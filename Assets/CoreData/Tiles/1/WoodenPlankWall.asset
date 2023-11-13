@@ -21,8 +21,8 @@ MonoBehaviour:
     _ref:
       rid: -2
   _category: {fileID: 0}
-  _layer: 0
-  _hasCollider: 0
+  _layer: 1
+  _hasCollider: 1
   _hasSightCollider: 0
   _hit:
     _script: {fileID: 0}
