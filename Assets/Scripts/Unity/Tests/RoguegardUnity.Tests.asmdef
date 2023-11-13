@@ -1,0 +1,31 @@
+{
+    "name": "RoguegardUnity.Tests",
+    "rootNamespace": "RoguegardUnity.Tests",
+    "references": [
+        "UnityEngine.TestRunner",
+        "UnityEditor.TestRunner",
+        "ObjectFormer",
+        "ObjectFormer.Serialization.Json",
+        "Roguegard",
+        "Roguegard.CharacterCreation",
+        "Roguegard.CoreData",
+        "RoguegardUnity",
+        "Roguegard.Device"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "nunit.framework.dll",
+        "Newtonsoft.Json.dll"
+    ],
+    "autoReferenced": false,
+    "defineConstraints": [
+        "UNITY_INCLUDE_TESTS"
+    ],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

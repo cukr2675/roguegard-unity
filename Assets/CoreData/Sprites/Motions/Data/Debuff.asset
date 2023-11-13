@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bef39a5e05a158d4aaa5bd757199184c, type: 3}
+  m_Name: Debuff
+  m_EditorClassIdentifier: 
+  _keyword: {fileID: 0}
+  _isLoop: 0
+  _items:
+  - _poseSource: {fileID: 11400000, guid: a8a9ae4f7e0bb2142b056a0205cd476b, type: 2}
+    _pixelPosition: {x: 0, y: 0, z: 0}
+    _pixelRotatablePosition: {x: 0, y: 0, z: 0}
+    _rotation: {x: 0, y: 0, z: 0, w: 1}
+    _scale: {x: 1, y: 1, z: 1}
+    _degree: 0
+    _wait: 4
+  - _poseSource: {fileID: 11400000, guid: 1daa165dbcde46a4aa33821693773637, type: 2}
+    _pixelPosition: {x: 0, y: 0, z: 0}
+    _pixelRotatablePosition: {x: 0, y: 0, z: 0}
+    _rotation: {x: 0, y: 0, z: 0, w: 1}
+    _scale: {x: 1, y: 1, z: 1}
+    _degree: 0
+    _wait: 4
+  - _poseSource: {fileID: 11400000, guid: bfa457607337dab489b341b4f3cfdcb5, type: 2}
+    _pixelPosition: {x: 0, y: 0, z: 0}
+    _pixelRotatablePosition: {x: 0, y: 0, z: 0}
+    _rotation: {x: 0, y: 0, z: 0, w: 1}
+    _scale: {x: 1, y: 1, z: 1}
+    _degree: 0
+    _wait: 4
+  - _poseSource: {fileID: 11400000, guid: df0f92bcd87845d4d9ee13bfd187948d, type: 2}
+    _pixelPosition: {x: 0, y: 0, z: 0}
+    _pixelRotatablePosition: {x: 0, y: 0, z: 0}
+    _rotation: {x: 0, y: 0, z: 0, w: 1}
+    _scale: {x: 1, y: 1, z: 1}
+    _degree: 0
+    _wait: 4
+  - _poseSource: {fileID: 11400000, guid: ed7bab317312796469c653a5e5deee73, type: 2}
+    _pixelPosition: {x: 0, y: 0, z: 0}
+    _pixelRotatablePosition: {x: 0, y: 0, z: 0}
+    _rotation: {x: 0, y: 0, z: 0, w: 1}
+    _scale: {x: 1, y: 1, z: 1}
+    _degree: 0
+    _wait: 4
+  - _poseSource: {fileID: 11400000, guid: fcc90d9c5bf5f49499b99dbc8c7c48bc, type: 2}
+    _pixelPosition: {x: 0, y: 0, z: 0}
+    _pixelRotatablePosition: {x: 0, y: 0, z: 0}
+    _rotation: {x: 0, y: 0, z: 0, w: 1}
+    _scale: {x: 1, y: 1, z: 1}
+    _degree: 0
+    _wait: 4
+  - _poseSource: {fileID: 11400000, guid: 873abfd3f956396428b0466ae58b2c45, type: 2}
+    _pixelPosition: {x: 0, y: 0, z: 0}
+    _pixelRotatablePosition: {x: 0, y: 0, z: 0}
+    _rotation: {x: 0, y: 0, z: 0, w: 1}
+    _scale: {x: 1, y: 1, z: 1}
+    _degree: 0
+    _wait: 4

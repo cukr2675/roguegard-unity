@@ -1,0 +1,7211 @@
+fileFormatVersion: 2
+guid: 5f3252285c7b2b04cab5e503bf085574
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 64
+    resizeAlgorithm: 0
+    textureFormat: 4
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Eye10RA0_NF
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 60
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1bfacae8ffffffff0800000000000000
+      internalID: -1901285455
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye10RA1_NF
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 56
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b90a32f9ffffffff0800000000000000
+      internalID: -1625055077
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye10RA2_NF
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 52
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 81ecef75000000000800000000000000
+      internalID: 1476316696
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye10RA3_NF
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 48
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d840eb67000000000800000000000000
+      internalID: 1992164493
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye10RB0_NF
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 60
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 57b0707dffffffff0800000000000000
+      internalID: -687404171
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye10RB1_NF
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 56
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ffdb7a3fffffffff0800000000000000
+      internalID: -207110657
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye10RB2_NF
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 52
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 81109988ffffffff0800000000000000
+      internalID: -2003238632
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye10RB3_NF
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 48
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dbe4e72bffffffff0800000000000000
+      internalID: -1300345155
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye10RC0_NF
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 60
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6c3703d0000000000800000000000000
+      internalID: 221279174
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye10RC1_NF
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 56
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 63dda092000000000800000000000000
+      internalID: 688577846
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye10RC2_NF
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 52
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 10b9e8acffffffff0800000000000000
+      internalID: -896623871
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye10RC3_NF
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 48
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 96e12cefffffffff0800000000000000
+      internalID: -20832663
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye10RD0_NF
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 60
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a470044bffffffff0800000000000000
+      internalID: -1270872246
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye10RD1_NF
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 56
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9d52f940000000000800000000000000
+      internalID: 77538777
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye10RD2_NF
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 52
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0476d688ffffffff0800000000000000
+      internalID: -2006096064
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye10RD3_NF
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 48
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bc458f6cffffffff0800000000000000
+      internalID: -956803893
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye10LA0_NF
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 60
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cdf7137cffffffff0800000000000000
+      internalID: -953057316
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye10LA1_NF
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 56
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7ee56d72000000000800000000000000
+      internalID: 668360423
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye10LA2_NF
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 52
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5f0d4c56000000000800000000000000
+      internalID: 1707397365
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye10LA3_NF
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 48
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f9a558fdffffffff0800000000000000
+      internalID: -544908641
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye10LB0_NF
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 60
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4b0b86b0000000000800000000000000
+      internalID: 191410356
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye10LB1_NF
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 56
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3cd20883000000000800000000000000
+      internalID: 947924419
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye10LB2_NF
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 52
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2cd91d47000000000800000000000000
+      internalID: 1959894466
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye10LB3_NF
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 48
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 201a99ceffffffff0800000000000000
+      internalID: -325476094
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye10LC0_NF
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 60
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9d4bbed4000000000800000000000000
+      internalID: 1307292889
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye10LC1_NF
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 56
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7cb32bf9ffffffff0800000000000000
+      internalID: -1615709241
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye10LC2_NF
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 52
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f78391deffffffff0800000000000000
+      internalID: -317114241
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye10LC3_NF
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 48
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 431d9b5cffffffff0800000000000000
+      internalID: -977678028
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye10LD0_NF
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 60
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ef13032affffffff0800000000000000
+      internalID: -1573899778
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye10LD1_NF
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 56
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b20192d2000000000800000000000000
+      internalID: 757665835
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye10LD2_NF
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 52
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e63c0d96000000000800000000000000
+      internalID: 1775289198
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye10LD3_NF
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 48
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6b9f67a9ffffffff0800000000000000
+      internalID: -1703478858
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye11RA0_NF
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 60
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f6153986000000000800000000000000
+      internalID: 1754485103
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye11RA1_NF
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 56
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b624131dffffffff0800000000000000
+      internalID: -785300885
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye11RA2_NF
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 52
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0d05bc94000000000800000000000000
+      internalID: 1238061264
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye11RA3_NF
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 48
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0bb75877000000000800000000000000
+      internalID: 2005236656
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye11RB0_NF
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 60
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 94caccddffffffff0800000000000000
+      internalID: -573789111
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye11RB1_NF
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 56
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 60b1d98effffffff0800000000000000
+      internalID: -392357114
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye11RB2_NF
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 52
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 37b6a695000000000800000000000000
+      internalID: 1500146547
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye11RB3_NF
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 48
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 91d66ea7000000000800000000000000
+      internalID: 2061921561
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye11RC0_NF
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 60
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2e7a5e89ffffffff0800000000000000
+      internalID: -1729779742
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye11RC1_NF
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 56
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 17f08babffffffff0800000000000000
+      internalID: -1162342543
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye11RC2_NF
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 52
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 60b5b607000000000800000000000000
+      internalID: 1886083846
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye11RC3_NF
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 48
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8b0ec3f4000000000800000000000000
+      internalID: 1329389752
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye11RD0_NF
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 60
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 57b11fb5000000000800000000000000
+      internalID: 1542527861
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye11RD1_NF
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 56
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c4d1b055000000000800000000000000
+      internalID: 1426791756
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye11RD2_NF
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 52
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: de18211dffffffff0800000000000000
+      internalID: -787316243
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye11RD3_NF
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 48
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9fa1caf5000000000800000000000000
+      internalID: 1605114617
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye11LA0_NF
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 60
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 981262dbffffffff0800000000000000
+      internalID: -1121574519
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye11LA1_NF
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 56
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b603f6bcffffffff0800000000000000
+      internalID: -881905557
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye11LA2_NF
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 52
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1a76903effffffff0800000000000000
+      internalID: -485922911
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye11LA3_NF
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 48
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e9495350000000000800000000000000
+      internalID: 87397534
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye11LB0_NF
+      rect:
+        serializedVersion: 2
+        x: 38
+        y: 60
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2d9ec820000000000800000000000000
+      internalID: 42789330
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye11LB1_NF
+      rect:
+        serializedVersion: 2
+        x: 38
+        y: 56
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 76413c58ffffffff0800000000000000
+      internalID: -2050812825
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye11LB2_NF
+      rect:
+        serializedVersion: 2
+        x: 38
+        y: 52
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8cc1db21000000000800000000000000
+      internalID: 314383560
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye11LB3_NF
+      rect:
+        serializedVersion: 2
+        x: 38
+        y: 48
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 83139a77000000000800000000000000
+      internalID: 2007576888
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye11LC0_NF
+      rect:
+        serializedVersion: 2
+        x: 45
+        y: 60
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a5e83c9cffffffff0800000000000000
+      internalID: -909930918
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye11LC1_NF
+      rect:
+        serializedVersion: 2
+        x: 45
+        y: 56
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b512d403000000000800000000000000
+      internalID: 810361179
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye11LC2_NF
+      rect:
+        serializedVersion: 2
+        x: 45
+        y: 52
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f1c812ddffffffff0800000000000000
+      internalID: -585004001
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye11LC3_NF
+      rect:
+        serializedVersion: 2
+        x: 45
+        y: 48
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 691f5ad8ffffffff0800000000000000
+      internalID: -1918504554
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye11LD0_NF
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 60
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1fba7695000000000800000000000000
+      internalID: 1499966449
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye11LD1_NF
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 56
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d41eae87000000000800000000000000
+      internalID: 2028659021
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye11LD2_NF
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 52
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ee136832000000000800000000000000
+      internalID: 595997166
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye11LD3_NF
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 48
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 75eb1d02000000000800000000000000
+      internalID: 550616663
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye12RA0_NF
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 44
+        width: 2
+        height: 4
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d8a595dcffffffff0800000000000000
+      internalID: -849782131
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye12RA1_NF
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 40
+        width: 2
+        height: 4
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5fe1adbeffffffff0800000000000000
+      internalID: -338026763
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye12RA2_NF
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 36
+        width: 2
+        height: 4
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5c1375b3000000000800000000000000
+      internalID: 995570117
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye12RA3_NF
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 32
+        width: 2
+        height: 4
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: add926e4000000000800000000000000
+      internalID: 1315085786
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye12RB0_NF
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 44
+        width: 2
+        height: 4
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5bee3060000000000800000000000000
+      internalID: 100921013
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye12RB1_NF
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 40
+        width: 2
+        height: 4
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 937b7046000000000800000000000000
+      internalID: 1678227257
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye12RB2_NF
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 36
+        width: 2
+        height: 4
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 40123b7dffffffff0800000000000000
+      internalID: -676126460
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye12RB3_NF
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 32
+        width: 2
+        height: 4
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bd6e9803000000000800000000000000
+      internalID: 814343899
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye12RC0_NF
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 44
+        width: 2
+        height: 4
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8a368037000000000800000000000000
+      internalID: 1929929640
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye12RC1_NF
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 40
+        width: 2
+        height: 4
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7fd67dbbffffffff0800000000000000
+      internalID: -1143509513
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye12RC2_NF
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 36
+        width: 2
+        height: 4
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6e6503c3000000000800000000000000
+      internalID: 1009800934
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye12RC3_NF
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 32
+        width: 2
+        height: 4
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 26fe273affffffff0800000000000000
+      internalID: -1552748702
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye12RD0_NF
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 44
+        width: 2
+        height: 4
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 358cfaeeffffffff0800000000000000
+      internalID: -290469805
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye12RD1_NF
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 40
+        width: 2
+        height: 4
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c9c260a1000000000800000000000000
+      internalID: 436612252
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye12RD2_NF
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 36
+        width: 2
+        height: 4
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7d96e2e5000000000800000000000000
+      internalID: 1580100055
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye12RD3_NF
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 32
+        width: 2
+        height: 4
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ccbed63cffffffff0800000000000000
+      internalID: -1016206388
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye12LA0_NF
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 44
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.33333334, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: efa8cd36000000000800000000000000
+      internalID: 1675397886
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye12LA1_NF
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 40
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.33333334, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 00c3e2c2000000000800000000000000
+      internalID: 741227520
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye12LA2_NF
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 36
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.33333334, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 110ab3a6000000000800000000000000
+      internalID: 1782292497
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye12LA3_NF
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 32
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.33333334, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 58dd9006000000000800000000000000
+      internalID: 1611259269
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye12LB0_NF
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 44
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.33333334, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4cbe7f61000000000800000000000000
+      internalID: 385346500
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye12LB1_NF
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 40
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.33333334, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aafccbf5000000000800000000000000
+      internalID: 1606209450
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye12LB2_NF
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 36
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.33333334, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0e1ed496000000000800000000000000
+      internalID: 1766711776
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye12LB3_NF
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 32
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.33333334, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d475e6feffffffff0800000000000000
+      internalID: -277981363
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye12LC0_NF
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 44
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.33333334, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7ffeed91000000000800000000000000
+      internalID: 434040823
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye12LC1_NF
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 40
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.33333334, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1d4396ccffffffff0800000000000000
+      internalID: -865520431
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye12LC2_NF
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 36
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.33333334, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bde41b8affffffff0800000000000000
+      internalID: -1464774949
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye12LC3_NF
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 32
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.33333334, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 286c5630000000000800000000000000
+      internalID: 57001602
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye12LD0_NF
+      rect:
+        serializedVersion: 2
+        x: 13
+        y: 44
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.33333334, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7d41d6f9ffffffff0800000000000000
+      internalID: -1620241193
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye12LD1_NF
+      rect:
+        serializedVersion: 2
+        x: 13
+        y: 40
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.33333334, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b5aee102000000000800000000000000
+      internalID: 538896987
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye12LD2_NF
+      rect:
+        serializedVersion: 2
+        x: 13
+        y: 36
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.33333334, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 33662beeffffffff0800000000000000
+      internalID: -290298317
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye12LD3_NF
+      rect:
+        serializedVersion: 2
+        x: 13
+        y: 32
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.33333334, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c215143cffffffff0800000000000000
+      internalID: -1019129556
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye13RA0_NF
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 44
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8c71d168ffffffff0800000000000000
+      internalID: -2044913720
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye13RA1_NF
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 40
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dd641197000000000800000000000000
+      internalID: 2031175389
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye13RA2_NF
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 36
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5ff50d42000000000800000000000000
+      internalID: 617635829
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye13RA3_NF
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 32
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 52e29191000000000800000000000000
+      internalID: 421080613
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye13RB0_NF
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 44
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4931e1d3000000000800000000000000
+      internalID: 1025381268
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye13RB1_NF
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 40
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 02d511bbffffffff0800000000000000
+      internalID: -1156489952
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye13RB2_NF
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 36
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6cca0e0fffffffff0800000000000000
+      internalID: -253711162
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye13RB3_NF
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 32
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d01b5293000000000800000000000000
+      internalID: 958771469
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye13RC0_NF
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 44
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5a4907a8ffffffff0800000000000000
+      internalID: -1972333403
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye13RC1_NF
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 40
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 22a53e88ffffffff0800000000000000
+      internalID: -1998366174
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye13RC2_NF
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 36
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b5d7496affffffff0800000000000000
+      internalID: -1500218021
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye13RC3_NF
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 32
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5b5d0e47000000000800000000000000
+      internalID: 1960891829
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye13RD0_NF
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 44
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3519a931000000000800000000000000
+      internalID: 328896851
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye13RD1_NF
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 40
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a64f2693000000000800000000000000
+      internalID: 962786410
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye13RD2_NF
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 36
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ec559674000000000800000000000000
+      internalID: 1198085582
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye13RD3_NF
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 32
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: be39c570000000000800000000000000
+      internalID: 123507691
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye13LA0_NF
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 44
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c22bde03000000000800000000000000
+      internalID: 820884012
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye13LA1_NF
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 40
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7a449e96000000000800000000000000
+      internalID: 1776895143
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye13LA2_NF
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 36
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4c80cf9affffffff0800000000000000
+      internalID: -1443100476
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye13LA3_NF
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 32
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f477c15bffffffff0800000000000000
+      internalID: -1256425649
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye13LB0_NF
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 44
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d9a7b236000000000800000000000000
+      internalID: 1663793821
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye13LB1_NF
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 40
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b60b76b0000000000800000000000000
+      internalID: 191344747
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye13LB2_NF
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 36
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ea03d5a3000000000800000000000000
+      internalID: 979185838
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye13LB3_NF
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 32
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 729d64f2000000000800000000000000
+      internalID: 793172263
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye13LC0_NF
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 44
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c53cec78ffffffff0800000000000000
+      internalID: -2016492708
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye13LC1_NF
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 40
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 58714abaffffffff0800000000000000
+      internalID: -1415309435
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye13LC2_NF
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 36
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 11ff2299ffffffff0800000000000000
+      internalID: -1725759727
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye13LC3_NF
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 32
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d3e7307dffffffff0800000000000000
+      internalID: -687636931
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye13LD0_NF
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 44
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fc4fd3edffffffff0800000000000000
+      internalID: -566364977
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye13LD1_NF
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 40
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 35008c75000000000800000000000000
+      internalID: 1472725075
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye13LD2_NF
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 36
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b0269d80000000000800000000000000
+      internalID: 148464139
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye13LD3_NF
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 32
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ca408c5cffffffff0800000000000000
+      internalID: -976747348
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye14RA0_NF
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 44
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3aef7ff9ffffffff0800000000000000
+      internalID: -1611137373
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye14RA1_NF
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 40
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 666d7b90000000000800000000000000
+      internalID: 163042918
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye14RA2_NF
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 36
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4d5e79a4000000000800000000000000
+      internalID: 1251468756
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye14RA3_NF
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 32
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a284f1f0000000000800000000000000
+      internalID: 253708330
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye14RB0_NF
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 44
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9e20b62dffffffff0800000000000000
+      internalID: -764738839
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye14RB1_NF
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 40
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bc32c055000000000800000000000000
+      internalID: 1426858955
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye14RB2_NF
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 36
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 55405c21000000000800000000000000
+      internalID: 314901589
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye14RB3_NF
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 32
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 884c632effffffff0800000000000000
+      internalID: -499727224
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye14RC0_NF
+      rect:
+        serializedVersion: 2
+        x: 47
+        y: 44
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2106b262000000000800000000000000
+      internalID: 640376850
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye14RC1_NF
+      rect:
+        serializedVersion: 2
+        x: 47
+        y: 40
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d635caf8ffffffff0800000000000000
+      internalID: -1884531859
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye14RC2_NF
+      rect:
+        serializedVersion: 2
+        x: 47
+        y: 36
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 62ea0d9fffffffff0800000000000000
+      internalID: -103764442
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye14RC3_NF
+      rect:
+        serializedVersion: 2
+        x: 47
+        y: 32
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bf8f80feffffffff0800000000000000
+      internalID: -284624645
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye14RD0_NF
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 44
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 76968acdffffffff0800000000000000
+      internalID: -592942745
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye14RD1_NF
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 40
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 11802a50000000000800000000000000
+      internalID: 94504977
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye14RD2_NF
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 36
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fe1365c6000000000800000000000000
+      internalID: 1817588207
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye14RD3_NF
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 32
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 72359f72000000000800000000000000
+      internalID: 670651175
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye14LA0_NF
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 44
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 95395b65000000000800000000000000
+      internalID: 1454740313
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye14LA1_NF
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 40
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e145bda6000000000800000000000000
+      internalID: 1792758814
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye14LA2_NF
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 36
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 66cd44c9ffffffff0800000000000000
+      internalID: -1673208730
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye14LA3_NF
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 32
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3440078cffffffff0800000000000000
+      internalID: -932182973
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye14LB0_NF
+      rect:
+        serializedVersion: 2
+        x: 44
+        y: 44
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 00710a6fffffffff0800000000000000
+      internalID: -157280512
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye14LB1_NF
+      rect:
+        serializedVersion: 2
+        x: 44
+        y: 40
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 92d3124effffffff0800000000000000
+      internalID: -467583703
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye14LB2_NF
+      rect:
+        serializedVersion: 2
+        x: 44
+        y: 36
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ddc461e2000000000800000000000000
+      internalID: 773213405
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye14LB3_NF
+      rect:
+        serializedVersion: 2
+        x: 44
+        y: 32
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 55c6bd35000000000800000000000000
+      internalID: 1406889045
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye14LC0_NF
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 44
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b8ad64daffffffff0800000000000000
+      internalID: -1387865461
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye14LC1_NF
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 40
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 95e4a684000000000800000000000000
+      internalID: 1214926425
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye14LC2_NF
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 36
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6c228b75000000000800000000000000
+      internalID: 1471685318
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye14LC3_NF
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 32
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d03f6cacffffffff0800000000000000
+      internalID: -892931315
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye14LD0_NF
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 44
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c9e215ccffffffff0800000000000000
+      internalID: -867094884
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye14LD1_NF
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 40
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a87e7fa8ffffffff0800000000000000
+      internalID: -1963464822
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye14LD2_NF
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 36
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ef24276dffffffff0800000000000000
+      internalID: -697154818
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye14LD3_NF
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 32
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8697abd7000000000800000000000000
+      internalID: 2109372776
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye15RA0_NF
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 28
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: be32474bffffffff0800000000000000
+      internalID: -1267457045
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye15RA1_NF
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 24
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 743fb09dffffffff0800000000000000
+      internalID: -653528249
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye15RA2_NF
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 20
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8a5d4a74000000000800000000000000
+      internalID: 1201984936
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye15RA3_NF
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 16
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 315ce126000000000800000000000000
+      internalID: 1646183699
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye15RB0_NF
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 28
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a6ac9e7effffffff0800000000000000
+      internalID: -404108694
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye15RB1_NF
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 24
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8304a2f8ffffffff0800000000000000
+      internalID: -1893056456
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye15RB2_NF
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 20
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 69e3981effffffff0800000000000000
+      internalID: -511099242
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye15RB3_NF
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 16
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e3036017000000000800000000000000
+      internalID: 1896230974
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye15RC0_NF
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 28
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 727338bdffffffff0800000000000000
+      internalID: -612157657
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye15RC1_NF
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 24
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 12023af8ffffffff0800000000000000
+      internalID: -1885134815
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye15RC2_NF
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 20
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fdcfd6bbffffffff0800000000000000
+      internalID: -1150419745
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye15RC3_NF
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 16
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d23afeacffffffff0800000000000000
+      internalID: -890264787
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye15RD0_NF
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 28
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 020b2904000000000800000000000000
+      internalID: 1083355168
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye15RD1_NF
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 24
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9b1af121000000000800000000000000
+      internalID: 304062905
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye15RD2_NF
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 20
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2c6bce27000000000800000000000000
+      internalID: 1928115906
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye15RD3_NF
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 16
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0fb60e73000000000800000000000000
+      internalID: 937454576
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye15LA0_NF
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 28
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: adda312effffffff0800000000000000
+      internalID: -502026790
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye15LA1_NF
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 24
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8c9ebe57000000000800000000000000
+      internalID: 1978395080
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye15LA2_NF
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 20
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b77c5a90000000000800000000000000
+      internalID: 161859451
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye15LA3_NF
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 16
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 66b0c4caffffffff0800000000000000
+      internalID: -1404302490
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye15LB0_NF
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 28
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a935d05bffffffff0800000000000000
+      internalID: -1257417830
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye15LB1_NF
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 24
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a032a3e1000000000800000000000000
+      internalID: 507126538
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye15LB2_NF
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 20
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b6fd569fffffffff0800000000000000
+      internalID: -110764181
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye15LB3_NF
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 16
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 86a8baabffffffff0800000000000000
+      internalID: -1163163032
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye15LC0_NF
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 28
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1fe8e859ffffffff0800000000000000
+      internalID: -1785819407
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye15LC1_NF
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 24
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1bf8a881000000000800000000000000
+      internalID: 411733937
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye15LC2_NF
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 20
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f7d1d2dbffffffff0800000000000000
+      internalID: -1121116801
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye15LC3_NF
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 16
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8d65488dffffffff0800000000000000
+      internalID: -662415656
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye15LD0_NF
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 28
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fd7cc354000000000800000000000000
+      internalID: 1161611231
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye15LD1_NF
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 24
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 804f10c7000000000800000000000000
+      internalID: 2080502792
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye15LD2_NF
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 20
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 56100a16000000000800000000000000
+      internalID: 1637876069
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye15LD3_NF
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 16
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 806998c7000000000800000000000000
+      internalID: 2089391624
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye16RA0_NF
+      rect:
+        serializedVersion: 2
+        x: 29
+        y: 28
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d9bbf9d7000000000800000000000000
+      internalID: 2107620253
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye16RA1_NF
+      rect:
+        serializedVersion: 2
+        x: 29
+        y: 24
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 90cf9d78ffffffff0800000000000000
+      internalID: -2015757303
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye16RA2_NF
+      rect:
+        serializedVersion: 2
+        x: 29
+        y: 20
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5a693c7dffffffff0800000000000000
+      internalID: -675047771
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye16RA3_NF
+      rect:
+        serializedVersion: 2
+        x: 29
+        y: 16
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c0bc7166000000000800000000000000
+      internalID: 1712835340
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye16RB0_NF
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 28
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ebd64c2dffffffff0800000000000000
+      internalID: -758878786
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye16RB1_NF
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 24
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0562c70affffffff0800000000000000
+      internalID: -1602476464
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye16RB2_NF
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 20
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e30bce73000000000800000000000000
+      internalID: 938258494
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye16RB3_NF
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 16
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 73e0564bffffffff0800000000000000
+      internalID: -1268445641
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye16RC0_NF
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 28
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 839aab09ffffffff0800000000000000
+      internalID: -1866815176
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye16RC1_NF
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 24
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b447cdddffffffff0800000000000000
+      internalID: -572754869
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye16RC2_NF
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 20
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b7b41307000000000800000000000000
+      internalID: 1882278779
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye16RC3_NF
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 16
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 264d4d80000000000800000000000000
+      internalID: 148165730
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye16RD0_NF
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 28
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 71b08f4dffffffff0800000000000000
+      internalID: -721941737
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye16RD1_NF
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 24
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 433994faffffffff0800000000000000
+      internalID: -1354132684
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye16RD2_NF
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 20
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a83156c4000000000800000000000000
+      internalID: 1281692554
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye16RD3_NF
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 16
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 237911fcffffffff0800000000000000
+      internalID: -820930766
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye16LA0_NF
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 28
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4ebafd77000000000800000000000000
+      internalID: 2011147236
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye16LA1_NF
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 24
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 92f7f63dffffffff0800000000000000
+      internalID: -747667671
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye16LA2_NF
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 20
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5418e56effffffff0800000000000000
+      internalID: -430014139
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye16LA3_NF
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 16
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c995c10affffffff0800000000000000
+      internalID: -1608754788
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye16LB0_NF
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 28
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5691dd82000000000800000000000000
+      internalID: 685578597
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye16LB1_NF
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 24
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4e50ee91000000000800000000000000
+      internalID: 435029476
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye16LB2_NF
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 20
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 548868ccffffffff0800000000000000
+      internalID: -863598523
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye16LB3_NF
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 16
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c46fc0ceffffffff0800000000000000
+      internalID: -334694836
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye16LC0_NF
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 28
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2dcd06b7000000000800000000000000
+      internalID: 2069945554
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye16LC1_NF
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 24
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 60bfb1f4000000000800000000000000
+      internalID: 1327233798
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye16LC2_NF
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 20
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 06a98bf9ffffffff0800000000000000
+      internalID: -1615291808
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye16LC3_NF
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 16
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fe89da88ffffffff0800000000000000
+      internalID: -2001889041
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye16LD0_NF
+      rect:
+        serializedVersion: 2
+        x: 53
+        y: 28
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2c242ed5000000000800000000000000
+      internalID: 1575109314
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye16LD1_NF
+      rect:
+        serializedVersion: 2
+        x: 53
+        y: 24
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2fb99e0bffffffff0800000000000000
+      internalID: -1326867470
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye16LD2_NF
+      rect:
+        serializedVersion: 2
+        x: 53
+        y: 20
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 69e06d3dffffffff0800000000000000
+      internalID: -740946282
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye16LD3_NF
+      rect:
+        serializedVersion: 2
+        x: 53
+        y: 16
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 943b62e6000000000800000000000000
+      internalID: 1848030025
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye17RA0_NF
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 12
+        width: 2
+        height: 4
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d19a38e9ffffffff0800000000000000
+      internalID: -1635538659
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye17RA1_NF
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 8
+        width: 2
+        height: 4
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 39048431000000000800000000000000
+      internalID: 323502227
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye17RA2_NF
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 4
+        width: 2
+        height: 4
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fcfa60bbffffffff0800000000000000
+      internalID: -1157189681
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye17RA3_NF
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 2
+        height: 4
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8167b221000000000800000000000000
+      internalID: 304838168
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye17RB0_NF
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 12
+        width: 2
+        height: 4
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4c8b03ecffffffff0800000000000000
+      internalID: -835667772
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye17RB1_NF
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 8
+        width: 2
+        height: 4
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ae79ca44000000000800000000000000
+      internalID: 1152161770
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye17RB2_NF
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 4
+        width: 2
+        height: 4
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e37aaa4affffffff0800000000000000
+      internalID: -1532319938
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye17RB3_NF
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 0
+        width: 2
+        height: 4
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 19e8b214000000000800000000000000
+      internalID: 1093373585
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye17RC0_NF
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 12
+        width: 2
+        height: 4
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d3ab0312000000000800000000000000
+      internalID: 556841533
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye17RC1_NF
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 8
+        width: 2
+        height: 4
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3eac7d37000000000800000000000000
+      internalID: 1943522019
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye17RC2_NF
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 4
+        width: 2
+        height: 4
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 365dfe85000000000800000000000000
+      internalID: 1492112739
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye17RC3_NF
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 0
+        width: 2
+        height: 4
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d2516b91000000000800000000000000
+      internalID: 431363373
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye17RD0_NF
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 12
+        width: 2
+        height: 4
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 53f8b21effffffff0800000000000000
+      internalID: -517238987
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye17RD1_NF
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 8
+        width: 2
+        height: 4
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 034c434fffffffff0800000000000000
+      internalID: -197868496
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye17RD2_NF
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 4
+        width: 2
+        height: 4
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 210946bdffffffff0800000000000000
+      internalID: -614166510
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye17RD3_NF
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 0
+        width: 2
+        height: 4
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c72e632bffffffff0800000000000000
+      internalID: -1305025924
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye17LA0_NF
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 12
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.33333334, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2e409ddfffffffff0800000000000000
+      internalID: -36109086
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye17LA1_NF
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 8
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.33333334, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 01a1c7b4000000000800000000000000
+      internalID: 1266424336
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye17LA2_NF
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 4
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.33333334, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 33fb50d9ffffffff0800000000000000
+      internalID: -1660567757
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye17LA3_NF
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 0
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.33333334, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4ef712f2000000000800000000000000
+      internalID: 790724580
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye17LB0_NF
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 12
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.33333334, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e606c088ffffffff0800000000000000
+      internalID: -2012454802
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye17LB1_NF
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 8
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.33333334, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d05f689effffffff0800000000000000
+      internalID: -377031411
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye17LB2_NF
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 4
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.33333334, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b1e1d75bffffffff0800000000000000
+      internalID: -1250091493
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye17LB3_NF
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 0
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.33333334, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ac8c3a2fffffffff0800000000000000
+      internalID: -224147254
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye17LC0_NF
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 12
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.33333334, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ba9c357bffffffff0800000000000000
+      internalID: -1219245653
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye17LC1_NF
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 8
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.33333334, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 962f24adffffffff0800000000000000
+      internalID: -633146775
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye17LC2_NF
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 4
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.33333334, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6ad7636bffffffff0800000000000000
+      internalID: -1237942874
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye17LC3_NF
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 0
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.33333334, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eb768e05000000000800000000000000
+      internalID: 1357408190
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye17LD0_NF
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 12
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.33333334, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fec0f25cffffffff0800000000000000
+      internalID: -986772241
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye17LD1_NF
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 8
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.33333334, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dcab9bf8ffffffff0800000000000000
+      internalID: -1883653427
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye17LD2_NF
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 4
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.33333334, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9c9511a9ffffffff0800000000000000
+      internalID: -1710138935
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye17LD3_NF
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 0
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.33333334, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a987c147000000000800000000000000
+      internalID: 1948022938
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye18RA0_NF
+      rect:
+        serializedVersion: 2
+        x: 13
+        y: 12
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 893b3020000000000800000000000000
+      internalID: 33797016
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye18RA1_NF
+      rect:
+        serializedVersion: 2
+        x: 13
+        y: 8
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 031b53abffffffff0800000000000000
+      internalID: -1170886352
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye18RA2_NF
+      rect:
+        serializedVersion: 2
+        x: 13
+        y: 4
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b35c9d56000000000800000000000000
+      internalID: 1708770619
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye18RA3_NF
+      rect:
+        serializedVersion: 2
+        x: 13
+        y: 0
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e477b2eaffffffff0800000000000000
+      internalID: -1372883122
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye18RB0_NF
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 12
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 15a297b9ffffffff0800000000000000
+      internalID: -1686558127
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye18RB1_NF
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 8
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 10c16c19ffffffff0800000000000000
+      internalID: -1849287679
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye18RB2_NF
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 4
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 93757258ffffffff0800000000000000
+      internalID: -2061019335
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye18RB3_NF
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 0
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 869862aaffffffff0800000000000000
+      internalID: -1440315032
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye18RC0_NF
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 12
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2a9c7ed0000000000800000000000000
+      internalID: 233294242
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye18RC1_NF
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 8
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6bd8d132000000000800000000000000
+      internalID: 589139382
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye18RC2_NF
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 4
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1f01b5c4000000000800000000000000
+      internalID: 1281036529
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye18RC3_NF
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 0
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ff3ad592000000000800000000000000
+      internalID: 694002687
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye18RD0_NF
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 12
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f1b05725000000000800000000000000
+      internalID: 1383402271
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye18RD1_NF
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 8
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5f0d3a71000000000800000000000000
+      internalID: 396611829
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye18RD2_NF
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 4
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6870766dffffffff0800000000000000
+      internalID: -697890938
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye18RD3_NF
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 0
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9b02a34effffffff0800000000000000
+      internalID: -465952583
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye18LA0_NF
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 12
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6c94f5f0000000000800000000000000
+      internalID: 257903046
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye18LA1_NF
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 8
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 707b892bffffffff0800000000000000
+      internalID: -1298614521
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye18LA2_NF
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 4
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 89212a21000000000800000000000000
+      internalID: 312611480
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye18LA3_NF
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 0
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 76f0a813000000000800000000000000
+      internalID: 831131495
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye18LB0_NF
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 12
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6a524374000000000800000000000000
+      internalID: 1194599846
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye18LB1_NF
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 8
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e71e9b14000000000800000000000000
+      internalID: 1102700926
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye18LB2_NF
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 4
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a58dfe35000000000800000000000000
+      internalID: 1408227418
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye18LB3_NF
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 0
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2366f643000000000800000000000000
+      internalID: 879715890
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye18LC0_NF
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 12
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: be9ed5b3000000000800000000000000
+      internalID: 996010475
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye18LC1_NF
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 8
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dfad5cc8ffffffff0800000000000000
+      internalID: -1933190403
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye18LC2_NF
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 4
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eb6fe9eaffffffff0800000000000000
+      internalID: -1365313858
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye18LC3_NF
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 0
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3eb2e8d8ffffffff0800000000000000
+      internalID: -1920062493
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye18LD0_NF
+      rect:
+        serializedVersion: 2
+        x: 30
+        y: 12
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ad0622c3000000000800000000000000
+      internalID: 1008885978
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye18LD1_NF
+      rect:
+        serializedVersion: 2
+        x: 30
+        y: 8
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 340ae8c3000000000800000000000000
+      internalID: 1015980099
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye18LD2_NF
+      rect:
+        serializedVersion: 2
+        x: 30
+        y: 4
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b06f137fffffffff0800000000000000
+      internalID: -147720693
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye18LD3_NF
+      rect:
+        serializedVersion: 2
+        x: 30
+        y: 0
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b87043feffffffff0800000000000000
+      internalID: -281802869
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye19RA0_NF
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 12
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a6ccf56cffffffff0800000000000000
+      internalID: -966800278
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye19RA1_NF
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 8
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ef6f6400000000000800000000000000
+      internalID: 4650750
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye19RA2_NF
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 4
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8eb6168fffffffff0800000000000000
+      internalID: -127833112
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye19RA3_NF
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 0
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 88d2bee3000000000800000000000000
+      internalID: 1055600008
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye19RB0_NF
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 12
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 69048006000000000800000000000000
+      internalID: 1611153558
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye19RB1_NF
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 8
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b93a401dffffffff0800000000000000
+      internalID: -788225125
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye19RB2_NF
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 4
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ffd441e5000000000800000000000000
+      internalID: 1578388991
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye19RB3_NF
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 0
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4974a0b0000000000800000000000000
+      internalID: 185223060
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye19RC0_NF
+      rect:
+        serializedVersion: 2
+        x: 44
+        y: 12
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e8185066000000000800000000000000
+      internalID: 1711636878
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye19RC1_NF
+      rect:
+        serializedVersion: 2
+        x: 44
+        y: 8
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 775ae23affffffff0800000000000000
+      internalID: -1557224073
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye19RC2_NF
+      rect:
+        serializedVersion: 2
+        x: 44
+        y: 4
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 70e47289ffffffff0800000000000000
+      internalID: -1742254585
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye19RC3_NF
+      rect:
+        serializedVersion: 2
+        x: 44
+        y: 0
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 65daa078ffffffff0800000000000000
+      internalID: -2029343402
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye19RD0_NF
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 12
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 685db707000000000800000000000000
+      internalID: 1887163782
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye19RD1_NF
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 8
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 992c3aafffffffff0800000000000000
+      internalID: -89931111
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye19RD2_NF
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 4
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e0834e6dffffffff0800000000000000
+      internalID: -689686514
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye19RD3_NF
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 0
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aa7bec46000000000800000000000000
+      internalID: 1691269034
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye19LA0_NF
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 12
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: baede01effffffff0800000000000000
+      internalID: -519119189
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye19LA1_NF
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 8
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fe023d7dffffffff0800000000000000
+      internalID: -674029329
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye19LA2_NF
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 4
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9a689b24000000000800000000000000
+      internalID: 1119454889
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye19LA3_NF
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 0
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fc9b13e2000000000800000000000000
+      internalID: 775010767
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye19LB0_NF
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 12
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 843c2584000000000800000000000000
+      internalID: 1213383496
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye19LB1_NF
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 8
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 346e969cffffffff0800000000000000
+      internalID: -915806653
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye19LB2_NF
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 4
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 90e9908cffffffff0800000000000000
+      internalID: -938893815
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye19LB3_NF
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 0
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7b4bb62dffffffff0800000000000000
+      internalID: -764693321
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye19LC0_NF
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 12
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 923092bcffffffff0800000000000000
+      internalID: -886504663
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye19LC1_NF
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 8
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5fe3a9bcffffffff0800000000000000
+      internalID: -879083787
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye19LC2_NF
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 4
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cf12f471000000000800000000000000
+      internalID: 391062012
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye19LC3_NF
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 0
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fb44940cffffffff0800000000000000
+      internalID: -1068940097
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye19LD0_NF
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 12
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bc73761bffffffff0800000000000000
+      internalID: -1318635573
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye19LD1_NF
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 8
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7e247bccffffffff0800000000000000
+      internalID: -860405017
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye19LD2_NF
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 4
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1960a5cbffffffff0800000000000000
+      internalID: -1134950767
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye19LD3_NF
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 0
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 63acc4c8ffffffff0800000000000000
+      internalID: -1941124554
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      : 578214154
+      1A0: 251622796
+      1B0: 526723655
+      Eye10LA0_NF: -953057316
+      Eye10LA1_NF: 668360423
+      Eye10LA2_NF: 1707397365
+      Eye10LA3_NF: -544908641
+      Eye10LB0_NF: 191410356
+      Eye10LB1_NF: 947924419
+      Eye10LB2_NF: 1959894466
+      Eye10LB3_NF: -325476094
+      Eye10LC0_NF: 1307292889
+      Eye10LC1_NF: -1615709241
+      Eye10LC2_NF: -317114241
+      Eye10LC3_NF: -977678028
+      Eye10LD0_NF: -1573899778
+      Eye10LD1_NF: 757665835
+      Eye10LD2_NF: 1775289198
+      Eye10LD3_NF: -1703478858
+      Eye10RA0_NF: -1901285455
+      Eye10RA1_NF: -1625055077
+      Eye10RA2_NF: 1476316696
+      Eye10RA3_NF: 1992164493
+      Eye10RB0_NF: -687404171
+      Eye10RB1_NF: -207110657
+      Eye10RB2_NF: -2003238632
+      Eye10RB3_NF: -1300345155
+      Eye10RC0_NF: 221279174
+      Eye10RC1_NF: 688577846
+      Eye10RC2_NF: -896623871
+      Eye10RC3_NF: -20832663
+      Eye10RD0_NF: -1270872246
+      Eye10RD1_NF: 77538777
+      Eye10RD2_NF: -2006096064
+      Eye10RD3_NF: -956803893
+      Eye11LA0_NF: -1121574519
+      Eye11LA1_NF: -881905557
+      Eye11LA2_NF: -485922911
+      Eye11LA3_NF: 87397534
+      Eye11LB0_NF: 42789330
+      Eye11LB1_NF: -2050812825
+      Eye11LB2_NF: 314383560
+      Eye11LB3_NF: 2007576888
+      Eye11LC0_NF: -909930918
+      Eye11LC1_NF: 810361179
+      Eye11LC2_NF: -585004001
+      Eye11LC3_NF: -1918504554
+      Eye11LD0_NF: 1499966449
+      Eye11LD1_NF: 2028659021
+      Eye11LD2_NF: 595997166
+      Eye11LD3_NF: 550616663
+      Eye11RA0_NF: 1754485103
+      Eye11RA1_NF: -785300885
+      Eye11RA2_NF: 1238061264
+      Eye11RA3_NF: 2005236656
+      Eye11RB0_NF: -573789111
+      Eye11RB1_NF: -392357114
+      Eye11RB2_NF: 1500146547
+      Eye11RB3_NF: 2061921561
+      Eye11RC0_NF: -1729779742
+      Eye11RC1_NF: -1162342543
+      Eye11RC2_NF: 1886083846
+      Eye11RC3_NF: 1329389752
+      Eye11RD0_NF: 1542527861
+      Eye11RD1_NF: 1426791756
+      Eye11RD2_NF: -787316243
+      Eye11RD3_NF: 1605114617
+      Eye12LA0_NF: 1675397886
+      Eye12LA1_NF: 741227520
+      Eye12LA2_NF: 1782292497
+      Eye12LA3_NF: 1611259269
+      Eye12LB0_NF: 385346500
+      Eye12LB1_NF: 1606209450
+      Eye12LB2_NF: 1766711776
+      Eye12LB3_NF: -277981363
+      Eye12LC0_NF: 434040823
+      Eye12LC1_NF: -865520431
+      Eye12LC2_NF: -1464774949
+      Eye12LC3_NF: 57001602
+      Eye12LD0_NF: -1620241193
+      Eye12LD1_NF: 538896987
+      Eye12LD2_NF: -290298317
+      Eye12LD3_NF: -1019129556
+      Eye12RA0_NF: -849782131
+      Eye12RA1_NF: -338026763
+      Eye12RA2_NF: 995570117
+      Eye12RA3_NF: 1315085786
+      Eye12RB0_NF: 100921013
+      Eye12RB1_NF: 1678227257
+      Eye12RB2_NF: -676126460
+      Eye12RB3_NF: 814343899
+      Eye12RC0_NF: 1929929640
+      Eye12RC1_NF: -1143509513
+      Eye12RC2_NF: 1009800934
+      Eye12RC3_NF: -1552748702
+      Eye12RD0_NF: -290469805
+      Eye12RD1_NF: 436612252
+      Eye12RD2_NF: 1580100055
+      Eye12RD3_NF: -1016206388
+      Eye13LA0_NF: 820884012
+      Eye13LA1_NF: 1776895143
+      Eye13LA2_NF: -1443100476
+      Eye13LA3_NF: -1256425649
+      Eye13LB0_NF: 1663793821
+      Eye13LB1_NF: 191344747
+      Eye13LB2_NF: 979185838
+      Eye13LB3_NF: 793172263
+      Eye13LC0_NF: -2016492708
+      Eye13LC1_NF: -1415309435
+      Eye13LC2_NF: -1725759727
+      Eye13LC3_NF: -687636931
+      Eye13LD0_NF: -566364977
+      Eye13LD1_NF: 1472725075
+      Eye13LD2_NF: 148464139
+      Eye13LD3_NF: -976747348
+      Eye13RA0_NF: -2044913720
+      Eye13RA1_NF: 2031175389
+      Eye13RA2_NF: 617635829
+      Eye13RA3_NF: 421080613
+      Eye13RB0_NF: 1025381268
+      Eye13RB1_NF: -1156489952
+      Eye13RB2_NF: -253711162
+      Eye13RB3_NF: 958771469
+      Eye13RC0_NF: -1972333403
+      Eye13RC1_NF: -1998366174
+      Eye13RC2_NF: -1500218021
+      Eye13RC3_NF: 1960891829
+      Eye13RD0_NF: 328896851
+      Eye13RD1_NF: 962786410
+      Eye13RD2_NF: 1198085582
+      Eye13RD3_NF: 123507691
+      Eye14LA0_NF: 1454740313
+      Eye14LA1_NF: 1792758814
+      Eye14LA2_NF: -1673208730
+      Eye14LA3_NF: -932182973
+      Eye14LB0_NF: -157280512
+      Eye14LB1_NF: -467583703
+      Eye14LB2_NF: 773213405
+      Eye14LB3_NF: 1406889045
+      Eye14LC0_NF: -1387865461
+      Eye14LC1_NF: 1214926425
+      Eye14LC2_NF: 1471685318
+      Eye14LC3_NF: -892931315
+      Eye14LD0_NF: -867094884
+      Eye14LD1_NF: -1963464822
+      Eye14LD2_NF: -697154818
+      Eye14LD3_NF: 2109372776
+      Eye14RA0_NF: -1611137373
+      Eye14RA1_NF: 163042918
+      Eye14RA2_NF: 1251468756
+      Eye14RA3_NF: 253708330
+      Eye14RB0_NF: -764738839
+      Eye14RB1_NF: 1426858955
+      Eye14RB2_NF: 314901589
+      Eye14RB3_NF: -499727224
+      Eye14RC0_NF: 640376850
+      Eye14RC1_NF: -1884531859
+      Eye14RC2_NF: -103764442
+      Eye14RC3_NF: -284624645
+      Eye14RD0_NF: -592942745
+      Eye14RD1_NF: 94504977
+      Eye14RD2_NF: 1817588207
+      Eye14RD3_NF: 670651175
+      Eye15LA0_NF: -502026790
+      Eye15LA1_NF: 1978395080
+      Eye15LA2_NF: 161859451
+      Eye15LA3_NF: -1404302490
+      Eye15LB0_NF: -1257417830
+      Eye15LB1_NF: 507126538
+      Eye15LB2_NF: -110764181
+      Eye15LB3_NF: -1163163032
+      Eye15LC0_NF: -1785819407
+      Eye15LC1_NF: 411733937
+      Eye15LC2_NF: -1121116801
+      Eye15LC3_NF: -662415656
+      Eye15LD0_NF: 1161611231
+      Eye15LD1_NF: 2080502792
+      Eye15LD2_NF: 1637876069
+      Eye15LD3_NF: 2089391624
+      Eye15RA0_NF: -1267457045
+      Eye15RA1_NF: -653528249
+      Eye15RA2_NF: 1201984936
+      Eye15RA3_NF: 1646183699
+      Eye15RB0_NF: -404108694
+      Eye15RB1_NF: -1893056456
+      Eye15RB2_NF: -511099242
+      Eye15RB3_NF: 1896230974
+      Eye15RC0_NF: -612157657
+      Eye15RC1_NF: -1885134815
+      Eye15RC2_NF: -1150419745
+      Eye15RC3_NF: -890264787
+      Eye15RD0_NF: 1083355168
+      Eye15RD1_NF: 304062905
+      Eye15RD2_NF: 1928115906
+      Eye15RD3_NF: 937454576
+      Eye16LA0_NF: 2011147236
+      Eye16LA1_NF: -747667671
+      Eye16LA2_NF: -430014139
+      Eye16LA3_NF: -1608754788
+      Eye16LB0_NF: 685578597
+      Eye16LB1_NF: 435029476
+      Eye16LB2_NF: -863598523
+      Eye16LB3_NF: -334694836
+      Eye16LC0_NF: 2069945554
+      Eye16LC1_NF: 1327233798
+      Eye16LC2_NF: -1615291808
+      Eye16LC3_NF: -2001889041
+      Eye16LD0_NF: 1575109314
+      Eye16LD1_NF: -1326867470
+      Eye16LD2_NF: -740946282
+      Eye16LD3_NF: 1848030025
+      Eye16RA0_NF: 2107620253
+      Eye16RA1_NF: -2015757303
+      Eye16RA2_NF: -675047771
+      Eye16RA3_NF: 1712835340
+      Eye16RB0_NF: -758878786
+      Eye16RB1_NF: -1602476464
+      Eye16RB2_NF: 938258494
+      Eye16RB3_NF: -1268445641
+      Eye16RC0_NF: -1866815176
+      Eye16RC1_NF: -572754869
+      Eye16RC2_NF: 1882278779
+      Eye16RC3_NF: 148165730
+      Eye16RD0_NF: -721941737
+      Eye16RD1_NF: -1354132684
+      Eye16RD2_NF: 1281692554
+      Eye16RD3_NF: -820930766
+      Eye17LA0_NF: -36109086
+      Eye17LA1_NF: 1266424336
+      Eye17LA2_NF: -1660567757
+      Eye17LA3_NF: 790724580
+      Eye17LB0_NF: -2012454802
+      Eye17LB1_NF: -377031411
+      Eye17LB2_NF: -1250091493
+      Eye17LB3_NF: -224147254
+      Eye17LC0_NF: -1219245653
+      Eye17LC1_NF: -633146775
+      Eye17LC2_NF: -1237942874
+      Eye17LC3_NF: 1357408190
+      Eye17LD0_NF: -986772241
+      Eye17LD1_NF: -1883653427
+      Eye17LD2_NF: -1710138935
+      Eye17LD3_NF: 1948022938
+      Eye17RA0_NF: -1635538659
+      Eye17RA1_NF: 323502227
+      Eye17RA2_NF: -1157189681
+      Eye17RA3_NF: 304838168
+      Eye17RB0_NF: -835667772
+      Eye17RB1_NF: 1152161770
+      Eye17RB2_NF: -1532319938
+      Eye17RB3_NF: 1093373585
+      Eye17RC0_NF: 556841533
+      Eye17RC1_NF: 1943522019
+      Eye17RC2_NF: 1492112739
+      Eye17RC3_NF: 431363373
+      Eye17RD0_NF: -517238987
+      Eye17RD1_NF: -197868496
+      Eye17RD2_NF: -614166510
+      Eye17RD3_NF: -1305025924
+      Eye18LA0_NF: 257903046
+      Eye18LA1_NF: -1298614521
+      Eye18LA2_NF: 312611480
+      Eye18LA3_NF: 831131495
+      Eye18LB0_NF: 1194599846
+      Eye18LB1_NF: 1102700926
+      Eye18LB2_NF: 1408227418
+      Eye18LB3_NF: 879715890
+      Eye18LC0_NF: 996010475
+      Eye18LC1_NF: -1933190403
+      Eye18LC2_NF: -1365313858
+      Eye18LC3_NF: -1920062493
+      Eye18LD0_NF: 1008885978
+      Eye18LD1_NF: 1015980099
+      Eye18LD2_NF: -147720693
+      Eye18LD3_NF: -281802869
+      Eye18RA0_NF: 33797016
+      Eye18RA1_NF: -1170886352
+      Eye18RA2_NF: 1708770619
+      Eye18RA3_NF: -1372883122
+      Eye18RB0_NF: -1686558127
+      Eye18RB1_NF: -1849287679
+      Eye18RB2_NF: -2061019335
+      Eye18RB3_NF: -1440315032
+      Eye18RC0_NF: 233294242
+      Eye18RC1_NF: 589139382
+      Eye18RC2_NF: 1281036529
+      Eye18RC3_NF: 694002687
+      Eye18RD0_NF: 1383402271
+      Eye18RD1_NF: 396611829
+      Eye18RD2_NF: -697890938
+      Eye18RD3_NF: -465952583
+      Eye19LA0_NF: -519119189
+      Eye19LA1_NF: -674029329
+      Eye19LA2_NF: 1119454889
+      Eye19LA3_NF: 775010767
+      Eye19LB0_NF: 1213383496
+      Eye19LB1_NF: -915806653
+      Eye19LB2_NF: -938893815
+      Eye19LB3_NF: -764693321
+      Eye19LC0_NF: -886504663
+      Eye19LC1_NF: -879083787
+      Eye19LC2_NF: 391062012
+      Eye19LC3_NF: -1068940097
+      Eye19LD0_NF: -1318635573
+      Eye19LD1_NF: -860405017
+      Eye19LD2_NF: -1134950767
+      Eye19LD3_NF: -1941124554
+      Eye19RA0_NF: -966800278
+      Eye19RA1_NF: 4650750
+      Eye19RA2_NF: -127833112
+      Eye19RA3_NF: 1055600008
+      Eye19RB0_NF: 1611153558
+      Eye19RB1_NF: -788225125
+      Eye19RB2_NF: 1578388991
+      Eye19RB3_NF: 185223060
+      Eye19RC0_NF: 1711636878
+      Eye19RC1_NF: -1557224073
+      Eye19RC2_NF: -1742254585
+      Eye19RC3_NF: -2029343402
+      Eye19RD0_NF: 1887163782
+      Eye19RD1_NF: -89931111
+      Eye19RD2_NF: -689686514
+      Eye19RD3_NF: 1691269034
+      Eye1LA0_NF: -1126713290
+      Eye1LA1_NF: 1444782738
+      Eye1LA2_NF: -489134142
+      Eye1LA3_NF: 1411928885
+      Eye1LB0_NF: -1669268729
+      Eye1LB1_NF: -1063013841
+      Eye1LB2_NF: -330579581
+      Eye1LB3_NF: 697264746
+      Eye1LC0_NF: 295582232
+      Eye1LC1_NF: -222222913
+      Eye1LC2_NF: -2085035721
+      Eye1LC3_NF: -2083271402
+      Eye1LD0_NF: -857173445
+      Eye1LD1_NF: 993962071
+      Eye1LD2_NF: -1523673813
+      Eye1LD3_NF: -2062819065
+      Eye1RA0_NF: 9140073597511663152
+      Eye1RA1_NF: -259134653884006319
+      Eye1RA2_NF: -5266853989121753614
+      Eye1RA3_NF: -5238664865568272083
+      Eye1RB0_NF: -1400116562835747069
+      Eye1RB1_NF: -8831212007219568786
+      Eye1RB2_NF: 717842660799622514
+      Eye1RB3_NF: 1758230459706008724
+      Eye1RC0_NF: 8963652936489090334
+      Eye1RC1_NF: -6396093148208488706
+      Eye1RC2_NF: -4713800119638380982
+      Eye1RC3_NF: 8750666181841747423
+      Eye1RD0_NF: -8835303492166384555
+      Eye1RD1_NF: -8944175047601826172
+      Eye1RD2_NF: 8689565375479457427
+      Eye1RD3_NF: -4088245511347758424
+      Eyes2_0: 1272293136
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

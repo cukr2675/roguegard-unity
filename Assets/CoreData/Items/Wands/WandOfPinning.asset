@@ -1,0 +1,127 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 797073a39246ce24195bfdd54b79f0dc, type: 3}
+  m_Name: WandOfPinning
+  m_EditorClassIdentifier: 
+  _overridesCost: 0
+  _cost: 0
+  _costIsUnknown: 0
+  _race:
+    _name: "\u98DB\u3073\u3064\u304D\u306E\u6756"
+    _icon: {fileID: 5341526939521646929, guid: 12a1a85046ed6d54e850e8a2b99fa7e9, type: 3}
+    _color: {r: 1, g: 1, b: 0, a: 1}
+    _caption: 
+    _details:
+      _script: {fileID: 0}
+      _ref:
+        rid: -2
+    _cost: 1
+    _costIsUnknown: 0
+    _genders: {fileID: 0}
+    _category: {fileID: 0}
+    _maxHP: 0
+    _maxMP: 0
+    _atk: 0
+    _def: 0
+    _loadCapacity: 0
+    _faction: {fileID: 0}
+    _ability: 4
+    _material: {fileID: 11400000, guid: e4aec123d7b1f8d4b8b561083a916f85, type: 2}
+    _lootTable: []
+    _walk:
+      _script: {fileID: 0}
+      _ref:
+        rid: -2
+    _wait:
+      _script: {fileID: 0}
+      _ref:
+        rid: -2
+    _attack:
+      _script: {fileID: 0}
+      _ref:
+        rid: -2
+    _throw:
+      _script: {fileID: 0}
+      _ref:
+        rid: -2
+    _pickUp:
+      _script: {fileID: 0}
+      _ref:
+        rid: -2
+    _put:
+      _script: {fileID: 0}
+      _ref:
+        rid: -2
+    _eat:
+      _script: {fileID: 0}
+      _ref:
+        rid: -2
+    _hit:
+      _script: {fileID: 0}
+      _ref:
+        rid: -2
+    _beDefeated:
+      _script: {fileID: 0}
+      _ref:
+        rid: -2
+    _locate:
+      _script: {fileID: 0}
+      _ref:
+        rid: -2
+    _polymorph:
+      _script: {fileID: 0}
+      _ref:
+        rid: -2
+    _beApplied:
+      _script: {fileID: 11500000, guid: 96fcc9843db8676448b8ea3f7c867c07, type: 3}
+      _ref:
+        rid: 2628609657810452628
+    _beThrown:
+      _script: {fileID: 0}
+      _ref:
+        rid: -2
+    _beEaten:
+      _script: {fileID: 0}
+      _ref:
+        rid: -2
+    _beSteppedOnTile:
+      _script: {fileID: 0}
+      _ref:
+        rid: -2
+    _equipmentState: {fileID: 0}
+    _weight:
+      _script: {fileID: 0}
+      _ref:
+        rid: -2
+    _sprite:
+      _script: {fileID: 0}
+      _ref:
+        rid: -2
+    _openEffects: []
+    _lv: 0
+    _gender: {fileID: 0}
+    _hpName: 
+    _mpName: 
+    _members:
+      _items: []
+  _appearances: []
+  _intrinsics: []
+  _startingItemTable: []
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 2628609657810452628
+      type: {class: WandOfPinningBeApplied, ns: Roguegard, asm: Roguegard.CoreData}
+      data:
+        _assemblyReflectionAssetDummy: 

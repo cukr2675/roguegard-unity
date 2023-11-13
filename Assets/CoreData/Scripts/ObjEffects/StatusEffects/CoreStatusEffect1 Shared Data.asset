@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: CoreStatusEffect1 Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: CoreStatusEffect1
+  m_TableCollectionNameGuidString: 08abd78f285ae09408e2b556a7c434a0
+  m_Entries:
+  - m_Id: 18930077696
+    m_Key: MeltErosion
+    m_Metadata:
+      m_Items: []
+  - m_Id: 712940589056
+    m_Key: MeltMsg::1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 420568240128
+    m_Key: melted
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6242287357952
+    m_Key: EquipMsg::2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 711542325776384
+    m_Key: EquipMissMsg::1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 711306563948544
+    m_Key: UnequipMsg::2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3204709230972928
+    m_Key: Paint
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3204743158697984
+    m_Key: PaintMsg::1
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 962668912412196864
+  references:
+    version: 2
+    RefIds:
+    - rid: 962668912412196864
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1697187113217

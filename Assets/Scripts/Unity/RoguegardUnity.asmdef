@@ -1,0 +1,29 @@
+{
+    "name": "RoguegardUnity",
+    "rootNamespace": "RoguegardUnity",
+    "references": [
+        "GUID:28450d8d664b1a54dae80398fd9e836c",
+        "GUID:d8abb204860aa084d9f13ac658cd0f9d",
+        "GUID:b8c890b4f238dff44ae16c5839465d06",
+        "GUID:b2fde94cad5718f459f0b430e39ac30d",
+        "GUID:19e3313c320cbdc47a4be9efac200342",
+        "GUID:411fefe97dc107843bf66c14baf7283d",
+        "GUID:ab91c4295e2010a4099959ebd35b9fa1",
+        "GUID:6055be8ebefd69e48b49212b09b47b2f",
+        "GUID:9e24947de15b9834991c9d8411ea37cf",
+        "GUID:84651a3751eca9349aac36a66bba901b",
+        "GUID:eec0964c48f6f4e40bc3ec2257ccf8c5",
+        "GUID:9d1d59f22e38e56489e24c47a3a4d335"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "Newtonsoft.Json.dll"
+    ],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -1,0 +1,193 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9886e2920cfeb7440abe81ba5bf4aa7f, type: 3}
+  m_Name: CoreScriptableCharacterCreationDataTable
+  m_EditorClassIdentifier: 
+  _namespace: Core
+  _filter: t:ScriptableCharacterCreationData
+  _targetFolders:
+  - {fileID: 102900000, guid: 20b5b660d1b9d9f4c8058d7c383a759c, type: 3}
+  - {fileID: 102900000, guid: 4f6c1aac6e3db484a8592e46d74553c5, type: 3}
+  - {fileID: 102900000, guid: 447ac99ae37cf834fac7fc8e0aba79ae, type: 3}
+  - {fileID: 102900000, guid: a52368c33c47fbc4ba2275827f65d8b9, type: 3}
+  - {fileID: 102900000, guid: f327df6ee002dd54e8398f6e44441aba, type: 3}
+  _items:
+  - _key: Core.Gatherer
+    _asset: {fileID: 11400000, guid: 319229867706872418481b44486e6bd9, type: 2}
+  - _key: Core.Rogue
+    _asset: {fileID: 11400000, guid: 1de337ac628278f4db386038a3e0b2b7, type: 2}
+  - _key: Core.Sorciere
+    _asset: {fileID: 11400000, guid: ff3a78dceaafbdf4b9bd12568b64d0ee, type: 2}
+  - _key: Core.FloatingEye
+    _asset: {fileID: 11400000, guid: 2eabc8dce52fcea4fb279e68a8194353, type: 2}
+  - _key: Core.Goblin
+    _asset: {fileID: 11400000, guid: 72d3ac7468c133f479abca35ae8ce0f3, type: 2}
+  - _key: Core.GusSpore
+    _asset: {fileID: 11400000, guid: d2d0495cfdb771245a66402c55a9cf1a, type: 2}
+  - _key: Core.Kobold
+    _asset: {fileID: 11400000, guid: b6af922b87e94df458a25f6094035a81, type: 2}
+  - _key: Core.LittleDevil
+    _asset: {fileID: 11400000, guid: 2fc212cc27f480840ae67f955102f257, type: 2}
+  - _key: Core.PinkSlime
+    _asset: {fileID: 11400000, guid: 6af4c1ead71b96b41829e3242e422295, type: 2}
+  - _key: Core.RockPudding
+    _asset: {fileID: 11400000, guid: a90260cad85e9644da9c9aa571e3251c, type: 2}
+  - _key: Core.RustSlime
+    _asset: {fileID: 11400000, guid: e3373bac00eb2b640ab1d560931eb8a1, type: 2}
+  - _key: Core.Slime
+    _asset: {fileID: 11400000, guid: 13820ce432f8dc842b4025600274a305, type: 2}
+  - _key: Core.SoldierTortoise
+    _asset: {fileID: 11400000, guid: f23eb6532dbbe3448b1b843ae39d91af, type: 2}
+  - _key: Core.AmuletOfChange
+    _asset: {fileID: 11400000, guid: 5ebc89f988d68d542bd6d716d2903874, type: 2}
+  - _key: Core.CriticalAmulet
+    _asset: {fileID: 11400000, guid: 970e7d3fac4773f4c83528a5009bdab2, type: 2}
+  - _key: Core.PowerRing
+    _asset: {fileID: 11400000, guid: 36f26a716019bca4bb4876e8566761af, type: 2}
+  - _key: Core.ProtectionRing
+    _asset: {fileID: 11400000, guid: 64e3078ba8e70d2459dfae9ad391bd79, type: 2}
+  - _key: Core.Arrow
+    _asset: {fileID: 11400000, guid: 5fe1c775da394924f852bc28469a0756, type: 2}
+  - _key: Core.Bullet
+    _asset: {fileID: 11400000, guid: a2067321cc35eb04e80ff1fed91b3fe0, type: 2}
+  - _key: Core.ThrowingKnife
+    _asset: {fileID: 11400000, guid: cb94158c0ce227b478eaf371070ba86b, type: 2}
+  - _key: Core.BuildingKit
+    _asset: {fileID: 11400000, guid: e91d25b4588208546a844f5bc4ae66ff, type: 2}
+  - _key: Core.LayingKit
+    _asset: {fileID: 11400000, guid: e3eb826f9c4d5de44a0f733925eb1926, type: 2}
+  - _key: Core.Potion
+    _asset: {fileID: 11400000, guid: c3b5691c9b4d42c4d9b2e6b0134e372c, type: 2}
+  - _key: Core.PreparationKit
+    _asset: {fileID: 11400000, guid: 2c07a029ce15f914c86a49e956e04590, type: 2}
+  - _key: Core.Chest
+    _asset: {fileID: 11400000, guid: 237bac36d0a0eb54c9136908fccf22e1, type: 2}
+  - _key: Core.Storage
+    _asset: {fileID: 11400000, guid: 84a244ec98600944586d993de59a7424, type: 2}
+  - _key: Core.FullPlate
+    _asset: {fileID: 11400000, guid: 559c8511ad3fb924697b0e9afc8ada06, type: 2}
+  - _key: Core.LeatherArmor
+    _asset: {fileID: 11400000, guid: 08cdd8218a3404f4989c90dd592bc34e, type: 2}
+  - _key: Core.LightArmor
+    _asset: {fileID: 11400000, guid: 88738dc654d97b0458f1e082293d6c37, type: 2}
+  - _key: Core.Shell
+    _asset: {fileID: 11400000, guid: 484c9e93d0225ff488ce80e02e35c043, type: 2}
+  - _key: Core.HideFootwear
+    _asset: {fileID: 11400000, guid: 0fd10a2e2669235459b036d752ed0e5f, type: 2}
+  - _key: Core.HighBoots
+    _asset: {fileID: 11400000, guid: f28ebee9cf9bcd94c84b7522abb8e7fa, type: 2}
+  - _key: Core.Jackboots
+    _asset: {fileID: 11400000, guid: 893d0f722f7ba394c9d86ec24df4be35, type: 2}
+  - _key: Core.Loafers
+    _asset: {fileID: 11400000, guid: eb4a37fa224a8ee4c91098167251552f, type: 2}
+  - _key: Core.StrappedBoots
+    _asset: {fileID: 11400000, guid: c2c4793dd950e9b46ac3d7e47d55dd12, type: 2}
+  - _key: Core.GrassSkirt
+    _asset: {fileID: 11400000, guid: 6f7e18025209af1419a58b44aa08625e, type: 2}
+  - _key: Core.ShortPants
+    _asset: {fileID: 11400000, guid: 25bbb3e5f0c15d544b1afc2813582dd0, type: 2}
+  - _key: Core.Slacks
+    _asset: {fileID: 11400000, guid: 24260a48869b1d94299c8d6abf966b68, type: 2}
+  - _key: Core.HoodedCloak
+    _asset: {fileID: 11400000, guid: 5f82e63027e45d449bc5157847267b4d, type: 2}
+  - _key: Core.WolfPowder
+    _asset: {fileID: 11400000, guid: 9e011b7400977ac48bd09d64774ddf4e, type: 2}
+  - _key: Core.LeatherGloves
+    _asset: {fileID: 11400000, guid: 61b5715891eacdc40818e86462b97bab, type: 2}
+  - _key: Core.FlightHat
+    _asset: {fileID: 11400000, guid: 59b398754a4dfe74eb23064857cccd7a, type: 2}
+  - _key: Core.IllusionBand
+    _asset: {fileID: 11400000, guid: 0ea43a322f3157e429746b82a348df8c, type: 2}
+  - _key: Core.Shako
+    _asset: {fileID: 11400000, guid: 98602f826227963489021023cf12e914, type: 2}
+  - _key: Core.Blindfold
+    _asset: {fileID: 11400000, guid: d3c5a0a25e0d6554ca0eec44b6520a91, type: 2}
+  - _key: Core.BarrierShield
+    _asset: {fileID: 11400000, guid: 80b4c5e3b530d624083f6deba7874774, type: 2}
+  - _key: Core.RoundShield
+    _asset: {fileID: 11400000, guid: c77d11f069e6ec940be8252663cbeff4, type: 2}
+  - _key: Core.GarterSocks
+    _asset: {fileID: 11400000, guid: 0c1b98ab3c541dd4c9d99ec17dc439b7, type: 2}
+  - _key: Core.CamisoleDress
+    _asset: {fileID: 11400000, guid: 3f49504da8915e449a729b49fb1bc7bd, type: 2}
+  - _key: Core.CaptainRobe
+    _asset: {fileID: 11400000, guid: 700ba87b2b6aad84c84976c4dd7fc433, type: 2}
+  - _key: Core.LaceUpShirt
+    _asset: {fileID: 11400000, guid: 22919a516a6bd704c952265efedf00bd, type: 2}
+  - _key: Core.TankTop
+    _asset: {fileID: 11400000, guid: b68c2a31347ecb847ab076c1a5ff032d, type: 2}
+  - _key: Core.Tribalwear
+    _asset: {fileID: 11400000, guid: b883c1a5004f31345b36f35e20036591, type: 2}
+  - _key: Core.PotionOfSleep
+    _asset: {fileID: 11400000, guid: af48a1f68eb333145808641d7b91e230, type: 2}
+  - _key: Core.PotionOfVision
+    _asset: {fileID: 11400000, guid: 89f426248bf078b409602f1c962369ed, type: 2}
+  - _key: Core.FoodRation
+    _asset: {fileID: 11400000, guid: 2df1aa5bfac2b584bbcc48830850fef6, type: 2}
+  - _key: Core.LembasWafer
+    _asset: {fileID: 11400000, guid: 39e6b5c51e2b2e14294897182dc832c0, type: 2}
+  - _key: Core.Mushroom
+    _asset: {fileID: 11400000, guid: efa97af209248bc47a8eae84f316a948, type: 2}
+  - _key: Core.HerbOfConfusion
+    _asset: {fileID: 11400000, guid: 1019c2b71fede034fa300841e5b1063a, type: 2}
+  - _key: Core.HerbOfGainLevel
+    _asset: {fileID: 11400000, guid: 35894ea5f76235547abf8878364d39a4, type: 2}
+  - _key: Core.HerbOfPaint
+    _asset: {fileID: 11400000, guid: 60df3d2beacbb624f97ace180a9cab27, type: 2}
+  - _key: Core.HerbOfRevenge
+    _asset: {fileID: 11400000, guid: 92bf64a440678f648b1b9fbc02c1151a, type: 2}
+  - _key: Core.HerbOfSleeping
+    _asset: {fileID: 11400000, guid: 8382eae7bfa90574181d5410e04d1cf1, type: 2}
+  - _key: Core.HerbOfVision
+    _asset: {fileID: 11400000, guid: dffb5d3e624842d449c20f687dd58a31, type: 2}
+  - _key: Core.MedicalHerb
+    _asset: {fileID: 11400000, guid: 68d9ba7921b771e43a506bea68681384, type: 2}
+  - _key: Core.PoisonousHerb
+    _asset: {fileID: 11400000, guid: 888ef6a98d3cd2549a70fbda705d1001, type: 2}
+  - _key: Core.ScrollOfDestroyArmor
+    _asset: {fileID: 11400000, guid: 4f8033013e68f364182cd8da13f6e06c, type: 2}
+  - _key: Core.Warbroom
+    _asset: {fileID: 11400000, guid: ee85b43af08c07e42a1cc3b6cec30fe6, type: 2}
+  - _key: Core.WandOfFire
+    _asset: {fileID: 11400000, guid: a9724bb0afacae44e9a2919d9ed3882a, type: 2}
+  - _key: Core.WandOfPinning
+    _asset: {fileID: 11400000, guid: 6124437e81222cf4c9bf5941aadccc40, type: 2}
+  - _key: Core.BoneSpear
+    _asset: {fileID: 11400000, guid: ea18f387027e3e24d90b989888903f11, type: 2}
+  - _key: Core.Bow
+    _asset: {fileID: 11400000, guid: 9c0ef51caf67c914a83313801032c993, type: 2}
+  - _key: Core.ColorGuardRifle
+    _asset: {fileID: 11400000, guid: 5ea5f641d9dfbbb4b9734cc63a81c954, type: 2}
+  - _key: Core.CrossGuardWand
+    _asset: {fileID: 11400000, guid: 45936e521f12c3c4a87a0a63cb5b6aba, type: 2}
+  - _key: Core.Dagger
+    _asset: {fileID: 11400000, guid: 9b83f15992282fe4da1b7cf4afd77a1e, type: 2}
+  - _key: Core.Mace
+    _asset: {fileID: 11400000, guid: fbb788ca451157c4f9f87858f725882e, type: 2}
+  - _key: Core.SubmachineGun
+    _asset: {fileID: 11400000, guid: 2a5ab5b9277a4d840a60eed38761a265, type: 2}
+  - _key: Core.WoodenBox
+    _asset: {fileID: 11400000, guid: 012b31dd8e7a0c047bc07ca9dfa9a6b2, type: 2}
+  - _key: Core.BD_Stairs
+    _asset: {fileID: 11400000, guid: 511df306b5f4ed24e997be5cf261e29e, type: 2}
+  - _key: Core.BeginningDungeon
+    _asset: {fileID: 11400000, guid: c1246455f94ee6a4f809870cb8afb63e, type: 2}
+  - _key: Core.Lobby
+    _asset: {fileID: 11400000, guid: b68d87efd75176742b76575e5de8220e, type: 2}
+  - _key: Core.LobbyDoorL
+    _asset: {fileID: 11400000, guid: 4bd23e76d696fc24e855daa8e7bbae1a, type: 2}
+  - _key: Core.LobbyDoorR
+    _asset: {fileID: 11400000, guid: e225e337f257e6948be07b906fa70162, type: 2}
+  - _key: Core.GoalDownStairs
+    _asset: {fileID: 11400000, guid: 846a752108fa0a74fb1ca155dfcb58a7, type: 2}
+  - _key: Core.World
+    _asset: {fileID: 11400000, guid: 54b7f1cb05acf694ca3545570d9e79e4, type: 2}

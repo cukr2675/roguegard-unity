@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: CoreWeapon1_en-US
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en-US
+  m_SharedData: {fileID: 11400000, guid: b21260393adc74243be97600119c567a, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 399563165696
+    m_Localized: BoneSpear
+    m_Metadata:
+      m_Items: []
+  - m_Id: 505901355008
+    m_Localized: 
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1601474531328
+    m_Localized: Bow
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4167872679936
+    m_Localized: ColorGuardRifle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4170561228800
+    m_Localized: ATK+1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6367705436160
+    m_Localized: CrossGuardWand
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7846050795520
+    m_Localized: Dagger
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8233822588928
+    m_Localized: Mace
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8563578769408
+    m_Localized: SubmachineGun
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

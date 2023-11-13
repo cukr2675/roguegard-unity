@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a4da3a0e289c1141b7ee56683c870a7, type: 3}
+  m_Name: BD_Rand_Ammo
+  m_EditorClassIdentifier: 
+  _overridesCost: 0
+  _cost: 0
+  _costIsUnknown: 0
+  _items:
+    _items:
+    - _option: {fileID: 11400000, guid: 5fe1c775da394924f852bc28469a0756, type: 2}
+      _optionDescription: {fileID: 0}
+      _generatorWeight: 1
+      _stack: 7
+      _isIntrinsicItem: 0
+      _members:
+        _items:
+        - rid: 962668678494027860
+    - _option: {fileID: 11400000, guid: cb94158c0ce227b478eaf371070ba86b, type: 2}
+      _optionDescription: {fileID: 0}
+      _generatorWeight: 1
+      _stack: 7
+      _isIntrinsicItem: 0
+      _members:
+        _items:
+        - rid: 962668678494027861
+  minDeltaStack: -4
+  references:
+    version: 2
+    RefIds:
+    - rid: 962668678494027860
+      type: {class: EquipMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
+      data:
+        _isEquipped: 0
+    - rid: 962668678494027861
+      type: {class: EquipMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
+      data:
+        _isEquipped: 0

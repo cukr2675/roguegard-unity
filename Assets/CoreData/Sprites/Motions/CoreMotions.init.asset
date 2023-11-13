@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfc22a8a5f4bb734c99980c0ae26815d, type: 3}
+  m_Name: CoreMotions.init
+  m_EditorClassIdentifier: 
+  _beThrownDrop: {fileID: 11400000, guid: 8a60e957951a4544986736a76d783e81, type: 2}
+  _beThrownFlying: {fileID: 11400000, guid: 2c43268cba53c38418d27269977ada3a, type: 2}
+  _bomb: {fileID: 11400000, guid: d55a29c3b79671045828241f1324c1cd, type: 2}
+  _buff: {fileID: 11400000, guid: 2b226c8c4e07ff04cb49121dcf5ebb40, type: 2}
+  _confusion: {fileID: 11400000, guid: 28799d98a2ea4924dbd460ac83a4f237, type: 2}
+  _debuff: {fileID: 11400000, guid: 4457a1c02368d88449aedc88d0d5b7d0, type: 2}
+  _discus: {fileID: 11400000, guid: 7af08de0346c8a9408a3059370e052f0, type: 2}
+  _eat: {fileID: 11400000, guid: b3ece7a9fe72adb46af858ee0628715c, type: 2}
+  _fullTurn: {fileID: 11400000, guid: 1bd9cfe5679e6a347a33441bae494296, type: 2}
+  _heal: {fileID: 11400000, guid: 9145528d69dbddb43af3a340f0c68381, type: 2}
+  _paralysis: {fileID: 11400000, guid: 17140f23c53866944ace748d89f92d25, type: 2}
+  _powerSlash: {fileID: 11400000, guid: 4e3d3c90d4dbc61448468ff28fe6c355, type: 2}
+  _sleep: {fileID: 11400000, guid: f553b13477575d84dbb0a28c6cfc5636, type: 2}
+  _smoke: {fileID: 11400000, guid: a9384ea41376c7a45a95acf479afed86, type: 2}

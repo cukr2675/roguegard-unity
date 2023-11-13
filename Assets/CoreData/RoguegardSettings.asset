@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a1ca32bab578ab41af30a33779ce5ee, type: 3}
+  m_Name: RoguegardSettings
+  m_EditorClassIdentifier: 
+  _autoUpdateSelfOnEnable: 0
+  _autoUpdateAssetTablesOnEnabled: 1
+  _world: {fileID: 11400000, guid: 54b7f1cb05acf694ca3545570d9e79e4, type: 2}
+  _lobby: {fileID: 11400000, guid: b68d87efd75176742b76575e5de8220e, type: 2}
+  _initialCharacter: {fileID: 11400000, guid: 1de337ac628278f4db386038a3e0b2b7, type: 2}
+  _maxTilemapSize: {x: 96, y: 64}
+  _defaultVisibleRadius: 2
+  _keywordsNotEnqueueMessageRule:
+  - {fileID: 11400000, guid: 4c78cdb33b96ec84e92eca381628fb79, type: 2}
+  - {fileID: 11400000, guid: 9166be26e3d3f9c4b8776f5130a0ca15, type: 2}
+  - {fileID: 11400000, guid: 06ed3f2b7969a62409ee0a15f7c3fb6a, type: 2}
+  _pixelPerUnit: 32
+  _boneSpriteBaseColor: {r: 1, g: 1, b: 1, a: 1}
+  _lightRatio: 0.972549
+  _defaultSaveFileName: Data.gard
+  _levelInfoInitializer:
+    _script: {fileID: 11500000, guid: 0bc94c8470be26542af39396e94082b3, type: 3}
+    _ref:
+      rid: 5795394415022571534
+  _defaultRaceOption: {fileID: 11400000, guid: e9af886bcd40dbe469f3f75f54ee9544, type: 2}
+  _objCommandTable: {fileID: 11400000, guid: fc0bf9764c3cf2d4293a81c04b4c2371, type: 2}
+  _assetTables:
+  - {fileID: 11400000, guid: 32cafb5b82e1b2945b45fb47e0603b58, type: 2}
+  - {fileID: 11400000, guid: 053e6ba34fdfad94f833cdab12d37a78, type: 2}
+  - {fileID: 11400000, guid: 1968ca916ec1af34db570069c4ac16f1, type: 2}
+  - {fileID: 11400000, guid: 355b7574fce375c4cb5ba58f1034d66a, type: 2}
+  _loaders:
+  - {fileID: 11400000, guid: 6f4598d925d6bd04c9d394ba4d128fb0, type: 2}
+  - {fileID: 11400000, guid: 00bb136dcfeaa1e4698f77565cb7e7b9, type: 2}
+  - {fileID: 11400000, guid: 878eecc0b46dbb44cbcc440ea3682c3b, type: 2}
+  - {fileID: 11400000, guid: 48bcfc9bada4d124397e123d440c3c57, type: 2}
+  - {fileID: 11400000, guid: 021ba068640efaf43895297436817f0a, type: 2}
+  - {fileID: 11400000, guid: 2e59e740cae7012458c1a3e4cfff9bc8, type: 2}
+  - {fileID: 11400000, guid: 86ed4b182872c3f4c95bca8b6f74fa7d, type: 2}
+  - {fileID: 11400000, guid: c3b129be7c716d64caa2e34289b2b7e4, type: 2}
+  - {fileID: 11400000, guid: 82de95db9daa0d14ca84659c2eb2f5a1, type: 2}
+  - {fileID: 11400000, guid: 77126b6d91ed3ad4f8f245ffbc091f1f, type: 2}
+  - {fileID: 11400000, guid: 883c775a112ebb74f8be7e6481553e86, type: 2}
+  - {fileID: 11400000, guid: 43200b633faecda438f61be9c56b1dc8, type: 2}
+  - {fileID: 11400000, guid: 7cf3b273ab24bd144a3fb61c75ad3637, type: 2}
+  - {fileID: 11400000, guid: 88a55f4f2af313044b8eb4861b1e11ed, type: 2}
+  - {fileID: 11400000, guid: e9a640beff0e03b49adea597151d8417, type: 2}
+  - {fileID: 11400000, guid: 42e52f332f4e23345a02235558751151, type: 2}
+  - {fileID: 11400000, guid: 94924038ab3f3124299a2fe546f0b6f7, type: 2}
+  references:
+    version: 2
+    RefIds:
+    - rid: 5795394415022571534
+      type: {class: StandardLevelInfo, ns: Roguegard, asm: Roguegard.CoreData}
+      data:
+        _assemblyReflectionAssetDummy: 

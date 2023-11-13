@@ -1,0 +1,16 @@
+{
+    "name": "Roguegard",
+    "rootNamespace": "Roguegard",
+    "references": [
+        "GUID:411fefe97dc107843bf66c14baf7283d"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

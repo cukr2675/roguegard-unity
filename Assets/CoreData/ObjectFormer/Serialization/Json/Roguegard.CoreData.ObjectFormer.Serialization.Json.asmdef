@@ -1,0 +1,21 @@
+{
+    "name": "Roguegard.CoreData.ObjectFormer.Serialization.Json",
+    "rootNamespace": "Roguegard.RogueObjectFormer.Serialization.Json",
+    "references": [
+        "GUID:28450d8d664b1a54dae80398fd9e836c",
+        "GUID:b2fde94cad5718f459f0b430e39ac30d",
+        "GUID:411fefe97dc107843bf66c14baf7283d",
+        "GUID:ab91c4295e2010a4099959ebd35b9fa1"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "Newtonsoft.Json.dll"
+    ],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

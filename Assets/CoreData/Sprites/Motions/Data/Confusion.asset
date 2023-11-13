@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bef39a5e05a158d4aaa5bd757199184c, type: 3}
+  m_Name: Confusion
+  m_EditorClassIdentifier: 
+  _keyword: {fileID: 0}
+  _isLoop: 1
+  _items:
+  - _poseSource: {fileID: 11400000, guid: 098bfd1b98065d04da6f5b15674eb80e, type: 2}
+    _pixelPosition: {x: 0, y: 0, z: 0}
+    _pixelRotatablePosition: {x: 0, y: 0, z: 0}
+    _rotation: {x: 0, y: 0, z: 0, w: 1}
+    _scale: {x: 1, y: 1, z: 1}
+    _degree: 0
+    _wait: 6
+  - _poseSource: {fileID: 11400000, guid: 6cfeb75b281133047bb7b9ce796e5c98, type: 2}
+    _pixelPosition: {x: 0, y: 0, z: 0}
+    _pixelRotatablePosition: {x: 0, y: 0, z: 0}
+    _rotation: {x: 0, y: 0, z: 0, w: 1}
+    _scale: {x: 1, y: 1, z: 1}
+    _degree: 0
+    _wait: 6
+  - _poseSource: {fileID: 11400000, guid: e49a187a7ee5571448d61048269b02be, type: 2}
+    _pixelPosition: {x: 0, y: 0, z: 0}
+    _pixelRotatablePosition: {x: 0, y: 0, z: 0}
+    _rotation: {x: 0, y: 0, z: 0, w: 1}
+    _scale: {x: 1, y: 1, z: 1}
+    _degree: 0
+    _wait: 6

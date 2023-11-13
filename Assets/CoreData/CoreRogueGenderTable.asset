@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9886e2920cfeb7440abe81ba5bf4aa7f, type: 3}
+  m_Name: CoreRogueGenderTable
+  m_EditorClassIdentifier: 
+  _namespace: Core
+  _filter: t:RogueGender
+  _targetFolders:
+  - {fileID: 102900000, guid: 1b4492f9d3e18484b8a895a41fa8360a, type: 3}
+  _items:
+  - _key: Core.Female
+    _asset: {fileID: 11400000, guid: 99e725911134608479036597379a44ac, type: 2}
+  - _key: Core.Male
+    _asset: {fileID: 11400000, guid: 4768b495a0252a9479576904ae785ceb, type: 2}
+  - _key: Core.NonBinary
+    _asset: {fileID: 11400000, guid: 6beb2a98e7d4e1c4ea522b83cfd976b8, type: 2}
+  - _key: Core.None
+    _asset: {fileID: 11400000, guid: be9ee7fa25e465a4983c4ed05f45a356, type: 2}

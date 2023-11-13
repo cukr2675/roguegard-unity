@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9886e2920cfeb7440abe81ba5bf4aa7f, type: 3}
+  m_Name: CoreRogueTileInfoTable
+  m_EditorClassIdentifier: 
+  _namespace: Core
+  _filter: t:RogueTileInfoData
+  _targetFolders:
+  - {fileID: 102900000, guid: 222d7e4e1141c4849ba4aded40361463, type: 3}
+  _items:
+  - _key: Core.Floor
+    _asset: {fileID: 11400000, guid: 9e07379c12401a54a9afcdc2d2081fc9, type: 2}
+  - _key: Core.Grass
+    _asset: {fileID: 11400000, guid: 8dab63605c378de4a895690f47728e39, type: 2}
+  - _key: Core.PaintTrap
+    _asset: {fileID: 11400000, guid: b24b54dad325f334b916700e5f697068, type: 2}
+  - _key: Core.Pool
+    _asset: {fileID: 11400000, guid: 255d75cb8b17d37418c0f99cb5f07a89, type: 2}
+  - _key: Core.RoomWall
+    _asset: {fileID: 11400000, guid: 44985f674517d934f9cfca6b10f538c6, type: 2}
+  - _key: Core.ThronsTrap
+    _asset: {fileID: 11400000, guid: 96d4bc3ad857739448d5823f36be3205, type: 2}
+  - _key: Core.Wall
+    _asset: {fileID: 11400000, guid: 7b5f75e0ffd65ff4ab579674c671753c, type: 2}

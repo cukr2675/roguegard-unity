@@ -1,0 +1,41 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+namespace Roguegard
+{
+    public static class AttackUtility
+    {
+        /// <summary>
+        /// 攻撃予定のターゲットと実際に攻撃するターゲットが一致しない場合、失敗させる。
+        /// </summary>
+        public static bool AssertTarget(RogueObj target, in RogueMethodArgument arg)
+        {
+            return arg.TargetObj != null && arg.TargetObj != target;
+        }
+
+        /// <summary>
+        /// 空振り
+        /// </summary>
+        private static bool AssertWhiff(RogueObj target)
+        {
+            return target == null;
+        }
+
+        /// <summary>
+        /// 二つの確率の和事象（少なくともどちらか発生する確率）を取得する。
+        /// </summary>
+        public static float Cup(float a, float b)
+        {
+            return a + b - a * b;
+        }
+
+        public static RogueObj GetTargetForward(IProjectileRogueMethodRange range, RogueObj self)
+        {
+            var movement = MovementCalculator.Get(self);
+            var direction = self.Main.Stats.Direction;
+            range.Raycast(self.Location, self.Position, direction, true, movement.HasTileCollider, out var target, out _, out _);
+            return target;
+        }
+    }
+}

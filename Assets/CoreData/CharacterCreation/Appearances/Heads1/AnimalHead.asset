@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: affde6d6b08392d4bb0b2e249363d22d, type: 3}
+  m_Name: AnimalHead
+  m_EditorClassIdentifier: 
+  _descriptionName: "\u30B4\u30D6\u30EA\u30F3\u982D"
+  _icon: {fileID: 232541735, guid: 9da13b7471ed81649be9ee18bea48cf0, type: 3}
+  _color: {r: 1, g: 1, b: 1, a: 1}
+  _caption: 
+  _details:
+    _script: {fileID: 0}
+    _ref:
+      rid: -2
+  _boneName: {fileID: 11400000, guid: c66efafae0b82384d8b4212c78358e52, type: 2}
+  _isBone: 1
+  _sprite:
+    _isColorRanged: 0
+    _spriteOrLightRed:
+      _normalFront: {fileID: 232541735, guid: 9da13b7471ed81649be9ee18bea48cf0, type: 3}
+      _normalRear: {fileID: 0}
+      _backFront: {fileID: -1981145755, guid: 9da13b7471ed81649be9ee18bea48cf0, type: 3}
+      _backRear: {fileID: 0}
+    _darkRed:
+      _normalFront: {fileID: 0}
+      _normalRear: {fileID: 0}
+      _backFront: {fileID: 0}
+      _backRear: {fileID: 0}
+    _lightOther:
+      _normalFront: {fileID: 0}
+      _normalRear: {fileID: 0}
+      _backFront: {fileID: 0}
+      _backRear: {fileID: 0}
+    _darkOther:
+      _normalFront: {fileID: 0}
+      _normalRear: {fileID: 0}
+      _backFront: {fileID: 0}
+      _backRear: {fileID: 0}
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }

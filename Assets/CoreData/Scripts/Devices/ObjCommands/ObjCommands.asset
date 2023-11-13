@@ -1,0 +1,208 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03432f0cd2c3f424a97fc06aa7a53969, type: 3}
+  m_Name: ObjCommands
+  m_EditorClassIdentifier: 
+  _items:
+  - _keyword: {fileID: 11400000, guid: 11c37567c65080c4983d02f2a5e05ff6, type: 2}
+    _commands:
+    - _script: {fileID: 11500000, guid: bf92e3a307633c045a878e8291cd8366, type: 3}
+      _ref:
+        rid: 992949827574693895
+    - _script: {fileID: 11500000, guid: 07bbb3e4aeca2ae4e892e836cfd18f7c, type: 3}
+      _ref:
+        rid: 992949827574693896
+  - _keyword: {fileID: 11400000, guid: 9c6e8e727efe732498ae632d55564cc3, type: 2}
+    _commands:
+    - _script: {fileID: 11500000, guid: 57504e6c42c809a4fbef5184ffc6b7c2, type: 3}
+      _ref:
+        rid: 992949827574693893
+    - _script: {fileID: 11500000, guid: 07bbb3e4aeca2ae4e892e836cfd18f7c, type: 3}
+      _ref:
+        rid: 992949827574693894
+  - _keyword: {fileID: 11400000, guid: 0082811a5684dae4babc72d3c932f4a5, type: 2}
+    _commands:
+    - _script: {fileID: 11500000, guid: 78b3ea2e32918004c93ee5a5fee48439, type: 3}
+      _ref:
+        rid: 992949827574693897
+    - _script: {fileID: 11500000, guid: 07bbb3e4aeca2ae4e892e836cfd18f7c, type: 3}
+      _ref:
+        rid: 992949827574693898
+  - _keyword: {fileID: 11400000, guid: 9f936bdb399bae2429058d8a76d54f7c, type: 2}
+    _commands:
+    - _script: {fileID: 11500000, guid: 37fb0ff98a0330e47819f55b485fd39c, type: 3}
+      _ref:
+        rid: 992949773875544389
+  - _keyword: {fileID: 11400000, guid: 0f3f4e221bd4cd14390f61e3c32a531e, type: 2}
+    _commands:
+    - _script: {fileID: 11500000, guid: 9b2bc4c979dc6bc468c1efedce2bd77b, type: 3}
+      _ref:
+        rid: 992949773875544390
+    - _script: {fileID: 11500000, guid: daba97f9d4eca9d4d9a0f700a2bd3644, type: 3}
+      _ref:
+        rid: 3336727631384543316
+  - _keyword: {fileID: 11400000, guid: 09294ea05f80b5d4d955986f479696be, type: 2}
+    _commands:
+    - _script: {fileID: 11500000, guid: 1e9d2408958d13348bb5aca3dcaef962, type: 3}
+      _ref:
+        rid: 962668663946346497
+  - _keyword: {fileID: 11400000, guid: 766475a356f5fb341bff16744b3b5d4c, type: 2}
+    _commands:
+    - _script: {fileID: 11500000, guid: 6a97ece5679b6bf46895922f7ca6fd95, type: 3}
+      _ref:
+        rid: 7978898133563211791
+    - _script: {fileID: 11500000, guid: 3ef4e797d718fac4a9e5c8161b00e942, type: 3}
+      _ref:
+        rid: 7978898133563211792
+  _equipChoices:
+  - _script: {fileID: 11500000, guid: 4cc5cb7b15ae9ec4a9dc59a8a1f589d3, type: 3}
+    _ref:
+      rid: 992949827574693892
+  - _script: {fileID: 11500000, guid: 07bbb3e4aeca2ae4e892e836cfd18f7c, type: 3}
+    _ref:
+      rid: 3336727568853762090
+  _unequipChoices:
+  - _script: {fileID: 11500000, guid: fc132a0bfdaa3314caefd877d8e32c67, type: 3}
+    _ref:
+      rid: 992949773875544382
+  - _script: {fileID: 11500000, guid: 07bbb3e4aeca2ae4e892e836cfd18f7c, type: 3}
+    _ref:
+      rid: 3336727568853762091
+  _rideChoices:
+  - _script: {fileID: 11500000, guid: 04becc5151784cd45a6870af8fd3d995, type: 3}
+    _ref:
+      rid: 992949773875544383
+  - _script: {fileID: 11500000, guid: 07bbb3e4aeca2ae4e892e836cfd18f7c, type: 3}
+    _ref:
+      rid: 3336727568853762092
+  _unrideChoices:
+  - _script: {fileID: 11500000, guid: 53d240fbb9e20fa46a0d89ee2a5ae38f, type: 3}
+    _ref:
+      rid: 992949773875544384
+  - _script: {fileID: 11500000, guid: 07bbb3e4aeca2ae4e892e836cfd18f7c, type: 3}
+    _ref:
+      rid: 3336727568853762093
+  _itemsChoices:
+  - _script: {fileID: 11500000, guid: 95ce0d9de64ae34418ef3d1d57d853ac, type: 3}
+    _ref:
+      rid: 992949827574693891
+  _groundChoices:
+  - _script: {fileID: 11500000, guid: a9ef87e260ee014429ceaad2983235ec, type: 3}
+    _ref:
+      rid: 992949827574693890
+  _shotChoice:
+    _script: {fileID: 11500000, guid: e511e0aa7a554994480b56f1861b8b5b, type: 3}
+    _ref:
+      rid: 992949827574693888
+  _throwChoice:
+    _script: {fileID: 11500000, guid: 07bbb3e4aeca2ae4e892e836cfd18f7c, type: 3}
+    _ref:
+      rid: 992949827574693889
+  references:
+    version: 2
+    RefIds:
+    - rid: 962668663946346497
+      type: {class: CommandRead, ns: Roguegard, asm: Roguegard.CoreData}
+      data:
+        _assemblyReflectionAssetDummy: 
+    - rid: 992949773875544382
+      type: {class: CommandUnequip, ns: Roguegard, asm: Roguegard.CoreData}
+      data:
+        _assemblyReflectionAssetDummy: 
+    - rid: 992949773875544383
+      type: {class: CommandRide, ns: Roguegard, asm: Roguegard.CoreData}
+      data:
+        _assemblyReflectionAssetDummy: 
+    - rid: 992949773875544384
+      type: {class: CommandUnride, ns: Roguegard, asm: Roguegard.CoreData}
+      data:
+        _assemblyReflectionAssetDummy: 
+    - rid: 992949773875544389
+      type: {class: CommandDownStairs, ns: Roguegard, asm: Roguegard.CoreData}
+      data:
+        _assemblyReflectionAssetDummy: 
+    - rid: 992949773875544390
+      type: {class: CommandFloorDownStairs, ns: Roguegard, asm: Roguegard.CoreData}
+      data:
+        _assemblyReflectionAssetDummy: 
+    - rid: 992949827574693888
+      type: {class: ShotObjCommand, ns: Roguegard, asm: Roguegard.CoreData}
+      data:
+        _assemblyReflectionAssetDummy: 
+    - rid: 992949827574693889
+      type: {class: ThrowObjCommand, ns: Roguegard, asm: Roguegard.CoreData}
+      data:
+        _assemblyReflectionAssetDummy: 
+    - rid: 992949827574693890
+      type: {class: PickUpObjCommand, ns: Roguegard, asm: Roguegard.CoreData}
+      data:
+        _assemblyReflectionAssetDummy: 
+    - rid: 992949827574693891
+      type: {class: PutObjCommand, ns: Roguegard, asm: Roguegard.CoreData}
+      data:
+        _assemblyReflectionAssetDummy: 
+    - rid: 992949827574693892
+      type: {class: CommandEquip, ns: Roguegard, asm: Roguegard.CoreData}
+      data:
+        _assemblyReflectionAssetDummy: 
+    - rid: 992949827574693893
+      type: {class: DrinkObjCommand, ns: Roguegard, asm: Roguegard.CoreData}
+      data:
+        _assemblyReflectionAssetDummy: 
+    - rid: 992949827574693894
+      type: {class: ThrowObjCommand, ns: Roguegard, asm: Roguegard.CoreData}
+      data:
+        _assemblyReflectionAssetDummy: 
+    - rid: 992949827574693895
+      type: {class: EatObjCommand, ns: Roguegard, asm: Roguegard.CoreData}
+      data:
+        _assemblyReflectionAssetDummy: 
+    - rid: 992949827574693896
+      type: {class: ThrowObjCommand, ns: Roguegard, asm: Roguegard.CoreData}
+      data:
+        _assemblyReflectionAssetDummy: 
+    - rid: 992949827574693897
+      type: {class: CommandApply, ns: Roguegard, asm: Roguegard.CoreData}
+      data:
+        _assemblyReflectionAssetDummy: 
+    - rid: 992949827574693898
+      type: {class: ThrowObjCommand, ns: Roguegard, asm: Roguegard.CoreData}
+      data:
+        _assemblyReflectionAssetDummy: 
+    - rid: 3336727568853762090
+      type: {class: ThrowObjCommand, ns: Roguegard, asm: Roguegard.CoreData}
+      data:
+        _assemblyReflectionAssetDummy: 
+    - rid: 3336727568853762091
+      type: {class: ThrowObjCommand, ns: Roguegard, asm: Roguegard.CoreData}
+      data:
+        _assemblyReflectionAssetDummy: 
+    - rid: 3336727568853762092
+      type: {class: ThrowObjCommand, ns: Roguegard, asm: Roguegard.CoreData}
+      data:
+        _assemblyReflectionAssetDummy: 
+    - rid: 3336727568853762093
+      type: {class: ThrowObjCommand, ns: Roguegard, asm: Roguegard.CoreData}
+      data:
+        _assemblyReflectionAssetDummy: 
+    - rid: 3336727631384543316
+      type: {class: CommandSaveStairs, ns: Roguegard, asm: Roguegard.CoreData}
+      data:
+        _assemblyReflectionAssetDummy: 
+    - rid: 7978898133563211791
+      type: {class: CommandTakeOutFromChest, ns: Roguegard, asm: Roguegard.CoreData}
+      data:
+        _assemblyReflectionAssetDummy: 
+    - rid: 7978898133563211792
+      type: {class: CommandPutIntoChest, ns: Roguegard, asm: Roguegard.CoreData}
+      data:
+        _assemblyReflectionAssetDummy: 

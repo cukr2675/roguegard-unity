@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: CoreAmmo1 Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: CoreAmmo1
+  m_TableCollectionNameGuidString: b528029067f6ae540bcc4ec632efa656
+  m_Entries:
+  - m_Id: 26622431232
+    m_Key: Arrow
+    m_Metadata:
+      m_Items: []
+  - m_Id: 114136584192
+    m_Key: Arrow::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 116988710912
+    m_Key: Arrow::d
+    m_Metadata:
+      m_Items: []
+  - m_Id: 330269069312
+    m_Key: Bullet
+    m_Metadata:
+      m_Items: []
+  - m_Id: 332924063744
+    m_Key: Bullet::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 341178454016
+    m_Key: Bullet::d
+    m_Metadata:
+      m_Items: []
+  - m_Id: 539225100288
+    m_Key: ThrowingKnife
+    m_Metadata:
+      m_Items: []
+  - m_Id: 542106587136
+    m_Key: ThrowingKnife::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 545600442368
+    m_Key: ThrowingKnife::d
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 962668880969597011
+  references:
+    version: 2
+    RefIds:
+    - rid: 962668880969597011
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1697079129100

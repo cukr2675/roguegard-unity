@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 319ab89c985429247a9979b8680b4176, type: 3}
+  m_Name: CategoryKw.init
+  m_EditorClassIdentifier: 
+  _applyTool: {fileID: 11400000, guid: 0082811a5684dae4babc72d3c932f4a5, type: 2}
+  _chest: {fileID: 11400000, guid: 766475a356f5fb341bff16744b3b5d4c, type: 2}
+  _downStairs: {fileID: 11400000, guid: 9f936bdb399bae2429058d8a76d54f7c, type: 2}
+  _drink: {fileID: 11400000, guid: 9c6e8e727efe732498ae632d55564cc3, type: 2}
+  _equipment: {fileID: 11400000, guid: 75e1343f76d38ef47996f24301d8239f, type: 2}
+  _food: {fileID: 11400000, guid: 11c37567c65080c4983d02f2a5e05ff6, type: 2}
+  _levelDownStairs: {fileID: 11400000, guid: 0f3f4e221bd4cd14390f61e3c32a531e, type: 2}
+  _movableObstacle: {fileID: 11400000, guid: f2a81183e4530f24381001badc269785, type: 2}
+  _pool: {fileID: 11400000, guid: b85a11c4d4787754ea5d539e97173c58, type: 2}
+  _readable: {fileID: 11400000, guid: 09294ea05f80b5d4d955986f479696be, type: 2}
+  _trap: {fileID: 11400000, guid: 163a5895f2bbdb047bd70c8cc45e4df0, type: 2}
+  _vehicle: {fileID: 11400000, guid: e0041513da9587349971d99ee2ef1b51, type: 2}
+  _wand: {fileID: 11400000, guid: 7562db9c4bb4087488debb7de40d5179, type: 2}

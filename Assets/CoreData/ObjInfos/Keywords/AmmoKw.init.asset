@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9373168ebf49bb40b19d748dc9e62a3, type: 3}
+  m_Name: AmmoKw.init
+  m_EditorClassIdentifier: 
+  _arrow: {fileID: 11400000, guid: 3547a91476e86c043b7e38daaaf0f6ce, type: 2}
+  _bullet: {fileID: 11400000, guid: 574195cd339c1d44896f61e64dfccaa0, type: 2}
+  _throwingKnife: {fileID: 11400000, guid: c80a773f2393752468a66053207c7f51, type: 2}

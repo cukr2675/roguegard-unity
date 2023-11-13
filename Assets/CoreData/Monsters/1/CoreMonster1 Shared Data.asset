@@ -1,0 +1,112 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: CoreMonster1 Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: CoreMonster1
+  m_TableCollectionNameGuidString: 77d57214937a1bf449e8b02d08d71e14
+  m_Entries:
+  - m_Id: 38375411712
+    m_Key: Slime
+    m_Metadata:
+      m_Items: []
+  - m_Id: 80683356160
+    m_Key: Slime::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 93970911232
+    m_Key: Slime::d
+    m_Metadata:
+      m_Items: []
+  - m_Id: 204440489984
+    m_Key: SoldierTortoise
+    m_Metadata:
+      m_Items: []
+  - m_Id: 222417276928
+    m_Key: SoldierTortoise::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 237084758016
+    m_Key: SoldierTortoise::d
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292483125248
+    m_Key: LittleDevil
+    m_Metadata:
+      m_Items: []
+  - m_Id: 362003714048
+    m_Key: LittleDevil::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 372204261376
+    m_Key: LittleDevil::d
+    m_Metadata:
+      m_Items: []
+  - m_Id: 437773815808
+    m_Key: GusSpore
+    m_Metadata:
+      m_Items: []
+  - m_Id: 492832444416
+    m_Key: GusSpore::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 502898774016
+    m_Key: GusSpore::d
+    m_Metadata:
+      m_Items: []
+  - m_Id: 557626052608
+    m_Key: FloatingEye
+    m_Metadata:
+      m_Items: []
+  - m_Id: 632787980288
+    m_Key: FloatingEye::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 647417712640
+    m_Key: FloatingEye::d
+    m_Metadata:
+      m_Items: []
+  - m_Id: 855220310016
+    m_Key: Goblin
+    m_Metadata:
+      m_Items: []
+  - m_Id: 895187832832
+    m_Key: Goblin::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 906931884032
+    m_Key: Goblin::d
+    m_Metadata:
+      m_Items: []
+  - m_Id: 916188712960
+    m_Key: Kobold
+    m_Metadata:
+      m_Items: []
+  - m_Id: 946521919488
+    m_Key: Kobold::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 958068838400
+    m_Key: Kobold::d
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 7160953846393471020
+  references:
+    version: 2
+    RefIds:
+    - rid: 7160953846393471020
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1698482028981

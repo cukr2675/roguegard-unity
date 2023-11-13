@@ -1,0 +1,68 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: CoreAbility1 Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: CoreAbility1
+  m_TableCollectionNameGuidString: c6142c37dd1530b44bb22abd576d46fe
+  m_Entries:
+  - m_Id: 15029374976
+    m_Key: BraveHeart
+    m_Metadata:
+      m_Items: []
+  - m_Id: 88777822208
+    m_Key: BraveHeart::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 146826989568
+    m_Key: BraveHeart::d
+    m_Metadata:
+      m_Items: []
+  - m_Id: 744310787149824
+    m_Key: BraveHeartMsg::1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 266612117504
+    m_Key: Multitask
+    m_Metadata:
+      m_Items: []
+  - m_Id: 466164518912
+    m_Key: Multitask::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 486464950272
+    m_Key: Multitask::d
+    m_Metadata:
+      m_Items: []
+  - m_Id: 670116745216
+    m_Key: StairPickup
+    m_Metadata:
+      m_Items: []
+  - m_Id: 718158303232
+    m_Key: StairPickup::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 732184055808
+    m_Key: StairPickup::d
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 962668970976739480
+  references:
+    version: 2
+    RefIds:
+    - rid: 962668970976739480
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1697448070198

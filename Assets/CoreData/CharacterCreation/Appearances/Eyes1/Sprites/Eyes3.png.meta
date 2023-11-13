@@ -1,0 +1,764 @@
+fileFormatVersion: 2
+guid: a078c83d45cb5b3438746d4849495323
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 64
+    resizeAlgorithm: 0
+    textureFormat: 4
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Eye20RA0_NF
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 60
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.09375, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0a009775c171355a0800000000000000
+      internalID: -6533853223890386784
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye20RA1_NF
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 56
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.09375, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9f20a7ad565b25da0800000000000000
+      internalID: -5957499907995991303
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye20RA2_NF
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 52
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.09375, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 14e2aec06d5207720800000000000000
+      internalID: 2841812966140685889
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye20RA3_NF
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 48
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.09375, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dd31f573a40f23c90800000000000000
+      internalID: -7191421453410036771
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye20RB0_NF
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 60
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.09375, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5d03742d818709f50800000000000000
+      internalID: 6886135878251917525
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye20RB1_NF
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 56
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.09375, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a094178323d89fcd0800000000000000
+      internalID: -2523830869329622774
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye20RB2_NF
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 52
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.09375, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: edfdb836af1c99860800000000000000
+      internalID: 7537268732537331678
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye20RB3_NF
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 48
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.09375, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 962476578c922d570800000000000000
+      internalID: 8489894188486705769
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye20RC0_NF
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 60
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.09375, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c4ac713b180743fb0800000000000000
+      internalID: -4668983211318588852
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye20RC1_NF
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 56
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.09375, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4cf5c7d8a7dbe6ac0800000000000000
+      internalID: -3859939496552538172
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye20RC2_NF
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 52
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.09375, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 24b284924907888f0800000000000000
+      internalID: -538056373820708030
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye20RC3_NF
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 48
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.09375, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 81583fbe2ddf33580800000000000000
+      internalID: -8848449760509328104
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye20RD0_NF
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 60
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.09375, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6ba20eb70532be290800000000000000
+      internalID: -7860149896062424394
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye20RD1_NF
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 56
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.09375, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3124d785bad4e6e20800000000000000
+      internalID: 3345696971502207507
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye20RD2_NF
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 52
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.09375, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 24297bb7158214290800000000000000
+      internalID: -7907995140252790206
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye20RD3_NF
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 48
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.09375, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0b38adbe0c7449390800000000000000
+      internalID: -7812540559664708688
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye20LA0_NF
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 60
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.03125, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 945d74894818a3470800000000000000
+      internalID: 8375148863539369289
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye20LA1_NF
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 56
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.03125, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bcaa66e70893f41d0800000000000000
+      internalID: -3364407172583216437
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye20LA2_NF
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 52
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.03125, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 950b8ae46c84e7f30800000000000000
+      internalID: 4575174288015405145
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye20LA3_NF
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 48
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.03125, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 08ca279dfbb093220800000000000000
+      internalID: 2466015189576887424
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye20LB0_NF
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 60
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.03125, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 743d1d6d336577130800000000000000
+      internalID: 3564412410734433095
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye20LB1_NF
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 56
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.03125, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ca71b56db547d7c50800000000000000
+      internalID: 6664610961365342124
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye20LB2_NF
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 52
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.03125, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: af0f88cb5eb536a60800000000000000
+      internalID: 7666072032983445754
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye20LB3_NF
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 48
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.03125, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 53f778b4c1f5fb800800000000000000
+      internalID: 630327047986052917
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye20LC0_NF
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 60
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.03125, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4a3b46f15df9019c0800000000000000
+      internalID: -3958488334755122268
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye20LC1_NF
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 56
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.03125, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4ff9b3fe11a3cc3f0800000000000000
+      internalID: -879263978541572108
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye20LC2_NF
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 52
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.03125, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 16b0c97460ba14ea0800000000000000
+      internalID: -5890238794164335775
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eye20LC3_NF
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 48
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.03125, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 880d8e48488a23dc0800000000000000
+      internalID: -3660678259979792248
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      Eye20LA0_NF: 8375148863539369289
+      Eye20LA1_NF: -3364407172583216437
+      Eye20LA2_NF: 4575174288015405145
+      Eye20LA3_NF: 2466015189576887424
+      Eye20LB0_NF: 3564412410734433095
+      Eye20LB1_NF: 6664610961365342124
+      Eye20LB2_NF: 7666072032983445754
+      Eye20LB3_NF: 630327047986052917
+      Eye20LC0_NF: -3958488334755122268
+      Eye20LC1_NF: -879263978541572108
+      Eye20LC2_NF: -5890238794164335775
+      Eye20LC3_NF: -3660678259979792248
+      Eye20LD0_NF: 177748986217414717
+      Eye20LD1_NF: 4765932572686087146
+      Eye20LD2_NF: -3621753094877876734
+      Eye20LD3_NF: 3107660502512914729
+      Eye20RA0_NF: -6533853223890386784
+      Eye20RA1_NF: -5957499907995991303
+      Eye20RA2_NF: 2841812966140685889
+      Eye20RA3_NF: -7191421453410036771
+      Eye20RB0_NF: 6886135878251917525
+      Eye20RB1_NF: -2523830869329622774
+      Eye20RB2_NF: 7537268732537331678
+      Eye20RB3_NF: 8489894188486705769
+      Eye20RC0_NF: -4668983211318588852
+      Eye20RC1_NF: -3859939496552538172
+      Eye20RC2_NF: -538056373820708030
+      Eye20RC3_NF: -8848449760509328104
+      Eye20RD0_NF: -7860149896062424394
+      Eye20RD1_NF: 3345696971502207507
+      Eye20RD2_NF: -7907995140252790206
+      Eye20RD3_NF: -7812540559664708688
+      Eye20RE0_NF: 299512257
+      Eye20RE1_NF: 1438759588
+      Eye20RE2_NF: 1330287474
+      Eye20RE3_NF: -1347301921
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

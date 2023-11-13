@@ -1,0 +1,143 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 724c4bdca52bc374fba6e995eaf69c69, type: 3}
+  m_Name: BeDefeated
+  m_EditorClassIdentifier: 
+  _items:
+  - _boneName: {fileID: 11400000, guid: a90fd0bc3132c214395dee60b9a645ae, type: 2}
+    _overridesSourceSprite: 0
+    _boneSprite:
+      _normalFront: {fileID: 0}
+      _normalRear: {fileID: 0}
+      _backFront: {fileID: 0}
+      _backRear: {fileID: 0}
+    _overridesSourceColor: 0
+    _color: {r: 1, g: 1, b: 1, a: 1}
+    _pixelLocalPosition: {x: 6, y: 4, z: 0}
+    _localRotation: {x: 0, y: 0, z: 0.70710677, w: 0.70710677}
+    _scaleOfLocalByLocal: {x: 1, y: 1, z: 1}
+    _transformsInRootParent: 1
+    _localMirrorX: 0
+    _localMirrorY: 0
+  - _boneName: {fileID: 11400000, guid: c66efafae0b82384d8b4212c78358e52, type: 2}
+    _overridesSourceSprite: 0
+    _boneSprite:
+      _normalFront: {fileID: 0}
+      _normalRear: {fileID: 0}
+      _backFront: {fileID: 0}
+      _backRear: {fileID: 0}
+    _overridesSourceColor: 0
+    _color: {r: 1, g: 1, b: 1, a: 1}
+    _pixelLocalPosition: {x: -3, y: 5, z: 0}
+    _localRotation: {x: 0, y: 0, z: -0.70710677, w: 0.70710677}
+    _scaleOfLocalByLocal: {x: 1, y: 1, z: 1}
+    _transformsInRootParent: 0
+    _localMirrorX: 0
+    _localMirrorY: 0
+  - _boneName: {fileID: 11400000, guid: 390f9798da027d8489dbb8048e8dc2d3, type: 2}
+    _overridesSourceSprite: 0
+    _boneSprite:
+      _normalFront: {fileID: 0}
+      _normalRear: {fileID: 0}
+      _backFront: {fileID: 0}
+      _backRear: {fileID: 0}
+    _overridesSourceColor: 0
+    _color: {r: 1, g: 1, b: 1, a: 1}
+    _pixelLocalPosition: {x: 0, y: 0, z: 0}
+    _localRotation: {x: 0, y: 0, z: 1, w: -0.00000004371139}
+    _scaleOfLocalByLocal: {x: 1, y: 1, z: 1}
+    _transformsInRootParent: 0
+    _localMirrorX: 1
+    _localMirrorY: 0
+  - _boneName: {fileID: 11400000, guid: 943353eeb2ebaf94fa745edefc849f40, type: 2}
+    _overridesSourceSprite: 0
+    _boneSprite:
+      _normalFront: {fileID: 0}
+      _normalRear: {fileID: 0}
+      _backFront: {fileID: 0}
+      _backRear: {fileID: 0}
+    _overridesSourceColor: 0
+    _color: {r: 1, g: 1, b: 1, a: 1}
+    _pixelLocalPosition: {x: 0, y: 0, z: 0}
+    _localRotation: {x: 0, y: 0, z: 1, w: -0.00000004371139}
+    _scaleOfLocalByLocal: {x: 1, y: 1, z: 1}
+    _transformsInRootParent: 0
+    _localMirrorX: 0
+    _localMirrorY: 0
+  - _boneName: {fileID: 11400000, guid: ec4ed1a3457777a41ae301e2da2a42f0, type: 2}
+    _overridesSourceSprite: 0
+    _boneSprite:
+      _normalFront: {fileID: 0}
+      _normalRear: {fileID: 0}
+      _backFront: {fileID: 0}
+      _backRear: {fileID: 0}
+    _overridesSourceColor: 0
+    _color: {r: 1, g: 1, b: 1, a: 1}
+    _pixelLocalPosition: {x: 0, y: 0, z: 0}
+    _localRotation: {x: 0, y: 0, z: 0.14349267, w: -0.9896514}
+    _scaleOfLocalByLocal: {x: 1, y: 1, z: 1}
+    _transformsInRootParent: 0
+    _localMirrorX: 0
+    _localMirrorY: 0
+  - _boneName: {fileID: 11400000, guid: 6c5bf9f3253d7214bba7b3466b57517f, type: 2}
+    _overridesSourceSprite: 0
+    _boneSprite:
+      _normalFront: {fileID: 0}
+      _normalRear: {fileID: 0}
+      _backFront: {fileID: 0}
+      _backRear: {fileID: 0}
+    _overridesSourceColor: 0
+    _color: {r: 1, g: 1, b: 1, a: 1}
+    _pixelLocalPosition: {x: 0, y: 0, z: 0}
+    _localRotation: {x: 0, y: 0, z: -0.06104854, w: 0.9981348}
+    _scaleOfLocalByLocal: {x: 1, y: 1, z: 1}
+    _transformsInRootParent: 0
+    _localMirrorX: 0
+    _localMirrorY: 0
+  - _boneName: {fileID: 11400000, guid: d75b8d3f26400424498cb4eff95f5ddd, type: 2}
+    _overridesSourceSprite: 1
+    _boneSprite:
+      _normalFront: {fileID: 2010396690, guid: 1dbdd348f2e5d504eb67276112af86e7, type: 3}
+      _normalRear: {fileID: 0}
+      _backFront: {fileID: 0}
+      _backRear: {fileID: 0}
+    _overridesSourceColor: 0
+    _color: {r: 1, g: 1, b: 1, a: 1}
+    _pixelLocalPosition: {x: 0, y: 0, z: 0}
+    _localRotation: {x: 0, y: 0, z: 0, w: 1}
+    _scaleOfLocalByLocal: {x: 1, y: 1, z: 1}
+    _transformsInRootParent: 0
+    _localMirrorX: 0
+    _localMirrorY: 0
+  - _boneName: {fileID: 11400000, guid: c9d1479eeb1d2424ba5ab7f85da95ed0, type: 2}
+    _overridesSourceSprite: 1
+    _boneSprite:
+      _normalFront: {fileID: -671630792, guid: 1dbdd348f2e5d504eb67276112af86e7, type: 3}
+      _normalRear: {fileID: 0}
+      _backFront: {fileID: 0}
+      _backRear: {fileID: 0}
+    _overridesSourceColor: 0
+    _color: {r: 1, g: 1, b: 1, a: 1}
+    _pixelLocalPosition: {x: 0, y: 0, z: 0}
+    _localRotation: {x: 0, y: 0, z: 0, w: 1}
+    _scaleOfLocalByLocal: {x: 1, y: 1, z: 1}
+    _transformsInRootParent: 0
+    _localMirrorX: 0
+    _localMirrorY: 0
+  _localBacks:
+  - _name: {fileID: 11400000, guid: a90fd0bc3132c214395dee60b9a645ae, type: 2}
+    _localBack: 3
+  - _name: {fileID: 11400000, guid: c66efafae0b82384d8b4212c78358e52, type: 2}
+    _localBack: 0
+  _reorders:
+  - _name: {fileID: 11400000, guid: 943353eeb2ebaf94fa745edefc849f40, type: 2}
+    _reorder: 0

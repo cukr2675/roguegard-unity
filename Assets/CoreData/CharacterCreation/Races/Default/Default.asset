@@ -1,0 +1,187 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2666c1a951081764697a9c96390c4a64, type: 3}
+  m_Name: Default
+  m_EditorClassIdentifier: 
+  _genders: {fileID: 11400000, guid: a1b6fd46befd4134da432947e374bc6e, type: 2}
+  _category: {fileID: 0}
+  _faction: {fileID: 11400000, guid: d4e19afa65e50ca43b0d30ec29f517f0, type: 2}
+  _material: {fileID: 0}
+  _walk:
+    _script: {fileID: 11500000, guid: 490df367dd83fda40866bdc6abab6451, type: 3}
+    _ref:
+      rid: 8656620228836589628
+  _wait:
+    _script: {fileID: 11500000, guid: 61c0cd2af4023c041bb501d06665607a, type: 3}
+    _ref:
+      rid: 992949400082579462
+  _attack:
+    _script: {fileID: 11500000, guid: 9d4c2ee8f8042a9438cef843ea3195bc, type: 3}
+    _ref:
+      rid: 8656620228836589638
+  _throw:
+    _script: {fileID: 11500000, guid: d3c2127593a2f3b46858ce92b8e79a10, type: 3}
+    _ref:
+      rid: 8656620228836589639
+  _pickUp:
+    _script: {fileID: 11500000, guid: 6cb28bc196aa98943af26f6cbf5c8ab5, type: 3}
+    _ref:
+      rid: 8656620228836589629
+  _put:
+    _script: {fileID: 11500000, guid: 91ef0713d9d98e1458d2f905cf6e208d, type: 3}
+    _ref:
+      rid: 8656620228836589630
+  _eat:
+    _script: {fileID: 11500000, guid: 7960d08281af444499857522464c000f, type: 3}
+    _ref:
+      rid: 992949400082579466
+  _hit:
+    _script: {fileID: 11500000, guid: 74513b13140879547b2095a9bdb02536, type: 3}
+    _ref:
+      rid: 992949400082579467
+  _beDefeated:
+    _script: {fileID: 11500000, guid: d66380e546f8c154d97a4f121455c58b, type: 3}
+    _ref:
+      rid: 992949400082579471
+  _locate:
+    _script: {fileID: 11500000, guid: ad6b33a832314c7498f5c0c77f3e2324, type: 3}
+    _ref:
+      rid: 992949400082579469
+  _polymorph:
+    _script: {fileID: 11500000, guid: a1d12057be85afa4f9b5349f881ff68b, type: 3}
+    _ref:
+      rid: 992949400082579470
+  _beApplied:
+    _script: {fileID: 11500000, guid: df8a6d2564a15534a8684420cf824c2f, type: 3}
+    _ref:
+      rid: 992949400082579472
+  _beThrown:
+    _script: {fileID: 11500000, guid: 59f9d730b79e0594286cdc90ff7e4999, type: 3}
+    _ref:
+      rid: 8656620228836589606
+  _beEaten:
+    _script: {fileID: 11500000, guid: 43861af6c08553c43ad0d896a7cb717c, type: 3}
+    _ref:
+      rid: 8656620228836589605
+  _beSteppedOnTile:
+    _script: {fileID: 11500000, guid: df8a6d2564a15534a8684420cf824c2f, type: 3}
+    _ref:
+      rid: 992949400082579475
+  _weight:
+    _script: {fileID: 11500000, guid: a06447db39874c14b9632903da8af0ef, type: 3}
+    _ref:
+      rid: 992949352820113779
+  _sprite:
+    _script: {fileID: 11500000, guid: deb4a86e933c3ea49bcaf24bd08289ef, type: 3}
+    _ref:
+      rid: 992949352820113780
+  _weaponAttack:
+    _script: {fileID: 11500000, guid: df8a6d2564a15534a8684420cf824c2f, type: 3}
+    _ref:
+      rid: 3336727568853762057
+  _weaponThrow:
+    _script: {fileID: 11500000, guid: df8a6d2564a15534a8684420cf824c2f, type: 3}
+    _ref:
+      rid: 3336727568853762058
+  _beShot:
+    _script: {fileID: 11500000, guid: 90944eafeb5d9ba44aeccc4e27612ea1, type: 3}
+    _ref:
+      rid: 962668766823186432
+  references:
+    version: 2
+    RefIds:
+    - rid: 962668766823186432
+      type: {class: CommonBeShot, ns: Roguegard, asm: Roguegard.CoreData}
+      data:
+        _assemblyReflectionAssetDummy: 
+        _flyingMotion: {fileID: 11400000, guid: 2c43268cba53c38418d27269977ada3a, type: 2}
+        _dropMotion: {fileID: 11400000, guid: 8a60e957951a4544986736a76d783e81, type: 2}
+    - rid: 992949352820113779
+      type: {class: CostedRaceWeight, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
+      data:
+        _assemblyReflectionAssetDummy: 
+    - rid: 992949352820113780
+      type: {class: ConstantRaceSprite, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
+      data:
+        _assemblyReflectionAssetDummy: 
+        _bone: {fileID: 0}
+        _motionSet: {fileID: 11400000, guid: 0061427982a1ffd4bb29fdba3a4c54b3, type: 2}
+    - rid: 992949400082579462
+      type: {class: CommonWait, ns: Roguegard, asm: Roguegard.CoreData}
+      data:
+        _assemblyReflectionAssetDummy: 
+    - rid: 992949400082579466
+      type: {class: InediateEat, ns: Roguegard, asm: Roguegard.CoreData}
+      data:
+        _assemblyReflectionAssetDummy: 
+    - rid: 992949400082579467
+      type: {class: CommonHit, ns: Roguegard, asm: Roguegard.CoreData}
+      data:
+        _assemblyReflectionAssetDummy: 
+    - rid: 992949400082579469
+      type: {class: CommonLocate, ns: Roguegard, asm: Roguegard.CoreData}
+      data:
+        _assemblyReflectionAssetDummy: 
+    - rid: 992949400082579470
+      type: {class: CommonPolymorph, ns: Roguegard, asm: Roguegard.CoreData}
+      data:
+        _assemblyReflectionAssetDummy: 
+    - rid: 992949400082579471
+      type: {class: CommonBeDefeated, ns: Roguegard, asm: Roguegard.CoreData}
+      data:
+        _assemblyReflectionAssetDummy: 
+    - rid: 992949400082579472
+      type: {class: FalseRogueMethod, ns: Roguegard, asm: Roguegard.CoreData}
+      data:
+        _assemblyReflectionAssetDummy: 
+    - rid: 992949400082579475
+      type: {class: FalseRogueMethod, ns: Roguegard, asm: Roguegard.CoreData}
+      data:
+        _assemblyReflectionAssetDummy: 
+    - rid: 3336727568853762057
+      type: {class: FalseRogueMethod, ns: Roguegard, asm: Roguegard.CoreData}
+      data:
+        _assemblyReflectionAssetDummy: 
+    - rid: 3336727568853762058
+      type: {class: FalseRogueMethod, ns: Roguegard, asm: Roguegard.CoreData}
+      data:
+        _assemblyReflectionAssetDummy: 
+    - rid: 8656620228836589605
+      type: {class: CostedBeEaten, ns: Roguegard, asm: Roguegard.CoreData}
+      data:
+        _assemblyReflectionAssetDummy: 
+    - rid: 8656620228836589606
+      type: {class: CommonBeThrown, ns: Roguegard, asm: Roguegard.CoreData}
+      data:
+        _assemblyReflectionAssetDummy: 
+        _flyingMotion: {fileID: 11400000, guid: 2c43268cba53c38418d27269977ada3a, type: 2}
+        _dropMotion: {fileID: 11400000, guid: 8a60e957951a4544986736a76d783e81, type: 2}
+    - rid: 8656620228836589628
+      type: {class: CommonWalk, ns: Roguegard, asm: Roguegard.CoreData}
+      data:
+        _assemblyReflectionAssetDummy: 
+    - rid: 8656620228836589629
+      type: {class: CommonPickUp, ns: Roguegard, asm: Roguegard.CoreData}
+      data:
+        _assemblyReflectionAssetDummy: 
+    - rid: 8656620228836589630
+      type: {class: CommonPut, ns: Roguegard, asm: Roguegard.CoreData}
+      data:
+        _assemblyReflectionAssetDummy: 
+    - rid: 8656620228836589638
+      type: {class: CommonAttack, ns: Roguegard, asm: Roguegard.CoreData}
+      data:
+        _assemblyReflectionAssetDummy: 
+    - rid: 8656620228836589639
+      type: {class: CommonThrow, ns: Roguegard, asm: Roguegard.CoreData}
+      data:
+        _assemblyReflectionAssetDummy: 

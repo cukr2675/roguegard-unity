@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: CoreMonster1_en-US
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en-US
+  m_SharedData: {fileID: 11400000, guid: 77d57214937a1bf449e8b02d08d71e14, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 38375411712
+    m_Localized: Slime
+    m_Metadata:
+      m_Items: []
+  - m_Id: 204440489984
+    m_Localized: SoldierTortoise
+    m_Metadata:
+      m_Items: []
+  - m_Id: 557626052608
+    m_Localized: FloatingEye
+    m_Metadata:
+      m_Items: []
+  - m_Id: 437773815808
+    m_Localized: GusSpore
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292483125248
+    m_Localized: LittleDevil
+    m_Metadata:
+      m_Items: []
+  - m_Id: 855220310016
+    m_Localized: Goblin
+    m_Metadata:
+      m_Items: []
+  - m_Id: 916188712960
+    m_Localized: Kobold
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

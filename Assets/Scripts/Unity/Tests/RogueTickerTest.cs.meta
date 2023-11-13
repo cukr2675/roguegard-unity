@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 3bfe3cf5cbf1ee949a34d25817e62281
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - _settings: {fileID: 11400000, guid: aa5ef1b55b7dd914bad2dea8e4af7f18, type: 2}
+  - _locateSelfTester: {fileID: 11400000, guid: 43488587b698b734b90929316e07981d, type: 2}
+  - _locateLocationTester: {fileID: 11400000, guid: bd36bdcb8f5e00a468d661d2a64585e6, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

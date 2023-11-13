@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5353752f2149abc45a1b13f851996c49, type: 3}
+  m_Name: StatsKw.init
+  m_EditorClassIdentifier: 
+  _atk: {fileID: 11400000, guid: 811acea957e495745b89aeae5c398159, type: 2}
+  _cost: {fileID: 11400000, guid: 02101e65d82f96f478bef48dc9a2f94a, type: 2}
+  _critical: {fileID: 11400000, guid: d11bddbd4f300c746af4c2b14b66ed41, type: 2}
+  _criticalATK: {fileID: 11400000, guid: 1100d3e9c251c0d47a0835f1384ea845, type: 2}
+  _criticalRate: {fileID: 11400000, guid: c8d0942c903b02644a5953f1532dad22, type: 2}
+  _damageGuarantee: {fileID: 11400000, guid: 5d360cc15f4e3a04190d52780b425ef1, type: 2}
+  _def: {fileID: 11400000, guid: 4ea065d4066ee51499d25d3ecb2cf5de, type: 2}
+  _exp: {fileID: 11400000, guid: 791a5d750b2ab734aa2dd806e3a0387f, type: 2}
+  _female: {fileID: 11400000, guid: 7d6f2166a76e7b34a8af39d2a00fb70b, type: 2}
+  _gender: {fileID: 11400000, guid: 1d78eea5a1d911f4295cb740bb2b589c, type: 2}
+  _looksFemale: {fileID: 11400000, guid: bdf3ec709c3e469418b769370c7ca74b, type: 2}
+  _looksMale: {fileID: 11400000, guid: a41f2d71a476a1d4aa8046baba4c8003, type: 2}
+  _male: {fileID: 11400000, guid: 7e9626c252bb9454980c8099ac9a17b3, type: 2}
+  _guard: {fileID: 11400000, guid: 0c9be25175cbf9b4994924cb04a0b3f4, type: 2}
+  _guardDEF: {fileID: 11400000, guid: 7b439dfa08692af41a859747c7eb962d, type: 2}
+  _guardRate: {fileID: 11400000, guid: c19129b7d43acdf4e845372fcbdb852e, type: 2}
+  _hp: {fileID: 11400000, guid: 9b6d99451c5954e4d86ea99f61c953ea, type: 2}
+  _hpregenerationPermille: {fileID: 11400000, guid: 84dafa6769807f04c8131bc3d1258dd9, type: 2}
+  _loadCapacity: {fileID: 11400000, guid: 6743bec4ed77b80439b61d3d0e9d8b04, type: 2}
+  _material: {fileID: 11400000, guid: 5537e68434bee974692d6612c89dd503, type: 2}
+  _maxHP: {fileID: 11400000, guid: 34bd909233e3d5e4397e4d7b299db3db, type: 2}
+  _maxMP: {fileID: 11400000, guid: e4f9aab0a8cb1e04e8ab0f17306ea4d7, type: 2}
+  _maxNutrition: {fileID: 11400000, guid: 69b8ec28d7640af4b8b7c23b5282cf95, type: 2}
+  _asTile: {fileID: 11400000, guid: d5fcda478cf3abe48b3a2758f8e5fafa, type: 2}
+  _hasCollider: {fileID: 11400000, guid: d6f71cd7b24548f429ee68e90a2c29df, type: 2}
+  _hasSightCollider: {fileID: 11400000, guid: 6b14136f1f339c747be8f73cb65eaf5d, type: 2}
+  _hasTileCollider: {fileID: 11400000, guid: db64857946d247040975f4dae220645a, type: 2}
+  _movement: {fileID: 11400000, guid: aae5b0dc89791394bbcc3126bb6c5e2a, type: 2}
+  _mp: {fileID: 11400000, guid: aa2027e1fc696dd46a111e577cccb16b, type: 2}
+  _mpregenerationPermille: {fileID: 11400000, guid: 9c2232588babade4b955ae67b8c16242, type: 2}
+  _requiredMP: {fileID: 11400000, guid: 034f0224731ad6843b1b9863ed20f4eb, type: 2}
+  _spaceWeight: {fileID: 11400000, guid: e0a8a0d0cc6f0684b8fb3066fd4d4721, type: 2}
+  _beInhibited: {fileID: 11400000, guid: 0e607186bdc32894b9ddc3abb630996d, type: 2}
+  _hungry: {fileID: 11400000, guid: 63ebc020648117e41b9ba053bee1026a, type: 2}
+  _speed: {fileID: 11400000, guid: 097eb961029ed5b439d8cb08b7418019, type: 2}
+  _weight: {fileID: 11400000, guid: 6f9540f0468aa1541bc176dd6a3c4eec, type: 2}

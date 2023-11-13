@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c21cbb95038fab4ebe0d538e0ad8d02, type: 3}
+  m_Name: Slime
+  m_EditorClassIdentifier: 
+  _items:
+  - _key: {fileID: 11400000, guid: 9166be26e3d3f9c4b8776f5130a0ca15, type: 2}
+    _value: {fileID: 11400000, guid: 175e664346a08bc44a3867025f43792d, type: 2}
+  - _key: {fileID: 11400000, guid: 4c78cdb33b96ec84e92eca381628fb79, type: 2}
+    _value: {fileID: 11400000, guid: 4d56a8c6dcb652643955d61846378650, type: 2}
+  - _key: {fileID: 11400000, guid: 06ed3f2b7969a62409ee0a15f7c3fb6a, type: 2}
+    _value: {fileID: 11400000, guid: f2e59c8bb62c91649ae84a1921468039, type: 2}
+  - _key: {fileID: 11400000, guid: 625e5dc48cba06e48b12d59d62ff5ac1, type: 2}
+    _value: {fileID: 11400000, guid: 4153490910120d843b3665cf5057d244, type: 2}
+  - _key: {fileID: 11400000, guid: 0c9be25175cbf9b4994924cb04a0b3f4, type: 2}
+    _value: {fileID: 11400000, guid: 252141d96a1039545a6f1ee0a02f9081, type: 2}
+  - _key: {fileID: 11400000, guid: 8d0eba7b4467cb04a8f600f68466f427, type: 2}
+    _value: {fileID: 11400000, guid: 5c6a6cb44a6e3fb4bad5427ec851c376, type: 2}

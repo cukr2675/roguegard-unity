@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2444e7abe088b6c489115701b579e4f5, type: 3}
+  m_Name: BD_Gen7
+  m_EditorClassIdentifier: 
+  _floorSize: {x: 32, y: 32}
+  _minRooms: 3
+  _maxRooms: 4
+  _minRoomWidth: 7
+  _maxRoomWidth: 12
+  _minAdditionalCorridors: 1
+  _maxAdditionalCorridors: 2
+  _fillTiles:
+  - {fileID: 11400000, guid: 9e07379c12401a54a9afcdc2d2081fc9, type: 2}
+  - {fileID: 11400000, guid: 7b5f75e0ffd65ff4ab579674c671753c, type: 2}
+  _noiseTiles:
+  - {fileID: 11400000, guid: 9e07379c12401a54a9afcdc2d2081fc9, type: 2}
+  - {fileID: 11400000, guid: 255d75cb8b17d37418c0f99cb5f07a89, type: 2}
+  _noiseTileThreshold: 0.6
+  _noiseTileScale: 0.2
+  _roomFloorTiles:
+  - {fileID: 11400000, guid: 9e07379c12401a54a9afcdc2d2081fc9, type: 2}
+  _roomWallTiles:
+  - {fileID: 11400000, guid: 9e07379c12401a54a9afcdc2d2081fc9, type: 2}
+  - {fileID: 11400000, guid: 44985f674517d934f9cfca6b10f538c6, type: 2}
+  _corridorTiles:
+  - _tiles:
+    - {fileID: 11400000, guid: 8dab63605c378de4a895690f47728e39, type: 2}

@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ea716a07ac70914cb92d3fedc9bcfd2, type: 3}
+  m_Name: TitleData
+  m_EditorClassIdentifier: 
+  _progressCircle: {fileID: 21300000, guid: 779f3c5c92053d9489e9f0e5a69afb6f, type: 3}
+  _settings: {fileID: 11400000, guid: aa5ef1b55b7dd914bad2dea8e4af7f18, type: 2}
+  _titleLogo: {fileID: 21300000, guid: 776c864d2b5c1de4a91bce326c31e764, type: 3}
+  _menuPrefab: {fileID: 1976325933450094917, guid: 43592966acce6c8499810e755a2e65aa, type: 3}
+  _spriteRendererPoolPrefab: {fileID: 5919979545806044597, guid: 9d7b2ef17eb63d04a98ad997e2e8fc27, type: 3}
+  _tilemapRendererPrefab: {fileID: 569002039659181459, guid: 9a1a9e73297da1d438127c3be1bb8628, type: 3}
+  _touchControllerPrefab: {fileID: 5851345719149690394, guid: fc2b9dbfc524ebd44922675574ce9621, type: 3}
+  _soundTable: {fileID: 11400000, guid: ec0852a62c96e5244b4ac8fb7020eeac, type: 2}
+  _audioMixer: {fileID: 24100000, guid: 557080067eb351944861920837fdcdfe, type: 2}
+  _seAudioSourcePrefab: {fileID: 5282523497276891947, guid: 0119011335df52a45a3e9f7a20a29ee8, type: 3}
+  _bgmAudioSourcePrefab: {fileID: 5282523497276891947, guid: 6e0ef912595b62a4fb2f4261ca58093c, type: 3}

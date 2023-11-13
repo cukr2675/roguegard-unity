@@ -1,0 +1,112 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: CoreWeapon1 Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: CoreWeapon1
+  m_TableCollectionNameGuidString: b21260393adc74243be97600119c567a
+  m_Entries:
+  - m_Id: 399563165696
+    m_Key: BoneSpear
+    m_Metadata:
+      m_Items: []
+  - m_Id: 505901355008
+    m_Key: BoneSpear::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1516778950656
+    m_Key: BoneSpear::d
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1601474531328
+    m_Key: Bow
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1923848736768
+    m_Key: Bow::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2071827976192
+    m_Key: Bow::d
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4167872679936
+    m_Key: ColorGuardRifle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4170561228800
+    m_Key: ColorGuardRifle::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4173476270080
+    m_Key: ColorGuardRifle::d
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6367705436160
+    m_Key: CrossGuardWand
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6370792443904
+    m_Key: CrossGuardWand::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6373543907328
+    m_Key: CrossGuardWand::d
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7846050795520
+    m_Key: Dagger
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7849301381120
+    m_Key: Dagger::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7853298552832
+    m_Key: Dagger::d
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8233822588928
+    m_Key: Mace
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8236540497920
+    m_Key: Mace::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8238855753728
+    m_Key: Mace::d
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8563578769408
+    m_Key: SubmachineGun
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8567437529088
+    m_Key: SubmachineGun::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8570390319104
+    m_Key: SubmachineGun::d
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 962668880969597010
+  references:
+    version: 2
+    RefIds:
+    - rid: 962668880969597010
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1697076946692

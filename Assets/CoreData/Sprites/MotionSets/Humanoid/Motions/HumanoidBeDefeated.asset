@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 114a2777e18778b4ca93f5388be802e3, type: 3}
+  m_Name: HumanoidBeDefeated
+  m_EditorClassIdentifier: 
+  _loopCount: 15
+  _direction: 1
+  _items:
+  - _poseSource: {fileID: 11400000, guid: 0dd1c2fb3538b654da256908f79d0a7f, type: 2}
+    _pixelPosition: {x: 0, y: 0, z: 0}
+    _pixelRotatablePosition: {x: 0, y: 0, z: 0}
+    _rotation: {x: 0, y: 0, z: 0, w: 1}
+    _scale: {x: 1, y: 1, z: 1}
+    _degree: 0
+    _wait: 1
+  - _poseSource: {fileID: 11400000, guid: 0dd1c2fb3538b654da256908f79d0a7f, type: 2}
+    _pixelPosition: {x: 0, y: 0, z: 0}
+    _pixelRotatablePosition: {x: 0, y: 0, z: 0}
+    _rotation: {x: 0, y: 0, z: 0, w: 1}
+    _scale: {x: 0, y: 0, z: 0}
+    _degree: 0
+    _wait: 1

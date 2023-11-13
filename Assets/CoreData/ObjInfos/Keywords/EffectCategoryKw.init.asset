@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1040c33d41142bd449ca08bd6871c3cf, type: 3}
+  m_Name: EffectCategoryKw.init
+  m_EditorClassIdentifier: 
+  _buff: {fileID: 11400000, guid: 4654aa6c6df34874f83ab794cd6fcdd7, type: 2}
+  _debuff: {fileID: 11400000, guid: 8bb0770df80cebb479cbbe188cc53ebb, type: 2}
+  _dummy: {fileID: 11400000, guid: e45a252f8549aeb4a8f43226f2921454, type: 2}
+  _statusAilment: {fileID: 11400000, guid: 71e30affb1bc09943af3a9d428c17989, type: 2}

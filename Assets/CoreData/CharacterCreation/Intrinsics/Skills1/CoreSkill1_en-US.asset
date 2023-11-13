@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: CoreSkill1_en-US
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en-US
+  m_SharedData: {fileID: 11400000, guid: 6c37925a1dd53c34e86c29d66acefec5, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 12030447616
+    m_Localized: SpellCharge
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2651594035200
+    m_Localized: BeamSlash
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3177614282752
+    m_Localized: BeamBullet
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8099508391936
+    m_Localized: Multishot3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 79758114295808
+    m_Localized: Ember
+    m_Metadata:
+      m_Items: []
+  - m_Id: 79844751839232
+    m_Localized: Poison
+    m_Metadata:
+      m_Items: []
+  - m_Id: 157311139188736
+    m_Localized: ThronsTrap
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10267297274007552
+    m_Localized: PowerSlash
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

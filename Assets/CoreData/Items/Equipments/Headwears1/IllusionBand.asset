@@ -1,0 +1,159 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d842246dd790334ba7cff66d4dab604, type: 3}
+  m_Name: IllusionBand
+  m_EditorClassIdentifier: 
+  _overridesCost: 0
+  _cost: 1
+  _costIsUnknown: 0
+  _race:
+    _name: "\u307F\u307E\u3054\u3044\u30CF\u30C1\u30DE\u30AD"
+    _icon: {fileID: -1265775385, guid: eadd615260332ec4cac4029b847a234f, type: 3}
+    _color: {r: 0, g: 0.5019608, b: 0, a: 1}
+    _caption: "\u88C5\u5099\u3057\u3066\u3044\u308B\u3042\u3044\u3060\u7570\u6027\u3068\u9593\u9055\u308F\u308C\u308B"
+    _details:
+      _script: {fileID: 0}
+      _ref:
+        rid: -2
+    _cost: 1
+    _costIsUnknown: 0
+    _genders: {fileID: 0}
+    _category: {fileID: 11400000, guid: 75e1343f76d38ef47996f24301d8239f, type: 2}
+    _maxHP: 0
+    _maxMP: 0
+    _atk: 0
+    _def: 0
+    _loadCapacity: 0
+    _faction: {fileID: 0}
+    _ability: 4
+    _material: {fileID: 11400000, guid: 59f6d2270bed63546b5881d252d89a96, type: 2}
+    _lootTable: []
+    _walk:
+      _script: {fileID: 0}
+      _ref:
+        rid: -2
+    _wait:
+      _script: {fileID: 0}
+      _ref:
+        rid: -2
+    _attack:
+      _script: {fileID: 0}
+      _ref:
+        rid: -2
+    _throw:
+      _script: {fileID: 0}
+      _ref:
+        rid: -2
+    _pickUp:
+      _script: {fileID: 0}
+      _ref:
+        rid: -2
+    _put:
+      _script: {fileID: 0}
+      _ref:
+        rid: -2
+    _eat:
+      _script: {fileID: 0}
+      _ref:
+        rid: -2
+    _hit:
+      _script: {fileID: 0}
+      _ref:
+        rid: -2
+    _beDefeated:
+      _script: {fileID: 0}
+      _ref:
+        rid: -2
+    _locate:
+      _script: {fileID: 0}
+      _ref:
+        rid: -2
+    _polymorph:
+      _script: {fileID: 0}
+      _ref:
+        rid: -2
+    _beApplied:
+      _script: {fileID: 0}
+      _ref:
+        rid: -2
+    _beThrown:
+      _script: {fileID: 0}
+      _ref:
+        rid: -2
+    _beEaten:
+      _script: {fileID: 0}
+      _ref:
+        rid: -2
+    _equipmentState: {fileID: 0}
+    _weight:
+      _script: {fileID: 0}
+      _ref:
+        rid: -2
+    _sprite:
+      _script: {fileID: 0}
+      _ref:
+        rid: -2
+    _openEffects: []
+    _lv: 0
+    _gender: {fileID: 0}
+    _hpName: 
+    _mpName: 
+    _members:
+      _items: []
+    _equipParts:
+    - {fileID: 11400000, guid: a9b106ec03139934fa761fa7f6484de4, type: 2}
+    _isNotStackableWhileEquipped: 1
+    _boneSpriteTable:
+      _items:
+      - _name: {fileID: 11400000, guid: ec68d48baa662234394a31361604143d, type: 2}
+        _hasFirstSprite: 1
+        _firstSprite:
+          _normalFront: {fileID: 333825727, guid: 6a76f83f271204a45b8c9c778cf89534, type: 3}
+          _normalRear: {fileID: 887467220, guid: 6a76f83f271204a45b8c9c778cf89534, type: 3}
+          _backFront: {fileID: 887467220, guid: 6a76f83f271204a45b8c9c778cf89534, type: 3}
+          _backRear: {fileID: 0}
+        _firstColor: {r: 1, g: 1, b: 1, a: 1}
+        _overridesSourceColor: 0
+        _overridesBaseColor: 0
+        _equipmentSprites:
+        - _sprite:
+            _normalFront: {fileID: -1265775385, guid: eadd615260332ec4cac4029b847a234f, type: 3}
+            _normalRear: {fileID: 0}
+            _backFront: {fileID: 65722407, guid: eadd615260332ec4cac4029b847a234f, type: 3}
+            _backRear: {fileID: -1265775385, guid: eadd615260332ec4cac4029b847a234f, type: 3}
+          _color: {r: 0, g: 0.5019608, b: 0, a: 1}
+    _overridesBoneSpriteEffectOrder: 0
+    _boneSpriteEffectOrder: 4
+    _beEquipped:
+      _script: {fileID: 0}
+      _ref:
+        rid: -2
+    _beUnequipped:
+      _script: {fileID: 0}
+      _ref:
+        rid: -2
+    _equippedEffectSources:
+    - _script: {fileID: 11500000, guid: 4858657adbd25bd499019bf393c502ee, type: 3}
+      _ref:
+        rid: 2120727420128460821
+  _appearances: []
+  _intrinsics: []
+  _startingItemTable: []
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 2120727420128460821
+      type: {class: IllusionBandEquipped, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
+      data:
+        _assemblyReflectionAssetDummy: 

@@ -1,0 +1,276 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 797073a39246ce24195bfdd54b79f0dc, type: 3}
+  m_Name: LittleDevil
+  m_EditorClassIdentifier: 
+  _overridesCost: 0
+  _cost: 1
+  _costIsUnknown: 0
+  _race:
+    _name: 
+    _icon: {fileID: 0}
+    _color: {r: 1, g: 0.9346939, b: 0.9, a: 1}
+    _caption: 
+    _details:
+      _script: {fileID: 0}
+      _ref:
+        rid: -2
+    _cost: 0
+    _costIsUnknown: 0
+    _genders: {fileID: 11400000, guid: 658fa402d7dcb0b47839b92ab0071d42, type: 2}
+    _category: {fileID: 0}
+    _maxHP: 4
+    _maxMP: 4
+    _atk: 0
+    _def: 0
+    _loadCapacity: 1
+    _faction: {fileID: 11400000, guid: 4e7b6fac7f3766b40a11a3ef85ca1f5e, type: 2}
+    _ability: 22
+    _material: {fileID: 0}
+    _lootTable: []
+    _walk:
+      _script: {fileID: 0}
+      _ref:
+        rid: -2
+    _wait:
+      _script: {fileID: 0}
+      _ref:
+        rid: -2
+    _attack:
+      _script: {fileID: 0}
+      _ref:
+        rid: -2
+    _throw:
+      _script: {fileID: 0}
+      _ref:
+        rid: -2
+    _pickUp:
+      _script: {fileID: 0}
+      _ref:
+        rid: -2
+    _put:
+      _script: {fileID: 0}
+      _ref:
+        rid: -2
+    _eat:
+      _script: {fileID: 11500000, guid: 38805ac0d413583419e6f37a360cdc16, type: 3}
+      _ref:
+        rid: 992949400082579498
+    _hit:
+      _script: {fileID: 0}
+      _ref:
+        rid: -2
+    _beDefeated:
+      _script: {fileID: 0}
+      _ref:
+        rid: -2
+    _locate:
+      _script: {fileID: 0}
+      _ref:
+        rid: -2
+    _polymorph:
+      _script: {fileID: 0}
+      _ref:
+        rid: -2
+    _beApplied:
+      _script: {fileID: 0}
+      _ref:
+        rid: -2
+    _beThrown:
+      _script: {fileID: 0}
+      _ref:
+        rid: -2
+    _beEaten:
+      _script: {fileID: 0}
+      _ref:
+        rid: -2
+    _equipmentState: {fileID: 11400000, guid: 511f9e7ae82b2054cab1da31b4fc8d65, type: 2}
+    _weight:
+      _script: {fileID: 0}
+      _ref:
+        rid: -2
+    _sprite:
+      _script: {fileID: 11500000, guid: 23efb9a745371d34ab468641ada2aad7, type: 3}
+      _ref:
+        rid: 992949461657321529
+    _openEffects:
+    - _script: {fileID: 11500000, guid: 839cd95643b93b145b700039d1079b32, type: 3}
+      _ref:
+        rid: 4814617655665754122
+    - _script: {fileID: 11500000, guid: e715933f1a4cffe4f90e34ffd2677442, type: 3}
+      _ref:
+        rid: 992949461902688274
+    _lv: 3
+    _gender: {fileID: 0}
+    _hpName: 
+    _mpName: 
+    _members:
+      _items: []
+  _appearances:
+  - _option: {fileID: 11400000, guid: aa3635e5f9929c94db784d4331574bb0, type: 2}
+    _optionDescription: {fileID: 0}
+    _color: {r: 1, g: 0.28627452, b: 0.34901962, a: 1}
+    _members:
+      _items: []
+  - _option: {fileID: 11400000, guid: 8110c88880941ba418ad3474535c7a8c, type: 2}
+    _optionDescription: {fileID: 0}
+    _color: {r: 1, g: 0.28627452, b: 0.34901962, a: 1}
+    _members:
+      _items: []
+  - _option: {fileID: 11400000, guid: 601306e8d69d814409d7ad25dd36c687, type: 2}
+    _optionDescription: {fileID: 0}
+    _color: {r: 1, g: 0.28627452, b: 0.34901962, a: 1}
+    _members:
+      _items: []
+  _intrinsics:
+  - _option:
+      _script: {fileID: 11500000, guid: 34c637711e8573e4b86be0e46a315500, type: 3}
+      _ref:
+        rid: 962668970976739350
+    _optionDescription: {fileID: 0}
+    _members:
+      _items: []
+  _startingItemTable: []
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 962668970976739350
+      type: {class: EmberSkill, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
+      data:
+        _assemblyReflectionAssetDummy: 
+    - rid: 962668970976739406
+      type: {class: AlphabetTypeMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
+      data:
+        _typeIndex: 2
+    - rid: 962668970976739407
+      type: {class: AlphabetTypeMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
+      data:
+        _typeIndex: 2
+    - rid: 962668970976739408
+      type: {class: SingleItemMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
+      data:
+        _item: {fileID: 11400000, guid: 25bbb3e5f0c15d544b1afc2813582dd0, type: 2}
+    - rid: 962668970976739409
+      type: {class: SingleItemMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
+      data:
+        _item: {fileID: 11400000, guid: c2c4793dd950e9b46ac3d7e47d55dd12, type: 2}
+    - rid: 962668970976739410
+      type: {class: SingleItemMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
+      data:
+        _item: {fileID: 11400000, guid: b68c2a31347ecb847ab076c1a5ff032d, type: 2}
+    - rid: 962668970976739411
+      type: {class: AlphabetTypeMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
+      data:
+        _typeIndex: 2
+    - rid: 962668970976739412
+      type: {class: AlphabetTypeMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
+      data:
+        _typeIndex: 2
+    - rid: 962668970976739413
+      type: {class: SingleItemMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
+      data:
+        _item: {fileID: 11400000, guid: c2c4793dd950e9b46ac3d7e47d55dd12, type: 2}
+    - rid: 962668970976739414
+      type: {class: SingleItemMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
+      data:
+        _item: {fileID: 11400000, guid: 3f49504da8915e449a729b49fb1bc7bd, type: 2}
+    - rid: 992949400082579498
+      type: {class: OmnivoreEat, ns: Roguegard, asm: Roguegard.CoreData}
+      data:
+        _assemblyReflectionAssetDummy: 
+    - rid: 992949461657321529
+      type: {class: GenderDifferenceRaceSprite, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
+      data:
+        _assemblyReflectionAssetDummy: 
+        _items:
+        - _gender: {fileID: 11400000, guid: 4768b495a0252a9479576904ae785ceb, type: 2}
+          _bone: {fileID: 11400000, guid: f483a0fbc1fc8f442b8f8a7758a50b3c, type: 2}
+          _motionSet: {fileID: 11400000, guid: 220d48c610f89544dbd06b565979cdc6, type: 2}
+          _appearances:
+          - _option: {fileID: 11400000, guid: 0e5cc3c508cbed94087bb3ab71fad0fb, type: 2}
+            _optionDescription: {fileID: 0}
+            _color: {r: 0.7529412, g: 0, b: 0, a: 1}
+            _members:
+              _items:
+              - rid: 962668970976739406
+          - _option: {fileID: 11400000, guid: 1dfbbcf68f52c644686653c10f8ffe68, type: 2}
+            _optionDescription: {fileID: 0}
+            _color: {r: 0.7529412, g: 0, b: 0, a: 1}
+            _members:
+              _items:
+              - rid: 962668970976739407
+          - _option: {fileID: 11400000, guid: 51e0fdd58ee5d904abaeffe1c03f3f4d, type: 2}
+            _optionDescription: {fileID: 0}
+            _color: {r: 0.33962262, g: 0.33962262, b: 0.33962262, a: 1}
+            _members:
+              _items: []
+          - _option: {fileID: 11400000, guid: 4ed202ff619b0b744a4f0be7bca8218f, type: 2}
+            _optionDescription: {fileID: 0}
+            _color: {r: 0.33962262, g: 0.33962262, b: 0.33962262, a: 1}
+            _members:
+              _items:
+              - rid: 962668970976739408
+          - _option: {fileID: 11400000, guid: 4ed202ff619b0b744a4f0be7bca8218f, type: 2}
+            _optionDescription: {fileID: 0}
+            _color: {r: 0.33962262, g: 0.33962262, b: 0.33962262, a: 1}
+            _members:
+              _items:
+              - rid: 962668970976739409
+          - _option: {fileID: 11400000, guid: 4ed202ff619b0b744a4f0be7bca8218f, type: 2}
+            _optionDescription: {fileID: 0}
+            _color: {r: 0.33962262, g: 0.33962262, b: 0.33962262, a: 1}
+            _members:
+              _items:
+              - rid: 962668970976739410
+        - _gender: {fileID: 11400000, guid: 99e725911134608479036597379a44ac, type: 2}
+          _bone: {fileID: 11400000, guid: f483a0fbc1fc8f442b8f8a7758a50b3c, type: 2}
+          _motionSet: {fileID: 11400000, guid: 220d48c610f89544dbd06b565979cdc6, type: 2}
+          _appearances:
+          - _option: {fileID: 11400000, guid: ee6d4c25279c1a34c886f3574d2f1cf8, type: 2}
+            _optionDescription: {fileID: 0}
+            _color: {r: 0.7529412, g: 0, b: 0, a: 1}
+            _members:
+              _items:
+              - rid: 962668970976739411
+          - _option: {fileID: 11400000, guid: cb3c9d85364e691488adf3495ad7b1e2, type: 2}
+            _optionDescription: {fileID: 0}
+            _color: {r: 0.7529412, g: 0, b: 0, a: 1}
+            _members:
+              _items:
+              - rid: 962668970976739412
+          - _option: {fileID: 11400000, guid: 03505c7063caf904c952eae9588ff7d4, type: 2}
+            _optionDescription: {fileID: 0}
+            _color: {r: 0.33962262, g: 0.33962262, b: 0.33962262, a: 1}
+            _members:
+              _items: []
+          - _option: {fileID: 11400000, guid: 4ed202ff619b0b744a4f0be7bca8218f, type: 2}
+            _optionDescription: {fileID: 0}
+            _color: {r: 0.33962262, g: 0.33962262, b: 0.33962262, a: 1}
+            _members:
+              _items:
+              - rid: 962668970976739413
+          - _option: {fileID: 11400000, guid: 4ed202ff619b0b744a4f0be7bca8218f, type: 2}
+            _optionDescription: {fileID: 0}
+            _color: {r: 0.33962262, g: 0.33962262, b: 0.33962262, a: 1}
+            _members:
+              _items:
+              - rid: 962668970976739414
+    - rid: 992949461902688274
+      type: {class: EmptyToFearOpen, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
+      data:
+        _assemblyReflectionAssetDummy: 
+    - rid: 4814617655665754122
+      type: {class: WanderingOpen, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
+      data:
+        _assemblyReflectionAssetDummy: 

@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea9ed398486e8374f934e9b916b4a1b3, type: 3}
+  m_Name: DeviceKw.init
+  m_EditorClassIdentifier: 
+  _afterLoad: {fileID: 11400000, guid: 024498bdb4f8e274d9e7356c5259e097, type: 2}
+  _appendText: {fileID: 11400000, guid: 90321579081e6484fac16b2af3a6aa04, type: 2}
+  _autoSave: {fileID: 11400000, guid: 842cd3e453ee89d4992affd81e05d1ea, type: 2}
+  _cancel: {fileID: 11400000, guid: 088b7559d1b67d34bb5bc7be2b411adb, type: 2}
+  _endTalk: {fileID: 11400000, guid: 0710bfc225749be48bbb72efb6941a58, type: 2}
+  _enqueueInteger: {fileID: 11400000, guid: ed5d9084f95f4b541b14311850fd8548, type: 2}
+  _enqueueMenu: {fileID: 11400000, guid: edad9fd4182de884da07734f5bbb756b, type: 2}
+  _enqueueNumber: {fileID: 11400000, guid: 096319882b4aab04290a0e039476fe56, type: 2}
+  _enqueueSE: {fileID: 11400000, guid: 90c798304c3c72443acc5c31a6f1ee1e, type: 2}
+  _enqueueSEAndWait: {fileID: 11400000, guid: acea6ae6d01079644b58652144cbf153, type: 2}
+  _enqueueViewDequeueState: {fileID: 11400000, guid: 5d1a853b8aec12b4f933196ebc34625e, type: 2}
+  _enqueueWaitSeconds: {fileID: 11400000, guid: ae6ea13958b23284ba07642d6e6a9342, type: 2}
+  _enqueueWork: {fileID: 11400000, guid: bfb353a7fdf84a3488705d298eed310d, type: 2}
+  _gameClear: {fileID: 11400000, guid: e9c5db5ebba067649830d4853ad3183d, type: 2}
+  _gameOver: {fileID: 11400000, guid: 753554881b423624d9838c9c7c2173f6, type: 2}
+  _horizontalRule: {fileID: 11400000, guid: 3e33e79890f3c2f47a80a10d96854290, type: 2}
+  _insertHideCharacterWork: {fileID: 11400000, guid: 7a386de4b5ca02349a1030573fa663cc, type: 2}
+  _loadGame: {fileID: 11400000, guid: 78c27715bafd7c04787645538e4f1ab2, type: 2}
+  _menuCommand: {fileID: 11400000, guid: a9a980e3cce249341b2baf5e3caa8f78, type: 2}
+  _menuDetails: {fileID: 11400000, guid: e94dd2a2778ee6642af8de73147641d5, type: 2}
+  _menuFloor: {fileID: 11400000, guid: d9eaad44572a6be4faf47df49ffc0c82, type: 2}
+  _menuLog: {fileID: 11400000, guid: d5b8c2e0211ddfc43b9d71eb8ae7f250, type: 2}
+  _menuOptions: {fileID: 11400000, guid: 3227d2c17f047fc4a8de3d41067fec2a, type: 2}
+  _menuScroll: {fileID: 11400000, guid: 516f732ec17ef9846a3252873465469a, type: 2}
+  _menuSummary: {fileID: 11400000, guid: a08778e4b7acd3448a91a1d9a0ba04c9, type: 2}
+  _menuTalk: {fileID: 11400000, guid: 8369900199d753e4d8cbd268adea188d, type: 2}
+  _menuThumbnail: {fileID: 11400000, guid: e4048f7b3466ae34eb44495f45e10458, type: 2}
+  _nqueueSEAndWait: {fileID: 11400000, guid: 5bde0acd7e0a32d47b74cbf7e7b8b05b, type: 2}
+  _saveGame: {fileID: 11400000, guid: 0c7221eb87b600c46b34d81133dbf6ac, type: 2}
+  _startTalk: {fileID: 11400000, guid: cb990fa9f75b57a4b9ca2da0a76c4972, type: 2}
+  _submit: {fileID: 11400000, guid: e6d072ae876eb9d47bae945a7b8dda51, type: 2}
+  _waitForInput: {fileID: 11400000, guid: 671fe5ab2c391844d8f3dd433e77fbd4, type: 2}

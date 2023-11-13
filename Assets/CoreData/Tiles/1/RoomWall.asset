@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aaea6a1339a408e4ca571c982a4b9eb1, type: 3}
+  m_Name: RoomWall
+  m_EditorClassIdentifier: 
+  _descriptionName: "\u58C1\uFF08\u90E8\u5C4B\uFF09"
+  _sprite: {fileID: 7105647059379118536, guid: 2c3b84187a5a624489356b62e46bf28e, type: 3}
+  _color: {r: 0.74759704, g: 0.74759704, b: 0.9056604, a: 1}
+  _caption: 
+  _details:
+    _script: {fileID: 0}
+    _ref:
+      rid: -2
+  _category: {fileID: 0}
+  _layer: 1
+  _hasCollider: 1
+  _hasSightCollider: 0
+  _hit:
+    _script: {fileID: 0}
+    _ref:
+      rid: -2
+  _beDefeated:
+    _script: {fileID: 0}
+    _ref:
+      rid: -2
+  _beApplied:
+    _script: {fileID: 0}
+    _ref:
+      rid: -2
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }

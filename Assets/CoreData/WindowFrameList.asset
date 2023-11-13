@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a2afaa20cf9d3b44a7fa2a3ec84c8df, type: 3}
+  m_Name: WindowFrameList
+  m_EditorClassIdentifier: 
+  _frames:
+  - _name: Type1
+    _backgroundA: {fileID: 21300000, guid: b6674c36316852f46b51b1637091fbaa, type: 3}
+    _backgroundB: {fileID: 21300000, guid: 80c6d34a46f2516449e0b81d315ddab7, type: 3}
+  - _name: Type2
+    _backgroundA: {fileID: 21300000, guid: 89901778ed0500a48bd7788def411dc1, type: 3}
+    _backgroundB: {fileID: 21300000, guid: 1ae4f127fb2b0eb489155ca821234d83, type: 3}
+  - _name: Type3
+    _backgroundA: {fileID: 21300000, guid: a72594a9dc261f54091659cc59a33ab8, type: 3}
+    _backgroundB: {fileID: 21300000, guid: b6722c362ec0ad54d84b8c4b1962f24f, type: 3}
+  - _name: Type4
+    _backgroundA: {fileID: 21300000, guid: 2c15e7442365a0c4c953522132dde141, type: 3}
+    _backgroundB: {fileID: 21300000, guid: 5d21da2944907da409736e620a3b858a, type: 3}

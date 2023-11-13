@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9886e2920cfeb7440abe81ba5bf4aa7f, type: 3}
+  m_Name: CoreSerializableKeywordTable
+  m_EditorClassIdentifier: 
+  _namespace: Core
+  _filter: t:SerializableKeywordData
+  _targetFolders:
+  - {fileID: 102900000, guid: bcde7f3237d579f4fa870173efd0291c, type: 3}
+  _items:
+  - _key: Core.Adventurer
+    _asset: {fileID: 11400000, guid: fbe14b7fe9283944d8b726aa7158a896, type: 2}
+  - _key: Core.Living
+    _asset: {fileID: 11400000, guid: d559c8320cddaa0499057c122652b4a9, type: 2}
+  - _key: Core.Monster
+    _asset: {fileID: 11400000, guid: 634979fb58ebdbc43b6ff18a5b063cc9, type: 2}
+  - _key: Core.Nothing
+    _asset: {fileID: 11400000, guid: 5e7b8983b9f530548802fb7127242999, type: 2}

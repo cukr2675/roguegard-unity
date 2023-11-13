@@ -1,0 +1,114 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1467b00e49562fc4fb508e0324f16c75, type: 3}
+  m_Name: Eye5L
+  m_EditorClassIdentifier: 
+  _descriptionName: "\u76EE5"
+  _icon: {fileID: -1497495757, guid: 7460fdaf1dc29ca49bb0b719cad192bc, type: 3}
+  _color: {r: 1, g: 1, b: 1, a: 1}
+  _caption: 
+  _details:
+    _script: {fileID: 0}
+    _ref:
+      rid: -2
+  _boneName: {fileID: 11400000, guid: d75b8d3f26400424498cb4eff95f5ddd, type: 2}
+  _isBone: 1
+  _table:
+  - _isColorRanged: 1
+    _spriteOrLightRed:
+      _normalFront: {fileID: -1497495757, guid: 7460fdaf1dc29ca49bb0b719cad192bc, type: 3}
+      _normalRear: {fileID: 0}
+      _backFront: {fileID: 0}
+      _backRear: {fileID: 0}
+    _darkRed:
+      _normalFront: {fileID: -2085310986, guid: 7460fdaf1dc29ca49bb0b719cad192bc, type: 3}
+      _normalRear: {fileID: 0}
+      _backFront: {fileID: 0}
+      _backRear: {fileID: 0}
+    _lightOther:
+      _normalFront: {fileID: -1532678044, guid: 7460fdaf1dc29ca49bb0b719cad192bc, type: 3}
+      _normalRear: {fileID: 0}
+      _backFront: {fileID: 0}
+      _backRear: {fileID: 0}
+    _darkOther:
+      _normalFront: {fileID: 227434825, guid: 7460fdaf1dc29ca49bb0b719cad192bc, type: 3}
+      _normalRear: {fileID: 0}
+      _backFront: {fileID: 0}
+      _backRear: {fileID: 0}
+  - _isColorRanged: 1
+    _spriteOrLightRed:
+      _normalFront: {fileID: -390606228, guid: 7460fdaf1dc29ca49bb0b719cad192bc, type: 3}
+      _normalRear: {fileID: 0}
+      _backFront: {fileID: 0}
+      _backRear: {fileID: 0}
+    _darkRed:
+      _normalFront: {fileID: 1820702460, guid: 7460fdaf1dc29ca49bb0b719cad192bc, type: 3}
+      _normalRear: {fileID: 0}
+      _backFront: {fileID: 0}
+      _backRear: {fileID: 0}
+    _lightOther:
+      _normalFront: {fileID: -254798569, guid: 7460fdaf1dc29ca49bb0b719cad192bc, type: 3}
+      _normalRear: {fileID: 0}
+      _backFront: {fileID: 0}
+      _backRear: {fileID: 0}
+    _darkOther:
+      _normalFront: {fileID: -1791489875, guid: 7460fdaf1dc29ca49bb0b719cad192bc, type: 3}
+      _normalRear: {fileID: 0}
+      _backFront: {fileID: 0}
+      _backRear: {fileID: 0}
+  - _isColorRanged: 1
+    _spriteOrLightRed:
+      _normalFront: {fileID: 1597961065, guid: 7460fdaf1dc29ca49bb0b719cad192bc, type: 3}
+      _normalRear: {fileID: 0}
+      _backFront: {fileID: 0}
+      _backRear: {fileID: 0}
+    _darkRed:
+      _normalFront: {fileID: -258126144, guid: 7460fdaf1dc29ca49bb0b719cad192bc, type: 3}
+      _normalRear: {fileID: 0}
+      _backFront: {fileID: 0}
+      _backRear: {fileID: 0}
+    _lightOther:
+      _normalFront: {fileID: 381151583, guid: 7460fdaf1dc29ca49bb0b719cad192bc, type: 3}
+      _normalRear: {fileID: 0}
+      _backFront: {fileID: 0}
+      _backRear: {fileID: 0}
+    _darkOther:
+      _normalFront: {fileID: -733184316, guid: 7460fdaf1dc29ca49bb0b719cad192bc, type: 3}
+      _normalRear: {fileID: 0}
+      _backFront: {fileID: 0}
+      _backRear: {fileID: 0}
+  - _isColorRanged: 1
+    _spriteOrLightRed:
+      _normalFront: {fileID: 1947397236, guid: 7460fdaf1dc29ca49bb0b719cad192bc, type: 3}
+      _normalRear: {fileID: 0}
+      _backFront: {fileID: 0}
+      _backRear: {fileID: 0}
+    _darkRed:
+      _normalFront: {fileID: -1392001162, guid: 7460fdaf1dc29ca49bb0b719cad192bc, type: 3}
+      _normalRear: {fileID: 0}
+      _backFront: {fileID: 0}
+      _backRear: {fileID: 0}
+    _lightOther:
+      _normalFront: {fileID: 1081290062, guid: 7460fdaf1dc29ca49bb0b719cad192bc, type: 3}
+      _normalRear: {fileID: 0}
+      _backFront: {fileID: 0}
+      _backRear: {fileID: 0}
+    _darkOther:
+      _normalFront: {fileID: 442255137, guid: 7460fdaf1dc29ca49bb0b719cad192bc, type: 3}
+      _normalRear: {fileID: 0}
+      _backFront: {fileID: 0}
+      _backRear: {fileID: 0}
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }

@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aaea6a1339a408e4ca571c982a4b9eb1, type: 3}
+  m_Name: ThronsTrap
+  m_EditorClassIdentifier: 
+  _descriptionName: 
+  _sprite: {fileID: -466306809, guid: 2c3b84187a5a624489356b62e46bf28e, type: 3}
+  _color: {r: 0, g: 0.5019608, b: 0, a: 1}
+  _caption: 
+  _details:
+    _script: {fileID: 0}
+    _ref:
+      rid: -2
+  _category: {fileID: 11400000, guid: 163a5895f2bbdb047bd70c8cc45e4df0, type: 2}
+  _layer: 1
+  _hasCollider: 0
+  _hasSightCollider: 0
+  _hit:
+    _script: {fileID: 0}
+    _ref:
+      rid: -2
+  _beDefeated:
+    _script: {fileID: 0}
+    _ref:
+      rid: -2
+  _beApplied:
+    _script: {fileID: 11500000, guid: 97b908c7d5b3027498b2c7b4b88be6c8, type: 3}
+    _ref:
+      rid: 962668992090865677
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 962668992090865677
+      type: {class: ThronsTrapBeApplied, ns: Roguegard, asm: Roguegard.CoreData}
+      data:
+        _assemblyReflectionAssetDummy: 
+        trapTileInfo: {fileID: 11400000}

@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f17cbf4824c8eb4d93d94fd6babf43b, type: 3}
+  m_Name: MainInfoKw.init
+  m_EditorClassIdentifier: 
+  _attack: {fileID: 11400000, guid: 06ed3f2b7969a62409ee0a15f7c3fb6a, type: 2}
+  _beApplied: {fileID: 11400000, guid: 86d4d6c6af1149442b841314f60e3196, type: 2}
+  _beDefeated: {fileID: 11400000, guid: 8d0eba7b4467cb04a8f600f68466f427, type: 2}
+  _beEaten: {fileID: 11400000, guid: 0b1db34d9dbb75e4389c2feaa3f42d8c, type: 2}
+  _beSteppedOnTile: {fileID: 11400000, guid: c350d9d20ad39b342b90deb772e2acdf, type: 2}
+  _beThrown: {fileID: 11400000, guid: 64d4b493943644a45898a976365609d2, type: 2}
+  _eat: {fileID: 11400000, guid: 2f9ee48caf7dbd842ab32de75ada3bbe, type: 2}
+  _equip: {fileID: 11400000, guid: 4fed74789e2c8534e98e2cf06c497c42, type: 2}
+  _hit: {fileID: 11400000, guid: 625e5dc48cba06e48b12d59d62ff5ac1, type: 2}
+  _locate: {fileID: 11400000, guid: 0f885c2170d7e9e46b3f11d873c63dde, type: 2}
+  _pickUp: {fileID: 11400000, guid: d66d1f1368805c84c9368e103a8a9421, type: 2}
+  _polymorph: {fileID: 11400000, guid: 48aa89544ac60c44daf295c92e638225, type: 2}
+  _put: {fileID: 11400000, guid: c88d148ea5d450947ad28a6d253806db, type: 2}
+  _skill: {fileID: 11400000, guid: c975e60946216194dbf26940142dc19c, type: 2}
+  _throw: {fileID: 11400000, guid: 1d344eadfd305f64c9b5809013774eba, type: 2}
+  _unequip: {fileID: 11400000, guid: 23113d328c0abbb47b2bb5abee3b6906, type: 2}
+  _wait: {fileID: 11400000, guid: 9166be26e3d3f9c4b8776f5130a0ca15, type: 2}
+  _walk: {fileID: 11400000, guid: 4c78cdb33b96ec84e92eca381628fb79, type: 2}

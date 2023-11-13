@@ -1,0 +1,90 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Localization-Assets-Shared
+  m_EditorClassIdentifier: 
+  m_GroupName: Localization-Assets-Shared
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 4430074c4db89314eaf3efb0a46c996c
+  m_SerializeEntries:
+  - m_GUID: df5b92953b451f34b9c73858241a0560
+    m_Address: Assets/CoreData/ObjInfos/Keywords/Stats/KwStats Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 471e6e46f5f53cd4ea869959d99c8f58
+    m_Address: Assets/CoreData/Items/ApplyTools1/CoreApplyTool1 Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 08abd78f285ae09408e2b556a7c434a0
+    m_Address: Assets/CoreData/Scripts/ObjEffects/StatusEffects/CoreStatusEffect1
+      Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f5ef8ac2d097b254cb472b5c8fc39d11
+    m_Address: Assets/CoreData/ObjInfos/Keywords/MainInfos/CoreMainInfoKw Shared
+      Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6c37925a1dd53c34e86c29d66acefec5
+    m_Address: Assets/CoreData/CharacterCreation/Intrinsics/Skills1/CoreSkill1 Shared
+      Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 48c2da3619d5e914e97860a6e75c0f05
+    m_Address: Assets/CoreData/Items/Equipments/BodyArmors1/CoreBodyArmor1 Shared
+      Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 77d57214937a1bf449e8b02d08d71e14
+    m_Address: Assets/CoreData/Monsters/1/CoreMonster1 Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b21260393adc74243be97600119c567a
+    m_Address: Assets/CoreData/Items/Weapons1/CoreWeapon1 Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b528029067f6ae540bcc4ec632efa656
+    m_Address: Assets/CoreData/Items/Ammos1/CoreAmmo1 Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c6142c37dd1530b44bb22abd576d46fe
+    m_Address: Assets/CoreData/CharacterCreation/Intrinsics/Abilities1/CoreAbility1
+      Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e2911fb43e85d98418a51de5d8c818f7
+    m_Address: Assets/CoreData/Tiles/1/CoreTile1 Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f442e2877505c5d4391852a201825d92
+    m_Address: Assets/Texts/Tables/Device/Device Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 1
+  m_Settings: {fileID: 11400000, guid: 3b33727de1adbae46bb88bf0e7b13048, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: d4d851de5fa8eaa48861d545f787fda3, type: 2}
+    - {fileID: 11400000, guid: cabbf70ba2fa72742b952c156ffbf803, type: 2}

@@ -1,0 +1,178 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfb23c4be0e14804084a8fc2298c9c78, type: 3}
+  m_Name: Eyes1Slicer
+  m_EditorClassIdentifier: 
+  _targetTexture: {fileID: 2800000, guid: 7460fdaf1dc29ca49bb0b719cad192bc, type: 3}
+  _slicers:
+  - _format: Eye1R{0}{1}_NF
+    _rect:
+      x: 0
+      y: 48
+      width: 16
+      height: 16
+    _pixelSize: {x: 2, y: 4}
+    _padding: {x: 2, y: 0}
+    _pixelPivot: {x: 1, y: 0}
+  - _format: Eye1L{0}{1}_NF
+    _rect:
+      x: 1
+      y: 48
+      width: 16
+      height: 16
+    _pixelSize: {x: 3, y: 4}
+    _padding: {x: 1, y: 0}
+    _pixelPivot: {x: 1, y: 0}
+  - _format: Eye2R{0}{1}_NF
+    _rect:
+      x: 16
+      y: 48
+      width: 21
+      height: 16
+    _pixelSize: {x: 3, y: 4}
+    _padding: {x: 2, y: 0}
+    _pixelPivot: {x: 2, y: 0}
+  - _format: Eye2L{0}{1}_NF
+    _rect:
+      x: 18
+      y: 48
+      width: 21
+      height: 16
+    _pixelSize: {x: 4, y: 4}
+    _padding: {x: 1, y: 0}
+    _pixelPivot: {x: 1, y: 0}
+  - _format: Eye3R{0}{1}_NF
+    _rect:
+      x: 0
+      y: 32
+      width: 21
+      height: 16
+    _pixelSize: {x: 3, y: 4}
+    _padding: {x: 2, y: 0}
+    _pixelPivot: {x: 2, y: 0}
+  - _format: Eye3L{0}{1}_NF
+    _rect:
+      x: 2
+      y: 32
+      width: 21
+      height: 16
+    _pixelSize: {x: 4, y: 4}
+    _padding: {x: 1, y: 0}
+    _pixelPivot: {x: 1, y: 0}
+  - _format: Eye4R{0}{1}_NF
+    _rect:
+      x: 21
+      y: 32
+      width: 21
+      height: 16
+    _pixelSize: {x: 3, y: 4}
+    _padding: {x: 2, y: 0}
+    _pixelPivot: {x: 2, y: 0}
+  - _format: Eye4L{0}{1}_NF
+    _rect:
+      x: 23
+      y: 32
+      width: 21
+      height: 16
+    _pixelSize: {x: 4, y: 4}
+    _padding: {x: 1, y: 0}
+    _pixelPivot: {x: 1, y: 0}
+  - _format: Eye5R{0}{1}_NF
+    _rect:
+      x: 42
+      y: 32
+      width: 21
+      height: 16
+    _pixelSize: {x: 3, y: 4}
+    _padding: {x: 2, y: 0}
+    _pixelPivot: {x: 2, y: 0}
+  - _format: Eye5L{0}{1}_NF
+    _rect:
+      x: 44
+      y: 32
+      width: 21
+      height: 16
+    _pixelSize: {x: 4, y: 4}
+    _padding: {x: 1, y: 0}
+    _pixelPivot: {x: 1, y: 0}
+  - _format: Eye6R{0}{1}_NF
+    _rect:
+      x: 0
+      y: 16
+      width: 26
+      height: 16
+    _pixelSize: {x: 4, y: 4}
+    _padding: {x: 2, y: 0}
+    _pixelPivot: {x: 3, y: 0}
+  - _format: Eye6L{0}{1}_NF
+    _rect:
+      x: 3
+      y: 16
+      width: 26
+      height: 16
+    _pixelSize: {x: 5, y: 4}
+    _padding: {x: 1, y: 0}
+    _pixelPivot: {x: 1, y: 0}
+  - _format: Eye7R{0}{1}_NF
+    _rect:
+      x: 25
+      y: 16
+      width: 29
+      height: 16
+    _pixelSize: {x: 4, y: 4}
+    _padding: {x: 3, y: 0}
+    _pixelPivot: {x: 3, y: 0}
+  - _format: Eye7L{0}{1}_NF
+    _rect:
+      x: 28
+      y: 16
+      width: 29
+      height: 16
+    _pixelSize: {x: 5, y: 4}
+    _padding: {x: 2, y: 0}
+    _pixelPivot: {x: 1, y: 0}
+  - _format: Eye8R{0}{1}_NF
+    _rect:
+      x: 0
+      y: 0
+      width: 29
+      height: 16
+    _pixelSize: {x: 4, y: 4}
+    _padding: {x: 3, y: 0}
+    _pixelPivot: {x: 3, y: 0}
+  - _format: Eye8L{0}{1}_NF
+    _rect:
+      x: 3
+      y: 0
+      width: 29
+      height: 16
+    _pixelSize: {x: 5, y: 4}
+    _padding: {x: 2, y: 0}
+    _pixelPivot: {x: 1, y: 0}
+  - _format: Eye9R{0}{1}_NF
+    _rect:
+      x: 29
+      y: 0
+      width: 29
+      height: 16
+    _pixelSize: {x: 4, y: 4}
+    _padding: {x: 3, y: 0}
+    _pixelPivot: {x: 3, y: 0}
+  - _format: Eye9L{0}{1}_NF
+    _rect:
+      x: 32
+      y: 0
+      width: 29
+      height: 16
+    _pixelSize: {x: 5, y: 4}
+    _padding: {x: 2, y: 0}
+    _pixelPivot: {x: 1, y: 0}
