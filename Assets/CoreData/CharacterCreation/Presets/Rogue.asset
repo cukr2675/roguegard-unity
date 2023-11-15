@@ -114,7 +114,7 @@ MonoBehaviour:
     _isIntrinsicItem: 0
     _members:
       _items:
-      - rid: 3586031061574877945
+      - rid: 3586031133046603856
   references:
     version: 2
     RefIds:
@@ -130,10 +130,6 @@ MonoBehaviour:
         _size: 8
         _typeIndex: 0
         _motionSetIndex: 0
-    - rid: 3586031061574877945
-      type: {class: EquipMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
-      data:
-        _isEquipped: 1
     - rid: 3586031086150090762
       type: {class: AlphabetTypeMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
       data:
@@ -182,3 +178,7 @@ MonoBehaviour:
       type: {class: PowerSlashSkill, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
       data:
         _assemblyReflectionAssetDummy: 
+    - rid: 3586031133046603856
+      type: {class: EquipMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
+      data:
+        _isEquipped: 1

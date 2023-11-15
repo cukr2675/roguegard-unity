@@ -20,7 +20,7 @@ namespace RoguegardUnity
         [Header("Initial Assets")]
         [SerializeField] private ItemCreationData _world = null;
         [SerializeField] private LobbyCreationData _lobby = null;
-        [SerializeField] private PresetCreationData _initialCharacter = null;
+        [SerializeField] private PresetCreationData[] _initialCharacters = null;
 
         [SerializeField] private Vector2Int _maxTilemapSize = new Vector2Int(y: 64, x: 96);
         // y: 64 透明マップのチップを4x4としたとき、縦幅を256に収めるサイズ
@@ -154,10 +154,10 @@ namespace RoguegardUnity
         {
             public RoguegardSettingsData parent;
 
-            public MainInfoSet InfoSet => ((IRogueObjGenerator)parent._initialCharacter).InfoSet;
-            public int Lv => ((IRogueObjGenerator)parent._initialCharacter).Lv;
-            public int Stack => ((IRogueObjGenerator)parent._initialCharacter).Stack;
-            public Spanning<IWeightedRogueObjGeneratorList> StartingItemTable => ((IRogueObjGenerator)parent._initialCharacter).StartingItemTable;
+            public MainInfoSet InfoSet => ((IRogueObjGenerator)parent._initialCharacters[0]).InfoSet;
+            public int Lv => ((IRogueObjGenerator)parent._initialCharacters[0]).Lv;
+            public int Stack => ((IRogueObjGenerator)parent._initialCharacters[0]).Stack;
+            public Spanning<IWeightedRogueObjGeneratorList> StartingItemTable => ((IRogueObjGenerator)parent._initialCharacters[0]).StartingItemTable;
 
             public RogueObj CreateObj(RogueObj location, Vector2Int position, IRogueRandom random, StackOption stackOption = StackOption.Default)
             {
@@ -167,8 +167,16 @@ namespace RoguegardUnity
                 RogueWorld.SetUpWorld(world, lobby);
 
                 // キャラクターを生成
-                var data = parent._initialCharacter;//.ToBuilder();
+                var data = parent._initialCharacters[0];//.ToBuilder();
                 var player = data.CreateObj(world, Vector2Int.zero, random);
+
+                var lobbyMembers = RogueWorld.GetLobbyMembersByCharacter(player);
+                lobbyMembers.Add(player);
+                for (int i = 1; i < parent._initialCharacters.Length; i++)
+                {
+                    var character = parent._initialCharacters[i].CreateObj(null, Vector2Int.zero, random);
+                    lobbyMembers.Add(character);
+                }
                 return player;
             }
         }

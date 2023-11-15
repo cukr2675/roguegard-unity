@@ -43,14 +43,28 @@ namespace Roguegard
             }
         }
 
+        public static RogueObjList GetLobbyMembersByCharacter(RogueObj self)
+        {
+            var world = GetWorld(self);
+            if (world.TryGet<Info>(out var info))
+            {
+                return info.LobbyMembers;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
 
 
         /// <summary>
         /// ロビーのプレイヤーパーティメンバーは自然回復する。
         /// </summary>
         [ObjectFormer.Formable]
-        private class LobbyLeaderEffect : PlayerLeaderRogueEffect, IRogueObjUpdater
+        private class LobbyLeaderEffect : PlayerLeaderRogueEffect, IValueEffect, IRogueObjUpdater
         {
+            float IValueEffect.Order => 0f;
             float IRogueObjUpdater.Order => 100f;
 
             private static readonly LobbyLeaderEffect instance = new LobbyLeaderEffect();
@@ -63,6 +77,14 @@ namespace Roguegard
                 if (party.Members[0] != playerObj) throw new RogueException(); // リーダーでなければ失敗する。
 
                 playerObj.Main.RogueEffects.AddOpen(playerObj, instance);
+            }
+
+            void IValueEffect.AffectValue(IKeyword keyword, AffectableValue value, RogueObj self)
+            {
+                if (keyword == StatsKw.LoadCapacity)
+                {
+                    value.MainValue = Mathf.Infinity;
+                }
             }
 
             RogueObjUpdaterContinueType IRogueObjUpdater.UpdateObj(RogueObj self, float activationDepth, ref int sectionIndex)
@@ -109,7 +131,10 @@ namespace Roguegard
         [ObjectFormer.Formable]
         private class Info : IRogueObjInfo
         {
-            public RogueObj Lobby { get; private set; }
+            public RogueObj Lobby { get; }
+
+            private RogueObjList _lobbyMembers;
+            public RogueObjList LobbyMembers => _lobbyMembers ??= new RogueObjList();
 
             public bool IsExclusedWhenSerialize => false;
 
@@ -128,12 +153,11 @@ namespace Roguegard
 
             public IRogueObjInfo DeepOrShallowCopy(RogueObj self, RogueObj clonedSelf)
             {
-                return new Info(Lobby);
+                return null;
             }
 
             public IRogueObjInfo ReplaceCloned(RogueObj obj, RogueObj clonedObj)
             {
-                if (obj == Lobby) { Lobby = clonedObj; }
                 return this;
             }
         }
