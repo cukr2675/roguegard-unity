@@ -406,6 +406,26 @@ namespace RoguegardUnity
                 AfterGameOver();
                 return;
             }
+            if (keyword == DeviceKw.ChangePlayer && obj is RogueObj newPlayer)
+            {
+                // ViewInfo を移動させる
+                var view = Player.Get<ViewInfo>();
+                Player.RemoveInfo(typeof(ViewInfo));
+                newPlayer.SetInfo(view);
+
+                // PlayerLeaderInfo を移動させる
+                var playerLeaderInfo = Player.Main.GetPlayerLeaderInfo(Player);
+                playerLeaderInfo?.Move(Player, newPlayer);
+
+                // RogueDeviceEffect を移動させる
+                var deviceEffect = RogueDeviceEffect.Get(Player);
+                deviceEffect.Close(Player);
+                RogueDeviceEffect.SetTo(newPlayer);
+
+                Player = newPlayer;
+                Open();
+                return;
+            }
 
             Debug.LogError($"{keyword.Name} に対応するキーワードが見つかりません。（obj: {obj}）");
         }

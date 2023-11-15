@@ -16,6 +16,7 @@ MonoBehaviour:
   _appendText: {fileID: 11400000, guid: 90321579081e6484fac16b2af3a6aa04, type: 2}
   _autoSave: {fileID: 11400000, guid: 842cd3e453ee89d4992affd81e05d1ea, type: 2}
   _cancel: {fileID: 11400000, guid: 088b7559d1b67d34bb5bc7be2b411adb, type: 2}
+  _changePlayer: {fileID: 11400000, guid: ef2538e2258d1e341b8189409eb1d50a, type: 2}
   _endTalk: {fileID: 11400000, guid: 0710bfc225749be48bbb72efb6941a58, type: 2}
   _enqueueInteger: {fileID: 11400000, guid: ed5d9084f95f4b541b14311850fd8548, type: 2}
   _enqueueMenu: {fileID: 11400000, guid: edad9fd4182de884da07734f5bbb756b, type: 2}
@@ -38,9 +39,11 @@ MonoBehaviour:
   _menuScroll: {fileID: 11400000, guid: 516f732ec17ef9846a3252873465469a, type: 2}
   _menuSummary: {fileID: 11400000, guid: a08778e4b7acd3448a91a1d9a0ba04c9, type: 2}
   _menuTalk: {fileID: 11400000, guid: 8369900199d753e4d8cbd268adea188d, type: 2}
+  _menuTalkChoices: {fileID: 11400000, guid: d5045b1bbbb1da842b020d224b0b2826, type: 2}
   _menuThumbnail: {fileID: 11400000, guid: e4048f7b3466ae34eb44495f45e10458, type: 2}
   _nqueueSEAndWait: {fileID: 11400000, guid: 5bde0acd7e0a32d47b74cbf7e7b8b05b, type: 2}
   _saveGame: {fileID: 11400000, guid: 0c7221eb87b600c46b34d81133dbf6ac, type: 2}
   _startTalk: {fileID: 11400000, guid: cb990fa9f75b57a4b9ca2da0a76c4972, type: 2}
   _submit: {fileID: 11400000, guid: e6d072ae876eb9d47bae945a7b8dda51, type: 2}
   _waitForInput: {fileID: 11400000, guid: 671fe5ab2c391844d8f3dd433e77fbd4, type: 2}
+  _waitTalk: {fileID: 11400000, guid: b8c5abc82baaa704da85a8ceac65ebf0, type: 2}

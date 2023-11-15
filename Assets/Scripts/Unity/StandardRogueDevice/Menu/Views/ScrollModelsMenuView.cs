@@ -8,7 +8,7 @@ using Roguegard.Device;
 
 namespace RoguegardUnity
 {
-    public class ScrollModelsMenuView : ModelsMenuView
+    public class ScrollModelsMenuView : ModelsMenuView, IScrollModelsMenuView
     {
         [SerializeField] private CanvasGroup _canvasGroup = null;
         [SerializeField] private ScrollRect _scrollRect = null;

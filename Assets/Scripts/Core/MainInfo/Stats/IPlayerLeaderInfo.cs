@@ -10,6 +10,8 @@ namespace Roguegard
     /// </summary>
     public interface IPlayerLeaderInfo
     {
+        void Move(RogueObj from, RogueObj to);
+
         void Close(RogueObj self);
     }
 }

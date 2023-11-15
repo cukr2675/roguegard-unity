@@ -20,6 +20,9 @@ namespace Roguegard
         [SerializeField] private KeywordData _cancel;
         public static IKeyword Cancel => instance._cancel;
 
+        [SerializeField] private KeywordData _changePlayer;
+        public static IKeyword ChangePlayer => instance._changePlayer;
+
         [SerializeField] private KeywordData _endTalk;
         public static IKeyword EndTalk => instance._endTalk;
 
@@ -86,6 +89,9 @@ namespace Roguegard
         [SerializeField] private KeywordData _menuTalk;
         public static IKeyword MenuTalk => instance._menuTalk;
 
+        [SerializeField] private KeywordData _menuTalkChoices;
+        public static IKeyword MenuTalkChoices => instance._menuTalkChoices;
+
         [SerializeField] private KeywordData _menuThumbnail;
         public static IKeyword MenuThumbnail => instance._menuThumbnail;
 
@@ -103,6 +109,9 @@ namespace Roguegard
 
         [SerializeField] private KeywordData _waitForInput;
         public static IKeyword WaitForInput => instance._waitForInput;
+
+        [SerializeField] private KeywordData _waitTalk;
+        public static IKeyword WaitTalk => instance._waitTalk;
 
         public override IEnumerator LoadAsync()
         {

@@ -13,6 +13,15 @@ namespace Roguegard
             self.Main.UpdatePlayerLeaderInfo(self, this);
         }
 
+        void IPlayerLeaderInfo.Move(RogueObj from, RogueObj to) => Move(from, to);
+        protected virtual void Move(RogueObj from, RogueObj to)
+        {
+            RogueEffectUtility.RemoveClose(from, this);
+
+            RogueEffectUtility.AddFromRogueEffect(to, this);
+            to.Main.UpdatePlayerLeaderInfo(to, this);
+        }
+
         void IPlayerLeaderInfo.Close(RogueObj self) => Close(self);
         protected virtual void Close(RogueObj self)
         {
