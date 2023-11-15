@@ -102,7 +102,10 @@ MonoBehaviour:
       _script: {fileID: 0}
       _ref:
         rid: -2
-    _openEffects: []
+    _openEffects:
+    - _script: {fileID: 11500000, guid: e67f4989b8dcd994d9dd1b95dba24ea9, type: 3}
+      _ref:
+        rid: 3586031133046603780
     _lv: 0
     _gender: {fileID: 0}
     _hpName: 
@@ -131,6 +134,14 @@ MonoBehaviour:
     _isIntrinsicItem: 0
     _members:
       _items: []
+  _partyBoard:
+    _option: {fileID: 11400000, guid: 27066327da3b83347ad557736dc6f6d7, type: 2}
+    _optionDescription: {fileID: 0}
+    _generatorWeight: 1
+    _stack: 1
+    _isIntrinsicItem: 0
+    _members:
+      _items: []
   _storage:
     _option: {fileID: 11400000, guid: 84a244ec98600944586d993de59a7424, type: 2}
     _optionDescription: {fileID: 0}
@@ -144,3 +155,15 @@ MonoBehaviour:
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
+    - rid: 3586031133046603780
+      type: {class: LobbyOpen, ns: Roguegard, asm: Roguegard.CoreData}
+      data:
+        _assemblyReflectionAssetDummy: 
+        _lobbyMerchant:
+          _option: {fileID: 11400000, guid: b09d95937b1330f42b02b115948f3876, type: 2}
+          _optionDescription: {fileID: 0}
+          _generatorWeight: 1
+          _stack: 1
+          _isIntrinsicItem: 0
+          _members:
+            _items: []
