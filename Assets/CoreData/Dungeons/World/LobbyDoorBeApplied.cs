@@ -6,9 +6,9 @@ using Roguegard.Device;
 
 namespace Roguegard
 {
-    public class LobbyDownStairsBeApplied : ReferableScript, IApplyRogueMethod
+    public class LobbyDoorBeApplied : ReferableScript, IApplyRogueMethod
     {
-        private LobbyDownStairsBeApplied() { }
+        private LobbyDoorBeApplied() { }
 
         IRogueMethodTarget ISkillDescription.Target => null;
         IRogueMethodRange ISkillDescription.Range => null;
@@ -41,7 +41,9 @@ namespace Roguegard
             public void OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 var dungeonChoices = RoguegardSettings.DungeonChoices;
-                root.Get(DeviceKw.MenuScroll).OpenView(ChoicesModelsMenuItemController.Instance, dungeonChoices, root, self, user, arg);
+                var scroll = (IScrollModelsMenuView)root.Get(DeviceKw.MenuScroll);
+                scroll.OpenView(ChoicesModelsMenuItemController.Instance, dungeonChoices, root, self, user, arg);
+                scroll.ShowExitButton(ExitModelsMenuChoice.Instance);
             }
         }
     }
