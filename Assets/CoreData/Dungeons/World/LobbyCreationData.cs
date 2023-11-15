@@ -13,6 +13,7 @@ namespace Roguegard.CharacterCreation
         [SerializeField] private ScriptableRogueTile _wall = null;
         [SerializeField] private ScriptableStartingItem _doorL = null;
         [SerializeField] private ScriptableStartingItem _doorR = null;
+        [SerializeField] private ScriptableStartingItem _partyBoard = null;
         [SerializeField] private ScriptableStartingItem _storage = null;
 
         private const int w = 6;
@@ -63,6 +64,7 @@ namespace Roguegard.CharacterCreation
             tilemap.Remove(new Vector2Int(width / 2, 2), RogueTileLayer.Building);
             _doorR.Option.CreateObj(_doorR, lobby, new Vector2Int(width / 2, 2), random);
 
+            _partyBoard.Option.CreateObj(_partyBoard, lobby, new Vector2Int(width / 2 - 2, 3), random);
             _storage.Option.CreateObj(_storage, lobby, new Vector2Int(width / 2 + 1, 3), random);
             return lobby;
         }
