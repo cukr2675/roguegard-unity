@@ -23,6 +23,10 @@ namespace RoguegardUnity
 
         private IModelsMenuItemController controller;
         private object source;
+        private bool waitTalk;
+
+        public override float GetPosition() => 0f;
+        public override void SetPosition(float position) { }
 
         public override void OpenView<T>(
             IModelsMenuItemController itemController, Spanning<T> models,
@@ -34,19 +38,25 @@ namespace RoguegardUnity
             MenuController.Show(_canvasGroup, true);
         }
 
-        public override float GetPosition() => 0f;
-        public override void SetPosition(float position) { }
-
         public void Input()
         {
+            if (!_text.WaitsInput) return;
+
             _text.Input();
             if (!_text.IsTalkingNow)
             {
                 MenuController.Show(_canvasGroup, false);
+                _text.Clear();
 
                 controller?.Activate(source, Root, Self, User, Arg);
                 controller = null;
             }
+        }
+
+        public void StartTalk()
+        {
+            _text.Clear();
+            MenuController.Show(_canvasGroup, true);
         }
 
         public void Append(string text)
@@ -72,6 +82,11 @@ namespace RoguegardUnity
             _text.AppendHorizontalRule();
         }
 
+        public void WaitTalk()
+        {
+            waitTalk = true;
+        }
+
         public void Clear()
         {
             _text.Clear();
@@ -82,6 +97,11 @@ namespace RoguegardUnity
         public void UpdateUI(int deltaTime)
         {
             _text.UpdateUI(deltaTime);
+
+            if (waitTalk && _text.WaitsInput)
+            {
+                _text.Input();
+            }
         }
 
         void IPointerClickHandler.OnPointerClick(PointerEventData eventData)

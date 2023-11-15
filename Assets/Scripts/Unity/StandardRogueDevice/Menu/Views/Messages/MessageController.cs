@@ -61,7 +61,12 @@ namespace RoguegardUnity
         public void StartTalk()
         {
             _messageWindow.Show(false);
-            MenuController.Show(_talkWindow.CanvasGroup, true);
+            _talkWindow.StartTalk();
+        }
+
+        public void WaitTalk()
+        {
+            _talkWindow.WaitTalk();
         }
 
         private void AppendText(string text)

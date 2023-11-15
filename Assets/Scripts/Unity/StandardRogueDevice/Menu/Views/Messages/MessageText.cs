@@ -54,6 +54,8 @@ namespace RoguegardUnity
 
         public bool IsTypewritingNow { get; private set; }
 
+        public bool WaitsInput => _horizontalArrow.enabled || _verticalArrow.enabled;
+
         /// <summary>
         /// 1 秒あたり 4 行送る
         /// </summary>
@@ -172,6 +174,7 @@ namespace RoguegardUnity
             if (_isTalk)
             {
                 text.maxVisibleCharacters = 0;
+                flushCount = 0;
             }
 
             stringBuilder.Clear();
@@ -241,13 +244,8 @@ namespace RoguegardUnity
                 }
                 else
                 {
-                    // なかったらテキストを消す
+                    // なかったら終了
                     _verticalArrow.enabled = false;
-                    stringBuilder.Clear();
-                    dirty = true;
-                    text.maxVisibleCharacters = 0;
-                    flushCount = 0;
-                    TextOffset = CalculateTargetTextOffset();
                 }
             }
         }

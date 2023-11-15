@@ -4,6 +4,7 @@ using UnityEngine;
 
 using Roguegard;
 using Roguegard.Device;
+using Roguegard.Extensions;
 
 namespace RoguegardUnity
 {
@@ -198,6 +199,8 @@ namespace RoguegardUnity
 
             private class GiveUp : IModelsMenuChoice
             {
+                private static readonly Choices nextMenu = new Choices();
+
                 public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
                     => ":GiveUp";
 
@@ -206,6 +209,38 @@ namespace RoguegardUnity
                     root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
                     root.AddInt(DeviceKw.StartTalk, 0);
                     root.AddObject(DeviceKw.AppendText, ":GiveUpMsg");
+                    root.AddInt(DeviceKw.WaitTalk, 0);
+                    root.OpenMenuAsDialog(nextMenu, self, user, arg, arg);
+                }
+
+                private class Choices : IModelsMenu
+                {
+                    private static readonly object[] models = new object[]
+                    {
+                        new GiveUpChoice(),
+                        ExitModelsMenuChoice.Instance
+                    };
+
+                    public void OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+                    {
+                        root.Get(DeviceKw.MenuTalkChoices).OpenView(ChoicesModelsMenuItemController.Instance, models, root, self, user, arg);
+                    }
+                }
+
+                private class GiveUpChoice : IModelsMenuChoice
+                {
+                    public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+                    {
+                        return "はい";
+                    }
+
+                    public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+                    {
+                        root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+                        root.Done();
+
+                        default(IActiveRogueMethodCaller).Defeat(self, user, 0f);
+                    }
                 }
             }
 

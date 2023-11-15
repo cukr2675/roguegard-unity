@@ -29,6 +29,7 @@ namespace RoguegardUnity
         [SerializeField] private SummaryMenuView _summaryMenu = null;
         [SerializeField] private DetailsMenuView _detailsMenu = null;
         [SerializeField] private OptionsMenuView _optionsMenu = null;
+        [SerializeField] private ModelsMenuView _talkChoicesMenu = null;
         [SerializeField] private StatsWindow _statsWindow = null;
 
         [SerializeField] private ScrollModelsMenuView _scrollMenu = null;
@@ -98,6 +99,7 @@ namespace RoguegardUnity
             table.Add(DeviceKw.MenuOptions, _optionsMenu);
             table.Add(DeviceKw.MenuLog, _messageController.LogView);
             table.Add(DeviceKw.MenuTalk, _messageController.TalkView);
+            table.Add(DeviceKw.MenuTalkChoices, _talkChoicesMenu);
         }
 
         public void Open(RogueObj player)
@@ -291,6 +293,11 @@ namespace RoguegardUnity
             _messageController.StartTalk();
         }
 
+        public void WaitTalk()
+        {
+            _messageController.WaitTalk();
+        }
+
         public void Append(RogueObj player, object obj, StackTrace stackTrace)
         {
             _messageController.Append(player, obj, stackTrace);
@@ -378,6 +385,11 @@ namespace RoguegardUnity
             if (keyword == DeviceKw.StartTalk)
             {
                 StartTalk();
+                return;
+            }
+            if (keyword == DeviceKw.WaitTalk)
+            {
+                WaitTalk();
                 return;
             }
             if (keyword == DeviceKw.EnqueueSE && type == AddType.Object)
