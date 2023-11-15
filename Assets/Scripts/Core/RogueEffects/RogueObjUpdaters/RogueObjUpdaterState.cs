@@ -76,7 +76,13 @@ namespace Roguegard
                 }
 
                 var continueType = updater.UpdateObj(self, activationDepth, ref sectionIndex);
-                if (continueType == RogueObjUpdaterContinueType.Continue)
+                if (!indexManager.Value.Any)
+                {
+                    throw new RogueException(
+                        $"{nameof(IndexManager)} の状態が不正です。 " +
+                        $"{nameof(IRogueObjUpdater)} の実行中に {nameof(StaticID.Next)} が呼び出された可能性があります。");
+                }
+                else if (continueType == RogueObjUpdaterContinueType.Continue)
                 {
                     indexManager.Value.SetPeekIndex(updaterIndex, sectionIndex);
                 }
@@ -93,6 +99,8 @@ namespace Roguegard
         private class IndexManager
         {
             private readonly List<Item> items = new List<Item>();
+
+            public bool Any => items.Count >= 1;
 
             public void PushOrGetPeekIndex(float activationDepth, out int updaterIndex, out int sectionIndex)
             {
