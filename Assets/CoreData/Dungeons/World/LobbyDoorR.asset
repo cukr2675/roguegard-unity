@@ -82,9 +82,9 @@ MonoBehaviour:
       _ref:
         rid: -2
     _beApplied:
-      _script: {fileID: 11500000, guid: 4bac560a817013f43ac20ef52fcd3785, type: 3}
+      _script: {fileID: 11500000, guid: b4df1733a3a10fa43ae12ee0b6b52bdc, type: 3}
       _ref:
-        rid: 992949352820113408
+        rid: 3586031133046603779
     _beThrown:
       _script: {fileID: 0}
       _ref:
@@ -117,7 +117,7 @@ MonoBehaviour:
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
-    - rid: 992949352820113408
-      type: {class: LobbyDownStairsBeApplied, ns: Roguegard, asm: Roguegard.CoreData}
+    - rid: 3586031133046603779
+      type: {class: LobbyDoorBeApplied, ns: Roguegard, asm: Roguegard.CoreData}
       data:
         _assemblyReflectionAssetDummy: 
