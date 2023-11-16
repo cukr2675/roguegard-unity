@@ -96,6 +96,9 @@ namespace RoguegardUnity
             writer.WritePropertyName("type");
             writer.WriteValue(TypeName);
 
+            writer.WritePropertyName("version");
+            writer.WriteValue(Application.version);
+
             writer.WritePropertyName("data");
             config.Serialize(writer, device);
 
