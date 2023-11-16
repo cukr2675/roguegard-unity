@@ -6,6 +6,9 @@ namespace Roguegard
 {
     public static class AttackUtility
     {
+        public static float BaseCupValueEffectOrder => -2f;
+        public static float CupValueEffectOrder => -1f;
+
         /// <summary>
         /// 攻撃予定のターゲットと実際に攻撃するターゲットが一致しない場合、失敗させる。
         /// </summary>
@@ -23,7 +26,8 @@ namespace Roguegard
         }
 
         /// <summary>
-        /// 二つの確率の和事象（少なくともどちらか発生する確率）を取得する。
+        /// 二つの確率の和事象（少なくともどちらか発生する確率）を取得する。このメソッドを呼び出す <see cref="IValueEffect.Order"/> は
+        /// <see cref="BaseCupValueEffectOrder"/> か <see cref="CupValueEffectOrder"/> にする。
         /// </summary>
         public static float Cup(float a, float b)
         {

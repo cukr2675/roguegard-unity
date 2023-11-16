@@ -15,7 +15,7 @@ namespace Roguegard.CharacterCreation
 
         private class Effect : BaseEquippedEffect, IValueEffect
         {
-            float IValueEffect.Order => 0f;
+            float IValueEffect.Order => AttackUtility.BaseCupValueEffectOrder;
 
             void IValueEffect.AffectValue(IKeyword keyword, AffectableValue value, RogueObj self)
             {

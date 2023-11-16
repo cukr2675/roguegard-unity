@@ -20,7 +20,7 @@ namespace Roguegard.CharacterCreation
         {
             public CapGuardEquipped parent;
 
-            float IValueEffect.Order => 0f;
+            float IValueEffect.Order => AttackUtility.BaseCupValueEffectOrder;
 
             void IValueEffect.AffectValue(IKeyword keyword, AffectableValue value, RogueObj self)
             {
