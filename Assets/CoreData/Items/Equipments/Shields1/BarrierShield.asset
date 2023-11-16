@@ -109,11 +109,13 @@ MonoBehaviour:
     _mpName: 
     _members:
       _items: []
+    _isCosmetic: 0
     _equipParts:
     - {fileID: 11400000, guid: dae43f9bc590f3d4dac614a92bee6241, type: 2}
     _isNotStackableWhileEquipped: 1
     _boneSpriteTable:
       _items: []
+    _eyeDropBoneName: {fileID: 0}
     _overridesBoneSpriteEffectOrder: 0
     _boneSpriteEffectOrder: 7
     _beEquipped:
@@ -127,7 +129,7 @@ MonoBehaviour:
     _equippedEffectSources:
     - _script: {fileID: 11500000, guid: 4aeff90b18b8cdf44a9ebd70e5e57945, type: 3}
       _ref:
-        rid: 8656620227275522091
+        rid: 3586031158212952149
   _appearances: []
   _intrinsics: []
   _startingItemTable: []
@@ -136,7 +138,7 @@ MonoBehaviour:
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
-    - rid: 8656620227275522091
+    - rid: 3586031158212952149
       type: {class: BarrierShieldEquipped, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
       data:
         _assemblyReflectionAssetDummy: 

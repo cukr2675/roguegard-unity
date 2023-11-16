@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Roguegard.CharacterCreation
 {
-    public class CapGuardEquipped : ReferableScript, IEquippedEffectSource
+    public class CupGuardEquipped : ReferableScript, IEquippedEffectSource
     {
         [SerializeField] private float _guardRate = 0f;
 
@@ -18,7 +18,7 @@ namespace Roguegard.CharacterCreation
 
         private class Effect : BaseEquippedEffect, IValueEffect
         {
-            public CapGuardEquipped parent;
+            public CupGuardEquipped parent;
 
             float IValueEffect.Order => AttackUtility.BaseCupValueEffectOrder;
 
