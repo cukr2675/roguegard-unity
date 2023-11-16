@@ -7,7 +7,7 @@ using System.Linq;
 namespace Roguegard.CharacterCreation
 {
     [CreateAssetMenu(menuName = "RoguegardData/CharacterCreation/Data/Preset")]
-    [ObjectFormer.Referable]
+    [ObjectFormer.IgnoreRequireRelationalComponent]
     public class PresetCreationData : ScriptableCharacterCreationData
     {
         [SerializeField] private string _descriptionName = null;
@@ -52,6 +52,13 @@ namespace Roguegard.CharacterCreation
         {
             base.Initialize();
             sortedIntrinsics = new SortedIntrinsicList(_intrinsics, this);
+        }
+
+        public override RogueObj CreateObj(
+            IReadOnlyStartingItem startingItem, RogueObj location, Vector2Int position, IRogueRandom random, StackOption stackOption = StackOption.Default)
+        {
+            // このインスタンスのシリアル化を避けるため、 Builder の CreateObj を使う
+            return ToBuilder().CreateObj(location, position, random, stackOption);
         }
 
         protected override void OnValidate()
