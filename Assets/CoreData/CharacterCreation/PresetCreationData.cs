@@ -85,27 +85,6 @@ namespace Roguegard.CharacterCreation
                 cost += intrinsic.Option.GetCost(intrinsic, this, out var intrinsicCostIsUnknown);
                 costIsUnknown |= intrinsicCostIsUnknown;
             }
-            for (int i = 0; i < _startingItemTable.Length; i++)
-            {
-                var startingItem = _startingItemTable[i];
-                if (!startingItem.IsIntrinsicItem) continue;
-
-                // 固有アイテム化したアイテムのコストはキャラのコストとなる
-                // 重いアイテムほどコストも重くなる
-                var itemData = startingItem.Option;
-                float weight;
-                try
-                {
-                    weight = itemData.Race.Option.GetWeight(itemData.Race.Option, itemData);
-                }
-                catch (System.NullReferenceException)
-                {
-                    // null 例外のとき RaceWeight が設定されていないと判断する
-                    weight = Mathf.Clamp01(itemData.Race.Option.Cost);
-                }
-                cost += startingItem.Option.Cost * weight * startingItem.Stack;
-                costIsUnknown |= startingItem.Option.CostIsUnknown;
-            }
         }
 
         /// <summary>

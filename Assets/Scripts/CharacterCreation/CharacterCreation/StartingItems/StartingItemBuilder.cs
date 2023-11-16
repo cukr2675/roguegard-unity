@@ -15,7 +15,6 @@ namespace Roguegard.CharacterCreation
         public object OptionDetails { get; set; }
         public float GeneratorWeight { get; set; }
         public int Stack { get; set; }
-        public bool IsIntrinsicItem { get; set; }
 
         private readonly List<IMember> members = new List<IMember>();
 

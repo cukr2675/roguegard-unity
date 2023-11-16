@@ -53,7 +53,7 @@ namespace RoguegardUnity
             {
                 var obj = (RogueObj)source;
                 SetIcon(obj);
-                SetName(_text, obj, out _);
+                SetName(_text, obj);
                 _stackedText.text = null;
                 _stackText.text = null;
                 _weightText.text = null;
@@ -79,11 +79,10 @@ namespace RoguegardUnity
             {
                 if (source is RogueObj obj)
                 {
-                    bool intrinsicItem;
                     if (obj.Stack == 1)
                     {
                         SetIcon(obj);
-                        SetName(_text, obj, out intrinsicItem);
+                        SetName(_text, obj);
                         _stackedText.text = null;
                         _stackText.text = null;
                     }
@@ -91,14 +90,9 @@ namespace RoguegardUnity
                     {
                         SetIcon(obj);
                         _text.text = null;
-                        SetName(_stackedText, obj, out intrinsicItem);
+                        SetName(_stackedText, obj);
                         _stackText.SetText("x{0}", obj.Stack);
                     }
-                    if (intrinsicItem)
-                    {
-                        _weightText.text = null;
-                    }
-                    else
                     {
                         var weight = WeightCalculator.Get(obj);
                         _weightText.SetText(string.Format("重:{0:0.##}", weight.TotalWeight));
@@ -147,21 +141,12 @@ namespace RoguegardUnity
             rectTransform.sizeDelta *= iconWidth / Mathf.Max(RoguegardSettings.PixelPerUnit, rectWidth);
         }
 
-        private void SetName(TMP_Text text, RogueObj obj, out bool intrinsicItem)
+        private void SetName(TMP_Text text, RogueObj obj)
         {
             obj.GetName(nameBuilder);
             StandardRogueDeviceUtility.Localize(nameBuilder);
             text.text = nameBuilder.ToString();
-
-            intrinsicItem = IntrinsicItemRogueEffect.Is(obj);
-            if (intrinsicItem)
-            {
-                text.color = Color.gray;
-            }
-            else
-            {
-                text.color = Color.white;
-            }
+            text.color = Color.white;
         }
 
         private void SetName(TMP_Text text, ISkill skill, RogueObj obj)

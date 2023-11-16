@@ -15,7 +15,6 @@ namespace Roguegard.CharacterCreation
         object OptionDetails { get; }
         float GeneratorWeight { get; }
         int Stack { get; }
-        bool IsIntrinsicItem { get; }
         IRogueGender OptionGender { get; }
     }
 }

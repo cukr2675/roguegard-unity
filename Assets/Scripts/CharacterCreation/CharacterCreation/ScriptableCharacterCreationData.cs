@@ -115,7 +115,6 @@ namespace Roguegard.CharacterCreation
             var obj = infoSet.CreateObj(location, position, random, stackOption);
 
             obj.TrySetStack(startingItem.Stack);
-            if (startingItem.IsIntrinsicItem) { IntrinsicItemRogueEffect.SetTo(obj); }
             if (startingItem.OptionColorIsEnabled) { ColoringEffect.ColorChange(obj, startingItem.OptionColor); }
 
             return obj;
@@ -161,7 +160,6 @@ namespace Roguegard.CharacterCreation
             public object OptionDetails => null;
             public float GeneratorWeight => 0f;
             public int Stack => 1;
-            public bool IsIntrinsicItem => false;
             public IRogueGender OptionGender { get; }
 
             public string Name => Option.Name;

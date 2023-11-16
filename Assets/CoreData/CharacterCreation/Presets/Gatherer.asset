@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Gatherer
   m_EditorClassIdentifier: 
   _overridesCost: 0
-  _cost: 8
+  _cost: 7
   _costIsUnknown: 0
   _descriptionName: "\u30DE\u30CE"
   _shortName: "\u63A1\u96C6\u58EB"
@@ -65,7 +65,7 @@ MonoBehaviour:
     _color: {r: 0, g: 0.5019608, b: 0, a: 1}
     _members:
       _items:
-      - rid: 3586031156681244922
+      - rid: 3586031158212952158
   - _option: {fileID: 11400000, guid: 4ed202ff619b0b744a4f0be7bca8218f, type: 2}
     _optionDescription: {fileID: 0}
     _color: {r: 0.54901963, g: 0.11764706, b: 0.11764706, a: 1}
@@ -99,15 +99,13 @@ MonoBehaviour:
     _optionDescription: {fileID: 0}
     _generatorWeight: 1
     _stack: 1
-    _isIntrinsicItem: 1
     _members:
       _items:
-      - rid: 3586031156681244932
+      - rid: 3586031158212952187
   - _option: {fileID: 11400000, guid: ea18f387027e3e24d90b989888903f11, type: 2}
     _optionDescription: {fileID: 0}
     _generatorWeight: 1
     _stack: 1
-    _isIntrinsicItem: 0
     _members:
       _items:
       - rid: 3586031156425392529
@@ -146,15 +144,15 @@ MonoBehaviour:
       type: {class: AlphabetTypeMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
       data:
         _typeIndex: 2
-    - rid: 3586031156681244922
-      type: {class: SingleItemMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
-      data:
-        _item: {fileID: 11400000, guid: 6f7e18025209af1419a58b44aa08625e, type: 2}
     - rid: 3586031156681244931
       type: {class: SingleItemMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
       data:
         _item: {fileID: 11400000, guid: 0fd10a2e2669235459b036d752ed0e5f, type: 2}
-    - rid: 3586031156681244932
+    - rid: 3586031158212952158
+      type: {class: SingleItemMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
+      data:
+        _item: {fileID: 11400000, guid: 6f7e18025209af1419a58b44aa08625e, type: 2}
+    - rid: 3586031158212952187
       type: {class: EquipMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
       data:
         _isEquipped: 1

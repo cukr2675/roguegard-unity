@@ -25,9 +25,6 @@ namespace Roguegard.CharacterCreation
         [SerializeField] private int _stack;
         public int Stack => _stack;
 
-        [SerializeField] private bool _isIntrinsicItem;
-        public bool IsIntrinsicItem => _isIntrinsicItem;
-
         [SerializeField] private MemberList _members;
 
         public string Name => _optionDescription?.DescriptionName ?? _option.DescriptionName;
@@ -76,7 +73,6 @@ namespace Roguegard.CharacterCreation
             builder.OptionCaption = _optionDescription?.Caption;
             builder.OptionDetails = _optionDescription?.Details;
             builder.Stack = _stack;
-            builder.IsIntrinsicItem = _isIntrinsicItem;
             builder.GeneratorWeight = _generatorWeight;
             var members = (Spanning<IMember>)_members;
             for (int i = 0; i < members.Count; i++)
