@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: LightArmor
   m_EditorClassIdentifier: 
   _overridesCost: 0
-  _cost: 2
+  _cost: 1
   _costIsUnknown: 0
   _race:
     _name: 
@@ -24,14 +24,14 @@ MonoBehaviour:
       _script: {fileID: 0}
       _ref:
         rid: -2
-    _cost: 2
+    _cost: 1
     _costIsUnknown: 0
     _genders: {fileID: 0}
     _category: {fileID: 11400000, guid: 75e1343f76d38ef47996f24301d8239f, type: 2}
     _maxHP: 0
     _maxMP: 0
     _atk: 0
-    _def: 1
+    _def: 0
     _loadCapacity: 0
     _faction: {fileID: 0}
     _ability: 4
@@ -109,6 +109,7 @@ MonoBehaviour:
     _mpName: 
     _members:
       _items: []
+    _isCosmetic: 0
     _equipParts:
     - {fileID: 11400000, guid: cdda43e7389bc8047a136f82d171ba34, type: 2}
     _isNotStackableWhileEquipped: 1
@@ -148,6 +149,7 @@ MonoBehaviour:
             _backFront: {fileID: 278652595, guid: ea6e08f75be6f3c4fa443acba9f4735a, type: 3}
             _backRear: {fileID: 0}
           _color: {r: 0.81960785, g: 0.8235294, b: 0.83137256, a: 1}
+    _eyeDropBoneName: {fileID: 0}
     _overridesBoneSpriteEffectOrder: 0
     _boneSpriteEffectOrder: 1
     _beEquipped:
@@ -159,9 +161,9 @@ MonoBehaviour:
       _ref:
         rid: -2
     _equippedEffectSources:
-    - _script: {fileID: 11500000, guid: e7a6a56c07226594d9f552962d75126e, type: 3}
+    - _script: {fileID: 11500000, guid: 7a9b352c454552a4dbfd0723588bc87f, type: 3}
       _ref:
-        rid: 992949845300346881
+        rid: 3586031158212952377
   _appearances: []
   _intrinsics: []
   _startingItemTable: []
@@ -174,8 +176,9 @@ MonoBehaviour:
       type: {class: ConstantRaceWeight, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
       data:
         _assemblyReflectionAssetDummy: 
-        _weight: 3
-    - rid: 992949845300346881
-      type: {class: ATKDEFEquipped, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
+        _weight: 2
+    - rid: 3586031158212952377
+      type: {class: CupGuardEquipped, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
       data:
         _assemblyReflectionAssetDummy: 
+        _guardRate: 0.4
