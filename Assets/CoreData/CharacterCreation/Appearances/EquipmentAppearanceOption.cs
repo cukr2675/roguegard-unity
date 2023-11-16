@@ -17,7 +17,8 @@ namespace Roguegard.CharacterCreation
         private static readonly IMemberSource[] _sources = new IMemberSource[] { SingleItemMember.SourceInstance };
 
         public override void Affect(
-            BoneNodeBuilder mainNode, AffectableBoneSpriteTable boneSpriteTable, IReadOnlyAppearance appearance, ICharacterCreationData characterCreationData)
+            BoneNodeBuilder mainNode, AppearanceBoneSpriteTable boneSpriteTable,
+            IReadOnlyAppearance appearance, ICharacterCreationData characterCreationData)
         {
             var member = SingleItemMember.GetMember(appearance);
             if (!(member.ItemOption is EquipmentCreationData itemData)) return;

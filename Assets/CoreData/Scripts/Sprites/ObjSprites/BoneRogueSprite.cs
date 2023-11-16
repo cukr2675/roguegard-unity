@@ -54,9 +54,9 @@ namespace Roguegard
             tileData.color = IconColor;
         }
 
-        public override void SetBoneSpriteEffects(Spanning<IBoneSpriteEffect> effects)
+        public override void SetBoneSpriteEffects(RogueObj self, Spanning<IBoneSpriteEffect> effects)
         {
-            root.SetEquipmentSprites(boneRoot, effects);
+            root.SetEquipmentSprites(self, boneRoot, effects);
             wasChangedEquipments = true;
         }
 

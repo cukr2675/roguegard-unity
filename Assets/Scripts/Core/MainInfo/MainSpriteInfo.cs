@@ -24,12 +24,12 @@ namespace Roguegard
                 MotionSet = motionSet;
                 isDirty = false;
                 var boneSpriteState = self.Main.GetBoneSpriteEffectState(self);
-                boneSpriteState.SetTo(objSprite, true);
+                boneSpriteState.SetTo(self, objSprite, true);
             }
             else
             {
                 var boneSpriteState = self.Main.GetBoneSpriteEffectState(self);
-                boneSpriteState.SetTo(objSprite, false);
+                boneSpriteState.SetTo(self, objSprite, false);
             }
 
             var boneMotionState = self.Main.GetBoneMotionEffectState(self);

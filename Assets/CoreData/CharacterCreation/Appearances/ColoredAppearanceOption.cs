@@ -17,7 +17,7 @@ namespace Roguegard.CharacterCreation
         protected abstract BoneSprite GetSprite(IReadOnlyAppearance appearance, ICharacterCreationData characterCreationData);
 
         public sealed override void Affect(
-            BoneNodeBuilder mainNode, AffectableBoneSpriteTable boneSpriteTable, IReadOnlyAppearance appearance, ICharacterCreationData characterCreationData)
+            BoneNodeBuilder mainNode, AppearanceBoneSpriteTable boneSpriteTable, IReadOnlyAppearance appearance, ICharacterCreationData characterCreationData)
         {
             if (IsBone)
             {
@@ -26,7 +26,7 @@ namespace Roguegard.CharacterCreation
             else
             {
                 var sprite = GetSprite(appearance, characterCreationData);
-                boneSpriteTable.AddEquipmentSprite(BoneName, sprite, appearance.Color);
+                boneSpriteTable.BaseTable.AddEquipmentSprite(BoneName, sprite, appearance.Color);
                 return;
             }
 

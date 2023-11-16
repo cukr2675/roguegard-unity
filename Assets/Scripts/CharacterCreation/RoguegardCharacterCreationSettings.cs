@@ -7,5 +7,7 @@ namespace Roguegard.CharacterCreation
     public static class RoguegardCharacterCreationSettings
     {
         public static ILevelInfoInitializer LevelInfoInitializer { get; set; }
+
+        public static IKeyword EquipPartOfInnerwear { get; set; }
     }
 }

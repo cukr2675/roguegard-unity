@@ -79,7 +79,7 @@ namespace Roguegard.CharacterCreation
 
         public override void GetSpriteValues(
             IRaceOption raceOption, ICharacterCreationData characterCreationData, IRogueGender gender,
-            out BoneNodeBuilder mainNode, out AffectableBoneSpriteTable boneSpriteTable)
+            out BoneNodeBuilder mainNode, out AppearanceBoneSpriteTable boneSpriteTable)
             => _main.GetSpriteValues(raceOption, characterCreationData, gender, out mainNode, out boneSpriteTable);
 
         public override void GetObjSprite(

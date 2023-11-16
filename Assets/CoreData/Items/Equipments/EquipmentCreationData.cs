@@ -61,7 +61,7 @@ namespace Roguegard.CharacterCreation
             }
         }
 
-        public void Affect(AffectableBoneSpriteTable boneSpriteTable, Color color)
+        public void Affect(AppearanceBoneSpriteTable boneSpriteTable, Color color)
         {
             TryInitialize();
             _race.Affect(boneSpriteTable, color);

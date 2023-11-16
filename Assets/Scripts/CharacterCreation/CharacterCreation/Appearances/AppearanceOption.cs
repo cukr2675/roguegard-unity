@@ -19,6 +19,7 @@ namespace Roguegard.CharacterCreation
         }
 
         public abstract void Affect(
-            BoneNodeBuilder mainNode, AffectableBoneSpriteTable boneSpriteTable, IReadOnlyAppearance appearance, ICharacterCreationData characterCreationData);
+            BoneNodeBuilder mainNode, AppearanceBoneSpriteTable boneSpriteTable,
+            IReadOnlyAppearance appearance, ICharacterCreationData characterCreationData);
     }
 }

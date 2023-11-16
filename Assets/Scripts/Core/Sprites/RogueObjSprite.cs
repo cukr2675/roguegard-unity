@@ -12,7 +12,7 @@ namespace Roguegard
         // これらのメソッドは RogueObj の MotionSet や RogueEffect ありきで呼び出すことを想定するため、
         // MainSpriteInfo 内でのみ使用する。
 
-        public abstract void SetBoneSpriteEffects(Spanning<IBoneSpriteEffect> effects);
+        public abstract void SetBoneSpriteEffects(RogueObj self, Spanning<IBoneSpriteEffect> effects);
 
         public abstract void SetTo(IRogueObjSpriteRenderController renderController, BonePose pose, RogueDirection direction);
     }

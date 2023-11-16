@@ -34,7 +34,7 @@ namespace Roguegard.CharacterCreation
 
         [System.NonSerialized] private float _weight;
         [System.NonSerialized] private IBoneNode boneNode;
-        [System.NonSerialized] private Effect effect;
+        [System.NonSerialized] private AppearanceBoneSpriteTable characterBoneSpriteTable;
 
         public override IKeyword Category => CurrentRaceOption.Category;
 
@@ -99,7 +99,7 @@ namespace Roguegard.CharacterCreation
         public void Reload()
         {
             _weight = CurrentRaceOption.GetWeight(CurrentRaceOption, Data);
-            CurrentRaceOption.GetSpriteValues(CurrentRaceOption, Data, _gender, out var mainNode, out var characterBoneSpriteTable);
+            CurrentRaceOption.GetSpriteValues(CurrentRaceOption, Data, _gender, out var mainNode, out characterBoneSpriteTable);
 
             if (mainNode != null)
             {
@@ -111,16 +111,6 @@ namespace Roguegard.CharacterCreation
                 }
                 boneNode = mainNode;
             }
-
-            if (characterBoneSpriteTable.Any)
-            {
-                effect = new Effect();
-                effect.characterBoneSpriteTable = characterBoneSpriteTable;
-            }
-            else
-            {
-                effect = null;
-            }
         }
 
         public override MainInfoSet Open(RogueObj self, MainInfoSetType infoSetType, bool polymorph2Base)
@@ -128,7 +118,7 @@ namespace Roguegard.CharacterCreation
             if (boneNode == null) { Reload(); }
 
             var newRaceOption = CurrentRaceOption.Open(self, infoSetType, polymorph2Base, CurrentRaceOption, Data);
-            if (effect != null) { RogueEffectUtility.AddFromInfoSet(self, effect); }
+            characterBoneSpriteTable.AddEffectFromInfoSet(self);
             Data.SortedIntrinsics.Open(self, infoSetType, polymorph2Base);
 
             if (newRaceOption == CurrentRaceOption) return this;
@@ -143,7 +133,7 @@ namespace Roguegard.CharacterCreation
             if (boneNode == null) { Reload(); }
 
             CurrentRaceOption.Close(self, infoSetType, base2Polymorph, CurrentRaceOption, Data);
-            if (effect != null) { RogueEffectUtility.Remove(self, effect); }
+            characterBoneSpriteTable.Remove(self);
             Data.SortedIntrinsics.Close(self, infoSetType, base2Polymorph);
         }
 
@@ -196,18 +186,6 @@ namespace Roguegard.CharacterCreation
         public override bool Equals(MainInfoSet other)
         {
             return other is CharacterCreationInfoSet c && Data == c.Data && currentRaceOptionIndex == c.currentRaceOptionIndex && _gender == c._gender;
-        }
-
-        private class Effect : IBoneSpriteEffect
-        {
-            public float Order => -200f;
-
-            public AffectableBoneSpriteTable characterBoneSpriteTable;
-
-            public void AffectSprite(IBoneNode boneRoot, AffectableBoneSpriteTable boneSpriteTable)
-            {
-                characterBoneSpriteTable.AddTo(boneSpriteTable);
-            }
         }
     }
 }

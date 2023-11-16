@@ -46,10 +46,16 @@ namespace Roguegard.CharacterCreation
             }
         }
 
-        public void Affect(AffectableBoneSpriteTable boneSpriteTable, Color color)
+        public void Affect(AppearanceBoneSpriteTable boneSpriteTable, Color color)
         {
+            if (!boneSpriteTable.TryGetNewEquipmentTable(_equipParts, _boneSpriteEffectOrder, out var table))
+            {
+                Debug.LogWarning("重複した装備部位の見た目が存在します。");
+                return;
+            }
+
             var baseColor = Color;
-            _boneSpriteTable.Table.ColoredAddTo(boneSpriteTable, baseColor, color);
+            _boneSpriteTable.Table.ColoredAddTo(table, baseColor, color);
         }
 
         protected class EquipmentInfo<T> : BaseEquipmentInfo, IBoneSpriteEffect
@@ -102,7 +108,7 @@ namespace Roguegard.CharacterCreation
                 }
             }
 
-            void IBoneSpriteEffect.AffectSprite(IBoneNode boneRoot, AffectableBoneSpriteTable boneSpriteTable)
+            void IBoneSpriteEffect.AffectSprite(RogueObj owner, IBoneNode boneRoot, AffectableBoneSpriteTable boneSpriteTable)
             {
                 var baseColor = Data.Color;
                 if (Data._eyeDropBoneName != null)

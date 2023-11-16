@@ -34,6 +34,7 @@ MonoBehaviour:
     _script: {fileID: 11500000, guid: 0bc94c8470be26542af39396e94082b3, type: 3}
     _ref:
       rid: 5795394415022571534
+  _equipPartOfInnerwear: {fileID: 11400000, guid: 477e575ba17b0dd4eb9bab0a3d571fe8, type: 2}
   _defaultRaceOption: {fileID: 11400000, guid: e9af886bcd40dbe469f3f75f54ee9544, type: 2}
   _objCommandTable: {fileID: 11400000, guid: fc0bf9764c3cf2d4293a81c04b4c2371, type: 2}
   _assetTables:

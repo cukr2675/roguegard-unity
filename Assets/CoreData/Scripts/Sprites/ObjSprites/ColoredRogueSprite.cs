@@ -57,7 +57,7 @@ namespace Roguegard
             }
         }
 
-        public override void SetBoneSpriteEffects(Spanning<IBoneSpriteEffect> effects)
+        public override void SetBoneSpriteEffects(RogueObj self, Spanning<IBoneSpriteEffect> effects)
         {
         }
 

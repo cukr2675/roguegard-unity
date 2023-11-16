@@ -94,7 +94,7 @@ namespace Roguegard
             }
         }
 
-        public void SetEquipmentSprites(IBoneNode boneRoot, Spanning<IBoneSpriteEffect> effects)
+        public void SetEquipmentSprites(RogueObj self, IBoneNode boneRoot, Spanning<IBoneSpriteEffect> effects)
         {
             // IBoneSpriteEffect と IRogueObjSprite の実装をできるだけ切り離すため、テーブルは空の状態で開始する。（バージョンで変更できる？）
             boneSpriteTable.Clear();
@@ -102,7 +102,7 @@ namespace Roguegard
             for (int i = 0; i < effects.Count; i++)
             {
                 var effect = effects[i];
-                effect.AffectSprite(boneRoot, boneSpriteTable);
+                effect.AffectSprite(self, boneRoot, boneSpriteTable);
             }
             ApplyTable(this);
 

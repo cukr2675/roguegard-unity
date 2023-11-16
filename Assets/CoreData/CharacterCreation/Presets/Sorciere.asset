@@ -49,7 +49,25 @@ MonoBehaviour:
     _color: {r: 0.54901963, g: 0, b: 0.03137255, a: 1}
     _members:
       _items:
-      - rid: 3586031061574877199
+      - rid: 3586031158212952093
+  - _option: {fileID: 11400000, guid: 4ed202ff619b0b744a4f0be7bca8218f, type: 2}
+    _optionDescription: {fileID: 0}
+    _color: {r: 0.8235294, g: 0.11764706, b: 0.15686275, a: 1}
+    _members:
+      _items:
+      - rid: 3586031158212952122
+  - _option: {fileID: 11400000, guid: 4ed202ff619b0b744a4f0be7bca8218f, type: 2}
+    _optionDescription: {fileID: 0}
+    _color: {r: 1, g: 1, b: 1, a: 1}
+    _members:
+      _items:
+      - rid: 3586031158212952124
+  - _option: {fileID: 11400000, guid: 4ed202ff619b0b744a4f0be7bca8218f, type: 2}
+    _optionDescription: {fileID: 0}
+    _color: {r: 1, g: 1, b: 1, a: 1}
+    _members:
+      _items:
+      - rid: 3586031158212952148
   _intrinsics:
   - _option:
       _script: {fileID: 11500000, guid: 05fc269745104c842831516b8d2b2f49, type: 3}
@@ -80,14 +98,6 @@ MonoBehaviour:
     _members:
       _items: []
   _startingItemTable:
-  - _option: {fileID: 11400000, guid: 700ba87b2b6aad84c84976c4dd7fc433, type: 2}
-    _optionDescription: {fileID: 0}
-    _generatorWeight: 1
-    _stack: 1
-    _isIntrinsicItem: 1
-    _members:
-      _items:
-      - rid: 962669074657312779
   - _option: {fileID: 11400000, guid: 98602f826227963489021023cf12e914, type: 2}
     _optionDescription: {fileID: 0}
     _generatorWeight: 1
@@ -95,23 +105,7 @@ MonoBehaviour:
     _isIntrinsicItem: 1
     _members:
       _items:
-      - rid: 962669074657312780
-  - _option: {fileID: 11400000, guid: f28ebee9cf9bcd94c84b7522abb8e7fa, type: 2}
-    _optionDescription: {fileID: 11400000, guid: 2aac82083f403b641af1eff3e34f9479, type: 2}
-    _generatorWeight: 1
-    _stack: 1
-    _isIntrinsicItem: 1
-    _members:
-      _items:
-      - rid: 962669074657312781
-  - _option: {fileID: 11400000, guid: 61b5715891eacdc40818e86462b97bab, type: 2}
-    _optionDescription: {fileID: 11400000, guid: 2aac82083f403b641af1eff3e34f9479, type: 2}
-    _generatorWeight: 1
-    _stack: 1
-    _isIntrinsicItem: 1
-    _members:
-      _items:
-      - rid: 962669074657312782
+      - rid: 3586031158212952142
   - _option: {fileID: 11400000, guid: 45936e521f12c3c4a87a0a63cb5b6aba, type: 2}
     _optionDescription: {fileID: 0}
     _generatorWeight: 1
@@ -119,7 +113,7 @@ MonoBehaviour:
     _isIntrinsicItem: 0
     _members:
       _items:
-      - rid: 962669074657312783
+      - rid: 3586031158212952073
   - _option: {fileID: 11400000, guid: 80b4c5e3b530d624083f6deba7874774, type: 2}
     _optionDescription: {fileID: 0}
     _generatorWeight: 1
@@ -127,7 +121,7 @@ MonoBehaviour:
     _isIntrinsicItem: 0
     _members:
       _items:
-      - rid: 962669074657312784
+      - rid: 3586031156681245686
   - _option: {fileID: 11400000, guid: 5ea5f641d9dfbbb4b9734cc63a81c954, type: 2}
     _optionDescription: {fileID: 0}
     _generatorWeight: 1
@@ -135,7 +129,7 @@ MonoBehaviour:
     _isIntrinsicItem: 0
     _members:
       _items:
-      - rid: 962669074657312785
+      - rid: 3586031158212952069
   - _option: {fileID: 11400000, guid: ee85b43af08c07e42a1cc3b6cec30fe6, type: 2}
     _optionDescription: {fileID: 0}
     _generatorWeight: 1
@@ -156,34 +150,6 @@ MonoBehaviour:
       type: {class: MultitaskAbility, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
       data:
         _assemblyReflectionAssetDummy: 
-    - rid: 962669074657312779
-      type: {class: EquipMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
-      data:
-        _isEquipped: 1
-    - rid: 962669074657312780
-      type: {class: EquipMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
-      data:
-        _isEquipped: 1
-    - rid: 962669074657312781
-      type: {class: EquipMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
-      data:
-        _isEquipped: 1
-    - rid: 962669074657312782
-      type: {class: EquipMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
-      data:
-        _isEquipped: 1
-    - rid: 962669074657312783
-      type: {class: EquipMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
-      data:
-        _isEquipped: 1
-    - rid: 962669074657312784
-      type: {class: EquipMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
-      data:
-        _isEquipped: 1
-    - rid: 962669074657312785
-      type: {class: EquipMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
-      data:
-        _isEquipped: 0
     - rid: 992949637108465688
       type: {class: BeamSlashSkill, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
       data:
@@ -202,7 +168,35 @@ MonoBehaviour:
       type: {class: AlphabetTypeMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
       data:
         _typeIndex: 2
-    - rid: 3586031061574877199
+    - rid: 3586031156681245686
+      type: {class: EquipMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
+      data:
+        _isEquipped: 1
+    - rid: 3586031158212952069
+      type: {class: EquipMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
+      data:
+        _isEquipped: 0
+    - rid: 3586031158212952073
+      type: {class: EquipMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
+      data:
+        _isEquipped: 1
+    - rid: 3586031158212952093
       type: {class: AlphabetTypeMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
       data:
         _typeIndex: 2
+    - rid: 3586031158212952122
+      type: {class: SingleItemMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
+      data:
+        _item: {fileID: 11400000, guid: 700ba87b2b6aad84c84976c4dd7fc433, type: 2}
+    - rid: 3586031158212952124
+      type: {class: SingleItemMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
+      data:
+        _item: {fileID: 11400000, guid: f28ebee9cf9bcd94c84b7522abb8e7fa, type: 2}
+    - rid: 3586031158212952142
+      type: {class: EquipMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
+      data:
+        _isEquipped: 1
+    - rid: 3586031158212952148
+      type: {class: SingleItemMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
+      data:
+        _item: {fileID: 11400000, guid: 61b5715891eacdc40818e86462b97bab, type: 2}

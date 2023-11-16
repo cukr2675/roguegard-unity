@@ -43,6 +43,7 @@ namespace RoguegardUnity
 
         [Header("Global Assets")]
         [SerializeField] private ScriptField<ILevelInfoInitializer> _levelInfoInitializer = null;
+        [SerializeField] private EquipKeywordData _equipPartOfInnerwear = null;
         [SerializeField] private DefaultRaceOption _defaultRaceOption = null;
         [SerializeField] private ObjCommandTable _objCommandTable = null;
         [SerializeField] private RogueAssetTable[] _assetTables = null;
@@ -65,6 +66,7 @@ namespace RoguegardUnity
             RoguegardSettings.DefaultSaveFileName = _defaultSaveFileName;
 
             RoguegardCharacterCreationSettings.LevelInfoInitializer = _levelInfoInitializer.Ref;
+            RoguegardCharacterCreationSettings.EquipPartOfInnerwear = _equipPartOfInnerwear;
             RoguegardSettings.DefaultRaceOption = _defaultRaceOption;
             RoguegardSettings.ObjCommandTable = _objCommandTable;
 

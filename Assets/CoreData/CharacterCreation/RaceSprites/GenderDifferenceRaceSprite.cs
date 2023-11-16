@@ -4,20 +4,23 @@ using UnityEngine;
 
 namespace Roguegard.CharacterCreation
 {
+    /// <summary>
+    /// ê´ï Ç…ÇÊÇ¡Çƒå©ÇΩñ⁄ÇïœÇ¶ÇÈ <see cref="IRaceOptionSprite"/>
+    /// </summary>
     public class GenderDifferenceRaceSprite : ReferableScript, IRaceOptionSprite
     {
         [SerializeField] private Item[] _items = null;
 
         public void GetSpriteValues(
             IRaceOption raceOption, ICharacterCreationData characterCreationData, IRogueGender gender,
-            out BoneNodeBuilder mainNode, out AffectableBoneSpriteTable boneSpriteTable)
+            out BoneNodeBuilder mainNode, out AppearanceBoneSpriteTable boneSpriteTable)
         {
             var item = GetItem(gender);
 
             var bodyColor = characterCreationData.Race.BodyColor;
             mainNode = item.Bone.CreateBoneNodeBuilder(bodyColor);
 
-            boneSpriteTable = new AffectableBoneSpriteTable();
+            boneSpriteTable = new AppearanceBoneSpriteTable();
 
             for (int i = 0; i < item.Appearances.Count; i++)
             {
