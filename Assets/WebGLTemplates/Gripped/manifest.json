@@ -1,0 +1,19 @@
+{
+  "name": "{{{ PRODUCT_NAME }}}",
+#if SHORT_NAME
+  "short_name": "{{{ SHORT_NAME }}}",
+#endif
+  "icons": [
+    {
+      "src": "{{{ ICON_HREF ? ICON_HREF : 'favicon.ico' }}}",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ],
+  "display": "{{{ MANIFEST_DISPLAY ? MANIFEST_DISPLAY : 'standalone' }}}",
+#if MANIFEST_ORIENTATION
+  "orientation": "{{{ MANIFEST_ORIENTATION }}}",
+#endif
+  "theme_color": "#aaa",
+  "background_color": "{{{ BACKGROUND_COLOR }}}"
+}

@@ -1,0 +1,72 @@
+body {
+  padding: 0;
+  margin: 0;
+  background: {{{ BACKGROUND_COLOR }}};
+}
+#unity-container {
+  position: fixed;
+  width: 100vw;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+}
+#unity-loading-bar { position: absolute; left: 50%; top: 50vh; transform: translate(-50%, -50%); display: none }
+#unity-logo { width: 154px; height: 130px; background: url('unity-logo-{{{ SPLASH_SCREEN_STYLE.toLowerCase() }}}.png') no-repeat center }
+#unity-progress-bar-empty { width: 141px; height: 18px; margin-top: 10px; margin-left: 6.5px; background: url('progress-bar-empty-{{{ SPLASH_SCREEN_STYLE.toLowerCase() }}}.png') no-repeat center }
+#unity-progress-bar-full { width: 0%; height: 18px; margin-top: 10px; background: url('progress-bar-full-{{{ SPLASH_SCREEN_STYLE.toLowerCase() }}}.png') no-repeat center }
+#unity-warning { position: absolute; left: 50%; top: 10%; transform: translate(-50%); background: white; padding: 10px; display: none }
+
+#dummy-control {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  visibility: hidden;
+}
+#address-bar-glip {
+  display: none;
+  position: absolute;
+  text-align: center;
+  width: 240px;
+  height: 0px;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 0;
+  border-top: 40px solid #666;
+  border-left: 60px solid transparent;
+  border-right: 60px solid transparent;
+  color: #aaa;
+}
+#address-bar-glip * {
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+#address-bar-glip span {
+  position: absolute;
+  top: -50px;
+  left: 50%;
+  transform: translateX(-50%) scaleX(3);
+  font-size: 50px;
+  white-space: nowrap;
+}
+#balloon {
+  position: relative;
+  width: 205px;
+  margin: 1em 0 0 0;
+  padding: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #eee;
+  color: #111;
+}
+#balloon:before {
+  content: "";
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  margin-left: -15px;
+  border: 15px solid transparent;
+  border-bottom: 15px solid #eee;
+}
