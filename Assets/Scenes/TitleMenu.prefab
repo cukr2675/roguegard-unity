@@ -1005,6 +1005,7 @@ MonoBehaviour:
   _creditMenu: {fileID: 1976325934088905232}
   _credits:
   - {fileID: 11400000, guid: 6b15133b386d2e24da02b3b87f58c7ed, type: 2}
+  - {fileID: 11400000, guid: 2d1d64b40d08c0f42842aaf1d5ce3120, type: 2}
   - {fileID: 11400000, guid: 9f3f1d0d2b09c1743ae409905fc3617e, type: 2}
   - {fileID: 11400000, guid: 9bea3e6df1e16ae4aaa589b9eeb6db12, type: 2}
   - {fileID: 11400000, guid: 7c63b2b8539fdfa47b6149cc4dfb69d2, type: 2}
