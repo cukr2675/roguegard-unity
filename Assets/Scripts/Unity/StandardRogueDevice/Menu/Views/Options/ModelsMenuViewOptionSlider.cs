@@ -8,20 +8,16 @@ using TMPro;
 
 namespace RoguegardUnity
 {
-    public class SliderOptionMenuItem : MonoBehaviour
+    public class ModelsMenuViewOptionSlider : MonoBehaviour
     {
         [SerializeField] private TMP_Text _label = null;
         [SerializeField] private Slider _slider = null;
 
-        public void Initialize(UnityAction<float> onValueChanged)
-        {
-            _slider.onValueChanged.AddListener(onValueChanged);
-        }
-
-        public void Open(string label, float value)
+        public void Initialize(string label, float value, UnityAction<float> onValueChanged)
         {
             _label.text = label;
-            _slider.value = value;
+            _slider.SetValueWithoutNotify(value);
+            _slider.onValueChanged.AddListener(onValueChanged);
         }
     }
 }

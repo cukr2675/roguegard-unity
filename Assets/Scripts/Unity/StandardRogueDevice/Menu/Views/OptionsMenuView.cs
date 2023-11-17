@@ -6,8 +6,7 @@ using System.Linq;
 using UnityEngine.UI;
 using Roguegard;
 using Roguegard.Device;
-using Roguegard.Extensions;
-using TMPro;
+using UnityEditor;
 
 namespace RoguegardUnity
 {
@@ -15,24 +14,19 @@ namespace RoguegardUnity
     {
         [SerializeField] private CanvasGroup _canvasGroup = null;
         [SerializeField] private ScrollRect _scrollRect = null;
-        [SerializeField] private SliderOptionMenuItem _masterVolume = null;
-        [SerializeField] private DropdownOptionMenuItem _windowFrameType = null;
-        [SerializeField] private DropdownOptionMenuItem _windowFrameColor = null;
         [SerializeField] private ModelsMenuViewItemButton _exitButton = null;
+        [Space]
+        [SerializeField] private ModelsMenuViewItemButton _choicePrefab = null;
+        [SerializeField] private ModelsMenuViewOptionSlider _sliderPrefab = null;
+        [SerializeField] private ModelsMenuViewOptionText _textPrefab = null;
 
         public override CanvasGroup CanvasGroup => _canvasGroup;
 
-        private static string[] windowFrameTypeNames;
-        private static string[] windowFrameColorNames;
-
-        private RogueOptions currentOptions;
+        private readonly List<GameObject> items = new List<GameObject>();
 
         public void Initialize()
         {
             _exitButton.Initialize(this);
-            _masterVolume.Initialize(x => currentOptions.SetMasterVolume(x));
-            _windowFrameType.Initialize(x => currentOptions.SetWindowFrame(x, currentOptions.WindowFrameColor));
-            _windowFrameColor.Initialize(x => currentOptions.SetWindowFrame(currentOptions.WindowFrameIndex, ColorPreset.GetColor(x)));
         }
 
         public override void OpenView<T>(
@@ -40,22 +34,53 @@ namespace RoguegardUnity
             IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         {
             SetArg(root, self, user, arg);
-
-            if (windowFrameTypeNames == null)
+            foreach (var item in items)
             {
-                windowFrameTypeNames = Enumerable.Range(0, WindowFrameList.Count).Select(i => WindowFrameList.GetName(i)).ToArray();
-                windowFrameColorNames = Enumerable.Range(0, ColorPreset.Count).Select(i => ColorPreset.GetName(i)).ToArray();
+                Destroy(item);
             }
+            items.Clear();
 
-            var device = (StandardRogueDevice)RogueDevice.Primary;
-            currentOptions = device.Options;
-            _masterVolume.Open("マスター音量", currentOptions.MasterVolume);
-            _windowFrameType.Open("ウィンドウタイプ", windowFrameTypeNames, currentOptions.WindowFrameIndex);
-            _windowFrameColor.Open("ウィンドウカラー", windowFrameColorNames, ColorPreset.IndexOf(currentOptions.WindowFrameColor));
+            var sumHeight = 0f;
+            for (int i = 0; i < models.Count; i++)
+            {
+                var model = models[i];
+                if (model is IModelsMenuOptionSlider slider)
+                {
+                    var item = Instantiate(_sliderPrefab, _scrollRect.content);
+                    SetTransform((RectTransform)item.transform, ref sumHeight);
 
-            MenuController.Show(_exitButton.CanvasGroup, false);
+                    var label = slider.GetName(Root, Self, User, Arg);
+                    var value = slider.GetValue(Root, Self, User, Arg);
+                    item.Initialize(label, value, value => slider.SetValue(Root, Self, User, Arg, value));
+                    items.Add(item.gameObject);
+                }
+                else if (model is IModelsMenuOptionText text)
+                {
+                    var item = Instantiate(_textPrefab, _scrollRect.content);
+                    SetTransform((RectTransform)item.transform, ref sumHeight);
+
+                    var label = text.GetName(Root, Self, User, Arg);
+                    var value = text.GetValue(Root, Self, User, Arg);
+                    item.Initialize(label, value, value => text.SetValue(Root, Self, User, Arg, value));
+                    items.Add(item.gameObject);
+                }
+                else if (model is IModelsMenuChoice choice)
+                {
+                    var item = Instantiate(_choicePrefab, _scrollRect.content);
+                    SetTransform((RectTransform)item.transform, ref sumHeight);
+
+                    item.Initialize(this);
+                    item.SetItem(itemController, choice);
+                    items.Add(item.gameObject);
+                }
+            }
             MenuController.Show(_canvasGroup, true);
-            ShowExitButton(ExitModelsMenuChoice.Instance);
+        }
+
+        private static void SetTransform(RectTransform itemTransform, ref float sumHeight)
+        {
+            itemTransform.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, sumHeight, itemTransform.rect.height);
+            sumHeight += itemTransform.rect.height;
         }
 
         public override float GetPosition()

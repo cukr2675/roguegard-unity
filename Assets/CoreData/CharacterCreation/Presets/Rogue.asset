@@ -31,7 +31,7 @@ MonoBehaviour:
     _mpName: 
     _members:
       _items:
-      - rid: 3586031061574877866
+      - rid: 5329270573211320433
   _appearances:
   - _option: {fileID: 11400000, guid: dd45398b31707594396bf2674adc6041, type: 2}
     _optionDescription: {fileID: 0}
@@ -115,12 +115,6 @@ MonoBehaviour:
       type: {class: StairPickupAbility, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
       data:
         _assemblyReflectionAssetDummy: 
-    - rid: 3586031061574877866
-      type: {class: StandardRaceMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
-      data:
-        _size: 8
-        _typeIndex: 0
-        _motionSetIndex: 0
     - rid: 3586031086150090857
       type: {class: AlphabetTypeMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
       data:
@@ -172,3 +166,9 @@ MonoBehaviour:
       type: {class: SingleItemMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
       data:
         _item: {fileID: 11400000, guid: 893d0f722f7ba394c9d86ec24df4be35, type: 2}
+    - rid: 5329270573211320433
+      type: {class: StandardRaceMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
+      data:
+        _size: 8
+        _typeIndex: 0
+        _motionSetIndex: 0
