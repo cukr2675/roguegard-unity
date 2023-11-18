@@ -27,7 +27,7 @@ namespace Roguegard
                     using var damageValue = AffectableValue.Get();
                     var baseDamage = Mathf.FloorToInt(StatsEffectedValues.GetMaxHP(user) / 2f);
                     damageValue.Initialize(baseDamage);
-                    this.Hurt(user, self, activationDepth, damageValue, true);
+                    this.Hurt(user, self, AttackUtility.GetActivationDepthCantCounter(activationDepth), damageValue);
                     if (this.TryDefeat(user, self, activationDepth, damageValue)) return true;
 
                     // 倒れていなければテレポートさせる

@@ -60,7 +60,7 @@ namespace Roguegard
                     using var damage = AffectableValue.Get();
                     StatsEffectedValues.GetATK(user, damage);
                     damage.Initialize(damage.BaseMainValue);
-                    this.Hurt(self, user, activationDepth, damage, true);
+                    this.Hurt(self, user, AttackUtility.GetActivationDepthCantCounter(activationDepth), damage);
                     this.TryDefeat(self, user, activationDepth, damage);
                 }
                 else
@@ -68,7 +68,7 @@ namespace Roguegard
                     // 1 の継続ダメージ
                     using var damage = AffectableValue.Get();
                     damage.Initialize(1f);
-                    this.Hurt(self, null, activationDepth, damage, true);
+                    this.Hurt(self, null, AttackUtility.GetActivationDepthCantCounter(activationDepth), damage);
                     this.TryDefeat(self, null, activationDepth, damage);
                 }
                 return default;

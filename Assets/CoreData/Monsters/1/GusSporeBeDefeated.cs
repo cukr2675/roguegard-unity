@@ -53,7 +53,7 @@ namespace Roguegard
                 using var damageValue = AffectableValue.Get();
                 StatsEffectedValues.GetATK(self, damageValue);
                 damageValue.MainValue += 2f;
-                default(IAffectRogueMethodCaller).TryHurt(target, user, nextActivationDepth, damageValue, true);
+                default(IAffectRogueMethodCaller).TryHurt(target, user, AttackUtility.GetActivationDepthCantCounter(nextActivationDepth), damageValue);
                 var defeated = default(IAffectRogueMethodCaller).TryDefeat(target, user, nextActivationDepth, damageValue);
                 if (!defeated) continue;
 

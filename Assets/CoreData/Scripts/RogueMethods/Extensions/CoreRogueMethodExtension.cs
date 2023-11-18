@@ -125,9 +125,8 @@ namespace Roguegard.Extensions
         }
 
         public static bool Hurt(
-            this IAffectRogueMethodCaller method, RogueObj target, RogueObj user, float activationDepth, AffectableValue damageValue, bool cantCounter = false)
+            this IAffectRogueMethodCaller method, RogueObj target, RogueObj user, float activationDepth, AffectableValue damageValue)
         {
-            if (cantCounter && activationDepth < 1f) { activationDepth = 1f; }
             var hitMethod = target.Main.InfoSet.Hit;
             var arg = new RogueMethodArgument(value: damageValue);
             var damageResult = RogueMethodAspectState.Invoke(MainInfoKw.Hit, hitMethod, target, user, activationDepth, arg);
@@ -135,9 +134,9 @@ namespace Roguegard.Extensions
         }
 
         public static bool TryHurt(
-            this IAffectRogueMethodCaller method, RogueObj target, RogueObj user, float activationDepth, AffectableValue damageValue, bool cantCounter = false)
+            this IAffectRogueMethodCaller method, RogueObj target, RogueObj user, float activationDepth, AffectableValue damageValue)
         {
-            if (target != null) return method.Hurt(target, user, activationDepth, damageValue, cantCounter);
+            if (target != null) return method.Hurt(target, user, activationDepth, damageValue);
             else return false;
         }
 

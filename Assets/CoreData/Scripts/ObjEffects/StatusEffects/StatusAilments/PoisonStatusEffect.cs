@@ -59,7 +59,7 @@ namespace Roguegard
                 using var damage = AffectableValue.Get();
                 damage.Initialize(1f);
                 damage.SubValues[StatsKw.GuardRate] = -1000000f; // ガード不可
-                this.Hurt(self, null, activationDepth, damage, true);
+                this.Hurt(self, null, AttackUtility.GetActivationDepthCantCounter(activationDepth), damage);
                 this.TryDefeat(self, null, activationDepth, damage);
 
                 // 継続ダメージ

@@ -34,6 +34,11 @@ namespace Roguegard
             return a + b - a * b;
         }
 
+        public static float GetActivationDepthCantCounter(float activationDepth)
+        {
+            return Mathf.Max(activationDepth, 1f);
+        }
+
         public static RogueObj GetTargetForward(IProjectileRogueMethodRange range, RogueObj self)
         {
             var movement = MovementCalculator.Get(self);
