@@ -53,6 +53,8 @@ namespace RoguegardUnity
                 }
             }
 
+            if (!EditorUtility.IsDirty(property.serializedObject.targetObject)) return;
+
             var e = Event.current;
             position.yMin -= 10f;
             position.yMax += 10f;
