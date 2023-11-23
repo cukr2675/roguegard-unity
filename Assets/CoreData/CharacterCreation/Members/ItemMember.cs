@@ -17,11 +17,11 @@ namespace Roguegard.CharacterCreation
         {
             get
             {
-                if (_item != null) throw new RogueException();
-                else return builder ??= new StartingItemBuilder();
+                if (builder == null) { builder = new StartingItemBuilder(_item); }
+                return builder;
             }
         }
-        IReadOnlyStartingItem IReadOnlyItemMember.Item => (IReadOnlyStartingItem)_item ?? builder;
+        IReadOnlyStartingItem IReadOnlyItemMember.Item => Item;
 
         private ItemMember() { }
 
@@ -33,8 +33,11 @@ namespace Roguegard.CharacterCreation
         public IMember Clone()
         {
             var clone = new ItemMember();
-            clone._item = _item;
             clone.builder = builder;
+
+            // CharacterCreationBuilder 生成時に必ず Clone が実行されるため、この設定だけでシリアル化可能
+            if (clone.builder == null && _item?.Option != null) { clone.builder = new StartingItemBuilder(_item); }
+
             return clone;
         }
 

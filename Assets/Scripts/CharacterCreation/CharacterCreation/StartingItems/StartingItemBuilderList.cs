@@ -28,6 +28,10 @@ namespace Roguegard.CharacterCreation
 
         public Spanning<IWeightedRogueObjGenerator> Spanning => Spanning<IWeightedRogueObjGenerator>.Create(builders);
 
+        public StartingItemBuilderList()
+        {
+        }
+
         public StartingItemBuilderList(IEnumerable<StartingItemBuilder> builders)
         {
             AddRange(builders);

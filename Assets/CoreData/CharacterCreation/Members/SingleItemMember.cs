@@ -12,16 +12,15 @@ namespace Roguegard.CharacterCreation
         IMemberSource IReadOnlyMember.Source => SourceInstance;
 
         [SerializeField, ObjectFormer.IgnoreMember] private ScriptableCharacterCreationData _item;
-        private IStartingItemOption builder;
+        private IStartingItemOption _itemOption;
         public IStartingItemOption ItemOption
         {
             get
             {
-                if (_item != null) throw new RogueException();
-                else return builder;
+                if (_itemOption == null) { _itemOption = _item; }
+                return _itemOption;
             }
         }
-        IStartingItemOption IReadOnlySingleItemMember.ItemOption => _item ?? builder;
 
         private SingleItemMember() { }
 
@@ -33,8 +32,7 @@ namespace Roguegard.CharacterCreation
         public IMember Clone()
         {
             var clone = new SingleItemMember();
-            clone._item = _item;
-            clone.builder = builder;
+            clone._itemOption = _itemOption ?? _item; // CharacterCreationBuilder 生成時に必ず Clone が実行されるため、この設定だけでシリアル化可能
             return clone;
         }
 

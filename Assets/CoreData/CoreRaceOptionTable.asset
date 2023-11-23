@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9886e2920cfeb7440abe81ba5bf4aa7f, type: 3}
+  m_Name: CoreRaceOptionTable
+  m_EditorClassIdentifier: 
+  _namespace: Core
+  _filter: t:RaceOption
+  _targetFolders:
+  - {fileID: 102900000, guid: 514ed108fff2cf24a8088705ebd266b4, type: 3}
+  _items:
+  - _key: Core.Human
+    _asset: {fileID: 11400000, guid: 864040daa0485e54294ecafa67d1fd53, type: 2}

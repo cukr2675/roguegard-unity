@@ -18,7 +18,10 @@ namespace RoguegardUnity
         {
             var members = property.FindPropertyRelative("_items");
             var size = members.arraySize;
+            var dirty = EditorUtility.IsDirty(property.serializedObject.targetObject);
+            var baseHeight = base.GetPropertyHeight(property, label);
             var y = position.y;
+            if (dirty) { y += baseHeight; }
             for (int i = 0; i < size; i++)
             {
                 var member = members.GetArrayElementAtIndex(i);
@@ -53,12 +56,10 @@ namespace RoguegardUnity
                 }
             }
 
-            if (!EditorUtility.IsDirty(property.serializedObject.targetObject)) return;
+            if (!dirty) return;
 
-            var e = Event.current;
-            position.yMin -= 10f;
-            position.yMax += 10f;
-            if (position.Contains(e.mousePosition))// || e.type == EventType.ExecuteCommand)
+            position.height = baseHeight;
+            if (GUI.Button(position, "Update Members"))
             {
                 var path = property.propertyPath;
                 var length = path.LastIndexOf('.');
@@ -116,7 +117,10 @@ namespace RoguegardUnity
         {
             var members = property.FindPropertyRelative("_items");
             var size = members.arraySize;
+            var dirty = EditorUtility.IsDirty(property.serializedObject.targetObject);
+            var baseHeight = base.GetPropertyHeight(property, label);
             var sumHeight = 0f;
+            if (dirty) { sumHeight += baseHeight; }
             for (int i = 0; i < size; i++)
             {
                 var member = members.GetArrayElementAtIndex(i);
