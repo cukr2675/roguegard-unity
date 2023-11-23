@@ -41,10 +41,10 @@ namespace Roguegard.CharacterCreation
             builder.ShortName = ShortName;
             builder.Cost = Cost;
             builder.CostIsUnknown = CostIsUnknown;
-            builder.Race = _race.ToBuilder();
-            builder.Appearances.SetValues(_appearances);
-            builder.Intrinsics.SetValues(_intrinsics);
-            builder.StartingItems.SetValues(_startingItemTable);
+            builder.Race = new RaceBuilder(_race);
+            builder.Appearances.AddRange(_appearances.Select(x => new AppearanceBuilder(x)));
+            builder.Intrinsics.AddRange(_intrinsics.Select(x => new IntrinsicBuilder(x)));
+            builder.StartingItemTable.AddRange(_startingItemTable.Select(x => x.ToBuilder()));
             return builder;
         }
 
@@ -91,14 +91,9 @@ namespace Roguegard.CharacterCreation
         /// プリセットは初期アイテムをランダムにしない。
         /// </summary>
         [System.Serializable]
-        private class StartingItem : ScriptableStartingItem, IWeightedRogueObjGeneratorList, IEnumerable<ScriptableStartingItem>
+        private class StartingItem : ScriptableStartingItem, IWeightedRogueObjGeneratorList
         {
             [System.NonSerialized] private StartingItem[] array;
-
-            //IWeightedRogueObjGenerator IReadOnlyList<IWeightedRogueObjGenerator>.this[int index]
-            //    => index == 0 ? this : throw new System.IndexOutOfRangeException();
-
-            //int IReadOnlyCollection<IWeightedRogueObjGenerator>.Count => 1;
 
             float IWeightedRogueObjGeneratorList.TotalWeight => 1f;
 
@@ -111,14 +106,9 @@ namespace Roguegard.CharacterCreation
                 }
             }
 
-            IEnumerator<ScriptableStartingItem> IEnumerable<ScriptableStartingItem>.GetEnumerator()
+            public IEnumerable<StartingItemBuilder> ToBuilder()
             {
-                yield return this;
-            }
-
-            IEnumerator IEnumerable.GetEnumerator()
-            {
-                yield return this;
+                yield return new StartingItemBuilder(this);
             }
         }
     }

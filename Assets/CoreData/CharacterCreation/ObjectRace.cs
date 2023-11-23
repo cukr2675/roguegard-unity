@@ -5,6 +5,7 @@ using UnityEngine;
 namespace Roguegard.CharacterCreation
 {
     [System.Serializable]
+    [ObjectFormer.IgnoreRequireRelationalComponent]
     public class ObjectRace : ObjectRaceOption, IReadOnlyRace
     {
         [Header("Race")]
