@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using System.Linq;
-using System.Text.RegularExpressions;
 using UnityEditor;
+using UnityEditor.U2D.Sprites;
 
 namespace Roguegard.Editor
 {
@@ -23,20 +23,16 @@ namespace Roguegard.Editor
         {
             var path = AssetDatabase.GetAssetPath(_targetTexture);
             var importer = (TextureImporter)AssetImporter.GetAtPath(path);
-            importer.spriteImportMode = SpriteImportMode.Single;
             importer.spriteImportMode = SpriteImportMode.Multiple;
-            importer.spritesheet = Slicers.SelectMany(x => x.Select(i => i)).ToArray();
-            EditorUtility.SetDirty(_targetTexture);
-            AssetDatabase.ImportAsset(path);
-        }
 
-        private void ToSingle()
-        {
-            var path = AssetDatabase.GetAssetPath(_targetTexture);
-            var importer = (TextureImporter)AssetImporter.GetAtPath(path);
-            importer.spriteImportMode = SpriteImportMode.Single;
-            importer.spriteImportMode = SpriteImportMode.Multiple;
-            importer.spritesheet = new[] { new SpriteMetaData() };
+            var factory = new SpriteDataProviderFactories();
+            factory.Init();
+
+            var provider = factory.GetSpriteEditorDataProviderFromObject(importer);
+            provider.InitSpriteEditorDataProvider();
+            provider.SetSpriteRects(Slicers.SelectMany(x => x).ToArray());
+            provider.Apply();
+
             EditorUtility.SetDirty(_targetTexture);
             AssetDatabase.ImportAsset(path);
         }
@@ -61,7 +57,7 @@ namespace Roguegard.Editor
         }
 
         [System.Serializable]
-        public class Slicer : IEnumerable<SpriteMetaData>
+        public class Slicer : IEnumerable<SpriteRect>
         {
             [SerializeField] private string _format;
             public string Format { get => _format; set => _format = value; }
@@ -87,7 +83,7 @@ namespace Roguegard.Editor
                 _pixelSize.y = Mathf.Clamp(PixelSize.y, 1, int.MaxValue);
             }
 
-            public IEnumerator<SpriteMetaData> GetEnumerator()
+            public IEnumerator<SpriteRect> GetEnumerator()
             {
                 if (PixelSize.x <= 0 || PixelSize.y <= 0) throw new RogueException();
 
@@ -99,10 +95,10 @@ namespace Roguegard.Editor
                     index.y = 0;
                     for (int y = Rect.yMax; y - PixelSize.y >= Rect.yMin; y -= PixelSize.y + Padding.y) // y 軸は上から下へ
                     {
-                        var sprite = new SpriteMetaData();
+                        var sprite = new SpriteRect();
                         sprite.name = string.Format(Format, alphabets[index.x], index.y);
                         sprite.rect = UnityEngine.Rect.MinMaxRect(x, y - PixelSize.y, x + PixelSize.x, y);
-                        sprite.alignment = (int)SpriteAlignment.Custom;
+                        sprite.alignment = SpriteAlignment.Custom;
                         sprite.pivot = pivot;
                         yield return sprite;
 
@@ -131,27 +127,6 @@ namespace Roguegard.Editor
                     foreach (var target in targets)
                     {
                         ((ScriptableSpriteSlicer)target).StartSlice();
-                    }
-                }
-                EditorGUILayout.Space();
-
-                var rect = GUILayoutUtility.GetRect(GUIContent.none, EditorStyles.helpBox);
-                var helpBoxRect = rect;
-                helpBoxRect.height *= 5;
-                EditorGUI.HelpBox(
-                    helpBoxRect,
-                    "警告 (Identifier uniqueness violation) が発生する場合は以下の操作を行う\n" +
-                    "1. 下の To Single ボタンを押す\n" +
-                    "2. 対象テクスチャの SpriteEditor を開いて Delete キーを押す\n" +
-                    "3. SpriteEditor の Apply を押す", MessageType.Info);
-
-                var buttonRect = rect;
-                buttonRect.y += helpBoxRect.height;
-                if (EditorGUI.LinkButton(buttonRect, "To Single"))
-                {
-                    foreach (var target in targets)
-                    {
-                        ((ScriptableSpriteSlicer)target).ToSingle();
                     }
                 }
             }

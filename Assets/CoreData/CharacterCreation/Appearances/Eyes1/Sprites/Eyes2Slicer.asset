@@ -144,19 +144,19 @@ MonoBehaviour:
     _rect:
       x: 0
       y: 0
-      width: 13
+      width: 16
       height: 16
     _pixelSize: {x: 2, y: 4}
-    _padding: {x: 1, y: 0}
+    _padding: {x: 2, y: 0}
     _pixelPivot: {x: 1, y: 0}
   - _format: Eye17L{0}{1}_NF
     _rect:
       x: 1
       y: 0
-      width: 13
+      width: 16
       height: 16
     _pixelSize: {x: 3, y: 4}
-    _padding: {x: 0, y: 0}
+    _padding: {x: 1, y: 0}
     _pixelPivot: {x: 1, y: 0}
   - _format: Eye18R{0}{1}_NF
     _rect:
