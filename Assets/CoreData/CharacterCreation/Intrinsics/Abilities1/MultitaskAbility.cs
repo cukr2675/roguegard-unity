@@ -6,18 +6,9 @@ using Roguegard.Extensions;
 
 namespace Roguegard.CharacterCreation
 {
-    public class MultitaskAbility : AbilityIntrinsicOption, IRogueMethodPassiveAspect
+    public class MultitaskAbility : AbilityIntrinsicOptionScript, IRogueMethodPassiveAspect
     {
-        public override string Name => ":Multitask";
-        protected override int Lv => 1;
-        protected override float Cost => 3;
-
         float IRogueMethodPassiveAspect.Order => 0f;
-
-        protected override void LevelUpToLv(RogueObj self, MainInfoSetType infoSetType)
-        {
-            base.LevelUpToLv(self, infoSetType);
-        }
 
         bool IRogueMethodPassiveAspect.PassiveInvoke(
             IKeyword keyword, IRogueMethod method, RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg,

@@ -4,12 +4,9 @@ using UnityEngine;
 
 namespace Roguegard.CharacterCreation
 {
-    public class StairPickupAbility : ToolAbilityIntrinsicOption
+    public class StairPickupAbility : ToolAbilityIntrinsicOptionScript
     {
-        public override string Name => ":StairPickup";
-        protected override int Lv => 1;
-
-        public override float GetCost(
+        protected override float GetCost(
             IReadOnlyIntrinsic intrinsic, ICharacterCreationData characterCreationData, IReadOnlyStartingItem tool, out bool costIsUnknown)
         {
             var cost = tool.Option.GetCost(tool, out costIsUnknown);

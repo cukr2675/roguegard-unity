@@ -4,13 +4,10 @@ using UnityEngine;
 
 namespace Roguegard.CharacterCreation
 {
-    public class BraveHeartAbility : PartyAbilityIntrinsicOption
+    public class BraveHeartAbility : PartyAbilityIntrinsicOptionScript
     {
-        public override string Name => ":BraveHeart";
-        protected override int Lv => 1;
-        protected override float Cost => 3f;
-
-        protected override ISortedIntrinsic CreateSortedIntrinsic(IReadOnlyIntrinsic intrinsic, ICharacterCreationData characterCreationData, int lv)
+        public override ISortedIntrinsic CreateSortedIntrinsic(
+            ScriptIntrinsicOption parent, IReadOnlyIntrinsic intrinsic, ICharacterCreationData characterCreationData, int lv)
         {
             return new SortedIntrinsic(lv);
         }
@@ -21,10 +18,7 @@ namespace Roguegard.CharacterCreation
 
             private static readonly MemberEffect memberEffect = new MemberEffect();
 
-            public SortedIntrinsic(int lv)
-                : base(lv)
-            {
-            }
+            public SortedIntrinsic(int lv) : base(lv) { }
 
             RogueObjUpdaterContinueType IRogueObjUpdater.UpdateObj(RogueObj self, float activationDepth, ref int sectionIndex)
             {
@@ -53,7 +47,7 @@ namespace Roguegard.CharacterCreation
         }
 
         /// <summary>
-        /// <see cref="PartyAbilityIntrinsicOption.BasePartyMemberRogueEffect.effecterEffect"/> のシリアル化が必要なため
+        /// <see cref="PartyAbilityIntrinsicOptionScript.BasePartyMemberRogueEffect.effecterEffect"/> のシリアル化が必要なため
         /// <see cref="ObjectFormer.FormableAttribute"/> を付与する
         /// </summary>
         [ObjectFormer.Formable]

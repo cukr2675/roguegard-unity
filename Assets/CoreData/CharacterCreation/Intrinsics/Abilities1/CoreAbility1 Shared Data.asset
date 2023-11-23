@@ -16,15 +16,15 @@ MonoBehaviour:
   m_TableCollectionNameGuidString: c6142c37dd1530b44bb22abd576d46fe
   m_Entries:
   - m_Id: 15029374976
-    m_Key: BraveHeart
+    m_Key: BraveHeartAbility
     m_Metadata:
       m_Items: []
   - m_Id: 88777822208
-    m_Key: BraveHeart::c
+    m_Key: BraveHeartAbility::c
     m_Metadata:
       m_Items: []
   - m_Id: 146826989568
-    m_Key: BraveHeart::d
+    m_Key: BraveHeartAbility::d
     m_Metadata:
       m_Items: []
   - m_Id: 744310787149824
@@ -32,27 +32,27 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 266612117504
-    m_Key: Multitask
+    m_Key: MultitaskAbility
     m_Metadata:
       m_Items: []
   - m_Id: 466164518912
-    m_Key: Multitask::c
+    m_Key: MultitaskAbility::c
     m_Metadata:
       m_Items: []
   - m_Id: 486464950272
-    m_Key: Multitask::d
+    m_Key: MultitaskAbility::d
     m_Metadata:
       m_Items: []
   - m_Id: 670116745216
-    m_Key: StairPickup
+    m_Key: StairPickupAbility
     m_Metadata:
       m_Items: []
   - m_Id: 718158303232
-    m_Key: StairPickup::c
+    m_Key: StairPickupAbility::c
     m_Metadata:
       m_Items: []
   - m_Id: 732184055808
-    m_Key: StairPickup::d
+    m_Key: StairPickupAbility::d
     m_Metadata:
       m_Items: []
   m_Metadata:
