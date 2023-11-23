@@ -4,8 +4,8 @@ using UnityEngine;
 
 namespace Roguegard.CharacterCreation
 {
+    [ObjectFormer.RequireRelationalComponent]
     public interface IMember : IReadOnlyMember
     {
-        IMember Clone();
     }
 }

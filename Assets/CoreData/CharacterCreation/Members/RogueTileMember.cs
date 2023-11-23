@@ -4,13 +4,14 @@ using UnityEngine;
 
 namespace Roguegard.CharacterCreation
 {
+    [ObjectFormer.Formable]
     public class RogueTileMember : IMember, IReadOnlyRogueTileMember
     {
         public static IMemberSource SourceInstance { get; } = new SourceType();
 
         IMemberSource IReadOnlyMember.Source => SourceInstance;
 
-        [SerializeField] private ScriptableRogueTile _tile;
+        [SerializeField, ObjectFormer.IgnoreMember] private ScriptableRogueTile _tile;
         public IRogueTile Tile => _tile;
 
         private RogueTileMember() { }

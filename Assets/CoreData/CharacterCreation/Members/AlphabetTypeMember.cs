@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace Roguegard.CharacterCreation
 {
+    [ObjectFormer.Formable]
     public class AlphabetTypeMember : IMember, IReadOnlyAlphabetTypeMember
     {
         public static IMemberSource SourceInstance { get; } = new SourceType();
@@ -15,7 +16,7 @@ namespace Roguegard.CharacterCreation
 
         public char TypeChar => typeChars[_typeIndex];
 
-        private readonly List<Sprite> typeItems = new List<Sprite>();
+        [System.NonSerialized] private readonly List<Sprite> typeItems = new List<Sprite>();
 
         private static readonly char[] typeChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray();
 

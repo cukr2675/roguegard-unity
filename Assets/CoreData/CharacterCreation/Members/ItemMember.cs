@@ -4,13 +4,14 @@ using UnityEngine;
 
 namespace Roguegard.CharacterCreation
 {
+    [ObjectFormer.Formable]
     public class ItemMember : IMember, IReadOnlyItemMember
     {
         public static IMemberSource SourceInstance { get; } = new SourceType();
 
         IMemberSource IReadOnlyMember.Source => SourceInstance;
 
-        [SerializeField] private ScriptableStartingItem _item;
+        [SerializeField, ObjectFormer.IgnoreMember] private ScriptableStartingItem _item;
         private StartingItemBuilder builder;
         public StartingItemBuilder Item
         {
