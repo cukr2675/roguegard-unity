@@ -15,7 +15,6 @@ using Roguegard;
 using Roguegard.CharacterCreation;
 using Roguegard.Device;
 using Roguegard.RogueObjectFormer.Json;
-using Roguegard.Extensions;
 
 namespace RoguegardUnity
 {
@@ -140,7 +139,6 @@ namespace RoguegardUnity
             converters.Add(RogueObjJsonConverter.Create());
             converters.Add(FormerJsonConverter.Create(typeof(StandardRogueDevice)));
             converters.Add(FormerJsonConverter.Create(typeof(RogueOptions)));
-            converters.Add(new ThrowExceptionJsonConverter(typeof(CharacterCreationDataBuilder)));
             converters.AddAuto(assemblies, instanceType =>
             {
                 if (instanceType.IsArray)
