@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace Roguegard.CharacterCreation
 {
+    [ObjectFormer.RequireRelationalComponent]
     public interface IStartingItemOption : IRogueDescription, IMemberableOption
     {
         MainInfoSet InfoSet { get; }

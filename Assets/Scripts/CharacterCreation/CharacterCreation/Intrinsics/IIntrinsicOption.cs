@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace Roguegard.CharacterCreation
 {
+    [ObjectFormer.RequireRelationalComponent]
     public interface IIntrinsicOption : IRogueDescription, IMemberableOption
     {
         void UpdateMemberRange(IMember member, IReadOnlyIntrinsic intrinsic, ICharacterCreationData characterCreationData);

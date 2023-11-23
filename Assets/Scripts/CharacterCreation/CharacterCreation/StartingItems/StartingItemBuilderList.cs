@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace Roguegard.CharacterCreation
 {
+    [ObjectFormer.Formable]
     public class StartingItemBuilderList : IWeightedRogueObjGeneratorList//, IReadOnlyList<StartingItemBuilder>
     {
         private readonly List<StartingItemBuilder> builders = new List<StartingItemBuilder>();
@@ -26,6 +27,11 @@ namespace Roguegard.CharacterCreation
         }
 
         public Spanning<IWeightedRogueObjGenerator> Spanning => Spanning<IWeightedRogueObjGenerator>.Create(builders);
+
+        public StartingItemBuilderList(IEnumerable<StartingItemBuilder> builders)
+        {
+            AddRange(builders);
+        }
 
         public void AddRange(IEnumerable<StartingItemBuilder> builders)
         {

@@ -37,22 +37,5 @@ namespace Roguegard.CharacterCreation
             }
             throw new System.ArgumentException();
         }
-
-        public AppearanceBuilder ToBuilder()
-        {
-            var builder = new AppearanceBuilder();
-            builder.Option = _option;
-            builder.OptionName = _optionDescription?.DescriptionName;
-            builder.Color = _color;
-            builder.OptionCaption = _optionDescription?.Caption;
-            builder.OptionDetails = _optionDescription?.Details;
-            var members = (Spanning<IMember>)_members;
-            for (int i = 0; i < members.Count; i++)
-            {
-                var member = members[i];
-                builder.AddMember(member.Clone());
-            }
-            return builder;
-        }
     }
 }

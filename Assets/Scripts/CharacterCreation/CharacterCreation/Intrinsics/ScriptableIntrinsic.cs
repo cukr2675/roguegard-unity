@@ -2,15 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-using System.Linq;
-
 namespace Roguegard.CharacterCreation
 {
     [System.Serializable]
     public class ScriptableIntrinsic : IReadOnlyIntrinsic
     {
-        [SerializeField] private ScriptField<IIntrinsicOption> _option;
-        public IIntrinsicOption Option => _option.Ref;
+        [SerializeField] private IntrinsicOption _option;
+        public IIntrinsicOption Option => _option;
 
         [SerializeField] private ScriptableOptionDescription _optionDescription = null;
 
@@ -38,25 +36,6 @@ namespace Roguegard.CharacterCreation
                 if (member.Source == source) return member;
             }
             throw new System.ArgumentException();
-        }
-
-        public IntrinsicBuilder ToBuilder()
-        {
-            var builder = new IntrinsicBuilder();
-            builder.Option = Option;
-            builder.OptionName = _optionDescription?.DescriptionName;
-            builder.OptionIcon = _optionDescription?.Icon;
-            builder.OptionColorIsEnabled = _optionDescription?.ColorIsEnabled ?? false;
-            builder.OptionColor = _optionDescription?.Color ?? default;
-            builder.OptionCaption = _optionDescription?.Caption;
-            builder.OptionDetails = _optionDescription?.Details;
-            var members = (Spanning<IMember>)_members;
-            for (int i = 0; i < members.Count; i++)
-            {
-                var member = members[i];
-                builder.AddMember(member.Clone());
-            }
-            return builder;
         }
     }
 }

@@ -2,10 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-using System.Linq;
-
 namespace Roguegard.CharacterCreation
 {
+    [ObjectFormer.Formable]
     public class AppearanceBuilderList //: IReadOnlyList<AppearanceBuilder>
     {
         private readonly List<AppearanceBuilder> builders = new List<AppearanceBuilder>();
@@ -14,10 +13,19 @@ namespace Roguegard.CharacterCreation
 
         public int Count => builders.Count;
 
-        public void SetValues(IEnumerable<ScriptableAppearance> appearances)
+        public void Add(AppearanceBuilder builder)
+        {
+            builders.Add(builder);
+        }
+
+        public void AddRange(IEnumerable<AppearanceBuilder> builders)
+        {
+            this.builders.AddRange(builders);
+        }
+
+        public void Clear()
         {
             builders.Clear();
-            builders.AddRange(appearances.Select(x => x.ToBuilder()));
         }
 
         public AppearanceBuilderList Clone()

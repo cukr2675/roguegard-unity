@@ -2,10 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-using System.Linq;
-
 namespace Roguegard.CharacterCreation
 {
+    [ObjectFormer.Formable]
     public class StartingItemBuilderTable //: IReadOnlyList<StartingItemBuilderList>
     {
         private readonly List<StartingItemBuilderList> table = new List<StartingItemBuilderList>();
@@ -14,15 +13,22 @@ namespace Roguegard.CharacterCreation
 
         public int Count => table.Count;
 
-        public void SetValues(IEnumerable<IEnumerable<ScriptableStartingItem>> startingItemTable)
+        public void Add(IEnumerable<StartingItemBuilder> builders)
+        {
+            table.Add(new StartingItemBuilderList(builders));
+        }
+
+        public void AddRange(IEnumerable<IEnumerable<StartingItemBuilder>> builderTable)
+        {
+            foreach (var builderList in builderTable)
+            {
+                Add(builderList);
+            }
+        }
+
+        public void Clear()
         {
             table.Clear();
-            foreach (var startingItemList in startingItemTable)
-            {
-                var list = new StartingItemBuilderList();
-                list.AddRange(startingItemList.Select(x => x.ToBuilder()));
-                table.Add(list);
-            }
         }
 
         private IEnumerator<StartingItemBuilderList> GetEnumerator() => table.GetEnumerator();

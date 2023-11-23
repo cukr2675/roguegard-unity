@@ -2,8 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-using System.Linq;
-
 namespace Roguegard.CharacterCreation
 {
     [System.Serializable]
@@ -60,27 +58,6 @@ namespace Roguegard.CharacterCreation
         RogueObj IRogueObjGenerator.CreateObj(RogueObj location, Vector2Int position, IRogueRandom random, StackOption stackOption)
         {
             return _option.CreateObj(this, location, position, random, stackOption);
-        }
-
-        public StartingItemBuilder ToBuilder()
-        {
-            var builder = new StartingItemBuilder();
-            builder.Option = _option;
-            builder.OptionName = _optionDescription?.DescriptionName;
-            builder.OptionIcon = _optionDescription?.Icon;
-            builder.OptionColorIsEnabled = _optionDescription?.ColorIsEnabled ?? false;
-            builder.OptionColor = _optionDescription?.Color ?? default;
-            builder.OptionCaption = _optionDescription?.Caption;
-            builder.OptionDetails = _optionDescription?.Details;
-            builder.Stack = _stack;
-            builder.GeneratorWeight = _generatorWeight;
-            var members = (Spanning<IMember>)_members;
-            for (int i = 0; i < members.Count; i++)
-            {
-                var member = members[i];
-                builder.AddMember(member.Clone());
-            }
-            return builder;
         }
     }
 }

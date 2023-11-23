@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace Roguegard.CharacterCreation
 {
+    [ObjectFormer.RequireRelationalComponent]
     public interface IRaceOption : IRogueDescription, IMemberableOption
     {
         /// <summary>

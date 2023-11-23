@@ -4,11 +4,13 @@ using UnityEngine;
 
 namespace Roguegard.CharacterCreation
 {
+    [ObjectFormer.Formable]
     public class IntrinsicBuilder : IReadOnlyIntrinsic
     {
         public IIntrinsicOption Option { get; set; }
         public string OptionName { get; set; }
-        public Sprite OptionIcon { get; set; }
+        //public Sprite OptionIcon { get; set; }
+        public Sprite OptionIcon { get => null; set { } }
         public bool OptionColorIsEnabled { get; set; }
         public Color OptionColor { get; set; }
         public string OptionCaption { get; set; }
@@ -22,9 +24,31 @@ namespace Roguegard.CharacterCreation
         public string Caption => OptionCaption ?? Option.Caption;
         public object Details => OptionDetails ?? Option.Details;
 
-        public void AddMember(IMember member)
+        public IntrinsicBuilder()
         {
-            members.Add(member);
+        }
+
+        public IntrinsicBuilder(IReadOnlyIntrinsic intrinsic)
+        {
+            Set(intrinsic);
+        }
+
+        public void Set(IReadOnlyIntrinsic intrinsic)
+        {
+            Option = intrinsic.Option;
+            OptionName = intrinsic.OptionName;
+            OptionIcon = intrinsic.OptionIcon;
+            OptionColorIsEnabled = intrinsic.OptionColorIsEnabled;
+            OptionColor = intrinsic.OptionColor;
+            OptionCaption = intrinsic.OptionCaption;
+            OptionDetails = intrinsic.OptionDetails;
+            members.Clear();
+            for (int i = 0; i < Option.MemberSources.Count; i++)
+            {
+                var memberSource = Option.MemberSources[i];
+                var member = intrinsic.GetMember(memberSource);
+                members.Add(member.Clone());
+            }
         }
 
         IReadOnlyMember IMemberable.GetMember(IMemberSource source)

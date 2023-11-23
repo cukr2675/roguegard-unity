@@ -6,6 +6,7 @@ using System.Linq;
 
 namespace Roguegard.CharacterCreation
 {
+    [ObjectFormer.Formable]
     public class IntrinsicBuilderList : IEnumerable<IntrinsicBuilder>//, IReadOnlyList<IntrinsicBuilder>
     {
         private readonly List<IntrinsicBuilder> builders = new List<IntrinsicBuilder>();
@@ -14,10 +15,19 @@ namespace Roguegard.CharacterCreation
 
         public int Count => builders.Count;
 
-        public void SetValues(IEnumerable<ScriptableIntrinsic> intrinsics)
+        public void Add(IntrinsicBuilder builder)
+        {
+            builders.Add(builder);
+        }
+
+        public void AddRange(IEnumerable<IntrinsicBuilder> builders)
+        {
+            this.builders.AddRange(builders);
+        }
+
+        public void Clear()
         {
             builders.Clear();
-            builders.AddRange(intrinsics.Select(x => x.ToBuilder()));
         }
 
         public IEnumerator<IntrinsicBuilder> GetEnumerator() => builders.GetEnumerator();

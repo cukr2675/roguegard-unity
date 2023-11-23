@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace Roguegard.CharacterCreation
 {
+    [ObjectFormer.Formable]
     public class AppearanceBuilder : IReadOnlyAppearance
     {
         public IAppearanceOption Option { get; set; }
@@ -12,16 +13,36 @@ namespace Roguegard.CharacterCreation
         public string OptionCaption { get; set; }
         public object OptionDetails { get; set; }
 
-        private List<IMember> members = new List<IMember>();
+        private readonly List<IMember> members = new List<IMember>();
 
         public string Name => Option.Name;
         public Sprite Icon => Option.Icon;
         public string Caption => Option.Caption;
         public object Details => Option.Details;
 
-        public void AddMember(IMember member)
+        public AppearanceBuilder()
         {
-            members.Add(member);
+        }
+
+        public AppearanceBuilder(IReadOnlyAppearance appearance)
+        {
+            Set(appearance);
+        }
+
+        public void Set(IReadOnlyAppearance appearance)
+        {
+            Option = appearance.Option;
+            OptionName = appearance.OptionName;
+            Color = appearance.Color;
+            OptionCaption = appearance.OptionCaption;
+            OptionDetails = appearance.OptionDetails;
+            members.Clear();
+            for (int i = 0; i < Option.MemberSources.Count; i++)
+            {
+                var memberSource = Option.MemberSources[i];
+                var member = appearance.GetMember(memberSource);
+                members.Add(member.Clone());
+            }
         }
 
         IReadOnlyMember IMemberable.GetMember(IMemberSource source)
@@ -35,14 +56,7 @@ namespace Roguegard.CharacterCreation
 
         public AppearanceBuilder Clone()
         {
-            var clone = new AppearanceBuilder();
-            clone.Option = Option;
-            clone.Color = Color;
-            foreach (var member in members)
-            {
-                clone.members.Add(member.Clone());
-            }
-            return clone;
+            return new AppearanceBuilder(this);
         }
     }
 }

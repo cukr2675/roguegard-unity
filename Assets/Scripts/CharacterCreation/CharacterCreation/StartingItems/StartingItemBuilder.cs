@@ -4,11 +4,13 @@ using UnityEngine;
 
 namespace Roguegard.CharacterCreation
 {
+    [ObjectFormer.Formable]
     public class StartingItemBuilder : IReadOnlyStartingItem, IWeightedRogueObjGenerator
     {
         public IStartingItemOption Option { get; set; }
         public string OptionName { get; set; }
-        public Sprite OptionIcon { get; set; }
+        //public Sprite OptionIcon { get; set; }
+        public Sprite OptionIcon { get => null; set { } }
         public bool OptionColorIsEnabled { get; set; }
         public Color OptionColor { get; set; }
         public string OptionCaption { get; set; }
@@ -30,9 +32,33 @@ namespace Roguegard.CharacterCreation
         float IWeightedRogueObjGenerator.Weight => GeneratorWeight;
         IRogueGender IReadOnlyStartingItem.OptionGender => null;
 
-        public void AddMember(IMember member)
+        public StartingItemBuilder()
         {
-            members.Add(member);
+        }
+
+        public StartingItemBuilder(IReadOnlyStartingItem startingItem)
+        {
+            Set(startingItem);
+        }
+
+        public void Set(IReadOnlyStartingItem startingItem)
+        {
+            Option = startingItem.Option;
+            OptionName = startingItem.OptionName;
+            OptionIcon = startingItem.OptionIcon;
+            OptionColorIsEnabled = startingItem.OptionColorIsEnabled;
+            OptionColor = startingItem.OptionColor;
+            OptionCaption = startingItem.OptionCaption;
+            OptionDetails = startingItem.OptionDetails;
+            GeneratorWeight = startingItem.GeneratorWeight;
+            Stack = startingItem.Stack;
+            members.Clear();
+            for (int i = 0; i < Option.MemberSources.Count; i++)
+            {
+                var memberSource = Option.MemberSources[i];
+                var member = startingItem.GetMember(memberSource);
+                members.Add(member.Clone());
+            }
         }
 
         RogueObj IRogueObjGenerator.CreateObj(RogueObj location, Vector2Int position, IRogueRandom random, StackOption stackOption)

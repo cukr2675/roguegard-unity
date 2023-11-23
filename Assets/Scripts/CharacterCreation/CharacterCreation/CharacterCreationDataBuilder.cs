@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace Roguegard.CharacterCreation
 {
+    [ObjectFormer.Formable]
     public class CharacterCreationDataBuilder : ICharacterCreationData
     {
         public string Name { get; set; }
@@ -17,7 +18,7 @@ namespace Roguegard.CharacterCreation
         public RaceBuilder Race { get; set; }
         public AppearanceBuilderList Appearances { get; }
         public IntrinsicBuilderList Intrinsics { get; }
-        public StartingItemBuilderTable StartingItems { get; }
+        public StartingItemBuilderTable StartingItemTable { get; }
 
         [System.NonSerialized] private SortedIntrinsicList sortedIntrinsics;
         [System.NonSerialized] private GrowingInfoSetTable growingInfoSets;
@@ -35,13 +36,13 @@ namespace Roguegard.CharacterCreation
                 return sortedIntrinsics;
             }
         }
-        Spanning<IWeightedRogueObjGeneratorList> ICharacterCreationData.StartingItemTable => StartingItems;
+        Spanning<IWeightedRogueObjGeneratorList> ICharacterCreationData.StartingItemTable => StartingItemTable;
 
         public CharacterCreationDataBuilder()
         {
             Appearances = new AppearanceBuilderList();
             Intrinsics = new IntrinsicBuilderList();
-            StartingItems = new StartingItemBuilderTable();
+            StartingItemTable = new StartingItemBuilderTable();
         }
 
         public void UpdateData()
