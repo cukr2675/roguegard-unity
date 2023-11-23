@@ -145,11 +145,11 @@ MonoBehaviour:
     - rid: 962668970976739406
       type: {class: AlphabetTypeMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
       data:
-        _typeIndex: 2
+        _typeIndex: 1
     - rid: 962668970976739407
       type: {class: AlphabetTypeMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
       data:
-        _typeIndex: 2
+        _typeIndex: 1
     - rid: 962668970976739408
       type: {class: SingleItemMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
       data:
@@ -165,11 +165,11 @@ MonoBehaviour:
     - rid: 962668970976739411
       type: {class: AlphabetTypeMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
       data:
-        _typeIndex: 2
+        _typeIndex: 1
     - rid: 962668970976739412
       type: {class: AlphabetTypeMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
       data:
-        _typeIndex: 2
+        _typeIndex: 1
     - rid: 962668970976739413
       type: {class: SingleItemMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
       data:

@@ -154,11 +154,11 @@ MonoBehaviour:
     - rid: 3586031305728196689
       type: {class: AlphabetTypeMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
       data:
-        _typeIndex: 2
+        _typeIndex: 1
     - rid: 3586031305728196690
       type: {class: AlphabetTypeMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
       data:
-        _typeIndex: 2
+        _typeIndex: 1
     - rid: 3586031305728196707
       type: {class: EquipMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
       data:
