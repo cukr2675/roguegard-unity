@@ -75,7 +75,7 @@ namespace ObjectFormer
 
         private static bool TryCreate(FieldInfo fieldInfo, out FormerMember member)
         {
-            if (fieldInfo.IsStatic || fieldInfo.IsNotSerialized)
+            if (fieldInfo.IsStatic || fieldInfo.IsNotSerialized || fieldInfo.IsDefined(typeof(IgnoreMemberAttribute), false))
             {
                 member = default;
                 return false;
