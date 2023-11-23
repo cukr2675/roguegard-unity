@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Roguegard.CharacterCreation
 {
-    public abstract class ToolAbilityIntrinsicOption : ToolIntrinsicOption
+    public abstract class ToolAbilityIntrinsicOptionScript : ToolIntrinsicOptionScript
     {
         protected abstract class AbilitySortedIntrinsic : ISortedIntrinsic
         {

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Roguegard.CharacterCreation
 {
-    public abstract class PartyAbilityIntrinsicOption : BaseIntrinsicOption
+    public abstract class PartyAbilityIntrinsicOptionScript : ScriptIntrinsicOption.Script
     {
         protected abstract class AbilitySortedIntrinsic : ISortedIntrinsic, IStatusEffect
         {

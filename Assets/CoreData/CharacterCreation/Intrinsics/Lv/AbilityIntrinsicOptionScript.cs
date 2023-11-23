@@ -4,9 +4,10 @@ using UnityEngine;
 
 namespace Roguegard.CharacterCreation
 {
-    public abstract class AbilityIntrinsicOption : BaseIntrinsicOption
+    public abstract class AbilityIntrinsicOptionScript : ScriptIntrinsicOption.Script
     {
-        protected sealed override ISortedIntrinsic CreateSortedIntrinsic(IReadOnlyIntrinsic intrinsic, ICharacterCreationData characterCreationData, int lv)
+        public override ISortedIntrinsic CreateSortedIntrinsic(
+            ScriptIntrinsicOption parent, IReadOnlyIntrinsic intrinsic, ICharacterCreationData characterCreationData, int lv)
         {
             return new AbilitySortedIntrinsic(this, lv);
         }
@@ -23,10 +24,10 @@ namespace Roguegard.CharacterCreation
 
         private class AbilitySortedIntrinsic : ISortedIntrinsic
         {
-            private readonly AbilityIntrinsicOption option;
+            private readonly AbilityIntrinsicOptionScript option;
             public int Lv { get; }
 
-            public AbilitySortedIntrinsic(AbilityIntrinsicOption option, int lv)
+            public AbilitySortedIntrinsic(AbilityIntrinsicOptionScript option, int lv)
             {
                 this.option = option;
                 Lv = lv;
