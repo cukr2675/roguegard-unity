@@ -5,6 +5,7 @@ using UnityEngine;
 namespace Roguegard.CharacterCreation
 {
     [CreateAssetMenu(menuName = "RoguegardData/CharacterCreation/Race/StandardRaceOption")]
+    [ObjectFormer.Referable]
     public class StandardRaceOption : BaseRaceOption, IStandardRaceOption
     {
         [SerializeField] private int _minSize = 1;

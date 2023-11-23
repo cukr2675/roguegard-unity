@@ -51,25 +51,5 @@ namespace Roguegard.CharacterCreation
             }
             throw new System.ArgumentException();
         }
-
-        public RaceBuilder ToBuilder()
-        {
-            var builder = new RaceBuilder();
-            builder.Option = _option;
-            builder.OptionName = _optionDescription?.DescriptionName;
-            builder.BodyColor = _bodyColor;
-            builder.OptionCaption = _optionDescription?.Caption;
-            builder.OptionDetails = _optionDescription?.Details;
-            builder.Gender = _gender;
-            builder.HPName = _hpName;
-            builder.MPName = _mpName;
-            var members = (Spanning<IMember>)_members;
-            for (int i = 0; i < members.Count; i++)
-            {
-                var member = members[i];
-                builder.AddMember(member.Clone());
-            }
-            return builder;
-        }
     }
 }
