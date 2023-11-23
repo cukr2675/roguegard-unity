@@ -65,7 +65,7 @@ namespace RoguegardUnity
                 return device;
             }
 
-            public Device LoadGame(Stream stream)
+            public Device LoadGame(Stream stream, string name)
             {
                 throw new RogueTestException();
             }

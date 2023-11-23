@@ -11,6 +11,6 @@ namespace Roguegard.Device
     {
         T NewGame();
 
-        T LoadGame(Stream stream);
+        T LoadGame(Stream stream, string name);
     }
 }

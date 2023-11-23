@@ -82,10 +82,10 @@ namespace RoguegardUnity
             return device;
         }
 
-        public void SaveGame(Stream stream, StandardRogueDevice device)
+        public void SaveGame(Stream stream, string name, StandardRogueDevice device)
         {
             using var archive = new ZipArchive(stream, ZipArchiveMode.Create, true);
-            var entry = archive.CreateEntry("main.json");
+            var entry = archive.CreateEntry($"{name}.json");
             using var streamWriter = new StreamWriter(entry.Open());
             using var writer = new JsonTextWriter(streamWriter);
 
@@ -104,10 +104,10 @@ namespace RoguegardUnity
             writer.WriteEndObject();
         }
 
-        public StandardRogueDevice LoadGame(Stream stream)
+        public StandardRogueDevice LoadGame(Stream stream, string name)
         {
             using var archive = new ZipArchive(stream, ZipArchiveMode.Read, true);
-            var entry = archive.GetEntry("main.json");
+            var entry = archive.GetEntry($"{name}.json");
             using var streamReader = new StreamReader(entry.Open());
             using var reader = new JsonTextReader(streamReader);
 

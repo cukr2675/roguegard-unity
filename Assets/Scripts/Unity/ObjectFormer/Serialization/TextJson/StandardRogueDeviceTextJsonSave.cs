@@ -17,7 +17,7 @@ namespace RoguegardUnity
 {
     internal class StandardRogueDeviceTextJsonSave : IRogueDeviceSave<StandardRogueDevice>
     {
-        public string Name => "StandardRogueDevice";
+        public string TypeName => "StandardRogueDevice";
 
         public StandardRogueDevice NewGame()
         {
@@ -33,7 +33,7 @@ namespace RoguegardUnity
             return device;
         }
 
-        public void SaveGame(Stream stream, StandardRogueDevice device)
+        public void SaveGame(Stream stream, string name, StandardRogueDevice device)
         {
             var save = new SaveClass();
             save.Data = device;
@@ -42,7 +42,7 @@ namespace RoguegardUnity
             config.Serialize(stream, save);
         }
 
-        public StandardRogueDevice LoadGame(Stream stream)
+        public StandardRogueDevice LoadGame(Stream stream, string name)
         {
             using (var streamReader = new StreamReader(stream))
             {
@@ -50,9 +50,8 @@ namespace RoguegardUnity
 
                 var jObj = JObject.Load(reader);
 
-                var name = jObj["name"].ToString();
                 var typeName = jObj["type"].ToString();
-                if (typeName != Name) throw new RogueException($"type ({typeName}) が {Name} と一致しません。");
+                if (typeName != TypeName) throw new RogueException($"type ({typeName}) が {TypeName} と一致しません。");
             }
             stream.Position = 0;
 

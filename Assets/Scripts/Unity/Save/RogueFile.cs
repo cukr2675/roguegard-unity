@@ -65,5 +65,10 @@ namespace RoguegardUnity
             using var stream = handle.Result;
             callback.Invoke(stream);
         }
+
+        public static string GetName(string path)
+        {
+            return Path.GetFileNameWithoutExtension(path);
+        }
     }
 }

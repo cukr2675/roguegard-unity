@@ -492,9 +492,10 @@ namespace RoguegardUnity
                 view.ReadyView(Player.Location);
             }
 
+            var name = RogueFile.GetName(path);
             var stream = RogueFile.Create(path);
             var save = new StandardRogueDeviceSave();
-            save.SaveGame(stream, this);
+            save.SaveGame(stream, name, this);
             stream.Save(() =>
             {
                 root?.Done();
@@ -521,8 +522,9 @@ namespace RoguegardUnity
                 AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
                 RogueFile.OpenRead(path, stream =>
                 {
+                    var name = RogueFile.GetName(path);
                     var save = new StandardRogueDeviceSave();
-                    var loadDevice = save.LoadGame(stream);
+                    var loadDevice = save.LoadGame(stream, name);
                     stream.Close();
                     Reload(loadDevice);
                 });

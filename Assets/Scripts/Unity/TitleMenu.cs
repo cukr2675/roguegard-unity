@@ -141,8 +141,9 @@ namespace RoguegardUnity
             {
                 RogueFile.OpenRead(path, stream =>
                 {
+                    var name = RogueFile.GetName(path);
                     var save = new StandardRogueDeviceSave();
-                    var device = RogueDevice.LoadGame(save, stream);
+                    var device = RogueDevice.LoadGame(save, stream, name);
                     stream.Close();
                     parent.OpenDevice(device);
                 });
