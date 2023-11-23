@@ -6,32 +6,26 @@ using Roguegard.Extensions;
 
 namespace Roguegard.CharacterCreation
 {
-    public class BeamSlashSkill : BaseIntrinsicOption
+    public class BeamSlashSkill : MPSkillIntrinsicOptionScript
     {
-        private const string _name = ":BeamSlash";
-        protected override float Cost => 2f;
-        protected override int Lv => 1;
-
-        public override string Name => _name;
-
-        protected override ISortedIntrinsic CreateSortedIntrinsic(IReadOnlyIntrinsic intrinsic, ICharacterCreationData characterCreationData, int lv)
+        public override ISortedIntrinsic CreateSortedIntrinsic(
+            ScriptIntrinsicOption parent, IReadOnlyIntrinsic intrinsic, ICharacterCreationData characterCreationData, int lv)
         {
-            return new SortedIntrinsic(lv);
+            return new SortedIntrinsic(parent, lv);
         }
 
         [ObjectFormer.Formable]
-        private class SortedIntrinsic : SortedIntrinsicMPSkill
+        private class SortedIntrinsic : MPSkillSortedIntrinsic<BeamSlashSkill>
         {
-            public override string Name => _name;
             public override IRogueMethodTarget Target => ForEnemyRogueMethodTarget.Instance;
             public override IRogueMethodRange Range => FacingAnd2FlankingRogueMethodRange.Instance;
             public override int RequiredMP => 2;
 
             private static IBoneMotion effect;
 
-            private SortedIntrinsic() : base(0) { }
+            private SortedIntrinsic() : base(null, 0) { }
 
-            public SortedIntrinsic(int lv) : base(lv) { }
+            public SortedIntrinsic(ScriptIntrinsicOption parent, int lv) : base(parent, lv) { }
 
             protected override bool Activate(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
             {

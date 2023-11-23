@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: LittleDevil
   m_EditorClassIdentifier: 
   _overridesCost: 0
-  _cost: 1
+  _cost: 2
   _costIsUnknown: 0
   _race:
     _name: 
@@ -132,10 +132,7 @@ MonoBehaviour:
     _members:
       _items: []
   _intrinsics:
-  - _option:
-      _script: {fileID: 11500000, guid: 34c637711e8573e4b86be0e46a315500, type: 3}
-      _ref:
-        rid: 962668970976739350
+  - _option: {fileID: 11400000, guid: 99f0b3ca485a2dc42bc70ed5a3c52e72, type: 2}
     _optionDescription: {fileID: 0}
     _members:
       _items: []
@@ -145,10 +142,6 @@ MonoBehaviour:
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
-    - rid: 962668970976739350
-      type: {class: EmberSkill, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
-      data:
-        _assemblyReflectionAssetDummy: 
     - rid: 962668970976739406
       type: {class: AlphabetTypeMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
       data:

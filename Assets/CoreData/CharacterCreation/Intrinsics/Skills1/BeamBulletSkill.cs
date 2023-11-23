@@ -6,30 +6,24 @@ using Roguegard.Extensions;
 
 namespace Roguegard.CharacterCreation
 {
-    public class BeamBulletSkill : BaseIntrinsicOption
+    public class BeamBulletSkill : MPSkillIntrinsicOptionScript
     {
-        private const string _name = ":BeamBullet";
-        protected override float Cost => 2f;
-        protected override int Lv => 1;
-
-        public override string Name => _name;
-
-        protected override ISortedIntrinsic CreateSortedIntrinsic(IReadOnlyIntrinsic intrinsic, ICharacterCreationData characterCreationData, int lv)
+        public override ISortedIntrinsic CreateSortedIntrinsic(
+            ScriptIntrinsicOption parent, IReadOnlyIntrinsic intrinsic, ICharacterCreationData characterCreationData, int lv)
         {
-            return new SortedIntrinsic(lv);
+            return new SortedIntrinsic(parent, lv);
         }
 
         [ObjectFormer.Formable]
-        private class SortedIntrinsic : SortedIntrinsicMPSkill
+        private class SortedIntrinsic : MPSkillSortedIntrinsic<BeamBulletSkill>
         {
-            public override string Name => _name;
             public override IRogueMethodTarget Target => ForEnemyRogueMethodTarget.Instance;
             public override IRogueMethodRange Range => LineOfSight10RogueMethodRange.Instance;
             public override int RequiredMP => 2;
 
-            private SortedIntrinsic() : base(0) { }
+            private SortedIntrinsic() : base(null, 0) { }
 
-            public SortedIntrinsic(int lv) : base(lv) { }
+            public SortedIntrinsic(ScriptIntrinsicOption parent, int lv) : base(parent, lv) { }
 
             protected override bool Activate(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
             {

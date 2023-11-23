@@ -16,15 +16,15 @@ MonoBehaviour:
   m_TableCollectionNameGuidString: 6c37925a1dd53c34e86c29d66acefec5
   m_Entries:
   - m_Id: 12030447616
-    m_Key: SpellCharge
+    m_Key: SpellChargeSkill
     m_Metadata:
       m_Items: []
   - m_Id: 96507924480
-    m_Key: SpellCharge::c
+    m_Key: SpellChargeSkill::c
     m_Metadata:
       m_Items: []
   - m_Id: 171573383168
-    m_Key: SpellCharge::d
+    m_Key: SpellChargeSkill::d
     m_Metadata:
       m_Items: []
   - m_Id: 1497774559232
@@ -36,15 +36,15 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 2651594035200
-    m_Key: BeamSlash
+    m_Key: BeamSlashSkill
     m_Metadata:
       m_Items: []
   - m_Id: 2732095311872
-    m_Key: BeamSlash::c
+    m_Key: BeamSlashSkill::c
     m_Metadata:
       m_Items: []
   - m_Id: 2752798396416
-    m_Key: BeamSlash::d
+    m_Key: BeamSlashSkill::d
     m_Metadata:
       m_Items: []
   - m_Id: 2766555713536
@@ -52,63 +52,63 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 3177614282752
-    m_Key: BeamBullet
+    m_Key: BeamBulletSkill
     m_Metadata:
       m_Items: []
   - m_Id: 3263555571712
-    m_Key: BeamBullet::c
+    m_Key: BeamBulletSkill::c
     m_Metadata:
       m_Items: []
   - m_Id: 3274565619712
-    m_Key: BeamBullet::d
+    m_Key: BeamBulletSkill::d
     m_Metadata:
       m_Items: []
   - m_Id: 8099508391936
-    m_Key: Multishot3
+    m_Key: Multishot3Skill
     m_Metadata:
       m_Items: []
   - m_Id: 8268555620352
-    m_Key: Multishot3::c
+    m_Key: Multishot3Skill::c
     m_Metadata:
       m_Items: []
   - m_Id: 8284842102784
-    m_Key: Multishot3::d
+    m_Key: Multishot3Skill::d
     m_Metadata:
       m_Items: []
   - m_Id: 79758114295808
-    m_Key: Ember
+    m_Key: EmberSkill
     m_Metadata:
       m_Items: []
   - m_Id: 79816499007488
-    m_Key: Ember::c
+    m_Key: EmberSkill::c
     m_Metadata:
       m_Items: []
   - m_Id: 79833142005760
-    m_Key: Ember::d
+    m_Key: EmberSkill::d
     m_Metadata:
       m_Items: []
   - m_Id: 79844751839232
-    m_Key: Poison
+    m_Key: PoisonSkill
     m_Metadata:
       m_Items: []
   - m_Id: 79894282375168
-    m_Key: Poison::c
+    m_Key: PoisonSkill::c
     m_Metadata:
       m_Items: []
   - m_Id: 79904587780096
-    m_Key: Poison::d
+    m_Key: PoisonSkill::d
     m_Metadata:
       m_Items: []
   - m_Id: 157311139188736
-    m_Key: ThronsTrap
+    m_Key: ThronsTrapSkill
     m_Metadata:
       m_Items: []
   - m_Id: 157376205426688
-    m_Key: ThronsTrap::c
+    m_Key: ThronsTrapSkill::c
     m_Metadata:
       m_Items: []
   - m_Id: 157393183969280
-    m_Key: ThronsTrap::d
+    m_Key: ThronsTrapSkill::d
     m_Metadata:
       m_Items: []
   - m_Id: 157403552288768
@@ -116,15 +116,27 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 10267297274007552
-    m_Key: PowerSlash
+    m_Key: PowerSlashSkill
     m_Metadata:
       m_Items: []
   - m_Id: 10267393705250816
-    m_Key: PowerSlash::c
+    m_Key: PowerSlashSkill::c
     m_Metadata:
       m_Items: []
   - m_Id: 10267403138240512
-    m_Key: PowerSlash::d
+    m_Key: PowerSlashSkill::d
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13447604882419712
+    m_Key: PaintTrapSkill
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13447693289959424
+    m_Key: PaintTrapSkill::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13447703561809920
+    m_Key: PaintTrapSkill::d
     m_Metadata:
       m_Items: []
   m_Metadata:

@@ -50,6 +50,10 @@ MonoBehaviour:
     m_Localized: PowerSlash
     m_Metadata:
       m_Items: []
+  - m_Id: 13447604882419712
+    m_Localized: PaintTrap
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

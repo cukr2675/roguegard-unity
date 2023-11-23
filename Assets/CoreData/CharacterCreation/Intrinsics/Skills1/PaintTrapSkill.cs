@@ -2,34 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-using Roguegard.Extensions;
-
 namespace Roguegard.CharacterCreation
 {
-    public class PaintTrapSkill : BaseIntrinsicOption
+    public class PaintTrapSkill : MPSkillIntrinsicOptionScript
     {
-        private const string _name = ":PaintTrap";
-        protected override float Cost => 2f;
-        protected override int Lv => 1;
-
-        public override string Name => _name;
-
-        protected override ISortedIntrinsic CreateSortedIntrinsic(IReadOnlyIntrinsic intrinsic, ICharacterCreationData characterCreationData, int lv)
+        public override ISortedIntrinsic CreateSortedIntrinsic(
+            ScriptIntrinsicOption parent, IReadOnlyIntrinsic intrinsic, ICharacterCreationData characterCreationData, int lv)
         {
-            return new SortedIntrinsic(lv);
+            return new SortedIntrinsic(parent, lv);
         }
 
         [ObjectFormer.Formable]
-        private class SortedIntrinsic : SortedIntrinsicMPSkill
+        private class SortedIntrinsic : MPSkillSortedIntrinsic<PaintTrapSkill>
         {
-            public override string Name => _name;
             public override IRogueMethodTarget Target => null;
             public override IRogueMethodRange Range => null;
             public override int RequiredMP => 1;
 
-            private SortedIntrinsic() : base(0) { }
+            private SortedIntrinsic() : base(null, 0) { }
 
-            public SortedIntrinsic(int lv) : base(lv) { }
+            public SortedIntrinsic(ScriptIntrinsicOption parent, int lv) : base(parent, lv) { }
 
             protected override bool Activate(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
             {

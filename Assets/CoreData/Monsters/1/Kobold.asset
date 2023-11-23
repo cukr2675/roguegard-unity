@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Kobold
   m_EditorClassIdentifier: 
   _overridesCost: 0
-  _cost: 1
+  _cost: 2
   _costIsUnknown: 0
   _race:
     _name: 
@@ -153,10 +153,7 @@ MonoBehaviour:
       _items:
       - rid: 962669199347417146
   _intrinsics:
-  - _option:
-      _script: {fileID: 11500000, guid: ae6291be4e91cb54fad7fa0af1f23622, type: 3}
-      _ref:
-        rid: 962668970976739349
+  - _option: {fileID: 11400000, guid: c48e43c498960fa4293409cbee60fd85, type: 2}
     _optionDescription: {fileID: 0}
     _members:
       _items: []
@@ -166,10 +163,6 @@ MonoBehaviour:
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
-    - rid: 962668970976739349
-      type: {class: PoisonSkill, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
-      data:
-        _assemblyReflectionAssetDummy: 
     - rid: 962669199347417143
       type: {class: AlphabetTypeMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
       data:
