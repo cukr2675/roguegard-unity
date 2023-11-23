@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using UnityEngine.Audio;
+using Roguegard;
+using Roguegard.CharacterCreation;
 
 namespace RoguegardUnity
 {
@@ -27,11 +29,25 @@ namespace RoguegardUnity
 
         public void InstantiateTitleMenu()
         {
+            var assetTable = RoguegardSettings.GetAssetTable("Core");
+            var characterCreationDatabase = new CharacterCreationDatabase();
+            foreach (var asset in assetTable.Values)
+            {
+                if (asset is IAppearanceOption appearanceOption)
+                {
+                    characterCreationDatabase.AddAppearanceOption(appearanceOption);
+                }
+                else if (asset is IIntrinsicOption intrinsicOption)
+                {
+                    characterCreationDatabase.AddIntrinsicOption(intrinsicOption);
+                }
+            }
+
             var menu = Instantiate(_menuPrefab);
             var spriteRendererPool = Instantiate(_spriteRendererPoolPrefab);
             menu.Initialize(
                 spriteRendererPool, _tilemapRendererPrefab, _touchControllerPrefab,
-                _soundTable, _audioMixer, _seAudioSourcePrefab, _bgmAudioSourcePrefab, _titleLogo);
+                _soundTable, _audioMixer, _seAudioSourcePrefab, _bgmAudioSourcePrefab, characterCreationDatabase, _titleLogo);
         }
     }
 }

@@ -123,7 +123,6 @@ MonoBehaviour:
     _optionDescription: {fileID: 0}
     _generatorWeight: 1
     _stack: 1
-    _isIntrinsicItem: 0
     _members:
       _items: []
   _doorR:
@@ -131,7 +130,6 @@ MonoBehaviour:
     _optionDescription: {fileID: 0}
     _generatorWeight: 1
     _stack: 1
-    _isIntrinsicItem: 0
     _members:
       _items: []
   _partyBoard:
@@ -139,7 +137,6 @@ MonoBehaviour:
     _optionDescription: {fileID: 0}
     _generatorWeight: 1
     _stack: 1
-    _isIntrinsicItem: 0
     _members:
       _items: []
   _storage:
@@ -147,7 +144,6 @@ MonoBehaviour:
     _optionDescription: {fileID: 0}
     _generatorWeight: 1
     _stack: 1
-    _isIntrinsicItem: 0
     _members:
       _items: []
   references:
@@ -164,6 +160,5 @@ MonoBehaviour:
           _optionDescription: {fileID: 0}
           _generatorWeight: 1
           _stack: 1
-          _isIntrinsicItem: 0
           _members:
             _items: []

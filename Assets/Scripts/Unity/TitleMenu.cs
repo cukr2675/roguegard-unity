@@ -39,6 +39,7 @@ namespace RoguegardUnity
         private AudioMixer audioMixer;
         private AudioSource seAudioSourcePrefab;
         private AudioSource bgmAudioSourcePrefab;
+        private CharacterCreationDatabase characterCreationDatabase;
 
         private IModelsMenuChoice[] titleMenuModels;
 
@@ -54,6 +55,7 @@ namespace RoguegardUnity
             AudioMixer audioMixer,
             AudioSource seAudioSourcePrefab,
             AudioSource bgmAudioSourcePrefab,
+            CharacterCreationDatabase characterCreationDatabase,
             Sprite logo)
         {
             this.spriteRendererPool = spriteRendererPool;
@@ -63,6 +65,7 @@ namespace RoguegardUnity
             this.audioMixer = audioMixer;
             this.seAudioSourcePrefab = seAudioSourcePrefab;
             this.bgmAudioSourcePrefab = bgmAudioSourcePrefab;
+            this.characterCreationDatabase = characterCreationDatabase;
             DontDestroyOnLoad(spriteRendererPool.gameObject);
 
             _logo.sprite = logo;
@@ -109,7 +112,7 @@ namespace RoguegardUnity
 
             device.Open(
                 spriteRendererPool, tilemapRendererPrefab, touchControllerPrefab,
-                soundTable, audioMixer, seAudioSourcePrefab, bgmAudioSourcePrefab);
+                soundTable, audioMixer, seAudioSourcePrefab, bgmAudioSourcePrefab, characterCreationDatabase);
         }
 
         private class StartGameChoice : IModelsMenuChoice

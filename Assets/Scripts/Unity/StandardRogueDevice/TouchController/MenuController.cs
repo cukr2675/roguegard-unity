@@ -29,6 +29,7 @@ namespace RoguegardUnity
         [SerializeField] private SummaryMenuView _summaryMenu = null;
         [SerializeField] private DetailsMenuView _detailsMenu = null;
         [SerializeField] private OptionsMenuView _optionsMenu = null;
+        [SerializeField] private CharacterCreationMenuView _characterCreationMenu = null;
         [SerializeField] private ModelsMenuView _talkChoicesMenu = null;
         [SerializeField] private StatsWindow _statsWindow = null;
 
@@ -61,7 +62,7 @@ namespace RoguegardUnity
 
         public StatsWindow Stats => _statsWindow;
 
-        internal void Initialize(SoundController soundController)
+        internal void Initialize(SoundController soundController, CharacterCreationDatabase characterCreationDatabase)
         {
             this.soundController = soundController;
             waitTimer = new WaitTimer();
@@ -86,6 +87,7 @@ namespace RoguegardUnity
             _summaryMenu.Initialize();
             _detailsMenu.Initialize();
             _optionsMenu.Initialize();
+            _characterCreationMenu.Initialize(characterCreationDatabase);
             var scrollSensitivity = 64f;
             SetScrollSensitivity(scrollSensitivity);
 
@@ -97,6 +99,7 @@ namespace RoguegardUnity
             table.Add(DeviceKw.MenuSummary, _summaryMenu);
             table.Add(DeviceKw.MenuDetails, _detailsMenu);
             table.Add(DeviceKw.MenuOptions, _optionsMenu);
+            table.Add(DeviceKw.MenuCharacterCreation, _characterCreationMenu);
             table.Add(DeviceKw.MenuLog, _messageController.LogView);
             table.Add(DeviceKw.MenuTalk, _messageController.TalkView);
             table.Add(DeviceKw.MenuTalkChoices, _talkChoicesMenu);

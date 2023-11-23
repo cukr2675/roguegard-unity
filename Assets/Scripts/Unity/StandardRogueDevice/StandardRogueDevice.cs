@@ -77,7 +77,8 @@ namespace RoguegardUnity
             SoundTable soundTable,
             AudioMixer audioMixer,
             AudioSource seAudioSourcePrefab,
-            AudioSource bgmAudioSourcePrefab)
+            AudioSource bgmAudioSourcePrefab,
+            CharacterCreationDatabase characterCreationDatabase)
         {
             if (!Player.TryGet<ViewInfo>(out _))
             {
@@ -98,7 +99,7 @@ namespace RoguegardUnity
             soundController.Open(parent, seAudioSourcePrefab, soundTable.ToTable());
 
             touchController = Object.Instantiate(touchControllerPrefab, parent);
-            touchController.Initialize(tilemapGrid.Tilemap, soundController);
+            touchController.Initialize(tilemapGrid.Tilemap, soundController, characterCreationDatabase);
             touchController.GetInfo(out var menuController, out openChestMenu);
 
             Options.Initialize(menuController, audioMixer);

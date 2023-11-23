@@ -1,0 +1,129 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9886e2920cfeb7440abe81ba5bf4aa7f, type: 3}
+  m_Name: CoreAppearanceOptionTable
+  m_EditorClassIdentifier: 
+  _namespace: Core
+  _filter: t:AppearanceOption
+  _targetFolders:
+  - {fileID: 102900000, guid: 49a475dab3f1bb94ab754c0c58f2ca86, type: 3}
+  _items:
+  - _key: Core.ArmMarkLine
+    _asset: {fileID: 11400000, guid: 3d302c6c5efbbfd49bf05c65bece9682, type: 2}
+  - _key: Core.EquipmentAppearanceOption
+    _asset: {fileID: 11400000, guid: 4ed202ff619b0b744a4f0be7bca8218f, type: 2}
+  - _key: Core.Eye1L
+    _asset: {fileID: 11400000, guid: c162d092af22ff747bbe2050d4785887, type: 2}
+  - _key: Core.Eye1R
+    _asset: {fileID: 11400000, guid: 0f38827a7650e384ab5264732dc5184c, type: 2}
+  - _key: Core.Eye2L
+    _asset: {fileID: 11400000, guid: 54cdab0d11c6db542b51520f5f22bcb3, type: 2}
+  - _key: Core.Eye2R
+    _asset: {fileID: 11400000, guid: 3a926326bb517db4fbedf45fb3388617, type: 2}
+  - _key: Core.Eye3L
+    _asset: {fileID: 11400000, guid: ad25def6e15c6a3478d6c76f941c0e1d, type: 2}
+  - _key: Core.Eye3R
+    _asset: {fileID: 11400000, guid: 10f1ae5e8ee7f6d4fa343c7fc85cceef, type: 2}
+  - _key: Core.Eye4L
+    _asset: {fileID: 11400000, guid: 66b1c4ac9a9cdf041be31582ae9d5fb2, type: 2}
+  - _key: Core.Eye4R
+    _asset: {fileID: 11400000, guid: 3a6de7d6f64092a41a43c92bb56dc4db, type: 2}
+  - _key: Core.Eye5L
+    _asset: {fileID: 11400000, guid: 0e5cc3c508cbed94087bb3ab71fad0fb, type: 2}
+  - _key: Core.Eye5R
+    _asset: {fileID: 11400000, guid: 1dfbbcf68f52c644686653c10f8ffe68, type: 2}
+  - _key: Core.Eye6L
+    _asset: {fileID: 11400000, guid: a31dd3f1d51ab4b4d8e85aebce13ddd2, type: 2}
+  - _key: Core.Eye6R
+    _asset: {fileID: 11400000, guid: 4ecc6d494e1668846bf1c6d8a003c4ae, type: 2}
+  - _key: Core.Eye7L
+    _asset: {fileID: 11400000, guid: ee6d4c25279c1a34c886f3574d2f1cf8, type: 2}
+  - _key: Core.Eye7R
+    _asset: {fileID: 11400000, guid: cb3c9d85364e691488adf3495ad7b1e2, type: 2}
+  - _key: Core.Eye8L
+    _asset: {fileID: 11400000, guid: ee64ff2f88d3b9c46967b4a7a3954ad3, type: 2}
+  - _key: Core.Eye8R
+    _asset: {fileID: 11400000, guid: 2d737e0578e57cc469da7524f6fd3ae3, type: 2}
+  - _key: Core.Eye9L
+    _asset: {fileID: 11400000, guid: 2c24c1b157daaae48a8b7a2081bbc467, type: 2}
+  - _key: Core.Eye9R
+    _asset: {fileID: 11400000, guid: d367d2157f0018044837911789ff05ea, type: 2}
+  - _key: Core.Eye10L
+    _asset: {fileID: 11400000, guid: 88337cefd0eb3e54fbdc218b35073223, type: 2}
+  - _key: Core.Eye10R
+    _asset: {fileID: 11400000, guid: 192a81db2fc87e741b2eb68e39d4b70f, type: 2}
+  - _key: Core.Eye11L
+    _asset: {fileID: 11400000, guid: 88a25a29b188e584ba0b84d7f4168941, type: 2}
+  - _key: Core.Eye11R
+    _asset: {fileID: 11400000, guid: 33cfe99c27b515b49b56a059e04fa8b4, type: 2}
+  - _key: Core.Eye12L
+    _asset: {fileID: 11400000, guid: ae90940fc72bfbe46911d535067729eb, type: 2}
+  - _key: Core.Eye12R
+    _asset: {fileID: 11400000, guid: bd868524529877040bbfdab95e1a11ce, type: 2}
+  - _key: Core.Eye13L
+    _asset: {fileID: 11400000, guid: a4f401d27b6890f4f994563b25cde01f, type: 2}
+  - _key: Core.Eye13R
+    _asset: {fileID: 11400000, guid: 7b54a37ea7716c04a9a9cae4351d7efd, type: 2}
+  - _key: Core.Eye14L
+    _asset: {fileID: 11400000, guid: 09c0df4c9132b234692d42f4a0a6543b, type: 2}
+  - _key: Core.Eye14R
+    _asset: {fileID: 11400000, guid: 02240b5b50a7da84c8878036c7edc7df, type: 2}
+  - _key: Core.Eye15L
+    _asset: {fileID: 11400000, guid: 46dcc20d23526124fbb6bd9a04fe18d5, type: 2}
+  - _key: Core.Eye15R
+    _asset: {fileID: 11400000, guid: 2008f1514d2ee974d9022336f2b6053b, type: 2}
+  - _key: Core.Eye16L
+    _asset: {fileID: 11400000, guid: b7dc97052dcbb404a84b2072bb7b17e5, type: 2}
+  - _key: Core.Eye16R
+    _asset: {fileID: 11400000, guid: 781676995b05df4418d74cb51609070f, type: 2}
+  - _key: Core.Eye17L
+    _asset: {fileID: 11400000, guid: 9cb538d37ff7cbf4e8e60fcd21316d42, type: 2}
+  - _key: Core.Eye17R
+    _asset: {fileID: 11400000, guid: 649bf89cb70a0354bbec361880e220ef, type: 2}
+  - _key: Core.Eye18L
+    _asset: {fileID: 11400000, guid: aa9b9738af8ee9c43bd1585c2980bc71, type: 2}
+  - _key: Core.Eye18R
+    _asset: {fileID: 11400000, guid: e6b14a7138f7b2c49981af954ae58ac7, type: 2}
+  - _key: Core.Eye19L
+    _asset: {fileID: 11400000, guid: 17fd41385d2157641bc150f885201e57, type: 2}
+  - _key: Core.Eye19R
+    _asset: {fileID: 11400000, guid: 0213af274c3e88d48aa45e70b02d5e5f, type: 2}
+  - _key: Core.Hair1
+    _asset: {fileID: 11400000, guid: dd45398b31707594396bf2674adc6041, type: 2}
+  - _key: Core.Hair2
+    _asset: {fileID: 11400000, guid: ddbcf6f4b1ef45e44be742c0eff792b6, type: 2}
+  - _key: Core.Hair3
+    _asset: {fileID: 11400000, guid: fa5d36dd1ea349442be3459f6ea05524, type: 2}
+  - _key: Core.Hair4
+    _asset: {fileID: 11400000, guid: c4bfe0950b79c0a41b3dcd71b9b6dac5, type: 2}
+  - _key: Core.Hair5
+    _asset: {fileID: 11400000, guid: 51e0fdd58ee5d904abaeffe1c03f3f4d, type: 2}
+  - _key: Core.Hair6
+    _asset: {fileID: 11400000, guid: 03505c7063caf904c952eae9588ff7d4, type: 2}
+  - _key: Core.Hair7
+    _asset: {fileID: 11400000, guid: 8c2a8f62afe19af408e357049b34228f, type: 2}
+  - _key: Core.Horn
+    _asset: {fileID: 11400000, guid: aa3635e5f9929c94db784d4331574bb0, type: 2}
+  - _key: Core.AnimalHead
+    _asset: {fileID: 11400000, guid: 695f02daad110034cb5f586a5c23c4c0, type: 2}
+  - _key: Core.GoblinHead
+    _asset: {fileID: 11400000, guid: 2b2cc61c0c8fc2646bc785517e3de6fb, type: 2}
+  - _key: Core.HeadMarkLine
+    _asset: {fileID: 11400000, guid: 5504b1d539bbc174d9f8d59984127400, type: 2}
+  - _key: Core.DogNose
+    _asset: {fileID: 11400000, guid: 5b03746dbc260234e89de3156f17a891, type: 2}
+  - _key: Core.DevilTail
+    _asset: {fileID: 11400000, guid: 8110c88880941ba418ad3474535c7a8c, type: 2}
+  - _key: Core.WolfTail
+    _asset: {fileID: 11400000, guid: e08f066d1886eed4aa8302735fedef0b, type: 2}
+  - _key: Core.DevilsWing
+    _asset: {fileID: 11400000, guid: 601306e8d69d814409d7ad25dd36c687, type: 2}

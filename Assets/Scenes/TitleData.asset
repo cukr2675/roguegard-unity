@@ -23,3 +23,4 @@ MonoBehaviour:
   _audioMixer: {fileID: 24100000, guid: 557080067eb351944861920837fdcdfe, type: 2}
   _seAudioSourcePrefab: {fileID: 5282523497276891947, guid: 0119011335df52a45a3e9f7a20a29ee8, type: 3}
   _bgmAudioSourcePrefab: {fileID: 5282523497276891947, guid: 6e0ef912595b62a4fb2f4261ca58093c, type: 3}
+  _characterCreationDatabase: {fileID: 11400000, guid: 036ca2233f4397947a86c4c589c7eb92, type: 2}

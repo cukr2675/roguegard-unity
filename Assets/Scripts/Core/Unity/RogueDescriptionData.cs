@@ -7,8 +7,20 @@ namespace Roguegard
     public abstract class RogueDescriptionData : ScriptableObject, IRogueDescription
     {
         [SerializeField] private string _descriptionName = null;
-        public string DescriptionName { get => _descriptionName; set => _descriptionName = value; }
-        string IRogueDescription.Name => _descriptionName;
+        [System.NonSerialized] private string _nameCache; // null ‚É‚·‚é‚½‚ß NonSerialized ‚ðÝ’è‚·‚é
+        public string DescriptionName
+        {
+            get
+            {
+                return _nameCache ??= (string.IsNullOrWhiteSpace(_descriptionName) ? $":{name}" : _descriptionName);
+            }
+            set
+            {
+                _descriptionName = value;
+                _nameCache = null;
+            }
+        }
+        string IRogueDescription.Name => DescriptionName;
 
         [SerializeField] private Sprite _icon = null;
         public Sprite Icon { get => _icon; set => _icon = value; }

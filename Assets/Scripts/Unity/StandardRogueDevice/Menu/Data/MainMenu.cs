@@ -277,12 +277,86 @@ namespace RoguegardUnity
 
         private class OptionsMenu : IModelsMenu
         {
-            private IModelsMenuChoice[] choices = new[] { ExitModelsMenuChoice.Instance };
+            private static readonly object[] choices = new object[]
+            {
+                new OptionsMasterVolume(),
+                new OptionsWindowFrameType(),
+                ExitModelsMenuChoice.Instance 
+            };
 
             public void OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 root.Get(DeviceKw.MenuOptions).OpenView(ChoicesModelsMenuItemController.Instance, choices, root, self, user, RogueMethodArgument.Identity);
                 root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+            }
+        }
+
+        private class OptionsMasterVolume : IModelsMenuOptionSlider
+        {
+            public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            {
+                return "マスター音量";
+            }
+
+            public float GetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            {
+                var device = (StandardRogueDevice)RogueDevice.Primary;
+                return device.Options.MasterVolume;
+            }
+
+            public void SetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg, float value)
+            {
+                var device = (StandardRogueDevice)RogueDevice.Primary;
+                device.Options.SetMasterVolume(value);
+            }
+        }
+
+        private class OptionsWindowFrameType : IModelsMenuChoice
+        {
+            private static readonly Menu nextMenu = new Menu();
+
+            public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            {
+                return "ウィンドウタイプ";
+            }
+
+            public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            {
+                root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+                root.OpenMenu(nextMenu, self, user, RogueMethodArgument.Identity, RogueMethodArgument.Identity);
+            }
+
+            private class Menu : IModelsMenu, IModelsMenuItemController
+            {
+                private static readonly List<object> models = new List<object>();
+
+                public void OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+                {
+                    if (models.Count != WindowFrameList.Count)
+                    {
+                        models.Clear();
+                        for (int i = 0; i < WindowFrameList.Count; i++)
+                        {
+                            models.Add(i);
+                        }
+                    }
+
+                    root.Get(DeviceKw.MenuScroll).OpenView(this, models, root, self, user, RogueMethodArgument.Identity);
+                }
+
+                public string GetName(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+                {
+                    return WindowFrameList.GetName((int)model);
+                }
+
+                public void Activate(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+                {
+                    var device = (StandardRogueDevice)RogueDevice.Primary;
+                    device.Options.SetWindowFrame((int)model, device.Options.WindowFrameColor);
+
+                    root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+                    root.Back();
+                }
             }
         }
     }

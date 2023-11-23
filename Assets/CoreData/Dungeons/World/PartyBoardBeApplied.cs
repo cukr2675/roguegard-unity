@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using Roguegard.Device;
-using Roguegard.Extensions;
+using Roguegard.CharacterCreation;
 
 namespace Roguegard
 {
@@ -89,6 +89,7 @@ namespace Roguegard
                 private static readonly object[] models = new object[]
                 {
                     new Change(),
+                    new Edit(),
                     ExitModelsMenuChoice.Instance
                 };
 
@@ -127,6 +128,40 @@ namespace Roguegard
                     RogueDevice.Primary.AddObject(DeviceKw.ChangePlayer, newPlayer);
 
                     root.Done();
+                }
+            }
+
+            private class Edit : IModelsMenuChoice
+            {
+                private static readonly Menu nextMenu = new Menu();
+
+                public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+                {
+                    return "ï“èW";
+                }
+
+                public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+                {
+                    var character = arg.TargetObj;
+                    var openArg = new RogueMethodArgument(targetObj: character);
+
+                    root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+                    root.OpenMenu(nextMenu, self, user, openArg, RogueMethodArgument.Identity);
+                }
+
+                private class Menu : IModelsMenu
+                {
+                    private readonly object[] models = new object[1];
+
+                    public void OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+                    {
+                        var character = arg.TargetObj;
+                        var infoSet = (CharacterCreationInfoSet)character.Main.BaseInfoSet;
+                        var builder = (CharacterCreationDataBuilder)infoSet.Data;
+                        models[0] = builder;
+                        var openArg = new RogueMethodArgument(targetObj: character);
+                        root.Get(DeviceKw.MenuCharacterCreation).OpenView(null, models, root, self, user, openArg);
+                    }
                 }
             }
         }

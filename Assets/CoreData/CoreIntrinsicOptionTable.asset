@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9886e2920cfeb7440abe81ba5bf4aa7f, type: 3}
+  m_Name: CoreIntrinsicOptionTable
+  m_EditorClassIdentifier: 
+  _namespace: Core
+  _filter: t:IntrinsicOption
+  _targetFolders:
+  - {fileID: 102900000, guid: 41129aed52e2bab43b40d39b23ed9f4f, type: 3}
+  _items:
+  - _key: Core.BraveHeartAbility
+    _asset: {fileID: 11400000, guid: f8f98e6ef0e9c97459e56e6eaeee1cf8, type: 2}
+  - _key: Core.MultitaskAbility
+    _asset: {fileID: 11400000, guid: 21a499e21ba3e28478b52f7de624adc9, type: 2}
+  - _key: Core.StairPickupAbility
+    _asset: {fileID: 11400000, guid: b1a9905bd46619642beccb45b4b5c17a, type: 2}
+  - _key: Core.BeamBulletSkill
+    _asset: {fileID: 11400000, guid: 96492908b68e1f9498422809e10728a4, type: 2}
+  - _key: Core.BeamSlashSkill
+    _asset: {fileID: 11400000, guid: 8a0e5474712b85e4fb8251eb75a73a8a, type: 2}
+  - _key: Core.EmberSkill
+    _asset: {fileID: 11400000, guid: 99f0b3ca485a2dc42bc70ed5a3c52e72, type: 2}
+  - _key: Core.Multishot3Skill
+    _asset: {fileID: 11400000, guid: 5e2f31b67af995e4b839a06e3acb2108, type: 2}
+  - _key: Core.PaintTrapSkill
+    _asset: {fileID: 11400000, guid: 4c40f526ccbe2a54ba9be64260117e81, type: 2}
+  - _key: Core.PoisonSkill
+    _asset: {fileID: 11400000, guid: c48e43c498960fa4293409cbee60fd85, type: 2}
+  - _key: Core.PowerSlashSkill
+    _asset: {fileID: 11400000, guid: abc2162f941202b43a04d8665a50aee9, type: 2}
+  - _key: Core.SpellChargeSkill
+    _asset: {fileID: 11400000, guid: 1940831252178064f9466f18538e6077, type: 2}
+  - _key: Core.ThronsTrapSkill
+    _asset: {fileID: 11400000, guid: 5d75ee0695b80214092c567460924729, type: 2}

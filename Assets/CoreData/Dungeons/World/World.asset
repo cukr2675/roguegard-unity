@@ -34,13 +34,7 @@ MonoBehaviour:
     _def: 0
     _loadCapacity: 0
     _faction: {fileID: 0}
-    _ability:
-      _asTile: 0
-      _hasCollider: 0
-      _hasTileCollider: 0
-      _hasRayCollider: 0
-      _movable: 0
-      _toolAbility: 0
+    _ability: 0
     _material: {fileID: 0}
     _lootTable: []
     _walk:
@@ -99,10 +93,6 @@ MonoBehaviour:
       _script: {fileID: 0}
       _ref:
         rid: -2
-    _beSteppedOnTile:
-      _script: {fileID: 0}
-      _ref:
-        rid: -2
     _equipmentState: {fileID: 0}
     _weight:
       _script: {fileID: 0}
@@ -113,6 +103,7 @@ MonoBehaviour:
       _ref:
         rid: -2
     _openEffects: []
+    _lv: 0
     _gender: {fileID: 0}
     _hpName: 
     _mpName: 

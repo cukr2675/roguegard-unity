@@ -31,7 +31,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -69,13 +68,13 @@ MonoBehaviour:
   m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 672eb0804d93fb143aa99c7b454b00e0, type: 2}
-  m_sharedMaterial: {fileID: -8408851840143411876, guid: 2980a0fc14a63404aaa0d239ec59a1d6, type: 2}
+  m_sharedMaterial: {fileID: 7670974690536288066, guid: 672eb0804d93fb143aa99c7b454b00e0, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 4293980400
   m_fontColor: {r: 0.9411765, g: 0.9411765, b: 0.9411765, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -132,6 +131,6 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
