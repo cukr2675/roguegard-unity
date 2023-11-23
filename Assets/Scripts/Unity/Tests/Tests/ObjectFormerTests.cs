@@ -39,5 +39,12 @@ namespace RoguegardUnity.Tests
                 Debug.Log($"{nameof(RequireRelationalComponentAttribute)} の答えが設定されていない型は見つかりませんでした。");
             }
         }
+
+        [Test]
+        public void CreateJsonSerializationModules()
+        {
+            ObjectFormerLogger.Primary = new RoguegardObjectFormerLogger();
+            StandardRogueDeviceSave.GetJsonSerializationModules();
+        }
     }
 }
