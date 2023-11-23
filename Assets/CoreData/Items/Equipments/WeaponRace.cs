@@ -5,6 +5,7 @@ using UnityEngine;
 namespace Roguegard.CharacterCreation
 {
     [System.Serializable]
+    [ObjectFormer.IgnoreRequireRelationalComponent]
     public class WeaponRace : EquipmentRace
     {
         [Header("WeaponRace")]

@@ -7,6 +7,7 @@ using System.Linq;
 namespace Roguegard.CharacterCreation
 {
     [System.Serializable]
+    [ObjectFormer.IgnoreRequireRelationalComponent]
     public class EquipmentRace : ObjectRace
     {
         [Header("EquipmentRace")]
