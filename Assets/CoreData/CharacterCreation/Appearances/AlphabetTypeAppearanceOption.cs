@@ -5,6 +5,7 @@ using UnityEngine;
 namespace Roguegard.CharacterCreation
 {
     [CreateAssetMenu(menuName = "RoguegardData/CharacterCreation/AppearanceOption/Alphabet")]
+    [ObjectFormer.Referable]
     public class AlphabetTypeAppearanceOption : ColoredAppearanceOption
     {
         [SerializeField] private List<ColorRangedBoneSprite> _table = null;

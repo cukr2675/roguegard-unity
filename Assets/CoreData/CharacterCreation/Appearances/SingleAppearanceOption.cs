@@ -5,6 +5,7 @@ using UnityEngine;
 namespace Roguegard.CharacterCreation
 {
     [CreateAssetMenu(menuName = "RoguegardData/CharacterCreation/AppearanceOption/Single")]
+    [ObjectFormer.Referable]
     public class SingleAppearanceOption : ColoredAppearanceOption
     {
         [SerializeField] private ColorRangedBoneSprite _sprite = null;

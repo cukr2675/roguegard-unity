@@ -9,6 +9,7 @@ namespace Roguegard.CharacterCreation
     /// <see cref="EquipKeywordData.Order"/> の影響を受けないので、付与する順番に気を付ける。
     /// </summary>
     [CreateAssetMenu(menuName = "RoguegardData/CharacterCreation/AppearanceOption/Singleton/Equipment")]
+    [ObjectFormer.Referable]
     public class EquipmentAppearanceOption : AppearanceOption
     {
         public override IKeyword BoneName => null;
