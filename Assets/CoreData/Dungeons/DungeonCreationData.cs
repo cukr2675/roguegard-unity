@@ -85,9 +85,9 @@ namespace Roguegard.CharacterCreation
         {
             base.OnValidate();
 
-            for (int i = 0; i < _race.OpenEffects.Count; i++)
+            for (int i = 0; i < _race.OpenEffectSources.Count; i++)
             {
-                if (_race.OpenEffects[i].Ref?.GetType() == typeof(DungeonOpen)) return;
+                if (_race.OpenEffectSources[i].Ref?.GetType() == typeof(DungeonOpen)) return;
             }
             Debug.LogError($"{name} ({nameof(DungeonCreationData)}) の {nameof(IOpenEffect)} に {nameof(DungeonOpen)} が設定されていません。");
         }

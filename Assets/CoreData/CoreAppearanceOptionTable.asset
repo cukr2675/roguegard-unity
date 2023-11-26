@@ -17,8 +17,6 @@ MonoBehaviour:
   _targetFolders:
   - {fileID: 102900000, guid: 49a475dab3f1bb94ab754c0c58f2ca86, type: 3}
   _items:
-  - _key: Core.ArmMarkLine
-    _asset: {fileID: 11400000, guid: 3d302c6c5efbbfd49bf05c65bece9682, type: 2}
   - _key: Core.EquipmentAppearanceOption
     _asset: {fileID: 11400000, guid: 4ed202ff619b0b744a4f0be7bca8218f, type: 2}
   - _key: Core.Eye1L
@@ -117,13 +115,7 @@ MonoBehaviour:
     _asset: {fileID: 11400000, guid: 695f02daad110034cb5f586a5c23c4c0, type: 2}
   - _key: Core.GoblinHead
     _asset: {fileID: 11400000, guid: 2b2cc61c0c8fc2646bc785517e3de6fb, type: 2}
-  - _key: Core.HeadMarkLine
-    _asset: {fileID: 11400000, guid: 5504b1d539bbc174d9f8d59984127400, type: 2}
-  - _key: Core.DogNose
-    _asset: {fileID: 11400000, guid: 5b03746dbc260234e89de3156f17a891, type: 2}
   - _key: Core.DevilTail
     _asset: {fileID: 11400000, guid: 8110c88880941ba418ad3474535c7a8c, type: 2}
-  - _key: Core.WolfTail
-    _asset: {fileID: 11400000, guid: e08f066d1886eed4aa8302735fedef0b, type: 2}
   - _key: Core.DevilsWing
     _asset: {fileID: 11400000, guid: 601306e8d69d814409d7ad25dd36c687, type: 2}
