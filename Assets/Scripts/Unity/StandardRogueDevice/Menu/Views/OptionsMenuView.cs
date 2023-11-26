@@ -95,7 +95,7 @@ namespace RoguegardUnity
             _scrollRect.verticalNormalizedPosition = position;
         }
 
-        private void ShowExitButton(IModelsMenuChoice choice)
+        public void ShowExitButton(IModelsMenuChoice choice)
         {
             _exitButton.SetItem(ChoicesModelsMenuItemController.Instance, choice);
             MenuController.Show(_exitButton.CanvasGroup, true);

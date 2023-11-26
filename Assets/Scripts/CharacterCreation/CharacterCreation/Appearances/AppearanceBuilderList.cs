@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using System.Linq;
+
 namespace Roguegard.CharacterCreation
 {
     [ObjectFormer.Formable]
-    public class AppearanceBuilderList //: IReadOnlyList<AppearanceBuilder>
+    public class AppearanceBuilderList : IEnumerable<AppearanceBuilder>
     {
         private readonly List<AppearanceBuilder> builders = new List<AppearanceBuilder>();
 
@@ -13,14 +15,35 @@ namespace Roguegard.CharacterCreation
 
         public int Count => builders.Count;
 
-        public void Add(AppearanceBuilder builder)
+        public bool TryGetBuilder(IKeyword boneName, out AppearanceBuilder builder)
         {
-            builders.Add(builder);
+            foreach (var item in builders)
+            {
+                if (item.Option.BoneName == boneName)
+                {
+                    builder = item;
+                    return true;
+                }
+            }
+            builder = null;
+            return false;
         }
 
-        public void AddRange(IEnumerable<AppearanceBuilder> builders)
+        public AppearanceBuilder Add()
         {
-            this.builders.AddRange(builders);
+            var builder = new AppearanceBuilder();
+            builders.Add(builder);
+            return builder;
+        }
+
+        public void AddClones(IEnumerable<IReadOnlyAppearance> appearances)
+        {
+            builders.AddRange(appearances.Select(x => new AppearanceBuilder(x)));
+        }
+
+        public bool Remove(AppearanceBuilder builder)
+        {
+            return builders.Remove(builder);
         }
 
         public void Clear()
@@ -35,7 +58,8 @@ namespace Roguegard.CharacterCreation
             return clone;
         }
 
-        private IEnumerator<AppearanceBuilder> GetEnumerator() => builders.GetEnumerator();
+        public IEnumerator<AppearanceBuilder> GetEnumerator() => builders.GetEnumerator();
+        IEnumerator IEnumerable.GetEnumerator() => builders.GetEnumerator();
         public static implicit operator Spanning<IReadOnlyAppearance>(AppearanceBuilderList list)
             => Spanning<IReadOnlyAppearance>.Create(list.builders);
     }

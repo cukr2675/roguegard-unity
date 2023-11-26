@@ -42,11 +42,12 @@ namespace RoguegardUnity
         public bool OpenGrid => _inputController.OpenGrid;
         public bool FastForward => _inputController.FastForward;
 
-        internal void Initialize(Tilemap tilemap, SoundController soundController, CharacterCreationDatabase characterCreationDatabase)
+        internal void Initialize(
+            Tilemap tilemap, SoundController soundController, CharacterCreationDatabase characterCreationDatabase, RogueSpriteRendererPool rendererPool)
         {
             _inputController.LongPressThresholdTurns = 4;
             _inputController.Initialize(tilemap, false, false);
-            _menuController.Initialize(soundController, characterCreationDatabase);
+            _menuController.Initialize(soundController, characterCreationDatabase, rendererPool);
             _headerController.Initialize();
         }
 

@@ -35,12 +35,25 @@ namespace RoguegardUnity
         private StartingItemItemController startingItemItemController;
         private static readonly HeaderChoice intrinsicHeader = new HeaderChoice() { text = "固有能力" };
         private static readonly HeaderChoice startingItemHeader = new HeaderChoice() { text = "初期アイテム" };
+        private MenuRogueObjSpriteRenderer spriteRenderer;
+        private AppearanceBuildersMenu appearanceBuildersMenu;
+        private AppearanceChoice appearanceChoice;
         private readonly List<ModelsMenuViewItemButton> intrinsicItemButtons = new List<ModelsMenuViewItemButton>();
         private readonly List<ModelsMenuViewItemButton> startingItemItemButtons = new List<ModelsMenuViewItemButton>();
 
-        public void Initialize(CharacterCreationDatabase database)
+        public void Initialize(CharacterCreationDatabase database, RogueSpriteRendererPool rendererPool)
         {
             this.database = database;
+            appearanceBuildersMenu = new AppearanceBuildersMenu(database);
+            spriteRenderer = rendererPool.GetMenuRogueSpriteRenderer(_appearanceParent);
+            var spriteRendererTransform = spriteRenderer.GetComponent<RectTransform>();
+            spriteRendererTransform.anchorMin = spriteRendererTransform.anchorMax = new Vector2(.5f, 0f);
+            spriteRendererTransform.sizeDelta = Vector2.zero;
+            spriteRendererTransform.localPosition = Vector3.zero;
+            spriteRendererTransform.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Bottom, 0f, 0f);
+            spriteRendererTransform.localScale = Vector3.one * 4f;
+            _appearanceButton.Initialize(this);
+            appearanceChoice = new AppearanceChoice() { parent = this };
             _exitButton.Initialize(this);
             _nameField.onValueChanged.AddListener(text => builder.Name = text);
             _shortNameField.onValueChanged.AddListener(text => builder.ShortName = text);
@@ -49,7 +62,7 @@ namespace RoguegardUnity
         public override void OpenView<T>(
             IModelsMenuItemController itemController, Spanning<T> models, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         {
-            if (!(models[0] is CharacterCreationDataBuilder builder)) throw new RogueException();
+            if (!(arg.Other is CharacterCreationDataBuilder builder)) throw new RogueException();
             this.builder = builder;
 
             if (intrinsicItemController == null)
@@ -59,6 +72,13 @@ namespace RoguegardUnity
             }
 
             SetArg(root, self, user, arg);
+
+            var obj = new CharacterCreationDataBuilder(builder).CreateObj(null, Vector2Int.zero, RogueRandom.Primary);
+            obj.Main.Sprite.Update(obj);
+            var spriteTransform = RogueObjSpriteTransform.Identity;
+            KeywordBoneMotion.Wait.ApplyTo(obj.Main.Sprite.MotionSet, 0, RogueDirection.Down, ref spriteTransform, out _);
+            obj.Main.Sprite.SetTo(spriteRenderer, spriteTransform.PoseSource.GetBonePose(spriteTransform.Direction), spriteTransform.Direction);
+
             _nameField.text = builder.Name;
             _shortNameField.text = builder.ShortName;
 
@@ -123,6 +143,7 @@ namespace RoguegardUnity
             _scrollRect.content.SetInsetAndSizeFromParentEdge(
                 RectTransform.Edge.Top, 0, _firstParent.rect.height + Mathf.Max(intrinsicSumHeight, startingItemSumHeight));
 
+            _appearanceButton.SetItem(ChoicesModelsMenuItemController.Instance, appearanceChoice);
             _exitButton.SetItem(ChoicesModelsMenuItemController.Instance, ExitModelsMenuChoice.Instance);
             MenuController.Show(_canvasGroup, true);
         }
@@ -142,19 +163,6 @@ namespace RoguegardUnity
         {
         }
 
-        private class ExitChoice : IModelsMenuChoice
-        {
-            public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                return "<";
-            }
-
-            public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                throw new System.NotImplementedException();
-            }
-        }
-
         private class HeaderChoice : IModelsMenuChoice
         {
             public string text;
@@ -169,10 +177,9 @@ namespace RoguegardUnity
             }
         }
 
-        private class AppearanceChoice : IModelsMenu, IModelsMenuChoice
+        private class AppearanceChoice : IModelsMenuChoice
         {
             public CharacterCreationMenuView parent;
-            private static readonly OptionItemController optionItemController = new OptionItemController();
 
             public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
@@ -181,32 +188,9 @@ namespace RoguegardUnity
 
             public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                //var openArg = new RogueMethodArgument(other: (AppearanceBuilder)model);
-                //root.OpenMenu(this, self, user, openArg, arg);
-            }
-
-            public void OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
                 root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-                var scroll = (IScrollModelsMenuView)root.Get(DeviceKw.MenuScroll);
-                scroll.OpenView(optionItemController, parent.database.IntrinsicOptions, root, self, user, arg);
-                scroll.ShowExitButton(ExitModelsMenuChoice.Instance);
-            }
 
-            private class OptionItemController : IModelsMenuItemController
-            {
-                public string GetName(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-                {
-                    return ((IIntrinsicOption)model).Name;
-                }
-
-                public void Activate(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-                {
-                    root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-                    var builder = (IntrinsicBuilder)arg.Other;
-                    builder.Option = (IIntrinsicOption)model;
-                    root.Back();
-                }
+                root.OpenMenu(parent.appearanceBuildersMenu, self, null, new(other: parent.builder), arg);
             }
         }
 

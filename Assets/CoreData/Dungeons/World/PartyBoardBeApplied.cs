@@ -44,6 +44,16 @@ namespace Roguegard
 
             public void OpenMenu(IModelsMenuRoot root, RogueObj player, RogueObj user, in RogueMethodArgument arg)
             {
+                if (arg.TargetObj != null && arg.Other is CharacterCreationDataBuilder builder)
+                {
+                    // キャラクリ画面から戻ったとき、そのキャラを更新する
+                    var character = arg.TargetObj;
+                    if (!builder.TryGetGrowingInfoSet(builder.Race.Option, builder.Race.Gender, out var newInfoSet)) throw new RogueException();
+
+                    character.Main.SetBaseInfoSet(character, newInfoSet);
+                    Debug.Log("Update character");
+                }
+
                 var lobbyMembers = RogueWorld.GetLobbyMembersByCharacter(player);
                 models.Clear();
                 for (int i = 0; i < lobbyMembers.Count; i++)
@@ -105,7 +115,7 @@ namespace Roguegard
             {
                 public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
                 {
-                    return "交替";
+                    return "交代";
                 }
 
                 public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
@@ -143,24 +153,22 @@ namespace Roguegard
                 public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
                 {
                     var character = arg.TargetObj;
-                    var openArg = new RogueMethodArgument(targetObj: character);
+                    var infoSet = (CharacterCreationInfoSet)character.Main.BaseInfoSet;
+                    var builder = (CharacterCreationDataBuilder)infoSet.Data;
+                    builder = new CharacterCreationDataBuilder(builder);
 
                     root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-                    root.OpenMenu(nextMenu, self, user, openArg, RogueMethodArgument.Identity);
+                    root.OpenMenu(nextMenu, self, user, new(other: builder), new(targetObj: character, other: builder));
                 }
 
                 private class Menu : IModelsMenu
                 {
-                    private readonly object[] models = new object[1];
+                    private readonly object[] models = new object[0];
 
                     public void OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
                     {
-                        var character = arg.TargetObj;
-                        var infoSet = (CharacterCreationInfoSet)character.Main.BaseInfoSet;
-                        var builder = (CharacterCreationDataBuilder)infoSet.Data;
-                        models[0] = builder;
-                        var openArg = new RogueMethodArgument(targetObj: character);
-                        root.Get(DeviceKw.MenuCharacterCreation).OpenView(null, models, root, self, user, openArg);
+                        var builder = (CharacterCreationDataBuilder)arg.Other;
+                        root.Get(DeviceKw.MenuCharacterCreation).OpenView(null, models, root, self, user, new(other: builder));
                     }
                 }
             }

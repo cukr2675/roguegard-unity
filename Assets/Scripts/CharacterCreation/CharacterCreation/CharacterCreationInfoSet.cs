@@ -15,7 +15,7 @@ namespace Roguegard.CharacterCreation
 
         public ICharacterCreationData Data { get; }
 
-        private readonly int currentRaceOptionIndex;
+        private int currentRaceOptionIndex;
         [System.NonSerialized] private IRaceOption _currentRaceOption;
         public IRaceOption CurrentRaceOption
         {
@@ -23,9 +23,19 @@ namespace Roguegard.CharacterCreation
             {
                 if (_currentRaceOption != null) return _currentRaceOption;
 
-
-                if (Data.Race.Option.GrowingOptions.Count == 0) { _currentRaceOption = Data.Race.Option; }
-                else { _currentRaceOption = Data.Race.Option.GrowingOptions[currentRaceOptionIndex]; }
+                if (Data.Race.Option.GrowingOptions.Count == 0)
+                {
+                    _currentRaceOption = Data.Race.Option;
+                }
+                else
+                {
+                    if (currentRaceOptionIndex >= Data.Race.Option.GrowingOptions.Count)
+                    {
+                        Debug.LogWarning($"{nameof(currentRaceOptionIndex)} ({currentRaceOptionIndex}) が不正です。");
+                        currentRaceOptionIndex = Data.Race.Option.GrowingOptions.IndexOf(Data.Race.Option);
+                    }
+                    _currentRaceOption = Data.Race.Option.GrowingOptions[currentRaceOptionIndex];
+                }
                 return _currentRaceOption;
             }
         }
@@ -96,8 +106,9 @@ namespace Roguegard.CharacterCreation
         /// <summary>
         /// <see cref="ICharacterCreationData"/> を再読み込みし、見た目などを再構成する。
         /// </summary>
-        public void Reload()
+        private void Reload()
         {
+            _currentRaceOption = null;
             _weight = CurrentRaceOption.GetWeight(CurrentRaceOption, Data);
             CurrentRaceOption.GetSpriteValues(CurrentRaceOption, Data, _gender, out var mainNode, out characterBoneSpriteTable);
 

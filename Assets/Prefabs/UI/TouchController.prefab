@@ -1660,7 +1660,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6040998038299976407}
   m_HandleRect: {fileID: 1934181880185961467}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -8148,7 +8148,7 @@ MonoBehaviour:
   _canvasGroup: {fileID: 1777946282866360712}
   _scrollRect: {fileID: 2104859296615582621}
   _firstParent: {fileID: 4389808468048602906}
-  _appearanceParent: {fileID: 0}
+  _appearanceParent: {fileID: 5704320652615944728}
   _appearanceButton: {fileID: 1405713507510975566}
   _nameField: {fileID: 555494975518997852}
   _shortNameField: {fileID: 4742913080136300271}

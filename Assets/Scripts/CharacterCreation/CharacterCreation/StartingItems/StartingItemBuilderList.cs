@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using System.Linq;
+
 namespace Roguegard.CharacterCreation
 {
     [ObjectFormer.Formable]
-    public class StartingItemBuilderList : IWeightedRogueObjGeneratorList//, IReadOnlyList<StartingItemBuilder>
+    public class StartingItemBuilderList : IWeightedRogueObjGeneratorList, IEnumerable<StartingItemBuilder>
     {
         private readonly List<StartingItemBuilder> builders = new List<StartingItemBuilder>();
 
@@ -28,23 +30,19 @@ namespace Roguegard.CharacterCreation
 
         public Spanning<IWeightedRogueObjGenerator> Spanning => Spanning<IWeightedRogueObjGenerator>.Create(builders);
 
-        public StartingItemBuilderList()
+        public StartingItemBuilder Add()
         {
+            var builder = new StartingItemBuilder();
+            builders.Add(builder);
+            return builder;
         }
 
-        public StartingItemBuilderList(IEnumerable<StartingItemBuilder> builders)
+        public void AddClones(IEnumerable<IReadOnlyStartingItem> startingItems)
         {
-            AddRange(builders);
+            builders.AddRange(startingItems.Select(x => new StartingItemBuilder(x)));
         }
 
-        public void AddRange(IEnumerable<StartingItemBuilder> builders)
-        {
-            this.builders.AddRange(builders);
-        }
-
-        private IEnumerator<StartingItemBuilder> GetEnumerator()
-        {
-            return builders.GetEnumerator();
-        }
+        public IEnumerator<StartingItemBuilder> GetEnumerator() => builders.GetEnumerator();
+        IEnumerator IEnumerable.GetEnumerator() => builders.GetEnumerator();
     }
 }

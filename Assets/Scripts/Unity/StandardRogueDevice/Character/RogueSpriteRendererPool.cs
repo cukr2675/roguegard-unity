@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using UnityEngine.Rendering;
+using UnityEngine.UI;
 using Roguegard;
 
 namespace RoguegardUnity
@@ -13,14 +14,18 @@ namespace RoguegardUnity
         private readonly Stack<SortingGroup> pooledSortingGroups = new Stack<SortingGroup>();
         private readonly Stack<RogueObjSpriteRenderer> pooledRogueObjSpriteRenderers = new Stack<RogueObjSpriteRenderer>();
         private readonly Stack<RogueCharacter> pooledCharacters = new Stack<RogueCharacter>();
+        private readonly Stack<Image> pooledImages = new Stack<Image>();
+        private readonly Stack<MenuRogueObjSpriteRenderer> pooledMenuRogueObjSpriteRenderers = new Stack<MenuRogueObjSpriteRenderer>();
 
         [SerializeField] private SpriteRenderer _spriteRendererPrefab = null;
         [SerializeField] private RogueCharacter _characterPrefab = null;
+        [SerializeField] private Image _imagePrefab = null;
 
         private void Awake()
         {
             if (_spriteRendererPrefab == null) throw new RogueException($"{nameof(_spriteRendererPrefab)} が設定されていません。");
             if (_characterPrefab == null) throw new RogueException($"{nameof(_characterPrefab)} が設定されていません。");
+            if (_imagePrefab == null) throw new RogueException($"{nameof(_imagePrefab)} が設定されていません。");
         }
 
         public void PoolSpriteRenderer(SpriteRenderer spriteRenderer)
@@ -50,6 +55,21 @@ namespace RoguegardUnity
             character.Destroy();
             character.transform.SetParent(transform, false);
             pooledCharacters.Push(character);
+        }
+
+        public void PoolImage(Image image)
+        {
+            image.transform.SetParent(transform, false);
+            image.gameObject.SetActive(false);
+            pooledImages.Push(image);
+        }
+
+        public void PoolMenuRogueSpriteRenderer(MenuRogueObjSpriteRenderer rogueObjSpriteRenderer)
+        {
+            rogueObjSpriteRenderer.AdjustBones(0);
+            rogueObjSpriteRenderer.transform.SetParent(transform, false);
+            rogueObjSpriteRenderer.gameObject.SetActive(false);
+            pooledMenuRogueObjSpriteRenderers.Push(rogueObjSpriteRenderer);
         }
 
         public SpriteRenderer GetRenderer(Transform parent)
@@ -119,6 +139,42 @@ namespace RoguegardUnity
             }
             character.Initialize(obj, this);
             return character;
+        }
+
+        public Image GetImage(Transform parent)
+        {
+            Image image;
+            if (pooledImages.Count >= 1)
+            {
+                image = pooledImages.Pop();
+                image.transform.SetParent(parent, false);
+                image.gameObject.SetActive(true);
+            }
+            else
+            {
+                image = Instantiate(_imagePrefab, parent);
+            }
+            return image;
+        }
+
+        public MenuRogueObjSpriteRenderer GetMenuRogueSpriteRenderer(RectTransform parent)
+        {
+            MenuRogueObjSpriteRenderer rogueObjSpriteRenderer;
+            if (pooledMenuRogueObjSpriteRenderers.Count >= 1)
+            {
+                rogueObjSpriteRenderer = pooledMenuRogueObjSpriteRenderers.Pop();
+                rogueObjSpriteRenderer.transform.SetParent(parent, false);
+                rogueObjSpriteRenderer.gameObject.SetActive(true);
+            }
+            else
+            {
+                var newObject = new GameObject("MenuRogueObjSpriteRenderer");
+                newObject.AddComponent<RectTransform>();
+                newObject.transform.SetParent(parent, false);
+                rogueObjSpriteRenderer = newObject.AddComponent<MenuRogueObjSpriteRenderer>();
+                rogueObjSpriteRenderer.Initialize(this);
+            }
+            return rogueObjSpriteRenderer;
         }
     }
 }

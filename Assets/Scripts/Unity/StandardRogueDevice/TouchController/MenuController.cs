@@ -62,7 +62,7 @@ namespace RoguegardUnity
 
         public StatsWindow Stats => _statsWindow;
 
-        internal void Initialize(SoundController soundController, CharacterCreationDatabase characterCreationDatabase)
+        internal void Initialize(SoundController soundController, CharacterCreationDatabase characterCreationDatabase, RogueSpriteRendererPool rendererPool)
         {
             this.soundController = soundController;
             waitTimer = new WaitTimer();
@@ -87,7 +87,7 @@ namespace RoguegardUnity
             _summaryMenu.Initialize();
             _detailsMenu.Initialize();
             _optionsMenu.Initialize();
-            _characterCreationMenu.Initialize(characterCreationDatabase);
+            _characterCreationMenu.Initialize(characterCreationDatabase, rendererPool);
             var scrollSensitivity = 64f;
             SetScrollSensitivity(scrollSensitivity);
 

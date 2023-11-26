@@ -118,6 +118,7 @@ namespace RoguegardUnity
 
             public void ClearSprite()
             {
+                spriteRenderer.gameObject.name = "(Empty)";
                 spriteRenderer.sprite = null;
             }
 

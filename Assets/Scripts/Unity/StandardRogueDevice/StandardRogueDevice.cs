@@ -99,7 +99,7 @@ namespace RoguegardUnity
             soundController.Open(parent, seAudioSourcePrefab, soundTable.ToTable());
 
             touchController = Object.Instantiate(touchControllerPrefab, parent);
-            touchController.Initialize(tilemapGrid.Tilemap, soundController, characterCreationDatabase);
+            touchController.Initialize(tilemapGrid.Tilemap, soundController, characterCreationDatabase, spriteRendererPool);
             touchController.GetInfo(out var menuController, out openChestMenu);
 
             Options.Initialize(menuController, audioMixer);

@@ -15,14 +15,16 @@ namespace Roguegard.CharacterCreation
 
         public int Count => builders.Count;
 
-        public void Add(IntrinsicBuilder builder)
+        public IntrinsicBuilder Add()
         {
+            var builder = new IntrinsicBuilder();
             builders.Add(builder);
+            return builder;
         }
 
-        public void AddRange(IEnumerable<IntrinsicBuilder> builders)
+        public void AddClones(IEnumerable<IReadOnlyIntrinsic> intrinsics)
         {
-            this.builders.AddRange(builders);
+            builders.AddRange(intrinsics.Select(x => new IntrinsicBuilder(x)));
         }
 
         public void Clear()

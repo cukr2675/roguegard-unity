@@ -43,9 +43,9 @@ namespace Roguegard.CharacterCreation
             builder.Cost = Cost;
             builder.CostIsUnknown = CostIsUnknown;
             builder.Race = new RaceBuilder(_race);
-            builder.Appearances.AddRange(_appearances.Select(x => new AppearanceBuilder(x)));
-            builder.Intrinsics.AddRange(_intrinsics.Select(x => new IntrinsicBuilder(x)));
-            builder.StartingItemTable.AddRange(_startingItemTable.Select(x => x.ToBuilder()));
+            builder.Appearances.AddClones(_appearances);
+            builder.Intrinsics.AddClones(_intrinsics);
+            builder.StartingItemTable.AddClones(_startingItemTable);
             return builder;
         }
 
@@ -92,7 +92,7 @@ namespace Roguegard.CharacterCreation
         /// プリセットは初期アイテムをランダムにしない。
         /// </summary>
         [System.Serializable]
-        private class StartingItem : ScriptableStartingItem, IWeightedRogueObjGeneratorList
+        private class StartingItem : ScriptableStartingItem, IWeightedRogueObjGeneratorList, IEnumerable<IReadOnlyStartingItem>
         {
             [System.NonSerialized] private StartingItem[] array;
 
@@ -107,10 +107,12 @@ namespace Roguegard.CharacterCreation
                 }
             }
 
-            public IEnumerable<StartingItemBuilder> ToBuilder()
+            public IEnumerator<IReadOnlyStartingItem> GetEnumerator()
             {
-                yield return new StartingItemBuilder(this);
+                yield return this;
             }
+
+            IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
         }
     }
 }
