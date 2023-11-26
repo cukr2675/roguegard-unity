@@ -75,7 +75,6 @@ namespace Roguegard.Editor
             public Vector2Int PixelPivot { get => _pixelPivot; set => _pixelPivot = value; }
 
             private static readonly char[] alphabets = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray();
-            private const float pixelPerUnits = 32;
 
             public void Validate()
             {
@@ -88,7 +87,7 @@ namespace Roguegard.Editor
                 if (PixelSize.x <= 0 || PixelSize.y <= 0) throw new RogueException();
 
                 // ループは x -> y の順番
-                var pivot = new Vector2(PixelPivot.x, PixelPivot.y) / pixelPerUnits; ;
+                var pivot = new Vector2(PixelPivot.x, PixelPivot.y) / _pixelSize;
                 var index = Vector2Int.zero;
                 for (int x = Rect.xMin; x + PixelSize.x <= Rect.xMax; x += PixelSize.x + Padding.x) // x 軸は左から右へ
                 {
