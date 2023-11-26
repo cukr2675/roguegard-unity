@@ -141,7 +141,7 @@ namespace Roguegard.CharacterCreation
         [SerializeField] private ScriptField<IRaceOptionWeight> _weight;
         [SerializeField] private ScriptField<IRaceOptionSprite> _sprite;
         [SerializeField] private ScriptField<IOpenEffect>[] _openEffects;
-        public Spanning<ScriptField<IOpenEffect>> OpenEffects => _openEffects;
+        public Spanning<ScriptField<IOpenEffect>> OpenEffectSources => _openEffects;
 
         public virtual IRaceOption Open(
             RogueObj self, MainInfoSetType infoSetType, bool polymorph2Base, IRaceOption raceOption, ICharacterCreationData characterCreationData)

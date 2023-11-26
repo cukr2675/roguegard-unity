@@ -1,0 +1,154 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d842246dd790334ba7cff66d4dab604, type: 3}
+  m_Name: HeadMarkLine
+  m_EditorClassIdentifier: 
+  _overridesCost: 0
+  _cost: 0
+  _costIsUnknown: 0
+  _race:
+    _name: "\u30DE\u30FC\u30AF(\u7DDA)"
+    _icon: {fileID: -1130061937, guid: aa1967e12fbad8d4da03b63446298929, type: 3}
+    _color: {r: 1, g: 1, b: 1, a: 0.7529412}
+    _caption: 
+    _details:
+      _script: {fileID: 0}
+      _ref:
+        rid: -2
+    _cost: 0
+    _costIsUnknown: 0
+    _genders: {fileID: 0}
+    _category: {fileID: 11400000, guid: 75e1343f76d38ef47996f24301d8239f, type: 2}
+    _maxHP: 0
+    _maxMP: 0
+    _atk: 0
+    _def: 0
+    _loadCapacity: 0
+    _faction: {fileID: 0}
+    _ability: 4
+    _material: {fileID: 0}
+    _lootTable: []
+    _walk:
+      _script: {fileID: 0}
+      _ref:
+        rid: -2
+    _wait:
+      _script: {fileID: 0}
+      _ref:
+        rid: -2
+    _attack:
+      _script: {fileID: 0}
+      _ref:
+        rid: -2
+    _throw:
+      _script: {fileID: 0}
+      _ref:
+        rid: -2
+    _pickUp:
+      _script: {fileID: 0}
+      _ref:
+        rid: -2
+    _put:
+      _script: {fileID: 0}
+      _ref:
+        rid: -2
+    _eat:
+      _script: {fileID: 0}
+      _ref:
+        rid: -2
+    _hit:
+      _script: {fileID: 0}
+      _ref:
+        rid: -2
+    _beDefeated:
+      _script: {fileID: 0}
+      _ref:
+        rid: -2
+    _locate:
+      _script: {fileID: 0}
+      _ref:
+        rid: -2
+    _polymorph:
+      _script: {fileID: 0}
+      _ref:
+        rid: -2
+    _beApplied:
+      _script: {fileID: 0}
+      _ref:
+        rid: -2
+    _beThrown:
+      _script: {fileID: 0}
+      _ref:
+        rid: -2
+    _beEaten:
+      _script: {fileID: 0}
+      _ref:
+        rid: -2
+    _equipmentState: {fileID: 0}
+    _weight:
+      _script: {fileID: 0}
+      _ref:
+        rid: -2
+    _sprite:
+      _script: {fileID: 0}
+      _ref:
+        rid: -2
+    _openEffects: []
+    _lv: 0
+    _gender: {fileID: 0}
+    _hpName: 
+    _mpName: 
+    _members:
+      _items: []
+    _isCosmetic: 1
+    _equipParts:
+    - {fileID: 11400000, guid: 0a5066941778bef46a99ac2da12b129b, type: 2}
+    _isNotStackableWhileEquipped: 1
+    _boneSpriteTable:
+      _items:
+      - _name: {fileID: 11400000, guid: c66efafae0b82384d8b4212c78358e52, type: 2}
+        _hasFirstSprite: 0
+        _firstSprite:
+          _normalFront: {fileID: 0}
+          _normalRear: {fileID: 0}
+          _backFront: {fileID: 0}
+          _backRear: {fileID: 0}
+        _firstColor: {r: 1, g: 1, b: 1, a: 1}
+        _overridesSourceColor: 0
+        _overridesBaseColor: 0
+        _equipmentSprites:
+        - _sprite:
+            _normalFront: {fileID: -1130061937, guid: aa1967e12fbad8d4da03b63446298929, type: 3}
+            _normalRear: {fileID: 0}
+            _backFront: {fileID: 0}
+            _backRear: {fileID: 0}
+          _color: {r: 1, g: 1, b: 1, a: 0.7529412}
+    _eyeDropBoneName: {fileID: 0}
+    _overridesBoneSpriteEffectOrder: 0
+    _boneSpriteEffectOrder: -2
+    _beEquipped:
+      _script: {fileID: 0}
+      _ref:
+        rid: -2
+    _beUnequipped:
+      _script: {fileID: 0}
+      _ref:
+        rid: -2
+    _equippedEffectSources: []
+  _appearances: []
+  _intrinsics: []
+  _startingItemTable: []
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }

@@ -22,7 +22,7 @@ MonoBehaviour:
       height: 16
     _pixelSize: {x: 4, y: 4}
     _padding: {x: 2, y: 0}
-    _pixelPivot: {x: 3, y: 0}
+    _pixelPivot: {x: 3, y: 1}
   - _format: Eye20L{0}{1}_NF
     _rect:
       x: 3
@@ -31,4 +31,4 @@ MonoBehaviour:
       height: 16
     _pixelSize: {x: 5, y: 4}
     _padding: {x: 1, y: 0}
-    _pixelPivot: {x: 1, y: 0}
+    _pixelPivot: {x: 1, y: 1}

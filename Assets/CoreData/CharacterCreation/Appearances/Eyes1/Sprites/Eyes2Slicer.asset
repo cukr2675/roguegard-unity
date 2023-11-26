@@ -22,7 +22,7 @@ MonoBehaviour:
       height: 16
     _pixelSize: {x: 4, y: 4}
     _padding: {x: 3, y: 0}
-    _pixelPivot: {x: 3, y: 0}
+    _pixelPivot: {x: 3, y: 1}
   - _format: Eye10L{0}{1}_NF
     _rect:
       x: 3
@@ -31,7 +31,7 @@ MonoBehaviour:
       height: 16
     _pixelSize: {x: 5, y: 4}
     _padding: {x: 2, y: 0}
-    _pixelPivot: {x: 1, y: 0}
+    _pixelPivot: {x: 1, y: 1}
   - _format: Eye11R{0}{1}_NF
     _rect:
       x: 28
@@ -40,7 +40,7 @@ MonoBehaviour:
       height: 16
     _pixelSize: {x: 4, y: 4}
     _padding: {x: 3, y: 0}
-    _pixelPivot: {x: 3, y: 0}
+    _pixelPivot: {x: 3, y: 1}
   - _format: Eye11L{0}{1}_NF
     _rect:
       x: 31
@@ -49,7 +49,7 @@ MonoBehaviour:
       height: 16
     _pixelSize: {x: 5, y: 4}
     _padding: {x: 2, y: 0}
-    _pixelPivot: {x: 1, y: 0}
+    _pixelPivot: {x: 1, y: 1}
   - _format: Eye12R{0}{1}_NF
     _rect:
       x: 0
@@ -58,7 +58,7 @@ MonoBehaviour:
       height: 16
     _pixelSize: {x: 2, y: 4}
     _padding: {x: 2, y: 0}
-    _pixelPivot: {x: 1, y: 0}
+    _pixelPivot: {x: 1, y: 1}
   - _format: Eye12L{0}{1}_NF
     _rect:
       x: 1
@@ -67,7 +67,7 @@ MonoBehaviour:
       height: 16
     _pixelSize: {x: 3, y: 4}
     _padding: {x: 1, y: 0}
-    _pixelPivot: {x: 1, y: 0}
+    _pixelPivot: {x: 1, y: 1}
   - _format: Eye13R{0}{1}_NF
     _rect:
       x: 16
@@ -76,7 +76,7 @@ MonoBehaviour:
       height: 16
     _pixelSize: {x: 3, y: 4}
     _padding: {x: 2, y: 0}
-    _pixelPivot: {x: 2, y: 0}
+    _pixelPivot: {x: 2, y: 1}
   - _format: Eye13L{0}{1}_NF
     _rect:
       x: 18
@@ -85,7 +85,7 @@ MonoBehaviour:
       height: 16
     _pixelSize: {x: 4, y: 4}
     _padding: {x: 1, y: 0}
-    _pixelPivot: {x: 1, y: 0}
+    _pixelPivot: {x: 1, y: 1}
   - _format: Eye14R{0}{1}_NF
     _rect:
       x: 37
@@ -94,7 +94,7 @@ MonoBehaviour:
       height: 16
     _pixelSize: {x: 3, y: 4}
     _padding: {x: 2, y: 0}
-    _pixelPivot: {x: 2, y: 0}
+    _pixelPivot: {x: 2, y: 1}
   - _format: Eye14L{0}{1}_NF
     _rect:
       x: 39
@@ -103,7 +103,7 @@ MonoBehaviour:
       height: 16
     _pixelSize: {x: 4, y: 4}
     _padding: {x: 1, y: 0}
-    _pixelPivot: {x: 1, y: 0}
+    _pixelPivot: {x: 1, y: 1}
   - _format: Eye15R{0}{1}_NF
     _rect:
       x: 0
@@ -112,7 +112,7 @@ MonoBehaviour:
       height: 16
     _pixelSize: {x: 4, y: 4}
     _padding: {x: 3, y: 0}
-    _pixelPivot: {x: 3, y: 0}
+    _pixelPivot: {x: 3, y: 1}
   - _format: Eye15L{0}{1}_NF
     _rect:
       x: 3
@@ -121,7 +121,7 @@ MonoBehaviour:
       height: 16
     _pixelSize: {x: 5, y: 4}
     _padding: {x: 2, y: 0}
-    _pixelPivot: {x: 1, y: 0}
+    _pixelPivot: {x: 1, y: 1}
   - _format: Eye16R{0}{1}_NF
     _rect:
       x: 29
@@ -130,7 +130,7 @@ MonoBehaviour:
       height: 16
     _pixelSize: {x: 4, y: 4}
     _padding: {x: 3, y: 0}
-    _pixelPivot: {x: 3, y: 0}
+    _pixelPivot: {x: 3, y: 1}
   - _format: Eye16L{0}{1}_NF
     _rect:
       x: 32
@@ -139,7 +139,7 @@ MonoBehaviour:
       height: 16
     _pixelSize: {x: 5, y: 4}
     _padding: {x: 2, y: 0}
-    _pixelPivot: {x: 1, y: 0}
+    _pixelPivot: {x: 1, y: 1}
   - _format: Eye17R{0}{1}_NF
     _rect:
       x: 0
@@ -148,7 +148,7 @@ MonoBehaviour:
       height: 16
     _pixelSize: {x: 2, y: 4}
     _padding: {x: 2, y: 0}
-    _pixelPivot: {x: 1, y: 0}
+    _pixelPivot: {x: 1, y: 1}
   - _format: Eye17L{0}{1}_NF
     _rect:
       x: 1
@@ -157,7 +157,7 @@ MonoBehaviour:
       height: 16
     _pixelSize: {x: 3, y: 4}
     _padding: {x: 1, y: 0}
-    _pixelPivot: {x: 1, y: 0}
+    _pixelPivot: {x: 1, y: 1}
   - _format: Eye18R{0}{1}_NF
     _rect:
       x: 13
@@ -166,7 +166,7 @@ MonoBehaviour:
       height: 16
     _pixelSize: {x: 3, y: 4}
     _padding: {x: 2, y: 0}
-    _pixelPivot: {x: 2, y: 0}
+    _pixelPivot: {x: 2, y: 1}
   - _format: Eye18L{0}{1}_NF
     _rect:
       x: 15
@@ -175,7 +175,7 @@ MonoBehaviour:
       height: 16
     _pixelSize: {x: 4, y: 4}
     _padding: {x: 1, y: 0}
-    _pixelPivot: {x: 1, y: 0}
+    _pixelPivot: {x: 1, y: 1}
   - _format: Eye19R{0}{1}_NF
     _rect:
       x: 34
@@ -184,7 +184,7 @@ MonoBehaviour:
       height: 16
     _pixelSize: {x: 3, y: 4}
     _padding: {x: 2, y: 0}
-    _pixelPivot: {x: 2, y: 0}
+    _pixelPivot: {x: 2, y: 1}
   - _format: Eye19L{0}{1}_NF
     _rect:
       x: 36
@@ -193,4 +193,4 @@ MonoBehaviour:
       height: 16
     _pixelSize: {x: 4, y: 4}
     _padding: {x: 1, y: 0}
-    _pixelPivot: {x: 1, y: 0}
+    _pixelPivot: {x: 1, y: 1}

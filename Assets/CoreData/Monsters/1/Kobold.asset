@@ -130,11 +130,12 @@ MonoBehaviour:
     _members:
       _items:
       - rid: 962669199347417144
-  - _option: {fileID: 11400000, guid: 5b03746dbc260234e89de3156f17a891, type: 2}
+  - _option: {fileID: 11400000, guid: 4ed202ff619b0b744a4f0be7bca8218f, type: 2}
     _optionDescription: {fileID: 0}
     _color: {r: 0.5915922, g: 0.6279435, b: 0.6784314, a: 1}
     _members:
-      _items: []
+      _items:
+      - rid: 5681463001098223616
   - _option: {fileID: 11400000, guid: 8c2a8f62afe19af408e357049b34228f, type: 2}
     _optionDescription: {fileID: 0}
     _color: {r: 0.5921569, g: 0.627451, b: 0.6784314, a: 1}
@@ -189,3 +190,7 @@ MonoBehaviour:
       type: {class: WanderingOpen, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
       data:
         _assemblyReflectionAssetDummy: 
+    - rid: 5681463001098223616
+      type: {class: SingleItemMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
+      data:
+        _item: {fileID: 11400000, guid: 7c3453877e1e52149b90cb9081517d51, type: 2}

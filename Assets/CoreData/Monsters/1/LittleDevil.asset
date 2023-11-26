@@ -116,21 +116,18 @@ MonoBehaviour:
     _members:
       _items: []
   _appearances:
-  - _option: {fileID: 11400000, guid: aa3635e5f9929c94db784d4331574bb0, type: 2}
+  - _option: {fileID: 11400000, guid: 4ed202ff619b0b744a4f0be7bca8218f, type: 2}
     _optionDescription: {fileID: 0}
     _color: {r: 1, g: 0.28627452, b: 0.34901962, a: 1}
     _members:
-      _items: []
-  - _option: {fileID: 11400000, guid: 8110c88880941ba418ad3474535c7a8c, type: 2}
+      _items:
+      - rid: 5681463001098223618
+  - _option: {fileID: 11400000, guid: 4ed202ff619b0b744a4f0be7bca8218f, type: 2}
     _optionDescription: {fileID: 0}
     _color: {r: 1, g: 0.28627452, b: 0.34901962, a: 1}
     _members:
-      _items: []
-  - _option: {fileID: 11400000, guid: 601306e8d69d814409d7ad25dd36c687, type: 2}
-    _optionDescription: {fileID: 0}
-    _color: {r: 1, g: 0.28627452, b: 0.34901962, a: 1}
-    _members:
-      _items: []
+      _items:
+      - rid: 5681463001098223617
   _intrinsics:
   - _option: {fileID: 11400000, guid: 99f0b3ca485a2dc42bc70ed5a3c52e72, type: 2}
     _optionDescription: {fileID: 0}
@@ -267,3 +264,11 @@ MonoBehaviour:
       type: {class: WanderingOpen, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
       data:
         _assemblyReflectionAssetDummy: 
+    - rid: 5681463001098223617
+      type: {class: SingleItemMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
+      data:
+        _item: {fileID: 11400000, guid: 8356c1aa167184343936906c841a7095, type: 2}
+    - rid: 5681463001098223618
+      type: {class: SingleItemMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
+      data:
+        _item: {fileID: 11400000, guid: b7ed7120220238540817ef105ec0e50c, type: 2}

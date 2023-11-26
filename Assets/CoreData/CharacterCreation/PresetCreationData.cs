@@ -39,6 +39,7 @@ namespace Roguegard.CharacterCreation
             var builder = new CharacterCreationDataBuilder();
             builder.Name = DescriptionName;
             builder.ShortName = ShortName;
+            builder.Details = Details;
             builder.Cost = Cost;
             builder.CostIsUnknown = CostIsUnknown;
             builder.Race = new RaceBuilder(_race);
