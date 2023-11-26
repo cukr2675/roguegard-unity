@@ -552,7 +552,7 @@ MonoBehaviour:
     _overridesBaseColor: 1
     _flipX: 0
     _flipY: 0
-    _pixelLocalPosition: {x: 2, y: 5, z: 0}
+    _pixelLocalPosition: {x: 3, y: 5, z: 0}
     _localRotation: {x: 0, y: 0, z: 0, w: 1}
     _scaleOfLocalByLocal: {x: 1, y: 1, z: 1}
     _normalOrderInParent: -4
@@ -584,7 +584,7 @@ MonoBehaviour:
     _overridesBaseColor: 1
     _flipX: 0
     _flipY: 0
-    _pixelLocalPosition: {x: -2, y: 5, z: 0}
+    _pixelLocalPosition: {x: -1, y: 5, z: 0}
     _localRotation: {x: 0, y: 0, z: 0, w: 1}
     _scaleOfLocalByLocal: {x: 1, y: 1, z: 1}
     _normalOrderInParent: -5
@@ -616,7 +616,7 @@ MonoBehaviour:
     _overridesBaseColor: 1
     _flipX: 0
     _flipY: 0
-    _pixelLocalPosition: {x: 0, y: 0, z: 0}
+    _pixelLocalPosition: {x: 1, y: 2, z: 0}
     _localRotation: {x: 0, y: 0, z: 0, w: 1}
     _scaleOfLocalByLocal: {x: 1, y: 1, z: 1}
     _normalOrderInParent: -6

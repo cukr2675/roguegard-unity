@@ -362,7 +362,7 @@ namespace Roguegard.Editor
                 var node = new BoneData.Node();
                 node.BoneName = RoguegardAssetDatabase.GetKeyword("LeftWing");
                 node.ParentBoneName = RoguegardAssetDatabase.GetKeyword("Body");
-                node.PixelLocalPosition = new Vector3(2f, statureRank);
+                node.PixelLocalPosition = new Vector3(3f, statureRank);
                 node.NormalOrderInParent = -4f;
                 node.BackOrderInParent = -4f;
                 return node;
@@ -377,7 +377,7 @@ namespace Roguegard.Editor
                 var node = new BoneData.Node();
                 node.BoneName = RoguegardAssetDatabase.GetKeyword("RightWing");
                 node.ParentBoneName = RoguegardAssetDatabase.GetKeyword("Body");
-                node.PixelLocalPosition = new Vector3(-2f, statureRank);
+                node.PixelLocalPosition = new Vector3(-1f, statureRank);
                 node.NormalOrderInParent = -5f;
                 node.BackOrderInParent = -5f;
                 return node;
@@ -391,6 +391,7 @@ namespace Roguegard.Editor
                 var node = new BoneData.Node();
                 node.BoneName = RoguegardAssetDatabase.GetKeyword("Tail");
                 node.ParentBoneName = RoguegardAssetDatabase.GetKeyword("Body");
+                node.PixelLocalPosition = new Vector3(1f, 2f);
                 node.NormalOrderInParent = -6f;
                 node.BackOrderInParent = -6f;
                 return node;
