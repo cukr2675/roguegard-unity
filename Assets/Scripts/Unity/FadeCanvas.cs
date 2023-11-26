@@ -26,6 +26,8 @@ namespace RoguegardUnity
 
         public static FadeCanvas current;
 
+        private static IEnumerator currentCoroutine;
+
         public static bool FadingNow { get; private set; }
 
         private void Awake()
@@ -136,9 +138,23 @@ namespace RoguegardUnity
             FadeIn();
         }
 
-        public static void StartConvasCoroutine(IEnumerator routine)
+        public static void StartCanvasCoroutine(IEnumerator routine)
         {
-            current.StartCoroutine(routine);
+            if (currentCoroutine != null)
+            {
+                Debug.LogError("別のコルーチンを実行中です。");
+                return;
+            }
+
+            currentCoroutine = CreateCoroutine(routine);
+            current.StartCoroutine(currentCoroutine);
+        }
+
+        private static IEnumerator CreateCoroutine(IEnumerator routine)
+        {
+            yield return routine;
+
+            currentCoroutine = null;
         }
 
         private enum FadeType

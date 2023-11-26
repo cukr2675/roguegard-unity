@@ -30,7 +30,7 @@ namespace RoguegardUnity
 
         public override void Save(System.Action callback)
         {
-            FadeCanvas.StartConvasCoroutine(SaveCoroutine(callback));
+            FadeCanvas.StartCanvasCoroutine(SaveCoroutine(callback));
         }
 
         private IEnumerator SaveCoroutine(System.Action callback)
