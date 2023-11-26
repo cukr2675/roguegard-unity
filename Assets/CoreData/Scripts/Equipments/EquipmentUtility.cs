@@ -99,9 +99,39 @@ namespace Roguegard
         }
 
         /// <summary>
-        /// <paramref name="obj"/> が装備している装備品からランダムに一つ取得する。（コストがゼロのものは含めない）
+        /// <paramref name="obj"/> が装備している装備品からランダムに一つ取得する。
         /// </summary>
-        public static RogueObj GetRandomEquipment(RogueObj obj, IRogueRandom random)
+        private static RogueObj GetRandomEquipment(RogueObj obj, IRogueRandom random)
+        {
+            var equipmentState = obj.Main.GetEquipmentState(obj);
+            equipParts.Clear();
+            for (int i = 0; i < equipmentState.Parts.Count; i++)
+            {
+                equipParts.Add(equipmentState.Parts[i]);
+            }
+
+            for (int i = equipmentState.Parts.Count - 1; i >= 0; i--)
+            {
+                var equipPartIndex = random.Next(0, equipParts.Count);
+                var equipPart = equipParts[equipPartIndex];
+                equipParts.RemoveAt(equipPartIndex);
+
+                var length = equipmentState.GetLength(equipPart);
+                for (int j = 0; j < length; j++)
+                {
+                    var equipment = equipmentState.GetEquipment(equipPart, j);
+                    if (equipment == null) continue;
+
+                    return equipment;
+                }
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// <paramref name="obj"/> が装備している装備品からランダムに一つ取得する。コスチューム＝コストがゼロのものは含めない。
+        /// </summary>
+        private static RogueObj GetRandomEquipmentWithoutCostume(RogueObj obj, IRogueRandom random)
         {
             var equipmentState = obj.Main.GetEquipmentState(obj);
             equipParts.Clear();
@@ -131,9 +161,42 @@ namespace Roguegard
         }
 
         /// <summary>
-        /// <paramref name="obj"/> が装備している装備品からランダムに一つ取得する。（コストがゼロのものと武器・弾は含めない）
+        /// <paramref name="obj"/> が装備している装備品からランダムに一つ取得する。
         /// </summary>
         public static RogueObj GetRandomArmor(RogueObj obj, IRogueRandom random)
+        {
+            var equipmentState = obj.Main.GetEquipmentState(obj);
+            equipParts.Clear();
+            for (int i = 0; i < equipmentState.Parts.Count; i++)
+            {
+                equipParts.Add(equipmentState.Parts[i]);
+            }
+
+            for (int i = equipmentState.Parts.Count - 1; i >= 0; i--)
+            {
+                var equipPartIndex = random.Next(0, equipParts.Count);
+                var equipPart = equipParts[equipPartIndex];
+                equipParts.RemoveAt(equipPartIndex);
+
+                var length = equipmentState.GetLength(equipPart);
+                for (int j = 0; j < length; j++)
+                {
+                    var equipment = equipmentState.GetEquipment(equipPart, j);
+                    if (equipment == null) continue;
+
+                    var equipmentInfo = equipment.Main.GetEquipmentInfo(equipment);
+                    if (equipmentInfo is IWeaponEquipmentInfo || equipmentInfo is IAmmoEquipmentInfo) continue; // 武器と弾は含めない。
+
+                    return equipment;
+                }
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// <paramref name="obj"/> が装備している装備品からランダムに一つ取得する。コスチューム＝コストがゼロのものと武器・弾は含めない。
+        /// </summary>
+        private static RogueObj GetRandomArmorWithoutCostume(RogueObj obj, IRogueRandom random)
         {
             var equipmentState = obj.Main.GetEquipmentState(obj);
             equipParts.Clear();

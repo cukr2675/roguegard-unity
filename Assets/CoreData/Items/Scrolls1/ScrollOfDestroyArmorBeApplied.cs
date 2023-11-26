@@ -6,12 +6,12 @@ using Roguegard.Extensions;
 
 namespace Roguegard
 {
-    public class ScrollOfDestroyArmorBeApplied : BaseApplyRogueMethod
+    public class ScrollOfDestroyArmorBeApplied : ConsumeApplyRogueMethod
     {
         public override IRogueMethodTarget Target => ForEnemyRogueMethodTarget.Instance;
         public override IRogueMethodRange Range => UserRogueMethodRange.Instance;
 
-        public override bool Invoke(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
+        protected override bool BeApplied(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
         {
             var visible = RogueDevice.Primary.VisibleAt(user.Location, user.Position);
             if (visible)
@@ -41,7 +41,6 @@ namespace Roguegard
                     RogueDevice.Add(DeviceKw.AppendText, "しかし何も起こらなかった！\n");
                 }
             }
-            self.TrySetStack(self.Stack - 1, user);
             return true;
         }
     }
