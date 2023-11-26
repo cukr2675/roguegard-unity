@@ -28,6 +28,11 @@ namespace Roguegard.Editor
             }
         }
 
+        /// <summary>
+        /// インスペクタで項目名に矢印が埋まることを回避したい場合は true に設定する
+        /// </summary>
+        private const bool fieldPositionCorrectionIsEnabled = false;
+
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
             //オブジェクトがドロップされたらパスを設定
@@ -66,7 +71,10 @@ namespace Roguegard.Editor
             if (HasProperties(refValue))
             {
                 var instancePosition = position;
+                var beforeIndentLevel = EditorGUI.indentLevel;
+                EditorGUI.indentLevel -= fieldPositionCorrectionIsEnabled ? 1 : 0;
                 EditorGUI.PropertyField(instancePosition, _ref, new GUIContent(), true);
+                EditorGUI.indentLevel = beforeIndentLevel;
             }
 
             // バリデーション
