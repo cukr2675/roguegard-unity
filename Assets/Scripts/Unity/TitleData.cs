@@ -17,6 +17,8 @@ namespace RoguegardUnity
         [SerializeField] private TitleMenu _menuPrefab = null;
         [SerializeField] private MenuController _menuControllerPrefab = null;
         [Space]
+        [SerializeField] private PresetCreationData[] _presets = null;
+        [Space]
         [SerializeField] private RogueSpriteRendererPool _spriteRendererPoolPrefab = null;
         [SerializeField] private RogueTilemapRenderer _tilemapRendererPrefab = null;
         [SerializeField] private TouchController _touchControllerPrefab = null;
@@ -30,8 +32,13 @@ namespace RoguegardUnity
 
         public void InstantiateTitleMenu()
         {
-            var assetTable = RoguegardSettings.GetAssetTable("Core");
             var characterCreationDatabase = new CharacterCreationDatabase();
+            foreach (var preset in _presets)
+            {
+                characterCreationDatabase.AddPreset(preset);
+            }
+
+            var assetTable = RoguegardSettings.GetAssetTable("Core");
             foreach (var asset in assetTable.Values)
             {
                 if (asset is IAppearanceOption appearanceOption)

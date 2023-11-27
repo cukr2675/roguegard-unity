@@ -8,6 +8,7 @@ using UnityEngine.AddressableAssets;
 using TMPro;
 using Roguegard;
 using Roguegard.Device;
+using Roguegard.CharacterCreation;
 
 namespace RoguegardUnity
 {
@@ -140,7 +141,7 @@ namespace RoguegardUnity
 
             public StartGameChoice(TitleMenu parent)
             {
-                nextMenu = new NextMenu() { parent = parent };
+                nextMenu = new NextMenu(parent);
             }
 
             public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
@@ -156,7 +157,14 @@ namespace RoguegardUnity
 
             private class NextMenu : IModelsMenu
             {
-                public TitleMenu parent;
+                private readonly TitleMenu parent;
+                private readonly NewGameMenu nextMenu;
+
+                public NextMenu(TitleMenu parent)
+                {
+                    this.parent = parent;
+                    nextMenu = new NewGameMenu(parent);
+                }
 
                 public void OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
                 {
@@ -168,7 +176,8 @@ namespace RoguegardUnity
                     (root) =>
                     {
                         root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-                        FadeCanvas.FadeWithLoadScene($"{parent._nextSceneAddress}", () => Loaded());
+                        var builder = parent.characterCreationDatabase.Presets[0].ToBuilder();
+                        root.OpenMenu(nextMenu, null, null, new(other: builder), RogueMethodArgument.Identity);
                     });
                 }
 
@@ -183,12 +192,105 @@ namespace RoguegardUnity
                         parent.OpenDevice(device);
                     });
                 }
+            }
 
-                private void Loaded()
+            private class NewGameMenu : IModelsMenu
+            {
+                private readonly object[] models;
+
+                public NewGameMenu(TitleMenu parent)
                 {
-                    var save = new StandardRogueDeviceSave();
-                    var device = RogueDevice.NewGame(save);
-                    parent.OpenDevice(device);
+                    models = new object[] { new ExitChoice(parent) };
+                }
+
+                public void OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+                {
+                    var builder = (CharacterCreationDataBuilder)arg.Other;
+                    root.Get(DeviceKw.MenuCharacterCreation).OpenView(null, models, root, null, null, new(other: builder));
+                }
+            }
+
+            private class ExitChoice : IModelsMenuChoice
+            {
+                private readonly NextMenu nextMenu;
+
+                public ExitChoice(TitleMenu parent)
+                {
+                    nextMenu = new NextMenu(parent);
+                }
+
+                public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+                {
+                    return "完了";
+                }
+
+                public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+                {
+                    var builder = (CharacterCreationDataBuilder)arg.Other;
+                    root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+                    root.AddInt(DeviceKw.StartTalk, 0);
+                    root.AddObject(DeviceKw.AppendText, "このキャラクターで始めますか？（あとで修正できます）");
+                    root.AddInt(DeviceKw.WaitEndOfTalk, 0);
+                    root.OpenMenuAsDialog(nextMenu, null, null, new(other: builder), new(other: builder));
+                }
+
+                private class NextMenu : IModelsMenu
+                {
+                    private readonly object[] models;
+
+                    public NextMenu(TitleMenu parent)
+                    {
+                        models = new object[]
+                        {
+                            new StartChoice() { parent = parent },
+                            new CloseChoice(),
+                            ExitModelsMenuChoice.Instance
+                        };
+                    }
+
+                    public void OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+                    {
+                        root.Get(DeviceKw.MenuTalkChoices).OpenView(ChoicesModelsMenuItemController.Instance, models, root, self, user, arg);
+                    }
+                }
+
+                private class StartChoice : IModelsMenuChoice
+                {
+                    public TitleMenu parent;
+
+                    public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+                    {
+                        return "保存して始める";
+                    }
+
+                    public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+                    {
+                        var builder = (CharacterCreationDataBuilder)arg.Other;
+                        root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+                        FadeCanvas.FadeWithLoadScene($"{parent._nextSceneAddress}", () => Loaded(builder));
+                    }
+
+                    private void Loaded(CharacterCreationDataBuilder builder)
+                    {
+                        var save = new StandardRogueDeviceSave(builder);
+                        var device = RogueDevice.NewGame(save);
+                        parent.OpenDevice(device);
+                    }
+                }
+
+                private class CloseChoice : IModelsMenuChoice
+                {
+                    public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+                    {
+                        return "保存せずに終わる";
+                    }
+
+                    public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+                    {
+                        root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+                        root.Back();
+                        root.Back();
+                    }
                 }
             }
         }

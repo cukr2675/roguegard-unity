@@ -16,10 +16,7 @@ MonoBehaviour:
   _autoUpdateAssetTablesOnEnabled: 1
   _world: {fileID: 11400000, guid: 54b7f1cb05acf694ca3545570d9e79e4, type: 2}
   _lobby: {fileID: 11400000, guid: b68d87efd75176742b76575e5de8220e, type: 2}
-  _initialCharacters:
-  - {fileID: 11400000, guid: 1de337ac628278f4db386038a3e0b2b7, type: 2}
-  - {fileID: 11400000, guid: ff3a78dceaafbdf4b9bd12568b64d0ee, type: 2}
-  - {fileID: 11400000, guid: 319229867706872418481b44486e6bd9, type: 2}
+  _initialCharacter: {fileID: 11400000, guid: b286c7f36e7fc6b468a964c089a7f222, type: 2}
   _maxTilemapSize: {x: 96, y: 64}
   _defaultVisibleRadius: 2
   _keywordsNotEnqueueMessageRule:

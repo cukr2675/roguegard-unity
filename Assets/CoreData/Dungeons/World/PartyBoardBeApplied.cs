@@ -163,7 +163,7 @@ namespace Roguegard
 
                 private class Menu : IModelsMenu
                 {
-                    private readonly object[] models = new object[0];
+                    private readonly object[] models = new object[] { ExitModelsMenuChoice.Instance };
 
                     public void OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
                     {

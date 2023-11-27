@@ -10,14 +10,19 @@ namespace RoguegardUnity
 {
     public class CharacterCreationDatabase
     {
-        //[SerializeField] private PresetCreationData[] _presets = null;
-        //public Spanning<PresetCreationData> Presets => _presets;
+        private List<PresetCreationData> _presets = new List<PresetCreationData>();
+        public Spanning<PresetCreationData> Presets => _presets;
 
         private List<IAppearanceOption> _appearanceOptions = new List<IAppearanceOption>();
         public Spanning<IAppearanceOption> AppearanceOptions => _appearanceOptions;
 
         private List<IIntrinsicOption> _intrinsicOptions = new List<IIntrinsicOption>();
         public Spanning<IIntrinsicOption> IntrinsicOptions => _intrinsicOptions;
+
+        public void AddPreset(PresetCreationData preset)
+        {
+            _presets.Add(preset);
+        }
 
         public void AddAppearanceOption(IAppearanceOption appearanceOption)
         {

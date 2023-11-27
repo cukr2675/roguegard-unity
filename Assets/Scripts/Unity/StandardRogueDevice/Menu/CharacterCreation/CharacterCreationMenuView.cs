@@ -73,7 +73,8 @@ namespace RoguegardUnity
 
             SetArg(root, self, user, arg);
 
-            var obj = new CharacterCreationDataBuilder(builder).CreateObj(null, Vector2Int.zero, RogueRandom.Primary);
+            var random = new RogueRandom(0);
+            var obj = new CharacterCreationDataBuilder(builder).CreateObj(null, Vector2Int.zero, random);
             obj.Main.Sprite.Update(obj);
             var spriteTransform = RogueObjSpriteTransform.Identity;
             KeywordBoneMotion.Wait.ApplyTo(obj.Main.Sprite.MotionSet, 0, RogueDirection.Down, ref spriteTransform, out _);
@@ -144,7 +145,7 @@ namespace RoguegardUnity
                 RectTransform.Edge.Top, 0, _firstParent.rect.height + Mathf.Max(intrinsicSumHeight, startingItemSumHeight));
 
             _appearanceButton.SetItem(ChoicesModelsMenuItemController.Instance, appearanceChoice);
-            _exitButton.SetItem(ChoicesModelsMenuItemController.Instance, ExitModelsMenuChoice.Instance);
+            _exitButton.SetItem(ChoicesModelsMenuItemController.Instance, models[0]);
             MenuController.Show(_canvasGroup, true);
         }
 
