@@ -209,7 +209,7 @@ namespace RoguegardUnity
                     root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
                     root.AddInt(DeviceKw.StartTalk, 0);
                     root.AddObject(DeviceKw.AppendText, ":GiveUpMsg");
-                    root.AddInt(DeviceKw.WaitTalk, 0);
+                    root.AddInt(DeviceKw.WaitEndOfTalk, 0);
                     root.OpenMenuAsDialog(nextMenu, self, user, arg, arg);
                 }
 

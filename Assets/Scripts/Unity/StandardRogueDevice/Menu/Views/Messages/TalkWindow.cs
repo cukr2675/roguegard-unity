@@ -23,7 +23,7 @@ namespace RoguegardUnity
 
         private IModelsMenuItemController controller;
         private object source;
-        private bool waitTalk;
+        private bool waitEndOfTalk;
 
         public override float GetPosition() => 0f;
         public override void SetPosition(float position) { }
@@ -82,9 +82,9 @@ namespace RoguegardUnity
             _text.AppendHorizontalRule();
         }
 
-        public void WaitTalk()
+        public void WaitEndOfTalk()
         {
-            waitTalk = true;
+            waitEndOfTalk = true;
         }
 
         public void Clear()
@@ -98,7 +98,7 @@ namespace RoguegardUnity
         {
             _text.UpdateUI(deltaTime);
 
-            if (waitTalk && _text.WaitsInput)
+            if (waitEndOfTalk && _text.WaitsInput)
             {
                 _text.Input();
             }

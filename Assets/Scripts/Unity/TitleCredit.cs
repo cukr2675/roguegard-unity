@@ -68,7 +68,7 @@ namespace RoguegardUnity
             Root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
             Root.AddInt(DeviceKw.StartTalk, 0);
             Root.AddObject(DeviceKw.AppendText, $"{url} へ移動しますか？");
-            Root.AddInt(DeviceKw.WaitTalk, 0);
+            Root.AddInt(DeviceKw.WaitEndOfTalk, 0);
             Root.OpenMenuAsDialog(urlTalk, Self, User, new(other: url), Arg);
         }
 

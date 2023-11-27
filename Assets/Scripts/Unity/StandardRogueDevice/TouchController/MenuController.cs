@@ -296,9 +296,9 @@ namespace RoguegardUnity
             _messageController.StartTalk();
         }
 
-        public void WaitTalk()
+        public void WaitEndOfTalk()
         {
-            _messageController.WaitTalk();
+            _messageController.WaitEndOfTalk();
         }
 
         public void Append(RogueObj player, object obj, StackTrace stackTrace)
@@ -390,9 +390,9 @@ namespace RoguegardUnity
                 StartTalk();
                 return;
             }
-            if (keyword == DeviceKw.WaitTalk)
+            if (keyword == DeviceKw.WaitEndOfTalk)
             {
-                WaitTalk();
+                WaitEndOfTalk();
                 return;
             }
             if (keyword == DeviceKw.EnqueueSE && type == AddType.Object)

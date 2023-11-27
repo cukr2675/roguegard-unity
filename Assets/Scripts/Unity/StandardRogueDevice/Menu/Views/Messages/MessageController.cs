@@ -64,9 +64,9 @@ namespace RoguegardUnity
             _talkWindow.StartTalk();
         }
 
-        public void WaitTalk()
+        public void WaitEndOfTalk()
         {
-            _talkWindow.WaitTalk();
+            _talkWindow.WaitEndOfTalk();
         }
 
         private void AppendText(string text)

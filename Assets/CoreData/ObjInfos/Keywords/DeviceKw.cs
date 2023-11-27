@@ -110,11 +110,11 @@ namespace Roguegard
         [SerializeField] private KeywordData _submit;
         public static IKeyword Submit => instance._submit;
 
+        [SerializeField] private KeywordData _waitEndOfTalk;
+        public static IKeyword WaitEndOfTalk => instance._waitEndOfTalk;
+
         [SerializeField] private KeywordData _waitForInput;
         public static IKeyword WaitForInput => instance._waitForInput;
-
-        [SerializeField] private KeywordData _waitTalk;
-        public static IKeyword WaitTalk => instance._waitTalk;
 
         public override IEnumerator LoadAsync()
         {

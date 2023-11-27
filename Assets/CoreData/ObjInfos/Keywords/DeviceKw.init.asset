@@ -46,5 +46,5 @@ MonoBehaviour:
   _saveGame: {fileID: 11400000, guid: 0c7221eb87b600c46b34d81133dbf6ac, type: 2}
   _startTalk: {fileID: 11400000, guid: cb990fa9f75b57a4b9ca2da0a76c4972, type: 2}
   _submit: {fileID: 11400000, guid: e6d072ae876eb9d47bae945a7b8dda51, type: 2}
+  _waitEndOfTalk: {fileID: 11400000, guid: b8c5abc82baaa704da85a8ceac65ebf0, type: 2}
   _waitForInput: {fileID: 11400000, guid: 671fe5ab2c391844d8f3dd433e77fbd4, type: 2}
-  _waitTalk: {fileID: 11400000, guid: b8c5abc82baaa704da85a8ceac65ebf0, type: 2}
