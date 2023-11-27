@@ -42,7 +42,7 @@ namespace ObjectFormer
         /// <summary>
         /// 現在のビルドでの <paramref name="type"/> の <see cref="FormerMember"/> 配列を取得する。
         /// </summary>
-        public static FormerMember[] Generate(Type type, bool force = false)
+        public static FormerMember[] Generate(Type type, bool force = false, bool includeObjectMember = false)
         {
             if (type.IsAbstract || type.IsInterface || type.IsGenericTypeDefinition) throw new ArgumentException();
 
@@ -62,7 +62,7 @@ namespace ObjectFormer
                 var fieldInfos = type1.GetRuntimeFields();
                 foreach (var fieldInfo in fieldInfos)
                 {
-                    if (TryCreate(fieldInfo, out var member))
+                    if (TryCreate(fieldInfo, includeObjectMember, out var member))
                     {
                         if (members.Select(x => x.Name).Contains(member.Name)) throw new Exception(
                             $"{type1} のメンバ名 {member.Name} は二つ以上存在します。");
@@ -73,10 +73,17 @@ namespace ObjectFormer
             }
         }
 
-        private static bool TryCreate(FieldInfo fieldInfo, out FormerMember member)
+        private static bool TryCreate(FieldInfo fieldInfo, bool allowObjectMember, out FormerMember member)
         {
             if (fieldInfo.IsStatic || fieldInfo.IsNotSerialized || fieldInfo.IsDefined(typeof(IgnoreMemberAttribute), false))
             {
+                member = default;
+                return false;
+            }
+            if (!allowObjectMember && fieldInfo.FieldType == typeof(object))
+            {
+                ObjectFormerLogger.LogWarning(
+                    $"許可されていない object 型のメンバ {fieldInfo.DeclaringType}.{fieldInfo.Name} の {nameof(FormerMember)} を生成しようとしました。");
                 member = default;
                 return false;
             }

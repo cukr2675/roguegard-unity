@@ -48,18 +48,17 @@ namespace RoguegardUnity
         public void SetObj(RogueObj obj)
         {
             var details = obj.Main.InfoSet.Details;
-            if (details == null)
+            if (details != null)
             {
-                var name = obj.Main.InfoSet.Name;
-                if (name.StartsWith(':'))
-                {
-                    details = StandardRogueDeviceUtility.Localize($"{name}::d");
-                }
+                _text.text = details.ToString();
+                return;
             }
 
-            if (details is string text)
+            var name = obj.Main.InfoSet.Name;
+            if (name.StartsWith(':'))
             {
-                _text.text = text;
+                _text.text = StandardRogueDeviceUtility.Localize($"{name}::d");
+                return;
             }
         }
 

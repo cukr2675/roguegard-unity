@@ -10,6 +10,6 @@ namespace Roguegard
         Sprite Icon { get; }
         Color Color { get; }
         string Caption { get; }
-        object Details { get; }
+        IRogueDetails Details { get; }
     }
 }

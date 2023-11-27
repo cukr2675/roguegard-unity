@@ -34,11 +34,11 @@ namespace Roguegard.CharacterCreation
         public Sprite Icon => _option.Icon;
         Color IRogueDescription.Color => _option.Color;
         public string Caption => _optionDescription?.Caption ?? _option.Caption;
-        public object Details => _optionDescription?.Details ?? _option.Details;
+        public IRogueDetails Details => _optionDescription?.Details ?? _option.Details;
 
         string IReadOnlyRace.OptionName => _optionDescription?.DescriptionName;
         string IReadOnlyRace.OptionCaption => _optionDescription?.Caption;
-        object IReadOnlyRace.OptionDetails => _optionDescription?.Details;
+        IRogueDetails IReadOnlyRace.OptionDetails => _optionDescription?.Details;
         int IReadOnlyRace.Lv => 1;
 
         IReadOnlyMember IMemberable.GetMember(IMemberSource source)

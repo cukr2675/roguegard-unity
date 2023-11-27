@@ -349,7 +349,7 @@ namespace RoguegardUnity
                 public Sprite Icon => null;
                 public Color Color => default;
                 public string Caption => null;
-                public object Details => null;
+                public IRogueDetails Details => null;
             }
 
             private class Comparer : IComparer<RogueObj>

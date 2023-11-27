@@ -9,6 +9,6 @@ namespace Roguegard.CharacterCreation
         IAppearanceOption Option { get; }
         string OptionName { get; }
         string OptionCaption { get; }
-        object OptionDetails { get; }
+        IRogueDetails OptionDetails { get; }
     }
 }

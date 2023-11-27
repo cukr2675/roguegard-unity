@@ -231,7 +231,7 @@ namespace Roguegard.Extensions
             public Sprite Icon => null;
             public Color Color => Color.white;
             public string Caption => null;
-            public object Details => null;
+            public IRogueDetails Details => null;
         }
     }
 }

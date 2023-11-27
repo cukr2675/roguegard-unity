@@ -21,9 +21,9 @@ namespace ObjectFormer.Serialization.Json
             FieldTypes = former.Members.Select(x => x.FieldType).ToArray();
         }
 
-        public static FormerJsonConverter Create(Type type, bool force = false)
+        public static FormerJsonConverter Create(Type type, bool force = false, bool includeObjectMember = false)
         {
-            var members = FormerMember.Generate(type, force);
+            var members = FormerMember.Generate(type, force, includeObjectMember);
             var former = new Former(type, members);
             return new FormerJsonConverter(former);
         }

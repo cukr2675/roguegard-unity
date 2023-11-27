@@ -19,7 +19,7 @@ namespace Roguegard.CharacterCreation
             Sprite IRogueDescription.Icon => null;
             Color IRogueDescription.Color => Color.white;
             string IRogueDescription.Caption => null;
-            object IRogueDescription.Details => null;
+            IRogueDetails IRogueDescription.Details => null;
 
             protected AbilitySortedIntrinsic(int lv)
             {

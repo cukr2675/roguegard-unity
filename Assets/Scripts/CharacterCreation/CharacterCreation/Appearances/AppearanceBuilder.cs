@@ -11,14 +11,14 @@ namespace Roguegard.CharacterCreation
         public string OptionName { get; set; }
         public Color Color { get; set; }
         public string OptionCaption { get; set; }
-        public object OptionDetails { get; set; }
+        public IRogueDetails OptionDetails { get; set; }
 
         private readonly List<IMember> members = new List<IMember>();
 
         public string Name => Option.Name;
         public Sprite Icon => Option.Icon;
         public string Caption => Option.Caption;
-        public object Details => Option.Details;
+        public IRogueDetails Details => Option.Details;
 
         public AppearanceBuilder()
         {

@@ -11,8 +11,8 @@ namespace Roguegard
         public string Name => "直線上10マス";
         Sprite IRogueDescription.Icon => null;
         Color IRogueDescription.Color => Color.white;
-        string IRogueDescription.Caption => null;
-        public object Details => "直線上10マスまで届く 障害物があるとそこで止まる";
+        string IRogueDescription.Caption => "直線上10マスまで届く 障害物があるとそこで止まる";
+        public IRogueDetails Details => null;
 
         public void Predicate(
             IRoguePredicator predicator, RogueObj self, float predictionDepth, RogueObj tool, float visibleRadius, RectInt room)

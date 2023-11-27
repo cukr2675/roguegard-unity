@@ -12,7 +12,7 @@ namespace Roguegard
         public override Sprite Icon => null;
         public override Color Color => Color.white;
         public override string Caption => null;
-        public override object Details => null;
+        public override IRogueDetails Details => null;
 
         public override IKeyword Category => null;
         public override int MaxHP => 0;

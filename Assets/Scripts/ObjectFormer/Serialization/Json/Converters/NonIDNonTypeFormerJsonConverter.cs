@@ -13,9 +13,9 @@ namespace ObjectFormer.Serialization.Json
         {
         }
 
-        public static new NonIDNonTypeFormerJsonConverter Create(Type type, bool force = false)
+        public static new NonIDNonTypeFormerJsonConverter Create(Type type, bool force = false, bool includeObjectMember = false)
         {
-            var members = FormerMember.Generate(type, force);
+            var members = FormerMember.Generate(type, force, includeObjectMember);
             var former = new Former(type, members);
             return new NonIDNonTypeFormerJsonConverter(former);
         }

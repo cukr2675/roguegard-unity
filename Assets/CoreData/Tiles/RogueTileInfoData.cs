@@ -24,7 +24,7 @@ namespace Roguegard
         public override string Caption => _caption;
 
         [SerializeField] private ScriptField<IRogueDetails> _details = null;
-        public override object Details => _details.Ref;
+        public override IRogueDetails Details => _details.Ref;
 
 
 

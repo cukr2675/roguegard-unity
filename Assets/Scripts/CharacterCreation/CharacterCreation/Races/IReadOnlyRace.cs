@@ -10,7 +10,7 @@ namespace Roguegard.CharacterCreation
         string OptionName { get; }
         Color BodyColor { get; }
         string OptionCaption { get; }
-        object OptionDetails { get; }
+        IRogueDetails OptionDetails { get; }
         int Lv { get; }
         IRogueGender Gender { get; }
         string HPName { get; }

@@ -23,7 +23,7 @@ namespace Roguegard.CharacterCreation
         public string Caption => _caption;
 
         [SerializeField] private ScriptField<IRogueDetails> _details;
-        public object Details => _details.Ref;
+        public IRogueDetails Details => _details.Ref;
 
 
 

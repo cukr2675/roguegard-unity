@@ -11,7 +11,7 @@ namespace Roguegard.CharacterCreation
         public string OptionName { get; set; }
         public Color BodyColor { get; set; }
         public string OptionCaption { get; set; }
-        public object OptionDetails { get; set; }
+        public IRogueDetails OptionDetails { get; set; }
         public IRogueGender Gender { get; set; }
         public string HPName { get; set; }
         public string MPName { get; set; }
@@ -22,7 +22,7 @@ namespace Roguegard.CharacterCreation
         public Sprite Icon => Option.Icon;
         Color IRogueDescription.Color => Option.Color;
         public string Caption => OptionCaption ?? Option.Caption;
-        public object Details => OptionDetails ?? Option.Details;
+        public IRogueDetails Details => OptionDetails ?? Option.Details;
         int IReadOnlyRace.Lv => 1;
 
         public RaceBuilder()

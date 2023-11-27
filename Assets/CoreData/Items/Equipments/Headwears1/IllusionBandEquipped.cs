@@ -23,8 +23,8 @@ namespace Roguegard.CharacterCreation
             string IRogueDescription.Name => "異性幻像";
             Sprite IRogueDescription.Icon => null;
             Color IRogueDescription.Color => Color.white;
-            string IRogueDescription.Caption => null;
-            object IRogueDescription.Details => "男性は女性 女性は男性と 間違われる状態";
+            string IRogueDescription.Caption => "男性は女性 女性は男性と 間違われる状態";
+            IRogueDetails IRogueDescription.Details => null;
             IKeyword IStatusEffect.EffectCategory => CategoryKw.Equipment;
             IBoneMotion IStatusEffect.HeadIcon => null;
             float IStatusEffect.Order => 0f;

@@ -13,7 +13,7 @@ namespace Roguegard.CharacterCreation
         public override Sprite Icon => _main.Icon;
         public override Color Color => _main.Color;
         public override string Caption => _main.Caption;
-        public override object Details => _main.Details;
+        public override IRogueDetails Details => _main.Details;
 
         public override float Cost => _main.Cost;
         public override bool CostIsUnknown => _main.CostIsUnknown;

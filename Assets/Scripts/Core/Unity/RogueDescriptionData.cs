@@ -32,7 +32,7 @@ namespace Roguegard
         public string Caption { get => _caption; set => _caption = value; }
 
         [SerializeField] private ScriptField<IRogueDetails> _details = null;
-        public object Details => _details.Ref;
+        public IRogueDetails Details => _details.Ref;
         private ScriptField<IRogueDetails> DetailsSource { get => _details; set => _details = value; }
     }
 }

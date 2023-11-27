@@ -26,7 +26,7 @@ namespace Roguegard.CharacterCreation
             Sprite IRogueDescription.Icon => null;
             Color IRogueDescription.Color => Color.white;
             string IRogueDescription.Caption => null;
-            object IRogueDescription.Details => null;
+            IRogueDetails IRogueDescription.Details => null;
             IBoneMotion IStatusEffect.HeadIcon => null;
 
             public IKeyword EffectCategory => StdKw.Vehicle;
@@ -133,7 +133,7 @@ namespace Roguegard.CharacterCreation
                 public Sprite Icon => null;
                 public Color Color => Color.white;
                 public string Caption => null;
-                public object Details => null;
+                public IRogueDetails Details => null;
 
                 float IStatusEffect.Order => 0f;
                 void IStatusEffect.GetEffectedName(RogueNameBuilder refName, RogueObj self) { }

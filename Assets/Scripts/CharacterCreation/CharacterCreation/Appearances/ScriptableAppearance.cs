@@ -21,11 +21,11 @@ namespace Roguegard.CharacterCreation
         public string Name => _optionDescription?.DescriptionName ?? _option.DescriptionName;
         public Sprite Icon => _option.Icon;
         public string Caption => _optionDescription?.Caption ?? _option.Caption;
-        public object Details => _optionDescription?.Details ?? _option.Details;
+        public IRogueDetails Details => _optionDescription?.Details ?? _option.Details;
 
         string IReadOnlyAppearance.OptionName => _optionDescription?.DescriptionName;
         string IReadOnlyAppearance.OptionCaption => _optionDescription?.Caption;
-        object IReadOnlyAppearance.OptionDetails => _optionDescription?.Details;
+        IRogueDetails IReadOnlyAppearance.OptionDetails => _optionDescription?.Details;
 
         IReadOnlyMember IMemberable.GetMember(IMemberSource source)
         {

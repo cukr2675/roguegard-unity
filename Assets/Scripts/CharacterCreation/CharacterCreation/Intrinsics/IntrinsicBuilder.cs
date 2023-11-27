@@ -14,7 +14,7 @@ namespace Roguegard.CharacterCreation
         public bool OptionColorIsEnabled { get; set; }
         public Color OptionColor { get; set; }
         public string OptionCaption { get; set; }
-        public object OptionDetails { get; set; }
+        public IRogueDetails OptionDetails { get; set; }
 
         private List<IMember> members = new List<IMember>();
 
@@ -22,7 +22,7 @@ namespace Roguegard.CharacterCreation
         public Sprite Icon => OptionIcon ?? Option.Icon;
         public Color Color => OptionColorIsEnabled ? OptionColor : Option.Color;
         public string Caption => OptionCaption ?? Option.Caption;
-        public object Details => OptionDetails ?? Option.Details;
+        public IRogueDetails Details => OptionDetails ?? Option.Details;
 
         public IntrinsicBuilder()
         {

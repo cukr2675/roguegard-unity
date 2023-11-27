@@ -18,14 +18,14 @@ namespace Roguegard.CharacterCreation
         public Sprite Icon => _optionDescription?.Icon ?? Option.Icon;
         public Color Color => (_optionDescription?.ColorIsEnabled ?? false) ? _optionDescription.Color : Option.Color;
         public string Caption => _optionDescription?.Caption ?? Option.Caption;
-        public object Details => _optionDescription?.Details ?? Option.Details;
+        public IRogueDetails Details => _optionDescription?.Details ?? Option.Details;
 
         string IReadOnlyIntrinsic.OptionName => _optionDescription?.DescriptionName;
         Sprite IReadOnlyIntrinsic.OptionIcon => _optionDescription?.Icon;
         bool IReadOnlyIntrinsic.OptionColorIsEnabled => _optionDescription?.ColorIsEnabled ?? false;
         Color IReadOnlyIntrinsic.OptionColor => _optionDescription?.Color ?? default;
         string IReadOnlyIntrinsic.OptionCaption => _optionDescription?.Caption;
-        object IReadOnlyIntrinsic.OptionDetails => _optionDescription?.Details;
+        IRogueDetails IReadOnlyIntrinsic.OptionDetails => _optionDescription?.Details;
 
         IReadOnlyMember IMemberable.GetMember(IMemberSource source)
         {

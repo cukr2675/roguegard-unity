@@ -13,7 +13,7 @@ namespace ObjectFormer.Serialization.TextJson
 
         private string _version;
 
-        [System.NonSerialized] private Version _classVersion;
+        [NonSerialized] private Version _classVersion;
         public Version Version => _classVersion ??= Version.Parse(_version);
 
         private readonly Dictionary<string, string> dependencies;

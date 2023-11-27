@@ -60,7 +60,7 @@ namespace Roguegard.CharacterCreation
         Sprite IRogueDescription.Icon => Race.Icon;
         Color IRogueDescription.Color => Race.Color;
         public virtual string Caption => null;
-        public virtual object Details => null;
+        public virtual IRogueDetails Details => null;
         int IStartingItemOption.Lv => Race.Lv;
 
         public virtual Spanning<IMemberSource> StartingItemOptionMemberSources => Spanning<IMemberSource>.Empty;
@@ -157,7 +157,7 @@ namespace Roguegard.CharacterCreation
             public bool OptionColorIsEnabled => false;
             public Color OptionColor => Color.white;
             public string OptionCaption => null;
-            public object OptionDetails => null;
+            public IRogueDetails OptionDetails => null;
             public float GeneratorWeight => 0f;
             public int Stack => 1;
             public IRogueGender OptionGender { get; }
@@ -166,7 +166,7 @@ namespace Roguegard.CharacterCreation
             public Sprite Icon => Option.Icon;
             public Color Color => Option.Color;
             public string Caption => Option.Caption;
-            public object Details => Option.Details;
+            public IRogueDetails Details => Option.Details;
 
             public IReadOnlyMember GetMember(IMemberSource source) => source.CreateMember();
 

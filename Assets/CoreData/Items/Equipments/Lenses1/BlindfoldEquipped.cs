@@ -24,7 +24,7 @@ namespace Roguegard.CharacterCreation
             Sprite IRogueDescription.Icon => null;
             Color IRogueDescription.Color => Color.white;
             string IRogueDescription.Caption => null;
-            object IRogueDescription.Details => null;
+            IRogueDetails IRogueDescription.Details => null;
             IKeyword IStatusEffect.EffectCategory => CategoryKw.Equipment;
             IBoneMotion IStatusEffect.HeadIcon => null;
             float IStatusEffect.Order => 0f;

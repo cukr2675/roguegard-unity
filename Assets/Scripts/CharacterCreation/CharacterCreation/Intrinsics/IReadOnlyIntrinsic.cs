@@ -12,6 +12,6 @@ namespace Roguegard.CharacterCreation
         bool OptionColorIsEnabled { get; }
         Color OptionColor { get; }
         string OptionCaption { get; }
-        object OptionDetails { get; }
+        IRogueDetails OptionDetails { get; }
     }
 }

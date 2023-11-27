@@ -13,7 +13,7 @@ namespace Roguegard
         public virtual Sprite Icon => Sprite;
         public abstract Color Color { get; }
         public abstract string Caption { get; }
-        public abstract object Details { get; }
+        public abstract IRogueDetails Details { get; }
 
         public abstract Sprite Sprite { get; }
         public abstract IKeyword Category { get; }

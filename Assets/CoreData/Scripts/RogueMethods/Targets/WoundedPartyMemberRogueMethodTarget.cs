@@ -12,7 +12,7 @@ namespace Roguegard
         Sprite IRogueDescription.Icon => null;
         Color IRogueDescription.Color => Color.white;
         string IRogueDescription.Caption => null;
-        object IRogueDescription.Details => null;
+        IRogueDetails IRogueDescription.Details => null;
 
         private static readonly Stack<Predicator> predicators = new Stack<Predicator>();
 

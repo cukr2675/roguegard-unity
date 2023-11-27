@@ -17,7 +17,7 @@ namespace Roguegard.CharacterCreation
             public virtual Sprite Icon => parent.Icon;
             public virtual Color Color => parent.Color;
             public virtual string Caption => parent.Caption;
-            public virtual object Details => parent.Details;
+            public virtual IRogueDetails Details => parent.Details;
 
             public abstract IRogueMethodTarget Target { get; }
             public abstract IRogueMethodRange Range { get; }

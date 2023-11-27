@@ -10,7 +10,7 @@ namespace Roguegard
         public virtual Sprite Icon => null;
         public virtual Color Color => Color.white;
         public virtual string Caption => null;
-        public virtual object Details => null;
+        public virtual IRogueDetails Details => null;
 
         public abstract IRogueMethodTarget Target { get; }
         public abstract IRogueMethodRange Range { get; }

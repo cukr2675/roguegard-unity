@@ -29,14 +29,14 @@ namespace Roguegard.CharacterCreation
         public Sprite Icon => _optionDescription?.Icon ?? _option.Race.Icon;
         public Color Color => (_optionDescription?.ColorIsEnabled ?? false) ? _optionDescription.Color : _option.Race.Color;
         public string Caption => _optionDescription?.Caption ?? _option.Caption;
-        public object Details => _optionDescription?.Details ?? _option.Details;
+        public IRogueDetails Details => _optionDescription?.Details ?? _option.Details;
 
         string IReadOnlyStartingItem.OptionName => _optionDescription?.DescriptionName;
         Sprite IReadOnlyStartingItem.OptionIcon => _optionDescription?.Icon;
         bool IReadOnlyStartingItem.OptionColorIsEnabled => _optionDescription?.ColorIsEnabled ?? false;
         Color IReadOnlyStartingItem.OptionColor => _optionDescription?.Color ?? default;
         string IReadOnlyStartingItem.OptionCaption => _optionDescription?.Caption;
-        object IReadOnlyStartingItem.OptionDetails => _optionDescription?.Details;
+        IRogueDetails IReadOnlyStartingItem.OptionDetails => _optionDescription?.Details;
         IRogueGender IReadOnlyStartingItem.OptionGender => null;
 
         MainInfoSet IRogueObjGenerator.InfoSet => _option.PrimaryInfoSet;

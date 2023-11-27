@@ -42,7 +42,7 @@ namespace Roguegard.CharacterCreation
         public abstract Sprite Icon { get; }
         public abstract Color Color { get; }
         public abstract string Caption { get; }
-        public abstract object Details { get; }
+        public abstract IRogueDetails Details { get; }
 
         public abstract IRaceOption Open(
             RogueObj self, MainInfoSetType infoSetType, bool polymorph2Base, IRaceOption raceOption, ICharacterCreationData characterCreationData);

@@ -9,7 +9,7 @@ namespace Roguegard.CharacterCreation
     {
         public string Name { get; set; }
         public string ShortName { get; set; }
-        public object Details { get; set; }
+        public IRogueDetails Details { get; set; }
         public float Cost { get; set; }
         public bool CostIsUnknown { get; set; }
         public int Lv { get; set; }

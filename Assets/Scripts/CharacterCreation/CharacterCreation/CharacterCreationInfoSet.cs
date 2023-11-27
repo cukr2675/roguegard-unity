@@ -11,7 +11,7 @@ namespace Roguegard.CharacterCreation
         public override Sprite Icon => CurrentRaceOption.Icon;
         public override Color Color => CurrentRaceOption.Color;
         public override string Caption => Data.Caption;
-        public override object Details => Data.Details;
+        public override IRogueDetails Details => Data.Details;
 
         public ICharacterCreationData Data { get; }
 
