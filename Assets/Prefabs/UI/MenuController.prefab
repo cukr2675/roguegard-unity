@@ -5729,6 +5729,8 @@ MonoBehaviour:
   _content: {fileID: 9062574898811413873}
   _itemPrefab: {fileID: 7251070034383148064, guid: 3d8de5b889250844ea67fe30402b2f9e, type: 3}
   _itemButtonCount: {x: 1, y: 2}
+  _verticalExtensionTarget: {fileID: 8232021275795392691}
+  _enabledVerticalExtension: 0
 --- !u!114 &3768411294708649195
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8667,6 +8669,8 @@ MonoBehaviour:
   _content: {fileID: 5026678911436868135}
   _itemPrefab: {fileID: 7251070034383148064, guid: 3d8de5b889250844ea67fe30402b2f9e, type: 3}
   _itemButtonCount: {x: 3, y: 3}
+  _verticalExtensionTarget: {fileID: 0}
+  _enabledVerticalExtension: 0
 --- !u!114 &1619776727288713241
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9286,6 +9290,8 @@ MonoBehaviour:
   _content: {fileID: 3435734120611164695}
   _itemPrefab: {fileID: 7251070034383148064, guid: 3d8de5b889250844ea67fe30402b2f9e, type: 3}
   _itemButtonCount: {x: 3, y: 3}
+  _verticalExtensionTarget: {fileID: 0}
+  _enabledVerticalExtension: 0
 --- !u!114 &7547723957348699995
 MonoBehaviour:
   m_ObjectHideFlags: 0

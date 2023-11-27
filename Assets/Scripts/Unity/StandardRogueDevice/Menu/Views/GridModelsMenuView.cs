@@ -15,6 +15,7 @@ namespace RoguegardUnity
 
         [Header("Layout")]
         [SerializeField] private Vector2Int _itemButtonCount = Vector2Int.one;
+        [SerializeField] private RectTransform _verticalExtensionTarget = null;
 
         private IModelsMenuItemController itemController;
 
@@ -46,6 +47,7 @@ namespace RoguegardUnity
         {
             var length = _itemButtonCount.x * _itemButtonCount.y;
             length = Mathf.Min(length, models.Count);
+            if (_verticalExtensionTarget != null) { length = models.Count; }
             AdjustItems(length);
             for (int i = 0; i < itemButtons.Count; i++)
             {
@@ -86,6 +88,15 @@ namespace RoguegardUnity
                         Destroy(itemButtons[i].gameObject);
                     }
                     itemButtons.RemoveRange(count, itemButtons.Count - count);
+                }
+
+                // 選択肢の要素数に合わせてウィンドウを拡張する
+                if (_verticalExtensionTarget != null)
+                {
+                    var height = itemSize.y * count;
+                    var sizeDelta = _verticalExtensionTarget.sizeDelta;
+                    sizeDelta.y = sizeDelta.y - _content.rect.height + height;
+                    _verticalExtensionTarget.sizeDelta = sizeDelta;
                 }
             }
         }
