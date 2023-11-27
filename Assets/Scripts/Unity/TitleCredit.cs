@@ -19,12 +19,14 @@ namespace RoguegardUnity
         [SerializeField] private ModelsMenuViewItemButton _exitButton = null;
 
         private ExitChoice exitChoice;
+        private URLTalk urlTalk;
 
         public override CanvasGroup CanvasGroup => _canvasGroup;
 
         public void Initialize()
         {
             exitChoice = new ExitChoice() { parent = this };
+            urlTalk = new URLTalk();
             _exitButton.Initialize(this);
             _exitButton.SetItem(ChoicesModelsMenuItemController.Instance, exitChoice);
         }
@@ -63,6 +65,11 @@ namespace RoguegardUnity
             var linkInfo = _text.textInfo.linkInfo[linkIndex];
             var url = linkInfo.GetLinkText();
             //Application.OpenURL(url);
+            Root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+            Root.AddInt(DeviceKw.StartTalk, 0);
+            Root.AddObject(DeviceKw.AppendText, $"{url} へ移動しますか？");
+            Root.AddInt(DeviceKw.WaitTalk, 0);
+            Root.OpenMenuAsDialog(urlTalk, Self, User, new(other: url), Arg);
         }
 
         private class ExitChoice : IModelsMenuChoice
@@ -78,6 +85,37 @@ namespace RoguegardUnity
             {
                 root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Cancel);
                 MenuController.Show(parent._canvasGroup, false);
+            }
+        }
+
+        private class URLTalk : IModelsMenu
+        {
+            private static readonly object[] models = new object[]
+            {
+                new JumpChoice(),
+                ExitModelsMenuChoice.Instance
+            };
+
+            public void OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            {
+                root.Get(DeviceKw.MenuTalkChoices).OpenView(ChoicesModelsMenuItemController.Instance, models, root, self, user, arg);
+            }
+
+            private class JumpChoice : IModelsMenuChoice
+            {
+                public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+                {
+                    return "はい";
+                }
+
+                public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+                {
+                    root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+                    root.Back();
+
+                    var url = (string)arg.Other;
+                    Application.OpenURL(url);
+                }
             }
         }
     }

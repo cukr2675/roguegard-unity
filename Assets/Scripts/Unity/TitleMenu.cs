@@ -86,6 +86,12 @@ namespace RoguegardUnity
             menuController.OpenMenu(new MainMenu(this), null, null, RogueMethodArgument.Identity);
         }
 
+        private void Update()
+        {
+            var deltaTime = 1;
+            menuController.UpdateUI(deltaTime);
+        }
+
         private void SetBackgroundSprite(Sprite sprite, Sprite spriteB, Color backgroundColor)
         {
             var backgrounds = GetComponentsInChildren<MenuWindowBackground>();
