@@ -29,7 +29,7 @@ namespace Roguegard
             VehicleInfo.SetRiderTo(vehicle, rider);
         }
 
-        public void Close()
+        public void RemoveClose()
         {
             Rider.Main.RogueEffects.Remove(this);
             Rider = null;

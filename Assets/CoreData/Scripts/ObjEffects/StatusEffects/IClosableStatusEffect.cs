@@ -6,6 +6,6 @@ namespace Roguegard
 {
     public interface IClosableStatusEffect : IStatusEffect
     {
-        void Close(RogueObj self);
+        void RemoveClose(RogueObj self);
     }
 }

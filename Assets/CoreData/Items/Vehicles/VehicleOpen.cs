@@ -123,7 +123,7 @@ namespace Roguegard.CharacterCreation
             public override bool Invoke(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
             {
                 var info = Roguegard.VehicleInfo.Get(self);
-                info.Close(self);
+                info.RemoveClose(self);
 
                 var owner = self.Location;
                 if (RogueDevice.Primary.VisibleAt(owner.Location, owner.Position))

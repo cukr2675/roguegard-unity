@@ -27,7 +27,7 @@ namespace Roguegard
         {
             if (obj.Main.RogueEffects.TryGetEffect<Effect>(out var effect))
             {
-                effect.Close(obj);
+                effect.RemoveClose(obj);
             }
         }
 
@@ -51,7 +51,7 @@ namespace Roguegard
                 RogueEffectUtility.AddFromRogueEffect(self, this);
             }
 
-            public void Close(RogueObj self)
+            public void RemoveClose(RogueObj self)
             {
                 RogueEffectUtility.RemoveClose(self, this);
                 self.RemoveInfo(typeof(Effect));

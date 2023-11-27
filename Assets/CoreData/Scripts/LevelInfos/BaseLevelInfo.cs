@@ -21,7 +21,7 @@ namespace Roguegard
             RogueEffectUtility.AddFromRogueEffect(self, this);
         }
 
-        public virtual void Close(RogueObj self)
+        public virtual void RemoveClose(RogueObj self)
         {
             RogueEffectUtility.RemoveClose(self, this);
         }

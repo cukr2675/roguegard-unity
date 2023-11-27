@@ -74,7 +74,7 @@ namespace Roguegard.CharacterCreation
                         if (statusEffect.EffectCategory == EffectCategoryKw.StatusAilment &&
                             statusEffect is IClosableStatusEffect closable)
                         {
-                            closable.Close(self);
+                            closable.RemoveClose(self);
                         }
                     }
                     if (RogueDevice.Primary.VisibleAt(self.Location, self.Position))

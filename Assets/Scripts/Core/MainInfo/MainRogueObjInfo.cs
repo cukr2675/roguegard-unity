@@ -213,16 +213,16 @@ namespace Roguegard
 
         public void UpdatePlayerLeaderInfo(RogueObj self, IPlayerLeaderInfo playerLeaderInfo)
         {
-            this.playerLeaderInfo?.Close(self);
+            this.playerLeaderInfo?.RemoveClose(self);
             this.playerLeaderInfo = playerLeaderInfo;
         }
 
         /// <summary>
-        /// このインスタンスに設定済みの <see cref="ILevelInfo.Close"/> を実行して <paramref name="levelInfo"/> を設定する。
+        /// このインスタンスに設定済みの <see cref="ILevelInfo.RemoveClose"/> を実行して <paramref name="levelInfo"/> を設定する。
         /// </summary>
         public void UpdateLevelInfo(RogueObj self, ILevelInfo levelInfo)
         {
-            this.levelInfo?.Close(self);
+            this.levelInfo?.RemoveClose(self);
             this.levelInfo = levelInfo;
         }
 
@@ -382,7 +382,7 @@ namespace Roguegard
                 {
                     var fromEquipment = from.GetEquipment(fromPart, i);
                     var fromEquipmentInfo = fromEquipment.Main.GetEquipmentInfo(fromEquipment);
-                    fromEquipmentInfo.Close(fromEquipment);
+                    fromEquipmentInfo.RemoveClose(fromEquipment);
                 }
             }
 
@@ -401,7 +401,7 @@ namespace Roguegard
                     // 移動しきれないぶんは解除する。
                     var fromEquipment = from.GetEquipment(fromPart, i);
                     var fromEquipmentInfo = fromEquipment.Main.GetEquipmentInfo(fromEquipment);
-                    fromEquipmentInfo.Close(fromEquipment);
+                    fromEquipmentInfo.RemoveClose(fromEquipment);
                 }
             }
         }

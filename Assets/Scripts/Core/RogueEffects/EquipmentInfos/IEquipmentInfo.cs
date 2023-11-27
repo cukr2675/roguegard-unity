@@ -22,6 +22,6 @@ namespace Roguegard
 
         bool TryOpen(RogueObj equipment, int index, EquipRogueEffect equipEffect = null);
 
-        void Close(RogueObj equipment);
+        void RemoveClose(RogueObj equipment);
     }
 }

@@ -41,7 +41,7 @@ namespace Roguegard
             SpeedCalculator.SetDirty(self);
         }
 
-        protected override bool Close(RogueObj self, StatusEffectCloseType closeType = StatusEffectCloseType.Manual)
+        protected override bool RemoveClose(RogueObj self, StatusEffectCloseType closeType = StatusEffectCloseType.Manual)
         {
             SpeedCalculator.SetDirty(self);
             if (RogueDevice.Primary.VisibleAt(self.Location, self.Position))
@@ -51,7 +51,7 @@ namespace Roguegard
                 RogueDevice.Add(DeviceKw.AppendText, this);
                 RogueDevice.Add(DeviceKw.AppendText, "がおさまった\n");
             }
-            return base.Close(self);
+            return base.RemoveClose(self);
         }
 
         void IValueEffect.AffectValue(IKeyword keyword, AffectableValue value, RogueObj self)

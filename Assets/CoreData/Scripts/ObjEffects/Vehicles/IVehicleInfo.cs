@@ -15,6 +15,6 @@ namespace Roguegard
 
         bool TryOpen(RogueObj vehicle, RogueObj rider, RideRogueEffect rideEffect = null);
 
-        void Close(RogueObj vehicle);
+        void RemoveClose(RogueObj vehicle);
     }
 }

@@ -50,10 +50,10 @@ namespace Roguegard
             RogueEffectUtility.AddFromRogueEffect(Rider, this);
         }
 
-        void IVehicleInfo.Close(RogueObj vehicle)
+        void IVehicleInfo.RemoveClose(RogueObj vehicle)
         {
             RemoveEffect(vehicle);
-            rideEffect.Close();
+            rideEffect.RemoveClose();
             VehicleInfo.SetRiderTo(vehicle, null);
         }
 

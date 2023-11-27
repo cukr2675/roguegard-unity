@@ -40,7 +40,7 @@ namespace Roguegard
                 DungeonFloorCloserStateInfo.AddCloser(self, this);
             }
 
-            bool IDungeonFloorCloser.Close(RogueObj self, bool exitDungeon)
+            bool IDungeonFloorCloser.RemoveClose(RogueObj self, bool exitDungeon)
             {
                 if (!exitDungeon) return false;
 

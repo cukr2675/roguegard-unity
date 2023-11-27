@@ -27,7 +27,7 @@ namespace Roguegard.Device
             obj.Main.RogueEffects.AddOpen(obj, effect);
         }
 
-        public void Close(RogueObj obj)
+        public void RemoveClose(RogueObj obj)
         {
             RogueEffectUtility.RemoveClose(obj, this);
         }

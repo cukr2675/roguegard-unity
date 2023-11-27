@@ -420,7 +420,7 @@ namespace RoguegardUnity
 
                 // RogueDeviceEffect を移動させる
                 var deviceEffect = RogueDeviceEffect.Get(Player);
-                deviceEffect.Close(Player);
+                deviceEffect.RemoveClose(Player);
                 RogueDeviceEffect.SetTo(newPlayer);
 
                 Player = newPlayer;

@@ -93,7 +93,7 @@ namespace Roguegard
             RogueEffectUtility.AddFromRogueEffect(owner, this);
         }
 
-        void IEquipmentInfo.Close(RogueObj equipment)
+        void IEquipmentInfo.RemoveClose(RogueObj equipment)
         {
             Unequip(equipment);
         }
@@ -128,7 +128,7 @@ namespace Roguegard
                 }
             }
 
-            equipEffect.Close(owner);
+            equipEffect.RemoveClose(owner);
         }
 
         protected virtual void RemoveEffect(RogueObj equipment)
@@ -187,7 +187,7 @@ namespace Roguegard
             {
                 var owner = self.Location;
                 var info = self.Main.GetEquipmentInfo(self);
-                info.Close(self);
+                info.RemoveClose(self);
                 SpaceUtility.Restack(self);
 
                 if (arg.Count == 0 && RogueDevice.Primary.VisibleAt(owner.Location, owner.Position))

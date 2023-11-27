@@ -24,7 +24,7 @@ namespace Roguegard
 
             // 装備に成功したら装備を破壊してステータスエフェクトを付与する。
             var owner = self.Location;
-            info.Close(self);
+            info.RemoveClose(self);
             self.TrySetStack(0, owner);
 
             ChangeGenderEffect.Change(owner);

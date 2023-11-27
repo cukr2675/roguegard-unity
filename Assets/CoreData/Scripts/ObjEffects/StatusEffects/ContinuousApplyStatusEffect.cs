@@ -35,12 +35,12 @@ namespace Roguegard
             SpeedCalculator.SetDirty(self);
         }
 
-        protected override bool Close(RogueObj self, StatusEffectCloseType closeType = StatusEffectCloseType.Manual)
+        protected override bool RemoveClose(RogueObj self, StatusEffectCloseType closeType = StatusEffectCloseType.Manual)
         {
             if (closeType == StatusEffectCloseType.TimeLimit) { Debug.LogWarning($"{nameof(ContinuousApplyStatusEffect)} をターン経過で解除しました。"); }
 
             SpeedCalculator.SetDirty(self);
-            return base.Close(self, closeType);
+            return base.RemoveClose(self, closeType);
         }
 
         protected override RogueObjUpdaterContinueType UpdateObj(RogueObj self, float activationDepth, ref int sectionIndex)
@@ -70,7 +70,7 @@ namespace Roguegard
             if (keyword == MainInfoKw.Hit && result && arg.Other != Callback) // Callback との等価判定で、エフェクト付与直後に解除されないようにする
             {
                 // 攻撃を受けると解除される
-                Close(self);
+                RemoveClose(self);
                 if (RogueDevice.Primary.VisibleAt(self.Location, self.Position))
                 {
                     RogueDevice.Add(DeviceKw.AppendText, self);

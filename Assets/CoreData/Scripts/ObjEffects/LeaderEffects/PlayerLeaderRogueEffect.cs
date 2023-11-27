@@ -22,8 +22,8 @@ namespace Roguegard
             to.Main.UpdatePlayerLeaderInfo(to, this);
         }
 
-        void IPlayerLeaderInfo.Close(RogueObj self) => Close(self);
-        protected virtual void Close(RogueObj self)
+        void IPlayerLeaderInfo.RemoveClose(RogueObj self) => RemoveClose(self);
+        protected virtual void RemoveClose(RogueObj self)
         {
             RogueEffectUtility.RemoveClose(self, this);
         }

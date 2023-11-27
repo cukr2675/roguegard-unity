@@ -36,10 +36,10 @@ namespace Roguegard
         }
 
         /// <summary>
-        /// 注意：このメソッドは必ず <see cref="IEquipmentInfo.Close(RogueObj)"/> 内で実行する。
+        /// 注意：このメソッドは必ず <see cref="IEquipmentInfo.RemoveClose(RogueObj)"/> 内で実行する。
         /// （このメソッドでは <paramref name="owner"/> からエフェクトを解除するのみで、装備品には影響を与えないため）
         /// </summary>
-        public void Close(RogueObj owner)
+        public void RemoveClose(RogueObj owner)
         {
             owner.Main.RogueEffects.Remove(this);
             Index = -1;

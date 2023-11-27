@@ -50,7 +50,7 @@ namespace Roguegard
             base.Open(self);
         }
 
-        protected override bool Close(RogueObj self, StatusEffectCloseType closeType = StatusEffectCloseType.Manual)
+        protected override bool RemoveClose(RogueObj self, StatusEffectCloseType closeType = StatusEffectCloseType.Manual)
         {
             SpeedCalculator.SetDirty(self);
             if (RogueDevice.Primary.VisibleAt(self.Location, self.Position))
@@ -58,7 +58,7 @@ namespace Roguegard
                 RogueDevice.Add(DeviceKw.AppendText, self);
                 RogueDevice.Add(DeviceKw.AppendText, "は目を覚ました！\n");
             }
-            return base.Close(self);
+            return base.RemoveClose(self);
         }
 
         void IValueEffect.AffectValue(IKeyword keyword, AffectableValue value, RogueObj self)
@@ -108,7 +108,7 @@ namespace Roguegard
             if (result && keyword == MainInfoKw.Hit && arg.RefValue?.MainValue >= 1)
             {
                 // ダメージを受けたとき目を覚ます
-                Close(self);
+                RemoveClose(self);
             }
             return result;
         }

@@ -8,7 +8,7 @@ namespace Roguegard
     {
         Spanning<int> NextTotalExps { get; }
 
-        void Close(RogueObj self);
+        void RemoveClose(RogueObj self);
 
         void LevelUp(RogueObj self);
 

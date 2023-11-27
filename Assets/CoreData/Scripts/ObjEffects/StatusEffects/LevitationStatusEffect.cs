@@ -24,9 +24,9 @@ namespace Roguegard
             RogueEffectUtility.AddFromRogueEffect(self, effect);
         }
 
-        protected override bool Close(RogueObj self, StatusEffectCloseType closeType = StatusEffectCloseType.Manual)
+        protected override bool RemoveClose(RogueObj self, StatusEffectCloseType closeType = StatusEffectCloseType.Manual)
         {
-            base.Close(self);
+            base.RemoveClose(self);
             RogueEffectUtility.Remove(self, effect);
             return true;
         }

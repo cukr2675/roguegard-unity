@@ -12,6 +12,6 @@ namespace Roguegard
     {
         void Move(RogueObj from, RogueObj to);
 
-        void Close(RogueObj self);
+        void RemoveClose(RogueObj self);
     }
 }

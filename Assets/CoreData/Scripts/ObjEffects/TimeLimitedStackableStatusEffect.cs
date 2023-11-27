@@ -35,7 +35,7 @@ namespace Roguegard
                 LifeTime--;
                 if (LifeTime <= 0)
                 {
-                    Close(self, StatusEffectCloseType.TimeLimit);
+                    RemoveClose(self, StatusEffectCloseType.TimeLimit);
                 }
             }
             return result;

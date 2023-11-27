@@ -82,7 +82,7 @@ namespace Roguegard.CharacterCreation
                     if (keyword == MainInfoKw.Hit && arg.RefValue != null && arg.RefValue.SubValues.Is(MainInfoKw.Skill) && arg.RefValue.MainValue > 0f)
                     {
                         arg.RefValue.MainValue += 2 * Stack;
-                        Close(self);
+                        RemoveClose(self);
                     }
                     return next.Invoke(keyword, method, self, target, activationDepth, arg);
                 }

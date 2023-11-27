@@ -25,7 +25,7 @@ namespace Roguegard
                 if (equipIndex >= 0)
                 {
                     // 装備品を変化させる場合、装備を解除してから変化させる。
-                    selfEquipmentInfo.Close(self);
+                    selfEquipmentInfo.RemoveClose(self);
                 }
 
                 self.Main.Polymorph(self, infoSet);
@@ -43,7 +43,7 @@ namespace Roguegard
                 var rider = vehicleInfo.Rider;
                 if (rider != null)
                 {
-                    vehicleInfo.Close(self);
+                    vehicleInfo.RemoveClose(self);
                 }
 
                 self.Main.Polymorph(self, infoSet);

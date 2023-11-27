@@ -46,7 +46,7 @@ namespace Roguegard
             {
                 for (int i = 0; i < closers.Count; i++)
                 {
-                    if (closers[i].Close(self, exitDungeon))
+                    if (closers[i].RemoveClose(self, exitDungeon))
                     {
                         closers.RemoveAt(i);
                         i--;

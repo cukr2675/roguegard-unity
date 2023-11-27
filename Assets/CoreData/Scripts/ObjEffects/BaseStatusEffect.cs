@@ -36,18 +36,18 @@ namespace Roguegard
             DungeonFloorCloserStateInfo.AddCloser(self, this);
         }
 
-        protected virtual bool Close(RogueObj self, StatusEffectCloseType closeType = StatusEffectCloseType.Manual)
+        protected virtual bool RemoveClose(RogueObj self, StatusEffectCloseType closeType = StatusEffectCloseType.Manual)
         {
             RogueEffectUtility.RemoveClose(self, this);
             return true;
         }
 
-        void IClosableStatusEffect.Close(RogueObj self)
+        void IClosableStatusEffect.RemoveClose(RogueObj self)
         {
-            Close(self, StatusEffectCloseType.Manual);
+            RemoveClose(self, StatusEffectCloseType.Manual);
         }
 
-        bool IDungeonFloorCloser.Close(RogueObj self, bool exitDungeon)
+        bool IDungeonFloorCloser.RemoveClose(RogueObj self, bool exitDungeon)
         {
             var statusEffectState = self.Main.GetStatusEffectState(self);
             if (!statusEffectState.TryGetStatusEffect<BaseStatusEffect>(GetType(), out _))
@@ -57,7 +57,7 @@ namespace Roguegard
                 return true;
             }
 
-            return Close(self, exitDungeon ? StatusEffectCloseType.ExitDungeon : StatusEffectCloseType.ExitDungeonFloor);
+            return RemoveClose(self, exitDungeon ? StatusEffectCloseType.ExitDungeon : StatusEffectCloseType.ExitDungeonFloor);
         }
 
         public static bool Close<T>(RogueObj obj)
@@ -66,7 +66,7 @@ namespace Roguegard
             var statusEffectState = obj.Main.GetStatusEffectState(obj);
             if (statusEffectState.TryGetStatusEffect<T>(out var statusEffect))
             {
-                statusEffect.Close(obj, StatusEffectCloseType.Manual);
+                statusEffect.RemoveClose(obj, StatusEffectCloseType.Manual);
                 return true;
             }
             return false;
