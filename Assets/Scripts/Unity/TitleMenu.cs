@@ -25,7 +25,6 @@ namespace RoguegardUnity
         [SerializeField] private Image _background = null;
         [SerializeField] private Image _logo = null;
         [SerializeField] private ModelsMenuView _titleMenu = null;
-        [SerializeField] private ScrollModelsMenuView _scrollMenu = null;
         [SerializeField] private TitleCredit _creditMenu = null;
 
         [Space]
@@ -41,14 +40,11 @@ namespace RoguegardUnity
         private AudioSource bgmAudioSourcePrefab;
         private CharacterCreationDatabase characterCreationDatabase;
 
-        private IModelsMenuChoice[] titleMenuModels;
-
-        private SelectFileMenu selectFileMenu;
-
-        private BackChoice backChoice;
+        private MenuController menuController;
 
         public void Initialize(
             RogueSpriteRendererPool spriteRendererPool,
+            MenuController menuControllerPrefab,
             RogueTilemapRenderer tilemapRendererPrefab,
             TouchController touchControllerPrefab,
             SoundTable soundTable,
@@ -68,10 +64,14 @@ namespace RoguegardUnity
             this.characterCreationDatabase = characterCreationDatabase;
             DontDestroyOnLoad(spriteRendererPool.gameObject);
 
+            menuController = Instantiate(menuControllerPrefab);
+            var soundController = new SoundController();
+            soundController.Open(null, seAudioSourcePrefab, soundTable.ToTable());
+            menuController.Initialize(soundController, characterCreationDatabase, spriteRendererPool);
+
             _logo.sprite = logo;
             _logo.SetNativeSize();
 
-            _scrollMenu.Initialize();
             _creditMenu.Initialize();
             _versionText.text = Application.version;
             _background.sprite = CoreTiles1.Grass.Sprite;
@@ -81,17 +81,9 @@ namespace RoguegardUnity
             WindowFrameList.GetWindowFrame(0, out var backgroundA, out var backgroundB);
             var windowColor = ColorPreset.GetColor(0);
             SetBackgroundSprite(backgroundA, backgroundB, windowColor);
+            menuController.SetWindowFrame(backgroundA, backgroundB, windowColor);
 
-            titleMenuModels = new IModelsMenuChoice[]
-            {
-                new StartGameChoice() { parent = this },
-                new CreditChoice() { parent = this },
-            };
-
-            selectFileMenu = new SelectFileMenu(_scrollMenu);
-            backChoice = new BackChoice() { parent = this };
-
-            _titleMenu.OpenView(ChoicesModelsMenuItemController.Instance, titleMenuModels, null, null, null, RogueMethodArgument.Identity);
+            menuController.OpenMenu(new MainMenu(this), null, null, RogueMethodArgument.Identity);
         }
 
         private void SetBackgroundSprite(Sprite sprite, Sprite spriteB, Color backgroundColor)
@@ -115,9 +107,35 @@ namespace RoguegardUnity
                 soundTable, audioMixer, seAudioSourcePrefab, bgmAudioSourcePrefab, characterCreationDatabase);
         }
 
+        private class MainMenu : IModelsMenu
+        {
+            private readonly TitleMenu parent;
+            private readonly object[] models;
+
+            public MainMenu(TitleMenu parent)
+            {
+                this.parent = parent;
+                models = new object[]
+                {
+                    new StartGameChoice(parent),
+                    new CreditChoice() { parent = parent },
+                };
+            }
+
+            public void OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            {
+                parent._titleMenu.OpenView(ChoicesModelsMenuItemController.Instance, models, root, null, null, RogueMethodArgument.Identity);
+            }
+        }
+
         private class StartGameChoice : IModelsMenuChoice
         {
-            public TitleMenu parent;
+            private readonly NextMenu nextMenu;
+
+            public StartGameChoice(TitleMenu parent)
+            {
+                nextMenu = new NextMenu() { parent = parent };
+            }
 
             public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
@@ -126,41 +144,53 @@ namespace RoguegardUnity
 
             public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                parent.selectFileMenu.Open((root, path) =>
-                {
-                    FadeCanvas.FadeWithLoadScene($"{parent._nextSceneAddress}", () => Loaded(path));
-                },
-                (root) =>
-                {
-                    FadeCanvas.FadeWithLoadScene($"{parent._nextSceneAddress}", () => Loaded());
-                });
-                parent._scrollMenu.ShowExitButton(parent.backChoice);
+                root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+                root.OpenMenu(nextMenu, null, null, RogueMethodArgument.Identity, RogueMethodArgument.Identity);
             }
 
-            private void Loaded(string path)
+            private class NextMenu : IModelsMenu
             {
-                RogueFile.OpenRead(path, stream =>
+                public TitleMenu parent;
+
+                public void OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
                 {
-                    var name = RogueFile.GetName(path);
+                    parent.menuController.OpenSelectFile((root, path) =>
+                    {
+                        root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+                        FadeCanvas.FadeWithLoadScene($"{parent._nextSceneAddress}", () => Loaded(path));
+                    },
+                    (root) =>
+                    {
+                        root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+                        FadeCanvas.FadeWithLoadScene($"{parent._nextSceneAddress}", () => Loaded());
+                    });
+                }
+
+                private void Loaded(string path)
+                {
+                    RogueFile.OpenRead(path, stream =>
+                    {
+                        var name = RogueFile.GetName(path);
+                        var save = new StandardRogueDeviceSave();
+                        var device = RogueDevice.LoadGame(save, stream, name);
+                        stream.Close();
+                        parent.OpenDevice(device);
+                    });
+                }
+
+                private void Loaded()
+                {
                     var save = new StandardRogueDeviceSave();
-                    var device = RogueDevice.LoadGame(save, stream, name);
-                    stream.Close();
+                    var device = RogueDevice.NewGame(save);
                     parent.OpenDevice(device);
-                });
-            }
-
-            private void Loaded()
-            {
-                var save = new StandardRogueDeviceSave();
-                var device = RogueDevice.NewGame(save);
-                parent.OpenDevice(device);
+                }
             }
         }
 
         private class CreditChoice : IModelsMenuChoice
         {
             public TitleMenu parent;
-            private ItemController itemController;
+            private NextMenu nextMenu;
 
             public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
@@ -169,18 +199,25 @@ namespace RoguegardUnity
 
             public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                if (itemController == null)
+                if (nextMenu == null)
                 {
-                    itemController = new ItemController() { parent = parent };
+                    nextMenu = new NextMenu() { parent = parent };
                 }
 
-                parent._scrollMenu.OpenView(itemController, parent._credits, null, null, null, RogueMethodArgument.Identity);
-                parent._scrollMenu.ShowExitButton(parent.backChoice);
+                root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+                root.OpenMenu(nextMenu, null, null, RogueMethodArgument.Identity, RogueMethodArgument.Identity);
             }
 
-            private class ItemController : IModelsMenuItemController
+            private class NextMenu : IModelsMenu, IModelsMenuItemController
             {
                 public TitleMenu parent;
+
+                public void OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+                {
+                    var scroll = (IScrollModelsMenuView)root.Get(DeviceKw.MenuScroll);
+                    scroll.OpenView(this, parent._credits, root, null, null, RogueMethodArgument.Identity);
+                    scroll.ShowExitButton(ExitModelsMenuChoice.Instance);
+                }
 
                 public string GetName(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
                 {
@@ -189,26 +226,27 @@ namespace RoguegardUnity
 
                 public void Activate(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
                 {
+                    root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
                     var credit = (CreditData)model;
-                    parent._creditMenu.Show(credit);
+                    parent._creditMenu.Show(credit, root);
                 }
             }
         }
 
-        private class BackChoice : IModelsMenuChoice
-        {
-            public TitleMenu parent;
+        //private class BackChoice : IModelsMenuChoice
+        //{
+        //    public TitleMenu parent;
 
-            public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                return ExitModelsMenuChoice.Instance.GetName(root, self, user, arg);
-            }
+        //    public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+        //    {
+        //        return ExitModelsMenuChoice.Instance.GetName(root, self, user, arg);
+        //    }
 
-            public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                MenuController.Show(parent._scrollMenu.CanvasGroup, false);
-                MenuController.Show(parent._creditMenu.CanvasGroup, false);
-            }
-        }
+        //    public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+        //    {
+        //        MenuController.Show(parent._scrollMenu.CanvasGroup, false);
+        //        MenuController.Show(parent._creditMenu.CanvasGroup, false);
+        //    }
+        //}
     }
 }

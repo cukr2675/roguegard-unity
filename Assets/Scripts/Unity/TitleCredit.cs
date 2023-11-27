@@ -45,8 +45,10 @@ namespace RoguegardUnity
             _scrollRect.verticalNormalizedPosition = 0f;
         }
 
-        public void Show(CreditData credit)
+        public void Show(CreditData credit, IModelsMenuRoot root)
         {
+            SetArg(root, null, null, RogueMethodArgument.Identity);
+
             // 文字列にリンクを貼ったものを表示
             _text.text = Regex.Replace(credit.Details, @"(https?://\S+)", "<color=#8080ff><u><link>$1</link></u></color>");
 
@@ -60,7 +62,7 @@ namespace RoguegardUnity
 
             var linkInfo = _text.textInfo.linkInfo[linkIndex];
             var url = linkInfo.GetLinkText();
-            Application.OpenURL(url);
+            //Application.OpenURL(url);
         }
 
         private class ExitChoice : IModelsMenuChoice
@@ -74,9 +76,9 @@ namespace RoguegardUnity
 
             public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
+                root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Cancel);
                 MenuController.Show(parent._canvasGroup, false);
             }
-
         }
     }
 }

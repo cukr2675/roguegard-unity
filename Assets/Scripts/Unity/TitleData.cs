@@ -15,6 +15,7 @@ namespace RoguegardUnity
         [SerializeField] private RoguegardSettingsData _settings = null;
         [SerializeField] private Sprite _titleLogo = null;
         [SerializeField] private TitleMenu _menuPrefab = null;
+        [SerializeField] private MenuController _menuControllerPrefab = null;
         [Space]
         [SerializeField] private RogueSpriteRendererPool _spriteRendererPoolPrefab = null;
         [SerializeField] private RogueTilemapRenderer _tilemapRendererPrefab = null;
@@ -46,7 +47,7 @@ namespace RoguegardUnity
             var menu = Instantiate(_menuPrefab);
             var spriteRendererPool = Instantiate(_spriteRendererPoolPrefab);
             menu.Initialize(
-                spriteRendererPool, _tilemapRendererPrefab, _touchControllerPrefab,
+                spriteRendererPool, _menuControllerPrefab, _tilemapRendererPrefab, _touchControllerPrefab,
                 _soundTable, _audioMixer, _seAudioSourcePrefab, _bgmAudioSourcePrefab, characterCreationDatabase, _titleLogo);
         }
     }
