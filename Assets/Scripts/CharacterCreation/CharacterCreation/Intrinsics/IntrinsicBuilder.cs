@@ -12,7 +12,7 @@ namespace Roguegard.CharacterCreation
         //public Sprite OptionIcon { get; set; }
         public Sprite OptionIcon { get => null; set { } }
         public bool OptionColorIsEnabled { get; set; }
-        public Color OptionColor { get; set; }
+        public Color32 OptionColor { get; set; }
         public string OptionCaption { get; set; }
         public IRogueDetails OptionDetails { get; set; }
 
@@ -23,6 +23,7 @@ namespace Roguegard.CharacterCreation
         public Color Color => OptionColorIsEnabled ? OptionColor : Option.Color;
         public string Caption => OptionCaption ?? Option.Caption;
         public IRogueDetails Details => OptionDetails ?? Option.Details;
+        Color IReadOnlyIntrinsic.OptionColor => OptionColor;
 
         public IntrinsicBuilder()
         {

@@ -149,7 +149,7 @@ namespace RoguegardUnity
             var converters = new RelationalComponentListBuilder<RelationalJsonConverter>();
             converters.Add(FormerJsonConverter.Create(typeof(Vector2Int), true));
             converters.Add(FormerJsonConverter.Create(typeof(RectInt), true));
-            converters.Add(FormerJsonConverter.Create(typeof(Color), true));
+            converters.Add(FormerJsonConverter.Create(typeof(Color32), true));
             converters.Add(RogueObjJsonConverter.Create());
             converters.Add(FormerJsonConverter.Create(typeof(StandardRogueDevice)));
             converters.Add(FormerJsonConverter.Create(typeof(RogueOptions)));

@@ -183,14 +183,14 @@ namespace RoguegardUnity
                 public float GetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
                 {
                     var builder = (AppearanceBuilder)arg.Other;
-                    return builder.Color.r;
+                    return builder.Color.r / 255f;
                 }
 
                 public void SetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg, float value)
                 {
                     var builder = (AppearanceBuilder)arg.Other;
                     var color = builder.Color;
-                    color.r = value;
+                    color.r = (byte)(value * 255f);
                     builder.Color = color;
                 }
             }
@@ -205,14 +205,14 @@ namespace RoguegardUnity
                 public float GetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
                 {
                     var builder = (AppearanceBuilder)arg.Other;
-                    return builder.Color.g;
+                    return builder.Color.g / 255f;
                 }
 
                 public void SetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg, float value)
                 {
                     var builder = (AppearanceBuilder)arg.Other;
                     var color = builder.Color;
-                    color.g = value;
+                    color.g = (byte)(value * 255f);
                     builder.Color = color;
                 }
             }
@@ -227,14 +227,14 @@ namespace RoguegardUnity
                 public float GetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
                 {
                     var builder = (AppearanceBuilder)arg.Other;
-                    return builder.Color.b;
+                    return builder.Color.b / 255f;
                 }
 
                 public void SetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg, float value)
                 {
                     var builder = (AppearanceBuilder)arg.Other;
                     var color = builder.Color;
-                    color.b = value;
+                    color.b = (byte)(value * 255f);
                     builder.Color = color;
                 }
             }
@@ -249,14 +249,14 @@ namespace RoguegardUnity
                 public float GetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
                 {
                     var builder = (AppearanceBuilder)arg.Other;
-                    return builder.Color.a;
+                    return builder.Color.a / 255f;
                 }
 
                 public void SetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg, float value)
                 {
                     var builder = (AppearanceBuilder)arg.Other;
                     var color = builder.Color;
-                    color.a = value;
+                    color.a = (byte)(value * 255f);
                     builder.Color = color;
                 }
             }

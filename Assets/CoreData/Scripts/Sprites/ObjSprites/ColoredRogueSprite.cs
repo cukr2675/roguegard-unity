@@ -12,7 +12,7 @@ namespace Roguegard
         public override Color IconColor => color;
 
         private Sprite sprite;
-        private Color color;
+        private Color32 color;
 
         private ColoredRogueSprite()
         {
@@ -44,8 +44,8 @@ namespace Roguegard
             renderController.AdjustBones(1);
             if (pose.BoneTransforms.TryGetValue(BoneKw.Body, out var transform))
             {
-                var sprite = transform.Sprite != null ? transform.Sprite.NormalFront : this.sprite;
-                var color = transform.OverridesSourceColor ? transform.Color : this.color;
+                var sprite = transform.Sprite != null ? transform.Sprite.NormalFront : IconSprite;
+                var color = transform.OverridesSourceColor ? transform.Color : IconColor;
                 renderController.SetBoneSprite(
                     0, BoneKw.Body.Name, sprite, color, transform.LocalMirrorX, transform.LocalMirrorY,
                     transform.LocalPosition, transform.LocalRotation, transform.ScaleOfLocalByLocal);

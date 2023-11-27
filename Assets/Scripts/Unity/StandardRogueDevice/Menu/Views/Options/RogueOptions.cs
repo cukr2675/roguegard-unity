@@ -11,7 +11,8 @@ namespace RoguegardUnity
     {
         public float MasterVolume { get; private set; }
         public int WindowFrameIndex { get; private set; }
-        public Color WindowFrameColor { get; private set; }
+        private Color32 _windowFrameColor;
+        public Color WindowFrameColor => _windowFrameColor;
 
         [System.NonSerialized] private MenuController menuController;
         [System.NonSerialized] private AudioMixer audioMixer;
@@ -35,7 +36,7 @@ namespace RoguegardUnity
         {
             MasterVolume = .5f;
             WindowFrameIndex = 0;
-            WindowFrameColor = ColorPreset.GetColor(0);
+            _windowFrameColor = ColorPreset.GetColor(0);
         }
 
         public void SetMasterVolume(float value)
@@ -48,7 +49,7 @@ namespace RoguegardUnity
         public void SetWindowFrame(int index, Color color)
         {
             WindowFrameIndex = index;
-            WindowFrameColor = color;
+            _windowFrameColor = color;
             WindowFrameList.GetWindowFrame(index, out var spriteA, out var spriteB);
             menuController.SetWindowFrame(spriteA, spriteB, color);
         }

@@ -12,7 +12,7 @@ namespace Roguegard.CharacterCreation
         //public Sprite OptionIcon { get; set; }
         public Sprite OptionIcon { get => null; set { } }
         public bool OptionColorIsEnabled { get; set; }
-        public Color OptionColor { get; set; }
+        public Color32 OptionColor { get; set; }
         public string OptionCaption { get; set; }
         public IRogueDetails OptionDetails { get; set; }
         public float GeneratorWeight { get; set; }
@@ -30,6 +30,7 @@ namespace Roguegard.CharacterCreation
         int IRogueObjGenerator.Lv => Option.Lv;
         Spanning<IWeightedRogueObjGeneratorList> IRogueObjGenerator.StartingItemTable => Option.StartingItemTable;
         float IWeightedRogueObjGenerator.Weight => GeneratorWeight;
+        Color IReadOnlyStartingItem.OptionColor => OptionColor;
         IRogueGender IReadOnlyStartingItem.OptionGender => null;
 
         public StartingItemBuilder()

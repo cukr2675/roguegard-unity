@@ -34,14 +34,14 @@ namespace Roguegard
         [ObjectFormer.Formable]
         private class Effect : IRogueEffect, IValueEffect
         {
-            private readonly Color color;
+            private readonly Color32 color;
 
             float IValueEffect.Order => 0f;
 
             [ObjectFormer.CreateInstance]
             private Effect() { }
 
-            public Effect(Color color)
+            public Effect(Color32 color)
             {
                 this.color = color;
             }
@@ -70,7 +70,7 @@ namespace Roguegard
 
             bool IRogueEffect.CanStack(RogueObj obj, RogueObj otherObj, IRogueEffect other)
             {
-                return other is Effect colorOther && colorOther.color == color;
+                return other is Effect colorOther && (Color)colorOther.color == color;
             }
 
             IRogueEffect IRogueEffect.DeepOrShallowCopy(RogueObj self, RogueObj clonedSelf) => this;

@@ -12,7 +12,8 @@ namespace Roguegard
 
         [field: System.NonSerialized] public TileBase Tile { get; }
 
-        public Color Color { get; }
+        private readonly Color32 _color;
+        public Color Color => _color;
 
         [ObjectFormer.CreateInstance]
         private ColoredRogueTile() { }
@@ -20,7 +21,7 @@ namespace Roguegard
         public ColoredRogueTile(IRogueTileInfo info, Color color)
         {
             Info = info;
-            Color = color;
+            _color = color;
 
             var tile = ScriptableObject.CreateInstance<Tile>();
             tile.sprite = info.Sprite;

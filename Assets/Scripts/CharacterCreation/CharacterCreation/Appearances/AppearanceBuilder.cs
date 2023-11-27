@@ -9,7 +9,7 @@ namespace Roguegard.CharacterCreation
     {
         public IAppearanceOption Option { get; set; }
         public string OptionName { get; set; }
-        public Color Color { get; set; }
+        public Color32 Color { get; set; }
         public string OptionCaption { get; set; }
         public IRogueDetails OptionDetails { get; set; }
 
@@ -17,6 +17,7 @@ namespace Roguegard.CharacterCreation
 
         public string Name => Option.Name;
         public Sprite Icon => Option.Icon;
+        Color IRogueDescription.Color => Color;
         public string Caption => Option.Caption;
         public IRogueDetails Details => Option.Details;
 
