@@ -42,7 +42,7 @@ namespace Roguegard.CharacterCreation
             builder.Details = Details;
             builder.Cost = Cost;
             builder.CostIsUnknown = CostIsUnknown;
-            builder.Race = new RaceBuilder(_race);
+            builder.Race.Set(_race);
             builder.Appearances.AddClones(_appearances);
             builder.Intrinsics.AddClones(_intrinsics);
             builder.StartingItemTable.AddClones(_startingItemTable);

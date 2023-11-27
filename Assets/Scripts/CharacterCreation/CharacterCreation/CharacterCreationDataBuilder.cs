@@ -14,7 +14,7 @@ namespace Roguegard.CharacterCreation
         public bool CostIsUnknown { get; set; }
         public int Lv { get; set; }
 
-        public RaceBuilder Race { get; set; }
+        public RaceBuilder Race { get; }
         public AppearanceBuilderList Appearances { get; }
         public IntrinsicBuilderList Intrinsics { get; }
         public StartingItemBuilderTable StartingItemTable { get; }
@@ -40,6 +40,7 @@ namespace Roguegard.CharacterCreation
 
         public CharacterCreationDataBuilder()
         {
+            Race = new RaceBuilder();
             Appearances = new AppearanceBuilderList();
             Intrinsics = new IntrinsicBuilderList();
             StartingItemTable = new StartingItemBuilderTable();
