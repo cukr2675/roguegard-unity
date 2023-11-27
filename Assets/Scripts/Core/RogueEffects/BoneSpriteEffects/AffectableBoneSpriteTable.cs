@@ -93,7 +93,7 @@ namespace Roguegard
             item.equipmentColors.Clear();
         }
 
-        /// <param name="overridesBaseColor">true のとき素体のスプライトの色をベースカラーから上書きする。</param>
+        /// <param name="overridesBaseColor">true かつ <paramref name="color"/> の不透明度が 100% のとき素体のスプライトの色をベースカラーから上書きする。</param>
         public void AddEquipmentSprite(IKeyword name, BoneSprite sprite, Color color, bool overridesBaseColor = false)
         {
             if (sprite == null) throw new System.ArgumentNullException(nameof(sprite));
@@ -105,7 +105,7 @@ namespace Roguegard
                 item.equipmentSprites.Clear();
                 item.equipmentColors.Clear();
             }
-            item.OverridesBaseColor |= overridesBaseColor;
+            item.OverridesBaseColor |= overridesBaseColor && color.a >= 1f;
             item.equipmentSprites.Add(sprite);
             item.equipmentColors.Add(color);
         }
@@ -136,10 +136,6 @@ namespace Roguegard
                     item.equipmentSprites.Clear();
                     item.equipmentColors.Clear();
                 }
-                else
-                {
-                    item.OverridesBaseColor |= value.OverridesBaseColor;
-                }
                 foreach (var equipmentSprite in value.equipmentSprites)
                 {
                     item.equipmentSprites.Add(equipmentSprite);
@@ -148,6 +144,7 @@ namespace Roguegard
                 {
                     item.equipmentColors.Add(equipmentColor);
                 }
+                item.OverridesBaseColor |= value.OverridesBaseColor;
             }
         }
 
@@ -178,19 +175,26 @@ namespace Roguegard
                     item.equipmentSprites.Clear();
                     item.equipmentColors.Clear();
                 }
-                else
-                {
-                    item.OverridesBaseColor |= value.OverridesBaseColor;
-                }
                 foreach (var equipmentSprite in value.equipmentSprites)
                 {
                     item.equipmentSprites.Add(equipmentSprite);
                 }
+                var valueOverridesBaseColor = value.OverridesBaseColor;
                 foreach (var equipmentColor in value.equipmentColors)
                 {
-                    if (equipmentColor == fromColor) { item.equipmentColors.Add(toColor); }
-                    else { item.equipmentColors.Add(equipmentColor); }
+                    if (equipmentColor == fromColor)
+                    {
+                        item.equipmentColors.Add(toColor);
+
+                        // 不透明色から透明になったとき、ベースカラーの設定を上書きしない
+                        if (fromColor.a >= 1f && toColor.a < 1f) { valueOverridesBaseColor = false; }
+                    }
+                    else
+                    {
+                        item.equipmentColors.Add(equipmentColor);
+                    }
                 }
+                item.OverridesBaseColor |= valueOverridesBaseColor;
             }
         }
 
