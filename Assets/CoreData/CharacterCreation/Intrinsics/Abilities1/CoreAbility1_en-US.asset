@@ -30,6 +30,10 @@ MonoBehaviour:
     m_Localized: StairPickup
     m_Metadata:
       m_Items: []
+  - m_Id: 15563982867841024
+    m_Localized: Adversity
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

@@ -139,6 +139,18 @@ MonoBehaviour:
     m_Key: PaintTrapSkill::d
     m_Metadata:
       m_Items: []
+  - m_Id: 15682278208356352
+    m_Key: ShieldJump
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15682314371645440
+    m_Key: ShieldJump::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15682338765717504
+    m_Key: ShieldJump::d
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

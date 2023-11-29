@@ -55,6 +55,18 @@ MonoBehaviour:
     m_Key: StairPickupAbility::d
     m_Metadata:
       m_Items: []
+  - m_Id: 15563982867841024
+    m_Key: AdversityAbility
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15563995610136576
+    m_Key: AdversityAbility::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15564012861308928
+    m_Key: AdversityAbility::d
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

@@ -28,21 +28,50 @@ MonoBehaviour:
     _bodyColor: {r: 1, g: 0.85882354, b: 0.7176471, a: 1}
     _gender: {fileID: 11400000, guid: 4768b495a0252a9479576904ae785ceb, type: 2}
     _hpName: 
-    _mpName: 
+    _mpName: SP
     _members:
       _items:
       - rid: 3586031399449133059
-  _appearances: []
-  _intrinsics: []
+  _appearances:
+  - _option: {fileID: 11400000, guid: c162d092af22ff747bbe2050d4785887, type: 2}
+    _optionDescription: {fileID: 0}
+    _color: {r: 0.23921569, g: 0.02745098, b: 0.02745098, a: 1}
+    _members:
+      _items:
+      - rid: 1446735840404570112
+  - _option: {fileID: 11400000, guid: 0f38827a7650e384ab5264732dc5184c, type: 2}
+    _optionDescription: {fileID: 0}
+    _color: {r: 0.23921569, g: 0.02745098, b: 0.02745098, a: 1}
+    _members:
+      _items:
+      - rid: 1446735840404570113
+  - _option: {fileID: 11400000, guid: dd45398b31707594396bf2674adc6041, type: 2}
+    _optionDescription: {fileID: 0}
+    _color: {r: 0.4, g: 0.3529412, b: 0.35686275, a: 1}
+    _members:
+      _items: []
+  _intrinsics:
+  - _option: {fileID: 11400000, guid: 7237a7ac9886c524b94c9f5c41c7dbb1, type: 2}
+    _optionDescription: {fileID: 0}
+    _members:
+      _items: []
   _startingItemTable: []
   references:
     version: 2
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
+    - rid: 1446735840404570112
+      type: {class: AlphabetTypeMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
+      data:
+        _typeIndex: 0
+    - rid: 1446735840404570113
+      type: {class: AlphabetTypeMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
+      data:
+        _typeIndex: 0
     - rid: 3586031399449133059
       type: {class: StandardRaceMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
       data:
-        _size: 8
+        _size: 6
         _typeIndex: 0
         _motionSetIndex: 0
