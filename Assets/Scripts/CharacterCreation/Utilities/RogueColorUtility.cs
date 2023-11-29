@@ -8,20 +8,27 @@ namespace Roguegard.CharacterCreation
     {
         private static readonly AffectableValue value = AffectableValue.Get();
 
+        private static readonly bool useColorRange = false;
+        private static readonly ColorRange defaultColorRange = ColorRange.LightOther;
+
         public static ColorRange GetColorRange(Color color)
         {
+            if (!useColorRange) return defaultColorRange;
+
             if (color.r > color.g && color.r > color.b)
             {
                 // Red
-                if (color.maxColorComponent >= 0.9f) return ColorRange.LightRed;
-                else if (color.maxColorComponent >= 0.5f) return ColorRange.DarkRed;
+                //if (color.maxColorComponent >= 0.9f) return ColorRange.LightRed;
+                //else
+                if (color.maxColorComponent >= 0.5f) return ColorRange.DarkRed;
                 else return ColorRange.DarkOther;
             }
             else
             {
                 // Other
-                if (color.maxColorComponent >= 0.9f) return ColorRange.LightOther;
-                else return ColorRange.DarkOther;
+                //if (color.maxColorComponent >= 0.9f) return ColorRange.LightOther;
+                //else
+                return ColorRange.DarkOther;
             }
         }
 
