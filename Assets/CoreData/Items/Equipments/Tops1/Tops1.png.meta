@@ -20,11 +20,12 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
+    flipGreenChannel: 0
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
-  ignoreMasterTextureLimit: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -63,6 +64,7 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  swizzle: 50462976
   cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
@@ -75,6 +77,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -87,6 +90,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -99,6 +103,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -111,6 +116,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
@@ -183,7 +189,7 @@ TextureImporter:
       name: LaceUpShirt_Arm_NFBF
       rect:
         serializedVersion: 2
-        x: 14
+        x: 15
         y: 59
         width: 4
         height: 5
@@ -204,7 +210,7 @@ TextureImporter:
       name: LaceUpShirt_Hand_NFBF
       rect:
         serializedVersion: 2
-        x: 14
+        x: 15
         y: 57
         width: 4
         height: 2
@@ -225,7 +231,7 @@ TextureImporter:
       name: CavalryRobe
       rect:
         serializedVersion: 2
-        x: 18
+        x: 19
         y: 52
         width: 12
         height: 12
@@ -246,7 +252,7 @@ TextureImporter:
       name: CavalryRobe_UpperBody_NF
       rect:
         serializedVersion: 2
-        x: 20
+        x: 21
         y: 60
         width: 8
         height: 4
@@ -267,7 +273,7 @@ TextureImporter:
       name: CavalryRobe_Body_NF
       rect:
         serializedVersion: 2
-        x: 18
+        x: 19
         y: 51
         width: 12
         height: 9
@@ -288,7 +294,7 @@ TextureImporter:
       name: CavalryRobe_Arm_NFBF
       rect:
         serializedVersion: 2
-        x: 41
+        x: 42
         y: 58
         width: 4
         height: 6
@@ -309,7 +315,7 @@ TextureImporter:
       name: CavalryRobe_Hand_NFBF
       rect:
         serializedVersion: 2
-        x: 41
+        x: 42
         y: 54
         width: 5
         height: 4
@@ -372,7 +378,7 @@ TextureImporter:
       name: CavalryRobe_UpperBody_BF
       rect:
         serializedVersion: 2
-        x: 31
+        x: 32
         y: 60
         width: 8
         height: 4
@@ -393,7 +399,7 @@ TextureImporter:
       name: CavalryRobe_Body_BF
       rect:
         serializedVersion: 2
-        x: 29
+        x: 30
         y: 51
         width: 12
         height: 9
@@ -414,7 +420,7 @@ TextureImporter:
       name: CamisoleDress
       rect:
         serializedVersion: 2
-        x: 18
+        x: 19
         y: 25
         width: 12
         height: 13
@@ -435,7 +441,7 @@ TextureImporter:
       name: CamisoleDress_UpperBody_NF
       rect:
         serializedVersion: 2
-        x: 20
+        x: 21
         y: 34
         width: 8
         height: 4
@@ -456,7 +462,7 @@ TextureImporter:
       name: CamisoleDress_Body_NF
       rect:
         serializedVersion: 2
-        x: 18
+        x: 19
         y: 25
         width: 12
         height: 9
@@ -477,7 +483,7 @@ TextureImporter:
       name: CamisoleDress_UpperBody_BF
       rect:
         serializedVersion: 2
-        x: 31
+        x: 32
         y: 34
         width: 8
         height: 4
@@ -498,7 +504,7 @@ TextureImporter:
       name: CamisoleDress_Body_BF
       rect:
         serializedVersion: 2
-        x: 29
+        x: 30
         y: 25
         width: 12
         height: 9
@@ -583,11 +589,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 40
+        y: 37
         width: 9
-        height: 10
+        height: 13
       alignment: 9
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.44444445, y: 0.46153846}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -604,11 +610,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 40
+        y: 37
         width: 9
-        height: 5
+        height: 8
       alignment: 9
-      pivot: {x: 0.44444445, y: 0.4}
+      pivot: {x: 0.44444445, y: 0.375}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -678,9 +684,8 @@ TextureImporter:
       Tribalwear: 1217776626
       Tribalwear_Body_NFBF: -575899113
       Tribalwear_UpperBody_NFBF: -144538691
-  spritePackingTag: 
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
-  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 
