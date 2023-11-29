@@ -1,0 +1,171 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d842246dd790334ba7cff66d4dab604, type: 3}
+  m_Name: LeatherGauntlets
+  m_EditorClassIdentifier: 
+  _overridesCost: 0
+  _cost: 0
+  _costIsUnknown: 0
+  _race:
+    _name: "\u30EC\u30B6\u30FC\u30AC\u30F3\u30C8\u30EC\u30C3\u30C8"
+    _icon: {fileID: 1878646332, guid: ad3dda28ccd739f47b1bb9a465461a63, type: 3}
+    _color: {r: 0.54901963, g: 0.11764706, b: 0.11764706, a: 1}
+    _caption: 
+    _details:
+      _script: {fileID: 0}
+      _ref:
+        rid: -2
+    _cost: 0
+    _costIsUnknown: 0
+    _genders: {fileID: 0}
+    _category: {fileID: 11400000, guid: 75e1343f76d38ef47996f24301d8239f, type: 2}
+    _maxHP: 0
+    _maxMP: 0
+    _atk: 0
+    _def: 0
+    _loadCapacity: 0
+    _faction: {fileID: 0}
+    _ability: 4
+    _material: {fileID: 11400000, guid: 18e3a43b6457b154f9328eba139ffc49, type: 2}
+    _lootTable: []
+    _walk:
+      _script: {fileID: 0}
+      _ref:
+        rid: -2
+    _wait:
+      _script: {fileID: 0}
+      _ref:
+        rid: -2
+    _attack:
+      _script: {fileID: 0}
+      _ref:
+        rid: -2
+    _throw:
+      _script: {fileID: 0}
+      _ref:
+        rid: -2
+    _pickUp:
+      _script: {fileID: 0}
+      _ref:
+        rid: -2
+    _put:
+      _script: {fileID: 0}
+      _ref:
+        rid: -2
+    _eat:
+      _script: {fileID: 0}
+      _ref:
+        rid: -2
+    _hit:
+      _script: {fileID: 0}
+      _ref:
+        rid: -2
+    _beDefeated:
+      _script: {fileID: 0}
+      _ref:
+        rid: -2
+    _locate:
+      _script: {fileID: 0}
+      _ref:
+        rid: -2
+    _polymorph:
+      _script: {fileID: 0}
+      _ref:
+        rid: -2
+    _beApplied:
+      _script: {fileID: 0}
+      _ref:
+        rid: -2
+    _beThrown:
+      _script: {fileID: 0}
+      _ref:
+        rid: -2
+    _beEaten:
+      _script: {fileID: 0}
+      _ref:
+        rid: -2
+    _equipmentState: {fileID: 0}
+    _weight:
+      _script: {fileID: 0}
+      _ref:
+        rid: -2
+    _sprite:
+      _script: {fileID: 0}
+      _ref:
+        rid: -2
+    _openEffects: []
+    _lv: 0
+    _gender: {fileID: 0}
+    _hpName: 
+    _mpName: 
+    _members:
+      _items: []
+    _isCosmetic: 0
+    _equipParts:
+    - {fileID: 11400000, guid: ef173008b2fd2ee44a39362f4abec77b, type: 2}
+    _isNotStackableWhileEquipped: 1
+    _boneSpriteTable:
+      _items:
+      - _name: {fileID: 11400000, guid: a0ccd12a7fd1b134aa832922cd725b6a, type: 2}
+        _hasFirstSprite: 0
+        _firstSprite:
+          _normalFront: {fileID: 0}
+          _normalRear: {fileID: 0}
+          _backFront: {fileID: 0}
+          _backRear: {fileID: 0}
+        _firstColor: {r: 1, g: 1, b: 1, a: 1}
+        _overridesSourceColor: 0
+        _overridesBaseColor: 0
+        _equipmentSprites:
+        - _sprite:
+            _normalFront: {fileID: 1878646332, guid: ad3dda28ccd739f47b1bb9a465461a63, type: 3}
+            _normalRear: {fileID: 0}
+            _backFront: {fileID: 1878646332, guid: ad3dda28ccd739f47b1bb9a465461a63, type: 3}
+            _backRear: {fileID: 0}
+          _color: {r: 0.54901963, g: 0.11764706, b: 0.11764706, a: 1}
+      - _name: {fileID: 11400000, guid: 1662f711f4d0ab043b52727470bfc0f1, type: 2}
+        _hasFirstSprite: 0
+        _firstSprite:
+          _normalFront: {fileID: 0}
+          _normalRear: {fileID: 0}
+          _backFront: {fileID: 0}
+          _backRear: {fileID: 0}
+        _firstColor: {r: 1, g: 1, b: 1, a: 1}
+        _overridesSourceColor: 0
+        _overridesBaseColor: 0
+        _equipmentSprites:
+        - _sprite:
+            _normalFront: {fileID: 1878646332, guid: ad3dda28ccd739f47b1bb9a465461a63, type: 3}
+            _normalRear: {fileID: 0}
+            _backFront: {fileID: 1878646332, guid: ad3dda28ccd739f47b1bb9a465461a63, type: 3}
+            _backRear: {fileID: 0}
+          _color: {r: 0.54901963, g: 0.11764706, b: 0.11764706, a: 1}
+    _eyeDropBoneName: {fileID: 0}
+    _overridesBoneSpriteEffectOrder: 1
+    _boneSpriteEffectOrder: 0.1
+    _beEquipped:
+      _script: {fileID: 0}
+      _ref:
+        rid: -2
+    _beUnequipped:
+      _script: {fileID: 0}
+      _ref:
+        rid: -2
+    _equippedEffectSources: []
+  _appearances: []
+  _intrinsics: []
+  _startingItemTable: []
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
