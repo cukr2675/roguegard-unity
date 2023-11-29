@@ -6,52 +6,44 @@ namespace Roguegard.CharacterCreation
 {
     public abstract class AbilityIntrinsicOptionScript : ScriptIntrinsicOption.Script
     {
-        public override ISortedIntrinsic CreateSortedIntrinsic(
-            ScriptIntrinsicOption parent, IReadOnlyIntrinsic intrinsic, ICharacterCreationData characterCreationData, int lv)
+        protected class AbilitySortedIntrinsic : ISortedIntrinsic
         {
-            return new AbilitySortedIntrinsic(this, lv);
-        }
-
-        protected virtual void LevelUpToLv(RogueObj self, MainInfoSetType infoSetType)
-        {
-            RogueEffectUtility.AddFromInfoSet(self, this);
-        }
-
-        protected virtual void LevelDownFromLv(RogueObj self, MainInfoSetType infoSetType)
-        {
-            RogueEffectUtility.Remove(self, this);
-        }
-
-        private class AbilitySortedIntrinsic : ISortedIntrinsic
-        {
-            private readonly AbilityIntrinsicOptionScript option;
             public int Lv { get; }
 
-            public AbilitySortedIntrinsic(AbilityIntrinsicOptionScript option, int lv)
+            public AbilitySortedIntrinsic(int lv)
             {
-                this.option = option;
                 Lv = lv;
+            }
+
+            protected virtual void LevelUpToLv(RogueObj self, MainInfoSetType infoSetType)
+            {
+                RogueEffectUtility.AddFromInfoSet(self, this);
+            }
+
+            protected virtual void LevelDownFromLv(RogueObj self, MainInfoSetType infoSetType)
+            {
+                RogueEffectUtility.Remove(self, this);
             }
 
             void ISortedIntrinsic.LevelUpToLv(RogueObj self, MainInfoSetType infoSetType)
             {
                 if (infoSetType != self.Main.InfoSetState) return;
 
-                option.LevelUpToLv(self, infoSetType);
+                LevelUpToLv(self, infoSetType);
             }
 
             void ISortedIntrinsic.LevelDownFromLv(RogueObj self, MainInfoSetType infoSetType)
             {
                 if (infoSetType != self.Main.InfoSetState) return;
 
-                option.LevelDownFromLv(self, infoSetType);
+                LevelDownFromLv(self, infoSetType);
             }
 
             void ISortedIntrinsic.Open(RogueObj self, MainInfoSetType infoSetType, bool polymorph2Base)
             {
                 if (self.Main.Stats.Lv >= Lv)
                 {
-                    option.LevelUpToLv(self, infoSetType);
+                    LevelUpToLv(self, infoSetType);
                 }
             }
 
@@ -59,7 +51,7 @@ namespace Roguegard.CharacterCreation
             {
                 if (self.Main.Stats.Lv >= Lv)
                 {
-                    option.LevelDownFromLv(self, infoSetType);
+                    LevelDownFromLv(self, infoSetType);
                 }
             }
         }
