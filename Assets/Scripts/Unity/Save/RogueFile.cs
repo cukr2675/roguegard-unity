@@ -17,7 +17,7 @@ namespace RoguegardUnity
 #if UNITY_STANDALONE || UNITY_EDITOR
             callback(Directory.GetFiles(path));
 #elif UNITY_WEBGL
-            FadeCanvas.StartConvasCoroutine(GetFilesCoroutine(path, callback));
+            FadeCanvas.StartCanvasCoroutine(GetFilesCoroutine(path, callback));
 #else
             throw new System.NotSupportedException();
 #endif
@@ -51,7 +51,7 @@ namespace RoguegardUnity
 #if UNITY_STANDALONE || UNITY_EDITOR
             callback(File.OpenRead(path));
 #elif UNITY_WEBGL
-            FadeCanvas.StartConvasCoroutine(ReadCoroutine(path, callback));
+            FadeCanvas.StartCanvasCoroutine(ReadCoroutine(path, callback));
 #else
             throw new System.NotSupportedException();
 #endif
