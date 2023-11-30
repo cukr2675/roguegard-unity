@@ -10,6 +10,7 @@ namespace Roguegard.CharacterCreation
         /// <see cref="parent"/> を型ごとに別の変数とするためジェネリック型にしている
         /// </summary>
         public abstract class MPSkillSortedIntrinsic<T> : ReferableScript, ISkill, ISortedIntrinsic
+            where T : MPSkillSortedIntrinsic<T>
         {
             private static ScriptIntrinsicOption parent;
 
