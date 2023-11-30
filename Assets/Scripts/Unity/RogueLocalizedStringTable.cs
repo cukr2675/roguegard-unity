@@ -27,7 +27,7 @@ namespace RoguegardUnity
                 if (entry != null) return true;
             }
 
-            Debug.LogError($"{key} のエントリが見つかりません。");
+            Debug.LogWarning($"{key} のエントリが見つかりません。");
             entry = null;
             return false;
         }
