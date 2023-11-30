@@ -21,11 +21,22 @@ namespace RoguegardUnity
         private Dictionary<string, object> _table;
         private Dictionary<string, object> Table => _table ??= new Dictionary<string, object>(_items.Select(x => x.ToPair()));
 
-        [ContextMenu("Update")]
+        [ContextMenu("ForceUpdate")]
+        private void ForceUpdate()
+        {
+            Update(true);
+        }
+
         public void Update()
         {
+            Update(false);
+        }
+
+        private void Update(bool force)
+        {
 #if UNITY_EDITOR
-            _items.Clear();
+            var newItems = new List<Item>();
+            var needItemKeys = new List<string>(_items.Select(x => x.Key));
             foreach (var folder in _targetFolders)
             {
                 var folderPath = UnityEditor.AssetDatabase.GetAssetPath(folder);
@@ -41,12 +52,25 @@ namespace RoguegardUnity
 
                     var name = $"{_namespace}.{asset.name}";
                     var item = new Item(name, asset);
-                    _items.Add(item);
+                    newItems.Add(item);
+                    needItemKeys.Remove(name);
                 }
             }
-            //var thisPath = AssetDatabase.GetAssetPath(this);
-            //EditorUtility.SetDirty(this);
-            //AssetDatabase.ImportAsset(thisPath);
+
+            if (!force && needItemKeys.Count >= 1)
+            {
+                foreach (var needItemKey in needItemKeys)
+                {
+                    Debug.LogError($"{needItemKey} のアセットが見つからないため {name} を更新できません。");
+                }
+            }
+            else
+            {
+                _items = newItems;
+                //var thisPath = AssetDatabase.GetAssetPath(this);
+                //EditorUtility.SetDirty(this);
+                //AssetDatabase.ImportAsset(thisPath);
+            }
 #endif
         }
 
