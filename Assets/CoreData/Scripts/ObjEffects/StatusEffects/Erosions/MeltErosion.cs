@@ -41,8 +41,8 @@ namespace Roguegard
 
         void IEquipmentRogueEffect.OpenEquip(RogueObj equipment)
         {
-            var def = StatsEffectedValues.GetDEF(equipment);
-            equipmentEffect.debuffDEF = Mathf.Min(Stack, def);
+            //var def = StatsEffectedValues.GetDEF(equipment);
+            //equipmentEffect.debuffDEF = Mathf.Min(Stack, def);
 
             var owner = equipment.Location;
             RogueEffectUtility.AddFromRogueEffect(owner, equipmentEffect);
@@ -88,6 +88,9 @@ namespace Roguegard
                 if (keyword == StatsKw.DEF)
                 {
                     value.MainValue += debuffDEF;
+
+                    // ガード率 -10%
+                    value.SubValues[StatsKw.GuardRate] -= .1f;
                 }
             }
         }
