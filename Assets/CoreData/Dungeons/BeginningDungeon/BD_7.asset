@@ -20,35 +20,24 @@ MonoBehaviour:
       _optionDescription: {fileID: 0}
       _generatorWeight: 1
       _stack: 1
-      _isIntrinsicItem: 0
       _members:
         _items: []
     - _option: {fileID: 11400000, guid: f23eb6532dbbe3448b1b843ae39d91af, type: 2}
       _optionDescription: {fileID: 0}
       _generatorWeight: 1
       _stack: 1
-      _isIntrinsicItem: 0
       _members:
         _items: []
     - _option: {fileID: 11400000, guid: 2fc212cc27f480840ae67f955102f257, type: 2}
       _optionDescription: {fileID: 0}
       _generatorWeight: 1
       _stack: 1
-      _isIntrinsicItem: 0
-      _members:
-        _items: []
-    - _option: {fileID: 11400000, guid: 2eabc8dce52fcea4fb279e68a8194353, type: 2}
-      _optionDescription: {fileID: 0}
-      _generatorWeight: 0.25
-      _stack: 1
-      _isIntrinsicItem: 0
       _members:
         _items: []
     - _option: {fileID: 11400000, guid: d2d0495cfdb771245a66402c55a9cf1a, type: 2}
       _optionDescription: {fileID: 0}
       _generatorWeight: 0.5
       _stack: 1
-      _isIntrinsicItem: 0
       _members:
         _items: []
     _minFrequency: 3
@@ -59,35 +48,30 @@ MonoBehaviour:
       _optionDescription: {fileID: 0}
       _generatorWeight: 10
       _stack: 1
-      _isIntrinsicItem: 0
       _members:
         _items: []
     - _option: {fileID: 11400000, guid: 31015d95bc32f874d9dd0deccae71167, type: 2}
       _optionDescription: {fileID: 0}
       _generatorWeight: 1
       _stack: 1
-      _isIntrinsicItem: 0
       _members:
         _items: []
     - _option: {fileID: 11400000, guid: a683aa33025885a44a55febd20f9e9b5, type: 2}
       _optionDescription: {fileID: 0}
       _generatorWeight: 1
       _stack: 1
-      _isIntrinsicItem: 0
       _members:
         _items: []
     - _option: {fileID: 11400000, guid: 0b6562c16b3a1f345892091ab5e6f6c4, type: 2}
       _optionDescription: {fileID: 0}
       _generatorWeight: 1
       _stack: 1
-      _isIntrinsicItem: 0
       _members:
         _items: []
     - _option: {fileID: 11400000, guid: 149ce082757fc75408d2274c54a034eb, type: 2}
       _optionDescription: {fileID: 0}
       _generatorWeight: 0.1
       _stack: 1
-      _isIntrinsicItem: 0
       _members:
         _items: []
     _minFrequency: 2
@@ -98,7 +82,6 @@ MonoBehaviour:
       _optionDescription: {fileID: 0}
       _generatorWeight: 1
       _stack: 1
-      _isIntrinsicItem: 0
       _members:
         _items: []
     _minFrequency: 1
