@@ -29,7 +29,7 @@ namespace Roguegard
             var result = next.Invoke(keyword, method, self, user, activationDepth, arg);
             if (!result) return false;
 
-            if (keyword == MainInfoKw.Hit && activationDepth < 1f)
+            if (keyword == MainInfoKw.Hit && activationDepth < 1f && user != null && arg.RefValue?.MainValue > 0f)
             {
                 result |= Counter(arg.RefValue);
             }
