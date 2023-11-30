@@ -99,6 +99,18 @@ MonoBehaviour:
     m_Key: SubmachineGun::d
     m_Metadata:
       m_Items: []
+  - m_Id: 17735201397542912
+    m_Key: ShortSword
+    m_Metadata:
+      m_Items: []
+  - m_Id: 17735247094484992
+    m_Key: ShortSword::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 17735258335219712
+    m_Key: ShortSword::d
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
