@@ -524,7 +524,7 @@ namespace RoguegardUnity
                 {
                     var name = RogueFile.GetName(path);
                     var save = new StandardRogueDeviceSave();
-                    var loadDevice = save.LoadGame(stream, name);
+                    var loadDevice = save.LoadGame(stream);
                     stream.Close();
                     Reload(loadDevice);
                 });

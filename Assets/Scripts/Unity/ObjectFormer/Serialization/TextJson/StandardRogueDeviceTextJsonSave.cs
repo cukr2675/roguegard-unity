@@ -42,7 +42,7 @@ namespace RoguegardUnity
             config.Serialize(stream, save);
         }
 
-        public StandardRogueDevice LoadGame(Stream stream, string name)
+        public StandardRogueDevice LoadGame(Stream stream)
         {
             using (var streamReader = new StreamReader(stream))
             {

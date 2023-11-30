@@ -22,13 +22,13 @@ namespace Roguegard
             return device;
         }
 
-        public static T LoadGame<T>(IRogueDeviceSave<T> save, Stream stream, string name)
+        public static T LoadGame<T>(IRogueDeviceSave<T> save, Stream stream)
             where T : IRogueDevice
         {
             Primary?.Close();
             Primary = null;
 
-            var device = save.LoadGame(stream, name);
+            var device = save.LoadGame(stream);
             Primary = device;
             return device;
         }

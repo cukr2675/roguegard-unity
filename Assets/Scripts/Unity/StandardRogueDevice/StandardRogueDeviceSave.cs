@@ -118,10 +118,10 @@ namespace RoguegardUnity
             writer.WriteEndObject();
         }
 
-        public StandardRogueDevice LoadGame(Stream stream, string name)
+        public StandardRogueDevice LoadGame(Stream stream)
         {
             using var archive = new ZipArchive(stream, ZipArchiveMode.Read, true);
-            var entry = archive.GetEntry($"{name}.json");
+            var entry = archive.Entries.First();
             using var streamReader = new StreamReader(entry.Open());
             using var reader = new JsonTextReader(streamReader);
 
