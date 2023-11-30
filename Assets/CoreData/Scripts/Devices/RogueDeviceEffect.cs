@@ -7,7 +7,11 @@ namespace Roguegard.Device
     [ObjectFormer.Formable]
     public class RogueDeviceEffect : IRogueEffect, IRogueObjUpdater
     {
-        [System.NonSerialized] private IDeviceCommandAction commandAction;
+        /// <summary>
+        /// 例外発生時に無限ループしないために <see cref="StaticID"/> でリセットする
+        /// </summary>
+        [System.NonSerialized] private StaticInitializable<IDeviceCommandAction> commandAction = new StaticInitializable<IDeviceCommandAction>(() => null);
+
         [System.NonSerialized] private RogueObj commandUser;
         [System.NonSerialized] private RogueMethodArgument commandArg;
 
@@ -34,16 +38,16 @@ namespace Roguegard.Device
 
         public void SetDeviceCommand(IDeviceCommandAction action, RogueObj user, in RogueMethodArgument arg)
         {
-            if (commandAction != null) throw new RogueException($"{nameof(commandAction)} を上書きすることはできません。");
+            if (commandAction.Value != null) throw new RogueException($"{nameof(commandAction)} を上書きすることはできません。");
 
-            commandAction = action;
+            commandAction.Value = action;
             commandUser = user;
             commandArg = arg;
         }
 
         public void ClearDeviceCommand()
         {
-            commandAction = null;
+            commandAction.Value = null;
         }
 
         void IRogueEffect.Open(RogueObj self)
@@ -61,11 +65,11 @@ namespace Roguegard.Device
             else
             {
                 var activeResult = false;
-                if (commandAction != null)
+                if (commandAction.Value != null)
                 {
                     // コマンドが設定されていたら実行する。
-                    activeResult = commandAction.CommandInvoke(self, commandUser, activationDepth, commandArg);
-                    commandAction = null;
+                    activeResult = commandAction.Value.CommandInvoke(self, commandUser, activationDepth, commandArg);
+                    commandAction.Value = null;
                 }
                 if (activeResult)
                 {
