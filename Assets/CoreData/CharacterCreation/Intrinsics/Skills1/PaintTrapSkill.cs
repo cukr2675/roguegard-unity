@@ -13,7 +13,7 @@ namespace Roguegard.CharacterCreation
         }
 
         [ObjectFormer.Formable]
-        private class SortedIntrinsic : MPSkillSortedIntrinsic<PaintTrapSkill>
+        private class SortedIntrinsic : MPSkillSortedIntrinsic<SortedIntrinsic>
         {
             public override IRogueMethodTarget Target => null;
             public override IRogueMethodRange Range => null;

@@ -58,6 +58,14 @@ MonoBehaviour:
     m_Localized: ShieldJump
     m_Metadata:
       m_Items: []
+  - m_Id: 16330716523663360
+    m_Localized: BlitzWave
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16331002650693632
+    m_Localized: VacuumRampage
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

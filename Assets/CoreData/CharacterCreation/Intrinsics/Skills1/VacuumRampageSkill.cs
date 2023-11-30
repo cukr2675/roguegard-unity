@@ -6,7 +6,7 @@ using Roguegard.Extensions;
 
 namespace Roguegard.CharacterCreation
 {
-    public class BeamBulletSkill : MPSkillIntrinsicOptionScript
+    public class VacuumRampageSkill : MPSkillIntrinsicOptionScript
     {
         public override ISortedIntrinsic CreateSortedIntrinsic(
             ScriptIntrinsicOption parent, IReadOnlyIntrinsic intrinsic, ICharacterCreationData characterCreationData, int lv)
@@ -18,8 +18,8 @@ namespace Roguegard.CharacterCreation
         private class SortedIntrinsic : MPSkillSortedIntrinsic<SortedIntrinsic>
         {
             public override IRogueMethodTarget Target => ForEnemyRogueMethodTarget.Instance;
-            public override IRogueMethodRange Range => LineOfSight10RogueMethodRange.Instance;
-            public override int RequiredMP => 2;
+            public override IRogueMethodRange Range => Within1TileRogueMethodRange.Instance;
+            public override int RequiredMP => 6;
 
             private SortedIntrinsic() : base(null, 0) { }
 
@@ -35,13 +35,12 @@ namespace Roguegard.CharacterCreation
                     RogueDevice.Add(DeviceKw.AppendText, this);
                     RogueDevice.Add(DeviceKw.AppendText, "\n");
                     MainCharacterWorkUtility.TryAddSkill(self);
-                    MainCharacterWorkUtility.TryAddShot(self);
                 }
 
-                // 攻撃力(x2)ダメージの攻撃。
+                // 攻撃力(x2)+2ダメージの攻撃。
                 using var damageValue = AffectableValue.Get();
                 StatsEffectedValues.GetATK(self, damageValue);
-                damageValue.MainValue += damageValue.BaseMainValue;
+                damageValue.MainValue += damageValue.BaseMainValue + 2;
                 damageValue.SubValues[MainInfoKw.Skill] = 1f;
                 this.TryHurt(target, self, activationDepth, damageValue);
                 this.TryDefeat(target, self, activationDepth, damageValue);
@@ -50,15 +49,15 @@ namespace Roguegard.CharacterCreation
 
             public override int GetATK(RogueObj self, out bool additionalEffect)
             {
-                // 攻撃力(x2)ダメージの攻撃。
+                // 攻撃力(x2)+2ダメージの攻撃。
                 using var damageValue = AffectableValue.Get();
                 StatsEffectedValues.GetATK(self, damageValue);
-                damageValue.MainValue += damageValue.BaseMainValue;
+                damageValue.MainValue += damageValue.BaseMainValue + 2;
 
                 var hpDamage = Mathf.FloorToInt(damageValue.MainValue);
                 additionalEffect = false;
                 return hpDamage;
             }
         }
-    }
+	}
 }

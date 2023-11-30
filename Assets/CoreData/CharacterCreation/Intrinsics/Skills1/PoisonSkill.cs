@@ -15,7 +15,7 @@ namespace Roguegard.CharacterCreation
         }
 
         [ObjectFormer.Formable]
-        private class SortedIntrinsic : MPSkillSortedIntrinsic<PoisonSkill>
+        private class SortedIntrinsic : MPSkillSortedIntrinsic<SortedIntrinsic>
         {
             public override IRogueMethodTarget Target => ForEnemyRogueMethodTarget.Instance;
             public override IRogueMethodRange Range => FrontRogueMethodRange.Instance;

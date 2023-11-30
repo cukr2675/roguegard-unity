@@ -15,7 +15,7 @@ namespace Roguegard.CharacterCreation
         }
 
         [ObjectFormer.Formable]
-        private class SortedIntrinsic : MPSkillSortedIntrinsic<ThronsTrapSkill>
+        private class SortedIntrinsic : MPSkillSortedIntrinsic<SortedIntrinsic>
         {
             public override IRogueMethodTarget Target => ForEnemyRogueMethodTarget.Instance;
             public override IRogueMethodRange Range => FacingAnd2FlankingRogueMethodRange.Instance;

@@ -15,7 +15,7 @@ namespace Roguegard.CharacterCreation
         }
 
         [ObjectFormer.Formable]
-        private class SortedIntrinsic : MPSkillSortedIntrinsic<BeamBulletSkill>
+        private class SortedIntrinsic : MPSkillSortedIntrinsic<SortedIntrinsic>
         {
             public override IRogueMethodTarget Target => ForPartyMemberRogueMethodTarget.Instance;
             public override IRogueMethodRange Range => UserRogueMethodRange.Instance;
@@ -61,7 +61,8 @@ namespace Roguegard.CharacterCreation
             }
         }
 
-		private class StatusEffect : BaseStatusEffect, IValueEffect, IRogueMethodPassiveAspect
+        [ObjectFormer.Formable]
+        private class StatusEffect : BaseStatusEffect, IValueEffect, IRogueMethodPassiveAspect
 		{
             public static IAffectCallback Callback { get; } = new AffectCallback(new StatusEffect());
 

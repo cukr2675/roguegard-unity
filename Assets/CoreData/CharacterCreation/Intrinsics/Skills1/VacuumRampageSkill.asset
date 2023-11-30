@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 02b25b52b1fe7ba469a29335fe1f60a0, type: 3}
-  m_Name: ShieldJump
+  m_Name: VacuumRampageSkill
   m_EditorClassIdentifier: 
   _descriptionName: 
   _icon: {fileID: 0}
@@ -20,19 +20,19 @@ MonoBehaviour:
     _script: {fileID: 0}
     _ref:
       rid: -2
-  _baseLv: 1
+  _baseLv: 20
   _baseCost: 2
   _baseCostIsUnknown: 0
   _script:
-    _script: {fileID: 11500000, guid: f463d9c12d7ca4a478a6d38877120b9f, type: 3}
+    _script: {fileID: 11500000, guid: 6d47e143edb69634fab7788dbf0325a7, type: 3}
     _ref:
-      rid: 1446735840404570116
+      rid: 3586031465861742595
   references:
     version: 2
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
-    - rid: 1446735840404570116
-      type: {class: ShieldJumpSkill, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
+    - rid: 3586031465861742595
+      type: {class: VacuumRampageSkill, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
       data:
         _assemblyReflectionAssetDummy: 
