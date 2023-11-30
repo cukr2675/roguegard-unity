@@ -34,6 +34,22 @@ MonoBehaviour:
     m_Localized: Adversity
     m_Metadata:
       m_Items: []
+  - m_Id: 16179513345052672
+    m_Localized: OneHandedSword
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16182614852505600
+    m_Localized: ShieldThrowing
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16183483815825408
+    m_Localized: BareHands
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16190205653553152
+    m_Localized: MartialArts
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

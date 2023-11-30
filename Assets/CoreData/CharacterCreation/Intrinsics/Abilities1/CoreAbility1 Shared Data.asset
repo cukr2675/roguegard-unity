@@ -67,6 +67,54 @@ MonoBehaviour:
     m_Key: AdversityAbility::d
     m_Metadata:
       m_Items: []
+  - m_Id: 16179513345052672
+    m_Key: OneHandedSwordAbility
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16179579438895104
+    m_Key: OneHandedSwordAbility::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16179588569894912
+    m_Key: OneHandedSwordAbility::d
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16182614852505600
+    m_Key: ShieldThrowingAbility
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16182674105438208
+    m_Key: ShieldThrowingAbility::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16182683806863360
+    m_Key: ShieldThrowingAbility::d
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16183483815825408
+    m_Key: BareHandsAbility
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16183598878167040
+    m_Key: BareHandsAbility::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16183607971418112
+    m_Key: BareHandsAbility::d
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16190205653553152
+    m_Key: MartialArtsAbility
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16190248431259648
+    m_Key: MartialArtsAbility::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16190257591619584
+    m_Key: MartialArtsAbility::d
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

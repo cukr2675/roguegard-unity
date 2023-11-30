@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 02b25b52b1fe7ba469a29335fe1f60a0, type: 3}
-  m_Name: OneHandedSwordAbility
+  m_Name: BareHandsAbility
   m_EditorClassIdentifier: 
   _descriptionName: 
   _icon: {fileID: 0}
@@ -21,18 +21,18 @@ MonoBehaviour:
     _ref:
       rid: -2
   _baseLv: 1
-  _baseCost: 2
+  _baseCost: 1
   _baseCostIsUnknown: 0
   _script:
-    _script: {fileID: 11500000, guid: a153c2d6a40cd6c4db0c5c271690e162, type: 3}
+    _script: {fileID: 11500000, guid: 9e37a0a4a39a0ad46bec96ba5281eab4, type: 3}
     _ref:
-      rid: 3586031465861742604
+      rid: 3586031465861742606
   references:
     version: 2
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
-    - rid: 3586031465861742604
-      type: {class: OneHandedSwordAbility, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
+    - rid: 3586031465861742606
+      type: {class: BareHandsAbility, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
       data:
         _assemblyReflectionAssetDummy: 

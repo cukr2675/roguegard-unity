@@ -12,7 +12,7 @@ namespace Roguegard.CharacterCreation
             return new SortedIntrinsic(lv);
 		}
 
-        private class SortedIntrinsic : AbilitySortedIntrinsic, IRogueMethodActiveAspect, IValueEffect, IRogueObjUpdater
+        private class SortedIntrinsic : AbilitySortedIntrinsic, IRogueMethodPassiveAspect, IRogueMethodActiveAspect, IValueEffect, IRogueObjUpdater
         {
             /// <summary>
             /// 通常攻撃回数をカウントする
@@ -22,27 +22,35 @@ namespace Roguegard.CharacterCreation
 
             private bool buffIsEnabled;
 
+            float IRogueMethodPassiveAspect.Order => 0f;
             float IRogueMethodActiveAspect.Order => 0f;
 			float IValueEffect.Order => AttackUtility.BaseCupValueEffectOrder;
 			float IRogueObjUpdater.Order => -100f; // 行動前にバフを無効化
 
-			public SortedIntrinsic(int lv) : base(lv) { }
+            public SortedIntrinsic(int lv) : base(lv) { }
 
-            bool IRogueMethodActiveAspect.ActiveInvoke(
-                IKeyword keyword, IRogueMethod method, RogueObj self, RogueObj target, float activationDepth, in RogueMethodArgument arg,
-                RogueMethodAspectState.ActiveNext next)
+            bool IRogueMethodPassiveAspect.PassiveInvoke(
+                IKeyword keyword, IRogueMethod method, RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg,
+                RogueMethodAspectState.PassiveNext next)
             {
                 if (keyword == MainInfoKw.Attack)
                 {
                     // 通常攻撃する
                     attackCount = 0;
                     attackActivationDepth = activationDepth;
-                    var result = next.Invoke(keyword, method, self, target, activationDepth, arg);
+                    var result = next.Invoke(keyword, method, self, user, activationDepth, arg);
 
                     // 通常攻撃後、攻撃回数が 2 であれば剣を使ったとみなしてバフを有効化
                     buffIsEnabled = attackCount == 2;
                     return result;
                 }
+                return next.Invoke(keyword, method, self, user, activationDepth, arg);
+            }
+
+            bool IRogueMethodActiveAspect.ActiveInvoke(
+                IKeyword keyword, IRogueMethod method, RogueObj self, RogueObj target, float activationDepth, in RogueMethodArgument arg,
+                RogueMethodAspectState.ActiveNext next)
+            {
                 if (keyword == MainInfoKw.Hit && activationDepth == attackActivationDepth && arg.RefValue?.MainValue > 0f)
                 {
                     // 攻撃が失敗しても、攻撃すればそれだけでカウントする
@@ -65,6 +73,6 @@ namespace Roguegard.CharacterCreation
                 buffIsEnabled = false;
                 return default;
 			}
-		}
+        }
     }
 }
