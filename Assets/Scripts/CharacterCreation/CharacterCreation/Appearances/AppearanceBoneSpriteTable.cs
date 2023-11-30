@@ -116,7 +116,7 @@ namespace Roguegard.CharacterCreation
             private static bool Any(RogueObj self, IKeyword equipPart)
             {
                 var equipmentState = self.Main.GetEquipmentState(self);
-                var length = equipmentState.GetLength(equipPart);
+                var length = equipmentState?.GetLength(equipPart) ?? 0;
                 for (int i = 0; i < length; i++)
                 {
                     var equipment = equipmentState.GetEquipment(equipPart, i);
