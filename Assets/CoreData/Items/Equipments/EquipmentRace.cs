@@ -16,7 +16,7 @@ namespace Roguegard.CharacterCreation
 
         [SerializeField] private EquipKeywordData[] _equipParts;
 
-        [SerializeField] private bool _isNotStackableWhileEquipped;
+        [SerializeField] private bool _canStackWhileEquipped;
 
         [SerializeField] private AffectableBoneSpriteTableData.Value _boneSpriteTable;
 
@@ -63,7 +63,7 @@ namespace Roguegard.CharacterCreation
             where T : EquipmentRace
         {
             public override Spanning<IKeyword> EquipParts => Data._isCosmetic ? Spanning<IKeyword>.Empty : Data._equipParts;
-            public override bool IsNotStackableWhileEquipped => Data._isNotStackableWhileEquipped;
+            public override bool CanStackWhileEquipped => Data._canStackWhileEquipped;
             public override IApplyRogueMethod BeEquipped => Data._beEquipped.Ref ?? base.BeEquipped;
             public override IChangeEffectRogueMethod BeUnequipped => Data._beUnequipped.Ref ?? base.BeUnequipped;
             float IBoneSpriteEffect.Order => Data._boneSpriteEffectOrder;

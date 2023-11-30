@@ -112,7 +112,7 @@ MonoBehaviour:
     _isCosmetic: 0
     _equipParts:
     - {fileID: 11400000, guid: d21eebdbb823a8a45938ccc35e91ddee, type: 2}
-    _isNotStackableWhileEquipped: 0
+    _canStackWhileEquipped: 1
     _boneSpriteTable:
       _items: []
     _eyeDropBoneName: {fileID: 0}

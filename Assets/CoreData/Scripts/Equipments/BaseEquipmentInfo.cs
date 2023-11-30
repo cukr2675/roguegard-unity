@@ -18,7 +18,7 @@ namespace Roguegard
 
         public int EquipIndex => equipEffect?.Index ?? -1;
 
-        public virtual bool IsNotStackableWhileEquipped => true;
+        public virtual bool CanStackWhileEquipped => false;
 
         public virtual IApplyRogueMethod BeEquipped => _beEquipped;
         private static readonly IApplyRogueMethod _beEquipped = new BeEquippedRogueMethod();
@@ -143,7 +143,7 @@ namespace Roguegard
             {
                 var owner = self.Location;
                 var info = self.Main.GetEquipmentInfo(self);
-                if (info.IsNotStackableWhileEquipped && self.Stack >= 2)
+                if (!info.CanStackWhileEquipped && self.Stack >= 2)
                 {
                     // 装備中スタック不可の装備品がスタックしていたら一つだけ装備する。
                     if (!SpaceUtility.TryDividedLocate(self, 1, out self)) return false;

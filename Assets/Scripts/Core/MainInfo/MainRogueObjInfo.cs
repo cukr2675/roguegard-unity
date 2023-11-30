@@ -417,7 +417,7 @@ namespace Roguegard
             {
                 if (selfEquipmentInfo == null || otherEquipmentInfo == null) return false;
                 if (otherEquipmentInfo.EquipIndex != -1) return false;
-                if (selfEquipmentInfo.EquipIndex != -1 && selfEquipmentInfo.IsNotStackableWhileEquipped) return false;
+                if (selfEquipmentInfo.EquipIndex != -1 && !selfEquipmentInfo.CanStackWhileEquipped) return false;
             }
 
             if (!Stats.CanStack(other.Main.Stats)) return false;

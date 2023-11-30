@@ -53,7 +53,7 @@ namespace Roguegard
 
         /// <summary>
         /// 装備状態のスタック判定は <see cref="MainRogueObjInfo.CanStack(RogueObj, RogueObj)"/> 内で行う。
-        /// （<see cref="IEquipmentInfo.IsNotStackableWhileEquipped"/> が絡むため）
+        /// （<see cref="IEquipmentInfo.CanStackWhileEquipped"/> が絡むため）
         /// </summary>
         bool IRogueEffect.CanStack(RogueObj obj, RogueObj otherObj, IRogueEffect other) => true;
 

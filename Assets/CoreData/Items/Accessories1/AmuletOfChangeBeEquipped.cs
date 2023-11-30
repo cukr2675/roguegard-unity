@@ -11,7 +11,7 @@ namespace Roguegard
         public override bool Invoke(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
         {
             var info = self.Main.GetEquipmentInfo(self);
-            if (info.IsNotStackableWhileEquipped && self.Stack >= 2)
+            if (!info.CanStackWhileEquipped && self.Stack >= 2)
             {
                 // 装備中スタック不可の装備品がスタックしていたら一つだけ装備する。
                 if (!SpaceUtility.TryDividedLocate(self, 1, out self)) return false;

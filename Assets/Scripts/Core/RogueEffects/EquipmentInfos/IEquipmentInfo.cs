@@ -13,7 +13,7 @@ namespace Roguegard
         /// </summary>
         int EquipIndex { get; }
 
-        bool IsNotStackableWhileEquipped { get; }
+        bool CanStackWhileEquipped { get; }
 
         IApplyRogueMethod BeEquipped { get; }
 
