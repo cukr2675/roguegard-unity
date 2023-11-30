@@ -24,6 +24,7 @@ namespace RoguegardUnity
         public void Initialize()
         {
             //_hpGauge.color = 
+            gameObject.SetActive(true);
         }
 
         public void UpdateHeader(RogueObj player)

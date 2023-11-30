@@ -4275,7 +4275,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7768187685787238941
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5730,7 +5730,6 @@ MonoBehaviour:
   _itemPrefab: {fileID: 7251070034383148064, guid: 3d8de5b889250844ea67fe30402b2f9e, type: 3}
   _itemButtonCount: {x: 1, y: 2}
   _verticalExtensionTarget: {fileID: 8232021275795392691}
-  _enabledVerticalExtension: 0
 --- !u!114 &3768411294708649195
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8670,7 +8669,6 @@ MonoBehaviour:
   _itemPrefab: {fileID: 7251070034383148064, guid: 3d8de5b889250844ea67fe30402b2f9e, type: 3}
   _itemButtonCount: {x: 3, y: 3}
   _verticalExtensionTarget: {fileID: 0}
-  _enabledVerticalExtension: 0
 --- !u!114 &1619776727288713241
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9291,7 +9289,6 @@ MonoBehaviour:
   _itemPrefab: {fileID: 7251070034383148064, guid: 3d8de5b889250844ea67fe30402b2f9e, type: 3}
   _itemButtonCount: {x: 3, y: 3}
   _verticalExtensionTarget: {fileID: 0}
-  _enabledVerticalExtension: 0
 --- !u!114 &7547723957348699995
 MonoBehaviour:
   m_ObjectHideFlags: 0
