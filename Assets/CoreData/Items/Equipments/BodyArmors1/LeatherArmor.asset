@@ -210,7 +210,7 @@ MonoBehaviour:
       type: {class: ConstantRaceWeight, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
       data:
         _assemblyReflectionAssetDummy: 
-        _weight: 4
+        _weight: 3
     - rid: 3586031158212952376
       type: {class: CupGuardEquipped, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
       data:
