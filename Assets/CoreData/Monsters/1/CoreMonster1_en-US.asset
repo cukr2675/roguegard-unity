@@ -46,6 +46,14 @@ MonoBehaviour:
     m_Localized: Kobold
     m_Metadata:
       m_Items: []
+  - m_Id: 11901523786338304
+    m_Localized: BomberTortoise
+    m_Metadata:
+      m_Items: []
+  - m_Id: 11911013889871872
+    m_Localized: BomberShell
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

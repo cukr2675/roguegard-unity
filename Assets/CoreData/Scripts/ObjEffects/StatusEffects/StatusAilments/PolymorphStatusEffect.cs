@@ -7,6 +7,8 @@ namespace Roguegard
     [ObjectFormer.Formable]
     public class PolymorphStatusEffect : TimeLimitedStackableStatusEffect
     {
+        private static readonly PolymorphStatusEffect instance = new PolymorphStatusEffect();
+
         public override string Name => "変化";
         public override IKeyword EffectCategory => EffectCategoryKw.StatusAilment;
         protected override int MaxStack => 1;
@@ -18,6 +20,12 @@ namespace Roguegard
         private readonly Dictionary<RogueObj, int> equipments = new Dictionary<RogueObj, int>();
 
         private PolymorphStatusEffect() { }
+
+        public static void AffectTo(RogueObj target, MainInfoSet infoSet, int lifeTime)
+        {
+            var effect = (PolymorphStatusEffect)instance.AffectTo(target, null, 0f, new(other: infoSet));
+            effect.LifeTime = lifeTime;
+        }
 
         protected override IRogueEffect AffectTo(RogueObj target, RogueObj user, float activationDepth, in RogueMethodArgument arg)
         {
@@ -44,6 +52,8 @@ namespace Roguegard
                     for (int j = 0; j < length; j++)
                     {
                         var equipment = equipmentState.GetEquipment(part, j);
+                        if (equipment == null) continue;
+
                         var equipmentInfo = equipment.Main.GetEquipmentInfo(equipment);
                         var index = equipmentInfo.EquipIndex;
                         effect.equipments[equipment] = index;

@@ -58,7 +58,7 @@ namespace Roguegard
                 if (!defeated) continue;
 
                 // 爆発で敵を倒したとき、アイテムを生成する。
-                _dropItem.Option.CreateObj(_dropItem, lootLocation, dropPosition, RogueRandom.Primary);
+                _dropItem.Option?.CreateObj(_dropItem, lootLocation, dropPosition, RogueRandom.Primary);
             }
 
             // アイテムドロップ

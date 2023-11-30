@@ -45,7 +45,7 @@ namespace Roguegard
             predicator.Predicate(self, hitObj, targetPosition);
         }
 
-        bool IProjectileRogueMethodRange.Raycast(
+        public bool Raycast(
             RogueObj space, Vector2Int origin, RogueDirection direction, bool collide, bool tileCollide,
             out RogueObj hitObj, out Vector2Int hitPosition, out Vector2Int dropPosition)
         {

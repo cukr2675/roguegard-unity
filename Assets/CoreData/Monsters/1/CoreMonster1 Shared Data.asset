@@ -99,6 +99,30 @@ MonoBehaviour:
     m_Key: Kobold::d
     m_Metadata:
       m_Items: []
+  - m_Id: 11901523786338304
+    m_Key: BomberTortoise
+    m_Metadata:
+      m_Items: []
+  - m_Id: 11901572939386880
+    m_Key: BomberTortoise::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 11901583110574080
+    m_Key: BomberTortoise::d
+    m_Metadata:
+      m_Items: []
+  - m_Id: 11911013889871872
+    m_Key: BomberShell
+    m_Metadata:
+      m_Items: []
+  - m_Id: 11911078008197120
+    m_Key: BomberShell::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 11911087806091264
+    m_Key: BomberShell::d
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
