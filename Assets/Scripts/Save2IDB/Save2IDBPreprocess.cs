@@ -13,8 +13,8 @@ namespace Save2IDB
 {
     internal class Save2IDBPreprocess : IPreprocessBuildWithReport, IPostprocessBuildWithReport
     {
-        private static readonly string directoryPath = "Assets/Save2IDBTemp";
-        private static readonly string assetPath = $"{directoryPath}/{Save2IDBSettings.assetName}.asset";
+        private static readonly string tempDirectoryPath = "Assets/Save2IDBTemp";
+        private static readonly string tempAssetPath = $"{tempDirectoryPath}/{typeof(Save2IDBSettings).Name}.asset";
 
         int IOrderedCallback.callbackOrder => 0;
 
@@ -22,9 +22,9 @@ namespace Save2IDB
         {
             var asset = Save2IDBSettings.Load();
 
-            Directory.CreateDirectory(directoryPath);
-            AssetDatabase.DeleteAsset(assetPath);
-            AssetDatabase.CreateAsset(asset, assetPath);
+            Directory.CreateDirectory(tempDirectoryPath);
+            AssetDatabase.DeleteAsset(tempAssetPath);
+            AssetDatabase.CreateAsset(asset, tempAssetPath);
 
             var preloadedAssets = PlayerSettings.GetPreloadedAssets();
             preloadedAssets = preloadedAssets.Append(asset).ToArray();
@@ -33,11 +33,11 @@ namespace Save2IDB
 
         void IPostprocessBuildWithReport.OnPostprocessBuild(BuildReport report)
         {
-            var asset = AssetDatabase.LoadAssetAtPath<Save2IDBSettings>(assetPath);
+            var asset = AssetDatabase.LoadAssetAtPath<Save2IDBSettings>(tempAssetPath);
 
-            AssetDatabase.DeleteAsset(assetPath);
-            Directory.Delete(directoryPath);
-            File.Delete($"{directoryPath}.meta");
+            AssetDatabase.DeleteAsset(tempAssetPath);
+            Directory.Delete(tempDirectoryPath);
+            File.Delete($"{tempDirectoryPath}.meta");
 
             var preloadedAssets = PlayerSettings.GetPreloadedAssets();
             preloadedAssets = preloadedAssets.Where(x => x != asset).ToArray();

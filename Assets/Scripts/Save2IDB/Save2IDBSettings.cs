@@ -55,10 +55,11 @@ namespace Save2IDB
 #if UNITY_EDITOR
         private string prevDatabaseName;
         private string prevFilesObjectStoreName;
+        private bool isSavedOnReset;
 
-        internal static readonly string assetName = typeof(Save2IDBSettings).Name;
+        private static readonly string assetPath = $"ProjectSettings/{typeof(Save2IDBSettings).Name}.asset";
 
-        internal void OnValidate()
+        private void OnValidate()
         {
             if (string.IsNullOrWhiteSpace(_databaseName)) { _databaseName = prevDatabaseName; }
             else { prevDatabaseName = _databaseName; }
@@ -69,21 +70,26 @@ namespace Save2IDB
 
         internal static Save2IDBSettings Load()
         {
-            var assetPath = $"ProjectSettings/{assetName}.asset";
             var asset = (Save2IDBSettings)UnityEditorInternal.InternalEditorUtility.LoadSerializedFileAndForget(assetPath).FirstOrDefault();
             if (asset == null)
             {
                 asset = CreateInstance<Save2IDBSettings>();
-                asset.name = assetName;
             }
+            asset.isSavedOnReset = true; // PlayerSettings として読み込まれた場合のみ、リセット時にセーブする。
             asset.hideFlags = HideFlags.DontSaveInEditor;
             return asset;
         }
 
         internal void Save()
         {
-            var assetPath = $"ProjectSettings/{assetName}.asset";
             UnityEditorInternal.InternalEditorUtility.SaveToSerializedFileAndForget(new[] { this }, assetPath, true);
+        }
+
+        private void Reset()
+        {
+            // SettingsProvider や　Editor などの中ではリセット後の処理ができない（要検証）ためここで保存する。
+            // （AssetSettingsProvider のリセット操作では OnValidate も呼ばれない）
+            if (isSavedOnReset) { Save(); }
         }
 #endif
     }
