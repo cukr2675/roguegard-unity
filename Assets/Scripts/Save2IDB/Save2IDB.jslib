@@ -136,6 +136,16 @@ const Save2IDBPlugin = {
 
 
 
+  Save2IDB_GetDataPath: function () {
+    const index = location.pathname.lastIndexOf('/');
+    const pathname = location.pathname.substring(0, index);
+    const dataPath = encodeURI(location.origin + pathname);
+    var bufferSize = lengthBytesUTF8(dataPath) + 1;
+    var buffer = _malloc(bufferSize);
+    stringToUTF8(dataPath, buffer, bufferSize);
+    return buffer;
+  },
+
   Save2IDB_Initialize: function (databaseNamePtr, filesObjectStoreNamePtr) {
     Save2IDB.databaseName = UTF8ToString(databaseNamePtr);
     Save2IDB.filesObjectStoreName = UTF8ToString(filesObjectStoreNamePtr);

@@ -13,6 +13,8 @@ namespace Save2IDB
     public class Save2IDBSettings : ScriptableObject
     {
         [DllImport("__Internal")]
+        private static extern string Save2IDB_GetDataPath();
+        [DllImport("__Internal")]
         private static extern void Save2IDB_Initialize(string databaseName, string filesObjectStoreName);
 
         [SerializeField] internal string _databaseName = defaultDatabaseName;
@@ -23,6 +25,7 @@ namespace Save2IDB
 
         private void OnEnable()
         {
+            hideFlags = HideFlags.DontSaveInEditor; // このオブジェクトを編集したときシーンが Dirty にならないようにする
 #if UNITY_WEBGL && !UNITY_EDITOR
             var hash = GetHash();
             var databaseName = GetName(_databaseName, hash);
@@ -33,8 +36,8 @@ namespace Save2IDB
 
         private static string GetHash()
         {
-            var path = Application.dataPath; // パーセントエンコーディング済み
-            var pathBytes = Encoding.ASCII.GetBytes(path); // ハッシュ生成のためbyte配列に変換
+            var dataPath = Save2IDB_GetDataPath(); // Application.dataPath および absoluteURL は初期化に時間がかかるので .jslib 呼び出しを使用
+            var pathBytes = Encoding.ASCII.GetBytes(dataPath); // ハッシュ生成のためbyte配列に変換
 
             using var md5 = new MD5CryptoServiceProvider();
             var hashBytes = md5.ComputeHash(pathBytes); // ハッシュを格納したbyte配列を生成
@@ -75,8 +78,7 @@ namespace Save2IDB
             {
                 asset = CreateInstance<Save2IDBSettings>();
             }
-            asset.isSavedOnReset = true; // PlayerSettings として読み込まれた場合のみ、リセット時にセーブする。
-            asset.hideFlags = HideFlags.DontSaveInEditor;
+            asset.isSavedOnReset = true; // PlayerSettings として読み込まれた場合のみ、リセット時にセーブする。（プリセットではセーブしない）
             return asset;
         }
 
