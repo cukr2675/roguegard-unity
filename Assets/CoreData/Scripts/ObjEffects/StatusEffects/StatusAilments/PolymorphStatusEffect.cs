@@ -65,7 +65,7 @@ namespace Roguegard
             target.Main.Polymorph(target, infoSet);
         }
 
-        protected override bool RemoveClose(RogueObj self, StatusEffectCloseType closeType = StatusEffectCloseType.Manual)
+        protected override void RemoveClose(RogueObj self, StatusEffectCloseType closeType = StatusEffectCloseType.Manual)
         {
             // 変化解除
             self.Main.Polymorph(self, self.Main.BaseInfoSet);
@@ -87,7 +87,7 @@ namespace Roguegard
                 equipmentInfo.TryOpen(equipment, index);
             }
 
-            return base.RemoveClose(self);
+            base.RemoveClose(self);
         }
 
         public override bool CanStack(RogueObj obj, RogueObj otherObj, IRogueEffect other)

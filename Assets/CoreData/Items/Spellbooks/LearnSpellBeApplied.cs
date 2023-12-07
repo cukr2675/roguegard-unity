@@ -37,16 +37,16 @@ namespace Roguegard
 
             void IRogueEffect.Open(RogueObj self)
             {
-                DungeonFloorCloserStateInfo.AddCloser(self, this);
+                DungeonFloorCloserStateInfo.AddTo(self, this);
             }
 
-            bool IDungeonFloorCloser.RemoveClose(RogueObj self, bool exitDungeon)
+            void IDungeonFloorCloser.RemoveClose(RogueObj self, bool exitDungeon)
             {
-                if (!exitDungeon) return false;
+                if (!exitDungeon) return;
 
                 self.Main.Skills.Remove(skill, MainInfoSetType.Other);
                 self.Main.RogueEffects.Remove(this);
-                return true;
+                DungeonFloorCloserStateInfo.ReplaceWithNull(self, this);
             }
 
             bool IRogueEffect.CanStack(RogueObj obj, RogueObj otherObj, IRogueEffect other) => false;

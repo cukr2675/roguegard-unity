@@ -189,7 +189,7 @@ namespace Roguegard
                 // パーティ・リーダーエフェクト・レベルアップボーナスの初期化
                 var party = new RogueParty(player.Main.InfoSet.Faction, player.Main.InfoSet.TargetFactions);
                 player.Main.Stats.TryAssignParty(player, party);
-                DungeonFloorCloserStateInfo.Close(player, true);
+                DungeonFloorCloserStateInfo.CloseAndRemoveNull(player, true);
                 LobbyLeaderEffect.Initialize(player);
                 RoguegardCharacterCreationSettings.LevelInfoInitializer.InitializeLv(player, 1);
 

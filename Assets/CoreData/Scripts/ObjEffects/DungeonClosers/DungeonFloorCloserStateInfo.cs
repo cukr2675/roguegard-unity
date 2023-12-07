@@ -9,7 +9,7 @@ namespace Roguegard
     /// </summary>
     public static class DungeonFloorCloserStateInfo
     {
-        public static void AddCloser(RogueObj obj, IDungeonFloorCloser closer)
+        public static void AddTo(RogueObj obj, IDungeonFloorCloser closer)
         {
             if (!obj.TryGet<Info>(out var info))
             {
@@ -19,14 +19,22 @@ namespace Roguegard
             info.Add(closer);
         }
 
-        public static void Close(RogueObj obj, bool exitDungeon)
+        public static bool ReplaceWithNull(RogueObj obj, IDungeonFloorCloser closer)
+        {
+            if (obj.TryGet<Info>(out var info))
+            {
+                return info.ReplaceWithNull(closer);
+            }
+            return false;
+        }
+
+        public static void CloseAndRemoveNull(RogueObj obj, bool exitDungeon)
         {
             obj.Main.TryOpenRogueEffects(obj);
 
             if (obj.TryGet<Info>(out var dungeonInfo))
             {
-                dungeonInfo.Close(obj, exitDungeon);
-                obj.RemoveInfo(typeof(Info));
+                dungeonInfo.CloseAndRemoveNull(obj, exitDungeon);
             }
         }
 
@@ -42,11 +50,26 @@ namespace Roguegard
                 closers.Add(closer);
             }
 
-            public void Close(RogueObj self, bool exitDungeon)
+            public bool ReplaceWithNull(IDungeonFloorCloser closer)
+            {
+                var index = closers.IndexOf(closer);
+                if (index >= 0)
+                {
+                    closers[index] = null;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+
+            public void CloseAndRemoveNull(RogueObj self, bool exitDungeon)
             {
                 for (int i = 0; i < closers.Count; i++)
                 {
-                    if (closers[i].RemoveClose(self, exitDungeon))
+                    closers[i]?.RemoveClose(self, exitDungeon);
+                    if (closers[i] == null)
                     {
                         closers.RemoveAt(i);
                         i--;

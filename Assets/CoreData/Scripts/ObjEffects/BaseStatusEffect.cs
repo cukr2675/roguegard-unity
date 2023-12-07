@@ -33,13 +33,13 @@ namespace Roguegard
         public virtual void Open(RogueObj self)
         {
             RogueEffectUtility.AddFromRogueEffect(self, this);
-            DungeonFloorCloserStateInfo.AddCloser(self, this);
+            DungeonFloorCloserStateInfo.AddTo(self, this);
         }
 
-        protected virtual bool RemoveClose(RogueObj self, StatusEffectCloseType closeType = StatusEffectCloseType.Manual)
+        protected virtual void RemoveClose(RogueObj self, StatusEffectCloseType closeType = StatusEffectCloseType.Manual)
         {
             RogueEffectUtility.RemoveClose(self, this);
-            return true;
+            DungeonFloorCloserStateInfo.ReplaceWithNull(self, this);
         }
 
         void IClosableStatusEffect.RemoveClose(RogueObj self)
@@ -47,17 +47,17 @@ namespace Roguegard
             RemoveClose(self, StatusEffectCloseType.Manual);
         }
 
-        bool IDungeonFloorCloser.RemoveClose(RogueObj self, bool exitDungeon)
+        void IDungeonFloorCloser.RemoveClose(RogueObj self, bool exitDungeon)
         {
             var statusEffectState = self.Main.GetStatusEffectState(self);
             if (!statusEffectState.TryGetStatusEffect<BaseStatusEffect>(GetType(), out _))
             {
                 // 呼び出されたときすでに解除されていた場合は何もせず true を返して削除させる
                 // DungeonFloorCloser 以外の方法で解除されたとき必要になる
-                return true;
+                return;
             }
 
-            return RemoveClose(self, exitDungeon ? StatusEffectCloseType.ExitDungeon : StatusEffectCloseType.ExitDungeonFloor);
+            RemoveClose(self, exitDungeon ? StatusEffectCloseType.ExitDungeon : StatusEffectCloseType.ExitDungeonFloor);
         }
 
         public static bool Close<T>(RogueObj obj)

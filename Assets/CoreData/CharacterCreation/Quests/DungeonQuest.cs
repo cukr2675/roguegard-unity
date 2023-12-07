@@ -74,19 +74,19 @@ namespace Roguegard.CharacterCreation
             public void Open(RogueObj self)
             {
                 DungeonQuestInfo.SetTo(self, quest);
-                DungeonFloorCloserStateInfo.AddCloser(self, this);
+                DungeonFloorCloserStateInfo.AddTo(self, this);
                 quest.SortedEffects.Open(self, MainInfoSetType.Other, false);
             }
 
-            bool IDungeonFloorCloser.RemoveClose(RogueObj self, bool exitDungeon)
+            void IDungeonFloorCloser.RemoveClose(RogueObj self, bool exitDungeon)
             {
-                if (!exitDungeon) return false;
+                if (!exitDungeon) return;
 
                 // ダンジョンから抜けるときクエストを終了させる
                 self.Main.RogueEffects.Remove(this);
                 DungeonQuestInfo.RemoveFrom(self);
+                DungeonFloorCloserStateInfo.ReplaceWithNull(self, this);
                 quest.SortedEffects.Close(self, MainInfoSetType.Other, false);
-                return true;
             }
 
             public bool CanStack(RogueObj obj, RogueObj otherObj, IRogueEffect other) => false;

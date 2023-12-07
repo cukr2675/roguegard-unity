@@ -38,7 +38,7 @@ namespace Roguegard.CharacterCreation
                 member.Main.Stats.TryAssignParty(member, party);
             }
 
-            DungeonFloorCloserStateInfo.Close(player, true);
+            DungeonFloorCloserStateInfo.CloseAndRemoveNull(player, true);
 
             // ターン経過で満腹度消費
             // 自然回復あり

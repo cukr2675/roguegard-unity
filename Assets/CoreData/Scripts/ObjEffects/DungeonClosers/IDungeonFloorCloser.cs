@@ -6,6 +6,6 @@ namespace Roguegard
 {
     public interface IDungeonFloorCloser
     {
-        bool RemoveClose(RogueObj self, bool exitDungeon);
+        void RemoveClose(RogueObj self, bool exitDungeon);
     }
 }

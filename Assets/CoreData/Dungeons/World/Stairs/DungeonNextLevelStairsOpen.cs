@@ -78,7 +78,7 @@ namespace Roguegard.CharacterCreation
                 dungeon.Space.RemoveAllNull();
 
                 // フロア限定のエフェクトを解除する。
-                DungeonFloorCloserStateInfo.Close(player, false);
+                DungeonFloorCloserStateInfo.CloseAndRemoveNull(player, false);
 
                 return true;
             }

@@ -38,7 +38,7 @@ namespace Roguegard
             return base.AffectTo(target, user, activationDepth, arg);
         }
 
-        protected override bool RemoveClose(RogueObj self, StatusEffectCloseType closeType = StatusEffectCloseType.Manual)
+        protected override void RemoveClose(RogueObj self, StatusEffectCloseType closeType = StatusEffectCloseType.Manual)
         {
             if (RogueDevice.Primary.VisibleAt(self.Location, self.Position))
             {
@@ -47,7 +47,7 @@ namespace Roguegard
                 RogueDevice.Add(DeviceKw.AppendText, this);
                 RogueDevice.Add(DeviceKw.AppendText, "が抜けた\n");
             }
-            return base.RemoveClose(self);
+            base.RemoveClose(self);
         }
 
         protected override RogueObjUpdaterContinueType UpdateObj(RogueObj self, float activationDepth, ref int sectionIndex)

@@ -39,10 +39,10 @@ namespace Roguegard
             base.Open(self);
         }
 
-        protected override bool RemoveClose(RogueObj self, StatusEffectCloseType closeType = StatusEffectCloseType.Manual)
+        protected override void RemoveClose(RogueObj self, StatusEffectCloseType closeType = StatusEffectCloseType.Manual)
         {
             MovementCalculator.SetDirty(self);
-            return base.RemoveClose(self);
+            base.RemoveClose(self);
         }
 
         void IValueEffect.AffectValue(IKeyword keyword, AffectableValue value, RogueObj self)
