@@ -267,18 +267,16 @@ namespace RoguegardUnity
 
                 public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
                 {
-                    if (!DungeonQuestInfo.TryGetQuest(self, out _)) return ":Quest";
+                    if (DungeonQuestInfo.TryGetQuest(self, out _)) return ":Quest";
                     else return "<#808080>:Quest";
                 }
 
                 public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
                 {
-                    if (!DungeonQuestInfo.TryGetQuest(self, out _))
+                    if (DungeonQuestInfo.TryGetQuest(self, out _))
                     {
                         root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
                         root.OpenMenu(nextMenu, self, null, RogueMethodArgument.Identity, RogueMethodArgument.Identity);
-                        //root.AddInt(DeviceKw.StartTalk, 0);
-                        //root.AddObject(DeviceKw.AppendText, quest.Caption);
                     }
                     else
                     {

@@ -140,6 +140,38 @@ namespace RoguegardUnity
             {
                 leftLBuilder.AppendLine(quest.Environments[i].Name);
             }
+            leftLBuilder.AppendLine("報酬：");
+            var any = false;
+            var plusAlpha = false;
+            for (int i = 0; i < quest.LootTable.Count; i++)
+            {
+                var loots = quest.LootTable[i].Spanning;
+                if (loots.Count == 1)
+                {
+                    var loot = loots[0];
+                    leftLBuilder.Append(loot.InfoSet.Name);
+                    if (loot.Stack != 1)
+                    {
+                        leftLBuilder.Append(" x");
+                        leftLBuilder.Append(loot.Stack);
+                    }
+                    leftLBuilder.AppendLine();
+                    any = true;
+                }
+                else if (loots.Count >= 2)
+                {
+                    plusAlpha = true;
+                    any = true;
+                }
+            }
+            if (plusAlpha)
+            {
+                leftLBuilder.AppendLine("？？？");
+            }
+            if (!any)
+            {
+                leftLBuilder.AppendLine("なし");
+            }
 
             _textLeftL.SetText(leftLBuilder);
             _textLeftR.SetText(leftRBuilder);
