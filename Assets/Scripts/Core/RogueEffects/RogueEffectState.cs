@@ -23,7 +23,8 @@ namespace Roguegard
 
         public void AddOpen(RogueObj self, IRogueEffect effect)
         {
-            if (self.Main.RogueEffectOpenState == RogueEffectOpenState.NotStarted)
+            //if (self.Main.RogueEffectOpenState == RogueEffectOpenState.NotStarted)
+            if (self.Main.RogueEffectOpenState != RogueEffectOpenState.Finished)
             {
                 _effects.Add(effect);
                 return;
@@ -31,9 +32,9 @@ namespace Roguegard
             if (self.Main.RogueEffectOpenState != RogueEffectOpenState.Finished) throw new RogueException(
                 $"{self} への {nameof(IRogueEffect)} ({effect}) の付与に失敗しました。 " +
                 $"{nameof(RogueObj)} のエフェクト準備中に新しいエフェクトを追加することはできません。");
-            if (openingObj.Value != null) throw new RogueException(
-                $"{self} への {nameof(IRogueEffect)} ({effect}) の付与に失敗しました。 " +
-                $"いずれかの {nameof(RogueObj)} ({openingObj.Value}) のエフェクト追加・準備中に新しいエフェクトを追加することはできません。");
+            //if (openingObj.Value != null) throw new RogueException(
+            //    $"{self} への {nameof(IRogueEffect)} ({effect}) の付与に失敗しました。 " +
+            //    $"いずれかの {nameof(RogueObj)} ({openingObj.Value}) のエフェクト追加・準備中に新しいエフェクトを追加することはできません。");
 
             openingObj.Value = self;
             _effects.Add(effect);
@@ -54,9 +55,15 @@ namespace Roguegard
         public bool TryGetEffect<T>(out T effect)
             where T : IRogueEffect
         {
+            return TryGetEffect(typeof(T), out effect);
+        }
+
+        public bool TryGetEffect<T>(System.Type type, out T effect)
+            where T : IRogueEffect
+        {
             foreach (var item in _effects)
             {
-                if (item.GetType() == typeof(T))
+                if (item.GetType() == type)
                 {
                     effect = (T)item;
                     return true;
@@ -78,9 +85,9 @@ namespace Roguegard
                 $"いずれかの {nameof(RogueObj)} ({openingObj.Value}) のエフェクト追加・準備中に新しいエフェクト準備を開始することはできません。");
 
             openingObj.Value = self;
-            foreach (var effect in _effects)
+            for (int i = 0; i < _effects.Count; i++)
             {
-                effect?.Open(self);
+                _effects[i]?.Open(self);
             }
             openingObj.Value = null;
         }
