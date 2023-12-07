@@ -139,6 +139,13 @@ MonoBehaviour:
     _stack: 1
     _members:
       _items: []
+  _questBoard:
+    _option: {fileID: 11400000, guid: 421f78ec35012f04bbf710b8cd41c7d2, type: 2}
+    _optionDescription: {fileID: 0}
+    _generatorWeight: 1
+    _stack: 1
+    _members:
+      _items: []
   _storage:
     _option: {fileID: 11400000, guid: 84a244ec98600944586d993de59a7424, type: 2}
     _optionDescription: {fileID: 0}

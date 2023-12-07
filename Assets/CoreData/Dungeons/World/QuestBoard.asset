@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 797073a39246ce24195bfdd54b79f0dc, type: 3}
-  m_Name: PartyBoard
+  m_Name: QuestBoard
   m_EditorClassIdentifier: 
   _overridesCost: 0
   _cost: 0
@@ -18,7 +18,7 @@ MonoBehaviour:
   _race:
     _name: "\u7DE8\u6210\u30DC\u30FC\u30C9"
     _icon: {fileID: 861691948, guid: 2c3b84187a5a624489356b62e46bf28e, type: 3}
-    _color: {r: 0.9607843, g: 0.8668954, b: 0.19607839, a: 1}
+    _color: {r: 0.9169811, g: 0.3650465, b: 0.22665003, a: 1}
     _caption: 
     _details:
       _script: {fileID: 0}
@@ -82,9 +82,9 @@ MonoBehaviour:
       _ref:
         rid: -2
     _beApplied:
-      _script: {fileID: 11500000, guid: dc83fa8cca57f314bb339235d7d346cd, type: 3}
+      _script: {fileID: 11500000, guid: 02a22034e0719cf48976e5fc17306a32, type: 3}
       _ref:
-        rid: 928021139233439746
+        rid: 1290118612948090882
     _beThrown:
       _script: {fileID: 0}
       _ref:
@@ -117,7 +117,7 @@ MonoBehaviour:
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
-    - rid: 928021139233439746
-      type: {class: PartyBoardBeApplied, ns: Roguegard, asm: Roguegard.CoreData}
+    - rid: 1290118612948090882
+      type: {class: QuestBoardBeApplied, ns: Roguegard, asm: Roguegard.CoreData}
       data:
         _assemblyReflectionAssetDummy: 
