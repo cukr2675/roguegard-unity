@@ -6,6 +6,7 @@ using System.Diagnostics;
 using UnityEngine.UI;
 using TMPro;
 using Roguegard;
+using Roguegard.CharacterCreation;
 using Roguegard.Device;
 
 namespace RoguegardUnity
@@ -62,7 +63,7 @@ namespace RoguegardUnity
 
         public StatsWindow Stats => _statsWindow;
 
-        internal void Initialize(SoundController soundController, CharacterCreationDatabase characterCreationDatabase, RogueSpriteRendererPool rendererPool)
+        internal void Initialize(SoundController soundController, RogueSpriteRendererPool rendererPool)
         {
             this.soundController = soundController;
             waitTimer = new WaitTimer();
@@ -87,7 +88,7 @@ namespace RoguegardUnity
             _summaryMenu.Initialize();
             _detailsMenu.Initialize();
             _optionsMenu.Initialize();
-            _characterCreationMenu.Initialize(characterCreationDatabase, rendererPool);
+            _characterCreationMenu.Initialize(rendererPool);
             var scrollSensitivity = 64f;
             SetScrollSensitivity(scrollSensitivity);
 

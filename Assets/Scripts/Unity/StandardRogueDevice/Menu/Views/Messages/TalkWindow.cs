@@ -100,6 +100,7 @@ namespace RoguegardUnity
 
             if (waitEndOfTalk && _text.WaitsInput)
             {
+                waitEndOfTalk = false;
                 _text.Input();
             }
         }

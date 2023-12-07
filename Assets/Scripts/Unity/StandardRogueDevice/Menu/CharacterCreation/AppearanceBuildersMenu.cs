@@ -16,12 +16,10 @@ namespace RoguegardUnity
         private static readonly object addRightEyeModel = new object();
         private static readonly object addHairModel = new object();
 
-        private readonly CharacterCreationDatabase database;
         private CharacterCreationDataBuilder builder;
 
-        public AppearanceBuildersMenu(CharacterCreationDatabase database)
+        public AppearanceBuildersMenu()
         {
-            this.database = database;
             itemController = new ItemController(this);
         }
 
@@ -113,7 +111,7 @@ namespace RoguegardUnity
             {
                 models = new object[]
                 {
-                    new SelectOptionChoice(parent),
+                    new SelectOptionChoice(),
                     new RSlider(),
                     new GSlider(),
                     new BSlider(),
@@ -133,12 +131,7 @@ namespace RoguegardUnity
 
             private class SelectOptionChoice : IModelsMenuChoice
             {
-                private readonly SelectOptionMenu nextMenu;
-
-                public SelectOptionChoice(AppearanceBuildersMenu parent)
-                {
-                    nextMenu = new SelectOptionMenu() { database = parent.database };
-                }
+                private readonly SelectOptionMenu nextMenu = new SelectOptionMenu();
 
                 public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
                 {
@@ -264,16 +257,15 @@ namespace RoguegardUnity
 
         private class SelectOptionMenu : IModelsMenu, IModelsMenuItemController
         {
-            public CharacterCreationDatabase database;
             private readonly List<object> models = new List<object>();
 
             public void OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 var builder = (AppearanceBuilder)arg.Other;
                 models.Clear();
-                for (int i = 0; i < database.AppearanceOptions.Count; i++)
+                for (int i = 0; i < RoguegardSettings.CharacterCreationDatabase.AppearanceOptions.Count; i++)
                 {
-                    var appearanceOption = database.AppearanceOptions[i];
+                    var appearanceOption = RoguegardSettings.CharacterCreationDatabase.AppearanceOptions[i];
                     if (appearanceOption.BoneName == builder.Option.BoneName)
                     {
                         models.Add(appearanceOption);

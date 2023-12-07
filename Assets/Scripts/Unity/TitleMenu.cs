@@ -39,7 +39,6 @@ namespace RoguegardUnity
         private AudioMixer audioMixer;
         private AudioSource seAudioSourcePrefab;
         private AudioSource bgmAudioSourcePrefab;
-        private CharacterCreationDatabase characterCreationDatabase;
 
         private MenuController menuController;
 
@@ -52,7 +51,6 @@ namespace RoguegardUnity
             AudioMixer audioMixer,
             AudioSource seAudioSourcePrefab,
             AudioSource bgmAudioSourcePrefab,
-            CharacterCreationDatabase characterCreationDatabase,
             Sprite logo)
         {
             this.spriteRendererPool = spriteRendererPool;
@@ -62,13 +60,12 @@ namespace RoguegardUnity
             this.audioMixer = audioMixer;
             this.seAudioSourcePrefab = seAudioSourcePrefab;
             this.bgmAudioSourcePrefab = bgmAudioSourcePrefab;
-            this.characterCreationDatabase = characterCreationDatabase;
             DontDestroyOnLoad(spriteRendererPool.gameObject);
 
             menuController = Instantiate(menuControllerPrefab);
             var soundController = new SoundController();
             soundController.Open(null, seAudioSourcePrefab, soundTable.ToTable());
-            menuController.Initialize(soundController, characterCreationDatabase, spriteRendererPool);
+            menuController.Initialize(soundController, spriteRendererPool);
 
             _logo.sprite = logo;
             _logo.SetNativeSize();
@@ -111,7 +108,7 @@ namespace RoguegardUnity
 
             device.Open(
                 spriteRendererPool, tilemapRendererPrefab, touchControllerPrefab,
-                soundTable, audioMixer, seAudioSourcePrefab, bgmAudioSourcePrefab, characterCreationDatabase);
+                soundTable, audioMixer, seAudioSourcePrefab, bgmAudioSourcePrefab);
         }
 
         private class MainMenu : IModelsMenu
@@ -176,7 +173,7 @@ namespace RoguegardUnity
                     (root) =>
                     {
                         root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-                        var builder = parent.characterCreationDatabase.Presets[0].ToBuilder();
+                        var builder = RoguegardSettings.CharacterCreationDatabase.LoadPreset(0);
                         root.OpenMenu(nextMenu, null, null, new(other: builder), RogueMethodArgument.Identity);
                     });
                 }

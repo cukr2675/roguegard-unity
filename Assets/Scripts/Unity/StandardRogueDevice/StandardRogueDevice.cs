@@ -4,6 +4,7 @@ using UnityEngine;
 
 using UnityEngine.Audio;
 using Roguegard;
+using Roguegard.CharacterCreation;
 using Roguegard.Device;
 using Roguegard.Extensions;
 
@@ -77,8 +78,7 @@ namespace RoguegardUnity
             SoundTable soundTable,
             AudioMixer audioMixer,
             AudioSource seAudioSourcePrefab,
-            AudioSource bgmAudioSourcePrefab,
-            CharacterCreationDatabase characterCreationDatabase)
+            AudioSource bgmAudioSourcePrefab)
         {
             if (!Player.TryGet<ViewInfo>(out _))
             {
@@ -99,7 +99,7 @@ namespace RoguegardUnity
             soundController.Open(parent, seAudioSourcePrefab, soundTable.ToTable());
 
             touchController = Object.Instantiate(touchControllerPrefab, parent);
-            touchController.Initialize(tilemapGrid.Tilemap, soundController, characterCreationDatabase, spriteRendererPool);
+            touchController.Initialize(tilemapGrid.Tilemap, soundController, spriteRendererPool);
             touchController.GetInfo(out var menuController, out openChestMenu);
 
             Options.Initialize(menuController, audioMixer);

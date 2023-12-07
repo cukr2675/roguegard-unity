@@ -5,6 +5,7 @@ using UnityEngine;
 using System.Diagnostics;
 using UnityEngine.Tilemaps;
 using Roguegard;
+using Roguegard.CharacterCreation;
 using Roguegard.Device;
 
 namespace RoguegardUnity
@@ -42,12 +43,11 @@ namespace RoguegardUnity
         public bool OpenGrid => _inputController.OpenGrid;
         public bool FastForward => _inputController.FastForward;
 
-        internal void Initialize(
-            Tilemap tilemap, SoundController soundController, CharacterCreationDatabase characterCreationDatabase, RogueSpriteRendererPool rendererPool)
+        internal void Initialize(Tilemap tilemap, SoundController soundController, RogueSpriteRendererPool rendererPool)
         {
             _inputController.LongPressThresholdTurns = 4;
             _inputController.Initialize(tilemap, false, false);
-            _menuController.Initialize(soundController, characterCreationDatabase, rendererPool);
+            _menuController.Initialize(soundController, rendererPool);
             _headerController.Initialize();
         }
 

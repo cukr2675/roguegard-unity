@@ -44,6 +44,10 @@ namespace Roguegard
 
         public static ObjCommandTable ObjCommandTable { get; set; }
 
+        public static ICharacterCreationDatabase CharacterCreationDatabase { get; set; }
+
+        public static DungeonQuestGenerator DungeonQuestGenerator { get; set; }
+
         private static readonly List<IModelsMenuChoice> _dungeonChoices = new List<IModelsMenuChoice>();
 
         public static Spanning<IModelsMenuChoice> DungeonChoices => _dungeonChoices;

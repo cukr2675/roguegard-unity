@@ -28,7 +28,7 @@ namespace Roguegard.CharacterCreation
             return new MenuChoice(this);
         }
 
-        private void StartDungeon(RogueObj player, IRogueRandom random)
+        public void StartDungeon(RogueObj player, IRogueRandom random)
         {
             var oldParty = player.Main.Stats.Party;
             var party = new RogueParty(_playerFaction.Faction, _playerFaction.TargetFactions);
@@ -60,7 +60,7 @@ namespace Roguegard.CharacterCreation
             player.Main.Stats.Direction = RogueDirection.Down;
             if (!SpaceUtility.TryLocate(player, dungeon)) throw new RogueException();
 
-            StartFloor(player, random);
+            //StartFloor(player, random);
         }
 
         public void StartFloor(RogueObj player, IRogueRandom random)
@@ -129,6 +129,7 @@ namespace Roguegard.CharacterCreation
             public override void Activate(IModelsMenuRoot root, RogueObj player, RogueObj empty, in RogueMethodArgument arg)
             {
                 data.StartDungeon(player, RogueRandom.Primary);
+                data.StartFloor(player, RogueRandom.Primary);
             }
         }
     }

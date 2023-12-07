@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using Roguegard;
+using Roguegard.CharacterCreation;
 using Roguegard.Device;
 using Roguegard.Extensions;
 
@@ -152,6 +153,7 @@ namespace RoguegardUnity
                 new Save(),
                 new GiveUp(),
                 new Load(),
+                new Quest(),
                 new Options(),
                 ExitModelsMenuChoice.Instance
             };
@@ -259,6 +261,44 @@ namespace RoguegardUnity
                 }
             }
 
+            private class Quest : IModelsMenuChoice
+            {
+                private IModelsMenu nextMenu = new QuestMenu();
+
+                public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+                {
+                    if (!DungeonQuestInfo.TryGetQuest(self, out _)) return ":Quest";
+                    else return "<#808080>:Quest";
+                }
+
+                public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+                {
+                    if (!DungeonQuestInfo.TryGetQuest(self, out _))
+                    {
+                        root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+                        root.OpenMenu(nextMenu, self, null, RogueMethodArgument.Identity, RogueMethodArgument.Identity);
+                        //root.AddInt(DeviceKw.StartTalk, 0);
+                        //root.AddObject(DeviceKw.AppendText, quest.Caption);
+                    }
+                    else
+                    {
+                        root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Cancel);
+                    }
+                }
+            }
+
+            private class QuestMenu : IModelsMenu
+            {
+                public void OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+                {
+                    if (!DungeonQuestInfo.TryGetQuest(self, out var quest)) throw new RogueException();
+
+                    var summary = (IDungeonQuestMenuView)root.Get(DeviceKw.MenuSummary);
+                    summary.OpenView(ChoicesModelsMenuItemController.Instance, Spanning<object>.Empty, root, self, null, RogueMethodArgument.Identity);
+                    summary.SetQuest(self, quest, false);
+                }
+            }
+
             private class Options : IModelsMenuChoice
             {
                 private IModelsMenu nextMenu = new OptionsMenu();
@@ -270,7 +310,6 @@ namespace RoguegardUnity
                 {
                     root.OpenMenu(nextMenu, self, null, RogueMethodArgument.Identity, RogueMethodArgument.Identity);
                     root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-
                 }
             }
         }

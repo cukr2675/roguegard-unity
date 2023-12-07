@@ -16,7 +16,8 @@ MonoBehaviour:
   _autoUpdateAssetTablesOnEnabled: 1
   _world: {fileID: 11400000, guid: 54b7f1cb05acf694ca3545570d9e79e4, type: 2}
   _lobby: {fileID: 11400000, guid: b68d87efd75176742b76575e5de8220e, type: 2}
-  _initialCharacter: {fileID: 11400000, guid: b286c7f36e7fc6b468a964c089a7f222, type: 2}
+  _presets:
+  - {fileID: 11400000, guid: b286c7f36e7fc6b468a964c089a7f222, type: 2}
   _maxTilemapSize: {x: 96, y: 64}
   _defaultVisibleRadius: 2
   _keywordsNotEnqueueMessageRule:
@@ -34,6 +35,7 @@ MonoBehaviour:
   _equipPartOfInnerwear: {fileID: 11400000, guid: 477e575ba17b0dd4eb9bab0a3d571fe8, type: 2}
   _defaultRaceOption: {fileID: 11400000, guid: e9af886bcd40dbe469f3f75f54ee9544, type: 2}
   _objCommandTable: {fileID: 11400000, guid: fc0bf9764c3cf2d4293a81c04b4c2371, type: 2}
+  _dungeonQuestGenerator: {fileID: 11400000, guid: 3383c0491e8c8fd4a811fb9d0a3a224d, type: 2}
   _assetTables:
   - {fileID: 11400000, guid: 32cafb5b82e1b2945b45fb47e0603b58, type: 2}
   - {fileID: 11400000, guid: 053e6ba34fdfad94f833cdab12d37a78, type: 2}

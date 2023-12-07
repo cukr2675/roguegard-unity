@@ -34,5 +34,7 @@ namespace Roguegard.CharacterCreation
 
         public IEnumerator<IntrinsicBuilder> GetEnumerator() => builders.GetEnumerator();
         IEnumerator IEnumerable.GetEnumerator() => builders.GetEnumerator();
+        public static implicit operator Spanning<IReadOnlyIntrinsic>(IntrinsicBuilderList list)
+            => Spanning<IReadOnlyIntrinsic>.Create(list.builders);
     }
 }

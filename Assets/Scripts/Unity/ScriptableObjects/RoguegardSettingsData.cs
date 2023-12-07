@@ -20,7 +20,8 @@ namespace RoguegardUnity
         [Header("Initial Assets")]
         [SerializeField] private ItemCreationData _world = null;
         [SerializeField] private LobbyCreationData _lobby = null;
-        [SerializeField] private PresetCreationData _initialCharacter = null;
+        [Space]
+        [SerializeField] private PresetCreationData[] _presets = null;
 
         [SerializeField] private Vector2Int _maxTilemapSize = new Vector2Int(y: 64, x: 96);
         // y: 64 透明マップのチップを4x4としたとき、縦幅を256に収めるサイズ
@@ -46,6 +47,7 @@ namespace RoguegardUnity
         [SerializeField] private EquipKeywordData _equipPartOfInnerwear = null;
         [SerializeField] private DefaultRaceOption _defaultRaceOption = null;
         [SerializeField] private ObjCommandTable _objCommandTable = null;
+        [SerializeField] private DungeonQuestGenerator _dungeonQuestGenerator = null;
         [SerializeField] private RogueAssetTable[] _assetTables = null;
 
         [Header("Scriptable Loaders")]
@@ -69,6 +71,7 @@ namespace RoguegardUnity
             RoguegardCharacterCreationSettings.EquipPartOfInnerwear = _equipPartOfInnerwear;
             RoguegardSettings.DefaultRaceOption = _defaultRaceOption;
             RoguegardSettings.ObjCommandTable = _objCommandTable;
+            RoguegardSettings.DungeonQuestGenerator = _dungeonQuestGenerator;
 
             RoguegardSettings.ClearDungeonChoices();
             RoguegardSettings.ClearAssetTable();
@@ -84,6 +87,32 @@ namespace RoguegardUnity
                         RoguegardSettings.AddDungeonChoice(dungeonChoice);
                     }
                 }
+            }
+
+            {
+                var characterCreationDatabase = new CharacterCreationDatabase();
+                foreach (var preset in _presets)
+                {
+                    characterCreationDatabase.AddPreset(preset.ToBuilder());
+                }
+
+                var assetTable = RoguegardSettings.GetAssetTable("Core");
+                foreach (var asset in assetTable.Values)
+                {
+                    if (asset is IAppearanceOption appearanceOption)
+                    {
+                        characterCreationDatabase.AddAppearanceOption(appearanceOption);
+                    }
+                    else if (asset is IIntrinsicOption intrinsicOption)
+                    {
+                        characterCreationDatabase.AddIntrinsicOption(intrinsicOption);
+                    }
+                    else if (asset is IStartingItemOption startingItemOption)
+                    {
+                        characterCreationDatabase.AddStartingItemOption(startingItemOption);
+                    }
+                }
+                RoguegardSettings.CharacterCreationDatabase = characterCreationDatabase;
             }
         }
 
@@ -156,10 +185,10 @@ namespace RoguegardUnity
         {
             public RoguegardSettingsData parent;
 
-            public MainInfoSet InfoSet => ((IRogueObjGenerator)parent._initialCharacter).InfoSet;
-            public int Lv => ((IRogueObjGenerator)parent._initialCharacter).Lv;
-            public int Stack => ((IRogueObjGenerator)parent._initialCharacter).Stack;
-            public Spanning<IWeightedRogueObjGeneratorList> StartingItemTable => ((IRogueObjGenerator)parent._initialCharacter).StartingItemTable;
+            public MainInfoSet InfoSet => ((IRogueObjGenerator)parent._presets[0]).InfoSet;
+            public int Lv => ((IRogueObjGenerator)parent._presets[0]).Lv;
+            public int Stack => ((IRogueObjGenerator)parent._presets[0]).Stack;
+            public Spanning<IWeightedRogueObjGeneratorList> StartingItemTable => ((IRogueObjGenerator)parent._presets[0]).StartingItemTable;
 
             public RogueObj CreateObj(RogueObj location, Vector2Int position, IRogueRandom random, StackOption stackOption = StackOption.Default)
             {
@@ -169,7 +198,7 @@ namespace RoguegardUnity
                 RogueWorld.SetUpWorld(world, lobby);
 
                 // キャラクターを生成
-                var player = parent._initialCharacter.CreateObj(world, Vector2Int.zero, random);
+                var player = parent._presets[0].CreateObj(world, Vector2Int.zero, random);
                 var lobbyMembers = RogueWorld.GetLobbyMembersByCharacter(player);
                 lobbyMembers.Add(player);
                 return player;

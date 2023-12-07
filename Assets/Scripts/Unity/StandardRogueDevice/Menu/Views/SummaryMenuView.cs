@@ -8,10 +8,11 @@ using Roguegard;
 using Roguegard.Device;
 using Roguegard.Extensions;
 using TMPro;
+using Roguegard.CharacterCreation;
 
 namespace RoguegardUnity
 {
-    public class SummaryMenuView : ModelsMenuView, IResultMenuView
+    public class SummaryMenuView : ModelsMenuView, IResultMenuView, IDungeonQuestMenuView
     {
         [SerializeField] private CanvasGroup _canvasGroup = null;
         [SerializeField] private ScrollRect _scrollRect = null;
@@ -33,6 +34,7 @@ namespace RoguegardUnity
         private RogueNameBuilder nameBuilder;
 
         private static readonly SubmitChoice submitChoice = new SubmitChoice();
+        private static readonly StartQuestChoice startQuestChoice = new StartQuestChoice();
 
         public void Initialize()
         {
@@ -113,6 +115,39 @@ namespace RoguegardUnity
             SetObj(player, null);
             ShowExitButton(ExitModelsMenuChoice.Instance);
             ShowSubmitButton(submitChoice);
+        }
+
+        void IDungeonQuestMenuView.SetQuest(RogueObj player, DungeonQuest quest, bool showSubmitButton)
+        {
+            SetArg(Root, player, User, new(other: quest));
+
+            _topText.text = null;
+            leftLBuilder.Clear();
+            leftRBuilder.Clear();
+            rightLBuilder.Clear();
+            rightRBuilder.Clear();
+
+            leftLBuilder.AppendLine(quest.Name);
+            leftLBuilder.AppendLine("場所：");
+            leftLBuilder.AppendLine(quest.Dungeon.DescriptionName);
+            leftLBuilder.AppendLine("達成条件：");
+            for (int i = 0; i < quest.Objectives.Count; i++)
+            {
+                leftLBuilder.AppendLine(quest.Objectives[i].Caption);
+            }
+            leftLBuilder.AppendLine("環境：");
+            for (int i = 0; i < quest.Environments.Count; i++)
+            {
+                leftLBuilder.AppendLine(quest.Environments[i].Name);
+            }
+
+            _textLeftL.SetText(leftLBuilder);
+            _textLeftR.SetText(leftRBuilder);
+            _textRightL.SetText(rightLBuilder);
+            _textRightR.SetText(rightRBuilder);
+
+            ShowExitButton(ExitModelsMenuChoice.Instance);
+            if (showSubmitButton) { ShowSubmitButton(startQuestChoice); }
         }
 
         private void SetHeader(RogueObj obj)
@@ -306,6 +341,23 @@ namespace RoguegardUnity
 
                 RogueDevice.Add(DeviceKw.AutoSave, RogueWorld.SavePointInfo);
                 default(IActiveRogueMethodCaller).LoadSavePoint(self, 0f, RogueWorld.SavePointInfo);
+
+                // BackToLobby で階層表示させるため、ここでは終了させない。
+                root.Done();
+            }
+        }
+
+        private class StartQuestChoice : IModelsMenuChoice
+        {
+            public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            {
+                return "出発";
+            }
+
+            public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            {
+                var quest = (DungeonQuest)arg.Other;
+                quest.Start(self);
 
                 // BackToLobby で階層表示させるため、ここでは終了させない。
                 root.Done();

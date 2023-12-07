@@ -17,8 +17,6 @@ namespace RoguegardUnity
         [SerializeField] private TitleMenu _menuPrefab = null;
         [SerializeField] private MenuController _menuControllerPrefab = null;
         [Space]
-        [SerializeField] private PresetCreationData[] _presets = null;
-        [Space]
         [SerializeField] private RogueSpriteRendererPool _spriteRendererPoolPrefab = null;
         [SerializeField] private RogueTilemapRenderer _tilemapRendererPrefab = null;
         [SerializeField] private TouchController _touchControllerPrefab = null;
@@ -32,30 +30,16 @@ namespace RoguegardUnity
 
         public void InstantiateTitleMenu()
         {
-            var characterCreationDatabase = new CharacterCreationDatabase();
-            foreach (var preset in _presets)
-            {
-                characterCreationDatabase.AddPreset(preset);
-            }
-
-            var assetTable = RoguegardSettings.GetAssetTable("Core");
-            foreach (var asset in assetTable.Values)
-            {
-                if (asset is IAppearanceOption appearanceOption)
-                {
-                    characterCreationDatabase.AddAppearanceOption(appearanceOption);
-                }
-                else if (asset is IIntrinsicOption intrinsicOption)
-                {
-                    characterCreationDatabase.AddIntrinsicOption(intrinsicOption);
-                }
-            }
+            var titleOption = new RogueOptions();
+            titleOption.Initialize(null, _audioMixer);
+            titleOption.ClearWithoutSet();
+            titleOption.Set(titleOption);
 
             var menu = Instantiate(_menuPrefab);
             var spriteRendererPool = Instantiate(_spriteRendererPoolPrefab);
             menu.Initialize(
                 spriteRendererPool, _menuControllerPrefab, _tilemapRendererPrefab, _touchControllerPrefab,
-                _soundTable, _audioMixer, _seAudioSourcePrefab, _bgmAudioSourcePrefab, characterCreationDatabase, _titleLogo);
+                _soundTable, _audioMixer, _seAudioSourcePrefab, _bgmAudioSourcePrefab, _titleLogo);
         }
     }
 }

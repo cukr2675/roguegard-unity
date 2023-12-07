@@ -51,7 +51,7 @@ namespace RoguegardUnity
             WindowFrameIndex = index;
             _windowFrameColor = color;
             WindowFrameList.GetWindowFrame(index, out var spriteA, out var spriteB);
-            menuController.SetWindowFrame(spriteA, spriteB, color);
+            menuController?.SetWindowFrame(spriteA, spriteB, color);
         }
     }
 }

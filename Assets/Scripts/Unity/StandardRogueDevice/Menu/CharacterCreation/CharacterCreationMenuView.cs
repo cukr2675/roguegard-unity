@@ -28,7 +28,6 @@ namespace RoguegardUnity
 
         public override CanvasGroup CanvasGroup => _canvasGroup;
 
-        private CharacterCreationDatabase database;
         private CharacterCreationDataBuilder builder;
 
         private IntrinsicItemController intrinsicItemController;
@@ -41,10 +40,9 @@ namespace RoguegardUnity
         private readonly List<ModelsMenuViewItemButton> intrinsicItemButtons = new List<ModelsMenuViewItemButton>();
         private readonly List<ModelsMenuViewItemButton> startingItemItemButtons = new List<ModelsMenuViewItemButton>();
 
-        public void Initialize(CharacterCreationDatabase database, RogueSpriteRendererPool rendererPool)
+        public void Initialize(RogueSpriteRendererPool rendererPool)
         {
-            this.database = database;
-            appearanceBuildersMenu = new AppearanceBuildersMenu(database);
+            appearanceBuildersMenu = new AppearanceBuildersMenu();
             spriteRenderer = rendererPool.GetMenuRogueSpriteRenderer(_appearanceParent);
             var spriteRendererTransform = spriteRenderer.GetComponent<RectTransform>();
             spriteRendererTransform.anchorMin = spriteRendererTransform.anchorMax = new Vector2(.5f, 0f);
@@ -67,8 +65,8 @@ namespace RoguegardUnity
 
             if (intrinsicItemController == null)
             {
-                intrinsicItemController = new IntrinsicItemController() { parent = this };
-                startingItemItemController = new StartingItemItemController() { parent = this };
+                intrinsicItemController = new IntrinsicItemController();
+                startingItemItemController = new StartingItemItemController();
             }
 
             SetArg(root, self, user, arg);
@@ -197,14 +195,13 @@ namespace RoguegardUnity
 
         private class IntrinsicItemController : IModelsMenu, IModelsMenuItemController
         {
-            public CharacterCreationMenuView parent;
             private static readonly OptionItemController optionItemController = new OptionItemController();
 
             public void OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
                 var scroll = (IScrollModelsMenuView)root.Get(DeviceKw.MenuScroll);
-                scroll.OpenView(optionItemController, parent.database.IntrinsicOptions, root, self, user, arg);
+                scroll.OpenView(optionItemController, RoguegardSettings.CharacterCreationDatabase.IntrinsicOptions, root, self, user, arg);
                 scroll.ShowExitButton(ExitModelsMenuChoice.Instance);
             }
 
@@ -247,7 +244,6 @@ namespace RoguegardUnity
 
         private class StartingItemItemController : IModelsMenu, IModelsMenuItemController
         {
-            public CharacterCreationMenuView parent;
             private readonly List<object> models = new List<object>();
             private static readonly OptionItemController optionItemController = new OptionItemController();
 
