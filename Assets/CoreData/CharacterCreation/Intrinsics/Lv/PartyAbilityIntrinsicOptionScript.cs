@@ -28,7 +28,14 @@ namespace Roguegard.CharacterCreation
 
             public virtual void LevelUpToLv(RogueObj self, MainInfoSetType infoSetType)
             {
-                RogueEffectUtility.AddFromInfoSet(self, this);
+                if (infoSetType == MainInfoSetType.Other)
+                {
+                    RogueEffectUtility.AddFromRogueEffect(self, this);
+                }
+                else
+                {
+                    RogueEffectUtility.AddFromInfoSet(self, this);
+                }
             }
 
             public virtual void LevelDownFromLv(RogueObj self, MainInfoSetType infoSetType)
@@ -53,16 +60,6 @@ namespace Roguegard.CharacterCreation
             }
 
             public virtual void GetEffectedName(RogueNameBuilder refName, RogueObj self) { }
-        }
-
-        protected abstract class BasePartyMemberRogueEffect<T> : PartyMemberRogueEffect
-            where T : IStatusEffect
-        {
-            protected sealed override bool MemberIsEffecter(RogueObj partyMember)
-            {
-                var statusEffectState = partyMember.Main.GetStatusEffectState(partyMember);
-                return statusEffectState.TryGetStatusEffect<T>(out _);
-            }
         }
     }
 }

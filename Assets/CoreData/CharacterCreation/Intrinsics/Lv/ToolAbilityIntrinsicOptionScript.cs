@@ -17,7 +17,14 @@ namespace Roguegard.CharacterCreation
 
             protected virtual void LevelUpToLv(RogueObj self, MainInfoSetType infoSetType)
             {
-                RogueEffectUtility.AddFromInfoSet(self, this);
+                if (infoSetType == MainInfoSetType.Other)
+                {
+                    RogueEffectUtility.AddFromRogueEffect(self, this);
+                }
+                else
+                {
+                    RogueEffectUtility.AddFromInfoSet(self, this);
+                }
             }
 
             protected virtual void LevelDownFromLv(RogueObj self, MainInfoSetType infoSetType)
