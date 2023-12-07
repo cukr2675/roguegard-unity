@@ -60,7 +60,9 @@ namespace Roguegard.Editor
             // C# ファイル設定フォーム
             var objPosition = position;
             objPosition.height = EditorGUIUtility.singleLineHeight;
-            var scriptFile = EditorGUI.ObjectField(objPosition, property.displayName, FieldAsset, typeof(MonoScript), false);
+            var hasProperties = HasProperties(refValue);
+            var objectFieldLabel = hasProperties ? " " : property.displayName;
+            var scriptFile = EditorGUI.ObjectField(objPosition, objectFieldLabel, FieldAsset, typeof(MonoScript), false);
             if (scriptFile != FieldAsset)
             {
                 // Inspector から obj 以外に設定されたら、その値を設定されたことにする。
@@ -68,12 +70,12 @@ namespace Roguegard.Editor
             }
 
             // インスタンスプロパティ設定フォーム
-            if (HasProperties(refValue))
+            if (hasProperties)
             {
                 var instancePosition = position;
                 var beforeIndentLevel = EditorGUI.indentLevel;
                 EditorGUI.indentLevel -= fieldPositionCorrectionIsEnabled ? 1 : 0;
-                EditorGUI.PropertyField(instancePosition, _ref, new GUIContent(), true);
+                EditorGUI.PropertyField(instancePosition, _ref, new GUIContent(property.displayName), true);
                 EditorGUI.indentLevel = beforeIndentLevel;
             }
 
@@ -173,6 +175,8 @@ namespace Roguegard.Editor
             static bool TypeHasProperties(System.Type type)
             {
                 var any = type.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance).Any(x => !x.IsNotSerialized);
+                //var any = type.GetFields(BindingFlags.Public | BindingFlags.Instance).Any(x => !x.IsNotSerialized);
+                //any |= type.GetFields(BindingFlags.NonPublic | BindingFlags.Instance).Any(x => !x.IsDefined(typeof(SerializeField)));
                 if (any) return true;
                 else if (type.BaseType == typeof(ReferableScript)) return false;
                 else return TypeHasProperties(type.BaseType);
