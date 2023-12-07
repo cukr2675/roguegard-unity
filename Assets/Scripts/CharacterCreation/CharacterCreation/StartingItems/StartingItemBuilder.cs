@@ -73,7 +73,7 @@ namespace Roguegard.CharacterCreation
             {
                 if (member.Source == source) return member;
             }
-            throw new System.ArgumentException();
+            throw new System.ArgumentException($"{source} ‚É‘Î‰‚·‚é {nameof(IReadOnlyMember)} ‚ÍŒ©‚Â‚©‚è‚Ü‚¹‚ñB");
         }
     }
 }

@@ -29,6 +29,13 @@ namespace Roguegard.CharacterCreation
             return (IReadOnlySingleItemMember)intrinsic.GetMember(SourceInstance);
         }
 
+        public void SetRandom(ICharacterCreationDatabase database, IRogueRandom random)
+        {
+            if (_item != null) throw new RogueException();
+
+            //_itemOption = database.
+        }
+
         public IMember Clone()
         {
             var clone = new SingleItemMember();

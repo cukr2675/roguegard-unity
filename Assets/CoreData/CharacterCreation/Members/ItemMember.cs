@@ -30,6 +30,13 @@ namespace Roguegard.CharacterCreation
             return (IReadOnlyItemMember)intrinsic.GetMember(SourceInstance);
         }
 
+        public void SetRandom(ICharacterCreationDatabase database, IRogueRandom random)
+        {
+            if (_item != null) throw new RogueException();
+
+            builder = new StartingItemBuilder();
+        }
+
         public IMember Clone()
         {
             var clone = new ItemMember();

@@ -27,6 +27,10 @@ namespace Roguegard.CharacterCreation
             return (IReadOnlyStandardRaceMember)race.GetMember(SourceInstance);
         }
 
+        public void SetRandom(ICharacterCreationDatabase database, IRogueRandom random)
+        {
+        }
+
         public IMember Clone()
         {
             var clone = new StandardRaceMember();

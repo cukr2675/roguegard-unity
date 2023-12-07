@@ -7,5 +7,6 @@ namespace Roguegard.CharacterCreation
     [ObjectFormer.RequireRelationalComponent]
     public interface IMember : IReadOnlyMember
     {
+        void SetRandom(ICharacterCreationDatabase database, IRogueRandom random);
     }
 }

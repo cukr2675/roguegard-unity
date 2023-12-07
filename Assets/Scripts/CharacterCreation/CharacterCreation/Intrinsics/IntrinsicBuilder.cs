@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using Roguegard.Extensions;
+
 namespace Roguegard.CharacterCreation
 {
     [ObjectFormer.Formable]
@@ -52,11 +54,40 @@ namespace Roguegard.CharacterCreation
             }
         }
 
+        public void SetRandomMembers(ICharacterCreationData characterCreationData, ICharacterCreationDatabase database, IRogueRandom random)
+        {
+            members.Clear();
+            for (int i = 0; i < Option.MemberSources.Count; i++)
+            {
+                var memberSource = Option.MemberSources[i];
+                var member = memberSource.CreateMember();
+                Option.UpdateMemberRange(member, this, characterCreationData);
+                member.SetRandom(database, random);
+                members.Add(member);
+            }
+        }
+
+        public IMember GetMember(IMemberSource source)
+        {
+            for (int i = 0; i < members.Count; i++)
+            {
+                if (members[i].Source == source) return members[i];
+            }
+            var member = source.CreateMember();
+            members.Add(member);
+            return member;
+        }
+
         IReadOnlyMember IMemberable.GetMember(IMemberSource source)
         {
             foreach (var member in members)
             {
                 if (member.Source == source) return member;
+            }
+            {
+                var member = source.CreateMember();
+                members.Add(member);
+                return member;
             }
             throw new System.ArgumentException();
         }
