@@ -70,6 +70,19 @@ namespace Roguegard.CharacterCreation
             growingInfoSets = new GrowingInfoSetTable(this);
         }
 
+        private void UpdateCost()
+        {
+            Cost = Race.Option.Cost;
+            CostIsUnknown = Race.Option.CostIsUnknown;
+
+            for (int i = 0; i < Intrinsics.Count; i++)
+            {
+                var intrinsic = Intrinsics[i];
+                Cost += Mathf.Max(intrinsic.Option.GetCost(intrinsic, this, out var intrinsicCostIsUnknown), 0f);
+                CostIsUnknown |= intrinsicCostIsUnknown;
+            }
+        }
+
         public RogueObj CreateObj(RogueObj location, Vector2Int position, IRogueRandom random, StackOption stackOption = StackOption.Default)
         {
             if (growingInfoSets == null) { UpdateData(); }

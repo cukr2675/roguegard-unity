@@ -71,7 +71,7 @@ namespace Roguegard.CharacterCreation
             for (int i = 0; i < _intrinsics.Length; i++)
             {
                 var intrinsic = _intrinsics[i];
-                cost += intrinsic.Option.GetCost(intrinsic, this, out var intrinsicCostIsUnknown);
+                cost += Mathf.Max(intrinsic.Option.GetCost(intrinsic, this, out var intrinsicCostIsUnknown), 0f);
                 costIsUnknown |= intrinsicCostIsUnknown;
             }
         }
