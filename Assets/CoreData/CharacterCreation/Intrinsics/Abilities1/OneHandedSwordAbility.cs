@@ -12,7 +12,7 @@ namespace Roguegard.CharacterCreation
             return new SortedIntrinsic(lv);
 		}
 
-        private class SortedIntrinsic : AbilitySortedIntrinsic, IRogueMethodPassiveAspect, IRogueMethodActiveAspect, IValueEffect, IRogueObjUpdater
+        private class SortedIntrinsic : AbilitySortedIntrinsic, IRogueMethodPassiveAspect, IRogueMethodActiveAspect
         {
             /// <summary>
             /// 通常攻撃回数をカウントする
@@ -20,12 +20,8 @@ namespace Roguegard.CharacterCreation
             [System.NonSerialized] private int attackCount;
             [System.NonSerialized] private float attackActivationDepth;
 
-            private bool buffIsEnabled;
-
             float IRogueMethodPassiveAspect.Order => 0f;
             float IRogueMethodActiveAspect.Order => 0f;
-			float IValueEffect.Order => AttackUtility.BaseCupValueEffectOrder;
-			float IRogueObjUpdater.Order => -100f; // 行動前にバフを無効化
 
             public SortedIntrinsic(int lv) : base(lv) { }
 
@@ -40,8 +36,11 @@ namespace Roguegard.CharacterCreation
                     attackActivationDepth = activationDepth;
                     var result = next.Invoke(keyword, method, self, user, activationDepth, arg);
 
-                    // 通常攻撃後、攻撃回数が 2 であれば剣を使ったとみなしてバフを有効化
-                    buffIsEnabled = attackCount == 2;
+                    if (attackCount == 2)
+                    {
+                        // 通常攻撃後、攻撃回数が 2 であれば剣を使ったとみなしてバフを有効化
+                        Effect.AffectTo(self);
+                    }
                     return result;
                 }
                 return next.Invoke(keyword, method, self, user, activationDepth, arg);
@@ -58,21 +57,43 @@ namespace Roguegard.CharacterCreation
                 }
                 return next.Invoke(keyword, method, self, target, activationDepth, arg);
             }
+        }
 
-			void IValueEffect.AffectValue(IKeyword keyword, AffectableValue value, RogueObj self)
-			{
-                if (buffIsEnabled && keyword == StatsKw.DEF)
+        [ObjectFormer.Formable]
+        private class Effect : TimeLimitedStackableStatusEffect, IValueEffect
+        {
+            public override string Name => ":OneHandedSwordAbility";
+            public override IKeyword EffectCategory => null;
+            protected override int InitialLifeTime => 2;
+            protected override int MaxStack => 1;
+
+            float IValueEffect.Order => AttackUtility.BaseCupValueEffectOrder;
+
+            private static Effect instance = new Effect();
+
+            public static void AffectTo(RogueObj obj)
+            {
+                instance.AffectTo(obj, null, 0f, RogueMethodArgument.Identity);
+            }
+
+            void IValueEffect.AffectValue(IKeyword keyword, AffectableValue value, RogueObj self)
+            {
+                if (keyword == StatsKw.DEF)
                 {
                     // 剣を振ったら次のターンまで 40% でガード
                     value.SubValues[StatsKw.GuardRate] = AttackUtility.Cup(value.SubValues[StatsKw.GuardRate], 0.4f);
                 }
-			}
+            }
 
-			RogueObjUpdaterContinueType IRogueObjUpdater.UpdateObj(RogueObj self, float activationDepth, ref int sectionIndex)
-			{
-                buffIsEnabled = false;
-                return default;
-			}
+            public override bool CanStack(RogueObj obj, RogueObj otherObj, IRogueEffect other) => false;
+
+            public override IRogueEffect DeepOrShallowCopy(RogueObj self, RogueObj clonedSelf)
+            {
+                var clone = new Effect();
+                clone.LifeTime = LifeTime;
+                clone.Stack = Stack;
+                return clone;
+            }
         }
     }
 }
