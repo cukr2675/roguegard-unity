@@ -60,21 +60,7 @@ namespace Roguegard
             }
 
             // パーティメンバーに自然回復効果を付与
-            if (self.Main.Stats.Party == null)
-            {
-                Debug.LogError("プレイヤーキャラがパーティに所属していません。");
-                return default;
-            }
-
-            var partyMembers = self.Main.Stats.Party.Members;
-            for (int i = 1; i < partyMembers.Count; i++)
-            {
-                var member = partyMembers[i];
-                if (member.Main.RogueEffects.Contains(memberEffect)) continue;
-
-                member.Main.RogueEffects.AddOpen(member, memberEffect);
-            }
-
+            memberEffect.AffectToPartyMembersOf(self, false);
             return default;
         }
 

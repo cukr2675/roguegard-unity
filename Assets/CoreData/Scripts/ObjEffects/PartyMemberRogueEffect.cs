@@ -9,6 +9,30 @@ namespace Roguegard
         float IRogueObjUpdater.Order => UpdaterOrder;
         protected virtual float UpdaterOrder => 100f;
 
+        public void AffectToPartyMembersOf(RogueObj self, bool affectToSelf)
+        {
+            if (self.Main.Stats.Party == null)
+            {
+                Add(self);
+            }
+            else
+            {
+                var partyMembers = self.Main.Stats.Party.Members;
+                for (int i = 0; i < partyMembers.Count; i++)
+                {
+                    Add(partyMembers[i]);
+                }
+            }
+
+            void Add(RogueObj partyMember)
+            {
+                if (!affectToSelf && partyMember == self) return;
+                if (partyMember.Main.RogueEffects.TryGetEffect<PartyMemberRogueEffect>(GetType(), out _)) return;
+
+                partyMember.Main.RogueEffects.AddOpen(partyMember, this);
+            }
+        }
+
         void IRogueEffect.Open(RogueObj self) => Open(self);
         protected virtual void Open(RogueObj self)
         {

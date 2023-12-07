@@ -22,36 +22,13 @@ namespace Roguegard.CharacterCreation
 
             RogueObjUpdaterContinueType IRogueObjUpdater.UpdateObj(RogueObj self, float activationDepth, ref int sectionIndex)
             {
-                // パーティメンバーに効果を付与
-                if (self.Main.Stats.Party == null)
-                {
-                    Add(self);
-                }
-                else
-                {
-                    var partyMembers = self.Main.Stats.Party.Members;
-                    for (int i = 0; i < partyMembers.Count; i++)
-                    {
-                        Add(partyMembers[i]);
-                    }
-                }
+                memberEffect.AffectToPartyMembersOf(self, true);
                 return default;
-
-                void Add(RogueObj partyMember)
-                {
-                    if (partyMember.Main.RogueEffects.TryGetEffect<MemberEffect>(out _)) return;
-
-                    partyMember.Main.RogueEffects.AddOpen(partyMember, memberEffect);
-                }
             }
         }
 
-        /// <summary>
-        /// <see cref="PartyAbilityIntrinsicOptionScript.BasePartyMemberRogueEffect.effecterEffect"/> のシリアル化が必要なため
-        /// <see cref="ObjectFormer.FormableAttribute"/> を付与する
-        /// </summary>
         [ObjectFormer.Formable]
-        private class MemberEffect : BasePartyMemberRogueEffect<SortedIntrinsic>, IRogueMethodActiveAspect
+        private class MemberEffect : StatusEffectPartyMemberRogueEffect<SortedIntrinsic>, IRogueMethodActiveAspect
         {
             float IRogueMethodActiveAspect.Order => 0f;
 
