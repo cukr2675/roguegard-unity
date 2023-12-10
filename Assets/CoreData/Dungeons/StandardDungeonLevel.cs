@@ -10,6 +10,10 @@ namespace Roguegard.CharacterCreation
     public class StandardDungeonLevel : RogueDungeonLevel
     {
         [SerializeField] private RogueDungeonGenerator _dungeonGenerator = null;
+        public override Spanning<IRogueTile> FillTiles => _dungeonGenerator.FillTiles;
+        public override Spanning<IRogueTile> NoizeTiles => _dungeonGenerator.NoiseTiles;
+        public override Spanning<IRogueTile> RoomFloorTiles => _dungeonGenerator.RoomFloorTiles;
+        public override Spanning<IRogueTile> RoomWallTiles => _dungeonGenerator.RoomWallTiles;
 
         [SerializeField] private RandomRoomObjTable[] _enemyTable = null;
         public override Spanning<IWeightedRogueObjGeneratorList> EnemyTable => _enemyTable;

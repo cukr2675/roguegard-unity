@@ -60,9 +60,13 @@ namespace Roguegard.CharacterCreation
                     return true;
                 }
 
-                // 条件に一致する位置が見つからなければ失敗として位置を返さない
-                position = default;
-                return false;
+                // 条件に一致する位置が見つからなければとりあえず生成
+                position = floor.Space.GetRandomPositionInRoom(random);
+                return true;
+
+                //// 条件に一致する位置が見つからなければ失敗として位置を返さない
+                //position = default;
+                //return false;
             }
             else
             {

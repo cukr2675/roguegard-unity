@@ -9,6 +9,11 @@ namespace Roguegard.CharacterCreation
         [SerializeField] private int _endLv = 0;
         public int EndLv => _endLv;
 
+        public abstract Spanning<IRogueTile> FillTiles { get; }
+        public abstract Spanning<IRogueTile> NoizeTiles { get; }
+        public abstract Spanning<IRogueTile> RoomFloorTiles { get; }
+        public abstract Spanning<IRogueTile> RoomWallTiles { get; }
+
         public abstract Spanning<IWeightedRogueObjGeneratorList> EnemyTable { get; }
         public abstract Spanning<IWeightedRogueObjGeneratorList> ItemTable { get; }
         public abstract Spanning<IWeightedRogueObjGeneratorList> OtherTable { get; }

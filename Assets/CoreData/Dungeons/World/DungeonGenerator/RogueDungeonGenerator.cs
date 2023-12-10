@@ -22,13 +22,17 @@ namespace Roguegard
 
         [Header("Tiles")]
         [SerializeField] private ScriptableRogueTile[] _fillTiles;
+        public Spanning<IRogueTile> FillTiles => _fillTiles;
         [Space]
         [SerializeField] private ScriptableRogueTile[] _noiseTiles;
+        public Spanning<IRogueTile> NoiseTiles => _noiseTiles;
         [SerializeField] private float _noiseTileThreshold;
         [SerializeField] private float _noiseTileScale;
         [Space]
         [SerializeField] private ScriptableRogueTile[] _roomFloorTiles;
+        public Spanning<IRogueTile> RoomFloorTiles => _roomFloorTiles;
         [SerializeField] private ScriptableRogueTile[] _roomWallTiles;
+        public Spanning<IRogueTile> RoomWallTiles => _roomWallTiles;
         [Space]
         [SerializeField] private TileArray[] _corridorTiles;
         private int CorridorWidth => _corridorTiles.Length;
