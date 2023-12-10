@@ -29,6 +29,7 @@ namespace Roguegard.CharacterCreation
         Color IReadOnlyRace.BodyColor => Color;
         string IReadOnlyRace.OptionCaption => null;
         IRogueDetails IReadOnlyRace.OptionDetails => null;
+        IMemberableOption IMemberable.MemberableOption => this;
 
         IReadOnlyMember IMemberable.GetMember(IMemberSource source)
         {

@@ -43,6 +43,7 @@ namespace Roguegard.CharacterCreation
         int IRogueObjGenerator.Lv => _option.Race.Lv;
         Spanning<IWeightedRogueObjGeneratorList> IRogueObjGenerator.StartingItemTable => _option.StartingItemTable;
         float IWeightedRogueObjGenerator.Weight => _generatorWeight;
+        IMemberableOption IMemberable.MemberableOption => _option;
 
         IReadOnlyMember IMemberable.GetMember(IMemberSource source)
         {

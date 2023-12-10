@@ -30,6 +30,21 @@ namespace Roguegard.CharacterCreation
             }
         }
 
+        public bool Remove(StartingItemBuilder builder, bool removeEmptyList)
+        {
+            var any = false;
+            for (int i = 0; i < table.Count; i++)
+            {
+                any |= table[i].Remove(builder);
+                if (removeEmptyList && table[i].Count == 0)
+                {
+                    table.RemoveAt(i);
+                    i--;
+                }
+            }
+            return any;
+        }
+
         public void Clear()
         {
             table.Clear();

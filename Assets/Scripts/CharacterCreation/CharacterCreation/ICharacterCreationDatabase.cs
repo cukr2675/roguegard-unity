@@ -8,6 +8,8 @@ namespace Roguegard.CharacterCreation
     {
         int PresetsCount { get; }
 
+        Spanning<IRaceOption> RaceOptions { get; }
+
         Spanning<IAppearanceOption> AppearanceOptions { get; }
 
         Spanning<IIntrinsicOption> IntrinsicOptions { get; }

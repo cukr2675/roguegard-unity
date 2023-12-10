@@ -20,6 +20,7 @@ namespace Roguegard.CharacterCreation
         Color IRogueDescription.Color => Color;
         public string Caption => Option.Caption;
         public IRogueDetails Details => Option.Details;
+        IMemberableOption IMemberable.MemberableOption => Option;
 
         public AppearanceBuilder()
         {
@@ -52,7 +53,11 @@ namespace Roguegard.CharacterCreation
             {
                 if (member.Source == source) return member;
             }
-            throw new System.ArgumentException();
+            {
+                var member = source.CreateMember();
+                members.Add(member);
+                return member;
+            }
         }
 
         public AppearanceBuilder Clone()

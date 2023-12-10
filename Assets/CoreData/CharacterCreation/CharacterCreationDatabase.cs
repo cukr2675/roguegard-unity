@@ -9,6 +9,9 @@ namespace Roguegard.CharacterCreation
         private List<CharacterCreationDataBuilder> _presets = new List<CharacterCreationDataBuilder>();
         public int PresetsCount => _presets.Count;
 
+        private List<IRaceOption> _raceOptions = new List<IRaceOption>();
+        public Spanning<IRaceOption> RaceOptions => _raceOptions;
+
         private List<IAppearanceOption> _appearanceOptions = new List<IAppearanceOption>();
         public Spanning<IAppearanceOption> AppearanceOptions => _appearanceOptions;
 
@@ -26,6 +29,11 @@ namespace Roguegard.CharacterCreation
         public void AddPreset(CharacterCreationDataBuilder preset)
         {
             _presets.Add(preset);
+        }
+
+        public void AddRaceOptions(IRaceOption raceOptions)
+        {
+            _raceOptions.Add(raceOptions);
         }
 
         public void AddAppearanceOption(IAppearanceOption appearanceOption)

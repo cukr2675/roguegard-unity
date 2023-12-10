@@ -20,8 +20,7 @@ namespace RoguegardUnity
         [SerializeField] private TMP_InputField _nameField = null;
         [SerializeField] private TMP_InputField _shortNameField = null;
         [SerializeField] private ModelsMenuViewItemButton _raceButton = null;
-        [SerializeField] private RectTransform _intrinsicParent = null;
-        [SerializeField] private RectTransform _startingItemParent = null;
+        [SerializeField] private RectTransform _secondParent = null;
         [SerializeField] private ModelsMenuViewItemButton _headerPrefab = null;
         [SerializeField] private ModelsMenuViewItemButton _itemButtonPrefab = null;
         [SerializeField] private ModelsMenuViewItemButton _exitButton = null;
@@ -29,14 +28,17 @@ namespace RoguegardUnity
         public override CanvasGroup CanvasGroup => _canvasGroup;
 
         private CharacterCreationDataBuilder builder;
+        private CharacterCreationAddMenu addMenu;
+        private CharacterCreationOptionMenu optionMenu;
 
         private IntrinsicItemController intrinsicItemController;
         private StartingItemItemController startingItemItemController;
         private static readonly HeaderChoice intrinsicHeader = new HeaderChoice() { text = "固有能力" };
         private static readonly HeaderChoice startingItemHeader = new HeaderChoice() { text = "初期アイテム" };
         private MenuRogueObjSpriteRenderer spriteRenderer;
-        private AppearanceBuildersMenu appearanceBuildersMenu;
+        private RaceChoice raceChoice;
         private AppearanceChoice appearanceChoice;
+        private AppearanceBuildersMenu appearanceBuildersMenu;
         private readonly List<ModelsMenuViewItemButton> intrinsicItemButtons = new List<ModelsMenuViewItemButton>();
         private readonly List<ModelsMenuViewItemButton> startingItemItemButtons = new List<ModelsMenuViewItemButton>();
 
@@ -50,7 +52,9 @@ namespace RoguegardUnity
             spriteRendererTransform.localPosition = Vector3.zero;
             spriteRendererTransform.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Bottom, 0f, 0f);
             spriteRendererTransform.localScale = Vector3.one * 4f;
+            _raceButton.Initialize(this);
             _appearanceButton.Initialize(this);
+            raceChoice = new RaceChoice() { parent = this };
             appearanceChoice = new AppearanceChoice() { parent = this };
             _exitButton.Initialize(this);
             _nameField.onValueChanged.AddListener(text => builder.Name = text);
@@ -62,11 +66,15 @@ namespace RoguegardUnity
         {
             if (!(arg.Other is CharacterCreationDataBuilder builder)) throw new RogueException();
             this.builder = builder;
+            addMenu = new CharacterCreationAddMenu(builder, RoguegardSettings.CharacterCreationDatabase);
+            optionMenu = new CharacterCreationOptionMenu(builder, RoguegardSettings.CharacterCreationDatabase);
+            appearanceBuildersMenu.NextMenu = optionMenu;
+            appearanceBuildersMenu.AddMenu = addMenu;
 
             if (intrinsicItemController == null)
             {
-                intrinsicItemController = new IntrinsicItemController();
-                startingItemItemController = new StartingItemItemController();
+                intrinsicItemController = new IntrinsicItemController() { parent = this };
+                startingItemItemController = new StartingItemItemController() { parent = this };
             }
 
             SetArg(root, self, user, arg);
@@ -92,65 +100,83 @@ namespace RoguegardUnity
             }
             startingItemItemButtons.Clear();
 
-            var intrinsicSumHeight = 0f;
+            var sumHeight = 0f;
+            var odd = false;
             {
-                var header = Instantiate(_headerPrefab, _intrinsicParent);
-                SetTransform((RectTransform)header.transform, ref intrinsicSumHeight);
+                var header = Instantiate(_headerPrefab, _secondParent);
+                SetTransform((RectTransform)header.transform, ref sumHeight, ref odd);
+                sumHeight += ((RectTransform)header.transform).rect.height;
+                odd = false;
                 header.Initialize(this);
                 header.SetItem(ChoicesModelsMenuItemController.Instance, intrinsicHeader);
             }
             for (int i = 0; i < builder.Intrinsics.Count; i++)
             {
                 var intrinsic = builder.Intrinsics[i];
-                var itemButton = Instantiate(_itemButtonPrefab, _intrinsicParent);
-                SetTransform((RectTransform)itemButton.transform, ref intrinsicSumHeight);
+                var itemButton = Instantiate(_itemButtonPrefab, _secondParent);
+                SetTransform((RectTransform)itemButton.transform, ref sumHeight, ref odd);
                 itemButton.Initialize(this);
                 itemButton.SetItem(intrinsicItemController, intrinsic);
                 intrinsicItemButtons.Add(itemButton);
             }
             {
-                var itemButton = Instantiate(_itemButtonPrefab, _intrinsicParent);
-                SetTransform((RectTransform)itemButton.transform, ref intrinsicSumHeight);
+                var itemButton = Instantiate(_itemButtonPrefab, _secondParent);
+                SetTransform((RectTransform)itemButton.transform, ref sumHeight, ref odd);
                 itemButton.Initialize(this);
                 itemButton.SetItem(intrinsicItemController, null);
                 intrinsicItemButtons.Add(itemButton);
+                if (odd) { sumHeight += ((RectTransform)itemButton.transform).rect.height; }
             }
 
-            var startingItemSumHeight = 0f;
+            odd = false;
             {
-                var header = Instantiate(_headerPrefab, _startingItemParent);
-                SetTransform((RectTransform)header.transform, ref startingItemSumHeight);
+                var header = Instantiate(_headerPrefab, _secondParent);
+                SetTransform((RectTransform)header.transform, ref sumHeight, ref odd);
+                sumHeight += ((RectTransform)header.transform).rect.height;
+                odd = false;
                 header.Initialize(this);
                 header.SetItem(ChoicesModelsMenuItemController.Instance, startingItemHeader);
             }
             for (int i = 0; i < builder.StartingItemTable.Count; i++)
             {
                 var startingItem = builder.StartingItemTable[i][0];
-                var itemButton = Instantiate(_itemButtonPrefab, _startingItemParent);
-                SetTransform((RectTransform)itemButton.transform, ref startingItemSumHeight);
+                var itemButton = Instantiate(_itemButtonPrefab, _secondParent);
+                SetTransform((RectTransform)itemButton.transform, ref sumHeight, ref odd);
                 itemButton.Initialize(this);
                 itemButton.SetItem(startingItemItemController, startingItem);
                 startingItemItemButtons.Add(itemButton);
             }
             {
-                var itemButton = Instantiate(_itemButtonPrefab, _startingItemParent);
-                SetTransform((RectTransform)itemButton.transform, ref startingItemSumHeight);
+                var itemButton = Instantiate(_itemButtonPrefab, _secondParent);
+                SetTransform((RectTransform)itemButton.transform, ref sumHeight, ref odd);
                 itemButton.Initialize(this);
                 itemButton.SetItem(startingItemItemController, null);
                 startingItemItemButtons.Add(itemButton);
+                if (odd) { sumHeight += ((RectTransform)itemButton.transform).rect.height; }
             }
             _scrollRect.content.SetInsetAndSizeFromParentEdge(
-                RectTransform.Edge.Top, 0, _firstParent.rect.height + Mathf.Max(intrinsicSumHeight, startingItemSumHeight));
+                RectTransform.Edge.Top, 0, _firstParent.rect.height + sumHeight);
 
+            _raceButton.SetItem(ChoicesModelsMenuItemController.Instance, raceChoice);
             _appearanceButton.SetItem(ChoicesModelsMenuItemController.Instance, appearanceChoice);
             _exitButton.SetItem(ChoicesModelsMenuItemController.Instance, models[0]);
             MenuController.Show(_canvasGroup, true);
         }
 
-        private static void SetTransform(RectTransform itemTransform, ref float sumHeight)
+        private static void SetTransform(RectTransform itemTransform, ref float sumHeight, ref bool odd)
         {
+            var parentRect = ((RectTransform)itemTransform.parent).rect;
             itemTransform.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, sumHeight, itemTransform.rect.height);
-            sumHeight += itemTransform.rect.height;
+            itemTransform.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Left, odd ? parentRect.width / 2f : 0f, parentRect.width / 2f);
+            if (odd)
+            {
+                sumHeight += itemTransform.rect.height;
+                odd = false;
+            }
+            else
+            {
+                odd = true;
+            }
         }
 
         public override float GetPosition()
@@ -176,6 +202,23 @@ namespace RoguegardUnity
             }
         }
 
+        private class RaceChoice : IModelsMenuChoice
+        {
+            public CharacterCreationMenuView parent;
+
+            public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            {
+                return null;
+            }
+
+            public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            {
+                root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+
+                root.OpenMenu(parent.optionMenu, self, null, new(other: parent.builder.Race), arg);
+            }
+        }
+
         private class AppearanceChoice : IModelsMenuChoice
         {
             public CharacterCreationMenuView parent;
@@ -193,17 +236,9 @@ namespace RoguegardUnity
             }
         }
 
-        private class IntrinsicItemController : IModelsMenu, IModelsMenuItemController
+        private class IntrinsicItemController : IModelsMenuItemController
         {
-            private static readonly OptionItemController optionItemController = new OptionItemController();
-
-            public void OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-                var scroll = (IScrollModelsMenuView)root.Get(DeviceKw.MenuScroll);
-                scroll.OpenView(optionItemController, RoguegardSettings.CharacterCreationDatabase.IntrinsicOptions, root, self, user, arg);
-                scroll.ShowExitButton(ExitModelsMenuChoice.Instance);
-            }
+            public CharacterCreationMenuView parent;
 
             public string GetName(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
@@ -216,56 +251,18 @@ namespace RoguegardUnity
                 if (model == null)
                 {
                     root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-                    //parent.
+                    root.OpenMenu(parent.addMenu, self, null, new(other: typeof(IntrinsicBuilder)), arg);
                 }
                 else
                 {
-                    var openArg = new RogueMethodArgument(other: (IntrinsicBuilder)model);
-                    root.OpenMenu(this, self, user, openArg, arg);
-                }
-            }
-
-            private class OptionItemController : IModelsMenuItemController
-            {
-                public string GetName(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-                {
-                    return ((IIntrinsicOption)model).Name;
-                }
-
-                public void Activate(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-                {
-                    root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-                    var builder = (IntrinsicBuilder)arg.Other;
-                    builder.Option = (IIntrinsicOption)model;
-                    root.Back();
+                    root.OpenMenu(parent.optionMenu, self, user, new(other: (IntrinsicBuilder)model), arg);
                 }
             }
         }
 
-        private class StartingItemItemController : IModelsMenu, IModelsMenuItemController
+        private class StartingItemItemController : IModelsMenuItemController
         {
-            private readonly List<object> models = new List<object>();
-            private static readonly OptionItemController optionItemController = new OptionItemController();
-
-            public void OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                models.Clear();
-                var spaceObjs = self.Space.Objs;
-                for (int i = 0; i < spaceObjs.Count; i++)
-                {
-                    var obj = spaceObjs[i];
-                    if (obj.Main.InfoSet is CharacterCreationInfoSet infoSet &&
-                        infoSet.Data is IStartingItemOption option)
-                    {
-                        models.Add(option);
-                    }
-                }
-
-                root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-                var scroll = (IScrollModelsMenuView)root.Get(DeviceKw.MenuScroll);
-                scroll.OpenView(optionItemController, models, root, self, user, arg);
-                scroll.ShowExitButton(ExitModelsMenuChoice.Instance);
-            }
+            public CharacterCreationMenuView parent;
 
             public string GetName(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
@@ -278,28 +275,11 @@ namespace RoguegardUnity
                 if (model == null)
                 {
                     root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-                    //parent.
+                    root.OpenMenu(parent.addMenu, self, null, new(other: typeof(StartingItemBuilder)), arg);
                 }
                 else
                 {
-                    var openArg = new RogueMethodArgument(other: (StartingItemBuilder)model);
-                    root.OpenMenu(this, self, user, openArg, arg);
-                }
-            }
-
-            private class OptionItemController : IModelsMenuItemController
-            {
-                public string GetName(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-                {
-                    return ((IStartingItemOption)model).Name;
-                }
-
-                public void Activate(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-                {
-                    root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-                    var builder = ((StartingItemBuilder)arg.Other);
-                    builder.Option = (IStartingItemOption)model;
-                    root.Back();
+                    root.OpenMenu(parent.optionMenu, self, null, new(other: (StartingItemBuilder)model), arg);
                 }
             }
         }

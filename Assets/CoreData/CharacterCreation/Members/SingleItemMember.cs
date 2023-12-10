@@ -20,6 +20,10 @@ namespace Roguegard.CharacterCreation
                 if (_itemOption == null) { _itemOption = _item; }
                 return _itemOption;
             }
+            set
+            {
+                _itemOption = value;
+            }
         }
 
         private SingleItemMember() { }

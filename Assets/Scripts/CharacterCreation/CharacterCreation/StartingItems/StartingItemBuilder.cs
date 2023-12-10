@@ -32,6 +32,7 @@ namespace Roguegard.CharacterCreation
         float IWeightedRogueObjGenerator.Weight => GeneratorWeight;
         Color IReadOnlyStartingItem.OptionColor => OptionColor;
         IRogueGender IReadOnlyStartingItem.OptionGender => null;
+        IMemberableOption IMemberable.MemberableOption => Option;
 
         public StartingItemBuilder()
         {
@@ -73,7 +74,11 @@ namespace Roguegard.CharacterCreation
             {
                 if (member.Source == source) return member;
             }
-            throw new System.ArgumentException($"{source} ‚É‘Î‰‚·‚é {nameof(IReadOnlyMember)} ‚ÍŒ©‚Â‚©‚è‚Ü‚¹‚ñB");
+            {
+                var member = source.CreateMember();
+                members.Add(member);
+                return member;
+            }
         }
     }
 }

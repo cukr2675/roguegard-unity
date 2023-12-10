@@ -74,6 +74,7 @@ namespace RoguegardUnity
                     items.Add(item.gameObject);
                 }
             }
+            _scrollRect.content.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, 0f, sumHeight);
             MenuController.Show(_canvasGroup, true);
         }
 

@@ -42,6 +42,11 @@ namespace Roguegard.CharacterCreation
             builders.AddRange(startingItems.Select(x => new StartingItemBuilder(x)));
         }
 
+        public bool Remove(StartingItemBuilder builder)
+        {
+            return builders.Remove(builder);
+        }
+
         public IEnumerator<StartingItemBuilder> GetEnumerator() => builders.GetEnumerator();
         IEnumerator IEnumerable.GetEnumerator() => builders.GetEnumerator();
     }

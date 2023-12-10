@@ -26,6 +26,7 @@ namespace Roguegard.CharacterCreation
         public string Caption => OptionCaption ?? Option.Caption;
         public IRogueDetails Details => OptionDetails ?? Option.Details;
         Color IReadOnlyIntrinsic.OptionColor => OptionColor;
+        IMemberableOption IMemberable.MemberableOption => Option;
 
         public IntrinsicBuilder()
         {
@@ -89,7 +90,6 @@ namespace Roguegard.CharacterCreation
                 members.Add(member);
                 return member;
             }
-            throw new System.ArgumentException();
         }
     }
 }

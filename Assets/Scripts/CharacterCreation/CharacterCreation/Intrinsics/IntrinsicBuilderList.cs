@@ -27,6 +27,11 @@ namespace Roguegard.CharacterCreation
             builders.AddRange(intrinsics.Select(x => new IntrinsicBuilder(x)));
         }
 
+        public bool Remove(IntrinsicBuilder builder)
+        {
+            return builders.Remove(builder);
+        }
+
         public void Clear()
         {
             builders.Clear();

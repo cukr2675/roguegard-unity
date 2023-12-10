@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using System.Linq;
+
 namespace Roguegard.CharacterCreation
 {
     [ObjectFormer.Formable]
@@ -14,11 +16,22 @@ namespace Roguegard.CharacterCreation
         [SerializeField] private int _typeIndex;
         public int TypeIndex { get => _typeIndex; set => _typeIndex = value; }
 
-        public char TypeChar => typeChars[_typeIndex];
+        public string Type => typeChars[_typeIndex].ToString();
 
         [System.NonSerialized] private readonly List<Sprite> typeItems = new List<Sprite>();
+        [System.NonSerialized] private string[] _types;
+        public Spanning<string> Types
+        {
+            get
+            {
+                if (typeItems.Count != _types?.Length) { _types = typeItems.Select((x, i) => typeStrings[i]).ToArray(); }
+
+                return _types;
+            }
+        }
 
         private static readonly char[] typeChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray();
+        private static readonly string[] typeStrings = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray().Select(x => x.ToString()).ToArray();
 
         private AlphabetTypeMember() { }
 

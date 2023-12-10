@@ -168,6 +168,8 @@ namespace Roguegard.CharacterCreation
             public string Caption => Option.Caption;
             public IRogueDetails Details => Option.Details;
 
+            IMemberableOption IMemberable.MemberableOption => Option;
+
             public IReadOnlyMember GetMember(IMemberSource source) => source.CreateMember();
 
             public DefaultItem(IStartingItemOption option, IRogueGender optionGender)

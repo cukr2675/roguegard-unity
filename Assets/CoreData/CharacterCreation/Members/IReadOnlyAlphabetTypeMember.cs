@@ -7,6 +7,6 @@ namespace Roguegard.CharacterCreation
     public interface IReadOnlyAlphabetTypeMember : IReadOnlyMember
     {
         int TypeIndex { get; }
-        char TypeChar { get; }
+        string Type { get; }
     }
 }
