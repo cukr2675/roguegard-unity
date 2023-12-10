@@ -79,6 +79,13 @@ namespace Roguegard
 
         public void SetLv(RogueObj self, int lv)
         {
+            if (lv == Lv)
+            {
+                var levelInfo = self.Main.GetLevelInfo(self);
+                TotalExp = levelInfo?.NextTotalExps[Lv - 1] ?? 0;
+                return;
+            }
+
             // 変化前 InfoSet と変化後 InfoSet でスキルの習得順を維持するため１レベルごとに処理する。
             while (Lv < lv)
             {
