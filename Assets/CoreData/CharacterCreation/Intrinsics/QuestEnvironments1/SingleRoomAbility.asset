@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: db98f972cd631bc4ea5f231be3d4f892, type: 3}
-  m_Name: RescueQuestObjective
+  m_Name: SingleRoomAbility
   m_EditorClassIdentifier: 
   _descriptionName: 
   _icon: {fileID: 0}
@@ -21,18 +21,18 @@ MonoBehaviour:
     _ref:
       rid: -2
   _baseLv: 1
-  _baseCost: -1
+  _baseCost: -4
   _baseCostIsUnknown: 0
   _script:
-    _script: {fileID: 11500000, guid: e46b75ab161601e41812d0d5c6176f4f, type: 3}
+    _script: {fileID: 11500000, guid: 77e1356e0df0dd54e836a069cb4426dc, type: 3}
     _ref:
-      rid: 3832255513784745987
+      rid: 3089142974586290178
   references:
     version: 2
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
-    - rid: 3832255513784745987
-      type: {class: RescueQuestObjective, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
+    - rid: 3089142974586290178
+      type: {class: SingleRoomAbility, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
       data:
         _assemblyReflectionAssetDummy: 

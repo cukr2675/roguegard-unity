@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: CoreQuestEnvironment1 Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: CoreQuestEnvironment1
+  m_TableCollectionNameGuidString: e63f09f9c5874394ab2eec6f3b815aa6
+  m_Entries:
+  - m_Id: 24057221120
+    m_Key: DoublePainAbility
+    m_Metadata:
+      m_Items: []
+  - m_Id: 82374823936
+    m_Key: DoublePainAbility::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 92843806720
+    m_Key: DoublePainAbility::d
+    m_Metadata:
+      m_Items: []
+  - m_Id: 141598396416
+    m_Key: SingleRoomAbility
+    m_Metadata:
+      m_Items: []
+  - m_Id: 738967949312
+    m_Key: SingleRoomAbility::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 748635820032
+    m_Key: SingleRoomAbility::d
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 3089142974586290179
+  references:
+    version: 2
+    RefIds:
+    - rid: 3089142974586290179
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1702008812809

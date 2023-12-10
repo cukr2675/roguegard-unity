@@ -89,6 +89,18 @@ MonoBehaviour:
     m_SerializedLabels:
     - Locale-ja-JP
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 19ffaa6d65548144bad24886f21590d2
+    m_Address: CoreQuestEnvironment1_ja-JP
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ja-JP
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 137155464690ba84e9a771a405742317
+    m_Address: CoreQuestObjectives1_ja-JP
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ja-JP
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: 3b33727de1adbae46bb88bf0e7b13048, type: 2}
   m_SchemaSet:

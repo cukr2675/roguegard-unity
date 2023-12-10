@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: CoreQuestObjectives1 Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: CoreQuestObjectives1
+  m_TableCollectionNameGuidString: 8a84542bf71592d4386eaa830ba6fd9c
+  m_Entries:
+  - m_Id: 18403299328
+    m_Key: RescueQuestObjective
+    m_Metadata:
+      m_Items: []
+  - m_Id: 63030693888
+    m_Key: RescueQuestObjective::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 72627261440
+    m_Key: RescueQuestObjective::d
+    m_Metadata:
+      m_Items: []
+  - m_Id: 93800108032
+    m_Key: SlayingQuestObjective
+    m_Metadata:
+      m_Items: []
+  - m_Id: 166617419776
+    m_Key: SlayingQuestObjective::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 175404486656
+    m_Key: SlayingQuestObjective::d
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 3089142974586290180
+  references:
+    version: 2
+    RefIds:
+    - rid: 3089142974586290180
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1702009018285

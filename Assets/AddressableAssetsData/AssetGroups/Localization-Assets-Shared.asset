@@ -82,6 +82,18 @@ MonoBehaviour:
     m_ReadOnly: 1
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e63f09f9c5874394ab2eec6f3b815aa6
+    m_Address: Assets/CoreData/CharacterCreation/Intrinsics/QuestEnvironments1/CoreQuestEnvironment1
+      Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8a84542bf71592d4386eaa830ba6fd9c
+    m_Address: Assets/CoreData/CharacterCreation/Intrinsics/QuestObjectives1/CoreQuestObjectives1
+      Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: 3b33727de1adbae46bb88bf0e7b13048, type: 2}
   m_SchemaSet:
