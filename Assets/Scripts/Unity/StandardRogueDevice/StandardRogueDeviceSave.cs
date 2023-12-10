@@ -121,7 +121,8 @@ namespace RoguegardUnity
         public StandardRogueDevice LoadGame(Stream stream)
         {
             using var archive = new ZipArchive(stream, ZipArchiveMode.Read, true);
-            var entry = archive.Entries.First();
+            var entry = archive.Entries.FirstOrDefault(x => x.Name.EndsWith(".json"));
+            if (entry == null) throw new RogueException("読み込んだファイル内で .json ファイルが見つかりません。");
             using var streamReader = new StreamReader(entry.Open());
             using var reader = new JsonTextReader(streamReader);
 
