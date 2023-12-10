@@ -37,7 +37,7 @@ namespace RoguegardUnity
 
         public StandardRogueDeviceSave(CharacterCreationDataBuilder characterCreationDataBuilder)
         {
-            this.characterCreationDataBuilder = characterCreationDataBuilder;
+            this.characterCreationDataBuilder = new CharacterCreationDataBuilder(characterCreationDataBuilder);
         }
 
         public static void GetFiles(System.Action<IEnumerable<string>> callback)
@@ -82,11 +82,10 @@ namespace RoguegardUnity
             var random = new RogueRandom();
 
             // キャラクターを生成
-            var player = RoguegardSettings.InitialPlayerCharacterGenerator.CreateObj(null, Vector2Int.zero, random);
-            var world = RogueWorld.GetWorld(player);
-            var builder = characterCreationDataBuilder;
-            if (!builder.TryGetGrowingInfoSet(builder.Race.Option, builder.Race.Gender, out var newInfoSet)) throw new RogueException();
-            player.Main.SetBaseInfoSet(player, newInfoSet);
+            var world = RoguegardSettings.WorldGenerator.CreateObj(null, Vector2Int.zero, random);
+            var player = characterCreationDataBuilder.CreateObj(world, Vector2Int.zero, random);
+            var lobbyMembers = RogueWorld.GetLobbyMembersByCharacter(player);
+            lobbyMembers.Add(player);
 
             // デバイスを設定
             var options = new RogueOptions();

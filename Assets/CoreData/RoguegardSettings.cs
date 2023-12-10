@@ -9,7 +9,7 @@ namespace Roguegard
 {
     public static class RoguegardSettings
     {
-        public static IRogueObjGenerator InitialPlayerCharacterGenerator { get; set; }
+        public static IRogueObjGenerator WorldGenerator { get; set; }
 
         public static Vector2Int MaxTilemapSize { get; set; }
 

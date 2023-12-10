@@ -55,7 +55,7 @@ namespace RoguegardUnity
 
         private void Init()
         {
-            RoguegardSettings.InitialPlayerCharacterGenerator = new InitialPlayerCharacterGenerator() { parent = this };
+            RoguegardSettings.WorldGenerator = new WorldGenerator() { parent = this };
 
             RoguegardSettings.MaxTilemapSize = _maxTilemapSize;
             RoguegardSettings.DefaultVisibleRadius = _defaultVisibleRadius;
@@ -189,14 +189,14 @@ namespace RoguegardUnity
         }
 #endif
 
-        private class InitialPlayerCharacterGenerator : IRogueObjGenerator
+        private class WorldGenerator : IRogueObjGenerator
         {
             public RoguegardSettingsData parent;
 
-            public MainInfoSet InfoSet => ((IRogueObjGenerator)parent._presets[0]).InfoSet;
-            public int Lv => ((IRogueObjGenerator)parent._presets[0]).Lv;
-            public int Stack => ((IRogueObjGenerator)parent._presets[0]).Stack;
-            public Spanning<IWeightedRogueObjGeneratorList> StartingItemTable => ((IRogueObjGenerator)parent._presets[0]).StartingItemTable;
+            public MainInfoSet InfoSet => ((IRogueObjGenerator)parent._world).InfoSet;
+            public int Lv => ((IRogueObjGenerator)parent._world).Lv;
+            public int Stack => ((IRogueObjGenerator)parent._world).Stack;
+            public Spanning<IWeightedRogueObjGeneratorList> StartingItemTable => ((IRogueObjGenerator)parent._world).StartingItemTable;
 
             public RogueObj CreateObj(RogueObj location, Vector2Int position, IRogueRandom random, StackOption stackOption = StackOption.Default)
             {
@@ -204,6 +204,7 @@ namespace RoguegardUnity
                 var world = parent._world.CreateObj(null, Vector2Int.zero, random);
                 var lobby = parent._lobby.CreateObj(world, Vector2Int.zero, random);
                 RogueWorld.SetUpWorld(world, lobby);
+                return world;
 
                 // キャラクターを生成
                 var player = parent._presets[0].CreateObj(world, Vector2Int.zero, random);
