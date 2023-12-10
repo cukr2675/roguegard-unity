@@ -99,11 +99,15 @@ namespace RoguegardUnity
                 var assetTable = RoguegardSettings.GetAssetTable("Core");
                 foreach (var asset in assetTable.Values)
                 {
+                    if (asset is IRaceOption raceOption)
+                    {
+                        characterCreationDatabase.AddRaceOptions(raceOption);
+                    }
                     if (asset is IAppearanceOption appearanceOption)
                     {
                         characterCreationDatabase.AddAppearanceOption(appearanceOption);
                     }
-                    else if (asset is IIntrinsicOption intrinsicOption)
+                    else if (asset is IIntrinsicOption intrinsicOption && intrinsicOption is not QuestEffectIntrinsicOption)
                     {
                         characterCreationDatabase.AddIntrinsicOption(intrinsicOption);
                     }
@@ -140,6 +144,10 @@ namespace RoguegardUnity
 #if UNITY_EDITOR
         private void OnEnable()
         {
+            // isPlaying では初回実行時しか動作しない
+            // isUpdating ではコンパイル時にも動作してしまう
+            if (!UnityEditor.EditorApplication.isPlayingOrWillChangePlaymode) return;
+
             if (_autoUpdateSelfOnEnable)
             {
                 Update();
