@@ -9,35 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aaea6a1339a408e4ca571c982a4b9eb1, type: 3}
+  m_Script: {fileID: 11500000, guid: 9d1514134bc4fbd41bb739b1b9a49231, type: 3}
   m_Name: GridTile
   m_EditorClassIdentifier: 
-  _descriptionName: 
-  _sprite: {fileID: 21300000, guid: fc7b4f30849333348a0ead6473db60af, type: 3}
-  _color: {r: 1, g: 1, b: 1, a: 1}
-  _caption: 
-  _details:
-    _script: {fileID: 0}
-    _ref:
-      rid: -2
-  _category: {fileID: 0}
-  _layer: 0
-  _hasCollider: 0
-  _hasSightCollider: 0
-  _hit:
-    _script: {fileID: 0}
-    _ref:
-      rid: -2
-  _beDefeated:
-    _script: {fileID: 0}
-    _ref:
-      rid: -2
-  _beApplied:
-    _script: {fileID: 0}
-    _ref:
-      rid: -2
-  references:
-    version: 2
-    RefIds:
-    - rid: -2
-      type: {class: , ns: , asm: }
+  m_DefaultSprite: {fileID: 21300000, guid: fc7b4f30849333348a0ead6473db60af, type: 3}
+  m_DefaultGameObject: {fileID: 0}
+  m_DefaultColliderType: 1
+  m_TilingRules: []
