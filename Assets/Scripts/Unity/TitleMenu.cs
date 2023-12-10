@@ -174,7 +174,9 @@ namespace RoguegardUnity
                     {
                         root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
                         var builder = RoguegardSettings.CharacterCreationDatabase.LoadPreset(0);
-                        root.OpenMenu(nextMenu, null, null, new(other: builder), RogueMethodArgument.Identity);
+                        RogueRandom.Primary = new RogueRandom();
+                        var player = builder.CreateObj(null, Vector2Int.zero, RogueRandom.Primary);
+                        root.OpenMenu(nextMenu, player, null, new(other: builder), RogueMethodArgument.Identity);
                     });
                 }
 
@@ -200,10 +202,10 @@ namespace RoguegardUnity
                     models = new object[] { new ExitChoice(parent) };
                 }
 
-                public void OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+                public void OpenMenu(IModelsMenuRoot root, RogueObj player, RogueObj user, in RogueMethodArgument arg)
                 {
                     var builder = (CharacterCreationDataBuilder)arg.Other;
-                    root.Get(DeviceKw.MenuCharacterCreation).OpenView(null, models, root, null, null, new(other: builder));
+                    root.Get(DeviceKw.MenuCharacterCreation).OpenView(null, models, root, player, null, new(other: builder));
                 }
             }
 
