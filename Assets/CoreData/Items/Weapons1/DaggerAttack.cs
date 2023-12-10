@@ -9,6 +9,8 @@ namespace Roguegard
     [ObjectFormer.Formable]
     public class DaggerAttack : MPSkill
     {
+        [SerializeField] private int _addDamage = 0;
+
         public override string Name => MainInfoKw.Attack.Name;
 
         public override IRogueMethodTarget Target => ForEnemyRogueMethodTarget.Instance;
@@ -23,6 +25,7 @@ namespace Roguegard
             using var damageValue = AffectableValue.Get();
             MainCharacterWorkUtility.TryAddAttack(self);
             StatsEffectedValues.GetATK(user, damageValue);
+            damageValue.MainValue += _addDamage;
             this.TryHurt(target, user, activationDepth, damageValue);
 
             if (this.TryAny(self))
@@ -30,6 +33,7 @@ namespace Roguegard
                 var target2 = AttackUtility.GetTargetForward(FrontRogueMethodRange.Instance, self);
                 MainCharacterWorkUtility.TryAddAttack(self);
                 StatsEffectedValues.GetATK(user, damageValue);
+                damageValue.MainValue += _addDamage;
                 this.TryHurt(target2, user, activationDepth, damageValue);
                 this.TryDefeat(target2, self, activationDepth, damageValue);
             }
@@ -39,14 +43,12 @@ namespace Roguegard
 
         public override int GetATK(RogueObj self, out bool additionalEffect)
         {
-            // 攻撃力+1ダメージの攻撃。
+            // 攻撃力ダメージの2回攻撃
             using var damageValue = AffectableValue.Get();
             StatsEffectedValues.GetATK(self, damageValue);
-            damageValue.MainValue += 1;
-
-            var hpDamage = Mathf.FloorToInt(damageValue.MainValue);
+            var hpDamage = Mathf.FloorToInt(damageValue.MainValue) + _addDamage;
             additionalEffect = false;
-            return hpDamage;
+            return hpDamage * 2;
         }
     }
 }

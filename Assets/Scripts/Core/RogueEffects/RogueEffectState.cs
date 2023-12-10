@@ -12,6 +12,7 @@ namespace Roguegard
         public Spanning<IRogueEffect> Effects => _effects;
 
         internal static StaticInitializable<RogueObj> openingObj = new StaticInitializable<RogueObj>(() => null);
+        internal static StaticInitializable<bool> openingNow = new StaticInitializable<bool>(() => false);
 
         [ObjectFormer.CreateInstance]
         private RogueEffectState(bool dummy) { }
@@ -49,6 +50,10 @@ namespace Roguegard
         /// </summary>
         public bool Remove(IRogueEffect effect)
         {
+            if (openingObj.Value != null && openingNow.Value) throw new RogueException(
+                $"{nameof(IRogueEffect)} ({effect}) の削除に失敗しました。 " +
+                $"いずれかの {nameof(RogueObj)} ({openingObj.Value}) のエフェクト準備中にエフェクトを削除することはできません。");
+
             return _effects.Remove(effect);
         }
 
@@ -85,11 +90,13 @@ namespace Roguegard
                 $"いずれかの {nameof(RogueObj)} ({openingObj.Value}) のエフェクト追加・準備中に新しいエフェクト準備を開始することはできません。");
 
             openingObj.Value = self;
+            openingNow.Value = true;
             for (int i = 0; i < _effects.Count; i++)
             {
                 _effects[i]?.Open(self);
             }
             openingObj.Value = null;
+            openingNow.Value = false;
         }
 
         internal bool CanStack(RogueObj self, RogueObj other)

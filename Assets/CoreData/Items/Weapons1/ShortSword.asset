@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ShortSword
   m_EditorClassIdentifier: 
   _overridesCost: 0
-  _cost: 1
+  _cost: 2
   _costIsUnknown: 0
   _race:
     _name: 
@@ -24,7 +24,7 @@ MonoBehaviour:
       _script: {fileID: 0}
       _ref:
         rid: -2
-    _cost: 1
+    _cost: 2
     _costIsUnknown: 0
     _genders: {fileID: 0}
     _category: {fileID: 11400000, guid: 75e1343f76d38ef47996f24301d8239f, type: 2}
@@ -112,7 +112,7 @@ MonoBehaviour:
     _isCosmetic: 0
     _equipParts:
     - {fileID: 11400000, guid: 718e67db40cd23d4086eca400d42c82a, type: 2}
-    _isNotStackableWhileEquipped: 1
+    _canStackWhileEquipped: 0
     _boneSpriteTable:
       _items: []
     _eyeDropBoneName: {fileID: 0}
@@ -147,3 +147,4 @@ MonoBehaviour:
       type: {class: DaggerAttack, ns: Roguegard, asm: Roguegard.CoreData}
       data:
         _assemblyReflectionAssetDummy: 
+        _addDamage: 1
