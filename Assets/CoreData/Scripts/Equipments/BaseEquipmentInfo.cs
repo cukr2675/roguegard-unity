@@ -190,7 +190,7 @@ namespace Roguegard
                 info.RemoveClose(self);
                 SpaceUtility.Restack(self);
 
-                if (arg.Count == 0 && RogueDevice.Primary.VisibleAt(owner.Location, owner.Position))
+                if (arg.Count == 0 && RogueDevice.Primary != null && RogueDevice.Primary.VisibleAt(owner.Location, owner.Position))
                 {
                     RogueDevice.Add(DeviceKw.AppendText, ":UnequipMsg::2");
                     RogueDevice.Add(DeviceKw.AppendText, user);
