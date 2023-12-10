@@ -22,6 +22,10 @@ MonoBehaviour:
     m_Localized: PaintTrap
     m_Metadata:
       m_Items: []
+  - m_Id: 19258416657920000
+    m_Localized: RandomTrap
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

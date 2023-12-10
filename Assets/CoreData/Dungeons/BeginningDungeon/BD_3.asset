@@ -86,6 +86,20 @@ MonoBehaviour:
         _items: []
     _minFrequency: 1
     _maxFrequency: 1
+  - _items:
+    - _option: {fileID: 11400000, guid: 8e448e0f8e4de4a4cb15b362b9e6891b, type: 2}
+      _optionDescription: {fileID: 0}
+      _generatorWeight: 1
+      _stack: 1
+      _members:
+        _items:
+        - rid: 3089142974586290185
+    _minFrequency: 0
+    _maxFrequency: 3
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 3089142974586290185
+      type: {class: RogueTileMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
+      data:
+        _tile: {fileID: 11400000, guid: 770c0978df6ab524ca283f3922e7bc3d, type: 2}

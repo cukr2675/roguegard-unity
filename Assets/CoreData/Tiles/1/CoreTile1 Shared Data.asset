@@ -23,6 +23,10 @@ MonoBehaviour:
     m_Key: PaintTrapMsg::2
     m_Metadata:
       m_Items: []
+  - m_Id: 19258416657920000
+    m_Key: RandomTrap
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
