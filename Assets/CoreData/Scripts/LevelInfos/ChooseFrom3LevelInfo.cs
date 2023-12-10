@@ -22,7 +22,7 @@ namespace Roguegard
         private int maxMP;
         private int loadCapacity;
 
-        private static LevelUpMenu levelUpMenu = new LevelUpMenu();
+        private static readonly LevelUpMenu levelUpMenu = new LevelUpMenu();
 
         static ChooseFrom3LevelInfo()
         {
@@ -175,15 +175,6 @@ namespace Roguegard
             clone.maxMP = maxMP;
             clone.loadCapacity = loadCapacity;
             return clone;
-        }
-
-        public override bool Equals(object obj)
-        {
-            return obj is ChooseFrom3LevelInfo c && maxHP == c.maxHP && maxMP == c.maxMP && loadCapacity == c.loadCapacity;
-        }
-        public override int GetHashCode()
-        {
-            return maxHP.GetHashCode() ^ maxMP.GetHashCode() ^ loadCapacity.GetHashCode();
         }
 
         private class LevelUpMenu : IModelsMenu
