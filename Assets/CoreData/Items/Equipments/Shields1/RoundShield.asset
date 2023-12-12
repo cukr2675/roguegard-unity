@@ -16,7 +16,7 @@ MonoBehaviour:
   _cost: 1
   _costIsUnknown: 0
   _race:
-    _name: "\u30E9\u30A6\u30F3\u30C9\u30B7\u30FC\u30EB\u30C9"
+    _name: 
     _icon: {fileID: 814183241, guid: 0344a045e865df040be963580996c849, type: 3}
     _color: {r: 0.8867924, g: 0.76166236, b: 0.40574938, a: 1}
     _caption: 
@@ -112,7 +112,7 @@ MonoBehaviour:
     _isCosmetic: 0
     _equipParts:
     - {fileID: 11400000, guid: dae43f9bc590f3d4dac614a92bee6241, type: 2}
-    _isNotStackableWhileEquipped: 1
+    _canStackWhileEquipped: 0
     _boneSpriteTable:
       _items: []
     _eyeDropBoneName: {fileID: 0}

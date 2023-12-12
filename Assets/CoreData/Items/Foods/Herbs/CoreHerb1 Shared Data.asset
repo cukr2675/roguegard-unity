@@ -1,0 +1,124 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: CoreHerb1 Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: CoreHerb1
+  m_TableCollectionNameGuidString: 02c943ae6ef2dd44da613361c54aff3a
+  m_Entries:
+  - m_Id: 8311062528
+    m_Key: MedicalHerb
+    m_Metadata:
+      m_Items: []
+  - m_Id: 54788145152
+    m_Key: MedicalHerb::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 680444084224
+    m_Key: MedicalHerb::d
+    m_Metadata:
+      m_Items: []
+  - m_Id: 741647368192
+    m_Key: PoisonousHerb
+    m_Metadata:
+      m_Items: []
+  - m_Id: 809095970816
+    m_Key: PoisonousHerb::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 818990333952
+    m_Key: PoisonousHerb::d
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1871156658176
+    m_Key: HerbOfConfusion
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1920716554240
+    m_Key: HerbOfConfusion::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1932590628864
+    m_Key: HerbOfConfusion::d
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2180763402240
+    m_Key: HerbOfGainLevel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2243644407808
+    m_Key: HerbOfGainLevel::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2427120041984
+    m_Key: HerbOfGainLevel::d
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2459026112512
+    m_Key: HerbOfPaint
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2487450910720
+    m_Key: HerbOfPaint::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2496909066240
+    m_Key: HerbOfPaint::d
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2988213059584
+    m_Key: HerbOfRevenge
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3027035537408
+    m_Key: HerbOfRevenge::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3039081578496
+    m_Key: HerbOfRevenge::d
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3222729179136
+    m_Key: HerbOfSleeping
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3269164318720
+    m_Key: HerbOfSleeping::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3278995767296
+    m_Key: HerbOfSleeping::d
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3439889268736
+    m_Key: HerbOfVision
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3467638784000
+    m_Key: HerbOfVision::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3476060946432
+    m_Key: HerbOfVision::d
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 6396022143867420677
+  references:
+    version: 2
+    RefIds:
+    - rid: 6396022143867420677
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1702364732519

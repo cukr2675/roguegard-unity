@@ -23,6 +23,7 @@ namespace RoguegardUnity
         [SerializeField] private RectTransform _secondParent = null;
         [SerializeField] private ModelsMenuViewItemButton _headerPrefab = null;
         [SerializeField] private ModelsMenuViewItemButton _itemButtonPrefab = null;
+        [SerializeField] private ModelsMenuViewItemButton _presetButton = null;
         [SerializeField] private ModelsMenuViewItemButton _exitButton = null;
 
         public override CanvasGroup CanvasGroup => _canvasGroup;
@@ -39,8 +40,8 @@ namespace RoguegardUnity
         private RaceChoice raceChoice;
         private AppearanceChoice appearanceChoice;
         private AppearanceBuildersMenu appearanceBuildersMenu;
-        private readonly List<ModelsMenuViewItemButton> intrinsicItemButtons = new List<ModelsMenuViewItemButton>();
-        private readonly List<ModelsMenuViewItemButton> startingItemItemButtons = new List<ModelsMenuViewItemButton>();
+        private readonly List<ModelsMenuViewItemButton> itemObjects = new List<ModelsMenuViewItemButton>();
+        private static readonly LoadPresetChoice loadPresetChoice = new LoadPresetChoice();
 
         public void Initialize(RogueSpriteRendererPool rendererPool)
         {
@@ -56,6 +57,7 @@ namespace RoguegardUnity
             _appearanceButton.Initialize(this);
             raceChoice = new RaceChoice() { parent = this };
             appearanceChoice = new AppearanceChoice() { parent = this };
+            _presetButton.Initialize(this);
             _exitButton.Initialize(this);
             _nameField.onValueChanged.AddListener(text => builder.Name = text);
             _shortNameField.onValueChanged.AddListener(text => builder.ShortName = text);
@@ -89,16 +91,11 @@ namespace RoguegardUnity
             _nameField.text = builder.Name;
             _shortNameField.text = builder.ShortName;
 
-            foreach (var itemButton in intrinsicItemButtons)
+            foreach (var itemObject in itemObjects)
             {
-                Destroy(itemButton.gameObject);
+                Destroy(itemObject.gameObject);
             }
-            intrinsicItemButtons.Clear();
-            foreach (var itemButton in startingItemItemButtons)
-            {
-                Destroy(itemButton.gameObject);
-            }
-            startingItemItemButtons.Clear();
+            itemObjects.Clear();
 
             var sumHeight = 0f;
             var odd = false;
@@ -109,6 +106,7 @@ namespace RoguegardUnity
                 odd = false;
                 header.Initialize(this);
                 header.SetItem(ChoicesModelsMenuItemController.Instance, intrinsicHeader);
+                itemObjects.Add(header);
             }
             for (int i = 0; i < builder.Intrinsics.Count; i++)
             {
@@ -117,14 +115,14 @@ namespace RoguegardUnity
                 SetTransform((RectTransform)itemButton.transform, ref sumHeight, ref odd);
                 itemButton.Initialize(this);
                 itemButton.SetItem(intrinsicItemController, intrinsic);
-                intrinsicItemButtons.Add(itemButton);
+                itemObjects.Add(itemButton);
             }
             {
                 var itemButton = Instantiate(_itemButtonPrefab, _secondParent);
                 SetTransform((RectTransform)itemButton.transform, ref sumHeight, ref odd);
                 itemButton.Initialize(this);
                 itemButton.SetItem(intrinsicItemController, null);
-                intrinsicItemButtons.Add(itemButton);
+                itemObjects.Add(itemButton);
                 if (odd) { sumHeight += ((RectTransform)itemButton.transform).rect.height; }
             }
 
@@ -136,6 +134,7 @@ namespace RoguegardUnity
                 odd = false;
                 header.Initialize(this);
                 header.SetItem(ChoicesModelsMenuItemController.Instance, startingItemHeader);
+                itemObjects.Add(header);
             }
             for (int i = 0; i < builder.StartingItemTable.Count; i++)
             {
@@ -144,14 +143,14 @@ namespace RoguegardUnity
                 SetTransform((RectTransform)itemButton.transform, ref sumHeight, ref odd);
                 itemButton.Initialize(this);
                 itemButton.SetItem(startingItemItemController, startingItem);
-                startingItemItemButtons.Add(itemButton);
+                itemObjects.Add(itemButton);
             }
             {
                 var itemButton = Instantiate(_itemButtonPrefab, _secondParent);
                 SetTransform((RectTransform)itemButton.transform, ref sumHeight, ref odd);
                 itemButton.Initialize(this);
                 itemButton.SetItem(startingItemItemController, null);
-                startingItemItemButtons.Add(itemButton);
+                itemObjects.Add(itemButton);
                 if (odd) { sumHeight += ((RectTransform)itemButton.transform).rect.height; }
             }
             _scrollRect.content.SetInsetAndSizeFromParentEdge(
@@ -160,6 +159,7 @@ namespace RoguegardUnity
             _raceButton.SetItem(ChoicesModelsMenuItemController.Instance, raceChoice);
             _appearanceButton.SetItem(ChoicesModelsMenuItemController.Instance, appearanceChoice);
             _exitButton.SetItem(ChoicesModelsMenuItemController.Instance, models[0]);
+            _presetButton.SetItem(ChoicesModelsMenuItemController.Instance, loadPresetChoice);
             MenuController.Show(_canvasGroup, true);
         }
 
@@ -281,6 +281,58 @@ namespace RoguegardUnity
                 {
                     root.OpenMenu(parent.optionMenu, self, null, new(other: (StartingItemBuilder)model), arg);
                 }
+            }
+        }
+
+        private class LoadPresetChoice : IModelsMenuChoice
+        {
+            private static readonly LoadPresetMenu nextMenu = new LoadPresetMenu();
+
+            public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            {
+                return "ƒ[ƒh";
+            }
+
+            public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            {
+                root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+
+                root.OpenMenu(nextMenu, self, null, new(other: arg.Other), arg);
+            }
+        }
+
+        private class LoadPresetMenu : IModelsMenu, IModelsMenuItemController
+        {
+            private static List<object> presets;
+
+            public void OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            {
+                if (presets == null)
+                {
+                    presets = new List<object>();
+                    for (int i = 0; i < RoguegardSettings.CharacterCreationDatabase.PresetsCount; i++)
+                    {
+                        presets.Add(RoguegardSettings.CharacterCreationDatabase.LoadPreset(i));
+                    }
+                }
+
+                var scroll = (IScrollModelsMenuView)root.Get(DeviceKw.MenuScroll);
+                scroll.OpenView(this, presets, root, self, null, new(other: arg.Other));
+                scroll.ShowExitButton(ExitModelsMenuChoice.Instance);
+            }
+
+            public string GetName(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            {
+                return ((CharacterCreationDataBuilder)model).ShortName;
+            }
+
+            public void Activate(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            {
+                root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+
+                var builder = (CharacterCreationDataBuilder)arg.Other;
+                builder.Set((CharacterCreationDataBuilder)model);
+                root.Back();
             }
         }
     }

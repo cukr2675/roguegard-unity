@@ -1,0 +1,100 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: CoreCosmetic1 Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: CoreCosmetic1
+  m_TableCollectionNameGuidString: dbf9c54f527d06a46916cb02102375a4
+  m_Entries:
+  - m_Id: 7476396032
+    m_Key: ArmMarkLine
+    m_Metadata:
+      m_Items: []
+  - m_Id: 61729718272
+    m_Key: ArmMarkLine::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 71259176960
+    m_Key: ArmMarkLine::d
+    m_Metadata:
+      m_Items: []
+  - m_Id: 120756158464
+    m_Key: DevilPowder
+    m_Metadata:
+      m_Items: []
+  - m_Id: 211554451456
+    m_Key: DevilPowder::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 220341518336
+    m_Key: DevilPowder::d
+    m_Metadata:
+      m_Items: []
+  - m_Id: 393952149504
+    m_Key: DogNose
+    m_Metadata:
+      m_Items: []
+  - m_Id: 423714930688
+    m_Key: DogNose::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 433277943808
+    m_Key: DogNose::d
+    m_Metadata:
+      m_Items: []
+  - m_Id: 838145720320
+    m_Key: HeadMarkLine
+    m_Metadata:
+      m_Items: []
+  - m_Id: 943875735552
+    m_Key: HeadMarkLine::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 954076282880
+    m_Key: HeadMarkLine::d
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1007432024064
+    m_Key: Horn
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1163355275264
+    m_Key: Horn::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1171655802880
+    m_Key: Horn::d
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1198654537728
+    m_Key: WolfPowder
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1231101673472
+    m_Key: WolfPowder::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1243785248768
+    m_Key: WolfPowder::d
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 6396022143867420683
+  references:
+    version: 2
+    RefIds:
+    - rid: 6396022143867420683
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1702366817125

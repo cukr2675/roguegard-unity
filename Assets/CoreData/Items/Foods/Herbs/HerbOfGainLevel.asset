@@ -16,7 +16,7 @@ MonoBehaviour:
   _cost: 1
   _costIsUnknown: 0
   _race:
-    _name: "\u5E78\u904B\u306E\u30CF\u30FC\u30D6"
+    _name: 
     _icon: {fileID: 5705265492000159877, guid: 12a1a85046ed6d54e850e8a2b99fa7e9, type: 3}
     _color: {r: 0.96339786, g: 0.7877358, b: 1, a: 1}
     _caption: 

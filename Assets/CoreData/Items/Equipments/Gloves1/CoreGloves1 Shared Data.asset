@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: CoreGloves1 Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: CoreGloves1
+  m_TableCollectionNameGuidString: cb93b46e15c562047b0c3d545b80b57d
+  m_Entries:
+  - m_Id: 13776240640
+    m_Key: LeatherGauntlets
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44675678208
+    m_Key: LeatherGauntlets::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 53701820416
+    m_Key: LeatherGauntlets::d
+    m_Metadata:
+      m_Items: []
+  - m_Id: 101181341696
+    m_Key: LeatherGloves
+    m_Metadata:
+      m_Items: []
+  - m_Id: 126011621376
+    m_Key: LeatherGloves::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 135977287680
+    m_Key: LeatherGloves::d
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 6396022143867420685
+  references:
+    version: 2
+    RefIds:
+    - rid: 6396022143867420685
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1702367148879

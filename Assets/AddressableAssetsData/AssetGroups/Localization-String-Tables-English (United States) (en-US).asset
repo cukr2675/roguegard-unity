@@ -101,6 +101,102 @@ MonoBehaviour:
     m_SerializedLabels:
     - Locale-en-US
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f8bafbd14fff8fc42a9e2714a85f18b3
+    m_Address: CoreMoney1_en-US
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en-US
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fab7782cfb4abdb4f947e3e48187e046
+    m_Address: CoreHerb1_en-US
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en-US
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3a72e8161d2e8e346badf423563cfeb8
+    m_Address: CoreFood1_en-US
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en-US
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: addadfba430b831458d64eec530d8721
+    m_Address: CoreBoots1_en-US
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en-US
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8b148e2409d7c2941bb92f9e2a2fcd5d
+    m_Address: CoreBottoms1_en-US
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en-US
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 69763492ff9c6984a8f9af355b7876b7
+    m_Address: CoreCloak1_en-US
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en-US
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0e1ca126ff12b5a4ab65c6fde0a76580
+    m_Address: CoreCosmetic1_en-US
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en-US
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 66784b09bc9cbaa49bdf7fe88f9a107b
+    m_Address: CoreGloves1_en-US
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en-US
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 39e8e01c0f6f7f744a98d18a1d61ebc4
+    m_Address: CoreHeadwear1_en-US
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en-US
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e05216f3ece548a408175652c106d8d4
+    m_Address: CoreLenses1_en-US
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en-US
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0207f7c51e678f247af7261d3d0f582c
+    m_Address: CoreShield1_en-US
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en-US
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 837e58f40bbf0eb42aa5760da2e89713
+    m_Address: CoreSocks1_en-US
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en-US
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 26cfa21335ac112419e429cee2fe7f5c
+    m_Address: CoreTops1_en-US
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en-US
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f6d2dd7f6e110cd478fc5537324706d5
+    m_Address: CoreScroll1_en-US
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en-US
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a6f460b0aec588c4c9f4fb1c7eb1c680
+    m_Address: CoreVehicle1_en-US
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en-US
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2cf0142efaecf8348b79466f8e9b48b7
+    m_Address: UnityTitle_en-US
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en-US
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: 3b33727de1adbae46bb88bf0e7b13048, type: 2}
   m_SchemaSet:

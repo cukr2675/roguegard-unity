@@ -16,7 +16,7 @@ MonoBehaviour:
   _cost: 0
   _costIsUnknown: 0
   _race:
-    _name: "\u30B9\u30C8\u30E9\u30C3\u30D7\u30D6\u30FC\u30C4"
+    _name: 
     _icon: {fileID: 287389965, guid: de92a0e3e26e6f943a6f5f473ca7ecad, type: 3}
     _color: {r: 0.50980395, g: 0.3529412, b: 0.27450982, a: 1}
     _caption: 
@@ -93,10 +93,6 @@ MonoBehaviour:
       _script: {fileID: 0}
       _ref:
         rid: -2
-    _beSteppedOnTile:
-      _script: {fileID: 0}
-      _ref:
-        rid: -2
     _equipmentState: {fileID: 0}
     _weight:
       _script: {fileID: 0}
@@ -113,9 +109,10 @@ MonoBehaviour:
     _mpName: 
     _members:
       _items: []
+    _isCosmetic: 0
     _equipParts:
     - {fileID: 11400000, guid: 05281665e1471864887d1e85a5d15d2d, type: 2}
-    _isNotStackableWhileEquipped: 1
+    _canStackWhileEquipped: 0
     _boneSpriteTable:
       _items:
       - _name: {fileID: 11400000, guid: 4847823016e5d67428aa750b880935c9, type: 2}
@@ -152,6 +149,7 @@ MonoBehaviour:
             _backFront: {fileID: -2018692272, guid: de92a0e3e26e6f943a6f5f473ca7ecad, type: 3}
             _backRear: {fileID: 0}
           _color: {r: 0.50980395, g: 0.3529412, b: 0.27450982, a: 1}
+    _eyeDropBoneName: {fileID: 0}
     _overridesBoneSpriteEffectOrder: 0
     _boneSpriteEffectOrder: -4
     _beEquipped:

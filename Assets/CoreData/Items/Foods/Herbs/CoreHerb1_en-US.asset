@@ -1,0 +1,71 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: CoreHerb1_en-US
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en-US
+  m_SharedData: {fileID: 11400000, guid: 02c943ae6ef2dd44da613361c54aff3a, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 8311062528
+    m_Localized: MedicalHerb
+    m_Metadata:
+      m_Items: []
+  - m_Id: 54788145152
+    m_Localized: Restores HP by 100.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 741647368192
+    m_Localized: PoisonousHerb
+    m_Metadata:
+      m_Items: []
+  - m_Id: 809095970816
+    m_Localized: Afflicts {Poison}.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1871156658176
+    m_Localized: HerbOfConfusion
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1920716554240
+    m_Localized: Afflicts {Confusion}.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2180763402240
+    m_Localized: HerbOfGainLevel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2459026112512
+    m_Localized: HerbOfPaint
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2487450910720
+    m_Localized: Afflicts {Paint}.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2988213059584
+    m_Localized: HerbOfRevenge
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3222729179136
+    m_Localized: HerbOfSleeping
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3439889268736
+    m_Localized: HerbOfVision
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

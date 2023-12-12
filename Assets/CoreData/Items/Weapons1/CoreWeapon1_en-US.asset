@@ -23,7 +23,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 505901355008
-    m_Localized: 
+    m_Localized: "Deal ATK+1 damage on the enemy 2 tiles away.\r"
     m_Metadata:
       m_Items: []
   - m_Id: 1601474531328
@@ -56,6 +56,30 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 17735201397542912
     m_Localized: ShortSword
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1923848736768
+    m_Localized: Shoot an arrow.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6370792443904
+    m_Localized: Deal ATK+1 damage on the enemy. And ATK depending on MP.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7849301381120
+    m_Localized: Deal ATK damage x2 on the enemy.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8236540497920
+    m_Localized: Deal ATK(x2) damage on the enemy.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8567437529088
+    m_Localized: Fire a series of bullets.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 17735247094484992
+    m_Localized: Deal ATK+1 damage x2 on the enemy.
     m_Metadata:
       m_Items: []
   references:

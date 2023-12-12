@@ -1,0 +1,88 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: CoreTops1 Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: CoreTops1
+  m_TableCollectionNameGuidString: dbbeb42f0b89a7642aea349f302888b9
+  m_Entries:
+  - m_Id: 12727664640
+    m_Key: CamisoleDress
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32357007360
+    m_Key: CamisoleDress::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 41215377408
+    m_Key: CamisoleDress::d
+    m_Metadata:
+      m_Items: []
+  - m_Id: 77588381696
+    m_Key: CaptainRobe
+    m_Metadata:
+      m_Items: []
+  - m_Id: 100908711936
+    m_Key: CaptainRobe::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 106512302080
+    m_Key: CaptainRobe::d
+    m_Metadata:
+      m_Items: []
+  - m_Id: 160065175552
+    m_Key: LaceUpShirt
+    m_Metadata:
+      m_Items: []
+  - m_Id: 199424524288
+    m_Key: LaceUpShirt::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 209159503872
+    m_Key: LaceUpShirt::d
+    m_Metadata:
+      m_Items: []
+  - m_Id: 238649655296
+    m_Key: TankTop
+    m_Metadata:
+      m_Items: []
+  - m_Id: 260330012672
+    m_Key: TankTop::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 269284851712
+    m_Key: TankTop::d
+    m_Metadata:
+      m_Items: []
+  - m_Id: 304718331904
+    m_Key: Tribalwear
+    m_Metadata:
+      m_Items: []
+  - m_Id: 341460434944
+    m_Key: Tribalwear::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 350855675904
+    m_Key: Tribalwear::d
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 6396022143867420690
+  references:
+    version: 2
+    RefIds:
+    - rid: 6396022143867420690
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1702367761703

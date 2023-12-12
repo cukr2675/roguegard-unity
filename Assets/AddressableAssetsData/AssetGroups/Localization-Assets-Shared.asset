@@ -94,6 +94,86 @@ MonoBehaviour:
     m_ReadOnly: 1
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 92ad1fddfdf90fb448c2692c55b6c389
+    m_Address: Assets/CoreData/ItemOthers/Money1/CoreMoney1 Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 02c943ae6ef2dd44da613361c54aff3a
+    m_Address: Assets/CoreData/Items/Foods/Herbs/CoreHerb1 Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 84aa6107a0523104fad134b24521f4b5
+    m_Address: Assets/CoreData/Items/Foods/Foods/CoreFood1 Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1e8f867f86a9c9a4780bf6f89f66e202
+    m_Address: Assets/CoreData/Items/Equipments/Boots1/CoreBoots1 Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 467eceb5ad3534f459e581adb587c1cc
+    m_Address: Assets/CoreData/Items/Equipments/Bottoms1/CoreBottoms1 Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4a11a1d786a51d94986c84d2261f8c78
+    m_Address: Assets/CoreData/Items/Equipments/Cloaks1/CoreCloak1 Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: dbf9c54f527d06a46916cb02102375a4
+    m_Address: Assets/CoreData/Items/Equipments/Cosmetics1/CoreCosmetic1 Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cb93b46e15c562047b0c3d545b80b57d
+    m_Address: Assets/CoreData/Items/Equipments/Gloves1/CoreGloves1 Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1857f1517ba18e644a959e4e157de281
+    m_Address: Assets/CoreData/Items/Equipments/Headwears1/CoreHeadwear1 Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 82e775d00540f8c429c094575a87127d
+    m_Address: Assets/CoreData/Items/Equipments/Lenses1/CoreLenses1 Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 93b7e5700a5deb64ab64b94eb4e8b006
+    m_Address: Assets/CoreData/Items/Equipments/Shields1/CoreShield1 Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f7125d9797867b0429993bbe8aa15f73
+    m_Address: Assets/CoreData/Items/Equipments/Socks1/CoreSocks1 Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: dbbeb42f0b89a7642aea349f302888b9
+    m_Address: Assets/CoreData/Items/Equipments/Tops1/CoreTops1 Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ce0069c544f02734494340159e592cbd
+    m_Address: Assets/CoreData/Items/Scrolls1/CoreScroll1 Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: dadac94ddb1755f428b1fdc663a255aa
+    m_Address: Assets/CoreData/Items/Vehicles/CoreVehicle1 Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 19cddf0deba7cc2408d3a984f89285cc
+    m_Address: Assets/Texts/Tables/UnityTitle/UnityTitle Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: 3b33727de1adbae46bb88bf0e7b13048, type: 2}
   m_SchemaSet:

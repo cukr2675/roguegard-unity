@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: CoreHeadwear1 Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: CoreHeadwear1
+  m_TableCollectionNameGuidString: 1857f1517ba18e644a959e4e157de281
+  m_Entries:
+  - m_Id: 12991905792
+    m_Key: FlightHat
+    m_Metadata:
+      m_Items: []
+  - m_Id: 40942747648
+    m_Key: FlightHat::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52082819072
+    m_Key: FlightHat::d
+    m_Metadata:
+      m_Items: []
+  - m_Id: 96206897152
+    m_Key: IllusionBand
+    m_Metadata:
+      m_Items: []
+  - m_Id: 117077753856
+    m_Key: IllusionBand::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 126204559360
+    m_Key: IllusionBand::d
+    m_Metadata:
+      m_Items: []
+  - m_Id: 223852150784
+    m_Key: Shako
+    m_Metadata:
+      m_Items: []
+  - m_Id: 274146050048
+    m_Key: Shako::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 286628298752
+    m_Key: Shako::d
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 6396022143867420686
+  references:
+    version: 2
+    RefIds:
+    - rid: 6396022143867420686
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1702367208025

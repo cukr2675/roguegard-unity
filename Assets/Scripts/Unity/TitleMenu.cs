@@ -143,7 +143,7 @@ namespace RoguegardUnity
 
             public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                return "はじめる";
+                return ":Play";
             }
 
             public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
@@ -220,7 +220,7 @@ namespace RoguegardUnity
 
                 public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
                 {
-                    return "完了";
+                    return ":Done";
                 }
 
                 public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
@@ -228,7 +228,7 @@ namespace RoguegardUnity
                     var builder = (CharacterCreationDataBuilder)arg.Other;
                     root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
                     root.AddInt(DeviceKw.StartTalk, 0);
-                    root.AddObject(DeviceKw.AppendText, "このキャラクターで始めますか？（あとで修正できます）");
+                    root.AddObject(DeviceKw.AppendText, ":DoneMsg");
                     root.AddInt(DeviceKw.WaitEndOfTalk, 0);
                     root.OpenMenuAsDialog(nextMenu, null, null, new(other: builder), new(other: builder));
                 }
@@ -259,7 +259,7 @@ namespace RoguegardUnity
 
                     public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
                     {
-                        return "保存して始める";
+                        return ":SaveAndStart";
                     }
 
                     public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
@@ -281,7 +281,7 @@ namespace RoguegardUnity
                 {
                     public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
                     {
-                        return "保存せずに終わる";
+                        return ":QuitWithoutSaving";
                     }
 
                     public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
@@ -301,7 +301,7 @@ namespace RoguegardUnity
 
             public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                return "クレジット";
+                return ":Credit";
             }
 
             public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
@@ -339,21 +339,5 @@ namespace RoguegardUnity
                 }
             }
         }
-
-        //private class BackChoice : IModelsMenuChoice
-        //{
-        //    public TitleMenu parent;
-
-        //    public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-        //    {
-        //        return ExitModelsMenuChoice.Instance.GetName(root, self, user, arg);
-        //    }
-
-        //    public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-        //    {
-        //        MenuController.Show(parent._scrollMenu.CanvasGroup, false);
-        //        MenuController.Show(parent._creditMenu.CanvasGroup, false);
-        //    }
-        //}
     }
 }

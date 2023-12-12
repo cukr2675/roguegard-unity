@@ -16,7 +16,7 @@ MonoBehaviour:
   _cost: 0
   _costIsUnknown: 0
   _race:
-    _name: "\u30DE\u30D5\u30E9\u30FC"
+    _name: 
     _icon: {fileID: -660644238, guid: ec906a9335ac9e04392c3104aa5b7617, type: 3}
     _color: {r: 0.8584906, g: 0.19032574, b: 0.19032574, a: 1}
     _caption: 
@@ -112,7 +112,7 @@ MonoBehaviour:
     _isCosmetic: 0
     _equipParts:
     - {fileID: 11400000, guid: cf165c696a4d995419a4bb84876a2263, type: 2}
-    _isNotStackableWhileEquipped: 1
+    _canStackWhileEquipped: 0
     _boneSpriteTable:
       _items:
       - _name: {fileID: 11400000, guid: c66efafae0b82384d8b4212c78358e52, type: 2}

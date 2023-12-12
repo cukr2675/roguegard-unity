@@ -16,7 +16,7 @@ MonoBehaviour:
   _cost: 1
   _costIsUnknown: 0
   _race:
-    _name: "\u30AB\u30E1\u306E\u7532\u7F85"
+    _name: 
     _icon: {fileID: -1337617543, guid: de92a0e3e26e6f943a6f5f473ca7ecad, type: 3}
     _color: {r: 0.25882354, g: 0.6313726, b: 0.039215688, a: 1}
     _caption: 
@@ -109,9 +109,10 @@ MonoBehaviour:
     _mpName: 
     _members:
       _items: []
+    _isCosmetic: 0
     _equipParts:
     - {fileID: 11400000, guid: cdda43e7389bc8047a136f82d171ba34, type: 2}
-    _isNotStackableWhileEquipped: 1
+    _canStackWhileEquipped: 0
     _boneSpriteTable:
       _items:
       - _name: {fileID: 11400000, guid: a90fd0bc3132c214395dee60b9a645ae, type: 2}
@@ -148,6 +149,7 @@ MonoBehaviour:
             _backFront: {fileID: -1357645393, guid: ea6e08f75be6f3c4fa443acba9f4735a, type: 3}
             _backRear: {fileID: 0}
           _color: {r: 0.25882354, g: 0.6313726, b: 0.039215688, a: 1}
+    _eyeDropBoneName: {fileID: 0}
     _overridesBoneSpriteEffectOrder: 0
     _boneSpriteEffectOrder: 1
     _beEquipped:

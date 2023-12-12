@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: HerbOfRevenge
   m_EditorClassIdentifier: 
   _overridesCost: 0
-  _cost: 0
+  _cost: 1
   _costIsUnknown: 0
   _race:
-    _name: "\u3057\u304B\u3048\u3057\u8349"
+    _name: 
     _icon: {fileID: 5705265492000159877, guid: 12a1a85046ed6d54e850e8a2b99fa7e9, type: 3}
     _color: {r: 1, g: 0.571074, b: 0.25098038, a: 1}
     _caption: 
@@ -93,10 +93,6 @@ MonoBehaviour:
       _script: {fileID: 11500000, guid: d7df06ca7ed281f4a8384453c52b16b9, type: 3}
       _ref:
         rid: 5141994339512614925
-    _beSteppedOnTile:
-      _script: {fileID: 0}
-      _ref:
-        rid: -2
     _equipmentState: {fileID: 0}
     _weight:
       _script: {fileID: 0}

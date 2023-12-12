@@ -12,18 +12,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8e577e923470ba4ea706a881ccd9308, type: 3}
   m_Name: RogueLocalizedStringTable
   m_EditorClassIdentifier: 
-  _tilemapRendererPrefab: {fileID: 569002039659181459, guid: 9a1a9e73297da1d438127c3be1bb8628, type: 3}
-  _touchControllerPrefab: {fileID: 5851345719149690394, guid: fc2b9dbfc524ebd44922675574ce9621, type: 3}
-  _soundTable: {fileID: 11400000, guid: ec0852a62c96e5244b4ac8fb7020eeac, type: 2}
-  _audioMixer: {fileID: 24100000, guid: 557080067eb351944861920837fdcdfe, type: 2}
-  _seAudioSourcePrefab: {fileID: 5282523497276891947, guid: 0119011335df52a45a3e9f7a20a29ee8, type: 3}
-  _bgmAudioSourcePrefab: {fileID: 5282523497276891947, guid: 6e0ef912595b62a4fb2f4261ca58093c, type: 3}
   _tableCollectionNames:
   - CoreAbility1
+  - CoreQuestEnvironment1
+  - CoreQuestObjectives1
   - CoreSkill1
+  - CoreMoney1
   - CoreAmmo1
   - CoreApplyTool1
   - CoreBodyArmor1
+  - CoreBoots1
+  - CoreBottoms1
+  - CoreCloak1
+  - CoreCosmetic1
+  - CoreGloves1
+  - CoreHeadwear1
+  - CoreLenses1
+  - CoreShield1
+  - CoreSocks1
+  - CoreTops1
+  - CoreFood1
+  - CoreHerb1
+  - CoreScroll1
+  - CoreVehicle1
   - CoreWeapon1
   - CoreMonster1
   - CoreMainInfoKw
@@ -31,3 +42,4 @@ MonoBehaviour:
   - CoreStatusEffect1
   - CoreTile1
   - Device
+  - UnityTitle

@@ -1,0 +1,100 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: CoreBoots1 Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: CoreBoots1
+  m_TableCollectionNameGuidString: 1e8f867f86a9c9a4780bf6f89f66e202
+  m_Entries:
+  - m_Id: 17773412352
+    m_Key: HideFootwear
+    m_Metadata:
+      m_Items: []
+  - m_Id: 49650122752
+    m_Key: HideFootwear::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 58571407360
+    m_Key: HideFootwear::d
+    m_Metadata:
+      m_Items: []
+  - m_Id: 482363883520
+    m_Key: HighBoots
+    m_Metadata:
+      m_Items: []
+  - m_Id: 540580823040
+    m_Key: HighBoots::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 551557316608
+    m_Key: HighBoots::d
+    m_Metadata:
+      m_Items: []
+  - m_Id: 586789470208
+    m_Key: Jackboots
+    m_Metadata:
+      m_Items: []
+  - m_Id: 612425056256
+    m_Key: Jackboots::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 625477730304
+    m_Key: Jackboots::d
+    m_Metadata:
+      m_Items: []
+  - m_Id: 674798551040
+    m_Key: LeatherGreaves
+    m_Metadata:
+      m_Items: []
+  - m_Id: 710131367936
+    m_Key: LeatherGreaves::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 720868786176
+    m_Key: LeatherGreaves::d
+    m_Metadata:
+      m_Items: []
+  - m_Id: 754121228288
+    m_Key: Loafers
+    m_Metadata:
+      m_Items: []
+  - m_Id: 779018616832
+    m_Key: Loafers::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 789894447104
+    m_Key: Loafers::d
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1028160274432
+    m_Key: StrappedBoots
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1093188763648
+    m_Key: StrappedBoots::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1102953103360
+    m_Key: StrappedBoots::d
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 6396022143867420680
+  references:
+    version: 2
+    RefIds:
+    - rid: 6396022143867420680
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1702366056215
