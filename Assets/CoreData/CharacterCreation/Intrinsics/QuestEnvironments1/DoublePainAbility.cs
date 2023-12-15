@@ -30,8 +30,8 @@ namespace Roguegard.CharacterCreation
         [ObjectFormer.Formable]
         private class MemberEffect : StatusEffectPartyMemberRogueEffect<SortedIntrinsic>, IValueEffect
         {
-            // ñhå‰óÕÇ∆ÉKÅ[ÉhÇìKópÇ∑ÇÈëOÇ…ìÒî{Ç…Ç∑ÇÈ
-            float IValueEffect.Order => -100f;
+            // ñhå‰óÕÇ∆ÉKÅ[ÉhÇìKópÇµÇΩÇ†Ç∆ìÒî{Ç…Ç∑ÇÈ
+            float IValueEffect.Order => 10f;
 
             void IValueEffect.AffectValue(IKeyword keyword, AffectableValue value, RogueObj self)
             {
@@ -39,6 +39,9 @@ namespace Roguegard.CharacterCreation
                 {
                     // éÛÇØÇÈÉ_ÉÅÅ[ÉWìÒî{
                     value.MainValue *= 2f;
+
+                    // ÉKÅ[Éhñhå‰óÕÇ‡ìÒî{
+                    value.SubValues[StatsKw.GuardDEF] *= 2f;
                 }
             }
         }

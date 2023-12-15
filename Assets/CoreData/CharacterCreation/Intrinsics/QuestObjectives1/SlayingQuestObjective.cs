@@ -92,6 +92,42 @@ namespace Roguegard.CharacterCreation
                 if (currentCount >= member.Targets[0].Stack)
                 {
                     // 討伐数が目標に到達したときクリア
+
+                    // 報酬を受け取る
+                    if (RogueDevice.Primary.Player == self && DungeonQuestInfo.TryGetQuest(self, out var quest))
+                    {
+                        RogueDevice.Add(DeviceKw.AppendText, DeviceKw.StartTalk);
+                        RogueDevice.Add(DeviceKw.AppendText, self);
+                        RogueDevice.Add(DeviceKw.AppendText, "は");
+                        RogueDevice.Add(DeviceKw.AppendText, quest);
+                        RogueDevice.Add(DeviceKw.AppendText, "をクリアした！");
+                        if (quest.LootTable.Count >= 1)
+                        {
+                            RogueDevice.Add(DeviceKw.AppendText, "\tその報酬として…");
+                        }
+                        for (int i = 0; i < quest.LootTable.Count; i++)
+                        {
+                            var loot = WeightedRogueObjGeneratorUtility.CreateObj(quest.LootTable[i], self, RogueRandom.Primary);
+                            RogueDevice.Add(DeviceKw.AppendText, "\t\n");
+                            if (loot.Main.InfoSet == RoguegardSettings.MoneyInfoSet)
+                            {
+                                RogueDevice.Add(DeviceKw.AppendText, loot.Stack);
+                                RogueDevice.Add(DeviceKw.AppendText, "G受け取った！");
+                            }
+                            else
+                            {
+                                RogueDevice.Add(DeviceKw.AppendText, loot);
+                                RogueDevice.Add(DeviceKw.AppendText, "を受け取った！");
+                            }
+                        }
+                        RogueDevice.Add(DeviceKw.AppendText, DeviceKw.EndTalk);
+
+                        RogueDevice.Add(DeviceKw.AppendText, self);
+                        RogueDevice.Add(DeviceKw.AppendText, "は");
+                        RogueDevice.Add(DeviceKw.AppendText, quest);
+                        RogueDevice.Add(DeviceKw.AppendText, "をクリアして 報酬を受け取った");
+                    }
+
                     var clearMethod = new GoalDownStairsBeApplied();
                     RogueMethodAspectState.Invoke(MainInfoKw.BeApplied, clearMethod, null, self, activationDepth, RogueMethodArgument.Identity);
                 }
@@ -110,6 +146,13 @@ namespace Roguegard.CharacterCreation
                 if (generate && self.Location.Space.Tilemap != null && DungeonInfo.TryGetLevel(self.Location, 0, out _) &&
                     self.Location.Main.Stats.Lv == member.TargetFloor)
                 {
+                    if (RogueDevice.Primary.Player == self)
+                    {
+                        RogueDevice.Add(DeviceKw.AppendText, DeviceKw.StartTalk);
+                        RogueDevice.Add(DeviceKw.AppendText, "目標の階に到達しました");
+                        RogueDevice.Add(DeviceKw.AppendText, DeviceKw.EndTalk);
+                    }
+
                     // 目標の階層への移動に成功したとき討伐対象を生成する。
                     var targetEffect = new TargetEffect() { parent = this };
                     for (int i = 0; i < member.Targets[0].Stack; i++)

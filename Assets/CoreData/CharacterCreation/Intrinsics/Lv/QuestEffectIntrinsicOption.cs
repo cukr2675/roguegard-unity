@@ -22,7 +22,6 @@ namespace Roguegard.CharacterCreation
             {
                 var builder = new IntrinsicBuilder();
                 builder.Option = this;
-                builder.SetRandomMembers(dungeon, database, random);
                 return builder;
             }
         }
