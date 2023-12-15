@@ -30,7 +30,16 @@ namespace RoguegardUnity
 
             textBuilder.AppendLine($"満腹度：{mainStats.Nutrition} / {StatsEffectedValues.GetMaxNutrition(obj)}");
             hpTextBuilder.AppendLine();
-            mpTextBuilder.AppendLine();
+            var totalMoney = 0;
+            var spaceObjs = obj.Space.Objs;
+            for (int i = 0; i < spaceObjs.Count; i++)
+            {
+                var spaceObj = spaceObjs[i];
+                if (spaceObj == null || spaceObj.Main.InfoSet != RoguegardSettings.MoneyInfoSet) continue;
+
+                totalMoney += spaceObj.Stack;
+            }
+            mpTextBuilder.AppendLine($"{totalMoney} G");
 
             textBuilder.AppendLine();
             hpTextBuilder.AppendLine("HP");

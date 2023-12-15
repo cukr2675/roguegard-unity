@@ -23,6 +23,8 @@ namespace RoguegardUnity
         [Space]
         [SerializeField] private PresetCreationData[] _presets = null;
 
+        [SerializeField] private ItemCreationData _money = null;
+
         [SerializeField] private Vector2Int _maxTilemapSize = new Vector2Int(y: 64, x: 96);
         // y: 64 透明マップのチップを4x4としたとき、縦幅を256に収めるサイズ
         // x: 96 縦幅に対して16:9に収まるサイズ
@@ -72,6 +74,7 @@ namespace RoguegardUnity
             RoguegardSettings.DefaultRaceOption = _defaultRaceOption;
             RoguegardSettings.ObjCommandTable = _objCommandTable;
             RoguegardSettings.DungeonQuestGenerator = _dungeonQuestGenerator;
+            RoguegardSettings.MoneyInfoSet = _money.PrimaryInfoSet;
 
             RoguegardSettings.ClearDungeonChoices();
             RoguegardSettings.ClearAssetTable();
@@ -205,12 +208,6 @@ namespace RoguegardUnity
                 var lobby = parent._lobby.CreateObj(world, Vector2Int.zero, random);
                 RogueWorld.SetUpWorld(world, lobby);
                 return world;
-
-                // キャラクターを生成
-                var player = parent._presets[0].CreateObj(world, Vector2Int.zero, random);
-                var lobbyMembers = RogueWorld.GetLobbyMembersByCharacter(player);
-                lobbyMembers.Add(player);
-                return player;
             }
         }
     }
