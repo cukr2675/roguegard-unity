@@ -31,7 +31,7 @@ namespace RoguegardUnity
                 models.Add(new GSlider());
                 models.Add(new BSlider());
                 models.Add(new ASlider());
-                AddMemberModels(raceBuilder, raceBuilder.Option);
+                AddMemberModels(raceBuilder);
             }
             else if (arg.Other is AppearanceBuilder appearanceBuilder)
             {
@@ -41,14 +41,14 @@ namespace RoguegardUnity
                 models.Add(new GSlider());
                 models.Add(new BSlider());
                 models.Add(new ASlider());
-                AddMemberModels(appearanceBuilder, appearanceBuilder.Option);
+                AddMemberModels(appearanceBuilder);
                 models.Add(removeChoice);
             }
             else if (arg.Other is IntrinsicBuilder intrinsicBuilder)
             {
                 models.Clear();
                 models.Add(new SelectOptionChoice(intrinsicBuilder, database));
-                AddMemberModels(intrinsicBuilder, intrinsicBuilder.Option);
+                AddMemberModels(intrinsicBuilder);
                 models.Add(removeChoice);
             }
             else if (arg.Other is StartingItemBuilder startingItemBuilder)
@@ -56,7 +56,7 @@ namespace RoguegardUnity
                 models.Clear();
                 models.Add(new SelectOptionChoice(startingItemBuilder, database));
                 models.Add(new StackOption());
-                AddMemberModels(startingItemBuilder, startingItemBuilder.Option);
+                AddMemberModels(startingItemBuilder);
                 models.Add(removeChoice);
             }
 
@@ -65,11 +65,11 @@ namespace RoguegardUnity
             options.ShowExitButton(ExitModelsMenuChoice.Instance);
         }
 
-        private void AddMemberModels(IMemberable memberable, IMemberableOption memberableOption)
+        private void AddMemberModels(IMemberable memberable)
         {
-            for (int i = 0; i < memberableOption.MemberSources.Count; i++)
+            for (int i = 0; i < memberable.MemberableOption.MemberSources.Count; i++)
             {
-                var member = memberable.GetMember(memberableOption.MemberSources[i]);
+                var member = memberable.GetMember(memberable.MemberableOption.MemberSources[i]);
                 if (member is SingleItemMember singleItemMember)
                 {
                     models.Add(new SelectOptionChoice(singleItemMember, database));
@@ -82,6 +82,11 @@ namespace RoguegardUnity
                 {
                     appearanceBuilder.Option.UpdateMemberRange(alphabetTypeMember, appearanceBuilder, removeChoice.builder);
                     models.Add(new SelectOptionChoice(alphabetTypeMember, database));
+                }
+                else if (member is StandardRaceMember standardRaceMember && memberable is RaceBuilder raceBuilder)
+                {
+                    raceBuilder.Option.UpdateMemberRange(standardRaceMember, raceBuilder.Option, removeChoice.builder);
+                    models.Add(new CommonSlider(standardRaceMember, (IStandardRaceOption)raceBuilder.Option));
                 }
             }
         }
@@ -512,6 +517,33 @@ namespace RoguegardUnity
             {
                 root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Cancel);
                 //equipMember.IsEquipped = !equipMember.IsEquipped;
+            }
+        }
+
+        private class CommonSlider : IModelsMenuOptionSlider
+        {
+            private readonly StandardRaceMember standardRaceMember;
+            private readonly IStandardRaceOption standardRaceOption;
+
+            public CommonSlider(StandardRaceMember standardRaceMember, IStandardRaceOption standardRaceOption)
+            {
+                this.standardRaceMember = standardRaceMember;
+                this.standardRaceOption = standardRaceOption;
+            }
+
+            public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            {
+                return "ƒTƒCƒY";
+            }
+
+            public float GetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            {
+                return Mathf.InverseLerp(standardRaceOption.MinSize, standardRaceOption.MaxSize, standardRaceMember.Size);
+            }
+
+            public void SetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg, float value)
+            {
+                standardRaceMember.Size = standardRaceOption.MinSize + Mathf.RoundToInt(value * (standardRaceOption.MaxSize - standardRaceOption.MinSize));
             }
         }
     }
