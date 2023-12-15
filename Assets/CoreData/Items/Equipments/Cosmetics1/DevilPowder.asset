@@ -18,7 +18,7 @@ MonoBehaviour:
   _race:
     _name: 
     _icon: {fileID: -1346136761, guid: 12a1a85046ed6d54e850e8a2b99fa7e9, type: 3}
-    _color: {r: 0.039215688, g: 0.015686275, b: 0.09411765, a: 1}
+    _color: {r: 0.23137255, g: 0.13333334, b: 0.19215687, a: 1}
     _caption: 
     _details:
       _script: {fileID: 0}
@@ -112,7 +112,7 @@ MonoBehaviour:
     _isCosmetic: 1
     _equipParts:
     - {fileID: 11400000, guid: cf165c696a4d995419a4bb84876a2263, type: 2}
-    _isNotStackableWhileEquipped: 1
+    _canStackWhileEquipped: 0
     _boneSpriteTable:
       _items:
       - _name: {fileID: 11400000, guid: 971d59b81cdac6b499bf4f884f750bae, type: 2}
@@ -122,7 +122,7 @@ MonoBehaviour:
           _normalRear: {fileID: 1821475317, guid: 33e711481a639a34ea6278a659ef0437, type: 3}
           _backFront: {fileID: 1821475317, guid: 33e711481a639a34ea6278a659ef0437, type: 3}
           _backRear: {fileID: 0}
-        _firstColor: {r: 0.039215688, g: 0.015686275, b: 0.09411765, a: 1}
+        _firstColor: {r: 0.23137255, g: 0.13333334, b: 0.19215687, a: 1}
         _overridesSourceColor: 1
         _overridesBaseColor: 0
         _equipmentSprites: []
@@ -133,7 +133,7 @@ MonoBehaviour:
           _normalRear: {fileID: -787297348, guid: 33e711481a639a34ea6278a659ef0437, type: 3}
           _backFront: {fileID: -787297348, guid: 33e711481a639a34ea6278a659ef0437, type: 3}
           _backRear: {fileID: 0}
-        _firstColor: {r: 0.039215688, g: 0.015686275, b: 0.09411765, a: 1}
+        _firstColor: {r: 0.23137255, g: 0.13333334, b: 0.19215687, a: 1}
         _overridesSourceColor: 1
         _overridesBaseColor: 0
         _equipmentSprites: []
@@ -144,7 +144,7 @@ MonoBehaviour:
           _normalRear: {fileID: 1906251046, guid: 33e711481a639a34ea6278a659ef0437, type: 3}
           _backFront: {fileID: 1906251046, guid: 33e711481a639a34ea6278a659ef0437, type: 3}
           _backRear: {fileID: 0}
-        _firstColor: {r: 0.039215688, g: 0.015686275, b: 0.09411765, a: 1}
+        _firstColor: {r: 0.23137255, g: 0.13333334, b: 0.19215687, a: 1}
         _overridesSourceColor: 1
         _overridesBaseColor: 0
         _equipmentSprites: []
