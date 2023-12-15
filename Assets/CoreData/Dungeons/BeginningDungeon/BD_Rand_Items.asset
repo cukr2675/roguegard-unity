@@ -21,49 +21,42 @@ MonoBehaviour:
       _optionDescription: {fileID: 0}
       _generatorWeight: 1
       _stack: 1
-      _isIntrinsicItem: 0
       _members:
         _items: []
     - _option: {fileID: 11400000, guid: 2df1aa5bfac2b584bbcc48830850fef6, type: 2}
       _optionDescription: {fileID: 0}
       _generatorWeight: 1.2
       _stack: 1
-      _isIntrinsicItem: 0
       _members:
         _items: []
     - _option: {fileID: 11400000, guid: 8382eae7bfa90574181d5410e04d1cf1, type: 2}
       _optionDescription: {fileID: 0}
       _generatorWeight: 1
       _stack: 1
-      _isIntrinsicItem: 0
       _members:
         _items: []
     - _option: {fileID: 11400000, guid: 92bf64a440678f648b1b9fbc02c1151a, type: 2}
       _optionDescription: {fileID: 0}
       _generatorWeight: 1
       _stack: 1
-      _isIntrinsicItem: 0
-      _members:
-        _items: []
-    - _option: {fileID: 11400000, guid: dffb5d3e624842d449c20f687dd58a31, type: 2}
-      _optionDescription: {fileID: 0}
-      _generatorWeight: 1
-      _stack: 1
-      _isIntrinsicItem: 0
       _members:
         _items: []
     - _option: {fileID: 11400000, guid: 1019c2b71fede034fa300841e5b1063a, type: 2}
       _optionDescription: {fileID: 0}
       _generatorWeight: 1
       _stack: 1
-      _isIntrinsicItem: 0
       _members:
         _items: []
-    - _option: {fileID: 11400000, guid: 60df3d2beacbb624f97ace180a9cab27, type: 2}
+    - _option: {fileID: 11400000, guid: cf5f8b78c114d2944aed939030632ff1, type: 2}
       _optionDescription: {fileID: 0}
       _generatorWeight: 1
       _stack: 1
-      _isIntrinsicItem: 0
+      _members:
+        _items: []
+    - _option: {fileID: 11400000, guid: 487c93904fd72af48877ab0ce25f16ab, type: 2}
+      _optionDescription: {fileID: 0}
+      _generatorWeight: 1
+      _stack: 1
       _members:
         _items: []
   references:
