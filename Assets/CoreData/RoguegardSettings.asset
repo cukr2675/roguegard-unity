@@ -21,6 +21,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ff3a78dceaafbdf4b9bd12568b64d0ee, type: 2}
   - {fileID: 11400000, guid: 319229867706872418481b44486e6bd9, type: 2}
   - {fileID: 11400000, guid: 1de337ac628278f4db386038a3e0b2b7, type: 2}
+  _money: {fileID: 11400000, guid: da554bc0ed96cf24bae4bd414b9cb53f, type: 2}
   _maxTilemapSize: {x: 96, y: 64}
   _defaultVisibleRadius: 2
   _keywordsNotEnqueueMessageRule:
