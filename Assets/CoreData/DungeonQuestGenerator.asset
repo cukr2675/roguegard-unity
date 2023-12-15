@@ -17,3 +17,5 @@ MonoBehaviour:
   _environmentEffects:
   - {fileID: 11400000, guid: 21b4950d932042745bfeb454cef09a96, type: 2}
   - {fileID: 11400000, guid: a2bbb1b094fc5bf48831ea349e0c6c89, type: 2}
+  _money: {fileID: 11400000, guid: da554bc0ed96cf24bae4bd414b9cb53f, type: 2}
+  _moneyPerQuestCost: 20
