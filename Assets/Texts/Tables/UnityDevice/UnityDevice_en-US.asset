@@ -9,76 +9,67 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
-  m_Name: Device Shared Data
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: UnityDevice_en-US
   m_EditorClassIdentifier: 
-  m_TableCollectionName: Device
-  m_TableCollectionNameGuidString: f442e2877505c5d4391852a201825d92
-  m_Entries:
-  - m_Id: 299159916544
-    m_Key: Skill
-    m_Metadata:
-      m_Items: []
+  m_LocaleId:
+    m_Code: en-US
+  m_SharedData: {fileID: 11400000, guid: f442e2877505c5d4391852a201825d92, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
   - m_Id: 77117657088
-    m_Key: Items
+    m_Localized: Items
     m_Metadata:
       m_Items: []
   - m_Id: 163927166976
-    m_Key: Ground
+    m_Localized: Ground
+    m_Metadata:
+      m_Items: []
+  - m_Id: 299159916544
+    m_Localized: Skill
     m_Metadata:
       m_Items: []
   - m_Id: 344324182016
-    m_Key: Party
+    m_Localized: Party
     m_Metadata:
       m_Items: []
   - m_Id: 16323276050432
-    m_Key: Log
+    m_Localized: Log
     m_Metadata:
       m_Items: []
   - m_Id: 16468034064384
-    m_Key: Close
+    m_Localized: Close
     m_Metadata:
       m_Items: []
   - m_Id: 2645105824632832
-    m_Key: Sort
+    m_Localized: Sort
     m_Metadata:
       m_Items: []
   - m_Id: 2660482730299392
-    m_Key: Others
+    m_Localized: Others
     m_Metadata:
       m_Items: []
   - m_Id: 2660542616571904
-    m_Key: Save
+    m_Localized: Save
     m_Metadata:
       m_Items: []
   - m_Id: 2660591442464768
-    m_Key: GiveUp
-    m_Metadata:
-      m_Items: []
-  - m_Id: 10869776709718016
-    m_Key: GiveUpMsg
+    m_Localized: GiveUp
     m_Metadata:
       m_Items: []
   - m_Id: 7652358743003136
-    m_Key: Load
+    m_Localized: Load
     m_Metadata:
       m_Items: []
   - m_Id: 8133783866970112
-    m_Key: Options
+    m_Localized: Options
     m_Metadata:
       m_Items: []
   - m_Id: 20494015452549120
-    m_Key: Quest
+    m_Localized: Quest
     m_Metadata:
       m_Items: []
-  m_Metadata:
-    m_Items: []
-  m_KeyGenerator:
-    rid: 962668880969596976
   references:
     version: 2
-    RefIds:
-    - rid: 962668880969596976
-      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
-      data:
-        m_CustomEpoch: 1697069551588
+    RefIds: []

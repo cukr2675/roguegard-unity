@@ -17,6 +17,7 @@ MonoBehaviour:
   - CoreQuestEnvironment1
   - CoreQuestObjectives1
   - CoreSkill1
+  - CoreMonster1
   - CoreMoney1
   - CoreAmmo1
   - CoreApplyTool1
@@ -36,10 +37,9 @@ MonoBehaviour:
   - CoreScroll1
   - CoreVehicle1
   - CoreWeapon1
-  - CoreMonster1
   - CoreMainInfoKw
   - KwStats
   - CoreStatusEffect1
   - CoreTile1
-  - Device
+  - UnityDevice
   - UnityTitle
