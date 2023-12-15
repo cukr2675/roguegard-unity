@@ -78,7 +78,7 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f442e2877505c5d4391852a201825d92
-    m_Address: Assets/Texts/Tables/Device/Device Shared Data.asset
+    m_Address: Assets/Texts/Tables/UnityDevice/UnityDevice Shared Data.asset
     m_ReadOnly: 1
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

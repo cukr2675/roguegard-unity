@@ -84,7 +84,7 @@ MonoBehaviour:
     - Locale-ja-JP
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 5ae7899b1c896234a857d9604581ceb9
-    m_Address: Device_ja-JP
+    m_Address: UnityDevice_ja-JP
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-ja-JP

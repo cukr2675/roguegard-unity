@@ -84,7 +84,7 @@ MonoBehaviour:
     - Locale-en-US
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 063195888fdca904bb1de5cf5253f870
-    m_Address: Device_en-US
+    m_Address: UnityDevice_en-US
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-en-US

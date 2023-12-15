@@ -140,12 +140,6 @@ namespace RoguegardUnity
 
         public static void StartCanvasCoroutine(IEnumerator routine)
         {
-            if (currentCoroutine != null)
-            {
-                Debug.LogError("別のコルーチンを実行中です。");
-                return;
-            }
-
             currentCoroutine = CreateCoroutine(routine);
             current.StartCoroutine(currentCoroutine);
         }
