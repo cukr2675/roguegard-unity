@@ -95,6 +95,7 @@ namespace RoguegardUnity
 
         private class ItemsMenu : MenuItemController, IModelsMenu
         {
+            private readonly List<RogueObj> models = new List<RogueObj>();
             public IModelsMenuChoice exitChoice;
             private SortChoice sortChoice;
 
@@ -102,7 +103,15 @@ namespace RoguegardUnity
 
             void IModelsMenu.OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                var models = arg.TargetObj.Space.Objs;
+                models.Clear();
+                var spaceObjs = arg.TargetObj.Space.Objs;
+                for (int i = 0; i < spaceObjs.Count; i++)
+                {
+                    if (spaceObjs[i] == null || spaceObjs[i].Main.InfoSet == RoguegardSettings.MoneyInfoSet) continue;
+
+                    models.Add(spaceObjs[i]);
+                }
+
                 float position;
                 if (arg.TargetObj == prevSelf)
                 {
@@ -110,6 +119,7 @@ namespace RoguegardUnity
                 }
                 else
                 {
+                    // 重さがゼロではないアイテムまで自動スクロール
                     int index;
                     for (index = 0; index < models.Count; index++)
                     {
@@ -120,7 +130,7 @@ namespace RoguegardUnity
                 }
                 var openArg = new RogueMethodArgument(targetObj: arg.TargetObj, vector: new Vector2(position, 0f));
                 var scroll = (ScrollModelsMenuView)root.Get(DeviceKw.MenuScroll);
-                scroll.OpenView(this, models, root, self, user, openArg);
+                scroll.OpenView(this, Spanning<RogueObj>.Create(models), root, self, user, openArg);
                 scroll.ShowExitButton(exitChoice);
 
                 // プレイヤーパーティのインベントリまたは箱であればソート可能
@@ -266,6 +276,8 @@ namespace RoguegardUnity
 
             public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
+                Debug.LogError(root.Get(DeviceKw.MenuScroll).GetPosition());
+
                 root.AddObject(DeviceKw.EnqueueSE, StdKw.Sort);
 
                 if (categorizedBufferTable == null)
@@ -294,7 +306,7 @@ namespace RoguegardUnity
                     var obj = objs[i];
                     if (obj == null) continue;
 
-                    if (!categorizedBufferTable.TryGetValue(obj.Main.InfoSet.Category, out var categorizedBuffers))
+                    if (obj.Main.InfoSet.Category == null || !categorizedBufferTable.TryGetValue(obj.Main.InfoSet.Category, out var categorizedBuffers))
                     {
                         categorizedBuffers = categorizedBufferTable[other];
                     }
