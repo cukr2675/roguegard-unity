@@ -33,6 +33,7 @@ namespace Roguegard.CharacterCreation
         public override Spanning<IReadOnlyAppearance> Appearances => _appearances;
         protected override ISortedIntrinsicList SortedIntrinsics => sortedIntrinsics;
         public override Spanning<IWeightedRogueObjGeneratorList> StartingItemTable => _startingItemTable;
+        protected override bool HasNotInfoSet => true;
 
         public CharacterCreationDataBuilder ToBuilder()
         {
