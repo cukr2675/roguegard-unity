@@ -50,11 +50,6 @@ namespace Roguegard.CharacterCreation
             typeItems.Clear();
         }
 
-        public void SetRandom(ICharacterCreationDatabase database, IRogueRandom random)
-        {
-            _typeIndex = random.Next(0, typeItems.Count);
-        }
-
         public IMember Clone()
         {
             var clone = new AlphabetTypeMember();

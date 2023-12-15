@@ -21,10 +21,6 @@ namespace Roguegard.CharacterCreation
             return (IReadOnlyQuestMember)memberable.GetMember(SourceInstance);
         }
 
-        public void SetRandom(ICharacterCreationDatabase database, IRogueRandom random)
-        {
-        }
-
         public IMember Clone()
         {
             var clone = new QuestMember();

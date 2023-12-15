@@ -21,11 +21,6 @@ namespace Roguegard.CharacterCreation
             return (IReadOnlyRogueTileMember)startingItem.GetMember(SourceInstance);
         }
 
-        public void SetRandom(ICharacterCreationDatabase database, IRogueRandom random)
-        {
-            if (_tile != null) throw new RogueException();
-        }
-
         public IMember Clone()
         {
             var clone = new RogueTileMember();

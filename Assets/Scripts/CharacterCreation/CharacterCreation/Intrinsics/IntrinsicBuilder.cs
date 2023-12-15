@@ -55,19 +55,6 @@ namespace Roguegard.CharacterCreation
             }
         }
 
-        public void SetRandomMembers(ICharacterCreationData characterCreationData, ICharacterCreationDatabase database, IRogueRandom random)
-        {
-            members.Clear();
-            for (int i = 0; i < Option.MemberSources.Count; i++)
-            {
-                var memberSource = Option.MemberSources[i];
-                var member = memberSource.CreateMember();
-                Option.UpdateMemberRange(member, this, characterCreationData);
-                member.SetRandom(database, random);
-                members.Add(member);
-            }
-        }
-
         public IMember GetMember(IMemberSource source)
         {
             for (int i = 0; i < members.Count; i++)
