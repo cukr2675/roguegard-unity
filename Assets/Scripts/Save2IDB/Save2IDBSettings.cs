@@ -20,7 +20,7 @@ namespace Save2IDB
         [SerializeField] internal string _databaseName = defaultDatabaseName;
         [SerializeField] internal string _filesObjectStoreName = defaultFilesObjectStoreName;
 
-        private const string defaultDatabaseName = "Save2IDB/%md5_hash_of_data_path%";
+        private const string defaultDatabaseName = "Save2IDB/{md5_hash_of_data_path}";
         private const string defaultFilesObjectStoreName = "Files";
 
         private void OnEnable()
@@ -47,11 +47,12 @@ namespace Save2IDB
 
         private static string GetName(string format, string hash)
         {
-            // %companyname% を置き換える。 %% でエスケープ可能（%%companyname% や %companyname%% は置き換えない）
-            format = Regex.Replace(format, @"(?<!%)%companyname%(?!%)", Application.companyName);
-            format = Regex.Replace(format, @"(?<!%)%productname%(?!%)", Application.productName);
-            format = Regex.Replace(format, @"(?<!%)%md5_hash_of_data_path%(?!%)", hash);
-            format = format.Replace("%%", "%"); // エスケープされた % を戻す
+            // {companyname} を置き換える。 {{ および }} でエスケープ可能（{{companyname} や {companyname}} は置き換えない）
+            format = Regex.Replace(format, @"(?<!\{)\{companyname\}(?!\})", Application.companyName);
+            format = Regex.Replace(format, @"(?<!\{)\{productname\}(?!\})", Application.productName);
+            format = Regex.Replace(format, @"(?<!\{)\{md5_hash_of_data_path\}(?!\})", hash);
+            format = format.Replace("{{", "{"); // エスケープされた { を戻す
+            format = format.Replace("}}", "}"); // エスケープされた } を戻す
             return format;
         }
 
