@@ -72,6 +72,7 @@ namespace Roguegard
             private class ItemController : IModelsMenuItemController
             {
                 private static readonly CommandMenu nextMenu = new CommandMenu();
+                private static readonly NewMenu newMenu = new NewMenu();
 
                 public string GetName(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
                 {
@@ -84,6 +85,11 @@ namespace Roguegard
                     if (model == null)
                     {
                         root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+                        var builder = RoguegardSettings.CharacterCreationDatabase.LoadPreset(0);
+                        var character = builder.CreateObj(null, Vector2Int.zero, RogueRandom.Primary);
+                        RogueWorld.GetLobbyMembersByCharacter(self).Add(character);
+                        var openArg = new RogueMethodArgument(other: builder);
+                        root.OpenMenuAsDialog(newMenu, self, user, openArg, new(targetObj: character, other: builder));
                     }
                     else
                     {
@@ -170,6 +176,17 @@ namespace Roguegard
                         var builder = (CharacterCreationDataBuilder)arg.Other;
                         root.Get(DeviceKw.MenuCharacterCreation).OpenView(null, models, root, self, user, new(other: builder));
                     }
+                }
+            }
+
+            private class NewMenu : IModelsMenu
+            {
+                private readonly object[] models = new object[] { ExitModelsMenuChoice.Instance };
+
+                public void OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+                {
+                    var builder = (CharacterCreationDataBuilder)arg.Other;
+                    root.Get(DeviceKw.MenuCharacterCreation).OpenView(null, models, root, self, user, new(other: builder));
                 }
             }
         }
