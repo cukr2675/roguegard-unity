@@ -19,6 +19,18 @@ MonoBehaviour:
     m_Key: LayMsg::2
     m_Metadata:
       m_Items: []
+  - m_Id: 21804965573038080
+    m_Key: Stool
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21805234113351680
+    m_Key: Stool::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21805245089845248
+    m_Key: Stool::d
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
