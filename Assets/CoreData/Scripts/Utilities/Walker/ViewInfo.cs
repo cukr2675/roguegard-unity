@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Roguegard
 {
     [ObjectFormer.Formable]
-    public class ViewInfo : IRogueObjInfo
+    public class ViewInfo : IRogueObjInfo, IRogueTilemapView
     {
         private ViewMap viewMap;
 
@@ -13,6 +13,10 @@ namespace Roguegard
 
         public int Width => viewMap.Width;
         public int Height => viewMap.Height;
+
+        Vector2Int IRogueTilemapView.Size => new Vector2Int(Width, Height);
+
+        Spanning<RogueObj> IRogueTilemapView.VisibleObjs => viewMap.VisibleObjs;
 
         public int VisibleObjCount => viewMap.VisibleObjs.Count;
 

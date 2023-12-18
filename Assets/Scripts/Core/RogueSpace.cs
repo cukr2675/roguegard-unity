@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Roguegard
 {
     [ObjectFormer.Formable]
-    public class RogueSpace
+    public class RogueSpace : IRogueTilemapView
     {
         /// <summary>
         /// 空間移動により null が含まれる可能性があるため、要素の null チェック必須。
@@ -28,6 +28,10 @@ namespace Roguegard
         private RogueSpaceRandom spaceRandom => _spaceRandom ??= new RogueSpaceRandom(this);
 
         public int RoomCount => rooms?.Length ?? 0;
+
+        Vector2Int IRogueTilemapView.Size => Tilemap?.Rect.size ?? Vector2Int.zero;
+
+        Spanning<RogueObj> IRogueTilemapView.VisibleObjs => _objs;
 
         private static readonly RectInt[] empty = new RectInt[0];
         private static readonly RogueObjList buffer = new RogueObjList();
@@ -383,6 +387,31 @@ namespace Roguegard
             for (int i = 0; i < sorted.Count; i++)
             {
                 _objs.Add(sorted[i]);
+            }
+        }
+
+        void IRogueTilemapView.GetTile(Vector2Int position, out bool visible, out IRogueTile tile, out RogueObj tileObj)
+        {
+            if (Tilemap == null || !Tilemap.Rect.Contains(position))
+            {
+                visible = false;
+                tile = null;
+                tileObj = null;
+                return;
+            }
+
+            visible = true;
+            tile = Tilemap.GetTop(position);
+            tileObj = tileColliderMap[position.y][position.x];
+
+            // 当たり判定のないタイルのオブジェクトを取得する（階段など）
+            for (int i = 0; i < _objs.Count; i++)
+            {
+                var obj = _objs[i];
+                if (obj == null || !obj.AsTile || obj.Position != position) continue;
+
+                tileObj = obj;
+                break;
             }
         }
     }
