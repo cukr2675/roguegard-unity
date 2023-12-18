@@ -16,7 +16,7 @@ namespace Roguegard
         {
             for (int i = 0; i < spanning.Count; i++)
             {
-                if (spanning[i].Equals(value)) return i;
+                if (spanning[i]?.Equals(value) ?? value == null) return i;
             }
             return -1;
         }
