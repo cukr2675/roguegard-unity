@@ -60,7 +60,7 @@ namespace Roguegard.CharacterCreation
         {
             public override bool Invoke(RogueObj self, RogueObj player, float activationDepth, in RogueMethodArgument arg)
             {
-                if (player != RogueDevice.Primary.Player) return false;
+                if (!LobbyMembers.Contains(player)) return false;
 
                 RogueDevice.Add(DeviceKw.EnqueueSE, CategoryKw.DownStairs);
 

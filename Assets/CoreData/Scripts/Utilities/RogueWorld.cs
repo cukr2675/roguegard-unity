@@ -43,19 +43,6 @@ namespace Roguegard
             }
         }
 
-        public static RogueObjList GetLobbyMembersByCharacter(RogueObj self)
-        {
-            var world = GetWorld(self);
-            if (world.TryGet<Info>(out var info))
-            {
-                return info.LobbyMembers;
-            }
-            else
-            {
-                return null;
-            }
-        }
-
 
 
         /// <summary>
@@ -118,9 +105,6 @@ namespace Roguegard
         private class Info : IRogueObjInfo
         {
             public RogueObj Lobby { get; }
-
-            private RogueObjList _lobbyMembers;
-            public RogueObjList LobbyMembers => _lobbyMembers ??= new RogueObjList();
 
             public bool IsExclusedWhenSerialize => false;
 

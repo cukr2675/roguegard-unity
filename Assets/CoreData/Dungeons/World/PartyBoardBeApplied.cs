@@ -54,7 +54,7 @@ namespace Roguegard
                     Debug.Log("Update character");
                 }
 
-                var lobbyMembers = RogueWorld.GetLobbyMembersByCharacter(player);
+                var lobbyMembers = LobbyMembers.GetMembersByCharacter(player);
                 models.Clear();
                 for (int i = 0; i < lobbyMembers.Count; i++)
                 {
@@ -87,7 +87,8 @@ namespace Roguegard
                         root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
                         var builder = RoguegardSettings.CharacterCreationDatabase.LoadPreset(0);
                         var character = builder.CreateObj(null, Vector2Int.zero, RogueRandom.Primary);
-                        RogueWorld.GetLobbyMembersByCharacter(self).Add(character);
+                        var world = RogueWorld.GetWorld(self);
+                        LobbyMembers.Add(character, world);
                         var openArg = new RogueMethodArgument(other: builder);
                         root.OpenMenuAsDialog(newMenu, self, user, openArg, new(targetObj: character, other: builder));
                     }

@@ -9,7 +9,7 @@ namespace Roguegard.Extensions
         public static bool LocateSavePoint(
             this IActiveRogueMethodCaller method, RogueObj player, RogueObj tool, float activationDepth, ISavePointInfo savePointInfo, bool force = false)
         {
-            if (RogueDevice.Primary.Player != player) return false;
+            if (!LobbyMembers.Contains(player)) return false;
 
             var result = RogueMethodAspectState.Invoke(
                 CategoryKw.DownStairs, savePointInfo.BeforeSave, tool, player, activationDepth, RogueMethodArgument.Identity);
@@ -27,7 +27,7 @@ namespace Roguegard.Extensions
         public static bool LoadSavePoint(
             this IActiveRogueMethodCaller method, RogueObj player, float activationDepth, ISavePointInfo savePointInfo)
         {
-            if (RogueDevice.Primary.Player != player) return false;
+            if (!LobbyMembers.Contains(player)) return false;
 
             var result = RogueMethodAspectState.Invoke(
                 DeviceKw.AfterLoad, savePointInfo.AfterLoad, null, player, activationDepth, RogueMethodArgument.Identity);
