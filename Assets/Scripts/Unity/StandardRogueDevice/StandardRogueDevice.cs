@@ -21,11 +21,15 @@ namespace RoguegardUnity
 
         public RogueObj Player { get; private set; }
 
+        private RogueObj targetObj;
+
         private RogueObj world;
 
         private IRogueRandom currentRandom;
 
         private ISavePointInfo savePointInfo;
+
+        private string saveDateTime;
 
         public RogueOptions Options { get; }
 
@@ -51,6 +55,7 @@ namespace RoguegardUnity
         {
             currentRandom = random;
             Player = player;
+            targetObj = player;
             this.world = world;
             this.savePointInfo = savePointInfo;
             Options = options;
@@ -60,6 +65,7 @@ namespace RoguegardUnity
         {
             currentRandom = device.currentRandom;
             Player = device.Player;
+            targetObj = device.Player;
             world = device.world;
             savePointInfo = device.savePointInfo;
             Options.Set(device.Options);
@@ -137,6 +143,19 @@ namespace RoguegardUnity
                 }
                 savePointInfo = null;
             }
+
+            // 前回セーブからの経過時間でターン経過
+            if (LobbyMembers.GetMembersByCharacter(RogueDevice.Primary.Player).Count == 2)
+            {
+                var loadDateTime = System.DateTime.Now;
+                var relationalDateTime = loadDateTime - System.DateTime.Parse(saveDateTime);
+                var seconds = (int)relationalDateTime.TotalSeconds;
+                Debug.Log(seconds);
+
+                var lobbyMember = LobbyMembers.GetMembersByCharacter(RogueDevice.Primary.Player)[1];
+                Debug.Log(lobbyMember);
+                ticker.UpdateObj(lobbyMember, seconds);
+            }
         }
 
         public void Close()
@@ -146,7 +165,7 @@ namespace RoguegardUnity
 
         public void Next()
         {
-            characterRenderSystem.StartAnimation(Player);
+            characterRenderSystem.StartAnimation(targetObj);
 
             // 入力受付が始まった時、ターンが経過したとみなして
             // メッセージに区切り線を入れる。
@@ -170,8 +189,8 @@ namespace RoguegardUnity
             // タイルマップタッチとボタン UI の処理
             var deltaTime = 1;
             var directional =
-                characterRenderSystem.TryGetPosition(Player, out var playerPosition) &
-                characterRenderSystem.TryGetDirection(Player, out var playerDirection);
+                characterRenderSystem.TryGetPosition(targetObj, out var playerPosition) &
+                characterRenderSystem.TryGetDirection(targetObj, out var playerDirection);
             touchController.EarlyUpdateController(directional, playerPosition, playerDirection, deltaTime);
 
 
@@ -180,7 +199,7 @@ namespace RoguegardUnity
             // messageWorkQueue が空になるまで、毎 Update 少しずつ処理する
             ////////////////////////////////////////////////////////////////////////
 
-            var workingNow = characterRenderSystem.UpdateCharactersAndGetWorkingNow(Player, messageWorkQueue.Count == 0, deltaTime, FastForward);
+            var workingNow = characterRenderSystem.UpdateCharactersAndGetWorkingNow(targetObj, messageWorkQueue.Count == 0, deltaTime, FastForward);
             if (!workingNow && !touchController.TalkingWait)
             {
                 if (messageWorkQueue.Count >= 1)
@@ -191,11 +210,11 @@ namespace RoguegardUnity
                 else if (characterRenderSystem.InAnimation)
                 {
                     // 次の RogueCharacterWork がなければ、今ターンのアニメーションを終了させる。
-                    characterRenderSystem.EndAnimation(Player);
+                    characterRenderSystem.EndAnimation(targetObj);
                     touchController.NextTurn(Player);
                 }
             }
-            tilemapRenderSystem.Update(Player, touchController.OpenGrid);
+            tilemapRenderSystem.Update(targetObj, touchController.OpenGrid);
 
 
 
@@ -204,7 +223,7 @@ namespace RoguegardUnity
             ////////////////////////////////////////////////////////////////////////
 
             // playerPosition にはオブジェクトの実位置ではなく表示用スプライトの位置を使う。
-            if (characterRenderSystem.TryGetPosition(Player, out var position)) { playerPosition = position; }
+            if (characterRenderSystem.TryGetPosition(targetObj, out var position)) { playerPosition = position; }
 
             // カメラ・メニュー処理
             touchController.LateUpdateController(Player, playerPosition, deltaTime);
@@ -427,6 +446,12 @@ namespace RoguegardUnity
                 Open();
                 return;
             }
+            if (keyword == DeviceKw.StartAutoPlay && obj is RogueObj autoPlayObj)
+            {
+                touchController.AutoPlayIsEnabled = true;
+                this.targetObj = autoPlayObj;
+                return;
+            }
 
             Debug.LogError($"{keyword.Name} に対応するキーワードが見つかりません。（obj: {obj}）");
         }
@@ -460,7 +485,10 @@ namespace RoguegardUnity
 
         bool IRogueDevice.VisibleAt(RogueObj location, Vector2Int position)
         {
-            var view = Player.Get<ViewInfo>();
+            if (!targetObj.TryGet<ViewInfo>(out var view))
+            {
+                return targetObj.Location == location;
+            }
             if (view.Location != location || view.Location.Space.Tilemap == null) return false;
 
             view.GetTile(position, out var visible, out _, out _);
@@ -476,7 +504,7 @@ namespace RoguegardUnity
 
             // 視界範囲外の判定が出ても、更新してもう一度試す
             // 出会いがしらの敵を表示する際に有効
-            view.AddView(Player);
+            view.AddView(targetObj);
             view.GetTile(position, out visible, out _, out _);
             return visible;
         }
@@ -485,6 +513,7 @@ namespace RoguegardUnity
         {
             currentRandom = RogueRandom.Primary;
             this.savePointInfo = savePointInfo;
+            saveDateTime = System.DateTime.Now.ToString();
             var view = Player.Get<ViewInfo>();
             if (Player.Location != view.Location)
             {

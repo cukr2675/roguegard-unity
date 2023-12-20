@@ -36,8 +36,7 @@ namespace RoguegardUnity
 
             // 外部へ空間移動したオブジェクトの Position は不定なので参照してはならない。
             // 外部へ空間移動したかを判定するため VisibleObjs は即座に更新する。
-            var view = player.Get<ViewInfo>();
-            if (!view.QueueHasItem)
+            if (player.TryGet<ViewInfo>(out var view) && !view.QueueHasItem)
             {
                 view.ReadyView(player.Location);
                 view.AddView(player);
@@ -50,7 +49,6 @@ namespace RoguegardUnity
         /// </summary>
         public bool UpdateCharactersAndGetWorkingNow(RogueObj player, bool queueDoesNotHaveItems, int deltaTime, bool fastForward)
         {
-            var view = player.Get<ViewInfo>();
             if (InAnimation && queueDoesNotHaveItems)
             {
                 foreach (var character in characters)
@@ -60,9 +58,13 @@ namespace RoguegardUnity
             }
 
             // 視界内に存在するオブジェクトのスプライトを追加する。
-            for (int i = 0; i < view.VisibleObjCount; i++)
+            IRogueTilemapView tilemap;
+            if (player.TryGet<ViewInfo>(out var view)) { tilemap = view; }
+            else { tilemap = player.Location.Space; }
+
+            for (int i = 0; i < tilemap.VisibleObjs.Count; i++)
             {
-                var visibleObj = view.GetVisibleObj(i);
+                var visibleObj = tilemap.VisibleObjs[i];
                 if (visibleObj == null || visibleObj.AsTile) continue; // null とタイルはスプライトにしない。
 
                 GetCharacter(visibleObj);
@@ -73,7 +75,7 @@ namespace RoguegardUnity
             foreach (var character in characters)
             {
                 // 動作進行中でなく、見えていないオブジェクトの場合、更新しない。
-                if (!character.WorkingNow && !view.ContainsVisible(character.Obj)) continue;
+                if (!character.WorkingNow && view != null && !view.ContainsVisible(character.Obj)) continue;
 
                 // 各オブジェクトのアニメーションを進行させる。
                 var speed = fastForward ? 4 : 1;
@@ -102,15 +104,17 @@ namespace RoguegardUnity
         {
             if (!InAnimation) return;
 
-            var view = player.Get<ViewInfo>();
+            IRogueTilemapView tilemap;
+            if (player.TryGet<ViewInfo>(out var view)) { tilemap = view; }
+            else { tilemap = player.Location.Space; }
 
             for (int i = characters.Count - 1; i >= 0; i--)
             {
                 var character = characters[i];
                 if (!character.IsUpdated || // 使用していない要素を取り除く
                     character.Obj == null || // エフェクトを取り除く
-                    character.Obj.Location != view.Location || // 別空間の要素を取り除く
-                    !view.ContainsVisible(character.Obj)) // 見えない要素を取り除く
+                    character.Obj.Location != player.Location || // 別空間の要素を取り除く
+                    !tilemap.VisibleObjs.Contains(character.Obj)) // 見えない要素を取り除く
                 {
                     pool.PoolCharacter(character);
                     characters.RemoveAt(i);
@@ -119,9 +123,9 @@ namespace RoguegardUnity
             }
 
             // 視界内に存在するオブジェクトのスプライトを追加する。
-            for (int i = 0; i < view.VisibleObjCount; i++)
+            for (int i = 0; i < tilemap.VisibleObjs.Count; i++)
             {
-                var visibleObj = view.GetVisibleObj(i);
+                var visibleObj = tilemap.VisibleObjs[i];
                 if (visibleObj == null || visibleObj.AsTile) continue; // null とタイルはスプライトにしない。
 
                 visibleObj.Main.Sprite.Update(visibleObj);
@@ -184,8 +188,8 @@ namespace RoguegardUnity
 
         public bool TryGetDirection(RogueObj player, out RogueDirection direction)
         {
-            var view = player.Get<ViewInfo>();
-            if (view.Location != player.Location)
+            player.TryGet<ViewInfo>(out var view);
+            if (view != null && view.Location != player.Location)
             {
                 direction = default;
                 return false;

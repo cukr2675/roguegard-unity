@@ -18,7 +18,8 @@ namespace RoguegardUnity
             var device = RogueDevice.Primary;
             if (device.NextStay) return;
 
-            var location = RogueDevice.Primary.Player.Location;
+            var location = RogueWorld.GetWorld(RogueDevice.Primary.Player);
+            //var location = RogueDevice.Primary.Player.Location;
             if (location != null)
             {
                 if (item == null) { item = new Item(); }
@@ -31,6 +32,30 @@ namespace RoguegardUnity
                 }
             }
             device.Next();
+        }
+
+        public void Update(RogueObj obj, int turns, int maxIteration)
+        {
+            if (item == null) { item = new Item(); }
+            for (int i = 0; i < maxIteration; i++)
+            {
+                var location = obj.Location ?? obj;
+                if (location == null) break;
+
+                var result = item.MoveNext(location);
+                if (result == Result.Next)
+                {
+                    turns--;
+                    if (turns <= 0)
+                    {
+                        break;
+                    }
+                }
+
+                ResetTick(location);
+
+                // RogueDeviceEffect で止まる
+            }
         }
 
         private static void ResetTick(RogueObj self)

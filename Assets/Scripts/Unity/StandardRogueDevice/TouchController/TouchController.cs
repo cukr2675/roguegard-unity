@@ -37,6 +37,11 @@ namespace RoguegardUnity
         /// 入力待機状態かを取得する。
         /// </summary>
         public bool WaitsForInput { get; set; }
+        public bool AutoPlayIsEnabled
+        {
+            get => _inputController.AutoPlayIsEnabled;
+            set => _inputController.AutoPlayIsEnabled = value;
+        }
 
         public bool InAnimation => WaitsForInput || _menuController.Wait;
         public bool TalkingWait => _menuController.TalkingWait;

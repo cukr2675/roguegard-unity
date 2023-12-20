@@ -30,8 +30,15 @@ namespace Roguegard
                 return false;
             }
 
-            // ダンジョン名と階層を表示してそこに移動させる。
-            RogueDevice.Primary.AddMenu(this, player, null, RogueMethodArgument.Identity);
+            if (player == RogueDevice.Primary.Player)
+            {
+                // ダンジョン名と階層を表示してそこに移動させる。
+                RogueDevice.Primary.AddMenu(this, player, null, RogueMethodArgument.Identity);
+            }
+            else
+            {
+                Activate(null, player, null, RogueMethodArgument.Identity);
+            }
             return true;
         }
 

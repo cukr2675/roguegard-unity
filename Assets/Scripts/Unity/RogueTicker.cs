@@ -34,6 +34,12 @@ namespace RoguegardUnity
 #endif
         }
 
+        public void UpdateObj(RogueObj obj, int turns)
+        {
+            var onetime = new TickEnumerator();
+            onetime.Update(obj, turns, turns * 10);
+        }
+
         public void Reset()
         {
             StaticID.Next();

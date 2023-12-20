@@ -41,6 +41,7 @@ namespace RoguegardUnity
         public bool FastForward => _touchField.FastForward || (dashButton.IsHeldDown && dashForwardTurns >= LongPressThresholdTurns);
 
         public int LongPressThresholdTurns { get; set; }
+        public bool AutoPlayIsEnabled { get; set; }
 
         public void Initialize(Tilemap tilemap, bool dashButtonIsOnTheRight, bool dashKeyMode)
         {
@@ -240,6 +241,14 @@ namespace RoguegardUnity
 
         public bool TryGetDashForward(RogueObj player, out bool wait, out RogueObj attackTarget, out bool startsDashForward)
         {
+            if (AutoPlayIsEnabled)
+            {
+                wait = true;
+                attackTarget = null;
+                startsDashForward = true;
+                return true;
+            }
+
             wait = false;
             if (dashForward && menuButton.IsHeldDown)
             {

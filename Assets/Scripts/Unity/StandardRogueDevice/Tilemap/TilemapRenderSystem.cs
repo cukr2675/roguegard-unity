@@ -23,17 +23,20 @@ namespace RoguegardUnity
             tilemapGrid.SetGridIsEnabled(openGrid);
 
             var location = player.Location;
-            if (location == null) return;
+            if (location == null || location.Space.Tilemap == null) return;
 
-            var view = player.Get<ViewInfo>();
             var origin = player.Position;
             var direction = player.Main.Stats.Direction;
-            for (int y = 0; y < view.Height; y++)
+            IRogueTilemapView tilemap;
+            if (player.TryGet<ViewInfo>(out var view)) { tilemap = view; }
+            else { tilemap = location.Space; }
+
+            for (int y = 0; y < tilemap.Size.y; y++)
             {
-                for (int x = 0; x < view.Width; x++)
+                for (int x = 0; x < tilemap.Size.x; x++)
                 {
                     var position = new Vector3Int(x, y, 0);
-                    view.GetTile(new Vector2Int(x, y), out var visible, out var tile, out var tileObj);
+                    tilemap.GetTile(new Vector2Int(x, y), out var visible, out var tile, out var tileObj);
                     if (tileObj != null)
                     {
                         tileObj.Main.Sprite.Update(tileObj);

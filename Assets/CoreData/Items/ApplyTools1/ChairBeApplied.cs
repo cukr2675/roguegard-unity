@@ -27,7 +27,7 @@ namespace Roguegard
         {
             public void OpenMenu(IModelsMenuRoot root, RogueObj player, RogueObj user, in RogueMethodArgument arg)
             {
-                var lobbyMembers = (Spanning<RogueObj>)RogueWorld.GetLobbyMembersByCharacter(player);
+                var lobbyMembers = LobbyMembers.GetMembersByCharacter(player);
                 var scroll = (IScrollModelsMenuView)root.Get(DeviceKw.MenuScroll);
                 scroll.OpenView(this, lobbyMembers, root, player, null, arg);
                 scroll.ShowExitButton(ExitModelsMenuChoice.Instance);
@@ -55,8 +55,18 @@ namespace Roguegard
                     root.Done();
 
                     var movement = MovementCalculator.Get(obj);
-                    var r = obj.TryLocate(self.Location, position, movement.AsTile, movement.HasCollider, false, movement.HasSightCollider, StackOption.Default);
-                    Debug.Log(r);
+                    obj.TryLocate(self.Location, position, movement.AsTile, movement.HasCollider, false, movement.HasSightCollider, StackOption.Default);
+                    var effect = new Effect();
+                    obj.Main.RogueEffects.AddOpen(obj, effect);
+                    var mainParty = RogueDevice.Primary.Player.Main.Stats.Party;
+                    obj.Main.Stats.TryAssignParty(obj, new RogueParty(mainParty.Faction, mainParty.TargetFactions));
+                }
+                else if (obj.Main.RogueEffects.TryGetEffect<Effect>(out _))
+                {
+                    root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+                    root.Done();
+
+                    RogueDevice.Add(DeviceKw.StartAutoPlay, obj);
                 }
                 else
                 {
@@ -65,8 +75,13 @@ namespace Roguegard
             }
         }
 
+        [ObjectFormer.Formable]
         private class Effect : IRogueEffect, IRogueObjUpdater, IValueEffect
         {
+            [System.NonSerialized] private RogueObj stairs;
+            [System.NonSerialized] private IPathBuilder pathBuilder = new AStarPathBuilder(RoguegardSettings.MaxTilemapSize);
+
+            private static CommandFloorDownStairs apply = new CommandFloorDownStairs();
 
             float IRogueObjUpdater.Order => 1f;
             float IValueEffect.Order => 0f;
@@ -88,19 +103,52 @@ namespace Roguegard
                         {
                             dungeon.StartDungeon(self, RogueRandom.Primary);
                             dungeon.StartFloor(self, RogueRandom.Primary);
+                            break;
                         }
                     }
                 }
                 else
                 {
+                    if (!self.Location.Space.TryGetRoomView(self.Position, out var room, out _)) { room = new RectInt(); }
+
+                    // ìGÇ™ÉvÉåÉCÉÑÅ[Çï«âzÇµÇ…é@ímÇµÇƒãﬂÇ√Ç¢ÇƒÇµÇ‹ÇÌÇ»Ç¢ÇÊÇ§Ç…éãäEãóó£ÇÕå≈íË
+                    var visibleRadius = RoguegardSettings.DefaultVisibleRadius;
+                    var random = RogueRandom.Primary;
+
                     // É_ÉìÉWÉáÉìÇ≈ÇÕäKíiÇñ⁄éwÇ∑
                     var spaceObjs = self.Location.Space.Objs;
                     for (int i = 0; i < spaceObjs.Count; i++)
                     {
                         var obj = spaceObjs[i];
-                        if (obj == null || obj.Main.InfoSet.Category != CategoryKw.LevelDownStairs) continue;
+                        if (obj == null) continue;
 
-                        //WanderingWalker
+                        if (obj.Main.InfoSet.Category == CategoryKw.LevelDownStairs)
+                        {
+                            if (stairs == null || stairs.Location != self.Location)
+                            {
+                                stairs = obj;
+                                pathBuilder.UpdatePath(self, stairs.Position);
+                            }
+
+                            var result = pathBuilder.TryGetNextPosition(self, out var nextPosition);
+                            if (result &&
+                                RogueDirection.TryFromSign(nextPosition - self.Position, out var direction) &&
+                                this.Walk(self, direction, activationDepth))
+                            {
+                                return default;
+                            }
+                            else if (!result && apply.CommandInvoke(self, null, activationDepth, new(tool: stairs)))
+                            {
+                                // äKíiÇ…Ç¬Ç¢ÇΩÇÁégÇ§
+                                return default;
+                            }
+                        }
+                        else if ((self.Position - obj.Position).sqrMagnitude <= 2 && StatsEffectedValues.AreVS(self, obj))
+                        {
+                            // ìGÇ∆ó◊ê⁄ÇµÇƒÇ¢ÇÈÇ∆Ç´ÅAìGÇçUåÇÇ∑ÇÈ
+                            var attackSkill = AttackUtility.GetNormalAttackSkill(self);
+                            if (AutoAction.AutoSkill(MainInfoKw.Attack, attackSkill, self, self, activationDepth, null, visibleRadius, room, random)) return default;
+                        }
                     }
                 }
                 return default;

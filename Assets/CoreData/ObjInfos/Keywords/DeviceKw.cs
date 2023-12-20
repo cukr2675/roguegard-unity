@@ -104,6 +104,9 @@ namespace Roguegard
         [SerializeField] private KeywordData _saveGame;
         public static IKeyword SaveGame => instance._saveGame;
 
+        [SerializeField] private KeywordData _startAutoPlay;
+        public static IKeyword StartAutoPlay => instance._startAutoPlay;
+
         [SerializeField] private KeywordData _startTalk;
         public static IKeyword StartTalk => instance._startTalk;
 
