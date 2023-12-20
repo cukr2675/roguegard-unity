@@ -78,7 +78,7 @@ namespace Roguegard.CharacterCreation
                     if (AutoAction.TryOtherAction(self, activationDepth, visibleRadius, room, random)) return;
 
                     // 通常攻撃
-                    var attackSkill = self.Main.InfoSet.Attack;
+                    var attackSkill = AttackUtility.GetNormalAttackSkill(self);
                     if (AutoAction.AutoSkill(MainInfoKw.Attack, attackSkill, self, self, activationDepth, null, visibleRadius, room, random)) return;
 
                     // 射撃

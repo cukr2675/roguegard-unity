@@ -36,21 +36,9 @@ namespace Roguegard.Extensions
             this IActiveRogueMethodCaller method, RogueObj self, float activationDepth, Vector2Int targetPosition, RogueObj target = null)
         {
             var arg = new RogueMethodArgument(targetPosition: targetPosition, targetObj: target);
-
-            EquipmentUtility.GetWeapon(self, out var weapon);
-            if (weapon?.Attack != null)
-            {
-                // 武器で攻撃する。
-                var result = RogueMethodAspectState.Invoke(MainInfoKw.Attack, weapon.Attack, self, null, activationDepth, arg);
-                if (result) return true;
-            }
-            {
-                // 素手で攻撃する。
-                var skill = self.Main.InfoSet.Attack;
-                var result = RogueMethodAspectState.Invoke(MainInfoKw.Attack, skill, self, null, activationDepth, arg);
-                if (result) return true;
-            }
-            return false;
+            var skill = AttackUtility.GetNormalAttackSkill(self);
+            var result = RogueMethodAspectState.Invoke(MainInfoKw.Attack, skill, self, null, activationDepth, arg);
+            return result;
         }
 
         public static bool Eat(

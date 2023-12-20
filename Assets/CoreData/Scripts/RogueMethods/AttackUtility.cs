@@ -46,5 +46,19 @@ namespace Roguegard
             range.Raycast(self.Location, self.Position, direction, true, movement.HasTileCollider, out var target, out _, out _);
             return target;
         }
+
+        public static ISkill GetNormalAttackSkill(RogueObj self)
+        {
+            EquipmentUtility.GetWeapon(self, out var weapon);
+            if (weapon?.Attack != null)
+            {
+                // 武器で攻撃する
+                return weapon.Attack;
+            }
+            {
+                // 素手で攻撃する
+                return self.Main.InfoSet.Attack;
+            }
+        }
     }
 }
