@@ -14,17 +14,21 @@ namespace Roguegard
             var lootLocation = self.Location;
             var lootPosition = self.Position;
 
-            if (RogueDevice.Primary.Player == self)
+            if (LobbyMembers.Contains(self) && self.Main.GetPlayerLeaderInfo(self) != null)
             {
-                RogueDevice.Add(DeviceKw.AppendText, self);
-                RogueDevice.Add(DeviceKw.AppendText, "は倒れてしまった！\n");
-                RogueDevice.Add(DeviceKw.EnqueueSE, DeviceKw.GameOver);
-                RogueDevice.AddWork(DeviceKw.EnqueueWork, RogueCharacterWork.CreateBoneMotion(self, CoreMotions.FullTurn, false));
-                RogueDevice.AddWork(DeviceKw.EnqueueWork, RogueCharacterWork.CreateBoneMotion(self, KeywordBoneMotion.Wait, true));
-                RogueDevice.AddWork(DeviceKw.EnqueueWork, RogueCharacterWork.CreateBoneMotion(self, CoreMotions.FullTurn, false));
-                RogueDevice.AddWork(DeviceKw.EnqueueWork, RogueCharacterWork.CreateBoneMotion(self, KeywordBoneMotion.BeDefeated, true));
-                RogueDevice.Add(DeviceKw.EnqueueWaitSeconds, 1f);
-                RogueDevice.Add(DeviceKw.GameOver, 0);
+                // プレイヤーパーティのリーダーが倒れたときゲームオーバー処理
+                if (RogueDevice.Primary.VisibleAt(self.Location, self.Position))
+                {
+                    RogueDevice.Add(DeviceKw.AppendText, self);
+                    RogueDevice.Add(DeviceKw.AppendText, "は倒れてしまった！\n");
+                    RogueDevice.Add(DeviceKw.EnqueueSE, DeviceKw.GameOver);
+                    RogueDevice.AddWork(DeviceKw.EnqueueWork, RogueCharacterWork.CreateBoneMotion(self, CoreMotions.FullTurn, false));
+                    RogueDevice.AddWork(DeviceKw.EnqueueWork, RogueCharacterWork.CreateBoneMotion(self, KeywordBoneMotion.Wait, true));
+                    RogueDevice.AddWork(DeviceKw.EnqueueWork, RogueCharacterWork.CreateBoneMotion(self, CoreMotions.FullTurn, false));
+                    RogueDevice.AddWork(DeviceKw.EnqueueWork, RogueCharacterWork.CreateBoneMotion(self, KeywordBoneMotion.BeDefeated, true));
+                    RogueDevice.Add(DeviceKw.EnqueueWaitSeconds, 1f);
+                }
+                RogueDevice.Add(DeviceKw.GameOver, self);
                 return true;
             }
             else if (RogueDevice.Primary.VisibleAt(self.Location, self.Position))

@@ -9,7 +9,6 @@ using Newtonsoft.Json.Linq;
 using ObjectFormer;
 using ObjectFormer.Serialization.TextJson;
 using Roguegard;
-using Roguegard.CharacterCreation;
 using Roguegard.Device;
 using Roguegard.RogueObjectFormer.TextJson;
 
@@ -28,7 +27,12 @@ namespace RoguegardUnity
             var world = RogueWorld.GetWorld(player);
 
             // デバイスを設定
-            var device = new StandardRogueDevice(random, player, world, null, null);
+            var data = new StandardRogueDeviceData();
+            data.Player = player;
+            data.TargetObj = player;
+            data.World = world;
+            data.CurrentRandom = random;
+            var device = new StandardRogueDevice(data);
             RogueDeviceEffect.SetTo(player);
             return device;
         }

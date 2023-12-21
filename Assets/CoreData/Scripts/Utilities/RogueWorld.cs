@@ -149,7 +149,7 @@ namespace Roguegard
         {
             public override bool Invoke(RogueObj self, RogueObj player, float activationDepth, in RogueMethodArgument arg)
             {
-                if (player != RogueDevice.Primary.Player) return false;
+                if (!LobbyMembers.Contains(player)) return false;
 
                 var world = GetWorld(player);
                 var dungeon = DungeonInfo.GetLargestDungeon(player);

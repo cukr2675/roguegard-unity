@@ -170,27 +170,14 @@ namespace RoguegardUnity
         }
 
         /// <summary>
-        /// 指定の <see cref="RogueObj"/> のスプライトの位置を取得する。
+        /// 指定の <see cref="RogueObj"/> のスプライトの位置と方向を取得する。
         /// </summary>
-        public bool TryGetPosition(RogueObj player, out Vector3 position)
-        {
-            foreach (var character in characters)
-            {
-                if (character.Obj == player)
-                {
-                    position = character.transform.position;
-                    return true;
-                }
-            }
-            position = default;
-            return false;
-        }
-
-        public bool TryGetDirection(RogueObj player, out RogueDirection direction)
+        public bool TryGetPositioning(RogueObj player, out Vector3 position, out RogueDirection direction)
         {
             player.TryGet<ViewInfo>(out var view);
             if (view != null && view.Location != player.Location)
             {
+                position = default;
                 direction = default;
                 return false;
             }
@@ -199,10 +186,12 @@ namespace RoguegardUnity
             {
                 if (character.Obj == player)
                 {
+                    position = character.transform.position;
                     direction = character.Direction;
                     return true;
                 }
             }
+            position = default;
             direction = default;
             return false;
         }

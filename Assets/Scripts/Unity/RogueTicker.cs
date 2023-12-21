@@ -37,7 +37,7 @@ namespace RoguegardUnity
         public void UpdateObj(RogueObj obj, int turns)
         {
             var onetime = new TickEnumerator();
-            onetime.Update(obj, turns, turns * 10);
+            onetime.Update(obj, turns, 100 * 24 * 60 * 60); // 最大 100日
         }
 
         public void Reset()

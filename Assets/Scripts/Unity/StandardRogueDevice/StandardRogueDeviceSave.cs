@@ -14,6 +14,7 @@ using ObjectFormer.Serialization.Json;
 using Roguegard;
 using Roguegard.CharacterCreation;
 using Roguegard.Device;
+using Roguegard.Extensions;
 using Roguegard.RogueObjectFormer.Json;
 
 namespace RoguegardUnity
@@ -27,7 +28,7 @@ namespace RoguegardUnity
         public static Spanning<string> Extensions => _extensions;
         private static readonly string[] _extensions = new[] { ".gard", ".zip" };
 
-        private static NewGamePointInfo newGamePointInfo = new NewGamePointInfo();
+        private static readonly NewGamePointInfo newGamePointInfo = new NewGamePointInfo();
 
         private readonly CharacterCreationDataBuilder characterCreationDataBuilder;
 
@@ -89,12 +90,18 @@ namespace RoguegardUnity
             // デバイスを設定
             var options = new RogueOptions();
             options.ClearWithoutSet();
-            var device = new StandardRogueDevice(random, player, world, newGamePointInfo, options);
+            var data = new StandardRogueDeviceData();
+            data.Player = player;
+            data.World = world;
+            data.Options = options;
+            data.CurrentRandom = random;
+            data.SavePointInfo = newGamePointInfo;
+            var device = new StandardRogueDevice(data);
             RogueDeviceEffect.SetTo(player);
             return device;
         }
 
-        public void SaveGame(Stream stream, string name, StandardRogueDevice device)
+        public void SaveGame(Stream stream, string name, StandardRogueDeviceData data)
         {
             using var archive = new ZipArchive(stream, ZipArchiveMode.Create, true);
             var entry = archive.CreateEntry($"{name}.json");
@@ -111,12 +118,12 @@ namespace RoguegardUnity
             writer.WriteValue(Application.version);
 
             writer.WritePropertyName("data");
-            config.Serialize(writer, device);
+            config.Serialize(writer, data);
 
             writer.WriteEndObject();
         }
 
-        public StandardRogueDevice LoadGame(Stream stream)
+        public StandardRogueDeviceData LoadGameData(Stream stream)
         {
             using var archive = new ZipArchive(stream, ZipArchiveMode.Read, true);
             var entry = archive.Entries.FirstOrDefault(x => x.Name.EndsWith(".json"));
@@ -131,8 +138,14 @@ namespace RoguegardUnity
             if (typeName != TypeName) throw new RogueException($"type ({typeName}) が {TypeName} と一致しません。");
 
             using var dataReader = jObj["data"].CreateReader();
-            var device = config.Deserialize<StandardRogueDevice>(dataReader);
-            return device;
+            var data = config.Deserialize<StandardRogueDeviceData>(dataReader);
+            return data;
+        }
+
+        public StandardRogueDevice LoadGame(Stream stream)
+        {
+            var data = LoadGameData(stream);
+            return new StandardRogueDevice(data);
         }
 
         public static JsonSerializationModule[] GetJsonSerializationModules()
@@ -150,7 +163,7 @@ namespace RoguegardUnity
             converters.Add(FormerJsonConverter.Create(typeof(RectInt), true));
             converters.Add(FormerJsonConverter.Create(typeof(Color32), true));
             converters.Add(RogueObjJsonConverter.Create());
-            converters.Add(FormerJsonConverter.Create(typeof(StandardRogueDevice)));
+            converters.Add(FormerJsonConverter.Create(typeof(StandardRogueDeviceData)));
             converters.Add(FormerJsonConverter.Create(typeof(RogueOptions)));
             converters.AddAuto(assemblies, instanceType =>
             {
@@ -219,9 +232,8 @@ namespace RoguegardUnity
             public override bool Invoke(RogueObj self, RogueObj player, float activationDepth, in RogueMethodArgument arg)
             {
                 if (activationDepth != 0f) throw new RogueException();
-
-                var device = (StandardRogueDevice)RogueDevice.Primary;
-                device.NewGame(1f);
+                if (!default(IActiveRogueMethodCaller).LocateSavePoint(player, null, 1f, RogueWorld.SavePointInfo, true)) throw new RogueException();
+                if (!default(IActiveRogueMethodCaller).LoadSavePoint(player, 1f, RogueWorld.SavePointInfo)) throw new RogueException();
                 return true;
             }
         }

@@ -57,6 +57,7 @@ namespace Roguegard
                     var movement = MovementCalculator.Get(obj);
                     obj.TryLocate(self.Location, position, movement.AsTile, movement.HasCollider, false, movement.HasSightCollider, StackOption.Default);
                     var effect = new Effect();
+                    effect.chairPosition = position;
                     obj.Main.RogueEffects.AddOpen(obj, effect);
                     var mainParty = RogueDevice.Primary.Player.Main.Stats.Party;
                     obj.Main.Stats.TryAssignParty(obj, new RogueParty(mainParty.Faction, mainParty.TargetFactions));
@@ -78,6 +79,7 @@ namespace Roguegard
         [ObjectFormer.Formable]
         private class Effect : IRogueEffect, IRogueObjUpdater, IValueEffect
         {
+            public Vector2Int chairPosition;
             [System.NonSerialized] private RogueObj stairs;
             [System.NonSerialized] private IPathBuilder pathBuilder = new AStarPathBuilder(RoguegardSettings.MaxTilemapSize);
 
@@ -93,6 +95,31 @@ namespace Roguegard
 
             RogueObjUpdaterContinueType IRogueObjUpdater.UpdateObj(RogueObj self, float activationDepth, ref int sectionIndex)
             {
+                if (self.Location == null || self.Main.Stats.HP == 0)
+                {
+                    // パーティ・リーダーエフェクト・レベルアップボーナスの初期化
+                    var party = new RogueParty(self.Main.InfoSet.Faction, self.Main.InfoSet.TargetFactions);
+                    self.Main.Stats.TryAssignParty(self, party);
+                    DungeonFloorCloserStateInfo.CloseAndRemoveNull(self, true);
+                    Roguegard.CharacterCreation.RoguegardCharacterCreationSettings.LevelInfoInitializer.InitializeLv(self, 1);
+                    //RoguegardCharacterCreationSettings.LevelInfoInitializer.InitializeLv(self, 1);
+
+                    // 探索開始前に全回復する
+                    self.Main.Stats.Reset(self);
+                    self.TrySetStack(1);
+
+                    var world = RogueWorld.GetWorld(RogueDevice.Primary.Player);
+                    var lobby1 = RogueWorld.GetLobbyByCharacter(RogueDevice.Primary.Player);
+
+                    var movement = MovementCalculator.Get(self);
+                    self.TryLocate(lobby1, chairPosition, movement.AsTile, movement.HasCollider, false, movement.HasSightCollider, StackOption.Default);
+                    //if (!SpaceUtility.TryLocate(self, lobby1, chairPosition)) throw new RogueException();
+
+                    world.Space.RemoveAllNull();
+                    RogueEffectUtility.RemoveClose(self, this);
+                    return default;
+                }
+
                 var lobby = RogueWorld.GetLobbyByCharacter(self);
                 if (self.Location == lobby)
                 {

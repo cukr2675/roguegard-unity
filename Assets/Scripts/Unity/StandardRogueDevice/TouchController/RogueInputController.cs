@@ -84,6 +84,9 @@ namespace RoguegardUnity
         /// </summary>
         public void EarlyUpdateController(bool visiblePlayer, Vector3 playerPosition, RogueDirection playerDirection, int deltaTime)
         {
+            // ダッシュボタンクリックで自動モードを終了させる。
+            if (dashButton.IsClick && !_cameraController.IsCameraMode) { AutoPlayIsEnabled = false; }
+
             // ダッシュボタンクリックでカメラモードを終了させる。
             if (dashButton.IsClick) { _cameraController.TerminateCameraMode(); }
 

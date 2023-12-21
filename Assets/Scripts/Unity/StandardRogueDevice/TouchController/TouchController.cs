@@ -79,6 +79,11 @@ namespace RoguegardUnity
             _menuController.Open(player);
         }
 
+        public void MenuOpen(RogueObj targetObj)
+        {
+            _menuController.Open(targetObj);
+        }
+
         public void GetInfo(out MenuController menuController, out IModelsMenu openChestMenu)
         {
             menuController = _menuController;
