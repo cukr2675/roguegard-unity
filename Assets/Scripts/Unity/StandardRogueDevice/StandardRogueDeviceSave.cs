@@ -86,6 +86,7 @@ namespace RoguegardUnity
             var world = RoguegardSettings.WorldGenerator.CreateObj(null, Vector2Int.zero, random);
             var player = characterCreationDataBuilder.CreateObj(world, Vector2Int.zero, random);
             LobbyMembers.Add(player);
+            player.SetInfo(new ViewInfo());
 
             // デバイスを設定
             var options = new RogueOptions();

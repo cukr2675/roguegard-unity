@@ -40,11 +40,6 @@ namespace RoguegardUnity
             AudioSource seAudioSourcePrefab,
             AudioSource bgmAudioSourcePrefab)
         {
-            if (!data.Player.TryGet<ViewInfo>(out _))
-            {
-                data.Player.SetInfo(new ViewInfo());
-            }
-
             var name = "StandardDevice";
             componentManager = new StandardRogueDeviceComponentManager();
             componentManager.Initialize(
