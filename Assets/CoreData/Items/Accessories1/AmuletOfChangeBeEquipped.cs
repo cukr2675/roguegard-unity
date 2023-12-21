@@ -28,7 +28,7 @@ namespace Roguegard
             self.TrySetStack(0, owner);
 
             ChangeGenderEffect.Change(owner);
-            if (RogueDevice.Primary.VisibleAt(owner.Location, owner.Position))
+            if (MainCharacterWorkUtility.VisibleAt(owner.Location, owner.Position))
             {
                 RogueDevice.Add(DeviceKw.AppendText, owner);
                 RogueDevice.Add(DeviceKw.AppendText, "は性別が変わった\n");

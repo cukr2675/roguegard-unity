@@ -54,7 +54,7 @@ namespace Roguegard.CharacterCreation
                 protected override void NewAffectTo(
                     RogueObj target, RogueObj user, float activationDepth, in RogueMethodArgument arg, StackableStatusEffect statusEffect)
                 {
-                    if (RogueDevice.Primary.VisibleAt(target.Location, target.Position))
+                    if (MainCharacterWorkUtility.VisibleAt(target.Location, target.Position))
                     {
                         effect ??= new VariantBoneMotion(CoreMotions.Buff, StatsKw.ATK.Color);
                         RogueDevice.Add(DeviceKw.AppendText, ":StatusUpMsg::4");

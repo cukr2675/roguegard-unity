@@ -6,6 +6,33 @@ namespace Roguegard
 {
     public static class MainCharacterWorkUtility
     {
+        public static bool VisibleAt(RogueObj location, Vector2Int position)
+        {
+            var subject = RogueDevice.Primary.Subject;
+            if (!subject.TryGet<ViewInfo>(out var view))
+            {
+                return subject.Location == location;
+            }
+            if (view.Location != location || view.Location.Space.Tilemap == null) return false;
+
+            view.GetTile(position, out var visible, out _, out _);
+            if (visible) return true;
+
+            // ペイントされているオブジェクトがいる位置は見える
+            var obj = view.Location.Space.GetColliderObj(position);
+            if (obj != null)
+            {
+                var objStatusEffectState = obj.Main.GetStatusEffectState(obj);
+                if (objStatusEffectState.TryGetStatusEffect<PaintStatusEffect>(out _)) return true;
+            }
+
+            // 視界範囲外の判定が出ても、更新してもう一度試す
+            // 出会いがしらの敵を表示する際に有効
+            view.AddView(subject);
+            view.GetTile(position, out visible, out _, out _);
+            return visible;
+        }
+
         public static void EnqueueViewDequeueState(RogueObj obj)
         {
             if (obj.TryGet<ViewInfo>(out var view) && !view.QueueHasItem)
@@ -19,7 +46,7 @@ namespace Roguegard
 
         public static bool TryAddSkill(RogueObj self)
         {
-            if (!RogueDevice.Primary.VisibleAt(self.Location, self.Position)) return false;
+            if (!VisibleAt(self.Location, self.Position)) return false;
 
             RogueDevice.Add(DeviceKw.EnqueueSE, MainInfoKw.Skill);
             var item = RogueCharacterWork.CreateBoneMotion(self, CoreMotions.FullTurn, false);
@@ -32,7 +59,7 @@ namespace Roguegard
         /// </summary>
         public static bool TryAddAttack(RogueObj self)
         {
-            if (!RogueDevice.Primary.VisibleAt(self.Location, self.Position)) return false;
+            if (!VisibleAt(self.Location, self.Position)) return false;
 
             RogueDevice.Add(DeviceKw.EnqueueSE, MainInfoKw.Attack);
             var item = RogueCharacterWork.CreateBoneMotion(self, KeywordBoneMotion.Attack, false);
@@ -44,7 +71,7 @@ namespace Roguegard
 
         public static bool TryAddShot(RogueObj self)
         {
-            if (!RogueDevice.Primary.VisibleAt(self.Location, self.Position)) return false;
+            if (!VisibleAt(self.Location, self.Position)) return false;
 
             RogueDevice.Add(DeviceKw.EnqueueSE, StdKw.GunThrow);
             var item = RogueCharacterWork.CreateBoneMotion(self, KeywordBoneMotion.GunThrow, false);
@@ -93,7 +120,7 @@ namespace Roguegard
                 var x = Mathf.FloorToInt(Mathf.Lerp(p1.x, p2.x, i / distance));
                 var y = Mathf.FloorToInt(Mathf.Lerp(p1.y, p2.y, i / distance));
                 position = new Vector2Int(x, y);
-                if (RogueDevice.Primary.VisibleAt(location, position)) return true;
+                if (VisibleAt(location, position)) return true;
             }
             position = default;
             return false;
@@ -104,7 +131,7 @@ namespace Roguegard
         /// </summary>
         public static bool TryAddBeDropped(RogueObj ammo, RogueObj user, Vector2Int to, IBoneMotion motion)
         {
-            if (!RogueDevice.Primary.VisibleAt(user.Location, to)) return false;
+            if (!VisibleAt(user.Location, to)) return false;
 
             var drop = RogueCharacterWork.CreateWalk(ammo, to, -.5f, ammo.Main.Stats.Direction, motion, false);
             RogueDevice.AddWork(DeviceKw.EnqueueWork, drop);
@@ -123,7 +150,7 @@ namespace Roguegard
                 RogueDevice.AddWork(DeviceKw.EnqueueWork, work);
                 return true;
             }
-            else if (RogueDevice.Primary.VisibleAt(self.Location, self.Position))
+            else if (VisibleAt(self.Location, self.Position))
             {
                 var work = RogueCharacterWork.CreateWalk(self, self.Position, self.Main.Stats.Direction, null, true);
                 RogueDevice.AddWork(DeviceKw.EnqueueWork, work);

@@ -40,7 +40,7 @@ namespace RoguegardUnity
             var dungeon = leaderCharacter.Location;
             SpaceUtility.TryLocate(leaderCharacter, componentManager.World);
 
-            if (leaderCharacter == componentManager.TargetObj)
+            if (leaderCharacter == componentManager.Subject)
             {
                 componentManager.EventManager.AddMenu(gameOverMenu, leaderCharacter, null, new(targetObj: dungeon));
                 RogueDevice.Add(DeviceKw.EnqueueViewDequeueState, 0);

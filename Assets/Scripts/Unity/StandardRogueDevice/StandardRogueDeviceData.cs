@@ -10,7 +10,7 @@ namespace RoguegardUnity
     public class StandardRogueDeviceData
     {
         public RogueObj Player { get; set; }
-        public RogueObj TargetObj { get; set; }
+        public RogueObj Subject { get; set; }
         public RogueObj World { get; set; }
         public RogueOptions Options { get; set; }
         public IRogueRandom CurrentRandom { get; set; }

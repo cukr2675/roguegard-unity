@@ -26,7 +26,7 @@ namespace Roguegard
         protected override void NewAffectTo(
             RogueObj target, RogueObj user, float activationDepth, in RogueMethodArgument arg, StackableStatusEffect statusEffect)
         {
-            if (RogueDevice.Primary.VisibleAt(target.Location, target.Position))
+            if (MainCharacterWorkUtility.VisibleAt(target.Location, target.Position))
             {
                 _smoke ??= new VariantBoneMotion(CoreMotions.Smoke, new Color32(250, 100, 200, 255));
                 RogueDevice.Add(DeviceKw.EnqueueSE, StdKw.StatusEffect);
@@ -53,7 +53,7 @@ namespace Roguegard
         protected override void RemoveClose(RogueObj self, StatusEffectCloseType closeType = StatusEffectCloseType.Manual)
         {
             SpeedCalculator.SetDirty(self);
-            if (RogueDevice.Primary.VisibleAt(self.Location, self.Position))
+            if (MainCharacterWorkUtility.VisibleAt(self.Location, self.Position))
             {
                 RogueDevice.Add(DeviceKw.AppendText, self);
                 RogueDevice.Add(DeviceKw.AppendText, "は目を覚ました！\n");

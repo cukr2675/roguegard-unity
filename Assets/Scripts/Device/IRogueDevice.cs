@@ -7,36 +7,25 @@ namespace Roguegard.Device
     [ObjectFormer.RequireRelationalComponent]
     public interface IRogueDevice
     {
-        string Name { get; }
-
-        string Version { get; }
-
-        string Description { get; }
-
         RogueObj Player { get; }
 
-        bool CalledSynchronizedView { get; }
+        RogueObj Subject { get; }
 
-        bool NextStay { get; }
+        /// <summary>
+        /// この値が true のとき同期アニメーションの待機を要求する
+        /// </summary>
+        bool HasSynchronizedWork { get; }
 
         void Close();
 
-        void Next();
+        bool UpdateAndGetAllowStepTurn();
 
-        void Update();
+        void AfterStepTurn();
 
         void AddInt(IKeyword keyword, int integer);
         void AddFloat(IKeyword keyword, float number);
-        void AddWork(IKeyword keyword, in RogueCharacterWork work);
         void AddObject(IKeyword keyword, object obj);
-
+        void AddWork(IKeyword keyword, in RogueCharacterWork work);
         void AddMenu(IModelsMenu menu, RogueObj self, RogueObj user, in RogueMethodArgument arg);
-
-        /// <summary>
-        /// 指定の位置が視界範囲内であれば true を取得する。
-        /// </summary>
-        bool VisibleAt(RogueObj location, Vector2Int position);
-
-        void UpdateCharacters();
     }
 }

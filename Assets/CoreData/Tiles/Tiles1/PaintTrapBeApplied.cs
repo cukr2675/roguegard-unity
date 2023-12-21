@@ -16,7 +16,7 @@ namespace Roguegard
                 return false;
             }
 
-            if (RogueDevice.Primary.VisibleAt(user.Location, user.Position))
+            if (MainCharacterWorkUtility.VisibleAt(user.Location, user.Position))
             {
                 RogueDevice.Add(DeviceKw.AppendText, ":PaintTrapMsg::2");
                 RogueDevice.Add(DeviceKw.AppendText, user);

@@ -28,7 +28,7 @@ namespace Roguegard
             var lootLocation = self.Location;
             var lootPosition = self.Position;
 
-            if (RogueDevice.Primary.VisibleAt(self.Location, self.Position))
+            if (MainCharacterWorkUtility.VisibleAt(self.Location, self.Position))
             {
                 RogueDevice.Add(DeviceKw.AppendText, self);
                 RogueDevice.Add(DeviceKw.AppendText, "は爆発した！\n");

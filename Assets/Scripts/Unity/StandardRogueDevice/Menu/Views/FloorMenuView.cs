@@ -49,7 +49,6 @@ namespace RoguegardUnity
             if (count > 0f) return;
 
             itemController.Activate(models[0], Root, Self, User, Arg);
-            RogueDevice.Primary.UpdateCharacters();
             MenuController.Show(_canvasGroup, false);
             Root.Done();
         }
@@ -60,7 +59,6 @@ namespace RoguegardUnity
 
             count = 0f;
             itemController.Activate(models[0], Root, Self, User, Arg);
-            RogueDevice.Primary.UpdateCharacters();
             MenuController.Show(_canvasGroup, false);
             Root.Done();
         }

@@ -14,7 +14,7 @@ namespace RoguegardUnity
         private readonly IStandardRogueDeviceEventHandler[] eventHandlers;
         private readonly MessageWorkQueue messageWorkQueue;
 
-        public bool CalledSynchronizedView { get; private set; }
+        public bool HasSynchronizedWork { get; private set; }
 
         public bool Any => messageWorkQueue.Count >= 1;
 
@@ -101,21 +101,21 @@ namespace RoguegardUnity
                 if (obj != null) { messageWorkQueue.EnqueueOther(obj); }
                 else if (number == 0f) { messageWorkQueue.EnqueueInteger(integer); }
                 else { messageWorkQueue.EnqueueNumber(number); }
-                CalledSynchronizedView = true;
+                HasSynchronizedWork = true;
                 return;
             }
             if (keyword == DeviceKw.EnqueueSE)
             {
                 messageWorkQueue.EnqueueOther(DeviceKw.EnqueueSE);
                 messageWorkQueue.EnqueueOther(obj);
-                CalledSynchronizedView = true;
+                HasSynchronizedWork = true;
                 return;
             }
             if (keyword == DeviceKw.EnqueueSEAndWait)
             {
                 messageWorkQueue.EnqueueOther(DeviceKw.EnqueueSEAndWait);
                 messageWorkQueue.EnqueueOther(obj);
-                CalledSynchronizedView = true;
+                HasSynchronizedWork = true;
                 return;
             }
             if (keyword == DeviceKw.EnqueueWaitSeconds)
@@ -123,13 +123,13 @@ namespace RoguegardUnity
                 messageWorkQueue.EnqueueOther(DeviceKw.EnqueueWaitSeconds);
                 if (number == 0f) { messageWorkQueue.EnqueueNumber(integer); }
                 else { messageWorkQueue.EnqueueNumber(number); }
-                CalledSynchronizedView = true;
+                HasSynchronizedWork = true;
                 return;
             }
             if (keyword == DeviceKw.WaitForInput)
             {
                 touchController.WaitsForInput = true;
-                CalledSynchronizedView = true;
+                HasSynchronizedWork = true;
                 return;
             }
 
@@ -186,7 +186,7 @@ namespace RoguegardUnity
                 {
                     // 攻撃モーションなどの再生を待機する。
                     messageWorkQueue.EnqueueWork(work);
-                    CalledSynchronizedView = true;
+                    HasSynchronizedWork = true;
                 }
             }
         }
@@ -203,7 +203,7 @@ namespace RoguegardUnity
 
         public void ResetCalledSynchronizedView()
         {
-            CalledSynchronizedView = false;
+            HasSynchronizedWork = false;
         }
     }
 }

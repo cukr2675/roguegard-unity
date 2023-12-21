@@ -21,7 +21,7 @@ namespace Roguegard
                 if (damage && activationDepth < 1f && !arg.RefValue.SubValues.Is(MainInfoKw.BeDefeated) && RogueMethodUtility.GetAdjacent(self, user))
                 {
                     // ダメージの判定が出たうえで倒されておらず、かつ隣接していれば、しびれにらみで反撃する。
-                    if (RogueDevice.Primary.VisibleAt(user.Location, user.Position))
+                    if (MainCharacterWorkUtility.VisibleAt(user.Location, user.Position))
                     {
                         RogueDevice.Add(DeviceKw.AppendText, self);
                         RogueDevice.Add(DeviceKw.AppendText, "は");

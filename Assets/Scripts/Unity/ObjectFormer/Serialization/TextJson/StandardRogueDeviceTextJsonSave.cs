@@ -29,7 +29,7 @@ namespace RoguegardUnity
             // デバイスを設定
             var data = new StandardRogueDeviceData();
             data.Player = player;
-            data.TargetObj = player;
+            data.Subject = player;
             data.World = world;
             data.CurrentRandom = random;
             var device = new StandardRogueDevice(data);

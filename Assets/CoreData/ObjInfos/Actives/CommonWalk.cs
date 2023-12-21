@@ -39,7 +39,7 @@ namespace Roguegard
                 return false;
             }
 
-            var trueVisible = RogueDevice.Primary.VisibleAt(self.Location, position) || RogueDevice.Primary.VisibleAt(self.Location, target);
+            var trueVisible = MainCharacterWorkUtility.VisibleAt(self.Location, position) || MainCharacterWorkUtility.VisibleAt(self.Location, target);
             if (deltaPosition.x != 0 && deltaPosition.y != 0)
             {
                 // 斜め移動

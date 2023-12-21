@@ -161,7 +161,7 @@ namespace Roguegard
                 var result = info.TryOpen(self, arg.Count);
 
                 // 装備時の効果メッセージより先に表示させるため、装備開始前にメッセージを出す。
-                if (result && RogueDevice.Primary.VisibleAt(owner.Location, owner.Position))
+                if (result && MainCharacterWorkUtility.VisibleAt(owner.Location, owner.Position))
                 {
                     RogueDevice.Add(DeviceKw.AppendText, ":EquipMsg::2");
                     RogueDevice.Add(DeviceKw.AppendText, user);
@@ -190,7 +190,7 @@ namespace Roguegard
                 info.RemoveClose(self);
                 SpaceUtility.Restack(self);
 
-                if (arg.Count == 0 && RogueDevice.Primary != null && RogueDevice.Primary.VisibleAt(owner.Location, owner.Position))
+                if (arg.Count == 0 && RogueDevice.Primary != null && MainCharacterWorkUtility.VisibleAt(owner.Location, owner.Position))
                 {
                     RogueDevice.Add(DeviceKw.AppendText, ":UnequipMsg::2");
                     RogueDevice.Add(DeviceKw.AppendText, user);

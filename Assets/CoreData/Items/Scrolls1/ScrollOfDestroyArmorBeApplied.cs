@@ -13,7 +13,7 @@ namespace Roguegard
 
         protected override bool BeApplied(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
         {
-            var visible = RogueDevice.Primary.VisibleAt(user.Location, user.Position);
+            var visible = MainCharacterWorkUtility.VisibleAt(user.Location, user.Position);
             if (visible)
             {
                 RogueDevice.Add(DeviceKw.AppendText, user);

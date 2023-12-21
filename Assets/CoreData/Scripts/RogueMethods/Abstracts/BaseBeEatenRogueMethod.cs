@@ -17,7 +17,7 @@ namespace Roguegard
             }
 
             // 効果を発動しなくても消費する。
-            if (RogueDevice.Primary.VisibleAt(user.Location, user.Position))
+            if (MainCharacterWorkUtility.VisibleAt(user.Location, user.Position))
             {
                 RogueDevice.Add(DeviceKw.AppendText, user);
                 RogueDevice.Add(DeviceKw.AppendText, "は");

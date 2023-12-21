@@ -23,7 +23,7 @@ namespace Roguegard
             var oldNutrition = userStats.Nutrition;
             userStats.SetNutrition(user, userStats.Nutrition + _nutrition);
             var deltaNutrition = userStats.Nutrition - oldNutrition;
-            if (RogueDevice.Primary.VisibleAt(user.Location, user.Position))
+            if (MainCharacterWorkUtility.VisibleAt(user.Location, user.Position))
             {
                 RogueDevice.Add(DeviceKw.AppendText, user);
                 RogueDevice.Add(DeviceKw.AppendText, "の満腹度が");

@@ -20,7 +20,7 @@ namespace Roguegard
         protected override void NewAffectTo(
             RogueObj target, RogueObj user, float activationDepth, in RogueMethodArgument arg, StackableStatusEffect statusEffect)
         {
-            if (RogueDevice.Primary.VisibleAt(target.Location, target.Position))
+            if (MainCharacterWorkUtility.VisibleAt(target.Location, target.Position))
             {
                 RogueDevice.Add(DeviceKw.AppendText, target);
                 RogueDevice.Add(DeviceKw.AppendText, "は少し崩れた！\n");

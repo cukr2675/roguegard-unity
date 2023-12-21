@@ -34,7 +34,7 @@ namespace Roguegard.CharacterCreation
                 var point2 = SpaceUtility.Raycast(
                     self.Location, self.Position, self.Main.Stats.Direction.Rotate(+1), 1, false, false, true, out _, out var pointHit2, out _);
                 if (point0 && point1 && point2) return false;
-                if (RogueDevice.Primary.VisibleAt(self.Location, self.Position))
+                if (MainCharacterWorkUtility.VisibleAt(self.Location, self.Position))
                 {
                     RogueDevice.Add(DeviceKw.AppendText, ":LayTrapMsg::2");
                     RogueDevice.Add(DeviceKw.AppendText, self);

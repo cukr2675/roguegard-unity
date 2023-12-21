@@ -28,7 +28,7 @@ namespace Roguegard
             {
                 RogueMethodAspectState.Invoke(StdKw.StepOn, trap.Info.BeApplied, null, user, 1f, new(other: trap));
             }
-            else if (RogueDevice.Primary.VisibleAt(user.Location, user.Position))
+            else if (MainCharacterWorkUtility.VisibleAt(user.Location, user.Position))
             {
                 //RogueDevice.Add(DeviceKw.AppendText, ":PaintTrapMsg::2");
                 //RogueDevice.Add(DeviceKw.AppendText, user);

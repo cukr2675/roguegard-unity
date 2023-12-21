@@ -24,7 +24,7 @@ namespace Roguegard
                 damage = Mathf.Max(damage, 0);
 
                 var stats = self.Main.Stats;
-                var visible = RogueDevice.Primary.VisibleAt(self.Location, self.Position);
+                var visible = MainCharacterWorkUtility.VisibleAt(self.Location, self.Position);
                 if (heal)
                 {
                     stats.SetHP(self, stats.HP + damage);

@@ -107,7 +107,7 @@ namespace Roguegard.CharacterCreation
 
                 if (!info.TryOpen(self, user)) return false;
 
-                if (RogueDevice.Primary.VisibleAt(user.Location, user.Position))
+                if (MainCharacterWorkUtility.VisibleAt(user.Location, user.Position))
                 {
                     RogueDevice.Add(DeviceKw.AppendText, user);
                     RogueDevice.Add(DeviceKw.AppendText, "は");
@@ -126,7 +126,7 @@ namespace Roguegard.CharacterCreation
                 info.RemoveClose(self);
 
                 var owner = self.Location;
-                if (RogueDevice.Primary.VisibleAt(owner.Location, owner.Position))
+                if (MainCharacterWorkUtility.VisibleAt(owner.Location, owner.Position))
                 {
                     RogueDevice.Add(DeviceKw.AppendText, owner);
                     RogueDevice.Add(DeviceKw.AppendText, "は");

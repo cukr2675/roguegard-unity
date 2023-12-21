@@ -29,7 +29,7 @@ namespace Roguegard
                 self.Position == tool.Position &&   // 重なっていないオブジェクトは拾えない。
                 this.Locate(tool, self, self, activationDepth)) // 拾う
             {
-                if (RogueDevice.Primary.VisibleAt(self.Location, self.Position))
+                if (MainCharacterWorkUtility.VisibleAt(self.Location, self.Position))
                 {
                     RogueDevice.AddWork(DeviceKw.EnqueueWork, RogueCharacterWork.CreateSync(self));
                     RogueDevice.Add(DeviceKw.AppendText, self);

@@ -51,7 +51,7 @@ namespace RoguegardUnity
             // セーブ用データを生成
             var data = new StandardRogueDeviceData();
             data.Player = componentManager.Player;
-            data.TargetObj = componentManager.TargetObj;
+            data.Subject = componentManager.Subject;
             data.World = componentManager.World;
             data.Options = componentManager.Options;
             data.CurrentRandom = RogueRandom.Primary;

@@ -74,31 +74,27 @@ namespace RoguegardUnity
         private class Device : IRogueDevice
         {
             public RogueObj Player { get; set; }
-            public bool CalledSynchronizedView { get; set; }
-            public bool NextStay { get; set; }
+            public RogueObj Subject { get; set; }
+            public bool HasSynchronizedWork { get; set; }
+            private bool allowStepTurn = true;
 
             public void AddFloat(IKeyword keyword, float value)
             {
-                CalledSynchronizedView = true;
+                HasSynchronizedWork = true;
             }
 
-            public void Next()
+            public void AfterStepTurn()
             {
-                Debug.Log($"{nameof(Next)} が実行されました");
-                NextStay = true;
+                Debug.Log($"{nameof(AfterStepTurn)} が実行されました");
+                allowStepTurn = false;
             }
 
-            public string Name => "TestDevice";
-            public string Version => "1.0.0";
-            public string Description => "";
             public void AddInt(IKeyword keyword, int value) { }
             public void AddMenu(IModelsMenu menu, RogueObj self, RogueObj user, in RogueMethodArgument arg) { }
             public void AddObject(IKeyword keyword, object obj) { }
             public void AddWork(IKeyword keyword, in RogueCharacterWork work) { }
             public void Close() { }
-            public void Update() { }
-            public void UpdateCharacters() { }
-            public bool VisibleAt(RogueObj location, Vector2Int position) { return false; }
+            public bool UpdateAndGetAllowStepTurn() => allowStepTurn;
         }
     }
 }

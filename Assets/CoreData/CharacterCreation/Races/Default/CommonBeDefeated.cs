@@ -17,7 +17,7 @@ namespace Roguegard
             if (LobbyMembers.Contains(self) && self.Main.GetPlayerLeaderInfo(self) != null)
             {
                 // プレイヤーパーティのリーダーが倒れたときゲームオーバー処理
-                if (RogueDevice.Primary.VisibleAt(self.Location, self.Position))
+                if (MainCharacterWorkUtility.VisibleAt(self.Location, self.Position))
                 {
                     RogueDevice.Add(DeviceKw.AppendText, self);
                     RogueDevice.Add(DeviceKw.AppendText, "は倒れてしまった！\n");
@@ -31,7 +31,7 @@ namespace Roguegard
                 RogueDevice.Add(DeviceKw.GameOver, self);
                 return true;
             }
-            else if (RogueDevice.Primary.VisibleAt(self.Location, self.Position))
+            else if (MainCharacterWorkUtility.VisibleAt(self.Location, self.Position))
             {
                 RogueDevice.Add(DeviceKw.AppendText, self);
                 RogueDevice.Add(DeviceKw.AppendText, "は倒れた！\n");

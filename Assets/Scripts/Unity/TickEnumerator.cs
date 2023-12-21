@@ -12,11 +12,9 @@ namespace RoguegardUnity
 
         public void Update(int maxIteration)
         {
-            // 入力情報を更新
-            RogueDevice.Primary.Update();
-
+            // 入力情報の更新と同時にターン経過可能かを取得
             var device = RogueDevice.Primary;
-            if (device.NextStay) return;
+            if (!device.UpdateAndGetAllowStepTurn()) return;
 
             var location = RogueWorld.GetWorld(RogueDevice.Primary.Player);
             //var location = RogueDevice.Primary.Player.Location;
@@ -31,7 +29,7 @@ namespace RoguegardUnity
                     ResetTick(location);
                 }
             }
-            device.Next();
+            device.AfterStepTurn();
         }
 
         public void Update(RogueObj obj, int turns, int maxIteration)
@@ -171,7 +169,7 @@ namespace RoguegardUnity
                     {
                         var continueType = updaterState.UpdateObjAndRemoveNull(self, activationDepth);
                         if (continueType == RogueObjUpdaterContinueType.Break) break;
-                        if (RogueDevice.Primary.CalledSynchronizedView)
+                        if (RogueDevice.Primary.HasSynchronizedWork)
                         {
                             yield return Result.View;
                         }

@@ -15,7 +15,7 @@ namespace Roguegard
 
         protected override bool BeApplied(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
         {
-            if (RogueDevice.Primary.VisibleAt(user.Location, user.Position))
+            if (MainCharacterWorkUtility.VisibleAt(user.Location, user.Position))
             {
                 var positioning = RogueCharacterWork.CreateSyncPositioning(user);
                 RogueDevice.AddWork(DeviceKw.EnqueueWork, positioning);

@@ -21,7 +21,7 @@ namespace Roguegard
                 tool.Location == self &&    // 所持していないオブジェクトは置けない。
                 this.Locate(tool, self, self.Location, self.Position, activationDepth)) // 置く
             {
-                if (RogueDevice.Primary.VisibleAt(self.Location, self.Position))
+                if (MainCharacterWorkUtility.VisibleAt(self.Location, self.Position))
                 {
                     RogueDevice.AddWork(DeviceKw.EnqueueWork, RogueCharacterWork.CreateSync(self));
                     RogueDevice.Add(DeviceKw.AppendText, self);

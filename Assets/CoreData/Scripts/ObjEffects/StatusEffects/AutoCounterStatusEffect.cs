@@ -69,7 +69,7 @@ namespace Roguegard
             public bool Invoke(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
             {
                 if (RaycastAssert.RequireTarget(FrontRogueMethodRange.Instance, self, arg, out var target)) return false;
-                if (RogueDevice.Primary.VisibleAt(self.Location, self.Position))
+                if (MainCharacterWorkUtility.VisibleAt(self.Location, self.Position))
                 {
                     var item = RogueCharacterWork.CreateBoneMotion(self, CoreMotions.Discus, false);
                     RogueDevice.AddWork(DeviceKw.EnqueueWork, item);

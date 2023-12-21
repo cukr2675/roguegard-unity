@@ -25,7 +25,7 @@ namespace Roguegard
                 }
                 return false;
             }
-            if (RogueDevice.Primary.VisibleAt(self.Location, self.Position))
+            if (MainCharacterWorkUtility.VisibleAt(self.Location, self.Position))
             {
                 RogueDevice.Add(DeviceKw.AppendText, self);
                 RogueDevice.Add(DeviceKw.AppendText, "は");

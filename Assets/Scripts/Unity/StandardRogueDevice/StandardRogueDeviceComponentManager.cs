@@ -11,7 +11,7 @@ namespace RoguegardUnity
     internal class StandardRogueDeviceComponentManager
     {
         public RogueObj Player { get; private set; }
-        public RogueObj TargetObj { get; private set; }
+        public RogueObj Subject { get; private set; }
         public RogueObj World { get; private set; }
         public RogueOptions Options { get; private set; }
 
@@ -24,7 +24,6 @@ namespace RoguegardUnity
 
         public StandardRogueDeviceEventManager EventManager { get; private set; }
 
-        public bool NextStay => characterRenderSystem.InAnimation || touchController.InAnimation;
         public bool FastForward => Player.Main.Stats.Nutrition >= 1 && touchController.FastForward;
 
         public void Initialize(
@@ -74,7 +73,7 @@ namespace RoguegardUnity
                 gameOverDeviceEventHandler,
                 new SaveDeviceEventHandler(this, touchController),
                 new ChangePlayerDeviceEventHandler(this, touchController, ticker, x => Player = x),
-                new AutoPlayDeviceEventHandler(touchController, x => TargetObj = x),
+                new AutoPlayDeviceEventHandler(touchController, x => Subject = x),
 
                 new ChestDeviceEventHandler(this, openChestMenu),
             };
@@ -87,7 +86,7 @@ namespace RoguegardUnity
         {
             // StandardRogueDeviceData を適用
             Player = data.Player;
-            TargetObj = data.TargetObj;
+            Subject = data.Subject;
             World = data.World;
             Options.Set(data.Options);
 
@@ -124,21 +123,21 @@ namespace RoguegardUnity
             Object.Destroy(parent.gameObject);
         }
 
-        public void Next()
+        public void AfterStepTurn()
         {
-            characterRenderSystem.StartAnimation(TargetObj);
+            characterRenderSystem.StartAnimation(Subject);
             EventManager.ResetCalledSynchronizedView();
 
             // クリックによる移動中に攻撃を受けるなど、入力受付でない状態で割り込まれたとき、移動を中止する。
             if (!touchController.WaitsForInput) { touchController.ClearInput(); }
         }
 
-        public void Update()
+        public bool UpdateAndGetAllowStepTurn()
         {
             if (!touchController.AutoPlayIsEnabled)
             {
-                TargetObj = Player;
-                touchController.MenuOpen(TargetObj);
+                Subject = Player;
+                touchController.MenuOpen(Subject);
             }
 
             ////////////////////////////////////////////////////////////////////////
@@ -147,7 +146,7 @@ namespace RoguegardUnity
 
             // タイルマップタッチとボタン UI の処理
             var deltaTime = 1;
-            var directional = characterRenderSystem.TryGetPositioning(TargetObj, out var playerPosition, out var playerDirection);
+            var directional = characterRenderSystem.TryGetPositioning(Subject, out var playerPosition, out var playerDirection);
             touchController.EarlyUpdateController(directional, playerPosition, playerDirection, deltaTime);
 
 
@@ -156,7 +155,7 @@ namespace RoguegardUnity
             // イベントキューが空になるまで、毎 Update 少しずつ処理する
             ////////////////////////////////////////////////////////////////////////
 
-            var workingNow = characterRenderSystem.UpdateCharactersAndGetWorkingNow(TargetObj, !EventManager.Any, deltaTime, FastForward);
+            var workingNow = characterRenderSystem.UpdateCharactersAndGetWorkingNow(Subject, !EventManager.Any, deltaTime, FastForward);
             if (!workingNow && !touchController.TalkingWait)
             {
                 if (EventManager.Any)
@@ -167,11 +166,11 @@ namespace RoguegardUnity
                 else if (characterRenderSystem.InAnimation)
                 {
                     // 次の RogueCharacterWork がなければ、今ターンのアニメーションを終了させる。
-                    characterRenderSystem.EndAnimation(TargetObj);
+                    characterRenderSystem.EndAnimation(Subject);
                     touchController.NextTurn(Player);
                 }
             }
-            tilemapRenderSystem.Update(TargetObj, touchController.OpenGrid);
+            tilemapRenderSystem.Update(Subject, touchController.OpenGrid);
 
 
 
@@ -180,7 +179,7 @@ namespace RoguegardUnity
             ////////////////////////////////////////////////////////////////////////
 
             // playerPosition にはオブジェクトの実位置ではなく表示用スプライトの位置を使う。
-            if (characterRenderSystem.TryGetPositioning(TargetObj, out var position, out _)) { playerPosition = position; }
+            if (characterRenderSystem.TryGetPositioning(Subject, out var position, out _)) { playerPosition = position; }
 
             // カメラ・メニュー処理
             touchController.LateUpdateController(Player, playerPosition, deltaTime);
@@ -199,6 +198,7 @@ namespace RoguegardUnity
                     touchController.CommandProcessing(Player, FastForward);
                 }
             }
+            return !characterRenderSystem.InAnimation && !touchController.InAnimation;
         }
 
         public void UpdateCharacters()

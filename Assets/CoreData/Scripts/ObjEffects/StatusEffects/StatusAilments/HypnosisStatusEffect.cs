@@ -23,7 +23,7 @@ namespace Roguegard
         protected override IRogueEffect AffectTo(RogueObj target, RogueObj user, float activationDepth, in RogueMethodArgument arg)
         {
             var statusEffect = base.AffectTo(target, user, activationDepth, arg);
-            if (RogueDevice.Primary.VisibleAt(target.Location, target.Position))
+            if (MainCharacterWorkUtility.VisibleAt(target.Location, target.Position))
             {
                 RogueDevice.Add(DeviceKw.AppendText, target);
                 RogueDevice.Add(DeviceKw.AppendText, "は");
@@ -42,7 +42,7 @@ namespace Roguegard
         protected override void RemoveClose(RogueObj self, StatusEffectCloseType closeType = StatusEffectCloseType.Manual)
         {
             SpeedCalculator.SetDirty(self);
-            if (RogueDevice.Primary.VisibleAt(self.Location, self.Position))
+            if (MainCharacterWorkUtility.VisibleAt(self.Location, self.Position))
             {
                 RogueDevice.Add(DeviceKw.AppendText, self);
                 RogueDevice.Add(DeviceKw.AppendText, "の");
@@ -56,7 +56,7 @@ namespace Roguegard
         {
             if (!self.Location.Space.TryGetRoomView(self.Position, out var room, out _)) { room = new RectInt(); }
 
-            if (RogueDevice.Primary.VisibleAt(self.Location, self.Position))
+            if (MainCharacterWorkUtility.VisibleAt(self.Location, self.Position))
             {
                 RogueDevice.Add(DeviceKw.AppendText, self);
                 RogueDevice.Add(DeviceKw.AppendText,  "は混乱している\n");

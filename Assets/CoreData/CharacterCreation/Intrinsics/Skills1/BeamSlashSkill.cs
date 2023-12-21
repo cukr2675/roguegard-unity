@@ -31,7 +31,7 @@ namespace Roguegard.CharacterCreation
             {
                 using var predicator = ForEnemyRogueMethodTarget.Instance.GetPredicator(self, 0f, null);
                 RaycastAssert.RequireTarget(predicator, FacingAnd2FlankingRogueMethodRange.Instance, self, arg, out var position);
-                if (RogueDevice.Primary.VisibleAt(self.Location, self.Position))
+                if (MainCharacterWorkUtility.VisibleAt(self.Location, self.Position))
                 {
                     effect ??= new VariantBoneMotion(CoreMotions.PowerSlash, Color.yellow);
 

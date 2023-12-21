@@ -9,12 +9,12 @@ namespace RoguegardUnity
     internal class AutoPlayDeviceEventHandler : IStandardRogueDeviceEventHandler
     {
         private readonly TouchController touchController;
-        private readonly System.Action<RogueObj> setTargetObj;
+        private readonly System.Action<RogueObj> setSubject;
 
-        public AutoPlayDeviceEventHandler(TouchController touchController, System.Action<RogueObj> setTargetObj)
+        public AutoPlayDeviceEventHandler(TouchController touchController, System.Action<RogueObj> setSubject)
         {
             this.touchController = touchController;
-            this.setTargetObj = setTargetObj;
+            this.setSubject = setSubject;
         }
 
         bool IStandardRogueDeviceEventHandler.TryHandle(IKeyword keyword, int integer, float number, object obj)
@@ -23,7 +23,7 @@ namespace RoguegardUnity
             {
                 // オートプレイ開始
                 touchController.AutoPlayIsEnabled = true;
-                setTargetObj(autoPlayObj);
+                setSubject(autoPlayObj);
                 touchController.MenuOpen(autoPlayObj);
                 return true;
             }

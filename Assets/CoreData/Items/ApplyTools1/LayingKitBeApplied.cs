@@ -79,7 +79,7 @@ namespace Roguegard
                 // 10 ターン経過したらタイルを敷く
                 BaseStatusEffect.Close<ContinuousApplyStatusEffect>(user);
 
-                var visible = RogueDevice.Primary.VisibleAt(user.Location, user.Position);
+                var visible = MainCharacterWorkUtility.VisibleAt(user.Location, user.Position);
                 if (_tileLayer != RogueTileLayer.Floor && topTile.Equals(sourceTile))
                 {
                     // すでに同じタイルが敷かれていたら、逆にタイルを消す（床タイルを除く）

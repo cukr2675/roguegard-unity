@@ -28,7 +28,7 @@ namespace Roguegard.CharacterCreation
             protected override bool Activate(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
             {
                 if (RaycastAssert.RequireTarget(LineOfSight10RogueMethodRange.Instance, self, arg, out var target)) return false;
-                if (RogueDevice.Primary.VisibleAt(self.Location, self.Position))
+                if (MainCharacterWorkUtility.VisibleAt(self.Location, self.Position))
                 {
                     RogueDevice.Add(DeviceKw.AppendText, ":ActivateSkillMsg::2");
                     RogueDevice.Add(DeviceKw.AppendText, self);

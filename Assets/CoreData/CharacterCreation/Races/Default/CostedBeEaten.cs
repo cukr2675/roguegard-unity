@@ -21,7 +21,7 @@ namespace Roguegard
             var nutrition = self.Main.InfoSet.Cost > 0f ? 50 : 0;
             if (nutrition <= 0)
             {
-                if (RogueDevice.Primary.VisibleAt(user.Location, user.Position))
+                if (MainCharacterWorkUtility.VisibleAt(user.Location, user.Position))
                 {
                     RogueDevice.Add(DeviceKw.AppendText, "何も起こらなかった\n");
                 }
@@ -34,7 +34,7 @@ namespace Roguegard
             var oldNutrition = userStats.Nutrition;
             userStats.SetNutrition(user, userStats.Nutrition + nutrition);
             var deltaNutrition = userStats.Nutrition - oldNutrition;
-            if (RogueDevice.Primary.VisibleAt(user.Location, user.Position))
+            if (MainCharacterWorkUtility.VisibleAt(user.Location, user.Position))
             {
                 RogueDevice.Add(DeviceKw.AppendText, user);
                 RogueDevice.Add(DeviceKw.AppendText, "の満腹度が");

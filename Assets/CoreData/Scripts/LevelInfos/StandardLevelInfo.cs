@@ -56,7 +56,7 @@ namespace Roguegard
 
         public override void LevelUp(RogueObj self)
         {
-            if (RogueDevice.Primary.VisibleAt(self.Location, self.Position))
+            if (MainCharacterWorkUtility.VisibleAt(self.Location, self.Position))
             {
                 RogueDevice.Add(DeviceKw.AppendText, self);
                 RogueDevice.Add(DeviceKw.AppendText, "はレベルが上がった！\n");
@@ -108,7 +108,7 @@ namespace Roguegard
 
         public override void LevelDown(RogueObj self)
         {
-            if (RogueDevice.Primary.VisibleAt(self.Location, self.Position))
+            if (MainCharacterWorkUtility.VisibleAt(self.Location, self.Position))
             {
                 RogueDevice.Add(DeviceKw.EnqueueSE, StdKw.LevelDown);
                 RogueDevice.Add(DeviceKw.AppendText, self);

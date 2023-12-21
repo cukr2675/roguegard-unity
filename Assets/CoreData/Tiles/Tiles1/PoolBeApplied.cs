@@ -17,7 +17,7 @@ namespace Roguegard
                 var userMovement = MovementCalculator.Get(user);
                 if (!userMovement.SubIs(StdKw.PoolMovement))
                 {
-                    if (RogueDevice.Primary.VisibleAt(user.Location, user.Position))
+                    if (MainCharacterWorkUtility.VisibleAt(user.Location, user.Position))
                     {
                         RogueDevice.Add(DeviceKw.AppendText, user);
                         RogueDevice.Add(DeviceKw.AppendText, "は川に流された！");

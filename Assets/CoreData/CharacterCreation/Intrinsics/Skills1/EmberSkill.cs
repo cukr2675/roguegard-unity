@@ -28,7 +28,7 @@ namespace Roguegard.CharacterCreation
             protected override bool Activate(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
             {
                 if (RaycastAssert.RequireTarget(FrontCutsCornersRogueMethodRange.Instance, self, arg, out var target)) return false;
-                if (RogueDevice.Primary.VisibleAt(self.Location, self.Position))
+                if (MainCharacterWorkUtility.VisibleAt(self.Location, self.Position))
                 {
                     RogueDevice.Add(DeviceKw.AppendText, self);
                     RogueDevice.Add(DeviceKw.AppendText, "は");

@@ -54,7 +54,7 @@ namespace Roguegard.CharacterCreation
                             closable.RemoveClose(self);
                         }
                     }
-                    if (RogueDevice.Primary.VisibleAt(self.Location, self.Position))
+                    if (MainCharacterWorkUtility.VisibleAt(self.Location, self.Position))
                     {
                         RogueDevice.Add(DeviceKw.EnqueueSE, StdKw.Heal);
                         RogueDevice.Add(DeviceKw.AppendText, ":BraveHeartMsg::1");

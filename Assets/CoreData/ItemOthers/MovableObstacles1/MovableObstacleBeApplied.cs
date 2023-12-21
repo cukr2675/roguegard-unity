@@ -17,7 +17,7 @@ namespace Roguegard
 
             if (SpaceUtility.TryLocate(self, targetPosition))
             {
-                if (RogueDevice.Primary.VisibleAt(self.Location, self.Position))
+                if (MainCharacterWorkUtility.VisibleAt(self.Location, self.Position))
                 {
                     RogueDevice.AddWork(DeviceKw.EnqueueWork, syncWork);
                     var work = RogueCharacterWork.CreateWalk(self, self.Position, self.Main.Stats.Direction, KeywordBoneMotion.Walk, true);
