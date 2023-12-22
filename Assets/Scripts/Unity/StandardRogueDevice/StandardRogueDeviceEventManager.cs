@@ -39,15 +39,15 @@ namespace RoguegardUnity
                 }
                 else if (other == DeviceKw.EnqueueInteger)
                 {
-                    touchController.Log(integer);
+                    touchController.EventManager.AppendInteger(integer);
                 }
                 else if (other == DeviceKw.EnqueueNumber)
                 {
-                    touchController.Log(number);
+                    touchController.EventManager.AppendNumber(number);
                 }
                 else if (other == DeviceKw.StartTalk)
                 {
-                    touchController.StartTalk();
+                    touchController.EventManager.Add((IKeyword)other);
                 }
                 else if (other == DeviceKw.EndTalk)
                 {
@@ -62,13 +62,13 @@ namespace RoguegardUnity
                 else if (other == DeviceKw.EnqueueSE || other == DeviceKw.EnqueueSEAndWait)
                 {
                     messageWorkQueue.Dequeue(out var seName, out _, out _, out _, out _);
-                    touchController.Play((IKeyword)seName, other == DeviceKw.EnqueueSEAndWait);
+                    touchController.EventManager.Add((IKeyword)other, obj: seName);
                     if (other == DeviceKw.EnqueueSEAndWait) break;
                 }
                 else if (other == DeviceKw.EnqueueWaitSeconds)
                 {
                     messageWorkQueue.Dequeue(out _, out _, out _, out var waitSeconds, out _);
-                    touchController.StartWait(waitSeconds);
+                    touchController.EventManager.Add((IKeyword)other, number: waitSeconds);
                     break;
                 }
                 else if (other == DeviceKw.EnqueueViewDequeueState)
@@ -80,12 +80,12 @@ namespace RoguegardUnity
                 }
                 else if (other == DeviceKw.HorizontalRule)
                 {
-                    touchController.Log(player, other, stackTrace);
+                    touchController.EventManager.Append(player, other, stackTrace);
                 }
                 else
                 {
                     other = StandardRogueDeviceUtility.LocalizeMessage(other, player, messageWorkQueue);
-                    touchController.Log(player, other, stackTrace);
+                    touchController.EventManager.Append(player, other, stackTrace);
                 }
             }
         }

@@ -6,7 +6,6 @@ using System.Diagnostics;
 using UnityEngine.UI;
 using TMPro;
 using Roguegard;
-using Roguegard.CharacterCreation;
 using Roguegard.Device;
 
 namespace RoguegardUnity
@@ -14,7 +13,7 @@ namespace RoguegardUnity
     /// <summary>
     /// メニュー UI
     /// </summary>
-    public class MenuController : MonoBehaviour, IModelsMenuRoot
+    public class MenuController : MonoBehaviour
     {
         [SerializeField] private TMP_Text _floorTitleText = null;
         [SerializeField] private CanvasGroup _floorTitleGroup = null;
@@ -36,38 +35,26 @@ namespace RoguegardUnity
 
         [SerializeField] private ScrollModelsMenuView _scrollMenu = null;
 
-        private SoundController soundController;
-        private WaitTimer waitTimer;
-
-        private Dictionary<IKeyword, ModelsMenuView> table;
-
         private MainMenu mainMenu;
         private LongDownMenu longDownMenu;
         private ObjsMenu objsMenu;
         private SelectFileMenu selectFileMenu;
 
-        private RogueObj player;
+        private StandardMenuRoot menuManager;
 
-        private Stack<StackItem> stack;
+        internal ModelsMenuEventManager EventManager => menuManager.EventManager;
 
-        private bool currentMenuIsDialog;
-
-        public bool IsDone { get; private set; }
+        public bool IsDone => menuManager.IsDone;
 
         /// <summary>
         /// メッセージがスクロール中 or メニュー操作中は待機
         /// </summary>
-        public bool Wait => _messageController.IsScrollingNow || stack.Count >= 1 || soundController.Wait || waitTimer.Wait;
+        public bool Wait => _messageController.IsScrollingNow || menuManager.Any || EventManager.Wait;
 
-        public bool TalkingWait => _messageController.IsTalkingNow || stack.Count >= 1 || soundController.Wait || waitTimer.Wait;
-
-        public StatsWindow Stats => _statsWindow;
+        public bool TalkingWait => _messageController.IsTalkingNow || menuManager.Any || EventManager.Wait;
 
         internal void Initialize(SoundController soundController, RogueSpriteRendererPool rendererPool)
         {
-            this.soundController = soundController;
-            waitTimer = new WaitTimer();
-
             var objCommandMenu = new ObjCommandMenu();
             var putInCommandMenu = new PutIntoChestCommandMenu();
             var takeOutCommandMenu = new TakeOutFromChestCommandMenu();
@@ -80,10 +67,7 @@ namespace RoguegardUnity
             longDownMenu = new LongDownMenu(objsMenu, objCommandMenu);
             selectFileMenu = new SelectFileMenu(_scrollMenu);
 
-            stack = new Stack<StackItem>();
-
             _touchMask.raycastTarget = false;
-
             _scrollMenu.Initialize();
             _summaryMenu.Initialize();
             _detailsMenu.Initialize();
@@ -92,7 +76,7 @@ namespace RoguegardUnity
             var scrollSensitivity = 64f;
             SetScrollSensitivity(scrollSensitivity);
 
-            table = new Dictionary<IKeyword, ModelsMenuView>();
+            var table = new Dictionary<IKeyword, ModelsMenuView>();
             table.Add(DeviceKw.MenuThumbnail, _thumbnailMenu);
             table.Add(DeviceKw.MenuScroll, _scrollMenu);
             table.Add(DeviceKw.MenuCommand, _commandMenu);
@@ -104,12 +88,12 @@ namespace RoguegardUnity
             table.Add(DeviceKw.MenuLog, _messageController.LogView);
             table.Add(DeviceKw.MenuTalk, _messageController.TalkView);
             table.Add(DeviceKw.MenuTalkChoices, _talkChoicesMenu);
+            menuManager = new StandardMenuRoot(_touchMask, _messageController, _captionWindow, _statsWindow, soundController, table);
         }
 
-        public void Open(RogueObj player)
+        public void Open(RogueObj menuSubject)
         {
-            this.player = player;
-            waitTimer.Reset();
+            EventManager.MenuSubject = menuSubject;
         }
 
         public void GetInfo(out IModelsMenu openChestMenu)
@@ -137,204 +121,59 @@ namespace RoguegardUnity
             }
         }
 
-        public void CloseMessage()
+        public void OpenMainMenu(RogueObj subject)
         {
-            _messageController.ShowMessage(false);
+            EventManager.Add(DeviceKw.EnqueueSE, obj: DeviceKw.Submit);
+            menuManager.OpenInitialMenu(mainMenu, subject, null, RogueMethodArgument.Identity);
         }
 
-        public void OpenMainMenu()
+        public void OpenGroundMenu(RogueObj subject)
         {
-            // メニューを一から開いたときスタックをリセットする。
-            stack.Clear();
-
-            OpenMenu(mainMenu, player, null, RogueMethodArgument.Identity, RogueMethodArgument.Identity);
-            _touchMask.raycastTarget = true;
-
-            Add(DeviceKw.EnqueueSE, AddType.Object, obj: DeviceKw.Submit);
+            EventManager.Add(DeviceKw.EnqueueSE, obj: DeviceKw.Submit);
+            menuManager.OpenInitialMenu(objsMenu.Ground, subject, null, new(targetObj: subject));
         }
 
-        public void OpenGroundMenu()
+        public void OpenLongDownMenu(RogueObj subject, Vector2Int position)
         {
-            // メニューを一から開いたときスタックをリセットする。
-            stack.Clear();
+            EventManager.Add(DeviceKw.EnqueueSE, obj: DeviceKw.Submit);
 
-            var arg = new RogueMethodArgument(targetObj: player, count: 1);
-            OpenMenu(objsMenu.Ground, player, null, arg, RogueMethodArgument.Identity);
-            _touchMask.raycastTarget = true;
-
-            Add(DeviceKw.EnqueueSE, AddType.Object, obj: DeviceKw.Submit);
-        }
-
-        public void OpenLongDownMenu(Vector2Int position)
-        {
-            // メニューを一から開いたときスタックをリセットする。
-            stack.Clear();
-
-            _touchMask.raycastTarget = true;
-
-            var view = player.Get<ViewInfo>();
+            var view = subject.Get<ViewInfo>();
             for (int i = 0; i < view.VisibleObjCount; i++)
             {
                 var obj = view.GetVisibleObj(i);
                 if (obj == null || obj.Position != position) continue;
 
                 // オブジェクトを長押ししたとき
-                var arg = new RogueMethodArgument(targetObj: obj);
-                OpenMenu(longDownMenu, player, null, arg, RogueMethodArgument.Identity);
-                Add(DeviceKw.EnqueueSE, AddType.Object, obj: DeviceKw.Submit);
+                menuManager.OpenInitialMenu(longDownMenu, subject, null, new(targetObj: obj));
                 return;
             }
             {
                 // オブジェクトが見つからないときはタイルを見る
                 view.GetTile(position, out _, out var tile, out _);
-                var arg = new RogueMethodArgument(other: tile);
-                OpenMenu(longDownMenu, player, null, arg, RogueMethodArgument.Identity);
-                Add(DeviceKw.EnqueueSE, AddType.Object, obj: DeviceKw.Submit);
+                menuManager.OpenInitialMenu(longDownMenu, subject, null, new(other: tile));
             }
         }
 
         public void OpenSelectFile(SelectFileMenu.SelectCallback selectCallback, SelectFileMenu.AddCallback addCallback = null)
         {
             selectFileMenu.SetCallback(selectCallback, addCallback);
-            OpenMenu(selectFileMenu, null, null, RogueMethodArgument.Identity);
+            menuManager.OpenInitialMenu(selectFileMenu, null, null, RogueMethodArgument.Identity);
         }
 
-        public IModelsMenuView Get(IKeyword keyword)
+        public void OpenInitialMenu(IModelsMenu menu, RogueObj self, RogueObj user, in RogueMethodArgument arg, bool enableTouchMask = true)
         {
-            return table.TryGetValue(keyword, out var menuView) ? menuView : null;
+            menuManager.OpenInitialMenu(menu, self, user, arg, enableTouchMask);
         }
 
-        public void OpenMenu(IModelsMenu menu, RogueObj self, RogueObj user, in RogueMethodArgument arg, in RogueMethodArgument backArg)
-        {
-            _messageController.ShowMessage(false);
+        public void ResetDone() => menuManager.ResetDone();
 
-            HideAll();
-            _statsWindow.Show(false);
-            menu.OpenMenu(this, self, user, arg);
-
-            if (stack.TryPeek(out var peek))
-            {
-                peek.Arg = backArg;
-            }
-            currentMenuIsDialog = false;
-
-            var stackItem = new StackItem();
-            stackItem.Set(menu, self, user, arg);
-            stack.Push(stackItem);
-        }
-
-        public void OpenMenu(IModelsMenu menu, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-        {
-            _messageController.ShowMessage(false);
-
-            HideAll();
-            _statsWindow.Show(false);
-            menu.OpenMenu(this, self, user, arg);
-
-            stack.Clear();
-            currentMenuIsDialog = false;
-
-            var stackItem = new StackItem();
-            stackItem.Set(menu, self, user, arg);
-            stack.Push(stackItem);
-        }
-
-        public void OpenMenuAsDialog(IModelsMenu menu, RogueObj self, RogueObj user, in RogueMethodArgument arg, in RogueMethodArgument backArg)
-        {
-            _messageController.ShowMessage(false);
-
-            menu?.OpenMenu(this, self, user, arg);
-            if (!currentMenuIsDialog)
-            {
-                if (stack.TryPeek(out var peek))
-                {
-                    peek.Arg = backArg;
-                }
-                currentMenuIsDialog = true;
-            }
-        }
-
-        public void Done()
-        {
-            stack.Clear();
-            HideAll();
-            _statsWindow.Show(false);
-            IsDone = true;
-            currentMenuIsDialog = false;
-            _touchMask.raycastTarget = false;
-        }
-
-        public void Back()
-        {
-            HideAll();
-            _statsWindow.Show(false);
-            if (currentMenuIsDialog)
-            {
-                currentMenuIsDialog = false;
-            }
-            else
-            {
-                stack.Pop();
-            }
-            if (stack.TryPeek(out var stackItem))
-            {
-                stackItem.Menu.OpenMenu(this, stackItem.Self, stackItem.User, stackItem.Arg);
-            }
-            else
-            {
-                UnityEngine.Debug.LogWarning("?");
-                Done();
-            }
-        }
-
-        public void ResetDone()
-        {
-            IsDone = false;
-        }
-
-        public void StartTalk()
-        {
-            _messageController.StartTalk();
-        }
-
-        public void WaitEndOfTalk()
-        {
-            _messageController.WaitEndOfTalk();
-        }
-
-        public void Append(RogueObj player, object obj, StackTrace stackTrace)
-        {
-            _messageController.Append(player, obj, stackTrace);
-        }
-
-        public void AppendInteger(int integer)
-        {
-            _messageController.AppendInteger(integer);
-        }
-
-        public void AppendNumber(float number)
-        {
-            _messageController.AppendNumber(number);
-        }
-
-        public void ClearText()
-        {
-            _messageController.ClearText();
-        }
-
-        public void UpdateUI(int deltaTime)
-        {
-            _messageController.UpdateUI(soundController, deltaTime);
-            waitTimer.UpdateTimer(deltaTime);
-        }
-
-        public void ShowFloorTitle(string text)
+        private void ShowFloorTitle(string text)
         {
             _floorTitleText.text = text;
             _floorTitleGroup.alpha = 1f;
         }
 
-        public void BehindFloorTitle()
+        private void BehindFloorTitle()
         {
             _floorTitleGroup.alpha = 0f;
         }
@@ -352,91 +191,6 @@ namespace RoguegardUnity
                 canvasGroup.alpha = 0f;
                 canvasGroup.interactable = false;
                 canvasGroup.blocksRaycasts = false;
-            }
-        }
-
-        private void HideAll()
-        {
-            foreach (var item in table)
-            {
-                Show(item.Value.CanvasGroup, false);
-            }
-            _captionWindow.Show(false);
-        }
-
-        public void Play(IKeyword keyword, bool wait)
-        {
-            soundController.Play(keyword, wait);
-        }
-
-        public void StartWait(float seconds)
-        {
-            waitTimer.Start(seconds);
-        }
-
-        private void Add(IKeyword keyword, AddType type, int integer = 0, float number = 0f, object obj = null)
-        {
-            if (keyword == null) throw new System.ArgumentNullException(nameof(keyword));
-
-            if (keyword == DeviceKw.AppendText)
-            {
-                if (type == AddType.Integer) { AppendInteger(integer); }
-                else if (type == AddType.Float) { AppendNumber(number); }
-                else if (obj is string text) { Append(player, StandardRogueDeviceUtility.Localize(text), null); }
-                else { Append(player, obj, null); }
-                return;
-            }
-            if (keyword == DeviceKw.StartTalk)
-            {
-                StartTalk();
-                return;
-            }
-            if (keyword == DeviceKw.WaitEndOfTalk)
-            {
-                WaitEndOfTalk();
-                return;
-            }
-            if (keyword == DeviceKw.EnqueueSE && type == AddType.Object)
-            {
-                soundController.Play((IKeyword)obj, keyword == DeviceKw.EnqueueSEAndWait);
-                return;
-            }
-
-            UnityEngine.Debug.LogError($"{keyword.Name} に対応するキーワードが見つかりません。（obj: {obj}）");
-        }
-
-        void IModelsMenuRoot.AddInt(IKeyword keyword, int integer) => Add(keyword, AddType.Integer, integer: integer);
-        void IModelsMenuRoot.AddFloat(IKeyword keyword, float number) => Add(keyword, AddType.Float, number: number);
-        void IModelsMenuRoot.AddObject(IKeyword keyword, object obj) => Add(keyword, AddType.Object, obj: obj);
-
-        void IModelsMenuRoot.AddWork(IKeyword keyword, in RogueCharacterWork work)
-        {
-            throw new System.NotSupportedException();
-        }
-
-        private enum AddType
-        {
-            Integer,
-            Float,
-            Object
-        }
-
-        private class StackItem
-        {
-            public IModelsMenu Menu { get; private set; }
-
-            public RogueObj Self { get; private set; }
-
-            public RogueObj User { get; private set; }
-
-            public RogueMethodArgument Arg { get; set; }
-
-            public void Set(IModelsMenu menu, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                Menu = menu;
-                Self = self;
-                User = user;
-                Arg = arg;
             }
         }
     }

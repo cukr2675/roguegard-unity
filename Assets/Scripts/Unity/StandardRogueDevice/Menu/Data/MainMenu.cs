@@ -33,7 +33,7 @@ namespace RoguegardUnity
         void IModelsMenu.OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         {
             root.Get(DeviceKw.MenuThumbnail).OpenView(ChoicesModelsMenuItemController.Instance, choices, root, self, user, arg);
-            var parent = (MenuController)root;
+            var parent = (StandardMenuRoot)root;
             parent.Stats.SetText(self);
             parent.Stats.SetDungeon(self.Location);
             parent.Stats.Show(true);

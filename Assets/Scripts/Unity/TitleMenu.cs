@@ -81,13 +81,13 @@ namespace RoguegardUnity
             SetBackgroundSprite(backgroundA, backgroundB, windowColor);
             menuController.SetWindowFrame(backgroundA, backgroundB, windowColor);
 
-            menuController.OpenMenu(new MainMenu(this), null, null, RogueMethodArgument.Identity);
+            menuController.OpenInitialMenu(new MainMenu(this), null, null, RogueMethodArgument.Identity, false);
         }
 
         private void Update()
         {
             var deltaTime = 1;
-            menuController.UpdateUI(deltaTime);
+            menuController.EventManager.UpdateUI(deltaTime);
         }
 
         private void SetBackgroundSprite(Sprite sprite, Sprite spriteB, Color backgroundColor)

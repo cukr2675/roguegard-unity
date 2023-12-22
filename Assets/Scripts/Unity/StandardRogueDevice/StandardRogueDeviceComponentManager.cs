@@ -72,7 +72,7 @@ namespace RoguegardUnity
             {
                 gameOverDeviceEventHandler,
                 new SaveDeviceEventHandler(this, touchController),
-                new ChangePlayerDeviceEventHandler(this, touchController, ticker, x => Player = x),
+                new ChangePlayerDeviceEventHandler(this, touchController, ticker, x => Player = Subject = x),
                 new AutoPlayDeviceEventHandler(touchController, x => Subject = x),
 
                 new ChestDeviceEventHandler(this, openChestMenu),
@@ -91,7 +91,8 @@ namespace RoguegardUnity
             Options.Set(data.Options);
 
             // 適用後の準備処理
-            touchController.Open(Player);
+            touchController.OpenWalker(Player);
+            touchController.MenuOpen(Subject);
             ticker.Reset();
             UpdateCharacters();
 
@@ -195,7 +196,7 @@ namespace RoguegardUnity
                 else
                 {
                     // コマンド入力処理を行う
-                    touchController.CommandProcessing(Player, FastForward);
+                    touchController.CommandProcessing(Player, Subject, FastForward);
                 }
             }
             return !characterRenderSystem.InAnimation && !touchController.InAnimation;
