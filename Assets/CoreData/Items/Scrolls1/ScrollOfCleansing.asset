@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 797073a39246ce24195bfdd54b79f0dc, type: 3}
-  m_Name: ScrollOfConfuseMonster
+  m_Name: ScrollOfCleansing
   m_EditorClassIdentifier: 
   _overridesCost: 0
   _cost: 1
@@ -82,9 +82,9 @@ MonoBehaviour:
       _ref:
         rid: -2
     _beApplied:
-      _script: {fileID: 11500000, guid: 4b1272a3f76d22840b578c7af7ae95a6, type: 3}
+      _script: {fileID: 11500000, guid: 639ef88e4a133914abead4260014bf6d, type: 3}
       _ref:
-        rid: 4750243674241892354
+        rid: 4750243674241892364
     _beThrown:
       _script: {fileID: 0}
       _ref:
@@ -117,7 +117,7 @@ MonoBehaviour:
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
-    - rid: 4750243674241892354
-      type: {class: ScrollOfConfuseMonsterBeApplied, ns: Roguegard, asm: Roguegard.CoreData}
+    - rid: 4750243674241892364
+      type: {class: ScrollOfCleansingBeApplied, ns: Roguegard, asm: Roguegard.CoreData}
       data:
         _assemblyReflectionAssetDummy: 

@@ -63,6 +63,18 @@ MonoBehaviour:
     m_Key: StinkingCloud::d
     m_Metadata:
       m_Items: []
+  - m_Id: 3515569601196032
+    m_Key: ScrollOfCleansing
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3515693207334912
+    m_Key: ScrollOfCleansing::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3515702468358144
+    m_Key: ScrollOfCleansing::d
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

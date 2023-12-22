@@ -34,6 +34,10 @@ MonoBehaviour:
     m_Localized: StinkingCloud
     m_Metadata:
       m_Items: []
+  - m_Id: 3515569601196032
+    m_Localized: ScrollOfCleansing
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

@@ -24,7 +24,7 @@ namespace Roguegard
                 RogueDevice.Add(DeviceKw.AppendText, "を読んだ！\n");
             }
 
-            var value = AffectableValue.Get();
+            using var value = AffectableValue.Get();
             value.Initialize(DungeonInfo.GetLocationVisibleRadius(self));
             ValueEffectState.AffectValue(StdKw.View, value, self);
             var sqrVisibleRadius = value.MainValue * value.MainValue;
