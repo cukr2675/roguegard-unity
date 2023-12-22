@@ -3,7 +3,6 @@ Shader "Roguegard/UI/CustomShift"
     Properties
     {
         _SaturationThreshold ("SaturationThreshold", Float) = .3
-        _ValueThreshold("ValueThreshold", Float) = .3
         [Header(OnLowSaturation)]
         _ShiftS0 ("ShiftS0", Float) = -.25
         _ShiftV0 ("ShiftV0", Float) = 0
@@ -90,9 +89,10 @@ Shader "Roguegard/UI/CustomShift"
             // テクスチャの RGB で設定色の hsv をシフトする
             fixed3 custom_shift(half3 hsv, fixed4 tex)
             {
-                // Renderer.color の彩度, 明度を SaturationThreshold, ValueThreshold と比較して、シフトパターンを判定する。
-                // 彩度 >= SaturationThreshold || 明度 >= ValueThreshold なら S1, V1 、それ以外は S0, V0 。
-                int satRatio = step(1., max(hsv.y / _SaturationThreshold, hsv.z / _ValueThreshold));
+                // Renderer.color の彩度を SaturationThreshold と比較して、シフトパターンを判定する。
+                // 彩度 >= SaturationThreshold なら S1, V1 、それ以外は S0, V0 。
+                // 白肌と褐色肌で影色を変えるために明度は比較しない。
+                int satRatio = step(1., hsv.y / _SaturationThreshold);
                 half3 shift = tex.xyz - 128. / 255.;
                 shift.xyz *= 2.; // -1 ~ +1 の範囲を扱うため２倍にする。
                 shift.yz += lerp(half2(_ShiftS0, _ShiftV0), half2(_ShiftS1, _ShiftV1), satRatio) * shift.x;
