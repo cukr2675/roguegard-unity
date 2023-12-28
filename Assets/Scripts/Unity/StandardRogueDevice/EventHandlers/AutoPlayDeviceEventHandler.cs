@@ -27,6 +27,7 @@ namespace RoguegardUnity
                 // オートプレイ開始
                 setSubject(autoPlayObj);
                 touchController.MenuOpen(autoPlayObj, true);
+                componentManager.UpdateCharacters();
                 return true;
             }
             return false;
@@ -36,6 +37,7 @@ namespace RoguegardUnity
         {
             setSubject(componentManager.Player);
             touchController.MenuOpen(componentManager.Player, false);
+            componentManager.UpdateCharacters();
         }
     }
 }
