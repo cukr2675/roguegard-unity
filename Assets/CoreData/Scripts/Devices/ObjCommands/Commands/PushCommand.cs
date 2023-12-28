@@ -2,27 +2,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-using Roguegard;
-using Roguegard.Device;
+using Roguegard.Extensions;
 
-namespace RoguegardUnity
+namespace Roguegard
 {
-    public class PushCommandAction : IDeviceCommandAction
+    public class PushCommand : BaseObjCommand
     {
-        public static PushCommandAction Instance { get; } = new PushCommandAction();
+        public override string Name => "押す";
 
         private static readonly PushRogueMethod pushRogueMethod = new PushRogueMethod();
 
-        public bool CommandInvoke(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
+        public override bool CommandInvoke(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
         {
+            var direction = RogueDirection.FromSignOrLowerLeft(arg.TargetObj.Position - self.Position);
             var result = RogueMethodAspectState.Invoke(StdKw.Push, pushRogueMethod, self, user, activationDepth, arg);
             if (!result) return false;
 
-            // 謚ｼ縺吶�ｮ縺ｫ謌仙粥縺励◆縺ｨ縺肴款縺励◆譁ｹ蜷代↓荳豁ｩ遘ｻ蜍輔☆繧九�
-            var targetPosition = arg.TargetObj.Position;
-            var walkArg = new RogueMethodArgument(targetPosition: targetPosition);
-            result = WalkCommandAction.Instance.CommandInvoke(self, user, activationDepth, walkArg);
-            return result;
+            // 押すのに成功したとき押した方向に一歩移動する。
+            this.Walk(self, direction, activationDepth);
+
+            // 移動できなくても押せたらターン経過させる
+            return true;
+        }
+
+        public override ISkillDescription GetSkillDescription(RogueObj self, RogueObj tool)
+        {
+            return null;
         }
 
         private class PushRogueMethod : IActiveRogueMethod

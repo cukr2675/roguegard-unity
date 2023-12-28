@@ -45,6 +45,8 @@ namespace RoguegardUnity
         public bool OpenGrid => _inputController.OpenGrid;
         public bool FastForward => _inputController.FastForward;
 
+        private static readonly PushCommand pushCommand = new PushCommand();
+
         internal void Initialize(Tilemap tilemap, SoundController soundController, RogueSpriteRendererPool rendererPool, System.Action stopAutoPlay)
         {
             _inputController.LongPressThresholdTurns = 4;
@@ -315,7 +317,7 @@ namespace RoguegardUnity
                             {
                                 // 大岩をクリックして押して移動させる
                                 var arg = new RogueMethodArgument(targetObj: obj);
-                                deviceInfo.SetDeviceCommand(PushCommandAction.Instance, player, arg);
+                                deviceInfo.SetDeviceCommand(pushCommand, player, arg);
                                 EndTurn();
                                 ClearInput();
                                 return;
