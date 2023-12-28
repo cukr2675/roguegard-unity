@@ -10,21 +10,21 @@ namespace RoguegardUnity
     {
         [SerializeField] private bool _stop = false;
 
-        private bool injected;
+        private bool updating;
 
         private TickEnumerator tick = new TickEnumerator();
 
         private void Update()
         {
-            if (injected)
+            if (updating)
             {
                 // 処理が中断されたとき例外が発生したとみなして、静的フィールドを初期化する。
-                Debug.Log("Injected");
+                Debug.Log($"{nameof(StaticID.Next)}");
                 StaticID.Next();
             }
-            injected = true;
+            updating = true;
             tick.Update(_stop ? 0 : 10);
-            injected = false;
+            updating = false;
         }
 
         public void UpdateOnce()
