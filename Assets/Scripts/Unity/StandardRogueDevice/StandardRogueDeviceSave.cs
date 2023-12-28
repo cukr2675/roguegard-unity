@@ -86,6 +86,7 @@ namespace RoguegardUnity
             var world = RoguegardSettings.WorldGenerator.CreateObj(null, Vector2Int.zero, random);
             var player = characterCreationDataBuilder.CreateObj(world, Vector2Int.zero, random);
             LobbyMembers.Add(player);
+            LobbyMembers.SetCharacterCreationDataBuilder(player, characterCreationDataBuilder);
             LobbyMembers.SetSavePoint(player, newGamePointInfo);
             player.SetInfo(new ViewInfo());
 

@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using Roguegard.CharacterCreation;
+
 namespace Roguegard
 {
     public static class LobbyMembers
@@ -52,6 +54,30 @@ namespace Roguegard
             return result;
         }
 
+        public static CharacterCreationDataBuilder GetCharacterCreationDataBuilder(RogueObj obj)
+        {
+            if (obj.TryGet<MemberInfo>(out var info))
+            {
+                return info.Data;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public static void SetCharacterCreationDataBuilder(RogueObj obj, CharacterCreationDataBuilder builder)
+        {
+            if (obj.TryGet<MemberInfo>(out var info))
+            {
+                info.Data = builder;
+            }
+            else
+            {
+                Debug.LogWarning($"{obj} はロビーメンバーではありません。");
+            }
+        }
+
         public static ISavePointInfo GetSavePoint(RogueObj obj)
         {
             if (obj.TryGet<MemberInfo>(out var info))
@@ -91,6 +117,8 @@ namespace Roguegard
         [ObjectFormer.Formable]
         private class MemberInfo : IRogueObjInfo
         {
+            public CharacterCreationDataBuilder Data { get; set; }
+
             public ISavePointInfo SavePoint { get; set; }
 
             public bool IsExclusedWhenSerialize => false;

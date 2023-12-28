@@ -62,6 +62,7 @@ namespace Roguegard
                         character = builder.CreateObj(null, Vector2Int.zero, RogueRandom.Primary);
                         LobbyMembers.Add(character, world);
                     }
+                    LobbyMembers.SetCharacterCreationDataBuilder(character, builder);
                 }
 
                 var lobbyMembers = LobbyMembers.GetMembersByCharacter(player);
@@ -167,8 +168,7 @@ namespace Roguegard
                 public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
                 {
                     var character = arg.TargetObj;
-                    var infoSet = (CharacterCreationInfoSet)character.Main.BaseInfoSet;
-                    var builder = (CharacterCreationDataBuilder)infoSet.Data;
+                    var builder = LobbyMembers.GetCharacterCreationDataBuilder(character);
                     builder = new CharacterCreationDataBuilder(builder);
 
                     root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
