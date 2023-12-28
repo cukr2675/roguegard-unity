@@ -23,14 +23,12 @@ namespace RoguegardUnity
             if (keyword == DeviceKw.AutoSave)
             {
                 // オートセーブ
-                //var savePointInfo = (ISavePointInfo)obj;
                 Save(null, StandardRogueDeviceSave.RootDirectory + "/AutoSave.gard", true);
                 return true;
             }
             if (keyword == DeviceKw.SaveGame)
             {
                 // 名前を付けてセーブ
-                //var savePointInfo = (ISavePointInfo)obj;
                 touchController.OpenSelectFile(
                     (root, path) => Save(root, path, false),
                     (root) => StandardRogueDeviceSave.GetNewNumberingPath(
@@ -91,6 +89,8 @@ namespace RoguegardUnity
                     RogueDevice.Add(DeviceKw.AppendText, "にセーブしました\n");
                 }
             });
+
+            componentManager.LoadSavePoint(player);
         }
 
         private void OpenLoadInGame()

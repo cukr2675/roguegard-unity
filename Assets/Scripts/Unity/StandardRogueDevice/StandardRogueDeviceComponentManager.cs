@@ -125,6 +125,7 @@ namespace RoguegardUnity
             UpdateCharacters();
 
             LobbyMembers.SetSavePoint(Player, playerSavePoint);
+            LoadSavePoint(Player);
         }
 
         public void Close()
@@ -132,18 +133,27 @@ namespace RoguegardUnity
             Object.Destroy(parent.gameObject);
         }
 
+        public void LoadSavePoint(RogueObj obj)
+        {
+            var savePoint = LobbyMembers.GetSavePoint(obj);
+            if (savePoint == null || savePoint == dummySavePoint) return;
+
+            default(IActiveRogueMethodCaller).LoadSavePoint(obj, 0f, savePoint);
+            LobbyMembers.SetSavePoint(obj, null);
+        }
+
         public void AfterStepTurn()
         {
-            // セーブポイントから復帰する
-            var lobbyMembers = LobbyMembers.GetMembersByCharacter(World.Space.Objs[0]);
-            for (int i = 0; i < lobbyMembers.Count; i++)
+            // セーブ前に復帰してしまわないようにする
+            var playerSavePoint = LobbyMembers.GetSavePoint(Player);
+            if (playerSavePoint == null)
             {
-                var lobbyMember = lobbyMembers[i];
-                var savePoint = LobbyMembers.GetSavePoint(lobbyMember);
-                if (savePoint == null || savePoint == dummySavePoint) continue;
-
-                default(IActiveRogueMethodCaller).LoadSavePoint(lobbyMember, 0f, savePoint);
-                LobbyMembers.SetSavePoint(lobbyMember, null);
+                // セーブポイントから復帰する
+                var lobbyMembers = LobbyMembers.GetMembersByCharacter(World.Space.Objs[0]);
+                for (int i = 0; i < lobbyMembers.Count; i++)
+                {
+                    LoadSavePoint(lobbyMembers[i]);
+                }
             }
 
             characterRenderSystem.StartAnimation(Subject);

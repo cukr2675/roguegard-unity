@@ -33,7 +33,7 @@ namespace Roguegard
             LobbyMembers.SetSavePoint(player, info);
 
             // プレイヤーのときだけオートセーブする
-            if (RogueDevice.Primary.Player == player) { RogueDevice.Add(DeviceKw.AutoSave, info); }
+            if (RogueDevice.Primary.Player == player) { RogueDevice.Add(DeviceKw.AutoSave, 0); }
 
             return true;
         }
