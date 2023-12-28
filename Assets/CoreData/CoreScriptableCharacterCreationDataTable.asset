@@ -20,6 +20,10 @@ MonoBehaviour:
   - {fileID: 102900000, guid: a52368c33c47fbc4ba2275827f65d8b9, type: 3}
   - {fileID: 102900000, guid: f327df6ee002dd54e8398f6e44441aba, type: 3}
   _items:
+  - _key: Core.BomberShell
+    _asset: {fileID: 11400000, guid: 2a606c0d5a04f04459e91ba223e139e3, type: 2}
+  - _key: Core.BomberTortoise
+    _asset: {fileID: 11400000, guid: 319daf1c7e8ff884696eaf9bf8e827c0, type: 2}
   - _key: Core.FloatingEye
     _asset: {fileID: 11400000, guid: 2eabc8dce52fcea4fb279e68a8194353, type: 2}
   - _key: Core.Goblin
@@ -62,6 +66,8 @@ MonoBehaviour:
     _asset: {fileID: 11400000, guid: c3b5691c9b4d42c4d9b2e6b0134e372c, type: 2}
   - _key: Core.PreparationKit
     _asset: {fileID: 11400000, guid: 2c07a029ce15f914c86a49e956e04590, type: 2}
+  - _key: Core.Stool
+    _asset: {fileID: 11400000, guid: a89d1895d6b9e39429f6d5b3229a3e15, type: 2}
   - _key: Core.Chest
     _asset: {fileID: 11400000, guid: 237bac36d0a0eb54c9136908fccf22e1, type: 2}
   - _key: Core.Storage
@@ -80,6 +86,8 @@ MonoBehaviour:
     _asset: {fileID: 11400000, guid: f28ebee9cf9bcd94c84b7522abb8e7fa, type: 2}
   - _key: Core.Jackboots
     _asset: {fileID: 11400000, guid: 893d0f722f7ba394c9d86ec24df4be35, type: 2}
+  - _key: Core.LeatherGreaves
+    _asset: {fileID: 11400000, guid: 671f3159f2afabf4487efc3fac912e05, type: 2}
   - _key: Core.Loafers
     _asset: {fileID: 11400000, guid: eb4a37fa224a8ee4c91098167251552f, type: 2}
   - _key: Core.StrappedBoots
@@ -92,8 +100,22 @@ MonoBehaviour:
     _asset: {fileID: 11400000, guid: 24260a48869b1d94299c8d6abf966b68, type: 2}
   - _key: Core.HoodedCloak
     _asset: {fileID: 11400000, guid: 5f82e63027e45d449bc5157847267b4d, type: 2}
+  - _key: Core.Muffler
+    _asset: {fileID: 11400000, guid: b26d960eb0d95d14b95ca347ed298797, type: 2}
+  - _key: Core.ArmMarkLine
+    _asset: {fileID: 11400000, guid: b1987c4e4445602479c32eb52dbf85f1, type: 2}
+  - _key: Core.DevilPowder
+    _asset: {fileID: 11400000, guid: 8356c1aa167184343936906c841a7095, type: 2}
+  - _key: Core.DogNose
+    _asset: {fileID: 11400000, guid: 7c3453877e1e52149b90cb9081517d51, type: 2}
+  - _key: Core.HeadMarkLine
+    _asset: {fileID: 11400000, guid: 381405490d3c2eb4789b28b3237732ff, type: 2}
+  - _key: Core.Horn
+    _asset: {fileID: 11400000, guid: b7ed7120220238540817ef105ec0e50c, type: 2}
   - _key: Core.WolfPowder
     _asset: {fileID: 11400000, guid: 9e011b7400977ac48bd09d64774ddf4e, type: 2}
+  - _key: Core.LeatherGauntlets
+    _asset: {fileID: 11400000, guid: 6432d393f0485d443ba970aa9aef0d85, type: 2}
   - _key: Core.LeatherGloves
     _asset: {fileID: 11400000, guid: 61b5715891eacdc40818e86462b97bab, type: 2}
   - _key: Core.FlightHat
@@ -146,8 +168,16 @@ MonoBehaviour:
     _asset: {fileID: 11400000, guid: 68d9ba7921b771e43a506bea68681384, type: 2}
   - _key: Core.PoisonousHerb
     _asset: {fileID: 11400000, guid: 888ef6a98d3cd2549a70fbda705d1001, type: 2}
+  - _key: Core.ScrollOfCleansing
+    _asset: {fileID: 11400000, guid: 20c7d8b294ff86a44a77b942ac0d2309, type: 2}
+  - _key: Core.ScrollOfConfuseMonster
+    _asset: {fileID: 11400000, guid: cf5f8b78c114d2944aed939030632ff1, type: 2}
   - _key: Core.ScrollOfDestroyArmor
     _asset: {fileID: 11400000, guid: 4f8033013e68f364182cd8da13f6e06c, type: 2}
+  - _key: Core.ScrollOfStinkingCloud
+    _asset: {fileID: 11400000, guid: 487c93904fd72af48877ab0ce25f16ab, type: 2}
+  - _key: Core.StinkingCloud
+    _asset: {fileID: 11400000, guid: 6ed06a5cd1f62944381062e6761f6870, type: 2}
   - _key: Core.Warbroom
     _asset: {fileID: 11400000, guid: ee85b43af08c07e42a1cc3b6cec30fe6, type: 2}
   - _key: Core.WandOfFire
@@ -166,8 +196,12 @@ MonoBehaviour:
     _asset: {fileID: 11400000, guid: 9b83f15992282fe4da1b7cf4afd77a1e, type: 2}
   - _key: Core.Mace
     _asset: {fileID: 11400000, guid: fbb788ca451157c4f9f87858f725882e, type: 2}
+  - _key: Core.ShortSword
+    _asset: {fileID: 11400000, guid: 753265d0e24af0640871110e0c355d1f, type: 2}
   - _key: Core.SubmachineGun
     _asset: {fileID: 11400000, guid: 2a5ab5b9277a4d840a60eed38761a265, type: 2}
+  - _key: Core.GoldPiece
+    _asset: {fileID: 11400000, guid: da554bc0ed96cf24bae4bd414b9cb53f, type: 2}
   - _key: Core.WoodenBox
     _asset: {fileID: 11400000, guid: 012b31dd8e7a0c047bc07ca9dfa9a6b2, type: 2}
   - _key: Core.BD_Stairs
@@ -184,6 +218,8 @@ MonoBehaviour:
     _asset: {fileID: 11400000, guid: b09d95937b1330f42b02b115948f3876, type: 2}
   - _key: Core.PartyBoard
     _asset: {fileID: 11400000, guid: 27066327da3b83347ad557736dc6f6d7, type: 2}
+  - _key: Core.QuestBoard
+    _asset: {fileID: 11400000, guid: 421f78ec35012f04bbf710b8cd41c7d2, type: 2}
   - _key: Core.GoalDownStairs
     _asset: {fileID: 11400000, guid: 846a752108fa0a74fb1ca155dfcb58a7, type: 2}
   - _key: Core.World
