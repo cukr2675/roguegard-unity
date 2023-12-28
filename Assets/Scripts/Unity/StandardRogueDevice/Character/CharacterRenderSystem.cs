@@ -100,7 +100,7 @@ namespace RoguegardUnity
         }
 
         // 全アニメーション終了後の処理
-        public void EndAnimation(RogueObj player)
+        public void EndAnimation(RogueObj player, bool completelyEnd)
         {
             if (!InAnimation) return;
 
@@ -137,7 +137,7 @@ namespace RoguegardUnity
             {
                 // 位置ずれ修正
                 // 待機モーションに戻す
-                character.EndWorkQueue();
+                character.EndWorkQueue(completelyEnd);
             }
             InAnimation = false;
         }

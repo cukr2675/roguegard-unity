@@ -99,6 +99,10 @@ namespace RoguegardUnity
             touchController.MenuOpen(Subject, Player != Subject);
             ticker.Reset();
 
+            // セーブポイントをキャッシュ
+            var playerSavePoint = LobbyMembers.GetSavePoint(Player);
+            LobbyMembers.SetSavePoint(Player, null);
+
             // 前回セーブからの経過時間でターン経過
             if (data.SaveDateTime != null)
             {
@@ -119,6 +123,8 @@ namespace RoguegardUnity
 
             // 時間経過処理後にリセット
             UpdateCharacters();
+
+            LobbyMembers.SetSavePoint(Player, playerSavePoint);
         }
 
         public void Close()
@@ -175,7 +181,7 @@ namespace RoguegardUnity
                 else if (characterRenderSystem.InAnimation)
                 {
                     // 次の RogueCharacterWork がなければ、今ターンのアニメーションを終了させる。
-                    characterRenderSystem.EndAnimation(Subject);
+                    characterRenderSystem.EndAnimation(Subject, false);
                     touchController.NextTurn(Player);
                 }
             }
@@ -225,7 +231,7 @@ namespace RoguegardUnity
             {
                 characterRenderSystem.StartAnimation(Player);
                 characterRenderSystem.UpdateCharactersAndGetWorkingNow(Player, true, deltaTime, fastForward);
-                characterRenderSystem.EndAnimation(Player);
+                characterRenderSystem.EndAnimation(Player, true);
             }
             tilemapRenderSystem.Update(Player, false);
         }

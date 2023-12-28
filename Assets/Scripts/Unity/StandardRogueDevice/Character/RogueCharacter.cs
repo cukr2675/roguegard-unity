@@ -142,7 +142,7 @@ namespace RoguegardUnity
         /// <summary>
         /// このインスタンスの動作終了処理
         /// </summary>
-        public void EndWorkQueue()
+        public void EndWorkQueue(bool completelyEnd)
         {
             // 待機モーションに切り替えるフラグを設定する。
             // モーションが終端のときだけ切り替える。
@@ -160,6 +160,8 @@ namespace RoguegardUnity
             {
                 SetWalk(Obj.Position, Mathf.Infinity, Obj.Main.Stats.Direction, true);
             }
+            walkTime = Mathf.CeilToInt(walkTimeLength);
+            if (completelyEnd) { SetBoneMotion(KeywordBoneMotion.Wait, true); }
 
             // HP のずれを直す。
             _canvas.SetHP(Obj);
