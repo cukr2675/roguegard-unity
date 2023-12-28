@@ -30,10 +30,12 @@ namespace Roguegard
 
             if (!this.LocateSavePoint(player, tool, activationDepth, info)) return false;
 
+            LobbyMembers.SetSavePoint(player, info);
+
             // プレイヤーのときだけオートセーブする
             if (RogueDevice.Primary.Player == player) { RogueDevice.Add(DeviceKw.AutoSave, info); }
 
-            return this.LoadSavePoint(player, activationDepth, info);
+            return true;
         }
 
         public override ISkillDescription GetSkillDescription(RogueObj self, RogueObj tool)

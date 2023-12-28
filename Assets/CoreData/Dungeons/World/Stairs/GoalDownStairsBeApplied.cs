@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using Roguegard.Device;
+using Roguegard.Extensions;
 
 namespace Roguegard
 {
@@ -12,16 +13,31 @@ namespace Roguegard
 
         public override bool Invoke(RogueObj self, RogueObj player, float activationDepth, in RogueMethodArgument arg)
         {
-            if (player != RogueDevice.Primary.Player) return false;
-
             player.Main.Stats.Direction = RogueDirection.Down;
-            RogueDevice.Add(DeviceKw.EnqueueSE, DeviceKw.GameClear);
-            RogueDevice.AddWork(DeviceKw.EnqueueWork, RogueCharacterWork.CreateBoneMotion(player, CoreMotions.FullTurn, false));
-            RogueDevice.AddWork(DeviceKw.EnqueueWork, RogueCharacterWork.CreateBoneMotion(player, KeywordBoneMotion.Wait, true));
-            RogueDevice.AddWork(DeviceKw.EnqueueWork, RogueCharacterWork.CreateBoneMotion(player, CoreMotions.FullTurn, false));
-            RogueDevice.AddWork(DeviceKw.EnqueueWork, RogueCharacterWork.CreateBoneMotion(player, KeywordBoneMotion.Victory, true));
-            RogueDevice.Add(DeviceKw.EnqueueWaitSeconds, 1f);
-            RogueDevice.Primary.AddMenu(resultRogueMenu, player, null, RogueMethodArgument.Identity);
+            if (MainCharacterWorkUtility.VisibleAt(player.Location, player.Position))
+            {
+                RogueDevice.Add(DeviceKw.EnqueueSE, DeviceKw.GameClear);
+                RogueDevice.AddWork(DeviceKw.EnqueueWork, RogueCharacterWork.CreateBoneMotion(player, CoreMotions.FullTurn, false));
+                RogueDevice.AddWork(DeviceKw.EnqueueWork, RogueCharacterWork.CreateBoneMotion(player, KeywordBoneMotion.Wait, true));
+                RogueDevice.AddWork(DeviceKw.EnqueueWork, RogueCharacterWork.CreateBoneMotion(player, CoreMotions.FullTurn, false));
+                RogueDevice.AddWork(DeviceKw.EnqueueWork, RogueCharacterWork.CreateBoneMotion(player, KeywordBoneMotion.Victory, true));
+                RogueDevice.Add(DeviceKw.EnqueueWaitSeconds, 1f);
+            }
+
+            if (player == RogueDevice.Primary.Player)
+            {
+                // プレイヤー操作を要求するため、プレイヤーキャラのみ実行可能とする
+                RogueDevice.Primary.AddMenu(resultRogueMenu, player, null, RogueMethodArgument.Identity);
+                return false;
+            }
+            else if (activationDepth < 1f)
+            {
+                var info = RogueWorld.SavePointInfo;
+                if (!default(IActiveRogueMethodCaller).LocateSavePoint(player, self, 1f, info)) return false;
+
+                LobbyMembers.SetSavePoint(player, info);
+                return false;
+            }
             return false;
         }
 

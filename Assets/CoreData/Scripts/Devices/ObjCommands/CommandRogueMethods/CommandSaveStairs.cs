@@ -14,9 +14,9 @@ namespace Roguegard
 
         public override bool Invoke(RogueObj player, RogueObj user, float activationDepth, in RogueMethodArgument arg)
         {
+            // プレイヤー操作を要求するため、プレイヤーキャラのみ実行可能とする
             if (RogueDevice.Primary.Player != player) return false;
             if (CommonAssert.RequireTool(arg, out var tool)) return false;
-
             if (tool.Main.Category != CategoryKw.LevelDownStairs)
             {
                 Debug.LogError($"{tool} のカテゴリは {CategoryKw.LevelDownStairs.Name} ではありません。");
@@ -26,8 +26,9 @@ namespace Roguegard
             var info = SavePointInfo.Get(tool);
             if (!this.LocateSavePoint(player, tool, activationDepth, info)) return false;
 
+            LobbyMembers.SetSavePoint(player, info);
             RogueDevice.Add(DeviceKw.SaveGame, info);
-            return this.LoadSavePoint(player, activationDepth, info);
+            return true;
         }
 
         public override ISkillDescription GetSkillDescription(RogueObj self, RogueObj tool)

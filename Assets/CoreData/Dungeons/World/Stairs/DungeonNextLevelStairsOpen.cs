@@ -62,7 +62,10 @@ namespace Roguegard.CharacterCreation
             {
                 if (!LobbyMembers.Contains(player)) return false;
 
-                RogueDevice.Add(DeviceKw.EnqueueSE, CategoryKw.DownStairs);
+                if (MainCharacterWorkUtility.VisibleAt(player.Location, player.Position))
+                {
+                    RogueDevice.Add(DeviceKw.EnqueueSE, CategoryKw.DownStairs);
+                }
 
                 // プレイヤーキャラクターは別空間に移動させる。
                 var floor = self.Location; // 階段の空間はフロア
