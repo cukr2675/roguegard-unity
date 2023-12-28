@@ -15,7 +15,7 @@ namespace Roguegard
             var heal = false;
             if (damageValue != null)
             {
-                useValue = damageValue.MainValue != 0f;
+                useValue = AttackUtility.GetUseValue(damageValue);
                 heal = damageValue.SubValues.Is(StdKw.Heal);
             }
             if (useValue)

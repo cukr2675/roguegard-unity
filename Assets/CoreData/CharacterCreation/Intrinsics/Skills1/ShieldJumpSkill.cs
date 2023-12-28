@@ -74,7 +74,7 @@ namespace Roguegard.CharacterCreation
                 IKeyword keyword, IRogueMethod method, RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg,
                 RogueMethodAspectState.PassiveNext next)
             {
-                var useValue = arg.RefValue?.MainValue > 0f;
+                var useValue = AttackUtility.GetUseValue(arg.RefValue);
                 var result = next.Invoke(keyword, method, self, user, activationDepth, arg);
 
                 if (result && keyword == MainInfoKw.Hit && activationDepth < 1f && useValue)

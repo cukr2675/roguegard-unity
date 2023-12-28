@@ -12,10 +12,10 @@ namespace Roguegard
 
         public bool Invoke(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
         {
-            var useValue = arg.RefValue != null;
+            var useValue = AttackUtility.GetUseValue(arg.RefValue);
             if (useValue)
             {
-                var damage = arg.RefValue.MainValue != 0f && !arg.RefValue.SubValues.Is(StdKw.Heal);
+                var damage = !arg.RefValue.SubValues.Is(StdKw.Heal);
                 var result = CommonHit.Instance.Invoke(self, user, activationDepth, arg);
 
                 if (damage && activationDepth < 1f && !arg.RefValue.SubValues.Is(MainInfoKw.BeDefeated) && RogueMethodUtility.GetAdjacent(self, user))

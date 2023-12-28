@@ -79,7 +79,8 @@ namespace Roguegard.CharacterCreation
                 {
                     // スキルダメージ +2
                     // スキルで攻撃時のみ解除する (MainValue を取得して状態異常付与スキルと区別する)
-                    if (keyword == MainInfoKw.Hit && arg.RefValue != null && arg.RefValue.SubValues.Is(MainInfoKw.Skill) && arg.RefValue.MainValue > 0f)
+                    if (keyword == MainInfoKw.Hit && arg.RefValue != null && arg.RefValue.SubValues.Is(MainInfoKw.Skill) &&
+                        AttackUtility.GetUseValue(arg.RefValue))
                     {
                         arg.RefValue.MainValue += 2 * Stack;
                         RemoveClose(self);

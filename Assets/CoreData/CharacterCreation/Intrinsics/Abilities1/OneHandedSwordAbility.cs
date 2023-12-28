@@ -50,7 +50,7 @@ namespace Roguegard.CharacterCreation
                 IKeyword keyword, IRogueMethod method, RogueObj self, RogueObj target, float activationDepth, in RogueMethodArgument arg,
                 RogueMethodAspectState.ActiveNext next)
             {
-                if (keyword == MainInfoKw.Hit && activationDepth == attackActivationDepth && arg.RefValue?.MainValue > 0f)
+                if (keyword == MainInfoKw.Hit && activationDepth == attackActivationDepth && AttackUtility.GetUseValue(arg.RefValue))
                 {
                     // 攻撃が失敗しても、攻撃すればそれだけでカウントする
                     attackCount++;

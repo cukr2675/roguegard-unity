@@ -60,5 +60,10 @@ namespace Roguegard
                 return self.Main.InfoSet.Attack;
             }
         }
+
+        public static bool GetUseValue(AffectableValue damageValue)
+        {
+            return damageValue != null ? damageValue.MainValue != 0f : false;
+        }
     }
 }
