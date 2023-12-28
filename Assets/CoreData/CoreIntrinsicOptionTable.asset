@@ -17,18 +17,50 @@ MonoBehaviour:
   _targetFolders:
   - {fileID: 102900000, guid: 41129aed52e2bab43b40d39b23ed9f4f, type: 3}
   _items:
+  - _key: Core.AdversityAbility
+    _asset: {fileID: 11400000, guid: 7237a7ac9886c524b94c9f5c41c7dbb1, type: 2}
+  - _key: Core.BareHandsAbility
+    _asset: {fileID: 11400000, guid: 50e7661b619f0594c995fdc30a9a620d, type: 2}
   - _key: Core.BraveHeartAbility
     _asset: {fileID: 11400000, guid: f8f98e6ef0e9c97459e56e6eaeee1cf8, type: 2}
+  - _key: Core.FoodAppraisalAbility
+    _asset: {fileID: 11400000, guid: fa79503ad38d25c48adb7c64f802416e, type: 2}
+  - _key: Core.MartialArtsAbility
+    _asset: {fileID: 11400000, guid: da99f9f2d621fcc4ca88c02a7f022a17, type: 2}
   - _key: Core.MultitaskAbility
     _asset: {fileID: 11400000, guid: 21a499e21ba3e28478b52f7de624adc9, type: 2}
+  - _key: Core.OneHandedSwordAbility
+    _asset: {fileID: 11400000, guid: 793b3d8d5c68c4c49bc674ed303450cc, type: 2}
+  - _key: Core.RestEfficiency1Ability
+    _asset: {fileID: 11400000, guid: 7f26e138763fe4c41b312777c6ab44d4, type: 2}
+  - _key: Core.ShieldThrowingAbility
+    _asset: {fileID: 11400000, guid: 245d8f8ab4398584597e5e7a8daee26d, type: 2}
   - _key: Core.StairPickupAbility
     _asset: {fileID: 11400000, guid: b1a9905bd46619642beccb45b4b5c17a, type: 2}
+  - _key: Core.CalmlyScoldAbility
+    _asset: {fileID: 11400000, guid: 0c835f94353530c4ca0bbe610eb319d4, type: 2}
+  - _key: Core.CaringAbility
+    _asset: {fileID: 11400000, guid: f2bae097ebd99af40912e1b5e4e3932c, type: 2}
+  - _key: Core.SnootyAbility
+    _asset: {fileID: 11400000, guid: 1dfd099963e55684184b2975315d689e, type: 2}
+  - _key: Core.DoublePainAbility
+    _asset: {fileID: 11400000, guid: 21b4950d932042745bfeb454cef09a96, type: 2}
+  - _key: Core.SingleRoomAbility
+    _asset: {fileID: 11400000, guid: a2bbb1b094fc5bf48831ea349e0c6c89, type: 2}
+  - _key: Core.RescueQuestObjective
+    _asset: {fileID: 11400000, guid: 9d2c9a79d3da9f6499d6f8cee865e899, type: 2}
+  - _key: Core.SlayingQuestObjective
+    _asset: {fileID: 11400000, guid: 309d965a43703e546babbb55930cdcd3, type: 2}
   - _key: Core.BeamBulletSkill
     _asset: {fileID: 11400000, guid: 96492908b68e1f9498422809e10728a4, type: 2}
   - _key: Core.BeamSlashSkill
     _asset: {fileID: 11400000, guid: 8a0e5474712b85e4fb8251eb75a73a8a, type: 2}
+  - _key: Core.BlitzWaveSkill
+    _asset: {fileID: 11400000, guid: 9552d2d8dd264c845b3d7e4a78116514, type: 2}
   - _key: Core.EmberSkill
     _asset: {fileID: 11400000, guid: 99f0b3ca485a2dc42bc70ed5a3c52e72, type: 2}
+  - _key: Core.FlareCannonSkill
+    _asset: {fileID: 11400000, guid: 2ad5374735808e64e9575f80dcf37892, type: 2}
   - _key: Core.Multishot3Skill
     _asset: {fileID: 11400000, guid: 5e2f31b67af995e4b839a06e3acb2108, type: 2}
   - _key: Core.PaintTrapSkill
@@ -37,7 +69,13 @@ MonoBehaviour:
     _asset: {fileID: 11400000, guid: c48e43c498960fa4293409cbee60fd85, type: 2}
   - _key: Core.PowerSlashSkill
     _asset: {fileID: 11400000, guid: abc2162f941202b43a04d8665a50aee9, type: 2}
+  - _key: Core.ShieldJumpSkill
+    _asset: {fileID: 11400000, guid: 9f5d6b5e0d2c89943ac5a29ce8ca926c, type: 2}
   - _key: Core.SpellChargeSkill
     _asset: {fileID: 11400000, guid: 1940831252178064f9466f18538e6077, type: 2}
   - _key: Core.ThronsTrapSkill
     _asset: {fileID: 11400000, guid: 5d75ee0695b80214092c567460924729, type: 2}
+  - _key: Core.ThunderStormSkill
+    _asset: {fileID: 11400000, guid: 3f62a76a40423be4d818c8c3097e45dc, type: 2}
+  - _key: Core.VacuumRampageSkill
+    _asset: {fileID: 11400000, guid: f6f603905d9d8804eb1478e66e094fdf, type: 2}
