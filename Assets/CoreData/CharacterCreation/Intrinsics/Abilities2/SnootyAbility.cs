@@ -16,7 +16,7 @@ namespace Roguegard.CharacterCreation
         {
             float IRogueObjUpdater.Order => 100f;
             float IRogueMethodPassiveAspect.Order => 0f;
-            float IValueEffect.Order => 0f;
+            float IValueEffect.Order => 10f; // 会心ダメージが発生しうるとき
 
             private bool readyToBuff;
             private bool buffIsEnabled;
@@ -35,9 +35,9 @@ namespace Roguegard.CharacterCreation
 
             void IValueEffect.AffectValue(IKeyword keyword, AffectableValue value, RogueObj self)
             {
-                if (keyword == StatsKw.ATK && buffIsEnabled)
+                if (keyword == StatsKw.ATK && buffIsEnabled && value.SubValues[StatsKw.CriticalRate] > 0f)
                 {
-                    // 会心率+5%
+                    // 会心ダメージが発生しうるとき会心率+5%
                     value.SubValues[StatsKw.CriticalRate] += 0.05f;
                 }
             }

@@ -44,7 +44,7 @@ namespace Roguegard.CharacterCreation
 
             void IValueEffect.AffectValue(IKeyword keyword, AffectableValue value, RogueObj self)
             {
-                if (keyword == StatsKw.DEF)
+                if (keyword == StatsKw.DEF && value.SubValues[StatsKw.GuardRate] > 0f)
                 {
                     // ガードしうるとき10%でガード
                     value.SubValues[StatsKw.GuardRate] = AttackUtility.Cup(value.SubValues[StatsKw.GuardRate], 0.1f);
