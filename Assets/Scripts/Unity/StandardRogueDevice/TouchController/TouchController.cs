@@ -33,30 +33,27 @@ namespace RoguegardUnity
         private PointingWalker pointingWalker;
         private WalkStopper walkStopper;
 
+        internal ModelsMenuEventManager EventManager => _menuController.EventManager;
+
         /// <summary>
         /// 入力待機状態かを取得する。
         /// </summary>
         public bool WaitsForInput { get; set; }
-        public bool AutoPlayIsEnabled
-        {
-            get => _inputController.AutoPlayIsEnabled;
-            set => _inputController.AutoPlayIsEnabled = value;
-        }
 
         public bool InAnimation => WaitsForInput || _menuController.Wait;
         public bool TalkingWait => _menuController.TalkingWait;
         public bool OpenGrid => _inputController.OpenGrid;
         public bool FastForward => _inputController.FastForward;
 
-        internal void Initialize(Tilemap tilemap, SoundController soundController, RogueSpriteRendererPool rendererPool)
+        internal void Initialize(Tilemap tilemap, SoundController soundController, RogueSpriteRendererPool rendererPool, System.Action stopAutoPlay)
         {
             _inputController.LongPressThresholdTurns = 4;
-            _inputController.Initialize(tilemap, false, false);
+            _inputController.Initialize(tilemap, false, false, stopAutoPlay);
             _menuController.Initialize(soundController, rendererPool);
             _headerController.Initialize();
         }
 
-        public void Open(RogueObj player)
+        public void OpenWalker(RogueObj player)
         {
             pointingWalker = new PointingWalker(RoguegardSettings.MaxTilemapSize);
             {
@@ -75,13 +72,12 @@ namespace RoguegardUnity
 
             walkStopper.Initialize();
             pointingWalker.WalkStopper.Initialize();
-
-            _menuController.Open(player);
         }
 
-        public void MenuOpen(RogueObj targetObj)
+        public void MenuOpen(RogueObj subject, bool autoPlayIsEnabled)
         {
-            _menuController.Open(targetObj);
+            _menuController.Open(subject);
+            _inputController.AutoPlayIsEnabled = autoPlayIsEnabled;
         }
 
         public void GetInfo(out MenuController menuController, out IModelsMenu openChestMenu)
@@ -116,18 +112,18 @@ namespace RoguegardUnity
         {
             // カメラとメニューを更新する。
             _inputController.LateUpdateController(player, playerPosition);
-            _menuController.UpdateUI(deltaTime);
+            _menuController.EventManager.UpdateUI(deltaTime);
         }
 
         /// <summary>
         /// <see cref="StandardRogueDevice.messageWorkQueue"/> のキュー完全処理後のコマンド入力メソッド
         /// </summary>
-        public void CommandProcessing(RogueObj player, bool fastForward)
+        public void CommandProcessing(RogueObj player, RogueObj subject, bool fastForward)
         {
             if (_menuController.Wait) return;
 
             // メニューにブロックされていないとき、入力情報を更新する。
-            Processing(player, fastForward);
+            Processing(player, subject, fastForward);
             _inputController.CommandUpdate();
         }
 
@@ -143,7 +139,7 @@ namespace RoguegardUnity
         /// <summary>
         /// フィールドとボタン UI のタッチ入力を処理するメソッド
         /// </summary>
-        private void Processing(RogueObj player, bool fastForward)
+        private void Processing(RogueObj player, RogueObj subject, bool fastForward)
         {
             if (!WaitsForInput) return;
 
@@ -168,7 +164,7 @@ namespace RoguegardUnity
 
                 // メニュー表示中はボタン UI を消す。
                 _inputController.SetEnabled(false);
-                _menuController.OpenMainMenu();
+                _menuController.OpenMainMenu(subject);
                 return;
             }
             if (_inputController.GroundIsClick && !_menuController.IsDone)
@@ -208,7 +204,7 @@ namespace RoguegardUnity
                 {
                     // メニュー表示中はボタン UI を消す。
                     _inputController.SetEnabled(false);
-                    _menuController.OpenGroundMenu();
+                    _menuController.OpenGroundMenu(subject);
                     return;
                 }
             }
@@ -284,7 +280,7 @@ namespace RoguegardUnity
                 {
                     // メニュー表示中はボタン UI を消す。
                     _inputController.SetEnabled(false);
-                    _menuController.OpenLongDownMenu(p);
+                    _menuController.OpenLongDownMenu(subject, p);
                     ClearInput();
                     return;
                 }
@@ -328,7 +324,7 @@ namespace RoguegardUnity
                                 RoguegardSettings.ObjCommandTable.Categories.Contains(obj.Main.InfoSet.Category))
                             {
                                 // その他、隣接しているアイテムはコマンドを開く
-                                _menuController.OpenLongDownMenu(p);
+                                _menuController.OpenLongDownMenu(subject, p);
                                 ClearInput();
                                 return;
                             }
@@ -359,7 +355,7 @@ namespace RoguegardUnity
 
         public void ResetUI()
         {
-            _menuController.ClearText();
+            _menuController.EventManager.ClearText();
             _inputController.ResetCamera();
         }
 
@@ -371,41 +367,11 @@ namespace RoguegardUnity
             _inputController.ClearInput();
         }
 
-        public void StartTalk()
-        {
-            _menuController.StartTalk();
-        }
-
-        public void Log(RogueObj player, object obj, StackTrace stackTrace)
-        {
-            _menuController.Append(player, obj, stackTrace);
-        }
-
-        public void Log(int integer)
-        {
-            _menuController.AppendInteger(integer);
-        }
-
-        public void Log(float number)
-        {
-            _menuController.AppendNumber(number);
-        }
-
         public void OpenMenu(RogueObj player, IModelsMenu menu, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         {
             _inputController.SetEnabled(false);
             _headerController.UpdateHeader(player);
-            _menuController.OpenMenu(menu, self, user, arg);
-        }
-
-        public void Play(IKeyword keyword, bool wait)
-        {
-            _menuController.Play(keyword, wait);
-        }
-
-        public void StartWait(float seconds)
-        {
-            _menuController.StartWait(seconds);
+            _menuController.OpenInitialMenu(menu, self, user, arg);
         }
     }
 }

@@ -55,7 +55,7 @@ namespace RoguegardUnity
 
             // •ÏXŒã‚Ì‰Šú‰»ˆ—
             touchController.OpenWalker(newPlayer);
-            touchController.MenuOpen(newPlayer);
+            touchController.MenuOpen(newPlayer, false);
             ticker.Reset();
             componentManager.UpdateCharacters();
         }

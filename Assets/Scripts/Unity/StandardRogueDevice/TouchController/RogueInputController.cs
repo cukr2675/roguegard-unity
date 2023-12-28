@@ -34,6 +34,7 @@ namespace RoguegardUnity
         private bool dashForward;
         private int dashForwardTurns;
         private RogueDirectionalSpriteTable currentDashSpriteTable;
+        private System.Action stopAutoPlay;
 
         public bool OpenMenu => menuButton.IsClick;
         public bool GroundIsClick => menuButton.BalloonIsClick;
@@ -43,7 +44,7 @@ namespace RoguegardUnity
         public int LongPressThresholdTurns { get; set; }
         public bool AutoPlayIsEnabled { get; set; }
 
-        public void Initialize(Tilemap tilemap, bool dashButtonIsOnTheRight, bool dashKeyMode)
+        public void Initialize(Tilemap tilemap, bool dashButtonIsOnTheRight, bool dashKeyMode, System.Action stopAutoPlay)
         {
             if (dashButtonIsOnTheRight)
             {
@@ -77,6 +78,8 @@ namespace RoguegardUnity
 
             var screenSize = new Vector2Int(1920, 1080);
             _cameraController.Initialize(screenSize);
+
+            this.stopAutoPlay = stopAutoPlay;
         }
 
         /// <summary>
@@ -85,7 +88,11 @@ namespace RoguegardUnity
         public void EarlyUpdateController(bool visiblePlayer, Vector3 playerPosition, RogueDirection playerDirection, int deltaTime)
         {
             // ダッシュボタンクリックで自動モードを終了させる。
-            if (dashButton.IsClick && !_cameraController.IsCameraMode) { AutoPlayIsEnabled = false; }
+            if (dashButton.IsClick && !_cameraController.IsCameraMode)
+            {
+                AutoPlayIsEnabled = false;
+                stopAutoPlay();
+            }
 
             // ダッシュボタンクリックでカメラモードを終了させる。
             if (dashButton.IsClick) { _cameraController.TerminateCameraMode(); }

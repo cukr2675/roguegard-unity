@@ -55,7 +55,8 @@ namespace RoguegardUnity
 
             // UI表示
             touchController = Object.Instantiate(touchControllerPrefab, parent);
-            touchController.Initialize(tilemapGrid.Tilemap, soundController, spriteRendererPool);
+            var autoPlayDeviceEventHandler = new AutoPlayDeviceEventHandler(this, touchController, x => Subject = x);
+            touchController.Initialize(tilemapGrid.Tilemap, soundController, spriteRendererPool, () => autoPlayDeviceEventHandler.StopAutoPlay());
             touchController.GetInfo(out var menuController, out var openChestMenu);
 
             // Unity の Update 実行用オブジェクト
@@ -75,7 +76,7 @@ namespace RoguegardUnity
                 gameOverDeviceEventHandler,
                 new SaveDeviceEventHandler(this, touchController),
                 new ChangePlayerDeviceEventHandler(this, touchController, ticker, x => Player = Subject = x),
-                new AutoPlayDeviceEventHandler(touchController, x => Subject = x),
+                autoPlayDeviceEventHandler,
 
                 new ChestDeviceEventHandler(this, openChestMenu),
             };
@@ -94,7 +95,7 @@ namespace RoguegardUnity
 
             // 適用後の準備処理
             touchController.OpenWalker(Player);
-            touchController.MenuOpen(Subject);
+            touchController.MenuOpen(Subject, Player != Subject);
             ticker.Reset();
             UpdateCharacters();
 
@@ -144,12 +145,6 @@ namespace RoguegardUnity
 
         public bool UpdateAndGetAllowStepTurn()
         {
-            if (!touchController.AutoPlayIsEnabled)
-            {
-                Subject = Player;
-                touchController.MenuOpen(Subject);
-            }
-
             ////////////////////////////////////////////////////////////////////////
             // イベントキュー処理前
             ////////////////////////////////////////////////////////////////////////
