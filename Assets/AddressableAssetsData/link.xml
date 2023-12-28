@@ -1,0 +1,420 @@
+<linker>
+  <assembly fullname="Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+    <type fullname="WebGLSupport.WebGLInput" preserve="all" />
+  </assembly>
+  <assembly fullname="Roguegard, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+    <type fullname="Roguegard.KeywordData" preserve="all" />
+    <type fullname="Roguegard.MainInfoKw" preserve="all" />
+    <type fullname="Roguegard.SerializableKeywordData" preserve="all" />
+    <type fullname="Roguegard.StatsKw" preserve="all" />
+    <type fullname="Roguegard.BoneSprite" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.ScriptField`1[Roguegard.CharacterCreation.IEquippedEffectSource]" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.ScriptField`1[Roguegard.CharacterCreation.ILevelInfoInitializer]" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.ScriptField`1[Roguegard.CharacterCreation.IOpenEffect]" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.ScriptField`1[Roguegard.CharacterCreation.IRaceOptionSprite]" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.ScriptField`1[Roguegard.CharacterCreation.IRaceOptionWeight]" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.ScriptField`1[Roguegard.CharacterCreation.ScriptIntrinsicOption/Script]" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.ScriptField`1[Roguegard.IActiveRogueMethod]" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.ScriptField`1[Roguegard.IAffectRogueMethod]" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.ScriptField`1[Roguegard.IApplyRogueMethod]" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.ScriptField`1[Roguegard.IChangeEffectRogueMethod]" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.ScriptField`1[Roguegard.IChangeStateRogueMethod]" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.ScriptField`1[Roguegard.IEatActiveRogueMethod]" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.ScriptField`1[Roguegard.IObjCommand]" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.ScriptField`1[Roguegard.IRogueDetails]" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.ScriptField`1[Roguegard.ISkill]" preserve="nothing" serialized="true" />
+  </assembly>
+  <assembly fullname="Roguegard.CharacterCreation, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+    <type fullname="Roguegard.CharacterCreationKw" preserve="all" />
+    <type fullname="Roguegard.CharacterCreation.MemberList" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CharacterCreation.ScriptableAppearance" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CharacterCreation.ScriptableIntrinsic" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CharacterCreation.ScriptableStartingItem" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CharacterCreation.ScriptableStartingItemList" preserve="nothing" serialized="true" />
+  </assembly>
+  <assembly fullname="Roguegard.CoreData, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+    <type fullname="Roguegard.AffectableBoneSpriteTableData" preserve="all" />
+    <type fullname="Roguegard.AmmoKw" preserve="all" />
+    <type fullname="Roguegard.BoneKw" preserve="all" />
+    <type fullname="Roguegard.CategoryKw" preserve="all" />
+    <type fullname="Roguegard.CharacterCreation.AlphabetTypeAppearanceOption" preserve="all" />
+    <type fullname="Roguegard.CharacterCreation.AmmoCreationData" preserve="all" />
+    <type fullname="Roguegard.CharacterCreation.BoneData" preserve="all" />
+    <type fullname="Roguegard.CharacterCreation.DefaultRaceOption" preserve="all" />
+    <type fullname="Roguegard.CharacterCreation.DungeonCreationData" preserve="all" />
+    <type fullname="Roguegard.CharacterCreation.DungeonQuestGenerator" preserve="all" />
+    <type fullname="Roguegard.CharacterCreation.EquipmentAppearanceOption" preserve="all" />
+    <type fullname="Roguegard.CharacterCreation.EquipmentCreationData" preserve="all" />
+    <type fullname="Roguegard.CharacterCreation.EquipmentStateData" preserve="all" />
+    <type fullname="Roguegard.CharacterCreation.FoodCreationData" preserve="all" />
+    <type fullname="Roguegard.CharacterCreation.ItemCreationData" preserve="all" />
+    <type fullname="Roguegard.CharacterCreation.LobbyCreationData" preserve="all" />
+    <type fullname="Roguegard.CharacterCreation.PresetCreationData" preserve="all" />
+    <type fullname="Roguegard.CharacterCreation.QuestEffectIntrinsicOption" preserve="all" />
+    <type fullname="Roguegard.CharacterCreation.RandomCreationData" preserve="all" />
+    <type fullname="Roguegard.CharacterCreation.RandomStackCreationData" preserve="all" />
+    <type fullname="Roguegard.CharacterCreation.ScriptableFaction" preserve="all" />
+    <type fullname="Roguegard.CharacterCreation.ScriptIntrinsicOption" preserve="all" />
+    <type fullname="Roguegard.CharacterCreation.SingleAppearanceOption" preserve="all" />
+    <type fullname="Roguegard.CharacterCreation.StandardDungeonLevel" preserve="all" />
+    <type fullname="Roguegard.CharacterCreation.StandardRaceOption" preserve="all" />
+    <type fullname="Roguegard.CharacterCreation.TileLayingCreationData" preserve="all" />
+    <type fullname="Roguegard.CharacterCreation.TileSourcedItemCreationData" preserve="all" />
+    <type fullname="Roguegard.CharacterCreation.WeaponCreationData" preserve="all" />
+    <type fullname="Roguegard.CoreBoneSpriteTables" preserve="all" />
+    <type fullname="Roguegard.CoreMotions" preserve="all" />
+    <type fullname="Roguegard.CoreObjCommandTable" preserve="all" />
+    <type fullname="Roguegard.CoreTiles1" preserve="all" />
+    <type fullname="Roguegard.DeviceKw" preserve="all" />
+    <type fullname="Roguegard.EffectCategoryKw" preserve="all" />
+    <type fullname="Roguegard.EquipKeywordData" preserve="all" />
+    <type fullname="Roguegard.EquipKw" preserve="all" />
+    <type fullname="Roguegard.KeywordsRogueGender" preserve="all" />
+    <type fullname="Roguegard.KeywordsRogueMaterial" preserve="all" />
+    <type fullname="Roguegard.MaterialKw" preserve="all" />
+    <type fullname="Roguegard.MotionSetData" preserve="all" />
+    <type fullname="Roguegard.RogueDungeonGenerator" preserve="all" />
+    <type fullname="Roguegard.RogueGenderList" preserve="all" />
+    <type fullname="Roguegard.RogueTileInfoData" preserve="all" />
+    <type fullname="Roguegard.Rotatable1To8BoneMotionData" preserve="all" />
+    <type fullname="Roguegard.RotatableBoneMotionData" preserve="all" />
+    <type fullname="Roguegard.RotatableLoopBoneMotionData" preserve="all" />
+    <type fullname="Roguegard.StdKw" preserve="all" />
+    <type fullname="Roguegard.SymmetricalBonePoseSourceData" preserve="all" />
+    <type fullname="Roguegard.AffectableBoneSpriteTableData/Value" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.AffectableBoneSpriteTableData/Value/BoneSpriteColorPair" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.AffectableBoneSpriteTableData/Value/Item" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.AmuletOfChangeBeEquipped" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.BomberShellBeApplied" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.BomberTortoiseHit" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.BoneSpearAttack" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.BowThrow" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.ChairBeApplied" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CharacterCreation.ATKDEFEquipped" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CharacterCreation.AdversityAbility" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CharacterCreation.AlphabetTypeMember" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CharacterCreation.AmmoRace" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CharacterCreation.BareHandsAbility" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CharacterCreation.BarrierShieldEquipped" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CharacterCreation.BeamBulletSkill" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CharacterCreation.BeamSlashSkill" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CharacterCreation.BlindfoldEquipped" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CharacterCreation.BlitzWaveSkill" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CharacterCreation.BoneData/Node" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CharacterCreation.BraveHeartAbility" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CharacterCreation.CalmlyScoldAbility" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CharacterCreation.CaringAbility" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CharacterCreation.ConstantRaceSprite" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CharacterCreation.ConstantRaceWeight" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CharacterCreation.CostedRaceWeight" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CharacterCreation.CriticalAmuletEquipped" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CharacterCreation.CupGuardEquipped" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CharacterCreation.DoublePainAbility" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CharacterCreation.DungeonNextLevelStairsOpen" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CharacterCreation.DungeonOpen" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CharacterCreation.EmberSkill" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CharacterCreation.EmptyToFearOpen" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CharacterCreation.EquipMember" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CharacterCreation.EquipmentRace" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CharacterCreation.EquipmentStateData/Item" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CharacterCreation.FlareCannonSkill" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CharacterCreation.FoodAppraisalAbility" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CharacterCreation.FoodRace" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CharacterCreation.GenderDifferenceRaceSprite" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CharacterCreation.IllusionBandEquipped" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CharacterCreation.ItemMember" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CharacterCreation.LevitationOpen" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CharacterCreation.LinearRaceWeight" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CharacterCreation.MartialArtsAbility" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CharacterCreation.Multishot3Skill" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CharacterCreation.MultitaskAbility" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CharacterCreation.ObjectRace" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CharacterCreation.ObjectRaceOption" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CharacterCreation.OneHandedSwordAbility" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CharacterCreation.PaintTrapSkill" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CharacterCreation.PoisonSkill" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CharacterCreation.PowerSlashSkill" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CharacterCreation.PresetCreationData/StartingItem" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CharacterCreation.RandomRoomObjTable" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CharacterCreation.RandomWalkOpen" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CharacterCreation.RescueQuestObjective" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CharacterCreation.RestEfficiency1Ability" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CharacterCreation.RogueTileMember" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CharacterCreation.ScriptableRace" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CharacterCreation.SetSPDOpen" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CharacterCreation.ShieldJumpSkill" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CharacterCreation.ShieldThrowingAbility" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CharacterCreation.SingleItemMember" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CharacterCreation.SingleRoomAbility" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CharacterCreation.SizedRaceSprite" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CharacterCreation.SlayingQuestObjective" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CharacterCreation.SnootyAbility" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CharacterCreation.SpellChargeSkill" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CharacterCreation.Sprite2To8RaceSprite" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CharacterCreation.StairPickupAbility" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CharacterCreation.StandardRaceMember" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CharacterCreation.StraddlingPoseEquipped" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CharacterCreation.ThronsTrapSkill" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CharacterCreation.ThunderStormSkill" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CharacterCreation.VacuumRampageSkill" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CharacterCreation.VehicleOpen" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CharacterCreation.WanderingOpen" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CharacterCreation.WarbroomEquipped" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CharacterCreation.WeaponRace" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.ChestOpen" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.ChooseFrom3LevelInfo" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.ColorRangedBoneSprite" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CommandApply" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CommandDownStairs" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CommandEquip" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CommandFloorDownStairs" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CommandPutIntoChest" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CommandRead" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CommandRide" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CommandSaveStairs" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CommandTakeOutFromChest" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CommandUnequip" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CommandUnride" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CommonAttack" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CommonBeDefeated" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CommonBeShot" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CommonBeThrown" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CommonHit" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CommonLocate" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CommonPickUp" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CommonPolymorph" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CommonPut" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CommonThrow" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CommonWait" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CommonWalk" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CoreObjCommandTable/Item" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CostedBeEaten" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CrossGuardWandAttack" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.CrumbleHit" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.DaggerAttack" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.DownHit" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.DrinkObjCommand" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.EatObjCommand" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.FalseRogueMethod" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.FillTheBellyBeEaten" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.FloatingEyeHit" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.GoalDownStairsBeApplied" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.GusSporeBeDefeated" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.HerbOfConfusionBeEaten" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.HerbOfGainLevelBeEaten" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.HerbOfPaintBeEaten" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.HerbOfPaintBeThrown" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.HerbOfRevengeBeEaten" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.HerbOfSleepingBeEaten" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.HerbOfVisionBeEaten" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.InediateEat" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.LayingKitBeApplied" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.LobbyDoorBeApplied" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.LobbyMerchantBeApplied" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.LobbyOpen" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.MaceAttack" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.MedicalHerbBeEaten" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.MeltAttack" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.MotionSetData/Item" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.MovableObstacleBeApplied" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.OmnivoreEat" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.PaintTrapBeApplied" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.PartyBoardBeApplied" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.PickUpObjCommand" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.PoisonousHerbBeEaten" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.PoolBeApplied" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.PotionOfVisionBeEaten" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.PreparationKitBeApplied" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.PutObjCommand" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.QuestBoardBeApplied" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.RandomTrapBeApplied" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.RogueDungeonGenerator/TileArray" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.Rotatable1To8BoneMotionData/Item" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.RotatableBoneMotionData/Item" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.RotatableLoopBoneMotionData/Item" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.RustAttack" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.ScrollOfCleansingBeApplied" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.ScrollOfConfuseMonsterBeApplied" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.ScrollOfDestroyArmorBeApplied" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.ScrollOfStinkingCloudBeApplied" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.ShotObjCommand" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.StandardLevelInfo" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.SubmachineGunThrow" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.SymmetricalBonePoseSourceData/BackItem" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.SymmetricalBonePoseSourceData/Item" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.SymmetricalBonePoseSourceData/ReorderItem" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.ThronsTrapBeApplied" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.ThrowObjCommand" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.VehicleLocate" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.VehiclePolymorph" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.WandOfFireBeApplied" preserve="nothing" serialized="true" />
+    <type fullname="Roguegard.WandOfPinningBeApplied" preserve="nothing" serialized="true" />
+  </assembly>
+  <assembly fullname="RoguegardUnity, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+    <type fullname="RoguegardUnity.AnchorBalloon" preserve="all" />
+    <type fullname="RoguegardUnity.AnchorButton" preserve="all" />
+    <type fullname="RoguegardUnity.AnchorKeyCenter" preserve="all" />
+    <type fullname="RoguegardUnity.AnchorKeyItem" preserve="all" />
+    <type fullname="RoguegardUnity.CameraController" preserve="all" />
+    <type fullname="RoguegardUnity.CaptionWindow" preserve="all" />
+    <type fullname="RoguegardUnity.CharacterCreationMenuView" preserve="all" />
+    <type fullname="RoguegardUnity.ColorPreset" preserve="all" />
+    <type fullname="RoguegardUnity.CreditData" preserve="all" />
+    <type fullname="RoguegardUnity.DetailsMenuView" preserve="all" />
+    <type fullname="RoguegardUnity.FloorMenuView" preserve="all" />
+    <type fullname="RoguegardUnity.ForwardCursor" preserve="all" />
+    <type fullname="RoguegardUnity.GridModelsMenuView" preserve="all" />
+    <type fullname="RoguegardUnity.HeaderController" preserve="all" />
+    <type fullname="RoguegardUnity.HPGauge" preserve="all" />
+    <type fullname="RoguegardUnity.LogMenuView" preserve="all" />
+    <type fullname="RoguegardUnity.MenuController" preserve="all" />
+    <type fullname="RoguegardUnity.MenuWindowBackground" preserve="all" />
+    <type fullname="RoguegardUnity.MessageController" preserve="all" />
+    <type fullname="RoguegardUnity.MessageText" preserve="all" />
+    <type fullname="RoguegardUnity.MessageWindow" preserve="all" />
+    <type fullname="RoguegardUnity.ModelsMenuViewItemButton" preserve="all" />
+    <type fullname="RoguegardUnity.ModelsMenuViewOptionSlider" preserve="all" />
+    <type fullname="RoguegardUnity.ModelsMenuViewOptionText" preserve="all" />
+    <type fullname="RoguegardUnity.OptionsMenuView" preserve="all" />
+    <type fullname="RoguegardUnity.PopNumber" preserve="all" />
+    <type fullname="RoguegardUnity.RogueAssetTable" preserve="all" />
+    <type fullname="RoguegardUnity.RogueCharacter" preserve="all" />
+    <type fullname="RoguegardUnity.RogueCharacterCanvas" preserve="all" />
+    <type fullname="RoguegardUnity.RogueCharacterSpriteRenderer" preserve="all" />
+    <type fullname="RoguegardUnity.RoguegardSettingsData" preserve="all" />
+    <type fullname="RoguegardUnity.RogueInputController" preserve="all" />
+    <type fullname="RoguegardUnity.RogueLocalizedStringTable" preserve="all" />
+    <type fullname="RoguegardUnity.RogueSpriteRendererPool" preserve="all" />
+    <type fullname="RoguegardUnity.RogueTilemapRenderer" preserve="all" />
+    <type fullname="RoguegardUnity.ScrollModelsMenuView" preserve="all" />
+    <type fullname="RoguegardUnity.SoundTable" preserve="all" />
+    <type fullname="RoguegardUnity.StatsWindow" preserve="all" />
+    <type fullname="RoguegardUnity.SummaryMenuView" preserve="all" />
+    <type fullname="RoguegardUnity.TalkWindow" preserve="all" />
+    <type fullname="RoguegardUnity.TileCursor" preserve="all" />
+    <type fullname="RoguegardUnity.TitleCredit" preserve="all" />
+    <type fullname="RoguegardUnity.TitleData" preserve="all" />
+    <type fullname="RoguegardUnity.TitleMenu" preserve="all" />
+    <type fullname="RoguegardUnity.TouchController" preserve="all" />
+    <type fullname="RoguegardUnity.TouchField" preserve="all" />
+    <type fullname="RoguegardUnity.WindowFrameList" preserve="all" />
+    <type fullname="RoguegardUnity.ColorPreset/Item" preserve="nothing" serialized="true" />
+    <type fullname="RoguegardUnity.RogueAssetTable/Item" preserve="nothing" serialized="true" />
+    <type fullname="RoguegardUnity.RogueDirectionalSpriteTable" preserve="nothing" serialized="true" />
+    <type fullname="RoguegardUnity.SoundTable/Item" preserve="nothing" serialized="true" />
+    <type fullname="RoguegardUnity.WindowFrameList/Item" preserve="nothing" serialized="true" />
+  </assembly>
+  <assembly fullname="Unity.2D.Tilemap.Extras, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+    <type fullname="UnityEngine.RuleTile" preserve="all" />
+  </assembly>
+  <assembly fullname="Unity.Addressables, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" preserve="all">
+    <type fullname="UnityEngine.AddressableAssets.Addressables" preserve="all" />
+  </assembly>
+  <assembly fullname="Unity.Localization, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+    <type fullname="UnityEngine.Localization.Locale" preserve="all" />
+    <type fullname="UnityEngine.Localization.Tables.SharedTableData" preserve="all" />
+    <type fullname="UnityEngine.Localization.Tables.StringTable" preserve="all" />
+    <type fullname="UnityEngine.Localization.LocaleIdentifier" preserve="nothing" serialized="true" />
+    <type fullname="UnityEngine.Localization.Metadata.MetadataCollection" preserve="nothing" serialized="true" />
+    <type fullname="UnityEngine.Localization.Tables.DistributedUIDGenerator" preserve="nothing" serialized="true" />
+    <type fullname="UnityEngine.Localization.Tables.SharedTableData/SharedTableEntry" preserve="nothing" serialized="true" />
+    <type fullname="UnityEngine.Localization.Tables.TableEntryData" preserve="nothing" serialized="true" />
+  </assembly>
+  <assembly fullname="Unity.RenderPipelines.Universal.Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+    <type fullname="UnityEngine.Rendering.Universal.UniversalAdditionalCameraData" preserve="all" />
+    <type fullname="UnityEngine.Rendering.Universal.TemporalAA/Settings" preserve="nothing" serialized="true" />
+  </assembly>
+  <assembly fullname="Unity.ResourceManager, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" preserve="all">
+    <type fullname="UnityEngine.ResourceManagement.ResourceProviders.AssetBundleProvider" preserve="all" />
+    <type fullname="UnityEngine.ResourceManagement.ResourceProviders.BundledAssetProvider" preserve="all" />
+    <type fullname="UnityEngine.ResourceManagement.ResourceProviders.InstanceProvider" preserve="all" />
+    <type fullname="UnityEngine.ResourceManagement.ResourceProviders.LegacyResourcesProvider" preserve="all" />
+    <type fullname="UnityEngine.ResourceManagement.ResourceProviders.SceneProvider" preserve="all" />
+  </assembly>
+  <assembly fullname="Unity.TextMeshPro, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+    <type fullname="TMPro.TextMeshProUGUI" preserve="all" />
+    <type fullname="TMPro.TMP_FontAsset" preserve="all" />
+    <type fullname="TMPro.TMP_InputField" preserve="all" />
+    <type fullname="TMPro.FaceInfo_Legacy" preserve="nothing" serialized="true" />
+    <type fullname="TMPro.FontAssetCreationSettings" preserve="nothing" serialized="true" />
+    <type fullname="TMPro.KerningTable" preserve="nothing" serialized="true" />
+    <type fullname="TMPro.TMP_Character" preserve="nothing" serialized="true" />
+    <type fullname="TMPro.TMP_FontFeatureTable" preserve="nothing" serialized="true" />
+    <type fullname="TMPro.TMP_FontWeightPair" preserve="nothing" serialized="true" />
+    <type fullname="TMPro.TMP_InputField/OnChangeEvent" preserve="nothing" serialized="true" />
+    <type fullname="TMPro.TMP_InputField/SelectionEvent" preserve="nothing" serialized="true" />
+    <type fullname="TMPro.TMP_InputField/SubmitEvent" preserve="nothing" serialized="true" />
+    <type fullname="TMPro.TMP_InputField/TextSelectionEvent" preserve="nothing" serialized="true" />
+    <type fullname="TMPro.TMP_InputField/TouchScreenKeyboardEvent" preserve="nothing" serialized="true" />
+    <type fullname="TMPro.VertexGradient" preserve="nothing" serialized="true" />
+  </assembly>
+  <assembly fullname="UnityEditor.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+    <type fullname="UnityEditor.Audio.AudioMixerSnapshotController" preserve="all" />
+  </assembly>
+  <assembly fullname="UnityEngine.AudioModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+    <type fullname="UnityEngine.Audio.AudioMixer" preserve="all" />
+    <type fullname="UnityEngine.Audio.AudioMixerGroup" preserve="all" />
+    <type fullname="UnityEngine.AudioClip" preserve="all" />
+    <type fullname="UnityEngine.AudioListener" preserve="all" />
+    <type fullname="UnityEngine.AudioSource" preserve="all" />
+  </assembly>
+  <assembly fullname="UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+    <type fullname="UnityEngine.Camera" preserve="all" />
+    <type fullname="UnityEngine.GameObject" preserve="all" />
+    <type fullname="UnityEngine.LightmapSettings" preserve="all" />
+    <type fullname="UnityEngine.Material" preserve="all" />
+    <type fullname="UnityEngine.Object" preserve="all" />
+    <type fullname="UnityEngine.RectTransform" preserve="all" />
+    <type fullname="UnityEngine.Rendering.SortingGroup" preserve="all" />
+    <type fullname="UnityEngine.RenderSettings" preserve="all" />
+    <type fullname="UnityEngine.Shader" preserve="all" />
+    <type fullname="UnityEngine.Sprite" preserve="all" />
+    <type fullname="UnityEngine.SpriteRenderer" preserve="all" />
+    <type fullname="UnityEngine.Texture2D" preserve="all" />
+    <type fullname="UnityEngine.Transform" preserve="all" />
+    <type fullname="UnityEngine.Events.PersistentCallGroup" preserve="nothing" serialized="true" />
+    <type fullname="UnityEngine.RectOffset" preserve="nothing" serialized="true" />
+  </assembly>
+  <assembly fullname="UnityEngine.GridModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+    <type fullname="UnityEngine.Grid" preserve="all" />
+  </assembly>
+  <assembly fullname="UnityEngine.TilemapModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+    <type fullname="UnityEngine.Tilemaps.Tilemap" preserve="all" />
+    <type fullname="UnityEngine.Tilemaps.TilemapRenderer" preserve="all" />
+  </assembly>
+  <assembly fullname="UnityEngine.UI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+    <type fullname="UnityEngine.EventSystems.EventSystem" preserve="all" />
+    <type fullname="UnityEngine.EventSystems.StandaloneInputModule" preserve="all" />
+    <type fullname="UnityEngine.UI.CanvasScaler" preserve="all" />
+    <type fullname="UnityEngine.UI.ContentSizeFitter" preserve="all" />
+    <type fullname="UnityEngine.UI.GraphicRaycaster" preserve="all" />
+    <type fullname="UnityEngine.UI.Image" preserve="all" />
+    <type fullname="UnityEngine.UI.LayoutElement" preserve="all" />
+    <type fullname="UnityEngine.UI.Mask" preserve="all" />
+    <type fullname="UnityEngine.UI.RawImage" preserve="all" />
+    <type fullname="UnityEngine.UI.RectMask2D" preserve="all" />
+    <type fullname="UnityEngine.UI.Scrollbar" preserve="all" />
+    <type fullname="UnityEngine.UI.ScrollRect" preserve="all" />
+    <type fullname="UnityEngine.UI.Slider" preserve="all" />
+    <type fullname="UnityEngine.UI.VerticalLayoutGroup" preserve="all" />
+    <type fullname="UnityEngine.UI.AnimationTriggers" preserve="nothing" serialized="true" />
+    <type fullname="UnityEngine.UI.ColorBlock" preserve="nothing" serialized="true" />
+    <type fullname="UnityEngine.UI.MaskableGraphic/CullStateChangedEvent" preserve="nothing" serialized="true" />
+    <type fullname="UnityEngine.UI.Navigation" preserve="nothing" serialized="true" />
+    <type fullname="UnityEngine.UI.ScrollRect/ScrollRectEvent" preserve="nothing" serialized="true" />
+    <type fullname="UnityEngine.UI.Scrollbar/ScrollEvent" preserve="nothing" serialized="true" />
+    <type fullname="UnityEngine.UI.Slider/SliderEvent" preserve="nothing" serialized="true" />
+    <type fullname="UnityEngine.UI.SpriteState" preserve="nothing" serialized="true" />
+  </assembly>
+  <assembly fullname="UnityEngine.UIModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+    <type fullname="UnityEngine.Canvas" preserve="all" />
+    <type fullname="UnityEngine.CanvasGroup" preserve="all" />
+    <type fullname="UnityEngine.CanvasRenderer" preserve="all" />
+  </assembly>
+  <assembly fullname="UnityEngine.TextCoreFontEngineModule">
+    <type fullname="UnityEngine.TextCore.FaceInfo" preserve="nothing" serialized="true" />
+    <type fullname="UnityEngine.TextCore.Glyph" preserve="nothing" serialized="true" />
+    <type fullname="UnityEngine.TextCore.GlyphMetrics" preserve="nothing" serialized="true" />
+    <type fullname="UnityEngine.TextCore.GlyphRect" preserve="nothing" serialized="true" />
+  </assembly>
+</linker>
