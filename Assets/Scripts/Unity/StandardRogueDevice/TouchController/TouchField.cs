@@ -33,6 +33,8 @@ namespace RoguegardUnity
         private float pressZoom;
         private bool lastPinch;
         private bool pinchOnly;
+        private FieldPointer p0;
+        private FieldPointer p1;
         private PointerEventData pointer0;
         private PointerEventData pointer1;
         private Vector2 lastPointerPosition0;
@@ -313,11 +315,11 @@ namespace RoguegardUnity
         {
             // WebGL では pointerId は 0 からの連番ではない
 
-            if (pointer0 == null || pointer0.pointerId == eventData.pointerId)
+            if ((pointer0 == null && pointer1?.pointerId != eventData.pointerId) || pointer0.pointerId == eventData.pointerId)
             {
                 SetPointers(eventData, pointer1);
             }
-            else if (pointer1 == null || pointer1.pointerId == eventData.pointerId)
+            else if ((pointer1 == null && pointer0?.pointerId != eventData.pointerId) || pointer1.pointerId == eventData.pointerId)
             {
                 SetPointers(pointer0, eventData);
             }
