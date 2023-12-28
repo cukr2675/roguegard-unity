@@ -88,6 +88,21 @@ MonoBehaviour:
     _transformsInRootParent: 0
     _localMirrorX: 0
     _localMirrorY: 0
+  - _boneName: {fileID: 11400000, guid: c66efafae0b82384d8b4212c78358e52, type: 2}
+    _overridesSourceSprite: 0
+    _boneSprite:
+      _normalFront: {fileID: 0}
+      _normalRear: {fileID: 0}
+      _backFront: {fileID: 0}
+      _backRear: {fileID: 0}
+    _overridesSourceColor: 0
+    _color: {r: 1, g: 1, b: 1, a: 1}
+    _pixelLocalPosition: {x: -1, y: 0, z: 0}
+    _localRotation: {x: 0, y: 0, z: 0, w: 1}
+    _scaleOfLocalByLocal: {x: 1, y: 1, z: 1}
+    _transformsInRootParent: 0
+    _localMirrorX: 0
+    _localMirrorY: 0
   _localBacks: []
   _reorders:
   - _name: {fileID: 11400000, guid: 390f9798da027d8489dbb8048e8dc2d3, type: 2}
