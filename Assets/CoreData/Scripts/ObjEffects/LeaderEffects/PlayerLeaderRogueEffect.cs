@@ -16,6 +16,8 @@ namespace Roguegard
         void IPlayerLeaderInfo.Move(RogueObj from, RogueObj to) => Move(from, to);
         protected virtual void Move(RogueObj from, RogueObj to)
         {
+            if (from == to) return;
+
             RogueEffectUtility.RemoveClose(from, this);
 
             RogueEffectUtility.AddFromRogueEffect(to, this);
