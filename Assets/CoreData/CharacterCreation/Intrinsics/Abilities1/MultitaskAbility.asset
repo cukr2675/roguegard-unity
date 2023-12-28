@@ -21,7 +21,7 @@ MonoBehaviour:
     _ref:
       rid: -2
   _baseLv: 1
-  _baseCost: 3
+  _baseCost: 4
   _baseCostIsUnknown: 0
   _script:
     _script: {fileID: 11500000, guid: c6cb1493fe73af7499a51ed582cf52b0, type: 3}
