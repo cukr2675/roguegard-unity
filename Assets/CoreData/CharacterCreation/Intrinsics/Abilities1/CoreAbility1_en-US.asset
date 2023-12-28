@@ -50,6 +50,14 @@ MonoBehaviour:
     m_Localized: MartialArts
     m_Metadata:
       m_Items: []
+  - m_Id: 26504033532514304
+    m_Localized: RestEfficiency+1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26506469831741440
+    m_Localized: FoodAppraisal
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

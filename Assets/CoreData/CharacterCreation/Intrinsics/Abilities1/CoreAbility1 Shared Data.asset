@@ -115,6 +115,30 @@ MonoBehaviour:
     m_Key: MartialArtsAbility::d
     m_Metadata:
       m_Items: []
+  - m_Id: 26504033532514304
+    m_Key: RestEfficiency1Ability
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26504088729554944
+    m_Key: RestEfficiency1Ability::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26504098292568064
+    m_Key: RestEfficiency1Ability::d
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26506469831741440
+    m_Key: FoodAppraisalAbility
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26507477320339456
+    m_Key: FoodAppraisalAbility::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26507487655104512
+    m_Key: FoodAppraisalAbility::d
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
