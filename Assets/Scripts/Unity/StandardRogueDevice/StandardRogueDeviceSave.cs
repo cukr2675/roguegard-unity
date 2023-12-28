@@ -94,6 +94,7 @@ namespace RoguegardUnity
             options.ClearWithoutSet();
             var data = new StandardRogueDeviceData();
             data.Player = player;
+            data.Subject = player;
             data.World = world;
             data.Options = options;
             data.CurrentRandom = random;
