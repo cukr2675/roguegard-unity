@@ -66,6 +66,14 @@ MonoBehaviour:
     m_Localized: VacuumRampage
     m_Metadata:
       m_Items: []
+  - m_Id: 26669658393415680
+    m_Localized: ThunderStorm
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26669804158062592
+    m_Localized: FlareCannon
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

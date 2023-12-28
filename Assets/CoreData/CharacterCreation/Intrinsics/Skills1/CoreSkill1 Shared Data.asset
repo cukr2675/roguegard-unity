@@ -179,6 +179,30 @@ MonoBehaviour:
     m_Key: VacuumRampageSkill::d
     m_Metadata:
       m_Items: []
+  - m_Id: 26669658393415680
+    m_Key: ThunderStormSkill
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26669695366205440
+    m_Key: ThunderStormSkill::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26669705533198336
+    m_Key: ThunderStormSkill::d
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26669804158062592
+    m_Key: FlareCannonSkill
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26669835934109696
+    m_Key: FlareCannonSkill::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26669844557598720
+    m_Key: FlareCannonSkill::d
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
