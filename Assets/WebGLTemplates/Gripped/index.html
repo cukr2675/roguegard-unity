@@ -141,7 +141,7 @@
         aspectRatio: {{{ LOCK_ASPECT_RATIO !== '' && Number.parseFloat(LOCK_ASPECT_RATIO) !== 0 ? WIDTH / HEIGHT : 'null' }}},
         fullscreenOrientation: {{{ MANIFEST_ORIENTATION ? `'${MANIFEST_ORIENTATION}'` : 'null' }}},
         pixelated: false,
-        resizeDelayMilliseconds: 250,
+        resizeDelayMilliseconds: 400,
         resizeTimeoutID: null,
         resize: () => {
           const unityCanvas = document.querySelector('#unity-canvas');
