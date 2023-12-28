@@ -79,6 +79,9 @@ namespace Roguegard.CharacterCreation
 
                 if (result && keyword == MainInfoKw.Hit && activationDepth < 1f && useValue)
                 {
+                    // 発動した瞬間に解除
+                    RemoveClose(self);
+
                     var targetPosition = self.Position + self.Main.Stats.Direction.Forward * 2;
                     var targetObj = self.Location.Space.GetColliderObj(targetPosition);
                     var visible = MainCharacterWorkUtility.VisibleAt(self.Location, self.Position);
