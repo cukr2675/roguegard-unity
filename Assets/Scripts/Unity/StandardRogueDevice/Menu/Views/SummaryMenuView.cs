@@ -370,11 +370,10 @@ namespace RoguegardUnity
                 {
                     dungeon.TrySetStack(0);
                 }
+                LobbyMembers.SetSavePoint(self, RogueWorld.SavePointInfo);
 
-                RogueDevice.Add(DeviceKw.AutoSave, RogueWorld.SavePointInfo);
-                default(IActiveRogueMethodCaller).LoadSavePoint(self, 0f, RogueWorld.SavePointInfo);
+                RogueDevice.Add(DeviceKw.AutoSave, 0);
 
-                // BackToLobby で階層表示させるため、ここでは終了させない。
                 root.Done();
             }
         }
