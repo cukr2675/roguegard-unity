@@ -12,6 +12,7 @@ namespace Roguegard
         public static KeywordBoneMotion GunThrow { get; } = new KeywordBoneMotion(StdKw.GunThrow);
         public static KeywordBoneMotion Hit { get; } = new KeywordBoneMotion(MainInfoKw.Hit);
         public static KeywordBoneMotion Guard { get; } = new KeywordBoneMotion(StatsKw.Guard);
+        public static KeywordBoneMotion NoDamage { get; } = new KeywordBoneMotion(StdKw.NoDamage);
         public static KeywordBoneMotion BeDefeated { get; } = new KeywordBoneMotion(MainInfoKw.BeDefeated);
         public static KeywordBoneMotion Victory { get; } = new KeywordBoneMotion(StdKw.Victory);
 

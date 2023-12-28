@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bef39a5e05a158d4aaa5bd757199184c, type: 3}
+  m_Name: Humanoid9NoDamage
+  m_EditorClassIdentifier: 
+  _isLoop: 0
+  _direction: 0
+  _items:
+  - _poseSource: {fileID: 11400000, guid: 5d168ef74bae01d42b3384907eb2abf4, type: 2}
+    _pixelPosition: {x: 1, y: 0, z: 0}
+    _pixelRotatablePosition: {x: 1, y: 0, z: 0}
+    _rotation: {x: 0, y: 0, z: 0, w: 1}
+    _scale: {x: 1, y: 1, z: 1}
+    _degree: 0
+    _wait: 2
+  - _poseSource: {fileID: 11400000, guid: 5d168ef74bae01d42b3384907eb2abf4, type: 2}
+    _pixelPosition: {x: -1, y: 0, z: 0}
+    _pixelRotatablePosition: {x: 1, y: 0, z: 0}
+    _rotation: {x: 0, y: 0, z: 0, w: 1}
+    _scale: {x: 1, y: 1, z: 1}
+    _degree: 0
+    _wait: 2
+  - _poseSource: {fileID: 11400000, guid: 5d168ef74bae01d42b3384907eb2abf4, type: 2}
+    _pixelPosition: {x: 1, y: 0, z: 0}
+    _pixelRotatablePosition: {x: 1, y: 0, z: 0}
+    _rotation: {x: 0, y: 0, z: 0, w: 1}
+    _scale: {x: 1, y: 1, z: 1}
+    _degree: 0
+    _wait: 2
+  - _poseSource: {fileID: 11400000, guid: 5d168ef74bae01d42b3384907eb2abf4, type: 2}
+    _pixelPosition: {x: 0, y: 0, z: 0}
+    _pixelRotatablePosition: {x: 1, y: 0, z: 0}
+    _rotation: {x: 0, y: 0, z: 0, w: 1}
+    _scale: {x: 1, y: 1, z: 1}
+    _degree: 0
+    _wait: 2
+  - _poseSource: {fileID: 11400000, guid: 5d168ef74bae01d42b3384907eb2abf4, type: 2}
+    _pixelPosition: {x: -1, y: 0, z: 0}
+    _pixelRotatablePosition: {x: 1, y: 0, z: 0}
+    _rotation: {x: 0, y: 0, z: 0, w: 1}
+    _scale: {x: 1, y: 1, z: 1}
+    _degree: 0
+    _wait: 2
+  - _poseSource: {fileID: 11400000, guid: 5d168ef74bae01d42b3384907eb2abf4, type: 2}
+    _pixelPosition: {x: 0, y: 0, z: 0}
+    _pixelRotatablePosition: {x: 1, y: 0, z: 0}
+    _rotation: {x: 0, y: 0, z: 0, w: 1}
+    _scale: {x: 1, y: 1, z: 1}
+    _degree: 0
+    _wait: 2

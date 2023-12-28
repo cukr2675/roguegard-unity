@@ -86,6 +86,11 @@ namespace Roguegard
                         var item = RogueCharacterWork.CreateBoneMotion(self, KeywordBoneMotion.Guard, false);
                         RogueDevice.AddWork(DeviceKw.EnqueueWork, item);
                     }
+                    else if (damage == 0)
+                    {
+                        var item = RogueCharacterWork.CreateBoneMotion(self, KeywordBoneMotion.NoDamage, false);
+                        RogueDevice.AddWork(DeviceKw.EnqueueWork, item);
+                    }
                     else
                     {
                         var item = RogueCharacterWork.CreateBoneMotion(self, KeywordBoneMotion.Hit, false);
