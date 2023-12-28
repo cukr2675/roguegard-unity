@@ -197,6 +197,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - Locale-ja-JP
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b30c739affe5b0648afcd2dcabc9d394
+    m_Address: CoreAbility2_ja-JP
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ja-JP
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: 3b33727de1adbae46bb88bf0e7b13048, type: 2}
   m_SchemaSet:

@@ -47,7 +47,7 @@ namespace Roguegard.CharacterCreation
                 RogueMethodAspectState.PassiveNext next)
             {
                 var result = next.Invoke(keyword, method, self, user, activationDepth, arg);
-                if (keyword == MainInfoKw.Hit && arg.RefValue?.MainValue > 0f)
+                if (result && keyword == MainInfoKw.Hit && arg.RefValue?.MainValue > 0f)
                 {
                     // ダメージを受けたときバフを解除
                     readyToBuff = false;
