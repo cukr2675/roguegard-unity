@@ -27,48 +27,36 @@ namespace Roguegard.CharacterCreation
 
             protected override bool Activate(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
             {
-                if (RaycastAssert.RequireTarget(LineOfSight10RogueMethodRange.Instance, self, arg, out var target)) return false;
-                if (RogueDevice.Primary.VisibleAt(self.Location, self.Position))
+                if (MainCharacterWorkUtility.VisibleAt(self.Location, self.Position))
                 {
                     RogueDevice.Add(DeviceKw.AppendText, ":ActivateSkillMsg::2");
                     RogueDevice.Add(DeviceKw.AppendText, self);
                     RogueDevice.Add(DeviceKw.AppendText, this);
                     RogueDevice.Add(DeviceKw.AppendText, "\n");
                     MainCharacterWorkUtility.TryAddSkill(self);
-                    MainCharacterWorkUtility.TryAddShot(self);
                 }
 
-                // 攻撃力(x2)ダメージの攻撃。
-                using var damageValue = AffectableValue.Get();
-                StatsEffectedValues.GetATK(self, damageValue);
-                damageValue.MainValue += damageValue.BaseMainValue;
-                damageValue.SubValues[MainInfoKw.Skill] = 1f;
-                this.TryHurt(target, self, activationDepth, damageValue);
-                this.TryDefeat(target, self, activationDepth, damageValue);
+                StatusEffect.Callback.AffectTo(self, self, activationDepth, RogueMethodArgument.Identity);
                 return true;
             }
 
             public override int GetATK(RogueObj self, out bool additionalEffect)
             {
-                // 攻撃力(x2)ダメージの攻撃。
-                using var damageValue = AffectableValue.Get();
-                StatsEffectedValues.GetATK(self, damageValue);
-                damageValue.MainValue += damageValue.BaseMainValue;
-
-                var hpDamage = Mathf.FloorToInt(damageValue.MainValue);
-                additionalEffect = false;
-                return hpDamage;
+                additionalEffect = true;
+                return 0;
             }
         }
 
         [ObjectFormer.Formable]
-        private class StatusEffect : BaseStatusEffect, IValueEffect, IRogueMethodPassiveAspect
+        private class StatusEffect : TimeLimitedStackableStatusEffect, IValueEffect, IRogueMethodPassiveAspect
 		{
             public static IAffectCallback Callback { get; } = new AffectCallback(new StatusEffect());
 
 			public override string Name => ":ShieldJumpSkill";
 
 			public override IKeyword EffectCategory => null;
+            protected override int MaxStack => 1;
+            protected override int InitialLifeTime => 2;
 
             float IValueEffect.Order => 0f;
             float IRogueMethodPassiveAspect.Order => 0f;
@@ -78,7 +66,7 @@ namespace Roguegard.CharacterCreation
                 if (keyword == StatsKw.DEF)
                 {
                     // 防御力 +1
-                    value.MainValue += 1f;
+                    value.MainValue -= 1f;
                 }
             }
 
@@ -86,12 +74,49 @@ namespace Roguegard.CharacterCreation
                 IKeyword keyword, IRogueMethod method, RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg,
                 RogueMethodAspectState.PassiveNext next)
             {
+                var useValue = arg.RefValue?.MainValue > 0f;
                 var result = next.Invoke(keyword, method, self, user, activationDepth, arg);
 
-                if (result && keyword == MainInfoKw.Hit && activationDepth < 1f && arg.RefValue?.MainValue > 0f)
+                if (result && keyword == MainInfoKw.Hit && activationDepth < 1f && useValue)
                 {
-                    // 正面2マス先に移動する
-                    //this.
+                    var targetPosition = self.Position + self.Main.Stats.Direction.Forward * 2;
+                    var targetObj = self.Location.Space.GetColliderObj(targetPosition);
+                    var visible = MainCharacterWorkUtility.VisibleAt(self.Location, self.Position);
+                    if (visible)
+                    {
+                        RogueDevice.Add(DeviceKw.AppendText, ":ShieldJumpMsg::1");
+                        RogueDevice.Add(DeviceKw.AppendText, self);
+                        RogueDevice.Add(DeviceKw.AppendText, "\n");
+
+                        var direction = RogueDirection.FromSignOrLowerLeft(targetPosition - self.Position);
+                        var syncItem = RogueCharacterWork.CreateSyncPositioning(self);
+                        var item = RogueCharacterWork.CreateWalk(self, targetPosition, direction, KeywordBoneMotion.Walk, false);
+                        RogueDevice.AddWork(DeviceKw.EnqueueWork, syncItem);
+                        RogueDevice.AddWork(DeviceKw.EnqueueWork, item);
+                    }
+
+                    var jumpBack = false;
+                    if (targetObj == null)
+                    {
+                        // 正面2マス先に何もなければそこに移動する
+                        jumpBack = !SpaceUtility.TryLocate(self, self.Location, targetPosition);
+                    }
+                    else
+                    {
+                        // 正面2マス先に誰かいるときそれに攻撃力(x2)+2ダメージ
+                        using var damage = AffectableValue.Get();
+                        StatsEffectedValues.GetATK(self, damage);
+                        damage.MainValue += damage.BaseMainValue + 2;
+                        default(IAffectRogueMethodCaller).Hurt(targetObj, self, 1f, damage);
+                        jumpBack = true;
+                    }
+
+                    if (jumpBack && visible)
+                    {
+                        var direction = RogueDirection.FromSignOrLowerLeft(self.Position - targetPosition);
+                        var item = RogueCharacterWork.CreateWalk(self, self.Position, direction, KeywordBoneMotion.Walk, false);
+                        RogueDevice.AddWork(DeviceKw.EnqueueWork, item);
+                    }
                 }
                 return result;
             }

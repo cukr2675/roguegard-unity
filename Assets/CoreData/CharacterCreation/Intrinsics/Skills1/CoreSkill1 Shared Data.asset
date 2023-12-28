@@ -151,6 +151,10 @@ MonoBehaviour:
     m_Key: ShieldJumpSkill::d
     m_Metadata:
       m_Items: []
+  - m_Id: 26570559249846272
+    m_Key: ShieldJumpMsg::1
+    m_Metadata:
+      m_Items: []
   - m_Id: 16330716523663360
     m_Key: BlitzWaveSkill
     m_Metadata:
