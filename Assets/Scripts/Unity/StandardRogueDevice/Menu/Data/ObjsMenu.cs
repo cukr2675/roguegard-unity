@@ -351,7 +351,7 @@ namespace RoguegardUnity
                 // ビューを更新
                 parent.action(root, self, user, arg);
                 var openArg = new RogueMethodArgument(targetObj: arg.TargetObj, vector: new Vector2(parent.selfIndex, 0f));
-                root.OpenMenuAsDialog(null, self, user, arg, openArg);
+                root.Reopen(self, user, arg, openArg);
                 root.Back();
             }
 

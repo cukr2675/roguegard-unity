@@ -140,6 +140,19 @@ namespace RoguegardUnity
             }
         }
 
+        void IModelsMenuRoot.Reopen(
+            RogueObj self, RogueObj user, in RogueMethodArgument arg, in RogueMethodArgument backArg)
+        {
+            if (!currentMenuIsDialog)
+            {
+                if (stack.TryPeek(out var peek))
+                {
+                    peek.Arg = backArg;
+                }
+                currentMenuIsDialog = true;
+            }
+        }
+
         void IModelsMenuRoot.AddInt(IKeyword keyword, int integer) => EventManager.Add(keyword, integer: integer);
         void IModelsMenuRoot.AddFloat(IKeyword keyword, float number) => EventManager.Add(keyword, number: number);
         void IModelsMenuRoot.AddObject(IKeyword keyword, object obj) => EventManager.Add(keyword, obj: obj);
