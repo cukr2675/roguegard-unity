@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Sorciere
   m_EditorClassIdentifier: 
   _overridesCost: 0
-  _cost: 9
+  _cost: 15
   _costIsUnknown: 0
   _descriptionName: "\u30C7\u30A3\u30A2\u30CA"
   _shortName: "\u7B92\u9A0E\u5175"
@@ -73,6 +73,10 @@ MonoBehaviour:
     _optionDescription: {fileID: 0}
     _members:
       _items: []
+  - _option: {fileID: 11400000, guid: 1dfd099963e55684184b2975315d689e, type: 2}
+    _optionDescription: {fileID: 0}
+    _members:
+      _items: []
   - _option: {fileID: 11400000, guid: 8a0e5474712b85e4fb8251eb75a73a8a, type: 2}
     _optionDescription: {fileID: 0}
     _members:
@@ -81,7 +85,15 @@ MonoBehaviour:
     _optionDescription: {fileID: 0}
     _members:
       _items: []
+  - _option: {fileID: 11400000, guid: 3f62a76a40423be4d818c8c3097e45dc, type: 2}
+    _optionDescription: {fileID: 0}
+    _members:
+      _items: []
   - _option: {fileID: 11400000, guid: 1940831252178064f9466f18538e6077, type: 2}
+    _optionDescription: {fileID: 0}
+    _members:
+      _items: []
+  - _option: {fileID: 11400000, guid: 2ad5374735808e64e9575f80dcf37892, type: 2}
     _optionDescription: {fileID: 0}
     _members:
       _items: []
