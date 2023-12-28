@@ -56,7 +56,8 @@ namespace RoguegardUnity
             // UI表示
             touchController = Object.Instantiate(touchControllerPrefab, parent);
             var autoPlayDeviceEventHandler = new AutoPlayDeviceEventHandler(this, touchController, x => Subject = x);
-            touchController.Initialize(tilemapGrid.Tilemap, soundController, spriteRendererPool, () => autoPlayDeviceEventHandler.StopAutoPlay());
+            touchController.Initialize(
+                tilemapGrid.Tilemap, soundController, spriteRendererPool, () => UpdateCharacters(), () => autoPlayDeviceEventHandler.StopAutoPlay());
             touchController.GetInfo(out var menuController, out var openChestMenu);
 
             // Unity の Update 実行用オブジェクト
@@ -97,7 +98,6 @@ namespace RoguegardUnity
             touchController.OpenWalker(Player);
             touchController.MenuOpen(Subject, Player != Subject);
             ticker.Reset();
-            UpdateCharacters();
 
             // 前回セーブからの経過時間でターン経過
             if (data.SaveDateTime != null)
@@ -115,6 +115,9 @@ namespace RoguegardUnity
                 TickEnumerator.UpdateTurns(Player, turns, maxTurns * 10, false);
                 LobbyMembers.SetSavePoint(Player, null);
             }
+
+            // 時間経過処理後にリセット
+            UpdateCharacters();
         }
 
         public void Close()

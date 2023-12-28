@@ -25,7 +25,7 @@ namespace RoguegardUnity
         [SerializeField] private CaptionWindow _captionWindow = null;
         [SerializeField] private ModelsMenuView _thumbnailMenu = null;
         [SerializeField] private ModelsMenuView _commandMenu = null;
-        [SerializeField] private ModelsMenuView _floorMenu = null;
+        [SerializeField] private FloorMenuView _floorMenu = null;
         [SerializeField] private SummaryMenuView _summaryMenu = null;
         [SerializeField] private DetailsMenuView _detailsMenu = null;
         [SerializeField] private OptionsMenuView _optionsMenu = null;
@@ -53,7 +53,7 @@ namespace RoguegardUnity
 
         public bool TalkingWait => _messageController.IsTalkingNow || menuManager.Any || EventManager.Wait;
 
-        internal void Initialize(SoundController soundController, RogueSpriteRendererPool rendererPool)
+        internal void Initialize(SoundController soundController, RogueSpriteRendererPool rendererPool, System.Action updateCharacters)
         {
             var objCommandMenu = new ObjCommandMenu();
             var putInCommandMenu = new PutIntoChestCommandMenu();
@@ -73,6 +73,7 @@ namespace RoguegardUnity
             _detailsMenu.Initialize();
             _optionsMenu.Initialize();
             _characterCreationMenu.Initialize(rendererPool);
+            _floorMenu.Initialize(updateCharacters);
             var scrollSensitivity = 64f;
             SetScrollSensitivity(scrollSensitivity);
 
