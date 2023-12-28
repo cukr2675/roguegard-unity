@@ -26,7 +26,7 @@ namespace Roguegard
             value.Initialize(DungeonInfo.GetLocationVisibleRadius(self));
             ValueEffectState.AffectValue(StdKw.View, value, self);
             var visibleRadius = value.MainValue;
-            var predicator = Target.GetPredicator(user, 0f, null);
+            using var predicator = Target.GetPredicator(user, 0f, null);
             if (!user.Location.Space.TryGetRoomView(user.Position, out var room, out _))
             {
                 room = new RectInt(0, 0, 0, 0);
