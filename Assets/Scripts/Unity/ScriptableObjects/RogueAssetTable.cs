@@ -67,9 +67,9 @@ namespace RoguegardUnity
             else
             {
                 _items = newItems;
-                //var thisPath = AssetDatabase.GetAssetPath(this);
-                //EditorUtility.SetDirty(this);
-                //AssetDatabase.ImportAsset(thisPath);
+                var thisPath = UnityEditor.AssetDatabase.GetAssetPath(this);
+                UnityEditor.EditorUtility.SetDirty(this);
+                UnityEditor.AssetDatabase.ImportAsset(thisPath);
             }
 #endif
         }
