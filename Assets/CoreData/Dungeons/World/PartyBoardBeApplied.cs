@@ -44,14 +44,24 @@ namespace Roguegard
 
             public void OpenMenu(IModelsMenuRoot root, RogueObj player, RogueObj user, in RogueMethodArgument arg)
             {
-                if (arg.TargetObj != null && arg.Other is CharacterCreationDataBuilder builder)
+                if (arg.Other is CharacterCreationDataBuilder builder)
                 {
                     // キャラクリ画面から戻ったとき、そのキャラを更新する
-                    var character = arg.TargetObj;
                     if (!builder.TryGetGrowingInfoSet(builder.Race.Option, builder.Race.Gender, out var newInfoSet)) throw new RogueException();
 
-                    character.Main.SetBaseInfoSet(character, newInfoSet);
-                    Debug.Log("Update character");
+                    var character = arg.TargetObj;
+                    if (character != null)
+                    {
+                        // 編集キャラ更新
+                        character.Main.SetBaseInfoSet(character, newInfoSet);
+                    }
+                    else
+                    {
+                        // 新規キャラ追加
+                        var world = RogueWorld.GetWorld(player);
+                        character = builder.CreateObj(null, Vector2Int.zero, RogueRandom.Primary);
+                        LobbyMembers.Add(character, world);
+                    }
                 }
 
                 var lobbyMembers = LobbyMembers.GetMembersByCharacter(player);
@@ -86,11 +96,8 @@ namespace Roguegard
                     {
                         root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
                         var builder = RoguegardSettings.CharacterCreationDatabase.LoadPreset(0);
-                        var character = builder.CreateObj(null, Vector2Int.zero, RogueRandom.Primary);
-                        var world = RogueWorld.GetWorld(self);
-                        LobbyMembers.Add(character, world);
                         var openArg = new RogueMethodArgument(other: builder);
-                        root.OpenMenuAsDialog(newMenu, self, user, openArg, new(targetObj: character, other: builder));
+                        root.OpenMenu(newMenu, self, user, openArg, openArg);
                     }
                     else
                     {
