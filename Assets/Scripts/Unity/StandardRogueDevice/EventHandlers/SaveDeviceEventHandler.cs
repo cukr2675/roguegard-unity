@@ -23,18 +23,18 @@ namespace RoguegardUnity
             if (keyword == DeviceKw.AutoSave)
             {
                 // オートセーブ
-                var savePointInfo = (ISavePointInfo)obj;
-                Save(null, StandardRogueDeviceSave.RootDirectory + "/AutoSave.gard", savePointInfo, true);
+                //var savePointInfo = (ISavePointInfo)obj;
+                Save(null, StandardRogueDeviceSave.RootDirectory + "/AutoSave.gard", true);
                 return true;
             }
             if (keyword == DeviceKw.SaveGame)
             {
                 // 名前を付けてセーブ
-                var savePointInfo = (ISavePointInfo)obj;
+                //var savePointInfo = (ISavePointInfo)obj;
                 touchController.OpenSelectFile(
-                    (root, path) => Save(root, path, savePointInfo, false),
+                    (root, path) => Save(root, path, false),
                     (root) => StandardRogueDeviceSave.GetNewNumberingPath(
-                        RoguegardSettings.DefaultSaveFileName, path => Save(root, path, savePointInfo, false)));
+                        RoguegardSettings.DefaultSaveFileName, path => Save(root, path, false)));
                 return true;
             }
             if (keyword == DeviceKw.LoadGame)
@@ -46,24 +46,28 @@ namespace RoguegardUnity
             return false;
         }
 
-        private void Save(IModelsMenuRoot root, string path, ISavePointInfo savePointInfo, bool autoSave)
+        private void Save(IModelsMenuRoot root, string path, bool autoSave)
         {
+            // セーブ前処理
+            var player = componentManager.Player;
+            var maxTurns = 1000;
+            TickEnumerator.UpdateTurns(player, maxTurns, maxTurns * 10, true);
+
             // セーブ用データを生成
             var data = new StandardRogueDeviceData();
-            data.Player = componentManager.Player;
+            data.Player = player;
             data.Subject = componentManager.Subject;
             data.World = componentManager.World;
             data.Options = componentManager.Options;
             data.CurrentRandom = RogueRandom.Primary;
-            data.SavePointInfo = savePointInfo;
             data.SaveDateTime = System.DateTime.UtcNow.ToString();
 
             // セーブデータ容量を減らす
-            var view = componentManager.Player.Get<ViewInfo>();
-            if (componentManager.Player.Location != view.Location)
+            var view = player.Get<ViewInfo>();
+            if (player.Location != view.Location)
             {
                 // 空間移動直後にセーブしたとき、移動前の空間の情報を保存しないよう処理する
-                view.ReadyView(componentManager.Player.Location);
+                view.ReadyView(player.Location);
             }
 
             var name = RogueFile.GetName(path);

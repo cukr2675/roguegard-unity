@@ -32,27 +32,63 @@ namespace RoguegardUnity
             device.AfterStepTurn();
         }
 
-        public void Update(RogueObj obj, int turns, int maxIteration)
+        public static void UpdateTurns(RogueObj player, int maxTurns, int maxIteration, bool untilSavePoint)
         {
-            if (item == null) { item = new Item(); }
-            for (int i = 0; i < maxIteration; i++)
+            var world = RogueWorld.GetWorld(player);
+            var lobby = RogueWorld.GetLobbyByCharacter(player);
+            var lobbyMembers = LobbyMembers.GetMembersByCharacter(player);
+            var item = new Item();
+            var iteration = 0;
+            for (int turns = 0; turns < maxTurns; turns++)
             {
-                var location = obj.Location ?? obj;
-                if (location == null) break;
-
-                var result = item.MoveNext(location);
-                if (result == Result.Next)
+                for (int i = 0; i < world.Space.Objs.Count; i++) // Update と同じ時間経過順を保つ
                 {
-                    turns--;
-                    if (turns <= 0)
+                    var location = world.Space.Objs[i];
+                    if (location == null) continue;
+                    if (untilSavePoint && location == lobby) continue; // セーブポイントで止める場合、ロビーは空間そのものをセーブポイントとみなす
+                    if (location != lobby && ObjIsIn(player, location)) continue; // ロビー以外の空間にプレイヤーが存在するとき、その空間は時間経過させない
+                    if (!ObjsIsIn(lobbyMembers, location)) continue; // ロビーメンバーが存在しない空間は時間経過させない
+
+                    while (iteration < maxIteration)
                     {
-                        break;
+                        var result = item.MoveNext(location);
+                        if (result == Result.Next) break;
+
+                        iteration++;
                     }
+
+                    // プレイヤーが存在する空間の IsTicked を変えるとセーブリセットリロード後の行動順に影響が出るため避ける
+                    // world ではなく location をリセットする
+                    ResetTick(location);
                 }
+                if (iteration >= maxIteration) break;
 
-                ResetTick(location);
+                if (!untilSavePoint)
+                {
+                    // セーブポイントで止めない場合、デバイスでセーブポイントから復帰させる
+                    RogueDevice.Primary.AfterStepTurn();
+                }
+            }
 
-                // RogueDeviceEffect で止まる
+            bool ObjIsIn(RogueObj obj, RogueObj space)
+            {
+                var objLocation = obj;
+                while (objLocation != null)
+                {
+                    if (objLocation == space) return true;
+
+                    objLocation = objLocation.Location;
+                }
+                return false;
+            }
+
+            bool ObjsIsIn(Spanning<RogueObj> objs, RogueObj space)
+            {
+                for (int j = 0; j < objs.Count; j++)
+                {
+                    if (ObjIsIn(objs[j], space)) return true;
+                }
+                return false;
             }
         }
 
@@ -116,13 +152,13 @@ namespace RoguegardUnity
 
                 while (true)
                 {
-                    var status = self.Main;
-                    if (status == null || status.IsTicked)
+                    if (self.Main.IsTicked || LobbyMembers.GetSavePoint(self) != null)
                     {
+                        // 行動済みまたはセーブポイントにいるとき行動しない
                         yield return Result.Next;
                         continue;
                     }
-                    status.IsTicked = true;
+                    self.Main.IsTicked = true;
 
                     // 子オブジェクトの処理
                     // 子オブジェクトの動作には親オブジェクトが IsTicked == false であることが必要。
@@ -156,9 +192,8 @@ namespace RoguegardUnity
 
 
                     // 行動前にオブジェクトエフェクトを更新する。
-                    var state = self.Main;
-                    var updaterState = state.GetRogueObjUpdaterState(self);
-                    var aspectState = state.GetRogueMethodAspectState(self);
+                    var updaterState = self.Main.GetRogueObjUpdaterState(self);
+                    var aspectState = self.Main.GetRogueMethodAspectState(self);
                     aspectState.RemoveAllNull();
 
                     // スタックがゼロなら解体する。
@@ -185,7 +220,7 @@ namespace RoguegardUnity
 
                     void Destruct()
                     {
-                        var locateMethod = status.InfoSet.Locate;
+                        var locateMethod = self.Main.InfoSet.Locate;
                         var destructArg = new RogueMethodArgument(targetObj: null);
                         RogueMethodAspectState.Invoke(MainInfoKw.Locate, locateMethod, self, null, 0f, destructArg);
                     }

@@ -22,6 +22,8 @@ namespace RoguegardUnity
         private RogueTicker ticker;
         private GameOverDeviceEventHandler gameOverDeviceEventHandler;
 
+        private static readonly DummySavePoint dummySavePoint = new DummySavePoint();
+
         public StandardRogueDeviceEventManager EventManager { get; private set; }
 
         public bool FastForward => Player.Main.Stats.Nutrition >= 1 && touchController.FastForward;
@@ -49,7 +51,7 @@ namespace RoguegardUnity
 
             // 音声再生
             var soundController = new SoundController();
-            soundController.Open(parent, seAudioSourcePrefab, soundTable.ToTable());
+            soundController.Open(parent, seAudioSourcePrefab, soundTable);
 
             // UI表示
             touchController = Object.Instantiate(touchControllerPrefab, parent);
@@ -96,26 +98,21 @@ namespace RoguegardUnity
             ticker.Reset();
             UpdateCharacters();
 
-            // セーブポイント読み込みは UpdateCharacters (キューリセット) より後
-            if (data.SavePointInfo != null)
-            {
-                var result = default(IActiveRogueMethodCaller).LoadSavePoint(Player, 0f, data.SavePointInfo);
-                if (!result)
-                {
-                    Debug.LogError($"セーブポイント {data.SavePointInfo} の読み込みに失敗しました。");
-                }
-            }
-
             // 前回セーブからの経過時間でターン経過
-            if (data.SaveDateTime != null && LobbyMembers.GetMembersByCharacter(RogueDevice.Primary.Player).Count == 2)
+            if (data.SaveDateTime != null)
             {
                 var loadDateTime = System.DateTime.UtcNow;
                 var relationalDateTime = loadDateTime - System.DateTime.Parse(data.SaveDateTime);
                 var seconds = (int)relationalDateTime.TotalSeconds;
 
-                var lobbyMember = LobbyMembers.GetMembersByCharacter(RogueDevice.Primary.Player)[1];
-                var turns = Mathf.Min(seconds, 10000);
-                ticker.UpdateObj(lobbyMember, turns);
+                var maxTurns = 1000;
+                var turns = Mathf.Min(seconds, maxTurns);
+                AfterStepTurn(); // セーブポイントから復帰させる
+
+                // ダミーのセーブポイントを設定して入力待機ループを抜ける
+                LobbyMembers.SetSavePoint(Player, dummySavePoint);
+                TickEnumerator.UpdateTurns(Player, turns, maxTurns * 10, false);
+                LobbyMembers.SetSavePoint(Player, null);
             }
         }
 
@@ -126,6 +123,18 @@ namespace RoguegardUnity
 
         public void AfterStepTurn()
         {
+            // セーブポイントから復帰する
+            var lobbyMembers = LobbyMembers.GetMembersByCharacter(World.Space.Objs[0]);
+            for (int i = 0; i < lobbyMembers.Count; i++)
+            {
+                var lobbyMember = lobbyMembers[i];
+                var savePoint = LobbyMembers.GetSavePoint(lobbyMember);
+                if (savePoint == null || savePoint == dummySavePoint) continue;
+
+                default(IActiveRogueMethodCaller).LoadSavePoint(lobbyMember, 0f, savePoint);
+                LobbyMembers.SetSavePoint(lobbyMember, null);
+            }
+
             characterRenderSystem.StartAnimation(Subject);
             EventManager.ResetCalledSynchronizedView();
 
@@ -220,6 +229,16 @@ namespace RoguegardUnity
                 characterRenderSystem.EndAnimation(Player);
             }
             tilemapRenderSystem.Update(Player, false);
+        }
+
+        /// <summary>
+        /// <see cref="TickEnumerator"/> で行動を停止させるためのクラス
+        /// </summary>
+        [ObjectFormer.IgnoreRequireRelationalComponent]
+        private class DummySavePoint : ISavePointInfo
+        {
+            public IApplyRogueMethod BeforeSave => throw new System.NotSupportedException();
+            public IApplyRogueMethod AfterLoad => throw new System.NotSupportedException();
         }
     }
 }

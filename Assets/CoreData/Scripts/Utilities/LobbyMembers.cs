@@ -52,6 +52,30 @@ namespace Roguegard
             return result;
         }
 
+        public static ISavePointInfo GetSavePoint(RogueObj obj)
+        {
+            if (obj.TryGet<MemberInfo>(out var info))
+            {
+                return info.SavePoint;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public static void SetSavePoint(RogueObj obj, ISavePointInfo savePoint)
+        {
+            if (obj.TryGet<MemberInfo>(out var info))
+            {
+                info.SavePoint = savePoint;
+            }
+            else
+            {
+                Debug.LogWarning($"{obj} はロビーメンバーではありません。");
+            }
+        }
+
         [ObjectFormer.Formable]
         private class WorldInfo : IRogueObjInfo
         {
@@ -67,6 +91,8 @@ namespace Roguegard
         [ObjectFormer.Formable]
         private class MemberInfo : IRogueObjInfo
         {
+            public ISavePointInfo SavePoint { get; set; }
+
             public bool IsExclusedWhenSerialize => false;
 
             public bool CanStack(IRogueObjInfo other) => false;

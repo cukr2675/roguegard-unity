@@ -86,6 +86,7 @@ namespace RoguegardUnity
             var world = RoguegardSettings.WorldGenerator.CreateObj(null, Vector2Int.zero, random);
             var player = characterCreationDataBuilder.CreateObj(world, Vector2Int.zero, random);
             LobbyMembers.Add(player);
+            LobbyMembers.SetSavePoint(player, newGamePointInfo);
             player.SetInfo(new ViewInfo());
 
             // デバイスを設定
@@ -96,7 +97,6 @@ namespace RoguegardUnity
             data.World = world;
             data.Options = options;
             data.CurrentRandom = random;
-            data.SavePointInfo = newGamePointInfo;
             var device = new StandardRogueDevice(data);
             RogueDeviceEffect.SetTo(player);
             return device;

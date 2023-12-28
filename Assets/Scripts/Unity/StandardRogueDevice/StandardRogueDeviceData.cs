@@ -14,7 +14,6 @@ namespace RoguegardUnity
         public RogueObj World { get; set; }
         public RogueOptions Options { get; set; }
         public IRogueRandom CurrentRandom { get; set; }
-        public ISavePointInfo SavePointInfo { get; set; }
         public string SaveDateTime { get; set; }
     }
 }
