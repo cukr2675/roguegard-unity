@@ -105,9 +105,10 @@ namespace RoguegardUnity
                 var loadDateTime = System.DateTime.UtcNow;
                 var relationalDateTime = loadDateTime - System.DateTime.Parse(data.SaveDateTime);
                 var seconds = (int)relationalDateTime.TotalSeconds;
+                var secondsPerTurn = 60;
 
                 var maxTurns = 1000;
-                var turns = Mathf.Min(seconds, maxTurns);
+                var turns = Mathf.Min(seconds / secondsPerTurn, maxTurns);
                 AfterStepTurn(); // セーブポイントから復帰させる
 
                 // ダミーのセーブポイントを設定して入力待機ループを抜ける
