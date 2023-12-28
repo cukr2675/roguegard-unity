@@ -23,16 +23,16 @@ namespace RoguegardUnity
             if (keyword == DeviceKw.AutoSave)
             {
                 // オートセーブ
-                Save(null, StandardRogueDeviceSave.RootDirectory + "/AutoSave.gard", true);
+                SaveDelay(null, StandardRogueDeviceSave.RootDirectory + "/AutoSave.gard", true);
                 return true;
             }
             if (keyword == DeviceKw.SaveGame)
             {
                 // 名前を付けてセーブ
                 touchController.OpenSelectFile(
-                    (root, path) => Save(root, path, false),
+                    (root, path) => SaveDelay(root, path, false),
                     (root) => StandardRogueDeviceSave.GetNewNumberingPath(
-                        RoguegardSettings.DefaultSaveFileName, path => Save(root, path, false)));
+                        RoguegardSettings.DefaultSaveFileName, path => SaveDelay(root, path, false)));
                 return true;
             }
             if (keyword == DeviceKw.LoadGame)
@@ -42,6 +42,17 @@ namespace RoguegardUnity
                 return true;
             }
             return false;
+        }
+
+        private void SaveDelay(IModelsMenuRoot root, string path, bool autoSave)
+        {
+            FadeCanvas.StartCanvasCoroutine(Conroutine());
+
+            IEnumerator Conroutine()
+            {
+                yield return null;
+                Save(root, path, autoSave);
+            }
         }
 
         private void Save(IModelsMenuRoot root, string path, bool autoSave)
