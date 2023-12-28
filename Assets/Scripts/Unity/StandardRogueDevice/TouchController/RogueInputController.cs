@@ -24,6 +24,7 @@ namespace RoguegardUnity
         [SerializeField] private RogueDirectionalSpriteTable _turnSprite = null;
         [SerializeField] private Sprite _waitSprite = null;
         [SerializeField] private Sprite _cameraSprite = null;
+        [SerializeField] private Sprite _stopSprite = null;
 
         [Space]
         [SerializeField] private Sprite _menuSprite = null;
@@ -95,7 +96,11 @@ namespace RoguegardUnity
             }
 
             // ダッシュボタンクリックでカメラモードを終了させる。
-            if (dashButton.IsClick) { _cameraController.TerminateCameraMode(); }
+            if (dashButton.IsClick)
+            {
+                _cameraController.TerminateCameraMode();
+                dashButton.CommandUpdate();
+            }
 
             if (dashButton.IsDown) { dashForward = true; }
             if (!dashButton.IsHeldDown) { dashForward = false; }
@@ -117,6 +122,10 @@ namespace RoguegardUnity
             {
                 // カメラモード
                 dashButton.SetSprite(_cameraSprite);
+            }
+            else if (AutoPlayIsEnabled)
+            {
+                dashButton.SetSprite(_stopSprite);
             }
             else if (visiblePlayer)
             {
