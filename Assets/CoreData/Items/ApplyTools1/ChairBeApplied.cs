@@ -83,7 +83,9 @@ namespace Roguegard
             [System.NonSerialized] private RogueObj stairs;
             [System.NonSerialized] private IPathBuilder pathBuilder = new AStarPathBuilder(RoguegardSettings.MaxTilemapSize);
 
-            private static CommandFloorDownStairs apply = new CommandFloorDownStairs();
+            private static readonly CommandFloorDownStairs apply = new CommandFloorDownStairs();
+            private static readonly CommandDownStairs apply2 = new CommandDownStairs();
+            private static readonly PushCommand pushCommand = new PushCommand();
 
             float IRogueObjUpdater.Order => 1f;
             float IValueEffect.Order => 0f;
@@ -116,7 +118,7 @@ namespace Roguegard
                     //if (!SpaceUtility.TryLocate(self, lobby1, chairPosition)) throw new RogueException();
 
                     world.Space.RemoveAllNull();
-                    RogueEffectUtility.RemoveClose(self, this);
+                    //RogueEffectUtility.RemoveClose(self, this);
                     return default;
                 }
 
@@ -149,7 +151,7 @@ namespace Roguegard
                         var obj = spaceObjs[i];
                         if (obj == null) continue;
 
-                        if (obj.Main.InfoSet.Category == CategoryKw.LevelDownStairs)
+                        if (obj.Main.InfoSet.Category == CategoryKw.LevelDownStairs || obj.Main.InfoSet.Category == CategoryKw.DownStairs)
                         {
                             if (stairs == null || stairs.Location != self.Location)
                             {
@@ -164,10 +166,21 @@ namespace Roguegard
                             {
                                 return default;
                             }
-                            else if (!result && apply.CommandInvoke(self, null, activationDepth, new(tool: stairs)))
+                            else if (obj.Main.InfoSet.Category == CategoryKw.LevelDownStairs)
                             {
-                                // ŠK’i‚É‚Â‚¢‚½‚çŽg‚¤
-                                return default;
+                                if (!result && apply.CommandInvoke(self, null, activationDepth, new(tool: stairs)))
+                                {
+                                    // ŠK’i‚É‚Â‚¢‚½‚çŽg‚¤
+                                    return default;
+                                }
+                            }
+                            else
+                            {
+                                if (!result && apply2.CommandInvoke(self, null, activationDepth, new(tool: stairs)))
+                                {
+                                    // ŠK’i‚É‚Â‚¢‚½‚çŽg‚¤
+                                    return default;
+                                }
                             }
                         }
                         else if ((self.Position - obj.Position).sqrMagnitude <= 2 && StatsEffectedValues.AreVS(self, obj))
@@ -175,6 +188,11 @@ namespace Roguegard
                             // “G‚Æ—×Ú‚µ‚Ä‚¢‚é‚Æ‚«A“G‚ðUŒ‚‚·‚é
                             var attackSkill = AttackUtility.GetNormalAttackSkill(self);
                             if (AutoAction.AutoSkill(MainInfoKw.Attack, attackSkill, self, self, activationDepth, null, visibleRadius, room, random)) return default;
+                        }
+                        else if ((self.Position - obj.Position).sqrMagnitude <= 2 && obj.Main.InfoSet.Category == CategoryKw.MovableObstacle)
+                        {
+                            // ‰Ÿ‚¹‚é‚à‚Ì‚Æ—×Ú‚µ‚Ä‚¢‚é‚Æ‚«A‚»‚ê‚ð‰Ÿ‚µ‚ÄˆÚ“®‚³‚¹‚é
+                            pushCommand.CommandInvoke(self, null, activationDepth, new(targetObj: obj));
                         }
                     }
                 }
