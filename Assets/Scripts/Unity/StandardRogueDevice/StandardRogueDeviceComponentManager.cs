@@ -186,13 +186,13 @@ namespace RoguegardUnity
                 if (EventManager.Any)
                 {
                     // 進行中の RogueCharacterWork が存在しなければ、次の RogueCharacterWork に移る。
-                    EventManager.Dequeue(Player, FastForward);
+                    EventManager.Dequeue(Player, Subject, FastForward);
                 }
                 else if (characterRenderSystem.InAnimation)
                 {
                     // 次の RogueCharacterWork がなければ、今ターンのアニメーションを終了させる。
                     characterRenderSystem.EndAnimation(Subject, false);
-                    touchController.NextTurn(Player);
+                    touchController.NextTurn(Player, Subject);
                 }
             }
             tilemapRenderSystem.Update(Subject, touchController.OpenGrid);

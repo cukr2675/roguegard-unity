@@ -27,7 +27,7 @@ namespace RoguegardUnity
             messageWorkQueue = new MessageWorkQueue();
         }
 
-        public void Dequeue(RogueObj player, bool fastForward)
+        public void Dequeue(RogueObj player, RogueObj subject, bool fastForward)
         {
             while (messageWorkQueue.Count >= 1)
             {
@@ -56,7 +56,7 @@ namespace RoguegardUnity
                 else if (other == DeviceKw.EnqueueMenu)
                 {
                     messageWorkQueue.DequeueMenu(out var menu, out var self, out var user, out var arg);
-                    touchController.OpenMenu(player, menu, self, user, arg);
+                    touchController.OpenMenu(subject, menu, self, user, arg);
                     break;
                 }
                 else if (other == DeviceKw.EnqueueSE || other == DeviceKw.EnqueueSEAndWait)

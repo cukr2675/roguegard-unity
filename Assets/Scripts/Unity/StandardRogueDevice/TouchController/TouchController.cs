@@ -134,10 +134,10 @@ namespace RoguegardUnity
         /// <summary>
         /// ターン終わりに一回だけ実行される
         /// </summary>
-        public void NextTurn(RogueObj player)
+        public void NextTurn(RogueObj player, RogueObj subject)
         {
             _inputController.NextTurn(player);
-            _headerController.UpdateHeader(player);
+            _headerController.UpdateHeader(subject);
         }
 
         /// <summary>
