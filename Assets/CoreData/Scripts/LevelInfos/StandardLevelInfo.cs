@@ -56,11 +56,11 @@ namespace Roguegard
 
         public override void LevelUp(RogueObj self)
         {
-            if (MainCharacterWorkUtility.VisibleAt(self.Location, self.Position))
-            {
-                RogueDevice.Add(DeviceKw.AppendText, self);
-                RogueDevice.Add(DeviceKw.AppendText, "はレベルが上がった！\n");
-            }
+            //if (MainCharacterWorkUtility.VisibleAt(self.Location, self.Position))
+            //{
+            //    RogueDevice.Add(DeviceKw.AppendText, self);
+            //    RogueDevice.Add(DeviceKw.AppendText, "はレベルが上がった！\n");
+            //}
 
             var selfIsPlayerPartyMember = RogueDevice.Primary.Player.Main.Stats.Party.Members.Contains(self);
             if (selfIsPlayerPartyMember)
