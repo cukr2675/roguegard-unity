@@ -304,6 +304,7 @@ namespace RoguegardUnity
         private class LoadPresetMenu : IModelsMenu, IModelsMenuItemController
         {
             private static List<object> presets;
+            private static readonly LoadDialog nextMenu = new LoadDialog();
 
             public void OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
@@ -329,9 +330,47 @@ namespace RoguegardUnity
             public void Activate(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+                root.AddInt(DeviceKw.StartTalk, 0);
+                root.AddObject(DeviceKw.AppendText, "ロードすると 編集中のキャラは消えてしまいますが よろしいですか？");
+                root.AddInt(DeviceKw.WaitEndOfTalk, 0);
+                root.OpenMenuAsDialog(nextMenu, self, user, arg, arg);
+
+                nextMenu.model = (CharacterCreationDataBuilder)model;
+            }
+        }
+
+        private class LoadDialog : IModelsMenu, IModelsMenuChoice
+        {
+            public CharacterCreationDataBuilder model;
+
+            private readonly object[] models;
+
+            public LoadDialog()
+            {
+                models = new object[]
+                {
+                    this,
+                    ExitModelsMenuChoice.Instance
+                };
+            }
+
+            public void OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            {
+                root.Get(DeviceKw.MenuTalkChoices).OpenView(ChoicesModelsMenuItemController.Instance, models, root, self, user, arg);
+            }
+
+            public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            {
+                return "ロードする";
+            }
+
+            public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            {
+                root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
 
                 var builder = (CharacterCreationDataBuilder)arg.Other;
-                builder.Set((CharacterCreationDataBuilder)model);
+                builder.Set(model);
+                root.Back();
                 root.Back();
             }
         }

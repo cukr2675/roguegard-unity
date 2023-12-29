@@ -172,17 +172,17 @@ namespace Roguegard
                     builder = new CharacterCreationDataBuilder(builder);
 
                     root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-                    root.OpenMenu(nextMenu, self, user, new(other: builder), new(targetObj: character, other: builder));
+                    root.OpenMenu(nextMenu, self, user, new(targetObj: character, other: builder), new(targetObj: character, other: builder));
                 }
 
                 private class Menu : IModelsMenu
                 {
-                    private readonly object[] models = new object[] { ExitModelsMenuChoice.Instance };
+                    private readonly object[] models = new object[] { new OpenExitDialog() };
 
                     public void OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
                     {
                         var builder = (CharacterCreationDataBuilder)arg.Other;
-                        root.Get(DeviceKw.MenuCharacterCreation).OpenView(null, models, root, self, user, new(other: builder));
+                        root.Get(DeviceKw.MenuCharacterCreation).OpenView(null, models, root, self, user, new(targetObj: arg.TargetObj, other: builder));
                     }
                 }
             }
@@ -195,6 +195,76 @@ namespace Roguegard
                 {
                     var builder = (CharacterCreationDataBuilder)arg.Other;
                     root.Get(DeviceKw.MenuCharacterCreation).OpenView(null, models, root, self, user, new(other: builder));
+                }
+            }
+
+            private class OpenExitDialog : IModelsMenuChoice
+            {
+                private static readonly ExitDialog nextMenu = new ExitDialog();
+
+                public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+                {
+                    return "<";
+                }
+
+                public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+                {
+                    root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+                    root.AddInt(DeviceKw.StartTalk, 0);
+                    root.AddObject(DeviceKw.AppendText, "編集内容を保存しますか？");
+                    root.AddInt(DeviceKw.WaitEndOfTalk, 0);
+                    root.OpenMenuAsDialog(nextMenu, self, user, arg, arg);
+                }
+            }
+
+            private class ExitDialog : IModelsMenu
+            {
+                private readonly object[] models = new object[]
+                {
+                    new SaveChoice(),
+                    new NotSaveChoice(),
+                    ExitModelsMenuChoice.Instance
+                };
+
+                public void OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+                {
+                    root.Get(DeviceKw.MenuTalkChoices).OpenView(ChoicesModelsMenuItemController.Instance, models, root, self, user, arg);
+                }
+
+                private class SaveChoice : IModelsMenuChoice
+                {
+                    public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+                    {
+                        return "上書き保存";
+                    }
+
+                    public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+                    {
+                        root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+                        root.Back();
+                        root.Back();
+                    }
+                }
+
+                private class NotSaveChoice : IModelsMenuChoice
+                {
+                    public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+                    {
+                        return "保存しない";
+                    }
+
+                    public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+                    {
+                        // 編集を取り消す
+                        var character = arg.TargetObj;
+                        var baseBuilder = LobbyMembers.GetCharacterCreationDataBuilder(character);
+                        var builder = (CharacterCreationDataBuilder)arg.Other;
+                        builder.Set(baseBuilder);
+
+                        root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+                        root.Back();
+                        root.Back();
+                    }
                 }
             }
         }
