@@ -23,7 +23,7 @@ namespace Roguegard
             // 移動前に生成する
             var syncWork = RogueCharacterWork.CreateSync(self);
 
-            if (SpaceUtility.TryLocate(self, to))
+            if (self.Position == to || SpaceUtility.TryLocate(self, to))
             {
                 if (MainCharacterWorkUtility.VisibleAt(self.Location, self.Position))
                 {
