@@ -317,13 +317,14 @@ namespace RoguegardUnity
             private static readonly object[] choices = new object[]
             {
                 new OptionsMasterVolume(),
-                new OptionsWindowFrameType(),
-                ExitModelsMenuChoice.Instance 
+                new OptionsWindowFrameType()
             };
 
             public void OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                root.Get(DeviceKw.MenuOptions).OpenView(ChoicesModelsMenuItemController.Instance, choices, root, self, user, RogueMethodArgument.Identity);
+                var options = (OptionsMenuView)root.Get(DeviceKw.MenuOptions);
+                options.OpenView(ChoicesModelsMenuItemController.Instance, choices, root, self, user, RogueMethodArgument.Identity);
+                options.ShowExitButton(ExitModelsMenuChoice.Instance);
                 root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
             }
         }
