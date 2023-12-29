@@ -302,7 +302,7 @@ PlayerSettings:
   openGLRequireES32: 0
   m_TemplateCustomTags:
     ICON_HREF: icon.png
-    LOCK_ASPECT_RATIO: 1
+    LOCK_ASPECT_RATIO: 
     MANIFEST_DISPLAY: 
     MANIFEST_ORIENTATION: landscape
     PIXELATED: 1
