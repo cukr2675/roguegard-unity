@@ -65,7 +65,7 @@ namespace RoguegardUnity
             menuController = Instantiate(menuControllerPrefab);
             var soundController = new SoundController();
             soundController.Open(null, seAudioSourcePrefab, soundTable);
-            menuController.Initialize(soundController, spriteRendererPool, null);
+            menuController.Initialize(soundController, spriteRendererPool, null, false);
 
             _logo.sprite = logo;
             _logo.SetNativeSize();

@@ -53,7 +53,8 @@ namespace RoguegardUnity
 
         public bool TalkingWait => _messageController.IsTalkingNow || menuManager.Any || EventManager.Wait;
 
-        internal void Initialize(SoundController soundController, RogueSpriteRendererPool rendererPool, System.Action updateCharacters)
+        internal void Initialize(
+            SoundController soundController, RogueSpriteRendererPool rendererPool, System.Action updateCharacters, bool touchMaskIsEnabled = true)
         {
             var objCommandMenu = new ObjCommandMenu();
             var putInCommandMenu = new PutIntoChestCommandMenu();
@@ -90,6 +91,8 @@ namespace RoguegardUnity
             table.Add(DeviceKw.MenuTalk, _messageController.TalkView);
             table.Add(DeviceKw.MenuTalkChoices, _talkChoicesMenu);
             menuManager = new StandardMenuRoot(_touchMask, _messageController, _captionWindow, _statsWindow, soundController, table);
+
+            _touchMask.gameObject.SetActive(touchMaskIsEnabled);
         }
 
         public void Open(RogueObj menuSubject)
