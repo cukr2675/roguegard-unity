@@ -63,6 +63,7 @@ namespace RoguegardUnity
                 var contentTransform = _content.transform;
                 var rect = ((RectTransform)contentTransform).rect;
                 var itemSize = rect.size / _itemButtonCount;
+                if (_verticalExtensionTarget != null && contentTransform.childCount >= 1) { itemSize.y = rect.height / contentTransform.childCount; }
 
                 while (itemButtons.Count < count)
                 {
