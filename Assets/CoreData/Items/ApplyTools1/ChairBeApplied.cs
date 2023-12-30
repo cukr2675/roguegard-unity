@@ -159,10 +159,8 @@ namespace Roguegard
                                 pathBuilder.UpdatePath(self, stairs.Position);
                             }
 
-                            var result = pathBuilder.TryGetNextPosition(self, out var nextPosition);
-                            if (result &&
-                                RogueDirection.TryFromSign(nextPosition - self.Position, out var direction) &&
-                                this.Walk(self, direction, activationDepth))
+                            var result = pathBuilder.TryGetNextPosition(self, out var direction);
+                            if (result && this.Walk(self, direction, activationDepth))
                             {
                                 return default;
                             }

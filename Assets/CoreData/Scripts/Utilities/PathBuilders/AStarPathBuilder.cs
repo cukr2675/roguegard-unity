@@ -101,15 +101,14 @@ namespace Roguegard
             }
         }
 
-        public bool TryGetNextPosition(RogueObj self, out Vector2Int nextPosition)
+        public bool TryGetNextPosition(RogueObj self, out RogueDirection nextDirection)
         {
-            nextPosition = Vector2Int.zero;
+            nextDirection = RogueDirection.LowerLeft;
             var currentPosition = self.Position;
             if (currentPosition == targetPosition) return false;
-            if (path.Count == 0 && MovementUtility.TryGetApproachDirection(self, targetPosition, true, out var direction))
+            if (path.Count == 0 && MovementUtility.TryGetApproachDirection(self, targetPosition, true, out nextDirection))
             {
                 // パスがない場合は、移動できない位置を指定されていると判断して直進する
-                nextPosition = currentPosition + direction.Forward;
                 return true;
             }
             else
@@ -120,7 +119,7 @@ namespace Roguegard
                     var pathPoint = path[i];
                     if (pathPoint != currentPosition) continue;
 
-                    nextPosition = path[i + 1];
+                    nextDirection = RogueDirection.FromSignOrLowerLeft(path[i + 1] - currentPosition);
                     return true;
                 }
             }
@@ -132,7 +131,7 @@ namespace Roguegard
                 var pathPoint = path[i];
                 if (pathPoint != currentPosition) continue;
 
-                nextPosition = path[i + 1];
+                nextDirection = RogueDirection.FromSignOrLowerLeft(path[i + 1] - currentPosition);
                 return true;
             }
 

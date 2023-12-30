@@ -8,6 +8,6 @@ namespace Roguegard
     {
         bool UpdatePath(RogueObj self, Vector2Int targetPosition);
 
-        bool TryGetNextPosition(RogueObj self, out Vector2Int nextPosition);
+        bool TryGetNextPosition(RogueObj self, out RogueDirection nextDirection);
     }
 }
