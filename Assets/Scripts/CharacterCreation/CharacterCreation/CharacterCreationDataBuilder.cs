@@ -38,6 +38,8 @@ namespace Roguegard.CharacterCreation
         }
         Spanning<IWeightedRogueObjGeneratorList> ICharacterCreationData.StartingItemTable => StartingItemTable;
 
+        public MainInfoSet PrimaryInfoSet => TryGetGrowingInfoSet(Race.Option, Race.Gender, out var value) ? value : throw new RogueException();
+
         public CharacterCreationDataBuilder()
         {
             Race = new RaceBuilder();
