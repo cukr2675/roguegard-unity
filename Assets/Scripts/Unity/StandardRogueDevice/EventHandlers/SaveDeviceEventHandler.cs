@@ -61,6 +61,7 @@ namespace RoguegardUnity
             var player = componentManager.Player;
             var maxTurns = 1000;
             TickEnumerator.UpdateTurns(player, maxTurns, maxTurns * 10, true);
+            RemoveNoLobbyMemberLocations(player);
 
             // セーブ用データを生成
             var data = new StandardRogueDeviceData();
@@ -102,6 +103,46 @@ namespace RoguegardUnity
             });
 
             componentManager.LoadSavePoint(player);
+        }
+
+        /// <summary>
+        /// ロビーメンバーが一人もいない空間を削除する
+        /// </summary>
+        private void RemoveNoLobbyMemberLocations(RogueObj player)
+        {
+            var lobbyMembers = LobbyMembers.GetMembersByCharacter(player);
+            var world = RogueWorld.GetWorld(player);
+            var lobby = RogueWorld.GetLobbyByCharacter(player);
+            var locations = world.Space.Objs;
+            for (int i = 0; i < locations.Count; i++)
+            {
+                var location = locations[i];
+                if (location == null || location == lobby || ObjsIsIn(lobbyMembers, location)) continue;
+
+                location.TrySetStack(0);
+                Debug.LogError($"ロビーメンバーがいない空間 {location} を削除しました。");
+            }
+
+            bool ObjIsIn(RogueObj obj, RogueObj space)
+            {
+                var objLocation = obj;
+                while (objLocation != null)
+                {
+                    if (objLocation == space) return true;
+
+                    objLocation = objLocation.Location;
+                }
+                return false;
+            }
+
+            bool ObjsIsIn(Spanning<RogueObj> objs, RogueObj space)
+            {
+                for (int j = 0; j < objs.Count; j++)
+                {
+                    if (ObjIsIn(objs[j], space)) return true;
+                }
+                return false;
+            }
         }
 
         private void OpenLoadInGame()
