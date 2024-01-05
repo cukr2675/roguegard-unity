@@ -28,7 +28,7 @@ namespace Roguegard
             if (needsUpdateTile && !updated) return false;
 
             path.Clear();
-            if (!nodemap.Rect.Contains(targetPosition) || nodemap[targetPosition].HasCollider)
+            if (!nodemap.Rect.Contains(targetPosition) || nodemap[targetPosition].HasCollider || targetPosition == self.Position)
             {
                 // 移動できない位置を指定した場合、パスを生成せずに直進する
                 return false;
