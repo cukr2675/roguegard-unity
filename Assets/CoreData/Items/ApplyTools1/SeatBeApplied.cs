@@ -7,7 +7,7 @@ using Roguegard.Device;
 
 namespace Roguegard
 {
-    public class ChairBeApplied : BaseApplyRogueMethod
+    public class SeatBeApplied : BaseApplyRogueMethod
     {
         private static readonly Menu menu = new Menu();
 

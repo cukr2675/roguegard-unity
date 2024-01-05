@@ -84,7 +84,7 @@ MonoBehaviour:
     _beApplied:
       _script: {fileID: 11500000, guid: 88945a0a4eedefc44b27b9b8ca79bbf8, type: 3}
       _ref:
-        rid: 3832255804731555842
+        rid: 743023689864577038
     _beThrown:
       _script: {fileID: 0}
       _ref:
@@ -117,7 +117,7 @@ MonoBehaviour:
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
-    - rid: 3832255804731555842
-      type: {class: ChairBeApplied, ns: Roguegard, asm: Roguegard.CoreData}
+    - rid: 743023689864577038
+      type: {class: SeatBeApplied, ns: Roguegard, asm: Roguegard.CoreData}
       data:
         _assemblyReflectionAssetDummy: 
