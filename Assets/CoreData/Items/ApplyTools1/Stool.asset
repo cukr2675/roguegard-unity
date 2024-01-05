@@ -34,7 +34,7 @@ MonoBehaviour:
     _def: 0
     _loadCapacity: 0
     _faction: {fileID: 0}
-    _ability: 3
+    _ability: 1
     _material: {fileID: 0}
     _lootTable: []
     _walk:
