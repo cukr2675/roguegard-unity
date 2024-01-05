@@ -100,8 +100,9 @@ namespace RoguegardUnity
             ticker.Reset();
 
             // セーブポイントをキャッシュ
-            var playerSavePoint = LobbyMembers.GetSavePoint(Player);
-            LobbyMembers.SetSavePoint(Player, null);
+            var memberInfo = LobbyMembers.GetMemberInfo(Player);
+            var playerSavePoint = memberInfo.SavePoint;
+            memberInfo.SavePoint = null;
 
             // 前回セーブからの経過時間でターン経過
             if (data.SaveDateTime != null)
@@ -116,15 +117,15 @@ namespace RoguegardUnity
                 AfterStepTurn(); // セーブポイントから復帰させる
 
                 // ダミーのセーブポイントを設定して入力待機ループを抜ける
-                LobbyMembers.SetSavePoint(Player, dummySavePoint);
+                memberInfo.SavePoint = dummySavePoint;
                 TickEnumerator.UpdateTurns(Player, turns, maxTurns * 10, false);
-                LobbyMembers.SetSavePoint(Player, null);
+                memberInfo.SavePoint = null;
             }
 
             // 時間経過処理後にリセット
             UpdateCharacters();
 
-            LobbyMembers.SetSavePoint(Player, playerSavePoint);
+            memberInfo.SavePoint = playerSavePoint;
             LoadSavePoint(Player);
         }
 
@@ -135,18 +136,18 @@ namespace RoguegardUnity
 
         public void LoadSavePoint(RogueObj obj)
         {
-            var savePoint = LobbyMembers.GetSavePoint(obj);
-            if (savePoint == null || savePoint == dummySavePoint) return;
+            var memberInfo = LobbyMembers.GetMemberInfo(obj);
+            if (memberInfo.SavePoint == null || memberInfo.SavePoint == dummySavePoint) return;
 
-            default(IActiveRogueMethodCaller).LoadSavePoint(obj, 0f, savePoint);
-            LobbyMembers.SetSavePoint(obj, null);
+            default(IActiveRogueMethodCaller).LoadSavePoint(obj, 0f, memberInfo.SavePoint);
+            memberInfo.SavePoint = null;
         }
 
         public void AfterStepTurn()
         {
             // セーブ前に復帰してしまわないようにする
-            var playerSavePoint = LobbyMembers.GetSavePoint(Player);
-            if (playerSavePoint == null)
+            var memberInfo = LobbyMembers.GetMemberInfo(Player);
+            if (memberInfo.SavePoint == null)
             {
                 // セーブポイントから復帰する
                 var lobbyMembers = LobbyMembers.GetMembersByCharacter(World.Space.Objs[0]);

@@ -30,7 +30,8 @@ namespace Roguegard
 
             if (!this.LocateSavePoint(player, tool, activationDepth, info)) return false;
 
-            LobbyMembers.SetSavePoint(player, info);
+            var memberInfo = LobbyMembers.GetMemberInfo(player);
+            memberInfo.SavePoint = info;
 
             // プレイヤーのときだけオートセーブする
             if (RogueDevice.Primary.Player == player) { RogueDevice.Add(DeviceKw.AutoSave, 0); }

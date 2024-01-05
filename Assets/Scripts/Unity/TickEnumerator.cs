@@ -152,7 +152,7 @@ namespace RoguegardUnity
 
                 while (true)
                 {
-                    if (self.Main.IsTicked || LobbyMembers.GetSavePoint(self) != null)
+                    if (self.Main.IsTicked || LobbyMembers.GetMemberInfo(self)?.SavePoint != null)
                     {
                         // 行動済みまたはセーブポイントにいるとき行動しない
                         yield return Result.Next;

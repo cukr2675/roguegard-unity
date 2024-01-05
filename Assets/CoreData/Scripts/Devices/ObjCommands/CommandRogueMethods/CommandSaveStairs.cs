@@ -26,7 +26,8 @@ namespace Roguegard
             var info = SavePointInfo.Get(tool);
             if (!this.LocateSavePoint(player, tool, activationDepth, info)) return false;
 
-            LobbyMembers.SetSavePoint(player, info);
+            var memberInfo = LobbyMembers.GetMemberInfo(player);
+            memberInfo.SavePoint = info;
             RogueDevice.Add(DeviceKw.SaveGame, 0);
             return true;
         }

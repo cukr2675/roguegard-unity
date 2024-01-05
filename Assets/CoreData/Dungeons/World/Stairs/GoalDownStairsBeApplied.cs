@@ -35,7 +35,8 @@ namespace Roguegard
                 var info = RogueWorld.SavePointInfo;
                 if (!default(IActiveRogueMethodCaller).LocateSavePoint(player, self, 1f, info)) return false;
 
-                LobbyMembers.SetSavePoint(player, info);
+                var memberInfo = LobbyMembers.GetMemberInfo(player);
+                memberInfo.SavePoint = info;
                 return false;
             }
             return false;

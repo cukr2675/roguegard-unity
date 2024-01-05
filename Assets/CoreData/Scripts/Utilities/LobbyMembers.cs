@@ -2,8 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-using Roguegard.CharacterCreation;
-
 namespace Roguegard
 {
     public static class LobbyMembers
@@ -37,7 +35,9 @@ namespace Roguegard
 
             if (!Contains(obj))
             {
-                obj.SetInfo(new MemberInfo());
+                var memberInfo = new MemberInfo();
+                memberInfo.info = new LobbyMemberInfo();
+                obj.SetInfo(memberInfo);
                 info.lobbyMembers.Add(obj);
             }
         }
@@ -54,51 +54,15 @@ namespace Roguegard
             return result;
         }
 
-        public static CharacterCreationDataBuilder GetCharacterCreationDataBuilder(RogueObj obj)
+        public static LobbyMemberInfo GetMemberInfo(RogueObj obj)
         {
-            if (obj.TryGet<MemberInfo>(out var info))
+            if (obj != null && obj.TryGet<MemberInfo>(out var info))
             {
-                return info.Data;
+                return info.info;
             }
             else
             {
                 return null;
-            }
-        }
-
-        public static void SetCharacterCreationDataBuilder(RogueObj obj, CharacterCreationDataBuilder builder)
-        {
-            if (obj.TryGet<MemberInfo>(out var info))
-            {
-                info.Data = builder;
-            }
-            else
-            {
-                Debug.LogWarning($"{obj} はロビーメンバーではありません。");
-            }
-        }
-
-        public static ISavePointInfo GetSavePoint(RogueObj obj)
-        {
-            if (obj.TryGet<MemberInfo>(out var info))
-            {
-                return info.SavePoint;
-            }
-            else
-            {
-                return null;
-            }
-        }
-
-        public static void SetSavePoint(RogueObj obj, ISavePointInfo savePoint)
-        {
-            if (obj.TryGet<MemberInfo>(out var info))
-            {
-                info.SavePoint = savePoint;
-            }
-            else
-            {
-                Debug.LogWarning($"{obj} はロビーメンバーではありません。");
             }
         }
 
@@ -117,9 +81,7 @@ namespace Roguegard
         [ObjectFormer.Formable]
         private class MemberInfo : IRogueObjInfo
         {
-            public CharacterCreationDataBuilder Data { get; set; }
-
-            public ISavePointInfo SavePoint { get; set; }
+            public LobbyMemberInfo info;
 
             public bool IsExclusedWhenSerialize => false;
 

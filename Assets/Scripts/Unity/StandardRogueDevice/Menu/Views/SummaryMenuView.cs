@@ -370,7 +370,8 @@ namespace RoguegardUnity
                 {
                     dungeon.TrySetStack(0);
                 }
-                LobbyMembers.SetSavePoint(self, RogueWorld.SavePointInfo);
+                var memberInfo = LobbyMembers.GetMemberInfo(self);
+                memberInfo.SavePoint = RogueWorld.SavePointInfo;
 
                 RogueDevice.Add(DeviceKw.AutoSave, 0);
 

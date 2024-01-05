@@ -199,8 +199,24 @@ namespace Roguegard
                 var world = player.Location;
                 var lobby = GetLobbyByCharacter(player);
                 var tilemap = lobby.Space.Tilemap;
-                var position = new Vector2Int(tilemap.Width / 2, 3);
-                if (!SpaceUtility.TryLocate(player, lobby, position)) throw new RogueException();
+                var memberInfo = LobbyMembers.GetMemberInfo(player);
+                Vector2Int position;
+                if (memberInfo.Seat != null && memberInfo.Seat.Location == lobby)
+                {
+                    position = memberInfo.Seat.Position;
+                }
+                else
+                {
+                    // リスポーン地点が設定されていなければ規定の位置を使用
+                    position = new Vector2Int(tilemap.Width / 2, 3);
+                }
+                if (!SpaceUtility.TryLocate(player, lobby, position))
+                {
+                    // 移動に失敗したら壁通過状態で移動させる
+                    var movement = MovementCalculator.Get(player);
+                    if (!player.TryLocate(lobby, position, movement.AsTile, false, false, movement.HasSightCollider, StackOption.Default))
+                        throw new RogueException("セーブポイントからの復帰に失敗しました。復帰位置に移動できません。");
+                }
 
                 world.Space.RemoveAllNull();
             }
