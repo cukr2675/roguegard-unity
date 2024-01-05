@@ -102,7 +102,10 @@ MonoBehaviour:
       _script: {fileID: 0}
       _ref:
         rid: -2
-    _openEffects: []
+    _openEffects:
+    - _script: {fileID: 11500000, guid: a60a1a04749024848af1a8de73f3e675, type: 3}
+      _ref:
+        rid: 743023639516413954
     _lv: 0
     _gender: {fileID: 0}
     _hpName: 
@@ -117,6 +120,10 @@ MonoBehaviour:
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
+    - rid: 743023639516413954
+      type: {class: QuestBoardOpen, ns: Roguegard, asm: Roguegard.CoreData}
+      data:
+        _assemblyReflectionAssetDummy: 
     - rid: 1290118612948090882
       type: {class: QuestBoardBeApplied, ns: Roguegard, asm: Roguegard.CoreData}
       data:
