@@ -76,13 +76,38 @@ namespace Roguegard
             }
             else
             {
-                // プレイヤーでない場合、HPを5上げる。
-                maxHP += 5;
-                self.Main.Stats.SetHP(self, self.Main.Stats.HP + 5, true);
+                // プレイヤーでない場合、HP・MP・最大重量をランダムに選択して上げる。
+                switch (RogueRandom.Primary.Next(0, 3))
+                {
+                    case 0:
+                        maxHP += 5;
+                        self.Main.Stats.SetHP(self, self.Main.Stats.HP + 5, true);
+                        if (selfIsPlayerPartyMember)
+                        {
+                            RogueDevice.Add(DeviceKw.AppendText, StatsKw.MaxHP);
+                            RogueDevice.Add(DeviceKw.AppendText, "が5上がった\t\n");
+                        }
+                        break;
+                    case 1:
+                        maxMP += 5;
+                        self.Main.Stats.SetMP(self, self.Main.Stats.MP + 5, true);
+                        if (selfIsPlayerPartyMember)
+                        {
+                            RogueDevice.Add(DeviceKw.AppendText, StatsKw.MaxMP);
+                            RogueDevice.Add(DeviceKw.AppendText, "が5上がった\t\n");
+                        }
+                        break;
+                    case 2:
+                        loadCapacity += 2;
+                        if (selfIsPlayerPartyMember)
+                        {
+                            RogueDevice.Add(DeviceKw.AppendText, StatsKw.LoadCapacity);
+                            RogueDevice.Add(DeviceKw.AppendText, "が2上がった\t\n");
+                        }
+                        break;
+                }
                 if (selfIsPlayerPartyMember)
                 {
-                    RogueDevice.Add(DeviceKw.AppendText, StatsKw.MaxHP);
-                    RogueDevice.Add(DeviceKw.AppendText, "が5上がった\t\n");
                     if (self.Main.Stats.Lv == 10 || self.Main.Stats.Lv == 20)
                     {
                         RogueDevice.Add(DeviceKw.AppendText, StatsKw.ATK);
