@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Roguegard.CharacterCreation
 {
     [ObjectFormer.Formable]
-    public class StartingItemBuilder : IReadOnlyStartingItem, IWeightedRogueObjGenerator
+    public class StartingItemBuilder : IReadOnlyStartingItem, IWeightedRogueObjGenerator, IMemberableBuilder
     {
         public IStartingItemOption Option { get; set; }
         public string OptionName { get; set; }

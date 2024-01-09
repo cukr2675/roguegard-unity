@@ -17,9 +17,14 @@ namespace Roguegard.CharacterCreation
 
         private EquipMember() { }
 
-        public static IReadOnlyEquipMember GetMember(IMemberable startingItem)
+        public static IReadOnlyEquipMember GetMember(IMemberable memberable)
         {
-            return (IReadOnlyEquipMember)startingItem.GetMember(SourceInstance);
+            return (IReadOnlyEquipMember)memberable.GetMember(SourceInstance);
+        }
+
+        public static EquipMember GetMember(IMemberableBuilder memberable)
+        {
+            return (EquipMember)memberable.GetMember(SourceInstance);
         }
 
         public IMember Clone()
