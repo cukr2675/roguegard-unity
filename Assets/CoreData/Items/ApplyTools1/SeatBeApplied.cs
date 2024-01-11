@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-using Roguegard.CharacterCreation;
 using Roguegard.Device;
 
 namespace Roguegard
@@ -16,6 +15,22 @@ namespace Roguegard
             var lobby = RogueWorld.GetLobbyByCharacter(self);
             if (self.Location == lobby)
             {
+                var lobbyMembers = LobbyMembers.GetMembersByCharacter(self);
+                for (int i = 0; i < lobbyMembers.Count; i++)
+                {
+                    var member = lobbyMembers[i];
+                    if (member == null) continue;
+
+                    var memberInfo = LobbyMembers.GetMemberInfo(member);
+                    if (memberInfo.Seat == self)
+                    {
+                        // 誰か座っていたらそのキャラに注目する
+                        RogueDevice.Add(DeviceKw.StartAutoPlay, member);
+                        return false;
+                    }
+                }
+
+                // 誰も座っていなかったら座らせるキャラを選択させる
                 RogueDevice.Primary.AddMenu(menu, user, null, new(targetPosition: self.Position));
                 return false;
             }
@@ -54,46 +69,29 @@ namespace Roguegard
                     root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
                     root.Done();
 
-                    var ifInLobby = new IfInLobbyBehaviourNode();
-                    ifInLobby.InLobbyNode.Add(new StorageBehaviourNode());
-                    ifInLobby.InLobbyNode.Add(new AcceptQuestBehaviourNode());
-                    ifInLobby.OtherNode.Add(new AttackBehaviourNode());
-                    ifInLobby.OtherNode.Add(new PushObstacleBehaviourNode());
-
-                    var explore = new ExploreForStairsBehaviourNode();
-                    explore.PathBuilder = new AStarPathBuilder(RoguegardSettings.MaxTilemapSize);
-                    explore.PositionSelector = new RoguePositionSelector();
-                    ifInLobby.OtherNode.Add(explore);
-
-                    obj.SetInfo(new ViewInfo());
-
-                    var node = new RogueBehaviourNodeList();
-                    node.Add(ifInLobby);
                     var info = LobbyMembers.GetMemberInfo(obj);
-                    info.SetSeat(obj, self, node);
+                    info.Seat = self;
+
+                    info.ItemRegister.Clear();
+                    var spaceObjs = obj.Space.Objs;
+                    for (int i = 0; i < spaceObjs.Count; i++)
+                    {
+                        var item = spaceObjs[i];
+                        if (item == null) continue;
+
+                        info.ItemRegister.Add(item);
+                    }
 
                     var world = RogueWorld.GetWorld(self);
                     SpaceUtility.TryLocate(obj, world);
                     info.SavePoint = RogueWorld.SavePointInfo;
-                    //var movement = MovementCalculator.Get(obj);
-                    //obj.TryLocate(self.Location, position, movement.AsTile, movement.HasCollider, false, movement.HasSightCollider, StackOption.Default);
-                    //var effect = new Effect();
-                    //effect.chairPosition = position;
-                    //obj.Main.RogueEffects.AddOpen(obj, effect);
                     var mainParty = RogueDevice.Primary.Player.Main.Stats.Party;
                     obj.Main.Stats.TryAssignParty(obj, new RogueParty(mainParty.Faction, mainParty.TargetFactions));
                 }
-                else// if (obj.Main.RogueEffects.TryGetEffect<Effect>(out _))
+                else
                 {
-                    root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-                    root.Done();
-
-                    RogueDevice.Add(DeviceKw.StartAutoPlay, obj);
+                    root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Cancel);
                 }
-                //else
-                //{
-                //    root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Cancel);
-                //}
             }
         }
     }

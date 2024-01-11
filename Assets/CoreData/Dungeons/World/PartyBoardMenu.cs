@@ -115,7 +115,7 @@ namespace Roguegard
                     default(IActiveRogueMethodCaller).LocateSavePoint(character, null, 0f, RogueWorld.SavePointInfo, true);
                     SpaceUtility.TryLocate(character, null);
                     var info = LobbyMembers.GetMemberInfo(character);
-                    info.ResetSeat(character);
+                    info.Seat = null;
 
                     root.Back();
                 }

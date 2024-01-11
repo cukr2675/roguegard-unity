@@ -13,21 +13,8 @@ namespace Roguegard
 
         public ISavePointInfo SavePoint { get; set; }
 
-        public RogueObj Seat { get; private set; }
+        public RogueObj Seat { get; set; }
 
-        public void SetSeat(RogueObj self, RogueObj seat, RogueBehaviourNodeList behaviourNode)
-        {
-            if (seat == null) throw new System.ArgumentNullException(nameof(seat));
-            if (behaviourNode == null) throw new System.ArgumentNullException(nameof(behaviourNode));
-
-            Seat = seat;
-            RogueBehaviourNodeEffect.SetBehaviourNode(self, behaviourNode);
-        }
-
-        public void ResetSeat(RogueObj self)
-        {
-            Seat = null;
-            RogueBehaviourNodeEffect.RemoveBehaviourNode(self);
-        }
+        public RogueObjRegister ItemRegister { get; } = new RogueObjRegister();
     }
 }
