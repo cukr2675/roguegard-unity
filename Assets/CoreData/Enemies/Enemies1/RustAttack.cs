@@ -45,6 +45,8 @@ namespace Roguegard
                     for (int j = 0; j < length; j++)
                     {
                         var equipment = equipmentState.GetEquipment(part, j);
+                        if (equipment == null) continue;
+
                         var cost = StatsEffectedValues.GetCost(equipment);
                         if (cost <= 0f) continue;
 
@@ -55,6 +57,7 @@ namespace Roguegard
                         equipments.Add(equipment);
                     }
                 }
+                if (equipments.Count >= 1)
                 {
                     var index = RogueRandom.Primary.Next(0, equipments.Count);
                     var equipment = equipments[index];
