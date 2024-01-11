@@ -51,6 +51,7 @@ namespace RoguegardUnity
                 objs.AddRange(files);
                 scrollMenuView.OpenView(itemController, objs, root, self, user, filesArg);
                 scrollMenuView.ShowExitButton(ExitModelsMenuChoice.Instance);
+                scrollMenuView.SetPosition(0f);
             });
         }
 

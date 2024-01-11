@@ -276,8 +276,6 @@ namespace RoguegardUnity
 
             public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                Debug.LogError(root.Get(DeviceKw.MenuScroll).GetPosition());
-
                 root.AddObject(DeviceKw.EnqueueSE, StdKw.Sort);
 
                 if (categorizedBufferTable == null)
