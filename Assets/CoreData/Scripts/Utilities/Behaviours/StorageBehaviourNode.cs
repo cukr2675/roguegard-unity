@@ -35,7 +35,7 @@ namespace Roguegard
             var itemRegister = memberInfo.ItemRegister;
             for (int i = 0; i < itemRegister.Count; i++)
             {
-                var item = itemRegister.GetItem(i, self, out var itemIsEquipped, out var startingItem);
+                var item = itemRegister.GetItem(self, i, out var itemIsEquipped, out var startingItem);
                 if (item == null)
                 {
                     item = startingItem.Option.CreateObj(startingItem, self, Vector2Int.zero, RogueRandom.Primary);
