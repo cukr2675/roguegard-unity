@@ -57,6 +57,8 @@ namespace Roguegard.CharacterCreation
 
         private IReadOnlyIntrinsic[] GenerateEnvironments(DungeonCreationData dungeon, IRogueRandom random)
         {
+            return new IReadOnlyIntrinsic[0];
+
             var environmentGenerator = random.Choice(_environmentEffects);
             var environment = environmentGenerator.GenerateEffect(dungeon, RoguegardSettings.CharacterCreationDatabase, random);
             return new[] { environment };
