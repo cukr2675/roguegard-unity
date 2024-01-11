@@ -4,6 +4,7 @@ using UnityEngine;
 
 using Roguegard;
 using Roguegard.Device;
+using Roguegard.Extensions;
 
 namespace RoguegardUnity
 {
@@ -36,14 +37,29 @@ namespace RoguegardUnity
             // 消滅でゲームオーバーになったときのためにスタック数を設定する
             leaderCharacter.TrySetStack(1);
 
-            // 一時的にワールド直下へ移動
-            var dungeon = leaderCharacter.Location;
-            SpaceUtility.TryLocate(leaderCharacter, componentManager.World);
-
             if (leaderCharacter == componentManager.Subject)
             {
+                // 一時的にワールド直下へ移動
+                var dungeon = leaderCharacter.Location;
+                SpaceUtility.TryLocate(leaderCharacter, componentManager.World);
+
                 componentManager.EventManager.AddMenu(gameOverMenu, leaderCharacter, null, new(targetObj: dungeon));
                 RogueDevice.Add(DeviceKw.EnqueueViewDequeueState, 0);
+            }
+            else
+            {
+                FadeCanvas.StartCanvasCoroutine(Coroutine());
+            }
+
+            IEnumerator Coroutine()
+            {
+                // RogueMethodAspectState の処理の完了を待つ
+                yield return null;
+
+                default(IActiveRogueMethodCaller).LocateSavePoint(leaderCharacter, null, 0f, RogueWorld.SavePointInfo, true);
+
+                var memberInfo = LobbyMembers.GetMemberInfo(leaderCharacter);
+                memberInfo.SavePoint = RogueWorld.SavePointInfo;
             }
         }
 
