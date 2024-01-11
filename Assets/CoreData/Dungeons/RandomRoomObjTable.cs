@@ -34,7 +34,13 @@ namespace Roguegard.CharacterCreation
             const int iteration = 10;
             const int minSqrDistance = 10 * 10;
 
-            if (player.Location == floor)
+            if (floor.Stack == 0)
+            {
+                // 消滅した空間では生成しない
+                position = default;
+                return false;
+            }
+            else if (player.Location == floor)
             {
                 // プレイヤーキャラがこの階層にいるとき、プレイヤーと同じ部屋または半径10マス以内での出現を避ける
 
