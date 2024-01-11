@@ -118,7 +118,7 @@ namespace RoguegardUnity
                 var seconds = (int)relationalDateTime.TotalSeconds;
                 var secondsPerTurn = 10;
 
-                var maxTurns = 7200;
+                var maxTurns = 10000;
                 var turns = Mathf.Min(seconds / secondsPerTurn, maxTurns);
                 AfterStepTurn(); // セーブポイントから復帰させる
 
