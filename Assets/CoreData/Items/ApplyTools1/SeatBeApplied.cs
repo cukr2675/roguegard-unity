@@ -31,7 +31,7 @@ namespace Roguegard
                 }
 
                 // íNÇ‡ç¿Ç¡ÇƒÇ¢Ç»Ç©Ç¡ÇΩÇÁç¿ÇÁÇπÇÈÉLÉÉÉâÇëIëÇ≥ÇπÇÈ
-                RogueDevice.Primary.AddMenu(menu, user, null, new(targetPosition: self.Position));
+                RogueDevice.Primary.AddMenu(menu, user, null, new(targetObj: self));
                 return false;
             }
 
@@ -63,17 +63,17 @@ namespace Roguegard
 
             public void Activate(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                var obj = (RogueObj)model;
-                if (obj.Location == null && arg.TryGetTargetPosition(out var position))
+                var lobbyMember = (RogueObj)model;
+                if (lobbyMember.Location == null)
                 {
                     root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
                     root.Done();
 
-                    var info = LobbyMembers.GetMemberInfo(obj);
-                    info.Seat = self;
+                    var info = LobbyMembers.GetMemberInfo(lobbyMember);
+                    info.Seat = arg.TargetObj;
 
                     info.ItemRegister.Clear();
-                    var spaceObjs = obj.Space.Objs;
+                    var spaceObjs = lobbyMember.Space.Objs;
                     for (int i = 0; i < spaceObjs.Count; i++)
                     {
                         var item = spaceObjs[i];
@@ -83,10 +83,10 @@ namespace Roguegard
                     }
 
                     var world = RogueWorld.GetWorld(self);
-                    SpaceUtility.TryLocate(obj, world);
+                    SpaceUtility.TryLocate(lobbyMember, world);
                     info.SavePoint = RogueWorld.SavePointInfo;
                     var mainParty = RogueDevice.Primary.Player.Main.Stats.Party;
-                    obj.Main.Stats.TryAssignParty(obj, new RogueParty(mainParty.Faction, mainParty.TargetFactions));
+                    lobbyMember.Main.Stats.TryAssignParty(lobbyMember, new RogueParty(mainParty.Faction, mainParty.TargetFactions));
                 }
                 else
                 {
