@@ -24,10 +24,10 @@ namespace Roguegard
             for (int i = 0; i < objs.Count; i++)
             {
                 var obj = objs[i];
-                if (obj == null || StatsEffectedValues.AreVS(self, obj)) continue;
+                if (obj == null || !StatsEffectedValues.AreVS(self, obj)) continue;
 
                 var distance = obj.Position - self.Position;
-                if (distance.sqrMagnitude >= sqrVisibleRadius || !room.Contains(obj.Position)) continue;
+                if (distance.sqrMagnitude >= sqrVisibleRadius && !room.Contains(obj.Position)) continue;
 
                 // “¦‚°‚é
                 var targetPosition = walker.GetWalk(self, true);
