@@ -20,8 +20,8 @@ namespace Roguegard
                 {
                     view.GetTile(new Vector2Int(x, y), out _, out var tile, out var tileObj);
                     if (tile == null && tileObj == null) continue;
-                    if (tile != null && tile.Info.HasCollider) continue;
-                    if (tileObj != null && tileObj.HasCollider) continue;
+                    if (tile != null && (tile.Info.HasCollider || tile.Info.Category == CategoryKw.Pool)) continue;
+                    if (tileObj != null && (tileObj.HasCollider || tileObj.Main.InfoSet.Category == CategoryKw.Pool)) continue;
 
                     if (!Mapped(view, x - 1, y)) { items.Add(new Item(x - 1, y, RogueDirection.Left)); }
                     if (!Mapped(view, x + 1, y)) { items.Add(new Item(x + 1, y, RogueDirection.Right)); }
@@ -111,7 +111,7 @@ namespace Roguegard
                 }
             }
 
-            if (maxScore >= 1)
+            if (maxScore > 0f)
             {
                 targetPosition = maxItem.Position;
                 return true;

@@ -153,7 +153,7 @@ MonoBehaviour:
     _stack: 1
     _members:
       _items: []
-  _chair:
+  _seat:
     _option: {fileID: 11400000, guid: a89d1895d6b9e39429f6d5b3229a3e15, type: 2}
     _optionDescription: {fileID: 0}
     _generatorWeight: 1
