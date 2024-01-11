@@ -8,6 +8,7 @@ namespace Roguegard
 {
     public class PickUpBehaviourNode : IRogueBehaviourNode
     {
+        public int DistanceThreshold { get; set; }
         public IPathBuilder PathBuilder { get; set; }
 
         private static readonly PickUpObjCommand pickUp = new PickUpObjCommand();
@@ -21,6 +22,9 @@ namespace Roguegard
 
             var loadCapacity = StatsEffectedValues.GetLoadCapacity(self);
             var selfWeight = WeightCalculator.Get(self);
+
+            RogueObj nearestItem = null;
+            var nearestSqrDistance = DistanceThreshold * DistanceThreshold;
             for (int i = 0; i < view.VisibleObjCount; i++)
             {
                 var obj = view.GetVisibleObj(i);
@@ -31,17 +35,28 @@ namespace Roguegard
                 var weight = WeightCalculator.Get(obj);
                 if (selfWeight.SpaceWeight + weight.TotalWeight > loadCapacity) continue;
 
-                if (obj.Position == self.Position)
+                var sqrDistance = (obj.Position - self.Position).sqrMagnitude;
+                if (sqrDistance < nearestSqrDistance)
                 {
-                    // アイテムの上についたら使う
-                    if (pickUp.CommandInvoke(self, null, activationDepth, new(tool: obj)))
+                    // 最短距離を更新したとき、敵を設定する
+                    nearestSqrDistance = sqrDistance;
+                    nearestItem = obj;
+                }
+            }
+
+            if (nearestItem != null)
+            {
+                if (nearestItem.Position == self.Position)
+                {
+                    // アイテムの上についたら拾う
+                    if (pickUp.CommandInvoke(self, null, activationDepth, new(tool: nearestItem)))
                     {
                         return RogueObjUpdaterContinueType.Break;
                     }
                 }
 
                 // アイテムを見つけたらそこまで移動
-                if (!PathBuilder.UpdatePath(self, obj.Position)) return RogueObjUpdaterContinueType.Continue;
+                if (!PathBuilder.UpdatePath(self, nearestItem.Position)) return RogueObjUpdaterContinueType.Continue;
                 if (!PathBuilder.TryGetNextPosition(self, out var nextDirection)) return RogueObjUpdaterContinueType.Continue;
 
                 default(IActiveRogueMethodCaller).Walk(self, nextDirection, activationDepth);
