@@ -77,6 +77,9 @@ namespace Roguegard
         [SerializeField] private KeywordData _menuFloor;
         public static IKeyword MenuFloor => instance._menuFloor;
 
+        [SerializeField] private KeywordData _menuLoading;
+        public static IKeyword MenuLoading => instance._menuLoading;
+
         [SerializeField] private KeywordData _menuLog;
         public static IKeyword MenuLog => instance._menuLog;
 
