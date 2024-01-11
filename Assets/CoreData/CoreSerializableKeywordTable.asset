@@ -17,7 +17,7 @@ MonoBehaviour:
   _targetFolders:
   - {fileID: 102900000, guid: bcde7f3237d579f4fa870173efd0291c, type: 3}
   _items:
-  - _key: Core.Explorer
+  - _key: Core.Adventurer
     _asset: {fileID: 11400000, guid: fbe14b7fe9283944d8b726aa7158a896, type: 2}
   - _key: Core.Living
     _asset: {fileID: 11400000, guid: d559c8320cddaa0499057c122652b4a9, type: 2}
