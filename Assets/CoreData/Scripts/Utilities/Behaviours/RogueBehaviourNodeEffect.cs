@@ -4,40 +4,60 @@ using UnityEngine;
 
 namespace Roguegard
 {
-    [ObjectFormer.IgnoreRequireRelationalComponent]
-    public class RogueBehaviourNodeEffect : IRogueEffect, IRogueObjUpdater
+    public class RogueBehaviourNodeEffect : IRogueObjUpdater, IStatusEffect
     {
         private RogueBehaviourNodeList node;
+        private float priority;
+
+        IKeyword IStatusEffect.EffectCategory => EffectCategoryKw.Dummy;
+        RogueObj IStatusEffect.Effecter => null;
+        IBoneMotion IStatusEffect.HeadIcon => null;
+        string IRogueDescription.Name => null;
+        Sprite IRogueDescription.Icon => null;
+        Color IRogueDescription.Color => Color.white;
+        string IRogueDescription.Caption => null;
+        IRogueDetails IRogueDescription.Details => null;
+        float IStatusEffect.Order => 0f;
 
         float IRogueObjUpdater.Order => 1f;
 
-        public static bool HasBehaviourNode(RogueObj obj)
+        public static float GetPriority(RogueObj obj)
         {
-            var effects = obj.Main.RogueEffects.Effects;
-            for (int i = 0; i < effects.Count; i++)
+            var statusEffectState = obj.Main.GetStatusEffectState(obj);
+            if (statusEffectState.TryGetStatusEffect<RogueBehaviourNodeEffect>(out var effect))
             {
-                if (effects[i] is RogueBehaviourNodeEffect) return true;
+                return effect.priority;
             }
-            return false;
+            else
+            {
+                return float.NegativeInfinity;
+            }
         }
 
-        public static void SetBehaviourNode(RogueObj obj, RogueBehaviourNodeList node)
+        public static void SetBehaviourNode(RogueObj obj, RogueBehaviourNodeList node, float priority)
         {
             if (node == null) throw new System.ArgumentNullException(nameof(node));
 
-            if (!obj.Main.RogueEffects.TryGetEffect<RogueBehaviourNodeEffect>(out var effect))
+            var statusEffectState = obj.Main.GetStatusEffectState(obj);
+            if (!statusEffectState.TryGetStatusEffect<RogueBehaviourNodeEffect>(out var effect))
             {
                 effect = new RogueBehaviourNodeEffect();
-                obj.Main.RogueEffects.AddOpen(obj, effect);
+                RogueEffectUtility.AddFromRogueEffect(obj, effect);
             }
+            if (priority <= effect.priority) throw new RogueException(
+                $"新しいビヘイビアの優先度 ({priority}) は既存のビヘイビアの優先度 ({effect.priority}) 以下のため上書きできません。");
+
             effect.node = node;
+            effect.priority = priority;
         }
 
-        public static bool RemoveBehaviourNode(RogueObj obj)
+        public static bool RemoveBehaviourNode(RogueObj obj, float priority)
         {
-            if (!obj.Main.RogueEffects.TryGetEffect<RogueBehaviourNodeEffect>(out var effect))
+            var statusEffectState = obj.Main.GetStatusEffectState(obj);
+            if (statusEffectState.TryGetStatusEffect<RogueBehaviourNodeEffect>(out var effect) &&
+                effect.priority == priority)
             {
-                RogueEffectUtility.RemoveClose(obj, effect);
+                RogueEffectUtility.Remove(obj, effect);
                 return true;
             }
             else
@@ -53,6 +73,8 @@ namespace Roguegard
 
         RogueObjUpdaterContinueType IRogueObjUpdater.UpdateObj(RogueObj self, float activationDepth, ref int sectionIndex)
         {
+            if (self.Location.Space.Tilemap == null) return default;
+
             RogueObjUpdaterContinueType result;
             if (sectionIndex == 0)
             {
@@ -66,8 +88,8 @@ namespace Roguegard
             return result;
         }
 
-        public bool CanStack(RogueObj obj, RogueObj otherObj, IRogueEffect other) => false;
-        public IRogueEffect DeepOrShallowCopy(RogueObj self, RogueObj clonedSelf) => null;
-        public IRogueEffect ReplaceCloned(RogueObj obj, RogueObj clonedObj) => this;
+        void IStatusEffect.GetEffectedName(RogueNameBuilder refName, RogueObj self)
+        {
+        }
     }
 }
