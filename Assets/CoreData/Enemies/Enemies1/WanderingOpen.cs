@@ -33,75 +33,34 @@ namespace Roguegard.CharacterCreation
         {
             private static readonly Effect instance = new Effect();
 
-            float IRogueObjUpdater.Order => -1f;
+            float IRogueObjUpdater.Order => -priority;
+
+            private const float priority = 1f;
 
             public static void SetTo(RogueObj obj)
             {
-                //if (RogueWalkerInfo.Get(obj) == null) { RogueWalkerInfo.SetTo(obj, new WanderingWalker(RoguegardSettings.MaxTilemapSize)); }
                 RogueEffectUtility.AddFromInfoSet(obj, instance);
             }
 
             public static void RemoveFrom(RogueObj obj)
             {
                 RogueEffectUtility.Remove(obj, instance);
-                //RogueWalkerInfo.RemoveFrom(obj);
+                RogueBehaviourNodeEffect.RemoveBehaviourNode(obj, priority);
             }
 
             RogueObjUpdaterContinueType IRogueObjUpdater.UpdateObj(RogueObj self, float activationDepth, ref int sectionIndex)
             {
-                if (RogueBehaviourNodeEffect.HasBehaviourNode(self)) return default;
+                var effectedPriority = RogueBehaviourNodeEffect.GetPriority(self);
+                if (priority <= effectedPriority) return default;
 
                 var node = new RogueBehaviourNodeList();
+                node.Add(new FearMovementBehaviourNode());
                 node.Add(new AttackBehaviourNode());
                 node.Add(new SearchEnemyBehaviourNode());
                 node.Add(new ChaseBehaviourNode());
                 node.Add(new WanderingBehaviourNode());
-                RogueBehaviourNodeEffect.SetBehaviourNode(self, node);
+                RogueBehaviourNodeEffect.SetBehaviourNode(self, node, priority);
                 return default;
-
-                //RogueObjUpdaterContinueType result;
-                //if (sectionIndex == 0)
-                //{
-                //    result = TickUtility.Section0Update(self, ref sectionIndex);
-                //}
-                //else
-                //{
-                //    Update(activationDepth);
-                //    result = TickUtility.SectionAfter1LateUpdate(self, ref sectionIndex);
-                //}
-                //return result;
-
-                //void Update(float activationDepth)
-                //{
-                //    if (!self.Location.Space.TryGetRoomView(self.Position, out var room, out _)) { room = new RectInt(); }
-
-                //    // 敵がプレイヤーを壁越しに察知して近づいてしまわないように視界距離は固定
-                //    var visibleRadius = RoguegardSettings.DefaultVisibleRadius;
-                //    var random = RogueRandom.Primary;
-
-                //    // 恐怖状態のとき逃げる
-                //    if (AutoAction.GetAway(this, self, activationDepth, visibleRadius, room)) return;
-
-                //    // スキル・アイテム使用
-                //    if (AutoAction.TryOtherAction(self, activationDepth, visibleRadius, room, random)) return;
-
-                //    // 通常攻撃
-                //    var attackSkill = AttackUtility.GetNormalAttackSkill(self);
-                //    if (AutoAction.AutoSkill(MainInfoKw.Attack, attackSkill, self, self, activationDepth, null, visibleRadius, room, random)) return;
-
-                //    // 射撃
-                //    var throwSkill = self.Main.InfoSet.Attack;
-                //    if (AutoAction.AutoSkill(MainInfoKw.Throw, throwSkill, self, self, activationDepth, null, visibleRadius, room, random)) return;
-
-                //    // 移動
-                //    var walker = RogueWalkerInfo.Get(self);
-                //    var targetPosition = walker.GetWalk(self, false);
-                //    if (MovementUtility.TryGetApproachDirection(self, targetPosition, true, out var approachDirection))
-                //    {
-                //        this.Walk(self, approachDirection, activationDepth);
-                //        walker.GetWalk(self, false); // 移動した直後の視界でパスを更新
-                //    }
-                //}
             }
         }
     }

@@ -78,45 +78,6 @@ namespace Roguegard
             return false;
         }
 
-        internal static bool GetAway(IActiveRogueMethodCaller method, RogueObj self, float activationDepth, float visibleRadius, RectInt room)
-        {
-            var movement = MovementCalculator.Get(self);
-            if (!movement.SubIs(StdKw.Fear)) return false;
-
-            var sqrVisibleRadius = visibleRadius * visibleRadius;
-            var objs = self.Location.Space.Objs;
-            for (int i = 0; i < objs.Count; i++)
-            {
-                var obj = objs[i];
-                if (obj == null || StatsEffectedValues.AreVS(self, obj)) continue;
-
-                var distance = obj.Position - self.Position;
-                if (distance.sqrMagnitude >= sqrVisibleRadius || !room.Contains(obj.Position)) continue;
-
-                // 逃げる
-                var walker = RogueWalkerInfo.Get(self);
-                var targetPosition = walker.GetWalk(self, true);
-                if (RogueDirection.TryFromSign(targetPosition - self.Position, out var direction))
-                {
-                    method.Walk(self, direction, activationDepth);
-                    walker.GetWalk(self, true); // 移動した直後の視界でパスを更新
-                }
-                return true;
-            }
-            {
-                // 移動
-                var walker = RogueWalkerInfo.Get(self);
-                var targetPosition = walker.GetWalk(self, true);
-                if (RogueDirection.TryFromSign(targetPosition - self.Position, out var direction))
-                {
-                    method.Walk(self, direction, activationDepth);
-                    walker.GetWalk(self, true); // 移動した直後の視界でパスを更新
-                }
-                walker.GetWalk(self, true); // 移動した直後の視界でパスを更新
-                return true;
-            }
-        }
-
         public static bool TryHypnosisOtherAction(RogueObj self, float activationDepth, float visibleRadius, RectInt room, IRogueRandom random)
         {
             if (self.Space == null) return false;

@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Roguegard
 {
     [ObjectFormer.Formable]
-    public class WanderingWalker : IRogueWalker
+    public class WanderingWalker
     {
         private Vector2Int lastTargetPosition = new Vector2Int(-1, -1);
 
