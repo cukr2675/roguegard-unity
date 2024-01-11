@@ -13,9 +13,9 @@ namespace Roguegard
             if (self.Location == null) return RogueObjUpdaterContinueType.Continue;
 
             count++;
-            if (count >= 100)
+            if (count >= 10)
             {
-                // 100ターン後にクエストへ出発
+                // 10ターン後にクエストへ出発
                 var spaceObjs = self.Location.Space.Objs;
                 for (int i = 0; i < spaceObjs.Count; i++)
                 {
