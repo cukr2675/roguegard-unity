@@ -26,6 +26,7 @@ namespace RoguegardUnity
         [SerializeField] private ModelsMenuView _thumbnailMenu = null;
         [SerializeField] private ModelsMenuView _commandMenu = null;
         [SerializeField] private FloorMenuView _floorMenu = null;
+        [SerializeField] private LoadingMenuView _loadingMenu = null;
         [SerializeField] private SummaryMenuView _summaryMenu = null;
         [SerializeField] private DetailsMenuView _detailsMenu = null;
         [SerializeField] private OptionsMenuView _optionsMenu = null;
@@ -75,6 +76,7 @@ namespace RoguegardUnity
             _optionsMenu.Initialize();
             _characterCreationMenu.Initialize(rendererPool);
             _floorMenu.Initialize(updateCharacters);
+            _loadingMenu.Initialize();
             var scrollSensitivity = 64f;
             SetScrollSensitivity(scrollSensitivity);
 
@@ -83,6 +85,7 @@ namespace RoguegardUnity
             table.Add(DeviceKw.MenuScroll, _scrollMenu);
             table.Add(DeviceKw.MenuCommand, _commandMenu);
             table.Add(DeviceKw.MenuFloor, _floorMenu);
+            table.Add(DeviceKw.MenuLoading, _loadingMenu);
             table.Add(DeviceKw.MenuSummary, _summaryMenu);
             table.Add(DeviceKw.MenuDetails, _detailsMenu);
             table.Add(DeviceKw.MenuOptions, _optionsMenu);

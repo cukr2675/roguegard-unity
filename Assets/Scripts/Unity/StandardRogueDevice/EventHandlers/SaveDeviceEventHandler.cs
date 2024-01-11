@@ -46,22 +46,20 @@ namespace RoguegardUnity
 
         private void SaveDelay(IModelsMenuRoot root, string path, bool autoSave)
         {
-            FadeCanvas.StartCanvasCoroutine(Conroutine());
-
-            IEnumerator Conroutine()
-            {
-                yield return null;
-                Save(root, path, autoSave);
-            }
+            FadeCanvas.StartCanvasCoroutine(Save(root, path, autoSave));
         }
 
-        private void Save(IModelsMenuRoot root, string path, bool autoSave)
+        private IEnumerator Save(IModelsMenuRoot root, string path, bool autoSave)
         {
+            // RogueMethodAspectState の処理の完了を待つ
+            yield return null;
+
             // セーブ前処理
             var player = componentManager.Player;
             var maxTurns = 1000;
-            TickEnumerator.UpdateTurns(player, maxTurns, maxTurns * 10, true);
+            yield return TickEnumerator.UpdateTurns(player, maxTurns, maxTurns * 100, true);
             RemoveNoLobbyMemberLocations(player);
+            RemoveViewInfoHeldByLobbyMembers(player);
 
             // セーブ用データを生成
             var data = new StandardRogueDeviceData();
@@ -145,6 +143,21 @@ namespace RoguegardUnity
             }
         }
 
+        /// <summary>
+        /// プレイヤー以外のロビーメンバーが持つ <see cref="ViewInfo"/> を削除する
+        /// </summary>
+        private void RemoveViewInfoHeldByLobbyMembers(RogueObj player)
+        {
+            var lobbyMembers = LobbyMembers.GetMembersByCharacter(player);
+            for (int i = 0; i < lobbyMembers.Count; i++)
+            {
+                var member = lobbyMembers[i];
+                if (member == null || member == player) continue;
+
+                member.RemoveInfo(typeof(ViewInfo));
+            }
+        }
+
         private void OpenLoadInGame()
         {
             touchController.OpenSelectFile((root, path) =>
@@ -161,7 +174,7 @@ namespace RoguegardUnity
 
                     // ロードしたデータを適用
                     RogueRandom.Primary = loadDeviceData.CurrentRandom;
-                    componentManager.Open(loadDeviceData);
+                    componentManager.OpenDelay(loadDeviceData);
                 });
             });
         }

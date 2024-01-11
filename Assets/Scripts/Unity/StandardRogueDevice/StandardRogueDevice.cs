@@ -45,7 +45,7 @@ namespace RoguegardUnity
             componentManager.Initialize(
                 name, spriteRendererPool, tilemapRendererPrefab, touchControllerPrefab,
                 soundTable, audioMixer, seAudioSourcePrefab, bgmAudioSourcePrefab);
-            componentManager.Open(data);
+            componentManager.OpenDelay(data);
             data = null;
         }
 

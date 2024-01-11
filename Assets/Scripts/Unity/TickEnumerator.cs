@@ -32,11 +32,10 @@ namespace RoguegardUnity
             device.AfterStepTurn();
         }
 
-        public static void UpdateTurns(RogueObj player, int maxTurns, int maxIteration, bool untilSavePoint)
+        public static IEnumerator<int> UpdateTurns(RogueObj player, int maxTurns, int maxIteration, bool untilSavePoint, int delayInterval = 100)
         {
             var world = RogueWorld.GetWorld(player);
             var lobby = RogueWorld.GetLobbyByCharacter(player);
-            var lobbyMembers = LobbyMembers.GetMembersByCharacter(player);
             var item = new Item();
             var iteration = 0;
             for (int turns = 0; turns < maxTurns; turns++)
@@ -47,7 +46,7 @@ namespace RoguegardUnity
                     if (location == null) continue;
                     if (untilSavePoint && location == lobby) continue; // セーブポイントで止める場合、ロビーは空間そのものをセーブポイントとみなす
                     if (location != lobby && ObjIsIn(player, location)) continue; // ロビー以外の空間にプレイヤーが存在するとき、その空間は時間経過させない
-                    if (!ObjsIsIn(lobbyMembers, location)) continue; // ロビーメンバーが存在しない空間は時間経過させない
+                    if (!LobbyMembersIsIn(player, location)) continue; // ロビーメンバーが存在しない空間は時間経過させない
 
                     while (iteration < maxIteration)
                     {
@@ -55,6 +54,7 @@ namespace RoguegardUnity
                         if (result == Result.Next) break;
 
                         iteration++;
+                        if (iteration % delayInterval == 0) yield return turns;
                     }
 
                     // プレイヤーが存在する空間の IsTicked を変えるとセーブリセットリロード後の行動順に影響が出るため避ける
@@ -69,27 +69,28 @@ namespace RoguegardUnity
                     RogueDevice.Primary.AfterStepTurn();
                 }
             }
+        }
 
-            bool ObjIsIn(RogueObj obj, RogueObj space)
+        private static bool ObjIsIn(RogueObj obj, RogueObj space)
+        {
+            var objLocation = obj;
+            while (objLocation != null)
             {
-                var objLocation = obj;
-                while (objLocation != null)
-                {
-                    if (objLocation == space) return true;
+                if (objLocation == space) return true;
 
-                    objLocation = objLocation.Location;
-                }
-                return false;
+                objLocation = objLocation.Location;
             }
+            return false;
+        }
 
-            bool ObjsIsIn(Spanning<RogueObj> objs, RogueObj space)
+        private static bool LobbyMembersIsIn(RogueObj player, RogueObj space)
+        {
+            var lobbyMembers = LobbyMembers.GetMembersByCharacter(player);
+            for (int j = 0; j < lobbyMembers.Count; j++)
             {
-                for (int j = 0; j < objs.Count; j++)
-                {
-                    if (ObjIsIn(objs[j], space)) return true;
-                }
-                return false;
+                if (ObjIsIn(lobbyMembers[j], space)) return true;
             }
+            return false;
         }
 
         private static void ResetTick(RogueObj self)

@@ -21,6 +21,7 @@ namespace RoguegardUnity
         private TilemapRenderSystem tilemapRenderSystem;
         private RogueTicker ticker;
         private GameOverDeviceEventHandler gameOverDeviceEventHandler;
+        private MenuController menuController;
 
         private static readonly DummySavePoint dummySavePoint = new DummySavePoint();
 
@@ -58,7 +59,7 @@ namespace RoguegardUnity
             var autoPlayDeviceEventHandler = new AutoPlayDeviceEventHandler(this, touchController, x => Subject = x);
             touchController.Initialize(
                 tilemapGrid.Tilemap, soundController, spriteRendererPool, () => UpdateCharacters(), () => autoPlayDeviceEventHandler.StopAutoPlay());
-            touchController.GetInfo(out var menuController, out var openChestMenu);
+            touchController.GetInfo(out menuController, out var openChestMenu);
 
             // Unity の Update 実行用オブジェクト
             var gameObject = new GameObject("Ticker");
@@ -86,7 +87,12 @@ namespace RoguegardUnity
             ticker.enabled = true;
         }
 
-        public void Open(StandardRogueDeviceData data)
+        public void OpenDelay(StandardRogueDeviceData data)
+        {
+            FadeCanvas.StartCanvasCoroutine(OpenCoroutine(data));
+        }
+
+        private IEnumerator OpenCoroutine(StandardRogueDeviceData data)
         {
             // StandardRogueDeviceData を適用
             Player = data.Player;
@@ -110,15 +116,25 @@ namespace RoguegardUnity
                 var loadDateTime = System.DateTime.UtcNow;
                 var relationalDateTime = loadDateTime - System.DateTime.Parse(data.SaveDateTime);
                 var seconds = (int)relationalDateTime.TotalSeconds;
-                var secondsPerTurn = 60;
+                var secondsPerTurn = 10;
 
-                var maxTurns = 1000;
+                var maxTurns = 7200;
                 var turns = Mathf.Min(seconds / secondsPerTurn, maxTurns);
                 AfterStepTurn(); // セーブポイントから復帰させる
 
-                // ダミーのセーブポイントを設定して入力待機ループを抜ける
+                // ロード画面表示
+                var synchronizeMenu = new SynchronizeMenu();
+                menuController.OpenInitialMenu(synchronizeMenu, null, null, RogueMethodArgument.Identity);
+
+                // ダミーのセーブポイントを設定して入力待機ループを素通りする
                 memberInfo.SavePoint = dummySavePoint;
-                TickEnumerator.UpdateTurns(Player, turns, maxTurns * 10, false);
+                var coroutine = TickEnumerator.UpdateTurns(Player, turns, maxTurns * 1000, false);
+                while (coroutine.MoveNext() && !synchronizeMenu.Interrupt)
+                {
+                    synchronizeMenu.Progress = (float)coroutine.Current / turns;
+                    yield return null;
+                }
+                synchronizeMenu.Progress = 1f;
                 memberInfo.SavePoint = null;
             }
 
@@ -139,6 +155,10 @@ namespace RoguegardUnity
             var memberInfo = LobbyMembers.GetMemberInfo(obj);
             if (memberInfo.SavePoint == null || memberInfo.SavePoint == dummySavePoint) return;
 
+            if (memberInfo.SavePoint == RogueWorld.SavePointInfo)
+            {
+            }
+
             default(IActiveRogueMethodCaller).LoadSavePoint(obj, 0f, memberInfo.SavePoint);
             memberInfo.SavePoint = null;
         }
@@ -147,7 +167,7 @@ namespace RoguegardUnity
         {
             // セーブ前に復帰してしまわないようにする
             var memberInfo = LobbyMembers.GetMemberInfo(Player);
-            if (memberInfo.SavePoint == null)
+            if (memberInfo.SavePoint == null || memberInfo.SavePoint == dummySavePoint)
             {
                 // セーブポイントから復帰する
                 var lobbyMembers = LobbyMembers.GetMembersByCharacter(World.Space.Objs[0]);
