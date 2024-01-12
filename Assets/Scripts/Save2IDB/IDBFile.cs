@@ -12,15 +12,15 @@ namespace Save2IDB
 {
     public static class IDBFile
     {
-        private delegate void DirectWriteAsyncThenCallback(System.IntPtr ohPtr);
         unsafe private delegate void OpenReadAsyncThenCallback(System.IntPtr ohPtr, byte* bytesPtr, long bytesLen);
-        private delegate void DeleteAsyncThenCallback(System.IntPtr ohPtr);
         private delegate void GetFileInfosDescDateAsyncThenCallback(System.IntPtr ohPtr, string serial);
+        private delegate void ImportAsyncThenCallback(System.IntPtr ohPtr, string path);
+        private delegate void CommonThenCallback(System.IntPtr ohPtr);
         private delegate void CommonCatchCallback(System.IntPtr ohPtr, string errorCode);
 
         [DllImport("__Internal")]
         unsafe private static extern void Save2IDB_DirectWriteAsync(
-            System.IntPtr ohPtr, string path, byte* bytesPtr, int bytesLen, DirectWriteAsyncThenCallback thenCallback, CommonCatchCallback catchCallback);
+            System.IntPtr ohPtr, string path, byte* bytesPtr, int bytesLen, CommonThenCallback thenCallback, CommonCatchCallback catchCallback);
 
         [DllImport("__Internal")]
         private static extern void Save2IDB_OpenReadAsync(
@@ -28,11 +28,23 @@ namespace Save2IDB
 
         [DllImport("__Internal")]
         private static extern void Save2IDB_DeleteAsync(
-            System.IntPtr ohPtr, string path, DeleteAsyncThenCallback thenCallback, CommonCatchCallback catchCallback);
+            System.IntPtr ohPtr, string path, CommonThenCallback thenCallback, CommonCatchCallback catchCallback);
+
+        [DllImport("__Internal")]
+        private static extern void Save2IDB_MoveAsync(
+            System.IntPtr ohPtr, string sourcePath, string destPath, CommonThenCallback thenCallback, CommonCatchCallback catchCallback);
 
         [DllImport("__Internal")]
         private static extern void Save2IDB_GetFileInfosDescDateAsync(
             System.IntPtr ohPtr, GetFileInfosDescDateAsyncThenCallback thenCallback, CommonCatchCallback catchCallback);
+
+        [DllImport("__Internal")]
+        private static extern void Save2IDB_ExportAsync(
+            System.IntPtr ohPtr, string path, CommonThenCallback thenCallback, CommonCatchCallback catchCallback);
+
+        [DllImport("__Internal")]
+        private static extern void Save2IDB_ImportAsync(
+            System.IntPtr ohPtr, string prefix, bool overwrite, ImportAsyncThenCallback thenCallback, CommonCatchCallback catchCallback);
 
         private static readonly string invalidCharacterExceptionMessage = $"パスに無効な文字 [{string.Join(", ", invalidChars)}] が含まれています。";
 
@@ -41,6 +53,13 @@ namespace Save2IDB
         public static bool ContainsInvalidChar(string path)
         {
             return invalidChars.Contains(path);
+        }
+
+        [MonoPInvokeCallback(typeof(CommonThenCallback))]
+        private static void CommonThen(System.IntPtr ohPtr)
+        {
+            var operationHandle = Unsafe.As<System.IntPtr, IDBOperationHandle>(ref ohPtr);
+            operationHandle.Done();
         }
 
         [MonoPInvokeCallback(typeof(CommonCatchCallback))]
@@ -68,7 +87,7 @@ namespace Save2IDB
             var ohPtr = Unsafe.As<IDBOperationHandle, System.IntPtr>(ref operationHandle);
             fixed (byte* ptr = &buffer[offset])
             {
-                Save2IDB_DirectWriteAsync(ohPtr, path, ptr, (int)length, DirectWriteAsyncThen, CommonCatch);
+                Save2IDB_DirectWriteAsync(ohPtr, path, ptr, (int)length, CommonThen, CommonCatch);
             }
 #endif
             return operationHandle;
@@ -88,17 +107,10 @@ namespace Save2IDB
             var ohPtr = Unsafe.As<IDBOperationHandle, System.IntPtr>(ref operationHandle);
             fixed (byte* ptr = source)
             {
-                Save2IDB_DirectWriteAsync(ohPtr, path, ptr, source.Length, DirectWriteAsyncThen, CommonCatch);
+                Save2IDB_DirectWriteAsync(ohPtr, path, ptr, source.Length, CommonThen, CommonCatch);
             }
 #endif
             return operationHandle;
-        }
-
-        [MonoPInvokeCallback(typeof(DirectWriteAsyncThenCallback))]
-        unsafe private static void DirectWriteAsyncThen(System.IntPtr ohPtr)
-        {
-            var operationHandle = Unsafe.As<System.IntPtr, IDBOperationHandle>(ref ohPtr);
-            operationHandle.Done();
         }
 
 
@@ -140,16 +152,29 @@ namespace Save2IDB
             var operationHandle = new IDBOperationHandle();
 #if UNITY_WEBGL && !UNITY_EDITOR
             var ohPtr = Unsafe.As<IDBOperationHandle, System.IntPtr>(ref operationHandle);
-            Save2IDB_DeleteAsync(ohPtr, path, DeleteAsyncThen, CommonCatch);
+            Save2IDB_DeleteAsync(ohPtr, path, CommonThen, CommonCatch);
 #endif
             return operationHandle;
         }
 
-        [MonoPInvokeCallback(typeof(DeleteAsyncThenCallback))]
-        private static void DeleteAsyncThen(System.IntPtr ohPtr)
+
+
+        /// <summary>
+        /// <paramref name="sourcePath"/> のファイルを <paramref name="destPath"/> へ移動します。
+        /// </summary>
+        public static IDBOperationHandle MoveAsync(string sourcePath, string destPath)
         {
-            var operationHandle = Unsafe.As<System.IntPtr, IDBOperationHandle>(ref ohPtr);
-            operationHandle.Done();
+            if (string.IsNullOrWhiteSpace(sourcePath)) throw new System.ArgumentException($"{sourcePath} は無効なパスです。", nameof(sourcePath));
+            if (ContainsInvalidChar(sourcePath)) throw new System.ArgumentException(invalidCharacterExceptionMessage, nameof(sourcePath));
+            if (string.IsNullOrWhiteSpace(destPath)) throw new System.ArgumentException($"{destPath} は無効なパスです。", nameof(destPath));
+            if (ContainsInvalidChar(destPath)) throw new System.ArgumentException(invalidCharacterExceptionMessage, nameof(destPath));
+
+            var operationHandle = new IDBOperationHandle();
+#if UNITY_WEBGL && !UNITY_EDITOR
+            var ohPtr = Unsafe.As<IDBOperationHandle, System.IntPtr>(ref operationHandle);
+            Save2IDB_MoveAsync(ohPtr, sourcePath, destPath, CommonThen, CommonCatch);
+#endif
+            return operationHandle;
         }
 
 
@@ -188,6 +213,43 @@ namespace Save2IDB
             }
             var operationHandle = Unsafe.As<System.IntPtr, Save2IDBOperationHandle<IDBFileInfo[]>>(ref ohPtr);
             operationHandle.Done(fileInfos.ToArray());
+        }
+
+
+
+        public static IDBOperationHandle ExportAsync(string path)
+        {
+            if (string.IsNullOrWhiteSpace(path)) throw new System.ArgumentException($"{path} は無効なパスです。", nameof(path));
+            if (ContainsInvalidChar(path)) throw new System.ArgumentException(invalidCharacterExceptionMessage, nameof(path));
+
+            var operationHandle = new IDBOperationHandle();
+#if UNITY_WEBGL && !UNITY_EDITOR
+            var ohPtr = Unsafe.As<IDBOperationHandle, System.IntPtr>(ref operationHandle);
+            Save2IDB_ExportAsync(ohPtr, path, CommonThen, CommonCatch);
+#endif
+            return operationHandle;
+        }
+
+
+
+        public static Save2IDBOperationHandle<string> ImportAsync(string prefix, bool overwrite = false)
+        {
+            if (string.IsNullOrWhiteSpace(prefix)) throw new System.ArgumentException($"{prefix} は無効なパスです。", nameof(prefix));
+            if (ContainsInvalidChar(prefix)) throw new System.ArgumentException(invalidCharacterExceptionMessage, nameof(prefix));
+
+            var operationHandle = new Save2IDBOperationHandle<string>();
+#if UNITY_WEBGL && !UNITY_EDITOR
+            var ohPtr = Unsafe.As<Save2IDBOperationHandle<string>, System.IntPtr>(ref operationHandle);
+            Save2IDB_ImportAsync(ohPtr, prefix, overwrite, ImportAsyncThen, CommonCatch);
+#endif
+            return operationHandle;
+        }
+
+        [MonoPInvokeCallback(typeof(ImportAsyncThenCallback))]
+        private static void ImportAsyncThen(System.IntPtr ohPtr, string path)
+        {
+            var operationHandle = Unsafe.As<System.IntPtr, Save2IDBOperationHandle<string>>(ref ohPtr);
+            operationHandle.Done(path);
         }
     }
 }
