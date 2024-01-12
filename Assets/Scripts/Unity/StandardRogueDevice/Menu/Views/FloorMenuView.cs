@@ -14,7 +14,6 @@ namespace RoguegardUnity
         [SerializeField] private CanvasGroup _canvasGroup = null;
         [SerializeField] private TMP_Text _text = null;
 
-        private System.Action updateCharacters;
         private IModelsMenuItemController itemController;
 
         private readonly List<object> models = new List<object>();
@@ -22,11 +21,6 @@ namespace RoguegardUnity
         public override CanvasGroup CanvasGroup => _canvasGroup;
 
         private float count;
-
-        public void Initialize(System.Action updateCharacters)
-        {
-            this.updateCharacters = updateCharacters;
-        }
 
         public override void OpenView<T>(
             IModelsMenuItemController itemController, Spanning<T> models,
@@ -55,7 +49,6 @@ namespace RoguegardUnity
             if (count > 0f) return;
 
             itemController.Activate(models[0], Root, Self, User, Arg);
-            updateCharacters();
             MenuController.Show(_canvasGroup, false);
             Root.Done();
         }
@@ -66,7 +59,6 @@ namespace RoguegardUnity
 
             count = 0f;
             itemController.Activate(models[0], Root, Self, User, Arg);
-            updateCharacters();
             MenuController.Show(_canvasGroup, false);
             Root.Done();
         }

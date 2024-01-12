@@ -55,7 +55,7 @@ namespace RoguegardUnity
         public bool TalkingWait => _messageController.IsTalkingNow || menuManager.Any || EventManager.Wait;
 
         internal void Initialize(
-            SoundController soundController, RogueSpriteRendererPool rendererPool, System.Action updateCharacters, bool touchMaskIsEnabled = true)
+            SoundController soundController, RogueSpriteRendererPool rendererPool, bool touchMaskIsEnabled = true)
         {
             var objCommandMenu = new ObjCommandMenu();
             var putInCommandMenu = new PutIntoChestCommandMenu();
@@ -75,7 +75,6 @@ namespace RoguegardUnity
             _detailsMenu.Initialize();
             _optionsMenu.Initialize();
             _characterCreationMenu.Initialize(rendererPool);
-            _floorMenu.Initialize(updateCharacters);
             _loadingMenu.Initialize();
             var scrollSensitivity = 64f;
             SetScrollSensitivity(scrollSensitivity);

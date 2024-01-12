@@ -58,7 +58,7 @@ namespace RoguegardUnity
             touchController = Object.Instantiate(touchControllerPrefab, parent);
             var autoPlayDeviceEventHandler = new AutoPlayDeviceEventHandler(this, touchController, x => Subject = x);
             touchController.Initialize(
-                tilemapGrid.Tilemap, soundController, spriteRendererPool, () => UpdateCharacters(), () => autoPlayDeviceEventHandler.StopAutoPlay());
+                tilemapGrid.Tilemap, soundController, spriteRendererPool, () => autoPlayDeviceEventHandler.StopAutoPlay());
             touchController.GetInfo(out menuController, out var openChestMenu);
 
             // Unity の Update 実行用オブジェクト
@@ -138,9 +138,6 @@ namespace RoguegardUnity
                 memberInfo.SavePoint = null;
             }
 
-            // 時間経過処理後にリセット
-            UpdateCharacters();
-
             memberInfo.SavePoint = playerSavePoint;
             LoadSavePoint(Player);
         }
@@ -155,8 +152,9 @@ namespace RoguegardUnity
             var memberInfo = LobbyMembers.GetMemberInfo(obj);
             if (memberInfo.SavePoint == null || memberInfo.SavePoint == dummySavePoint) return;
 
-            if (memberInfo.SavePoint == RogueWorld.SavePointInfo)
+            if (obj == Subject)
             {
+                UpdateCharacters();
             }
 
             default(IActiveRogueMethodCaller).LoadSavePoint(obj, 0f, memberInfo.SavePoint);
