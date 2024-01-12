@@ -106,12 +106,11 @@ const Save2IDBPlugin = {
             const cursor = event.target.result;
             if (cursor) {
               const lastModified = cursor.value ? cursor.value.lastModified : cursor.key;
-              let date = new Date(lastModified);
-              fileInfos.push({ name: cursor.primaryKey, date: date });
+              fileInfos.push({ name: cursor.primaryKey, lastModified: new Date(lastModified) });
               cursor.continue();
             } else {
               if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-                fileInfos.sort((a, b) => b.date - a.date);
+                fileInfos.sort((a, b) => b.lastModified - a.lastModified);
               }
               resolve(fileInfos);
             }
@@ -248,7 +247,7 @@ const Save2IDBPlugin = {
   Save2IDB_GetFileInfosDescDateAsync: async function (ohPtr, thenCallback, catchCallback) {
     try {
       const fileInfos = await Save2IDB.getFileInfosDescDate();
-      const serial = fileInfos.map((x) => `${x.name}|${x.date.toJSON()}`).join('|');
+      const serial = fileInfos.map((x) => `${x.name}|${x.lastModified.toJSON()}`).join('|');
       Save2IDB.callbackText(thenCallback, ohPtr, serial);
     } catch (error) {
       console.error(`Save2IDB_GetFileInfosDescDateAsync error: ${error}`);
