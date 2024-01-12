@@ -66,9 +66,88 @@ namespace RoguegardUnity
             callback.Invoke(stream);
         }
 
+        public static void Delete(string path)
+        {
+            if (path.Contains('\\')) { path = path.Replace('\\', '/'); };
+
+#if UNITY_STANDALONE || UNITY_EDITOR
+            File.Delete(path);
+#elif UNITY_WEBGL
+            FadeCanvas.StartCanvasCoroutine(IDBFile.DeleteAsync(path));
+#else
+            throw new System.NotSupportedException();
+#endif
+        }
+
+        public static void Move(string sourcePath, string destPath, System.Action<bool> callback)
+        {
+            if (sourcePath.Contains('\\')) { sourcePath = sourcePath.Replace('\\', '/'); };
+            if (destPath.Contains('\\')) { destPath = destPath.Replace('\\', '/'); };
+
+#if UNITY_STANDALONE || UNITY_EDITOR
+            if (File.Exists(destPath))
+            {
+                callback(false);
+            }
+            else
+            {
+                File.Move(sourcePath, destPath);
+                callback(true);
+            }
+#elif UNITY_WEBGL
+            FadeCanvas.StartCanvasCoroutine(MoveCoroutine(sourcePath, destPath, callback));
+#else
+            throw new System.NotSupportedException();
+#endif
+        }
+
+        private static IEnumerator MoveCoroutine(string sourcePath, string destPath, System.Action<bool> callback)
+        {
+            var handle = IDBFile.MoveAsync(sourcePath, destPath);
+            yield return handle;
+
+            callback.Invoke(handle.Status == IDBOperationStatus.Succeeded);
+        }
+
         public static string GetName(string path)
         {
             return Path.GetFileNameWithoutExtension(path);
+        }
+
+        public static void Export(string path)
+        {
+            if (path.Contains('\\')) { path = path.Replace('\\', '/'); };
+
+#if UNITY_STANDALONE || UNITY_EDITOR
+            // スタンドアロンではセーブファイルの場所を開く
+            System.Diagnostics.Process.Start("explorer.exe", $"/select,{path.Replace('/', '\\')}");
+#elif UNITY_WEBGL
+            FadeCanvas.StartCanvasCoroutine(IDBFile.ExportAsync(path));
+#else
+            throw new System.NotSupportedException();
+#endif
+        }
+
+        public static void Import(string path, System.Action<bool> callback)
+        {
+            if (path.Contains('\\')) { path = path.Replace('\\', '/'); };
+            if (!path.EndsWith('/')) { path = path + '/'; }
+
+#if UNITY_STANDALONE || UNITY_EDITOR
+
+#elif UNITY_WEBGL
+            FadeCanvas.StartCanvasCoroutine(ImportCoroutine(path, callback));
+#else
+            throw new System.NotSupportedException();
+#endif
+        }
+
+        private static IEnumerator ImportCoroutine(string path, System.Action<bool> callback)
+        {
+            var handle = IDBFile.ImportAsync(path);
+            yield return handle;
+
+            callback.Invoke(handle.Status == IDBOperationStatus.Succeeded);
         }
     }
 }
