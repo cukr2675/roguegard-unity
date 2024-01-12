@@ -165,7 +165,7 @@ namespace RoguegardUnity
 
                 public void OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
                 {
-                    parent.menuController.OpenSelectFile((root, path) =>
+                    parent.menuController.OpenSelectFile(SelectFileMenu.Type.Read, (root, path) =>
                     {
                         root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
                         FadeCanvas.FadeWithLoadScene($"{parent._nextSceneAddress}", () => Loaded(path));

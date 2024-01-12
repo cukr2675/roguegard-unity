@@ -161,9 +161,9 @@ namespace RoguegardUnity
             }
         }
 
-        public void OpenSelectFile(SelectFileMenu.SelectCallback selectCallback, SelectFileMenu.AddCallback addCallback = null)
+        public void OpenSelectFile(SelectFileMenu.Type type, SelectFileMenu.SelectCallback selectCallback, SelectFileMenu.AddCallback addCallback = null)
         {
-            selectFileMenu.SetCallback(selectCallback, addCallback);
+            selectFileMenu.SetCallback(type, selectCallback, addCallback);
             menuManager.OpenInitialMenu(selectFileMenu, null, null, RogueMethodArgument.Identity);
         }
 

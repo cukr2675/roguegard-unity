@@ -30,6 +30,7 @@ namespace RoguegardUnity
             {
                 // 名前を付けてセーブ
                 touchController.OpenSelectFile(
+                    SelectFileMenu.Type.Write,
                     (root, path) => SaveDelay(root, path, false),
                     (root) => StandardRogueDeviceSave.GetNewNumberingPath(
                         RoguegardSettings.DefaultSaveFileName, path => SaveDelay(root, path, false)));
@@ -160,7 +161,7 @@ namespace RoguegardUnity
 
         private void OpenLoadInGame()
         {
-            touchController.OpenSelectFile((root, path) =>
+            touchController.OpenSelectFile(SelectFileMenu.Type.Read, (root, path) =>
             {
                 root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
 

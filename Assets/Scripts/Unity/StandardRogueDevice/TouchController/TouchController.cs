@@ -90,9 +90,9 @@ namespace RoguegardUnity
             _menuController.GetInfo(out openChestMenu);
         }
 
-        public void OpenSelectFile(SelectFileMenu.SelectCallback selectCallback, SelectFileMenu.AddCallback addCallback = null)
+        public void OpenSelectFile(SelectFileMenu.Type type, SelectFileMenu.SelectCallback selectCallback, SelectFileMenu.AddCallback addCallback = null)
         {
-            _menuController.OpenSelectFile(selectCallback, addCallback);
+            _menuController.OpenSelectFile(type, selectCallback, addCallback);
         }
 
         /// <summary>

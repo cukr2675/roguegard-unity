@@ -25,14 +25,15 @@ namespace RoguegardUnity
             this.scrollMenuView = scrollMenuView;
         }
 
-        public void Open(SelectCallback selectCallback, AddCallback addCallback = null)
+        public void Open(Type type, SelectCallback selectCallback, AddCallback addCallback = null)
         {
-            SetCallback(selectCallback, addCallback);
+            SetCallback(type, selectCallback, addCallback);
             OpenMenu(null, null, null, RogueMethodArgument.Identity);
         }
 
-        public void SetCallback(SelectCallback selectCallback, AddCallback addCallback = null)
+        public void SetCallback(Type type, SelectCallback selectCallback, AddCallback addCallback = null)
         {
+            itemController.type = type;
             itemController.selectCallback = selectCallback;
             itemController.addCallback = addCallback;
         }
@@ -52,13 +53,14 @@ namespace RoguegardUnity
                 objs.AddRange(files);
                 scrollMenuView.OpenView(itemController, objs, root, self, user, filesArg);
                 scrollMenuView.ShowExitButton(ExitModelsMenuChoice.Instance);
-                scrollMenuView.ShowSortButton(importChoice);
+                if (itemController.type == Type.Read) { scrollMenuView.ShowSortButton(importChoice); }
                 scrollMenuView.SetPosition(1f);
             });
         }
 
         private class ItemController : IModelsMenuItemController
         {
+            public Type type;
             public SelectCallback selectCallback;
             public AddCallback addCallback;
 
@@ -83,8 +85,15 @@ namespace RoguegardUnity
                 }
                 else
                 {
-                    root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-                    root.OpenMenuAsDialog(nextMenu, null, null, new(other: model), RogueMethodArgument.Identity);
+                    if (type == Type.Write)
+                    {
+                        selectCallback(root, (string)model);
+                    }
+                    else
+                    {
+                        root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+                        root.OpenMenuAsDialog(nextMenu, null, null, new(other: model), RogueMethodArgument.Identity);
+                    }
                 }
             }
         }
@@ -227,6 +236,12 @@ namespace RoguegardUnity
                     root.Back();
                 });
             }
+        }
+
+        public enum Type
+        {
+            Read,
+            Write
         }
     }
 }
