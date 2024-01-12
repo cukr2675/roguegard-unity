@@ -118,14 +118,14 @@ namespace Save2IDB
         /// <summary>
         /// 指定のパスからファイルを読み込みます。
         /// </summary>
-        unsafe public static Save2IDBOperationHandle<IDBStreamReader> OpenReadAsync(string path)
+        unsafe public static IDBOperationHandle<IDBStreamReader> OpenReadAsync(string path)
         {
             if (string.IsNullOrWhiteSpace(path)) throw new System.ArgumentException($"{path} は無効なパスです。", nameof(path));
             if (ContainsInvalidChar(path)) throw new System.ArgumentException(invalidCharacterExceptionMessage, nameof(path));
 
-            var operationHandle = new Save2IDBOperationHandle<IDBStreamReader>();
+            var operationHandle = new IDBOperationHandle<IDBStreamReader>();
 #if UNITY_WEBGL && !UNITY_EDITOR
-            var ohPtr = Unsafe.As<Save2IDBOperationHandle<IDBStreamReader>, System.IntPtr>(ref operationHandle);
+            var ohPtr = Unsafe.As<IDBOperationHandle<IDBStreamReader>, System.IntPtr>(ref operationHandle);
             Save2IDB_OpenReadAsync(ohPtr, path, OpenReadAsyncThen, CommonCatch);
 #endif
             return operationHandle;
@@ -135,7 +135,7 @@ namespace Save2IDB
         unsafe private static void OpenReadAsyncThen(System.IntPtr ohPtr, byte* bytesPtr, long bytesLen)
         {
             var stream = new IDBStreamReader(bytesPtr, bytesLen);
-            var operationHandle = Unsafe.As<System.IntPtr, Save2IDBOperationHandle<IDBStreamReader>>(ref ohPtr);
+            var operationHandle = Unsafe.As<System.IntPtr, IDBOperationHandle<IDBStreamReader>>(ref ohPtr);
             operationHandle.Done(stream);
         }
 
@@ -182,11 +182,11 @@ namespace Save2IDB
         /// <summary>
         /// 保存されているファイルのパスの一覧を、更新日時の降順で取得します。
         /// </summary>
-        public static Save2IDBOperationHandle<IDBFileInfo[]> GetFileInfosDescDateAsync()
+        public static IDBOperationHandle<IDBFileInfo[]> GetFileInfosDescDateAsync()
         {
-            var operationHandle = new Save2IDBOperationHandle<IDBFileInfo[]>();
+            var operationHandle = new IDBOperationHandle<IDBFileInfo[]>();
 #if UNITY_WEBGL && !UNITY_EDITOR
-            var ohPtr = Unsafe.As<Save2IDBOperationHandle<IDBFileInfo[]>, System.IntPtr>(ref operationHandle);
+            var ohPtr = Unsafe.As<IDBOperationHandle<IDBFileInfo[]>, System.IntPtr>(ref operationHandle);
             Save2IDB_GetFileInfosDescDateAsync(ohPtr, GetFileInfosDescDateAsyncThen, CommonCatch);
 #endif
             return operationHandle;
@@ -211,7 +211,7 @@ namespace Save2IDB
                     path = null;
                 }
             }
-            var operationHandle = Unsafe.As<System.IntPtr, Save2IDBOperationHandle<IDBFileInfo[]>>(ref ohPtr);
+            var operationHandle = Unsafe.As<System.IntPtr, IDBOperationHandle<IDBFileInfo[]>>(ref ohPtr);
             operationHandle.Done(fileInfos.ToArray());
         }
 
@@ -232,14 +232,14 @@ namespace Save2IDB
 
 
 
-        public static Save2IDBOperationHandle<string> ImportAsync(string prefix, bool overwrite = false)
+        public static IDBOperationHandle<string> ImportAsync(string prefix, bool overwrite = false)
         {
             if (string.IsNullOrWhiteSpace(prefix)) throw new System.ArgumentException($"{prefix} は無効なパスです。", nameof(prefix));
             if (ContainsInvalidChar(prefix)) throw new System.ArgumentException(invalidCharacterExceptionMessage, nameof(prefix));
 
-            var operationHandle = new Save2IDBOperationHandle<string>();
+            var operationHandle = new IDBOperationHandle<string>();
 #if UNITY_WEBGL && !UNITY_EDITOR
-            var ohPtr = Unsafe.As<Save2IDBOperationHandle<string>, System.IntPtr>(ref operationHandle);
+            var ohPtr = Unsafe.As<IDBOperationHandle<string>, System.IntPtr>(ref operationHandle);
             Save2IDB_ImportAsync(ohPtr, prefix, overwrite, ImportAsyncThen, CommonCatch);
 #endif
             return operationHandle;
@@ -248,7 +248,7 @@ namespace Save2IDB
         [MonoPInvokeCallback(typeof(ImportAsyncThenCallback))]
         private static void ImportAsyncThen(System.IntPtr ohPtr, string path)
         {
-            var operationHandle = Unsafe.As<System.IntPtr, Save2IDBOperationHandle<string>>(ref ohPtr);
+            var operationHandle = Unsafe.As<System.IntPtr, IDBOperationHandle<string>>(ref ohPtr);
             operationHandle.Done(path);
         }
     }

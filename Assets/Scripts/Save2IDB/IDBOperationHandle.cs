@@ -48,13 +48,13 @@ namespace Save2IDB
         }
     }
 
-    public class Save2IDBOperationHandle<T> : IDBOperationHandle, IEnumerator
+    public class IDBOperationHandle<T> : IDBOperationHandle, IEnumerator
     {
         public T Result { get; private set; }
 
         object IEnumerator.Current => null;
 
-        internal Save2IDBOperationHandle() { }
+        internal IDBOperationHandle() { }
 
         internal void Done(T stream)
         {
