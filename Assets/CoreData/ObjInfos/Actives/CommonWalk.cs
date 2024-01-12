@@ -10,6 +10,8 @@ namespace Roguegard
     {
         public bool Invoke(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
         {
+            if (self.Location?.Space.Tilemap == null) return false;
+
             var direction = RogueMethodUtility.GetTargetDirection(self, arg);
             var weightCalculator = WeightCalculator.Get(self);
             var loadCapacity = StatsEffectedValues.GetLoadCapacity(self);
@@ -32,7 +34,9 @@ namespace Roguegard
             var position = self.Position;
             var target = position + deltaPosition;
             var userMovement = MovementCalculator.Get(self);
-            if (self.Location.Space.Tilemap.GetTop(target).Info.Category == CategoryKw.Pool &&
+            var targetTile = self.Location.Space.Tilemap.GetTop(target);
+            if (targetTile != null &&
+                targetTile.Info.Category == CategoryKw.Pool &&
                 !userMovement.SubIs(StdKw.PoolMovement))
             {
                 // 水路には立ち入らない
