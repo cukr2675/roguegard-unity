@@ -94,7 +94,7 @@ const Save2IDBPlugin = {
         Save2IDB.getDb().then((db) => {
           const objectStore = db.transaction(Save2IDB.filesObjectStoreName).objectStore(Save2IDB.filesObjectStoreName);
         
-          let fileKeys = [];
+          let fileInfos = [];
           let request;
           if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
             request = objectStore.openCursor();
@@ -106,12 +106,14 @@ const Save2IDBPlugin = {
             const cursor = event.target.result;
             if (cursor) {
               const lastModified = cursor.value ? cursor.value.lastModified : cursor.key;
-              let date = new Date();
-              date.setTime(lastModified);
-              fileKeys.push(`${cursor.primaryKey}|${date.toJSON()}`);
+              let date = new Date(lastModified);
+              fileInfos.push({ name: cursor.primaryKey, date: date });
               cursor.continue();
             } else {
-              resolve(fileKeys);
+              if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+                fileInfos.sort((a, b) => b.date - a.date);
+              }
+              resolve(fileInfos);
             }
           };
           request.onerror = (event) => {
@@ -245,8 +247,8 @@ const Save2IDBPlugin = {
 
   Save2IDB_GetFileInfosDescDateAsync: async function (ohPtr, thenCallback, catchCallback) {
     try {
-      const fileKeys = await Save2IDB.getFileInfosDescDate();
-      const serial = fileKeys.join('|');
+      const fileInfos = await Save2IDB.getFileInfosDescDate();
+      const serial = fileInfos.map((x) => `${x.name}|${x.date.toJSON()}`).join('|');
       Save2IDB.callbackText(thenCallback, ohPtr, serial);
     } catch (error) {
       console.error(`Save2IDB_GetFileInfosDescDateAsync error: ${error}`);
