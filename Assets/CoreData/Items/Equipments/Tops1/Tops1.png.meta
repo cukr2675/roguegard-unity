@@ -232,11 +232,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 19
-        y: 52
+        y: 38
         width: 12
-        height: 12
+        height: 13
       alignment: 9
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0.5, y: 0.46153846}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -253,7 +253,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 21
-        y: 60
+        y: 47
         width: 8
         height: 4
       alignment: 9
@@ -274,7 +274,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 19
-        y: 51
+        y: 38
         width: 12
         height: 9
       alignment: 9
@@ -295,7 +295,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 42
-        y: 58
+        y: 48
         width: 4
         height: 6
       alignment: 9
@@ -316,7 +316,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 42
-        y: 54
+        y: 44
         width: 5
         height: 4
       alignment: 9
@@ -379,7 +379,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 32
-        y: 60
+        y: 47
         width: 8
         height: 4
       alignment: 9
@@ -400,7 +400,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 30
-        y: 51
+        y: 38
         width: 12
         height: 9
       alignment: 9
@@ -647,6 +647,174 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Tanktop
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 50
+        width: 8
+        height: 7
+      alignment: 9
+      pivot: {x: 0.5, y: 0.42857143}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: af7e878e0898bc340a357a1f028026c2
+      internalID: 1810044930
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CaptainRobe_UpperBody_NF
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 60
+        width: 8
+        height: 4
+      alignment: 9
+      pivot: {x: 0.5, y: 0.75}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 69f946e21af63534b8cd92ecf891defc
+      internalID: 958931543
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CaptainRobe_Body_NF
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 51
+        width: 12
+        height: 9
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bc08770a46acc4f47a2f05c1c4b3e678
+      internalID: 1072110244
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CaptainRobe
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 51
+        width: 12
+        height: 13
+      alignment: 9
+      pivot: {x: 0.5, y: 0.46153846}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8bd1f580286ca744b81e3a55703ed847
+      internalID: 1539274562
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CaptainRobe_Hand_NFBF
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 54
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.4, y: -0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 12b0e679267daab4aa725fef0e1551ef
+      internalID: 2067704437
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CaptainRobe_Arm_NFBF
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 58
+        width: 4
+        height: 6
+      alignment: 9
+      pivot: {x: 0.5, y: 0.8333333}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e3cb89a34ab24664fb434bdb2b3d2794
+      internalID: 1222286035
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CaptainRobe_UpperBody_BF
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 60
+        width: 8
+        height: 4
+      alignment: 9
+      pivot: {x: 0.5, y: 0.75}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d52e5f866dab16348baf6b838dc4b920
+      internalID: 1682681095
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CaptainRobe_Body_BF
+      rect:
+        serializedVersion: 2
+        x: 30
+        y: 51
+        width: 12
+        height: 9
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4199c3cf5d6c1fc45bc6d4e8e5522302
+      internalID: -8139818
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -663,6 +831,13 @@ TextureImporter:
       CamisoleDress_Body_NF: -804008388
       CamisoleDress_UpperBody_BF: -436714114
       CamisoleDress_UpperBody_NF: 116926746
+      CaptainRobe: 1539274562
+      CaptainRobe_Arm_NFBF: 1222286035
+      CaptainRobe_Body_BF: -8139818
+      CaptainRobe_Body_NF: 1072110244
+      CaptainRobe_Hand_NFBF: 2067704437
+      CaptainRobe_UpperBody_BF: 1682681095
+      CaptainRobe_UpperBody_NF: 958931543
       CavalryRobe: 1892006231
       CavalryRobe_Arm_NFBF: -465753210
       CavalryRobe_Body_BF: -195458470
@@ -677,6 +852,7 @@ TextureImporter:
       LaceUpShirt_Hand_NFBF: -1024374986
       LaceUpShirt_UpperBody_BF: 1624763838
       LaceUpShirt_UpperBody_NF: 1992403056
+      Tanktop: 1810044930
       Tanktop_Body_NFBF: -361051830
       Tanktop_UpperBody_BF: -1681575655
       Tanktop_UpperBody_NF: 1426671315

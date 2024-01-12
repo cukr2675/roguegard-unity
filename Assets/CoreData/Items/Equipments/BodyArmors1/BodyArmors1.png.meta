@@ -416,6 +416,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Shel
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 54
+        width: 9
+        height: 10
+      alignment: 9
+      pivot: {x: 0.44444445, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fef3225cf532af546852c36c8872bc27
+      internalID: -1898969014
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -436,6 +457,7 @@ TextureImporter:
       LightArmor_Body_BF: -972827807
       LightArmor_Body_NF: -393005359
       LightArmor_UpperBody_NFBF: 278652595
+      Shel: -1898969014
       Shell: 14424580
       Shell_Body_BF: 1145129531
       Shell_Body_NF: 509085040

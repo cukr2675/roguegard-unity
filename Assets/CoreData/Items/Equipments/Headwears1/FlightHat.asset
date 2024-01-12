@@ -17,7 +17,7 @@ MonoBehaviour:
   _costIsUnknown: 0
   _race:
     _name: 
-    _icon: {fileID: 279867003, guid: eadd615260332ec4cac4029b847a234f, type: 3}
+    _icon: {fileID: 1071780184, guid: eadd615260332ec4cac4029b847a234f, type: 3}
     _color: {r: 0.6039216, g: 0.34901962, b: 0.10980392, a: 1}
     _caption: 
     _details:
