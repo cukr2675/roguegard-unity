@@ -90,7 +90,7 @@ namespace Roguegard
         {
             private static readonly object[] models = new object[]
             {
-                new Yes(),
+                new ActionModelsMenuChoice("ÇÕÇ¢", Yes),
                 ExitModelsMenuChoice.Instance
             };
 
@@ -99,26 +99,18 @@ namespace Roguegard
                 root.Get(DeviceKw.MenuTalkChoices).OpenView(ChoicesModelsMenuItemController.Instance, models, root, self, user, arg);
             }
 
-            private class Yes : IModelsMenuChoice
+            private static void Yes(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-                {
-                    return "ÇÕÇ¢";
-                }
+                root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
 
-                public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-                {
-                    root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+                // ÉLÉÉÉâÇê»Ç©ÇÁåƒÇ—ñﬂÇ∑
+                var character = arg.TargetObj;
+                default(IActiveRogueMethodCaller).LocateSavePoint(character, null, 0f, RogueWorld.SavePointInfo, true);
+                SpaceUtility.TryLocate(character, null);
+                var info = LobbyMembers.GetMemberInfo(character);
+                info.Seat = null;
 
-                    // ÉLÉÉÉâÇê»Ç©ÇÁåƒÇ—ñﬂÇ∑
-                    var character = arg.TargetObj;
-                    default(IActiveRogueMethodCaller).LocateSavePoint(character, null, 0f, RogueWorld.SavePointInfo, true);
-                    SpaceUtility.TryLocate(character, null);
-                    var info = LobbyMembers.GetMemberInfo(character);
-                    info.Seat = null;
-
-                    root.Back();
-                }
+                root.Back();
             }
         }
 

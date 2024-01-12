@@ -194,7 +194,7 @@ namespace RoguegardUnity
             {
                 private static readonly object[] models = new object[]
                 {
-                    new Yes(),
+                    new ActionModelsMenuChoice("<#f00>çÌèúÇ∑ÇÈ", Yes),
                     ExitModelsMenuChoice.Instance
                 };
 
@@ -203,19 +203,11 @@ namespace RoguegardUnity
                     root.Get(DeviceKw.MenuTalkChoices).OpenView(ChoicesModelsMenuItemController.Instance, models, root, self, user, arg);
                 }
 
-                private class Yes : IModelsMenuChoice
+                private static void Yes(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
                 {
-                    public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-                    {
-                        return "<#f00>çÌèúÇ∑ÇÈ";
-                    }
-
-                    public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-                    {
-                        root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-                        RogueFile.Delete((string)arg.Other);
-                        root.Back();
-                    }
+                    root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+                    RogueFile.Delete((string)arg.Other);
+                    root.Back();
                 }
             }
         }

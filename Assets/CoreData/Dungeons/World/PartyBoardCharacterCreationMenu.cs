@@ -40,8 +40,8 @@ namespace Roguegard
         {
             private readonly object[] models = new object[]
             {
-                new SaveChoice(),
-                new NotSaveChoice(),
+                new ActionModelsMenuChoice("上書き保存", Save),
+                new ActionModelsMenuChoice("保存しない", NotSave),
                 ExitModelsMenuChoice.Instance
             };
 
@@ -50,56 +50,40 @@ namespace Roguegard
                 root.Get(DeviceKw.MenuTalkChoices).OpenView(ChoicesModelsMenuItemController.Instance, models, root, self, user, arg);
             }
 
-            private class SaveChoice : IModelsMenuChoice
+            private static void Save(IModelsMenuRoot root, RogueObj player, RogueObj user, in RogueMethodArgument arg)
             {
-                public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-                {
-                    return "上書き保存";
-                }
+                root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
 
-                public void Activate(IModelsMenuRoot root, RogueObj player, RogueObj user, in RogueMethodArgument arg)
+                if (arg.Other is CharacterCreationDataBuilder builder)
                 {
-                    root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-
-                    if (arg.Other is CharacterCreationDataBuilder builder)
+                    // キャラクリ画面から戻ったとき、そのキャラを更新する
+                    var character = arg.TargetObj;
+                    if (character != null)
                     {
-                        // キャラクリ画面から戻ったとき、そのキャラを更新する
-                        var character = arg.TargetObj;
-                        if (character != null)
-                        {
-                            // 編集キャラ更新
-                            character.Main.SetBaseInfoSet(character, builder.PrimaryInfoSet);
-                        }
-                        else
-                        {
-                            // 新規キャラ追加
-                            var world = RogueWorld.GetWorld(player);
-                            character = builder.CreateObj(null, Vector2Int.zero, RogueRandom.Primary);
-                            LobbyMembers.Add(character, world);
-                        }
-                        var info = LobbyMembers.GetMemberInfo(character);
-                        info.CharacterCreationData = builder;
+                        // 編集キャラ更新
+                        character.Main.SetBaseInfoSet(character, builder.PrimaryInfoSet);
                     }
-
-                    root.Back();
-                    root.Back();
+                    else
+                    {
+                        // 新規キャラ追加
+                        var world = RogueWorld.GetWorld(player);
+                        character = builder.CreateObj(null, Vector2Int.zero, RogueRandom.Primary);
+                        LobbyMembers.Add(character, world);
+                    }
+                    var info = LobbyMembers.GetMemberInfo(character);
+                    info.CharacterCreationData = builder;
                 }
+
+                root.Back();
+                root.Back();
             }
 
-            private class NotSaveChoice : IModelsMenuChoice
+            private static void NotSave(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-                {
-                    return "保存しない";
-                }
-
-                public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-                {
-                    // 何もせず閉じる
-                    root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-                    root.Back();
-                    root.Back();
-                }
+                // 何もせず閉じる
+                root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+                root.Back();
+                root.Back();
             }
         }
     }

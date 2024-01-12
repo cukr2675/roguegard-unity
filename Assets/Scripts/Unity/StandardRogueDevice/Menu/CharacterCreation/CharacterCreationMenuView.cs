@@ -339,7 +339,7 @@ namespace RoguegardUnity
             }
         }
 
-        private class LoadDialog : IModelsMenu, IModelsMenuChoice
+        private class LoadDialog : IModelsMenu
         {
             public CharacterCreationDataBuilder model;
 
@@ -349,7 +349,7 @@ namespace RoguegardUnity
             {
                 models = new object[]
                 {
-                    this,
+                    new ActionModelsMenuChoice("ロードする", Load),
                     ExitModelsMenuChoice.Instance
                 };
             }
@@ -359,12 +359,7 @@ namespace RoguegardUnity
                 root.Get(DeviceKw.MenuTalkChoices).OpenView(ChoicesModelsMenuItemController.Instance, models, root, self, user, arg);
             }
 
-            public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                return "ロードする";
-            }
-
-            public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            private void Load(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
 
