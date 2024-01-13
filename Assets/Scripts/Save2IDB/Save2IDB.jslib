@@ -128,7 +128,7 @@ const Save2IDBPlugin = {
     export: (file) => {
       const element = document.createElement('a');
       element.href = URL.createObjectURL(file);
-      element.download = file.name;
+      element.download = file.name.replace(/^.*[\\\/]/, '');
       element.style.display = 'none';
       document.body.appendChild(element);
       element.click();
