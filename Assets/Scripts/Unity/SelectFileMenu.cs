@@ -69,7 +69,9 @@ namespace RoguegardUnity
             public string GetName(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 if (model == null) return "+ New File";
-                return (string)model;
+                
+                var path = (string)model;
+                return path.Substring(path.LastIndexOf('/') + 1);
             }
 
             public void Activate(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)

@@ -15,7 +15,7 @@ namespace RoguegardUnity
             if (path.Contains('\\')) { path = path.Replace('\\', '/'); };
 
 #if UNITY_STANDALONE || UNITY_EDITOR
-            callback(Directory.GetFiles(path));
+            callback(Directory.GetFiles(path).OrderByDescending(x => File.GetLastWriteTime(x)).Select(x => x.Replace('\\', '/')).ToArray());
 #elif UNITY_WEBGL
             FadeCanvas.StartCanvasCoroutine(GetFilesCoroutine(path, callback));
 #else
