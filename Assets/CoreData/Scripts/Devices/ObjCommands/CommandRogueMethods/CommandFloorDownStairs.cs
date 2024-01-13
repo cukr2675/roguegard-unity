@@ -20,17 +20,17 @@ namespace Roguegard
                 Debug.LogError($"{tool} のカテゴリは {CategoryKw.LevelDownStairs.Name} ではありません。");
                 return false;
             }
-            if (!LobbyMembers.Contains(player))
+            if (LobbyMemberList.GetMemberInfo(player) == null)
             {
                 // ダンジョン空間オブジェクトが永続的に残ることを避けるため、 LobbyMembers によって追跡できないキャラによる階層移動は禁止する。
-                Debug.LogError($"{player} は {nameof(LobbyMembers)} を持ちません。");
+                Debug.LogError($"{player} は {nameof(LobbyMemberInfo)} を持ちません。");
                 return false;
             }
             var info = SavePointInfo.Get(tool);
 
             if (!this.LocateSavePoint(player, tool, activationDepth, info)) return false;
 
-            var memberInfo = LobbyMembers.GetMemberInfo(player);
+            var memberInfo = LobbyMemberList.GetMemberInfo(player);
             memberInfo.SavePoint = info;
 
             // プレイヤーのときだけオートセーブする

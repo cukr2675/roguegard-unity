@@ -102,9 +102,10 @@ namespace RoguegardUnity
             EventManager.MenuSubject = menuSubject;
         }
 
-        public void GetInfo(out IModelsMenu openChestMenu)
+        public void GetInfo(out IModelsMenu putIntoChestMenu, out IModelsMenu takeOutFromChestMenu)
         {
-            openChestMenu = objsMenu.OpenChest;
+            putIntoChestMenu = objsMenu.PutIntoChest;
+            takeOutFromChestMenu = objsMenu.TakeOutFromChest;
         }
 
         public void SetWindowFrame(Sprite sprite, Sprite spriteB, Color backgroundColor)
@@ -143,7 +144,7 @@ namespace RoguegardUnity
         {
             EventManager.Add(DeviceKw.EnqueueSE, obj: DeviceKw.Submit);
 
-            var view = subject.Get<ViewInfo>();
+            var view = ViewInfo.Get(subject);
             for (int i = 0; i < view.VisibleObjCount; i++)
             {
                 var obj = view.GetVisibleObj(i);

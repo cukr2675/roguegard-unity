@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Roguegard.CharacterCreation
 {
-    public class DungeonQuestInfo
+    public static class DungeonQuestInfo
     {
         public static bool TryGetQuest(RogueObj self, out DungeonQuest quest)
         {

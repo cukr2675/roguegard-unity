@@ -136,6 +136,8 @@ MonoBehaviour:
     _asset: {fileID: 11400000, guid: 3f49504da8915e449a729b49fb1bc7bd, type: 2}
   - _key: Core.CaptainRobe
     _asset: {fileID: 11400000, guid: 700ba87b2b6aad84c84976c4dd7fc433, type: 2}
+  - _key: Core.CavalryRobe
+    _asset: {fileID: 11400000, guid: b2de0422136427f4d99f7e933f558531, type: 2}
   - _key: Core.LaceUpShirt
     _asset: {fileID: 11400000, guid: 22919a516a6bd704c952265efedf00bd, type: 2}
   - _key: Core.TankTop

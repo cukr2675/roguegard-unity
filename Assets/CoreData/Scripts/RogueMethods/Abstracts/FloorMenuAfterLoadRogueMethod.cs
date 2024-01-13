@@ -23,10 +23,10 @@ namespace Roguegard
         /// </summary>
         public sealed override bool Invoke(RogueObj self, RogueObj player, float activationDepth, in RogueMethodArgument arg)
         {
-            if (!LobbyMembers.Contains(player))
+            if (LobbyMemberList.GetMemberInfo(player) == null)
             {
                 // ダンジョン空間オブジェクトが永続的に残ることを避けるため、 LobbyMembers によって追跡できないキャラによる階層移動は禁止する。
-                Debug.LogError($"{player} は {nameof(LobbyMembers)} を持ちません。");
+                Debug.LogError($"{player} は {nameof(LobbyMemberInfo)} を持ちません。");
                 return false;
             }
 

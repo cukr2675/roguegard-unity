@@ -187,7 +187,7 @@ namespace RoguegardUnity
             else { currentDashSpriteTable = _sprintSprite; }
 
             // 足元に何かあったら吹き出しボタンを表示する
-            var view = player.Get<ViewInfo>();
+            var view = ViewInfo.Get(player);
             for (int i = 0; i < view.VisibleObjCount; i++)
             {
                 var obj = view.GetVisibleObj(i);

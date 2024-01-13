@@ -49,7 +49,7 @@ namespace Roguegard.CharacterCreation
 
         public void Affect(AppearanceBoneSpriteTable boneSpriteTable, Color color)
         {
-            if (!boneSpriteTable.TryGetNewEquipmentTable(_equipParts, _boneSpriteEffectOrder, out var table))
+            if (!boneSpriteTable.TryGetNewEquipmentTable(_isCosmetic ? Spanning<IKeyword>.Empty : _equipParts, _boneSpriteEffectOrder, out var table))
             {
                 Debug.LogWarning("重複した装備部位の見た目が存在します。");
                 return;

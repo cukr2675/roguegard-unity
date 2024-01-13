@@ -33,14 +33,9 @@ namespace RoguegardUnity
         private float pressZoom;
         private bool lastPinch;
         private bool pinchOnly;
-        private FieldPointer p0;
-        private FieldPointer p1;
+        private readonly FieldPointerManager pointerManager = new FieldPointerManager();
         private PointerEventData pointer0;
         private PointerEventData pointer1;
-        private Vector2 lastPointerPosition0;
-        private Vector2 lastPointerPosition1;
-        private float lastPointerMoveSecond0;
-        private float lastPointerMoveSecond1;
         private Vector2 scrollDelta;
         private bool readyToLongDown;
         private float downSeconds;
@@ -61,43 +56,7 @@ namespace RoguegardUnity
         private void Update()
         {
             scrollDelta += Input.mouseScrollDelta;
-
-            // 一定時間変化のなかったタッチ操作は中断する。
-
-            if (pointer0 != null && pointer0.dragging)
-            {
-                if (pointer0.position == lastPointerPosition0)
-                {
-                    lastPointerMoveSecond0 += Time.deltaTime;
-                    if (lastPointerMoveSecond0 >= TouchResetTime)
-                    {
-                        SetPointers(null, pointer1);
-                        readyToLongDown = false;
-                    }
-                }
-                else
-                {
-                    lastPointerMoveSecond0 = 0;
-                    lastPointerPosition0 = pointer0.position;
-                }
-            }
-            if (pointer1 != null && pointer1.dragging)
-            {
-                if (pointer1.position == lastPointerPosition1)
-                {
-                    lastPointerMoveSecond1 += Time.deltaTime;
-                    if (lastPointerMoveSecond1 >= TouchResetTime)
-                    {
-                        SetPointers(pointer0, null);
-                        readyToLongDown = false;
-                    }
-                }
-                else
-                {
-                    lastPointerMoveSecond1 = 0;
-                    lastPointerPosition1 = pointer1.position;
-                }
-            }
+            pointerManager.Update(Time.deltaTime);
         }
 
         public void UpdateField(bool visiblePlayer, Vector3 playerPosition, RogueDirection playerDirection, int deltaTime)
@@ -280,87 +239,15 @@ namespace RoguegardUnity
         }
 
         void IPointerDownHandler.OnPointerDown(PointerEventData eventData)
-        {
-            SetPointer(eventData);
-            readyToLongDown = true;
-
-            if (pointer0 != null && pointer1 != null)
-            {
-                // 一瞬でも二点タップ状態になったとき、ドラッグ扱いにする。
-                pointer0.dragging = true;
-                pointer0.eligibleForClick = false;
-                pointer1.dragging = true;
-                pointer1.eligibleForClick = false;
-                readyToLongDown = false;
-
-                // カメラモードに切り替えるより先に二点タップ状態になったときは、ピンチ操作のみにする。
-                if (!cameraController.IsCameraMode) { pinchOnly = true; }
-            }
-        }
-
-        private void SetPointers(PointerEventData pointer0, PointerEventData pointer1)
-        {
-            // タッチを開始・停止したとき、すでにタッチ中の指も含めてタッチ開始位置を再設定する。（新規ドラッグ開始扱いにする）
-            // ドラッグ開始時のカクツキを回避するため、もとの pressPosition は使わない。
-            if (pointer0 != null) { pointer0.pressPosition = pointer0.position; }
-            if (pointer1 != null) { pointer1.pressPosition = pointer1.position; }
-            this.pointer0 = pointer0;
-            this.pointer1 = pointer1;
-            StartsDrag = true;
-            pressZoom = currentZoom;
-            downSeconds = 0f;
-        }
-
-        private void SetPointer(PointerEventData eventData)
-        {
-            // WebGL では pointerId は 0 からの連番ではない
-
-            if ((pointer0 == null && pointer1?.pointerId != eventData.pointerId) || pointer0.pointerId == eventData.pointerId)
-            {
-                SetPointers(eventData, pointer1);
-            }
-            else if ((pointer1 == null && pointer0?.pointerId != eventData.pointerId) || pointer1.pointerId == eventData.pointerId)
-            {
-                SetPointers(pointer0, eventData);
-            }
-        }
+            => pointerManager.OnPointerDown(eventData);
 
         void IPointerUpHandler.OnPointerUp(PointerEventData eventData)
-        {
-            if (eventData.pointerId == pointer0?.pointerId)
-            {
-                SetPointers(null, pointer1);
-            }
-            else if (eventData.pointerId == pointer1?.pointerId)
-            {
-                SetPointers(pointer0, null);
-            }
-            readyToLongDown = false;
-        }
+            => pointerManager.OnPointerUp(eventData);
 
         void IDragHandler.OnDrag(PointerEventData eventData)
-        {
-            if (pointer0?.pointerId != eventData.pointerId && pointer1?.pointerId != eventData.pointerId)
-            {
-                // 中断したタッチ処理を再開する。
-                //eventData.dragging = false;
-                SetPointer(eventData);
-            }
-
-            //// ドラッグしたら長押しを無効化する。
-            //readyToLongDown = false;
-        }
+            => pointerManager.OnDrag(eventData);
 
         void IBeginDragHandler.OnBeginDrag(PointerEventData eventData)
-        {
-            // ドラッグ開始は新規タッチ扱いにする。
-            SetPointer(eventData);
-
-            // ドラッグしたらクリックを無効化する。
-            eventData.eligibleForClick = false;
-
-            // ドラッグしたら長押しを無効化する。
-            readyToLongDown = false;
-        }
+            => pointerManager.OnBeginDrag(eventData);
     }
 }

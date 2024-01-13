@@ -41,7 +41,7 @@ namespace Roguegard
                 for (int j = 0; j < length; j++)
                 {
                     var position = item.Position + item.Direction.Forward * j;
-                    if (Mapped(view, position) || OnExtension(position, item.Direction))
+                    if (Mapped(view, position))// || OnExtension(position, item.Direction))
                     {
                         item.Score = j;
                         break;
@@ -102,7 +102,7 @@ namespace Roguegard
             Item maxItem = default;
             foreach (var item in items)
             {
-                var relationalPosition = item.Position - currentPosition;
+                var relationalPosition = item.Position - maxItem.Direction.Forward - currentPosition;
                 var score = (float)item.Score / Mathf.Max(Mathf.Abs(relationalPosition.x), Mathf.Abs(relationalPosition.y));
                 if (score > maxScore)
                 {
@@ -113,7 +113,7 @@ namespace Roguegard
 
             if (maxScore > 0f)
             {
-                targetPosition = maxItem.Position;
+                targetPosition = maxItem.Position - maxItem.Direction.Forward;
                 return true;
             }
             else

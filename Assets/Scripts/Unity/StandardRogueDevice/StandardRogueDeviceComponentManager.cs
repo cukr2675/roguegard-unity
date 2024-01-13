@@ -59,7 +59,7 @@ namespace RoguegardUnity
             var autoPlayDeviceEventHandler = new AutoPlayDeviceEventHandler(this, touchController, x => Subject = x);
             touchController.Initialize(
                 tilemapGrid.Tilemap, soundController, spriteRendererPool, () => autoPlayDeviceEventHandler.StopAutoPlay());
-            touchController.GetInfo(out menuController, out var openChestMenu);
+            touchController.GetInfo(out menuController, out var putIntoChestMenu, out var takeOutFromChestMenu);
 
             // Unity の Update 実行用オブジェクト
             var gameObject = new GameObject("Ticker");
@@ -80,7 +80,7 @@ namespace RoguegardUnity
                 new ChangePlayerDeviceEventHandler(this, touchController, ticker, x => Player = Subject = x),
                 autoPlayDeviceEventHandler,
 
-                new ChestDeviceEventHandler(this, openChestMenu),
+                new ChestDeviceEventHandler(this, putIntoChestMenu, takeOutFromChestMenu),
             };
             EventManager = new StandardRogueDeviceEventManager(touchController, characterRenderSystem, eventHandlers);
 
@@ -106,7 +106,7 @@ namespace RoguegardUnity
             ticker.Reset();
 
             // セーブポイントをキャッシュ
-            var memberInfo = LobbyMembers.GetMemberInfo(Player);
+            var memberInfo = LobbyMemberList.GetMemberInfo(Player);
             var playerSavePoint = memberInfo.SavePoint;
             memberInfo.SavePoint = null;
 
@@ -149,7 +149,7 @@ namespace RoguegardUnity
 
         public void LoadSavePoint(RogueObj obj)
         {
-            var memberInfo = LobbyMembers.GetMemberInfo(obj);
+            var memberInfo = LobbyMemberList.GetMemberInfo(obj);
             if (memberInfo.SavePoint == null || memberInfo.SavePoint == dummySavePoint) return;
 
             if (obj == Subject)
@@ -164,11 +164,12 @@ namespace RoguegardUnity
         public void AfterStepTurn()
         {
             // セーブ前に復帰してしまわないようにする
-            var memberInfo = LobbyMembers.GetMemberInfo(Player);
+            var memberInfo = LobbyMemberList.GetMemberInfo(Player);
             if (memberInfo.SavePoint == null || memberInfo.SavePoint == dummySavePoint)
             {
                 // セーブポイントから復帰する
-                var lobbyMembers = LobbyMembers.GetMembersByCharacter(World.Space.Objs[0]);
+                var worldInfo = RogueWorldInfo.GetByCharacter(Player);
+                var lobbyMembers = worldInfo.LobbyMembers.Members;
                 for (int i = 0; i < lobbyMembers.Count; i++)
                 {
                     LoadSavePoint(lobbyMembers[i]);

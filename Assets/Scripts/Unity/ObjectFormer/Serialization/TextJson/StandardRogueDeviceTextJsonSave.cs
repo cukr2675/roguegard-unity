@@ -24,7 +24,7 @@ namespace RoguegardUnity
 
             // キャラクターを生成
             var player = RoguegardSettings.WorldGenerator.CreateObj(null, Vector2Int.zero, random);
-            var world = RogueWorld.GetWorld(player);
+            var world = RogueWorldInfo.GetWorld(player);
 
             // デバイスを設定
             var data = new StandardRogueDeviceData();

@@ -260,7 +260,8 @@ namespace RoguegardUnity
             rightLBuilder.AppendLine();
             rightRBuilder.AppendLine("攻撃力");
 
-            AppendSkill(obj.Main.InfoSet.Attack, MainInfoKw.Attack.Name);
+            var normalAttack = AttackUtility.GetNormalAttackSkill(obj);
+            AppendSkill(normalAttack, MainInfoKw.Attack.Name);
 
             var skills = obj.Main.Skills;
             for (int i = 0; i < skills.Count; i++)
@@ -364,14 +365,14 @@ namespace RoguegardUnity
             {
                 var dungeon = DungeonInfo.GetLargestDungeon(arg.TargetObj);
 
-                if (!default(IActiveRogueMethodCaller).LocateSavePoint(self, null, 0f, RogueWorld.SavePointInfo, true)) return;
+                if (!default(IActiveRogueMethodCaller).LocateSavePoint(self, null, 0f, RogueWorldSavePointInfo.Instance, true)) return;
 
                 if (dungeon?.Stack >= 1)
                 {
                     dungeon.TrySetStack(0);
                 }
-                var memberInfo = LobbyMembers.GetMemberInfo(self);
-                memberInfo.SavePoint = RogueWorld.SavePointInfo;
+                var memberInfo = LobbyMemberList.GetMemberInfo(self);
+                memberInfo.SavePoint = RogueWorldSavePointInfo.Instance;
 
                 RogueDevice.Add(DeviceKw.AutoSave, 0);
 

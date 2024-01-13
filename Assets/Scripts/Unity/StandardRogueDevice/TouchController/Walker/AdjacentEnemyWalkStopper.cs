@@ -13,7 +13,7 @@ namespace RoguegardUnity
     {
         public bool GetStop(RogueObj self, Vector2Int targetPosition)
         {
-            var view = self.Get<ViewInfo>();
+            var view = ViewInfo.Get(self);
             for (int j = 0; j < view.VisibleObjCount; j++)
             {
                 var viewObj = view.GetVisibleObj(j);

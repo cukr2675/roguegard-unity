@@ -66,11 +66,11 @@ namespace Roguegard
                     else
                     {
                         // êVãKÉLÉÉÉâí«â¡
-                        var world = RogueWorld.GetWorld(player);
+                        var worldInfo = RogueWorldInfo.GetByCharacter(player);
                         character = builder.CreateObj(null, Vector2Int.zero, RogueRandom.Primary);
-                        LobbyMembers.Add(character, world);
+                        worldInfo.LobbyMembers.Add(character);
                     }
-                    var info = LobbyMembers.GetMemberInfo(character);
+                    var info = LobbyMemberList.GetMemberInfo(character);
                     info.CharacterCreationData = builder;
                 }
 

@@ -15,7 +15,7 @@ namespace Roguegard
 
         public RogueObjUpdaterContinueType Tick(RogueObj self, float activationDepth)
         {
-            if (!self.TryGet<ViewInfo>(out var view)) return RogueObjUpdaterContinueType.Continue;
+            if (!ViewInfo.TryGet(self, out var view)) return RogueObjUpdaterContinueType.Continue;
 
             view.ReadyView(self.Location);
             view.AddView(self);

@@ -16,7 +16,7 @@ namespace RoguegardUnity
             var device = RogueDevice.Primary;
             if (!device.UpdateAndGetAllowStepTurn()) return;
 
-            var location = RogueWorld.GetWorld(RogueDevice.Primary.Player);
+            var location = RogueWorldInfo.GetWorld(RogueDevice.Primary.Player);
             //var location = RogueDevice.Primary.Player.Location;
             if (location != null)
             {
@@ -34,8 +34,8 @@ namespace RoguegardUnity
 
         public static IEnumerator<int> UpdateTurns(RogueObj player, int maxTurns, int maxIteration, bool untilSavePoint, int delayInterval = 100)
         {
-            var world = RogueWorld.GetWorld(player);
-            var lobby = RogueWorld.GetLobbyByCharacter(player);
+            var world = RogueWorldInfo.GetWorld(player);
+            var worldInfo = RogueWorldInfo.GetByCharacter(player);
             var item = new Item();
             var iteration = 0;
             for (int turns = 0; turns < maxTurns; turns++)
@@ -44,8 +44,8 @@ namespace RoguegardUnity
                 {
                     var location = world.Space.Objs[i];
                     if (location == null) continue;
-                    if (untilSavePoint && location == lobby) continue; // セーブポイントで止める場合、ロビーは空間そのものをセーブポイントとみなす
-                    if (location != lobby && ObjIsIn(player, location)) continue; // ロビー以外の空間にプレイヤーが存在するとき、その空間は時間経過させない
+                    if (untilSavePoint && location == worldInfo.Lobby) continue; // セーブポイントで止める場合、ロビーは空間そのものをセーブポイントとみなす
+                    if (location != worldInfo.Lobby && ObjIsIn(player, location)) continue; // ロビー以外の空間にプレイヤーが存在するとき、その空間は時間経過させない
                     if (!LobbyMembersIsIn(player, location)) continue; // ロビーメンバーが存在しない空間は時間経過させない
 
                     while (iteration < maxIteration)
@@ -85,7 +85,8 @@ namespace RoguegardUnity
 
         private static bool LobbyMembersIsIn(RogueObj player, RogueObj space)
         {
-            var lobbyMembers = LobbyMembers.GetMembersByCharacter(player);
+            var worldInfo = RogueWorldInfo.GetByCharacter(player);
+            var lobbyMembers = worldInfo.LobbyMembers.Members;
             for (int j = 0; j < lobbyMembers.Count; j++)
             {
                 if (ObjIsIn(lobbyMembers[j], space)) return true;
@@ -153,7 +154,7 @@ namespace RoguegardUnity
 
                 while (true)
                 {
-                    if (self.Main.IsTicked || LobbyMembers.GetMemberInfo(self)?.SavePoint != null)
+                    if (self.Main.IsTicked || LobbyMemberList.GetMemberInfo(self)?.SavePoint != null)
                     {
                         // 行動済みまたはセーブポイントにいるとき行動しない
                         yield return Result.Next;

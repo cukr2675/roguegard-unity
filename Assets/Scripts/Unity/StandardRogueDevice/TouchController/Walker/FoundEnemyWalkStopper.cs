@@ -15,7 +15,7 @@ namespace RoguegardUnity
 
         public bool GetStop(RogueObj self)
         {
-            var view = self.Get<ViewInfo>();
+            var view = ViewInfo.Get(self);
             var checkView = CheckView(view);
             lastViews.Clear();
             for (int i = 0; i < view.VisibleObjCount; i++)

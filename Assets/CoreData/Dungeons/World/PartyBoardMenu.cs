@@ -16,7 +16,8 @@ namespace Roguegard
         public void OpenMenu(IModelsMenuRoot root, RogueObj player, RogueObj user, in RogueMethodArgument arg)
         {
             // ロビーメンバーの一覧を表示する
-            var lobbyMembers = LobbyMembers.GetMembersByCharacter(player);
+            var worldInfo = RogueWorldInfo.GetByCharacter(player);
+            var lobbyMembers = worldInfo.LobbyMembers.Members;
             models.Clear();
             for (int i = 0; i < lobbyMembers.Count; i++)
             {
@@ -46,7 +47,7 @@ namespace Roguegard
                 }
                 else
                 {
-                    var info = LobbyMembers.GetMemberInfo(character);
+                    var info = LobbyMemberList.GetMemberInfo(character);
                     var name = character.GetName();
                     if (info.Seat != null) return "<#ffff00>" + name; // 席についているキャラは別メニュー
                     else return name;
@@ -68,7 +69,7 @@ namespace Roguegard
                 {
                     // 既存メンバーのメニュー表示
                     root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-                    var info = LobbyMembers.GetMemberInfo(character);
+                    var info = LobbyMemberList.GetMemberInfo(character);
                     if (info.Seat != null)
                     {
                         // 席についているキャラはそこから呼び戻すか尋ねる
@@ -105,9 +106,9 @@ namespace Roguegard
 
                 // キャラを席から呼び戻す
                 var character = arg.TargetObj;
-                default(IActiveRogueMethodCaller).LocateSavePoint(character, null, 0f, RogueWorld.SavePointInfo, true);
+                default(IActiveRogueMethodCaller).LocateSavePoint(character, null, 0f, RogueWorldSavePointInfo.Instance, true);
                 SpaceUtility.TryLocate(character, null);
-                var info = LobbyMembers.GetMemberInfo(character);
+                var info = LobbyMemberList.GetMemberInfo(character);
                 info.Seat = null;
 
                 root.Back();
@@ -136,14 +137,14 @@ namespace Roguegard
             public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 // 席が設定されている場合はグレーアウト
-                var info = LobbyMembers.GetMemberInfo(arg.TargetObj);
+                var info = LobbyMemberList.GetMemberInfo(arg.TargetObj);
                 if (info?.Seat != null) return "<#808080>交代";
                 else return "交代";
             }
 
             public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                var info = LobbyMembers.GetMemberInfo(arg.TargetObj);
+                var info = LobbyMemberList.GetMemberInfo(arg.TargetObj);
                 if (info?.Seat != null)
                 {
                     root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Cancel);
@@ -183,7 +184,7 @@ namespace Roguegard
             public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 var character = arg.TargetObj;
-                var info = LobbyMembers.GetMemberInfo(character);
+                var info = LobbyMemberList.GetMemberInfo(character);
                 var builder = new CharacterCreationDataBuilder(info.CharacterCreationData);
 
                 root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);

@@ -28,7 +28,7 @@ namespace RoguegardUnity
             var origin = player.Position;
             var direction = player.Main.Stats.Direction;
             IRogueTilemapView tilemap;
-            if (player.TryGet<ViewInfo>(out var view)) { tilemap = view; }
+            if (ViewInfo.TryGet(player, out var view)) { tilemap = view; }
             else { tilemap = location.Space; }
 
             for (int y = 0; y < tilemap.Size.y; y++)

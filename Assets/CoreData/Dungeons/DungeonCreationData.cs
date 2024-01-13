@@ -50,7 +50,7 @@ namespace Roguegard.CharacterCreation
             // 探索開始前に全回復する
             player.Main.Stats.Reset(player);
 
-            var world = RogueWorld.GetWorld(player);
+            var world = RogueWorldInfo.GetWorld(player);
             var dungeon = CreateObj(world, Vector2Int.zero, random);
 
             // ダンジョンのシード値を設定する

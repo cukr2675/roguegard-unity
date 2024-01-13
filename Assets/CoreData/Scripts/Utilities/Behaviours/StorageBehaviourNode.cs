@@ -12,7 +12,7 @@ namespace Roguegard
         {
             if (self.Location == null) return RogueObjUpdaterContinueType.Continue;
 
-            var memberInfo = LobbyMembers.GetMemberInfo(self);
+            var memberInfo = LobbyMemberList.GetMemberInfo(self);
             if (memberInfo == null) return RogueObjUpdaterContinueType.Continue;
 
             var spaceObjs = self.Location.Space.Objs;

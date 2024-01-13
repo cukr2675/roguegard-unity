@@ -23,8 +23,31 @@ namespace RoguegardUnity
             set => Data.eligibleForClick = value;
         }
 
+        public float TouchResetTime { get; set; }
+
         private Vector2 lastPointerPosition;
         private float lastPointerMoveSecond;
+
+        public void Update(float deltaTime)
+        {
+            // 一定時間変化のなかったドラッグ操作は中断する。
+            if (IsHeldDown && Dragging)
+            {
+                if (Data.position == lastPointerPosition)
+                {
+                    lastPointerMoveSecond += deltaTime;
+                    if (lastPointerMoveSecond >= TouchResetTime)
+                    {
+                        Data = null;
+                    }
+                }
+                else
+                {
+                    lastPointerMoveSecond = 0;
+                    lastPointerPosition = Data.position;
+                }
+            }
+        }
 
         public void SetEventData(PointerEventData eventData)
         {

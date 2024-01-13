@@ -60,7 +60,7 @@ namespace Roguegard.CharacterCreation
         {
             public override bool Invoke(RogueObj self, RogueObj player, float activationDepth, in RogueMethodArgument arg)
             {
-                if (!LobbyMembers.Contains(player)) return false;
+                if (LobbyMemberList.GetMemberInfo(player) == null) return false;
 
                 if (MainCharacterWorkUtility.VisibleAt(player.Location, player.Position))
                 {

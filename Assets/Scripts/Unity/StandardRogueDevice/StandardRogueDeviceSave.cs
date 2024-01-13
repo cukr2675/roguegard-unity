@@ -85,11 +85,12 @@ namespace RoguegardUnity
             // キャラクターを生成
             var world = RoguegardSettings.WorldGenerator.CreateObj(null, Vector2Int.zero, random);
             var player = characterCreationDataBuilder.CreateObj(world, Vector2Int.zero, random);
-            LobbyMembers.Add(player);
-            var memberInfo = LobbyMembers.GetMemberInfo(player);
+            var worldInfo = RogueWorldInfo.GetByCharacter(player);
+            worldInfo.LobbyMembers.Add(player);
+            var memberInfo = LobbyMemberList.GetMemberInfo(player);
             memberInfo.CharacterCreationData = characterCreationDataBuilder;
             memberInfo.SavePoint = newGamePointInfo;
-            player.SetInfo(new ViewInfo());
+            ViewInfo.SetTo(player);
 
             // デバイスを設定
             var options = new RogueOptions();
@@ -236,8 +237,8 @@ namespace RoguegardUnity
             public override bool Invoke(RogueObj self, RogueObj player, float activationDepth, in RogueMethodArgument arg)
             {
                 if (activationDepth != 0f) throw new RogueException();
-                if (!default(IActiveRogueMethodCaller).LocateSavePoint(player, null, 1f, RogueWorld.SavePointInfo, true)) throw new RogueException();
-                if (!default(IActiveRogueMethodCaller).LoadSavePoint(player, 1f, RogueWorld.SavePointInfo)) throw new RogueException();
+                if (!default(IActiveRogueMethodCaller).LocateSavePoint(player, null, 1f, RogueWorldSavePointInfo.Instance, true)) throw new RogueException();
+                if (!default(IActiveRogueMethodCaller).LoadSavePoint(player, 1f, RogueWorldSavePointInfo.Instance)) throw new RogueException();
                 return true;
             }
         }

@@ -72,7 +72,7 @@ namespace RoguegardUnity
             data.SaveDateTime = System.DateTime.UtcNow.ToString();
 
             // セーブデータ容量を減らす
-            var view = player.Get<ViewInfo>();
+            var view = ViewInfo.Get(player);
             if (player.Location != view.Location)
             {
                 // 空間移動直後にセーブしたとき、移動前の空間の情報を保存しないよう処理する
@@ -109,14 +109,14 @@ namespace RoguegardUnity
         /// </summary>
         private void RemoveNoLobbyMemberLocations(RogueObj player)
         {
-            var lobbyMembers = LobbyMembers.GetMembersByCharacter(player);
-            var world = RogueWorld.GetWorld(player);
-            var lobby = RogueWorld.GetLobbyByCharacter(player);
+            var worldInfo = RogueWorldInfo.GetByCharacter(player);
+            var lobbyMembers = worldInfo.LobbyMembers.Members;
+            var world = RogueWorldInfo.GetWorld(player);
             var locations = world.Space.Objs;
             for (int i = 0; i < locations.Count; i++)
             {
                 var location = locations[i];
-                if (location == null || location == lobby || ObjsIsIn(lobbyMembers, location)) continue;
+                if (location == null || location == worldInfo.Lobby || ObjsIsIn(lobbyMembers, location)) continue;
 
                 location.TrySetStack(0);
                 Debug.LogError($"ロビーメンバーがいない空間 {location} を削除しました。");
@@ -149,13 +149,14 @@ namespace RoguegardUnity
         /// </summary>
         private void RemoveViewInfoHeldByLobbyMembers(RogueObj player)
         {
-            var lobbyMembers = LobbyMembers.GetMembersByCharacter(player);
+            var worldInfo = RogueWorldInfo.GetByCharacter(player);
+            var lobbyMembers = worldInfo.LobbyMembers.Members;
             for (int i = 0; i < lobbyMembers.Count; i++)
             {
                 var member = lobbyMembers[i];
                 if (member == null || member == player) continue;
 
-                member.RemoveInfo(typeof(ViewInfo));
+                ViewInfo.RemoveFrom(member);
             }
         }
 

@@ -4,62 +4,40 @@ using UnityEngine;
 
 namespace Roguegard
 {
-    public static class LobbyMembers
+    [ObjectFormer.Formable]
+    public class LobbyMemberList
     {
-        public static Spanning<RogueObj> GetMembersByCharacter(RogueObj obj)
+        private readonly List<RogueObj> _members = new List<RogueObj>();
+
+        public Spanning<RogueObj> Members => _members;
+
+        public void Add(RogueObj character)
         {
-            var world = RogueWorld.GetWorld(obj);
-            if (world.TryGet<WorldInfo>(out var info))
-            {
-                return info.lobbyMembers;
-            }
-            else
-            {
-                return Spanning<RogueObj>.Empty;
-            }
+            if (_members.Contains(character)) return;
+
+            var memberEffect = new MemberEffect();
+            memberEffect.info = new LobbyMemberInfo();
+            character.Main.RogueEffects.AddOpen(character, memberEffect);
+            _members.Add(character);
         }
 
-        public static bool Contains(RogueObj obj)
+        public bool Remove(RogueObj character)
         {
-            return obj.TryGet<MemberEffect>(out _);
-        }
-
-        public static void Add(RogueObj obj, RogueObj world = null)
-        {
-            world ??= RogueWorld.GetWorld(obj);
-            if (!world.TryGet<WorldInfo>(out var info))
+            if (character.Main.RogueEffects.TryGetEffect<MemberEffect>(out var memberEffect))
             {
-                info = new WorldInfo();
-                world.SetInfo(info);
-            }
-
-            if (!Contains(obj))
-            {
-                var memberEffect = new MemberEffect();
-                memberEffect.info = new LobbyMemberInfo();
-                obj.Main.RogueEffects.AddOpen(obj, memberEffect);
-                info.lobbyMembers.Add(obj);
-            }
-        }
-
-        public static bool Remove(RogueObj obj, RogueObj world = null)
-        {
-            if (obj.Main.RogueEffects.TryGetEffect<MemberEffect>(out var memberEffect))
-            {
-                RogueEffectUtility.RemoveClose(obj, memberEffect);
-                world ??= RogueWorld.GetWorld(obj);
-                var info = world.Get<WorldInfo>();
-                info.lobbyMembers.Remove(obj);
+                RogueEffectUtility.RemoveClose(character, memberEffect);
+                character.RemoveInfo(typeof(MemberEffect));
+                _members.Remove(character);
                 return true;
             }
             return false;
         }
 
-        public static LobbyMemberInfo GetMemberInfo(RogueObj obj)
+        public static LobbyMemberInfo GetMemberInfo(RogueObj character)
         {
-            obj.Main.TryOpenRogueEffects(obj);
+            character.Main.TryOpenRogueEffects(character);
 
-            if (obj != null && obj.TryGet<MemberEffect>(out var info))
+            if (character != null && character.TryGet<MemberEffect>(out var info))
             {
                 return info.info;
             }
@@ -67,18 +45,6 @@ namespace Roguegard
             {
                 return null;
             }
-        }
-
-        [ObjectFormer.Formable]
-        private class WorldInfo : IRogueObjInfo
-        {
-            public RogueObjList lobbyMembers = new RogueObjList();
-
-            public bool IsExclusedWhenSerialize => false;
-
-            public bool CanStack(IRogueObjInfo other) => false;
-            public IRogueObjInfo DeepOrShallowCopy(RogueObj self, RogueObj clonedSelf) => null;
-            public IRogueObjInfo ReplaceCloned(RogueObj obj, RogueObj clonedObj) => this;
         }
 
         [ObjectFormer.Formable]
@@ -107,11 +73,6 @@ namespace Roguegard
                 {
                     if (priority == effectedPriority) { RogueBehaviourNodeEffect.RemoveBehaviourNode(self, priority); }
                     return default;
-                }
-
-                if (!self.TryGet<ViewInfo>(out _))
-                {
-                    self.SetInfo(new ViewInfo());
                 }
 
                 var ifInLobby = new IfInLobbyBehaviourNode();

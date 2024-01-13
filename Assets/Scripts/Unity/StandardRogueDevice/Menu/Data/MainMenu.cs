@@ -160,8 +160,8 @@ namespace RoguegardUnity
 
             public void OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                var lobby = RogueWorld.GetLobbyByCharacter(RogueDevice.Primary.Player);
-                var inLobby = RogueDevice.Primary.Player.Location == lobby;
+                var worldInfo = RogueWorldInfo.GetByCharacter(RogueDevice.Primary.Player);
+                var inLobby = RogueDevice.Primary.Player.Location == worldInfo.Lobby;
                 var openArg = new RogueMethodArgument(count: inLobby ? 1 : 0);
                 root.Get(DeviceKw.MenuThumbnail).OpenView(ChoicesModelsMenuItemController.Instance, choices, root, self, user, openArg);
                 root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);

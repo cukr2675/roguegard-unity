@@ -56,10 +56,10 @@ namespace RoguegardUnity
                 // RogueMethodAspectState ‚Ìˆ—‚ÌŠ®—¹‚ğ‘Ò‚Â
                 yield return null;
 
-                default(IActiveRogueMethodCaller).LocateSavePoint(leaderCharacter, null, 0f, RogueWorld.SavePointInfo, true);
+                default(IActiveRogueMethodCaller).LocateSavePoint(leaderCharacter, null, 0f, RogueWorldSavePointInfo.Instance, true);
 
-                var memberInfo = LobbyMembers.GetMemberInfo(leaderCharacter);
-                memberInfo.SavePoint = RogueWorld.SavePointInfo;
+                var memberInfo = LobbyMemberList.GetMemberInfo(leaderCharacter);
+                memberInfo.SavePoint = RogueWorldSavePointInfo.Instance;
             }
         }
 

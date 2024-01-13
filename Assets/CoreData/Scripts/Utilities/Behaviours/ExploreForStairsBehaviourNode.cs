@@ -11,12 +11,18 @@ namespace Roguegard
         public IPathBuilder PathBuilder { get; set; }
         public RoguePositionSelector PositionSelector { get; set; }
 
+        private bool selectedPositionIsEnabled;
+        private Vector2Int selectedPosition;
+
         private static readonly CommandFloorDownStairs apply = new CommandFloorDownStairs();
         private static readonly CommandDownStairs apply2 = new CommandDownStairs();
 
         public RogueObjUpdaterContinueType Tick(RogueObj self, float activationDepth)
         {
-            if (!self.TryGet<ViewInfo>(out var view)) return RogueObjUpdaterContinueType.Continue;
+            if (!ViewInfo.TryGet(self, out var view))
+            {
+                view = ViewInfo.SetTo(self);
+            }
 
             view.ReadyView(self.Location);
             view.AddView(self);
@@ -51,19 +57,38 @@ namespace Roguegard
                 if (!PathBuilder.TryGetNextPosition(self, out var nextDirection)) return RogueObjUpdaterContinueType.Continue;
 
                 default(IActiveRogueMethodCaller).Walk(self, nextDirection, activationDepth);
+                selectedPositionIsEnabled = false;
                 return RogueObjUpdaterContinueType.Break;
             }
             {
-                // äKíiÇ™å©Ç¬Ç©ÇÁÇ»Ç©Ç¡ÇΩÇÁíTçı
-                PositionSelector.Update(view);
-                if (!PositionSelector.TryGetTargetPosition(self.Position, out var targetPosition)) return RogueObjUpdaterContinueType.Continue;
-
-                if (!PathBuilder.UpdatePath(self, targetPosition)) return RogueObjUpdaterContinueType.Continue;
-                if (!PathBuilder.TryGetNextPosition(self, out var nextDirection)) return RogueObjUpdaterContinueType.Continue;
+                RogueDirection nextDirection = default;
+                if (!selectedPositionIsEnabled ||
+                    !PathBuilder.UpdatePath(self, selectedPosition) ||
+                    !PathBuilder.TryGetNextPosition(self, out nextDirection))
+                {
+                    selectedPositionIsEnabled = false;
+                }
+                if (!selectedPositionIsEnabled)
+                {
+                    // äKíiÇ™å©Ç¬Ç©ÇÁÇ»Ç©Ç¡ÇΩÇÁíTçı
+                    if (!UpdateSelectedPosition(self, view)) return RogueObjUpdaterContinueType.Continue;
+                }
+                if (!PathBuilder.UpdatePath(self, selectedPosition) ||
+                    !PathBuilder.TryGetNextPosition(self, out nextDirection)) return RogueObjUpdaterContinueType.Continue;
 
                 default(IActiveRogueMethodCaller).Walk(self, nextDirection, activationDepth);
                 return RogueObjUpdaterContinueType.Break;
             }
+        }
+
+        private bool UpdateSelectedPosition(RogueObj self, ViewInfo view)
+        {
+            PositionSelector.Update(view);
+            if (!PositionSelector.TryGetTargetPosition(self.Position, out var targetPosition)) return false;
+
+            selectedPositionIsEnabled = true;
+            selectedPosition = targetPosition;
+            return true;
         }
     }
 }

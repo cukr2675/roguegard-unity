@@ -12,7 +12,7 @@ namespace RoguegardUnity
         {
             walkStopper.UpdateStatedStop();
 
-            var view = self.Get<ViewInfo>();
+            var view = ViewInfo.Get(self);
             var position = self.Position;
             var direction = self.Main.Stats.Direction;
             var forward = direction.Forward;

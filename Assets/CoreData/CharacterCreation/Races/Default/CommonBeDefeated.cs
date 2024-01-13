@@ -14,7 +14,7 @@ namespace Roguegard
             var lootLocation = self.Location;
             var lootPosition = self.Position;
 
-            if (LobbyMembers.Contains(self) && self.Main.GetPlayerLeaderInfo(self) != null)
+            if (LobbyMemberList.GetMemberInfo(self) != null && self.Main.GetPlayerLeaderInfo(self) != null)
             {
                 // プレイヤーパーティのリーダーが倒れたときゲームオーバー処理
                 if (MainCharacterWorkUtility.VisibleAt(self.Location, self.Position))

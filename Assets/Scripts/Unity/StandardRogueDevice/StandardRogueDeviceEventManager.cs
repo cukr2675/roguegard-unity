@@ -73,7 +73,7 @@ namespace RoguegardUnity
                 }
                 else if (other == DeviceKw.EnqueueViewDequeueState)
                 {
-                    var view = player.Get<ViewInfo>();
+                    var view = ViewInfo.Get(player);
                     view.DequeueState();
                     view.ReadyView(player.Location);
                     view.AddView(player);

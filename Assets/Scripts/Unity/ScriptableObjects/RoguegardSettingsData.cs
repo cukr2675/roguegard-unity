@@ -206,7 +206,7 @@ namespace RoguegardUnity
                 // ワールドを生成
                 var world = parent._world.CreateObj(null, Vector2Int.zero, random);
                 var lobby = parent._lobby.CreateObj(world, Vector2Int.zero, random);
-                RogueWorld.SetUpWorld(world, lobby);
+                RogueWorldInfo.SetTo(world, lobby);
                 return world;
             }
         }

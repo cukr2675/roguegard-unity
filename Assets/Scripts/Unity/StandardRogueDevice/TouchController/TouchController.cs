@@ -30,8 +30,9 @@ namespace RoguegardUnity
         /// </summary>
         [SerializeField] private HeaderController _headerController = null;
 
-        private PointingWalker pointingWalker;
-        private WalkStopper walkStopper;
+        private IPathBuilder pointingPathBuilder;
+        private WalkStopper pointingWalkStopper;
+        private WalkStopper dashForwardWalkStopper;
 
         internal ModelsMenuEventManager EventManager => _menuController.EventManager;
 
@@ -58,23 +59,21 @@ namespace RoguegardUnity
 
         public void OpenWalker(RogueObj player)
         {
-            pointingWalker = new PointingWalker(RoguegardSettings.MaxTilemapSize);
-            {
-                // 画面タッチで移動する場合、敵を発見したとき・敵と隣接しようとしたとき一時停止する
-                var pointingWalkStopper = new WalkStopper(player);
-                pointingWalkStopper.AddStopper(new FoundEnemyWalkStopper());
-                pointingWalkStopper.AddStopper(new AdjacentEnemyWalkStopper());
-                pointingWalker.WalkStopper = pointingWalkStopper;
-            }
+            pointingPathBuilder = new AStarPathBuilder(RoguegardSettings.MaxTilemapSize);
+
+            // 画面タッチで移動する場合、敵を発見したとき・敵と隣接しようとしたとき一時停止する
+            pointingWalkStopper = new WalkStopper(player);
+            pointingWalkStopper.AddStopper(new FoundEnemyWalkStopper());
+            pointingWalkStopper.AddStopper(new AdjacentEnemyWalkStopper());
 
             // 直進移動する場合、敵を発見したとき・敵と隣接しようとしたとき・分岐路にいるとき一時停止する
-            walkStopper = new WalkStopper(player);
-            walkStopper.AddStopper(new FoundEnemyWalkStopper());
-            walkStopper.AddStopper(new AdjacentEnemyWalkStopper());
-            walkStopper.AddStopper(new EnteredForkWalkStopper());
+            dashForwardWalkStopper = new WalkStopper(player);
+            dashForwardWalkStopper.AddStopper(new FoundEnemyWalkStopper());
+            dashForwardWalkStopper.AddStopper(new AdjacentEnemyWalkStopper());
+            dashForwardWalkStopper.AddStopper(new EnteredForkWalkStopper());
 
-            walkStopper.Initialize();
-            pointingWalker.WalkStopper.Initialize();
+            pointingWalkStopper.Initialize();
+            dashForwardWalkStopper.Initialize();
         }
 
         public void MenuOpen(RogueObj subject, bool autoPlayIsEnabled)
@@ -83,10 +82,10 @@ namespace RoguegardUnity
             _inputController.AutoPlayIsEnabled = autoPlayIsEnabled;
         }
 
-        public void GetInfo(out MenuController menuController, out IModelsMenu openChestMenu)
+        public void GetInfo(out MenuController menuController, out IModelsMenu putIntoChestMenu, out IModelsMenu takeOutFromChestMenu)
         {
             menuController = _menuController;
-            _menuController.GetInfo(out openChestMenu);
+            _menuController.GetInfo(out putIntoChestMenu, out takeOutFromChestMenu);
         }
 
         public void OpenSelectFile(SelectFileMenu.Type type, SelectFileMenu.SelectCallback selectCallback, SelectFileMenu.AddCallback addCallback = null)
@@ -232,8 +231,8 @@ namespace RoguegardUnity
                 if (wait)
                 {
                     // 足踏み
-                    walkStopper.UpdateStatedStop();
-                    if (walkStopper.StatedStop && !startsDash)
+                    dashForwardWalkStopper.UpdateStatedStop();
+                    if (dashForwardWalkStopper.StatedStop && !startsDash)
                     {
                         // ストッパーが発動したら連続動作を停止する
                         _inputController.StopDashForward();
@@ -252,7 +251,7 @@ namespace RoguegardUnity
                     EndTurn();
                     return;
                 }
-                if (AutoWalker.AutoWalking(player, out var targetPosition, walkStopper, startsDash))
+                if (AutoWalker.AutoWalking(player, out var targetPosition, dashForwardWalkStopper, startsDash))
                 {
                     // 前方へ移動する（通路であれば曲がり角を曲がる）
                     var arg = new RogueMethodArgument(targetPosition: targetPosition);
@@ -291,15 +290,32 @@ namespace RoguegardUnity
                 // 新規クリック時、移動ルートを生成する。
                 if (startsPointing)
                 {
-                    pointingWalker.SetRoute(player, p, true, false);
+                    pointingPathBuilder.UpdatePath(player, p);
                 }
 
-                if (pointingWalker.GetWalk(player, p, true, out var point, startsPointing))
+                pointingWalkStopper.UpdateStatedStop();
+                if (pointingWalkStopper.StatedStop && !startsPointing)
                 {
+                    // ストッパーが発動したら連続動作を停止する。
+                    ClearInput();
+                    return;
+                }
+
+                if (pointingPathBuilder.TryGetNextPosition(player, out var direction) || startsPointing)
+                {
+                    var point = player.Position + direction.Forward;
+                    pointingWalkStopper.UpdatePositionedStop(point);
+                    if (pointingWalkStopper.PositionedStop && !startsPointing)
+                    {
+                        // ストッパーが発動したら連続動作を停止する。
+                        ClearInput();
+                        return;
+                    }
+
                     if (startsPointing)
                     {
                         // オブジェクトを新規クリックした瞬間だけ反応する動作（新規クリックした瞬間だけ攻撃させたい）
-                        var view = player.Get<ViewInfo>();
+                        var view = ViewInfo.Get(player);
                         for (int i = 0; i < view.VisibleObjCount; i++)
                         {
                             var obj = view.GetVisibleObj(i);
@@ -335,8 +351,7 @@ namespace RoguegardUnity
                     }
                     {
                         // 地面をクリックして移動
-                        var arg = new RogueMethodArgument(targetPosition: point);
-                        deviceInfo.SetDeviceCommand(WalkCommandAction.Instance, player, arg);
+                        deviceInfo.SetDeviceCommand(WalkCommandAction.Instance, player, new(targetPosition: point));
                         EndTurn();
                         return;
                     }

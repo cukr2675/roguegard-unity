@@ -32,10 +32,10 @@ namespace Roguegard
             }
             else if (activationDepth < 1f)
             {
-                var info = RogueWorld.SavePointInfo;
+                var info = RogueWorldSavePointInfo.Instance;
                 if (!default(IActiveRogueMethodCaller).LocateSavePoint(player, self, 1f, info)) return false;
 
-                var memberInfo = LobbyMembers.GetMemberInfo(player);
+                var memberInfo = LobbyMemberList.GetMemberInfo(player);
                 memberInfo.SavePoint = info;
                 return false;
             }

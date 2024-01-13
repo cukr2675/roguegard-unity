@@ -10,12 +10,15 @@ namespace RoguegardUnity
     internal class ChestDeviceEventHandler : IStandardRogueDeviceEventHandler
     {
         private readonly StandardRogueDeviceComponentManager componentManager;
-        private readonly IModelsMenu openChestMenu;
+        private readonly IModelsMenu putIntoChestMenu;
+        private readonly IModelsMenu takeOutFromChestMenu;
 
-        public ChestDeviceEventHandler(StandardRogueDeviceComponentManager componentManager, IModelsMenu openChestMenu)
+        public ChestDeviceEventHandler(
+            StandardRogueDeviceComponentManager componentManager, IModelsMenu putIntoChestMenu, IModelsMenu takeOutFromChestMenu)
         {
             this.componentManager = componentManager;
-            this.openChestMenu = openChestMenu;
+            this.putIntoChestMenu = putIntoChestMenu;
+            this.takeOutFromChestMenu = takeOutFromChestMenu;
         }
 
         bool IStandardRogueDeviceEventHandler.TryHandle(IKeyword keyword, int integer, float number, object obj)
@@ -24,13 +27,13 @@ namespace RoguegardUnity
             if (keyword == StdKw.TakeOutFromChest && obj is RogueObj takeChest)
             {
                 // チェストからアイテムを取り出す
-                componentManager.EventManager.AddMenu(openChestMenu, player, null, new(targetObj: takeChest, count: 0));
+                componentManager.EventManager.AddMenu(takeOutFromChestMenu, player, null, new(targetObj: takeChest));
                 return true;
             }
             if (keyword == StdKw.PutIntoChest && obj is RogueObj putChest)
             {
                 // チェストへアイテムを入れる
-                componentManager.EventManager.AddMenu(openChestMenu, player, null, new(targetObj: putChest, count: 1));
+                componentManager.EventManager.AddMenu(putIntoChestMenu, player, null, new(targetObj: putChest));
                 return true;
             }
             return false;

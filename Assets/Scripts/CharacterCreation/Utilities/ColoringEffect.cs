@@ -54,7 +54,6 @@ namespace Roguegard
             public void RemoveClose(RogueObj self)
             {
                 RogueEffectUtility.RemoveClose(self, this);
-                self.RemoveInfo(typeof(Effect));
             }
 
             void IValueEffect.AffectValue(IKeyword keyword, AffectableValue value, RogueObj self)

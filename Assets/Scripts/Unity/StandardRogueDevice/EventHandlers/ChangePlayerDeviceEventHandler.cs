@@ -37,9 +37,8 @@ namespace RoguegardUnity
         private void OnChangePlayer(RogueObj player, RogueObj newPlayer)
         {
             // ViewInfo ‚ðˆÚ“®‚³‚¹‚é
-            var view = player.Get<ViewInfo>();
-            player.RemoveInfo(typeof(ViewInfo));
-            newPlayer.SetInfo(view);
+            ViewInfo.RemoveFrom(player);
+            ViewInfo.SetTo(newPlayer);
 
             // PlayerLeaderInfo ‚ðˆÚ“®‚³‚¹‚é
             var playerLeaderInfo = player.Main.GetPlayerLeaderInfo(player);

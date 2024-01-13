@@ -9,7 +9,7 @@ namespace Roguegard
         public static bool VisibleAt(RogueObj location, Vector2Int position)
         {
             var subject = RogueDevice.Primary.Subject;
-            if (!subject.TryGet<ViewInfo>(out var view))
+            if (!ViewInfo.TryGet(subject, out var view))
             {
                 return subject.Location == location;
             }
@@ -35,7 +35,7 @@ namespace Roguegard
 
         public static void EnqueueViewDequeueState(RogueObj obj)
         {
-            if (obj.TryGet<ViewInfo>(out var view) && !view.QueueHasItem)
+            if (ViewInfo.TryGet(obj, out var view) && !view.QueueHasItem)
             {
                 view.ReadyView(obj.Location);
                 view.AddView(obj);

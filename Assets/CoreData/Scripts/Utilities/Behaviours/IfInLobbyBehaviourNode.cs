@@ -11,8 +11,8 @@ namespace Roguegard
 
         public RogueObjUpdaterContinueType Tick(RogueObj self, float activationDepth)
         {
-            var lobby = RogueWorld.GetLobbyByCharacter(self);
-            if (self.Location == lobby)
+            var worldInfo = RogueWorldInfo.GetByCharacter(self);
+            if (self.Location == worldInfo.Lobby)
             {
                 return InLobbyNode.Tick(self, activationDepth);
             }

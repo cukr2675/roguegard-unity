@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Roguegard
 {
     [ObjectFormer.Formable]
-    public class ViewInfo : IRogueObjInfo, IRogueTilemapView
+    public class ViewInfo : IRogueTilemapView
     {
         private ViewMap viewMap;
 
@@ -22,9 +22,9 @@ namespace Roguegard
 
         public RogueObj Location => viewMap.Location;
 
-        bool IRogueObjInfo.IsExclusedWhenSerialize => false;
+        private ViewInfo() { }
 
-        public ViewInfo()
+        private ViewInfo(bool flag)
         {
             viewMap = new ViewMap(RoguegardSettings.MaxTilemapSize);
         }
@@ -84,8 +84,48 @@ namespace Roguegard
             QueueHasItem = false;
         }
 
-        bool IRogueObjInfo.CanStack(IRogueObjInfo other) => false;
-        IRogueObjInfo IRogueObjInfo.DeepOrShallowCopy(RogueObj self, RogueObj clonedSelf) => null;
-        IRogueObjInfo IRogueObjInfo.ReplaceCloned(RogueObj obj, RogueObj clonedObj) => null;
+        public static ViewInfo Get(RogueObj obj)
+        {
+            return obj.Get<Info>().info;
+        }
+
+        public static bool TryGet(RogueObj obj, out ViewInfo info)
+        {
+            if (obj.TryGet<Info>(out var value))
+            {
+                info = value.info;
+                return true;
+            }
+            else
+            {
+                info = null;
+                return false;
+            }
+        }
+
+        public static ViewInfo SetTo(RogueObj obj)
+        {
+            var info = new Info();
+            info.info = new ViewInfo(false);
+            obj.SetInfo(info);
+            return info.info;
+        }
+
+        public static void RemoveFrom(RogueObj obj)
+        {
+            obj.RemoveInfo(typeof(Info));
+        }
+
+        [ObjectFormer.Formable]
+        private class Info : IRogueObjInfo
+        {
+            public ViewInfo info;
+
+            bool IRogueObjInfo.IsExclusedWhenSerialize => false;
+
+            bool IRogueObjInfo.CanStack(IRogueObjInfo other) => false;
+            IRogueObjInfo IRogueObjInfo.DeepOrShallowCopy(RogueObj self, RogueObj clonedSelf) => null;
+            IRogueObjInfo IRogueObjInfo.ReplaceCloned(RogueObj obj, RogueObj clonedObj) => this;
+        }
     }
 }

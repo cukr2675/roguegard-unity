@@ -36,7 +36,7 @@ namespace RoguegardUnity
 
             // 外部へ空間移動したオブジェクトの Position は不定なので参照してはならない。
             // 外部へ空間移動したかを判定するため VisibleObjs は即座に更新する。
-            if (player.TryGet<ViewInfo>(out var view) && !view.QueueHasItem)
+            if (ViewInfo.TryGet(player, out var view) && !view.QueueHasItem)
             {
                 view.ReadyView(player.Location);
                 view.AddView(player);
@@ -59,7 +59,7 @@ namespace RoguegardUnity
 
             // 視界内に存在するオブジェクトのスプライトを追加する。
             IRogueTilemapView tilemap;
-            if (player.TryGet<ViewInfo>(out var view)) { tilemap = view; }
+            if (ViewInfo.TryGet(player, out var view)) { tilemap = view; }
             else { tilemap = player.Location.Space; }
 
             for (int i = 0; i < tilemap.VisibleObjs.Count; i++)
@@ -105,7 +105,7 @@ namespace RoguegardUnity
             if (!InAnimation) return;
 
             IRogueTilemapView tilemap;
-            if (player.TryGet<ViewInfo>(out var view)) { tilemap = view; }
+            if (ViewInfo.TryGet(player, out var view)) { tilemap = view; }
             else { tilemap = player.Location.Space; }
 
             for (int i = characters.Count - 1; i >= 0; i--)
@@ -174,7 +174,7 @@ namespace RoguegardUnity
         /// </summary>
         public bool TryGetPositioning(RogueObj player, out Vector3 position, out RogueDirection direction)
         {
-            player.TryGet<ViewInfo>(out var view);
+            ViewInfo.TryGet(player, out var view);
             if (view != null && view.Location != player.Location)
             {
                 position = default;

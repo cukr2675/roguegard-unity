@@ -43,6 +43,7 @@ namespace RoguegardUnity
                     if (result) return true;
                 }
             }
+            if (weapon?.Attack == null) // 通常攻撃可能な武器を装備しているとき、素手で攻撃させない。
             {
                 // 素手で攻撃する。
                 var skill = self.Main.InfoSet.Attack;
@@ -59,44 +60,22 @@ namespace RoguegardUnity
 
         public static RogueObj GetVisibleTarget(RogueObj self)
         {
-            var viewMap = self.Get<ViewInfo>();
+            var viewMap = ViewInfo.Get(self);
             if (viewMap == null || viewMap.Location != self.Location) return null;
             if (self.Location == null || self.Location.Space.Tilemap == null) return null;
 
-            EquipmentUtility.GetWeapon(self, out var weapon);
-            if (weapon != null)
+            var normalAttack = AttackUtility.GetNormalAttackSkill(self);
+            var predicator = normalAttack?.Target?.GetPredicator(self, 0f, null);
+            if (predicator != null)
             {
-                // 武器で攻撃する。
-                var skill = weapon.Attack;
-                var predicator = skill?.Target?.GetPredicator(self, 0f, null);
-                if (predicator != null)
+                normalAttack.Range?.Predicate(predicator, self, 0f, null, self.Position + self.Main.Stats.Direction.Forward);
+                predicator.EndPredicate();
+                if (predicator.Positions.Count >= 1)
                 {
-                    skill.Range?.Predicate(predicator, self, 0f, null, self.Position + self.Main.Stats.Direction.Forward);
-                    predicator.EndPredicate();
-                    if (predicator.Positions.Count >= 1)
-                    {
-                        var objs = predicator.GetObjs(predicator.Positions[0]);
-                        if (!viewMap.ContainsVisible(objs[0])) return null;
+                    var objs = predicator.GetObjs(predicator.Positions[0]);
+                    if (!viewMap.ContainsVisible(objs[0])) return null;
 
-                        return objs[0];
-                    }
-                }
-            }
-            {
-                // 素手で攻撃する。
-                var skill = self.Main.InfoSet.Attack;
-                var predicator = skill?.Target?.GetPredicator(self, 0f, null);
-                if (predicator != null)
-                {
-                    skill.Range?.Predicate(predicator, self, 0f, null, self.Position + self.Main.Stats.Direction.Forward);
-                    predicator.EndPredicate();
-                    if (predicator.Positions.Count >= 1)
-                    {
-                        var objs = predicator.GetObjs(predicator.Positions[0]);
-                        if (!viewMap.ContainsVisible(objs[0])) return null;
-
-                        return objs[0];
-                    }
+                    return objs[0];
                 }
             }
             return null;

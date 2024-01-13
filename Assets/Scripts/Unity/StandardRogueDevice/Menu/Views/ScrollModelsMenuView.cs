@@ -74,7 +74,8 @@ namespace RoguegardUnity
 
         public override void SetPosition(float position)
         {
-            _scrollRect.verticalNormalizedPosition = position;
+            _scrollRect.verticalNormalizedPosition = 1f - (position * itemHeight / marginHeight);
+            //_scrollRect.verticalNormalizedPosition = position;
         }
 
         public void ShowExitButton(IModelsMenuChoice choice)

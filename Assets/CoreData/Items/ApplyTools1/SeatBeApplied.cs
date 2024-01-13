@@ -12,16 +12,16 @@ namespace Roguegard
 
         public override bool Invoke(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
         {
-            var lobby = RogueWorld.GetLobbyByCharacter(self);
-            if (self.Location == lobby)
+            var worldInfo = RogueWorldInfo.GetByCharacter(self);
+            if (self.Location == worldInfo.Lobby)
             {
-                var lobbyMembers = LobbyMembers.GetMembersByCharacter(self);
+                var lobbyMembers = worldInfo.LobbyMembers.Members;
                 for (int i = 0; i < lobbyMembers.Count; i++)
                 {
                     var member = lobbyMembers[i];
                     if (member == null) continue;
 
-                    var memberInfo = LobbyMembers.GetMemberInfo(member);
+                    var memberInfo = LobbyMemberList.GetMemberInfo(member);
                     if (memberInfo.Seat == self)
                     {
                         // ’N‚©À‚Á‚Ä‚¢‚½‚ç‚»‚ÌƒLƒƒƒ‰‚É’–Ú‚·‚é
@@ -42,7 +42,8 @@ namespace Roguegard
         {
             public void OpenMenu(IModelsMenuRoot root, RogueObj player, RogueObj user, in RogueMethodArgument arg)
             {
-                var lobbyMembers = LobbyMembers.GetMembersByCharacter(player);
+                var worldInfo = RogueWorldInfo.GetByCharacter(player);
+                var lobbyMembers = worldInfo.LobbyMembers.Members;
                 var scroll = (IScrollModelsMenuView)root.Get(DeviceKw.MenuScroll);
                 scroll.OpenView(this, lobbyMembers, root, player, null, arg);
                 scroll.ShowExitButton(ExitModelsMenuChoice.Instance);
@@ -69,7 +70,7 @@ namespace Roguegard
                     root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
                     root.Done();
 
-                    var info = LobbyMembers.GetMemberInfo(lobbyMember);
+                    var info = LobbyMemberList.GetMemberInfo(lobbyMember);
                     info.Seat = arg.TargetObj;
 
                     info.ItemRegister.Clear();
@@ -82,9 +83,9 @@ namespace Roguegard
                         info.ItemRegister.Add(item);
                     }
 
-                    var world = RogueWorld.GetWorld(self);
+                    var world = RogueWorldInfo.GetWorld(self);
                     SpaceUtility.TryLocate(lobbyMember, world);
-                    info.SavePoint = RogueWorld.SavePointInfo;
+                    info.SavePoint = RogueWorldSavePointInfo.Instance;
                     var mainParty = RogueDevice.Primary.Player.Main.Stats.Party;
                     lobbyMember.Main.Stats.TryAssignParty(lobbyMember, new RogueParty(mainParty.Faction, mainParty.TargetFactions));
                 }
