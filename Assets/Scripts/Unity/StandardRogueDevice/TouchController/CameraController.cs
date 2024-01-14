@@ -50,7 +50,7 @@ namespace RoguegardUnity
             {
                 if (startsDrag)
                 {
-                    // 新しくドラッグを始めたとき、開始カメラ位置とドラッグ開始位置を記憶し、カメラモードに切り替える。
+                    // 新しくドラッグを始めたとき、ドラッグ開始カメラ位置を記憶し、カメラモードに切り替える。
                     pressCameraLocalPosition = _mainCamera.transform.localPosition;
                     IsCameraMode = true;
                 }
@@ -72,7 +72,9 @@ namespace RoguegardUnity
             else
             {
                 // カメラ強制移動
-                _mainCamera.transform.localPosition += deltaPosition;
+                var position = _mainCamera.transform.localPosition + deltaPosition;
+                position = new Vector3(AdjustPixel(position.x), AdjustPixel(position.y), position.z);
+                _mainCamera.transform.localPosition = position;
                 pressCameraLocalPosition += deltaPosition;
             }
 

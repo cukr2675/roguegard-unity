@@ -65,16 +65,6 @@ namespace RoguegardUnity
             menuButton.DragToShowKeys = true;
             menuButton.Initialize(false, _turnSprite);
 
-            _touchField.TouchResetTime = .1f;
-            _touchField.ZoomClippingRadius = .2f;
-            _touchField.WheelZoomingFilters = new[]
-            {
-                -4f, -3.5f, -3f, -2.5f, -2f, -1.5f, -1f, -.5f,
-                Mathf.Log(1f, 2f), Mathf.Log(1.5f, 2f), Mathf.Log(2f, 2f), Mathf.Log(3f, 2f), Mathf.Log(4f, 2f), Mathf.Log(6f, 2f), Mathf.Log(8f, 2f)
-            };
-            _touchField.MaxPowedZoom = 8f;
-            _touchField.MinPowedZoom = Mathf.Pow(2f, -4f);
-            _touchField.LongDownSeconds = .5f;
             _touchField.Initialize(tilemap, _cameraController);
 
             var screenSize = new Vector2Int(1920, 1080);
