@@ -12,9 +12,13 @@ namespace RoguegardUnity
     {
         [SerializeField] private TMP_Text _text = null;
 
-        private readonly StringBuilder stringBuilder = new StringBuilder();
+        public void ShowCaption(string text)
+        {
+            _text.SetText(text);
+            Show(true);
+        }
 
-        public void Log(IRogueDescription description)
+        public void ShowCaption(IRogueDescription description)
         {
             var text = description.Caption;
             if (text == null)
@@ -22,13 +26,14 @@ namespace RoguegardUnity
                 var name = description.Name;
                 if (name.StartsWith(':'))
                 {
-                    text = StandardRogueDeviceUtility.Localize($"{name}::c");
+                    if (!StandardRogueDeviceUtility.TryLocalize($"{name}::c", out text))
+                    {
+                        text = "";
+                    }
                 }
             }
 
-            stringBuilder.Clear();
-            stringBuilder.Append(text);
-            _text.SetText(stringBuilder);
+            _text.SetText(text);
             Show(true);
         }
     }

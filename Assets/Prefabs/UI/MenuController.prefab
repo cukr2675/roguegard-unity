@@ -131,14 +131,14 @@ Canvas:
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
-  m_OverrideSorting: 0
+  m_OverrideSorting: 1
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 23
   m_TargetDisplay: 0
 --- !u!225 &2234339041645905834
 CanvasGroup:
@@ -593,9 +593,9 @@ RectTransform:
   - {fileID: 7768187685787238941}
   - {fileID: 6872655231693886435}
   - {fileID: 5590415974293909831}
-  - {fileID: 7339603701269503044}
   - {fileID: 6648427471621868263}
   - {fileID: 6723554179332411113}
+  - {fileID: 7339603701269503044}
   - {fileID: 5338946138059463390}
   - {fileID: 5213153361628583617}
   - {fileID: 8473441933672619}

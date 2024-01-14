@@ -18,7 +18,7 @@ namespace RoguegardUnity
 
         public override float ProgressBarWeight => 4f;
 
-        public static bool TryGetEntry(string key, out StringTableEntry entry)
+        public static bool TryGetEntry(string key, out StringTableEntry entry, bool showWarning = true)
         {
             foreach (var table in tables)
             {
@@ -26,7 +26,7 @@ namespace RoguegardUnity
                 if (entry != null) return true;
             }
 
-            Debug.LogWarning($"{key} のエントリが見つかりません。");
+            if (showWarning) { Debug.LogWarning($"{key} のエントリが見つかりません。"); }
             entry = null;
             return false;
         }

@@ -20,6 +20,43 @@ namespace RoguegardUnity
             else return new Color(1f, 1f, .5f);
         }
 
+        public static bool TryLocalize(string text, out string localizedText)
+        {
+            if (string.IsNullOrWhiteSpace(text))
+            {
+                localizedText = null;
+                return false;
+            }
+
+            var index = 0;
+            while (text[index] == '<')
+            {
+                var closeIndex = text.IndexOf('>', index);
+                if (closeIndex == -1) break;
+
+                index = closeIndex + 1;
+            }
+
+            if (text[index] == ':')
+            {
+                var head = text.Substring(0, index);
+                text = text.Substring(index + 1);
+                if (!RogueLocalizedStringTable.TryGetEntry(text, out var entry, false))
+                {
+                    localizedText = null;
+                    return false;
+                }
+
+                localizedText = head + entry.GetLocalizedString();
+                return true;
+            }
+            else
+            {
+                localizedText = null;
+                return false;
+            }
+        }
+
         public static string Localize(string text)
         {
             if (string.IsNullOrWhiteSpace(text))

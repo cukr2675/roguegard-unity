@@ -16,8 +16,8 @@ namespace RoguegardUnity
             choices = new IModelsMenuChoice[]
             {
                 objCommandMenu.Summary,
-                new Objs() { captionWindow = captionWindow, nextMenu = objsMenu.Items },
-                new Skill() { captionWindow = captionWindow, nextMenu = skillsMenu.Use },
+                new Objs() { nextMenu = objsMenu.Items },
+                new Skill() { nextMenu = skillsMenu.Use },
                 ExitModelsMenuChoice.Instance
             };
         }
@@ -29,7 +29,6 @@ namespace RoguegardUnity
 
         private class Objs : IModelsMenuChoice
         {
-            public CaptionWindow captionWindow;
             public IModelsMenu nextMenu;
 
             public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
@@ -39,14 +38,12 @@ namespace RoguegardUnity
             {
                 var openArg = new RogueMethodArgument(targetObj: self);
                 root.OpenMenu(nextMenu, self, null, openArg, RogueMethodArgument.Identity);
-                captionWindow.Show(true);
                 root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
             }
         }
 
         private class Skill : IModelsMenuChoice
         {
-            public CaptionWindow captionWindow;
             public IModelsMenu nextMenu;
 
             public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
@@ -55,7 +52,6 @@ namespace RoguegardUnity
             public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 root.OpenMenu(nextMenu, self, null, RogueMethodArgument.Identity, RogueMethodArgument.Identity);
-                captionWindow.Show(true);
                 root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
             }
         }

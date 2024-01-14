@@ -9,10 +9,12 @@ namespace RoguegardUnity
 {
     public class PartyMenu : IModelsMenu
     {
+        private readonly CaptionWindow captionWindow;
         private readonly ItemController itemController;
 
         public PartyMenu(CaptionWindow captionWindow, PartyMemberMenu memberMenu)
         {
+            this.captionWindow = captionWindow;
             itemController = new ItemController() { menu = memberMenu };
         }
 
@@ -22,6 +24,7 @@ namespace RoguegardUnity
             var scroll = (ScrollModelsMenuView)root.Get(DeviceKw.MenuScroll);
             scroll.OpenView(itemController, partyMembers, root, self, user, arg);
             scroll.ShowExitButton(ExitModelsMenuChoice.Instance);
+            captionWindow.ShowCaption("パーティ：");
         }
 
         private class ItemController : IPartyMenuItemController

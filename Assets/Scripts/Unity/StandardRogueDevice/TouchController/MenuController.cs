@@ -65,7 +65,7 @@ namespace RoguegardUnity
             var skillsMenu = new SkillsMenu(_captionWindow);
             var partyMemberMenu = new PartyMemberMenu(_captionWindow, objsMenu, objCommandMenu, skillsMenu);
             var partyMenu = new PartyMenu(_captionWindow, partyMemberMenu);
-            mainMenu = new MainMenu(_captionWindow, objsMenu, skillsMenu, partyMenu);
+            mainMenu = new MainMenu(objsMenu, skillsMenu, partyMenu);
             longDownMenu = new LongDownMenu(objsMenu, objCommandMenu);
             selectFileMenu = new SelectFileMenu(_scrollMenu);
 

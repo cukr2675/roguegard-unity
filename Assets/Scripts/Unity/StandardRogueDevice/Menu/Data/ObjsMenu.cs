@@ -53,6 +53,7 @@ namespace RoguegardUnity
 
         private abstract class ScrollMenu : IModelsMenu, IModelsMenuItemController
         {
+            protected abstract string MenuName { get; }
             protected virtual bool Skip0WeightObjs => false;
             protected virtual bool SortIsEnabled => false;
 
@@ -102,6 +103,8 @@ namespace RoguegardUnity
                 scroll.SetPosition(position);
                 scroll.ShowExitButton(ExitModelsMenuChoice.Instance);
 
+                caption.ShowCaption(MenuName);
+
                 // プレイヤーパーティのキャラのインベントリまたは倉庫であればソート可能
                 if (SortIsEnabled)
                 {
@@ -138,7 +141,7 @@ namespace RoguegardUnity
 
                 // 選択したアイテムの情報と選択肢を表示する
                 var obj = (RogueObj)model;
-                caption.Log(obj.Main.InfoSet);
+                caption.ShowCaption(obj.Main.InfoSet);
                 root.OpenMenuAsDialog(commandMenu, self, null, new(tool: obj), arg);
             }
 
@@ -163,6 +166,7 @@ namespace RoguegardUnity
 
         private class ItemsMenu : ScrollMenu
         {
+            protected override string MenuName => "パーティインベントリ：";
             protected override bool Skip0WeightObjs => true;
             protected override bool SortIsEnabled => true;
 
@@ -185,6 +189,8 @@ namespace RoguegardUnity
 
         private class GroundMenu : ScrollMenu
         {
+            protected override string MenuName => "足元：";
+
             private readonly List<RogueObj> models = new List<RogueObj>();
 
             protected override Spanning<RogueObj> GetObjs(RogueObj self, RogueObj targetObj)
@@ -205,6 +211,8 @@ namespace RoguegardUnity
 
         private class PutIntoChestMenu : ScrollMenu
         {
+            protected override string MenuName => "どれを入れますか？";
+
             protected override bool SortIsEnabled => true;
 
             protected override Spanning<RogueObj> GetObjs(RogueObj self, RogueObj targetObj)
@@ -215,6 +223,8 @@ namespace RoguegardUnity
 
         private class TakeOutFromChestMenu : ScrollMenu
         {
+            protected override string MenuName => "どれを取り出しますか？";
+
             protected override bool SortIsEnabled => true;
 
             protected override Spanning<RogueObj> GetObjs(RogueObj self, RogueObj chest)

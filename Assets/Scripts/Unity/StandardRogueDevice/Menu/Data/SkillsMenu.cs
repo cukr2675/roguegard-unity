@@ -58,6 +58,7 @@ namespace RoguegardUnity
                 var scroll = (ScrollModelsMenuView)root.Get(DeviceKw.MenuScroll);
                 scroll.OpenView(this, models, root, self, user, openArg);
                 scroll.ShowExitButton(exitChoice);
+                caption.ShowCaption("スキル：");
             }
 
             public string GetName(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
@@ -77,7 +78,7 @@ namespace RoguegardUnity
                 }
                 root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
 
-                caption.Log(skill);
+                caption.ShowCaption(skill);
                 var openArg = new RogueMethodArgument(other: skill);
                 root.OpenMenuAsDialog(menu, self, null, openArg, RogueMethodArgument.Identity);
             }
