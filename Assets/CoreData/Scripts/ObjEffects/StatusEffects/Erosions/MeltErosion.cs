@@ -7,15 +7,13 @@ using Roguegard.Extensions;
 namespace Roguegard
 {
     [ObjectFormer.Formable]
-    public class MeltErosion : StackableStatusEffect, IEquipmentRogueEffect, IValueEffect
+    public class MeltErosion : StackableStatusEffect, IEquipmentRogueEffect
     {
         public static IAffectCallback Callback { get; } = new AffectCallback(new MeltErosion());
 
         public override string Name => ":MeltErosion";
         public override IKeyword EffectCategory => null;
         protected override int MaxStack => 1;
-
-        float IValueEffect.Order => 0f;
 
         [System.NonSerialized] private readonly EquipmentEffect equipmentEffect = new EquipmentEffect();
 
@@ -41,9 +39,6 @@ namespace Roguegard
 
         void IEquipmentRogueEffect.OpenEquip(RogueObj equipment)
         {
-            //var def = StatsEffectedValues.GetDEF(equipment);
-            //equipmentEffect.debuffDEF = Mathf.Min(Stack, def);
-
             var owner = equipment.Location;
             RogueEffectUtility.AddFromRogueEffect(owner, equipmentEffect);
         }
@@ -52,14 +47,6 @@ namespace Roguegard
         {
             var owner = equipment.Location;
             RogueEffectUtility.Remove(owner, equipmentEffect);
-        }
-
-        void IValueEffect.AffectValue(IKeyword keyword, AffectableValue value, RogueObj self)
-        {
-            if (keyword == StatsKw.DEF)
-            {
-                value.MainValue += equipmentEffect.debuffDEF;
-            }
         }
 
         public override void GetEffectedName(RogueNameBuilder refName, RogueObj self)
@@ -79,16 +66,12 @@ namespace Roguegard
 
         private class EquipmentEffect : IValueEffect
         {
-            public float debuffDEF;
-
             public float Order => 0f;
 
             public void AffectValue(IKeyword keyword, AffectableValue value, RogueObj self)
             {
                 if (keyword == StatsKw.DEF)
                 {
-                    value.MainValue += debuffDEF;
-
                     // ガード率 -10%
                     value.SubValues[StatsKw.GuardRate] -= .1f;
                 }

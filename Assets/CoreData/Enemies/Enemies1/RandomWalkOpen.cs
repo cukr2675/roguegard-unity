@@ -35,8 +35,6 @@ namespace Roguegard.CharacterCreation
 
         private class Effect : IRogueObjUpdater
         {
-            public int walkInterval;
-
             float IRogueObjUpdater.Order => 1f;
 
             RogueObjUpdaterContinueType IRogueObjUpdater.UpdateObj(RogueObj self, float activationDepth, ref int sectionIndex)

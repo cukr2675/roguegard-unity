@@ -18,12 +18,13 @@ namespace Roguegard
         int ISkillDescription.RequiredMP => 0;
         Spanning<IKeyword> ISkillDescription.AmmoCategories => Spanning<IKeyword>.Empty;
 
-        private static readonly RogueMenu rogueMenu = new RogueMenu();
+        private RogueMenu rogueMenu;
 
         public bool Invoke(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
         {
             if (user == RogueDevice.Primary.Player)
             {
+                rogueMenu ??= new RogueMenu() { parent = this };
                 //RogueDevice.Primary.AddMenu(rogueMenu, user, null, RogueMethodArgument.Identity);
                 RogueDevice.Add(DeviceKw.AppendText, DeviceKw.StartTalk);
                 RogueDevice.Add(DeviceKw.AppendText, "è§êlÅuÇÌÇΩÇµÇÕè§êlÇ≈Ç∑ Ç≈Ç‡Ç‹ÇæèÄîıíÜÇ≈Ç∑");
