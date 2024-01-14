@@ -54,7 +54,7 @@ namespace RoguegardUnity
                 scrollMenuView.OpenView(itemController, objs, root, self, user, filesArg);
                 scrollMenuView.ShowExitButton(ExitModelsMenuChoice.Instance);
                 if (itemController.type == Type.Read) { scrollMenuView.ShowSortButton(importChoice); }
-                scrollMenuView.SetPosition(1f);
+                scrollMenuView.SetPosition(0f);
             });
         }
 
@@ -65,6 +65,7 @@ namespace RoguegardUnity
             public AddCallback addCallback;
 
             private CommandMenu nextMenu;
+            private OverwriteDialog overwriteDialog;
 
             public string GetName(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
@@ -79,6 +80,7 @@ namespace RoguegardUnity
                 if (nextMenu == null)
                 {
                     nextMenu = new CommandMenu() { parent = this };
+                    overwriteDialog = new OverwriteDialog() { parent = this };
                 }
 
                 if (model == null)
@@ -87,16 +89,50 @@ namespace RoguegardUnity
                 }
                 else
                 {
+                    var path = (string)model;
                     if (type == Type.Write)
                     {
-                        selectCallback(root, (string)model);
+                        root.AddInt(DeviceKw.StartTalk, 0);
+                        root.AddObject(DeviceKw.AppendText, path);
+                        root.AddObject(DeviceKw.AppendText, "を上書きしますか？");
+                        root.AddInt(DeviceKw.WaitEndOfTalk, 0);
+                        root.OpenMenuAsDialog(overwriteDialog, null, null, new(other: path), RogueMethodArgument.Identity);
                     }
                     else
                     {
                         root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-                        root.OpenMenuAsDialog(nextMenu, null, null, new(other: model), RogueMethodArgument.Identity);
+                        root.OpenMenuAsDialog(nextMenu, null, null, new(other: path), RogueMethodArgument.Identity);
                     }
                 }
+            }
+        }
+
+        private class OverwriteDialog : IModelsMenu
+        {
+            public ItemController parent;
+
+            private object[] models;
+
+            public void OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            {
+                if (models == null)
+                {
+                    models = new object[]
+                    {
+                        new ActionModelsMenuChoice("上書き保存", Yes),
+                        ExitModelsMenuChoice.Instance
+                    };
+                }
+
+                root.Get(DeviceKw.MenuTalkChoices).OpenView(ChoicesModelsMenuItemController.Instance, models, root, self, user, arg);
+            }
+
+            private void Yes(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            {
+                root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+
+                // セーブデータを上書き
+                parent.selectCallback(root, (string)arg.Other);
             }
         }
 
