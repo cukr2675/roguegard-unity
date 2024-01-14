@@ -58,7 +58,7 @@ namespace RoguegardUnity
                 var scroll = (ScrollModelsMenuView)root.Get(DeviceKw.MenuScroll);
                 scroll.OpenView(this, models, root, self, user, openArg);
                 scroll.ShowExitButton(exitChoice);
-                caption.ShowCaption("スキル：");
+                caption.ShowCaption(":Skills");
             }
 
             public string GetName(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)

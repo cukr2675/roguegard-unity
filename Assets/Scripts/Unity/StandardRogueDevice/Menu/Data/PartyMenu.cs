@@ -24,7 +24,7 @@ namespace RoguegardUnity
             var scroll = (ScrollModelsMenuView)root.Get(DeviceKw.MenuScroll);
             scroll.OpenView(itemController, partyMembers, root, self, user, arg);
             scroll.ShowExitButton(ExitModelsMenuChoice.Instance);
-            captionWindow.ShowCaption("パーティ：");
+            captionWindow.ShowCaption(":Party");
         }
 
         private class ItemController : IPartyMenuItemController

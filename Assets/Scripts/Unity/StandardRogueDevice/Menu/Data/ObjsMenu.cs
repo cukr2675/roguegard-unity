@@ -166,7 +166,7 @@ namespace RoguegardUnity
 
         private class ItemsMenu : ScrollMenu
         {
-            protected override string MenuName => "パーティインベントリ：";
+            protected override string MenuName => ":Inventory";
             protected override bool Skip0WeightObjs => true;
             protected override bool SortIsEnabled => true;
 
@@ -189,7 +189,7 @@ namespace RoguegardUnity
 
         private class GroundMenu : ScrollMenu
         {
-            protected override string MenuName => "足元：";
+            protected override string MenuName => ":Ground";
 
             private readonly List<RogueObj> models = new List<RogueObj>();
 
@@ -211,7 +211,7 @@ namespace RoguegardUnity
 
         private class PutIntoChestMenu : ScrollMenu
         {
-            protected override string MenuName => "どれを入れますか？";
+            protected override string MenuName => ":Put in what?";
 
             protected override bool SortIsEnabled => true;
 
@@ -223,7 +223,7 @@ namespace RoguegardUnity
 
         private class TakeOutFromChestMenu : ScrollMenu
         {
-            protected override string MenuName => "どれを取り出しますか？";
+            protected override string MenuName => ":Take out what?";
 
             protected override bool SortIsEnabled => true;
 

@@ -44,7 +44,7 @@ namespace RoguegardUnity
             public IModelsMenu nextMenu;
 
             public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-                => ":Skill";
+                => ":Skills";
 
             public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {

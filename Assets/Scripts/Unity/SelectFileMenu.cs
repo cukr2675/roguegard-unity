@@ -69,7 +69,7 @@ namespace RoguegardUnity
 
             public string GetName(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                if (model == null) return "+ New File";
+                if (model == null) return ":+ New File";
                 
                 var path = (string)model;
                 return path.Substring(path.LastIndexOf('/') + 1);
@@ -93,8 +93,8 @@ namespace RoguegardUnity
                     if (type == Type.Write)
                     {
                         root.AddInt(DeviceKw.StartTalk, 0);
-                        root.AddObject(DeviceKw.AppendText, path);
-                        root.AddObject(DeviceKw.AppendText, "を上書きしますか？");
+                        root.AddObject(DeviceKw.AppendText, ":OverwriteMsg::1");
+                        root.AddObject(DeviceKw.AppendText, RogueFile.GetName(path));
                         root.AddInt(DeviceKw.WaitEndOfTalk, 0);
                         root.OpenMenuAsDialog(overwriteDialog, null, null, new(other: path), RogueMethodArgument.Identity);
                     }
@@ -119,7 +119,7 @@ namespace RoguegardUnity
                 {
                     models = new object[]
                     {
-                        new ActionModelsMenuChoice("上書き保存", Yes),
+                        new ActionModelsMenuChoice(":Overwrite", Yes),
                         ExitModelsMenuChoice.Instance
                     };
                 }
@@ -166,7 +166,7 @@ namespace RoguegardUnity
 
                 public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
                 {
-                    return "ロード";
+                    return ":Load";
                 }
 
                 public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
@@ -180,7 +180,7 @@ namespace RoguegardUnity
             {
                 public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
                 {
-                    return "名称変更";
+                    return ":Rename";
                 }
 
                 public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
@@ -199,7 +199,7 @@ namespace RoguegardUnity
             {
                 public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
                 {
-                    return "エクスポート";
+                    return ":Export";
                 }
 
                 public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
@@ -215,14 +215,14 @@ namespace RoguegardUnity
 
                 public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
                 {
-                    return "<#f00>削除";
+                    return "<#f00>:Delete";
                 }
 
                 public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
                 {
                     root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
                     root.AddInt(DeviceKw.StartTalk, 0);
-                    root.AddObject(DeviceKw.AppendText, "削除すると戻せませんが本当に削除しますか？");
+                    root.AddObject(DeviceKw.AppendText, ":DeleteMsg");
                     root.AddInt(DeviceKw.WaitEndOfTalk, 0);
                     root.OpenMenuAsDialog(nextMenu, null, null, arg, arg);
                 }
@@ -232,7 +232,7 @@ namespace RoguegardUnity
             {
                 private static readonly object[] models = new object[]
                 {
-                    new ActionModelsMenuChoice("<#f00>削除する", Yes),
+                    new ActionModelsMenuChoice("<#f00>:Delete", Yes),
                     ExitModelsMenuChoice.Instance
                 };
 
@@ -254,7 +254,7 @@ namespace RoguegardUnity
         {
             public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                return "インポート";
+                return ":Import";
             }
 
             public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)

@@ -15,8 +15,12 @@ MonoBehaviour:
   m_TableCollectionName: UnityDevice
   m_TableCollectionNameGuidString: f442e2877505c5d4391852a201825d92
   m_Entries:
+  - m_Id: 34278007242887168
+    m_Key: /* MainMenu */
+    m_Metadata:
+      m_Items: []
   - m_Id: 299159916544
-    m_Key: Skill
+    m_Key: Skills
     m_Metadata:
       m_Items: []
   - m_Id: 77117657088
@@ -35,19 +39,39 @@ MonoBehaviour:
     m_Key: Log
     m_Metadata:
       m_Items: []
+  - m_Id: 2660482730299392
+    m_Key: Others
+    m_Metadata:
+      m_Items: []
   - m_Id: 16468034064384
     m_Key: Close
+    m_Metadata:
+      m_Items: []
+  - m_Id: 34278284947755008
+    m_Key: /* ObjsMenu */
     m_Metadata:
       m_Items: []
   - m_Id: 2645105824632832
     m_Key: Sort
     m_Metadata:
       m_Items: []
-  - m_Id: 2660482730299392
-    m_Key: Others
+  - m_Id: 34278444100620288
+    m_Key: Inventory
+    m_Metadata:
+      m_Items: []
+  - m_Id: 34278867075207168
+    m_Key: Put in what?
     m_Metadata:
       m_Items: []
   - m_Id: 2660542616571904
+    m_Key: Take out what?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 34283134867607552
+    m_Key: /* OthersMenu */
+    m_Metadata:
+      m_Items: []
+  - m_Id: 34285058408976384
     m_Key: Save
     m_Metadata:
       m_Items: []
@@ -63,12 +87,48 @@ MonoBehaviour:
     m_Key: Load
     m_Metadata:
       m_Items: []
+  - m_Id: 20494015452549120
+    m_Key: Quest
+    m_Metadata:
+      m_Items: []
   - m_Id: 8133783866970112
     m_Key: Options
     m_Metadata:
       m_Items: []
-  - m_Id: 20494015452549120
-    m_Key: Quest
+  - m_Id: 34285251615395840
+    m_Key: /* FileMenu */
+    m_Metadata:
+      m_Items: []
+  - m_Id: 34285352685539328
+    m_Key: + New File
+    m_Metadata:
+      m_Items: []
+  - m_Id: 34285890152042496
+    m_Key: OverwriteMsg::1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 34286139004293120
+    m_Key: Overwrite
+    m_Metadata:
+      m_Items: []
+  - m_Id: 34286473856552960
+    m_Key: Rename
+    m_Metadata:
+      m_Items: []
+  - m_Id: 34286546409623552
+    m_Key: Export
+    m_Metadata:
+      m_Items: []
+  - m_Id: 34286600398704640
+    m_Key: Delete
+    m_Metadata:
+      m_Items: []
+  - m_Id: 34286652038975488
+    m_Key: DeleteMsg
+    m_Metadata:
+      m_Items: []
+  - m_Id: 34286772742656000
+    m_Key: Import
     m_Metadata:
       m_Items: []
   m_Metadata:
