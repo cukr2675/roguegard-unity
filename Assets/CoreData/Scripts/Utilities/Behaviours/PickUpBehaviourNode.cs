@@ -57,7 +57,7 @@ namespace Roguegard
 
                 // ƒAƒCƒeƒ€‚ðŒ©‚Â‚¯‚½‚ç‚»‚±‚Ü‚ÅˆÚ“®
                 if (!PathBuilder.UpdatePath(self, nearestItem.Position)) return RogueObjUpdaterContinueType.Continue;
-                if (!PathBuilder.TryGetNextPosition(self, out var nextDirection)) return RogueObjUpdaterContinueType.Continue;
+                if (!PathBuilder.TryGetNextDirection(self, out var nextDirection)) return RogueObjUpdaterContinueType.Continue;
 
                 default(IActiveRogueMethodCaller).Walk(self, nextDirection, activationDepth);
                 return RogueObjUpdaterContinueType.Break;

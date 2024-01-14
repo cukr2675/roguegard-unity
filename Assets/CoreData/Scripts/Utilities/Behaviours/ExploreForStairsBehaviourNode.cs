@@ -54,7 +54,7 @@ namespace Roguegard
 
                 // ŠK’i‚ðŒ©‚Â‚¯‚½‚ç‚»‚±‚Ü‚ÅˆÚ“®
                 if (!PathBuilder.UpdatePath(self, obj.Position)) return RogueObjUpdaterContinueType.Continue;
-                if (!PathBuilder.TryGetNextPosition(self, out var nextDirection)) return RogueObjUpdaterContinueType.Continue;
+                if (!PathBuilder.TryGetNextDirection(self, out var nextDirection)) return RogueObjUpdaterContinueType.Continue;
 
                 default(IActiveRogueMethodCaller).Walk(self, nextDirection, activationDepth);
                 selectedPositionIsEnabled = false;
@@ -64,7 +64,7 @@ namespace Roguegard
                 RogueDirection nextDirection = default;
                 if (!selectedPositionIsEnabled ||
                     !PathBuilder.UpdatePath(self, selectedPosition) ||
-                    !PathBuilder.TryGetNextPosition(self, out nextDirection))
+                    !PathBuilder.TryGetNextDirection(self, out nextDirection))
                 {
                     selectedPositionIsEnabled = false;
                 }
@@ -74,7 +74,7 @@ namespace Roguegard
                     if (!UpdateSelectedPosition(self, view)) return RogueObjUpdaterContinueType.Continue;
                 }
                 if (!PathBuilder.UpdatePath(self, selectedPosition) ||
-                    !PathBuilder.TryGetNextPosition(self, out nextDirection)) return RogueObjUpdaterContinueType.Continue;
+                    !PathBuilder.TryGetNextDirection(self, out nextDirection)) return RogueObjUpdaterContinueType.Continue;
 
                 default(IActiveRogueMethodCaller).Walk(self, nextDirection, activationDepth);
                 return RogueObjUpdaterContinueType.Break;

@@ -301,7 +301,7 @@ namespace RoguegardUnity
                     return;
                 }
 
-                if (pointingPathBuilder.TryGetNextPosition(player, out var direction) || startsPointing)
+                if (pointingPathBuilder.TryGetNextDirection(player, out var direction) || startsPointing)
                 {
                     var point = player.Position + direction.Forward;
                     pointingWalkStopper.UpdatePositionedStop(point);

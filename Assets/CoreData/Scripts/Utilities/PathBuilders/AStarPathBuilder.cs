@@ -101,7 +101,7 @@ namespace Roguegard
             }
         }
 
-        public bool TryGetNextPosition(RogueObj self, out RogueDirection nextDirection)
+        public bool TryGetNextDirection(RogueObj self, out RogueDirection nextDirection)
         {
             nextDirection = RogueDirection.LowerLeft;
             var currentPosition = self.Position;
