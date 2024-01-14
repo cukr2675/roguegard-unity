@@ -85,11 +85,18 @@ namespace RoguegardUnity
 
             string IModelsMenuChoice.GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                return "説明";
+                if (arg.Tool?.Main.InfoSet.Details == null) return "<#808080>説明";
+                else return "説明";
             }
 
             void IModelsMenuChoice.Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
+                if (arg.Tool?.Main.InfoSet.Details == null)
+                {
+                    root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Cancel);
+                    return;
+                }
+
                 root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
                 root.OpenMenu(nextMenu, self, user, arg, arg);
             }
