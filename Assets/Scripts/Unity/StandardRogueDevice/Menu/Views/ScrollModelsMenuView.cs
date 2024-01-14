@@ -28,13 +28,13 @@ namespace RoguegardUnity
         public override CanvasGroup CanvasGroup => _canvasGroup;
 
         private float itemHeight;
-        private float scrollRectHeight;
+        private RectTransform scrollTransform;
         private float marginHeight;
 
         public void Initialize()
         {
             itemHeight = _itemPrefab.GetComponent<RectTransform>().rect.height;
-            scrollRectHeight = _scrollRect.GetComponent<RectTransform>().rect.height;
+            scrollTransform = _scrollRect.GetComponent<RectTransform>(); // 画面サイズの変更に対応するため Transform を記憶する
             _sortButton.Initialize(this);
             _exitButton.Initialize(this);
             _scrollRect.onValueChanged.AddListener((x) => UpdateItems());
@@ -51,10 +51,7 @@ namespace RoguegardUnity
                 this.models.Add(models[i]);
             }
             SetArg(root, self, user, arg);
-            AdjustItems(7);
-            var contentHeight = itemHeight * (models.Count - 1) + scrollRectHeight;
-            marginHeight = contentHeight - scrollRectHeight;
-            _scrollRect.content.sizeDelta = new Vector2(_scrollRect.content.sizeDelta.x, contentHeight);
+            UpdateItems();
             var index = arg.Vector.x;
             //index = Mathf.Clamp(arg.Vector.x, 0f, Mathf.Floor(marginHeight / itemHeight));
             _scrollRect.verticalNormalizedPosition = 1f - (index * itemHeight / marginHeight);
@@ -97,6 +94,12 @@ namespace RoguegardUnity
 
         private void UpdateItems()
         {
+            var scrollRectHeight = scrollTransform.rect.height;
+            AdjustItems(Mathf.CeilToInt(scrollRectHeight / itemHeight) + 1);
+            var contentHeight = itemHeight * (models.Count - 1) + scrollRectHeight;
+            marginHeight = contentHeight - scrollRectHeight;
+            _scrollRect.content.sizeDelta = new Vector2(_scrollRect.content.sizeDelta.x, contentHeight);
+
             var offset = Mathf.FloorToInt(marginHeight * (1f - _scrollRect.verticalNormalizedPosition) / itemHeight);
             for (int i = 0; i < itemButtons.Count; i++)
             {
