@@ -12,6 +12,7 @@ namespace RoguegardUnity
     {
         [SerializeField] private CanvasGroup _canvasGroup = null;
         [SerializeField] private MessageText _text = null;
+        [SerializeField] private CanvasGroup _talkChoicesCanvasGroup = null;
 
         public override CanvasGroup CanvasGroup => _canvasGroup;
 
@@ -84,6 +85,7 @@ namespace RoguegardUnity
 
         public void WaitEndOfTalk()
         {
+            MenuController.Show(_talkChoicesCanvasGroup, false);
             waitEndOfTalk = true;
         }
 
@@ -100,6 +102,7 @@ namespace RoguegardUnity
 
             if (waitEndOfTalk && _text.WaitsInput)
             {
+                MenuController.Show(_talkChoicesCanvasGroup, true);
                 waitEndOfTalk = false;
                 _text.Input();
             }
