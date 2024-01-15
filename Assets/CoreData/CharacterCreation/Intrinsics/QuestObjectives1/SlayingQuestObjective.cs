@@ -143,7 +143,7 @@ namespace Roguegard.CharacterCreation
                 var result = next.Invoke(keyword, method, self, user, activationDepth, arg);
                 if (!result) return false;
 
-                if (generate && self.Location.Space.Tilemap != null && DungeonInfo.TryGetLevel(self.Location, 0, out _) &&
+                if (generate && self.Location.Space.Tilemap != null && DungeonInfo.TryGet(self.Location, out _) &&
                     self.Location.Main.Stats.Lv == member.TargetFloor)
                 {
                     if (RogueDevice.Primary.Player == self)

@@ -98,14 +98,15 @@ namespace Roguegard.CharacterCreation
 
             public override string GetName(IModelsMenuRoot root, RogueObj player, RogueObj empty, in RogueMethodArgument arg)
             {
-                var levelText = DungeonInfo.GetLevelText(player.Location);
+                var levelText = DungeonInfo.Get(player.Location).GetLevelText(player.Location);
                 return $"{data.DescriptionName}\n{levelText}";
             }
 
             public override void Activate(IModelsMenuRoot root, RogueObj player, RogueObj empty, in RogueMethodArgument arg)
             {
                 var dungeon = player.Location;
-                if (!DungeonInfo.TryGetRandom(dungeon, dungeon.Main.Stats.Lv, out var random))
+                if (!DungeonInfo.TryGet(dungeon, out var info) ||
+                    !info.TryGetRandom(dungeon.Main.Stats.Lv, out var random))
                 {
                     Debug.LogError("ダンジョンのシード値の取得に失敗しました。");
                     random = new RogueRandom();

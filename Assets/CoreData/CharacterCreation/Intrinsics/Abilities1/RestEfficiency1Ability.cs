@@ -41,7 +41,7 @@ namespace Roguegard.CharacterCreation
                 var result = next.Invoke(keyword, method, self, user, activationDepth, arg);
                 if (!result) return false;
 
-                if (generate && self.Location.Space.Tilemap != null && DungeonInfo.TryGetLevel(self.Location, 0, out _))
+                if (generate && self.Location.Space.Tilemap != null && DungeonInfo.TryGet(self.Location, out _))
                 {
                     // 階層移動に成功したとき満腹度を50回復する
                     var stats = self.Main.Stats;

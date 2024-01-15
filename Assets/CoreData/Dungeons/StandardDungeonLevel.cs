@@ -93,7 +93,8 @@ namespace Roguegard.CharacterCreation
 
                 if (parent == null)
                 {
-                    if (!DungeonInfo.TryGetLevel(self, lv, out var level) ||
+                    if (!DungeonInfo.TryGet(self, out var info) ||
+                        !info.TryGetLevel(lv, out var level) ||
                         !(level is StandardDungeonLevel standardLevel))
                     {
                         Debug.LogError("ダンジョン階層データの取得に失敗しました。");

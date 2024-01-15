@@ -29,7 +29,8 @@ namespace Roguegard.CharacterCreation
                 var result = next.Invoke(keyword, method, self, user, activationDepth, arg);
                 if (!result) return false;
 
-                if (generate && self.Location.Space.Tilemap != null && DungeonInfo.TryGetLevel(self.Location, 0, out var level))
+                if (generate && self.Location.Space.Tilemap != null && DungeonInfo.TryGet(self.Location, out var info) &&
+                    info.TryGetLevel(0, out var level))
                 {
                     // ŠK‘w‚ð•Ç‚Å–„‚ß‚é
                     var tilemap = self.Location.Space.Tilemap;
