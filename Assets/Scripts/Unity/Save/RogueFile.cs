@@ -8,14 +8,25 @@ using Save2IDB;
 
 namespace RoguegardUnity
 {
-    public static class RogueFile
+    public class RogueFile
     {
-        public static void GetFiles(string path, System.Action<string[]> callback)
+        public string Path { get; }
+        public System.DateTime LastModified { get; }
+
+        private RogueFile(string path, System.DateTime lastModified)
+        {
+            Path = path;
+            LastModified = lastModified;
+        }
+
+        public static void GetFiles(string path, System.Action<RogueFile[]> callback)
         {
             if (path.Contains('\\')) { path = path.Replace('\\', '/'); };
 
 #if UNITY_STANDALONE || UNITY_EDITOR
-            callback(Directory.GetFiles(path).OrderByDescending(x => File.GetLastWriteTime(x)).Select(x => x.Replace('\\', '/')).ToArray());
+            callback(Directory.GetFiles(path)
+                .Select(x => new RogueFile(x.Replace('\\', '/'), File.GetLastWriteTime(x)))
+                .OrderByDescending(x => x.LastModified).ToArray());
 #elif UNITY_WEBGL
             FadeCanvas.StartCanvasCoroutine(GetFilesCoroutine(path, callback));
 #else
@@ -23,12 +34,12 @@ namespace RoguegardUnity
 #endif
         }
 
-        private static IEnumerator GetFilesCoroutine(string path, System.Action<string[]> callback)
+        private static IEnumerator GetFilesCoroutine(string path, System.Action<RogueFile[]> callback)
         {
             var handle = IDBFile.GetFileInfosDescDateAsync();
             yield return handle;
 
-            callback(handle.Result.Select(x => x.Path).Where(x => x.StartsWith(path)).ToArray());
+            callback(handle.Result.Where(x => x.Path.StartsWith(path)).Select(x => new RogueFile(x.Path, x.LastModified)).ToArray());
         }
 
         public static RogueSaveStream Create(string path)
@@ -111,7 +122,7 @@ namespace RoguegardUnity
 
         public static string GetName(string path)
         {
-            return Path.GetFileNameWithoutExtension(path);
+            return System.IO.Path.GetFileNameWithoutExtension(path);
         }
 
         public static void Export(string path)

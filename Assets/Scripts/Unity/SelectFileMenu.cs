@@ -71,8 +71,8 @@ namespace RoguegardUnity
             {
                 if (model == null) return ":+ New File";
                 
-                var path = (string)model;
-                return path.Substring(path.LastIndexOf('/') + 1);
+                var file = (RogueFile)model;
+                return file.Path.Substring(file.Path.LastIndexOf('/') + 1);
             }
 
             public void Activate(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
@@ -89,19 +89,19 @@ namespace RoguegardUnity
                 }
                 else
                 {
-                    var path = (string)model;
+                    var file = (RogueFile)model;
                     if (type == Type.Write)
                     {
                         root.AddInt(DeviceKw.StartTalk, 0);
                         root.AddObject(DeviceKw.AppendText, ":OverwriteMsg::1");
-                        root.AddObject(DeviceKw.AppendText, RogueFile.GetName(path));
+                        root.AddObject(DeviceKw.AppendText, RogueFile.GetName(file.Path));
                         root.AddInt(DeviceKw.WaitEndOfTalk, 0);
-                        root.OpenMenuAsDialog(overwriteDialog, null, null, new(other: path), RogueMethodArgument.Identity);
+                        root.OpenMenuAsDialog(overwriteDialog, null, null, new(other: file.Path), RogueMethodArgument.Identity);
                     }
                     else
                     {
                         root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-                        root.OpenMenuAsDialog(nextMenu, null, null, new(other: path), RogueMethodArgument.Identity);
+                        root.OpenMenuAsDialog(nextMenu, null, null, new(other: file.Path), RogueMethodArgument.Identity);
                     }
                 }
             }

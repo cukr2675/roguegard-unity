@@ -118,6 +118,11 @@ namespace RoguegardUnity
                         _weightText.text = null;
                         _equippedText.text = null;
                     }
+                    if (source is RogueFile file)
+                    {
+                        _weightText.text = file.LastModified.ToString();
+                        _weightText.fontSize = 48;
+                    }
                 }
             }
         }

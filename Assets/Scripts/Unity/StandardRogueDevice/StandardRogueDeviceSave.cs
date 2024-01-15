@@ -41,16 +41,16 @@ namespace RoguegardUnity
             this.characterCreationDataBuilder = new CharacterCreationDataBuilder(characterCreationDataBuilder);
         }
 
-        public static void GetFiles(System.Action<IEnumerable<string>> callback)
+        public static void GetFiles(System.Action<IEnumerable<RogueFile>> callback)
         {
             GetFiles(RootDirectory, callback);
         }
 
-        private static void GetFiles(string path, System.Action<IEnumerable<string>> callback)
+        private static void GetFiles(string path, System.Action<IEnumerable<RogueFile>> callback)
         {
             RogueFile.GetFiles(path, files =>
             {
-                callback(files.Where(x => x.ToLower().EndsWith(_extensions[0]) || x.ToLower().EndsWith(_extensions[1])));
+                callback(files.Where(x => x.Path.ToLower().EndsWith(_extensions[0]) || x.Path.ToLower().EndsWith(_extensions[1])));
             });
         }
 
@@ -63,9 +63,25 @@ namespace RoguegardUnity
 
             GetFiles(Path.Combine(RootDirectory, directory), files =>
             {
-                var numbers = files.Where(x => Path.GetFileName(x).StartsWith(saveName)).Select(x => GetFirstNumber(x)).ToArray();
+                var numbers = files.Where(x => Path.GetFileName(x.Path).StartsWith(saveName)).Select(x => GetFirstNumber(x.Path)).ToArray();
                 var newNumber = 1;
                 if (numbers.Length >= 1) { newNumber = numbers.Max() + 1; }
+                if (!Extensions.Contains(extension)) { extension += _extensions[0]; }
+                callback(Path.Combine(RootDirectory, directory, saveName + newNumber + extension));
+            });
+        }
+
+        public static void GetNewAutoSavePath(string name, System.Action<string> callback)
+        {
+            var directory = Path.GetDirectoryName(name);
+            if (directory == ".") { directory = ""; }
+            var saveName = Path.GetFileNameWithoutExtension(name);
+            var extension = Path.GetExtension(name);
+
+            GetFiles(Path.Combine(RootDirectory, directory), files =>
+            {
+                var newNumber = files.Where(x => Path.GetFileName(x.Path).StartsWith(saveName)).Select(x => GetFirstNumber(x.Path)).FirstOrDefault();
+                newNumber = (newNumber % 3) + 1;
                 if (!Extensions.Contains(extension)) { extension += _extensions[0]; }
                 callback(Path.Combine(RootDirectory, directory, saveName + newNumber + extension));
             });

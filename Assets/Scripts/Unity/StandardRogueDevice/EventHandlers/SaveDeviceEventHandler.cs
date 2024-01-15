@@ -23,7 +23,8 @@ namespace RoguegardUnity
             if (keyword == DeviceKw.AutoSave)
             {
                 // オートセーブ
-                SaveDelay(null, StandardRogueDeviceSave.RootDirectory + "/AutoSave.gard", true);
+                StandardRogueDeviceSave.GetNewAutoSavePath(
+                    "AutoSave.gard", path => SaveDelay(null, path, true));
                 return true;
             }
             if (keyword == DeviceKw.SaveGame)
