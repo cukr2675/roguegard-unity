@@ -33,8 +33,8 @@ namespace Roguegard
             var memberInfo = LobbyMemberList.GetMemberInfo(player);
             memberInfo.SavePoint = info;
 
-            // プレイヤーのときだけオートセーブする
-            if (RogueDevice.Primary.Player == player) { RogueDevice.Add(DeviceKw.AutoSave, 0); }
+            // 注目中のパーティのときだけオートセーブする
+            if (RogueDevice.Primary.Subject.Main.Stats.Party.Members.Contains(player)) { RogueDevice.Add(DeviceKw.AutoSave, 0); }
 
             return true;
         }
