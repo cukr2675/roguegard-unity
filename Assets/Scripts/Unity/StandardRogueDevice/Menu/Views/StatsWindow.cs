@@ -60,8 +60,16 @@ namespace RoguegardUnity
         {
             dungeon.GetName(nameBuilder);
             StandardRogueDeviceUtility.Localize(nameBuilder);
-            var levelText = DungeonInfo.Get(dungeon).GetLevelText(dungeon);
-            _dungeonText.SetText($"{nameBuilder} {levelText}");
+            if (DungeonInfo.TryGet(dungeon, out var info))
+            {
+                var levelText = info.GetLevelText(dungeon);
+                _dungeonText.SetText($"{nameBuilder} {levelText}");
+            }
+            else
+            {
+                var levelText = DungeonInfo.GetLevelText(DungeonLevelType.None, dungeon.Main.Stats.Lv);
+                _dungeonText.SetText($"{nameBuilder} {levelText}");
+            }
         }
     }
 }
