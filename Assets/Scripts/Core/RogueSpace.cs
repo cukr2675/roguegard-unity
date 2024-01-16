@@ -172,6 +172,13 @@ namespace Roguegard
             return spaceRandom.GetRandomPositionInRoom(this, random);
         }
 
+        public Vector2Int GetRandomPositionInRoom(IRogueRandom random, int roomIndex)
+        {
+            if (Tilemap == null) throw new RogueException($"{Tilemap} の設定されていない空間からランダム位置を取得することはできません。");
+
+            return spaceRandom.GetRandomPositionInRoom(this, random, roomIndex);
+        }
+
         public bool CollideAt(Vector2Int position, bool collide = true, bool tileCollide = true)
         {
             // タイルマップを持たない空間に移動する場合、 (0, 0) に限定する。

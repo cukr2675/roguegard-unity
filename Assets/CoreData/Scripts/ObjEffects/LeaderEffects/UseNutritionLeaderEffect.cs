@@ -9,9 +9,10 @@ namespace Roguegard
     /// 満腹度がゼロのときターン経過でHP-1。
     /// </summary>
     [ObjectFormer.Formable]
-    public class UseNutritionLeaderEffect : PlayerLeaderRogueEffect, IRogueObjUpdater
+    public class UseNutritionLeaderEffect : PlayerLeaderRogueEffect, IRogueObjUpdater, IRogueMethodPassiveAspect
     {
         float IRogueObjUpdater.Order => 100f;
+        float IRogueMethodPassiveAspect.Order => -10f;
 
         private static readonly UseNutritionLeaderEffect instance = new UseNutritionLeaderEffect();
         private static readonly MemberEffect memberEffect = new MemberEffect();
@@ -64,6 +65,19 @@ namespace Roguegard
             return default;
         }
 
+        bool IRogueMethodPassiveAspect.PassiveInvoke(
+            IKeyword keyword, IRogueMethod method, RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg,
+            RogueMethodAspectState.PassiveNext next)
+        {
+            var result = next.Invoke(keyword, method, self, user, activationDepth, arg);
+            if (result && activationDepth < 21f && self.Location != null && DungeonInfo.TryGet(self.Location, out _))
+            {
+                // モンスターハウスを起動する
+                RogueMethodAspectState.Invoke(StdKw.BeEntered, RogueMethod.Instance, self.Location, self, 21f, RogueMethodArgument.Identity);
+            }
+            return result;
+        }
+
         public override bool Equals(object obj) => obj.GetType() == GetType();
         public override int GetHashCode() => GetType().GetHashCode();
 
@@ -71,8 +85,10 @@ namespace Roguegard
         /// このエフェクトが付与されているオブジェクトは自然回復を有効にする。
         /// </summary>
         [ObjectFormer.Formable]
-        private class MemberEffect : BasePartyMemberRogueEffect<UseNutritionLeaderEffect>
+        private class MemberEffect : BasePartyMemberRogueEffect<UseNutritionLeaderEffect>, IRogueMethodPassiveAspect
         {
+            float IRogueMethodPassiveAspect.Order => -10f;
+
             protected override RogueObjUpdaterContinueType UpdateObj(RogueObj self, float activationDepth, ref int sectionIndex)
             {
                 if (self.Main.Stats.Nutrition > 0)
@@ -80,6 +96,29 @@ namespace Roguegard
                     self.Main.Stats.Regenerate(self);
                 }
                 return default;
+            }
+
+            bool IRogueMethodPassiveAspect.PassiveInvoke(
+                IKeyword keyword, IRogueMethod method, RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg,
+                RogueMethodAspectState.PassiveNext next)
+            {
+                var result = next.Invoke(keyword, method, self, user, activationDepth, arg);
+                if (result && activationDepth < 21f && self.Location != null && DungeonInfo.TryGet(self.Location, out _))
+                {
+                    // モンスターハウスを起動する
+                    RogueMethodAspectState.Invoke(StdKw.BeEntered, RogueMethod.Instance, self.Location, self, 21f, RogueMethodArgument.Identity);
+                }
+                return result;
+            }
+        }
+
+        private class RogueMethod : IActiveRogueMethod
+        {
+            public static RogueMethod Instance { get; } = new RogueMethod();
+
+            public bool Invoke(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
+            {
+                return true;
             }
         }
     }

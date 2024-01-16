@@ -24,6 +24,8 @@ namespace Roguegard.CharacterCreation
         [SerializeField] private RandomRoomObjTable[] _otherTable = null;
         public override Spanning<IWeightedRogueObjGeneratorList> OtherTable => _otherTable;
 
+        [SerializeField] private float _monsterHouseRate = .2f;
+
         public override void GenerateFloor(RogueObj player, RogueObj floor, IRogueRandom random)
         {
             var dungeon = player.Location;
@@ -37,6 +39,13 @@ namespace Roguegard.CharacterCreation
                 var effect = new Effect();
                 effect.lv = lv;
                 floor.Main.RogueEffects.AddOpen(floor, effect);
+
+                var monsterHouse = random.NextFloat(0f, 1f);
+                if (monsterHouse <= _monsterHouseRate)
+                {
+                    var roomIndex = random.Next(0, floor.Space.RoomCount);
+                    MonsterHouseEffect.SetTo(floor, roomIndex);
+                }
             }
 
             // プレイヤーキャラを移動

@@ -8,6 +8,8 @@ namespace Roguegard
     {
         private RectInt[] smallRooms;
 
+        private int[] floorInRoomCounts;
+
         /// <summary>
         /// 部屋内の <see cref="RogueTileLayer.Floor"/> である面積。位置をランダムで取得するときに使う
         /// </summary>
@@ -28,7 +30,7 @@ namespace Roguegard
                 {
                     var position = new Vector2Int(x, y);
                     var tile = space.Tilemap.GetTop(position);
-                    if (!InAnyRoom(space, position) || space.CollideAt(position) || tile.Info.Layer != RogueTileLayer.Floor) continue;
+                    if (RoomIndexOf(space, position) == -1 || space.CollideAt(position) || tile.Info.Layer != RogueTileLayer.Floor) continue;
 
                     if (index == positionIndex) return new Vector2Int(x, y);
 
@@ -38,15 +40,55 @@ namespace Roguegard
             throw new RogueException(FloorInRoomCount.ToString());
         }
 
+        public Vector2Int GetRandomPositionInRoom(RogueSpace space, IRogueRandom random, int roomIndex)
+        {
+            var positionIndex = random.Next(0, floorInRoomCounts[roomIndex]);
+            space.GetRoom(roomIndex, out var room, out _);
+            var index = 0;
+            for (int y = room.yMin; y < room.yMax; y++)
+            {
+                for (int x = room.xMin; x < room.xMax; x++)
+                {
+                    var position = new Vector2Int(x, y);
+                    var tile = space.Tilemap.GetTop(position);
+                    if (RoomIndexOf(space, position) != roomIndex || space.CollideAt(position) || tile.Info.Layer != RogueTileLayer.Floor) continue;
+
+                    if (index == positionIndex) return new Vector2Int(x, y);
+
+                    index++;
+                }
+            }
+            throw new RogueException(floorInRoomCounts[roomIndex].ToString());
+        }
+
         public void Reset(RogueSpace space)
         {
             if (smallRooms == null || smallRooms.Length != space.RoomCount)
             {
                 smallRooms = new RectInt[space.RoomCount];
+                floorInRoomCounts = new int[space.RoomCount];
                 for (int i = 0; i < space.RoomCount; i++)
                 {
                     space.GetRoom(i, out var room, out _);
                     smallRooms[i] = new RectInt(room.xMin + 1, room.yMin + 1, room.width - 2, room.height - 2);
+                }
+            }
+
+            for (int i = 0; i < space.RoomCount; i++)
+            {
+                space.GetRoom(i, out var room, out _);
+                floorInRoomCounts[i] = room.width * room.height;
+                for (int y = room.yMin; y < room.yMax; y++)
+                {
+                    for (int x = room.xMin; x < room.xMax; x++)
+                    {
+                        var position = new Vector2Int(x, y);
+                        var tile = space.Tilemap.GetTop(position);
+                        if (RoomIndexOf(space, position) != i || space.CollideAt(position) || tile.Info.Layer != RogueTileLayer.Floor)
+                        {
+                            floorInRoomCounts[i]--;
+                        }
+                    }
                 }
             }
 
@@ -57,12 +99,15 @@ namespace Roguegard
                 {
                     var position = new Vector2Int(x, y);
                     var tile = space.Tilemap.GetTop(position);
-                    if (!InAnyRoom(space, position) || space.CollideAt(position) || tile.Info.Layer != RogueTileLayer.Floor) FloorInRoomCount--;
+                    if (RoomIndexOf(space, position) == -1 || space.CollideAt(position) || tile.Info.Layer != RogueTileLayer.Floor)
+                    {
+                        FloorInRoomCount--;
+                    }
                 }
             }
         }
 
-        private bool InAnyRoom(RogueSpace space, Vector2Int position)
+        private int RoomIndexOf(RogueSpace space, Vector2Int position)
         {
             for (int i = 0; i < smallRooms.Length; i++)
             {
@@ -70,14 +115,14 @@ namespace Roguegard
                 if (!room.Contains(position)) continue;
 
                 // 部屋の入口に隣接していたら false
-                if (position.x == room.xMin && !space.CollideAt(position + Vector2Int.left, false)) return false;
-                if (position.x == room.xMax - 1 && !space.CollideAt(position + Vector2Int.right, false)) return false;
-                if (position.y == room.yMin && !space.CollideAt(position + Vector2Int.down, false)) return false;
-                if (position.y == room.yMax - 1 && !space.CollideAt(position + Vector2Int.up, false)) return false;
+                if (position.x == room.xMin && !space.CollideAt(position + Vector2Int.left, false)) return -1;
+                if (position.x == room.xMax - 1 && !space.CollideAt(position + Vector2Int.right, false)) return -1;
+                if (position.y == room.yMin && !space.CollideAt(position + Vector2Int.down, false)) return -1;
+                if (position.y == room.yMax - 1 && !space.CollideAt(position + Vector2Int.up, false)) return -1;
 
-                return true;
+                return i;
             }
-            return false;
+            return -1;
         }
 
         /// <summary>
@@ -93,7 +138,12 @@ namespace Roguegard
             var tile = space.Tilemap.GetTop(position);
             if (tile.Info.Layer != RogueTileLayer.Floor) return;
 
-            if (InAnyRoom(space, position)) FloorInRoomCount++;
+            var roomIndex = RoomIndexOf(space, position);
+            if (roomIndex >= 0)
+            {
+                floorInRoomCounts[roomIndex]++;
+                FloorInRoomCount++;
+            }
         }
 
         /// <summary>
@@ -109,7 +159,12 @@ namespace Roguegard
             var tile = space.Tilemap.GetTop(position);
             if (tile.Info.Layer != RogueTileLayer.Floor) return;
 
-            if (InAnyRoom(space, position)) FloorInRoomCount--;
+            var roomIndex = RoomIndexOf(space, position);
+            if (roomIndex >= 0)
+            {
+                floorInRoomCounts[roomIndex]--;
+                FloorInRoomCount--;
+            }
         }
     }
 }

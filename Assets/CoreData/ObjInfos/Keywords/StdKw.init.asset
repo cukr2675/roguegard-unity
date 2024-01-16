@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: StdKw.init
   m_EditorClassIdentifier: 
   _apply: {fileID: 11400000, guid: f9f634ef8c48046418c3f7c5e8804d16, type: 2}
+  _beEntered: {fileID: 11400000, guid: cc2c92d3c20ecdd4a9fb21eef13c55a3, type: 2}
   _beShot: {fileID: 11400000, guid: 00a521444c6a35647ba379bb7a0c21d0, type: 2}
   _heal: {fileID: 11400000, guid: a32485cbb202b73439e38d3a70b03ebc, type: 2}
   _loseExp: {fileID: 11400000, guid: 2fab5b41bc2f6974a8525a595cb434c7, type: 2}
