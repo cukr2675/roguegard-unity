@@ -13,13 +13,13 @@ namespace Roguegard
     public class DungeonInfo
     {
         [System.NonSerialized]
-        public RogueDungeonLevel[] levels;
+        private RogueDungeonLevel[] levels;
 
         [System.NonSerialized]
-        public DungeonLevelType levelType;
+        private DungeonLevelType levelType;
 
         [System.NonSerialized]
-        public float visibleRadius;
+        private float visibleRadius;
 
         private bool hasDungeonSeed;
         private int dungeonSeed;
