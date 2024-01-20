@@ -136,6 +136,7 @@ namespace RoguegardUnity
                 }
                 synchronizeMenu.Progress = 1f;
                 memberInfo.SavePoint = null;
+                UpdateCharacters();
             }
 
             memberInfo.SavePoint = playerSavePoint;
