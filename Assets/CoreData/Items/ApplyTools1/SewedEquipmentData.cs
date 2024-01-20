@@ -58,7 +58,7 @@ namespace Roguegard
         {
             Name = data.Name;
             MainColor = data.MainColor;
-            _equipParts = data._equipParts.ToArray();
+            _equipParts = data._equipParts?.ToArray();
             BoneSpriteEffectOrder = data.BoneSpriteEffectOrder;
             Items = new SewedEquipmentDataItemTable(data.Items);
             _palette = new RoguePaintColor[RoguePaintData.PaletteSize];
