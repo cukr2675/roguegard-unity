@@ -65,8 +65,8 @@ namespace Roguegard
             var instance = new RoguePaintColor();
             instance.ROrShade = (byte)(color.r * 255f);
             instance.GOrSaturation = (byte)(color.g * 255f);
-            instance.BOrValue = (byte)(color.a * 255f);
-            instance.A = Mathf.InverseLerp(0.0f, 0.4f, color.a % .5f);
+            instance.BOrValue = (byte)(color.b * 255f);
+            instance.A = Mathf.InverseLerp(0.0f, 0.4f, color.a - (color.a >= .5f ? .5f : 0f));
             instance.IsShift = color.a >= .5f;
             return instance;
         }
