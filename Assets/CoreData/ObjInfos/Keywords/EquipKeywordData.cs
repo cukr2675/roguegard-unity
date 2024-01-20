@@ -5,7 +5,8 @@ using UnityEngine;
 namespace Roguegard
 {
     [CreateAssetMenu(menuName = "RoguegardData/Keyword/Equip")]
-    public class EquipKeywordData : KeywordData
+    [ObjectFormer.Referable]
+    public class EquipKeywordData : SerializableKeywordData
     {
         [Header("Equip")]
         [SerializeField] private float _order = 0f;

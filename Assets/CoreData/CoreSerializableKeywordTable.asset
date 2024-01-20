@@ -17,6 +17,36 @@ MonoBehaviour:
   _targetFolders:
   - {fileID: 102900000, guid: bcde7f3237d579f4fa870173efd0291c, type: 3}
   _items:
+  - _key: Core.Accessory
+    _asset: {fileID: 11400000, guid: 343599ea2c47b7545949b99582567a27, type: 2}
+  - _key: Core.Ammo
+    _asset: {fileID: 11400000, guid: d21eebdbb823a8a45938ccc35e91ddee, type: 2}
+  - _key: Core.BodyArmor
+    _asset: {fileID: 11400000, guid: cdda43e7389bc8047a136f82d171ba34, type: 2}
+  - _key: Core.Boots
+    _asset: {fileID: 11400000, guid: 05281665e1471864887d1e85a5d15d2d, type: 2}
+  - _key: Core.Bottoms
+    _asset: {fileID: 11400000, guid: 5cf2bde435fc98046bd1877964dc8fc9, type: 2}
+  - _key: Core.Cloak
+    _asset: {fileID: 11400000, guid: cf165c696a4d995419a4bb84876a2263, type: 2}
+  - _key: Core.FaceMask
+    _asset: {fileID: 11400000, guid: 0a5066941778bef46a99ac2da12b129b, type: 2}
+  - _key: Core.Gloves
+    _asset: {fileID: 11400000, guid: ef173008b2fd2ee44a39362f4abec77b, type: 2}
+  - _key: Core.Headwear
+    _asset: {fileID: 11400000, guid: a9b106ec03139934fa761fa7f6484de4, type: 2}
+  - _key: Core.Innerwear
+    _asset: {fileID: 11400000, guid: 477e575ba17b0dd4eb9bab0a3d571fe8, type: 2}
+  - _key: Core.Lenses
+    _asset: {fileID: 11400000, guid: ee5bf4666c7731d4b83fd28829b78295, type: 2}
+  - _key: Core.Shield
+    _asset: {fileID: 11400000, guid: dae43f9bc590f3d4dac614a92bee6241, type: 2}
+  - _key: Core.Socks
+    _asset: {fileID: 11400000, guid: b289b559087fe644490cc0a62d428417, type: 2}
+  - _key: Core.Tops
+    _asset: {fileID: 11400000, guid: 9dc0901d9f2ea2b4086b555c0feabb26, type: 2}
+  - _key: Core.Weapon
+    _asset: {fileID: 11400000, guid: 718e67db40cd23d4086eca400d42c82a, type: 2}
   - _key: Core.Adventurer
     _asset: {fileID: 11400000, guid: fbe14b7fe9283944d8b726aa7158a896, type: 2}
   - _key: Core.Living
