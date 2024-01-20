@@ -2,15 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-using System.Linq;
 using UnityEngine.UI;
 using Roguegard;
 using Roguegard.Device;
-using UnityEditor;
 
 namespace RoguegardUnity
 {
-    public class OptionsMenuView : ModelsMenuView
+    public class OptionsMenuView : ModelsMenuView, IScrollModelsMenuView
     {
         [SerializeField] private CanvasGroup _canvasGroup = null;
         [SerializeField] private ScrollRect _scrollRect = null;

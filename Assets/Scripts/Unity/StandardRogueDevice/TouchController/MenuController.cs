@@ -31,6 +31,7 @@ namespace RoguegardUnity
         [SerializeField] private DetailsMenuView _detailsMenu = null;
         [SerializeField] private OptionsMenuView _optionsMenu = null;
         [SerializeField] private CharacterCreationMenuView _characterCreationMenu = null;
+        [SerializeField] private PaintMenuView _paintMenu = null;
         [SerializeField] private ModelsMenuView _talkChoicesMenu = null;
         [SerializeField] private StatsWindow _statsWindow = null;
 
@@ -75,6 +76,7 @@ namespace RoguegardUnity
             _detailsMenu.Initialize();
             _optionsMenu.Initialize();
             _characterCreationMenu.Initialize(rendererPool);
+            _paintMenu.Initialize();
             _loadingMenu.Initialize();
             var scrollSensitivity = 64f;
             SetScrollSensitivity(scrollSensitivity);
@@ -89,6 +91,7 @@ namespace RoguegardUnity
             table.Add(DeviceKw.MenuDetails, _detailsMenu);
             table.Add(DeviceKw.MenuOptions, _optionsMenu);
             table.Add(DeviceKw.MenuCharacterCreation, _characterCreationMenu);
+            table.Add(DeviceKw.MenuPaint, _paintMenu);
             table.Add(DeviceKw.MenuLog, _messageController.LogView);
             table.Add(DeviceKw.MenuTalk, _messageController.TalkView);
             table.Add(DeviceKw.MenuTalkChoices, _talkChoicesMenu);

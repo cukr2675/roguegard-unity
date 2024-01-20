@@ -31,6 +31,8 @@ namespace RoguegardUnity
 
         [SerializeField] private float _defaultVisibleRadius = 2f;
 
+        [SerializeField] private Color[] _defaultPalette = null;
+
         [Tooltip("メッセージを横線で分割しない行動を指定する")]
         [SerializeField] private KeywordData[] _keywordsNotEnqueueMessageRule = null;
 
@@ -61,6 +63,7 @@ namespace RoguegardUnity
 
             RoguegardSettings.MaxTilemapSize = _maxTilemapSize;
             RoguegardSettings.DefaultVisibleRadius = _defaultVisibleRadius;
+            RoguegardSettings.DefaultPalette = _defaultPalette.Select(x => RoguePaintColor.FromColor(x)).ToArray();
             RoguegardSettings.KeywordsNotEnqueueMessageRule = _keywordsNotEnqueueMessageRule;
 
             RoguegardSettings.PixelPerUnit = _pixelPerUnit;

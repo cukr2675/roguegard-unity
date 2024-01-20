@@ -38,6 +38,7 @@ MonoBehaviour:
   _menuLoading: {fileID: 11400000, guid: be399055f7cdec94ea00f8cc5cbd3faa, type: 2}
   _menuLog: {fileID: 11400000, guid: d5b8c2e0211ddfc43b9d71eb8ae7f250, type: 2}
   _menuOptions: {fileID: 11400000, guid: 3227d2c17f047fc4a8de3d41067fec2a, type: 2}
+  _menuPaint: {fileID: 11400000, guid: 3bc90de16c8262e46bb3e413687f417d, type: 2}
   _menuScroll: {fileID: 11400000, guid: 516f732ec17ef9846a3252873465469a, type: 2}
   _menuSummary: {fileID: 11400000, guid: a08778e4b7acd3448a91a1d9a0ba04c9, type: 2}
   _menuTalk: {fileID: 11400000, guid: 8369900199d753e4d8cbd268adea188d, type: 2}

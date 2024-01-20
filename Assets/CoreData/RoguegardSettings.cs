@@ -29,6 +29,13 @@ namespace Roguegard
         /// </summary>
         public static float LightRatio { get; set; }
 
+        private static RoguePaintColor[] _defaultPalette;
+        public static Spanning<RoguePaintColor> DefaultPalette
+        {
+            get => _defaultPalette;
+            set => _defaultPalette = (value.Count == RoguePaintData.PaletteSize ? value.ToArray() : throw new RogueException());
+        }
+
         public static Color White => Color.white * LightRatio;
 
         public static Color Gray => Color.gray * LightRatio;
