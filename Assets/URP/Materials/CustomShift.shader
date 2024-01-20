@@ -60,7 +60,6 @@ Shader "Roguegard/Sprites/CustomShift"
             }
 
             half _SaturationThreshold;
-            half _ValueThreshold;
             half _ShiftS0, _ShiftV0;
             half _ShiftS1, _ShiftV1;
 
