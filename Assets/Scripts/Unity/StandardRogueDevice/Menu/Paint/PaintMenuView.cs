@@ -154,7 +154,7 @@ namespace RoguegardUnity
         void IPointerMoveHandler.OnPointerMove(PointerEventData eventData)
         {
             if (eventData.pointerDrag == null || eventData.dragging) return;
-            if (eventData.pointerDrag != gameObject && eventData.pointerDrag != _board.gameObject) return;
+            if (eventData.pointerDrag != gameObject) return;
 
             // ドラッグ開始までのずれをなくすため、マウスボタン押下後すぐにドラッグ扱いにする。
             // IPointerDownHandler を使うと ScrollView のスワイプによるスクロールができなくなってしまうので IPointerMoveHandler を使う。
@@ -165,7 +165,7 @@ namespace RoguegardUnity
 
         void IDragHandler.OnDrag(PointerEventData eventData)
         {
-            if (eventData.pointerDrag != gameObject && eventData.pointerDrag != _board.gameObject) return;
+            if (eventData.pointerDrag != gameObject) return;
 
             penPosition = pressPenPosition + (eventData.position - eventData.pressPosition) / (944f / 2f / RoguePaintData.BoardSize);
             penPosition.x = Mathf.Clamp(penPosition.x, .5f, RoguePaintData.BoardSize - .5f);
