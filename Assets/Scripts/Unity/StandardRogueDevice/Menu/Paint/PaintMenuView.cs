@@ -33,7 +33,7 @@ namespace RoguegardUnity
 
         public void Initialize()
         {
-            boardTexture = new Texture2D(RoguePaintData.BoardSize, RoguePaintData.BoardSize);
+            boardTexture = new Texture2D(RoguePaintData.BoardSize * 2, RoguePaintData.BoardSize * 2); // WebGL ‚Åƒhƒbƒg‚ª‚Â‚Ô‚ê‚È‚¢‚æ‚¤2”{‚·‚é
             boardTexture.filterMode = FilterMode.Point;
             _board.texture = boardTexture;
 
