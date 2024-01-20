@@ -40,7 +40,7 @@ namespace Roguegard
 
             var degree = _direction.Convert(direction).Degree + current.Degree;
             var degreeRotation = Quaternion.Euler(0f, 0f, degree);
-            transform.Position = (current.PixelPosition + degreeRotation * current.PixelRotatablePosition) / RoguegardSettings.PixelPerUnit;
+            transform.Position = (current.PixelPosition + degreeRotation * current.PixelRotatablePosition) / RoguegardSettings.PixelsPerUnit;
             transform.Rotation = current.Rotation;
             transform.Scale = current.Scale;
             transform.PoseSource = current.PoseSource;

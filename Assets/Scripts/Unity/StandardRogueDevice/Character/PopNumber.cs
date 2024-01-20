@@ -28,7 +28,7 @@ namespace RoguegardUnity
 
         public void UpdateUI(int deltaTime)
         {
-            var speed = 16f / RoguegardSettings.PixelPerUnit / 60f;
+            var speed = 16f / RoguegardSettings.PixelsPerUnit / 60f;
             transform.localPosition = Vector3.up * (speed * lifeTime);
             lifeTime += deltaTime;
             if (lifeTime >= lifeTimeLength)
@@ -57,7 +57,7 @@ namespace RoguegardUnity
                     _image10.sprite = _numberSprites[number / 10];
                     var width = _image10.rectTransform.rect.width;
                     _image10.rectTransform.localPosition = Vector3.left * (width / 2f);
-                    _image1.rectTransform.localPosition = Vector3.right * (width / 2f - 1f / RoguegardSettings.PixelPerUnit);
+                    _image1.rectTransform.localPosition = Vector3.right * (width / 2f - 1f / RoguegardSettings.PixelsPerUnit);
                 }
                 _image1.sprite = _numberSprites[number % 10];
                 _imagePlus.enabled = false;

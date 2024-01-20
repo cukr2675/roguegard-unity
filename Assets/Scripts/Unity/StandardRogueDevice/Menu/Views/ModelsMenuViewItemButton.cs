@@ -143,7 +143,7 @@ namespace RoguegardUnity
             // アイコンを枠内に収める
             var rectTransform = _icon.rectTransform;
             var rectWidth = Mathf.Max(rectTransform.sizeDelta.x, rectTransform.sizeDelta.y);
-            rectTransform.sizeDelta *= iconWidth / Mathf.Max(RoguegardSettings.PixelPerUnit, rectWidth);
+            rectTransform.sizeDelta *= iconWidth / Mathf.Max(RoguegardSettings.PixelsPerUnit, rectWidth);
         }
 
         private void SetName(TMP_Text text, RogueObj obj)

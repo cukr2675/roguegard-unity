@@ -85,7 +85,7 @@ namespace Roguegard
             {
                 return new BoneTransform(
                     OverridesSourceSprite ? BoneSprite : null, Color, OverridesSourceColor,
-                    PixelLocalPosition / RoguegardSettings.PixelPerUnit, LocalRotation, ScaleOfLocalByLocal,
+                    PixelLocalPosition / RoguegardSettings.PixelsPerUnit, LocalRotation, ScaleOfLocalByLocal,
                     TransformsInRootParent, LocalMirrorX, LocalMirrorY);
             }
 

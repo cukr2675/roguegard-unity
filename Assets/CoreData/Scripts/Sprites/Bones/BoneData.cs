@@ -110,7 +110,7 @@ namespace Roguegard.CharacterCreation
                 OverridesBaseColor = node.OverridesBaseColor;
                 FlipX = node.FlipX;
                 FlipY = node.FlipY;
-                LocalPosition = node.PixelLocalPosition / RoguegardSettings.PixelPerUnit;
+                LocalPosition = node.PixelLocalPosition / RoguegardSettings.PixelsPerUnit;
                 LocalRotation = node.LocalRotation;
                 ScaleOfLocalByLocal = node.ScaleOfLocalByLocal;
                 NormalOrderInParent = node.NormalOrderInParent;

@@ -102,7 +102,7 @@ namespace Roguegard
                 motionSet.GetPose(MainInfoKw.Wait, 0, direction, ref transform, out _);
 
                 // 左右に震えさせる
-                var x = (float)(animationTime / 2 % 2) / RoguegardSettings.PixelPerUnit;
+                var x = (float)(animationTime / 2 % 2) / RoguegardSettings.PixelsPerUnit;
                 transform.Position += Vector3.right * x;
             }
             if (keyword == MainInfoKw.Hit)
@@ -110,7 +110,7 @@ namespace Roguegard
                 motionSet.GetPose(MainInfoKw.Hit, animationTime, direction, ref transform, out _);
 
                 // 左右に震えさせる
-                var x = (float)(animationTime / 2 % 2) / RoguegardSettings.PixelPerUnit;
+                var x = (float)(animationTime / 2 % 2) / RoguegardSettings.PixelsPerUnit;
                 transform.Position += Vector3.right * x;
             }
         }

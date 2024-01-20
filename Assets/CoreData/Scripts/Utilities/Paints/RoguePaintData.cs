@@ -66,7 +66,7 @@ namespace Roguegard
             var texture = new Texture2D(BoardSize, BoardSize);
             SetPixelsTo(texture, palette);
             texture.Apply();
-            var sprite = Sprite.Create(texture, rect, new Vector2(.5f, .5f), RoguegardSettings.PixelPerUnit);
+            var sprite = Sprite.Create(texture, rect, new Vector2(.5f, .5f), RoguegardSettings.PixelsPerUnit);
             return sprite;
         }
 
@@ -78,9 +78,9 @@ namespace Roguegard
             texture.Apply();
             var splitPosition = BoardSize / 2;
             var upperRect = new Rect(0f, splitPosition, BoardSize, BoardSize - splitPosition);
-            upperSprite = Sprite.Create(texture, upperRect, upperPivot, RoguegardSettings.PixelPerUnit);
+            upperSprite = Sprite.Create(texture, upperRect, upperPivot, RoguegardSettings.PixelsPerUnit);
             var lowerRect = new Rect(0f, 0f, BoardSize, splitPosition);
-            lowerSprite = Sprite.Create(texture, lowerRect, lowerPivot, RoguegardSettings.PixelPerUnit);
+            lowerSprite = Sprite.Create(texture, lowerRect, lowerPivot, RoguegardSettings.PixelsPerUnit);
         }
     }
 }

@@ -109,18 +109,18 @@ namespace Roguegard
 
             private readonly Vector3[] positions = new[]
             {
-                new Vector3(0f, 1f) / RoguegardSettings.PixelPerUnit,
-                new Vector3(0f, 2f) / RoguegardSettings.PixelPerUnit,
-                new Vector3(0f, 3f) / RoguegardSettings.PixelPerUnit,
-                new Vector3(0f, 4f) / RoguegardSettings.PixelPerUnit,
-                new Vector3(0f, 3f) / RoguegardSettings.PixelPerUnit,
-                new Vector3(0f, 2f) / RoguegardSettings.PixelPerUnit,
+                new Vector3(0f, 1f) / RoguegardSettings.PixelsPerUnit,
+                new Vector3(0f, 2f) / RoguegardSettings.PixelsPerUnit,
+                new Vector3(0f, 3f) / RoguegardSettings.PixelsPerUnit,
+                new Vector3(0f, 4f) / RoguegardSettings.PixelsPerUnit,
+                new Vector3(0f, 3f) / RoguegardSettings.PixelsPerUnit,
+                new Vector3(0f, 2f) / RoguegardSettings.PixelsPerUnit,
             };
 
             public void ApplyTo(IMotionSet motionSet, int animationTime, RogueDirection direction, ref RogueObjSpriteTransform transform, out bool endOfMotion)
             {
                 var index = animationTime / 8 % positions.Length;
-                transform.Position = positions[index] + Vector3.up * (4f / RoguegardSettings.PixelPerUnit);
+                transform.Position = positions[index] + Vector3.up * (4f / RoguegardSettings.PixelsPerUnit);
                 endOfMotion = false;
             }
         }

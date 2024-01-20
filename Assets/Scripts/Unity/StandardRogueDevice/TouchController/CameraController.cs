@@ -55,7 +55,7 @@ namespace RoguegardUnity
                     IsCameraMode = true;
                 }
 
-                var position = pressCameraLocalPosition - dragRelativePosition / RoguegardSettings.PixelPerUnit;
+                var position = pressCameraLocalPosition - dragRelativePosition / RoguegardSettings.PixelsPerUnit;
                 position = new Vector3(AdjustPixel(position.x), AdjustPixel(position.y), position.z);
                 _mainCamera.transform.localPosition = position;
             }
@@ -103,17 +103,17 @@ namespace RoguegardUnity
             {
                 // ズーム倍率が 1 以上なら RenderTexture を拡大表示させる。
                 imageTransform.localScale = new Vector3(zoom, zoom, 1f);
-                _mainCamera.orthographicSize = (float)ScreenSize.y / RoguegardSettings.PixelPerUnit * .5f;
+                _mainCamera.orthographicSize = (float)ScreenSize.y / RoguegardSettings.PixelsPerUnit * .5f;
             }
             else
             {
                 // ズーム倍率が 1 未満なら Camera をズームアウトさせる。
                 imageTransform.localScale = Vector3.one;
-                _mainCamera.orthographicSize = (float)ScreenSize.y / RoguegardSettings.PixelPerUnit * (.5f / zoom);
+                _mainCamera.orthographicSize = (float)ScreenSize.y / RoguegardSettings.PixelsPerUnit * (.5f / zoom);
             }
 
             // ドットが崩れないようにカメラ位置を補正する。（カメラをドット単位で移動させる）
-            static float AdjustPixel(float value) => Mathf.Round(value * RoguegardSettings.PixelPerUnit) / RoguegardSettings.PixelPerUnit;
+            static float AdjustPixel(float value) => Mathf.Round(value * RoguegardSettings.PixelsPerUnit) / RoguegardSettings.PixelsPerUnit;
         }
 
         public Vector3 ScreenPointToWorldPoint(Vector2 position)

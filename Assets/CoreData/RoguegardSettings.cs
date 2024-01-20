@@ -18,9 +18,9 @@ namespace Roguegard
         public static float DefaultVisibleRadius { get; set; }
 
         /// <summary>
-        /// ローグガルドで標準の PixelPerUnit
+        /// ローグガルドで標準の PixelsPerUnit
         /// </summary>
-        public static int PixelPerUnit { get; set; }
+        public static int PixelsPerUnit { get; set; }
 
         public static Color BoneSpriteBaseColor { get; set; }
 

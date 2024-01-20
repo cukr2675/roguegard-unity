@@ -35,25 +35,25 @@ namespace Roguegard
 
             AddTo(
                 table, mainColor, palette, BodyItem,
-                BoneKw.UpperBody, new Vector2(.5f, 6f / RoguegardSettings.PixelPerUnit),
-                BoneKw.Body, new Vector2(.5f, 20f / RoguegardSettings.PixelPerUnit),
+                BoneKw.UpperBody, new Vector2(.5f, 6f / RoguegardSettings.PixelsPerUnit),
+                BoneKw.Body, new Vector2(.5f, 20f / RoguegardSettings.PixelsPerUnit),
                 bodyItemOverridesUpperBaseColor, bodyItemOverridesLowerBaseColor);
             AddTo(
                 table, mainColor, palette, LeftArmItem,
-                BoneKw.LeftArm, new Vector2(.5f, 6f / RoguegardSettings.PixelPerUnit),
-                BoneKw.LeftHand, new Vector2(.5f, 20f / RoguegardSettings.PixelPerUnit));
+                BoneKw.LeftArm, new Vector2(.5f, 6f / RoguegardSettings.PixelsPerUnit),
+                BoneKw.LeftHand, new Vector2(.5f, 20f / RoguegardSettings.PixelsPerUnit));
             AddTo(
                 table, mainColor, palette, RightArmItem,
-                BoneKw.RightArm, new Vector2(.5f, 6f / RoguegardSettings.PixelPerUnit),
-                BoneKw.RightHand, new Vector2(.5f, 20f / RoguegardSettings.PixelPerUnit));
+                BoneKw.RightArm, new Vector2(.5f, 6f / RoguegardSettings.PixelsPerUnit),
+                BoneKw.RightHand, new Vector2(.5f, 20f / RoguegardSettings.PixelsPerUnit));
             AddTo(
                 table, mainColor, palette, LeftLegItem,
-                BoneKw.LeftLeg, new Vector2(.5f, 6f / RoguegardSettings.PixelPerUnit),
-                BoneKw.LeftFoot, new Vector2(.5f, 20f / RoguegardSettings.PixelPerUnit));
+                BoneKw.LeftLeg, new Vector2(.5f, 6f / RoguegardSettings.PixelsPerUnit),
+                BoneKw.LeftFoot, new Vector2(.5f, 20f / RoguegardSettings.PixelsPerUnit));
             AddTo(
                 table, mainColor, palette, RightLegItem,
-                BoneKw.RightLeg, new Vector2(.5f, 6f / RoguegardSettings.PixelPerUnit),
-                BoneKw.RightFoot, new Vector2(.5f, 20f / RoguegardSettings.PixelPerUnit));
+                BoneKw.RightLeg, new Vector2(.5f, 6f / RoguegardSettings.PixelsPerUnit),
+                BoneKw.RightFoot, new Vector2(.5f, 20f / RoguegardSettings.PixelsPerUnit));
             return table;
         }
 

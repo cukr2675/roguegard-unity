@@ -80,7 +80,7 @@ namespace RoguegardUnity
                 var transform = (RectTransform)image.transform;
                 transform.anchorMin = transform.anchorMax = Vector2.zero;
                 transform.pivot = sprite.pivot / sprite.rect.size;
-                transform.localPosition = localPosition * RoguegardSettings.PixelPerUnit;
+                transform.localPosition = localPosition * RoguegardSettings.PixelsPerUnit;
                 transform.localRotation = localRotation;
                 transform.localScale = Vector3.Scale(localScale, new Vector3(flipX ? -1f : 1f, flipY ? -1f : 1f, 1f)) / 2f;
             }

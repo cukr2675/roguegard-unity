@@ -71,8 +71,8 @@ namespace RoguegardUnity
             var motionEffectState = obj.Main.GetBoneMotionEffectState(obj);
             motionEffectState.ApplyTo(motionSet, boneMotion.Keyword, motionEffectAnimationTime, direction, ref transform);
 
-            var x = Mathf.Round(transform.Position.x * RoguegardSettings.PixelPerUnit) / RoguegardSettings.PixelPerUnit;
-            var y = Mathf.Round(transform.Position.y * RoguegardSettings.PixelPerUnit) / RoguegardSettings.PixelPerUnit;
+            var x = Mathf.Round(transform.Position.x * RoguegardSettings.PixelsPerUnit) / RoguegardSettings.PixelsPerUnit;
+            var y = Mathf.Round(transform.Position.y * RoguegardSettings.PixelsPerUnit) / RoguegardSettings.PixelsPerUnit;
             transform.Position = new Vector3(x, y);
 
             if (transform.PoseSource == null) { transform.PoseSource = DefaultBonePoseSource.Instance; }
@@ -114,8 +114,8 @@ namespace RoguegardUnity
             var transform = RogueObjSpriteTransform.Identity;
             boneMotion.ApplyTo(effectMotionSet, motionEffectAnimationTime, direction, ref transform, out var endOfMotion);
 
-            var x = Mathf.Round(transform.Position.x * RoguegardSettings.PixelPerUnit) / RoguegardSettings.PixelPerUnit;
-            var y = Mathf.Round(transform.Position.y * RoguegardSettings.PixelPerUnit) / RoguegardSettings.PixelPerUnit;
+            var x = Mathf.Round(transform.Position.x * RoguegardSettings.PixelsPerUnit) / RoguegardSettings.PixelsPerUnit;
+            var y = Mathf.Round(transform.Position.y * RoguegardSettings.PixelsPerUnit) / RoguegardSettings.PixelsPerUnit;
             transform.Position = new Vector3(x, y);
 
             if (transform.PoseSource == null) { transform.PoseSource = DefaultBonePoseSource.Instance; }
