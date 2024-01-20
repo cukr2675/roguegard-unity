@@ -17,6 +17,7 @@ namespace Roguegard.CharacterCreation
         [SerializeField] private ScriptableStartingItem _questBoard = null;
         [SerializeField] private ScriptableStartingItem _storage = null;
         [SerializeField] private ScriptableStartingItem _seat = null;
+        [SerializeField] private ScriptableStartingItem _sewingMachine = null;
 
         private const int w = 6;
 
@@ -70,6 +71,7 @@ namespace Roguegard.CharacterCreation
             _questBoard.Option.CreateObj(_questBoard, lobby, new Vector2Int(width / 2 - 2, 5), random);
             _storage.Option.CreateObj(_storage, lobby, new Vector2Int(width / 2 + 1, 3), random);
             _seat.Option.CreateObj(_seat, lobby, new Vector2Int(width / 2 + 1, 5), random);
+            _sewingMachine.Option.CreateObj(_sewingMachine, lobby, new Vector2Int(width / 2 - 5, 3), random);
             return lobby;
         }
     }

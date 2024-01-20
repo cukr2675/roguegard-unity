@@ -160,6 +160,13 @@ MonoBehaviour:
     _stack: 1
     _members:
       _items: []
+  _sewingMachine:
+    _option: {fileID: 11400000, guid: abab981097431aa43a1040531251ac64, type: 2}
+    _optionDescription: {fileID: 0}
+    _generatorWeight: 1
+    _stack: 1
+    _members:
+      _items: []
   references:
     version: 2
     RefIds:

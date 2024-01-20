@@ -66,6 +66,8 @@ MonoBehaviour:
     _asset: {fileID: 11400000, guid: c3b5691c9b4d42c4d9b2e6b0134e372c, type: 2}
   - _key: Core.PreparationKit
     _asset: {fileID: 11400000, guid: 2c07a029ce15f914c86a49e956e04590, type: 2}
+  - _key: Core.SewingMachine
+    _asset: {fileID: 11400000, guid: abab981097431aa43a1040531251ac64, type: 2}
   - _key: Core.Stool
     _asset: {fileID: 11400000, guid: a89d1895d6b9e39429f6d5b3229a3e15, type: 2}
   - _key: Core.Chest
