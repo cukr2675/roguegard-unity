@@ -128,7 +128,7 @@ namespace RoguegardUnity
 
                 // ダミーのセーブポイントを設定して入力待機ループを素通りする
                 memberInfo.SavePoint = dummySavePoint;
-                var coroutine = TickEnumerator.UpdateTurns(Player, turns, maxTurns * 1000, false);
+                var coroutine = TickEnumerator.UpdateTurns(Player, Subject, turns, maxTurns * 1000, false);
                 while (coroutine.MoveNext() && !synchronizeMenu.Interrupt)
                 {
                     synchronizeMenu.Progress = (float)coroutine.Current / turns;

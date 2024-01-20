@@ -58,10 +58,13 @@ namespace RoguegardUnity
 
             // セーブ前処理
             var player = componentManager.Player;
+            var subject = componentManager.Subject;
             var maxTurns = 1000;
-            yield return TickEnumerator.UpdateTurns(player, maxTurns, maxTurns * 100, true);
+            yield return TickEnumerator.UpdateTurns(player, subject, maxTurns, maxTurns * 100, true);
             RemoveNoLobbyMemberLocations(player);
-            RemoveViewInfoHeldByLobbyMembers(player);
+            RemoveViewInfoHeldByLobbyMembers(player, subject);
+            ClearViewInfoAfterLocate(player);
+            ClearViewInfoAfterLocate(subject);
 
             // セーブ用データを生成
             var data = new StandardRogueDeviceData();
@@ -71,14 +74,6 @@ namespace RoguegardUnity
             data.Options = componentManager.Options;
             data.CurrentRandom = RogueRandom.Primary;
             data.SaveDateTime = System.DateTime.UtcNow.ToString();
-
-            // セーブデータ容量を減らす
-            var view = ViewInfo.Get(player);
-            if (player.Location != view.Location)
-            {
-                // 空間移動直後にセーブしたとき、移動前の空間の情報を保存しないよう処理する
-                view.ReadyView(player.Location);
-            }
 
             var name = RogueFile.GetName(path);
             var stream = RogueFile.Create(path);
@@ -146,18 +141,31 @@ namespace RoguegardUnity
         }
 
         /// <summary>
-        /// プレイヤー以外のロビーメンバーが持つ <see cref="ViewInfo"/> を削除する
+        /// プレイヤー以外と被写体以外のロビーメンバーが持つ <see cref="ViewInfo"/> を削除する
         /// </summary>
-        private void RemoveViewInfoHeldByLobbyMembers(RogueObj player)
+        private void RemoveViewInfoHeldByLobbyMembers(RogueObj player, RogueObj subject)
         {
             var worldInfo = RogueWorldInfo.GetByCharacter(player);
             var lobbyMembers = worldInfo.LobbyMembers.Members;
             for (int i = 0; i < lobbyMembers.Count; i++)
             {
                 var member = lobbyMembers[i];
-                if (member == null || member == player) continue;
+                if (member == null || member == player || member == subject) continue;
 
                 ViewInfo.RemoveFrom(member);
+            }
+        }
+
+        /// <summary>
+        /// 空間移動直後にセーブしたとき、移動前の空間の情報を保存しないよう処理する
+        /// </summary>
+        private void ClearViewInfoAfterLocate(RogueObj obj)
+        {
+            var view = ViewInfo.Get(obj);
+            if (obj.Location != view.Location)
+            {
+                // 空間移動直後にセーブしたとき、移動前の空間の情報を保存しないよう処理する
+                view.ReadyView(obj.Location);
             }
         }
 

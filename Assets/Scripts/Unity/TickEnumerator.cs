@@ -32,7 +32,8 @@ namespace RoguegardUnity
             device.AfterStepTurn();
         }
 
-        public static IEnumerator<int> UpdateTurns(RogueObj player, int maxTurns, int maxIteration, bool untilSavePoint, int delayInterval = 100)
+        public static IEnumerator<int> UpdateTurns(
+            RogueObj player, RogueObj subject, int maxTurns, int maxIteration, bool untilSavePoint, int delayInterval = 100)
         {
             var world = RogueWorldInfo.GetWorld(player);
             var worldInfo = RogueWorldInfo.GetByCharacter(player);
@@ -46,6 +47,7 @@ namespace RoguegardUnity
                     if (location == null) continue;
                     if (untilSavePoint && location == worldInfo.Lobby) continue; // セーブポイントで止める場合、ロビーは空間そのものをセーブポイントとみなす
                     if (location != worldInfo.Lobby && ObjIsIn(player, location)) continue; // ロビー以外の空間にプレイヤーが存在するとき、その空間は時間経過させない
+                    if (location != worldInfo.Lobby && ObjIsIn(subject, location)) continue; // ロビー以外の空間に被写体が存在するとき、その空間は時間経過させない
                     if (!LobbyMembersIsIn(player, location)) continue; // ロビーメンバーが存在しない空間は時間経過させない
 
                     while (iteration < maxIteration)
