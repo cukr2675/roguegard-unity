@@ -63,7 +63,8 @@ namespace Roguegard
 
         public Sprite ToSprite(Spanning<RoguePaintColor> palette)
         {
-            var texture = new Texture2D(BoardSize, BoardSize);
+            // WebGL でドットがつぶれないようミップマップを無効化する
+            var texture = new Texture2D(BoardSize, BoardSize, TextureFormat.RGBA32, false);
             SetPixelsTo(texture, palette);
             texture.Apply();
             var sprite = Sprite.Create(texture, rect, new Vector2(.5f, .5f), RoguegardSettings.PixelsPerUnit);
@@ -72,7 +73,8 @@ namespace Roguegard
 
         public void ToSprite(Spanning<RoguePaintColor> palette, Vector2 upperPivot, Vector2 lowerPivot, out Sprite upperSprite, out Sprite lowerSprite)
         {
-            var texture = new Texture2D(BoardSize, BoardSize);
+            // WebGL でドットがつぶれないようミップマップを無効化する
+            var texture = new Texture2D(BoardSize, BoardSize, TextureFormat.RGBA32, false);
             texture.filterMode = FilterMode.Point;
             SetPixelsTo(texture, palette);
             texture.Apply();
