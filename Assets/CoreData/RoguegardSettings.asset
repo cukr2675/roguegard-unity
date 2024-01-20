@@ -41,44 +41,11 @@ MonoBehaviour:
   - {r: 0.8745098, g: 0.76862746, b: 0, a: 0.4509804}
   - {r: 0.7058824, g: 0.74509805, b: 0.7490196, a: 0.4509804}
   - {r: 0.9411765, g: 0.99215686, b: 1, a: 0.4509804}
-  _defaultPalette2:
-  - serializedVersion: 2
-    rgba: 0
-  - serializedVersion: 2
-    rgba: 4278255360
-  - serializedVersion: 2
-    rgba: 4286611584
-  - serializedVersion: 2
-    rgba: 4286616422
-  - serializedVersion: 2
-    rgba: 4286611456
-  - serializedVersion: 2
-    rgba: 4290805952
-  - serializedVersion: 2
-    rgba: 4290789536
-  - serializedVersion: 2
-    rgba: 4294901888
-  - serializedVersion: 2
-    rgba: 1930436832
-  - serializedVersion: 2
-    rgba: 1930172584
-  - serializedVersion: 2
-    rgba: 1944068128
-  - serializedVersion: 2
-    rgba: 1938560020
-  - serializedVersion: 2
-    rgba: 1929437439
-  - serializedVersion: 2
-    rgba: 1929430239
-  - serializedVersion: 2
-    rgba: 1941946036
-  - serializedVersion: 2
-    rgba: 1946156528
   _keywordsNotEnqueueMessageRule:
   - {fileID: 11400000, guid: 4c78cdb33b96ec84e92eca381628fb79, type: 2}
   - {fileID: 11400000, guid: 9166be26e3d3f9c4b8776f5130a0ca15, type: 2}
   - {fileID: 11400000, guid: 06ed3f2b7969a62409ee0a15f7c3fb6a, type: 2}
-  _pixelPerUnit: 32
+  _pixelsPerUnit: 32
   _boneSpriteBaseColor: {r: 1, g: 1, b: 1, a: 1}
   _lightRatio: 0.972549
   _defaultSaveFileName: Data.gard

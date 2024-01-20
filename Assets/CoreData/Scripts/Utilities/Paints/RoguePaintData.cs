@@ -14,7 +14,7 @@ namespace Roguegard
 
         private static readonly RectInt rectInt = new RectInt(0, 0, BoardSize, BoardSize);
         private static readonly Rect rect = new Rect(0, 0, BoardSize, BoardSize);
-        private static Color32[] pixels;
+        private static Color[] pixels;
 
         public RoguePaintData()
         {
@@ -45,9 +45,9 @@ namespace Roguegard
 
         public void SetPixelsTo(Texture2D texture, Spanning<RoguePaintColor> palette)
         {
-            if (pixels == null || pixels.Length < texture.width * texture.height)
+            if (pixels == null || pixels.Length != texture.width * texture.height)
             {
-                pixels = new Color32[texture.width * texture.height];
+                pixels = new Color[texture.width * texture.height];
             }
 
             for (int y = 0; y < texture.height; y++)
@@ -58,7 +58,7 @@ namespace Roguegard
                     pixels[x + y * texture.width] = palette[colorIndex].ToColor();
                 }
             }
-            texture.SetPixels32(pixels);
+            texture.SetPixels(pixels);
         }
 
         public Sprite ToSprite(Spanning<RoguePaintColor> palette)
