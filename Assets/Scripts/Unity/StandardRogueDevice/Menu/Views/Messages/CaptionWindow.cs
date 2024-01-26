@@ -14,6 +14,10 @@ namespace RoguegardUnity
 
         public void ShowCaption(string text)
         {
+            if (text.StartsWith(':') && !StandardRogueDeviceUtility.TryLocalize(text, out text))
+            {
+                text = "";
+            }
             _text.SetText(text);
             Show(true);
         }
