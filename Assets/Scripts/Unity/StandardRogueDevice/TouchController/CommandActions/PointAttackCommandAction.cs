@@ -65,7 +65,7 @@ namespace RoguegardUnity
             if (self.Location == null || self.Location.Space.Tilemap == null) return null;
 
             var normalAttack = AttackUtility.GetNormalAttackSkill(self);
-            var predicator = normalAttack?.Target?.GetPredicator(self, 0f, null);
+            using var predicator = normalAttack?.Target?.GetPredicator(self, 0f, null);
             if (predicator != null)
             {
                 normalAttack.Range?.Predicate(predicator, self, 0f, null, self.Position + self.Main.Stats.Direction.Forward);

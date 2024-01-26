@@ -41,7 +41,7 @@ namespace Roguegard.CharacterCreation
                 StatsEffectedValues.GetATK(self, damage);
                 damage.MainValue += -damage.BaseMainValue + 2;
 
-                var value = AffectableValue.Get();
+                using var value = AffectableValue.Get();
                 value.Initialize(DungeonInfo.GetLocationVisibleRadius(self));
                 ValueEffectState.AffectValue(StdKw.View, value, self);
                 var visibleRadius = value.MainValue;
