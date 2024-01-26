@@ -17,12 +17,10 @@ MonoBehaviour:
   _color: {r: 1, g: 1, b: 1, a: 1}
   _caption: 
   _details:
-    script: {fileID: 0}
-    name: None (IRogueDetails)
-    isValidated: 1
+    _script: {fileID: 0}
     _ref:
       rid: -2
-  _order: -3
+  _order: -5
   references:
     version: 2
     RefIds:
