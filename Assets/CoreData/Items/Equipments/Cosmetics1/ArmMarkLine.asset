@@ -111,7 +111,7 @@ MonoBehaviour:
       _items: []
     _isCosmetic: 1
     _equipParts:
-    - {fileID: 11400000, guid: a9b106ec03139934fa761fa7f6484de4, type: 2}
+    - {fileID: 11400000, guid: 477e575ba17b0dd4eb9bab0a3d571fe8, type: 2}
     _canStackWhileEquipped: 0
     _boneSpriteTable:
       _items:
@@ -134,7 +134,7 @@ MonoBehaviour:
           _color: {r: 1, g: 1, b: 1, a: 0.7529412}
     _eyeDropBoneName: {fileID: 0}
     _overridesBoneSpriteEffectOrder: 0
-    _boneSpriteEffectOrder: 4
+    _boneSpriteEffectOrder: -6
     _beEquipped:
       _script: {fileID: 0}
       _ref:
