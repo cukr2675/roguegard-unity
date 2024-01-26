@@ -29,6 +29,8 @@ namespace RoguegardUnity
 
         public bool FastForward => Player.Main.Stats.Nutrition >= 1 && touchController.FastForward;
 
+        internal bool CantSave => LobbyMemberList.GetMemberInfo(Player).SavePoint == dummySavePoint;
+
         public void Initialize(
             string name,
             RogueSpriteRendererPool spriteRendererPool,
@@ -113,6 +115,14 @@ namespace RoguegardUnity
             // 前回セーブからの経過時間でターン経過
             if (data.SaveDateTime != null)
             {
+                // ターン経過前に視点をプレイヤーへ移動する
+                var tempSubject = Subject;
+                if (tempSubject != Player)
+                {
+                    Subject = Player;
+                    touchController.MenuOpen(Player, true);
+                }
+
                 var loadDateTime = System.DateTime.UtcNow;
                 var relationalDateTime = loadDateTime - System.DateTime.Parse(data.SaveDateTime);
                 var seconds = (int)relationalDateTime.TotalSeconds;
@@ -128,14 +138,25 @@ namespace RoguegardUnity
 
                 // ダミーのセーブポイントを設定して入力待機ループを素通りする
                 memberInfo.SavePoint = dummySavePoint;
-                var coroutine = TickEnumerator.UpdateTurns(Player, Subject, turns, maxTurns * 1000, false);
+                var stopwatch = new System.Diagnostics.Stopwatch();
+                stopwatch.Start();
+                var coroutine = TickEnumerator.UpdateTurns(Player, Subject, turns, maxTurns * 1000, false, 1000);
                 while (coroutine.MoveNext() && !synchronizeMenu.Interrupt)
                 {
                     synchronizeMenu.Progress = (float)coroutine.Current / turns;
                     yield return null;
                 }
+                stopwatch.Stop();
+                Debug.Log($"Synchronization time: {stopwatch.ElapsedMilliseconds}ms");
                 synchronizeMenu.Progress = 1f;
                 memberInfo.SavePoint = null;
+
+                // ターン経過後に視点を被写体へ戻す
+                if (tempSubject != Player)
+                {
+                    Subject = tempSubject;
+                    touchController.MenuOpen(tempSubject, true);
+                }
                 UpdateCharacters();
             }
 

@@ -22,6 +22,8 @@ namespace RoguegardUnity
         {
             if (keyword == DeviceKw.AutoSave)
             {
+                if (componentManager.CantSave) return true;
+
                 // オートセーブ
                 StandardRogueDeviceSave.GetNewAutoSavePath(
                     "AutoSave.gard", path => SaveDelay(null, path, true));
@@ -29,6 +31,8 @@ namespace RoguegardUnity
             }
             if (keyword == DeviceKw.SaveGame)
             {
+                if (componentManager.CantSave) return true;
+
                 // 名前を付けてセーブ
                 touchController.OpenSelectFile(
                     SelectFileMenu.Type.Write,
