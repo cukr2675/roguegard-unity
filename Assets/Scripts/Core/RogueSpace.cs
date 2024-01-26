@@ -382,19 +382,7 @@ namespace Roguegard
 
         public void Sort(Spanning<RogueObj> sorted)
         {
-            if (sorted.Count != _objs.Count) throw new System.ArgumentException("要素数が一致しません。");
-
-            // 例外を投げるときソートをキャンセルしたいので、一通り例外判定してからソートする
-            for (int i = 0; i < sorted.Count; i++)
-            {
-                if (!sorted.Contains(_objs[i])) throw new System.ArgumentException($"{nameof(sorted)} が要素を網羅していません。");
-            }
-
-            _objs.Clear();
-            for (int i = 0; i < sorted.Count; i++)
-            {
-                _objs.Add(sorted[i]);
-            }
+            _objs.Sort(sorted);
         }
 
         void IRogueTilemapView.GetTile(Vector2Int position, out bool visible, out IRogueTile tile, out RogueObj tileObj)

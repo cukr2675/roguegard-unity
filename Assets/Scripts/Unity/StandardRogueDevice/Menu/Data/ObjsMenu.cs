@@ -153,12 +153,15 @@ namespace RoguegardUnity
                 prevPosition = root.Get(DeviceKw.MenuScroll).GetPosition();
                 prevTargetObj = arg.TargetObj;
 
-                // ソートしたあと開きなおす
                 if (sortTable == null)
                 {
                     sortTable = new CategorizedSortTable(RoguegardSettings.ObjCommandTable.Categories);
                 }
-                sortTable.Sort(arg.TargetObj);
+
+                // ソートしたあと開きなおす
+                var storageObjs = ChestInfo.GetStorage(arg.TargetObj);
+                if (storageObjs != null) { sortTable.Sort(arg.TargetObj); }
+                else { sortTable.Sort(arg.TargetObj); }
                 root.Reopen(self, user, arg, arg);
                 root.Back();
             }
@@ -212,8 +215,6 @@ namespace RoguegardUnity
         private class PutIntoChestMenu : ScrollMenu
         {
             protected override string MenuName => ":Put in what?";
-
-            protected override bool SortIsEnabled => true;
 
             protected override Spanning<RogueObj> GetObjs(RogueObj self, RogueObj targetObj)
             {

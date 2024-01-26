@@ -87,6 +87,23 @@ namespace Roguegard
             objs.Sort(comparer);
         }
 
+        public void Sort(Spanning<RogueObj> sorted)
+        {
+            if (sorted.Count != Count) throw new System.ArgumentException("要素数が一致しません。");
+
+            // 例外を投げるときソートをキャンセルしたいので、一通り例外判定してからソートする
+            for (int i = 0; i < sorted.Count; i++)
+            {
+                if (!sorted.Contains(objs[i])) throw new System.ArgumentException($"{nameof(sorted)} が要素を網羅していません。");
+            }
+
+            objs.Clear();
+            for (int i = 0; i < sorted.Count; i++)
+            {
+                objs.Add(sorted[i]);
+            }
+        }
+
         public bool Stack(RogueObj item, Vector2Int position, int maxStack)
         {
             var result = false;
