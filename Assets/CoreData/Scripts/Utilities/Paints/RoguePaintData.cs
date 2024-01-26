@@ -12,9 +12,9 @@ namespace Roguegard
         public static int BoardSize => 32;
         public static int PaletteSize => 16;
 
-        private static readonly RectInt rectInt = new RectInt(0, 0, BoardSize, BoardSize);
+        public static RectInt RectInt => new RectInt(0, 0, BoardSize, BoardSize);
         private static readonly Rect rect = new Rect(0, 0, BoardSize, BoardSize);
-        private static Color[] pixels;
+        private static Color32[] pixels;
 
         public RoguePaintData()
         {
@@ -30,14 +30,14 @@ namespace Roguegard
 
         public int GetPixel(Vector2Int position)
         {
-            if (!rectInt.Contains(position)) throw new System.ArgumentOutOfRangeException(nameof(position));
+            if (!RectInt.Contains(position)) throw new System.ArgumentOutOfRangeException(nameof(position));
 
             return board[position.y][position.x];
         }
 
         public void SetPixel(Vector2Int position, int colorIndex)
         {
-            if (!rectInt.Contains(position)) throw new System.ArgumentOutOfRangeException(nameof(position));
+            if (!RectInt.Contains(position)) throw new System.ArgumentOutOfRangeException(nameof(position));
             if (colorIndex < 0 || PaletteSize <= colorIndex) throw new System.ArgumentOutOfRangeException(nameof(colorIndex));
 
             board[position.y][position.x] = colorIndex;
@@ -47,7 +47,7 @@ namespace Roguegard
         {
             if (pixels == null || pixels.Length != texture.width * texture.height)
             {
-                pixels = new Color[texture.width * texture.height];
+                pixels = new Color32[texture.width * texture.height];
             }
 
             for (int y = 0; y < texture.height; y++)
@@ -58,7 +58,7 @@ namespace Roguegard
                     pixels[x + y * texture.width] = palette[colorIndex].ToColor();
                 }
             }
-            texture.SetPixels(pixels);
+            texture.SetPixels32(pixels);
         }
 
         public Sprite ToSprite(Spanning<RoguePaintColor> palette)
@@ -71,17 +71,17 @@ namespace Roguegard
             return sprite;
         }
 
-        public void ToSprite(Spanning<RoguePaintColor> palette, Vector2 upperPivot, Vector2 lowerPivot, out Sprite upperSprite, out Sprite lowerSprite)
+        public void ToSprite(
+            Spanning<RoguePaintColor> palette, int splitY, Vector2 upperPivot, Vector2 lowerPivot, out Sprite upperSprite, out Sprite lowerSprite)
         {
             // WebGL でドットがつぶれないようミップマップを無効化する
             var texture = new Texture2D(BoardSize, BoardSize, TextureFormat.RGBA32, false);
             texture.filterMode = FilterMode.Point;
             SetPixelsTo(texture, palette);
             texture.Apply();
-            var splitPosition = BoardSize / 2;
-            var upperRect = new Rect(0f, splitPosition, BoardSize, BoardSize - splitPosition);
+            var upperRect = new Rect(0f, splitY, BoardSize, BoardSize - splitY);
             upperSprite = Sprite.Create(texture, upperRect, upperPivot, RoguegardSettings.PixelsPerUnit);
-            var lowerRect = new Rect(0f, 0f, BoardSize, splitPosition);
+            var lowerRect = new Rect(0f, 0f, BoardSize, splitY);
             lowerSprite = Sprite.Create(texture, lowerRect, lowerPivot, RoguegardSettings.PixelsPerUnit);
         }
     }

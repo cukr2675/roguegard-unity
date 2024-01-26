@@ -28,12 +28,13 @@ namespace Roguegard
         }
 
         public void ToBoneSprite(
-            Spanning<RoguePaintColor> palette, Vector2 upperPivot, Vector2 lowerPivot, out BoneSprite upperBoneSprite, out BoneSprite lowerBoneSprite)
+            Spanning<RoguePaintColor> palette, int splitY, Vector2 upperPivot, Vector2 lowerPivot,
+            out BoneSprite upperBoneSprite, out BoneSprite lowerBoneSprite)
         {
-            NormalFront.ToSprite(palette, upperPivot, lowerPivot, out var upperNormalFront, out var lowerNormalFront);
-            NormalRear.ToSprite(palette, upperPivot, lowerPivot, out var upperNormalRear, out var lowerNormalRear);
-            BackFront.ToSprite(palette, upperPivot, lowerPivot, out var upperBackFront, out var lowerBackFront);
-            BackRear.ToSprite(palette, upperPivot, lowerPivot, out var upperBackRear, out var lowerBackRear);
+            NormalFront.ToSprite(palette, splitY, upperPivot, lowerPivot, out var upperNormalFront, out var lowerNormalFront);
+            NormalRear.ToSprite(palette, splitY, upperPivot, lowerPivot, out var upperNormalRear, out var lowerNormalRear);
+            BackFront.ToSprite(palette, splitY, upperPivot, lowerPivot, out var upperBackFront, out var lowerBackFront);
+            BackRear.ToSprite(palette, splitY, upperPivot, lowerPivot, out var upperBackRear, out var lowerBackRear);
             upperBoneSprite = new BoneSprite(upperNormalFront, upperNormalRear, upperBackFront, upperBackRear);
             lowerBoneSprite = new BoneSprite(lowerNormalFront, lowerNormalRear, lowerBackFront, lowerBackRear);
         }

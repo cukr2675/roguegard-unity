@@ -88,6 +88,7 @@ namespace Roguegard
                         new BSlider(),
                         new ASlider(),
                         new ActionModelsMenuChoice("ëïîıïîà ", EquipParts),
+                        new OrderOption(),
                         new ActionModelsMenuChoice("å©ÇΩñ⁄Çï“èW", Appearance),
                     };
                 }
@@ -302,6 +303,7 @@ namespace Roguegard
                         EquipKw.Gloves,
                         EquipKw.Socks,
                         EquipKw.Innerwear,
+                        null
                     };
                 }
 
@@ -311,23 +313,54 @@ namespace Roguegard
 
             public string GetName(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
+                if (model == null) return "ÇªÇÃëº";
                 return ((IKeyword)model).Name;
             }
 
             public void Activate(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Cancel);
+                root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
 
-                var part = (IKeyword)model;
                 var data = (SewedEquipmentData)arg.Other;
-                data.EquipParts = new[] { part };
-
-                if (part is EquipKeywordData keyword)
+                if (model == null)
                 {
-                    data.BoneSpriteEffectOrder = keyword.Order;
+                    data.EquipParts = Spanning<IKeyword>.Empty;
+                }
+                else
+                {
+                    var part = (IKeyword)model;
+                    data.EquipParts = new[] { part };
+
+                    if (part is EquipKeywordData keyword)
+                    {
+                        data.BoneSpriteEffectOrder = keyword.Order;
+                    }
                 }
 
                 root.Back();
+            }
+        }
+
+        private class OrderOption : IModelsMenuOptionText
+        {
+            public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            {
+                return "èáèò";
+            }
+
+            public string GetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            {
+                var data = (SewedEquipmentData)arg.Other;
+                return data.BoneSpriteEffectOrder.ToString();
+            }
+
+            public void SetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg, string value)
+            {
+                var data = (SewedEquipmentData)arg.Other;
+                if (float.TryParse(value, out var order))
+                {
+                    data.BoneSpriteEffectOrder = order;
+                }
             }
         }
 

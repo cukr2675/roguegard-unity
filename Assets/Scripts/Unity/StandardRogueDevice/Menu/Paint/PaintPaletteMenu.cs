@@ -10,7 +10,7 @@ namespace RoguegardUnity
 {
     internal class PaintPaletteMenu : IModelsMenu, IModelsMenuItemController
     {
-        private static readonly object[] models = Enumerable.Range(0, 16).Cast<object>().ToArray();
+        private static readonly object[] models = Enumerable.Range(0, 16).Select(x => new Choice() { colorIndex = x }).ToArray();
         private static readonly NextMenu nextMenu = new NextMenu();
 
         public void OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
@@ -23,11 +23,8 @@ namespace RoguegardUnity
 
         public string GetName(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         {
-            var colorIndex = (int)model;
-            var data = (SewedEquipmentData)arg.Other;
-            var color = data.Palette[colorIndex];
-            var colorCode = string.Format("{0:X2}{1:X2}{2:X2}{3:X2}", color.ROrShade, color.GOrSaturation, color.BOrValue, color.ByteA);
-            return $"<#{colorCode}>■</color> カラー{colorIndex}";
+            var choice = (Choice)model;
+            return $"カラー{choice.colorIndex}";
         }
 
         public void Activate(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
@@ -35,8 +32,20 @@ namespace RoguegardUnity
             root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
 
             var data = (SewedEquipmentData)arg.Other;
-            var colorIndex = (int)model;
-            root.OpenMenu(nextMenu, null, null, new(other: data, count: colorIndex), arg);
+            var choice = (Choice)model;
+            root.OpenMenu(nextMenu, null, null, new(other: data, count: choice.colorIndex), arg);
+        }
+
+        private class Choice : IModelsMenuIcon
+        {
+            public int colorIndex;
+
+            public void GetIcon(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg, out Sprite sprite, out Color color)
+            {
+                var data = (SewedEquipmentData)arg.Other;
+                sprite = data.Palette[colorIndex].ToIcon();
+                color = data.MainColor;
+            }
         }
 
         private class NextMenu : IModelsMenu

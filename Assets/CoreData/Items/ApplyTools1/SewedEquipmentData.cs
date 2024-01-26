@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using System.Linq;
+using Roguegard.CharacterCreation;
 
 namespace Roguegard
 {
@@ -66,6 +67,18 @@ namespace Roguegard
             {
                 _palette[i] = new RoguePaintColor(data._palette[i]);
             }
+        }
+
+        public void Affect(AppearanceBoneSpriteTable boneSpriteTable, Color color)
+        {
+            if (!boneSpriteTable.TryGetNewEquipmentTable(_equipParts, BoneSpriteEffectOrder, out var table))
+            {
+                Debug.LogWarning("d•¡‚µ‚½‘•”õ•”ˆÊ‚ÌŒ©‚½–Ú‚ª‘¶İ‚µ‚Ü‚·B");
+                return;
+            }
+
+            var baseColor = MainColor;
+            Items.GetTable(baseColor, _palette).ColoredAddTo(table, baseColor, color);
         }
     }
 }

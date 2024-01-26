@@ -123,6 +123,14 @@ namespace RoguegardUnity
                         _weightText.text = file.LastModified.ToString();
                         _weightText.fontSize = 48;
                     }
+                    if (source is IModelsMenuIcon icon)
+                    {
+                        icon.GetIcon(view.Root, view.Self, view.User, view.Arg, out var sprite, out var color);
+                        _icon.sprite = sprite;
+                        _icon.color = color;
+                        _icon.SetNativeSize();
+                        _icon.enabled = true;
+                    }
                 }
             }
         }

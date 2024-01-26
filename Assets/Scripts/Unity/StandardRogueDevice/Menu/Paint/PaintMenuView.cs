@@ -16,7 +16,10 @@ namespace RoguegardUnity
         [SerializeField] private PaintButton _button = null;
         [SerializeField] private RectTransform _paletteContent = null;
         [SerializeField] private ModelsMenuViewItemButton _paletteItemPrefab = null;
-        [SerializeField] private Image _cursor = null;
+        [SerializeField] private RectTransform _cursor = null;
+        [SerializeField] private Image _splitLine = null;
+        [SerializeField] private Image _upperPivot = null;
+        [SerializeField] private Image _lowerPivot = null;
 
         public override CanvasGroup CanvasGroup => _canvasGroup;
 
@@ -25,9 +28,10 @@ namespace RoguegardUnity
         private SewedEquipmentData data;
         private Vector2 pressPenPosition;
         private Vector2 penPosition;
-        PaintSelector selector;
+        private PaintSelector selector;
         private int colorIndex;
         private ModelsMenuViewItemButton exitButton;
+        private ModelsMenuViewItemButton changeButton;
 
         private static readonly PaintPaletteMenu paintPaletteMenu = new PaintPaletteMenu();
 
@@ -40,8 +44,9 @@ namespace RoguegardUnity
 
             paletteItems = new ModelsMenuViewItemButton[16];
             var paletteItemSize = _paletteContent.rect.width / 2f;
-            for (int y = 0; y < 3; y++)
+            for (int y = 0; y < 4; y++)
             {
+                // 部位変更ボタン
                 for (int x = 0; x < 2; x++)
                 {
                     var boneItem = Instantiate(_paletteItemPrefab, _paletteContent);
@@ -52,33 +57,61 @@ namespace RoguegardUnity
                     boneItem.SetItem(ChoicesModelsMenuItemController.Instance, new BoneChoice() { parent = this, selector = selector });
                 }
             }
+            for (int y = 0; y < 2; y++)
+            {
+                // 分割線移動ボタン
+                var splitItem = Instantiate(_paletteItemPrefab, _paletteContent);
+                splitItem.RectTransform.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, (4 + y) * paletteItemSize, paletteItemSize);
+                splitItem.RectTransform.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Left, 0 * paletteItemSize, paletteItemSize);
+                splitItem.Initialize(this);
+                splitItem.SetItem(ChoicesModelsMenuItemController.Instance, new SplitChoice() { parent = this, up = y == 0 });
+            }
+            for (int y = 0; y < 2; y++)
+            {
+                // 間隔変更ボタン
+                var distanceItem = Instantiate(_paletteItemPrefab, _paletteContent);
+                distanceItem.RectTransform.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, (4 + y) * paletteItemSize, paletteItemSize);
+                distanceItem.RectTransform.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Left, 1 * paletteItemSize, paletteItemSize);
+                distanceItem.Initialize(this);
+                distanceItem.SetItem(ChoicesModelsMenuItemController.Instance, new PivotChoice() { parent = this, up = y == 0 });
+            }
+            {
+                // 上書き切り替えボタン
+                changeButton = Instantiate(_paletteItemPrefab, _paletteContent);
+                changeButton.RectTransform.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, 6 * paletteItemSize, paletteItemSize);
+                changeButton.RectTransform.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Left, 0 * paletteItemSize, paletteItemSize * 2f);
+                changeButton.Initialize(this);
+            }
             for (int y = 0; y < 8; y++)
             {
+                // パレット
                 for (int x = 0; x < 2; x++)
                 {
                     var index = x + y * 2;
                     var paletteItem = Instantiate(_paletteItemPrefab, _paletteContent);
-                    paletteItem.RectTransform.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, (3 + y) * paletteItemSize, paletteItemSize);
+                    paletteItem.RectTransform.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, (7 + y) * paletteItemSize, paletteItemSize);
                     paletteItem.RectTransform.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Left, x * paletteItemSize, paletteItemSize);
                     paletteItem.Initialize(this);
                     paletteItems[index] = paletteItem;
                 }
             }
             {
+                // パレット変更
                 var paletteButton = Instantiate(_paletteItemPrefab, _paletteContent);
-                paletteButton.RectTransform.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, 12 * paletteItemSize, paletteItemSize);
-                paletteButton.RectTransform.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Left, 0 * paletteItemSize, paletteItemSize);
+                paletteButton.RectTransform.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, 16 * paletteItemSize, paletteItemSize);
+                paletteButton.RectTransform.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Left, 1 * paletteItemSize, paletteItemSize);
                 paletteButton.Initialize(this);
                 paletteButton.SetItem(ChoicesModelsMenuItemController.Instance, new ActionModelsMenuChoice("パレット", Palette));
             }
             {
+                // 終了
                 exitButton = Instantiate(_paletteItemPrefab, _paletteContent);
-                exitButton.RectTransform.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, 12 * paletteItemSize, paletteItemSize);
-                exitButton.RectTransform.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Left, 1 * paletteItemSize, paletteItemSize);
+                exitButton.RectTransform.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, 16 * paletteItemSize, paletteItemSize);
+                exitButton.RectTransform.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Left, 0 * paletteItemSize, paletteItemSize);
                 exitButton.Initialize(this);
             }
 
-            _paletteContent.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, 0f, paletteItemSize * 13f);
+            _paletteContent.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, 0f, paletteItemSize * 17f);
             _paletteContent.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Left, 0f, paletteItemSize * 2f);
         }
 
@@ -102,7 +135,8 @@ namespace RoguegardUnity
             }
             exitButton.SetItem(ChoicesModelsMenuItemController.Instance, models[0]);
 
-            SetBoneIndex(new PaintSelector(PaintSelector.Bone.Body, PaintSelector.Pose.NormalFront));
+            selector = new PaintSelector(PaintSelector.Bone.Body, PaintSelector.Pose.NormalFront);
+            UpdateBoardTexture();
             MenuController.Show(_canvasGroup, true);
         }
 
@@ -120,8 +154,7 @@ namespace RoguegardUnity
         {
             if (!_canvasGroup.interactable) return;
 
-            _cursor.rectTransform.anchorMin = penPosition / RoguePaintData.BoardSize;
-            _cursor.rectTransform.anchorMax = penPosition / RoguePaintData.BoardSize;
+            _cursor.anchorMin = _cursor.anchorMax = penPosition / RoguePaintData.BoardSize;
 
             if (_button.IsDown || Input.GetKey(KeyCode.Space))
             {
@@ -137,16 +170,34 @@ namespace RoguegardUnity
             }
         }
 
-        private void SetBoneIndex(PaintSelector selector)
-        {
-            this.selector = selector;
-            UpdateBoardTexture();
-        }
-
         private void UpdateBoardTexture()
         {
+            var item = selector.GetItem(data.Items);
             var paintData = selector.Get(data.Items);
+
+            // ペイント内容を表示
             paintData.SetPixelsTo(boardTexture, data.Palette);
+
+            if (selector.SelectsSplitBone)
+            {
+                // 分割線を表示
+                _splitLine.rectTransform.anchorMin = new Vector2(0f, (float)item.SplitY / RoguePaintData.BoardSize);
+                _splitLine.rectTransform.anchorMax = new Vector2(1f, (float)item.SplitY / RoguePaintData.BoardSize);
+
+                // 中心点を表示
+                _upperPivot.rectTransform.anchorMin = _upperPivot.rectTransform.anchorMax = item.GetUpperPivot();
+                _lowerPivot.rectTransform.anchorMin = _lowerPivot.rectTransform.anchorMax = item.GetLowerPivot();
+
+                _splitLine.enabled = _upperPivot.enabled = _lowerPivot.enabled = true;
+            }
+            else
+            {
+                _splitLine.enabled = _upperPivot.enabled = _lowerPivot.enabled = false;
+            }
+
+            // 上書き切り替えを更新
+            changeButton.SetItem(ChoicesModelsMenuItemController.Instance, new ChangeChoice() { parent = this });
+
             _board.color = data.MainColor;
             boardTexture.Apply();
         }
@@ -184,25 +235,99 @@ namespace RoguegardUnity
 
             public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                parent.SetBoneIndex(selector);
+                parent.selector = selector;
+                parent.UpdateBoardTexture();
             }
         }
 
-        private class PaletteChoice : IModelsMenuChoice
+        private class SplitChoice : IModelsMenuChoice
+        {
+            public PaintMenuView parent;
+            public bool up;
+
+            public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            {
+                if (up) return "分割▲";
+                else return "分割▼";
+            }
+
+            public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            {
+                var item = parent.selector.GetItem(parent.data.Items);
+                if (up) { item.SplitY++; }
+                else { item.SplitY--; }
+                item.SplitY = Mathf.Clamp(item.SplitY, 1, 31);
+                parent.UpdateBoardTexture();
+            }
+        }
+
+        private class PivotChoice : IModelsMenuChoice
+        {
+            public PaintMenuView parent;
+            public bool up;
+
+            public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            {
+                if (up) return "間隔＋";
+                else return "間隔－";
+            }
+
+            public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            {
+                var item = parent.selector.GetItem(parent.data.Items);
+                if (up) { item.PivotDistance++; }
+                else { item.PivotDistance--; }
+                item.PivotDistance = Mathf.Clamp(item.PivotDistance, 1, 31);
+                parent.UpdateBoardTexture();
+            }
+        }
+
+        private class ChangeChoice : IModelsMenuChoice
+        {
+            public PaintMenuView parent;
+
+            public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            {
+                var item = parent.selector.GetItem(parent.data.Items);
+                return $"切替: {(item.EquipmentSprite != null ? "装" : "変")}";
+            }
+
+            public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            {
+                var item = parent.selector.GetItem(parent.data.Items);
+                if (item.EquipmentSprite != null)
+                {
+                    item.FirstSprite = item.EquipmentSprite;
+                    item.EquipmentSprite = null;
+                }
+                else
+                {
+                    item.EquipmentSprite = item.FirstSprite;
+                    item.FirstSprite = null;
+                }
+                parent.UpdateBoardTexture();
+            }
+        }
+
+        private class PaletteChoice : IModelsMenuChoice, IModelsMenuIcon
         {
             public PaintMenuView parent;
             public int colorIndex;
 
             public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                var color = parent.data.Palette[colorIndex];
-                var colorCode = string.Format("{0:X2}{1:X2}{2:X2}{3:X2}", color.ROrShade, color.GOrSaturation, color.BOrValue, color.ByteA);
-                return $"<#{colorCode}>■";
+                return null;
             }
 
             public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 parent.colorIndex = colorIndex;
+            }
+
+            public void GetIcon(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg, out Sprite sprite, out Color color)
+            {
+                sprite = parent.data.Palette[colorIndex].ToIcon();
+                color = parent.data.MainColor;
             }
         }
     }

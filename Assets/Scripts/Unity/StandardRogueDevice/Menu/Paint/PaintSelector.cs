@@ -11,6 +11,8 @@ namespace RoguegardUnity
         private readonly Bone bone;
         private readonly Pose pose;
 
+        public bool SelectsSplitBone => bone == Bone.Body || bone == Bone.Arm || bone == Bone.Leg;
+
         public PaintSelector(Bone bone, Pose pose)
         {
             this.bone = bone;
@@ -52,42 +54,24 @@ namespace RoguegardUnity
                     return "‹r:Œã";
                 }
             }
+            if (bone == Bone.Hair)
+            {
+                if (pose == Pose.NormalFront)
+                {
+                    return "”¯:‘O";
+                }
+                if (pose == Pose.BackFront)
+                {
+                    return "”¯:Œã";
+                }
+            }
             return null;
         }
 
         public RoguePaintData Get(SewedEquipmentDataItemTable items)
         {
-            switch (bone)
-            {
-                case Bone.Body:
-                    return Get(items, items.BodyItem);
-                case Bone.Arm:
-                    return Get(items, items.LeftArmItem);
-                case Bone.Leg:
-                    return Get(items, items.LeftLegItem);
-            }
-            throw new RogueException();
-        }
-
-        private RoguePaintData Get(SewedEquipmentDataItemTable items, SewedEquipmentDataItem item)
-        {
-            if (item == null)
-            {
-                switch (bone)
-                {
-                    case Bone.Body:
-                        item = items.BodyItem = new SewedEquipmentDataItem();
-                        break;
-                    case Bone.Arm:
-                        item = items.LeftArmItem = items.RightArmItem = new SewedEquipmentDataItem();
-                        break;
-                    case Bone.Leg:
-                        item = items.LeftLegItem = items.RightLegItem = new SewedEquipmentDataItem();
-                        break;
-                }
-            }
-
-            if (item.EquipmentSprite == null)
+            var item = GetItem(items);
+            if (item.FirstSprite == null && item.EquipmentSprite == null)
             {
                 var frontPaint = new RoguePaintData();
                 var rearPaint = new RoguePaintData();
@@ -97,9 +81,25 @@ namespace RoguegardUnity
             switch (pose)
             {
                 case Pose.NormalFront:
-                    return item.EquipmentSprite.NormalFront;
+                    return (item.FirstSprite ?? item.EquipmentSprite).NormalFront;
                 case Pose.BackFront:
-                    return item.EquipmentSprite.BackFront;
+                    return (item.FirstSprite ?? item.EquipmentSprite).BackFront;
+            }
+            throw new RogueException();
+        }
+
+        public SewedEquipmentDataItem GetItem(SewedEquipmentDataItemTable items)
+        {
+            switch (bone)
+            {
+                case Bone.Body:
+                    return items.BodyItem ??= new SewedEquipmentDataItem();
+                case Bone.Arm:
+                    return items.LeftArmItem = items.RightArmItem ??= new SewedEquipmentDataItem();
+                case Bone.Leg:
+                    return items.LeftLegItem = items.RightLegItem ??= new SewedEquipmentDataItem();
+                case Bone.Hair:
+                    return items.HairItem ??= new SewedEquipmentDataItem();
             }
             throw new RogueException();
         }
@@ -108,7 +108,8 @@ namespace RoguegardUnity
         {
             Body,
             Arm,
-            Leg
+            Leg,
+            Hair
         }
 
         public enum Pose

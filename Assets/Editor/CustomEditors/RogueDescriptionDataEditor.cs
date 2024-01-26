@@ -36,7 +36,7 @@ namespace Roguegard.CharacterCreation.Editor
             }
 
             var preview = new Texture2D(size.x, size.y);
-            var pixels = preview.GetPixels();
+            var pixels = preview.GetPixels32();
             var scale = icon.rect.size / size;
             for (int i = 0; i < pixels.Length; i++)
             {
@@ -44,7 +44,7 @@ namespace Roguegard.CharacterCreation.Editor
                 var position = index * scale;
                 pixels[i] = tempPreview.GetPixel(Mathf.FloorToInt(position.x), Mathf.FloorToInt(position.y));
             }
-            preview.SetPixels(pixels);
+            preview.SetPixels32(pixels);
             preview.Apply();
             return preview;
         }

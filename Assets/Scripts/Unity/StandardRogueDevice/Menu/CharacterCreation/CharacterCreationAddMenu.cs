@@ -114,6 +114,14 @@ namespace RoguegardUnity
                     {
                         models.Add(option);
                     }
+                    if (item?.Main.BaseInfoSet is SewedEquipmentInfoSet &&
+                        item.Main.RogueEffects.Effects.Count <= 1)
+                    {
+                        var objOption = new ObjStartingItemOption();
+                        objOption.Obj = item.Clone();
+                        models.Add(objOption);
+                        continue;
+                    }
                 }
             }
             else if (builder is AlphabetTypeMember alphabetTypeMember)
@@ -166,6 +174,15 @@ namespace RoguegardUnity
                         !models.Contains(option))
                     {
                         models.Add(option);
+                        continue;
+                    }
+                    if (item?.Main.BaseInfoSet is SewedEquipmentInfoSet &&
+                        item.Main.RogueEffects.Effects.Count <= 1)
+                    {
+                        var objOption = new ObjStartingItemOption();
+                        objOption.Obj = item.Clone();
+                        models.Add(objOption);
+                        continue;
                     }
                 }
             }

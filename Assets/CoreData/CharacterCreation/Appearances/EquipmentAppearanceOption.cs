@@ -22,9 +22,17 @@ namespace Roguegard.CharacterCreation
             IReadOnlyAppearance appearance, ICharacterCreationData characterCreationData)
         {
             var member = SingleItemMember.GetMember(appearance);
-            if (!(member.ItemOption is EquipmentCreationData itemData)) return;
-
-            itemData.Affect(boneSpriteTable, appearance.Color);
+            if (member.ItemOption is EquipmentCreationData itemData)
+            {
+                itemData.Affect(boneSpriteTable, appearance.Color);
+            }
+            else if (
+                member.ItemOption is ObjStartingItemOption objData &&
+                objData.InfoSet is SewedEquipmentInfoSet sewedInfoSet)
+            {
+                var data = sewedInfoSet.GetDataClone();
+                data.Affect(boneSpriteTable, appearance.Color);
+            }
         }
     }
 }

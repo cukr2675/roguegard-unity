@@ -70,5 +70,24 @@ namespace Roguegard
             instance.IsShift = color.a >= .5f;
             return instance;
         }
+
+        public Sprite ToIcon()
+        {
+            var pixels = new Color32[32 * 32];
+            var colorA = ToColor();
+            var colorB = IsShift ? Color.gray : colorA;
+            for (int y = 0; y < 32; y++)
+            {
+                for (int x = 0; x < 32; x++)
+                {
+                    pixels[x + (31 - y) * 32] = (x + y >= 16) ? colorA : colorB;
+                }
+            }
+
+            var texture = new Texture2D(32, 32, TextureFormat.RGBA32, false);
+            texture.SetPixels32(pixels);
+            texture.Apply();
+            return Sprite.Create(texture, new Rect(0f, 0f, 32f, 32f), new Vector2(.5f, .5f), RoguegardSettings.PixelsPerUnit);
+        }
     }
 }
