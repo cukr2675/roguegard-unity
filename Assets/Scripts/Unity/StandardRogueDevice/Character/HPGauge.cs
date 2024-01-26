@@ -70,7 +70,15 @@ namespace RoguegardUnity
 
             this.hp = hp;
             this.maxHP = maxHP;
-            _gauge.rectTransform.anchorMax = new Vector2((float)hp / maxHP, 1f);
+            if (maxHP == 0f)
+            {
+                // ゼロ除算対策
+                _gauge.rectTransform.anchorMax = new Vector2(0f, 1f);
+            }
+            else
+            {
+                _gauge.rectTransform.anchorMax = new Vector2((float)hp / maxHP, 1f);
+            }
 
             if (hp < 10000)
             {
