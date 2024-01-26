@@ -54,8 +54,16 @@ namespace Roguegard
                 // 探索開始前に全回復する
                 player.Main.Stats.Reset(player);
 
-                // 最初は上向き
-                player.Main.Stats.Direction = RogueDirection.Up;
+                if (player == RogueDevice.Primary.Player)
+                {
+                    // プレイヤーキャラなら最初は上向き
+                    player.Main.Stats.Direction = RogueDirection.Up;
+                }
+                else
+                {
+                    // それ以外は下向き
+                    player.Main.Stats.Direction = RogueDirection.Down;
+                }
 
                 return true;
             }
