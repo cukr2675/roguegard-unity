@@ -73,7 +73,7 @@ namespace Roguegard
 
         RogueObjUpdaterContinueType IRogueObjUpdater.UpdateObj(RogueObj self, float activationDepth, ref int sectionIndex)
         {
-            if (self.Location.Space.Tilemap == null) return default;
+            if (self.Location?.Space.Tilemap == null) return default;
 
             RogueObjUpdaterContinueType result;
             if (sectionIndex == 0)
