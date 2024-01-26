@@ -104,11 +104,15 @@ namespace Roguegard.CharacterCreation
             public void AffectSprite(RogueObj self, IBoneNode boneRoot, AffectableBoneSpriteTable boneSpriteTable)
             {
                 // 同一部位または Innerwear に何か装備されていたらエフェクト無効化
-                for (int i = 0; i < _equipParts.Length; i++)
+                // （部位がゼロのエフェクトは無視して表示）
+                if (_equipParts.Length >= 1)
                 {
-                    if (Any(self, _equipParts[i])) return;
+                    for (int i = 0; i < _equipParts.Length; i++)
+                    {
+                        if (Any(self, _equipParts[i])) return;
+                    }
+                    if (Any(self, RoguegardCharacterCreationSettings.EquipPartOfInnerwear)) return;
                 }
-                if (Any(self, RoguegardCharacterCreationSettings.EquipPartOfInnerwear)) return;
 
                 Table.AddTo(boneSpriteTable);
             }
