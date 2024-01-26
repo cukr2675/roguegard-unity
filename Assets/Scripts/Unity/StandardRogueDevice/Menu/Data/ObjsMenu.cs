@@ -142,7 +142,7 @@ namespace RoguegardUnity
                 // 選択したアイテムの情報と選択肢を表示する
                 var obj = (RogueObj)model;
                 caption.ShowCaption(obj.Main.InfoSet);
-                root.OpenMenuAsDialog(commandMenu, self, null, new(tool: obj), arg);
+                root.OpenMenuAsDialog(commandMenu, self, null, new(targetObj: arg.TargetObj, tool: obj), arg);
             }
 
             public void Sort(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
@@ -217,7 +217,7 @@ namespace RoguegardUnity
 
             protected override Spanning<RogueObj> GetObjs(RogueObj self, RogueObj targetObj)
             {
-                return targetObj.Space.Objs;
+                return self.Space.Objs;
             }
         }
 
