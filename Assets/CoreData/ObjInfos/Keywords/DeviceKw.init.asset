@@ -43,6 +43,7 @@ MonoBehaviour:
   _menuSummary: {fileID: 11400000, guid: a08778e4b7acd3448a91a1d9a0ba04c9, type: 2}
   _menuTalk: {fileID: 11400000, guid: 8369900199d753e4d8cbd268adea188d, type: 2}
   _menuTalkChoices: {fileID: 11400000, guid: d5045b1bbbb1da842b020d224b0b2826, type: 2}
+  _menuTextEditor: {fileID: 11400000, guid: d6976b1e69c0d7d4ebfae0d68fd9b628, type: 2}
   _menuThumbnail: {fileID: 11400000, guid: e4048f7b3466ae34eb44495f45e10458, type: 2}
   _nqueueSEAndWait: {fileID: 11400000, guid: 5bde0acd7e0a32d47b74cbf7e7b8b05b, type: 2}
   _saveGame: {fileID: 11400000, guid: 0c7221eb87b600c46b34d81133dbf6ac, type: 2}

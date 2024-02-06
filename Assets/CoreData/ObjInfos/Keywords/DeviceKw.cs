@@ -101,6 +101,9 @@ namespace Roguegard
         [SerializeField] private KeywordData _menuTalkChoices;
         public static IKeyword MenuTalkChoices => instance._menuTalkChoices;
 
+        [SerializeField] private KeywordData _menuTextEditor;
+        public static IKeyword MenuTextEditor => instance._menuTextEditor;
+
         [SerializeField] private KeywordData _menuThumbnail;
         public static IKeyword MenuThumbnail => instance._menuThumbnail;
 

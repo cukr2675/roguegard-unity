@@ -62,6 +62,8 @@ MonoBehaviour:
     _asset: {fileID: 11400000, guid: e91d25b4588208546a844f5bc4ae66ff, type: 2}
   - _key: Core.LayingKit
     _asset: {fileID: 11400000, guid: e3eb826f9c4d5de44a0f733925eb1926, type: 2}
+  - _key: Core.Notepad
+    _asset: {fileID: 11400000, guid: cd01f3ba88a8e774b83eec58d0841b4c, type: 2}
   - _key: Core.Potion
     _asset: {fileID: 11400000, guid: c3b5691c9b4d42c4d9b2e6b0134e372c, type: 2}
   - _key: Core.PreparationKit
