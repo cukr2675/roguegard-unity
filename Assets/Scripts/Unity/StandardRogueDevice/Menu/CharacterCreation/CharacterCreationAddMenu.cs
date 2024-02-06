@@ -46,29 +46,25 @@ namespace RoguegardUnity
             {
                 root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
 
-                root.Back();
-
                 var builderType = (System.Type)arg.Other;
                 if (builderType == typeof(AppearanceBuilder))
                 {
                     var appearanceBuilder = parent.builder.Appearances.Add();
                     appearanceBuilder.Option = (IAppearanceOption)model;
-                    root.OpenMenu(parent.nextMenu, self, null, new(other: appearanceBuilder), new(other: parent.builder));
                 }
                 else if (builderType == typeof(IntrinsicBuilder))
                 {
                     var intrinsicBuilder = parent.builder.Intrinsics.Add();
                     intrinsicBuilder.Option = (IIntrinsicOption)model;
-                    root.OpenMenu(parent.nextMenu, self, null, new(other: intrinsicBuilder), new(other: parent.builder));
                 }
                 else if (builderType == typeof(StartingItemBuilder))
                 {
                     var startingItemBuilder = parent.builder.StartingItemTable.Add().Add();
                     startingItemBuilder.Option = (IStartingItemOption)model;
-                    root.OpenMenu(parent.nextMenu, self, null, new(other: startingItemBuilder), new(other: parent.builder));
-
                     ConsumeStartingItemOptionObj(startingItemBuilder.Option, self);
                 }
+
+                root.Back();
             }
         }
 
