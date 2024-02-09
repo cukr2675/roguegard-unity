@@ -127,7 +127,13 @@ MonoBehaviour:
       type: {class: LobbyMerchantBeApplied, ns: Roguegard, asm: Roguegard.CoreData}
       data:
         _assemblyReflectionAssetDummy: 
-        _items: []
+        _items:
+        - _option: {fileID: 11400000, guid: cd01f3ba88a8e774b83eec58d0841b4c, type: 2}
+          _optionDescription: {fileID: 0}
+          _generatorWeight: 1
+          _stack: 1
+          _members:
+            _items: []
     - rid: 3586031133046603782
       type: {class: ConstantRaceSprite, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
       data:
