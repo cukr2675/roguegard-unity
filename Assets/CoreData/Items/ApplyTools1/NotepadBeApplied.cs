@@ -6,7 +6,7 @@ using Roguegard.Device;
 
 namespace Roguegard
 {
-    public class NotebookBeApplied : BaseApplyRogueMethod
+    public class NotepadBeApplied : BaseApplyRogueMethod
     {
         private static readonly Menu menu = new Menu();
 
@@ -23,9 +23,9 @@ namespace Roguegard
             public void OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 var memo = arg.Tool;
-                var text = NotebookInfo.GetText(memo);
+                var text = NotepadInfo.GetText(memo);
                 var scroll = (IScrollModelsMenuView)root.Get(DeviceKw.MenuTextEditor);
-                scroll.OpenView(ChoicesModelsMenuItemController.Instance, Spanning<object>.Empty, root, self, null, new(other: text));
+                scroll.OpenView(ChoicesModelsMenuItemController.Instance, Spanning<object>.Empty, root, self, null, new(tool: memo, other: text));
                 scroll.ShowExitButton(exit);
             }
 
@@ -33,7 +33,7 @@ namespace Roguegard
             {
                 root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
 
-                NotebookInfo.SetTo(arg.Tool, (string)arg.Other);
+                NotepadInfo.SetTo(arg.Tool, (string)arg.Other);
                 root.Done();
             }
         }

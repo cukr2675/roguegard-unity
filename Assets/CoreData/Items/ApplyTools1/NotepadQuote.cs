@@ -5,11 +5,13 @@ using UnityEngine;
 namespace Roguegard
 {
     [ObjectFormer.Formable]
-    public class NotebookQuote
+    public class NotepadQuote
     {
         public string Text { get; }
 
-        public NotebookQuote(string text)
+        private NotepadQuote() { }
+
+        public NotepadQuote(string text)
         {
             Text = text;
         }

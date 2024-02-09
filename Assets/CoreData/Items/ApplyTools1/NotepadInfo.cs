@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Roguegard
 {
-    public static class NotebookInfo
+    public static class NotepadInfo
     {
         public static string GetText(RogueObj obj)
         {
@@ -13,13 +13,13 @@ namespace Roguegard
             return info.quote?.Text ?? info.text;
         }
 
-        public static NotebookQuote GetQuote(RogueObj obj)
+        public static NotepadQuote GetQuote(RogueObj obj)
         {
             obj.Main.TryOpenRogueEffects(obj);
             var info = obj.Get<Info>();
             if (info.quote == null)
             {
-                info.quote = new NotebookQuote(info.text);
+                info.quote = new NotepadQuote(info.text);
                 info.text = null;
             }
             return info.quote;
@@ -42,7 +42,12 @@ namespace Roguegard
                 info = new Info();
                 obj.SetInfo(info);
             }
-            if (info.quote != null) throw new RogueException($"{obj} のテキストはロックされています。");
+            //if (info.quote != null) throw new RogueException($"{obj} のテキストはロックされています。");
+            if (info.quote != null)
+            {
+                if (info.quote.Text == text) return;
+                info.quote = null;
+            }
 
             info.text = text;
         }
@@ -56,7 +61,7 @@ namespace Roguegard
         private class Info : IRogueObjInfo
         {
             public string text;
-            public NotebookQuote quote;
+            public NotepadQuote quote;
 
             public bool IsExclusedWhenSerialize => false;
 

@@ -6,12 +6,12 @@ using Roguegard.CharacterCreation;
 
 namespace Roguegard
 {
-    public class NotebookOpen : ReferableScript, IOpenEffect
+    public class NotepadOpen : ReferableScript, IOpenEffect
     {
         public IRaceOption Open(
             RogueObj self, MainInfoSetType infoSetType, bool polymorph2Base, IRaceOption raceOption, ICharacterCreationData characterCreationData)
         {
-            NotebookInfo.Ready(self);
+            NotepadInfo.Ready(self);
             return raceOption;
         }
 
@@ -21,7 +21,7 @@ namespace Roguegard
 
         public IRaceOption Reopen(RogueObj self, MainInfoSetType infoSetType, IRaceOption raceOption, ICharacterCreationData characterCreationData)
         {
-            NotebookInfo.Ready(self);
+            NotepadInfo.Ready(self);
             return raceOption;
         }
 
