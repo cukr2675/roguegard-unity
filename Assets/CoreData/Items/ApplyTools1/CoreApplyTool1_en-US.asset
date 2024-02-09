@@ -22,6 +22,10 @@ MonoBehaviour:
     m_Localized: Stool
     m_Metadata:
       m_Items: []
+  - m_Id: 41189034560065536
+    m_Localized: Padleaf
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
