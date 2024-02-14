@@ -45,7 +45,7 @@ namespace Roguegard
             RogueObjUpdaterContinueType IRogueObjUpdater.UpdateObj(RogueObj self, float activationDepth, ref int sectionIndex)
             {
                 var tile = GetTile(self);
-                if (!tile.Info.Equals(trapTileInfo))
+                if (tile == null || !tile.Info.Equals(trapTileInfo))
                 {
                     // 足元が罠でなければ解除する
                     RogueEffectUtility.RemoveClose(self, this);
