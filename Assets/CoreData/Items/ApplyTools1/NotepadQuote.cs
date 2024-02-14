@@ -7,12 +7,15 @@ namespace Roguegard
     [ObjectFormer.Formable]
     public class NotepadQuote
     {
+        public string Name { get; }
+
         public string Text { get; }
 
         private NotepadQuote() { }
 
-        public NotepadQuote(string text)
+        public NotepadQuote(string name, string text)
         {
+            Name = name;
             Text = text;
         }
     }

@@ -13,13 +13,19 @@ namespace Roguegard
             return info.quote?.Text ?? info.text;
         }
 
+        public static string GetQuoteName(RogueObj obj)
+        {
+            return obj.Main.InfoSet.Name;
+        }
+
         public static NotepadQuote GetQuote(RogueObj obj)
         {
             obj.Main.TryOpenRogueEffects(obj);
             var info = obj.Get<Info>();
             if (info.quote == null)
             {
-                info.quote = new NotepadQuote(info.text);
+                var name = GetQuoteName(obj);
+                info.quote = new NotepadQuote(name, info.text);
                 info.text = null;
             }
             return info.quote;
