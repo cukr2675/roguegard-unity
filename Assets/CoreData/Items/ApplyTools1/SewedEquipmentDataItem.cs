@@ -15,13 +15,16 @@ namespace Roguegard
 
         public Vector2 GetUpperPivot()
         {
-            var pivotY = SplitY + (PivotDistance + 1) / 2;
+            // Pivot の距離は下→上→下→上の順で移動させる
+            // そのほうがアイコンとなる胴部のペイントが自然になる
+            var pivotY = SplitY + PivotDistance / 2;
             return new Vector2(.5f, (float)pivotY / RoguePaintData.BoardSize);
         }
 
         public Vector2 GetLowerPivot()
         {
-            var pivotY = SplitY - PivotDistance / 2;
+            // Pivot の距離は下→上→下→上の順で移動させる
+            var pivotY = SplitY - (PivotDistance + 1) / 2;
             return new Vector2(.5f, (float)pivotY / RoguePaintData.BoardSize);
         }
     }
