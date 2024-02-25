@@ -4,6 +4,11 @@ using UnityEngine;
 
 namespace Roguegard
 {
+    // AnimationClip ではなく BonePose を自作する理由
+    // ・AnimationClip では Front と Rear それぞれ同じ位置に Transform が必要となって面倒なため
+    // ・ランタイムではスプライトを変更する AnimationClip を動的生成できないため (AnimationUtility.SetEditorCurve がエディタでしか使えない)
+    // ・AnimationClip で1フレーム内に複数の AnimationEvent を設定すると Animation ビュー上で重なって表示されて面倒なため
+
     public class BonePose
     {
         /// <summary>

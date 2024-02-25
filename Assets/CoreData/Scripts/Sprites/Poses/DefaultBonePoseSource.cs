@@ -14,7 +14,7 @@ namespace Roguegard
         {
             var table = new BonePose();
             var transform = new BoneTransform(null, default, false, Vector3.zero, Quaternion.identity, Vector3.one, false, false, false);
-            table.AddBoneTransform(transform, BoneKw.Body);
+            table.AddBoneTransform(transform, BoneKw.Body); // ƒLƒƒƒ‰‚ÌŒü‚«‚Å¶‰E”½“]‚³‚¹‚é‚½‚ß Body ‚¾‚¯‚Íİ’è‚·‚é
             table.SetImmutable();
             source = new ImmutableSymmetricalBonePoseSource(table);
         }
