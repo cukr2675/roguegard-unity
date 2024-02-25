@@ -4,6 +4,7 @@ using UnityEngine;
 
 using Roguegard;
 using Roguegard.Device;
+using Roguegard.Scripting.MoonSharp;
 using TMPro;
 
 namespace RoguegardUnity
@@ -22,6 +23,7 @@ namespace RoguegardUnity
             _executeButton.Initialize(this);
             _executeButton.SetItem(ChoicesModelsMenuItemController.Instance, new Execute() { parent = this });
             _exitButton.Initialize(this);
+            _inputField.onEndEdit.AddListener(x => SetArg(Root, Self, User, new(tool: Arg.Tool, other: x)));
         }
 
         public override void OpenView<T>(
@@ -54,6 +56,8 @@ namespace RoguegardUnity
         {
             public TextEditorMenuView parent;
 
+            private static readonly MoonSharpRogueScript script = new MoonSharpRogueScript();
+
             public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 return "実行";
@@ -61,11 +65,17 @@ namespace RoguegardUnity
 
             public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                //var code = parent._inputField.text;
-                //var script = RogueScript.Compile(code);
-                //script.SetValue("__name__", "__main__");
-                //script.SetValue("__caster__", self);
-                //script.Call();
+                if (parent._inputField.text.StartsWith("#!lua"))
+                {
+                    root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+                    NotepadInfo.SetTo(arg.Tool, parent._inputField.text);
+                    var code = NotepadInfo.GetQuote(arg.Tool);
+                    script.Call(code, self);
+                }
+                else
+                {
+                    root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Cancel);
+                }
             }
         }
     }

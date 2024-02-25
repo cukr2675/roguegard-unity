@@ -853,6 +853,7 @@ MonoBehaviour:
   _creditMenu: {fileID: 1976325934088905232}
   _credits:
   - {fileID: 11400000, guid: 6b15133b386d2e24da02b3b87f58c7ed, type: 2}
+  - {fileID: 11400000, guid: 4ffa4cd81acdb56459ef6acabe343382, type: 2}
   - {fileID: 11400000, guid: 2d1d64b40d08c0f42842aaf1d5ce3120, type: 2}
   - {fileID: 11400000, guid: 9f3f1d0d2b09c1743ae409905fc3617e, type: 2}
   - {fileID: 11400000, guid: 9bea3e6df1e16ae4aaa589b9eeb6db12, type: 2}
@@ -967,6 +968,7 @@ MonoBehaviour:
   _content: {fileID: 1976325934340065475}
   _itemPrefab: {fileID: 8693878858779085785, guid: c174e8e4fc21d6a4994e5a3e2363b4f5, type: 3}
   _itemButtonCount: {x: 1, y: 2}
+  _verticalExtensionTarget: {fileID: 0}
 --- !u!1 &1976325933680873127
 GameObject:
   m_ObjectHideFlags: 0

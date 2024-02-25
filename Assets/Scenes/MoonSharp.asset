@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d3a19fe285e64249925d0ba0415ddff, type: 3}
+  m_Name: MoonSharp
+  m_EditorClassIdentifier: 
+  _name: MoonSharp
+  _details: "MoonSharp\nhttp://www.moonsharp.org\n\nCopyright (c) 2014-2016, Marco
+    Mastropaolo\r\nAll rights reserved.\r\n\r\nParts of the string library are based
+    on the KopiLua project (https://github.com/NLua/KopiLua)\r\nCopyright (c) 2012
+    LoDC\r\n\r\nVisual Studio Code debugger code is based on code from Microsoft
+    vscode-mono-debug project (https://github.com/Microsoft/vscode-mono-debug).\r\nCopyright
+    (c) Microsoft Corporation - released under MIT license.\r\n\r\nRemote Debugger
+    icons are from the Eclipse project (https://www.eclipse.org/).\r\nCopyright of
+    The Eclipse Foundation\r\n\r\nThe MoonSharp icon is (c) Isaac, 2014-2015\r\n\r\nRedistribution
+    and use in source and binary forms, with or without\r\nmodification, are permitted
+    provided that the following conditions are met:\r\n\r\n* Redistributions of source
+    code must retain the above copyright notice, this\r\n  list of conditions and
+    the following disclaimer.\r\n\r\n* Redistributions in binary form must reproduce
+    the above copyright notice,\r\n  this list of conditions and the following disclaimer
+    in the documentation\r\n  and/or other materials provided with the distribution.\r\n\r\n*
+    Neither the name of the {organization} nor the names of its\r\n  contributors
+    may be used to endorse or promote products derived from\r\n  this software without
+    specific prior written permission.\r\n\r\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT
+    HOLDERS AND CONTRIBUTORS \"AS IS\"\r\nAND ANY EXPRESS OR IMPLIED WARRANTIES,
+    INCLUDING, BUT NOT LIMITED TO, THE\r\nIMPLIED WARRANTIES OF MERCHANTABILITY AND
+    FITNESS FOR A PARTICULAR PURPOSE ARE\r\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+    HOLDER OR CONTRIBUTORS BE LIABLE\r\nFOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+    EXEMPLARY, OR CONSEQUENTIAL\r\nDAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT
+    OF SUBSTITUTE GOODS OR\r\nSERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+    INTERRUPTION) HOWEVER\r\nCAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,
+    STRICT LIABILITY,\r\nOR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY
+    WAY OUT OF THE USE\r\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+    SUCH DAMAGE."

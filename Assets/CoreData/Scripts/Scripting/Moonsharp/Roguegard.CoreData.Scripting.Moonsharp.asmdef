@@ -1,0 +1,19 @@
+{
+    "name": "Roguegard.CoreData.Scripting.Moonsharp",
+    "rootNamespace": "Roguegard.Scripting.MoonSharp",
+    "references": [
+        "GUID:28450d8d664b1a54dae80398fd9e836c",
+        "GUID:b2fde94cad5718f459f0b430e39ac30d",
+        "GUID:8b7f6e1967d3724498e6c93f135870c3",
+        "GUID:411fefe97dc107843bf66c14baf7283d"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
