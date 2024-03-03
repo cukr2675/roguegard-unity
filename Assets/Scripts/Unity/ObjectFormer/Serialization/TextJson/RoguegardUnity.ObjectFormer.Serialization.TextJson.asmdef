@@ -1,5 +1,5 @@
 {
-    "name": "RoguegardUnity.RogueObjectFormer.Serialization.TextJson",
+    "name": "RoguegardUnity.ObjectFormer.Serialization.TextJson",
     "rootNamespace": "RoguegardUnity",
     "references": [
         "GUID:28450d8d664b1a54dae80398fd9e836c",

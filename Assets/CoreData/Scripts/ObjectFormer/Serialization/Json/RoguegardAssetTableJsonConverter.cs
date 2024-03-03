@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 using ObjectFormer;
 using ObjectFormer.Serialization.Json;
 
-namespace Roguegard.RogueObjectFormer.Json
+namespace Roguegard.ObjectFormer.Json
 {
     public class RoguegardAssetTableJsonConverter : RelationalJsonConverter
     {

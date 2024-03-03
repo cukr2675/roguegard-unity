@@ -6,7 +6,7 @@ using System.Text.Json;
 using ObjectFormer;
 using ObjectFormer.Serialization.TextJson;
 
-namespace Roguegard.RogueObjectFormer.TextJson
+namespace Roguegard.ObjectFormer.TextJson
 {
     public class RoguegardAssetTableJsonConverter : RelationalJsonConverter
     {

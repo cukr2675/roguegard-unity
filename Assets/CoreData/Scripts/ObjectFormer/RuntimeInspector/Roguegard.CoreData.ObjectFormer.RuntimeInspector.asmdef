@@ -1,11 +1,12 @@
 {
     "name": "Roguegard.CoreData.ObjectFormer.RuntimeInspector",
-    "rootNamespace": "Roguegard.RogueObjectFormer.RuntimeInspector",
+    "rootNamespace": "Roguegard.ObjectFormer.RuntimeInspector",
     "references": [
         "GUID:28450d8d664b1a54dae80398fd9e836c",
         "GUID:b2fde94cad5718f459f0b430e39ac30d",
         "GUID:411fefe97dc107843bf66c14baf7283d",
-        "GUID:d14ac74dcc618b048ae3603d818e40dc"
+        "GUID:d14ac74dcc618b048ae3603d818e40dc",
+        "GUID:6055be8ebefd69e48b49212b09b47b2f"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

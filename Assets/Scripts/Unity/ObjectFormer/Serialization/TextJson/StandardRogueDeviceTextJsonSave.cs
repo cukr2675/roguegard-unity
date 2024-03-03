@@ -10,7 +10,7 @@ using ObjectFormer;
 using ObjectFormer.Serialization.TextJson;
 using Roguegard;
 using Roguegard.Device;
-using Roguegard.RogueObjectFormer.TextJson;
+using Roguegard.ObjectFormer.TextJson;
 
 namespace RoguegardUnity
 {
