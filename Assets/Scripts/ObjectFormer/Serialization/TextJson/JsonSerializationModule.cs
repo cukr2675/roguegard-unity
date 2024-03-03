@@ -28,13 +28,13 @@ namespace ObjectFormer.Serialization.TextJson
             Name = name;
             _version = version.ToString();
 
-            this.dependencies = new Dictionary<string, string>();
             if (dependencies != null)
             {
-                foreach (var pair in dependencies)
-                {
-                    this.dependencies.Add(pair.Key, pair.Value);
-                }
+                this.dependencies = new Dictionary<string, string>(dependencies);
+            }
+            else
+            {
+                this.dependencies = new Dictionary<string, string>();
             }
 
             _converters = converters.ToArray();
