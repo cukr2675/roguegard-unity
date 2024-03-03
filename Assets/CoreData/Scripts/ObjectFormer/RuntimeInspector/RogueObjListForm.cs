@@ -4,7 +4,7 @@ using UnityEngine;
 
 using ObjectFormer.Unity.RuntimeInspector;
 
-namespace Roguegard.RogueObjectFormer.Inspector
+namespace Roguegard.RogueObjectFormer.RuntimeInspector
 {
     public class RogueObjListForm : LinkRelationalForm
     {

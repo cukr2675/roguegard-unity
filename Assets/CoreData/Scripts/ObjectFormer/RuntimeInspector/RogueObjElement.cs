@@ -2,7 +2,7 @@
 //using System.Collections.Generic;
 //using UnityEngine;
 
-//namespace Roguegard.RogueObjectFormer.Inspector
+//namespace Roguegard.RogueObjectFormer.RuntimeInspector
 //{
 //    public class RogueObjElement : MonoBehaviour
 //    {
