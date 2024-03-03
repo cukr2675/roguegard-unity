@@ -38,13 +38,14 @@ namespace RoguegardUnity
             SoundTable soundTable,
             AudioMixer audioMixer,
             AudioSource seAudioSourcePrefab,
-            AudioSource bgmAudioSourcePrefab)
+            AudioSource bgmAudioSourcePrefab,
+            StandardRogueDeviceInspector runtimeInspectorPrefab)
         {
             var name = "StandardDevice";
             componentManager = new StandardRogueDeviceComponentManager();
             componentManager.Initialize(
                 name, spriteRendererPool, tilemapRendererPrefab, touchControllerPrefab,
-                soundTable, audioMixer, seAudioSourcePrefab, bgmAudioSourcePrefab);
+                soundTable, audioMixer, seAudioSourcePrefab, bgmAudioSourcePrefab, runtimeInspectorPrefab);
             componentManager.OpenDelay(data);
             data = null;
         }

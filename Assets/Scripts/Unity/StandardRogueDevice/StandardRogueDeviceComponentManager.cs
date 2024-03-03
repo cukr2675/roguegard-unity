@@ -22,6 +22,7 @@ namespace RoguegardUnity
         private RogueTicker ticker;
         private GameOverDeviceEventHandler gameOverDeviceEventHandler;
         private MenuController menuController;
+        private StandardRogueDeviceInspector runtimeInspector;
 
         private static readonly DummySavePoint dummySavePoint = new DummySavePoint();
 
@@ -39,7 +40,8 @@ namespace RoguegardUnity
             SoundTable soundTable,
             AudioMixer audioMixer,
             AudioSource seAudioSourcePrefab,
-            AudioSource bgmAudioSourcePrefab)
+            AudioSource bgmAudioSourcePrefab,
+            StandardRogueDeviceInspector runtimeInspectorPrefab)
         {
             parent = new GameObject($"{name} - Parent").transform;
 
@@ -86,6 +88,9 @@ namespace RoguegardUnity
             };
             EventManager = new StandardRogueDeviceEventManager(touchController, characterRenderSystem, eventHandlers);
 
+            runtimeInspector = Object.Instantiate(runtimeInspectorPrefab, parent);
+            runtimeInspector.Initialize();
+
             ticker.enabled = true;
         }
 
@@ -101,6 +106,11 @@ namespace RoguegardUnity
             Subject = data.Subject;
             World = data.World;
             Options.Set(data.Options);
+
+            // 開発者ツールを初期化
+            var rootValue = new RogueObjList();
+            rootValue.Add(data.World);
+            runtimeInspector.SetRoot(rootValue);
 
             // 適用後の準備処理
             touchController.OpenWalker(Player);

@@ -39,6 +39,7 @@ namespace RoguegardUnity
         private AudioMixer audioMixer;
         private AudioSource seAudioSourcePrefab;
         private AudioSource bgmAudioSourcePrefab;
+        private StandardRogueDeviceInspector runtimeInspectorPrefab;
 
         private MenuController menuController;
 
@@ -51,6 +52,7 @@ namespace RoguegardUnity
             AudioMixer audioMixer,
             AudioSource seAudioSourcePrefab,
             AudioSource bgmAudioSourcePrefab,
+            StandardRogueDeviceInspector runtimeInspectorPrefab,
             Sprite logo)
         {
             this.spriteRendererPool = spriteRendererPool;
@@ -60,6 +62,7 @@ namespace RoguegardUnity
             this.audioMixer = audioMixer;
             this.seAudioSourcePrefab = seAudioSourcePrefab;
             this.bgmAudioSourcePrefab = bgmAudioSourcePrefab;
+            this.runtimeInspectorPrefab = runtimeInspectorPrefab;
             DontDestroyOnLoad(spriteRendererPool.gameObject);
 
             menuController = Instantiate(menuControllerPrefab);
@@ -108,7 +111,7 @@ namespace RoguegardUnity
 
             device.Open(
                 spriteRendererPool, tilemapRendererPrefab, touchControllerPrefab,
-                soundTable, audioMixer, seAudioSourcePrefab, bgmAudioSourcePrefab);
+                soundTable, audioMixer, seAudioSourcePrefab, bgmAudioSourcePrefab, runtimeInspectorPrefab);
         }
 
         private class MainMenu : IModelsMenu

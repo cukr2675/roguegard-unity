@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using UnityEngine.Audio;
-using Roguegard;
-using Roguegard.CharacterCreation;
 
 namespace RoguegardUnity
 {
@@ -24,6 +22,7 @@ namespace RoguegardUnity
         [SerializeField] private AudioMixer _audioMixer = null;
         [SerializeField] private AudioSource _seAudioSourcePrefab = null;
         [SerializeField] private AudioSource _bgmAudioSourcePrefab = null;
+        [SerializeField] private StandardRogueDeviceInspector _runtimeInspectorPrefab = null;
 
         public Sprite ProgressCircle => _progressCircle;
         public RoguegardSettingsData Settings => _settings;
@@ -39,7 +38,7 @@ namespace RoguegardUnity
             var spriteRendererPool = Instantiate(_spriteRendererPoolPrefab);
             menu.Initialize(
                 spriteRendererPool, _menuControllerPrefab, _tilemapRendererPrefab, _touchControllerPrefab,
-                _soundTable, _audioMixer, _seAudioSourcePrefab, _bgmAudioSourcePrefab, _titleLogo);
+                _soundTable, _audioMixer, _seAudioSourcePrefab, _bgmAudioSourcePrefab, _runtimeInspectorPrefab, _titleLogo);
         }
     }
 }
