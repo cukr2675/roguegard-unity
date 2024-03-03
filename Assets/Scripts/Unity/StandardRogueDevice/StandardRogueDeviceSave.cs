@@ -15,7 +15,8 @@ using Roguegard;
 using Roguegard.CharacterCreation;
 using Roguegard.Device;
 using Roguegard.Extensions;
-using Roguegard.RogueObjectFormer.Json;
+using Roguegard.Scripting.MoonSharp.ObjectFormer.Serialization.Json;
+using Roguegard.ObjectFormer.Json;
 
 namespace RoguegardUnity
 {
@@ -185,6 +186,7 @@ namespace RoguegardUnity
             converters.Add(FormerJsonConverter.Create(typeof(RectInt), true));
             converters.Add(FormerJsonConverter.Create(typeof(Color32), true));
             converters.Add(RogueObjJsonConverter.Create());
+            converters.Add(new MoonSharpTableSerialJsonConverter());
             converters.Add(FormerJsonConverter.Create(typeof(StandardRogueDeviceData)));
             converters.Add(FormerJsonConverter.Create(typeof(RogueOptions)));
             converters.AddAuto(assemblies, instanceType =>

@@ -49,6 +49,8 @@ MonoBehaviour:
   _inputElementPrefab: {fileID: 6010715269433900813, guid: 63535d9d536c69c499ddf239310e2960, type: 3}
   _toggleElementPrefab: {fileID: 1782817526211464612, guid: 053a938db89665c4aa29ae16ffba19f1, type: 3}
   _linkElementPrefab: {fileID: -4223394344586323663, guid: d34744c8c1e367e46ad6859a9615ce73, type: 3}
+  _buttonElementPrefab: {fileID: -2957318823783390093, guid: d421bee627ab4a5498c14947398b4132, type: 3}
+  _rogueObjListItemElementPrefab: {fileID: 5689611153185147041, guid: 30792f13a34b2ff4197a2f64a74509e9, type: 3}
 --- !u!1001 &4427654672535002745
 PrefabInstance:
   m_ObjectHideFlags: 0

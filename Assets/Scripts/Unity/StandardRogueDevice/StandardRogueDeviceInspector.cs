@@ -2,9 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using System.Linq;
 using System.Reflection;
+using System.IO;
 using ObjectFormer;
 using ObjectFormer.Unity.RuntimeInspector;
+using Roguegard;
+using Roguegard.ObjectFormer.RuntimeInspector;
 
 namespace RoguegardUnity
 {
@@ -15,6 +19,10 @@ namespace RoguegardUnity
         [SerializeField] private InputElement _inputElementPrefab = null;
         [SerializeField] private ToggleElement _toggleElementPrefab = null;
         [SerializeField] private LinkElement _linkElementPrefab = null;
+        [SerializeField] private ButtonElement _buttonElementPrefab = null;
+        [SerializeField] private RogueObjListItemElement _rogueObjListItemElementPrefab = null;
+
+        private static readonly string[] invalidFileNameChars = Path.GetInvalidFileNameChars().Select(x => x.ToString()).ToArray();
 
         public void Initialize()
         {
@@ -46,6 +54,8 @@ namespace RoguegardUnity
             forms.Add(FormerForm.Create(typeof(Vector2Int), _linkElementPrefab, true));
             forms.Add(FormerForm.Create(typeof(RectInt), _linkElementPrefab, true));
             forms.Add(FormerForm.Create(typeof(Color32), _linkElementPrefab, true));
+            forms.Add(RogueObjForm.Create(_linkElementPrefab, _buttonElementPrefab, x => SerializeRogueObj(x)));
+            forms.Add(RogueObjListForm.Create(_rogueObjListItemElementPrefab, _linkElementPrefab));
             forms.Add(FormerForm.Create(typeof(StandardRogueDeviceData), _linkElementPrefab));
             forms.Add(FormerForm.Create(typeof(RogueOptions), _linkElementPrefab));
             forms.AddAuto(assemblies, instanceType =>
@@ -76,7 +86,7 @@ namespace RoguegardUnity
                 {
                     return FormerForm.Create(instanceType, _linkElementPrefab);
                 }
-                return null;
+                return new RelationOnlyComponent(instanceType);
             });
 
             var name = "Core";
@@ -93,6 +103,23 @@ namespace RoguegardUnity
             var fallbackForm = new FallbackForm(_inputElementPrefab);
             var config = new InspectorConfig(modules, moduleTable, fallbackForm);
             return config;
+        }
+
+        private static void SerializeRogueObj(RogueObj obj)
+        {
+            var name = obj.GetName();
+            foreach (var invalidFileNameChar in invalidFileNameChars)
+            {
+                name = name.Replace(invalidFileNameChar, "");
+            }
+            var path = $"Temp/{name}.json";
+            var clone = obj.Clone();
+            using (var stream = RogueFile.Create(path))
+            {
+                RoguegardSettings.JsonSerialization.Serialize(stream, clone);
+                stream.Save(() => { });
+            }
+            RogueFile.Export(path);
         }
     }
 }

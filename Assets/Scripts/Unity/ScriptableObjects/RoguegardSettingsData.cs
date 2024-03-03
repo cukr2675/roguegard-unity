@@ -6,6 +6,7 @@ using System.Linq;
 using System.Reflection;
 using Roguegard;
 using Roguegard.CharacterCreation;
+using System.IO;
 
 namespace RoguegardUnity
 {
@@ -78,6 +79,7 @@ namespace RoguegardUnity
             RoguegardSettings.ObjCommandTable = _objCommandTable;
             RoguegardSettings.DungeonQuestGenerator = _dungeonQuestGenerator;
             RoguegardSettings.MoneyInfoSet = _money.PrimaryInfoSet;
+            RoguegardSettings.JsonSerialization = new JsonSerializationSetting();
 
             RoguegardSettings.ClearDungeonChoices();
             RoguegardSettings.ClearAssetTable();
@@ -211,6 +213,21 @@ namespace RoguegardUnity
                 var lobby = parent._lobby.CreateObj(world, Vector2Int.zero, random);
                 RogueWorldInfo.SetTo(world, lobby);
                 return world;
+            }
+        }
+
+        private class JsonSerializationSetting : IJsonSerializationSetting
+        {
+            public void Serialize<T>(Stream stream, T instance)
+            {
+                var config = StandardRogueDeviceSave.GetJsonSerializationConfig();
+                config.Serialize(stream, instance);
+            }
+
+            public T Deserialize<T>(Stream stream)
+            {
+                var config = StandardRogueDeviceSave.GetJsonSerializationConfig();
+                return config.Deserialize<T>(stream);
             }
         }
     }

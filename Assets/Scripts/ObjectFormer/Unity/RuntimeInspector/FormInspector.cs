@@ -12,7 +12,7 @@ namespace ObjectFormer.Unity.RuntimeInspector
     [RequireComponent(typeof(Canvas))]
     public class FormInspector : MonoBehaviour
     {
-        [SerializeField] private RectTransform _page = null;
+        [SerializeField] private ScrollRect _pageScrollRect = null;
         [SerializeField] private Button _prevButton = null;
         [SerializeField] private Button _nextButton = null;
         [SerializeField] private TMP_Text _pathText = null;
@@ -23,7 +23,7 @@ namespace ObjectFormer.Unity.RuntimeInspector
         [SerializeField] private int _doubleTapFingers = 3;
         [SerializeField] private float _doubleTapInterval = .5f;
 
-        public RectTransform Page => _page;
+        public RectTransform Page => _pageScrollRect.content;
         public object UpdateCoroutineWait => config.UpdateCoroutineWait;
 
         private Canvas canvas;
@@ -99,12 +99,13 @@ namespace ObjectFormer.Unity.RuntimeInspector
 
         public void SetRoot(object root)
         {
-            _page.DetachChildren();
-            foreach (Transform child in _page)
+            foreach (Transform child in Page)
             {
-                child.SetParent(null);
+                //child.SetParent(null);
                 Destroy(child.gameObject);
             }
+            //Page.DetachChildren();
+            _pageScrollRect.horizontalNormalizedPosition = 0f;
             path.Clear();
             path.Add(root);
             UpdatePathText();
@@ -113,12 +114,13 @@ namespace ObjectFormer.Unity.RuntimeInspector
 
         public void SetTarget(object target)
         {
-            _page.DetachChildren();
-            foreach (Transform child in _page)
+            foreach (Transform child in Page)
             {
-                child.SetParent(null);
+                //child.SetParent(null);
                 Destroy(child.gameObject);
             }
+            //Page.DetachChildren();
+            _pageScrollRect.horizontalNormalizedPosition = 0f;
             path.Add(target);
             UpdatePathText();
             config.SetFormTo(this, target);
@@ -128,12 +130,13 @@ namespace ObjectFormer.Unity.RuntimeInspector
         {
             if (path.Count <= 1) return;
 
-            _page.DetachChildren();
-            foreach (Transform child in _page)
+            foreach (Transform child in Page)
             {
-                child.SetParent(null);
+                //child.SetParent(null);
                 Destroy(child.gameObject);
             }
+            //Page.DetachChildren();
+            _pageScrollRect.horizontalNormalizedPosition = 0f;
             path.RemoveAt(path.Count - 1);
             UpdatePathText();
             config.SetFormTo(this, path[path.Count - 1]);

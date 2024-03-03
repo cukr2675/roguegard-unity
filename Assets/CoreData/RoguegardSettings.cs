@@ -57,6 +57,8 @@ namespace Roguegard
 
         public static DungeonQuestGenerator DungeonQuestGenerator { get; set; }
 
+        public static IJsonSerializationSetting JsonSerialization { get; set; }
+
         private static readonly List<IModelsMenuChoice> _dungeonChoices = new List<IModelsMenuChoice>();
 
         public static Spanning<IModelsMenuChoice> DungeonChoices => _dungeonChoices;

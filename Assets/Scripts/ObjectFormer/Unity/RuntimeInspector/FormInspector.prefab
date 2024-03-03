@@ -394,7 +394,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03075e4918d38e946a6f67f66f2037a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _page: {fileID: 4914920001020388492}
+  _pageScrollRect: {fileID: 329489689659722132}
   _prevButton: {fileID: 3208879373723485141}
   _nextButton: {fileID: 2808413883085977757}
   _pathText: {fileID: 3402631993620922635}
