@@ -12,10 +12,30 @@ namespace Roguegard.Scripting.MoonSharp
         private Table table;
         private Table sTable;
 
+        public Table Table => sTable;
+
+        private Dictionary<string, DynValue> loadTable;
+
+        public void Load(string key, DynValue value)
+        {
+            if (loadTable == null) { loadTable = new Dictionary<string, DynValue>(); }
+
+            loadTable.Add(key, value);
+        }
+
         public void SetTable(Table table)
         {
             this.table = table;
             sTable = table.Get("__s").Table;
+
+            if (loadTable != null)
+            {
+                foreach (var pair in loadTable)
+                {
+                    sTable.Set(pair.Key, pair.Value);
+                }
+                loadTable = null;
+            }
         }
 
         public bool CanStack(MoonSharpTableSerial other)
