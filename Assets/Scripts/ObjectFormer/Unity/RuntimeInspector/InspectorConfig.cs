@@ -25,7 +25,7 @@ namespace ObjectFormer.Unity.RuntimeInspector
                 }
             }
             this.fallbackForm = fallbackForm;
-            UpdateCoroutineWait = updateCoroutineWait;
+            UpdateCoroutineWait = updateCoroutineWait ?? new WaitForSeconds(1f);
         }
 
         public void SetFormTo(FormInspector inspector, object value)
