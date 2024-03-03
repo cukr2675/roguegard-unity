@@ -18,7 +18,8 @@ namespace RoguegardUnity.Tests
                 Assembly.Load("Roguegard"),
                 Assembly.Load("Roguegard.CharacterCreation"),
                 Assembly.Load("Roguegard.Device"),
-                Assembly.Load("Roguegard.CoreData")
+                Assembly.Load("Roguegard.CoreData"),
+                Assembly.Load("Roguegard.CoreData.Scripting.MoonSharp")
             };
             return assemblies;
         }
