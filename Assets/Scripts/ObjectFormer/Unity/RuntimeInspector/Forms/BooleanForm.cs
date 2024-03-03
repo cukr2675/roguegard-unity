@@ -28,7 +28,7 @@ namespace ObjectFormer.Unity.RuntimeInspector
         public override void AppendElementTo(FormInspector inspector, string key, ElementValueGetter getter, ElementValueSetter setter)
         {
             var element = Object.Instantiate(toggleElementPrefab, inspector.Page);
-            element.Initialize(key, getter, setter, inspector.UpdateCoroutineWait);
+            element.Initialize(inspector, key, getter, setter);
         }
     }
 }

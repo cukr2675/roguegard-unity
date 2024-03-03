@@ -12,16 +12,19 @@ namespace ObjectFormer.Unity.RuntimeInspector
         [SerializeField] private TMP_Text _label = null;
         [SerializeField] private Toggle _toggle = null;
 
+        private FormInspector inspector;
         private ElementValueGetter getter;
-        private object updateCoroutineWait;
 
-        public void Initialize(string label, ElementValueGetter getter, ElementValueSetter setter, object updateCoroutineWait)
+        public void Initialize(
+            FormInspector inspector, string label, ElementValueGetter getter, ElementValueSetter setter,
+            bool interactable = true)
         {
+            this.inspector = inspector;
             _label.text = label;
             this.getter = getter;
-            this.updateCoroutineWait = updateCoroutineWait;
             UpdateValue();
             _toggle.onValueChanged.AddListener(x => setter(x));
+            _toggle.interactable = interactable;
 
             StartCoroutine(UpdateCoroutine());
 
@@ -39,7 +42,7 @@ namespace ObjectFormer.Unity.RuntimeInspector
             {
                 UpdateValue();
 
-                yield return updateCoroutineWait;
+                yield return inspector.UpdateCoroutineWait;
             }
         }
     }
