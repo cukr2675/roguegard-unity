@@ -7,12 +7,12 @@ using Roguegard.Extensions;
 namespace Roguegard
 {
     [ObjectFormer.Formable]
-    public class MeltErosion : StackableStatusEffect, IEquipmentRogueEffect
+    public class MeltErosion : StackableStatusEffect, IEquipmentRogueEffect, IClosableStatusEffect
     {
         public static IAffectCallback Callback { get; } = new AffectCallback(new MeltErosion());
 
         public override string Name => ":MeltErosion";
-        public override IKeyword EffectCategory => null;
+        public override IKeyword EffectCategory => EffectCategoryKw.Erosion;
         protected override int MaxStack => 1;
 
         [System.NonSerialized] private readonly EquipmentEffect equipmentEffect = new EquipmentEffect();
@@ -35,6 +35,12 @@ namespace Roguegard
             RogueObj target, RogueObj user, float activationDepth, in RogueMethodArgument arg, StackableStatusEffect statusEffect)
         {
             NewAffectTo(target, user, activationDepth, arg, statusEffect);
+        }
+
+        protected override void RemoveClose(RogueObj self, StatusEffectCloseType closeType = StatusEffectCloseType.Manual)
+        {
+            ((IEquipmentRogueEffect)this).CloseEquip(self);
+            base.RemoveClose(self, closeType);
         }
 
         void IEquipmentRogueEffect.OpenEquip(RogueObj equipment)

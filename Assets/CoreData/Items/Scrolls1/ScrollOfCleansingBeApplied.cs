@@ -26,14 +26,15 @@ namespace Roguegard
                 var obj = spaceObjs[i];
                 if (obj == null) continue;
 
-                var statusEffects = obj.Main.GetStatusEffectState(obj).StatusEffects;
-                for (int j = 0; j < statusEffects.Count; j++)
+                var statusEffectState = obj.Main.GetStatusEffectState(obj);
+                for (int j = 0; j < statusEffectState.StatusEffects.Count; j++)
                 {
-                    var statusEffect = statusEffects[i];
-                    if (statusEffect.EffectCategory == EffectCategoryKw.StatusAilment &&
+                    var statusEffect = statusEffectState.StatusEffects[j];
+                    if (statusEffect.EffectCategory == EffectCategoryKw.Erosion &&
                         statusEffect is IClosableStatusEffect closable)
                     {
                         closable.RemoveClose(obj);
+                        j--;
                     }
                 }
             }

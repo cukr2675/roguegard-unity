@@ -17,6 +17,9 @@ namespace Roguegard
         [SerializeField] private KeywordData _dummy;
         public static IKeyword Dummy => instance._dummy;
 
+        [SerializeField] private KeywordData _erosion;
+        public static IKeyword Erosion => instance._erosion;
+
         [SerializeField] private KeywordData _statusAilment;
         public static IKeyword StatusAilment => instance._statusAilment;
 

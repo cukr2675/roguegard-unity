@@ -15,4 +15,5 @@ MonoBehaviour:
   _buff: {fileID: 11400000, guid: 4654aa6c6df34874f83ab794cd6fcdd7, type: 2}
   _debuff: {fileID: 11400000, guid: 8bb0770df80cebb479cbbe188cc53ebb, type: 2}
   _dummy: {fileID: 11400000, guid: e45a252f8549aeb4a8f43226f2921454, type: 2}
+  _erosion: {fileID: 11400000, guid: e739c4c7d1071214cb8ac51b38f3f75f, type: 2}
   _statusAilment: {fileID: 11400000, guid: 71e30affb1bc09943af3a9d428c17989, type: 2}
