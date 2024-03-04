@@ -61,6 +61,7 @@ namespace RoguegardUnity
                 {
                     var startingItemBuilder = parent.builder.StartingItemTable.Add().Add();
                     startingItemBuilder.Option = (IStartingItemOption)model;
+                    startingItemBuilder.Stack = 1;
                     ConsumeStartingItemOptionObj(startingItemBuilder.Option, self);
                 }
 

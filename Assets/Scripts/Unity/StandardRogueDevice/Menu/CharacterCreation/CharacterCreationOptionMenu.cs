@@ -494,6 +494,8 @@ namespace RoguegardUnity
                 if (arg.Other is StartingItemBuilder startingItemBuilder)
                 {
                     startingItemBuilder.Stack = (int)(value * RogueObj.GetMaxStack(startingItemBuilder.Option.InfoSet, Roguegard.StackOption.Default));
+                    if (startingItemBuilder.Stack <= 0) { startingItemBuilder.Stack = 1; }
+                    return;
                 }
                 Debug.LogError("•s³‚ÈŒ^‚Å‚·B");
             }
