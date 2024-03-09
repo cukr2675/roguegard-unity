@@ -1,0 +1,16 @@
+{
+    "name": "RuntimeDotter",
+    "rootNamespace": "RuntimeDotter",
+    "references": [
+        "GUID:413a95a52ca644b7dac76988ad8915af"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
