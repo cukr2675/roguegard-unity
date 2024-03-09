@@ -35,22 +35,27 @@ namespace RuntimeDotter
         private void Awake()
         {
             // プリセット上限に達したら最古のプリセットを削除する
-            var normalPresets = _normalPicker.GetComponentInChildren<ColorPresets>();
-            var normalPresetsLength = normalPresets.presets.Length;
-            normalPresetList = ColorPresetManager.Get(_normalPicker.Setup.PresetColorsId);
-            normalPresetList.OnColorsUpdated += x => { if (x.Count >= normalPresetsLength) { x.RemoveAt(0); } };
+            if (_normalPicker != null)
+            {
+                var normalPresets = _normalPicker.GetComponentInChildren<ColorPresets>();
+                var normalPresetsLength = normalPresets.presets.Length;
+                normalPresetList = ColorPresetManager.Get(_normalPicker.Setup.PresetColorsId);
+                normalPresetList.OnColorsUpdated += x => { if (x.Count >= normalPresetsLength) { x.RemoveAt(0); } };
+            }
+            if (_shiftPicker != null)
+            {
+                var shiftPresets = _shiftPicker.GetComponentInChildren<ColorPresets>();
+                var shiftPresetsLength = shiftPresets.presets.Length;
+                shiftPresetList = ColorPresetManager.Get(_shiftPicker.Setup.PresetColorsId);
+                shiftPresetList.OnColorsUpdated += x => { if (x.Count >= shiftPresetsLength) { x.RemoveAt(0); } };
+            }
 
-            var shiftPresets = _shiftPicker.GetComponentInChildren<ColorPresets>();
-            var shiftPresetsLength = normalPresets.presets.Length;
-            shiftPresetList = ColorPresetManager.Get(_shiftPicker.Setup.PresetColorsId);
-            shiftPresetList.OnColorsUpdated += x => { if (x.Count >= normalPresetsLength) { x.RemoveAt(0); } };
-
-            _normalPicker.onValueChanged.AddListener(x => UpdateColor(x));
-            _shiftPicker.onValueChanged.AddListener(x => UpdateColor(x));
-            _closePickerButton0.onClick.AddListener(() => Close());
-            _closePickerButton1.onClick.AddListener(() => Close());
-            _switchPickerButton0.onClick.AddListener(() => SwitchPicker());
-            _switchPickerButton1.onClick.AddListener(() => SwitchPicker());
+            _normalPicker?.onValueChanged.AddListener(x => UpdateColor(x));
+            _shiftPicker?.onValueChanged.AddListener(x => UpdateColor(x));
+            _closePickerButton0?.onClick.AddListener(() => Close());
+            _closePickerButton1?.onClick.AddListener(() => Close());
+            _switchPickerButton0?.onClick.AddListener(() => SwitchPicker());
+            _switchPickerButton1?.onClick.AddListener(() => SwitchPicker());
         }
 
         private void UpdateColor(Color32 pickerColor)
@@ -91,8 +96,8 @@ namespace RuntimeDotter
             afterOpen = true;
             afterOpenColor = color.ToPickerColor();
 
-            _switchPickerButton0.gameObject.SetActive(!pickMainColor);
-            _switchPickerButton1.gameObject.SetActive(!pickMainColor);
+            _switchPickerButton0?.gameObject.SetActive(!pickMainColor);
+            _switchPickerButton1?.gameObject.SetActive(!pickMainColor);
         }
 
         private void UpdateActive()
@@ -108,6 +113,8 @@ namespace RuntimeDotter
         /// </summary>
         private static void SetShow(CanvasGroup group, bool show)
         {
+            if (group == null) return;
+
             group.alpha = show ? 1f : 0f;
             group.interactable = show;
             group.blocksRaycasts = show;

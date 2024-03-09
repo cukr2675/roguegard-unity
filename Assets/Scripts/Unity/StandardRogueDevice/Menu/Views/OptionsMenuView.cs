@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using UnityEngine.UI;
+using RuntimeDotter;
 using Roguegard;
 using Roguegard.Device;
 
@@ -13,6 +14,7 @@ namespace RoguegardUnity
         [SerializeField] private CanvasGroup _canvasGroup = null;
         [SerializeField] private ScrollRect _scrollRect = null;
         [SerializeField] private ModelsMenuViewItemButton _exitButton = null;
+        [SerializeField] private DotterColorPicker _colorPicker = null;
         [Space]
         [SerializeField] private ModelsMenuViewItemButton _choicePrefab = null;
         [SerializeField] private ModelsMenuViewOptionSlider _sliderPrefab = null;
@@ -22,9 +24,13 @@ namespace RoguegardUnity
 
         private readonly List<GameObject> items = new List<GameObject>();
 
+        private ColorItemController colorItemController;
+
         public void Initialize()
         {
             _exitButton.Initialize(this);
+            colorItemController = new ColorItemController() { parent = this };
+            _colorPicker.OnColorChanged.AddListener(x => colorItemController.OnColorChanged(Root, Self, User, Arg, x.ToPickerColor()));
         }
 
         public override void OpenView<T>(
@@ -60,6 +66,15 @@ namespace RoguegardUnity
                     var label = text.GetName(Root, Self, User, Arg);
                     var value = text.GetValue(Root, Self, User, Arg);
                     item.Initialize(label, value, value => text.SetValue(Root, Self, User, Arg, value));
+                    items.Add(item.gameObject);
+                }
+                else if (model is IModelsMenuOptionColor color)
+                {
+                    var item = Instantiate(_choicePrefab, _scrollRect.content);
+                    SetTransform((RectTransform)item.transform, ref sumHeight);
+
+                    item.Initialize(this);
+                    item.SetItem(colorItemController, color);
                     items.Add(item.gameObject);
                 }
                 else
@@ -98,6 +113,30 @@ namespace RoguegardUnity
         {
             _exitButton.SetItem(ChoicesModelsMenuItemController.Instance, choice);
             MenuController.Show(_exitButton.CanvasGroup, true);
+        }
+
+        private class ColorItemController : IModelsMenuItemController
+        {
+            public OptionsMenuView parent;
+            private IModelsMenuOptionColor currentColor;
+
+            public string GetName(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            {
+                var color = (IModelsMenuOptionColor)model;
+                return color.GetName(root, self, user, arg);
+            }
+
+            public void Activate(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            {
+                currentColor = (IModelsMenuOptionColor)model;
+                var value = currentColor.GetValue(root, self, user, arg);
+                parent._colorPicker.Open(new ShiftableColor(value, false), true);
+            }
+
+            public void OnColorChanged(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg, Color value)
+            {
+                currentColor.SetValue(root, self, user, arg, value);
+            }
         }
     }
 }

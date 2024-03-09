@@ -84,10 +84,7 @@ namespace Roguegard
                     models = new List<object>()
                     {
                         new NameOption(),
-                        new RSlider(),
-                        new GSlider(),
-                        new BSlider(),
-                        new ASlider(),
+                        new ColorPicker(),
                         new ActionModelsMenuChoice("装備部位", EquipParts),
                         new OrderOption(),
                     };
@@ -96,7 +93,7 @@ namespace Roguegard
                 var data = (SewedEquipmentData)arg.Other;
                 var equipment = arg.TargetObj;
 
-                models.RemoveRange(7, models.Count - 7);
+                models.RemoveRange(4, models.Count - 4);
                 for (int i = 0; i < data.Items.Items.Count; i++)
                 {
                     var item = data.Items.Items[i];
@@ -229,91 +226,24 @@ namespace Roguegard
             }
         }
 
-        private class RSlider : IModelsMenuOptionSlider
+        private class ColorPicker : IModelsMenuOptionColor
         {
             public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                return "R";
+                var data = (SewedEquipmentData)arg.Other;
+                return $"<#{ColorUtility.ToHtmlStringRGBA(data.Items.MainColor)}>メインカラー";
             }
 
-            public float GetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public Color GetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 var data = (SewedEquipmentData)arg.Other;
-                return data.Items.MainColor.r / 255f;
+                return data.Items.MainColor;
             }
 
-            public void SetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg, float value)
+            public void SetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg, Color value)
             {
                 var data = (SewedEquipmentData)arg.Other;
-                var color = data.Items.MainColor;
-                color.r = (byte)(value * 255f);
-                data.Items.MainColor = color;
-            }
-        }
-
-        private class GSlider : IModelsMenuOptionSlider
-        {
-            public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                return "G";
-            }
-
-            public float GetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                var data = (SewedEquipmentData)arg.Other;
-                return data.Items.MainColor.g / 255f;
-            }
-
-            public void SetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg, float value)
-            {
-                var data = (SewedEquipmentData)arg.Other;
-                var color = data.Items.MainColor;
-                color.g = (byte)(value * 255f);
-                data.Items.MainColor = color;
-            }
-        }
-
-        private class BSlider : IModelsMenuOptionSlider
-        {
-            public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                return "B";
-            }
-
-            public float GetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                var data = (SewedEquipmentData)arg.Other;
-                return data.Items.MainColor.b / 255f;
-            }
-
-            public void SetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg, float value)
-            {
-                var data = (SewedEquipmentData)arg.Other;
-                var color = data.Items.MainColor;
-                color.b = (byte)(value * 255f);
-                data.Items.MainColor = color;
-            }
-        }
-
-        private class ASlider : IModelsMenuOptionSlider
-        {
-            public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                return "不透明度";
-            }
-
-            public float GetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                var data = (SewedEquipmentData)arg.Other;
-                return data.Items.MainColor.a / 255f;
-            }
-
-            public void SetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg, float value)
-            {
-                var data = (SewedEquipmentData)arg.Other;
-                var color = data.Items.MainColor;
-                color.a = (byte)(value * 255f);
-                data.Items.MainColor = color;
+                data.Items.MainColor = value;
             }
         }
 

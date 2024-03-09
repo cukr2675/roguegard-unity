@@ -27,20 +27,14 @@ namespace RoguegardUnity
                 models.Clear();
                 models.Add(new SelectOptionChoice(raceBuilder, database));
                 models.Add(new GenderOption(database));
-                models.Add(new RSlider());
-                models.Add(new GSlider());
-                models.Add(new BSlider());
-                models.Add(new ASlider());
+                models.Add(new ColorPicker());
                 AddMemberModels(raceBuilder);
             }
             else if (arg.Other is AppearanceBuilder appearanceBuilder)
             {
                 models.Clear();
                 models.Add(new SelectOptionChoice(appearanceBuilder, database));
-                models.Add(new RSlider());
-                models.Add(new GSlider());
-                models.Add(new BSlider());
-                models.Add(new ASlider());
+                models.Add(new ColorPicker());
                 AddMemberModels(appearanceBuilder);
                 models.Add(removeChoice);
             }
@@ -248,164 +242,46 @@ namespace RoguegardUnity
             }
         }
 
-        private class RSlider : IModelsMenuOptionSlider
+        private class ColorPicker : IModelsMenuOptionColor
         {
             public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                return "R";
-            }
-
-            public float GetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
                 if (arg.Other is RaceBuilder raceBuilder)
                 {
-                    return raceBuilder.BodyColor.r / 255f;
+                    return $"<#{ColorUtility.ToHtmlStringRGBA(raceBuilder.BodyColor)}>カラー";
                 }
                 else if (arg.Other is AppearanceBuilder appearanceBuilder)
                 {
-                    return appearanceBuilder.Color.r / 255f;
+                    return $"<#{ColorUtility.ToHtmlStringRGBA(appearanceBuilder.Color)}>カラー";
                 }
                 Debug.LogError("不正な型です。");
-                return 0;
+                return "???";
             }
 
-            public void SetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg, float value)
+            public Color GetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 if (arg.Other is RaceBuilder raceBuilder)
                 {
-                    var color = raceBuilder.BodyColor;
-                    color.r = (byte)(value * 255f);
-                    raceBuilder.BodyColor = color;
+                    return raceBuilder.BodyColor;
+                }
+                else if (arg.Other is AppearanceBuilder appearanceBuilder)
+                {
+                    return appearanceBuilder.Color;
+                }
+                Debug.LogError("不正な型です。");
+                return Color.white;
+            }
+
+            public void SetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg, Color value)
+            {
+                if (arg.Other is RaceBuilder raceBuilder)
+                {
+                    raceBuilder.BodyColor = value;
                     return;
                 }
                 else if (arg.Other is AppearanceBuilder appearanceBuilder)
                 {
-                    var color = appearanceBuilder.Color;
-                    color.r = (byte)(value * 255f);
-                    appearanceBuilder.Color = color;
-                    return;
-                }
-                Debug.LogError("不正な型です。");
-            }
-        }
-
-        private class GSlider : IModelsMenuOptionSlider
-        {
-            public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                return "G";
-            }
-
-            public float GetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                if (arg.Other is RaceBuilder raceBuilder)
-                {
-                    return raceBuilder.BodyColor.g / 255f;
-                }
-                else if (arg.Other is AppearanceBuilder appearanceBuilder)
-                {
-                    return appearanceBuilder.Color.g / 255f;
-                }
-                Debug.LogError("不正な型です。");
-                return 0;
-            }
-
-            public void SetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg, float value)
-            {
-                if (arg.Other is RaceBuilder raceBuilder)
-                {
-                    var color = raceBuilder.BodyColor;
-                    color.g = (byte)(value * 255f);
-                    raceBuilder.BodyColor = color;
-                    return;
-                }
-                else if (arg.Other is AppearanceBuilder appearanceBuilder)
-                {
-                    var color = appearanceBuilder.Color;
-                    color.g = (byte)(value * 255f);
-                    appearanceBuilder.Color = color;
-                    return;
-                }
-                Debug.LogError("不正な型です。");
-            }
-        }
-
-        private class BSlider : IModelsMenuOptionSlider
-        {
-            public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                return "B";
-            }
-
-            public float GetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                if (arg.Other is RaceBuilder raceBuilder)
-                {
-                    return raceBuilder.BodyColor.b / 255f;
-                }
-                else if (arg.Other is AppearanceBuilder appearanceBuilder)
-                {
-                    return appearanceBuilder.Color.b / 255f;
-                }
-                Debug.LogError("不正な型です。");
-                return 0;
-            }
-
-            public void SetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg, float value)
-            {
-                if (arg.Other is RaceBuilder raceBuilder)
-                {
-                    var color = raceBuilder.BodyColor;
-                    color.b = (byte)(value * 255f);
-                    raceBuilder.BodyColor = color;
-                    return;
-                }
-                else if (arg.Other is AppearanceBuilder appearanceBuilder)
-                {
-                    var color = appearanceBuilder.Color;
-                    color.b = (byte)(value * 255f);
-                    appearanceBuilder.Color = color;
-                    return;
-                }
-                Debug.LogError("不正な型です。");
-            }
-        }
-
-        private class ASlider : IModelsMenuOptionSlider
-        {
-            public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                return "不透明度";
-            }
-
-            public float GetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                if (arg.Other is RaceBuilder raceBuilder)
-                {
-                    return raceBuilder.BodyColor.a / 255f;
-                }
-                else if (arg.Other is AppearanceBuilder appearanceBuilder)
-                {
-                    return appearanceBuilder.Color.a / 255f;
-                }
-                Debug.LogError("不正な型です。");
-                return 0;
-            }
-
-            public void SetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg, float value)
-            {
-                if (arg.Other is RaceBuilder raceBuilder)
-                {
-                    var color = raceBuilder.BodyColor;
-                    color.a = (byte)(value * 255f);
-                    raceBuilder.BodyColor = color;
-                    return;
-                }
-                else if (arg.Other is AppearanceBuilder appearanceBuilder)
-                {
-                    var color = appearanceBuilder.Color;
-                    color.a = (byte)(value * 255f);
-                    appearanceBuilder.Color = color;
+                    appearanceBuilder.Color = value;
                     return;
                 }
                 Debug.LogError("不正な型です。");

@@ -127,11 +127,12 @@ namespace RuntimeDotter
         private void UpdatePenPosition(PointerEventData eventData)
         {
             var boardRect = _board.rectTransform.rect;
-            var ratio = Board.Size.y / boardRect.height;
-            _cursor.sizeDelta = boardRect.size * ratio * 2f;
+            _cursor.sizeDelta = _board.rectTransform.sizeDelta;
+            _cursor.localScale = Vector3.one / Board.Size.y * 2f;
 
             if (eventData != null)
             {
+                var ratio = Board.Size.y / boardRect.height;
                 penPosition = pressPenPosition + (eventData.position - eventData.pressPosition) * ratio * 2f;
             }
             penPosition.x = Mathf.Clamp(penPosition.x, .5f, Board.Size.x - .5f);

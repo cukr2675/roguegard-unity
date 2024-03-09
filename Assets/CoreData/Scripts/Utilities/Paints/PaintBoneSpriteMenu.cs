@@ -13,7 +13,7 @@ namespace Roguegard
 
         private static readonly IModelsMenu boneMenu = new BoneMenu();
 
-        private static readonly IModelsMenu[] paintMenues = new[]
+        private static readonly IModelsMenu[] paintMenus = new[]
         {
             new PaintMenu(0),
             new PaintMenu(1),
@@ -56,7 +56,7 @@ namespace Roguegard
 
             var table = (PaintBoneSpriteTable)arg.Other;
             var itemIndex = arg.Count;
-            root.OpenMenu(paintMenues[0], null, null, new(other: table, count: itemIndex), arg);
+            root.OpenMenu(paintMenus[0], null, null, new(other: table, count: itemIndex), arg);
         }
 
         private static void EditBackSprite(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
@@ -65,7 +65,7 @@ namespace Roguegard
 
             var table = (PaintBoneSpriteTable)arg.Other;
             var itemIndex = arg.Count;
-            root.OpenMenu(paintMenues[2], null, null, new(other: table, count: itemIndex), arg);
+            root.OpenMenu(paintMenus[2], null, null, new(other: table, count: itemIndex), arg);
         }
 
         private class BoneMenu : IModelsMenu, IModelsMenuItemController
