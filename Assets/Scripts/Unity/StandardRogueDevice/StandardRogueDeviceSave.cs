@@ -11,6 +11,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using ObjectFormer;
 using ObjectFormer.Serialization.Json;
+using RuntimeDotter;
 using Roguegard;
 using Roguegard.CharacterCreation;
 using Roguegard.Device;
@@ -175,6 +176,7 @@ namespace RoguegardUnity
             var assemblies = new[]
             {
                 Assembly.Load("UnityEngine.CoreModule"),
+                Assembly.Load("RuntimeDotter"),
                 Assembly.Load("Roguegard"),
                 Assembly.Load("Roguegard.CharacterCreation"),
                 Assembly.Load("Roguegard.Device"),
@@ -185,6 +187,8 @@ namespace RoguegardUnity
             converters.Add(FormerJsonConverter.Create(typeof(Vector2Int), true));
             converters.Add(FormerJsonConverter.Create(typeof(RectInt), true));
             converters.Add(FormerJsonConverter.Create(typeof(Color32), true));
+            converters.Add(FormerJsonConverter.Create(typeof(ShiftableColor), true));
+            converters.Add(FormerJsonConverter.Create(typeof(DotterBoard), true));
             converters.Add(RogueObjJsonConverter.Create());
             converters.Add(new MoonSharpTableSerialJsonConverter());
             converters.Add(FormerJsonConverter.Create(typeof(StandardRogueDeviceData)));

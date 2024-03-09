@@ -18,6 +18,7 @@ namespace RoguegardUnity.Tests
             {
                 //Assembly.Load("mscorlib"),
                 Assembly.Load("UnityEngine.CoreModule"),
+                Assembly.Load("RuntimeDotter"),
                 Assembly.Load("Roguegard"),
                 Assembly.Load("Roguegard.CharacterCreation"),
                 Assembly.Load("Roguegard.Device"),

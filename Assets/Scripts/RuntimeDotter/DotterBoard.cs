@@ -33,6 +33,8 @@ namespace RuntimeDotter
             board.CopyTo(this);
         }
 
+        private DotterBoard() { }
+
         public int GetPixel(Vector2Int position)
         {
             if (!RectInt.Contains(position)) throw new System.ArgumentOutOfRangeException(nameof(position));

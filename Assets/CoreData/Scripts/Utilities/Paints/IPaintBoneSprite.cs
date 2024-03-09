@@ -6,6 +6,7 @@ using RuntimeDotter;
 
 namespace Roguegard
 {
+    [ObjectFormer.RequireRelationalComponent]
     public interface IPaintBoneSprite
     {
         void AddTo(AffectableBoneSpriteTable table, Color mainColor, Spanning<ShiftableColor> palette);

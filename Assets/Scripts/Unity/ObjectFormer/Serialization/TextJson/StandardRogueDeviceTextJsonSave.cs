@@ -68,6 +68,7 @@ namespace RoguegardUnity
             var assemblies = new[]
             {
                 Assembly.Load("UnityEngine.CoreModule"),
+                Assembly.Load("RuntimeDotter"),
                 Assembly.Load("Roguegard"),
                 Assembly.Load("Roguegard.CharacterCreation"),
                 Assembly.Load("Roguegard.Device"),

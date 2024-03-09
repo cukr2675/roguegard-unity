@@ -6,9 +6,10 @@ using RuntimeDotter;
 
 namespace Roguegard
 {
+    [ObjectFormer.Formable]
     public class PaintBoneSpriteTable
     {
-        private List<IPaintBoneSprite> _items = new List<IPaintBoneSprite>();
+        private readonly List<IPaintBoneSprite> _items = new List<IPaintBoneSprite>();
         public Spanning<IPaintBoneSprite> Items => _items;
 
         public Color32 MainColor { get; set; }
@@ -20,6 +21,9 @@ namespace Roguegard
         {
             _palette = new ShiftableColor[RoguegardSettings.DefaultPalette.Count];
         }
+
+        [ObjectFormer.CreateInstance]
+        private PaintBoneSpriteTable(bool flag) { }
 
         public PaintBoneSpriteTable(PaintBoneSpriteTable table)
         {
