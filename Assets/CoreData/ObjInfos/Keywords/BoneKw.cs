@@ -8,65 +8,65 @@ namespace Roguegard
     {
         private static BoneKw instance;
 
-        [SerializeField] private KeywordData _body;
-        public static IKeyword Body => instance._body;
+        [SerializeField] private SerializableKeywordData _body;
+        public static ISerializableKeyword Body => instance._body;
 
-        [SerializeField] private KeywordData _effect;
-        public static IKeyword Effect => instance._effect;
+        [SerializeField] private SerializableKeywordData _effect;
+        public static ISerializableKeyword Effect => instance._effect;
 
-        [SerializeField] private KeywordData _hair;
-        public static IKeyword Hair => instance._hair;
+        [SerializeField] private SerializableKeywordData _hair;
+        public static ISerializableKeyword Hair => instance._hair;
 
-        [SerializeField] private KeywordData _head;
-        public static IKeyword Head => instance._head;
+        [SerializeField] private SerializableKeywordData _head;
+        public static ISerializableKeyword Head => instance._head;
 
-        [SerializeField] private KeywordData _leftArm;
-        public static IKeyword LeftArm => instance._leftArm;
+        [SerializeField] private SerializableKeywordData _leftArm;
+        public static ISerializableKeyword LeftArm => instance._leftArm;
 
-        [SerializeField] private KeywordData _leftEar;
-        public static IKeyword LeftEar => instance._leftEar;
+        [SerializeField] private SerializableKeywordData _leftEar;
+        public static ISerializableKeyword LeftEar => instance._leftEar;
 
-        [SerializeField] private KeywordData _leftEye;
-        public static IKeyword LeftEye => instance._leftEye;
+        [SerializeField] private SerializableKeywordData _leftEye;
+        public static ISerializableKeyword LeftEye => instance._leftEye;
 
-        [SerializeField] private KeywordData _leftFoot;
-        public static IKeyword LeftFoot => instance._leftFoot;
+        [SerializeField] private SerializableKeywordData _leftFoot;
+        public static ISerializableKeyword LeftFoot => instance._leftFoot;
 
-        [SerializeField] private KeywordData _leftHand;
-        public static IKeyword LeftHand => instance._leftHand;
+        [SerializeField] private SerializableKeywordData _leftHand;
+        public static ISerializableKeyword LeftHand => instance._leftHand;
 
-        [SerializeField] private KeywordData _leftLeg;
-        public static IKeyword LeftLeg => instance._leftLeg;
+        [SerializeField] private SerializableKeywordData _leftLeg;
+        public static ISerializableKeyword LeftLeg => instance._leftLeg;
 
-        [SerializeField] private KeywordData _leftWing;
-        public static IKeyword LeftWing => instance._leftWing;
+        [SerializeField] private SerializableKeywordData _leftWing;
+        public static ISerializableKeyword LeftWing => instance._leftWing;
 
-        [SerializeField] private KeywordData _rightArm;
-        public static IKeyword RightArm => instance._rightArm;
+        [SerializeField] private SerializableKeywordData _rightArm;
+        public static ISerializableKeyword RightArm => instance._rightArm;
 
-        [SerializeField] private KeywordData _rightEar;
-        public static IKeyword RightEar => instance._rightEar;
+        [SerializeField] private SerializableKeywordData _rightEar;
+        public static ISerializableKeyword RightEar => instance._rightEar;
 
-        [SerializeField] private KeywordData _rightEye;
-        public static IKeyword RightEye => instance._rightEye;
+        [SerializeField] private SerializableKeywordData _rightEye;
+        public static ISerializableKeyword RightEye => instance._rightEye;
 
-        [SerializeField] private KeywordData _rightFoot;
-        public static IKeyword RightFoot => instance._rightFoot;
+        [SerializeField] private SerializableKeywordData _rightFoot;
+        public static ISerializableKeyword RightFoot => instance._rightFoot;
 
-        [SerializeField] private KeywordData _rightHand;
-        public static IKeyword RightHand => instance._rightHand;
+        [SerializeField] private SerializableKeywordData _rightHand;
+        public static ISerializableKeyword RightHand => instance._rightHand;
 
-        [SerializeField] private KeywordData _rightLeg;
-        public static IKeyword RightLeg => instance._rightLeg;
+        [SerializeField] private SerializableKeywordData _rightLeg;
+        public static ISerializableKeyword RightLeg => instance._rightLeg;
 
-        [SerializeField] private KeywordData _rightWing;
-        public static IKeyword RightWing => instance._rightWing;
+        [SerializeField] private SerializableKeywordData _rightWing;
+        public static ISerializableKeyword RightWing => instance._rightWing;
 
-        [SerializeField] private KeywordData _tail;
-        public static IKeyword Tail => instance._tail;
+        [SerializeField] private SerializableKeywordData _tail;
+        public static ISerializableKeyword Tail => instance._tail;
 
-        [SerializeField] private KeywordData _upperBody;
-        public static IKeyword UpperBody => instance._upperBody;
+        [SerializeField] private SerializableKeywordData _upperBody;
+        public static ISerializableKeyword UpperBody => instance._upperBody;
 
         public override IEnumerator LoadAsync()
         {

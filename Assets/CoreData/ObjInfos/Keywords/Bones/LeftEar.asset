@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7fab66e696671984c8cab2172b9a92ab, type: 3}
+  m_Script: {fileID: 11500000, guid: de842a29d178c9c4597e7fcfb40dc609, type: 3}
   m_Name: LeftEar
   m_EditorClassIdentifier: 
   _descriptionName: "\u5DE6\u8033"
