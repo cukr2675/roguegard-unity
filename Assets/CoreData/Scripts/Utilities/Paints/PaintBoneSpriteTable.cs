@@ -28,7 +28,7 @@ namespace Roguegard
                 _items.Add(item.Clone());
             }
             MainColor = table.MainColor;
-            _palette = new ShiftableColor[_palette.Length];
+            _palette = new ShiftableColor[table._palette.Length];
             for (int i = 0; i < _palette.Length; i++)
             {
                 _palette[i] = table._palette[i];
