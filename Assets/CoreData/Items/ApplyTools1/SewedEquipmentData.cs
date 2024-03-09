@@ -12,8 +12,6 @@ namespace Roguegard
     {
         public string Name { get; set; }
 
-        public Color32 MainColor { get; set; }
-
         private ISerializableKeyword[] _equipParts;
         public Spanning<IKeyword> EquipParts
         {
@@ -30,43 +28,32 @@ namespace Roguegard
 
         public float BoneSpriteEffectOrder { get; set; }
 
-        public SewedEquipmentDataItemTable Items { get; }
-
-        private readonly RoguePaintColor[] _palette;
-        public Spanning<RoguePaintColor> Palette => _palette;
+        public PaintBoneSpriteTable Items { get; }
 
         [System.NonSerialized] private Sprite _icon;
         public Sprite Icon
         {
             get
             {
-                if (_icon == null) { _icon = Items.GetIcon(_palette); }
+                if (_icon == null) { _icon = Items.GetIcon(); }
                 return _icon;
             }
         }
 
         public SewedEquipmentData()
         {
-            Items = new SewedEquipmentDataItemTable();
-            _palette = new RoguePaintColor[RoguePaintData.PaletteSize];
-            for (int i = 0; i < _palette.Length; i++)
-            {
-                _palette[i] = new RoguePaintColor();
-            }
+            Name = "";
+            _equipParts = new ISerializableKeyword[0];
+            BoneSpriteEffectOrder = 0;
+            Items = new PaintBoneSpriteTable();
         }
 
         public SewedEquipmentData(SewedEquipmentData data)
         {
             Name = data.Name;
-            MainColor = data.MainColor;
             _equipParts = data._equipParts?.ToArray();
             BoneSpriteEffectOrder = data.BoneSpriteEffectOrder;
-            Items = new SewedEquipmentDataItemTable(data.Items);
-            _palette = new RoguePaintColor[RoguePaintData.PaletteSize];
-            for (int i = 0; i < _palette.Length; i++)
-            {
-                _palette[i] = new RoguePaintColor(data._palette[i]);
-            }
+            Items = new PaintBoneSpriteTable(data.Items);
         }
 
         public void Affect(AppearanceBoneSpriteTable boneSpriteTable, Color color)
@@ -77,8 +64,7 @@ namespace Roguegard
                 return;
             }
 
-            var baseColor = MainColor;
-            Items.GetTable(baseColor, _palette).ColoredAddTo(table, baseColor, color);
+            Items.GetAffectableTable().ColoredAddTo(table, Items.MainColor, color);
         }
     }
 }

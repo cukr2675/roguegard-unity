@@ -25,6 +25,8 @@ namespace Roguegard
 
         public int Count => _count;
 
+        public System.ReadOnlySpan<T> Span => new System.Span<T>(ToArray(), 0, _count);
+
         public static Spanning<T> Empty => _empty;
         private static readonly T[] _empty = new T[0];
 

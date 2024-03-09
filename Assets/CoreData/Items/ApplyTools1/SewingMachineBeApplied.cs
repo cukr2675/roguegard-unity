@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using RuntimeDotter;
 using Roguegard.Device;
 
 namespace Roguegard
@@ -53,11 +54,11 @@ namespace Roguegard
                 {
                     // 装備品を新規作成する場合はデータクラスを生成する
                     var data = new SewedEquipmentData();
-                    for (int i = 0; i < RoguePaintData.PaletteSize; i++)
+                    for (int i = 0; i < RoguegardSettings.DefaultPalette.Count; i++)
                     {
-                        data.Palette[i].Set(RoguegardSettings.DefaultPalette[i]);
+                        data.Items.SetPalette(i, RoguegardSettings.DefaultPalette[i]);
                     }
-                    data.MainColor = Color.white;
+                    data.Items.MainColor = Color.white;
                     root.OpenMenu(nextMenu, self, null, new(other: data, targetObj: null), RogueMethodArgument.Identity);
                 }
                 else if (model is RogueObj equipment && equipment.Main.BaseInfoSet is SewedEquipmentInfoSet infoSet)
@@ -69,10 +70,10 @@ namespace Roguegard
             }
         }
 
-        private class SewingMenu : IModelsMenu
+        private class SewingMenu : IModelsMenu, IModelsMenuItemController
         {
-            private static object[] models;
-            private static readonly PaintMenu nextMenu = new PaintMenu();
+            private static List<object> models;
+            private static readonly PaintBoneSpriteMenu nextMenu = new PaintBoneSpriteMenu();
             private static readonly EquipPartsMenu equipPartsMenu = new EquipPartsMenu();
             private static readonly ExitDialog exitDialog = new ExitDialog();
 
@@ -80,7 +81,7 @@ namespace Roguegard
             {
                 if (models == null)
                 {
-                    models = new object[]
+                    models = new List<object>()
                     {
                         new NameOption(),
                         new RSlider(),
@@ -89,30 +90,31 @@ namespace Roguegard
                         new ASlider(),
                         new ActionModelsMenuChoice("装備部位", EquipParts),
                         new OrderOption(),
-                        new ActionModelsMenuChoice("見た目を編集", Appearance),
                     };
                 }
 
                 var data = (SewedEquipmentData)arg.Other;
                 var equipment = arg.TargetObj;
 
+                models.RemoveRange(7, models.Count - 7);
+                for (int i = 0; i < data.Items.Items.Count; i++)
+                {
+                    var item = data.Items.Items[i];
+                    models.Add(item);
+                }
+                models.Add(null);
+
                 var options = (IScrollModelsMenuView)root.Get(DeviceKw.MenuOptions);
-                options.OpenView(ChoicesModelsMenuItemController.Instance, models, root, self, null, new(other: data, targetObj: equipment));
+                options.OpenView(this, models, root, self, null, new(other: data, targetObj: equipment));
                 options.ShowExitButton(new ActionModelsMenuChoice("<", Exit));
             }
 
             private static void EquipParts(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Cancel);
+                root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+
                 var data = (SewedEquipmentData)arg.Other;
                 root.OpenMenu(equipPartsMenu, self, null, new(other: data), arg);
-            }
-
-            private static void Appearance(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Cancel);
-                var data = (SewedEquipmentData)arg.Other;
-                root.OpenMenu(nextMenu, self, null, new(other: data), arg);
             }
 
             private static void Exit(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
@@ -122,6 +124,43 @@ namespace Roguegard
                 root.AddObject(DeviceKw.AppendText, "編集内容を保存しますか？");
                 root.AddInt(DeviceKw.WaitEndOfTalk, 0);
                 root.OpenMenuAsDialog(exitDialog, self, user, arg, arg);
+            }
+
+            public string GetName(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            {
+                if (model is IModelsMenuChoice choice) return choice.GetName(root, self, user, arg);
+                else if (model is PaintBoneSprite item) return item.Bone.Name;
+                else return "+ 追加";
+            }
+
+            public void Activate(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            {
+                if (model is IModelsMenuChoice choice)
+                {
+                    choice.Activate(root, self, user, arg);
+                }
+                else if (model is PaintBoneSprite boneSprite)
+                {
+                    // 部位編集
+                    root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+
+                    var data = (SewedEquipmentData)arg.Other;
+                    root.OpenMenu(nextMenu, self, null, new(other: data.Items, count: data.Items.IndexOf(boneSprite)), arg);
+                }
+                else
+                {
+                    // 部位追加
+                    root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+
+                    var data = (SewedEquipmentData)arg.Other;
+                    boneSprite = new PaintBoneSprite();
+                    boneSprite.NormalFront = boneSprite.BackRear = new DotterBoard(new Vector2Int(32, 32), 16);
+                    boneSprite.NormalRear = boneSprite.BackFront = new DotterBoard(new Vector2Int(32, 32), 16);
+                    boneSprite.Bone = BoneKw.Body;
+                    boneSprite.Mirroring = true;
+                    data.Items.Add(boneSprite);
+                    root.OpenMenu(nextMenu, self, null, new(other: data.Items, count: data.Items.IndexOf(boneSprite)), arg);
+                }
             }
 
             private class NameOption : IModelsMenuOptionText
@@ -200,15 +239,15 @@ namespace Roguegard
             public float GetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 var data = (SewedEquipmentData)arg.Other;
-                return data.MainColor.r / 255f;
+                return data.Items.MainColor.r / 255f;
             }
 
             public void SetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg, float value)
             {
                 var data = (SewedEquipmentData)arg.Other;
-                var color = data.MainColor;
+                var color = data.Items.MainColor;
                 color.r = (byte)(value * 255f);
-                data.MainColor = color;
+                data.Items.MainColor = color;
             }
         }
 
@@ -222,15 +261,15 @@ namespace Roguegard
             public float GetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 var data = (SewedEquipmentData)arg.Other;
-                return data.MainColor.g / 255f;
+                return data.Items.MainColor.g / 255f;
             }
 
             public void SetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg, float value)
             {
                 var data = (SewedEquipmentData)arg.Other;
-                var color = data.MainColor;
+                var color = data.Items.MainColor;
                 color.g = (byte)(value * 255f);
-                data.MainColor = color;
+                data.Items.MainColor = color;
             }
         }
 
@@ -244,15 +283,15 @@ namespace Roguegard
             public float GetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 var data = (SewedEquipmentData)arg.Other;
-                return data.MainColor.b / 255f;
+                return data.Items.MainColor.b / 255f;
             }
 
             public void SetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg, float value)
             {
                 var data = (SewedEquipmentData)arg.Other;
-                var color = data.MainColor;
+                var color = data.Items.MainColor;
                 color.b = (byte)(value * 255f);
-                data.MainColor = color;
+                data.Items.MainColor = color;
             }
         }
 
@@ -266,15 +305,15 @@ namespace Roguegard
             public float GetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 var data = (SewedEquipmentData)arg.Other;
-                return data.MainColor.a / 255f;
+                return data.Items.MainColor.a / 255f;
             }
 
             public void SetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg, float value)
             {
                 var data = (SewedEquipmentData)arg.Other;
-                var color = data.MainColor;
+                var color = data.Items.MainColor;
                 color.a = (byte)(value * 255f);
-                data.MainColor = color;
+                data.Items.MainColor = color;
             }
         }
 
@@ -361,18 +400,6 @@ namespace Roguegard
                 {
                     data.BoneSpriteEffectOrder = order;
                 }
-            }
-        }
-
-        private class PaintMenu : IModelsMenu
-        {
-            private static readonly object[] models = new object[] { ExitModelsMenuChoice.Instance };
-
-            public void OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                var data = (SewedEquipmentData)arg.Other;
-                var paint = root.Get(DeviceKw.MenuPaint);
-                paint.OpenView(ChoicesModelsMenuItemController.Instance, models, root, self, null, new(other: data));
             }
         }
     }

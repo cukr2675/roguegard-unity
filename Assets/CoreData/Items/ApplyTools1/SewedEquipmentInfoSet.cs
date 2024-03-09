@@ -15,7 +15,7 @@ namespace Roguegard
 
         public override string Name => data.Name;
         [field: System.NonSerialized] public override Sprite Icon { get; }
-        public override Color Color => data.MainColor;
+        public override Color Color => data.Items.MainColor;
         public override string Caption => null;
         public override IRogueDetails Details => null;
 
@@ -60,7 +60,7 @@ namespace Roguegard
         public SewedEquipmentInfoSet(SewedEquipmentData data)
         {
             this.data = new SewedEquipmentData(data);
-            Icon = data.Items.GetIcon(data.Palette);
+            Icon = data.Items.GetIcon();
         }
 
         private SewedEquipmentInfoSet() { }
@@ -127,7 +127,7 @@ namespace Roguegard
 
             private readonly SewedEquipmentData data;
             private readonly RogueObj self;
-            private AffectableBoneSpriteTable table;
+            private readonly AffectableBoneSpriteTable table;
             private bool colorIsInitialized;
             private Color color;
 
@@ -135,7 +135,7 @@ namespace Roguegard
             {
                 this.data = data;
                 this.self = self;
-                table = data.Items.GetTable(data.MainColor, data.Palette);
+                table = data.Items.GetAffectableTable();
                 colorIsInitialized = false;
             }
 
@@ -158,7 +158,7 @@ namespace Roguegard
 
             void IBoneSpriteEffect.AffectSprite(RogueObj owner, IBoneNode boneRoot, AffectableBoneSpriteTable boneSpriteTable)
             {
-                var baseColor = data.MainColor;
+                var baseColor = data.Items.MainColor;
                 if (!colorIsInitialized)
                 {
                     color = RogueColorUtility.GetColor(self);

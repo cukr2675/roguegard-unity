@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using RuntimeDotter;
 using Roguegard.CharacterCreation;
 using Roguegard.Device;
 
@@ -29,11 +30,12 @@ namespace Roguegard
         /// </summary>
         public static float LightRatio { get; set; }
 
-        private static RoguePaintColor[] _defaultPalette;
-        public static Spanning<RoguePaintColor> DefaultPalette
+        private const int paletteLength = 16;
+        private static ShiftableColor[] _defaultPalette;
+        public static Spanning<ShiftableColor> DefaultPalette
         {
             get => _defaultPalette;
-            set => _defaultPalette = (value.Count == RoguePaintData.PaletteSize ? value.ToArray() : throw new RogueException());
+            set => _defaultPalette = (value.Count == paletteLength ? value.ToArray() : throw new RogueException());
         }
 
         public static Color White => Color.white * LightRatio;

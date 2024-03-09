@@ -4,6 +4,7 @@ using UnityEngine;
 
 using System.Linq;
 using System.Reflection;
+using RuntimeDotter;
 using Roguegard;
 using Roguegard.CharacterCreation;
 using System.IO;
@@ -64,7 +65,7 @@ namespace RoguegardUnity
 
             RoguegardSettings.MaxTilemapSize = _maxTilemapSize;
             RoguegardSettings.DefaultVisibleRadius = _defaultVisibleRadius;
-            RoguegardSettings.DefaultPalette = _defaultPalette.Select(x => RoguePaintColor.FromColor(x)).ToArray();
+            RoguegardSettings.DefaultPalette = _defaultPalette.Select(x => ShiftableColor.FromColor(x)).ToArray();
             RoguegardSettings.KeywordsNotEnqueueMessageRule = _keywordsNotEnqueueMessageRule;
 
             RoguegardSettings.PixelsPerUnit = _pixelsPerUnit;

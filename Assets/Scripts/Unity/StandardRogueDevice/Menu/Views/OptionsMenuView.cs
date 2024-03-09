@@ -62,13 +62,13 @@ namespace RoguegardUnity
                     item.Initialize(label, value, value => text.SetValue(Root, Self, User, Arg, value));
                     items.Add(item.gameObject);
                 }
-                else if (model is IModelsMenuChoice choice)
+                else
                 {
                     var item = Instantiate(_choicePrefab, _scrollRect.content);
                     SetTransform((RectTransform)item.transform, ref sumHeight);
 
                     item.Initialize(this);
-                    item.SetItem(itemController, choice);
+                    item.SetItem(itemController, model);
                     items.Add(item.gameObject);
                 }
             }
