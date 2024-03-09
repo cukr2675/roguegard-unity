@@ -325,7 +325,7 @@ namespace Roguegard
             {
                 if (models == null)
                 {
-                    models = new object[]
+                    models = new ISerializableKeyword[]
                     {
                         //EquipKw.Shield,
                         //EquipKw.Weapon,
@@ -363,12 +363,12 @@ namespace Roguegard
                 var data = (SewedEquipmentData)arg.Other;
                 if (model == null)
                 {
-                    data.EquipParts = Spanning<IKeyword>.Empty;
+                    data.SetEquipParts(Spanning<ISerializableKeyword>.Empty);
                 }
                 else
                 {
-                    var part = (IKeyword)model;
-                    data.EquipParts = new[] { part };
+                    var part = (ISerializableKeyword)model;
+                    data.SetEquipParts(new[] { part });
 
                     if (part is EquipKeywordData keyword)
                     {

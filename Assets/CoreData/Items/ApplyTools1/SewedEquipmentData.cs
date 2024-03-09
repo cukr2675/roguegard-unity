@@ -13,18 +13,7 @@ namespace Roguegard
         public string Name { get; set; }
 
         private ISerializableKeyword[] _equipParts;
-        public Spanning<IKeyword> EquipParts
-        {
-            get => _equipParts;
-            set
-            {
-                _equipParts = new ISerializableKeyword[value.Count];
-                for (int i = 0; i < value.Count; i++)
-                {
-                    _equipParts[i] = (ISerializableKeyword)value[i];
-                }
-            }
-        }
+        public Spanning<IKeyword> EquipParts => _equipParts;
 
         public float BoneSpriteEffectOrder { get; set; }
 
@@ -54,6 +43,11 @@ namespace Roguegard
             _equipParts = data._equipParts?.ToArray();
             BoneSpriteEffectOrder = data.BoneSpriteEffectOrder;
             Items = new PaintBoneSpriteTable(data.Items);
+        }
+
+        public void SetEquipParts(Spanning<ISerializableKeyword> parts)
+        {
+            _equipParts = parts.ToArray();
         }
 
         public void Affect(AppearanceBoneSpriteTable boneSpriteTable, Color color)
