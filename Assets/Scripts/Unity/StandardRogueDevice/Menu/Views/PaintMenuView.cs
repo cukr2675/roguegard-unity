@@ -22,6 +22,7 @@ namespace RoguegardUnity
 
         private PaintBoneSpriteTable baseTable;
         private List<DotterBoard> _boards;
+        private List<ShiftableColor> _palette;
 
         public Spanning<DotterBoard> Boards
         {
@@ -32,9 +33,25 @@ namespace RoguegardUnity
             }
         }
 
+        public Color32 MainColor => _toolSet.MainColor;
+
+        public Spanning<ShiftableColor> Palette
+        {
+            get
+            {
+                _palette.Clear();
+                for (int i = 0; i < _toolSet.Palette.Count; i++)
+                {
+                    _palette.Add(_toolSet.Palette[i]);
+                }
+                return _palette;
+            }
+        }
+
         public void Initialize()
         {
             _boards = new List<DotterBoard>();
+            _palette = new List<ShiftableColor>();
             _exitButton.Initialize(this);
         }
 

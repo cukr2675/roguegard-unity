@@ -200,6 +200,11 @@ namespace Roguegard
                         paint.Boards[0].CopyTo(boneSprite.BackRear);
                         break;
                 }
+                table.MainColor = paint.MainColor;
+                for (int i = 0; i < paint.Palette.Count; i++)
+                {
+                    table.SetPalette(i, paint.Palette[i]);
+                }
             }
         }
     }

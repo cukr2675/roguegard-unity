@@ -19,6 +19,7 @@ namespace RuntimeDotter
         private DotterBoard undoBoard;
 
         public DotterBoard Board => _boardView.Board;
+        public Color32 MainColor => _paletteView.MainColor;
         public IReadOnlyList<ShiftableColor> Palette => _paletteView.Palette;
 
         private void Start()
