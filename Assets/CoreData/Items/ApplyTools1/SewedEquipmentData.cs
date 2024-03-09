@@ -17,14 +17,14 @@ namespace Roguegard
 
         public float BoneSpriteEffectOrder { get; set; }
 
-        public PaintBoneSpriteTable Items { get; }
+        public PaintBoneSpriteTable BoneSprites { get; }
 
         [System.NonSerialized] private Sprite _icon;
         public Sprite Icon
         {
             get
             {
-                if (_icon == null) { _icon = Items.GetIcon(); }
+                if (_icon == null) { _icon = BoneSprites.GetIcon(); }
                 return _icon;
             }
         }
@@ -34,7 +34,7 @@ namespace Roguegard
             Name = "";
             _equipParts = new ISerializableKeyword[0];
             BoneSpriteEffectOrder = 0;
-            Items = new PaintBoneSpriteTable();
+            BoneSprites = new PaintBoneSpriteTable();
         }
 
         public SewedEquipmentData(SewedEquipmentData data)
@@ -42,7 +42,7 @@ namespace Roguegard
             Name = data.Name;
             _equipParts = data._equipParts?.ToArray();
             BoneSpriteEffectOrder = data.BoneSpriteEffectOrder;
-            Items = new PaintBoneSpriteTable(data.Items);
+            BoneSprites = new PaintBoneSpriteTable(data.BoneSprites);
         }
 
         public void SetEquipParts(Spanning<ISerializableKeyword> parts)
@@ -58,7 +58,7 @@ namespace Roguegard
                 return;
             }
 
-            Items.GetAffectableTable().ColoredAddTo(table, Items.MainColor, color);
+            BoneSprites.GetAffectableTable().ColoredAddTo(table, BoneSprites.MainColor, color);
         }
     }
 }

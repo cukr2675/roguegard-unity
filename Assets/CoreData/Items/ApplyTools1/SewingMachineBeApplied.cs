@@ -56,9 +56,9 @@ namespace Roguegard
                     var data = new SewedEquipmentData();
                     for (int i = 0; i < RoguegardSettings.DefaultPalette.Count; i++)
                     {
-                        data.Items.SetPalette(i, RoguegardSettings.DefaultPalette[i]);
+                        data.BoneSprites.SetPalette(i, RoguegardSettings.DefaultPalette[i]);
                     }
-                    data.Items.MainColor = Color.white;
+                    data.BoneSprites.MainColor = Color.white;
                     root.OpenMenu(nextMenu, self, null, new(other: data, targetObj: null), RogueMethodArgument.Identity);
                 }
                 else if (model is RogueObj equipment && equipment.Main.BaseInfoSet is SewedEquipmentInfoSet infoSet)
@@ -94,9 +94,9 @@ namespace Roguegard
                 var equipment = arg.TargetObj;
 
                 models.RemoveRange(4, models.Count - 4);
-                for (int i = 0; i < data.Items.Items.Count; i++)
+                for (int i = 0; i < data.BoneSprites.Items.Count; i++)
                 {
-                    var item = data.Items.Items[i];
+                    var item = data.BoneSprites.Items[i];
                     models.Add(item);
                 }
                 models.Add(null);
@@ -142,7 +142,7 @@ namespace Roguegard
                     root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
 
                     var data = (SewedEquipmentData)arg.Other;
-                    root.OpenMenu(nextMenu, self, null, new(other: data.Items, count: data.Items.IndexOf(boneSprite)), arg);
+                    root.OpenMenu(nextMenu, self, null, new(other: data.BoneSprites, count: data.BoneSprites.IndexOf(boneSprite)), arg);
                 }
                 else
                 {
@@ -155,8 +155,8 @@ namespace Roguegard
                     boneSprite.NormalRear = boneSprite.BackFront = new DotterBoard(new Vector2Int(32, 32), 16);
                     boneSprite.Bone = BoneKw.Body;
                     boneSprite.Mirroring = true;
-                    data.Items.Add(boneSprite);
-                    root.OpenMenu(nextMenu, self, null, new(other: data.Items, count: data.Items.IndexOf(boneSprite)), arg);
+                    data.BoneSprites.Add(boneSprite);
+                    root.OpenMenu(nextMenu, self, null, new(other: data.BoneSprites, count: data.BoneSprites.IndexOf(boneSprite)), arg);
                 }
             }
 
@@ -231,19 +231,19 @@ namespace Roguegard
             public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 var data = (SewedEquipmentData)arg.Other;
-                return $"<#{ColorUtility.ToHtmlStringRGBA(data.Items.MainColor)}>メインカラー";
+                return $"<#{ColorUtility.ToHtmlStringRGBA(data.BoneSprites.MainColor)}>メインカラー";
             }
 
             public Color GetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 var data = (SewedEquipmentData)arg.Other;
-                return data.Items.MainColor;
+                return data.BoneSprites.MainColor;
             }
 
             public void SetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg, Color value)
             {
                 var data = (SewedEquipmentData)arg.Other;
-                data.Items.MainColor = value;
+                data.BoneSprites.MainColor = value;
             }
         }
 
