@@ -57,8 +57,12 @@ namespace ObjectFormer.Serialization.Json
 
                 var propertyName = (string)reader.Value;
 
-                reader.Read();
-                if (!Former.TryGetMemberByCamel(propertyName, out var member)) continue;
+                reader.Read(); // ƒL[‚ğ”ò‚Î‚·
+                if (!Former.TryGetMemberByCamel(propertyName, out var member))
+                {
+                    reader.Read(); // ’l‚ğ”ò‚Î‚·
+                    continue;
+                }
 
                 var memberValue = serializer.Deserialize(reader, member.FieldType);
                 member.SetValue(value, memberValue);
