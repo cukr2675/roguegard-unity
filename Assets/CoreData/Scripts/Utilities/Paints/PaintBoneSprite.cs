@@ -45,7 +45,7 @@ namespace Roguegard
 
         public bool ShowsSplitLine(DotterBoard board, out Vector2 upperPivot, out Vector2 lowerPivot)
         {
-            if (Bone == BoneKw.Body)
+            if (Bone == BoneKw.Body || Bone == BoneKw.LeftArm || Bone == BoneKw.RightArm || Bone == BoneKw.LeftLeg || Bone == BoneKw.RightLeg)
             {
                 var center = board.Size / 2;
                 var size = (Vector2)board.Size;
@@ -79,6 +79,17 @@ namespace Roguegard
                 {
                     AddTo(table, BoneKw.RightArm, upperBoneSprite, mainColor);
                     AddTo(table, BoneKw.RightHand, lowerBoneSprite, mainColor);
+                }
+            }
+            else if (Bone == BoneKw.LeftLeg)
+            {
+                ToBoneSprite(palette, out var upperBoneSprite, out var lowerBoneSprite);
+                AddTo(table, BoneKw.LeftLeg, upperBoneSprite, mainColor);
+                AddTo(table, BoneKw.LeftFoot, lowerBoneSprite, mainColor);
+                if (Mirroring)
+                {
+                    AddTo(table, BoneKw.RightLeg, upperBoneSprite, mainColor);
+                    AddTo(table, BoneKw.RightFoot, lowerBoneSprite, mainColor);
                 }
             }
             else
