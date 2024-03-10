@@ -134,6 +134,24 @@ MonoBehaviour:
           _stack: 1
           _members:
             _items: []
+        - _option: {fileID: 11400000, guid: a1cf5d687b994244fa96d10066d22698, type: 2}
+          _optionDescription: {fileID: 0}
+          _generatorWeight: 1
+          _stack: 1
+          _members:
+            _items: []
+        - _option: {fileID: 11400000, guid: 04deaed9983a1ae4bbf3297ca0be50f1, type: 2}
+          _optionDescription: {fileID: 0}
+          _generatorWeight: 1
+          _stack: 1
+          _members:
+            _items: []
+        - _option: {fileID: 11400000, guid: 20c7d8b294ff86a44a77b942ac0d2309, type: 2}
+          _optionDescription: {fileID: 0}
+          _generatorWeight: 1
+          _stack: 1
+          _members:
+            _items: []
     - rid: 3586031133046603782
       type: {class: ConstantRaceSprite, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
       data:
