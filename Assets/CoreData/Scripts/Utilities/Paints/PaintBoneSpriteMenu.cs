@@ -174,7 +174,7 @@ namespace Roguegard
                 }
                 var showsSplitLine = boneSprite.ShowsSplitLine(models[0], out pivots[0], out pivots[1]);
                 var paint = (IPaintModelsMenuView)root.Get(DeviceKw.MenuPaint);
-                paint.OpenView(ChoicesModelsMenuItemController.Instance, models, root, self, null, new(other: table));
+                paint.OpenView(ChoicesModelsMenuItemController.Instance, models, root, self, null, new(other: table, count: itemIndex));
                 paint.ShowExitButton(exit);
                 paint.ShowSplitLine(showsSplitLine, pivots);
             }
