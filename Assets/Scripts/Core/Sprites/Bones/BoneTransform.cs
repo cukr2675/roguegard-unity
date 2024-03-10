@@ -33,6 +33,7 @@ namespace Roguegard
 
         /// <summary>
         /// 適用するボーンを子も含めて左右反転する。 <see cref="TransformsInRootParent"/> の影響を受けない。
+        /// 頭のみを左右反転しつつ耳の角度を保つために必須
         /// </summary>
         public bool LocalMirrorX { get; }
 
