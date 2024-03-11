@@ -6,9 +6,7 @@ namespace Roguegard
 {
     public class RoguePositionSelector
     {
-        private readonly List<Item> items = new List<Item>();
-
-        private const int length = 10;
+        private readonly List<Vector2Int> items = new List<Vector2Int>();
 
         public void Update(IRogueTilemapView view)
         {
@@ -18,36 +16,17 @@ namespace Roguegard
             {
                 for (int x = 0; x < size.x; x++)
                 {
-                    view.GetTile(new Vector2Int(x, y), out _, out var tile, out var tileObj);
+                    var position = new Vector2Int(x, y);
+                    view.GetTile(position, out _, out var tile, out var tileObj);
                     if (tile == null && tileObj == null) continue;
                     if (tile != null && (tile.Info.HasCollider || tile.Info.Category == CategoryKw.Pool)) continue;
                     if (tileObj != null && (tileObj.HasCollider || tileObj.Main.InfoSet.Category == CategoryKw.Pool)) continue;
 
-                    if (!Mapped(view, x - 1, y)) { items.Add(new Item(x - 1, y, RogueDirection.Left)); }
-                    if (!Mapped(view, x + 1, y)) { items.Add(new Item(x + 1, y, RogueDirection.Right)); }
-                    if (!Mapped(view, x, y - 1)) { items.Add(new Item(x, y - 1, RogueDirection.Down)); }
-                    if (!Mapped(view, x, y + 1)) { items.Add(new Item(x, y + 1, RogueDirection.Up)); }
-                }
-            }
-            UpdateCost(view);
-        }
-
-        private void UpdateCost(IRogueTilemapView view)
-        {
-            for (int i = 0; i < items.Count; i++)
-            {
-                var item = items[i];
-                item.Score = length;
-                for (int j = 0; j < length; j++)
-                {
-                    var position = item.Position + item.Direction.Forward * j;
-                    if (Mapped(view, position))// || OnExtension(position, item.Direction))
+                    if (!Mapped(view, x - 1, y) || !Mapped(view, x + 1, y) || !Mapped(view, x, y - 1) || !Mapped(view, x, y + 1))
                     {
-                        item.Score = j;
-                        break;
+                        items.Add(position);
                     }
                 }
-                items[i] = item;
             }
         }
 
@@ -62,48 +41,16 @@ namespace Roguegard
             return tile != null || tileObj != null;
         }
 
-        /// <summary>
-        /// ほかの <see cref="Item"/> の延長線上にあるか取得する
-        /// </summary>
-        private bool OnExtension(Vector2Int position, RogueDirection direction)
-        {
-            if (direction == RogueDirection.Right || direction == RogueDirection.Left)
-            {
-                for (int i = 0; i < items.Count; i++)
-                {
-                    var item = items[i];
-                    if (item.Position.x == position.x)
-                    {
-                        if (item.Position.y < position.y && item.Direction == RogueDirection.Up) return true;
-                        if (item.Position.y > position.y && item.Direction == RogueDirection.Down) return true;
-                    }
-                }
-            }
-            if (direction == RogueDirection.Up || direction == RogueDirection.Down)
-            {
-                for (int i = 0; i < items.Count; i++)
-                {
-                    var item = items[i];
-                    if (item.Position.y == position.y)
-                    {
-                        if (item.Position.x < position.x && item.Direction == RogueDirection.Right) return true;
-                        if (item.Position.x > position.x && item.Direction == RogueDirection.Left) return true;
-                    }
-                }
-            }
-            return false;
-        }
-
         public bool TryGetTargetPosition(Vector2Int currentPosition, out Vector2Int targetPosition)
         {
             // 優先度の計算
             // 近くてスコアが高いほど優先度が高い
             var maxScore = 0f;
-            Item maxItem = default;
+            Vector2Int maxItem = default;
             foreach (var item in items)
             {
-                var relationalPosition = item.Position - maxItem.Direction.Forward - currentPosition;
-                var score = (float)item.Score / Mathf.Max(Mathf.Abs(relationalPosition.x), Mathf.Abs(relationalPosition.y));
+                var relationalPosition = item - currentPosition;
+                var score = 10f / (Mathf.Abs(relationalPosition.x) + Mathf.Abs(relationalPosition.y));
                 if (score > maxScore)
                 {
                     maxScore = score;
@@ -113,27 +60,13 @@ namespace Roguegard
 
             if (maxScore > 0f)
             {
-                targetPosition = maxItem.Position - maxItem.Direction.Forward;
+                targetPosition = maxItem;
                 return true;
             }
             else
             {
                 targetPosition = default;
                 return false;
-            }
-        }
-
-        private struct Item
-        {
-            public Vector2Int Position { get; }
-            public RogueDirection Direction { get; }
-            public int Score { get; set; }
-
-            public Item(int x, int y, RogueDirection direction)
-            {
-                Position = new Vector2Int(x, y);
-                Direction = direction;
-                Score = -1;
             }
         }
     }
