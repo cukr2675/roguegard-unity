@@ -301,7 +301,45 @@ namespace RoguegardUnity
                     return;
                 }
 
-                if (pointingPathBuilder.TryGetNextDirection(player, out var direction) || startsPointing)
+                if (startsPointing)
+                {
+                    // オブジェクトを新規クリックした瞬間だけ反応する動作（新規クリックした瞬間だけ攻撃させたい）
+                    var view = ViewInfo.Get(player);
+                    for (int i = 0; i < view.VisibleObjCount; i++)
+                    {
+                        var obj = view.GetVisibleObj(i);
+                        if (obj == null || obj.Position != p) continue;
+
+                        if (StatsEffectedValues.AreVS(player, obj))
+                        {
+                            // 敵をクリックして攻撃
+                            var arg = new RogueMethodArgument(targetObj: obj, targetPosition: p);
+                            deviceInfo.SetDeviceCommand(PointAttackCommandAction.Instance, player, arg);
+                            EndTurn();
+                            ClearInput();
+                            return;
+                        }
+                        else if (obj.Main.InfoSet.Category == CategoryKw.MovableObstacle)
+                        {
+                            // 大岩をクリックして押して移動させる
+                            var arg = new RogueMethodArgument(targetObj: obj);
+                            deviceInfo.SetDeviceCommand(pushCommand, player, arg);
+                            EndTurn();
+                            ClearInput();
+                            return;
+                        }
+                        else if (obj.HasCollider && (p - player.Position).sqrMagnitude <= 2 &&
+                            RoguegardSettings.ObjCommandTable.Categories.Contains(obj.Main.InfoSet.Category))
+                        {
+                            // その他、隣接しているアイテムはコマンドを開く
+                            _menuController.OpenLongDownMenu(subject, p);
+                            ClearInput();
+                            return;
+                        }
+                    }
+                }
+
+                if (pointingPathBuilder.TryGetNextDirection(player, out var direction))
                 {
                     var point = player.Position + direction.Forward;
                     pointingWalkStopper.UpdatePositionedStop(point);
@@ -312,49 +350,10 @@ namespace RoguegardUnity
                         return;
                     }
 
-                    if (startsPointing)
-                    {
-                        // オブジェクトを新規クリックした瞬間だけ反応する動作（新規クリックした瞬間だけ攻撃させたい）
-                        var view = ViewInfo.Get(player);
-                        for (int i = 0; i < view.VisibleObjCount; i++)
-                        {
-                            var obj = view.GetVisibleObj(i);
-                            if (obj == null || obj.Position != p) continue;
-
-                            if (StatsEffectedValues.AreVS(player, obj))
-                            {
-                                // 敵をクリックして攻撃
-                                var arg = new RogueMethodArgument(targetObj: obj, targetPosition: p);
-                                deviceInfo.SetDeviceCommand(PointAttackCommandAction.Instance, player, arg);
-                                EndTurn();
-                                ClearInput();
-                                return;
-                            }
-                            else if (obj.Main.InfoSet.Category == CategoryKw.MovableObstacle)
-                            {
-                                // 大岩をクリックして押して移動させる
-                                var arg = new RogueMethodArgument(targetObj: obj);
-                                deviceInfo.SetDeviceCommand(pushCommand, player, arg);
-                                EndTurn();
-                                ClearInput();
-                                return;
-                            }
-                            else if (obj.HasCollider && (p - player.Position).sqrMagnitude <= 2 &&
-                                RoguegardSettings.ObjCommandTable.Categories.Contains(obj.Main.InfoSet.Category))
-                            {
-                                // その他、隣接しているアイテムはコマンドを開く
-                                _menuController.OpenLongDownMenu(subject, p);
-                                ClearInput();
-                                return;
-                            }
-                        }
-                    }
-                    {
-                        // 地面をクリックして移動
-                        deviceInfo.SetDeviceCommand(WalkCommandAction.Instance, player, new(targetPosition: point));
-                        EndTurn();
-                        return;
-                    }
+                    // 地面をクリックして移動
+                    deviceInfo.SetDeviceCommand(WalkCommandAction.Instance, player, new(targetPosition: point));
+                    EndTurn();
+                    return;
                 }
                 else
                 {
