@@ -165,8 +165,7 @@ namespace RoguegardUnity
         /// </summary>
         private void ClearViewInfoAfterLocate(RogueObj obj)
         {
-            var view = ViewInfo.Get(obj);
-            if (obj.Location != view.Location)
+            if (ViewInfo.TryGet(obj, out var view) && obj.Location != view.Location)
             {
                 // 空間移動直後にセーブしたとき、移動前の空間の情報を保存しないよう処理する
                 view.ReadyView(obj.Location);
