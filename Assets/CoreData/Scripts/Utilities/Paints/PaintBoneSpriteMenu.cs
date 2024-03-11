@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using TMPro;
 using RuntimeDotter;
 using Roguegard.Device;
 
@@ -29,6 +30,7 @@ namespace Roguegard
                 {
                     new ActionModelsMenuChoice("部位を変更", EditBone),
                     new PivotDistanceOption(),
+                    new IsFirstOption(),
                     new ActionModelsMenuChoice("正面を編集", EditNormalSprite),
                     new ActionModelsMenuChoice("背面を編集", EditBackSprite)
                 };
@@ -111,6 +113,8 @@ namespace Roguegard
 
         private class PivotDistanceOption : IModelsMenuOptionText
         {
+            public TMP_InputField.ContentType ContentType => TMP_InputField.ContentType.IntegerNumber;
+
             public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 return "中心点距離";
@@ -133,6 +137,32 @@ namespace Roguegard
                 {
                     boneSprite.PivotDistance = pivotDistance;
                 }
+            }
+        }
+
+        private class IsFirstOption : IModelsMenuOptionCheckBox
+        {
+            public TMP_InputField.ContentType ContentType => TMP_InputField.ContentType.IntegerNumber;
+
+            public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            {
+                return "上書き";
+            }
+
+            public bool GetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            {
+                var table = (PaintBoneSpriteTable)arg.Other;
+                var itemIndex = arg.Count;
+                var boneSprite = (PaintBoneSprite)table.Items[itemIndex];
+                return boneSprite.IsFirst;
+            }
+
+            public void SetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg, bool value)
+            {
+                var table = (PaintBoneSpriteTable)arg.Other;
+                var itemIndex = arg.Count;
+                var boneSprite = (PaintBoneSprite)table.Items[itemIndex];
+                boneSprite.IsFirst = value;
             }
         }
 
