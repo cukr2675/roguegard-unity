@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace ObjectFormer.Unity.RuntimeInspector
 {
-    public class InspectorConfig : MonoBehaviour
+    public class InspectorConfig
     {
         private readonly List<RelationalForm> forms;
         private readonly RelationalForm fallbackForm;
