@@ -39,7 +39,10 @@ namespace Roguegard
                 if (self.Space.TryGetRoomView(user.Position, out var userRoom, out _) && userRoom.Equals(monsterHouse) &&
                     (DungeonInfo.Get(self)?.TryGetLevel(self.Main.Stats.Lv, out level) ?? false) && level.EnemyTable.Count >= 1)
                 {
-                    RogueDevice.Add(DeviceKw.AppendText, "モンスターハウスだ！");
+                    if (RogueDevice.Primary.Subject.Main.Stats.Party.Members.Contains(self))
+                    {
+                        RogueDevice.Add(DeviceKw.AppendText, "モンスターハウスだ！\n");
+                    }
 
                     // 敵を生成
                     var enemies = level.EnemyTable[0];
