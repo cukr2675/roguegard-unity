@@ -10,7 +10,6 @@ namespace RuntimeDotter
     public class DotterHoldButton : Selectable, IPointerDownHandler, IPointerUpHandler
     {
         [SerializeField] private Image _target = null;
-        [SerializeField] private Button a = null;
         [SerializeField] private ColorBlock _color = ColorBlock.defaultColorBlock;
         [SerializeField] private KeyCode _keyCode = KeyCode.Space;
 
