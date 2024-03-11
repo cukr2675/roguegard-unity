@@ -139,6 +139,18 @@ MonoBehaviour:
     m_Key: FoodAppraisalAbility::d
     m_Metadata:
       m_Items: []
+  - m_Id: 53183206653038592
+    m_Key: FruitfulGraceAbility
+    m_Metadata:
+      m_Items: []
+  - m_Id: 53183454762897408
+    m_Key: FruitfulGraceAbility::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 53183467547136000
+    m_Key: FruitfulGraceAbility::d
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
