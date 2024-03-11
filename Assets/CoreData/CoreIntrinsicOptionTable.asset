@@ -25,6 +25,8 @@ MonoBehaviour:
     _asset: {fileID: 11400000, guid: f8f98e6ef0e9c97459e56e6eaeee1cf8, type: 2}
   - _key: Core.FoodAppraisalAbility
     _asset: {fileID: 11400000, guid: fa79503ad38d25c48adb7c64f802416e, type: 2}
+  - _key: Core.FruitfulGraceAbility
+    _asset: {fileID: 11400000, guid: ba0119390b829204ba759a7c6bacc487, type: 2}
   - _key: Core.MartialArtsAbility
     _asset: {fileID: 11400000, guid: da99f9f2d621fcc4ca88c02a7f022a17, type: 2}
   - _key: Core.MultitaskAbility
@@ -61,6 +63,8 @@ MonoBehaviour:
     _asset: {fileID: 11400000, guid: 99f0b3ca485a2dc42bc70ed5a3c52e72, type: 2}
   - _key: Core.FlareCannonSkill
     _asset: {fileID: 11400000, guid: 2ad5374735808e64e9575f80dcf37892, type: 2}
+  - _key: Core.ItemSearchSkill
+    _asset: {fileID: 11400000, guid: 8680bbb2910981b42b9785636961fcdb, type: 2}
   - _key: Core.Multishot3Skill
     _asset: {fileID: 11400000, guid: 5e2f31b67af995e4b839a06e3acb2108, type: 2}
   - _key: Core.PaintTrapSkill

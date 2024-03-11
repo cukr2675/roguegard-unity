@@ -27,9 +27,7 @@ namespace Roguegard.CharacterCreation
 
             protected override bool Activate(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
             {
-                if (!arg.TryGetTargetPosition(out var targetPosition) ||
-                    !RogueDirection.TryFromSign(targetPosition - self.Position, out var targetDirection)) return false;
-
+                var targetDirection = RogueMethodUtility.GetTargetDirection(self, arg);
                 self.Main.Stats.Direction = targetDirection;
                 var point0 = SpaceUtility.Raycast(
                     self.Location, self.Position, self.Main.Stats.Direction.Rotate(-1), 1, false, false, true, out _, out var pointHit0, out _);
