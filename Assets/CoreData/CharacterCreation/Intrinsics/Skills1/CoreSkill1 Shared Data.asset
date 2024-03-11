@@ -203,6 +203,26 @@ MonoBehaviour:
     m_Key: FlareCannonSkill::d
     m_Metadata:
       m_Items: []
+  - m_Id: 53348856193224704
+    m_Key: ItemSearchSkill
+    m_Metadata:
+      m_Items: []
+  - m_Id: 53348888300621824
+    m_Key: ItemSearchSkill::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 53348898736050176
+    m_Key: ItemSearchSkill::d
+    m_Metadata:
+      m_Items: []
+  - m_Id: 53350401676808192
+    m_Key: ItemSearchMsgSucceed::1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 53350431104045056
+    m_Key: ItemSearchMsgFailed::1
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

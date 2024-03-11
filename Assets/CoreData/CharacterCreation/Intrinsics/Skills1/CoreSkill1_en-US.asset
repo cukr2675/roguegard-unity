@@ -74,6 +74,10 @@ MonoBehaviour:
     m_Localized: FlareCannon
     m_Metadata:
       m_Items: []
+  - m_Id: 53348856193224704
+    m_Localized: ItemSearch
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
