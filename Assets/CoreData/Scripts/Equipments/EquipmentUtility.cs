@@ -227,5 +227,25 @@ namespace Roguegard
             }
             return null;
         }
+
+        /// <summary>
+        /// 指定の装備品から <see cref="IStatusEffect.EffectCategory"/> == <see cref="EffectCategoryKw.Erosion"/> のエフェクトを解除する
+        /// </summary>
+        public static void Cleansing(RogueObj equipment)
+        {
+            if (equipment == null) throw new System.ArgumentNullException(nameof(equipment));
+
+            var statusEffectState = equipment.Main.GetStatusEffectState(equipment);
+            for (int j = 0; j < statusEffectState.StatusEffects.Count; j++)
+            {
+                var statusEffect = statusEffectState.StatusEffects[j];
+                if (statusEffect.EffectCategory == EffectCategoryKw.Erosion &&
+                    statusEffect is IClosableStatusEffect closable)
+                {
+                    closable.RemoveClose(equipment);
+                    j--;
+                }
+            }
+        }
     }
 }

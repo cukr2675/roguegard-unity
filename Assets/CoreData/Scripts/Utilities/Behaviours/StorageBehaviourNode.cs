@@ -41,6 +41,10 @@ namespace Roguegard
                     item = startingItem.Option.CreateObj(startingItem, self, Vector2Int.zero, RogueRandom.Primary);
                     itemRegister.SetItem(i, item);
                 }
+
+                // ‘•”õ•i‚ğò‰»
+                EquipmentUtility.Cleansing(item);
+
                 if (itemIsEquipped && item.Main.GetEquipmentInfo(item).EquipIndex == -1)
                 {
                     // ‘•”õ•i‚ğ‘•”õ‚µ‚È‚¨‚·
