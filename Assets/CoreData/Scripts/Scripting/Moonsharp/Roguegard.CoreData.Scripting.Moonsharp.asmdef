@@ -1,5 +1,5 @@
 {
-    "name": "Roguegard.CoreData.Scripting.Moonsharp",
+    "name": "Roguegard.CoreData.Scripting.MoonSharp",
     "rootNamespace": "Roguegard.Scripting.MoonSharp",
     "references": [
         "GUID:28450d8d664b1a54dae80398fd9e836c",
