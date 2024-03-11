@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 namespace RuntimeDotter
 {
-    public class DotterToolSet : MonoBehaviour
+    public class DotterToolSet : Selectable
     {
         [SerializeField] private DotterBoardView _boardView = null;
         [SerializeField] private DotterHoldButton _holdButton = null;
@@ -22,8 +22,10 @@ namespace RuntimeDotter
         public Color32 MainColor => _paletteView.MainColor;
         public IReadOnlyList<ShiftableColor> Palette => _paletteView.Palette;
 
-        private void Start()
+        protected override void Start()
         {
+            base.Start();
+
             _paletteView.Picker.OnColorChanged.AddListener(x => _boardView.UpdateView(_paletteView.Palette, _paletteView.MainColor));
             _undoRedoButton.onClick.AddListener(() => Undo());
             _switchGridButton.onClick.AddListener(() => _boardView.SwitchGrid());
@@ -41,6 +43,8 @@ namespace RuntimeDotter
 
         private void Update()
         {
+            if (!IsInteractable()) return;
+
             var hold = _holdButton.IsDown;
             if (hold)
             {

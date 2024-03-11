@@ -7,9 +7,10 @@ using UnityEngine.EventSystems;
 
 namespace RuntimeDotter
 {
-    public class DotterHoldButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
+    public class DotterHoldButton : Selectable, IPointerDownHandler, IPointerUpHandler
     {
         [SerializeField] private Image _target = null;
+        [SerializeField] private Button a = null;
         [SerializeField] private ColorBlock _color = ColorBlock.defaultColorBlock;
         [SerializeField] private KeyCode _keyCode = KeyCode.Space;
 
@@ -19,6 +20,8 @@ namespace RuntimeDotter
 
         private void Update()
         {
+            if (!IsInteractable()) return;
+
             var keyIsDown = Input.GetKey(_keyCode);
 
             IsDown = keyIsDown || pointerIsDown;
