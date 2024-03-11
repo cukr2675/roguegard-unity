@@ -45,7 +45,7 @@ namespace Roguegard
             return VisibleObjs[index];
         }
 
-        private void AddUnique(RogueObj obj)
+        public void AddUnique(RogueObj obj)
         {
             if (obj == null) return;
 

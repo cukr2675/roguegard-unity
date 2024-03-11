@@ -45,6 +45,11 @@ namespace Roguegard
             viewMap.AddView(self);
         }
 
+        public void AddVisibleObj(RogueObj obj)
+        {
+            viewMap.AddUnique(obj);
+        }
+
         public RogueObj GetVisibleObj(int index)
         {
             return viewMap.GetVisibleObj(index);

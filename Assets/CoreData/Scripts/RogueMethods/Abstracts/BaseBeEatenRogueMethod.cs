@@ -17,21 +17,6 @@ namespace Roguegard
             }
 
             // 効果を発動しなくても消費する。
-            if (MainCharacterWorkUtility.VisibleAt(user.Location, user.Position))
-            {
-                RogueDevice.Add(DeviceKw.AppendText, user);
-                RogueDevice.Add(DeviceKw.AppendText, "は");
-                RogueDevice.Add(DeviceKw.AppendText, self);
-                if (self?.Main.InfoSet.Category == CategoryKw.Drink)
-                {
-                    RogueDevice.Add(DeviceKw.AppendText, "を飲んだ！\n");
-                }
-                else
-                {
-                    RogueDevice.Add(DeviceKw.AppendText, "を食べた！\n");
-                }
-            }
-
             BeEaten(self, user, activationDepth);
             var nutrition = GetNutritionHeal(self);
             if (nutrition >= 1)
