@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Gatherer
   m_EditorClassIdentifier: 
   _overridesCost: 0
-  _cost: 14
+  _cost: 8
   _costIsUnknown: 0
   _descriptionName: "\u30DE\u30CE"
   _shortName: "\u63A1\u96C6\u58EB"
@@ -79,7 +79,7 @@ MonoBehaviour:
     _optionDescription: {fileID: 0}
     _members:
       _items: []
-  - _option: {fileID: 11400000, guid: 7f26e138763fe4c41b312777c6ab44d4, type: 2}
+  - _option: {fileID: 11400000, guid: ba0119390b829204ba759a7c6bacc487, type: 2}
     _optionDescription: {fileID: 0}
     _members:
       _items: []
@@ -95,11 +95,15 @@ MonoBehaviour:
     _optionDescription: {fileID: 0}
     _members:
       _items: []
-  - _option: {fileID: 11400000, guid: 5d75ee0695b80214092c567460924729, type: 2}
+  - _option: {fileID: 11400000, guid: 8680bbb2910981b42b9785636961fcdb, type: 2}
     _optionDescription: {fileID: 0}
     _members:
       _items: []
   - _option: {fileID: 11400000, guid: 4c40f526ccbe2a54ba9be64260117e81, type: 2}
+    _optionDescription: {fileID: 0}
+    _members:
+      _items: []
+  - _option: {fileID: 11400000, guid: 5d75ee0695b80214092c567460924729, type: 2}
     _optionDescription: {fileID: 0}
     _members:
       _items: []
