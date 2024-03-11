@@ -19,6 +19,7 @@ namespace RoguegardUnity
         [SerializeField] private ModelsMenuViewItemButton _choicePrefab = null;
         [SerializeField] private ModelsMenuViewOptionSlider _sliderPrefab = null;
         [SerializeField] private ModelsMenuViewOptionText _textPrefab = null;
+        [SerializeField] private ModelsMenuViewOptionCheckBox _checkBoxPrefab = null;
 
         public override CanvasGroup CanvasGroup => _canvasGroup;
 
@@ -66,6 +67,16 @@ namespace RoguegardUnity
                     var label = text.GetName(Root, Self, User, Arg);
                     var value = text.GetValue(Root, Self, User, Arg);
                     item.Initialize(label, value, value => text.SetValue(Root, Self, User, Arg, value));
+                    items.Add(item.gameObject);
+                }
+                else if (model is IModelsMenuOptionCheckBox checkBox)
+                {
+                    var item = Instantiate(_checkBoxPrefab, _scrollRect.content);
+                    SetTransform((RectTransform)item.transform, ref sumHeight);
+
+                    var label = checkBox.GetName(Root, Self, User, Arg);
+                    var value = checkBox.GetValue(Root, Self, User, Arg);
+                    item.Initialize(label, value, value => checkBox.SetValue(Root, Self, User, Arg, value));
                     items.Add(item.gameObject);
                 }
                 else if (model is IModelsMenuOptionColor color)

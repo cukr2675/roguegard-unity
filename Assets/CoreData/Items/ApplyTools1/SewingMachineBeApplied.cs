@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using TMPro;
 using RuntimeDotter;
 using Roguegard.Device;
 
@@ -162,6 +163,8 @@ namespace Roguegard
 
             private class NameOption : IModelsMenuOptionText
             {
+                public TMP_InputField.ContentType ContentType => TMP_InputField.ContentType.Standard;
+
                 public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
                 {
                     return "–¼‘O";
@@ -312,6 +315,8 @@ namespace Roguegard
 
         private class OrderOption : IModelsMenuOptionText
         {
+            public TMP_InputField.ContentType ContentType => TMP_InputField.ContentType.DecimalNumber;
+
             public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 return "‡˜";

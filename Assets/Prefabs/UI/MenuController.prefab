@@ -3986,6 +3986,7 @@ MonoBehaviour:
   _choicePrefab: {fileID: 8693878858779085785, guid: c174e8e4fc21d6a4994e5a3e2363b4f5, type: 3}
   _sliderPrefab: {fileID: 8680977674407602239, guid: dd2f3f53292db944faa70c95783d3f4a, type: 3}
   _textPrefab: {fileID: 2043351209288173973, guid: 18d41c25911794549a02dc0c30b85ba3, type: 3}
+  _checkBoxPrefab: {fileID: 5755292667844237628, guid: 9a1213407ab41b944b509d755620f486, type: 3}
 --- !u!1 &3726663893462019948
 GameObject:
   m_ObjectHideFlags: 0
