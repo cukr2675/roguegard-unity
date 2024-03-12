@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using System.Diagnostics;
+using SkeletalSprite;
 using Roguegard;
 using Roguegard.Device;
 
@@ -147,9 +148,10 @@ namespace RoguegardUnity
 
         private class HideMotion : IBoneMotion
         {
-            public IKeyword Keyword => null;
+            public BoneMotionKeyword Keyword => new BoneMotionKeyword(null);
 
-            public void ApplyTo(IMotionSet motionSet, int animationTime, RogueDirection direction, ref RogueObjSpriteTransform transform, out bool endOfMotion)
+            public void ApplyTo(
+                IMotionSet motionSet, int animationTime, SpriteDirection direction, ref RogueObjSpriteTransform transform, out bool endOfMotion)
             {
                 transform.Scale = Vector3.zero;
                 endOfMotion = true;

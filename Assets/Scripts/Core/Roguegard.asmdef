@@ -2,7 +2,8 @@
     "name": "Roguegard",
     "rootNamespace": "Roguegard",
     "references": [
-        "GUID:411fefe97dc107843bf66c14baf7283d"
+        "GUID:411fefe97dc107843bf66c14baf7283d",
+        "GUID:7dfbf61cc65360d44a5ad1b24fe31a31"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

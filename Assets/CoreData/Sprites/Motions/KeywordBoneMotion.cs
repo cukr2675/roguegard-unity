@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using SkeletalSprite;
+
 namespace Roguegard
 {
     public class KeywordBoneMotion : IBoneMotion
@@ -16,14 +18,14 @@ namespace Roguegard
         public static KeywordBoneMotion BeDefeated { get; } = new KeywordBoneMotion(MainInfoKw.BeDefeated);
         public static KeywordBoneMotion Victory { get; } = new KeywordBoneMotion(StdKw.Victory);
 
-        public IKeyword Keyword { get; }
+        public BoneMotionKeyword Keyword { get; }
 
         public KeywordBoneMotion(IKeyword keyword)
         {
-            Keyword = keyword;
+            Keyword = new BoneMotionKeyword(keyword.Name);
         }
 
-        public void ApplyTo(IMotionSet motionSet, int animationTime, RogueDirection direction, ref RogueObjSpriteTransform transform, out bool endOfMotion)
+        public void ApplyTo(IMotionSet motionSet, int animationTime, SpriteDirection direction, ref RogueObjSpriteTransform transform, out bool endOfMotion)
         {
             motionSet.GetPose(Keyword, animationTime, direction, ref transform, out endOfMotion);
         }

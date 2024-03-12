@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using SkeletalSprite;
+
 namespace Roguegard
 {
     public class VariantBoneMotion : IBoneMotion
@@ -13,7 +15,7 @@ namespace Roguegard
         private readonly Color color;
         private readonly Dictionary<IDirectionalBonePoseSource, IDirectionalBonePoseSource> coloredPoseTable;
 
-        public IKeyword Keyword => baseMotion.Keyword;
+        public BoneMotionKeyword Keyword => baseMotion.Keyword;
 
         public VariantBoneMotion(IBoneMotion baseMotion, Color color)
             : this(baseMotion, null, null, true, color)
@@ -30,7 +32,7 @@ namespace Roguegard
             coloredPoseTable = new Dictionary<IDirectionalBonePoseSource, IDirectionalBonePoseSource>();
         }
 
-        public void ApplyTo(IMotionSet motionSet, int animationTime, RogueDirection direction, ref RogueObjSpriteTransform transform, out bool endOfMotion)
+        public void ApplyTo(IMotionSet motionSet, int animationTime, SpriteDirection direction, ref RogueObjSpriteTransform transform, out bool endOfMotion)
         {
             baseMotion.ApplyTo(motionSet, animationTime, direction, ref transform, out endOfMotion);
 

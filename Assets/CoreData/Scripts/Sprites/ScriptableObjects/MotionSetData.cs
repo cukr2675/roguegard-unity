@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Roguegard
+namespace SkeletalSprite
 {
     [CreateAssetMenu(menuName = "RoguegardData/Sprite/MotionSet")]
     public class MotionSetData : ScriptableObject, IMotionSet
@@ -11,16 +11,16 @@ namespace Roguegard
 
         [System.NonSerialized] private IBoneMotion firstValue;
 
-        public bool ContainsKey(IKeyword key)
-        {
-            foreach (var item in _items)
-            {
-                if (item.Key == key) return true;
-            }
-            return false;
-        }
+        //public bool ContainsKey(IKeyword key)
+        //{
+        //    foreach (var item in _items)
+        //    {
+        //        if (item.Key == new BoneMotionKeyword(key.Name)) return true;
+        //    }
+        //    return false;
+        //}
 
-        public bool TryGetValue(IKeyword key, out IBoneMotion value)
+        public bool TryGetValue(BoneMotionKeyword key, out IBoneMotion value)
         {
             foreach (var item in _items)
             {
@@ -34,7 +34,7 @@ namespace Roguegard
             return false;
         }
 
-        void IMotionSet.GetPose(IKeyword keyword, int animationTime, RogueDirection direction, ref RogueObjSpriteTransform transform, out bool endOfMotion)
+        void IMotionSet.GetPose(BoneMotionKeyword keyword, int animationTime, SpriteDirection direction, ref RogueObjSpriteTransform transform, out bool endOfMotion)
         {
             if (!TryGetValue(keyword, out var value))
             {
@@ -49,8 +49,8 @@ namespace Roguegard
         [System.Serializable]
         public class Item
         {
-            [SerializeField] private KeywordData _key;
-            public IKeyword Key => _key;
+            [SerializeField] private Roguegard.KeywordData _key;
+            public BoneMotionKeyword Key => new BoneMotionKeyword(_key.DescriptionName);
 
             [SerializeField] private BoneMotionData _value;
             public IBoneMotion Value => _value;

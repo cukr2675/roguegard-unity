@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using SkeletalSprite;
 using Roguegard;
 
 namespace RoguegardUnity
@@ -177,7 +178,7 @@ namespace RoguegardUnity
             localPosition.y = Mathf.Round(localPosition.y * 32f) / 32f;
             transform.localPosition = localPosition;
             var endOfWalk = walkTimeRatio >= 1f;
-            if (endOfWalk && currentBoneMotion.Keyword == MainInfoKw.Walk)
+            if (endOfWalk && currentBoneMotion.Keyword == new BoneMotionKeyword(MainInfoKw.Walk.Name))
             {
                 // 位置変更終了で動作完了
                 // 歩きモーションのときだけモーション終了前に前もって動作完了させる。
@@ -201,7 +202,7 @@ namespace RoguegardUnity
                 if (boneMotionIsClosed)
                 {
                     // モーションが終端のときだけ待機モーションに切り替える。（待機系モーションの場合は切り替えない）
-                    if (currentBoneMotion.Keyword != MainInfoKw.Wait) SetBoneMotion(KeywordBoneMotion.Wait, true);
+                    if (currentBoneMotion.Keyword != new BoneMotionKeyword(MainInfoKw.Wait.Name)) SetBoneMotion(KeywordBoneMotion.Wait, true);
                     boneMotionIsClosed = false;
                 }
 

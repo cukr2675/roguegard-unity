@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using SkeletalSprite;
 using RuntimeDotter;
 
 namespace Roguegard
@@ -103,12 +104,12 @@ namespace Roguegard
         {
             if (IsFirst)
             {
-                if (OverridesSourceColor) { table.SetFirstSprite(name, sprite, color, true); }
-                else { table.SetFirstSprite(name, sprite, overridesBaseColor); }
+                if (OverridesSourceColor) { table.SetFirstSprite(new BoneKeyword(name.Name), sprite, color, true); }
+                else { table.SetFirstSprite(new BoneKeyword(name.Name), sprite, overridesBaseColor); }
             }
             else
             {
-                table.AddEquipmentSprite(name, sprite, color, overridesBaseColor);
+                table.AddEquipmentSprite(new BoneKeyword(name.Name), sprite, color, overridesBaseColor);
             }
         }
 

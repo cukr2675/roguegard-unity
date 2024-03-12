@@ -2,7 +2,8 @@
     "name": "Roguegard.Tests",
     "rootNamespace": "Roguegard",
     "references": [
-        "Roguegard"
+        "Roguegard",
+        "SkeletalSprite"
     ],
     "includePlatforms": [
         "Editor"

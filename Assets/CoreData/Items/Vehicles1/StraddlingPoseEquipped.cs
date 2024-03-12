@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using SkeletalSprite;
+
 namespace Roguegard.CharacterCreation
 {
     public class StraddlingPoseEquipped : ReferableScript, IEquippedEffectSource
@@ -39,9 +41,9 @@ namespace Roguegard.CharacterCreation
             }
 
             void IBoneMotionEffect.ApplyTo(
-                IMotionSet motionSet, IKeyword keyword, int animationTime, RogueDirection direction, ref RogueObjSpriteTransform transform)
+                IMotionSet motionSet, BoneMotionKeyword keyword, int animationTime, RogueDirection direction, ref RogueObjSpriteTransform transform)
             {
-                if (keyword == MainInfoKw.Wait || keyword == MainInfoKw.Walk)
+                if (keyword == new BoneMotionKeyword(MainInfoKw.Wait.Name) || keyword == new BoneMotionKeyword(MainInfoKw.Walk.Name))
                 {
                     if (PoseSource == null)
                     {

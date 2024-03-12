@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using SkeletalSprite;
+
 namespace Roguegard.CharacterCreation
 {
     public abstract class PartyAbilityIntrinsicOptionScript : ScriptIntrinsicOption.Script

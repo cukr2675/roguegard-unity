@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using SkeletalSprite;
+
 namespace Roguegard.CharacterCreation
 {
     /// <summary>
@@ -18,7 +20,7 @@ namespace Roguegard.CharacterCreation
             var item = GetItem(gender);
 
             var bodyColor = characterCreationData.Race.BodyColor;
-            mainNode = item.Bone.CreateBoneNodeBuilder(bodyColor);
+            mainNode = BoneNodeBuilder.Create(item.Bone, bodyColor);
 
             boneSpriteTable = new AppearanceBoneSpriteTable();
 

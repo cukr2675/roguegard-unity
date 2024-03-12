@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using SkeletalSprite;
+
 namespace Roguegard
 {
     /// <summary>
@@ -14,6 +16,6 @@ namespace Roguegard
 
         public abstract void SetBoneSpriteEffects(RogueObj self, Spanning<IBoneSpriteEffect> effects);
 
-        public abstract void SetTo(IRogueObjSpriteRenderController renderController, BonePose pose, RogueDirection direction);
+        public abstract void SetTo(IRogueObjSpriteRenderController renderController, BonePose pose, SpriteDirection direction);
     }
 }

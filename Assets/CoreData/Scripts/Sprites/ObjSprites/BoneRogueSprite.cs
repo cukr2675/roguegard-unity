@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 using UnityEngine.Tilemaps;
+using SkeletalSprite;
 
 namespace Roguegard
 {
@@ -21,6 +23,8 @@ namespace Roguegard
         private int normalBonesCount;
         private int backBonesCount;
         private BonePose enabledImmutablePose;
+
+        private static readonly AffectableBoneSpriteTable boneSpriteTable = new AffectableBoneSpriteTable();
 
         private BoneRogueSprite()
         {
@@ -56,7 +60,15 @@ namespace Roguegard
 
         public override void SetBoneSpriteEffects(RogueObj self, Spanning<IBoneSpriteEffect> effects)
         {
-            root.SetEquipmentSprites(self, boneRoot, effects);
+            // IBoneSpriteEffect と IRogueObjSprite の実装をできるだけ切り離すため、テーブルは空の状態で開始する。（バージョンで変更できる？）
+            boneSpriteTable.Clear();
+
+            for (int i = 0; i < effects.Count; i++)
+            {
+                var effect = effects[i];
+                effect.AffectSprite(self, boneRoot, boneSpriteTable);
+            }
+            root.ApplyTable(boneSpriteTable);
             wasChangedEquipments = true;
         }
 
@@ -71,7 +83,7 @@ namespace Roguegard
             enabledOrder = boneOrder;
         }
 
-        public override void SetTo(IRogueObjSpriteRenderController renderController, BonePose pose, RogueDirection direction)
+        public override void SetTo(IRogueObjSpriteRenderController renderController, BonePose pose, SpriteDirection direction)
         {
             // 装備が変更されておらず、引数のポーズが前回のポーズと同じかつ不変であれば、更新する必要はない。
             if (!wasChangedEquipments && enabledImmutablePose == pose) return;
@@ -83,7 +95,8 @@ namespace Roguegard
             renderController.ClearBoneSprites();
 
             root.SetTo(
-                renderController, pose.BoneTransforms, pose.Back, Vector2.zero, Quaternion.identity, Vector3.one, false, false);
+                renderController, pose.BoneTransforms, pose.Back, Vector2.zero, Quaternion.identity, Vector3.one, false, false,
+                RoguegardSettings.BoneSpriteBaseColor);
 
             if (pose.IsImmutable) enabledImmutablePose = pose;
             else enabledImmutablePose = null;

@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using SkeletalSprite;
+
 namespace Roguegard.CharacterCreation
 {
     public static class RogueColorUtility
@@ -11,6 +13,7 @@ namespace Roguegard.CharacterCreation
         private static readonly bool useColorRange = false;
         private static readonly ColorRange defaultColorRange = ColorRange.LightOther;
 
+        [System.Obsolete]
         public static ColorRange GetColorRange(Color color)
         {
             if (!useColorRange) return defaultColorRange;
@@ -50,7 +53,7 @@ namespace Roguegard.CharacterCreation
 
         public static Color GetFirstColor(IKeyword boneName, IBoneNode boneRoot, AffectableBoneSpriteTable boneSpriteTable)
         {
-            var sprite = boneSpriteTable.GetSprite(boneName);
+            var sprite = boneSpriteTable.GetSprite(new BoneKeyword(boneName.Name));
             if (sprite.OverridesSourceColor)
             {
                 return sprite.FirstColor;
@@ -61,7 +64,7 @@ namespace Roguegard.CharacterCreation
 
             IBone Recursion(IBoneNode node)
             {
-                if (node.Bone.Name == boneName) return node.Bone;
+                if (node.Bone.Name == new BoneKeyword(boneName.Name)) return node.Bone;
 
                 for (int i = 0; i < node.Children.Count; i++)
                 {

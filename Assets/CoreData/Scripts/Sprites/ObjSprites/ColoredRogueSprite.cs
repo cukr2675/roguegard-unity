@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using UnityEngine.Tilemaps;
+using SkeletalSprite;
 
 namespace Roguegard
 {
@@ -39,10 +40,10 @@ namespace Roguegard
             }
         }
 
-        public override void SetTo(IRogueObjSpriteRenderController renderController, BonePose pose, RogueDirection direction)
+        public override void SetTo(IRogueObjSpriteRenderController renderController, BonePose pose, SpriteDirection direction)
         {
             renderController.AdjustBones(1);
-            if (pose.BoneTransforms.TryGetValue(BoneKw.Body, out var transform))
+            if (pose.BoneTransforms.TryGetValue(new BoneKeyword(BoneKw.Body.Name), out var transform))
             {
                 var sprite = transform.Sprite != null ? transform.Sprite.NormalFront : IconSprite;
                 var color = transform.OverridesSourceColor ? transform.Color : IconColor;

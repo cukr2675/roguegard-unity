@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using SkeletalSprite;
+
 namespace Roguegard
 {
     public class BoneMotionEffectState
@@ -72,7 +74,7 @@ namespace Roguegard
             showEffectsIsDirty = false;
         }
 
-        public void ApplyTo(IMotionSet motionSet, IKeyword keyword, int animationTime, RogueDirection direction, ref RogueObjSpriteTransform transform)
+        public void ApplyTo(IMotionSet motionSet, BoneMotionKeyword keyword, int animationTime, RogueDirection direction, ref RogueObjSpriteTransform transform)
         {
             for (int i = 0; i < showEffects.Count; i++)
             {

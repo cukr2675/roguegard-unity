@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using SkeletalSprite;
 using UnityEngine.Tilemaps;
 
 namespace Roguegard
@@ -37,7 +38,7 @@ namespace Roguegard
             }
         }
 
-        public override void SetTo(IRogueObjSpriteRenderController renderController, BonePose pose, RogueDirection direction)
+        public override void SetTo(IRogueObjSpriteRenderController renderController, BonePose pose, SpriteDirection direction)
         {
             var angleIndex = (int)direction;
             var sprite = angleIndex % 2 == 0 ? spriteLeft : spriteLowerLeft;
@@ -45,7 +46,7 @@ namespace Roguegard
             var rotation = Quaternion.Euler(0f, 0f, eulerZ);
 
             renderController.AdjustBones(1);
-            if (pose.BoneTransforms.TryGetValue(BoneKw.Body, out var transform))
+            if (pose.BoneTransforms.TryGetValue(new BoneKeyword(BoneKw.Body.Name), out var transform))
             {
                 renderController.SetBoneSprite(
                     0, BoneKw.Body.Name, sprite, color, false, false,

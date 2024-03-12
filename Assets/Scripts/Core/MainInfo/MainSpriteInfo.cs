@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Tilemaps;
+
+using SkeletalSprite;
 
 namespace Roguegard
 {
@@ -36,7 +37,7 @@ namespace Roguegard
             boneMotionState.Update();
         }
 
-        public void SetTo(IRogueObjSpriteRenderController renderController, BonePose pose, RogueDirection direction)
+        public void SetTo(IRogueObjSpriteRenderController renderController, BonePose pose, SpriteDirection direction)
         {
             objSprite.SetTo(renderController, pose, direction);
         }

@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using SkeletalSprite;
+
 namespace Roguegard
 {
     /// <summary>
@@ -59,11 +61,11 @@ namespace Roguegard
         }
 
         void IBoneMotionEffect.ApplyTo(
-            IMotionSet motionSet, IKeyword keyword, int animationTime, RogueDirection direction, ref RogueObjSpriteTransform transform)
+            IMotionSet motionSet, BoneMotionKeyword keyword, int animationTime, RogueDirection direction, ref RogueObjSpriteTransform transform)
         {
-            if (keyword != MainInfoKw.Hit && keyword != MainInfoKw.BeDefeated)
+            if (keyword != new BoneMotionKeyword(MainInfoKw.Hit.Name) && keyword != new BoneMotionKeyword(MainInfoKw.BeDefeated.Name))
             {
-                motionSet.GetPose(MainInfoKw.Hit, animationTime, direction, ref transform, out _);
+                motionSet.GetPose(new BoneMotionKeyword(MainInfoKw.Hit.Name), animationTime, direction, ref transform, out _);
             }
         }
 

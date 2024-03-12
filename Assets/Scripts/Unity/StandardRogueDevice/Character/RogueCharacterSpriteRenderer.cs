@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using UnityEngine.Rendering;
+using SkeletalSprite;
 using Roguegard;
 
 namespace RoguegardUnity
@@ -140,7 +141,8 @@ namespace RoguegardUnity
 
         private class EffectMotionSet : IMotionSet
         {
-            public void GetPose(IKeyword keyword, int animationTime, RogueDirection direction, ref RogueObjSpriteTransform transform, out bool endOfMotion)
+            public void GetPose(
+                BoneMotionKeyword keyword, int animationTime, SpriteDirection direction, ref RogueObjSpriteTransform transform, out bool endOfMotion)
             {
                 endOfMotion = true;
             }

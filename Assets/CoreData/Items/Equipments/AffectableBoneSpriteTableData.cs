@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using SkeletalSprite;
+
 namespace Roguegard
 {
     [CreateAssetMenu(menuName = "RoguegardData/Sprite/AffectableBoneSpriteTable")]
@@ -49,7 +51,7 @@ namespace Roguegard
             private class Item
             {
                 [SerializeField] private KeywordData _name;
-                public IKeyword Name => _name;
+                public BoneKeyword Name => new BoneKeyword(_name.DescriptionName);
 
                 [SerializeField] private bool _hasFirstSprite;
                 public bool HasFirstSprite => _hasFirstSprite;

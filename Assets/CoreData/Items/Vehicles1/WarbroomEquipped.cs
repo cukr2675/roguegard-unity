@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using SkeletalSprite;
+
 namespace Roguegard.CharacterCreation
 {
     public class WarbroomEquipped : ReferableScript, IEquippedEffectSource
@@ -116,7 +118,7 @@ namespace Roguegard.CharacterCreation
             void IStatusEffect.GetEffectedName(RogueNameBuilder refName, RogueObj self) { }
 
             void IBoneMotionEffect.ApplyTo(
-                IMotionSet motionSet, IKeyword keyword, int animationTime, RogueDirection direction, ref RogueObjSpriteTransform transform)
+                IMotionSet motionSet, BoneMotionKeyword keyword, int animationTime, RogueDirection direction, ref RogueObjSpriteTransform transform)
             {
                 LevitationStatusEffect.MotionApplyTo(motionSet, keyword, animationTime, direction, ref transform);
             }

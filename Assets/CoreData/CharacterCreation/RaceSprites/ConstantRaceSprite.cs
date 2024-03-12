@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using SkeletalSprite;
+
 namespace Roguegard.CharacterCreation
 {
     public class ConstantRaceSprite : ReferableScript, IRaceOptionSprite
@@ -15,7 +17,8 @@ namespace Roguegard.CharacterCreation
             out BoneNodeBuilder mainNode, out AppearanceBoneSpriteTable boneSpriteTable)
         {
             var bodyColor = characterCreationData.Race.BodyColor;
-            mainNode = _bone?.CreateBoneNodeBuilder(bodyColor);
+            if (_bone != null) { mainNode = BoneNodeBuilder.Create(_bone, bodyColor); }
+            else { mainNode = null; }
             boneSpriteTable = new AppearanceBoneSpriteTable();
         }
 

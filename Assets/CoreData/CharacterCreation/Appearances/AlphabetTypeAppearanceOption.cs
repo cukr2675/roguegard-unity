@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using SkeletalSprite;
+
 namespace Roguegard.CharacterCreation
 {
     [CreateAssetMenu(menuName = "RoguegardData/CharacterCreation/AppearanceOption/Alphabet")]
@@ -24,7 +26,7 @@ namespace Roguegard.CharacterCreation
                 typeMember.ClearTypeItems();
                 foreach (var item in Table)
                 {
-                    var sprite = item.GetSprite(colorRange).GetRepresentativeSprite();
+                    var sprite = item.GetSprite(bodyColor).GetRepresentativeSprite();
                     typeMember.AddTypeItem(sprite);
                 }
             }
@@ -36,7 +38,7 @@ namespace Roguegard.CharacterCreation
             var member = AlphabetTypeMember.GetMember(appearance);
             var typeIndex = Mathf.Clamp(member.TypeIndex, 0, Table.Count);
             var colorRange = RogueColorUtility.GetColorRange(bodyColor);
-            var sprite = Table[typeIndex].GetSprite(colorRange);
+            var sprite = Table[typeIndex].GetSprite(bodyColor);
             return sprite;
         }
     }

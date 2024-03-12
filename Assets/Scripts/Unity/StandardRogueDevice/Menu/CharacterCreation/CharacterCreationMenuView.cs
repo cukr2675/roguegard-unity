@@ -4,6 +4,7 @@ using UnityEngine;
 
 using UnityEngine.UI;
 using TMPro;
+using SkeletalSprite;
 using Roguegard;
 using Roguegard.Device;
 using Roguegard.CharacterCreation;

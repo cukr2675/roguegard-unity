@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using SkeletalSprite;
+
 namespace Roguegard
 {
     [ObjectFormer.Formable]
@@ -74,9 +76,9 @@ namespace Roguegard
         }
 
         void IBoneMotionEffect.ApplyTo(
-            IMotionSet motionSet, IKeyword keyword, int animationTime, RogueDirection direction, ref RogueObjSpriteTransform transform)
+            IMotionSet motionSet, BoneMotionKeyword keyword, int animationTime, RogueDirection direction, ref RogueObjSpriteTransform transform)
         {
-            if (keyword != MainInfoKw.Hit)
+            if (keyword != new BoneMotionKeyword(MainInfoKw.Hit.Name))
             {
                 CoreMotions.Sleep.ApplyTo(motionSet, animationTime, direction, ref transform, out _);
             }

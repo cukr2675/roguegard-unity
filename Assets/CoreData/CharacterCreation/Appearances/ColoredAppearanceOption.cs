@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using SkeletalSprite;
+
 namespace Roguegard.CharacterCreation
 {
     public abstract class ColoredAppearanceOption : AppearanceOption
@@ -26,7 +28,7 @@ namespace Roguegard.CharacterCreation
             else
             {
                 var sprite = GetSprite(appearance, characterCreationData);
-                boneSpriteTable.BaseTable.AddEquipmentSprite(BoneName, sprite, appearance.Color);
+                boneSpriteTable.BaseTable.AddEquipmentSprite(new BoneKeyword(BoneName.Name), sprite, appearance.Color);
                 return;
             }
 
@@ -35,7 +37,7 @@ namespace Roguegard.CharacterCreation
                 for (int i = 0; i < node.Children.Count; i++)
                 {
                     var child = node.Children[i];
-                    if (child.Bone.Name is IKeyword name && name == BoneName)
+                    if (child.Bone.Name == new BoneKeyword(BoneName.Name))
                     {
                         var sprite = GetSprite(appearance, characterCreationData);
                         child.Bone = new Bone(child.Bone, sprite, appearance.Color);
@@ -51,7 +53,7 @@ namespace Roguegard.CharacterCreation
             private readonly BoneSprite _sprite;
             private readonly Color _color;
 
-            public IKeyword Name => baseBone.Name;
+            public BoneKeyword Name => baseBone.Name;
             public BoneSprite Sprite => _sprite;
             public Color Color => _color;
             public bool OverridesBaseColor => baseBone.OverridesBaseColor;

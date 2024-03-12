@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using SkeletalSprite;
+
 namespace Roguegard
 {
     [ObjectFormer.Formable]
@@ -95,19 +97,19 @@ namespace Roguegard
         }
 
         void IBoneMotionEffect.ApplyTo(
-            IMotionSet motionSet, IKeyword keyword, int animationTime, RogueDirection direction, ref RogueObjSpriteTransform transform)
+            IMotionSet motionSet, BoneMotionKeyword keyword, int animationTime, RogueDirection direction, ref RogueObjSpriteTransform transform)
         {
-            if (keyword == MainInfoKw.Wait)
+            if (keyword == new BoneMotionKeyword(MainInfoKw.Wait.Name))
             {
-                motionSet.GetPose(MainInfoKw.Wait, 0, direction, ref transform, out _);
+                motionSet.GetPose(new BoneMotionKeyword(MainInfoKw.Wait.Name), 0, direction, ref transform, out _);
 
                 // 左右に震えさせる
                 var x = (float)(animationTime / 2 % 2) / RoguegardSettings.PixelsPerUnit;
                 transform.Position += Vector3.right * x;
             }
-            if (keyword == MainInfoKw.Hit)
+            if (keyword == new BoneMotionKeyword(MainInfoKw.Hit.Name))
             {
-                motionSet.GetPose(MainInfoKw.Hit, animationTime, direction, ref transform, out _);
+                motionSet.GetPose(new BoneMotionKeyword(MainInfoKw.Hit.Name), animationTime, direction, ref transform, out _);
 
                 // 左右に震えさせる
                 var x = (float)(animationTime / 2 % 2) / RoguegardSettings.PixelsPerUnit;

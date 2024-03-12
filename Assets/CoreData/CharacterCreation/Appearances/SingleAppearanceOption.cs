@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using SkeletalSprite;
+
 namespace Roguegard.CharacterCreation
 {
     [CreateAssetMenu(menuName = "RoguegardData/CharacterCreation/AppearanceOption/Single")]
@@ -15,7 +17,7 @@ namespace Roguegard.CharacterCreation
         {
             var bodyColor = characterCreationData.Race.BodyColor;
             var colorRange = RogueColorUtility.GetColorRange(bodyColor);
-            var sprite = Sprite.GetSprite(colorRange);
+            var sprite = Sprite.GetSprite(bodyColor);
             return sprite;
         }
     }

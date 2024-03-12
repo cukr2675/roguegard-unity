@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using SkeletalSprite;
+
 namespace Roguegard
 {
     /// <summary>
@@ -17,11 +19,12 @@ namespace Roguegard
             poses = new BonePose[8];
             for (int i = 0; i < 8; i++)
             {
-                poses[i] = GetPose(poseSource, boneName, sprite, true, color, new RogueDirection(i));
+                poses[i] = GetPose(poseSource, new BoneKeyword(boneName.Name), sprite, true, color, new SpriteDirection(i));
             }
         }
 
-        BonePose GetPose(IDirectionalBonePoseSource poseSource, IKeyword boneName, BoneSprite sprite, bool overridesColor, Color color, RogueDirection direction)
+        private BonePose GetPose(
+            IDirectionalBonePoseSource poseSource, BoneKeyword boneName, BoneSprite sprite, bool overridesColor, Color color, SpriteDirection direction)
         {
             var basePose = poseSource.GetBonePose(direction);
             if (!basePose.IsImmutable) throw new RogueException("元のポーズが不変ではありません。");
@@ -47,7 +50,7 @@ namespace Roguegard
             return pose;
         }
 
-        public BonePose GetBonePose(RogueDirection direction)
+        public BonePose GetBonePose(SpriteDirection direction)
         {
             return poses[(int)direction];
         }

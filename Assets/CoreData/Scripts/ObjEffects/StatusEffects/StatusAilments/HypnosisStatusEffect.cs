@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using SkeletalSprite;
+
 namespace Roguegard
 {
     [ObjectFormer.Formable]
@@ -98,8 +100,8 @@ namespace Roguegard
         {
             // 目の色を変更
             var color = new Color32(255, 0, 255, 255);
-            boneSpriteTable.SetFirstSprite(BoneKw.LeftEye, color);
-            boneSpriteTable.SetFirstSprite(BoneKw.RightEye, color);
+            boneSpriteTable.SetFirstSprite(new BoneKeyword(BoneKw.LeftEye.Name), color);
+            boneSpriteTable.SetFirstSprite(new BoneKeyword(BoneKw.RightEye.Name), color);
         }
     }
 }

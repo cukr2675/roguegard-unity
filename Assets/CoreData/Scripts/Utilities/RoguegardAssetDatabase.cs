@@ -8,6 +8,7 @@ using System.Text.RegularExpressions;
 using System.IO;
 using UnityEditor;
 using UnityEditorInternal;
+using SkeletalSprite;
 
 namespace Roguegard.Editor
 {
@@ -87,11 +88,11 @@ namespace Roguegard.Editor
             return new BoneSprite(normalFront, normalRear, backFront, backRear);
         }
 
-        public static KeywordData GetKeyword(string name)
+        public static BoneKeywordData GetKeyword(string name)
         {
-            return AssetDatabase.FindAssets($"{name} t:{nameof(KeywordData)}")
+            return AssetDatabase.FindAssets($"{name} t:{nameof(BoneKeywordData)}")
                 .Select(guid => AssetDatabase.GUIDToAssetPath(guid))
-                .Select(path => AssetDatabase.LoadAssetAtPath<KeywordData>(path))
+                .Select(path => AssetDatabase.LoadAssetAtPath<BoneKeywordData>(path))
                 .First(); // 見つからなければ例外を投げる
         }
 
