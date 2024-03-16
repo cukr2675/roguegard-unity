@@ -11,7 +11,7 @@ namespace Roguegard.CharacterCreation
         [SerializeField] private Sprite _spriteLowerLeft = null;
         [SerializeField] private Sprite _spriteLeft = null;
 
-        [SerializeField] private MotionSetData _motionSet = null;
+        [SerializeField] private SpriteMotionSetData _motionSet = null;
 
         public void GetSpriteValues(
             IRaceOption raceOption, ICharacterCreationData characterCreationData, IRogueGender gender,

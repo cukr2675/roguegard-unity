@@ -7,7 +7,7 @@ using SkeletalSprite;
 namespace Roguegard
 {
     [CreateAssetMenu(menuName = "RoguegardData/Sprite/MotionSet")]
-    public class MotionSetData : ScriptableObject, ISpriteMotionSet
+    public class SpriteMotionSetData : ScriptableObject, ISpriteMotionSet
     {
         [SerializeField] private List<Item> _items = null;
 
