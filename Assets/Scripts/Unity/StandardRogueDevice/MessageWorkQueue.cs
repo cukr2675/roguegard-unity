@@ -146,11 +146,11 @@ namespace RoguegardUnity
 #endif
         }
 
-        private class HideMotion : ISpriteMotion
+        private class HideMotion : RogueSpriteMotion
         {
-            public BoneMotionKeyword Keyword => new BoneMotionKeyword(null);
+            public override IKeyword Keyword => null;
 
-            public void ApplyTo(
+            public override void ApplyTo(
                 ISpriteMotionSet motionSet, int animationTime, SpriteDirection direction, ref SkeletalSpriteTransform transform, out bool endOfMotion)
             {
                 transform.Scale = Vector3.zero;

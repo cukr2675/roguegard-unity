@@ -6,7 +6,7 @@ using SkeletalSprite;
 
 namespace Roguegard
 {
-    public class KeywordBoneMotion : ISpriteMotion
+    public class KeywordBoneMotion : RogueSpriteMotion
     {
         public static KeywordBoneMotion Wait { get; } = new KeywordBoneMotion(MainInfoKw.Wait);
         public static KeywordBoneMotion Walk { get; } = new KeywordBoneMotion(MainInfoKw.Walk);
@@ -18,14 +18,15 @@ namespace Roguegard
         public static KeywordBoneMotion BeDefeated { get; } = new KeywordBoneMotion(MainInfoKw.BeDefeated);
         public static KeywordBoneMotion Victory { get; } = new KeywordBoneMotion(StdKw.Victory);
 
-        public BoneMotionKeyword Keyword { get; }
+        public override IKeyword Keyword { get; }
 
         public KeywordBoneMotion(IKeyword keyword)
         {
-            Keyword = new BoneMotionKeyword(keyword.Name);
+            Keyword = keyword;
         }
 
-        public void ApplyTo(ISpriteMotionSet motionSet, int animationTime, SpriteDirection direction, ref SkeletalSpriteTransform transform, out bool endOfMotion)
+        public override void ApplyTo(
+            ISpriteMotionSet motionSet, int animationTime, SpriteDirection direction, ref SkeletalSpriteTransform transform, out bool endOfMotion)
         {
             motionSet.GetPose(Keyword, animationTime, direction, ref transform, out endOfMotion);
         }

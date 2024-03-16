@@ -18,7 +18,6 @@ namespace RoguegardUnity
 
         private const int headIconCount = 60;
 
-        private static readonly EffectMotionSet effectMotionSet = new EffectMotionSet();
         private static ColoredRogueSprite effectSprite;
 
         public void Initialize(RogueSpriteRendererPool pool)
@@ -67,10 +66,20 @@ namespace RoguegardUnity
         {
             var motionSet = obj.Main.Sprite.MotionSet;
             var transform = SkeletalSpriteTransform.Identity;
-            boneMotion.ApplyTo(motionSet, boneMotionAnimationTime, direction, ref transform, out var endOfMotion);
+            IKeyword keyword = null;
+            bool endOfMotion;
+            if (boneMotion is IRogueSpriteMotion rogueSpriteMotion)
+            {
+                rogueSpriteMotion.ApplyTo(motionSet, boneMotionAnimationTime, direction, ref transform, out endOfMotion);
+                keyword = rogueSpriteMotion.Keyword;
+            }
+            else
+            {
+                boneMotion.ApplyTo(boneMotionAnimationTime, direction, ref transform, out endOfMotion);
+            }
 
             var motionEffectState = obj.Main.GetBoneMotionEffectState(obj);
-            motionEffectState.ApplyTo(motionSet, boneMotion.Keyword, motionEffectAnimationTime, direction, ref transform);
+            motionEffectState.ApplyTo(motionSet, keyword, motionEffectAnimationTime, direction, ref transform);
 
             var x = Mathf.Round(transform.Position.x * RoguegardSettings.PixelsPerUnit) / RoguegardSettings.PixelsPerUnit;
             var y = Mathf.Round(transform.Position.y * RoguegardSettings.PixelsPerUnit) / RoguegardSettings.PixelsPerUnit;
@@ -113,7 +122,7 @@ namespace RoguegardUnity
             effectSprite ??= ColoredRogueSprite.Create(null, RoguegardSettings.BoneSpriteBaseColor);
 
             var transform = SkeletalSpriteTransform.Identity;
-            boneMotion.ApplyTo(effectMotionSet, motionEffectAnimationTime, direction, ref transform, out var endOfMotion);
+            boneMotion.ApplyTo(motionEffectAnimationTime, direction, ref transform, out var endOfMotion);
 
             var x = Mathf.Round(transform.Position.x * RoguegardSettings.PixelsPerUnit) / RoguegardSettings.PixelsPerUnit;
             var y = Mathf.Round(transform.Position.y * RoguegardSettings.PixelsPerUnit) / RoguegardSettings.PixelsPerUnit;
@@ -137,15 +146,6 @@ namespace RoguegardUnity
             statusEffectIconRenderer.BePooledParent();
             statusEffectIconRenderer = null;
             gameObject.SetActive(false);
-        }
-
-        private class EffectMotionSet : ISpriteMotionSet
-        {
-            public void GetPose(
-                BoneMotionKeyword keyword, int animationTime, SpriteDirection direction, ref SkeletalSpriteTransform transform, out bool endOfMotion)
-            {
-                endOfMotion = true;
-            }
         }
     }
 }

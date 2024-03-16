@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace SkeletalSprite
+using SkeletalSprite;
+
+namespace Roguegard
 {
     [CreateAssetMenu(menuName = "RoguegardData/Sprite/MotionSet")]
     public class MotionSetData : ScriptableObject, ISpriteMotionSet
@@ -11,16 +13,7 @@ namespace SkeletalSprite
 
         [System.NonSerialized] private ISpriteMotion firstValue;
 
-        //public bool ContainsKey(IKeyword key)
-        //{
-        //    foreach (var item in _items)
-        //    {
-        //        if (item.Key == new BoneMotionKeyword(key.Name)) return true;
-        //    }
-        //    return false;
-        //}
-
-        public bool TryGetValue(BoneMotionKeyword key, out ISpriteMotion value)
+        private bool TryGetValue(IKeyword key, out ISpriteMotion value)
         {
             foreach (var item in _items)
             {
@@ -34,7 +27,8 @@ namespace SkeletalSprite
             return false;
         }
 
-        void ISpriteMotionSet.GetPose(BoneMotionKeyword keyword, int animationTime, SpriteDirection direction, ref SkeletalSpriteTransform transform, out bool endOfMotion)
+        void ISpriteMotionSet.GetPose(
+            IKeyword keyword, int animationTime, SpriteDirection direction, ref SkeletalSpriteTransform transform, out bool endOfMotion)
         {
             if (!TryGetValue(keyword, out var value))
             {
@@ -43,14 +37,14 @@ namespace SkeletalSprite
                 value = firstValue;
             }
 
-            value.ApplyTo(this, animationTime, direction, ref transform, out endOfMotion);
+            value.ApplyTo(animationTime, direction, ref transform, out endOfMotion);
         }
 
         [System.Serializable]
         public class Item
         {
-            [SerializeField] private Roguegard.KeywordData _key;
-            public BoneMotionKeyword Key => new BoneMotionKeyword(_key.DescriptionName);
+            [SerializeField] private KeywordData _key;
+            public IKeyword Key => _key;
 
             [SerializeField] private SpriteMotionData _value;
             public ISpriteMotion Value => _value;

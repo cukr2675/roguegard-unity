@@ -25,7 +25,8 @@ namespace RoguegardUnity
         private int motionEffectAnimationTime;
         public RogueDirection Direction { get; private set; }
 
-        private ISpriteMotion currentBoneMotion;
+        private ISpriteMotion currentSpriteMotion;
+        private IRogueSpriteMotion currentRogueSpriteMotion;
         private bool boneMotionIsClosed;
 
         public void Initialize(RogueObj self, RogueSpriteRendererPool pool)
@@ -126,11 +127,12 @@ namespace RoguegardUnity
             }
         }
 
-        public void SetBoneMotion(ISpriteMotion boneMotion, bool continues)
+        public void SetBoneMotion(ISpriteMotion spriteMotion, bool continues)
         {
-            if (boneMotion == null || boneMotion == currentBoneMotion) return;
+            if (spriteMotion == null || spriteMotion == currentSpriteMotion) return;
 
-            currentBoneMotion = boneMotion;
+            currentSpriteMotion = spriteMotion;
+            currentRogueSpriteMotion = spriteMotion as IRogueSpriteMotion;
             boneMotionAnimationTime = 0;
             if (!continues) { WorkingNow = true; }
         }
@@ -178,7 +180,7 @@ namespace RoguegardUnity
             localPosition.y = Mathf.Round(localPosition.y * 32f) / 32f;
             transform.localPosition = localPosition;
             var endOfWalk = walkTimeRatio >= 1f;
-            if (endOfWalk && currentBoneMotion.Keyword == new BoneMotionKeyword(MainInfoKw.Walk.Name))
+            if (endOfWalk && currentRogueSpriteMotion?.Keyword == MainInfoKw.Walk)
             {
                 // 位置変更終了で動作完了
                 // 歩きモーションのときだけモーション終了前に前もって動作完了させる。
@@ -191,18 +193,18 @@ namespace RoguegardUnity
             bool endOfMotion;
             if (Obj != null)
             {
-                _spriteRenderer.SetSprite(Obj, currentBoneMotion, boneMotionAnimationTime, motionEffectAnimationTime, Direction, out endOfMotion);
+                _spriteRenderer.SetSprite(Obj, currentSpriteMotion, boneMotionAnimationTime, motionEffectAnimationTime, Direction, out endOfMotion);
             }
             else
             {
-                _spriteRenderer.SetEffectSprite(localPosition, currentBoneMotion, motionEffectAnimationTime, Direction, out endOfMotion);
+                _spriteRenderer.SetEffectSprite(localPosition, currentSpriteMotion, motionEffectAnimationTime, Direction, out endOfMotion);
             }
             if (endOfWalk && endOfMotion)
             {
                 if (boneMotionIsClosed)
                 {
                     // モーションが終端のときだけ待機モーションに切り替える。（待機系モーションの場合は切り替えない）
-                    if (currentBoneMotion.Keyword != new BoneMotionKeyword(MainInfoKw.Wait.Name)) SetBoneMotion(KeywordBoneMotion.Wait, true);
+                    if (currentRogueSpriteMotion?.Keyword != MainInfoKw.Wait) SetBoneMotion(KeywordBoneMotion.Wait, true);
                     boneMotionIsClosed = false;
                 }
 

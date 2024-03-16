@@ -76,11 +76,11 @@ namespace Roguegard
         }
 
         void IBoneMotionEffect.ApplyTo(
-            ISpriteMotionSet motionSet, BoneMotionKeyword keyword, int animationTime, RogueDirection direction, ref SkeletalSpriteTransform transform)
+            ISpriteMotionSet motionSet, IKeyword keyword, int animationTime, RogueDirection direction, ref SkeletalSpriteTransform transform)
         {
-            if (keyword != new BoneMotionKeyword(MainInfoKw.Hit.Name))
+            if (keyword != MainInfoKw.Hit)
             {
-                CoreMotions.Sleep.ApplyTo(motionSet, animationTime, direction, ref transform, out _);
+                CoreMotions.Sleep.ApplyTo(animationTime, direction, ref transform, out _);
             }
         }
 

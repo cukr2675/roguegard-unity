@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace SkeletalSprite
+using SkeletalSprite;
+
+namespace Roguegard
 {
-    [CreateAssetMenu(menuName = "SkeletalSprite/SpriteMotion/Rotatable1to8")]
-    public class Rotatable1To8SpriteMotionData : SpriteMotionData
+    [CreateAssetMenu(menuName = "SkeletalSprite/SpriteMotion/Rotatable")]
+    public class RotatableSpriteMotionData : SpriteMotionData
     {
         //[SerializeField] private KeywordData _keyword = null;
         [SerializeField] private int _pixelsPerUnit = 32;
@@ -13,7 +15,7 @@ namespace SkeletalSprite
         [SerializeField] private SpriteMotionDirectionType _direction = SpriteMotionDirectionType.Linear;
         [SerializeField] private List<Item> _items = null;
 
-        public override BoneMotionKeyword Keyword => new BoneMotionKeyword(null);
+        public override IKeyword Keyword => null;
 
         public override void ApplyTo(
             ISpriteMotionSet motionSet, int animationTime, SpriteDirection direction, ref SkeletalSpriteTransform transform, out bool endOfMotion)
@@ -42,9 +44,9 @@ namespace SkeletalSprite
             var degree = _direction.Convert(direction).Degree + current.Degree;
             var degreeRotation = Quaternion.Euler(0f, 0f, degree);
             transform.Position = (current.PixelPosition + degreeRotation * current.PixelRotatablePosition) / _pixelsPerUnit;
-            transform.Rotation = current.Rotation * degreeRotation;
+            transform.Rotation = current.Rotation;
             transform.Scale = current.Scale;
-            transform.PoseSource = current;
+            transform.PoseSource = current.PoseSource;
             transform.Direction = SpriteDirection.FromDegree(degree);
             endOfMotion = index >= sumWait - 1;
         }
@@ -58,12 +60,10 @@ namespace SkeletalSprite
         }
 
         [System.Serializable]
-        private class Item : IDirectionalSpritePoseSource
+        private class Item
         {
-            [SerializeField] private Sprite _rightSprite;
-            private SpritePose spritePose;
-
-            [SerializeField] private Color _color;
+            [SerializeField] private DirectionalSpritePoseSourceData _poseSource;
+            public IDirectionalSpritePoseSource PoseSource => _poseSource;
 
             [SerializeField] private Vector3 _pixelPosition;
             public Vector3 PixelPosition => _pixelPosition;
@@ -82,22 +82,6 @@ namespace SkeletalSprite
 
             [SerializeField] private int _wait;
             public int Wait => _wait;
-
-            public SpritePose GetSpritePose(SpriteDirection direction)
-            {
-                if (spritePose == null)
-                {
-                    if (_rightSprite == null) return DefaultSpriteMotionPoseSource.Instance.GetSpritePose(direction);
-
-                    spritePose = new SpritePose();
-                    var boneSprite = BoneSprite.CreateNF(_rightSprite);
-                    var transform = new BoneTransform(boneSprite, _color, true, Vector3.zero, Quaternion.identity, Vector3.one, false, false, false);
-                    spritePose.AddBoneTransform(transform, BoneKeyword.Body);
-                    spritePose.SetImmutable();
-                }
-
-                return spritePose;
-            }
 
             public void Validate()
             {

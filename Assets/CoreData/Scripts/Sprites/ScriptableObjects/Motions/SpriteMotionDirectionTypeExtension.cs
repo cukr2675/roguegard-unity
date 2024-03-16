@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace SkeletalSprite
+using SkeletalSprite;
+
+namespace Roguegard
 {
     public static class SpriteMotionDirectionTypeExtension
     {

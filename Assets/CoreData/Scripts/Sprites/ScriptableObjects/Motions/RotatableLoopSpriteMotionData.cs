@@ -2,37 +2,38 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace SkeletalSprite
+using SkeletalSprite;
+
+namespace Roguegard
 {
-    [CreateAssetMenu(menuName = "SkeletalSprite/SpriteMotion/Rotatable")]
-    public class RotatableSpriteMotionData : SpriteMotionData
+    [CreateAssetMenu(menuName = "SkeletalSprite/SpriteMotion/RotatableLoop")]
+    public class RotatableLoopSpriteMotionData : SpriteMotionData
     {
         //[SerializeField] private KeywordData _keyword = null;
         [SerializeField] private int _pixelsPerUnit = 32;
-        [SerializeField] private bool _isLoop = true;
+        [SerializeField] private int _loopCount = 0;
         [SerializeField] private SpriteMotionDirectionType _direction = SpriteMotionDirectionType.Linear;
         [SerializeField] private List<Item> _items = null;
 
-        public override BoneMotionKeyword Keyword => new BoneMotionKeyword(null);
+        public override IKeyword Keyword => null;
 
         public override void ApplyTo(
             ISpriteMotionSet motionSet, int animationTime, SpriteDirection direction, ref SkeletalSpriteTransform transform, out bool endOfMotion)
         {
-            var sumWait = 0;
+            var oneLoopWait = 0;
             foreach (var item in _items)
             {
-                sumWait += item.Wait;
+                oneLoopWait += item.Wait;
             }
+            var sumWait = oneLoopWait * _loopCount;
 
-            int index;
-            if (_isLoop) index = animationTime % sumWait;
-            else index = Mathf.Min(animationTime, sumWait - 1);
+            var index = Mathf.Min(animationTime, sumWait - 1);
             var sum = 0;
             Item current = null;
             foreach (var item in _items)
             {
                 sum += item.Wait;
-                if (index < sum)
+                if ((index % oneLoopWait) < sum)
                 {
                     current = item;
                     break;

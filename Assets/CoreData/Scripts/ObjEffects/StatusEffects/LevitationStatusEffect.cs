@@ -38,7 +38,7 @@ namespace Roguegard
         }
 
         public static void MotionApplyTo(
-            ISpriteMotionSet motionSet, BoneMotionKeyword keyword, int animationTime, RogueDirection direction, ref SkeletalSpriteTransform transform)
+            ISpriteMotionSet motionSet, IKeyword keyword, int animationTime, RogueDirection direction, ref SkeletalSpriteTransform transform)
         {
             Motion.Instance.ApplyTo(motionSet, animationTime, direction, ref transform, out _);
         }
@@ -97,17 +97,17 @@ namespace Roguegard
             }
 
             void IBoneMotionEffect.ApplyTo(
-                ISpriteMotionSet motionSet, BoneMotionKeyword keyword, int animationTime, RogueDirection direction, ref SkeletalSpriteTransform transform)
+                ISpriteMotionSet motionSet, IKeyword keyword, int animationTime, RogueDirection direction, ref SkeletalSpriteTransform transform)
             {
                 Motion.Instance.ApplyTo(motionSet, animationTime, direction, ref transform, out _);
             }
         }
 
-        private class Motion : ISpriteMotion
+        private class Motion : RogueSpriteMotion
         {
             public static Motion Instance { get; } = new Motion();
 
-            public BoneMotionKeyword Keyword => new BoneMotionKeyword(null);
+            public override IKeyword Keyword => null;
 
             private readonly Vector3[] positions = new[]
             {
@@ -119,7 +119,8 @@ namespace Roguegard
                 new Vector3(0f, 2f) / RoguegardSettings.PixelsPerUnit,
             };
 
-            public void ApplyTo(ISpriteMotionSet motionSet, int animationTime, SpriteDirection direction, ref SkeletalSpriteTransform transform, out bool endOfMotion)
+            public override void ApplyTo(
+                ISpriteMotionSet motionSet, int animationTime, SpriteDirection direction, ref SkeletalSpriteTransform transform, out bool endOfMotion)
             {
                 var index = animationTime / 8 % positions.Length;
                 transform.Position = positions[index] + Vector3.up * (4f / RoguegardSettings.PixelsPerUnit);

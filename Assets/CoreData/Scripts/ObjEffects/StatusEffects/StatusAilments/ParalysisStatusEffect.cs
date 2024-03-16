@@ -97,19 +97,19 @@ namespace Roguegard
         }
 
         void IBoneMotionEffect.ApplyTo(
-            ISpriteMotionSet motionSet, BoneMotionKeyword keyword, int animationTime, RogueDirection direction, ref SkeletalSpriteTransform transform)
+            ISpriteMotionSet motionSet, IKeyword keyword, int animationTime, RogueDirection direction, ref SkeletalSpriteTransform transform)
         {
-            if (keyword == new BoneMotionKeyword(MainInfoKw.Wait.Name))
+            if (keyword == MainInfoKw.Wait)
             {
-                motionSet.GetPose(new BoneMotionKeyword(MainInfoKw.Wait.Name), 0, direction, ref transform, out _);
+                motionSet.GetPose(MainInfoKw.Wait, 0, direction, ref transform, out _);
 
                 // 左右に震えさせる
                 var x = (float)(animationTime / 2 % 2) / RoguegardSettings.PixelsPerUnit;
                 transform.Position += Vector3.right * x;
             }
-            if (keyword == new BoneMotionKeyword(MainInfoKw.Hit.Name))
+            if (keyword == MainInfoKw.Hit)
             {
-                motionSet.GetPose(new BoneMotionKeyword(MainInfoKw.Hit.Name), animationTime, direction, ref transform, out _);
+                motionSet.GetPose(MainInfoKw.Hit, animationTime, direction, ref transform, out _);
 
                 // 左右に震えさせる
                 var x = (float)(animationTime / 2 % 2) / RoguegardSettings.PixelsPerUnit;

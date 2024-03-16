@@ -10,8 +10,6 @@ namespace SkeletalSprite
     /// </summary>
     public interface ISpriteMotion
     {
-        BoneMotionKeyword Keyword { get; }
-
-        void ApplyTo(ISpriteMotionSet motionSet, int animationTime, SpriteDirection direction, ref SkeletalSpriteTransform transform, out bool endOfMotion);
+        void ApplyTo(int animationTime, SpriteDirection direction, ref SkeletalSpriteTransform transform, out bool endOfMotion);
     }
 }

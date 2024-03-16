@@ -15,8 +15,6 @@ namespace Roguegard
         private readonly Color color;
         private readonly Dictionary<IDirectionalSpritePoseSource, IDirectionalSpritePoseSource> coloredPoseTable;
 
-        public BoneMotionKeyword Keyword => baseMotion.Keyword;
-
         public VariantBoneMotion(ISpriteMotion baseMotion, Color color)
             : this(baseMotion, null, null, true, color)
         {
@@ -32,9 +30,9 @@ namespace Roguegard
             coloredPoseTable = new Dictionary<IDirectionalSpritePoseSource, IDirectionalSpritePoseSource>();
         }
 
-        public void ApplyTo(ISpriteMotionSet motionSet, int animationTime, SpriteDirection direction, ref SkeletalSpriteTransform transform, out bool endOfMotion)
+        public void ApplyTo(int animationTime, SpriteDirection direction, ref SkeletalSpriteTransform transform, out bool endOfMotion)
         {
-            baseMotion.ApplyTo(motionSet, animationTime, direction, ref transform, out endOfMotion);
+            baseMotion.ApplyTo(animationTime, direction, ref transform, out endOfMotion);
 
             if (!coloredPoseTable.TryGetValue(transform.PoseSource, out var coloredPoseSource))
             {
