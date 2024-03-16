@@ -4,16 +4,16 @@ using UnityEngine;
 
 namespace SkeletalSprite
 {
-    public class BoneRogueSpriteNode : ISortableBone<BoneRogueSpriteNode>
+    public class SkeletalSpriteNode : ISortableBone<SkeletalSpriteNode>
     {
         public readonly IBone source;
 
-        BoneKeyword ISortableBone<BoneRogueSpriteNode>.Name => source.Name;
-        float ISortableBone<BoneRogueSpriteNode>.NormalOrderInParent => source.NormalOrderInParent;
-        float ISortableBone<BoneRogueSpriteNode>.BackOrderInParent => source.BackOrderInParent;
+        BoneKeyword ISortableBone<SkeletalSpriteNode>.Name => source.Name;
+        float ISortableBone<SkeletalSpriteNode>.NormalOrderInParent => source.NormalOrderInParent;
+        float ISortableBone<SkeletalSpriteNode>.BackOrderInParent => source.BackOrderInParent;
 
-        private readonly BoneChildren<BoneRogueSpriteNode> _children;
-        ISortableBoneChildren<BoneRogueSpriteNode> ISortableBone<BoneRogueSpriteNode>.Children => _children;
+        private readonly BoneChildren<SkeletalSpriteNode> _children;
+        ISortableBoneChildren<SkeletalSpriteNode> ISortableBone<SkeletalSpriteNode>.Children => _children;
 
         public BoneBack.Type LocalBack { get; set; }
         public int NormalFrontSpriteCount { get; set; }
@@ -31,30 +31,30 @@ namespace SkeletalSprite
         private readonly List<Color> equipmentColors;
         private bool overridesBaseColor;
 
-        public BoneRogueSpriteNode(IBoneNode boneNode)
+        public SkeletalSpriteNode(IBoneNode boneNode)
         {
             source = boneNode.Bone;
-            _children = new BoneChildren<BoneRogueSpriteNode>();
+            _children = new BoneChildren<SkeletalSpriteNode>();
             equipmentSprites = new List<BoneSprite>();
             equipmentColors = new List<Color>();
             for (int i = 0; i < boneNode.Children.Count; i++)
             {
                 var childBone = boneNode.Children[i];
-                var child = new BoneRogueSpriteNode(childBone);
+                var child = new SkeletalSpriteNode(childBone);
                 _children.AddChild(child);
             }
         }
 
-        public BoneRogueSpriteNode(BoneRogueSpriteNode node)
+        public SkeletalSpriteNode(SkeletalSpriteNode node)
         {
             source = node.source;
-            _children = new BoneChildren<BoneRogueSpriteNode>();
+            _children = new BoneChildren<SkeletalSpriteNode>();
             equipmentSprites = new List<BoneSprite>();
             equipmentColors = new List<Color>();
             for (int i = 0; i < node._children.Count; i++)
             {
                 var childBone = node._children[i];
-                var child = new BoneRogueSpriteNode(childBone);
+                var child = new SkeletalSpriteNode(childBone);
                 _children.AddChild(child);
             }
         }
@@ -114,7 +114,7 @@ namespace SkeletalSprite
         }
 
         public void SetTo(
-            IRogueObjSpriteRenderController renderController,
+            ISkeletalSpriteRenderController renderController,
             IReadOnlyDictionary<BoneKeyword, BoneTransform> boneTransforms, bool poseBack,
             Vector3 parentPosition, Quaternion parentRotation, Vector3 scaleOfLocalByParent,
             bool parentMirrorX, bool parentMirrorY, Color baseColor)

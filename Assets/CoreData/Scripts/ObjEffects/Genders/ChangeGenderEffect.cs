@@ -43,7 +43,7 @@ namespace Roguegard
             IRogueDetails IRogueDescription.Details => null;
             IKeyword IStatusEffect.EffectCategory => null;
             RogueObj IStatusEffect.Effecter => null;
-            IBoneMotion IStatusEffect.HeadIcon => null;
+            ISpriteMotion IStatusEffect.HeadIcon => null;
             float IStatusEffect.Order => 0f;
 
             void IRogueEffect.Open(RogueObj self)

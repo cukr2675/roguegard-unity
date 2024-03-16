@@ -21,7 +21,7 @@ namespace Roguegard
         float IRogueMethodPassiveAspect.Order => 0f;
         float IBoneMotionEffect.Order => 0f;
 
-        private static IBoneMotion _smoke;
+        private static ISpriteMotion _smoke;
 
         private SleepStatusEffect() { }
 
@@ -76,7 +76,7 @@ namespace Roguegard
         }
 
         void IBoneMotionEffect.ApplyTo(
-            IMotionSet motionSet, BoneMotionKeyword keyword, int animationTime, RogueDirection direction, ref RogueObjSpriteTransform transform)
+            ISpriteMotionSet motionSet, BoneMotionKeyword keyword, int animationTime, RogueDirection direction, ref SkeletalSpriteTransform transform)
         {
             if (keyword != new BoneMotionKeyword(MainInfoKw.Hit.Name))
             {

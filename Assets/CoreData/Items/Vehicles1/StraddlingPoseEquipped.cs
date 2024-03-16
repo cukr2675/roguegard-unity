@@ -8,7 +8,7 @@ namespace Roguegard.CharacterCreation
 {
     public class StraddlingPoseEquipped : ReferableScript, IEquippedEffectSource
     {
-        [SerializeField] private DirectionalBonePoseSourceData _pose;
+        [SerializeField] private DirectionalSpritePoseSourceData _pose;
         [SerializeField] private KeywordData _vehicleBoneName;
         [SerializeField] private BoneSprite _vehicleBoneSprite;
 
@@ -41,7 +41,7 @@ namespace Roguegard.CharacterCreation
             }
 
             void IBoneMotionEffect.ApplyTo(
-                IMotionSet motionSet, BoneMotionKeyword keyword, int animationTime, RogueDirection direction, ref RogueObjSpriteTransform transform)
+                ISpriteMotionSet motionSet, BoneMotionKeyword keyword, int animationTime, RogueDirection direction, ref SkeletalSpriteTransform transform)
             {
                 if (keyword == new BoneMotionKeyword(MainInfoKw.Wait.Name) || keyword == new BoneMotionKeyword(MainInfoKw.Walk.Name))
                 {

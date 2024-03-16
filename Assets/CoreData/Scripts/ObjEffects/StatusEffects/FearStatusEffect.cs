@@ -19,7 +19,7 @@ namespace Roguegard
         float IRogueMethodActiveAspect.Order => 1f; // 成否判定のため 1
         float IValueEffect.Order => 0f;
 
-        private static IBoneMotion _smoke;
+        private static ISpriteMotion _smoke;
 
         private FearStatusEffect() { }
 

@@ -11,7 +11,7 @@ namespace Roguegard
     public class BoneRogueSprite : RogueObjSprite
     {
         private IBoneNode boneRoot;
-        private BoneRogueSpriteNode root;
+        private SkeletalSpriteNode root;
         private Sprite _iconSprite;
         private Color _iconColor;
 
@@ -22,7 +22,7 @@ namespace Roguegard
         private BoneOrder enabledOrder;
         private int normalBonesCount;
         private int backBonesCount;
-        private BonePose enabledImmutablePose;
+        private SpritePose enabledImmutablePose;
 
         private static readonly AffectableBoneSpriteTable boneSpriteTable = new AffectableBoneSpriteTable();
 
@@ -45,7 +45,7 @@ namespace Roguegard
             {
                 var instance = CreateInstance<BoneRogueSprite>();
                 instance.boneRoot = boneNode;
-                instance.root = new BoneRogueSpriteNode(boneNode);
+                instance.root = new SkeletalSpriteNode(boneNode);
                 instance._iconSprite = iconSprite;
                 instance._iconColor = iconColor;
                 return instance;
@@ -83,7 +83,7 @@ namespace Roguegard
             enabledOrder = boneOrder;
         }
 
-        public override void SetTo(IRogueObjSpriteRenderController renderController, BonePose pose, SpriteDirection direction)
+        public override void SetTo(ISkeletalSpriteRenderController renderController, SpritePose pose, SpriteDirection direction)
         {
             // 装備が変更されておらず、引数のポーズが前回のポーズと同じかつ不変であれば、更新する必要はない。
             if (!wasChangedEquipments && enabledImmutablePose == pose) return;

@@ -38,7 +38,7 @@ namespace Roguegard
             }
         }
 
-        public override void SetTo(IRogueObjSpriteRenderController renderController, BonePose pose, SpriteDirection direction)
+        public override void SetTo(ISkeletalSpriteRenderController renderController, SpritePose pose, SpriteDirection direction)
         {
             var angleIndex = (int)direction;
             var sprite = angleIndex % 2 == 0 ? spriteLeft : spriteLowerLeft;

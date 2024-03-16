@@ -4,17 +4,17 @@ using UnityEngine;
 
 namespace SkeletalSprite
 {
-    public ref struct RogueObjSpriteTransform
+    public ref struct SkeletalSpriteTransform
     {
         public Vector3 Position { get; set; }
         public Quaternion Rotation { get; set; }
         public Vector3 Scale { get; set; }
-        public IDirectionalBonePoseSource PoseSource { get; set; }
+        public IDirectionalSpritePoseSource PoseSource { get; set; }
         public SpriteDirection Direction { get; set; }
 
-        public static RogueObjSpriteTransform Identity => new RogueObjSpriteTransform(false);
+        public static SkeletalSpriteTransform Identity => new SkeletalSpriteTransform(false);
 
-        private RogueObjSpriteTransform(bool flag)
+        private SkeletalSpriteTransform(bool flag)
         {
             Position = Vector3.zero;
             Rotation = Quaternion.identity;

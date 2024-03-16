@@ -15,7 +15,7 @@ namespace Roguegard
         public override IKeyword EffectCategory => EffectCategoryKw.StatusAilment;
         protected override int MaxStack => 1;
         protected override int InitialLifeTime => 10;
-        public override IBoneMotion HeadIcon => CoreMotions.Confusion;
+        public override ISpriteMotion HeadIcon => CoreMotions.Confusion;
 
         float IRogueMethodPassiveAspect.Order => -1f; // 引数変更のため -1
         float IBoneSpriteEffect.Order => 0f;

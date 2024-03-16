@@ -8,7 +8,7 @@ using Roguegard;
 
 namespace RoguegardUnity
 {
-    public class MenuRogueObjSpriteRenderer : MonoBehaviour, IRogueObjSpriteRenderController
+    public class MenuRogueObjSpriteRenderer : MonoBehaviour, ISkeletalSpriteRenderController
     {
         private RogueSpriteRendererPool parentPool;
 

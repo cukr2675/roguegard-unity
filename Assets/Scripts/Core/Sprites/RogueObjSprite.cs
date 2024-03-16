@@ -16,6 +16,6 @@ namespace Roguegard
 
         public abstract void SetBoneSpriteEffects(RogueObj self, Spanning<IBoneSpriteEffect> effects);
 
-        public abstract void SetTo(IRogueObjSpriteRenderController renderController, BonePose pose, SpriteDirection direction);
+        public abstract void SetTo(ISkeletalSpriteRenderController renderController, SpritePose pose, SpriteDirection direction);
     }
 }

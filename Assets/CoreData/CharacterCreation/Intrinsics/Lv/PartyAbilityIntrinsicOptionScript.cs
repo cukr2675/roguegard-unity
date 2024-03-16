@@ -15,7 +15,7 @@ namespace Roguegard.CharacterCreation
             // IRogueEffect でないエフェクトを Contains で判定したいので、 IStatusEffect として追加してそちらの Contains を使う。
             IKeyword IStatusEffect.EffectCategory => EffectCategoryKw.Dummy;
             RogueObj IStatusEffect.Effecter => null;
-            IBoneMotion IStatusEffect.HeadIcon => null;
+            ISpriteMotion IStatusEffect.HeadIcon => null;
             float IStatusEffect.Order => 0f;
             string IRogueDescription.Name => null;
             Sprite IRogueDescription.Icon => null;

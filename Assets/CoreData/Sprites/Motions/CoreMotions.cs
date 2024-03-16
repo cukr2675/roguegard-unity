@@ -10,47 +10,47 @@ namespace Roguegard
     {
         private static CoreMotions instance;
 
-        [SerializeField] private RotatableBoneMotionData _beThrownDrop;
-        public static IBoneMotion BeThrownDrop => instance._beThrownDrop;
+        [SerializeField] private RotatableSpriteMotionData _beThrownDrop;
+        public static ISpriteMotion BeThrownDrop => instance._beThrownDrop;
 
-        [SerializeField] private RotatableBoneMotionData _beThrownFlying;
-        public static IBoneMotion BeThrownFlying => instance._beThrownFlying;
+        [SerializeField] private RotatableSpriteMotionData _beThrownFlying;
+        public static ISpriteMotion BeThrownFlying => instance._beThrownFlying;
 
-        [SerializeField] private RotatableBoneMotionData _bomb;
-        public static IBoneMotion Bomb => instance._bomb;
+        [SerializeField] private RotatableSpriteMotionData _bomb;
+        public static ISpriteMotion Bomb => instance._bomb;
 
-        [SerializeField] private RotatableBoneMotionData _buff;
-        public static IBoneMotion Buff => instance._buff;
+        [SerializeField] private RotatableSpriteMotionData _buff;
+        public static ISpriteMotion Buff => instance._buff;
 
-        [SerializeField] private RotatableBoneMotionData _confusion;
-        public static IBoneMotion Confusion => instance._confusion;
+        [SerializeField] private RotatableSpriteMotionData _confusion;
+        public static ISpriteMotion Confusion => instance._confusion;
 
-        [SerializeField] private RotatableBoneMotionData _debuff;
-        public static IBoneMotion Debuff => instance._debuff;
+        [SerializeField] private RotatableSpriteMotionData _debuff;
+        public static ISpriteMotion Debuff => instance._debuff;
 
-        [SerializeField] private RotatableBoneMotionData _discus;
-        public static IBoneMotion Discus => instance._discus;
+        [SerializeField] private RotatableSpriteMotionData _discus;
+        public static ISpriteMotion Discus => instance._discus;
 
-        [SerializeField] private RotatableBoneMotionData _eat;
-        public static IBoneMotion Eat => instance._eat;
+        [SerializeField] private RotatableSpriteMotionData _eat;
+        public static ISpriteMotion Eat => instance._eat;
 
-        [SerializeField] private RotatableBoneMotionData _fullTurn;
-        public static IBoneMotion FullTurn => instance._fullTurn;
+        [SerializeField] private RotatableSpriteMotionData _fullTurn;
+        public static ISpriteMotion FullTurn => instance._fullTurn;
 
-        [SerializeField] private RotatableBoneMotionData _heal;
-        public static IBoneMotion Heal => instance._heal;
+        [SerializeField] private RotatableSpriteMotionData _heal;
+        public static ISpriteMotion Heal => instance._heal;
 
-        [SerializeField] private RotatableBoneMotionData _paralysis;
-        public static IBoneMotion Paralysis => instance._paralysis;
+        [SerializeField] private RotatableSpriteMotionData _paralysis;
+        public static ISpriteMotion Paralysis => instance._paralysis;
 
-        [SerializeField] private Rotatable1To8BoneMotionData _powerSlash;
-        public static IBoneMotion PowerSlash => instance._powerSlash;
+        [SerializeField] private Rotatable1To8SpriteMotionData _powerSlash;
+        public static ISpriteMotion PowerSlash => instance._powerSlash;
 
-        [SerializeField] private RotatableBoneMotionData _sleep;
-        public static IBoneMotion Sleep => instance._sleep;
+        [SerializeField] private RotatableSpriteMotionData _sleep;
+        public static ISpriteMotion Sleep => instance._sleep;
 
-        [SerializeField] private RotatableBoneMotionData _smoke;
-        public static IBoneMotion Smoke => instance._smoke;
+        [SerializeField] private RotatableSpriteMotionData _smoke;
+        public static ISpriteMotion Smoke => instance._smoke;
 
         public override IEnumerator LoadAsync()
         {

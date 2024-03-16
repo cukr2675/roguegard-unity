@@ -74,7 +74,7 @@ namespace Roguegard
             showEffectsIsDirty = false;
         }
 
-        public void ApplyTo(IMotionSet motionSet, BoneMotionKeyword keyword, int animationTime, RogueDirection direction, ref RogueObjSpriteTransform transform)
+        public void ApplyTo(ISpriteMotionSet motionSet, BoneMotionKeyword keyword, int animationTime, RogueDirection direction, ref SkeletalSpriteTransform transform)
         {
             for (int i = 0; i < showEffects.Count; i++)
             {

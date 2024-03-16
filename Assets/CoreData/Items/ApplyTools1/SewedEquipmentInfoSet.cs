@@ -85,7 +85,7 @@ namespace Roguegard
             return this;
         }
 
-        public override void GetObjSprite(RogueObj self, out RogueObjSprite objSprite, out IMotionSet motionSet)
+        public override void GetObjSprite(RogueObj self, out RogueObjSprite objSprite, out ISpriteMotionSet motionSet)
         {
             RoguegardSettings.DefaultRaceOption.GetObjSprite(null, null, null, self, null, out objSprite, out motionSet);
         }

@@ -7,7 +7,7 @@ using SkeletalSprite;
 
 namespace RoguegardUnity
 {
-    public class RogueObjSpriteRenderer : MonoBehaviour, IRogueObjSpriteRenderController
+    public class RogueObjSpriteRenderer : MonoBehaviour, ISkeletalSpriteRenderController
     {
         /// <summary>
         /// このインスタンスを生成・プーリングする親

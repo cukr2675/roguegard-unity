@@ -4,18 +4,18 @@ using UnityEngine;
 
 namespace SkeletalSprite
 {
-    public static class BoneMotionDirectionTypeExtension
+    public static class SpriteMotionDirectionTypeExtension
     {
-        public static SpriteDirection Convert(this BoneMotionDirectionType directionType, SpriteDirection direction)
+        public static SpriteDirection Convert(this SpriteMotionDirectionType directionType, SpriteDirection direction)
         {
             switch (directionType)
             {
-                case BoneMotionDirectionType.Linear:
+                case SpriteMotionDirectionType.Linear:
                     return direction;
-                case BoneMotionDirectionType.NotBack:
+                case SpriteMotionDirectionType.NotBack:
                     if (direction.Degree < 180f) return SpriteDirection.FromDegree(360f - direction.Degree);
                     else return direction;
-                case BoneMotionDirectionType.DownwardOnly:
+                case SpriteMotionDirectionType.DownwardOnly:
                     return SpriteDirection.Down;
                 default:
                     throw new System.ArgumentException();

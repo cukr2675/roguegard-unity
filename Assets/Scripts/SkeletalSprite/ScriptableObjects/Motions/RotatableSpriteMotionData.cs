@@ -4,34 +4,35 @@ using UnityEngine;
 
 namespace SkeletalSprite
 {
-    [CreateAssetMenu(menuName = "RoguegardData/Sprite/BoneMotion/RotatableLoop")]
-    public class RotatableLoopBoneMotionData : BoneMotionData
+    [CreateAssetMenu(menuName = "SkeletalSprite/SpriteMotion/Rotatable")]
+    public class RotatableSpriteMotionData : SpriteMotionData
     {
         //[SerializeField] private KeywordData _keyword = null;
         [SerializeField] private int _pixelsPerUnit = 32;
-        [SerializeField] private int _loopCount = 0;
-        [SerializeField] private BoneMotionDirectionType _direction = BoneMotionDirectionType.Linear;
+        [SerializeField] private bool _isLoop = true;
+        [SerializeField] private SpriteMotionDirectionType _direction = SpriteMotionDirectionType.Linear;
         [SerializeField] private List<Item> _items = null;
 
         public override BoneMotionKeyword Keyword => new BoneMotionKeyword(null);
 
         public override void ApplyTo(
-            IMotionSet motionSet, int animationTime, SpriteDirection direction, ref RogueObjSpriteTransform transform, out bool endOfMotion)
+            ISpriteMotionSet motionSet, int animationTime, SpriteDirection direction, ref SkeletalSpriteTransform transform, out bool endOfMotion)
         {
-            var oneLoopWait = 0;
+            var sumWait = 0;
             foreach (var item in _items)
             {
-                oneLoopWait += item.Wait;
+                sumWait += item.Wait;
             }
-            var sumWait = oneLoopWait * _loopCount;
 
-            var index = Mathf.Min(animationTime, sumWait - 1);
+            int index;
+            if (_isLoop) index = animationTime % sumWait;
+            else index = Mathf.Min(animationTime, sumWait - 1);
             var sum = 0;
             Item current = null;
             foreach (var item in _items)
             {
                 sum += item.Wait;
-                if ((index % oneLoopWait) < sum)
+                if (index < sum)
                 {
                     current = item;
                     break;
@@ -59,8 +60,8 @@ namespace SkeletalSprite
         [System.Serializable]
         private class Item
         {
-            [SerializeField] private DirectionalBonePoseSourceData _poseSource;
-            public IDirectionalBonePoseSource PoseSource => _poseSource;
+            [SerializeField] private DirectionalSpritePoseSourceData _poseSource;
+            public IDirectionalSpritePoseSource PoseSource => _poseSource;
 
             [SerializeField] private Vector3 _pixelPosition;
             public Vector3 PixelPosition => _pixelPosition;

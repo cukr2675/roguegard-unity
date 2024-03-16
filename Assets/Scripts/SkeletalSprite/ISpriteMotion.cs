@@ -5,13 +5,13 @@ using UnityEngine;
 namespace SkeletalSprite
 {
     /// <summary>
-    /// キャラクターのモーション（<see cref="BonePose"/> を使ったアニメーション）のインターフェース。
+    /// キャラクターのモーション（<see cref="SpritePose"/> を使ったアニメーション）のインターフェース。
     /// 待機アニメーションにも使用するため、状態の種類として扱える値（インスタンス）にする必要がある。
     /// </summary>
-    public interface IBoneMotion
+    public interface ISpriteMotion
     {
         BoneMotionKeyword Keyword { get; }
 
-        void ApplyTo(IMotionSet motionSet, int animationTime, SpriteDirection direction, ref RogueObjSpriteTransform transform, out bool endOfMotion);
+        void ApplyTo(ISpriteMotionSet motionSet, int animationTime, SpriteDirection direction, ref SkeletalSpriteTransform transform, out bool endOfMotion);
     }
 }

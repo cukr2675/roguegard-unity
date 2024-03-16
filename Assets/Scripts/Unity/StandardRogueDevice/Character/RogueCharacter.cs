@@ -25,7 +25,7 @@ namespace RoguegardUnity
         private int motionEffectAnimationTime;
         public RogueDirection Direction { get; private set; }
 
-        private IBoneMotion currentBoneMotion;
+        private ISpriteMotion currentBoneMotion;
         private bool boneMotionIsClosed;
 
         public void Initialize(RogueObj self, RogueSpriteRendererPool pool)
@@ -126,7 +126,7 @@ namespace RoguegardUnity
             }
         }
 
-        public void SetBoneMotion(IBoneMotion boneMotion, bool continues)
+        public void SetBoneMotion(ISpriteMotion boneMotion, bool continues)
         {
             if (boneMotion == null || boneMotion == currentBoneMotion) return;
 

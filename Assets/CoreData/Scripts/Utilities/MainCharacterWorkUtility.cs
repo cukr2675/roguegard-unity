@@ -86,7 +86,7 @@ namespace Roguegard
         /// <summary>
         /// オブジェクトが発射されるモーションをプッシュする
         /// </summary>
-        public static bool TryAddBeThrown(RogueObj ammo, RogueObj user, Vector2Int hitPosition, Vector2Int from, IBoneMotion motion)
+        public static bool TryAddBeThrown(RogueObj ammo, RogueObj user, Vector2Int hitPosition, Vector2Int from, ISpriteMotion motion)
         {
             if (!TryGetLineVisiblePosition(user.Location, from, hitPosition, out var startPosition) ||
                 !TryGetLineVisiblePosition(user.Location, hitPosition, from, out var endPosition)) return false;
@@ -100,7 +100,7 @@ namespace Roguegard
             return true;
         }
 
-        public static bool TryAddBeShot(RogueObj ammo, RogueObj user, Vector2Int hitPosition, Vector2Int from, IBoneMotion motion)
+        public static bool TryAddBeShot(RogueObj ammo, RogueObj user, Vector2Int hitPosition, Vector2Int from, ISpriteMotion motion)
         {
             if (!TryGetLineVisiblePosition(user.Location, from, hitPosition, out var startPosition) ||
                 !TryGetLineVisiblePosition(user.Location, hitPosition, from, out var endPosition)) return false;
@@ -131,7 +131,7 @@ namespace Roguegard
         /// <summary>
         /// 発射したオブジェクトが地面に落ちるモーションをプッシュする
         /// </summary>
-        public static bool TryAddBeDropped(RogueObj ammo, RogueObj user, Vector2Int to, IBoneMotion motion)
+        public static bool TryAddBeDropped(RogueObj ammo, RogueObj user, Vector2Int to, ISpriteMotion motion)
         {
             if (!VisibleAt(user.Location, to)) return false;
 

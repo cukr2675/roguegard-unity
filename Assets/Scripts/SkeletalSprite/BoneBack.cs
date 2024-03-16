@@ -27,12 +27,12 @@ namespace SkeletalSprite
         public enum Type
         {
             /// <summary>
-            /// <see cref="BonePose.Back"/> と同値にする。
+            /// <see cref="SpritePose.Back"/> と同値にする。
             /// </summary>
             ForPose,
 
             /// <summary>
-            /// <see cref="BonePose.Back"/> の逆の値にする。
+            /// <see cref="SpritePose.Back"/> の逆の値にする。
             /// </summary>
             InversePose,
 

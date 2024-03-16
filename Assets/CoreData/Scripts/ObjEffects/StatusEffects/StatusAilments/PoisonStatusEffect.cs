@@ -19,7 +19,7 @@ namespace Roguegard
 
         private int cooldown;
 
-        private static IBoneMotion _smoke;
+        private static ISpriteMotion _smoke;
 
         private PoisonStatusEffect() { }
 

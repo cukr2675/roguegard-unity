@@ -15,7 +15,7 @@ namespace Roguegard
         /// </summary>
         RogueObj Effecter { get; }
 
-        IBoneMotion HeadIcon { get; }
+        ISpriteMotion HeadIcon { get; }
 
         float Order { get; }
 

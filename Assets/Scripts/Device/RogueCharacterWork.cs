@@ -12,7 +12,7 @@ namespace Roguegard
         public Vector2Int Position { get; }
         public float WalkSpeed { get; }
         public RogueDirection Direction { get; }
-        public IBoneMotion BoneMotion { get; }
+        public ISpriteMotion BoneMotion { get; }
         public PopSignType PopSign { get; }
         public int PopupValue { get; }
         public Color PopupColor { get; }
@@ -22,7 +22,7 @@ namespace Roguegard
         public static RogueCharacterWork Identity { get; } = default;
 
         public RogueCharacterWork(
-            RogueObj obj, Vector2Int position, float walkSpeed, RogueDirection direction, IBoneMotion boneMotion,
+            RogueObj obj, Vector2Int position, float walkSpeed, RogueDirection direction, ISpriteMotion boneMotion,
             PopSignType popSign, int popupValue, Color popupColor, bool popCritical, bool continues)
         {
             Obj = obj;
@@ -55,19 +55,19 @@ namespace Roguegard
         }
 
         public static RogueCharacterWork CreateWalk(
-            RogueObj obj, Vector2Int position, RogueDirection direction, IBoneMotion boneMotion, bool continues)
+            RogueObj obj, Vector2Int position, RogueDirection direction, ISpriteMotion boneMotion, bool continues)
         {
             var walkSpeed = -1f / 4f;
             return new RogueCharacterWork(obj, position, walkSpeed, direction, boneMotion, PopSignType.Clear, 0, default, false, continues);
         }
 
         public static RogueCharacterWork CreateWalk(
-            RogueObj obj, Vector2Int position, float walkSpeed, RogueDirection direction, IBoneMotion boneMotion, bool continues)
+            RogueObj obj, Vector2Int position, float walkSpeed, RogueDirection direction, ISpriteMotion boneMotion, bool continues)
         {
             return new RogueCharacterWork(obj, position, walkSpeed, direction, boneMotion, PopSignType.Clear, 0, default, false, continues);
         }
 
-        public static RogueCharacterWork CreateBoneMotion(RogueObj obj, IBoneMotion boneMotion, bool continues)
+        public static RogueCharacterWork CreateBoneMotion(RogueObj obj, ISpriteMotion boneMotion, bool continues)
         {
             return new RogueCharacterWork(obj, obj.Position, 0f, obj.Main.Stats.Direction, boneMotion, PopSignType.Clear, 0, default, false, continues);
         }
@@ -77,12 +77,12 @@ namespace Roguegard
             return new RogueCharacterWork(obj, obj.Position, 0f, obj.Main.Stats.Direction, null, sign, value, Color.white, critical, continues);
         }
 
-        public static RogueCharacterWork CreateEffect(Vector2Int position, IBoneMotion boneMotion, bool continues)
+        public static RogueCharacterWork CreateEffect(Vector2Int position, ISpriteMotion boneMotion, bool continues)
         {
             return new RogueCharacterWork(null, position, Mathf.Infinity, RogueDirection.Down, boneMotion, PopSignType.Clear, 0, default, false, continues);
         }
 
-        public static RogueCharacterWork CreateEffect(Vector2Int position, RogueDirection direction, IBoneMotion boneMotion, bool continues)
+        public static RogueCharacterWork CreateEffect(Vector2Int position, RogueDirection direction, ISpriteMotion boneMotion, bool continues)
         {
             return new RogueCharacterWork(null, position, Mathf.Infinity, direction, boneMotion, PopSignType.Clear, 0, default, false, continues);
         }

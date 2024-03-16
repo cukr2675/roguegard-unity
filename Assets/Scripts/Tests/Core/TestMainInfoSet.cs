@@ -77,7 +77,7 @@ namespace Roguegard
             return null;
         }
 
-        public override void GetObjSprite(RogueObj self, out RogueObjSprite objSprite, out IMotionSet motionSet)
+        public override void GetObjSprite(RogueObj self, out RogueObjSprite objSprite, out ISpriteMotionSet motionSet)
         {
             throw new System.NotSupportedException();
         }

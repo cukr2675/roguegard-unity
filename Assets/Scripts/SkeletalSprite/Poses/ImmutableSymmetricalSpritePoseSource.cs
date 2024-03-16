@@ -5,28 +5,25 @@ using UnityEngine;
 namespace SkeletalSprite
 {
     /// <summary>
-    /// 指定の <see cref="BonePose"/> を４方向に対応させた <see cref="IDirectionalBonePoseSource"/> 。
+    /// 指定の <see cref="SpritePose"/> を４方向に対応させた <see cref="IDirectionalSpritePoseSource"/> 。
     /// </summary>
-    public class ImmutableSymmetricalBonePoseSource : IDirectionalBonePoseSource
+    public class ImmutableSymmetricalSpritePoseSource : IDirectionalSpritePoseSource
     {
-        private readonly BonePose lowerLeftTransformTable;
+        private readonly SpritePose lowerLeftTransformTable;
+        private readonly SpritePose lowerRightTransformTable;
+        private readonly SpritePose upperLeftTransformTable;
+        private readonly SpritePose upperRightTransformTable;
 
-        private readonly BonePose lowerRightTransformTable;
-
-        private readonly BonePose upperLeftTransformTable;
-
-        private readonly BonePose upperRightTransformTable;
-
-        public ImmutableSymmetricalBonePoseSource(BonePose immutableLowerLeftBonePose, bool nonUp = false)
+        public ImmutableSymmetricalSpritePoseSource(SpritePose immutableLowerLeftSpritePose, bool nonUp = false)
         {
-            lowerLeftTransformTable = immutableLowerLeftBonePose;
-            if (!lowerLeftTransformTable.IsImmutable) throw new System.Exception($"{nameof(immutableLowerLeftBonePose)} が Immutable ではありません。");
+            lowerLeftTransformTable = immutableLowerLeftSpritePose;
+            if (!lowerLeftTransformTable.IsImmutable) throw new System.Exception($"{nameof(immutableLowerLeftSpritePose)} が Immutable ではありません。");
 
-            var rightDownTransformTable = new BonePose();
+            var rightDownTransformTable = new SpritePose();
             rightDownTransformTable.SetBack(lowerLeftTransformTable.Back);
-            var leftUpTransformTable = new BonePose();
+            var leftUpTransformTable = new SpritePose();
             leftUpTransformTable.SetBack(!lowerLeftTransformTable.Back);
-            var rightUpTransformTable = new BonePose();
+            var rightUpTransformTable = new SpritePose();
             rightUpTransformTable.SetBack(!lowerLeftTransformTable.Back);
             foreach (var leftDownPair in lowerLeftTransformTable.BoneTransforms)
             {
@@ -76,7 +73,7 @@ namespace SkeletalSprite
             }
         }
 
-        public BonePose GetBonePose(SpriteDirection direction)
+        public SpritePose GetSpritePose(SpriteDirection direction)
         {
             if (direction == SpriteDirection.Down ||
                 direction == SpriteDirection.LowerLeft ||

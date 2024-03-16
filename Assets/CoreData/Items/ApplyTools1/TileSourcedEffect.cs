@@ -40,7 +40,7 @@ namespace Roguegard
 
             IKeyword IStatusEffect.EffectCategory => EffectCategoryKw.Dummy;
             RogueObj IStatusEffect.Effecter => null;
-            IBoneMotion IStatusEffect.HeadIcon => null;
+            ISpriteMotion IStatusEffect.HeadIcon => null;
             float IStatusEffect.Order => 0f;
 
             void IRogueEffect.Open(RogueObj self)

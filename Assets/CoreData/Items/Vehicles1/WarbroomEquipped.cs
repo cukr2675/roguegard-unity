@@ -29,7 +29,7 @@ namespace Roguegard.CharacterCreation
             Color IRogueDescription.Color => Color.white;
             string IRogueDescription.Caption => null;
             IRogueDetails IRogueDescription.Details => null;
-            IBoneMotion IStatusEffect.HeadIcon => null;
+            ISpriteMotion IStatusEffect.HeadIcon => null;
 
             public IKeyword EffectCategory => StdKw.Vehicle;
             public RogueObj Effecter { get; }
@@ -118,7 +118,7 @@ namespace Roguegard.CharacterCreation
             void IStatusEffect.GetEffectedName(RogueNameBuilder refName, RogueObj self) { }
 
             void IBoneMotionEffect.ApplyTo(
-                IMotionSet motionSet, BoneMotionKeyword keyword, int animationTime, RogueDirection direction, ref RogueObjSpriteTransform transform)
+                ISpriteMotionSet motionSet, BoneMotionKeyword keyword, int animationTime, RogueDirection direction, ref SkeletalSpriteTransform transform)
             {
                 LevitationStatusEffect.MotionApplyTo(motionSet, keyword, animationTime, direction, ref transform);
             }
@@ -129,7 +129,7 @@ namespace Roguegard.CharacterCreation
 
                 public IKeyword EffectCategory => StdKw.Vehicle;
                 public RogueObj Effecter => parent.Effecter;
-                public IBoneMotion HeadIcon => null;
+                public ISpriteMotion HeadIcon => null;
 
                 public string Name => "倍速";
                 public Sprite Icon => null;

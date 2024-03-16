@@ -10,7 +10,7 @@ namespace Roguegard
     {
         private RogueObjSprite objSprite;
 
-        public IMotionSet MotionSet { get; private set; }
+        public ISpriteMotionSet MotionSet { get; private set; }
 
         private bool isDirty;
 
@@ -37,7 +37,7 @@ namespace Roguegard
             boneMotionState.Update();
         }
 
-        public void SetTo(IRogueObjSpriteRenderController renderController, BonePose pose, SpriteDirection direction)
+        public void SetTo(ISkeletalSpriteRenderController renderController, SpritePose pose, SpriteDirection direction)
         {
             objSprite.SetTo(renderController, pose, direction);
         }

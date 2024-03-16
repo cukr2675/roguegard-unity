@@ -20,7 +20,7 @@ namespace Roguegard
 
         public abstract IKeyword EffectCategory { get; }
         public virtual RogueObj Effecter => null;
-        public virtual IBoneMotion HeadIcon => null;
+        public virtual ISpriteMotion HeadIcon => null;
         protected virtual float StatusEffectOrder => 0f;
         float IStatusEffect.Order => StatusEffectOrder;
 

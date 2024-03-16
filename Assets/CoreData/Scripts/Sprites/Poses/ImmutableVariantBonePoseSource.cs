@@ -7,29 +7,29 @@ using SkeletalSprite;
 namespace Roguegard
 {
     /// <summary>
-    /// 指定の <see cref="IDirectionalBonePoseSource"/> の一部のスプライトと色を変更した <see cref="IDirectionalBonePoseSource"/> 。
+    /// 指定の <see cref="IDirectionalSpritePoseSource"/> の一部のスプライトと色を変更した <see cref="IDirectionalSpritePoseSource"/> 。
     /// 乗り物にまたがるポーズで乗り物の見た目を反映するときなどに使う。
     /// </summary>
-    public class ImmutableVariantBonePoseSource : IDirectionalBonePoseSource
+    public class ImmutableVariantBonePoseSource : IDirectionalSpritePoseSource
     {
-        private readonly BonePose[] poses;
+        private readonly SpritePose[] poses;
 
-        public ImmutableVariantBonePoseSource(IDirectionalBonePoseSource poseSource, IKeyword boneName, BoneSprite sprite, bool overridesColor, Color color)
+        public ImmutableVariantBonePoseSource(IDirectionalSpritePoseSource poseSource, IKeyword boneName, BoneSprite sprite, bool overridesColor, Color color)
         {
-            poses = new BonePose[8];
+            poses = new SpritePose[8];
             for (int i = 0; i < 8; i++)
             {
                 poses[i] = GetPose(poseSource, new BoneKeyword(boneName.Name), sprite, true, color, new SpriteDirection(i));
             }
         }
 
-        private BonePose GetPose(
-            IDirectionalBonePoseSource poseSource, BoneKeyword boneName, BoneSprite sprite, bool overridesColor, Color color, SpriteDirection direction)
+        private SpritePose GetPose(
+            IDirectionalSpritePoseSource poseSource, BoneKeyword boneName, BoneSprite sprite, bool overridesColor, Color color, SpriteDirection direction)
         {
-            var basePose = poseSource.GetBonePose(direction);
+            var basePose = poseSource.GetSpritePose(direction);
             if (!basePose.IsImmutable) throw new RogueException("元のポーズが不変ではありません。");
 
-            var pose = new BonePose();
+            var pose = new SpritePose();
             foreach (var pair in basePose.BoneTransforms)
             {
                 var transform = pair.Value;
@@ -50,7 +50,7 @@ namespace Roguegard
             return pose;
         }
 
-        public BonePose GetBonePose(SpriteDirection direction)
+        public SpritePose GetSpritePose(SpriteDirection direction)
         {
             return poses[(int)direction];
         }

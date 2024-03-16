@@ -35,7 +35,7 @@ namespace RoguegardUnity
         }
 
         public void SetSprite(
-            RogueObj obj, IBoneMotion boneMotion, int boneMotionAnimationTime, int motionEffectAnimationTime, RogueDirection direction,
+            RogueObj obj, ISpriteMotion boneMotion, int boneMotionAnimationTime, int motionEffectAnimationTime, RogueDirection direction,
             out bool endOfMotion)
         {
             // 下のキャラを手前に表示させる。
@@ -63,10 +63,10 @@ namespace RoguegardUnity
             }
         }
 
-        private bool SetTo(RogueObj obj, IBoneMotion boneMotion, int boneMotionAnimationTime, RogueDirection direction, int motionEffectAnimationTime)
+        private bool SetTo(RogueObj obj, ISpriteMotion boneMotion, int boneMotionAnimationTime, RogueDirection direction, int motionEffectAnimationTime)
         {
             var motionSet = obj.Main.Sprite.MotionSet;
-            var transform = RogueObjSpriteTransform.Identity;
+            var transform = SkeletalSpriteTransform.Identity;
             boneMotion.ApplyTo(motionSet, boneMotionAnimationTime, direction, ref transform, out var endOfMotion);
 
             var motionEffectState = obj.Main.GetBoneMotionEffectState(obj);
@@ -76,8 +76,8 @@ namespace RoguegardUnity
             var y = Mathf.Round(transform.Position.y * RoguegardSettings.PixelsPerUnit) / RoguegardSettings.PixelsPerUnit;
             transform.Position = new Vector3(x, y);
 
-            if (transform.PoseSource == null) { transform.PoseSource = DefaultBonePoseSource.Instance; }
-            var pose = transform.PoseSource.GetBonePose(transform.Direction);
+            if (transform.PoseSource == null) { transform.PoseSource = DefaultSpriteMotionPoseSource.Instance; }
+            var pose = transform.PoseSource.GetSpritePose(transform.Direction);
             obj.Main.Sprite.SetTo(mainRenderer, pose, direction);
             var rendererTransform = mainRenderer.transform;
             rendererTransform.localPosition = transform.Position;
@@ -96,7 +96,7 @@ namespace RoguegardUnity
         }
 
         public void SetEffectSprite(
-            Vector3 position, IBoneMotion boneMotion, int motionEffectAnimationTime, RogueDirection direction,
+            Vector3 position, ISpriteMotion boneMotion, int motionEffectAnimationTime, RogueDirection direction,
             out bool endOfMotion)
         {
             // 下のキャラを手前に表示させる。
@@ -108,19 +108,19 @@ namespace RoguegardUnity
             endOfMotion = SetTo(mainRenderer, boneMotion, motionEffectAnimationTime, direction);
         }
 
-        private static bool SetTo(RogueObjSpriteRenderer renderer, IBoneMotion boneMotion, int motionEffectAnimationTime, RogueDirection direction)
+        private static bool SetTo(RogueObjSpriteRenderer renderer, ISpriteMotion boneMotion, int motionEffectAnimationTime, RogueDirection direction)
         {
             effectSprite ??= ColoredRogueSprite.Create(null, RoguegardSettings.BoneSpriteBaseColor);
 
-            var transform = RogueObjSpriteTransform.Identity;
+            var transform = SkeletalSpriteTransform.Identity;
             boneMotion.ApplyTo(effectMotionSet, motionEffectAnimationTime, direction, ref transform, out var endOfMotion);
 
             var x = Mathf.Round(transform.Position.x * RoguegardSettings.PixelsPerUnit) / RoguegardSettings.PixelsPerUnit;
             var y = Mathf.Round(transform.Position.y * RoguegardSettings.PixelsPerUnit) / RoguegardSettings.PixelsPerUnit;
             transform.Position = new Vector3(x, y);
 
-            if (transform.PoseSource == null) { transform.PoseSource = DefaultBonePoseSource.Instance; }
-            var pose = transform.PoseSource.GetBonePose(transform.Direction);
+            if (transform.PoseSource == null) { transform.PoseSource = DefaultSpriteMotionPoseSource.Instance; }
+            var pose = transform.PoseSource.GetSpritePose(transform.Direction);
             effectSprite.SetTo(renderer, pose, direction);
             var rendererTransform = renderer.transform;
             rendererTransform.localPosition = transform.Position;
@@ -139,10 +139,10 @@ namespace RoguegardUnity
             gameObject.SetActive(false);
         }
 
-        private class EffectMotionSet : IMotionSet
+        private class EffectMotionSet : ISpriteMotionSet
         {
             public void GetPose(
-                BoneMotionKeyword keyword, int animationTime, SpriteDirection direction, ref RogueObjSpriteTransform transform, out bool endOfMotion)
+                BoneMotionKeyword keyword, int animationTime, SpriteDirection direction, ref SkeletalSpriteTransform transform, out bool endOfMotion)
             {
                 endOfMotion = true;
             }

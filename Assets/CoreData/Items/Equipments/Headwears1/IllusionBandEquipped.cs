@@ -28,7 +28,7 @@ namespace Roguegard.CharacterCreation
             string IRogueDescription.Caption => "男性は女性 女性は男性と 間違われる状態";
             IRogueDetails IRogueDescription.Details => null;
             IKeyword IStatusEffect.EffectCategory => CategoryKw.Equipment;
-            IBoneMotion IStatusEffect.HeadIcon => null;
+            ISpriteMotion IStatusEffect.HeadIcon => null;
             float IStatusEffect.Order => 0f;
 
             public RogueObj Effecter { get; }

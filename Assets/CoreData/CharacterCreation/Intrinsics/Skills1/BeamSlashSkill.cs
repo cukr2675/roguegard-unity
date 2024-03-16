@@ -22,7 +22,7 @@ namespace Roguegard.CharacterCreation
             public override IRogueMethodRange Range => FacingAnd2FlankingRogueMethodRange.Instance;
             public override int RequiredMP => 2;
 
-            private static IBoneMotion effect;
+            private static ISpriteMotion effect;
 
             private SortedIntrinsic() : base(null, 0) { }
 

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace SkeletalSprite
 {
-    public interface IRogueObjSpriteRenderController
+    public interface ISkeletalSpriteRenderController
     {
         int Count { get; }
 

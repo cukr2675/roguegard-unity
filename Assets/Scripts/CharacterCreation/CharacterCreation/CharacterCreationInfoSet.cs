@@ -172,7 +172,7 @@ namespace Roguegard.CharacterCreation
             return CurrentRaceOption.GetEquipmentInfo(self, CurrentRaceOption, Data);
         }
 
-        public override void GetObjSprite(RogueObj self, out RogueObjSprite objSprite, out IMotionSet motionSet)
+        public override void GetObjSprite(RogueObj self, out RogueObjSprite objSprite, out ISpriteMotionSet motionSet)
         {
             if (boneNode == null) { Reload(); }
 

@@ -48,7 +48,7 @@ namespace Roguegard.CharacterCreation
 
                 float IRogueMethodActiveAspect.Order => 0f;
 
-                private static IBoneMotion effect;
+                private static ISpriteMotion effect;
 
                 private Effect() { }
 

@@ -4,35 +4,34 @@ using UnityEngine;
 
 namespace SkeletalSprite
 {
-    [CreateAssetMenu(menuName = "RoguegardData/Sprite/BoneMotion/Rotatable1to8")]
-    public class Rotatable1To8BoneMotionData : BoneMotionData
+    [CreateAssetMenu(menuName = "SkeletalSprite/SpriteMotion/RotatableLoop")]
+    public class RotatableLoopSpriteMotionData : SpriteMotionData
     {
         //[SerializeField] private KeywordData _keyword = null;
         [SerializeField] private int _pixelsPerUnit = 32;
-        [SerializeField] private bool _isLoop = true;
-        [SerializeField] private BoneMotionDirectionType _direction = BoneMotionDirectionType.Linear;
+        [SerializeField] private int _loopCount = 0;
+        [SerializeField] private SpriteMotionDirectionType _direction = SpriteMotionDirectionType.Linear;
         [SerializeField] private List<Item> _items = null;
 
         public override BoneMotionKeyword Keyword => new BoneMotionKeyword(null);
 
         public override void ApplyTo(
-            IMotionSet motionSet, int animationTime, SpriteDirection direction, ref RogueObjSpriteTransform transform, out bool endOfMotion)
+            ISpriteMotionSet motionSet, int animationTime, SpriteDirection direction, ref SkeletalSpriteTransform transform, out bool endOfMotion)
         {
-            var sumWait = 0;
+            var oneLoopWait = 0;
             foreach (var item in _items)
             {
-                sumWait += item.Wait;
+                oneLoopWait += item.Wait;
             }
+            var sumWait = oneLoopWait * _loopCount;
 
-            int index;
-            if (_isLoop) index = animationTime % sumWait;
-            else index = Mathf.Min(animationTime, sumWait - 1);
+            var index = Mathf.Min(animationTime, sumWait - 1);
             var sum = 0;
             Item current = null;
             foreach (var item in _items)
             {
                 sum += item.Wait;
-                if (index < sum)
+                if ((index % oneLoopWait) < sum)
                 {
                     current = item;
                     break;
@@ -42,9 +41,9 @@ namespace SkeletalSprite
             var degree = _direction.Convert(direction).Degree + current.Degree;
             var degreeRotation = Quaternion.Euler(0f, 0f, degree);
             transform.Position = (current.PixelPosition + degreeRotation * current.PixelRotatablePosition) / _pixelsPerUnit;
-            transform.Rotation = current.Rotation * degreeRotation;
+            transform.Rotation = current.Rotation;
             transform.Scale = current.Scale;
-            transform.PoseSource = current;
+            transform.PoseSource = current.PoseSource;
             transform.Direction = SpriteDirection.FromDegree(degree);
             endOfMotion = index >= sumWait - 1;
         }
@@ -58,12 +57,10 @@ namespace SkeletalSprite
         }
 
         [System.Serializable]
-        private class Item : IDirectionalBonePoseSource
+        private class Item
         {
-            [SerializeField] private Sprite _rightSprite;
-            private BonePose bonePose;
-
-            [SerializeField] private Color _color;
+            [SerializeField] private DirectionalSpritePoseSourceData _poseSource;
+            public IDirectionalSpritePoseSource PoseSource => _poseSource;
 
             [SerializeField] private Vector3 _pixelPosition;
             public Vector3 PixelPosition => _pixelPosition;
@@ -82,22 +79,6 @@ namespace SkeletalSprite
 
             [SerializeField] private int _wait;
             public int Wait => _wait;
-
-            public BonePose GetBonePose(SpriteDirection direction)
-            {
-                if (bonePose == null)
-                {
-                    if (_rightSprite == null) return DefaultBonePoseSource.Instance.GetBonePose(direction);
-
-                    bonePose = new BonePose();
-                    var boneSprite = BoneSprite.CreateNF(_rightSprite);
-                    var transform = new BoneTransform(boneSprite, _color, true, Vector3.zero, Quaternion.identity, Vector3.one, false, false, false);
-                    bonePose.AddBoneTransform(transform, BoneKeyword.Body);
-                    bonePose.SetImmutable();
-                }
-
-                return bonePose;
-            }
 
             public void Validate()
             {

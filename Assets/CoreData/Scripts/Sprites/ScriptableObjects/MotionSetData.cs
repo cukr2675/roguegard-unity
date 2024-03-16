@@ -5,11 +5,11 @@ using UnityEngine;
 namespace SkeletalSprite
 {
     [CreateAssetMenu(menuName = "RoguegardData/Sprite/MotionSet")]
-    public class MotionSetData : ScriptableObject, IMotionSet
+    public class MotionSetData : ScriptableObject, ISpriteMotionSet
     {
         [SerializeField] private List<Item> _items = null;
 
-        [System.NonSerialized] private IBoneMotion firstValue;
+        [System.NonSerialized] private ISpriteMotion firstValue;
 
         //public bool ContainsKey(IKeyword key)
         //{
@@ -20,7 +20,7 @@ namespace SkeletalSprite
         //    return false;
         //}
 
-        public bool TryGetValue(BoneMotionKeyword key, out IBoneMotion value)
+        public bool TryGetValue(BoneMotionKeyword key, out ISpriteMotion value)
         {
             foreach (var item in _items)
             {
@@ -34,7 +34,7 @@ namespace SkeletalSprite
             return false;
         }
 
-        void IMotionSet.GetPose(BoneMotionKeyword keyword, int animationTime, SpriteDirection direction, ref RogueObjSpriteTransform transform, out bool endOfMotion)
+        void ISpriteMotionSet.GetPose(BoneMotionKeyword keyword, int animationTime, SpriteDirection direction, ref SkeletalSpriteTransform transform, out bool endOfMotion)
         {
             if (!TryGetValue(keyword, out var value))
             {
@@ -52,8 +52,8 @@ namespace SkeletalSprite
             [SerializeField] private Roguegard.KeywordData _key;
             public BoneMotionKeyword Key => new BoneMotionKeyword(_key.DescriptionName);
 
-            [SerializeField] private BoneMotionData _value;
-            public IBoneMotion Value => _value;
+            [SerializeField] private SpriteMotionData _value;
+            public ISpriteMotion Value => _value;
         }
     }
 }

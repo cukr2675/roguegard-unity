@@ -23,7 +23,7 @@ namespace Roguegard.CharacterCreation
 
         public void GetObjSprite(
             IRaceOption raceOption, ICharacterCreationData characterCreationData, IRogueGender gender, RogueObj self, IBoneNode boneNode,
-            out RogueObjSprite objSprite, out IMotionSet motionSet)
+            out RogueObjSprite objSprite, out ISpriteMotionSet motionSet)
         {
             var color = RogueColorUtility.GetColor(self);
             objSprite = Sprite2To8RogueSprite.CreateOrReuse(self, _spriteLowerLeft, _spriteLeft, color);

@@ -13,7 +13,7 @@ namespace Roguegard
 
         IKeyword IStatusEffect.EffectCategory => EffectCategoryKw.Dummy;
         RogueObj IStatusEffect.Effecter => null;
-        IBoneMotion IStatusEffect.HeadIcon => null;
+        ISpriteMotion IStatusEffect.HeadIcon => null;
         string IRogueDescription.Name => null;
         Sprite IRogueDescription.Icon => null;
         Color IRogueDescription.Color => Color.white;

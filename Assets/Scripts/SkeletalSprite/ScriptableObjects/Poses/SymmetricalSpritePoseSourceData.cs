@@ -6,36 +6,36 @@ using System.Linq;
 
 namespace SkeletalSprite
 {
-    [CreateAssetMenu(menuName = "RoguegardData/Sprite/BonePoseSource/Symmetrical")]
-    public class SymmetricalBonePoseSourceData : DirectionalBonePoseSourceData
+    [CreateAssetMenu(menuName = "SkeletalSprite/SpritePoseSource/Symmetrical")]
+    public class SymmetricalSpritePoseSourceData : DirectionalSpritePoseSourceData
     {
         [SerializeField] private int _pixelsPerUnit = 32;
         [SerializeField] private List<Item> _items = null;
         [SerializeField] private List<BackItem> _localBacks = null;
         [SerializeField] private List<ReorderItem> _reorders = null;
 
-        [System.NonSerialized] private ImmutableSymmetricalBonePoseSource poseSource;
+        [System.NonSerialized] private ImmutableSymmetricalSpritePoseSource poseSource;
 
         private void Initialize()
         {
-            var bonePose = new BonePose();
+            var spritePose = new SpritePose();
             foreach (var item in _items)
             {
-                bonePose.AddBoneTransform(item.ToBoneTransform(_pixelsPerUnit), item.BoneName);
+                spritePose.AddBoneTransform(item.ToBoneTransform(_pixelsPerUnit), item.BoneName);
             }
             var localBacks = _localBacks.Select(x => x.ToStruct());
             var reorders = _reorders.Select(x => x.ToStruct());
             var boneOrder = new BoneOrder(localBacks, reorders);
-            bonePose.SetBoneOrder(boneOrder);
-            bonePose.SetImmutable();
-            poseSource = new ImmutableSymmetricalBonePoseSource(bonePose);
+            spritePose.SetBoneOrder(boneOrder);
+            spritePose.SetImmutable();
+            poseSource = new ImmutableSymmetricalSpritePoseSource(spritePose);
         }
 
-        public override BonePose GetBonePose(SpriteDirection direction)
+        public override SpritePose GetSpritePose(SpriteDirection direction)
         {
             if (poseSource == null) { Initialize(); }
 
-            return poseSource.GetBonePose(direction);
+            return poseSource.GetSpritePose(direction);
         }
 
         private void OnValidate()

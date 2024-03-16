@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace SkeletalSprite
 {
-    public enum BoneMotionDirectionType
+    public enum SpriteMotionDirectionType
     {
         Linear,
         NotBack,

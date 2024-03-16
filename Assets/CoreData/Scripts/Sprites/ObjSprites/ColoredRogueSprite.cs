@@ -40,7 +40,7 @@ namespace Roguegard
             }
         }
 
-        public override void SetTo(IRogueObjSpriteRenderController renderController, BonePose pose, SpriteDirection direction)
+        public override void SetTo(ISkeletalSpriteRenderController renderController, SpritePose pose, SpriteDirection direction)
         {
             renderController.AdjustBones(1);
             if (pose.BoneTransforms.TryGetValue(new BoneKeyword(BoneKw.Body.Name), out var transform))

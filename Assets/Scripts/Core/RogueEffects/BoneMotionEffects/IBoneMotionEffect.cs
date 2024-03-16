@@ -10,6 +10,6 @@ namespace Roguegard
     {
         float Order { get; }
 
-        void ApplyTo(IMotionSet motionSet, BoneMotionKeyword keyword, int animationTime, RogueDirection direction, ref RogueObjSpriteTransform transform);
+        void ApplyTo(ISpriteMotionSet motionSet, BoneMotionKeyword keyword, int animationTime, RogueDirection direction, ref SkeletalSpriteTransform transform);
     }
 }
