@@ -33,8 +33,8 @@ namespace Roguegard
                 boneSpriteState.SetTo(self, objSprite, false);
             }
 
-            var boneMotionState = self.Main.GetBoneMotionEffectState(self);
-            boneMotionState.Update();
+            var spriteMotionState = self.Main.GetSpriteMotionEffectState(self);
+            spriteMotionState.Update();
         }
 
         public void SetTo(ISkeletalSpriteRenderController renderController, SpritePose pose, SpriteDirection direction)

@@ -6,20 +6,20 @@ using SkeletalSprite;
 
 namespace Roguegard
 {
-    public class BoneMotionEffectState
+    public class SpriteMotionEffectState
     {
-        private readonly List<IBoneMotionEffect> bufferEffects;
-        private readonly List<IBoneMotionEffect> showEffects;
+        private readonly List<ISpriteMotionEffect> bufferEffects;
+        private readonly List<ISpriteMotionEffect> showEffects;
         private bool showEffectsIsDirty;
 
-        public BoneMotionEffectState()
+        public SpriteMotionEffectState()
         {
-            bufferEffects = new List<IBoneMotionEffect>();
-            showEffects = new List<IBoneMotionEffect>();
+            bufferEffects = new List<ISpriteMotionEffect>();
+            showEffects = new List<ISpriteMotionEffect>();
             showEffectsIsDirty = true;
         }
 
-        public void AddFromInfoSet(RogueObj self, IBoneMotionEffect effect)
+        public void AddFromInfoSet(RogueObj self, ISpriteMotionEffect effect)
         {
             if (self.Main.RogueEffectOpenState == RogueEffectOpenState.OpeningEffects) throw new RogueException();
             if (effect == null) throw new System.ArgumentNullException(nameof(effect));
@@ -37,7 +37,7 @@ namespace Roguegard
             bufferEffects.Add(effect);
         }
 
-        public void AddFromRogueEffect(RogueObj self, IBoneMotionEffect effect)
+        public void AddFromRogueEffect(RogueObj self, ISpriteMotionEffect effect)
         {
             if (self.Main.RogueEffectOpenState == RogueEffectOpenState.OpeningInfoSet) throw new RogueException();
             if (effect == null) throw new System.ArgumentNullException(nameof(effect));
@@ -55,7 +55,7 @@ namespace Roguegard
             bufferEffects.Insert(0, effect);
         }
 
-        public bool Remove(IBoneMotionEffect effect)
+        public bool Remove(ISpriteMotionEffect effect)
         {
             var result = bufferEffects.Remove(effect);
             if (result) { showEffectsIsDirty = true; }

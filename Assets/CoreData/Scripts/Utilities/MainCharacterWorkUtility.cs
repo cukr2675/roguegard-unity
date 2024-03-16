@@ -51,7 +51,7 @@ namespace Roguegard
             if (!VisibleAt(self.Location, self.Position)) return false;
 
             RogueDevice.Add(DeviceKw.EnqueueSE, MainInfoKw.Skill);
-            var item = RogueCharacterWork.CreateBoneMotion(self, CoreMotions.FullTurn, false);
+            var item = RogueCharacterWork.CreateSpriteMotion(self, CoreMotions.FullTurn, false);
             RogueDevice.AddWork(DeviceKw.EnqueueWork, item);
             return true;
         }
@@ -64,9 +64,9 @@ namespace Roguegard
             if (!VisibleAt(self.Location, self.Position)) return false;
 
             RogueDevice.Add(DeviceKw.EnqueueSE, MainInfoKw.Attack);
-            var item = RogueCharacterWork.CreateBoneMotion(self, KeywordBoneMotion.Attack, false);
+            var item = RogueCharacterWork.CreateSpriteMotion(self, KeywordSpriteMotion.Attack, false);
             RogueDevice.AddWork(DeviceKw.EnqueueWork, item);
-            item = RogueCharacterWork.CreateBoneMotion(self, KeywordBoneMotion.Wait, true);
+            item = RogueCharacterWork.CreateSpriteMotion(self, KeywordSpriteMotion.Wait, true);
             RogueDevice.AddWork(DeviceKw.EnqueueWork, item);
             return true;
         }
@@ -76,9 +76,9 @@ namespace Roguegard
             if (!VisibleAt(self.Location, self.Position)) return false;
 
             RogueDevice.Add(DeviceKw.EnqueueSE, StdKw.GunThrow);
-            var item = RogueCharacterWork.CreateBoneMotion(self, KeywordBoneMotion.GunThrow, false);
+            var item = RogueCharacterWork.CreateSpriteMotion(self, KeywordSpriteMotion.GunThrow, false);
             RogueDevice.AddWork(DeviceKw.EnqueueWork, item);
-            item = RogueCharacterWork.CreateBoneMotion(self, KeywordBoneMotion.Wait, true);
+            item = RogueCharacterWork.CreateSpriteMotion(self, KeywordSpriteMotion.Wait, true);
             RogueDevice.AddWork(DeviceKw.EnqueueWork, item);
             return true;
         }

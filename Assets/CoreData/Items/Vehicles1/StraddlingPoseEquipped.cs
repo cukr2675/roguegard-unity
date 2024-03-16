@@ -25,14 +25,14 @@ namespace Roguegard.CharacterCreation
             }
         }
 
-        private class Effect : BaseEquippedEffect, IBoneMotionEffect
+        private class Effect : BaseEquippedEffect, ISpriteMotionEffect
         {
             private readonly StraddlingPoseEquipped parent;
             private readonly RogueObj equipment;
 
-            public ImmutableVariantBonePoseSource PoseSource { get; set; }
+            public ImmutableVariantSpritePoseSource PoseSource { get; set; }
 
-            float IBoneMotionEffect.Order => -1f;
+            float ISpriteMotionEffect.Order => -1f;
 
             public Effect(StraddlingPoseEquipped parent, RogueObj equipment)
             {
@@ -40,7 +40,7 @@ namespace Roguegard.CharacterCreation
                 this.equipment = equipment;
             }
 
-            void IBoneMotionEffect.ApplyTo(
+            void ISpriteMotionEffect.ApplyTo(
                 ISpriteMotionSet motionSet, IKeyword keyword, int animationTime, RogueDirection direction, ref SkeletalSpriteTransform transform)
             {
                 if (keyword == MainInfoKw.Wait || keyword == MainInfoKw.Walk)
@@ -48,7 +48,7 @@ namespace Roguegard.CharacterCreation
                     if (PoseSource == null)
                     {
                         var color = RogueColorUtility.GetColor(equipment);
-                        PoseSource = new ImmutableVariantBonePoseSource(parent._pose, parent._vehicleBoneName, parent._vehicleBoneSprite, true, color);
+                        PoseSource = new ImmutableVariantSpritePoseSource(parent._pose, parent._vehicleBoneName, parent._vehicleBoneSprite, true, color);
                     }
 
                     transform.PoseSource = PoseSource;

@@ -86,7 +86,7 @@ namespace RoguegardUnity
             var obj = new CharacterCreationDataBuilder(builder).CreateObj(null, Vector2Int.zero, random);
             obj.Main.Sprite.Update(obj);
             var spriteTransform = SkeletalSpriteTransform.Identity;
-            KeywordBoneMotion.Wait.ApplyTo(obj.Main.Sprite.MotionSet, 0, RogueDirection.Down, ref spriteTransform, out _);
+            KeywordSpriteMotion.Wait.ApplyTo(obj.Main.Sprite.MotionSet, 0, RogueDirection.Down, ref spriteTransform, out _);
             obj.Main.Sprite.SetTo(spriteRenderer, spriteTransform.PoseSource.GetSpritePose(spriteTransform.Direction), spriteTransform.Direction);
 
             _nameField.text = builder.Name;

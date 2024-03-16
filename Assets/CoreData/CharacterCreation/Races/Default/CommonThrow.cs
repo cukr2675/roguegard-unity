@@ -32,7 +32,7 @@ namespace Roguegard
                 RogueDevice.Add(DeviceKw.AppendText, ammo);
                 RogueDevice.Add(DeviceKw.AppendText, "を投げた！\n");
                 RogueDevice.Add(DeviceKw.EnqueueSE, MainInfoKw.Skill);
-                var item = RogueCharacterWork.CreateBoneMotion(self, CoreMotions.Discus, false);
+                var item = RogueCharacterWork.CreateSpriteMotion(self, CoreMotions.Discus, false);
                 RogueDevice.AddWork(DeviceKw.EnqueueWork, item);
             }
 

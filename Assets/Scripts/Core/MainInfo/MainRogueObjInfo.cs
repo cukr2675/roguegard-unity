@@ -61,7 +61,7 @@ namespace Roguegard
         [System.NonSerialized] private RogueObjUpdaterState rogueObjUpdaterState;
         [System.NonSerialized] private RogueMethodAspectState rogueMethodAspectState;
         [System.NonSerialized] private BoneSpriteEffectState boneSpriteEffectState;
-        [System.NonSerialized] private BoneMotionEffectState boneMotionEffectState;
+        [System.NonSerialized] private SpriteMotionEffectState spriteMotionEffectState;
 
         private static readonly StaticInitializable<bool> recursion = new StaticInitializable<bool>(() => false);
 
@@ -292,10 +292,10 @@ namespace Roguegard
             return boneSpriteEffectState;
         }
 
-        public BoneMotionEffectState GetBoneMotionEffectState(RogueObj self)
+        public SpriteMotionEffectState GetSpriteMotionEffectState(RogueObj self)
         {
             if (RogueEffectOpenState == RogueEffectOpenState.NotStarted) OpenRogueEffects(self);
-            return boneMotionEffectState;
+            return spriteMotionEffectState;
         }
 
         public void TryOpenRogueEffects(RogueObj self)
@@ -317,7 +317,7 @@ namespace Roguegard
             rogueObjUpdaterState = new RogueObjUpdaterState();
             rogueMethodAspectState = new RogueMethodAspectState();
             boneSpriteEffectState = new BoneSpriteEffectState();
-            boneMotionEffectState = new BoneMotionEffectState();
+            spriteMotionEffectState = new SpriteMotionEffectState();
 
             RogueEffectOpenState = RogueEffectOpenState.OpeningInfoSet;
             BaseInfoSet = BaseInfoSet.Open(self, MainInfoSetType.Base, false);

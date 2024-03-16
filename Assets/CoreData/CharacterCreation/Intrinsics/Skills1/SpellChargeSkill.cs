@@ -57,7 +57,7 @@ namespace Roguegard.CharacterCreation
                 {
                     if (MainCharacterWorkUtility.VisibleAt(target.Location, target.Position))
                     {
-                        effect ??= new VariantBoneMotion(CoreMotions.Buff, StatsKw.ATK.Color);
+                        effect ??= new VariantSpriteMotion(CoreMotions.Buff, StatsKw.ATK.Color);
                         RogueDevice.Add(DeviceKw.AppendText, ":StatusUpMsg::4");
                         RogueDevice.Add(DeviceKw.AppendText, target);
                         RogueDevice.Add(DeviceKw.AppendText, MainInfoKw.Skill);

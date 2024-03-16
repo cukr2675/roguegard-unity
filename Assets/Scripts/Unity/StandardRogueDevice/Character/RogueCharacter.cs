@@ -21,20 +21,20 @@ namespace RoguegardUnity
         private Vector2Int endWalkPositionSource;
         private int walkTime;
         private float walkTimeLength;
-        private int boneMotionAnimationTime;
+        private int spriteMotionAnimationTime;
         private int motionEffectAnimationTime;
         public RogueDirection Direction { get; private set; }
 
         private ISpriteMotion currentSpriteMotion;
         private IRogueSpriteMotion currentRogueSpriteMotion;
-        private bool boneMotionIsClosed;
+        private bool spriteMotionIsClosed;
 
         public void Initialize(RogueObj self, RogueSpriteRendererPool pool)
         {
             name = self?.Main.InfoSet.Name ?? "Effect";
             _spriteRenderer.Initialize(pool);
             _canvas.Initialize(self);
-            boneMotionAnimationTime = 0;
+            spriteMotionAnimationTime = 0;
             motionEffectAnimationTime = 0;
 
             if (self != null)
@@ -46,8 +46,8 @@ namespace RoguegardUnity
             {
                 SetWalk(Vector2Int.zero, Mathf.Infinity, RogueDirection.Down, true);
             }
-            SetBoneMotion(KeywordBoneMotion.Wait, true);
-            boneMotionIsClosed = false;
+            SetSpriteMotion(KeywordSpriteMotion.Wait, true);
+            spriteMotionIsClosed = false;
             WorkingNow = false;
         }
 
@@ -127,13 +127,13 @@ namespace RoguegardUnity
             }
         }
 
-        public void SetBoneMotion(ISpriteMotion spriteMotion, bool continues)
+        public void SetSpriteMotion(ISpriteMotion spriteMotion, bool continues)
         {
             if (spriteMotion == null || spriteMotion == currentSpriteMotion) return;
 
             currentSpriteMotion = spriteMotion;
             currentRogueSpriteMotion = spriteMotion as IRogueSpriteMotion;
-            boneMotionAnimationTime = 0;
+            spriteMotionAnimationTime = 0;
             if (!continues) { WorkingNow = true; }
         }
 
@@ -149,7 +149,7 @@ namespace RoguegardUnity
         {
             // 待機モーションに切り替えるフラグを設定する。
             // モーションが終端のときだけ切り替える。
-            boneMotionIsClosed = true;
+            spriteMotionIsClosed = true;
 
             if (Obj == null) return;
 
@@ -164,7 +164,7 @@ namespace RoguegardUnity
                 SetWalk(Obj.Position, Mathf.Infinity, Obj.Main.Stats.Direction, true);
             }
             walkTime = Mathf.CeilToInt(walkTimeLength);
-            if (completelyEnd) { SetBoneMotion(KeywordBoneMotion.Wait, true); }
+            if (completelyEnd) { SetSpriteMotion(KeywordSpriteMotion.Wait, true); }
 
             // HP のずれを直す。
             _canvas.SetHP(Obj);
@@ -188,12 +188,12 @@ namespace RoguegardUnity
             }
 
             // スプライト
-            boneMotionAnimationTime += deltaTime;
+            spriteMotionAnimationTime += deltaTime;
             motionEffectAnimationTime += deltaTime;
             bool endOfMotion;
             if (Obj != null)
             {
-                _spriteRenderer.SetSprite(Obj, currentSpriteMotion, boneMotionAnimationTime, motionEffectAnimationTime, Direction, out endOfMotion);
+                _spriteRenderer.SetSprite(Obj, currentSpriteMotion, spriteMotionAnimationTime, motionEffectAnimationTime, Direction, out endOfMotion);
             }
             else
             {
@@ -201,15 +201,15 @@ namespace RoguegardUnity
             }
             if (endOfWalk && endOfMotion)
             {
-                if (boneMotionIsClosed)
+                if (spriteMotionIsClosed)
                 {
                     // モーションが終端のときだけ待機モーションに切り替える。（待機系モーションの場合は切り替えない）
-                    if (currentRogueSpriteMotion?.Keyword != MainInfoKw.Wait) SetBoneMotion(KeywordBoneMotion.Wait, true);
-                    boneMotionIsClosed = false;
+                    if (currentRogueSpriteMotion?.Keyword != MainInfoKw.Wait) SetSpriteMotion(KeywordSpriteMotion.Wait, true);
+                    spriteMotionIsClosed = false;
                 }
 
                 // 位置変更とモーションが終端に達したとき動作完了させる。
-                // TrySetBoneMotion より後に設定する。
+                // TrySetSpriteMotion より後に設定する。
                 WorkingNow = false;
             }
 

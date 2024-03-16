@@ -7,7 +7,7 @@ using SkeletalSprite;
 namespace Roguegard
 {
     [ObjectFormer.Formable]
-    public class SleepStatusEffect : TimeLimitedStackableStatusEffect, IValueEffect, IRogueMethodActiveAspect, IRogueMethodPassiveAspect, IBoneMotionEffect
+    public class SleepStatusEffect : TimeLimitedStackableStatusEffect, IValueEffect, IRogueMethodActiveAspect, IRogueMethodPassiveAspect, ISpriteMotionEffect
     {
         public static IAffectCallback Callback { get; } = new AffectCallback(new SleepStatusEffect());
 
@@ -19,7 +19,7 @@ namespace Roguegard
         float IValueEffect.Order => 1f;
         float IRogueMethodActiveAspect.Order => -100f;
         float IRogueMethodPassiveAspect.Order => 0f;
-        float IBoneMotionEffect.Order => 0f;
+        float ISpriteMotionEffect.Order => 0f;
 
         private static ISpriteMotion _smoke;
 
@@ -30,9 +30,9 @@ namespace Roguegard
         {
             if (MainCharacterWorkUtility.VisibleAt(target.Location, target.Position))
             {
-                _smoke ??= new VariantBoneMotion(CoreMotions.Smoke, new Color32(250, 100, 200, 255));
+                _smoke ??= new VariantSpriteMotion(CoreMotions.Smoke, new Color32(250, 100, 200, 255));
                 RogueDevice.Add(DeviceKw.EnqueueSE, StdKw.StatusEffect);
-                RogueDevice.AddWork(DeviceKw.EnqueueWork, RogueCharacterWork.CreateBoneMotion(target, CoreMotions.Sleep, true));
+                RogueDevice.AddWork(DeviceKw.EnqueueWork, RogueCharacterWork.CreateSpriteMotion(target, CoreMotions.Sleep, true));
                 RogueDevice.AddWork(DeviceKw.EnqueueWork, RogueCharacterWork.CreateEffect(target.Position, _smoke, false));
                 RogueDevice.Add(DeviceKw.AppendText, target);
                 RogueDevice.Add(DeviceKw.AppendText, "は眠ってしまった！\n");
@@ -75,7 +75,7 @@ namespace Roguegard
             }
         }
 
-        void IBoneMotionEffect.ApplyTo(
+        void ISpriteMotionEffect.ApplyTo(
             ISpriteMotionSet motionSet, IKeyword keyword, int animationTime, RogueDirection direction, ref SkeletalSpriteTransform transform)
         {
             if (keyword != MainInfoKw.Hit)

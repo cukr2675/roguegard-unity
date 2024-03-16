@@ -36,7 +36,7 @@ namespace Roguegard.CharacterCreation
                     RogueDevice.Add(DeviceKw.AppendText, this);
                     RogueDevice.Add(DeviceKw.AppendText, "\n");
                     RogueDevice.Add(DeviceKw.EnqueueSE, MainInfoKw.Skill);
-                    var item = RogueCharacterWork.CreateBoneMotion(self, CoreMotions.Discus, false);
+                    var item = RogueCharacterWork.CreateSpriteMotion(self, CoreMotions.Discus, false);
                     RogueDevice.AddWork(DeviceKw.EnqueueWork, item);
                     RogueDevice.Add(DeviceKw.EnqueueSE, StdKw.PowerSlash);
                     var work = RogueCharacterWork.CreateEffect(

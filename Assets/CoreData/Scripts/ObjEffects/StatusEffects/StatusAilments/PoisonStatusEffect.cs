@@ -32,7 +32,7 @@ namespace Roguegard
                 RogueDevice.Add(DeviceKw.AppendText, this);
                 RogueDevice.Add(DeviceKw.AppendText, "を浴びた！\n");
                 RogueDevice.Add(DeviceKw.EnqueueSE, StdKw.Poison);
-                _smoke ??= new VariantBoneMotion(CoreMotions.Smoke, new Color32(200, 50, 200, 255));
+                _smoke ??= new VariantSpriteMotion(CoreMotions.Smoke, new Color32(200, 50, 200, 255));
                 var work = RogueCharacterWork.CreateEffect(target.Position, _smoke, false);
                 RogueDevice.AddWork(DeviceKw.EnqueueWork, work);
             }

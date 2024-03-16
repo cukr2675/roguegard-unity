@@ -83,17 +83,17 @@ namespace Roguegard
                     else if (guard)
                     {
                         RogueDevice.Add(DeviceKw.EnqueueSE, StatsKw.Guard);
-                        var item = RogueCharacterWork.CreateBoneMotion(self, KeywordBoneMotion.Guard, false);
+                        var item = RogueCharacterWork.CreateSpriteMotion(self, KeywordSpriteMotion.Guard, false);
                         RogueDevice.AddWork(DeviceKw.EnqueueWork, item);
                     }
                     else if (damage == 0)
                     {
-                        var item = RogueCharacterWork.CreateBoneMotion(self, KeywordBoneMotion.NoDamage, false);
+                        var item = RogueCharacterWork.CreateSpriteMotion(self, KeywordSpriteMotion.NoDamage, false);
                         RogueDevice.AddWork(DeviceKw.EnqueueWork, item);
                     }
                     else
                     {
-                        var item = RogueCharacterWork.CreateBoneMotion(self, KeywordBoneMotion.Hit, false);
+                        var item = RogueCharacterWork.CreateSpriteMotion(self, KeywordSpriteMotion.Hit, false);
                         RogueDevice.AddWork(DeviceKw.EnqueueWork, item);
                     }
                 }

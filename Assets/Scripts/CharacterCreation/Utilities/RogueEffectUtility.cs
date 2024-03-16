@@ -41,9 +41,9 @@ namespace Roguegard
                 var equipmentSpriteState = self.Main.GetBoneSpriteEffectState(self);
                 equipmentSpriteState.AddFromRogueEffect(self, equipmentSpriteEffect);
             }
-            if (effect is IBoneMotionEffect motionEffect)
+            if (effect is ISpriteMotionEffect motionEffect)
             {
-                var motionEffectState = self.Main.GetBoneMotionEffectState(self);
+                var motionEffectState = self.Main.GetSpriteMotionEffectState(self);
                 motionEffectState.AddFromRogueEffect(self, motionEffect);
             }
         }
@@ -80,9 +80,9 @@ namespace Roguegard
                 var equipmentSpriteState = self.Main.GetBoneSpriteEffectState(self);
                 equipmentSpriteState.AddFromInfoSet(self, equipmentSpriteEffect);
             }
-            if (effect is IBoneMotionEffect motionEffect)
+            if (effect is ISpriteMotionEffect motionEffect)
             {
-                var motionEffectState = self.Main.GetBoneMotionEffectState(self);
+                var motionEffectState = self.Main.GetSpriteMotionEffectState(self);
                 motionEffectState.AddFromInfoSet(self, motionEffect);
             }
         }
@@ -145,9 +145,9 @@ namespace Roguegard
                 var equipmentSpriteState = self.Main.GetBoneSpriteEffectState(self);
                 result |= equipmentSpriteState.Remove(equipmentSpriteEffect);
             }
-            if (effect is IBoneMotionEffect motionEffect)
+            if (effect is ISpriteMotionEffect motionEffect)
             {
-                var motionEffectState = self.Main.GetBoneMotionEffectState(self);
+                var motionEffectState = self.Main.GetSpriteMotionEffectState(self);
                 result |= motionEffectState.Remove(motionEffect);
             }
             return result;

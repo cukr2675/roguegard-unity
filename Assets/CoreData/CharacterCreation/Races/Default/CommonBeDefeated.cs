@@ -22,10 +22,10 @@ namespace Roguegard
                     RogueDevice.Add(DeviceKw.AppendText, self);
                     RogueDevice.Add(DeviceKw.AppendText, "は倒れてしまった！\n");
                     RogueDevice.Add(DeviceKw.EnqueueSE, DeviceKw.GameOver);
-                    RogueDevice.AddWork(DeviceKw.EnqueueWork, RogueCharacterWork.CreateBoneMotion(self, CoreMotions.FullTurn, false));
-                    RogueDevice.AddWork(DeviceKw.EnqueueWork, RogueCharacterWork.CreateBoneMotion(self, KeywordBoneMotion.Wait, true));
-                    RogueDevice.AddWork(DeviceKw.EnqueueWork, RogueCharacterWork.CreateBoneMotion(self, CoreMotions.FullTurn, false));
-                    RogueDevice.AddWork(DeviceKw.EnqueueWork, RogueCharacterWork.CreateBoneMotion(self, KeywordBoneMotion.BeDefeated, true));
+                    RogueDevice.AddWork(DeviceKw.EnqueueWork, RogueCharacterWork.CreateSpriteMotion(self, CoreMotions.FullTurn, false));
+                    RogueDevice.AddWork(DeviceKw.EnqueueWork, RogueCharacterWork.CreateSpriteMotion(self, KeywordSpriteMotion.Wait, true));
+                    RogueDevice.AddWork(DeviceKw.EnqueueWork, RogueCharacterWork.CreateSpriteMotion(self, CoreMotions.FullTurn, false));
+                    RogueDevice.AddWork(DeviceKw.EnqueueWork, RogueCharacterWork.CreateSpriteMotion(self, KeywordSpriteMotion.BeDefeated, true));
                     RogueDevice.Add(DeviceKw.EnqueueWaitSeconds, 1f);
                 }
                 RogueDevice.Add(DeviceKw.GameOver, self);
@@ -35,7 +35,7 @@ namespace Roguegard
             {
                 RogueDevice.Add(DeviceKw.AppendText, self);
                 RogueDevice.Add(DeviceKw.AppendText, "は倒れた！\n");
-                RogueDevice.AddWork(DeviceKw.EnqueueWork, RogueCharacterWork.CreateBoneMotion(self, KeywordBoneMotion.BeDefeated, false));
+                RogueDevice.AddWork(DeviceKw.EnqueueWork, RogueCharacterWork.CreateSpriteMotion(self, KeywordSpriteMotion.BeDefeated, false));
             }
 
             // 倒れたキャラクターを消す。

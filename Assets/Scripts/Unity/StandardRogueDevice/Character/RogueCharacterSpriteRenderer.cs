@@ -34,14 +34,14 @@ namespace RoguegardUnity
         }
 
         public void SetSprite(
-            RogueObj obj, ISpriteMotion boneMotion, int boneMotionAnimationTime, int motionEffectAnimationTime, RogueDirection direction,
+            RogueObj obj, ISpriteMotion spriteMotion, int spriteMotionAnimationTime, int motionEffectAnimationTime, RogueDirection direction,
             out bool endOfMotion)
         {
             // 下のキャラを手前に表示させる。
             _sortingGroup.sortingOrder = -obj.Position.y;
             if (obj.HasCollider) _sortingGroup.sortingOrder += obj.Location?.Space.Tilemap?.Height ?? 0;
 
-            endOfMotion = SetTo(obj, boneMotion, boneMotionAnimationTime, direction, motionEffectAnimationTime);
+            endOfMotion = SetTo(obj, spriteMotion, spriteMotionAnimationTime, direction, motionEffectAnimationTime);
 
             // 影の設定
             _shadowRenderer.enabled = obj.HasCollider;
@@ -52,8 +52,8 @@ namespace RoguegardUnity
             if (statusEffects.Count >= 1)
             {
                 var headIconIndex = motionEffectAnimationTime % headIconCount % statusEffects.Count;
-                var iconBoneMotion = statusEffects[headIconIndex].HeadIcon;
-                SetTo(statusEffectIconRenderer, iconBoneMotion, motionEffectAnimationTime, RogueDirection.Down);
+                var iconSpriteMotion = statusEffects[headIconIndex].HeadIcon;
+                SetTo(statusEffectIconRenderer, iconSpriteMotion, motionEffectAnimationTime, RogueDirection.Down);
             }
             else
             {
@@ -62,23 +62,23 @@ namespace RoguegardUnity
             }
         }
 
-        private bool SetTo(RogueObj obj, ISpriteMotion boneMotion, int boneMotionAnimationTime, RogueDirection direction, int motionEffectAnimationTime)
+        private bool SetTo(RogueObj obj, ISpriteMotion spriteMotion, int spriteMotionAnimationTime, RogueDirection direction, int motionEffectAnimationTime)
         {
             var motionSet = obj.Main.Sprite.MotionSet;
             var transform = SkeletalSpriteTransform.Identity;
             IKeyword keyword = null;
             bool endOfMotion;
-            if (boneMotion is IRogueSpriteMotion rogueSpriteMotion)
+            if (spriteMotion is IRogueSpriteMotion rogueSpriteMotion)
             {
-                rogueSpriteMotion.ApplyTo(motionSet, boneMotionAnimationTime, direction, ref transform, out endOfMotion);
+                rogueSpriteMotion.ApplyTo(motionSet, spriteMotionAnimationTime, direction, ref transform, out endOfMotion);
                 keyword = rogueSpriteMotion.Keyword;
             }
             else
             {
-                boneMotion.ApplyTo(boneMotionAnimationTime, direction, ref transform, out endOfMotion);
+                spriteMotion.ApplyTo(spriteMotionAnimationTime, direction, ref transform, out endOfMotion);
             }
 
-            var motionEffectState = obj.Main.GetBoneMotionEffectState(obj);
+            var motionEffectState = obj.Main.GetSpriteMotionEffectState(obj);
             motionEffectState.ApplyTo(motionSet, keyword, motionEffectAnimationTime, direction, ref transform);
 
             var x = Mathf.Round(transform.Position.x * RoguegardSettings.PixelsPerUnit) / RoguegardSettings.PixelsPerUnit;
@@ -105,7 +105,7 @@ namespace RoguegardUnity
         }
 
         public void SetEffectSprite(
-            Vector3 position, ISpriteMotion boneMotion, int motionEffectAnimationTime, RogueDirection direction,
+            Vector3 position, ISpriteMotion spriteMotion, int motionEffectAnimationTime, RogueDirection direction,
             out bool endOfMotion)
         {
             // 下のキャラを手前に表示させる。
@@ -114,15 +114,15 @@ namespace RoguegardUnity
             // 影の設定
             _shadowRenderer.enabled = false;
 
-            endOfMotion = SetTo(mainRenderer, boneMotion, motionEffectAnimationTime, direction);
+            endOfMotion = SetTo(mainRenderer, spriteMotion, motionEffectAnimationTime, direction);
         }
 
-        private static bool SetTo(RogueObjSpriteRenderer renderer, ISpriteMotion boneMotion, int motionEffectAnimationTime, RogueDirection direction)
+        private static bool SetTo(RogueObjSpriteRenderer renderer, ISpriteMotion spriteMotion, int motionEffectAnimationTime, RogueDirection direction)
         {
             effectSprite ??= ColoredRogueSprite.Create(null, RoguegardSettings.BoneSpriteBaseColor);
 
             var transform = SkeletalSpriteTransform.Identity;
-            boneMotion.ApplyTo(motionEffectAnimationTime, direction, ref transform, out var endOfMotion);
+            spriteMotion.ApplyTo(motionEffectAnimationTime, direction, ref transform, out var endOfMotion);
 
             var x = Mathf.Round(transform.Position.x * RoguegardSettings.PixelsPerUnit) / RoguegardSettings.PixelsPerUnit;
             var y = Mathf.Round(transform.Position.y * RoguegardSettings.PixelsPerUnit) / RoguegardSettings.PixelsPerUnit;

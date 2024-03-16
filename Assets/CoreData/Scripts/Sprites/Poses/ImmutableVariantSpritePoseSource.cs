@@ -10,11 +10,11 @@ namespace Roguegard
     /// 指定の <see cref="IDirectionalSpritePoseSource"/> の一部のスプライトと色を変更した <see cref="IDirectionalSpritePoseSource"/> 。
     /// 乗り物にまたがるポーズで乗り物の見た目を反映するときなどに使う。
     /// </summary>
-    public class ImmutableVariantBonePoseSource : IDirectionalSpritePoseSource
+    public class ImmutableVariantSpritePoseSource : IDirectionalSpritePoseSource
     {
         private readonly SpritePose[] poses;
 
-        public ImmutableVariantBonePoseSource(IDirectionalSpritePoseSource poseSource, IKeyword boneName, BoneSprite sprite, bool overridesColor, Color color)
+        public ImmutableVariantSpritePoseSource(IDirectionalSpritePoseSource poseSource, IKeyword boneName, BoneSprite sprite, bool overridesColor, Color color)
         {
             poses = new SpritePose[8];
             for (int i = 0; i < 8; i++)

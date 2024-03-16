@@ -71,7 +71,7 @@ namespace Roguegard
                 if (RaycastAssert.RequireTarget(FrontRogueMethodRange.Instance, self, arg, out var target)) return false;
                 if (MainCharacterWorkUtility.VisibleAt(self.Location, self.Position))
                 {
-                    var item = RogueCharacterWork.CreateBoneMotion(self, CoreMotions.Discus, false);
+                    var item = RogueCharacterWork.CreateSpriteMotion(self, CoreMotions.Discus, false);
                     RogueDevice.AddWork(DeviceKw.EnqueueWork, item);
                 }
 

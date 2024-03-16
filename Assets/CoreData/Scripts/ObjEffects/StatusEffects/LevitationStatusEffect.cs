@@ -62,10 +62,10 @@ namespace Roguegard
             };
         }
 
-        private class Effect : IRogueMethodPassiveAspect, IBoneMotionEffect
+        private class Effect : IRogueMethodPassiveAspect, ISpriteMotionEffect
         {
             float IRogueMethodPassiveAspect.Order => 0f;
-            float IBoneMotionEffect.Order => 0f;
+            float ISpriteMotionEffect.Order => 0f;
 
             bool IRogueMethodPassiveAspect.PassiveInvoke(
                 IKeyword keyword, IRogueMethod method, RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg,
@@ -96,7 +96,7 @@ namespace Roguegard
                 }
             }
 
-            void IBoneMotionEffect.ApplyTo(
+            void ISpriteMotionEffect.ApplyTo(
                 ISpriteMotionSet motionSet, IKeyword keyword, int animationTime, RogueDirection direction, ref SkeletalSpriteTransform transform)
             {
                 Motion.Instance.ApplyTo(motionSet, animationTime, direction, ref transform, out _);

@@ -7,7 +7,7 @@ using SkeletalSprite;
 namespace Roguegard
 {
     [ObjectFormer.Formable]
-    public class ParalysisStatusEffect : TimeLimitedStackableStatusEffect, IValueEffect, IRogueMethodActiveAspect, IBoneMotionEffect
+    public class ParalysisStatusEffect : TimeLimitedStackableStatusEffect, IValueEffect, IRogueMethodActiveAspect, ISpriteMotionEffect
     {
         public static IAffectCallback Callback { get; } = new AffectCallback(new ParalysisStatusEffect());
 
@@ -18,7 +18,7 @@ namespace Roguegard
 
         float IValueEffect.Order => 0f;
         float IRogueMethodActiveAspect.Order => -100f;
-        float IBoneMotionEffect.Order => 0f;
+        float ISpriteMotionEffect.Order => 0f;
 
         private ParalysisStatusEffect() { }
 
@@ -96,7 +96,7 @@ namespace Roguegard
             };
         }
 
-        void IBoneMotionEffect.ApplyTo(
+        void ISpriteMotionEffect.ApplyTo(
             ISpriteMotionSet motionSet, IKeyword keyword, int animationTime, RogueDirection direction, ref SkeletalSpriteTransform transform)
         {
             if (keyword == MainInfoKw.Wait)

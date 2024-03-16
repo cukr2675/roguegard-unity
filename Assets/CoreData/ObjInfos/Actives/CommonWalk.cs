@@ -57,7 +57,7 @@ namespace Roguegard
                 {
                     if (trueVisible)
                     {
-                        var item = CreateWork(self, target, KeywordBoneMotion.Walk, true);
+                        var item = CreateWork(self, target, KeywordSpriteMotion.Walk, true);
                         RogueDevice.AddWork(DeviceKw.EnqueueWork, item);
                     }
 
@@ -78,7 +78,7 @@ namespace Roguegard
                 {
                     if (trueVisible)
                     {
-                        var item = CreateWork(self, target, KeywordBoneMotion.Walk, true);
+                        var item = CreateWork(self, target, KeywordSpriteMotion.Walk, true);
                         RogueDevice.AddWork(DeviceKw.EnqueueWork, item);
                     }
 
@@ -93,9 +93,9 @@ namespace Roguegard
             }
         }
 
-        private static RogueCharacterWork CreateWork(RogueObj obj, Vector2Int position, ISpriteMotion boneMotion, bool continues)
+        private static RogueCharacterWork CreateWork(RogueObj obj, Vector2Int position, ISpriteMotion spriteMotion, bool continues)
         {
-            return RogueCharacterWork.CreateWalk(obj, position, obj.Main.Stats.Direction, boneMotion, continues);
+            return RogueCharacterWork.CreateWalk(obj, position, obj.Main.Stats.Direction, spriteMotion, continues);
         }
     }
 }

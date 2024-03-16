@@ -22,7 +22,7 @@ namespace Roguegard.CharacterCreation
             }
         }
 
-        private class Effect : BaseEquippedEffect, IStatusEffect, IValueEffect, IRogueMethodPassiveAspect, IBoneMotionEffect
+        private class Effect : BaseEquippedEffect, IStatusEffect, IValueEffect, IRogueMethodPassiveAspect, ISpriteMotionEffect
         {
             string IRogueDescription.Name => "飛行";
             Sprite IRogueDescription.Icon => null;
@@ -37,7 +37,7 @@ namespace Roguegard.CharacterCreation
             float IStatusEffect.Order => 0f;
             float IValueEffect.Order => 0f;
             float IRogueMethodPassiveAspect.Order => 0f;
-            float IBoneMotionEffect.Order => 0f;
+            float ISpriteMotionEffect.Order => 0f;
 
             private readonly StatusEffect statusEffect;
 
@@ -117,7 +117,7 @@ namespace Roguegard.CharacterCreation
 
             void IStatusEffect.GetEffectedName(RogueNameBuilder refName, RogueObj self) { }
 
-            void IBoneMotionEffect.ApplyTo(
+            void ISpriteMotionEffect.ApplyTo(
                 ISpriteMotionSet motionSet, IKeyword keyword, int animationTime, RogueDirection direction, ref SkeletalSpriteTransform transform)
             {
                 LevitationStatusEffect.MotionApplyTo(motionSet, keyword, animationTime, direction, ref transform);

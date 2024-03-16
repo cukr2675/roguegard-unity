@@ -17,10 +17,10 @@ namespace Roguegard
             if (MainCharacterWorkUtility.VisibleAt(player.Location, player.Position))
             {
                 RogueDevice.Add(DeviceKw.EnqueueSE, DeviceKw.GameClear);
-                RogueDevice.AddWork(DeviceKw.EnqueueWork, RogueCharacterWork.CreateBoneMotion(player, CoreMotions.FullTurn, false));
-                RogueDevice.AddWork(DeviceKw.EnqueueWork, RogueCharacterWork.CreateBoneMotion(player, KeywordBoneMotion.Wait, true));
-                RogueDevice.AddWork(DeviceKw.EnqueueWork, RogueCharacterWork.CreateBoneMotion(player, CoreMotions.FullTurn, false));
-                RogueDevice.AddWork(DeviceKw.EnqueueWork, RogueCharacterWork.CreateBoneMotion(player, KeywordBoneMotion.Victory, true));
+                RogueDevice.AddWork(DeviceKw.EnqueueWork, RogueCharacterWork.CreateSpriteMotion(player, CoreMotions.FullTurn, false));
+                RogueDevice.AddWork(DeviceKw.EnqueueWork, RogueCharacterWork.CreateSpriteMotion(player, KeywordSpriteMotion.Wait, true));
+                RogueDevice.AddWork(DeviceKw.EnqueueWork, RogueCharacterWork.CreateSpriteMotion(player, CoreMotions.FullTurn, false));
+                RogueDevice.AddWork(DeviceKw.EnqueueWork, RogueCharacterWork.CreateSpriteMotion(player, KeywordSpriteMotion.Victory, true));
                 RogueDevice.Add(DeviceKw.EnqueueWaitSeconds, 1f);
             }
 

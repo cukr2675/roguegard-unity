@@ -10,7 +10,7 @@ namespace Roguegard
     /// 転倒して2ターン行動不能。さらに防御力-2。
     /// </summary>
     [ObjectFormer.Formable]
-    public class DownStatusEffect : TimeLimitedStackableStatusEffect, IValueEffect, IBoneMotionEffect
+    public class DownStatusEffect : TimeLimitedStackableStatusEffect, IValueEffect, ISpriteMotionEffect
     {
         public static IAffectCallback Callback { get; } = new AffectCallback(new DownStatusEffect());
 
@@ -20,7 +20,7 @@ namespace Roguegard
         protected override int InitialLifeTime => 3;
 
         float IValueEffect.Order => -1;
-        float IBoneMotionEffect.Order => 0f;
+        float ISpriteMotionEffect.Order => 0f;
 
         private DownStatusEffect() { }
 
@@ -60,7 +60,7 @@ namespace Roguegard
             }
         }
 
-        void IBoneMotionEffect.ApplyTo(
+        void ISpriteMotionEffect.ApplyTo(
             ISpriteMotionSet motionSet, IKeyword keyword, int animationTime, RogueDirection direction, ref SkeletalSpriteTransform transform)
         {
             if (keyword != MainInfoKw.Hit && keyword != MainInfoKw.BeDefeated)

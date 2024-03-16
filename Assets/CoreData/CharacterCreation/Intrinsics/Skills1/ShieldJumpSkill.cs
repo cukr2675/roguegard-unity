@@ -93,7 +93,7 @@ namespace Roguegard.CharacterCreation
 
                         var direction = RogueDirection.FromSignOrLowerLeft(targetPosition - self.Position);
                         var syncItem = RogueCharacterWork.CreateSyncPositioning(self);
-                        var item = RogueCharacterWork.CreateWalk(self, targetPosition, direction, KeywordBoneMotion.Walk, false);
+                        var item = RogueCharacterWork.CreateWalk(self, targetPosition, direction, KeywordSpriteMotion.Walk, false);
                         RogueDevice.AddWork(DeviceKw.EnqueueWork, syncItem);
                         RogueDevice.AddWork(DeviceKw.EnqueueWork, item);
                     }
@@ -117,7 +117,7 @@ namespace Roguegard.CharacterCreation
                     if (jumpBack && visible)
                     {
                         var direction = RogueDirection.FromSignOrLowerLeft(self.Position - targetPosition);
-                        var item = RogueCharacterWork.CreateWalk(self, self.Position, direction, KeywordBoneMotion.Walk, false);
+                        var item = RogueCharacterWork.CreateWalk(self, self.Position, direction, KeywordSpriteMotion.Walk, false);
                         RogueDevice.AddWork(DeviceKw.EnqueueWork, item);
                     }
                 }

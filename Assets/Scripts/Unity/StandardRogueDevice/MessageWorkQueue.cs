@@ -94,7 +94,7 @@ namespace RoguegardUnity
             if (hideCharacters.TryPop(out var obj))
             {
                 other = DeviceKw.EnqueueWork;
-                work = RogueCharacterWork.CreateBoneMotion(obj, hideMotion, true);
+                work = RogueCharacterWork.CreateSpriteMotion(obj, hideMotion, true);
                 integer = default;
                 number = default;
                 stackTrace = null;

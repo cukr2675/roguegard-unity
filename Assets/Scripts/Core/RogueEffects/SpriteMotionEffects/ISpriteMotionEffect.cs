@@ -6,7 +6,7 @@ using SkeletalSprite;
 
 namespace Roguegard
 {
-    public interface IBoneMotionEffect
+    public interface ISpriteMotionEffect
     {
         float Order { get; }
 

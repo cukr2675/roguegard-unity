@@ -94,7 +94,7 @@ namespace RoguegardUnity
         {
             var character = GetCharacter(work.Obj);
             character.SetWalk(work.Position, work.WalkSpeed, work.Direction, fastForward);
-            character.SetBoneMotion(work.BoneMotion, work.Continues);
+            character.SetSpriteMotion(work.SpriteMotion, work.Continues);
             character.Popup(work.PopSign, work.PopupValue, work.PopupColor, work.PopCritical);
             character.UpdateCharacter(player, 0);
         }

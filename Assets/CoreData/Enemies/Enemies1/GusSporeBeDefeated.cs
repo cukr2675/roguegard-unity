@@ -12,7 +12,7 @@ namespace Roguegard
         [SerializeField] private ScriptableStartingItem _dropItem = null;
 
         private static readonly CommonBeDefeated common = new CommonBeDefeated();
-        private static VariantBoneMotion bombMotion;
+        private static VariantSpriteMotion bombMotion;
 
         private GusSporeBeDefeated() { }
 
@@ -33,7 +33,7 @@ namespace Roguegard
                 RogueDevice.Add(DeviceKw.AppendText, self);
                 RogueDevice.Add(DeviceKw.AppendText, "は爆発した！\n");
                 RogueDevice.Add(DeviceKw.EnqueueSE, StdKw.Bomb);
-                bombMotion ??= new VariantBoneMotion(CoreMotions.Bomb, new Color32(215, 255, 64, 255));
+                bombMotion ??= new VariantSpriteMotion(CoreMotions.Bomb, new Color32(215, 255, 64, 255));
                 RogueDevice.AddWork(DeviceKw.EnqueueWork, RogueCharacterWork.CreateEffect(self.Position, bombMotion, false));
             }
 

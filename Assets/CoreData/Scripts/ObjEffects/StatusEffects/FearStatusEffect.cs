@@ -29,7 +29,7 @@ namespace Roguegard
             if (MainCharacterWorkUtility.VisibleAt(target.Location, target.Position))
             {
                 RogueDevice.Add(DeviceKw.EnqueueSE, StdKw.StatusEffect);
-                _smoke ??= new VariantBoneMotion(CoreMotions.Smoke, new Color32(100, 200, 250, 255));
+                _smoke ??= new VariantSpriteMotion(CoreMotions.Smoke, new Color32(100, 200, 250, 255));
                 var work = RogueCharacterWork.CreateEffect(target.Position, _smoke, false);
                 RogueDevice.AddWork(DeviceKw.EnqueueWork, work);
             }

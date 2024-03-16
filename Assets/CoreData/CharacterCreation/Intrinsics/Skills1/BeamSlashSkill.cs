@@ -34,14 +34,14 @@ namespace Roguegard.CharacterCreation
                 RaycastAssert.RequireTarget(predicator, FacingAnd2FlankingRogueMethodRange.Instance, self, arg, out var position);
                 if (MainCharacterWorkUtility.VisibleAt(self.Location, self.Position))
                 {
-                    effect ??= new VariantBoneMotion(CoreMotions.PowerSlash, Color.yellow);
+                    effect ??= new VariantSpriteMotion(CoreMotions.PowerSlash, Color.yellow);
 
                     RogueDevice.Add(DeviceKw.AppendText, ":ActivateSkillMsg::2");
                     RogueDevice.Add(DeviceKw.AppendText, self);
                     RogueDevice.Add(DeviceKw.AppendText, this);
                     RogueDevice.Add(DeviceKw.AppendText, "\n");
                     RogueDevice.Add(DeviceKw.EnqueueSE, MainInfoKw.Skill);
-                    var item = RogueCharacterWork.CreateBoneMotion(self, CoreMotions.Discus, false);
+                    var item = RogueCharacterWork.CreateSpriteMotion(self, CoreMotions.Discus, false);
                     RogueDevice.AddWork(DeviceKw.EnqueueWork, item);
                     RogueDevice.Add(DeviceKw.EnqueueSE, StdKw.PowerSlash);
                     var work = RogueCharacterWork.CreateEffect(self.Position + self.Main.Stats.Direction.Forward, self.Main.Stats.Direction, effect, false);

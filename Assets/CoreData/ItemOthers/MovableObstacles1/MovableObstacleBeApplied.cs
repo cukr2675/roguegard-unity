@@ -20,7 +20,7 @@ namespace Roguegard
                 if (MainCharacterWorkUtility.VisibleAt(self.Location, self.Position))
                 {
                     RogueDevice.AddWork(DeviceKw.EnqueueWork, syncWork);
-                    var work = RogueCharacterWork.CreateWalk(self, self.Position, self.Main.Stats.Direction, KeywordBoneMotion.Walk, true);
+                    var work = RogueCharacterWork.CreateWalk(self, self.Position, self.Main.Stats.Direction, KeywordSpriteMotion.Walk, true);
                     RogueDevice.AddWork(DeviceKw.EnqueueWork, work);
                 }
                 return true;
