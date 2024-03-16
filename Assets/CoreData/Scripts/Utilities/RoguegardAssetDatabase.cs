@@ -88,7 +88,7 @@ namespace Roguegard.Editor
             return new BoneSprite(normalFront, normalRear, backFront, backRear);
         }
 
-        public static BoneKeywordData GetKeyword(string name)
+        public static BoneKeywordData GetBoneKeyword(string name)
         {
             return AssetDatabase.FindAssets($"{name} t:{nameof(BoneKeywordData)}")
                 .Select(guid => AssetDatabase.GUIDToAssetPath(guid))

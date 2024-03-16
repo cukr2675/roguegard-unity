@@ -8,7 +8,7 @@ namespace Roguegard.CharacterCreation
 {
     public class ConstantRaceSprite : ReferableScript, IRaceOptionSprite
     {
-        [SerializeField] private BoneData _bone = null;
+        [SerializeField] private SkeletalSpriteData _bone = null;
 
         [SerializeField] private MotionSetData _motionSet = null;
 

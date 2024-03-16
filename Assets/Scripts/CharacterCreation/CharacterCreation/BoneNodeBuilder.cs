@@ -21,19 +21,19 @@ namespace Roguegard.CharacterCreation
             _children = children.ToArray();
         }
 
-        public static BoneNodeBuilder Create(BoneData boneData, Color color)
+        public static BoneNodeBuilder Create(SkeletalSpriteData skeletalSprite, Color color)
         {
             return Recursion(0);
 
             BoneNodeBuilder Recursion(int index)
             {
-                var boneNode = boneData[index];
+                var boneNode = skeletalSprite[index];
                 var bone = new BuilderBone(boneNode, color);
                 var children = new List<BoneNodeBuilder>();
                 var startIndex = index + 1;
-                for (int i = startIndex; i < boneData.Count; i++)
+                for (int i = startIndex; i < skeletalSprite.Count; i++)
                 {
-                    var itemNode = boneData[i];
+                    var itemNode = skeletalSprite[i];
                     if (itemNode.ParentBoneName != boneNode.BoneName) continue;
 
                     var child = Recursion(i);
@@ -57,7 +57,7 @@ namespace Roguegard.CharacterCreation
             public float NormalOrderInParent { get; set; }
             public float BackOrderInParent { get; set; }
 
-            public BuilderBone(BoneData.Node node, Color color)
+            public BuilderBone(SkeletalSpriteData.Node node, Color color)
             {
                 Name = node.BoneName;
                 Sprite = node.Sprite.GetSprite(color, node.LightDarkThreshold);

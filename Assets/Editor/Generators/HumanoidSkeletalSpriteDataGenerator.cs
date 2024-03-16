@@ -3,17 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using SkeletalSprite;
-using Roguegard.CharacterCreation;
 
 namespace Roguegard.Editor
 {
     [CreateAssetMenu(menuName = "RoguegardData/Sprite/HumanoidBoneGenerator")]
-    public class HumanoidBoneDataGenerator : ScriptableObjectGenerator<BoneData>
+    public class HumanoidSkeletalSpriteDataGenerator : ScriptableObjectGenerator<SkeletalSpriteData>
     {
         protected override int Start => 1;
         protected override int Length => 9;
 
-        protected override bool TrySetObject(BoneData data, int index)
+        protected override bool TrySetObject(SkeletalSpriteData data, int index)
         {
             var size = index;
             data.ClearNodes();
@@ -94,7 +93,7 @@ namespace Roguegard.Editor
             return GetUpperBodyStatureRank(bodyStature) + 1;
         }
 
-        private abstract class BaseBone : BoneData.Node
+        private abstract class BaseBone : SkeletalSpriteData.Node
         {
             public BaseBone()
             {
@@ -106,11 +105,11 @@ namespace Roguegard.Editor
 
         private static class Body
         {
-            public static BoneData.Node Create(int bodyStature, int legStature)
+            public static SkeletalSpriteData.Node Create(int bodyStature, int legStature)
             {
                 var statureRank = GetBodyStatureRank(legStature);
-                var node = new BoneData.Node();
-                node.BoneName = RoguegardAssetDatabase.GetKeyword("Body");
+                var node = new SkeletalSpriteData.Node();
+                node.BoneName = RoguegardAssetDatabase.GetBoneKeyword("Body");
                 node.Sprite = GetSprite(bodyStature);
                 node.PixelLocalPosition = new Vector3(0f, statureRank);
                 node.NormalOrderInParent = 0f;
@@ -131,12 +130,12 @@ namespace Roguegard.Editor
 
         private static class UpperBody
         {
-            public static BoneData.Node Create(int bodyStature)
+            public static SkeletalSpriteData.Node Create(int bodyStature)
             {
                 var statureRank = GetUpperBodyStatureRank(bodyStature);
-                var node = new BoneData.Node();
-                node.BoneName = RoguegardAssetDatabase.GetKeyword("UpperBody");
-                node.ParentBoneName = RoguegardAssetDatabase.GetKeyword("Body");
+                var node = new SkeletalSpriteData.Node();
+                node.BoneName = RoguegardAssetDatabase.GetBoneKeyword("UpperBody");
+                node.ParentBoneName = RoguegardAssetDatabase.GetBoneKeyword("Body");
                 node.Sprite = RoguegardAssetDatabase.CreateColorRangedBoneSpriteOrNull(false, "UpperBody{0}");
                 node.PixelLocalPosition = new Vector3(0f, statureRank);
                 node.NormalOrderInParent = -1f;
@@ -148,12 +147,12 @@ namespace Roguegard.Editor
 
         private static class LeftArm
         {
-            public static BoneData.Node Create(int bodyStature, int armStature)
+            public static SkeletalSpriteData.Node Create(int bodyStature, int armStature)
             {
                 var statureRank = GetUpperBodyStatureRank(bodyStature);
-                var node = new BoneData.Node();
-                node.BoneName = RoguegardAssetDatabase.GetKeyword("LeftArm");
-                node.ParentBoneName = RoguegardAssetDatabase.GetKeyword("Body");
+                var node = new SkeletalSpriteData.Node();
+                node.BoneName = RoguegardAssetDatabase.GetBoneKeyword("LeftArm");
+                node.ParentBoneName = RoguegardAssetDatabase.GetBoneKeyword("Body");
                 node.Sprite = GetArmSprite(armStature);
                 node.PixelLocalPosition = new Vector3(3f, statureRank);
                 node.NormalOrderInParent = -2f;
@@ -164,12 +163,12 @@ namespace Roguegard.Editor
 
         private static class LeftHand
         {
-            public static BoneData.Node Create(int armStature)
+            public static SkeletalSpriteData.Node Create(int armStature)
             {
                 var statureRank = GetHandStatureRank(armStature);
-                var node = new BoneData.Node();
-                node.BoneName = RoguegardAssetDatabase.GetKeyword("LeftHand");
-                node.ParentBoneName = RoguegardAssetDatabase.GetKeyword("LeftArm");
+                var node = new SkeletalSpriteData.Node();
+                node.BoneName = RoguegardAssetDatabase.GetBoneKeyword("LeftHand");
+                node.ParentBoneName = RoguegardAssetDatabase.GetBoneKeyword("LeftArm");
                 node.PixelLocalPosition = new Vector3(0f, statureRank);
                 node.NormalOrderInParent = -1f;
                 node.BackOrderInParent = -1f;
@@ -179,12 +178,12 @@ namespace Roguegard.Editor
 
         private static class RightArm
         {
-            public static BoneData.Node Create(int bodyStature, int armStature)
+            public static SkeletalSpriteData.Node Create(int bodyStature, int armStature)
             {
                 var statureRank = GetUpperBodyStatureRank(bodyStature);
-                var node = new BoneData.Node();
-                node.BoneName = RoguegardAssetDatabase.GetKeyword("RightArm");
-                node.ParentBoneName = RoguegardAssetDatabase.GetKeyword("Body");
+                var node = new SkeletalSpriteData.Node();
+                node.BoneName = RoguegardAssetDatabase.GetBoneKeyword("RightArm");
+                node.ParentBoneName = RoguegardAssetDatabase.GetBoneKeyword("Body");
                 node.Sprite = GetArmSprite(armStature);
                 node.FlipX = true;
                 node.PixelLocalPosition = new Vector3(-3f, statureRank);
@@ -196,12 +195,12 @@ namespace Roguegard.Editor
 
         private static class RightHand
         {
-            public static BoneData.Node Create(int armStature)
+            public static SkeletalSpriteData.Node Create(int armStature)
             {
                 var statureRank = GetHandStatureRank(armStature);
-                var node = new BoneData.Node();
-                node.BoneName = RoguegardAssetDatabase.GetKeyword("RightHand");
-                node.ParentBoneName = RoguegardAssetDatabase.GetKeyword("RightArm");
+                var node = new SkeletalSpriteData.Node();
+                node.BoneName = RoguegardAssetDatabase.GetBoneKeyword("RightHand");
+                node.ParentBoneName = RoguegardAssetDatabase.GetBoneKeyword("RightArm");
                 node.FlipX = true;
                 node.PixelLocalPosition = new Vector3(0f, statureRank);
                 node.NormalOrderInParent = -1f;
@@ -212,11 +211,11 @@ namespace Roguegard.Editor
 
         private static class LeftLeg
         {
-            public static BoneData.Node Create(int legStature)
+            public static SkeletalSpriteData.Node Create(int legStature)
             {
-                var node = new BoneData.Node();
-                node.BoneName = RoguegardAssetDatabase.GetKeyword("LeftLeg");
-                node.ParentBoneName = RoguegardAssetDatabase.GetKeyword("Body");
+                var node = new SkeletalSpriteData.Node();
+                node.BoneName = RoguegardAssetDatabase.GetBoneKeyword("LeftLeg");
+                node.ParentBoneName = RoguegardAssetDatabase.GetBoneKeyword("Body");
                 node.Sprite = GetLegSprite(legStature);
                 node.PixelLocalPosition = new Vector3(2f, 0f);
                 node.NormalOrderInParent = 1f;
@@ -227,12 +226,12 @@ namespace Roguegard.Editor
 
         private static class LeftFoot
         {
-            public static BoneData.Node Create(int legStature)
+            public static SkeletalSpriteData.Node Create(int legStature)
             {
                 var statureRank = GetFootStatureRank(legStature);
-                var node = new BoneData.Node();
-                node.BoneName = RoguegardAssetDatabase.GetKeyword("LeftFoot");
-                node.ParentBoneName = RoguegardAssetDatabase.GetKeyword("LeftLeg");
+                var node = new SkeletalSpriteData.Node();
+                node.BoneName = RoguegardAssetDatabase.GetBoneKeyword("LeftFoot");
+                node.ParentBoneName = RoguegardAssetDatabase.GetBoneKeyword("LeftLeg");
                 node.PixelLocalPosition = new Vector3(0f, statureRank);
                 node.NormalOrderInParent = -1f;
                 node.BackOrderInParent = -1f;
@@ -242,11 +241,11 @@ namespace Roguegard.Editor
 
         private static class RightLeg
         {
-            public static BoneData.Node Create(int legStature)
+            public static SkeletalSpriteData.Node Create(int legStature)
             {
-                var node = new BoneData.Node();
-                node.BoneName = RoguegardAssetDatabase.GetKeyword("RightLeg");
-                node.ParentBoneName = RoguegardAssetDatabase.GetKeyword("Body");
+                var node = new SkeletalSpriteData.Node();
+                node.BoneName = RoguegardAssetDatabase.GetBoneKeyword("RightLeg");
+                node.ParentBoneName = RoguegardAssetDatabase.GetBoneKeyword("Body");
                 node.Sprite = GetLegSprite(legStature);
                 node.PixelLocalPosition = new Vector3(-1f, 0f);
                 node.NormalOrderInParent = 2f;
@@ -257,12 +256,12 @@ namespace Roguegard.Editor
 
         private static class RightFoot
         {
-            public static BoneData.Node Create(int legStature)
+            public static SkeletalSpriteData.Node Create(int legStature)
             {
                 var statureRank = GetFootStatureRank(legStature);
-                var node = new BoneData.Node();
-                node.BoneName = RoguegardAssetDatabase.GetKeyword("RightFoot");
-                node.ParentBoneName = RoguegardAssetDatabase.GetKeyword("RightLeg");
+                var node = new SkeletalSpriteData.Node();
+                node.BoneName = RoguegardAssetDatabase.GetBoneKeyword("RightFoot");
+                node.ParentBoneName = RoguegardAssetDatabase.GetBoneKeyword("RightLeg");
                 node.PixelLocalPosition = new Vector3(0f, statureRank);
                 node.NormalOrderInParent = -1f;
                 node.BackOrderInParent = -1f;
@@ -272,12 +271,12 @@ namespace Roguegard.Editor
 
         private static class Head
         {
-            public static BoneData.Node Create(int bodyStature)
+            public static SkeletalSpriteData.Node Create(int bodyStature)
             {
                 var statureRank = GetHeadStatureRank(bodyStature);
-                var node = new BoneData.Node();
-                node.BoneName = RoguegardAssetDatabase.GetKeyword("Head");
-                node.ParentBoneName = RoguegardAssetDatabase.GetKeyword("Body");
+                var node = new SkeletalSpriteData.Node();
+                node.BoneName = RoguegardAssetDatabase.GetBoneKeyword("Head");
+                node.ParentBoneName = RoguegardAssetDatabase.GetBoneKeyword("Body");
                 node.Sprite = RoguegardAssetDatabase.CreateColorRangedBoneSpriteOrNull(true, "Head{0}{1}");
                 node.PixelLocalPosition = new Vector3(0f, statureRank);
                 node.NormalOrderInParent = -3f;
@@ -288,11 +287,11 @@ namespace Roguegard.Editor
 
         private static class Hair
         {
-            public static BoneData.Node Create()
+            public static SkeletalSpriteData.Node Create()
             {
-                var node = new BoneData.Node();
-                node.BoneName = RoguegardAssetDatabase.GetKeyword("Hair");
-                node.ParentBoneName = RoguegardAssetDatabase.GetKeyword("Head");
+                var node = new SkeletalSpriteData.Node();
+                node.BoneName = RoguegardAssetDatabase.GetBoneKeyword("Hair");
+                node.ParentBoneName = RoguegardAssetDatabase.GetBoneKeyword("Head");
                 node.NormalOrderInParent = -1f;
                 node.BackOrderInParent = -1f;
                 return node;
@@ -301,11 +300,11 @@ namespace Roguegard.Editor
 
         private static class LeftEar
         {
-            public static BoneData.Node Create()
+            public static SkeletalSpriteData.Node Create()
             {
-                var node = new BoneData.Node();
-                node.BoneName = RoguegardAssetDatabase.GetKeyword("LeftEar");
-                node.ParentBoneName = RoguegardAssetDatabase.GetKeyword("Head");
+                var node = new SkeletalSpriteData.Node();
+                node.BoneName = RoguegardAssetDatabase.GetBoneKeyword("LeftEar");
+                node.ParentBoneName = RoguegardAssetDatabase.GetBoneKeyword("Head");
                 node.PixelLocalPosition = new Vector3(1f, 7f);
                 node.NormalOrderInParent = -3f;
                 node.BackOrderInParent = -3f;
@@ -315,11 +314,11 @@ namespace Roguegard.Editor
 
         private static class RightEar
         {
-            public static BoneData.Node Create()
+            public static SkeletalSpriteData.Node Create()
             {
-                var node = new BoneData.Node();
-                node.BoneName = RoguegardAssetDatabase.GetKeyword("RightEar");
-                node.ParentBoneName = RoguegardAssetDatabase.GetKeyword("Head");
+                var node = new SkeletalSpriteData.Node();
+                node.BoneName = RoguegardAssetDatabase.GetBoneKeyword("RightEar");
+                node.ParentBoneName = RoguegardAssetDatabase.GetBoneKeyword("Head");
                 node.PixelLocalPosition = new Vector3(-4f, 7f);
                 node.NormalOrderInParent = -2f;
                 node.BackOrderInParent = -2f;
@@ -329,11 +328,11 @@ namespace Roguegard.Editor
 
         private static class LeftEye
         {
-            public static BoneData.Node Create()
+            public static SkeletalSpriteData.Node Create()
             {
-                var node = new BoneData.Node();
-                node.BoneName = RoguegardAssetDatabase.GetKeyword("LeftEye");
-                node.ParentBoneName = RoguegardAssetDatabase.GetKeyword("Head");
+                var node = new SkeletalSpriteData.Node();
+                node.BoneName = RoguegardAssetDatabase.GetBoneKeyword("LeftEye");
+                node.ParentBoneName = RoguegardAssetDatabase.GetBoneKeyword("Head");
                 node.PixelLocalPosition = new Vector3(1f, 3f);
                 node.NormalOrderInParent = -5f;
                 node.BackOrderInParent = -5f;
@@ -343,11 +342,11 @@ namespace Roguegard.Editor
 
         private static class RightEye
         {
-            public static BoneData.Node Create()
+            public static SkeletalSpriteData.Node Create()
             {
-                var node = new BoneData.Node();
-                node.BoneName = RoguegardAssetDatabase.GetKeyword("RightEye");
-                node.ParentBoneName = RoguegardAssetDatabase.GetKeyword("Head");
+                var node = new SkeletalSpriteData.Node();
+                node.BoneName = RoguegardAssetDatabase.GetBoneKeyword("RightEye");
+                node.ParentBoneName = RoguegardAssetDatabase.GetBoneKeyword("Head");
                 node.PixelLocalPosition = new Vector3(-4f, 3f);
                 node.NormalOrderInParent = -4f;
                 node.BackOrderInParent = -4f;
@@ -357,12 +356,12 @@ namespace Roguegard.Editor
 
         private static class LeftWing
         {
-            public static BoneData.Node Create(int bodyStature)
+            public static SkeletalSpriteData.Node Create(int bodyStature)
             {
                 var statureRank = GetUpperBodyStatureRank(bodyStature);
-                var node = new BoneData.Node();
-                node.BoneName = RoguegardAssetDatabase.GetKeyword("LeftWing");
-                node.ParentBoneName = RoguegardAssetDatabase.GetKeyword("Body");
+                var node = new SkeletalSpriteData.Node();
+                node.BoneName = RoguegardAssetDatabase.GetBoneKeyword("LeftWing");
+                node.ParentBoneName = RoguegardAssetDatabase.GetBoneKeyword("Body");
                 node.PixelLocalPosition = new Vector3(3f, statureRank);
                 node.NormalOrderInParent = -4f;
                 node.BackOrderInParent = -4f;
@@ -372,12 +371,12 @@ namespace Roguegard.Editor
 
         private static class RightWing
         {
-            public static BoneData.Node Create(int bodyStature)
+            public static SkeletalSpriteData.Node Create(int bodyStature)
             {
                 var statureRank = GetUpperBodyStatureRank(bodyStature);
-                var node = new BoneData.Node();
-                node.BoneName = RoguegardAssetDatabase.GetKeyword("RightWing");
-                node.ParentBoneName = RoguegardAssetDatabase.GetKeyword("Body");
+                var node = new SkeletalSpriteData.Node();
+                node.BoneName = RoguegardAssetDatabase.GetBoneKeyword("RightWing");
+                node.ParentBoneName = RoguegardAssetDatabase.GetBoneKeyword("Body");
                 node.PixelLocalPosition = new Vector3(-1f, statureRank);
                 node.NormalOrderInParent = -5f;
                 node.BackOrderInParent = -5f;
@@ -387,11 +386,11 @@ namespace Roguegard.Editor
 
         private static class Tail
         {
-            public static BoneData.Node Create()
+            public static SkeletalSpriteData.Node Create()
             {
-                var node = new BoneData.Node();
-                node.BoneName = RoguegardAssetDatabase.GetKeyword("Tail");
-                node.ParentBoneName = RoguegardAssetDatabase.GetKeyword("Body");
+                var node = new SkeletalSpriteData.Node();
+                node.BoneName = RoguegardAssetDatabase.GetBoneKeyword("Tail");
+                node.ParentBoneName = RoguegardAssetDatabase.GetBoneKeyword("Body");
                 node.PixelLocalPosition = new Vector3(1f, 2f);
                 node.NormalOrderInParent = -6f;
                 node.BackOrderInParent = -6f;
@@ -401,11 +400,11 @@ namespace Roguegard.Editor
 
         private static class Effect
         {
-            public static BoneData.Node Create()
+            public static SkeletalSpriteData.Node Create()
             {
-                var node = new BoneData.Node();
-                node.BoneName = RoguegardAssetDatabase.GetKeyword("Effect");
-                node.ParentBoneName = RoguegardAssetDatabase.GetKeyword("Body");
+                var node = new SkeletalSpriteData.Node();
+                node.BoneName = RoguegardAssetDatabase.GetBoneKeyword("Effect");
+                node.ParentBoneName = RoguegardAssetDatabase.GetBoneKeyword("Body");
                 var clearSprite = RoguegardAssetDatabase.GetSprite("clear");
                 node.Sprite = new ColorRangedBoneSprite(BoneSprite.CreateNFBR_NRBF(clearSprite, clearSprite));
                 node.NormalOrderInParent = -7f;

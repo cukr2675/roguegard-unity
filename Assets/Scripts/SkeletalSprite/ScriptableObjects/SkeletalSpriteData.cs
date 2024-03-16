@@ -4,8 +4,8 @@ using UnityEngine;
 
 namespace SkeletalSprite
 {
-    [CreateAssetMenu(menuName = "RoguegardData/Sprite/Bone")]
-    public class BoneData : ScriptableObject
+    [CreateAssetMenu(menuName = "SkeletalSprite/Bone")]
+    public class SkeletalSpriteData : ScriptableObject
     {
         [SerializeField] private List<Node> _nodes = new List<Node>();
 

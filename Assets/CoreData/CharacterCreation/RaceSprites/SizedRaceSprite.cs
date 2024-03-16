@@ -46,8 +46,8 @@ namespace Roguegard.CharacterCreation
         [System.Serializable]
         public class Item
         {
-            [SerializeField] private BoneData _bone = null;
-            public BoneData Bone => _bone;
+            [SerializeField] private SkeletalSpriteData _bone = null;
+            public SkeletalSpriteData Bone => _bone;
 
             [SerializeField] private MotionSetData _motionSet = null;
             public MotionSetData MotionSet => _motionSet;
