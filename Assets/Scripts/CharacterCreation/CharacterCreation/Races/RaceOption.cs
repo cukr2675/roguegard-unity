@@ -61,10 +61,10 @@ namespace Roguegard.CharacterCreation
 
         public abstract void GetSpriteValues(
             IRaceOption raceOption, ICharacterCreationData characterCreationData, IRogueGender gender,
-            out BoneNodeBuilder mainNode, out AppearanceBoneSpriteTable boneSpriteTable);
+            out NodeBone nodeBone, out AppearanceBoneSpriteTable boneSpriteTable);
 
         public abstract void GetObjSprite(
-            IRaceOption raceOption, ICharacterCreationData characterCreationData, IRogueGender gender, RogueObj self, IBoneNode boneNode,
+            IRaceOption raceOption, ICharacterCreationData characterCreationData, IRogueGender gender, RogueObj self, IReadOnlyNodeBone nodeBone,
             out RogueObjSprite objSprite, out ISpriteMotionSet motionSet);
 
         public abstract void UpdateMemberRange(IMember member, IRaceOption raceOption, ICharacterCreationData characterCreationData);

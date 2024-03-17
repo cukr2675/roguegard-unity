@@ -81,7 +81,7 @@ namespace Roguegard.CharacterCreation
 
             public AffectableBoneSpriteTable Table { get; } = new AffectableBoneSpriteTable();
 
-            public void AffectSprite(RogueObj self, IBoneNode boneRoot, AffectableBoneSpriteTable boneSpriteTable)
+            public void AffectSprite(RogueObj self, IReadOnlyNodeBone rootNode, AffectableBoneSpriteTable boneSpriteTable)
             {
                 Table.AddTo(boneSpriteTable);
             }
@@ -103,7 +103,7 @@ namespace Roguegard.CharacterCreation
                 Table = new AffectableBoneSpriteTable();
             }
 
-            public void AffectSprite(RogueObj self, IBoneNode boneRoot, AffectableBoneSpriteTable boneSpriteTable)
+            public void AffectSprite(RogueObj self, IReadOnlyNodeBone rootNode, AffectableBoneSpriteTable boneSpriteTable)
             {
                 // 同一部位または Innerwear に何か装備されていたらエフェクト無効化
                 // （部位がゼロのエフェクトは無視して表示）

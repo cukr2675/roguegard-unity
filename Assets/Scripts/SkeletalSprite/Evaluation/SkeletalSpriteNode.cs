@@ -6,7 +6,7 @@ namespace SkeletalSprite
 {
     public class SkeletalSpriteNode : ISortableBone<SkeletalSpriteNode>
     {
-        public readonly IBone source;
+        public readonly IReadOnlyNodeBone source;
 
         BoneKeyword ISortableBone<SkeletalSpriteNode>.Name => source.Name;
         float ISortableBone<SkeletalSpriteNode>.NormalOrderInParent => source.NormalOrderInParent;
@@ -31,15 +31,15 @@ namespace SkeletalSprite
         private readonly List<Color> equipmentColors;
         private bool overridesBaseColor;
 
-        public SkeletalSpriteNode(IBoneNode boneNode)
+        public SkeletalSpriteNode(IReadOnlyNodeBone nodeBone)
         {
-            source = boneNode.Bone;
+            source = nodeBone;
             _children = new BoneChildren<SkeletalSpriteNode>();
             equipmentSprites = new List<BoneSprite>();
             equipmentColors = new List<Color>();
-            for (int i = 0; i < boneNode.Children.Count; i++)
+            for (int i = 0; i < nodeBone.Children.Count; i++)
             {
-                var childBone = boneNode.Children[i];
+                var childBone = nodeBone.Children[i];
                 var child = new SkeletalSpriteNode(childBone);
                 _children.AddChild(child);
             }
@@ -59,14 +59,14 @@ namespace SkeletalSprite
             }
         }
 
-        private bool Equals(IBoneNode boneNode)
+        private bool Equals(IReadOnlyNodeBone nodeBone)
         {
-            if (boneNode.Bone != source) return false;
-            if (boneNode.Children.Count != _children.Count) return false;
+            if (nodeBone != source) return false;
+            if (nodeBone.Children.Count != _children.Count) return false;
             for (int i = 0; i < _children.Count; i++)
             {
                 var child = _children[i];
-                var boneChild = boneNode.Children[i];
+                var boneChild = nodeBone.Children[i];
                 if (!child.Equals(boneChild)) return false;
             }
             return true;

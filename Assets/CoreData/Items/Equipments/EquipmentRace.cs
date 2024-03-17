@@ -110,12 +110,12 @@ namespace Roguegard.CharacterCreation
                 }
             }
 
-            void IBoneSpriteEffect.AffectSprite(RogueObj owner, IBoneNode boneRoot, AffectableBoneSpriteTable boneSpriteTable)
+            void IBoneSpriteEffect.AffectSprite(RogueObj owner, IReadOnlyNodeBone rootNode, AffectableBoneSpriteTable boneSpriteTable)
             {
                 var baseColor = Data.Color;
                 if (Data._eyeDropBoneName != null)
                 {
-                    var color = RogueColorUtility.GetFirstColor(Data._eyeDropBoneName, boneRoot, boneSpriteTable);
+                    var color = RogueColorUtility.GetFirstColor(Data._eyeDropBoneName, rootNode, boneSpriteTable);
                     Data._boneSpriteTable.Table.ColoredAddTo(boneSpriteTable, baseColor, color);
                     return;
                 }

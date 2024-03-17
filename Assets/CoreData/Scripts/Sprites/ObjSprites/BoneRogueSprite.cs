@@ -10,7 +10,7 @@ namespace Roguegard
     // CharacterCreation で bodyColor からスプライトの種類を変えることがあるため BaseColoredSprite は実装しない。
     public class BoneRogueSprite : RogueObjSprite
     {
-        private IBoneNode boneRoot;
+        private IReadOnlyNodeBone rootNode;
         private SkeletalSpriteNode root;
         private Sprite _iconSprite;
         private Color _iconColor;
@@ -33,10 +33,10 @@ namespace Roguegard
         /// <summary>
         /// 引数の値が <paramref name="sprite"/> と一致するなら <paramref name="sprite"/> を取得し、違うなら新しく生成する。
         /// </summary>
-        public static BoneRogueSprite CreateOrReuse(RogueObj self, IBoneNode boneNode, Sprite iconSprite, Color iconColor)
+        public static BoneRogueSprite CreateOrReuse(RogueObj self, IReadOnlyNodeBone nodeBone, Sprite iconSprite, Color iconColor)
         {
             var sprite = self.Main.Sprite.Sprite;
-            if (sprite is BoneRogueSprite objSprite && boneNode == objSprite.boneRoot &&
+            if (sprite is BoneRogueSprite objSprite && nodeBone == objSprite.rootNode &&
                 iconSprite == objSprite.IconSprite && iconColor == objSprite.IconColor)
             {
                 return objSprite;
@@ -44,8 +44,8 @@ namespace Roguegard
             else
             {
                 var instance = CreateInstance<BoneRogueSprite>();
-                instance.boneRoot = boneNode;
-                instance.root = new SkeletalSpriteNode(boneNode);
+                instance.rootNode = nodeBone;
+                instance.root = new SkeletalSpriteNode(nodeBone);
                 instance._iconSprite = iconSprite;
                 instance._iconColor = iconColor;
                 return instance;
@@ -66,7 +66,7 @@ namespace Roguegard
             for (int i = 0; i < effects.Count; i++)
             {
                 var effect = effects[i];
-                effect.AffectSprite(self, boneRoot, boneSpriteTable);
+                effect.AffectSprite(self, rootNode, boneSpriteTable);
             }
             root.ApplyTable(boneSpriteTable);
             wasChangedEquipments = true;

@@ -27,6 +27,27 @@ namespace SkeletalSprite
             _nodes.Clear();
         }
 
+        public NodeBone CreateNodeBone(Color color)
+        {
+            return Recursion(0);
+
+            NodeBone Recursion(int index)
+            {
+                var node = _nodes[index];
+                var bone = node.ToBone(color);
+                var startIndex = index + 1;
+                for (int i = startIndex; i < _nodes.Count; i++)
+                {
+                    var itemNode = _nodes[i];
+                    if (itemNode.ParentBoneName != node.BoneName) continue;
+
+                    var child = Recursion(i);
+                    bone.Children.Add(child);
+                }
+                return bone;
+            }
+        }
+
         private void OnValidate()
         {
             foreach (var node in _nodes)
@@ -78,6 +99,23 @@ namespace SkeletalSprite
 
             [SerializeField] private float _backOrderInParent = 0f;
             public float BackOrderInParent { get => _backOrderInParent; set => _backOrderInParent = value; }
+
+            public NodeBone ToBone(Color color)
+            {
+                var bone = new NodeBone();
+                bone.Name = _boneName;
+                bone.Sprite = _sprite.GetSprite(color, LightDarkThreshold);
+                bone.Color = color;
+                bone.OverridesBaseColor = _overridesBaseColor;
+                bone.FlipX = _flipX;
+                bone.FlipY = _flipY;
+                bone.LocalPosition = _pixelLocalPosition / _pixelsPerUnit;
+                bone.LocalRotation = _localRotation;
+                bone.ScaleOfLocalByLocal = _scaleOfLocalByLocal;
+                bone.NormalOrderInParent = _normalOrderInParent;
+                bone.BackOrderInParent = _backOrderInParent;
+                return bone;
+            }
         }
     }
 }

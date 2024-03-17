@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace SkeletalSprite
 {
-    public interface IBone
+    public interface IReadOnlyNodeBone
     {
         BoneKeyword Name { get; }
 
@@ -13,17 +13,17 @@ namespace SkeletalSprite
         Color Color { get; }
 
         /// <summary>
-        /// true ã®ã¨ãã€ã“ã®ãƒœãƒ¼ãƒ³ã‚’ãƒ™ãƒ¼ã‚¹ã‚«ãƒ©ãƒ¼ã‹ã‚‰ä¸Šæ›¸ãã™ã‚‹ã€‚
+        /// true ‚Ì‚Æ‚«A‚±‚Ìƒ{[ƒ“‚ğƒx[ƒXƒJƒ‰[‚©‚çã‘‚«‚·‚éB
         /// </summary>
         bool OverridesBaseColor { get; }
 
         /// <summary>
-        /// ã“ã®ãƒœãƒ¼ãƒ³ã®ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆï¼ˆè£…å‚™å«ã‚€ï¼‰ã®ã¿ã‚’å·¦å³åè»¢ã™ã‚‹ã€‚ <see cref="BoneTransform.LocalMirrorX"/> ã¨é•ã„å­ãƒœãƒ¼ãƒ³ã¯ãã®ã¾ã¾ã€‚
+        /// ‚±‚Ìƒ{[ƒ“‚ÌƒXƒvƒ‰ƒCƒgi‘•”õŠÜ‚Şj‚Ì‚İ‚ğ¶‰E”½“]‚·‚éB <see cref="BoneTransform.LocalMirrorX"/> ‚Æˆá‚¢qƒ{[ƒ“‚Í‚»‚Ì‚Ü‚ÜB
         /// </summary>
         bool FlipX { get; }
 
         /// <summary>
-        /// ã“ã®ãƒœãƒ¼ãƒ³ã®ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆï¼ˆè£…å‚™å«ã‚€ï¼‰ã®ã¿ã‚’ä¸Šä¸‹åè»¢ã™ã‚‹ã€‚ <see cref="BoneTransform.LocalMirrorY"/> ã¨é•ã„å­ãƒœãƒ¼ãƒ³ã¯ãã®ã¾ã¾ã€‚
+        /// ‚±‚Ìƒ{[ƒ“‚ÌƒXƒvƒ‰ƒCƒgi‘•”õŠÜ‚Şj‚Ì‚İ‚ğã‰º”½“]‚·‚éB <see cref="BoneTransform.LocalMirrorY"/> ‚Æˆá‚¢qƒ{[ƒ“‚Í‚»‚Ì‚Ü‚ÜB
         /// </summary>
         bool FlipY { get; }
 
@@ -32,13 +32,15 @@ namespace SkeletalSprite
         Quaternion LocalRotation { get; }
 
         /// <summary>
-        /// è¦ªãƒœãƒ¼ãƒ³ã¨å›è»¢å‰ã®å­ãƒœãƒ¼ãƒ³ã®å¤§ãã•ã€‚
-        /// <see cref="Transform.localScale"/> ã¨é•ã„å›è»¢å¾Œã®å­ãƒœãƒ¼ãƒ³ã‚’æ‹¡ç¸®ã—ãªã„ã€‚
+        /// eƒ{[ƒ“‚Æ‰ñ“]‘O‚Ìqƒ{[ƒ“‚Ì‘å‚«‚³B
+        /// <see cref="Transform.localScale"/> ‚Æˆá‚¢‰ñ“]Œã‚Ìqƒ{[ƒ“‚ğŠgk‚µ‚È‚¢B
         /// </summary>
         Vector3 ScaleOfLocalByLocal { get; }
 
         float NormalOrderInParent { get; }
 
         float BackOrderInParent { get; }
+
+        IReadOnlyList<IReadOnlyNodeBone> Children { get; }
     }
 }

@@ -14,22 +14,22 @@ namespace Roguegard.CharacterCreation
 
         public void GetSpriteValues(
             IRaceOption raceOption, ICharacterCreationData characterCreationData, IRogueGender gender,
-            out BoneNodeBuilder mainNode, out AppearanceBoneSpriteTable boneSpriteTable)
+            out NodeBone mainNode, out AppearanceBoneSpriteTable boneSpriteTable)
         {
             var bodyColor = characterCreationData.Race.BodyColor;
-            if (_bone != null) { mainNode = BoneNodeBuilder.Create(_bone, bodyColor); }
+            if (_bone != null) { mainNode = _bone.CreateNodeBone(bodyColor); }
             else { mainNode = null; }
             boneSpriteTable = new AppearanceBoneSpriteTable();
         }
 
         public void GetObjSprite(
-            IRaceOption raceOption, ICharacterCreationData characterCreationData, IRogueGender gender, RogueObj self, IBoneNode boneNode,
+            IRaceOption raceOption, ICharacterCreationData characterCreationData, IRogueGender gender, RogueObj self, IReadOnlyNodeBone nodeBone,
             out RogueObjSprite objSprite, out ISpriteMotionSet motionSet)
         {
             var infoSet = self.Main.InfoSet;
-            if (boneNode != null)
+            if (nodeBone != null)
             {
-                objSprite = BoneRogueSprite.CreateOrReuse(self, boneNode, infoSet.Icon, infoSet.Color);
+                objSprite = BoneRogueSprite.CreateOrReuse(self, nodeBone, infoSet.Icon, infoSet.Color);
             }
             else
             {

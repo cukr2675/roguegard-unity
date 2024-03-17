@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using SkeletalSprite;
+
 namespace Roguegard.CharacterCreation
 {
     public abstract class AppearanceOption : RogueDescriptionData, IAppearanceOption
     {
         /// <summary>
-        /// この <see cref="AppearanceOption"/> の前提となる <see cref="IBone"/> の名前を取得する。
+        /// この <see cref="AppearanceOption"/> の前提となる <see cref="NodeBone"/> の名前を取得する。
         /// null のときは自由枠とする。
         /// </summary>
         public abstract IKeyword BoneName { get; }
@@ -19,7 +21,7 @@ namespace Roguegard.CharacterCreation
         }
 
         public abstract void Affect(
-            BoneNodeBuilder mainNode, AppearanceBoneSpriteTable boneSpriteTable,
+            NodeBone mainNode, AppearanceBoneSpriteTable boneSpriteTable,
             IReadOnlyAppearance appearance, ICharacterCreationData characterCreationData);
     }
 }

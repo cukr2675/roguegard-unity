@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using SkeletalSprite;
+
 namespace Roguegard.CharacterCreation
 {
     /// <summary>
@@ -18,7 +20,7 @@ namespace Roguegard.CharacterCreation
         private static readonly IMemberSource[] _sources = new IMemberSource[] { SingleItemMember.SourceInstance };
 
         public override void Affect(
-            BoneNodeBuilder mainNode, AppearanceBoneSpriteTable boneSpriteTable,
+            NodeBone mainNode, AppearanceBoneSpriteTable boneSpriteTable,
             IReadOnlyAppearance appearance, ICharacterCreationData characterCreationData)
         {
             var member = SingleItemMember.GetMember(appearance);

@@ -45,7 +45,7 @@ namespace Roguegard.CharacterCreation
         private readonly IRogueGender _gender;
 
         [System.NonSerialized] private float _weight;
-        [System.NonSerialized] private IBoneNode boneNode;
+        [System.NonSerialized] private IReadOnlyNodeBone nodeBone;
         [System.NonSerialized] private AppearanceBoneSpriteTable characterBoneSpriteTable;
 
         public override IKeyword Category => CurrentRaceOption.Category;
@@ -58,7 +58,7 @@ namespace Roguegard.CharacterCreation
         {
             get
             {
-                if (boneNode == null) { Reload(); }
+                if (nodeBone == null) { Reload(); }
 
                 return _weight;
             }
@@ -122,13 +122,13 @@ namespace Roguegard.CharacterCreation
                     var appearance = appearances[i];
                     appearance.Option.Affect(mainNode, characterBoneSpriteTable, appearance, Data);
                 }
-                boneNode = mainNode;
+                nodeBone = mainNode;
             }
         }
 
         public override MainInfoSet Open(RogueObj self, MainInfoSetType infoSetType, bool polymorph2Base)
         {
-            if (boneNode == null) { Reload(); }
+            if (nodeBone == null) { Reload(); }
 
             var newRaceOption = CurrentRaceOption.Open(self, infoSetType, polymorph2Base, CurrentRaceOption, Data);
             characterBoneSpriteTable.AddEffectFromInfoSet(self);
@@ -143,7 +143,7 @@ namespace Roguegard.CharacterCreation
 
         public override void Close(RogueObj self, MainInfoSetType infoSetType, bool base2Polymorph)
         {
-            if (boneNode == null) { Reload(); }
+            if (nodeBone == null) { Reload(); }
 
             CurrentRaceOption.Close(self, infoSetType, base2Polymorph, CurrentRaceOption, Data);
             characterBoneSpriteTable.Remove(self);
@@ -174,9 +174,9 @@ namespace Roguegard.CharacterCreation
 
         public override void GetObjSprite(RogueObj self, out RogueObjSprite objSprite, out ISpriteMotionSet motionSet)
         {
-            if (boneNode == null) { Reload(); }
+            if (nodeBone == null) { Reload(); }
 
-            CurrentRaceOption.GetObjSprite(CurrentRaceOption, Data, _gender, self, boneNode, out objSprite, out motionSet);
+            CurrentRaceOption.GetObjSprite(CurrentRaceOption, Data, _gender, self, nodeBone, out objSprite, out motionSet);
         }
 
         public RogueObj CreateObj(RogueObj location, Vector2Int position, IRogueRandom random, StackOption stackOption = StackOption.Default)

@@ -19,7 +19,7 @@ namespace Roguegard.CharacterCreation
         protected abstract BoneSprite GetSprite(IReadOnlyAppearance appearance, ICharacterCreationData characterCreationData);
 
         public sealed override void Affect(
-            BoneNodeBuilder mainNode, AppearanceBoneSpriteTable boneSpriteTable, IReadOnlyAppearance appearance, ICharacterCreationData characterCreationData)
+            NodeBone mainNode, AppearanceBoneSpriteTable boneSpriteTable, IReadOnlyAppearance appearance, ICharacterCreationData characterCreationData)
         {
             if (IsBone)
             {
@@ -32,44 +32,19 @@ namespace Roguegard.CharacterCreation
                 return;
             }
 
-            void Recursion(BoneNodeBuilder node)
+            void Recursion(NodeBone node)
             {
                 for (int i = 0; i < node.Children.Count; i++)
                 {
                     var child = node.Children[i];
-                    if (child.Bone.Name == new BoneKeyword(BoneName.Name))
+                    if (child.Name == new BoneKeyword(BoneName.Name))
                     {
                         var sprite = GetSprite(appearance, characterCreationData);
-                        child.Bone = new Bone(child.Bone, sprite, appearance.Color);
+                        child.Sprite = sprite;
+                        child.Color = appearance.Color;
                     }
                     Recursion(child);
                 }
-            }
-        }
-
-        private class Bone : IBone
-        {
-            private readonly IBone baseBone;
-            private readonly BoneSprite _sprite;
-            private readonly Color _color;
-
-            public BoneKeyword Name => baseBone.Name;
-            public BoneSprite Sprite => _sprite;
-            public Color Color => _color;
-            public bool OverridesBaseColor => baseBone.OverridesBaseColor;
-            public bool FlipX => baseBone.FlipX;
-            public bool FlipY => baseBone.FlipY;
-            public Vector3 LocalPosition => baseBone.LocalPosition;
-            public Quaternion LocalRotation => baseBone.LocalRotation;
-            public Vector3 ScaleOfLocalByLocal => baseBone.ScaleOfLocalByLocal;
-            public float NormalOrderInParent => baseBone.NormalOrderInParent;
-            public float BackOrderInParent => baseBone.BackOrderInParent;
-
-            public Bone(IBone baseBone, BoneSprite sprite, Color color)
-            {
-                this.baseBone = baseBone;
-                _sprite = sprite;
-                _color = color;
             }
         }
     }
