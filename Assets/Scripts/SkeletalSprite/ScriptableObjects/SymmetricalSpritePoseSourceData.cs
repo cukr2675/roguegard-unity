@@ -9,7 +9,7 @@ namespace SkeletalSprite
     [CreateAssetMenu(menuName = "SkeletalSprite/SpritePoseSource/Symmetrical")]
     public class SymmetricalSpritePoseSourceData : DirectionalSpritePoseSourceData
     {
-        [SerializeField] private int _pixelsPerUnit = 32;
+        [SerializeField] private int _pixelsPerUnit = SkeletalSpriteUtility.PixelsPerUnit;
         [SerializeField] private List<Item> _items = null;
         [SerializeField] private List<BackItem> _localBacks = null;
         [SerializeField] private List<ReorderItem> _reorders = null;

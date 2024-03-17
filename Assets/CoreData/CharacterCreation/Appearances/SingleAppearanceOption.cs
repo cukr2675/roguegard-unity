@@ -15,9 +15,9 @@ namespace Roguegard.CharacterCreation
 
         protected override BoneSprite GetSprite(IReadOnlyAppearance appearance, ICharacterCreationData characterCreationData)
         {
-            var bodyColor = characterCreationData.Race.BodyColor;
-            var colorRange = RogueColorUtility.GetColorRange(bodyColor);
-            var sprite = Sprite.GetSprite(bodyColor);
+            var hairColor = RogueColorUtility.GetHairColor(characterCreationData);
+            var bright = hairColor.maxColorComponent >= SkeletalSpriteUtility.LightDarkThreshold;
+            var sprite = Sprite.GetSprite(bright);
             return sprite;
         }
     }

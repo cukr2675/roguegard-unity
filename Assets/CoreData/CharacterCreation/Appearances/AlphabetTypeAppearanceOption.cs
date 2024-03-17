@@ -21,12 +21,12 @@ namespace Roguegard.CharacterCreation
             if (member.Source == MemberSources[0] &&
                 member is AlphabetTypeMember typeMember)
             {
-                var bodyColor = characterCreationData.Race.BodyColor;
-                var colorRange = RogueColorUtility.GetColorRange(bodyColor);
+                var hairColor = RogueColorUtility.GetHairColor(characterCreationData);
+                var bright = hairColor.maxColorComponent >= SkeletalSpriteUtility.LightDarkThreshold;
                 typeMember.ClearTypeItems();
                 foreach (var item in Table)
                 {
-                    var sprite = item.GetSprite(bodyColor).GetRepresentativeSprite();
+                    var sprite = item.GetSprite(bright).GetRepresentativeSprite();
                     typeMember.AddTypeItem(sprite);
                 }
             }
@@ -34,11 +34,11 @@ namespace Roguegard.CharacterCreation
 
         protected override BoneSprite GetSprite(IReadOnlyAppearance appearance, ICharacterCreationData characterCreationData)
         {
-            var bodyColor = characterCreationData.Race.BodyColor;
+            var hairColor = RogueColorUtility.GetHairColor(characterCreationData);
+            var bright = hairColor.maxColorComponent >= SkeletalSpriteUtility.LightDarkThreshold;
             var member = AlphabetTypeMember.GetMember(appearance);
             var typeIndex = Mathf.Clamp(member.TypeIndex, 0, Table.Count);
-            var colorRange = RogueColorUtility.GetColorRange(bodyColor);
-            var sprite = Table[typeIndex].GetSprite(bodyColor);
+            var sprite = Table[typeIndex].GetSprite(bright);
             return sprite;
         }
     }

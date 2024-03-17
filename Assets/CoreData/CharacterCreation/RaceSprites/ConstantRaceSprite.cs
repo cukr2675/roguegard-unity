@@ -17,7 +17,8 @@ namespace Roguegard.CharacterCreation
             out NodeBone mainNode, out AppearanceBoneSpriteTable boneSpriteTable)
         {
             var bodyColor = characterCreationData.Race.BodyColor;
-            if (_bone != null) { mainNode = _bone.CreateNodeBone(bodyColor); }
+            var hairColor = RogueColorUtility.GetHairColor(characterCreationData);
+            if (_bone != null) { mainNode = _bone.CreateNodeBone(bodyColor, hairColor.maxColorComponent); }
             else { mainNode = null; }
             boneSpriteTable = new AppearanceBoneSpriteTable();
         }

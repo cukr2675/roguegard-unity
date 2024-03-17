@@ -38,13 +38,11 @@ namespace SkeletalSprite
             _isColorRanged = true;
         }
 
-        public BoneSprite GetSprite(Color color) => GetSprite(color, .2f);
-
-        public BoneSprite GetSprite(Color color, float lightDarkThreshold)
+        public BoneSprite GetSprite(bool bright)
         {
             if (!_isColorRanged) return Sprite;
 
-            if (color.maxColorComponent >= lightDarkThreshold) return _lightOther;
+            if (bright) return _lightOther;
             else return _darkOther;
         }
 

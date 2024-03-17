@@ -10,7 +10,6 @@ namespace Roguegard
     public class Rotatable1To8SpriteMotionData : SpriteMotionData
     {
         //[SerializeField] private KeywordData _keyword = null;
-        [SerializeField] private int _pixelsPerUnit = 32;
         [SerializeField] private bool _isLoop = true;
         [SerializeField] private SpriteMotionDirectionType _direction = SpriteMotionDirectionType.Linear;
         [SerializeField] private List<Item> _items = null;
@@ -43,7 +42,7 @@ namespace Roguegard
 
             var degree = _direction.Convert(direction).Degree + current.Degree;
             var degreeRotation = Quaternion.Euler(0f, 0f, degree);
-            transform.Position = (current.PixelPosition + degreeRotation * current.PixelRotatablePosition) / _pixelsPerUnit;
+            transform.Position = (current.PixelPosition + degreeRotation * current.PixelRotatablePosition) / RoguegardSettings.PixelsPerUnit;
             transform.Rotation = current.Rotation * degreeRotation;
             transform.Scale = current.Scale;
             transform.PoseSource = current;

@@ -4,9 +4,15 @@ using UnityEngine;
 
 namespace SkeletalSprite
 {
-    [CreateAssetMenu(menuName = "SkeletalSprite/Bone")]
+    [CreateAssetMenu(menuName = "SkeletalSprite/SkeletalSprite")]
     public class SkeletalSpriteData : ScriptableObject
     {
+        [SerializeField] private int _pixelsPerUnit = SkeletalSpriteUtility.PixelsPerUnit;
+        public int PixelsPerUnit { get => _pixelsPerUnit; set => _pixelsPerUnit = value; }
+
+        [SerializeField] private float _lightDarkThreshold = SkeletalSpriteUtility.LightDarkThreshold;
+        public float LightDarkThreshold { get => _lightDarkThreshold; set => _lightDarkThreshold = value; }
+
         [SerializeField] private List<Node> _nodes = new List<Node>();
 
         public Node this[int index]
@@ -27,14 +33,15 @@ namespace SkeletalSprite
             _nodes.Clear();
         }
 
-        public NodeBone CreateNodeBone(Color color)
+        public NodeBone CreateNodeBone(Color color, float brightness)
         {
+            var bright = brightness >= _lightDarkThreshold;
             return Recursion(0);
 
             NodeBone Recursion(int index)
             {
                 var node = _nodes[index];
-                var bone = node.ToBone(color);
+                var bone = node.ToBone(color, bright, _pixelsPerUnit);
                 var startIndex = index + 1;
                 for (int i = startIndex; i < _nodes.Count; i++)
                 {
@@ -67,12 +74,6 @@ namespace SkeletalSprite
 
             [Space]
 
-            [SerializeField] private int _pixelsPerUnit = 32;
-            public int PixelsPerUnit { get => _pixelsPerUnit; set => _pixelsPerUnit = value; }
-
-            [SerializeField] private float _lightDarkThreshold = 0.2f;
-            public float LightDarkThreshold { get => _lightDarkThreshold; set => _lightDarkThreshold = value; }
-
             [SerializeField] private ColorRangedBoneSprite _sprite = null;
             public ColorRangedBoneSprite Sprite { get => _sprite; set => _sprite = value; }
 
@@ -100,16 +101,16 @@ namespace SkeletalSprite
             [SerializeField] private float _backOrderInParent = 0f;
             public float BackOrderInParent { get => _backOrderInParent; set => _backOrderInParent = value; }
 
-            public NodeBone ToBone(Color color)
+            public NodeBone ToBone(Color color, bool bright, int pixelsPerUnit)
             {
                 var bone = new NodeBone();
                 bone.Name = _boneName;
-                bone.Sprite = _sprite.GetSprite(color, LightDarkThreshold);
+                bone.Sprite = _sprite.GetSprite(bright);
                 bone.Color = color;
                 bone.OverridesBaseColor = _overridesBaseColor;
                 bone.FlipX = _flipX;
                 bone.FlipY = _flipY;
-                bone.LocalPosition = _pixelLocalPosition / _pixelsPerUnit;
+                bone.LocalPosition = _pixelLocalPosition / pixelsPerUnit;
                 bone.LocalRotation = _localRotation;
                 bone.ScaleOfLocalByLocal = _scaleOfLocalByLocal;
                 bone.NormalOrderInParent = _normalOrderInParent;
