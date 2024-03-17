@@ -68,7 +68,6 @@ MonoBehaviour:
   _loaders:
   - {fileID: 11400000, guid: 6f4598d925d6bd04c9d394ba4d128fb0, type: 2}
   - {fileID: 11400000, guid: 00bb136dcfeaa1e4698f77565cb7e7b9, type: 2}
-  - {fileID: 11400000, guid: 878eecc0b46dbb44cbcc440ea3682c3b, type: 2}
   - {fileID: 11400000, guid: 48bcfc9bada4d124397e123d440c3c57, type: 2}
   - {fileID: 11400000, guid: 021ba068640efaf43895297436817f0a, type: 2}
   - {fileID: 11400000, guid: 2e59e740cae7012458c1a3e4cfff9bc8, type: 2}
