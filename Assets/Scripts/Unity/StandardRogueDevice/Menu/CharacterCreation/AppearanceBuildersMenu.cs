@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using SkeletalSprite;
 using Roguegard.CharacterCreation;
 using Roguegard.Device;
 using Roguegard;
@@ -30,7 +31,7 @@ namespace RoguegardUnity
 
             models.Clear();
 
-            if (builder.Appearances.TryGetBuilder(BoneKw.LeftEye, out var leftEyeBuilder))
+            if (builder.Appearances.TryGetBuilder(BoneKeyword.LeftEye, out var leftEyeBuilder))
             {
                 models.Add(leftEyeBuilder);
             }
@@ -39,7 +40,7 @@ namespace RoguegardUnity
                 models.Add(addLeftEyeModel);
             }
 
-            if (builder.Appearances.TryGetBuilder(BoneKw.RightEye, out var rightEyeBuilder))
+            if (builder.Appearances.TryGetBuilder(BoneKeyword.RightEye, out var rightEyeBuilder))
             {
                 models.Add(rightEyeBuilder);
             }
@@ -48,7 +49,7 @@ namespace RoguegardUnity
                 models.Add(addRightEyeModel);
             }
 
-            if (builder.Appearances.TryGetBuilder(BoneKw.Hair, out var hairBuilder))
+            if (builder.Appearances.TryGetBuilder(BoneKeyword.Hair, out var hairBuilder))
             {
                 models.Add(hairBuilder);
             }

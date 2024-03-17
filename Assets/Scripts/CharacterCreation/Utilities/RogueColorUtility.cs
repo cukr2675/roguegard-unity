@@ -26,9 +26,9 @@ namespace Roguegard.CharacterCreation
             return new Color(red, green, blue, alpha);
         }
 
-        public static Color GetFirstColor(IKeyword boneName, IReadOnlyNodeBone rootNode, AffectableBoneSpriteTable boneSpriteTable)
+        public static Color GetFirstColor(BoneKeyword boneName, IReadOnlyNodeBone rootNode, AffectableBoneSpriteTable boneSpriteTable)
         {
-            var sprite = boneSpriteTable.GetSprite(new BoneKeyword(boneName.Name));
+            var sprite = boneSpriteTable.GetSprite(boneName);
             if (sprite.OverridesSourceColor)
             {
                 return sprite.FirstColor;
@@ -39,7 +39,7 @@ namespace Roguegard.CharacterCreation
 
             IReadOnlyNodeBone Recursion(IReadOnlyNodeBone node)
             {
-                if (node.Name == new BoneKeyword(boneName.Name)) return node;
+                if (node.Name == boneName) return node;
 
                 for (int i = 0; i < node.Children.Count; i++)
                 {
@@ -56,7 +56,7 @@ namespace Roguegard.CharacterCreation
             for (int i = 0; i < appearances.Count; i++)
             {
                 var appearance = appearances[i];
-                if (appearance.Option?.BoneName != RoguegardCharacterCreationSettings.HairBoneName) continue;
+                if (appearance.Option?.BoneName != BoneKeyword.Hair) continue;
 
                 return appearance.Color;
             }

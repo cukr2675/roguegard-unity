@@ -9,18 +9,18 @@ namespace Roguegard
     public class VariantSpriteMotion : ISpriteMotion
     {
         private readonly ISpriteMotion baseMotion;
-        private readonly IKeyword boneName;
+        private readonly BoneKeyword boneName;
         private readonly BoneSprite sprite;
         private readonly bool overridesColor;
         private readonly Color color;
         private readonly Dictionary<IDirectionalSpritePoseSource, IDirectionalSpritePoseSource> coloredPoseTable;
 
         public VariantSpriteMotion(ISpriteMotion baseMotion, Color color)
-            : this(baseMotion, null, null, true, color)
+            : this(baseMotion, default, null, true, color)
         {
         }
 
-        public VariantSpriteMotion(ISpriteMotion baseMotion, IKeyword boneName, BoneSprite sprite, bool overridesColor, Color color)
+        public VariantSpriteMotion(ISpriteMotion baseMotion, BoneKeyword boneName, BoneSprite sprite, bool overridesColor, Color color)
         {
             this.baseMotion = baseMotion;
             this.boneName = boneName;

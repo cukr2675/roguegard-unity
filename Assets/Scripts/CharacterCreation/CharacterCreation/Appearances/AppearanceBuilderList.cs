@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using System.Linq;
+using SkeletalSprite;
 
 namespace Roguegard.CharacterCreation
 {
@@ -15,7 +16,7 @@ namespace Roguegard.CharacterCreation
 
         public int Count => builders.Count;
 
-        public bool TryGetBuilder(IKeyword boneName, out AppearanceBuilder builder)
+        public bool TryGetBuilder(BoneKeyword boneName, out AppearanceBuilder builder)
         {
             foreach (var item in builders)
             {

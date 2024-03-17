@@ -14,12 +14,13 @@ namespace Roguegard
     {
         private readonly SpritePose[] poses;
 
-        public ImmutableVariantSpritePoseSource(IDirectionalSpritePoseSource poseSource, IKeyword boneName, BoneSprite sprite, bool overridesColor, Color color)
+        public ImmutableVariantSpritePoseSource(
+            IDirectionalSpritePoseSource poseSource, BoneKeyword boneName, BoneSprite sprite, bool overridesColor, Color color)
         {
             poses = new SpritePose[8];
             for (int i = 0; i < 8; i++)
             {
-                poses[i] = GetPose(poseSource, new BoneKeyword(boneName.Name), sprite, true, color, new SpriteDirection(i));
+                poses[i] = GetPose(poseSource, boneName, sprite, overridesColor, color, new SpriteDirection(i));
             }
         }
 

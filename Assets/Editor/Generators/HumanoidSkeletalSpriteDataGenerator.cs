@@ -6,7 +6,7 @@ using SkeletalSprite;
 
 namespace Roguegard.Editor
 {
-    [CreateAssetMenu(menuName = "RoguegardData/Sprite/HumanoidBoneGenerator")]
+    [CreateAssetMenu(menuName = "RoguegardData/Sprite/HumanoidSkeletalSpriteGenerator")]
     public class HumanoidSkeletalSpriteDataGenerator : ScriptableObjectGenerator<SkeletalSpriteData>
     {
         protected override int Start => 1;

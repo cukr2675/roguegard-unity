@@ -12,7 +12,7 @@ namespace Roguegard.CharacterCreation
         /// この <see cref="AppearanceOption"/> の前提となる <see cref="NodeBone"/> の名前を取得する。
         /// null のときは自由枠とする。
         /// </summary>
-        public abstract IKeyword BoneName { get; }
+        public abstract BoneKeyword BoneName { get; }
 
         public virtual Spanning<IMemberSource> MemberSources => Spanning<IMemberSource>.Empty;
 

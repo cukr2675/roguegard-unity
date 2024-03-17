@@ -50,8 +50,8 @@ namespace Roguegard
             [System.Serializable]
             private class Item
             {
-                [SerializeField] private KeywordData _name;
-                public BoneKeyword Name => new BoneKeyword(_name.DescriptionName);
+                [SerializeField] private BoneKeywordData _name;
+                public BoneKeyword Name => _name;
 
                 [SerializeField] private bool _hasFirstSprite;
                 public bool HasFirstSprite => _hasFirstSprite;

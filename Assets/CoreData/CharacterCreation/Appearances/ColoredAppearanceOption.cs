@@ -9,9 +9,9 @@ namespace Roguegard.CharacterCreation
     public abstract class ColoredAppearanceOption : AppearanceOption
     {
         [Space]
-        [SerializeField] private KeywordData _boneName = null;
-        public KeywordData BoneNameSource { get => _boneName; set => _boneName = value; }
-        public override IKeyword BoneName => _boneName;
+        [SerializeField] private BoneKeywordData _boneName = null;
+        public BoneKeywordData BoneNameSource { get => _boneName; set => _boneName = value; }
+        public override BoneKeyword BoneName => _boneName;
 
         [SerializeField] private bool _isBone = false;
         public bool IsBone { get => _isBone; set => _isBone = value; }
@@ -28,7 +28,7 @@ namespace Roguegard.CharacterCreation
             else
             {
                 var sprite = GetSprite(appearance, characterCreationData);
-                boneSpriteTable.BaseTable.AddEquipmentSprite(new BoneKeyword(BoneName.Name), sprite, appearance.Color);
+                boneSpriteTable.BaseTable.AddEquipmentSprite(BoneName, sprite, appearance.Color);
                 return;
             }
 
@@ -37,7 +37,7 @@ namespace Roguegard.CharacterCreation
                 for (int i = 0; i < node.Children.Count; i++)
                 {
                     var child = node.Children[i];
-                    if (child.Name == new BoneKeyword(BoneName.Name))
+                    if (child.Name == BoneName)
                     {
                         var sprite = GetSprite(appearance, characterCreationData);
                         child.Sprite = sprite;

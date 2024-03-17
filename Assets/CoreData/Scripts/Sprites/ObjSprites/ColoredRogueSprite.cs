@@ -43,18 +43,18 @@ namespace Roguegard
         public override void SetTo(ISkeletalSpriteRenderController renderController, SpritePose pose, SpriteDirection direction)
         {
             renderController.AdjustBones(1);
-            if (pose.BoneTransforms.TryGetValue(new BoneKeyword(BoneKw.Body.Name), out var transform))
+            if (pose.BoneTransforms.TryGetValue(BoneKeyword.Body, out var transform))
             {
                 var sprite = transform.Sprite != null ? transform.Sprite.NormalFront : IconSprite;
                 var color = transform.OverridesSourceColor ? transform.Color : IconColor;
                 renderController.SetBoneSprite(
-                    0, BoneKw.Body.Name, sprite, color, transform.LocalMirrorX, transform.LocalMirrorY,
+                    0, BoneKeyword.Body.Name, sprite, color, transform.LocalMirrorX, transform.LocalMirrorY,
                     transform.LocalPosition, transform.LocalRotation, transform.ScaleOfLocalByLocal);
             }
             else
             {
                 renderController.SetBoneSprite(
-                    0, BoneKw.Body.Name, sprite, color, false, false, Vector3.zero, Quaternion.identity, Vector3.one);
+                    0, BoneKeyword.Body.Name, sprite, color, false, false, Vector3.zero, Quaternion.identity, Vector3.one);
             }
         }
 

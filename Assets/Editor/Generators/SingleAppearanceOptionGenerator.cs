@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using SkeletalSprite;
 using Roguegard.Editor;
 
 namespace Roguegard.CharacterCreation.Editor
@@ -12,8 +13,8 @@ namespace Roguegard.CharacterCreation.Editor
         [SerializeField] private string _descriptionNameFormat = null;
         public string DescriptionNameFormat { get => _descriptionNameFormat; set => _descriptionNameFormat = value; }
 
-        [SerializeField] private KeywordData _boneName = null;
-        public KeywordData BoneName { get => _boneName; set => _boneName = value; }
+        [SerializeField] private BoneKeywordData _boneName = null;
+        public BoneKeywordData BoneName { get => _boneName; set => _boneName = value; }
 
         [SerializeField] private bool _isBone = false;
         public bool IsBone { get => _isBone; set => _isBone = value; }

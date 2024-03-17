@@ -46,16 +46,16 @@ namespace Roguegard
             var rotation = Quaternion.Euler(0f, 0f, eulerZ);
 
             renderController.AdjustBones(1);
-            if (pose.BoneTransforms.TryGetValue(new BoneKeyword(BoneKw.Body.Name), out var transform))
+            if (pose.BoneTransforms.TryGetValue(BoneKeyword.Body, out var transform))
             {
                 renderController.SetBoneSprite(
-                    0, BoneKw.Body.Name, sprite, color, false, false,
+                    0, BoneKeyword.Body.Name, sprite, color, false, false,
                     transform.LocalPosition, transform.LocalRotation * rotation, transform.ScaleOfLocalByLocal);
             }
             else
             {
                 renderController.SetBoneSprite(
-                    0, BoneKw.Body.Name, sprite, color, false, false, Vector3.zero, rotation, Vector3.one);
+                    0, BoneKeyword.Body.Name, sprite, color, false, false, Vector3.zero, rotation, Vector3.one);
             }
         }
 

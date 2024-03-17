@@ -100,8 +100,8 @@ namespace Roguegard
         {
             // 目の色を変更
             var color = new Color32(255, 0, 255, 255);
-            boneSpriteTable.SetFirstSprite(new BoneKeyword(BoneKw.LeftEye.Name), color);
-            boneSpriteTable.SetFirstSprite(new BoneKeyword(BoneKw.RightEye.Name), color);
+            boneSpriteTable.SetFirstSprite(BoneKeyword.LeftEye, color);
+            boneSpriteTable.SetFirstSprite(BoneKeyword.RightEye, color);
         }
     }
 }

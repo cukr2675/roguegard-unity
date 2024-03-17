@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using TMPro;
+using SkeletalSprite;
 using RuntimeDotter;
 using Roguegard.Device;
 
@@ -154,7 +155,7 @@ namespace Roguegard
                     boneSprite = new PaintBoneSprite();
                     boneSprite.NormalFront = boneSprite.BackRear = new DotterBoard(new Vector2Int(32, 32), 16);
                     boneSprite.NormalRear = boneSprite.BackFront = new DotterBoard(new Vector2Int(32, 32), 16);
-                    boneSprite.Bone = BoneKw.Body;
+                    boneSprite.Bone = BoneKeyword.Body;
                     boneSprite.Mirroring = true;
                     data.BoneSprites.Add(boneSprite);
                     root.OpenMenu(nextMenu, self, null, new(other: data.BoneSprites, count: data.BoneSprites.IndexOf(boneSprite)), arg);

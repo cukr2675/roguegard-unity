@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using TMPro;
+using SkeletalSprite;
 using RuntimeDotter;
 using Roguegard.Device;
 
@@ -80,10 +81,10 @@ namespace Roguegard
                 {
                     models = new[]
                     {
-                        BoneKw.Body,
-                        BoneKw.LeftArm,
-                        BoneKw.LeftLeg,
-                        BoneKw.Hair,
+                        BoneKeyword.Body.Name,
+                        BoneKeyword.LeftArm.Name,
+                        BoneKeyword.LeftLeg.Name,
+                        BoneKeyword.Hair.Name,
                     };
                 }
 
@@ -105,7 +106,7 @@ namespace Roguegard
                 root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
 
                 var boneSprite = (PaintBoneSprite)arg.Other;
-                boneSprite.Bone = (ISerializableKeyword)model;
+                boneSprite.Bone = new BoneKeyword((string)model);
 
                 root.Back();
             }

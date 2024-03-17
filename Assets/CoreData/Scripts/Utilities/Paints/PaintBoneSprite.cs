@@ -16,7 +16,7 @@ namespace Roguegard
         public DotterBoard BackRear { get; set; }
         public int PivotDistance { get; set; }
 
-        public ISerializableKeyword Bone { get; set; }
+        public BoneKeyword Bone { get; set; }
         public bool Mirroring { get; set; }
         public bool IsFirst { get; set; }
         public bool OverridesSourceColor { get; set; }
@@ -46,7 +46,9 @@ namespace Roguegard
 
         public bool ShowsSplitLine(DotterBoard board, out Vector2 upperPivot, out Vector2 lowerPivot)
         {
-            if (Bone == BoneKw.Body || Bone == BoneKw.LeftArm || Bone == BoneKw.RightArm || Bone == BoneKw.LeftLeg || Bone == BoneKw.RightLeg)
+            if (
+                Bone == BoneKeyword.Body || Bone == BoneKeyword.LeftArm || Bone == BoneKeyword.RightArm ||
+                Bone == BoneKeyword.LeftLeg || Bone == BoneKeyword.RightLeg)
             {
                 var center = board.Size / 2;
                 var size = (Vector2)board.Size;
@@ -63,34 +65,34 @@ namespace Roguegard
 
         public void AddTo(AffectableBoneSpriteTable table, Color mainColor, Spanning<ShiftableColor> palette)
         {
-            if (Bone == BoneKw.Body)
+            if (Bone == BoneKeyword.Body)
             {
                 var overridesUpperBaseColor = OverridesBaseColor(true, upperBodyRect, palette);
                 var overridesLowerBaseColor = OverridesBaseColor(false, bodyRect, palette);
                 ToBoneSprite(palette, out var upperBoneSprite, out var lowerBoneSprite);
-                AddTo(table, BoneKw.UpperBody, upperBoneSprite, mainColor, overridesUpperBaseColor);
-                AddTo(table, BoneKw.Body, lowerBoneSprite, mainColor, overridesLowerBaseColor);
+                AddTo(table, BoneKeyword.UpperBody, upperBoneSprite, mainColor, overridesUpperBaseColor);
+                AddTo(table, BoneKeyword.Body, lowerBoneSprite, mainColor, overridesLowerBaseColor);
             }
-            else if (Bone == BoneKw.LeftArm)
+            else if (Bone == BoneKeyword.LeftArm)
             {
                 ToBoneSprite(palette, out var upperBoneSprite, out var lowerBoneSprite);
-                AddTo(table, BoneKw.LeftArm, upperBoneSprite, mainColor);
-                AddTo(table, BoneKw.LeftHand, lowerBoneSprite, mainColor);
+                AddTo(table, BoneKeyword.LeftArm, upperBoneSprite, mainColor);
+                AddTo(table, BoneKeyword.LeftHand, lowerBoneSprite, mainColor);
                 if (Mirroring)
                 {
-                    AddTo(table, BoneKw.RightArm, upperBoneSprite, mainColor);
-                    AddTo(table, BoneKw.RightHand, lowerBoneSprite, mainColor);
+                    AddTo(table, BoneKeyword.RightArm, upperBoneSprite, mainColor);
+                    AddTo(table, BoneKeyword.RightHand, lowerBoneSprite, mainColor);
                 }
             }
-            else if (Bone == BoneKw.LeftLeg)
+            else if (Bone == BoneKeyword.LeftLeg)
             {
                 ToBoneSprite(palette, out var upperBoneSprite, out var lowerBoneSprite);
-                AddTo(table, BoneKw.LeftLeg, upperBoneSprite, mainColor);
-                AddTo(table, BoneKw.LeftFoot, lowerBoneSprite, mainColor);
+                AddTo(table, BoneKeyword.LeftLeg, upperBoneSprite, mainColor);
+                AddTo(table, BoneKeyword.LeftFoot, lowerBoneSprite, mainColor);
                 if (Mirroring)
                 {
-                    AddTo(table, BoneKw.RightLeg, upperBoneSprite, mainColor);
-                    AddTo(table, BoneKw.RightFoot, lowerBoneSprite, mainColor);
+                    AddTo(table, BoneKeyword.RightLeg, upperBoneSprite, mainColor);
+                    AddTo(table, BoneKeyword.RightFoot, lowerBoneSprite, mainColor);
                 }
             }
             else
@@ -100,16 +102,16 @@ namespace Roguegard
             }
         }
 
-        private void AddTo(AffectableBoneSpriteTable table, IKeyword name, BoneSprite sprite, Color color, bool overridesBaseColor = false)
+        private void AddTo(AffectableBoneSpriteTable table, BoneKeyword name, BoneSprite sprite, Color color, bool overridesBaseColor = false)
         {
             if (IsFirst)
             {
-                if (OverridesSourceColor) { table.SetFirstSprite(new BoneKeyword(name.Name), sprite, color, true); }
-                else { table.SetFirstSprite(new BoneKeyword(name.Name), sprite, overridesBaseColor); }
+                if (OverridesSourceColor) { table.SetFirstSprite(name, sprite, color, true); }
+                else { table.SetFirstSprite(name, sprite, overridesBaseColor); }
             }
             else
             {
-                table.AddEquipmentSprite(new BoneKeyword(name.Name), sprite, color, overridesBaseColor);
+                table.AddEquipmentSprite(name, sprite, color, overridesBaseColor);
             }
         }
 

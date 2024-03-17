@@ -22,7 +22,7 @@ namespace Roguegard.CharacterCreation
         [SerializeField] private AffectableBoneSpriteTableData.Value _boneSpriteTable;
 
         [Tooltip("この値が設定されているとき、装備者の指定のボーンの色をスポイトする")]
-        [SerializeField] private KeywordData _eyeDropBoneName;
+        [SerializeField] private BoneKeywordData _eyeDropBoneName;
 
         [SerializeField] private bool _overridesBoneSpriteEffectOrder;
 
