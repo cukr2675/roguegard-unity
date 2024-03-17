@@ -2,9 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-using SkeletalSprite;
-
-namespace Roguegard
+namespace SkeletalSprite
 {
     /// <summary>
     /// 指定の <see cref="IDirectionalSpritePoseSource"/> の一部のスプライトと色を変更した <see cref="IDirectionalSpritePoseSource"/> 。
@@ -28,7 +26,7 @@ namespace Roguegard
             IDirectionalSpritePoseSource poseSource, BoneKeyword boneName, BoneSprite sprite, bool overridesColor, Color color, SpriteDirection direction)
         {
             var basePose = poseSource.GetSpritePose(direction);
-            if (!basePose.IsImmutable) throw new RogueException("元のポーズが不変ではありません。");
+            if (!basePose.IsImmutable) throw new System.Exception("元のポーズが不変ではありません。");
 
             var pose = new SpritePose();
             foreach (var pair in basePose.BoneTransforms)
