@@ -34,7 +34,7 @@ namespace Roguegard
             foreach (var pair in basePose.BoneTransforms)
             {
                 var transform = pair.Value;
-                if (boneName == null || pair.Key == boneName)
+                if (boneName == BoneKeyword.Other || pair.Key == boneName)
                 {
                     var overridesTransformColor = overridesColor && transform.OverridesSourceColor;
                     transform = new BoneTransform(

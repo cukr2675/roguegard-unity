@@ -54,15 +54,5 @@ namespace SkeletalSprite
         {
             return left.Name != right.Name;
         }
-
-        public static bool operator ==(BoneKeyword left, BoneKeyword? right)
-        {
-            return left.Name == right?.Name;
-        }
-
-        public static bool operator !=(BoneKeyword left, BoneKeyword? right)
-        {
-            return left.Name != right?.Name;
-        }
     }
 }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using SkeletalSprite;
 using Roguegard;
 using Roguegard.CharacterCreation;
 using Roguegard.Device;
@@ -84,7 +85,7 @@ namespace RoguegardUnity
                 for (int i = 0; i < database.AppearanceOptions.Count; i++)
                 {
                     var option = database.AppearanceOptions[i];
-                    if (option.BoneName == appearanceBuilder.Option?.BoneName)
+                    if (appearanceBuilder.Option != null && option.BoneName == appearanceBuilder.Option.BoneName)
                     {
                         models.Add(option);
                     }
@@ -145,7 +146,7 @@ namespace RoguegardUnity
                 for (int i = 0; i < database.AppearanceOptions.Count; i++)
                 {
                     var option = database.AppearanceOptions[i];
-                    if (option.BoneName == null)
+                    if (option.BoneName == BoneKeyword.Other)
                     {
                         models.Add(option);
                     }
