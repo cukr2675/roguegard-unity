@@ -16,7 +16,7 @@ namespace Roguegard
         private readonly Dictionary<IDirectionalSpritePoseSource, IDirectionalSpritePoseSource> coloredPoseTable;
 
         public VariantSpriteMotion(ISpriteMotion baseMotion, Color color)
-            : this(baseMotion, default, null, true, color)
+            : this(baseMotion, BoneKeyword.Other, null, true, color)
         {
         }
 

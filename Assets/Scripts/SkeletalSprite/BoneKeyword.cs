@@ -28,6 +28,7 @@ namespace SkeletalSprite
         public static BoneKeyword RightWing { get; } = new BoneKeyword("RightWing");
         public static BoneKeyword Tail { get; } = new BoneKeyword("Tail");
         public static BoneKeyword Effect { get; } = new BoneKeyword("Effect");
+        public static BoneKeyword Other { get; } = new BoneKeyword(null);
 
         public BoneKeyword(string name)
         {
@@ -36,7 +37,7 @@ namespace SkeletalSprite
 
         public override bool Equals(object obj)
         {
-            return Name.Equals(obj);
+            return obj is BoneKeyword boneKeyword && Name == boneKeyword.Name;
         }
 
         public override int GetHashCode()
@@ -52,6 +53,16 @@ namespace SkeletalSprite
         public static bool operator !=(BoneKeyword left, BoneKeyword right)
         {
             return left.Name != right.Name;
+        }
+
+        public static bool operator ==(BoneKeyword left, BoneKeyword? right)
+        {
+            return left.Name == right?.Name;
+        }
+
+        public static bool operator !=(BoneKeyword left, BoneKeyword? right)
+        {
+            return left.Name != right?.Name;
         }
     }
 }

@@ -14,7 +14,7 @@ namespace Roguegard.CharacterCreation
     [ObjectFormer.Referable]
     public class EquipmentAppearanceOption : AppearanceOption
     {
-        public override BoneKeyword BoneName => default;
+        public override BoneKeyword BoneName => BoneKeyword.Other;
 
         public override Spanning<IMemberSource> MemberSources => _sources;
         private static readonly IMemberSource[] _sources = new IMemberSource[] { SingleItemMember.SourceInstance };
