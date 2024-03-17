@@ -15,5 +15,5 @@ MonoBehaviour:
   _namespaceName: Roguegard
   _targetFolder: {fileID: 102900000, guid: 7af7e7bd10d191e4190192b20e198c13, type: 3}
   _assetTypeNames:
-  - BoneMotionData
+  - SpriteMotionData
   _propertyTypeName: IBoneMotion

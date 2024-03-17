@@ -7,7 +7,7 @@ namespace SkeletalSprite
     [CreateAssetMenu(menuName = "SkeletalSprite/SkeletalSprite")]
     public class SkeletalSpriteData : ScriptableObject
     {
-        [SerializeField] private int _pixelsPerUnit = SkeletalSpriteUtility.PixelsPerUnit;
+        [SerializeField] private int _pixelsPerUnit = SkeletalSpriteUtility.DefaultPixelsPerUnit;
         public int PixelsPerUnit { get => _pixelsPerUnit; set => _pixelsPerUnit = value; }
 
         [SerializeField] private float _lightDarkThreshold = SkeletalSpriteUtility.LightDarkThreshold;

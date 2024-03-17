@@ -6,7 +6,7 @@ using SkeletalSprite;
 
 namespace Roguegard
 {
-    public abstract class SpriteMotionData : ScriptableObject, IRogueSpriteMotion
+    public abstract class RogueSpriteMotionData : SpriteMotionData, IRogueSpriteMotion
     {
         public abstract IKeyword Keyword { get; }
 
@@ -15,7 +15,7 @@ namespace Roguegard
         public abstract void ApplyTo(
             ISpriteMotionSet motionSet, int animationTime, SpriteDirection direction, ref SkeletalSpriteTransform transform, out bool endOfMotion);
 
-        public void ApplyTo(int animationTime, SpriteDirection direction, ref SkeletalSpriteTransform transform, out bool endOfMotion)
+        public override void ApplyTo(int animationTime, SpriteDirection direction, ref SkeletalSpriteTransform transform, out bool endOfMotion)
         {
             ApplyTo(motionSet, animationTime, direction, ref transform, out endOfMotion);
         }
