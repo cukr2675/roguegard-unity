@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: affde6d6b08392d4bb0b2e249363d22d, type: 3}
-  m_Name: Hair3
+  m_Name: Hair8
   m_EditorClassIdentifier: 
-  _descriptionName: "\u9AEA3"
-  _icon: {fileID: 333825727, guid: 6a76f83f271204a45b8c9c778cf89534, type: 3}
+  _descriptionName: "\u9AEA8"
+  _icon: {fileID: -531570557, guid: 6a76f83f271204a45b8c9c778cf89534, type: 3}
   _color: {r: 1, g: 1, b: 1, a: 1}
   _caption: 
   _details:
@@ -25,9 +25,9 @@ MonoBehaviour:
   _sprite:
     _isColorRanged: 0
     _spriteOrLightSprite:
-      _normalFront: {fileID: 333825727, guid: 6a76f83f271204a45b8c9c778cf89534, type: 3}
-      _normalRear: {fileID: 887467220, guid: 6a76f83f271204a45b8c9c778cf89534, type: 3}
-      _backFront: {fileID: 887467220, guid: 6a76f83f271204a45b8c9c778cf89534, type: 3}
+      _normalFront: {fileID: -531570557, guid: 6a76f83f271204a45b8c9c778cf89534, type: 3}
+      _normalRear: {fileID: -923531408, guid: 6a76f83f271204a45b8c9c778cf89534, type: 3}
+      _backFront: {fileID: -923531408, guid: 6a76f83f271204a45b8c9c778cf89534, type: 3}
       _backRear: {fileID: 0}
     _darkSprite:
       _normalFront: {fileID: 0}

@@ -24,86 +24,46 @@ MonoBehaviour:
   _isBone: 1
   _table:
   - _isColorRanged: 1
-    _spriteOrLightRed:
+    _spriteOrLightSprite:
       _normalFront: {fileID: 939377268, guid: 7460fdaf1dc29ca49bb0b719cad192bc, type: 3}
       _normalRear: {fileID: 0}
       _backFront: {fileID: 0}
       _backRear: {fileID: 0}
-    _darkRed:
+    _darkSprite:
       _normalFront: {fileID: 46997777, guid: 7460fdaf1dc29ca49bb0b719cad192bc, type: 3}
       _normalRear: {fileID: 0}
       _backFront: {fileID: 0}
       _backRear: {fileID: 0}
-    _lightOther:
-      _normalFront: {fileID: 1560372862, guid: 7460fdaf1dc29ca49bb0b719cad192bc, type: 3}
-      _normalRear: {fileID: 0}
-      _backFront: {fileID: 0}
-      _backRear: {fileID: 0}
-    _darkOther:
-      _normalFront: {fileID: -601347019, guid: 7460fdaf1dc29ca49bb0b719cad192bc, type: 3}
-      _normalRear: {fileID: 0}
-      _backFront: {fileID: 0}
-      _backRear: {fileID: 0}
   - _isColorRanged: 1
-    _spriteOrLightRed:
+    _spriteOrLightSprite:
       _normalFront: {fileID: 893552775, guid: 7460fdaf1dc29ca49bb0b719cad192bc, type: 3}
       _normalRear: {fileID: 0}
       _backFront: {fileID: 0}
       _backRear: {fileID: 0}
-    _darkRed:
+    _darkSprite:
       _normalFront: {fileID: -515230883, guid: 7460fdaf1dc29ca49bb0b719cad192bc, type: 3}
       _normalRear: {fileID: 0}
       _backFront: {fileID: 0}
       _backRear: {fileID: 0}
-    _lightOther:
-      _normalFront: {fileID: 1294203998, guid: 7460fdaf1dc29ca49bb0b719cad192bc, type: 3}
-      _normalRear: {fileID: 0}
-      _backFront: {fileID: 0}
-      _backRear: {fileID: 0}
-    _darkOther:
-      _normalFront: {fileID: -671239334, guid: 7460fdaf1dc29ca49bb0b719cad192bc, type: 3}
-      _normalRear: {fileID: 0}
-      _backFront: {fileID: 0}
-      _backRear: {fileID: 0}
   - _isColorRanged: 1
-    _spriteOrLightRed:
+    _spriteOrLightSprite:
       _normalFront: {fileID: 2091040291, guid: 7460fdaf1dc29ca49bb0b719cad192bc, type: 3}
       _normalRear: {fileID: 0}
       _backFront: {fileID: 0}
       _backRear: {fileID: 0}
-    _darkRed:
+    _darkSprite:
       _normalFront: {fileID: -692183131, guid: 7460fdaf1dc29ca49bb0b719cad192bc, type: 3}
       _normalRear: {fileID: 0}
       _backFront: {fileID: 0}
       _backRear: {fileID: 0}
-    _lightOther:
-      _normalFront: {fileID: -1119568782, guid: 7460fdaf1dc29ca49bb0b719cad192bc, type: 3}
-      _normalRear: {fileID: 0}
-      _backFront: {fileID: 0}
-      _backRear: {fileID: 0}
-    _darkOther:
-      _normalFront: {fileID: -1294470915, guid: 7460fdaf1dc29ca49bb0b719cad192bc, type: 3}
-      _normalRear: {fileID: 0}
-      _backFront: {fileID: 0}
-      _backRear: {fileID: 0}
   - _isColorRanged: 1
-    _spriteOrLightRed:
+    _spriteOrLightSprite:
       _normalFront: {fileID: 1435650637, guid: 7460fdaf1dc29ca49bb0b719cad192bc, type: 3}
       _normalRear: {fileID: 0}
       _backFront: {fileID: 0}
       _backRear: {fileID: 0}
-    _darkRed:
+    _darkSprite:
       _normalFront: {fileID: 272059467, guid: 7460fdaf1dc29ca49bb0b719cad192bc, type: 3}
-      _normalRear: {fileID: 0}
-      _backFront: {fileID: 0}
-      _backRear: {fileID: 0}
-    _lightOther:
-      _normalFront: {fileID: -1542694415, guid: 7460fdaf1dc29ca49bb0b719cad192bc, type: 3}
-      _normalRear: {fileID: 0}
-      _backFront: {fileID: 0}
-      _backRear: {fileID: 0}
-    _darkOther:
-      _normalFront: {fileID: -426823630, guid: 7460fdaf1dc29ca49bb0b719cad192bc, type: 3}
       _normalRear: {fileID: 0}
       _backFront: {fileID: 0}
       _backRear: {fileID: 0}

@@ -19,10 +19,20 @@ MonoBehaviour:
     _parentBoneName: {fileID: 0}
     _sprite:
       _isColorRanged: 0
-      _spriteOrLightRed:
+      _spriteOrLightSprite:
         _normalFront: {fileID: 4329407632164072968, guid: d29fd121295802c4d86be31c8dd36ecd, type: 3}
         _normalRear: {fileID: 0}
         _backFront: {fileID: -687686590730729439, guid: d29fd121295802c4d86be31c8dd36ecd, type: 3}
+        _backRear: {fileID: 0}
+      _darkSprite:
+        _normalFront: {fileID: 0}
+        _normalRear: {fileID: 0}
+        _backFront: {fileID: 0}
+        _backRear: {fileID: 0}
+      _spriteOrLightRed:
+        _normalFront: {fileID: 0}
+        _normalRear: {fileID: 0}
+        _backFront: {fileID: 0}
         _backRear: {fileID: 0}
       _darkRed:
         _normalFront: {fileID: 0}
@@ -51,10 +61,20 @@ MonoBehaviour:
     _parentBoneName: {fileID: 11400000, guid: a90fd0bc3132c214395dee60b9a645ae, type: 2}
     _sprite:
       _isColorRanged: 0
-      _spriteOrLightRed:
+      _spriteOrLightSprite:
         _normalFront: {fileID: -261993853, guid: d29fd121295802c4d86be31c8dd36ecd, type: 3}
         _normalRear: {fileID: 0}
         _backFront: {fileID: -1587713641, guid: d29fd121295802c4d86be31c8dd36ecd, type: 3}
+        _backRear: {fileID: 0}
+      _darkSprite:
+        _normalFront: {fileID: 0}
+        _normalRear: {fileID: 0}
+        _backFront: {fileID: 0}
+        _backRear: {fileID: 0}
+      _spriteOrLightRed:
+        _normalFront: {fileID: 0}
+        _normalRear: {fileID: 0}
+        _backFront: {fileID: 0}
         _backRear: {fileID: 0}
       _darkRed:
         _normalFront: {fileID: 0}
@@ -83,10 +103,20 @@ MonoBehaviour:
     _parentBoneName: {fileID: 11400000, guid: a90fd0bc3132c214395dee60b9a645ae, type: 2}
     _sprite:
       _isColorRanged: 0
-      _spriteOrLightRed:
+      _spriteOrLightSprite:
         _normalFront: {fileID: -958800549, guid: e5a8986b8081b504db8a54ffa73647f9, type: 3}
         _normalRear: {fileID: 0}
         _backFront: {fileID: -958800549, guid: e5a8986b8081b504db8a54ffa73647f9, type: 3}
+        _backRear: {fileID: 0}
+      _darkSprite:
+        _normalFront: {fileID: 0}
+        _normalRear: {fileID: 0}
+        _backFront: {fileID: 0}
+        _backRear: {fileID: 0}
+      _spriteOrLightRed:
+        _normalFront: {fileID: 0}
+        _normalRear: {fileID: 0}
+        _backFront: {fileID: 0}
         _backRear: {fileID: 0}
       _darkRed:
         _normalFront: {fileID: 0}
@@ -115,6 +145,16 @@ MonoBehaviour:
     _parentBoneName: {fileID: 11400000, guid: 390f9798da027d8489dbb8048e8dc2d3, type: 2}
     _sprite:
       _isColorRanged: 0
+      _spriteOrLightSprite:
+        _normalFront: {fileID: 0}
+        _normalRear: {fileID: 0}
+        _backFront: {fileID: 0}
+        _backRear: {fileID: 0}
+      _darkSprite:
+        _normalFront: {fileID: 0}
+        _normalRear: {fileID: 0}
+        _backFront: {fileID: 0}
+        _backRear: {fileID: 0}
       _spriteOrLightRed:
         _normalFront: {fileID: 0}
         _normalRear: {fileID: 0}
@@ -147,10 +187,20 @@ MonoBehaviour:
     _parentBoneName: {fileID: 11400000, guid: a90fd0bc3132c214395dee60b9a645ae, type: 2}
     _sprite:
       _isColorRanged: 0
-      _spriteOrLightRed:
+      _spriteOrLightSprite:
         _normalFront: {fileID: -958800549, guid: e5a8986b8081b504db8a54ffa73647f9, type: 3}
         _normalRear: {fileID: 0}
         _backFront: {fileID: -958800549, guid: e5a8986b8081b504db8a54ffa73647f9, type: 3}
+        _backRear: {fileID: 0}
+      _darkSprite:
+        _normalFront: {fileID: 0}
+        _normalRear: {fileID: 0}
+        _backFront: {fileID: 0}
+        _backRear: {fileID: 0}
+      _spriteOrLightRed:
+        _normalFront: {fileID: 0}
+        _normalRear: {fileID: 0}
+        _backFront: {fileID: 0}
         _backRear: {fileID: 0}
       _darkRed:
         _normalFront: {fileID: 0}
@@ -179,6 +229,16 @@ MonoBehaviour:
     _parentBoneName: {fileID: 11400000, guid: 943353eeb2ebaf94fa745edefc849f40, type: 2}
     _sprite:
       _isColorRanged: 0
+      _spriteOrLightSprite:
+        _normalFront: {fileID: 0}
+        _normalRear: {fileID: 0}
+        _backFront: {fileID: 0}
+        _backRear: {fileID: 0}
+      _darkSprite:
+        _normalFront: {fileID: 0}
+        _normalRear: {fileID: 0}
+        _backFront: {fileID: 0}
+        _backRear: {fileID: 0}
       _spriteOrLightRed:
         _normalFront: {fileID: 0}
         _normalRear: {fileID: 0}
@@ -211,10 +271,20 @@ MonoBehaviour:
     _parentBoneName: {fileID: 11400000, guid: a90fd0bc3132c214395dee60b9a645ae, type: 2}
     _sprite:
       _isColorRanged: 0
-      _spriteOrLightRed:
+      _spriteOrLightSprite:
         _normalFront: {fileID: -8497750495507081368, guid: d29fd121295802c4d86be31c8dd36ecd, type: 3}
         _normalRear: {fileID: 0}
         _backFront: {fileID: -8497750495507081368, guid: d29fd121295802c4d86be31c8dd36ecd, type: 3}
+        _backRear: {fileID: 0}
+      _darkSprite:
+        _normalFront: {fileID: 0}
+        _normalRear: {fileID: 0}
+        _backFront: {fileID: 0}
+        _backRear: {fileID: 0}
+      _spriteOrLightRed:
+        _normalFront: {fileID: 0}
+        _normalRear: {fileID: 0}
+        _backFront: {fileID: 0}
         _backRear: {fileID: 0}
       _darkRed:
         _normalFront: {fileID: 0}
@@ -243,6 +313,16 @@ MonoBehaviour:
     _parentBoneName: {fileID: 11400000, guid: ec4ed1a3457777a41ae301e2da2a42f0, type: 2}
     _sprite:
       _isColorRanged: 0
+      _spriteOrLightSprite:
+        _normalFront: {fileID: 0}
+        _normalRear: {fileID: 0}
+        _backFront: {fileID: 0}
+        _backRear: {fileID: 0}
+      _darkSprite:
+        _normalFront: {fileID: 0}
+        _normalRear: {fileID: 0}
+        _backFront: {fileID: 0}
+        _backRear: {fileID: 0}
       _spriteOrLightRed:
         _normalFront: {fileID: 0}
         _normalRear: {fileID: 0}
@@ -275,10 +355,20 @@ MonoBehaviour:
     _parentBoneName: {fileID: 11400000, guid: a90fd0bc3132c214395dee60b9a645ae, type: 2}
     _sprite:
       _isColorRanged: 0
-      _spriteOrLightRed:
+      _spriteOrLightSprite:
         _normalFront: {fileID: -8497750495507081368, guid: d29fd121295802c4d86be31c8dd36ecd, type: 3}
         _normalRear: {fileID: 0}
         _backFront: {fileID: -8497750495507081368, guid: d29fd121295802c4d86be31c8dd36ecd, type: 3}
+        _backRear: {fileID: 0}
+      _darkSprite:
+        _normalFront: {fileID: 0}
+        _normalRear: {fileID: 0}
+        _backFront: {fileID: 0}
+        _backRear: {fileID: 0}
+      _spriteOrLightRed:
+        _normalFront: {fileID: 0}
+        _normalRear: {fileID: 0}
+        _backFront: {fileID: 0}
         _backRear: {fileID: 0}
       _darkRed:
         _normalFront: {fileID: 0}
@@ -307,6 +397,16 @@ MonoBehaviour:
     _parentBoneName: {fileID: 11400000, guid: 6c5bf9f3253d7214bba7b3466b57517f, type: 2}
     _sprite:
       _isColorRanged: 0
+      _spriteOrLightSprite:
+        _normalFront: {fileID: 0}
+        _normalRear: {fileID: 0}
+        _backFront: {fileID: 0}
+        _backRear: {fileID: 0}
+      _darkSprite:
+        _normalFront: {fileID: 0}
+        _normalRear: {fileID: 0}
+        _backFront: {fileID: 0}
+        _backRear: {fileID: 0}
       _spriteOrLightRed:
         _normalFront: {fileID: 0}
         _normalRear: {fileID: 0}
@@ -339,25 +439,35 @@ MonoBehaviour:
     _parentBoneName: {fileID: 11400000, guid: a90fd0bc3132c214395dee60b9a645ae, type: 2}
     _sprite:
       _isColorRanged: 1
-      _spriteOrLightRed:
+      _spriteOrLightSprite:
         _normalFront: {fileID: -3305930847782083002, guid: d29fd121295802c4d86be31c8dd36ecd, type: 3}
         _normalRear: {fileID: 0}
         _backFront: {fileID: -1876098581559971608, guid: d29fd121295802c4d86be31c8dd36ecd, type: 3}
         _backRear: {fileID: 0}
-      _darkRed:
+      _darkSprite:
         _normalFront: {fileID: -5969058091126000365, guid: d29fd121295802c4d86be31c8dd36ecd, type: 3}
         _normalRear: {fileID: 0}
         _backFront: {fileID: 6539314811114664936, guid: d29fd121295802c4d86be31c8dd36ecd, type: 3}
         _backRear: {fileID: 0}
-      _lightOther:
-        _normalFront: {fileID: -1867809915, guid: d29fd121295802c4d86be31c8dd36ecd, type: 3}
+      _spriteOrLightRed:
+        _normalFront: {fileID: 0}
         _normalRear: {fileID: 0}
-        _backFront: {fileID: 1420756525, guid: d29fd121295802c4d86be31c8dd36ecd, type: 3}
+        _backFront: {fileID: 0}
+        _backRear: {fileID: 0}
+      _darkRed:
+        _normalFront: {fileID: 0}
+        _normalRear: {fileID: 0}
+        _backFront: {fileID: 0}
+        _backRear: {fileID: 0}
+      _lightOther:
+        _normalFront: {fileID: 0}
+        _normalRear: {fileID: 0}
+        _backFront: {fileID: 0}
         _backRear: {fileID: 0}
       _darkOther:
-        _normalFront: {fileID: 1745256399, guid: d29fd121295802c4d86be31c8dd36ecd, type: 3}
+        _normalFront: {fileID: 0}
         _normalRear: {fileID: 0}
-        _backFront: {fileID: -93702945, guid: d29fd121295802c4d86be31c8dd36ecd, type: 3}
+        _backFront: {fileID: 0}
         _backRear: {fileID: 0}
     _overridesBaseColor: 1
     _flipX: 0
@@ -371,6 +481,16 @@ MonoBehaviour:
     _parentBoneName: {fileID: 11400000, guid: c66efafae0b82384d8b4212c78358e52, type: 2}
     _sprite:
       _isColorRanged: 0
+      _spriteOrLightSprite:
+        _normalFront: {fileID: 0}
+        _normalRear: {fileID: 0}
+        _backFront: {fileID: 0}
+        _backRear: {fileID: 0}
+      _darkSprite:
+        _normalFront: {fileID: 0}
+        _normalRear: {fileID: 0}
+        _backFront: {fileID: 0}
+        _backRear: {fileID: 0}
       _spriteOrLightRed:
         _normalFront: {fileID: 0}
         _normalRear: {fileID: 0}
@@ -403,6 +523,16 @@ MonoBehaviour:
     _parentBoneName: {fileID: 11400000, guid: c66efafae0b82384d8b4212c78358e52, type: 2}
     _sprite:
       _isColorRanged: 0
+      _spriteOrLightSprite:
+        _normalFront: {fileID: 0}
+        _normalRear: {fileID: 0}
+        _backFront: {fileID: 0}
+        _backRear: {fileID: 0}
+      _darkSprite:
+        _normalFront: {fileID: 0}
+        _normalRear: {fileID: 0}
+        _backFront: {fileID: 0}
+        _backRear: {fileID: 0}
       _spriteOrLightRed:
         _normalFront: {fileID: 0}
         _normalRear: {fileID: 0}
@@ -435,6 +565,16 @@ MonoBehaviour:
     _parentBoneName: {fileID: 11400000, guid: c66efafae0b82384d8b4212c78358e52, type: 2}
     _sprite:
       _isColorRanged: 0
+      _spriteOrLightSprite:
+        _normalFront: {fileID: 0}
+        _normalRear: {fileID: 0}
+        _backFront: {fileID: 0}
+        _backRear: {fileID: 0}
+      _darkSprite:
+        _normalFront: {fileID: 0}
+        _normalRear: {fileID: 0}
+        _backFront: {fileID: 0}
+        _backRear: {fileID: 0}
       _spriteOrLightRed:
         _normalFront: {fileID: 0}
         _normalRear: {fileID: 0}
@@ -467,6 +607,16 @@ MonoBehaviour:
     _parentBoneName: {fileID: 11400000, guid: c66efafae0b82384d8b4212c78358e52, type: 2}
     _sprite:
       _isColorRanged: 0
+      _spriteOrLightSprite:
+        _normalFront: {fileID: 0}
+        _normalRear: {fileID: 0}
+        _backFront: {fileID: 0}
+        _backRear: {fileID: 0}
+      _darkSprite:
+        _normalFront: {fileID: 0}
+        _normalRear: {fileID: 0}
+        _backFront: {fileID: 0}
+        _backRear: {fileID: 0}
       _spriteOrLightRed:
         _normalFront: {fileID: 0}
         _normalRear: {fileID: 0}
@@ -499,6 +649,16 @@ MonoBehaviour:
     _parentBoneName: {fileID: 11400000, guid: c66efafae0b82384d8b4212c78358e52, type: 2}
     _sprite:
       _isColorRanged: 0
+      _spriteOrLightSprite:
+        _normalFront: {fileID: 0}
+        _normalRear: {fileID: 0}
+        _backFront: {fileID: 0}
+        _backRear: {fileID: 0}
+      _darkSprite:
+        _normalFront: {fileID: 0}
+        _normalRear: {fileID: 0}
+        _backFront: {fileID: 0}
+        _backRear: {fileID: 0}
       _spriteOrLightRed:
         _normalFront: {fileID: 0}
         _normalRear: {fileID: 0}
@@ -531,6 +691,16 @@ MonoBehaviour:
     _parentBoneName: {fileID: 11400000, guid: a90fd0bc3132c214395dee60b9a645ae, type: 2}
     _sprite:
       _isColorRanged: 0
+      _spriteOrLightSprite:
+        _normalFront: {fileID: 0}
+        _normalRear: {fileID: 0}
+        _backFront: {fileID: 0}
+        _backRear: {fileID: 0}
+      _darkSprite:
+        _normalFront: {fileID: 0}
+        _normalRear: {fileID: 0}
+        _backFront: {fileID: 0}
+        _backRear: {fileID: 0}
       _spriteOrLightRed:
         _normalFront: {fileID: 0}
         _normalRear: {fileID: 0}
@@ -563,6 +733,16 @@ MonoBehaviour:
     _parentBoneName: {fileID: 11400000, guid: a90fd0bc3132c214395dee60b9a645ae, type: 2}
     _sprite:
       _isColorRanged: 0
+      _spriteOrLightSprite:
+        _normalFront: {fileID: 0}
+        _normalRear: {fileID: 0}
+        _backFront: {fileID: 0}
+        _backRear: {fileID: 0}
+      _darkSprite:
+        _normalFront: {fileID: 0}
+        _normalRear: {fileID: 0}
+        _backFront: {fileID: 0}
+        _backRear: {fileID: 0}
       _spriteOrLightRed:
         _normalFront: {fileID: 0}
         _normalRear: {fileID: 0}
@@ -595,6 +775,16 @@ MonoBehaviour:
     _parentBoneName: {fileID: 11400000, guid: a90fd0bc3132c214395dee60b9a645ae, type: 2}
     _sprite:
       _isColorRanged: 0
+      _spriteOrLightSprite:
+        _normalFront: {fileID: 0}
+        _normalRear: {fileID: 0}
+        _backFront: {fileID: 0}
+        _backRear: {fileID: 0}
+      _darkSprite:
+        _normalFront: {fileID: 0}
+        _normalRear: {fileID: 0}
+        _backFront: {fileID: 0}
+        _backRear: {fileID: 0}
       _spriteOrLightRed:
         _normalFront: {fileID: 0}
         _normalRear: {fileID: 0}
@@ -627,11 +817,21 @@ MonoBehaviour:
     _parentBoneName: {fileID: 11400000, guid: a90fd0bc3132c214395dee60b9a645ae, type: 2}
     _sprite:
       _isColorRanged: 0
-      _spriteOrLightRed:
+      _spriteOrLightSprite:
         _normalFront: {fileID: 21300000, guid: d81e2b78432e6b94cb42e32a43bbec75, type: 3}
         _normalRear: {fileID: 21300000, guid: d81e2b78432e6b94cb42e32a43bbec75, type: 3}
         _backFront: {fileID: 21300000, guid: d81e2b78432e6b94cb42e32a43bbec75, type: 3}
         _backRear: {fileID: 21300000, guid: d81e2b78432e6b94cb42e32a43bbec75, type: 3}
+      _darkSprite:
+        _normalFront: {fileID: 0}
+        _normalRear: {fileID: 0}
+        _backFront: {fileID: 0}
+        _backRear: {fileID: 0}
+      _spriteOrLightRed:
+        _normalFront: {fileID: 0}
+        _normalRear: {fileID: 0}
+        _backFront: {fileID: 0}
+        _backRear: {fileID: 0}
       _darkRed:
         _normalFront: {fileID: 0}
         _normalRear: {fileID: 0}

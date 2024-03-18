@@ -8,51 +8,41 @@ namespace SkeletalSprite
     public class ColorRangedBoneSprite
     {
         [SerializeField] private bool _isColorRanged;
-        [SerializeField] private BoneSprite _spriteOrLightRed;
-        [SerializeField] private BoneSprite _darkRed;
-        [SerializeField] private BoneSprite _lightOther;
-        [SerializeField] private BoneSprite _darkOther;
+        [SerializeField] private BoneSprite _spriteOrLightSprite;
+        [SerializeField] private BoneSprite _darkSprite;
 
         public bool IsColorRanged => _isColorRanged;
-        public BoneSprite Sprite => !_isColorRanged ? _spriteOrLightRed : throw new System.Exception();
-        public BoneSprite LightRed => _isColorRanged ? _spriteOrLightRed : throw new System.Exception();
-        public BoneSprite DarkRed => _isColorRanged ? _darkRed : throw new System.Exception();
-        public BoneSprite LightOther => _isColorRanged ? _lightOther : throw new System.Exception();
-        public BoneSprite DarkOther => _isColorRanged ? _darkOther : throw new System.Exception();
-        public BoneSprite Icon => _spriteOrLightRed;
+        public BoneSprite Sprite => !_isColorRanged ? _spriteOrLightSprite : throw new System.Exception();
+        public BoneSprite LightSprite => _isColorRanged ? _spriteOrLightSprite : throw new System.Exception();
+        public BoneSprite DarkSprite => _isColorRanged ? _darkSprite : throw new System.Exception();
+        public BoneSprite Icon => _spriteOrLightSprite;
 
         public ColorRangedBoneSprite() { }
 
         public ColorRangedBoneSprite(BoneSprite sprite)
         {
-            _spriteOrLightRed = sprite;
+            _spriteOrLightSprite = sprite;
             _isColorRanged = false;
         }
 
-        public ColorRangedBoneSprite(BoneSprite lightRed, BoneSprite darkRed, BoneSprite lightOther, BoneSprite darkOther)
+        public ColorRangedBoneSprite(BoneSprite lightSprite, BoneSprite darkSprite)
         {
-            _spriteOrLightRed = lightRed;
-            _darkRed = darkRed;
-            _lightOther = lightOther;
-            _darkOther = darkOther;
+            _spriteOrLightSprite = lightSprite;
+            _darkSprite = darkSprite;
             _isColorRanged = true;
         }
 
         public BoneSprite GetSprite(bool bright)
         {
-            if (!_isColorRanged) return Sprite;
-
-            if (bright) return _lightOther;
-            else return _darkOther;
+            if (!_isColorRanged || bright) return _spriteOrLightSprite;
+            else return _darkSprite;
         }
 
         public void Validate()
         {
             if (!_isColorRanged)
             {
-                _darkRed = null;
-                _lightOther = null;
-                _darkOther = null;
+                _darkSprite = null;
             }
         }
     }

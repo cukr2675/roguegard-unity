@@ -17,162 +17,342 @@ MonoBehaviour:
   - _format: Eye1R{0}{1}_NF
     _rect:
       x: 0
-      y: 48
+      y: 56
       width: 16
-      height: 16
+      height: 8
     _pixelSize: {x: 2, y: 4}
     _padding: {x: 2, y: 0}
     _pixelPivot: {x: 1, y: 1}
   - _format: Eye1L{0}{1}_NF
     _rect:
       x: 1
-      y: 48
+      y: 56
       width: 16
-      height: 16
+      height: 8
     _pixelSize: {x: 3, y: 4}
     _padding: {x: 1, y: 0}
     _pixelPivot: {x: 1, y: 1}
   - _format: Eye2R{0}{1}_NF
     _rect:
       x: 16
-      y: 48
+      y: 56
       width: 21
-      height: 16
+      height: 8
     _pixelSize: {x: 3, y: 4}
     _padding: {x: 2, y: 0}
     _pixelPivot: {x: 2, y: 1}
   - _format: Eye2L{0}{1}_NF
     _rect:
       x: 18
-      y: 48
+      y: 56
       width: 21
-      height: 16
+      height: 8
     _pixelSize: {x: 4, y: 4}
     _padding: {x: 1, y: 0}
     _pixelPivot: {x: 1, y: 1}
   - _format: Eye3R{0}{1}_NF
     _rect:
       x: 0
-      y: 32
+      y: 48
       width: 21
-      height: 16
+      height: 8
     _pixelSize: {x: 3, y: 4}
     _padding: {x: 2, y: 0}
     _pixelPivot: {x: 2, y: 1}
   - _format: Eye3L{0}{1}_NF
     _rect:
       x: 2
-      y: 32
+      y: 48
       width: 21
-      height: 16
+      height: 8
     _pixelSize: {x: 4, y: 4}
     _padding: {x: 1, y: 0}
     _pixelPivot: {x: 1, y: 1}
   - _format: Eye4R{0}{1}_NF
     _rect:
       x: 21
-      y: 32
+      y: 48
       width: 21
-      height: 16
+      height: 8
     _pixelSize: {x: 3, y: 4}
     _padding: {x: 2, y: 0}
     _pixelPivot: {x: 2, y: 1}
   - _format: Eye4L{0}{1}_NF
     _rect:
       x: 23
-      y: 32
+      y: 48
       width: 21
-      height: 16
+      height: 8
     _pixelSize: {x: 4, y: 4}
     _padding: {x: 1, y: 0}
     _pixelPivot: {x: 1, y: 1}
   - _format: Eye5R{0}{1}_NF
     _rect:
       x: 42
-      y: 32
+      y: 48
       width: 21
-      height: 16
+      height: 8
     _pixelSize: {x: 3, y: 4}
     _padding: {x: 2, y: 0}
     _pixelPivot: {x: 2, y: 1}
   - _format: Eye5L{0}{1}_NF
     _rect:
       x: 44
-      y: 32
+      y: 48
       width: 21
-      height: 16
+      height: 8
     _pixelSize: {x: 4, y: 4}
     _padding: {x: 1, y: 0}
     _pixelPivot: {x: 1, y: 1}
   - _format: Eye6R{0}{1}_NF
     _rect:
       x: 0
-      y: 16
+      y: 40
       width: 26
-      height: 16
+      height: 8
     _pixelSize: {x: 4, y: 4}
     _padding: {x: 2, y: 0}
     _pixelPivot: {x: 3, y: 1}
   - _format: Eye6L{0}{1}_NF
     _rect:
       x: 3
-      y: 16
+      y: 40
       width: 26
-      height: 16
+      height: 8
     _pixelSize: {x: 5, y: 4}
     _padding: {x: 1, y: 0}
     _pixelPivot: {x: 1, y: 1}
   - _format: Eye7R{0}{1}_NF
     _rect:
       x: 25
-      y: 16
+      y: 40
       width: 29
-      height: 16
+      height: 8
     _pixelSize: {x: 4, y: 4}
     _padding: {x: 3, y: 0}
     _pixelPivot: {x: 3, y: 1}
   - _format: Eye7L{0}{1}_NF
     _rect:
       x: 28
-      y: 16
+      y: 40
       width: 29
-      height: 16
+      height: 8
     _pixelSize: {x: 5, y: 4}
     _padding: {x: 2, y: 0}
     _pixelPivot: {x: 1, y: 1}
   - _format: Eye8R{0}{1}_NF
     _rect:
       x: 0
-      y: 0
+      y: 32
       width: 29
-      height: 16
+      height: 8
     _pixelSize: {x: 4, y: 4}
     _padding: {x: 3, y: 0}
     _pixelPivot: {x: 3, y: 1}
   - _format: Eye8L{0}{1}_NF
     _rect:
       x: 3
-      y: 0
+      y: 32
       width: 29
-      height: 16
+      height: 8
     _pixelSize: {x: 5, y: 4}
     _padding: {x: 2, y: 0}
     _pixelPivot: {x: 1, y: 1}
   - _format: Eye9R{0}{1}_NF
     _rect:
       x: 29
-      y: 0
+      y: 32
       width: 29
-      height: 16
+      height: 8
     _pixelSize: {x: 4, y: 4}
     _padding: {x: 3, y: 0}
     _pixelPivot: {x: 3, y: 1}
   - _format: Eye9L{0}{1}_NF
     _rect:
       x: 32
-      y: 0
+      y: 32
       width: 29
-      height: 16
+      height: 8
     _pixelSize: {x: 5, y: 4}
     _padding: {x: 2, y: 0}
+    _pixelPivot: {x: 1, y: 1}
+  - _format: Eye10R{0}{1}_NF
+    _rect:
+      x: 0
+      y: 24
+      width: 29
+      height: 8
+    _pixelSize: {x: 4, y: 4}
+    _padding: {x: 3, y: 0}
+    _pixelPivot: {x: 3, y: 1}
+  - _format: Eye10L{0}{1}_NF
+    _rect:
+      x: 3
+      y: 24
+      width: 26
+      height: 8
+    _pixelSize: {x: 5, y: 4}
+    _padding: {x: 2, y: 0}
+    _pixelPivot: {x: 1, y: 1}
+  - _format: Eye11R{0}{1}_NF
+    _rect:
+      x: 28
+      y: 24
+      width: 29
+      height: 8
+    _pixelSize: {x: 4, y: 4}
+    _padding: {x: 3, y: 0}
+    _pixelPivot: {x: 3, y: 1}
+  - _format: Eye11L{0}{1}_NF
+    _rect:
+      x: 31
+      y: 24
+      width: 29
+      height: 8
+    _pixelSize: {x: 5, y: 4}
+    _padding: {x: 2, y: 0}
+    _pixelPivot: {x: 1, y: 1}
+  - _format: Eye12R{0}{1}_NF
+    _rect:
+      x: 0
+      y: 16
+      width: 16
+      height: 8
+    _pixelSize: {x: 2, y: 4}
+    _padding: {x: 2, y: 0}
+    _pixelPivot: {x: 1, y: 1}
+  - _format: Eye12L{0}{1}_NF
+    _rect:
+      x: 1
+      y: 16
+      width: 16
+      height: 8
+    _pixelSize: {x: 3, y: 4}
+    _padding: {x: 1, y: 0}
+    _pixelPivot: {x: 1, y: 1}
+  - _format: Eye13R{0}{1}_NF
+    _rect:
+      x: 16
+      y: 16
+      width: 21
+      height: 8
+    _pixelSize: {x: 3, y: 4}
+    _padding: {x: 2, y: 0}
+    _pixelPivot: {x: 2, y: 1}
+  - _format: Eye13L{0}{1}_NF
+    _rect:
+      x: 18
+      y: 16
+      width: 21
+      height: 8
+    _pixelSize: {x: 4, y: 4}
+    _padding: {x: 1, y: 0}
+    _pixelPivot: {x: 1, y: 1}
+  - _format: Eye14R{0}{1}_NF
+    _rect:
+      x: 37
+      y: 16
+      width: 21
+      height: 8
+    _pixelSize: {x: 3, y: 4}
+    _padding: {x: 2, y: 0}
+    _pixelPivot: {x: 2, y: 1}
+  - _format: Eye14L{0}{1}_NF
+    _rect:
+      x: 39
+      y: 16
+      width: 21
+      height: 8
+    _pixelSize: {x: 4, y: 4}
+    _padding: {x: 1, y: 0}
+    _pixelPivot: {x: 1, y: 1}
+  - _format: Eye15R{0}{1}_NF
+    _rect:
+      x: 0
+      y: 8
+      width: 29
+      height: 8
+    _pixelSize: {x: 4, y: 4}
+    _padding: {x: 3, y: 0}
+    _pixelPivot: {x: 3, y: 1}
+  - _format: Eye15L{0}{1}_NF
+    _rect:
+      x: 3
+      y: 8
+      width: 29
+      height: 8
+    _pixelSize: {x: 5, y: 4}
+    _padding: {x: 2, y: 0}
+    _pixelPivot: {x: 1, y: 1}
+  - _format: Eye16R{0}{1}_NF
+    _rect:
+      x: 29
+      y: 8
+      width: 29
+      height: 8
+    _pixelSize: {x: 4, y: 4}
+    _padding: {x: 3, y: 0}
+    _pixelPivot: {x: 3, y: 1}
+  - _format: Eye16L{0}{1}_NF
+    _rect:
+      x: 32
+      y: 8
+      width: 29
+      height: 8
+    _pixelSize: {x: 5, y: 4}
+    _padding: {x: 2, y: 0}
+    _pixelPivot: {x: 1, y: 1}
+  - _format: Eye17R{0}{1}_NF
+    _rect:
+      x: 0
+      y: 0
+      width: 16
+      height: 8
+    _pixelSize: {x: 2, y: 4}
+    _padding: {x: 2, y: 0}
+    _pixelPivot: {x: 1, y: 1}
+  - _format: Eye17L{0}{1}_NF
+    _rect:
+      x: 1
+      y: 0
+      width: 16
+      height: 8
+    _pixelSize: {x: 3, y: 4}
+    _padding: {x: 1, y: 0}
+    _pixelPivot: {x: 1, y: 1}
+  - _format: Eye18R{0}{1}_NF
+    _rect:
+      x: 13
+      y: 0
+      width: 21
+      height: 8
+    _pixelSize: {x: 3, y: 4}
+    _padding: {x: 2, y: 0}
+    _pixelPivot: {x: 2, y: 1}
+  - _format: Eye18L{0}{1}_NF
+    _rect:
+      x: 15
+      y: 0
+      width: 21
+      height: 8
+    _pixelSize: {x: 4, y: 4}
+    _padding: {x: 1, y: 0}
+    _pixelPivot: {x: 1, y: 1}
+  - _format: Eye19R{0}{1}_NF
+    _rect:
+      x: 34
+      y: 0
+      width: 21
+      height: 8
+    _pixelSize: {x: 3, y: 4}
+    _padding: {x: 2, y: 0}
+    _pixelPivot: {x: 2, y: 1}
+  - _format: Eye19L{0}{1}_NF
+    _rect:
+      x: 36
+      y: 0
+      width: 21
+      height: 8
+    _pixelSize: {x: 4, y: 4}
+    _padding: {x: 1, y: 0}
     _pixelPivot: {x: 1, y: 1}

@@ -24,6 +24,16 @@ MonoBehaviour:
   _isBone: 1
   _sprite:
     _isColorRanged: 0
+    _spriteOrLightSprite:
+      _normalFront: {fileID: -2136853133, guid: 9da13b7471ed81649be9ee18bea48cf0, type: 3}
+      _normalRear: {fileID: 0}
+      _backFront: {fileID: -550886237, guid: 9da13b7471ed81649be9ee18bea48cf0, type: 3}
+      _backRear: {fileID: 0}
+    _darkSprite:
+      _normalFront: {fileID: 0}
+      _normalRear: {fileID: 0}
+      _backFront: {fileID: 0}
+      _backRear: {fileID: 0}
     _spriteOrLightRed:
       _normalFront: {fileID: -2136853133, guid: 9da13b7471ed81649be9ee18bea48cf0, type: 3}
       _normalRear: {fileID: 0}

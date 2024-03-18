@@ -40,15 +40,11 @@ namespace Roguegard.Editor
         {
             if (colorRanged)
             {
-                var lightRed = GetSprites(format, args.Append(0));
-                var darkRed = GetSprites(format, args.Append(1));
-                var lightOther = GetSprites(format, args.Append(2));
-                var darkOther = GetSprites(format, args.Append(3));
-                if (lightRed.Any() && darkRed.Any() && lightOther.Any() && darkOther.Any())
+                var lightSprites = GetSprites(format, args.Append(0));
+                var darkSprites = GetSprites(format, args.Append(1));
+                if (lightSprites.Any() && darkSprites.Any())
                 {
-                    return new ColorRangedBoneSprite(
-                        CreateBoneSprite(lightRed), CreateBoneSprite(darkRed),
-                        CreateBoneSprite(lightOther), CreateBoneSprite(darkOther));
+                    return new ColorRangedBoneSprite(CreateBoneSprite(lightSprites), CreateBoneSprite(darkSprites));
                 }
             }
             else

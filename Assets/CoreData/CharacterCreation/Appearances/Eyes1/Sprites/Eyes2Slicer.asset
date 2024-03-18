@@ -14,183 +14,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _targetTexture: {fileID: 2800000, guid: 5f3252285c7b2b04cab5e503bf085574, type: 3}
   _slicers:
-  - _format: Eye10R{0}{1}_NF
+  - _format: Eye20R{0}{1}_NF
     _rect:
       x: 0
-      y: 48
-      width: 29
-      height: 16
-    _pixelSize: {x: 4, y: 4}
-    _padding: {x: 3, y: 0}
-    _pixelPivot: {x: 3, y: 1}
-  - _format: Eye10L{0}{1}_NF
-    _rect:
-      x: 3
-      y: 48
+      y: 56
       width: 26
-      height: 16
-    _pixelSize: {x: 5, y: 4}
-    _padding: {x: 2, y: 0}
-    _pixelPivot: {x: 1, y: 1}
-  - _format: Eye11R{0}{1}_NF
-    _rect:
-      x: 28
-      y: 48
-      width: 29
-      height: 16
+      height: 8
     _pixelSize: {x: 4, y: 4}
-    _padding: {x: 3, y: 0}
+    _padding: {x: 2, y: 0}
     _pixelPivot: {x: 3, y: 1}
-  - _format: Eye11L{0}{1}_NF
-    _rect:
-      x: 31
-      y: 48
-      width: 29
-      height: 16
-    _pixelSize: {x: 5, y: 4}
-    _padding: {x: 2, y: 0}
-    _pixelPivot: {x: 1, y: 1}
-  - _format: Eye12R{0}{1}_NF
-    _rect:
-      x: 0
-      y: 32
-      width: 16
-      height: 16
-    _pixelSize: {x: 2, y: 4}
-    _padding: {x: 2, y: 0}
-    _pixelPivot: {x: 1, y: 1}
-  - _format: Eye12L{0}{1}_NF
-    _rect:
-      x: 1
-      y: 32
-      width: 16
-      height: 16
-    _pixelSize: {x: 3, y: 4}
-    _padding: {x: 1, y: 0}
-    _pixelPivot: {x: 1, y: 1}
-  - _format: Eye13R{0}{1}_NF
-    _rect:
-      x: 16
-      y: 32
-      width: 21
-      height: 16
-    _pixelSize: {x: 3, y: 4}
-    _padding: {x: 2, y: 0}
-    _pixelPivot: {x: 2, y: 1}
-  - _format: Eye13L{0}{1}_NF
-    _rect:
-      x: 18
-      y: 32
-      width: 21
-      height: 16
-    _pixelSize: {x: 4, y: 4}
-    _padding: {x: 1, y: 0}
-    _pixelPivot: {x: 1, y: 1}
-  - _format: Eye14R{0}{1}_NF
-    _rect:
-      x: 37
-      y: 32
-      width: 21
-      height: 16
-    _pixelSize: {x: 3, y: 4}
-    _padding: {x: 2, y: 0}
-    _pixelPivot: {x: 2, y: 1}
-  - _format: Eye14L{0}{1}_NF
-    _rect:
-      x: 39
-      y: 32
-      width: 21
-      height: 16
-    _pixelSize: {x: 4, y: 4}
-    _padding: {x: 1, y: 0}
-    _pixelPivot: {x: 1, y: 1}
-  - _format: Eye15R{0}{1}_NF
-    _rect:
-      x: 0
-      y: 16
-      width: 29
-      height: 16
-    _pixelSize: {x: 4, y: 4}
-    _padding: {x: 3, y: 0}
-    _pixelPivot: {x: 3, y: 1}
-  - _format: Eye15L{0}{1}_NF
+  - _format: Eye20L{0}{1}_NF
     _rect:
       x: 3
-      y: 16
-      width: 29
-      height: 16
+      y: 56
+      width: 26
+      height: 8
     _pixelSize: {x: 5, y: 4}
-    _padding: {x: 2, y: 0}
-    _pixelPivot: {x: 1, y: 1}
-  - _format: Eye16R{0}{1}_NF
-    _rect:
-      x: 29
-      y: 16
-      width: 29
-      height: 16
-    _pixelSize: {x: 4, y: 4}
-    _padding: {x: 3, y: 0}
-    _pixelPivot: {x: 3, y: 1}
-  - _format: Eye16L{0}{1}_NF
-    _rect:
-      x: 32
-      y: 16
-      width: 29
-      height: 16
-    _pixelSize: {x: 5, y: 4}
-    _padding: {x: 2, y: 0}
-    _pixelPivot: {x: 1, y: 1}
-  - _format: Eye17R{0}{1}_NF
-    _rect:
-      x: 0
-      y: 0
-      width: 16
-      height: 16
-    _pixelSize: {x: 2, y: 4}
-    _padding: {x: 2, y: 0}
-    _pixelPivot: {x: 1, y: 1}
-  - _format: Eye17L{0}{1}_NF
-    _rect:
-      x: 1
-      y: 0
-      width: 16
-      height: 16
-    _pixelSize: {x: 3, y: 4}
-    _padding: {x: 1, y: 0}
-    _pixelPivot: {x: 1, y: 1}
-  - _format: Eye18R{0}{1}_NF
-    _rect:
-      x: 13
-      y: 0
-      width: 21
-      height: 16
-    _pixelSize: {x: 3, y: 4}
-    _padding: {x: 2, y: 0}
-    _pixelPivot: {x: 2, y: 1}
-  - _format: Eye18L{0}{1}_NF
-    _rect:
-      x: 15
-      y: 0
-      width: 21
-      height: 16
-    _pixelSize: {x: 4, y: 4}
-    _padding: {x: 1, y: 0}
-    _pixelPivot: {x: 1, y: 1}
-  - _format: Eye19R{0}{1}_NF
-    _rect:
-      x: 34
-      y: 0
-      width: 21
-      height: 16
-    _pixelSize: {x: 3, y: 4}
-    _padding: {x: 2, y: 0}
-    _pixelPivot: {x: 2, y: 1}
-  - _format: Eye19L{0}{1}_NF
-    _rect:
-      x: 36
-      y: 0
-      width: 21
-      height: 16
-    _pixelSize: {x: 4, y: 4}
     _padding: {x: 1, y: 0}
     _pixelPivot: {x: 1, y: 1}

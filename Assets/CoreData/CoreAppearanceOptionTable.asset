@@ -95,6 +95,10 @@ MonoBehaviour:
     _asset: {fileID: 11400000, guid: 17fd41385d2157641bc150f885201e57, type: 2}
   - _key: Core.Eye19R
     _asset: {fileID: 11400000, guid: 0213af274c3e88d48aa45e70b02d5e5f, type: 2}
+  - _key: Core.Eye20L
+    _asset: {fileID: 11400000, guid: 9e578f725e2b6564dad835ef13fad9ea, type: 2}
+  - _key: Core.Eye20R
+    _asset: {fileID: 11400000, guid: e1fd7e370753af74ba101e3a4c342427, type: 2}
   - _key: Core.Hair1
     _asset: {fileID: 11400000, guid: dd45398b31707594396bf2674adc6041, type: 2}
   - _key: Core.Hair2
@@ -109,6 +113,8 @@ MonoBehaviour:
     _asset: {fileID: 11400000, guid: 03505c7063caf904c952eae9588ff7d4, type: 2}
   - _key: Core.Hair7
     _asset: {fileID: 11400000, guid: 8c2a8f62afe19af408e357049b34228f, type: 2}
+  - _key: Core.Hair8
+    _asset: {fileID: 11400000, guid: 05b6b1d8fcad1e54984aea057c80ea21, type: 2}
   - _key: Core.AnimalHead
     _asset: {fileID: 11400000, guid: 695f02daad110034cb5f586a5c23c4c0, type: 2}
   - _key: Core.GoblinHead
