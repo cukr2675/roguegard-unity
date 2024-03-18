@@ -7,6 +7,6 @@ namespace SkeletalSprite
     public static class SkeletalSpriteUtility
     {
         public static int DefaultPixelsPerUnit => 32;
-        public static float LightDarkThreshold => .2f;
+        public static float LightDarkThreshold => .4f;
     }
 }

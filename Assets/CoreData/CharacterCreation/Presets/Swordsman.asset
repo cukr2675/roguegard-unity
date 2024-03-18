@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Swordsman
   m_EditorClassIdentifier: 
   _overridesCost: 0
-  _cost: 16
+  _cost: 17
   _costIsUnknown: 0
   _descriptionName: 
   _shortName: "\u5263\u58EB"
@@ -47,7 +47,7 @@ MonoBehaviour:
       - rid: 1446735840404570113
   - _option: {fileID: 11400000, guid: dd45398b31707594396bf2674adc6041, type: 2}
     _optionDescription: {fileID: 0}
-    _color: {r: 0.4, g: 0.3529412, b: 0.35686275, a: 1}
+    _color: {r: 0.39607844, g: 0.3529412, b: 0.35686275, a: 1}
     _members:
       _items: []
   - _option: {fileID: 11400000, guid: 4ed202ff619b0b744a4f0be7bca8218f, type: 2}
