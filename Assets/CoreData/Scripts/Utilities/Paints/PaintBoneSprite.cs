@@ -16,7 +16,13 @@ namespace Roguegard
         public DotterBoard BackRear { get; set; }
         public int PivotDistance { get; set; }
 
-        public BoneKeyword Bone { get; set; }
+        private string _bone;
+        public BoneKeyword Bone
+        {
+            get => new BoneKeyword(_bone);
+            set => _bone = value.Name;
+        }
+
         public bool Mirroring { get; set; }
         public bool IsFirst { get; set; }
         public bool OverridesSourceColor { get; set; }
