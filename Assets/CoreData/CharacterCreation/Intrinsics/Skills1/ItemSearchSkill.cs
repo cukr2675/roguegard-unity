@@ -36,9 +36,9 @@ namespace Roguegard.CharacterCreation
                 for (int i = 0; i < locationObjs.Count; i++)
                 {
                     var obj = locationObjs[i];
-                    if (obj == null || obj.HasCollider) continue;
+                    if (obj == null || obj.HasCollider || obj.AsTile) continue;
 
-                    viewInfo.AddVisibleObj(obj);
+                    viewInfo.AddVisibleObj(obj, true); // オブジェクトだけだと見づらいのでタイルも表示する
                     any = true;
                 }
                 if (any)

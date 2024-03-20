@@ -52,6 +52,13 @@ namespace Roguegard
             VisibleObjs.TryAddUnique(obj);
         }
 
+        public void AddPoint(Vector2Int point)
+        {
+            var locationSpace = Location.Space;
+            var tile = locationSpace.Tilemap.GetTop(point);
+            SetTile(tile, point.x, point.y);
+        }
+
         public void AddView(RogueObj self)
         {
             if (self.Location != Location) return;
