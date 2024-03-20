@@ -12,10 +12,10 @@ namespace Roguegard.CharacterCreation
         [SerializeField] private bool _overridesCost = false;
         public bool OverridesCost => _overridesCost;
 
-        [SerializeField] private float _cost = 0f;
+        [SerializeField, EnabledBy(nameof(_overridesCost))] private float _cost = 0f;
         public float Cost => _cost;
 
-        [SerializeField] private bool _costIsUnknown = false;
+        [SerializeField, EnabledBy(nameof(_overridesCost))] private bool _costIsUnknown = false;
         public bool CostIsUnknown => _costIsUnknown;
 
         [System.NonSerialized] private GrowingInfoSetTable _infoSets;

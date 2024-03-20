@@ -26,7 +26,7 @@ namespace Roguegard.CharacterCreation
 
         [SerializeField] private bool _overridesBoneSpriteEffectOrder;
 
-        [SerializeField] private float _boneSpriteEffectOrder;
+        [SerializeField, EnabledBy(nameof(_overridesBoneSpriteEffectOrder))] private float _boneSpriteEffectOrder;
 
         [SerializeField] private ScriptField<IApplyRogueMethod> _beEquipped;
 
