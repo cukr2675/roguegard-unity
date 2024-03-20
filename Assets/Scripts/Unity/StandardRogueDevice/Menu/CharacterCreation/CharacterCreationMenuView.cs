@@ -19,7 +19,7 @@ namespace RoguegardUnity
         [SerializeField] private RectTransform _appearanceParent = null;
         [SerializeField] private ModelsMenuViewItemButton _appearanceButton = null;
         [SerializeField] private TMP_InputField _nameField = null;
-        [SerializeField] private TMP_InputField _shortNameField = null;
+        [SerializeField] private CharacterCreationStarsItem _stars = null;
         [SerializeField] private ModelsMenuViewItemButton _raceButton = null;
         [SerializeField] private RectTransform _secondParent = null;
         [SerializeField] private ModelsMenuViewItemButton _headerPrefab = null;
@@ -61,7 +61,6 @@ namespace RoguegardUnity
             _presetButton.Initialize(this);
             _exitButton.Initialize(this);
             _nameField.onValueChanged.AddListener(text => builder.Name = text);
-            _shortNameField.onValueChanged.AddListener(text => builder.ShortName = text);
         }
 
         public override void OpenView<T>(
@@ -90,7 +89,9 @@ namespace RoguegardUnity
             obj.Main.Sprite.SetTo(spriteRenderer, spriteTransform.PoseSource.GetSpritePose(spriteTransform.Direction), spriteTransform.Direction);
 
             _nameField.text = builder.Name;
-            _shortNameField.text = builder.ShortName;
+            builder.UpdateCost();
+            var stars = RoguegardCharacterCreationSettings.GetStars(builder.Cost);
+            _stars.SetStars(stars, builder.CostIsUnknown);
 
             foreach (var itemObject in itemObjects)
             {

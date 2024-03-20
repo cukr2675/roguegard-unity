@@ -5,6 +5,7 @@ using UnityEngine;
 using Roguegard;
 using Roguegard.CharacterCreation;
 using Roguegard.Device;
+using TMPro;
 
 namespace RoguegardUnity
 {
@@ -25,6 +26,7 @@ namespace RoguegardUnity
             if (arg.Other is RaceBuilder raceBuilder)
             {
                 models.Clear();
+                models.Add(new ShortNameOption(removeChoice.builder));
                 models.Add(new SelectOptionChoice(raceBuilder, database));
                 models.Add(new GenderOption(database));
                 models.Add(new ColorPicker());
@@ -82,6 +84,33 @@ namespace RoguegardUnity
                     raceBuilder.Option.UpdateMemberRange(standardRaceMember, raceBuilder.Option, removeChoice.builder);
                     models.Add(new CommonSlider(standardRaceMember, (IStandardRaceOption)raceBuilder.Option));
                 }
+            }
+        }
+
+        private class ShortNameOption : IModelsMenuOptionText
+        {
+            private readonly CharacterCreationDataBuilder builder;
+
+            public TMP_InputField.ContentType ContentType => TMP_InputField.ContentType.Standard;
+
+            public ShortNameOption(CharacterCreationDataBuilder builder)
+            {
+                this.builder = builder;
+            }
+
+            public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            {
+                return "êEã∆Å^ìÒÇ¬ñº";
+            }
+
+            public string GetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            {
+                return builder.ShortName;
+            }
+
+            public void SetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg, string value)
+            {
+                builder.ShortName = value;
             }
         }
 

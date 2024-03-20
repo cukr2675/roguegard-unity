@@ -90,7 +90,7 @@ namespace Roguegard.CharacterCreation
             growingInfoSets = new GrowingInfoSetTable(this);
         }
 
-        private void UpdateCost()
+        public void UpdateCost()
         {
             Cost = Race.Option.Cost;
             CostIsUnknown = Race.Option.CostIsUnknown;
