@@ -209,6 +209,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8478593782216466303}
     m_Modifications:
+    - target: {fileID: 457216403670546925, guid: 43344a6d014a9af49b36f0d875b62eb0, type: 3}
+      propertyPath: m_fontSize
+      value: 96
+      objectReference: {fileID: 0}
+    - target: {fileID: 457216403670546925, guid: 43344a6d014a9af49b36f0d875b62eb0, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 96
+      objectReference: {fileID: 0}
+    - target: {fileID: 457216403670546925, guid: 43344a6d014a9af49b36f0d875b62eb0, type: 3}
+      propertyPath: m_VerticalAlignment
+      value: 512
+      objectReference: {fileID: 0}
     - target: {fileID: 2675354955996275455, guid: 43344a6d014a9af49b36f0d875b62eb0, type: 3}
       propertyPath: m_Name
       value: RogueInputField
@@ -292,6 +304,18 @@ PrefabInstance:
     - target: {fileID: 5904481867483224445, guid: 43344a6d014a9af49b36f0d875b62eb0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6192443445496099765, guid: 43344a6d014a9af49b36f0d875b62eb0, type: 3}
+      propertyPath: m_fontSize
+      value: 96
+      objectReference: {fileID: 0}
+    - target: {fileID: 6192443445496099765, guid: 43344a6d014a9af49b36f0d875b62eb0, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 96
+      objectReference: {fileID: 0}
+    - target: {fileID: 6192443445496099765, guid: 43344a6d014a9af49b36f0d875b62eb0, type: 3}
+      propertyPath: m_VerticalAlignment
+      value: 512
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
