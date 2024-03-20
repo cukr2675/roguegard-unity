@@ -29,6 +29,19 @@ namespace Roguegard.CharacterCreation
             }
         }
 
+        public void GenerateFloor(RogueObj player, RogueObj floor, Vector2Int position, IRogueRandom random, int frequency = -1)
+        {
+            if (frequency == -1)
+            {
+                frequency = random.Next(_minFrequency, _maxFrequency + 1);
+            }
+
+            for (int i = 0; i < frequency; i++)
+            {
+                WeightedRogueObjGeneratorUtility.CreateObj(this, floor, position, random);
+            }
+        }
+
         private static bool TryGetRandomPosition(RogueObj player, RogueObj floor, IRogueRandom random, out Vector2Int position)
         {
             const int iteration = 10;

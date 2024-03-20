@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35dd98401eaef3c4e873c88647ac9a06, type: 3}
   m_Name: BD_10
   m_EditorClassIdentifier: 
-  _endLv: 9
+  _endLv: 10
   _dungeonGenerator: {fileID: 11400000, guid: de13ed426b0bcba4e9cfd5ac098702db, type: 2}
   _enemyTable:
   - _items:
@@ -107,6 +107,7 @@ MonoBehaviour:
         _items: []
     _minFrequency: 1
     _maxFrequency: 1
+  _monsterHouseRate: 0.2
   references:
     version: 2
     RefIds: []
