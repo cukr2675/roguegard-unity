@@ -10,7 +10,7 @@ namespace Roguegard.CharacterCreation
             IReadOnlyIntrinsic intrinsic, ICharacterCreationData characterCreationData, IReadOnlyStartingItem tool, out bool costIsUnknown)
         {
             var cost = tool.Option.GetCost(tool, out costIsUnknown);
-            cost *= 2f;
+            cost *= 200f;
             return cost;
         }
 
