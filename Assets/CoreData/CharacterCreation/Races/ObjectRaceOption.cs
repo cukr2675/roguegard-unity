@@ -10,8 +10,6 @@ namespace Roguegard.CharacterCreation
     [ObjectFormer.IgnoreRequireRelationalComponent]
     public class ObjectRaceOption : IRaceOption
     {
-        [Header("RaceOption")]
-
         [SerializeField] private string _name;
         public string Name => _name;
 
