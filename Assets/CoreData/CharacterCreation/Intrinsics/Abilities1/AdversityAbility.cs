@@ -24,7 +24,7 @@ namespace Roguegard.CharacterCreation
             {
                 if (keyword == MainInfoKw.Hit && AttackUtility.GetUseValue(arg.RefValue))
                 {
-                    // 周囲8マスに敵が3体以上いるときダメージ追加
+                    // 周囲8マスに敵が4体以上いるときダメージ追加
                     var enemyCount = 0;
                     var spaceObjs = self.Location.Space.Objs;
                     for (int i = 0; i < spaceObjs.Count; i++)
@@ -34,7 +34,7 @@ namespace Roguegard.CharacterCreation
 
                         if (RogueMethodUtility.GetAdjacent(self, obj) && StatsEffectedValues.AreVS(self, obj)) { enemyCount++; }
                     }
-                    arg.RefValue.MainValue += Mathf.Max((enemyCount - 2) * 2, 0);
+                    arg.RefValue.MainValue += Mathf.Max((enemyCount - 3) * 2, 0);
                 }
                 return next.Invoke(keyword, method, self, target, activationDepth, arg);
             }
