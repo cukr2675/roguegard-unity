@@ -23,7 +23,7 @@ namespace RoguegardUnity
         [SerializeField] private ModelsMenuViewItemButton _raceButton = null;
         [SerializeField] private RectTransform _secondParent = null;
         [SerializeField] private ModelsMenuViewItemButton _headerPrefab = null;
-        [SerializeField] private ModelsMenuViewItemButton _itemButtonPrefab = null;
+        [SerializeField] private CharacterCreationMenuViewItemButton _itemButtonPrefab = null;
         [SerializeField] private ModelsMenuViewItemButton _presetButton = null;
         [SerializeField] private ModelsMenuViewItemButton _exitButton = null;
 
@@ -41,7 +41,7 @@ namespace RoguegardUnity
         private RaceChoice raceChoice;
         private AppearanceChoice appearanceChoice;
         private AppearanceBuildersMenu appearanceBuildersMenu;
-        private readonly List<ModelsMenuViewItemButton> itemObjects = new List<ModelsMenuViewItemButton>();
+        private readonly List<MonoBehaviour> itemObjects = new List<MonoBehaviour>();
         private static readonly LoadPresetChoice loadPresetChoice = new LoadPresetChoice();
 
         public void Initialize(RogueSpriteRendererPool rendererPool)
@@ -90,7 +90,7 @@ namespace RoguegardUnity
 
             _nameField.text = builder.Name;
             builder.UpdateCost();
-            var stars = RoguegardCharacterCreationSettings.GetStars(builder.Cost);
+            var stars = RoguegardCharacterCreationSettings.GetCharacterStars(builder.Cost);
             _stars.SetStars(stars, builder.CostIsUnknown);
 
             foreach (var itemObject in itemObjects)
@@ -116,14 +116,14 @@ namespace RoguegardUnity
                 var itemButton = Instantiate(_itemButtonPrefab, _secondParent);
                 SetTransform((RectTransform)itemButton.transform, ref sumHeight, ref odd);
                 itemButton.Initialize(this);
-                itemButton.SetItem(intrinsicItemController, intrinsic);
+                itemButton.SetItem(intrinsicItemController, intrinsic, builder);
                 itemObjects.Add(itemButton);
             }
             {
                 var itemButton = Instantiate(_itemButtonPrefab, _secondParent);
                 SetTransform((RectTransform)itemButton.transform, ref sumHeight, ref odd);
                 itemButton.Initialize(this);
-                itemButton.SetItem(intrinsicItemController, null);
+                itemButton.SetItem(intrinsicItemController, null, "+ 固有能力を追加");
                 itemObjects.Add(itemButton);
                 if (odd) { sumHeight += ((RectTransform)itemButton.transform).rect.height; }
             }
@@ -151,7 +151,7 @@ namespace RoguegardUnity
                 var itemButton = Instantiate(_itemButtonPrefab, _secondParent);
                 SetTransform((RectTransform)itemButton.transform, ref sumHeight, ref odd);
                 itemButton.Initialize(this);
-                itemButton.SetItem(startingItemItemController, null);
+                itemButton.SetItem(startingItemItemController, null, "+ 初期アイテムを追加");
                 itemObjects.Add(itemButton);
                 if (odd) { sumHeight += ((RectTransform)itemButton.transform).rect.height; }
             }
