@@ -97,6 +97,9 @@ namespace RoguegardUnity
             if (property.propertyType == SerializedPropertyType.Integer && property.intValue == 0) return true;
             if (property.propertyType == SerializedPropertyType.Float && property.floatValue == 0f) return true;
 
+            if (property.propertyType == SerializedPropertyType.Boolean && property.boolValue == false) return true;
+            if (property.propertyType == SerializedPropertyType.Color && property.colorValue == Color.white) return true;
+
             if (property.isArray && property.arraySize == 0) return true;
 
             if (property.propertyType == SerializedPropertyType.ObjectReference && property.objectReferenceValue == null) return true;
