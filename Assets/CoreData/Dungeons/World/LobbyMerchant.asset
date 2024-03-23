@@ -158,6 +158,13 @@ MonoBehaviour:
           _stack: 1
           _members:
             _items: []
+        - _option: {fileID: 11400000, guid: aaff18f342a3f4149b1a5d46644d9ef8, type: 2}
+          _optionDescription: {fileID: 0}
+          _generatorWeight: 1
+          _stack: 1
+          _members:
+            _items:
+            - rid: 7982931028819050499
     - rid: 3586031133046603782
       type: {class: ConstantRaceSprite, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
       data:
@@ -173,3 +180,7 @@ MonoBehaviour:
       data:
         _assemblyReflectionAssetDummy: 
         _spd: -5
+    - rid: 7982931028819050499
+      type: {class: SingleItemMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
+      data:
+        _item: {fileID: 11400000, guid: a89d1895d6b9e39429f6d5b3229a3e15, type: 2}

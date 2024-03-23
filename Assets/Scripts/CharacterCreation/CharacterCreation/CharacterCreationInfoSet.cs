@@ -181,18 +181,32 @@ namespace Roguegard.CharacterCreation
 
         public RogueObj CreateObj(RogueObj location, Vector2Int position, IRogueRandom random, StackOption stackOption = StackOption.Default)
         {
+            var obj = CreateObj(this, location, position, Data.StartingItemTable, random, stackOption, Data.Race.Lv);
+            CurrentRaceOption.InitializeObj(obj, CurrentRaceOption, Data);
+            return obj;
+        }
+
+        public static RogueObj CreateObj(
+            MainInfoSet infoSet, RogueObj location, Vector2Int position, StackOption stackOption = StackOption.Default, int initialLv = 0)
+        {
+            return CreateObj(infoSet, location, position, Spanning<IWeightedRogueObjGeneratorList>.Empty, null, stackOption, initialLv);
+        }
+
+        public static RogueObj CreateObj(
+            MainInfoSet infoSet, RogueObj location, Vector2Int position, Spanning<IWeightedRogueObjGeneratorList> startingItems, IRogueRandom random,
+            StackOption stackOption = StackOption.Default, int initialLv = 0)
+        {
             var obj = new RogueObj();
             obj.Main = new MainRogueObjInfo();
-            obj.Main.SetBaseInfoSet(obj, this);
-            RoguegardCharacterCreationSettings.LevelInfoInitializer.InitializeLv(obj, Data.Race.Lv);
+            obj.Main.SetBaseInfoSet(obj, infoSet);
+            RoguegardCharacterCreationSettings.LevelInfoInitializer.InitializeLv(obj, initialLv);
             var stats = obj.Main.Stats;
             // キャラは下向き　アイテムは矢の向きを考慮して左下向き
-            stats.Direction = CurrentRaceOption.Ability.HasFlag(MainInfoSetAbility.HasCollider) ? RogueDirection.Down : RogueDirection.LowerLeft;
+            stats.Direction = infoSet.Ability.HasFlag(MainInfoSetAbility.HasCollider) ? RogueDirection.Down : RogueDirection.LowerLeft;
             stats.Reset(obj);
-            WeightedRogueObjGeneratorUtility.CreateObjs(Data.StartingItemTable, obj, random);
+            if (startingItems.Count >= 1) { WeightedRogueObjGeneratorUtility.CreateObjs(startingItems, obj, random); }
             if (!SpaceUtility.TryLocate(obj, location, position, stackOption)) throw new RogueException("生成したオブジェクトの移動に失敗しました。");
 
-            CurrentRaceOption.InitializeObj(obj, CurrentRaceOption, Data);
             return obj;
         }
 

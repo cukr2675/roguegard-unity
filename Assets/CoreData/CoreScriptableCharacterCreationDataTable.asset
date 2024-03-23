@@ -60,6 +60,8 @@ MonoBehaviour:
     _asset: {fileID: 11400000, guid: cb94158c0ce227b478eaf371070ba86b, type: 2}
   - _key: Core.BuildingKit
     _asset: {fileID: 11400000, guid: e91d25b4588208546a844f5bc4ae66ff, type: 2}
+  - _key: Core.ConstructionKit
+    _asset: {fileID: 11400000, guid: aaff18f342a3f4149b1a5d46644d9ef8, type: 2}
   - _key: Core.LayingKit
     _asset: {fileID: 11400000, guid: e3eb826f9c4d5de44a0f733925eb1926, type: 2}
   - _key: Core.Padleaf
