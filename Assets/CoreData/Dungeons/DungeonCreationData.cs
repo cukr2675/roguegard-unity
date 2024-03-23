@@ -38,18 +38,6 @@ namespace Roguegard.CharacterCreation
                 member.Main.Stats.TryAssignParty(member, party);
             }
 
-            DungeonFloorCloserStateInfo.CloseAndRemoveNull(player, true);
-
-            // ターン経過で満腹度消費
-            // 自然回復あり
-            UseNutritionLeaderEffect.Initialize(player);
-
-            // レベルアップボーナスは HP, MP, 最大重量 から選択
-            _playerLevelInfos[0].Ref.InitializeLv(player, 1);
-
-            // 探索開始前に全回復する
-            player.Main.Stats.Reset(player);
-
             var world = RogueWorldInfo.GetWorld(player);
             var dungeon = CreateObj(world, Vector2Int.zero, random);
 
@@ -57,8 +45,28 @@ namespace Roguegard.CharacterCreation
             var dungeonSeed = random.Next(int.MinValue, int.MaxValue);
             DungeonInfo.SetSeedTo(dungeon, dungeonSeed);
 
-            player.Main.Stats.Direction = RogueDirection.Down;
-            if (!SpaceUtility.TryLocate(player, dungeon)) throw new RogueException();
+            var partyMembers = player.Main.Stats.Party.Members;
+            for (int i = 0; i < partyMembers.Count; i++)
+            {
+                var member = partyMembers[i];
+                DungeonFloorCloserStateInfo.CloseAndRemoveNull(member, true);
+
+                // レベルを初期化
+                RoguegardCharacterCreationSettings.LevelInfoInitializer.InitializeLv(member, 1);
+
+                // 探索開始前に全回復する
+                member.Main.Stats.Reset(member);
+
+                member.Main.Stats.Direction = RogueDirection.Down;
+                if (!SpaceUtility.TryLocate(member, dungeon)) throw new RogueException();
+            }
+
+            // ターン経過で満腹度消費
+            // 自然回復あり
+            UseNutritionLeaderEffect.Initialize(player);
+
+            // リーダーのレベルアップボーナスは HP, MP, 最大重量 から選択
+            _playerLevelInfos[0].Ref.InitializeLv(player, 1);
 
             //StartFloor(player, random);
         }

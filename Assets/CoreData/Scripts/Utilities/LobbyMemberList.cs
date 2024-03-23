@@ -52,6 +52,8 @@ namespace Roguegard
         {
             public LobbyMemberInfo info;
 
+            [System.NonSerialized] private bool leader;
+
             public bool IsExclusedWhenSerialize => true;
 
             float IRogueObjUpdater.Order => -priority;
@@ -67,33 +69,41 @@ namespace Roguegard
             RogueObjUpdaterContinueType IRogueObjUpdater.UpdateObj(RogueObj self, float activationDepth, ref int sectionIndex)
             {
                 var effectedPriority = RogueBehaviourNodeEffect.GetPriority(self);
-                if (priority <= effectedPriority) return default;
+                if (leader == (info.Seat != null) && priority <= effectedPriority) return default;
 
-                if (info.Seat == null)
+                RogueBehaviourNodeEffect.RemoveBehaviourNode(self, priority);
+                leader = info.Seat != null;
+                if (leader)
                 {
-                    if (priority == effectedPriority) { RogueBehaviourNodeEffect.RemoveBehaviourNode(self, priority); }
-                    return default;
+                    var ifInLobby = new IfInLobbyBehaviourNode();
+                    ifInLobby.InLobbyNode.Add(new StorageBehaviourNode());
+                    ifInLobby.InLobbyNode.Add(new AcceptQuestBehaviourNode());
+                    ifInLobby.OtherNode.Add(new AttackBehaviourNode());
+                    ifInLobby.OtherNode.Add(new PushObstacleBehaviourNode());
+
+                    var pickUp = new PickUpBehaviourNode();
+                    pickUp.DistanceThreshold = 10;
+                    pickUp.PathBuilder = new AStarPathBuilder(RoguegardSettings.MaxTilemapSize);
+                    ifInLobby.OtherNode.Add(pickUp);
+
+                    var explore = new ExploreForStairsBehaviourNode();
+                    explore.PathBuilder = pickUp.PathBuilder;
+                    explore.PositionSelector = new RoguePositionSelector();
+                    ifInLobby.OtherNode.Add(explore);
+
+                    var node = new RogueBehaviourNodeList();
+                    node.Add(ifInLobby);
+                    RogueBehaviourNodeEffect.SetBehaviourNode(self, node, priority);
                 }
-
-                var ifInLobby = new IfInLobbyBehaviourNode();
-                ifInLobby.InLobbyNode.Add(new StorageBehaviourNode());
-                ifInLobby.InLobbyNode.Add(new AcceptQuestBehaviourNode());
-                ifInLobby.OtherNode.Add(new AttackBehaviourNode());
-                ifInLobby.OtherNode.Add(new PushObstacleBehaviourNode());
-
-                var pickUp = new PickUpBehaviourNode();
-                pickUp.DistanceThreshold = 10;
-                pickUp.PathBuilder = new AStarPathBuilder(RoguegardSettings.MaxTilemapSize);
-                ifInLobby.OtherNode.Add(pickUp);
-
-                var explore = new ExploreForStairsBehaviourNode();
-                explore.PathBuilder = pickUp.PathBuilder;
-                explore.PositionSelector = new RoguePositionSelector();
-                ifInLobby.OtherNode.Add(explore);
-
-                var node = new RogueBehaviourNodeList();
-                node.Add(ifInLobby);
-                RogueBehaviourNodeEffect.SetBehaviourNode(self, node, priority);
+                else
+                {
+                    var node = new RogueBehaviourNodeList();
+                    node.Add(new AttackBehaviourNode());
+                    var follow = new FollowLeaderBehaviourNode();
+                    follow.PathBuilder = new AStarPathBuilder(RoguegardSettings.MaxTilemapSize);
+                    node.Add(follow);
+                    RogueBehaviourNodeEffect.SetBehaviourNode(self, node, priority);
+                }
                 return default;
             }
 

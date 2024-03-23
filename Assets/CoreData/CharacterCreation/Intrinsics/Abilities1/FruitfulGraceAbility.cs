@@ -22,7 +22,7 @@ namespace Roguegard.CharacterCreation
                 IKeyword keyword, IRogueMethod method, RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg,
                 RogueMethodAspectState.PassiveNext next)
             {
-                var generate = keyword == MainInfoKw.Locate && self.Location.Space.Tilemap == null;
+                var generate = keyword == MainInfoKw.Locate && self?.Location?.Space.Tilemap == null;
 
                 var result = next.Invoke(keyword, method, self, user, activationDepth, arg);
                 if (!result) return false;

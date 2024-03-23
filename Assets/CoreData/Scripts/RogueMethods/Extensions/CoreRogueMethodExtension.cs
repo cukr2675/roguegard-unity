@@ -153,8 +153,23 @@ namespace Roguegard.Extensions
                 MainInfoKw.BeDefeated, beDefeatedMethod, target, user, activationDepth, RogueMethodArgument.Identity);
             if (!defeatResult) return false;
 
-            if (user != null)
+            if (user != null && user.Main.Stats.Party != null)
             {
+                // パーティメンバー全員に経験値を与える
+                var partyMembers = user.Main.Stats.Party.Members;
+                for (int i = 0; i < partyMembers.Count; i++)
+                {
+                    using var expValue = AffectableValue.Get();
+                    expValue.Initialize(target.Main.Stats.Lv);
+                    ValueEffectState.AffectValue(StdKw.LoseExp, expValue, target);
+
+                    var addExpArg = new RogueMethodArgument(value: expValue);
+                    RogueMethodAspectState.Invoke(StdKw.LoseExp, loseExp, target, partyMembers[i], activationDepth, addExpArg);
+                }
+            }
+            else if (user != null)
+            {
+                // 経験値を与える
                 using var expValue = AffectableValue.Get();
                 expValue.Initialize(target.Main.Stats.Lv);
                 ValueEffectState.AffectValue(StdKw.LoseExp, expValue, target);

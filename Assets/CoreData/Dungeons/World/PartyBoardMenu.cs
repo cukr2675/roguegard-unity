@@ -117,10 +117,13 @@ namespace Roguegard
 
         private class CommandMenu : IModelsMenu
         {
+            private static readonly PartyBoardCharacterCreationMenu nextMenu = new PartyBoardCharacterCreationMenu();
+
             private static readonly object[] models = new object[]
             {
-                new Change(),
-                new Edit(),
+                new ActionModelsMenuChoice("交代", Change),
+                new ActionModelsMenuChoice("加入", Invite),
+                new ActionModelsMenuChoice("編集", Edit),
                 ExitModelsMenuChoice.Instance
             };
 
@@ -130,20 +133,10 @@ namespace Roguegard
                 var openArg = new RogueMethodArgument(targetObj: newPlayer);
                 root.Get(DeviceKw.MenuCommand).OpenView(ChoicesModelsMenuItemController.Instance, models, root, self, null, openArg);
             }
-        }
 
-        private class Change : IModelsMenuChoice
-        {
-            public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            private static void Change(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                // 席が設定されている場合はグレーアウト
-                var info = LobbyMemberList.GetMemberInfo(arg.TargetObj);
-                if (info?.Seat != null) return "<#808080>交代";
-                else return "交代";
-            }
-
-            public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
+                // 席が設定されている場合は失敗させる
                 var info = LobbyMemberList.GetMemberInfo(arg.TargetObj);
                 if (info?.Seat != null)
                 {
@@ -170,21 +163,53 @@ namespace Roguegard
 
                 root.Done();
             }
-        }
 
-        private class Edit : IModelsMenuChoice
-        {
-            private static readonly PartyBoardCharacterCreationMenu nextMenu = new PartyBoardCharacterCreationMenu();
-
-            public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            private static void Invite(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                return "編集";
+                // 席が設定されている場合は失敗させる
+                var info = LobbyMemberList.GetMemberInfo(arg.TargetObj);
+                if (info?.Seat != null)
+                {
+                    root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Cancel);
+                    return;
+                }
+
+                root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+                var newMember = arg.TargetObj;
+
+                // 空間移動
+                var party = self.Main.Stats.Party;
+                if (!default(IChangeStateRogueMethodCaller).LocateNextToAnyMember(newMember, self, 0f, party)) return;
+                newMember.Main.Stats.Direction = RogueDirection.Down;
+
+                // パーティ移動
+                newMember.Main.Stats.TryAssignParty(newMember, party);
+                info.Seat = null;
+                info.SavePoint = null;
+                info.ItemRegister.Clear();
+                var spaceObjs = newMember.Space.Objs;
+                for (int i = 0; i < spaceObjs.Count; i++)
+                {
+                    var item = spaceObjs[i];
+                    if (item == null) continue;
+
+                    info.ItemRegister.Add(item);
+                }
+
+                root.Done();
             }
 
-            public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            private static void Edit(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
+                // 席が設定されている場合は失敗させる
+                var info = LobbyMemberList.GetMemberInfo(arg.TargetObj);
+                if (info?.Seat != null)
+                {
+                    root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Cancel);
+                    return;
+                }
+
                 var character = arg.TargetObj;
-                var info = LobbyMemberList.GetMemberInfo(character);
                 var builder = new CharacterCreationDataBuilder(info.CharacterCreationData);
 
                 root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);

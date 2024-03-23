@@ -47,6 +47,7 @@ namespace RoguegardUnity
         public bool FastForward => _inputController.FastForward;
 
         private static readonly PushCommand pushCommand = new PushCommand();
+        private static readonly SwapPositionCommand swapPositionCommand = new SwapPositionCommand();
 
         internal void Initialize(
             Tilemap tilemap, SoundController soundController, RogueSpriteRendererPool rendererPool, System.Action stopAutoPlay)
@@ -313,8 +314,7 @@ namespace RoguegardUnity
                         if (StatsEffectedValues.AreVS(player, obj))
                         {
                             // 敵をクリックして攻撃
-                            var arg = new RogueMethodArgument(targetObj: obj, targetPosition: p);
-                            deviceInfo.SetDeviceCommand(PointAttackCommandAction.Instance, player, arg);
+                            deviceInfo.SetDeviceCommand(PointAttackCommandAction.Instance, player, new(targetObj: obj, targetPosition: p));
                             EndTurn();
                             ClearInput();
                             return;
@@ -322,8 +322,15 @@ namespace RoguegardUnity
                         else if (obj.Main.InfoSet.Category == CategoryKw.MovableObstacle)
                         {
                             // 大岩をクリックして押して移動させる
-                            var arg = new RogueMethodArgument(targetObj: obj);
-                            deviceInfo.SetDeviceCommand(pushCommand, player, arg);
+                            deviceInfo.SetDeviceCommand(pushCommand, player, new(targetObj: obj));
+                            EndTurn();
+                            ClearInput();
+                            return;
+                        }
+                        else if (player.Main.Stats.Party.Members.Contains(obj))
+                        {
+                            // パーティメンバーをクリックして場所を入れ替える
+                            deviceInfo.SetDeviceCommand(swapPositionCommand, player, new(targetObj: obj));
                             EndTurn();
                             ClearInput();
                             return;

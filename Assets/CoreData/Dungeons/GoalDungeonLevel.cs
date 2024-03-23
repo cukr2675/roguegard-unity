@@ -77,6 +77,20 @@ namespace Roguegard.CharacterCreation
                 //if (!SpaceUtility.TryLocate(player, floor, position)) { Debug.LogError("生成に失敗しました。"); }
                 if (!default(IActiveRogueMethodCaller).Locate(player, null, floor, position, 0f)) { Debug.LogError("生成に失敗しました。"); }
             }
+            // パーティメンバーを移動
+            var party = player.Main.Stats.Party;
+            var members = party.Members;
+            for (int i = 0; i < members.Count; i++)
+            {
+                var member = members[i];
+                if (default(IActiveRogueMethodCaller).LocateNextToAnyMember(member, null, 0f, party)) continue;
+
+                // メンバーの移動に失敗したらランダム位置へ移動
+                var position = floor.Space.GetRandomPositionInRoom(random);
+                if (default(IActiveRogueMethodCaller).Locate(player, null, floor, position, 0f)) continue;
+
+                Debug.LogError("生成に失敗しました。");
+            }
 
             // アイテムを生成
             for (int i = 0; i < _items.Length; i++)

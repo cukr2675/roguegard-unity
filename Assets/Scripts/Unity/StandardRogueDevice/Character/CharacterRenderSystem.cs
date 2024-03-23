@@ -39,7 +39,20 @@ namespace RoguegardUnity
             if (ViewInfo.TryGet(player, out var view) && !view.QueueHasItem)
             {
                 view.ReadyView(player.Location);
-                view.AddView(player);
+                if (player.Main.Stats.Party != null)
+                {
+                    // パーティメンバー全員の視界を追加する
+                    var partyMembers = player.Main.Stats.Party.Members;
+                    for (int i = 0; i < partyMembers.Count; i++)
+                    {
+                        view.AddView(partyMembers[i]);
+                    }
+                }
+                else
+                {
+                    // 視界を追加する
+                    view.AddView(player);
+                }
             }
             InAnimation = true;
         }
