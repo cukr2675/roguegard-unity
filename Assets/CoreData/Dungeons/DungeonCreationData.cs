@@ -24,6 +24,10 @@ namespace Roguegard.CharacterCreation
         [SerializeField] private RogueDungeonLevel[] _levels = null;
         public Spanning<RogueDungeonLevel> Levels => _levels;
 
+        // ターン経過で満腹度消費
+        // 自然回復あり
+        private static readonly UseNutritionLeaderEffect useNutritionLeaderEffect = new UseNutritionLeaderEffect();
+
         public IModelsMenuChoice CreateDungeonChoice()
         {
             return new MenuChoice(this);
@@ -41,12 +45,8 @@ namespace Roguegard.CharacterCreation
             var dungeonSeed = random.Next(int.MinValue, int.MaxValue);
             DungeonInfo.SetSeedTo(dungeon, dungeonSeed);
 
-            RoguePartyUtility.Reset(party);
+            RoguePartyUtility.Reset(party, useNutritionLeaderEffect);
             if (!RoguePartyUtility.TryLocateWithPartyMembers(player, dungeon)) throw new RogueException();
-
-            // ターン経過で満腹度消費
-            // 自然回復あり
-            UseNutritionLeaderEffect.Initialize(player);
 
             // リーダーのレベルアップボーナスは HP, MP, 最大重量 から選択
             _playerLevelInfos[0].Ref.InitializeLv(player, 1);

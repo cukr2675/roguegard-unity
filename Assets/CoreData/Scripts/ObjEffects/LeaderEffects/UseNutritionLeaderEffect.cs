@@ -14,17 +14,7 @@ namespace Roguegard
         float IRogueObjUpdater.Order => 100f;
         float IRogueMethodPassiveAspect.Order => -10f;
 
-        private static readonly UseNutritionLeaderEffect instance = new UseNutritionLeaderEffect();
         private static readonly MemberEffect memberEffect = new MemberEffect();
-        private UseNutritionLeaderEffect() { }
-
-        public static void Initialize(RogueObj playerObj)
-        {
-            var party = playerObj.Main.Stats.Party;
-            if (party.Members[0] != playerObj) throw new RogueException(); // リーダーでなければ失敗する。
-
-            playerObj.Main.RogueEffects.AddOpen(playerObj, instance);
-        }
 
         RogueObjUpdaterContinueType IRogueObjUpdater.UpdateObj(RogueObj self, float activationDepth, ref int sectionIndex)
         {

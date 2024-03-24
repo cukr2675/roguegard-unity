@@ -19,6 +19,8 @@ namespace Roguegard
         public IApplyRogueMethod AfterLoad => _afterLoad;
         private static readonly IApplyRogueMethod _afterLoad = new AfterLoadRogueMethod();
 
+        private static readonly LobbyLeaderEffect lobbyLeaderEffect = new LobbyLeaderEffect();
+
         private class BeforeSaveRogueMethod : BaseApplyRogueMethod
         {
             public override bool Invoke(RogueObj self, RogueObj player, float activationDepth, in RogueMethodArgument arg)
@@ -48,8 +50,7 @@ namespace Roguegard
                 var party = new RogueParty(player.Main.InfoSet.Faction, player.Main.InfoSet.TargetFactions);
                 RoguePartyUtility.AssignWithPartyMembers(player, party);
 
-                RoguePartyUtility.Reset(party);
-                LobbyLeaderEffect.Initialize(player);
+                RoguePartyUtility.Reset(party, lobbyLeaderEffect);
 
                 if (player == RogueDevice.Primary.Player)
                 {
@@ -137,17 +138,7 @@ namespace Roguegard
             float IValueEffect.Order => 0f;
             float IRogueObjUpdater.Order => 100f;
 
-            private static readonly LobbyLeaderEffect instance = new LobbyLeaderEffect();
             private static readonly MemberEffect memberEffect = new MemberEffect();
-            private LobbyLeaderEffect() { }
-
-            public static void Initialize(RogueObj playerObj)
-            {
-                var party = playerObj.Main.Stats.Party;
-                if (party.Members[0] != playerObj) throw new RogueException(); // リーダーでなければ失敗する。
-
-                playerObj.Main.RogueEffects.AddOpen(playerObj, instance);
-            }
 
             void IValueEffect.AffectValue(IKeyword keyword, AffectableValue value, RogueObj self)
             {

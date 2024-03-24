@@ -97,12 +97,23 @@ namespace Roguegard.Extensions
         /// <summary>
         /// ダンジョンに突入・脱出したときの処理。エフェクトの解除・レベル初期化・全回復をおこなう。
         /// </summary>
-        public static void Reset(RogueParty party)
+        public static void Reset(RogueParty party, IRogueEffect leaderEffect)
         {
             var partyMembers = party.Members;
+            {
+                // リーダー用エフェクトを設定
+                var leader = partyMembers[0];
+                leader.Main.RogueEffects.AddOpen(leader, leaderEffect);
+            }
             for (int i = 0; i < partyMembers.Count; i++)
             {
                 var member = partyMembers[i];
+                if (i != 0)
+                {
+                    // リーダー以外はエフェクトを解除
+                    member.Main.UpdatePlayerLeaderInfo(member, null);
+                }
+
                 DungeonFloorCloserStateInfo.CloseAndRemoveNull(member, true);
 
                 // レベルを初期化
