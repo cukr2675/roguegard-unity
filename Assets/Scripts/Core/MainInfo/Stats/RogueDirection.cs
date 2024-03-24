@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Roguegard
 {
-    [ObjectFormer.Formable]
+    [Objforming.Formable]
     public struct RogueDirection : System.IEquatable<RogueDirection>
     {
         private readonly int angle;

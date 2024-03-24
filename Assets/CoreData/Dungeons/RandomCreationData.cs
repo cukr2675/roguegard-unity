@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Roguegard.CharacterCreation
 {
     [CreateAssetMenu(menuName = "RoguegardData/CharacterCreation/Data/Random")]
-    [ObjectFormer.IgnoreRequireRelationalComponent]
+    [Objforming.IgnoreRequireRelationalComponent]
     public class RandomCreationData : ScriptableCharacterCreationData
     {
         [SerializeField] private ScriptableStartingItemList _items = null;

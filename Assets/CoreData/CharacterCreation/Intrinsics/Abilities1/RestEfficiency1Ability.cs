@@ -27,7 +27,7 @@ namespace Roguegard.CharacterCreation
             }
         }
 
-        [ObjectFormer.Formable]
+        [Objforming.Formable]
         private class MemberEffect : StatusEffectPartyMemberRogueEffect<SortedIntrinsic>, IRogueMethodPassiveAspect
         {
             float IRogueMethodPassiveAspect.Order => 0f;

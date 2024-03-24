@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Roguegard.Device
 {
-    [ObjectFormer.Formable]
+    [Objforming.Formable]
     public class RogueDeviceEffect : IRogueEffect, IRogueObjUpdater
     {
         /// <summary>

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Roguegard.CharacterCreation
 {
-    [ObjectFormer.Formable]
+    [Objforming.Formable]
     public class CharacterCreationDataBuilder : ICharacterCreationData
     {
         public string Name { get; set; }

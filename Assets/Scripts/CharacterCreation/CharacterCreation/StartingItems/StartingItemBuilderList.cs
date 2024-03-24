@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace Roguegard.CharacterCreation
 {
-    [ObjectFormer.Formable]
+    [Objforming.Formable]
     public class StartingItemBuilderList : IWeightedRogueObjGeneratorList, IEnumerable<StartingItemBuilder>
     {
         private readonly List<StartingItemBuilder> builders = new List<StartingItemBuilder>();

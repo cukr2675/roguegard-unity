@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Roguegard
 {
-    [ObjectFormer.Formable]
+    [Objforming.Formable]
     public class RogueTilemap
     {
         private readonly IRogueTile[][][] tilemap;
@@ -17,7 +17,7 @@ namespace Roguegard
 
         private const int depth = 2;
 
-        [ObjectFormer.CreateInstance]
+        [Objforming.CreateInstance]
         private RogueTilemap() { }
 
         public RogueTilemap(Vector2Int size)

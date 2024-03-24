@@ -9,7 +9,7 @@ namespace Roguegard
     /// （生成したインスタンスを <see cref="IEquipmentInfo"/> 側で使いまわすため）
     /// ただし、生成時点で装備済みにする場合は例外的に生成する。
     /// </summary>
-    [ObjectFormer.Formable]
+    [Objforming.Formable]
     public class EquipRogueEffect : IRogueEffect
     {
         /// <summary>
@@ -19,7 +19,7 @@ namespace Roguegard
 
         private RogueObj equipment;
 
-        [ObjectFormer.CreateInstance]
+        [Objforming.CreateInstance]
         private EquipRogueEffect() { }
 
         public EquipRogueEffect(RogueObj equipment)

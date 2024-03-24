@@ -8,7 +8,7 @@ using Roguegard.Extensions;
 namespace Roguegard.CharacterCreation
 {
     [CreateAssetMenu(menuName = "RoguegardData/CharacterCreation/Data/Location/Dungeon")]
-    [ObjectFormer.Referable]
+    [Objforming.Referable]
     public class DungeonCreationData : ItemCreationData
     {
         [Header("DungeonData")]

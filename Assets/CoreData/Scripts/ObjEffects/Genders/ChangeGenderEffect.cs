@@ -31,7 +31,7 @@ namespace Roguegard
             }
         }
 
-        [ObjectFormer.Formable]
+        [Objforming.Formable]
         private class Effect : IRogueEffect, IStatusEffect, IValueEffect
         {
             float IValueEffect.Order => 0f;

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Roguegard
 {
-    [ObjectFormer.Formable]
+    [Objforming.Formable]
     public class MainStats
     {
         public int HP { get; private set; }

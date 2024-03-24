@@ -6,7 +6,7 @@ using UnityEngine.Audio;
 
 namespace RoguegardUnity
 {
-    [ObjectFormer.Formable]
+    [Objforming.Formable]
     public class RogueOptions
     {
         public float MasterVolume { get; private set; }

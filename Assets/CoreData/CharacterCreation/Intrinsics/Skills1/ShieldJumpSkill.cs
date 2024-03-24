@@ -14,7 +14,7 @@ namespace Roguegard.CharacterCreation
             return new SortedIntrinsic(parent, lv);
         }
 
-        [ObjectFormer.Formable]
+        [Objforming.Formable]
         private class SortedIntrinsic : MPSkillSortedIntrinsic<SortedIntrinsic>
         {
             public override IRogueMethodTarget Target => ForPartyMemberRogueMethodTarget.Instance;
@@ -47,7 +47,7 @@ namespace Roguegard.CharacterCreation
             }
         }
 
-        [ObjectFormer.Formable]
+        [Objforming.Formable]
         private class StatusEffect : TimeLimitedStackableStatusEffect, IValueEffect, IRogueMethodPassiveAspect
 		{
             public static IAffectCallback Callback { get; } = new AffectCallback(new StatusEffect());

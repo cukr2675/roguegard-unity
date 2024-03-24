@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Roguegard.CharacterCreation
 {
-    [ObjectFormer.Formable]
+    [Objforming.Formable]
     public class StandardRaceMember : IMember, IReadOnlyStandardRaceMember
     {
         public static IMemberSource SourceInstance { get; } = new SourceType();

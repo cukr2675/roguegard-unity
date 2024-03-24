@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Roguegard
 {
-    [ObjectFormer.Formable]
+    [Objforming.Formable]
     public class RogueSpace : IRogueTilemapView
     {
         /// <summary>
@@ -38,7 +38,7 @@ namespace Roguegard
 
         private const bool cantViewRoomFromSide = true;
 
-        [ObjectFormer.CreateInstance]
+        [Objforming.CreateInstance]
         private RogueSpace(bool flag) { }
 
         internal RogueSpace()

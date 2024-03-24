@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Roguegard.CharacterCreation
 {
     [CreateAssetMenu(menuName = "RoguegardData/CharacterCreation/Intrinsic/QuestEffect")]
-    [ObjectFormer.Referable]
+    [Objforming.Referable]
     public class QuestEffectIntrinsicOption : ScriptIntrinsicOption
     {
         private static readonly IMemberSource[] _memberSources = new[] { QuestMember.SourceInstance };

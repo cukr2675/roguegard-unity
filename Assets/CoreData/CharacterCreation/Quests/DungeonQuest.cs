@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace Roguegard.CharacterCreation
 {
-    [ObjectFormer.Formable]
+    [Objforming.Formable]
     public class DungeonQuest : IRogueDescription
     {
         public string Name => _objectives[0].Name;
@@ -66,7 +66,7 @@ namespace Roguegard.CharacterCreation
             Dungeon.StartFloor(player, RogueRandom.Primary);
         }
 
-        [ObjectFormer.Formable]
+        [Objforming.Formable]
         private class Effect : IRogueEffect, IDungeonFloorCloser
         {
             public DungeonQuest quest;

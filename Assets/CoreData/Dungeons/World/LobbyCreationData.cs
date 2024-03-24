@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Roguegard.CharacterCreation
 {
     [CreateAssetMenu(menuName = "RoguegardData/CharacterCreation/Data/Location/Lobby")]
-    [ObjectFormer.Referable]
+    [Objforming.Referable]
     public class LobbyCreationData : ItemCreationData
     {
         [SerializeField] private ScriptableRogueTile _floor = null;

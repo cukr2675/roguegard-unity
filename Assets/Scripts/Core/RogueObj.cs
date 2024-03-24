@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace Roguegard
 {
-    [ObjectFormer.Formable]
+    [Objforming.Formable]
     public class RogueObj
     {
         public int Stack { get; private set; }
@@ -35,7 +35,7 @@ namespace Roguegard
 
         private readonly Dictionary<System.Type, IRogueObjInfo> infos;
 
-        [ObjectFormer.CreateInstance]
+        [Objforming.CreateInstance]
         private RogueObj(bool dummy) { }
 
         public RogueObj()

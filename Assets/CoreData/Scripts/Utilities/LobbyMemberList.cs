@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Roguegard
 {
-    [ObjectFormer.Formable]
+    [Objforming.Formable]
     public class LobbyMemberList
     {
         private readonly List<RogueObj> _members = new List<RogueObj>();
@@ -47,7 +47,7 @@ namespace Roguegard
             }
         }
 
-        [ObjectFormer.Formable]
+        [Objforming.Formable]
         private class MemberEffect : IRogueEffect, IRogueObjUpdater, IRogueObjInfo
         {
             public LobbyMemberInfo info;

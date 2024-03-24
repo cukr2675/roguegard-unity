@@ -6,7 +6,7 @@ using Roguegard.Extensions;
 
 namespace Roguegard
 {
-    [ObjectFormer.Formable]
+    [Objforming.Formable]
     public class BowThrow : MPSkill
     {
 		public override string Name => MainInfoKw.Throw.Name;

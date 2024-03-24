@@ -10,7 +10,7 @@ namespace Roguegard
     /// <summary>
     /// HP・MP・最大重量から一つ選ぶレベルアップボーナス。
     /// </summary>
-    [ObjectFormer.Formable]
+    [Objforming.Formable]
     public class ChooseFrom3LevelInfo : BaseLevelInfo, IValueEffect, ILevelInfoInitializer
     {
         public override Spanning<int> NextTotalExps => _nextTotalExps;

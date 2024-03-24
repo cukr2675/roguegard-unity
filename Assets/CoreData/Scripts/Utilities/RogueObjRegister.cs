@@ -9,7 +9,7 @@ namespace Roguegard
     /// <summary>
     /// <see cref="LobbyMemberInfo.Seat"/> 設定時の所有アイテムの状態を記憶するクラス
     /// </summary>
-    [ObjectFormer.Formable]
+    [Objforming.Formable]
     public class RogueObjRegister
     {
         private readonly List<Item> items = new List<Item>();
@@ -95,7 +95,7 @@ namespace Roguegard
             }
         }
 
-        [ObjectFormer.Formable]
+        [Objforming.Formable]
         private class Item
         {
             public MainStats MainStats { get; set; }

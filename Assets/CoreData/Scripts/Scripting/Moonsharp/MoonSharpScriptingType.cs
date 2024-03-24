@@ -8,7 +8,7 @@ using MoonSharp.Interpreter;
 namespace Roguegard.Scripting.MoonSharp
 {
     [MoonSharpUserData]
-    [ObjectFormer.Formable]
+    [Objforming.Formable]
     public class MoonSharpScriptingType : System.IEquatable<MoonSharpScriptingType>
     {
         private readonly string name;

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Roguegard.CharacterCreation
 {
-    [ObjectFormer.Formable]
+    [Objforming.Formable]
     public class DungeonQuestTable
     {
         private readonly List<Item> items = new List<Item>();
@@ -70,7 +70,7 @@ namespace Roguegard.CharacterCreation
             }
         }
 
-        [ObjectFormer.Formable]
+        [Objforming.Formable]
         private class Item
         {
             public DungeonQuest quest;

@@ -27,7 +27,7 @@ namespace Roguegard
             effect.source = source;
         }
 
-        [ObjectFormer.Formable]
+        [Objforming.Formable]
         private class Effect : IRogueEffect, IStatusEffect
         {
             public MainInfoSet source;

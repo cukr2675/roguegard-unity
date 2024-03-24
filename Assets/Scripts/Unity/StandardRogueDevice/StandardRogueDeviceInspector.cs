@@ -5,10 +5,10 @@ using UnityEngine;
 using System.Linq;
 using System.Reflection;
 using System.IO;
-using ObjectFormer;
-using ObjectFormer.Unity.RuntimeInspector;
+using Objforming;
+using Objforming.Unity.RuntimeInspector;
 using Roguegard;
-using Roguegard.ObjectFormer.RuntimeInspector;
+using Roguegard.Objforming.RuntimeInspector;
 
 namespace RoguegardUnity
 {

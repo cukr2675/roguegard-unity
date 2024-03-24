@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Roguegard
 {
     [CreateAssetMenu(menuName = "RoguegardData/Keyword/Serializable")]
-    [ObjectFormer.Referable]
+    [Objforming.Referable]
     public class SerializableKeywordData : KeywordData, ISerializableKeyword
     {
     }

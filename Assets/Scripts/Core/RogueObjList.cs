@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Roguegard
 {
-    [ObjectFormer.Formable]
+    [Objforming.Formable]
     public class RogueObjList //: IReadOnlyList<RogueObj>
     {
         private readonly List<RogueObj> objs;
@@ -17,7 +17,7 @@ namespace Roguegard
 
         public int Count => objs.Count;
 
-        [ObjectFormer.CreateInstance]
+        [Objforming.CreateInstance]
         private RogueObjList(bool dummy) { }
 
         public RogueObjList()

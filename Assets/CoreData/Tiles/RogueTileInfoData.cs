@@ -7,7 +7,7 @@ using UnityEngine.Tilemaps;
 namespace Roguegard
 {
     [CreateAssetMenu(menuName = "RoguegardData/Tile")]
-    [ObjectFormer.Referable]
+    [Objforming.Referable]
     public class RogueTileInfoData : ScriptableRogueTileInfo
     {
         [SerializeField] private string _descriptionName = null;

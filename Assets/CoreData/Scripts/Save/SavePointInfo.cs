@@ -38,7 +38,7 @@ namespace Roguegard
             obj.RemoveInfo(typeof(Info));
         }
 
-        [ObjectFormer.IgnoreRequireRelationalComponent]
+        [Objforming.IgnoreRequireRelationalComponent]
         private class Info : IRogueObjInfo
         {
             public ISavePointInfo info;

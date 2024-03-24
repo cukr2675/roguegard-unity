@@ -48,7 +48,7 @@ namespace RoguegardUnity
                     var assetType = asset.GetType();
 
                     // Referable である ScriptableObject だけ登録する
-                    if (!assetType.IsDefined(typeof(ObjectFormer.ReferableAttribute))) continue;
+                    if (!assetType.IsDefined(typeof(Objforming.ReferableAttribute))) continue;
 
                     var name = $"{_namespace}.{asset.name}";
                     var item = new Item(name, asset);

@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace Roguegard
 {
-    [ObjectFormer.Formable]
+    [Objforming.Formable]
     public class RogueParty
     {
         private readonly List<RogueObj> _members;
@@ -17,7 +17,7 @@ namespace Roguegard
         private ISerializableKeyword[] _targetFactions;
         public Spanning<ISerializableKeyword> TargetFactions => _targetFactions;
 
-        [ObjectFormer.CreateInstance]
+        [Objforming.CreateInstance]
         private RogueParty() { }
 
         public RogueParty(ISerializableKeyword faction, Spanning<ISerializableKeyword> targetFactions)

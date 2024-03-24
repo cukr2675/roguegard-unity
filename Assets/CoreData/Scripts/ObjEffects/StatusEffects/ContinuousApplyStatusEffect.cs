@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Roguegard
 {
-    [ObjectFormer.Formable]
+    [Objforming.Formable]
     public class ContinuousApplyStatusEffect : TimeLimitedStackableStatusEffect, IValueEffect, IRogueMethodPassiveAspect
     {
         public static IAffectCallback Callback { get; } = new AffectCallback(new ContinuousApplyStatusEffect());

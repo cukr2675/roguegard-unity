@@ -6,7 +6,7 @@ using Roguegard.CharacterCreation;
 
 namespace Roguegard
 {
-    [ObjectFormer.Formable]
+    [Objforming.Formable]
     public class MonsterHouseEffect : IRogueEffect, IRogueMethodPassiveAspect
     {
         public int RoomIndex { get; private set; }

@@ -73,7 +73,7 @@ namespace Roguegard.CharacterCreation
             }
         }
 
-        [ObjectFormer.Formable]
+        [Objforming.Formable]
         private class Effect : IRogueEffect, IRogueObjUpdater, IRogueMethodPassiveAspect
         {
             public QuestMember member;
@@ -171,7 +171,7 @@ namespace Roguegard.CharacterCreation
             public IRogueEffect ReplaceCloned(RogueObj obj, RogueObj clonedObj) => this;
         }
 
-        [ObjectFormer.Formable]
+        [Objforming.Formable]
         private class TargetEffect : IRogueEffect, IRogueMethodPassiveAspect
         {
             public Effect parent;

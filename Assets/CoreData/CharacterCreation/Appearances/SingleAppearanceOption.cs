@@ -7,7 +7,7 @@ using SkeletalSprite;
 namespace Roguegard.CharacterCreation
 {
     [CreateAssetMenu(menuName = "RoguegardData/CharacterCreation/AppearanceOption/Single")]
-    [ObjectFormer.Referable]
+    [Objforming.Referable]
     public class SingleAppearanceOption : ColoredAppearanceOption
     {
         [SerializeField] private ColorRangedBoneSprite _sprite = null;

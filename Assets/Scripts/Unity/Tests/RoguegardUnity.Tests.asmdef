@@ -4,8 +4,8 @@
     "references": [
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
-        "ObjectFormer",
-        "ObjectFormer.Serialization.Json",
+        "Objforming",
+        "Objforming.Serialization.Json",
         "Roguegard",
         "Roguegard.CharacterCreation",
         "Roguegard.CoreData",

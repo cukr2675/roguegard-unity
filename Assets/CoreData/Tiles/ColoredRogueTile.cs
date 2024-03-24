@@ -5,7 +5,7 @@ using UnityEngine.Tilemaps;
 
 namespace Roguegard
 {
-    [ObjectFormer.Formable]
+    [Objforming.Formable]
     public class ColoredRogueTile : IRogueTile
     {
         public IRogueTileInfo Info { get; }
@@ -15,7 +15,7 @@ namespace Roguegard
         private readonly Color32 _color;
         public Color Color => _color;
 
-        [ObjectFormer.CreateInstance]
+        [Objforming.CreateInstance]
         private ColoredRogueTile() { }
 
         public ColoredRogueTile(IRogueTileInfo info, Color color)

@@ -8,7 +8,7 @@ using Roguegard.Extensions;
 
 namespace Roguegard
 {
-    [ObjectFormer.Formable]
+    [Objforming.Formable]
     public class RogueWorldSavePointInfo : ISavePointInfo
     {
         public static RogueWorldSavePointInfo Instance { get; } = new RogueWorldSavePointInfo();
@@ -131,7 +131,7 @@ namespace Roguegard
         /// <summary>
         /// ロビーのプレイヤーパーティメンバーは自然回復する。
         /// </summary>
-        [ObjectFormer.Formable]
+        [Objforming.Formable]
         private class LobbyLeaderEffect : PlayerLeaderRogueEffect, IValueEffect, IRogueObjUpdater
         {
             float IValueEffect.Order => 0f;
@@ -173,7 +173,7 @@ namespace Roguegard
             /// <summary>
             /// このエフェクトが付与されているオブジェクトは自然回復を有効にする。
             /// </summary>
-            [ObjectFormer.Formable]
+            [Objforming.Formable]
             private class MemberEffect : BasePartyMemberRogueEffect<LobbyLeaderEffect>
             {
                 protected override RogueObjUpdaterContinueType UpdateObj(RogueObj self, float activationDepth, ref int sectionIndex)

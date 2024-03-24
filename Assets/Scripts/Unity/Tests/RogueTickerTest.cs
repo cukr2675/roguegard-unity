@@ -6,8 +6,8 @@ using UnityEngine.TestTools;
 
 using System.IO;
 using System.Reflection;
-using ObjectFormer;
-using ObjectFormer.Serialization.Json;
+using Objforming;
+using Objforming.Serialization.Json;
 using Roguegard;
 using Roguegard.CharacterCreation;
 using Roguegard.Device;

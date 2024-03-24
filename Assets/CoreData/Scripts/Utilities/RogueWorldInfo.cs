@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Roguegard
 {
-    [ObjectFormer.Formable]
+    [Objforming.Formable]
     public class RogueWorldInfo
     {
         public RogueObj Lobby { get; }
@@ -51,7 +51,7 @@ namespace Roguegard
             }
         }
 
-        [ObjectFormer.Formable]
+        [Objforming.Formable]
         private class Info : IRogueObjInfo
         {
             public RogueWorldInfo info;

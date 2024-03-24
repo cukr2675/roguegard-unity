@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Roguegard.CharacterCreation
 {
     [CreateAssetMenu(menuName = "RoguegardData/CharacterCreation/Data/Singleton/TileLaying")]
-    [ObjectFormer.IgnoreRequireRelationalComponent]
+    [Objforming.IgnoreRequireRelationalComponent]
     public class TileLayingCreationData : ItemCreationData
     {
         public override Spanning<IMemberSource> StartingItemOptionMemberSources => _startingItemOptionMemberSources;

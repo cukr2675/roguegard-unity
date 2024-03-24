@@ -8,7 +8,7 @@ namespace Roguegard
     /// <see cref="RogueObj"/> にシリアル化しても残るエフェクトを付与する。
     /// 連想配列で保存する <see cref="IRogueObjInfo"/> と違いリストで保存される。
     /// </summary>
-    [ObjectFormer.RequireRelationalComponent]
+    [Objforming.RequireRelationalComponent]
     public interface IRogueEffect
     {
         void Open(RogueObj self);

@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Roguegard.CharacterCreation
 {
     [CreateAssetMenu(menuName = "RoguegardData/CharacterCreation/Data/InfoSetSourcedItem")]
-    [ObjectFormer.Referable]
+    [Objforming.Referable]
     public class InfoSetSourcedItemCreationData : ItemCreationData
     {
         public override Spanning<IMemberSource> StartingItemOptionMemberSources => _startingItemOptionMemberSources;

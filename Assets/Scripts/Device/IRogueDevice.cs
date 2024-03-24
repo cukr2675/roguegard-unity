@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Roguegard.Device
 {
-    [ObjectFormer.RequireRelationalComponent]
+    [Objforming.RequireRelationalComponent]
     public interface IRogueDevice
     {
         RogueObj Player { get; }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Roguegard
 {
-    [ObjectFormer.RequireRelationalComponent]
+    [Objforming.RequireRelationalComponent]
     public interface IRogueGender : IRogueDescription
     {
         void AffectValue(AffectableValue value, RogueObj self, MainInfoSetType infoSetType);

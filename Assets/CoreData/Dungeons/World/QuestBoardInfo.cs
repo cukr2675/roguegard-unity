@@ -6,7 +6,7 @@ using Roguegard.CharacterCreation;
 
 namespace Roguegard
 {
-    [ObjectFormer.Formable]
+    [Objforming.Formable]
     public class QuestBoardInfo
     {
         public DungeonQuestTable QuestTable { get; set; }
@@ -23,7 +23,7 @@ namespace Roguegard
             WeightTurnsAfterAccept = 10;
         }
 
-        [ObjectFormer.CreateInstance]
+        [Objforming.CreateInstance]
         private QuestBoardInfo(bool flag) { }
 
         public static QuestBoardInfo Get(RogueObj obj)
@@ -75,7 +75,7 @@ namespace Roguegard
             return false;
         }
 
-        [ObjectFormer.Formable]
+        [Objforming.Formable]
         private class Info : IRogueObjInfo
         {
             public QuestBoardInfo info = new QuestBoardInfo();

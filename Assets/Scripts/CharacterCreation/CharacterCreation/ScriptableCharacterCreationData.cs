@@ -30,7 +30,7 @@ namespace Roguegard.CharacterCreation
 
         /// <summary>
         /// これが true のクラスでは <see cref="MainInfoSet"/> を生成しない。（ランダム生成テーブルなどでの使用を想定）
-        /// true にするとき <see cref="ObjectFormer.IgnoreRequireRelationalComponentAttribute"/> と併用する。
+        /// true にするとき <see cref="Objforming.IgnoreRequireRelationalComponentAttribute"/> と併用する。
         /// </summary>
         protected virtual bool HasNotInfoSet => false;
 

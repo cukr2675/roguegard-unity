@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Roguegard
 {
-    [ObjectFormer.Formable]
+    [Objforming.Formable]
     public class TossAttackSkill : MPSkill
     {
         public override string Name => "ぶん投げる";

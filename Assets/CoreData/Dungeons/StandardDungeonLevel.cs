@@ -83,7 +83,7 @@ namespace Roguegard.CharacterCreation
         /// <summary>
         /// 敵の自然湧きエフェクト
         /// </summary>
-        [ObjectFormer.Formable]
+        [Objforming.Formable]
         private class Effect : IRogueEffect, IRogueObjUpdater
         {
             public int lv;

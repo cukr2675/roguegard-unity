@@ -6,7 +6,7 @@ using SkeletalSprite;
 
 namespace Roguegard
 {
-    [ObjectFormer.Formable]
+    [Objforming.Formable]
     public class LevitationStatusEffect : TimeLimitedStackableStatusEffect
     {
         public static IAffectCallback Callback { get; } = new AffectCallback(new LevitationStatusEffect());

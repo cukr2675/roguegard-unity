@@ -24,7 +24,7 @@ namespace Roguegard
             return this.TryAffect(user, activationDepth, callback);
         }
 
-        [ObjectFormer.Formable]
+        [Objforming.Formable]
         private class Effect : StackableStatusEffect, IRogueObjUpdater
         {
             public override string Name => ":ThronsTrap";

@@ -7,7 +7,7 @@ using Roguegard.Extensions;
 namespace Roguegard.CharacterCreation
 {
     [System.Serializable]
-    [ObjectFormer.IgnoreRequireRelationalComponent]
+    [Objforming.IgnoreRequireRelationalComponent]
     public class FoodRace : ObjectRace
     {
         public override IApplyRogueMethod BeThrown

@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace Roguegard.CharacterCreation
 {
-    [ObjectFormer.Formable]
+    [Objforming.Formable]
     public class IntrinsicBuilderList : IEnumerable<IntrinsicBuilder>//, IReadOnlyList<IntrinsicBuilder>
     {
         private readonly List<IntrinsicBuilder> builders = new List<IntrinsicBuilder>();

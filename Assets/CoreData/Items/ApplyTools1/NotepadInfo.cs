@@ -63,7 +63,7 @@ namespace Roguegard
             return obj.RemoveInfo(typeof(Info));
         }
 
-        [ObjectFormer.Formable]
+        [Objforming.Formable]
         private class Info : IRogueObjInfo
         {
             public string text;

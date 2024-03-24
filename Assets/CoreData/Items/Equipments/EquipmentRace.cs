@@ -8,7 +8,7 @@ using SkeletalSprite;
 namespace Roguegard.CharacterCreation
 {
     [System.Serializable]
-    [ObjectFormer.IgnoreRequireRelationalComponent]
+    [Objforming.IgnoreRequireRelationalComponent]
     public class EquipmentRace : ObjectRace
     {
         [Header("EquipmentRace")]

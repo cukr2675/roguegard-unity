@@ -65,7 +65,7 @@ namespace Roguegard
             info.rider = rider;
         }
 
-        [ObjectFormer.Formable]
+        [Objforming.Formable]
         private class Info : IRogueObjInfo
         {
             [System.NonSerialized] public IVehicleInfo info;

@@ -301,7 +301,7 @@ namespace RoguegardUnity
         /// <summary>
         /// <see cref="TickEnumerator"/> ‚Ås“®‚ğ’â~‚³‚¹‚é‚½‚ß‚ÌƒNƒ‰ƒX
         /// </summary>
-        [ObjectFormer.IgnoreRequireRelationalComponent]
+        [Objforming.IgnoreRequireRelationalComponent]
         private class DummySavePoint : ISavePointInfo
         {
             public IApplyRogueMethod BeforeSave => throw new System.NotSupportedException();

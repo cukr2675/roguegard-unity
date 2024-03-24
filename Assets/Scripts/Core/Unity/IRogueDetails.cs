@@ -7,6 +7,6 @@ namespace Roguegard
     /// <summary>
     /// <see cref="RogueDescriptionData._details"/> の型引数向けインターフェース
     /// </summary>
-    [ObjectFormer.RequireRelationalComponent]
+    [Objforming.RequireRelationalComponent]
     public interface IRogueDetails { }
 }

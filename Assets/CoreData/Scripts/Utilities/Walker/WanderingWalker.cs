@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Roguegard
 {
-    [ObjectFormer.Formable]
+    [Objforming.Formable]
     public class WanderingWalker
     {
         private Vector2Int lastTargetPosition = new Vector2Int(-1, -1);
@@ -27,7 +27,7 @@ namespace Roguegard
             new Vector2Int(-1, -1),
         };
 
-        [ObjectFormer.CreateInstance]
+        [Objforming.CreateInstance]
         private WanderingWalker() { }
 
         public WanderingWalker(Vector2Int size)
@@ -285,7 +285,7 @@ namespace Roguegard
             return updated;
         }
 
-        [ObjectFormer.Formable]
+        [Objforming.Formable]
         private class Cell
         {
             public bool CanWalkOn { get; set; }

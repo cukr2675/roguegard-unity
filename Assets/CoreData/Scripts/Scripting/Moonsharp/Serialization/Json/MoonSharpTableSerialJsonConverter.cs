@@ -5,9 +5,9 @@ using UnityEngine;
 using System;
 using Newtonsoft.Json;
 using MoonSharp.Interpreter;
-using ObjectFormer.Serialization.Json;
+using Objforming.Serialization.Json;
 
-namespace Roguegard.Scripting.MoonSharp.ObjectFormer.Serialization.Json
+namespace Roguegard.Scripting.MoonSharp.Objforming.Serialization.Json
 {
     public class MoonSharpTableSerialJsonConverter : RelationalJsonConverter
     {

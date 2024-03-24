@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Roguegard.CharacterCreation
 {
     [CreateAssetMenu(menuName = "RoguegardData/CharacterCreation/Data/Item")]
-    [ObjectFormer.Referable]
+    [Objforming.Referable]
     public class ItemCreationData : ScriptableCharacterCreationData
     {
         [SerializeField] protected ObjectRace _race = null;

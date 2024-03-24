@@ -9,7 +9,7 @@ namespace Roguegard
     /// <summary>
     /// 転倒して2ターン行動不能。さらに防御力-2。
     /// </summary>
-    [ObjectFormer.Formable]
+    [Objforming.Formable]
     public class DownStatusEffect : TimeLimitedStackableStatusEffect, IValueEffect, ISpriteMotionEffect
     {
         public static IAffectCallback Callback { get; } = new AffectCallback(new DownStatusEffect());

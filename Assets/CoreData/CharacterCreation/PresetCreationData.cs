@@ -7,7 +7,7 @@ using System.Linq;
 namespace Roguegard.CharacterCreation
 {
     [CreateAssetMenu(menuName = "RoguegardData/CharacterCreation/Data/Preset")]
-    [ObjectFormer.IgnoreRequireRelationalComponent]
+    [Objforming.IgnoreRequireRelationalComponent]
     public class PresetCreationData : ScriptableCharacterCreationData
     {
         [SerializeField] private string _descriptionName = null;

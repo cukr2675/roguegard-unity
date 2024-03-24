@@ -38,7 +38,7 @@ namespace Roguegard
             }
         }
 
-        [ObjectFormer.IgnoreRequireRelationalComponent]
+        [Objforming.IgnoreRequireRelationalComponent]
         private class Info : IRogueObjInfo
         {
             private readonly List<IDungeonFloorCloser> closers = new List<IDungeonFloorCloser>();

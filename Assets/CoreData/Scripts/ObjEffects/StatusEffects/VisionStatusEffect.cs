@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Roguegard
 {
-    [ObjectFormer.Formable]
+    [Objforming.Formable]
     public class VisionStatusEffect : StackableStatusEffect, IValueEffect
     {
         public static IAffectCallback Callback { get; } = new AffectCallback(new VisionStatusEffect());

@@ -9,7 +9,7 @@ namespace Roguegard
     /// <summary>
     /// ダンジョンの階層データを公開するクラス
     /// </summary>
-    [ObjectFormer.Formable]
+    [Objforming.Formable]
     public class DungeonInfo
     {
         [System.NonSerialized]
@@ -166,7 +166,7 @@ namespace Roguegard
             info.info.dungeonSeed = dungeonSeed;
         }
 
-        [ObjectFormer.Formable]
+        [Objforming.Formable]
         private class Info : IRogueObjInfo
         {
             public DungeonInfo info;

@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Roguegard.CharacterCreation
 {
     [CreateAssetMenu(menuName = "RoguegardData/CharacterCreation/Intrinsic/Script")]
-    [ObjectFormer.Referable]
+    [Objforming.Referable]
     public class ScriptIntrinsicOption : IntrinsicOption
     {
         [SerializeField] private int _baseLv = 1;

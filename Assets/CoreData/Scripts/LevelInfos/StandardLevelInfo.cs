@@ -6,7 +6,7 @@ using Roguegard.CharacterCreation;
 
 namespace Roguegard
 {
-    [ObjectFormer.Formable]
+    [Objforming.Formable]
     public class StandardLevelInfo : BaseLevelInfo, IValueEffect, ILevelInfoInitializer
     {
         public override Spanning<int> NextTotalExps => _nextTotalExps;
@@ -29,7 +29,7 @@ namespace Roguegard
             _nextTotalExps = nextTotalExps;
         }
 
-        [ObjectFormer.CreateInstance]
+        [Objforming.CreateInstance]
         private StandardLevelInfo() { }
 
         private StandardLevelInfo(int initialLv)

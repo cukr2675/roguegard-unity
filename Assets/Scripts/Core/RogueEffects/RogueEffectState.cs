@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Roguegard
 {
-    [ObjectFormer.Formable]
+    [Objforming.Formable]
     public class RogueEffectState
     {
         private readonly List<IRogueEffect> _effects;
@@ -14,7 +14,7 @@ namespace Roguegard
         internal static StaticInitializable<RogueObj> openingObj = new StaticInitializable<RogueObj>(() => null);
         internal static StaticInitializable<bool> openingNow = new StaticInitializable<bool>(() => false);
 
-        [ObjectFormer.CreateInstance]
+        [Objforming.CreateInstance]
         private RogueEffectState(bool dummy) { }
 
         public RogueEffectState()

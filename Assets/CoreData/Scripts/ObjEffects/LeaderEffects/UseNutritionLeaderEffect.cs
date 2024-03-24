@@ -8,7 +8,7 @@ namespace Roguegard
     /// パーティリーダーは最大満腹度が10倍になり、ターン経過で満腹度-1。
     /// 満腹度がゼロのときターン経過でHP-1。
     /// </summary>
-    [ObjectFormer.Formable]
+    [Objforming.Formable]
     public class UseNutritionLeaderEffect : PlayerLeaderRogueEffect, IRogueObjUpdater, IRogueMethodPassiveAspect
     {
         float IRogueObjUpdater.Order => 100f;
@@ -84,7 +84,7 @@ namespace Roguegard
         /// <summary>
         /// このエフェクトが付与されているオブジェクトは自然回復を有効にする。
         /// </summary>
-        [ObjectFormer.Formable]
+        [Objforming.Formable]
         private class MemberEffect : BasePartyMemberRogueEffect<UseNutritionLeaderEffect>, IRogueMethodPassiveAspect
         {
             float IRogueMethodPassiveAspect.Order => -10f;

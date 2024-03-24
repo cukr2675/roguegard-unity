@@ -59,7 +59,7 @@ namespace Roguegard.CharacterCreation
             }
         }
 
-        [ObjectFormer.Formable]
+        [Objforming.Formable]
         private class Effect : TimeLimitedStackableStatusEffect, IValueEffect
         {
             public override string Name => ":OneHandedSwordAbility";

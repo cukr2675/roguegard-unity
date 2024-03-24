@@ -8,14 +8,14 @@ namespace Roguegard
     /// このクラスのインスタンスは <see cref="IVehicleInfo.TryOpen(RogueObj, RideRogueEffect)"/> 内で生成する。
     /// （生成したインスタンスを <see cref="IVehicleInfo"/> 側で使いまわすため）
     /// </summary>
-    [ObjectFormer.Formable]
+    [Objforming.Formable]
     public class RideRogueEffect : IRogueEffect
     {
         private RogueObj vehicle;
 
         [field: System.NonSerialized] public RogueObj Rider { get; private set; }
 
-        [ObjectFormer.CreateInstance]
+        [Objforming.CreateInstance]
         private RideRogueEffect() { }
 
         public RideRogueEffect(RogueObj vehicle)

@@ -31,14 +31,14 @@ namespace Roguegard
             }
         }
 
-        [ObjectFormer.Formable]
+        [Objforming.Formable]
         private class Effect : IRogueEffect, IValueEffect
         {
             private readonly Color32 color;
 
             float IValueEffect.Order => 0f;
 
-            [ObjectFormer.CreateInstance]
+            [Objforming.CreateInstance]
             private Effect() { }
 
             public Effect(Color32 color)

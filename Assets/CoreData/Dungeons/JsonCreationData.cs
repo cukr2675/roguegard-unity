@@ -10,7 +10,7 @@ namespace Roguegard.CharacterCreation
     /// Json テキストからなる <see cref="RogueObj"/> のクローンを生成する <see cref="ScriptableCharacterCreationData"/>
     /// </summary>
     [CreateAssetMenu(menuName = "RoguegardData/CharacterCreation/Data/Json")]
-    [ObjectFormer.IgnoreRequireRelationalComponent]
+    [Objforming.IgnoreRequireRelationalComponent]
     public class JsonCreationData : ScriptableCharacterCreationData
     {
         [SerializeField] private TextAsset _json = null;

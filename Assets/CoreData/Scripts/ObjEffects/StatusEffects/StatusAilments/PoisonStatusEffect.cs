@@ -7,7 +7,7 @@ using Roguegard.Extensions;
 
 namespace Roguegard
 {
-    [ObjectFormer.Formable]
+    [Objforming.Formable]
     public class PoisonStatusEffect : TimeLimitedStackableStatusEffect
     {
         public static IAffectCallback Callback { get; } = new AffectCallback(new PoisonStatusEffect());

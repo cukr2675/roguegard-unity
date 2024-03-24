@@ -11,7 +11,7 @@ namespace Roguegard
     {
         public override bool Invoke(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
         {
-            var sourceInfoSet = InfoSetSourcedEffect.GetSource(self);
+            var sourceInfoSet = InfoSetSourcedEffect.GetSource(self); // InfoSet 単位で解体可能か判定する（スタックできなくても解体可能）
             if (sourceInfoSet == null)
             {
                 Debug.LogError($"{self} にオブジェクト情報が設定されていません。");

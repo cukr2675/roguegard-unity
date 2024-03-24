@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Roguegard
 {
-    [ObjectFormer.Formable]
+    [Objforming.Formable]
     public class PolymorphStatusEffect : TimeLimitedStackableStatusEffect
     {
         private static readonly PolymorphStatusEffect instance = new PolymorphStatusEffect();

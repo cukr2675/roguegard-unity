@@ -6,7 +6,7 @@ using Roguegard;
 
 namespace RoguegardUnity
 {
-    [ObjectFormer.Formable]
+    [Objforming.Formable]
     public class StandardRogueDeviceData
     {
         public RogueObj Player { get; set; }

@@ -7,7 +7,7 @@ using SkeletalSprite;
 
 namespace Roguegard.CharacterCreation
 {
-    [ObjectFormer.Formable]
+    [Objforming.Formable]
     public class AppearanceBuilderList : IEnumerable<AppearanceBuilder>
     {
         private readonly List<AppearanceBuilder> builders = new List<AppearanceBuilder>();

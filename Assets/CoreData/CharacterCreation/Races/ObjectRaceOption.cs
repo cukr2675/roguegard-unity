@@ -7,7 +7,7 @@ using SkeletalSprite;
 namespace Roguegard.CharacterCreation
 {
     [System.Serializable]
-    [ObjectFormer.IgnoreRequireRelationalComponent]
+    [Objforming.IgnoreRequireRelationalComponent]
     public class ObjectRaceOption : IRaceOption
     {
         [SerializeField] private string _name;

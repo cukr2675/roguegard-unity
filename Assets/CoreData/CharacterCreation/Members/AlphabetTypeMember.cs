@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace Roguegard.CharacterCreation
 {
-    [ObjectFormer.Formable]
+    [Objforming.Formable]
     public class AlphabetTypeMember : IMember, IReadOnlyAlphabetTypeMember
     {
         public static IMemberSource SourceInstance { get; } = new SourceType();

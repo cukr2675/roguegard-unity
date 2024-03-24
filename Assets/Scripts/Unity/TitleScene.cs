@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
-using ObjectFormer;
+using Objforming;
 using Roguegard;
 
 namespace RoguegardUnity
@@ -20,7 +20,7 @@ namespace RoguegardUnity
         {
             StaticID.Next();
             Application.targetFrameRate = 60;
-            ObjectFormerLogger.Primary = new RoguegardObjectFormerLogger();
+            ObjformingLogger.Primary = new RoguegardObjformingLogger();
             //RogueMethodAspectState.Logger = new CoreRogueMethodAspectLogger();
 
             StartCoroutine(Coroutine());

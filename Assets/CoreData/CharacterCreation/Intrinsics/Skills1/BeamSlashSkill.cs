@@ -15,7 +15,7 @@ namespace Roguegard.CharacterCreation
             return new SortedIntrinsic(parent, lv);
         }
 
-        [ObjectFormer.Formable]
+        [Objforming.Formable]
         private class SortedIntrinsic : MPSkillSortedIntrinsic<SortedIntrinsic>
         {
             public override IRogueMethodTarget Target => ForEnemyRogueMethodTarget.Instance;

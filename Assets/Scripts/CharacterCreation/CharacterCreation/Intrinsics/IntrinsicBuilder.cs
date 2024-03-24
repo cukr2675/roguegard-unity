@@ -6,7 +6,7 @@ using Roguegard.Extensions;
 
 namespace Roguegard.CharacterCreation
 {
-    [ObjectFormer.Formable]
+    [Objforming.Formable]
     public class IntrinsicBuilder : IReadOnlyIntrinsic
     {
         public IIntrinsicOption Option { get; set; }

@@ -5,7 +5,7 @@ using UnityEngine.Tilemaps;
 
 namespace Roguegard
 {
-    [ObjectFormer.Formable]
+    [Objforming.Formable]
     public class UserRogueTile : IRogueTile
     {
         private readonly IRogueTileInfo _info;

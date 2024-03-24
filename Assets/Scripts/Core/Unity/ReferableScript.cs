@@ -17,7 +17,7 @@ namespace Roguegard
         ///     <see cref="ScriptableObject"/> による .asset ファイルでは string が最短なので string 型。
         /// </para>
         /// </summary>
-        [SerializeField, AssemblyReflectionAssetDummy, ObjectFormer.IgnoreMember] private string _assemblyReflectionAssetDummy;
+        [SerializeField, AssemblyReflectionAssetDummy, Objforming.IgnoreMember] private string _assemblyReflectionAssetDummy;
 #endif
 
         /// <summary>

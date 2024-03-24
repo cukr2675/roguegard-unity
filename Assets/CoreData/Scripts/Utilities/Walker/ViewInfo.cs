@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Roguegard
 {
-    [ObjectFormer.Formable]
+    [Objforming.Formable]
     public class ViewInfo : IRogueTilemapView
     {
         private ViewMap viewMap;
@@ -122,7 +122,7 @@ namespace Roguegard
             obj.RemoveInfo(typeof(Info));
         }
 
-        [ObjectFormer.Formable]
+        [Objforming.Formable]
         private class Info : IRogueObjInfo
         {
             public ViewInfo info;

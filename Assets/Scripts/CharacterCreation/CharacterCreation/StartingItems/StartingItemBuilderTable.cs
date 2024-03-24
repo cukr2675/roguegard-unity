@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Roguegard.CharacterCreation
 {
-    [ObjectFormer.Formable]
+    [Objforming.Formable]
     public class StartingItemBuilderTable : IEnumerable<StartingItemBuilderList>
     {
         private readonly List<StartingItemBuilderList> table = new List<StartingItemBuilderList>();

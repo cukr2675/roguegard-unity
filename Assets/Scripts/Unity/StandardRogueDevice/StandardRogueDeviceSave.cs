@@ -9,15 +9,15 @@ using System.IO.Compression;
 using System.Reflection;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using ObjectFormer;
-using ObjectFormer.Serialization.Json;
+using Objforming;
+using Objforming.Serialization.Json;
 using RuntimeDotter;
 using Roguegard;
 using Roguegard.CharacterCreation;
 using Roguegard.Device;
 using Roguegard.Extensions;
-using Roguegard.Scripting.MoonSharp.ObjectFormer.Serialization.Json;
-using Roguegard.ObjectFormer.Json;
+using Roguegard.Scripting.MoonSharp.Objforming.Serialization.Json;
+using Roguegard.Objforming.Json;
 
 namespace RoguegardUnity
 {

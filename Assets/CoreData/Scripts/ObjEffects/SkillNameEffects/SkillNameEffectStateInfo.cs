@@ -46,7 +46,7 @@ namespace Roguegard
             info.GetEffectedName(refName, skill);
         }
 
-        [ObjectFormer.IgnoreRequireRelationalComponent]
+        [Objforming.IgnoreRequireRelationalComponent]
         private class Info : IRogueObjInfo
         {
             private readonly List<ISkillNameEffect> _skillNameEffects = new List<ISkillNameEffect>();

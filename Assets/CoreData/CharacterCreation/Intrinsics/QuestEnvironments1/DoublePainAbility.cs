@@ -27,7 +27,7 @@ namespace Roguegard.CharacterCreation
             }
         }
 
-        [ObjectFormer.Formable]
+        [Objforming.Formable]
         private class MemberEffect : StatusEffectPartyMemberRogueEffect<SortedIntrinsic>, IValueEffect
         {
             // –hŒä—Í‚ÆƒK[ƒh‚ğ“K—p‚µ‚½‚ ‚Æ“ñ”{‚É‚·‚é

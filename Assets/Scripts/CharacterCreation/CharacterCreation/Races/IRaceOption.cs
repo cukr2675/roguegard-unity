@@ -6,7 +6,7 @@ using SkeletalSprite;
 
 namespace Roguegard.CharacterCreation
 {
-    [ObjectFormer.RequireRelationalComponent]
+    [Objforming.RequireRelationalComponent]
     public interface IRaceOption : IRogueDescription, IMemberableOption
     {
         /// <summary>

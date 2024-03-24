@@ -6,7 +6,7 @@ using MoonSharp.Interpreter;
 
 namespace Roguegard.Scripting.MoonSharp
 {
-    [ObjectFormer.Formable]
+    [Objforming.Formable]
     internal class MoonSharpRogueEffect : IRogueEffect, IRogueObjUpdater, IRogueMethodPassiveAspect
     {
         private readonly MoonSharpScriptingType type;

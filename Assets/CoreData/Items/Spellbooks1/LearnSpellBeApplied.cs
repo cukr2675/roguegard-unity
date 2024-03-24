@@ -22,12 +22,12 @@ namespace Roguegard
             return true;
         }
 
-        [ObjectFormer.Formable]
+        [Objforming.Formable]
         private class Closer : IRogueEffect, IDungeonFloorCloser
         {
             private readonly ISkill skill;
 
-            [ObjectFormer.CreateInstance]
+            [Objforming.CreateInstance]
             private Closer() { }
 
             public Closer(ISkill skill)

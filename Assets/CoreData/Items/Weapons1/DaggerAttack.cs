@@ -6,7 +6,7 @@ using Roguegard.Extensions;
 
 namespace Roguegard
 {
-    [ObjectFormer.Formable]
+    [Objforming.Formable]
     public class DaggerAttack : MPSkill
     {
         [SerializeField] private int _addDamage = 0;

@@ -10,7 +10,7 @@ namespace Roguegard
     /// 等価判定は <see cref="System.IEquatable{T}.Equals(T)"/> でおこなう。
     /// <see cref="System.IEquatable{T}.Equals(T)"/> で一致するものを同一インスタンスとしてシリアル化する。
     /// </summary>
-    [ObjectFormer.RequireRelationalComponent]
+    [Objforming.RequireRelationalComponent]
     public interface IRogueTile : System.IEquatable<IRogueTile>
     {
         /// <summary>

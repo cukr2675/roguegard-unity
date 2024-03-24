@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Roguegard
 {
     [CreateAssetMenu(menuName = "RoguegardData/Gender")]
-    [ObjectFormer.Referable]
+    [Objforming.Referable]
     public class KeywordsRogueGender : RogueGender
     {
         [SerializeField] private KeywordData[] _keywords = null;

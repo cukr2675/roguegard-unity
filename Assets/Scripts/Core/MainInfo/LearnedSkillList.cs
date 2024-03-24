@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace Roguegard
 {
-    [ObjectFormer.Formable]
+    [Objforming.Formable]
     public class LearnedSkillList //: IReadOnlyList<ISkill>
     {
         private readonly List<LearnedSkill> skills = new List<LearnedSkill>();
@@ -49,7 +49,7 @@ namespace Roguegard
 
         private IEnumerator<ISkill> GetEnumerator() => skills.Select(x => x.Skill).GetEnumerator();
 
-        [ObjectFormer.Formable]
+        [Objforming.Formable]
         private struct LearnedSkill : System.IEquatable<LearnedSkill>
         {
             public ISkill Skill { get; }

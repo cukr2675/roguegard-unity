@@ -75,7 +75,7 @@ namespace Roguegard
             info.storage = new RogueObjList();
         }
 
-        [ObjectFormer.Formable]
+        [Objforming.Formable]
         private class Info : IRogueObjInfo
         {
             [System.NonSerialized]

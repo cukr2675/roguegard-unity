@@ -6,7 +6,7 @@ using SkeletalSprite;
 
 namespace Roguegard.CharacterCreation
 {
-    [ObjectFormer.Formable]
+    [Objforming.Formable]
     public class CharacterCreationInfoSet : MainInfoSet
     {
         public override string Name => Data.Name;
@@ -93,7 +93,7 @@ namespace Roguegard.CharacterCreation
         public override IApplyRogueMethod BeThrown => CurrentRaceOption.BeThrown;
         public override IApplyRogueMethod BeEaten => CurrentRaceOption.BeEaten;
 
-        [ObjectFormer.CreateInstance]
+        [Objforming.CreateInstance]
         private CharacterCreationInfoSet() { }
 
         public CharacterCreationInfoSet(ICharacterCreationData data, int growingOptionIndex, IRogueGender gender)

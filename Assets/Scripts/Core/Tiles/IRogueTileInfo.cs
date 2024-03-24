@@ -5,7 +5,7 @@ using UnityEngine.Tilemaps;
 
 namespace Roguegard
 {
-    [ObjectFormer.RequireRelationalComponent]
+    [Objforming.RequireRelationalComponent]
     public interface IRogueTileInfo : IRogueTile, IRogueDescription
     {
         Sprite Sprite { get; }

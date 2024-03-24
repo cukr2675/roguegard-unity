@@ -8,13 +8,13 @@ namespace Roguegard
     /// <see cref="RogueObj"/> に情報を付与するインターフェース。
     /// リストで保存する <see cref="IRogueEffect"/> や <see cref="IStatusEffect"/> と違い <see cref="object.GetType"/> をキーとする連想配列で保存される。
     /// </summary>
-    [ObjectFormer.RequireRelationalComponent]
+    [Objforming.RequireRelationalComponent]
     public interface IRogueObjInfo
     {
         /// <summary>
         /// この値が true のときシリアル化から除外される。
         /// 常に除外し、かつ <see cref="IRogueEffect"/> を実装しないクラスでは
-        /// <see cref="ObjectFormer.IgnoreRequireRelationalComponentAttribute"/> と併用する。
+        /// <see cref="Objforming.IgnoreRequireRelationalComponentAttribute"/> と併用する。
         /// </summary>
         bool IsExclusedWhenSerialize { get; }
 

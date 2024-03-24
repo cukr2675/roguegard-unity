@@ -7,7 +7,7 @@ using Roguegard.CharacterCreation;
 
 namespace Roguegard
 {
-    [ObjectFormer.Formable]
+    [Objforming.Formable]
     public class SewedEquipmentInfoSet : MainInfoSet
     {
         private readonly SewedEquipmentData data;

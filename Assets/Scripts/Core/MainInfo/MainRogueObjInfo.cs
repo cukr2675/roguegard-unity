@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Roguegard
 {
-    [ObjectFormer.Formable]
+    [Objforming.Formable]
     public class MainRogueObjInfo
     {
         public IKeyword Category => InfoSet.Category;
@@ -65,7 +65,7 @@ namespace Roguegard
 
         private static readonly StaticInitializable<bool> recursion = new StaticInitializable<bool>(() => false);
 
-        [ObjectFormer.CreateInstance]
+        [Objforming.CreateInstance]
         private MainRogueObjInfo(bool dummy)
         {
             Sprite = new MainSpriteInfo();

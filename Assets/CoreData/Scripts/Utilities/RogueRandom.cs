@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Roguegard
 {
-    [ObjectFormer.Formable]
+    [Objforming.Formable]
     public class RogueRandom : IRogueRandom
     {
         [System.NonSerialized] private System.Random random;

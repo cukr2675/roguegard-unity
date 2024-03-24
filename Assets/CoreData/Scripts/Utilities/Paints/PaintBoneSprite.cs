@@ -7,7 +7,7 @@ using RuntimeDotter;
 
 namespace Roguegard
 {
-    [ObjectFormer.Formable]
+    [Objforming.Formable]
     public class PaintBoneSprite : IPaintBoneSprite
     {
         public DotterBoard NormalFront { get; set; }

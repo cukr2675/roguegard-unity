@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Roguegard
 {
-    [ObjectFormer.RequireRelationalComponent]
+    [Objforming.RequireRelationalComponent]
     public abstract class MainInfoSet : IRogueDescription, System.IEquatable<MainInfoSet>
     {
         public abstract string Name { get; }

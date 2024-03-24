@@ -37,7 +37,7 @@ namespace Roguegard.CharacterCreation
         {
         }
 
-        [ObjectFormer.Formable]
+        [Objforming.Formable]
         private class SavePoint : ISavePointInfo
         {
             private readonly DungeonCreationData data;

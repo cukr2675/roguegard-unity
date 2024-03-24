@@ -6,7 +6,7 @@ using Roguegard.Extensions;
 
 namespace Roguegard
 {
-    [ObjectFormer.Formable]
+    [Objforming.Formable]
     public class HungerStatusEffect : StackableStatusEffect, IValueEffect, IRogueObjUpdater
     {
         public static IAffectCallback Callback { get; } = new AffectCallback(new HungerStatusEffect());

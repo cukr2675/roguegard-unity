@@ -6,8 +6,8 @@ using UnityEngine.TestTools;
 
 using System.IO;
 using System.Reflection;
-using ObjectFormer;
-using ObjectFormer.Serialization.Json;
+using Objforming;
+using Objforming.Serialization.Json;
 using Roguegard;
 using Roguegard.CharacterCreation;
 
@@ -25,7 +25,7 @@ namespace RoguegardUnity.Tests
         public void RideTest()
         {
             _settings.TestLoad();
-            ObjectFormerLogger.Primary = new RoguegardObjectFormerLogger();
+            ObjformingLogger.Primary = new RoguegardObjformingLogger();
             RogueRandom.Primary = new RogueRandom(0);
             StaticID.Next();
 
@@ -89,7 +89,7 @@ namespace RoguegardUnity.Tests
         public void EquipTest()
         {
             _settings.TestLoad();
-            ObjectFormerLogger.Primary = new RoguegardObjectFormerLogger();
+            ObjformingLogger.Primary = new RoguegardObjformingLogger();
             RogueRandom.Primary = new RogueRandom(0);
             StaticID.Next();
 

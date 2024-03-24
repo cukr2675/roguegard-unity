@@ -42,7 +42,7 @@ namespace Roguegard.CharacterCreation
             return self.RemoveInfo(typeof(Info));
         }
 
-        [ObjectFormer.IgnoreRequireRelationalComponent]
+        [Objforming.IgnoreRequireRelationalComponent]
         private class Info : IRogueObjInfo
         {
             public DungeonQuest quest;
