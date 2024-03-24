@@ -128,6 +128,9 @@ namespace Roguegard
         {
             if (NormalFront == null || BackFront == null) return false;
 
+            // PivotDistance ‚ª¬‚³‚¢‚Æ‚«ã‰º•ªŠ„‚Ì‰e‹¿‚Å‰B‚¹‚È‚¢‚±‚Æ‚ª‚ ‚é‚½‚ßAˆê’èˆÈ‰º‚Ì‚Æ‚« false ‚ğ•Ô‚·B
+            if (PivotDistance < 4) return false;
+
             var normalPivot = NormalFront.Size / 2;
             var backPivot = BackFront.Size / 2;
             if (up)
