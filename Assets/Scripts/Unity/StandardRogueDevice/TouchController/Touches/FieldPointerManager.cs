@@ -18,11 +18,13 @@ namespace RoguegardUnity
         public float LongDownSeconds { get; set; }
         public float ZoomClippingRadius { get; set; }
         public float AntiJumpDistanceThreshold { get; set; }
+        public float AntiJumpValidSeconds { get; set; }
 
         private bool lastPinch;
         private bool pinchOnly;
         private float pressZoom;
         private float lastDistance;
+        private float antiJumpTimerSeconds;
 
         private float downSeconds;
         private bool readyToLongDown;
@@ -44,6 +46,10 @@ namespace RoguegardUnity
             {
                 pointer0.Update(deltaTime);
                 pointer1.Update(deltaTime);
+            }
+            if (antiJumpTimerSeconds > 0f)
+            {
+                antiJumpTimerSeconds -= deltaTime;
             }
         }
 
@@ -141,10 +147,12 @@ namespace RoguegardUnity
             {
                 // 同時タッチ中は指の間の距離を記録する
                 lastDistance = Vector2.Distance(pointer0.Position, pointer1.Position);
+                antiJumpTimerSeconds = AntiJumpValidSeconds;
             }
-            else if (pointer0.IsHeldDown || pointer1.IsHeldDown)
+            else if (antiJumpTimerSeconds > 0f && pointer0.IsHeldDown || pointer1.IsHeldDown)
             {
                 // 片方の指を離したあと、記録した距離より長い距離を移動していたらその操作を無効化する
+                // ジャンプ現象は連続して発生するため、連続して無効化できるようにする
                 if (info.DragRelativePosition.magnitude * info.PowedZoom >= lastDistance - AntiJumpDistanceThreshold)
                 {
                     if (pointer0.IsHeldDown) { pointer0.PressPosition = pointer0.Position; }

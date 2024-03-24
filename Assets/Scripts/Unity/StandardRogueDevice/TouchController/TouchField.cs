@@ -40,6 +40,7 @@ namespace RoguegardUnity
             pointerManager.LongDownSeconds = .5f;
             pointerManager.ZoomClippingRadius = .2f;
             pointerManager.AntiJumpDistanceThreshold = 40f;
+            pointerManager.AntiJumpValidSeconds = .1f;
             mouseInputManager = new MouseInputManager(info);
             mouseInputManager.WheelZoomingFilters = new[]
             {
