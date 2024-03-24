@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using Roguegard.Device;
+using Roguegard.Extensions;
 
 namespace Roguegard.CharacterCreation
 {
@@ -30,13 +31,8 @@ namespace Roguegard.CharacterCreation
 
         public void StartDungeon(RogueObj player, IRogueRandom random)
         {
-            var oldParty = player.Main.Stats.Party;
             var party = new RogueParty(_playerFaction.Faction, _playerFaction.TargetFactions);
-            while (oldParty.Members.Count >= 1)
-            {
-                var member = oldParty.Members[0];
-                member.Main.Stats.TryAssignParty(member, party);
-            }
+            RoguePartyUtility.AssignWithPartyMembers(player, party);
 
             var world = RogueWorldInfo.GetWorld(player);
             var dungeon = CreateObj(world, Vector2Int.zero, random);
@@ -45,21 +41,8 @@ namespace Roguegard.CharacterCreation
             var dungeonSeed = random.Next(int.MinValue, int.MaxValue);
             DungeonInfo.SetSeedTo(dungeon, dungeonSeed);
 
-            var partyMembers = party.Members;
-            for (int i = 0; i < partyMembers.Count; i++)
-            {
-                var member = partyMembers[i];
-                DungeonFloorCloserStateInfo.CloseAndRemoveNull(member, true);
-
-                // レベルを初期化
-                RoguegardCharacterCreationSettings.LevelInfoInitializer.InitializeLv(member, 1);
-
-                // 探索開始前に全回復する
-                member.Main.Stats.Reset(member);
-
-                member.Main.Stats.Direction = RogueDirection.Down;
-                if (!SpaceUtility.TryLocate(member, dungeon)) throw new RogueException();
-            }
+            RoguePartyUtility.Reset(party);
+            if (!RoguePartyUtility.TryLocateWithPartyMembers(player, dungeon)) throw new RogueException();
 
             // ターン経過で満腹度消費
             // 自然回復あり

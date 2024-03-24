@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using Roguegard.Extensions;
+
 namespace Roguegard.CharacterCreation
 {
     public abstract class RogueDungeonLevel : ScriptableObject
@@ -19,5 +21,25 @@ namespace Roguegard.CharacterCreation
         public abstract Spanning<IWeightedRogueObjGeneratorList> OtherTable { get; }
 
         public abstract void GenerateFloor(RogueObj player, RogueObj floor, IRogueRandom random);
+
+        protected static void LocatePartyMembers(RogueObj player, RogueObj floor, IRogueRandom random)
+        {
+            // パーティメンバーを移動
+            var party = player.Main.Stats.Party;
+            var members = party.Members;
+            for (int i = 0; i < members.Count; i++)
+            {
+                var member = members[i];
+                if (member == player) continue;
+                if (member.Main.Stats.HP <= 0 && StatsEffectedValues.GetMaxHP(member) >= 1) continue; // 倒れていたら移動させない
+                if (default(IActiveRogueMethodCaller).LocateNextToAnyMember(member, null, 0f, party)) continue;
+
+                // メンバーの移動に失敗したらランダム位置へ移動
+                var position = floor.Space.GetRandomPositionInRoom(random);
+                if (default(IActiveRogueMethodCaller).Locate(player, null, floor, position, 0f)) continue;
+
+                Debug.LogError("生成に失敗しました。");
+            }
+        }
     }
 }

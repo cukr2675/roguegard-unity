@@ -27,30 +27,14 @@ namespace Roguegard
 
                 var world = RogueWorldInfo.GetWorld(player);
                 var dungeon = DungeonInfo.GetLargestDungeon(player);
-                var oldParty = player.Main.Stats.Party;
 
                 if (player.Location != world)
                 {
                     // ワールドにいない場合
 
-                    // プレイヤーキャラクターは別空間に移動させる。
-                    var result = this.Locate(player, null, world, activationDepth);
+                    // プレイヤーキャラクターとパーティメンバーは別空間に移動させる。
+                    var result = this.LocateWithPartyMembers(player, null, world, activationDepth);
                     if (!result) return false;
-
-                    // パーティメンバーも移動
-                    if (oldParty != null)
-                    {
-                        var oldPartyMembers = oldParty.Members;
-                        for (int i = 0; i < oldPartyMembers.Count; i++)
-                        {
-                            var member = oldPartyMembers[i];
-                            if (member == player) continue;
-                            if (!this.Locate(member, null, world, activationDepth) && !SpaceUtility.TryLocate(member, world))
-                            {
-                                Debug.LogError($"{member} の移動に失敗しました。");
-                            }
-                        }
-                    }
 
                     // 元居たダンジョンは消す。
                     if (dungeon != null)
@@ -62,38 +46,15 @@ namespace Roguegard
 
                 // パーティ・リーダーエフェクト・レベルアップボーナスの初期化
                 var party = new RogueParty(player.Main.InfoSet.Faction, player.Main.InfoSet.TargetFactions);
-                while (oldParty.Members.Count >= 1)
-                {
-                    var member = oldParty.Members[0];
-                    member.Main.Stats.TryAssignParty(member, party);
-                }
+                RoguePartyUtility.AssignWithPartyMembers(player, party);
 
-                var partyMembers = party.Members;
-                for (int i = 0; i < partyMembers.Count; i++)
-                {
-                    var member = partyMembers[i];
-                    DungeonFloorCloserStateInfo.CloseAndRemoveNull(member, true);
-
-                    // レベルを初期化
-                    RoguegardCharacterCreationSettings.LevelInfoInitializer.InitializeLv(member, 1);
-
-                    // 探索開始前に全回復する
-                    member.Main.Stats.Reset(member);
-
-                    member.Main.Stats.Direction = RogueDirection.Down;
-                }
-
+                RoguePartyUtility.Reset(party);
                 LobbyLeaderEffect.Initialize(player);
 
                 if (player == RogueDevice.Primary.Player)
                 {
                     // プレイヤーキャラなら最初は上向き
                     player.Main.Stats.Direction = RogueDirection.Up;
-                }
-                else
-                {
-                    // それ以外は下向き
-                    player.Main.Stats.Direction = RogueDirection.Down;
                 }
 
                 return true;
@@ -113,7 +74,7 @@ namespace Roguegard
                 var worldInfo = RogueWorldInfo.GetByCharacter(player);
                 var tilemap = worldInfo.Lobby.Space.Tilemap;
                 var memberInfo = LobbyMemberList.GetMemberInfo(player);
-                if (memberInfo.Seat.Location == null)
+                if (memberInfo.Seat != null && memberInfo.Seat.Location == null)
                 {
                     // 席が消えていたら無効化
                     memberInfo.Seat = null;

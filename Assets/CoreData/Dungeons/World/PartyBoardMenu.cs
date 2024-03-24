@@ -104,9 +104,10 @@ namespace Roguegard
             {
                 root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
 
-                // キャラを席から呼び戻す
+                // クエストを中止してキャラを席から呼び戻す
                 var character = arg.TargetObj;
-                default(IActiveRogueMethodCaller).LocateSavePoint(character, null, 0f, RogueWorldSavePointInfo.Instance, true);
+                var leader = character.Main.Stats.Party.Members[0];
+                default(IActiveRogueMethodCaller).LocateSavePoint(leader, null, 0f, RogueWorldSavePointInfo.Instance, true);
                 SpaceUtility.TryLocate(character, null);
                 var info = LobbyMemberList.GetMemberInfo(character);
                 info.Seat = null;

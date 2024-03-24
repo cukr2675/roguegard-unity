@@ -70,24 +70,8 @@ namespace Roguegard.CharacterCreation
                 // プレイヤーキャラクターは別空間に移動させる。
                 var floor = self.Location; // 階段の空間はフロア
                 var dungeon = floor.Location; // フロアの空間はダンジョン
-                var result = this.Locate(player, null, dungeon, activationDepth);
+                var result = this.LocateWithPartyMembers(player, null, dungeon, activationDepth);
                 if (!result) return false;
-
-                // パーティメンバーも移動
-                var party = player.Main.Stats.Party;
-                if (party != null)
-                {
-                    var partyMembers = player.Main.Stats.Party.Members;
-                    for (int i = 0; i < partyMembers.Count; i++)
-                    {
-                        if (partyMembers[i] == player) continue;
-                        if (!this.Locate(partyMembers[i], null, dungeon, activationDepth) &&
-                            !SpaceUtility.TryLocate(partyMembers[i], dungeon))
-                        {
-                            Debug.LogError($"{partyMembers[i]} の移動に失敗しました。");
-                        }
-                    }
-                }
 
                 // 階層をレベルとして記憶する。
                 dungeon.Main.Stats.SetLv(dungeon, floor.Main.Stats.Lv + 1);
@@ -97,18 +81,7 @@ namespace Roguegard.CharacterCreation
                 dungeon.Space.RemoveAllNull();
 
                 // フロア限定のエフェクトを解除する。
-                DungeonFloorCloserStateInfo.CloseAndRemoveNull(player, false);
-
-                // パーティメンバーも解除
-                if (party != null)
-                {
-                    var partyMembers = player.Main.Stats.Party.Members;
-                    for (int i = 0; i < partyMembers.Count; i++)
-                    {
-                        if (partyMembers[i] == player) continue;
-                        DungeonFloorCloserStateInfo.CloseAndRemoveNull(partyMembers[i], false);
-                    }
-                }
+                RoguePartyUtility.CloseDungeonFloorClosers(player.Main.Stats.Party, false);
 
                 return true;
             }
