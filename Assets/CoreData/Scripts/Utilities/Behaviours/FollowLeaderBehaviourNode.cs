@@ -29,7 +29,13 @@ namespace Roguegard
             if (sqrDistance <= 2)
             {
                 if (!MovementUtility.TryGetApproachDirection(self, leader.Position, true, out var direction)) return RogueObjUpdaterContinueType.Continue;
-                if ((int)direction % 2 == 0) return RogueObjUpdaterContinueType.Continue; // ŽÎ‚ßˆÚ“®‚Å‚«‚éê‡‚Í‹ß‚Ã‚©‚È‚¢
+
+                // ŽÎ‚ßˆÚ“®‚Å‚«‚éê‡‚Í‹ß‚Ã‚©‚È‚¢
+                var nearAngle = (int)RogueDirection.FromSignOrLowerLeft(leader.Position - self.Position);
+                var angle = (int)direction;
+                var near = new RogueDirection(nearAngle - (angle - nearAngle)).Forward;
+                if (!self.Location.Space.CollideAt(self.Position + near)) return RogueObjUpdaterContinueType.Continue;
+
                 if (!default(IActiveRogueMethodCaller).Walk(self, direction, activationDepth)) return RogueObjUpdaterContinueType.Continue;
 
                 return RogueObjUpdaterContinueType.Break;
