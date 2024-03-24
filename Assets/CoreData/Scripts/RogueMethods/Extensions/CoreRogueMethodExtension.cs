@@ -9,6 +9,7 @@ namespace Roguegard.Extensions
         private static readonly LoseExpRogueMethod loseExp = new LoseExpRogueMethod();
         private static readonly TryAnyRogueMethod tryAnyRogueMethod = new TryAnyRogueMethod();
         private static readonly TryAnyKeyword tryAnyKeyword = new TryAnyKeyword();
+        private static readonly SwapPositionCommand swapPositionCommand = new SwapPositionCommand();
 
         public static bool PutIn(
             this IApplyRogueMethodCaller method, RogueObj self, RogueObj chest, IChestInfo chestInfo, RogueObj obj, float activationDepth)
@@ -25,8 +26,18 @@ namespace Roguegard.Extensions
         }
 
         public static bool Walk(
-            this IActiveRogueMethodCaller method, RogueObj self, RogueDirection direction, float activationDepth)
+            this IActiveRogueMethodCaller method, RogueObj self, RogueDirection direction, float activationDepth, bool canSwapPosition = false)
         {
+            if (canSwapPosition && self.Location != null)
+            {
+                var obj = self.Location.Space.GetColliderObj(self.Position + direction.Forward);
+                if (obj != null && !obj.AsTile && !StatsEffectedValues.AreVS(self, obj))
+                {
+                    // 被敵対キャラと入れ替わる
+                    return swapPositionCommand.CommandInvoke(self, null, activationDepth, new(targetObj: obj));
+                }
+            }
+
             var walkMethod = self.Main.InfoSet.Walk;
             var arg = new RogueMethodArgument(targetPosition: self.Position + direction.Forward);
             return RogueMethodAspectState.Invoke(MainInfoKw.Walk, walkMethod, self, null, activationDepth, arg);

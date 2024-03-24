@@ -73,6 +73,22 @@ namespace Roguegard.CharacterCreation
                 var result = this.Locate(player, null, dungeon, activationDepth);
                 if (!result) return false;
 
+                // パーティメンバーも移動
+                var party = player.Main.Stats.Party;
+                if (party != null)
+                {
+                    var partyMembers = player.Main.Stats.Party.Members;
+                    for (int i = 0; i < partyMembers.Count; i++)
+                    {
+                        if (partyMembers[i] == player) continue;
+                        if (!this.Locate(partyMembers[i], null, dungeon, activationDepth) &&
+                            !SpaceUtility.TryLocate(partyMembers[i], dungeon))
+                        {
+                            Debug.LogError($"{partyMembers[i]} の移動に失敗しました。");
+                        }
+                    }
+                }
+
                 // 階層をレベルとして記憶する。
                 dungeon.Main.Stats.SetLv(dungeon, floor.Main.Stats.Lv + 1);
 
@@ -82,6 +98,17 @@ namespace Roguegard.CharacterCreation
 
                 // フロア限定のエフェクトを解除する。
                 DungeonFloorCloserStateInfo.CloseAndRemoveNull(player, false);
+
+                // パーティメンバーも解除
+                if (party != null)
+                {
+                    var partyMembers = player.Main.Stats.Party.Members;
+                    for (int i = 0; i < partyMembers.Count; i++)
+                    {
+                        if (partyMembers[i] == player) continue;
+                        DungeonFloorCloserStateInfo.CloseAndRemoveNull(partyMembers[i], false);
+                    }
+                }
 
                 return true;
             }

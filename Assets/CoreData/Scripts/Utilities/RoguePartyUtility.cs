@@ -27,5 +27,23 @@ namespace Roguegard.Extensions
             }
             return false;
         }
+
+        public static bool TryLocateNextToAnyMember(RogueObj self, RogueParty party)
+        {
+            var partyMembers = party.Members;
+            for (int i = 0; i < partyMembers.Count; i++)
+            {
+                var member = partyMembers[i];
+                if (member == null) continue;
+
+                for (int j = 0; j < 8; j++)
+                {
+                    var direction = new RogueDirection(j);
+                    var position = member.Position + direction.Forward;
+                    if (SpaceUtility.TryLocate(self, member.Location, position)) return true;
+                }
+            }
+            return false;
+        }
     }
 }

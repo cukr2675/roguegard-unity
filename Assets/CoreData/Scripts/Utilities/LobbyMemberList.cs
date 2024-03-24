@@ -69,10 +69,11 @@ namespace Roguegard
             RogueObjUpdaterContinueType IRogueObjUpdater.UpdateObj(RogueObj self, float activationDepth, ref int sectionIndex)
             {
                 var effectedPriority = RogueBehaviourNodeEffect.GetPriority(self);
-                if (leader == (info.Seat != null) && priority <= effectedPriority) return default;
+                var currentLeader = (info.Seat != null) && (self.Main.Stats.Party.Members[0] == self);
+                if (leader == currentLeader && priority <= effectedPriority) return default;
 
                 RogueBehaviourNodeEffect.RemoveBehaviourNode(self, priority);
-                leader = info.Seat != null;
+                leader = currentLeader;
                 if (leader)
                 {
                     var ifInLobby = new IfInLobbyBehaviourNode();

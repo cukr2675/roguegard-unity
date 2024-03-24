@@ -39,18 +39,33 @@ namespace Roguegard
 
             public RogueObjUpdaterContinueType UpdateObj(RogueObj self, float activationDepth, ref int sectionIndex)
             {
-                var quests = QuestBoardInfo.GetQuestList(self);
-                if (quests == null)
+                var questBoardInfo = QuestBoardInfo.Get(self);
+                if (questBoardInfo == null)
                 {
-                    quests = QuestBoardInfo.SetQuestListTo(self);
+                    questBoardInfo = QuestBoardInfo.SetTo(self);
                 }
+                var questTable = questBoardInfo.QuestTable;
 
+                // クエストを4個そろえる
                 var random = RogueRandom.Primary;
-                while (quests.Count < 4)
+                while (questTable.Count < 4)
                 {
                     var quest = RoguegardSettings.DungeonQuestGenerator.GenerateQuest(random);
-                    quests.Add(quest);
+                    questTable.Add(quest);
                 }
+
+                // 最少人数以上で待ち時間がゼロになったクエストは出発させる
+                questTable.UpdateWeightTurns();
+                for (int i = 0; i < questTable.Count; i++)
+                {
+                    questTable.GetItem(i, out var quest, out var party, out var weightTurns);
+                    if (party == null || party.Members.Count < questBoardInfo.MinPartySize || weightTurns >= 1) continue;
+
+                    quest.Start(party.Members[0]);
+                    questTable.RemoveAt(i);
+                    i--;
+                }
+
                 return default;
             }
         }

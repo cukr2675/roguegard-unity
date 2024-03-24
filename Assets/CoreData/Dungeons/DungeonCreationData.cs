@@ -45,7 +45,7 @@ namespace Roguegard.CharacterCreation
             var dungeonSeed = random.Next(int.MinValue, int.MaxValue);
             DungeonInfo.SetSeedTo(dungeon, dungeonSeed);
 
-            var partyMembers = player.Main.Stats.Party.Members;
+            var partyMembers = party.Members;
             for (int i = 0; i < partyMembers.Count; i++)
             {
                 var member = partyMembers[i];

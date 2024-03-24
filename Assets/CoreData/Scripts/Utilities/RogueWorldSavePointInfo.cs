@@ -27,6 +27,7 @@ namespace Roguegard
 
                 var world = RogueWorldInfo.GetWorld(player);
                 var dungeon = DungeonInfo.GetLargestDungeon(player);
+                var oldParty = player.Main.Stats.Party;
 
                 if (player.Location != world)
                 {
@@ -35,6 +36,21 @@ namespace Roguegard
                     // プレイヤーキャラクターは別空間に移動させる。
                     var result = this.Locate(player, null, world, activationDepth);
                     if (!result) return false;
+
+                    // パーティメンバーも移動
+                    if (oldParty != null)
+                    {
+                        var oldPartyMembers = oldParty.Members;
+                        for (int i = 0; i < oldPartyMembers.Count; i++)
+                        {
+                            var member = oldPartyMembers[i];
+                            if (member == player) continue;
+                            if (!this.Locate(member, null, world, activationDepth) && !SpaceUtility.TryLocate(member, world))
+                            {
+                                Debug.LogError($"{member} の移動に失敗しました。");
+                            }
+                        }
+                    }
 
                     // 元居たダンジョンは消す。
                     if (dungeon != null)
@@ -46,13 +62,28 @@ namespace Roguegard
 
                 // パーティ・リーダーエフェクト・レベルアップボーナスの初期化
                 var party = new RogueParty(player.Main.InfoSet.Faction, player.Main.InfoSet.TargetFactions);
-                player.Main.Stats.TryAssignParty(player, party);
-                DungeonFloorCloserStateInfo.CloseAndRemoveNull(player, true);
-                LobbyLeaderEffect.Initialize(player);
-                RoguegardCharacterCreationSettings.LevelInfoInitializer.InitializeLv(player, 1);
+                while (oldParty.Members.Count >= 1)
+                {
+                    var member = oldParty.Members[0];
+                    member.Main.Stats.TryAssignParty(member, party);
+                }
 
-                // 探索開始前に全回復する
-                player.Main.Stats.Reset(player);
+                var partyMembers = party.Members;
+                for (int i = 0; i < partyMembers.Count; i++)
+                {
+                    var member = partyMembers[i];
+                    DungeonFloorCloserStateInfo.CloseAndRemoveNull(member, true);
+
+                    // レベルを初期化
+                    RoguegardCharacterCreationSettings.LevelInfoInitializer.InitializeLv(member, 1);
+
+                    // 探索開始前に全回復する
+                    member.Main.Stats.Reset(member);
+
+                    member.Main.Stats.Direction = RogueDirection.Down;
+                }
+
+                LobbyLeaderEffect.Initialize(player);
 
                 if (player == RogueDevice.Primary.Player)
                 {
@@ -82,6 +113,11 @@ namespace Roguegard
                 var worldInfo = RogueWorldInfo.GetByCharacter(player);
                 var tilemap = worldInfo.Lobby.Space.Tilemap;
                 var memberInfo = LobbyMemberList.GetMemberInfo(player);
+                if (memberInfo.Seat.Location == null)
+                {
+                    // 席が消えていたら無効化
+                    memberInfo.Seat = null;
+                }
                 Vector2Int position;
                 if (memberInfo.Seat != null && memberInfo.Seat.Location == worldInfo.Lobby)
                 {
@@ -98,6 +134,33 @@ namespace Roguegard
                     var movement = MovementCalculator.Get(player);
                     if (!player.TryLocate(worldInfo.Lobby, position, movement.AsTile, false, false, movement.HasSightCollider, StackOption.Default))
                         throw new RogueException("セーブポイントからの復帰に失敗しました。復帰位置に移動できません。");
+                }
+                // パーティメンバーも移動
+                if (player.Main.Stats.Party != null)
+                {
+                    var partyMembers = player.Main.Stats.Party.Members;
+                    for (int i = 0; i < partyMembers.Count; i++)
+                    {
+                        var member = partyMembers[i];
+                        if (member == player) continue;
+                        var memberMemberInfo = LobbyMemberList.GetMemberInfo(member);
+                        if (memberMemberInfo.Seat.Location == null)
+                        {
+                            // 席が消えていたら無効化
+                            memberMemberInfo.Seat = null;
+                        }
+                        if (memberMemberInfo.Seat != null && memberMemberInfo.Seat.Location == worldInfo.Lobby)
+                        {
+                            var memberPosition = memberMemberInfo.Seat.Position;
+                            if (SpaceUtility.TryLocate(member, worldInfo.Lobby, memberPosition)) continue;
+                        }
+
+                        // リスポーン地点が設定されていなければ規定の位置を使用
+                        if (!RoguePartyUtility.TryLocateNextToAnyMember(member, player.Main.Stats.Party))
+                        {
+                            Debug.LogError($"{member} の移動に失敗しました。");
+                        }
+                    }
                 }
 
                 world.Space.RemoveAllNull();
