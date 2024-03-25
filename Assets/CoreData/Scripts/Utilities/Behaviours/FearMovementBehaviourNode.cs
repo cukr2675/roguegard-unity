@@ -33,7 +33,7 @@ namespace Roguegard
                 var targetPosition = walker.GetWalk(self, true);
                 if (RogueDirection.TryFromSign(targetPosition - self.Position, out var direction))
                 {
-                    default(IActiveRogueMethodCaller).Walk(self, direction, activationDepth);
+                    default(IActiveRogueMethodCaller).Walk(self, direction, activationDepth, true);
                     walker.GetWalk(self, true); // 移動した直後の視界でパスを更新
                 }
                 return RogueObjUpdaterContinueType.Break;
