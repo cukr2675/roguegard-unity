@@ -40,8 +40,8 @@ namespace RuntimeDotter
             UpdatePenPosition(null);
 
             // êeóvëfÇÃçÇÇ≥Ç…çáÇÌÇπÇÈ
-            var height = ((RectTransform)_board.rectTransform.parent.transform).rect.height;
-            _board.rectTransform.sizeDelta = Vector2.one * height;
+            var height = ((RectTransform)transform.parent.transform).rect.height;
+            ((RectTransform)transform).sizeDelta = Vector2.one * height;
         }
 
         public void UpdateView(IReadOnlyList<ShiftableColor> palette, Color32 mainColor)
@@ -126,8 +126,9 @@ namespace RuntimeDotter
 
         private void UpdatePenPosition(PointerEventData eventData)
         {
-            var boardRect = _board.rectTransform.rect;
-            _cursor.sizeDelta = _board.rectTransform.sizeDelta;
+            var rectTransform = ((RectTransform)transform);
+            var boardRect = rectTransform.rect;
+            _cursor.sizeDelta = rectTransform.sizeDelta;
             _cursor.localScale = Vector3.one / Board.Size.y * 2f;
 
             if (eventData != null)
