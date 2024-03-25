@@ -101,6 +101,28 @@ namespace Roguegard
                     AddTo(table, BoneKeyword.RightFoot, lowerBoneSprite, mainColor);
                 }
             }
+            else if (Bone == BoneKeyword.RightArm)
+            {
+                ToBoneSprite(palette, out var upperBoneSprite, out var lowerBoneSprite);
+                AddTo(table, BoneKeyword.RightArm, upperBoneSprite, mainColor);
+                AddTo(table, BoneKeyword.RightHand, lowerBoneSprite, mainColor);
+                if (Mirroring)
+                {
+                    AddTo(table, BoneKeyword.LeftArm, upperBoneSprite, mainColor);
+                    AddTo(table, BoneKeyword.LeftHand, lowerBoneSprite, mainColor);
+                }
+            }
+            else if (Bone == BoneKeyword.RightLeg)
+            {
+                ToBoneSprite(palette, out var upperBoneSprite, out var lowerBoneSprite);
+                AddTo(table, BoneKeyword.RightLeg, upperBoneSprite, mainColor);
+                AddTo(table, BoneKeyword.RightFoot, lowerBoneSprite, mainColor);
+                if (Mirroring)
+                {
+                    AddTo(table, BoneKeyword.LeftLeg, upperBoneSprite, mainColor);
+                    AddTo(table, BoneKeyword.LeftFoot, lowerBoneSprite, mainColor);
+                }
+            }
             else
             {
                 var sprite = ToBoneSprite(palette);
