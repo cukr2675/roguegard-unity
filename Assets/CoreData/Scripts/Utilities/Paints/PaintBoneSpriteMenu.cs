@@ -11,7 +11,8 @@ namespace Roguegard
 {
     internal class PaintBoneSpriteMenu : IModelsMenu
     {
-        private static object[] models;
+        private static List<object> models;
+        private static BoneKeyword[] mirroringBones;
 
         private static readonly IModelsMenu boneMenu = new BoneMenu();
 
@@ -27,7 +28,7 @@ namespace Roguegard
         {
             if (models == null)
             {
-                models = new object[]
+                models = new List<object>
                 {
                     new ActionModelsMenuChoice("部位を変更", EditBone),
                     new PivotDistanceOption(),
@@ -35,10 +36,26 @@ namespace Roguegard
                     new ActionModelsMenuChoice("正面を編集", EditNormalSprite),
                     new ActionModelsMenuChoice("背面を編集", EditBackSprite)
                 };
+                mirroringBones = new[]
+                {
+                    BoneKeyword.LeftArm,
+                    BoneKeyword.LeftLeg,
+                    BoneKeyword.LeftEye,
+                    BoneKeyword.LeftEar,
+                    BoneKeyword.LeftWing
+                };
             }
-
             var table = (PaintBoneSpriteTable)arg.Other;
             var itemIndex = arg.Count;
+
+            // 一部ボーンはミラーリング設定を表示する
+            models.RemoveRange(5, models.Count - 5);
+            if (table.Items[itemIndex] is PaintBoneSprite paintBoneSprite && System.Array.IndexOf(mirroringBones, paintBoneSprite.Bone) != -1)
+            {
+                models.Add(new MirroringOption());
+            }
+            models.Add(new RemoveChoice());
+
             var scroll = (IScrollModelsMenuView)root.Get(DeviceKw.MenuOptions);
             scroll.OpenView(ChoicesModelsMenuItemController.Instance, models, root, null, null, new(other: table, count: itemIndex));
             scroll.ShowExitButton(ExitModelsMenuChoice.Instance);
@@ -83,8 +100,11 @@ namespace Roguegard
                     {
                         BoneKeyword.Body.Name,
                         BoneKeyword.LeftArm.Name,
+                        BoneKeyword.RightArm.Name,
                         BoneKeyword.LeftLeg.Name,
+                        BoneKeyword.RightLeg.Name,
                         BoneKeyword.Hair.Name,
+                        BoneKeyword.Head.Name,
                     };
                 }
 
@@ -164,6 +184,52 @@ namespace Roguegard
                 var itemIndex = arg.Count;
                 var boneSprite = (PaintBoneSprite)table.Items[itemIndex];
                 boneSprite.IsFirst = value;
+            }
+        }
+
+        private class MirroringOption : IModelsMenuOptionCheckBox
+        {
+            public TMP_InputField.ContentType ContentType => TMP_InputField.ContentType.IntegerNumber;
+
+            public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            {
+                return "ミラーリング";
+            }
+
+            public bool GetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            {
+                var table = (PaintBoneSpriteTable)arg.Other;
+                var itemIndex = arg.Count;
+                var boneSprite = (PaintBoneSprite)table.Items[itemIndex];
+                return boneSprite.Mirroring;
+            }
+
+            public void SetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg, bool value)
+            {
+                var table = (PaintBoneSpriteTable)arg.Other;
+                var itemIndex = arg.Count;
+                var boneSprite = (PaintBoneSprite)table.Items[itemIndex];
+                boneSprite.Mirroring = value;
+            }
+        }
+
+        private class RemoveChoice : IModelsMenuChoice
+        {
+            public TMP_InputField.ContentType ContentType => TMP_InputField.ContentType.IntegerNumber;
+
+            public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            {
+                return "<#f00>削除";
+            }
+
+            public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            {
+                root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+
+                var table = (PaintBoneSpriteTable)arg.Other;
+                var itemIndex = arg.Count;
+                table.RemoveAt(itemIndex);
+                root.Back();
             }
         }
 

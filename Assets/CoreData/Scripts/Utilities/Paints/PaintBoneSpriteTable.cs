@@ -45,6 +45,11 @@ namespace Roguegard
             _items.Add(item);
         }
 
+        public void RemoveAt(int index)
+        {
+            _items.RemoveAt(index);
+        }
+
         public int IndexOf(IPaintBoneSprite item)
         {
             return _items.IndexOf(item);
