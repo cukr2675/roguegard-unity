@@ -98,7 +98,7 @@ namespace Roguegard
 
             public string GetName(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                return ((IKeyword)model).Name;
+                return (string)model;
             }
 
             public void Activate(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
@@ -219,16 +219,14 @@ namespace Roguegard
                 switch (directionIndex)
                 {
                     case 0:
-                        paint.Boards[0].CopyTo(boneSprite.NormalFront);
-                        break;
                     case 1:
-                        paint.Boards[0].CopyTo(boneSprite.NormalRear);
+                        paint.Boards[0].CopyTo(boneSprite.NormalFront);
+                        boneSprite.BackRear = boneSprite.NormalFront;
                         break;
                     case 2:
-                        paint.Boards[0].CopyTo(boneSprite.BackFront);
-                        break;
                     case 3:
-                        paint.Boards[0].CopyTo(boneSprite.BackRear);
+                        paint.Boards[0].CopyTo(boneSprite.NormalRear);
+                        boneSprite.BackFront = boneSprite.NormalRear;
                         break;
                 }
                 table.MainColor = paint.MainColor;

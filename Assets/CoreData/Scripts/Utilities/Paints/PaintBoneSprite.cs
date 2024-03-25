@@ -38,10 +38,10 @@ namespace Roguegard
         public IPaintBoneSprite Clone()
         {
             var clone = new PaintBoneSprite();
-            clone.NormalFront = NormalFront;
-            clone.NormalRear = NormalRear;
-            clone.BackFront = BackFront;
-            clone.BackRear = BackRear;
+            clone.NormalFront = new DotterBoard(NormalFront);
+            clone.NormalRear = new DotterBoard(NormalRear);
+            clone.BackFront = new DotterBoard(BackFront);
+            clone.BackRear = new DotterBoard(BackRear);
             clone.PivotDistance = PivotDistance;
             clone.Bone = Bone;
             clone.Mirroring = Mirroring;
