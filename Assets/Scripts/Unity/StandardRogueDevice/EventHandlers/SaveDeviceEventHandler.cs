@@ -24,6 +24,14 @@ namespace RoguegardUnity
             {
                 if (componentManager.CantSave) return true;
 
+                var subject = componentManager.Subject;
+                if (subject != componentManager.Player && (subject.Location == null || subject.Location.Main.Stats.Lv % 5 != 0))
+                {
+                    // プレイヤーキャラクター以外に注目しているとき、5の倍数の階層のみオートセーブできる
+                    // それ以外は何もせず終了
+                    return true;
+                }
+
                 // オートセーブ
                 StandardRogueDeviceSave.GetNewAutoSavePath(
                     "AutoSave.gard", path => SaveDelay(null, path, true));
