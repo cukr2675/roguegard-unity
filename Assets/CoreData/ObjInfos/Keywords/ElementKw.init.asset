@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 471c469ef5fd9df40914c9874f2be567, type: 3}
+  m_Name: ElementKw.init
+  m_EditorClassIdentifier: 
+  _fire: {fileID: 11400000, guid: 89ca8d3ea134bc343b73c3835f0c9e2c, type: 2}
+  _ice: {fileID: 11400000, guid: 5d69d675699f5534dbfd44c76bd1c3f5, type: 2}
+  _thunder: {fileID: 11400000, guid: 74bae27c26f9b054796d75eea7465a25, type: 2}
