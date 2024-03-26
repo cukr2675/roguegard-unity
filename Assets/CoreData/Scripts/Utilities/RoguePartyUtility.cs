@@ -54,8 +54,9 @@ namespace Roguegard.Extensions
         }
 
         public static bool LocateWithPartyMembers(
-            this IChangeStateRogueMethodCaller method, RogueObj self, RogueObj user, RogueObj location, float activationDepth)
+            this IChangeStateRogueMethodCaller method, RogueObj self, RogueObj user, RogueObj location, float activationDepth, bool resetStack)
         {
+            if (self.Stack == 0 && resetStack) { self.TrySetStack(1); }
             var result = method.Locate(self, user, location, activationDepth);
             var party = self.Main.Stats.Party;
             if (result && party != null)
@@ -65,6 +66,11 @@ namespace Roguegard.Extensions
                 {
                     var member = partyMembers[i];
                     if (member == self) continue;
+                    if (member.Stack == 0)
+                    {
+                        if (resetStack) { member.TrySetStack(1); }
+                        else continue;
+                    }
                     if (!method.Locate(member, user, location, activationDepth) && !SpaceUtility.TryLocate(member, location))
                     {
                         Debug.LogError($"{member} ÇÃà⁄ìÆÇ…é∏îsÇµÇ‹ÇµÇΩÅB");
@@ -74,8 +80,9 @@ namespace Roguegard.Extensions
             return result;
         }
 
-        public static bool TryLocateWithPartyMembers(RogueObj self, RogueObj location)
+        public static bool TryLocateWithPartyMembers(RogueObj self, RogueObj location, bool resetStack)
         {
+            if (self.Stack == 0 && resetStack) { self.TrySetStack(1); }
             var result = SpaceUtility.TryLocate(self, location);
             var party = self.Main.Stats.Party;
             if (result && party != null)
@@ -85,6 +92,11 @@ namespace Roguegard.Extensions
                 {
                     var member = partyMembers[i];
                     if (member == self) continue;
+                    if (member.Stack == 0)
+                    {
+                        if (resetStack) { member.TrySetStack(1); }
+                        else continue;
+                    }
                     if (!SpaceUtility.TryLocate(member, location))
                     {
                         Debug.LogError($"{member} ÇÃà⁄ìÆÇ…é∏îsÇµÇ‹ÇµÇΩÅB");

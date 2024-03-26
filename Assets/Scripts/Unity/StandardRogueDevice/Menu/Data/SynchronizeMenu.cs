@@ -53,7 +53,7 @@ namespace RoguegardUnity
 
             public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                return "“¯Šú‚ð’†’f";
+                return "“¯Šú‚ð’†Ž~";
             }
 
             public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)

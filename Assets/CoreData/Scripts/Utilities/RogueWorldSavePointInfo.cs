@@ -27,7 +27,7 @@ namespace Roguegard
             {
                 if (LobbyMemberList.GetMemberInfo(player) == null) return false;
 
-                var world = RogueWorldInfo.GetWorld(player);
+                var world = RogueWorldInfo.GetWorld(RogueDevice.Primary.Player);
                 var dungeon = DungeonInfo.GetLargestDungeon(player);
 
                 if (player.Location != world)
@@ -35,7 +35,7 @@ namespace Roguegard
                     // ワールドにいない場合
 
                     // プレイヤーキャラクターとパーティメンバーは別空間に移動させる。
-                    var result = this.LocateWithPartyMembers(player, null, world, activationDepth);
+                    var result = this.LocateWithPartyMembers(player, null, world, activationDepth, true);
                     if (!result) return false;
 
                     // 元居たダンジョンは消す。

@@ -123,6 +123,7 @@ namespace RoguegardUnity
             memberInfo.SavePoint = null;
 
             // 前回セーブからの経過時間でターン経過
+            System.Exception exception = null;
             if (data.SaveDateTime != null)
             {
                 // ターン経過前に視点をプレイヤーへ移動する
@@ -151,8 +152,20 @@ namespace RoguegardUnity
                 var stopwatch = new System.Diagnostics.Stopwatch();
                 stopwatch.Start();
                 var coroutine = TickEnumerator.UpdateTurns(Player, Subject, turns, maxTurns * 1000, false, 1000);
-                while (coroutine.MoveNext() && !synchronizeMenu.Interrupt)
+                while (!synchronizeMenu.Interrupt)
                 {
+                    try
+                    {
+                        var result = coroutine.MoveNext();
+                        if (!result) break;
+                    }
+                    catch (System.Exception e)
+                    {
+                        // 例外を保留して処理を中止
+                        exception = e;
+                        Debug.LogError(e.StackTrace);
+                        break;
+                    }
                     synchronizeMenu.Progress = (float)coroutine.Current / turns;
                     yield return null;
                 }
@@ -172,6 +185,9 @@ namespace RoguegardUnity
 
             memberInfo.SavePoint = playerSavePoint;
             LoadSavePoint(Player);
+
+            // 保留した例外を投げなおす
+            if (exception != null) throw exception;
         }
 
         public void Close()

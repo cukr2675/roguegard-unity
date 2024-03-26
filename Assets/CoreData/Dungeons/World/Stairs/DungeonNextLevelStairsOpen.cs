@@ -70,7 +70,7 @@ namespace Roguegard.CharacterCreation
                 // プレイヤーキャラクターは別空間に移動させる。
                 var floor = self.Location; // 階段の空間はフロア
                 var dungeon = floor.Location; // フロアの空間はダンジョン
-                var result = this.LocateWithPartyMembers(player, null, dungeon, activationDepth);
+                var result = this.LocateWithPartyMembers(player, null, dungeon, activationDepth, true);
                 if (!result) return false;
 
                 // 階層をレベルとして記憶する。
