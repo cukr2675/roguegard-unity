@@ -30,6 +30,70 @@ MonoBehaviour:
     m_Localized: Snooty
     m_Metadata:
       m_Items: []
+  - m_Id: 32220907180265472
+    m_Localized: Hardy
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32234143917150208
+    m_Localized: Relaxed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32233802286895104
+    m_Localized: Quirky
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32233712059027456
+    m_Localized: Docile
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32235122305667072
+    m_Localized: Gentle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32240997858676736
+    m_Localized: Lonely
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32241526630387712
+    m_Localized: Quiet
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32241710856802304
+    m_Localized: Timid
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32242231919382528
+    m_Localized: Hasty
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32242652901675008
+    m_Localized: Sassy
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32242848901500928
+    m_Localized: Naive
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32243134529409024
+    m_Localized: Bold
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32243460531687424
+    m_Localized: Jolly
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32244228626190336
+    m_Localized: Brave
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32245213457158144
+    m_Localized: Naughty
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32245660553187328
+    m_Localized: Rash
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

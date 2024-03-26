@@ -51,6 +51,198 @@ MonoBehaviour:
     m_Key: SnootyAbility::d
     m_Metadata:
       m_Items: []
+  - m_Id: 32220907180265472
+    m_Key: HardyAbility
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32221394097016832
+    m_Key: HardyAbility::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32221407858528256
+    m_Key: HardyAbility::d
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32233712059027456
+    m_Key: DocileAbility
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32233739733045248
+    m_Key: DocileAbility::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32233749770014720
+    m_Key: DocileAbility::d
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32233802286895104
+    m_Key: QuirkyAbility
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32233925196779520
+    m_Key: QuirkyAbility::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32233937343483904
+    m_Key: QuirkyAbility::d
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32234143917150208
+    m_Key: RelaxedAbility
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32234152544833536
+    m_Key: RelaxedAbility::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32234167237480448
+    m_Key: RelaxedAbility::d
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32235122305667072
+    m_Key: GentleAbility
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32235158649311232
+    m_Key: GentleAbility::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32235167373463552
+    m_Key: GentleAbility::d
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32240997858676736
+    m_Key: LonelyAbility
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32241139731009536
+    m_Key: LonelyAbility::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32241150099329024
+    m_Key: LonelyAbility::d
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32241526630387712
+    m_Key: QuietAbility
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32241548105224192
+    m_Key: QuietAbility::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32241557198475264
+    m_Key: QuietAbility::d
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32241710856802304
+    m_Key: TimidAbility
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32241745782771712
+    m_Key: TimidAbility::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32241756889288704
+    m_Key: TimidAbility::d
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32242231919382528
+    m_Key: HastyAbility
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32242266002296832
+    m_Key: HastyAbility::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32242275934408704
+    m_Key: HastyAbility::d
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32242652901675008
+    m_Key: SassyAbility
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32242719410753536
+    m_Key: SassyAbility::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32242728537559040
+    m_Key: SassyAbility::d
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32242848901500928
+    m_Key: NaiveAbility
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32242876219002880
+    m_Key: NaiveAbility::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32242885043818496
+    m_Key: NaiveAbility::d
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32243134529409024
+    m_Key: BoldAbility
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32243205065019392
+    m_Key: BoldAbility::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32243214124716032
+    m_Key: BoldAbility::d
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32243460531687424
+    m_Key: JollyAbility
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32243506664837120
+    m_Key: JollyAbility::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32243515154108416
+    m_Key: JollyAbility::d
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32244228626190336
+    m_Key: BraveAbility
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32244293352689664
+    m_Key: BraveAbility::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32244334188433408
+    m_Key: BraveAbility::d
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32245213457158144
+    m_Key: NaughtyAbility
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32245241877762048
+    m_Key: NaughtyAbility::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32245251474329600
+    m_Key: NaughtyAbility::d
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32245660553187328
+    m_Key: RashAbility
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32245907568332800
+    m_Key: RashAbility::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32245925813555200
+    m_Key: RashAbility::d
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
