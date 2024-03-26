@@ -36,6 +36,12 @@ namespace Roguegard
             IKeyword keyword, ISkill skill, RogueObj self, RogueObj user, float activationDepth,
             RogueObj tool, float visibleRadius, RectInt room, IRogueRandom random, bool enqueueMessageRule = false)
         {
+            if (skill.RequiredMP >= 1)
+            {
+                var requiredMP = StatsEffectedValues.GetRequiredMP(self, skill.RequiredMP);
+                if (self.Main.Stats.MP < requiredMP) return false;
+            }
+
             using var predicator = skill.Target?.GetPredicator(self, 0f, tool);
             if (predicator == null) return false;
 
@@ -43,7 +49,8 @@ namespace Roguegard
             predicator.EndPredicate();
             if (predicator.Positions.Count == 0) return false;
 
-            if (enqueueMessageRule && !RoguegardSettings.KeywordsNotEnqueueMessageRule.Contains(keyword))
+            if (enqueueMessageRule && !RoguegardSettings.KeywordsNotEnqueueMessageRule.Contains(keyword) &&
+                MainCharacterWorkUtility.VisibleAt(self.Location, self.Position))
             {
                 RogueDevice.Add(DeviceKw.AppendText, DeviceKw.HorizontalRule);
             }
@@ -51,7 +58,12 @@ namespace Roguegard
             var positionIndex = random.Next(0, predicator.Positions.Count);
             var position = predicator.Positions[positionIndex];
             var arg = new RogueMethodArgument(targetPosition: position);
-            return RogueMethodAspectState.Invoke(keyword, skill, self, user, activationDepth, arg);
+            var result = RogueMethodAspectState.Invoke(keyword, skill, self, user, activationDepth, arg);
+            if (!result)
+            {
+                Debug.Log($"{self} が {skill} の発動に失敗しました。これにより不自然なアニメーション待機が起こることがあります。");
+            }
+            return result;
         }
 
         private static bool AutoItem(RogueObj item, RogueObj self, RogueObj user, float activationDepth, float visibleRadius, RectInt room, IRogueRandom random)
