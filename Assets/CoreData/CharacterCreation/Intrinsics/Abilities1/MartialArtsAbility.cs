@@ -16,6 +16,8 @@ namespace Roguegard.CharacterCreation
         {
             float IRogueMethodPassiveAspect.Order => 0f;
 
+            private static readonly RogueMethodArgumentBuilder argumentBuilder = new RogueMethodArgumentBuilder();
+
             public SortedIntrinsic(int lv) : base(lv) { }
 
             bool IRogueMethodPassiveAspect.PassiveInvoke(
@@ -27,7 +29,11 @@ namespace Roguegard.CharacterCreation
                 // 武器を使わずに通常攻撃するとき二回攻撃する
                 if (keyword == MainInfoKw.Attack && method == self.Main.InfoSet.Attack)
                 {
-                    result = next.Invoke(keyword, method, self, user, activationDepth, arg);
+                    // 二回目の攻撃はターゲットを指定しない
+                    argumentBuilder.SetArgument(arg);
+                    argumentBuilder.TargetObj = null;
+
+                    result = next.Invoke(keyword, method, self, user, activationDepth, argumentBuilder.ToArgument());
                 }
 
                 return result;
