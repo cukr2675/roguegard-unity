@@ -62,7 +62,7 @@ namespace Roguegard
         {
         }
 
-        public override MainInfoSet Reopen(RogueObj self, MainInfoSetType infoSetType)
+        public override MainInfoSet Reopen(RogueObj self, MainInfoSetType infoSetType, int deltaLv)
         {
             return this;
         }

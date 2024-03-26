@@ -31,18 +31,30 @@ namespace Roguegard.CharacterCreation
             }
         }
 
-        public void Reopen(RogueObj self, MainInfoSetType infoSetType)
+        public void Reopen(RogueObj self, MainInfoSetType infoSetType, int deltaLv)
         {
+            // すべてを閉じてから開きなおすとスキルの並びが変わってしまうため、
+            // Reopen 前のレベルから現在のレベルまでの Intrinsic だけ更新する。
+            // 同じ Intrinsic を複数回習得しないよう気を付ける。
             var selfLv = self.Main.Stats.Lv;
-            foreach (var intrinsic in sortedIntrinsics)
+            if (deltaLv == +1)
             {
-                if (intrinsic.Lv == selfLv)
+                foreach (var intrinsic in sortedIntrinsics)
                 {
-                    intrinsic.LevelUpToLv(self, infoSetType);
+                    if (intrinsic.Lv == selfLv)
+                    {
+                        intrinsic.LevelUpToLv(self, infoSetType);
+                    }
                 }
-                else if (intrinsic.Lv == selfLv + 1)
+            }
+            else if (deltaLv == -1)
+            {
+                foreach (var intrinsic in sortedIntrinsics)
                 {
-                    intrinsic.LevelDownFromLv(self, infoSetType);
+                    if (intrinsic.Lv == selfLv + 1)
+                    {
+                        intrinsic.LevelDownFromLv(self, infoSetType);
+                    }
                 }
             }
         }

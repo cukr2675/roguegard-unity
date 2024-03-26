@@ -10,6 +10,6 @@ namespace Roguegard.CharacterCreation
 
         void Close(RogueObj self, MainInfoSetType infoSetType, bool base2Polymorph);
 
-        void Reopen(RogueObj self, MainInfoSetType infoSetType);
+        void Reopen(RogueObj self, MainInfoSetType infoSetType, int deltaLv);
     }
 }

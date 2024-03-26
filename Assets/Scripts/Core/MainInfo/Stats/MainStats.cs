@@ -90,7 +90,7 @@ namespace Roguegard
             while (Lv < lv)
             {
                 Lv++;
-                if (self.Main.InfoSet != null) { self.Main.Polymorph(self, self.Main.InfoSet); }
+                if (self.Main.InfoSet != null) { self.Main.Polymorph(self, self.Main.InfoSet, +1); }
 
                 var levelInfo = self.Main.GetLevelInfo(self);
                 if (levelInfo != null)
@@ -108,7 +108,7 @@ namespace Roguegard
             while (Lv > lv)
             {
                 Lv--;
-                if (self.Main.InfoSet != null) { self.Main.Polymorph(self, self.Main.InfoSet); }
+                if (self.Main.InfoSet != null) { self.Main.Polymorph(self, self.Main.InfoSet, -1); }
 
                 var levelInfo = self.Main.GetLevelInfo(self);
                 if (levelInfo != null)

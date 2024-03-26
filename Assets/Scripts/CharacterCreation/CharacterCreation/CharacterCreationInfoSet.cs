@@ -150,10 +150,10 @@ namespace Roguegard.CharacterCreation
             Data.SortedIntrinsics.Close(self, infoSetType, base2Polymorph);
         }
 
-        public override MainInfoSet Reopen(RogueObj self, MainInfoSetType infoSetType)
+        public override MainInfoSet Reopen(RogueObj self, MainInfoSetType infoSetType, int deltaLv)
         {
             var newRaceOption = CurrentRaceOption.Reopen(self, infoSetType, CurrentRaceOption, Data);
-            Data.SortedIntrinsics.Reopen(self, infoSetType);
+            Data.SortedIntrinsics.Reopen(self, infoSetType, deltaLv);
 
             if (newRaceOption == CurrentRaceOption) return this;
             else if (Data.TryGetGrowingInfoSet(newRaceOption, _gender, out var growingInfoSet)) return growingInfoSet;

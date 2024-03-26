@@ -73,7 +73,7 @@ namespace Roguegard
         /// Close して Open するとスキルの順番が変わってしまうためこのメソッドが必要。
         /// 戻り値を実際の <see cref="MainRogueObjInfo.InfoSet"/> として使用する。
         /// </summary>
-        public abstract MainInfoSet Reopen(RogueObj self, MainInfoSetType infoSetType);
+        public abstract MainInfoSet Reopen(RogueObj self, MainInfoSetType infoSetType, int deltaLv);
 
         public abstract void GetObjSprite(RogueObj self, out RogueObjSprite objSprite, out ISpriteMotionSet motionSet);
 

@@ -134,6 +134,11 @@ namespace Roguegard
 
         public void Polymorph(RogueObj self, MainInfoSet infoSet)
         {
+            Polymorph(self, infoSet, 0);
+        }
+
+        internal void Polymorph(RogueObj self, MainInfoSet infoSet, int deltaLv)
+        {
             if (infoSet == null)
             {
                 Debug.LogError($"引数 {nameof(infoSet)} が null です。");
@@ -159,8 +164,8 @@ namespace Roguegard
                     case RogueEffectOpenState.NotStarted:
                         break;
                     case RogueEffectOpenState.Finished:
-                        BaseInfoSet = BaseInfoSet.Reopen(self, MainInfoSetType.Base);
-                        PolymorphInfoSet = PolymorphInfoSet?.Reopen(self, MainInfoSetType.Polymorph);
+                        BaseInfoSet = BaseInfoSet.Reopen(self, MainInfoSetType.Base, deltaLv);
+                        PolymorphInfoSet = PolymorphInfoSet?.Reopen(self, MainInfoSetType.Polymorph, deltaLv);
                         ReopenInfoSet(self);
                         break;
                     default:
