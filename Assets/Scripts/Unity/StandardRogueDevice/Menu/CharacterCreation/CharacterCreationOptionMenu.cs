@@ -44,6 +44,7 @@ namespace RoguegardUnity
             {
                 models.Clear();
                 models.Add(new SelectOptionChoice(intrinsicBuilder, database));
+                models.Add(new NameOption());
                 AddMemberModels(intrinsicBuilder);
                 models.Add(removeChoice);
             }
@@ -224,6 +225,38 @@ namespace RoguegardUnity
                     alphabetTypeMember.TypeIndex = (int)model;
                 }
                 root.Back();
+            }
+        }
+
+        private class NameOption : IModelsMenuOptionText
+        {
+            public TMP_InputField.ContentType ContentType => TMP_InputField.ContentType.Standard;
+
+            public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            {
+                return "名前";
+            }
+
+            public string GetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            {
+                if (arg.Other is IntrinsicBuilder intrinsicBuilder)
+                {
+                    return intrinsicBuilder.OptionName;
+                }
+                Debug.LogError("不正な型です。");
+                return "???";
+            }
+
+            public void SetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg, string value)
+            {
+                // 空欄の場合は上書きしないよう null にする
+                if (string.IsNullOrWhiteSpace(value)) { value = null; }
+
+                if (arg.Other is IntrinsicBuilder intrinsicBuilder)
+                {
+                    intrinsicBuilder.OptionName = value;
+                }
+                Debug.LogError("不正な型です。");
             }
         }
 

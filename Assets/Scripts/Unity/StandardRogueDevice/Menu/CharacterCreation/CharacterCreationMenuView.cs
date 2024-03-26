@@ -159,8 +159,8 @@ namespace RoguegardUnity
             _appearanceButton.SetItem(ChoicesModelsMenuItemController.Instance, appearanceChoice);
             MenuController.Show(_canvasGroup, true);
 
-            leftAnchorObjs[0] = models[0];
-            leftAnchorObjs[1] = loadPresetChoice;
+            leftAnchorObjs[0] = loadPresetChoice;
+            leftAnchorObjs[1] = models[0];
             var leftAnchor = root.Get(DeviceKw.MenuLeftAnchor);
             leftAnchor.OpenView(ChoicesModelsMenuItemController.Instance, leftAnchorObjs, root, self, user, arg);
         }
