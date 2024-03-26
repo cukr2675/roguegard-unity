@@ -37,9 +37,9 @@ namespace Roguegard
                 }
                 models.Add(null);
 
-                var scroll = (IScrollModelsMenuView)root.Get(DeviceKw.MenuScroll);
+                var scroll = root.Get(DeviceKw.MenuScroll);
                 scroll.OpenView(this, models, root, self, null, RogueMethodArgument.Identity);
-                scroll.ShowExitButton(ExitModelsMenuChoice.Instance);
+                ExitModelsMenuChoice.OpenLeftAnchorExit(root);
             }
 
             public string GetName(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
@@ -75,6 +75,7 @@ namespace Roguegard
         private class SewingMenu : IModelsMenu, IModelsMenuItemController
         {
             private static List<object> models;
+            private static object[] leftAnchorModels = new[]{ new ActionModelsMenuChoice("<", Exit) };
             private static readonly PaintBoneSpriteMenu nextMenu = new PaintBoneSpriteMenu();
             private static readonly EquipPartsMenu equipPartsMenu = new EquipPartsMenu();
             private static readonly ExitDialog exitDialog = new ExitDialog();
@@ -103,9 +104,10 @@ namespace Roguegard
                 }
                 models.Add(null);
 
-                var options = (IScrollModelsMenuView)root.Get(DeviceKw.MenuOptions);
+                var options = root.Get(DeviceKw.MenuOptions);
                 options.OpenView(this, models, root, self, null, new(other: data, targetObj: equipment));
-                options.ShowExitButton(new ActionModelsMenuChoice("<", Exit));
+                var leftAnchor = root.Get(DeviceKw.MenuLeftAnchor);
+                leftAnchor.OpenView(ChoicesModelsMenuItemController.Instance, leftAnchorModels, root, self, null, new(other: data, targetObj: equipment));
             }
 
             private static void EquipParts(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)

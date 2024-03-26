@@ -24,6 +24,8 @@ namespace RoguegardUnity
         [SerializeField] private CaptionWindow _captionWindow = null;
         [SerializeField] private ModelsMenuView _thumbnailMenu = null;
         [SerializeField] private ModelsMenuView _commandMenu = null;
+        [SerializeField] private ModelsMenuView _leftAnchorMenu = null;
+        [SerializeField] private ModelsMenuView _rightAnchorMenu = null;
         [SerializeField] private FloorMenuView _floorMenu = null;
         [SerializeField] private LoadingMenuView _loadingMenu = null;
         [SerializeField] private SummaryMenuView _summaryMenu = null;
@@ -68,12 +70,11 @@ namespace RoguegardUnity
             var partyMenu = new PartyMenu(_captionWindow, partyMemberMenu);
             mainMenu = new MainMenu(objsMenu, skillsMenu, partyMenu);
             longDownMenu = new LongDownMenu(objsMenu, objCommandMenu);
-            selectFileMenu = new SelectFileMenu(_scrollMenu);
+            selectFileMenu = new SelectFileMenu(_scrollMenu, _leftAnchorMenu);
 
             _touchMask.raycastTarget = false;
             _scrollMenu.Initialize();
             _summaryMenu.Initialize();
-            _detailsMenu.Initialize();
             _optionsMenu.Initialize();
             _characterCreationMenu.Initialize(rendererPool);
             _textEditorMenu.Initialize();
@@ -86,6 +87,8 @@ namespace RoguegardUnity
             table.Add(DeviceKw.MenuThumbnail, _thumbnailMenu);
             table.Add(DeviceKw.MenuScroll, _scrollMenu);
             table.Add(DeviceKw.MenuCommand, _commandMenu);
+            table.Add(DeviceKw.MenuLeftAnchor, _leftAnchorMenu);
+            table.Add(DeviceKw.MenuRightAnchor, _rightAnchorMenu);
             table.Add(DeviceKw.MenuFloor, _floorMenu);
             table.Add(DeviceKw.MenuLoading, _loadingMenu);
             table.Add(DeviceKw.MenuSummary, _summaryMenu);

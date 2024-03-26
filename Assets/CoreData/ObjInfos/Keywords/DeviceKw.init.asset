@@ -35,10 +35,12 @@ MonoBehaviour:
   _menuCommand: {fileID: 11400000, guid: a9a980e3cce249341b2baf5e3caa8f78, type: 2}
   _menuDetails: {fileID: 11400000, guid: e94dd2a2778ee6642af8de73147641d5, type: 2}
   _menuFloor: {fileID: 11400000, guid: d9eaad44572a6be4faf47df49ffc0c82, type: 2}
+  _menuLeftAnchor: {fileID: 11400000, guid: 0d5bcc19fa23b5d4e91686ebebe77ad3, type: 2}
   _menuLoading: {fileID: 11400000, guid: be399055f7cdec94ea00f8cc5cbd3faa, type: 2}
   _menuLog: {fileID: 11400000, guid: d5b8c2e0211ddfc43b9d71eb8ae7f250, type: 2}
   _menuOptions: {fileID: 11400000, guid: 3227d2c17f047fc4a8de3d41067fec2a, type: 2}
   _menuPaint: {fileID: 11400000, guid: 3bc90de16c8262e46bb3e413687f417d, type: 2}
+  _menuRightAnchor: {fileID: 11400000, guid: 81c7bbdd6372eab4fa145240dd6beb9f, type: 2}
   _menuScroll: {fileID: 11400000, guid: 516f732ec17ef9846a3252873465469a, type: 2}
   _menuSummary: {fileID: 11400000, guid: a08778e4b7acd3448a91a1d9a0ba04c9, type: 2}
   _menuTalk: {fileID: 11400000, guid: 8369900199d753e4d8cbd268adea188d, type: 2}

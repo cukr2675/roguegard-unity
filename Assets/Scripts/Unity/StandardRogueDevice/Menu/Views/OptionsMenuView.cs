@@ -9,11 +9,10 @@ using Roguegard.Device;
 
 namespace RoguegardUnity
 {
-    public class OptionsMenuView : ModelsMenuView, IScrollModelsMenuView
+    public class OptionsMenuView : ModelsMenuView
     {
         [SerializeField] private CanvasGroup _canvasGroup = null;
         [SerializeField] private ScrollRect _scrollRect = null;
-        [SerializeField] private ModelsMenuViewItemButton _exitButton = null;
         [SerializeField] private DotterColorPicker _colorPicker = null;
         [Space]
         [SerializeField] private ModelsMenuViewItemButton _choicePrefab = null;
@@ -29,7 +28,6 @@ namespace RoguegardUnity
 
         public void Initialize()
         {
-            _exitButton.Initialize(this);
             colorItemController = new ColorItemController() { parent = this };
             _colorPicker.OnColorChanged.AddListener(x => colorItemController.OnColorChanged(Root, Self, User, Arg, x.ToPickerColor()));
         }
@@ -118,12 +116,6 @@ namespace RoguegardUnity
         public override void SetPosition(float position)
         {
             _scrollRect.verticalNormalizedPosition = position;
-        }
-
-        public void ShowExitButton(IModelsMenuChoice choice)
-        {
-            _exitButton.SetItem(ChoicesModelsMenuItemController.Instance, choice);
-            MenuController.Show(_exitButton.CanvasGroup, true);
         }
 
         private class ColorItemController : IModelsMenuItemController

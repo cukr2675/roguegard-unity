@@ -44,9 +44,9 @@ namespace Roguegard
             {
                 var worldInfo = RogueWorldInfo.GetByCharacter(player);
                 var lobbyMembers = worldInfo.LobbyMembers.Members;
-                var scroll = (IScrollModelsMenuView)root.Get(DeviceKw.MenuScroll);
+                var scroll = root.Get(DeviceKw.MenuScroll);
                 scroll.OpenView(this, lobbyMembers, root, player, null, arg);
-                scroll.ShowExitButton(ExitModelsMenuChoice.Instance);
+                ExitModelsMenuChoice.OpenLeftAnchorExit(root);
             }
 
             public string GetName(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)

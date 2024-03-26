@@ -61,7 +61,7 @@ namespace RoguegardUnity
                 {
                     var summary = (SummaryMenuView)root.Get(DeviceKw.MenuSummary);
                     summary.OpenView(ChoicesModelsMenuItemController.Instance, Spanning<object>.Empty, root, self, user, arg);
-                    summary.ShowExitButton(ExitModelsMenuChoice.Instance);
+                    ExitModelsMenuChoice.OpenLeftAnchorExit(root);
 
                     if (arg.TargetObj != null)
                     {
@@ -111,7 +111,7 @@ namespace RoguegardUnity
                     details.OpenView(ChoicesModelsMenuItemController.Instance, models, root, self, user, arg);
                     Debug.Log(arg.TargetObj + " , " + arg.Tool);
                     details.SetObj(arg.Tool ?? arg.TargetObj);
-                    details.ShowExitButton(ExitModelsMenuChoice.Instance);
+                    ExitModelsMenuChoice.OpenLeftAnchorExit(root);
                 }
             }
         }

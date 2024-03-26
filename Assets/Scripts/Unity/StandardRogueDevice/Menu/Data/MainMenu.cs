@@ -316,7 +316,7 @@ namespace RoguegardUnity
             {
                 var options = (OptionsMenuView)root.Get(DeviceKw.MenuOptions);
                 options.OpenView(ChoicesModelsMenuItemController.Instance, choices, root, self, user, RogueMethodArgument.Identity);
-                options.ShowExitButton(ExitModelsMenuChoice.Instance);
+                ExitModelsMenuChoice.OpenLeftAnchorExit(root);
                 root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
             }
         }

@@ -24,8 +24,6 @@ namespace RoguegardUnity
         [SerializeField] private RectTransform _secondParent = null;
         [SerializeField] private ModelsMenuViewItemButton _headerPrefab = null;
         [SerializeField] private CharacterCreationMenuViewItemButton _itemButtonPrefab = null;
-        [SerializeField] private ModelsMenuViewItemButton _presetButton = null;
-        [SerializeField] private ModelsMenuViewItemButton _exitButton = null;
 
         public override CanvasGroup CanvasGroup => _canvasGroup;
 
@@ -43,6 +41,7 @@ namespace RoguegardUnity
         private AppearanceBuildersMenu appearanceBuildersMenu;
         private readonly List<MonoBehaviour> itemObjects = new List<MonoBehaviour>();
         private static readonly LoadPresetChoice loadPresetChoice = new LoadPresetChoice();
+        private static readonly object[] leftAnchorObjs = new object[2];
 
         public void Initialize(RogueSpriteRendererPool rendererPool)
         {
@@ -58,8 +57,6 @@ namespace RoguegardUnity
             _appearanceButton.Initialize(this);
             raceChoice = new RaceChoice() { parent = this };
             appearanceChoice = new AppearanceChoice() { parent = this };
-            _presetButton.Initialize(this);
-            _exitButton.Initialize(this);
             _nameField.onValueChanged.AddListener(text => builder.Name = text);
         }
 
@@ -160,9 +157,12 @@ namespace RoguegardUnity
 
             _raceButton.SetItem(ChoicesModelsMenuItemController.Instance, raceChoice);
             _appearanceButton.SetItem(ChoicesModelsMenuItemController.Instance, appearanceChoice);
-            _exitButton.SetItem(ChoicesModelsMenuItemController.Instance, models[0]);
-            _presetButton.SetItem(ChoicesModelsMenuItemController.Instance, loadPresetChoice);
             MenuController.Show(_canvasGroup, true);
+
+            leftAnchorObjs[0] = models[0];
+            leftAnchorObjs[1] = loadPresetChoice;
+            var leftAnchor = root.Get(DeviceKw.MenuLeftAnchor);
+            leftAnchor.OpenView(ChoicesModelsMenuItemController.Instance, leftAnchorObjs, root, self, user, arg);
         }
 
         private static void SetTransform(RectTransform itemTransform, ref float sumHeight, ref bool odd)
@@ -319,9 +319,9 @@ namespace RoguegardUnity
                     }
                 }
 
-                var scroll = (IScrollModelsMenuView)root.Get(DeviceKw.MenuScroll);
+                var scroll = root.Get(DeviceKw.MenuScroll);
                 scroll.OpenView(this, presets, root, self, null, new(other: arg.Other));
-                scroll.ShowExitButton(ExitModelsMenuChoice.Instance);
+                ExitModelsMenuChoice.OpenLeftAnchorExit(root);
             }
 
             public string GetName(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)

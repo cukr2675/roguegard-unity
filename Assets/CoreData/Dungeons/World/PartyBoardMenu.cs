@@ -27,9 +27,9 @@ namespace Roguegard
             }
             models.Add(null);
 
-            var scroll = (IScrollModelsMenuView)root.Get(DeviceKw.MenuScroll);
+            var scroll = root.Get(DeviceKw.MenuScroll);
             scroll.OpenView(itemController, models, root, player, null, RogueMethodArgument.Identity);
-            scroll.ShowExitButton(ExitModelsMenuChoice.Instance);
+            ExitModelsMenuChoice.OpenLeftAnchorExit(root);
         }
 
         private class ItemController : IModelsMenuItemController

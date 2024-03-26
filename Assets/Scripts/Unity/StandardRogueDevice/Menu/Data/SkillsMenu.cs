@@ -24,7 +24,7 @@ namespace RoguegardUnity
                     use.selfIndex = root.Get(DeviceKw.MenuScroll).GetPosition();
                     use.prevSelf = self;
                 };
-                use.exitChoice = new ExitModelsMenuChoice(use.action);
+                use.exitChoice = new[] { new ExitModelsMenuChoice(use.action) };
                 Use = use;
             }
         }
@@ -35,7 +35,7 @@ namespace RoguegardUnity
         private class UseMenu : IModelsMenu, IModelsMenuItemController, ISkillMenuItemController
         {
             private readonly SkillCommandMenu menu = new SkillCommandMenu();
-            public IModelsMenuChoice exitChoice;
+            public object[] exitChoice;
             public ModelsMenuAction action;
             public CaptionWindow caption;
 
@@ -57,8 +57,9 @@ namespace RoguegardUnity
                 var openArg = new RogueMethodArgument(targetObj: self, vector: new Vector2(position, 0f));
                 var scroll = (ScrollModelsMenuView)root.Get(DeviceKw.MenuScroll);
                 scroll.OpenView(this, models, root, self, user, openArg);
-                scroll.ShowExitButton(exitChoice);
                 caption.ShowCaption(":Skills");
+                var leftAnchor = root.Get(DeviceKw.MenuLeftAnchor);
+                leftAnchor.OpenView(ChoicesModelsMenuItemController.Instance, exitChoice, root, self, user, openArg);
             }
 
             public string GetName(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)

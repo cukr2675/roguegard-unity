@@ -8,6 +8,8 @@ namespace Roguegard.Device
     {
         public static ExitModelsMenuChoice Instance { get; } = new ExitModelsMenuChoice(null);
 
+        private static readonly object[] single = new[] { Instance };
+
         private ModelsMenuAction Action { get; }
 
         public ExitModelsMenuChoice(ModelsMenuAction action)
@@ -25,6 +27,12 @@ namespace Roguegard.Device
             Action?.Invoke(root, self, user, arg);
             root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Cancel);
             root.Back();
+        }
+
+        public static void OpenLeftAnchorExit(IModelsMenuRoot root)
+        {
+            var leftAnchor = root.Get(DeviceKw.MenuLeftAnchor);
+            leftAnchor.OpenView(ChoicesModelsMenuItemController.Instance, single, root, null, null, RogueMethodArgument.Identity);
         }
     }
 }

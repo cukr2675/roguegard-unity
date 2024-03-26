@@ -21,8 +21,6 @@ namespace RoguegardUnity
         [SerializeField] private TMP_Text _textLeftR = null;
         [SerializeField] private TMP_Text _textRightL = null;
         [SerializeField] private TMP_Text _textRightR = null;
-        [SerializeField] private ModelsMenuViewItemButton _exitButton = null;
-        [SerializeField] private ModelsMenuViewItemButton _submitButton = null;
 
         public override CanvasGroup CanvasGroup => _canvasGroup;
 
@@ -33,8 +31,8 @@ namespace RoguegardUnity
         private StringBuilder rightRBuilder;
         private RogueNameBuilder nameBuilder;
 
-        private static readonly SubmitChoice submitChoice = new SubmitChoice();
-        private static readonly StartQuestChoice startQuestChoice = new StartQuestChoice();
+        private static readonly SubmitChoice[] submitChoice = new[] { new SubmitChoice() };
+        private static readonly StartQuestChoice[] startQuestChoice = new[] { new StartQuestChoice() };
 
         public void Initialize()
         {
@@ -44,9 +42,6 @@ namespace RoguegardUnity
             rightLBuilder = new StringBuilder();
             rightRBuilder = new StringBuilder();
             nameBuilder = new RogueNameBuilder();
-
-            _exitButton.Initialize(this);
-            _submitButton.Initialize(this);
         }
 
         public override void OpenView<T>(
@@ -54,8 +49,6 @@ namespace RoguegardUnity
             IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         {
             SetArg(root, self, user, arg);
-            MenuController.Show(_exitButton.CanvasGroup, false);
-            MenuController.Show(_submitButton.CanvasGroup, false);
             MenuController.Show(_canvasGroup, true);
         }
 
@@ -104,7 +97,8 @@ namespace RoguegardUnity
             SetArg(Root, Self, User, arg);
 
             SetObj(player, dungeon);
-            ShowSubmitButton(submitChoice);
+            var rightAnchor = Root.Get(DeviceKw.MenuRightAnchor);
+            rightAnchor.OpenView(ChoicesModelsMenuItemController.Instance, submitChoice, Root, Self, User, Arg);
         }
 
         void IResultMenuView.SetGameOver(RogueObj player, RogueObj dungeon)
@@ -113,8 +107,9 @@ namespace RoguegardUnity
             SetArg(Root, Self, User, arg);
 
             SetObj(player, null);
-            ShowExitButton(ExitModelsMenuChoice.Instance);
-            ShowSubmitButton(submitChoice);
+            ExitModelsMenuChoice.OpenLeftAnchorExit(Root);
+            var rightAnchor = Root.Get(DeviceKw.MenuRightAnchor);
+            rightAnchor.OpenView(ChoicesModelsMenuItemController.Instance, submitChoice, Root, Self, User, Arg);
         }
 
         void IDungeonQuestMenuView.SetQuest(RogueObj player, DungeonQuest quest, bool showSubmitButton)
@@ -178,8 +173,12 @@ namespace RoguegardUnity
             _textRightL.SetText(rightLBuilder);
             _textRightR.SetText(rightRBuilder);
 
-            ShowExitButton(ExitModelsMenuChoice.Instance);
-            if (showSubmitButton) { ShowSubmitButton(startQuestChoice); }
+            ExitModelsMenuChoice.OpenLeftAnchorExit(Root);
+            if (showSubmitButton)
+            {
+                var rightAnchor = Root.Get(DeviceKw.MenuRightAnchor);
+                rightAnchor.OpenView(ChoicesModelsMenuItemController.Instance, startQuestChoice, Root, Self, User, Arg);
+            }
         }
 
         private void SetHeader(RogueObj obj)
@@ -340,18 +339,6 @@ namespace RoguegardUnity
             topBuilder.Append(nameBuilder.ToString()).AppendLine(" を突破した");
 
             _topText.SetText(topBuilder);
-        }
-
-        public void ShowExitButton(IModelsMenuChoice choice)
-        {
-            _exitButton.SetItem(ChoicesModelsMenuItemController.Instance, choice);
-            MenuController.Show(_exitButton.CanvasGroup, true);
-        }
-
-        private void ShowSubmitButton(IModelsMenuChoice choice)
-        {
-            _submitButton.SetItem(ChoicesModelsMenuItemController.Instance, choice);
-            MenuController.Show(_submitButton.CanvasGroup, true);
         }
 
         private class SubmitChoice : IModelsMenuChoice

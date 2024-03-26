@@ -65,6 +65,7 @@ namespace RoguegardUnity
             private ActionModelsMenuChoice sortChoice;
 
             private static CategorizedSortTable sortTable;
+            private static List<object> leftAnchorObjs = new List<object>();
 
             /// <summary>
             /// <paramref name="targetObj"/> のインベントリを開く
@@ -101,9 +102,10 @@ namespace RoguegardUnity
                 var scroll = (ScrollModelsMenuView)root.Get(DeviceKw.MenuScroll);
                 scroll.OpenView(this, models, root, self, user, arg);
                 scroll.SetPosition(position);
-                scroll.ShowExitButton(ExitModelsMenuChoice.Instance);
 
                 caption.ShowCaption(MenuName);
+
+                leftAnchorObjs.Clear();
 
                 // プレイヤーパーティのキャラのインベントリまたは倉庫であればソート可能
                 if (SortIsEnabled)
@@ -112,9 +114,13 @@ namespace RoguegardUnity
                         ChestInfo.GetStorage(arg.TargetObj) != null)
                     {
                         sortChoice ??= new ActionModelsMenuChoice(":Sort", Sort);
-                        scroll.ShowSortButton(sortChoice);
+                        leftAnchorObjs.Add(sortChoice);
                     }
                 }
+
+                leftAnchorObjs.Add(ExitModelsMenuChoice.Instance);
+                var leftAnchor = root.Get(DeviceKw.MenuLeftAnchor);
+                leftAnchor.OpenView(ChoicesModelsMenuItemController.Instance, leftAnchorObjs, root, self, user, arg);
             }
 
             public string GetName(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)

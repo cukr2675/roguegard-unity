@@ -49,9 +49,9 @@ namespace Roguegard
 
             public void OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                var scroll = (IScrollModelsMenuView)root.Get(DeviceKw.MenuScroll);
+                var scroll = root.Get(DeviceKw.MenuScroll);
                 scroll.OpenView(this, parent._items, root, self, user, arg);
-                scroll.ShowExitButton(ExitModelsMenuChoice.Instance);
+                ExitModelsMenuChoice.OpenLeftAnchorExit(root);
             }
 
             public string GetName(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)

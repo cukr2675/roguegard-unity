@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using RuntimeDotter;
+using Roguegard.Device;
 
 namespace Roguegard
 {
-    public interface IPaintModelsMenuView : IScrollModelsMenuView
+    public interface IPaintModelsMenuView : IModelsMenuView
     {
         Spanning<DotterBoard> Boards { get; }
         Color32 MainColor { get; }

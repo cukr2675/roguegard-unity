@@ -16,7 +16,6 @@ namespace RoguegardUnity
         [SerializeField] private Image _splitLine = null;
         [SerializeField] private Image _upperPivot = null;
         [SerializeField] private Image _lowerPivot = null;
-        [SerializeField] private ModelsMenuViewItemButton _exitButton = null;
 
         public override CanvasGroup CanvasGroup => _canvasGroup;
 
@@ -52,7 +51,6 @@ namespace RoguegardUnity
         {
             _boards = new List<DotterBoard>();
             _palette = new List<ShiftableColor>();
-            _exitButton.Initialize(this);
         }
 
         public override void OpenView<T>(
@@ -98,11 +96,6 @@ namespace RoguegardUnity
 
         public override void SetPosition(float position)
         {
-        }
-
-        void IScrollModelsMenuView.ShowExitButton(IModelsMenuChoice exitItem)
-        {
-            _exitButton.SetItem(ChoicesModelsMenuItemController.Instance, exitItem);
         }
     }
 }

@@ -11,8 +11,10 @@ namespace RoguegardUnity
     public class SelectFileMenu : IModelsMenu
     {
         private readonly ScrollModelsMenuView scrollMenuView;
+        private readonly IModelsMenuView leftAnchorMenuView;
 
         private readonly List<object> objs = new List<object>();
+        private readonly List<object> leftAnchorObjs = new List<object>();
 
         private static readonly ItemController itemController = new ItemController();
         private static readonly ImportChoice importChoice = new ImportChoice();
@@ -20,9 +22,10 @@ namespace RoguegardUnity
         public delegate void SelectCallback(IModelsMenuRoot root, string path);
         public delegate void AddCallback(IModelsMenuRoot root);
 
-        public SelectFileMenu(ScrollModelsMenuView scrollMenuView)
+        public SelectFileMenu(ScrollModelsMenuView scrollMenuView, IModelsMenuView leftAnchorMenuView)
         {
             this.scrollMenuView = scrollMenuView;
+            this.leftAnchorMenuView = leftAnchorMenuView;
         }
 
         public void Open(Type type, SelectCallback selectCallback, AddCallback addCallback = null)
@@ -52,9 +55,12 @@ namespace RoguegardUnity
                 if (itemController.addCallback != null) { objs.Add(null); }
                 objs.AddRange(files);
                 scrollMenuView.OpenView(itemController, objs, root, self, user, filesArg);
-                scrollMenuView.ShowExitButton(ExitModelsMenuChoice.Instance);
-                if (itemController.type == Type.Read) { scrollMenuView.ShowSortButton(importChoice); }
                 scrollMenuView.SetPosition(0f);
+
+                leftAnchorObjs.Clear();
+                if (itemController.type == Type.Read) { leftAnchorObjs.Add(importChoice); }
+                leftAnchorObjs.Add(ExitModelsMenuChoice.Instance);
+                leftAnchorMenuView.OpenView(ChoicesModelsMenuItemController.Instance, leftAnchorObjs, root, self, user, filesArg);
             });
         }
 

@@ -8,12 +8,10 @@ using Roguegard.Device;
 
 namespace RoguegardUnity
 {
-    public class ScrollModelsMenuView : ModelsMenuView, IScrollModelsMenuView
+    public class ScrollModelsMenuView : ModelsMenuView
     {
         [SerializeField] private CanvasGroup _canvasGroup = null;
         [SerializeField] private ScrollRect _scrollRect = null;
-        [SerializeField] private ModelsMenuViewItemButton _sortButton = null;
-        [SerializeField] private ModelsMenuViewItemButton _exitButton = null;
         [SerializeField] private ModelsMenuViewItemButton _itemPrefab = null;
 
         [Header("Layout")]
@@ -35,8 +33,6 @@ namespace RoguegardUnity
         {
             itemHeight = _itemPrefab.GetComponent<RectTransform>().rect.height;
             scrollTransform = _scrollRect.GetComponent<RectTransform>(); // 画面サイズの変更に対応するため Transform を記憶する
-            _sortButton.Initialize(this);
-            _exitButton.Initialize(this);
             _scrollRect.onValueChanged.AddListener((x) => UpdateItems());
         }
 
@@ -56,8 +52,6 @@ namespace RoguegardUnity
             //index = Mathf.Clamp(arg.Vector.x, 0f, Mathf.Floor(marginHeight / itemHeight));
             _scrollRect.verticalNormalizedPosition = 1f - (index * itemHeight / marginHeight);
             UpdateItems();
-            MenuController.Show(_sortButton.CanvasGroup, false);
-            MenuController.Show(_exitButton.CanvasGroup, false);
             MenuController.Show(_canvasGroup, true);
         }
 
@@ -73,18 +67,6 @@ namespace RoguegardUnity
         {
             _scrollRect.verticalNormalizedPosition = 1f - (position * itemHeight / marginHeight);
             //_scrollRect.verticalNormalizedPosition = position;
-        }
-
-        public void ShowExitButton(IModelsMenuChoice choice)
-        {
-            _exitButton.SetItem(ChoicesModelsMenuItemController.Instance, choice);
-            MenuController.Show(_exitButton.CanvasGroup, true);
-        }
-
-        public void ShowSortButton(IModelsMenuChoice choice)
-        {
-            _sortButton.SetItem(ChoicesModelsMenuItemController.Instance, choice);
-            MenuController.Show(_sortButton.CanvasGroup, true);
         }
 
         private void ShowSubmitButton(IModelsMenuChoice choice)

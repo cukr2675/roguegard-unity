@@ -58,7 +58,7 @@ namespace RoguegardUnity
 
             var options = (OptionsMenuView)root.Get(DeviceKw.MenuOptions);
             options.OpenView(ChoicesModelsMenuItemController.Instance, models, root, self, null, new(other: arg.Other));
-            options.ShowExitButton(ExitModelsMenuChoice.Instance);
+            ExitModelsMenuChoice.OpenLeftAnchorExit(root);
         }
 
         private void AddMemberModels(IMemberable memberable)
@@ -172,9 +172,9 @@ namespace RoguegardUnity
             {
                 models.Clear();
                 CharacterCreationAddMenu.AddOptionsTo(models, self, arg.Other, database);
-                var scroll = (IScrollModelsMenuView)root.Get(DeviceKw.MenuScroll);
+                var scroll = root.Get(DeviceKw.MenuScroll);
                 scroll.OpenView(this, models, root, self, null, new(other: arg.Other));
-                scroll.ShowExitButton(ExitModelsMenuChoice.Instance);
+                ExitModelsMenuChoice.OpenLeftAnchorExit(root);
             }
 
             public string GetName(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
@@ -350,17 +350,15 @@ namespace RoguegardUnity
 
         private class SelectGenderMenu : IModelsMenu, IModelsMenuItemController
         {
-            private readonly List<object> models = new List<object>();
-
             public ICharacterCreationDatabase database;
             private RaceBuilder builder;
 
             public void OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 builder = (RaceBuilder)arg.Other;
-                var scroll = (IScrollModelsMenuView)root.Get(DeviceKw.MenuScroll);
+                var scroll = root.Get(DeviceKw.MenuScroll);
                 scroll.OpenView(this, builder.Option.Genders, root, self, null, new(other: arg.Other));
-                scroll.ShowExitButton(ExitModelsMenuChoice.Instance);
+                ExitModelsMenuChoice.OpenLeftAnchorExit(root);
             }
 
             public string GetName(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)

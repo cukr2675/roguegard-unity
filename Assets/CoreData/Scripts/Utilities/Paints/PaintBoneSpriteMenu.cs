@@ -61,9 +61,9 @@ namespace Roguegard
             }
             models.Add(new RemoveChoice());
 
-            var scroll = (IScrollModelsMenuView)root.Get(DeviceKw.MenuOptions);
+            var scroll = root.Get(DeviceKw.MenuOptions);
             scroll.OpenView(ChoicesModelsMenuItemController.Instance, models, root, null, null, new(other: table, count: itemIndex));
-            scroll.ShowExitButton(ExitModelsMenuChoice.Instance);
+            ExitModelsMenuChoice.OpenLeftAnchorExit(root);
         }
 
         private static void EditBone(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
@@ -116,9 +116,9 @@ namespace Roguegard
                 var table = (PaintBoneSpriteTable)arg.Other;
                 var itemIndex = arg.Count;
                 var boneSprite = table.Items[itemIndex];
-                var scroll = (IScrollModelsMenuView)root.Get(DeviceKw.MenuScroll);
+                var scroll = root.Get(DeviceKw.MenuScroll);
                 scroll.OpenView(this, models, root, null, null, new(other: boneSprite));
-                scroll.ShowExitButton(ExitModelsMenuChoice.Instance);
+                ExitModelsMenuChoice.OpenLeftAnchorExit(root);
             }
 
             public string GetName(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
@@ -241,7 +241,7 @@ namespace Roguegard
         private class PaintMenu : IModelsMenu
         {
             private readonly int directionIndex;
-            private readonly IModelsMenuChoice exit;
+            private readonly object[] exit;
 
             private static readonly DotterBoard[] models = new DotterBoard[1];
             private static readonly Vector2[] pivots = new Vector2[2];
@@ -251,7 +251,7 @@ namespace Roguegard
                 if (directionIndex < 0 || 4 <= directionIndex) throw new System.ArgumentOutOfRangeException(nameof(directionIndex));
 
                 this.directionIndex = directionIndex;
-                exit = new ExitModelsMenuChoice(Exit);
+                exit = new[] { new ExitModelsMenuChoice(Exit) };
             }
 
             public void OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
@@ -277,8 +277,9 @@ namespace Roguegard
                 var showsSplitLine = boneSprite.ShowsSplitLine(models[0], out pivots[0], out pivots[1]);
                 var paint = (IPaintModelsMenuView)root.Get(DeviceKw.MenuPaint);
                 paint.OpenView(ChoicesModelsMenuItemController.Instance, models, root, self, null, new(other: table, count: itemIndex));
-                paint.ShowExitButton(exit);
                 paint.ShowSplitLine(showsSplitLine, pivots);
+                var leftAnchor = root.Get(DeviceKw.MenuLeftAnchor);
+                leftAnchor.OpenView(ChoicesModelsMenuItemController.Instance, exit, root, self, null, new(other: table, count: itemIndex));
             }
 
             private void Exit(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
