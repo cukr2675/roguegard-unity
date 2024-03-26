@@ -43,6 +43,38 @@ MonoBehaviour:
     _asset: {fileID: 11400000, guid: 0c835f94353530c4ca0bbe610eb319d4, type: 2}
   - _key: Core.CaringAbility
     _asset: {fileID: 11400000, guid: f2bae097ebd99af40912e1b5e4e3932c, type: 2}
+  - _key: Core.GentleAbility
+    _asset: {fileID: 11400000, guid: bce5a4e69fbcb9e4a88d5d0ca67c5f38, type: 2}
+  - _key: Core.LonelyAbility
+    _asset: {fileID: 11400000, guid: dac2ad0f2a8c64e4594c38fd8848f509, type: 2}
+  - _key: Core.QuietAbility
+    _asset: {fileID: 11400000, guid: 769458da9c3aa2b4aad14fe4690f2395, type: 2}
+  - _key: Core.TimidAbility
+    _asset: {fileID: 11400000, guid: 724c50865d7806f4bbf9c709deddb941, type: 2}
+  - _key: Core.DocileAbility
+    _asset: {fileID: 11400000, guid: 939d9ee6c6a4b0f44ad630ceb00e2a08, type: 2}
+  - _key: Core.HardyAbility
+    _asset: {fileID: 11400000, guid: b20a686203ea67b4dabe008e927a857a, type: 2}
+  - _key: Core.QuirkyAbility
+    _asset: {fileID: 11400000, guid: 25b9717fc3561044584b24f412f57489, type: 2}
+  - _key: Core.RelaxedAbility
+    _asset: {fileID: 11400000, guid: 0266504bf9c8e904dba1b859f05f07db, type: 2}
+  - _key: Core.BoldAbility
+    _asset: {fileID: 11400000, guid: 3f309298bf04f0e48bfaa74e123cb771, type: 2}
+  - _key: Core.HastyAbility
+    _asset: {fileID: 11400000, guid: 31507d011262a054a91ec6e6f1a24d14, type: 2}
+  - _key: Core.NaiveAbility
+    _asset: {fileID: 11400000, guid: 76fcdcc5008cf8f4d9c0ecd2702a45e1, type: 2}
+  - _key: Core.SassyAbility
+    _asset: {fileID: 11400000, guid: 12b6183e51670194f954e4366324a324, type: 2}
+  - _key: Core.BraveAbility
+    _asset: {fileID: 11400000, guid: c89782d2fd6fa044581d7f8abf6d1bae, type: 2}
+  - _key: Core.JollyAbility
+    _asset: {fileID: 11400000, guid: 3f0eae47c6aa08849939c9e7ff61a404, type: 2}
+  - _key: Core.NaughtyAbility
+    _asset: {fileID: 11400000, guid: 63d9c2a2885f95f4996522a1400dcfd4, type: 2}
+  - _key: Core.RashAbility
+    _asset: {fileID: 11400000, guid: ecdd51ecb05fd004fbeafabc48474fa6, type: 2}
   - _key: Core.SnootyAbility
     _asset: {fileID: 11400000, guid: 1dfd099963e55684184b2975315d689e, type: 2}
   - _key: Core.DoublePainAbility
