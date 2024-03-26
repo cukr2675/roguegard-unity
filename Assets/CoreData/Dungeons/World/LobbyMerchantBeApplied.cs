@@ -62,10 +62,8 @@ namespace Roguegard
             public void Activate(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-                root.AddObject(DeviceKw.AppendText, DeviceKw.StartTalk);
                 root.AddObject(DeviceKw.AppendText, model);
                 root.AddObject(DeviceKw.AppendText, "‚ðŽè‚É“ü‚ê‚½\n");
-                root.AddObject(DeviceKw.AppendText, DeviceKw.EndTalk);
 
                 var startingItem = (ScriptableStartingItem)model;
                 startingItem.Option.CreateObj(startingItem, self, Vector2Int.zero, RogueRandom.Primary);
