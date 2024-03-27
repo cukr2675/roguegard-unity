@@ -7,7 +7,7 @@ namespace Roguegard
     [Objforming.Formable]
     public class ViewInfo : IRogueTilemapView
     {
-        private ViewMap viewMap;
+        [System.NonSerialized] private ViewMap viewMap;
 
         [field: System.NonSerialized] public bool QueueHasItem { get; private set; }
 
@@ -22,7 +22,10 @@ namespace Roguegard
 
         public RogueObj Location => viewMap.Location;
 
-        private ViewInfo() { }
+        private ViewInfo()
+        {
+            viewMap = new ViewMap(RoguegardSettings.MaxTilemapSize);
+        }
 
         private ViewInfo(bool flag)
         {
@@ -61,15 +64,16 @@ namespace Roguegard
             return viewMap.VisibleObjs.Contains(obj);
         }
 
-        public void GetTile(Vector2Int position, out bool visible, out IRogueTile tile, out RogueObj tileObj)
+        public void GetTile(Vector2Int position, out bool visible, out IRogueTile floorTile, out IRogueTile buildingTile, out RogueObj tileObj)
         {
-            viewMap.GetTile(position, out visible, out tile, out tileObj);
+            viewMap.GetTile(position, out visible, out floorTile, out buildingTile, out tileObj);
         }
 
         public bool HasStopperAt(Vector2Int position, bool invisibleIsStopper = true)
         {
-            GetTile(position, out _, out var tile, out var tileObj);
-            if (tile != null) return tile.Info.HasCollider || tile.Info.Category == CategoryKw.Pool;
+            GetTile(position, out _, out var floorTile, out var buildingTile, out var tileObj);
+            var topTile = buildingTile ?? floorTile;
+            if (topTile != null) return topTile.Info.HasCollider || topTile.Info.Category == CategoryKw.Pool;
             if (tileObj != null) return tileObj.HasCollider;
             return invisibleIsStopper;
         }

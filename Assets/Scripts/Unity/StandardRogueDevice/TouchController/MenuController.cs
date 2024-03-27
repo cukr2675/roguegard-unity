@@ -164,8 +164,9 @@ namespace RoguegardUnity
             }
             {
                 // オブジェクトが見つからないときはタイルを見る
-                view.GetTile(position, out _, out var tile, out _);
-                menuManager.OpenInitialMenu(longDownMenu, subject, null, new(other: tile));
+                view.GetTile(position, out _, out var floorTile, out var buildingTile, out _);
+                var topTile = buildingTile ?? floorTile;
+                menuManager.OpenInitialMenu(longDownMenu, subject, null, new(other: topTile));
             }
         }
 

@@ -11,6 +11,18 @@ namespace RoguegardUnity
     {
         private RogueTilemapRenderer tilemapGrid;
 
+        private static readonly Vector3Int[] deltaPositions = new[]
+        {
+            new Vector3Int(-1, -1),
+            new Vector3Int(+0, -1),
+            new Vector3Int(+1, -1),
+            new Vector3Int(-1, +0),
+            new Vector3Int(+1, +0),
+            new Vector3Int(-1, +1),
+            new Vector3Int(+0, +1),
+            new Vector3Int(+1, +1),
+        };
+
         public void Open(RogueTilemapRenderer tilemapGrid)
         {
             var name = "TilemapRenderSystem";
@@ -35,25 +47,36 @@ namespace RoguegardUnity
             {
                 for (int x = 0; x < tilemap.Size.x; x++)
                 {
-                    var position = new Vector3Int(x, y, 0);
-                    tilemap.GetTile(new Vector2Int(x, y), out var visible, out var tile, out var tileObj);
+                    var position = new Vector3Int(x, y, (int)RogueTileLayer.Building);
+                    tilemap.GetTile(new Vector2Int(x, y), out var visible, out var floorTile, out var buildingTile, out var tileObj);
                     if (tileObj != null)
                     {
                         tileObj.Main.Sprite.Update(tileObj);
-                        tilemapGrid.Tilemap.SetTile(position, tileObj.Main.Sprite.Sprite);
-                        tilemapGrid.Tilemap.SetColor(position, tileObj.Main.Sprite.Sprite.IconColor);
+                        var sprite = tileObj.Main.Sprite.Sprite;
+                        SetTile(tilemapGrid.Tilemap, position, sprite, sprite.IconColor);
                     }
-                    else if (tile != null)
+                    else if (buildingTile != null)
                     {
-                        if (tile.Tile != tilemapGrid.Tilemap.GetTile(position))
-                        {
-                            tilemapGrid.Tilemap.SetTile(position, null);
-                            tilemapGrid.Tilemap.SetTile(position, tile.Tile);
-                        }
+                        SetTile(tilemapGrid.Tilemap, position, buildingTile.Tile, buildingTile.Info.Color);
+                    }
+                    else if (floorTile != null)
+                    {
+                        SetTile(tilemapGrid.Tilemap, position, InvisibleTile.Instance, Color.clear);
                     }
                     else
                     {
-                        tilemapGrid.Tilemap.SetTile(position, null);
+                        SetTile(tilemapGrid.Tilemap, position, null, Color.clear);
+                    }
+
+                    var floorPosition = new Vector3Int(x, y, (int)RogueTileLayer.Floor);
+                    if (floorTile != null)
+                    {
+                        tilemapGrid.Tilemap.SetTile(floorPosition, floorTile.Tile);
+                        tilemapGrid.Tilemap.SetColor(floorPosition, floorTile.Info.Color);
+                    }
+                    else
+                    {
+                        tilemapGrid.Tilemap.SetTile(floorPosition, null);
                     }
 
                     var visibleColor = visible ? Color.clear : new Color(0f, 0f, 0f, .75f);
@@ -79,7 +102,8 @@ namespace RoguegardUnity
                         // 見えない範囲や壁には表示しない。
                         if (!openGrid || !visible) return false;
                         if (tileObj != null && tileObj.HasCollider) return false;
-                        if (tile != null && tile.Info.HasCollider) return false;
+                        var topTile = buildingTile ?? floorTile;
+                        if (topTile != null && topTile.Info.HasCollider) return false;
 
                         var position2 = new Vector2Int(position.x, position.y);
                         var deltaPosition2 = position2 - origin;
@@ -97,6 +121,22 @@ namespace RoguegardUnity
                     if ((origin + direction.Forward * i) == position) return true;
                 }
                 return false;
+            }
+
+            static void SetTile(Tilemap tilemap, Vector3Int position, TileBase tile, Color color)
+            {
+                var oldTile = tilemap.GetTile(position);
+                if (tile != oldTile)
+                {
+                    tilemap.SetTile(position, tile);
+                    foreach (var delta in deltaPositions)
+                    {
+                        // タイルが変更されたとき、周囲8マスを更新する
+                        tilemap.RefreshTile(position + delta);
+                    }
+                }
+
+                tilemap.SetColor(position, color);
             }
         }
 

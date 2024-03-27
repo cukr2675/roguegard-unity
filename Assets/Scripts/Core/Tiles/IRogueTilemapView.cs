@@ -10,6 +10,6 @@ namespace Roguegard
 
         Spanning<RogueObj> VisibleObjs { get; }
 
-        void GetTile(Vector2Int position, out bool visible, out IRogueTile tile, out RogueObj tileObj);
+        void GetTile(Vector2Int position, out bool visible, out IRogueTile floorTile, out IRogueTile buildingTile, out RogueObj tileObj);
     }
 }

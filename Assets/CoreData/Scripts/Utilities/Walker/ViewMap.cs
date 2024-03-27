@@ -14,13 +14,15 @@ namespace Roguegard
 
         private bool[][] visibles;
 
-        private IRogueTile[][] tilemap;
+        private IRogueTile[][] floorTilemap;
+
+        private IRogueTile[][] buildingTilemap;
 
         private RogueObj[][] tilemapObjs;
 
-        public int Width => tilemap[0].Length;
+        public int Width => visibles[0].Length;
 
-        public int Height => tilemap.Length;
+        public int Height => visibles.Length;
 
         private ViewMap() { }
 
@@ -30,12 +32,14 @@ namespace Roguegard
             var height = size.y;
             var width = size.x;
             visibles = new bool[height][];
-            tilemap = new IRogueTile[height][];
+            floorTilemap = new IRogueTile[height][];
+            buildingTilemap = new IRogueTile[height][];
             tilemapObjs = new RogueObj[height][];
-            for (int y = 0; y < tilemap.Length; y++)
+            for (int y = 0; y < visibles.Length; y++)
             {
                 visibles[y] = new bool[width];
-                tilemap[y] = new IRogueTile[width];
+                floorTilemap[y] = new IRogueTile[width];
+                buildingTilemap[y] = new IRogueTile[width];
                 tilemapObjs[y] = new RogueObj[width];
             }
         }
@@ -55,8 +59,9 @@ namespace Roguegard
         public void AddPoint(Vector2Int point)
         {
             var locationSpace = Location.Space;
-            var tile = locationSpace.Tilemap.GetTop(point);
-            SetTile(tile, point.x, point.y);
+            var floorTile = locationSpace.Tilemap.Get(point, RogueTileLayer.Floor);
+            var tile = locationSpace.Tilemap.Get(point, RogueTileLayer.Building);
+            SetTile(floorTile, tile, point.x, point.y);
         }
 
         public void AddView(RogueObj self)
@@ -102,7 +107,8 @@ namespace Roguegard
 
                 if (locationObj.AsTile)
                 {
-                    SetTile(locationObj, locationObj.Position.x, locationObj.Position.y);
+                    var floorTile = locationSpace.Tilemap.Get(locationObj.Position, RogueTileLayer.Floor);
+                    SetTile(floorTile, locationObj, locationObj.Position.x, locationObj.Position.y);
                     AddUnique(locationObj);
                 }
                 else
@@ -138,8 +144,9 @@ namespace Roguegard
                     if (sqrDistance >= sqrVisibleRadius) continue;
 
                     var point = new Vector2Int(x, y);
-                    var tile = Location.Space.Tilemap.GetTop(point);
-                    SetTile(tile, x, y);
+                    var floorTile = Location.Space.Tilemap.Get(point, RogueTileLayer.Floor);
+                    var tile = Location.Space.Tilemap.Get(point, RogueTileLayer.Building);
+                    SetTile(floorTile, tile, x, y);
                 }
             }
         }
@@ -152,16 +159,17 @@ namespace Roguegard
                 {
                     for (int x = room.xMin; x < room.xMax; x++)
                     {
-                        if (TryGetTileObj(roomObjs, new Vector2Int(x, y), out var obj))
+                        var index = new Vector2Int(x, y);
+                        var floorTile = space.Tilemap.Get(index, RogueTileLayer.Floor);
+                        if (TryGetTileObj(roomObjs, index, out var obj))
                         {
-                            SetTile(obj, x, y);
+                            SetTile(floorTile, obj, x, y);
                         }
                         else
                         {
                             // 上にタイル化されたオブジェクトが重なっていない時に限り、タイルを設定する。
-                            var index = new Vector2Int(x, y);
-                            var tile = space.Tilemap.GetTop(index);
-                            SetTile(tile, x, y);
+                            var tile = space.Tilemap.Get(index, RogueTileLayer.Building);
+                            SetTile(floorTile, tile, x, y);
                         }
                     }
                 }
@@ -171,7 +179,8 @@ namespace Roguegard
                     var obj = roomObjs[j];
                     if (obj == null || !obj.AsTile) continue;
 
-                    SetTile(obj, obj.Position.x, obj.Position.y);
+                    var floorTile = space.Tilemap.Get(obj.Position, RogueTileLayer.Floor);
+                    SetTile(floorTile, obj, obj.Position.x, obj.Position.y);
                 }
             }
 
@@ -196,11 +205,12 @@ namespace Roguegard
             // 別の空間に移動したとき、地図をリセットする。
             if (location != Location)
             {
-                for (int y = 0; y < tilemap.Length; y++)
+                for (int y = 0; y < visibles.Length; y++)
                 {
-                    for (int x = 0; x < tilemap[0].Length; x++)
+                    for (int x = 0; x < visibles[0].Length; x++)
                     {
-                        tilemap[y][x] = null;
+                        floorTilemap[y][x] = null;
+                        buildingTilemap[y][x] = null;
                         tilemapObjs[y][x] = null;
                     }
                 }
@@ -227,32 +237,36 @@ namespace Roguegard
             }
         }
 
-        public void GetTile(Vector2Int position, out bool visible, out IRogueTile tile, out RogueObj tileObj)
+        public void GetTile(Vector2Int position, out bool visible, out IRogueTile floorTile, out IRogueTile buildingTile, out RogueObj tileObj)
         {
             if (Location == null || Location.Space.Tilemap == null || !Location.Space.Tilemap.Rect.Contains(position))
             {
                 visible = false;
-                tile = null;
+                floorTile = null;
+                buildingTile = null;
                 tileObj = null;
                 return;
             }
 
             visible = visibles[position.y][position.x];
-            tile = tilemap[position.y][position.x];
+            floorTile = floorTilemap[position.y][position.x];
+            buildingTile = buildingTilemap[position.y][position.x];
             tileObj = tilemapObjs[position.y][position.x];
         }
 
-        private void SetTile(IRogueTile tile, int x, int y)
+        private void SetTile(IRogueTile floorTile, IRogueTile buildingTile, int x, int y)
         {
             visibles[y][x] = true;
-            tilemap[y][x] = tile;
+            floorTilemap[y][x] = floorTile;
+            buildingTilemap[y][x] = buildingTile;
             tilemapObjs[y][x] = null;
         }
 
-        private void SetTile(RogueObj tileObj, int x, int y)
+        private void SetTile(IRogueTile floorTile, RogueObj tileObj, int x, int y)
         {
             visibles[y][x] = true;
-            tilemap[y][x] = null;
+            floorTilemap[y][x] = floorTile;
+            buildingTilemap[y][x] = null;
             tilemapObjs[y][x] = tileObj;
         }
     }

@@ -385,18 +385,20 @@ namespace Roguegard
             _objs.Sort(sorted);
         }
 
-        void IRogueTilemapView.GetTile(Vector2Int position, out bool visible, out IRogueTile tile, out RogueObj tileObj)
+        void IRogueTilemapView.GetTile(Vector2Int position, out bool visible, out IRogueTile floorTile, out IRogueTile buildingTile, out RogueObj tileObj)
         {
             if (Tilemap == null || !Tilemap.Rect.Contains(position))
             {
                 visible = false;
-                tile = null;
+                floorTile = null;
+                buildingTile = null;
                 tileObj = null;
                 return;
             }
 
             visible = true;
-            tile = Tilemap.GetTop(position);
+            floorTile = Tilemap.Get(position, RogueTileLayer.Floor);
+            buildingTile = Tilemap.Get(position, RogueTileLayer.Building);
             tileObj = tileColliderMap[position.y][position.x];
 
             // 当たり判定のないタイルのオブジェクトを取得する（階段など）

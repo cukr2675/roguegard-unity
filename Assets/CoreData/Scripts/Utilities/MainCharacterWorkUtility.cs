@@ -17,7 +17,7 @@ namespace Roguegard
             }
             if (view.Location != location || view.Location.Space.Tilemap == null) return false;
 
-            view.GetTile(position, out var visible, out _, out _);
+            view.GetTile(position, out var visible, out _, out _, out _);
             if (visible) return true;
 
             // ペイントされているオブジェクトがいる位置は見える
@@ -31,7 +31,7 @@ namespace Roguegard
             // 視界範囲外の判定が出ても、更新してもう一度試す
             // 出会いがしらの敵を表示する際に有効
             view.AddView(subject);
-            view.GetTile(position, out visible, out _, out _);
+            view.GetTile(position, out visible, out _, out _, out _);
             return visible;
         }
 

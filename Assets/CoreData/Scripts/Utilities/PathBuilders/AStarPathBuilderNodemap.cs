@@ -53,9 +53,10 @@ namespace Roguegard
                 for (int x = 0; x < newRect.width; x++)
                 {
                     var node = map[y][x];
-                    tilemap.GetTile(new Vector2Int(x, y), out _, out var tile, out var tileObj);
-                    var collide = GetCollider(tile, tileObj);
-                    var cornerCollide = collide && (tile != null ? tile.Info.Category != CategoryKw.Pool : true);
+                    tilemap.GetTile(new Vector2Int(x, y), out _, out var floorTile, out var buildingTile, out var tileObj);
+                    var topTile = buildingTile ?? floorTile;
+                    var collide = GetCollider(topTile, tileObj);
+                    var cornerCollide = collide && (topTile != null ? topTile.Info.Category != CategoryKw.Pool : true);
                     if (collide != node.HasCollider || cornerCollide != node.HasCornerCollider)
                     {
                         node.HasCollider = collide;
