@@ -346,7 +346,10 @@ namespace Roguegard.Editor
 
             // 保存した画像のインポート設定を取得
             var ruleTileTexture = AssetDatabase.LoadAssetAtPath<Texture2D>(ruleTileTexturePath);
+            ruleTileTexture.filterMode = FilterMode.Point;
             var importer = (TextureImporter)AssetImporter.GetAtPath(ruleTileTexturePath);
+            var pefaultPlatformTextureSettings = importer.GetDefaultPlatformTextureSettings();
+            pefaultPlatformTextureSettings.format = TextureImporterFormat.RGBA32;
             importer.spritePixelsPerUnit = _pixelsPerUnit;
             importer.spriteImportMode = SpriteImportMode.Multiple;
 
@@ -396,7 +399,7 @@ namespace Roguegard.Editor
                 // テクスチャへ書き込み
                 var x = X * tileSize.x;
                 var y = Y * tileSize.y;
-                texture.SetPixels32(x, y, tileSize.x, tileSize.y, pixels);
+                texture.SetPixels32(x, y, tileSize.x, tileSize.y, pixels, 0);
 
                 RectInt MinMaxRect(int xmin, int ymin, int xmax, int ymax) => new RectInt(xmin, ymin, xmax - xmin, ymax - ymin);
             }
@@ -409,7 +412,7 @@ namespace Roguegard.Editor
                     {
                         var point = x + y * tileSize.x;
                         var rect = sprite.rect;
-                        pixels[point] = sprite.texture.GetPixel((int)rect.x + x - indexRect.xMin, (int)rect.y + y - indexRect.yMin);
+                        pixels[point] = sprite.texture.GetPixel((int)rect.x + x - indexRect.xMin, (int)rect.y + y - indexRect.yMin, 0);
                     }
                 }
             }
