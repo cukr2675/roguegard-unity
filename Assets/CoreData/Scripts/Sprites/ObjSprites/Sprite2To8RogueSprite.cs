@@ -7,38 +7,41 @@ using UnityEngine.Tilemaps;
 
 namespace Roguegard
 {
-    public class Sprite2To8RogueSprite : RogueObjSprite
+    public class Sprite2To8RogueSprite : IRogueObjSprite
     {
-        public override Sprite IconSprite => spriteLowerLeft;
-        public override Color IconColor => color;
-
         private Sprite spriteLeft;
         private Sprite spriteLowerLeft;
-        private Color color;
+
+        private TileObject _tile;
+        public TileBase Tile => _tile;
+
+        public Color EffectedColor { get; private set; }
 
         private Sprite2To8RogueSprite()
         {
         }
 
-        public static Sprite2To8RogueSprite CreateOrReuse(RogueObj self, Sprite spriteLowerLeft, Sprite spriteLeft, Color color)
+        public static Sprite2To8RogueSprite CreateOrReuse(RogueObj self, Sprite spriteLowerLeft, Sprite spriteLeft, Color effectedColor)
         {
             var value = self.Main.Sprite.Sprite;
             if (value is Sprite2To8RogueSprite objSprite &&
-                spriteLowerLeft == objSprite.spriteLowerLeft && spriteLeft == objSprite.spriteLeft && color == objSprite.color)
+                spriteLowerLeft == objSprite.spriteLowerLeft && spriteLeft == objSprite.spriteLeft && effectedColor == objSprite.EffectedColor)
             {
                 return objSprite;
             }
             else
             {
-                var sprite8Sprite = CreateInstance<Sprite2To8RogueSprite>();
+                var sprite8Sprite = new Sprite2To8RogueSprite();
                 sprite8Sprite.spriteLeft = spriteLeft;
                 sprite8Sprite.spriteLowerLeft = spriteLowerLeft;
-                sprite8Sprite.color = color;
+                sprite8Sprite._tile = ScriptableObject.CreateInstance<TileObject>();
+                sprite8Sprite._tile.sprite = spriteLowerLeft;
+                sprite8Sprite.EffectedColor = effectedColor;
                 return sprite8Sprite;
             }
         }
 
-        public override void SetTo(ISkeletalSpriteRenderController renderController, SpritePose pose, SpriteDirection direction)
+        public void SetTo(ISkeletalSpriteRenderController renderController, SpritePose pose, SpriteDirection direction)
         {
             var angleIndex = (int)direction;
             var sprite = angleIndex % 2 == 0 ? spriteLeft : spriteLowerLeft;
@@ -49,24 +52,28 @@ namespace Roguegard
             if (pose.BoneTransforms.TryGetValue(BoneKeyword.Body, out var transform))
             {
                 renderController.SetBoneSprite(
-                    0, BoneKeyword.Body.Name, sprite, color, false, false,
+                    0, BoneKeyword.Body.Name, sprite, EffectedColor, false, false,
                     transform.LocalPosition, transform.LocalRotation * rotation, transform.ScaleOfLocalByLocal);
             }
             else
             {
                 renderController.SetBoneSprite(
-                    0, BoneKeyword.Body.Name, sprite, color, false, false, Vector3.zero, rotation, Vector3.one);
+                    0, BoneKeyword.Body.Name, sprite, EffectedColor, false, false, Vector3.zero, rotation, Vector3.one);
             }
         }
 
-        public override void SetBoneSpriteEffects(RogueObj self, Spanning<IBoneSpriteEffect> effects)
+        public void SetBoneSpriteEffects(RogueObj self, Spanning<IBoneSpriteEffect> effects)
         {
         }
 
-        public override void GetTileData(Vector3Int position, ITilemap tilemap, ref TileData tileData)
+        private class TileObject : TileBase
         {
-            tileData.sprite = spriteLowerLeft;
-            tileData.color = color;
+            public Sprite sprite;
+
+            public override void GetTileData(Vector3Int position, ITilemap tilemap, ref TileData tileData)
+            {
+                tileData.sprite = sprite;
+            }
         }
     }
 }

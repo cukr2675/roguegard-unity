@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: RandomTrap
   m_EditorClassIdentifier: 
   _descriptionName: 
-  _sprite: {fileID: 942371861, guid: 2c3b84187a5a624489356b62e46bf28e, type: 3}
+  _icon: {fileID: 942371861, guid: 2c3b84187a5a624489356b62e46bf28e, type: 3}
+  _tile: {fileID: 0}
   _color: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
   _caption: 
   _details:

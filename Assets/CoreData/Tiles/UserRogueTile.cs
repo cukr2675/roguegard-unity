@@ -11,7 +11,8 @@ namespace Roguegard
         private readonly IRogueTileInfo _info;
         public IRogueTileInfo Info => _info;
 
-        public TileBase Tile => _info.Tile;
+        TileBase IRogueSprite.Tile => _info.Tile;
+        Color IRogueSprite.EffectedColor => _info.Color;
 
         public RogueObj User { get; }
 

@@ -10,10 +10,10 @@ namespace Roguegard
     {
         public IRogueTileInfo Info { get; }
 
-        [field: System.NonSerialized] public TileBase Tile { get; }
+        TileBase IRogueSprite.Tile => Info.Tile;
 
         private readonly Color32 _color;
-        public Color Color => _color;
+        public Color EffectedColor => _color;
 
         [Objforming.CreateInstance]
         private ColoredRogueTile() { }
@@ -22,16 +22,11 @@ namespace Roguegard
         {
             Info = info;
             _color = color;
-
-            var tile = ScriptableObject.CreateInstance<Tile>();
-            tile.sprite = info.Sprite;
-            tile.color = color;
-            Tile = tile;
         }
 
         public bool Equals(IRogueTile other)
         {
-            return other is ColoredRogueTile coloredOther && coloredOther.Info.Equals(Info) && coloredOther.Color == Color;
+            return other is ColoredRogueTile coloredOther && coloredOther.Info.Equals(Info) && coloredOther.EffectedColor == EffectedColor;
         }
 
         public override bool Equals(object obj)
@@ -41,7 +36,7 @@ namespace Roguegard
 
         public override int GetHashCode()
         {
-            return Color.GetHashCode();
+            return EffectedColor.GetHashCode();
         }
     }
 }

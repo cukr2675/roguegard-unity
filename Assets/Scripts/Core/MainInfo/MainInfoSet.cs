@@ -75,7 +75,7 @@ namespace Roguegard
         /// </summary>
         public abstract MainInfoSet Reopen(RogueObj self, MainInfoSetType infoSetType, int deltaLv);
 
-        public abstract void GetObjSprite(RogueObj self, out RogueObjSprite objSprite, out ISpriteMotionSet motionSet);
+        public abstract void GetObjSprite(RogueObj self, out IRogueObjSprite objSprite, out ISpriteMotionSet motionSet);
 
         public abstract IEquipmentState GetEquipmentState(RogueObj self);
 

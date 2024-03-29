@@ -11,7 +11,7 @@ namespace Roguegard
     /// <see cref="System.IEquatable{T}.Equals(T)"/> で一致するものを同一インスタンスとしてシリアル化する。
     /// </summary>
     [Objforming.RequireRelationalComponent]
-    public interface IRogueTile : System.IEquatable<IRogueTile>
+    public interface IRogueTile : IRogueSprite, System.IEquatable<IRogueTile>
     {
         /// <summary>
         /// ColoredRogueTile などのタイルを加工するタイルに、
@@ -19,8 +19,6 @@ namespace Roguegard
         /// （ColoredRogueTile が ColoredRogueTile を参照できないようにする）
         /// </summary>
         IRogueTileInfo Info { get; }
-
-        TileBase Tile { get; }
 
         // クローン生成は実装しない。
         // ・タイルのほとんどは面で処理（２重ループ処理）するため、一つ一つ複製すると重くなる

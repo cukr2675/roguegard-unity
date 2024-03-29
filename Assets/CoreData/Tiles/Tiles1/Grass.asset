@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Grass
   m_EditorClassIdentifier: 
   _descriptionName: "\u8349"
-  _sprite: {fileID: 3061405219280824131, guid: 2c3b84187a5a624489356b62e46bf28e, type: 3}
+  _icon: {fileID: 3061405219280824131, guid: 2c3b84187a5a624489356b62e46bf28e, type: 3}
+  _tile: {fileID: 0}
   _color: {r: 0.34300655, g: 0.5019608, b: 0.025098046, a: 1}
   _caption: 
   _details:
@@ -33,10 +34,6 @@ MonoBehaviour:
     _ref:
       rid: -2
   _beApplied:
-    _script: {fileID: 0}
-    _ref:
-      rid: -2
-  _beSteppedOn:
     _script: {fileID: 0}
     _ref:
       rid: -2

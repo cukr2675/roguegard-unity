@@ -53,11 +53,11 @@ namespace RoguegardUnity
                     {
                         tileObj.Main.Sprite.Update(tileObj);
                         var sprite = tileObj.Main.Sprite.Sprite;
-                        SetTile(tilemapGrid.Tilemap, position, sprite, sprite.IconColor);
+                        SetTile(tilemapGrid.Tilemap, position, sprite.Tile, sprite.EffectedColor);
                     }
                     else if (buildingTile != null)
                     {
-                        SetTile(tilemapGrid.Tilemap, position, buildingTile.Tile, buildingTile.Info.Color);
+                        SetTile(tilemapGrid.Tilemap, position, buildingTile.Tile, buildingTile.EffectedColor);
                     }
                     else if (floorTile != null)
                     {

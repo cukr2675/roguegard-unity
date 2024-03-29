@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: WoodenWall
   m_EditorClassIdentifier: 
   _descriptionName: 
-  _sprite: {fileID: 7105647059379118536, guid: 2c3b84187a5a624489356b62e46bf28e, type: 3}
+  _icon: {fileID: 7105647059379118536, guid: 2c3b84187a5a624489356b62e46bf28e, type: 3}
+  _tile: {fileID: 0}
   _color: {r: 0.6698113, g: 0.43222383, b: 0.3001513, a: 1}
   _caption: 
   _details:

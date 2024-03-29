@@ -77,7 +77,7 @@ namespace Roguegard.CharacterCreation
 
         void GetObjSprite(
             IRaceOption raceOption, ICharacterCreationData characterCreationData, IRogueGender gender, RogueObj self, IReadOnlyNodeBone nodeBone,
-            out RogueObjSprite objSprite, out ISpriteMotionSet motionSet);
+            out IRogueObjSprite objSprite, out ISpriteMotionSet motionSet);
 
         void UpdateMemberRange(IMember member, IRaceOption raceOption, ICharacterCreationData characterCreationData);
 

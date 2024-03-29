@@ -8,7 +8,6 @@ namespace Roguegard
     [Objforming.RequireRelationalComponent]
     public interface IRogueTileInfo : IRogueTile, IRogueDescription
     {
-        Sprite Sprite { get; }
         IKeyword Category { get; }
 
         RogueTileLayer Layer { get; }

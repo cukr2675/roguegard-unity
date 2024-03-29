@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Pool
   m_EditorClassIdentifier: 
   _descriptionName: "\u6025\u6D41\u306E\u5DDD"
-  _sprite: {fileID: 3061405219280824131, guid: 2c3b84187a5a624489356b62e46bf28e, type: 3}
+  _icon: {fileID: 3061405219280824131, guid: 2c3b84187a5a624489356b62e46bf28e, type: 3}
   _tile: {fileID: 11400000, guid: 4050ebd7dee18a4459a5e2de7db9ad85, type: 2}
   _color: {r: 0.3058473, g: 0.47306508, b: 0.745283, a: 1}
   _caption: 

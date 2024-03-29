@@ -9,9 +9,9 @@ namespace Roguegard
     /// <summary>
     /// アイコンやタイルなどのスプライト。
     /// </summary>
-    public abstract class RogueSprite : TileBase
+    public interface IRogueSprite
     {
-        public abstract Sprite IconSprite { get; }
-        public abstract Color IconColor { get; }
+        TileBase Tile { get; }
+        Color EffectedColor { get; }
     }
 }

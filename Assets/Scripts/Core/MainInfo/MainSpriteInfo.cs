@@ -8,14 +8,14 @@ namespace Roguegard
 {
     public class MainSpriteInfo
     {
-        private RogueObjSprite objSprite;
+        private IRogueObjSprite objSprite;
 
         public ISpriteMotionSet MotionSet { get; private set; }
 
         private bool isDirty;
 
         // 外部との共有による AddEquipment 等の複数呼び出しを防ぐため型そのままの取得は隠す。
-        public RogueSprite Sprite => objSprite;
+        public IRogueSprite Sprite => objSprite;
 
         public void Update(RogueObj self)
         {

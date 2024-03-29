@@ -8,15 +8,15 @@ using SkeletalSprite;
 namespace Roguegard
 {
     // CharacterCreation で bodyColor からスプライトの種類を変えることがあるため BaseColoredSprite は実装しない。
-    public class BoneRogueSprite : RogueObjSprite
+    public class BoneRogueSprite : IRogueObjSprite
     {
         private IReadOnlyNodeBone rootNode;
         private SkeletalSpriteNode root;
-        private Sprite _iconSprite;
-        private Color _iconColor;
 
-        public override Sprite IconSprite => _iconSprite;
-        public override Color IconColor => _iconColor;
+        private TileObject _tile;
+        public TileBase Tile => _tile;
+
+        public Color EffectedColor { get; private set; }
 
         private bool wasChangedEquipments;
         private BoneOrder enabledOrder;
@@ -33,32 +33,26 @@ namespace Roguegard
         /// <summary>
         /// 引数の値が <paramref name="sprite"/> と一致するなら <paramref name="sprite"/> を取得し、違うなら新しく生成する。
         /// </summary>
-        public static BoneRogueSprite CreateOrReuse(RogueObj self, IReadOnlyNodeBone nodeBone, Sprite iconSprite, Color iconColor)
+        public static BoneRogueSprite CreateOrReuse(RogueObj self, IReadOnlyNodeBone nodeBone, Sprite sprite, Color effectedColor)
         {
-            var sprite = self.Main.Sprite.Sprite;
-            if (sprite is BoneRogueSprite objSprite && nodeBone == objSprite.rootNode &&
-                iconSprite == objSprite.IconSprite && iconColor == objSprite.IconColor)
+            if (self.Main.Sprite.Sprite is BoneRogueSprite objSprite && nodeBone == objSprite.rootNode &&
+                sprite == objSprite._tile.sprite && effectedColor == objSprite.EffectedColor)
             {
                 return objSprite;
             }
             else
             {
-                var instance = CreateInstance<BoneRogueSprite>();
+                var instance = new BoneRogueSprite();
                 instance.rootNode = nodeBone;
                 instance.root = new SkeletalSpriteNode(nodeBone);
-                instance._iconSprite = iconSprite;
-                instance._iconColor = iconColor;
+                instance._tile = ScriptableObject.CreateInstance<TileObject>();
+                instance._tile.sprite = sprite;
+                instance.EffectedColor = effectedColor;
                 return instance;
             }
         }
 
-        public override void GetTileData(Vector3Int position, ITilemap tilemap, ref TileData tileData)
-        {
-            tileData.sprite = IconSprite;
-            tileData.color = IconColor;
-        }
-
-        public override void SetBoneSpriteEffects(RogueObj self, Spanning<IBoneSpriteEffect> effects)
+        public void SetBoneSpriteEffects(RogueObj self, Spanning<IBoneSpriteEffect> effects)
         {
             // IBoneSpriteEffect と IRogueObjSprite の実装をできるだけ切り離すため、テーブルは空の状態で開始する。（バージョンで変更できる？）
             boneSpriteTable.Clear();
@@ -83,7 +77,7 @@ namespace Roguegard
             enabledOrder = boneOrder;
         }
 
-        public override void SetTo(ISkeletalSpriteRenderController renderController, SpritePose pose, SpriteDirection direction)
+        public void SetTo(ISkeletalSpriteRenderController renderController, SpritePose pose, SpriteDirection direction)
         {
             // 装備が変更されておらず、引数のポーズが前回のポーズと同じかつ不変であれば、更新する必要はない。
             if (!wasChangedEquipments && enabledImmutablePose == pose) return;
@@ -100,6 +94,16 @@ namespace Roguegard
 
             if (pose.IsImmutable) enabledImmutablePose = pose;
             else enabledImmutablePose = null;
+        }
+
+        private class TileObject : TileBase
+        {
+            public Sprite sprite;
+
+            public override void GetTileData(Vector3Int position, ITilemap tilemap, ref TileData tileData)
+            {
+                tileData.sprite = sprite;
+            }
         }
     }
 }

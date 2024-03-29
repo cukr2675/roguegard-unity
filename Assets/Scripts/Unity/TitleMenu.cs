@@ -75,7 +75,7 @@ namespace RoguegardUnity
 
             _creditMenu.Initialize();
             _versionText.text = Application.version;
-            _background.sprite = CoreTiles1.Grass.Sprite;
+            _background.sprite = CoreTiles1.Grass.Icon;
             var backgroundColor = CoreTiles1.Grass.Color;
             backgroundColor.a = .375f;
             _background.color = backgroundColor;

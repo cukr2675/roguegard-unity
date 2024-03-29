@@ -210,7 +210,7 @@ namespace Roguegard.CharacterCreation
 
         public void GetObjSprite(
             IRaceOption raceOption, ICharacterCreationData characterCreationData, IRogueGender gender, RogueObj self, IReadOnlyNodeBone nodeBone,
-            out RogueObjSprite objSprite, out ISpriteMotionSet motionSet)
+            out IRogueObjSprite objSprite, out ISpriteMotionSet motionSet)
         {
             if (_sprite.Ref != null)
             {

@@ -14,8 +14,8 @@ namespace Roguegard
         private string _name;
         protected override string DescriptionName => _name ??= (string.IsNullOrEmpty(_descriptionName) ? $":{name}" : _descriptionName);
 
-        [SerializeField] private Sprite _sprite = null;
-        public override Sprite Sprite => _sprite;
+        [SerializeField] private Sprite _icon = null;
+        public override Sprite Icon => _icon;
 
         [SerializeField] private TileBase _tile = null;
 
@@ -66,8 +66,8 @@ namespace Roguegard
                 if (_tileObject == null)
                 {
                     _tileObject = CreateInstance<TileObject>();
-                    _tileObject.sprite = Sprite;
-                    _tileObject.color = Color;
+                    _tileObject.sprite = Icon;
+                    _tileObject.color = EffectedColor;
                 }
                 return _tileObject;
             }

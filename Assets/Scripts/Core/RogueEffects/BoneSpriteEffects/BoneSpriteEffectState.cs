@@ -59,7 +59,7 @@ namespace Roguegard
             return result;
         }
 
-        internal void SetTo(RogueObj self, RogueObjSprite selfSprite, bool forced)
+        internal void SetTo(RogueObj self, IRogueObjSprite selfSprite, bool forced)
         {
             if (!forced && !isDirty) return;
 

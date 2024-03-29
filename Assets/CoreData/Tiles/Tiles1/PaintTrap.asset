@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: PaintTrap
   m_EditorClassIdentifier: 
   _descriptionName: 
-  _sprite: {fileID: 1247147453, guid: 2c3b84187a5a624489356b62e46bf28e, type: 3}
+  _icon: {fileID: 1247147453, guid: 2c3b84187a5a624489356b62e46bf28e, type: 3}
+  _tile: {fileID: 0}
   _color: {r: 0.9716981, g: 0.44459772, b: 0.77584887, a: 1}
   _caption: 
   _details:

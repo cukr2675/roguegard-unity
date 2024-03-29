@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: WoodenPlank
   m_EditorClassIdentifier: 
   _descriptionName: 
-  _sprite: {fileID: 1324592953, guid: 2c3b84187a5a624489356b62e46bf28e, type: 3}
+  _icon: {fileID: 1324592953, guid: 2c3b84187a5a624489356b62e46bf28e, type: 3}
+  _tile: {fileID: 0}
   _color: {r: 0.5566038, g: 0.42052075, b: 0.37019405, a: 1}
   _caption: 
   _details:

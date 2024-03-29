@@ -7,46 +7,46 @@ using SkeletalSprite;
 
 namespace Roguegard
 {
-    public class ColoredRogueSprite : RogueObjSprite
+    public class ColoredRogueSprite : IRogueObjSprite
     {
-        public override Sprite IconSprite => sprite;
-        public override Color IconColor => color;
+        private TileObject _tile;
+        public TileBase Tile => _tile;
 
-        private Sprite sprite;
-        private Color32 color;
+        public Color EffectedColor { get; private set; }
 
         private ColoredRogueSprite()
         {
         }
 
-        public static ColoredRogueSprite Create(Sprite sprite, Color color)
+        public static ColoredRogueSprite Create(Sprite sprite, Color effectedColor)
         {
-            var coloredSprite = CreateInstance<ColoredRogueSprite>();
-            coloredSprite.sprite = sprite;
-            coloredSprite.color = color;
+            var coloredSprite = new ColoredRogueSprite();
+            coloredSprite._tile = ScriptableObject.CreateInstance<TileObject>();
+            coloredSprite._tile.sprite = sprite;
+            coloredSprite.EffectedColor = effectedColor;
             return coloredSprite;
         }
 
-        public static ColoredRogueSprite CreateOrReuse(RogueObj self, Sprite sprite, Color color)
+        public static ColoredRogueSprite CreateOrReuse(RogueObj self, Sprite sprite, Color effectedColor)
         {
             var value = self.Main.Sprite.Sprite;
-            if (value is ColoredRogueSprite objSprite && sprite == objSprite.sprite && color == objSprite.color)
+            if (value is ColoredRogueSprite objSprite && sprite == objSprite._tile.sprite && effectedColor == objSprite.EffectedColor)
             {
                 return objSprite;
             }
             else
             {
-                return Create(sprite, color);
+                return Create(sprite, effectedColor);
             }
         }
 
-        public override void SetTo(ISkeletalSpriteRenderController renderController, SpritePose pose, SpriteDirection direction)
+        public void SetTo(ISkeletalSpriteRenderController renderController, SpritePose pose, SpriteDirection direction)
         {
             renderController.AdjustBones(1);
             if (pose.BoneTransforms.TryGetValue(BoneKeyword.Body, out var transform))
             {
-                var sprite = transform.Sprite != null ? transform.Sprite.NormalFront : IconSprite;
-                var color = transform.OverridesSourceColor ? transform.Color : IconColor;
+                var sprite = transform.Sprite != null ? transform.Sprite.NormalFront : _tile.sprite;
+                var color = transform.OverridesSourceColor ? transform.Color : EffectedColor;
                 renderController.SetBoneSprite(
                     0, BoneKeyword.Body.Name, sprite, color, transform.LocalMirrorX, transform.LocalMirrorY,
                     transform.LocalPosition, transform.LocalRotation, transform.ScaleOfLocalByLocal);
@@ -54,18 +54,22 @@ namespace Roguegard
             else
             {
                 renderController.SetBoneSprite(
-                    0, BoneKeyword.Body.Name, sprite, color, false, false, Vector3.zero, Quaternion.identity, Vector3.one);
+                    0, BoneKeyword.Body.Name, _tile.sprite, EffectedColor, false, false, Vector3.zero, Quaternion.identity, Vector3.one);
             }
         }
 
-        public override void SetBoneSpriteEffects(RogueObj self, Spanning<IBoneSpriteEffect> effects)
+        public void SetBoneSpriteEffects(RogueObj self, Spanning<IBoneSpriteEffect> effects)
         {
         }
 
-        public override void GetTileData(Vector3Int position, ITilemap tilemap, ref TileData tileData)
+        private class TileObject : TileBase
         {
-            tileData.sprite = sprite;
-            tileData.color = color;
+            public Sprite sprite;
+
+            public override void GetTileData(Vector3Int position, ITilemap tilemap, ref TileData tileData)
+            {
+                tileData.sprite = sprite;
+            }
         }
     }
 }

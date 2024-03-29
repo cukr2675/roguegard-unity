@@ -10,12 +10,12 @@ namespace Roguegard
 
         protected abstract string DescriptionName { get; }
         string IRogueDescription.Name => DescriptionName;
-        public virtual Sprite Icon => Sprite;
+        public abstract Sprite Icon { get; }
         public abstract Color Color { get; }
+        public override Color EffectedColor => Color;
         public abstract string Caption { get; }
         public abstract IRogueDetails Details { get; }
 
-        public abstract Sprite Sprite { get; }
         public abstract IKeyword Category { get; }
 
         public abstract RogueTileLayer Layer { get; }

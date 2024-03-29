@@ -11,6 +11,8 @@ namespace Roguegard
 
         public abstract TileBase Tile { get; }
 
+        public abstract Color EffectedColor { get; }
+
         public abstract bool Equals(IRogueTile other);
     }
 }
