@@ -23,7 +23,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 9e07379c12401a54a9afcdc2d2081fc9, type: 2}
   - {fileID: 11400000, guid: 7b5f75e0ffd65ff4ab579674c671753c, type: 2}
   _noiseTiles:
-  - {fileID: 11400000, guid: 9e07379c12401a54a9afcdc2d2081fc9, type: 2}
+  - {fileID: 11400000, guid: 8dab63605c378de4a895690f47728e39, type: 2}
   - {fileID: 11400000, guid: 255d75cb8b17d37418c0f99cb5f07a89, type: 2}
   _noiseTileThreshold: 0.6
   _noiseTileScale: 0.2
@@ -31,7 +31,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 9e07379c12401a54a9afcdc2d2081fc9, type: 2}
   _roomWallTiles:
   - {fileID: 11400000, guid: 9e07379c12401a54a9afcdc2d2081fc9, type: 2}
-  - {fileID: 11400000, guid: 44985f674517d934f9cfca6b10f538c6, type: 2}
+  - {fileID: 11400000, guid: 7b5f75e0ffd65ff4ab579674c671753c, type: 2}
   _corridorTiles:
   - _tiles:
     - {fileID: 11400000, guid: 8dab63605c378de4a895690f47728e39, type: 2}
