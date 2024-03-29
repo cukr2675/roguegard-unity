@@ -419,7 +419,7 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -427,6 +427,27 @@ TextureImporter:
       bones: []
       spriteID: 0c34dac0a41ee894a8a885b7df3e21af
       internalID: 942371861
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stool
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a4003a8793735044a89b08e140a65282
+      internalID: 1381343669
       vertices: []
       indices: 
       edges: []
@@ -454,6 +475,7 @@ TextureImporter:
       Plank: 1324592953
       PlankWall: -2037728393
       RandomTrap: 942371861
+      Stool: 1381343669
       Storage: -1362082320
       ThronsTrap: -466306809
   mipmapLimitGroupName: 

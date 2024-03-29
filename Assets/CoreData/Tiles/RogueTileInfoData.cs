@@ -6,7 +6,7 @@ using UnityEngine.Tilemaps;
 
 namespace Roguegard
 {
-    [CreateAssetMenu(menuName = "RoguegardData/Tile")]
+    [CreateAssetMenu(menuName = "RoguegardData/Tiles/TileInfo")]
     [Objforming.Referable]
     public class RogueTileInfoData : ScriptableRogueTileInfo
     {
@@ -16,6 +16,8 @@ namespace Roguegard
 
         [SerializeField] private Sprite _sprite = null;
         public override Sprite Sprite => _sprite;
+
+        [SerializeField] private TileBase _tile = null;
 
         [SerializeField] private Color _color = Color.white;
         public override Color Color => _color;
@@ -55,18 +57,19 @@ namespace Roguegard
 
 
 
-        private TileObject _tile;
+        private TileObject _tileObject;
         public override TileBase Tile
         {
             get
             {
-                if (_tile == null)
+                if (_tile != null) return _tile;
+                if (_tileObject == null)
                 {
-                    _tile = CreateInstance<TileObject>();
-                    _tile.sprite = Sprite;
-                    _tile.color = Color;
+                    _tileObject = CreateInstance<TileObject>();
+                    _tileObject.sprite = Sprite;
+                    _tileObject.color = Color;
                 }
-                return _tile;
+                return _tileObject;
             }
         }
 

@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _descriptionName: "\u58C1"
   _sprite: {fileID: -4239167428487352687, guid: 2c3b84187a5a624489356b62e46bf28e, type: 3}
+  _tile: {fileID: 11400000, guid: 01fb66b8260cdb84bbaabe2790adf97f, type: 2}
   _color: {r: 0.78431374, g: 0.78431374, b: 0.9098039, a: 1}
   _caption: 
   _details:
