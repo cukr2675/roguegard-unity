@@ -60,7 +60,7 @@ namespace Objforming.Serialization.Json
                 reader.Read(); // キーを飛ばす
                 if (!Former.TryGetMemberByCamel(propertyName, out var member))
                 {
-                    reader.Read(); // 値を飛ばす
+                    reader.Skip(); // 値を飛ばす
                     continue;
                 }
 
