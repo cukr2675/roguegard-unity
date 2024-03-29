@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7bf5c64188927e44b48dc078b09e4a6, type: 3}
   m_Name: PoolTile
   m_EditorClassIdentifier: 
-  m_DefaultSprite: {fileID: 570176010, guid: 213e41f8004e0454382486d4154af52e, type: 3}
+  m_DefaultSprite: {fileID: 7378847285410580482, guid: 4698113a7c1f9ed4089a3718224d0916, type: 3}
   m_DefaultGameObject: {fileID: 0}
   m_DefaultColliderType: 1
   m_TilingRules:

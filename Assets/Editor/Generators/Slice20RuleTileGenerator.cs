@@ -13,10 +13,10 @@ namespace Roguegard.Editor
     public class Slice20RuleTileGenerator : ScriptableGenerator
     {
         [SerializeField] private Texture2D _source = null;
-        [SerializeField] private RuleTile _ruleTile = null;
+        [SerializeField] private Vector2Int _tileSizePixel = Vector2Int.one * 32;
+        [SerializeField] private Vector2Int _tileCenterPixel = Vector2Int.one * 16;
         [SerializeField] private int _pixelsPerUnit = 32;
-
-        private Color32[] pixels;
+        [SerializeField] private RuleTile _targetRuleTile = null;
 
         // 18 19 20 21 22 23
         // 12       15 16 17
@@ -291,44 +291,55 @@ namespace Roguegard.Editor
 
         protected override void Generate()
         {
-            if (_source.width != _pixelsPerUnit * 3 || _source.height != _pixelsPerUnit * 2) throw new RogueException(
-                $"テクスチャのサイズが {_pixelsPerUnit * 3}x{_pixelsPerUnit * 2} ではありません。");
+            var tileSize = _tileSizePixel;
+            var tileCenter = _tileCenterPixel;
+            if (_source.width != tileSize.x * 3 || _source.height != tileSize.y * 2) throw new RogueException(
+                $"テクスチャのサイズが {tileSize.x * 3}x{tileSize.y * 2} ではありません。");
 
             // source を 24 分割したスプライトを生成する
             var sprites = new Sprite[24];
-            var spriteSize = _pixelsPerUnit / 2f;
-            for (int y = 0; y < 4; y++)
+            for (int y = 0; y < 2; y++)
             {
-                for (int x = 0; x < 6; x++)
+                for (int x = 0; x < 3; x++)
                 {
-                    var rect = new Rect(spriteSize * x, spriteSize * y, spriteSize, spriteSize);
+                    var x2 = x * 2;
+                    var y2 = y * 2;
+                    var relationalPosition = new Vector2(x, y) * tileSize;
+
+                    var rect = Rect.MinMaxRect(0, tileCenter.y, tileCenter.x, tileSize.y);
+                    rect.position += relationalPosition;
                     var sprite = Sprite.Create(_source, rect, Vector2.zero);
-                    sprites[x + y * 6] = sprite;
+                    sprites[(x2 + 0) + (y2 + 1) * 6] = sprite;
+
+                    rect = Rect.MinMaxRect(tileCenter.x, tileCenter.y, tileSize.x, tileSize.y);
+                    rect.position += relationalPosition;
+                    sprite = Sprite.Create(_source, rect, Vector2.zero);
+                    sprites[(x2 + 1) + (y2 + 1) * 6] = sprite;
+
+                    rect = Rect.MinMaxRect(0, 0, tileCenter.x, tileCenter.y);
+                    rect.position += relationalPosition;
+                    sprite = Sprite.Create(_source, rect, Vector2.zero);
+                    sprites[(x2 + 0) + (y2 + 0) * 6] = sprite;
+
+                    rect = Rect.MinMaxRect(tileCenter.x, 0, tileSize.x, tileCenter.y);
+                    rect.position += relationalPosition;
+                    sprite = Sprite.Create(_source, rect, Vector2.zero);
+                    sprites[(x2 + 1) + (y2 + 0) * 6] = sprite;
                 }
             }
 
-            if (pixels == null || pixels.Length != _pixelsPerUnit * _pixelsPerUnit)
-            {
-                pixels = new Color32[_pixelsPerUnit * _pixelsPerUnit];
-            }
-            var texture = new Texture2D(_pixelsPerUnit * 12, _pixelsPerUnit * 4, TextureFormat.RGBA32, false);
+            // スライスしたスプライトをテクスチャへ書き込む
+            var texture = new Texture2D(tileSize.x * 12, tileSize.y * 4, TextureFormat.RGBA32, false);
             texture.filterMode = FilterMode.Point;
-
             foreach (var slicer in slicers)
             {
-                // pixels へ書き込み
-                slicer.GetPixelsNonAlloc(sprites, pixels, _pixelsPerUnit);
-
-                // テクスチャへ書き込み
-                var x = slicer.X * _pixelsPerUnit;
-                var y = slicer.Y * _pixelsPerUnit;
-                texture.SetPixels32(x, y, _pixelsPerUnit, _pixelsPerUnit, pixels);
+                slicer.SetPixelsTo(texture, sprites, tileSize, tileCenter);
             }
 
-            // png 画像として保存
-            var ruleTilePath = AssetDatabase.GetAssetPath(_ruleTile);
+            // テクスチャを png 画像として保存
+            var ruleTilePath = AssetDatabase.GetAssetPath(_targetRuleTile);
             var ruleTileDirectory = Path.GetDirectoryName(ruleTilePath);
-            var ruleTileTexturePath = $@"{ruleTileDirectory}\{_ruleTile.name}.png";
+            var ruleTileTexturePath = $@"{ruleTileDirectory}\{_targetRuleTile.name}.png";
             var png = texture.EncodeToPNG();
             File.WriteAllBytes(ruleTileTexturePath, png);
             AssetDatabase.ImportAsset(ruleTileTexturePath);
@@ -344,15 +355,16 @@ namespace Roguegard.Editor
             factory.Init();
             var provider = factory.GetSpriteEditorDataProviderFromObject(importer);
             provider.InitSpriteEditorDataProvider();
-            provider.SetSpriteRects(slicers.Select(x => x.GetSpriteRect(_ruleTile.name, _pixelsPerUnit)).ToArray());
+            provider.SetSpriteRects(slicers.Select(x => x.GetSpriteRect(_targetRuleTile.name, tileSize)).ToArray());
             provider.Apply();
             EditorUtility.SetDirty(ruleTileTexture);
             AssetDatabase.ImportAsset(ruleTileTexturePath);
 
             // RuleTile を更新
-            _ruleTile.m_TilingRules.Clear();
-            _ruleTile.m_TilingRules.AddRange(slicers.Select(x => x.GetTilingRule(_ruleTile.name)));
-            EditorUtility.SetDirty(_ruleTile);
+            _targetRuleTile.m_TilingRules.Clear();
+            _targetRuleTile.m_TilingRules.AddRange(slicers.Select(x => x.GetTilingRule(_targetRuleTile.name)));
+            _targetRuleTile.m_DefaultSprite = _targetRuleTile.m_TilingRules[15].m_Sprites[0];
+            EditorUtility.SetDirty(_targetRuleTile);
             AssetDatabase.ImportAsset(ruleTilePath);
         }
 
@@ -367,35 +379,47 @@ namespace Roguegard.Editor
             public int LowerRight { get; set; }
             public Dictionary<Vector3Int, int> Neighbors { get; set; }
 
-            public void GetPixelsNonAlloc(Sprite[] sprites, Color32[] pixels, int pixelsPerUnit)
+            private  static Color32[] pixels;
+
+            public void SetPixelsTo(Texture2D texture, Sprite[] sprites, Vector2Int tileSize, Vector2Int tileCenter)
             {
-                var size = pixelsPerUnit / 2;
-                GetPixelsNonAlloc(sprites[UpperLeft], pixels, pixelsPerUnit, size, 0, size);
-                GetPixelsNonAlloc(sprites[UpperRight], pixels, pixelsPerUnit, size, size, size);
-                GetPixelsNonAlloc(sprites[LowerLeft], pixels, pixelsPerUnit, size, 0, 0);
-                GetPixelsNonAlloc(sprites[LowerRight], pixels, pixelsPerUnit, size, size, 0);
+                // pixels へ書き込み
+                if (pixels == null || pixels.Length != tileSize.x * tileSize.y)
+                {
+                    pixels = new Color32[tileSize.x * tileSize.y];
+                }
+                GetPixelsNonAlloc(sprites[UpperLeft], pixels, tileSize, MinMaxRect(0, tileCenter.y, tileCenter.x, tileSize.y));
+                GetPixelsNonAlloc(sprites[UpperRight], pixels, tileSize, MinMaxRect(tileCenter.x, tileCenter.y, tileSize.x, tileSize.y));
+                GetPixelsNonAlloc(sprites[LowerLeft], pixels, tileSize, MinMaxRect(0, 0, tileCenter.x, tileCenter.y));
+                GetPixelsNonAlloc(sprites[LowerRight], pixels, tileSize, MinMaxRect(tileCenter.x, 0, tileSize.x, tileCenter.y));
+
+                // テクスチャへ書き込み
+                var x = X * tileSize.x;
+                var y = Y * tileSize.y;
+                texture.SetPixels32(x, y, tileSize.x, tileSize.y, pixels);
+
+                RectInt MinMaxRect(int xmin, int ymin, int xmax, int ymax) => new RectInt(xmin, ymin, xmax - xmin, ymax - ymin);
             }
 
-            private static void GetPixelsNonAlloc(Sprite sprite, Color32[] pixels, int pixelsPerUnit, int size, int startX, int startY)
+            private static void GetPixelsNonAlloc(Sprite sprite, Color32[] pixels, Vector2Int tileSize, RectInt indexRect)
             {
-                for (int y = 0; y < size; y++)
+                for (int y = indexRect.yMin; y < indexRect.yMax; y++)
                 {
-                    for (int x = 0; x < size; x++)
+                    for (int x = indexRect.xMin; x < indexRect.xMax; x++)
                     {
-                        var point = startX + x + (startY + y) * pixelsPerUnit;
+                        var point = x + y * tileSize.x;
                         var rect = sprite.rect;
-                        pixels[point] = sprite.texture.GetPixel((int)rect.x + x, (int)rect.y + y);
+                        pixels[point] = sprite.texture.GetPixel((int)rect.x + x - indexRect.xMin, (int)rect.y + y - indexRect.yMin);
                     }
                 }
             }
 
-            public SpriteRect GetSpriteRect(string name, int pixelsPerUnit)
+            public SpriteRect GetSpriteRect(string name, Vector2Int tileSize)
             {
                 var spriteRect = new SpriteRect();
                 spriteRect.name = $"{name}_{Index}";
-                var x = X * pixelsPerUnit;
-                var y = Y * pixelsPerUnit;
-                spriteRect.rect = Rect.MinMaxRect(x, y, x + pixelsPerUnit, y + pixelsPerUnit);
+                var position = new Vector2Int(X, Y) * tileSize;
+                spriteRect.rect = new Rect(position, tileSize);
                 spriteRect.alignment = SpriteAlignment.Center;
                 return spriteRect;
             }

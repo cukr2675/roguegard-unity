@@ -13,5 +13,7 @@ MonoBehaviour:
   m_Name: WallTileGenerator
   m_EditorClassIdentifier: 
   _source: {fileID: 2800000, guid: 73982092af2f4984f8a281486679dd12, type: 3}
-  _ruleTile: {fileID: 11400000, guid: 01fb66b8260cdb84bbaabe2790adf97f, type: 2}
+  _tileSizePixel: {x: 32, y: 32}
+  _tileCenterPixel: {x: 16, y: 16}
   _pixelsPerUnit: 32
+  _targetRuleTile: {fileID: 11400000, guid: 01fb66b8260cdb84bbaabe2790adf97f, type: 2}

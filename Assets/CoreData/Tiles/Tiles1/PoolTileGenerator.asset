@@ -13,5 +13,7 @@ MonoBehaviour:
   m_Name: PoolTileGenerator
   m_EditorClassIdentifier: 
   _source: {fileID: 2800000, guid: 754f4e8606ea8d142a7da9c83c3ab0fb, type: 3}
-  _ruleTile: {fileID: 11400000, guid: 4050ebd7dee18a4459a5e2de7db9ad85, type: 2}
+  _tileSizePixel: {x: 32, y: 32}
+  _tileCenterPixel: {x: 16, y: 16}
   _pixelsPerUnit: 32
+  _targetRuleTile: {fileID: 11400000, guid: 4050ebd7dee18a4459a5e2de7db9ad85, type: 2}
