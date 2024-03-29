@@ -7,7 +7,7 @@ namespace Roguegard.CharacterCreation
     [System.Serializable]
     public class ScriptableStartingItemList : IWeightedRogueObjGeneratorList//, IReadOnlyList<ScriptableStartingItem>
     {
-        [SerializeField] private ScriptableStartingItem[] _items;
+        [SerializeField, ElementDescription("_option")] private ScriptableStartingItem[] _items;
 
         public ScriptableStartingItem this[int index] => _items[index];
 

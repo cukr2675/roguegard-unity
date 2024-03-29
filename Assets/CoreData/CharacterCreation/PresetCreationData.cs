@@ -23,8 +23,8 @@ namespace Roguegard.CharacterCreation
         public override IRogueDetails Details => _details.Ref;
 
         [SerializeField] private ScriptableRace _race = null;
-        [SerializeField] private ScriptableAppearance[] _appearances = null;
-        [SerializeField] private ScriptableIntrinsic[] _intrinsics = null;
+        [SerializeField, ElementDescription("_option")] private ScriptableAppearance[] _appearances = null;
+        [SerializeField, ElementDescription("_option")] private ScriptableIntrinsic[] _intrinsics = null;
         [SerializeField] private StartingItem[] _startingItemTable = null;
 
         [System.NonSerialized] private SortedIntrinsicList sortedIntrinsics;

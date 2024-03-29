@@ -72,7 +72,7 @@ namespace Roguegard.CharacterCreation
             [SerializeField] private SpriteMotionSetData _motionSet = null;
             public SpriteMotionSetData MotionSet => _motionSet;
 
-            [SerializeField] private ScriptableAppearance[] _appearances = null;
+            [SerializeField, ElementDescription("_option")] private ScriptableAppearance[] _appearances = null;
             public Spanning<ScriptableAppearance> Appearances => _appearances;
         }
     }

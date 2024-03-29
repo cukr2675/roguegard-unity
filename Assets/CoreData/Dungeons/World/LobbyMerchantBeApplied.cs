@@ -11,7 +11,7 @@ namespace Roguegard
     {
         private LobbyMerchantBeApplied() { }
 
-        [SerializeField] private ScriptableStartingItem[] _items = null;
+        [SerializeField, ElementDescription("_option")] private ScriptableStartingItem[] _items = null;
 
         IRogueMethodTarget ISkillDescription.Target => null;
         IRogueMethodRange ISkillDescription.Range => null;

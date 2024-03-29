@@ -54,10 +54,10 @@ namespace Roguegard.CharacterCreation
 
         public virtual Spanning<IWeightedRogueObjGeneratorList> StartingItemTable => Spanning<IWeightedRogueObjGeneratorList>.Empty;
 
-        public virtual string DescriptionName => Race.Name;
+        public virtual string DescriptionName => Race?.Name ?? "";
         [System.NonSerialized] private string _name; // null にするために NonSerialized にする
         string IRogueDescription.Name => DescriptionName.Length >= 1 ? DescriptionName : (_name ??= $":{name}");
-        public virtual Sprite Icon => Race.Icon;
+        public virtual Sprite Icon => Race?.Icon;
         public virtual Color Color => Race.Color;
         public virtual string Caption => null;
         public virtual IRogueDetails Details => null;

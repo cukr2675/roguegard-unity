@@ -9,8 +9,8 @@ namespace Roguegard.CharacterCreation
     public class ItemCreationData : ScriptableCharacterCreationData
     {
         [SerializeField] protected ObjectRace _race = null;
-        [SerializeField] private ScriptableAppearance[] _appearances = null;
-        [SerializeField] private ScriptableIntrinsic[] _intrinsics = null;
+        [SerializeField, ElementDescription("_option")] private ScriptableAppearance[] _appearances = null;
+        [SerializeField, ElementDescription("_option")] private ScriptableIntrinsic[] _intrinsics = null;
         [SerializeField] private ScriptableStartingItemList[] _startingItemTable = null;
 
         [System.NonSerialized] private SortedIntrinsicList sortedIntrinsics;
