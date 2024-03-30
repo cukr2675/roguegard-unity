@@ -128,7 +128,6 @@ namespace RoguegardUnity
                 if (storageObjs != null) { sortTable.Sort(arg.TargetObj); }
                 else { sortTable.Sort(arg.TargetObj); }
                 root.Reopen(self, user, arg, arg);
-                root.Back();
             }
         }
 

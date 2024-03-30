@@ -234,7 +234,6 @@ namespace RoguegardUnity
                 RogueFile.Import(StandardRogueDeviceSave.RootDirectory, x =>
                 {
                     root.Reopen(self, user, RogueMethodArgument.Identity, RogueMethodArgument.Identity);
-                    root.Back();
                 });
             }
         }

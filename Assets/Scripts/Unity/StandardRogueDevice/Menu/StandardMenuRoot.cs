@@ -90,7 +90,7 @@ namespace RoguegardUnity
             IsDone = true;
         }
 
-        void IModelsMenuRoot.Back()
+        private void Back()
         {
             HideAll();
 
@@ -116,6 +116,8 @@ namespace RoguegardUnity
                 Done();
             }
         }
+
+        void IModelsMenuRoot.Back() => Back();
 
         IModelsMenuView IModelsMenuRoot.Get(IKeyword keyword) => table[keyword];
 
@@ -148,6 +150,7 @@ namespace RoguegardUnity
                 }
                 currentMenuIsDialog = true;
             }
+            Back();
         }
 
         void IModelsMenuRoot.AddInt(IKeyword keyword, int integer) => EventManager.Add(keyword, integer: integer);
