@@ -25,7 +25,12 @@ namespace Roguegard.CharacterCreation
                 for (int i = 0; i < allOptions.Count; i++)
                 {
                     var value = allOptions[i];
-                    if (value is DungeonCreationData dungeonValue) { dungeons.Add(dungeonValue); }
+                    if (value is DungeonCreationData dungeonValue)
+                    {
+                        if (dungeonValue.Levels.Count == 0) continue;
+
+                        dungeons.Add(dungeonValue);
+                    }
                 }
             }
 
