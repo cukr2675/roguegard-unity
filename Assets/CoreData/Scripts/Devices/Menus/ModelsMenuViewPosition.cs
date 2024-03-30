@@ -46,6 +46,12 @@ namespace Roguegard.Device
             view.SetPosition(position);
         }
 
+        public void Reset()
+        {
+            prevPosition = 0f;
+            prevPositionHolder = null;
+        }
+
         public IModelsMenuChoice GetExitChoiceSelf()
         {
             return new ExitChoice() { parent = this, valueType = ValueType.Self };

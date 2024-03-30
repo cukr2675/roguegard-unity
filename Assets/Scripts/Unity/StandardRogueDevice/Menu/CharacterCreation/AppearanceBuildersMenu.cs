@@ -9,23 +9,18 @@ using Roguegard;
 
 namespace RoguegardUnity
 {
-    public class AppearanceBuildersMenu : IModelsMenu
+    public class AppearanceBuildersMenu : BaseScrollModelsMenu<object>
     {
-        private readonly ItemController itemController;
-        private readonly List<object> models = new List<object>();
+        private readonly List<object> models = new();
         private static readonly object addLeftEyeModel = new object();
         private static readonly object addRightEyeModel = new object();
         private static readonly object addHairModel = new object();
+        private static readonly object addOtherModel = new object();
 
         public CharacterCreationOptionMenu NextMenu { get; set; }
         public CharacterCreationAddMenu AddMenu { get; set; }
 
-        public AppearanceBuildersMenu()
-        {
-            itemController = new ItemController() { parent = this };
-        }
-
-        public void OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+        protected override Spanning<object> GetModels(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         {
             if (!(arg.Other is CharacterCreationDataBuilder builder)) throw new RogueException();
 
@@ -65,39 +60,31 @@ namespace RoguegardUnity
 
                 models.Add(appearanceBuilder);
             }
-            models.Add(null);
-
-            var scroll = root.Get(DeviceKw.MenuScroll);
-            scroll.OpenView(itemController, models, root, self, null, arg);
-            ExitModelsMenuChoice.OpenLeftAnchorExit(root);
+            models.Add(addOtherModel);
+            return models;
         }
 
-        private class ItemController : IModelsMenuItemController
+        protected override string GetItemName(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         {
-            public AppearanceBuildersMenu parent;
-
-            public string GetName(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            if (model is AppearanceBuilder builder)
             {
-                if (model is AppearanceBuilder builder)
-                {
-                    return builder.Name;
-                }
-                else
-                {
-                    return "+ Œ©‚½–Ú‚ð’Ç‰Á";
-                }
+                return builder.Name;
             }
-
-            public void Activate(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            else
             {
-                if (model is AppearanceBuilder builder)
-                {
-                    root.OpenMenu(parent.NextMenu, self, null, new(other: builder), arg);
-                }
-                else
-                {
-                    root.OpenMenu(parent.AddMenu, self, null, new(other: typeof(AppearanceBuilder)), arg);
-                }
+                return "+ Œ©‚½–Ú‚ð’Ç‰Á";
+            }
+        }
+
+        protected override void ItemActivate(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+        {
+            if (model is AppearanceBuilder builder)
+            {
+                root.OpenMenu(NextMenu, self, null, new(other: builder), arg);
+            }
+            else
+            {
+                root.OpenMenu(AddMenu, self, null, new(other: typeof(AppearanceBuilder)), arg);
             }
         }
     }

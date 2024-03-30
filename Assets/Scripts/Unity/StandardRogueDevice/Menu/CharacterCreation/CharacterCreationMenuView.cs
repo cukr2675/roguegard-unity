@@ -65,8 +65,13 @@ namespace RoguegardUnity
         {
             if (!(arg.Other is CharacterCreationDataBuilder builder)) throw new RogueException();
             this.builder = builder;
-            addMenu = new CharacterCreationAddMenu(builder, RoguegardSettings.CharacterCreationDatabase);
-            optionMenu = new CharacterCreationOptionMenu(builder, RoguegardSettings.CharacterCreationDatabase);
+            if (addMenu == null)
+            {
+                addMenu = new CharacterCreationAddMenu(RoguegardSettings.CharacterCreationDatabase);
+                optionMenu = new CharacterCreationOptionMenu(RoguegardSettings.CharacterCreationDatabase);
+            }
+            addMenu.Set(builder);
+            optionMenu.Set(builder);
             appearanceBuildersMenu.NextMenu = optionMenu;
             appearanceBuildersMenu.AddMenu = addMenu;
 
@@ -288,7 +293,7 @@ namespace RoguegardUnity
 
         private class LoadPresetChoice : IModelsMenuChoice
         {
-            private static readonly LoadPresetMenu nextMenu = new LoadPresetMenu();
+            private static LoadPresetMenu nextMenu;
 
             public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
@@ -299,37 +304,37 @@ namespace RoguegardUnity
             {
                 root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
 
+                if (nextMenu == null) { nextMenu = new(); }
                 root.OpenMenu(nextMenu, self, null, new(other: arg.Other), arg);
             }
         }
 
-        private class LoadPresetMenu : IModelsMenu, IModelsMenuItemController
+        private class LoadPresetMenu : BaseScrollModelsMenu<CharacterCreationDataBuilder>
         {
-            private static List<object> presets;
-            private static readonly LoadDialog nextMenu = new LoadDialog();
+            private static List<CharacterCreationDataBuilder> presets;
+            private static readonly LoadDialog nextMenu = new();
 
-            public void OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            protected override Spanning<CharacterCreationDataBuilder> GetModels(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 if (presets == null)
                 {
-                    presets = new List<object>();
+                    presets = new List<CharacterCreationDataBuilder>();
                     for (int i = 0; i < RoguegardSettings.CharacterCreationDatabase.PresetsCount; i++)
                     {
                         presets.Add(RoguegardSettings.CharacterCreationDatabase.LoadPreset(i));
                     }
                 }
-
-                var scroll = root.Get(DeviceKw.MenuScroll);
-                scroll.OpenView(this, presets, root, self, null, new(other: arg.Other));
-                ExitModelsMenuChoice.OpenLeftAnchorExit(root);
+                return presets;
             }
 
-            public string GetName(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            protected override string GetItemName(
+                CharacterCreationDataBuilder model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                return ((CharacterCreationDataBuilder)model).ShortName;
+                return model.ShortName;
             }
 
-            public void Activate(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            protected override void ItemActivate(
+                CharacterCreationDataBuilder model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
                 root.AddInt(DeviceKw.StartTalk, 0);
@@ -337,7 +342,7 @@ namespace RoguegardUnity
                 root.AddInt(DeviceKw.WaitEndOfTalk, 0);
                 root.OpenMenuAsDialog(nextMenu, self, user, arg, arg);
 
-                nextMenu.model = (CharacterCreationDataBuilder)model;
+                nextMenu.model = model;
             }
         }
 

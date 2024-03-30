@@ -9,7 +9,7 @@ namespace Roguegard.Device
         protected virtual string MenuName => null;
         protected virtual IKeyword ViewKeyword => DeviceKw.MenuScroll;
 
-        protected ModelsMenuViewPosition ViewPosition { get; }
+        public ModelsMenuViewPosition ViewPosition { get; }
 
         private readonly ExitModelsMenuChoice exitChoice;
         private readonly List<object> leftAnchorModels;

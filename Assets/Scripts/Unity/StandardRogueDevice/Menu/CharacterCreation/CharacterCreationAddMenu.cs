@@ -9,65 +9,58 @@ using Roguegard.Device;
 
 namespace RoguegardUnity
 {
-    public class CharacterCreationAddMenu : IModelsMenu
+    public class CharacterCreationAddMenu : BaseScrollModelsMenu<object>
     {
-        private readonly CharacterCreationDataBuilder builder;
         private readonly ICharacterCreationDatabase database;
-        private readonly CharacterCreationOptionMenu nextMenu;
-        private readonly List<object> models = new List<object>();
-        private readonly ItemController itemController;
+        private readonly List<object> models;
 
-        public CharacterCreationAddMenu(CharacterCreationDataBuilder builder, ICharacterCreationDatabase database)
+        private CharacterCreationDataBuilder builder;
+
+        public CharacterCreationAddMenu(ICharacterCreationDatabase database)
         {
-            this.builder = builder;
             this.database = database;
-            nextMenu = new CharacterCreationOptionMenu(builder, database);
-            itemController = new ItemController() { parent = this };
+            models = new List<object>();
         }
 
-        public void OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+        public void Set(CharacterCreationDataBuilder builder)
+        {
+            this.builder = builder;
+        }
+
+        protected override Spanning<object> GetModels(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         {
             models.Clear();
             AddOptionsTo(models, self, (System.Type)arg.Other, database);
-            var scroll = root.Get(DeviceKw.MenuScroll);
-            scroll.OpenView(itemController, models, root, self, null, new(other: arg.Other));
-            ExitModelsMenuChoice.OpenLeftAnchorExit(root);
+            return models;
         }
 
-        private class ItemController : IModelsMenuItemController
+        protected override string GetItemName(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         {
-            public CharacterCreationAddMenu parent;
+            return ((IRogueDescription)model).Name;
+        }
 
-            public string GetName(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+        protected override void ItemActivate(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+        {
+            var builderType = (System.Type)arg.Other;
+            if (builderType == typeof(AppearanceBuilder))
             {
-                return ((IRogueDescription)model).Name;
+                var appearanceBuilder = builder.Appearances.Add();
+                appearanceBuilder.Option = (IAppearanceOption)model;
+            }
+            else if (builderType == typeof(IntrinsicBuilder))
+            {
+                var intrinsicBuilder = builder.Intrinsics.Add();
+                intrinsicBuilder.Option = (IIntrinsicOption)model;
+            }
+            else if (builderType == typeof(StartingItemBuilder))
+            {
+                var startingItemBuilder = builder.StartingItemTable.Add().Add();
+                startingItemBuilder.Option = (IStartingItemOption)model;
+                startingItemBuilder.Stack = 1;
+                ConsumeStartingItemOptionObj(startingItemBuilder.Option, self);
             }
 
-            public void Activate(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-
-                var builderType = (System.Type)arg.Other;
-                if (builderType == typeof(AppearanceBuilder))
-                {
-                    var appearanceBuilder = parent.builder.Appearances.Add();
-                    appearanceBuilder.Option = (IAppearanceOption)model;
-                }
-                else if (builderType == typeof(IntrinsicBuilder))
-                {
-                    var intrinsicBuilder = parent.builder.Intrinsics.Add();
-                    intrinsicBuilder.Option = (IIntrinsicOption)model;
-                }
-                else if (builderType == typeof(StartingItemBuilder))
-                {
-                    var startingItemBuilder = parent.builder.StartingItemTable.Add().Add();
-                    startingItemBuilder.Option = (IStartingItemOption)model;
-                    startingItemBuilder.Stack = 1;
-                    ConsumeStartingItemOptionObj(startingItemBuilder.Option, self);
-                }
-
-                root.Back();
-            }
+            root.Back();
         }
 
         public static void AddOptionsTo(List<object> models, RogueObj player, object builder, ICharacterCreationDatabase database)

@@ -9,25 +9,41 @@ using TMPro;
 
 namespace RoguegardUnity
 {
-    public class CharacterCreationOptionMenu : IModelsMenu
+    public class CharacterCreationOptionMenu : BaseScrollModelsMenu<object>
     {
-        private readonly List<object> models = new List<object>();
+        protected override IKeyword ViewKeyword => DeviceKw.MenuOptions;
+
+        private readonly List<object> models = new();
         private readonly ICharacterCreationDatabase database;
+        private readonly CharacterCreationSelectOptionChoice selectOptionChoice;
         private readonly RemoveChoice removeChoice;
 
-        public CharacterCreationOptionMenu(CharacterCreationDataBuilder builder, ICharacterCreationDatabase database)
+        // selectOptionChoice と同時に出現するメンバーは別インスタンスにする。
+        private readonly CharacterCreationSelectOptionChoice singleItemMemberOptionChoice;
+        private readonly CharacterCreationSelectOptionChoice alphabetTypeMemberOptionChoice;
+
+        public CharacterCreationOptionMenu(ICharacterCreationDatabase database)
         {
-            removeChoice = new RemoveChoice() { builder = builder };
             this.database = database;
+            selectOptionChoice = new CharacterCreationSelectOptionChoice(database);
+            removeChoice = new RemoveChoice();
+
+            singleItemMemberOptionChoice = new CharacterCreationSelectOptionChoice(database);
+            alphabetTypeMemberOptionChoice = new CharacterCreationSelectOptionChoice(database);
         }
 
-        public void OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+        public void Set(CharacterCreationDataBuilder builder)
+        {
+            removeChoice.builder = builder;
+        }
+
+        protected override Spanning<object> GetModels(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         {
             if (arg.Other is RaceBuilder raceBuilder)
             {
                 models.Clear();
                 models.Add(new ShortNameOption(removeChoice.builder));
-                models.Add(new SelectOptionChoice(raceBuilder, database));
+                models.Add(selectOptionChoice.Set(raceBuilder));
                 models.Add(new GenderOption(database));
                 models.Add(new ColorPicker());
                 AddMemberModels(raceBuilder);
@@ -35,7 +51,7 @@ namespace RoguegardUnity
             else if (arg.Other is AppearanceBuilder appearanceBuilder)
             {
                 models.Clear();
-                models.Add(new SelectOptionChoice(appearanceBuilder, database));
+                models.Add(selectOptionChoice.Set(appearanceBuilder));
                 models.Add(new ColorPicker());
                 AddMemberModels(appearanceBuilder);
                 models.Add(removeChoice);
@@ -43,7 +59,7 @@ namespace RoguegardUnity
             else if (arg.Other is IntrinsicBuilder intrinsicBuilder)
             {
                 models.Clear();
-                models.Add(new SelectOptionChoice(intrinsicBuilder, database));
+                models.Add(selectOptionChoice.Set(intrinsicBuilder));
                 models.Add(new NameOption());
                 AddMemberModels(intrinsicBuilder);
                 models.Add(removeChoice);
@@ -51,15 +67,12 @@ namespace RoguegardUnity
             else if (arg.Other is StartingItemBuilder startingItemBuilder)
             {
                 models.Clear();
-                models.Add(new SelectOptionChoice(startingItemBuilder, database));
+                models.Add(selectOptionChoice.Set(startingItemBuilder));
                 models.Add(new StackOption());
                 AddMemberModels(startingItemBuilder);
                 models.Add(removeChoice);
             }
-
-            var options = (OptionsMenuView)root.Get(DeviceKw.MenuOptions);
-            options.OpenView(ChoicesModelsMenuItemController.Instance, models, root, self, null, new(other: arg.Other));
-            ExitModelsMenuChoice.OpenLeftAnchorExit(root);
+            return models;
         }
 
         private void AddMemberModels(IMemberable memberable)
@@ -69,7 +82,7 @@ namespace RoguegardUnity
                 var member = memberable.GetMember(memberable.MemberableOption.MemberSources[i]);
                 if (member is SingleItemMember singleItemMember)
                 {
-                    models.Add(new SelectOptionChoice(singleItemMember, database));
+                    models.Add(singleItemMemberOptionChoice.Set(singleItemMember));
                 }
                 else if (member is EquipMember equipMember)
                 {
@@ -78,7 +91,7 @@ namespace RoguegardUnity
                 else if (member is AlphabetTypeMember alphabetTypeMember && memberable is AppearanceBuilder appearanceBuilder)
                 {
                     appearanceBuilder.Option.UpdateMemberRange(alphabetTypeMember, appearanceBuilder, removeChoice.builder);
-                    models.Add(new SelectOptionChoice(alphabetTypeMember, database));
+                    models.Add(alphabetTypeMemberOptionChoice.Set(alphabetTypeMember));
                 }
                 else if (member is StandardRaceMember standardRaceMember && memberable is RaceBuilder raceBuilder)
                 {
@@ -88,154 +101,32 @@ namespace RoguegardUnity
             }
         }
 
+        protected override string GetItemName(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+        {
+            return ChoicesModelsMenuItemController.Instance.GetName(model, root, self, user, arg);
+        }
+
+        protected override void ItemActivate(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+        {
+            ChoicesModelsMenuItemController.Instance.Activate(model, root, self, user, arg);
+        }
+
         private class ShortNameOption : IModelsMenuOptionText
         {
             private readonly CharacterCreationDataBuilder builder;
-
             public TMP_InputField.ContentType ContentType => TMP_InputField.ContentType.Standard;
+            public ShortNameOption(CharacterCreationDataBuilder builder) => this.builder = builder;
 
-            public ShortNameOption(CharacterCreationDataBuilder builder)
-            {
-                this.builder = builder;
-            }
-
-            public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                return "職業／二つ名";
-            }
-
-            public string GetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                return builder.ShortName;
-            }
-
-            public void SetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg, string value)
-            {
-                builder.ShortName = value;
-            }
-        }
-
-        private class SelectOptionChoice : IModelsMenuChoice
-        {
-            private readonly object builder;
-            private readonly SelectOptionMenu nextMenu;
-
-            public SelectOptionChoice(object builder, ICharacterCreationDatabase database)
-            {
-                this.builder = builder;
-                nextMenu = new SelectOptionMenu() { database = database };
-            }
-
-            public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                if (builder is RaceBuilder raceBuilder)
-                {
-                    return raceBuilder.Option.Name;
-                }
-                else if (builder is AppearanceBuilder appearanceBuilder)
-                {
-                    return appearanceBuilder.Option.Name;
-                }
-                else if (builder is IntrinsicBuilder intrinsicBuilder)
-                {
-                    return intrinsicBuilder.Option.Name;
-                }
-                else if (builder is StartingItemBuilder startingItemBuilder)
-                {
-                    return startingItemBuilder.Option.Name;
-                }
-                else if (builder is SingleItemMember singleItemMember)
-                {
-                    return singleItemMember.ItemOption?.Name;
-                }
-                else if (builder is AlphabetTypeMember alphabetTypeMember)
-                {
-                    return $"タイプ{alphabetTypeMember.Type}";
-                }
-                Debug.LogError("不正な型です。");
-                return null;
-            }
-
-            public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-                root.OpenMenu(nextMenu, self, null, new(other: builder), arg);
-            }
-        }
-
-        private class SelectOptionMenu : IModelsMenu, IModelsMenuItemController
-        {
-            private readonly List<object> models = new List<object>();
-
-            public ICharacterCreationDatabase database;
-
-            public void OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                models.Clear();
-                CharacterCreationAddMenu.AddOptionsTo(models, self, arg.Other, database);
-                var scroll = root.Get(DeviceKw.MenuScroll);
-                scroll.OpenView(this, models, root, self, null, new(other: arg.Other));
-                ExitModelsMenuChoice.OpenLeftAnchorExit(root);
-            }
-
-            public string GetName(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                if (model is IRogueDescription description)
-                {
-                    return description.Name;
-                }
-                else if (arg.Other is AlphabetTypeMember alphabetTypeMember)
-                {
-                    return $"タイプ{alphabetTypeMember.Types[(int)model]}";
-                }
-                Debug.LogError("不正な型です。");
-                return null;
-            }
-
-            public void Activate(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-
-                if (arg.Other is RaceBuilder raceBuilder)
-                {
-                    raceBuilder.Option = (IRaceOption)model;
-                }
-                else if (arg.Other is AppearanceBuilder appearanceBuilder)
-                {
-                    appearanceBuilder.Option = (IAppearanceOption)model;
-                }
-                else if (arg.Other is IntrinsicBuilder intrinsicBuilder)
-                {
-                    intrinsicBuilder.Option = (IIntrinsicOption)model;
-                }
-                else if (arg.Other is StartingItemBuilder startingItemBuilder)
-                {
-                    CharacterCreationAddMenu.ReceiveStartingItemOptionObj(startingItemBuilder.Option, self);
-                    startingItemBuilder.Option = (IStartingItemOption)model;
-                    CharacterCreationAddMenu.ConsumeStartingItemOptionObj(startingItemBuilder.Option, self);
-                }
-                else if (arg.Other is SingleItemMember singleItemMember)
-                {
-                    CharacterCreationAddMenu.ReceiveStartingItemOptionObj(singleItemMember.ItemOption, self);
-                    singleItemMember.ItemOption = (IStartingItemOption)model;
-                    CharacterCreationAddMenu.ConsumeStartingItemOptionObj(singleItemMember.ItemOption, self);
-                }
-                else if (arg.Other is AlphabetTypeMember alphabetTypeMember)
-                {
-                    alphabetTypeMember.TypeIndex = (int)model;
-                }
-                root.Back();
-            }
+            public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg) => "職業／二つ名";
+            public string GetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg) => builder.ShortName;
+            public void SetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg, string value) => builder.ShortName = value;
         }
 
         private class NameOption : IModelsMenuOptionText
         {
             public TMP_InputField.ContentType ContentType => TMP_InputField.ContentType.Standard;
 
-            public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                return "名前";
-            }
+            public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg) => "名前";
 
             public string GetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
@@ -264,10 +155,7 @@ namespace RoguegardUnity
         {
             public CharacterCreationDataBuilder builder;
 
-            public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                return "<#f00>削除";
-            }
+            public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg) => "<#f00>削除";
 
             public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
@@ -353,11 +241,7 @@ namespace RoguegardUnity
         private class GenderOption : IModelsMenuChoice
         {
             private readonly SelectGenderMenu nextMenu;
-
-            public GenderOption(ICharacterCreationDatabase database)
-            {
-                nextMenu = new SelectGenderMenu() { database = database };
-            }
+            public GenderOption(ICharacterCreationDatabase database) => nextMenu = new SelectGenderMenu() { database = database };
 
             public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
@@ -381,39 +265,32 @@ namespace RoguegardUnity
             }
         }
 
-        private class SelectGenderMenu : IModelsMenu, IModelsMenuItemController
+        private class SelectGenderMenu : BaseScrollModelsMenu<IRogueGender>
         {
             public ICharacterCreationDatabase database;
             private RaceBuilder builder;
 
-            public void OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            protected override Spanning<IRogueGender> GetModels(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 builder = (RaceBuilder)arg.Other;
-                var scroll = root.Get(DeviceKw.MenuScroll);
-                scroll.OpenView(this, builder.Option.Genders, root, self, null, new(other: arg.Other));
-                ExitModelsMenuChoice.OpenLeftAnchorExit(root);
+                return builder.Option.Genders;
             }
 
-            public string GetName(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            protected override string GetItemName(IRogueGender gender, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                return ((IRogueGender)model).Name;
+                return gender.Name;
             }
 
-            public void Activate(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            protected override void ItemActivate(IRogueGender gender, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-
-                builder.Gender = (IRogueGender)model;
+                builder.Gender = gender;
                 root.Back();
             }
         }
 
         private class StackOption : IModelsMenuOptionSlider
         {
-            public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                return "個数";
-            }
+            public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg) => "個数";
 
             public float GetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
@@ -440,11 +317,7 @@ namespace RoguegardUnity
         private class IsEquippedChoice : IModelsMenuChoice
         {
             private readonly EquipMember equipMember;
-
-            public IsEquippedChoice(EquipMember equipMember)
-            {
-                this.equipMember = equipMember;
-            }
+            public IsEquippedChoice(EquipMember equipMember) => this.equipMember = equipMember;
 
             public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
@@ -469,10 +342,7 @@ namespace RoguegardUnity
                 this.standardRaceOption = standardRaceOption;
             }
 
-            public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                return "サイズ";
-            }
+            public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg) => "サイズ";
 
             public float GetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
