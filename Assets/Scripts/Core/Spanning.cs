@@ -61,6 +61,10 @@ namespace Roguegard
             return result;
         }
 
+        /// <summary>
+        /// Unsafe を使用するとき、 int[] など値型配列から object[] への型変換ができないため使わない
+        /// </summary>
+        [System.Obsolete]
         private Spanning<TTo> Cast<TTo>()
         {
             return new Spanning<TTo>((IReadOnlyList<TTo>)_list, _count);
