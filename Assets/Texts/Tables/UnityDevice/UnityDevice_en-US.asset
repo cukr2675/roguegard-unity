@@ -110,6 +110,14 @@ MonoBehaviour:
     m_Localized: Import
     m_Metadata:
       m_Items: []
+  - m_Id: 61745564916781056
+    m_Localized: <
+    m_Metadata:
+      m_Items: []
+  - m_Id: 61746009336844288
+    m_Localized: Don't Save
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

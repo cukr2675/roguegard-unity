@@ -35,7 +35,7 @@ namespace Roguegard
         private class ItemController : IModelsMenuItemController
         {
             private static readonly CommandMenu nextMenu = new CommandMenu();
-            private static readonly CallLobbyDialog callLobbyDialog = new CallLobbyDialog();
+            private static readonly DialogModelsMenuChoice callLobbyDialog = new DialogModelsMenuChoice(("‚Í‚¢", CallLobby)).AppendExit();
             private static readonly PartyBoardCharacterCreationMenu newMenu = new PartyBoardCharacterCreationMenu();
 
             public string GetName(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
@@ -85,22 +85,8 @@ namespace Roguegard
                     }
                 }
             }
-        }
 
-        private class CallLobbyDialog : IModelsMenu
-        {
-            private static readonly object[] models = new object[]
-            {
-                new ActionModelsMenuChoice("‚Í‚¢", Yes),
-                ExitModelsMenuChoice.Instance
-            };
-
-            public void OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                root.Get(DeviceKw.MenuTalkChoices).OpenView(ChoicesModelsMenuItemController.Instance, models, root, self, user, arg);
-            }
-
-            private static void Yes(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            private static void CallLobby(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
 

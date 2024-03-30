@@ -71,7 +71,7 @@ namespace RoguegardUnity
             public AddCallback addCallback;
 
             private CommandMenu nextMenu;
-            private OverwriteDialog overwriteDialog;
+            private DialogModelsMenuChoice overwriteDialog;
 
             public string GetName(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
@@ -86,7 +86,7 @@ namespace RoguegardUnity
                 if (nextMenu == null)
                 {
                     nextMenu = new CommandMenu() { parent = this };
-                    overwriteDialog = new OverwriteDialog() { parent = this };
+                    overwriteDialog = new DialogModelsMenuChoice((":Overwrite", Yes)).AppendExit();
                 }
 
                 if (model == null)
@@ -111,34 +111,13 @@ namespace RoguegardUnity
                     }
                 }
             }
-        }
-
-        private class OverwriteDialog : IModelsMenu
-        {
-            public ItemController parent;
-
-            private object[] models;
-
-            public void OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                if (models == null)
-                {
-                    models = new object[]
-                    {
-                        new ActionModelsMenuChoice(":Overwrite", Yes),
-                        ExitModelsMenuChoice.Instance
-                    };
-                }
-
-                root.Get(DeviceKw.MenuTalkChoices).OpenView(ChoicesModelsMenuItemController.Instance, models, root, self, user, arg);
-            }
 
             private void Yes(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
 
                 // セーブデータを上書き
-                parent.selectCallback(root, (string)arg.Other);
+                selectCallback(root, (string)arg.Other);
             }
         }
 
@@ -217,7 +196,7 @@ namespace RoguegardUnity
 
             private class Delete : IModelsMenuChoice
             {
-                private static readonly DeleteDialog nextMenu = new DeleteDialog();
+                private static readonly DialogModelsMenuChoice nextMenu = new DialogModelsMenuChoice(("<#f00>:Delete", Yes)).AppendExit();
 
                 public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
                 {
@@ -234,25 +213,11 @@ namespace RoguegardUnity
                 }
             }
 
-            private class DeleteDialog : IModelsMenu
+            private static void Yes(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                private static readonly object[] models = new object[]
-                {
-                    new ActionModelsMenuChoice("<#f00>:Delete", Yes),
-                    ExitModelsMenuChoice.Instance
-                };
-
-                public void OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-                {
-                    root.Get(DeviceKw.MenuTalkChoices).OpenView(ChoicesModelsMenuItemController.Instance, models, root, self, user, arg);
-                }
-
-                private static void Yes(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-                {
-                    root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-                    RogueFile.Delete((string)arg.Other);
-                    root.Back();
-                }
+                root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+                RogueFile.Delete((string)arg.Other);
+                root.Back();
             }
         }
 

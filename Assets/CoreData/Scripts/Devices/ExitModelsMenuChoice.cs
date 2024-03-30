@@ -19,7 +19,7 @@ namespace Roguegard.Device
 
         public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         {
-            return "<";
+            return ":Exit";
         }
 
         public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)

@@ -131,6 +131,26 @@ MonoBehaviour:
     m_Key: Import
     m_Metadata:
       m_Items: []
+  - m_Id: 61745497740808192
+    m_Key: /* Choices */
+    m_Metadata:
+      m_Items: []
+  - m_Id: 61745564916781056
+    m_Key: Exit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 61745863035326464
+    m_Key: ExitMsg
+    m_Metadata:
+      m_Items: []
+  - m_Id: 61746009336844288
+    m_Key: DontSave
+    m_Metadata:
+      m_Items: []
+  - m_Id: 61746370936180736
+    m_Key: SecondExitMsg
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

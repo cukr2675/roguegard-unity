@@ -312,7 +312,9 @@ namespace RoguegardUnity
         private class LoadPresetMenu : BaseScrollModelsMenu<CharacterCreationDataBuilder>
         {
             private static List<CharacterCreationDataBuilder> presets;
-            private static readonly LoadDialog nextMenu = new();
+
+            private DialogModelsMenuChoice nextMenu;
+            private CharacterCreationDataBuilder model;
 
             protected override Spanning<CharacterCreationDataBuilder> GetModels(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
@@ -336,34 +338,15 @@ namespace RoguegardUnity
             protected override void ItemActivate(
                 CharacterCreationDataBuilder model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
+                if (nextMenu == null) { nextMenu = new DialogModelsMenuChoice(("ロードする", Load)).AppendExit(); }
+
                 root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
                 root.AddInt(DeviceKw.StartTalk, 0);
                 root.AddObject(DeviceKw.AppendText, "ロードすると 編集中のキャラは消えてしまいますが よろしいですか？");
                 root.AddInt(DeviceKw.WaitEndOfTalk, 0);
                 root.OpenMenuAsDialog(nextMenu, self, user, arg, arg);
 
-                nextMenu.model = model;
-            }
-        }
-
-        private class LoadDialog : IModelsMenu
-        {
-            public CharacterCreationDataBuilder model;
-
-            private readonly object[] models;
-
-            public LoadDialog()
-            {
-                models = new object[]
-                {
-                    new ActionModelsMenuChoice("ロードする", Load),
-                    ExitModelsMenuChoice.Instance
-                };
-            }
-
-            public void OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                root.Get(DeviceKw.MenuTalkChoices).OpenView(ChoicesModelsMenuItemController.Instance, models, root, self, user, arg);
+                this.model = model;
             }
 
             private void Load(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)

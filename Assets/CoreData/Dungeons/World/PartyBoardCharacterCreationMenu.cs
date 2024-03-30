@@ -9,7 +9,7 @@ namespace Roguegard
 {
     public class PartyBoardCharacterCreationMenu : IModelsMenu
     {
-        private readonly object[] models = new object[] { new OpenExitDialog() };
+        private readonly object[] models = new object[] { DialogModelsMenuChoice.CreateExit(Save) };
 
         public void OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         {
@@ -17,74 +17,32 @@ namespace Roguegard
             root.Get(DeviceKw.MenuCharacterCreation).OpenView(null, models, root, self, user, new(targetObj: arg.TargetObj, other: builder));
         }
 
-        private class OpenExitDialog : IModelsMenuChoice
+        private static void Save(IModelsMenuRoot root, RogueObj player, RogueObj user, in RogueMethodArgument arg)
         {
-            private static readonly ExitDialog nextMenu = new ExitDialog();
+            root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
 
-            public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            if (arg.Other is CharacterCreationDataBuilder builder)
             {
-                return "<";
-            }
-
-            public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-                root.AddInt(DeviceKw.StartTalk, 0);
-                root.AddObject(DeviceKw.AppendText, "編集内容を保存しますか？");
-                root.AddInt(DeviceKw.WaitEndOfTalk, 0);
-                root.OpenMenuAsDialog(nextMenu, self, user, arg, arg);
-            }
-        }
-
-        private class ExitDialog : IModelsMenu
-        {
-            private readonly object[] models = new object[]
-            {
-                new ActionModelsMenuChoice("上書き保存", Save),
-                new ActionModelsMenuChoice("保存しない", NotSave),
-                ExitModelsMenuChoice.Instance
-            };
-
-            public void OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                root.Get(DeviceKw.MenuTalkChoices).OpenView(ChoicesModelsMenuItemController.Instance, models, root, self, user, arg);
-            }
-
-            private static void Save(IModelsMenuRoot root, RogueObj player, RogueObj user, in RogueMethodArgument arg)
-            {
-                root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-
-                if (arg.Other is CharacterCreationDataBuilder builder)
+                // キャラクリ画面から戻ったとき、そのキャラを更新する
+                var character = arg.TargetObj;
+                if (character != null)
                 {
-                    // キャラクリ画面から戻ったとき、そのキャラを更新する
-                    var character = arg.TargetObj;
-                    if (character != null)
-                    {
-                        // 編集キャラ更新
-                        character.Main.SetBaseInfoSet(character, builder.PrimaryInfoSet);
-                    }
-                    else
-                    {
-                        // 新規キャラ追加
-                        var worldInfo = RogueWorldInfo.GetByCharacter(player);
-                        character = builder.CreateObj(null, Vector2Int.zero, RogueRandom.Primary);
-                        worldInfo.LobbyMembers.Add(character);
-                    }
-                    var info = LobbyMemberList.GetMemberInfo(character);
-                    info.CharacterCreationData = builder;
+                    // 編集キャラ更新
+                    character.Main.SetBaseInfoSet(character, builder.PrimaryInfoSet);
                 }
-
-                root.Back();
-                root.Back();
+                else
+                {
+                    // 新規キャラ追加
+                    var worldInfo = RogueWorldInfo.GetByCharacter(player);
+                    character = builder.CreateObj(null, Vector2Int.zero, RogueRandom.Primary);
+                    worldInfo.LobbyMembers.Add(character);
+                }
+                var info = LobbyMemberList.GetMemberInfo(character);
+                info.CharacterCreationData = builder;
             }
 
-            private static void NotSave(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                // 何もせず閉じる
-                root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-                root.Back();
-                root.Back();
-            }
+            root.Back();
+            root.Back();
         }
     }
 }

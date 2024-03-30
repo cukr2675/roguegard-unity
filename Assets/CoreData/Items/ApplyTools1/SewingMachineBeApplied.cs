@@ -75,10 +75,9 @@ namespace Roguegard
         private class SewingMenu : IModelsMenu, IModelsMenuItemController
         {
             private static List<object> models;
-            private static object[] leftAnchorModels = new[]{ new ActionModelsMenuChoice("<", Exit) };
+            private static object[] leftAnchorModels = new[] { DialogModelsMenuChoice.CreateExit(Save) };
             private static readonly PaintBoneSpriteMenu nextMenu = new PaintBoneSpriteMenu();
             private static readonly EquipPartsMenu equipPartsMenu = new EquipPartsMenu();
-            private static readonly ExitDialog exitDialog = new ExitDialog();
 
             public void OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
@@ -118,15 +117,6 @@ namespace Roguegard
                 root.OpenMenu(equipPartsMenu, self, null, new(other: data), arg);
             }
 
-            private static void Exit(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-                root.AddInt(DeviceKw.StartTalk, 0);
-                root.AddObject(DeviceKw.AppendText, "編集内容を保存しますか？");
-                root.AddInt(DeviceKw.WaitEndOfTalk, 0);
-                root.OpenMenuAsDialog(exitDialog, self, user, arg, arg);
-            }
-
             public string GetName(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 if (model is IModelsMenuChoice choice) return choice.GetName(root, self, user, arg);
@@ -164,6 +154,28 @@ namespace Roguegard
                 }
             }
 
+            private static void Save(IModelsMenuRoot root, RogueObj player, RogueObj user, in RogueMethodArgument arg)
+            {
+                root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+
+                // 編集画面から戻ったとき、その装備品を更新する
+                var data = (SewedEquipmentData)arg.Other;
+                var equipment = arg.TargetObj;
+                if (equipment != null)
+                {
+                    // 装備品更新
+                    equipment.Main.SetBaseInfoSet(equipment, new SewedEquipmentInfoSet(data));
+                }
+                else
+                {
+                    // 新規装備品
+                    new SewedEquipmentInfoSet(data).CreateObj(player, Vector2Int.zero, RogueRandom.Primary);
+                }
+
+                root.Back();
+                root.Back();
+            }
+
             private class NameOption : IModelsMenuOptionText
             {
                 public TMP_InputField.ContentType ContentType => TMP_InputField.ContentType.Standard;
@@ -183,51 +195,6 @@ namespace Roguegard
                 {
                     var data = (SewedEquipmentData)arg.Other;
                     data.Name = value;
-                }
-            }
-
-            private class ExitDialog : IModelsMenu
-            {
-                private readonly object[] models = new object[]
-                {
-                    new ActionModelsMenuChoice("上書き保存", Save),
-                    new ActionModelsMenuChoice("保存しない", NotSave),
-                    ExitModelsMenuChoice.Instance
-                };
-
-                public void OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-                {
-                    root.Get(DeviceKw.MenuTalkChoices).OpenView(ChoicesModelsMenuItemController.Instance, models, root, self, user, arg);
-                }
-
-                private static void Save(IModelsMenuRoot root, RogueObj player, RogueObj user, in RogueMethodArgument arg)
-                {
-                    root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-
-                    // 編集画面から戻ったとき、その装備品を更新する
-                    var data = (SewedEquipmentData)arg.Other;
-                    var equipment = arg.TargetObj;
-                    if (equipment != null)
-                    {
-                        // 装備品更新
-                        equipment.Main.SetBaseInfoSet(equipment, new SewedEquipmentInfoSet(data));
-                    }
-                    else
-                    {
-                        // 新規装備品
-                        new SewedEquipmentInfoSet(data).CreateObj(player, Vector2Int.zero, RogueRandom.Primary);
-                    }
-
-                    root.Back();
-                    root.Back();
-                }
-
-                private static void NotSave(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-                {
-                    // 何もせず閉じる
-                    root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Cancel);
-                    root.Back();
-                    root.Back();
                 }
             }
         }
