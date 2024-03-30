@@ -4085,7 +4085,7 @@ MonoBehaviour:
   _canvasGroup: {fileID: 5926676241923944491}
   _content: {fileID: 5063230484211815101}
   _itemPrefab: {fileID: 7251070034383148064, guid: 3d8de5b889250844ea67fe30402b2f9e, type: 3}
-  _itemButtonCount: {x: 1, y: 2}
+  _itemButtonCount: {x: 1, y: 1}
   _verticalExtensionTarget: {fileID: 6551028471310100233}
 --- !u!114 &8880381994383216123
 MonoBehaviour:
