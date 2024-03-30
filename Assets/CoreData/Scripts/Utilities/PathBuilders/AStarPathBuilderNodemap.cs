@@ -40,7 +40,7 @@ namespace Roguegard
         public bool UpdateMap(RogueObj self)
         {
             IRogueTilemapView tilemap;
-            if (ViewInfo.TryGet(self, out var view)) { tilemap = view; }
+            if (ViewInfo.TryGet(RogueParty.GetLeader(self), out var view)) { tilemap = view; }
             else { tilemap = self.Location.Space; }
             var newRect = new RectInt(Vector2Int.zero, tilemap.Size);
             if (newRect.width > capacity.x || newRect.height > capacity.y) throw new RogueException();

@@ -48,5 +48,12 @@ namespace Roguegard
             // 同じキャラか、同じパーティなら true
             return left == right || left.Main.Stats.Party == right.Main.Stats.Party;
         }
+
+        public static RogueObj GetLeader(RogueObj obj)
+        {
+            if (obj == null) throw new System.ArgumentNullException(nameof(obj));
+
+            return obj.Main.Stats.Party?.Members[0] ?? obj;
+        }
     }
 }
