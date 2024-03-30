@@ -304,7 +304,7 @@ namespace RoguegardUnity
             }
         }
 
-        private class OptionsMenu : IModelsMenu
+        private class OptionsMenu : BaseScrollModelsMenu<object>
         {
             private static readonly object[] choices = new object[]
             {
@@ -312,12 +312,19 @@ namespace RoguegardUnity
                 new OptionsWindowFrameType()
             };
 
-            public void OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            protected override Spanning<object> GetModels(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                var options = (OptionsMenuView)root.Get(DeviceKw.MenuOptions);
-                options.OpenView(ChoicesModelsMenuItemController.Instance, choices, root, self, user, RogueMethodArgument.Identity);
-                ExitModelsMenuChoice.OpenLeftAnchorExit(root);
-                root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+                return choices;
+            }
+
+            protected override string GetItemName(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            {
+                return ChoicesModelsMenuItemController.Instance.GetName(model, root, self, user, arg);
+            }
+
+            protected override void ItemActivate(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            {
+                ChoicesModelsMenuItemController.Instance.Activate(model, root, self, user, arg);
             }
         }
 
@@ -356,11 +363,11 @@ namespace RoguegardUnity
                 root.OpenMenu(nextMenu, self, user, RogueMethodArgument.Identity, RogueMethodArgument.Identity);
             }
 
-            private class Menu : IModelsMenu, IModelsMenuItemController
+            private class Menu : BaseScrollModelsMenu<int>
             {
-                private static readonly List<object> models = new List<object>();
+                private static readonly List<int> models = new();
 
-                public void OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+                protected override Spanning<int> GetModels(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
                 {
                     if (models.Count != WindowFrameList.Count)
                     {
@@ -370,19 +377,18 @@ namespace RoguegardUnity
                             models.Add(i);
                         }
                     }
-
-                    root.Get(DeviceKw.MenuScroll).OpenView(this, models, root, self, user, RogueMethodArgument.Identity);
+                    return models;
                 }
 
-                public string GetName(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+                protected override string GetItemName(int index, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
                 {
-                    return WindowFrameList.GetName((int)model);
+                    return WindowFrameList.GetName(index);
                 }
 
-                public void Activate(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+                protected override void ItemActivate(int index, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
                 {
                     var device = (StandardRogueDevice)RogueDevice.Primary;
-                    device.Options.SetWindowFrame((int)model, device.Options.WindowFrameColor);
+                    device.Options.SetWindowFrame(index, device.Options.WindowFrameColor);
 
                     root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
                     root.Back();

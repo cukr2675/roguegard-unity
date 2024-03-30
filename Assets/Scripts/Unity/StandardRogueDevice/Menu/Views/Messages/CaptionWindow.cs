@@ -5,12 +5,38 @@ using UnityEngine;
 using System.Text;
 using TMPro;
 using Roguegard;
+using Roguegard.Device;
 
 namespace RoguegardUnity
 {
-    public class CaptionWindow : MenuWindow
+    public class CaptionWindow : ModelsMenuView
     {
+        [SerializeField] private CanvasGroup _canvasGroup = null;
         [SerializeField] private TMP_Text _text = null;
+
+        public override CanvasGroup CanvasGroup => _canvasGroup;
+
+        public override void OpenView<T>(
+            IModelsMenuItemController itemController, Spanning<T> models, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+        {
+            if (arg.Other is IRogueDescription description)
+            {
+                ShowCaption(description);
+            }
+            else
+            {
+                ShowCaption(arg.Other?.ToString() ?? "");
+            }
+        }
+
+        public override float GetPosition()
+        {
+            return 0f;
+        }
+
+        public override void SetPosition(float position)
+        {
+        }
 
         public void ShowCaption(string text)
         {
@@ -19,7 +45,7 @@ namespace RoguegardUnity
                 text = "";
             }
             _text.SetText(text);
-            Show(true);
+            MenuController.Show(_canvasGroup, true);
         }
 
         public void ShowCaption(IRogueDescription description)
@@ -38,7 +64,7 @@ namespace RoguegardUnity
             }
 
             _text.SetText(text);
-            Show(true);
+            MenuController.Show(_canvasGroup, true);
         }
     }
 }

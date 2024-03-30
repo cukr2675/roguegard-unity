@@ -318,26 +318,24 @@ namespace RoguegardUnity
                 root.OpenMenu(nextMenu, null, null, RogueMethodArgument.Identity, RogueMethodArgument.Identity);
             }
 
-            private class NextMenu : IModelsMenu, IModelsMenuItemController
+            private class NextMenu : BaseScrollModelsMenu<CreditData>
             {
+                protected override string MenuName => ":Credit";
+
                 public TitleMenu parent;
 
-                public void OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+                protected override Spanning<CreditData> GetModels(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
                 {
-                    var scroll = root.Get(DeviceKw.MenuScroll);
-                    scroll.OpenView(this, parent._credits, root, null, null, RogueMethodArgument.Identity);
-                    ExitModelsMenuChoice.OpenLeftAnchorExit(root);
+                    return parent._credits;
                 }
 
-                public string GetName(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+                protected override string GetItemName(CreditData credit, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
                 {
-                    return ((CreditData)model).Name;
+                    return credit.Name;
                 }
 
-                public void Activate(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+                protected override void ItemActivate(CreditData credit, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
                 {
-                    root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-                    var credit = (CreditData)model;
                     parent._creditMenu.Show(credit, root);
                 }
             }

@@ -64,10 +64,10 @@ namespace RoguegardUnity
             var putInCommandMenu = new PutIntoChestCommandMenu();
             var takeOutCommandMenu = new TakeOutFromChestCommandMenu();
 
-            objsMenu = new ObjsMenu(_captionWindow, objCommandMenu, putInCommandMenu, takeOutCommandMenu);
-            var skillsMenu = new SkillsMenu(_captionWindow);
-            var partyMemberMenu = new PartyMemberMenu(_captionWindow, objsMenu, objCommandMenu, skillsMenu);
-            var partyMenu = new PartyMenu(_captionWindow, partyMemberMenu);
+            objsMenu = new ObjsMenu(objCommandMenu, putInCommandMenu, takeOutCommandMenu);
+            var skillsMenu = new SkillsMenu();
+            var partyMemberMenu = new PartyMemberMenu(objsMenu, objCommandMenu, skillsMenu);
+            var partyMenu = new PartyMenu(partyMemberMenu);
             mainMenu = new MainMenu(objsMenu, skillsMenu, partyMenu);
             longDownMenu = new LongDownMenu(objsMenu, objCommandMenu);
             selectFileMenu = new SelectFileMenu(_scrollMenu, _leftAnchorMenu);
@@ -84,6 +84,7 @@ namespace RoguegardUnity
             SetScrollSensitivity(scrollSensitivity);
 
             var table = new Dictionary<IKeyword, ModelsMenuView>();
+            table.Add(DeviceKw.MenuCaption, _captionWindow);
             table.Add(DeviceKw.MenuThumbnail, _thumbnailMenu);
             table.Add(DeviceKw.MenuScroll, _scrollMenu);
             table.Add(DeviceKw.MenuCommand, _commandMenu);
@@ -100,7 +101,7 @@ namespace RoguegardUnity
             table.Add(DeviceKw.MenuLog, _messageController.LogView);
             table.Add(DeviceKw.MenuTalk, _messageController.TalkView);
             table.Add(DeviceKw.MenuTalkChoices, _talkChoicesMenu);
-            menuManager = new StandardMenuRoot(_touchMask, _messageController, _captionWindow, _statsWindow, soundController, table);
+            menuManager = new StandardMenuRoot(_touchMask, _messageController, _statsWindow, soundController, table);
 
             _touchMask.gameObject.SetActive(touchMaskIsEnabled);
         }

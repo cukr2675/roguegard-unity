@@ -28,15 +28,13 @@ namespace RoguegardUnity
 
         public IModelsMenu TakeOutFromChest { get; }
 
-        public ObjsMenu(
-            CaptionWindow captionWindow, ObjCommandMenu commandMenu,
-            PutIntoChestCommandMenu putInCommandMenu, TakeOutFromChestCommandMenu takeOutCommandMenu)
+        public ObjsMenu(ObjCommandMenu commandMenu, PutIntoChestCommandMenu putInCommandMenu, TakeOutFromChestCommandMenu takeOutCommandMenu)
         {
             Close = new CloseChoice();
-            Items = new ItemsMenu() { caption = captionWindow, commandMenu = commandMenu };
-            Ground = new GroundMenu() { caption = captionWindow, commandMenu = commandMenu };
-            PutIntoChest = new PutIntoChestMenu() { caption = captionWindow, commandMenu = putInCommandMenu };
-            TakeOutFromChest = new TakeOutFromChestMenu() { caption = captionWindow, commandMenu = takeOutCommandMenu };
+            Items = new ItemsMenu() { commandMenu = commandMenu };
+            Ground = new GroundMenu() { commandMenu = commandMenu };
+            PutIntoChest = new PutIntoChestMenu() { commandMenu = putInCommandMenu };
+            TakeOutFromChest = new TakeOutFromChestMenu() { commandMenu = takeOutCommandMenu };
         }
 
         private class CloseChoice : IModelsMenuChoice
@@ -51,113 +49,74 @@ namespace RoguegardUnity
             }
         }
 
-        private abstract class ScrollMenu : IModelsMenu, IModelsMenuItemController
+        private abstract class ScrollMenu : BaseScrollModelsMenu<RogueObj>
         {
-            protected abstract string MenuName { get; }
             protected virtual bool Skip0WeightObjs => false;
             protected virtual bool SortIsEnabled => false;
 
-            public CaptionWindow caption;
             public IModelsMenu commandMenu;
 
-            private RogueObj prevTargetObj;
-            private float prevPosition;
-            private ActionModelsMenuChoice sortChoice;
+            private readonly ActionModelsMenuChoice sortChoice;
 
             private static CategorizedSortTable sortTable;
-            private static List<object> leftAnchorObjs = new List<object>();
+
+            protected ScrollMenu()
+            {
+                sortChoice = new ActionModelsMenuChoice(":Sort", Sort);
+            }
+
+            protected override object GetViewPositionHolder(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+                => arg.TargetObj;
+
+            protected sealed override Spanning<RogueObj> GetModels(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+                => GetObjs(self, arg.TargetObj);
 
             /// <summary>
             /// <paramref name="targetObj"/> のインベントリを開く
             /// </summary>
             protected abstract Spanning<RogueObj> GetObjs(RogueObj self, RogueObj targetObj);
 
-            public void OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            protected override float GetDefaultViewPosition(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
+                if (!Skip0WeightObjs) return 0f;
+
+                // 重さがゼロではないアイテムまで自動スクロール
                 var models = GetObjs(self, arg.TargetObj);
-
-                float position;
-                if (arg.TargetObj == prevTargetObj)
+                for (int i = 0; i < models.Count; i++)
                 {
-                    // 前回開いた対象と同じであれば同じ位置までスクロール
-                    position = prevPosition;
+                    var weight = WeightCalculator.Get(models[i]);
+                    if (weight.TotalWeight > 0f) return i;
                 }
-                else if (Skip0WeightObjs)
-                {
-                    // 重さがゼロではないアイテムまで自動スクロール
-                    int index;
-                    for (index = 0; index < models.Count; index++)
-                    {
-                        var weight = WeightCalculator.Get(models[index]);
-                        if (weight.TotalWeight > 0f) break;
-                    }
-                    position = index;
-                }
-                else
-                {
-                    // 一番上までスクロール
-                    position = 0f;
-                }
-
-                var scroll = (ScrollModelsMenuView)root.Get(DeviceKw.MenuScroll);
-                scroll.OpenView(this, models, root, self, user, arg);
-                scroll.SetPosition(position);
-
-                caption.ShowCaption(MenuName);
-
-                leftAnchorObjs.Clear();
-
-                // プレイヤーパーティのキャラのインベントリまたは倉庫であればソート可能
-                if (SortIsEnabled)
-                {
-                    if (RogueDevice.Primary.Player.Main.Stats.Party.Members.Contains(arg.TargetObj) ||
-                        ChestInfo.GetStorage(arg.TargetObj) != null)
-                    {
-                        sortChoice ??= new ActionModelsMenuChoice(":Sort", Sort);
-                        leftAnchorObjs.Add(sortChoice);
-                    }
-                }
-
-                leftAnchorObjs.Add(ExitModelsMenuChoice.Instance);
-                var leftAnchor = root.Get(DeviceKw.MenuLeftAnchor);
-                leftAnchor.OpenView(ChoicesModelsMenuItemController.Instance, leftAnchorObjs, root, self, user, arg);
+                return 0f;
             }
 
-            public string GetName(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            protected override void GetLeftAnchorModels(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg, List<object> models)
             {
-                if (model == null) return null;
+                if (!SortIsEnabled) return;
 
-                var obj = (RogueObj)model;
+                // プレイヤーパーティのキャラのインベントリまたは倉庫であればソート可能
+                if (RogueDevice.Primary.Player.Main.Stats.Party.Members.Contains(arg.TargetObj) ||
+                    ChestInfo.GetStorage(arg.TargetObj) != null)
+                {
+                    models.Insert(0, sortChoice);
+                }
+            }
+
+            protected override string GetItemName(RogueObj obj, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            {
                 return obj.GetName();
             }
 
-            public void Activate(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            protected override void ItemActivate(RogueObj obj, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                if (model == null)
-                {
-                    root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Cancel);
-                    return;
-                }
-
-                root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-
-                // スクロール位置を記憶する
-                prevPosition = root.Get(DeviceKw.MenuScroll).GetPosition();
-                prevTargetObj = arg.TargetObj;
-
                 // 選択したアイテムの情報と選択肢を表示する
-                var obj = (RogueObj)model;
-                caption.ShowCaption(obj.Main.InfoSet);
                 root.OpenMenuAsDialog(commandMenu, self, null, new(targetObj: arg.TargetObj, tool: obj), arg);
             }
 
-            public void Sort(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            private void Sort(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
+                ViewPosition.Save(root, arg.TargetObj);
                 root.AddObject(DeviceKw.EnqueueSE, StdKw.Sort);
-
-                // スクロール位置を記憶する
-                prevPosition = root.Get(DeviceKw.MenuScroll).GetPosition();
-                prevTargetObj = arg.TargetObj;
 
                 if (sortTable == null)
                 {
@@ -231,7 +190,6 @@ namespace RoguegardUnity
         private class TakeOutFromChestMenu : ScrollMenu
         {
             protected override string MenuName => ":Take out what?";
-
             protected override bool SortIsEnabled => true;
 
             protected override Spanning<RogueObj> GetObjs(RogueObj self, RogueObj chest)

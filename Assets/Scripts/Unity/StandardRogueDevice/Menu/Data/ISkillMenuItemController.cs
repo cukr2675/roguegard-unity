@@ -9,6 +9,5 @@ namespace RoguegardUnity
 {
     public interface ISkillMenuItemController : IModelsMenuItemController
     {
-        RogueObj Obj { get; }
     }
 }

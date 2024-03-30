@@ -18,10 +18,8 @@ namespace RoguegardUnity
         [SerializeField] private float _itemWidth = 150f;
 
         private IModelsMenuItemController itemController;
-
-        private readonly List<object> models = new List<object>();
-
-        private List<ModelsMenuViewItemButton> itemButtons = new List<ModelsMenuViewItemButton>();
+        private readonly List<object> models = new();
+        private readonly List<ModelsMenuViewItemButton> itemButtons = new();
 
         public override CanvasGroup CanvasGroup => _canvasGroup;
 
@@ -48,10 +46,6 @@ namespace RoguegardUnity
             }
             SetArg(root, self, user, arg);
             UpdateItems();
-            var index = arg.Vector.x;
-            //index = Mathf.Clamp(arg.Vector.x, 0f, Mathf.Floor(marginHeight / itemHeight));
-            _scrollRect.verticalNormalizedPosition = 1f - (index * itemHeight / marginHeight);
-            UpdateItems();
             MenuController.Show(_canvasGroup, true);
         }
 
@@ -59,19 +53,13 @@ namespace RoguegardUnity
         {
             // 後からアイテムが増えたときのため、スクロール位置を変換したものを返す
             var offset = marginHeight * (1f - _scrollRect.verticalNormalizedPosition) / itemHeight;
-            //offset = Mathf.Clamp(offset, 0f, Mathf.Floor(marginHeight / itemHeight));
             return offset;
         }
 
         public override void SetPosition(float position)
         {
             _scrollRect.verticalNormalizedPosition = 1f - (position * itemHeight / marginHeight);
-            //_scrollRect.verticalNormalizedPosition = position;
-        }
-
-        private void ShowSubmitButton(IModelsMenuChoice choice)
-        {
-
+            UpdateItems();
         }
 
         private void UpdateItems()

@@ -49,7 +49,7 @@ namespace RoguegardUnity
         {
             this.controller = controller;
             this.source = source;
-            if (controller is IPartyMenuItemController partyController)
+            if (controller is IPartyMenuItemController)
             {
                 var obj = (RogueObj)source;
                 SetIcon(obj);
@@ -59,9 +59,9 @@ namespace RoguegardUnity
                 _weightText.text = null;
                 _equippedText.text = null;
             }
-            else if (controller is ISkillMenuItemController skillController)
+            else if (controller is ISkillMenuItemController)
             {
-                var obj = skillController.Obj;
+                var obj = view.Arg.TargetObj ?? view.Self;
                 if (obj == null) return;
 
                 var skill = (ISkill)source;

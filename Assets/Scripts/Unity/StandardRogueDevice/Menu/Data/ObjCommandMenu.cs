@@ -39,6 +39,9 @@ namespace RoguegardUnity
             choices.Add(Details);
             choices.Add(ExitModelsMenuChoice.Instance);
             root.Get(DeviceKw.MenuCommand).OpenView(ChoicesModelsMenuItemController.Instance, choices, root, self, user, arg);
+
+            var caption = root.Get(DeviceKw.MenuCaption);
+            caption.OpenView(null, Spanning<object>.Empty, null, null, null, new(other: tool.Main.InfoSet));
         }
 
         private class SummaryChoice : IModelsMenuChoice

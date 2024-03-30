@@ -12,76 +12,40 @@ namespace RoguegardUnity
     {
         public IModelsMenu Use { get; }
 
-        public SkillsMenu(CaptionWindow captionWindow)
+        public SkillsMenu()
         {
-            var commandMenu = new SkillCommandMenu();
-            {
-                var use = new UseMenu();
-                use.caption = captionWindow;
-                use.action = (IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg) =>
-                {
-                    // スクロール位置を記憶する。違うキャラのインベントリを開いたときリセットされる
-                    use.selfIndex = root.Get(DeviceKw.MenuScroll).GetPosition();
-                    use.prevSelf = self;
-                };
-                use.exitChoice = new[] { new ExitModelsMenuChoice(use.action) };
-                Use = use;
-            }
+            Use = new UseMenu();
         }
 
         /// <summary>
         /// 使うスキルを選択するメニュー
         /// </summary>
-        private class UseMenu : IModelsMenu, IModelsMenuItemController, ISkillMenuItemController
+        private class UseMenu : BaseScrollModelsMenu<ISkill>, ISkillMenuItemController
         {
+            protected override string MenuName => ":Skills";
+
+            private readonly List<ISkill> models = new List<ISkill>();
             private readonly SkillCommandMenu menu = new SkillCommandMenu();
-            public object[] exitChoice;
-            public ModelsMenuAction action;
-            public CaptionWindow caption;
 
-            public RogueObj prevSelf;
-            public float selfIndex;
-            private List<object> models = new List<object>();
-
-            RogueObj ISkillMenuItemController.Obj => prevSelf;
-
-            void IModelsMenu.OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            protected override Spanning<ISkill> GetModels(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 models.Clear();
                 for (int i = 0; i < self.Main.Skills.Count; i++)
                 {
                     models.Add(self.Main.Skills[i]);
                 }
-                var position = self == prevSelf ? selfIndex : 0f;
-                prevSelf = self;
-                var openArg = new RogueMethodArgument(targetObj: self, vector: new Vector2(position, 0f));
-                var scroll = (ScrollModelsMenuView)root.Get(DeviceKw.MenuScroll);
-                scroll.OpenView(this, models, root, self, user, openArg);
-                caption.ShowCaption(":Skills");
-                var leftAnchor = root.Get(DeviceKw.MenuLeftAnchor);
-                leftAnchor.OpenView(ChoicesModelsMenuItemController.Instance, exitChoice, root, self, user, openArg);
+                return models;
             }
 
-            public string GetName(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            protected override string GetItemName(ISkill skill, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                var skill = (ISkill)model;
-                return skill.Name;
+                return "???";
             }
 
-            public void Activate(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            protected override void ItemActivate(ISkill skill, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                action(root, self, user, arg);
-                var skill = (ISkill)model;
-                if (skill == null)
-                {
-                    root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Cancel);
-                    return;
-                }
-                root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-
-                caption.ShowCaption(skill);
-                var openArg = new RogueMethodArgument(other: skill);
-                root.OpenMenuAsDialog(menu, self, null, openArg, RogueMethodArgument.Identity);
+                // 選択したスキルの情報と選択肢を表示する
+                root.OpenMenuAsDialog(menu, self, null, new(other: skill), arg);
             }
         }
     }

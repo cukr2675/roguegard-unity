@@ -11,7 +11,7 @@ namespace RoguegardUnity
     {
         private readonly IModelsMenuChoice[] choices;
 
-        public PartyMemberMenu(CaptionWindow captionWindow, ObjsMenu objsMenu, ObjCommandMenu objCommandMenu, SkillsMenu skillsMenu)
+        public PartyMemberMenu(ObjsMenu objsMenu, ObjCommandMenu objCommandMenu, SkillsMenu skillsMenu)
         {
             choices = new IModelsMenuChoice[]
             {

@@ -65,6 +65,9 @@ namespace Roguegard
         [SerializeField] private KeywordData _loadGame;
         public static IKeyword LoadGame => instance._loadGame;
 
+        [SerializeField] private KeywordData _menuCaption;
+        public static IKeyword MenuCaption => instance._menuCaption;
+
         [SerializeField] private KeywordData _menuCharacterCreation;
         public static IKeyword MenuCharacterCreation => instance._menuCharacterCreation;
 

@@ -31,6 +31,7 @@ MonoBehaviour:
   _horizontalRule: {fileID: 11400000, guid: 3e33e79890f3c2f47a80a10d96854290, type: 2}
   _insertHideCharacterWork: {fileID: 11400000, guid: 7a386de4b5ca02349a1030573fa663cc, type: 2}
   _loadGame: {fileID: 11400000, guid: 78c27715bafd7c04787645538e4f1ab2, type: 2}
+  _menuCaption: {fileID: 11400000, guid: 6b019d75662c62940acdcc690473a04a, type: 2}
   _menuCharacterCreation: {fileID: 11400000, guid: 7770a8d624087cd44ab77f73a47076a8, type: 2}
   _menuCommand: {fileID: 11400000, guid: a9a980e3cce249341b2baf5e3caa8f78, type: 2}
   _menuDetails: {fileID: 11400000, guid: e94dd2a2778ee6642af8de73147641d5, type: 2}

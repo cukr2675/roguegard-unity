@@ -7,44 +7,32 @@ using Roguegard.Device;
 
 namespace RoguegardUnity
 {
-    public class PartyMenu : IModelsMenu
+    public class PartyMenu : BaseScrollModelsMenu<RogueObj>
     {
-        private readonly CaptionWindow captionWindow;
-        private readonly ItemController itemController;
+        protected override string MenuName => ":Party";
 
-        public PartyMenu(CaptionWindow captionWindow, PartyMemberMenu memberMenu)
+        private readonly PartyMemberMenu memberMenu;
+
+        public PartyMenu(PartyMemberMenu memberMenu)
         {
-            this.captionWindow = captionWindow;
-            itemController = new ItemController() { menu = memberMenu };
+            this.memberMenu = memberMenu;
         }
 
-        void IModelsMenu.OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+        protected override Spanning<RogueObj> GetModels(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         {
             var partyMembers = self.Main.Stats.Party.Members;
-            var scroll = (ScrollModelsMenuView)root.Get(DeviceKw.MenuScroll);
-            scroll.OpenView(itemController, partyMembers, root, self, user, arg);
-            captionWindow.ShowCaption(":Party");
-            ExitModelsMenuChoice.OpenLeftAnchorExit(root);
+            return partyMembers;
         }
 
-        private class ItemController : IPartyMenuItemController
+        protected override string GetItemName(RogueObj partyMember, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         {
-            public PartyMemberMenu menu;
+            return partyMember.GetName();
+        }
 
-            public string GetName(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                var partyMember = (RogueObj)model;
-                return partyMember.GetName();
-            }
-
-            public void Activate(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                var partyMember = (RogueObj)model;
-                var openArg = new RogueMethodArgument(targetObj: partyMember);
-                var backArg = RogueMethodArgument.Identity;
-                root.OpenMenuAsDialog(menu, self, user, openArg, backArg);
-                root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-            }
+        protected override void ItemActivate(RogueObj partyMember, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+        {
+            // 選択したパーティメンバーの情報と選択肢を表示する
+            root.OpenMenuAsDialog(memberMenu, self, null, new(targetObj: partyMember), arg);
         }
     }
 }

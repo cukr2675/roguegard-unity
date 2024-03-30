@@ -12,7 +12,6 @@ namespace RoguegardUnity
     {
         private readonly Image touchMask;
         private readonly MessageController messageController;
-        private readonly CaptionWindow captionWindow;
         private readonly StatsWindow statsWindow;
         private readonly Dictionary<IKeyword, ModelsMenuView> table;
         private readonly Stack<StackItem> stack;
@@ -27,12 +26,11 @@ namespace RoguegardUnity
         public bool IsDone { get; private set; }
 
         public StandardMenuRoot(
-            Image touchMask, MessageController messageController, CaptionWindow captionWindow, StatsWindow statsWindow,
+            Image touchMask, MessageController messageController, StatsWindow statsWindow,
             SoundController soundController, IReadOnlyDictionary<IKeyword, ModelsMenuView> table)
         {
             this.touchMask = touchMask;
             this.messageController = messageController;
-            this.captionWindow = captionWindow;
             this.statsWindow = statsWindow;
             this.table = new Dictionary<IKeyword, ModelsMenuView>(table);
             EventManager = new ModelsMenuEventManager(messageController, soundController);
@@ -74,7 +72,6 @@ namespace RoguegardUnity
         private void HideAll()
         {
             messageController.ShowMessage(false);
-            captionWindow.Show(false);
             statsWindow.Show(false);
             foreach (var item in table)
             {
