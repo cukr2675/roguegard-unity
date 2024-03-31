@@ -35,6 +35,11 @@ namespace Roguegard
                     RogueDevice.Add(DeviceKw.AppendText, self);
                     RogueDevice.Add(DeviceKw.AppendText, "は");
                     RogueDevice.Add(DeviceKw.AppendText, tool);
+                    if (tool.Stack >= 2)
+                    {
+                        RogueDevice.Add(DeviceKw.AppendText, "x");
+                        RogueDevice.Add(DeviceKw.AppendText, tool.Stack);
+                    }
                     RogueDevice.Add(DeviceKw.AppendText, "を拾った\n");
                     RogueDevice.Add(DeviceKw.EnqueueSE, MainInfoKw.PickUp);
                 }
