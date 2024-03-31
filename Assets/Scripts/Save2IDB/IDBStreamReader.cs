@@ -10,7 +10,7 @@ namespace Save2IDB
     unsafe public class IDBStreamReader : UnmanagedMemoryStream
     {
         [DllImport("__Internal")]
-        private static extern void Save2IDB_CloseRead(byte* pointer);
+        private static extern void Save2IDB_CloseReadAllBytes(byte* pointer);
 
         private bool isClosed;
 
@@ -26,7 +26,7 @@ namespace Save2IDB
                 Position = 0;
 #if UNITY_WEBGL && !UNITY_EDITOR
                 var pointer = PositionPointer;
-                Save2IDB_CloseRead(pointer);
+                Save2IDB_CloseReadAllBytes(pointer);
 #endif
                 isClosed = true;
             }

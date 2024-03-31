@@ -180,7 +180,7 @@ const Save2IDBPlugin = {
     Save2IDB.filesObjectStoreName = UTF8ToString(filesObjectStoreNamePtr);
   },
   
-  Save2IDB_DirectWriteAsync: async function (ohPtr, pathPtr, bytesPtr, bytesLen, thenCallback, catchCallback) {
+  Save2IDB_WriteAllBytesAsync: async function (ohPtr, pathPtr, bytesPtr, bytesLen, thenCallback, catchCallback) {
     try {
       const path = UTF8ToString(pathPtr);
       const bytesView = Module.HEAPU8.subarray(bytesPtr, bytesPtr + bytesLen);
@@ -190,12 +190,12 @@ const Save2IDBPlugin = {
       Module.dynCall_vi(thenCallback, ohPtr);
 
     } catch (error) {
-      console.error(`Save2IDB_DirectWriteAsync error: ${error}`);
+      console.error(`Save2IDB_WriteAllBytesAsync error: ${error}`);
       Save2IDB.callbackText(catchCallback, ohPtr, error);
     }
   },
 
-  Save2IDB_OpenReadAsync: async function (ohPtr, pathPtr, thenCallback, catchCallback) {
+  Save2IDB_OpenReadAllBytesAsync: async function (ohPtr, pathPtr, thenCallback, catchCallback) {
     try {
       const path = UTF8ToString(pathPtr);
 
@@ -206,12 +206,12 @@ const Save2IDBPlugin = {
       Module.dynCall_viij(thenCallback, ohPtr, bytesPtr, buffer.byteLength);
 
     } catch (error) {
-      console.error(`Save2IDB_OpenReadAsync error: ${error}`);
+      console.error(`Save2IDB_OpenReadAllBytesAsync error: ${error}`);
       Save2IDB.callbackText(catchCallback, ohPtr, error);
     }
   },
 
-  Save2IDB_CloseRead: function (ptr) {
+  Save2IDB_CloseReadAllBytes: function (ptr) {
     Module._free(ptr);
   },
 

@@ -12,7 +12,7 @@ namespace Save2IDB
 {
     public static class IDBFile
     {
-        unsafe private delegate void OpenReadAsyncThenCallback(System.IntPtr ohPtr, byte* bytesPtr, long bytesLen);
+        unsafe private delegate void OpenReadAllBytesAsyncThenCallback(System.IntPtr ohPtr, byte* bytesPtr, long bytesLen);
         private delegate void ExistsAsyncThenCallback(System.IntPtr ohPtr, bool exists);
         private delegate void GetFileInfosDescDateAsyncThenCallback(System.IntPtr ohPtr, string serial);
         private delegate void ImportAsyncThenCallback(System.IntPtr ohPtr, string path);
@@ -20,12 +20,12 @@ namespace Save2IDB
         private delegate void CommonCatchCallback(System.IntPtr ohPtr, string errorCode);
 
         [DllImport("__Internal")]
-        unsafe private static extern void Save2IDB_DirectWriteAsync(
+        unsafe private static extern void Save2IDB_WriteAllBytesAsync(
             System.IntPtr ohPtr, string path, byte* bytesPtr, int bytesLen, CommonThenCallback thenCallback, CommonCatchCallback catchCallback);
 
         [DllImport("__Internal")]
-        private static extern void Save2IDB_OpenReadAsync(
-            System.IntPtr ohPtr, string path, OpenReadAsyncThenCallback thenCallback, CommonCatchCallback catchCallback);
+        private static extern void Save2IDB_OpenReadAllBytesAsync(
+            System.IntPtr ohPtr, string path, OpenReadAllBytesAsyncThenCallback thenCallback, CommonCatchCallback catchCallback);
 
         [DllImport("__Internal")]
         private static extern void Save2IDB_DeleteAsync(
@@ -80,7 +80,7 @@ namespace Save2IDB
         /// <summary>
         /// 指定のパスにファイルを書き込みます。
         /// </summary>
-        unsafe private static IDBOperationHandle DirectWriteAsync(string path, byte[] buffer, long offset, long length)
+        unsafe private static IDBOperationHandle WriteAllBytesAsync(string path, byte[] buffer, long offset, long length)
         {
             if (string.IsNullOrWhiteSpace(path)) throw new System.ArgumentException($"{path} は無効なパスです。", nameof(path));
             if (buffer == null) throw new System.ArgumentNullException(nameof(buffer));
@@ -92,7 +92,7 @@ namespace Save2IDB
             var ohPtr = Unsafe.As<IDBOperationHandle, System.IntPtr>(ref operationHandle);
             fixed (byte* ptr = &buffer[offset])
             {
-                Save2IDB_DirectWriteAsync(ohPtr, path, ptr, (int)length, CommonThen, CommonCatch);
+                Save2IDB_WriteAllBytesAsync(ohPtr, path, ptr, (int)length, CommonThen, CommonCatch);
             }
 #endif
             return operationHandle;
@@ -101,18 +101,18 @@ namespace Save2IDB
         /// <summary>
         /// 指定のパスにファイルを書き込みます。
         /// </summary>
-        unsafe public static IDBOperationHandle DirectWriteAsync(string path, System.ReadOnlySpan<byte> source)
+        unsafe public static IDBOperationHandle WriteAllBytesAsync(string path, System.ReadOnlySpan<byte> bytes)
         {
             if (string.IsNullOrWhiteSpace(path)) throw new System.ArgumentException($"{path} は無効なパスです。", nameof(path));
-            if (source == null) throw new System.ArgumentNullException(nameof(source));
+            if (bytes == null) throw new System.ArgumentNullException(nameof(bytes));
             if (ContainsInvalidChar(path)) throw new System.ArgumentException(invalidCharacterExceptionMessage, nameof(path));
 
             var operationHandle = new IDBOperationHandle();
 #if UNITY_WEBGL && !UNITY_EDITOR
             var ohPtr = Unsafe.As<IDBOperationHandle, System.IntPtr>(ref operationHandle);
-            fixed (byte* ptr = source)
+            fixed (byte* ptr = bytes)
             {
-                Save2IDB_DirectWriteAsync(ohPtr, path, ptr, source.Length, CommonThen, CommonCatch);
+                Save2IDB_WriteAllBytesAsync(ohPtr, path, ptr, bytes.Length, CommonThen, CommonCatch);
             }
 #endif
             return operationHandle;
@@ -123,7 +123,7 @@ namespace Save2IDB
         /// <summary>
         /// 指定のパスからファイルを読み込みます。
         /// </summary>
-        unsafe public static IDBOperationHandle<IDBStreamReader> OpenReadAsync(string path)
+        unsafe public static IDBOperationHandle<IDBStreamReader> OpenReadAllBytesAsync(string path)
         {
             if (string.IsNullOrWhiteSpace(path)) throw new System.ArgumentException($"{path} は無効なパスです。", nameof(path));
             if (ContainsInvalidChar(path)) throw new System.ArgumentException(invalidCharacterExceptionMessage, nameof(path));
@@ -131,13 +131,13 @@ namespace Save2IDB
             var operationHandle = new IDBOperationHandle<IDBStreamReader>();
 #if UNITY_WEBGL && !UNITY_EDITOR
             var ohPtr = Unsafe.As<IDBOperationHandle<IDBStreamReader>, System.IntPtr>(ref operationHandle);
-            Save2IDB_OpenReadAsync(ohPtr, path, OpenReadAsyncThen, CommonCatch);
+            Save2IDB_OpenReadAllBytesAsync(ohPtr, path, OpenReadAllBytesAsyncThen, CommonCatch);
 #endif
             return operationHandle;
         }
 
-        [MonoPInvokeCallback(typeof(OpenReadAsyncThenCallback))]
-        unsafe private static void OpenReadAsyncThen(System.IntPtr ohPtr, byte* bytesPtr, long bytesLen)
+        [MonoPInvokeCallback(typeof(OpenReadAllBytesAsyncThenCallback))]
+        unsafe private static void OpenReadAllBytesAsyncThen(System.IntPtr ohPtr, byte* bytesPtr, long bytesLen)
         {
             var stream = new IDBStreamReader(bytesPtr, bytesLen);
             var operationHandle = Unsafe.As<System.IntPtr, IDBOperationHandle<IDBStreamReader>>(ref ohPtr);
