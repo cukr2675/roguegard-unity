@@ -258,7 +258,7 @@ namespace RoguegardUnity
                 root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
                 if (arg.Other is RaceBuilder raceBuilder)
                 {
-                    root.OpenMenu(nextMenu, self, null, new(other: arg.Other), arg);
+                    root.OpenMenu(nextMenu, self, null, new(other: arg.Other));
                     return;
                 }
                 Debug.LogError("ïsê≥Ç»å^Ç≈Ç∑ÅB");

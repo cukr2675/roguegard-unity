@@ -69,7 +69,7 @@ namespace RoguegardUnity
             Root.AddInt(DeviceKw.StartTalk, 0);
             Root.AddObject(DeviceKw.AppendText, $"{url} へ移動しますか？");
             Root.AddInt(DeviceKw.WaitEndOfTalk, 0);
-            Root.OpenMenuAsDialog(urlTalk, Self, User, new(other: url), Arg);
+            Root.OpenMenuAsDialog(urlTalk, Self, User, new(other: url));
         }
 
         private class ExitChoice : IModelsMenuChoice

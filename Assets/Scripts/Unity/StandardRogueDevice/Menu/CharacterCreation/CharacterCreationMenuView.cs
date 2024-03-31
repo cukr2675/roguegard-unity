@@ -222,7 +222,7 @@ namespace RoguegardUnity
             {
                 root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
 
-                root.OpenMenu(parent.optionMenu, self, null, new(other: parent.builder.Race), arg);
+                root.OpenMenu(parent.optionMenu, self, null, new(other: parent.builder.Race));
             }
         }
 
@@ -239,7 +239,7 @@ namespace RoguegardUnity
             {
                 root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
 
-                root.OpenMenu(parent.appearanceBuildersMenu, self, null, new(other: parent.builder), arg);
+                root.OpenMenu(parent.appearanceBuildersMenu, self, null, new(other: parent.builder));
             }
         }
 
@@ -258,11 +258,11 @@ namespace RoguegardUnity
                 if (model == null)
                 {
                     root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-                    root.OpenMenu(parent.addMenu, self, null, new(other: typeof(IntrinsicBuilder)), arg);
+                    root.OpenMenu(parent.addMenu, self, null, new(other: typeof(IntrinsicBuilder)));
                 }
                 else
                 {
-                    root.OpenMenu(parent.optionMenu, self, user, new(other: (IntrinsicBuilder)model), arg);
+                    root.OpenMenu(parent.optionMenu, self, user, new(other: (IntrinsicBuilder)model));
                 }
             }
         }
@@ -282,11 +282,11 @@ namespace RoguegardUnity
                 if (model == null)
                 {
                     root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-                    root.OpenMenu(parent.addMenu, self, null, new(other: typeof(StartingItemBuilder)), arg);
+                    root.OpenMenu(parent.addMenu, self, null, new(other: typeof(StartingItemBuilder)));
                 }
                 else
                 {
-                    root.OpenMenu(parent.optionMenu, self, null, new(other: (StartingItemBuilder)model), arg);
+                    root.OpenMenu(parent.optionMenu, self, null, new(other: (StartingItemBuilder)model));
                 }
             }
         }
@@ -305,7 +305,7 @@ namespace RoguegardUnity
                 root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
 
                 if (nextMenu == null) { nextMenu = new(); }
-                root.OpenMenu(nextMenu, self, null, new(other: arg.Other), arg);
+                root.OpenMenu(nextMenu, self, null, new(other: arg.Other));
             }
         }
 
@@ -344,7 +344,7 @@ namespace RoguegardUnity
                 root.AddInt(DeviceKw.StartTalk, 0);
                 root.AddObject(DeviceKw.AppendText, "ロードすると 編集中のキャラは消えてしまいますが よろしいですか？");
                 root.AddInt(DeviceKw.WaitEndOfTalk, 0);
-                root.OpenMenuAsDialog(nextMenu, self, user, arg, arg);
+                root.OpenMenuAsDialog(nextMenu, self, user, arg);
 
                 this.model = model;
             }

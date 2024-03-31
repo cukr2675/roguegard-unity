@@ -81,7 +81,7 @@ namespace RoguegardUnity
                     {
                         var newArg = new RogueMethodArgument(other: new Paths() { path = path, newPath = newPath });
                         root.Back();
-                        root.OpenMenuAsDialog(overwriteDialog, self, user, newArg, newArg);
+                        root.OpenMenuAsDialog(overwriteDialog, self, user, newArg);
                     }
                     else
                     {
@@ -136,7 +136,7 @@ namespace RoguegardUnity
                 root.AddInt(DeviceKw.StartTalk, 0);
                 root.AddObject(DeviceKw.AppendText, ":DeleteMsg");
                 root.AddInt(DeviceKw.WaitEndOfTalk, 0);
-                root.OpenMenuAsDialog(nextMenu, null, null, arg, arg);
+                root.OpenMenuAsDialog(nextMenu, null, null, arg);
             }
 
             private static void Yes(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)

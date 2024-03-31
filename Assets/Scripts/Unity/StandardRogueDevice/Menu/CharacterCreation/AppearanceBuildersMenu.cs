@@ -80,11 +80,11 @@ namespace RoguegardUnity
         {
             if (model is AppearanceBuilder builder)
             {
-                root.OpenMenu(NextMenu, self, null, new(other: builder), arg);
+                root.OpenMenu(NextMenu, self, null, new(other: builder));
             }
             else
             {
-                root.OpenMenu(AddMenu, self, null, new(other: typeof(AppearanceBuilder)), arg);
+                root.OpenMenu(AddMenu, self, null, new(other: typeof(AppearanceBuilder)));
             }
         }
     }

@@ -61,13 +61,13 @@ namespace Roguegard
                         data.BoneSprites.SetPalette(i, RoguegardSettings.DefaultPalette[i]);
                     }
                     data.BoneSprites.MainColor = Color.white;
-                    root.OpenMenu(nextMenu, self, null, new(other: data, targetObj: null), RogueMethodArgument.Identity);
+                    root.OpenMenu(nextMenu, self, null, new(other: data, targetObj: null));
                 }
                 else if (model is RogueObj equipment && equipment.Main.BaseInfoSet is SewedEquipmentInfoSet infoSet)
                 {
                     // ï€ë∂ÇπÇ∏èIóπÇ≈Ç´ÇÈÇÊÇ§Ç…ï°êªÇ∑ÇÈ
                     var data = infoSet.GetDataClone();
-                    root.OpenMenu(nextMenu, self, null, new(other: data, targetObj: equipment), RogueMethodArgument.Identity);
+                    root.OpenMenu(nextMenu, self, null, new(other: data, targetObj: equipment));
                 }
             }
         }
@@ -114,7 +114,7 @@ namespace Roguegard
                 root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
 
                 var data = (SewedEquipmentData)arg.Other;
-                root.OpenMenu(equipPartsMenu, self, null, new(other: data), arg);
+                root.OpenMenu(equipPartsMenu, self, null, new(other: data));
             }
 
             public string GetName(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
@@ -136,7 +136,7 @@ namespace Roguegard
                     root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
 
                     var data = (SewedEquipmentData)arg.Other;
-                    root.OpenMenu(nextMenu, self, null, new(other: data.BoneSprites, count: data.BoneSprites.IndexOf(boneSprite)), arg);
+                    root.OpenMenu(nextMenu, self, null, new(other: data.BoneSprites, count: data.BoneSprites.IndexOf(boneSprite)));
                 }
                 else
                 {
@@ -150,7 +150,7 @@ namespace Roguegard
                     boneSprite.Bone = BoneKeyword.Body;
                     boneSprite.Mirroring = true;
                     data.BoneSprites.Add(boneSprite);
-                    root.OpenMenu(nextMenu, self, null, new(other: data.BoneSprites, count: data.BoneSprites.IndexOf(boneSprite)), arg);
+                    root.OpenMenu(nextMenu, self, null, new(other: data.BoneSprites, count: data.BoneSprites.IndexOf(boneSprite)));
                 }
             }
 

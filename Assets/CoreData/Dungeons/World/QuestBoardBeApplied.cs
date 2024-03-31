@@ -70,7 +70,7 @@ namespace Roguegard
                     var quest = (DungeonQuest)model;
 
                     root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-                    root.OpenMenu(nextMenu, player, null, new(other: quest), RogueMethodArgument.Identity);
+                    root.OpenMenu(nextMenu, player, null, new(other: quest));
                 }
             }
 

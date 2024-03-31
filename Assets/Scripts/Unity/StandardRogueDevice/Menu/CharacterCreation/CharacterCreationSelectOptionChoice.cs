@@ -71,7 +71,7 @@ namespace RoguegardUnity
         public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         {
             root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-            root.OpenMenu(nextMenu, self, null, new(other: builder), arg);
+            root.OpenMenu(nextMenu, self, null, new(other: builder));
         }
 
         private class SelectOptionMenu : BaseScrollModelsMenu<object>

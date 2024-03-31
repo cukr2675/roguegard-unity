@@ -33,7 +33,7 @@ namespace RoguegardUnity
             {
                 // 長押ししたアイテムと隣接していた場合、アイテム向けのメニューを表示する
                 var openArg = new RogueMethodArgument(tool: arg.TargetObj);
-                root.OpenMenuAsDialog(commandMenu, self, null, openArg, RogueMethodArgument.Identity);
+                root.OpenMenuAsDialog(commandMenu, self, null, openArg);
                 return;
             }
 

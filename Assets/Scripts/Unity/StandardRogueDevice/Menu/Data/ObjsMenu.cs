@@ -110,7 +110,7 @@ namespace RoguegardUnity
             protected override void ItemActivate(RogueObj obj, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 // 選択したアイテムの情報と選択肢を表示する
-                root.OpenMenuAsDialog(commandMenu, self, null, new(targetObj: arg.TargetObj, tool: obj), arg);
+                root.OpenMenuAsDialog(commandMenu, self, null, new(targetObj: arg.TargetObj, tool: obj));
             }
 
             private void Sort(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
@@ -127,7 +127,7 @@ namespace RoguegardUnity
                 var storageObjs = ChestInfo.GetStorage(arg.TargetObj);
                 if (storageObjs != null) { sortTable.Sort(arg.TargetObj); }
                 else { sortTable.Sort(arg.TargetObj); }
-                root.Reopen(self, user, arg, arg);
+                root.Reopen(self, user, arg);
             }
         }
 

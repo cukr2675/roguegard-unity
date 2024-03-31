@@ -72,7 +72,7 @@ namespace Roguegard
 
             var table = (PaintBoneSpriteTable)arg.Other;
             var itemIndex = arg.Count;
-            root.OpenMenu(boneMenu, null, null, new(other: table, count: itemIndex), arg);
+            root.OpenMenu(boneMenu, null, null, new(other: table, count: itemIndex));
         }
 
         private static void EditNormalSprite(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
@@ -81,7 +81,7 @@ namespace Roguegard
 
             var table = (PaintBoneSpriteTable)arg.Other;
             var itemIndex = arg.Count;
-            root.OpenMenu(paintMenus[0], null, null, new(other: table, count: itemIndex), arg);
+            root.OpenMenu(paintMenus[0], null, null, new(other: table, count: itemIndex));
         }
 
         private static void EditBackSprite(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
@@ -90,7 +90,7 @@ namespace Roguegard
 
             var table = (PaintBoneSpriteTable)arg.Other;
             var itemIndex = arg.Count;
-            root.OpenMenu(paintMenus[2], null, null, new(other: table, count: itemIndex), arg);
+            root.OpenMenu(paintMenus[2], null, null, new(other: table, count: itemIndex));
         }
 
         private class BoneMenu : IModelsMenu, IModelsMenuItemController

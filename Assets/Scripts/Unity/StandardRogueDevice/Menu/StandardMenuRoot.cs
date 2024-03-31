@@ -37,16 +37,11 @@ namespace RoguegardUnity
             stack = new Stack<StackItem>();
         }
 
-        private void OpenMenu(
-            IModelsMenu menu, RogueObj self, RogueObj user, in RogueMethodArgument arg, in RogueMethodArgument backArg)
+        private void OpenMenu(IModelsMenu menu, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         {
             HideAll();
             menu.OpenMenu(this, self, user, arg);
 
-            if (stack.TryPeek(out var peek))
-            {
-                peek.Arg = backArg;
-            }
             currentMenuIsDialog = false;
 
             var stackItem = new StackItem();
@@ -59,7 +54,7 @@ namespace RoguegardUnity
             IModelsMenu menu, RogueObj self, RogueObj user, in RogueMethodArgument arg, bool enableTouchMask = true)
         {
             stack.Clear();
-            OpenMenu(menu, self, user, arg, RogueMethodArgument.Identity);
+            OpenMenu(menu, self, user, arg);
 
             if (!enableTouchMask) { touchMask.raycastTarget = false; }
         }
@@ -121,35 +116,18 @@ namespace RoguegardUnity
 
         IModelsMenuView IModelsMenuRoot.Get(IKeyword keyword) => table[keyword];
 
-        void IModelsMenuRoot.OpenMenu(
-            IModelsMenu menu, RogueObj self, RogueObj user, in RogueMethodArgument arg, in RogueMethodArgument backArg)
-            => OpenMenu(menu, self, user, arg, backArg);
+        void IModelsMenuRoot.OpenMenu(IModelsMenu menu, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            => OpenMenu(menu, self, user, arg);
 
-        void IModelsMenuRoot.OpenMenuAsDialog(
-            IModelsMenu menu, RogueObj self, RogueObj user, in RogueMethodArgument arg, in RogueMethodArgument backArg)
+        void IModelsMenuRoot.OpenMenuAsDialog(IModelsMenu menu, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         {
             menu.OpenMenu(this, self, user, arg);
-            if (!currentMenuIsDialog)
-            {
-                if (stack.TryPeek(out var peek))
-                {
-                    peek.Arg = backArg;
-                }
-                currentMenuIsDialog = true;
-            }
+            currentMenuIsDialog = true;
         }
 
-        void IModelsMenuRoot.Reopen(
-            RogueObj self, RogueObj user, in RogueMethodArgument arg, in RogueMethodArgument backArg)
+        void IModelsMenuRoot.Reopen(RogueObj self, RogueObj user, in RogueMethodArgument arg)
         {
-            if (!currentMenuIsDialog)
-            {
-                if (stack.TryPeek(out var peek))
-                {
-                    peek.Arg = backArg;
-                }
-                currentMenuIsDialog = true;
-            }
+            currentMenuIsDialog = true;
             Back();
         }
 

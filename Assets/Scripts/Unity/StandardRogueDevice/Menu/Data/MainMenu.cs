@@ -48,7 +48,7 @@ namespace RoguegardUnity
 
             public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                root.OpenMenu(nextMenu, self, null, RogueMethodArgument.Identity, RogueMethodArgument.Identity);
+                root.OpenMenu(nextMenu, self, null, RogueMethodArgument.Identity);
                 root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
             }
         }
@@ -63,7 +63,7 @@ namespace RoguegardUnity
             public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 var openArg = new RogueMethodArgument(targetObj: self);
-                root.OpenMenu(nextMenu, self, null, openArg, RogueMethodArgument.Identity);
+                root.OpenMenu(nextMenu, self, null, openArg);
                 root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
             }
         }
@@ -78,7 +78,7 @@ namespace RoguegardUnity
             public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 var openArg = new RogueMethodArgument(targetObj: self, count: 0);
-                root.OpenMenu(nextMenu, self, null, openArg, RogueMethodArgument.Identity);
+                root.OpenMenu(nextMenu, self, null, openArg);
                 root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
             }
         }
@@ -92,7 +92,7 @@ namespace RoguegardUnity
 
             public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                root.OpenMenu(nextMenu, self, null, RogueMethodArgument.Identity, RogueMethodArgument.Identity);
+                root.OpenMenu(nextMenu, self, null, RogueMethodArgument.Identity);
                 root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
             }
         }
@@ -106,7 +106,7 @@ namespace RoguegardUnity
 
             public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                root.OpenMenu(nextMenu, self, null, RogueMethodArgument.Identity, RogueMethodArgument.Identity);
+                root.OpenMenu(nextMenu, self, null, RogueMethodArgument.Identity);
                 root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
             }
         }
@@ -120,7 +120,7 @@ namespace RoguegardUnity
 
             public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                root.OpenMenu(nextMenu, self, null, RogueMethodArgument.Identity, RogueMethodArgument.Identity);
+                root.OpenMenu(nextMenu, self, null, RogueMethodArgument.Identity);
                 root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
             }
         }
@@ -204,7 +204,7 @@ namespace RoguegardUnity
                     root.AddInt(DeviceKw.StartTalk, 0);
                     root.AddObject(DeviceKw.AppendText, ":GiveUpMsg");
                     root.AddInt(DeviceKw.WaitEndOfTalk, 0);
-                    root.OpenMenuAsDialog(nextMenu, self, user, arg, arg);
+                    root.OpenMenuAsDialog(nextMenu, self, user, arg);
                 }
 
                 private class Choices : IModelsMenu
@@ -268,7 +268,7 @@ namespace RoguegardUnity
                     if (DungeonQuestInfo.TryGetQuest(self, out _))
                     {
                         root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-                        root.OpenMenu(nextMenu, self, null, RogueMethodArgument.Identity, RogueMethodArgument.Identity);
+                        root.OpenMenu(nextMenu, self, null, RogueMethodArgument.Identity);
                     }
                     else
                     {
@@ -298,7 +298,7 @@ namespace RoguegardUnity
 
                 public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
                 {
-                    root.OpenMenu(nextMenu, self, null, RogueMethodArgument.Identity, RogueMethodArgument.Identity);
+                    root.OpenMenu(nextMenu, self, null, RogueMethodArgument.Identity);
                     root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
                 }
             }
@@ -360,7 +360,7 @@ namespace RoguegardUnity
             public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-                root.OpenMenu(nextMenu, self, user, RogueMethodArgument.Identity, RogueMethodArgument.Identity);
+                root.OpenMenu(nextMenu, self, user, RogueMethodArgument.Identity);
             }
 
             private class Menu : BaseScrollModelsMenu<int>

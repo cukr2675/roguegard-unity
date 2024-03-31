@@ -50,7 +50,7 @@ namespace Roguegard.Device
         void IModelsMenuChoice.Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         {
             root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-            root.OpenMenuAsDialog(this, self, user, arg, arg);
+            root.OpenMenuAsDialog(this, self, user, arg);
         }
 
         void IModelsMenu.OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)

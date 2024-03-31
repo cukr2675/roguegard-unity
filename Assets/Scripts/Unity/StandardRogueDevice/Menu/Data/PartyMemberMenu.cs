@@ -37,7 +37,7 @@ namespace RoguegardUnity
             public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 var openArg = new RogueMethodArgument(targetObj: self);
-                root.OpenMenu(nextMenu, self, null, openArg, RogueMethodArgument.Identity);
+                root.OpenMenu(nextMenu, self, null, openArg);
                 root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
             }
         }
@@ -51,7 +51,7 @@ namespace RoguegardUnity
 
             public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                root.OpenMenu(nextMenu, self, null, RogueMethodArgument.Identity, RogueMethodArgument.Identity);
+                root.OpenMenu(nextMenu, self, null, RogueMethodArgument.Identity);
                 root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
             }
         }

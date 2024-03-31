@@ -8,11 +8,11 @@ namespace Roguegard.Device
     {
         IModelsMenuView Get(IKeyword keyword);
 
-        void OpenMenu(IModelsMenu menu, RogueObj self, RogueObj user, in RogueMethodArgument arg, in RogueMethodArgument backArg);
+        void OpenMenu(IModelsMenu menu, RogueObj self, RogueObj user, in RogueMethodArgument arg);
 
-        void OpenMenuAsDialog(IModelsMenu menu, RogueObj self, RogueObj user, in RogueMethodArgument arg, in RogueMethodArgument backArg);
+        void OpenMenuAsDialog(IModelsMenu menu, RogueObj self, RogueObj user, in RogueMethodArgument arg);
 
-        void Reopen(RogueObj self, RogueObj user, in RogueMethodArgument arg, in RogueMethodArgument backArg);
+        void Reopen(RogueObj self, RogueObj user, in RogueMethodArgument arg);
 
         void Done();
 

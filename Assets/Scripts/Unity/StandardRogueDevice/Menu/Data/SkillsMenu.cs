@@ -45,7 +45,7 @@ namespace RoguegardUnity
             protected override void ItemActivate(ISkill skill, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 // 選択したスキルの情報と選択肢を表示する
-                root.OpenMenuAsDialog(menu, self, null, new(other: skill), arg);
+                root.OpenMenuAsDialog(menu, self, null, new(other: skill));
             }
         }
     }

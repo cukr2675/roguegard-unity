@@ -63,7 +63,7 @@ namespace Roguegard
                     root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
                     var builder = RoguegardSettings.CharacterCreationDatabase.LoadPreset(0);
                     var openArg = new RogueMethodArgument(other: builder);
-                    root.OpenMenu(newMenu, self, user, openArg, openArg);
+                    root.OpenMenu(newMenu, self, user, openArg);
                 }
                 else
                 {
@@ -77,11 +77,11 @@ namespace Roguegard
                         root.AddObject(DeviceKw.AppendText, character);
                         root.AddObject(DeviceKw.AppendText, "ÇåƒÇ—ñﬂÇµÇ‹Ç∑Ç©ÅH");
                         root.AddInt(DeviceKw.WaitEndOfTalk, 0);
-                        root.OpenMenuAsDialog(callLobbyDialog, self, null, new(targetObj: character), arg);
+                        root.OpenMenuAsDialog(callLobbyDialog, self, null, new(targetObj: character));
                     }
                     else
                     {
-                        root.OpenMenuAsDialog(nextMenu, self, null, new(targetObj: character), arg);
+                        root.OpenMenuAsDialog(nextMenu, self, null, new(targetObj: character));
                     }
                 }
             }
@@ -200,7 +200,7 @@ namespace Roguegard
                 var builder = new CharacterCreationDataBuilder(info.CharacterCreationData);
 
                 root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-                root.OpenMenu(nextMenu, self, user, new(targetObj: character, other: builder), new(targetObj: character, other: builder));
+                root.OpenMenu(nextMenu, self, user, new(targetObj: character, other: builder));
             }
         }
     }

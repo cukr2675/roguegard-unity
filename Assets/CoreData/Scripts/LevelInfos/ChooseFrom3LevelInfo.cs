@@ -222,7 +222,7 @@ namespace Roguegard
                 public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
                 {
                     var commandArg = new RogueMethodArgument(count: 0);
-                    root.OpenMenuAsDialog(submitMenu, self, user, commandArg, arg);
+                    root.OpenMenuAsDialog(submitMenu, self, user, commandArg);
                 }
             }
 
@@ -236,7 +236,7 @@ namespace Roguegard
                 public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
                 {
                     var commandArg = new RogueMethodArgument(count: 1);
-                    root.OpenMenuAsDialog(submitMenu, self, user, commandArg, arg);
+                    root.OpenMenuAsDialog(submitMenu, self, user, commandArg);
                 }
             }
 
@@ -250,7 +250,7 @@ namespace Roguegard
                 public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
                 {
                     var commandArg = new RogueMethodArgument(count: 2);
-                    root.OpenMenuAsDialog(submitMenu, self, user, commandArg, arg);
+                    root.OpenMenuAsDialog(submitMenu, self, user, commandArg);
                 }
             }
         }

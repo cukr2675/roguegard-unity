@@ -152,7 +152,7 @@ namespace RoguegardUnity
             public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-                root.OpenMenu(nextMenu, null, null, RogueMethodArgument.Identity, RogueMethodArgument.Identity);
+                root.OpenMenu(nextMenu, null, null, RogueMethodArgument.Identity);
             }
 
             private class NextMenu : IModelsMenu
@@ -181,13 +181,13 @@ namespace RoguegardUnity
                         var builder = RoguegardSettings.CharacterCreationDatabase.LoadPreset(0);
                         RogueRandom.Primary = new RogueRandom();
                         var player = builder.CreateObj(null, Vector2Int.zero, RogueRandom.Primary);
-                        root.OpenMenu(nextMenu, player, null, new(other: builder), RogueMethodArgument.Identity);
+                        root.OpenMenu(nextMenu, player, null, new(other: builder));
                     });
                 }
 
                 public void OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
                 {
-                    root.OpenMenu(selectFileMenu, null, null, RogueMethodArgument.Identity, arg);
+                    root.OpenMenu(selectFileMenu, null, null, RogueMethodArgument.Identity);
                 }
 
                 private void Loaded(string path)
@@ -264,7 +264,7 @@ namespace RoguegardUnity
                 }
 
                 root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-                root.OpenMenu(nextMenu, null, null, RogueMethodArgument.Identity, RogueMethodArgument.Identity);
+                root.OpenMenu(nextMenu, null, null, RogueMethodArgument.Identity);
             }
 
             private class NextMenu : BaseScrollModelsMenu<CreditData>

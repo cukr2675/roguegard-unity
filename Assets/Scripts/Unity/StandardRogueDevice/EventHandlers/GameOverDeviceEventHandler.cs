@@ -85,7 +85,7 @@ namespace RoguegardUnity
                 public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
                 {
                     root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-                    root.OpenMenu(nextMenu, self, user, arg, arg);
+                    root.OpenMenu(nextMenu, self, user, arg);
                 }
             }
 

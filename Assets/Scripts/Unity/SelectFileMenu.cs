@@ -65,17 +65,17 @@ namespace RoguegardUnity
 
         public static void ShowSaving(IModelsMenuRoot root)
         {
-            root.OpenMenuAsDialog(savingMenu, null, null, RogueMethodArgument.Identity, RogueMethodArgument.Identity);
+            root.OpenMenuAsDialog(savingMenu, null, null, RogueMethodArgument.Identity);
         }
 
         public static void ShowLoading(IModelsMenuRoot root)
         {
-            root.OpenMenuAsDialog(loadingMenu, null, null, RogueMethodArgument.Identity, RogueMethodArgument.Identity);
+            root.OpenMenuAsDialog(loadingMenu, null, null, RogueMethodArgument.Identity);
         }
 
         public static void ShowDeleting(IModelsMenuRoot root)
         {
-            root.OpenMenuAsDialog(deletingMenu, null, null, RogueMethodArgument.Identity, RogueMethodArgument.Identity);
+            root.OpenMenuAsDialog(deletingMenu, null, null, RogueMethodArgument.Identity);
         }
 
         private static void LoadingCancel(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
@@ -92,7 +92,7 @@ namespace RoguegardUnity
                 return;
             }
 
-            root.Reopen(null, null, RogueMethodArgument.Identity, RogueMethodArgument.Identity);
+            root.Reopen(null, null, RogueMethodArgument.Identity);
         }
 
         public static void ShowErrorMsg(IModelsMenuRoot root, string errorMsg)
@@ -103,7 +103,7 @@ namespace RoguegardUnity
             root.AddObject(DeviceKw.AppendText, errorMsg);
             root.AddObject(DeviceKw.AppendText, ")");
             root.AddInt(DeviceKw.WaitEndOfTalk, 0);
-            root.OpenMenuAsDialog(errorMsgDialog, null, null, RogueMethodArgument.Identity, RogueMethodArgument.Identity);
+            root.OpenMenuAsDialog(errorMsgDialog, null, null, RogueMethodArgument.Identity);
         }
 
         private static void ErrorMsgOK(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
@@ -146,14 +146,14 @@ namespace RoguegardUnity
                         root.AddObject(DeviceKw.AppendText, ":OverwriteMsg::1");
                         root.AddObject(DeviceKw.AppendText, RogueFile.GetName(file.Path));
                         root.AddInt(DeviceKw.WaitEndOfTalk, 0);
-                        root.OpenMenuAsDialog(overwriteDialog, null, null, new(other: file.Path), RogueMethodArgument.Identity);
+                        root.OpenMenuAsDialog(overwriteDialog, null, null, new(other: file.Path));
                     }
                     else
                     {
                         if (nextMenu == null) { nextMenu = new SelectFileCommandMenu(selectCallback); }
 
                         root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-                        root.OpenMenuAsDialog(nextMenu, null, null, new(other: file.Path), RogueMethodArgument.Identity);
+                        root.OpenMenuAsDialog(nextMenu, null, null, new(other: file.Path));
                     }
                 }
             }
@@ -186,7 +186,7 @@ namespace RoguegardUnity
                         return;
                     }
 
-                    root.Reopen(self, user, RogueMethodArgument.Identity, RogueMethodArgument.Identity);
+                    root.Reopen(null, null, RogueMethodArgument.Identity);
                 });
             }
         }
