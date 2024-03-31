@@ -13,6 +13,7 @@ namespace Save2IDB
     public static class IDBFile
     {
         unsafe private delegate void OpenReadAsyncThenCallback(System.IntPtr ohPtr, byte* bytesPtr, long bytesLen);
+        private delegate void ExistsAsyncThenCallback(System.IntPtr ohPtr, bool exists);
         private delegate void GetFileInfosDescDateAsyncThenCallback(System.IntPtr ohPtr, string serial);
         private delegate void ImportAsyncThenCallback(System.IntPtr ohPtr, string path);
         private delegate void CommonThenCallback(System.IntPtr ohPtr);
@@ -31,8 +32,12 @@ namespace Save2IDB
             System.IntPtr ohPtr, string path, CommonThenCallback thenCallback, CommonCatchCallback catchCallback);
 
         [DllImport("__Internal")]
-        private static extern void Save2IDB_MoveAsync(
-            System.IntPtr ohPtr, string sourcePath, string destPath, CommonThenCallback thenCallback, CommonCatchCallback catchCallback);
+        private static extern void Save2IDB_CopyMoveAsync(
+            System.IntPtr ohPtr, string sourcePath, string destPath, bool overwrite, bool moveMode, CommonThenCallback thenCallback, CommonCatchCallback catchCallback);
+
+        [DllImport("__Internal")]
+        private static extern void Save2IDB_ExistsAsync(
+            System.IntPtr ohPtr, string path, ExistsAsyncThenCallback thenCallback, CommonCatchCallback catchCallback);
 
         [DllImport("__Internal")]
         private static extern void Save2IDB_GetFileInfosDescDateAsync(
@@ -162,7 +167,7 @@ namespace Save2IDB
         /// <summary>
         /// <paramref name="sourcePath"/> のファイルを <paramref name="destPath"/> へ移動します。
         /// </summary>
-        public static IDBOperationHandle MoveAsync(string sourcePath, string destPath)
+        public static IDBOperationHandle CopyAsync(string sourcePath, string destPath, bool overwrite = false)
         {
             if (string.IsNullOrWhiteSpace(sourcePath)) throw new System.ArgumentException($"{sourcePath} は無効なパスです。", nameof(sourcePath));
             if (ContainsInvalidChar(sourcePath)) throw new System.ArgumentException(invalidCharacterExceptionMessage, nameof(sourcePath));
@@ -172,9 +177,54 @@ namespace Save2IDB
             var operationHandle = new IDBOperationHandle();
 #if UNITY_WEBGL && !UNITY_EDITOR
             var ohPtr = Unsafe.As<IDBOperationHandle, System.IntPtr>(ref operationHandle);
-            Save2IDB_MoveAsync(ohPtr, sourcePath, destPath, CommonThen, CommonCatch);
+            Save2IDB_CopyMoveAsync(ohPtr, sourcePath, destPath, overwrite, false, CommonThen, CommonCatch);
 #endif
             return operationHandle;
+        }
+
+
+
+        /// <summary>
+        /// <paramref name="sourcePath"/> のファイルを <paramref name="destPath"/> へ移動します。
+        /// </summary>
+        public static IDBOperationHandle MoveAsync(string sourcePath, string destPath, bool overwrite = false)
+        {
+            if (string.IsNullOrWhiteSpace(sourcePath)) throw new System.ArgumentException($"{sourcePath} は無効なパスです。", nameof(sourcePath));
+            if (ContainsInvalidChar(sourcePath)) throw new System.ArgumentException(invalidCharacterExceptionMessage, nameof(sourcePath));
+            if (string.IsNullOrWhiteSpace(destPath)) throw new System.ArgumentException($"{destPath} は無効なパスです。", nameof(destPath));
+            if (ContainsInvalidChar(destPath)) throw new System.ArgumentException(invalidCharacterExceptionMessage, nameof(destPath));
+
+            var operationHandle = new IDBOperationHandle();
+#if UNITY_WEBGL && !UNITY_EDITOR
+            var ohPtr = Unsafe.As<IDBOperationHandle, System.IntPtr>(ref operationHandle);
+            Save2IDB_CopyMoveAsync(ohPtr, sourcePath, destPath, overwrite, true, CommonThen, CommonCatch);
+#endif
+            return operationHandle;
+        }
+
+
+
+        /// <summary>
+        /// <paramref name="path"/> にファイルが存在するかを取得します。
+        /// </summary>
+        public static IDBOperationHandle<bool> ExistsAsync(string path)
+        {
+            if (string.IsNullOrWhiteSpace(path)) throw new System.ArgumentException($"{path} は無効なパスです。", nameof(path));
+            if (ContainsInvalidChar(path)) throw new System.ArgumentException(invalidCharacterExceptionMessage, nameof(path));
+
+            var operationHandle = new IDBOperationHandle<bool>();
+#if UNITY_WEBGL && !UNITY_EDITOR
+            var ohPtr = Unsafe.As<IDBOperationHandle<bool>, System.IntPtr>(ref operationHandle);
+            Save2IDB_ExistsAsync(ohPtr, path, CommonThen, CommonCatch);
+#endif
+            return operationHandle;
+        }
+
+        [MonoPInvokeCallback(typeof(ExistsAsyncThenCallback))]
+        private static void ExistsAsyncThen(System.IntPtr ohPtr, bool exists)
+        {
+            var operationHandle = Unsafe.As<System.IntPtr, IDBOperationHandle<bool>>(ref ohPtr);
+            operationHandle.Done(exists);
         }
 
 
