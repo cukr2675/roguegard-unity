@@ -12,11 +12,16 @@ namespace Roguegard.Device
         private readonly string message;
         private readonly IModelsMenuChoice[] choices;
 
-        public DialogModelsMenuChoice(string name, string message, params IModelsMenuChoice[] choices)
+        private DialogModelsMenuChoice(string name, string message, IEnumerable<IModelsMenuChoice> choices)
         {
             this.name = name;
             this.message = message;
             this.choices = choices?.ToArray() ?? new IModelsMenuChoice[0];
+        }
+
+        private DialogModelsMenuChoice(string name, string message, params IModelsMenuChoice[] choices)
+            : this(name, message, (IEnumerable<IModelsMenuChoice>)choices)
+        {
         }
 
         public DialogModelsMenuChoice(params (string, ModelsMenuAction)[] choices)
@@ -24,9 +29,16 @@ namespace Roguegard.Device
             this.choices = choices?.Select(x => new ActionModelsMenuChoice(x.Item1, x.Item2)).ToArray() ?? new ActionModelsMenuChoice[0];
         }
 
+        public DialogModelsMenuChoice(string name, string message, params (string, ModelsMenuAction)[] choices)
+        {
+            this.name = name;
+            this.message = message;
+            this.choices = choices?.Select(x => new ActionModelsMenuChoice(x.Item1, x.Item2)).ToArray() ?? new ActionModelsMenuChoice[0];
+        }
+
         public DialogModelsMenuChoice AppendExit()
         {
-            var choice = new DialogModelsMenuChoice(name, message, choices.Append(ExitModelsMenuChoice.Instance).ToArray());
+            var choice = new DialogModelsMenuChoice(name, message, choices.Append(ExitModelsMenuChoice.Instance));
             return choice;
         }
 

@@ -35,7 +35,19 @@ namespace RoguegardUnity
 
         private IEnumerator SaveCoroutine(System.Action callback)
         {
-            var handle = IDBFile.DirectWriteAsync(Path, baseStream.ToArray());
+            IDBOperationHandle handle;
+            if (baseStream.TryGetBuffer(out var buffer))
+            {
+                handle = IDBFile.WriteAllBytesAsync(Path, buffer);
+            }
+            else
+            {
+                Debug.LogWarning(
+                    $"{nameof(baseStream.TryGetBuffer)} の取得に失敗しました。" +
+                    $"代わりに {nameof(baseStream.ToArray)} を使用しますが、これによりメモリパフォーマンスが低下する可能性があります。");
+
+                handle = IDBFile.WriteAllBytesAsync(Path, baseStream.ToArray());
+            }
             yield return handle;
 
             switch (handle.Status)

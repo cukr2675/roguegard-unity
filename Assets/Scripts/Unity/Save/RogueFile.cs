@@ -13,13 +13,16 @@ namespace RoguegardUnity
         public string Path { get; }
         public System.DateTime LastModified { get; }
 
+        public delegate void Callback(string errorMsg = null);
+        public delegate void Callback<T>(T result, string errorMsg = null);
+
         private RogueFile(string path, System.DateTime lastModified)
         {
             Path = path;
             LastModified = lastModified;
         }
 
-        public static void GetFiles(string path, System.Action<RogueFile[]> callback)
+        public static void GetFiles(string path, Callback<RogueFile[]> callback)
         {
             if (path.Contains('\\')) { path = path.Replace('\\', '/'); };
 
@@ -34,12 +37,12 @@ namespace RoguegardUnity
 #endif
         }
 
-        private static IEnumerator GetFilesCoroutine(string path, System.Action<RogueFile[]> callback)
+        private static IEnumerator GetFilesCoroutine(string path, Callback<RogueFile[]> callback)
         {
             var handle = IDBFile.GetFileInfosDescDateAsync();
             yield return handle;
 
-            callback(handle.Result.Where(x => x.Path.StartsWith(path)).Select(x => new RogueFile(x.Path, x.LastModified)).ToArray());
+            callback(handle.Result?.Where(x => x.Path.StartsWith(path)).Select(x => new RogueFile(x.Path, x.LastModified)).ToArray(), handle.ErrorMsg);
         }
 
         public static RogueSaveStream Create(string path)
@@ -55,7 +58,7 @@ namespace RoguegardUnity
 #endif
         }
 
-        public static void OpenRead(string path, System.Action<Stream> callback)
+        public static void OpenRead(string path, Callback<Stream> callback)
         {
             if (path.Contains('\\')) { path = path.Replace('\\', '/'); };
 
@@ -68,56 +71,56 @@ namespace RoguegardUnity
 #endif
         }
 
-        private static IEnumerator ReadCoroutine(string path, System.Action<Stream> callback)
+        private static IEnumerator ReadCoroutine(string path, Callback<Stream> callback)
         {
-            var handle = IDBFile.OpenReadAsync(path);
+            var handle = IDBFile.OpenReadAllBytesAsync(path);
             yield return handle;
 
             using var stream = handle.Result;
-            callback.Invoke(stream);
+            callback.Invoke(stream, handle.ErrorMsg);
         }
 
-        public static void Delete(string path)
+        public static void Delete(string path, Callback callback)
         {
             if (path.Contains('\\')) { path = path.Replace('\\', '/'); };
 
 #if UNITY_STANDALONE || UNITY_EDITOR
             File.Delete(path);
+            callback();
 #elif UNITY_WEBGL
-            FadeCanvas.StartCanvasCoroutine(IDBFile.DeleteAsync(path));
+            StartCoroutine(IDBFile.DeleteAsync(path), callback);
 #else
             throw new System.NotSupportedException();
 #endif
         }
 
-        public static void Move(string sourcePath, string destPath, System.Action<bool> callback)
+        public static void Move(string sourcePath, string destPath, Callback callback, bool overwrite = false)
         {
             if (sourcePath.Contains('\\')) { sourcePath = sourcePath.Replace('\\', '/'); };
             if (destPath.Contains('\\')) { destPath = destPath.Replace('\\', '/'); };
 
 #if UNITY_STANDALONE || UNITY_EDITOR
-            if (File.Exists(destPath))
-            {
-                callback(false);
-            }
-            else
-            {
-                File.Move(sourcePath, destPath);
-                callback(true);
-            }
+            if (overwrite && sourcePath != destPath && File.Exists(destPath)) { File.Delete(destPath); }
+            File.Move(sourcePath, destPath);
+            callback();
 #elif UNITY_WEBGL
-            FadeCanvas.StartCanvasCoroutine(MoveCoroutine(sourcePath, destPath, callback));
+            StartCoroutine(IDBFile.MoveAsync(sourcePath, destPath, overwrite), callback);
 #else
             throw new System.NotSupportedException();
 #endif
         }
 
-        private static IEnumerator MoveCoroutine(string sourcePath, string destPath, System.Action<bool> callback)
+        public static void Exists(string path, Callback<bool> callback)
         {
-            var handle = IDBFile.MoveAsync(sourcePath, destPath);
-            yield return handle;
+            if (path.Contains('\\')) { path = path.Replace('\\', '/'); };
 
-            callback.Invoke(handle.Status == IDBOperationStatus.Succeeded);
+#if UNITY_STANDALONE || UNITY_EDITOR
+            callback(File.Exists(path));
+#elif UNITY_WEBGL
+            StartCoroutine(IDBFile.ExistsAsync(path), callback);
+#else
+            throw new System.NotSupportedException();
+#endif
         }
 
         public static string GetName(string path)
@@ -125,40 +128,57 @@ namespace RoguegardUnity
             return System.IO.Path.GetFileNameWithoutExtension(path);
         }
 
-        public static void Export(string path)
+        public static void Export(string path, Callback callback)
         {
             if (path.Contains('\\')) { path = path.Replace('\\', '/'); };
 
 #if UNITY_STANDALONE || UNITY_EDITOR
             // スタンドアロンではセーブファイルの場所を開く
             System.Diagnostics.Process.Start("explorer.exe", $"/select,{path.Replace('/', '\\')}");
+            callback();
 #elif UNITY_WEBGL
-            FadeCanvas.StartCanvasCoroutine(IDBFile.ExportAsync(path));
+            StartCoroutine(IDBFile.ExportAsync(path), callback);
 #else
             throw new System.NotSupportedException();
 #endif
         }
 
-        public static void Import(string path, System.Action<bool> callback)
+        public static void Import(string path, Callback callback)
         {
             if (path.Contains('\\')) { path = path.Replace('\\', '/'); };
             if (!path.EndsWith('/')) { path = path + '/'; }
 
 #if UNITY_STANDALONE || UNITY_EDITOR
-
+            callback("Not supported.");
 #elif UNITY_WEBGL
-            FadeCanvas.StartCanvasCoroutine(ImportCoroutine(path, callback));
+            StartCoroutine(IDBFile.ImportAsync(path), callback);
 #else
             throw new System.NotSupportedException();
 #endif
         }
 
-        private static IEnumerator ImportCoroutine(string path, System.Action<bool> callback)
+        private static void StartCoroutine(IDBOperationHandle handle, Callback callback)
         {
-            var handle = IDBFile.ImportAsync(path);
-            yield return handle;
+            FadeCanvas.StartCanvasCoroutine(Coroutine(handle, callback));
 
-            callback.Invoke(handle.Status == IDBOperationStatus.Succeeded);
+            IEnumerator Coroutine(IDBOperationHandle handle, Callback callback)
+            {
+                yield return handle;
+
+                callback.Invoke(handle.ErrorMsg);
+            }
+        }
+
+        private static void StartCoroutine<T>(IDBOperationHandle<T> handle, Callback<T> callback)
+        {
+            FadeCanvas.StartCanvasCoroutine(Coroutine(handle, callback));
+
+            IEnumerator Coroutine(IDBOperationHandle<T> handle, Callback<T> callback)
+            {
+                yield return handle;
+
+                callback.Invoke(handle.Result, handle.ErrorMsg);
+            }
         }
     }
 }

@@ -89,11 +89,6 @@ namespace RoguegardUnity
             _menuController.GetInfo(out putIntoChestMenu, out takeOutFromChestMenu);
         }
 
-        public void OpenSelectFile(SelectFileMenu.Type type, SelectFileMenu.SelectCallback selectCallback, SelectFileMenu.AddCallback addCallback = null)
-        {
-            _menuController.OpenSelectFile(type, selectCallback, addCallback);
-        }
-
         /// <summary>
         /// <see cref="StandardRogueDevice.messageWorkQueue"/> のキュー処理前メソッド
         /// </summary>

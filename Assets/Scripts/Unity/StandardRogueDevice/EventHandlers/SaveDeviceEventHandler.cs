@@ -11,11 +11,52 @@ namespace RoguegardUnity
     {
         private readonly StandardRogueDeviceComponentManager componentManager;
         private readonly TouchController touchController;
+        private readonly SelectFileMenu writeFileMenu;
+        private readonly SelectFileMenu readFileMenu;
 
         public SaveDeviceEventHandler(StandardRogueDeviceComponentManager componentManager, TouchController touchController)
         {
             this.componentManager = componentManager;
             this.touchController = touchController;
+
+            writeFileMenu = new SelectFileMenu(
+                SelectFileMenu.Type.Write,
+                (root, path) => SaveDelay(root, path, false),
+                (root) =>
+                {
+                    root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+                    root.Back();
+                    SelectFileMenu.ShowSaving(root);
+
+                    StandardRogueDeviceSave.GetNewNumberingPath(
+                        RoguegardSettings.DefaultSaveFileName, path => SaveDelay(root, path, false));
+                });
+
+            readFileMenu = new SelectFileMenu(SelectFileMenu.Type.Read, (root, path) =>
+            {
+                root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+                root.Back();
+                SelectFileMenu.ShowLoading(root);
+
+                // 入力されたパスの Stream を開く
+                RogueFile.OpenRead(path, (stream, errorMsg) =>
+                {
+                    if (errorMsg != null)
+                    {
+                        Debug.LogError(errorMsg);
+                        return;
+                    }
+
+                    var save = new StandardRogueDeviceSave();
+                    var loadDeviceData = save.LoadGameData(stream); // ここで逆シリアル化
+                    stream.Close();
+                    root.Done();
+
+                    // ロードしたデータを適用
+                    RogueRandom.Primary = loadDeviceData.CurrentRandom;
+                    componentManager.OpenDelay(loadDeviceData);
+                });
+            });
         }
 
         bool IStandardRogueDeviceEventHandler.TryHandle(IKeyword keyword, int integer, float number, object obj)
@@ -42,17 +83,13 @@ namespace RoguegardUnity
                 if (componentManager.CantSave) return true;
 
                 // 名前を付けてセーブ
-                touchController.OpenSelectFile(
-                    SelectFileMenu.Type.Write,
-                    (root, path) => SaveDelay(root, path, false),
-                    (root) => StandardRogueDeviceSave.GetNewNumberingPath(
-                        RoguegardSettings.DefaultSaveFileName, path => SaveDelay(root, path, false)));
+                touchController.OpenMenu(componentManager.Subject, writeFileMenu, null, null, RogueMethodArgument.Identity);
                 return true;
             }
             if (keyword == DeviceKw.LoadGame)
             {
                 // ロード
-                OpenLoadInGame();
+                touchController.OpenMenu(componentManager.Subject, readFileMenu, null, null, RogueMethodArgument.Identity);
                 return true;
             }
             return false;
@@ -60,6 +97,13 @@ namespace RoguegardUnity
 
         private void SaveDelay(IModelsMenuRoot root, string path, bool autoSave)
         {
+            if (root != null)
+            {
+                root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+                root.Back();
+                SelectFileMenu.ShowSaving(root);
+            }
+
             FadeCanvas.StartCanvasCoroutine(Save(root, path, autoSave));
         }
 
@@ -178,27 +222,6 @@ namespace RoguegardUnity
                 // 空間移動直後にセーブしたとき、移動前の空間の情報を保存しないよう処理する
                 view.ReadyView(obj.Location);
             }
-        }
-
-        private void OpenLoadInGame()
-        {
-            touchController.OpenSelectFile(SelectFileMenu.Type.Read, (root, path) =>
-            {
-                root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-
-                // 入力されたパスの Stream を開く
-                RogueFile.OpenRead(path, stream =>
-                {
-                    var save = new StandardRogueDeviceSave();
-                    var loadDeviceData = save.LoadGameData(stream); // ここで逆シリアル化
-                    stream.Close();
-                    root.Done();
-
-                    // ロードしたデータを適用
-                    RogueRandom.Primary = loadDeviceData.CurrentRandom;
-                    componentManager.OpenDelay(loadDeviceData);
-                });
-            });
         }
     }
 }

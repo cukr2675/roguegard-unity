@@ -42,7 +42,6 @@ namespace RoguegardUnity
         private MainMenu mainMenu;
         private LongDownMenu longDownMenu;
         private ObjsMenu objsMenu;
-        private SelectFileMenu selectFileMenu;
 
         private StandardMenuRoot menuManager;
 
@@ -70,7 +69,6 @@ namespace RoguegardUnity
             var partyMenu = new PartyMenu(partyMemberMenu);
             mainMenu = new MainMenu(objsMenu, skillsMenu, partyMenu);
             longDownMenu = new LongDownMenu(objsMenu, objCommandMenu);
-            selectFileMenu = new SelectFileMenu(_scrollMenu, _leftAnchorMenu);
 
             _touchMask.raycastTarget = false;
             _scrollMenu.Initialize();
@@ -169,12 +167,6 @@ namespace RoguegardUnity
                 var topTile = buildingTile ?? floorTile;
                 menuManager.OpenInitialMenu(longDownMenu, subject, null, new(other: topTile));
             }
-        }
-
-        public void OpenSelectFile(SelectFileMenu.Type type, SelectFileMenu.SelectCallback selectCallback, SelectFileMenu.AddCallback addCallback = null)
-        {
-            selectFileMenu.SetCallback(type, selectCallback, addCallback);
-            menuManager.OpenInitialMenu(selectFileMenu, null, null, RogueMethodArgument.Identity);
         }
 
         public void OpenInitialMenu(IModelsMenu menu, RogueObj self, RogueObj user, in RogueMethodArgument arg, bool enableTouchMask = true)

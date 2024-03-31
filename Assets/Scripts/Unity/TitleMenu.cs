@@ -159,23 +159,25 @@ namespace RoguegardUnity
             {
                 private readonly TitleMenu parent;
                 private readonly NewGameMenu nextMenu;
+                private readonly SelectFileMenu selectFileMenu;
 
                 public NextMenu(TitleMenu parent)
                 {
                     this.parent = parent;
                     nextMenu = new NewGameMenu(parent);
-                }
 
-                public void OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-                {
-                    parent.menuController.OpenSelectFile(SelectFileMenu.Type.Read, (root, path) =>
+                    selectFileMenu = new SelectFileMenu(SelectFileMenu.Type.Read, (root, path) =>
                     {
                         root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+                        root.Back();
+                        SelectFileMenu.ShowLoading(root);
+
                         FadeCanvas.FadeWithLoadScene($"{parent._nextSceneAddress}", () => Loaded(path));
                     },
                     (root) =>
                     {
                         root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+
                         var builder = RoguegardSettings.CharacterCreationDatabase.LoadPreset(0);
                         RogueRandom.Primary = new RogueRandom();
                         var player = builder.CreateObj(null, Vector2Int.zero, RogueRandom.Primary);
@@ -183,10 +185,21 @@ namespace RoguegardUnity
                     });
                 }
 
+                public void OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+                {
+                    root.OpenMenu(selectFileMenu, null, null, RogueMethodArgument.Identity, arg);
+                }
+
                 private void Loaded(string path)
                 {
-                    RogueFile.OpenRead(path, stream =>
+                    RogueFile.OpenRead(path, (stream, errorMsg) =>
                     {
+                        if (errorMsg != null)
+                        {
+                            Debug.LogError(errorMsg);
+                            return;
+                        }
+
                         var name = RogueFile.GetName(path);
                         var save = new StandardRogueDeviceSave();
                         var device = RogueDevice.LoadGame(save, stream);

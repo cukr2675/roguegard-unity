@@ -50,8 +50,14 @@ namespace RoguegardUnity
 
         private static void GetFiles(string path, System.Action<IEnumerable<RogueFile>> callback)
         {
-            RogueFile.GetFiles(path, files =>
+            RogueFile.GetFiles(path, (files, errorMsg) =>
             {
+                if (errorMsg != null)
+                {
+                    Debug.LogError(errorMsg);
+                    return;
+                }
+
                 callback(files.Where(x => x.Path.ToLower().EndsWith(_extensions[0]) || x.Path.ToLower().EndsWith(_extensions[1])));
             });
         }

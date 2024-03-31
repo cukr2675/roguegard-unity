@@ -120,7 +120,10 @@ namespace RoguegardUnity
                 RoguegardSettings.JsonSerialization.Serialize(stream, clone);
                 stream.Save(() => { });
             }
-            RogueFile.Export(path);
+            RogueFile.Export(path, errorMsg =>
+            {
+                if (errorMsg != null) { Debug.LogError(errorMsg); }
+            });
         }
     }
 }

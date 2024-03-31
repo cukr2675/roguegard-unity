@@ -118,6 +118,22 @@ MonoBehaviour:
     m_Localized: Don't Save
     m_Metadata:
       m_Items: []
+  - m_Id: 62127054993362944
+    m_Localized: An error has occurred.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 62128719553236992
+    m_Localized: A file with the same name already exists. Do you want to overwrite?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 62128950286094336
+    m_Localized: Yes
+    m_Metadata:
+      m_Items: []
+  - m_Id: 62128980174704640
+    m_Localized: No
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

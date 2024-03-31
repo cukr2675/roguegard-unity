@@ -151,6 +151,22 @@ MonoBehaviour:
     m_Key: SecondExitMsg
     m_Metadata:
       m_Items: []
+  - m_Id: 62127054993362944
+    m_Key: An error has occurred.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 62128719553236992
+    m_Key: RenameOverwrite
+    m_Metadata:
+      m_Items: []
+  - m_Id: 62128950286094336
+    m_Key: Yes
+    m_Metadata:
+      m_Items: []
+  - m_Id: 62128980174704640
+    m_Key: No
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
