@@ -12,7 +12,7 @@ namespace Roguegard
         {
             var keyword = MainInfoKw.Eat;
             var eatMethod = self.Main.InfoSet.Eat;
-            EnqueueMessageRule(keyword);
+            EnqueueMessageRule(self, keyword);
             return RogueMethodAspectState.Invoke(keyword, eatMethod, self, user, activationDepth, arg);
         }
 

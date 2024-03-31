@@ -19,7 +19,7 @@ namespace Roguegard
 
             var keyword = MainInfoKw.Throw;
             var throwMethod = self.Main.InfoSet.Throw;
-            EnqueueMessageRule(keyword);
+            EnqueueMessageRule(self, keyword);
             return RogueMethodAspectState.Invoke(keyword, throwMethod, self, user, activationDepth, arg);
         }
 

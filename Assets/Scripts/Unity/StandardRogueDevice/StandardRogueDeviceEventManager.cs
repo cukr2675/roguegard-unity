@@ -17,6 +17,7 @@ namespace RoguegardUnity
         public bool HasSynchronizedWork { get; private set; }
 
         public bool Any => messageWorkQueue.Count >= 1;
+        public System.Diagnostics.StackTrace PeekStackTrace => messageWorkQueue.PeekStackTrace;
 
         public StandardRogueDeviceEventManager(
             TouchController touchController, CharacterRenderSystem characterRenderSystem, IStandardRogueDeviceEventHandler[] eventHandlers)

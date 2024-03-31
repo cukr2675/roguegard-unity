@@ -90,7 +90,7 @@ namespace RoguegardUnity
         }
 
         /// <summary>
-        /// <see cref="StandardRogueDevice.messageWorkQueue"/> のキュー処理前メソッド
+        /// <see cref="StandardRogueDeviceEventManager.messageWorkQueue"/> のキュー処理前メソッド
         /// </summary>
         public void EarlyUpdateController(bool visiblePlayer, Vector3 playerPosition, RogueDirection playerDirection, int deltaTime)
         {
@@ -104,7 +104,7 @@ namespace RoguegardUnity
         }
 
         /// <summary>
-        /// <see cref="StandardRogueDevice.messageWorkQueue"/> のキュー処理後メソッド
+        /// <see cref="StandardRogueDeviceEventManager.messageWorkQueue"/> のキュー処理後メソッド
         /// </summary>
         public void LateUpdateController(RogueObj player, Vector3 playerPosition, int deltaTime)
         {
@@ -114,7 +114,7 @@ namespace RoguegardUnity
         }
 
         /// <summary>
-        /// <see cref="StandardRogueDevice.messageWorkQueue"/> のキュー完全処理後のコマンド入力メソッド
+        /// <see cref="StandardRogueDeviceEventManager.messageWorkQueue"/> のキュー完全処理後のコマンド入力メソッド
         /// </summary>
         public void CommandProcessing(RogueObj player, RogueObj subject, bool fastForward)
         {

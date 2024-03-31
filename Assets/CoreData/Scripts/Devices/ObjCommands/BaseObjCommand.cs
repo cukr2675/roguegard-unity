@@ -22,9 +22,10 @@ namespace Roguegard
             menuChoice.parent = this;
         }
 
-        protected void EnqueueMessageRule(IKeyword keyword)
+        protected void EnqueueMessageRule(RogueObj self, IKeyword keyword)
         {
-            if (!RoguegardSettings.KeywordsNotEnqueueMessageRule.Contains(keyword))
+            if (!RoguegardSettings.KeywordsNotEnqueueMessageRule.Contains(keyword) &&
+                MainCharacterWorkUtility.VisibleAt(self.Location, self.Position))
             {
                 RogueDevice.Add(DeviceKw.AppendText, DeviceKw.HorizontalRule);
             }

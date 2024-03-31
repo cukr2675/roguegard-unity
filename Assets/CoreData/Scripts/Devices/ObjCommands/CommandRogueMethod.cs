@@ -15,7 +15,7 @@ namespace Roguegard
 
         public override bool CommandInvoke(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
         {
-            EnqueueMessageRule(Keyword);
+            EnqueueMessageRule(self, Keyword);
             return RogueMethodAspectState.Invoke(Keyword, this, self, user, activationDepth, arg);
         }
 

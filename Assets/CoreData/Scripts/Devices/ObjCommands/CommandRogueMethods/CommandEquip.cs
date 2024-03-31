@@ -36,7 +36,7 @@ namespace Roguegard
             if (CommonAssert.RequireTool(arg, out var tool)) return false;
             if (CommonAssert.ObjDoesNotHaveToolAbility(self)) return false;
 
-            EnqueueMessageRule(Keyword);
+            EnqueueMessageRule(self, Keyword);
 
             if (tool.Location == self.Location)
             {

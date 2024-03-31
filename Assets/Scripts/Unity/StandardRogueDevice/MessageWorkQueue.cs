@@ -24,6 +24,15 @@ namespace RoguegardUnity
         private readonly Queue<StackTrace> stackTraces = new Queue<StackTrace>();
 #endif
 
+        public StackTrace PeekStackTrace
+        {
+#if DEBUG
+            get => stackTraces.TryPeek(out var stackTrace) ? stackTrace : null;
+#else
+            get => throw new System.NotSupportedException($"{nameof(PeekStackTrace)} はランタイムではサポートされません。");
+#endif
+        }
+
         public int Count => others.Count;
 
         private static readonly HideMotion hideMotion = new HideMotion();
@@ -79,7 +88,6 @@ namespace RoguegardUnity
         public void InsertHideCharacterWork(RogueObj obj)
         {
             hideCharacters.Push(obj);
-            EnqueueStackTrace();
         }
 
         public void Clear()

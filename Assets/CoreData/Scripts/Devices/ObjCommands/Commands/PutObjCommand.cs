@@ -12,7 +12,7 @@ namespace Roguegard
         {
             var keyword = MainInfoKw.Put;
             var putMethod = self.Main.InfoSet.Put;
-            EnqueueMessageRule(keyword);
+            EnqueueMessageRule(self, keyword);
             return RogueMethodAspectState.Invoke(keyword, putMethod, self, user, activationDepth, arg);
         }
 
