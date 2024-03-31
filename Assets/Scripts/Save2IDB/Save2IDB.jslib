@@ -253,7 +253,7 @@ const Save2IDBPlugin = {
       const path = UTF8ToString(pathPtr);
       const file = await Save2IDB.read(path);
       const exists = file != null;
-      Module.dynCall_viB(thenCallback, ohPtr, exists);
+      Module.dynCall_vii(thenCallback, ohPtr, exists);
     } catch (error) {
       console.error(`Save2IDB_ExistsAsync error: ${error}`);
       Save2IDB.callbackText(catchCallback, ohPtr, error);

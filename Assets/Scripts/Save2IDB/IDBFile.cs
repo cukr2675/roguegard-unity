@@ -215,7 +215,7 @@ namespace Save2IDB
             var operationHandle = new IDBOperationHandle<bool>();
 #if UNITY_WEBGL && !UNITY_EDITOR
             var ohPtr = Unsafe.As<IDBOperationHandle<bool>, System.IntPtr>(ref operationHandle);
-            Save2IDB_ExistsAsync(ohPtr, path, CommonThen, CommonCatch);
+            Save2IDB_ExistsAsync(ohPtr, path, ExistsAsyncThen, CommonCatch);
 #endif
             return operationHandle;
         }
