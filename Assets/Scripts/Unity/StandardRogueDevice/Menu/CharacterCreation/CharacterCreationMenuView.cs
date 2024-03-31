@@ -33,8 +33,8 @@ namespace RoguegardUnity
 
         private IntrinsicItemController intrinsicItemController;
         private StartingItemItemController startingItemItemController;
-        private static readonly HeaderChoice intrinsicHeader = new HeaderChoice() { text = "固有能力" };
-        private static readonly HeaderChoice startingItemHeader = new HeaderChoice() { text = "初期アイテム" };
+        private static readonly HeaderChoice intrinsicHeader = new HeaderChoice("固有能力");
+        private static readonly HeaderChoice startingItemHeader = new HeaderChoice("初期アイテム");
         private MenuRogueObjSpriteRenderer spriteRenderer;
         private RaceChoice raceChoice;
         private AppearanceChoice appearanceChoice;
@@ -195,30 +195,27 @@ namespace RoguegardUnity
         {
         }
 
-        private class HeaderChoice : IModelsMenuChoice
+        private class HeaderChoice : BaseModelsMenuChoice
         {
-            public string text;
+            public override string Name { get; }
 
-            public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public HeaderChoice(string name)
             {
-                return text;
+                Name = name;
             }
 
-            public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public override void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
             }
         }
 
-        private class RaceChoice : IModelsMenuChoice
+        private class RaceChoice : BaseModelsMenuChoice
         {
+            public override string Name => null;
+
             public CharacterCreationMenuView parent;
 
-            public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                return null;
-            }
-
-            public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public override void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
 
@@ -226,16 +223,13 @@ namespace RoguegardUnity
             }
         }
 
-        private class AppearanceChoice : IModelsMenuChoice
+        private class AppearanceChoice : BaseModelsMenuChoice
         {
+            public override string Name => null;
+
             public CharacterCreationMenuView parent;
 
-            public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                return null;
-            }
-
-            public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public override void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
 
@@ -291,16 +285,13 @@ namespace RoguegardUnity
             }
         }
 
-        private class LoadPresetChoice : IModelsMenuChoice
+        private class LoadPresetChoice : BaseModelsMenuChoice
         {
+            public override string Name => ":Load";
+
             private static LoadPresetMenu nextMenu;
 
-            public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                return "ロード";
-            }
-
-            public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public override void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
 

@@ -34,22 +34,23 @@ namespace RoguegardUnity
             caption.OpenView(ChoicesModelsMenuItemController.Instance, Spanning<object>.Empty, root, null, null, new(other: text));
         }
 
-        private class Load : IModelsMenuChoice
+        private class Load : BaseModelsMenuChoice
         {
+            public override string Name => ":Load";
+
             public SelectFileMenu.SelectCallback selectCallback;
 
-            public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-                => ":Load";
-
-            public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public override void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
                 selectCallback(root, (string)arg.Other);
             }
         }
 
-        private class Rename : IModelsMenuChoice
+        private class Rename : BaseModelsMenuChoice
         {
+            public override string Name => ":Rename";
+
             private readonly DialogModelsMenuChoice overwriteDialog;
 
             public Rename()
@@ -57,10 +58,7 @@ namespace RoguegardUnity
                 overwriteDialog = new DialogModelsMenuChoice("", ":RenameOverride", (":Yes", Overwrite)).AppendExit();
             }
 
-            public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-                => ":Rename";
-
-            public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public override void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
                 root.Back();
@@ -106,14 +104,11 @@ namespace RoguegardUnity
             }
         }
 
-        private class Export : IModelsMenuChoice
+        private class Export : BaseModelsMenuChoice
         {
-            public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                return ":Export";
-            }
+            public override string Name => ":Export";
 
-            public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public override void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
                 root.Back();
@@ -123,14 +118,13 @@ namespace RoguegardUnity
             }
         }
 
-        private class Delete : IModelsMenuChoice
+        private class Delete : BaseModelsMenuChoice
         {
+            public override string Name => "<#f00>:Delete";
+
             private static readonly DialogModelsMenuChoice nextMenu = new DialogModelsMenuChoice(("<#f00>:Delete", Yes)).AppendExit();
 
-            public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-                => "<#f00>:Delete";
-
-            public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public override void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
                 root.AddInt(DeviceKw.StartTalk, 0);

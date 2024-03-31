@@ -34,16 +34,13 @@ namespace Roguegard
 
         public abstract ISkillDescription GetSkillDescription(RogueObj self, RogueObj tool);
 
-        private class MenuChoice : IModelsMenuChoice
+        private class MenuChoice : BaseModelsMenuChoice
         {
             public BaseObjCommand parent;
 
-            public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                return parent.Name;
-            }
+            public override string Name => parent.Name;
 
-            public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public override void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 var deviceInfo = RogueDeviceEffect.Get(self);
                 deviceInfo.SetDeviceCommand(parent, user, arg);

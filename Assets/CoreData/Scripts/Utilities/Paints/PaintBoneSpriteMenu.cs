@@ -218,16 +218,11 @@ namespace Roguegard
             }
         }
 
-        private class RemoveChoice : IModelsMenuChoice
+        private class RemoveChoice : BaseModelsMenuChoice
         {
-            public TMP_InputField.ContentType ContentType => TMP_InputField.ContentType.IntegerNumber;
+            public override string Name => "<#f00>çÌèú";
 
-            public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                return "<#f00>çÌèú";
-            }
-
-            public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public override void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
 

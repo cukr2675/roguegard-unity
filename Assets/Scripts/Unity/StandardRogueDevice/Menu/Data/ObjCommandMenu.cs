@@ -44,14 +44,13 @@ namespace RoguegardUnity
             caption.OpenView(null, Spanning<object>.Empty, null, null, null, new(other: tool.Main.InfoSet));
         }
 
-        private class SummaryChoice : IModelsMenuChoice
+        private class SummaryChoice : BaseModelsMenuChoice
         {
-            private Menu menu = new Menu();
+            public override string Name => "つよさ";
 
-            public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-                => "つよさ";
+            private Menu menu = new();
 
-            public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public override void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 var openArg = new RogueMethodArgument(targetObj: arg.TargetObj, other: arg.Other);
                 root.OpenMenu(menu, self, null, openArg);

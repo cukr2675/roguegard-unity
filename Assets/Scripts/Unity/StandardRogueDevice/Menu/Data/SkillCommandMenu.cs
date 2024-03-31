@@ -30,16 +30,13 @@ namespace RoguegardUnity
             caption.OpenView(null, Spanning<object>.Empty, null, null, null, new(other: currentSkill));
         }
 
-        private class UseChoice : IModelsMenuChoice, IDeviceCommandAction
+        private class UseChoice : BaseModelsMenuChoice, IDeviceCommandAction
         {
+            public override string Name => "使う";
+
             public SkillCommandMenu parent;
 
-            public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                return "使う";
-            }
-
-            public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public override void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 var info = RogueDeviceEffect.Get(self);
                 info.SetDeviceCommand(this, null, RogueMethodArgument.Identity);

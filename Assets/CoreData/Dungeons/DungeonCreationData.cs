@@ -83,10 +83,12 @@ namespace Roguegard.CharacterCreation
             Debug.LogError($"{name} ({nameof(DungeonCreationData)}) の {nameof(IOpenEffect)} に {nameof(DungeonOpen)} が設定されていません。");
         }
 
-        private class MenuChoice : IModelsMenuChoice
+        private class MenuChoice : BaseModelsMenuChoice
         {
             private readonly DungeonCreationData data;
             private readonly FloorMenu floorMenu;
+
+            public override string Name => data.DescriptionName;
 
             public MenuChoice(DungeonCreationData data)
             {
@@ -94,12 +96,7 @@ namespace Roguegard.CharacterCreation
                 floorMenu = new FloorMenu() { data = data };
             }
 
-            public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                return data.DescriptionName;
-            }
-
-            public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public override void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 root.AddObject(DeviceKw.EnqueueSE, CategoryKw.DownStairs);
                 root.Done();

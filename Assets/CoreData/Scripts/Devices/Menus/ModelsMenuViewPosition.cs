@@ -62,17 +62,14 @@ namespace Roguegard.Device
             return new ExitChoice() { parent = this, valueType = ValueType.TargetObj };
         }
 
-        private class ExitChoice : IModelsMenuChoice
+        private class ExitChoice : BaseModelsMenuChoice
         {
+            public override string Name => ExitModelsMenuChoice.Instance.Name;
+
             public ModelsMenuViewPosition parent;
             public ValueType valueType;
 
-            public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                return ExitModelsMenuChoice.Instance.GetName(root, self, user, arg);
-            }
-
-            public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public override void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 switch (valueType)
                 {

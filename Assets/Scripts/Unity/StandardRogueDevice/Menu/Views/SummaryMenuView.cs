@@ -341,14 +341,11 @@ namespace RoguegardUnity
             _topText.SetText(topBuilder);
         }
 
-        private class SubmitChoice : IModelsMenuChoice
+        private class SubmitChoice : BaseModelsMenuChoice
         {
-            public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                return "OK";
-            }
+            public override string Name => "OK";
 
-            public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public override void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 var dungeon = DungeonInfo.GetLargestDungeon(arg.TargetObj);
 
@@ -367,14 +364,11 @@ namespace RoguegardUnity
             }
         }
 
-        private class StartQuestChoice : IModelsMenuChoice
+        private class StartQuestChoice : BaseModelsMenuChoice
         {
-            public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                return "出発";
-            }
+            public override string Name => "出発";
 
-            public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public override void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 var quest = (DungeonQuest)arg.Other;
                 quest.Start(self);

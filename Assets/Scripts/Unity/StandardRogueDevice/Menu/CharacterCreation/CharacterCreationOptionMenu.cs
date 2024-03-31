@@ -151,13 +151,13 @@ namespace RoguegardUnity
             }
         }
 
-        private class RemoveChoice : IModelsMenuChoice
+        private class RemoveChoice : BaseModelsMenuChoice
         {
+            public override string Name => "<#f00>çÌèú";
+
             public CharacterCreationDataBuilder builder;
 
-            public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg) => "<#f00>çÌèú";
-
-            public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public override void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
 

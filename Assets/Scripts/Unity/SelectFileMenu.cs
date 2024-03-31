@@ -167,14 +167,11 @@ namespace RoguegardUnity
             }
         }
 
-        private class ImportChoice : IModelsMenuChoice
+        private class ImportChoice : BaseModelsMenuChoice
         {
-            public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                return ":Import";
-            }
+            public override string Name => ":Import";
 
-            public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public override void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
                 ShowSaving(root);

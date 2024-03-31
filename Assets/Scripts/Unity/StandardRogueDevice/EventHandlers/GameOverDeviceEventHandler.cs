@@ -76,13 +76,13 @@ namespace RoguegardUnity
                 root.Get(DeviceKw.MenuLog).OpenView(ChoicesModelsMenuItemController.Instance, choices, root, self, user, arg);
             }
 
-            private class Next : IModelsMenuChoice
+            private class Next : BaseModelsMenuChoice
             {
-                private static readonly NextMenu nextMenu = new NextMenu();
+                public override string Name => null;
 
-                public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg) => null;
+                private static readonly NextMenu nextMenu = new();
 
-                public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+                public override void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
                 {
                     root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
                     root.OpenMenu(nextMenu, self, user, arg);

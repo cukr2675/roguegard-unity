@@ -212,42 +212,33 @@ namespace Roguegard
                 root.Get(DeviceKw.MenuScroll).OpenView(ChoicesModelsMenuItemController.Instance, choices, root, self, user, arg);
             }
 
-            private class HPPlusChoice : IModelsMenuChoice
+            private class HPPlusChoice : BaseModelsMenuChoice
             {
-                public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-                {
-                    return "最大HP +5";
-                }
+                public override string Name => "最大HP +5";
 
-                public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+                public override void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
                 {
                     var commandArg = new RogueMethodArgument(count: 0);
                     root.OpenMenuAsDialog(submitMenu, self, user, commandArg);
                 }
             }
 
-            private class MPPlusChoice : IModelsMenuChoice
+            private class MPPlusChoice : BaseModelsMenuChoice
             {
-                public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-                {
-                    return "最大MP +5";
-                }
+                public override string Name => "最大MP +5";
 
-                public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+                public override void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
                 {
                     var commandArg = new RogueMethodArgument(count: 1);
                     root.OpenMenuAsDialog(submitMenu, self, user, commandArg);
                 }
             }
 
-            private class WeightLiftingChoice : IModelsMenuChoice
+            private class WeightLiftingChoice : BaseModelsMenuChoice
             {
-                public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-                {
-                    return "最大重量 +2";
-                }
+                public override string Name => "最大重量 +2";
 
-                public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+                public override void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
                 {
                     var commandArg = new RogueMethodArgument(count: 2);
                     root.OpenMenuAsDialog(submitMenu, self, user, commandArg);
@@ -264,14 +255,11 @@ namespace Roguegard
                 root.Get(DeviceKw.MenuCommand).OpenView(ChoicesModelsMenuItemController.Instance, choices, root, self, user, arg);
             }
 
-            private class SubmitChoice : IModelsMenuChoice
+            private class SubmitChoice : BaseModelsMenuChoice
             {
-                public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-                {
-                    return "決定";
-                }
+                public override string Name => "決定";
 
-                public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+                public override void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
                 {
                     root.Done();
                     root.AddInt(DeviceKw.StartTalk, 0);

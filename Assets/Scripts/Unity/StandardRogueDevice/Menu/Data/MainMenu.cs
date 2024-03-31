@@ -39,28 +39,26 @@ namespace RoguegardUnity
             parent.Stats.Show(true);
         }
 
-        private class Skill : IModelsMenuChoice
+        private class Skill : BaseModelsMenuChoice
         {
+            public override string Name => ":Skills";
+
             public IModelsMenu nextMenu;
 
-            public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-                => ":Skills";
-
-            public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public override void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 root.OpenMenu(nextMenu, self, null, RogueMethodArgument.Identity);
                 root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
             }
         }
 
-        private class Objs : IModelsMenuChoice
+        private class Objs : BaseModelsMenuChoice
         {
+            public override string Name => ":Items";
+
             public IModelsMenu nextMenu;
 
-            public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-                => ":Items";
-
-            public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public override void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 var openArg = new RogueMethodArgument(targetObj: self);
                 root.OpenMenu(nextMenu, self, null, openArg);
@@ -68,14 +66,13 @@ namespace RoguegardUnity
             }
         }
 
-        private class Ground : IModelsMenuChoice
+        private class Ground : BaseModelsMenuChoice
         {
+            public override string Name => ":Ground";
+
             public IModelsMenu nextMenu;
 
-            public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-                => ":Ground";
-
-            public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public override void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 var openArg = new RogueMethodArgument(targetObj: self, count: 0);
                 root.OpenMenu(nextMenu, self, null, openArg);
@@ -83,42 +80,39 @@ namespace RoguegardUnity
             }
         }
 
-        private class Party : IModelsMenuChoice
+        private class Party : BaseModelsMenuChoice
         {
+            public override string Name => ":Party";
+
             public IModelsMenu nextMenu;
 
-            public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-                => ":Party";
-
-            public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public override void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 root.OpenMenu(nextMenu, self, null, RogueMethodArgument.Identity);
                 root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
             }
         }
 
-        private class Log : IModelsMenuChoice
+        private class Log : BaseModelsMenuChoice
         {
+            public override string Name => ":Log";
+
             private IModelsMenu nextMenu = new LogMenu();
 
-            public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-                => ":Log";
-
-            public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public override void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 root.OpenMenu(nextMenu, self, null, RogueMethodArgument.Identity);
                 root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
             }
         }
 
-        private class Others : IModelsMenuChoice
+        private class Others : BaseModelsMenuChoice
         {
+            public override string Name => ":Others";
+
             private IModelsMenu nextMenu = new OthersMenu();
 
-            public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-                => ":Others";
-
-            public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public override void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 root.OpenMenu(nextMenu, self, null, RogueMethodArgument.Identity);
                 root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
@@ -191,14 +185,13 @@ namespace RoguegardUnity
                 }
             }
 
-            private class GiveUp : IModelsMenuChoice
+            private class GiveUp : BaseModelsMenuChoice
             {
+                public override string Name => ":GiveUp";
+
                 private static readonly Choices nextMenu = new Choices();
 
-                public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-                    => ":GiveUp";
-
-                public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+                public override void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
                 {
                     root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
                     root.AddInt(DeviceKw.StartTalk, 0);
@@ -221,14 +214,11 @@ namespace RoguegardUnity
                     }
                 }
 
-                private class GiveUpChoice : IModelsMenuChoice
+                private class GiveUpChoice : BaseModelsMenuChoice
                 {
-                    public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-                    {
-                        return "はい";
-                    }
+                    public override string Name => ":Yes";
 
-                    public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+                    public override void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
                     {
                         root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
                         root.Done();
@@ -238,12 +228,11 @@ namespace RoguegardUnity
                 }
             }
 
-            private class Load : IModelsMenuChoice
+            private class Load : BaseModelsMenuChoice
             {
-                public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-                    => ":Load";
+                public override string Name => ":Load";
 
-                public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+                public override void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
                 {
                     root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
                     RogueDevice.Add(DeviceKw.LoadGame, null);
@@ -289,14 +278,13 @@ namespace RoguegardUnity
                 }
             }
 
-            private class Options : IModelsMenuChoice
+            private class Options : BaseModelsMenuChoice
             {
+                public override string Name => ":Options";
+
                 private IModelsMenu nextMenu = new OptionsMenu();
 
-                public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-                    => ":Options";
-
-                public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+                public override void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
                 {
                     root.OpenMenu(nextMenu, self, null, RogueMethodArgument.Identity);
                     root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
@@ -348,16 +336,13 @@ namespace RoguegardUnity
             }
         }
 
-        private class OptionsWindowFrameType : IModelsMenuChoice
+        private class OptionsWindowFrameType : BaseModelsMenuChoice
         {
+            public override string Name => "ウィンドウタイプ";
+
             private static readonly Menu nextMenu = new Menu();
 
-            public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                return "ウィンドウタイプ";
-            }
-
-            public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public override void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
                 root.OpenMenu(nextMenu, self, user, RogueMethodArgument.Identity);

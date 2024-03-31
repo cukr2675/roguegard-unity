@@ -6,15 +6,16 @@ using System.Linq;
 
 namespace Roguegard.Device
 {
-    public class DialogModelsMenuChoice : IModelsMenuChoice, IModelsMenu
+    public class DialogModelsMenuChoice : BaseModelsMenuChoice, IModelsMenu
     {
-        private readonly string name;
+        public override string Name { get; }
+
         private readonly string message;
         private readonly IModelsMenuChoice[] choices;
 
         private DialogModelsMenuChoice(string name, string message, IEnumerable<IModelsMenuChoice> choices)
         {
-            this.name = name;
+            Name = name;
             this.message = message;
             this.choices = choices?.ToArray() ?? new IModelsMenuChoice[0];
         }
@@ -31,23 +32,18 @@ namespace Roguegard.Device
 
         public DialogModelsMenuChoice(string name, string message, params (string, ModelsMenuAction)[] choices)
         {
-            this.name = name;
+            Name = name;
             this.message = message;
             this.choices = choices?.Select(x => new ActionModelsMenuChoice(x.Item1, x.Item2)).ToArray() ?? new ActionModelsMenuChoice[0];
         }
 
         public DialogModelsMenuChoice AppendExit()
         {
-            var choice = new DialogModelsMenuChoice(name, message, choices.Append(ExitModelsMenuChoice.Instance));
+            var choice = new DialogModelsMenuChoice(Name, message, choices.Append(ExitModelsMenuChoice.Instance));
             return choice;
         }
 
-        string IModelsMenuChoice.GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-        {
-            return name;
-        }
-
-        void IModelsMenuChoice.Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+        public override void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         {
             root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
             root.OpenMenuAsDialog(this, self, user, arg);

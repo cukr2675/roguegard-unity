@@ -37,12 +37,11 @@ namespace RoguegardUnity
             TakeOutFromChest = new TakeOutFromChestMenu() { commandMenu = takeOutCommandMenu };
         }
 
-        private class CloseChoice : IModelsMenuChoice
+        private class CloseChoice : BaseModelsMenuChoice
         {
-            public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-                => ":Close";
+            public override string Name => ":Close";
 
-            public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public override void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 root.Done();
                 root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Cancel);

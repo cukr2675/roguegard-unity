@@ -8,11 +8,11 @@ namespace Roguegard.Device
     {
         private readonly object[] models;
 
-        public LoadingModelsMenu(string text, string buttonText, ModelsMenuAction buttonAction)
+        public LoadingModelsMenu(string text, string buttonText, ModelsMenuAction buttonAction, ModelsMenuAction updateAction = null)
         {
             models = new object[]
             {
-                new ActionModelsMenuChoice(text, Wait),
+                new ActionModelsMenuChoice(text, updateAction ?? Wait),
                 new ActionModelsMenuChoice(buttonText, buttonAction)
             };
         }

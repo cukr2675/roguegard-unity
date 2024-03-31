@@ -135,8 +135,10 @@ namespace RoguegardUnity
             }
         }
 
-        private class StartGameChoice : IModelsMenuChoice
+        private class StartGameChoice : BaseModelsMenuChoice
         {
+            public override string Name => ":Play";
+
             private readonly NextMenu nextMenu;
 
             public StartGameChoice(TitleMenu parent)
@@ -144,12 +146,7 @@ namespace RoguegardUnity
                 nextMenu = new NextMenu(parent);
             }
 
-            public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                return ":Play";
-            }
-
-            public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public override void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
                 root.OpenMenu(nextMenu, null, null, RogueMethodArgument.Identity);
@@ -246,17 +243,14 @@ namespace RoguegardUnity
             }
         }
 
-        private class CreditChoice : IModelsMenuChoice
+        private class CreditChoice : BaseModelsMenuChoice
         {
+            public override string Name => ":Credit";
+
             public TitleMenu parent;
             private NextMenu nextMenu;
 
-            public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                return ":Credit";
-            }
-
-            public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public override void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 if (nextMenu == null)
                 {

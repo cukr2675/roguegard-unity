@@ -13,6 +13,7 @@ namespace RoguegardUnity
         private readonly TouchController touchController;
         private readonly SelectFileMenu writeFileMenu;
         private readonly SelectFileMenu readFileMenu;
+        private readonly AutoSaveMenu autoSaveMenu;
 
         public SaveDeviceEventHandler(StandardRogueDeviceComponentManager componentManager, TouchController touchController)
         {
@@ -57,6 +58,8 @@ namespace RoguegardUnity
                     componentManager.OpenDelay(loadDeviceData);
                 });
             });
+
+            autoSaveMenu = new AutoSaveMenu() { parent = this };
         }
 
         bool IStandardRogueDeviceEventHandler.TryHandle(IKeyword keyword, int integer, float number, object obj)
@@ -74,8 +77,7 @@ namespace RoguegardUnity
                 }
 
                 // オートセーブ
-                StandardRogueDeviceSave.GetNewAutoSavePath(
-                    "AutoSave.gard", path => SaveDelay(null, path, true));
+                touchController.OpenMenu(componentManager.Subject, autoSaveMenu, null, null, RogueMethodArgument.Identity);
                 return true;
             }
             if (keyword == DeviceKw.SaveGame)
@@ -221,6 +223,17 @@ namespace RoguegardUnity
             {
                 // 空間移動直後にセーブしたとき、移動前の空間の情報を保存しないよう処理する
                 view.ReadyView(obj.Location);
+            }
+        }
+
+        private class AutoSaveMenu : IModelsMenu
+        {
+            public SaveDeviceEventHandler parent;
+
+            public void OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            {
+                SelectFileMenu.ShowSaving(root);
+                StandardRogueDeviceSave.GetNewAutoSavePath("AutoSave.gard", path => parent.SaveDelay(root, path, true));
             }
         }
     }

@@ -72,16 +72,13 @@ namespace RoguegardUnity
             Root.OpenMenuAsDialog(urlTalk, Self, User, new(other: url));
         }
 
-        private class ExitChoice : IModelsMenuChoice
+        private class ExitChoice : BaseModelsMenuChoice
         {
+            public override string Name => ExitModelsMenuChoice.Instance.Name;
+
             public TitleCredit parent;
 
-            public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                return ":Exit";
-            }
-
-            public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public override void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Cancel);
                 MenuController.Show(parent._canvasGroup, false);
@@ -101,14 +98,11 @@ namespace RoguegardUnity
                 root.Get(DeviceKw.MenuTalkChoices).OpenView(ChoicesModelsMenuItemController.Instance, models, root, self, user, arg);
             }
 
-            private class JumpChoice : IModelsMenuChoice
+            private class JumpChoice : BaseModelsMenuChoice
             {
-                public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-                {
-                    return "はい";
-                }
+                public override string Name => ":Yes";
 
-                public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+                public override void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
                 {
                     root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
                     root.Back();
