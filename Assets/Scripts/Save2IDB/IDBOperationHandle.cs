@@ -7,7 +7,7 @@ namespace Save2IDB
     public class IDBOperationHandle : IEnumerator
     {
         public IDBOperationStatus Status { get; protected set; }
-        internal protected string ErrorCode { get; protected set; }
+        public string ErrorMsg { get; protected set; }
 
         private readonly object _current;
         object IEnumerator.Current => _current;
@@ -30,9 +30,9 @@ namespace Save2IDB
             Status = IDBOperationStatus.Succeeded;
         }
 
-        internal void Error(string errorCode)
+        internal void Error(string errorMsg)
         {
-            ErrorCode = errorCode;
+            ErrorMsg = errorMsg;
             Status = IDBOperationStatus.Failed;
         }
 
@@ -43,7 +43,7 @@ namespace Save2IDB
 
         void IEnumerator.Reset()
         {
-            ErrorCode = default;
+            ErrorMsg = default;
             Status = IDBOperationStatus.InProgress;
         }
     }
@@ -65,7 +65,7 @@ namespace Save2IDB
         void IEnumerator.Reset()
         {
             Result = default;
-            ErrorCode = default;
+            ErrorMsg = default;
             Status = IDBOperationStatus.InProgress;
         }
     }

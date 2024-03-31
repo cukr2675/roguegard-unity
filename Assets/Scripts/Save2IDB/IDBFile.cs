@@ -68,11 +68,11 @@ namespace Save2IDB
         }
 
         [MonoPInvokeCallback(typeof(CommonCatchCallback))]
-        private static void CommonCatch(System.IntPtr ohPtr, string errorCode)
+        private static void CommonCatch(System.IntPtr ohPtr, string errorMsg)
         {
-            Debug.LogError($"ErrorCode: {errorCode}");
+            Debug.LogError($"ErrorMsg: {errorMsg}");
             var operationHandle = Unsafe.As<System.IntPtr, IDBOperationHandle>(ref ohPtr);
-            operationHandle.Error(errorCode);
+            operationHandle.Error(errorMsg);
         }
 
 
