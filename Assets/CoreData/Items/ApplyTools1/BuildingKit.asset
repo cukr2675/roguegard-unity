@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BuildingKit
   m_EditorClassIdentifier: 
   _overridesCost: 0
-  _cost: 0
+  _cost: 1
   _costIsUnknown: 0
   _race:
     _name: "\u5EFA\u8A2D\u30AD\u30C3\u30C8"
@@ -93,10 +93,6 @@ MonoBehaviour:
       _script: {fileID: 0}
       _ref:
         rid: -2
-    _beSteppedOnTile:
-      _script: {fileID: 0}
-      _ref:
-        rid: -2
     _equipmentState: {fileID: 0}
     _weight:
       _script: {fileID: 11500000, guid: 594f5163e7481f942883460d7787cf0a, type: 3}
@@ -106,7 +102,10 @@ MonoBehaviour:
       _script: {fileID: 0}
       _ref:
         rid: -2
-    _openEffects: []
+    _openEffects:
+    - _script: {fileID: 11500000, guid: 803cd00a012534c40a983b460a9888ec, type: 3}
+      _ref:
+        rid: 2885636439883644930
     _lv: 0
     _gender: {fileID: 0}
     _hpName: 
@@ -121,6 +120,10 @@ MonoBehaviour:
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
+    - rid: 2885636439883644930
+      type: {class: BracketReferencedObjNameOpen, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
+      data:
+        _assemblyReflectionAssetDummy: 
     - rid: 5141994136678432768
       type: {class: LayingKitBeApplied, ns: Roguegard, asm: Roguegard.CoreData}
       data:

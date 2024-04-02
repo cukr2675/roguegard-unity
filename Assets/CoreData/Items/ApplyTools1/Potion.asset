@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Potion
   m_EditorClassIdentifier: 
   _overridesCost: 0
-  _cost: 0
+  _cost: 1
   _costIsUnknown: 0
   _race:
     _name: "\u30DD\u30FC\u30B7\u30E7\u30F3"
@@ -93,10 +93,6 @@ MonoBehaviour:
       _script: {fileID: 0}
       _ref:
         rid: -2
-    _beSteppedOnTile:
-      _script: {fileID: 0}
-      _ref:
-        rid: -2
     _equipmentState: {fileID: 0}
     _weight:
       _script: {fileID: 0}
@@ -106,7 +102,10 @@ MonoBehaviour:
       _script: {fileID: 0}
       _ref:
         rid: -2
-    _openEffects: []
+    _openEffects:
+    - _script: {fileID: 11500000, guid: 36f1cc5cf1220c94ebf6721d608cd577, type: 3}
+      _ref:
+        rid: 2885636439883644933
     _lv: 0
     _gender: {fileID: 0}
     _hpName: 
@@ -121,3 +120,7 @@ MonoBehaviour:
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
+    - rid: 2885636439883644933
+      type: {class: PrefixReferencedObjNameOpen, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
+      data:
+        _assemblyReflectionAssetDummy: 

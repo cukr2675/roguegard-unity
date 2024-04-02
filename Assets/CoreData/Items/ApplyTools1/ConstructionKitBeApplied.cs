@@ -11,13 +11,14 @@ namespace Roguegard
     {
         public override bool Invoke(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
         {
-            var sourceInfoSet = InfoSetSourcedEffect.GetSource(self); // InfoSet 単位で解体可能か判定する（スタックできなくても解体可能）
-            if (sourceInfoSet == null)
+            var infoSetVariantInfo = InfoSetReferenceInfo.Get(self);
+            if (infoSetVariantInfo == null || infoSetVariantInfo.Count == 0)
             {
                 Debug.LogError($"{self} にオブジェクト情報が設定されていません。");
                 BaseStatusEffect.Close<ContinuousApplyStatusEffect>(user);
                 return false;
             }
+            var sourceInfoSet = infoSetVariantInfo.Get(0); // InfoSet 単位で解体可能か判定する（スタックできなくても解体可能）
             var space = user.Location.Space;
             if (space.Tilemap == null)
             {

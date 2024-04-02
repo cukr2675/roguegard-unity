@@ -12,13 +12,14 @@ namespace Roguegard
 
         public override bool Invoke(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
         {
-            var sourceTile = TileSourcedEffect.GetSource(self);
-            if (sourceTile == null)
+            var tileVariantInfo = TileReferenceInfo.Get(self);
+            if (tileVariantInfo == null || tileVariantInfo.Count == 0)
             {
                 Debug.LogError($"{self} にタイルが設定されていません。");
                 BaseStatusEffect.Close<ContinuousApplyStatusEffect>(user);
                 return false;
             }
+            var sourceTile = tileVariantInfo.Get(0);
             if (sourceTile.Info.Layer != _tileLayer)
             {
                 Debug.LogError($"{self.Main.InfoSet.Name} で {_tileLayer} 以外を敷くことはできません。");

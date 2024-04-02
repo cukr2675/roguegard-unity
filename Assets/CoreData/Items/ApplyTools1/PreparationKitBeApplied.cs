@@ -45,7 +45,7 @@ namespace Roguegard
                 {
                     if (!SpaceUtility.TryDividedLocate(arg.Tool, 1, out tool)) return false;
                 }
-                InfoSetSourcedEffect.SetSource(tool, tool.Main.InfoSet);
+                InfoSetReferenceInfo.SetTo(tool, tool.Main.InfoSet);
                 tool.Main.SetBaseInfoSet(tool, parent._potionInfoSet.PrimaryInfoSet);
                 if (RogueDevice.Primary.Player == self)
                 {
