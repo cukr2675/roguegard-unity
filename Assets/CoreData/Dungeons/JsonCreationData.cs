@@ -26,14 +26,16 @@ namespace Roguegard.CharacterCreation
         private RogueObj _cloneBase;
 
         protected override bool HasNotInfoSet => true;
-        public override string DescriptionName => CloneBase.Main.InfoSet.Name;
-        public override Sprite Icon => CloneBase.Main.InfoSet.Icon;
+        public override string DescriptionName => CloneBase?.Main.InfoSet.Name ?? _json.name;
+        public override Sprite Icon => CloneBase?.Main.InfoSet.Icon;
         public override Color Color => CloneBase.Main.InfoSet.Color;
         public override string Caption => CloneBase.Main.InfoSet.Caption;
         public override IRogueDetails Details => CloneBase.Main.InfoSet.Details;
 
         private static RogueObj Deserialize(string json)
         {
+            if (RoguegardSettings.JsonSerialization == null) return null;
+
             var stream = new MemoryStream();
             var writer = new StreamWriter(stream);
             writer.Write(json);
