@@ -24,7 +24,7 @@ namespace RoguegardUnity
         void IModelsMenu.OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         {
             currentSkill = (ISkill)arg.Other;
-            root.Get(DeviceKw.MenuCommand).OpenView(ChoicesModelsMenuItemController.Instance, choices, root, self, user, arg);
+            root.Get(DeviceKw.MenuCommand).OpenView(ChoiceListPresenter.Instance, choices, root, self, user, arg);
 
             var caption = root.Get(DeviceKw.MenuCaption);
             caption.OpenView(null, Spanning<object>.Empty, null, null, null, new(other: currentSkill));

@@ -43,7 +43,7 @@ namespace Roguegard
             return 0;
         }
 
-        private class RogueMenu : IModelsMenu, IModelsMenuItemController
+        private class RogueMenu : IModelsMenu, IModelListPresenter
         {
             public LobbyMerchantBeApplied parent;
 
@@ -54,12 +54,12 @@ namespace Roguegard
                 ExitModelsMenuChoice.OpenLeftAnchorExit(root);
             }
 
-            public string GetName(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public string GetItemName(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 return ((ScriptableStartingItem)model).Name;
             }
 
-            public void Activate(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public void ActivateItem(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
                 root.AddObject(DeviceKw.AppendText, model);

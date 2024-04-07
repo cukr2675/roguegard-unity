@@ -103,12 +103,12 @@ namespace RoguegardUnity
 
         protected override string GetItemName(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         {
-            return ChoicesModelsMenuItemController.Instance.GetName(model, root, self, user, arg);
+            return ChoiceListPresenter.Instance.GetItemName(model, root, self, user, arg);
         }
 
         protected override void ItemActivate(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         {
-            ChoicesModelsMenuItemController.Instance.Activate(model, root, self, user, arg);
+            ChoiceListPresenter.Instance.ActivateItem(model, root, self, user, arg);
         }
 
         private class ShortNameOption : IModelsMenuOptionText

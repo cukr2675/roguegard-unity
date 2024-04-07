@@ -14,26 +14,25 @@ namespace RoguegardUnity
         [SerializeField] private CanvasGroup _canvasGroup = null;
         [SerializeField] private TMP_Text _text = null;
 
-        private IModelsMenuItemController itemController;
+        private IModelListPresenter presenter;
 
-        private readonly List<object> models = new List<object>();
+        private readonly List<object> modelList = new List<object>();
 
         public override CanvasGroup CanvasGroup => _canvasGroup;
 
         private float count;
 
         public override void OpenView<T>(
-            IModelsMenuItemController itemController, Spanning<T> models,
-            IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            IModelListPresenter presenter, Spanning<T> modelList, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         {
-            this.itemController = itemController;
-            this.models.Clear();
-            for (int i = 0; i < models.Count; i++)
+            this.presenter = presenter;
+            this.modelList.Clear();
+            for (int i = 0; i < modelList.Count; i++)
             {
-                this.models.Add(models[i]);
+                this.modelList.Add(modelList[i]);
             }
             SetArg(root, self, user, arg);
-            _text.text = itemController.GetName(models[0], Root, Self, User, Arg);
+            _text.text = presenter.GetItemName(modelList[0], Root, Self, User, Arg);
             MenuController.Show(_canvasGroup, true);
             count = 2f;
         }
@@ -48,7 +47,7 @@ namespace RoguegardUnity
             count -= Time.deltaTime;
             if (count > 0f) return;
 
-            itemController.Activate(models[0], Root, Self, User, Arg);
+            presenter.ActivateItem(modelList[0], Root, Self, User, Arg);
             MenuController.Show(_canvasGroup, false);
             Root.Done();
         }
@@ -58,7 +57,7 @@ namespace RoguegardUnity
             if (count <= 0f) return;
 
             count = 0f;
-            itemController.Activate(models[0], Root, Self, User, Arg);
+            presenter.ActivateItem(modelList[0], Root, Self, User, Arg);
             MenuController.Show(_canvasGroup, false);
             Root.Done();
         }

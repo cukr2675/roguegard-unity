@@ -17,15 +17,14 @@ namespace RoguegardUnity
 
         public override CanvasGroup CanvasGroup => _canvasGroup;
 
-        private IModelsMenuItemController controller;
+        private IModelListPresenter presenter;
         private object source;
 
         public override void OpenView<T>(
-            IModelsMenuItemController itemController, Spanning<T> models,
-            IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            IModelListPresenter presenter, Spanning<T> modelList, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         {
-            controller = itemController;
-            source = models[0];
+            this.presenter = presenter;
+            source = modelList[0];
             SetArg(root, self, user, arg);
             _scrollRect.verticalNormalizedPosition = 0f; // 常に一番下から表示
             MenuController.Show(_canvasGroup, true);
@@ -65,7 +64,7 @@ namespace RoguegardUnity
 
         void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
         {
-            controller.Activate(source, Root, Self, User, Arg);
+            presenter.ActivateItem(source, Root, Self, User, Arg);
         }
     }
 }

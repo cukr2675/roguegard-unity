@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Roguegard.Device
 {
     /// <summary>
-    /// <see cref="ChoicesModelsMenuItemController"/> のモデルとして扱うインターフェース。
+    /// <see cref="ChoiceListPresenter"/> のモデルとして扱うインターフェース。
     /// </summary>
     public interface IModelsMenuChoice
     {

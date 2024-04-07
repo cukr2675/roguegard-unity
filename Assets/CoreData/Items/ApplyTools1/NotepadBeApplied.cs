@@ -29,7 +29,7 @@ namespace Roguegard
                 var memo = arg.Tool;
                 var text = NotepadInfo.GetText(memo);
                 var scroll = root.Get(DeviceKw.MenuTextEditor);
-                scroll.OpenView(ChoicesModelsMenuItemController.Instance, Spanning<object>.Empty, root, self, null, new(tool: memo, other: text));
+                scroll.OpenView(ChoiceListPresenter.Instance, Spanning<object>.Empty, root, self, null, new(tool: memo, other: text));
                 ExitModelsMenuChoice.OpenLeftAnchorExit(root);
             }
 

@@ -4,13 +4,13 @@ using UnityEngine;
 
 namespace Roguegard.Device
 {
-    public static class ModelsMenuViewExtension
+    public static class ModelListViewExtension
     {
         public static void OpenView(
-            this IModelsMenuView view, IModelsMenuItemController itemController, Spanning<object> models,
+            this IModelListView view, IModelListPresenter presenter, Spanning<object> models,
             IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         {
-            view.OpenView(itemController, models, root, self, user, arg);
+            view.OpenView(presenter, models, root, self, user, arg);
         }
     }
 }

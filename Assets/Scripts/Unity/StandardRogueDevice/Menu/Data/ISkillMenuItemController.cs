@@ -7,7 +7,7 @@ using Roguegard.Device;
 
 namespace RoguegardUnity
 {
-    public interface ISkillMenuItemController : IModelsMenuItemController
+    public interface ISkillMenuItemController : IModelListPresenter
     {
     }
 }

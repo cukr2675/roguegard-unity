@@ -18,8 +18,7 @@ namespace RoguegardUnity
         public override CanvasGroup CanvasGroup => _canvasGroup;
 
         public override void OpenView<T>(
-            IModelsMenuItemController itemController, Spanning<T> models,
-            IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            IModelListPresenter presenter, Spanning<T> modelList, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         {
             SetArg(root, self, user, arg);
             MenuController.Show(_canvasGroup, true);

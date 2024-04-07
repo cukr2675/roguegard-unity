@@ -48,7 +48,7 @@ namespace Roguegard
             {
                 var dungeon = player.Location;
                 var summary = (IResultMenuView)root.Get(DeviceKw.MenuSummary);
-                summary.OpenView(ChoicesModelsMenuItemController.Instance, Spanning<object>.Empty, root, player, user, arg);
+                summary.OpenView(ChoiceListPresenter.Instance, Spanning<object>.Empty, root, player, user, arg);
                 summary.SetResult(player, dungeon);
             }
         }

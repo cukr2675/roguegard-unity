@@ -29,7 +29,7 @@ namespace Roguegard.Device
         public static void OpenLeftAnchorExit(IModelsMenuRoot root)
         {
             var leftAnchor = root.Get(DeviceKw.MenuLeftAnchor);
-            leftAnchor.OpenView(ChoicesModelsMenuItemController.Instance, single, root, null, null, RogueMethodArgument.Identity);
+            leftAnchor.OpenView(ChoiceListPresenter.Instance, single, root, null, null, RogueMethodArgument.Identity);
         }
     }
 }

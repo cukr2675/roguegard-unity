@@ -45,8 +45,7 @@ namespace RoguegardUnity
         }
 
         public override void OpenView<T>(
-            IModelsMenuItemController itemController, Spanning<T> models,
-            IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            IModelListPresenter presenter, Spanning<T> modelList, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         {
             SetArg(root, self, user, arg);
             MenuController.Show(_canvasGroup, true);
@@ -98,7 +97,7 @@ namespace RoguegardUnity
 
             SetObj(player, dungeon);
             var rightAnchor = Root.Get(DeviceKw.MenuRightAnchor);
-            rightAnchor.OpenView(ChoicesModelsMenuItemController.Instance, submitChoice, Root, Self, User, Arg);
+            rightAnchor.OpenView(ChoiceListPresenter.Instance, submitChoice, Root, Self, User, Arg);
         }
 
         void IResultMenuView.SetGameOver(RogueObj player, RogueObj dungeon)
@@ -109,7 +108,7 @@ namespace RoguegardUnity
             SetObj(player, null);
             ExitModelsMenuChoice.OpenLeftAnchorExit(Root);
             var rightAnchor = Root.Get(DeviceKw.MenuRightAnchor);
-            rightAnchor.OpenView(ChoicesModelsMenuItemController.Instance, submitChoice, Root, Self, User, Arg);
+            rightAnchor.OpenView(ChoiceListPresenter.Instance, submitChoice, Root, Self, User, Arg);
         }
 
         void IDungeonQuestMenuView.SetQuest(RogueObj player, DungeonQuest quest, bool showSubmitButton)
@@ -177,7 +176,7 @@ namespace RoguegardUnity
             if (showSubmitButton)
             {
                 var rightAnchor = Root.Get(DeviceKw.MenuRightAnchor);
-                rightAnchor.OpenView(ChoicesModelsMenuItemController.Instance, startQuestChoice, Root, Self, User, Arg);
+                rightAnchor.OpenView(ChoiceListPresenter.Instance, startQuestChoice, Root, Self, User, Arg);
             }
         }
 

@@ -22,7 +22,7 @@ namespace RoguegardUnity
 
         public bool IsShow => _canvasGroup.blocksRaycasts;
 
-        private IModelsMenuItemController controller;
+        private IModelListPresenter presenter;
         private object source;
         private bool waitEndOfTalk;
 
@@ -30,11 +30,10 @@ namespace RoguegardUnity
         public override void SetPosition(float position) { }
 
         public override void OpenView<T>(
-            IModelsMenuItemController itemController, Spanning<T> models,
-            IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            IModelListPresenter presenter, Spanning<T> modelList, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         {
-            controller = itemController;
-            source = models[0];
+            this.presenter = presenter;
+            source = modelList[0];
             SetArg(root, self, user, arg);
             MenuController.Show(_canvasGroup, true);
         }
@@ -49,8 +48,8 @@ namespace RoguegardUnity
                 MenuController.Show(_canvasGroup, false);
                 _text.Clear();
 
-                controller?.Activate(source, Root, Self, User, Arg);
-                controller = null;
+                presenter?.ActivateItem(source, Root, Self, User, Arg);
+                presenter = null;
             }
         }
 
@@ -93,7 +92,7 @@ namespace RoguegardUnity
         {
             _text.Clear();
             MenuController.Show(_canvasGroup, false);
-            controller = null;
+            presenter = null;
         }
 
         public void UpdateUI(int deltaTime)

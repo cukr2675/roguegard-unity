@@ -19,7 +19,7 @@ namespace Roguegard.Device
 
         public void OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         {
-            root.Get(DeviceKw.MenuLoading).OpenView(ChoicesModelsMenuItemController.Instance, models, root, self, user, arg);
+            root.Get(DeviceKw.MenuLoading).OpenView(ChoiceListPresenter.Instance, models, root, self, user, arg);
         }
 
         private static void Wait(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)

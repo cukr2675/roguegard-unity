@@ -23,7 +23,7 @@ namespace RoguegardUnity
 
         private ModelsMenuView view;
 
-        private IModelsMenuItemController controller;
+        private IModelListPresenter presenter;
 
         private object source;
 
@@ -45,11 +45,11 @@ namespace RoguegardUnity
             this.view = view;
         }
 
-        public void SetItem(IModelsMenuItemController controller, object source)
+        public void SetItem(IModelListPresenter presenter, object source)
         {
-            this.controller = controller;
+            this.presenter = presenter;
             this.source = source;
-            if (controller is IPartyMenuItemController)
+            if (presenter is IPartyMenuItemController)
             {
                 var obj = (RogueObj)source;
                 SetIcon(obj);
@@ -59,7 +59,7 @@ namespace RoguegardUnity
                 _weightText.text = null;
                 _equippedText.text = null;
             }
-            else if (controller is ISkillMenuItemController)
+            else if (presenter is ISkillMenuItemController)
             {
                 var obj = view.Arg.TargetObj ?? view.Self;
                 if (obj == null) return;
@@ -106,7 +106,7 @@ namespace RoguegardUnity
                 }
                 else
                 {
-                    var text = controller.GetName(source, view.Root, view.Self, view.User, view.Arg);
+                    var text = presenter.GetItemName(source, view.Root, view.Self, view.User, view.Arg);
                     text = StandardRogueDeviceUtility.Localize(text);
                     _text.text = text;
                     _text.color = new Color32(240, 240, 240, 255);
@@ -171,7 +171,7 @@ namespace RoguegardUnity
 
         void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
         {
-            controller.Activate(source, view.Root, view.Self, view.User, view.Arg);
+            presenter.ActivateItem(source, view.Root, view.Self, view.User, view.Arg);
         }
     }
 }

@@ -38,7 +38,7 @@ namespace RoguegardUnity
             }
             choices.Add(Details);
             choices.Add(ExitModelsMenuChoice.Instance);
-            root.Get(DeviceKw.MenuCommand).OpenView(ChoicesModelsMenuItemController.Instance, choices, root, self, user, arg);
+            root.Get(DeviceKw.MenuCommand).OpenView(ChoiceListPresenter.Instance, choices, root, self, user, arg);
 
             var caption = root.Get(DeviceKw.MenuCaption);
             caption.OpenView(null, Spanning<object>.Empty, null, null, null, new(other: tool.Main.InfoSet));
@@ -62,7 +62,7 @@ namespace RoguegardUnity
                 public void OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
                 {
                     var summary = (SummaryMenuView)root.Get(DeviceKw.MenuSummary);
-                    summary.OpenView(ChoicesModelsMenuItemController.Instance, Spanning<object>.Empty, root, self, user, arg);
+                    summary.OpenView(ChoiceListPresenter.Instance, Spanning<object>.Empty, root, self, user, arg);
                     ExitModelsMenuChoice.OpenLeftAnchorExit(root);
 
                     if (arg.TargetObj != null)
@@ -110,7 +110,7 @@ namespace RoguegardUnity
                 public void OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
                 {
                     var details = (DetailsMenuView)root.Get(DeviceKw.MenuDetails);
-                    details.OpenView(ChoicesModelsMenuItemController.Instance, models, root, self, user, arg);
+                    details.OpenView(ChoiceListPresenter.Instance, models, root, self, user, arg);
                     Debug.Log(arg.TargetObj + " , " + arg.Tool);
                     details.SetObj(arg.Tool ?? arg.TargetObj);
                     ExitModelsMenuChoice.OpenLeftAnchorExit(root);

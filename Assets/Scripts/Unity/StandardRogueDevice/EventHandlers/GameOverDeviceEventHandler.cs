@@ -73,7 +73,7 @@ namespace RoguegardUnity
             public void OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 // ログ表示
-                root.Get(DeviceKw.MenuLog).OpenView(ChoicesModelsMenuItemController.Instance, choices, root, self, user, arg);
+                root.Get(DeviceKw.MenuLog).OpenView(ChoiceListPresenter.Instance, choices, root, self, user, arg);
             }
 
             private class Next : BaseModelsMenuChoice
@@ -95,7 +95,7 @@ namespace RoguegardUnity
                 {
                     // リザルト表示 → ロビーへ帰還
                     var summary = (IResultMenuView)root.Get(DeviceKw.MenuSummary);
-                    summary.OpenView(ChoicesModelsMenuItemController.Instance, Spanning<object>.Empty, root, player, user, arg);
+                    summary.OpenView(ChoiceListPresenter.Instance, Spanning<object>.Empty, root, player, user, arg);
                     summary.SetGameOver(player, arg.TargetObj);
                 }
             }

@@ -27,11 +27,11 @@ namespace RoguegardUnity
         public void OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         {
             var command = root.Get(DeviceKw.MenuCommand);
-            command.OpenView(ChoicesModelsMenuItemController.Instance, models, root, null, null, new(other: arg.Other));
+            command.OpenView(ChoiceListPresenter.Instance, models, root, null, null, new(other: arg.Other));
 
             var caption = root.Get(DeviceKw.MenuCaption);
             var text = RogueFile.GetName((string)arg.Other) + "ÇÉçÅ[ÉhÇµÇ‹Ç∑Ç©ÅH";
-            caption.OpenView(ChoicesModelsMenuItemController.Instance, Spanning<object>.Empty, root, null, null, new(other: text));
+            caption.OpenView(ChoiceListPresenter.Instance, Spanning<object>.Empty, root, null, null, new(other: text));
         }
 
         private class Load : BaseModelsMenuChoice

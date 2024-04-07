@@ -58,7 +58,7 @@ namespace Roguegard.Device
                 root.AddInt(DeviceKw.WaitEndOfTalk, 0);
             }
 
-            root.Get(DeviceKw.MenuTalkChoices).OpenView(ChoicesModelsMenuItemController.Instance, choices, root, self, user, arg);
+            root.Get(DeviceKw.MenuTalkChoices).OpenView(ChoiceListPresenter.Instance, choices, root, self, user, arg);
         }
 
         public static DialogModelsMenuChoice CreateExit(ModelsMenuAction saveAction, ModelsMenuAction notSaveAction = null)

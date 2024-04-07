@@ -17,8 +17,8 @@ namespace RoguegardUnity
         [Header("Layout")]
         [SerializeField] private float _itemWidth = 150f;
 
-        private IModelsMenuItemController itemController;
-        private readonly List<object> models = new();
+        private IModelListPresenter presenter;
+        private readonly List<object> modelList = new();
         private readonly List<ModelsMenuViewItemButton> itemButtons = new();
 
         public override CanvasGroup CanvasGroup => _canvasGroup;
@@ -35,14 +35,13 @@ namespace RoguegardUnity
         }
 
         public override void OpenView<T>(
-            IModelsMenuItemController itemController, Spanning<T> models,
-            IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            IModelListPresenter presenter, Spanning<T> modelList, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         {
-            this.itemController = itemController;
-            this.models.Clear();
-            for (int i = 0; i < models.Count; i++)
+            this.presenter = presenter;
+            this.modelList.Clear();
+            for (int i = 0; i < modelList.Count; i++)
             {
-                this.models.Add(models[i]);
+                this.modelList.Add(modelList[i]);
             }
             SetArg(root, self, user, arg);
             UpdateItems();
@@ -66,7 +65,7 @@ namespace RoguegardUnity
         {
             var scrollRectHeight = scrollTransform.rect.height;
             AdjustItems(Mathf.CeilToInt(scrollRectHeight / itemHeight) + 1);
-            var contentHeight = itemHeight * (models.Count - 1) + scrollRectHeight;
+            var contentHeight = itemHeight * (modelList.Count - 1) + scrollRectHeight;
             marginHeight = contentHeight - scrollRectHeight;
             _scrollRect.content.sizeDelta = new Vector2(_scrollRect.content.sizeDelta.x, contentHeight);
 
@@ -76,13 +75,13 @@ namespace RoguegardUnity
                 var itemButton = itemButtons[i];
                 var itemButtonTransform = itemButton.RectTransform;
                 var index = i + offset;
-                if (index < 0 || models.Count <= index)
+                if (index < 0 || modelList.Count <= index)
                 {
                     MenuController.Show(itemButton.CanvasGroup, false);
                     continue;
                 }
 
-                itemButton.SetItem(itemController, models[index]);
+                itemButton.SetItem(presenter, modelList[index]);
                 itemButtonTransform.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, index * _itemWidth, _itemWidth);
                 MenuController.Show(itemButton.CanvasGroup, true);
             }

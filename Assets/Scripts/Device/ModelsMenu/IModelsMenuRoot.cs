@@ -6,7 +6,7 @@ namespace Roguegard.Device
 {
     public interface IModelsMenuRoot
     {
-        IModelsMenuView Get(IKeyword keyword);
+        IModelListView Get(IKeyword keyword);
 
         void OpenMenu(IModelsMenu menu, RogueObj self, RogueObj user, in RogueMethodArgument arg);
 

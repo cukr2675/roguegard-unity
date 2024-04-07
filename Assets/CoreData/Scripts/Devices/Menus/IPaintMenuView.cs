@@ -7,7 +7,7 @@ using Roguegard.Device;
 
 namespace Roguegard
 {
-    public interface IPaintModelsMenuView : IModelsMenuView
+    public interface IPaintMenuView : IModelListView
     {
         Spanning<DotterBoard> Boards { get; }
         Color32 MainColor { get; }

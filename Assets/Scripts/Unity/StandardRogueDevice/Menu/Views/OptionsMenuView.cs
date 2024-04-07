@@ -24,17 +24,16 @@ namespace RoguegardUnity
 
         private readonly List<GameObject> items = new List<GameObject>();
 
-        private ColorItemController colorItemController;
+        private ColorPresenter colorPresenter;
 
         public void Initialize()
         {
-            colorItemController = new ColorItemController() { parent = this };
-            _colorPicker.OnColorChanged.AddListener(x => colorItemController.OnColorChanged(Root, Self, User, Arg, x.ToPickerColor()));
+            colorPresenter = new ColorPresenter() { parent = this };
+            _colorPicker.OnColorChanged.AddListener(x => colorPresenter.OnColorChanged(Root, Self, User, Arg, x.ToPickerColor()));
         }
 
         public override void OpenView<T>(
-            IModelsMenuItemController itemController, Spanning<T> models,
-            IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            IModelListPresenter presenter, Spanning<T> modelList, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         {
             SetArg(root, self, user, arg);
             foreach (var item in items)
@@ -44,9 +43,9 @@ namespace RoguegardUnity
             items.Clear();
 
             var sumHeight = 0f;
-            for (int i = 0; i < models.Count; i++)
+            for (int i = 0; i < modelList.Count; i++)
             {
-                var model = models[i];
+                var model = modelList[i];
                 if (model is IModelsMenuOptionSlider slider)
                 {
                     var item = Instantiate(_sliderPrefab, _scrollRect.content);
@@ -83,7 +82,7 @@ namespace RoguegardUnity
                     SetTransform((RectTransform)item.transform, ref sumHeight);
 
                     item.Initialize(this);
-                    item.SetItem(colorItemController, color);
+                    item.SetItem(colorPresenter, color);
                     items.Add(item.gameObject);
                 }
                 else
@@ -92,7 +91,7 @@ namespace RoguegardUnity
                     SetTransform((RectTransform)item.transform, ref sumHeight);
 
                     item.Initialize(this);
-                    item.SetItem(itemController, model);
+                    item.SetItem(presenter, model);
                     items.Add(item.gameObject);
                 }
             }
@@ -118,18 +117,18 @@ namespace RoguegardUnity
             _scrollRect.verticalNormalizedPosition = position;
         }
 
-        private class ColorItemController : IModelsMenuItemController
+        private class ColorPresenter : IModelListPresenter
         {
             public OptionsMenuView parent;
             private IModelsMenuOptionColor currentColor;
 
-            public string GetName(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public string GetItemName(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 var color = (IModelsMenuOptionColor)model;
                 return color.GetName(root, self, user, arg);
             }
 
-            public void Activate(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public void ActivateItem(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 currentColor = (IModelsMenuOptionColor)model;
                 var value = currentColor.GetValue(root, self, user, arg);

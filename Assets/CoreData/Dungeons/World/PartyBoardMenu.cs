@@ -10,7 +10,7 @@ namespace Roguegard
 {
     public class PartyBoardMenu : IModelsMenu
     {
-        private static readonly ItemController itemController = new ItemController();
+        private static readonly Presenter presenter = new Presenter();
         private static readonly List<object> models = new List<object>();
 
         public void OpenMenu(IModelsMenuRoot root, RogueObj player, RogueObj user, in RogueMethodArgument arg)
@@ -28,17 +28,17 @@ namespace Roguegard
             models.Add(null);
 
             var scroll = root.Get(DeviceKw.MenuScroll);
-            scroll.OpenView(itemController, models, root, player, null, RogueMethodArgument.Identity);
+            scroll.OpenView(presenter, models, root, player, null, RogueMethodArgument.Identity);
             ExitModelsMenuChoice.OpenLeftAnchorExit(root);
         }
 
-        private class ItemController : IModelsMenuItemController
+        private class Presenter : IModelListPresenter
         {
             private static readonly CommandMenu nextMenu = new CommandMenu();
             private static readonly DialogModelsMenuChoice callLobbyDialog = new DialogModelsMenuChoice(("‚Í‚¢", CallLobby)).AppendExit();
             private static readonly PartyBoardCharacterCreationMenu newMenu = new PartyBoardCharacterCreationMenu();
 
-            public string GetName(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public string GetItemName(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 var character = (RogueObj)model;
                 if (character == null)
@@ -54,7 +54,7 @@ namespace Roguegard
                 }
             }
 
-            public void Activate(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public void ActivateItem(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 var character = (RogueObj)model;
                 if (character == null)
@@ -118,7 +118,7 @@ namespace Roguegard
             {
                 var newPlayer = arg.TargetObj;
                 var openArg = new RogueMethodArgument(targetObj: newPlayer);
-                root.Get(DeviceKw.MenuCommand).OpenView(ChoicesModelsMenuItemController.Instance, models, root, self, null, openArg);
+                root.Get(DeviceKw.MenuCommand).OpenView(ChoiceListPresenter.Instance, models, root, self, null, openArg);
             }
 
             private static void Change(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)

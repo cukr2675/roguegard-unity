@@ -10,7 +10,7 @@ namespace RoguegardUnity
     /// <summary>
     /// モデルのリストをコントローラで制御する UI のクラス。
     /// </summary>
-    public abstract class ModelsMenuView : MonoBehaviour, IModelsMenuView
+    public abstract class ModelsMenuView : MonoBehaviour, IModelListView
     {
         public abstract CanvasGroup CanvasGroup { get; }
 
@@ -31,8 +31,7 @@ namespace RoguegardUnity
         }
 
         public abstract void OpenView<T>(
-            IModelsMenuItemController itemController, Spanning<T> models,
-            IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg);
+            IModelListPresenter presenter, Spanning<T> modelList, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg);
 
         public abstract float GetPosition();
 

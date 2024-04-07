@@ -44,7 +44,7 @@ namespace Roguegard
 
         public void OpenMenu(IModelsMenuRoot root, RogueObj player, RogueObj empty, in RogueMethodArgument arg)
         {
-            root.Get(DeviceKw.MenuFloor).OpenView(ChoicesModelsMenuItemController.Instance, choices, root, player, empty, arg);
+            root.Get(DeviceKw.MenuFloor).OpenView(ChoiceListPresenter.Instance, choices, root, player, empty, arg);
         }
 
         public abstract string GetName(IModelsMenuRoot root, RogueObj player, RogueObj empty, in RogueMethodArgument arg);

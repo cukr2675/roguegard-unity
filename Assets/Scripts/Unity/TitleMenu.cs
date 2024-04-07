@@ -131,7 +131,7 @@ namespace RoguegardUnity
 
             public void OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                parent._titleMenu.OpenView(ChoicesModelsMenuItemController.Instance, models, root, null, null, RogueMethodArgument.Identity);
+                parent._titleMenu.OpenView(ChoiceListPresenter.Instance, models, root, null, null, RogueMethodArgument.Identity);
             }
         }
 

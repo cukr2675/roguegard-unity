@@ -209,7 +209,7 @@ namespace Roguegard
 
             public void OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                root.Get(DeviceKw.MenuScroll).OpenView(ChoicesModelsMenuItemController.Instance, choices, root, self, user, arg);
+                root.Get(DeviceKw.MenuScroll).OpenView(ChoiceListPresenter.Instance, choices, root, self, user, arg);
             }
 
             private class HPPlusChoice : BaseModelsMenuChoice
@@ -252,7 +252,7 @@ namespace Roguegard
 
             public void OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                root.Get(DeviceKw.MenuCommand).OpenView(ChoicesModelsMenuItemController.Instance, choices, root, self, user, arg);
+                root.Get(DeviceKw.MenuCommand).OpenView(ChoiceListPresenter.Instance, choices, root, self, user, arg);
             }
 
             private class SubmitChoice : BaseModelsMenuChoice

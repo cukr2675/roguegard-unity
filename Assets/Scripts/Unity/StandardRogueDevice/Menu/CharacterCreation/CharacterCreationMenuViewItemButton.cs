@@ -31,7 +31,7 @@ namespace RoguegardUnity
 
         private ModelsMenuView view;
 
-        private IModelsMenuItemController controller;
+        private IModelListPresenter presenter;
 
         private object source;
 
@@ -53,13 +53,13 @@ namespace RoguegardUnity
             this.view = view;
         }
 
-        public void SetItem(IModelsMenuItemController controller, IReadOnlyIntrinsic intrinsic, ICharacterCreationData characterCreationData)
+        public void SetItem(IModelListPresenter presenter, IReadOnlyIntrinsic intrinsic, ICharacterCreationData characterCreationData)
         {
-            this.controller = controller;
+            this.presenter = presenter;
             source = intrinsic;
             _icon.enabled = false;
 
-            var text = controller.GetName(intrinsic, view.Root, view.Self, view.User, view.Arg);
+            var text = presenter.GetItemName(intrinsic, view.Root, view.Self, view.User, view.Arg);
             text = StandardRogueDeviceUtility.Localize(text);
             var lv = intrinsic.Option.GetLv(intrinsic, characterCreationData);
             _text.text = $"Lv{lv} {text}";
@@ -72,13 +72,13 @@ namespace RoguegardUnity
             ShowCaption(intrinsic.Option);
         }
 
-        public void SetItem(IModelsMenuItemController controller, IReadOnlyStartingItem startingItem)
+        public void SetItem(IModelListPresenter presenter, IReadOnlyStartingItem startingItem)
         {
-            this.controller = controller;
+            this.presenter = presenter;
             source = startingItem;
             _icon.enabled = false;
 
-            var text = controller.GetName(startingItem, view.Root, view.Self, view.User, view.Arg);
+            var text = presenter.GetItemName(startingItem, view.Root, view.Self, view.User, view.Arg);
             text = StandardRogueDeviceUtility.Localize(text);
             _text.text = text;
 
@@ -90,9 +90,9 @@ namespace RoguegardUnity
             ShowCaption(startingItem.Option);
         }
 
-        public void SetItem(IModelsMenuItemController controller, string text, string captionText)
+        public void SetItem(IModelListPresenter presenter, string text, string captionText)
         {
-            this.controller = controller;
+            this.presenter = presenter;
             source = null;
             _icon.enabled = false;
             _stars.SetInvisible();
@@ -133,7 +133,7 @@ namespace RoguegardUnity
 
         void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
         {
-            controller.Activate(source, view.Root, view.Self, view.User, view.Arg);
+            presenter.ActivateItem(source, view.Root, view.Self, view.User, view.Arg);
         }
     }
 }

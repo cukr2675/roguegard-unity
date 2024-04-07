@@ -31,8 +31,8 @@ namespace RoguegardUnity
         private CharacterCreationAddMenu addMenu;
         private CharacterCreationOptionMenu optionMenu;
 
-        private IntrinsicItemController intrinsicItemController;
-        private StartingItemItemController startingItemItemController;
+        private IntrinsicPresenter intrinsicPresenter;
+        private StartingItemPresenter startingItemPresenter;
         private static readonly HeaderChoice intrinsicHeader = new HeaderChoice("固有能力");
         private static readonly HeaderChoice startingItemHeader = new HeaderChoice("初期アイテム");
         private MenuRogueObjSpriteRenderer spriteRenderer;
@@ -61,7 +61,7 @@ namespace RoguegardUnity
         }
 
         public override void OpenView<T>(
-            IModelsMenuItemController itemController, Spanning<T> models, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            IModelListPresenter presenter, Spanning<T> modelList, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         {
             if (!(arg.Other is CharacterCreationDataBuilder builder)) throw new RogueException();
             this.builder = builder;
@@ -75,10 +75,10 @@ namespace RoguegardUnity
             appearanceBuildersMenu.NextMenu = optionMenu;
             appearanceBuildersMenu.AddMenu = addMenu;
 
-            if (intrinsicItemController == null)
+            if (intrinsicPresenter == null)
             {
-                intrinsicItemController = new IntrinsicItemController() { parent = this };
-                startingItemItemController = new StartingItemItemController() { parent = this };
+                intrinsicPresenter = new IntrinsicPresenter() { parent = this };
+                startingItemPresenter = new StartingItemPresenter() { parent = this };
             }
 
             SetArg(root, self, user, arg);
@@ -109,7 +109,7 @@ namespace RoguegardUnity
                 sumHeight += ((RectTransform)header.transform).rect.height;
                 odd = false;
                 header.Initialize(this);
-                header.SetItem(ChoicesModelsMenuItemController.Instance, intrinsicHeader);
+                header.SetItem(ChoiceListPresenter.Instance, intrinsicHeader);
                 itemObjects.Add(header);
             }
             for (int i = 0; i < builder.Intrinsics.Count; i++)
@@ -118,14 +118,14 @@ namespace RoguegardUnity
                 var itemButton = Instantiate(_itemButtonPrefab, _secondParent);
                 SetTransform((RectTransform)itemButton.transform, ref sumHeight, ref odd);
                 itemButton.Initialize(this);
-                itemButton.SetItem(intrinsicItemController, intrinsic, builder);
+                itemButton.SetItem(intrinsicPresenter, intrinsic, builder);
                 itemObjects.Add(itemButton);
             }
             {
                 var itemButton = Instantiate(_itemButtonPrefab, _secondParent);
                 SetTransform((RectTransform)itemButton.transform, ref sumHeight, ref odd);
                 itemButton.Initialize(this);
-                itemButton.SetItem(intrinsicItemController, null, "+ 固有能力を追加");
+                itemButton.SetItem(intrinsicPresenter, null, "+ 固有能力を追加");
                 itemObjects.Add(itemButton);
                 if (odd) { sumHeight += ((RectTransform)itemButton.transform).rect.height; }
             }
@@ -137,7 +137,7 @@ namespace RoguegardUnity
                 sumHeight += ((RectTransform)header.transform).rect.height;
                 odd = false;
                 header.Initialize(this);
-                header.SetItem(ChoicesModelsMenuItemController.Instance, startingItemHeader);
+                header.SetItem(ChoiceListPresenter.Instance, startingItemHeader);
                 itemObjects.Add(header);
             }
             for (int i = 0; i < builder.StartingItemTable.Count; i++)
@@ -146,28 +146,28 @@ namespace RoguegardUnity
                 var itemButton = Instantiate(_itemButtonPrefab, _secondParent);
                 SetTransform((RectTransform)itemButton.transform, ref sumHeight, ref odd);
                 itemButton.Initialize(this);
-                itemButton.SetItem(startingItemItemController, startingItem);
+                itemButton.SetItem(startingItemPresenter, startingItem);
                 itemObjects.Add(itemButton);
             }
             {
                 var itemButton = Instantiate(_itemButtonPrefab, _secondParent);
                 SetTransform((RectTransform)itemButton.transform, ref sumHeight, ref odd);
                 itemButton.Initialize(this);
-                itemButton.SetItem(startingItemItemController, null, "+ 初期アイテムを追加");
+                itemButton.SetItem(startingItemPresenter, null, "+ 初期アイテムを追加");
                 itemObjects.Add(itemButton);
                 if (odd) { sumHeight += ((RectTransform)itemButton.transform).rect.height; }
             }
             _scrollRect.content.SetInsetAndSizeFromParentEdge(
                 RectTransform.Edge.Top, 0, _firstParent.rect.height + sumHeight);
 
-            _raceButton.SetItem(ChoicesModelsMenuItemController.Instance, raceChoice);
-            _appearanceButton.SetItem(ChoicesModelsMenuItemController.Instance, appearanceChoice);
+            _raceButton.SetItem(ChoiceListPresenter.Instance, raceChoice);
+            _appearanceButton.SetItem(ChoiceListPresenter.Instance, appearanceChoice);
             MenuController.Show(_canvasGroup, true);
 
             leftAnchorObjs[0] = loadPresetChoice;
-            leftAnchorObjs[1] = models[0];
+            leftAnchorObjs[1] = modelList[0];
             var leftAnchor = root.Get(DeviceKw.MenuLeftAnchor);
-            leftAnchor.OpenView(ChoicesModelsMenuItemController.Instance, leftAnchorObjs, root, self, user, arg);
+            leftAnchor.OpenView(ChoiceListPresenter.Instance, leftAnchorObjs, root, self, user, arg);
         }
 
         private static void SetTransform(RectTransform itemTransform, ref float sumHeight, ref bool odd)
@@ -237,17 +237,17 @@ namespace RoguegardUnity
             }
         }
 
-        private class IntrinsicItemController : IModelsMenuItemController
+        private class IntrinsicPresenter : IModelListPresenter
         {
             public CharacterCreationMenuView parent;
 
-            public string GetName(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public string GetItemName(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 if (model == null) return "+ 固有能力を追加";
                 else return ((IntrinsicBuilder)model).Name;
             }
 
-            public void Activate(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public void ActivateItem(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 if (model == null)
                 {
@@ -261,17 +261,17 @@ namespace RoguegardUnity
             }
         }
 
-        private class StartingItemItemController : IModelsMenuItemController
+        private class StartingItemPresenter : IModelListPresenter
         {
             public CharacterCreationMenuView parent;
 
-            public string GetName(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public string GetItemName(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 if (model == null) return "+ 初期アイテムを追加";
                 else return ((StartingItemBuilder)model).Name;
             }
 
-            public void Activate(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public void ActivateItem(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 if (model == null)
                 {

@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-using System.Text;
 using TMPro;
 using Roguegard;
 using Roguegard.Device;
@@ -17,7 +16,7 @@ namespace RoguegardUnity
         public override CanvasGroup CanvasGroup => _canvasGroup;
 
         public override void OpenView<T>(
-            IModelsMenuItemController itemController, Spanning<T> models, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            IModelListPresenter presenter, Spanning<T> modelList, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         {
             if (arg.Other is IRogueDescription description)
             {

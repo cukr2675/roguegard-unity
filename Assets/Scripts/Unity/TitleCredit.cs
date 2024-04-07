@@ -28,11 +28,11 @@ namespace RoguegardUnity
             exitChoice = new ExitChoice() { parent = this };
             urlTalk = new URLTalk();
             _exitButton.Initialize(this);
-            _exitButton.SetItem(ChoicesModelsMenuItemController.Instance, exitChoice);
+            _exitButton.SetItem(ChoiceListPresenter.Instance, exitChoice);
         }
 
         public override void OpenView<T>(
-            IModelsMenuItemController itemController, Spanning<T> models, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            IModelListPresenter presenter, Spanning<T> modelList, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         {
             SetArg(root, self, user, arg);
         }
@@ -95,7 +95,7 @@ namespace RoguegardUnity
 
             public void OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                root.Get(DeviceKw.MenuTalkChoices).OpenView(ChoicesModelsMenuItemController.Instance, models, root, self, user, arg);
+                root.Get(DeviceKw.MenuTalkChoices).OpenView(ChoiceListPresenter.Instance, models, root, self, user, arg);
             }
 
             private class JumpChoice : BaseModelsMenuChoice

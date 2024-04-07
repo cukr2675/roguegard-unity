@@ -17,23 +17,22 @@ namespace RoguegardUnity
         [SerializeField] private Vector2Int _itemButtonCount = Vector2Int.one;
         [SerializeField] private RectTransform _verticalExtensionTarget = null;
 
-        private IModelsMenuItemController itemController;
+        private IModelListPresenter presenter;
 
-        private readonly List<object> models = new List<object>();
+        private readonly List<object> modelList = new List<object>();
 
         private List<ModelsMenuViewItemButton> itemButtons = new List<ModelsMenuViewItemButton>();
 
         public override CanvasGroup CanvasGroup => _canvasGroup;
 
         public override void OpenView<T>(
-            IModelsMenuItemController itemController, Spanning<T> models,
-            IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            IModelListPresenter presenter, Spanning<T> modelList, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         {
-            this.itemController = itemController;
-            this.models.Clear();
-            for (int i = 0; i < models.Count; i++)
+            this.presenter = presenter;
+            this.modelList.Clear();
+            for (int i = 0; i < modelList.Count; i++)
             {
-                this.models.Add(models[i]);
+                this.modelList.Add(modelList[i]);
             }
             SetArg(root, self, user, arg);
             UpdateItems();
@@ -46,13 +45,13 @@ namespace RoguegardUnity
         private void UpdateItems()
         {
             var length = _itemButtonCount.x * _itemButtonCount.y;
-            length = Mathf.Min(length, models.Count);
-            if (_verticalExtensionTarget != null) { length = models.Count; }
+            length = Mathf.Min(length, modelList.Count);
+            if (_verticalExtensionTarget != null) { length = modelList.Count; }
             AdjustItems(length);
             for (int i = 0; i < itemButtons.Count; i++)
             {
                 var itemButton = itemButtons[i];
-                itemButton.SetItem(itemController, models[i]);
+                itemButton.SetItem(presenter, modelList[i]);
             }
         }
 

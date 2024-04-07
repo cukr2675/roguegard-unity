@@ -38,7 +38,7 @@ namespace Roguegard
             return false;
         }
 
-        private class Menu : IModelsMenu, IModelsMenuItemController
+        private class Menu : IModelsMenu, IModelListPresenter
         {
             public void OpenMenu(IModelsMenuRoot root, RogueObj player, RogueObj user, in RogueMethodArgument arg)
             {
@@ -49,7 +49,7 @@ namespace Roguegard
                 ExitModelsMenuChoice.OpenLeftAnchorExit(root);
             }
 
-            public string GetName(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public string GetItemName(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 var obj = (RogueObj)model;
                 if (obj.Location == null)
@@ -62,7 +62,7 @@ namespace Roguegard
                 }
             }
 
-            public void Activate(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public void ActivateItem(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 var lobbyMember = (RogueObj)model;
                 if (lobbyMember.Location == null)

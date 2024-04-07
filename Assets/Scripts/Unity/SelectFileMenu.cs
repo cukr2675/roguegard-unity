@@ -10,7 +10,7 @@ namespace RoguegardUnity
 {
     internal class SelectFileMenu : IModelsMenu
     {
-        private readonly ItemController itemController;
+        private readonly Presenter presenter;
 
         private readonly List<object> objs = new();
         private readonly List<object> leftAnchorObjs = new();
@@ -26,10 +26,10 @@ namespace RoguegardUnity
 
         public SelectFileMenu(Type type, SelectCallback selectCallback, AddCallback addCallback = null)
         {
-            itemController = new ItemController();
-            itemController.type = type;
-            itemController.selectCallback = selectCallback;
-            itemController.addCallback = addCallback;
+            presenter = new Presenter();
+            presenter.type = type;
+            presenter.selectCallback = selectCallback;
+            presenter.addCallback = addCallback;
         }
 
         public void OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
@@ -43,23 +43,23 @@ namespace RoguegardUnity
             StandardRogueDeviceSave.GetFiles(files =>
             {
                 objs.Clear();
-                if (itemController.addCallback != null) { objs.Add(null); }
+                if (presenter.addCallback != null) { objs.Add(null); }
                 objs.AddRange(files);
 
                 var scroll = root.Get(DeviceKw.MenuScroll);
-                scroll.OpenView(itemController, objs, root, self, user, filesArg);
+                scroll.OpenView(presenter, objs, root, self, user, filesArg);
                 scroll.SetPosition(0f);
 
                 var caption = root.Get(DeviceKw.MenuCaption);
                 caption.OpenView(
-                    ChoicesModelsMenuItemController.Instance, Spanning<object>.Empty, root, null, null,
-                    new(other: itemController.type == Type.Read ? ":Load" : ":Save"));
+                    ChoiceListPresenter.Instance, Spanning<object>.Empty, root, null, null,
+                    new(other: presenter.type == Type.Read ? ":Load" : ":Save"));
 
                 leftAnchorObjs.Clear();
-                if (itemController.type == Type.Read) { leftAnchorObjs.Add(importChoice); }
+                if (presenter.type == Type.Read) { leftAnchorObjs.Add(importChoice); }
                 leftAnchorObjs.Add(ExitModelsMenuChoice.Instance);
                 var leftAnchor = root.Get(DeviceKw.MenuLeftAnchor);
-                leftAnchor.OpenView(ChoicesModelsMenuItemController.Instance, leftAnchorObjs, root, self, user, filesArg);
+                leftAnchor.OpenView(ChoiceListPresenter.Instance, leftAnchorObjs, root, self, user, filesArg);
             });
         }
 
@@ -112,7 +112,7 @@ namespace RoguegardUnity
             root.Back();
         }
 
-        private class ItemController : IModelsMenuItemController
+        private class Presenter : IModelListPresenter
         {
             public Type type;
             public SelectCallback selectCallback;
@@ -121,7 +121,7 @@ namespace RoguegardUnity
             private SelectFileCommandMenu nextMenu;
             private DialogModelsMenuChoice overwriteDialog;
 
-            public string GetName(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public string GetItemName(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 if (model == null) return ":+ New File";
                 
@@ -129,7 +129,7 @@ namespace RoguegardUnity
                 return file.Path.Substring(file.Path.LastIndexOf('/') + 1);
             }
 
-            public void Activate(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public void ActivateItem(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 if (model == null)
                 {

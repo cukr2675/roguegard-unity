@@ -16,9 +16,9 @@ namespace RoguegardUnity
         [SerializeField] private ModelsMenuViewItemButton _interruptButton = null;
         [SerializeField] private TMP_Text _text = null;
 
-        private IModelsMenuItemController itemController;
+        private IModelListPresenter presenter;
 
-        private readonly List<object> models = new List<object>();
+        private readonly List<object> modelList = new List<object>();
 
         public override CanvasGroup CanvasGroup => _canvasGroup;
 
@@ -28,20 +28,19 @@ namespace RoguegardUnity
         }
 
         public override void OpenView<T>(
-            IModelsMenuItemController itemController, Spanning<T> models,
-            IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            IModelListPresenter presenter, Spanning<T> modelList, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         {
-            this.itemController = itemController;
-            this.models.Clear();
-            for (int i = 0; i < models.Count; i++)
+            this.presenter = presenter;
+            this.modelList.Clear();
+            for (int i = 0; i < modelList.Count; i++)
             {
-                this.models.Add(models[i]);
+                this.modelList.Add(modelList[i]);
             }
             SetArg(root, self, user, arg);
 
             _progressCircle.fillAmount = 0f;
-            _interruptButton.SetItem(itemController, models[1]);
-            _text.text = itemController.GetName(models[0], Root, Self, User, Arg);
+            _interruptButton.SetItem(presenter, modelList[1]);
+            _text.text = presenter.GetItemName(modelList[0], Root, Self, User, Arg);
             MenuController.Show(_canvasGroup, true);
         }
 
@@ -50,13 +49,13 @@ namespace RoguegardUnity
 
         private void Update()
         {
-            if (models.Count == 0) return;
+            if (modelList.Count == 0) return;
 
-            itemController.Activate(models[0], Root, Self, User, Arg);
+            presenter.ActivateItem(modelList[0], Root, Self, User, Arg);
             if (_progressCircle.fillAmount >= 1f)
             {
                 MenuController.Show(_canvasGroup, false);
-                models.Clear();
+                modelList.Clear();
                 Root.Done();
             }
         }

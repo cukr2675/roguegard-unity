@@ -19,7 +19,7 @@ namespace Roguegard
             return false;
         }
 
-        private class Menu : IModelsMenu, IModelsMenuItemController
+        private class Menu : IModelsMenu, IModelListPresenter
         {
             private readonly List<object> models = new List<object>();
             private static readonly SewingMenu nextMenu = new SewingMenu();
@@ -42,13 +42,13 @@ namespace Roguegard
                 ExitModelsMenuChoice.OpenLeftAnchorExit(root);
             }
 
-            public string GetName(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public string GetItemName(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 if (model == null) return "+ êVÇµÇ≠çÏÇÈ";
                 else return ((RogueObj)model).GetName();
             }
 
-            public void Activate(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public void ActivateItem(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
 
@@ -72,7 +72,7 @@ namespace Roguegard
             }
         }
 
-        private class SewingMenu : IModelsMenu, IModelsMenuItemController
+        private class SewingMenu : IModelsMenu, IModelListPresenter
         {
             private static List<object> models;
             private static object[] leftAnchorModels = new[] { DialogModelsMenuChoice.CreateExit(Save) };
@@ -106,7 +106,7 @@ namespace Roguegard
                 var options = root.Get(DeviceKw.MenuOptions);
                 options.OpenView(this, models, root, self, null, new(other: data, targetObj: equipment));
                 var leftAnchor = root.Get(DeviceKw.MenuLeftAnchor);
-                leftAnchor.OpenView(ChoicesModelsMenuItemController.Instance, leftAnchorModels, root, self, null, new(other: data, targetObj: equipment));
+                leftAnchor.OpenView(ChoiceListPresenter.Instance, leftAnchorModels, root, self, null, new(other: data, targetObj: equipment));
             }
 
             private static void EquipParts(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
@@ -117,14 +117,14 @@ namespace Roguegard
                 root.OpenMenu(equipPartsMenu, self, null, new(other: data));
             }
 
-            public string GetName(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public string GetItemName(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 if (model is IModelsMenuChoice choice) return choice.GetName(root, self, user, arg);
                 else if (model is PaintBoneSprite item) return item.Bone.Name;
                 else return "+ í«â¡";
             }
 
-            public void Activate(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public void ActivateItem(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 if (model is IModelsMenuChoice choice)
                 {
@@ -220,7 +220,7 @@ namespace Roguegard
             }
         }
 
-        private class EquipPartsMenu : IModelsMenu, IModelsMenuItemController
+        private class EquipPartsMenu : IModelsMenu, IModelListPresenter
         {
             private object[] models;
 
@@ -253,13 +253,13 @@ namespace Roguegard
                 scroll.OpenView(this, models, root, self, null, arg);
             }
 
-            public string GetName(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public string GetItemName(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 if (model == null) return "ÇªÇÃëº";
                 return ((IKeyword)model).Name;
             }
 
-            public void Activate(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public void ActivateItem(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
 

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Roguegard.Device
 {
-    public abstract class BaseScrollModelsMenu<T> : IModelsMenu, IModelsMenuItemController
+    public abstract class BaseScrollModelsMenu<T> : IModelsMenu, IModelListPresenter
     {
         protected virtual string MenuName => null;
         protected virtual IKeyword ViewKeyword => DeviceKw.MenuScroll;
@@ -43,7 +43,7 @@ namespace Roguegard.Device
             leftAnchorModels.Add(exitChoice);
             GetLeftAnchorModels(root, self, user, arg, leftAnchorModels);
             var leftAnchor = root.Get(DeviceKw.MenuLeftAnchor);
-            leftAnchor.OpenView(ChoicesModelsMenuItemController.Instance, leftAnchorModels, root, self, user, arg);
+            leftAnchor.OpenView(ChoiceListPresenter.Instance, leftAnchorModels, root, self, user, arg);
         }
 
         protected virtual object GetViewPositionHolder(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
@@ -72,7 +72,7 @@ namespace Roguegard.Device
 
 
 
-        string IModelsMenuItemController.GetName(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+        string IModelListPresenter.GetItemName(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         {
             if (model == null || !(model is T t)) return null;
 
@@ -80,7 +80,7 @@ namespace Roguegard.Device
             return GetItemName(t, root, self, user, arg);
         }
 
-        void IModelsMenuItemController.Activate(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+        void IModelListPresenter.ActivateItem(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         {
             // スクロール位置を記憶する
             var holder = GetViewPositionHolder(root, self, user, arg);

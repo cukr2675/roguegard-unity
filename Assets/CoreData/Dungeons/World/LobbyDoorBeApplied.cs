@@ -42,7 +42,7 @@ namespace Roguegard
             {
                 var dungeonChoices = RoguegardSettings.DungeonChoices;
                 var scroll = root.Get(DeviceKw.MenuScroll);
-                scroll.OpenView(ChoicesModelsMenuItemController.Instance, dungeonChoices, root, self, user, arg);
+                scroll.OpenView(ChoiceListPresenter.Instance, dungeonChoices, root, self, user, arg);
                 ExitModelsMenuChoice.OpenLeftAnchorExit(root);
             }
         }

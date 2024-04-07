@@ -6,7 +6,7 @@ namespace Roguegard.Device
 {
     /// <summary>
     /// メニューの画面単位のインターフェース。
-    /// 一つの画面につき複数の <see cref="IModelsMenuItemController"/> を持つ可能性がある。
+    /// 一つの画面につき複数の <see cref="IModelListPresenter"/> を持つ可能性がある。
     /// </summary>
     public interface IModelsMenu
     {

@@ -114,7 +114,7 @@ namespace RoguegardUnity
 
         void IModelsMenuRoot.Back() => Back();
 
-        IModelsMenuView IModelsMenuRoot.Get(IKeyword keyword) => table[keyword];
+        IModelListView IModelsMenuRoot.Get(IKeyword keyword) => table[keyword];
 
         void IModelsMenuRoot.OpenMenu(IModelsMenu menu, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             => OpenMenu(menu, self, user, arg);

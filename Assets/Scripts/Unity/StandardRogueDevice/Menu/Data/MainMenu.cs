@@ -32,7 +32,7 @@ namespace RoguegardUnity
 
         void IModelsMenu.OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         {
-            root.Get(DeviceKw.MenuThumbnail).OpenView(ChoicesModelsMenuItemController.Instance, choices, root, self, user, arg);
+            root.Get(DeviceKw.MenuThumbnail).OpenView(ChoiceListPresenter.Instance, choices, root, self, user, arg);
             var parent = (StandardMenuRoot)root;
             parent.Stats.SetText(self);
             parent.Stats.SetDungeon(self.Location);
@@ -127,7 +127,7 @@ namespace RoguegardUnity
             {
                 var position = 0f;
                 var openArg = new RogueMethodArgument(vector: new Vector2(position, 0f));
-                root.Get(DeviceKw.MenuLog).OpenView(ChoicesModelsMenuItemController.Instance, choices, root, self, user, openArg);
+                root.Get(DeviceKw.MenuLog).OpenView(ChoiceListPresenter.Instance, choices, root, self, user, openArg);
                 root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
             }
         }
@@ -149,7 +149,7 @@ namespace RoguegardUnity
                 var worldInfo = RogueWorldInfo.GetByCharacter(RogueDevice.Primary.Player);
                 var inLobby = RogueDevice.Primary.Player.Location == worldInfo.Lobby;
                 var openArg = new RogueMethodArgument(count: inLobby ? 1 : 0);
-                root.Get(DeviceKw.MenuThumbnail).OpenView(ChoicesModelsMenuItemController.Instance, choices, root, self, user, openArg);
+                root.Get(DeviceKw.MenuThumbnail).OpenView(ChoiceListPresenter.Instance, choices, root, self, user, openArg);
                 root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
             }
 
@@ -210,7 +210,7 @@ namespace RoguegardUnity
 
                     public void OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
                     {
-                        root.Get(DeviceKw.MenuTalkChoices).OpenView(ChoicesModelsMenuItemController.Instance, models, root, self, user, arg);
+                        root.Get(DeviceKw.MenuTalkChoices).OpenView(ChoiceListPresenter.Instance, models, root, self, user, arg);
                     }
                 }
 
@@ -273,7 +273,7 @@ namespace RoguegardUnity
                     if (!DungeonQuestInfo.TryGetQuest(self, out var quest)) throw new RogueException();
 
                     var summary = (IDungeonQuestMenuView)root.Get(DeviceKw.MenuSummary);
-                    summary.OpenView(ChoicesModelsMenuItemController.Instance, Spanning<object>.Empty, root, self, null, RogueMethodArgument.Identity);
+                    summary.OpenView(ChoiceListPresenter.Instance, Spanning<object>.Empty, root, self, null, RogueMethodArgument.Identity);
                     summary.SetQuest(self, quest, false);
                 }
             }
@@ -307,12 +307,12 @@ namespace RoguegardUnity
 
             protected override string GetItemName(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                return ChoicesModelsMenuItemController.Instance.GetName(model, root, self, user, arg);
+                return ChoiceListPresenter.Instance.GetItemName(model, root, self, user, arg);
             }
 
             protected override void ItemActivate(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                ChoicesModelsMenuItemController.Instance.Activate(model, root, self, user, arg);
+                ChoiceListPresenter.Instance.ActivateItem(model, root, self, user, arg);
             }
         }
 
