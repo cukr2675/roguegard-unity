@@ -3,6 +3,7 @@ const Save2IDBPlugin = {
   $Save2IDB: {
     databaseName: null,
     filesObjectStoreName: null,
+    tempElement: null,
 
     getDb: (mode, options) => {
       return new Promise((resolve, reject) => {
@@ -138,6 +139,8 @@ const Save2IDBPlugin = {
 
     import: () => {
       return new Promise((resolve) => {
+        if (Save2IDB.tempElement != null) { document.body.removeChild(Save2IDB.tempElement); }
+
         const element = document.createElement('input');
         element.type = 'file';
         element.addEventListener('change', () => {
@@ -149,7 +152,10 @@ const Save2IDBPlugin = {
         element.style.display = 'none';
         document.body.appendChild(element);
         element.click();
-        document.body.removeChild(element);
+        Save2IDB.tempElement = element;
+
+        // Invoke removeChild(element) immediately may not work.
+        // document.body.removeChild(element);
       });
     },
 
