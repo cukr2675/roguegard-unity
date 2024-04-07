@@ -102,6 +102,7 @@ namespace RoguegardUnity
         private IEnumerator OpenCoroutine(StandardRogueDeviceData data)
         {
             // StandardRogueDeviceData ‚ð“K—p
+            EventManager.IsOpen = false;
             Player = data.Player;
             Subject = data.Subject;
             World = data.World;
@@ -151,7 +152,8 @@ namespace RoguegardUnity
                 memberInfo.SavePoint = dummySavePoint;
                 var stopwatch = new System.Diagnostics.Stopwatch();
                 stopwatch.Start();
-                var coroutine = TickEnumerator.UpdateTurns(Player, Subject, turns, maxTurns * 1000, false, 1000);
+                var coroutine = TickEnumerator.UpdateTurns(Player, Subject, turns, maxTurns * 1000, false, 250);
+                yield return new WaitForSeconds(1f);
                 while (!synchronizeMenu.Interrupt)
                 {
                     try
@@ -180,6 +182,7 @@ namespace RoguegardUnity
                     Subject = tempSubject;
                     touchController.MenuOpen(tempSubject, true);
                 }
+                EventManager.IsOpen = true;
                 UpdateCharacters();
             }
 

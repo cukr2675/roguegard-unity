@@ -65,7 +65,9 @@ namespace RoguegardUnity
                     // world ではなく location をリセットする
                     ResetTick(location);
                 }
+                iteration++;
                 if (iteration >= maxIteration) break;
+                if (iteration % delayInterval == 0) yield return turns;
 
                 if (!untilSavePoint)
                 {

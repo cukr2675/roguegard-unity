@@ -64,6 +64,8 @@ MonoBehaviour:
     _asset: {fileID: 11400000, guid: aaff18f342a3f4149b1a5d46644d9ef8, type: 2}
   - _key: Core.LayingKit
     _asset: {fileID: 11400000, guid: e3eb826f9c4d5de44a0f733925eb1926, type: 2}
+  - _key: Core.LinkPhial
+    _asset: {fileID: 11400000, guid: 0312ad7686bfa234a8c3b45adec535e1, type: 2}
   - _key: Core.Padleaf
     _asset: {fileID: 11400000, guid: cd01f3ba88a8e774b83eec58d0841b4c, type: 2}
   - _key: Core.Potion

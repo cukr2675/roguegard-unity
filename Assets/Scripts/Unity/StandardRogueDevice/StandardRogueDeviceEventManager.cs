@@ -16,6 +16,8 @@ namespace RoguegardUnity
 
         public bool HasSynchronizedWork { get; private set; }
 
+        public bool IsOpen { get; set; }
+
         public bool Any => messageWorkQueue.Count >= 1;
         public System.Diagnostics.StackTrace PeekStackTrace => messageWorkQueue.PeekStackTrace;
 
@@ -93,6 +95,8 @@ namespace RoguegardUnity
 
         public void Add(IKeyword keyword, int integer = 0, float number = 0f, object obj = null)
         {
+            if (!IsOpen) return;
+
             ////////////////////////////////////////////////////////////////////////
             // メッセージ表示・効果音再生・待機
             ////////////////////////////////////////////////////////////////////////
@@ -176,6 +180,8 @@ namespace RoguegardUnity
 
         public void AddWork(RogueObj player, IKeyword keyword, in RogueCharacterWork work, bool fastForward)
         {
+            if (!IsOpen) return;
+
             if (keyword == DeviceKw.EnqueueWork)
             {
                 if (messageWorkQueue.Count == 0 && work.Continues)
@@ -194,6 +200,8 @@ namespace RoguegardUnity
 
         public void AddMenu(IModelsMenu menu, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         {
+            if (!IsOpen) return;
+
             messageWorkQueue.EnqueueMenu(menu, self, user, arg);
         }
 
