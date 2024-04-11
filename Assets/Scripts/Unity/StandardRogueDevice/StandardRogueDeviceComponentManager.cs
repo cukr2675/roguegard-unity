@@ -186,6 +186,7 @@ namespace RoguegardUnity
                 UpdateCharacters();
             }
 
+            EventManager.IsOpen = true;
             memberInfo.SavePoint = playerSavePoint;
             LoadSavePoint(Player);
 

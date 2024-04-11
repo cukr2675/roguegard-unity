@@ -213,8 +213,6 @@ namespace RoguegardUnity
 
         public void AddMenu(IModelsMenu menu, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         {
-            if (!IsOpen) return;
-
             messageWorkQueue.EnqueueMenu(menu, self, user, arg);
         }
 
