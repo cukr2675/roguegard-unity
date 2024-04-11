@@ -47,6 +47,10 @@ MonoBehaviour:
       \u5165\u308C\u305F\u3082\u306E\u304C\u9023\u7D50\u3055\u308C\u308B</flavor>"
     m_Metadata:
       m_Items: []
+  - m_Id: 63960750608224256
+    m_Localized: "\u90F5\u4FBF\u53D7\u3051"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

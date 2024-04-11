@@ -68,6 +68,8 @@ MonoBehaviour:
     _asset: {fileID: 11400000, guid: 0312ad7686bfa234a8c3b45adec535e1, type: 2}
   - _key: Core.Padleaf
     _asset: {fileID: 11400000, guid: cd01f3ba88a8e774b83eec58d0841b4c, type: 2}
+  - _key: Core.Postbox
+    _asset: {fileID: 11400000, guid: 2cd0d5e3e4f49ab49bbf6c56ae1a7efd, type: 2}
   - _key: Core.Potion
     _asset: {fileID: 11400000, guid: c3b5691c9b4d42c4d9b2e6b0134e372c, type: 2}
   - _key: Core.PreparationKit

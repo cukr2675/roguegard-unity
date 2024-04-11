@@ -56,6 +56,9 @@ namespace Roguegard
         [SerializeField] private KeywordData _gameOver;
         public static IKeyword GameOver => instance._gameOver;
 
+        [SerializeField] private KeywordData _getDateTimeUtc;
+        public static IKeyword GetDateTimeUtc => instance._getDateTimeUtc;
+
         [SerializeField] private KeywordData _horizontalRule;
         public static IKeyword HorizontalRule => instance._horizontalRule;
 

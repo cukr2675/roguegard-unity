@@ -28,6 +28,7 @@ MonoBehaviour:
   _enqueueWork: {fileID: 11400000, guid: bfb353a7fdf84a3488705d298eed310d, type: 2}
   _gameClear: {fileID: 11400000, guid: e9c5db5ebba067649830d4853ad3183d, type: 2}
   _gameOver: {fileID: 11400000, guid: 753554881b423624d9838c9c7c2173f6, type: 2}
+  _getDateTimeUtc: {fileID: 11400000, guid: ef67c2c76f3e55740ba5f2e4daf65e67, type: 2}
   _horizontalRule: {fileID: 11400000, guid: 3e33e79890f3c2f47a80a10d96854290, type: 2}
   _insertHideCharacterWork: {fileID: 11400000, guid: 7a386de4b5ca02349a1030573fa663cc, type: 2}
   _loadGame: {fileID: 11400000, guid: 78c27715bafd7c04787645538e4f1ab2, type: 2}

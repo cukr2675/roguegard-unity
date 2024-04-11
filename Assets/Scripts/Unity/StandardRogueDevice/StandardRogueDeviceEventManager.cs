@@ -95,10 +95,29 @@ namespace RoguegardUnity
 
         public void Add(IKeyword keyword, int integer = 0, float number = 0f, object obj = null)
         {
+            ////////////////////////////////////////////////////////////////////////
+            // ゲーム内日時取得・待機
+            ////////////////////////////////////////////////////////////////////////
+
+            if (keyword == DeviceKw.GetDateTimeUtc)
+            {
+                var callback = (RogueDateTime.Callback)obj;
+                callback(System.DateTime.UtcNow);
+                return;
+            }
+            if (keyword == DeviceKw.WaitForInput)
+            {
+                touchController.WaitsForInput = true;
+                HasSynchronizedWork = true;
+                return;
+            }
+
+
+
             if (!IsOpen) return;
 
             ////////////////////////////////////////////////////////////////////////
-            // メッセージ表示・効果音再生・待機
+            // メッセージ表示・効果音再生
             ////////////////////////////////////////////////////////////////////////
 
             if (keyword == DeviceKw.AppendText)
@@ -128,12 +147,6 @@ namespace RoguegardUnity
                 messageWorkQueue.EnqueueOther(DeviceKw.EnqueueWaitSeconds);
                 if (number == 0f) { messageWorkQueue.EnqueueNumber(integer); }
                 else { messageWorkQueue.EnqueueNumber(number); }
-                HasSynchronizedWork = true;
-                return;
-            }
-            if (keyword == DeviceKw.WaitForInput)
-            {
-                touchController.WaitsForInput = true;
                 HasSynchronizedWork = true;
                 return;
             }

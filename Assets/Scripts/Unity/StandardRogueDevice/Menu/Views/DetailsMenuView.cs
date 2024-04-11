@@ -20,6 +20,11 @@ namespace RoguegardUnity
         public override void OpenView<T>(
             IModelListPresenter presenter, Spanning<T> modelList, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         {
+            if (modelList.Count >= 1 && modelList[0] is IRogueDescription description)
+            {
+                SetDescription(description);
+            }
+
             SetArg(root, self, user, arg);
             MenuController.Show(_canvasGroup, true);
         }
@@ -38,14 +43,19 @@ namespace RoguegardUnity
 
         public void SetObj(RogueObj obj)
         {
-            var details = obj.Main.InfoSet.Details;
+            SetDescription(obj.Main.InfoSet);
+        }
+
+        public void SetDescription(IRogueDescription description)
+        {
+            var details = description.Details;
             if (details != null)
             {
                 _text.text = details.ToString();
                 return;
             }
 
-            var name = obj.Main.InfoSet.Name;
+            var name = description.Name;
             if (name.StartsWith(':'))
             {
                 _text.text = StandardRogueDeviceUtility.Localize($"{name}::d");

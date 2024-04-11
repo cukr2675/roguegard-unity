@@ -123,6 +123,11 @@ namespace RoguegardUnity
                         _weightText.text = file.LastModified.ToString();
                         _weightText.fontSize = 48;
                     }
+                    if (source is RoguePost post)
+                    {
+                        _weightText.text = post.DateTime;
+                        _weightText.fontSize = 48;
+                    }
                     if (source is IModelsMenuIcon icon)
                     {
                         icon.GetIcon(view.Root, view.Self, view.User, view.Arg, out var sprite, out var color);
