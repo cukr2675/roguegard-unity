@@ -11,14 +11,23 @@ namespace Roguegard
 
         public Spanning<RoguePost> Posts => _posts;
 
+        public int MaxPosts { get; set; }
+
         private PostboxInfo()
         {
             _posts = new List<RoguePost>();
+            MaxPosts = 100;
         }
 
         public void AddPost(RoguePost post)
         {
             if (post == null) throw new System.ArgumentNullException(nameof(post));
+
+            if (MaxPosts >= _posts.Count)
+            {
+                // 最大ポスト数を超えるとき、最も古いポストを削除する
+                _posts.RemoveAt(0);
+            }
 
             _posts.Add(post);
         }

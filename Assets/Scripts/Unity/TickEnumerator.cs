@@ -33,7 +33,7 @@ namespace RoguegardUnity
         }
 
         public static IEnumerator<int> UpdateTurns(
-            RogueObj player, RogueObj subject, int maxTurns, int maxIteration, bool untilSavePoint, int delayInterval = 100)
+            RogueObj player, RogueObj subject, int maxTurns, int maxIteration, bool untilSavePoint)
         {
             var world = RogueWorldInfo.GetWorld(player);
             var worldInfo = RogueWorldInfo.GetByCharacter(player);
@@ -58,7 +58,7 @@ namespace RoguegardUnity
                         if (result == Result.Next) break;
 
                         iteration++;
-                        if (iteration % delayInterval == 0) yield return turns;
+                        yield return turns;
                     }
 
                     // プレイヤーが存在する空間の IsTicked を変えるとセーブリセットリロード後の行動順に影響が出るため避ける
@@ -67,7 +67,7 @@ namespace RoguegardUnity
                 }
                 iteration++;
                 if (iteration >= maxIteration) break;
-                if (iteration % delayInterval == 0) yield return turns;
+                yield return turns;
 
                 if (!untilSavePoint)
                 {

@@ -35,8 +35,6 @@ namespace Roguegard
             var post = new RoguePost();
             post.Name = $"{self.Location.Main.InfoSet.Name}Ç÷èoî≠";
             post.From = self;
-            Debug.Log(System.DateTime.UtcNow);
-            Debug.Log(RogueDateTime.UtcNow());
             post.DateTime = RogueDateTime.UtcNow().ToString();
             postboxInfo.AddPost(post);
             lobby = false;

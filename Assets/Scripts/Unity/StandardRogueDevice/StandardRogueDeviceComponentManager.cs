@@ -21,6 +21,7 @@ namespace RoguegardUnity
         private TilemapRenderSystem tilemapRenderSystem;
         private RogueTicker ticker;
         private GameOverDeviceEventHandler gameOverDeviceEventHandler;
+        private DateTimeCallbackEventHandler dateTimeCallbackEventHandler;
         private MenuController menuController;
         private StandardRogueDeviceInspector runtimeInspector;
 
@@ -77,9 +78,11 @@ namespace RoguegardUnity
 
             // イベントハンドラ設定
             gameOverDeviceEventHandler = new GameOverDeviceEventHandler(this);
+            dateTimeCallbackEventHandler = new DateTimeCallbackEventHandler();
             var eventHandlers = new IStandardRogueDeviceEventHandler[]
             {
                 gameOverDeviceEventHandler,
+                dateTimeCallbackEventHandler,
                 new SaveDeviceEventHandler(this, touchController),
                 new ChangePlayerDeviceEventHandler(this, touchController, ticker, x => Player = Subject = x),
                 autoPlayDeviceEventHandler,
@@ -135,8 +138,9 @@ namespace RoguegardUnity
                     touchController.MenuOpen(Player, true);
                 }
 
+                var saveDateTime = System.DateTime.Parse(data.SaveDateTime);
                 var loadDateTime = System.DateTime.UtcNow;
-                var relationalDateTime = loadDateTime - System.DateTime.Parse(data.SaveDateTime);
+                var relationalDateTime = loadDateTime - saveDateTime;
                 var seconds = (int)relationalDateTime.TotalSeconds;
                 var secondsPerTurn = 10;
 
@@ -152,10 +156,12 @@ namespace RoguegardUnity
                 memberInfo.SavePoint = dummySavePoint;
                 var stopwatch = new System.Diagnostics.Stopwatch();
                 stopwatch.Start();
-                var coroutine = TickEnumerator.UpdateTurns(Player, Subject, turns, maxTurns * 1000, false, 250);
+                var coroutine = TickEnumerator.UpdateTurns(Player, Subject, turns, maxTurns * 1000, false);
+                var delayInterval = 250;
                 yield return new WaitForSeconds(1f);
                 while (!synchronizeMenu.Interrupt)
                 {
+                    dateTimeCallbackEventHandler.SetInGameTime(saveDateTime + new System.TimeSpan(0, 0, coroutine.Current * secondsPerTurn));
                     try
                     {
                         var result = coroutine.MoveNext();
@@ -168,13 +174,17 @@ namespace RoguegardUnity
                         Debug.LogError(e.StackTrace);
                         break;
                     }
-                    synchronizeMenu.Progress = (float)coroutine.Current / turns;
-                    yield return null;
+                    if (coroutine.Current % delayInterval == 0)
+                    {
+                        synchronizeMenu.Progress = (float)coroutine.Current / turns;
+                        yield return null;
+                    }
                 }
                 stopwatch.Stop();
                 Debug.Log($"Synchronization time: {stopwatch.ElapsedMilliseconds}ms");
                 synchronizeMenu.Progress = 1f;
                 memberInfo.SavePoint = null;
+                dateTimeCallbackEventHandler.UseRealTime();
 
                 // ターン経過後に視点を被写体へ戻す
                 if (tempSubject != Player)
