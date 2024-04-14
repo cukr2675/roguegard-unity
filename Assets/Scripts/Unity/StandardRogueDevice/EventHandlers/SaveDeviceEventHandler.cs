@@ -118,7 +118,15 @@ namespace RoguegardUnity
             var player = componentManager.Player;
             var subject = componentManager.Subject;
             var maxTurns = 1000;
-            yield return TickEnumerator.UpdateTurns(player, subject, maxTurns, maxTurns * 100, true);
+            var coroutine = TickEnumerator.UpdateTurns(player, subject, maxTurns, maxTurns * 100, true);
+            var delayInterval = 250;
+            while (coroutine.MoveNext())
+            {
+                if (coroutine.Current % delayInterval == 0)
+                {
+                    yield return null;
+                }
+            }
             RemoveNoLobbyMemberLocations(player);
             RemoveViewInfoHeldByLobbyMembers(player, subject);
             ClearViewInfoAfterLocate(player);
