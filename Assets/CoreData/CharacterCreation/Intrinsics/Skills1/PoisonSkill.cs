@@ -28,12 +28,11 @@ namespace Roguegard.CharacterCreation
             protected override bool Activate(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
             {
                 if (RaycastAssert.RequireTarget(FrontRogueMethodRange.Instance, self, arg, out var target)) return false;
-                if (MainCharacterWorkUtility.TryAddAttack(self))
+                if (MessageWorkListener.TryOpenHandler(self.Location, self.Position, out var h))
                 {
-                    RogueDevice.Add(DeviceKw.AppendText, self);
-                    RogueDevice.Add(DeviceKw.AppendText, "は");
-                    RogueDevice.Add(DeviceKw.AppendText, this);
-                    RogueDevice.Add(DeviceKw.AppendText, "を放った！\n");
+                    using var handler = h;
+                    MainCharacterWorkUtility.TryAddAttack(self);
+                    handler.AppendText(self).AppendText("は").AppendText(this).AppendText("を放った！\n");
                 }
 
                 // 毒付与

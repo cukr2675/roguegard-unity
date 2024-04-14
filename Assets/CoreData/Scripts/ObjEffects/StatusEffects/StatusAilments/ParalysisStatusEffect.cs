@@ -25,14 +25,12 @@ namespace Roguegard
         protected override IRogueEffect AffectTo(RogueObj target, RogueObj user, float activationDepth, in RogueMethodArgument arg)
         {
             var statusEffect = base.AffectTo(target, user, activationDepth, arg);
-            if (MainCharacterWorkUtility.VisibleAt(target.Location, target.Position))
+            if (MessageWorkListener.TryOpenHandler(target.Location, target.Position, out var h))
             {
-                RogueDevice.Add(DeviceKw.EnqueueSE, StdKw.Paralysis);
-                RogueDevice.Add(DeviceKw.AppendText, target);
-                RogueDevice.Add(DeviceKw.AppendText, "は");
-                RogueDevice.Add(DeviceKw.AppendText, this);
-                RogueDevice.Add(DeviceKw.AppendText, "した！\n");
-                RogueDevice.AddWork(DeviceKw.EnqueueWork, RogueCharacterWork.CreateEffect(target.Position, CoreMotions.Paralysis, false));
+                using var handler = h;
+                handler.EnqueueSE(StdKw.Paralysis);
+                handler.AppendText(target).AppendText("は").AppendText(this).AppendText("した！\n");
+                handler.EnqueueWork(RogueCharacterWork.CreateEffect(target.Position, CoreMotions.Paralysis, false));
             }
             return statusEffect;
         }
@@ -46,12 +44,10 @@ namespace Roguegard
         protected override void RemoveClose(RogueObj self, StatusEffectCloseType closeType = StatusEffectCloseType.Manual)
         {
             SpeedCalculator.SetDirty(self);
-            if (MainCharacterWorkUtility.VisibleAt(self.Location, self.Position))
+            if (MessageWorkListener.TryOpenHandler(self.Location, self.Position, out var h))
             {
-                RogueDevice.Add(DeviceKw.AppendText, self);
-                RogueDevice.Add(DeviceKw.AppendText, "の");
-                RogueDevice.Add(DeviceKw.AppendText, this);
-                RogueDevice.Add(DeviceKw.AppendText, "がおさまった\n");
+                using var handler = h;
+                handler.AppendText(self).AppendText("の").AppendText(this).AppendText("がおさまった\n");
             }
             base.RemoveClose(self);
         }

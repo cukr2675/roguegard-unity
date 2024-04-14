@@ -23,12 +23,10 @@ namespace Roguegard
             var oldNutrition = userStats.Nutrition;
             userStats.SetNutrition(user, userStats.Nutrition + _nutrition);
             var deltaNutrition = userStats.Nutrition - oldNutrition;
-            if (MainCharacterWorkUtility.VisibleAt(user.Location, user.Position))
+            if (MessageWorkListener.TryOpenHandler(user.Location, user.Position, out var h))
             {
-                RogueDevice.Add(DeviceKw.AppendText, user);
-                RogueDevice.Add(DeviceKw.AppendText, "の満腹度が");
-                RogueDevice.Add(DeviceKw.AppendText, deltaNutrition);
-                RogueDevice.Add(DeviceKw.AppendText, "回復した！\n");
+                using var handler = h;
+                handler.AppendText(user).AppendText("の満腹度が").AppendText(deltaNutrition).AppendText("回復した！\n");
             }
         }
     }

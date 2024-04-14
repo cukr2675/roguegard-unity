@@ -17,10 +17,10 @@ namespace Roguegard
                 var userMovement = MovementCalculator.Get(user);
                 if (!userMovement.SubIs(StdKw.PoolMovement))
                 {
-                    if (MainCharacterWorkUtility.VisibleAt(user.Location, user.Position))
+                    if (MessageWorkListener.TryOpenHandler(user.Location, user.Position, out var h))
                     {
-                        RogueDevice.Add(DeviceKw.AppendText, user);
-                        RogueDevice.Add(DeviceKw.AppendText, "は川に流された！");
+                        using var handler = h;
+                        handler.AppendText(user).AppendText("は川に流された！\n");
                     }
 
                     // 水上を移動できないキャラのとき、最大 HP の半分のダメージを与える

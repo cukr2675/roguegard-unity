@@ -17,11 +17,11 @@ namespace Roguegard
 
             if (SpaceUtility.TryLocate(self, targetPosition))
             {
-                if (MainCharacterWorkUtility.VisibleAt(self.Location, self.Position))
+                if (MessageWorkListener.TryOpenHandler(self.Location, self.Position, out var h))
                 {
-                    RogueDevice.AddWork(DeviceKw.EnqueueWork, syncWork);
-                    var work = RogueCharacterWork.CreateWalk(self, self.Position, self.Main.Stats.Direction, KeywordSpriteMotion.Walk, true);
-                    RogueDevice.AddWork(DeviceKw.EnqueueWork, work);
+                    using var handler = h;
+                    handler.EnqueueWork(syncWork);
+                    handler.EnqueueWork(RogueCharacterWork.CreateWalk(self, self.Position, self.Main.Stats.Direction, KeywordSpriteMotion.Walk, true));
                 }
                 return true;
             }

@@ -32,15 +32,13 @@ namespace Roguegard.CharacterCreation
             {
                 using var predicator = ForEnemyRogueMethodTarget.Instance.GetPredicator(self, 0f, null);
                 RaycastAssert.RequireTarget(predicator, FacingAnd2FlankingRogueMethodRange.Instance, self, arg, out var position);
-                if (MainCharacterWorkUtility.VisibleAt(self.Location, self.Position))
+                if (MessageWorkListener.TryOpenHandler(self.Location, self.Position, out var h))
                 {
+                    using var handler = h;
                     effect ??= new VariantSpriteMotion(CoreMotions.PowerSlash, Color.yellow);
 
-                    RogueDevice.Add(DeviceKw.AppendText, ":ActivateSkillMsg::2");
-                    RogueDevice.Add(DeviceKw.AppendText, self);
-                    RogueDevice.Add(DeviceKw.AppendText, this);
-                    RogueDevice.Add(DeviceKw.AppendText, "\n");
-                    RogueDevice.Add(DeviceKw.EnqueueSE, MainInfoKw.Skill);
+                    handler.AppendText(":ActivateSkillMsg::2").AppendText(self).AppendText(this).AppendText("\n");
+                    handler.EnqueueSE(MainInfoKw.Skill);
                     var item = RogueCharacterWork.CreateSpriteMotion(self, CoreMotions.Discus, false);
                     RogueDevice.AddWork(DeviceKw.EnqueueWork, item);
                     RogueDevice.Add(DeviceKw.EnqueueSE, StdKw.PowerSlash);

@@ -55,16 +55,13 @@ namespace Roguegard.CharacterCreation
                 protected override void NewAffectTo(
                     RogueObj target, RogueObj user, float activationDepth, in RogueMethodArgument arg, StackableStatusEffect statusEffect)
                 {
-                    if (MainCharacterWorkUtility.VisibleAt(target.Location, target.Position))
+                    if (MessageWorkListener.TryOpenHandler(target.Location, target.Position, out var h))
                     {
                         effect ??= new VariantSpriteMotion(CoreMotions.Buff, StatsKw.ATK.Color);
-                        RogueDevice.Add(DeviceKw.AppendText, ":StatusUpMsg::4");
-                        RogueDevice.Add(DeviceKw.AppendText, target);
-                        RogueDevice.Add(DeviceKw.AppendText, MainInfoKw.Skill);
-                        RogueDevice.Add(DeviceKw.AppendText, StatsKw.ATK);
-                        RogueDevice.Add(DeviceKw.AppendText, 2);
-                        RogueDevice.Add(DeviceKw.AppendText, "\n");
-                        RogueDevice.AddWork(DeviceKw.EnqueueWork, RogueCharacterWork.CreateEffect(target.Position, effect, false));
+                        using var handler = h;
+                        handler.AppendText(":StatusUpMsg::4").AppendText(target).AppendText(MainInfoKw.Skill).AppendText(StatsKw.ATK).AppendText(2);
+                        handler.AppendText("\n");
+                        handler.EnqueueWork(RogueCharacterWork.CreateEffect(target.Position, effect, false));
                     }
                 }
 

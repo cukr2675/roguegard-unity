@@ -27,11 +27,11 @@ namespace Roguegard
         protected override void NewAffectTo(
             RogueObj target, RogueObj user, float activationDepth, in RogueMethodArgument arg, StackableStatusEffect statusEffect)
         {
-            if (MainCharacterWorkUtility.VisibleAt(target.Location, target.Position))
+            if (MessageWorkListener.TryOpenHandler(target.Location, target.Position, out var h))
             {
-                RogueDevice.Add(DeviceKw.EnqueueSE, StdKw.Confusion);
-                RogueDevice.Add(DeviceKw.AppendText, target);
-                RogueDevice.Add(DeviceKw.AppendText, "は混乱してしまった！\n");
+                using var handler = h;
+                handler.EnqueueSE(StdKw.Confusion);
+                handler.AppendText(target).AppendText("は混乱してしまった！\n");
             }
         }
 

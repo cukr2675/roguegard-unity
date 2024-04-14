@@ -27,12 +27,10 @@ namespace Roguegard.CharacterCreation
 
             protected override bool Activate(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
             {
-                if (MainCharacterWorkUtility.VisibleAt(self.Location, self.Position))
+                if (MessageWorkListener.TryOpenHandler(self.Location, self.Position, out var h))
                 {
-                    RogueDevice.Add(DeviceKw.AppendText, ":ActivateSkillMsg::2");
-                    RogueDevice.Add(DeviceKw.AppendText, self);
-                    RogueDevice.Add(DeviceKw.AppendText, this);
-                    RogueDevice.Add(DeviceKw.AppendText, "\n");
+                    using var handler = h;
+                    handler.AppendText(":ActivateSkillMsg::2").AppendText(self).AppendText(this).AppendText("\n");
                     MainCharacterWorkUtility.TryAddSkill(self);
                 }
 
@@ -84,18 +82,14 @@ namespace Roguegard.CharacterCreation
 
                     var targetPosition = self.Position + self.Main.Stats.Direction.Forward * 2;
                     var targetObj = self.Location.Space.GetColliderObj(targetPosition);
-                    var visible = MainCharacterWorkUtility.VisibleAt(self.Location, self.Position);
+                    var visible = MessageWorkListener.TryOpenHandler(self.Location, self.Position, out var handler);
                     if (visible)
                     {
-                        RogueDevice.Add(DeviceKw.AppendText, ":ShieldJumpMsg::1");
-                        RogueDevice.Add(DeviceKw.AppendText, self);
-                        RogueDevice.Add(DeviceKw.AppendText, "\n");
+                        handler.AppendText(":ShieldJumpMsg::1").AppendText(self).AppendText("\n");
 
                         var direction = RogueDirection.FromSignOrLowerLeft(targetPosition - self.Position);
-                        var syncItem = RogueCharacterWork.CreateSyncPositioning(self);
-                        var item = RogueCharacterWork.CreateWalk(self, targetPosition, direction, KeywordSpriteMotion.Walk, false);
-                        RogueDevice.AddWork(DeviceKw.EnqueueWork, syncItem);
-                        RogueDevice.AddWork(DeviceKw.EnqueueWork, item);
+                        handler.EnqueueWork(RogueCharacterWork.CreateSyncPositioning(self));
+                        handler.EnqueueWork(RogueCharacterWork.CreateWalk(self, targetPosition, direction, KeywordSpriteMotion.Walk, false));
                     }
 
                     var jumpBack = false;
@@ -117,9 +111,9 @@ namespace Roguegard.CharacterCreation
                     if (jumpBack && visible)
                     {
                         var direction = RogueDirection.FromSignOrLowerLeft(self.Position - targetPosition);
-                        var item = RogueCharacterWork.CreateWalk(self, self.Position, direction, KeywordSpriteMotion.Walk, false);
-                        RogueDevice.AddWork(DeviceKw.EnqueueWork, item);
+                        handler.EnqueueWork(RogueCharacterWork.CreateWalk(self, self.Position, direction, KeywordSpriteMotion.Walk, false));
                     }
+                    handler?.Dispose();
                 }
                 return result;
             }

@@ -36,12 +36,10 @@ namespace Roguegard.CharacterCreation
                 var point2 = SpaceUtility.Raycast(
                     self.Location, self.Position, self.Main.Stats.Direction.Rotate(+1), 1, false, false, true, out _, out var pointHit2, out _);
                 if (point0 && point1 && point2) return false;
-                if (MainCharacterWorkUtility.VisibleAt(self.Location, self.Position))
+                if (MessageWorkListener.TryOpenHandler(self.Location, self.Position, out var h))
                 {
-                    RogueDevice.Add(DeviceKw.AppendText, ":LayTrapMsg::2");
-                    RogueDevice.Add(DeviceKw.AppendText, self);
-                    RogueDevice.Add(DeviceKw.AppendText, this);
-                    RogueDevice.Add(DeviceKw.AppendText, "\n");
+                    using var handler = h;
+                    handler.AppendText(":LayTrapMsg::2").AppendText(self).AppendText(this).AppendText("\n");
                     MainCharacterWorkUtility.TryAddSkill(self);
                     MainCharacterWorkUtility.EnqueueViewDequeueState(RogueDevice.Primary.Player);
                 }

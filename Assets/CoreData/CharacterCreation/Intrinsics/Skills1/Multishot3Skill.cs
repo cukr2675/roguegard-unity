@@ -28,12 +28,10 @@ namespace Roguegard.CharacterCreation
             protected override bool Activate(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
             {
                 if (CommonAssert.RequireMatchedAmmo(self, arg, AmmoCategories, out var ammo, out _)) return false;
-                if (MainCharacterWorkUtility.VisibleAt(self.Location, self.Position))
+                if (MessageWorkListener.TryOpenHandler(self.Location, self.Position, out var h))
                 {
-                    RogueDevice.Add(DeviceKw.AppendText, ":ActivateSkillMsg::2");
-                    RogueDevice.Add(DeviceKw.AppendText, self);
-                    RogueDevice.Add(DeviceKw.AppendText, this);
-                    RogueDevice.Add(DeviceKw.AppendText, "\n");
+                    using var handler = h;
+                    handler.AppendText(":ActivateSkillMsg::2").AppendText(self).AppendText(this).AppendText("\n");
                 }
 
                 self.Main.Stats.Direction = RogueMethodUtility.GetTargetDirection(self, arg);

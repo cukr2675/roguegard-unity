@@ -29,13 +29,13 @@ namespace Roguegard
             var lootLocation = self.Location;
             var lootPosition = self.Position;
 
-            if (MainCharacterWorkUtility.VisibleAt(self.Location, self.Position))
+            if (MessageWorkListener.TryOpenHandler(self.Location, self.Position, out var h))
             {
-                RogueDevice.Add(DeviceKw.AppendText, self);
-                RogueDevice.Add(DeviceKw.AppendText, "は爆発した！\n");
-                RogueDevice.Add(DeviceKw.EnqueueSE, StdKw.Bomb);
                 bombMotion ??= new VariantSpriteMotion(CoreMotions.Bomb, new Color32(215, 255, 64, 255));
-                RogueDevice.AddWork(DeviceKw.EnqueueWork, RogueCharacterWork.CreateEffect(self.Position, bombMotion, false));
+                using var handler = h;
+                handler.AppendText(self).AppendText("は爆発した！\n");
+                handler.EnqueueSE(StdKw.Bomb);
+                handler.EnqueueWork(RogueCharacterWork.CreateEffect(self.Position, bombMotion, false));
             }
 
             // 消す前に当たり判定

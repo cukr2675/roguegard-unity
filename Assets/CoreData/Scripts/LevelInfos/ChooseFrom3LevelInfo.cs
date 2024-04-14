@@ -50,10 +50,10 @@ namespace Roguegard
 
         public override void LevelUp(RogueObj self)
         {
-            if (MainCharacterWorkUtility.VisibleAt(self.Location, self.Position))
+            if (MessageWorkListener.TryOpenHandler(self.Location, self.Position, out var h))
             {
-                RogueDevice.Add(DeviceKw.AppendText, self);
-                RogueDevice.Add(DeviceKw.AppendText, "はレベルが上がった！\n");
+                using var handler = h;
+                handler.AppendText(self).AppendText("はレベルが上がった！\n");
             }
 
             var selfIsPlayerPartyMember = RogueDevice.Primary.Player.Main.Stats.Party.Members.Contains(self);
@@ -120,11 +120,11 @@ namespace Roguegard
 
         public override void LevelDown(RogueObj self)
         {
-            if (MainCharacterWorkUtility.VisibleAt(self.Location, self.Position))
+            if (MessageWorkListener.TryOpenHandler(self.Location, self.Position, out var h))
             {
-                RogueDevice.Add(DeviceKw.EnqueueSE, StdKw.LevelDown);
-                RogueDevice.Add(DeviceKw.AppendText, self);
-                RogueDevice.Add(DeviceKw.AppendText, "はレベルが下がった！\n");
+                using var handler = h;
+                handler.EnqueueSE(StdKw.LevelDown);
+                handler.AppendText(self).AppendText("はレベルが下がった！\n");
             }
 
             // 上がった能力をランダムで選んで下げる。

@@ -24,7 +24,7 @@ namespace Roguegard
                 damage = Mathf.Max(damage, 0);
 
                 var stats = self.Main.Stats;
-                var visible = MainCharacterWorkUtility.VisibleAt(self.Location, self.Position);
+                var visible = MessageWorkListener.TryOpenHandler(self.Location, self.Position, out var handler);
                 if (heal)
                 {
                     stats.SetHP(self, stats.HP + damage);
@@ -32,16 +32,12 @@ namespace Roguegard
                     {
                         if (damage == 0)
                         {
-                            RogueDevice.Add(DeviceKw.AppendText, self);
-                            RogueDevice.Add(DeviceKw.AppendText, "に効果はない！\n");
-                            RogueDevice.Add(DeviceKw.EnqueueSE, StdKw.NoDamage);
+                            handler.AppendText(self).AppendText("に効果はない！\n");
+                            handler.EnqueueSE(StdKw.NoDamage);
                         }
                         else
                         {
-                            RogueDevice.Add(DeviceKw.AppendText, self);
-                            RogueDevice.Add(DeviceKw.AppendText, "は");
-                            RogueDevice.Add(DeviceKw.AppendText, damage);
-                            RogueDevice.Add(DeviceKw.AppendText, "回復した！\n");
+                            handler.AppendText(self).AppendText("は").AppendText(damage).AppendText("回復した！\n");
                         }
                     }
                 }
@@ -52,50 +48,39 @@ namespace Roguegard
                     {
                         if (damage == 0)
                         {
-                            RogueDevice.Add(DeviceKw.AppendText, self);
-                            RogueDevice.Add(DeviceKw.AppendText, "にダメージはない！\n");
-                            RogueDevice.Add(DeviceKw.EnqueueSE, StdKw.NoDamage);
+                            handler.AppendText(self).AppendText("にダメージはない！\n");
+                            handler.EnqueueSE(StdKw.NoDamage);
                         }
                         else
                         {
-                            RogueDevice.Add(DeviceKw.AppendText, self);
-                            RogueDevice.Add(DeviceKw.AppendText, "に");
-                            RogueDevice.Add(DeviceKw.AppendText, damage);
-                            RogueDevice.Add(DeviceKw.AppendText, "のダメージ！\n");
-                            RogueDevice.Add(DeviceKw.EnqueueSE, MainInfoKw.Hit);
+                            handler.AppendText(self).AppendText("に").AppendText(damage).AppendText("のダメージ！\n");
+                            handler.EnqueueSE(MainInfoKw.Hit);
                         }
                     }
                 }
                 if (visible)
                 {
-                    var positioning = RogueCharacterWork.CreateSyncPositioning(self);
-                    RogueDevice.AddWork(DeviceKw.EnqueueWork, positioning);
-                    {
-                        var item = RogueCharacterWork.CreatePopupNumber(self, RogueCharacterWork.PopSignType.None, damage, critical, true);
-                        RogueDevice.AddWork(DeviceKw.EnqueueWork, item);
-                    }
+                    handler.EnqueueWork(RogueCharacterWork.CreateSyncPositioning(self));
+                    handler.EnqueueWork(RogueCharacterWork.CreatePopupNumber(self, RogueCharacterWork.PopSignType.None, damage, critical, true));
                     if (heal)
                     {
-                        RogueDevice.Add(DeviceKw.EnqueueSE, StdKw.Heal);
-                        var item = RogueCharacterWork.CreateEffect(self.Position, CoreMotions.Heal, false);
-                        RogueDevice.AddWork(DeviceKw.EnqueueWork, item);
+                        handler.EnqueueSE(StdKw.Heal);
+                        handler.EnqueueWork(RogueCharacterWork.CreateEffect(self.Position, CoreMotions.Heal, false));
                     }
                     else if (guard)
                     {
-                        RogueDevice.Add(DeviceKw.EnqueueSE, StatsKw.Guard);
-                        var item = RogueCharacterWork.CreateSpriteMotion(self, KeywordSpriteMotion.Guard, false);
-                        RogueDevice.AddWork(DeviceKw.EnqueueWork, item);
+                        handler.EnqueueSE(StatsKw.Guard);
+                        handler.EnqueueWork(RogueCharacterWork.CreateSpriteMotion(self, KeywordSpriteMotion.Guard, false));
                     }
                     else if (damage == 0)
                     {
-                        var item = RogueCharacterWork.CreateSpriteMotion(self, KeywordSpriteMotion.NoDamage, false);
-                        RogueDevice.AddWork(DeviceKw.EnqueueWork, item);
+                        handler.EnqueueWork(RogueCharacterWork.CreateSpriteMotion(self, KeywordSpriteMotion.NoDamage, false));
                     }
                     else
                     {
-                        var item = RogueCharacterWork.CreateSpriteMotion(self, KeywordSpriteMotion.Hit, false);
-                        RogueDevice.AddWork(DeviceKw.EnqueueWork, item);
+                        handler.EnqueueWork(RogueCharacterWork.CreateSpriteMotion(self, KeywordSpriteMotion.Hit, false));
                     }
+                    handler.Dispose();
                 }
 
                 if (stats.HP <= 0)

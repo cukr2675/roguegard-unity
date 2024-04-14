@@ -25,9 +25,10 @@ namespace Roguegard
         protected void EnqueueMessageRule(RogueObj self, IKeyword keyword)
         {
             if (!RoguegardSettings.KeywordsNotEnqueueMessageRule.Contains(keyword) &&
-                MainCharacterWorkUtility.VisibleAt(self.Location, self.Position))
+                MessageWorkListener.TryOpenHandler(self.Location, self.Position, out var h))
             {
-                RogueDevice.Add(DeviceKw.AppendText, DeviceKw.HorizontalRule);
+                using var handler = h;
+                handler.AppendText(DeviceKw.HorizontalRule);
             }
         }
 

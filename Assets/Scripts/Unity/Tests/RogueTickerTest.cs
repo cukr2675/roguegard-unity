@@ -54,6 +54,7 @@ namespace RoguegardUnity
             {
                 var random = new RogueRandom();
                 RogueRandom.Primary = random;
+                MessageWorkListener.ClearListeners();
 
                 // キャラクターを生成
                 var world = data.CreateObj(null, Vector2Int.zero, random);

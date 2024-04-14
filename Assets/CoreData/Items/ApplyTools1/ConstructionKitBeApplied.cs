@@ -62,7 +62,7 @@ namespace Roguegard
                 // 10 ターン経過したらタイルを敷く
                 BaseStatusEffect.Close<ContinuousApplyStatusEffect>(user);
 
-                var visible = MainCharacterWorkUtility.VisibleAt(user.Location, user.Position);
+                var visible = MessageWorkListener.TryOpenHandler(user.Location, user.Position, out var handler);
                 if (topObj?.Main.InfoSet == sourceInfoSet)
                 {
                     // すでに同じタイルが敷かれていたら、逆にタイルを消す
@@ -70,20 +70,14 @@ namespace Roguegard
                     {
                         if (visible)
                         {
-                            RogueDevice.Add(DeviceKw.AppendText, user);
-                            RogueDevice.Add(DeviceKw.AppendText, "は");
-                            RogueDevice.Add(DeviceKw.AppendText, topObj);
-                            RogueDevice.Add(DeviceKw.AppendText, "を取り壊した\n");
+                            handler.AppendText(user).AppendText("は").AppendText(topObj).AppendText("を取り壊した\n");
                         }
                     }
                     else
                     {
                         if (visible)
                         {
-                            RogueDevice.Add(DeviceKw.AppendText, user);
-                            RogueDevice.Add(DeviceKw.AppendText, "は");
-                            RogueDevice.Add(DeviceKw.AppendText, topObj);
-                            RogueDevice.Add(DeviceKw.AppendText, "を取り壊せなかった\n");
+                            handler.AppendText(user).AppendText("は").AppendText(topObj).AppendText("を取り壊せなかった\n");
                         }
                     }
                 }
@@ -94,23 +88,18 @@ namespace Roguegard
                     {
                         if (visible)
                         {
-                            RogueDevice.Add(DeviceKw.AppendText, user);
-                            RogueDevice.Add(DeviceKw.AppendText, "は");
-                            RogueDevice.Add(DeviceKw.AppendText, newObj);
-                            RogueDevice.Add(DeviceKw.AppendText, "を組み立てた\n");
+                            handler.AppendText(user).AppendText("は").AppendText(newObj).AppendText("を組み立てた\n");
                         }
                     }
                     else
                     {
                         if (visible)
                         {
-                            RogueDevice.Add(DeviceKw.AppendText, user);
-                            RogueDevice.Add(DeviceKw.AppendText, "は");
-                            RogueDevice.Add(DeviceKw.AppendText, newObj);
-                            RogueDevice.Add(DeviceKw.AppendText, "を組み立てられなかった\n");
+                            handler.AppendText(user).AppendText("は").AppendText(newObj).AppendText("を組み立てられなかった\n");
                         }
                     }
                 }
+                handler?.Dispose();
                 return true;
             }
         }

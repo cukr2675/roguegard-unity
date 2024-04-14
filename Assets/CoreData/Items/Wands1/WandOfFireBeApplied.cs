@@ -15,10 +15,10 @@ namespace Roguegard
 
         protected override bool BeApplied(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
         {
-            if (MainCharacterWorkUtility.VisibleAt(user.Location, user.Position))
+            if (MessageWorkListener.TryOpenHandler(user.Location, user.Position, out var h))
             {
-                var positioning = RogueCharacterWork.CreateSyncPositioning(user);
-                RogueDevice.AddWork(DeviceKw.EnqueueWork, positioning);
+                using var handler = h;
+                handler.EnqueueWork(RogueCharacterWork.CreateSyncPositioning(user));
             }
             var direction = user.Main.Stats.Direction;
             ((IProjectileRogueMethodRange)LineOfSight10RogueMethodRange.Instance).Raycast(

@@ -25,10 +25,10 @@ namespace Roguegard
                     {
                         // ダメージの判定が出ていれば、爆弾コウラになる。
                         PolymorphStatusEffect.AffectTo(self, _bomberShell.PrimaryInfoSet, 3);
-                        if (MainCharacterWorkUtility.VisibleAt(self.Location, self.Position))
+                        if (MessageWorkListener.TryOpenHandler(self.Location, self.Position, out var h))
                         {
-                            RogueDevice.Add(DeviceKw.AppendText, self);
-                            RogueDevice.Add(DeviceKw.AppendText, "は甲羅にこもった！\n");
+                            using var handler = h;
+                            handler.AppendText(self).AppendText("は甲羅にこもった！\n");
                         }
                         return true;
                     }

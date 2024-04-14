@@ -108,11 +108,11 @@ namespace Roguegard
 
         public override void LevelDown(RogueObj self)
         {
-            if (MainCharacterWorkUtility.VisibleAt(self.Location, self.Position))
+            if (MessageWorkListener.TryOpenHandler(self.Location, self.Position, out var h))
             {
-                RogueDevice.Add(DeviceKw.EnqueueSE, StdKw.LevelDown);
-                RogueDevice.Add(DeviceKw.AppendText, self);
-                RogueDevice.Add(DeviceKw.AppendText, "はレベルが下がった！\t\n");
+                using var handler = h;
+                handler.EnqueueSE(StdKw.LevelDown);
+                handler.AppendText(self).AppendText("はレベルが下がった！\n");
             }
 
             if (self.Main.Stats.Lv < initialLv)

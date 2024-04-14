@@ -50,9 +50,10 @@ namespace Roguegard
             if (predicator.Positions.Count == 0) return false;
 
             if (enqueueMessageRule && !RoguegardSettings.KeywordsNotEnqueueMessageRule.Contains(keyword) &&
-                MainCharacterWorkUtility.VisibleAt(self.Location, self.Position))
+                MessageWorkListener.TryOpenHandler(self.Location, self.Position, out var h))
             {
-                RogueDevice.Add(DeviceKw.AppendText, DeviceKw.HorizontalRule);
+                using var handler = h;
+                handler.AppendText(DeviceKw.HorizontalRule);
             }
 
             var positionIndex = random.Next(0, predicator.Positions.Count);

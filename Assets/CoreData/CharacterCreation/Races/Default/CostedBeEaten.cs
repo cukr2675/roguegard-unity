@@ -21,9 +21,10 @@ namespace Roguegard
             var nutrition = self.Main.InfoSet.Cost > 0f ? 50 : 0;
             if (nutrition <= 0)
             {
-                if (MainCharacterWorkUtility.VisibleAt(user.Location, user.Position))
+                if (MessageWorkListener.TryOpenHandler(user.Location, user.Position, out var h1))
                 {
-                    RogueDevice.Add(DeviceKw.AppendText, "何も起こらなかった\n");
+                    using var handler = h1;
+                    handler.AppendText("何も起こらなかった\n");
                 }
 
                 self.TrySetStack(self.Stack - 1, user); // オブジェクトを消費する。
@@ -34,12 +35,10 @@ namespace Roguegard
             var oldNutrition = userStats.Nutrition;
             userStats.SetNutrition(user, userStats.Nutrition + nutrition);
             var deltaNutrition = userStats.Nutrition - oldNutrition;
-            if (MainCharacterWorkUtility.VisibleAt(user.Location, user.Position))
+            if (MessageWorkListener.TryOpenHandler(user.Location, user.Position, out var h2))
             {
-                RogueDevice.Add(DeviceKw.AppendText, user);
-                RogueDevice.Add(DeviceKw.AppendText, "の満腹度が");
-                RogueDevice.Add(DeviceKw.AppendText, deltaNutrition);
-                RogueDevice.Add(DeviceKw.AppendText, "回復した！\n");
+                using var handler = h2;
+                handler.AppendText(user).AppendText("の満腹度が").AppendText(deltaNutrition).AppendText("回復した！\n");
             }
 
             self.TrySetStack(self.Stack - 1, user); // オブジェクトを消費する。

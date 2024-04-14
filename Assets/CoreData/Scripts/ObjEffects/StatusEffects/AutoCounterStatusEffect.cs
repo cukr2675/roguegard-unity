@@ -69,10 +69,10 @@ namespace Roguegard
             public bool Invoke(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
             {
                 if (RaycastAssert.RequireTarget(FrontRogueMethodRange.Instance, self, arg, out var target)) return false;
-                if (MainCharacterWorkUtility.VisibleAt(self.Location, self.Position))
+                if (MessageWorkListener.TryOpenHandler(self.Location, self.Position, out var h))
                 {
-                    var item = RogueCharacterWork.CreateSpriteMotion(self, CoreMotions.Discus, false);
-                    RogueDevice.AddWork(DeviceKw.EnqueueWork, item);
+                    using var handler = h;
+                    handler.EnqueueWork(RogueCharacterWork.CreateSpriteMotion(self, CoreMotions.Discus, false));
                 }
 
                 this.TryHurt(target, self, activationDepth, arg.RefValue);

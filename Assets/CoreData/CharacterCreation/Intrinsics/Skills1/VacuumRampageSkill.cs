@@ -47,13 +47,10 @@ namespace Roguegard.CharacterCreation
 
             protected override bool Activate(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
             {
-                var visible = MainCharacterWorkUtility.VisibleAt(self.Location, self.Position);
+                var visible = MessageWorkListener.TryOpenHandler(self.Location, self.Position, out var handler);
                 if (visible)
                 {
-                    RogueDevice.Add(DeviceKw.AppendText, ":ActivateSkillMsg::2");
-                    RogueDevice.Add(DeviceKw.AppendText, self);
-                    RogueDevice.Add(DeviceKw.AppendText, this);
-                    RogueDevice.Add(DeviceKw.AppendText, "\n");
+                    handler.AppendText(":ActivateSkillMsg::2").AppendText(self).AppendText(this).AppendText("\n");
                 }
 
 
@@ -72,8 +69,8 @@ namespace Roguegard.CharacterCreation
                     if (visible)
                     {
                         var item = RogueCharacterWork.CreateWalk(obj, obj.Position, obj.Main.Stats.Direction, CoreMotions.FullTurn, true);
-                        RogueDevice.AddWork(DeviceKw.EnqueueWork, syncItem);
-                        RogueDevice.AddWork(DeviceKw.EnqueueWork, item);
+                        handler.EnqueueWork(syncItem);
+                        handler.EnqueueWork(item);
                     }
                 }
 
@@ -81,6 +78,7 @@ namespace Roguegard.CharacterCreation
                 {
                     MainCharacterWorkUtility.TryAddSkill(self);
                     MainCharacterWorkUtility.TryAddSkill(self);
+                    handler.Dispose();
                 }
 
                 // 周囲8マスに攻撃力(x2)+2ダメージの攻撃。

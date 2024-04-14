@@ -29,12 +29,10 @@ namespace Roguegard.CharacterCreation
             {
                 using var predicator = Target.GetPredicator(self, 0f, null);
                 RaycastAssert.RequireTarget(predicator, Range, self, arg, out var position);
-                if (MainCharacterWorkUtility.VisibleAt(self.Location, self.Position))
+                if (MessageWorkListener.TryOpenHandler(self.Location, self.Position, out var h))
                 {
-                    RogueDevice.Add(DeviceKw.AppendText, ":ActivateSkillMsg::2");
-                    RogueDevice.Add(DeviceKw.AppendText, self);
-                    RogueDevice.Add(DeviceKw.AppendText, this);
-                    RogueDevice.Add(DeviceKw.AppendText, "\n");
+                    using var handler = h;
+                    handler.AppendText(":ActivateSkillMsg::2").AppendText(self).AppendText(this).AppendText("\n");
                     MainCharacterWorkUtility.TryAddSkill(self);
                 }
 

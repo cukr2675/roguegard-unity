@@ -26,12 +26,12 @@ namespace Roguegard
         protected override void NewAffectTo(
             RogueObj target, RogueObj user, float activationDepth, in RogueMethodArgument arg, StackableStatusEffect statusEffect)
         {
-            if (MainCharacterWorkUtility.VisibleAt(target.Location, target.Position))
+            if (MessageWorkListener.TryOpenHandler(target.Location, target.Position, out var h))
             {
-                RogueDevice.Add(DeviceKw.EnqueueSE, StdKw.StatusEffect);
                 _smoke ??= new VariantSpriteMotion(CoreMotions.Smoke, new Color32(100, 200, 250, 255));
-                var work = RogueCharacterWork.CreateEffect(target.Position, _smoke, false);
-                RogueDevice.AddWork(DeviceKw.EnqueueWork, work);
+                using var handler = h;
+                handler.EnqueueSE(StdKw.StatusEffect);
+                handler.EnqueueWork(RogueCharacterWork.CreateEffect(target.Position, _smoke, false));
             }
         }
 
@@ -64,10 +64,10 @@ namespace Roguegard
             // 恐怖状態のとき、攻撃を失敗させる。
             if (keyword == MainInfoKw.Attack)
             {
-                if (MainCharacterWorkUtility.VisibleAt(self.Location, self.Position))
+                if (MessageWorkListener.TryOpenHandler(self.Location, self.Position, out var h))
                 {
-                    RogueDevice.Add(DeviceKw.AppendText, self);
-                    RogueDevice.Add(DeviceKw.AppendText, "は怖くて手が出せない！\n");
+                    using var handler = h;
+                    handler.AppendText(self).AppendText("は怖くて手が出せない！\n");
                 }
                 return false;
             }

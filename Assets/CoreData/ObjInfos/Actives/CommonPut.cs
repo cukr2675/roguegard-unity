@@ -21,13 +21,11 @@ namespace Roguegard
                 tool.Location == self &&    // 所持していないオブジェクトは置けない。
                 this.Locate(tool, self, self.Location, self.Position, activationDepth)) // 置く
             {
-                if (MainCharacterWorkUtility.VisibleAt(self.Location, self.Position))
+                if (MessageWorkListener.TryOpenHandler(self.Location, self.Position, out var h))
                 {
-                    RogueDevice.AddWork(DeviceKw.EnqueueWork, RogueCharacterWork.CreateSync(self));
-                    RogueDevice.Add(DeviceKw.AppendText, self);
-                    RogueDevice.Add(DeviceKw.AppendText, "は");
-                    RogueDevice.Add(DeviceKw.AppendText, tool);
-                    RogueDevice.Add(DeviceKw.AppendText, "を地面に置いた\n");
+                    using var handler = h;
+                    handler.EnqueueWork(RogueCharacterWork.CreateSync(self));
+                    handler.AppendText(self).AppendText("は").AppendText(tool).AppendText("を地面に置いた\n");
                 }
                 return true;
             }

@@ -16,12 +16,10 @@ namespace Roguegard
                 return false;
             }
 
-            if (MainCharacterWorkUtility.VisibleAt(user.Location, user.Position))
+            if (MessageWorkListener.TryOpenHandler(user.Location, user.Position, out var h))
             {
-                RogueDevice.Add(DeviceKw.AppendText, ":PaintTrapMsg::2");
-                RogueDevice.Add(DeviceKw.AppendText, user);
-                RogueDevice.Add(DeviceKw.AppendText, CoreTiles1.PaintTrap);
-                RogueDevice.Add(DeviceKw.AppendText, "\n");
+                using var handler = h;
+                handler.AppendText(":PaintTrapMsg::2").AppendText(user).AppendText(CoreTiles1.PaintTrap).AppendText("\n");
             }
             return this.TryAffect(user, activationDepth, PaintStatusEffect.Callback);
         }

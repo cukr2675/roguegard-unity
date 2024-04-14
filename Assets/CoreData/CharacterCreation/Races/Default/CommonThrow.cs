@@ -25,15 +25,12 @@ namespace Roguegard
             }
 
             self.Main.Stats.Direction = RogueMethodUtility.GetTargetDirection(self, arg);
-            if (MainCharacterWorkUtility.VisibleAt(self.Location, self.Position))
+            if (MessageWorkListener.TryOpenHandler(self.Location, self.Position, out var h))
             {
-                RogueDevice.Add(DeviceKw.AppendText, self);
-                RogueDevice.Add(DeviceKw.AppendText, "は");
-                RogueDevice.Add(DeviceKw.AppendText, ammo);
-                RogueDevice.Add(DeviceKw.AppendText, "を投げた！\n");
-                RogueDevice.Add(DeviceKw.EnqueueSE, MainInfoKw.Skill);
-                var item = RogueCharacterWork.CreateSpriteMotion(self, CoreMotions.Discus, false);
-                RogueDevice.AddWork(DeviceKw.EnqueueWork, item);
+                using var handler = h;
+                handler.AppendText(self).AppendText("は").AppendText(ammo).AppendText("を投げた！\n");
+                handler.EnqueueSE(MainInfoKw.Skill);
+                handler.EnqueueWork(RogueCharacterWork.CreateSpriteMotion(self, CoreMotions.Discus, false));
             }
 
             return this.Throw(ammo, self, activationDepth, targetPosition);

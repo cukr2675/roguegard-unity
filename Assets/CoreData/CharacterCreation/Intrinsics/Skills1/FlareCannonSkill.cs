@@ -29,15 +29,13 @@ namespace Roguegard.CharacterCreation
             {
                 var direction = RogueMethodUtility.GetTargetDirection(self, arg);
                 SpaceUtility.Raycast(self.Location, self.Position, direction, 10, true, true, true, out _, out _, out var position);
-                if (MainCharacterWorkUtility.VisibleAt(self.Location, self.Position))
+                if (MessageWorkListener.TryOpenHandler(self.Location, self.Position, out var h))
                 {
-                    RogueDevice.Add(DeviceKw.AppendText, ":ActivateSkillMsg::2");
-                    RogueDevice.Add(DeviceKw.AppendText, self);
-                    RogueDevice.Add(DeviceKw.AppendText, this);
-                    RogueDevice.Add(DeviceKw.AppendText, "\n");
+                    using var handler = h;
+                    handler.AppendText(":ActivateSkillMsg::2").AppendText(self).AppendText(this).AppendText("\n");
                     MainCharacterWorkUtility.TryAddSkill(self);
                     MainCharacterWorkUtility.TryAddShot(self);
-                    RogueDevice.AddWork(DeviceKw.EnqueueWork, RogueCharacterWork.CreateEffect(position, CoreMotions.Bomb, false));
+                    handler.EnqueueWork(RogueCharacterWork.CreateEffect(position, CoreMotions.Bomb, false));
                 }
 
                 //// 攻撃力(x0)+2ダメージの攻撃。

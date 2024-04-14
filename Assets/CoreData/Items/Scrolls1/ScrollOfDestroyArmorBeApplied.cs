@@ -13,13 +13,10 @@ namespace Roguegard
 
         protected override bool BeApplied(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
         {
-            var visible = MainCharacterWorkUtility.VisibleAt(user.Location, user.Position);
+            var visible = MessageWorkListener.TryOpenHandler(user.Location, user.Position, out var handler);
             if (visible)
             {
-                RogueDevice.Add(DeviceKw.AppendText, user);
-                RogueDevice.Add(DeviceKw.AppendText, "は");
-                RogueDevice.Add(DeviceKw.AppendText, self);
-                RogueDevice.Add(DeviceKw.AppendText, "を読んだ！\n");
+                handler.AppendText(user).AppendText("は").AppendText(self).AppendText("を読んだ！\n");
             }
 
             var equipment = EquipmentUtility.GetRandomArmor(user, RogueRandom.Primary);
@@ -28,19 +25,17 @@ namespace Roguegard
                 equipment.TrySetStack(0, user);
                 if (visible)
                 {
-                    RogueDevice.Add(DeviceKw.AppendText, user);
-                    RogueDevice.Add(DeviceKw.AppendText, "が装備していた");
-                    RogueDevice.Add(DeviceKw.AppendText, equipment);
-                    RogueDevice.Add(DeviceKw.AppendText, "が砕け散った！\n");
+                    handler.AppendText(user).AppendText("が装備していた").AppendText(equipment).AppendText("が砕け散った！\n");
                 }
             }
             else
             {
                 if (visible)
                 {
-                    RogueDevice.Add(DeviceKw.AppendText, "しかし何も起こらなかった！\n");
+                    handler.AppendText("しかし何も起こらなかった！\n");
                 }
             }
+            handler?.Dispose();
             return true;
         }
     }

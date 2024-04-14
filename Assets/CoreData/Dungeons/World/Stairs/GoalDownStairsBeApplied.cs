@@ -14,14 +14,15 @@ namespace Roguegard
         public override bool Invoke(RogueObj self, RogueObj player, float activationDepth, in RogueMethodArgument arg)
         {
             player.Main.Stats.Direction = RogueDirection.Down;
-            if (MainCharacterWorkUtility.VisibleAt(player.Location, player.Position))
+            if (MessageWorkListener.TryOpenHandler(player.Location, player.Position, out var h))
             {
-                RogueDevice.Add(DeviceKw.EnqueueSE, DeviceKw.GameClear);
-                RogueDevice.AddWork(DeviceKw.EnqueueWork, RogueCharacterWork.CreateSpriteMotion(player, CoreMotions.FullTurn, false));
-                RogueDevice.AddWork(DeviceKw.EnqueueWork, RogueCharacterWork.CreateSpriteMotion(player, KeywordSpriteMotion.Wait, true));
-                RogueDevice.AddWork(DeviceKw.EnqueueWork, RogueCharacterWork.CreateSpriteMotion(player, CoreMotions.FullTurn, false));
-                RogueDevice.AddWork(DeviceKw.EnqueueWork, RogueCharacterWork.CreateSpriteMotion(player, KeywordSpriteMotion.Victory, true));
-                RogueDevice.Add(DeviceKw.EnqueueWaitSeconds, 1f);
+                using var handler = h;
+                handler.EnqueueSE(DeviceKw.GameClear);
+                handler.EnqueueWork(RogueCharacterWork.CreateSpriteMotion(player, CoreMotions.FullTurn, false));
+                handler.EnqueueWork(RogueCharacterWork.CreateSpriteMotion(player, KeywordSpriteMotion.Wait, true));
+                handler.EnqueueWork(RogueCharacterWork.CreateSpriteMotion(player, CoreMotions.FullTurn, false));
+                handler.EnqueueWork(RogueCharacterWork.CreateSpriteMotion(player, KeywordSpriteMotion.Victory, true));
+                handler.Handle(DeviceKw.EnqueueWaitSeconds, 1f);
             }
 
             if (player == RogueDevice.Primary.Player)

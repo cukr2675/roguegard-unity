@@ -8,33 +8,6 @@ namespace Roguegard
 {
     public static class MainCharacterWorkUtility
     {
-        public static bool VisibleAt(RogueObj location, Vector2Int position)
-        {
-            var subject = RogueDevice.Primary.Subject;
-            if (!ViewInfo.TryGet(subject, out var view))
-            {
-                return subject.Location == location;
-            }
-            if (view.Location != location || view.Location.Space.Tilemap == null) return false;
-
-            view.GetTile(position, out var visible, out _, out _, out _);
-            if (visible) return true;
-
-            // ペイントされているオブジェクトがいる位置は見える
-            var obj = view.Location.Space.GetColliderObj(position);
-            if (obj != null)
-            {
-                var objStatusEffectState = obj.Main.GetStatusEffectState(obj);
-                if (objStatusEffectState.TryGetStatusEffect<PaintStatusEffect>(out _)) return true;
-            }
-
-            // 視界範囲外の判定が出ても、更新してもう一度試す
-            // 出会いがしらの敵を表示する際に有効
-            view.AddView(subject);
-            view.GetTile(position, out visible, out _, out _, out _);
-            return visible;
-        }
-
         public static void EnqueueViewDequeueState(RogueObj obj)
         {
             if (ViewInfo.TryGet(obj, out var view) && !view.QueueHasItem)
@@ -48,11 +21,11 @@ namespace Roguegard
 
         public static bool TryAddSkill(RogueObj self)
         {
-            if (!VisibleAt(self.Location, self.Position)) return false;
+            if (!MessageWorkListener.TryOpenHandler(self.Location, self.Position, out var handler)) return false;
 
-            RogueDevice.Add(DeviceKw.EnqueueSE, MainInfoKw.Skill);
-            var item = RogueCharacterWork.CreateSpriteMotion(self, CoreMotions.FullTurn, false);
-            RogueDevice.AddWork(DeviceKw.EnqueueWork, item);
+            handler.EnqueueSE(MainInfoKw.Skill);
+            handler.EnqueueWork(RogueCharacterWork.CreateSpriteMotion(self, CoreMotions.FullTurn, false));
+            handler.Dispose();
             return true;
         }
 
@@ -61,25 +34,23 @@ namespace Roguegard
         /// </summary>
         public static bool TryAddAttack(RogueObj self)
         {
-            if (!VisibleAt(self.Location, self.Position)) return false;
+            if (!MessageWorkListener.TryOpenHandler(self.Location, self.Position, out var handler)) return false;
 
-            RogueDevice.Add(DeviceKw.EnqueueSE, MainInfoKw.Attack);
-            var item = RogueCharacterWork.CreateSpriteMotion(self, KeywordSpriteMotion.Attack, false);
-            RogueDevice.AddWork(DeviceKw.EnqueueWork, item);
-            item = RogueCharacterWork.CreateSpriteMotion(self, KeywordSpriteMotion.Wait, true);
-            RogueDevice.AddWork(DeviceKw.EnqueueWork, item);
+            handler.EnqueueSE(MainInfoKw.Attack);
+            handler.EnqueueWork(RogueCharacterWork.CreateSpriteMotion(self, KeywordSpriteMotion.Attack, false));
+            handler.EnqueueWork(RogueCharacterWork.CreateSpriteMotion(self, KeywordSpriteMotion.Wait, true));
+            handler.Dispose();
             return true;
         }
 
         public static bool TryAddShot(RogueObj self)
         {
-            if (!VisibleAt(self.Location, self.Position)) return false;
+            if (!MessageWorkListener.TryOpenHandler(self.Location, self.Position, out var handler)) return false;
 
-            RogueDevice.Add(DeviceKw.EnqueueSE, StdKw.GunThrow);
-            var item = RogueCharacterWork.CreateSpriteMotion(self, KeywordSpriteMotion.GunThrow, false);
-            RogueDevice.AddWork(DeviceKw.EnqueueWork, item);
-            item = RogueCharacterWork.CreateSpriteMotion(self, KeywordSpriteMotion.Wait, true);
-            RogueDevice.AddWork(DeviceKw.EnqueueWork, item);
+            handler.EnqueueSE(StdKw.GunThrow);
+            handler.EnqueueWork(RogueCharacterWork.CreateSpriteMotion(self, KeywordSpriteMotion.GunThrow, false));
+            handler.EnqueueWork(RogueCharacterWork.CreateSpriteMotion(self, KeywordSpriteMotion.Wait, true));
+            handler.Dispose();
             return true;
         }
 
@@ -122,7 +93,7 @@ namespace Roguegard
                 var x = Mathf.FloorToInt(Mathf.Lerp(p1.x, p2.x, i / distance));
                 var y = Mathf.FloorToInt(Mathf.Lerp(p1.y, p2.y, i / distance));
                 position = new Vector2Int(x, y);
-                if (VisibleAt(location, position)) return true;
+                if (MessageWorkListener.CanHandle(location, position)) return true;
             }
             position = default;
             return false;
@@ -133,7 +104,7 @@ namespace Roguegard
         /// </summary>
         public static bool TryAddBeDropped(RogueObj ammo, RogueObj user, Vector2Int to, ISpriteMotion motion)
         {
-            if (!VisibleAt(user.Location, to)) return false;
+            if (!MessageWorkListener.CanHandle(user.Location, to)) return false;
 
             var drop = RogueCharacterWork.CreateWalk(ammo, to, -.5f, ammo.Main.Stats.Direction, motion, false);
             RogueDevice.AddWork(DeviceKw.EnqueueWork, drop);
@@ -152,10 +123,10 @@ namespace Roguegard
                 RogueDevice.AddWork(DeviceKw.EnqueueWork, work);
                 return true;
             }
-            else if (VisibleAt(self.Location, self.Position))
+            else if (MessageWorkListener.TryOpenHandler(self.Location, self.Position, out var h))
             {
-                var work = RogueCharacterWork.CreateWalk(self, self.Position, self.Main.Stats.Direction, null, true);
-                RogueDevice.AddWork(DeviceKw.EnqueueWork, work);
+                using var handler = h;
+                handler.EnqueueWork(RogueCharacterWork.CreateWalk(self, self.Position, self.Main.Stats.Direction, null, true));
                 return true;
             }
             else

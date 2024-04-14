@@ -107,12 +107,10 @@ namespace Roguegard.CharacterCreation
 
                 if (!info.TryOpen(self, user)) return false;
 
-                if (MainCharacterWorkUtility.VisibleAt(user.Location, user.Position))
+                if (MessageWorkListener.TryOpenHandler(user.Location, user.Position, out var h))
                 {
-                    RogueDevice.Add(DeviceKw.AppendText, user);
-                    RogueDevice.Add(DeviceKw.AppendText, "は");
-                    RogueDevice.Add(DeviceKw.AppendText, self);
-                    RogueDevice.Add(DeviceKw.AppendText, "に乗った！\n");
+                    using var handler = h;
+                    handler.AppendText(user).AppendText("は").AppendText(self).AppendText("に乗った！\n");
                 }
                 return true;
             }
@@ -126,12 +124,10 @@ namespace Roguegard.CharacterCreation
                 info.RemoveClose(self);
 
                 var owner = self.Location;
-                if (MainCharacterWorkUtility.VisibleAt(owner.Location, owner.Position))
+                if (MessageWorkListener.TryOpenHandler(owner.Location, owner.Position, out var h))
                 {
-                    RogueDevice.Add(DeviceKw.AppendText, owner);
-                    RogueDevice.Add(DeviceKw.AppendText, "は");
-                    RogueDevice.Add(DeviceKw.AppendText, self);
-                    RogueDevice.Add(DeviceKw.AppendText, "から降りた\n");
+                    using var handler = h;
+                    handler.AppendText(owner).AppendText("は").AppendText(self).AppendText("から降りた\n");
                 }
                 return true;
             }

@@ -16,11 +16,10 @@ namespace Roguegard
 
         protected override void NewAffectTo(RogueObj target, RogueObj user, float activationDepth, in RogueMethodArgument arg, StackableStatusEffect statusEffect)
         {
-            if (MainCharacterWorkUtility.VisibleAt(target.Location, target.Position))
+            if (MessageWorkListener.TryOpenHandler(target.Location, target.Position, out var h))
             {
-                RogueDevice.Add(DeviceKw.AppendText, ":PaintMsg::1");
-                RogueDevice.Add(DeviceKw.AppendText, target);
-                RogueDevice.Add(DeviceKw.AppendText, "\n");
+                using var handler = h;
+                handler.AppendText(":PaintMsg::1").AppendText(target).AppendText("\n");
             }
         }
 

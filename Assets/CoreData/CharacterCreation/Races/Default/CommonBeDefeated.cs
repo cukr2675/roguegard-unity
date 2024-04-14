@@ -17,25 +17,27 @@ namespace Roguegard
             if (LobbyMemberList.GetMemberInfo(self) != null && self.Main.GetPlayerLeaderInfo(self) != null)
             {
                 // プレイヤーパーティのリーダーが倒れたときゲームオーバー処理
-                if (MainCharacterWorkUtility.VisibleAt(self.Location, self.Position))
+                if (MessageWorkListener.TryOpenHandler(self.Location, self.Position, out var h))
                 {
-                    RogueDevice.Add(DeviceKw.AppendText, self);
-                    RogueDevice.Add(DeviceKw.AppendText, "は倒れてしまった！\n");
-                    RogueDevice.Add(DeviceKw.EnqueueSE, DeviceKw.GameOver);
-                    RogueDevice.AddWork(DeviceKw.EnqueueWork, RogueCharacterWork.CreateSpriteMotion(self, CoreMotions.FullTurn, false));
-                    RogueDevice.AddWork(DeviceKw.EnqueueWork, RogueCharacterWork.CreateSpriteMotion(self, KeywordSpriteMotion.Wait, true));
-                    RogueDevice.AddWork(DeviceKw.EnqueueWork, RogueCharacterWork.CreateSpriteMotion(self, CoreMotions.FullTurn, false));
-                    RogueDevice.AddWork(DeviceKw.EnqueueWork, RogueCharacterWork.CreateSpriteMotion(self, KeywordSpriteMotion.BeDefeated, true));
-                    RogueDevice.Add(DeviceKw.EnqueueWaitSeconds, 1f);
+                    using var handler = h;
+                    handler.AppendText(self);
+                    handler.AppendText("は倒れてしまった！\n");
+                    handler.EnqueueSE(DeviceKw.GameOver);
+                    handler.EnqueueWork(RogueCharacterWork.CreateSpriteMotion(self, CoreMotions.FullTurn, false));
+                    handler.EnqueueWork(RogueCharacterWork.CreateSpriteMotion(self, KeywordSpriteMotion.Wait, true));
+                    handler.EnqueueWork(RogueCharacterWork.CreateSpriteMotion(self, CoreMotions.FullTurn, false));
+                    handler.EnqueueWork(RogueCharacterWork.CreateSpriteMotion(self, KeywordSpriteMotion.BeDefeated, true));
+                    handler.Handle(DeviceKw.EnqueueWaitSeconds, 1f);
                 }
                 RogueDevice.Add(DeviceKw.GameOver, self);
                 return true;
             }
-            else if (MainCharacterWorkUtility.VisibleAt(self.Location, self.Position))
+            else if (MessageWorkListener.TryOpenHandler(self.Location, self.Position, out var h))
             {
-                RogueDevice.Add(DeviceKw.AppendText, self);
-                RogueDevice.Add(DeviceKw.AppendText, "は倒れた！\n");
-                RogueDevice.AddWork(DeviceKw.EnqueueWork, RogueCharacterWork.CreateSpriteMotion(self, KeywordSpriteMotion.BeDefeated, false));
+                using var handler = h;
+                handler.AppendText(self);
+                handler.AppendText("は倒れた！\n");
+                handler.EnqueueWork(RogueCharacterWork.CreateSpriteMotion(self, KeywordSpriteMotion.BeDefeated, false));
             }
 
             // 倒れたキャラクターを消す。

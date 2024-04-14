@@ -25,28 +25,23 @@ namespace Roguegard
 
         protected override IRogueEffect AffectTo(RogueObj target, RogueObj user, float activationDepth, in RogueMethodArgument arg)
         {
-            if (MainCharacterWorkUtility.VisibleAt(target.Location, target.Position))
+            if (MessageWorkListener.TryOpenHandler(target.Location, target.Position, out var h))
             {
-                RogueDevice.Add(DeviceKw.AppendText, target);
-                RogueDevice.Add(DeviceKw.AppendText, "は");
-                RogueDevice.Add(DeviceKw.AppendText, this);
-                RogueDevice.Add(DeviceKw.AppendText, "を浴びた！\n");
-                RogueDevice.Add(DeviceKw.EnqueueSE, StdKw.Poison);
                 _smoke ??= new VariantSpriteMotion(CoreMotions.Smoke, new Color32(200, 50, 200, 255));
-                var work = RogueCharacterWork.CreateEffect(target.Position, _smoke, false);
-                RogueDevice.AddWork(DeviceKw.EnqueueWork, work);
+                using var handler = h;
+                handler.AppendText(target).AppendText("は").AppendText(this).AppendText("を浴びた！\n");
+                handler.EnqueueSE(StdKw.Poison);
+                handler.EnqueueWork(RogueCharacterWork.CreateEffect(target.Position, _smoke, false));
             }
             return base.AffectTo(target, user, activationDepth, arg);
         }
 
         protected override void RemoveClose(RogueObj self, StatusEffectCloseType closeType = StatusEffectCloseType.Manual)
         {
-            if (MainCharacterWorkUtility.VisibleAt(self.Location, self.Position))
+            if (MessageWorkListener.TryOpenHandler(self.Location, self.Position, out var h))
             {
-                RogueDevice.Add(DeviceKw.AppendText, self);
-                RogueDevice.Add(DeviceKw.AppendText, "から");
-                RogueDevice.Add(DeviceKw.AppendText, this);
-                RogueDevice.Add(DeviceKw.AppendText, "が抜けた\n");
+                using var handler = h;
+                handler.AppendText(self).AppendText("から").AppendText(this).AppendText("が抜けた\n");
             }
             base.RemoveClose(self);
         }

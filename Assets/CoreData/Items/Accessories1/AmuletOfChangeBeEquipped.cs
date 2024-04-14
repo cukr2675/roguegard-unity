@@ -28,10 +28,10 @@ namespace Roguegard
             self.TrySetStack(0, owner);
 
             ChangeGenderEffect.Change(owner);
-            if (MainCharacterWorkUtility.VisibleAt(owner.Location, owner.Position))
+            if (MessageWorkListener.TryOpenHandler(owner.Location, owner.Position, out var h))
             {
-                RogueDevice.Add(DeviceKw.AppendText, owner);
-                RogueDevice.Add(DeviceKw.AppendText, "は性別が変わった\n");
+                using var handler = h;
+                handler.AppendText(owner).AppendText("は性別が変わった\n");
             }
             return true;
         }

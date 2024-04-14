@@ -25,12 +25,10 @@ namespace Roguegard
         protected override IRogueEffect AffectTo(RogueObj target, RogueObj user, float activationDepth, in RogueMethodArgument arg)
         {
             var statusEffect = base.AffectTo(target, user, activationDepth, arg);
-            if (MainCharacterWorkUtility.VisibleAt(target.Location, target.Position))
+            if (MessageWorkListener.TryOpenHandler(target.Location, target.Position, out var h))
             {
-                RogueDevice.Add(DeviceKw.AppendText, target);
-                RogueDevice.Add(DeviceKw.AppendText, "は");
-                RogueDevice.Add(DeviceKw.AppendText, this);
-                RogueDevice.Add(DeviceKw.AppendText, "にかかった！\n");
+                using var handler = h;
+                handler.AppendText(target).AppendText("は").AppendText(this).AppendText("にかかった！\n");
             }
             return statusEffect;
         }
@@ -44,12 +42,10 @@ namespace Roguegard
         protected override void RemoveClose(RogueObj self, StatusEffectCloseType closeType = StatusEffectCloseType.Manual)
         {
             SpeedCalculator.SetDirty(self);
-            if (MainCharacterWorkUtility.VisibleAt(self.Location, self.Position))
+            if (MessageWorkListener.TryOpenHandler(self.Location, self.Position, out var h))
             {
-                RogueDevice.Add(DeviceKw.AppendText, self);
-                RogueDevice.Add(DeviceKw.AppendText, "の");
-                RogueDevice.Add(DeviceKw.AppendText, this);
-                RogueDevice.Add(DeviceKw.AppendText, "が解けた\n");
+                using var handler = h;
+                handler.AppendText(self).AppendText("の").AppendText(this).AppendText("が解けた\n");
             }
             base.RemoveClose(self);
         }
@@ -58,10 +54,10 @@ namespace Roguegard
         {
             if (!self.Location.Space.TryGetRoomView(self.Position, out var room, out _)) { room = new RectInt(); }
 
-            if (MainCharacterWorkUtility.VisibleAt(self.Location, self.Position))
+            if (MessageWorkListener.TryOpenHandler(self.Location, self.Position, out var h))
             {
-                RogueDevice.Add(DeviceKw.AppendText, self);
-                RogueDevice.Add(DeviceKw.AppendText,  "は混乱している\n");
+                using var handler = h;
+                handler.AppendText(self).AppendText("は混乱している\n");
             }
 
             // アイテム使用

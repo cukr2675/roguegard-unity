@@ -15,13 +15,10 @@ namespace Roguegard
 
         protected override bool BeApplied(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
         {
-            var visible = MainCharacterWorkUtility.VisibleAt(user.Location, user.Position);
+            var visible = MessageWorkListener.TryOpenHandler(user.Location, user.Position, out var handler);
             if (visible)
             {
-                RogueDevice.Add(DeviceKw.AppendText, user);
-                RogueDevice.Add(DeviceKw.AppendText, "は");
-                RogueDevice.Add(DeviceKw.AppendText, self);
-                RogueDevice.Add(DeviceKw.AppendText, "を読んだ！\n");
+                handler.AppendText(user).AppendText("は").AppendText(self).AppendText("を読んだ！\n");
             }
 
             using var value = AffectableValue.Get();
@@ -47,8 +44,8 @@ namespace Roguegard
 
             if (visible)
             {
-                RogueDevice.Add(DeviceKw.AppendText, user);
-                RogueDevice.Add(DeviceKw.AppendText, "のまわりに毒ガスが広がった！\n");
+                handler.AppendText(user).AppendText("のまわりに毒ガスが広がった！\n");
+                handler.Dispose();
             }
             return true;
         }

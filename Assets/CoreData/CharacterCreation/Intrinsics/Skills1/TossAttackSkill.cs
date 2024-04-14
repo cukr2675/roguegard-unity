@@ -25,12 +25,10 @@ namespace Roguegard
                 }
                 return false;
             }
-            if (MainCharacterWorkUtility.VisibleAt(self.Location, self.Position))
+            if (MessageWorkListener.TryOpenHandler(self.Location, self.Position, out var h))
             {
-                RogueDevice.Add(DeviceKw.AppendText, self);
-                RogueDevice.Add(DeviceKw.AppendText, "は");
-                RogueDevice.Add(DeviceKw.AppendText, objs[0]);
-                RogueDevice.Add(DeviceKw.AppendText, "をぶん投げた！\n");
+                using var handler = h;
+                handler.AppendText(self).AppendText("は").AppendText(objs[0]).AppendText("をぶん投げた！\n");
             }
 
             var direction = RogueMethodUtility.GetTargetDirection(self, arg);

@@ -108,6 +108,8 @@ namespace RoguegardUnity
         {
             device.GetInfo(out var random);
             RogueRandom.Primary = random;
+            MessageWorkListener.ClearListeners();
+            MessageWorkListener.AddListener(new DeviceMessageWorkListener());
 
             device.Open(
                 spriteRendererPool, tilemapRendererPrefab, touchControllerPrefab,
@@ -177,6 +179,8 @@ namespace RoguegardUnity
 
                         var builder = RoguegardSettings.CharacterCreationDatabase.LoadPreset(0);
                         RogueRandom.Primary = new RogueRandom();
+                        MessageWorkListener.ClearListeners();
+                        MessageWorkListener.AddListener(new DeviceMessageWorkListener());
                         var player = builder.CreateObj(null, Vector2Int.zero, RogueRandom.Primary);
                         root.OpenMenu(nextMenu, player, null, new(other: builder));
                     });

@@ -44,7 +44,9 @@ namespace Roguegard
                 return false;
             }
 
-            var trueVisible = MainCharacterWorkUtility.VisibleAt(self.Location, position) || MainCharacterWorkUtility.VisibleAt(self.Location, target);
+            MessageWorkListener.TryOpenHandler(self.Location, position, out var positionHandler);
+            MessageWorkListener.TryOpenHandler(self.Location, target, out var targetHandler);
+            var unionHandler = MessageWorkListener.UnionHandlers(positionHandler, targetHandler);
             if (deltaPosition.x != 0 && deltaPosition.y != 0)
             {
                 // 斜め移動
@@ -55,19 +57,19 @@ namespace Roguegard
                     !space.CollideAt(new Vector2Int(target.x, position.y), false, tileCollide) &&
                     self.TryLocate(target, asTile, collide, tileCollide, sightCollide))
                 {
-                    if (trueVisible)
-                    {
-                        var item = CreateWork(self, target, KeywordSpriteMotion.Walk, true);
-                        RogueDevice.AddWork(DeviceKw.EnqueueWork, item);
-                    }
+                    unionHandler?.EnqueueWork(CreateWork(self, target, KeywordSpriteMotion.Walk, true));
 
                     // 移動に成功したら移動先のタイルを踏む
                     this.StepOn(self, activationDepth);
+                    positionHandler?.Dispose();
+                    targetHandler?.Dispose();
                     return true;
                 }
 
                 // 失敗しても方向転換する
                 MainCharacterWorkUtility.TryAddTurn(self);
+                positionHandler?.Dispose();
+                targetHandler?.Dispose();
                 return false;
             }
             else
@@ -76,19 +78,19 @@ namespace Roguegard
                 self.Main.Stats.Direction = RogueDirection.FromSignOrLowerLeft(target - position);
                 if (self.TryLocate(target, asTile, collide, tileCollide, sightCollide))
                 {
-                    if (trueVisible)
-                    {
-                        var item = CreateWork(self, target, KeywordSpriteMotion.Walk, true);
-                        RogueDevice.AddWork(DeviceKw.EnqueueWork, item);
-                    }
+                    unionHandler?.EnqueueWork(CreateWork(self, target, KeywordSpriteMotion.Walk, true));
 
                     // 移動に成功したら移動先のタイルを踏む
                     this.StepOn(self, activationDepth);
+                    positionHandler?.Dispose();
+                    targetHandler?.Dispose();
                     return true;
                 }
 
                 // 失敗しても方向転換する
                 MainCharacterWorkUtility.TryAddTurn(self);
+                positionHandler?.Dispose();
+                targetHandler?.Dispose();
                 return false;
             }
         }

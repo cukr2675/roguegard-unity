@@ -45,22 +45,21 @@ namespace Roguegard
                 return false;
             }
 
-            if (MainCharacterWorkUtility.VisibleAt(self.Location, self.Position))
+            if (MessageWorkListener.TryOpenHandler(self.Location, self.Position, out var h))
             {
-                RogueDevice.Add(DeviceKw.AppendText, self);
-                RogueDevice.Add(DeviceKw.AppendText, "は");
-                RogueDevice.Add(DeviceKw.AppendText, tool);
+                using var handler = h;
+                handler.AppendText(self).AppendText("は").AppendText(tool);
                 if (tool?.Main.InfoSet.Category == CategoryKw.Drink)
                 {
-                    RogueDevice.Add(DeviceKw.AppendText, "を飲んだ！\n");
+                    handler.AppendText("を飲んだ！\n");
                 }
                 else
                 {
-                    RogueDevice.Add(DeviceKw.AppendText, "を食べた！\n");
+                    handler.AppendText("を食べた！\n");
                 }
-                RogueDevice.AddWork(DeviceKw.EnqueueWork, RogueCharacterWork.CreateSync(self));
-                RogueDevice.Add(DeviceKw.EnqueueSE, MainInfoKw.Eat);
-                RogueDevice.AddWork(DeviceKw.EnqueueWork, RogueCharacterWork.CreateEffect(self.Position, CoreMotions.Eat, false));
+                handler.EnqueueWork(RogueCharacterWork.CreateSync(self));
+                handler.EnqueueSE(MainInfoKw.Eat);
+                handler.EnqueueWork(RogueCharacterWork.CreateEffect(self.Position, CoreMotions.Eat, false));
             }
 
             var result = this.Eat(tool, self, activationDepth, RogueMethodArgument.Identity);

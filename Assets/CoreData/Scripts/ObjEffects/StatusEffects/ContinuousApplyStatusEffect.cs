@@ -71,12 +71,11 @@ namespace Roguegard
             {
                 // 攻撃を受けると解除される
                 RemoveClose(self);
-                if (MainCharacterWorkUtility.VisibleAt(self.Location, self.Position))
+                if (MessageWorkListener.TryOpenHandler(self.Location, self.Position, out var h))
                 {
-                    RogueDevice.Add(DeviceKw.AppendText, self);
-                    RogueDevice.Add(DeviceKw.AppendText, "は");
-                    RogueDevice.Add(DeviceKw.AppendText, tool);
-                    RogueDevice.Add(DeviceKw.AppendText, "の使用を中止した\n");
+                    using var handler = h;
+                    handler.EnqueueSE(StdKw.Confusion);
+                    handler.AppendText(self).AppendText("は").AppendText(tool).AppendText("の使用を中止した\n");
                 }
             }
 

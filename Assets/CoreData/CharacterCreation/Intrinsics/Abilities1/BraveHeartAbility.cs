@@ -54,13 +54,12 @@ namespace Roguegard.CharacterCreation
                             closable.RemoveClose(self);
                         }
                     }
-                    if (MainCharacterWorkUtility.VisibleAt(self.Location, self.Position))
+                    if (MessageWorkListener.TryOpenHandler(self.Location, self.Position, out var h))
                     {
-                        RogueDevice.Add(DeviceKw.EnqueueSE, StdKw.Heal);
-                        RogueDevice.Add(DeviceKw.AppendText, ":BraveHeartMsg::1");
-                        RogueDevice.Add(DeviceKw.AppendText, self);
-                        RogueDevice.Add(DeviceKw.AppendText, "\n");
-                        RogueDevice.AddWork(DeviceKw.EnqueueWork, RogueCharacterWork.CreateEffect(self.Position, CoreMotions.Heal, false));
+                        using var handler = h;
+                        handler.EnqueueSE(StdKw.Heal);
+                        handler.AppendText(":BraveHeartMsg::1").AppendText(self).AppendText("\n");
+                        handler.EnqueueWork(RogueCharacterWork.CreateEffect(self.Position, CoreMotions.Heal, false));
                     }
                 }
                 return result;

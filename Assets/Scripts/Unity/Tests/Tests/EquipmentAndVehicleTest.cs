@@ -27,6 +27,7 @@ namespace RoguegardUnity.Tests
             _settings.TestLoad();
             ObjformingLogger.Primary = new RoguegardObjformingLogger();
             RogueRandom.Primary = new RogueRandom(0);
+            MessageWorkListener.ClearListeners();
             StaticID.Next();
 
             var random = RogueRandom.Primary;
@@ -91,6 +92,7 @@ namespace RoguegardUnity.Tests
             _settings.TestLoad();
             ObjformingLogger.Primary = new RoguegardObjformingLogger();
             RogueRandom.Primary = new RogueRandom(0);
+            MessageWorkListener.ClearListeners();
             StaticID.Next();
 
             var random = RogueRandom.Primary;

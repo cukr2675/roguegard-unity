@@ -17,12 +17,11 @@ namespace Roguegard
         protected override bool Activate(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
         {
             if (RaycastAssert.RequireTarget(FrontRogueMethodRange.Instance, self, arg, out var target)) return false;
-            if (MainCharacterWorkUtility.TryAddAttack(self))
+            if (MessageWorkListener.TryOpenHandler(self.Location, self.Position, out var h))
             {
-                RogueDevice.Add(DeviceKw.AppendText, self);
-                RogueDevice.Add(DeviceKw.AppendText, "は");
-                RogueDevice.Add(DeviceKw.AppendText, target);
-                RogueDevice.Add(DeviceKw.AppendText, "を放り投げた！\n");
+                using var handler = h;
+                MainCharacterWorkUtility.TryAddAttack(self);
+                handler.AppendText(self).AppendText("は").AppendText(target).AppendText("を放り投げた！\n");
             }
 
             var angle = RogueRandom.Primary.Next(0, 8);

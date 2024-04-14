@@ -62,9 +62,10 @@ namespace Roguegard.CharacterCreation
             {
                 if (LobbyMemberList.GetMemberInfo(player) == null) return false;
 
-                if (MainCharacterWorkUtility.VisibleAt(player.Location, player.Position))
+                if (MessageWorkListener.TryOpenHandler(player.Location, player.Position, out var h))
                 {
-                    RogueDevice.Add(DeviceKw.EnqueueSE, CategoryKw.DownStairs);
+                    using var handler = h;
+                    handler.EnqueueSE(CategoryKw.DownStairs);
                 }
 
                 // プレイヤーキャラクターは別空間に移動させる。

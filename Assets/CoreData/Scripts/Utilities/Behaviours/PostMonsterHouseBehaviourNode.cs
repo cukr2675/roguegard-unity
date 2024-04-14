@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using Roguegard.CharacterCreation;
+
 namespace Roguegard
 {
     public class PostMonsterHouseBehaviourNode : IRogueBehaviourNode
@@ -10,6 +12,9 @@ namespace Roguegard
         private RogueObj postbox;
         private RogueObj postLocation;
         private RoguePost post;
+        private RecordingMessageWorkListener recordingListener;
+
+        [System.Obsolete] public static DungeonRecorder test;
 
         public RogueObjUpdaterContinueType Tick(RogueObj self, float activationDepth)
         {
@@ -23,14 +28,22 @@ namespace Roguegard
             }
 
             // äKëwÇà⁄ìÆÇµÇΩÇÁîzêMèIóπ
-            if (postLocation != self.Location)
+            if (postLocation != null && postLocation != self.Location)
             {
-                if (post != null) { post.LiveState = RoguePostLiveState.Done; }
+                if (post != null)
+                {
+                    MessageWorkListener.RemoveListener(recordingListener);
+                    test = recordingListener.Recorder;
+                    post.LiveState = RoguePostLiveState.Done;
+                }
                 postLocation = null;
             }
 
             // ìØÇ∂äKëwÇ≈ÇÕàÍâÒÇµÇ©ìäçeÇµÇ»Ç¢
             if (postLocation != null) return RogueObjUpdaterContinueType.Continue;
+
+            // ÉNÉGÉXÉgíÜÇÃÇ›ò^âÊÇ∑ÇÈ
+            if (!DungeonQuestInfo.TryGetQuest(self, out var quest)) return RogueObjUpdaterContinueType.Continue;
 
             var enemyCount = 0;
             for (int i = 0; i < view.VisibleObjCount; i++)
@@ -49,6 +62,11 @@ namespace Roguegard
             post.DateTime = RogueDateTime.UtcNow().ToString();
             post.LiveState = RoguePostLiveState.Live;
             postboxInfo.AddPost(post);
+
+            // ò^âÊäJén
+            var recorder = new DungeonRecorder(quest, self.Location.Main.Stats.Lv);
+            recordingListener = new RecordingMessageWorkListener(self, recorder);
+            MessageWorkListener.AddListener(recordingListener);
 
             // ìØÇ∂äKëwÇ≈ÇÕàÍâÒÇµÇ©ìäçeÇµÇ»Ç¢
             postLocation = self.Location;

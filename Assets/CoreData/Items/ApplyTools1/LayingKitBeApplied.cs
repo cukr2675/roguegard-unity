@@ -80,7 +80,7 @@ namespace Roguegard
                 // 10 ターン経過したらタイルを敷く
                 BaseStatusEffect.Close<ContinuousApplyStatusEffect>(user);
 
-                var visible = MainCharacterWorkUtility.VisibleAt(user.Location, user.Position);
+                var visible = MessageWorkListener.TryOpenHandler(user.Location, user.Position, out var handler);
                 if (_tileLayer != RogueTileLayer.Floor && topTile.Equals(sourceTile))
                 {
                     // すでに同じタイルが敷かれていたら、逆にタイルを消す（床タイルを除く）
@@ -88,20 +88,14 @@ namespace Roguegard
                     {
                         if (visible)
                         {
-                            RogueDevice.Add(DeviceKw.AppendText, user);
-                            RogueDevice.Add(DeviceKw.AppendText, "は");
-                            RogueDevice.Add(DeviceKw.AppendText, topTile);
-                            RogueDevice.Add(DeviceKw.AppendText, "を取り壊した\n");
+                            handler.AppendText(user).AppendText("は").AppendText(topTile).AppendText("を取り壊した\n");
                         }
                     }
                     else
                     {
                         if (visible)
                         {
-                            RogueDevice.Add(DeviceKw.AppendText, user);
-                            RogueDevice.Add(DeviceKw.AppendText, "は");
-                            RogueDevice.Add(DeviceKw.AppendText, topTile);
-                            RogueDevice.Add(DeviceKw.AppendText, "を取り壊せなかった\n");
+                            handler.AppendText(user).AppendText("は").AppendText(topTile).AppendText("を取り壊せなかった\n");
                         }
                     }
                 }
@@ -111,16 +105,14 @@ namespace Roguegard
                     {
                         if (visible)
                         {
-                            RogueDevice.Add(DeviceKw.AppendText, user);
-                            RogueDevice.Add(DeviceKw.AppendText, "は");
-                            RogueDevice.Add(DeviceKw.AppendText, sourceTile);
+                            handler.AppendText(user).AppendText("は").AppendText(sourceTile);
                             if (sourceTileHasCollider)
                             {
-                                RogueDevice.Add(DeviceKw.AppendText, "を建てた\n");
+                                handler.AppendText("を建てた\n");
                             }
                             else
                             {
-                                RogueDevice.Add(DeviceKw.AppendText, "を敷いた\n");
+                                handler.AppendText("を敷いた\n");
                             }
                         }
                     }
@@ -128,13 +120,11 @@ namespace Roguegard
                     {
                         if (visible)
                         {
-                            RogueDevice.Add(DeviceKw.AppendText, user);
-                            RogueDevice.Add(DeviceKw.AppendText, "は");
-                            RogueDevice.Add(DeviceKw.AppendText, sourceTile);
-                            RogueDevice.Add(DeviceKw.AppendText, "を建てられなかった\n");
+                            handler.AppendText(user).AppendText("は").AppendText(sourceTile).AppendText("を建てられなかった\n");
                         }
                     }
                 }
+                handler?.Dispose();
                 return true;
             }
         }

@@ -29,19 +29,17 @@ namespace Roguegard
                 self.Position == tool.Position &&   // 重なっていないオブジェクトは拾えない。
                 this.Locate(tool, self, self, activationDepth)) // 拾う
             {
-                if (MainCharacterWorkUtility.VisibleAt(self.Location, self.Position))
+                if (MessageWorkListener.TryOpenHandler(self.Location, self.Position, out var h))
                 {
-                    RogueDevice.AddWork(DeviceKw.EnqueueWork, RogueCharacterWork.CreateSync(self));
-                    RogueDevice.Add(DeviceKw.AppendText, self);
-                    RogueDevice.Add(DeviceKw.AppendText, "は");
-                    RogueDevice.Add(DeviceKw.AppendText, tool);
+                    using var handler = h;
+                    handler.EnqueueWork(RogueCharacterWork.CreateSync(self));
+                    handler.AppendText(self).AppendText("は").AppendText(tool);
                     if (tool.Stack >= 2)
                     {
-                        RogueDevice.Add(DeviceKw.AppendText, "x");
-                        RogueDevice.Add(DeviceKw.AppendText, tool.Stack);
+                        handler.AppendText("x").AppendText(tool.Stack);
                     }
-                    RogueDevice.Add(DeviceKw.AppendText, "を拾った\n");
-                    RogueDevice.Add(DeviceKw.EnqueueSE, MainInfoKw.PickUp);
+                    handler.AppendText("を拾った\n");
+                    handler.EnqueueSE(MainInfoKw.PickUp);
                 }
                 return true;
             }

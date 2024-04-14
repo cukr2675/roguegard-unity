@@ -28,14 +28,14 @@ namespace Roguegard
         protected override void NewAffectTo(
             RogueObj target, RogueObj user, float activationDepth, in RogueMethodArgument arg, StackableStatusEffect statusEffect)
         {
-            if (MainCharacterWorkUtility.VisibleAt(target.Location, target.Position))
+            if (MessageWorkListener.TryOpenHandler(target.Location, target.Position, out var h))
             {
                 _smoke ??= new VariantSpriteMotion(CoreMotions.Smoke, new Color32(250, 100, 200, 255));
-                RogueDevice.Add(DeviceKw.EnqueueSE, StdKw.StatusEffect);
-                RogueDevice.AddWork(DeviceKw.EnqueueWork, RogueCharacterWork.CreateSpriteMotion(target, CoreMotions.Sleep, true));
-                RogueDevice.AddWork(DeviceKw.EnqueueWork, RogueCharacterWork.CreateEffect(target.Position, _smoke, false));
-                RogueDevice.Add(DeviceKw.AppendText, target);
-                RogueDevice.Add(DeviceKw.AppendText, "は眠ってしまった！\n");
+                using var handler = h;
+                handler.EnqueueSE(StdKw.StatusEffect);
+                handler.EnqueueWork(RogueCharacterWork.CreateSpriteMotion(target, CoreMotions.Sleep, true));
+                handler.EnqueueWork(RogueCharacterWork.CreateEffect(target.Position, _smoke, false));
+                handler.AppendText(target).AppendText("は眠ってしまった！\n");
             }
             MainCharacterWorkUtility.EnqueueViewDequeueState(target);
         }
@@ -55,10 +55,10 @@ namespace Roguegard
         protected override void RemoveClose(RogueObj self, StatusEffectCloseType closeType = StatusEffectCloseType.Manual)
         {
             SpeedCalculator.SetDirty(self);
-            if (MainCharacterWorkUtility.VisibleAt(self.Location, self.Position))
+            if (MessageWorkListener.TryOpenHandler(self.Location, self.Position, out var h))
             {
-                RogueDevice.Add(DeviceKw.AppendText, self);
-                RogueDevice.Add(DeviceKw.AppendText, "は目を覚ました！\n");
+                using var handler = h;
+                handler.AppendText(self).AppendText("は目を覚ました！\n");
             }
             base.RemoveClose(self);
         }
