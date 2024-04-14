@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-using Roguegard.Extensions;
 using Roguegard.CharacterCreation;
 
 namespace Roguegard
@@ -12,6 +11,8 @@ namespace Roguegard
         public IRaceOption Open(
             RogueObj self, MainInfoSetType infoSetType, bool polymorph2Base, IRaceOption raceOption, ICharacterCreationData characterCreationData)
         {
+            var info = PostboxInfo.Get(self);
+            if (info == null) { PostboxInfo.SetTo(self); }
             return raceOption;
         }
 
@@ -28,7 +29,6 @@ namespace Roguegard
 
         public void InitializeObj(RogueObj self, IRaceOption raceOption, ICharacterCreationData characterCreationData)
         {
-            PostboxInfo.SetTo(self);
         }
     }
 }

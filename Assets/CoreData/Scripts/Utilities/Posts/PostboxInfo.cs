@@ -16,14 +16,14 @@ namespace Roguegard
         private PostboxInfo()
         {
             _posts = new List<RoguePost>();
-            MaxPosts = 100;
+            MaxPosts = 10;
         }
 
         public void AddPost(RoguePost post)
         {
             if (post == null) throw new System.ArgumentNullException(nameof(post));
 
-            if (MaxPosts >= _posts.Count)
+            if (_posts.Count >= MaxPosts)
             {
                 // 最大ポスト数を超えるとき、最も古いポストを削除する
                 _posts.RemoveAt(0);
@@ -34,6 +34,8 @@ namespace Roguegard
 
         public static PostboxInfo Get(RogueObj obj)
         {
+            obj.Main.TryOpenRogueEffects(obj);
+
             if (obj.TryGet<Info>(out var info))
             {
                 return info.info;
