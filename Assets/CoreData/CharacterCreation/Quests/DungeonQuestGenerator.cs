@@ -49,7 +49,8 @@ namespace Roguegard.CharacterCreation
             }
 
             var lootTable = GenerateLootTable(cost, dungeon, random);
-            var quest = new DungeonQuest(dungeon, objectives, environments, lootTable);
+            var seed = random.Next(int.MinValue, int.MaxValue);
+            var quest = new DungeonQuest(dungeon, seed, objectives, environments, lootTable);
             return quest;
         }
 

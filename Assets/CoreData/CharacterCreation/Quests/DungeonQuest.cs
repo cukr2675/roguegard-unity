@@ -16,6 +16,7 @@ namespace Roguegard.CharacterCreation
         public IRogueDetails Details => _objectives[0].Details;
 
         public DungeonCreationData Dungeon { get; }
+        public int Seed { get; }
 
         private readonly IntrinsicBuilderList _objectives;
         public Spanning<IReadOnlyIntrinsic> Objectives => _objectives;
@@ -37,12 +38,13 @@ namespace Roguegard.CharacterCreation
         }
 
         public DungeonQuest(
-            DungeonCreationData dungeon, IEnumerable<IReadOnlyIntrinsic> objectives, IEnumerable<IReadOnlyIntrinsic> environments,
+            DungeonCreationData dungeon, int seed, IEnumerable<IReadOnlyIntrinsic> objectives, IEnumerable<IReadOnlyIntrinsic> environments,
             IEnumerable<IEnumerable<IReadOnlyStartingItem>> lootTable)
         {
             if (!objectives.Any()) throw new System.ArgumentException();
 
             Dungeon = dungeon;
+            Seed = seed;
             _objectives = new IntrinsicBuilderList();
             _objectives.AddClones(objectives);
             _environments = new IntrinsicBuilderList();
@@ -57,6 +59,8 @@ namespace Roguegard.CharacterCreation
             {
                 throw new RogueException($"すでにクエスト ({quest.Name}: {quest.Caption}) を開始しています。");
             }
+
+            RogueRandom.Primary = new RogueRandom(Seed);
 
             Dungeon.StartDungeon(player, RogueRandom.Primary);
 
