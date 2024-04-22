@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using Roguegard.Extensions;
+
 namespace Roguegard
 {
     public class CommonBeDefeated : ReferableScript, IAffectRogueMethod
@@ -29,7 +31,18 @@ namespace Roguegard
                     handler.EnqueueWork(RogueCharacterWork.CreateSpriteMotion(self, KeywordSpriteMotion.BeDefeated, true));
                     handler.Handle(DeviceKw.EnqueueWaitSeconds, 1f);
                 }
-                RogueDevice.Add(DeviceKw.GameOver, self);
+                if (self == RogueDevice.Primary.Subject)
+                {
+                    RogueDevice.Add(DeviceKw.GameOver, self);
+                }
+                else
+                {
+                    const float beDefeatedLocateActivationDepth = 99f;
+                    default(IActiveRogueMethodCaller).LocateSavePoint(self, null, beDefeatedLocateActivationDepth, RogueWorldSavePointInfo.Instance, true);
+
+                    var memberInfo = LobbyMemberList.GetMemberInfo(self);
+                    memberInfo.SavePoint = RogueWorldSavePointInfo.Instance;
+                }
                 return true;
             }
             else if (MessageWorkListener.TryOpenHandler(self.Location, self.Position, out var h))

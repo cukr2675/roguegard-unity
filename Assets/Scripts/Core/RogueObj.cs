@@ -196,9 +196,10 @@ namespace Roguegard
             {
                 // ０個になったら null 空間へ移動させて消去する。
                 // 装備解除時に再スタックさせるための移動が必要なため、 activationDepth = 100 で実行する。
+                const float setStackLocateActivationDepth = 100f;
                 var locateMethod = Main.InfoSet.Locate;
                 var arg = new RogueMethodArgument(targetObj: null);
-                RogueMethodAspectState.Invoke(MainInfoKw.Locate, locateMethod, this, user, 100f, arg);
+                RogueMethodAspectState.Invoke(MainInfoKw.Locate, locateMethod, this, user, setStackLocateActivationDepth, arg);
             }
             return true;
         }

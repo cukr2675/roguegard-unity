@@ -21,7 +21,7 @@ namespace RoguegardUnity
 
         bool IStandardRogueDeviceEventHandler.TryHandle(IKeyword keyword, int integer, float number, object obj)
         {
-            if (keyword == DeviceKw.GameOver && obj is RogueObj leaderCharacter)
+            if (keyword == DeviceKw.GameOver && obj is RogueObj leaderCharacter && leaderCharacter == componentManager.Subject)
             {
                 AfterGameOver(leaderCharacter);
                 return true;
@@ -37,30 +37,12 @@ namespace RoguegardUnity
             // 消滅でゲームオーバーになったときのためにスタック数を設定する
             leaderCharacter.TrySetStack(1);
 
-            if (leaderCharacter == componentManager.Subject)
-            {
-                // 一時的にワールド直下へ移動
-                var dungeon = leaderCharacter.Location;
-                SpaceUtility.TryLocate(leaderCharacter, componentManager.World);
+            // 一時的にワールド直下へ移動
+            var dungeon = leaderCharacter.Location;
+            SpaceUtility.TryLocate(leaderCharacter, componentManager.World);
 
-                componentManager.EventManager.AddMenu(gameOverMenu, leaderCharacter, null, new(targetObj: dungeon));
-                RogueDevice.Add(DeviceKw.EnqueueViewDequeueState, 0);
-            }
-            else
-            {
-                FadeCanvas.StartCanvasCoroutine(Coroutine());
-            }
-
-            IEnumerator Coroutine()
-            {
-                // RogueMethodAspectState の処理の完了を待つ
-                yield return null;
-
-                default(IActiveRogueMethodCaller).LocateSavePoint(leaderCharacter, null, 0f, RogueWorldSavePointInfo.Instance, true);
-
-                var memberInfo = LobbyMemberList.GetMemberInfo(leaderCharacter);
-                memberInfo.SavePoint = RogueWorldSavePointInfo.Instance;
-            }
+            componentManager.EventManager.AddMenu(gameOverMenu, leaderCharacter, null, new(targetObj: dungeon));
+            RogueDevice.Add(DeviceKw.EnqueueViewDequeueState, 0);
         }
 
         /// <summary>
