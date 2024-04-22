@@ -76,6 +76,10 @@ MonoBehaviour:
     _asset: {fileID: 11400000, guid: 2c07a029ce15f914c86a49e956e04590, type: 2}
   - _key: Core.SewingMachine
     _asset: {fileID: 11400000, guid: abab981097431aa43a1040531251ac64, type: 2}
+  - _key: Core.SpQuestAtelier
+    _asset: {fileID: 11400000, guid: 2a072d3fd47c2c042a0917960d61e113, type: 2}
+  - _key: Core.SpQuestMonolith
+    _asset: {fileID: 11400000, guid: bd14012f6e0dbfb48a7212b62078599d, type: 2}
   - _key: Core.Stool
     _asset: {fileID: 11400000, guid: a89d1895d6b9e39429f6d5b3229a3e15, type: 2}
   - _key: Core.Chest
