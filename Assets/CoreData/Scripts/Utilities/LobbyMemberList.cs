@@ -93,8 +93,8 @@ namespace Roguegard
                     ifInLobby.OtherNode.Add(explore);
 
                     var node = new RogueBehaviourNodeList();
-                    node.Add(new PostQuestBehaviourNode());
-                    node.Add(new PostMonsterHouseBehaviourNode());
+                    //node.Add(new PostQuestBehaviourNode());
+                    //node.Add(new PostMonsterHouseBehaviourNode());
                     node.Add(ifInLobby);
                     RogueBehaviourNodeEffect.SetBehaviourNode(self, node, priority);
                 }
