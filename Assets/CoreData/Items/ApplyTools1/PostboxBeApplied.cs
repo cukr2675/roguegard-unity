@@ -40,7 +40,7 @@ namespace Roguegard
                 return model.Name;
             }
 
-            protected override void ItemActivate(RoguePost model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            protected override void ActivateItem(RoguePost model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 root.OpenMenu(nextMenu, null, null, new(other: model));
             }

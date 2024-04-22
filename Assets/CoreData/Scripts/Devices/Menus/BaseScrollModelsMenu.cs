@@ -61,7 +61,7 @@ namespace Roguegard.Device
         }
 
         protected abstract string GetItemName(T model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg);
-        protected abstract void ItemActivate(T model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg);
+        protected abstract void ActivateItem(T model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg);
 
         private void Exit(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         {
@@ -94,7 +94,7 @@ namespace Roguegard.Device
             root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
 
             // å¬ï èàóùÇé¿çs
-            ItemActivate(t, root, self, user, arg);
+            ActivateItem(t, root, self, user, arg);
         }
     }
 }

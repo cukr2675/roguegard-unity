@@ -310,7 +310,7 @@ namespace RoguegardUnity
                 return ChoiceListPresenter.Instance.GetItemName(model, root, self, user, arg);
             }
 
-            protected override void ItemActivate(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            protected override void ActivateItem(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 ChoiceListPresenter.Instance.ActivateItem(model, root, self, user, arg);
             }
@@ -370,7 +370,7 @@ namespace RoguegardUnity
                     return WindowFrameList.GetName(index);
                 }
 
-                protected override void ItemActivate(int index, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+                protected override void ActivateItem(int index, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
                 {
                     var device = (StandardRogueDevice)RogueDevice.Primary;
                     device.Options.SetWindowFrame(index, device.Options.WindowFrameColor);

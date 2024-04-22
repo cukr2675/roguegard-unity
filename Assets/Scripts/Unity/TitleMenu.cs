@@ -281,7 +281,7 @@ namespace RoguegardUnity
                     return credit.Name;
                 }
 
-                protected override void ItemActivate(CreditData credit, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+                protected override void ActivateItem(CreditData credit, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
                 {
                     parent._creditMenu.Show(credit, root);
                 }

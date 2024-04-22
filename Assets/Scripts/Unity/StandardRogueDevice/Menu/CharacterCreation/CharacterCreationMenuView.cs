@@ -326,7 +326,7 @@ namespace RoguegardUnity
                 return model.ShortName;
             }
 
-            protected override void ItemActivate(
+            protected override void ActivateItem(
                 CharacterCreationDataBuilder model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 if (nextMenu == null) { nextMenu = new DialogModelsMenuChoice(("ÉçÅ[ÉhÇ∑ÇÈ", Load)).AppendExit(); }

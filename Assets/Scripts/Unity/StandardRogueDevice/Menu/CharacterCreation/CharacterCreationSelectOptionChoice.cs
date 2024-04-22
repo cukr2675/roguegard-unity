@@ -101,7 +101,7 @@ namespace RoguegardUnity
                 return null;
             }
 
-            protected override void ItemActivate(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            protected override void ActivateItem(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 if (arg.Other is RaceBuilder raceBuilder)
                 {

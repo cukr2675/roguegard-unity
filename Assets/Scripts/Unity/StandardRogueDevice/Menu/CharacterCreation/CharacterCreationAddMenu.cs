@@ -39,7 +39,7 @@ namespace RoguegardUnity
             return ((IRogueDescription)model).Name;
         }
 
-        protected override void ItemActivate(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+        protected override void ActivateItem(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         {
             var builderType = (System.Type)arg.Other;
             if (builderType == typeof(AppearanceBuilder))

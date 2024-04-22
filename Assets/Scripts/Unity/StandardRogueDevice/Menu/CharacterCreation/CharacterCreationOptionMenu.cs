@@ -106,7 +106,7 @@ namespace RoguegardUnity
             return ChoiceListPresenter.Instance.GetItemName(model, root, self, user, arg);
         }
 
-        protected override void ItemActivate(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+        protected override void ActivateItem(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         {
             ChoiceListPresenter.Instance.ActivateItem(model, root, self, user, arg);
         }
@@ -281,7 +281,7 @@ namespace RoguegardUnity
                 return gender.Name;
             }
 
-            protected override void ItemActivate(IRogueGender gender, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            protected override void ActivateItem(IRogueGender gender, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 builder.Gender = gender;
                 root.Back();

@@ -29,7 +29,7 @@ namespace RoguegardUnity
             return partyMember.GetName();
         }
 
-        protected override void ItemActivate(RogueObj partyMember, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+        protected override void ActivateItem(RogueObj partyMember, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         {
             // 選択したパーティメンバーの情報と選択肢を表示する
             root.OpenMenuAsDialog(memberMenu, self, null, new(targetObj: partyMember));

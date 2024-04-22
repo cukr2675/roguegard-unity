@@ -106,7 +106,7 @@ namespace RoguegardUnity
                 return obj.GetName();
             }
 
-            protected override void ItemActivate(RogueObj obj, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            protected override void ActivateItem(RogueObj obj, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 // 選択したアイテムの情報と選択肢を表示する
                 root.OpenMenuAsDialog(commandMenu, self, null, new(targetObj: arg.TargetObj, tool: obj));
