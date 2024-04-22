@@ -4,6 +4,7 @@ using UnityEngine;
 
 using Roguegard.CharacterCreation;
 using Roguegard.Device;
+using Roguegard.Extensions;
 
 namespace Roguegard
 {
@@ -25,21 +26,21 @@ namespace Roguegard
     public class DungeonRecorder
     {
         public DungeonQuest Quest { get; }
-        public int Floor { get; }
+        public int FloorLv { get; }
         public MessageWorkList List { get; }
 
         private PlayCommand playCommand;
 
-        public DungeonRecorder(DungeonQuest quest, int floor)
+        public DungeonRecorder(DungeonQuest quest, int floorLv)
         {
             Quest = quest;
-            Floor = floor;
+            FloorLv = floorLv;
             List = new MessageWorkList();
-            var obj = new RogueObj();
-            obj.Main = new MainRogueObjInfo();
-            obj.Main.SetBaseInfoSet(obj, RogueDevice.Primary.Player.Main.InfoSet);
-            List.Add(RogueCharacterWork.CreateWalk(obj, Vector2Int.zero, RogueDirection.Down, KeywordSpriteMotion.Attack, false));
-            List.Add(RogueCharacterWork.CreateWalk(obj, Vector2Int.one*100, 1f, RogueDirection.Down, KeywordSpriteMotion.Attack, false));
+            //var obj = new RogueObj();
+            //obj.Main = new MainRogueObjInfo();
+            //obj.Main.SetBaseInfoSet(obj, RogueDevice.Primary.Player.Main.InfoSet);
+            //List.Add(RogueCharacterWork.CreateWalk(obj, Vector2Int.zero, RogueDirection.Down, KeywordSpriteMotion.Attack, false));
+            //List.Add(RogueCharacterWork.CreateWalk(obj, Vector2Int.one*100, 1f, RogueDirection.Down, KeywordSpriteMotion.Attack, false));
             playCommand = new PlayCommand() { recorder = this };
         }
 
@@ -47,7 +48,7 @@ namespace Roguegard
         {
             if (keyword == DeviceKw.AppendText)
             {
-                List.Add(integer);
+                List.Add(integer.ToString());
             }
         }
 
@@ -55,7 +56,7 @@ namespace Roguegard
         {
             if (keyword == DeviceKw.AppendText)
             {
-                List.Add(number);
+                List.Add(number.ToString());
             }
         }
 
@@ -83,6 +84,22 @@ namespace Roguegard
         public void Play(RogueObj player)
         {
             // Seed ÇéwíËÇµÇƒäKëwê∂ê¨
+            var random = new RogueRandom(Quest.Seed);
+            var world = RogueWorldInfo.GetWorld(player);
+            var dungeon = Quest.Dungeon.CreateObj(world, Vector2Int.zero, random);
+            var dungeonSeed = random.Next(int.MinValue, int.MaxValue);
+            DungeonInfo.SetSeedTo(dungeon, dungeonSeed);
+            var dungeonInfo = DungeonInfo.Get(dungeon);
+            if (!dungeonInfo.TryGetRandom(FloorLv, out var floorRandom)) throw new RogueException();
+            if (!dungeonInfo.TryGetLevel(FloorLv, out var level)) throw new RogueException();
+
+            var floor = Quest.Dungeon.CreateObj(dungeon, Vector2Int.zero, floorRandom);
+            level.GenerateFloor(player, floor, floorRandom);
+
+            var view = ViewInfo.Get(player);
+            //player.TryLocate(floor, Vector2Int.zero, false, false, false, false, StackOption.Default);
+            view.ReadyView(player.Location);
+            default(IActiveRogueMethodCaller).Affect(player, 0f, VisionStatusEffect.Callback);
 
             var device = RogueDeviceEffect.Get(player);
             device.SetDeviceCommand(playCommand, null, RogueMethodArgument.Identity);
