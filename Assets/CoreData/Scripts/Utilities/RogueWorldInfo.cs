@@ -11,12 +11,15 @@ namespace Roguegard
 
         public LobbyMemberList LobbyMembers { get; }
 
+        public RogueChartState ChartState { get; set; }
+
         private RogueWorldInfo() { }
 
         private RogueWorldInfo(RogueObj lobby)
         {
             Lobby = lobby;
             LobbyMembers = new LobbyMemberList();
+            ChartState = new RogueChartState();
         }
 
         public static void SetTo(RogueObj world, RogueObj lobby)

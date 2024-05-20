@@ -9,8 +9,8 @@ namespace Roguegard
         public static string GetText(RogueObj obj)
         {
             obj.Main.TryOpenRogueEffects(obj);
-            var info = obj.Get<Info>();
-            return info.quote?.Text ?? info.text;
+            if (obj.TryGet<Info>(out var info)) return info.quote?.Text ?? info.text;
+            else return null;
         }
 
         public static string GetQuoteName(RogueObj obj)

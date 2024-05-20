@@ -10,21 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 797073a39246ce24195bfdd54b79f0dc, type: 3}
-  m_Name: SpQuestMonolith
+  m_Name: ChartPad
   m_EditorClassIdentifier: 
   _overridesCost: 0
-  _cost: 0
+  _cost: 1
   _costIsUnknown: 0
   _race:
-    _name: "\u30B9\u30DA\u30AF\u30A8\u30E2\u30CE\u30EA\u30B9"
-    _icon: {fileID: -1362082320, guid: 2c3b84187a5a624489356b62e46bf28e, type: 3}
-    _color: {r: 0.22807114, g: 0.21248667, b: 0.23584908, a: 1}
+    _name: "\u30C1\u30E3\u30FC\u30C8\u30D1\u30C3\u30C9"
+    _icon: {fileID: -7854557981505934654, guid: 12a1a85046ed6d54e850e8a2b99fa7e9, type: 3}
+    _color: {r: 1, g: 1, b: 1, a: 1}
     _caption: 
     _details:
       _script: {fileID: 0}
       _ref:
         rid: -2
-    _cost: 0
+    _cost: 1
     _costIsUnknown: 0
     _genders: {fileID: 0}
     _category: {fileID: 11400000, guid: 0082811a5684dae4babc72d3c932f4a5, type: 2}
@@ -34,7 +34,7 @@ MonoBehaviour:
     _def: 0
     _loadCapacity: 0
     _faction: {fileID: 0}
-    _ability: 11
+    _ability: 4
     _material: {fileID: 0}
     _lootTable: []
     _walk:
@@ -82,9 +82,9 @@ MonoBehaviour:
       _ref:
         rid: -2
     _beApplied:
-      _script: {fileID: 11500000, guid: 72c8b62eeeb3832488c1f16232c9763e, type: 3}
+      _script: {fileID: 11500000, guid: c54756706d3bc3d4a9cbd016cb0d0a0d, type: 3}
       _ref:
-        rid: 2885636890002456586
+        rid: 7922971005043867650
     _beThrown:
       _script: {fileID: 0}
       _ref:
@@ -117,7 +117,7 @@ MonoBehaviour:
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
-    - rid: 2885636890002456586
-      type: {class: SpQuestMonolithBeApplied, ns: Roguegard, asm: Roguegard.CoreData}
+    - rid: 7922971005043867650
+      type: {class: ChartPadBeApplied, ns: Roguegard, asm: Roguegard.CoreData}
       data:
         _assemblyReflectionAssetDummy: 

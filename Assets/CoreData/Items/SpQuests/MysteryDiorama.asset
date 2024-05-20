@@ -10,21 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 797073a39246ce24195bfdd54b79f0dc, type: 3}
-  m_Name: SpQuestAtelier
+  m_Name: MysteryDiorama
   m_EditorClassIdentifier: 
   _overridesCost: 0
-  _cost: 0
+  _cost: 1
   _costIsUnknown: 0
   _race:
-    _name: "\u30B9\u30DA\u30AF\u30A8\u30A2\u30C8\u30EA\u30A8"
-    _icon: {fileID: 427690671, guid: 2c3b84187a5a624489356b62e46bf28e, type: 3}
-    _color: {r: 0.9622642, g: 0.78332096, b: 0.27687788, a: 1}
+    _name: "\u3075\u3057\u304E\u306A\u30B8\u30AA\u30E9\u30DE"
+    _icon: {fileID: -7854557981505934654, guid: 12a1a85046ed6d54e850e8a2b99fa7e9, type: 3}
+    _color: {r: 0.9811321, g: 0.8825522, b: 0.48593804, a: 1}
     _caption: 
     _details:
       _script: {fileID: 0}
       _ref:
         rid: -2
-    _cost: 0
+    _cost: 1
     _costIsUnknown: 0
     _genders: {fileID: 0}
     _category: {fileID: 11400000, guid: 0082811a5684dae4babc72d3c932f4a5, type: 2}
@@ -34,7 +34,7 @@ MonoBehaviour:
     _def: 0
     _loadCapacity: 0
     _faction: {fileID: 0}
-    _ability: 11
+    _ability: 4
     _material: {fileID: 0}
     _lootTable: []
     _walk:
@@ -82,9 +82,9 @@ MonoBehaviour:
       _ref:
         rid: -2
     _beApplied:
-      _script: {fileID: 11500000, guid: 0800e775424564e4995fe7662aa493c4, type: 3}
+      _script: {fileID: 11500000, guid: 1ab3d7fb6317ceb4a98305103662b316, type: 3}
       _ref:
-        rid: 2885636890002456578
+        rid: 7922971087598256131
     _beThrown:
       _script: {fileID: 0}
       _ref:
@@ -102,10 +102,7 @@ MonoBehaviour:
       _script: {fileID: 0}
       _ref:
         rid: -2
-    _openEffects:
-    - _script: {fileID: 11500000, guid: d8fa8820ea9221e4292d6c139ca5ed35, type: 3}
-      _ref:
-        rid: 2885636890002456579
+    _openEffects: []
     _lv: 0
     _gender: {fileID: 0}
     _hpName: 
@@ -120,20 +117,14 @@ MonoBehaviour:
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
-    - rid: 2885636890002456578
-      type: {class: SpQuestAtelierBeApplied, ns: Roguegard, asm: Roguegard.CoreData}
+    - rid: 7922971087598256131
+      type: {class: MysteryDioramaBeApplied, ns: Roguegard, asm: Roguegard.CoreData}
       data:
         _assemblyReflectionAssetDummy: 
-    - rid: 2885636890002456579
-      type: {class: SpQuestAtelierOpen, ns: Roguegard, asm: Roguegard.CoreData}
-      data:
-        _assemblyReflectionAssetDummy: 
-        _monolith:
-          _option: {fileID: 11400000, guid: bd14012f6e0dbfb48a7212b62078599d, type: 2}
+        _newFloor:
+          _option: {fileID: 11400000, guid: f2beb08d304645b498645c85ab0577ec, type: 2}
           _optionDescription: {fileID: 0}
           _generatorWeight: 1
           _stack: 1
           _members:
             _items: []
-        _floorTile: {fileID: 11400000, guid: 289d2d375cda4a542bc0591e961cd7dc, type: 2}
-        _wallTile: {fileID: 11400000, guid: 7b5f75e0ffd65ff4ab579674c671753c, type: 2}

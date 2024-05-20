@@ -30,14 +30,17 @@ namespace Roguegard
                 var text = NotepadInfo.GetText(memo);
                 var scroll = root.Get(DeviceKw.MenuTextEditor);
                 scroll.OpenView(ChoiceListPresenter.Instance, Spanning<object>.Empty, root, self, null, new(tool: memo, other: text));
-                ExitModelsMenuChoice.OpenLeftAnchorExit(root);
+
+                var leftAnchor = root.Get(DeviceKw.MenuLeftAnchor);
+                leftAnchor.OpenView(ChoiceListPresenter.Instance, exit, root, null, null, new(tool: memo));
             }
 
             private static void Exit(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
 
-                NotepadInfo.SetTo(arg.Tool, (string)arg.Other);
+                var scroll = (ITextMenuView)root.Get(DeviceKw.MenuTextEditor);
+                NotepadInfo.SetTo(arg.Tool, scroll.Text);
                 root.Done();
             }
 
