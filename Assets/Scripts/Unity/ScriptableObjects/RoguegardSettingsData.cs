@@ -48,6 +48,9 @@ namespace RoguegardUnity
         [Header("Options")]
         [SerializeField] private string _defaultSaveFileName = "Data.gard";
 
+        [Header("Scripting")]
+        [SerializeField] private ScriptField<IScriptingEvaluator>[] _scriptingEvaluators = null;
+
         [Header("Global Assets")]
         [SerializeField] private ScriptField<ILevelInfoInitializer> _levelInfoInitializer = null;
         [SerializeField] private EquipKeywordData _equipPartOfInnerwear = null;
@@ -81,6 +84,7 @@ namespace RoguegardUnity
             RoguegardSettings.DungeonQuestGenerator = _dungeonQuestGenerator;
             RoguegardSettings.MoneyInfoSet = _money.PrimaryInfoSet;
             RoguegardSettings.JsonSerialization = new JsonSerializationSetting();
+            RoguegardSettings.ScriptingEvaluator = _scriptingEvaluators[0].Ref;
 
             RoguegardSettings.ClearDungeonChoices();
             RoguegardSettings.ClearAssetTable();

@@ -25,19 +25,19 @@ namespace Roguegard
                 var item = items[i];
                 if (!RgpackReference.Equals(item.ChartReference, chartReference)) continue;
 
-                var nextEventRef = item.Chart.GetNextEventOf(item.CurrentCmn);
-                var nextEvent = nextEventRef.GetData<IScriptingEvent>();
-                nextEvent.Invoke();
-                item.CurrentCmn = nextEventRef;
+                var nextCmnRef = item.Chart.GetNextCmnOf(item.CurrentCmn);
+                var nextCmn = nextCmnRef.GetData<IScriptingCmn>();
+                nextCmn.Invoke();
+                item.CurrentCmn = nextCmnRef;
                 return true;
             }
             {
                 var item = new Item(chartReference);
                 items.Add(item);
-                var eventRef = item.Chart.GetFirstEvent();
-                var ev = eventRef.GetData<IScriptingEvent>();
-                ev.Invoke();
-                item.CurrentCmn = eventRef;
+                var cmnRef = item.Chart.GetFirstCmn();
+                var cmn = cmnRef.GetData<IScriptingCmn>();
+                cmn.Invoke();
+                item.CurrentCmn = cmnRef;
             }
 
             nexts.RemoveAt(0);

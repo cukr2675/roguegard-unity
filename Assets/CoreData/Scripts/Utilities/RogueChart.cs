@@ -11,48 +11,48 @@ namespace Roguegard
     {
         public string ID { get; }
 
-        private readonly RgpackReference[] evs;
+        private readonly RgpackReference[] cmns;
 
-        public Spanning<RgpackReference> Events => evs;
+        public Spanning<RgpackReference> Cmns => cmns;
 
         private RogueChart() { }
 
-        public RogueChart(string id, IEnumerable<RgpackReference> evs)
+        public RogueChart(string id, IEnumerable<RgpackReference> cmns)
         {
             ID = id;
-            this.evs = evs.ToArray();
+            this.cmns = cmns.ToArray();
         }
 
         public RogueChart(RogueChart chart)
         {
             ID = chart.ID;
-            evs = chart.evs.ToArray();
+            cmns = chart.cmns.ToArray();
         }
 
         public void SetRgpackID(string rgpackID)
         {
-            for (int i = 0; i < evs.Length; i++)
+            for (int i = 0; i < cmns.Length; i++)
             {
-                evs[i] = new RgpackReference(rgpackID, evs[i].AssetID);
+                cmns[i] = new RgpackReference(rgpackID, cmns[i].AssetID);
             }
         }
 
-        public RgpackReference GetFirstEvent()
+        public RgpackReference GetFirstCmn()
         {
-            return evs[0];
+            return cmns[0];
         }
 
-        public RgpackReference GetNextEventOf(RgpackReference ev)
+        public RgpackReference GetNextCmnOf(RgpackReference cmn)
         {
-            if (ev == null) throw new System.ArgumentNullException(nameof(ev));
+            if (cmn == null) throw new System.ArgumentNullException(nameof(cmn));
 
-            var evIndex = System.Array.IndexOf(evs, ev);
-            if (evIndex == -1) throw new RogueException($"イベント ({ev}) が見つからないため、次のイベントを取得できません。");
+            var cmnIndex = System.Array.IndexOf(cmns, cmn);
+            if (cmnIndex == -1) throw new RogueException($"イベント ({cmn}) が見つからないため、次のイベントを取得できません。");
 
-            if (evIndex < evs.Length - 1)
+            if (cmnIndex < cmns.Length - 1)
             {
-                var nextEv = evs[evIndex];
-                return nextEv;
+                var nextCmn = cmns[cmnIndex];
+                return nextCmn;
             }
             else
             {
