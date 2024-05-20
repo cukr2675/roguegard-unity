@@ -74,10 +74,10 @@ namespace Roguegard.Device
 
         string IModelListPresenter.GetItemName(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         {
-            if (model == null || !(model is T t)) return null;
+            if (model != null && !(model is T t)) return null;
 
             // å¬ï èàóùÇé¿çs
-            return GetItemName(t, root, self, user, arg);
+            return GetItemName((T)model, root, self, user, arg);
         }
 
         void IModelListPresenter.ActivateItem(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
@@ -86,7 +86,7 @@ namespace Roguegard.Device
             var holder = GetViewPositionHolder(root, self, user, arg);
             ViewPosition.Save(root, holder);
 
-            if (model == null || !(model is T t))
+            if (model != null && !(model is T t))
             {
                 root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Cancel);
                 return;
@@ -94,7 +94,7 @@ namespace Roguegard.Device
             root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
 
             // å¬ï èàóùÇé¿çs
-            ActivateItem(t, root, self, user, arg);
+            ActivateItem((T)model, root, self, user, arg);
         }
     }
 }
