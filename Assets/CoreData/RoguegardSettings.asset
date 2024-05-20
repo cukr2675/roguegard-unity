@@ -49,6 +49,10 @@ MonoBehaviour:
   _boneSpriteBaseColor: {r: 1, g: 1, b: 1, a: 1}
   _lightRatio: 0.972549
   _defaultSaveFileName: Data.gard
+  _scriptingEvaluators:
+  - _script: {fileID: 11500000, guid: 5c0433e7c1ca6714496bf806c4f4369d, type: 3}
+    _ref:
+      rid: 7922971030183215106
   _levelInfoInitializer:
     _script: {fileID: 11500000, guid: 0bc94c8470be26542af39396e94082b3, type: 3}
     _ref:
@@ -87,5 +91,9 @@ MonoBehaviour:
     RefIds:
     - rid: 5795394415022571534
       type: {class: StandardLevelInfo, ns: Roguegard, asm: Roguegard.CoreData}
+      data:
+        _assemblyReflectionAssetDummy: 
+    - rid: 7922971030183215106
+      type: {class: MoonSharpScriptingEvaluator, ns: Roguegard.Scripting.MoonSharp, asm: Roguegard.CoreData.Scripting.MoonSharp}
       data:
         _assemblyReflectionAssetDummy: 

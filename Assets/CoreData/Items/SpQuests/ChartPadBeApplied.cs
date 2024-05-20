@@ -32,9 +32,9 @@ namespace Roguegard
                 models.Add(assetId);
                 if (chart != null)
                 {
-                    for (int i = 0; i < chart.Events.Count; i++)
+                    for (int i = 0; i < chart.Cmns.Count; i++)
                     {
-                        models.Add(chart.Events[i]);
+                        models.Add(chart.Cmns[i]);
                     }
                 }
                 models.Add(null);
@@ -64,10 +64,10 @@ namespace Roguegard
                         RogueChartInfo.SetChartTo(chartPad, new RogueChart("Chart1", new RgpackReference[0]));
                         chart = RogueChartInfo.GetChart(chartPad);
                     }
-                    var newEvents = new RgpackReference[chart.Events.Count + 1];
-                    for (int i = 0; i < chart.Events.Count; i++)
+                    var newEvents = new RgpackReference[chart.Cmns.Count + 1];
+                    for (int i = 0; i < chart.Cmns.Count; i++)
                     {
-                        newEvents[i] = chart.Events[i];
+                        newEvents[i] = chart.Cmns[i];
                     }
                     newEvents[newEvents.Length - 1] = new RgpackReference(null, null);
                     RogueChartInfo.SetChartTo(chartPad, new RogueChart(chart.ID, newEvents));
@@ -77,7 +77,7 @@ namespace Roguegard
                 {
                     root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
 
-                    var index = chart.Events.IndexOf((RgpackReference)model);
+                    var index = chart.Cmns.IndexOf((RgpackReference)model);
                     Debug.Log(chartPad);
                     root.OpenMenu(nextMenu, null, null, new(targetObj: chartPad, count: index));
                 }
@@ -101,7 +101,7 @@ namespace Roguegard
                 {
                     var chartPad = arg.TargetObj;
                     var chart = RogueChartInfo.GetChart(chartPad);
-                    RogueChartInfo.SetChartTo(chartPad, new RogueChart(value, chart.Events.ToArray()));
+                    RogueChartInfo.SetChartTo(chartPad, new RogueChart(value, chart.Cmns.ToArray()));
                 }
             }
         }
@@ -136,7 +136,7 @@ namespace Roguegard
                     var chartPad = arg.TargetObj;
                     var chart = RogueChartInfo.GetChart(chartPad);
                     var index = arg.Count;
-                    var rgpackReference = chart.Events[index];
+                    var rgpackReference = chart.Cmns[index];
                     return rgpackReference.AssetID;
                 }
 
@@ -145,7 +145,7 @@ namespace Roguegard
                     var chartPad = arg.TargetObj;
                     var chart = RogueChartInfo.GetChart(chartPad);
                     var index = arg.Count;
-                    var events = chart.Events.ToArray();
+                    var events = chart.Cmns.ToArray();
                     var rgpackReference = events[index];
                     events[index] = new RgpackReference(rgpackReference.RgpackID, value);
                     RogueChartInfo.SetChartTo(chartPad, new RogueChart(chart.ID, events));
