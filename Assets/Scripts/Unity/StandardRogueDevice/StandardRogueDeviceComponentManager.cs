@@ -301,8 +301,13 @@ namespace RoguegardUnity
                 }
                 else
                 {
-                    // コマンド入力処理を行う
-                    touchController.CommandProcessing(Player, Subject, FastForward);
+                    var worldInfo = RogueWorldInfo.GetByCharacter(Player);
+                    worldInfo.ChartState ??= new RogueChartState();
+                    if (!worldInfo.ChartState.TryUpdate())
+                    {
+                        // コマンド入力処理を行う
+                        touchController.CommandProcessing(Player, Subject, FastForward);
+                    }
                 }
             }
             return !characterRenderSystem.InAnimation && !touchController.InAnimation;

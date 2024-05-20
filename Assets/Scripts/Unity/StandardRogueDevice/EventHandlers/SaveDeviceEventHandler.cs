@@ -4,6 +4,7 @@ using UnityEngine;
 
 using Roguegard;
 using Roguegard.Device;
+using Roguegard.Extensions;
 
 namespace RoguegardUnity
 {
@@ -13,7 +14,10 @@ namespace RoguegardUnity
         private readonly TouchController touchController;
         private readonly SelectFileMenu writeFileMenu;
         private readonly SelectFileMenu readFileMenu;
+        private readonly SelectFileMenu startPlaytestFileMenu;
         private readonly AutoSaveMenu autoSaveMenu;
+
+        private IRgpack spQuestRgpack;
 
         public SaveDeviceEventHandler(StandardRogueDeviceComponentManager componentManager, TouchController touchController)
         {
@@ -59,6 +63,19 @@ namespace RoguegardUnity
                 });
             });
 
+            startPlaytestFileMenu = new SelectFileMenu(
+                SelectFileMenu.Type.Write,
+                (root, path) => SaveDelay(root, path, false),
+                (root) =>
+                {
+                    root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+                    root.Back();
+                    SelectFileMenu.ShowSaving(root);
+
+                    StandardRogueDeviceSave.GetNewNumberingPath(
+                        RoguegardSettings.DefaultSaveFileName, path => SaveDelay(root, path, false));
+                });
+
             autoSaveMenu = new AutoSaveMenu() { parent = this };
         }
 
@@ -92,6 +109,15 @@ namespace RoguegardUnity
             {
                 // ロード
                 touchController.OpenMenu(componentManager.Subject, readFileMenu, null, null, RogueMethodArgument.Identity);
+                return true;
+            }
+            if (keyword == DeviceKw.StartPlaytest && obj is IRgpack spQuestRgpack)
+            {
+                if (componentManager.CantSave) return true;
+
+                // 名前を付けてテストプレイ
+                this.spQuestRgpack = spQuestRgpack;
+                touchController.OpenMenu(componentManager.Subject, writeFileMenu, null, null, RogueMethodArgument.Identity);
                 return true;
             }
             return false;
@@ -145,6 +171,7 @@ namespace RoguegardUnity
             var stream = RogueFile.Create(path);
             var save = new StandardRogueDeviceSave();
             save.SaveGame(stream, name, data); // ここでシリアル化
+            var flag = false;
             stream.Save(() =>
             {
                 stream.Close();
@@ -161,9 +188,46 @@ namespace RoguegardUnity
                     RogueDevice.Add(DeviceKw.AppendText, path);
                     RogueDevice.Add(DeviceKw.AppendText, "にセーブしました\n");
                 }
+
+                if (spQuestRgpack != null)
+                {
+                    if (!spQuestRgpack.TryGetAsset<SpQuestMonolithInfo>("Main", out var monolithData)) throw new RogueException();
+
+                    var save = new StandardRogueDeviceSave();
+                    var random = new RogueRandom();
+                    var spQuestDeviceData = new StandardRogueDeviceData();
+                    spQuestDeviceData.CurrentRandom = random;
+                    spQuestDeviceData.World = RoguegardSettings.WorldGenerator.CreateObj(null, Vector2Int.zero, random);
+                    var player = RoguegardSettings.CharacterCreationDatabase.LoadPreset(0).CreateObj(spQuestDeviceData.World, Vector2Int.zero, random);
+                    RogueDeviceEffect.SetTo(player);
+                    ViewInfo.SetTo(player);
+                    var worldInfo = RogueWorldInfo.GetByCharacter(player);
+                    worldInfo.LobbyMembers.Add(player);
+
+                    // パーティ・リーダーエフェクト・レベルアップボーナスの初期化
+                    var party = new RogueParty(player.Main.InfoSet.Faction, player.Main.InfoSet.TargetFactions);
+                    RoguePartyUtility.AssignWithPartyMembers(player, party);
+
+                    RoguePartyUtility.Reset(party, new UseNutritionLeaderEffect());
+
+                    spQuestDeviceData.Player = player;
+                    spQuestDeviceData.Subject = spQuestDeviceData.Player;
+                    spQuestDeviceData.Options = data.Options;
+                    spQuestDeviceData.TempRgpack = spQuestRgpack;
+
+                    RgpackReference.LoadRgpack(spQuestRgpack);
+                    spQuestRgpack = null; flag = true;
+                    root.Done();
+
+                    worldInfo.ChartState.MoveNext(monolithData.MainChart);
+
+                    // ロードしたデータを適用
+                    RogueRandom.Primary = spQuestDeviceData.CurrentRandom;
+                    componentManager.OpenDelay(spQuestDeviceData);
+                }
             });
 
-            componentManager.LoadSavePoint(player);
+            if (spQuestRgpack == null && !flag) { componentManager.LoadSavePoint(player); Debug.Log("X"); }
         }
 
         /// <summary>

@@ -15,5 +15,7 @@ namespace RoguegardUnity
         public RogueOptions Options { get; set; }
         public IRogueRandom CurrentRandom { get; set; }
         public string SaveDateTime { get; set; }
+
+        public IRgpack TempRgpack { get; set; }
     }
 }

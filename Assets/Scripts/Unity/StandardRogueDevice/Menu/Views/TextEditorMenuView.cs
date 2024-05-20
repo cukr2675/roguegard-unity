@@ -9,12 +9,14 @@ using TMPro;
 
 namespace RoguegardUnity
 {
-    public class TextEditorMenuView : ModelsMenuView
+    public class TextEditorMenuView : ModelsMenuView, ITextMenuView
     {
         [SerializeField] private CanvasGroup _canvasGroup = null;
         [SerializeField] private TMP_InputField _inputField = null;
 
         public override CanvasGroup CanvasGroup => _canvasGroup;
+
+        public string Text => _inputField.text;
 
         public void Initialize()
         {

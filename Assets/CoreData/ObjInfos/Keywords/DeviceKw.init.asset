@@ -52,6 +52,7 @@ MonoBehaviour:
   _nqueueSEAndWait: {fileID: 11400000, guid: 5bde0acd7e0a32d47b74cbf7e7b8b05b, type: 2}
   _saveGame: {fileID: 11400000, guid: 0c7221eb87b600c46b34d81133dbf6ac, type: 2}
   _startAutoPlay: {fileID: 11400000, guid: ff22f38eb80f84f45ab5345e053d385e, type: 2}
+  _startPlaytest: {fileID: 11400000, guid: b63e740f070ad574f8e0e9d605d7a649, type: 2}
   _startTalk: {fileID: 11400000, guid: cb990fa9f75b57a4b9ca2da0a76c4972, type: 2}
   _submit: {fileID: 11400000, guid: e6d072ae876eb9d47bae945a7b8dda51, type: 2}
   _waitEndOfTalk: {fileID: 11400000, guid: b8c5abc82baaa704da85a8ceac65ebf0, type: 2}
