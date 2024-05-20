@@ -15,6 +15,12 @@ namespace Roguegard.Editor
             var objPath = $"{property.propertyPath}.{attribute.DescriptionVariableName}";
             var objProperty = property.serializedObject.FindProperty(objPath);
             var obj = (IRogueDescription)objProperty.objectReferenceValue;
+            if (obj == null)
+            {
+                EditorGUI.PropertyField(position, property, true);
+                return;
+            }
+
             var preview = AssetPreview.GetAssetPreview(obj.Icon);
             EditorGUI.PropertyField(position, property, new GUIContent(obj.Name ?? label.text, preview), true);
         }
