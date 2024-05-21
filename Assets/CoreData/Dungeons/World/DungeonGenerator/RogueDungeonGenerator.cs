@@ -29,8 +29,8 @@ namespace Roguegard
         [SerializeField] private float _noiseTileThreshold;
         [SerializeField] private float _noiseTileScale;
         [Space]
-        [SerializeField] private ScriptableRogueTile[] _roomFloorTiles;
-        public Spanning<IRogueTile> RoomFloorTiles => _roomFloorTiles;
+        [SerializeField] private ScriptableRogueTile[] _roomGroundTiles;
+        public Spanning<IRogueTile> RoomGroundTiles => _roomGroundTiles;
         [SerializeField] private ScriptableRogueTile[] _roomWallTiles;
         public Spanning<IRogueTile> RoomWallTiles => _roomWallTiles;
         [Space]
@@ -105,7 +105,7 @@ namespace Roguegard
             }
             foreach (var shrinkedRoom in shrinkedRooms)
             {
-                shrinkedRoom.SetTile(tilemap, _roomFloorTiles, _roomWallTiles);
+                shrinkedRoom.SetTile(tilemap, _roomGroundTiles, _roomWallTiles);
             }
             for (int i = 0; i < CorridorTiles.Count / 2; i++)
             {
@@ -134,19 +134,19 @@ namespace Roguegard
         private void OnValidate()
         {
             // 壁を壊したときのため、床は必ず埋める
-            if (!ContainsFloor(_fillTiles)) { Debug.LogError($"[{this}] {nameof(_fillTiles)} に {RogueTileLayer.Floor} が含まれません。"); }
-            if (!ContainsFloor(_roomFloorTiles)) { Debug.LogError($"[{this}] {nameof(_roomFloorTiles)} に {RogueTileLayer.Floor} が含まれません。"); }
-            if (!ContainsFloor(_roomWallTiles)) { Debug.LogError($"[{this}] {nameof(_roomWallTiles)} に {RogueTileLayer.Floor} が含まれません。"); }
+            if (!ContainsGround(_fillTiles)) { Debug.LogError($"[{this}] {nameof(_fillTiles)} に {RogueTileLayer.Ground} が含まれません。"); }
+            if (!ContainsGround(_roomGroundTiles)) { Debug.LogError($"[{this}] {nameof(_roomGroundTiles)} に {RogueTileLayer.Ground} が含まれません。"); }
+            if (!ContainsGround(_roomWallTiles)) { Debug.LogError($"[{this}] {nameof(_roomWallTiles)} に {RogueTileLayer.Ground} が含まれません。"); }
             for (int i = 0; i < _corridorTiles.Length; i++)
             {
-                if (!ContainsFloor(_corridorTiles[i])) { Debug.LogError($"[{this}] {nameof(_corridorTiles)}[{i}] に {RogueTileLayer.Floor} が含まれません。"); }
+                if (!ContainsGround(_corridorTiles[i])) { Debug.LogError($"[{this}] {nameof(_corridorTiles)}[{i}] に {RogueTileLayer.Ground} が含まれません。"); }
             }
 
-            bool ContainsFloor(Spanning<IRogueTile> tiles)
+            bool ContainsGround(Spanning<IRogueTile> tiles)
             {
                 for (int i = 0; i < tiles.Count; i++)
                 {
-                    if (tiles[i].Info.Layer == RogueTileLayer.Floor) return true;
+                    if (tiles[i].Info.Layer == RogueTileLayer.Ground) return true;
                 }
                 return false;
             }

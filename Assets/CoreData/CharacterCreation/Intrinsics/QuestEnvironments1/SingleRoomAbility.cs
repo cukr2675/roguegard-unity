@@ -30,7 +30,7 @@ namespace Roguegard.CharacterCreation
                 if (!result) return false;
 
                 if (generate && self.Location.Space.Tilemap != null && DungeonInfo.TryGet(self.Location, out var info) &&
-                    info.TryGetLevel(0, out var level))
+                    info.TryGetFloor(0, out var level))
                 {
                     // ŠK‘w‚ð•Ç‚Å–„‚ß‚é
                     var tilemap = self.Location.Space.Tilemap;
@@ -65,7 +65,7 @@ namespace Roguegard.CharacterCreation
                     {
                         for (int x = room.xMin + 1; x < room.xMax - 1; x++)
                         {
-                            tilemap.Replace(level.RoomFloorTiles, x, y);
+                            tilemap.Replace(level.RoomGroundTiles, x, y);
                         }
                     }
 

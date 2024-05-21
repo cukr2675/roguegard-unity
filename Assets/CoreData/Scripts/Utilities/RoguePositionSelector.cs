@@ -17,8 +17,8 @@ namespace Roguegard
                 for (int x = 0; x < size.x; x++)
                 {
                     var position = new Vector2Int(x, y);
-                    view.GetTile(position, out _, out var floorTile, out var buildingTile, out var tileObj);
-                    var topTile = buildingTile ?? floorTile;
+                    view.GetTile(position, out _, out var groundTile, out var buildingTile, out var tileObj);
+                    var topTile = buildingTile ?? groundTile;
                     if (topTile == null && tileObj == null) continue;
                     if (topTile != null && (topTile.Info.HasCollider || topTile.Info.Category == CategoryKw.Pool)) continue;
                     if (tileObj != null && (tileObj.HasCollider || tileObj.Main.InfoSet.Category == CategoryKw.Pool)) continue;
@@ -38,8 +38,8 @@ namespace Roguegard
 
         private static bool Mapped(IRogueTilemapView view, Vector2Int position)
         {
-            view.GetTile(position, out _, out var floorTile, out var buildingTile, out var tileObj);
-            return floorTile != null || buildingTile != null || tileObj != null;
+            view.GetTile(position, out _, out var groundTile, out var buildingTile, out var tileObj);
+            return groundTile != null || buildingTile != null || tileObj != null;
         }
 
         public bool TryGetTargetPosition(Vector2Int currentPosition, out Vector2Int targetPosition)

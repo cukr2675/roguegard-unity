@@ -32,12 +32,12 @@ namespace Roguegard
             RogueMethodAspectState.PassiveNext next)
         {
             var result = next.Invoke(keyword, method, self, user, activationDepth, arg);
-            RogueDungeonLevel level = null;
+            RogueDungeonFloor floor = null;
             if (result && keyword == StdKw.BeEntered && RoomIndex < self.Space.RoomCount)
             {
                 self.Space.GetRoom(RoomIndex, out var monsterHouse, out _);
                 if (self.Space.TryGetRoomView(user.Position, out var userRoom, out _) && userRoom.Equals(monsterHouse) &&
-                    (DungeonInfo.Get(self)?.TryGetLevel(self.Main.Stats.Lv, out level) ?? false) && level.EnemyTable.Count >= 1)
+                    (DungeonInfo.Get(self)?.TryGetFloor(self.Main.Stats.Lv, out floor) ?? false) && floor.EnemyTable.Count >= 1)
                 {
                     if (RogueDevice.Primary.Subject.Main.Stats.Party.Members.Contains(user))
                     {
@@ -45,7 +45,7 @@ namespace Roguegard
                     }
 
                     // ìGÇê∂ê¨
-                    var enemies = level.EnemyTable[0];
+                    var enemies = floor.EnemyTable[0];
                     var random = RogueRandom.Primary;
                     for (int i = 0; i < 10; i++)
                     {

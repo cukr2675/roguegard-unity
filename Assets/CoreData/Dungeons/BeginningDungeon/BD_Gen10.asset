@@ -27,7 +27,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 255d75cb8b17d37418c0f99cb5f07a89, type: 2}
   _noiseTileThreshold: 0.6
   _noiseTileScale: 0.2
-  _roomFloorTiles:
+  _roomGroundTiles:
   - {fileID: 11400000, guid: 9e07379c12401a54a9afcdc2d2081fc9, type: 2}
   _roomWallTiles:
   - {fileID: 11400000, guid: 9e07379c12401a54a9afcdc2d2081fc9, type: 2}

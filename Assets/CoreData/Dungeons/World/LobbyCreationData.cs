@@ -8,7 +8,7 @@ namespace Roguegard.CharacterCreation
     [Objforming.Referable]
     public class LobbyCreationData : ItemCreationData
     {
-        [SerializeField] private ScriptableRogueTile _floor = null;
+        [SerializeField] private ScriptableRogueTile _ground = null;
         [SerializeField] private ScriptableRogueTile _roomWall = null;
         [SerializeField] private ScriptableRogueTile _wall = null;
         [SerializeField] private ScriptableStartingItem _doorL = null;
@@ -32,7 +32,7 @@ namespace Roguegard.CharacterCreation
             {
                 for (int x = 0; x < width; x++)
                 {
-                    tilemap.Set(_floor, x, y);
+                    tilemap.Set(_ground, x, y);
                 }
             }
             for (int y = 0; y < height; y++)

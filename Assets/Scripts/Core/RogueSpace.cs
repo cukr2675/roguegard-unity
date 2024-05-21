@@ -353,12 +353,12 @@ namespace Roguegard
             if (TileCollideAt(position, tile.Info.Layer, tile.Info.HasCollider, overwrite, bury)) return false;
 
             //var topTile = Tilemap.GetTop(position);
-            //if (tile.Info.HasCollider || tile.Info.Layer != RogueTileLayer.Floor)
+            //if (tile.Info.HasCollider || tile.Info.Layer != RogueTileLayer.Ground)
             //{
             //    spaceRandom.RemoveRandomPosition(this, position);
             //}
             Tilemap.Set(tile, position);
-            //if (topTile.Info.HasCollider || topTile.Info.Layer != RogueTileLayer.Floor)
+            //if (topTile.Info.HasCollider || topTile.Info.Layer != RogueTileLayer.Ground)
             //{
             //    spaceRandom.AddRandomPosition(this, position);
             //}
@@ -372,7 +372,7 @@ namespace Roguegard
 
             //var topTile = Tilemap.GetTop(position);
             Tilemap.Remove(position, layer);
-            //if (topTile.Info.HasCollider || topTile.Info.Layer != RogueTileLayer.Floor)
+            //if (topTile.Info.HasCollider || topTile.Info.Layer != RogueTileLayer.Ground)
             //{
             //    spaceRandom.AddRandomPosition(this, position);
             //}
@@ -385,19 +385,19 @@ namespace Roguegard
             _objs.Sort(sorted);
         }
 
-        void IRogueTilemapView.GetTile(Vector2Int position, out bool visible, out IRogueTile floorTile, out IRogueTile buildingTile, out RogueObj tileObj)
+        void IRogueTilemapView.GetTile(Vector2Int position, out bool visible, out IRogueTile groundTile, out IRogueTile buildingTile, out RogueObj tileObj)
         {
             if (Tilemap == null || !Tilemap.Rect.Contains(position))
             {
                 visible = false;
-                floorTile = null;
+                groundTile = null;
                 buildingTile = null;
                 tileObj = null;
                 return;
             }
 
             visible = true;
-            floorTile = Tilemap.Get(position, RogueTileLayer.Floor);
+            groundTile = Tilemap.Get(position, RogueTileLayer.Ground);
             buildingTile = Tilemap.Get(position, RogueTileLayer.Building);
             tileObj = tileColliderMap[position.y][position.x];
 

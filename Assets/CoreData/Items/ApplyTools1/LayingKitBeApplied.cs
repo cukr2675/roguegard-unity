@@ -8,7 +8,7 @@ namespace Roguegard
 {
     public class LayingKitBeApplied : BaseApplyRogueMethod
     {
-        [SerializeField] private RogueTileLayer _tileLayer = RogueTileLayer.Floor;
+        [SerializeField] private RogueTileLayer _tileLayer = RogueTileLayer.Ground;
 
         public override bool Invoke(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
         {
@@ -42,7 +42,7 @@ namespace Roguegard
             if (sourceTileHasCollider) { layingPosition = user.Position + user.Main.Stats.Direction.Forward; }
 
             // 床タイルのみ上書き可能
-            var overwrite = _tileLayer == RogueTileLayer.Floor;
+            var overwrite = _tileLayer == RogueTileLayer.Ground;
 
             var topTile = space.Tilemap.GetTop(layingPosition);
             if (!topTile.Equals(sourceTile) && space.TileCollideAt(layingPosition, _tileLayer, sourceTileHasCollider, overwrite))
@@ -81,7 +81,7 @@ namespace Roguegard
                 BaseStatusEffect.Close<ContinuousApplyStatusEffect>(user);
 
                 var visible = MessageWorkListener.TryOpenHandler(user.Location, user.Position, out var handler);
-                if (_tileLayer != RogueTileLayer.Floor && topTile.Equals(sourceTile))
+                if (_tileLayer != RogueTileLayer.Ground && topTile.Equals(sourceTile))
                 {
                     // すでに同じタイルが敷かれていたら、逆にタイルを消す（床タイルを除く）
                     if (space.TryRemove(layingPosition, sourceTile.Info.Layer))

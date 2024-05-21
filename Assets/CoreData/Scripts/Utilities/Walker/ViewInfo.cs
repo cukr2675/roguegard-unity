@@ -64,15 +64,15 @@ namespace Roguegard
             return viewMap.VisibleObjs.Contains(obj);
         }
 
-        public void GetTile(Vector2Int position, out bool visible, out IRogueTile floorTile, out IRogueTile buildingTile, out RogueObj tileObj)
+        public void GetTile(Vector2Int position, out bool visible, out IRogueTile groundTile, out IRogueTile buildingTile, out RogueObj tileObj)
         {
-            viewMap.GetTile(position, out visible, out floorTile, out buildingTile, out tileObj);
+            viewMap.GetTile(position, out visible, out groundTile, out buildingTile, out tileObj);
         }
 
         public bool HasStopperAt(Vector2Int position, bool invisibleIsStopper = true)
         {
-            GetTile(position, out _, out var floorTile, out var buildingTile, out var tileObj);
-            var topTile = buildingTile ?? floorTile;
+            GetTile(position, out _, out var groundTile, out var buildingTile, out var tileObj);
+            var topTile = buildingTile ?? groundTile;
             if (topTile != null) return topTile.Info.HasCollider || topTile.Info.Category == CategoryKw.Pool;
             if (tileObj != null) return tileObj.HasCollider;
             return invisibleIsStopper;

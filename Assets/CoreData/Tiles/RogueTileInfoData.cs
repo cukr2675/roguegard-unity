@@ -35,7 +35,7 @@ namespace Roguegard
 
 
 
-        [SerializeField] private RogueTileLayer _layer = RogueTileLayer.Floor;
+        [SerializeField] private RogueTileLayer _layer = RogueTileLayer.Ground;
         public override RogueTileLayer Layer => _layer;
         
         [SerializeField] private bool _hasCollider = false;

@@ -10,7 +10,7 @@ namespace Roguegard.CharacterCreation
         {
             // ダンジョンの階層データを公開する
             var dungeon = (DungeonCreationData)characterCreationData;
-            DungeonInfo.SetLevelsTo(self, dungeon.Levels, dungeon.LevelType, dungeon.VisibleRadius);
+            DungeonInfo.SetFloorsTo(self, dungeon.Floors, dungeon.LevelType, dungeon.VisibleRadius);
             return raceOption;
         }
 

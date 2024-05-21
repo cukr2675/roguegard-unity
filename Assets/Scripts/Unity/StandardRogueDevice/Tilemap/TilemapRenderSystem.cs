@@ -48,7 +48,7 @@ namespace RoguegardUnity
                 for (int x = 0; x < tilemap.Size.x; x++)
                 {
                     var position = new Vector3Int(x, y, (int)RogueTileLayer.Building);
-                    tilemap.GetTile(new Vector2Int(x, y), out var visible, out var floorTile, out var buildingTile, out var tileObj);
+                    tilemap.GetTile(new Vector2Int(x, y), out var visible, out var groundTile, out var buildingTile, out var tileObj);
                     if (tileObj != null)
                     {
                         tileObj.Main.Sprite.Update(tileObj);
@@ -59,7 +59,7 @@ namespace RoguegardUnity
                     {
                         SetTile(tilemapGrid.Tilemap, position, buildingTile.Tile, buildingTile.EffectedColor);
                     }
-                    else if (floorTile != null)
+                    else if (groundTile != null)
                     {
                         SetTile(tilemapGrid.Tilemap, position, InvisibleTile.Instance, Color.clear);
                     }
@@ -68,15 +68,15 @@ namespace RoguegardUnity
                         SetTile(tilemapGrid.Tilemap, position, null, Color.clear);
                     }
 
-                    var floorPosition = new Vector3Int(x, y, (int)RogueTileLayer.Floor);
-                    if (floorTile != null)
+                    var groundPosition = new Vector3Int(x, y, (int)RogueTileLayer.Ground);
+                    if (groundTile != null)
                     {
-                        tilemapGrid.Tilemap.SetTile(floorPosition, floorTile.Tile);
-                        tilemapGrid.Tilemap.SetColor(floorPosition, floorTile.Info.Color);
+                        tilemapGrid.Tilemap.SetTile(groundPosition, groundTile.Tile);
+                        tilemapGrid.Tilemap.SetColor(groundPosition, groundTile.Info.Color);
                     }
                     else
                     {
-                        tilemapGrid.Tilemap.SetTile(floorPosition, null);
+                        tilemapGrid.Tilemap.SetTile(groundPosition, null);
                     }
 
                     var visibleColor = visible ? Color.clear : new Color(0f, 0f, 0f, .75f);
@@ -102,7 +102,7 @@ namespace RoguegardUnity
                         // 見えない範囲や壁には表示しない。
                         if (!openGrid || !visible) return false;
                         if (tileObj != null && tileObj.HasCollider) return false;
-                        var topTile = buildingTile ?? floorTile;
+                        var topTile = buildingTile ?? groundTile;
                         if (topTile != null && topTile.Info.HasCollider) return false;
 
                         var position2 = new Vector2Int(position.x, position.y);

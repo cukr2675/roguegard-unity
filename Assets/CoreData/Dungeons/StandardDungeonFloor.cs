@@ -6,13 +6,13 @@ using Roguegard.Extensions;
 
 namespace Roguegard.CharacterCreation
 {
-    [CreateAssetMenu(menuName = "RoguegardData/Dungeon/Levels/Standard")]
-    public class StandardDungeonLevel : RogueDungeonLevel
+    [CreateAssetMenu(menuName = "RoguegardData/Dungeon/Floors/Standard")]
+    public class StandardDungeonFloor : RogueDungeonFloor
     {
         [SerializeField] private RogueDungeonGenerator _dungeonGenerator = null;
         public override Spanning<IRogueTile> FillTiles => _dungeonGenerator.FillTiles;
         public override Spanning<IRogueTile> NoizeTiles => _dungeonGenerator.NoiseTiles;
-        public override Spanning<IRogueTile> RoomFloorTiles => _dungeonGenerator.RoomFloorTiles;
+        public override Spanning<IRogueTile> RoomGroundTiles => _dungeonGenerator.RoomGroundTiles;
         public override Spanning<IRogueTile> RoomWallTiles => _dungeonGenerator.RoomWallTiles;
 
         [SerializeField] private RandomRoomObjTable[] _enemyTable = null;
@@ -88,7 +88,7 @@ namespace Roguegard.CharacterCreation
         {
             public int lv;
 
-            [System.NonSerialized] private StandardDungeonLevel parent;
+            [System.NonSerialized] private StandardDungeonFloor parent;
 
             float IRogueObjUpdater.Order => 100f;
 
@@ -104,14 +104,14 @@ namespace Roguegard.CharacterCreation
                 if (parent == null)
                 {
                     if (!DungeonInfo.TryGet(self, out var info) ||
-                        !info.TryGetLevel(lv, out var level) ||
-                        !(level is StandardDungeonLevel standardLevel))
+                        !info.TryGetFloor(lv, out var floor) ||
+                        !(floor is StandardDungeonFloor standardFloor))
                     {
                         Debug.LogError("ダンジョン階層データの取得に失敗しました。");
                         return default;
                     }
 
-                    parent = standardLevel;
+                    parent = standardFloor;
                 }
 
                 var enemyTable = parent._enemyTable[0];

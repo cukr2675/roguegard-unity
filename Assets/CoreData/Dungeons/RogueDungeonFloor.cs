@@ -6,14 +6,14 @@ using Roguegard.Extensions;
 
 namespace Roguegard.CharacterCreation
 {
-    public abstract class RogueDungeonLevel : ScriptableObject
+    public abstract class RogueDungeonFloor : ScriptableObject
     {
         [SerializeField] private int _endLv = 0;
         public int EndLv => _endLv;
 
         public abstract Spanning<IRogueTile> FillTiles { get; }
         public abstract Spanning<IRogueTile> NoizeTiles { get; }
-        public abstract Spanning<IRogueTile> RoomFloorTiles { get; }
+        public abstract Spanning<IRogueTile> RoomGroundTiles { get; }
         public abstract Spanning<IRogueTile> RoomWallTiles { get; }
 
         public abstract Spanning<IWeightedRogueObjGeneratorList> EnemyTable { get; }

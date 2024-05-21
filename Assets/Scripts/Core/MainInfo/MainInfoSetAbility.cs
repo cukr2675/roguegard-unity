@@ -34,7 +34,7 @@ namespace Roguegard
         Ghost
             = HasCollider | Movable,
 
-        FloorTile
+        GroundTile
             = AsTile,
 
         TrapTile

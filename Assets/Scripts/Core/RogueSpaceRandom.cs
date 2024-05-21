@@ -8,12 +8,12 @@ namespace Roguegard
     {
         private RectInt[] smallRooms;
 
-        private int[] floorInRoomCounts;
+        private int[] groundInRoomCounts;
 
         /// <summary>
-        /// 部屋内の <see cref="RogueTileLayer.Floor"/> である面積。位置をランダムで取得するときに使う
+        /// 部屋内の <see cref="RogueTileLayer.Ground"/> である面積。位置をランダムで取得するときに使う
         /// </summary>
-        public int FloorInRoomCount { get; private set; }
+        public int GroundInRoomCount { get; private set; }
 
         public RogueSpaceRandom(RogueSpace space)
         {
@@ -22,7 +22,7 @@ namespace Roguegard
 
         public Vector2Int GetRandomPositionInRoom(RogueSpace space, IRogueRandom random)
         {
-            var positionIndex = random.Next(0, FloorInRoomCount);
+            var positionIndex = random.Next(0, GroundInRoomCount);
             var index = 0;
             for (int y = 0; y < space.Tilemap.Height; y++)
             {
@@ -30,19 +30,19 @@ namespace Roguegard
                 {
                     var position = new Vector2Int(x, y);
                     var tile = space.Tilemap.GetTop(position);
-                    if (RoomIndexOf(space, position) == -1 || space.CollideAt(position) || tile.Info.Layer != RogueTileLayer.Floor) continue;
+                    if (RoomIndexOf(space, position) == -1 || space.CollideAt(position) || tile.Info.Layer != RogueTileLayer.Ground) continue;
 
                     if (index == positionIndex) return new Vector2Int(x, y);
 
                     index++;
                 }
             }
-            throw new RogueException(FloorInRoomCount.ToString());
+            throw new RogueException(GroundInRoomCount.ToString());
         }
 
         public Vector2Int GetRandomPositionInRoom(RogueSpace space, IRogueRandom random, int roomIndex)
         {
-            var positionIndex = random.Next(0, floorInRoomCounts[roomIndex]);
+            var positionIndex = random.Next(0, groundInRoomCounts[roomIndex]);
             space.GetRoom(roomIndex, out var room, out _);
             var index = 0;
             for (int y = room.yMin; y < room.yMax; y++)
@@ -51,14 +51,14 @@ namespace Roguegard
                 {
                     var position = new Vector2Int(x, y);
                     var tile = space.Tilemap.GetTop(position);
-                    if (RoomIndexOf(space, position) != roomIndex || space.CollideAt(position) || tile.Info.Layer != RogueTileLayer.Floor) continue;
+                    if (RoomIndexOf(space, position) != roomIndex || space.CollideAt(position) || tile.Info.Layer != RogueTileLayer.Ground) continue;
 
                     if (index == positionIndex) return new Vector2Int(x, y);
 
                     index++;
                 }
             }
-            throw new RogueException(floorInRoomCounts[roomIndex].ToString());
+            throw new RogueException(groundInRoomCounts[roomIndex].ToString());
         }
 
         public void Reset(RogueSpace space)
@@ -66,7 +66,7 @@ namespace Roguegard
             if (smallRooms == null || smallRooms.Length != space.RoomCount)
             {
                 smallRooms = new RectInt[space.RoomCount];
-                floorInRoomCounts = new int[space.RoomCount];
+                groundInRoomCounts = new int[space.RoomCount];
                 for (int i = 0; i < space.RoomCount; i++)
                 {
                     space.GetRoom(i, out var room, out _);
@@ -77,31 +77,31 @@ namespace Roguegard
             for (int i = 0; i < space.RoomCount; i++)
             {
                 space.GetRoom(i, out var room, out _);
-                floorInRoomCounts[i] = room.width * room.height;
+                groundInRoomCounts[i] = room.width * room.height;
                 for (int y = room.yMin; y < room.yMax; y++)
                 {
                     for (int x = room.xMin; x < room.xMax; x++)
                     {
                         var position = new Vector2Int(x, y);
                         var tile = space.Tilemap.GetTop(position);
-                        if (RoomIndexOf(space, position) != i || space.CollideAt(position) || tile.Info.Layer != RogueTileLayer.Floor)
+                        if (RoomIndexOf(space, position) != i || space.CollideAt(position) || tile.Info.Layer != RogueTileLayer.Ground)
                         {
-                            floorInRoomCounts[i]--;
+                            groundInRoomCounts[i]--;
                         }
                     }
                 }
             }
 
-            FloorInRoomCount = space.Tilemap.Width * space.Tilemap.Height;
+            GroundInRoomCount = space.Tilemap.Width * space.Tilemap.Height;
             for (int y = 0; y < space.Tilemap.Height; y++)
             {
                 for (int x = 0; x < space.Tilemap.Width; x++)
                 {
                     var position = new Vector2Int(x, y);
                     var tile = space.Tilemap.GetTop(position);
-                    if (RoomIndexOf(space, position) == -1 || space.CollideAt(position) || tile.Info.Layer != RogueTileLayer.Floor)
+                    if (RoomIndexOf(space, position) == -1 || space.CollideAt(position) || tile.Info.Layer != RogueTileLayer.Ground)
                     {
-                        FloorInRoomCount--;
+                        GroundInRoomCount--;
                     }
                 }
             }
@@ -136,13 +136,13 @@ namespace Roguegard
 
             // オブジェクトやタイルの移動処理をした後、床タイルが露出していない場合何もしない
             var tile = space.Tilemap.GetTop(position);
-            if (tile.Info.Layer != RogueTileLayer.Floor) return;
+            if (tile.Info.Layer != RogueTileLayer.Ground) return;
 
             var roomIndex = RoomIndexOf(space, position);
             if (roomIndex >= 0)
             {
-                floorInRoomCounts[roomIndex]++;
-                FloorInRoomCount++;
+                groundInRoomCounts[roomIndex]++;
+                GroundInRoomCount++;
             }
         }
 
@@ -157,13 +157,13 @@ namespace Roguegard
 
             // オブジェクトやタイルの移動処理をする前から、床タイルが露出していない場合何もしない
             var tile = space.Tilemap.GetTop(position);
-            if (tile.Info.Layer != RogueTileLayer.Floor) return;
+            if (tile.Info.Layer != RogueTileLayer.Ground) return;
 
             var roomIndex = RoomIndexOf(space, position);
             if (roomIndex >= 0)
             {
-                floorInRoomCounts[roomIndex]--;
-                FloorInRoomCount--;
+                groundInRoomCounts[roomIndex]--;
+                GroundInRoomCount--;
             }
         }
     }

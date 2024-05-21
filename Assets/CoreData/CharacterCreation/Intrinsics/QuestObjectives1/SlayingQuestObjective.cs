@@ -28,7 +28,7 @@ namespace Roguegard.CharacterCreation
             }
 
             var targetOption = random.Choice(options);
-            var maxFloor = dungeon.Levels[dungeon.Levels.Count - 1].EndLv - 1;
+            var maxFloor = dungeon.Floors[dungeon.Floors.Count - 1].EndLv - 1;
             var count = random.Next(3, 5);
             var floor = random.Next(1, maxFloor);
 

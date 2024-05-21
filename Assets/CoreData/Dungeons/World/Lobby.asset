@@ -115,7 +115,7 @@ MonoBehaviour:
   _appearances: []
   _intrinsics: []
   _startingItemTable: []
-  _floor: {fileID: 11400000, guid: 289d2d375cda4a542bc0591e961cd7dc, type: 2}
+  _ground: {fileID: 11400000, guid: 289d2d375cda4a542bc0591e961cd7dc, type: 2}
   _roomWall: {fileID: 11400000, guid: ce1865f724ba5574f870c6a71f0cb03c, type: 2}
   _wall: {fileID: 11400000, guid: 909c20f6081ef684d8fede937dcb398d, type: 2}
   _doorL:

@@ -6,7 +6,7 @@ namespace Roguegard
 {
     public enum RogueTileLayer
     {
-        Floor,
+        Ground,
         Building
     }
 }

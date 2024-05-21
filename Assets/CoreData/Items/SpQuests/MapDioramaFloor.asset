@@ -124,5 +124,5 @@ MonoBehaviour:
       type: {class: MapDioramaFloorOpen, ns: Roguegard, asm: Roguegard.CoreData}
       data:
         _assemblyReflectionAssetDummy: 
-        _floorTile: {fileID: 11400000, guid: 9e07379c12401a54a9afcdc2d2081fc9, type: 2}
+        _groundTile: {fileID: 11400000, guid: 289d2d375cda4a542bc0591e961cd7dc, type: 2}
         _wallTile: {fileID: 11400000, guid: 7b5f75e0ffd65ff4ab579674c671753c, type: 2}

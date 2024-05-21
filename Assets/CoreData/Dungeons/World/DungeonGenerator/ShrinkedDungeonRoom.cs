@@ -46,7 +46,7 @@ namespace Roguegard
             }
         }
 
-        public void SetTile(RogueTilemap tilemap, Spanning<IRogueTile> floorTiles, Spanning<IRogueTile> wallTiles)
+        public void SetTile(RogueTilemap tilemap, Spanning<IRogueTile> groundTiles, Spanning<IRogueTile> wallTiles)
         {
             // 壁（上下）
             var y0 = Rect.yMin;
@@ -71,7 +71,7 @@ namespace Roguegard
             {
                 for (int x = Rect.xMin + 1; x < Rect.xMax - 1; x++)
                 {
-                    tilemap.Replace(floorTiles, x, y);
+                    tilemap.Replace(groundTiles, x, y);
                 }
             }
         }

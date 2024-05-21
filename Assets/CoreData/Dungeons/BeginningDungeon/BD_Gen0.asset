@@ -12,16 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2444e7abe088b6c489115701b579e4f5, type: 3}
   m_Name: BD_Gen0
   m_EditorClassIdentifier: 
-  _size: {x: 32, y: 32}
+  _floorSize: {x: 0, y: 0}
   _minRooms: 2
   _maxRooms: 3
   _minRoomWidth: 30
   _maxRoomWidth: 30
-  _generationRateOfCorridor: 4
+  _minAdditionalCorridors: 0
+  _maxAdditionalCorridors: 0
   _fillTiles:
   - {fileID: 11400000, guid: 9e07379c12401a54a9afcdc2d2081fc9, type: 2}
   - {fileID: 11400000, guid: 7b5f75e0ffd65ff4ab579674c671753c, type: 2}
-  _roomFloorTiles:
+  _noiseTiles: []
+  _noiseTileThreshold: 0
+  _noiseTileScale: 0
+  _roomGroundTiles:
   - {fileID: 11400000, guid: 9e07379c12401a54a9afcdc2d2081fc9, type: 2}
   _roomWallTiles:
   - {fileID: 11400000, guid: 9e07379c12401a54a9afcdc2d2081fc9, type: 2}

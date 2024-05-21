@@ -122,7 +122,7 @@ MonoBehaviour:
       rid: 5795394415022571535
   _levelType: 0
   _visibleRadius: 2
-  _levels:
+  _floors:
   - {fileID: 11400000, guid: a84e30bfdfa34f143ba697996f32740f, type: 2}
   - {fileID: 11400000, guid: 5ab76811bca5c2d4c986b187fe0fdea6, type: 2}
   - {fileID: 11400000, guid: 5161e29026162114681e3a4304fdc5ec, type: 2}

@@ -6,8 +6,8 @@ using Roguegard.Extensions;
 
 namespace Roguegard.CharacterCreation
 {
-    [CreateAssetMenu(menuName = "RoguegardData/Dungeon/Levels/Goal")]
-    public class GoalDungeonLevel : RogueDungeonLevel
+    [CreateAssetMenu(menuName = "RoguegardData/Dungeon/Floors/Goal")]
+    public class GoalDungeonFloor : RogueDungeonFloor
     {
         [SerializeField] private RogueDungeonGenerator _dungeonGenerator = null;
         [Space]
@@ -16,7 +16,7 @@ namespace Roguegard.CharacterCreation
 
         public override Spanning<IRogueTile> FillTiles => _dungeonGenerator.FillTiles;
         public override Spanning<IRogueTile> NoizeTiles => _dungeonGenerator.NoiseTiles;
-        public override Spanning<IRogueTile> RoomFloorTiles => _dungeonGenerator.RoomFloorTiles;
+        public override Spanning<IRogueTile> RoomGroundTiles => _dungeonGenerator.RoomGroundTiles;
         public override Spanning<IRogueTile> RoomWallTiles => _dungeonGenerator.RoomWallTiles;
 
         public override Spanning<IWeightedRogueObjGeneratorList> EnemyTable => Spanning<IWeightedRogueObjGeneratorList>.Empty;
@@ -55,7 +55,7 @@ namespace Roguegard.CharacterCreation
                         var position = new Vector2Int(x, y);
                         if (roomRect.Contains(position))
                         {
-                            tilemap.Replace(_dungeonGenerator.RoomFloorTiles, x, y);
+                            tilemap.Replace(_dungeonGenerator.RoomGroundTiles, x, y);
                         }
                         else if (wallRect.Contains(position))
                         {

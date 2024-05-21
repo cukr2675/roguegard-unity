@@ -10,7 +10,7 @@ namespace Roguegard
     public class SpQuestAtelierBeApplied : BaseApplyRogueMethod
     {
         [SerializeField] private ScriptableStartingItem _monolith = null;
-        [SerializeField] private RogueTileInfoData _floorTile = null;
+        [SerializeField] private RogueTileInfoData _groundTile = null;
         [SerializeField] private RogueTileInfoData _wallTile = null;
 
         public override bool Invoke(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
@@ -38,7 +38,7 @@ namespace Roguegard
             {
                 for (int x = 0; x < tilemap.Width; x++)
                 {
-                    tilemap.Set(_floorTile, x, y);
+                    tilemap.Set(_groundTile, x, y);
 
                     // マップ端は壁
                     if (x == 0 || x == tilemap.Width - 1 || y == 0 || y == tilemap.Height - 1)

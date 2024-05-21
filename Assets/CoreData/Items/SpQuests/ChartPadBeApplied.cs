@@ -13,6 +13,12 @@ namespace Roguegard
 
         public override bool Invoke(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
         {
+            var chart = RogueChartInfo.GetChart(self);
+            if (chart == null)
+            {
+                RogueChartInfo.SetChartTo(self, new RogueChart("Chart1", new RgpackReference[0]));
+            }
+
             menu ??= new();
             RogueDevice.Primary.AddMenu(menu, user, null, new(targetObj: self));
             return false;
@@ -59,11 +65,6 @@ namespace Roguegard
                 {
                     root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
 
-                    if (chart == null)
-                    {
-                        RogueChartInfo.SetChartTo(chartPad, new RogueChart("Chart1", new RgpackReference[0]));
-                        chart = RogueChartInfo.GetChart(chartPad);
-                    }
                     var newEvents = new RgpackReference[chart.Cmns.Count + 1];
                     for (int i = 0; i < chart.Cmns.Count; i++)
                     {

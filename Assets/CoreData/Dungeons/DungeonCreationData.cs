@@ -21,8 +21,8 @@ namespace Roguegard.CharacterCreation
         [SerializeField] private float _visibleRadius = 2f;
         public float VisibleRadius => _visibleRadius;
 
-        [SerializeField] private RogueDungeonLevel[] _levels = null;
-        public Spanning<RogueDungeonLevel> Levels => _levels;
+        [SerializeField] private RogueDungeonFloor[] _floors = null;
+        public Spanning<RogueDungeonFloor> Floors => _floors;
 
         // ターン経過で満腹度消費
         // 自然回復あり
@@ -61,7 +61,7 @@ namespace Roguegard.CharacterCreation
 
             var dungeon = player.Location;
             var lv = dungeon.Main.Stats.Lv;
-            foreach (var level in _levels)
+            foreach (var level in _floors)
             {
                 if (level.EndLv < lv) continue;
 

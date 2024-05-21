@@ -128,5 +128,5 @@ MonoBehaviour:
           _stack: 1
           _members:
             _items: []
-        _floorTile: {fileID: 11400000, guid: 289d2d375cda4a542bc0591e961cd7dc, type: 2}
+        _groundTile: {fileID: 11400000, guid: 289d2d375cda4a542bc0591e961cd7dc, type: 2}
         _wallTile: {fileID: 11400000, guid: 7b5f75e0ffd65ff4ab579674c671753c, type: 2}

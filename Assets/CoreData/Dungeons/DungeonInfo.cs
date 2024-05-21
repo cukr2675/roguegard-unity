@@ -13,7 +13,7 @@ namespace Roguegard
     public class DungeonInfo
     {
         [System.NonSerialized]
-        private RogueDungeonLevel[] levels;
+        private RogueDungeonFloor[] floors;
 
         [System.NonSerialized]
         private DungeonLevelType levelType;
@@ -36,16 +36,16 @@ namespace Roguegard
             return GetLevelText(levelType, lv);
         }
 
-        public bool TryGetLevel(int lv, out RogueDungeonLevel level)
+        public bool TryGetFloor(int lv, out RogueDungeonFloor floor)
         {
-            foreach (var item in levels)
+            foreach (var item in floors)
             {
                 if (item.EndLv < lv) continue;
 
-                level = item;
+                floor = item;
                 return true;
             }
-            level = null;
+            floor = null;
             return false;
         }
 
@@ -111,7 +111,7 @@ namespace Roguegard
             return dungeon;
         }
 
-        public static void SetLevelsTo(RogueObj dungeon, Spanning<RogueDungeonLevel> levels, DungeonLevelType levelType, float visibleRadius)
+        public static void SetFloorsTo(RogueObj dungeon, Spanning<RogueDungeonFloor> floors, DungeonLevelType levelType, float visibleRadius)
         {
             if (!dungeon.TryGet<Info>(out var info))
             {
@@ -121,9 +121,9 @@ namespace Roguegard
             }
 
             // 上書き不可
-            if (info.info.levels != null) throw new RogueException();
+            if (info.info.floors != null) throw new RogueException();
 
-            info.info.levels = levels.ToArray();
+            info.info.floors = floors.ToArray();
             info.info.levelType = levelType;
             info.info.visibleRadius = visibleRadius;
         }
