@@ -6,12 +6,12 @@ using MoonSharp.Interpreter;
 
 namespace Roguegard.Scripting.MoonSharp
 {
-    public class MoonSharpScriptingEvent : IScriptingCmn
+    public class MoonSharpScriptingCmn : IScriptingCmn
     {
         private readonly MoonSharpScriptingType type;
         private Table scriptingInstance;
 
-        public MoonSharpScriptingEvent(MoonSharpScriptingType type)
+        public MoonSharpScriptingCmn(MoonSharpScriptingType type)
         {
             this.type = type;
         }

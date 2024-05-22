@@ -310,8 +310,8 @@ end
                 var type = (MoonSharpScriptingType)ev.MetaTable.Get("__type").UserData.Object;
 
                 // ローグガルド側のイベントインスタンスを生成してテーブルに設定
-                var scriptingEvent = new MoonSharpScriptingEvent(type);
-                var scriptingEventWrapper = new AnonWrapper<MoonSharpScriptingEvent>(scriptingEvent);
+                var scriptingEvent = new MoonSharpScriptingCmn(type);
+                var scriptingEventWrapper = new AnonWrapper<MoonSharpScriptingCmn>(scriptingEvent);
                 var scriptingEventValue = UserData.Create(scriptingEventWrapper);
                 ev.Set("__rgins", scriptingEventValue);
 
