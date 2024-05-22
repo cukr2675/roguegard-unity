@@ -7,9 +7,9 @@ using Roguegard.CharacterCreation;
 namespace Roguegard
 {
     [Objforming.Formable]
-    public class EventInstanceInfoSet : MainInfoSet
+    public class EvtInstanceInfoSet : MainInfoSet
     {
-        private readonly EventFairyInfo info;
+        private readonly EvtFairyInfo info;
         private readonly ICharacterCreationData data;
 
         private const int equipmentInitialLv = 0;
@@ -58,14 +58,14 @@ namespace Roguegard
         public override IApplyRogueMethod BeThrown => RoguegardSettings.DefaultRaceOption.BeThrown;
         public override IApplyRogueMethod BeEaten => RoguegardSettings.DefaultRaceOption.BeEaten;
 
-        public EventInstanceInfoSet(RgpackReference reference)
+        public EvtInstanceInfoSet(RgpackReference reference)
         {
-            var eventFairyInfo = reference.GetData<EventFairyInfo>();
+            var eventFairyInfo = reference.GetData<EvtFairyInfo>();
             info = eventFairyInfo;
             data = eventFairyInfo.Appearance.GetData<KyarakuriFigurineInfo>().Main;
         }
 
-        public EventInstanceInfoSet(EventFairyInfo info, ICharacterCreationData data)
+        public EvtInstanceInfoSet(EvtFairyInfo info, ICharacterCreationData data)
         {
             this.info = info;
             this.data = data;
@@ -102,7 +102,7 @@ namespace Roguegard
 
         public override bool Equals(MainInfoSet other)
         {
-            return other is EventInstanceInfoSet info && info.info == this.info;
+            return other is EvtInstanceInfoSet info && info.info == this.info;
         }
 
         public RogueObj CreateObj(

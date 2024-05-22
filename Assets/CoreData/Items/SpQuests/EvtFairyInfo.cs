@@ -7,7 +7,7 @@ using System.Linq;
 namespace Roguegard
 {
     [Objforming.Formable]
-    public class EventFairyInfo
+    public class EvtFairyInfo
     {
         public string ID { get; set; }
         public RgpackReference RelatedChart { get; set; }
@@ -35,7 +35,7 @@ namespace Roguegard
             _opens = opens.ToArray();
         }
 
-        public static EventFairyInfo Get(RogueObj obj)
+        public static EvtFairyInfo Get(RogueObj obj)
         {
             if (obj.TryGet<Info>(out var info))
             {
@@ -61,14 +61,14 @@ namespace Roguegard
             // ã‘‚«•s‰Â
             if (info.info != null) throw new RogueException();
 
-            info.info = new EventFairyInfo();
+            info.info = new EvtFairyInfo();
             info.info.Appearance = new RgpackReference(null, null);
         }
 
         [Objforming.Formable]
         private class Info : IRogueObjInfo
         {
-            public EventFairyInfo info;
+            public EvtFairyInfo info;
 
             public bool IsExclusedWhenSerialize => false;
 

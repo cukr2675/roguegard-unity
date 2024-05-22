@@ -47,7 +47,7 @@ namespace Roguegard
                 assetTable.Add(characterCreationInfo.ID, characterCreationInfo);
             }
 
-            var eventFairyInfo = EventFairyInfo.Get(obj);
+            var eventFairyInfo = EvtFairyInfo.Get(obj);
             if (eventFairyInfo != null)
             {
                 eventFairyInfo.SetRgpackID(ID);

@@ -17,7 +17,7 @@ namespace Roguegard
             floor.Space.SetTilemap(tilemap);
             foreach (var item in items)
             {
-                var itemInfoSet = new EventInstanceInfoSet(item);
+                var itemInfoSet = new EvtInstanceInfoSet(item);
                 itemInfoSet.CreateObj(floor, random);
             }
             SpaceUtility.TryLocate(player, floor, Vector2Int.one);
@@ -34,7 +34,7 @@ namespace Roguegard
                 var spaceObj = spaceObjs[i];
                 if (spaceObj == null) continue;
 
-                var eventFairyInfo = EventFairyInfo.Get(spaceObj);
+                var eventFairyInfo = EvtFairyInfo.Get(spaceObj);
                 if (eventFairyInfo != null)
                 {
                     items.Add(new RgpackReference(rgpackID, eventFairyInfo.ID));

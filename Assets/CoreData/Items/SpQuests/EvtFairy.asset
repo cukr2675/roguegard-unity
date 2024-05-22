@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 797073a39246ce24195bfdd54b79f0dc, type: 3}
-  m_Name: EventFairy
+  m_Name: EvtFairy
   m_EditorClassIdentifier: 
   _overridesCost: 0
   _cost: 1
@@ -84,7 +84,7 @@ MonoBehaviour:
     _beApplied:
       _script: {fileID: 11500000, guid: 557b38cd3ff69d447b58965f613bb2b7, type: 3}
       _ref:
-        rid: 7922971087598256130
+        rid: 7922971335059046413
     _beThrown:
       _script: {fileID: 0}
       _ref:
@@ -117,7 +117,7 @@ MonoBehaviour:
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
-    - rid: 7922971087598256130
-      type: {class: EventFairyBeApplied, ns: Roguegard, asm: Roguegard.CoreData}
+    - rid: 7922971335059046413
+      type: {class: EvtFairyBeApplied, ns: Roguegard, asm: Roguegard.CoreData}
       data:
         _assemblyReflectionAssetDummy: 

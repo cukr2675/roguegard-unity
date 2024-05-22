@@ -3,22 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using TMPro;
-using Roguegard.CharacterCreation;
 using Roguegard.Device;
 
 namespace Roguegard
 {
-    public class EventFairyBeApplied : BaseApplyRogueMethod
+    public class EvtFairyBeApplied : BaseApplyRogueMethod
     {
         private static Menu menu;
 
         public override bool Invoke(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
         {
             menu ??= new();
-            var characterCreationInfo = EventFairyInfo.Get(self);
+            var characterCreationInfo = EvtFairyInfo.Get(self);
             if (characterCreationInfo == null)
             {
-                EventFairyInfo.SetTo(self);
+                EvtFairyInfo.SetTo(self);
             }
 
             RogueDevice.Primary.AddMenu(menu, user, null, new(targetObj: self));
@@ -37,7 +36,7 @@ namespace Roguegard
             protected override Spanning<object> GetModels(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 var fairy = arg.TargetObj;
-                var eventFairyInfo = EventFairyInfo.Get(fairy);
+                var eventFairyInfo = EvtFairyInfo.Get(fairy);
                 models.Clear();
                 models.Add(assetID);
                 models.Add(appearanceAssetID);
@@ -61,7 +60,7 @@ namespace Roguegard
                     root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
 
                     var fairy = arg.TargetObj;
-                    var eventFairyInfo = EventFairyInfo.Get(fairy);
+                    var eventFairyInfo = EvtFairyInfo.Get(fairy);
                     var index = eventFairyInfo.Opens.IndexOf(reference);
                     root.OpenMenu(nextMenu, null, null, new(targetObj: fairy, count: index));
 
@@ -71,7 +70,7 @@ namespace Roguegard
                     root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
 
                     var fairy = arg.TargetObj;
-                    var eventFairyInfo = EventFairyInfo.Get(fairy);
+                    var eventFairyInfo = EvtFairyInfo.Get(fairy);
                     var newOpens = new RgpackReference[eventFairyInfo.Opens.Count + 1];
                     for (int i = 0; i < eventFairyInfo.Opens.Count; i++)
                     {
@@ -94,14 +93,14 @@ namespace Roguegard
             public string GetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 var fairy = arg.TargetObj;
-                var eventFairyInfo = EventFairyInfo.Get(fairy);
+                var eventFairyInfo = EvtFairyInfo.Get(fairy);
                 return eventFairyInfo.ID;
             }
 
             public void SetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg, string value)
             {
                 var fairy = arg.TargetObj;
-                var eventFairyInfo = EventFairyInfo.Get(fairy);
+                var eventFairyInfo = EvtFairyInfo.Get(fairy);
                 eventFairyInfo.ID = value;
             }
         }
@@ -116,14 +115,14 @@ namespace Roguegard
             public string GetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 var fairy = arg.TargetObj;
-                var eventFairyInfo = EventFairyInfo.Get(fairy);
+                var eventFairyInfo = EvtFairyInfo.Get(fairy);
                 return eventFairyInfo.Appearance.AssetID;
             }
 
             public void SetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg, string value)
             {
                 var fairy = arg.TargetObj;
-                var eventFairyInfo = EventFairyInfo.Get(fairy);
+                var eventFairyInfo = EvtFairyInfo.Get(fairy);
                 eventFairyInfo.Appearance = new RgpackReference(eventFairyInfo.Appearance.RgpackID, value);
             }
         }
@@ -156,7 +155,7 @@ namespace Roguegard
                 public string GetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
                 {
                     var fairy = arg.TargetObj;
-                    var eventFairyInfo = EventFairyInfo.Get(fairy);
+                    var eventFairyInfo = EvtFairyInfo.Get(fairy);
                     var index = arg.Count;
                     var rgpackReference = eventFairyInfo.Opens[index];
                     return rgpackReference.AssetID;
@@ -165,7 +164,7 @@ namespace Roguegard
                 public void SetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg, string value)
                 {
                     var fairy = arg.TargetObj;
-                    var eventFairyInfo = EventFairyInfo.Get(fairy);
+                    var eventFairyInfo = EvtFairyInfo.Get(fairy);
                     var index = arg.Count;
                     var opens = eventFairyInfo.Opens.ToArray();
                     var rgpackReference = opens[index];
