@@ -17,8 +17,7 @@ namespace Roguegard
             var world = RogueWorldInfo.GetWorld(player);
 
             var info = new EvtFairyInfo();
-            info.Position = Vector2Int.zero;
-            var infoSet = new EvtInstanceInfoSet(info, RoguegardSettings.CharacterCreationDatabase.LoadPreset(0));
+            var infoSet = new EvtInstanceInfoSet(info, RoguegardSettings.CharacterCreationDatabase.LoadPreset(0), Vector2Int.zero);
             var dungeon = infoSet.CreateObj(world, random);
             var floor = infoSet.CreateObj(dungeon, random);
             floors[0].GenerateFloor(player, floor, random);

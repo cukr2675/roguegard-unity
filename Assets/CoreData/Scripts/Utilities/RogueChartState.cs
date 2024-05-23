@@ -15,6 +15,18 @@ namespace Roguegard
             nexts.Add(chart);
         }
 
+        public RgpackReference GetCurrentCmn(RgpackReference chartReference)
+        {
+            for (int i = 0; i < items.Count; i++)
+            {
+                var item = items[i];
+                if (!RgpackReference.Equals(item.ChartReference, chartReference)) continue;
+
+                return item.CurrentCmn;
+            }
+            return null;
+        }
+
         public bool TryUpdate()
         {
             if (nexts.Count == 0) return false;

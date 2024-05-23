@@ -11,28 +11,50 @@ namespace Roguegard
     {
         public string ID { get; set; }
         public RgpackReference RelatedChart { get; set; }
-        private readonly List<Point> points = new();
+        private readonly List<Point> _points = new();
 
-        public Vector2Int Position { get; set; }
-        public RgpackReference Appearance { get; set; }
-        private RgpackReference[] _opens = new RgpackReference[0];
-
-        public Spanning<RgpackReference> Opens => _opens;
+        public Spanning<Point> Points => _points;
 
         //private EventFairyInfo() { }
 
-        public void SetRgpackID(string rgpackID)
+        public void SetRgpackID(RogueObj evtFairy, string rgpackID)
         {
-            Appearance = new RgpackReference(rgpackID, Appearance.AssetID);
-            for (int i = 0; i < _opens.Length; i++)
+            RelatedChart = new RgpackReference(rgpackID, RelatedChart.AssetID);
+            foreach (var point in _points)
             {
-                _opens[i] = new RgpackReference(rgpackID, _opens[i].AssetID);
+                point.ChartCmn = new RgpackReference(rgpackID, point.ChartCmn.AssetID);
+                point.IfCmn = new RgpackReference(rgpackID, point.IfCmn.AssetID);
+                point.Appearance = new RgpackReference(rgpackID, point.Appearance.AssetID);
+                point.Cmn = new RgpackReference(rgpackID, point.Cmn.AssetID);
+                point.Position = evtFairy.Position;
             }
         }
 
-        public void SetOpens(IEnumerable<RgpackReference> opens)
+        public void AddPoint(RgpackReference chartCmn)
         {
-            _opens = opens.ToArray();
+            var point = new Point();
+            point.ChartCmn = chartCmn;
+            point.IfCmn = new RgpackReference(null, null);
+            point.Appearance = new RgpackReference(null, null);
+            point.Cmn = new RgpackReference(null, null);
+            _points.Add(point);
+        }
+
+        public EvtInstanceInfoSet CreateInfoSet()
+        {
+            var worldInfo = RogueWorldInfo.GetByCharacter(RogueDevice.Primary.Player);
+            var currentCmn = worldInfo.ChartState.GetCurrentCmn(RelatedChart);
+            foreach (var point in _points)
+            {
+                //if (point.ChartCmn != currentCmn) continue;
+
+                //var ifCmn = point.IfCmn?.GetData<IScriptingCmn>();
+                //ifCmn?.Invoke();
+
+                var appearance = point.Appearance.GetData<KyarakuriFigurineInfo>();
+                return new EvtInstanceInfoSet(this, appearance.Main, point.Position);
+            }
+            throw new RogueException();
         }
 
         public static EvtFairyInfo Get(RogueObj obj)
@@ -62,7 +84,7 @@ namespace Roguegard
             if (info.info != null) throw new RogueException();
 
             info.info = new EvtFairyInfo();
-            info.info.Appearance = new RgpackReference(null, null);
+            info.info.RelatedChart = new RgpackReference(null, null);
         }
 
         [Objforming.Formable]
@@ -89,9 +111,10 @@ namespace Roguegard
         }
 
         [Objforming.Formable]
-        private class Point
+        public class Point
         {
-            public RgpackReference ChartCmn { get; }
+            public RgpackReference ChartCmn { get; set; }
+            public RgpackReference IfCmn { get; set; }
             public RgpackReference Appearance { get; set; }
             public int Category { get; set; }
             public RgpackReference Cmn { get; set; }

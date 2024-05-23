@@ -52,7 +52,7 @@ namespace Roguegard
 
         public override int GetHashCode()
         {
-            return AssetID.GetHashCode();
+            return AssetID?.GetHashCode() ?? 0;
         }
     }
 }

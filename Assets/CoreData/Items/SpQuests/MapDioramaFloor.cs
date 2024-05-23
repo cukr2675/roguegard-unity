@@ -9,7 +9,7 @@ namespace Roguegard
     {
         public RogueTilemap Tilemap { get; private set; }
 
-        private List<RgpackReference> items;
+        private List<EvtFairyInfo> items;
 
         public void GenerateFloor(RogueObj player, RogueObj floor, IRogueRandom random)
         {
@@ -17,7 +17,7 @@ namespace Roguegard
             floor.Space.SetTilemap(tilemap);
             foreach (var item in items)
             {
-                var itemInfoSet = new EvtInstanceInfoSet(item);
+                var itemInfoSet = item.CreateInfoSet();
                 itemInfoSet.CreateObj(floor, random);
             }
             SpaceUtility.TryLocate(player, floor, Vector2Int.one);
@@ -27,17 +27,18 @@ namespace Roguegard
         {
             Tilemap = new RogueTilemap(dioramaFloor.Space.Tilemap);
 
-            items = new List<RgpackReference>();
+            items = new List<EvtFairyInfo>();
             var spaceObjs = dioramaFloor.Space.Objs;
             for (int i = 0; i < spaceObjs.Count; i++)
             {
                 var spaceObj = spaceObjs[i];
                 if (spaceObj == null) continue;
 
-                var eventFairyInfo = EvtFairyInfo.Get(spaceObj);
-                if (eventFairyInfo != null)
+                var evtFairyInfo = EvtFairyInfo.Get(spaceObj);
+                if (evtFairyInfo != null)
                 {
-                    items.Add(new RgpackReference(rgpackID, eventFairyInfo.ID));
+                    evtFairyInfo.SetRgpackID(spaceObj, rgpackID);
+                    items.Add(evtFairyInfo);
                 }
             }
         }

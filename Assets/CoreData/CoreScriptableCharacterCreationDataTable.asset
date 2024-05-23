@@ -188,7 +188,7 @@ MonoBehaviour:
     _asset: {fileID: 11400000, guid: 6ed06a5cd1f62944381062e6761f6870, type: 2}
   - _key: Core.ChartPad
     _asset: {fileID: 11400000, guid: 62a14c733f982354aa9b56e6c8ef2c81, type: 2}
-  - _key: Core.EventFairy
+  - _key: Core.EvtFairy
     _asset: {fileID: 11400000, guid: ffa8ea2797e10f24aaa019fb83e065dd, type: 2}
   - _key: Core.KyarakuriFigurine
     _asset: {fileID: 11400000, guid: df60cc758c9870849a5ea7fcd651045b, type: 2}

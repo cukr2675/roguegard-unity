@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using SkeletalSprite;
 using Roguegard.CharacterCreation;
 
 namespace Roguegard
@@ -11,6 +12,38 @@ namespace Roguegard
     {
         private readonly EvtFairyInfo info;
         private readonly ICharacterCreationData data;
+        private readonly Vector2Int position;
+
+        private int currentRaceOptionIndex;
+        [System.NonSerialized] private IRaceOption _currentRaceOption;
+        public IRaceOption CurrentRaceOption
+        {
+            get
+            {
+                if (_currentRaceOption != null) return _currentRaceOption;
+
+                if (data.Race.Option.GrowingOptions.Count == 0)
+                {
+                    _currentRaceOption = data.Race.Option;
+                }
+                else
+                {
+                    if (currentRaceOptionIndex >= data.Race.Option.GrowingOptions.Count)
+                    {
+                        Debug.LogWarning($"{nameof(currentRaceOptionIndex)} ({currentRaceOptionIndex}) が不正です。");
+                        currentRaceOptionIndex = data.Race.Option.GrowingOptions.IndexOf(data.Race.Option);
+                    }
+                    _currentRaceOption = data.Race.Option.GrowingOptions[currentRaceOptionIndex];
+                }
+                return _currentRaceOption;
+            }
+        }
+
+        private readonly IRogueGender _gender;
+
+        [System.NonSerialized] private float _weight;
+        [System.NonSerialized] private IReadOnlyNodeBone nodeBone;
+        [System.NonSerialized] private AppearanceBoneSpriteTable characterBoneSpriteTable;
 
         private const int equipmentInitialLv = 0;
 
@@ -58,17 +91,39 @@ namespace Roguegard
         public override IApplyRogueMethod BeThrown => RoguegardSettings.DefaultRaceOption.BeThrown;
         public override IApplyRogueMethod BeEaten => RoguegardSettings.DefaultRaceOption.BeEaten;
 
-        public EvtInstanceInfoSet(RgpackReference reference)
-        {
-            var eventFairyInfo = reference.GetData<EvtFairyInfo>();
-            info = eventFairyInfo;
-            data = eventFairyInfo.Appearance.GetData<KyarakuriFigurineInfo>().Main;
-        }
+        //public EvtInstanceInfoSet(RgpackReference reference)
+        //{
+        //    var eventFairyInfo = reference.GetData<EvtFairyInfo>();
+        //    info = eventFairyInfo;
+        //    data = eventFairyInfo.Appearance.GetData<KyarakuriFigurineInfo>().Main;
+        //}
 
-        public EvtInstanceInfoSet(EvtFairyInfo info, ICharacterCreationData data)
+        public EvtInstanceInfoSet(EvtFairyInfo info, ICharacterCreationData data, Vector2Int position)
         {
             this.info = info;
             this.data = data;
+            this.position = position;
+        }
+
+        /// <summary>
+        /// <see cref="ICharacterCreationData"/> を再読み込みし、見た目などを再構成する。
+        /// </summary>
+        private void Reload()
+        {
+            _currentRaceOption = null;
+            _weight = CurrentRaceOption.GetWeight(CurrentRaceOption, data);
+            CurrentRaceOption.GetSpriteValues(CurrentRaceOption, data, _gender, out var mainNode, out characterBoneSpriteTable);
+
+            if (mainNode != null)
+            {
+                var appearances = data.Appearances;
+                for (int i = 0; i < appearances.Count; i++)
+                {
+                    var appearance = appearances[i];
+                    appearance.Option.Affect(mainNode, characterBoneSpriteTable, appearance, data);
+                }
+                nodeBone = mainNode;
+            }
         }
 
         public override MainInfoSet Open(RogueObj self, MainInfoSetType infoSetType, bool polymorph2Base)
@@ -87,7 +142,9 @@ namespace Roguegard
 
         public override void GetObjSprite(RogueObj self, out IRogueObjSprite objSprite, out ISpriteMotionSet motionSet)
         {
-            RoguegardSettings.DefaultRaceOption.GetObjSprite(null, null, null, self, null, out objSprite, out motionSet);
+            if (nodeBone == null) { Reload(); }
+
+            CurrentRaceOption.GetObjSprite(CurrentRaceOption, data, _gender, self, nodeBone, out objSprite, out motionSet);
         }
 
         public override IEquipmentState GetEquipmentState(RogueObj self)
@@ -115,7 +172,7 @@ namespace Roguegard
             var stats = obj.Main.Stats;
             stats.Direction = RogueDirection.LowerLeft;
             stats.Reset(obj);
-            if (!SpaceUtility.TryLocate(obj, location, info.Position, stackOption)) throw new RogueException("生成したオブジェクトの移動に失敗しました。");
+            if (!SpaceUtility.TryLocate(obj, location, position, stackOption)) throw new RogueException("生成したオブジェクトの移動に失敗しました。");
 
             return obj;
         }
