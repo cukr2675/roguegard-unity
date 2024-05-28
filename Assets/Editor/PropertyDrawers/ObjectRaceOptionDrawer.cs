@@ -45,7 +45,7 @@ namespace RoguegardUnity
             var path = property.propertyPath;
             var parentType = property.serializedObject.targetObject.GetType();
             var raceField = parentType.GetField(path, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
-            var raceType = raceField.FieldType;
+            var raceType = raceField?.FieldType;
             while (property.NextVisible(true) && property.propertyPath.Contains(path)) // 次に移動できない or 親プロパティに出た 場合は終了
             {
                 // 子プロパティは表示しない。
@@ -74,7 +74,7 @@ namespace RoguegardUnity
                 var path = property.propertyPath;
                 var parentType = property.serializedObject.targetObject.GetType();
                 var raceField = parentType.GetField(path, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
-                var raceType = raceField.FieldType;
+                var raceType = raceField?.FieldType;
                 while (property.NextVisible(true) && property.propertyPath.Contains(path)) // 次に移動できない or 親プロパティに出た 場合は終了
                 {
                     // 子プロパティは表示しない。
@@ -122,7 +122,7 @@ namespace RoguegardUnity
                 fieldInfo ??= searchType.GetField(property.name, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
                 searchType = searchType.BaseType;
             }
-            return fieldInfo.CustomAttributes.Any(x => x.AttributeType == typeof(HeaderAttribute));
+            return fieldInfo?.CustomAttributes.Any(x => x.AttributeType == typeof(HeaderAttribute)) ?? false;
         }
     }
 }
