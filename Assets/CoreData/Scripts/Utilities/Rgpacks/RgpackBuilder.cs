@@ -57,14 +57,14 @@ namespace Roguegard
             var rogueChart = RogueChartInfo.GetChart(obj);
             if (rogueChart != null)
             {
-                rogueChart.SetRgpackID(ID);
+                rogueChart.LoadFullID(ID);
                 assetTable.Add(rogueChart.ID, rogueChart);
             }
 
             var monolithInfo = SpQuestMonolithInfo.Get(obj);
             if (monolithInfo != null)
             {
-                monolithInfo.SetRgpackID(ID);
+                monolithInfo.LoadFullID(ID);
                 assetTable.Add("Main", monolithInfo);
             }
 

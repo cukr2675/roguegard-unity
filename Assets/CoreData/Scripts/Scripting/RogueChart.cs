@@ -29,11 +29,11 @@ namespace Roguegard
             cmns = chart.cmns.ToArray();
         }
 
-        public void SetRgpackID(string rgpackID)
+        public void LoadFullID(string rgpackID)
         {
             for (int i = 0; i < cmns.Length; i++)
             {
-                cmns[i] = new RgpackReference(rgpackID, cmns[i].AssetID);
+                cmns[i].LoadFullID(rgpackID);
             }
         }
 
@@ -51,7 +51,7 @@ namespace Roguegard
 
             if (cmnIndex < cmns.Length - 1)
             {
-                var nextCmn = cmns[cmnIndex];
+                var nextCmn = cmns[cmnIndex + 1];
                 return nextCmn;
             }
             else

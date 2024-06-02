@@ -20,6 +20,7 @@ namespace Roguegard
                 var itemInfoSet = item.CreateInfoSet();
                 itemInfoSet.CreateObj(floor, random);
             }
+            floor.Space.SetRooms(new[] { floor.Space.Tilemap.Rect });
             SpaceUtility.TryLocate(player, floor, Vector2Int.one);
         }
 
@@ -37,7 +38,7 @@ namespace Roguegard
                 var evtFairyInfo = EvtFairyInfo.Get(spaceObj);
                 if (evtFairyInfo != null)
                 {
-                    evtFairyInfo.SetRgpackID(spaceObj, rgpackID);
+                    evtFairyInfo.LoadFullID(spaceObj, rgpackID);
                     items.Add(evtFairyInfo);
                 }
             }

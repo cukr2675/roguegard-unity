@@ -56,6 +56,10 @@ namespace RoguegardUnity
                 {
                     break;
                 }
+                else if (other == DeviceKw.WaitEndOfTalk)
+                {
+                    touchController.EventManager.Add(DeviceKw.WaitEndOfTalk);
+                }
                 else if (other == DeviceKw.EnqueueMenu)
                 {
                     messageWorkQueue.DequeueMenu(out var menu, out var self, out var user, out var arg);

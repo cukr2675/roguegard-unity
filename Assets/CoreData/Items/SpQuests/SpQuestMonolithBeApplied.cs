@@ -128,14 +128,14 @@ namespace Roguegard
                 {
                     var monolith = arg.Tool;
                     var info = SpQuestMonolithInfo.Get(monolith);
-                    return info.MainChart?.AssetID;
+                    return info.MainChart?.ID;
                 }
 
                 public void SetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg, string value)
                 {
                     var monolith = arg.Tool;
                     var info = SpQuestMonolithInfo.Get(monolith);
-                    info.MainChart = new RgpackReference(info.MainChart?.RgpackID, value);
+                    info.MainChart = new RgpackReference(value);
                 }
             }
         }

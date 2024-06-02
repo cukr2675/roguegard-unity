@@ -8,11 +8,11 @@ using MoonSharp.Interpreter.Interop;
 namespace Roguegard.Scripting.MoonSharp
 {
     [MoonSharpUserData]
-    public class CharacterCreationAsset
+    public class KyarakuriFigurineAsset
     {
         private readonly KyarakuriFigurineInfo info;
 
-        public CharacterCreationAsset(KyarakuriFigurineInfo info)
+        public KyarakuriFigurineAsset(KyarakuriFigurineInfo info)
         {
             this.info = info;
         }

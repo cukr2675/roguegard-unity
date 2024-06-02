@@ -11,9 +11,9 @@ namespace Roguegard
 
         public RgpackReference MainChart { get; set; }
 
-        public void SetRgpackID(string rgpackID)
+        public void LoadFullID(string rgpackID)
         {
-            MainChart = new RgpackReference(rgpackID, MainChart.AssetID);
+            MainChart.LoadFullID(rgpackID);
         }
 
         public static SpQuestMonolithInfo Get(RogueObj monolith)

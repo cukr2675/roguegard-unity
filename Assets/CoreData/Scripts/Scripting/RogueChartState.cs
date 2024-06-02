@@ -32,6 +32,7 @@ namespace Roguegard
             if (nexts.Count == 0) return false;
 
             var chartReference = nexts[0];
+            nexts.RemoveAt(0);
             for (int i = 0; i < items.Count; i++)
             {
                 var item = items[i];
@@ -39,8 +40,8 @@ namespace Roguegard
 
                 var nextCmnRef = item.Chart.GetNextCmnOf(item.CurrentCmn);
                 var nextCmn = nextCmnRef.GetData<IScriptingCmn>();
+                item.CurrentCmn = nextCmnRef; // nextFrom() で使用するためコモンイベント実行前に設定する
                 nextCmn.Invoke();
-                item.CurrentCmn = nextCmnRef;
                 return true;
             }
             {
@@ -48,11 +49,10 @@ namespace Roguegard
                 items.Add(item);
                 var cmnRef = item.Chart.GetFirstCmn();
                 var cmn = cmnRef.GetData<IScriptingCmn>();
+                item.CurrentCmn = cmnRef;  // nextFrom() で使用するためコモンイベント実行前に設定する
                 cmn.Invoke();
-                item.CurrentCmn = cmnRef;
             }
 
-            nexts.RemoveAt(0);
             return true;
         }
 

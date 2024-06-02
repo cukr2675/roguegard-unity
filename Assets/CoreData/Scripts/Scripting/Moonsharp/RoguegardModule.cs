@@ -4,9 +4,12 @@ using UnityEngine;
 
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using MoonSharp.Interpreter;
 using MoonSharp.Interpreter.Interop;
 using Roguegard.Extensions;
+using Roguegard.Device;
+using Coroutine = MoonSharp.Interpreter.Coroutine;
 
 namespace Roguegard.Scripting.MoonSharp
 {
@@ -15,6 +18,7 @@ namespace Roguegard.Scripting.MoonSharp
     {
         private const string moduleName = "roguegard";
         private static readonly StringBuilder stringBuilder = new();
+        private static readonly SelectMenu selectMenu = new();
 
         public static void MoonSharpInit(Table globalTable, Table roguegardTable)
         {
@@ -56,6 +60,13 @@ return function(type_name)
 end
 "));
 
+            roguegardTable.Set("select", roguegardTable.OwnerScript.DoString(@"
+return function(a, b, c)
+    rg.__select(a, b, c)
+    return coroutine.yield()
+end
+"));
+
             // require('roguegard') を必須にする
             globalTable.Remove(moduleName);
         }
@@ -64,27 +75,49 @@ end
         public static DynValue @ref(ScriptExecutionContext executionContext, CallbackArguments args)
         {
             const string name = "ref";
-            var rgpackID = args.AsType(0, name, DataType.String, false).String;
-            var assetID = args.AsType(1, name, DataType.String, false).String;
-            if (rgpackID == ".")
-            {
-                rgpackID = executionContext.CurrentGlobalEnv.Get("__rgpack").String;
-                rgpackID = "Playtest";
-            }
+            var id = args.AsType(0, name, DataType.String, false).String;
+            var envRgpackID = executionContext.CurrentGlobalEnv.Get("__rgpack").String;
+            envRgpackID = "Playtest";
+            var rgpackID = RgpackReference.GetRgpackID(id, envRgpackID);
+            var assetID = RgpackReference.GetAssetID(id);
 
             if (!RgpackReference.TryGetRgpack(rgpackID, out var rgpack)) throw new RogueException($"Rgpack ({rgpackID}) が見つかりません。");
             if (!rgpack.TryGetAsset<object>(assetID, out var asset)) throw new RogueException(
                 $"Rgpack ({rgpackID}) に ID ({assetID}) のデータが見つかりません。");
 
-            if (asset is KyarakuriFigurineInfo characterCreationInfo)
+            if (asset is KyarakuriFigurineInfo kyarakuriFigurineInfo)
             {
-                return UserData.Create(new CharacterCreationAsset(characterCreationInfo));
+                return UserData.Create(new KyarakuriFigurineAsset(kyarakuriFigurineInfo));
             }
             if (asset is MysteryDioramaInfo mysteryDioramaInfo)
             {
                 return UserData.Create(new MysteryDioramaAsset(mysteryDioramaInfo));
             }
+            if (asset is RogueChart)
+            {
+                var reference = new RgpackReference(rgpackID + "." + assetID);
+                reference.LoadFullID(rgpackID);
+                return UserData.Create(new RogueChartAsset(reference));
+            }
             throw new RogueException();
+        }
+
+        [MoonSharpModuleMethod]
+        public static DynValue find(ScriptExecutionContext executionContext, CallbackArguments args)
+        {
+            const string name = "find";
+            var evtID = args.AsType(0, name, DataType.String, false).String;
+
+            var location = RogueDevice.Primary.Player.Location;
+            var locationObjs = location.Space.Objs;
+            for (int i = 0; i < locationObjs.Count; i++)
+            {
+                var obj = locationObjs[i];
+                if (obj == null || !(obj.Main.InfoSet is EvtInstanceInfoSet infoSet) || infoSet.ID != evtID) continue;
+
+                return UserData.Create(new RogueObjAsset(obj));
+            }
+            return DynValue.Nil;
         }
 
         [MoonSharpModuleMethod]
@@ -124,71 +157,71 @@ end
         }
 
         [MoonSharpModuleMethod]
-        public static DynValue msgf(ScriptExecutionContext executionContext, CallbackArguments args)
+        public static DynValue talkf(ScriptExecutionContext executionContext, CallbackArguments args)
         {
-            const string name = "msgf";
+            const string name = "talkf";
             var text = args.AsType(0, name, DataType.String, false).String;
-
-            if (text.Length >= "@talk".Length && text.IndexOf("@talk", 0, "@talk".Length, System.StringComparison.OrdinalIgnoreCase) == 0)
-            {
-                RogueDevice.Add(DeviceKw.AppendText, DeviceKw.StartTalk);
-                return DynValue.Nil;
-            }
-            if (text.Length >= "@endtalk".Length && text.IndexOf("@endtalk", 0, "@endtalk".Length, System.StringComparison.OrdinalIgnoreCase) == 0)
-            {
-                RogueDevice.Add(DeviceKw.AppendText, DeviceKw.EndTalk);
-                return DynValue.Nil;
-            }
+            var lines = Regex.Matches(text, @"\S.*(\r\n|\r|\n)?");
 
             stringBuilder.Clear();
-            for (int i = 0; i < text.Length; i++)
+            foreach (Match match in lines)
             {
-                if (text[i] == '{' && text[i + 1] != '{')
+                var value = match.Value;
+                for (int i = 0; i < match.Length; i++)
                 {
-                    var length = text.IndexOf('}', i) - i;
-                    if (text[i + 1] == '#')
+                    if (value[i] == '{' && value[i + 1] != '{')
                     {
-                        var id = text.Substring(i + 2, length - 2);
-                        var rgpackID = "Playtest";
-                        if (!RgpackReference.TryGetRgpack(rgpackID, out var rgpack)) throw new RogueException($"Rgpack ({rgpackID}) が見つかりません。");
-                        if (!rgpack.TryGetAsset<object>(id, out var asset)) throw new RogueException(
-                            $"Rgpack ({rgpackID}) に ID ({id}) のデータが見つかりません。");
+                        var length = value.IndexOf('}', i) - i;
+                        if (value[i + 1] == '>')
+                        {
+                            stringBuilder.Append('\t');
+                            i += length;
+                            continue;
+                        }
+                        if (value[i + 1] == 'v')
+                        {
+                            stringBuilder.Append('\v');
+                            i += length;
+                            if (value[i + 1] == '\r' || value[i + 1] == '\n') break;
+                            continue;
+                        }
+                        if (value[i + 1] == '#')
+                        {
+                            var id = value.Substring(i + 2, length - 2);
+                            var rgpackID = "Playtest";
+                            if (!RgpackReference.TryGetRgpack(rgpackID, out var rgpack)) throw new RogueException($"Rgpack ({rgpackID}) が見つかりません。");
+                            if (!rgpack.TryGetAsset<object>(id, out var asset)) throw new RogueException(
+                                $"Rgpack ({rgpackID}) に ID ({id}) のデータが見つかりません。");
 
-                        stringBuilder.Append(asset);
-                        i += length;
-                        continue;
+                            stringBuilder.Append(asset);
+                            i += length;
+                            continue;
+                        }
                     }
+
+                    stringBuilder.Append(value[i]);
                 }
-
-                if ((text[i] == '\n' || text[i] == '\r') && (text[i + 1] == '@'))
-                {
-                    var index = text.IndexOf("starttalk", i + 2, "starttalk".Length, System.StringComparison.OrdinalIgnoreCase);
-                    if (index == 0)
-                    {
-
-                        continue;
-                    }
-                }
-
-                stringBuilder.Append(text[i]);
             }
+            if (stringBuilder.Length == 0) { stringBuilder.Append(" "); }
+            RogueDevice.Add(DeviceKw.AppendText, DeviceKw.StartTalk);
             RogueDevice.Add(DeviceKw.AppendText, stringBuilder.ToString());
+            RogueDevice.Add(DeviceKw.AppendText, DeviceKw.EndTalk);
+            //RogueDevice.Add(DeviceKw.AppendText, DeviceKw.WaitEndOfTalk);
             return DynValue.Nil;
         }
 
         [MoonSharpModuleMethod]
-        public static DynValue getChart(ScriptExecutionContext executionContext, CallbackArguments args)
+        public static DynValue __select(ScriptExecutionContext executionContext, CallbackArguments args)
         {
-            const string name = "getChart";
-            var chartID = args.AsType(0, name, DataType.String, false).String;
-
-            var rgpackID = "Playtest";
-            var chartReference = new RgpackReference(rgpackID, chartID);
-
-            var worldInfo = RogueWorldInfo.GetByCharacter(RogueDevice.Primary.Player);
-            worldInfo.ChartState.MoveNext(chartReference);
-
-            RogueDevice.Add(DeviceKw.AppendText, DeviceKw.EndTalk);
+            const string name = "__select";
+            selectMenu.coroutine = executionContext.GetCallingCoroutine();
+            selectMenu.choices.Clear();
+            for (int i = 0; i < args.Count; i++)
+            {
+                var choice = args.AsType(i, name, DataType.String, false).String;
+                selectMenu.choices.Add(choice);
+            }
+            RogueDevice.Primary.AddMenu(selectMenu, null, null, RogueMethodArgument.Identity);
             return DynValue.Nil;
         }
 
@@ -336,6 +369,32 @@ end
                 effect.Set("__rgins", rogueEffectValue);
 
                 return DynValue.Nil;
+            }
+        }
+
+        private class SelectMenu : IModelsMenu, IModelListPresenter
+        {
+            public Coroutine coroutine;
+            public List<string> choices = new();
+            private static readonly DynValue[] args = new DynValue[1];
+
+            public void OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            {
+                var view = root.Get(DeviceKw.MenuTalkChoices);
+                view.OpenView<string>(this, choices, root, self, user, arg);
+            }
+
+            public string GetItemName(object modelListItem, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            {
+                return (string)modelListItem;
+            }
+
+            public void ActivateItem(object modelListItem, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            {
+                root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+                root.Done();
+                args[0] = DynValue.NewNumber(choices.IndexOf((string)modelListItem) + 1);
+                coroutine.Resume(args);
             }
         }
     }

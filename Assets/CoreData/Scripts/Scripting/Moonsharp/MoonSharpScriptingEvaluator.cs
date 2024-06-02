@@ -21,16 +21,16 @@ namespace Roguegard.Scripting.MoonSharp
                 var value = pair.Value.Table;
                 if (value.Get("__type").String == "Event")
                 {
-                    rgpack.AddAsset(pair.Key.String, new Event(value));
+                    rgpack.AddAsset(pair.Key.String, new Cmn(value));
                 }
             }
         }
 
-        private class Event : IScriptingCmn
+        private class Cmn : IScriptingCmn
         {
             private readonly Table table;
 
-            public Event(Table table)
+            public Cmn(Table table)
             {
                 this.table = table;
             }
@@ -38,7 +38,8 @@ namespace Roguegard.Scripting.MoonSharp
             public void Invoke()
             {
                 var function = table.Get("invoke").Function;
-                function.Call();
+                var coroutine = function.OwnerScript.CreateCoroutine(function).Coroutine;
+                coroutine.Resume();
             }
         }
     }

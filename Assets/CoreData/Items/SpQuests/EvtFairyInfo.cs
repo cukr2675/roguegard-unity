@@ -2,8 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-using System.Linq;
-
 namespace Roguegard
 {
     [Objforming.Formable]
@@ -17,15 +15,15 @@ namespace Roguegard
 
         //private EventFairyInfo() { }
 
-        public void SetRgpackID(RogueObj evtFairy, string rgpackID)
+        public void LoadFullID(RogueObj evtFairy, string rgpackID)
         {
-            RelatedChart = new RgpackReference(rgpackID, RelatedChart.AssetID);
+            RelatedChart.LoadFullID(rgpackID);
             foreach (var point in _points)
             {
-                point.ChartCmn = new RgpackReference(rgpackID, point.ChartCmn.AssetID);
-                point.IfCmn = new RgpackReference(rgpackID, point.IfCmn.AssetID);
-                point.Appearance = new RgpackReference(rgpackID, point.Appearance.AssetID);
-                point.Cmn = new RgpackReference(rgpackID, point.Cmn.AssetID);
+                point.ChartCmn.LoadFullID(rgpackID);
+                point.IfCmn.LoadFullID(rgpackID);
+                point.Appearance.LoadFullID(rgpackID);
+                point.Cmn.LoadFullID(rgpackID);
                 point.Position = evtFairy.Position;
             }
         }
@@ -34,9 +32,9 @@ namespace Roguegard
         {
             var point = new Point();
             point.ChartCmn = chartCmn;
-            point.IfCmn = new RgpackReference(null, null);
-            point.Appearance = new RgpackReference(null, null);
-            point.Cmn = new RgpackReference(null, null);
+            point.IfCmn = new RgpackReference(null);
+            point.Appearance = new RgpackReference(null);
+            point.Cmn = new RgpackReference(null);
             _points.Add(point);
         }
 
@@ -51,8 +49,7 @@ namespace Roguegard
                 //var ifCmn = point.IfCmn?.GetData<IScriptingCmn>();
                 //ifCmn?.Invoke();
 
-                var appearance = point.Appearance.GetData<KyarakuriFigurineInfo>();
-                return new EvtInstanceInfoSet(this, appearance.Main, point.Position);
+                return new EvtInstanceInfoSet(this, point);
             }
             throw new RogueException();
         }
@@ -84,7 +81,7 @@ namespace Roguegard
             if (info.info != null) throw new RogueException();
 
             info.info = new EvtFairyInfo();
-            info.info.RelatedChart = new RgpackReference(null, null);
+            info.info.RelatedChart = new RgpackReference(null);
         }
 
         [Objforming.Formable]
@@ -116,9 +113,16 @@ namespace Roguegard
             public RgpackReference ChartCmn { get; set; }
             public RgpackReference IfCmn { get; set; }
             public RgpackReference Appearance { get; set; }
-            public int Category { get; set; }
+            public Category Category { get; set; }
             public RgpackReference Cmn { get; set; }
             public Vector2Int Position { get; set; }
+        }
+
+        [Objforming.Formable]
+        public enum Category
+        {
+            ApplyTool,
+            Trap
         }
     }
 }

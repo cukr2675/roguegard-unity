@@ -53,7 +53,7 @@ namespace Roguegard
             public string GetItemName(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 if (model == null) return "+ ƒCƒxƒ“ƒg‚ð’Ç‰Á";
-                else return ((RgpackReference)model).AssetID;
+                else return ((RgpackReference)model).ID;
             }
 
             public void ActivateItem(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
@@ -70,7 +70,7 @@ namespace Roguegard
                     {
                         newEvents[i] = chart.Cmns[i];
                     }
-                    newEvents[newEvents.Length - 1] = new RgpackReference(null, null);
+                    newEvents[newEvents.Length - 1] = new RgpackReference(null);
                     RogueChartInfo.SetChartTo(chartPad, new RogueChart(chart.ID, newEvents));
                     root.Reopen(null, null, arg);
                 }
@@ -138,7 +138,7 @@ namespace Roguegard
                     var chart = RogueChartInfo.GetChart(chartPad);
                     var index = arg.Count;
                     var rgpackReference = chart.Cmns[index];
-                    return rgpackReference.AssetID;
+                    return rgpackReference.ID;
                 }
 
                 public void SetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg, string value)
@@ -147,8 +147,7 @@ namespace Roguegard
                     var chart = RogueChartInfo.GetChart(chartPad);
                     var index = arg.Count;
                     var events = chart.Cmns.ToArray();
-                    var rgpackReference = events[index];
-                    events[index] = new RgpackReference(rgpackReference.RgpackID, value);
+                    events[index] = new RgpackReference(value);
                     RogueChartInfo.SetChartTo(chartPad, new RogueChart(chart.ID, events));
                 }
             }

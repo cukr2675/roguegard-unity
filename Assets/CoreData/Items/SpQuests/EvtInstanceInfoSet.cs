@@ -11,8 +11,10 @@ namespace Roguegard
     public class EvtInstanceInfoSet : MainInfoSet
     {
         private readonly EvtFairyInfo info;
+        private readonly EvtFairyInfo.Point point;
         private readonly ICharacterCreationData data;
-        private readonly Vector2Int position;
+
+        public string ID => info.ID;
 
         private int currentRaceOptionIndex;
         [System.NonSerialized] private IRaceOption _currentRaceOption;
@@ -53,7 +55,7 @@ namespace Roguegard
         public override string Caption => null;
         public override IRogueDetails Details => null;
 
-        public override IKeyword Category => CategoryKw.Equipment;
+        public override IKeyword Category => point.Category == EvtFairyInfo.Category.ApplyTool ? CategoryKw.ApplyTool : CategoryKw.Trap;
 
         public override int MaxHP => 0;
         public override int MaxMP => 0;
@@ -64,7 +66,7 @@ namespace Roguegard
 
         public override ISerializableKeyword Faction => RoguegardSettings.DefaultRaceOption.Faction;
         public override Spanning<ISerializableKeyword> TargetFactions => RoguegardSettings.DefaultRaceOption.TargetFactions;
-        public override MainInfoSetAbility Ability => MainInfoSetAbility.Object;
+        public override MainInfoSetAbility Ability => point.Category == EvtFairyInfo.Category.ApplyTool ? MainInfoSetAbility.WallObject : MainInfoSetAbility.TrapTile;
         public override IRogueMaterial Material => RoguegardSettings.DefaultRaceOption.Material;
         public override IRogueGender Gender => RoguegardSettings.DefaultRaceOption.Genders[0];
         public override string HPName => null;
@@ -87,7 +89,8 @@ namespace Roguegard
         public override IChangeStateRogueMethod Locate => RoguegardSettings.DefaultRaceOption.Locate;
         public override IChangeStateRogueMethod Polymorph => RoguegardSettings.DefaultRaceOption.Polymorph;
 
-        public override IApplyRogueMethod BeApplied => RoguegardSettings.DefaultRaceOption.BeApplied;
+        [System.NonSerialized] private BeAppliedRogueMethod _beApplied;
+        public override IApplyRogueMethod BeApplied => _beApplied ??= new BeAppliedRogueMethod() { cmn = point.Cmn.GetData<IScriptingCmn>() };
         public override IApplyRogueMethod BeThrown => RoguegardSettings.DefaultRaceOption.BeThrown;
         public override IApplyRogueMethod BeEaten => RoguegardSettings.DefaultRaceOption.BeEaten;
 
@@ -98,11 +101,11 @@ namespace Roguegard
         //    data = eventFairyInfo.Appearance.GetData<KyarakuriFigurineInfo>().Main;
         //}
 
-        public EvtInstanceInfoSet(EvtFairyInfo info, ICharacterCreationData data, Vector2Int position)
+        public EvtInstanceInfoSet(EvtFairyInfo info, EvtFairyInfo.Point point, ICharacterCreationData data = null)
         {
             this.info = info;
-            this.data = data;
-            this.position = position;
+            this.point = point;
+            this.data = data ?? point.Appearance.GetData<KyarakuriFigurineInfo>().Main;
         }
 
         /// <summary>
@@ -172,9 +175,20 @@ namespace Roguegard
             var stats = obj.Main.Stats;
             stats.Direction = RogueDirection.LowerLeft;
             stats.Reset(obj);
-            if (!SpaceUtility.TryLocate(obj, location, position, stackOption)) throw new RogueException("生成したオブジェクトの移動に失敗しました。");
+            if (!SpaceUtility.TryLocate(obj, location, point.Position, stackOption)) throw new RogueException("生成したオブジェクトの移動に失敗しました。");
 
             return obj;
+        }
+
+        private class BeAppliedRogueMethod : BaseApplyRogueMethod
+        {
+            public IScriptingCmn cmn;
+
+            public override bool Invoke(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
+            {
+                cmn.Invoke();
+                return true;
+            }
         }
     }
 }

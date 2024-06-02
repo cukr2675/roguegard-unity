@@ -7,23 +7,49 @@ namespace Roguegard
     [Objforming.Formable]
     public class RgpackReference : System.IEquatable<RgpackReference>
     {
-        public string RgpackID { get; }
-        public string AssetID { get; }
+        public string ID { get; }
+
+        [System.NonSerialized] private string _rgpackID;
+        private string RgpackID => _rgpackID ?? throw new RogueException($"{ID} の Rgpack 名が読み込まれていません。");
+
+        [System.NonSerialized] private string _assetID;
+        private string AssetID => _assetID ?? throw new RogueException($"{ID} の Rgpack 名が読み込まれていません。");
 
         private static readonly Dictionary<string, IRgpack> loadedRgpackTable = new();
 
         private RgpackReference() { }
 
-        public RgpackReference(string rgpackID, string assetID)
+        public RgpackReference(string id)
         {
-            RgpackID = rgpackID;
-            AssetID = assetID;
+            ID = id;
+        }
+
+        public void LoadFullID(string envRgpackID)
+        {
+            _rgpackID = GetRgpackID(ID, envRgpackID);
+            _assetID = GetAssetID(ID);
+        }
+
+        public static string GetRgpackID(string id, string envRgpackID)
+        {
+            if (id == null) return "";
+            if (id.StartsWith('.')) return envRgpackID;
+            else return id.Substring(0, id.IndexOf('.'));
+        }
+
+        public static string GetAssetID(string id)
+        {
+            if (id == null) return "";
+            return id.Substring(id.IndexOf('.') + 1);
         }
 
         public T GetData<T>()
         {
-            if (!TryGetRgpack(RgpackID, out var rgpack)) throw new RogueException($"Rgpack ({RgpackID}) が見つかりません。");
-            if (!rgpack.TryGetAsset<T>(AssetID, out var asset)) throw new RogueException($"Rgpack ({RgpackID}) に ID ({AssetID}) のデータが見つかりません。");
+
+            if (!TryGetRgpack(RgpackID, out var rgpack)) throw new RogueException(
+                $"Rgpack ({RgpackID}) が見つかりません。");
+            if (!rgpack.TryGetAsset<T>(AssetID, out var asset)) throw new RogueException(
+                $"Rgpack ({RgpackID}) に ID ({AssetID}) のデータが見つかりません。");
 
             return asset;
         }
@@ -52,7 +78,7 @@ namespace Roguegard
 
         public override int GetHashCode()
         {
-            return AssetID?.GetHashCode() ?? 0;
+            return GetAssetID(ID).GetHashCode();
         }
     }
 }

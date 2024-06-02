@@ -50,7 +50,7 @@ namespace Roguegard
 
             protected override string GetItemName(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                if (model is EvtFairyInfo.Point point) return point.ChartCmn.AssetID;
+                if (model is EvtFairyInfo.Point point) return point.ChartCmn.ID;
                 else return "+ Point Çí«â¡";
             }
 
@@ -69,7 +69,7 @@ namespace Roguegard
 
                     var fairy = arg.TargetObj;
                     var eventFairyInfo = EvtFairyInfo.Get(fairy);
-                    eventFairyInfo.AddPoint(new RgpackReference(null, null));
+                    eventFairyInfo.AddPoint(new RgpackReference(null));
                     root.Reopen(null, null, arg);
                 }
             }
@@ -108,14 +108,14 @@ namespace Roguegard
             {
                 var fairy = arg.TargetObj;
                 var eventFairyInfo = EvtFairyInfo.Get(fairy);
-                return eventFairyInfo.RelatedChart.AssetID;
+                return eventFairyInfo.RelatedChart.ID;
             }
 
             public void SetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg, string value)
             {
                 var fairy = arg.TargetObj;
                 var eventFairyInfo = EvtFairyInfo.Get(fairy);
-                eventFairyInfo.RelatedChart = new RgpackReference(eventFairyInfo.RelatedChart.RgpackID, value);
+                eventFairyInfo.RelatedChart = new RgpackReference(value);
             }
         }
 
@@ -126,6 +126,8 @@ namespace Roguegard
                 new ConditionID(),
                 new AdditionalConditionID(),
                 new AppearanceAssetID(),
+                new CategoryMenu(),
+                new CmnID()
             };
 
             protected override IKeyword ViewKeyword => DeviceKw.MenuOptions;
@@ -156,13 +158,13 @@ namespace Roguegard
             public string GetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 var point = (EvtFairyInfo.Point)arg.Other;
-                return point.ChartCmn.AssetID;
+                return point.ChartCmn.ID;
             }
 
             public void SetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg, string value)
             {
                 var point = (EvtFairyInfo.Point)arg.Other;
-                point.ChartCmn = new RgpackReference(point.ChartCmn.RgpackID, value);
+                point.ChartCmn = new RgpackReference(value);
             }
         }
 
@@ -176,13 +178,13 @@ namespace Roguegard
             public string GetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 var point = (EvtFairyInfo.Point)arg.Other;
-                return point.IfCmn.AssetID;
+                return point.IfCmn.ID;
             }
 
             public void SetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg, string value)
             {
                 var point = (EvtFairyInfo.Point)arg.Other;
-                point.IfCmn = new RgpackReference(point.IfCmn.RgpackID, value);
+                point.IfCmn = new RgpackReference(value);
             }
         }
 
@@ -196,13 +198,74 @@ namespace Roguegard
             public string GetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 var point = (EvtFairyInfo.Point)arg.Other;
-                return point.Appearance.AssetID;
+                return point.Appearance.ID;
             }
 
             public void SetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg, string value)
             {
                 var point = (EvtFairyInfo.Point)arg.Other;
-                point.Appearance = new RgpackReference(point.Appearance.RgpackID, value);
+                point.Appearance = new RgpackReference(value);
+            }
+        }
+
+        private class CategoryMenu : BaseScrollModelsMenu<EvtFairyInfo.Category>, IModelsMenuChoice
+        {
+            public TMP_InputField.ContentType ContentType => TMP_InputField.ContentType.Standard;
+
+            private static readonly EvtFairyInfo.Category[] models = new EvtFairyInfo.Category[]
+            {
+                EvtFairyInfo.Category.ApplyTool,
+                EvtFairyInfo.Category.Trap
+            };
+
+            public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+                => "ÉJÉeÉSÉä";
+
+            public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            {
+                root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+
+                var point = (EvtFairyInfo.Point)arg.Other;
+                root.OpenMenu(this, null, null, new(other: point));
+            }
+
+            protected override Spanning<EvtFairyInfo.Category> GetModels(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            {
+                return models;
+            }
+
+            protected override string GetItemName(EvtFairyInfo.Category model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            {
+                return model.ToString();
+            }
+
+            protected override void ActivateItem(EvtFairyInfo.Category model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            {
+                root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+
+                var point = (EvtFairyInfo.Point)arg.Other;
+                point.Category = model;
+                root.Back();
+            }
+        }
+
+        private class CmnID : IModelsMenuOptionText
+        {
+            public TMP_InputField.ContentType ContentType => TMP_InputField.ContentType.Standard;
+
+            public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+                => "Cmn";
+
+            public string GetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            {
+                var point = (EvtFairyInfo.Point)arg.Other;
+                return point.Cmn.ID;
+            }
+
+            public void SetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg, string value)
+            {
+                var point = (EvtFairyInfo.Point)arg.Other;
+                point.Cmn = new RgpackReference(value);
             }
         }
     }
