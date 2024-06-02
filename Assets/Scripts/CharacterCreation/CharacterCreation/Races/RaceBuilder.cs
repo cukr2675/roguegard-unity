@@ -25,7 +25,7 @@ namespace Roguegard.CharacterCreation
         public IRogueDetails Details => OptionDetails ?? Option.Details;
         Color IReadOnlyRace.BodyColor => BodyColor;
         int IReadOnlyRace.Lv => 1;
-        IMemberableOption IMemberable.MemberableOption => Option;
+        Spanning<IMemberSource> IMemberable.MemberSources => Option.MemberSources;
 
         public RaceBuilder()
         {

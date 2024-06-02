@@ -26,7 +26,7 @@ namespace Roguegard.CharacterCreation
         Color IReadOnlyIntrinsic.OptionColor => _optionDescription?.Color ?? default;
         string IReadOnlyIntrinsic.OptionCaption => _optionDescription?.Caption;
         IRogueDetails IReadOnlyIntrinsic.OptionDetails => _optionDescription?.Details;
-        IMemberableOption IMemberable.MemberableOption => _option;
+        Spanning<IMemberSource> IMemberable.MemberSources => _option.MemberSources;
 
         IReadOnlyMember IMemberable.GetMember(IMemberSource source)
         {

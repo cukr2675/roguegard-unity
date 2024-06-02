@@ -27,7 +27,7 @@ namespace Roguegard.CharacterCreation
 
 
 
-        Spanning<IMemberSource> IMemberableOption.MemberSources => Spanning<IMemberSource>.Empty;
+        Spanning<IMemberSource> IRaceOption.MemberSources => Spanning<IMemberSource>.Empty;
 
         public virtual Spanning<IRaceOption> GrowingOptions => Spanning<IRaceOption>.Empty;
 

@@ -32,7 +32,7 @@ namespace Roguegard.CharacterCreation
         float IWeightedRogueObjGenerator.Weight => GeneratorWeight;
         Color IReadOnlyStartingItem.OptionColor => OptionColor;
         IRogueGender IReadOnlyStartingItem.OptionGender => null;
-        IMemberableOption IMemberable.MemberableOption => Option;
+        Spanning<IMemberSource> IMemberable.MemberSources => Option.MemberSources;
 
         public StartingItemBuilder()
         {

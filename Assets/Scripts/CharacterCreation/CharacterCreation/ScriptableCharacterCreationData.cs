@@ -64,8 +64,7 @@ namespace Roguegard.CharacterCreation
         int IStartingItemOption.Lv => Race.Lv;
 
         public virtual Spanning<IMemberSource> StartingItemOptionMemberSources => Spanning<IMemberSource>.Empty;
-
-        Spanning<IMemberSource> IMemberableOption.MemberSources => StartingItemOptionMemberSources;
+        Spanning<IMemberSource> IStartingItemOption.MemberSources => StartingItemOptionMemberSources;
 
         public MainInfoSet PrimaryInfoSet
         {
@@ -168,7 +167,7 @@ namespace Roguegard.CharacterCreation
             public string Caption => Option.Caption;
             public IRogueDetails Details => Option.Details;
 
-            IMemberableOption IMemberable.MemberableOption => Option;
+            Spanning<IMemberSource> IMemberable.MemberSources => Option.MemberSources;
 
             public IReadOnlyMember GetMember(IMemberSource source) => source.CreateMember();
 

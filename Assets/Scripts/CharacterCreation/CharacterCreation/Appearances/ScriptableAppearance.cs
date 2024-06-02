@@ -26,7 +26,7 @@ namespace Roguegard.CharacterCreation
         string IReadOnlyAppearance.OptionName => _optionDescription?.DescriptionName;
         string IReadOnlyAppearance.OptionCaption => _optionDescription?.Caption;
         IRogueDetails IReadOnlyAppearance.OptionDetails => _optionDescription?.Details;
-        IMemberableOption IMemberable.MemberableOption => _option;
+        Spanning<IMemberSource> IMemberable.MemberSources => _option.MemberSources;
 
         IReadOnlyMember IMemberable.GetMember(IMemberSource source)
         {

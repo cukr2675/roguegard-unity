@@ -5,8 +5,10 @@ using UnityEngine;
 namespace Roguegard.CharacterCreation
 {
     [Objforming.RequireRelationalComponent]
-    public interface IIntrinsicOption : IRogueDescription, IMemberableOption
+    public interface IIntrinsicOption : IRogueDescription
     {
+        Spanning<IMemberSource> MemberSources { get; }
+
         void UpdateMemberRange(IMember member, IReadOnlyIntrinsic intrinsic, ICharacterCreationData characterCreationData);
 
         int GetLv(IReadOnlyIntrinsic intrinsic, ICharacterCreationData characterCreationData);

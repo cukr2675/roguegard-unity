@@ -7,7 +7,7 @@ using SkeletalSprite;
 namespace Roguegard.CharacterCreation
 {
     [Objforming.RequireRelationalComponent]
-    public interface IRaceOption : IRogueDescription, IMemberableOption
+    public interface IRaceOption : IRogueDescription
     {
         /// <summary>
         /// この <see cref="IRaceOption"/> の進化・退化先。 <see cref="CharacterCreationInfoSet"/> のキャッシュに必要。
@@ -51,6 +51,8 @@ namespace Roguegard.CharacterCreation
         IApplyRogueMethod BeApplied { get; }
         IApplyRogueMethod BeThrown { get; }
         IApplyRogueMethod BeEaten { get; }
+
+        Spanning<IMemberSource> MemberSources { get; }
 
         /// <summary>
         /// <see cref="IReadOnlyRace.Gender"/> は外部で設定しているため、このメソッドで設定する必要はない。

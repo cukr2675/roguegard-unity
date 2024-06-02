@@ -5,11 +5,13 @@ using UnityEngine;
 namespace Roguegard.CharacterCreation
 {
     [Objforming.RequireRelationalComponent]
-    public interface IStartingItemOption : IRogueDescription, IMemberableOption
+    public interface IStartingItemOption : IRogueDescription
     {
         MainInfoSet InfoSet { get; }
         int Lv { get; }
         Spanning<IWeightedRogueObjGeneratorList> StartingItemTable { get; }
+
+        Spanning<IMemberSource> MemberSources { get; }
 
         void UpdateMemberRange(IMember member, IReadOnlyStartingItem startingItem, ICharacterCreationData characterCreationData);
 

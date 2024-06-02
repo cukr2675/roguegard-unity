@@ -40,7 +40,7 @@ namespace Roguegard.CharacterCreation
         string IReadOnlyRace.OptionCaption => _optionDescription?.Caption;
         IRogueDetails IReadOnlyRace.OptionDetails => _optionDescription?.Details;
         int IReadOnlyRace.Lv => 1;
-        IMemberableOption IMemberable.MemberableOption => _option;
+        Spanning<IMemberSource> IMemberable.MemberSources => _option.MemberSources;
 
         IReadOnlyMember IMemberable.GetMember(IMemberSource source)
         {

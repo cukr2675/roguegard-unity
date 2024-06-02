@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using UnityEditor;
+using Roguegard;
 using Roguegard.CharacterCreation;
 
 namespace RoguegardUnity
@@ -69,28 +70,33 @@ namespace RoguegardUnity
                 var _option = parent.FindPropertyRelative("_option");
                 if (_option?.propertyType == SerializedPropertyType.ObjectReference)
                 {
-                    Validate((IMemberableOption)_option.objectReferenceValue, members);
+                    Validate(_option.objectReferenceValue, members);
                 }
                 else if (_option?.propertyType == SerializedPropertyType.Generic)
                 {
                     _option = parent.FindPropertyRelative("_option._ref");
-                    Validate((IMemberableOption)_option.managedReferenceValue, members);
+                    Validate(_option.managedReferenceValue, members);
                 }
             }
         }
 
-        public void Validate(IMemberableOption _option, SerializedProperty _members)
+        public void Validate(object memberableOption, SerializedProperty _members)
         {
-            if (_option == null)
+            Spanning<IMemberSource> memberSources;
+            if (memberableOption is IRaceOption raceOption) { memberSources = raceOption.MemberSources; }
+            else if (memberableOption is IAppearanceOption appearanceOption) { memberSources = appearanceOption.MemberSources; }
+            else if (memberableOption is IIntrinsicOption intrinsicOption) { memberSources = intrinsicOption.MemberSources; }
+            else if (memberableOption is IStartingItemOption startingItemOption) { memberSources = startingItemOption.MemberSources; }
+            else
             {
                 _members.arraySize = 0;
                 return;
             }
 
             membersBuffer.Clear();
-            for (int i = 0; i < _option.MemberSources.Count; i++)
+            for (int i = 0; i < memberSources.Count; i++)
             {
-                var source = _option.MemberSources[i];
+                var source = memberSources[i];
                 var member = FirstOrDefault(source);
                 if (member != null) { membersBuffer.Add(member.Clone()); } // 参照越しに変更されないようにクローンを使用する。
                 else { membersBuffer.Add(source.CreateMember()); } // 元のリストになければ新規作成する。

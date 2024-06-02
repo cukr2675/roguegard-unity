@@ -20,7 +20,7 @@ namespace Roguegard.CharacterCreation
         Color IRogueDescription.Color => Color;
         public string Caption => Option.Caption;
         public IRogueDetails Details => Option.Details;
-        IMemberableOption IMemberable.MemberableOption => Option;
+        Spanning<IMemberSource> IMemberable.MemberSources => Option.MemberSources;
 
         public AppearanceBuilder()
         {

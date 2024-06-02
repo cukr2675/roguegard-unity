@@ -77,9 +77,9 @@ namespace RoguegardUnity
 
         private void AddMemberModels(IMemberable memberable)
         {
-            for (int i = 0; i < memberable.MemberableOption.MemberSources.Count; i++)
+            for (int i = 0; i < memberable.MemberSources.Count; i++)
             {
-                var member = memberable.GetMember(memberable.MemberableOption.MemberSources[i]);
+                var member = memberable.GetMember(memberable.MemberSources[i]);
                 if (member is SingleItemMember singleItemMember)
                 {
                     models.Add(singleItemMemberOptionChoice.Set(singleItemMember));
@@ -163,9 +163,9 @@ namespace RoguegardUnity
 
                 if (arg.Other is IMemberable memberable)
                 {
-                    for (int i = 0; i < memberable.MemberableOption.MemberSources.Count; i++)
+                    for (int i = 0; i < memberable.MemberSources.Count; i++)
                     {
-                        var member = memberable.GetMember(memberable.MemberableOption.MemberSources[i]);
+                        var member = memberable.GetMember(memberable.MemberSources[i]);
                         if (member is SingleItemMember singleItemMember)
                         {
                             // Œ©‚½–Ú‘•”õ‚ðíœ‚µ‚½‚Æ‚«A‚»‚Ì‘•”õ•i‚ðŠl“¾‚·‚é

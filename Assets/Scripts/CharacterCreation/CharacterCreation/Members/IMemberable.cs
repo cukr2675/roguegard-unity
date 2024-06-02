@@ -6,7 +6,7 @@ namespace Roguegard.CharacterCreation
 {
     public interface IMemberable
     {
-        IMemberableOption MemberableOption { get; }
+        Spanning<IMemberSource> MemberSources { get; }
 
         IReadOnlyMember GetMember(IMemberSource source);
     }

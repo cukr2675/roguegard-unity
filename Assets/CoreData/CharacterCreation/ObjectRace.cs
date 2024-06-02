@@ -29,7 +29,7 @@ namespace Roguegard.CharacterCreation
         Color IReadOnlyRace.BodyColor => Color;
         string IReadOnlyRace.OptionCaption => null;
         IRogueDetails IReadOnlyRace.OptionDetails => null;
-        IMemberableOption IMemberable.MemberableOption => this;
+        Spanning<IMemberSource> IMemberable.MemberSources => ((IRaceOption)this).MemberSources;
 
         IReadOnlyMember IMemberable.GetMember(IMemberSource source)
         {
