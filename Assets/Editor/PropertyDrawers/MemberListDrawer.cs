@@ -70,23 +70,28 @@ namespace RoguegardUnity
                 var _option = parent.FindPropertyRelative("_option");
                 if (_option?.propertyType == SerializedPropertyType.ObjectReference)
                 {
-                    Validate(_option.objectReferenceValue, members);
+                    Validate(_option.objectReferenceValue, members, _option.propertyPath);
                 }
                 else if (_option?.propertyType == SerializedPropertyType.Generic)
                 {
                     _option = parent.FindPropertyRelative("_option._ref");
-                    Validate(_option.managedReferenceValue, members);
+                    Validate(_option.managedReferenceValue, members, _option.propertyPath);
                 }
             }
         }
 
-        public void Validate(object memberableOption, SerializedProperty _members)
+        public void Validate(object memberableOption, SerializedProperty _members, string path)
         {
+            // プロパティのパスが _race._option または _race._option._ref で終わる場合は RaceOption.MemberSource 優先で処理する
+            // そうでない場合は StartingItemOption.MemberSource 優先で処理する
+            var containsRace = path.EndsWith("_race._option") || path.EndsWith("_race._option._ref");
+
             Spanning<IMemberSource> memberSources;
-            if (memberableOption is IRaceOption raceOption) { memberSources = raceOption.MemberSources; }
+            if (containsRace && memberableOption is IRaceOption raceOption1) { memberSources = raceOption1.MemberSources; }
             else if (memberableOption is IAppearanceOption appearanceOption) { memberSources = appearanceOption.MemberSources; }
             else if (memberableOption is IIntrinsicOption intrinsicOption) { memberSources = intrinsicOption.MemberSources; }
             else if (memberableOption is IStartingItemOption startingItemOption) { memberSources = startingItemOption.MemberSources; }
+            else if (memberableOption is IRaceOption raceOption2) { memberSources = raceOption2.MemberSources; }
             else
             {
                 _members.arraySize = 0;
