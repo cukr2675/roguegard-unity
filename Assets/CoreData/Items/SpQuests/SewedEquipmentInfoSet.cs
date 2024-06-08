@@ -7,6 +7,9 @@ using Roguegard.CharacterCreation;
 
 namespace Roguegard
 {
+    /// <summary>
+    /// <see cref="CharacterCreation"/> ‚ÉˆË‘¶‚µ‚È‚¢À‘•‚É‚·‚é‚½‚ßA <see cref="ICharacterCreationData"/> ‚ğÀ‘•‚µ‚È‚¢
+    /// </summary>
     [Objforming.Formable]
     public class SewedEquipmentInfoSet : MainInfoSet
     {
