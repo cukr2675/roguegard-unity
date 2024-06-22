@@ -22,7 +22,7 @@ namespace Roguegard.Rgpacks
 
         private PropertiedCmnSkill(PropertiedCmnData data, string envRgpackID)
         {
-            reference = new PropertiedCmnReference(data, envRgpackID);
+            reference = data.ToReference(envRgpackID);
         }
 
         public static ISkill Create(PropertiedCmnData data, string envRgpackID, ISkill defaultMethod)

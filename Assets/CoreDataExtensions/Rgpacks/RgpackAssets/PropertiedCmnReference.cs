@@ -8,24 +8,16 @@ namespace Roguegard.Rgpacks
     public class PropertiedCmnReference
     {
         public CmnReference Cmn { get; }
-        private readonly PropertiedCmnData data;
-        private readonly string envRgpackID;
-        private IReadOnlyDictionary<string, ICmnProperty> properties;
+        private readonly Dictionary<string, ICmnProperty> properties;
 
-        public PropertiedCmnReference(PropertiedCmnData data, string envRgpackID)
+        public PropertiedCmnReference(PropertiedCmnData data, string envRgpackID, IReadOnlyDictionary<string, ICmnProperty> properties)
         {
             Cmn = new CmnReference(data.Cmn, envRgpackID);
-            this.data = new PropertiedCmnData(data);
-            this.envRgpackID = envRgpackID;
+            this.properties = new Dictionary<string, ICmnProperty>(properties);
         }
 
         public object Invoke()
         {
-            if (properties == null)
-            {
-                properties = data.GetProperties(envRgpackID);
-            }
-
             return Cmn.Asset.Invoke(properties);
         }
     }

@@ -18,7 +18,7 @@ namespace Roguegard.Rgpacks
             cmns = new PropertiedCmnReference[info.Cmns.Count];
             for (int i = 0; i < info.Cmns.Count; i++)
             {
-                cmns[i] = new PropertiedCmnReference(info.Cmns[i], envRgpackID);
+                cmns[i] = info.Cmns[i].ToReference(envRgpackID);
             }
 
             ChartSource = ChartPadReference.CreateSource(fullID, envRgpackID);

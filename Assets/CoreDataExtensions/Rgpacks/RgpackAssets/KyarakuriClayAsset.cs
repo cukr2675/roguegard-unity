@@ -79,8 +79,8 @@ namespace Roguegard.Rgpacks
         {
             this.info = info;
             Reference = new KyarakuriClayReference(fullID, envRgpackID);
-            if (info.RaceWeight != null) { raceWeightCmn = new PropertiedCmnReference(info.RaceWeight, envRgpackID); }
-            if (info.RaceSprite != null) { raceSpriteCmn = new PropertiedCmnReference(info.RaceSprite, envRgpackID); }
+            if (info.RaceWeight != null) { raceWeightCmn = info.RaceWeight.ToReference(envRgpackID); }
+            if (info.RaceSprite != null) { raceSpriteCmn = info.RaceSprite.ToReference(envRgpackID); }
 
             Walk = RogueMethod.Create(info.Walk, envRgpackID, RoguegardSettings.DefaultRaceOption.Walk);
             Wait = RogueMethod.Create(info.Wait, envRgpackID, RoguegardSettings.DefaultRaceOption.Wait);
@@ -203,7 +203,7 @@ namespace Roguegard.Rgpacks
 
             private RogueMethod(PropertiedCmnData data, string envRgpackID)
             {
-                reference = new PropertiedCmnReference(data, envRgpackID);
+                reference = data.ToReference(envRgpackID);
             }
 
             public static IActiveRogueMethod Create(PropertiedCmnData data, string envRgpackID, IActiveRogueMethod defaultMethod)

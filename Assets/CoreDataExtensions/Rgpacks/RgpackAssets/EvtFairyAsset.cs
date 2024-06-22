@@ -20,10 +20,10 @@ namespace Roguegard.Rgpacks
                 var infoPoint = info.Points[i];
                 var newPoint = new Point();
                 newPoint.ChartCmn = new CmnReference(infoPoint.ChartCmn, envRgpackID);
-                newPoint.IfCmn = new PropertiedCmnReference(infoPoint.IfCmn, envRgpackID);
+                newPoint.IfCmn = infoPoint.IfCmn.ToReference(envRgpackID);
                 newPoint.Sprite = new RogueObjSpriteReference(infoPoint.Sprite, envRgpackID);
                 newPoint.Category = infoPoint.Category;
-                newPoint.Cmn = new PropertiedCmnReference(infoPoint.Cmn, envRgpackID);
+                newPoint.Cmn = infoPoint.Cmn.ToReference(envRgpackID);
                 newPoint.Position = infoPoint.Position;
                 newPoint.Position = new Vector2Int(3, 3);
                 points.Add(newPoint);

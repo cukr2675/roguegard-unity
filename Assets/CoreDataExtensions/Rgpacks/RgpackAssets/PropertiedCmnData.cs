@@ -61,5 +61,10 @@ namespace Roguegard.Rgpacks
 
             return properties;
         }
+
+        public PropertiedCmnReference ToReference(string envRgpackID)
+        {
+            return new PropertiedCmnReference(this, envRgpackID, properties);
+        }
     }
 }
