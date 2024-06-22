@@ -19,6 +19,7 @@ MonoBehaviour:
   - {fileID: 102900000, guid: 447ac99ae37cf834fac7fc8e0aba79ae, type: 3}
   - {fileID: 102900000, guid: a52368c33c47fbc4ba2275827f65d8b9, type: 3}
   - {fileID: 102900000, guid: f327df6ee002dd54e8398f6e44441aba, type: 3}
+  - {fileID: 102900000, guid: 0d8dfafefbaa5ef49a3ef315659ae604, type: 3}
   _items:
   - _key: Core.BomberShell
     _asset: {fileID: 11400000, guid: 2a606c0d5a04f04459e91ba223e139e3, type: 2}
@@ -190,6 +191,8 @@ MonoBehaviour:
     _asset: {fileID: 11400000, guid: 62a14c733f982354aa9b56e6c8ef2c81, type: 2}
   - _key: Core.EvtFairy
     _asset: {fileID: 11400000, guid: ffa8ea2797e10f24aaa019fb83e065dd, type: 2}
+  - _key: Core.KyarakuriClay
+    _asset: {fileID: 11400000, guid: 50071604c072db046bff36b1339f2914, type: 2}
   - _key: Core.KyarakuriFigurine
     _asset: {fileID: 11400000, guid: df60cc758c9870849a5ea7fcd651045b, type: 2}
   - _key: Core.MapDioramaFloor

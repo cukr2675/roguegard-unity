@@ -7,6 +7,7 @@ using System.Reflection;
 using RuntimeDotter;
 using Roguegard;
 using Roguegard.CharacterCreation;
+using Roguegard.Rgpacks;
 using System.IO;
 
 namespace RoguegardUnity
@@ -49,7 +50,7 @@ namespace RoguegardUnity
         [SerializeField] private string _defaultSaveFileName = "Data.gard";
 
         [Header("Scripting")]
-        [SerializeField] private ScriptField<IScriptingEvaluator>[] _scriptingEvaluators = null;
+        [SerializeField] private ScriptField<IScriptEvaluator>[] _scriptEvaluators = null;
 
         [Header("Global Assets")]
         [SerializeField] private ScriptField<ILevelInfoInitializer> _levelInfoInitializer = null;
@@ -84,7 +85,7 @@ namespace RoguegardUnity
             RoguegardSettings.DungeonQuestGenerator = _dungeonQuestGenerator;
             RoguegardSettings.MoneyInfoSet = _money.PrimaryInfoSet;
             RoguegardSettings.JsonSerialization = new JsonSerializationSetting();
-            RoguegardSettings.ScriptingEvaluator = _scriptingEvaluators[0].Ref;
+            Rgpacker.DefaultEvaluator = _scriptEvaluators[0].Ref;
 
             RoguegardSettings.ClearDungeonChoices();
             RoguegardSettings.ClearAssetTable();

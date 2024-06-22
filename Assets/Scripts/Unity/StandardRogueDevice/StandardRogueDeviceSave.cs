@@ -16,7 +16,7 @@ using Roguegard;
 using Roguegard.CharacterCreation;
 using Roguegard.Device;
 using Roguegard.Extensions;
-using Roguegard.Scripting.MoonSharp.Objforming.Serialization.Json;
+using Roguegard.Rgpacks.MoonSharp.Objforming.Serialization.Json;
 using Roguegard.Objforming.Json;
 
 namespace RoguegardUnity
@@ -187,7 +187,8 @@ namespace RoguegardUnity
                 Assembly.Load("Roguegard.CharacterCreation"),
                 Assembly.Load("Roguegard.Device"),
                 Assembly.Load("Roguegard.CoreData"),
-                Assembly.Load("Roguegard.CoreData.Scripting.MoonSharp")
+                Assembly.Load("Roguegard.Rgpacks"),
+                Assembly.Load("Roguegard.Rgpacks.MoonSharp")
             };
             var converters = new RelationalComponentListBuilder<RelationalJsonConverter>();
             converters.Add(FormerJsonConverter.Create(typeof(Vector2Int), true));

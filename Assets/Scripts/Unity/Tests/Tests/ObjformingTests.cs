@@ -23,7 +23,8 @@ namespace RoguegardUnity.Tests
                 Assembly.Load("Roguegard.CharacterCreation"),
                 Assembly.Load("Roguegard.Device"),
                 Assembly.Load("Roguegard.CoreData"),
-                Assembly.Load("Roguegard.CoreData.Scripting.MoonSharp")
+                Assembly.Load("Roguegard.Rgpacks"),
+                Assembly.Load("Roguegard.Rgpacks.MoonSharp")
             };
 
             var notAnsweredTypes = RelationalComponentDebugUtility.GetNotAnsweredTypes(asms);

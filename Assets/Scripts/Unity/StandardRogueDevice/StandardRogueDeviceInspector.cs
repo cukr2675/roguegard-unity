@@ -45,7 +45,8 @@ namespace RoguegardUnity
                 Assembly.Load("Roguegard.CharacterCreation"),
                 Assembly.Load("Roguegard.Device"),
                 Assembly.Load("Roguegard.CoreData"),
-                Assembly.Load("Roguegard.CoreData.Scripting.MoonSharp")
+                Assembly.Load("Roguegard.Rgpacks"),
+                Assembly.Load("Roguegard.Rgpacks.MoonSharp")
             };
             var forms = new RelationalComponentListBuilder<RelationalForm>();
             forms.Add(new Int32Form(_inputElementPrefab));

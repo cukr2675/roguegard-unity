@@ -61,8 +61,6 @@ namespace Roguegard
 
         public static IJsonSerializationSetting JsonSerialization { get; set; }
 
-        public static IScriptingEvaluator ScriptingEvaluator { get; set; }
-
         private static readonly List<IModelsMenuChoice> _dungeonChoices = new List<IModelsMenuChoice>();
 
         public static Spanning<IModelsMenuChoice> DungeonChoices => _dungeonChoices;
