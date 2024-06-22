@@ -6,8 +6,22 @@ namespace Roguegard.CharacterCreation
 {
     [CreateAssetMenu(menuName = "RoguegardData/CharacterCreation/Data/Location/Lobby")]
     [Objforming.Referable]
-    public class LobbyCreationData : ItemCreationData
+    public class LobbyCreationData : ScriptableCharacterCreationData
     {
+        [SerializeField] private ObjectRace _race = null;
+        [SerializeField, ElementDescription("_option")] private ScriptableAppearance[] _appearances = null;
+        [SerializeField, ElementDescription("_option")] private ScriptableIntrinsic[] _intrinsics = null;
+        [SerializeField] private ScriptableStartingItemList[] _startingItemTable = null;
+
+        [System.NonSerialized] private SortedIntrinsicList sortedIntrinsics;
+
+        public override IReadOnlyRace Race => _race;
+        public override Spanning<IReadOnlyAppearance> Appearances => _appearances;
+        protected override ISortedIntrinsicList SortedIntrinsics => sortedIntrinsics;
+        public override Spanning<IWeightedRogueObjGeneratorList> StartingItemTable => _startingItemTable;
+
+
+
         [SerializeField] private ScriptableRogueTile _ground = null;
         [SerializeField] private ScriptableRogueTile _roomWall = null;
         [SerializeField] private ScriptableRogueTile _wall = null;
@@ -73,6 +87,25 @@ namespace Roguegard.CharacterCreation
             _seat.Option.CreateObj(_seat, lobby, new Vector2Int(width / 2 + 1, 5), random);
             _sewingMachine.Option.CreateObj(_sewingMachine, lobby, new Vector2Int(width / 2 - 5, 3), random);
             return lobby;
+        }
+
+        protected override void Initialize()
+        {
+            base.Initialize();
+            sortedIntrinsics = new SortedIntrinsicList(_intrinsics, this);
+        }
+
+        protected override void GetCost(out float cost, out bool costIsUnknown)
+        {
+            cost = Race.Option.Cost;
+            costIsUnknown = Race.Option.CostIsUnknown;
+
+            for (int i = 0; i < _intrinsics.Length; i++)
+            {
+                var intrinsic = _intrinsics[i];
+                cost += Mathf.Max(intrinsic.Option.GetCost(intrinsic, this, out var intrinsicCostIsUnknown), 0f);
+                costIsUnknown |= intrinsicCostIsUnknown;
+            }
         }
     }
 }

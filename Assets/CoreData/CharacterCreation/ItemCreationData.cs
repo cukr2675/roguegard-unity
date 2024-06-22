@@ -6,7 +6,7 @@ namespace Roguegard.CharacterCreation
 {
     [CreateAssetMenu(menuName = "RoguegardData/CharacterCreation/Data/Item")]
     [Objforming.Referable]
-    public class ItemCreationData : ScriptableCharacterCreationData
+    public class ItemCreationData : RaceOptionalCreationData
     {
         [SerializeField] protected ObjectRace _race = null;
         [SerializeField, ElementDescription("_option")] private ScriptableAppearance[] _appearances = null;
