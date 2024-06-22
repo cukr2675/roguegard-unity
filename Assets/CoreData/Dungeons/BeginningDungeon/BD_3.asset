@@ -111,6 +111,7 @@ MonoBehaviour:
         - rid: 3089142974586290185
     _minFrequency: 0
     _maxFrequency: 2
+  _monsterHouseRate: 0.2
   references:
     version: 2
     RefIds:

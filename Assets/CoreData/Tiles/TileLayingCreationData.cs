@@ -6,10 +6,12 @@ namespace Roguegard.CharacterCreation
 {
     [CreateAssetMenu(menuName = "RoguegardData/CharacterCreation/Data/Singleton/TileLaying")]
     [Objforming.IgnoreRequireRelationalComponent]
-    public class TileLayingCreationData : ItemCreationData
+    public class TileLayingCreationData : ScriptableCharacterCreationData
     {
         public override Spanning<IMemberSource> StartingItemOptionMemberSources => _startingItemOptionMemberSources;
         private static readonly IMemberSource[] _startingItemOptionMemberSources = new IMemberSource[] { RogueTileMember.SourceInstance };
+
+        protected override bool HasNotInfoSet => true;
 
         public override RogueObj CreateObj(
             IReadOnlyStartingItem startingItem, RogueObj location, Vector2Int position, IRogueRandom random, StackOption stackOption = StackOption.Default)
@@ -19,6 +21,12 @@ namespace Roguegard.CharacterCreation
 
             location.Space.TrySet(member.Tile, position);
             return null;
+        }
+
+        protected override void GetCost(out float cost, out bool costIsUnknown)
+        {
+            cost = 0f;
+            costIsUnknown = true;
         }
     }
 }
