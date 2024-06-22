@@ -9,7 +9,7 @@ namespace Roguegard.CharacterCreation
     {
         public RogueObj Obj { get; set; }
 
-        public MainInfoSet InfoSet => Obj.Main.InfoSet;
+        public IMainInfoSet InfoSet => Obj.Main.InfoSet;
         public int Lv => Obj.Main.Stats.Lv;
         public Spanning<IWeightedRogueObjGeneratorList> StartingItemTable => Spanning<IWeightedRogueObjGeneratorList>.Empty;
 

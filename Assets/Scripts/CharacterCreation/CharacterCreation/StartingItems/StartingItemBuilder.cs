@@ -26,7 +26,7 @@ namespace Roguegard.CharacterCreation
         public string Caption => OptionCaption ?? Option.Caption;
         public IRogueDetails Details => OptionDetails ?? Option.Details;
 
-        MainInfoSet IRogueObjGenerator.InfoSet => Option.InfoSet;
+        IMainInfoSet IRogueObjGenerator.InfoSet => Option.InfoSet;
         int IRogueObjGenerator.Lv => Option.Lv;
         Spanning<IWeightedRogueObjGeneratorList> IRogueObjGenerator.StartingItemTable => Option.StartingItemTable;
         float IWeightedRogueObjGenerator.Weight => GeneratorWeight;

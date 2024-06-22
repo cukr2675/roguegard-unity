@@ -48,7 +48,7 @@ namespace Roguegard
                     var obj = spaceObjs[i];
                     if (obj == null) continue;
 
-                    if (obj.Main.InfoSet == parent._lobbyMerchant.Option.PrimaryInfoSet) return default;
+                    if (obj.Main.InfoSet.Equals(parent._lobbyMerchant.Option.PrimaryInfoSet)) return default;
                 }
 
                 // è§êlÇ™Ç¢Ç»Ç©Ç¡ÇΩÇÁê∂ê¨Ç∑ÇÈ

@@ -145,7 +145,7 @@ namespace RoguegardUnity
                 var spaceObjs = targetObj.Space.Objs;
                 for (int i = 0; i < spaceObjs.Count; i++)
                 {
-                    if (spaceObjs[i] == null || spaceObjs[i].Main.InfoSet == RoguegardSettings.MoneyInfoSet) continue;
+                    if (spaceObjs[i] == null || spaceObjs[i].Main.InfoSet.Equals(RoguegardSettings.MoneyInfoSet)) continue;
 
                     models.Add(spaceObjs[i]);
                 }

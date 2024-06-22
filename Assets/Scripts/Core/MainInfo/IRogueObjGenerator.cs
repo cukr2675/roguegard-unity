@@ -6,7 +6,7 @@ namespace Roguegard
 {
     public interface IRogueObjGenerator
     {
-        MainInfoSet InfoSet { get; }
+        IMainInfoSet InfoSet { get; }
 
         int Lv { get; }
 

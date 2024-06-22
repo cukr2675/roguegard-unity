@@ -35,7 +35,7 @@ namespace RoguegardUnity
             for (int i = 0; i < spaceObjs.Count; i++)
             {
                 var spaceObj = spaceObjs[i];
-                if (spaceObj == null || spaceObj.Main.InfoSet != RoguegardSettings.MoneyInfoSet) continue;
+                if (spaceObj == null || !spaceObj.Main.InfoSet.Equals(RoguegardSettings.MoneyInfoSet)) continue;
 
                 totalMoney += spaceObj.Stack;
             }

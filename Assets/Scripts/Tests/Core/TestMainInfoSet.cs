@@ -6,83 +6,83 @@ using SkeletalSprite;
 
 namespace Roguegard
 {
-    public class TestMainInfoSet : MainInfoSet
+    public class TestMainInfoSet : IMainInfoSet
     {
         public static TestMainInfoSet Instance { get; } = new TestMainInfoSet();
 
-        public override string Name => "TesterRogueObj";
-        public override Sprite Icon => null;
-        public override Color Color => Color.white;
-        public override string Caption => null;
-        public override IRogueDetails Details => null;
+        public string Name => "TesterRogueObj";
+        public Sprite Icon => null;
+        public Color Color => Color.white;
+        public string Caption => null;
+        public IRogueDetails Details => null;
 
-        public override IKeyword Category => null;
-        public override int MaxHP => 0;
-        public override int MaxMP => 0;
-        public override int ATK => 0;
-        public override int DEF => 0;
-        public override float Weight => 1;
-        public override float LoadCapacity => 0;
+        public IKeyword Category => null;
+        public int MaxHP => 0;
+        public int MaxMP => 0;
+        public int ATK => 0;
+        public int DEF => 0;
+        public float Weight => 1;
+        public float LoadCapacity => 0;
 
-        public override ISerializableKeyword Faction => null;
-        public override Spanning<ISerializableKeyword> TargetFactions => Spanning<ISerializableKeyword>.Empty;
-        public override MainInfoSetAbility Ability => MainInfoSetAbility.Object;
-        public override IRogueMaterial Material => null;
-        public override IRogueGender Gender => null;
-        public override string HPName => null;
-        public override string MPName => null;
-        public override float Cost => 0f;
-        public override bool CostIsUnknown => false;
+        public ISerializableKeyword Faction => null;
+        public Spanning<ISerializableKeyword> TargetFactions => Spanning<ISerializableKeyword>.Empty;
+        public MainInfoSetAbility Ability => MainInfoSetAbility.Object;
+        public IRogueMaterial Material => null;
+        public IRogueGender Gender => null;
+        public string HPName => null;
+        public string MPName => null;
+        public float Cost => 0f;
+        public bool CostIsUnknown => false;
 
-        public override Spanning<IWeightedRogueObjGeneratorList> LootTable => Spanning<IWeightedRogueObjGeneratorList>.Empty;
+        public Spanning<IWeightedRogueObjGeneratorList> LootTable => Spanning<IWeightedRogueObjGeneratorList>.Empty;
 
-        public override IActiveRogueMethod Walk => TestRogueMethod.Instance;
-        public override IActiveRogueMethod Wait => TestRogueMethod.Instance;
-        public override ISkill Attack => TestRogueMethod.Instance;
-        public override ISkill Throw => TestRogueMethod.Instance;
-        public override IActiveRogueMethod PickUp => TestRogueMethod.Instance;
-        public override IActiveRogueMethod Put => TestRogueMethod.Instance;
-        public override IEatActiveRogueMethod Eat => TestRogueMethod.Instance;
+        public IActiveRogueMethod Walk => TestRogueMethod.Instance;
+        public IActiveRogueMethod Wait => TestRogueMethod.Instance;
+        public ISkill Attack => TestRogueMethod.Instance;
+        public ISkill Throw => TestRogueMethod.Instance;
+        public IActiveRogueMethod PickUp => TestRogueMethod.Instance;
+        public IActiveRogueMethod Put => TestRogueMethod.Instance;
+        public IEatActiveRogueMethod Eat => TestRogueMethod.Instance;
 
-        public override IAffectRogueMethod Hit => TestRogueMethod.Instance;
-        public override IAffectRogueMethod BeDefeated => TestRogueMethod.Instance;
-        public override IChangeStateRogueMethod Locate => TestRogueMethod.Instance;
-        public override IChangeStateRogueMethod Polymorph => TestRogueMethod.Instance;
+        public IAffectRogueMethod Hit => TestRogueMethod.Instance;
+        public IAffectRogueMethod BeDefeated => TestRogueMethod.Instance;
+        public IChangeStateRogueMethod Locate => TestRogueMethod.Instance;
+        public IChangeStateRogueMethod Polymorph => TestRogueMethod.Instance;
 
-        public override IApplyRogueMethod BeApplied => TestRogueMethod.Instance;
-        public override IApplyRogueMethod BeThrown => TestRogueMethod.Instance;
-        public override IApplyRogueMethod BeEaten => TestRogueMethod.Instance;
+        public IApplyRogueMethod BeApplied => TestRogueMethod.Instance;
+        public IApplyRogueMethod BeThrown => TestRogueMethod.Instance;
+        public IApplyRogueMethod BeEaten => TestRogueMethod.Instance;
 
-        public override MainInfoSet Open(RogueObj self, MainInfoSetType infoSetType, bool polymorph2Base)
+        public IMainInfoSet Open(RogueObj self, MainInfoSetType infoSetType, bool polymorph2Base)
         {
             return this;
         }
 
-        public override void Close(RogueObj self, MainInfoSetType infoSetType, bool base2Polymorph)
+        public void Close(RogueObj self, MainInfoSetType infoSetType, bool base2Polymorph)
         {
         }
 
-        public override MainInfoSet Reopen(RogueObj self, MainInfoSetType infoSetType, int deltaLv)
+        public IMainInfoSet Reopen(RogueObj self, MainInfoSetType infoSetType, int deltaLv)
         {
             return this;
         }
 
-        public override IEquipmentInfo GetEquipmentInfo(RogueObj self)
+        public IEquipmentInfo GetEquipmentInfo(RogueObj self)
         {
             return null;
         }
 
-        public override IEquipmentState GetEquipmentState(RogueObj self)
+        public IEquipmentState GetEquipmentState(RogueObj self)
         {
             return null;
         }
 
-        public override void GetObjSprite(RogueObj self, out IRogueObjSprite objSprite, out ISpriteMotionSet motionSet)
+        public void GetObjSprite(RogueObj self, out IRogueObjSprite objSprite, out ISpriteMotionSet motionSet)
         {
             throw new System.NotSupportedException();
         }
 
-        public override bool Equals(MainInfoSet other)
+        public bool Equals(IMainInfoSet other)
         {
             return other?.GetType() == GetType();
         }

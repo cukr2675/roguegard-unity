@@ -207,7 +207,7 @@ namespace RoguegardUnity
         {
             public RoguegardSettingsData parent;
 
-            public MainInfoSet InfoSet => ((IRogueObjGenerator)parent._world).InfoSet;
+            public IMainInfoSet InfoSet => ((IRogueObjGenerator)parent._world).InfoSet;
             public int Lv => ((IRogueObjGenerator)parent._world).Lv;
             public int Stack => ((IRogueObjGenerator)parent._world).Stack;
             public Spanning<IWeightedRogueObjGeneratorList> StartingItemTable => ((IRogueObjGenerator)parent._world).StartingItemTable;

@@ -39,7 +39,7 @@ namespace Roguegard.CharacterCreation
         IRogueDetails IReadOnlyStartingItem.OptionDetails => _optionDescription?.Details;
         IRogueGender IReadOnlyStartingItem.OptionGender => null;
 
-        MainInfoSet IRogueObjGenerator.InfoSet => _option.PrimaryInfoSet;
+        IMainInfoSet IRogueObjGenerator.InfoSet => _option.PrimaryInfoSet;
         int IRogueObjGenerator.Lv => _option.Race.Lv;
         Spanning<IWeightedRogueObjGeneratorList> IRogueObjGenerator.StartingItemTable => _option.StartingItemTable;
         float IWeightedRogueObjGenerator.Weight => _generatorWeight;

@@ -7,7 +7,7 @@ namespace Roguegard.CharacterCreation
     [Objforming.RequireRelationalComponent]
     public interface IStartingItemOption : IRogueDescription
     {
-        MainInfoSet InfoSet { get; }
+        IMainInfoSet InfoSet { get; }
         int Lv { get; }
         Spanning<IWeightedRogueObjGeneratorList> StartingItemTable { get; }
 

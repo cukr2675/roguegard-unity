@@ -7,13 +7,13 @@ using SkeletalSprite;
 namespace Roguegard.CharacterCreation
 {
     [Objforming.Formable]
-    public class CharacterCreationInfoSet : MainInfoSet
+    public class CharacterCreationInfoSet : IMainInfoSet
     {
-        public override string Name => Data.Name;
-        public override Sprite Icon => CurrentRaceOption.Icon;
-        public override Color Color => CurrentRaceOption.Color;
-        public override string Caption => Data.Caption;
-        public override IRogueDetails Details => Data.Details;
+        public string Name => Data.Name;
+        public Sprite Icon => CurrentRaceOption.Icon;
+        public Color Color => CurrentRaceOption.Color;
+        public string Caption => Data.Caption;
+        public IRogueDetails Details => Data.Details;
 
         public ICharacterCreationData Data { get; }
 
@@ -48,13 +48,13 @@ namespace Roguegard.CharacterCreation
         [System.NonSerialized] private IReadOnlyNodeBone nodeBone;
         [System.NonSerialized] private AppearanceBoneSpriteTable characterBoneSpriteTable;
 
-        public override IKeyword Category => CurrentRaceOption.Category;
+        public IKeyword Category => CurrentRaceOption.Category;
 
-		public override int MaxHP => CurrentRaceOption.MaxHP;
-        public override int MaxMP => CurrentRaceOption.MaxMP;
-        public override int ATK => CurrentRaceOption.ATK;
-        public override int DEF => CurrentRaceOption.DEF;
-        public override float Weight
+		public int MaxHP => CurrentRaceOption.MaxHP;
+        public int MaxMP => CurrentRaceOption.MaxMP;
+        public int ATK => CurrentRaceOption.ATK;
+        public int DEF => CurrentRaceOption.DEF;
+        public float Weight
         {
             get
             {
@@ -63,35 +63,35 @@ namespace Roguegard.CharacterCreation
                 return _weight;
             }
         }
-        public override float LoadCapacity => CurrentRaceOption.LoadCapacity;
-        public override ISerializableKeyword Faction => CurrentRaceOption.Faction;
-        public override Spanning<ISerializableKeyword> TargetFactions => CurrentRaceOption.TargetFactions;
+        public float LoadCapacity => CurrentRaceOption.LoadCapacity;
+        public ISerializableKeyword Faction => CurrentRaceOption.Faction;
+        public Spanning<ISerializableKeyword> TargetFactions => CurrentRaceOption.TargetFactions;
 
-        public override MainInfoSetAbility Ability => CurrentRaceOption.Ability;
-        public override IRogueMaterial Material => CurrentRaceOption.Material;
-        public override IRogueGender Gender => Data.Race.Gender ?? _gender;
-        public override string HPName => Data.Race.HPName;
-        public override string MPName => Data.Race.MPName;
-        public override float Cost => Data.Cost;
-        public override bool CostIsUnknown => Data.CostIsUnknown;
-        public override Spanning<IWeightedRogueObjGeneratorList> LootTable => CurrentRaceOption.LootTable;
+        public MainInfoSetAbility Ability => CurrentRaceOption.Ability;
+        public IRogueMaterial Material => CurrentRaceOption.Material;
+        public IRogueGender Gender => Data.Race.Gender ?? _gender;
+        public string HPName => Data.Race.HPName;
+        public string MPName => Data.Race.MPName;
+        public float Cost => Data.Cost;
+        public bool CostIsUnknown => Data.CostIsUnknown;
+        public Spanning<IWeightedRogueObjGeneratorList> LootTable => CurrentRaceOption.LootTable;
 
-        public override IActiveRogueMethod Walk => CurrentRaceOption.Walk;
-        public override IActiveRogueMethod Wait => CurrentRaceOption.Wait;
-        public override ISkill Attack => CurrentRaceOption.Attack;
-        public override ISkill Throw => CurrentRaceOption.Throw;
-        public override IActiveRogueMethod PickUp => CurrentRaceOption.PickUp;
-        public override IActiveRogueMethod Put => CurrentRaceOption.Put;
-        public override IEatActiveRogueMethod Eat => CurrentRaceOption.Eat;
+        public IActiveRogueMethod Walk => CurrentRaceOption.Walk;
+        public IActiveRogueMethod Wait => CurrentRaceOption.Wait;
+        public ISkill Attack => CurrentRaceOption.Attack;
+        public ISkill Throw => CurrentRaceOption.Throw;
+        public IActiveRogueMethod PickUp => CurrentRaceOption.PickUp;
+        public IActiveRogueMethod Put => CurrentRaceOption.Put;
+        public IEatActiveRogueMethod Eat => CurrentRaceOption.Eat;
 
-        public override IAffectRogueMethod Hit => CurrentRaceOption.Hit;
-        public override IAffectRogueMethod BeDefeated => CurrentRaceOption.BeDefeated;
-        public override IChangeStateRogueMethod Locate => CurrentRaceOption.Locate;
-        public override IChangeStateRogueMethod Polymorph => CurrentRaceOption.Polymorph;
+        public IAffectRogueMethod Hit => CurrentRaceOption.Hit;
+        public IAffectRogueMethod BeDefeated => CurrentRaceOption.BeDefeated;
+        public IChangeStateRogueMethod Locate => CurrentRaceOption.Locate;
+        public IChangeStateRogueMethod Polymorph => CurrentRaceOption.Polymorph;
 
-        public override IApplyRogueMethod BeApplied => CurrentRaceOption.BeApplied;
-        public override IApplyRogueMethod BeThrown => CurrentRaceOption.BeThrown;
-        public override IApplyRogueMethod BeEaten => CurrentRaceOption.BeEaten;
+        public IApplyRogueMethod BeApplied => CurrentRaceOption.BeApplied;
+        public IApplyRogueMethod BeThrown => CurrentRaceOption.BeThrown;
+        public IApplyRogueMethod BeEaten => CurrentRaceOption.BeEaten;
 
         [Objforming.CreateInstance]
         private CharacterCreationInfoSet() { }
@@ -126,7 +126,7 @@ namespace Roguegard.CharacterCreation
             }
         }
 
-        public override MainInfoSet Open(RogueObj self, MainInfoSetType infoSetType, bool polymorph2Base)
+        public IMainInfoSet Open(RogueObj self, MainInfoSetType infoSetType, bool polymorph2Base)
         {
             if (nodeBone == null) { Reload(); }
 
@@ -141,7 +141,7 @@ namespace Roguegard.CharacterCreation
             return this;
         }
 
-        public override void Close(RogueObj self, MainInfoSetType infoSetType, bool base2Polymorph)
+        public void Close(RogueObj self, MainInfoSetType infoSetType, bool base2Polymorph)
         {
             if (nodeBone == null) { Reload(); }
 
@@ -150,7 +150,7 @@ namespace Roguegard.CharacterCreation
             Data.SortedIntrinsics.Close(self, infoSetType, base2Polymorph);
         }
 
-        public override MainInfoSet Reopen(RogueObj self, MainInfoSetType infoSetType, int deltaLv)
+        public IMainInfoSet Reopen(RogueObj self, MainInfoSetType infoSetType, int deltaLv)
         {
             var newRaceOption = CurrentRaceOption.Reopen(self, infoSetType, CurrentRaceOption, Data);
             Data.SortedIntrinsics.Reopen(self, infoSetType, deltaLv);
@@ -162,17 +162,17 @@ namespace Roguegard.CharacterCreation
             return this;
         }
 
-        public override IEquipmentState GetEquipmentState(RogueObj self)
+        public IEquipmentState GetEquipmentState(RogueObj self)
         {
             return CurrentRaceOption.GetEquipmentState(self, CurrentRaceOption, Data);
         }
 
-        public override IEquipmentInfo GetEquipmentInfo(RogueObj self)
+        public IEquipmentInfo GetEquipmentInfo(RogueObj self)
         {
             return CurrentRaceOption.GetEquipmentInfo(self, CurrentRaceOption, Data);
         }
 
-        public override void GetObjSprite(RogueObj self, out IRogueObjSprite objSprite, out ISpriteMotionSet motionSet)
+        public void GetObjSprite(RogueObj self, out IRogueObjSprite objSprite, out ISpriteMotionSet motionSet)
         {
             if (nodeBone == null) { Reload(); }
 
@@ -187,13 +187,13 @@ namespace Roguegard.CharacterCreation
         }
 
         public static RogueObj CreateObj(
-            MainInfoSet infoSet, RogueObj location, Vector2Int position, StackOption stackOption = StackOption.Default, int initialLv = 0)
+            IMainInfoSet infoSet, RogueObj location, Vector2Int position, StackOption stackOption = StackOption.Default, int initialLv = 0)
         {
             return CreateObj(infoSet, location, position, Spanning<IWeightedRogueObjGeneratorList>.Empty, null, stackOption, initialLv);
         }
 
         public static RogueObj CreateObj(
-            MainInfoSet infoSet, RogueObj location, Vector2Int position, Spanning<IWeightedRogueObjGeneratorList> startingItems, IRogueRandom random,
+            IMainInfoSet infoSet, RogueObj location, Vector2Int position, Spanning<IWeightedRogueObjGeneratorList> startingItems, IRogueRandom random,
             StackOption stackOption = StackOption.Default, int initialLv = 0)
         {
             var obj = new RogueObj();
@@ -210,9 +210,19 @@ namespace Roguegard.CharacterCreation
             return obj;
         }
 
-        public override bool Equals(MainInfoSet other)
+        public bool Equals(IMainInfoSet other)
         {
             return other is CharacterCreationInfoSet c && Data == c.Data && currentRaceOptionIndex == c.currentRaceOptionIndex && _gender == c._gender;
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj is CharacterCreationInfoSet c && Data == c.Data && currentRaceOptionIndex == c.currentRaceOptionIndex && _gender == c._gender;
+        }
+
+        public override int GetHashCode()
+        {
+            return 0;
         }
     }
 }

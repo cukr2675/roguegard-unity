@@ -9,11 +9,11 @@ namespace Roguegard
     {
         public IKeyword Category => InfoSet.Category;
 
-        public MainInfoSet BaseInfoSet { get; private set; }
+        public IMainInfoSet BaseInfoSet { get; private set; }
 
-        public MainInfoSet PolymorphInfoSet { get; private set; }
+        public IMainInfoSet PolymorphInfoSet { get; private set; }
 
-        public MainInfoSet InfoSet
+        public IMainInfoSet InfoSet
         {
             get
             {
@@ -86,7 +86,7 @@ namespace Roguegard
             equipmentInfoIsDirty = true;
         }
 
-        public void SetBaseInfoSet(RogueObj self, MainInfoSet infoSet)
+        public void SetBaseInfoSet(RogueObj self, IMainInfoSet infoSet)
         {
             if (infoSet == null)
             {
@@ -132,12 +132,12 @@ namespace Roguegard
             recursion.Value = false;
         }
 
-        public void Polymorph(RogueObj self, MainInfoSet infoSet)
+        public void Polymorph(RogueObj self, IMainInfoSet infoSet)
         {
             Polymorph(self, infoSet, 0);
         }
 
-        internal void Polymorph(RogueObj self, MainInfoSet infoSet, int deltaLv)
+        internal void Polymorph(RogueObj self, IMainInfoSet infoSet, int deltaLv)
         {
             if (infoSet == null)
             {
@@ -156,7 +156,7 @@ namespace Roguegard
             }
             recursion.Value = true;
 
-            if (infoSet == InfoSet)
+            if (infoSet.Equals(InfoSet))
             {
                 // 再変化
                 switch (RogueEffectOpenState)
@@ -172,7 +172,7 @@ namespace Roguegard
                         throw new RogueException();
                 }
             }
-            else if (infoSet == BaseInfoSet)
+            else if (infoSet.Equals(BaseInfoSet))
             {
                 // 変化解除
                 switch (RogueEffectOpenState)
@@ -413,8 +413,8 @@ namespace Roguegard
 
         public bool CanStack(RogueObj self, RogueObj other)
         {
-            if (BaseInfoSet != other.Main.BaseInfoSet) return false;
-            if (PolymorphInfoSet != other.Main.PolymorphInfoSet) return false;
+            if (!BaseInfoSet.Equals(other.Main.BaseInfoSet)) return false;
+            if (!PolymorphInfoSet.Equals(other.Main.PolymorphInfoSet)) return false;
 
             var selfEquipmentInfo = GetEquipmentInfo(self);
             var otherEquipmentInfo = other.Main.GetEquipmentInfo(other);

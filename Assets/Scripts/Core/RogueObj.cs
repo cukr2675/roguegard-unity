@@ -209,7 +209,7 @@ namespace Roguegard
             return GetMaxStack(Main.InfoSet, stackOption);
         }
 
-        public static int GetMaxStack(MainInfoSet infoSet, StackOption stackOption)
+        public static int GetMaxStack(IMainInfoSet infoSet, StackOption stackOption)
         {
             if (stackOption == StackOption.Default) { stackOption = StackOption.StackUntilMax; } // Default の場合は規定値に変換する。
             var baseWeight = infoSet.Weight;

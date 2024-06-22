@@ -23,7 +23,7 @@ namespace Roguegard.Extensions
         }
 
         public static bool Polymorph(
-            this IChangeStateRogueMethodCaller method, RogueObj self, RogueObj user, MainInfoSet infoSet, float activationDepth)
+            this IChangeStateRogueMethodCaller method, RogueObj self, RogueObj user, IMainInfoSet infoSet, float activationDepth)
         {
             var polymorphMethod = self.Main.InfoSet.Polymorph;
             var arg = new RogueMethodArgument(other: infoSet);

@@ -109,7 +109,7 @@ namespace Roguegard.CharacterCreation
                         {
                             var loot = WeightedRogueObjGeneratorUtility.CreateObj(quest.LootTable[i], self, RogueRandom.Primary);
                             RogueDevice.Add(DeviceKw.AppendText, "\t\n");
-                            if (loot.Main.InfoSet == RoguegardSettings.MoneyInfoSet)
+                            if (loot.Main.InfoSet.Equals(RoguegardSettings.MoneyInfoSet))
                             {
                                 RogueDevice.Add(DeviceKw.AppendText, loot.Stack);
                                 RogueDevice.Add(DeviceKw.AppendText, "GéÛÇØéÊÇ¡ÇΩÅI");

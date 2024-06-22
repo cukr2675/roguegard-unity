@@ -11,55 +11,55 @@ namespace Roguegard
     /// <see cref="CharacterCreation"/> Ç…àÀë∂ÇµÇ»Ç¢é¿ëïÇ…Ç∑ÇÈÇΩÇﬂÅA <see cref="ICharacterCreationData"/> Çé¿ëïÇµÇ»Ç¢
     /// </summary>
     [Objforming.Formable]
-    public class SewedEquipmentInfoSet : MainInfoSet
+    public class SewedEquipmentInfoSet : IMainInfoSet
     {
         private readonly SewedEquipmentData data;
 
         private const int equipmentInitialLv = 0;
 
-        public override string Name => data.Name;
-        [field: System.NonSerialized] public override Sprite Icon { get; }
-        public override Color Color => data.BoneSprites.MainColor;
-        public override string Caption => null;
-        public override IRogueDetails Details => null;
+        public string Name => data.Name;
+        [field: System.NonSerialized] public Sprite Icon { get; }
+        public Color Color => data.BoneSprites.MainColor;
+        public string Caption => null;
+        public IRogueDetails Details => null;
 
-        public override IKeyword Category => CategoryKw.Equipment;
+        public IKeyword Category => CategoryKw.Equipment;
 
-        public override int MaxHP => 0;
-        public override int MaxMP => 0;
-        public override int ATK => 0;
-        public override int DEF => 0;
-        public override float Weight => 0f;
-        public override float LoadCapacity => 0f;
+        public int MaxHP => 0;
+        public int MaxMP => 0;
+        public int ATK => 0;
+        public int DEF => 0;
+        public float Weight => 0f;
+        public float LoadCapacity => 0f;
 
-        public override ISerializableKeyword Faction => RoguegardSettings.DefaultRaceOption.Faction;
-        public override Spanning<ISerializableKeyword> TargetFactions => RoguegardSettings.DefaultRaceOption.TargetFactions;
-        public override MainInfoSetAbility Ability => MainInfoSetAbility.Object;
-        public override IRogueMaterial Material => RoguegardSettings.DefaultRaceOption.Material;
-        public override IRogueGender Gender => RoguegardSettings.DefaultRaceOption.Genders[0];
-        public override string HPName => null;
-        public override string MPName => null;
-        public override float Cost => 0f;
-        public override bool CostIsUnknown => false;
+        public ISerializableKeyword Faction => RoguegardSettings.DefaultRaceOption.Faction;
+        public Spanning<ISerializableKeyword> TargetFactions => RoguegardSettings.DefaultRaceOption.TargetFactions;
+        public MainInfoSetAbility Ability => MainInfoSetAbility.Object;
+        public IRogueMaterial Material => RoguegardSettings.DefaultRaceOption.Material;
+        public IRogueGender Gender => RoguegardSettings.DefaultRaceOption.Genders[0];
+        public string HPName => null;
+        public string MPName => null;
+        public float Cost => 0f;
+        public bool CostIsUnknown => false;
 
-        public override Spanning<IWeightedRogueObjGeneratorList> LootTable => Spanning<IWeightedRogueObjGeneratorList>.Empty;
+        public Spanning<IWeightedRogueObjGeneratorList> LootTable => Spanning<IWeightedRogueObjGeneratorList>.Empty;
 
-        public override IActiveRogueMethod Walk => RoguegardSettings.DefaultRaceOption.Walk;
-        public override IActiveRogueMethod Wait => RoguegardSettings.DefaultRaceOption.Wait;
-        public override ISkill Attack => RoguegardSettings.DefaultRaceOption.Attack;
-        public override ISkill Throw => RoguegardSettings.DefaultRaceOption.Throw;
-        public override IActiveRogueMethod PickUp => RoguegardSettings.DefaultRaceOption.PickUp;
-        public override IActiveRogueMethod Put => RoguegardSettings.DefaultRaceOption.Put;
-        public override IEatActiveRogueMethod Eat => RoguegardSettings.DefaultRaceOption.Eat;
+        public IActiveRogueMethod Walk => RoguegardSettings.DefaultRaceOption.Walk;
+        public IActiveRogueMethod Wait => RoguegardSettings.DefaultRaceOption.Wait;
+        public ISkill Attack => RoguegardSettings.DefaultRaceOption.Attack;
+        public ISkill Throw => RoguegardSettings.DefaultRaceOption.Throw;
+        public IActiveRogueMethod PickUp => RoguegardSettings.DefaultRaceOption.PickUp;
+        public IActiveRogueMethod Put => RoguegardSettings.DefaultRaceOption.Put;
+        public IEatActiveRogueMethod Eat => RoguegardSettings.DefaultRaceOption.Eat;
 
-        public override IAffectRogueMethod Hit => RoguegardSettings.DefaultRaceOption.Hit;
-        public override IAffectRogueMethod BeDefeated => RoguegardSettings.DefaultRaceOption.BeDefeated;
-        public override IChangeStateRogueMethod Locate => RoguegardSettings.DefaultRaceOption.Locate;
-        public override IChangeStateRogueMethod Polymorph => RoguegardSettings.DefaultRaceOption.Polymorph;
+        public IAffectRogueMethod Hit => RoguegardSettings.DefaultRaceOption.Hit;
+        public IAffectRogueMethod BeDefeated => RoguegardSettings.DefaultRaceOption.BeDefeated;
+        public IChangeStateRogueMethod Locate => RoguegardSettings.DefaultRaceOption.Locate;
+        public IChangeStateRogueMethod Polymorph => RoguegardSettings.DefaultRaceOption.Polymorph;
 
-        public override IApplyRogueMethod BeApplied => RoguegardSettings.DefaultRaceOption.BeApplied;
-        public override IApplyRogueMethod BeThrown => RoguegardSettings.DefaultRaceOption.BeThrown;
-        public override IApplyRogueMethod BeEaten => RoguegardSettings.DefaultRaceOption.BeEaten;
+        public IApplyRogueMethod BeApplied => RoguegardSettings.DefaultRaceOption.BeApplied;
+        public IApplyRogueMethod BeThrown => RoguegardSettings.DefaultRaceOption.BeThrown;
+        public IApplyRogueMethod BeEaten => RoguegardSettings.DefaultRaceOption.BeEaten;
 
         public SewedEquipmentInfoSet(SewedEquipmentData data)
         {
@@ -74,38 +74,48 @@ namespace Roguegard
             return new SewedEquipmentData(data);
         }
 
-        public override MainInfoSet Open(RogueObj self, MainInfoSetType infoSetType, bool polymorph2Base)
+        public IMainInfoSet Open(RogueObj self, MainInfoSetType infoSetType, bool polymorph2Base)
         {
             return this;
         }
 
-        public override void Close(RogueObj self, MainInfoSetType infoSetType, bool base2Polymorph)
+        public void Close(RogueObj self, MainInfoSetType infoSetType, bool base2Polymorph)
         {
         }
 
-        public override MainInfoSet Reopen(RogueObj self, MainInfoSetType infoSetType, int deltaLv)
+        public IMainInfoSet Reopen(RogueObj self, MainInfoSetType infoSetType, int deltaLv)
         {
             return this;
         }
 
-        public override void GetObjSprite(RogueObj self, out IRogueObjSprite objSprite, out ISpriteMotionSet motionSet)
+        public void GetObjSprite(RogueObj self, out IRogueObjSprite objSprite, out ISpriteMotionSet motionSet)
         {
             RoguegardSettings.DefaultRaceOption.GetObjSprite(null, null, null, self, null, out objSprite, out motionSet);
         }
 
-        public override IEquipmentState GetEquipmentState(RogueObj self)
+        public IEquipmentState GetEquipmentState(RogueObj self)
         {
             return null;
         }
 
-        public override IEquipmentInfo GetEquipmentInfo(RogueObj self)
+        public IEquipmentInfo GetEquipmentInfo(RogueObj self)
         {
             return new EquipmentInfo(data, self);
         }
 
-        public override bool Equals(MainInfoSet other)
+        public bool Equals(IMainInfoSet other)
         {
             return other is SewedEquipmentInfoSet info && info.data == data;
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj is SewedEquipmentInfoSet info && info.data == data;
+        }
+
+        public override int GetHashCode()
+        {
+            return 0;
         }
 
         public RogueObj CreateObj(

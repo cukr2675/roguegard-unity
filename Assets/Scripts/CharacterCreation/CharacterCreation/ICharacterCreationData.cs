@@ -14,6 +14,6 @@ namespace Roguegard.CharacterCreation
         ISortedIntrinsicList SortedIntrinsics { get; }
         Spanning<IWeightedRogueObjGeneratorList> StartingItemTable { get; }
 
-        bool TryGetGrowingInfoSet(IRaceOption raceOption, IRogueGender gender, out MainInfoSet growingInfoSet);
+        bool TryGetGrowingInfoSet(IRaceOption raceOption, IRogueGender gender, out IMainInfoSet growingInfoSet);
     }
 }

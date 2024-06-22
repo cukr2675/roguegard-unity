@@ -8,7 +8,7 @@ namespace Roguegard
     {
         public bool Invoke(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
         {
-            if (!(arg.Other is MainInfoSet infoSet))
+            if (!(arg.Other is IMainInfoSet infoSet))
             {
                 Debug.LogError("引数が不正です。");
                 return false;

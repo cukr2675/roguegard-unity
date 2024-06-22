@@ -63,7 +63,7 @@ namespace Roguegard
                 BaseStatusEffect.Close<ContinuousApplyStatusEffect>(user);
 
                 var visible = MessageWorkListener.TryOpenHandler(user.Location, user.Position, out var handler);
-                if (topObj?.Main.InfoSet == sourceInfoSet)
+                if (topObj?.Main.InfoSet.Equals(sourceInfoSet) ?? false)
                 {
                     // すでに同じタイルが敷かれていたら、逆にタイルを消す
                     if (topObj.TrySetStack(0, user))
@@ -104,13 +104,13 @@ namespace Roguegard
             }
         }
 
-        private static bool TryGetEquals(MainInfoSet infoSet, Vector2Int position, RogueObj location, out RogueObj obj)
+        private static bool TryGetEquals(IMainInfoSet infoSet, Vector2Int position, RogueObj location, out RogueObj obj)
         {
             var locationObjs = location.Space.Objs;
             for (int i = 0; i < locationObjs.Count; i++)
             {
                 obj = locationObjs[i];
-                if (obj.Position == position && obj.Main.InfoSet == infoSet) return true;
+                if (obj.Position == position && obj.Main.InfoSet.Equals(infoSet)) return true;
             }
             obj = null;
             return false;

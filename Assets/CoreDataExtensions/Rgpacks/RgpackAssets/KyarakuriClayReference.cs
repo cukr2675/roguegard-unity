@@ -71,7 +71,7 @@ namespace Roguegard.Rgpacks
 
         int IStartingItemOption.Lv => Asset.Lv;
 
-        public MainInfoSet PrimaryInfoSet
+        public IMainInfoSet PrimaryInfoSet
         {
             get
             {
@@ -79,7 +79,7 @@ namespace Roguegard.Rgpacks
                 return InfoSets[this, primaryGender];
             }
         }
-        MainInfoSet IStartingItemOption.InfoSet => PrimaryInfoSet;
+        IMainInfoSet IStartingItemOption.InfoSet => PrimaryInfoSet;
 
         public virtual Spanning<IWeightedRogueObjGeneratorList> StartingItemTable => Spanning<IWeightedRogueObjGeneratorList>.Empty;
 
@@ -136,7 +136,7 @@ namespace Roguegard.Rgpacks
             return Asset.Cost;
         }
 
-        bool ICharacterCreationData.TryGetGrowingInfoSet(IRaceOption raceOption, IRogueGender gender, out MainInfoSet growingInfoSet)
+        bool ICharacterCreationData.TryGetGrowingInfoSet(IRaceOption raceOption, IRogueGender gender, out IMainInfoSet growingInfoSet)
         {
             if (raceOption == null) throw new System.ArgumentNullException(nameof(raceOption));
             if (gender == null) throw new System.ArgumentNullException(nameof(gender));

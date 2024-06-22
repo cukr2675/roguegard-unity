@@ -12,7 +12,7 @@ namespace Roguegard
     {
         public static IRogueObjGenerator WorldGenerator { get; set; }
 
-        public static MainInfoSet MoneyInfoSet { get; set; }
+        public static IMainInfoSet MoneyInfoSet { get; set; }
 
         public static Vector2Int MaxTilemapSize { get; set; }
 

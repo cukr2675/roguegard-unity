@@ -21,7 +21,7 @@ namespace Roguegard
 
         private PolymorphStatusEffect() { }
 
-        public static void AffectTo(RogueObj target, MainInfoSet infoSet, int lifeTime)
+        public static void AffectTo(RogueObj target, IMainInfoSet infoSet, int lifeTime)
         {
             var effect = (PolymorphStatusEffect)instance.AffectTo(target, null, 0f, new(other: infoSet));
             effect.LifeTime = lifeTime;
@@ -29,7 +29,7 @@ namespace Roguegard
 
         protected override IRogueEffect AffectTo(RogueObj target, RogueObj user, float activationDepth, in RogueMethodArgument arg)
         {
-            if (!(arg.Other is MainInfoSet)) return null;
+            if (!(arg.Other is IMainInfoSet)) return null;
 
             return base.AffectTo(target, user, activationDepth, arg);
         }
@@ -61,7 +61,7 @@ namespace Roguegard
                 }
             }
 
-            var infoSet = (MainInfoSet)arg.Other;
+            var infoSet = (IMainInfoSet)arg.Other;
             target.Main.Polymorph(target, infoSet);
         }
 

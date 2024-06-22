@@ -10,7 +10,7 @@ namespace Roguegard.Rgpacks
     /// <see cref="CharacterCreation"/> に依存しない実装にするため、 <see cref="ICharacterCreationData"/> を実装しない
     /// </summary>
     [Objforming.Formable]
-    public class EvtFairyReference : MainInfoSet
+    public class EvtFairyReference : IMainInfoSet
     {
         public string FullID => reference.FullID;
         public string RgpackID => reference.RgpackID;
@@ -23,50 +23,50 @@ namespace Roguegard.Rgpacks
 
         private const int initialLv = 0;
 
-        public override string Name => "インスタンス";
-        [field: System.NonSerialized] public override Sprite Icon { get; }
-        public override Color Color => Color.white;
-        public override string Caption => null;
-        public override IRogueDetails Details => null;
+        public string Name => "インスタンス";
+        [field: System.NonSerialized] public Sprite Icon { get; }
+        public Color Color => Color.white;
+        public string Caption => null;
+        public IRogueDetails Details => null;
 
-        public override IKeyword Category => point.Category == EvtFairyInfo.Category.ApplyTool ? CategoryKw.ApplyTool : CategoryKw.Trap;
+        public IKeyword Category => point.Category == EvtFairyInfo.Category.ApplyTool ? CategoryKw.ApplyTool : CategoryKw.Trap;
 
-        public override int MaxHP => 0;
-        public override int MaxMP => 0;
-        public override int ATK => 0;
-        public override int DEF => 0;
-        public override float Weight => 0f;
-        public override float LoadCapacity => 0f;
+        public int MaxHP => 0;
+        public int MaxMP => 0;
+        public int ATK => 0;
+        public int DEF => 0;
+        public float Weight => 0f;
+        public float LoadCapacity => 0f;
 
-        public override ISerializableKeyword Faction => RoguegardSettings.DefaultRaceOption.Faction;
-        public override Spanning<ISerializableKeyword> TargetFactions => RoguegardSettings.DefaultRaceOption.TargetFactions;
-        public override MainInfoSetAbility Ability => point.Category == EvtFairyInfo.Category.ApplyTool ? MainInfoSetAbility.WallObject : MainInfoSetAbility.TrapTile;
-        public override IRogueMaterial Material => RoguegardSettings.DefaultRaceOption.Material;
-        public override IRogueGender Gender => RoguegardSettings.DefaultRaceOption.Genders[0];
-        public override string HPName => null;
-        public override string MPName => null;
-        public override float Cost => 0f;
-        public override bool CostIsUnknown => false;
+        public ISerializableKeyword Faction => RoguegardSettings.DefaultRaceOption.Faction;
+        public Spanning<ISerializableKeyword> TargetFactions => RoguegardSettings.DefaultRaceOption.TargetFactions;
+        public MainInfoSetAbility Ability => point.Category == EvtFairyInfo.Category.ApplyTool ? MainInfoSetAbility.WallObject : MainInfoSetAbility.TrapTile;
+        public IRogueMaterial Material => RoguegardSettings.DefaultRaceOption.Material;
+        public IRogueGender Gender => RoguegardSettings.DefaultRaceOption.Genders[0];
+        public string HPName => null;
+        public string MPName => null;
+        public float Cost => 0f;
+        public bool CostIsUnknown => false;
 
-        public override Spanning<IWeightedRogueObjGeneratorList> LootTable => Spanning<IWeightedRogueObjGeneratorList>.Empty;
+        public Spanning<IWeightedRogueObjGeneratorList> LootTable => Spanning<IWeightedRogueObjGeneratorList>.Empty;
 
-        public override IActiveRogueMethod Walk => RoguegardSettings.DefaultRaceOption.Walk;
-        public override IActiveRogueMethod Wait => RoguegardSettings.DefaultRaceOption.Wait;
-        public override ISkill Attack => RoguegardSettings.DefaultRaceOption.Attack;
-        public override ISkill Throw => RoguegardSettings.DefaultRaceOption.Throw;
-        public override IActiveRogueMethod PickUp => RoguegardSettings.DefaultRaceOption.PickUp;
-        public override IActiveRogueMethod Put => RoguegardSettings.DefaultRaceOption.Put;
-        public override IEatActiveRogueMethod Eat => RoguegardSettings.DefaultRaceOption.Eat;
+        public IActiveRogueMethod Walk => RoguegardSettings.DefaultRaceOption.Walk;
+        public IActiveRogueMethod Wait => RoguegardSettings.DefaultRaceOption.Wait;
+        public ISkill Attack => RoguegardSettings.DefaultRaceOption.Attack;
+        public ISkill Throw => RoguegardSettings.DefaultRaceOption.Throw;
+        public IActiveRogueMethod PickUp => RoguegardSettings.DefaultRaceOption.PickUp;
+        public IActiveRogueMethod Put => RoguegardSettings.DefaultRaceOption.Put;
+        public IEatActiveRogueMethod Eat => RoguegardSettings.DefaultRaceOption.Eat;
 
-        public override IAffectRogueMethod Hit => RoguegardSettings.DefaultRaceOption.Hit;
-        public override IAffectRogueMethod BeDefeated => RoguegardSettings.DefaultRaceOption.BeDefeated;
-        public override IChangeStateRogueMethod Locate => RoguegardSettings.DefaultRaceOption.Locate;
-        public override IChangeStateRogueMethod Polymorph => RoguegardSettings.DefaultRaceOption.Polymorph;
+        public IAffectRogueMethod Hit => RoguegardSettings.DefaultRaceOption.Hit;
+        public IAffectRogueMethod BeDefeated => RoguegardSettings.DefaultRaceOption.BeDefeated;
+        public IChangeStateRogueMethod Locate => RoguegardSettings.DefaultRaceOption.Locate;
+        public IChangeStateRogueMethod Polymorph => RoguegardSettings.DefaultRaceOption.Polymorph;
 
         [System.NonSerialized] private BeAppliedRogueMethod _beApplied;
-        public override IApplyRogueMethod BeApplied => _beApplied ??= new BeAppliedRogueMethod() { cmn = point.Cmn };
-        public override IApplyRogueMethod BeThrown => RoguegardSettings.DefaultRaceOption.BeThrown;
-        public override IApplyRogueMethod BeEaten => RoguegardSettings.DefaultRaceOption.BeEaten;
+        public IApplyRogueMethod BeApplied => _beApplied ??= new BeAppliedRogueMethod() { cmn = point.Cmn };
+        public IApplyRogueMethod BeThrown => RoguegardSettings.DefaultRaceOption.BeThrown;
+        public IApplyRogueMethod BeEaten => RoguegardSettings.DefaultRaceOption.BeEaten;
 
         public EvtFairyReference(string id, string envRgpackID, EvtFairyAsset.Point point)
         {
@@ -74,39 +74,49 @@ namespace Roguegard.Rgpacks
             this.point = point;
         }
 
-        public override MainInfoSet Open(RogueObj self, MainInfoSetType infoSetType, bool polymorph2Base)
+        public IMainInfoSet Open(RogueObj self, MainInfoSetType infoSetType, bool polymorph2Base)
         {
             return reference.Asset.GetInfoSet();
         }
 
-        public override void Close(RogueObj self, MainInfoSetType infoSetType, bool base2Polymorph)
+        public void Close(RogueObj self, MainInfoSetType infoSetType, bool base2Polymorph)
         {
         }
 
-        public override MainInfoSet Reopen(RogueObj self, MainInfoSetType infoSetType, int deltaLv)
+        public IMainInfoSet Reopen(RogueObj self, MainInfoSetType infoSetType, int deltaLv)
         {
             return reference.Asset.GetInfoSet();
         }
 
-        public override void GetObjSprite(RogueObj self, out IRogueObjSprite objSprite, out ISpriteMotionSet motionSet)
+        public void GetObjSprite(RogueObj self, out IRogueObjSprite objSprite, out ISpriteMotionSet motionSet)
         {
             objSprite = point.Sprite.GetObjSprite();
             motionSet = point.Sprite.GetMotionSet();
         }
 
-        public override IEquipmentState GetEquipmentState(RogueObj self)
+        public IEquipmentState GetEquipmentState(RogueObj self)
         {
             return null;
         }
 
-        public override IEquipmentInfo GetEquipmentInfo(RogueObj self)
+        public IEquipmentInfo GetEquipmentInfo(RogueObj self)
         {
             return null;
         }
 
-        public override bool Equals(MainInfoSet other)
+        public bool Equals(IMainInfoSet other)
         {
             return other is EvtFairyReference info && info.reference.FullID == reference.FullID;
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj is EvtFairyReference info && info.reference.FullID == reference.FullID;
+        }
+
+        public override int GetHashCode()
+        {
+            return 0;
         }
 
         public RogueObj CreateObj(RogueObj location, IRogueRandom random, StackOption stackOption = StackOption.Default)

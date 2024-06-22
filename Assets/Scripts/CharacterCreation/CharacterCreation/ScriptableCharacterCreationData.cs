@@ -29,7 +29,7 @@ namespace Roguegard.CharacterCreation
         }
 
         /// <summary>
-        /// これが true のクラスでは <see cref="MainInfoSet"/> を生成しない。（ランダム生成テーブルなどでの使用を想定）
+        /// これが true のクラスでは <see cref="IMainInfoSet"/> を生成しない。（ランダム生成テーブルなどでの使用を想定）
         /// true にするとき <see cref="Objforming.IgnoreRequireRelationalComponentAttribute"/> と併用する。
         /// </summary>
         protected virtual bool HasNotInfoSet => false;
@@ -66,7 +66,7 @@ namespace Roguegard.CharacterCreation
         public virtual Spanning<IMemberSource> StartingItemOptionMemberSources => Spanning<IMemberSource>.Empty;
         Spanning<IMemberSource> IStartingItemOption.MemberSources => StartingItemOptionMemberSources;
 
-        public MainInfoSet PrimaryInfoSet
+        public IMainInfoSet PrimaryInfoSet
         {
             get
             {
@@ -74,9 +74,9 @@ namespace Roguegard.CharacterCreation
                 return InfoSets[Race.Option, primaryGender];
             }
         }
-        MainInfoSet IStartingItemOption.InfoSet => PrimaryInfoSet;
+        IMainInfoSet IStartingItemOption.InfoSet => PrimaryInfoSet;
 
-        bool ICharacterCreationData.TryGetGrowingInfoSet(IRaceOption raceOption, IRogueGender gender, out MainInfoSet growingInfoSet)
+        bool ICharacterCreationData.TryGetGrowingInfoSet(IRaceOption raceOption, IRogueGender gender, out IMainInfoSet growingInfoSet)
         {
             if (raceOption == null) throw new System.ArgumentNullException(nameof(raceOption));
             if (gender == null) throw new System.ArgumentNullException(nameof(gender));
@@ -128,7 +128,7 @@ namespace Roguegard.CharacterCreation
 
         protected void TryInitialize()
         {
-            if (HasNotInfoSet) throw new RogueException($"{DescriptionName} は {nameof(MainInfoSet)} を持ちません。");
+            if (HasNotInfoSet) throw new RogueException($"{DescriptionName} は {nameof(IMainInfoSet)} を持ちません。");
             if (_infoSets == null) { Initialize(); }
         }
 

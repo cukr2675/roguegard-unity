@@ -5,14 +5,8 @@ using UnityEngine;
 namespace Roguegard
 {
     [Objforming.RequireRelationalComponent]
-    public abstract class MainInfoSet : IRogueDescription, System.IEquatable<MainInfoSet>
+    public interface IMainInfoSet : IRogueDescription, System.IEquatable<IMainInfoSet>
     {
-        public abstract string Name { get; }
-        public abstract Sprite Icon { get; }
-        public abstract Color Color { get; }
-        public abstract string Caption { get; }
-        public abstract IRogueDetails Details { get; }
-
         public abstract IKeyword Category { get; }
 
         public abstract int MaxHP { get; }
@@ -58,7 +52,7 @@ namespace Roguegard
         /// エフェクト系の利用は禁止。（<see cref="RogueEffectState.Contains(IRogueEffect)"/> は可能）
         /// </summary>
         /// <param name="polymorph2Base">変化状態から変化解除するときのみ true 。変化状態からさらに変化しても false となる</param>
-        public abstract MainInfoSet Open(RogueObj self, MainInfoSetType infoSetType, bool polymorph2Base);
+        public abstract IMainInfoSet Open(RogueObj self, MainInfoSetType infoSetType, bool polymorph2Base);
 
         /// <summary>
         /// 変化時に呼び出すメソッド。
@@ -73,20 +67,13 @@ namespace Roguegard
         /// Close して Open するとスキルの順番が変わってしまうためこのメソッドが必要。
         /// 戻り値を実際の <see cref="MainRogueObjInfo.InfoSet"/> として使用する。
         /// </summary>
-        public abstract MainInfoSet Reopen(RogueObj self, MainInfoSetType infoSetType, int deltaLv);
+        public abstract IMainInfoSet Reopen(RogueObj self, MainInfoSetType infoSetType, int deltaLv);
 
         public abstract void GetObjSprite(RogueObj self, out IRogueObjSprite objSprite, out ISpriteMotionSet motionSet);
 
         public abstract IEquipmentState GetEquipmentState(RogueObj self);
 
         public abstract IEquipmentInfo GetEquipmentInfo(RogueObj self);
-
-        public abstract bool Equals(MainInfoSet other);
-        public override bool Equals(object obj) => obj is MainInfoSet other && Equals(other);
-        public override int GetHashCode() => 0;
-
-        public static bool operator ==(MainInfoSet left, MainInfoSet right) => left?.Equals(right) ?? right is null;
-        public static bool operator !=(MainInfoSet left, MainInfoSet right) => !(left?.Equals(right) ?? right is null);
 
         // 状態を持つことを想定しないため、クローン生成は実装しない。
     }

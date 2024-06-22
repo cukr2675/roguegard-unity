@@ -7,21 +7,21 @@ namespace Roguegard
     [Objforming.Formable]
     public class InfoSetReferenceInfo
     {
-        private readonly List<MainInfoSet> infoSets;
+        private readonly List<IMainInfoSet> infoSets;
 
         public int Count => infoSets.Count;
 
         private InfoSetReferenceInfo()
         {
-            infoSets = new List<MainInfoSet>();
+            infoSets = new List<IMainInfoSet>();
         }
 
-        private InfoSetReferenceInfo(IEnumerable<MainInfoSet> infoSets)
+        private InfoSetReferenceInfo(IEnumerable<IMainInfoSet> infoSets)
         {
-            this.infoSets = new List<MainInfoSet>(infoSets);
+            this.infoSets = new List<IMainInfoSet>(infoSets);
         }
 
-        public MainInfoSet Get(int index)
+        public IMainInfoSet Get(int index)
         {
             return infoSets[index];
         }
@@ -35,7 +35,7 @@ namespace Roguegard
             return null;
         }
 
-        public static void SetTo(RogueObj obj, IEnumerable<MainInfoSet> infoSets)
+        public static void SetTo(RogueObj obj, IEnumerable<IMainInfoSet> infoSets)
         {
             if (!obj.TryGet<Info>(out _))
             {
@@ -49,9 +49,9 @@ namespace Roguegard
             }
         }
 
-        public static void SetTo(RogueObj obj, params MainInfoSet[] infoSets)
+        public static void SetTo(RogueObj obj, params IMainInfoSet[] infoSets)
         {
-            SetTo(obj, (IEnumerable<MainInfoSet>)infoSets);
+            SetTo(obj, (IEnumerable<IMainInfoSet>)infoSets);
         }
 
         [Objforming.Formable]
@@ -67,7 +67,7 @@ namespace Roguegard
                 if (info.Count != otherInfo.info.Count) return false;
                 for (int i = 0; i < info.Count; i++)
                 {
-                    if (info.Get(i) != otherInfo.info.Get(i)) return false;
+                    if (!info.Get(i).Equals(otherInfo.info.Get(i))) return false;
                 }
                 return true;
             }

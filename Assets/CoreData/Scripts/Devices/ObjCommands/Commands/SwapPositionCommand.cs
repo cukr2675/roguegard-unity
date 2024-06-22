@@ -7,7 +7,7 @@ using Roguegard.Extensions;
 namespace Roguegard
 {
     /// <summary>
-    /// 他のキャラクターと場所を入れ替える。商人と入れ替わることで罠を踏ませてしまわないように <see cref="MainInfoSet.Walk"/> とは区別する。
+    /// 他のキャラクターと場所を入れ替える。商人と入れ替わることで罠を踏ませてしまわないように <see cref="IMainInfoSet.Walk"/> とは区別する。
     /// </summary>
     public class SwapPositionCommand : BaseObjCommand
     {
