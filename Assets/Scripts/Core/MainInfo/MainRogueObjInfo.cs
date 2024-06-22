@@ -414,7 +414,7 @@ namespace Roguegard
         public bool CanStack(RogueObj self, RogueObj other)
         {
             if (!BaseInfoSet.Equals(other.Main.BaseInfoSet)) return false;
-            if (!PolymorphInfoSet.Equals(other.Main.PolymorphInfoSet)) return false;
+            if (!(PolymorphInfoSet?.Equals(other.Main.PolymorphInfoSet) ?? other.Main.PolymorphInfoSet == null)) return false;
 
             var selfEquipmentInfo = GetEquipmentInfo(self);
             var otherEquipmentInfo = other.Main.GetEquipmentInfo(other);
