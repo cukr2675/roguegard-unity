@@ -12,7 +12,7 @@ namespace Roguegard.Device
 
         void OpenMenuAsDialog(IListMenu menu, RogueObj self, RogueObj user, in RogueMethodArgument arg);
 
-        void Reopen(RogueObj self, RogueObj user, in RogueMethodArgument arg);
+        void Reopen();
 
         void Done();
 

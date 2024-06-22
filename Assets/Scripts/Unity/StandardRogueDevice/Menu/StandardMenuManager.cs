@@ -125,7 +125,7 @@ namespace RoguegardUnity
             currentMenuIsDialog = true;
         }
 
-        void IListMenuManager.Reopen(RogueObj self, RogueObj user, in RogueMethodArgument arg)
+        void IListMenuManager.Reopen()
         {
             currentMenuIsDialog = true;
             Back();

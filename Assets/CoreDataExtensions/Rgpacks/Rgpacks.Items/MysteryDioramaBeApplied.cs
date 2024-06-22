@@ -81,7 +81,7 @@ namespace Roguegard.Rgpacks
                 {
                     var diorama = arg.TargetObj;
                     _newFloor.Option.CreateObj(_newFloor, diorama, Vector2Int.zero, RogueRandom.Primary);
-                    manager.Reopen(self, user, arg);
+                    manager.Reopen();
                 }
                 else
                 {

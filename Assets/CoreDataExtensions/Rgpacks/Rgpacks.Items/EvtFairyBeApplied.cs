@@ -71,7 +71,7 @@ namespace Roguegard.Rgpacks
                     var fairy = arg.TargetObj;
                     var eventFairyInfo = EvtFairyInfo.Get(fairy);
                     eventFairyInfo.AddPoint();
-                    manager.Reopen(null, null, arg);
+                    manager.Reopen();
                 }
             }
         }

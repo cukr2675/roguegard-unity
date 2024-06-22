@@ -64,7 +64,7 @@ namespace Roguegard.Rgpacks
                     manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
 
                     chartPadInfo.AddCmn();
-                    manager.Reopen(null, null, arg);
+                    manager.Reopen();
                 }
                 else
                 {

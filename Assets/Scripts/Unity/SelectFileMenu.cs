@@ -92,7 +92,7 @@ namespace RoguegardUnity
                 return;
             }
 
-            manager.Reopen(null, null, RogueMethodArgument.Identity);
+            manager.Reopen();
         }
 
         public static void ShowErrorMsg(IListMenuManager manager, string errorMsg)
@@ -183,7 +183,7 @@ namespace RoguegardUnity
                         return;
                     }
 
-                    manager.Reopen(null, null, RogueMethodArgument.Identity);
+                    manager.Reopen();
                 });
             }
         }

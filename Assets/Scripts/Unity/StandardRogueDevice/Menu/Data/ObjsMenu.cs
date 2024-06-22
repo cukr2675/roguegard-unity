@@ -126,7 +126,7 @@ namespace RoguegardUnity
                 var storageObjs = ChestInfo.GetStorage(arg.TargetObj);
                 if (storageObjs != null) { sortTable.Sort(arg.TargetObj); }
                 else { sortTable.Sort(arg.TargetObj); }
-                manager.Reopen(self, user, arg);
+                manager.Reopen();
             }
         }
 
