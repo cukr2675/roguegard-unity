@@ -10,15 +10,11 @@ namespace Roguegard.Rgpacks
     /// <see cref="CharacterCreation"/> Ç…àÀë∂ÇµÇ»Ç¢é¿ëïÇ…Ç∑ÇÈÇΩÇﬂÅA <see cref="ICharacterCreationData"/> Çé¿ëïÇµÇ»Ç¢
     /// </summary>
     [Objforming.Formable]
-    public class EvtFairyReference : IMainInfoSet
+    public class EvtFairyReference : RgpackReference<IEvtAsset>, IMainInfoSet
     {
-        public string FullID => reference.FullID;
-        public string RgpackID => reference.RgpackID;
-
         [System.NonSerialized] private string _evtID;
-        public string EvtID => _evtID ??= reference.FullID.Substring(reference.FullID.LastIndexOf('.') + 1);
+        public string EvtID => _evtID ??= FullID.Substring(FullID.LastIndexOf('.') + 1);
 
-        private readonly Reference reference;
         [System.NonSerialized] private readonly EvtFairyAsset.Point point;
 
         private const int initialLv = 0;
@@ -69,14 +65,14 @@ namespace Roguegard.Rgpacks
         public IApplyRogueMethod BeEaten => RoguegardSettings.DefaultRaceOption.BeEaten;
 
         public EvtFairyReference(string id, string envRgpackID, EvtFairyAsset.Point point)
+            : base(id, envRgpackID)
         {
-            reference = new Reference(id, envRgpackID);
             this.point = point;
         }
 
         public IMainInfoSet Open(RogueObj self, MainInfoSetType infoSetType, bool polymorph2Base)
         {
-            return reference.Asset.GetInfoSet();
+            return Asset.GetInfoSet();
         }
 
         public void Close(RogueObj self, MainInfoSetType infoSetType, bool base2Polymorph)
@@ -85,7 +81,7 @@ namespace Roguegard.Rgpacks
 
         public IMainInfoSet Reopen(RogueObj self, MainInfoSetType infoSetType, int deltaLv)
         {
-            return reference.Asset.GetInfoSet();
+            return Asset.GetInfoSet();
         }
 
         public void GetObjSprite(RogueObj self, out IRogueObjSprite objSprite, out ISpriteMotionSet motionSet)
@@ -106,12 +102,12 @@ namespace Roguegard.Rgpacks
 
         public bool Equals(IMainInfoSet other)
         {
-            return other is EvtFairyReference info && info.reference.FullID == reference.FullID;
+            return other is EvtFairyReference info && info.FullID == FullID;
         }
 
         public override bool Equals(object obj)
         {
-            return obj is EvtFairyReference info && info.reference.FullID == reference.FullID;
+            return obj is EvtFairyReference info && info.FullID == FullID;
         }
 
         public override int GetHashCode()
@@ -141,17 +137,6 @@ namespace Roguegard.Rgpacks
             {
                 cmn.Invoke();
                 return true;
-            }
-        }
-
-        [Objforming.Formable]
-        private class Reference : RgpackReference<IEvtAsset>
-        {
-            public new IEvtAsset Asset => base.Asset;
-
-            public Reference(string id, string envRgpackID)
-                : base(id, envRgpackID)
-            {
             }
         }
     }
