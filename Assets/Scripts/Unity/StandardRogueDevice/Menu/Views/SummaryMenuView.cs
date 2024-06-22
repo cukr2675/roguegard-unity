@@ -12,7 +12,7 @@ using Roguegard.CharacterCreation;
 
 namespace RoguegardUnity
 {
-    public class SummaryMenuView : ModelsMenuView, IResultMenuView, IDungeonQuestMenuView
+    public class SummaryMenuView : ElementsView, IResultMenuView, IDungeonQuestMenuView
     {
         [SerializeField] private CanvasGroup _canvasGroup = null;
         [SerializeField] private ScrollRect _scrollRect = null;
@@ -31,8 +31,8 @@ namespace RoguegardUnity
         private StringBuilder rightRBuilder;
         private RogueNameBuilder nameBuilder;
 
-        private static readonly SubmitChoice[] submitChoice = new[] { new SubmitChoice() };
-        private static readonly StartQuestChoice[] startQuestChoice = new[] { new StartQuestChoice() };
+        private static readonly SubmitSelectOption[] submitSelectOption = new[] { new SubmitSelectOption() };
+        private static readonly StartQuestSelectOption[] startQuestSelectOption = new[] { new StartQuestSelectOption() };
 
         public void Initialize()
         {
@@ -45,9 +45,9 @@ namespace RoguegardUnity
         }
 
         public override void OpenView<T>(
-            IModelListPresenter presenter, Spanning<T> modelList, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            IElementPresenter presenter, Spanning<T> list, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         {
-            SetArg(root, self, user, arg);
+            SetArg(manager, self, user, arg);
             MenuController.Show(_canvasGroup, true);
         }
 
@@ -96,8 +96,8 @@ namespace RoguegardUnity
             SetArg(Root, Self, User, arg);
 
             SetObj(player, dungeon);
-            var rightAnchor = Root.Get(DeviceKw.MenuRightAnchor);
-            rightAnchor.OpenView(ChoiceListPresenter.Instance, submitChoice, Root, Self, User, Arg);
+            var rightAnchor = Root.GetView(DeviceKw.MenuRightAnchor);
+            rightAnchor.OpenView(SelectOptionPresenter.Instance, submitSelectOption, Root, Self, User, Arg);
         }
 
         void IResultMenuView.SetGameOver(RogueObj player, RogueObj dungeon)
@@ -106,9 +106,9 @@ namespace RoguegardUnity
             SetArg(Root, Self, User, arg);
 
             SetObj(player, null);
-            ExitModelsMenuChoice.OpenLeftAnchorExit(Root);
-            var rightAnchor = Root.Get(DeviceKw.MenuRightAnchor);
-            rightAnchor.OpenView(ChoiceListPresenter.Instance, submitChoice, Root, Self, User, Arg);
+            ExitListMenuSelectOption.OpenLeftAnchorExit(Root);
+            var rightAnchor = Root.GetView(DeviceKw.MenuRightAnchor);
+            rightAnchor.OpenView(SelectOptionPresenter.Instance, submitSelectOption, Root, Self, User, Arg);
         }
 
         void IDungeonQuestMenuView.SetQuest(RogueObj player, DungeonQuest quest, bool showSubmitButton)
@@ -172,11 +172,11 @@ namespace RoguegardUnity
             _textRightL.SetText(rightLBuilder);
             _textRightR.SetText(rightRBuilder);
 
-            ExitModelsMenuChoice.OpenLeftAnchorExit(Root);
+            ExitListMenuSelectOption.OpenLeftAnchorExit(Root);
             if (showSubmitButton)
             {
-                var rightAnchor = Root.Get(DeviceKw.MenuRightAnchor);
-                rightAnchor.OpenView(ChoiceListPresenter.Instance, startQuestChoice, Root, Self, User, Arg);
+                var rightAnchor = Root.GetView(DeviceKw.MenuRightAnchor);
+                rightAnchor.OpenView(SelectOptionPresenter.Instance, startQuestSelectOption, Root, Self, User, Arg);
             }
         }
 
@@ -340,11 +340,11 @@ namespace RoguegardUnity
             _topText.SetText(topBuilder);
         }
 
-        private class SubmitChoice : BaseModelsMenuChoice
+        private class SubmitSelectOption : BaseListMenuSelectOption
         {
             public override string Name => "OK";
 
-            public override void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public override void Activate(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 var dungeon = DungeonInfo.GetLargestDungeon(arg.TargetObj);
 
@@ -359,21 +359,21 @@ namespace RoguegardUnity
 
                 RogueDevice.Add(DeviceKw.AutoSave, 0);
 
-                root.Done();
+                manager.Done();
             }
         }
 
-        private class StartQuestChoice : BaseModelsMenuChoice
+        private class StartQuestSelectOption : BaseListMenuSelectOption
         {
             public override string Name => "出発";
 
-            public override void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public override void Activate(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 var quest = (DungeonQuest)arg.Other;
                 quest.Start(self);
 
                 // BackToLobby で階層表示させるため、ここでは終了させない。
-                root.Done();
+                manager.Done();
             }
         }
     }

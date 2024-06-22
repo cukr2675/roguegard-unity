@@ -9,16 +9,16 @@ using Roguegard.Device;
 
 namespace RoguegardUnity
 {
-    public class LoadingMenuView : ModelsMenuView
+    public class LoadingMenuView : ElementsView
     {
         [SerializeField] private CanvasGroup _canvasGroup = null;
         [SerializeField] private Image _progressCircle = null;
-        [SerializeField] private ModelsMenuViewItemButton _interruptButton = null;
+        [SerializeField] private ViewElementButton _interruptButton = null;
         [SerializeField] private TMP_Text _text = null;
 
-        private IModelListPresenter presenter;
+        private IElementPresenter presenter;
 
-        private readonly List<object> modelList = new List<object>();
+        private readonly List<object> list = new List<object>();
 
         public override CanvasGroup CanvasGroup => _canvasGroup;
 
@@ -28,19 +28,19 @@ namespace RoguegardUnity
         }
 
         public override void OpenView<T>(
-            IModelListPresenter presenter, Spanning<T> modelList, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            IElementPresenter presenter, Spanning<T> list, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         {
             this.presenter = presenter;
-            this.modelList.Clear();
-            for (int i = 0; i < modelList.Count; i++)
+            this.list.Clear();
+            for (int i = 0; i < list.Count; i++)
             {
-                this.modelList.Add(modelList[i]);
+                this.list.Add(list[i]);
             }
-            SetArg(root, self, user, arg);
+            SetArg(manager, self, user, arg);
 
             _progressCircle.fillAmount = 0f;
-            _interruptButton.SetItem(presenter, modelList[1]);
-            _text.text = presenter.GetItemName(modelList[0], Root, Self, User, Arg);
+            _interruptButton.SetItem(presenter, list[1]);
+            _text.text = presenter.GetItemName(list[0], Root, Self, User, Arg);
             MenuController.Show(_canvasGroup, true);
         }
 
@@ -49,13 +49,13 @@ namespace RoguegardUnity
 
         private void Update()
         {
-            if (modelList.Count == 0) return;
+            if (list.Count == 0) return;
 
-            presenter.ActivateItem(modelList[0], Root, Self, User, Arg);
+            presenter.ActivateItem(list[0], Root, Self, User, Arg);
             if (_progressCircle.fillAmount >= 1f)
             {
                 MenuController.Show(_canvasGroup, false);
-                modelList.Clear();
+                list.Clear();
                 Root.Done();
             }
         }

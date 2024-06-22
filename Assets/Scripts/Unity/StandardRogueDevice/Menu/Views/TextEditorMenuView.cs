@@ -9,7 +9,7 @@ using TMPro;
 
 namespace RoguegardUnity
 {
-    public class TextEditorMenuView : ModelsMenuView, ITextMenuView
+    public class TextEditorMenuView : ElementsView, ITextElementsView
     {
         [SerializeField] private CanvasGroup _canvasGroup = null;
         [SerializeField] private TMP_InputField _inputField = null;
@@ -24,9 +24,9 @@ namespace RoguegardUnity
         }
 
         public override void OpenView<T>(
-            IModelListPresenter presenter, Spanning<T> modelList, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            IElementPresenter presenter, Spanning<T> list, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         {
-            SetArg(root, self, user, arg);
+            SetArg(manager, self, user, arg);
             _inputField.text = (string)arg.Other;
             MenuController.Show(_canvasGroup, true);
         }

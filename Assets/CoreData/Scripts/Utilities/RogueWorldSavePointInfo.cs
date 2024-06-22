@@ -64,12 +64,12 @@ namespace Roguegard
 
         private class AfterLoadRogueMethod : FloorMenuAfterLoadRogueMethod
         {
-            public override string GetName(IModelsMenuRoot root, RogueObj player, RogueObj empty, in RogueMethodArgument arg)
+            public override string GetName(IListMenuManager manager, RogueObj player, RogueObj empty, in RogueMethodArgument arg)
             {
                 return "ÉçÉrÅ[";
             }
 
-            public override void Activate(IModelsMenuRoot root, RogueObj player, RogueObj empty, in RogueMethodArgument arg)
+            public override void Activate(IListMenuManager manager, RogueObj player, RogueObj empty, in RogueMethodArgument arg)
             {
                 var world = player.Location;
                 var worldInfo = RogueWorldInfo.GetByCharacter(player);

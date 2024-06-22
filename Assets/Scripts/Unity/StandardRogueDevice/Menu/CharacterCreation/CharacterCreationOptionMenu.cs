@@ -9,126 +9,126 @@ using TMPro;
 
 namespace RoguegardUnity
 {
-    public class CharacterCreationOptionMenu : BaseScrollModelsMenu<object>
+    public class CharacterCreationOptionMenu : BaseScrollListMenu<object>
     {
         protected override IKeyword ViewKeyword => DeviceKw.MenuOptions;
 
-        private readonly List<object> models = new();
+        private readonly List<object> elms = new();
         private readonly ICharacterCreationDatabase database;
-        private readonly CharacterCreationSelectOptionChoice selectOptionChoice;
-        private readonly RemoveChoice removeChoice;
+        private readonly CharacterCreationOptionsSelectOption selectOption;
+        private readonly RemoveSelectOption removeSelectOption;
 
-        // selectOptionChoice と同時に出現するメンバーは別インスタンスにする。
-        private readonly CharacterCreationSelectOptionChoice singleItemMemberOptionChoice;
-        private readonly CharacterCreationSelectOptionChoice alphabetTypeMemberOptionChoice;
+        // selectOption と同時に出現するメンバーは別インスタンスにする。
+        private readonly CharacterCreationOptionsSelectOption singleItemMemberSelectOption;
+        private readonly CharacterCreationOptionsSelectOption alphabetTypeMemberSelectOption;
 
         public CharacterCreationOptionMenu(ICharacterCreationDatabase database)
         {
             this.database = database;
-            selectOptionChoice = new CharacterCreationSelectOptionChoice(database);
-            removeChoice = new RemoveChoice();
+            selectOption = new CharacterCreationOptionsSelectOption(database);
+            removeSelectOption = new RemoveSelectOption();
 
-            singleItemMemberOptionChoice = new CharacterCreationSelectOptionChoice(database);
-            alphabetTypeMemberOptionChoice = new CharacterCreationSelectOptionChoice(database);
+            singleItemMemberSelectOption = new CharacterCreationOptionsSelectOption(database);
+            alphabetTypeMemberSelectOption = new CharacterCreationOptionsSelectOption(database);
         }
 
         public void Set(CharacterCreationDataBuilder builder)
         {
-            removeChoice.builder = builder;
+            removeSelectOption.builder = builder;
         }
 
-        protected override Spanning<object> GetModels(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+        protected override Spanning<object> GetList(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         {
             if (arg.Other is RaceBuilder raceBuilder)
             {
-                models.Clear();
-                models.Add(new ShortNameOption(removeChoice.builder));
-                models.Add(selectOptionChoice.Set(raceBuilder));
-                models.Add(new GenderOption(database));
-                models.Add(new ColorPicker());
-                AddMemberModels(raceBuilder);
+                elms.Clear();
+                elms.Add(new ShortNameOption(removeSelectOption.builder));
+                elms.Add(selectOption.Set(raceBuilder));
+                elms.Add(new GenderOption(database));
+                elms.Add(new ColorPicker());
+                AddMemberElements(raceBuilder);
             }
             else if (arg.Other is AppearanceBuilder appearanceBuilder)
             {
-                models.Clear();
-                models.Add(selectOptionChoice.Set(appearanceBuilder));
-                models.Add(new ColorPicker());
-                AddMemberModels(appearanceBuilder);
-                models.Add(removeChoice);
+                elms.Clear();
+                elms.Add(selectOption.Set(appearanceBuilder));
+                elms.Add(new ColorPicker());
+                AddMemberElements(appearanceBuilder);
+                elms.Add(removeSelectOption);
             }
             else if (arg.Other is IntrinsicBuilder intrinsicBuilder)
             {
-                models.Clear();
-                models.Add(selectOptionChoice.Set(intrinsicBuilder));
-                models.Add(new NameOption());
-                AddMemberModels(intrinsicBuilder);
-                models.Add(removeChoice);
+                elms.Clear();
+                elms.Add(selectOption.Set(intrinsicBuilder));
+                elms.Add(new NameOption());
+                AddMemberElements(intrinsicBuilder);
+                elms.Add(removeSelectOption);
             }
             else if (arg.Other is StartingItemBuilder startingItemBuilder)
             {
-                models.Clear();
-                models.Add(selectOptionChoice.Set(startingItemBuilder));
-                models.Add(new StackOption());
-                AddMemberModels(startingItemBuilder);
-                models.Add(removeChoice);
+                elms.Clear();
+                elms.Add(selectOption.Set(startingItemBuilder));
+                elms.Add(new StackOption());
+                AddMemberElements(startingItemBuilder);
+                elms.Add(removeSelectOption);
             }
-            return models;
+            return elms;
         }
 
-        private void AddMemberModels(IMemberable memberable)
+        private void AddMemberElements(IMemberable memberable)
         {
             for (int i = 0; i < memberable.MemberSources.Count; i++)
             {
                 var member = memberable.GetMember(memberable.MemberSources[i]);
                 if (member is SingleItemMember singleItemMember)
                 {
-                    models.Add(singleItemMemberOptionChoice.Set(singleItemMember));
+                    elms.Add(singleItemMemberSelectOption.Set(singleItemMember));
                 }
                 else if (member is EquipMember equipMember)
                 {
-                    models.Add(new IsEquippedChoice(equipMember));
+                    elms.Add(new IsEquippedSelectOption(equipMember));
                 }
                 else if (member is AlphabetTypeMember alphabetTypeMember && memberable is AppearanceBuilder appearanceBuilder)
                 {
-                    appearanceBuilder.Option.UpdateMemberRange(alphabetTypeMember, appearanceBuilder, removeChoice.builder);
-                    models.Add(alphabetTypeMemberOptionChoice.Set(alphabetTypeMember));
+                    appearanceBuilder.Option.UpdateMemberRange(alphabetTypeMember, appearanceBuilder, removeSelectOption.builder);
+                    elms.Add(alphabetTypeMemberSelectOption.Set(alphabetTypeMember));
                 }
                 else if (member is StandardRaceMember standardRaceMember && memberable is RaceBuilder raceBuilder)
                 {
-                    raceBuilder.Option.UpdateMemberRange(standardRaceMember, raceBuilder.Option, removeChoice.builder);
-                    models.Add(new CommonSlider(standardRaceMember, (IStandardRaceOption)raceBuilder.Option));
+                    raceBuilder.Option.UpdateMemberRange(standardRaceMember, raceBuilder.Option, removeSelectOption.builder);
+                    elms.Add(new CommonSlider(standardRaceMember, (IStandardRaceOption)raceBuilder.Option));
                 }
             }
         }
 
-        protected override string GetItemName(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+        protected override string GetItemName(object element, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         {
-            return ChoiceListPresenter.Instance.GetItemName(model, root, self, user, arg);
+            return SelectOptionPresenter.Instance.GetItemName(element, manager, self, user, arg);
         }
 
-        protected override void ActivateItem(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+        protected override void ActivateItem(object element, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         {
-            ChoiceListPresenter.Instance.ActivateItem(model, root, self, user, arg);
+            SelectOptionPresenter.Instance.ActivateItem(element, manager, self, user, arg);
         }
 
-        private class ShortNameOption : IModelsMenuOptionText
+        private class ShortNameOption : IOptionsMenuText
         {
             private readonly CharacterCreationDataBuilder builder;
             public TMP_InputField.ContentType ContentType => TMP_InputField.ContentType.Standard;
             public ShortNameOption(CharacterCreationDataBuilder builder) => this.builder = builder;
 
-            public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg) => "職業／二つ名";
-            public string GetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg) => builder.ShortName;
-            public void SetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg, string value) => builder.ShortName = value;
+            public string GetName(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg) => "職業／二つ名";
+            public string GetValue(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg) => builder.ShortName;
+            public void SetValue(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg, string value) => builder.ShortName = value;
         }
 
-        private class NameOption : IModelsMenuOptionText
+        private class NameOption : IOptionsMenuText
         {
             public TMP_InputField.ContentType ContentType => TMP_InputField.ContentType.Standard;
 
-            public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg) => "名前";
+            public string GetName(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg) => "名前";
 
-            public string GetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public string GetValue(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 if (arg.Other is IntrinsicBuilder intrinsicBuilder)
                 {
@@ -138,7 +138,7 @@ namespace RoguegardUnity
                 return "???";
             }
 
-            public void SetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg, string value)
+            public void SetValue(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg, string value)
             {
                 // 空欄の場合は上書きしないよう null にする
                 if (string.IsNullOrWhiteSpace(value)) { value = null; }
@@ -151,15 +151,15 @@ namespace RoguegardUnity
             }
         }
 
-        private class RemoveChoice : BaseModelsMenuChoice
+        private class RemoveSelectOption : BaseListMenuSelectOption
         {
             public override string Name => "<#f00>削除";
 
             public CharacterCreationDataBuilder builder;
 
-            public override void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public override void Activate(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+                manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
 
                 if (arg.Other is IMemberable memberable)
                 {
@@ -188,13 +188,13 @@ namespace RoguegardUnity
                     CharacterCreationAddMenu.ReceiveStartingItemOptionObj(startingItemBuilder.Option, self);
                     builder.StartingItemTable.Remove(startingItemBuilder, true);
                 }
-                root.Back();
+                manager.Back();
             }
         }
 
-        private class ColorPicker : IModelsMenuOptionColor
+        private class ColorPicker : IOptionsMenuColor
         {
-            public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public string GetName(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 if (arg.Other is RaceBuilder raceBuilder)
                 {
@@ -208,7 +208,7 @@ namespace RoguegardUnity
                 return "???";
             }
 
-            public Color GetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public Color GetValue(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 if (arg.Other is RaceBuilder raceBuilder)
                 {
@@ -222,7 +222,7 @@ namespace RoguegardUnity
                 return Color.white;
             }
 
-            public void SetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg, Color value)
+            public void SetValue(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg, Color value)
             {
                 if (arg.Other is RaceBuilder raceBuilder)
                 {
@@ -238,12 +238,12 @@ namespace RoguegardUnity
             }
         }
 
-        private class GenderOption : IModelsMenuChoice
+        private class GenderOption : IListMenuSelectOption
         {
             private readonly SelectGenderMenu nextMenu;
             public GenderOption(ICharacterCreationDatabase database) => nextMenu = new SelectGenderMenu() { database = database };
 
-            public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public string GetName(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 if (arg.Other is RaceBuilder raceBuilder)
                 {
@@ -253,46 +253,46 @@ namespace RoguegardUnity
                 return "性別：";
             }
 
-            public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public void Activate(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+                manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
                 if (arg.Other is RaceBuilder raceBuilder)
                 {
-                    root.OpenMenu(nextMenu, self, null, new(other: arg.Other));
+                    manager.OpenMenu(nextMenu, self, null, new(other: arg.Other));
                     return;
                 }
                 Debug.LogError("不正な型です。");
             }
         }
 
-        private class SelectGenderMenu : BaseScrollModelsMenu<IRogueGender>
+        private class SelectGenderMenu : BaseScrollListMenu<IRogueGender>
         {
             public ICharacterCreationDatabase database;
             private RaceBuilder builder;
 
-            protected override Spanning<IRogueGender> GetModels(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            protected override Spanning<IRogueGender> GetList(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 builder = (RaceBuilder)arg.Other;
                 return builder.Option.Genders;
             }
 
-            protected override string GetItemName(IRogueGender gender, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            protected override string GetItemName(IRogueGender gender, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 return gender.Name;
             }
 
-            protected override void ActivateItem(IRogueGender gender, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            protected override void ActivateItem(IRogueGender gender, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 builder.Gender = gender;
-                root.Back();
+                manager.Back();
             }
         }
 
-        private class StackOption : IModelsMenuOptionSlider
+        private class StackOption : IOptionsMenuSlider
         {
-            public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg) => "個数";
+            public string GetName(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg) => "個数";
 
-            public float GetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public float GetValue(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 if (arg.Other is StartingItemBuilder startingItemBuilder)
                 {
@@ -302,7 +302,7 @@ namespace RoguegardUnity
                 return 0;
             }
 
-            public void SetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg, float value)
+            public void SetValue(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg, float value)
             {
                 if (arg.Other is StartingItemBuilder startingItemBuilder)
                 {
@@ -314,24 +314,24 @@ namespace RoguegardUnity
             }
         }
 
-        private class IsEquippedChoice : IModelsMenuChoice
+        private class IsEquippedSelectOption : IListMenuSelectOption
         {
             private readonly EquipMember equipMember;
-            public IsEquippedChoice(EquipMember equipMember) => this.equipMember = equipMember;
+            public IsEquippedSelectOption(EquipMember equipMember) => this.equipMember = equipMember;
 
-            public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public string GetName(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 return $"<#808080>装備する：{equipMember.IsEquipped}";
             }
 
-            public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public void Activate(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Cancel);
+                manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Cancel);
                 //equipMember.IsEquipped = !equipMember.IsEquipped;
             }
         }
 
-        private class CommonSlider : IModelsMenuOptionSlider
+        private class CommonSlider : IOptionsMenuSlider
         {
             private readonly StandardRaceMember standardRaceMember;
             private readonly IStandardRaceOption standardRaceOption;
@@ -342,14 +342,14 @@ namespace RoguegardUnity
                 this.standardRaceOption = standardRaceOption;
             }
 
-            public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg) => "サイズ";
+            public string GetName(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg) => "サイズ";
 
-            public float GetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public float GetValue(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 return Mathf.InverseLerp(standardRaceOption.MinSize, standardRaceOption.MaxSize, standardRaceMember.Size);
             }
 
-            public void SetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg, float value)
+            public void SetValue(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg, float value)
             {
                 standardRaceMember.Size = standardRaceOption.MinSize + Mathf.RoundToInt(value * (standardRaceOption.MaxSize - standardRaceOption.MinSize));
             }

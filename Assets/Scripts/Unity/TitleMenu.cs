@@ -25,7 +25,7 @@ namespace RoguegardUnity
         [SerializeField] private TMP_Text _versionText = null;
         [SerializeField] private Image _background = null;
         [SerializeField] private Image _logo = null;
-        [SerializeField] private ModelsMenuView _titleMenu = null;
+        [SerializeField] private ElementsView _titleMenu = null;
         [SerializeField] private TitleCredit _creditMenu = null;
 
         [Space]
@@ -116,45 +116,45 @@ namespace RoguegardUnity
                 soundTable, audioMixer, seAudioSourcePrefab, bgmAudioSourcePrefab, runtimeInspectorPrefab);
         }
 
-        private class MainMenu : IModelsMenu
+        private class MainMenu : IListMenu
         {
             private readonly TitleMenu parent;
-            private readonly object[] models;
+            private readonly object[] elms;
 
             public MainMenu(TitleMenu parent)
             {
                 this.parent = parent;
-                models = new object[]
+                elms = new object[]
                 {
-                    new StartGameChoice(parent),
-                    new CreditChoice() { parent = parent },
+                    new StartGameSelectOption(parent),
+                    new CreditSelectOption() { parent = parent },
                 };
             }
 
-            public void OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public void OpenMenu(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                parent._titleMenu.OpenView(ChoiceListPresenter.Instance, models, root, null, null, RogueMethodArgument.Identity);
+                parent._titleMenu.OpenView(SelectOptionPresenter.Instance, elms, manager, null, null, RogueMethodArgument.Identity);
             }
         }
 
-        private class StartGameChoice : BaseModelsMenuChoice
+        private class StartGameSelectOption : BaseListMenuSelectOption
         {
             public override string Name => ":Play";
 
             private readonly NextMenu nextMenu;
 
-            public StartGameChoice(TitleMenu parent)
+            public StartGameSelectOption(TitleMenu parent)
             {
                 nextMenu = new NextMenu(parent);
             }
 
-            public override void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public override void Activate(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-                root.OpenMenu(nextMenu, null, null, RogueMethodArgument.Identity);
+                manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+                manager.OpenMenu(nextMenu, null, null, RogueMethodArgument.Identity);
             }
 
-            private class NextMenu : IModelsMenu
+            private class NextMenu : IListMenu
             {
                 private readonly TitleMenu parent;
                 private readonly NewGameMenu nextMenu;
@@ -186,9 +186,9 @@ namespace RoguegardUnity
                     });
                 }
 
-                public void OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+                public void OpenMenu(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
                 {
-                    root.OpenMenu(selectFileMenu, null, null, RogueMethodArgument.Identity);
+                    manager.OpenMenu(selectFileMenu, null, null, RogueMethodArgument.Identity);
                 }
 
                 private void Loaded(string path)
@@ -210,31 +210,31 @@ namespace RoguegardUnity
                 }
             }
 
-            private class NewGameMenu : IModelsMenu
+            private class NewGameMenu : IListMenu
             {
                 private readonly TitleMenu parent;
-                private readonly object[] models;
+                private readonly object[] elms;
 
                 public NewGameMenu(TitleMenu parent)
                 {
                     this.parent = parent;
-                    models = new object[]
+                    elms = new object[]
                     {
-                        DialogModelsMenuChoice.CreateExit(
+                        DialogListMenuSelectOption.CreateExit(
                             ":Done", ":DoneMsg", ":SaveAndStart", SaveAndStart, ":QuitWithoutSaving", null)
                     };
                 }
 
-                public void OpenMenu(IModelsMenuRoot root, RogueObj player, RogueObj user, in RogueMethodArgument arg)
+                public void OpenMenu(IListMenuManager manager, RogueObj player, RogueObj user, in RogueMethodArgument arg)
                 {
                     var builder = (CharacterCreationDataBuilder)arg.Other;
-                    root.Get(DeviceKw.MenuCharacterCreation).OpenView(null, models, root, player, null, new(other: builder));
+                    manager.GetView(DeviceKw.MenuCharacterCreation).OpenView(null, elms, manager, player, null, new(other: builder));
                 }
 
-                private void SaveAndStart(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+                private void SaveAndStart(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
                 {
                     var builder = (CharacterCreationDataBuilder)arg.Other;
-                    root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+                    manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
                     FadeCanvas.FadeWithLoadScene($"{parent._nextSceneAddress}", () => Loaded(builder));
                 }
 
@@ -247,43 +247,43 @@ namespace RoguegardUnity
             }
         }
 
-        private class CreditChoice : BaseModelsMenuChoice
+        private class CreditSelectOption : BaseListMenuSelectOption
         {
             public override string Name => ":Credit";
 
             public TitleMenu parent;
             private NextMenu nextMenu;
 
-            public override void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public override void Activate(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 if (nextMenu == null)
                 {
                     nextMenu = new NextMenu() { parent = parent };
                 }
 
-                root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-                root.OpenMenu(nextMenu, null, null, RogueMethodArgument.Identity);
+                manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+                manager.OpenMenu(nextMenu, null, null, RogueMethodArgument.Identity);
             }
 
-            private class NextMenu : BaseScrollModelsMenu<CreditData>
+            private class NextMenu : BaseScrollListMenu<CreditData>
             {
                 protected override string MenuName => ":Credit";
 
                 public TitleMenu parent;
 
-                protected override Spanning<CreditData> GetModels(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+                protected override Spanning<CreditData> GetList(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
                 {
                     return parent._credits;
                 }
 
-                protected override string GetItemName(CreditData credit, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+                protected override string GetItemName(CreditData credit, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
                 {
                     return credit.Name;
                 }
 
-                protected override void ActivateItem(CreditData credit, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+                protected override void ActivateItem(CreditData credit, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
                 {
-                    parent._creditMenu.Show(credit, root);
+                    parent._creditMenu.Show(credit, manager);
                 }
             }
         }

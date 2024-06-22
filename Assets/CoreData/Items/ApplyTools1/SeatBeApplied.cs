@@ -38,20 +38,20 @@ namespace Roguegard
             return false;
         }
 
-        private class Menu : IModelsMenu, IModelListPresenter
+        private class Menu : IListMenu, IElementPresenter
         {
-            public void OpenMenu(IModelsMenuRoot root, RogueObj player, RogueObj user, in RogueMethodArgument arg)
+            public void OpenMenu(IListMenuManager manager, RogueObj player, RogueObj user, in RogueMethodArgument arg)
             {
                 var worldInfo = RogueWorldInfo.GetByCharacter(player);
                 var lobbyMembers = worldInfo.LobbyMembers.Members;
-                var scroll = root.Get(DeviceKw.MenuScroll);
-                scroll.OpenView(this, lobbyMembers, root, player, null, arg);
-                ExitModelsMenuChoice.OpenLeftAnchorExit(root);
+                var scroll = manager.GetView(DeviceKw.MenuScroll);
+                scroll.OpenView(this, lobbyMembers, manager, player, null, arg);
+                ExitListMenuSelectOption.OpenLeftAnchorExit(manager);
             }
 
-            public string GetItemName(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public string GetItemName(object element, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                var obj = (RogueObj)model;
+                var obj = (RogueObj)element;
                 if (obj.Location == null)
                 {
                     return obj.GetName();
@@ -62,13 +62,13 @@ namespace Roguegard
                 }
             }
 
-            public void ActivateItem(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public void ActivateItem(object element, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                var lobbyMember = (RogueObj)model;
+                var lobbyMember = (RogueObj)element;
                 if (lobbyMember.Location == null)
                 {
-                    root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-                    root.Done();
+                    manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+                    manager.Done();
 
                     var info = LobbyMemberList.GetMemberInfo(lobbyMember);
                     info.Seat = arg.TargetObj;
@@ -91,7 +91,7 @@ namespace Roguegard
                 }
                 else
                 {
-                    root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Cancel);
+                    manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Cancel);
                 }
             }
         }

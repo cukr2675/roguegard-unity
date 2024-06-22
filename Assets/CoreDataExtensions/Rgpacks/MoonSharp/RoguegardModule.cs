@@ -231,11 +231,11 @@ return {
         {
             const string name = "__select";
             selectMenu.coroutine = executionContext.GetCallingCoroutine();
-            selectMenu.choices.Clear();
+            selectMenu.selectOptions.Clear();
             for (int i = 0; i < args.Count; i++)
             {
-                var choice = args.AsType(i, name, DataType.String, false).String;
-                selectMenu.choices.Add(choice);
+                var selectOption = args.AsType(i, name, DataType.String, false).String;
+                selectMenu.selectOptions.Add(selectOption);
             }
             RogueDevice.Primary.AddMenu(selectMenu, null, null, RogueMethodArgument.Identity);
             return DynValue.Nil;
@@ -394,28 +394,28 @@ return {
             }
         }
 
-        private class SelectMenu : IModelsMenu, IModelListPresenter
+        private class SelectMenu : IListMenu, IElementPresenter
         {
             public global::MoonSharp.Interpreter.Coroutine coroutine;
-            public List<string> choices = new();
+            public List<string> selectOptions = new();
             private static readonly DynValue[] args = new DynValue[1];
 
-            public void OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public void OpenMenu(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                var view = root.Get(DeviceKw.MenuTalkChoices);
-                view.OpenView<string>(this, choices, root, self, user, arg);
+                var view = manager.GetView(DeviceKw.MenuTalkSelect);
+                view.OpenView<string>(this, selectOptions, manager, self, user, arg);
             }
 
-            public string GetItemName(object modelListItem, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public string GetItemName(object element, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                return (string)modelListItem;
+                return (string)element;
             }
 
-            public void ActivateItem(object modelListItem, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public void ActivateItem(object element, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-                root.Done();
-                args[0] = DynValue.NewNumber(choices.IndexOf((string)modelListItem) + 1);
+                manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+                manager.Done();
+                args[0] = DynValue.NewNumber(selectOptions.IndexOf((string)element) + 1);
                 coroutine.Resume(args);
             }
         }

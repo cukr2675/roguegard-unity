@@ -12,62 +12,62 @@ namespace RoguegardUnity
     /// </summary>
     public class ObjsMenu
     {
-        public IModelsMenuChoice Close { get; }
+        public IListMenuSelectOption Close { get; }
 
         /// <summary>
         /// <see cref="RogueMethodArgument.TargetObj"/> のインベントリを開く
         /// </summary>
-        public IModelsMenu Items { get; }
+        public IListMenu Items { get; }
 
         /// <summary>
         /// <see cref="RogueMethodArgument.TargetObj"/> の足元のアイテム一覧を開く
         /// </summary>
-        public IModelsMenu Ground { get; }
+        public IListMenu Ground { get; }
 
-        public IModelsMenu PutIntoChest { get; }
+        public IListMenu PutIntoChest { get; }
 
-        public IModelsMenu TakeOutFromChest { get; }
+        public IListMenu TakeOutFromChest { get; }
 
         public ObjsMenu(ObjCommandMenu commandMenu, PutIntoChestCommandMenu putInCommandMenu, TakeOutFromChestCommandMenu takeOutCommandMenu)
         {
-            Close = new CloseChoice();
+            Close = new CloseSelectOption();
             Items = new ItemsMenu() { commandMenu = commandMenu };
             Ground = new GroundMenu() { commandMenu = commandMenu };
             PutIntoChest = new PutIntoChestMenu() { commandMenu = putInCommandMenu };
             TakeOutFromChest = new TakeOutFromChestMenu() { commandMenu = takeOutCommandMenu };
         }
 
-        private class CloseChoice : BaseModelsMenuChoice
+        private class CloseSelectOption : BaseListMenuSelectOption
         {
             public override string Name => ":Close";
 
-            public override void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public override void Activate(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                root.Done();
-                root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Cancel);
+                manager.Done();
+                manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Cancel);
             }
         }
 
-        private abstract class ScrollMenu : BaseScrollModelsMenu<RogueObj>
+        private abstract class ScrollMenu : BaseScrollListMenu<RogueObj>
         {
             protected virtual bool Skip0WeightObjs => false;
             protected virtual bool SortIsEnabled => false;
 
-            public IModelsMenu commandMenu;
+            public IListMenu commandMenu;
 
-            private readonly ActionModelsMenuChoice sortChoice;
+            private readonly ActionListMenuSelectOption sortSelectOption;
 
             private static CategorizedSortTable sortTable;
 
             protected ScrollMenu()
             {
-                sortChoice = new ActionModelsMenuChoice(":Sort", Sort);
+                sortSelectOption = new ActionListMenuSelectOption(":Sort", Sort);
             }
 
-            protected override object GetViewPositionHolder(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            protected override object GetViewPositionHolder(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
                 => arg.TargetObj;
 
-            protected sealed override Spanning<RogueObj> GetModels(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            protected sealed override Spanning<RogueObj> GetList(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
                 => GetObjs(self, arg.TargetObj);
 
             /// <summary>
@@ -75,21 +75,21 @@ namespace RoguegardUnity
             /// </summary>
             protected abstract Spanning<RogueObj> GetObjs(RogueObj self, RogueObj targetObj);
 
-            protected override float GetDefaultViewPosition(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            protected override float GetDefaultViewPosition(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 if (!Skip0WeightObjs) return 0f;
 
                 // 重さがゼロではないアイテムまで自動スクロール
-                var models = GetObjs(self, arg.TargetObj);
-                for (int i = 0; i < models.Count; i++)
+                var objs = GetObjs(self, arg.TargetObj);
+                for (int i = 0; i < objs.Count; i++)
                 {
-                    var weight = WeightCalculator.Get(models[i]);
+                    var weight = WeightCalculator.Get(objs[i]);
                     if (weight.TotalWeight > 0f) return i;
                 }
                 return 0f;
             }
 
-            protected override void GetLeftAnchorModels(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg, List<object> models)
+            protected override void GetLeftAnchorList(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg, List<object> list)
             {
                 if (!SortIsEnabled) return;
 
@@ -97,25 +97,25 @@ namespace RoguegardUnity
                 if (RogueDevice.Primary.Player.Main.Stats.Party.Members.Contains(arg.TargetObj) ||
                     ChestInfo.GetStorage(arg.TargetObj) != null)
                 {
-                    models.Insert(0, sortChoice);
+                    list.Insert(0, sortSelectOption);
                 }
             }
 
-            protected override string GetItemName(RogueObj obj, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            protected override string GetItemName(RogueObj obj, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 return obj.GetName();
             }
 
-            protected override void ActivateItem(RogueObj obj, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            protected override void ActivateItem(RogueObj obj, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 // 選択したアイテムの情報と選択肢を表示する
-                root.OpenMenuAsDialog(commandMenu, self, null, new(targetObj: arg.TargetObj, tool: obj));
+                manager.OpenMenuAsDialog(commandMenu, self, null, new(targetObj: arg.TargetObj, tool: obj));
             }
 
-            private void Sort(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            private void Sort(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                ViewPosition.Save(root, arg.TargetObj);
-                root.AddObject(DeviceKw.EnqueueSE, StdKw.Sort);
+                ViewPosition.Save(manager, arg.TargetObj);
+                manager.AddObject(DeviceKw.EnqueueSE, StdKw.Sort);
 
                 if (sortTable == null)
                 {
@@ -126,7 +126,7 @@ namespace RoguegardUnity
                 var storageObjs = ChestInfo.GetStorage(arg.TargetObj);
                 if (storageObjs != null) { sortTable.Sort(arg.TargetObj); }
                 else { sortTable.Sort(arg.TargetObj); }
-                root.Reopen(self, user, arg);
+                manager.Reopen(self, user, arg);
             }
         }
 
@@ -136,20 +136,20 @@ namespace RoguegardUnity
             protected override bool Skip0WeightObjs => true;
             protected override bool SortIsEnabled => true;
 
-            private readonly List<RogueObj> models = new List<RogueObj>();
+            private readonly List<RogueObj> objs = new List<RogueObj>();
 
             protected override Spanning<RogueObj> GetObjs(RogueObj self, RogueObj targetObj)
             {
                 // お金を取り除いたリストを生成
-                models.Clear();
+                objs.Clear();
                 var spaceObjs = targetObj.Space.Objs;
                 for (int i = 0; i < spaceObjs.Count; i++)
                 {
                     if (spaceObjs[i] == null || spaceObjs[i].Main.InfoSet.Equals(RoguegardSettings.MoneyInfoSet)) continue;
 
-                    models.Add(spaceObjs[i]);
+                    objs.Add(spaceObjs[i]);
                 }
-                return models;
+                return objs;
             }
         }
 
@@ -157,21 +157,21 @@ namespace RoguegardUnity
         {
             protected override string MenuName => ":Ground";
 
-            private readonly List<RogueObj> models = new List<RogueObj>();
+            private readonly List<RogueObj> objs = new List<RogueObj>();
 
             protected override Spanning<RogueObj> GetObjs(RogueObj self, RogueObj targetObj)
             {
                 var locationObjs = targetObj.Location.Space.Objs;
                 var targetPosition = targetObj.Position;
-                models.Clear();
+                objs.Clear();
                 for (int i = 0; i < locationObjs.Count; i++)
                 {
                     var obj = locationObjs[i];
                     if (obj == null || obj == targetObj || obj.Position != targetPosition) continue;
 
-                    models.Add(obj);
+                    objs.Add(obj);
                 }
-                return models;
+                return objs;
             }
         }
 

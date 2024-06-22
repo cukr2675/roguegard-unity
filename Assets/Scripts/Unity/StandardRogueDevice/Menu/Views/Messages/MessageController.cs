@@ -23,8 +23,8 @@ namespace RoguegardUnity
 
         public bool IsTalkingNow => _talkWindow.IsScrollingNow;
 
-        public ModelsMenuView LogView => _logWindow;
-        public ModelsMenuView TalkView => _talkWindow;
+        public ElementsView LogView => _logWindow;
+        public ElementsView TalkView => _talkWindow;
 
         internal void UpdateUI(SoundController soundController, int deltaTime)
         {

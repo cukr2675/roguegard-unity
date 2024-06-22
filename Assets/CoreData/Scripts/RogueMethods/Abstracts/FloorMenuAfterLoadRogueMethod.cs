@@ -9,13 +9,13 @@ namespace Roguegard
     /// <summary>
     /// ダンジョン名と階層を表示してそこに移動させる <see cref="IRogueMethod"/>
     /// </summary>
-    public abstract class FloorMenuAfterLoadRogueMethod : BaseApplyRogueMethod, IModelsMenu, IModelsMenuChoice
+    public abstract class FloorMenuAfterLoadRogueMethod : BaseApplyRogueMethod, IListMenu, IListMenuSelectOption
     {
-        private IModelsMenuChoice[] choices;
+        private IListMenuSelectOption[] selectOptions;
 
         protected FloorMenuAfterLoadRogueMethod()
         {
-            choices = new IModelsMenuChoice[] { this };
+            selectOptions = new IListMenuSelectOption[] { this };
         }
 
         /// <summary>
@@ -42,13 +42,13 @@ namespace Roguegard
             return true;
         }
 
-        public void OpenMenu(IModelsMenuRoot root, RogueObj player, RogueObj empty, in RogueMethodArgument arg)
+        public void OpenMenu(IListMenuManager manager, RogueObj player, RogueObj empty, in RogueMethodArgument arg)
         {
-            root.Get(DeviceKw.MenuFloor).OpenView(ChoiceListPresenter.Instance, choices, root, player, empty, arg);
+            manager.GetView(DeviceKw.MenuFloor).OpenView(SelectOptionPresenter.Instance, selectOptions, manager, player, empty, arg);
         }
 
-        public abstract string GetName(IModelsMenuRoot root, RogueObj player, RogueObj empty, in RogueMethodArgument arg);
+        public abstract string GetName(IListMenuManager manager, RogueObj player, RogueObj empty, in RogueMethodArgument arg);
 
-        public abstract void Activate(IModelsMenuRoot root, RogueObj player, RogueObj empty, in RogueMethodArgument arg);
+        public abstract void Activate(IListMenuManager manager, RogueObj player, RogueObj empty, in RogueMethodArgument arg);
     }
 }

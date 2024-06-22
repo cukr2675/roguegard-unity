@@ -87,7 +87,7 @@ namespace RoguegardUnity
             RoguegardSettings.JsonSerialization = new JsonSerializationSetting();
             Rgpacker.DefaultEvaluator = _scriptEvaluators[0].Ref;
 
-            RoguegardSettings.ClearDungeonChoices();
+            RoguegardSettings.ClearDungeonSelectOptions();
             RoguegardSettings.ClearAssetTable();
             foreach (var assetTable in _assetTables)
             {
@@ -97,8 +97,8 @@ namespace RoguegardUnity
                 {
                     if (pair.Value is DungeonCreationData dungeonData)
                     {
-                        var dungeonChoice = dungeonData.CreateDungeonChoice();
-                        RoguegardSettings.AddDungeonChoice(dungeonChoice);
+                        var dungeonSelectOption = dungeonData.CreateDungeonSelectOption();
+                        RoguegardSettings.AddDungeonSelectOption(dungeonSelectOption);
                     }
                 }
             }

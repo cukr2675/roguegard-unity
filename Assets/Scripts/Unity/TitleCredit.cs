@@ -11,30 +11,30 @@ using Roguegard.Device;
 
 namespace RoguegardUnity
 {
-    public class TitleCredit : ModelsMenuView, IPointerClickHandler
+    public class TitleCredit : ElementsView, IPointerClickHandler
     {
         [SerializeField] private CanvasGroup _canvasGroup = null;
         [SerializeField] private TMP_Text _text = null;
         [SerializeField] private ScrollRect _scrollRect = null;
-        [SerializeField] private ModelsMenuViewItemButton _exitButton = null;
+        [SerializeField] private ViewElementButton _exitButton = null;
 
-        private ExitChoice exitChoice;
+        private ExitSelectOption exitSelectOption;
         private URLTalk urlTalk;
 
         public override CanvasGroup CanvasGroup => _canvasGroup;
 
         public void Initialize()
         {
-            exitChoice = new ExitChoice() { parent = this };
+            exitSelectOption = new ExitSelectOption() { parent = this };
             urlTalk = new URLTalk();
             _exitButton.Initialize(this);
-            _exitButton.SetItem(ChoiceListPresenter.Instance, exitChoice);
+            _exitButton.SetItem(SelectOptionPresenter.Instance, exitSelectOption);
         }
 
         public override void OpenView<T>(
-            IModelListPresenter presenter, Spanning<T> modelList, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            IElementPresenter presenter, Spanning<T> list, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         {
-            SetArg(root, self, user, arg);
+            SetArg(manager, self, user, arg);
         }
 
         public override float GetPosition()
@@ -47,9 +47,9 @@ namespace RoguegardUnity
             _scrollRect.verticalNormalizedPosition = 0f;
         }
 
-        public void Show(CreditData credit, IModelsMenuRoot root)
+        public void Show(CreditData credit, IListMenuManager manager)
         {
-            SetArg(root, null, null, RogueMethodArgument.Identity);
+            SetArg(manager, null, null, RogueMethodArgument.Identity);
 
             // 文字列にリンクを貼ったものを表示
             _text.text = Regex.Replace(credit.Details, @"(https?://\S+)", "<color=#8080ff><u><link>$1</link></u></color>");
@@ -72,40 +72,40 @@ namespace RoguegardUnity
             Root.OpenMenuAsDialog(urlTalk, Self, User, new(other: url));
         }
 
-        private class ExitChoice : BaseModelsMenuChoice
+        private class ExitSelectOption : BaseListMenuSelectOption
         {
-            public override string Name => ExitModelsMenuChoice.Instance.Name;
+            public override string Name => ExitListMenuSelectOption.Instance.Name;
 
             public TitleCredit parent;
 
-            public override void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public override void Activate(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Cancel);
+                manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Cancel);
                 MenuController.Show(parent._canvasGroup, false);
             }
         }
 
-        private class URLTalk : IModelsMenu
+        private class URLTalk : IListMenu
         {
-            private static readonly object[] models = new object[]
+            private static readonly object[] elms = new object[]
             {
-                new JumpChoice(),
-                ExitModelsMenuChoice.Instance
+                new JumpSelectOption(),
+                ExitListMenuSelectOption.Instance
             };
 
-            public void OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public void OpenMenu(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                root.Get(DeviceKw.MenuTalkChoices).OpenView(ChoiceListPresenter.Instance, models, root, self, user, arg);
+                manager.GetView(DeviceKw.MenuTalkSelect).OpenView(SelectOptionPresenter.Instance, elms, manager, self, user, arg);
             }
 
-            private class JumpChoice : BaseModelsMenuChoice
+            private class JumpSelectOption : BaseListMenuSelectOption
             {
                 public override string Name => ":Yes";
 
-                public override void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+                public override void Activate(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
                 {
-                    root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-                    root.Back();
+                    manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+                    manager.Back();
 
                     var url = (string)arg.Other;
                     Application.OpenURL(url);

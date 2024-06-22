@@ -9,7 +9,7 @@ using Roguegard.Device;
 
 namespace RoguegardUnity
 {
-    public class LogMenuView : ModelsMenuView, IPointerClickHandler
+    public class LogMenuView : ElementsView, IPointerClickHandler
     {
         [SerializeField] private CanvasGroup _canvasGroup = null;
         [SerializeField] private MessageText _text = null;
@@ -17,15 +17,15 @@ namespace RoguegardUnity
 
         public override CanvasGroup CanvasGroup => _canvasGroup;
 
-        private IModelListPresenter presenter;
+        private IElementPresenter presenter;
         private object source;
 
         public override void OpenView<T>(
-            IModelListPresenter presenter, Spanning<T> modelList, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            IElementPresenter presenter, Spanning<T> list, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         {
             this.presenter = presenter;
-            source = modelList[0];
-            SetArg(root, self, user, arg);
+            source = list[0];
+            SetArg(manager, self, user, arg);
             _scrollRect.verticalNormalizedPosition = 0f; // 常に一番下から表示
             MenuController.Show(_canvasGroup, true);
         }

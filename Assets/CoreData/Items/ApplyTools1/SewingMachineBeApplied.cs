@@ -19,40 +19,40 @@ namespace Roguegard
             return false;
         }
 
-        private class Menu : IModelsMenu, IModelListPresenter
+        private class Menu : IListMenu, IElementPresenter
         {
-            private readonly List<object> models = new List<object>();
+            private readonly List<object> elms = new List<object>();
             private static readonly SewingMenu nextMenu = new SewingMenu();
 
-            public void OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public void OpenMenu(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 var spaceObjs = self.Space.Objs;
-                models.Clear();
+                elms.Clear();
                 for (int i = 0; i < spaceObjs.Count; i++)
                 {
                     var obj = spaceObjs[i];
                     if (obj == null) continue;
 
-                    models.Add(obj);
+                    elms.Add(obj);
                 }
-                models.Add(null);
+                elms.Add(null);
 
-                var scroll = root.Get(DeviceKw.MenuScroll);
-                scroll.OpenView(this, models, root, self, null, RogueMethodArgument.Identity);
-                ExitModelsMenuChoice.OpenLeftAnchorExit(root);
+                var scroll = manager.GetView(DeviceKw.MenuScroll);
+                scroll.OpenView(this, elms, manager, self, null, RogueMethodArgument.Identity);
+                ExitListMenuSelectOption.OpenLeftAnchorExit(manager);
             }
 
-            public string GetItemName(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public string GetItemName(object element, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                if (model == null) return "+ 新しく作る";
-                else return ((RogueObj)model).GetName();
+                if (element == null) return "+ 新しく作る";
+                else return ((RogueObj)element).GetName();
             }
 
-            public void ActivateItem(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public void ActivateItem(object element, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+                manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
 
-                if (model == null)
+                if (element == null)
                 {
                     // 装備品を新規作成する場合はデータクラスを生成する
                     var data = new SewedEquipmentData();
@@ -61,33 +61,33 @@ namespace Roguegard
                         data.BoneSprites.SetPalette(i, RoguegardSettings.DefaultPalette[i]);
                     }
                     data.BoneSprites.MainColor = Color.white;
-                    root.OpenMenu(nextMenu, self, null, new(other: data, targetObj: null));
+                    manager.OpenMenu(nextMenu, self, null, new(other: data, targetObj: null));
                 }
-                else if (model is RogueObj equipment && equipment.Main.BaseInfoSet is SewedEquipmentInfoSet infoSet)
+                else if (element is RogueObj equipment && equipment.Main.BaseInfoSet is SewedEquipmentInfoSet infoSet)
                 {
                     // 保存せず終了できるように複製する
                     var data = infoSet.GetDataClone();
-                    root.OpenMenu(nextMenu, self, null, new(other: data, targetObj: equipment));
+                    manager.OpenMenu(nextMenu, self, null, new(other: data, targetObj: equipment));
                 }
             }
         }
 
-        private class SewingMenu : IModelsMenu, IModelListPresenter
+        private class SewingMenu : IListMenu, IElementPresenter
         {
-            private static List<object> models;
-            private static object[] leftAnchorModels = new[] { DialogModelsMenuChoice.CreateExit(Save) };
+            private static List<object> elms;
+            private static object[] leftAnchorList = new[] { DialogListMenuSelectOption.CreateExit(Save) };
             private static readonly PaintBoneSpriteMenu nextMenu = new PaintBoneSpriteMenu();
             private static readonly EquipPartsMenu equipPartsMenu = new EquipPartsMenu();
 
-            public void OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public void OpenMenu(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                if (models == null)
+                if (elms == null)
                 {
-                    models = new List<object>()
+                    elms = new List<object>()
                     {
                         new NameOption(),
                         new ColorPicker(),
-                        new ActionModelsMenuChoice("装備部位", EquipParts),
+                        new ActionListMenuSelectOption("装備部位", EquipParts),
                         new OrderOption(),
                     };
                 }
@@ -95,53 +95,53 @@ namespace Roguegard
                 var data = (SewedEquipmentData)arg.Other;
                 var equipment = arg.TargetObj;
 
-                models.RemoveRange(4, models.Count - 4);
+                elms.RemoveRange(4, elms.Count - 4);
                 for (int i = 0; i < data.BoneSprites.Items.Count; i++)
                 {
                     var item = data.BoneSprites.Items[i];
-                    models.Add(item);
+                    elms.Add(item);
                 }
-                models.Add(null);
+                elms.Add(null);
 
-                var options = root.Get(DeviceKw.MenuOptions);
-                options.OpenView(this, models, root, self, null, new(other: data, targetObj: equipment));
-                var leftAnchor = root.Get(DeviceKw.MenuLeftAnchor);
-                leftAnchor.OpenView(ChoiceListPresenter.Instance, leftAnchorModels, root, self, null, new(other: data, targetObj: equipment));
+                var options = manager.GetView(DeviceKw.MenuOptions);
+                options.OpenView(this, elms, manager, self, null, new(other: data, targetObj: equipment));
+                var leftAnchor = manager.GetView(DeviceKw.MenuLeftAnchor);
+                leftAnchor.OpenView(SelectOptionPresenter.Instance, leftAnchorList, manager, self, null, new(other: data, targetObj: equipment));
             }
 
-            private static void EquipParts(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            private static void EquipParts(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+                manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
 
                 var data = (SewedEquipmentData)arg.Other;
-                root.OpenMenu(equipPartsMenu, self, null, new(other: data));
+                manager.OpenMenu(equipPartsMenu, self, null, new(other: data));
             }
 
-            public string GetItemName(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public string GetItemName(object element, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                if (model is IModelsMenuChoice choice) return choice.GetName(root, self, user, arg);
-                else if (model is PaintBoneSprite item) return item.Bone.Name;
+                if (element is IListMenuSelectOption selectOption) return selectOption.GetName(manager, self, user, arg);
+                else if (element is PaintBoneSprite item) return item.Bone.Name;
                 else return "+ 追加";
             }
 
-            public void ActivateItem(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public void ActivateItem(object element, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                if (model is IModelsMenuChoice choice)
+                if (element is IListMenuSelectOption selectOption)
                 {
-                    choice.Activate(root, self, user, arg);
+                    selectOption.Activate(manager, self, user, arg);
                 }
-                else if (model is PaintBoneSprite boneSprite)
+                else if (element is PaintBoneSprite boneSprite)
                 {
                     // 部位編集
-                    root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+                    manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
 
                     var data = (SewedEquipmentData)arg.Other;
-                    root.OpenMenu(nextMenu, self, null, new(other: data.BoneSprites, count: data.BoneSprites.IndexOf(boneSprite)));
+                    manager.OpenMenu(nextMenu, self, null, new(other: data.BoneSprites, count: data.BoneSprites.IndexOf(boneSprite)));
                 }
                 else
                 {
                     // 部位追加
-                    root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+                    manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
 
                     var data = (SewedEquipmentData)arg.Other;
                     boneSprite = new PaintBoneSprite();
@@ -150,13 +150,13 @@ namespace Roguegard
                     boneSprite.Bone = BoneKeyword.Body;
                     boneSprite.Mirroring = true;
                     data.BoneSprites.Add(boneSprite);
-                    root.OpenMenu(nextMenu, self, null, new(other: data.BoneSprites, count: data.BoneSprites.IndexOf(boneSprite)));
+                    manager.OpenMenu(nextMenu, self, null, new(other: data.BoneSprites, count: data.BoneSprites.IndexOf(boneSprite)));
                 }
             }
 
-            private static void Save(IModelsMenuRoot root, RogueObj player, RogueObj user, in RogueMethodArgument arg)
+            private static void Save(IListMenuManager manager, RogueObj player, RogueObj user, in RogueMethodArgument arg)
             {
-                root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+                manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
 
                 // 編集画面から戻ったとき、その装備品を更新する
                 var data = (SewedEquipmentData)arg.Other;
@@ -172,26 +172,26 @@ namespace Roguegard
                     new SewedEquipmentInfoSet(data).CreateObj(player, Vector2Int.zero, RogueRandom.Primary);
                 }
 
-                root.Back();
-                root.Back();
+                manager.Back();
+                manager.Back();
             }
 
-            private class NameOption : IModelsMenuOptionText
+            private class NameOption : IOptionsMenuText
             {
                 public TMP_InputField.ContentType ContentType => TMP_InputField.ContentType.Standard;
 
-                public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+                public string GetName(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
                 {
                     return "名前";
                 }
 
-                public string GetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+                public string GetValue(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
                 {
                     var data = (SewedEquipmentData)arg.Other;
                     return data.Name;
                 }
 
-                public void SetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg, string value)
+                public void SetValue(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg, string value)
                 {
                     var data = (SewedEquipmentData)arg.Other;
                     data.Name = value;
@@ -199,36 +199,36 @@ namespace Roguegard
             }
         }
 
-        private class ColorPicker : IModelsMenuOptionColor
+        private class ColorPicker : IOptionsMenuColor
         {
-            public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public string GetName(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 var data = (SewedEquipmentData)arg.Other;
                 return $"<#{ColorUtility.ToHtmlStringRGBA(data.BoneSprites.MainColor)}>メインカラー";
             }
 
-            public Color GetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public Color GetValue(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 var data = (SewedEquipmentData)arg.Other;
                 return data.BoneSprites.MainColor;
             }
 
-            public void SetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg, Color value)
+            public void SetValue(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg, Color value)
             {
                 var data = (SewedEquipmentData)arg.Other;
                 data.BoneSprites.MainColor = value;
             }
         }
 
-        private class EquipPartsMenu : IModelsMenu, IModelListPresenter
+        private class EquipPartsMenu : IListMenu, IElementPresenter
         {
-            private object[] models;
+            private object[] elms;
 
-            public void OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public void OpenMenu(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                if (models == null)
+                if (elms == null)
                 {
-                    models = new ISerializableKeyword[]
+                    elms = new ISerializableKeyword[]
                     {
                         //EquipKw.Shield,
                         //EquipKw.Weapon,
@@ -249,28 +249,28 @@ namespace Roguegard
                     };
                 }
 
-                var scroll = root.Get(DeviceKw.MenuScroll);
-                scroll.OpenView(this, models, root, self, null, arg);
+                var scroll = manager.GetView(DeviceKw.MenuScroll);
+                scroll.OpenView(this, elms, manager, self, null, arg);
             }
 
-            public string GetItemName(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public string GetItemName(object element, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                if (model == null) return "その他";
-                return ((IKeyword)model).Name;
+                if (element == null) return "その他";
+                return ((IKeyword)element).Name;
             }
 
-            public void ActivateItem(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public void ActivateItem(object element, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+                manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
 
                 var data = (SewedEquipmentData)arg.Other;
-                if (model == null)
+                if (element == null)
                 {
                     data.SetEquipParts(Spanning<ISerializableKeyword>.Empty);
                 }
                 else
                 {
-                    var part = (ISerializableKeyword)model;
+                    var part = (ISerializableKeyword)element;
                     data.SetEquipParts(new[] { part });
 
                     if (part is EquipKeywordData keyword)
@@ -279,26 +279,26 @@ namespace Roguegard
                     }
                 }
 
-                root.Back();
+                manager.Back();
             }
         }
 
-        private class OrderOption : IModelsMenuOptionText
+        private class OrderOption : IOptionsMenuText
         {
             public TMP_InputField.ContentType ContentType => TMP_InputField.ContentType.DecimalNumber;
 
-            public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public string GetName(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 return "順序";
             }
 
-            public string GetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public string GetValue(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 var data = (SewedEquipmentData)arg.Other;
                 return data.BoneSpriteEffectOrder.ToString();
             }
 
-            public void SetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg, string value)
+            public void SetValue(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg, string value)
             {
                 var data = (SewedEquipmentData)arg.Other;
                 if (float.TryParse(value, out var order))

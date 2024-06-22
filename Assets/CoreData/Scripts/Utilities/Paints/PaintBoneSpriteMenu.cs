@@ -9,14 +9,14 @@ using Roguegard.Device;
 
 namespace Roguegard
 {
-    internal class PaintBoneSpriteMenu : IModelsMenu
+    internal class PaintBoneSpriteMenu : IListMenu
     {
-        private static List<object> models;
+        private static List<object> elms;
         private static BoneKeyword[] mirroringBones;
 
-        private static readonly IModelsMenu boneMenu = new BoneMenu();
+        private static readonly IListMenu boneMenu = new BoneMenu();
 
-        private static readonly IModelsMenu[] paintMenus = new[]
+        private static readonly IListMenu[] paintMenus = new[]
         {
             new PaintMenu(0),
             new PaintMenu(1),
@@ -24,17 +24,17 @@ namespace Roguegard
             new PaintMenu(3),
         };
 
-        public void OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+        public void OpenMenu(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         {
-            if (models == null)
+            if (elms == null)
             {
-                models = new List<object>
+                elms = new List<object>
                 {
-                    new ActionModelsMenuChoice("部位を変更", EditBone),
+                    new ActionListMenuSelectOption("部位を変更", EditBone),
                     new PivotDistanceOption(),
                     new IsFirstOption(),
-                    new ActionModelsMenuChoice("正面を編集", EditNormalSprite),
-                    new ActionModelsMenuChoice("背面を編集", EditBackSprite)
+                    new ActionListMenuSelectOption("正面を編集", EditNormalSprite),
+                    new ActionListMenuSelectOption("背面を編集", EditBackSprite)
                 };
                 mirroringBones = new[]
                 {
@@ -54,54 +54,54 @@ namespace Roguegard
             var itemIndex = arg.Count;
 
             // 一部ボーンはミラーリング設定を表示する
-            models.RemoveRange(5, models.Count - 5);
+            elms.RemoveRange(5, elms.Count - 5);
             if (table.Items[itemIndex] is PaintBoneSprite paintBoneSprite && System.Array.IndexOf(mirroringBones, paintBoneSprite.Bone) != -1)
             {
-                models.Add(new MirroringOption());
+                elms.Add(new MirroringOption());
             }
-            models.Add(new RemoveChoice());
+            elms.Add(new RemoveSelectOption());
 
-            var scroll = root.Get(DeviceKw.MenuOptions);
-            scroll.OpenView(ChoiceListPresenter.Instance, models, root, null, null, new(other: table, count: itemIndex));
-            ExitModelsMenuChoice.OpenLeftAnchorExit(root);
+            var scroll = manager.GetView(DeviceKw.MenuOptions);
+            scroll.OpenView(SelectOptionPresenter.Instance, elms, manager, null, null, new(other: table, count: itemIndex));
+            ExitListMenuSelectOption.OpenLeftAnchorExit(manager);
         }
 
-        private static void EditBone(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+        private static void EditBone(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         {
-            root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+            manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
 
             var table = (PaintBoneSpriteTable)arg.Other;
             var itemIndex = arg.Count;
-            root.OpenMenu(boneMenu, null, null, new(other: table, count: itemIndex));
+            manager.OpenMenu(boneMenu, null, null, new(other: table, count: itemIndex));
         }
 
-        private static void EditNormalSprite(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+        private static void EditNormalSprite(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         {
-            root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+            manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
 
             var table = (PaintBoneSpriteTable)arg.Other;
             var itemIndex = arg.Count;
-            root.OpenMenu(paintMenus[0], null, null, new(other: table, count: itemIndex));
+            manager.OpenMenu(paintMenus[0], null, null, new(other: table, count: itemIndex));
         }
 
-        private static void EditBackSprite(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+        private static void EditBackSprite(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         {
-            root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+            manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
 
             var table = (PaintBoneSpriteTable)arg.Other;
             var itemIndex = arg.Count;
-            root.OpenMenu(paintMenus[2], null, null, new(other: table, count: itemIndex));
+            manager.OpenMenu(paintMenus[2], null, null, new(other: table, count: itemIndex));
         }
 
-        private class BoneMenu : IModelsMenu, IModelListPresenter
+        private class BoneMenu : IListMenu, IElementPresenter
         {
-            private static object[] models;
+            private static object[] elms;
 
-            public void OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public void OpenMenu(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                if (models == null)
+                if (elms == null)
                 {
-                    models = new[]
+                    elms = new[]
                     {
                         BoneKeyword.Body.Name,
                         BoneKeyword.LeftArm.Name,
@@ -116,37 +116,37 @@ namespace Roguegard
                 var table = (PaintBoneSpriteTable)arg.Other;
                 var itemIndex = arg.Count;
                 var boneSprite = table.Items[itemIndex];
-                var scroll = root.Get(DeviceKw.MenuScroll);
-                scroll.OpenView(this, models, root, null, null, new(other: boneSprite));
-                ExitModelsMenuChoice.OpenLeftAnchorExit(root);
+                var scroll = manager.GetView(DeviceKw.MenuScroll);
+                scroll.OpenView(this, elms, manager, null, null, new(other: boneSprite));
+                ExitListMenuSelectOption.OpenLeftAnchorExit(manager);
             }
 
-            public string GetItemName(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public string GetItemName(object element, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                return (string)model;
+                return (string)element;
             }
 
-            public void ActivateItem(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public void ActivateItem(object element, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+                manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
 
                 var boneSprite = (PaintBoneSprite)arg.Other;
-                boneSprite.Bone = new BoneKeyword((string)model);
+                boneSprite.Bone = new BoneKeyword((string)element);
 
-                root.Back();
+                manager.Back();
             }
         }
 
-        private class PivotDistanceOption : IModelsMenuOptionText
+        private class PivotDistanceOption : IOptionsMenuText
         {
             public TMP_InputField.ContentType ContentType => TMP_InputField.ContentType.IntegerNumber;
 
-            public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public string GetName(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 return "中心点距離";
             }
 
-            public string GetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public string GetValue(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 var table = (PaintBoneSpriteTable)arg.Other;
                 var itemIndex = arg.Count;
@@ -154,7 +154,7 @@ namespace Roguegard
                 return boneSprite.PivotDistance.ToString();
             }
 
-            public void SetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg, string value)
+            public void SetValue(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg, string value)
             {
                 var table = (PaintBoneSpriteTable)arg.Other;
                 var itemIndex = arg.Count;
@@ -166,16 +166,16 @@ namespace Roguegard
             }
         }
 
-        private class IsFirstOption : IModelsMenuOptionCheckBox
+        private class IsFirstOption : IOptionsMenuCheckBox
         {
             public TMP_InputField.ContentType ContentType => TMP_InputField.ContentType.IntegerNumber;
 
-            public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public string GetName(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 return "上書き";
             }
 
-            public bool GetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public bool GetValue(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 var table = (PaintBoneSpriteTable)arg.Other;
                 var itemIndex = arg.Count;
@@ -183,7 +183,7 @@ namespace Roguegard
                 return boneSprite.IsFirst;
             }
 
-            public void SetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg, bool value)
+            public void SetValue(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg, bool value)
             {
                 var table = (PaintBoneSpriteTable)arg.Other;
                 var itemIndex = arg.Count;
@@ -192,16 +192,16 @@ namespace Roguegard
             }
         }
 
-        private class MirroringOption : IModelsMenuOptionCheckBox
+        private class MirroringOption : IOptionsMenuCheckBox
         {
             public TMP_InputField.ContentType ContentType => TMP_InputField.ContentType.IntegerNumber;
 
-            public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public string GetName(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 return "ミラーリング";
             }
 
-            public bool GetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public bool GetValue(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 var table = (PaintBoneSpriteTable)arg.Other;
                 var itemIndex = arg.Count;
@@ -209,7 +209,7 @@ namespace Roguegard
                 return boneSprite.Mirroring;
             }
 
-            public void SetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg, bool value)
+            public void SetValue(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg, bool value)
             {
                 var table = (PaintBoneSpriteTable)arg.Other;
                 var itemIndex = arg.Count;
@@ -218,27 +218,27 @@ namespace Roguegard
             }
         }
 
-        private class RemoveChoice : BaseModelsMenuChoice
+        private class RemoveSelectOption : BaseListMenuSelectOption
         {
             public override string Name => "<#f00>削除";
 
-            public override void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public override void Activate(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+                manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
 
                 var table = (PaintBoneSpriteTable)arg.Other;
                 var itemIndex = arg.Count;
                 table.RemoveAt(itemIndex);
-                root.Back();
+                manager.Back();
             }
         }
 
-        private class PaintMenu : IModelsMenu
+        private class PaintMenu : IListMenu
         {
             private readonly int directionIndex;
             private readonly object[] exit;
 
-            private static readonly DotterBoard[] models = new DotterBoard[1];
+            private static readonly DotterBoard[] elms = new DotterBoard[1];
             private static readonly Vector2[] pivots = new Vector2[2];
 
             public PaintMenu(int directionIndex)
@@ -246,10 +246,10 @@ namespace Roguegard
                 if (directionIndex < 0 || 4 <= directionIndex) throw new System.ArgumentOutOfRangeException(nameof(directionIndex));
 
                 this.directionIndex = directionIndex;
-                exit = new[] { new ExitModelsMenuChoice(Exit) };
+                exit = new[] { new ExitListMenuSelectOption(Exit) };
             }
 
-            public void OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public void OpenMenu(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 var table = (PaintBoneSpriteTable)arg.Other;
                 var itemIndex = arg.Count;
@@ -257,32 +257,32 @@ namespace Roguegard
                 switch (directionIndex)
                 {
                     case 0:
-                        models[0] = boneSprite.NormalFront;
+                        elms[0] = boneSprite.NormalFront;
                         break;
                     case 1:
-                        models[0] = boneSprite.NormalRear;
+                        elms[0] = boneSprite.NormalRear;
                         break;
                     case 2:
-                        models[0] = boneSprite.BackFront;
+                        elms[0] = boneSprite.BackFront;
                         break;
                     case 3:
-                        models[0] = boneSprite.BackRear;
+                        elms[0] = boneSprite.BackRear;
                         break;
                 }
-                var showsSplitLine = boneSprite.ShowsSplitLine(models[0], out pivots[0], out pivots[1]);
-                var paint = (IPaintMenuView)root.Get(DeviceKw.MenuPaint);
-                paint.OpenView(ChoiceListPresenter.Instance, models, root, self, null, new(other: table, count: itemIndex));
+                var showsSplitLine = boneSprite.ShowsSplitLine(elms[0], out pivots[0], out pivots[1]);
+                var paint = (IPaintElementsView)manager.GetView(DeviceKw.MenuPaint);
+                paint.OpenView(SelectOptionPresenter.Instance, elms, manager, self, null, new(other: table, count: itemIndex));
                 paint.ShowSplitLine(showsSplitLine, pivots);
-                var leftAnchor = root.Get(DeviceKw.MenuLeftAnchor);
-                leftAnchor.OpenView(ChoiceListPresenter.Instance, exit, root, self, null, new(other: table, count: itemIndex));
+                var leftAnchor = manager.GetView(DeviceKw.MenuLeftAnchor);
+                leftAnchor.OpenView(SelectOptionPresenter.Instance, exit, manager, self, null, new(other: table, count: itemIndex));
             }
 
-            private void Exit(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            private void Exit(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 var table = (PaintBoneSpriteTable)arg.Other;
                 var itemIndex = arg.Count;
                 var boneSprite = (PaintBoneSprite)table.Items[itemIndex];
-                var paint = (IPaintMenuView)root.Get(DeviceKw.MenuPaint);
+                var paint = (IPaintElementsView)manager.GetView(DeviceKw.MenuPaint);
                 switch (directionIndex)
                 {
                     case 0:

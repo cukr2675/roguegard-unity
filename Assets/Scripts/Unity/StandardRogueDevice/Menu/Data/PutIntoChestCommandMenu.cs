@@ -8,28 +8,28 @@ using Roguegard.Extensions;
 
 namespace RoguegardUnity
 {
-    public class PutIntoChestCommandMenu : IModelsMenu
+    public class PutIntoChestCommandMenu : IListMenu
     {
-        private readonly object[] choices;
+        private readonly object[] selectOptions;
 
         public PutIntoChestCommandMenu()
         {
-            choices = new object[] { new PutIn(), ExitModelsMenuChoice.Instance };
+            selectOptions = new object[] { new PutIn(), ExitListMenuSelectOption.Instance };
         }
 
-        void IModelsMenu.OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+        void IListMenu.OpenMenu(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         {
-            root.Get(DeviceKw.MenuCommand).OpenView(ChoiceListPresenter.Instance, choices, root, self, user, arg);
+            manager.GetView(DeviceKw.MenuCommand).OpenView(SelectOptionPresenter.Instance, selectOptions, manager, self, user, arg);
         }
 
-        private class PutIn : BaseModelsMenuChoice
+        private class PutIn : BaseListMenuSelectOption
         {
             public override string Name => "すべて入れる";
 
-            public override void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public override void Activate(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-                root.Done();
+                manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+                manager.Done();
 
                 var chestInfo = ChestInfo.GetInfo(arg.TargetObj);
                 var selfObjs = self.Space.Objs;
@@ -41,7 +41,7 @@ namespace RoguegardUnity
                     default(IActiveRogueMethodCaller).PutIn(self, arg.TargetObj, chestInfo, obj, 0f);
                 }
 
-                root.AddObject(DeviceKw.EnqueueSE, MainInfoKw.Put);
+                manager.AddObject(DeviceKw.EnqueueSE, MainInfoKw.Put);
                 RogueDevice.Add(DeviceKw.AppendText, "持っている");
                 RogueDevice.Add(DeviceKw.AppendText, arg.Tool);
                 RogueDevice.Add(DeviceKw.AppendText, "をすべて");

@@ -8,61 +8,61 @@ using Roguegard.Device;
 
 namespace RoguegardUnity
 {
-    internal class SelectFileCommandMenu : IModelsMenu
+    internal class SelectFileCommandMenu : IListMenu
     {
-        private readonly object[] models;
+        private readonly object[] elms;
 
         public SelectFileCommandMenu(SelectFileMenu.SelectCallback selectCallback)
         {
-            models = new object[]
+            elms = new object[]
             {
                 new Load() { selectCallback = selectCallback },
                 new Rename(),
                 new Delete(),
                 new Export(),
-                ExitModelsMenuChoice.Instance
+                ExitListMenuSelectOption.Instance
             };
         }
 
-        public void OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+        public void OpenMenu(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         {
-            var command = root.Get(DeviceKw.MenuCommand);
-            command.OpenView(ChoiceListPresenter.Instance, models, root, null, null, new(other: arg.Other));
+            var command = manager.GetView(DeviceKw.MenuCommand);
+            command.OpenView(SelectOptionPresenter.Instance, elms, manager, null, null, new(other: arg.Other));
 
-            var caption = root.Get(DeviceKw.MenuCaption);
+            var caption = manager.GetView(DeviceKw.MenuCaption);
             var text = RogueFile.GetName((string)arg.Other) + "ÇÉçÅ[ÉhÇµÇ‹Ç∑Ç©ÅH";
-            caption.OpenView(ChoiceListPresenter.Instance, Spanning<object>.Empty, root, null, null, new(other: text));
+            caption.OpenView(SelectOptionPresenter.Instance, Spanning<object>.Empty, manager, null, null, new(other: text));
         }
 
-        private class Load : BaseModelsMenuChoice
+        private class Load : BaseListMenuSelectOption
         {
             public override string Name => ":Load";
 
             public SelectFileMenu.SelectCallback selectCallback;
 
-            public override void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public override void Activate(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-                selectCallback(root, (string)arg.Other);
+                manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+                selectCallback(manager, (string)arg.Other);
             }
         }
 
-        private class Rename : BaseModelsMenuChoice
+        private class Rename : BaseListMenuSelectOption
         {
             public override string Name => ":Rename";
 
-            private readonly DialogModelsMenuChoice overwriteDialog;
+            private readonly DialogListMenuSelectOption overwriteDialog;
 
             public Rename()
             {
-                overwriteDialog = new DialogModelsMenuChoice("", ":RenameOverride", (":Yes", Overwrite)).AppendExit();
+                overwriteDialog = new DialogListMenuSelectOption("", ":RenameOverride", (":Yes", Overwrite)).AppendExit();
             }
 
-            public override void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public override void Activate(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-                root.Back();
-                SelectFileMenu.ShowSaving(root);
+                manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+                manager.Back();
+                SelectFileMenu.ShowSaving(manager);
 
                 var path = (string)arg.Other;
                 var newPath = Path.Combine(Path.GetDirectoryName(path), "NewPath.gard");
@@ -70,32 +70,32 @@ namespace RoguegardUnity
                 {
                     if (errorMsg != null)
                     {
-                        root.Back();
-                        SelectFileMenu.ShowErrorMsg(root, errorMsg);
+                        manager.Back();
+                        SelectFileMenu.ShowErrorMsg(manager, errorMsg);
                         return;
                     }
 
                     if (exists)
                     {
                         var newArg = new RogueMethodArgument(other: new Paths() { path = path, newPath = newPath });
-                        root.Back();
-                        root.OpenMenuAsDialog(overwriteDialog, self, user, newArg);
+                        manager.Back();
+                        manager.OpenMenuAsDialog(overwriteDialog, self, user, newArg);
                     }
                     else
                     {
-                        RogueFile.Move(path, newPath, errorMsg => SelectFileMenu.ReopenCallback(root, errorMsg));
+                        RogueFile.Move(path, newPath, errorMsg => SelectFileMenu.ReopenCallback(manager, errorMsg));
                     }
                 });
             }
 
-            private void Overwrite(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            private void Overwrite(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-                root.Back();
-                SelectFileMenu.ShowSaving(root);
+                manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+                manager.Back();
+                SelectFileMenu.ShowSaving(manager);
 
                 var paths = (Paths)arg.Other;
-                RogueFile.Move(paths.path, paths.newPath, errorMsg => SelectFileMenu.ReopenCallback(root, errorMsg), true);
+                RogueFile.Move(paths.path, paths.newPath, errorMsg => SelectFileMenu.ReopenCallback(manager, errorMsg), true);
             }
 
             private class Paths
@@ -104,42 +104,42 @@ namespace RoguegardUnity
             }
         }
 
-        private class Export : BaseModelsMenuChoice
+        private class Export : BaseListMenuSelectOption
         {
             public override string Name => ":Export";
 
-            public override void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public override void Activate(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-                root.Back();
-                SelectFileMenu.ShowLoading(root);
+                manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+                manager.Back();
+                SelectFileMenu.ShowLoading(manager);
 
-                RogueFile.Export((string)arg.Other, errorMsg => SelectFileMenu.ReopenCallback(root, errorMsg));
+                RogueFile.Export((string)arg.Other, errorMsg => SelectFileMenu.ReopenCallback(manager, errorMsg));
             }
         }
 
-        private class Delete : BaseModelsMenuChoice
+        private class Delete : BaseListMenuSelectOption
         {
             public override string Name => "<#f00>:Delete";
 
-            private static readonly DialogModelsMenuChoice nextMenu = new DialogModelsMenuChoice(("<#f00>:Delete", Yes)).AppendExit();
+            private static readonly DialogListMenuSelectOption nextMenu = new DialogListMenuSelectOption(("<#f00>:Delete", Yes)).AppendExit();
 
-            public override void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public override void Activate(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-                root.AddInt(DeviceKw.StartTalk, 0);
-                root.AddObject(DeviceKw.AppendText, ":DeleteMsg");
-                root.AddInt(DeviceKw.WaitEndOfTalk, 0);
-                root.OpenMenuAsDialog(nextMenu, null, null, arg);
+                manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+                manager.AddInt(DeviceKw.StartTalk, 0);
+                manager.AddObject(DeviceKw.AppendText, ":DeleteMsg");
+                manager.AddInt(DeviceKw.WaitEndOfTalk, 0);
+                manager.OpenMenuAsDialog(nextMenu, null, null, arg);
             }
 
-            private static void Yes(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            private static void Yes(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-                root.Back();
-                SelectFileMenu.ShowDeleting(root);
+                manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+                manager.Back();
+                SelectFileMenu.ShowDeleting(manager);
 
-                RogueFile.Delete((string)arg.Other, errorMsg => SelectFileMenu.ReopenCallback(root, errorMsg));
+                RogueFile.Delete((string)arg.Other, errorMsg => SelectFileMenu.ReopenCallback(manager, errorMsg));
             }
         }
     }

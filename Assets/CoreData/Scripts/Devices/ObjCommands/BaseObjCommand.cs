@@ -13,13 +13,13 @@ namespace Roguegard
     {
         public abstract string Name { get; }
 
-        IModelsMenuChoice IObjCommand.ModelsMenuChoice => menuChoice;
-        private readonly MenuChoice menuChoice;
+        IListMenuSelectOption IObjCommand.SelectOption => menuSelectOption;
+        private readonly MenuSelectOption menuSelectOption;
 
         protected BaseObjCommand()
         {
-            menuChoice = new MenuChoice();
-            menuChoice.parent = this;
+            menuSelectOption = new MenuSelectOption();
+            menuSelectOption.parent = this;
         }
 
         protected void EnqueueMessageRule(RogueObj self, IKeyword keyword)
@@ -36,17 +36,17 @@ namespace Roguegard
 
         public abstract ISkillDescription GetSkillDescription(RogueObj self, RogueObj tool);
 
-        private class MenuChoice : BaseModelsMenuChoice
+        private class MenuSelectOption : BaseListMenuSelectOption
         {
             public BaseObjCommand parent;
 
             public override string Name => parent.Name;
 
-            public override void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public override void Activate(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 var deviceInfo = RogueDeviceEffect.Get(self);
                 deviceInfo.SetDeviceCommand(parent, user, arg);
-                root.Done();
+                manager.Done();
                 RogueDevice.Add(DeviceKw.EnqueueSE, DeviceKw.Submit);
             }
         }

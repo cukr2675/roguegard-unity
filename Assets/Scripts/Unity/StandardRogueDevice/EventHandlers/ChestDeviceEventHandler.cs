@@ -10,11 +10,11 @@ namespace RoguegardUnity
     internal class ChestDeviceEventHandler : IStandardRogueDeviceEventHandler
     {
         private readonly StandardRogueDeviceComponentManager componentManager;
-        private readonly IModelsMenu putIntoChestMenu;
-        private readonly IModelsMenu takeOutFromChestMenu;
+        private readonly IListMenu putIntoChestMenu;
+        private readonly IListMenu takeOutFromChestMenu;
 
         public ChestDeviceEventHandler(
-            StandardRogueDeviceComponentManager componentManager, IModelsMenu putIntoChestMenu, IModelsMenu takeOutFromChestMenu)
+            StandardRogueDeviceComponentManager componentManager, IListMenu putIntoChestMenu, IListMenu takeOutFromChestMenu)
         {
             this.componentManager = componentManager;
             this.putIntoChestMenu = putIntoChestMenu;

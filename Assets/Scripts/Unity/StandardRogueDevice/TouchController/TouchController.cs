@@ -34,7 +34,7 @@ namespace RoguegardUnity
         private WalkStopper pointingWalkStopper;
         private WalkStopper dashForwardWalkStopper;
 
-        internal ModelsMenuEventManager EventManager => _menuController.EventManager;
+        internal ListMenuEventManager EventManager => _menuController.EventManager;
 
         /// <summary>
         /// 入力待機状態かを取得する。
@@ -83,7 +83,7 @@ namespace RoguegardUnity
             _inputController.AutoPlayIsEnabled = autoPlayIsEnabled;
         }
 
-        public void GetInfo(out MenuController menuController, out IModelsMenu putIntoChestMenu, out IModelsMenu takeOutFromChestMenu)
+        public void GetInfo(out MenuController menuController, out IListMenu putIntoChestMenu, out IListMenu takeOutFromChestMenu)
         {
             menuController = _menuController;
             _menuController.GetInfo(out putIntoChestMenu, out takeOutFromChestMenu);
@@ -386,7 +386,7 @@ namespace RoguegardUnity
             _inputController.ClearInput();
         }
 
-        public void OpenMenu(RogueObj player, IModelsMenu menu, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+        public void OpenMenu(RogueObj player, IListMenu menu, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         {
             _inputController.SetEnabled(false);
             _headerController.UpdateHeader(player);

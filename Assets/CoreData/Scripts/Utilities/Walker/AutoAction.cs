@@ -8,7 +8,7 @@ namespace Roguegard
 {
     internal static class AutoAction
     {
-        private static readonly List<IObjCommand> choices = new List<IObjCommand>();
+        private static readonly List<IObjCommand> options = new List<IObjCommand>();
         private static readonly List<RogueObj> items = new List<RogueObj>();
 
         public static bool TryOtherAction(RogueObj self, float activationDepth, float visibleRadius, RectInt room, IRogueRandom random)
@@ -69,10 +69,10 @@ namespace Roguegard
 
         private static bool AutoItem(RogueObj item, RogueObj self, RogueObj user, float activationDepth, float visibleRadius, RectInt room, IRogueRandom random)
         {
-            RoguegardSettings.ObjCommandTable.GetCommands(self, item, choices);
-            foreach (var choice in choices)
+            RoguegardSettings.ObjCommandTable.GetCommands(self, item, options);
+            foreach (var option in options)
             {
-                var skillDescription = choice.GetSkillDescription(self, item);
+                var skillDescription = option.GetSkillDescription(self, item);
                 if (skillDescription == null) continue;
 
                 using var predicator = skillDescription.Target?.GetPredicator(self, 0f, item);
@@ -84,7 +84,7 @@ namespace Roguegard
                 {
                     var positionIndex = random.Next(0, predicator.Positions.Count);
                     var arg = new RogueMethodArgument(tool: item, targetPosition: predicator.Positions[positionIndex]);
-                    var result = choice.CommandInvoke(self, user, activationDepth, arg);
+                    var result = option.CommandInvoke(self, user, activationDepth, arg);
                     if (result) return true;
                 }
             }
@@ -117,10 +117,10 @@ namespace Roguegard
         private static bool HypnosisAutoItem(
             RogueObj item, RogueObj self, RogueObj user, float activationDepth, float visibleRadius, RectInt room, IRogueRandom random)
         {
-            RoguegardSettings.ObjCommandTable.GetCommands(self, item, choices);
-            foreach (var choice in choices)
+            RoguegardSettings.ObjCommandTable.GetCommands(self, item, options);
+            foreach (var option in options)
             {
-                var skillDescription = choice.GetSkillDescription(self, item);
+                var skillDescription = option.GetSkillDescription(self, item);
                 if (skillDescription == null) continue;
 
                 var target = GetTarget(skillDescription.Target);
@@ -133,7 +133,7 @@ namespace Roguegard
                 {
                     var positionIndex = random.Next(0, predicator.Positions.Count);
                     var arg = new RogueMethodArgument(tool: item, targetPosition: predicator.Positions[positionIndex]);
-                    var result = choice.CommandInvoke(self, user, activationDepth, arg);
+                    var result = option.CommandInvoke(self, user, activationDepth, arg);
                     if (result) return true;
                 }
             }

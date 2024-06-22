@@ -26,46 +26,46 @@ namespace Roguegard.Rgpacks
             return false;
         }
 
-        private class Menu : BaseScrollModelsMenu<object>
+        private class Menu : BaseScrollListMenu<object>
         {
-            private static readonly object[] models = new object[]
+            private static readonly object[] elms = new object[]
             {
                 new AssetID(),
-                new SetStartingPlayerChoice(),
+                new SetStartingPlayerSelectOption(),
             };
 
             protected override IKeyword ViewKeyword => DeviceKw.MenuOptions;
 
-            protected override Spanning<object> GetModels(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            protected override Spanning<object> GetList(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                return models;
+                return elms;
             }
 
-            protected override string GetItemName(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            protected override string GetItemName(object element, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                return ChoiceListPresenter.Instance.GetItemName(model, root, self, user, arg);
+                return SelectOptionPresenter.Instance.GetItemName(element, manager, self, user, arg);
             }
 
-            protected override void ActivateItem(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            protected override void ActivateItem(object element, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                ChoiceListPresenter.Instance.ActivateItem(model, root, self, user, arg);
+                SelectOptionPresenter.Instance.ActivateItem(element, manager, self, user, arg);
             }
         }
 
-        private class AssetID : IModelsMenuOptionText
+        private class AssetID : IOptionsMenuText
         {
             public TMP_InputField.ContentType ContentType => TMP_InputField.ContentType.Standard;
 
-            public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public string GetName(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
                 => "アセットID";
 
-            public string GetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public string GetValue(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 var figurine = arg.TargetObj;
                 return NamingEffect.Get(figurine)?.Naming;
             }
 
-            public void SetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg, string value)
+            public void SetValue(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg, string value)
             {
                 var figurine = arg.TargetObj;
                 default(IActiveRogueMethodCaller).Affect(figurine, 1f, NamingEffect.Callback);
@@ -73,36 +73,36 @@ namespace Roguegard.Rgpacks
             }
         }
 
-        private class SetStartingPlayerChoice : IModelsMenuChoice
+        private class SetStartingPlayerSelectOption : IListMenuSelectOption
         {
             private static readonly EditMenu nextMenu = new();
 
-            public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public string GetName(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
                 => "キャラクリ設定";
 
-            public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public void Activate(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 var figurine = arg.TargetObj;
                 var builder = KyarakuriFigurineInfo.Get(figurine);
 
-                root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-                root.OpenMenu(nextMenu, self, user, new(targetObj: figurine, other: builder));
+                manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+                manager.OpenMenu(nextMenu, self, user, new(targetObj: figurine, other: builder));
             }
         }
 
-        private class EditMenu : IModelsMenu
+        private class EditMenu : IListMenu
         {
-            private readonly object[] models = new object[] { DialogModelsMenuChoice.CreateExit(Save) };
+            private readonly object[] elms = new object[] { DialogListMenuSelectOption.CreateExit(Save) };
 
-            public void OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public void OpenMenu(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 var builder = (CharacterCreationDataBuilder)arg.Other;
-                root.Get(DeviceKw.MenuCharacterCreation).OpenView(null, models, root, self, user, new(targetObj: arg.TargetObj, other: builder));
+                manager.GetView(DeviceKw.MenuCharacterCreation).OpenView(null, elms, manager, self, user, new(targetObj: arg.TargetObj, other: builder));
             }
 
-            private static void Save(IModelsMenuRoot root, RogueObj player, RogueObj user, in RogueMethodArgument arg)
+            private static void Save(IListMenuManager manager, RogueObj player, RogueObj user, in RogueMethodArgument arg)
             {
-                root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+                manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
 
                 if (arg.Other is CharacterCreationDataBuilder builder)
                 {
@@ -111,8 +111,8 @@ namespace Roguegard.Rgpacks
                     KyarakuriFigurineInfo.SetTo(figurine, builder);
                 }
 
-                root.Back();
-                root.Back();
+                manager.Back();
+                manager.Back();
             }
         }
     }

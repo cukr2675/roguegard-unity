@@ -8,33 +8,33 @@ using Roguegard.Extensions;
 
 namespace RoguegardUnity
 {
-    public class TakeOutFromChestCommandMenu : IModelsMenu
+    public class TakeOutFromChestCommandMenu : IListMenu
     {
-        private readonly object[] choices;
+        private readonly object[] selectOptions;
 
         public TakeOutFromChestCommandMenu()
         {
-            choices = new object[] { new TakeOut(), ExitModelsMenuChoice.Instance };
+            selectOptions = new object[] { new TakeOut(), ExitListMenuSelectOption.Instance };
         }
 
-        void IModelsMenu.OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+        void IListMenu.OpenMenu(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         {
-            root.Get(DeviceKw.MenuCommand).OpenView(ChoiceListPresenter.Instance, choices, root, self, user, arg);
+            manager.GetView(DeviceKw.MenuCommand).OpenView(SelectOptionPresenter.Instance, selectOptions, manager, self, user, arg);
         }
 
-        private class TakeOut : BaseModelsMenuChoice
+        private class TakeOut : BaseListMenuSelectOption
         {
             public override string Name => "取り出す";
 
-            public override void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public override void Activate(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-                root.Done();
+                manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+                manager.Done();
 
                 var chestInfo = ChestInfo.GetInfo(arg.TargetObj);
                 default(IActiveRogueMethodCaller).TakeOut(self, arg.TargetObj, chestInfo, arg.Tool, 0f);
 
-                root.AddObject(DeviceKw.EnqueueSE, MainInfoKw.PickUp);
+                manager.AddObject(DeviceKw.EnqueueSE, MainInfoKw.PickUp);
                 RogueDevice.Add(DeviceKw.AppendText, arg.TargetObj);
                 RogueDevice.Add(DeviceKw.AppendText, "から");
                 RogueDevice.Add(DeviceKw.AppendText, arg.Tool);

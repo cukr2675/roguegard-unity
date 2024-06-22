@@ -25,71 +25,71 @@ namespace Roguegard.Rgpacks
             return false;
         }
 
-        private class Menu : BaseScrollModelsMenu<object>
+        private class Menu : BaseScrollListMenu<object>
         {
-            private static readonly List<object> models = new();
+            private static readonly List<object> elms = new();
             private static readonly AssetID assetID = new();
             private static readonly RelatedChartID relatedChartID = new();
             private static readonly PointMenu nextMenu = new();
 
             protected override IKeyword ViewKeyword => DeviceKw.MenuOptions;
 
-            protected override Spanning<object> GetModels(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            protected override Spanning<object> GetList(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 var fairy = arg.TargetObj;
                 var eventFairyInfo = EvtFairyInfo.Get(fairy);
-                models.Clear();
-                models.Add(assetID);
-                models.Add(relatedChartID);
+                elms.Clear();
+                elms.Add(assetID);
+                elms.Add(relatedChartID);
                 for (int i = 0; i < eventFairyInfo.Points.Count; i++)
                 {
-                    models.Add(eventFairyInfo.Points[i]);
+                    elms.Add(eventFairyInfo.Points[i]);
                 }
-                models.Add(null);
-                return models;
+                elms.Add(null);
+                return elms;
             }
 
-            protected override string GetItemName(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            protected override string GetItemName(object element, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                if (model is EvtFairyInfo.Point point) return point.ChartCmn;
+                if (element is EvtFairyInfo.Point point) return point.ChartCmn;
                 else return "+ Point を追加";
             }
 
-            protected override void ActivateItem(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            protected override void ActivateItem(object element, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                if (model is EvtFairyInfo.Point point)
+                if (element is EvtFairyInfo.Point point)
                 {
-                    root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+                    manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
 
-                    root.OpenMenu(nextMenu, null, null, new(other: point));
+                    manager.OpenMenu(nextMenu, null, null, new(other: point));
 
                 }
                 else
                 {
-                    root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+                    manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
 
                     var fairy = arg.TargetObj;
                     var eventFairyInfo = EvtFairyInfo.Get(fairy);
                     eventFairyInfo.AddPoint();
-                    root.Reopen(null, null, arg);
+                    manager.Reopen(null, null, arg);
                 }
             }
         }
 
-        private class AssetID : IModelsMenuOptionText
+        private class AssetID : IOptionsMenuText
         {
             public TMP_InputField.ContentType ContentType => TMP_InputField.ContentType.Standard;
 
-            public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public string GetName(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
                 => "アセットID";
 
-            public string GetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public string GetValue(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 var fairy = arg.TargetObj;
                 return NamingEffect.Get(fairy)?.Naming;
             }
 
-            public void SetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg, string value)
+            public void SetValue(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg, string value)
             {
                 var fairy = arg.TargetObj;
                 default(IActiveRogueMethodCaller).Affect(fairy, 1f, NamingEffect.Callback);
@@ -97,21 +97,21 @@ namespace Roguegard.Rgpacks
             }
         }
 
-        private class RelatedChartID : IModelsMenuOptionText
+        private class RelatedChartID : IOptionsMenuText
         {
             public TMP_InputField.ContentType ContentType => TMP_InputField.ContentType.Standard;
 
-            public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public string GetName(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
                 => "チャートID";
 
-            public string GetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public string GetValue(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 var fairy = arg.TargetObj;
                 var eventFairyInfo = EvtFairyInfo.Get(fairy);
                 return eventFairyInfo.RelatedChart;
             }
 
-            public void SetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg, string value)
+            public void SetValue(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg, string value)
             {
                 var fairy = arg.TargetObj;
                 var eventFairyInfo = EvtFairyInfo.Get(fairy);
@@ -119,9 +119,9 @@ namespace Roguegard.Rgpacks
             }
         }
 
-        private class PointMenu : BaseScrollModelsMenu<object>
+        private class PointMenu : BaseScrollListMenu<object>
         {
-            private static readonly object[] models = new object[]
+            private static readonly object[] elms = new object[]
             {
                 new ConditionID(),
                 new AdditionalConditionID(),
@@ -132,140 +132,140 @@ namespace Roguegard.Rgpacks
 
             protected override IKeyword ViewKeyword => DeviceKw.MenuOptions;
 
-            protected override Spanning<object> GetModels(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            protected override Spanning<object> GetList(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                return models;
+                return elms;
             }
 
-            protected override string GetItemName(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            protected override string GetItemName(object element, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                return ChoiceListPresenter.Instance.GetItemName(model, root, self, user, arg);
+                return SelectOptionPresenter.Instance.GetItemName(element, manager, self, user, arg);
             }
 
-            protected override void ActivateItem(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            protected override void ActivateItem(object element, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                ChoiceListPresenter.Instance.ActivateItem(model, root, self, user, arg);
+                SelectOptionPresenter.Instance.ActivateItem(element, manager, self, user, arg);
             }
         }
 
-        private class ConditionID : IModelsMenuOptionText
+        private class ConditionID : IOptionsMenuText
         {
             public TMP_InputField.ContentType ContentType => TMP_InputField.ContentType.Standard;
 
-            public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public string GetName(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
                 => "条件Cmn";
 
-            public string GetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public string GetValue(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 var point = (EvtFairyInfo.Point)arg.Other;
                 return point.ChartCmn;
             }
 
-            public void SetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg, string value)
+            public void SetValue(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg, string value)
             {
                 var point = (EvtFairyInfo.Point)arg.Other;
                 point.ChartCmn = value;
             }
         }
 
-        private class AdditionalConditionID : IModelsMenuOptionText
+        private class AdditionalConditionID : IOptionsMenuText
         {
             public TMP_InputField.ContentType ContentType => TMP_InputField.ContentType.Standard;
 
-            public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public string GetName(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
                 => "追加条件ID";
 
-            public string GetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public string GetValue(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 var point = (EvtFairyInfo.Point)arg.Other;
                 return point.IfCmn.Cmn;
             }
 
-            public void SetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg, string value)
+            public void SetValue(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg, string value)
             {
                 var point = (EvtFairyInfo.Point)arg.Other;
                 point.IfCmn.Cmn = value;
             }
         }
 
-        private class AppearanceAssetID : IModelsMenuOptionText
+        private class AppearanceAssetID : IOptionsMenuText
         {
             public TMP_InputField.ContentType ContentType => TMP_InputField.ContentType.Standard;
 
-            public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public string GetName(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
                 => "見た目アセットID";
 
-            public string GetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public string GetValue(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 var point = (EvtFairyInfo.Point)arg.Other;
                 return point.Sprite;
             }
 
-            public void SetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg, string value)
+            public void SetValue(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg, string value)
             {
                 var point = (EvtFairyInfo.Point)arg.Other;
                 point.Sprite = value;
             }
         }
 
-        private class CategoryMenu : BaseScrollModelsMenu<EvtFairyInfo.Category>, IModelsMenuChoice
+        private class CategoryMenu : BaseScrollListMenu<EvtFairyInfo.Category>, IListMenuSelectOption
         {
             public TMP_InputField.ContentType ContentType => TMP_InputField.ContentType.Standard;
 
-            private static readonly EvtFairyInfo.Category[] models = new EvtFairyInfo.Category[]
+            private static readonly EvtFairyInfo.Category[] elms = new EvtFairyInfo.Category[]
             {
                 EvtFairyInfo.Category.ApplyTool,
                 EvtFairyInfo.Category.Trap
             };
 
-            public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public string GetName(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
                 => "カテゴリ";
 
-            public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public void Activate(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+                manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
 
                 var point = (EvtFairyInfo.Point)arg.Other;
-                root.OpenMenu(this, null, null, new(other: point));
+                manager.OpenMenu(this, null, null, new(other: point));
             }
 
-            protected override Spanning<EvtFairyInfo.Category> GetModels(
-                IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            protected override Spanning<EvtFairyInfo.Category> GetList(
+                IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                return models;
+                return elms;
             }
 
             protected override string GetItemName(
-                EvtFairyInfo.Category model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+                EvtFairyInfo.Category element, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                return model.ToString();
+                return element.ToString();
             }
 
             protected override void ActivateItem(
-                EvtFairyInfo.Category model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+                EvtFairyInfo.Category element, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+                manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
 
                 var point = (EvtFairyInfo.Point)arg.Other;
-                point.Category = model;
-                root.Back();
+                point.Category = element;
+                manager.Back();
             }
         }
 
-        private class CmnID : IModelsMenuOptionText
+        private class CmnID : IOptionsMenuText
         {
             public TMP_InputField.ContentType ContentType => TMP_InputField.ContentType.Standard;
 
-            public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public string GetName(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
                 => "Cmn";
 
-            public string GetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public string GetValue(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 var point = (EvtFairyInfo.Point)arg.Other;
                 return point.Cmn.Cmn;
             }
 
-            public void SetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg, string value)
+            public void SetValue(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg, string value)
             {
                 var point = (EvtFairyInfo.Point)arg.Other;
                 point.Cmn.Cmn = value;

@@ -63,47 +63,47 @@ MonoBehaviour:
     - _script: {fileID: 11500000, guid: 3ef4e797d718fac4a9e5c8161b00e942, type: 3}
       _ref:
         rid: 7978898133563211792
-  _equipChoices:
+  _equipOptions:
   - _script: {fileID: 11500000, guid: 4cc5cb7b15ae9ec4a9dc59a8a1f589d3, type: 3}
     _ref:
       rid: 992949827574693892
   - _script: {fileID: 11500000, guid: 07bbb3e4aeca2ae4e892e836cfd18f7c, type: 3}
     _ref:
       rid: 3336727568853762090
-  _unequipChoices:
+  _unequipOptions:
   - _script: {fileID: 11500000, guid: fc132a0bfdaa3314caefd877d8e32c67, type: 3}
     _ref:
       rid: 992949773875544382
   - _script: {fileID: 11500000, guid: 07bbb3e4aeca2ae4e892e836cfd18f7c, type: 3}
     _ref:
       rid: 3336727568853762091
-  _rideChoices:
+  _rideOptions:
   - _script: {fileID: 11500000, guid: 04becc5151784cd45a6870af8fd3d995, type: 3}
     _ref:
       rid: 992949773875544383
   - _script: {fileID: 11500000, guid: 07bbb3e4aeca2ae4e892e836cfd18f7c, type: 3}
     _ref:
       rid: 3336727568853762092
-  _unrideChoices:
+  _unrideOptions:
   - _script: {fileID: 11500000, guid: 53d240fbb9e20fa46a0d89ee2a5ae38f, type: 3}
     _ref:
       rid: 992949773875544384
   - _script: {fileID: 11500000, guid: 07bbb3e4aeca2ae4e892e836cfd18f7c, type: 3}
     _ref:
       rid: 3336727568853762093
-  _itemsChoices:
+  _itemsOptions:
   - _script: {fileID: 11500000, guid: 95ce0d9de64ae34418ef3d1d57d853ac, type: 3}
     _ref:
       rid: 992949827574693891
-  _groundChoices:
+  _groundOptions:
   - _script: {fileID: 11500000, guid: a9ef87e260ee014429ceaad2983235ec, type: 3}
     _ref:
       rid: 992949827574693890
-  _shotChoice:
+  _shotOption:
     _script: {fileID: 11500000, guid: e511e0aa7a554994480b56f1861b8b5b, type: 3}
     _ref:
       rid: 992949827574693888
-  _throwChoice:
+  _throwOption:
     _script: {fileID: 11500000, guid: 07bbb3e4aeca2ae4e892e836cfd18f7c, type: 3}
     _ref:
       rid: 992949827574693889

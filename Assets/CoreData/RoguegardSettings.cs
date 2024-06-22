@@ -61,20 +61,20 @@ namespace Roguegard
 
         public static IJsonSerializationSetting JsonSerialization { get; set; }
 
-        private static readonly List<IModelsMenuChoice> _dungeonChoices = new List<IModelsMenuChoice>();
+        private static readonly List<IListMenuSelectOption> _dungeonSelectOption = new List<IListMenuSelectOption>();
 
-        public static Spanning<IModelsMenuChoice> DungeonChoices => _dungeonChoices;
+        public static Spanning<IListMenuSelectOption> DungeonSelectOption => _dungeonSelectOption;
 
         private static readonly Dictionary<string, Dictionary<string, object>> _assetTables = new Dictionary<string, Dictionary<string, object>>();
 
-        public static void AddDungeonChoice(IModelsMenuChoice dungeonChoice)
+        public static void AddDungeonSelectOption(IListMenuSelectOption dungeonSelectOption)
         {
-            _dungeonChoices.Add(dungeonChoice);
+            _dungeonSelectOption.Add(dungeonSelectOption);
         }
 
-        public static void ClearDungeonChoices()
+        public static void ClearDungeonSelectOptions()
         {
-            _dungeonChoices.Clear();
+            _dungeonSelectOption.Clear();
         }
 
         public static void AddAssetTable(IReadOnlyDictionary<string, object> table)

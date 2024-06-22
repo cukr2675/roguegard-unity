@@ -8,7 +8,7 @@ using Roguegard.Device;
 
 namespace RoguegardUnity
 {
-    public class CaptionWindow : ModelsMenuView
+    public class CaptionWindow : ElementsView
     {
         [SerializeField] private CanvasGroup _canvasGroup = null;
         [SerializeField] private TMP_Text _text = null;
@@ -16,7 +16,7 @@ namespace RoguegardUnity
         public override CanvasGroup CanvasGroup => _canvasGroup;
 
         public override void OpenView<T>(
-            IModelListPresenter presenter, Spanning<T> modelList, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            IElementPresenter presenter, Spanning<T> list, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         {
             if (arg.Other is IRogueDescription description)
             {

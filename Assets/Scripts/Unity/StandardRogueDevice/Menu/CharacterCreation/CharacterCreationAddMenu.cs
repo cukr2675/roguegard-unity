@@ -9,17 +9,17 @@ using Roguegard.Device;
 
 namespace RoguegardUnity
 {
-    public class CharacterCreationAddMenu : BaseScrollModelsMenu<object>
+    public class CharacterCreationAddMenu : BaseScrollListMenu<object>
     {
         private readonly ICharacterCreationDatabase database;
-        private readonly List<object> models;
+        private readonly List<object> elms;
 
         private CharacterCreationDataBuilder builder;
 
         public CharacterCreationAddMenu(ICharacterCreationDatabase database)
         {
             this.database = database;
-            models = new List<object>();
+            elms = new List<object>();
         }
 
         public void Set(CharacterCreationDataBuilder builder)
@@ -27,50 +27,50 @@ namespace RoguegardUnity
             this.builder = builder;
         }
 
-        protected override Spanning<object> GetModels(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+        protected override Spanning<object> GetList(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         {
-            models.Clear();
-            AddOptionsTo(models, self, (System.Type)arg.Other, database);
-            return models;
+            elms.Clear();
+            AddOptionsTo(elms, self, (System.Type)arg.Other, database);
+            return elms;
         }
 
-        protected override string GetItemName(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+        protected override string GetItemName(object element, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         {
-            return ((IRogueDescription)model).Name;
+            return ((IRogueDescription)element).Name;
         }
 
-        protected override void ActivateItem(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+        protected override void ActivateItem(object element, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         {
             var builderType = (System.Type)arg.Other;
             if (builderType == typeof(AppearanceBuilder))
             {
                 var appearanceBuilder = builder.Appearances.Add();
-                appearanceBuilder.Option = (IAppearanceOption)model;
+                appearanceBuilder.Option = (IAppearanceOption)element;
             }
             else if (builderType == typeof(IntrinsicBuilder))
             {
                 var intrinsicBuilder = builder.Intrinsics.Add();
-                intrinsicBuilder.Option = (IIntrinsicOption)model;
+                intrinsicBuilder.Option = (IIntrinsicOption)element;
             }
             else if (builderType == typeof(StartingItemBuilder))
             {
                 var startingItemBuilder = builder.StartingItemTable.Add().Add();
-                startingItemBuilder.Option = (IStartingItemOption)model;
+                startingItemBuilder.Option = (IStartingItemOption)element;
                 startingItemBuilder.Stack = 1;
                 ConsumeStartingItemOptionObj(startingItemBuilder.Option, self);
             }
 
-            root.Back();
+            manager.Back();
         }
 
-        public static void AddOptionsTo(List<object> models, RogueObj player, object builder, ICharacterCreationDatabase database)
+        public static void AddOptionsTo(List<object> elms, RogueObj player, object builder, ICharacterCreationDatabase database)
         {
             if (builder is RaceBuilder)
             {
                 for (int i = 0; i < database.RaceOptions.Count; i++)
                 {
                     var option = database.RaceOptions[i];
-                    models.Add(option);
+                    elms.Add(option);
                 }
             }
             else if (builder is AppearanceBuilder appearanceBuilder)
@@ -80,7 +80,7 @@ namespace RoguegardUnity
                     var option = database.AppearanceOptions[i];
                     if (appearanceBuilder.Option != null && option.BoneName == appearanceBuilder.Option.BoneName)
                     {
-                        models.Add(option);
+                        elms.Add(option);
                     }
                 }
             }
@@ -89,7 +89,7 @@ namespace RoguegardUnity
                 for (int i = 0; i < database.IntrinsicOptions.Count; i++)
                 {
                     var option = database.IntrinsicOptions[i];
-                    models.Add(option);
+                    elms.Add(option);
                 }
             }
             else if (builder is StartingItemBuilder || builder is SingleItemMember)
@@ -101,16 +101,16 @@ namespace RoguegardUnity
                     if (item?.Main.BaseInfoSet is CharacterCreationInfoSet itemInfoSet &&
                         itemInfoSet.Data is IStartingItemOption option &&
                         item.Main.RogueEffects.Effects.Count <= 1 &&
-                        !models.Contains(option))
+                        !elms.Contains(option))
                     {
-                        models.Add(option);
+                        elms.Add(option);
                     }
                     if (item?.Main.BaseInfoSet is SewedEquipmentInfoSet &&
                         item.Main.RogueEffects.Effects.Count <= 1)
                     {
                         var objOption = new ObjStartingItemOption();
                         objOption.Obj = item.Clone();
-                        models.Add(objOption);
+                        elms.Add(objOption);
                         continue;
                     }
                 }
@@ -119,19 +119,19 @@ namespace RoguegardUnity
             {
                 for (int i = 0; i < alphabetTypeMember.Types.Count; i++)
                 {
-                    models.Add(i);
+                    elms.Add(i);
                 }
             }
         }
 
-        public static void AddOptionsTo(List<object> models, RogueObj player, System.Type builderType, ICharacterCreationDatabase database)
+        public static void AddOptionsTo(List<object> elms, RogueObj player, System.Type builderType, ICharacterCreationDatabase database)
         {
             if (builderType == typeof(RaceBuilder))
             {
                 for (int i = 0; i < database.AppearanceOptions.Count; i++)
                 {
                     var option = database.AppearanceOptions[i];
-                    models.Add(option);
+                    elms.Add(option);
                 }
             }
             else if (builderType == typeof(AppearanceBuilder))
@@ -141,7 +141,7 @@ namespace RoguegardUnity
                     var option = database.AppearanceOptions[i];
                     if (option.BoneName == BoneKeyword.Other)
                     {
-                        models.Add(option);
+                        elms.Add(option);
                     }
                 }
             }
@@ -150,7 +150,7 @@ namespace RoguegardUnity
                 for (int i = 0; i < database.IntrinsicOptions.Count; i++)
                 {
                     var option = database.IntrinsicOptions[i];
-                    models.Add(option);
+                    elms.Add(option);
                 }
             }
             else if (builderType == typeof(StartingItemBuilder) || builderType == typeof(SingleItemMember))
@@ -162,9 +162,9 @@ namespace RoguegardUnity
                     if (item?.Main.BaseInfoSet is CharacterCreationInfoSet itemInfoSet &&
                         itemInfoSet.Data is IStartingItemOption option &&
                         item.Main.RogueEffects.Effects.Count <= 1 &&
-                        !models.Contains(option))
+                        !elms.Contains(option))
                     {
-                        models.Add(option);
+                        elms.Add(option);
                         continue;
                     }
                     if (item?.Main.BaseInfoSet is SewedEquipmentInfoSet &&
@@ -172,7 +172,7 @@ namespace RoguegardUnity
                     {
                         var objOption = new ObjStartingItemOption();
                         objOption.Obj = item.Clone();
-                        models.Add(objOption);
+                        elms.Add(objOption);
                         continue;
                     }
                 }

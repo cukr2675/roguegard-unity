@@ -7,17 +7,17 @@ using Roguegard.Rgpacks;
 
 namespace Roguegard.Device
 {
-    public class PropertiedCmnMenu : IModelsMenu
+    public class PropertiedCmnMenu : IListMenu
     {
-        private readonly List<object> models = new();
+        private readonly List<object> elms = new();
         private static readonly AssetID assetID = new();
 
-        public void OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+        public void OpenMenu(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         {
             var cmnData = (PropertiedCmnData)arg.Other;
 
-            models.Clear();
-            models.Add(assetID);
+            elms.Clear();
+            elms.Add(assetID);
             if (!string.IsNullOrWhiteSpace(cmnData.Cmn))
             {
                 // コモンイベントのプロパティ一覧を取得するためにビルドする
@@ -31,38 +31,38 @@ namespace Roguegard.Device
                 {
                     if (pair.Value is NumberCmnProperty numberCmnProperty)
                     {
-                        models.Add(new NumberProperty(pair.Key, numberCmnProperty));
+                        elms.Add(new NumberProperty(pair.Key, numberCmnProperty));
                     }
                 }
             }
 
-            var options = root.Get(DeviceKw.MenuOptions);
-            options.OpenView(ChoiceListPresenter.Instance, models, root, self, user, arg);
+            var options = manager.GetView(DeviceKw.MenuOptions);
+            options.OpenView(SelectOptionPresenter.Instance, elms, manager, self, user, arg);
             options.SetPosition(0f);
-            ExitModelsMenuChoice.OpenLeftAnchorExit(root);
+            ExitListMenuSelectOption.OpenLeftAnchorExit(manager);
         }
 
-        private class AssetID : IModelsMenuOptionText
+        private class AssetID : IOptionsMenuText
         {
             public TMP_InputField.ContentType ContentType => TMP_InputField.ContentType.Standard;
 
-            public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public string GetName(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
                 => "アセットID";
 
-            public string GetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public string GetValue(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 var cmnData = (PropertiedCmnData)arg.Other;
                 return cmnData.Cmn;
             }
 
-            public void SetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg, string value)
+            public void SetValue(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg, string value)
             {
                 var cmnData = (PropertiedCmnData)arg.Other;
                 cmnData.Cmn = value;
             }
         }
 
-        private class NumberProperty : IModelsMenuOptionText
+        private class NumberProperty : IOptionsMenuText
         {
             private readonly string name;
             private readonly NumberCmnProperty cmnProperty;
@@ -75,15 +75,15 @@ namespace Roguegard.Device
                 this.cmnProperty = cmnProperty;
             }
 
-            public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public string GetName(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
                 => name;
 
-            public string GetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public string GetValue(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 return cmnProperty.Value.ToString();
             }
 
-            public void SetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg, string value)
+            public void SetValue(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg, string value)
             {
                 cmnProperty.Value = float.Parse(value);
             }

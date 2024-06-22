@@ -7,50 +7,50 @@ using Roguegard.Device;
 
 namespace RoguegardUnity
 {
-    public class PartyMemberMenu : IModelsMenu
+    public class PartyMemberMenu : IListMenu
     {
-        private readonly IModelsMenuChoice[] choices;
+        private readonly IListMenuSelectOption[] selectOptions;
 
         public PartyMemberMenu(ObjsMenu objsMenu, ObjCommandMenu objCommandMenu, SkillsMenu skillsMenu)
         {
-            choices = new IModelsMenuChoice[]
+            selectOptions = new IListMenuSelectOption[]
             {
                 objCommandMenu.Summary,
                 new Objs() { nextMenu = objsMenu.Items },
                 new Skill() { nextMenu = skillsMenu.Use },
-                ExitModelsMenuChoice.Instance
+                ExitListMenuSelectOption.Instance
             };
         }
 
-        void IModelsMenu.OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+        void IListMenu.OpenMenu(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         {
-            root.Get(DeviceKw.MenuCommand).OpenView(ChoiceListPresenter.Instance, choices, root, self, user, arg);
+            manager.GetView(DeviceKw.MenuCommand).OpenView(SelectOptionPresenter.Instance, selectOptions, manager, self, user, arg);
         }
 
-        private class Objs : BaseModelsMenuChoice
+        private class Objs : BaseListMenuSelectOption
         {
             public override string Name => ":Items";
 
-            public IModelsMenu nextMenu;
+            public IListMenu nextMenu;
 
-            public override void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public override void Activate(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 var openArg = new RogueMethodArgument(targetObj: self);
-                root.OpenMenu(nextMenu, self, null, openArg);
-                root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+                manager.OpenMenu(nextMenu, self, null, openArg);
+                manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
             }
         }
 
-        private class Skill : BaseModelsMenuChoice
+        private class Skill : BaseListMenuSelectOption
         {
             public override string Name => ":Skills";
 
-            public IModelsMenu nextMenu;
+            public IListMenu nextMenu;
 
-            public override void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public override void Activate(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                root.OpenMenu(nextMenu, self, null, RogueMethodArgument.Identity);
-                root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+                manager.OpenMenu(nextMenu, self, null, RogueMethodArgument.Identity);
+                manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
             }
         }
     }

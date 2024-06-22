@@ -22,10 +22,10 @@ namespace RoguegardUnity
 
         [SerializeField] private MessageController _messageController = null;
         [SerializeField] private CaptionWindow _captionWindow = null;
-        [SerializeField] private ModelsMenuView _thumbnailMenu = null;
-        [SerializeField] private ModelsMenuView _commandMenu = null;
-        [SerializeField] private ModelsMenuView _leftAnchorMenu = null;
-        [SerializeField] private ModelsMenuView _rightAnchorMenu = null;
+        [SerializeField] private ElementsView _thumbnailMenu = null;
+        [SerializeField] private ElementsView _commandMenu = null;
+        [SerializeField] private ElementsView _leftAnchorMenu = null;
+        [SerializeField] private ElementsView _rightAnchorMenu = null;
         [SerializeField] private FloorMenuView _floorMenu = null;
         [SerializeField] private LoadingMenuView _loadingMenu = null;
         [SerializeField] private SummaryMenuView _summaryMenu = null;
@@ -34,18 +34,18 @@ namespace RoguegardUnity
         [SerializeField] private CharacterCreationMenuView _characterCreationMenu = null;
         [SerializeField] private TextEditorMenuView _textEditorMenu = null;
         [SerializeField] private PaintMenuView _paintMenu = null;
-        [SerializeField] private ModelsMenuView _talkChoicesMenu = null;
+        [SerializeField] private ElementsView _talkSelectMenu = null;
         [SerializeField] private StatsWindow _statsWindow = null;
 
-        [SerializeField] private ScrollModelsMenuView _scrollMenu = null;
+        [SerializeField] private ScrollMenuView _scrollMenu = null;
 
         private MainMenu mainMenu;
         private LongDownMenu longDownMenu;
         private ObjsMenu objsMenu;
 
-        private StandardMenuRoot menuManager;
+        private StandardMenuManager menuManager;
 
-        internal ModelsMenuEventManager EventManager => menuManager.EventManager;
+        internal ListMenuEventManager EventManager => menuManager.EventManager;
 
         public bool IsDone => menuManager.IsDone;
 
@@ -81,7 +81,7 @@ namespace RoguegardUnity
             var scrollSensitivity = 64f;
             SetScrollSensitivity(scrollSensitivity);
 
-            var table = new Dictionary<IKeyword, ModelsMenuView>();
+            var table = new Dictionary<IKeyword, ElementsView>();
             table.Add(DeviceKw.MenuCaption, _captionWindow);
             table.Add(DeviceKw.MenuThumbnail, _thumbnailMenu);
             table.Add(DeviceKw.MenuScroll, _scrollMenu);
@@ -98,8 +98,8 @@ namespace RoguegardUnity
             table.Add(DeviceKw.MenuPaint, _paintMenu);
             table.Add(DeviceKw.MenuLog, _messageController.LogView);
             table.Add(DeviceKw.MenuTalk, _messageController.TalkView);
-            table.Add(DeviceKw.MenuTalkChoices, _talkChoicesMenu);
-            menuManager = new StandardMenuRoot(_touchMask, _messageController, _statsWindow, soundController, table);
+            table.Add(DeviceKw.MenuTalkSelect, _talkSelectMenu);
+            menuManager = new StandardMenuManager(_touchMask, _messageController, _statsWindow, soundController, table);
 
             _touchMask.gameObject.SetActive(touchMaskIsEnabled);
         }
@@ -109,7 +109,7 @@ namespace RoguegardUnity
             EventManager.MenuSubject = menuSubject;
         }
 
-        public void GetInfo(out IModelsMenu putIntoChestMenu, out IModelsMenu takeOutFromChestMenu)
+        public void GetInfo(out IListMenu putIntoChestMenu, out IListMenu takeOutFromChestMenu)
         {
             putIntoChestMenu = objsMenu.PutIntoChest;
             takeOutFromChestMenu = objsMenu.TakeOutFromChest;
@@ -169,7 +169,7 @@ namespace RoguegardUnity
             }
         }
 
-        public void OpenInitialMenu(IModelsMenu menu, RogueObj self, RogueObj user, in RogueMethodArgument arg, bool enableTouchMask = true)
+        public void OpenInitialMenu(IListMenu menu, RogueObj self, RogueObj user, in RogueMethodArgument arg, bool enableTouchMask = true)
         {
             menuManager.OpenInitialMenu(menu, self, user, arg, enableTouchMask);
         }

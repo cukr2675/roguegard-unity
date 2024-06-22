@@ -25,39 +25,39 @@ namespace Roguegard
             }
         }
 
-        private class Menu : BaseScrollModelsMenu<RoguePost>
+        private class Menu : BaseScrollListMenu<RoguePost>
         {
             private static readonly DetailsMenu nextMenu = new();
 
-            protected override Spanning<RoguePost> GetModels(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            protected override Spanning<RoguePost> GetList(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 var info = PostboxInfo.Get(arg.Tool);
                 return info.Posts;
             }
 
-            protected override string GetItemName(RoguePost model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            protected override string GetItemName(RoguePost element, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                return model.Name;
+                return element.Name;
             }
 
-            protected override void ActivateItem(RoguePost model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            protected override void ActivateItem(RoguePost element, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                root.OpenMenu(nextMenu, null, null, new(other: model));
+                manager.OpenMenu(nextMenu, null, null, new(other: element));
             }
         }
 
-        private class DetailsMenu : IModelsMenu
+        private class DetailsMenu : IListMenu
         {
-            private List<object> models = new();
+            private List<object> elms = new();
 
-            public void OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public void OpenMenu(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 var post = arg.Other;
 
-                models.Clear();
-                models.Add(post);
-                root.Get(DeviceKw.MenuDetails).OpenView(ChoiceListPresenter.Instance, models, root, null, null, RogueMethodArgument.Identity);
-                ExitModelsMenuChoice.OpenLeftAnchorExit(root);
+                elms.Clear();
+                elms.Add(post);
+                manager.GetView(DeviceKw.MenuDetails).OpenView(SelectOptionPresenter.Instance, elms, manager, null, null, RogueMethodArgument.Identity);
+                ExitListMenuSelectOption.OpenLeftAnchorExit(manager);
             }
         }
     }

@@ -24,114 +24,114 @@ namespace Roguegard.Rgpacks
             return false;
         }
 
-        private class Menu : BaseScrollModelsMenu<object>
+        private class Menu : BaseScrollListMenu<object>
         {
-            private readonly object[] models;
+            private readonly object[] elms;
 
             public Menu(SpQuestMonolithBeApplied parent)
             {
-                models = new object[]
+                elms = new object[]
                 {
-                    new ShotChoice() { parent = parent },
-                    new SetMainChartChoice(),
-                    new PlaytestChoice(),
-                    new LeaveChoice(),
+                    new ShotSelectOption() { parent = parent },
+                    new SetMainChartSelectOption(),
+                    new PlaytestSelectOption(),
+                    new LeaveSelectOption(),
                 };
             }
 
-            protected override Spanning<object> GetModels(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            protected override Spanning<object> GetList(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                return models;
+                return elms;
             }
 
-            protected override string GetItemName(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            protected override string GetItemName(object element, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                return ChoiceListPresenter.Instance.GetItemName(model, root, self, user, arg);
+                return SelectOptionPresenter.Instance.GetItemName(element, manager, self, user, arg);
             }
 
-            protected override void ActivateItem(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            protected override void ActivateItem(object element, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                ChoiceListPresenter.Instance.ActivateItem(model, root, self, user, arg);
+                SelectOptionPresenter.Instance.ActivateItem(element, manager, self, user, arg);
             }
         }
 
-        private class ShotChoice : BaseScrollModelsMenu<ScriptableStartingItem>, IModelsMenuChoice
+        private class ShotSelectOption : BaseScrollListMenu<ScriptableStartingItem>, IListMenuSelectOption
         {
             public SpQuestMonolithBeApplied parent;
 
-            public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public string GetName(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
                 => "ショップ";
 
-            public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public void Activate(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-                root.OpenMenu(this, self, null, RogueMethodArgument.Identity);
+                manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+                manager.OpenMenu(this, self, null, RogueMethodArgument.Identity);
             }
 
-            protected override Spanning<ScriptableStartingItem> GetModels(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            protected override Spanning<ScriptableStartingItem> GetList(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 return parent._shopItems;
             }
 
             protected override string GetItemName(
-                ScriptableStartingItem startingItem, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+                ScriptableStartingItem startingItem, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 return startingItem.Name;
             }
 
             protected override void ActivateItem(
-                ScriptableStartingItem startingItem, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+                ScriptableStartingItem startingItem, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-                root.AddObject(DeviceKw.AppendText, startingItem);
-                root.AddObject(DeviceKw.AppendText, "を手に入れた\n");
+                manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+                manager.AddObject(DeviceKw.AppendText, startingItem);
+                manager.AddObject(DeviceKw.AppendText, "を手に入れた\n");
                 startingItem.Option.CreateObj(startingItem, self, Vector2Int.zero, RogueRandom.Primary);
             }
         }
 
-        private class SetMainChartChoice : IModelsMenuChoice, IModelsMenu
+        private class SetMainChartSelectOption : IListMenuSelectOption, IListMenu
         {
-            private readonly object[] models = new object[]
+            private readonly object[] elms = new object[]
             {
                 new AssetID(),
             };
 
-            public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public string GetName(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
                 => "メインチャート設定";
 
-            public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public void Activate(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+                manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
 
                 var monolith = arg.Tool;
-                root.OpenMenu(this, null, null, new(tool: monolith));
+                manager.OpenMenu(this, null, null, new(tool: monolith));
             }
 
-            public void OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public void OpenMenu(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 var monolith = arg.Tool;
 
-                var options = root.Get(DeviceKw.MenuOptions);
-                options.OpenView(ChoiceListPresenter.Instance, models, root, null, null, new(tool: monolith));
+                var options = manager.GetView(DeviceKw.MenuOptions);
+                options.OpenView(SelectOptionPresenter.Instance, elms, manager, null, null, new(tool: monolith));
                 options.SetPosition(0f);
-                ExitModelsMenuChoice.OpenLeftAnchorExit(root);
+                ExitListMenuSelectOption.OpenLeftAnchorExit(manager);
             }
 
-            private class AssetID : IModelsMenuOptionText
+            private class AssetID : IOptionsMenuText
             {
                 public TMP_InputField.ContentType ContentType => TMP_InputField.ContentType.Standard;
 
-                public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+                public string GetName(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
                     => "アセットID";
 
-                public string GetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+                public string GetValue(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
                 {
                     var monolith = arg.Tool;
                     var info = SpQuestMonolithInfo.Get(monolith);
                     return info.MainChart;
                 }
 
-                public void SetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg, string value)
+                public void SetValue(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg, string value)
                 {
                     var monolith = arg.Tool;
                     var info = SpQuestMonolithInfo.Get(monolith);
@@ -140,12 +140,12 @@ namespace Roguegard.Rgpacks
             }
         }
 
-        private class PlaytestChoice : IModelsMenuChoice
+        private class PlaytestSelectOption : IListMenuSelectOption
         {
-            public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public string GetName(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
                 => "テストプレイ";
 
-            public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public void Activate(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 var monolith = arg.Tool;
                 var spQuestAtelier = monolith.Location;
@@ -154,19 +154,19 @@ namespace Roguegard.Rgpacks
             }
         }
 
-        private class LeaveChoice : IModelsMenuChoice
+        private class LeaveSelectOption : IListMenuSelectOption
         {
-            public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public string GetName(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
                 => "アトリエから出る";
 
-            public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public void Activate(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-                root.AddObject(DeviceKw.EnqueueSE, CategoryKw.DownStairs);
+                manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+                manager.AddObject(DeviceKw.EnqueueSE, CategoryKw.DownStairs);
                 default(IActiveRogueMethodCaller).LocateSavePoint(self, null, 0f, RogueWorldSavePointInfo.Instance, true);
                 var memberInfo = LobbyMemberList.GetMemberInfo(self);
                 memberInfo.SavePoint = RogueWorldSavePointInfo.Instance;
-                root.Done();
+                manager.Done();
             }
         }
     }

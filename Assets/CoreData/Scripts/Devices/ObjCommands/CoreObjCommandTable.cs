@@ -11,45 +11,45 @@ namespace Roguegard
     {
         [SerializeField] private Item[] _items = null;
 
-        [SerializeField] private ScriptField<IObjCommand>[] _equipChoices;
-        [SerializeField] private ScriptField<IObjCommand>[] _unequipChoices;
+        [SerializeField] private ScriptField<IObjCommand>[] _equipOptions;
+        [SerializeField] private ScriptField<IObjCommand>[] _unequipOptions;
 
-        [SerializeField] private ScriptField<IObjCommand>[] _rideChoices;
-        [SerializeField] private ScriptField<IObjCommand>[] _unrideChoices;
+        [SerializeField] private ScriptField<IObjCommand>[] _rideOptions;
+        [SerializeField] private ScriptField<IObjCommand>[] _unrideOptions;
 
-        [SerializeField] private ScriptField<IObjCommand>[] _itemsChoices;
-        [SerializeField] private ScriptField<IObjCommand>[] _groundChoices;
+        [SerializeField] private ScriptField<IObjCommand>[] _itemsOptions;
+        [SerializeField] private ScriptField<IObjCommand>[] _groundOptions;
 
-        [SerializeField] private ScriptField<IObjCommand> _shotChoice;
-        [SerializeField] private ScriptField<IObjCommand> _throwChoice;
+        [SerializeField] private ScriptField<IObjCommand> _shotOption;
+        [SerializeField] private ScriptField<IObjCommand> _throwOption;
 
-        private Dictionary<IKeyword, IObjCommand[]> choiceTable;
+        private Dictionary<IKeyword, IObjCommand[]> optionTable;
 
         private IKeyword[] _categories;
         public override Spanning<IKeyword> Categories => _categories ?? Initialize();
 
-        public override IObjCommand PickUpCommand => _groundChoices[0].Ref;
+        public override IObjCommand PickUpCommand => _groundOptions[0].Ref;
 
         private IKeyword[] Initialize()
         {
-            choiceTable = new Dictionary<IKeyword, IObjCommand[]>();
+            optionTable = new Dictionary<IKeyword, IObjCommand[]>();
             foreach (var item in _items)
             {
-                choiceTable.Add(item.Keyword, item.GetCommands());
+                optionTable.Add(item.Keyword, item.GetCommands());
             }
 
-            return _categories = new IKeyword[] { CategoryKw.Equipment, CategoryKw.Vehicle }.Concat(choiceTable.Keys).ToArray();
+            return _categories = new IKeyword[] { CategoryKw.Equipment, CategoryKw.Vehicle }.Concat(optionTable.Keys).ToArray();
         }
 
         public override void GetCommands(RogueObj self, RogueObj tool, IList<IObjCommand> commands)
         {
-            if (choiceTable == null) { Initialize(); }
+            if (optionTable == null) { Initialize(); }
 
             commands.Clear();
 
             if (tool.Location == self.Location)
             {
-                AddRange(_groundChoices);
+                AddRange(_groundOptions);
             }
 
             var category = tool.Main.Category;
@@ -64,29 +64,29 @@ namespace Roguegard
             {
                 if (toolEquipmentInfo.EquipIndex >= 0)
                 {
-                    AddRange(_unequipChoices);
+                    AddRange(_unequipOptions);
                 }
                 else
                 {
-                    AddRange(_equipChoices);
+                    AddRange(_equipOptions);
                 }
             }
             else if (category == CategoryKw.Vehicle && toolVehicleInfo != null)
             {
                 if (toolVehicleInfo.Rider != null)
                 {
-                    AddRange(_unrideChoices);
+                    AddRange(_unrideOptions);
                 }
                 else
                 {
-                    AddRange(_rideChoices);
+                    AddRange(_rideOptions);
                 }
             }
-            else if (choiceTable.TryGetValue(category, out var categoryChoices))
+            else if (optionTable.TryGetValue(category, out var categoryOptions))
             {
-                for (int i = 0; i < categoryChoices.Length; i++)
+                for (int i = 0; i < categoryOptions.Length; i++)
                 {
-                    commands.Add(categoryChoices[i]);
+                    commands.Add(categoryOptions[i]);
                 }
             }
             else
@@ -103,10 +103,10 @@ namespace Roguegard
                     // 装備中の武器に対応した弾なら「投げる」ではなく「撃つ」にする。
                     for (int i = 0; i < commands.Count; i++)
                     {
-                        if (commands[i].GetType() != _throwChoice.Ref.GetType()) continue;
+                        if (commands[i].GetType() != _throwOption.Ref.GetType()) continue;
 
                         commands.RemoveAt(i);
-                        commands.Insert(i, _shotChoice.Ref);
+                        commands.Insert(i, _shotOption.Ref);
                         break;
                     }
                 }
@@ -114,7 +114,7 @@ namespace Roguegard
 
             if (tool.Location == self)
             {
-                AddRange(_itemsChoices);
+                AddRange(_itemsOptions);
             }
 
             void AddRange(ScriptField<IObjCommand>[] array)

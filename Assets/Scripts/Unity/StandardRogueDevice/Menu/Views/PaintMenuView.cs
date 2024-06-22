@@ -9,7 +9,7 @@ using Roguegard.Device;
 
 namespace RoguegardUnity
 {
-    public class PaintMenuView : ModelsMenuView, IPaintMenuView
+    public class PaintMenuView : ElementsView, IPaintElementsView
     {
         [SerializeField] private CanvasGroup _canvasGroup = null;
         [SerializeField] private DotterToolSet _toolSet = null;
@@ -54,14 +54,14 @@ namespace RoguegardUnity
         }
 
         public override void OpenView<T>(
-            IModelListPresenter presenter, Spanning<T> modelList, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            IElementPresenter presenter, Spanning<T> list, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         {
-            SetArg(root, self, user, arg);
+            SetArg(manager, self, user, arg);
             baseTable = (PaintBoneSpriteTable)arg.Other;
             _boards.Clear();
-            for (int i = 0; i < modelList.Count; i++)
+            for (int i = 0; i < list.Count; i++)
             {
-                if (!(modelList[i] is DotterBoard board)) continue;
+                if (!(list[i] is DotterBoard board)) continue;
 
                 _boards.Add(board);
             }

@@ -8,11 +8,11 @@ using Roguegard.Device;
 
 namespace RoguegardUnity
 {
-    public class TalkWindow : ModelsMenuView, IPointerClickHandler
+    public class TalkWindow : ElementsView, IPointerClickHandler
     {
         [SerializeField] private CanvasGroup _canvasGroup = null;
         [SerializeField] private MessageText _text = null;
-        [SerializeField] private CanvasGroup _talkChoicesCanvasGroup = null;
+        [SerializeField] private CanvasGroup _talkSelectCanvasGroup = null;
 
         public override CanvasGroup CanvasGroup => _canvasGroup;
 
@@ -22,7 +22,7 @@ namespace RoguegardUnity
 
         public bool IsShow => _canvasGroup.blocksRaycasts;
 
-        private IModelListPresenter presenter;
+        private IElementPresenter presenter;
         private object source;
         private bool waitEndOfTalk;
 
@@ -30,11 +30,11 @@ namespace RoguegardUnity
         public override void SetPosition(float position) { }
 
         public override void OpenView<T>(
-            IModelListPresenter presenter, Spanning<T> modelList, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            IElementPresenter presenter, Spanning<T> list, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         {
             this.presenter = presenter;
-            source = modelList[0];
-            SetArg(root, self, user, arg);
+            source = list[0];
+            SetArg(manager, self, user, arg);
             MenuController.Show(_canvasGroup, true);
         }
 
@@ -84,7 +84,7 @@ namespace RoguegardUnity
 
         public void WaitEndOfTalk()
         {
-            MenuController.Show(_talkChoicesCanvasGroup, false);
+            MenuController.Show(_talkSelectCanvasGroup, false);
             waitEndOfTalk = true;
         }
 
@@ -101,7 +101,7 @@ namespace RoguegardUnity
 
             if (waitEndOfTalk && _text.WaitsInput)
             {
-                MenuController.Show(_talkChoicesCanvasGroup, true);
+                MenuController.Show(_talkSelectCanvasGroup, true);
                 waitEndOfTalk = false;
                 _text.Input();
             }

@@ -43,29 +43,29 @@ namespace Roguegard
             return 0;
         }
 
-        private class RogueMenu : IModelsMenu, IModelListPresenter
+        private class RogueMenu : IListMenu, IElementPresenter
         {
             public LobbyMerchantBeApplied parent;
 
-            public void OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public void OpenMenu(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                var scroll = root.Get(DeviceKw.MenuScroll);
-                scroll.OpenView(this, parent._items, root, self, user, arg);
-                ExitModelsMenuChoice.OpenLeftAnchorExit(root);
+                var scroll = manager.GetView(DeviceKw.MenuScroll);
+                scroll.OpenView(this, parent._items, manager, self, user, arg);
+                ExitListMenuSelectOption.OpenLeftAnchorExit(manager);
             }
 
-            public string GetItemName(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public string GetItemName(object element, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                return ((ScriptableStartingItem)model).Name;
+                return ((ScriptableStartingItem)element).Name;
             }
 
-            public void ActivateItem(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public void ActivateItem(object element, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-                root.AddObject(DeviceKw.AppendText, model);
-                root.AddObject(DeviceKw.AppendText, "‚ðŽè‚É“ü‚ê‚½\n");
+                manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+                manager.AddObject(DeviceKw.AppendText, element);
+                manager.AddObject(DeviceKw.AppendText, "‚ðŽè‚É“ü‚ê‚½\n");
 
-                var startingItem = (ScriptableStartingItem)model;
+                var startingItem = (ScriptableStartingItem)element;
                 startingItem.Option.CreateObj(startingItem, self, Vector2Int.zero, RogueRandom.Primary);
             }
         }

@@ -48,36 +48,36 @@ namespace RoguegardUnity
         /// <summary>
         /// ログ表示 → リザルト表示 → ロビーへ帰還
         /// </summary>
-        private class GameOverMenu : IModelsMenu
+        private class GameOverMenu : IListMenu
         {
-            private static readonly object[] choices = new[] { new Next() };
+            private static readonly object[] selectOptions = new[] { new Next() };
 
-            public void OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public void OpenMenu(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 // ログ表示
-                root.Get(DeviceKw.MenuLog).OpenView(ChoiceListPresenter.Instance, choices, root, self, user, arg);
+                manager.GetView(DeviceKw.MenuLog).OpenView(SelectOptionPresenter.Instance, selectOptions, manager, self, user, arg);
             }
 
-            private class Next : BaseModelsMenuChoice
+            private class Next : BaseListMenuSelectOption
             {
                 public override string Name => null;
 
                 private static readonly NextMenu nextMenu = new();
 
-                public override void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+                public override void Activate(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
                 {
-                    root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-                    root.OpenMenu(nextMenu, self, user, arg);
+                    manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+                    manager.OpenMenu(nextMenu, self, user, arg);
                 }
             }
 
-            private class NextMenu : IModelsMenu
+            private class NextMenu : IListMenu
             {
-                public void OpenMenu(IModelsMenuRoot root, RogueObj player, RogueObj user, in RogueMethodArgument arg)
+                public void OpenMenu(IListMenuManager manager, RogueObj player, RogueObj user, in RogueMethodArgument arg)
                 {
                     // リザルト表示 → ロビーへ帰還
-                    var summary = (IResultMenuView)root.Get(DeviceKw.MenuSummary);
-                    summary.OpenView(ChoiceListPresenter.Instance, Spanning<object>.Empty, root, player, user, arg);
+                    var summary = (IResultMenuView)manager.GetView(DeviceKw.MenuSummary);
+                    summary.OpenView(SelectOptionPresenter.Instance, Spanning<object>.Empty, manager, player, user, arg);
                     summary.SetGameOver(player, arg.TargetObj);
                 }
             }

@@ -17,7 +17,7 @@ namespace RoguegardUnity
 
         private readonly Queue<object> others;
 
-        private readonly ModelsMenuQueue menus;
+        private readonly ListMenuQueue menus;
         private readonly Stack<RogueObj> hideCharacters;
 
 #if DEBUG
@@ -43,7 +43,7 @@ namespace RoguegardUnity
             integers = new Queue<int>();
             numbers = new Queue<float>();
             others = new Queue<object>();
-            menus = new ModelsMenuQueue();
+            menus = new ListMenuQueue();
             hideCharacters = new Stack<RogueObj>();
             Clear();
         }
@@ -78,7 +78,7 @@ namespace RoguegardUnity
             EnqueueStackTrace();
         }
 
-        public void EnqueueMenu(IModelsMenu menu, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+        public void EnqueueMenu(IListMenu menu, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         {
             others.Enqueue(DeviceKw.EnqueueMenu);
             menus.Enqueue(menu, self, user, arg);
@@ -142,7 +142,7 @@ namespace RoguegardUnity
 #endif
         }
 
-        public void DequeueMenu(out IModelsMenu menu, out RogueObj self, out RogueObj user, out RogueMethodArgument arg)
+        public void DequeueMenu(out IListMenu menu, out RogueObj self, out RogueObj user, out RogueMethodArgument arg)
         {
             menus.Dequeue(out menu, out self, out user, out arg);
         }

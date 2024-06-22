@@ -37,50 +37,50 @@ namespace Roguegard
             return 0;
         }
 
-        public class RogueMenu : IModelsMenu
+        public class RogueMenu : IListMenu
         {
             private static readonly Presenter presenter = new Presenter();
-            private static readonly List<object> models = new List<object>();
+            private static readonly List<object> elms = new List<object>();
 
-            public void OpenMenu(IModelsMenuRoot root, RogueObj player, RogueObj user, in RogueMethodArgument arg)
+            public void OpenMenu(IListMenuManager manager, RogueObj player, RogueObj user, in RogueMethodArgument arg)
             {
-                models.Clear();
+                elms.Clear();
                 for (int i = 0; i < 4; i++)
                 {
                     var quest = RoguegardSettings.DungeonQuestGenerator.GenerateQuest(RogueRandom.Primary);
-                    models.Add(quest);
+                    elms.Add(quest);
                 }
 
-                var scroll = root.Get(DeviceKw.MenuScroll);
-                scroll.OpenView(presenter, models, root, player, null, RogueMethodArgument.Identity);
-                ExitModelsMenuChoice.OpenLeftAnchorExit(root);
+                var scroll = manager.GetView(DeviceKw.MenuScroll);
+                scroll.OpenView(presenter, elms, manager, player, null, RogueMethodArgument.Identity);
+                ExitListMenuSelectOption.OpenLeftAnchorExit(manager);
             }
 
-            private class Presenter : IModelListPresenter
+            private class Presenter : IElementPresenter
             {
                 private static readonly QuestViewMenu nextMenu = new QuestViewMenu();
 
-                public string GetItemName(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+                public string GetItemName(object element, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
                 {
-                    return ((DungeonQuest)model).Caption;
+                    return ((DungeonQuest)element).Caption;
                 }
 
-                public void ActivateItem(object model, IModelsMenuRoot root, RogueObj player, RogueObj user, in RogueMethodArgument arg)
+                public void ActivateItem(object element, IListMenuManager manager, RogueObj player, RogueObj user, in RogueMethodArgument arg)
                 {
-                    var quest = (DungeonQuest)model;
+                    var quest = (DungeonQuest)element;
 
-                    root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-                    root.OpenMenu(nextMenu, player, null, new(other: quest));
+                    manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+                    manager.OpenMenu(nextMenu, player, null, new(other: quest));
                 }
             }
 
-            private class QuestViewMenu : IModelsMenu
+            private class QuestViewMenu : IListMenu
             {
-                public void OpenMenu(IModelsMenuRoot root, RogueObj player, RogueObj user, in RogueMethodArgument arg)
+                public void OpenMenu(IListMenuManager manager, RogueObj player, RogueObj user, in RogueMethodArgument arg)
                 {
                     var quest = (DungeonQuest)arg.Other;
-                    var summary = (IDungeonQuestMenuView)root.Get(DeviceKw.MenuSummary);
-                    summary.OpenView(ChoiceListPresenter.Instance, Spanning<object>.Empty, root, player, null, RogueMethodArgument.Identity);
+                    var summary = (IDungeonQuestMenuView)manager.GetView(DeviceKw.MenuSummary);
+                    summary.OpenView(SelectOptionPresenter.Instance, Spanning<object>.Empty, manager, player, null, RogueMethodArgument.Identity);
                     summary.SetQuest(player, quest, true);
                 }
             }

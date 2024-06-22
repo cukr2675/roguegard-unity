@@ -9,16 +9,16 @@ using Roguegard.Device;
 
 namespace RoguegardUnity
 {
-    public class OptionsMenuView : ModelsMenuView
+    public class OptionsMenuView : ElementsView
     {
         [SerializeField] private CanvasGroup _canvasGroup = null;
         [SerializeField] private ScrollRect _scrollRect = null;
         [SerializeField] private DotterColorPicker _colorPicker = null;
         [Space]
-        [SerializeField] private ModelsMenuViewItemButton _choicePrefab = null;
-        [SerializeField] private ModelsMenuViewOptionSlider _sliderPrefab = null;
-        [SerializeField] private ModelsMenuViewOptionText _textPrefab = null;
-        [SerializeField] private ModelsMenuViewOptionCheckBox _checkBoxPrefab = null;
+        [SerializeField] private ViewElementButton _selectOptionPrefab = null;
+        [SerializeField] private OptionsViewSlider _sliderPrefab = null;
+        [SerializeField] private OptionsViewText _textPrefab = null;
+        [SerializeField] private OptionsViewCheckBox _checkBoxPrefab = null;
 
         public override CanvasGroup CanvasGroup => _canvasGroup;
 
@@ -33,9 +33,9 @@ namespace RoguegardUnity
         }
 
         public override void OpenView<T>(
-            IModelListPresenter presenter, Spanning<T> modelList, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            IElementPresenter presenter, Spanning<T> list, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         {
-            SetArg(root, self, user, arg);
+            SetArg(manager, self, user, arg);
             foreach (var item in items)
             {
                 Destroy(item);
@@ -43,10 +43,10 @@ namespace RoguegardUnity
             items.Clear();
 
             var sumHeight = 0f;
-            for (int i = 0; i < modelList.Count; i++)
+            for (int i = 0; i < list.Count; i++)
             {
-                var model = modelList[i];
-                if (model is IModelsMenuOptionSlider slider)
+                var element = list[i];
+                if (element is IOptionsMenuSlider slider)
                 {
                     var item = Instantiate(_sliderPrefab, _scrollRect.content);
                     SetTransform((RectTransform)item.transform, ref sumHeight);
@@ -56,7 +56,7 @@ namespace RoguegardUnity
                     item.Initialize(label, value, value => slider.SetValue(Root, Self, User, Arg, value));
                     items.Add(item.gameObject);
                 }
-                else if (model is IModelsMenuOptionText text)
+                else if (element is IOptionsMenuText text)
                 {
                     var item = Instantiate(_textPrefab, _scrollRect.content);
                     SetTransform((RectTransform)item.transform, ref sumHeight);
@@ -66,7 +66,7 @@ namespace RoguegardUnity
                     item.Initialize(label, value, value => text.SetValue(Root, Self, User, Arg, value));
                     items.Add(item.gameObject);
                 }
-                else if (model is IModelsMenuOptionCheckBox checkBox)
+                else if (element is IOptionsMenuCheckBox checkBox)
                 {
                     var item = Instantiate(_checkBoxPrefab, _scrollRect.content);
                     SetTransform((RectTransform)item.transform, ref sumHeight);
@@ -76,9 +76,9 @@ namespace RoguegardUnity
                     item.Initialize(label, value, value => checkBox.SetValue(Root, Self, User, Arg, value));
                     items.Add(item.gameObject);
                 }
-                else if (model is IModelsMenuOptionColor color)
+                else if (element is IOptionsMenuColor color)
                 {
-                    var item = Instantiate(_choicePrefab, _scrollRect.content);
+                    var item = Instantiate(_selectOptionPrefab, _scrollRect.content);
                     SetTransform((RectTransform)item.transform, ref sumHeight);
 
                     item.Initialize(this);
@@ -87,11 +87,11 @@ namespace RoguegardUnity
                 }
                 else
                 {
-                    var item = Instantiate(_choicePrefab, _scrollRect.content);
+                    var item = Instantiate(_selectOptionPrefab, _scrollRect.content);
                     SetTransform((RectTransform)item.transform, ref sumHeight);
 
                     item.Initialize(this);
-                    item.SetItem(presenter, model);
+                    item.SetItem(presenter, element);
                     items.Add(item.gameObject);
                 }
             }
@@ -117,27 +117,27 @@ namespace RoguegardUnity
             _scrollRect.verticalNormalizedPosition = position;
         }
 
-        private class ColorPresenter : IModelListPresenter
+        private class ColorPresenter : IElementPresenter
         {
             public OptionsMenuView parent;
-            private IModelsMenuOptionColor currentColor;
+            private IOptionsMenuColor currentColor;
 
-            public string GetItemName(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public string GetItemName(object element, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                var color = (IModelsMenuOptionColor)model;
-                return color.GetName(root, self, user, arg);
+                var color = (IOptionsMenuColor)element;
+                return color.GetName(manager, self, user, arg);
             }
 
-            public void ActivateItem(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public void ActivateItem(object element, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                currentColor = (IModelsMenuOptionColor)model;
-                var value = currentColor.GetValue(root, self, user, arg);
+                currentColor = (IOptionsMenuColor)element;
+                var value = currentColor.GetValue(manager, self, user, arg);
                 parent._colorPicker.Open(new ShiftableColor(value, false), true);
             }
 
-            public void OnColorChanged(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg, Color value)
+            public void OnColorChanged(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg, Color value)
             {
-                currentColor.SetValue(root, self, user, arg, value);
+                currentColor.SetValue(manager, self, user, arg, value);
             }
         }
     }

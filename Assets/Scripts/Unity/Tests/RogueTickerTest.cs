@@ -91,7 +91,7 @@ namespace RoguegardUnity
             }
 
             public void AddInt(IKeyword keyword, int value) { }
-            public void AddMenu(IModelsMenu menu, RogueObj self, RogueObj user, in RogueMethodArgument arg) { }
+            public void AddMenu(IListMenu menu, RogueObj self, RogueObj user, in RogueMethodArgument arg) { }
             public void AddObject(IKeyword keyword, object obj) { }
             public void AddWork(IKeyword keyword, in RogueCharacterWork work) { }
             public void Close() { }

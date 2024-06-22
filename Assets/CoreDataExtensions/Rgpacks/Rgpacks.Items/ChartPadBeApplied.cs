@@ -25,70 +25,70 @@ namespace Roguegard.Rgpacks
             return false;
         }
 
-        private class Menu : IModelsMenu, IModelListPresenter
+        private class Menu : IListMenu, IElementPresenter
         {
-            private static readonly List<object> models = new();
+            private static readonly List<object> elms = new();
             private static readonly PropertiedCmnMenu nextMenu = new();
             private static readonly object assetId = new AssetID();
 
-            public void OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public void OpenMenu(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 var chartPad = arg.TargetObj;
                 var chartPadInfo = ChartPadInfo.Get(chartPad);
-                models.Clear();
-                models.Add(assetId);
+                elms.Clear();
+                elms.Add(assetId);
                 for (int i = 0; i < chartPadInfo.Cmns.Count; i++)
                 {
-                    models.Add(chartPadInfo.Cmns[i]);
+                    elms.Add(chartPadInfo.Cmns[i]);
                 }
-                models.Add(null);
-                var options = root.Get(DeviceKw.MenuOptions);
-                options.OpenView(this, models, root, self, user, new(targetObj: chartPad));
+                elms.Add(null);
+                var options = manager.GetView(DeviceKw.MenuOptions);
+                options.OpenView(this, elms, manager, self, user, new(targetObj: chartPad));
                 options.SetPosition(0f);
-                ExitModelsMenuChoice.OpenLeftAnchorExit(root);
+                ExitListMenuSelectOption.OpenLeftAnchorExit(manager);
             }
 
-            public string GetItemName(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public string GetItemName(object element, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                if (model == null) return "+ イベントを追加";
-                else return ((PropertiedCmnData)model).Cmn;
+                if (element == null) return "+ イベントを追加";
+                else return ((PropertiedCmnData)element).Cmn;
             }
 
-            public void ActivateItem(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public void ActivateItem(object element, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 var chartPad = arg.TargetObj;
                 var chartPadInfo = ChartPadInfo.Get(chartPad);
 
-                if (model == null)
+                if (element == null)
                 {
-                    root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+                    manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
 
                     chartPadInfo.AddCmn();
-                    root.Reopen(null, null, arg);
+                    manager.Reopen(null, null, arg);
                 }
                 else
                 {
-                    root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+                    manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
 
-                    var cmnData = (PropertiedCmnData)model;
-                    root.OpenMenu(nextMenu, self, null, new(other: cmnData));
+                    var cmnData = (PropertiedCmnData)element;
+                    manager.OpenMenu(nextMenu, self, null, new(other: cmnData));
                 }
             }
 
-            private class AssetID : IModelsMenuOptionText
+            private class AssetID : IOptionsMenuText
             {
                 public TMP_InputField.ContentType ContentType => TMP_InputField.ContentType.Standard;
 
-                public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+                public string GetName(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
                     => "アセットID";
 
-                public string GetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+                public string GetValue(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
                 {
                     var chartPad = arg.TargetObj;
                     return NamingEffect.Get(chartPad)?.Naming;
                 }
 
-                public void SetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg, string value)
+                public void SetValue(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg, string value)
                 {
                     var chartPad = arg.TargetObj;
                     default(IActiveRogueMethodCaller).Affect(chartPad, 1f, NamingEffect.Callback);

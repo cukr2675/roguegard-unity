@@ -10,60 +10,60 @@ namespace RoguegardUnity
     /// <summary>
     /// <see cref="RogueObj"/> に対するコマンド（食べる・投げるなど）を選択するメニュー。
     /// </summary>
-    public class ObjCommandMenu : IModelsMenu
+    public class ObjCommandMenu : IListMenu
     {
         private readonly List<IObjCommand> commands;
-        private readonly List<object> choices;
+        private readonly List<object> selectOptions;
 
-        public IModelsMenuChoice Summary { get; }
-        public IModelsMenuChoice Details { get; }
+        public IListMenuSelectOption Summary { get; }
+        public IListMenuSelectOption Details { get; }
 
         public ObjCommandMenu()
         {
             commands = new List<IObjCommand>();
-            choices = new List<object>();
+            selectOptions = new List<object>();
 
-            Summary = new SummaryChoice();
-            Details = new DetailsChoice();
+            Summary = new SummarySelectOption();
+            Details = new DetailsSelectOption();
         }
 
-        void IModelsMenu.OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+        void IListMenu.OpenMenu(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         {
             var tool = arg.Tool;
             RoguegardSettings.ObjCommandTable.GetCommands(self, tool, commands);
-            choices.Clear();
+            selectOptions.Clear();
             foreach (var command in commands)
             {
-                choices.Add(command.ModelsMenuChoice);
+                selectOptions.Add(command.SelectOption);
             }
-            choices.Add(Details);
-            choices.Add(ExitModelsMenuChoice.Instance);
-            root.Get(DeviceKw.MenuCommand).OpenView(ChoiceListPresenter.Instance, choices, root, self, user, arg);
+            selectOptions.Add(Details);
+            selectOptions.Add(ExitListMenuSelectOption.Instance);
+            manager.GetView(DeviceKw.MenuCommand).OpenView(SelectOptionPresenter.Instance, selectOptions, manager, self, user, arg);
 
-            var caption = root.Get(DeviceKw.MenuCaption);
+            var caption = manager.GetView(DeviceKw.MenuCaption);
             caption.OpenView(null, Spanning<object>.Empty, null, null, null, new(other: tool.Main.InfoSet));
         }
 
-        private class SummaryChoice : BaseModelsMenuChoice
+        private class SummarySelectOption : BaseListMenuSelectOption
         {
             public override string Name => "つよさ";
 
             private Menu menu = new();
 
-            public override void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public override void Activate(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 var openArg = new RogueMethodArgument(targetObj: arg.TargetObj, other: arg.Other);
-                root.OpenMenu(menu, self, null, openArg);
-                root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+                manager.OpenMenu(menu, self, null, openArg);
+                manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
             }
 
-            private class Menu : IModelsMenu
+            private class Menu : IListMenu
             {
-                public void OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+                public void OpenMenu(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
                 {
-                    var summary = (SummaryMenuView)root.Get(DeviceKw.MenuSummary);
-                    summary.OpenView(ChoiceListPresenter.Instance, Spanning<object>.Empty, root, self, user, arg);
-                    ExitModelsMenuChoice.OpenLeftAnchorExit(root);
+                    var summary = (SummaryMenuView)manager.GetView(DeviceKw.MenuSummary);
+                    summary.OpenView(SelectOptionPresenter.Instance, Spanning<object>.Empty, manager, self, user, arg);
+                    ExitListMenuSelectOption.OpenLeftAnchorExit(manager);
 
                     if (arg.TargetObj != null)
                     {
@@ -81,39 +81,39 @@ namespace RoguegardUnity
             }
         }
 
-        private class DetailsChoice : IModelsMenuChoice
+        private class DetailsSelectOption : IListMenuSelectOption
         {
             private static readonly Menu nextMenu = new Menu();
 
-            string IModelsMenuChoice.GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            string IListMenuSelectOption.GetName(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 if (arg.Tool?.Main.InfoSet.Details == null) return "<#808080>説明";
                 else return "説明";
             }
 
-            void IModelsMenuChoice.Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            void IListMenuSelectOption.Activate(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 if (arg.Tool?.Main.InfoSet.Details == null)
                 {
-                    root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Cancel);
+                    manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Cancel);
                     return;
                 }
 
-                root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-                root.OpenMenu(nextMenu, self, user, arg);
+                manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+                manager.OpenMenu(nextMenu, self, user, arg);
             }
 
-            private class Menu : IModelsMenu
+            private class Menu : IListMenu
             {
-                private static readonly object[] models = new object[0];
+                private static readonly object[] elms = new object[0];
 
-                public void OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+                public void OpenMenu(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
                 {
-                    var details = (DetailsMenuView)root.Get(DeviceKw.MenuDetails);
-                    details.OpenView(ChoiceListPresenter.Instance, models, root, self, user, arg);
+                    var details = (DetailsMenuView)manager.GetView(DeviceKw.MenuDetails);
+                    details.OpenView(SelectOptionPresenter.Instance, elms, manager, self, user, arg);
                     Debug.Log(arg.TargetObj + " , " + arg.Tool);
                     details.SetObj(arg.Tool ?? arg.TargetObj);
-                    ExitModelsMenuChoice.OpenLeftAnchorExit(root);
+                    ExitListMenuSelectOption.OpenLeftAnchorExit(manager);
                 }
             }
         }

@@ -28,82 +28,82 @@ namespace Roguegard.Rgpacks
             return false;
         }
 
-        private class Menu : BaseScrollModelsMenu<object>
+        private class Menu : BaseScrollListMenu<object>
         {
             public ScriptableStartingItem _newFloor;
 
-            private static readonly List<object> models = new();
+            private static readonly List<object> elms = new();
             private static readonly AssetID assetID = new();
             private static readonly FloorMenu nextMenu = new();
 
             protected override IKeyword ViewKeyword => DeviceKw.MenuOptions;
 
-            protected override Spanning<object> GetModels(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            protected override Spanning<object> GetList(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 var diorama = arg.TargetObj;
                 var dioramaFloorObjs = diorama.Space.Objs;
-                models.Clear();
-                models.Add(assetID);
+                elms.Clear();
+                elms.Add(assetID);
                 for (int i = 0; i < dioramaFloorObjs.Count; i++)
                 {
                     var dioramaFloorObj = dioramaFloorObjs[i];
                     if (dioramaFloorObj == null) continue;
 
-                    models.Add(dioramaFloorObj);
+                    elms.Add(dioramaFloorObj);
                 }
-                models.Add(null);
-                return models;
+                elms.Add(null);
+                return elms;
             }
 
-            protected override string GetItemName(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            protected override string GetItemName(object element, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                if (model is RogueObj dioramaFloorObj)
+                if (element is RogueObj dioramaFloorObj)
                 {
                     return dioramaFloorObj.GetName();
                 }
-                else if (model == null)
+                else if (element == null)
                 {
                     return "+ ŠK‘w‚ð’Ç‰Á";
                 }
                 else
                 {
-                    return ChoiceListPresenter.Instance.GetItemName(model, root, self, user, arg);
+                    return SelectOptionPresenter.Instance.GetItemName(element, manager, self, user, arg);
                 }
             }
 
-            protected override void ActivateItem(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            protected override void ActivateItem(object element, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                if (model is RogueObj dioramaFloorObj)
+                if (element is RogueObj dioramaFloorObj)
                 {
-                    root.OpenMenu(nextMenu, self, null, new(targetObj: dioramaFloorObj));
+                    manager.OpenMenu(nextMenu, self, null, new(targetObj: dioramaFloorObj));
                 }
-                else if (model == null)
+                else if (element == null)
                 {
                     var diorama = arg.TargetObj;
                     _newFloor.Option.CreateObj(_newFloor, diorama, Vector2Int.zero, RogueRandom.Primary);
-                    root.Reopen(self, user, arg);
+                    manager.Reopen(self, user, arg);
                 }
                 else
                 {
-                    ChoiceListPresenter.Instance.ActivateItem(model, root, self, user, arg);
+                    SelectOptionPresenter.Instance.ActivateItem(element, manager, self, user, arg);
                 }
             }
         }
 
-        private class AssetID : IModelsMenuOptionText
+        private class AssetID : IOptionsMenuText
         {
             public TMP_InputField.ContentType ContentType => TMP_InputField.ContentType.Standard;
 
-            public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public string GetName(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
                 => "ƒAƒZƒbƒgID";
 
-            public string GetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public string GetValue(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 var diorama = arg.TargetObj;
                 return NamingEffect.Get(diorama)?.Naming;
             }
 
-            public void SetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg, string value)
+            public void SetValue(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg, string value)
             {
                 var diorama = arg.TargetObj;
                 default(IActiveRogueMethodCaller).Affect(diorama, 1f, NamingEffect.Callback);
@@ -111,46 +111,46 @@ namespace Roguegard.Rgpacks
             }
         }
 
-        private class FloorMenu : BaseScrollModelsMenu<object>
+        private class FloorMenu : BaseScrollListMenu<object>
         {
             public ScriptableStartingItem _newFloor;
 
-            private static readonly object[] models = new object[]
+            private static readonly object[] elms = new object[]
             {
                 new AssetID(),
-                new EnterChoice()
+                new EnterSelectOption()
             };
 
             protected override IKeyword ViewKeyword => DeviceKw.MenuOptions;
 
-            protected override Spanning<object> GetModels(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            protected override Spanning<object> GetList(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                return models;
+                return elms;
             }
 
-            protected override string GetItemName(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            protected override string GetItemName(object element, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                return ChoiceListPresenter.Instance.GetItemName(model, root, self, user, arg);
+                return SelectOptionPresenter.Instance.GetItemName(element, manager, self, user, arg);
             }
 
-            protected override void ActivateItem(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            protected override void ActivateItem(object element, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                ChoiceListPresenter.Instance.ActivateItem(model, root, self, user, arg);
+                SelectOptionPresenter.Instance.ActivateItem(element, manager, self, user, arg);
             }
         }
 
-        private class EnterChoice : IModelsMenuChoice
+        private class EnterSelectOption : IListMenuSelectOption
         {
             public TMP_InputField.ContentType ContentType => TMP_InputField.ContentType.Standard;
 
-            public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public string GetName(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
                 => "“ü‚é";
 
-            public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public void Activate(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 var dioramaFloor = arg.TargetObj;
                 SpaceUtility.TryLocate(self, dioramaFloor, Vector2Int.one);
-                root.Done();
+                manager.Done();
             }
         }
     }

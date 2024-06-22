@@ -25,46 +25,46 @@ namespace Roguegard.Rgpacks
             return false;
         }
 
-        private class Menu : IModelsMenu, IModelListPresenter
+        private class Menu : IListMenu, IElementPresenter
         {
-            private static readonly List<object> models = new List<object>()
+            private static readonly List<object> elms = new List<object>()
             {
                 new AssetID(),
                 new RaceWeight()
             };
 
-            public void OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public void OpenMenu(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                var options = root.Get(DeviceKw.MenuOptions);
-                options.OpenView(this, models, root, self, user, arg);
+                var options = manager.GetView(DeviceKw.MenuOptions);
+                options.OpenView(this, elms, manager, self, user, arg);
                 options.SetPosition(0f);
-                ExitModelsMenuChoice.OpenLeftAnchorExit(root);
+                ExitListMenuSelectOption.OpenLeftAnchorExit(manager);
             }
 
-            public string GetItemName(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public string GetItemName(object element, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                return ChoiceListPresenter.Instance.GetItemName(model, root, self, user, arg);
+                return SelectOptionPresenter.Instance.GetItemName(element, manager, self, user, arg);
             }
 
-            public void ActivateItem(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public void ActivateItem(object element, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                ChoiceListPresenter.Instance.ActivateItem(model, root, self, user, arg);
+                SelectOptionPresenter.Instance.ActivateItem(element, manager, self, user, arg);
             }
 
-            private class AssetID : IModelsMenuOptionText
+            private class AssetID : IOptionsMenuText
             {
                 public TMP_InputField.ContentType ContentType => TMP_InputField.ContentType.Standard;
 
-                public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+                public string GetName(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
                     => "アセットID";
 
-                public string GetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+                public string GetValue(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
                 {
                     var kyarakuriClay = arg.TargetObj;
                     return NamingEffect.Get(kyarakuriClay)?.Naming;
                 }
 
-                public void SetValue(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg, string value)
+                public void SetValue(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg, string value)
                 {
                     var kyarakuriClay = arg.TargetObj;
                     default(IActiveRogueMethodCaller).Affect(kyarakuriClay, 1f, NamingEffect.Callback);
@@ -72,17 +72,17 @@ namespace Roguegard.Rgpacks
                 }
             }
 
-            private class RaceWeight : IModelsMenuChoice
+            private class RaceWeight : IListMenuSelectOption
             {
                 private static readonly PropertiedCmnMenu nextMenu = new();
 
-                public string GetName(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+                public string GetName(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
                     => "重さ";
 
-                public void Activate(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+                public void Activate(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
                 {
                     var kyarakuriClayInfo = (KyarakuriClayInfo)arg.Other;
-                    root.OpenMenu(nextMenu, self, null, new(other: kyarakuriClayInfo.RaceWeight));
+                    manager.OpenMenu(nextMenu, self, null, new(other: kyarakuriClayInfo.RaceWeight));
                 }
             }
         }

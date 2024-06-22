@@ -43,13 +43,13 @@ namespace Roguegard
             return false;
         }
 
-        private class ResultRogueMenu : IModelsMenu
+        private class ResultRogueMenu : IListMenu
         {
-            public void OpenMenu(IModelsMenuRoot root, RogueObj player, RogueObj user, in RogueMethodArgument arg)
+            public void OpenMenu(IListMenuManager manager, RogueObj player, RogueObj user, in RogueMethodArgument arg)
             {
                 var dungeon = player.Location;
-                var summary = (IResultMenuView)root.Get(DeviceKw.MenuSummary);
-                summary.OpenView(ChoiceListPresenter.Instance, Spanning<object>.Empty, root, player, user, arg);
+                var summary = (IResultMenuView)manager.GetView(DeviceKw.MenuSummary);
+                summary.OpenView(SelectOptionPresenter.Instance, Spanning<object>.Empty, manager, player, user, arg);
                 summary.SetResult(player, dungeon);
             }
         }

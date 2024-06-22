@@ -16,37 +16,37 @@ namespace Roguegard
             return false;
         }
 
-        private class Menu : IModelsMenu
+        private class Menu : IListMenu
         {
             private static readonly object[] exit = new object[]
             {
-                new ActionModelsMenuChoice("é¿çs", Execute),
-                new ActionModelsMenuChoice("ï¬Ç∂ÇÈ", Exit),
+                new ActionListMenuSelectOption("é¿çs", Execute),
+                new ActionListMenuSelectOption("ï¬Ç∂ÇÈ", Exit),
             };
 
-            public void OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public void OpenMenu(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
                 var memo = arg.Tool;
                 var text = NotepadInfo.GetText(memo);
-                var scroll = root.Get(DeviceKw.MenuTextEditor);
-                scroll.OpenView(ChoiceListPresenter.Instance, Spanning<object>.Empty, root, self, null, new(tool: memo, other: text));
+                var scroll = manager.GetView(DeviceKw.MenuTextEditor);
+                scroll.OpenView(SelectOptionPresenter.Instance, Spanning<object>.Empty, manager, self, null, new(tool: memo, other: text));
 
-                var leftAnchor = root.Get(DeviceKw.MenuLeftAnchor);
-                leftAnchor.OpenView(ChoiceListPresenter.Instance, exit, root, null, null, new(tool: memo));
+                var leftAnchor = manager.GetView(DeviceKw.MenuLeftAnchor);
+                leftAnchor.OpenView(SelectOptionPresenter.Instance, exit, manager, null, null, new(tool: memo));
             }
 
-            private static void Exit(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            private static void Exit(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+                manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
 
-                var scroll = (ITextMenuView)root.Get(DeviceKw.MenuTextEditor);
+                var scroll = (ITextElementsView)manager.GetView(DeviceKw.MenuTextEditor);
                 NotepadInfo.SetTo(arg.Tool, scroll.Text);
-                root.Done();
+                manager.Done();
             }
 
-            private static void Execute(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            private static void Execute(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                var scroll = root.Get(DeviceKw.MenuTextEditor);
+                var scroll = manager.GetView(DeviceKw.MenuTextEditor);
                 //if (parent._inputField.text.StartsWith("#!lua"))
                 //{
                 //    root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
@@ -56,7 +56,7 @@ namespace Roguegard
                 //}
                 //else
                 //{
-                //    root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Cancel);
+                //    manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Cancel);
                 //}
             }
         }

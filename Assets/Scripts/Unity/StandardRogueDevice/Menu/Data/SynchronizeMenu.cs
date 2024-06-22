@@ -7,29 +7,29 @@ using Roguegard;
 
 namespace RoguegardUnity
 {
-    internal class SynchronizeMenu : IModelsMenu
+    internal class SynchronizeMenu : IListMenu
     {
         public bool Interrupt { get; private set; }
         public float Progress { get; set; }
 
-        private LoadingModelsMenu loadingMenu;
+        private LoadingListMenu loadingMenu;
 
-        public void OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+        public void OpenMenu(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         {
-            if (loadingMenu == null) { loadingMenu = new LoadingModelsMenu("¢ŠE‚Æ“¯Šú’†c", "“¯Šú‚ğ’†~", Stop, Update); }
+            if (loadingMenu == null) { loadingMenu = new LoadingListMenu("¢ŠE‚Æ“¯Šú’†c", "“¯Šú‚ğ’†~", Stop, Update); }
 
             Interrupt = false;
-            loadingMenu.OpenMenu(root, null, null, RogueMethodArgument.Identity);
+            loadingMenu.OpenMenu(manager, null, null, RogueMethodArgument.Identity);
         }
 
-        private void Stop(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+        private void Stop(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         {
             Interrupt = true;
         }
 
-        private void Update(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+        private void Update(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         {
-            var loading = root.Get(DeviceKw.MenuLoading);
+            var loading = manager.GetView(DeviceKw.MenuLoading);
             loading.SetPosition(Progress);
         }
     }

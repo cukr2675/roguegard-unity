@@ -111,19 +111,19 @@ namespace RoguegardUnity
             return false;
         }
 
-        private void SaveDelay(IModelsMenuRoot root, string path, bool autoSave)
+        private void SaveDelay(IListMenuManager manager, string path, bool autoSave)
         {
-            if (root != null)
+            if (manager != null)
             {
-                root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-                root.Back();
-                SelectFileMenu.ShowSaving(root);
+                manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+                manager.Back();
+                SelectFileMenu.ShowSaving(manager);
             }
 
-            FadeCanvas.StartCanvasCoroutine(Save(root, path, autoSave));
+            FadeCanvas.StartCanvasCoroutine(Save(manager, path, autoSave));
         }
 
-        private IEnumerator Save(IModelsMenuRoot root, string path, bool autoSave)
+        private IEnumerator Save(IListMenuManager manager, string path, bool autoSave)
         {
             // RogueMethodAspectState の処理の完了を待つ
             yield return null;
@@ -164,7 +164,7 @@ namespace RoguegardUnity
             stream.Save(() =>
             {
                 stream.Close();
-                root?.Done();
+                manager?.Done();
 
                 // セーブ完了メッセージを表示
                 if (autoSave)
@@ -205,7 +205,7 @@ namespace RoguegardUnity
                     spQuestDeviceData.Options = data.Options;
 
                     RgpackReference.LoadRgpack(rgpack);
-                    root.Done();
+                    manager.Done();
 
                     worldInfo.ChartState.PushNext(monolith.MainChartSource);
 
@@ -286,14 +286,14 @@ namespace RoguegardUnity
             }
         }
 
-        private class AutoSaveMenu : IModelsMenu
+        private class AutoSaveMenu : IListMenu
         {
             public SaveDeviceEventHandler parent;
 
-            public void OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public void OpenMenu(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                SelectFileMenu.ShowSaving(root);
-                StandardRogueDeviceSave.GetNewAutoSavePath("AutoSave.gard", path => parent.SaveDelay(root, path, true));
+                SelectFileMenu.ShowSaving(manager);
+                StandardRogueDeviceSave.GetNewAutoSavePath("AutoSave.gard", path => parent.SaveDelay(manager, path, true));
             }
         }
     }

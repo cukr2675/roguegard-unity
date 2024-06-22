@@ -36,14 +36,14 @@ namespace Roguegard
             return 0;
         }
 
-        private class RogueMenu : IModelsMenu
+        private class RogueMenu : IListMenu
         {
-            public void OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public void OpenMenu(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                var dungeonChoices = RoguegardSettings.DungeonChoices;
-                var scroll = root.Get(DeviceKw.MenuScroll);
-                scroll.OpenView(ChoiceListPresenter.Instance, dungeonChoices, root, self, user, arg);
-                ExitModelsMenuChoice.OpenLeftAnchorExit(root);
+                var dungeonSelectOptions = RoguegardSettings.DungeonSelectOption;
+                var scroll = manager.GetView(DeviceKw.MenuScroll);
+                scroll.OpenView(SelectOptionPresenter.Instance, dungeonSelectOptions, manager, self, user, arg);
+                ExitListMenuSelectOption.OpenLeftAnchorExit(manager);
             }
         }
     }

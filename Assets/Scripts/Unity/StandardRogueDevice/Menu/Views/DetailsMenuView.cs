@@ -9,7 +9,7 @@ using TMPro;
 
 namespace RoguegardUnity
 {
-    public class DetailsMenuView : ModelsMenuView
+    public class DetailsMenuView : ElementsView
     {
         [SerializeField] private CanvasGroup _canvasGroup = null;
         [SerializeField] private ScrollRect _scrollRect = null;
@@ -18,14 +18,14 @@ namespace RoguegardUnity
         public override CanvasGroup CanvasGroup => _canvasGroup;
 
         public override void OpenView<T>(
-            IModelListPresenter presenter, Spanning<T> modelList, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            IElementPresenter presenter, Spanning<T> list, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         {
-            if (modelList.Count >= 1 && modelList[0] is IRogueDescription description)
+            if (list.Count >= 1 && list[0] is IRogueDescription description)
             {
                 SetDescription(description);
             }
 
-            SetArg(root, self, user, arg);
+            SetArg(manager, self, user, arg);
             MenuController.Show(_canvasGroup, true);
         }
 

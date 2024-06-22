@@ -10,14 +10,14 @@ namespace RoguegardUnity
     /// <summary>
     /// 長押しメニュー
     /// </summary>
-    public class LongDownMenu : IModelsMenu
+    public class LongDownMenu : IListMenu
     {
-        private readonly IModelsMenuChoice[] choices;
-        private readonly IModelsMenu commandMenu;
+        private readonly IListMenuSelectOption[] selectOptions;
+        private readonly IListMenu commandMenu;
 
         public LongDownMenu(ObjsMenu objsMenu, ObjCommandMenu objCommandMenu)
         {
-            choices = new IModelsMenuChoice[]
+            selectOptions = new IListMenuSelectOption[]
             {
                 objCommandMenu.Summary,
                 objCommandMenu.Details,
@@ -26,18 +26,18 @@ namespace RoguegardUnity
             commandMenu = objCommandMenu;
         }
 
-        void IModelsMenu.OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+        void IListMenu.OpenMenu(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         {
             if (arg.TargetObj != null && arg.TargetObj.HasCollider && (self.Position - arg.TargetObj.Position).sqrMagnitude <= 2 &&
                 RoguegardSettings.ObjCommandTable.Categories.Contains(arg.TargetObj.Main.InfoSet.Category))
             {
                 // 長押ししたアイテムと隣接していた場合、アイテム向けのメニューを表示する
                 var openArg = new RogueMethodArgument(tool: arg.TargetObj);
-                root.OpenMenuAsDialog(commandMenu, self, null, openArg);
+                manager.OpenMenuAsDialog(commandMenu, self, null, openArg);
                 return;
             }
 
-            root.Get(DeviceKw.MenuCommand).OpenView(ChoiceListPresenter.Instance, choices, root, self, user, arg);
+            manager.GetView(DeviceKw.MenuCommand).OpenView(SelectOptionPresenter.Instance, selectOptions, manager, self, user, arg);
         }
     }
 }

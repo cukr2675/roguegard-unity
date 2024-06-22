@@ -7,19 +7,19 @@ using Roguegard.Device;
 
 namespace Roguegard
 {
-    public class PartyBoardCharacterCreationMenu : IModelsMenu
+    public class PartyBoardCharacterCreationMenu : IListMenu
     {
-        private readonly object[] models = new object[] { DialogModelsMenuChoice.CreateExit(Save) };
+        private readonly object[] elms = new object[] { DialogListMenuSelectOption.CreateExit(Save) };
 
-        public void OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+        public void OpenMenu(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         {
             var builder = (CharacterCreationDataBuilder)arg.Other;
-            root.Get(DeviceKw.MenuCharacterCreation).OpenView(null, models, root, self, user, new(targetObj: arg.TargetObj, other: builder));
+            manager.GetView(DeviceKw.MenuCharacterCreation).OpenView(null, elms, manager, self, user, new(targetObj: arg.TargetObj, other: builder));
         }
 
-        private static void Save(IModelsMenuRoot root, RogueObj player, RogueObj user, in RogueMethodArgument arg)
+        private static void Save(IListMenuManager manager, RogueObj player, RogueObj user, in RogueMethodArgument arg)
         {
-            root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+            manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
 
             if (arg.Other is CharacterCreationDataBuilder builder)
             {
@@ -41,8 +41,8 @@ namespace Roguegard
                 info.CharacterCreationData = builder;
             }
 
-            root.Back();
-            root.Back();
+            manager.Back();
+            manager.Back();
         }
     }
 }

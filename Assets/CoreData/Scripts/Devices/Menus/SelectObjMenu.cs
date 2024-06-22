@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Roguegard.Device
 {
-    public class SelectObjMenu : IModelsMenu
+    public class SelectObjMenu : IListMenu
     {
         private readonly Presenter presenter;
 
@@ -13,28 +13,28 @@ namespace Roguegard.Device
             presenter = new Presenter() { callback = callback };
         }
 
-        public void OpenMenu(IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+        public void OpenMenu(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         {
-            root.Get(DeviceKw.MenuScroll).OpenView(presenter, self.Space.Objs, root, self, user, arg);
+            manager.GetView(DeviceKw.MenuScroll).OpenView(presenter, self.Space.Objs, manager, self, user, arg);
         }
 
-        private class Presenter : IModelListPresenter
+        private class Presenter : IElementPresenter
         {
             public IDeviceCommandAction callback;
 
-            public string GetItemName(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public string GetItemName(object element, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                var obj = (RogueObj)model;
+                var obj = (RogueObj)element;
                 return obj.GetName();
             }
 
-            public void ActivateItem(object model, IModelsMenuRoot root, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public void ActivateItem(object element, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
             {
-                var obj = (RogueObj)model;
+                var obj = (RogueObj)element;
                 var device = RogueDeviceEffect.Get(self);
                 var callbackArg = new RogueMethodArgument(tool: obj);
                 device.SetDeviceCommand(callback, self, callbackArg);
-                root.Done();
+                manager.Done();
             }
         }
     }
