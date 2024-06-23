@@ -44,12 +44,10 @@ namespace Roguegard
                 result = false;
             }
 
-            if (!result && MessageWorkListener.TryOpenHandler(self.Location, self.Position, out var h))
+            if (!result && MessageWorkListener.TryOpenHandler(user.Location, user.Position, out var h))
             {
                 using var handler = h;
                 handler.AppendText("‰½‚à‹N‚±‚ç‚È‚©‚Á‚½").AppendText("\n");
-                MainCharacterWorkUtility.TryAddSkill(self);
-                MainCharacterWorkUtility.TryAddShot(self);
             }
             return true;
         }
