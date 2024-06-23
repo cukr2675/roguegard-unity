@@ -29,26 +29,6 @@ MonoBehaviour:
         _normalRear: {fileID: 0}
         _backFront: {fileID: 0}
         _backRear: {fileID: 0}
-      _spriteOrLightRed:
-        _normalFront: {fileID: 0}
-        _normalRear: {fileID: 0}
-        _backFront: {fileID: 0}
-        _backRear: {fileID: 0}
-      _darkRed:
-        _normalFront: {fileID: 0}
-        _normalRear: {fileID: 0}
-        _backFront: {fileID: 0}
-        _backRear: {fileID: 0}
-      _lightOther:
-        _normalFront: {fileID: 0}
-        _normalRear: {fileID: 0}
-        _backFront: {fileID: 0}
-        _backRear: {fileID: 0}
-      _darkOther:
-        _normalFront: {fileID: 0}
-        _normalRear: {fileID: 0}
-        _backFront: {fileID: 0}
-        _backRear: {fileID: 0}
     _overridesBaseColor: 0
     _flipX: 0
     _flipY: 0
@@ -67,26 +47,6 @@ MonoBehaviour:
         _backFront: {fileID: -1587713641, guid: d29fd121295802c4d86be31c8dd36ecd, type: 3}
         _backRear: {fileID: 0}
       _darkSprite:
-        _normalFront: {fileID: 0}
-        _normalRear: {fileID: 0}
-        _backFront: {fileID: 0}
-        _backRear: {fileID: 0}
-      _spriteOrLightRed:
-        _normalFront: {fileID: 0}
-        _normalRear: {fileID: 0}
-        _backFront: {fileID: 0}
-        _backRear: {fileID: 0}
-      _darkRed:
-        _normalFront: {fileID: 0}
-        _normalRear: {fileID: 0}
-        _backFront: {fileID: 0}
-        _backRear: {fileID: 0}
-      _lightOther:
-        _normalFront: {fileID: 0}
-        _normalRear: {fileID: 0}
-        _backFront: {fileID: 0}
-        _backRear: {fileID: 0}
-      _darkOther:
         _normalFront: {fileID: 0}
         _normalRear: {fileID: 0}
         _backFront: {fileID: 0}
@@ -113,26 +73,6 @@ MonoBehaviour:
         _normalRear: {fileID: 0}
         _backFront: {fileID: 0}
         _backRear: {fileID: 0}
-      _spriteOrLightRed:
-        _normalFront: {fileID: 0}
-        _normalRear: {fileID: 0}
-        _backFront: {fileID: 0}
-        _backRear: {fileID: 0}
-      _darkRed:
-        _normalFront: {fileID: 0}
-        _normalRear: {fileID: 0}
-        _backFront: {fileID: 0}
-        _backRear: {fileID: 0}
-      _lightOther:
-        _normalFront: {fileID: 0}
-        _normalRear: {fileID: 0}
-        _backFront: {fileID: 0}
-        _backRear: {fileID: 0}
-      _darkOther:
-        _normalFront: {fileID: 0}
-        _normalRear: {fileID: 0}
-        _backFront: {fileID: 0}
-        _backRear: {fileID: 0}
     _overridesBaseColor: 1
     _flipX: 0
     _flipY: 0
@@ -151,26 +91,6 @@ MonoBehaviour:
         _backFront: {fileID: 0}
         _backRear: {fileID: 0}
       _darkSprite:
-        _normalFront: {fileID: 0}
-        _normalRear: {fileID: 0}
-        _backFront: {fileID: 0}
-        _backRear: {fileID: 0}
-      _spriteOrLightRed:
-        _normalFront: {fileID: 0}
-        _normalRear: {fileID: 0}
-        _backFront: {fileID: 0}
-        _backRear: {fileID: 0}
-      _darkRed:
-        _normalFront: {fileID: 0}
-        _normalRear: {fileID: 0}
-        _backFront: {fileID: 0}
-        _backRear: {fileID: 0}
-      _lightOther:
-        _normalFront: {fileID: 0}
-        _normalRear: {fileID: 0}
-        _backFront: {fileID: 0}
-        _backRear: {fileID: 0}
-      _darkOther:
         _normalFront: {fileID: 0}
         _normalRear: {fileID: 0}
         _backFront: {fileID: 0}
@@ -197,26 +117,6 @@ MonoBehaviour:
         _normalRear: {fileID: 0}
         _backFront: {fileID: 0}
         _backRear: {fileID: 0}
-      _spriteOrLightRed:
-        _normalFront: {fileID: 0}
-        _normalRear: {fileID: 0}
-        _backFront: {fileID: 0}
-        _backRear: {fileID: 0}
-      _darkRed:
-        _normalFront: {fileID: 0}
-        _normalRear: {fileID: 0}
-        _backFront: {fileID: 0}
-        _backRear: {fileID: 0}
-      _lightOther:
-        _normalFront: {fileID: 0}
-        _normalRear: {fileID: 0}
-        _backFront: {fileID: 0}
-        _backRear: {fileID: 0}
-      _darkOther:
-        _normalFront: {fileID: 0}
-        _normalRear: {fileID: 0}
-        _backFront: {fileID: 0}
-        _backRear: {fileID: 0}
     _overridesBaseColor: 1
     _flipX: 1
     _flipY: 0
@@ -235,26 +135,6 @@ MonoBehaviour:
         _backFront: {fileID: 0}
         _backRear: {fileID: 0}
       _darkSprite:
-        _normalFront: {fileID: 0}
-        _normalRear: {fileID: 0}
-        _backFront: {fileID: 0}
-        _backRear: {fileID: 0}
-      _spriteOrLightRed:
-        _normalFront: {fileID: 0}
-        _normalRear: {fileID: 0}
-        _backFront: {fileID: 0}
-        _backRear: {fileID: 0}
-      _darkRed:
-        _normalFront: {fileID: 0}
-        _normalRear: {fileID: 0}
-        _backFront: {fileID: 0}
-        _backRear: {fileID: 0}
-      _lightOther:
-        _normalFront: {fileID: 0}
-        _normalRear: {fileID: 0}
-        _backFront: {fileID: 0}
-        _backRear: {fileID: 0}
-      _darkOther:
         _normalFront: {fileID: 0}
         _normalRear: {fileID: 0}
         _backFront: {fileID: 0}
@@ -281,26 +161,6 @@ MonoBehaviour:
         _normalRear: {fileID: 0}
         _backFront: {fileID: 0}
         _backRear: {fileID: 0}
-      _spriteOrLightRed:
-        _normalFront: {fileID: 0}
-        _normalRear: {fileID: 0}
-        _backFront: {fileID: 0}
-        _backRear: {fileID: 0}
-      _darkRed:
-        _normalFront: {fileID: 0}
-        _normalRear: {fileID: 0}
-        _backFront: {fileID: 0}
-        _backRear: {fileID: 0}
-      _lightOther:
-        _normalFront: {fileID: 0}
-        _normalRear: {fileID: 0}
-        _backFront: {fileID: 0}
-        _backRear: {fileID: 0}
-      _darkOther:
-        _normalFront: {fileID: 0}
-        _normalRear: {fileID: 0}
-        _backFront: {fileID: 0}
-        _backRear: {fileID: 0}
     _overridesBaseColor: 1
     _flipX: 0
     _flipY: 0
@@ -319,26 +179,6 @@ MonoBehaviour:
         _backFront: {fileID: 0}
         _backRear: {fileID: 0}
       _darkSprite:
-        _normalFront: {fileID: 0}
-        _normalRear: {fileID: 0}
-        _backFront: {fileID: 0}
-        _backRear: {fileID: 0}
-      _spriteOrLightRed:
-        _normalFront: {fileID: 0}
-        _normalRear: {fileID: 0}
-        _backFront: {fileID: 0}
-        _backRear: {fileID: 0}
-      _darkRed:
-        _normalFront: {fileID: 0}
-        _normalRear: {fileID: 0}
-        _backFront: {fileID: 0}
-        _backRear: {fileID: 0}
-      _lightOther:
-        _normalFront: {fileID: 0}
-        _normalRear: {fileID: 0}
-        _backFront: {fileID: 0}
-        _backRear: {fileID: 0}
-      _darkOther:
         _normalFront: {fileID: 0}
         _normalRear: {fileID: 0}
         _backFront: {fileID: 0}
@@ -365,26 +205,6 @@ MonoBehaviour:
         _normalRear: {fileID: 0}
         _backFront: {fileID: 0}
         _backRear: {fileID: 0}
-      _spriteOrLightRed:
-        _normalFront: {fileID: 0}
-        _normalRear: {fileID: 0}
-        _backFront: {fileID: 0}
-        _backRear: {fileID: 0}
-      _darkRed:
-        _normalFront: {fileID: 0}
-        _normalRear: {fileID: 0}
-        _backFront: {fileID: 0}
-        _backRear: {fileID: 0}
-      _lightOther:
-        _normalFront: {fileID: 0}
-        _normalRear: {fileID: 0}
-        _backFront: {fileID: 0}
-        _backRear: {fileID: 0}
-      _darkOther:
-        _normalFront: {fileID: 0}
-        _normalRear: {fileID: 0}
-        _backFront: {fileID: 0}
-        _backRear: {fileID: 0}
     _overridesBaseColor: 1
     _flipX: 0
     _flipY: 0
@@ -403,26 +223,6 @@ MonoBehaviour:
         _backFront: {fileID: 0}
         _backRear: {fileID: 0}
       _darkSprite:
-        _normalFront: {fileID: 0}
-        _normalRear: {fileID: 0}
-        _backFront: {fileID: 0}
-        _backRear: {fileID: 0}
-      _spriteOrLightRed:
-        _normalFront: {fileID: 0}
-        _normalRear: {fileID: 0}
-        _backFront: {fileID: 0}
-        _backRear: {fileID: 0}
-      _darkRed:
-        _normalFront: {fileID: 0}
-        _normalRear: {fileID: 0}
-        _backFront: {fileID: 0}
-        _backRear: {fileID: 0}
-      _lightOther:
-        _normalFront: {fileID: 0}
-        _normalRear: {fileID: 0}
-        _backFront: {fileID: 0}
-        _backRear: {fileID: 0}
-      _darkOther:
         _normalFront: {fileID: 0}
         _normalRear: {fileID: 0}
         _backFront: {fileID: 0}
@@ -449,26 +249,6 @@ MonoBehaviour:
         _normalRear: {fileID: 0}
         _backFront: {fileID: 6539314811114664936, guid: d29fd121295802c4d86be31c8dd36ecd, type: 3}
         _backRear: {fileID: 0}
-      _spriteOrLightRed:
-        _normalFront: {fileID: 0}
-        _normalRear: {fileID: 0}
-        _backFront: {fileID: 0}
-        _backRear: {fileID: 0}
-      _darkRed:
-        _normalFront: {fileID: 0}
-        _normalRear: {fileID: 0}
-        _backFront: {fileID: 0}
-        _backRear: {fileID: 0}
-      _lightOther:
-        _normalFront: {fileID: 0}
-        _normalRear: {fileID: 0}
-        _backFront: {fileID: 0}
-        _backRear: {fileID: 0}
-      _darkOther:
-        _normalFront: {fileID: 0}
-        _normalRear: {fileID: 0}
-        _backFront: {fileID: 0}
-        _backRear: {fileID: 0}
     _overridesBaseColor: 1
     _flipX: 0
     _flipY: 0
@@ -487,26 +267,6 @@ MonoBehaviour:
         _backFront: {fileID: 0}
         _backRear: {fileID: 0}
       _darkSprite:
-        _normalFront: {fileID: 0}
-        _normalRear: {fileID: 0}
-        _backFront: {fileID: 0}
-        _backRear: {fileID: 0}
-      _spriteOrLightRed:
-        _normalFront: {fileID: 0}
-        _normalRear: {fileID: 0}
-        _backFront: {fileID: 0}
-        _backRear: {fileID: 0}
-      _darkRed:
-        _normalFront: {fileID: 0}
-        _normalRear: {fileID: 0}
-        _backFront: {fileID: 0}
-        _backRear: {fileID: 0}
-      _lightOther:
-        _normalFront: {fileID: 0}
-        _normalRear: {fileID: 0}
-        _backFront: {fileID: 0}
-        _backRear: {fileID: 0}
-      _darkOther:
         _normalFront: {fileID: 0}
         _normalRear: {fileID: 0}
         _backFront: {fileID: 0}
@@ -533,26 +293,6 @@ MonoBehaviour:
         _normalRear: {fileID: 0}
         _backFront: {fileID: 0}
         _backRear: {fileID: 0}
-      _spriteOrLightRed:
-        _normalFront: {fileID: 0}
-        _normalRear: {fileID: 0}
-        _backFront: {fileID: 0}
-        _backRear: {fileID: 0}
-      _darkRed:
-        _normalFront: {fileID: 0}
-        _normalRear: {fileID: 0}
-        _backFront: {fileID: 0}
-        _backRear: {fileID: 0}
-      _lightOther:
-        _normalFront: {fileID: 0}
-        _normalRear: {fileID: 0}
-        _backFront: {fileID: 0}
-        _backRear: {fileID: 0}
-      _darkOther:
-        _normalFront: {fileID: 0}
-        _normalRear: {fileID: 0}
-        _backFront: {fileID: 0}
-        _backRear: {fileID: 0}
     _overridesBaseColor: 1
     _flipX: 0
     _flipY: 0
@@ -571,26 +311,6 @@ MonoBehaviour:
         _backFront: {fileID: 0}
         _backRear: {fileID: 0}
       _darkSprite:
-        _normalFront: {fileID: 0}
-        _normalRear: {fileID: 0}
-        _backFront: {fileID: 0}
-        _backRear: {fileID: 0}
-      _spriteOrLightRed:
-        _normalFront: {fileID: 0}
-        _normalRear: {fileID: 0}
-        _backFront: {fileID: 0}
-        _backRear: {fileID: 0}
-      _darkRed:
-        _normalFront: {fileID: 0}
-        _normalRear: {fileID: 0}
-        _backFront: {fileID: 0}
-        _backRear: {fileID: 0}
-      _lightOther:
-        _normalFront: {fileID: 0}
-        _normalRear: {fileID: 0}
-        _backFront: {fileID: 0}
-        _backRear: {fileID: 0}
-      _darkOther:
         _normalFront: {fileID: 0}
         _normalRear: {fileID: 0}
         _backFront: {fileID: 0}
@@ -617,26 +337,6 @@ MonoBehaviour:
         _normalRear: {fileID: 0}
         _backFront: {fileID: 0}
         _backRear: {fileID: 0}
-      _spriteOrLightRed:
-        _normalFront: {fileID: 0}
-        _normalRear: {fileID: 0}
-        _backFront: {fileID: 0}
-        _backRear: {fileID: 0}
-      _darkRed:
-        _normalFront: {fileID: 0}
-        _normalRear: {fileID: 0}
-        _backFront: {fileID: 0}
-        _backRear: {fileID: 0}
-      _lightOther:
-        _normalFront: {fileID: 0}
-        _normalRear: {fileID: 0}
-        _backFront: {fileID: 0}
-        _backRear: {fileID: 0}
-      _darkOther:
-        _normalFront: {fileID: 0}
-        _normalRear: {fileID: 0}
-        _backFront: {fileID: 0}
-        _backRear: {fileID: 0}
     _overridesBaseColor: 1
     _flipX: 0
     _flipY: 0
@@ -655,26 +355,6 @@ MonoBehaviour:
         _backFront: {fileID: 0}
         _backRear: {fileID: 0}
       _darkSprite:
-        _normalFront: {fileID: 0}
-        _normalRear: {fileID: 0}
-        _backFront: {fileID: 0}
-        _backRear: {fileID: 0}
-      _spriteOrLightRed:
-        _normalFront: {fileID: 0}
-        _normalRear: {fileID: 0}
-        _backFront: {fileID: 0}
-        _backRear: {fileID: 0}
-      _darkRed:
-        _normalFront: {fileID: 0}
-        _normalRear: {fileID: 0}
-        _backFront: {fileID: 0}
-        _backRear: {fileID: 0}
-      _lightOther:
-        _normalFront: {fileID: 0}
-        _normalRear: {fileID: 0}
-        _backFront: {fileID: 0}
-        _backRear: {fileID: 0}
-      _darkOther:
         _normalFront: {fileID: 0}
         _normalRear: {fileID: 0}
         _backFront: {fileID: 0}
@@ -701,76 +381,14 @@ MonoBehaviour:
         _normalRear: {fileID: 0}
         _backFront: {fileID: 0}
         _backRear: {fileID: 0}
-      _spriteOrLightRed:
-        _normalFront: {fileID: 0}
-        _normalRear: {fileID: 0}
-        _backFront: {fileID: 0}
-        _backRear: {fileID: 0}
-      _darkRed:
-        _normalFront: {fileID: 0}
-        _normalRear: {fileID: 0}
-        _backFront: {fileID: 0}
-        _backRear: {fileID: 0}
-      _lightOther:
-        _normalFront: {fileID: 0}
-        _normalRear: {fileID: 0}
-        _backFront: {fileID: 0}
-        _backRear: {fileID: 0}
-      _darkOther:
-        _normalFront: {fileID: 0}
-        _normalRear: {fileID: 0}
-        _backFront: {fileID: 0}
-        _backRear: {fileID: 0}
     _overridesBaseColor: 1
     _flipX: 0
     _flipY: 0
-    _pixelLocalPosition: {x: 3, y: 9, z: 0}
+    _pixelLocalPosition: {x: 0, y: 9, z: 0}
     _localRotation: {x: 0, y: 0, z: 0, w: 1}
     _scaleOfLocalByLocal: {x: 1, y: 1, z: 1}
     _normalOrderInParent: -4
     _backOrderInParent: -4
-  - _boneName: {fileID: 11400000, guid: a413b9bde843c9849a6ec0f8d7e53ab0, type: 2}
-    _parentBoneName: {fileID: 11400000, guid: a90fd0bc3132c214395dee60b9a645ae, type: 2}
-    _sprite:
-      _isColorRanged: 0
-      _spriteOrLightSprite:
-        _normalFront: {fileID: 0}
-        _normalRear: {fileID: 0}
-        _backFront: {fileID: 0}
-        _backRear: {fileID: 0}
-      _darkSprite:
-        _normalFront: {fileID: 0}
-        _normalRear: {fileID: 0}
-        _backFront: {fileID: 0}
-        _backRear: {fileID: 0}
-      _spriteOrLightRed:
-        _normalFront: {fileID: 0}
-        _normalRear: {fileID: 0}
-        _backFront: {fileID: 0}
-        _backRear: {fileID: 0}
-      _darkRed:
-        _normalFront: {fileID: 0}
-        _normalRear: {fileID: 0}
-        _backFront: {fileID: 0}
-        _backRear: {fileID: 0}
-      _lightOther:
-        _normalFront: {fileID: 0}
-        _normalRear: {fileID: 0}
-        _backFront: {fileID: 0}
-        _backRear: {fileID: 0}
-      _darkOther:
-        _normalFront: {fileID: 0}
-        _normalRear: {fileID: 0}
-        _backFront: {fileID: 0}
-        _backRear: {fileID: 0}
-    _overridesBaseColor: 1
-    _flipX: 0
-    _flipY: 0
-    _pixelLocalPosition: {x: -1, y: 9, z: 0}
-    _localRotation: {x: 0, y: 0, z: 0, w: 1}
-    _scaleOfLocalByLocal: {x: 1, y: 1, z: 1}
-    _normalOrderInParent: -5
-    _backOrderInParent: -5
   - _boneName: {fileID: 11400000, guid: 5ea5eef48e6079b43a6ac0722c5611ce, type: 2}
     _parentBoneName: {fileID: 11400000, guid: a90fd0bc3132c214395dee60b9a645ae, type: 2}
     _sprite:
@@ -785,34 +403,14 @@ MonoBehaviour:
         _normalRear: {fileID: 0}
         _backFront: {fileID: 0}
         _backRear: {fileID: 0}
-      _spriteOrLightRed:
-        _normalFront: {fileID: 0}
-        _normalRear: {fileID: 0}
-        _backFront: {fileID: 0}
-        _backRear: {fileID: 0}
-      _darkRed:
-        _normalFront: {fileID: 0}
-        _normalRear: {fileID: 0}
-        _backFront: {fileID: 0}
-        _backRear: {fileID: 0}
-      _lightOther:
-        _normalFront: {fileID: 0}
-        _normalRear: {fileID: 0}
-        _backFront: {fileID: 0}
-        _backRear: {fileID: 0}
-      _darkOther:
-        _normalFront: {fileID: 0}
-        _normalRear: {fileID: 0}
-        _backFront: {fileID: 0}
-        _backRear: {fileID: 0}
     _overridesBaseColor: 1
     _flipX: 0
     _flipY: 0
     _pixelLocalPosition: {x: 1, y: 2, z: 0}
     _localRotation: {x: 0, y: 0, z: 0, w: 1}
     _scaleOfLocalByLocal: {x: 1, y: 1, z: 1}
-    _normalOrderInParent: -6
-    _backOrderInParent: -6
+    _normalOrderInParent: -5
+    _backOrderInParent: -5
   - _boneName: {fileID: 11400000, guid: aefbcbb4bd643564f93620264e4030c3, type: 2}
     _parentBoneName: {fileID: 11400000, guid: a90fd0bc3132c214395dee60b9a645ae, type: 2}
     _sprite:
@@ -827,31 +425,11 @@ MonoBehaviour:
         _normalRear: {fileID: 0}
         _backFront: {fileID: 0}
         _backRear: {fileID: 0}
-      _spriteOrLightRed:
-        _normalFront: {fileID: 0}
-        _normalRear: {fileID: 0}
-        _backFront: {fileID: 0}
-        _backRear: {fileID: 0}
-      _darkRed:
-        _normalFront: {fileID: 0}
-        _normalRear: {fileID: 0}
-        _backFront: {fileID: 0}
-        _backRear: {fileID: 0}
-      _lightOther:
-        _normalFront: {fileID: 0}
-        _normalRear: {fileID: 0}
-        _backFront: {fileID: 0}
-        _backRear: {fileID: 0}
-      _darkOther:
-        _normalFront: {fileID: 0}
-        _normalRear: {fileID: 0}
-        _backFront: {fileID: 0}
-        _backRear: {fileID: 0}
     _overridesBaseColor: 1
     _flipX: 0
     _flipY: 0
     _pixelLocalPosition: {x: 0, y: 0, z: 0}
     _localRotation: {x: 0, y: 0, z: 0, w: 1}
     _scaleOfLocalByLocal: {x: 1, y: 1, z: 1}
-    _normalOrderInParent: -7
-    _backOrderInParent: -7
+    _normalOrderInParent: -6
+    _backOrderInParent: -6

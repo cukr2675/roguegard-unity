@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2b954f4a468173c43aecefdf8f5df095, type: 3}
-  m_Name: RightWing
+  m_Name: Wings
   m_EditorClassIdentifier: 
-  _name: "\u53F3\u7FBD"
+  _name: "\u5DE6\u7FBD"
   _icon: {fileID: 0}
   _color: {r: 1, g: 1, b: 1, a: 1}
   _caption: 

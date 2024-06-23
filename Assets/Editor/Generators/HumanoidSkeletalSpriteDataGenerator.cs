@@ -32,8 +32,7 @@ namespace Roguegard.Editor
             data.Add(RightEar.Create());
             data.Add(LeftEye.Create());
             data.Add(RightEye.Create());
-            data.Add(LeftWing.Create(size));
-            data.Add(RightWing.Create(size));
+            data.Add(Wings.Create(size));
             data.Add(Tail.Create());
             data.Add(Effect.Create());
             return true;
@@ -354,32 +353,17 @@ namespace Roguegard.Editor
             }
         }
 
-        private static class LeftWing
+        private static class Wings
         {
             public static SkeletalSpriteData.Node Create(int bodyStature)
             {
                 var statureRank = GetUpperBodyStatureRank(bodyStature);
                 var node = new SkeletalSpriteData.Node();
-                node.BoneName = RoguegardAssetDatabase.GetBoneKeyword("LeftWing");
+                node.BoneName = RoguegardAssetDatabase.GetBoneKeyword("Wing");
                 node.ParentBoneName = RoguegardAssetDatabase.GetBoneKeyword("Body");
-                node.PixelLocalPosition = new Vector3(3f, statureRank);
+                node.PixelLocalPosition = new Vector3(0f, statureRank);
                 node.NormalOrderInParent = -4f;
                 node.BackOrderInParent = -4f;
-                return node;
-            }
-        }
-
-        private static class RightWing
-        {
-            public static SkeletalSpriteData.Node Create(int bodyStature)
-            {
-                var statureRank = GetUpperBodyStatureRank(bodyStature);
-                var node = new SkeletalSpriteData.Node();
-                node.BoneName = RoguegardAssetDatabase.GetBoneKeyword("RightWing");
-                node.ParentBoneName = RoguegardAssetDatabase.GetBoneKeyword("Body");
-                node.PixelLocalPosition = new Vector3(-1f, statureRank);
-                node.NormalOrderInParent = -5f;
-                node.BackOrderInParent = -5f;
                 return node;
             }
         }
@@ -392,8 +376,8 @@ namespace Roguegard.Editor
                 node.BoneName = RoguegardAssetDatabase.GetBoneKeyword("Tail");
                 node.ParentBoneName = RoguegardAssetDatabase.GetBoneKeyword("Body");
                 node.PixelLocalPosition = new Vector3(1f, 2f);
-                node.NormalOrderInParent = -6f;
-                node.BackOrderInParent = -6f;
+                node.NormalOrderInParent = -5f;
+                node.BackOrderInParent = -5f;
                 return node;
             }
         }
@@ -407,8 +391,8 @@ namespace Roguegard.Editor
                 node.ParentBoneName = RoguegardAssetDatabase.GetBoneKeyword("Body");
                 var clearSprite = RoguegardAssetDatabase.GetSprite("clear");
                 node.Sprite = new ColorRangedBoneSprite(BoneSprite.CreateNFBR_NRBF(clearSprite, clearSprite));
-                node.NormalOrderInParent = -7f;
-                node.BackOrderInParent = -7f;
+                node.NormalOrderInParent = -6f;
+                node.BackOrderInParent = -6f;
                 return node;
             }
         }
