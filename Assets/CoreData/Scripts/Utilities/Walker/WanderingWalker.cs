@@ -176,6 +176,8 @@ namespace Roguegard
             var canWalkDiagonally = false;
             bool stop;
 
+            if (player.Location == null) return player.Position;
+
             var currentPosition = player.Position;
             if (!fear)
             {
