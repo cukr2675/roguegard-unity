@@ -38,6 +38,10 @@ MonoBehaviour:
     m_Localized: Healing
     m_Metadata:
       m_Items: []
+  - m_Id: 166525635006464
+    m_Localized: SprintAssault
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

@@ -71,6 +71,18 @@ MonoBehaviour:
     m_Key: HealingSkill::d
     m_Metadata:
       m_Items: []
+  - m_Id: 166525635006464
+    m_Key: SprintAssaultSkill
+    m_Metadata:
+      m_Items: []
+  - m_Id: 166574481870848
+    m_Key: SprintAssaultSkill::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 166583143108608
+    m_Key: SprintAssaultSkill::d
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
