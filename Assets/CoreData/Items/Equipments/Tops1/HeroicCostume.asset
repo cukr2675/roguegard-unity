@@ -18,7 +18,7 @@ MonoBehaviour:
   _race:
     _name: 
     _icon: {fileID: -2006770886, guid: 6eb590d0a69e3664199180daf0498368, type: 3}
-    _color: {r: 0.99607843, g: 1, b: 1, a: 1}
+    _color: {r: 0.99607843, g: 0.99607843, b: 0.99607843, a: 1}
     _caption: 
     _details:
       _script: {fileID: 0}
@@ -131,7 +131,7 @@ MonoBehaviour:
             _normalRear: {fileID: 0}
             _backFront: {fileID: 1716850496, guid: 6eb590d0a69e3664199180daf0498368, type: 3}
             _backRear: {fileID: 0}
-          _color: {r: 0.99607843, g: 1, b: 1, a: 1}
+          _color: {r: 0.99607843, g: 0.99607843, b: 0.99607843, a: 1}
       - _name: {fileID: 11400000, guid: 1974de15d93c82241bdd964fc44a5b9e, type: 2}
         _hasFirstSprite: 0
         _firstSprite:
@@ -148,7 +148,7 @@ MonoBehaviour:
             _normalRear: {fileID: 0}
             _backFront: {fileID: -1598278128, guid: 6eb590d0a69e3664199180daf0498368, type: 3}
             _backRear: {fileID: 0}
-          _color: {r: 0.99607843, g: 1, b: 1, a: 1}
+          _color: {r: 0.99607843, g: 0.99607843, b: 0.99607843, a: 1}
       - _name: {fileID: 11400000, guid: c66efafae0b82384d8b4212c78358e52, type: 2}
         _hasFirstSprite: 0
         _firstSprite:
@@ -165,7 +165,7 @@ MonoBehaviour:
             _normalRear: {fileID: 0}
             _backFront: {fileID: -90484951, guid: 6eb590d0a69e3664199180daf0498368, type: 3}
             _backRear: {fileID: 0}
-          _color: {r: 0.99607843, g: 1, b: 1, a: 1}
+          _color: {r: 0.99607843, g: 0.99607843, b: 0.99607843, a: 1}
     _eyeDropBoneName: {fileID: 0}
     _overridesBoneSpriteEffectOrder: 0
     _boneSpriteEffectOrder: 0
