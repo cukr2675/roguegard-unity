@@ -105,7 +105,7 @@ namespace Roguegard.CharacterCreation
                 // 1 の固定ダメージ
                 using var damage = AffectableValue.Get();
                 damage.Initialize(1f);
-                damage.SubValues[StatsKw.DamageGuarantee] = 1f;
+                damage.SubValues[StatsKw.GuaranteedDamage] = 1f;
                 damage.SubValues[StatsKw.GuardRate] = 0.1f * count; // 1 ターンでガード率 10% 上昇
                 this.Hurt(self, user, AttackUtility.GetActivationDepthCantCounter(activationDepth), damage);
                 this.TryDefeat(self, user, activationDepth, damage);

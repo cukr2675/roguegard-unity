@@ -17,7 +17,6 @@ MonoBehaviour:
   _critical: {fileID: 11400000, guid: d11bddbd4f300c746af4c2b14b66ed41, type: 2}
   _criticalATK: {fileID: 11400000, guid: 1100d3e9c251c0d47a0835f1384ea845, type: 2}
   _criticalRate: {fileID: 11400000, guid: c8d0942c903b02644a5953f1532dad22, type: 2}
-  _damageGuarantee: {fileID: 11400000, guid: 5d360cc15f4e3a04190d52780b425ef1, type: 2}
   _def: {fileID: 11400000, guid: 4ea065d4066ee51499d25d3ecb2cf5de, type: 2}
   _exp: {fileID: 11400000, guid: 791a5d750b2ab734aa2dd806e3a0387f, type: 2}
   _female: {fileID: 11400000, guid: 7d6f2166a76e7b34a8af39d2a00fb70b, type: 2}
@@ -25,6 +24,7 @@ MonoBehaviour:
   _looksFemale: {fileID: 11400000, guid: bdf3ec709c3e469418b769370c7ca74b, type: 2}
   _looksMale: {fileID: 11400000, guid: a41f2d71a476a1d4aa8046baba4c8003, type: 2}
   _male: {fileID: 11400000, guid: 7e9626c252bb9454980c8099ac9a17b3, type: 2}
+  _guaranteedDamage: {fileID: 11400000, guid: 5d360cc15f4e3a04190d52780b425ef1, type: 2}
   _guard: {fileID: 11400000, guid: 0c9be25175cbf9b4994924cb04a0b3f4, type: 2}
   _guardDEF: {fileID: 11400000, guid: 7b439dfa08692af41a859747c7eb962d, type: 2}
   _guardRate: {fileID: 11400000, guid: c19129b7d43acdf4e845372fcbdb852e, type: 2}

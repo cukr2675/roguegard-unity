@@ -23,9 +23,6 @@ namespace Roguegard
         [SerializeField] private KeywordData _criticalRate;
         public static IKeyword CriticalRate => instance._criticalRate;
 
-        [SerializeField] private KeywordData _damageGuarantee;
-        public static IKeyword DamageGuarantee => instance._damageGuarantee;
-
         [SerializeField] private KeywordData _def;
         public static IKeyword DEF => instance._def;
 
@@ -46,6 +43,9 @@ namespace Roguegard
 
         [SerializeField] private KeywordData _male;
         public static IKeyword Male => instance._male;
+
+        [SerializeField] private KeywordData _guaranteedDamage;
+        public static IKeyword GuaranteedDamage => instance._guaranteedDamage;
 
         [SerializeField] private KeywordData _guard;
         public static IKeyword Guard => instance._guard;

@@ -10,16 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7fab66e696671984c8cab2172b9a92ab, type: 3}
-  m_Name: DamageGuarantee
+  m_Name: GuaranteedDamage
   m_EditorClassIdentifier: 
-  _descriptionName: "\u30C0\u30E1\u30FC\u30B8\u4FDD\u8A3C"
+  _descriptionName: "\u4FDD\u8A3C\u30C0\u30E1\u30FC\u30B8"
   _icon: {fileID: 0}
   _color: {r: 1, g: 1, b: 1, a: 1}
   _caption: 
   _details:
-    script: {fileID: 0}
-    name: None (IRogueDetails)
-    isValidated: 1
+    _script: {fileID: 0}
     _ref:
       rid: -2
   references:

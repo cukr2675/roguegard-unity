@@ -112,11 +112,11 @@ namespace Roguegard
             }
 
             // ダメージは 0 以上の整数。
-            var damageGuarantee = Mathf.FloorToInt(refDamageValue.SubValues[StatsKw.DamageGuarantee]);
-            damageGuarantee = Mathf.Max(damageGuarantee, 0);
+            var guaranteedDamage = Mathf.FloorToInt(refDamageValue.SubValues[StatsKw.GuaranteedDamage]);
+            guaranteedDamage = Mathf.Max(guaranteedDamage, 0);
 
             var damage = Mathf.FloorToInt(refDamageValue.MainValue);
-            damage = Mathf.Max(damage, damageGuarantee);
+            damage = Mathf.Max(damage, guaranteedDamage);
             return damage;
         }
 
