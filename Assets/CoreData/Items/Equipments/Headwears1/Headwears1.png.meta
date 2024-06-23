@@ -248,6 +248,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: DiademOfBrave_NF
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 112
+        width: 12
+        height: 4
+      alignment: 9
+      pivot: {x: 0.5, y: -1.75}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3f70cd9983535ad48b6c5e0b32ca05df
+      internalID: -693634052
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -259,6 +280,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
+      DiademOfBrave_NF: -693634052
       FlightHat_BF: -388090836
       FlightHat_NF: 1071780184
       IllusionBand_BF: 65722407
