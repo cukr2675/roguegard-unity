@@ -47,6 +47,14 @@ MonoBehaviour:
     m_Key: PaintMsg::1
     m_Metadata:
       m_Items: []
+  - m_Id: 91933020156727296
+    m_Key: SpoilFoodErosion
+    m_Metadata:
+      m_Items: []
+  - m_Id: 91933105351430144
+    m_Key: SpoilFoodMsg::1
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
