@@ -59,6 +59,18 @@ MonoBehaviour:
     m_Key: FireballSkill::d
     m_Metadata:
       m_Items: []
+  - m_Id: 158625369821184
+    m_Key: HealingSkill
+    m_Metadata:
+      m_Items: []
+  - m_Id: 158924193009664
+    m_Key: HealingSkill::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 158933785382912
+    m_Key: HealingSkill::d
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

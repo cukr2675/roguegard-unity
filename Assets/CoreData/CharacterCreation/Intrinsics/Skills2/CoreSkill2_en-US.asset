@@ -34,6 +34,10 @@ MonoBehaviour:
     m_Localized: Fireball
     m_Metadata:
       m_Items: []
+  - m_Id: 158625369821184
+    m_Localized: Healing
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
