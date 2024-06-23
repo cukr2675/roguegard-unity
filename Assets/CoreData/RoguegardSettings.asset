@@ -18,6 +18,7 @@ MonoBehaviour:
   _lobby: {fileID: 11400000, guid: b68d87efd75176742b76575e5de8220e, type: 2}
   _presets:
   - {fileID: 11400000, guid: b286c7f36e7fc6b468a964c089a7f222, type: 2}
+  - {fileID: 11400000, guid: 1ff320d75db2c354b9d351cad07d582c, type: 2}
   - {fileID: 11400000, guid: ff3a78dceaafbdf4b9bd12568b64d0ee, type: 2}
   - {fileID: 11400000, guid: 319229867706872418481b44486e6bd9, type: 2}
   - {fileID: 11400000, guid: 1de337ac628278f4db386038a3e0b2b7, type: 2}
@@ -75,6 +76,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 48bcfc9bada4d124397e123d440c3c57, type: 2}
   - {fileID: 11400000, guid: 021ba068640efaf43895297436817f0a, type: 2}
   - {fileID: 11400000, guid: 2e59e740cae7012458c1a3e4cfff9bc8, type: 2}
+  - {fileID: 11400000, guid: 35cad6f313765f344bfdaf53e4952d54, type: 2}
   - {fileID: 11400000, guid: 86ed4b182872c3f4c95bca8b6f74fa7d, type: 2}
   - {fileID: 11400000, guid: c3b129be7c716d64caa2e34289b2b7e4, type: 2}
   - {fileID: 11400000, guid: 82de95db9daa0d14ca84659c2eb2f5a1, type: 2}

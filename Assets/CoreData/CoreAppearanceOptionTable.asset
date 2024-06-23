@@ -115,6 +115,8 @@ MonoBehaviour:
     _asset: {fileID: 11400000, guid: 8c2a8f62afe19af408e357049b34228f, type: 2}
   - _key: Core.Hair8
     _asset: {fileID: 11400000, guid: 05b6b1d8fcad1e54984aea057c80ea21, type: 2}
+  - _key: Core.Hair9
+    _asset: {fileID: 11400000, guid: 68814a51430190e4cac5b4673ed678c9, type: 2}
   - _key: Core.AnimalHead
     _asset: {fileID: 11400000, guid: 695f02daad110034cb5f586a5c23c4c0, type: 2}
   - _key: Core.GoblinHead

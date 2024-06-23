@@ -113,9 +113,19 @@ MonoBehaviour:
     _asset: {fileID: 11400000, guid: 5d75ee0695b80214092c567460924729, type: 2}
   - _key: Core.ThunderStormSkill
     _asset: {fileID: 11400000, guid: 3f62a76a40423be4d818c8c3097e45dc, type: 2}
-  - _key: Core.VacuumRampageSkill
+  - _key: Core.VacuumSpinSkill
     _asset: {fileID: 11400000, guid: f6f603905d9d8804eb1478e66e094fdf, type: 2}
   - _key: Core.EngulfingSkill
     _asset: {fileID: 11400000, guid: 224ad3fde411a8842b695dc7c0db3d31, type: 2}
+  - _key: Core.FireballSkill
+    _asset: {fileID: 11400000, guid: 88c11b6a4524e7742bb75b24322c3478, type: 2}
+  - _key: Core.HealingSkill
+    _asset: {fileID: 11400000, guid: c950ceb4dcf76af48be468f418b2c7a3, type: 2}
+  - _key: Core.ImpulseSkill
+    _asset: {fileID: 11400000, guid: cdada32be4178ff4f9875985663781b2, type: 2}
   - _key: Core.KnightJumpSkill
     _asset: {fileID: 11400000, guid: d7fba64b6f0f1414baca32c6486d5e8f, type: 2}
+  - _key: Core.SpinSlashSkill
+    _asset: {fileID: 11400000, guid: 03c1e7bc09716334ca131559307bba06, type: 2}
+  - _key: Core.SprintAssaultSkill
+    _asset: {fileID: 11400000, guid: 6cd90d8cf59fc0347b0e32ca7c04d2d3, type: 2}

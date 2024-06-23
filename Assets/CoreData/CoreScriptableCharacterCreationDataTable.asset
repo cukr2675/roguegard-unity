@@ -105,6 +105,8 @@ MonoBehaviour:
     _asset: {fileID: 11400000, guid: f28ebee9cf9bcd94c84b7522abb8e7fa, type: 2}
   - _key: Core.Jackboots
     _asset: {fileID: 11400000, guid: 893d0f722f7ba394c9d86ec24df4be35, type: 2}
+  - _key: Core.LaceUpSandals
+    _asset: {fileID: 11400000, guid: 3cbb80ae0e063b64d92630f91d8d6d3c, type: 2}
   - _key: Core.LeatherGreaves
     _asset: {fileID: 11400000, guid: 671f3159f2afabf4487efc3fac912e05, type: 2}
   - _key: Core.Loafers
@@ -113,12 +115,16 @@ MonoBehaviour:
     _asset: {fileID: 11400000, guid: c2c4793dd950e9b46ac3d7e47d55dd12, type: 2}
   - _key: Core.GrassSkirt
     _asset: {fileID: 11400000, guid: 6f7e18025209af1419a58b44aa08625e, type: 2}
+  - _key: Core.HeroicBottoms
+    _asset: {fileID: 11400000, guid: e3e656abb3457b0449495a5b6866bca1, type: 2}
   - _key: Core.ShortPants
     _asset: {fileID: 11400000, guid: 25bbb3e5f0c15d544b1afc2813582dd0, type: 2}
   - _key: Core.Slacks
     _asset: {fileID: 11400000, guid: 24260a48869b1d94299c8d6abf966b68, type: 2}
   - _key: Core.HoodedCloak
     _asset: {fileID: 11400000, guid: 5f82e63027e45d449bc5157847267b4d, type: 2}
+  - _key: Core.HoodlessCloak
+    _asset: {fileID: 11400000, guid: 041399b31e3e34245b3a82fc4732248d, type: 2}
   - _key: Core.Muffler
     _asset: {fileID: 11400000, guid: b26d960eb0d95d14b95ca347ed298797, type: 2}
   - _key: Core.ArmMarkLine
@@ -127,16 +133,22 @@ MonoBehaviour:
     _asset: {fileID: 11400000, guid: 8356c1aa167184343936906c841a7095, type: 2}
   - _key: Core.DogNose
     _asset: {fileID: 11400000, guid: 7c3453877e1e52149b90cb9081517d51, type: 2}
+  - _key: Core.GoldTrimmedShoulderArmor
+    _asset: {fileID: 11400000, guid: bc7048e2b1c1ed8498a018817d55fa3b, type: 2}
   - _key: Core.HeadMarkLine
     _asset: {fileID: 11400000, guid: 381405490d3c2eb4789b28b3237732ff, type: 2}
   - _key: Core.Horn
     _asset: {fileID: 11400000, guid: b7ed7120220238540817ef105ec0e50c, type: 2}
   - _key: Core.WolfPowder
     _asset: {fileID: 11400000, guid: 9e011b7400977ac48bd09d64774ddf4e, type: 2}
+  - _key: Core.BraceredGloves
+    _asset: {fileID: 11400000, guid: 6782dacad4dffe345a4e70f80da8d307, type: 2}
   - _key: Core.LeatherGauntlets
     _asset: {fileID: 11400000, guid: 6432d393f0485d443ba970aa9aef0d85, type: 2}
   - _key: Core.LeatherGloves
     _asset: {fileID: 11400000, guid: 61b5715891eacdc40818e86462b97bab, type: 2}
+  - _key: Core.DiademOfBrave
+    _asset: {fileID: 11400000, guid: 60acc18fccf52234c8502589717c6a0d, type: 2}
   - _key: Core.FlightHat
     _asset: {fileID: 11400000, guid: 59b398754a4dfe74eb23064857cccd7a, type: 2}
   - _key: Core.IllusionBand
@@ -151,12 +163,16 @@ MonoBehaviour:
     _asset: {fileID: 11400000, guid: c77d11f069e6ec940be8252663cbeff4, type: 2}
   - _key: Core.GarterSocks
     _asset: {fileID: 11400000, guid: 0c1b98ab3c541dd4c9d99ec17dc439b7, type: 2}
+  - _key: Core.KneeHighSocks
+    _asset: {fileID: 11400000, guid: dd989dc40571bfc48ad5b17101be0c12, type: 2}
   - _key: Core.CamisoleDress
     _asset: {fileID: 11400000, guid: 3f49504da8915e449a729b49fb1bc7bd, type: 2}
   - _key: Core.CaptainRobe
     _asset: {fileID: 11400000, guid: 700ba87b2b6aad84c84976c4dd7fc433, type: 2}
   - _key: Core.CavalryRobe
     _asset: {fileID: 11400000, guid: b2de0422136427f4d99f7e933f558531, type: 2}
+  - _key: Core.HeroicCostume
+    _asset: {fileID: 11400000, guid: 9f3cb6d6459b2ef45bfbb4e9356b64ef, type: 2}
   - _key: Core.LaceUpShirt
     _asset: {fileID: 11400000, guid: 22919a516a6bd704c952265efedf00bd, type: 2}
   - _key: Core.TankTop
