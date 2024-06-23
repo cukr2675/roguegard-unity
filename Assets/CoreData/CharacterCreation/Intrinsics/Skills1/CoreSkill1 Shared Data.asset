@@ -168,15 +168,15 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 16331002650693632
-    m_Key: VacuumRampageSkill
+    m_Key: VacuumSpinSkill
     m_Metadata:
       m_Items: []
   - m_Id: 16331063891726336
-    m_Key: VacuumRampageSkill::c
+    m_Key: VacuumSpinSkill::c
     m_Metadata:
       m_Items: []
   - m_Id: 16331074092273664
-    m_Key: VacuumRampageSkill::d
+    m_Key: VacuumSpinSkill::d
     m_Metadata:
       m_Items: []
   - m_Id: 26669658393415680
