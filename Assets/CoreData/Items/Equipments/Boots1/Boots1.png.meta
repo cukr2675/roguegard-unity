@@ -290,6 +290,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: LaceUpSandals_NFBF
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2
+        width: 4
+        height: 5
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eb81d231cb4925c4c8ad3bf2f1084d19
+      internalID: -1825847207
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -305,6 +326,7 @@ TextureImporter:
       HideFootwear_NFBF: -1337617543
       HighBoots_NFBF: 1999232382
       Jackboots_NFBF: -1624938874
+      LaceUpSandals_NFBF: -1825847207
       Loafers_BF: -376238752
       Loafers_NF: -484031646
       StrapBoots_BF: -2018692272
