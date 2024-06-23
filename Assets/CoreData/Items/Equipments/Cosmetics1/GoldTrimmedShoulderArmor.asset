@@ -133,8 +133,8 @@ MonoBehaviour:
             _backRear: {fileID: 0}
           _color: {r: 0.078431375, g: 0.3137255, b: 0.8784314, a: 1}
     _eyeDropBoneName: {fileID: 0}
-    _overridesBoneSpriteEffectOrder: 0
-    _boneSpriteEffectOrder: 3
+    _overridesBoneSpriteEffectOrder: 1
+    _boneSpriteEffectOrder: 3.5
     _beEquipped:
       _script: {fileID: 0}
       _ref:
