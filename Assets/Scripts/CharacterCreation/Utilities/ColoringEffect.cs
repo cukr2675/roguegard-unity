@@ -60,10 +60,10 @@ namespace Roguegard
             {
                 if (keyword == CharacterCreationKw.Color)
                 {
-                    value.SubValues[CharacterCreationKw.Red] = color.r;
-                    value.SubValues[CharacterCreationKw.Green] = color.g;
-                    value.SubValues[CharacterCreationKw.Blue] = color.b;
-                    value.SubValues[CharacterCreationKw.Alpha] = color.a;
+                    value.SubValues[CharacterCreationKw.Red] = color.r / 255f;
+                    value.SubValues[CharacterCreationKw.Green] = color.g / 255f;
+                    value.SubValues[CharacterCreationKw.Blue] = color.b / 255f;
+                    value.SubValues[CharacterCreationKw.Alpha] = color.a / 255f;
                 }
             }
 
