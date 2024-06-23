@@ -269,6 +269,90 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: HoodlessCloak_Head_NF
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 62
+        width: 6
+        height: 2
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d49f46e49f331f1429c3bc4bccb45c10
+      internalID: -2046699242
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HoodlessCloak_UpperBody_NR
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 47
+        width: 19
+        height: 15
+      alignment: 9
+      pivot: {x: 0.47368422, y: 0.8666667}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2da472a8d12919c40a0066e698fa3758
+      internalID: 457133670
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HoodlessCloak_UpperBody_BF
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 32
+        width: 19
+        height: 15
+      alignment: 9
+      pivot: {x: 0.47368422, y: 0.8666667}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d9adccb5fde984248a08397dffc7f3ba
+      internalID: -1330581519
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HoodlessCloak_Head_BF
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 45
+        width: 7
+        height: 2
+      alignment: 9
+      pivot: {x: 0.5714286, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 31550ed6f56b1ee4792371c40ddf6a03
+      internalID: -556247229
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -285,6 +369,10 @@ TextureImporter:
       HoodedCloak_LeftEye_NF: 2131531776
       HoodedCloak_UpperBody_NF: 1098482034
       HoodedCloak_UpperBody_NRBF: -191375082
+      HoodlessCloak_Head_BF: -556247229
+      HoodlessCloak_Head_NF: -2046699242
+      HoodlessCloak_UpperBody_BF: -1330581519
+      HoodlessCloak_UpperBody_NR: 457133670
       Muffler_BF: -660644238
       Muffler_NF: 1827395112
   mipmapLimitGroupName: 
