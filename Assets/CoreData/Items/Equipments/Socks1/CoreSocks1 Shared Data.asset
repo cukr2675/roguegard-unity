@@ -27,6 +27,18 @@ MonoBehaviour:
     m_Key: GarterSocks::d
     m_Metadata:
       m_Items: []
+  - m_Id: 70366825859387392
+    m_Key: KneeHighSocks
+    m_Metadata:
+      m_Items: []
+  - m_Id: 70366853864755200
+    m_Key: KneeHighSocks::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 70366862035259392
+    m_Key: KneeHighSocks::d
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

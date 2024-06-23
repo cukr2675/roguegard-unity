@@ -39,6 +39,18 @@ MonoBehaviour:
     m_Key: Muffler::d
     m_Metadata:
       m_Items: []
+  - m_Id: 70343507135565824
+    m_Key: HoodlessCloak
+    m_Metadata:
+      m_Items: []
+  - m_Id: 70343528111280128
+    m_Key: HoodlessCloak::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 70343538206969856
+    m_Key: HoodlessCloak::d
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

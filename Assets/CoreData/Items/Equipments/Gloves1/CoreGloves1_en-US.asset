@@ -26,6 +26,10 @@ MonoBehaviour:
     m_Localized: LeatherGloves
     m_Metadata:
       m_Items: []
+  - m_Id: 70360381776859136
+    m_Localized: BraceredGloves
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

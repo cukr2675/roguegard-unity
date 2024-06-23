@@ -51,6 +51,18 @@ MonoBehaviour:
     m_Key: Shako::d
     m_Metadata:
       m_Items: []
+  - m_Id: 70368783609499648
+    m_Key: DiademOfBrave
+    m_Metadata:
+      m_Items: []
+  - m_Id: 70368843705487360
+    m_Key: DiademOfBrave::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 70368852698075136
+    m_Key: DiademOfBrave::d
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

@@ -38,6 +38,10 @@ MonoBehaviour:
     m_Localized: Tribalwear
     m_Metadata:
       m_Items: []
+  - m_Id: 70366755395080192
+    m_Localized: HeroicCostume
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

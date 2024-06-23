@@ -22,6 +22,10 @@ MonoBehaviour:
     m_Localized: GarterSocks
     m_Metadata:
       m_Items: []
+  - m_Id: 70366825859387392
+    m_Localized: KneeHighSocks
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

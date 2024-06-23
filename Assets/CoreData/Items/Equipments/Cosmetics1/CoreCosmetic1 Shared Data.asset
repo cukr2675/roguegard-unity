@@ -87,6 +87,18 @@ MonoBehaviour:
     m_Key: WolfPowder::d
     m_Metadata:
       m_Items: []
+  - m_Id: 70343015739297792
+    m_Key: GoldTrimmedShoulderArmor
+    m_Metadata:
+      m_Items: []
+  - m_Id: 70343207439962112
+    m_Key: GoldTrimmedShoulderArmor::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 70343221067255808
+    m_Key: GoldTrimmedShoulderArmor::d
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

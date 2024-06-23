@@ -75,6 +75,18 @@ MonoBehaviour:
     m_Key: Tribalwear::d
     m_Metadata:
       m_Items: []
+  - m_Id: 70366755395080192
+    m_Key: HeroicCostume
+    m_Metadata:
+      m_Items: []
+  - m_Id: 70366785896058880
+    m_Key: HeroicCostume::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 70366794645377024
+    m_Key: HeroicCostume::d
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

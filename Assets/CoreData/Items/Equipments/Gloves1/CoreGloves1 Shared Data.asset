@@ -39,6 +39,18 @@ MonoBehaviour:
     m_Key: LeatherGloves::d
     m_Metadata:
       m_Items: []
+  - m_Id: 70360381776859136
+    m_Key: BraceredGloves
+    m_Metadata:
+      m_Items: []
+  - m_Id: 70360450789937152
+    m_Key: BraceredGloves::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 70363863430860800
+    m_Key: BraceredGloves::d
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

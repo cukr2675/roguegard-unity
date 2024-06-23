@@ -51,6 +51,18 @@ MonoBehaviour:
     m_Key: Slacks::d
     m_Metadata:
       m_Items: []
+  - m_Id: 70344709478944768
+    m_Key: HeroicBottoms
+    m_Metadata:
+      m_Items: []
+  - m_Id: 70344814068109312
+    m_Key: HeroicBottoms::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 70344822855176192
+    m_Key: HeroicBottoms::d
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

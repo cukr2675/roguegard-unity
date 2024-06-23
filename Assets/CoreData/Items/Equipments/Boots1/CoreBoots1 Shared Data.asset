@@ -87,6 +87,18 @@ MonoBehaviour:
     m_Key: StrappedBoots::d
     m_Metadata:
       m_Items: []
+  - m_Id: 70345828158541824
+    m_Key: LaceUpSandals
+    m_Metadata:
+      m_Items: []
+  - m_Id: 70345894059446272
+    m_Key: LaceUpSandals::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 70345902649380864
+    m_Key: LaceUpSandals::d
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
