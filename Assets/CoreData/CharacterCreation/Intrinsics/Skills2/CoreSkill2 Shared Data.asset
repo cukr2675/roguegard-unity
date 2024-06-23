@@ -83,6 +83,18 @@ MonoBehaviour:
     m_Key: SprintAssaultSkill::d
     m_Metadata:
       m_Items: []
+  - m_Id: 168569431265280
+    m_Key: SpinSlashSkill
+    m_Metadata:
+      m_Items: []
+  - m_Id: 168728110174208
+    m_Key: SpinSlashSkill::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 168736800772096
+    m_Key: SpinSlashSkill::d
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

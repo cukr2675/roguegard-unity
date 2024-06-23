@@ -42,6 +42,10 @@ MonoBehaviour:
     m_Localized: SprintAssault
     m_Metadata:
       m_Items: []
+  - m_Id: 168569431265280
+    m_Localized: SpinSlash
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
