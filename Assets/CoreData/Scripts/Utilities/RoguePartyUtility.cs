@@ -128,7 +128,12 @@ namespace Roguegard.Extensions
 
                 DungeonFloorCloserStateInfo.CloseAndRemoveNull(member, true);
 
+                // レベル習得スキルを忘れさせる
+                member.Main.Skills.Clear(MainInfoSetType.Base);
+                member.Main.Skills.Clear(MainInfoSetType.Polymorph);
+
                 // レベルを初期化
+                RoguegardCharacterCreationSettings.LevelInfoInitializer.InitializeLv(member, 0);
                 RoguegardCharacterCreationSettings.LevelInfoInitializer.InitializeLv(member, 1);
 
                 // 探索開始前に全回復する

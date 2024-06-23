@@ -35,6 +35,14 @@ namespace Roguegard
             skills.Clear();
         }
 
+        public void Clear(MainInfoSetType sourceType)
+        {
+            for (int i = skills.Count - 1; i >= 0; i--)
+            {
+                if (skills[i].SourceType == sourceType) { skills.RemoveAt(i); }
+            }
+        }
+
         public bool Contains(ISkill skill, MainInfoSetType sourceType)
         {
             var item = new LearnedSkill(skill, sourceType);
