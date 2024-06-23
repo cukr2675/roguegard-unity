@@ -47,6 +47,18 @@ MonoBehaviour:
     m_Key: KnightJumpSkill::d
     m_Metadata:
       m_Items: []
+  - m_Id: 158133851918336
+    m_Key: FireballSkill
+    m_Metadata:
+      m_Items: []
+  - m_Id: 158173169324032
+    m_Key: FireballSkill::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 158182166106112
+    m_Key: FireballSkill::d
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

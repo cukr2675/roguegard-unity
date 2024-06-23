@@ -30,6 +30,10 @@ MonoBehaviour:
     m_Localized: KnightJump
     m_Metadata:
       m_Items: []
+  - m_Id: 158133851918336
+    m_Localized: Fireball
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
