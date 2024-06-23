@@ -88,6 +88,12 @@ namespace Roguegard
                     assetTable = new Dictionary<string, object>();
                     _assetTables.Add(space, assetTable);
                 }
+
+                if (assetTable.ContainsKey(pair.Key))
+                {
+                    throw new RogueException($"{pair.Key} が重複しています。（{pair.Value}, already exists {assetTable[pair.Key]}）");
+                }
+
                 assetTable.Add(pair.Key, pair.Value);
             }
         }
