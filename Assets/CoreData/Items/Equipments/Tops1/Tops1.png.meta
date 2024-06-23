@@ -815,6 +815,153 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: HeroicCostume
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 24
+        width: 8
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 12f4f74952a0bc54e8cb4a2a4932906d
+      internalID: -2006770886
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroicCostume_UpperBody_NF
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 31
+        width: 8
+        height: 5
+      alignment: 9
+      pivot: {x: 0.5, y: 0.8}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 116c2f19dadae3b4d8ac79bbfa8a057c
+      internalID: -1012682570
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroicCostume_Body_NF
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 24
+        width: 8
+        height: 8
+      alignment: 9
+      pivot: {x: 0.5, y: 0.375}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e257c748043752e47873da00819f8836
+      internalID: 913441373
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroicCostume_UpperBody_BF
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 31
+        width: 8
+        height: 5
+      alignment: 9
+      pivot: {x: 0.5, y: 0.8}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 26499ea3e5e318b41b5629111336d32d
+      internalID: -1598278128
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroicCostume_Body_BF
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 24
+        width: 8
+        height: 8
+      alignment: 9
+      pivot: {x: 0.5, y: 0.375}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8d3c93ade110ac045ba2d190f9c6731b
+      internalID: 1716850496
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroicCostume_Head_NF
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 36
+        width: 4
+        height: 1
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4a49a86e76433ac4e9bf97ad0d04535b
+      internalID: -2119003483
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroicCostume_Head_BF
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 36
+        width: 4
+        height: 1
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dee30572d2e686547ae1e8ecef0f3270
+      internalID: -90484951
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -845,6 +992,13 @@ TextureImporter:
       CavalryRobe_Hand_NFBF: -654929124
       CavalryRobe_UpperBody_BF: 363934055
       CavalryRobe_UpperBody_NF: 934986129
+      HeroicCostume: -2006770886
+      HeroicCostume_Body_BF: 1716850496
+      HeroicCostume_Body_NF: 913441373
+      HeroicCostume_Head_BF: -90484951
+      HeroicCostume_Head_NF: -2119003483
+      HeroicCostume_UpperBody_BF: -1598278128
+      HeroicCostume_UpperBody_NF: -1012682570
       LaceUpShirt: -410107368
       LaceUpShirt_Arm_NFBF: 1393228050
       LaceUpShirt_Body_BF: 2058178066
