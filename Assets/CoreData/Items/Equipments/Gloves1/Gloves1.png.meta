@@ -164,6 +164,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: BraceredGloves
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 17
+        width: 4
+        height: 6
+      alignment: 9
+      pivot: {x: 0.5, y: 0.16666667}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cd972d0eb5584cd49b2117e17508f483
+      internalID: -115690787
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -175,6 +196,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
+      BraceredGloves: -115690787
       Gauntlets: 1878646332
       Gloves: -1624938874
       HideFootwear_NFBF: 1999232382
