@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7d842246dd790334ba7cff66d4dab604, type: 3}
-  m_Name: GarterSocks
+  m_Name: KneeHighSocks
   m_EditorClassIdentifier: 
   _overridesCost: 0
   _cost: 0
   _costIsUnknown: 0
   _race:
     _name: 
-    _icon: {fileID: -7772326, guid: 09e9b7d5d061dd441a7b995ab1812aac, type: 3}
+    _icon: {fileID: -63266821, guid: 09e9b7d5d061dd441a7b995ab1812aac, type: 3}
     _color: {r: 0.7529412, g: 0.7529412, b: 0.7529412, a: 1}
     _caption: 
     _details:
@@ -127,9 +127,9 @@ MonoBehaviour:
         _overridesBaseColor: 0
         _equipmentSprites:
         - _sprite:
-            _normalFront: {fileID: -7772326, guid: 09e9b7d5d061dd441a7b995ab1812aac, type: 3}
+            _normalFront: {fileID: -63266821, guid: 09e9b7d5d061dd441a7b995ab1812aac, type: 3}
             _normalRear: {fileID: 0}
-            _backFront: {fileID: -7772326, guid: 09e9b7d5d061dd441a7b995ab1812aac, type: 3}
+            _backFront: {fileID: -63266821, guid: 09e9b7d5d061dd441a7b995ab1812aac, type: 3}
             _backRear: {fileID: 0}
           _color: {r: 0.7529412, g: 0.7529412, b: 0.7529412, a: 1}
       - _name: {fileID: 11400000, guid: 78416086f1e60f44ba37a2a278beedb7, type: 2}
@@ -144,9 +144,9 @@ MonoBehaviour:
         _overridesBaseColor: 0
         _equipmentSprites:
         - _sprite:
-            _normalFront: {fileID: -7772326, guid: 09e9b7d5d061dd441a7b995ab1812aac, type: 3}
+            _normalFront: {fileID: -63266821, guid: 09e9b7d5d061dd441a7b995ab1812aac, type: 3}
             _normalRear: {fileID: 0}
-            _backFront: {fileID: -7772326, guid: 09e9b7d5d061dd441a7b995ab1812aac, type: 3}
+            _backFront: {fileID: -63266821, guid: 09e9b7d5d061dd441a7b995ab1812aac, type: 3}
             _backRear: {fileID: 0}
           _color: {r: 0.7529412, g: 0.7529412, b: 0.7529412, a: 1}
     _eyeDropBoneName: {fileID: 0}
