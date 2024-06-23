@@ -43,16 +43,16 @@ namespace Roguegard
             var result = next.Invoke(keyword, method, self, user, activationDepth, arg);
 
             // くさった食べ物を食べると、ランダムで悪い効果を起こす
-            if (result && keyword == MainInfoKw.BeEaten && activationDepth < 1f)
+            if (result && keyword == MainInfoKw.BeEaten && activationDepth < 2f)
             {
                 var randomValue = RogueRandom.Primary.Next(0, 2);
                 switch (randomValue)
                 {
                     case 0:
-                        default(IAffectRogueMethodCaller).TryAffect(user, 1f, PoisonStatusEffect.Callback);
+                        default(IAffectRogueMethodCaller).TryAffect(user, 2f, PoisonStatusEffect.Callback);
                         break;
                     case 1:
-                        default(IAffectRogueMethodCaller).TryAffect(user, 1f, ConfusionStatusEffect.Callback);
+                        default(IAffectRogueMethodCaller).TryAffect(user, 2f, ConfusionStatusEffect.Callback);
                         break;
                 }
             }
