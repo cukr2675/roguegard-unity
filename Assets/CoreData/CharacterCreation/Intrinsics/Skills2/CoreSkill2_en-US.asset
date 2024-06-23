@@ -46,6 +46,10 @@ MonoBehaviour:
     m_Localized: SpinSlash
     m_Metadata:
       m_Items: []
+  - m_Id: 173349616619520
+    m_Localized: Impulse
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

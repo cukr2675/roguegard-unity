@@ -95,6 +95,18 @@ MonoBehaviour:
     m_Key: SpinSlashSkill::d
     m_Metadata:
       m_Items: []
+  - m_Id: 173349616619520
+    m_Key: ImpulseSkill
+    m_Metadata:
+      m_Items: []
+  - m_Id: 173384844578816
+    m_Key: ImpulseSkill::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 173393300295680
+    m_Key: ImpulseSkill::d
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
