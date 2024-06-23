@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bfa92bbe51072b46b85e78077749d76, type: 3}
+  m_Name: SandWallTileGenerator
+  m_EditorClassIdentifier: 
+  _source: {fileID: 2800000, guid: 8cb52317f06c4f845b5c2eb0eb1f5acd, type: 3}
+  _tileSizePixel: {x: 32, y: 32}
+  _tileCenterPixel: {x: 16, y: 16}
+  _pixelsPerUnit: 32
+  _targetRuleTile: {fileID: 11400000, guid: 5bd99c9f52c7fba4a89c498ca2e9f054, type: 2}

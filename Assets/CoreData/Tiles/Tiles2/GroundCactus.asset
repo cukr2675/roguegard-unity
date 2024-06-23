@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aaea6a1339a408e4ca571c982a4b9eb1, type: 3}
+  m_Name: GroundCactus
+  m_EditorClassIdentifier: 
+  _descriptionName: "\u5E8A\u30B5\u30DC\u30C6\u30F3"
+  _icon: {fileID: 763234825, guid: 8281587eb84e6d7478283032943b445f, type: 3}
+  _tile: {fileID: 0}
+  _color: {r: 0.5713717, g: 0.6981132, b: 0.4774831, a: 1}
+  _caption: 
+  _details:
+    _script: {fileID: 0}
+    _ref:
+      rid: -2
+  _category: {fileID: 11400000, guid: 163a5895f2bbdb047bd70c8cc45e4df0, type: 2}
+  _layer: 1
+  _hasCollider: 0
+  _hasSightCollider: 0
+  _hit:
+    _script: {fileID: 0}
+    _ref:
+      rid: -2
+  _beDefeated:
+    _script: {fileID: 0}
+    _ref:
+      rid: -2
+  _beApplied:
+    _script: {fileID: 11500000, guid: a0e2647d2f8ccdc4697cc0da83599b5d, type: 3}
+    _ref:
+      rid: 3003915766944235527
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 3003915766944235527
+      type: {class: HurtTrapBeApplied, ns: Roguegard, asm: Roguegard.CoreData}
+      data:
+        _assemblyReflectionAssetDummy: 
+        _additionalDamage: 0

@@ -21,14 +21,24 @@ MonoBehaviour:
     _asset: {fileID: 11400000, guid: 9e07379c12401a54a9afcdc2d2081fc9, type: 2}
   - _key: Core.Grass
     _asset: {fileID: 11400000, guid: 8dab63605c378de4a895690f47728e39, type: 2}
+  - _key: Core.GroundCactus
+    _asset: {fileID: 11400000, guid: 4ea6f0d99ab17c441ade1ca947411970, type: 2}
   - _key: Core.PaintTrap
     _asset: {fileID: 11400000, guid: b24b54dad325f334b916700e5f697068, type: 2}
   - _key: Core.Pool
     _asset: {fileID: 11400000, guid: 255d75cb8b17d37418c0f99cb5f07a89, type: 2}
+  - _key: Core.QuicksandTrap
+    _asset: {fileID: 11400000, guid: 153bbdf0c4a4f854995cc319a214edd8, type: 2}
   - _key: Core.RandomTrap
     _asset: {fileID: 11400000, guid: 770c0978df6ab524ca283f3922e7bc3d, type: 2}
   - _key: Core.RoomWall
     _asset: {fileID: 11400000, guid: 44985f674517d934f9cfca6b10f538c6, type: 2}
+  - _key: Core.Sand
+    _asset: {fileID: 11400000, guid: 9842b0be999f5dd4c84281d6622f3ba0, type: 2}
+  - _key: Core.SandWall
+    _asset: {fileID: 11400000, guid: 7290c371cdc13be4f8bd90bffa1cd30b, type: 2}
+  - _key: Core.SpoilFoodTrap
+    _asset: {fileID: 11400000, guid: a87eb4bad633c0549b92f667edafbcb7, type: 2}
   - _key: Core.ThronsTrap
     _asset: {fileID: 11400000, guid: 96d4bc3ad857739448d5823f36be3205, type: 2}
   - _key: Core.Wall

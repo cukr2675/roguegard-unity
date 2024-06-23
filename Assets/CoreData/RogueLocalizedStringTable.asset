@@ -18,7 +18,9 @@ MonoBehaviour:
   - CoreQuestEnvironment1
   - CoreQuestObjectives1
   - CoreSkill1
+  - CoreSkill2
   - CoreMonster1
+  - CoreMonster2
   - CoreMoney1
   - CoreAmmo1
   - CoreApplyTool1

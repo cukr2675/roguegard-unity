@@ -115,3 +115,7 @@ MonoBehaviour:
     _asset: {fileID: 11400000, guid: 3f62a76a40423be4d818c8c3097e45dc, type: 2}
   - _key: Core.VacuumRampageSkill
     _asset: {fileID: 11400000, guid: f6f603905d9d8804eb1478e66e094fdf, type: 2}
+  - _key: Core.EngulfingSkill
+    _asset: {fileID: 11400000, guid: 224ad3fde411a8842b695dc7c0db3d31, type: 2}
+  - _key: Core.KnightJumpSkill
+    _asset: {fileID: 11400000, guid: d7fba64b6f0f1414baca32c6486d5e8f, type: 2}

@@ -1,0 +1,141 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35dd98401eaef3c4e873c88647ac9a06, type: 3}
+  m_Name: DD_15
+  m_EditorClassIdentifier: 
+  _endLv: 15
+  _dungeonGenerator: {fileID: 11400000, guid: 1359d9acf71a1ca438b60880c0277c79, type: 2}
+  _enemyTable:
+  - _items:
+    - _option: {fileID: 11400000, guid: a90260cad85e9644da9c9aa571e3251c, type: 2}
+      _optionDescription: {fileID: 0}
+      _generatorWeight: 3
+      _stack: 1
+      _members:
+        _items: []
+    - _option: {fileID: 11400000, guid: 3e2de51ee4bd401448889d95573b24bf, type: 2}
+      _optionDescription: {fileID: 0}
+      _generatorWeight: 10
+      _stack: 1
+      _members:
+        _items: []
+    - _option: {fileID: 11400000, guid: 0780d566e681530429f8015156ef25be, type: 2}
+      _optionDescription: {fileID: 0}
+      _generatorWeight: 5
+      _stack: 1
+      _members:
+        _items: []
+    - _option: {fileID: 11400000, guid: 5950a26c91d05684686761593a9422a4, type: 2}
+      _optionDescription: {fileID: 0}
+      _generatorWeight: 5
+      _stack: 1
+      _members:
+        _items: []
+    - _option: {fileID: 11400000, guid: cf2b695c11488264a89b1fc22b8c5308, type: 2}
+      _optionDescription: {fileID: 0}
+      _generatorWeight: 1
+      _stack: 1
+      _members:
+        _items: []
+    _minFrequency: 5
+    _maxFrequency: 8
+  _itemTable:
+  - _items:
+    - _option: {fileID: 11400000, guid: 0ec5b6e99b38f3943bb648aa79c2db29, type: 2}
+      _optionDescription: {fileID: 0}
+      _generatorWeight: 10
+      _stack: 1
+      _members:
+        _items: []
+    - _option: {fileID: 11400000, guid: 81ba5bbae5941f3438aab82fd58b904e, type: 2}
+      _optionDescription: {fileID: 0}
+      _generatorWeight: 1
+      _stack: 1
+      _members:
+        _items: []
+    - _option: {fileID: 11400000, guid: 47e5dd0993735644aa348343cbb82cc9, type: 2}
+      _optionDescription: {fileID: 0}
+      _generatorWeight: 1
+      _stack: 1
+      _members:
+        _items: []
+    - _option: {fileID: 11400000, guid: b77bd3202061e9942b11eb8c7a377d76, type: 2}
+      _optionDescription: {fileID: 0}
+      _generatorWeight: 1
+      _stack: 1
+      _members:
+        _items: []
+    - _option: {fileID: 11400000, guid: 676223ceb145e114bb8b68d2618bc1f8, type: 2}
+      _optionDescription: {fileID: 0}
+      _generatorWeight: 0.1
+      _stack: 1
+      _members:
+        _items: []
+    - _option: {fileID: 11400000, guid: 5a6b247f4025daf45b1620adff0b962d, type: 2}
+      _optionDescription: {fileID: 0}
+      _generatorWeight: 3
+      _stack: 1
+      _members:
+        _items: []
+    _minFrequency: 2
+    _maxFrequency: 4
+  - _items:
+    - _option: {fileID: 11400000, guid: d090773916d53b140b839cdfa0ce291a, type: 2}
+      _optionDescription: {fileID: 0}
+      _generatorWeight: 1
+      _stack: 1
+      _members:
+        _items: []
+    _minFrequency: 0
+    _maxFrequency: 1
+  _otherTable:
+  - _items:
+    - _option: {fileID: 11400000, guid: f238f3405bf59164480f466139147eb7, type: 2}
+      _optionDescription: {fileID: 0}
+      _generatorWeight: 1
+      _stack: 1
+      _members:
+        _items: []
+    _minFrequency: 1
+    _maxFrequency: 1
+  - _items:
+    - _option: {fileID: 11400000, guid: 8e448e0f8e4de4a4cb15b362b9e6891b, type: 2}
+      _optionDescription: {fileID: 0}
+      _generatorWeight: 1
+      _stack: 1
+      _members:
+        _items:
+        - rid: 3089142974586290185
+    _minFrequency: 8
+    _maxFrequency: 12
+  - _items:
+    - _option: {fileID: 11400000, guid: 8e448e0f8e4de4a4cb15b362b9e6891b, type: 2}
+      _optionDescription: {fileID: 0}
+      _generatorWeight: 1
+      _stack: 1
+      _members:
+        _items:
+        - rid: 3003915766944235529
+    _minFrequency: 0
+    _maxFrequency: 3
+  _monsterHouseRate: 0.2
+  references:
+    version: 2
+    RefIds:
+    - rid: 3003915766944235529
+      type: {class: RogueTileMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
+      data:
+        _tile: {fileID: 11400000, guid: 7a6f262d5be164240822183b1d25f004, type: 2}
+    - rid: 3089142974586290185
+      type: {class: RogueTileMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
+      data:
+        _tile: {fileID: 11400000, guid: 4ea6f0d99ab17c441ade1ca947411970, type: 2}

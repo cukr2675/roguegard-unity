@@ -1,0 +1,70 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5f2989f961ab9141a87793d4026a4ad, type: 3}
+  m_Name: DD_Rand_Weapon
+  m_EditorClassIdentifier: 
+  _overridesCost: 0
+  _cost: 0
+  _costIsUnknown: 0
+  _items:
+    _items:
+    - _option: {fileID: 11400000, guid: 9b83f15992282fe4da1b7cf4afd77a1e, type: 2}
+      _optionDescription: {fileID: 0}
+      _generatorWeight: 1
+      _stack: 1
+      _isIntrinsicItem: 0
+      _members:
+        _items:
+        - rid: 962668678494027809
+    - _option: {fileID: 11400000, guid: ea18f387027e3e24d90b989888903f11, type: 2}
+      _optionDescription: {fileID: 0}
+      _generatorWeight: 1
+      _stack: 1
+      _isIntrinsicItem: 0
+      _members:
+        _items:
+        - rid: 962668678494027810
+    - _option: {fileID: 11400000, guid: fbb788ca451157c4f9f87858f725882e, type: 2}
+      _optionDescription: {fileID: 0}
+      _generatorWeight: 1
+      _stack: 1
+      _isIntrinsicItem: 0
+      _members:
+        _items:
+        - rid: 962668678494027811
+    - _option: {fileID: 11400000, guid: 9c0ef51caf67c914a83313801032c993, type: 2}
+      _optionDescription: {fileID: 0}
+      _generatorWeight: 1
+      _stack: 1
+      _isIntrinsicItem: 0
+      _members:
+        _items:
+        - rid: 962668678494027812
+  references:
+    version: 2
+    RefIds:
+    - rid: 962668678494027809
+      type: {class: EquipMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
+      data:
+        _isEquipped: 0
+    - rid: 962668678494027810
+      type: {class: EquipMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
+      data:
+        _isEquipped: 0
+    - rid: 962668678494027811
+      type: {class: EquipMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
+      data:
+        _isEquipped: 0
+    - rid: 962668678494027812
+      type: {class: EquipMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
+      data:
+        _isEquipped: 0

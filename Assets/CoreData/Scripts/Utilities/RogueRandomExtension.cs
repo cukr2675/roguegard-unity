@@ -23,5 +23,11 @@ namespace Roguegard
             var index = random.Next(0, list.Count);
             return list[index];
         }
+
+        public static T Choice<T>(this IRogueRandom random, Spanning<T> span)
+        {
+            var index = random.Next(0, span.Count);
+            return span[index];
+        }
     }
 }

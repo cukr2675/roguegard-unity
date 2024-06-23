@@ -45,6 +45,14 @@ MonoBehaviour:
     _asset: {fileID: 11400000, guid: 13820ce432f8dc842b4025600274a305, type: 2}
   - _key: Core.SoldierTortoise
     _asset: {fileID: 11400000, guid: f23eb6532dbbe3448b1b843ae39d91af, type: 2}
+  - _key: Core.KillerRat
+    _asset: {fileID: 11400000, guid: 3e2de51ee4bd401448889d95573b24bf, type: 2}
+  - _key: Core.ParalyzeScorpion
+    _asset: {fileID: 11400000, guid: 5950a26c91d05684686761593a9422a4, type: 2}
+  - _key: Core.RattleSnake
+    _asset: {fileID: 11400000, guid: 0780d566e681530429f8015156ef25be, type: 2}
+  - _key: Core.SandWorm
+    _asset: {fileID: 11400000, guid: cf2b695c11488264a89b1fc22b8c5308, type: 2}
   - _key: Core.AmuletOfChange
     _asset: {fileID: 11400000, guid: 5ebc89f988d68d542bd6d716d2903874, type: 2}
   - _key: Core.CriticalAmulet
@@ -221,6 +229,10 @@ MonoBehaviour:
     _asset: {fileID: 11400000, guid: 511df306b5f4ed24e997be5cf261e29e, type: 2}
   - _key: Core.BeginningDungeon
     _asset: {fileID: 11400000, guid: c1246455f94ee6a4f809870cb8afb63e, type: 2}
+  - _key: Core.DD_Stairs
+    _asset: {fileID: 11400000, guid: f238f3405bf59164480f466139147eb7, type: 2}
+  - _key: Core.DesertDungeon
+    _asset: {fileID: 11400000, guid: 81565f413cb190a4a9ced715571c49d2, type: 2}
   - _key: Core.Lobby
     _asset: {fileID: 11400000, guid: b68d87efd75176742b76575e5de8220e, type: 2}
   - _key: Core.LobbyDoorL

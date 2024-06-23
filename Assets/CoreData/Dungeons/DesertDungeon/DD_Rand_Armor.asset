@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5f2989f961ab9141a87793d4026a4ad, type: 3}
+  m_Name: DD_Rand_Armor
+  m_EditorClassIdentifier: 
+  _overridesCost: 0
+  _cost: 0
+  _costIsUnknown: 1
+  _items:
+    _items:
+    - _option: {fileID: 11400000, guid: c77d11f069e6ec940be8252663cbeff4, type: 2}
+      _optionDescription: {fileID: 0}
+      _generatorWeight: 1
+      _stack: 1
+      _isIntrinsicItem: 0
+      _members:
+        _items:
+        - rid: 962669039468937242
+  references:
+    version: 2
+    RefIds:
+    - rid: 962669039468937242
+      type: {class: EquipMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
+      data:
+        _isEquipped: 0
