@@ -73,7 +73,7 @@ namespace Roguegard.CharacterCreation
 
                 bool IRogueMethodActiveAspect.ActiveInvoke(
                     IKeyword keyword, IRogueMethod method, RogueObj self, RogueObj target, float activationDepth, in RogueMethodArgument arg,
-                    RogueMethodAspectState.ActiveNext next)
+                    RogueMethodAspectState.ActiveChain chain)
                 {
                     // スキルダメージ +2
                     // スキルで攻撃時のみ解除する (MainValue を取得して状態異常付与スキルと区別する)
@@ -83,7 +83,7 @@ namespace Roguegard.CharacterCreation
                         arg.RefValue.MainValue += 2 * Stack;
                         RemoveClose(self);
                     }
-                    return next.Invoke(keyword, method, self, target, activationDepth, arg);
+                    return chain.Invoke(keyword, method, self, target, activationDepth, arg);
                 }
 
                 public override bool CanStack(RogueObj obj, RogueObj otherObj, IRogueEffect other)

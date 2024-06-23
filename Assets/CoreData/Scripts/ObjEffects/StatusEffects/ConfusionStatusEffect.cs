@@ -43,7 +43,7 @@ namespace Roguegard
 
         bool IRogueMethodPassiveAspect.PassiveInvoke(
             IKeyword keyword, IRogueMethod method, RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg,
-            RogueMethodAspectState.PassiveNext next)
+            RogueMethodAspectState.PassiveChain chain)
         {
             var angle = RogueRandom.Primary.Next(0, 8);
             self.Main.Stats.Direction = new RogueDirection(angle);
@@ -51,7 +51,7 @@ namespace Roguegard
             argBuilder.ClearTargetPosition();
             argBuilder.TargetObj = null; // 命中確認を無効化する
             var arg1 = argBuilder.ToArgument();
-            return next.Invoke(keyword, method, self, user, activationDepth, arg1);
+            return chain.Invoke(keyword, method, self, user, activationDepth, arg1);
         }
 
         void IBoneSpriteEffect.AffectSprite(RogueObj self, IReadOnlyNodeBone rootNode, AffectableBoneSpriteTable boneSpriteTable)

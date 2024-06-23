@@ -22,7 +22,7 @@ namespace Roguegard.CharacterCreation
 
             bool IRogueMethodActiveAspect.ActiveInvoke(
                 IKeyword keyword, IRogueMethod method, RogueObj self, RogueObj target, float activationDepth, in RogueMethodArgument arg,
-                RogueMethodAspectState.ActiveNext next)
+                RogueMethodAspectState.ActiveChain chain)
             {
                 if (keyword == MainInfoKw.BeThrown && target != null)
                 {
@@ -30,10 +30,10 @@ namespace Roguegard.CharacterCreation
                     if (shieldInfo != null && shieldInfo.EquipParts.Contains(EquipKw.Shield) && shieldInfo.EquipIndex != -1)
                     {
                         // 装備している盾を投げたとき、当たった敵に攻撃力ダメージを与えるようにメソッドを変更する
-                        return next.Invoke(keyword, beShotMethod, self, target, activationDepth, arg);
+                        return chain.Invoke(keyword, beShotMethod, self, target, activationDepth, arg);
                     }
                 }
-                return next.Invoke(keyword, method, self, target, activationDepth, arg);
+                return chain.Invoke(keyword, method, self, target, activationDepth, arg);
             }
 		}
     }

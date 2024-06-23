@@ -62,12 +62,12 @@ namespace Roguegard
 
         bool IRogueMethodActiveAspect.ActiveInvoke(
             IKeyword keyword, IRogueMethod method, RogueObj self, RogueObj target, float activationDepth, in RogueMethodArgument arg,
-            RogueMethodAspectState.ActiveNext next)
+            RogueMethodAspectState.ActiveChain chain)
         {
             if (keyword == MainInfoKw.BeEaten)
             {
                 // 食べる動作だけは可能
-                return next.Invoke(keyword, method, self, target, activationDepth, arg);
+                return chain.Invoke(keyword, method, self, target, activationDepth, arg);
             }
 
             if (RogueDevice.Primary.Player.Main.Stats.Party.Members.Contains(self))

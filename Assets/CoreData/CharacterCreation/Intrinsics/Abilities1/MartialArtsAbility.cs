@@ -22,9 +22,9 @@ namespace Roguegard.CharacterCreation
 
             bool IRogueMethodPassiveAspect.PassiveInvoke(
                 IKeyword keyword, IRogueMethod method, RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg,
-                RogueMethodAspectState.PassiveNext next)
+                RogueMethodAspectState.PassiveChain chain)
             {
-                var result = next.Invoke(keyword, method, self, user, activationDepth, arg);
+                var result = chain.Invoke(keyword, method, self, user, activationDepth, arg);
 
                 // 武器を使わずに通常攻撃するとき二回攻撃する
                 if (keyword == MainInfoKw.Attack && method == self.Main.InfoSet.Attack)
@@ -33,7 +33,7 @@ namespace Roguegard.CharacterCreation
                     argumentBuilder.SetArgument(arg);
                     argumentBuilder.TargetObj = null;
 
-                    result = next.Invoke(keyword, method, self, user, activationDepth, argumentBuilder.ToArgument());
+                    result = chain.Invoke(keyword, method, self, user, activationDepth, argumentBuilder.ToArgument());
                 }
 
                 return result;

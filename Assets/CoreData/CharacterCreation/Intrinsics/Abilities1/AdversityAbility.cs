@@ -20,7 +20,7 @@ namespace Roguegard.CharacterCreation
 
             bool IRogueMethodActiveAspect.ActiveInvoke(
                 IKeyword keyword, IRogueMethod method, RogueObj self, RogueObj target, float activationDepth, in RogueMethodArgument arg,
-                RogueMethodAspectState.ActiveNext next)
+                RogueMethodAspectState.ActiveChain chain)
             {
                 if (keyword == MainInfoKw.Hit && AttackUtility.GetUseValue(arg.RefValue))
                 {
@@ -36,7 +36,7 @@ namespace Roguegard.CharacterCreation
                     }
                     arg.RefValue.MainValue += Mathf.Max((enemyCount - 3) * 2, 0);
                 }
-                return next.Invoke(keyword, method, self, target, activationDepth, arg);
+                return chain.Invoke(keyword, method, self, target, activationDepth, arg);
             }
         }
     }

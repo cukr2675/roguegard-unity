@@ -34,10 +34,10 @@ namespace Roguegard.CharacterCreation
 
             bool IRogueMethodActiveAspect.ActiveInvoke(
                 IKeyword keyword, IRogueMethod method, RogueObj self, RogueObj target, float activationDepth, in RogueMethodArgument arg,
-                RogueMethodAspectState.ActiveNext next)
+                RogueMethodAspectState.ActiveChain chain)
             {
                 var beforeLv = self.Main.Stats.Lv;
-                var result = next.Invoke(keyword, method, self, target, activationDepth, arg);
+                var result = chain.Invoke(keyword, method, self, target, activationDepth, arg);
                 if (result && keyword == StdKw.LoseExp && self.Main.Stats.Lv > beforeLv)
                 {
                     // 経験値取得でレベルが上がったとき HP と MP を全回復し、状態異常をすべて解除する

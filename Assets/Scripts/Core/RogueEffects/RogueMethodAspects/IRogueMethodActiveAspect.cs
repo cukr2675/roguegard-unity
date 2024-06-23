@@ -17,6 +17,6 @@ namespace Roguegard
         /// </summary>
         bool ActiveInvoke(
             IKeyword keyword, IRogueMethod method, RogueObj self, RogueObj target, float activationDepth, in RogueMethodArgument arg,
-            RogueMethodAspectState.ActiveNext next);
+            RogueMethodAspectState.ActiveChain chain);
     }
 }

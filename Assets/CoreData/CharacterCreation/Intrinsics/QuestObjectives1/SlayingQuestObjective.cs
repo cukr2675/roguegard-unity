@@ -136,11 +136,11 @@ namespace Roguegard.CharacterCreation
 
             bool IRogueMethodPassiveAspect.PassiveInvoke(
                 IKeyword keyword, IRogueMethod method, RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg,
-                RogueMethodAspectState.PassiveNext next)
+                RogueMethodAspectState.PassiveChain chain)
             {
                 var generate = keyword == MainInfoKw.Locate && self.Location.Space.Tilemap == null;
 
-                var result = next.Invoke(keyword, method, self, user, activationDepth, arg);
+                var result = chain.Invoke(keyword, method, self, user, activationDepth, arg);
                 if (!result) return false;
 
                 if (generate && self.Location.Space.Tilemap != null && DungeonInfo.TryGet(self.Location, out _) &&
@@ -189,9 +189,9 @@ namespace Roguegard.CharacterCreation
 
             bool IRogueMethodPassiveAspect.PassiveInvoke(
                 IKeyword keyword, IRogueMethod method, RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg,
-                RogueMethodAspectState.PassiveNext next)
+                RogueMethodAspectState.PassiveChain chain)
             {
-                var result = next.Invoke(keyword, method, self, user, activationDepth, arg);
+                var result = chain.Invoke(keyword, method, self, user, activationDepth, arg);
                 if (result && keyword == MainInfoKw.BeDefeated)
                 {
                     // ì|Ç≥ÇÍÇΩÇ∆Ç´ÉNÉGÉXÉgÇÃåÇîjêîÇâ¡éZÇ∑ÇÈ

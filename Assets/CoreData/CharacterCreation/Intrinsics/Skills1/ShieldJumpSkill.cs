@@ -70,10 +70,10 @@ namespace Roguegard.CharacterCreation
 
             bool IRogueMethodPassiveAspect.PassiveInvoke(
                 IKeyword keyword, IRogueMethod method, RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg,
-                RogueMethodAspectState.PassiveNext next)
+                RogueMethodAspectState.PassiveChain chain)
             {
                 var useValue = AttackUtility.GetUseValue(arg.RefValue);
-                var result = next.Invoke(keyword, method, self, user, activationDepth, arg);
+                var result = chain.Invoke(keyword, method, self, user, activationDepth, arg);
 
                 if (result && keyword == MainInfoKw.Hit && activationDepth < 1f && useValue)
                 {

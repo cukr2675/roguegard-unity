@@ -237,8 +237,8 @@ namespace Roguegard
             Logger?.LogActiveAspect(item.Aspect, keyword, method, self, target, activationDepth, arg);
 
             stack.Value.SetPeek(index, actives[index].ID);
-            var next = new ActiveNext(this);
-            var result = item.Aspect.ActiveInvoke(keyword, method, self, target, activationDepth, arg, next);
+            var chain = new ActiveChain(this);
+            var result = item.Aspect.ActiveInvoke(keyword, method, self, target, activationDepth, arg, chain);
 
             stack.Value.SetPeek(oldIndex, id);
             return result;
@@ -285,8 +285,8 @@ namespace Roguegard
             Logger?.LogPassiveAspect(item.Aspect, keyword, method, self, user, activationDepth, arg);
 
             stack.Value.SetPeek(index, passives[index].ID);
-            var next = new PassiveNext(this);
-            var result = item.Aspect.PassiveInvoke(keyword, method, self, user, activationDepth, arg, next);
+            var chain = new PassiveChain(this);
+            var result = item.Aspect.PassiveInvoke(keyword, method, self, user, activationDepth, arg, chain);
 
             stack.Value.SetPeek(oldIndex, id);
             return result;
@@ -344,19 +344,19 @@ namespace Roguegard
             }
         }
 
-        public ref struct ActiveNext
+        public ref struct ActiveChain
         {
             private readonly RogueMethodAspectState state;
-            internal ActiveNext(RogueMethodAspectState state) { this.state = state; }
+            internal ActiveChain(RogueMethodAspectState state) { this.state = state; }
             public bool Invoke(
                 IKeyword keyword, IRogueMethod method, RogueObj self, RogueObj target, float activationDepth, in RogueMethodArgument arg)
                 => state.ActiveInvoke(keyword, method, self, target, activationDepth, arg);
         }
 
-        public ref struct PassiveNext
+        public ref struct PassiveChain
         {
             private readonly RogueMethodAspectState state;
-            internal PassiveNext(RogueMethodAspectState state) { this.state = state; }
+            internal PassiveChain(RogueMethodAspectState state) { this.state = state; }
             public bool Invoke(
                 IKeyword keyword, IRogueMethod method, RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
                 => state.PassiveInvoke(keyword, method, self, user, activationDepth, arg);

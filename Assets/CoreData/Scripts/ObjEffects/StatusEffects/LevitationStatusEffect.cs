@@ -69,13 +69,13 @@ namespace Roguegard
 
             bool IRogueMethodPassiveAspect.PassiveInvoke(
                 IKeyword keyword, IRogueMethod method, RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg,
-                RogueMethodAspectState.PassiveNext next)
+                RogueMethodAspectState.PassiveChain chain)
             {
                 var tool = arg.Tool;
                 if (tool == null)
                 {
                     // 道具を使用しない場合関わらない。
-                    return next.Invoke(keyword, method, self, user, activationDepth, arg);
+                    return chain.Invoke(keyword, method, self, user, activationDepth, arg);
                 }
 
                 // 道具を所持しているか衝突できる場合、そのまま実行させる。
@@ -84,7 +84,7 @@ namespace Roguegard
                 // ほかのオブジェクトから呼び出された場合（食べ物を投げ当てられたときなど）も気にせず実行する。
                 if (self.Space.Contains(tool) || tool.HasCollider || method is not IActiveRogueMethod || (user != null && self != user))
                 {
-                    return next.Invoke(keyword, method, self, user, activationDepth, arg);
+                    return chain.Invoke(keyword, method, self, user, activationDepth, arg);
                 }
                 else
                 {

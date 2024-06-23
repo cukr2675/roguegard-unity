@@ -22,9 +22,9 @@ namespace Roguegard.CharacterCreation
 
             bool IRogueMethodPassiveAspect.PassiveInvoke(
                 IKeyword keyword, IRogueMethod method, RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg,
-                RogueMethodAspectState.PassiveNext next)
+                RogueMethodAspectState.PassiveChain chain)
             {
-                var result = next.Invoke(keyword, method, self, user, activationDepth, arg);
+                var result = chain.Invoke(keyword, method, self, user, activationDepth, arg);
                 if (result && activationDepth < 1f && method is ISkill skill)
                 {
                     var atk = skill.GetATK(self, out var additionalEffect);

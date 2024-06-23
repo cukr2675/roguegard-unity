@@ -91,7 +91,7 @@ namespace Roguegard.CharacterCreation
 
             bool IRogueMethodPassiveAspect.PassiveInvoke(
                 IKeyword keyword, IRogueMethod method, RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg,
-                RogueMethodAspectState.PassiveNext next)
+                RogueMethodAspectState.PassiveChain chain)
             {
                 if (keyword == MainInfoKw.Walk)
                 {
@@ -112,7 +112,7 @@ namespace Roguegard.CharacterCreation
                     self.Main.Stats.ChargedSpeed = -100;
                 }
 
-                return next.Invoke(keyword, method, self, user, activationDepth, arg);
+                return chain.Invoke(keyword, method, self, user, activationDepth, arg);
             }
 
             void IStatusEffect.GetEffectedName(RogueNameBuilder refName, RogueObj self) { }

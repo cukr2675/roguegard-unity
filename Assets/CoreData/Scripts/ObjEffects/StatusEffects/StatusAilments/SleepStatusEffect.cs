@@ -86,12 +86,12 @@ namespace Roguegard
 
         bool IRogueMethodActiveAspect.ActiveInvoke(
             IKeyword keyword, IRogueMethod method, RogueObj self, RogueObj target, float activationDepth, in RogueMethodArgument arg,
-            RogueMethodAspectState.ActiveNext next)
+            RogueMethodAspectState.ActiveChain chain)
         {
             if (keyword == MainInfoKw.BeEaten)
             {
                 // 食べる動作だけは可能
-                return next.Invoke(keyword, method, self, target, activationDepth, arg);
+                return chain.Invoke(keyword, method, self, target, activationDepth, arg);
             }
 
             if (RogueDevice.Primary.Player == self)
@@ -104,9 +104,9 @@ namespace Roguegard
 
         bool IRogueMethodPassiveAspect.PassiveInvoke(
             IKeyword keyword, IRogueMethod method, RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg,
-            RogueMethodAspectState.PassiveNext next)
+            RogueMethodAspectState.PassiveChain chain)
         {
-            var result = next.Invoke(keyword, method, self, user, activationDepth, arg);
+            var result = chain.Invoke(keyword, method, self, user, activationDepth, arg);
             if (result && keyword == MainInfoKw.Hit && arg.RefValue?.MainValue >= 1)
             {
                 // ダメージを受けたとき目を覚ます

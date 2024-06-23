@@ -65,7 +65,7 @@ namespace Roguegard.Rgpacks.MoonSharp
 
         bool IRogueMethodPassiveAspect.PassiveInvoke(
             IKeyword keyword, IRogueMethod method, RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg,
-            RogueMethodAspectState.PassiveNext next)
+            RogueMethodAspectState.PassiveChain chain)
         {
             return passiveAspectMethod.Call().Boolean;
         }

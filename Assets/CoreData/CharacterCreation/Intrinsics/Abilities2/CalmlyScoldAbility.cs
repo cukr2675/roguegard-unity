@@ -20,14 +20,14 @@ namespace Roguegard.CharacterCreation
 
             bool IRogueMethodPassiveAspect.PassiveInvoke(
                 IKeyword keyword, IRogueMethod method, RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg,
-                RogueMethodAspectState.PassiveNext next)
+                RogueMethodAspectState.PassiveChain chain)
             {
                 if (keyword == MainInfoKw.Hit && (self.Main.Stats.Party?.Members.Contains(user) ?? false) && AttackUtility.GetUseValue(arg.RefValue))
                 {
                     // 味方からの被会心率-5%
                     arg.RefValue.SubValues[StatsKw.CriticalRate] -= .05f;
                 }
-                return next.Invoke(keyword, method, self, user, activationDepth, arg);
+                return chain.Invoke(keyword, method, self, user, activationDepth, arg);
             }
         }
     }

@@ -27,14 +27,14 @@ namespace Roguegard.CharacterCreation
 
             bool IRogueMethodPassiveAspect.PassiveInvoke(
                 IKeyword keyword, IRogueMethod method, RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg,
-                RogueMethodAspectState.PassiveNext next)
+                RogueMethodAspectState.PassiveChain chain)
             {
                 if (keyword == MainInfoKw.Attack)
                 {
                     // 通常攻撃する
                     attackCount = 0;
                     attackActivationDepth = activationDepth;
-                    var result = next.Invoke(keyword, method, self, user, activationDepth, arg);
+                    var result = chain.Invoke(keyword, method, self, user, activationDepth, arg);
 
                     if (attackCount == 2)
                     {
@@ -43,19 +43,19 @@ namespace Roguegard.CharacterCreation
                     }
                     return result;
                 }
-                return next.Invoke(keyword, method, self, user, activationDepth, arg);
+                return chain.Invoke(keyword, method, self, user, activationDepth, arg);
             }
 
             bool IRogueMethodActiveAspect.ActiveInvoke(
                 IKeyword keyword, IRogueMethod method, RogueObj self, RogueObj target, float activationDepth, in RogueMethodArgument arg,
-                RogueMethodAspectState.ActiveNext next)
+                RogueMethodAspectState.ActiveChain chain)
             {
                 if (keyword == MainInfoKw.Hit && activationDepth == attackActivationDepth && AttackUtility.GetUseValue(arg.RefValue))
                 {
                     // 攻撃が失敗しても、攻撃すればそれだけでカウントする
                     attackCount++;
                 }
-                return next.Invoke(keyword, method, self, target, activationDepth, arg);
+                return chain.Invoke(keyword, method, self, target, activationDepth, arg);
             }
         }
 

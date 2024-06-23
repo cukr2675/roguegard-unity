@@ -13,7 +13,7 @@ namespace Roguegard
         /// </summary>
         bool PassiveInvoke(
             IKeyword keyword, IRogueMethod method, RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg,
-            RogueMethodAspectState.PassiveNext next);
+            RogueMethodAspectState.PassiveChain chain);
     }
 
     // Walk など実行回数が多いキーワードだけ別リストにするなら必要。

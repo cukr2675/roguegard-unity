@@ -59,7 +59,7 @@ namespace Roguegard
 
         bool IRogueMethodActiveAspect.ActiveInvoke(
             IKeyword keyword, IRogueMethod method, RogueObj self, RogueObj target, float activationDepth, in RogueMethodArgument arg,
-            RogueMethodAspectState.ActiveNext next)
+            RogueMethodAspectState.ActiveChain chain)
         {
             // 恐怖状態のとき、攻撃を失敗させる。
             if (keyword == MainInfoKw.Attack)
@@ -72,7 +72,7 @@ namespace Roguegard
                 return false;
             }
 
-            return next.Invoke(keyword, method, self, target, activationDepth, arg);
+            return chain.Invoke(keyword, method, self, target, activationDepth, arg);
         }
 
         public override bool CanStack(RogueObj obj, RogueObj otherObj, IRogueEffect other)

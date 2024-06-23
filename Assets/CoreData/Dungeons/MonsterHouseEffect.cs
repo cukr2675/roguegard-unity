@@ -29,9 +29,9 @@ namespace Roguegard
 
         bool IRogueMethodPassiveAspect.PassiveInvoke(
             IKeyword keyword, IRogueMethod method, RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg,
-            RogueMethodAspectState.PassiveNext next)
+            RogueMethodAspectState.PassiveChain chain)
         {
-            var result = next.Invoke(keyword, method, self, user, activationDepth, arg);
+            var result = chain.Invoke(keyword, method, self, user, activationDepth, arg);
             RogueDungeonFloor floor = null;
             if (result && keyword == StdKw.BeEntered && RoomIndex < self.Space.RoomCount)
             {
