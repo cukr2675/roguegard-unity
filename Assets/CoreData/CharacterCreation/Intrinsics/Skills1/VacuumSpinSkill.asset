@@ -16,23 +16,19 @@ MonoBehaviour:
   _icon: {fileID: 0}
   _color: {r: 1, g: 1, b: 1, a: 1}
   _caption: 
-  _details:
-    _script: {fileID: 0}
-    _ref:
-      rid: -2
   _baseLv: 20
   _baseCost: 2
   _baseCostIsUnknown: 0
   _script:
     _script: {fileID: 11500000, guid: 6d47e143edb69634fab7788dbf0325a7, type: 3}
     _ref:
-      rid: 3586031465861742595
+      rid: 3003915779736600581
   references:
     version: 2
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
-    - rid: 3586031465861742595
-      type: {class: VacuumRampageSkill, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
+    - rid: 3003915779736600581
+      type: {class: VacuumSpinSkill, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
       data:
         _assemblyReflectionAssetDummy: 

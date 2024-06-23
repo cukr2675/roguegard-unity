@@ -26,13 +26,13 @@ MonoBehaviour:
   _script:
     _script: {fileID: 11500000, guid: 97d93f5e77bd02147b6f42d1fc37827e, type: 3}
     _ref:
-      rid: 3003915766944235603
+      rid: 3003915766944235620
   references:
     version: 2
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
-    - rid: 3003915766944235603
-      type: {class: HealSkill, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
+    - rid: 3003915766944235620
+      type: {class: HealingSkill, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
       data:
         _assemblyReflectionAssetDummy: 
