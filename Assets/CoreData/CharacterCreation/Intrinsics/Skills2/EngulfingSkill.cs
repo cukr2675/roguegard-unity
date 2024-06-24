@@ -125,8 +125,8 @@ namespace Roguegard.CharacterCreation
                     // 移動に失敗したらランダム位置へワープする。それでも失敗したら変化なし
                     if (self.Location == user)
                     {
-                        var position = self.Location.Location.Space.GetRandomPositionInRoom(RogueRandom.Primary);
-                        if (!this.Locate(self, null, self.Location.Location, position, activationDepth)) return default;
+                        if (!self.Location.Location.Space.TryGetRandomPositionInRoom(RogueRandom.Primary, out var position) ||
+                            !this.Locate(self, null, self.Location.Location, position, activationDepth)) return default;
                     }
 
                     RemoveClose(self);

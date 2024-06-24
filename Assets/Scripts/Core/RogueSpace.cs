@@ -165,18 +165,18 @@ namespace Roguegard
             }
         }
 
-        public Vector2Int GetRandomPositionInRoom(IRogueRandom random)
+        public bool TryGetRandomPositionInRoom(IRogueRandom random, out Vector2Int position)
         {
             if (Tilemap == null) throw new RogueException($"{Tilemap} の設定されていない空間からランダム位置を取得することはできません。");
 
-            return spaceRandom.GetRandomPositionInRoom(this, random);
+            return spaceRandom.TryGetRandomPositionInRoom(this, random, out position);
         }
 
-        public Vector2Int GetRandomPositionInRoom(IRogueRandom random, int roomIndex)
+        public bool TryGetRandomPositionInRoom(IRogueRandom random, int roomIndex, out Vector2Int position)
         {
             if (Tilemap == null) throw new RogueException($"{Tilemap} の設定されていない空間からランダム位置を取得することはできません。");
 
-            return spaceRandom.GetRandomPositionInRoom(this, random, roomIndex);
+            return spaceRandom.GetRandomPositionInRoom(this, random, roomIndex, out position);
         }
 
         public bool CollideAt(Vector2Int position, bool collide = true, bool tileCollide = true)

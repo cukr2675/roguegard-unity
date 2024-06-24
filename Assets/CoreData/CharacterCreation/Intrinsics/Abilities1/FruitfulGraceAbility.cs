@@ -34,9 +34,8 @@ namespace Roguegard.CharacterCreation
                 {
                     // 階層移動に成功したとき 10% でアイテムを追加生成する。
                     var random = RogueRandom.Primary;
-                    if (random.Next(0, 10) == 0)
+                    if (random.Next(0, 10) == 0 && self.Location.Space.TryGetRandomPositionInRoom(random, out var position))
                     {
-                        var position = self.Location.Space.GetRandomPositionInRoom(random);
                         WeightedRogueObjGeneratorUtility.CreateObj(level.ItemTable[0], self.Location, position, RogueRandom.Primary);
                     }
                 }

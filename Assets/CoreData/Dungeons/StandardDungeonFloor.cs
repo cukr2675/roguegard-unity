@@ -50,8 +50,8 @@ namespace Roguegard.CharacterCreation
 
             // プレイヤーキャラを移動
             {
-                var position = floor.Space.GetRandomPositionInRoom(random);
-                if (!default(IActiveRogueMethodCaller).Locate(player, null, floor, position, 0f)) { Debug.LogError("生成に失敗しました。"); }
+                if (!floor.Space.TryGetRandomPositionInRoom(random, out var position) ||
+                    !default(IActiveRogueMethodCaller).Locate(player, null, floor, position, 0f)) { Debug.LogError("生成に失敗しました。"); }
 
                 LocatePartyMembers(player, floor, random);
             }

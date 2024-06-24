@@ -69,7 +69,13 @@ namespace Roguegard.CharacterCreation
                     self.Location.Main.Stats.Lv == member.TargetFloor)
                 {
                     // 目標の階層への移動に成功したとき NPC を生成する。
-                    var position = self.Location.Space.GetRandomPositionInRoom(RogueRandom.Primary);
+                    if (!self.Location.Space.TryGetRandomPositionInRoom(RogueRandom.Primary, out var position))
+                    {
+                        // 生成に失敗したらメッセージを表示
+                        RogueDevice.Add(DeviceKw.AppendText, "目的の階層に到達したが 目標が見つからなかった\n");
+                        return true;
+                    }
+
                     var client = member.Targets[0];
                     client.Option.CreateObj(client, self.Location, position, RogueRandom.Primary);
                 }

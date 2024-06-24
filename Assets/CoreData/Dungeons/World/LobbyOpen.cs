@@ -53,8 +53,10 @@ namespace Roguegard
 
                 // è§êlÇ™Ç¢Ç»Ç©Ç¡ÇΩÇÁê∂ê¨Ç∑ÇÈ
                 var random = RogueRandom.Primary;
-                var position = self.Space.GetRandomPositionInRoom(random);
-                parent._lobbyMerchant.Option.CreateObj(parent._lobbyMerchant, self, position, random);
+                if (self.Space.TryGetRandomPositionInRoom(random, out var position))
+                {
+                    parent._lobbyMerchant.Option.CreateObj(parent._lobbyMerchant, self, position, random);
+                }
                 return default;
             }
         }

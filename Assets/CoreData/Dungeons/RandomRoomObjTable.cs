@@ -61,7 +61,12 @@ namespace Roguegard.CharacterCreation
                 {
                     for (int j = 0; j < iteration; j++)
                     {
-                        position = floor.Space.GetRandomPositionInRoom(random);
+                        if (!floor.Space.TryGetRandomPositionInRoom(random, out position))
+                        {
+                            position = default;
+                            return false;
+                        }
+
                         var sqrDistance = (position - player.Position).sqrMagnitude;
                         if (room.Contains(position) || sqrDistance < minSqrDistance) continue;
 
@@ -72,7 +77,12 @@ namespace Roguegard.CharacterCreation
                 // 同部屋外の出現に失敗した場合も再試行する
                 for (int j = 0; j < iteration; j++)
                 {
-                    position = floor.Space.GetRandomPositionInRoom(random);
+                    if (!floor.Space.TryGetRandomPositionInRoom(random, out position))
+                    {
+                        position = default;
+                        return false;
+                    }
+
                     var sqrDistance = (position - player.Position).sqrMagnitude;
                     if (sqrDistance < minSqrDistance) continue;
 
@@ -80,8 +90,7 @@ namespace Roguegard.CharacterCreation
                 }
 
                 // 条件に一致する位置が見つからなければとりあえず生成
-                position = floor.Space.GetRandomPositionInRoom(random);
-                return true;
+                return floor.Space.TryGetRandomPositionInRoom(random, out position);
 
                 //// 条件に一致する位置が見つからなければ失敗として位置を返さない
                 //position = default;
@@ -89,8 +98,7 @@ namespace Roguegard.CharacterCreation
             }
             else
             {
-                position = floor.Space.GetRandomPositionInRoom(random);
-                return true;
+                return floor.Space.TryGetRandomPositionInRoom(random, out position);
             }
         }
     }

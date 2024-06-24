@@ -20,19 +20,25 @@ namespace Roguegard
             Reset(space);
         }
 
-        public Vector2Int GetRandomPositionInRoom(RogueSpace space, IRogueRandom random)
+        public bool TryGetRandomPositionInRoom(RogueSpace space, IRogueRandom random, out Vector2Int position)
         {
+            if (GroundInRoomCount == 0)
+            {
+                position = default;
+                return false;
+            }
+
             var positionIndex = random.Next(0, GroundInRoomCount);
             var index = 0;
             for (int y = 0; y < space.Tilemap.Height; y++)
             {
                 for (int x = 0; x < space.Tilemap.Width; x++)
                 {
-                    var position = new Vector2Int(x, y);
+                    position = new Vector2Int(x, y);
                     var tile = space.Tilemap.GetTop(position);
                     if (RoomIndexOf(space, position) == -1 || space.CollideAt(position) || tile.Info.Layer != RogueTileLayer.Ground) continue;
 
-                    if (index == positionIndex) return new Vector2Int(x, y);
+                    if (index == positionIndex) return true;
 
                     index++;
                 }
@@ -40,8 +46,14 @@ namespace Roguegard
             throw new RogueException(GroundInRoomCount.ToString());
         }
 
-        public Vector2Int GetRandomPositionInRoom(RogueSpace space, IRogueRandom random, int roomIndex)
+        public bool GetRandomPositionInRoom(RogueSpace space, IRogueRandom random, int roomIndex, out Vector2Int position)
         {
+            if (groundInRoomCounts[roomIndex] == 0)
+            {
+                position = default;
+                return false;
+            }
+
             var positionIndex = random.Next(0, groundInRoomCounts[roomIndex]);
             space.GetRoom(roomIndex, out var room, out _);
             var index = 0;
@@ -49,11 +61,11 @@ namespace Roguegard
             {
                 for (int x = room.xMin; x < room.xMax; x++)
                 {
-                    var position = new Vector2Int(x, y);
+                    position = new Vector2Int(x, y);
                     var tile = space.Tilemap.GetTop(position);
                     if (RoomIndexOf(space, position) != roomIndex || space.CollideAt(position) || tile.Info.Layer != RogueTileLayer.Ground) continue;
 
-                    if (index == positionIndex) return new Vector2Int(x, y);
+                    if (index == positionIndex) return true;
 
                     index++;
                 }

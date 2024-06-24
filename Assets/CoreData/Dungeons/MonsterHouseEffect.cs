@@ -49,7 +49,8 @@ namespace Roguegard
                     var random = RogueRandom.Primary;
                     for (int i = 0; i < 10; i++)
                     {
-                        var position = self.Space.GetRandomPositionInRoom(random, RoomIndex);
+                        if (!self.Space.TryGetRandomPositionInRoom(random, RoomIndex, out var position)) continue;
+
                         WeightedRogueObjGeneratorUtility.CreateObj(enemies, self, position, random);
                     }
 

@@ -157,7 +157,13 @@ namespace Roguegard.CharacterCreation
                     var targetEffect = new TargetEffect() { parent = this };
                     for (int i = 0; i < member.Targets[0].Stack; i++)
                     {
-                        var position = self.Location.Space.GetRandomPositionInRoom(RogueRandom.Primary);
+                        if (!self.Location.Space.TryGetRandomPositionInRoom(RogueRandom.Primary, out var position))
+                        {
+                            // 生成に失敗したらそのぶんは討伐扱いとしてカウントする
+                            currentCount++;
+                            continue;
+                        }
+
                         var target = member.Targets[0].Option.CreateObj(member.Targets[0], self.Location, position, RogueRandom.Primary);
                         target.TrySetStack(1);
                         target.Main.RogueEffects.AddOpen(target, targetEffect); // 討伐数をカウントするためのエフェクトを付与

@@ -30,9 +30,18 @@ namespace Roguegard
                     this.Hurt(user, self, AttackUtility.GetActivationDepthCantCounter(activationDepth), damageValue);
                     if (this.TryDefeat(user, self, activationDepth, damageValue)) return true;
 
-                    // 倒れていなければテレポートさせる
-                    var position = user.Location.Space.GetRandomPositionInRoom(RogueRandom.Primary);
-                    SpaceUtility.TryLocate(user, user.Location, position);
+                    // 倒れていなければテレポートさせる。テレポートに失敗したら即死
+                    if (!user.Location.Space.TryGetRandomPositionInRoom(RogueRandom.Primary, out var position) ||
+                        !SpaceUtility.TryLocate(user, user.Location, position))
+                    {
+                        if (MessageWorkListener.TryOpenHandler(user.Location, user.Position, out var h2))
+                        {
+                            using var handler = h2;
+                            handler.AppendText(user).AppendText("はそのまま流されてしまった…\n");
+                        }
+
+                        if (this.Defeat(user, self, activationDepth)) return true;
+                    }
                 }
                 else
                 {
