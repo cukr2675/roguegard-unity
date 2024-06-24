@@ -27,11 +27,11 @@ namespace Roguegard
             // UŒ‚—Íƒ_ƒ[ƒW‚ÌUŒ‚
             using var damageValue = AffectableValue.Get();
             StatsEffectedValues.GetATK(self, damageValue);
-            this.TryHurt(target, self, activationDepth, damageValue);
+            var hit = this.TryHurt(target, self, activationDepth, damageValue);
             var defeated = this.TryDefeat(target, self, activationDepth, damageValue);
 
             // “|‚ê‚Ä‚¢‚È‚¯‚ê‚ÎŠm—¦‚Å“Å•t—^
-            if (!defeated)
+            if (hit && !defeated)
             {
                 var randomValue = RogueRandom.Primary.NextFloat(0f, 1f);
                 if (randomValue <= _affectRate)

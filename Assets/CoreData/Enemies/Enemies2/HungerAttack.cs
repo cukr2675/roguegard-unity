@@ -28,11 +28,11 @@ namespace Roguegard
             // 攻撃力ダメージの攻撃
             using var damageValue = AffectableValue.Get();
             StatsEffectedValues.GetATK(self, damageValue);
-            this.TryHurt(target, self, activationDepth, damageValue);
+            var hit = this.TryHurt(target, self, activationDepth, damageValue);
             var defeated = this.TryDefeat(target, self, activationDepth, damageValue);
 
             // 倒れていなければ確率で満腹度低下
-            if (!defeated)
+            if (hit && !defeated)
             {
                 var randomValue = RogueRandom.Primary.NextFloat(0f, 1f);
                 if (randomValue <= _affectRate)
@@ -41,7 +41,7 @@ namespace Roguegard
                     if (MessageWorkListener.TryOpenHandler(self.Location, self.Position, out var h))
                     {
                         using var handler = h;
-                        handler.AppendText(":NutritionDamageMsg::2").AppendText(self).AppendText(_nutritionDamage).AppendText("\n");
+                        handler.AppendText(":NutritionDamageMsg::2").AppendText(target).AppendText(_nutritionDamage).AppendText("\n");
                     }
                 }
             }
