@@ -12,6 +12,7 @@ namespace RoguegardUnity
     {
         RogueObj IRogueDevice.Player => componentManager.Player;
         RogueObj IRogueDevice.Subject => componentManager.Subject;
+        RogueObj IRogueDevice.World => componentManager.World;
         bool IRogueDevice.HasSynchronizedWork => componentManager.EventManager.HasSynchronizedWork;
 
         public RogueOptions Options => componentManager.Options;

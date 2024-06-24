@@ -76,6 +76,7 @@ namespace RoguegardUnity
         {
             public RogueObj Player { get; set; }
             public RogueObj Subject { get; set; }
+            public RogueObj World { get; set; }
             public bool HasSynchronizedWork { get; set; }
             private bool allowStepTurn = true;
 

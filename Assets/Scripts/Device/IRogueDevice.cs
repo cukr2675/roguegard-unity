@@ -11,6 +11,8 @@ namespace Roguegard.Device
 
         RogueObj Subject { get; }
 
+        RogueObj World { get; }
+
         /// <summary>
         /// この値が true のとき同期アニメーションの待機を要求する
         /// </summary>

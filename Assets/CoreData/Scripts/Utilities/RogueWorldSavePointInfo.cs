@@ -71,7 +71,7 @@ namespace Roguegard
 
             public override void Activate(IListMenuManager manager, RogueObj player, RogueObj empty, in RogueMethodArgument arg)
             {
-                var world = player.Location;
+                var world = RogueWorldInfo.GetWorld(player);
                 var worldInfo = RogueWorldInfo.GetByCharacter(player);
                 var tilemap = worldInfo.Lobby.Space.Tilemap;
                 var memberInfo = LobbyMemberList.GetMemberInfo(player);

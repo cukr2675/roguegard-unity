@@ -31,6 +31,8 @@ namespace Roguegard
 
         public static RogueObj GetWorld(RogueObj self)
         {
+            return RogueDevice.Primary.World;
+
             var location = self;
             while (true)
             {
