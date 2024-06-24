@@ -16,6 +16,7 @@ MonoBehaviour:
   _filter: t:RogueTileInfoData
   _targetFolders:
   - {fileID: 102900000, guid: 222d7e4e1141c4849ba4aded40361463, type: 3}
+  - {fileID: 102900000, guid: f327df6ee002dd54e8398f6e44441aba, type: 3}
   _items:
   - _key: Core.Dirt
     _asset: {fileID: 11400000, guid: 9e07379c12401a54a9afcdc2d2081fc9, type: 2}
@@ -49,3 +50,5 @@ MonoBehaviour:
     _asset: {fileID: 11400000, guid: 7290c371cdc13be4f8bd90bffa1cd30b, type: 2}
   - _key: Core.SpoilFoodTrap
     _asset: {fileID: 11400000, guid: a87eb4bad633c0549b92f667edafbcb7, type: 2}
+  - _key: Core.DD_RandomTrap
+    _asset: {fileID: 11400000, guid: 7a6f262d5be164240822183b1d25f004, type: 2}
