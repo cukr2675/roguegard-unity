@@ -28,11 +28,13 @@ namespace Roguegard.CharacterCreation
                 }
             }
 
-            // Š®‘Sˆê’v‚·‚é—v‘f‚ªŒ©‚Â‚©‚ç‚È‚¯‚ê‚ÎV‚µ‚­’Ç‰Á‚·‚é
-            var item = new EquipmentItem(equipParts, order);
-            equipmentItems.Add(item);
-            table = item.Table;
-            return true;
+            {
+                // Š®‘Sˆê’v‚·‚é—v‘f‚ªŒ©‚Â‚©‚ç‚È‚¯‚ê‚ÎV‚µ‚­’Ç‰Á‚·‚é
+                var item = new EquipmentItem(equipParts, order);
+                equipmentItems.Add(item);
+                table = item.Table;
+                return true;
+            }
         }
 
         public void AddEffectFromInfoSet(RogueObj self)
