@@ -109,7 +109,7 @@ namespace RoguegardUnity
             // キャラクターを生成
             var world = RoguegardSettings.WorldGenerator.CreateObj(null, Vector2Int.zero, random);
             var player = characterCreationDataBuilder.CreateObj(world, Vector2Int.zero, random);
-            var worldInfo = RogueWorldInfo.GetByCharacter(player);
+            var worldInfo = RogueWorldInfo.Get(world);
             worldInfo.LobbyMembers.Add(player);
             var memberInfo = LobbyMemberList.GetMemberInfo(player);
             memberInfo.CharacterCreationData = characterCreationDataBuilder;

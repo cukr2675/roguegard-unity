@@ -46,6 +46,11 @@ namespace Roguegard
         public static RogueWorldInfo GetByCharacter(RogueObj self)
         {
             var world = GetWorld(self);
+            return Get(world);
+        }
+
+        public static RogueWorldInfo Get(RogueObj world)
+        {
             if (world.TryGet<Info>(out var info))
             {
                 return info.info;
