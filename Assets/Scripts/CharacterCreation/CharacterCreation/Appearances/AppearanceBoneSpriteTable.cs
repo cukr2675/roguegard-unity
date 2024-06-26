@@ -15,40 +15,24 @@ namespace Roguegard.CharacterCreation
 
         public bool TryGetNewEquipmentTable(Spanning<IKeyword> equipParts, float order, out AffectableBoneSpriteTable table)
         {
-            table = null;
+            // •”•ªˆê’v‚·‚é—v‘f‚ª‚ ‚Á‚½‚ç¸”s‚³‚¹‚é
             foreach (var item in equipmentItems)
             {
-                // EquipParts ‚Æ Order ‚ªŠ®‘Sˆê’v‚·‚é—v‘f‚Ìƒe[ƒuƒ‹‚ğ•Ô‚·
-                if (!ListEquals(item.EquipParts, equipParts, out var partialMatch))
+                for (int i = 0; i < item.EquipParts.Count; i++)
                 {
-                    if (partialMatch) return false; // •”•ªˆê’v‚·‚é—v‘f‚ª‚ ‚Á‚½‚ç¸”s‚³‚¹‚é
-                    else continue;
+                    if (equipParts.Contains(item.EquipParts[i]))
+                    {
+                        table = null;
+                        return false;
+                    }
                 }
-                if (item.Order != order) continue;
+            }
 
-                table = item.Table;
-                return true;
-            }
-            {
-                // Š®‘Sˆê’v‚·‚é—v‘f‚ªŒ©‚Â‚©‚ç‚È‚¯‚ê‚ÎV‚µ‚­’Ç‰Á‚·‚é
-                var item = new EquipmentItem(equipParts, order);
-                equipmentItems.Add(item);
-                table = item.Table;
-                return true;
-            }
-        }
-
-        private static bool ListEquals(Spanning<IKeyword> a, Spanning<IKeyword> b, out bool partialMatch)
-        {
-            var exactMatch = a.Count == b.Count;
-            partialMatch = false;
-            var length = Mathf.Min(a.Count, b.Count);
-            for (int i = 0; i < length; i++)
-            {
-                if (a[i] == b[i]) { partialMatch = true; }
-                else { exactMatch = false; }
-            }
-            return exactMatch;
+            // Š®‘Sˆê’v‚·‚é—v‘f‚ªŒ©‚Â‚©‚ç‚È‚¯‚ê‚ÎV‚µ‚­’Ç‰Á‚·‚é
+            var item = new EquipmentItem(equipParts, order);
+            equipmentItems.Add(item);
+            table = item.Table;
+            return true;
         }
 
         public void AddEffectFromInfoSet(RogueObj self)
