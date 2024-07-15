@@ -18,6 +18,8 @@ namespace Roguegard.Rgpacks.MoonSharp
         private const string moduleName = "roguegard";
         private static readonly StringBuilder stringBuilder = new();
         private static readonly SelectMenu selectMenu = new();
+        private static readonly Stack<Table> tableStack = new();
+        private const int indentWidth = 2;
 
         public static void MoonSharpInit(Table globalTable, Table roguegardTable)
         {
@@ -83,6 +85,74 @@ return {
 
             // require('roguegard') ÇïKê{Ç…Ç∑ÇÈ
             globalTable.Remove(moduleName);
+        }
+
+        [MoonSharpModuleMethod]
+        public static DynValue todump(ScriptExecutionContext executionContext, CallbackArguments args)
+        {
+            tableStack.Clear();
+            stringBuilder.Clear();
+            AddTo(stringBuilder, args[0], true, 0);
+            return DynValue.NewString(stringBuilder);
+
+            void AddTo(StringBuilder stringBuilder, DynValue obj, bool expandTable, int indentRank)
+            {
+                if (obj.Type == DataType.Number || obj.Type == DataType.Boolean || obj.Type == DataType.Nil)
+                {
+                    stringBuilder.Append(obj.String);
+                }
+                else if (obj.Type == DataType.String)
+                {
+                    stringBuilder.Append('"' + obj.String + '"');
+                }
+                else if (expandTable && obj.Type == DataType.Table)
+                {
+                    var table = obj.Table;
+                    if (tableStack.Contains(table))
+                    {
+                        // ñ≥å¿çƒãAëŒçÙ
+                        stringBuilder.Append("{...}");
+                        return;
+                    }
+                    tableStack.Push(table);
+
+                    stringBuilder.AppendLine("{");
+
+                    var any = false;
+                    foreach (var pair in table.Pairs)
+                    {
+                        stringBuilder.Append(' ', indentWidth * (indentRank + 1));
+                        stringBuilder.Append("[");
+                        AddTo(stringBuilder, pair.Key, false, 0);
+                        stringBuilder.Append("] = ");
+                        AddTo(stringBuilder, pair.Value, true, indentRank + 1);
+                        stringBuilder.Append(", ");
+                        any = true;
+                    }
+                    if (any)
+                    {
+                        stringBuilder.Length -= ", ".Length;
+                    }
+
+                    stringBuilder.AppendLine();
+                    stringBuilder.Append(' ', indentWidth * indentRank);
+                    stringBuilder.Append("}");
+
+                    tableStack.Pop();
+                }
+                else
+                {
+                    stringBuilder.Append('(' + obj.CastToString() + ')');
+                }
+            }
+        }
+
+        [MoonSharpModuleMethod]
+        public static DynValue dump(ScriptExecutionContext executionContext, CallbackArguments args)
+        {
+            var text = todump(executionContext, args);
+            Debug.Log(text.String);
+            return text;
         }
 
         [MoonSharpModuleMethod]
