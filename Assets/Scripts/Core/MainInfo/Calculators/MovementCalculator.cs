@@ -6,7 +6,7 @@ namespace Roguegard
 {
     public class MovementCalculator : IRogueCalculator
     {
-        private readonly AffectableValue value = AffectableValue.Get();
+        private readonly EffectableValue value = EffectableValue.Get();
 
         public bool AsTile { get; private set; }
         public bool HasCollider { get; private set; }

@@ -76,7 +76,7 @@ namespace Roguegard.CharacterCreation
                 instance.AffectTo(obj, null, 0f, RogueMethodArgument.Identity);
             }
 
-            void IValueEffect.AffectValue(IKeyword keyword, AffectableValue value, RogueObj self)
+            void IValueEffect.AffectValue(IKeyword keyword, EffectableValue value, RogueObj self)
             {
                 if (keyword == StatsKw.DEF)
                 {

@@ -9,7 +9,7 @@ namespace Roguegard
     {
         [SerializeField] private KeywordData[] _keywords = null;
 
-        public override void AffectValue(AffectableValue value, RogueObj self)
+        public override void AffectValue(EffectableValue value, RogueObj self)
         {
             foreach (var keyword in _keywords)
             {

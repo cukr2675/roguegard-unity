@@ -11,7 +11,7 @@ namespace Roguegard
         private bool positioned;
         public int Count { get; set; }
         public Vector2 Vector { get; set; }
-        public AffectableValue RefValue { get; set; }
+        public EffectableValue RefValue { get; set; }
         public RogueObj Tool { get; set; }
         public object Other { get; set; }
 

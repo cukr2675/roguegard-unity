@@ -140,7 +140,7 @@ namespace Roguegard
 
             private static readonly MemberEffect memberEffect = new MemberEffect();
 
-            void IValueEffect.AffectValue(IKeyword keyword, AffectableValue value, RogueObj self)
+            void IValueEffect.AffectValue(IKeyword keyword, EffectableValue value, RogueObj self)
             {
                 if (keyword == StatsKw.LoadCapacity)
                 {

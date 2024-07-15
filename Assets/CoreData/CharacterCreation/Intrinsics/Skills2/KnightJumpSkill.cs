@@ -52,7 +52,7 @@ namespace Roguegard.CharacterCreation
                 else
                 {
                     // 正面2マス先に誰かいるときそれに攻撃力(x2)ダメージ
-                    using var damage = AffectableValue.Get();
+                    using var damage = EffectableValue.Get();
                     StatsEffectedValues.GetATK(self, damage);
                     damage.MainValue += damage.BaseMainValue;
                     default(IAffectRogueMethodCaller).Hurt(targets[0], self, 1f, damage);
@@ -70,7 +70,7 @@ namespace Roguegard.CharacterCreation
             public override int GetATK(RogueObj self, out bool additionalEffect)
             {
                 // 攻撃力(x2)ダメージの攻撃。
-                using var damageValue = AffectableValue.Get();
+                using var damageValue = EffectableValue.Get();
                 StatsEffectedValues.GetATK(self, damageValue);
                 damageValue.MainValue += damageValue.BaseMainValue;
 

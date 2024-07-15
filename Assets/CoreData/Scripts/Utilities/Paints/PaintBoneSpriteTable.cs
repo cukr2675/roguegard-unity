@@ -60,9 +60,9 @@ namespace Roguegard
             _palette[index] = color;
         }
 
-        public AffectableBoneSpriteTable GetAffectableTable()
+        public EffectableBoneSpriteTable GetEffectableTable()
         {
-            var table = new AffectableBoneSpriteTable();
+            var table = new EffectableBoneSpriteTable();
             foreach (var item in _items)
             {
                 item.AddTo(table, MainColor, _palette);

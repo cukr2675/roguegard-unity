@@ -15,7 +15,7 @@ namespace Roguegard
 
         protected override void BeEaten(RogueObj self, RogueObj user, float activationDepth)
         {
-            using var value = AffectableValue.Get();
+            using var value = EffectableValue.Get();
             value.Initialize(5f);
             value.SubValues[StdKw.Heal] = 1f;
 

@@ -47,7 +47,7 @@ namespace Roguegard
             base.RemoveClose(self);
         }
 
-        void IValueEffect.AffectValue(IKeyword keyword, AffectableValue value, RogueObj self)
+        void IValueEffect.AffectValue(IKeyword keyword, EffectableValue value, RogueObj self)
         {
             // 自律行動する敵は、恐怖状態のとき逃げる。
             // 恐怖状態の判定のために値を設定する。

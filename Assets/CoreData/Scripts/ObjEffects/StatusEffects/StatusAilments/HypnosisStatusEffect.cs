@@ -70,7 +70,7 @@ namespace Roguegard
             return default;
         }
 
-        void IValueEffect.AffectValue(IKeyword keyword, AffectableValue value, RogueObj self)
+        void IValueEffect.AffectValue(IKeyword keyword, EffectableValue value, RogueObj self)
         {
             if (keyword == StatsKw.Speed)
             {
@@ -92,7 +92,7 @@ namespace Roguegard
             };
         }
 
-        void IBoneSpriteEffect.AffectSprite(RogueObj self, IReadOnlyNodeBone rootNode, AffectableBoneSpriteTable boneSpriteTable)
+        void IBoneSpriteEffect.AffectSprite(RogueObj self, IReadOnlyNodeBone rootNode, EffectableBoneSpriteTable boneSpriteTable)
         {
             // 目の色を変更
             var color = new Color32(255, 0, 255, 255);

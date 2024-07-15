@@ -20,7 +20,7 @@ namespace Roguegard
             if (RaycastAssert.RequireTarget(FrontRogueMethodRange.Instance, self, arg, out var target)) return false;
 
             // 攻撃力(x2)ダメージの攻撃
-            using var damageValue = AffectableValue.Get();
+            using var damageValue = EffectableValue.Get();
             MainCharacterWorkUtility.TryAddAttack(self);
             StatsEffectedValues.GetATK(user, damageValue);
             damageValue.MainValue += damageValue.BaseMainValue;
@@ -32,7 +32,7 @@ namespace Roguegard
         public override int GetATK(RogueObj self, out bool additionalEffect)
         {
             // 攻撃力+1ダメージの攻撃。
-            using var damageValue = AffectableValue.Get();
+            using var damageValue = EffectableValue.Get();
             StatsEffectedValues.GetATK(self, damageValue);
             damageValue.MainValue += 1;
 

@@ -165,7 +165,7 @@ namespace Roguegard
             Debug.LogError("下げる能力が見つかりません。");
         }
 
-        void IValueEffect.AffectValue(IKeyword keyword, AffectableValue value, RogueObj self)
+        void IValueEffect.AffectValue(IKeyword keyword, EffectableValue value, RogueObj self)
         {
             if (keyword == StatsKw.MaxHP)
             {

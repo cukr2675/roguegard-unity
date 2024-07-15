@@ -30,7 +30,7 @@ namespace Roguegard.CharacterCreation
             {
                 MainCharacterWorkUtility.TryAddSkill(self);
 
-                using var value = AffectableValue.Get();
+                using var value = EffectableValue.Get();
                 value.Initialize(0f);
                 value.SubValues[MainInfoKw.Skill] = 1f;
                 this.Affect(self, activationDepth, Effect.Callback, refValue: value);

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace SkeletalSprite
 {
-    public class AffectableBoneSpriteTable
+    public class EffectableBoneSpriteTable
     {
         private readonly Dictionary<BoneKeyword, Item> items = new Dictionary<BoneKeyword, Item>();
 
@@ -110,7 +110,7 @@ namespace SkeletalSprite
             item.equipmentColors.Add(color);
         }
 
-        public void AddTo(AffectableBoneSpriteTable table)
+        public void AddTo(EffectableBoneSpriteTable table)
         {
             foreach (var pair in items)
             {
@@ -148,7 +148,7 @@ namespace SkeletalSprite
             }
         }
 
-        public void ColoredAddTo(AffectableBoneSpriteTable table, Color fromColor, Color toColor)
+        public void ColoredAddTo(EffectableBoneSpriteTable table, Color fromColor, Color toColor)
         {
             foreach (var pair in items)
             {
@@ -226,7 +226,7 @@ namespace SkeletalSprite
         }
 
         /// <summary>
-        /// <see cref="RefItem"/> のコンストラクタを internal で <see cref="AffectableBoneSpriteTable"/> に公開する必要があるため、
+        /// <see cref="RefItem"/> のコンストラクタを internal で <see cref="EffectableBoneSpriteTable"/> に公開する必要があるため、
         /// このインターフェースも internal にする
         /// </summary>
         internal interface IItem

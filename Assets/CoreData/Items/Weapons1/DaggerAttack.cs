@@ -22,7 +22,7 @@ namespace Roguegard
             if (RaycastAssert.RequireTarget(FrontRogueMethodRange.Instance, self, arg, out var target)) return false;
 
             // 攻撃力ダメージの2回攻撃
-            using var damageValue = AffectableValue.Get();
+            using var damageValue = EffectableValue.Get();
             MainCharacterWorkUtility.TryAddAttack(self);
             StatsEffectedValues.GetATK(user, damageValue);
             damageValue.MainValue += _addDamage;
@@ -44,7 +44,7 @@ namespace Roguegard
         public override int GetATK(RogueObj self, out bool additionalEffect)
         {
             // 攻撃力ダメージの2回攻撃
-            using var damageValue = AffectableValue.Get();
+            using var damageValue = EffectableValue.Get();
             StatsEffectedValues.GetATK(self, damageValue);
             var hpDamage = Mathf.FloorToInt(damageValue.MainValue) + _addDamage;
             additionalEffect = false;

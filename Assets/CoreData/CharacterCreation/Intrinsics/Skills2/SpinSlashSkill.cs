@@ -43,7 +43,7 @@ namespace Roguegard.CharacterCreation
                     var obj = self.Location.Space.GetColliderObj(effectPosition);
                     if (obj == null || !StatsEffectedValues.AreVS(self, obj)) continue;
 
-                    using var damageValue = AffectableValue.Get();
+                    using var damageValue = EffectableValue.Get();
                     StatsEffectedValues.GetATK(self, damageValue);
                     damageValue.MainValue += damageValue.BaseMainValue + 2;
                     damageValue.SubValues[MainInfoKw.Skill] = 1f;
@@ -56,7 +56,7 @@ namespace Roguegard.CharacterCreation
             public override int GetATK(RogueObj self, out bool additionalEffect)
             {
                 // 攻撃力(x2)+2ダメージの攻撃。
-                using var damageValue = AffectableValue.Get();
+                using var damageValue = EffectableValue.Get();
                 StatsEffectedValues.GetATK(self, damageValue);
                 damageValue.MainValue += damageValue.BaseMainValue + 2;
 

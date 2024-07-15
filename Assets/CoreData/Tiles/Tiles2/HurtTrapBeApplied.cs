@@ -22,7 +22,7 @@ namespace Roguegard
             if (userTile != null)
             {
                 // 基礎攻撃力ぶんのダメージ
-                using var damage = AffectableValue.Get();
+                using var damage = EffectableValue.Get();
                 StatsEffectedValues.GetATK(userTile.User, damage);
                 damage.Initialize(damage.BaseMainValue + _additionalDamage);
                 var result = this.Hurt(user, userTile.User, AttackUtility.GetActivationDepthCantCounter(activationDepth), damage);
@@ -32,7 +32,7 @@ namespace Roguegard
             else
             {
                 // 1 のダメージ
-                using var damage = AffectableValue.Get();
+                using var damage = EffectableValue.Get();
                 damage.Initialize(1 + _additionalDamage);
                 var result = this.Hurt(user, null, AttackUtility.GetActivationDepthCantCounter(activationDepth), damage);
                 this.TryDefeat(user, null, activationDepth, damage);

@@ -51,7 +51,7 @@ namespace Roguegard
                 // 周囲1マスに攻撃力+2ダメージ
                 var target = targets[i];
                 var dropPosition = target.Position;
-                using var damageValue = AffectableValue.Get();
+                using var damageValue = EffectableValue.Get();
                 StatsEffectedValues.GetATK(self, damageValue);
                 damageValue.MainValue += 2f;
                 default(IAffectRogueMethodCaller).TryHurt(target, user, AttackUtility.GetActivationDepthCantCounter(nextActivationDepth), damageValue);

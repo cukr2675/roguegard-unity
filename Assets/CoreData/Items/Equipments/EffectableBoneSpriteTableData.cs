@@ -6,20 +6,20 @@ using SkeletalSprite;
 
 namespace Roguegard
 {
-    [CreateAssetMenu(menuName = "RoguegardData/Sprite/AffectableBoneSpriteTable")]
-    public class AffectableBoneSpriteTableData : ScriptableObject
+    [CreateAssetMenu(menuName = "RoguegardData/Sprite/EffectableBoneSpriteTable")]
+    public class EffectableBoneSpriteTableData : ScriptableObject
     {
         [SerializeField] private Value _value = null;
 
-        public AffectableBoneSpriteTable Table => _value.Table;
+        public EffectableBoneSpriteTable Table => _value.Table;
 
         [System.Serializable]
         public class Value
         {
             [SerializeField] private List<Item> _items;
 
-            [System.NonSerialized] private AffectableBoneSpriteTable _table;
-            public AffectableBoneSpriteTable Table
+            [System.NonSerialized] private EffectableBoneSpriteTable _table;
+            public EffectableBoneSpriteTable Table
             {
                 get
                 {
@@ -31,7 +31,7 @@ namespace Roguegard
 
             private void Enable()
             {
-                _table = new AffectableBoneSpriteTable();
+                _table = new EffectableBoneSpriteTable();
                 foreach (var item in _items)
                 {
                     if (item.HasFirstSprite)

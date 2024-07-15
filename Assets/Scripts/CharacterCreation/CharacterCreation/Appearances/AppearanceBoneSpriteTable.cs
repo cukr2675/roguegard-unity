@@ -11,9 +11,9 @@ namespace Roguegard.CharacterCreation
         private readonly BaseEffect baseEffect = new BaseEffect();
         private readonly List<EquipmentItem> equipmentItems = new List<EquipmentItem>();
 
-        public AffectableBoneSpriteTable BaseTable => baseEffect.Table;
+        public EffectableBoneSpriteTable BaseTable => baseEffect.Table;
 
-        public bool TryGetNewEquipmentTable(Spanning<IKeyword> equipParts, float order, out AffectableBoneSpriteTable table)
+        public bool TryGetNewEquipmentTable(Spanning<IKeyword> equipParts, float order, out EffectableBoneSpriteTable table)
         {
             // 部分一致する要素があったら失敗させる
             foreach (var item in equipmentItems)
@@ -65,9 +65,9 @@ namespace Roguegard.CharacterCreation
         {
             public float Order => -200f;
 
-            public AffectableBoneSpriteTable Table { get; } = new AffectableBoneSpriteTable();
+            public EffectableBoneSpriteTable Table { get; } = new EffectableBoneSpriteTable();
 
-            public void AffectSprite(RogueObj self, IReadOnlyNodeBone rootNode, AffectableBoneSpriteTable boneSpriteTable)
+            public void AffectSprite(RogueObj self, IReadOnlyNodeBone rootNode, EffectableBoneSpriteTable boneSpriteTable)
             {
                 Table.AddTo(boneSpriteTable);
             }
@@ -80,16 +80,16 @@ namespace Roguegard.CharacterCreation
 
             public float Order { get; }
 
-            public AffectableBoneSpriteTable Table { get; }
+            public EffectableBoneSpriteTable Table { get; }
 
             public EquipmentItem(Spanning<IKeyword> equipParts, float order)
             {
                 _equipParts = equipParts.ToArray();
                 Order = order;
-                Table = new AffectableBoneSpriteTable();
+                Table = new EffectableBoneSpriteTable();
             }
 
-            public void AffectSprite(RogueObj self, IReadOnlyNodeBone rootNode, AffectableBoneSpriteTable boneSpriteTable)
+            public void AffectSprite(RogueObj self, IReadOnlyNodeBone rootNode, EffectableBoneSpriteTable boneSpriteTable)
             {
                 // 同一部位または Innerwear に何か装備されていたらエフェクト無効化
                 // （部位がゼロのエフェクトは無視して表示）

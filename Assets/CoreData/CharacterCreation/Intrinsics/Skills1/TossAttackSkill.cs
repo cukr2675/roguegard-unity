@@ -36,7 +36,7 @@ namespace Roguegard
                 self.Location, self.Position, direction, true, true, out var hitObj, out var hitPosition, out var dropPosition);
 
             // 攻撃力+2ダメージの攻撃
-            using var damageValue = AffectableValue.Get();
+            using var damageValue = EffectableValue.Get();
             StatsEffectedValues.GetATK(self, damageValue);
             damageValue.MainValue += 2;
             //this.TryHurt(target, self, activationDepth, damageValue);
@@ -47,7 +47,7 @@ namespace Roguegard
         public override int GetATK(RogueObj self, out bool additionalEffect)
         {
             // 攻撃力+2ダメージの攻撃
-            using var damageValue = AffectableValue.Get();
+            using var damageValue = EffectableValue.Get();
             StatsEffectedValues.GetATK(self, damageValue);
             damageValue.MainValue += 2;
             var hpDamage = Mathf.FloorToInt(damageValue.MainValue);

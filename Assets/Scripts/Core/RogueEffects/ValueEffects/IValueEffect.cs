@@ -11,6 +11,6 @@ namespace Roguegard
         /// <summary>
         /// このメソッド内では <see cref="IRogueMethod"/> や値エフェクトなどの再帰する可能性がある呼び出しは禁止。
         /// </summary>
-        void AffectValue(IKeyword keyword, AffectableValue value, RogueObj self);
+        void AffectValue(IKeyword keyword, EffectableValue value, RogueObj self);
     }
 }

@@ -52,7 +52,7 @@ namespace Roguegard
             if (cooldown <= 0)
             {
                 // 1ダメージ
-                using var damage = AffectableValue.Get();
+                using var damage = EffectableValue.Get();
                 damage.Initialize(1f);
                 damage.SubValues[StatsKw.GuardRate] = -1000000f; // ガード不可
                 this.Hurt(self, null, AttackUtility.GetActivationDepthCantCounter(activationDepth), damage);

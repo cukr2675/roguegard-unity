@@ -52,7 +52,7 @@ namespace Roguegard
             base.RemoveClose(self);
         }
 
-        void IValueEffect.AffectValue(IKeyword keyword, AffectableValue value, RogueObj self)
+        void IValueEffect.AffectValue(IKeyword keyword, EffectableValue value, RogueObj self)
         {
             if (keyword == StatsKw.Speed)
             {

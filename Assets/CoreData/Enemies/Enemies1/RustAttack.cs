@@ -24,7 +24,7 @@ namespace Roguegard
             if (RaycastAssert.RequireTarget(FrontRogueMethodRange.Instance, self, arg, out var target)) return false;
             MainCharacterWorkUtility.TryAddAttack(self);
 
-            using var damageValue = AffectableValue.Get();
+            using var damageValue = EffectableValue.Get();
             StatsEffectedValues.GetATK(self, damageValue);
             var hurted = this.TryHurt(target, self, activationDepth, damageValue);
             var defeated = this.TryDefeat(target, self, activationDepth, damageValue);
@@ -50,7 +50,7 @@ namespace Roguegard
                         var cost = StatsEffectedValues.GetCost(equipment);
                         if (cost <= 0f) continue;
 
-                        using var materialValue = AffectableValue.Get();
+                        using var materialValue = EffectableValue.Get();
                         StatsEffectedValues.GetMaterial(equipment, materialValue);
                         if (!materialValue.SubValues.Is(MaterialKw.Iron)) continue;
 

@@ -74,7 +74,7 @@ namespace Roguegard
             AddUnique(self);
 
             // 視界半径を取得
-            using var value = AffectableValue.Get();
+            using var value = EffectableValue.Get();
             value.Initialize(DungeonInfo.GetLocationVisibleRadius(self));
             ValueEffectState.AffectValue(StdKw.View, value, self);
             var visibleRadius = value.MainValue;

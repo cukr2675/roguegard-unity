@@ -18,7 +18,7 @@ namespace Roguegard.CharacterCreation
 
             public SortedIntrinsic(int lv) : base(lv) { }
 
-            void IValueEffect.AffectValue(IKeyword keyword, AffectableValue value, RogueObj self)
+            void IValueEffect.AffectValue(IKeyword keyword, EffectableValue value, RogueObj self)
             {
                 if (keyword == StatsKw.DEF && value.SubValues[StatsKw.GuardRate] > 0f && value.SubValues[ElementKw.Ice] > 0f)
                 {

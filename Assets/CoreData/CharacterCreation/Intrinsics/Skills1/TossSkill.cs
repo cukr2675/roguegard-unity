@@ -31,7 +31,7 @@ namespace Roguegard
             if (hitPosition != dropPosition)
             {
                 // 壁に当たったら1ダメージ
-                using var damageValue = AffectableValue.Get();
+                using var damageValue = EffectableValue.Get();
                 damageValue.Initialize(1f);
                 this.TryHurt(target, self, activationDepth, damageValue);
                 this.TryDefeat(target, self, activationDepth, damageValue);
@@ -39,7 +39,7 @@ namespace Roguegard
             if (hitObj != null)
             {
                 // 何かに当たったら当たったオブジェクトに1ダメージ
-                using var damageValue = AffectableValue.Get();
+                using var damageValue = EffectableValue.Get();
                 damageValue.Initialize(1f);
                 this.TryHurt(target, self, activationDepth, damageValue);
                 this.TryDefeat(target, self, activationDepth, damageValue);
@@ -50,7 +50,7 @@ namespace Roguegard
         public override int GetATK(RogueObj self, out bool additionalEffect)
         {
             // 攻撃力+2ダメージの攻撃
-            using var damageValue = AffectableValue.Get();
+            using var damageValue = EffectableValue.Get();
             StatsEffectedValues.GetATK(self, damageValue);
             damageValue.MainValue += 2;
             var hpDamage = Mathf.FloorToInt(damageValue.MainValue);

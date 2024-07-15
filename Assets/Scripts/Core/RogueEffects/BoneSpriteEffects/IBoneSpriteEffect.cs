@@ -18,6 +18,6 @@ namespace Roguegard
         /// </summary>
         float Order { get; }
 
-        void AffectSprite(RogueObj self, IReadOnlyNodeBone rootNode, AffectableBoneSpriteTable boneSpriteTable);
+        void AffectSprite(RogueObj self, IReadOnlyNodeBone rootNode, EffectableBoneSpriteTable boneSpriteTable);
     }
 }

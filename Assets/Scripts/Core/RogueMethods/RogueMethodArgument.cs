@@ -16,7 +16,7 @@ namespace Roguegard
         private readonly bool positioned;
         public int Count { get; }
         public Vector2 Vector { get; }
-        public AffectableValue RefValue { get; }
+        public EffectableValue RefValue { get; }
         public RogueObj Tool { get; }
         public object Other { get; }
 
@@ -24,7 +24,7 @@ namespace Roguegard
             RogueObj targetObj = null,
             int count = default,
             Vector2 vector = default,
-            AffectableValue value = null,
+            EffectableValue value = null,
             RogueObj tool = null,
             object other = null)
         {
@@ -44,7 +44,7 @@ namespace Roguegard
             RogueObj targetObj = null,
             int count = default,
             Vector2 vector = default,
-            AffectableValue value = null,
+            EffectableValue value = null,
             RogueObj tool = null,
             object other = null)
         {

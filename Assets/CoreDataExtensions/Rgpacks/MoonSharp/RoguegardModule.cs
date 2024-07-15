@@ -369,7 +369,7 @@ return {
         [MoonSharpModuleMethod]
         public static DynValue open_value(ScriptExecutionContext executionContext, CallbackArguments args)
         {
-            var value = AffectableValue.Get();
+            var value = EffectableValue.Get();
             return UserData.Create(value);
         }
 
@@ -377,7 +377,7 @@ return {
         public static DynValue close_value(ScriptExecutionContext executionContext, CallbackArguments args)
         {
             const string name = "close_value";
-            var value = args.AsUserData<AnonWrapper<AffectableValue>>(0, name, false).Value;
+            var value = args.AsUserData<AnonWrapper<EffectableValue>>(0, name, false).Value;
             value.Dispose();
             return DynValue.Nil;
         }
@@ -387,7 +387,7 @@ return {
         {
             const string name = "affect_value";
             var keyword = args.AsUserData<AnonWrapper<IKeyword>>(0, name, false).Value;
-            var value = args.AsUserData<AnonWrapper<AffectableValue>>(1, name, false).Value;
+            var value = args.AsUserData<AnonWrapper<EffectableValue>>(1, name, false).Value;
             var obj = args.AsUserData<AnonWrapper<RogueObj>>(2, name, false).Value;
             ValueEffectState.AffectValue(keyword, value, obj);
             return DynValue.Nil;
@@ -400,7 +400,7 @@ return {
             var target = args.AsUserData<AnonWrapper<RogueObj>>(0, name, false).Value;
             var user = args.AsUserData<AnonWrapper<RogueObj>>(1, name, false).Value;
             var activationDepth = (float)args.AsType(2, name, DataType.Number, false).Number;
-            var value = args.AsUserData<AnonWrapper<AffectableValue>>(3, name, false).Value;
+            var value = args.AsUserData<AnonWrapper<EffectableValue>>(3, name, false).Value;
             default(IActiveRogueMethodCaller).Hurt(target, user, activationDepth, value);
             return DynValue.Nil;
         }

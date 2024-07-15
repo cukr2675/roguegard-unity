@@ -27,7 +27,7 @@ namespace Roguegard.CharacterCreation
                 return default;
             }
 
-            void IValueEffect.AffectValue(IKeyword keyword, AffectableValue value, RogueObj self)
+            void IValueEffect.AffectValue(IKeyword keyword, EffectableValue value, RogueObj self)
             {
                 if (keyword == StatsKw.DEF)
                 {
@@ -42,7 +42,7 @@ namespace Roguegard.CharacterCreation
         {
             float IValueEffect.Order => AttackUtility.CupValueEffectOrder;
 
-            void IValueEffect.AffectValue(IKeyword keyword, AffectableValue value, RogueObj self)
+            void IValueEffect.AffectValue(IKeyword keyword, EffectableValue value, RogueObj self)
             {
                 if (keyword == StatsKw.DEF && value.SubValues[StatsKw.GuardRate] > 0f)
                 {

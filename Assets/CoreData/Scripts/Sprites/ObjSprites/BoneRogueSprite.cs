@@ -24,7 +24,7 @@ namespace Roguegard
         private int backBonesCount;
         private SpritePose enabledImmutablePose;
 
-        private static readonly AffectableBoneSpriteTable boneSpriteTable = new AffectableBoneSpriteTable();
+        private static readonly EffectableBoneSpriteTable boneSpriteTable = new EffectableBoneSpriteTable();
 
         private BoneRogueSprite()
         {

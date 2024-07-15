@@ -37,7 +37,7 @@ namespace Roguegard.CharacterCreation
                 }
 
                 // 攻撃力(x2)ダメージの攻撃。
-                using var damageValue = AffectableValue.Get();
+                using var damageValue = EffectableValue.Get();
                 StatsEffectedValues.GetATK(self, damageValue);
                 damageValue.MainValue += damageValue.BaseMainValue;
                 damageValue.SubValues[MainInfoKw.Skill] = 1f;
@@ -49,7 +49,7 @@ namespace Roguegard.CharacterCreation
             public override int GetATK(RogueObj self, out bool additionalEffect)
             {
                 // 攻撃力(x2)ダメージの攻撃。
-                using var damageValue = AffectableValue.Get();
+                using var damageValue = EffectableValue.Get();
                 StatsEffectedValues.GetATK(self, damageValue);
                 damageValue.MainValue += damageValue.BaseMainValue;
 

@@ -34,7 +34,7 @@ namespace Roguegard.CharacterCreation
                 return result;
             }
 
-            void IValueEffect.AffectValue(IKeyword keyword, AffectableValue value, RogueObj self)
+            void IValueEffect.AffectValue(IKeyword keyword, EffectableValue value, RogueObj self)
             {
                 if (buffCount >= 1 && keyword == StatsKw.ATK)
                 {

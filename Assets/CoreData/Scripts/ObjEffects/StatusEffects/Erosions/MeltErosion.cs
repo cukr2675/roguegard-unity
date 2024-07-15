@@ -74,7 +74,7 @@ namespace Roguegard
         {
             public float Order => 0f;
 
-            public void AffectValue(IKeyword keyword, AffectableValue value, RogueObj self)
+            public void AffectValue(IKeyword keyword, EffectableValue value, RogueObj self)
             {
                 if (keyword == StatsKw.DEF)
                 {

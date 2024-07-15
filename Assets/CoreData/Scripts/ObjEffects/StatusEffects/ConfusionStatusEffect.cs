@@ -54,7 +54,7 @@ namespace Roguegard
             return chain.Invoke(keyword, method, self, user, activationDepth, arg1);
         }
 
-        void IBoneSpriteEffect.AffectSprite(RogueObj self, IReadOnlyNodeBone rootNode, AffectableBoneSpriteTable boneSpriteTable)
+        void IBoneSpriteEffect.AffectSprite(RogueObj self, IReadOnlyNodeBone rootNode, EffectableBoneSpriteTable boneSpriteTable)
         {
             CoreBoneSpriteTables.GuruguruEyes.Table.AddTo(boneSpriteTable);
         }

@@ -19,7 +19,7 @@ namespace Roguegard.CharacterCreation
 
         [SerializeField] private bool _canStackWhileEquipped;
 
-        [SerializeField] private AffectableBoneSpriteTableData.Value _boneSpriteTable;
+        [SerializeField] private EffectableBoneSpriteTableData.Value _boneSpriteTable;
 
         [Tooltip("この値が設定されているとき、装備者の指定のボーンの色をスポイトする")]
         [SerializeField] private BoneKeywordData _eyeDropBoneName;
@@ -110,7 +110,7 @@ namespace Roguegard.CharacterCreation
                 }
             }
 
-            void IBoneSpriteEffect.AffectSprite(RogueObj owner, IReadOnlyNodeBone rootNode, AffectableBoneSpriteTable boneSpriteTable)
+            void IBoneSpriteEffect.AffectSprite(RogueObj owner, IReadOnlyNodeBone rootNode, EffectableBoneSpriteTable boneSpriteTable)
             {
                 var baseColor = Data.Color;
                 if (Data._eyeDropBoneName != null)

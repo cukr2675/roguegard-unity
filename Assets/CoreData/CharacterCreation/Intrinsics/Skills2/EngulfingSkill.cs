@@ -103,7 +103,7 @@ namespace Roguegard.CharacterCreation
                 }
 
                 // 1 の固定ダメージ
-                using var damage = AffectableValue.Get();
+                using var damage = EffectableValue.Get();
                 damage.Initialize(1f);
                 damage.SubValues[StatsKw.GuaranteedDamage] = 1f;
                 damage.SubValues[StatsKw.GuardRate] = 0.1f * count; // 1 ターンでガード率 10% 上昇
@@ -136,7 +136,7 @@ namespace Roguegard.CharacterCreation
                 return default;
             }
 
-            void IValueEffect.AffectValue(IKeyword keyword, AffectableValue value, RogueObj self)
+            void IValueEffect.AffectValue(IKeyword keyword, EffectableValue value, RogueObj self)
             {
                 if (keyword == StatsKw.Speed)
                 {

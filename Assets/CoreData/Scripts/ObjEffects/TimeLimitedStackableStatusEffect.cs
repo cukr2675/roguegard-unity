@@ -20,7 +20,7 @@ namespace Roguegard
         {
             var statusEffect = (TimeLimitedStackableStatusEffect)base.AffectTo(target, user, activationDepth, arg);
 
-            using var lifeTimeValue = AffectableValue.Get();
+            using var lifeTimeValue = EffectableValue.Get();
             lifeTimeValue.Initialize(InitialLifeTime);
             //if (arg.Tool != null) { ValueEffectState.AffectValue(StdKw.ItemPower, lifeTimeValue, arg.Tool); }
             statusEffect.LifeTime = Mathf.FloorToInt(lifeTimeValue.MainValue);

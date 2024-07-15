@@ -24,7 +24,7 @@ namespace Roguegard
             ((IProjectileRogueMethodRange)LineOfSight10RogueMethodRange.Instance).Raycast(
                 user.Location, user.Position, direction, true, true, out var hitObj, out _, out _);
 
-            using var damageValue = AffectableValue.Get();
+            using var damageValue = EffectableValue.Get();
             damageValue.Initialize(3f);
             //damageValue.SubValues[CommonKw.Magic] = 1f;
             //damageValue.SubValues[CommonKw.Fire] = 1f;

@@ -49,7 +49,7 @@ namespace Roguegard.CharacterCreation
 
             public float Order => -100f;
 
-            public void AffectValue(IKeyword keyword, AffectableValue value, RogueObj self)
+            public void AffectValue(IKeyword keyword, EffectableValue value, RogueObj self)
             {
                 if (keyword == StatsKw.Speed)
                 {

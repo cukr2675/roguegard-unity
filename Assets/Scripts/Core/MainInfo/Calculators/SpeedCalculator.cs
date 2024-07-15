@@ -6,7 +6,7 @@ namespace Roguegard
 {
     public class SpeedCalculator : IRogueCalculator
     {
-        private readonly AffectableValue value = AffectableValue.Get();
+        private readonly EffectableValue value = EffectableValue.Get();
 
         public int Speed { get; private set; }
         public bool BeInhibited { get; private set; }

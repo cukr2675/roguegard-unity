@@ -72,7 +72,7 @@ namespace SkeletalSprite
             return true;
         }
 
-        private void SetBaseSprite(AffectableBoneSpriteTable.RefItem item)
+        private void SetBaseSprite(EffectableBoneSpriteTable.RefItem item)
         {
             primarySprite = item.FirstSprite ?? source.Sprite;
             primaryColor = item.OverridesSourceColor ? item.FirstColor : source.Color;
@@ -92,7 +92,7 @@ namespace SkeletalSprite
             }
         }
 
-        public void ApplyTable(AffectableBoneSpriteTable boneSpriteTable)
+        public void ApplyTable(EffectableBoneSpriteTable boneSpriteTable)
         {
             var item = boneSpriteTable.GetSprite(source.Name);
             SetBaseSprite(item);

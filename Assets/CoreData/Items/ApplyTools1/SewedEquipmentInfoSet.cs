@@ -141,7 +141,7 @@ namespace Roguegard
 
             private readonly SewedEquipmentData data;
             private readonly RogueObj self;
-            private readonly AffectableBoneSpriteTable table;
+            private readonly EffectableBoneSpriteTable table;
             private bool colorIsInitialized;
             private Color color;
 
@@ -149,7 +149,7 @@ namespace Roguegard
             {
                 this.data = data;
                 this.self = self;
-                table = data.BoneSprites.GetAffectableTable();
+                table = data.BoneSprites.GetEffectableTable();
                 colorIsInitialized = false;
             }
 
@@ -170,7 +170,7 @@ namespace Roguegard
                 equipmentSpriteState.Remove(this);
             }
 
-            void IBoneSpriteEffect.AffectSprite(RogueObj owner, IReadOnlyNodeBone rootNode, AffectableBoneSpriteTable boneSpriteTable)
+            void IBoneSpriteEffect.AffectSprite(RogueObj owner, IReadOnlyNodeBone rootNode, EffectableBoneSpriteTable boneSpriteTable)
             {
                 var baseColor = data.BoneSprites.MainColor;
                 if (!colorIsInitialized)

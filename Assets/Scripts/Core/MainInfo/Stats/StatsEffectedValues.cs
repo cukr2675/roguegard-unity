@@ -9,7 +9,7 @@ namespace Roguegard
     /// </summary>
     public static class StatsEffectedValues
     {
-        private static readonly AffectableValue value = AffectableValue.Get();
+        private static readonly EffectableValue value = EffectableValue.Get();
 
         public static int GetMaxHP(RogueObj self)
         {
@@ -69,7 +69,7 @@ namespace Roguegard
             return Mathf.FloorToInt(value.MainValue);
         }
 
-        public static void GetATK(RogueObj self, AffectableValue refATKValue)
+        public static void GetATK(RogueObj self, EffectableValue refATKValue)
         {
             refATKValue.Initialize(self.Main.InfoSet.ATK);
             refATKValue.SubValues[StatsKw.CriticalATK] = 1f; // 基本会心攻撃力は 1
@@ -86,7 +86,7 @@ namespace Roguegard
             return def;
         }
 
-        public static int GetDamage(RogueObj self, AffectableValue refDamageValue, IRogueRandom random, out bool critical, out bool guard)
+        public static int GetDamage(RogueObj self, EffectableValue refDamageValue, IRogueRandom random, out bool critical, out bool guard)
         {
             refDamageValue.BaseMainValue = refDamageValue.MainValue;
             refDamageValue.MainValue -= self.Main.InfoSet.DEF;
@@ -134,14 +134,14 @@ namespace Roguegard
             return value.MainValue;
         }
 
-        public static void GetMaterial(RogueObj self, AffectableValue refMaterialValue)
+        public static void GetMaterial(RogueObj self, EffectableValue refMaterialValue)
         {
             refMaterialValue.Initialize(0);
             self.Main.InfoSet.Material.AffectValue(refMaterialValue, self);
             ValueEffectState.AffectValue(StatsKw.Material, refMaterialValue, self);
         }
 
-        public static void GetGender(RogueObj self, AffectableValue refGenderValue)
+        public static void GetGender(RogueObj self, EffectableValue refGenderValue)
         {
             refGenderValue.Initialize(0);
             self.Main.BaseInfoSet.Gender.AffectValue(refGenderValue, self, MainInfoSetType.Base);

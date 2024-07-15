@@ -61,7 +61,7 @@ namespace Roguegard
             }
         }
 
-        public static bool GetUseValue(AffectableValue damageValue)
+        public static bool GetUseValue(EffectableValue damageValue)
         {
             return damageValue != null ? damageValue.MainValue != 0f : false;
         }

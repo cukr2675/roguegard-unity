@@ -37,7 +37,7 @@ namespace Roguegard.CharacterCreation
                 }
 
                 // HPを5回復
-                using var healValue = AffectableValue.Get();
+                using var healValue = EffectableValue.Get();
                 healValue.Initialize(5f);
                 healValue.SubValues[StdKw.Heal] = 1f;
                 this.TryHurt(target, self, activationDepth, healValue);

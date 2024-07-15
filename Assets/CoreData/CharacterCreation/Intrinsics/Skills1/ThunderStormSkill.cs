@@ -35,11 +35,11 @@ namespace Roguegard.CharacterCreation
                 }
 
                 // 攻撃力(x0)+2ダメージの攻撃。
-                using var damage = AffectableValue.Get();
+                using var damage = EffectableValue.Get();
                 StatsEffectedValues.GetATK(self, damage);
                 damage.MainValue += -damage.BaseMainValue + 2;
 
-                using var value = AffectableValue.Get();
+                using var value = EffectableValue.Get();
                 value.Initialize(DungeonInfo.GetLocationVisibleRadius(self));
                 ValueEffectState.AffectValue(StdKw.View, value, self);
                 var visibleRadius = value.MainValue;
@@ -61,7 +61,7 @@ namespace Roguegard.CharacterCreation
             public override int GetATK(RogueObj self, out bool additionalEffect)
             {
                 // 攻撃力(x0)+2ダメージの攻撃。
-                using var damageValue = AffectableValue.Get();
+                using var damageValue = EffectableValue.Get();
                 StatsEffectedValues.GetATK(self, damageValue);
                 damageValue.MainValue += -damageValue.BaseMainValue + 2;
 

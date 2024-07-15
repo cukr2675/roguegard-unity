@@ -80,7 +80,7 @@ namespace Roguegard.Extensions
 
         public static bool Throw(
             this IApplyRogueMethodCaller method, RogueObj ammo, RogueObj self, float activationDepth,
-            RogueObj targetObj = null, AffectableValue damageValue = null)
+            RogueObj targetObj = null, EffectableValue damageValue = null)
         {
             var beThrownMethod = ammo.Main.InfoSet.BeThrown;
             var arg = new RogueMethodArgument(targetObj: targetObj, value: damageValue);
@@ -89,7 +89,7 @@ namespace Roguegard.Extensions
 
         public static bool Throw(
             this IApplyRogueMethodCaller method, RogueObj ammo, RogueObj self, float activationDepth,
-            Vector2Int targetPosition, RogueObj targetObj = null, AffectableValue damageValue = null)
+            Vector2Int targetPosition, RogueObj targetObj = null, EffectableValue damageValue = null)
         {
             var beThrownMethod = ammo.Main.InfoSet.BeThrown;
             var arg = new RogueMethodArgument(targetPosition: targetPosition, targetObj: targetObj, value: damageValue);
@@ -102,7 +102,7 @@ namespace Roguegard.Extensions
         /// </summary>
         public static bool Shot(
             this IApplyRogueMethodCaller method, IAmmoEquipmentInfo ammoInfo, RogueObj ammo, RogueObj self, float activationDepth,
-            RogueObj targetObj = null, AffectableValue damageValue = null)
+            RogueObj targetObj = null, EffectableValue damageValue = null)
         {
             var beShotMethod = ammoInfo.BeShot;
             var arg = new RogueMethodArgument(targetObj: targetObj, value: damageValue);
@@ -116,7 +116,7 @@ namespace Roguegard.Extensions
         /// </summary>
         public static bool Shot(
             this IApplyRogueMethodCaller method, IAmmoEquipmentInfo ammoInfo, RogueObj ammo, RogueObj self, float activationDepth,
-            Vector2Int targetPosition, RogueObj targetObj = null, AffectableValue damageValue = null)
+            Vector2Int targetPosition, RogueObj targetObj = null, EffectableValue damageValue = null)
         {
             var beShotMethod = ammoInfo.BeShot;
             var arg = new RogueMethodArgument(targetPosition: targetPosition, targetObj: targetObj, value: damageValue);
@@ -124,7 +124,7 @@ namespace Roguegard.Extensions
         }
 
         public static bool Hurt(
-            this IAffectRogueMethodCaller method, RogueObj target, RogueObj user, float activationDepth, AffectableValue damageValue)
+            this IAffectRogueMethodCaller method, RogueObj target, RogueObj user, float activationDepth, EffectableValue damageValue)
         {
             var hitMethod = target.Main.InfoSet.Hit;
             var arg = new RogueMethodArgument(value: damageValue);
@@ -133,7 +133,7 @@ namespace Roguegard.Extensions
         }
 
         public static bool TryHurt(
-            this IAffectRogueMethodCaller method, RogueObj target, RogueObj user, float activationDepth, AffectableValue damageValue)
+            this IAffectRogueMethodCaller method, RogueObj target, RogueObj user, float activationDepth, EffectableValue damageValue)
         {
             if (target != null) return method.Hurt(target, user, activationDepth, damageValue);
             else return false;
@@ -141,7 +141,7 @@ namespace Roguegard.Extensions
 
         public static bool Affect(
             this IAffectRogueMethodCaller method, RogueObj target, float activationDepth, IAffectCallback callback,
-            RogueObj tool = null, RogueObj user = null, AffectableValue refValue = null)
+            RogueObj tool = null, RogueObj user = null, EffectableValue refValue = null)
         {
             var hitMethod = target.Main.InfoSet.Hit;
             var arg = new RogueMethodArgument(tool: tool, other: callback, value: refValue);
@@ -150,7 +150,7 @@ namespace Roguegard.Extensions
 
         public static bool TryAffect(
             this IAffectRogueMethodCaller method, RogueObj target, float activationDepth, IAffectCallback callback,
-            RogueObj tool = null, RogueObj user = null, AffectableValue refValue = null)
+            RogueObj tool = null, RogueObj user = null, EffectableValue refValue = null)
         {
             if (target != null) return method.Affect(target, activationDepth, callback, tool, user, refValue);
             else return false;
@@ -170,7 +170,7 @@ namespace Roguegard.Extensions
                 var partyMembers = user.Main.Stats.Party.Members;
                 for (int i = 0; i < partyMembers.Count; i++)
                 {
-                    using var expValue = AffectableValue.Get();
+                    using var expValue = EffectableValue.Get();
                     expValue.Initialize(target.Main.Stats.Lv);
                     ValueEffectState.AffectValue(StdKw.LoseExp, expValue, target);
 
@@ -181,7 +181,7 @@ namespace Roguegard.Extensions
             else if (user != null)
             {
                 // 経験値を与える
-                using var expValue = AffectableValue.Get();
+                using var expValue = EffectableValue.Get();
                 expValue.Initialize(target.Main.Stats.Lv);
                 ValueEffectState.AffectValue(StdKw.LoseExp, expValue, target);
 
@@ -192,7 +192,7 @@ namespace Roguegard.Extensions
         }
 
         public static bool TryDefeat(
-            this IAffectRogueMethodCaller method, RogueObj target, RogueObj user, float activationDepth, AffectableValue damageValue)
+            this IAffectRogueMethodCaller method, RogueObj target, RogueObj user, float activationDepth, EffectableValue damageValue)
         {
             if (target != null && damageValue.SubValues[MainInfoKw.BeDefeated] != 0f)
             {

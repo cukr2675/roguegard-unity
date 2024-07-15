@@ -36,7 +36,7 @@ namespace Roguegard.CharacterCreation
                 }
 
                 // 毒付与
-                using var value = AffectableValue.Get();
+                using var value = EffectableValue.Get();
                 value.Initialize(0f);
                 value.SubValues[MainInfoKw.Skill] = 1f;
                 this.TryAffect(target, activationDepth, PoisonStatusEffect.Callback, null, self, value);

@@ -33,7 +33,7 @@ namespace Roguegard.CharacterCreation
                 return default;
             }
 
-            void IValueEffect.AffectValue(IKeyword keyword, AffectableValue value, RogueObj self)
+            void IValueEffect.AffectValue(IKeyword keyword, EffectableValue value, RogueObj self)
             {
                 if (keyword == StatsKw.ATK && buffIsEnabled && value.SubValues[StatsKw.CriticalRate] > 0f)
                 {

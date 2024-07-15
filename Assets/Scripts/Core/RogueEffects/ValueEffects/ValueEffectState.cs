@@ -54,7 +54,7 @@ namespace Roguegard
             return effects.Remove(effect);
         }
 
-        public static void AffectValue(IKeyword keyword, AffectableValue value, RogueObj self)
+        public static void AffectValue(IKeyword keyword, EffectableValue value, RogueObj self)
         {
             if (recursion.Value)
             {

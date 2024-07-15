@@ -33,7 +33,7 @@ namespace Roguegard.CharacterCreation
             // –hŒä—Í‚ÆƒK[ƒh‚ð“K—p‚µ‚½‚ ‚Æ“ñ”{‚É‚·‚é
             float IValueEffect.Order => 10f;
 
-            void IValueEffect.AffectValue(IKeyword keyword, AffectableValue value, RogueObj self)
+            void IValueEffect.AffectValue(IKeyword keyword, EffectableValue value, RogueObj self)
             {
                 if (keyword == StatsKw.DEF && !value.SubValues.Is(StdKw.Heal))
                 {

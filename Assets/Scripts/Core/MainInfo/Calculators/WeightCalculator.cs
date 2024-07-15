@@ -6,7 +6,7 @@ namespace Roguegard
 {
     public class WeightCalculator : IRogueCalculator
     {
-        private readonly AffectableValue value = AffectableValue.Get();
+        private readonly EffectableValue value = EffectableValue.Get();
 
         public float TotalWeight { get; private set; }
         public float Weight => value.MainValue;

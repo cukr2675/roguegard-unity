@@ -21,7 +21,7 @@ namespace Roguegard
                 MainCharacterWorkUtility.TryAddBeShot(self, user, hitPosition, from, CoreMotions.BeThrownFlying);
             }
 
-            using var damageValue = AffectableValue.Get();
+            using var damageValue = EffectableValue.Get();
             if (arg.RefValue != null)
             {
                 // 射撃武器から攻撃力を引き継ぐ。同じ RefValue が使いまわされることを想定してコピーを使用する

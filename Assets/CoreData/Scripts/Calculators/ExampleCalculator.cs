@@ -6,7 +6,7 @@ namespace Roguegard
 {
     internal class ExampleCalculator : IRogueCalculator
     {
-        private readonly AffectableValue value = AffectableValue.Get();
+        private readonly EffectableValue value = EffectableValue.Get();
 
         private static readonly Source source = new Source();
 

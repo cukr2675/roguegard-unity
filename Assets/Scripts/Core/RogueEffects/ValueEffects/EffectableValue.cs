@@ -4,17 +4,17 @@ using UnityEngine;
 
 namespace Roguegard
 {
-    public class AffectableValue : System.IDisposable
+    public class EffectableValue : System.IDisposable
     {
         public float BaseMainValue { get; set; }
         public float MainValue { get; set; }
         public KeywordValueTable SubValues { get; } = new KeywordValueTable();
 
-        private static readonly Stack<AffectableValue> stack = new Stack<AffectableValue>();
+        private static readonly Stack<EffectableValue> stack = new Stack<EffectableValue>();
 
-        private AffectableValue() { }
+        private EffectableValue() { }
 
-        public static AffectableValue Get()
+        public static EffectableValue Get()
         {
             if (stack.Count >= 1)
             {
@@ -22,7 +22,7 @@ namespace Roguegard
             }
             else
             {
-                return new AffectableValue();
+                return new EffectableValue();
             }
         }
 
@@ -33,7 +33,7 @@ namespace Roguegard
             SubValues.Clear();
         }
 
-        public void CopyTo(AffectableValue value)
+        public void CopyTo(EffectableValue value)
         {
             value.BaseMainValue = BaseMainValue;
             value.MainValue = MainValue;

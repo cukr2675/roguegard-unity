@@ -7,6 +7,6 @@ namespace Roguegard
     [Objforming.RequireRelationalComponent]
     public interface IRogueGender : IRogueDescription
     {
-        void AffectValue(AffectableValue value, RogueObj self, MainInfoSetType infoSetType);
+        void AffectValue(EffectableValue value, RogueObj self, MainInfoSetType infoSetType);
     }
 }

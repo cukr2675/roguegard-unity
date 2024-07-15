@@ -228,7 +228,7 @@ namespace RoguegardUnity
 
         private static string GetGenderText(RogueObj obj)
         {
-            using var genderValue = AffectableValue.Get();
+            using var genderValue = EffectableValue.Get();
             StatsEffectedValues.GetGender(obj, genderValue);
             var objIsMale = genderValue.SubValues.Is(StatsKw.Male);
             var objIsFemale = genderValue.SubValues.Is(StatsKw.Female);
@@ -239,7 +239,7 @@ namespace RoguegardUnity
 
         private static string GetATKText(RogueObj obj)
         {
-            using var atkValue = AffectableValue.Get();
+            using var atkValue = EffectableValue.Get();
             StatsEffectedValues.GetATK(obj, atkValue);
             if (atkValue.BaseMainValue == atkValue.MainValue)
             {

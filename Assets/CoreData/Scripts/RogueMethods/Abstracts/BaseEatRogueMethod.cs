@@ -21,7 +21,7 @@ namespace Roguegard
             // 食べ物アイテムは誰でも食べられる。
             if (tool.Main.InfoSet.Category == CategoryKw.Food || tool.Main.InfoSet.Category == CategoryKw.Drink) return true;
 
-            using var value = AffectableValue.Get();
+            using var value = EffectableValue.Get();
             StatsEffectedValues.GetMaterial(tool, value);
             var edible = false;
             for (int i = 0; i < Edibles.Count; i++)

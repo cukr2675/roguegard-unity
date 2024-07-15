@@ -21,7 +21,7 @@ namespace Roguegard
                 handler.AppendText(user).AppendText("は").AppendText(self).AppendText("を読んだ！\n");
             }
 
-            using var value = AffectableValue.Get();
+            using var value = EffectableValue.Get();
             value.Initialize(DungeonInfo.GetLocationVisibleRadius(self));
             ValueEffectState.AffectValue(StdKw.View, value, self);
             var sqrVisibleRadius = value.MainValue * value.MainValue;

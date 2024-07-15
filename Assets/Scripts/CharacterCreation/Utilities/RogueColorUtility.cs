@@ -8,7 +8,7 @@ namespace Roguegard.CharacterCreation
 {
     public static class RogueColorUtility
     {
-        private static readonly AffectableValue value = AffectableValue.Get();
+        private static readonly EffectableValue value = EffectableValue.Get();
 
         public static Color GetColor(RogueObj obj)
         {
@@ -26,7 +26,7 @@ namespace Roguegard.CharacterCreation
             return new Color(red, green, blue, alpha);
         }
 
-        public static Color GetFirstColor(BoneKeyword boneName, IReadOnlyNodeBone rootNode, AffectableBoneSpriteTable boneSpriteTable)
+        public static Color GetFirstColor(BoneKeyword boneName, IReadOnlyNodeBone rootNode, EffectableBoneSpriteTable boneSpriteTable)
         {
             var sprite = boneSpriteTable.GetSprite(boneName);
             if (sprite.OverridesSourceColor)

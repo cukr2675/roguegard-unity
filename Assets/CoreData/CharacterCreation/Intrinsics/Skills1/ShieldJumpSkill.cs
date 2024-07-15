@@ -59,7 +59,7 @@ namespace Roguegard.CharacterCreation
             float IValueEffect.Order => 0f;
             float IRogueMethodPassiveAspect.Order => 0f;
 
-            void IValueEffect.AffectValue(IKeyword keyword, AffectableValue value, RogueObj self)
+            void IValueEffect.AffectValue(IKeyword keyword, EffectableValue value, RogueObj self)
             {
                 if (keyword == StatsKw.DEF)
                 {
@@ -101,7 +101,7 @@ namespace Roguegard.CharacterCreation
                     else
                     {
                         // 正面2マス先に誰かいるときそれに攻撃力(x2)+2ダメージ
-                        using var damage = AffectableValue.Get();
+                        using var damage = EffectableValue.Get();
                         StatsEffectedValues.GetATK(self, damage);
                         damage.MainValue += damage.BaseMainValue + 2;
                         default(IAffectRogueMethodCaller).Hurt(targetObj, self, 1f, damage);

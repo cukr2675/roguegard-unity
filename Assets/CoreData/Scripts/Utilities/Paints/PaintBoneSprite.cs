@@ -69,7 +69,7 @@ namespace Roguegard
             }
         }
 
-        public void AddTo(AffectableBoneSpriteTable table, Color mainColor, Spanning<ShiftableColor> palette)
+        public void AddTo(EffectableBoneSpriteTable table, Color mainColor, Spanning<ShiftableColor> palette)
         {
             if (Bone == BoneKeyword.Body)
             {
@@ -130,7 +130,7 @@ namespace Roguegard
             }
         }
 
-        private void AddTo(AffectableBoneSpriteTable table, BoneKeyword name, BoneSprite sprite, Color color, bool overridesBaseColor = false)
+        private void AddTo(EffectableBoneSpriteTable table, BoneKeyword name, BoneSprite sprite, Color color, bool overridesBaseColor = false)
         {
             if (IsFirst)
             {

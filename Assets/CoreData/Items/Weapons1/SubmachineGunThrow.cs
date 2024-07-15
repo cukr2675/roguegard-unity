@@ -23,7 +23,7 @@ namespace Roguegard
 
             // (基礎攻撃力x2) 回射撃する。
             int count;
-            using var atkValue = AffectableValue.Get();
+            using var atkValue = EffectableValue.Get();
             StatsEffectedValues.GetATK(user, atkValue);
             count = Mathf.FloorToInt(atkValue.BaseMainValue) * 2;
             count = Mathf.Max(count, 1);

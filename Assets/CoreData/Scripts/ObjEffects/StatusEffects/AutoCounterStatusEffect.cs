@@ -35,13 +35,13 @@ namespace Roguegard
             }
             return true;
 
-            bool Counter(AffectableValue baseDamage)
+            bool Counter(EffectableValue baseDamage)
             {
                 var distance = (user.Position - self.Position).sqrMagnitude;
                 if (distance <= 2)
                 {
                     // 受けたダメージを返す
-                    using var damage = AffectableValue.Get();
+                    using var damage = EffectableValue.Get();
                     damage.Initialize(baseDamage.MainValue);
                     var attackArg = new RogueMethodArgument(targetPosition: user.Position, value: damage);
                     RogueMethodAspectState.Invoke(MainInfoKw.Attack, attack, self, null, 1f, attackArg);

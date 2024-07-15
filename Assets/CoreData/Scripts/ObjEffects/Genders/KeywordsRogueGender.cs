@@ -10,7 +10,7 @@ namespace Roguegard
     {
         [SerializeField] private KeywordData[] _keywords = null;
 
-        public override void AffectValue(AffectableValue value, RogueObj self, MainInfoSetType infoSetType)
+        public override void AffectValue(EffectableValue value, RogueObj self, MainInfoSetType infoSetType)
         {
             if (infoSetType != MainInfoSetType.Base) return;
 
