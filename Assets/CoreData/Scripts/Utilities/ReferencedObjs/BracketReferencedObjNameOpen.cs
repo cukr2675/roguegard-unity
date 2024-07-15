@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using SkeletalSprite;
+using SDSSprite;
 using UnityEngine;
 
 namespace Roguegard.CharacterCreation

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using TMPro;
-using SkeletalSprite;
+using SDSSprite;
 using RuntimeDotter;
 using Roguegard.Device;
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using UnityEngine.UI;
-using SkeletalSprite;
+using SDSSprite;
 using Roguegard;
 
 namespace RoguegardUnity

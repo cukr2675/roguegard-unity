@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using UnityEngine.Tilemaps;
-using SkeletalSprite;
+using SDSSprite;
 
 namespace Roguegard
 {

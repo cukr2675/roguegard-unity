@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-using SkeletalSprite;
+using SDSSprite;
 
 namespace Roguegard.CharacterCreation
 {
@@ -16,7 +16,7 @@ namespace Roguegard.CharacterCreation
         protected override BoneSprite GetSprite(IReadOnlyAppearance appearance, ICharacterCreationData characterCreationData)
         {
             var hairColor = RogueColorUtility.GetHairColor(characterCreationData);
-            var bright = hairColor.maxColorComponent >= SkeletalSpriteUtility.LightDarkThreshold;
+            var bright = hairColor.maxColorComponent >= SDSSpriteUtility.LightDarkThreshold;
             var sprite = Sprite.GetSprite(bright);
             return sprite;
         }

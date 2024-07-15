@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-using SkeletalSprite;
+using SDSSprite;
 
 namespace Roguegard
 {
