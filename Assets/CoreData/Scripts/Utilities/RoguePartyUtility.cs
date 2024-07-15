@@ -9,6 +9,22 @@ namespace Roguegard.Extensions
     public static class RoguePartyUtility
     {
         /// <summary>
+        /// ターゲットオブジェクトの隣へ移動する。
+        /// </summary>
+        public static bool LocateNextToObj(
+            this IChangeStateRogueMethodCaller method, RogueObj self, RogueObj user, float activationDepth, RogueObj target)
+        {
+            var targetLocation = target.Location;
+            for (int i = 0; i < 8; i++)
+            {
+                var direction = new RogueDirection(i);
+                var position = target.Position + direction.Forward;
+                if (method.Locate(self, user, targetLocation, position, activationDepth)) return true;
+            }
+            return false;
+        }
+
+        /// <summary>
         /// いずれかのパーティメンバーの隣へ移動する。ただしリーダーと同じ空間に限定される。
         /// </summary>
         public static bool LocateNextToAnyMember(
@@ -21,12 +37,7 @@ namespace Roguegard.Extensions
                 var member = partyMembers[i];
                 if (member == null || member.Location != targetLocation) continue;
 
-                for (int j = 0; j < 8; j++)
-                {
-                    var direction = new RogueDirection(j);
-                    var position = member.Position + direction.Forward;
-                    if (method.Locate(self, user, targetLocation, position, activationDepth)) return true;
-                }
+                if (method.LocateNextToObj(self, user, activationDepth, member)) return true;
             }
             return false;
         }

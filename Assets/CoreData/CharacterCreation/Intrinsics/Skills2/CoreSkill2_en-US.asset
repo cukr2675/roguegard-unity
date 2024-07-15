@@ -50,6 +50,10 @@ MonoBehaviour:
     m_Localized: Impulse
     m_Metadata:
       m_Items: []
+  - m_Id: 2569870437912576
+    m_Localized: Shout
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

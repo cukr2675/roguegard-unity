@@ -107,6 +107,18 @@ MonoBehaviour:
     m_Key: ImpulseSkill::d
     m_Metadata:
       m_Items: []
+  - m_Id: 2569870437912576
+    m_Key: ShoutSkill
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2569915270828032
+    m_Key: ShoutSkill::c
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2569924879978496
+    m_Key: ShoutSkill::d
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
