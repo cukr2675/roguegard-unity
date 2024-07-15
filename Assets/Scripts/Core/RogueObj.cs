@@ -115,7 +115,7 @@ namespace Roguegard
                 return true;
             }
 
-            // 空間を循環参照させることはできない。（重さ計算で循環参照は無限再帰になる）
+            // 空間を循環参照させることはできない。（重さ計算するとき循環参照があると無限再帰になる）
             if (location == this || Contains(location)) return false;
 
             // 消滅したオブジェクトのとき、さらに空間移動を設定することはできない。
@@ -195,7 +195,14 @@ namespace Roguegard
             if (Stack <= 0)
             {
                 // ０個になったら null 空間へ移動させて消去する。
-                // 装備解除時に再スタックさせるための移動が必要なため、 activationDepth = 100 で実行する。
+
+                // 装備中の装備品を空間移動させたとき
+                // 1. 装備品を空間移動させる
+                // 2. 装備が解除される
+                // 3. 装備解除してから Restack する（装備状態でスタック結果が変わるため）
+                // 4. スタックされた結果、片方の装備品を null へ空間移動する
+                // のように空間移動が再帰的に実行されるため activationDepth = 100 で実行する。
+
                 const float setStackLocateActivationDepth = 100f;
                 var locateMethod = Main.InfoSet.Locate;
                 var arg = new RogueMethodArgument(targetObj: null);

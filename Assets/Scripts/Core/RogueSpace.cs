@@ -203,7 +203,7 @@ namespace Roguegard
         }
 
         /// <summary>
-        /// <see cref="RogueObj.TryLocate(RogueObj, Vector2Int, bool, bool, bool)"/> 以外では実行しない。
+        /// <see cref="RogueObj.TryLocate(RogueObj, Vector2Int, bool, bool, bool, bool, StackOption)"/> 以外では実行しない。
         /// </summary>
         internal bool TryLocate(RogueObj obj, Vector2Int position, bool asTile, bool collide, bool tileCollide)
         {
