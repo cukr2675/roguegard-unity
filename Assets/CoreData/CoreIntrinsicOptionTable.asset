@@ -125,6 +125,8 @@ MonoBehaviour:
     _asset: {fileID: 11400000, guid: cdada32be4178ff4f9875985663781b2, type: 2}
   - _key: Core.KnightJumpSkill
     _asset: {fileID: 11400000, guid: d7fba64b6f0f1414baca32c6486d5e8f, type: 2}
+  - _key: Core.ShoutSkill
+    _asset: {fileID: 11400000, guid: dc6549c67a6a13d46b6854b97a0ba23d, type: 2}
   - _key: Core.SpinSlashSkill
     _asset: {fileID: 11400000, guid: 03c1e7bc09716334ca131559307bba06, type: 2}
   - _key: Core.SprintAssaultSkill

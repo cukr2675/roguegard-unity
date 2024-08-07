@@ -34,7 +34,7 @@ namespace Roguegard
         /// <summary>
         /// <see cref="RogueObj.TrySetStack(int, RogueObj)"/> に失敗したときは代わりに <paramref name="stack"/> - 1 個のクローンを生成する。
         /// </summary>
-        public static bool TryStackClone(RogueObj obj, int stack)
+        private static bool TryStackClone(RogueObj obj, int stack)
         {
             var stackResult = obj.TrySetStack(stack);
             if (!stackResult)
