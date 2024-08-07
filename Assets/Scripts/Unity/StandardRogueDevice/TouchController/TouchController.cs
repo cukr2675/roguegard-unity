@@ -392,5 +392,10 @@ namespace RoguegardUnity
             _headerController.UpdateHeader(player);
             _menuController.OpenInitialMenu(menu, self, user, arg);
         }
+
+        public void CloseMenu()
+        {
+            _menuController.CloseMenu();
+        }
     }
 }

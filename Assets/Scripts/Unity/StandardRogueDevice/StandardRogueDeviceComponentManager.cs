@@ -65,6 +65,7 @@ namespace RoguegardUnity
             touchController.Initialize(
                 tilemapGrid.Tilemap, soundController, spriteRendererPool, () => autoPlayDeviceEventHandler.StopAutoPlay());
             touchController.GetInfo(out menuController, out var putIntoChestMenu, out var takeOutFromChestMenu);
+            Application.logMessageReceived += OnLogMessageReceived;
 
             // Unity の Update 実行用オブジェクト
             var gameObject = new GameObject("Ticker");
@@ -206,7 +207,18 @@ namespace RoguegardUnity
 
         public void Close()
         {
+            Application.logMessageReceived -= OnLogMessageReceived;
             Object.Destroy(parent.gameObject);
+        }
+
+        private void OnLogMessageReceived(string condition, string stackTrace, LogType type)
+        {
+            // メニューを開いているときエラーが発生すると行動できなくなることがある
+            // その対策として、エラー発生時はメニューを閉じる
+            if (type == LogType.Error || type == LogType.Exception)
+            {
+                touchController.CloseMenu();
+            }
         }
 
         public void LoadSavePoint(RogueObj obj)

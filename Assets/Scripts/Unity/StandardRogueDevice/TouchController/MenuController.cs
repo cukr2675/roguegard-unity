@@ -174,6 +174,11 @@ namespace RoguegardUnity
             menuManager.OpenInitialMenu(menu, self, user, arg, enableTouchMask);
         }
 
+        public void CloseMenu()
+        {
+            menuManager.Done();
+        }
+
         public void ResetDone() => menuManager.ResetDone();
 
         private void ShowFloorTitle(string text)
