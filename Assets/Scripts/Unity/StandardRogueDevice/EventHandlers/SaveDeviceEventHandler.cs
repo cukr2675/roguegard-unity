@@ -188,10 +188,12 @@ namespace RoguegardUnity
                     var spQuestDeviceData = new StandardRogueDeviceData();
                     spQuestDeviceData.CurrentRandom = random;
                     spQuestDeviceData.World = RoguegardSettings.WorldGenerator.CreateObj(null, Vector2Int.zero, random);
-                    var player = RoguegardSettings.CharacterCreationDatabase.LoadPreset(0).CreateObj(spQuestDeviceData.World, Vector2Int.zero, random);
+                    var preset = RoguegardSettings.CharacterCreationDatabase.LoadPreset(0);
+                    preset.Name = "Playtest";
+                    var player = preset.CreateObj(spQuestDeviceData.World, Vector2Int.zero, random);
                     RogueDeviceEffect.SetTo(player);
                     ViewInfo.SetTo(player);
-                    var worldInfo = RogueWorldInfo.GetByCharacter(player);
+                    var worldInfo = RogueWorldInfo.Get(spQuestDeviceData.World);
                     worldInfo.LobbyMembers.Add(player);
 
                     // パーティ・リーダーエフェクト・レベルアップボーナスの初期化

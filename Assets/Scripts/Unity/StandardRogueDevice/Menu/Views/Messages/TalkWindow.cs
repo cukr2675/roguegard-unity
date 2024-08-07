@@ -40,7 +40,7 @@ namespace RoguegardUnity
 
         public void Input()
         {
-            if (!_text.WaitsInput) return;
+            if (!_text.WaitsInput || _text.IsScrollingNow) return;
 
             _text.Input();
             if (!_text.IsTalkingNow)

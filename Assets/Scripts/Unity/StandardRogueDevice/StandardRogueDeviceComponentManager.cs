@@ -302,7 +302,6 @@ namespace RoguegardUnity
                 else
                 {
                     var worldInfo = RogueWorldInfo.GetByCharacter(Player);
-                    worldInfo.ChartState ??= new RogueChartState();
                     if (menuController.Wait || menuController.TalkingWait || touchController.WaitsForInput || !worldInfo.ChartState.TryUpdate())
                     {
                         // コマンド入力処理を行う
