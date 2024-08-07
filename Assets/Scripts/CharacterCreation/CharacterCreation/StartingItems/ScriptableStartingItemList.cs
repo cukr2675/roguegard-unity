@@ -11,7 +11,7 @@ namespace Roguegard.CharacterCreation
 
         public ScriptableStartingItem this[int index] => _items[index];
 
-        public int Count => _items.Length;
+        private int Count => _items.Length;
 
         public float TotalWeight
         {
@@ -27,6 +27,9 @@ namespace Roguegard.CharacterCreation
         }
 
         public Spanning<IWeightedRogueObjGenerator> Spanning => _items;
+
+        int IWeightedRogueObjGeneratorList.MinFrequency => 1;
+        int IWeightedRogueObjGeneratorList.MaxFrequency => 1;
 
         private IEnumerator<ScriptableStartingItem> GetEnumerator()
         {

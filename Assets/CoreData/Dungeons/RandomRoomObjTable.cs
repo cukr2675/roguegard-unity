@@ -5,13 +5,16 @@ using UnityEngine;
 namespace Roguegard.CharacterCreation
 {
     [System.Serializable]
-    public class RandomRoomObjTable : ScriptableStartingItemList
+    public class RandomRoomObjTable : ScriptableStartingItemList, IWeightedRogueObjGeneratorList
     {
         [SerializeField] private int _minFrequency = 0;
         public int MinFrequency => _minFrequency;
 
         [SerializeField] private int _maxFrequency = 0;
         public int MaxFrequency => _maxFrequency;
+
+        int IWeightedRogueObjGeneratorList.MinFrequency => _minFrequency;
+        int IWeightedRogueObjGeneratorList.MaxFrequency => _maxFrequency;
 
         public void GenerateFloor(RogueObj player, RogueObj floor, IRogueRandom random, int frequency = -1)
         {

@@ -108,6 +108,9 @@ namespace Roguegard.CharacterCreation
                 }
             }
 
+            int IWeightedRogueObjGeneratorList.MinFrequency => 1;
+            int IWeightedRogueObjGeneratorList.MaxFrequency => 1;
+
             public IEnumerator<IReadOnlyStartingItem> GetEnumerator()
             {
                 yield return this;

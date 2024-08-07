@@ -30,6 +30,9 @@ namespace Roguegard.CharacterCreation
 
         public Spanning<IWeightedRogueObjGenerator> Spanning => Spanning<IWeightedRogueObjGenerator>.Create(builders);
 
+        int IWeightedRogueObjGeneratorList.MinFrequency => 1;
+        int IWeightedRogueObjGeneratorList.MaxFrequency => 1;
+
         public StartingItemBuilder Add()
         {
             var builder = new StartingItemBuilder();
