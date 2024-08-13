@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace SDSSprite
 {
-    [CreateAssetMenu(menuName = "SkeletalSprite/SpritePoseSource/Symmetrical")]
+    [CreateAssetMenu(menuName = "SDSkeletalSprite/SpritePoseSource/Symmetrical")]
     public class SymmetricalSpritePoseSourceData : DirectionalSpritePoseSourceData
     {
         [SerializeField] private int _pixelsPerUnit = SDSSpriteUtility.DefaultPixelsPerUnit;

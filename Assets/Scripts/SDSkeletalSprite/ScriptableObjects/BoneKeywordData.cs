@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace SDSSprite
 {
-    [CreateAssetMenu(menuName = "SkeletalSprite/BoneKeyword")]
+    [CreateAssetMenu(menuName = "SDSkeletalSprite/BoneKeyword")]
     public class BoneKeywordData : ScriptableObject
     {
         public static implicit operator BoneKeyword(BoneKeywordData data)

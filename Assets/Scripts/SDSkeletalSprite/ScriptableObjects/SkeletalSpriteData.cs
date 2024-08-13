@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace SDSSprite
 {
-    [CreateAssetMenu(menuName = "SkeletalSprite/SkeletalSprite")]
+    [CreateAssetMenu(menuName = "SDSkeletalSprite/SkeletalSprite")]
     public class SkeletalSpriteData : ScriptableObject
     {
         [SerializeField] private int _pixelsPerUnit = SDSSpriteUtility.DefaultPixelsPerUnit;

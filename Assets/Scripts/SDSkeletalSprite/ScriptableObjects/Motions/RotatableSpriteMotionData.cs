@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace SDSSprite
 {
-    [CreateAssetMenu(menuName = "SkeletalSprite/SpriteMotion/Rotatable")]
+    [CreateAssetMenu(menuName = "SDSkeletalSprite/SpriteMotion/Rotatable")]
     public class RotatableSpriteMotionData : SpriteMotionData
     {
         [SerializeField] private int _pixelsPerUnit = SDSSpriteUtility.DefaultPixelsPerUnit;
