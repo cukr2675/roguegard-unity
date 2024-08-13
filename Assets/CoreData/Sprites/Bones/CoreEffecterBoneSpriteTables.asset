@@ -10,11 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dfb9989c8855602459af55a242dfd433, type: 3}
-  m_Name: CoreBoneSpriteTables
+  m_Name: CoreEffecterBoneSpriteTables
   m_EditorClassIdentifier: 
   _namespaceName: Roguegard
   _targetFolder: {fileID: 102900000, guid: a4a1edbb61d9bcb40b7405e8a074abb0, type: 3}
-  _assetTypeName: AffectableBoneSpriteTableData
   _assetTypeNames:
-  - AffectableBoneSpriteTableData
-  _propertyTypeName: AffectableBoneSpriteTableData
+  - EffecterBoneSpriteTableData
+  _propertyTypeName: EffecterBoneSpriteTableData

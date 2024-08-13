@@ -6,12 +6,14 @@ using SDSSprite;
 
 namespace Roguegard
 {
-    [CreateAssetMenu(menuName = "RoguegardData/Sprite/EffectableBoneSpriteTable")]
-    public class EffectableBoneSpriteTableData : ScriptableObject
+    [CreateAssetMenu(menuName = "RoguegardData/Sprite/EffecterBoneSpriteTableData")]
+    public class EffecterBoneSpriteTableData : ScriptableObject
     {
         [SerializeField] private Value _value = null;
 
-        public EffectableBoneSpriteTable Table => _value.Table;
+        public bool Any => _value.Any;
+        public void AddTo(EffectableBoneSpriteTable table) => _value.AddTo(table);
+        public void ColoredAddTo(EffectableBoneSpriteTable table, Color fromColor, Color toColor) => _value.ColoredAddTo(table, fromColor, toColor);
 
         [System.Serializable]
         public class Value
@@ -19,7 +21,7 @@ namespace Roguegard
             [SerializeField] private List<Item> _items;
 
             [System.NonSerialized] private EffectableBoneSpriteTable _table;
-            public EffectableBoneSpriteTable Table
+            private EffectableBoneSpriteTable Table
             {
                 get
                 {
@@ -28,6 +30,8 @@ namespace Roguegard
                     return _table;
                 }
             }
+
+            public bool Any => Table.Any;
 
             private void Enable()
             {
@@ -46,6 +50,9 @@ namespace Roguegard
                     }
                 }
             }
+
+            public void AddTo(EffectableBoneSpriteTable table) => Table.AddTo(table);
+            public void ColoredAddTo(EffectableBoneSpriteTable table, Color fromColor, Color toColor) => Table.ColoredAddTo(table, fromColor, toColor);
 
             [System.Serializable]
             private class Item

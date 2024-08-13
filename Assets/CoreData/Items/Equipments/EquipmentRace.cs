@@ -19,7 +19,7 @@ namespace Roguegard.CharacterCreation
 
         [SerializeField] private bool _canStackWhileEquipped;
 
-        [SerializeField] private EffectableBoneSpriteTableData.Value _boneSpriteTable;
+        [SerializeField] private EffecterBoneSpriteTableData.Value _boneSpriteTable;
 
         [Tooltip("この値が設定されているとき、装備者の指定のボーンの色をスポイトする")]
         [SerializeField] private BoneKeywordData _eyeDropBoneName;
@@ -57,7 +57,7 @@ namespace Roguegard.CharacterCreation
             }
 
             var baseColor = Color;
-            _boneSpriteTable.Table.ColoredAddTo(table, baseColor, color);
+            _boneSpriteTable.ColoredAddTo(table, baseColor, color);
         }
 
         protected class EquipmentInfo<T> : BaseEquipmentInfo, IBoneSpriteEffect
@@ -86,7 +86,7 @@ namespace Roguegard.CharacterCreation
             protected override void AddEffect(RogueObj equipment)
             {
                 var owner = equipment.Location;
-                if (Data._boneSpriteTable.Table.Any)
+                if (Data._boneSpriteTable.Any)
                 {
                     var equipmentSpriteState = owner.Main.GetBoneSpriteEffectState(owner);
                     equipmentSpriteState.AddFromRogueEffect(owner, this);
@@ -116,7 +116,7 @@ namespace Roguegard.CharacterCreation
                 if (Data._eyeDropBoneName != null)
                 {
                     var color = RogueColorUtility.GetFirstColor(Data._eyeDropBoneName, rootNode, boneSpriteTable);
-                    Data._boneSpriteTable.Table.ColoredAddTo(boneSpriteTable, baseColor, color);
+                    Data._boneSpriteTable.ColoredAddTo(boneSpriteTable, baseColor, color);
                     return;
                 }
 
@@ -125,7 +125,7 @@ namespace Roguegard.CharacterCreation
                     color = RogueColorUtility.GetColor(self);
                     colorIsInitialized = true;
                 }
-                Data._boneSpriteTable.Table.ColoredAddTo(boneSpriteTable, baseColor, color);
+                Data._boneSpriteTable.ColoredAddTo(boneSpriteTable, baseColor, color);
             }
         }
     }

@@ -56,7 +56,7 @@ namespace Roguegard
 
         void IBoneSpriteEffect.AffectSprite(RogueObj self, IReadOnlyNodeBone rootNode, EffectableBoneSpriteTable boneSpriteTable)
         {
-            CoreBoneSpriteTables.GuruguruEyes.Table.AddTo(boneSpriteTable);
+            CoreEffecterBoneSpriteTables.GuruguruEyes.AddTo(boneSpriteTable);
         }
 
         public override bool CanStack(RogueObj obj, RogueObj otherObj, IRogueEffect other)

@@ -4,12 +4,12 @@ using UnityEngine;
 
 namespace Roguegard
 {
-    public class CoreBoneSpriteTables : ScriptableLoader
+    public class CoreEffecterBoneSpriteTables : ScriptableLoader
     {
-        private static CoreBoneSpriteTables instance;
+        private static CoreEffecterBoneSpriteTables instance;
 
-        [SerializeField] private EffectableBoneSpriteTableData _guruguruEyes;
-        public static EffectableBoneSpriteTableData GuruguruEyes => instance._guruguruEyes;
+        [SerializeField] private EffecterBoneSpriteTableData _guruguruEyes;
+        public static EffecterBoneSpriteTableData GuruguruEyes => instance._guruguruEyes;
 
         public override IEnumerator LoadAsync()
         {

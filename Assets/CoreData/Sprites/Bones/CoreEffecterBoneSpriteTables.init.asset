@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 544cd0f9c176b9141985d36fd378633f, type: 3}
-  m_Name: CoreBoneSpriteTables.init
+  m_Name: CoreEffecterBoneSpriteTables.init
   m_EditorClassIdentifier: 
   _guruguruEyes: {fileID: 11400000, guid: 4c6122e96af5a9940ab7ff09fe5df1fb, type: 2}
