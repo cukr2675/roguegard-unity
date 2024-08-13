@@ -29,6 +29,10 @@ namespace Roguegard
 
         public MainInfoSetType InfoSetState => PolymorphInfoSet != null ? MainInfoSetType.Polymorph : MainInfoSetType.Base;
 
+        /// <summary>
+        /// このオブジェクトが更新済みかを取得する。
+        /// これがあることによってオブジェクトの並び替えによる複数回行動を抑制できる。
+        /// </summary>
         public bool IsTicked { get; set; }
         
         public MainStats Stats { get; private set; }
