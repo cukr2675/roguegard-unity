@@ -113,41 +113,7 @@ MonoBehaviour:
     _equipParts:
     - {fileID: 11400000, guid: a9b106ec03139934fa761fa7f6484de4, type: 2}
     _canStackWhileEquipped: 0
-    _boneSpriteTable:
-      _items:
-      - _name: {fileID: 11400000, guid: f2969665be9ee4d41a5326de4f6eb085, type: 2}
-        _hasFirstSprite: 1
-        _firstSprite:
-          _normalFront: {fileID: -1663329768, guid: aa1967e12fbad8d4da03b63446298929, type: 3}
-          _normalRear: {fileID: 0}
-          _backFront: {fileID: 0}
-          _backRear: {fileID: 694386994, guid: aa1967e12fbad8d4da03b63446298929, type: 3}
-        _firstColor: {r: 0.2784314, g: 0.34117648, b: 0.3372549, a: 1}
-        _overridesSourceColor: 1
-        _overridesBaseColor: 0
-        _equipmentSprites: []
-      - _name: {fileID: 11400000, guid: 052643cd6ce569142a49fa1980f8534a, type: 2}
-        _hasFirstSprite: 1
-        _firstSprite:
-          _normalFront: {fileID: 0}
-          _normalRear: {fileID: -598813443, guid: aa1967e12fbad8d4da03b63446298929, type: 3}
-          _backFront: {fileID: -46386991, guid: aa1967e12fbad8d4da03b63446298929, type: 3}
-          _backRear: {fileID: 0}
-        _firstColor: {r: 0.2784314, g: 0.34117648, b: 0.3372549, a: 1}
-        _overridesSourceColor: 1
-        _overridesBaseColor: 0
-        _equipmentSprites: []
-      - _name: {fileID: 11400000, guid: 5ea5eef48e6079b43a6ac0722c5611ce, type: 2}
-        _hasFirstSprite: 1
-        _firstSprite:
-          _normalFront: {fileID: 0}
-          _normalRear: {fileID: -2110068730, guid: 33e711481a639a34ea6278a659ef0437, type: 3}
-          _backFront: {fileID: -2110068730, guid: 33e711481a639a34ea6278a659ef0437, type: 3}
-          _backRear: {fileID: 0}
-        _firstColor: {r: 0.2784314, g: 0.34117648, b: 0.3372549, a: 1}
-        _overridesSourceColor: 1
-        _overridesBaseColor: 0
-        _equipmentSprites: []
+    _boneSpriteTable: {fileID: 11400000, guid: bca65975c73ec5a408f30466286965f8, type: 2}
     _eyeDropBoneName: {fileID: 11400000, guid: ec68d48baa662234394a31361604143d, type: 2}
     _overridesBoneSpriteEffectOrder: 0
     _boneSpriteEffectOrder: 4

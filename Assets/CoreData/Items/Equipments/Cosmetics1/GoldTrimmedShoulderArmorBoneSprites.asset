@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ff905651ac553e458ac896bdf1ceec6, type: 3}
+  m_Name: GoldTrimmedShoulderArmorBoneSprites
+  m_EditorClassIdentifier: 
+  _items:
+  - _name: {fileID: 11400000, guid: 971d59b81cdac6b499bf4f884f750bae, type: 2}
+    _hasFirstSprite: 0
+    _firstSprite:
+      _normalFront: {fileID: 0}
+      _normalRear: {fileID: 0}
+      _backFront: {fileID: 0}
+      _backRear: {fileID: 0}
+    _firstColor: {r: 1, g: 1, b: 1, a: 1}
+    _firstColorIsFixed: 0
+    _overridesSourceColor: 0
+    _overridesBaseColor: 0
+    _equipmentSprites:
+    - _sprite:
+        _normalFront: {fileID: -834868669, guid: 40c71f15d26832846a0eb4a89b3c8e54, type: 3}
+        _normalRear: {fileID: 0}
+        _backFront: {fileID: -2031566907, guid: 40c71f15d26832846a0eb4a89b3c8e54, type: 3}
+        _backRear: {fileID: 0}
+      _color: {r: 1, g: 1, b: 1, a: 1}
+      _colorIsFixed: 0

@@ -113,25 +113,7 @@ MonoBehaviour:
     _equipParts:
     - {fileID: 11400000, guid: cf165c696a4d995419a4bb84876a2263, type: 2}
     _canStackWhileEquipped: 0
-    _boneSpriteTable:
-      _items:
-      - _name: {fileID: 11400000, guid: c66efafae0b82384d8b4212c78358e52, type: 2}
-        _hasFirstSprite: 0
-        _firstSprite:
-          _normalFront: {fileID: 0}
-          _normalRear: {fileID: 0}
-          _backFront: {fileID: 0}
-          _backRear: {fileID: 0}
-        _firstColor: {r: 1, g: 1, b: 1, a: 1}
-        _overridesSourceColor: 0
-        _overridesBaseColor: 0
-        _equipmentSprites:
-        - _sprite:
-            _normalFront: {fileID: 1827395112, guid: ec906a9335ac9e04392c3104aa5b7617, type: 3}
-            _normalRear: {fileID: 0}
-            _backFront: {fileID: -660644238, guid: ec906a9335ac9e04392c3104aa5b7617, type: 3}
-            _backRear: {fileID: 0}
-          _color: {r: 0.7647059, g: 0, b: 0, a: 1}
+    _boneSpriteTable: {fileID: 11400000, guid: e5c76feb1aa991b4292894631797cf1d, type: 2}
     _eyeDropBoneName: {fileID: 0}
     _overridesBoneSpriteEffectOrder: 0
     _boneSpriteEffectOrder: 3

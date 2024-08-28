@@ -291,7 +291,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HoodlessCloak_UpperBody_NR
+      name: HoodlessCloak_Wings_NR
       rect:
         serializedVersion: 2
         x: 36
@@ -312,7 +312,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HoodlessCloak_UpperBody_BF
+      name: HoodlessCloak_Wings_BF
       rect:
         serializedVersion: 2
         x: 36
@@ -371,8 +371,8 @@ TextureImporter:
       HoodedCloak_UpperBody_NRBF: -191375082
       HoodlessCloak_Head_BF: -556247229
       HoodlessCloak_Head_NF: -2046699242
-      HoodlessCloak_UpperBody_BF: -1330581519
-      HoodlessCloak_UpperBody_NR: 457133670
+      HoodlessCloak_Wings_BF: -1330581519
+      HoodlessCloak_Wings_NR: 457133670
       Muffler_BF: -660644238
       Muffler_NF: 1827395112
   mipmapLimitGroupName: 

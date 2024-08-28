@@ -15,5 +15,5 @@ MonoBehaviour:
   _namespaceName: Roguegard
   _targetFolder: {fileID: 102900000, guid: a4a1edbb61d9bcb40b7405e8a074abb0, type: 3}
   _assetTypeNames:
-  - EffecterBoneSpriteTableData
-  _propertyTypeName: EffecterBoneSpriteTableData
+  - SDSSprite.EffecterBoneSpriteTableData
+  _propertyTypeName: SDSSprite.EffecterBoneSpriteTableData

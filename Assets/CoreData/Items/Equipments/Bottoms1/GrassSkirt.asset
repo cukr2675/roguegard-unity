@@ -113,45 +113,10 @@ MonoBehaviour:
     _equipParts:
     - {fileID: 11400000, guid: 5cf2bde435fc98046bd1877964dc8fc9, type: 2}
     _canStackWhileEquipped: 0
-    _boneSpriteTable:
-      _items:
-      - _name: {fileID: 11400000, guid: a90fd0bc3132c214395dee60b9a645ae, type: 2}
-        _hasFirstSprite: 0
-        _firstSprite:
-          _normalFront: {fileID: 0}
-          _normalRear: {fileID: 0}
-          _backFront: {fileID: 0}
-          _backRear: {fileID: 0}
-        _firstColor: {r: 1, g: 1, b: 1, a: 1}
-        _overridesSourceColor: 0
-        _overridesBaseColor: 1
-        _equipmentSprites:
-        - _sprite:
-            _normalFront: {fileID: 630979168, guid: 91f7407251227b244a23d77c1aa47e41, type: 3}
-            _normalRear: {fileID: 0}
-            _backFront: {fileID: 439183725, guid: 91f7407251227b244a23d77c1aa47e41, type: 3}
-            _backRear: {fileID: 630979168, guid: 91f7407251227b244a23d77c1aa47e41, type: 3}
-          _color: {r: 0, g: 0.5019608, b: 0, a: 1}
-      - _name: {fileID: 11400000, guid: 1974de15d93c82241bdd964fc44a5b9e, type: 2}
-        _hasFirstSprite: 0
-        _firstSprite:
-          _normalFront: {fileID: 0}
-          _normalRear: {fileID: 0}
-          _backFront: {fileID: 0}
-          _backRear: {fileID: 0}
-        _firstColor: {r: 1, g: 1, b: 1, a: 1}
-        _overridesSourceColor: 0
-        _overridesBaseColor: 1
-        _equipmentSprites:
-        - _sprite:
-            _normalFront: {fileID: -892543744, guid: 91f7407251227b244a23d77c1aa47e41, type: 3}
-            _normalRear: {fileID: 0}
-            _backFront: {fileID: -2021880604, guid: 91f7407251227b244a23d77c1aa47e41, type: 3}
-            _backRear: {fileID: 0}
-          _color: {r: 0, g: 0.5019608, b: 0, a: 1}
+    _boneSpriteTable: {fileID: 11400000, guid: 9b71cddb852b1b34e81a761de5af0d3c, type: 2}
     _eyeDropBoneName: {fileID: 0}
     _overridesBoneSpriteEffectOrder: 0
-    _boneSpriteEffectOrder: -5
+    _boneSpriteEffectOrder: -2
     _beEquipped:
       _script: {fileID: 0}
       _ref:

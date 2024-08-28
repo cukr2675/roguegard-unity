@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ff905651ac553e458ac896bdf1ceec6, type: 3}
+  m_Name: LeatherGauntletsBoneSprites
+  m_EditorClassIdentifier: 
+  _items:
+  - _name: {fileID: 11400000, guid: a0ccd12a7fd1b134aa832922cd725b6a, type: 2}
+    _hasFirstSprite: 0
+    _firstSprite:
+      _normalFront: {fileID: 0}
+      _normalRear: {fileID: 0}
+      _backFront: {fileID: 0}
+      _backRear: {fileID: 0}
+    _firstColor: {r: 1, g: 1, b: 1, a: 1}
+    _firstColorIsFixed: 0
+    _overridesSourceColor: 0
+    _overridesBaseColor: 0
+    _equipmentSprites:
+    - _sprite:
+        _normalFront: {fileID: 1878646332, guid: ad3dda28ccd739f47b1bb9a465461a63, type: 3}
+        _normalRear: {fileID: 0}
+        _backFront: {fileID: 1878646332, guid: ad3dda28ccd739f47b1bb9a465461a63, type: 3}
+        _backRear: {fileID: 0}
+      _color: {r: 1, g: 1, b: 1, a: 1}
+      _colorIsFixed: 0
+  - _name: {fileID: 11400000, guid: 1662f711f4d0ab043b52727470bfc0f1, type: 2}
+    _hasFirstSprite: 0
+    _firstSprite:
+      _normalFront: {fileID: 0}
+      _normalRear: {fileID: 0}
+      _backFront: {fileID: 0}
+      _backRear: {fileID: 0}
+    _firstColor: {r: 1, g: 1, b: 1, a: 1}
+    _firstColorIsFixed: 0
+    _overridesSourceColor: 0
+    _overridesBaseColor: 0
+    _equipmentSprites:
+    - _sprite:
+        _normalFront: {fileID: 1878646332, guid: ad3dda28ccd739f47b1bb9a465461a63, type: 3}
+        _normalRear: {fileID: 0}
+        _backFront: {fileID: 1878646332, guid: ad3dda28ccd739f47b1bb9a465461a63, type: 3}
+        _backRear: {fileID: 0}
+      _color: {r: 1, g: 1, b: 1, a: 1}
+      _colorIsFixed: 0

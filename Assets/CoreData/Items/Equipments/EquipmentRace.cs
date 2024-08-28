@@ -19,7 +19,7 @@ namespace Roguegard.CharacterCreation
 
         [SerializeField] private bool _canStackWhileEquipped;
 
-        [SerializeField] private EffecterBoneSpriteTableData.Value _boneSpriteTable;
+        [SerializeField] private EffecterBoneSpriteTableData _boneSpriteTable;
 
         [Tooltip("この値が設定されているとき、装備者の指定のボーンの色をスポイトする")]
         [SerializeField] private BoneKeywordData _eyeDropBoneName;
@@ -56,8 +56,7 @@ namespace Roguegard.CharacterCreation
                 return;
             }
 
-            var baseColor = Color;
-            _boneSpriteTable.ColoredAddTo(table, baseColor, color);
+            _boneSpriteTable?.ColoredAddTo(table, color);
         }
 
         protected class EquipmentInfo<T> : BaseEquipmentInfo, IBoneSpriteEffect
@@ -77,7 +76,7 @@ namespace Roguegard.CharacterCreation
 
             public EquipmentInfo(T data, RogueObj self)
             {
-                this.Data = data;
+                Data = data;
                 this.self = self;
                 effects = data._equippedEffectSources.Select(x => x.Ref.CreateOrReuse(self, null)).ToArray();
                 colorIsInitialized = false;
@@ -86,7 +85,7 @@ namespace Roguegard.CharacterCreation
             protected override void AddEffect(RogueObj equipment)
             {
                 var owner = equipment.Location;
-                if (Data._boneSpriteTable.Any)
+                if (Data._boneSpriteTable != null)
                 {
                     var equipmentSpriteState = owner.Main.GetBoneSpriteEffectState(owner);
                     equipmentSpriteState.AddFromRogueEffect(owner, this);
@@ -112,11 +111,10 @@ namespace Roguegard.CharacterCreation
 
             void IBoneSpriteEffect.AffectSprite(RogueObj owner, IReadOnlyNodeBone rootNode, EffectableBoneSpriteTable boneSpriteTable)
             {
-                var baseColor = Data.Color;
                 if (Data._eyeDropBoneName != null)
                 {
                     var color = RogueColorUtility.GetFirstColor(Data._eyeDropBoneName, rootNode, boneSpriteTable);
-                    Data._boneSpriteTable.ColoredAddTo(boneSpriteTable, baseColor, color);
+                    Data._boneSpriteTable?.ColoredAddTo(boneSpriteTable, color);
                     return;
                 }
 
@@ -125,7 +123,7 @@ namespace Roguegard.CharacterCreation
                     color = RogueColorUtility.GetColor(self);
                     colorIsInitialized = true;
                 }
-                Data._boneSpriteTable.ColoredAddTo(boneSpriteTable, baseColor, color);
+                Data._boneSpriteTable?.ColoredAddTo(boneSpriteTable, color);
             }
         }
     }

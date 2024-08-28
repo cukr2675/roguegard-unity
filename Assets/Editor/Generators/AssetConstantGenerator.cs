@@ -58,7 +58,7 @@ namespace {_namespaceName}
             {
                 writer.Write($@"
 
-        [SerializeField] private {item.TypeName} {item.FieldName};
+        [SerializeField] private {item.GetTypeName(_namespaceName)} {item.FieldName};
         public static {_propertyTypeName} {item.Name} => instance.{item.FieldName};");
             }
 
@@ -97,7 +97,7 @@ namespace {_namespaceName}
             public Object Asset { get; }
             public string Name { get; }
             public string FieldName { get; }
-            public string TypeName { get; }
+            private readonly System.Type type;
 
             public Item(string guid)
             {
@@ -106,7 +106,13 @@ namespace {_namespaceName}
                 Asset = AssetDatabase.LoadAssetAtPath<Object>(path);
                 Name = Path.GetFileNameWithoutExtension(path);
                 FieldName = "_" + Regex.Replace(Name, @"^[A-Z]+", x => x.Value.ToLowerInvariant());
-                TypeName = Asset.GetType().Name;
+                type = Asset.GetType();
+            }
+
+            public string GetTypeName(string assetNamespace)
+            {
+                if (assetNamespace.StartsWith(type.Namespace)) return type.Name;
+                else return type.FullName;
             }
         }
 

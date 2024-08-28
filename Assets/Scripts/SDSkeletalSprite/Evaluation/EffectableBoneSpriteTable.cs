@@ -143,12 +143,14 @@ namespace SDSSprite
                 foreach (var equipmentColor in value.equipmentColors)
                 {
                     item.equipmentColors.Add(equipmentColor);
+
+                    // 不透明のスプライトを重ねるときのみベースカラーの設定を上書きする
+                    if (equipmentColor.a >= 1f) { item.OverridesBaseColor |= value.OverridesBaseColor; }
                 }
-                item.OverridesBaseColor |= value.OverridesBaseColor;
             }
         }
 
-        public void ColoredAddTo(EffectableBoneSpriteTable table, Color fromColor, Color toColor)
+        public void ColoredAddTo(EffectableBoneSpriteTable table, Color toColor)
         {
             foreach (var pair in items)
             {
@@ -165,9 +167,8 @@ namespace SDSSprite
                     table.items.Add(pair.Key, item);
                 }
                 var value = pair.Value;
-                var valueFirstColor = value.FirstColor == fromColor ? toColor : value.FirstColor;
                 item.FirstSprite = value.FirstSprite ?? item.FirstSprite;
-                item.FirstColor = value.OverridesSourceColor ? valueFirstColor : item.FirstColor;
+                item.FirstColor = value.OverridesSourceColor ? toColor : item.FirstColor;
                 item.OverridesSourceColor |= value.OverridesSourceColor;
                 if (value.FirstSprite != null || value.OverridesSourceColor)
                 {
@@ -178,23 +179,11 @@ namespace SDSSprite
                 foreach (var equipmentSprite in value.equipmentSprites)
                 {
                     item.equipmentSprites.Add(equipmentSprite);
+                    item.equipmentColors.Add(toColor);
                 }
-                var valueOverridesBaseColor = value.OverridesBaseColor;
-                foreach (var equipmentColor in value.equipmentColors)
-                {
-                    if (equipmentColor == fromColor)
-                    {
-                        item.equipmentColors.Add(toColor);
 
-                        // 不透明色から透明になったとき、ベースカラーの設定を上書きしない
-                        if (fromColor.a >= 1f && toColor.a < 1f) { valueOverridesBaseColor = false; }
-                    }
-                    else
-                    {
-                        item.equipmentColors.Add(equipmentColor);
-                    }
-                }
-                item.OverridesBaseColor |= valueOverridesBaseColor;
+                // 不透明のスプライトを重ねるときのみベースカラーの設定を上書きする
+                if (value.equipmentSprites.Count >= 1 && toColor.a >= 1f) { item.OverridesBaseColor |= value.OverridesBaseColor; }
             }
         }
 
@@ -207,7 +196,12 @@ namespace SDSSprite
             items.Clear();
         }
 
-        private class Item : IItem
+        /// <summary>
+        /// <see cref="RefItem"/> のコンストラクタを internal で <see cref="EffectableBoneSpriteTable"/> に公開する必要があるため、
+        /// このクラスも internal にする
+        /// <see cref="EffectableBoneSpriteTable"/> 以外では使用しない
+        /// </summary>
+        internal sealed class Item
         {
             public BoneSprite FirstSprite { get; set; }
             public Color FirstColor { get; set; }
@@ -225,24 +219,9 @@ namespace SDSSprite
             }
         }
 
-        /// <summary>
-        /// <see cref="RefItem"/> のコンストラクタを internal で <see cref="EffectableBoneSpriteTable"/> に公開する必要があるため、
-        /// このインターフェースも internal にする
-        /// </summary>
-        internal interface IItem
-        {
-            BoneSprite FirstSprite { get; }
-            Color FirstColor { get; }
-            bool OverridesSourceColor { get; }
-            bool OverridesBaseColor { get; }
-            int EquipmentSpriteCount { get; }
-
-            void GetEquipmentSprite(int index, out BoneSprite sprite, out Color color);
-        }
-
         public readonly ref struct RefItem
         {
-            private readonly IItem item;
+            private readonly Item item;
 
             public BoneSprite FirstSprite => item.FirstSprite;
             public Color FirstColor => item.FirstColor;
@@ -250,7 +229,7 @@ namespace SDSSprite
             public bool OverridesBaseColor => item.OverridesBaseColor;
             public int EquipmentSpriteCount => item.EquipmentSpriteCount;
 
-            internal RefItem(IItem item)
+            internal RefItem(Item item)
             {
                 this.item = item;
             }

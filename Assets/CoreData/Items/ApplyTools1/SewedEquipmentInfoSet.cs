@@ -172,13 +172,12 @@ namespace Roguegard
 
             void IBoneSpriteEffect.AffectSprite(RogueObj owner, IReadOnlyNodeBone rootNode, EffectableBoneSpriteTable boneSpriteTable)
             {
-                var baseColor = data.BoneSprites.MainColor;
                 if (!colorIsInitialized)
                 {
                     color = RogueColorUtility.GetColor(self);
                     colorIsInitialized = true;
                 }
-                table.ColoredAddTo(boneSpriteTable, baseColor, color);
+                table.ColoredAddTo(boneSpriteTable, color);
             }
         }
     }

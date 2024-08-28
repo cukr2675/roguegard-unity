@@ -58,7 +58,7 @@ namespace Roguegard
                 return;
             }
 
-            BoneSprites.GetEffectableTable().ColoredAddTo(table, BoneSprites.MainColor, color);
+            BoneSprites.GetEffectableTable().ColoredAddTo(table, color);
         }
     }
 }
