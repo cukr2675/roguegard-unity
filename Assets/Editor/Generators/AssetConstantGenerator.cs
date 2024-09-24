@@ -9,6 +9,9 @@ using UnityEditor;
 
 namespace Roguegard.Editor
 {
+    // >生成コードがこのクラスを継承することで一つの ScriptableObject で済ませられる？
+    // 「t:ScriptableGenerator」または「t:ScriptableLoader」のどちらかが検索できなくなるので微妙
+
     [CreateAssetMenu(menuName = "RoguegardData/Editor/ConstantGenerator")]
     public class AssetConstantGenerator : ScriptableGenerator
     {
