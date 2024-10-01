@@ -66,26 +66,17 @@ namespace RoguegardUnity
 
                 var path = (string)arg.Other;
                 var newPath = Path.Combine(Path.GetDirectoryName(path), "NewPath.gard");
-                RogueFile.Exists(newPath, (exists, errorMsg) =>
+                if (RogueFile.Exists(newPath))
                 {
-                    if (errorMsg != null)
-                    {
-                        manager.Back();
-                        SelectFileMenu.ShowErrorMsg(manager, errorMsg);
-                        return;
-                    }
-
-                    if (exists)
-                    {
-                        var newArg = new RogueMethodArgument(other: new Paths() { path = path, newPath = newPath });
-                        manager.Back();
-                        manager.OpenMenuAsDialog(overwriteDialog, self, user, newArg);
-                    }
-                    else
-                    {
-                        RogueFile.Move(path, newPath, errorMsg => SelectFileMenu.ReopenCallback(manager, errorMsg));
-                    }
-                });
+                    var newArg = new RogueMethodArgument(other: new Paths() { path = path, newPath = newPath });
+                    manager.Back();
+                    manager.OpenMenuAsDialog(overwriteDialog, self, user, newArg);
+                }
+                else
+                {
+                    RogueFile.Move(path, newPath);
+                    manager.Reopen();
+                }
             }
 
             private void Overwrite(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
@@ -95,7 +86,9 @@ namespace RoguegardUnity
                 SelectFileMenu.ShowSaving(manager);
 
                 var paths = (Paths)arg.Other;
-                RogueFile.Move(paths.path, paths.newPath, errorMsg => SelectFileMenu.ReopenCallback(manager, errorMsg), true);
+                RogueFile.Delete(paths.newPath);
+                RogueFile.Move(paths.path, paths.newPath);
+                manager.Reopen();
             }
 
             private class Paths
@@ -114,7 +107,8 @@ namespace RoguegardUnity
                 manager.Back();
                 SelectFileMenu.ShowLoading(manager);
 
-                RogueFile.Export((string)arg.Other, errorMsg => SelectFileMenu.ReopenCallback(manager, errorMsg));
+                RogueFile.Export((string)arg.Other);
+                manager.Reopen();
             }
         }
 
@@ -139,7 +133,8 @@ namespace RoguegardUnity
                 manager.Back();
                 SelectFileMenu.ShowDeleting(manager);
 
-                RogueFile.Delete((string)arg.Other, errorMsg => SelectFileMenu.ReopenCallback(manager, errorMsg));
+                RogueFile.Delete((string)arg.Other);
+                manager.Reopen();
             }
         }
     }

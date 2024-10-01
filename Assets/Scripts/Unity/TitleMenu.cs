@@ -193,20 +193,15 @@ namespace RoguegardUnity
 
                 private void Loaded(string path)
                 {
-                    RogueFile.OpenRead(path, (stream, errorMsg) =>
+                    StandardRogueDevice device;
+                    using (var stream = RogueFile.OpenRead(path))
                     {
-                        if (errorMsg != null)
-                        {
-                            Debug.LogError(errorMsg);
-                            return;
-                        }
-
                         var name = RogueFile.GetName(path);
                         var save = new StandardRogueDeviceSave();
-                        var device = RogueDevice.LoadGame(save, stream);
+                        device = RogueDevice.LoadGame(save, stream);
                         stream.Close();
-                        parent.OpenDevice(device);
-                    });
+                    }
+                    parent.OpenDevice(device);
                 }
             }
 

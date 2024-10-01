@@ -9,31 +9,33 @@ namespace Save2IDB
         public IDBOperationStatus Status { get; protected set; }
         public string ErrorMsg { get; protected set; }
 
+        public virtual event System.Action<IDBOperationHandle> CompletedTypeless;
+
         private readonly object _current;
         object IEnumerator.Current => _current;
 
         internal IDBOperationHandle()
         {
-#if UNITY_WEBGL && !UNITY_EDITOR
-            //_current = new WaitWhile(() => Status == IDBOperationStatus.InProgress);
-            _current = null;
+            _current = new WaitWhile(() => Status == IDBOperationStatus.InProgress);
             Status = IDBOperationStatus.InProgress;
-#else
-            // WebGL でなければ最初から失敗扱い
-            _current = null;
-            Status = IDBOperationStatus.Failed;
-#endif
         }
 
         internal void Done()
         {
             Status = IDBOperationStatus.Succeeded;
+            OnCompleted();
         }
 
         internal void Error(string errorMsg)
         {
             ErrorMsg = errorMsg;
             Status = IDBOperationStatus.Failed;
+            OnCompleted();
+        }
+
+        protected virtual void OnCompleted()
+        {
+            CompletedTypeless?.Invoke(this);
         }
 
         bool IEnumerator.MoveNext()
@@ -50,16 +52,28 @@ namespace Save2IDB
 
     public class IDBOperationHandle<T> : IDBOperationHandle, IEnumerator
     {
-        public T Result { get; private set; }
+        public virtual T Result { get; private set; }
 
-        object IEnumerator.Current => null;
+        public event System.Action<IDBOperationHandle<T>> Completed;
+
+        public override event System.Action<IDBOperationHandle> CompletedTypeless
+        {
+            add => Completed += value;
+            remove => Completed -= value;
+        }
 
         internal IDBOperationHandle() { }
 
-        internal void Done(T stream)
+        internal void Done(T result)
         {
-            Result = stream;
-            Status = IDBOperationStatus.Succeeded;
+            Result = result;
+            Done();
+        }
+
+        protected override void OnCompleted()
+        {
+            base.OnCompleted();
+            Completed?.Invoke(this);
         }
 
         void IEnumerator.Reset()

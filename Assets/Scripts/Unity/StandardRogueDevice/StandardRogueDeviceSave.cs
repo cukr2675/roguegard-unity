@@ -25,7 +25,13 @@ namespace RoguegardUnity
     {
         public string TypeName => "StandardRogueDevice.Json";
 
+#if UNITY_EDITOR
         public static string RootDirectory => "./Save";
+#elif UNITY_STANDALONE
+        public static string RootDirectory => $"{System.AppContext.BaseDirectory}/Save";
+#elif UNITY_WEBGL
+        public static string RootDirectory => $"{Application.persistentDataPath}/Save";
+#endif
 
         public static Spanning<string> Extensions => _extensions;
         private static readonly string[] _extensions = new[] { ".gard", ".zip" };
@@ -45,21 +51,9 @@ namespace RoguegardUnity
 
         public static void GetFiles(System.Action<IEnumerable<RogueFile>> callback)
         {
-            GetFiles(RootDirectory, callback);
-        }
-
-        private static void GetFiles(string path, System.Action<IEnumerable<RogueFile>> callback)
-        {
-            RogueFile.GetFiles(path, (files, errorMsg) =>
-            {
-                if (errorMsg != null)
-                {
-                    Debug.LogError(errorMsg);
-                    return;
-                }
-
-                callback(files.Where(x => x.Path.ToLower().EndsWith(_extensions[0]) || x.Path.ToLower().EndsWith(_extensions[1])));
-            });
+            var fileArray = RogueFile.GetFiles(RootDirectory);
+            var files = fileArray.Where(x => x.Path.ToLower().EndsWith(_extensions[0]) || x.Path.ToLower().EndsWith(_extensions[1]));
+            callback(files);
         }
 
         public static void GetNewNumberingPath(string name, System.Action<string> callback)
@@ -69,14 +63,13 @@ namespace RoguegardUnity
             var saveName = Path.GetFileNameWithoutExtension(name);
             var extension = Path.GetExtension(name);
 
-            GetFiles(Path.Combine(RootDirectory, directory), files =>
-            {
-                var numbers = files.Where(x => Path.GetFileName(x.Path).StartsWith(saveName)).Select(x => GetFirstNumber(x.Path)).ToArray();
-                var newNumber = 1;
-                if (numbers.Length >= 1) { newNumber = numbers.Max() + 1; }
-                if (!Extensions.Contains(extension)) { extension += _extensions[0]; }
-                callback(Path.Combine(RootDirectory, directory, saveName + newNumber + extension));
-            });
+            var fileArray = RogueFile.GetFiles(Path.Combine(RootDirectory, directory));
+            var files = fileArray.Where(x => x.Path.ToLower().EndsWith(_extensions[0]) || x.Path.ToLower().EndsWith(_extensions[1]));
+            var numbers = files.Where(x => Path.GetFileName(x.Path).StartsWith(saveName)).Select(x => GetFirstNumber(x.Path)).ToArray();
+            var newNumber = 1;
+            if (numbers.Length >= 1) { newNumber = numbers.Max() + 1; }
+            if (!Extensions.Contains(extension)) { extension += _extensions[0]; }
+            callback(Path.Combine(RootDirectory, directory, saveName + newNumber + extension));
         }
 
         public static void GetNewAutoSavePath(string name, System.Action<string> callback)
@@ -86,13 +79,12 @@ namespace RoguegardUnity
             var saveName = Path.GetFileNameWithoutExtension(name);
             var extension = Path.GetExtension(name);
 
-            GetFiles(Path.Combine(RootDirectory, directory), files =>
-            {
-                var newNumber = files.Where(x => Path.GetFileName(x.Path).StartsWith(saveName)).Select(x => GetFirstNumber(x.Path)).FirstOrDefault();
-                newNumber = (newNumber % 3) + 1;
-                if (!Extensions.Contains(extension)) { extension += _extensions[0]; }
-                callback(Path.Combine(RootDirectory, directory, saveName + newNumber + extension));
-            });
+            var fileArray = RogueFile.GetFiles(Path.Combine(RootDirectory, directory));
+            var files = fileArray.Where(x => x.Path.ToLower().EndsWith(_extensions[0]) || x.Path.ToLower().EndsWith(_extensions[1]));
+            var newNumber = files.Where(x => Path.GetFileName(x.Path).StartsWith(saveName)).Select(x => GetFirstNumber(x.Path)).FirstOrDefault();
+            newNumber = (newNumber % 3) + 1;
+            if (!Extensions.Contains(extension)) { extension += _extensions[0]; }
+            callback(Path.Combine(RootDirectory, directory, saveName + newNumber + extension));
         }
 
         private static int GetFirstNumber(string x)

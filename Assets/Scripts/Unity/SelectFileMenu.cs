@@ -34,10 +34,7 @@ namespace RoguegardUnity
 
         public void OpenMenu(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         {
-            if (!Directory.Exists(StandardRogueDeviceSave.RootDirectory))
-            {
-                Directory.CreateDirectory(StandardRogueDeviceSave.RootDirectory);
-            }
+            RogueFile.InitializeDirectory(StandardRogueDeviceSave.RootDirectory);
 
             var filesArg = arg;
             StandardRogueDeviceSave.GetFiles(files =>

@@ -44,23 +44,17 @@ namespace RoguegardUnity
                 SelectFileMenu.ShowLoading(root);
 
                 // 入力されたパスの Stream を開く
-                RogueFile.OpenRead(path, (stream, errorMsg) =>
+                StandardRogueDeviceData loadDeviceData;
+                using (var stream = RogueFile.OpenRead(path))
                 {
-                    if (errorMsg != null)
-                    {
-                        Debug.LogError(errorMsg);
-                        return;
-                    }
-
                     var save = new StandardRogueDeviceSave();
-                    var loadDeviceData = save.LoadGameData(stream); // ここで逆シリアル化
-                    stream.Close();
-                    root.Done();
+                    loadDeviceData = save.LoadGameData(stream); // ここで逆シリアル化
+                }
+                root.Done();
 
-                    // ロードしたデータを適用
-                    RogueRandom.Primary = loadDeviceData.CurrentRandom;
-                    componentManager.OpenDelay(loadDeviceData);
-                });
+                // ロードしたデータを適用
+                RogueRandom.Primary = loadDeviceData.CurrentRandom;
+                componentManager.OpenDelay(loadDeviceData);
             });
 
             autoSaveMenu = new AutoSaveMenu() { parent = this };
@@ -161,7 +155,7 @@ namespace RoguegardUnity
             save.SaveGame(stream, name, data); // ここでシリアル化
             var loadRgpack = spQuestRgpack;
             spQuestRgpack = null;
-            stream.Save(() =>
+            System.Action invoke = () =>
             {
                 stream.Close();
                 manager?.Done();
@@ -215,7 +209,8 @@ namespace RoguegardUnity
                     RogueRandom.Primary = spQuestDeviceData.CurrentRandom;
                     componentManager.OpenDelay(spQuestDeviceData);
                 }
-            });
+            };
+            invoke();
 
             if (loadRgpack == null) { componentManager.LoadSavePoint(player); }
         }

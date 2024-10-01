@@ -1,314 +1,151 @@
 const Save2IDBPlugin = {
 
-  $Save2IDB: {
-    databaseName: null,
-    filesObjectStoreName: null,
-    tempElement: null,
+    $Save2IDB: {
+        importElements: {},
 
-    getDb: (mode, options) => {
-      return new Promise((resolve, reject) => {
-        if (Save2IDB.db) {
-          resolve(Save2IDB.db);
-        } else if (Save2IDB.databaseName) {
-          const request = indexedDB.open(Save2IDB.databaseName);
-          request.onerror = (event) => {
-            reject(event.target);
-          };
-          request.onsuccess = (event) => {
-            Save2IDB.db = event.target.result;
-            resolve(Save2IDB.db);
-          };
-          request.onupgradeneeded = (event) => {
-            const db = event.target.result;
-            const objectStore = db.createObjectStore(Save2IDB.filesObjectStoreName, { keyPath: 'name' }); // File.name
-            objectStore.createIndex('lastModified', 'lastModified', { unique: false }); // File.lastModified
-          };
-        } else {
-          reject('Save2IDB error: Save2IDB has not been initialized.')
+        export: (file) => {
+            const element = document.createElement('a');
+            element.style.display = 'none';
+            element.download = file.name;
+            element.href = URL.createObjectURL(file);
+            document.body.appendChild(element);
+            element.click();
+            URL.revokeObjectURL(element.href);
+            document.body.removeChild(element);
+        },
+
+        import: (filterAccept, multiselect, ohPtr) => {
+            return new Promise((resolve) => {
+                const element = document.createElement('input');
+                element.style.display = 'none';
+                element.type = 'file';
+                element.accept = filterAccept;
+                element.multiple = multiselect;
+                element.addEventListener('change', () => {
+                    resolve(Array.from(element.files));
+                });
+                element.addEventListener('cancel', () => {
+                    resolve([]);
+                });
+                document.body.appendChild(element);
+                element.click();
+                Save2IDB.importElements[ohPtr] = element;
+            });
+        },
+
+        disposeImporter: (ohPtr) => {
+            if (!Save2IDB.importElements[ohPtr]) return;
+
+            document.body.removeChild(Save2IDB.importElements[ohPtr]);
+            delete Save2IDB.importElements[ohPtr];
+        },
+
+        getStatsJson: (files) => {
+            const stats = files.map(({ name, destPath, size, type, lastModifiedDate }) => ({ name, destPath, size, type, lastModifiedDate }));
+            return JSON.stringify({ vs: stats }); // Convert to object because JsonUtility.FromJson cannot parse array.
+        },
+        
+        callbackText: (callback, ohPtr, text) => {
+            const buffer = new TextEncoder().encode(text + String.fromCharCode(0));
+            const textPtr = Module._malloc(buffer.length);
+            Module.HEAPU8.set(buffer, textPtr);
+            Module.dynCall_vii(callback, ohPtr, textPtr);
+            Module._free(textPtr);
         }
-      });
     },
 
-    write: (path, buffer) => {
-      return new Promise((resolve, reject) => {
-        Save2IDB.getDb().then((db) => {
-          const objectStore = db.transaction(Save2IDB.filesObjectStoreName, 'readwrite').objectStore(Save2IDB.filesObjectStoreName);
-        
-          // Set Date.now() to lastModified here.
-          const file = new File([buffer], path);
 
-          const request = objectStore.put(file);
-          request.onsuccess = () => {
-            resolve();
-          };
-          request.onerror = (event) => {
-            reject(event.target);
-          };
 
-        }).catch((target) => {
-          reject(target);
-        });
-      });
+    Save2IDB_ExportFrom: function (pathPtr, filenamePtr, contentTypePtr) {
+        const path = UTF8ToString(pathPtr);
+        const filename = UTF8ToString(filenamePtr);
+        const contentType = UTF8ToString(contentTypePtr);
+
+        const buffer = FS.readFile(path);
+        const file = new File([buffer], filename, { type: contentType });
+        Save2IDB.export(file);
     },
 
-    read: (path) => {
-      return new Promise((resolve, reject) => {
-        Save2IDB.getDb().then((db) => {
-          const objectStore = db.transaction(Save2IDB.filesObjectStoreName).objectStore(Save2IDB.filesObjectStoreName);
-        
-          const request = objectStore.get(path);
-          request.onsuccess = (event) => {
-            const file = event.target.result;
-            resolve(file);
-          };
-          request.onerror = (event) => {
-            reject(event.target);
-          };
+    Save2IDB_ExportAllBytes: function (bytesPtr, bytesLen, filenamePtr, contentTypePtr) {
+        const buffer = Module.HEAPU8.subarray(bytesPtr, bytesPtr + bytesLen);
+        const filename = UTF8ToString(filenamePtr);
+        const contentType = UTF8ToString(contentTypePtr);
 
-        }).catch((target) => {
-          reject(target);
-        });
-      });
+        const file = new File([buffer], filename, { type: contentType });
+        Save2IDB.export(file);
     },
 
-    delete: (path) => {
-      return new Promise((resolve, reject) => {
-        Save2IDB.getDb().then((db) => {
-          const objectStore = db.transaction(Save2IDB.filesObjectStoreName, 'readwrite').objectStore(Save2IDB.filesObjectStoreName);
-        
-          const request = objectStore.delete(path);
-          request.onsuccess = () => {
-            resolve();
-          };
-          request.onerror = (event) => {
-            reject(event.target);
-          };
+    // To file or Into directory
+    Save2IDB_ImportToAsync: async function (pathPtr, overwrite, filterAcceptPtr, multiselect, ohPtr, thenCallback, catchCallback) {
+        try {
+            const path = UTF8ToString(pathPtr);
+            const filterAccept = UTF8ToString(filterAcceptPtr);
+            const pathIsDir = path.endsWith('/'); // If path ends with '/' then the path is a directory path, otherwise it is a file path.
 
-        }).catch((target) => {
-          reject(target);
-        });
-      });
-    },
+            // Determine destination paths
+            const files = await Save2IDB.import(filterAccept, multiselect);
+            files.map(file => file.destPath = path + (pathIsDir ? file.name : ''));
 
-    getFileInfosDescDate: () => {
-      return new Promise((resolve, reject) => {
-        Save2IDB.getDb().then((db) => {
-          const objectStore = db.transaction(Save2IDB.filesObjectStoreName).objectStore(Save2IDB.filesObjectStoreName);
-        
-          let fileInfos = [];
-          let request;
-          if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-            request = objectStore.openCursor();
-          } else {
-            const index = objectStore.index('lastModified'); // File.lastModified
-            request = index.openKeyCursor(null, 'prev');
-          }
-          request.onsuccess = function(event) {
-            const cursor = event.target.result;
-            if (cursor) {
-              const lastModified = cursor.value ? cursor.value.lastModified : cursor.key;
-              fileInfos.push({ name: cursor.primaryKey, lastModified: new Date(lastModified) });
-              cursor.continue();
-            } else {
-              if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-                fileInfos.sort((a, b) => b.lastModified - a.lastModified);
-              }
-              resolve(fileInfos);
+            // Check overwrite
+            if (!overwrite) {
+                const existsFiles = files.filter(file => FS.analyzePath(file.destPath).exists);
+                if (existsFiles.length >= 1) throw new Error(`Attempted to import ${existsFiles.map(file => file.destPath)}, but the file(s) already exists.`);
             }
-          };
-          request.onerror = (event) => {
-            reject(event.target);
-          };
 
-        }).catch((target) => {
-          reject(target);
-        });
-      });
-    },
+            // Copy files
+            for (const file of files) {
+                const buffer = await file.arrayBuffer();
+                FS.writeFile(file.destPath, new Uint8Array(buffer));
+            }
+            FS.syncfs(() => {});
 
-    export: (file) => {
-      const element = document.createElement('a');
-      element.href = URL.createObjectURL(file);
-      element.download = file.name.replace(/^.*[\\\/]/, '');
-      element.style.display = 'none';
-      document.body.appendChild(element);
-      element.click();
-      document.body.removeChild(element);
-      URL.revokeObjectURL(file);
-    },
+            // Callback with file stats
+            const statsJson = Save2IDB.getStatsJson(files);
+            Save2IDB.callbackText(thenCallback, ohPtr, statsJson);
 
-    import: () => {
-      return new Promise((resolve) => {
-        if (Save2IDB.tempElement != null) { document.body.removeChild(Save2IDB.tempElement); }
-
-        const element = document.createElement('input');
-        element.type = 'file';
-        element.addEventListener('change', () => {
-          resolve(element.files[0]);
-        });
-        element.addEventListener('cancel', () => {
-          resolve(new File([], ''));
-        });
-        element.style.display = 'none';
-        document.body.appendChild(element);
-        element.click();
-        Save2IDB.tempElement = element;
-
-        // Invoke removeChild(element) immediately may not work.
-        // document.body.removeChild(element);
-      });
-    },
-
-    callbackText: (callback, ohPtr, text) => {
-      const buffer = new TextEncoder().encode(text + String.fromCharCode(0));
-      const textPtr = Module._malloc(buffer.length);
-      Module.HEAPU8.set(buffer, textPtr);
-      Module.dynCall_vii(callback, ohPtr, textPtr);
-      Module._free(textPtr);
-    }
-
-  },
-
-
-
-  Save2IDB_GetDataPath: function () {
-    const index = location.pathname.lastIndexOf('/');
-    const pathname = location.pathname.substring(0, index);
-    const dataPath = encodeURI(location.origin + pathname);
-    var bufferSize = lengthBytesUTF8(dataPath) + 1;
-    var buffer = _malloc(bufferSize);
-    stringToUTF8(dataPath, buffer, bufferSize);
-    return buffer;
-  },
-
-  Save2IDB_Initialize: function (databaseNamePtr, filesObjectStoreNamePtr) {
-    Save2IDB.databaseName = UTF8ToString(databaseNamePtr);
-    Save2IDB.filesObjectStoreName = UTF8ToString(filesObjectStoreNamePtr);
-  },
-  
-  Save2IDB_WriteAllBytesAsync: async function (ohPtr, pathPtr, bytesPtr, bytesLen, thenCallback, catchCallback) {
-    try {
-      const path = UTF8ToString(pathPtr);
-      const bytesView = Module.HEAPU8.subarray(bytesPtr, bytesPtr + bytesLen);
-
-      const buffer = new Uint8Array(bytesView).buffer; // Optimize buffer size.
-      await Save2IDB.write(path, buffer);
-      Module.dynCall_vi(thenCallback, ohPtr);
-
-    } catch (error) {
-      console.error(`Save2IDB_WriteAllBytesAsync error: ${error}`);
-      Save2IDB.callbackText(catchCallback, ohPtr, error);
-    }
-  },
-
-  Save2IDB_OpenReadAllBytesAsync: async function (ohPtr, pathPtr, thenCallback, catchCallback) {
-    try {
-      const path = UTF8ToString(pathPtr);
-
-      const file = await Save2IDB.read(path);
-      const buffer = await file.arrayBuffer();
-      const bytesPtr = Module._malloc(buffer.byteLength);
-      Module.HEAPU8.set(new Uint8Array(buffer), bytesPtr);
-      Module.dynCall_viij(thenCallback, ohPtr, bytesPtr, buffer.byteLength);
-
-    } catch (error) {
-      console.error(`Save2IDB_OpenReadAllBytesAsync error: ${error}`);
-      Save2IDB.callbackText(catchCallback, ohPtr, error);
-    }
-  },
-
-  Save2IDB_CloseReadAllBytes: function (ptr) {
-    Module._free(ptr);
-  },
-
-  Save2IDB_DeleteAsync: async function (ohPtr, pathPtr, thenCallback, catchCallback) {
-    try {
-      const path = UTF8ToString(pathPtr);
-      await Save2IDB.delete(path);
-      Module.dynCall_vi(thenCallback, ohPtr);
-    } catch (error) {
-      console.error(`Save2IDB_DeleteAsync error: ${error}`);
-      Save2IDB.callbackText(catchCallback, ohPtr, error);
-    }
-  },
-
-  Save2IDB_CopyMoveAsync: async function (ohPtr, sourcePathPtr, destPathPtr, overwrite, moveMode, thenCallback, catchCallback) {
-    try {
-      const sourcePath = UTF8ToString(sourcePathPtr);
-      const destPath = UTF8ToString(destPathPtr);
-      if (!overwrite) {
-        const destPathFile = await Save2IDB.read(destPath);
-        if (destPathFile != null) throw new Error(`File already exists at ${destPath}.`);
-      }
-
-      if (sourcePath != destPath) {
-        const sourceFile = await Save2IDB.read(sourcePath);
-        const buffer = await sourceFile.arrayBuffer();
-        await Save2IDB.write(destPath, buffer);
-        if (moveMode) { await Save2IDB.delete(sourcePath); }
-      }
-      Module.dynCall_vi(thenCallback, ohPtr);
-    } catch (error) {
-      console.error(`Save2IDB_CopyMoveAsync error: ${error}`);
-      Save2IDB.callbackText(catchCallback, ohPtr, error);
-    }
-  },
-
-  Save2IDB_ExistsAsync: async function (ohPtr, pathPtr, thenCallback, catchCallback) {
-    try {
-      const path = UTF8ToString(pathPtr);
-      const file = await Save2IDB.read(path);
-      const exists = file != null;
-      Module.dynCall_vii(thenCallback, ohPtr, exists);
-    } catch (error) {
-      console.error(`Save2IDB_ExistsAsync error: ${error}`);
-      Save2IDB.callbackText(catchCallback, ohPtr, error);
-    }
-  },
-
-  Save2IDB_GetFileInfosDescDateAsync: async function (ohPtr, thenCallback, catchCallback) {
-    try {
-      const fileInfos = await Save2IDB.getFileInfosDescDate();
-      const serial = fileInfos.map((x) => `${x.name}|${x.lastModified.toJSON()}`).join('|');
-      Save2IDB.callbackText(thenCallback, ohPtr, serial);
-    } catch (error) {
-      console.error(`Save2IDB_GetFileInfosDescDateAsync error: ${error}`);
-      Save2IDB.callbackText(catchCallback, ohPtr, error);
-    }
-  },
-
-  Save2IDB_ExportAsync: async function (ohPtr, pathPtr, thenCallback, catchCallback) {
-    try {
-      const path = UTF8ToString(pathPtr);
-      const file = await Save2IDB.read(path);
-      Save2IDB.export(file);
-      Module.dynCall_vi(thenCallback, ohPtr);
-    } catch (error) {
-      console.error(`Save2IDB_ExportAsync error: ${error}`);
-      Save2IDB.callbackText(catchCallback, ohPtr, error);
-    }
-  },
-
-  Save2IDB_ImportAsync: async function (ohPtr, prefixPtr, overwrite, thenCallback, catchCallback) {
-    try {
-      const prefix = UTF8ToString(prefixPtr);
-      const file = await Save2IDB.import();
-      if (file.name != '') {
-        const destPath = prefix + file.name;
-        if (!overwrite) {
-          const destPathFile = await Save2IDB.read(destPath);
-          if (destPathFile != null) throw new Error(`File already exists at ${destPath}.`);
+        } catch (error) {
+            console.error(`Save2IDB_ImportToAsync error: ${error}`);
+            Save2IDB.callbackText(catchCallback, ohPtr, error);
         }
+    },
 
-        const buffer = await file.arrayBuffer();
-        await Save2IDB.write(destPath, buffer);
-      }
-      Save2IDB.callbackText(thenCallback, ohPtr, file.name);
-    } catch (error) {
-      console.error(`Save2IDB_ImportAsync error: ${error}`);
-      Save2IDB.callbackText(catchCallback, ohPtr, error);
+    // Dispose a file input element.
+    Save2IDB_DisposeImporter: function (ohPtr) {
+        Save2IDB.disposeImporter(ohPtr);
+    },
+
+    // To MemoryStreams
+    Save2IDB_ImportToMemoryStreamsAsync: async function (filterAcceptPtr, multiselect, ohPtr, thenCallback, catchCallback) {
+        try {
+            const filterAccept = UTF8ToString(filterAcceptPtr);
+
+            // Callback with file stats
+            const files = await Save2IDB.import(filterAccept, multiselect, ohPtr);
+            const statsJson = Save2IDB.getStatsJson(files);
+            Save2IDB.callbackText(thenCallback, ohPtr, statsJson);
+
+        } catch (error) {
+            console.error(`Save2IDB_ImportToMemoryStreamsAsync error: ${error}`);
+            Save2IDB.callbackText(catchCallback, ohPtr, error);
+        }
+    },
+
+    Save2IDB_ReadInputtedFileAsync: async function (fileNamePtr, bytesPtr, ohPtr, readOhPtr, thenCallback, catchCallback) {
+        try {
+            const fileName = UTF8ToString(fileNamePtr);
+
+            // Copy the file to a MemoryStream
+            const files = Array.from(Save2IDB.importElements[ohPtr].files); // Get files inputted by user.
+            const file = files.find(file => file.name === fileName);
+            const buffer = await file.arrayBuffer();
+            Module.HEAPU8.set(new Uint8Array(buffer), bytesPtr);
+            Module.dynCall_vi(thenCallback, readOhPtr);
+
+        } catch (error) {
+            console.error(`Save2IDB_ReadInputtedFileAsync error: ${error}`);
+            Save2IDB.callbackText(catchCallback, readOhPtr, error);
+        }
     }
-  }
 
 };
 

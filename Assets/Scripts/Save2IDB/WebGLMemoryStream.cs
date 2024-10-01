@@ -7,16 +7,20 @@ using System.Runtime.InteropServices;
 
 namespace Save2IDB
 {
-    unsafe public class IDBStreamReader : UnmanagedMemoryStream
+    internal class WebGLMemoryStream : UnmanagedMemoryStream
     {
-        [DllImport("__Internal")]
-        private static extern void Save2IDB_CloseReadAllBytes(byte* pointer);
+        //[DllImport("__Internal")] unsafe private static extern void Free(byte* pointer);
 
         private bool isClosed;
 
-        internal IDBStreamReader(byte* pointer, long length)
+        unsafe internal WebGLMemoryStream(byte* pointer, long length)
             : base(pointer, length, length, FileAccess.Read)
         {
+        }
+
+        ~WebGLMemoryStream()
+        {
+            Dispose(false);
         }
 
         protected override void Dispose(bool disposing)
@@ -25,8 +29,7 @@ namespace Save2IDB
             {
                 Position = 0;
 #if UNITY_WEBGL && !UNITY_EDITOR
-                var pointer = PositionPointer;
-                Save2IDB_CloseReadAllBytes(pointer);
+                //unsafe { Free(PositionPointer); }
 #endif
                 isClosed = true;
             }

@@ -119,12 +119,8 @@ namespace RoguegardUnity
             using (var stream = RogueFile.Create(path))
             {
                 RoguegardSettings.JsonSerialization.Serialize(stream, clone);
-                stream.Save(() => { });
             }
-            RogueFile.Export(path, errorMsg =>
-            {
-                if (errorMsg != null) { Debug.LogError(errorMsg); }
-            });
+            RogueFile.Export(path);
         }
     }
 }
