@@ -1,0 +1,15 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: LMF_StaticMessageBox
+  m_Controller: {fileID: 9100000, guid: 556555587f552d94d86bccf46df1df4d, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 01d39dc439a07e34b925de2e3fea3700, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: c15feb7df36d89d4ca1e98e2f6237198, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 6b893e34051de8d4c85e1b5f14414ff0, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: c15feb7df36d89d4ca1e98e2f6237198, type: 2}
