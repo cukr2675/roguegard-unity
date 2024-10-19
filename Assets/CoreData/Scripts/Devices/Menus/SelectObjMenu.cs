@@ -2,40 +2,45 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using ListingMF;
+
 namespace Roguegard.Device
 {
-    public class SelectObjMenu : IListMenu
+    public class SelectObjMenu : RogueMenuScreen
     {
-        private readonly Presenter presenter;
+        private readonly IDeviceCommandAction callback;
+        private readonly List<RogueObj> list = new();
+
+        private readonly ScrollViewTemplate<RogueObj, RogueMenuManager, ReadOnlyMenuArg> view = new()
+        {
+        };
 
         public SelectObjMenu(IDeviceCommandAction callback)
         {
-            presenter = new Presenter() { callback = callback };
+            this.callback = callback;
         }
 
-        public void OpenMenu(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+        public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
         {
-            manager.GetView(DeviceKw.MenuScroll).OpenView(presenter, self.Space.Objs, manager, self, user, arg);
-        }
-
-        private class Presenter : IElementPresenter
-        {
-            public IDeviceCommandAction callback;
-
-            public string GetItemName(object element, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            list.Clear();
+            for (int i = 0; i < arg.Self.Space.Objs.Count; i++)
             {
-                var obj = (RogueObj)element;
-                return obj.GetName();
+                list.Add(arg.Self.Space.Objs[i]);
             }
 
-            public void ActivateItem(object element, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                var obj = (RogueObj)element;
-                var device = RogueDeviceEffect.Get(self);
-                var callbackArg = new RogueMethodArgument(tool: obj);
-                device.SetDeviceCommand(callback, self, callbackArg);
-                manager.Done();
-            }
+            view.Show(list, manager, arg)
+                ?.ElementNameGetter((obj, manager, arg) =>
+                {
+                    return obj.GetName();
+                })
+                .OnClickElement((obj, manager, arg) =>
+                {
+                    var device = RogueDeviceEffect.Get(arg.Self);
+                    var callbackArg = new RogueMethodArgument(tool: obj);
+                    device.SetDeviceCommand(callback, arg.Self, callbackArg);
+                    manager.Done();
+                })
+                .Build();
         }
     }
 }

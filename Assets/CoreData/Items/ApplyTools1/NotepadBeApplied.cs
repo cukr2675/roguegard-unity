@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using ListingMF;
 using Roguegard.Device;
 
 namespace Roguegard
@@ -16,7 +17,7 @@ namespace Roguegard
             return false;
         }
 
-        private class Menu : IListMenu
+        private class Menu : RogueMenuScreen
         {
             private static readonly object[] exit = new object[]
             {
@@ -24,29 +25,31 @@ namespace Roguegard
                 new ActionListMenuSelectOption("•Â‚¶‚é", Exit),
             };
 
-            public void OpenMenu(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                var memo = arg.Tool;
-                var text = NotepadInfo.GetText(memo);
-                var scroll = manager.GetView(DeviceKw.MenuTextEditor);
-                scroll.OpenView(SelectOptionPresenter.Instance, Spanning<object>.Empty, manager, self, null, new(tool: memo, other: text));
+            private IElementsSubViewStateProvider stateProvider;
 
-                var leftAnchor = manager.GetView(DeviceKw.MenuLeftAnchor);
-                leftAnchor.OpenView(SelectOptionPresenter.Instance, exit, manager, null, null, new(tool: memo));
+            private readonly ListMenuSelectOption<RogueMenuManager, ReadOnlyMenuArg> exitOption
+                = ListMenuSelectOption.Create<RogueMenuManager, ReadOnlyMenuArg>("•Â‚¶‚é", Exit);
+
+            public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
+            {
+                var memo = arg.Arg.Tool;
+                var text = NotepadInfo.GetText(memo);
+
+                manager.OpenTextEditor(text);
+                manager.StandardSubViewTable.BackAnchor.Show(exit, SelectOptionHandler.Instance, manager, arg, ref stateProvider);
             }
 
-            private static void Exit(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            private static void Exit(RogueMenuManager manager, ReadOnlyMenuArg arg)
             {
                 manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
 
-                var scroll = (ITextElementsView)manager.GetView(DeviceKw.MenuTextEditor);
-                NotepadInfo.SetTo(arg.Tool, scroll.Text);
+                NotepadInfo.SetTo(arg.Arg.Tool, manager.TextEditorValue);
                 manager.Done();
             }
 
-            private static void Execute(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            private static void Execute(RogueMenuManager manager, ReadOnlyMenuArg arg)
             {
-                var scroll = manager.GetView(DeviceKw.MenuTextEditor);
+                //var scroll = manager.GetView(DeviceKw.MenuTextEditor);
                 //if (parent._inputField.text.StartsWith("#!lua"))
                 //{
                 //    root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);

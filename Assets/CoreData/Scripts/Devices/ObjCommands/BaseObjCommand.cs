@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using ListingMF;
 using Roguegard.Device;
 
 namespace Roguegard
@@ -13,14 +14,14 @@ namespace Roguegard
     {
         public abstract string Name { get; }
 
-        IListMenuSelectOption IObjCommand.SelectOption => menuSelectOption;
-        private readonly MenuSelectOption menuSelectOption;
-
-        protected BaseObjCommand()
+        IListMenuSelectOption IObjCommand.SelectOption => menuSelectOption ??= ListMenuSelectOption.Create<RogueMenuManager, ReadOnlyMenuArg>(Name, (manager, arg) =>
         {
-            menuSelectOption = new MenuSelectOption();
-            menuSelectOption.parent = this;
-        }
+            var deviceInfo = RogueDeviceEffect.Get(arg.Self);
+            deviceInfo.SetDeviceCommand(this, arg.User, arg.Arg);
+            manager.Done();
+            RogueDevice.Add(DeviceKw.EnqueueSE, DeviceKw.Submit);
+        });
+        private ListMenuSelectOption<RogueMenuManager, ReadOnlyMenuArg> menuSelectOption;
 
         protected void EnqueueMessageRule(RogueObj self, IKeyword keyword)
         {
@@ -35,20 +36,5 @@ namespace Roguegard
         public abstract bool CommandInvoke(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg);
 
         public abstract ISkillDescription GetSkillDescription(RogueObj self, RogueObj tool);
-
-        private class MenuSelectOption : BaseListMenuSelectOption
-        {
-            public BaseObjCommand parent;
-
-            public override string Name => parent.Name;
-
-            public override void Activate(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                var deviceInfo = RogueDeviceEffect.Get(self);
-                deviceInfo.SetDeviceCommand(parent, user, arg);
-                manager.Done();
-                RogueDevice.Add(DeviceKw.EnqueueSE, DeviceKw.Submit);
-            }
-        }
     }
 }

@@ -2,44 +2,46 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using ListingMF;
 using Roguegard;
 using Roguegard.Device;
 using Roguegard.Extensions;
 
 namespace RoguegardUnity
 {
-    public class TakeOutFromChestCommandMenu : IListMenu
+    public class TakeOutFromChestCommandMenu : RogueMenuScreen
     {
-        private readonly object[] selectOptions;
+        private readonly IListMenuSelectOption[] selectOptions;
+
+        private readonly CommandListViewTemplate<IListMenuSelectOption, RogueMenuManager, ReadOnlyMenuArg> view = new()
+        {
+        };
 
         public TakeOutFromChestCommandMenu()
         {
-            selectOptions = new object[] { new TakeOut(), ExitListMenuSelectOption.Instance };
-        }
-
-        void IListMenu.OpenMenu(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-        {
-            manager.GetView(DeviceKw.MenuCommand).OpenView(SelectOptionPresenter.Instance, selectOptions, manager, self, user, arg);
-        }
-
-        private class TakeOut : BaseListMenuSelectOption
-        {
-            public override string Name => "取り出す";
-
-            public override void Activate(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            selectOptions = new IListMenuSelectOption[]
             {
-                manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-                manager.Done();
+                ListMenuSelectOption.Create<RogueMenuManager, ReadOnlyMenuArg>("取り出す", (manager, arg) =>
+                {
+                    manager.Done();
+                    
+                    var chestInfo = ChestInfo.GetInfo(arg.Arg.TargetObj);
+                    default(IActiveRogueMethodCaller).TakeOut(arg.Self, arg.Arg.TargetObj, chestInfo, arg.Arg.Tool, 0f);
+                    
+                    manager.AddObject(DeviceKw.EnqueueSE, MainInfoKw.PickUp);
+                    RogueDevice.Add(DeviceKw.AppendText, arg.Arg.TargetObj);
+                    RogueDevice.Add(DeviceKw.AppendText, "から");
+                    RogueDevice.Add(DeviceKw.AppendText, arg.Arg.Tool);
+                    RogueDevice.Add(DeviceKw.AppendText, "を取り出した\n");
+                }),
+                ExitListMenuSelectOption.Instance
+            };
+        }
 
-                var chestInfo = ChestInfo.GetInfo(arg.TargetObj);
-                default(IActiveRogueMethodCaller).TakeOut(self, arg.TargetObj, chestInfo, arg.Tool, 0f);
-
-                manager.AddObject(DeviceKw.EnqueueSE, MainInfoKw.PickUp);
-                RogueDevice.Add(DeviceKw.AppendText, arg.TargetObj);
-                RogueDevice.Add(DeviceKw.AppendText, "から");
-                RogueDevice.Add(DeviceKw.AppendText, arg.Tool);
-                RogueDevice.Add(DeviceKw.AppendText, "を取り出した\n");
-            }
+        public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
+        {
+            view.Show(selectOptions, manager, arg)
+                ?.Build();
         }
     }
 }

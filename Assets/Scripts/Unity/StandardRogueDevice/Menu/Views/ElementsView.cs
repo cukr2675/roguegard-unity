@@ -10,11 +10,12 @@ namespace RoguegardUnity
     /// <summary>
     /// モデルのリストをコントローラで制御する UI のクラス。
     /// </summary>
-    public abstract class ElementsView : MonoBehaviour, IElementsView
+    [System.Obsolete]
+    public abstract class ElementsView : MonoBehaviour//, IElementsView
     {
-        public abstract CanvasGroup CanvasGroup { get; }
+        //public abstract CanvasGroup CanvasGroup { get; }
 
-        public IListMenuManager Root { get; private set; }
+        public object Root { get; private set; }
 
         public RogueObj Self { get; private set; }
 
@@ -22,7 +23,7 @@ namespace RoguegardUnity
 
         public RogueMethodArgument Arg { get; private set; }
 
-        protected void SetArg(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+        protected void SetArg(object manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         {
             Root = manager;
             Self = self;
@@ -30,11 +31,11 @@ namespace RoguegardUnity
             Arg = arg;
         }
 
-        public abstract void OpenView<T>(
-            IElementPresenter presenter, Spanning<T> list, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg);
+        //public abstract void OpenView<T>(
+        //    IElementPresenter presenter, Spanning<T> list, object manager, RogueObj self, RogueObj user, in RogueMethodArgument arg);
 
-        public abstract float GetPosition();
+        //public abstract float GetPosition();
 
-        public abstract void SetPosition(float position);
+        //public abstract void SetPosition(float position);
     }
 }

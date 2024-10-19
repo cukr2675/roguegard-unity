@@ -97,13 +97,13 @@ namespace Roguegard.CharacterCreation
                 this.data = data;
             }
 
-            public override string GetName(IListMenuManager manager, RogueObj player, RogueObj empty, in RogueMethodArgument arg)
+            protected override string GetName(RogueMenuManager manager, RogueObj player, RogueObj empty, in RogueMethodArgument arg)
             {
                 var levelText = DungeonInfo.Get(player.Location).GetLevelText(player.Location);
                 return $"{data.DescriptionName}\n{levelText}";
             }
 
-            public override void Activate(IListMenuManager manager, RogueObj player, RogueObj empty, in RogueMethodArgument arg)
+            protected override void Activate(RogueMenuManager manager, RogueObj player, RogueObj empty, in RogueMethodArgument arg)
             {
                 var dungeon = player.Location;
                 if (!DungeonInfo.TryGet(dungeon, out var info) ||

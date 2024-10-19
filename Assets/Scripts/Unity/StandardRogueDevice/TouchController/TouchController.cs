@@ -83,7 +83,7 @@ namespace RoguegardUnity
             _inputController.AutoPlayIsEnabled = autoPlayIsEnabled;
         }
 
-        public void GetInfo(out MenuController menuController, out IListMenu putIntoChestMenu, out IListMenu takeOutFromChestMenu)
+        public void GetInfo(out MenuController menuController, out RogueMenuScreen putIntoChestMenu, out RogueMenuScreen takeOutFromChestMenu)
         {
             menuController = _menuController;
             _menuController.GetInfo(out putIntoChestMenu, out takeOutFromChestMenu);
@@ -386,11 +386,11 @@ namespace RoguegardUnity
             _inputController.ClearInput();
         }
 
-        public void OpenMenu(RogueObj player, IListMenu menu, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+        public void OpenMenu(RogueObj player, RogueMenuScreen menu, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         {
             _inputController.SetEnabled(false);
             _headerController.UpdateHeader(player);
-            _menuController.OpenInitialMenu(menu, self, user, arg);
+            _menuController.PushInitialMenuScreen(menu, new MenuArg(self, user, arg).ReadOnly);
         }
 
         public void CloseMenu()

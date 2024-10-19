@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using ListingMF;
 using Roguegard;
 using Roguegard.Device;
 
@@ -17,70 +18,85 @@ namespace RoguegardUnity
         /// <summary>
         /// <see cref="RogueMethodArgument.TargetObj"/> のインベントリを開く
         /// </summary>
-        public IListMenu Items { get; }
+        public RogueMenuScreen Items { get; }
 
         /// <summary>
         /// <see cref="RogueMethodArgument.TargetObj"/> の足元のアイテム一覧を開く
         /// </summary>
-        public IListMenu Ground { get; }
+        public RogueMenuScreen Ground { get; }
 
-        public IListMenu PutIntoChest { get; }
+        public RogueMenuScreen PutIntoChest { get; }
 
-        public IListMenu TakeOutFromChest { get; }
+        public RogueMenuScreen TakeOutFromChest { get; }
 
         public ObjsMenu(ObjCommandMenu commandMenu, PutIntoChestCommandMenu putInCommandMenu, TakeOutFromChestCommandMenu takeOutCommandMenu)
         {
-            Close = new CloseSelectOption();
+            Close = ListMenuSelectOption.Create<RogueMenuManager, ReadOnlyMenuArg>(":Close", (manager, arg) => manager.Done());
             Items = new ItemsMenu() { commandMenu = commandMenu };
             Ground = new GroundMenu() { commandMenu = commandMenu };
             PutIntoChest = new PutIntoChestMenu() { commandMenu = putInCommandMenu };
             TakeOutFromChest = new TakeOutFromChestMenu() { commandMenu = takeOutCommandMenu };
         }
 
-        private class CloseSelectOption : BaseListMenuSelectOption
+        private abstract class ScrollMenu : RogueMenuScreen
         {
-            public override string Name => ":Close";
-
-            public override void Activate(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                manager.Done();
-                manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Cancel);
-            }
-        }
-
-        private abstract class ScrollMenu : BaseScrollListMenu<RogueObj>
-        {
+            protected abstract string Title { get; }
             protected virtual bool Skip0WeightObjs => false;
             protected virtual bool SortIsEnabled => false;
 
-            public IListMenu commandMenu;
+            public RogueMenuScreen commandMenu;
 
             private readonly ActionListMenuSelectOption sortSelectOption;
 
             private static CategorizedSortTable sortTable;
 
+            private readonly ScrollViewTemplate<RogueObj, RogueMenuManager, ReadOnlyMenuArg> view = new()
+            {
+            };
+
+
             protected ScrollMenu()
             {
-                sortSelectOption = new ActionListMenuSelectOption(":Sort", Sort);
+                view.Title = Title;
+                if (SortIsEnabled)
+                {
+                    view.BackAnchorList = new IListMenuSelectOption[]
+                    {
+                        ListMenuSelectOption.Create<RogueMenuManager, ReadOnlyMenuArg>(":Sort", Sort),
+                        ExitListMenuSelectOption.Instance
+                    };
+                }
             }
 
-            protected override object GetViewPositionHolder(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-                => arg.TargetObj;
+            public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
+            {
+                var list = GetObjs(arg.Self, arg.Arg.TargetObj);
+                var viewStateHolder = GetViewStateHolder(manager, arg);
 
-            protected sealed override Spanning<RogueObj> GetList(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-                => GetObjs(self, arg.TargetObj);
+                view.Show(list, manager, arg, viewStateHolder)
+                    ?.ElementNameGetter((obj, manager, arg) =>
+                    {
+                        return obj.GetName();
+                    })
+                    .OnClickElement((obj, manager, arg) =>
+                    {
+                        // 選択したアイテムの情報と選択肢を表示する
+                        manager.PushMenuScreen(commandMenu, arg.Self, null, targetObj: arg.Arg.TargetObj, tool: obj);
+                    })
+                    .Build();
+            }
 
-            /// <summary>
-            /// <paramref name="targetObj"/> のインベントリを開く
-            /// </summary>
-            protected abstract Spanning<RogueObj> GetObjs(RogueObj self, RogueObj targetObj);
+            protected virtual object GetViewStateHolder(RogueMenuManager manager, ReadOnlyMenuArg arg)
+                => arg.Arg.TargetObj;
 
-            protected override float GetDefaultViewPosition(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            protected abstract List<RogueObj> GetObjs(RogueObj self, RogueObj targetObj);
+
+            protected virtual float GetDefaultViewPosition(RogueMenuManager manager, ReadOnlyMenuArg arg)
             {
                 if (!Skip0WeightObjs) return 0f;
 
                 // 重さがゼロではないアイテムまで自動スクロール
-                var objs = GetObjs(self, arg.TargetObj);
+                var objs = GetObjs(arg.Self, arg.Arg.TargetObj);
                 for (int i = 0; i < objs.Count; i++)
                 {
                     var weight = WeightCalculator.Get(objs[i]);
@@ -89,33 +105,9 @@ namespace RoguegardUnity
                 return 0f;
             }
 
-            protected override void GetLeftAnchorList(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg, List<object> list)
+            private void Sort(RogueMenuManager manager, ReadOnlyMenuArg arg)
             {
-                if (!SortIsEnabled) return;
-
-                // プレイヤーパーティのキャラのインベントリまたは倉庫であればソート可能
-                if (RogueDevice.Primary.Player.Main.Stats.Party.Members.Contains(arg.TargetObj) ||
-                    ChestInfo.GetStorage(arg.TargetObj) != null)
-                {
-                    list.Insert(0, sortSelectOption);
-                }
-            }
-
-            protected override string GetItemName(RogueObj obj, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                return obj.GetName();
-            }
-
-            protected override void ActivateItem(RogueObj obj, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                // 選択したアイテムの情報と選択肢を表示する
-                manager.OpenMenuAsDialog(commandMenu, self, null, new(targetObj: arg.TargetObj, tool: obj));
-            }
-
-            private void Sort(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                ViewPosition.Save(manager, arg.TargetObj);
-                manager.AddObject(DeviceKw.EnqueueSE, StdKw.Sort);
+                //manager.AddObject(DeviceKw.EnqueueSE, StdKw.Sort);
 
                 if (sortTable == null)
                 {
@@ -123,22 +115,22 @@ namespace RoguegardUnity
                 }
 
                 // ソートしたあと開きなおす
-                var storageObjs = ChestInfo.GetStorage(arg.TargetObj);
-                if (storageObjs != null) { sortTable.Sort(arg.TargetObj); }
-                else { sortTable.Sort(arg.TargetObj); }
+                var storageObjs = ChestInfo.GetStorage(arg.Arg.TargetObj);
+                if (storageObjs != null) { sortTable.Sort(arg.Arg.TargetObj); }
+                else { sortTable.Sort(arg.Arg.TargetObj); }
                 manager.Reopen();
             }
         }
 
         private class ItemsMenu : ScrollMenu
         {
-            protected override string MenuName => ":Inventory";
+            protected override string Title => ":Inventory";
             protected override bool Skip0WeightObjs => true;
             protected override bool SortIsEnabled => true;
 
-            private readonly List<RogueObj> objs = new List<RogueObj>();
+            private readonly List<RogueObj> objs = new();
 
-            protected override Spanning<RogueObj> GetObjs(RogueObj self, RogueObj targetObj)
+            protected override List<RogueObj> GetObjs(RogueObj self, RogueObj targetObj)
             {
                 // お金を取り除いたリストを生成
                 objs.Clear();
@@ -155,11 +147,11 @@ namespace RoguegardUnity
 
         private class GroundMenu : ScrollMenu
         {
-            protected override string MenuName => ":Ground";
+            protected override string Title => ":Ground";
 
-            private readonly List<RogueObj> objs = new List<RogueObj>();
+            private readonly List<RogueObj> objs = new();
 
-            protected override Spanning<RogueObj> GetObjs(RogueObj self, RogueObj targetObj)
+            protected override List<RogueObj> GetObjs(RogueObj self, RogueObj targetObj)
             {
                 var locationObjs = targetObj.Location.Space.Objs;
                 var targetPosition = targetObj.Position;
@@ -177,24 +169,50 @@ namespace RoguegardUnity
 
         private class PutIntoChestMenu : ScrollMenu
         {
-            protected override string MenuName => ":Put in what?";
+            protected override string Title => ":Put in what?";
 
-            protected override Spanning<RogueObj> GetObjs(RogueObj self, RogueObj targetObj)
+            private readonly List<RogueObj> objs = new();
+
+            protected override List<RogueObj> GetObjs(RogueObj self, RogueObj targetObj)
             {
-                return self.Space.Objs;
+                objs.Clear();
+                var spaceObjs = self.Space.Objs;
+                for (int i = 0; i < spaceObjs.Count; i++)
+                {
+                    objs.Add(spaceObjs[i]);
+                }
+                return objs;
             }
         }
 
         private class TakeOutFromChestMenu : ScrollMenu
         {
-            protected override string MenuName => ":Take out what?";
+            protected override string Title => ":Take out what?";
             protected override bool SortIsEnabled => true;
 
-            protected override Spanning<RogueObj> GetObjs(RogueObj self, RogueObj chest)
+            private readonly List<RogueObj> objs = new();
+
+            protected override List<RogueObj> GetObjs(RogueObj self, RogueObj chest)
             {
                 var storageObjs = ChestInfo.GetStorage(chest);
-                if (storageObjs != null) return storageObjs;
-                else return chest.Space.Objs;
+                if (storageObjs != null)
+                {
+                    objs.Clear();
+                    for (int i = 0; i < storageObjs.Count; i++)
+                    {
+                        objs.Add(storageObjs[i]);
+                    }
+                    return objs;
+                }
+                else
+                {
+                    objs.Clear();
+                    for (int i = 0; i < chest.Space.Objs.Count; i++)
+                    {
+                        objs.Add(chest.Space.Objs[i]);
+                    }
+                    return objs;
+                }
             }
         }
     }

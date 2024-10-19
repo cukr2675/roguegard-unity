@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using ListingMF;
 using Roguegard;
 using Roguegard.CharacterCreation;
 using Roguegard.Device;
@@ -12,373 +13,239 @@ namespace RoguegardUnity
     /// <summary>
     /// メインメニュー（開いてすぐのメニュー）
     /// </summary>
-    public class MainMenu : IListMenu
+    public class MainMenu : RogueMenuScreen
     {
-        private readonly IListMenuSelectOption[] selectOptions;
+        private readonly ViewTemplate view = new();
+
+        private readonly ObjsMenu objsMenu;
+        private readonly SkillsMenu skillsMenu;
+        private readonly PartyMenu partyMenu;
+        private readonly LogMenu logMenu = new();
+        private readonly OthersMenu othersMenu = new();
 
         public MainMenu(ObjsMenu objsMenu, SkillsMenu skillsMenu, PartyMenu partyMenu)
         {
-            selectOptions = new IListMenuSelectOption[]
-            {
-                new Skill() { nextMenu = skillsMenu.Use },
-                new Objs() { nextMenu = objsMenu.Items },
-                new Ground() { nextMenu = objsMenu.Ground },
-                new Party() { nextMenu = partyMenu },
-                new Log(),
-                new Others(),
-                objsMenu.Close,
-            };
+            this.objsMenu = objsMenu;
+            this.skillsMenu = skillsMenu;
+            this.partyMenu = partyMenu;
         }
 
-        void IListMenu.OpenMenu(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+        public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
         {
-            manager.GetView(DeviceKw.MenuThumbnail).OpenView(SelectOptionPresenter.Instance, selectOptions, manager, self, user, arg);
-            var parent = (StandardMenuManager)manager;
-            parent.Stats.SetText(self);
-            parent.Stats.SetDungeon(self.Location);
-            parent.Stats.Show(true);
+            view.Show(manager, arg)
+                ?
+                .Option(":Skills", skillsMenu.Use)
+                .Option(":Items", (manager, arg) => manager.PushMenuScreen(objsMenu.Items, arg.Self, null, targetObj: arg.Self))
+                .Option(":Ground", (manager, arg) => manager.PushMenuScreen(objsMenu.Ground, arg.Self, null, targetObj: arg.Self))
+                .Option(":Party", partyMenu)
+                .Option(":Log", logMenu)
+                .Option(":Others", othersMenu)
+                .Append(objsMenu.Close)
+                .Build();
         }
 
-        private class Skill : BaseListMenuSelectOption
+        private class ViewTemplate : MainMenuViewTemplate<RogueMenuManager, ReadOnlyMenuArg>
         {
-            public override string Name => ":Skills";
-
-            public IListMenu nextMenu;
-
-            public override void Activate(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            protected override void ShowSubViews(RogueMenuManager manager, ReadOnlyMenuArg arg)
             {
-                manager.OpenMenu(nextMenu, self, null, RogueMethodArgument.Identity);
-                manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+                base.ShowSubViews(manager, arg);
+
+                var parent = (MenuController)manager;
+                parent.Stats.SetText(arg.Self);
+                parent.Stats.SetDungeon(arg.Self.Location);
+                parent.Stats.Show(true);
             }
         }
 
-        private class Objs : BaseListMenuSelectOption
+        private class LogMenu : RogueMenuScreen
         {
-            public override string Name => ":Items";
-
-            public IListMenu nextMenu;
-
-            public override void Activate(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            private readonly DialogViewTemplate<RogueMenuManager, ReadOnlyMenuArg> view = new()
             {
-                var openArg = new RogueMethodArgument(targetObj: self);
-                manager.OpenMenu(nextMenu, self, null, openArg);
-                manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-            }
-        }
-
-        private class Ground : BaseListMenuSelectOption
-        {
-            public override string Name => ":Ground";
-
-            public IListMenu nextMenu;
-
-            public override void Activate(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                var openArg = new RogueMethodArgument(targetObj: self, count: 0);
-                manager.OpenMenu(nextMenu, self, null, openArg);
-                manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-            }
-        }
-
-        private class Party : BaseListMenuSelectOption
-        {
-            public override string Name => ":Party";
-
-            public IListMenu nextMenu;
-
-            public override void Activate(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                manager.OpenMenu(nextMenu, self, null, RogueMethodArgument.Identity);
-                manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-            }
-        }
-
-        private class Log : BaseListMenuSelectOption
-        {
-            public override string Name => ":Log";
-
-            private IListMenu nextMenu = new LogMenu();
-
-            public override void Activate(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                manager.OpenMenu(nextMenu, self, null, RogueMethodArgument.Identity);
-                manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-            }
-        }
-
-        private class Others : BaseListMenuSelectOption
-        {
-            public override string Name => ":Others";
-
-            private IListMenu nextMenu = new OthersMenu();
-
-            public override void Activate(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                manager.OpenMenu(nextMenu, self, null, RogueMethodArgument.Identity);
-                manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-            }
-        }
-
-        private class LogMenu : IListMenu
-        {
-            private IListMenuSelectOption[] selectOptions = new[] { ExitListMenuSelectOption.Instance };
-
-            public void OpenMenu(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                var position = 0f;
-                var openArg = new RogueMethodArgument(vector: new Vector2(position, 0f));
-                manager.GetView(DeviceKw.MenuLog).OpenView(SelectOptionPresenter.Instance, selectOptions, manager, self, user, openArg);
-                manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-            }
-        }
-
-        private class OthersMenu : IListMenu
-        {
-            private IListMenuSelectOption[] selectOptions = new IListMenuSelectOption[]
-            {
-                new Save(),
-                new GiveUp(),
-                new Load(),
-                new Quest(),
-                new Options(),
-                ExitListMenuSelectOption.Instance
             };
 
-            public void OpenMenu(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
+            {
+                view.Show("", manager, arg)
+                    ?.Build();
+            }
+        }
+
+        private class OthersMenu : RogueMenuScreen
+        {
+            private readonly GiveUpMenu giveUpMenu = new();
+            private readonly QuestMenu questMenu = new();
+            private readonly OptionsMenu optionsMenu = new();
+
+            private readonly MainMenuViewTemplate<RogueMenuManager, ReadOnlyMenuArg> view = new()
+            {
+            };
+
+            public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
             {
                 var worldInfo = RogueWorldInfo.GetByCharacter(RogueDevice.Primary.Player);
                 var inLobby = RogueDevice.Primary.Player.Location == worldInfo.Lobby;
                 var openArg = new RogueMethodArgument(count: inLobby ? 1 : 0);
-                manager.GetView(DeviceKw.MenuThumbnail).OpenView(SelectOptionPresenter.Instance, selectOptions, manager, self, user, openArg);
-                manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-            }
 
-            private class Save : IListMenuSelectOption
-            {
-                public string GetName(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-                {
-                    // ロビー以外ではセーブをグレーアウトする
-                    if (arg.Count == 1)
+                view.Show(manager, arg)
+                    ?
+                    .Option(":Save", (manager, arg) =>
                     {
-                        return ":Save";
-                    }
-                    else
-                    {
-                        return "<#808080>:Save";
-                    }
-                }
-
-                public void Activate(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-                {
-                    if (arg.Count == 1)
-                    {
-                        manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
                         RogueDevice.Add(DeviceKw.SaveGame, null);
 
                         // Done するとセーブメニューが消える
                         //root.Done();
-                    }
-                    else
+                    })
+                    .Option(":GiveUp", (manager, arg) =>
                     {
-                        manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Cancel);
-                    }
-                }
-            }
-
-            private class GiveUp : BaseListMenuSelectOption
-            {
-                public override string Name => ":GiveUp";
-
-                private static readonly SelectOptions nextMenu = new SelectOptions();
-
-                public override void Activate(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-                {
-                    manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-                    manager.AddInt(DeviceKw.StartTalk, 0);
-                    manager.AddObject(DeviceKw.AppendText, ":GiveUpMsg");
-                    manager.AddInt(DeviceKw.WaitEndOfTalk, 0);
-                    manager.OpenMenuAsDialog(nextMenu, self, user, arg);
-                }
-
-                private class SelectOptions : IListMenu
-                {
-                    private static readonly object[] elms = new object[]
+                        manager.PushMenuScreen(giveUpMenu, arg);
+                    })
+                    .Option(":Load", (manager, arg) =>
                     {
-                        new GiveUpSelectOption(),
-                        ExitListMenuSelectOption.Instance
-                    };
+                        RogueDevice.Add(DeviceKw.LoadGame, null);
 
-                    public void OpenMenu(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+                        // Done するとロードメニューが消える
+                        //root.Done();
+                    })
+                    .Option(":Quest", (manager, arg) =>
                     {
-                        manager.GetView(DeviceKw.MenuTalkSelect).OpenView(SelectOptionPresenter.Instance, elms, manager, self, user, arg);
-                    }
-                }
-
-                private class GiveUpSelectOption : BaseListMenuSelectOption
-                {
-                    public override string Name => ":Yes";
-
-                    public override void Activate(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-                    {
-                        manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-                        manager.Done();
-
-                        default(IActiveRogueMethodCaller).Defeat(self, user, 0f);
-                    }
-                }
-            }
-
-            private class Load : BaseListMenuSelectOption
-            {
-                public override string Name => ":Load";
-
-                public override void Activate(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-                {
-                    manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-                    RogueDevice.Add(DeviceKw.LoadGame, null);
-
-                    // Done するとロードメニューが消える
-                    //root.Done();
-                }
-            }
-
-            private class Quest : IListMenuSelectOption
-            {
-                private IListMenu nextMenu = new QuestMenu();
-
-                public string GetName(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-                {
-                    if (DungeonQuestInfo.TryGetQuest(self, out _)) return ":Quest";
-                    else return "<#808080>:Quest";
-                }
-
-                public void Activate(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-                {
-                    if (DungeonQuestInfo.TryGetQuest(self, out _))
-                    {
-                        manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-                        manager.OpenMenu(nextMenu, self, null, RogueMethodArgument.Identity);
-                    }
-                    else
-                    {
-                        manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Cancel);
-                    }
-                }
-            }
-
-            private class QuestMenu : IListMenu
-            {
-                public void OpenMenu(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-                {
-                    if (!DungeonQuestInfo.TryGetQuest(self, out var quest)) throw new RogueException();
-
-                    var summary = (IDungeonQuestMenuView)manager.GetView(DeviceKw.MenuSummary);
-                    summary.OpenView(SelectOptionPresenter.Instance, Spanning<object>.Empty, manager, self, null, RogueMethodArgument.Identity);
-                    summary.SetQuest(self, quest, false);
-                }
-            }
-
-            private class Options : BaseListMenuSelectOption
-            {
-                public override string Name => ":Options";
-
-                private IListMenu nextMenu = new OptionsMenu();
-
-                public override void Activate(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-                {
-                    manager.OpenMenu(nextMenu, self, null, RogueMethodArgument.Identity);
-                    manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-                }
-            }
-        }
-
-        private class OptionsMenu : BaseScrollListMenu<object>
-        {
-            private static readonly object[] selectOptions = new object[]
-            {
-                new OptionsMasterVolume(),
-                new OptionsWindowFrameType()
-            };
-
-            protected override Spanning<object> GetList(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                return selectOptions;
-            }
-
-            protected override string GetItemName(object element, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                return SelectOptionPresenter.Instance.GetItemName(element, manager, self, user, arg);
-            }
-
-            protected override void ActivateItem(object element, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                SelectOptionPresenter.Instance.ActivateItem(element, manager, self, user, arg);
-            }
-        }
-
-        private class OptionsMasterVolume : IOptionsMenuSlider
-        {
-            public string GetName(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                return "マスター音量";
-            }
-
-            public float GetValue(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                var device = (StandardRogueDevice)RogueDevice.Primary;
-                return device.Options.MasterVolume;
-            }
-
-            public void SetValue(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg, float value)
-            {
-                var device = (StandardRogueDevice)RogueDevice.Primary;
-                device.Options.SetMasterVolume(value);
-            }
-        }
-
-        private class OptionsWindowFrameType : BaseListMenuSelectOption
-        {
-            public override string Name => "ウィンドウタイプ";
-
-            private static readonly Menu nextMenu = new Menu();
-
-            public override void Activate(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-                manager.OpenMenu(nextMenu, self, user, RogueMethodArgument.Identity);
-            }
-
-            private class Menu : BaseScrollListMenu<int>
-            {
-                private static readonly List<int> elms = new();
-
-                protected override Spanning<int> GetList(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-                {
-                    if (elms.Count != WindowFrameList.Count)
-                    {
-                        elms.Clear();
-                        for (int i = 0; i < WindowFrameList.Count; i++)
+                        if (DungeonQuestInfo.TryGetQuest(arg.Self, out _))
                         {
-                            elms.Add(i);
+                            manager.PushMenuScreen(questMenu, arg.Self);
                         }
-                    }
-                    return elms;
-                }
+                    })
+                    .Option(":Options", optionsMenu)
+                    .Exit()
+                    .Build();
+            }
 
-                protected override string GetItemName(int index, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            private class GiveUpMenu : RogueMenuScreen
+            {
+                private readonly SpeechBoxViewTemplate<RogueMenuManager, ReadOnlyMenuArg> view = new()
                 {
-                    return WindowFrameList.GetName(index);
-                }
+                };
 
-                protected override void ActivateItem(int index, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+                public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
                 {
-                    var device = (StandardRogueDevice)RogueDevice.Primary;
-                    device.Options.SetWindowFrame(index, device.Options.WindowFrameColor);
+                    view.Show(":GiveUpMsg", manager, arg)
+                        ?.AppendSelectOption(":Yes", (manager, arg) =>
+                        {
+                            manager.Done();
 
-                    manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-                    manager.Back();
+                            default(IActiveRogueMethodCaller).Defeat(arg.Self, arg.User, 0f);
+                        })
+                        .Exit()
+                        .Build();
+                }
+            }
+
+            private class QuestMenu : RogueMenuScreen
+            {
+                private readonly DialogViewTemplate<RogueMenuManager, ReadOnlyMenuArg> view = new()
+                {
+                };
+
+                public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
+                {
+                    if (!DungeonQuestInfo.TryGetQuest(arg.Self, out var quest)) throw new RogueException();
+
+                    view.Show(quest.ToString(), manager, arg)
+                        ?.Build();
                 }
             }
         }
+
+        private class OptionsMenu : RogueMenuScreen
+        {
+            //private static readonly object[] selectOptions = new object[]
+            //{
+            //    new OptionsMasterVolume(),
+            //    new OptionsWindowFrameType()
+            //};
+
+            public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
+            {
+                throw new System.NotImplementedException();
+            }
+
+            //protected override Spanning<object> GetList(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            //{
+            //    return selectOptions;
+            //}
+
+            //protected override string GetItemName(object element, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            //{
+            //    return SelectOptionPresenter.Instance.GetItemName(element, manager, self, user, arg);
+            //}
+
+            //protected override void ActivateItem(object element, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            //{
+            //    SelectOptionPresenter.Instance.ActivateItem(element, manager, self, user, arg);
+            //}
+        }
+
+        //private class OptionsMasterVolume : IOptionsMenuSlider
+        //{
+        //    public string GetName(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+        //    {
+        //        return "マスター音量";
+        //    }
+
+        //    public float GetValue(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+        //    {
+        //        var device = (StandardRogueDevice)RogueDevice.Primary;
+        //        return device.Options.MasterVolume;
+        //    }
+
+        //    public void SetValue(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg, float value)
+        //    {
+        //        var device = (StandardRogueDevice)RogueDevice.Primary;
+        //        device.Options.SetMasterVolume(value);
+        //    }
+        //}
+
+        //private class OptionsWindowFrameType : BaseListMenuSelectOption
+        //{
+        //    public override string Name => "ウィンドウタイプ";
+
+        //    private static readonly Menu nextMenu = new Menu();
+
+        //    public override void Activate(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+        //    {
+        //        manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+        //        manager.OpenMenu(nextMenu, self, user, RogueMethodArgument.Identity);
+        //    }
+
+        //    private class Menu : BaseScrollListMenu<int>
+        //    {
+        //        private static readonly List<int> elms = new();
+
+        //        protected override Spanning<int> GetList(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+        //        {
+        //            if (elms.Count != WindowFrameList.Count)
+        //            {
+        //                elms.Clear();
+        //                for (int i = 0; i < WindowFrameList.Count; i++)
+        //                {
+        //                    elms.Add(i);
+        //                }
+        //            }
+        //            return elms;
+        //        }
+
+        //        protected override string GetItemName(int index, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+        //        {
+        //            return WindowFrameList.GetName(index);
+        //        }
+
+        //        protected override void ActivateItem(int index, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+        //        {
+        //            var device = (StandardRogueDevice)RogueDevice.Primary;
+        //            device.Options.SetWindowFrame(index, device.Options.WindowFrameColor);
+
+        //            manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+        //            manager.Back();
+        //        }
+        //    }
+        //}
     }
 }

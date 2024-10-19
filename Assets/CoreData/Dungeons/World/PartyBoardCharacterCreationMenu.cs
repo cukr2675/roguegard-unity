@@ -2,29 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using ListingMF;
 using Roguegard.CharacterCreation;
 using Roguegard.Device;
 
 namespace Roguegard
 {
-    public class PartyBoardCharacterCreationMenu : IListMenu
+    public class PartyBoardCharacterCreationMenu : RogueMenuScreen
     {
-        private readonly object[] elms = new object[] { DialogListMenuSelectOption.CreateExit(Save) };
+        private readonly ListMenuSelectOption<RogueMenuManager, ReadOnlyMenuArg> exit
+            = ListMenuSelectOption.Create<RogueMenuManager, ReadOnlyMenuArg>("<", Save);
 
-        public void OpenMenu(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+        public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
         {
-            var builder = (CharacterCreationDataBuilder)arg.Other;
-            manager.GetView(DeviceKw.MenuCharacterCreation).OpenView(null, elms, manager, self, user, new(targetObj: arg.TargetObj, other: builder));
+            manager.OpenCharacterCreationView(exit, arg);
         }
 
-        private static void Save(IListMenuManager manager, RogueObj player, RogueObj user, in RogueMethodArgument arg)
+        private static void Save(RogueMenuManager manager, ReadOnlyMenuArg arg)
         {
             manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
 
-            if (arg.Other is CharacterCreationDataBuilder builder)
+            if (arg.Arg.Other is CharacterCreationDataBuilder builder)
             {
                 // キャラクリ画面から戻ったとき、そのキャラを更新する
-                var character = arg.TargetObj;
+                var character = arg.Arg.TargetObj;
                 if (character != null)
                 {
                     // 編集キャラ更新
@@ -33,7 +34,7 @@ namespace Roguegard
                 else
                 {
                     // 新規キャラ追加
-                    var worldInfo = RogueWorldInfo.GetByCharacter(player);
+                    var worldInfo = RogueWorldInfo.GetByCharacter(arg.Self);
                     character = builder.CreateObj(null, Vector2Int.zero, RogueRandom.Primary);
                     worldInfo.LobbyMembers.Add(character);
                 }
@@ -41,8 +42,8 @@ namespace Roguegard
                 info.CharacterCreationData = builder;
             }
 
-            manager.Back();
-            manager.Back();
+            manager.HandleClickBack();
+            manager.HandleClickBack();
         }
     }
 }

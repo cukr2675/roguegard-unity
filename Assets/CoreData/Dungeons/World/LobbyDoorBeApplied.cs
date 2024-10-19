@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using ListingMF;
 using Roguegard.Device;
 
 namespace Roguegard
@@ -36,14 +37,27 @@ namespace Roguegard
             return 0;
         }
 
-        private class RogueMenu : IListMenu
+        private class RogueMenu : RogueMenuScreen
         {
-            public void OpenMenu(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            private readonly ScrollViewTemplate<IListMenuSelectOption, RogueMenuManager, ReadOnlyMenuArg> view = new()
+            {
+            };
+
+            private readonly List<IListMenuSelectOption> selectOptions = new();
+
+            public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
             {
                 var dungeonSelectOptions = RoguegardSettings.DungeonSelectOption;
-                var scroll = manager.GetView(DeviceKw.MenuScroll);
-                scroll.OpenView(SelectOptionPresenter.Instance, dungeonSelectOptions, manager, self, user, arg);
-                ExitListMenuSelectOption.OpenLeftAnchorExit(manager);
+                selectOptions.Clear();
+                for (int i = 0; i < dungeonSelectOptions.Count; i++)
+                {
+                    selectOptions.Add(dungeonSelectOptions[i]);
+                }
+
+                view.Show(selectOptions, manager, arg)
+                    ?.ElementNameGetter(SelectOptionHandler.Instance.GetName)
+                    .OnClickElement(SelectOptionHandler.Instance.HandleClick)
+                    .Build();
             }
         }
     }

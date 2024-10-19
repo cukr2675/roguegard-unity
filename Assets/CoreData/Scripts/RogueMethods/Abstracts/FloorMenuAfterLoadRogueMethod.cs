@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using ListingMF;
 using Roguegard.Device;
 
 namespace Roguegard
@@ -9,13 +10,16 @@ namespace Roguegard
     /// <summary>
     /// ダンジョン名と階層を表示してそこに移動させる <see cref="IRogueMethod"/>
     /// </summary>
-    public abstract class FloorMenuAfterLoadRogueMethod : BaseApplyRogueMethod, IListMenu, IListMenuSelectOption
+    public abstract class FloorMenuAfterLoadRogueMethod : BaseApplyRogueMethod, IListMenuSelectOption
     {
-        private IListMenuSelectOption[] selectOptions;
+        public RogueMenuScreen MenuScreen { get; }
 
         protected FloorMenuAfterLoadRogueMethod()
         {
-            selectOptions = new IListMenuSelectOption[] { this };
+            MenuScreen = new Screen()
+            {
+                selectOptions = new IListMenuSelectOption[] { this }
+            };
         }
 
         /// <summary>
@@ -33,7 +37,7 @@ namespace Roguegard
             if (player == RogueDevice.Primary.Player)
             {
                 // ダンジョン名と階層を表示してそこに移動させる。
-                RogueDevice.Primary.AddMenu(this, player, null, RogueMethodArgument.Identity);
+                RogueDevice.Primary.AddMenu(MenuScreen, player, null, RogueMethodArgument.Identity);
             }
             else
             {
@@ -42,13 +46,40 @@ namespace Roguegard
             return true;
         }
 
-        public void OpenMenu(IListMenuManager manager, RogueObj player, RogueObj empty, in RogueMethodArgument arg)
+        protected abstract string GetName(RogueMenuManager manager, RogueObj player, RogueObj empty, in RogueMethodArgument arg);
+
+        protected abstract void Activate(RogueMenuManager manager, RogueObj player, RogueObj empty, in RogueMethodArgument arg);
+
+        string IListMenuSelectOption.GetName(IListMenuManager manager, IListMenuArg arg)
         {
-            manager.GetView(DeviceKw.MenuFloor).OpenView(SelectOptionPresenter.Instance, selectOptions, manager, player, empty, arg);
+            var args = (ReadOnlyMenuArg)arg;
+            return GetName((RogueMenuManager)manager, args.Self, args.User, args.Arg);
         }
 
-        public abstract string GetName(IListMenuManager manager, RogueObj player, RogueObj empty, in RogueMethodArgument arg);
+        void IListMenuSelectOption.HandleClick(IListMenuManager manager, IListMenuArg arg)
+        {
+            var args = (ReadOnlyMenuArg)arg;
+            Activate((RogueMenuManager)manager, args.Self, args.User, args.Arg);
+        }
 
-        public abstract void Activate(IListMenuManager manager, RogueObj player, RogueObj empty, in RogueMethodArgument arg);
+        private class Screen : RogueMenuScreen
+        {
+            public IListMenuSelectOption[] selectOptions;
+
+            private readonly FadeOutInViewTemplate<RogueMenuManager, ReadOnlyMenuArg> view = new()
+            {
+            };
+
+            public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
+            {
+                view.FadeOut(manager, arg)
+                    ?.OnFadeOutCompleted((manager, arg) =>
+                    {
+                        selectOptions[0].HandleClick(manager, arg);
+                        manager.Done();
+                    })
+                    .Build();
+            }
+        }
     }
 }

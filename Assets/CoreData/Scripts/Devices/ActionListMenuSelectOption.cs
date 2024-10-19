@@ -6,19 +6,10 @@ namespace Roguegard.Device
 {
     public class ActionListMenuSelectOption : BaseListMenuSelectOption
     {
-        private readonly ListMenuAction action;
-
-        public override string Name { get; }
-
-        public ActionListMenuSelectOption(string name, ListMenuAction action)
+        public ActionListMenuSelectOption(string name, HandleClickAction action)
         {
             Name = name;
-            this.action = action;
-        }
-
-        public override void Activate(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-        {
-            action.Invoke(manager, self, user, arg);
+            HandleClick = action;
         }
     }
 }

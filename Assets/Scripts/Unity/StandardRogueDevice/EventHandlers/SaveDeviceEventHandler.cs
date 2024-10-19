@@ -30,7 +30,7 @@ namespace RoguegardUnity
                 (root) =>
                 {
                     root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-                    root.Back();
+                    root.HandleClickBack();
                     SelectFileMenu.ShowSaving(root);
 
                     StandardRogueDeviceSave.GetNewNumberingPath(
@@ -40,7 +40,7 @@ namespace RoguegardUnity
             readFileMenu = new SelectFileMenu(SelectFileMenu.Type.Read, (root, path) =>
             {
                 root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-                root.Back();
+                root.HandleClickBack();
                 SelectFileMenu.ShowLoading(root);
 
                 // “ü—Í‚³‚ê‚½ƒpƒX‚Ì Stream ‚ğŠJ‚­
@@ -105,19 +105,19 @@ namespace RoguegardUnity
             return false;
         }
 
-        private void SaveDelay(IListMenuManager manager, string path, bool autoSave)
+        private void SaveDelay(RogueMenuManager manager, string path, bool autoSave)
         {
             if (manager != null)
             {
                 manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-                manager.Back();
+                manager.HandleClickBack();
                 SelectFileMenu.ShowSaving(manager);
             }
 
             FadeCanvas.StartCanvasCoroutine(Save(manager, path, autoSave));
         }
 
-        private IEnumerator Save(IListMenuManager manager, string path, bool autoSave)
+        private IEnumerator Save(RogueMenuManager manager, string path, bool autoSave)
         {
             // RogueMethodAspectState ‚Ìˆ—‚ÌŠ®—¹‚ğ‘Ò‚Â
             yield return null;
@@ -283,12 +283,13 @@ namespace RoguegardUnity
             }
         }
 
-        private class AutoSaveMenu : IListMenu
+        private class AutoSaveMenu : RogueMenuScreen
         {
             public SaveDeviceEventHandler parent;
 
-            public void OpenMenu(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public override void OpenScreen(in RogueMenuManager inManager, in ReadOnlyMenuArg arg)
             {
+                var manager = inManager;
                 SelectFileMenu.ShowSaving(manager);
                 StandardRogueDeviceSave.GetNewAutoSavePath("AutoSave.gard", path => parent.SaveDelay(manager, path, true));
             }

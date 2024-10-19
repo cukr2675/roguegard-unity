@@ -2,35 +2,37 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using ListingMF;
 using Roguegard.Device;
 using Roguegard;
 
 namespace RoguegardUnity
 {
-    internal class SynchronizeMenu : IListMenu
+    internal class SynchronizeMenu : RogueMenuScreen
     {
         public bool Interrupt { get; private set; }
         public float Progress { get; set; }
 
-        private LoadingListMenu loadingMenu;
+        private float beforeProgress;
 
-        public void OpenMenu(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+        private readonly DialogViewTemplate<RogueMenuManager, ReadOnlyMenuArg> view = new()
         {
-            if (loadingMenu == null) { loadingMenu = new LoadingListMenu("¢ŠE‚Æ“¯Šú’†c", "“¯Šú‚ğ’†~", Stop, Update); }
+            DialogSubViewName = StandardSubViewTable.OverlayName,
+        };
 
-            Interrupt = false;
-            loadingMenu.OpenMenu(manager, null, null, RogueMethodArgument.Identity);
-        }
-
-        private void Stop(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+        public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
         {
-            Interrupt = true;
-        }
+            beforeProgress = 0f;
+            view.Show("¢ŠE‚Æ“¯Šú’†c", manager, arg)
+                ?.Append(ProgressBarViewWidget.CreateOption<RogueMenuManager, ReadOnlyMenuArg>((manager, arg) =>
+                {
+                    if (Progress >= 1f && beforeProgress < 1f) { manager.Done(); }
+                    beforeProgress = Progress;
 
-        private void Update(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-        {
-            var loading = manager.GetView(DeviceKw.MenuLoading);
-            loading.SetPosition(Progress);
+                    return Progress;
+                }))
+                .AppendSelectOption("“¯Šú‚ğ’†~", (manager, arg) => Interrupt = true)
+                .Build();
         }
     }
 }

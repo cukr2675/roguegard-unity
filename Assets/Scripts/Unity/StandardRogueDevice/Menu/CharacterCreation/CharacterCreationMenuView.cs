@@ -4,6 +4,7 @@ using UnityEngine;
 
 using UnityEngine.UI;
 using TMPro;
+using ListingMF;
 using SDSSprite;
 using Roguegard;
 using Roguegard.Device;
@@ -11,7 +12,7 @@ using Roguegard.CharacterCreation;
 
 namespace RoguegardUnity
 {
-    public class CharacterCreationMenuView : ElementsView
+    public class CharacterCreationMenuView : MonoBehaviour
     {
         [SerializeField] private CanvasGroup _canvasGroup = null;
         [SerializeField] private ScrollRect _scrollRect = null;
@@ -25,149 +26,149 @@ namespace RoguegardUnity
         [SerializeField] private ViewElementButton _headerPrefab = null;
         [SerializeField] private CharacterCreationViewElementButton _elementButtonPrefab = null;
 
-        public override CanvasGroup CanvasGroup => _canvasGroup;
+        //public override CanvasGroup CanvasGroup => _canvasGroup;
 
         private CharacterCreationDataBuilder builder;
-        private CharacterCreationAddMenu addMenu;
-        private CharacterCreationOptionMenu optionMenu;
+        //private CharacterCreationAddMenu addMenu;
+        //private CharacterCreationOptionMenu optionMenu;
 
-        private IntrinsicPresenter intrinsicPresenter;
-        private StartingItemPresenter startingItemPresenter;
-        private static readonly HeaderSelectOption intrinsicHeader = new HeaderSelectOption("固有能力");
-        private static readonly HeaderSelectOption startingItemHeader = new HeaderSelectOption("初期アイテム");
-        private MenuRogueObjSpriteRenderer spriteRenderer;
-        private RaceSelectOption raceSelectOption;
-        private AppearanceSelectOption appearanceSelectOption;
-        private AppearanceBuildersMenu appearanceBuildersMenu;
-        private readonly List<MonoBehaviour> itemObjects = new List<MonoBehaviour>();
-        private static readonly LoadPresetSelectOption loadPresetSelectOption = new LoadPresetSelectOption();
-        private static readonly object[] leftAnchorObjs = new object[2];
+        //private IntrinsicPresenter intrinsicPresenter;
+        //private StartingItemPresenter startingItemPresenter;
+        //private static readonly HeaderSelectOption intrinsicHeader = new HeaderSelectOption("固有能力");
+        //private static readonly HeaderSelectOption startingItemHeader = new HeaderSelectOption("初期アイテム");
+        //private MenuRogueObjSpriteRenderer spriteRenderer;
+        //private RaceSelectOption raceSelectOption;
+        //private AppearanceSelectOption appearanceSelectOption;
+        //private AppearanceBuildersMenu appearanceBuildersMenu;
+        //private readonly List<MonoBehaviour> itemObjects = new List<MonoBehaviour>();
+        //private static readonly LoadPresetSelectOption loadPresetSelectOption = new LoadPresetSelectOption();
+        //private static readonly object[] leftAnchorObjs = new object[2];
 
         public void Initialize(RogueSpriteRendererPool rendererPool)
         {
-            appearanceBuildersMenu = new AppearanceBuildersMenu();
-            spriteRenderer = rendererPool.GetMenuRogueSpriteRenderer(_appearanceParent);
-            var spriteRendererTransform = spriteRenderer.GetComponent<RectTransform>();
-            spriteRendererTransform.anchorMin = spriteRendererTransform.anchorMax = new Vector2(.5f, 0f);
-            spriteRendererTransform.sizeDelta = Vector2.zero;
-            spriteRendererTransform.localPosition = Vector3.zero;
-            spriteRendererTransform.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Bottom, 0f, 0f);
-            spriteRendererTransform.localScale = Vector3.one * 4f;
-            _raceButton.Initialize(this);
-            _appearanceButton.Initialize(this);
-            raceSelectOption = new RaceSelectOption() { parent = this };
-            appearanceSelectOption = new AppearanceSelectOption() { parent = this };
-            _nameField.onValueChanged.AddListener(text => builder.Name = text);
+            //appearanceBuildersMenu = new AppearanceBuildersMenu();
+            //spriteRenderer = rendererPool.GetMenuRogueSpriteRenderer(_appearanceParent);
+            //var spriteRendererTransform = spriteRenderer.GetComponent<RectTransform>();
+            //spriteRendererTransform.anchorMin = spriteRendererTransform.anchorMax = new Vector2(.5f, 0f);
+            //spriteRendererTransform.sizeDelta = Vector2.zero;
+            //spriteRendererTransform.localPosition = Vector3.zero;
+            //spriteRendererTransform.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Bottom, 0f, 0f);
+            //spriteRendererTransform.localScale = Vector3.one * 4f;
+            //_raceButton.Initialize(this);
+            //_appearanceButton.Initialize(this);
+            //raceSelectOption = new RaceSelectOption() { parent = this };
+            //appearanceSelectOption = new AppearanceSelectOption() { parent = this };
+            //_nameField.onValueChanged.AddListener(text => builder.Name = text);
         }
 
-        public override void OpenView<T>(
-            IElementPresenter presenter, Spanning<T> list, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+        public void OpenView<T>(
+            IElementHandler presenter, Spanning<T> list, RogueMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         {
-            if (!(arg.Other is CharacterCreationDataBuilder builder)) throw new RogueException();
-            this.builder = builder;
-            if (addMenu == null)
-            {
-                addMenu = new CharacterCreationAddMenu(RoguegardSettings.CharacterCreationDatabase);
-                optionMenu = new CharacterCreationOptionMenu(RoguegardSettings.CharacterCreationDatabase);
-            }
-            addMenu.Set(builder);
-            optionMenu.Set(builder);
-            appearanceBuildersMenu.NextMenu = optionMenu;
-            appearanceBuildersMenu.AddMenu = addMenu;
+            //if (!(arg.Other is CharacterCreationDataBuilder builder)) throw new RogueException();
+            //this.builder = builder;
+            //if (addMenu == null)
+            //{
+            //    addMenu = new CharacterCreationAddMenu(RoguegardSettings.CharacterCreationDatabase);
+            //    optionMenu = new CharacterCreationOptionMenu(RoguegardSettings.CharacterCreationDatabase);
+            //}
+            //addMenu.Set(builder);
+            //optionMenu.Set(builder);
+            //appearanceBuildersMenu.NextMenu = optionMenu;
+            //appearanceBuildersMenu.AddMenu = addMenu;
 
-            if (intrinsicPresenter == null)
-            {
-                intrinsicPresenter = new IntrinsicPresenter() { parent = this };
-                startingItemPresenter = new StartingItemPresenter() { parent = this };
-            }
+            //if (intrinsicPresenter == null)
+            //{
+            //    intrinsicPresenter = new IntrinsicPresenter() { parent = this };
+            //    startingItemPresenter = new StartingItemPresenter() { parent = this };
+            //}
 
-            SetArg(manager, self, user, arg);
+            //SetArg(manager, self, user, arg);
 
-            var random = new RogueRandom(0);
-            var obj = new CharacterCreationDataBuilder(builder).CreateObj(null, Vector2Int.zero, random);
-            obj.Main.Sprite.Update(obj);
-            var spriteTransform = SkeletalSpriteTransform.Identity;
-            KeywordSpriteMotion.Wait.ApplyTo(obj.Main.Sprite.MotionSet, 0, RogueDirection.Down, ref spriteTransform, out _);
-            obj.Main.Sprite.SetTo(spriteRenderer, spriteTransform.PoseSource.GetSpritePose(spriteTransform.Direction), spriteTransform.Direction);
+            //var random = new RogueRandom(0);
+            //var obj = new CharacterCreationDataBuilder(builder).CreateObj(null, Vector2Int.zero, random);
+            //obj.Main.Sprite.Update(obj);
+            //var spriteTransform = SkeletalSpriteTransform.Identity;
+            //KeywordSpriteMotion.Wait.ApplyTo(obj.Main.Sprite.MotionSet, 0, RogueDirection.Down, ref spriteTransform, out _);
+            //obj.Main.Sprite.SetTo(spriteRenderer, spriteTransform.PoseSource.GetSpritePose(spriteTransform.Direction), spriteTransform.Direction);
 
-            _nameField.text = builder.Name;
-            builder.UpdateCost();
-            var stars = RoguegardCharacterCreationSettings.GetCharacterStars(builder.Cost);
-            _stars.SetStars(stars, builder.CostIsUnknown);
+            //_nameField.text = builder.Name;
+            //builder.UpdateCost();
+            //var stars = RoguegardCharacterCreationSettings.GetCharacterStars(builder.Cost);
+            //_stars.SetStars(stars, builder.CostIsUnknown);
 
-            foreach (var itemObject in itemObjects)
-            {
-                Destroy(itemObject.gameObject);
-            }
-            itemObjects.Clear();
+            //foreach (var itemObject in itemObjects)
+            //{
+            //    Destroy(itemObject.gameObject);
+            //}
+            //itemObjects.Clear();
 
-            var sumHeight = 0f;
-            var odd = false;
-            {
-                var header = Instantiate(_headerPrefab, _secondParent);
-                SetTransform((RectTransform)header.transform, ref sumHeight, ref odd);
-                sumHeight += ((RectTransform)header.transform).rect.height;
-                odd = false;
-                header.Initialize(this);
-                header.SetItem(SelectOptionPresenter.Instance, intrinsicHeader);
-                itemObjects.Add(header);
-            }
-            for (int i = 0; i < builder.Intrinsics.Count; i++)
-            {
-                var intrinsic = builder.Intrinsics[i];
-                var itemButton = Instantiate(_elementButtonPrefab, _secondParent);
-                SetTransform((RectTransform)itemButton.transform, ref sumHeight, ref odd);
-                itemButton.Initialize(this);
-                itemButton.SetItem(intrinsicPresenter, intrinsic, builder);
-                itemObjects.Add(itemButton);
-            }
-            {
-                var itemButton = Instantiate(_elementButtonPrefab, _secondParent);
-                SetTransform((RectTransform)itemButton.transform, ref sumHeight, ref odd);
-                itemButton.Initialize(this);
-                itemButton.SetItem(intrinsicPresenter, null, "+ 固有能力を追加");
-                itemObjects.Add(itemButton);
-                if (odd) { sumHeight += ((RectTransform)itemButton.transform).rect.height; }
-            }
+            //var sumHeight = 0f;
+            //var odd = false;
+            //{
+            //    var header = Instantiate(_headerPrefab, _secondParent);
+            //    SetTransform((RectTransform)header.transform, ref sumHeight, ref odd);
+            //    sumHeight += ((RectTransform)header.transform).rect.height;
+            //    odd = false;
+            //    header.Initialize(this);
+            //    header.SetItem(SelectOptionPresenter.Instance, intrinsicHeader);
+            //    itemObjects.Add(header);
+            //}
+            //for (int i = 0; i < builder.Intrinsics.Count; i++)
+            //{
+            //    var intrinsic = builder.Intrinsics[i];
+            //    var itemButton = Instantiate(_elementButtonPrefab, _secondParent);
+            //    SetTransform((RectTransform)itemButton.transform, ref sumHeight, ref odd);
+            //    itemButton.Initialize(this);
+            //    itemButton.SetItem(intrinsicPresenter, intrinsic, builder);
+            //    itemObjects.Add(itemButton);
+            //}
+            //{
+            //    var itemButton = Instantiate(_elementButtonPrefab, _secondParent);
+            //    SetTransform((RectTransform)itemButton.transform, ref sumHeight, ref odd);
+            //    itemButton.Initialize(this);
+            //    itemButton.SetItem(intrinsicPresenter, null, "+ 固有能力を追加");
+            //    itemObjects.Add(itemButton);
+            //    if (odd) { sumHeight += ((RectTransform)itemButton.transform).rect.height; }
+            //}
 
-            odd = false;
-            {
-                var header = Instantiate(_headerPrefab, _secondParent);
-                SetTransform((RectTransform)header.transform, ref sumHeight, ref odd);
-                sumHeight += ((RectTransform)header.transform).rect.height;
-                odd = false;
-                header.Initialize(this);
-                header.SetItem(SelectOptionPresenter.Instance, startingItemHeader);
-                itemObjects.Add(header);
-            }
-            for (int i = 0; i < builder.StartingItemTable.Count; i++)
-            {
-                var startingItem = builder.StartingItemTable[i][0];
-                var itemButton = Instantiate(_elementButtonPrefab, _secondParent);
-                SetTransform((RectTransform)itemButton.transform, ref sumHeight, ref odd);
-                itemButton.Initialize(this);
-                itemButton.SetItem(startingItemPresenter, startingItem);
-                itemObjects.Add(itemButton);
-            }
-            {
-                var itemButton = Instantiate(_elementButtonPrefab, _secondParent);
-                SetTransform((RectTransform)itemButton.transform, ref sumHeight, ref odd);
-                itemButton.Initialize(this);
-                itemButton.SetItem(startingItemPresenter, null, "+ 初期アイテムを追加");
-                itemObjects.Add(itemButton);
-                if (odd) { sumHeight += ((RectTransform)itemButton.transform).rect.height; }
-            }
-            _scrollRect.content.SetInsetAndSizeFromParentEdge(
-                RectTransform.Edge.Top, 0, _firstParent.rect.height + sumHeight);
+            //odd = false;
+            //{
+            //    var header = Instantiate(_headerPrefab, _secondParent);
+            //    SetTransform((RectTransform)header.transform, ref sumHeight, ref odd);
+            //    sumHeight += ((RectTransform)header.transform).rect.height;
+            //    odd = false;
+            //    header.Initialize(this);
+            //    header.SetItem(SelectOptionPresenter.Instance, startingItemHeader);
+            //    itemObjects.Add(header);
+            //}
+            //for (int i = 0; i < builder.StartingItemTable.Count; i++)
+            //{
+            //    var startingItem = builder.StartingItemTable[i][0];
+            //    var itemButton = Instantiate(_elementButtonPrefab, _secondParent);
+            //    SetTransform((RectTransform)itemButton.transform, ref sumHeight, ref odd);
+            //    itemButton.Initialize(this);
+            //    itemButton.SetItem(startingItemPresenter, startingItem);
+            //    itemObjects.Add(itemButton);
+            //}
+            //{
+            //    var itemButton = Instantiate(_elementButtonPrefab, _secondParent);
+            //    SetTransform((RectTransform)itemButton.transform, ref sumHeight, ref odd);
+            //    itemButton.Initialize(this);
+            //    itemButton.SetItem(startingItemPresenter, null, "+ 初期アイテムを追加");
+            //    itemObjects.Add(itemButton);
+            //    if (odd) { sumHeight += ((RectTransform)itemButton.transform).rect.height; }
+            //}
+            //_scrollRect.content.SetInsetAndSizeFromParentEdge(
+            //    RectTransform.Edge.Top, 0, _firstParent.rect.height + sumHeight);
 
-            _raceButton.SetItem(SelectOptionPresenter.Instance, raceSelectOption);
-            _appearanceButton.SetItem(SelectOptionPresenter.Instance, appearanceSelectOption);
-            MenuController.Show(_canvasGroup, true);
+            //_raceButton.SetItem(SelectOptionPresenter.Instance, raceSelectOption);
+            //_appearanceButton.SetItem(SelectOptionPresenter.Instance, appearanceSelectOption);
+            //MenuController.Show(_canvasGroup, true);
 
-            leftAnchorObjs[0] = loadPresetSelectOption;
-            leftAnchorObjs[1] = list[0];
-            var leftAnchor = manager.GetView(DeviceKw.MenuLeftAnchor);
-            leftAnchor.OpenView(SelectOptionPresenter.Instance, leftAnchorObjs, manager, self, user, arg);
+            //leftAnchorObjs[0] = loadPresetSelectOption;
+            //leftAnchorObjs[1] = list[0];
+            //var leftAnchor = manager.GetView(DeviceKw.MenuLeftAnchor);
+            //leftAnchor.OpenView(SelectOptionPresenter.Instance, leftAnchorObjs, manager, self, user, arg);
         }
 
         private static void SetTransform(RectTransform itemTransform, ref float sumHeight, ref bool odd)
@@ -186,169 +187,160 @@ namespace RoguegardUnity
             }
         }
 
-        public override float GetPosition()
-        {
-            return 0f;
-        }
+        //private class HeaderSelectOption : BaseListMenuSelectOption
+        //{
+        //    public override string Name { get; }
 
-        public override void SetPosition(float position)
-        {
-        }
+        //    public HeaderSelectOption(string name)
+        //    {
+        //        Name = name;
+        //    }
 
-        private class HeaderSelectOption : BaseListMenuSelectOption
-        {
-            public override string Name { get; }
+        //    public override void Activate(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+        //    {
+        //    }
+        //}
 
-            public HeaderSelectOption(string name)
-            {
-                Name = name;
-            }
+        //private class RaceSelectOption : BaseListMenuSelectOption
+        //{
+        //    public override string Name => null;
 
-            public override void Activate(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-            }
-        }
+        //    public CharacterCreationMenuView parent;
 
-        private class RaceSelectOption : BaseListMenuSelectOption
-        {
-            public override string Name => null;
+        //    public override void Activate(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+        //    {
+        //        manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
 
-            public CharacterCreationMenuView parent;
+        //        manager.OpenMenu(parent.optionMenu, self, null, new(other: parent.builder.Race));
+        //    }
+        //}
 
-            public override void Activate(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+        //private class AppearanceSelectOption : BaseListMenuSelectOption
+        //{
+        //    public override string Name => null;
 
-                manager.OpenMenu(parent.optionMenu, self, null, new(other: parent.builder.Race));
-            }
-        }
+        //    public CharacterCreationMenuView parent;
 
-        private class AppearanceSelectOption : BaseListMenuSelectOption
-        {
-            public override string Name => null;
+        //    public override void Activate(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+        //    {
+        //        manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
 
-            public CharacterCreationMenuView parent;
+        //        manager.OpenMenu(parent.appearanceBuildersMenu, self, null, new(other: parent.builder));
+        //    }
+        //}
 
-            public override void Activate(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+        //private class IntrinsicPresenter : IElementPresenter
+        //{
+        //    public CharacterCreationMenuView parent;
 
-                manager.OpenMenu(parent.appearanceBuildersMenu, self, null, new(other: parent.builder));
-            }
-        }
+        //    public string GetItemName(object element, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+        //    {
+        //        if (element == null) return "+ 固有能力を追加";
+        //        else return ((IntrinsicBuilder)element).Name;
+        //    }
 
-        private class IntrinsicPresenter : IElementPresenter
-        {
-            public CharacterCreationMenuView parent;
+        //    public void ActivateItem(object element, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+        //    {
+        //        if (element == null)
+        //        {
+        //            manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+        //            manager.OpenMenu(parent.addMenu, self, null, new(other: typeof(IntrinsicBuilder)));
+        //        }
+        //        else
+        //        {
+        //            manager.OpenMenu(parent.optionMenu, self, user, new(other: (IntrinsicBuilder)element));
+        //        }
+        //    }
+        //}
 
-            public string GetItemName(object element, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                if (element == null) return "+ 固有能力を追加";
-                else return ((IntrinsicBuilder)element).Name;
-            }
+        //private class StartingItemPresenter : IElementPresenter
+        //{
+        //    public CharacterCreationMenuView parent;
 
-            public void ActivateItem(object element, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                if (element == null)
-                {
-                    manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-                    manager.OpenMenu(parent.addMenu, self, null, new(other: typeof(IntrinsicBuilder)));
-                }
-                else
-                {
-                    manager.OpenMenu(parent.optionMenu, self, user, new(other: (IntrinsicBuilder)element));
-                }
-            }
-        }
+        //    public string GetItemName(object element, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+        //    {
+        //        if (element == null) return "+ 初期アイテムを追加";
+        //        else return ((StartingItemBuilder)element).Name;
+        //    }
 
-        private class StartingItemPresenter : IElementPresenter
-        {
-            public CharacterCreationMenuView parent;
+        //    public void ActivateItem(object element, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+        //    {
+        //        if (element == null)
+        //        {
+        //            manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+        //            manager.OpenMenu(parent.addMenu, self, null, new(other: typeof(StartingItemBuilder)));
+        //        }
+        //        else
+        //        {
+        //            manager.OpenMenu(parent.optionMenu, self, null, new(other: (StartingItemBuilder)element));
+        //        }
+        //    }
+        //}
 
-            public string GetItemName(object element, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                if (element == null) return "+ 初期アイテムを追加";
-                else return ((StartingItemBuilder)element).Name;
-            }
+        //private class LoadPresetSelectOption : BaseListMenuSelectOption
+        //{
+        //    public override string Name => ":Load";
 
-            public void ActivateItem(object element, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                if (element == null)
-                {
-                    manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-                    manager.OpenMenu(parent.addMenu, self, null, new(other: typeof(StartingItemBuilder)));
-                }
-                else
-                {
-                    manager.OpenMenu(parent.optionMenu, self, null, new(other: (StartingItemBuilder)element));
-                }
-            }
-        }
+        //    private static LoadPresetMenu nextMenu;
 
-        private class LoadPresetSelectOption : BaseListMenuSelectOption
-        {
-            public override string Name => ":Load";
+        //    public override void Activate(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+        //    {
+        //        manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
 
-            private static LoadPresetMenu nextMenu;
+        //        if (nextMenu == null) { nextMenu = new(); }
+        //        manager.OpenMenu(nextMenu, self, null, new(other: arg.Other));
+        //    }
+        //}
 
-            public override void Activate(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+        //private class LoadPresetMenu : BaseScrollListMenu<CharacterCreationDataBuilder>
+        //{
+        //    private static List<CharacterCreationDataBuilder> presets;
 
-                if (nextMenu == null) { nextMenu = new(); }
-                manager.OpenMenu(nextMenu, self, null, new(other: arg.Other));
-            }
-        }
+        //    private DialogListMenuSelectOption nextMenu;
+        //    private CharacterCreationDataBuilder element;
 
-        private class LoadPresetMenu : BaseScrollListMenu<CharacterCreationDataBuilder>
-        {
-            private static List<CharacterCreationDataBuilder> presets;
+        //    protected override Spanning<CharacterCreationDataBuilder> GetList(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+        //    {
+        //        if (presets == null)
+        //        {
+        //            presets = new List<CharacterCreationDataBuilder>();
+        //            for (int i = 0; i < RoguegardSettings.CharacterCreationDatabase.PresetsCount; i++)
+        //            {
+        //                presets.Add(RoguegardSettings.CharacterCreationDatabase.LoadPreset(i));
+        //            }
+        //        }
+        //        return presets;
+        //    }
 
-            private DialogListMenuSelectOption nextMenu;
-            private CharacterCreationDataBuilder element;
+        //    protected override string GetItemName(
+        //        CharacterCreationDataBuilder element, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+        //    {
+        //        return element.ShortName;
+        //    }
 
-            protected override Spanning<CharacterCreationDataBuilder> GetList(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                if (presets == null)
-                {
-                    presets = new List<CharacterCreationDataBuilder>();
-                    for (int i = 0; i < RoguegardSettings.CharacterCreationDatabase.PresetsCount; i++)
-                    {
-                        presets.Add(RoguegardSettings.CharacterCreationDatabase.LoadPreset(i));
-                    }
-                }
-                return presets;
-            }
+        //    protected override void ActivateItem(
+        //        CharacterCreationDataBuilder element, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+        //    {
+        //        if (nextMenu == null) { nextMenu = new DialogListMenuSelectOption(("ロードする", Load)).AppendExit(); }
 
-            protected override string GetItemName(
-                CharacterCreationDataBuilder element, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                return element.ShortName;
-            }
+        //        manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+        //        manager.AddInt(DeviceKw.StartTalk, 0);
+        //        manager.AddObject(DeviceKw.AppendText, "ロードすると 編集中のキャラは消えてしまいますが よろしいですか？");
+        //        manager.AddInt(DeviceKw.WaitEndOfTalk, 0);
+        //        manager.OpenMenuAsDialog(nextMenu, self, user, arg);
 
-            protected override void ActivateItem(
-                CharacterCreationDataBuilder element, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                if (nextMenu == null) { nextMenu = new DialogListMenuSelectOption(("ロードする", Load)).AppendExit(); }
+        //        this.element = element;
+        //    }
 
-                manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-                manager.AddInt(DeviceKw.StartTalk, 0);
-                manager.AddObject(DeviceKw.AppendText, "ロードすると 編集中のキャラは消えてしまいますが よろしいですか？");
-                manager.AddInt(DeviceKw.WaitEndOfTalk, 0);
-                manager.OpenMenuAsDialog(nextMenu, self, user, arg);
+        //    private void Load(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+        //    {
+        //        manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
 
-                this.element = element;
-            }
-
-            private void Load(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-
-                var builder = (CharacterCreationDataBuilder)arg.Other;
-                builder.Set(element);
-                manager.Back();
-                manager.Back();
-            }
-        }
+        //        var builder = (CharacterCreationDataBuilder)arg.Other;
+        //        builder.Set(element);
+        //        manager.Back();
+        //        manager.Back();
+        //    }
+        //}
     }
 }

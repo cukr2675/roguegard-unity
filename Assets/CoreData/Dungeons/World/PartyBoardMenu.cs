@@ -2,21 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using ListingMF;
 using Roguegard.CharacterCreation;
 using Roguegard.Device;
 using Roguegard.Extensions;
 
 namespace Roguegard
 {
-    public class PartyBoardMenu : IListMenu
+    public class PartyBoardMenu : RogueMenuScreen
     {
-        private static readonly Presenter presenter = new Presenter();
-        private static readonly List<object> elms = new List<object>();
+        private static readonly List<RogueObj> elms = new();
 
-        public void OpenMenu(IListMenuManager manager, RogueObj player, RogueObj user, in RogueMethodArgument arg)
+        private static readonly CommandMenu nextMenu = new CommandMenu();
+        private static readonly DialogListMenuSelectOption callLobbyDialog = new DialogListMenuSelectOption(("はい", CallLobby)).AppendExit();
+        private static readonly PartyBoardCharacterCreationMenu newMenu = new PartyBoardCharacterCreationMenu();
+
+        private readonly ScrollViewTemplate<RogueObj, RogueMenuManager, ReadOnlyMenuArg> view = new()
+        {
+        };
+
+        public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
         {
             // ロビーメンバーの一覧を表示する
-            var worldInfo = RogueWorldInfo.GetByCharacter(player);
+            var worldInfo = RogueWorldInfo.GetByCharacter(arg.Self);
             var lobbyMembers = worldInfo.LobbyMembers.Members;
             elms.Clear();
             for (int i = 0; i < lobbyMembers.Count; i++)
@@ -27,104 +35,90 @@ namespace Roguegard
             }
             elms.Add(null);
 
-            var scroll = manager.GetView(DeviceKw.MenuScroll);
-            scroll.OpenView(presenter, elms, manager, player, null, RogueMethodArgument.Identity);
-            ExitListMenuSelectOption.OpenLeftAnchorExit(manager);
-        }
-
-        private class Presenter : IElementPresenter
-        {
-            private static readonly CommandMenu nextMenu = new CommandMenu();
-            private static readonly DialogListMenuSelectOption callLobbyDialog = new DialogListMenuSelectOption(("はい", CallLobby)).AppendExit();
-            private static readonly PartyBoardCharacterCreationMenu newMenu = new PartyBoardCharacterCreationMenu();
-
-            public string GetItemName(object element, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                var character = (RogueObj)element;
-                if (character == null)
+            view.Show(elms, manager, arg)
+                ?.ElementNameGetter((obj, manager, arg) =>
                 {
-                    return "+ 追加";
-                }
-                else
-                {
-                    var info = LobbyMemberList.GetMemberInfo(character);
-                    var name = character.GetName();
-                    if (info.Seat != null) return "<#ffff00>" + name; // 席についているキャラは別メニュー
-                    else return name;
-                }
-            }
-
-            public void ActivateItem(object element, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                var character = (RogueObj)element;
-                if (character == null)
-                {
-                    // 新規メンバー作成
-                    manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-                    var builder = RoguegardSettings.CharacterCreationDatabase.LoadPreset(0);
-                    var openArg = new RogueMethodArgument(other: builder);
-                    manager.OpenMenu(newMenu, self, user, openArg);
-                }
-                else
-                {
-                    // 既存メンバーのメニュー表示
-                    manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-                    var info = LobbyMemberList.GetMemberInfo(character);
-                    if (info.Seat != null)
+                    if (obj == null)
                     {
-                        // 席についているキャラはそこから呼び戻すか尋ねる
-                        manager.AddInt(DeviceKw.StartTalk, 0);
-                        manager.AddObject(DeviceKw.AppendText, character);
-                        manager.AddObject(DeviceKw.AppendText, "を呼び戻しますか？");
-                        manager.AddInt(DeviceKw.WaitEndOfTalk, 0);
-                        manager.OpenMenuAsDialog(callLobbyDialog, self, null, new(targetObj: character));
+                        return "+ 追加";
                     }
                     else
                     {
-                        manager.OpenMenuAsDialog(nextMenu, self, null, new(targetObj: character));
+                        var info = LobbyMemberList.GetMemberInfo(obj);
+                        var name = obj.GetName();
+                        if (info.Seat != null) return "<#ffff00>" + name; // 席についているキャラは別メニュー
+                        else return name;
                     }
-                }
-            }
-
-            private static void CallLobby(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-
-                // クエストを中止してキャラを席から呼び戻す
-                var character = arg.TargetObj;
-                var leader = character.Main.Stats.Party.Members[0];
-                default(IActiveRogueMethodCaller).LocateSavePoint(leader, null, 0f, RogueWorldSavePointInfo.Instance, true);
-                SpaceUtility.TryLocate(character, null);
-                var info = LobbyMemberList.GetMemberInfo(character);
-                info.Seat = null;
-
-                manager.Back();
-            }
+                })
+                .OnClickElement((obj, manager, arg) =>
+                {
+                    if (obj == null)
+                    {
+                        // 新規メンバー作成
+                        manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+                        var builder = RoguegardSettings.CharacterCreationDatabase.LoadPreset(0);
+                        manager.PushMenuScreen(newMenu, arg.Self, arg.User, other: builder);
+                    }
+                    else
+                    {
+                        // 既存メンバーのメニュー表示
+                        manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+                        var info = LobbyMemberList.GetMemberInfo(obj);
+                        if (info.Seat != null)
+                        {
+                            // 席についているキャラはそこから呼び戻すか尋ねる
+                            manager.AddInt(DeviceKw.StartTalk, 0);
+                            manager.AddObject(DeviceKw.AppendText, obj);
+                            manager.AddObject(DeviceKw.AppendText, "を呼び戻しますか？");
+                            manager.AddInt(DeviceKw.WaitEndOfTalk, 0);
+                            manager.PushMenuScreen(callLobbyDialog.menuScreen, arg.Self, targetObj: obj);
+                        }
+                        else
+                        {
+                            manager.PushMenuScreen(nextMenu, arg.Self, targetObj: obj);
+                        }
+                    }
+                })
+                .Build();
         }
 
-        private class CommandMenu : IListMenu
+        private static void CallLobby(RogueMenuManager manager, ReadOnlyMenuArg arg)
+        {
+            manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+
+            // クエストを中止してキャラを席から呼び戻す
+            var character = arg.Arg.TargetObj;
+            var leader = character.Main.Stats.Party.Members[0];
+            default(IActiveRogueMethodCaller).LocateSavePoint(leader, null, 0f, RogueWorldSavePointInfo.Instance, true);
+            SpaceUtility.TryLocate(character, null);
+            var info = LobbyMemberList.GetMemberInfo(character);
+            info.Seat = null;
+
+            manager.HandleClickBack();
+        }
+
+        private class CommandMenu : RogueMenuScreen
         {
             private static readonly PartyBoardCharacterCreationMenu nextMenu = new PartyBoardCharacterCreationMenu();
 
-            private static readonly object[] elms = new object[]
+            private readonly MainMenuViewTemplate<RogueMenuManager, ReadOnlyMenuArg> view = new()
             {
-                new ActionListMenuSelectOption("交代", Change),
-                new ActionListMenuSelectOption("加入", Invite),
-                new ActionListMenuSelectOption("編集", Edit),
-                ExitListMenuSelectOption.Instance
             };
 
-            public void OpenMenu(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
             {
-                var newPlayer = arg.TargetObj;
-                var openArg = new RogueMethodArgument(targetObj: newPlayer);
-                manager.GetView(DeviceKw.MenuCommand).OpenView(SelectOptionPresenter.Instance, elms, manager, self, null, openArg);
+                view.Show(manager, arg)
+                    ?.Option("交代", Change)
+                    .Option("加入", Invite)
+                    .Option("編集", Edit)
+                    .Exit()
+                    .Build();
             }
 
-            private static void Change(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            private static void Change(RogueMenuManager manager, ReadOnlyMenuArg arg)
             {
                 // 席が設定されている場合は失敗させる
-                var info = LobbyMemberList.GetMemberInfo(arg.TargetObj);
+                var info = LobbyMemberList.GetMemberInfo(arg.Arg.TargetObj);
                 if (info?.Seat != null)
                 {
                     manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Cancel);
@@ -132,9 +126,10 @@ namespace Roguegard
                 }
 
                 manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-                var newPlayer = arg.TargetObj;
+                var newPlayer = arg.Arg.TargetObj;
 
                 // 空間移動
+                var self = arg.Self;
                 var location = self.Location;
                 var position = self.Position;
                 SpaceUtility.TryLocate(self, null);
@@ -151,10 +146,10 @@ namespace Roguegard
                 manager.Done();
             }
 
-            private static void Invite(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            private static void Invite(RogueMenuManager manager, ReadOnlyMenuArg arg)
             {
                 // 席が設定されている場合は失敗させる
-                var info = LobbyMemberList.GetMemberInfo(arg.TargetObj);
+                var info = LobbyMemberList.GetMemberInfo(arg.Arg.TargetObj);
                 if (info?.Seat != null)
                 {
                     manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Cancel);
@@ -162,11 +157,11 @@ namespace Roguegard
                 }
 
                 manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-                var newMember = arg.TargetObj;
+                var newMember = arg.Arg.TargetObj;
 
                 // 空間移動
-                var party = self.Main.Stats.Party;
-                if (!default(IChangeStateRogueMethodCaller).LocateNextToAnyMember(newMember, self, 0f, party)) return;
+                var party = arg.Self.Main.Stats.Party;
+                if (!default(IChangeStateRogueMethodCaller).LocateNextToAnyMember(newMember, arg.Self, 0f, party)) return;
                 newMember.Main.Stats.Direction = RogueDirection.Down;
 
                 // パーティ移動
@@ -186,21 +181,21 @@ namespace Roguegard
                 manager.Done();
             }
 
-            private static void Edit(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            private static void Edit(RogueMenuManager manager, ReadOnlyMenuArg arg)
             {
                 // 席が設定されている場合は失敗させる
-                var info = LobbyMemberList.GetMemberInfo(arg.TargetObj);
+                var info = LobbyMemberList.GetMemberInfo(arg.Arg.TargetObj);
                 if (info?.Seat != null)
                 {
                     manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Cancel);
                     return;
                 }
 
-                var character = arg.TargetObj;
+                var character = arg.Arg.TargetObj;
                 var builder = new CharacterCreationDataBuilder(info.CharacterCreationData);
 
                 manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-                manager.OpenMenu(nextMenu, self, user, new(targetObj: character, other: builder));
+                manager.PushMenuScreen(nextMenu, arg.Self, arg.User, targetObj: character, other: builder);
             }
         }
     }

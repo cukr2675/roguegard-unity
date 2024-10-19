@@ -10,10 +10,10 @@ namespace Roguegard.Device
     {
         TMP_InputField.ContentType ContentType { get; }
 
-        string GetName(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg);
+        string GetName(RogueMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg);
 
-        string GetValue(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg);
+        string GetValue(RogueMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg);
 
-        void SetValue(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg, string value);
+        void SetValue(RogueMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg, string value);
     }
 }

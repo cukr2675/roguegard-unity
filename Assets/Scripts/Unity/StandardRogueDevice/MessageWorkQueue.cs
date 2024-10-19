@@ -78,7 +78,7 @@ namespace RoguegardUnity
             EnqueueStackTrace();
         }
 
-        public void EnqueueMenu(IListMenu menu, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+        public void EnqueueMenu(RogueMenuScreen menu, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         {
             others.Enqueue(DeviceKw.EnqueueMenu);
             menus.Enqueue(menu, self, user, arg);
@@ -142,7 +142,7 @@ namespace RoguegardUnity
 #endif
         }
 
-        public void DequeueMenu(out IListMenu menu, out RogueObj self, out RogueObj user, out RogueMethodArgument arg)
+        public void DequeueMenu(out RogueMenuScreen menu, out RogueObj self, out RogueObj user, out RogueMethodArgument arg)
         {
             menus.Dequeue(out menu, out self, out user, out arg);
         }

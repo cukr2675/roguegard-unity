@@ -8,8 +8,9 @@ namespace Roguegard.Device
     /// メニューの画面単位のインターフェース。
     /// 一つの画面につき複数の <see cref="IElementPresenter"/> を持つ可能性がある。
     /// </summary>
+    [System.Obsolete]
     public interface IListMenu
     {
-        void OpenMenu(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg);
+        void OpenMenu(object manager, RogueObj self, RogueObj user, in RogueMethodArgument arg);
     }
 }

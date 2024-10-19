@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using ListingMF;
 using Roguegard;
 using Roguegard.Device;
 
@@ -10,7 +11,7 @@ namespace RoguegardUnity
     // スキル選択メニュー。
     public class SkillsMenu
     {
-        public IListMenu Use { get; }
+        public RogueMenuScreen Use { get; }
 
         public SkillsMenu()
         {
@@ -20,32 +21,36 @@ namespace RoguegardUnity
         /// <summary>
         /// 使うスキルを選択するメニュー
         /// </summary>
-        private class UseMenu : BaseScrollListMenu<ISkill>, ISkillMenuItemController
+        private class UseMenu : RogueMenuScreen
         {
-            protected override string MenuName => ":Skills";
+            private readonly ScrollViewTemplate<ISkill, RogueMenuManager, ReadOnlyMenuArg> view = new()
+            {
+                Title = ":Skills",
+            };
 
-            private readonly List<ISkill> elms = new List<ISkill>();
+            private readonly List<ISkill> list = new List<ISkill>();
             private readonly SkillCommandMenu menu = new SkillCommandMenu();
 
-            protected override Spanning<ISkill> GetList(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
             {
-                elms.Clear();
-                for (int i = 0; i < self.Main.Skills.Count; i++)
+                var skills = arg.Self.Main.Skills;
+                list.Clear();
+                for (int i = 0; i < skills.Count; i++)
                 {
-                    elms.Add(self.Main.Skills[i]);
+                    list.Add(skills[i]);
                 }
-                return elms;
-            }
 
-            protected override string GetItemName(ISkill skill, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                return "???";
-            }
-
-            protected override void ActivateItem(ISkill skill, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                // 選択したスキルの情報と選択肢を表示する
-                manager.OpenMenuAsDialog(menu, self, null, new(other: skill));
+                view.Show(list, manager, arg)
+                    ?.ElementNameGetter((skill, manager, arg) =>
+                    {
+                        return skill.Name;
+                    })
+                    .OnClickElement((skill, manager, arg) =>
+                    {
+                        // 選択したスキルの情報と選択肢を表示する
+                        manager.PushMenuScreen(menu, other: skill);
+                    })
+                    .Build();
             }
         }
     }

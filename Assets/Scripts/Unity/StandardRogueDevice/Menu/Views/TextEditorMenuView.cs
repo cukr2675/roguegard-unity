@@ -9,12 +9,12 @@ using TMPro;
 
 namespace RoguegardUnity
 {
-    public class TextEditorMenuView : ElementsView, ITextElementsView
+    public class TextEditorMenuView : ElementsView//, ITextElementsView
     {
         [SerializeField] private CanvasGroup _canvasGroup = null;
         [SerializeField] private TMP_InputField _inputField = null;
 
-        public override CanvasGroup CanvasGroup => _canvasGroup;
+        public CanvasGroup CanvasGroup => _canvasGroup;
 
         public string Text => _inputField.text;
 
@@ -23,22 +23,43 @@ namespace RoguegardUnity
             _inputField.onEndEdit.AddListener(x => SetArg(Root, Self, User, new(tool: Arg.Tool, other: x)));
         }
 
-        public override void OpenView<T>(
-            IElementPresenter presenter, Spanning<T> list, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+        public void SetText(string text)
         {
-            SetArg(manager, self, user, arg);
-            _inputField.text = (string)arg.Other;
-            MenuController.Show(_canvasGroup, true);
+            _inputField.text = text;
         }
 
-        public override float GetPosition()
+        public void Show(bool show)
         {
-            throw new System.NotImplementedException();
+            if (show)
+            {
+                _canvasGroup.alpha = 1f;
+                _canvasGroup.interactable = true;
+                _canvasGroup.blocksRaycasts = true;
+            }
+            else
+            {
+                _canvasGroup.alpha = 0f;
+                _canvasGroup.interactable = false;
+                _canvasGroup.blocksRaycasts = false;
+            }
         }
 
-        public override void SetPosition(float position)
-        {
-            throw new System.NotImplementedException();
-        }
+        //public override void OpenView<T>(
+        //    IElementPresenter presenter, Spanning<T> list, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+        //{
+        //    SetArg(manager, self, user, arg);
+        //    _inputField.text = (string)arg.Other;
+        //    MenuController.Show(_canvasGroup, true);
+        //}
+
+        //public override float GetPosition()
+        //{
+        //    throw new System.NotImplementedException();
+        //}
+
+        //public override void SetPosition(float position)
+        //{
+        //    throw new System.NotImplementedException();
+        //}
     }
 }

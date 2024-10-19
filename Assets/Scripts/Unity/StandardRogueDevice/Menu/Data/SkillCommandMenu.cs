@@ -2,55 +2,57 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using ListingMF;
 using Roguegard;
 using Roguegard.Device;
 
 namespace RoguegardUnity
 {
-    public class SkillCommandMenu : IListMenu
+    public class SkillCommandMenu : RogueMenuScreen
     {
-        private readonly IListMenuSelectOption[] selectOptions;
-        private ISkill currentSkill;
+        public override bool IsIncremental => true;
 
-        public SkillCommandMenu()
+        private readonly MainMenuViewTemplate<RogueMenuManager, ReadOnlyMenuArg> view = new()
         {
-            selectOptions = new IListMenuSelectOption[]
-            {
-                new UseSelectOption() { parent = this },
-                ExitListMenuSelectOption.Instance
-            };
+            PrimaryCommandSubViewName = StandardSubViewTable.SecondaryCommandName,
+        };
+
+        private readonly CommandAction commandAction = new();
+
+        public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
+        {
+            var selectedSkill = (ISkill)arg.Arg.Other;
+
+            view.Title = selectedSkill.Details.ToString();
+
+            view.Show(manager, arg)
+                ?.Option(":Use", (manager, arg) =>
+                {
+                    var info = RogueDeviceEffect.Get(arg.Self);
+                    var selectedSkill = (ISkill)arg.Arg.Other;
+                    info.SetDeviceCommand(commandAction, null, new(other: selectedSkill));
+                    manager.Done();
+                })
+                .Exit()
+                .Build();
         }
 
-        void IListMenu.OpenMenu(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+        public override void CloseScreen(in RogueMenuManager manager, bool back)
         {
-            currentSkill = (ISkill)arg.Other;
-            manager.GetView(DeviceKw.MenuCommand).OpenView(SelectOptionPresenter.Instance, selectOptions, manager, self, user, arg);
-
-            var caption = manager.GetView(DeviceKw.MenuCaption);
-            caption.OpenView(null, Spanning<object>.Empty, null, null, null, new(other: currentSkill));
+            view.HideSubViews(manager, back);
         }
 
-        private class UseSelectOption : BaseListMenuSelectOption, IDeviceCommandAction
+        private class CommandAction : IDeviceCommandAction
         {
-            public override string Name => "使う";
-
-            public SkillCommandMenu parent;
-
-            public override void Activate(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                var info = RogueDeviceEffect.Get(self);
-                info.SetDeviceCommand(this, null, RogueMethodArgument.Identity);
-                manager.Done();
-            }
-
-            bool IDeviceCommandAction.CommandInvoke(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
+            public bool CommandInvoke(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
             {
                 if (!RoguegardSettings.KeywordsNotEnqueueMessageRule.Contains(MainInfoKw.Skill))
                 {
                     RogueDevice.Add(DeviceKw.AppendText, DeviceKw.HorizontalRule);
                 }
 
-                return RogueMethodAspectState.Invoke(MainInfoKw.Skill, parent.currentSkill, self, user, activationDepth, arg);
+                var selectedSkill = (ISkill)arg.Other;
+                return RogueMethodAspectState.Invoke(MainInfoKw.Skill, selectedSkill, self, user, activationDepth, RogueMethodArgument.Identity);
             }
         }
     }

@@ -6,10 +6,10 @@ namespace Roguegard.Device
 {
     public interface IOptionsMenuSlider
     {
-        string GetName(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg);
+        string GetName(RogueMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg);
 
-        float GetValue(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg);
+        float GetValue(RogueMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg);
 
-        void SetValue(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg, float value);
+        void SetValue(RogueMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg, float value);
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using System.Diagnostics;
+using ListingMF;
 using Roguegard;
 using Roguegard.Device;
 
@@ -14,71 +15,86 @@ namespace RoguegardUnity
         [SerializeField] private LogMenuView _logWindow = null;
         [SerializeField] private TalkWindow _talkWindow = null;
 
+        [SerializeField] private MessageBoxSubView _messageBox = null;
+        [SerializeField] private MessageBoxSubView _speechBox = null;
+
         private int showMessageTime;
         private const int messageTime = 3 * 60;
 
         private bool lastTypewriting;
 
-        public bool IsScrollingNow => _messageWindow.IsScrollingNow || _talkWindow.IsScrollingNow;
+        private bool talk;
 
-        public bool IsTalkingNow => _talkWindow.IsScrollingNow;
+        public bool IsScrollingNow => _messageBox.MessageBox.IsInProgress || _speechBox.MessageBox.IsInProgress;
+
+        public bool IsTalkingNow => _speechBox.MessageBox.IsInProgress;
 
         public ElementsView LogView => _logWindow;
         public ElementsView TalkView => _talkWindow;
 
         internal void UpdateUI(SoundController soundController, int deltaTime)
         {
-            _messageWindow.UpdateUI(deltaTime);
-            if (_messageWindow.IsShow && !_messageWindow.IsScrollingNow)
+            if (Input.GetKeyDown(KeyCode.Space))
             {
-                showMessageTime += deltaTime;
-                if (showMessageTime >= messageTime)
-                {
-                    _messageWindow.Show(false);
-                }
+                _speechBox.MessageBox.InvokeReachHiddenLink("Submit");
             }
 
-            _talkWindow.UpdateUI(deltaTime);
-            if (lastTypewriting != _talkWindow.IsTypewritingNow)
-            {
-                if (_talkWindow.IsTypewritingNow)
-                {
-                    soundController.PlayLoop(DeviceKw.StartTalk);
-                }
-                else
-                {
-                    soundController.SetLastLoop(DeviceKw.StartTalk);
-                }
-                lastTypewriting = _talkWindow.IsTypewritingNow;
-            }
+
+            //_messageWindow.UpdateUI(deltaTime);
+            //if (_messageWindow.IsShow && !_messageWindow.IsScrollingNow)
+            //{
+            //    showMessageTime += deltaTime;
+            //    if (showMessageTime >= messageTime)
+            //    {
+            //        _messageWindow.Show(false);
+            //    }
+            //}
+
+            //_talkWindow.UpdateUI(deltaTime);
+            //if (lastTypewriting != _talkWindow.IsTypewritingNow)
+            //{
+            //    if (_talkWindow.IsTypewritingNow)
+            //    {
+            //        soundController.PlayLoop(DeviceKw.StartTalk);
+            //    }
+            //    else
+            //    {
+            //        soundController.SetLastLoop(DeviceKw.StartTalk);
+            //    }
+            //    lastTypewriting = _talkWindow.IsTypewritingNow;
+            //}
         }
 
         public void ShowMessage(bool show)
         {
-            _messageWindow.Show(show);
+            _messageBox.Show();
+            //_messageWindow.Show(show);
         }
 
         public void StartTalk()
         {
-            _messageWindow.Show(false);
-            _talkWindow.StartTalk();
+            _speechBox.Show();
+            talk = true;
+            _speechBox.ShowScheduledAfterCompletion((manager, arg) => talk = false);
+            //_messageWindow.Show(false);
+            //_talkWindow.StartTalk();
         }
 
         public void WaitEndOfTalk()
         {
-            _talkWindow.WaitEndOfTalk();
+            //_talkWindow.WaitEndOfTalk();
         }
 
         private void AppendText(string text)
         {
-            if (_talkWindow.IsShow)
+            if (talk)
             {
-                _talkWindow.Append(text);
+                _speechBox.MessageBox.Append(text);
             }
             else
             {
-                _messageWindow.Append(text);
-                _logWindow.Append(text);
+                _messageBox.MessageBox.Append(text);
+                //_logWindow.Append(text);
                 showMessageTime = 0;
             }
         }
@@ -128,51 +144,54 @@ namespace RoguegardUnity
 
         public void AppendInteger(int integer)
         {
-            if (_talkWindow.IsShow)
-            {
-                _talkWindow.Append(integer);
-            }
-            else
-            {
-                _messageWindow.Append(integer);
-                _logWindow.Append(integer);
-                showMessageTime = 0;
-            }
+            AppendText(integer.ToString());
+            //if (talk)
+            //{
+            //    _talkWindow.Append(integer);
+            //}
+            //else
+            //{
+            //    _messageWindow.Append(integer);
+            //    _logWindow.Append(integer);
+            //    showMessageTime = 0;
+            //}
         }
 
         public void AppendNumber(float number)
         {
-            if (_talkWindow.IsShow)
-            {
-                _talkWindow.Append(number);
-            }
-            else
-            {
-                _messageWindow.Append(number);
-                _logWindow.Append(number);
-                showMessageTime = 0;
-            }
+            AppendText(number.ToString());
+            //if (talk)
+            //{
+            //    _talkWindow.Append(number);
+            //}
+            //else
+            //{
+            //    _messageWindow.Append(number);
+            //    _logWindow.Append(number);
+            //    showMessageTime = 0;
+            //}
         }
 
         public void AppendHorizontalRule()
         {
-            if (_talkWindow.IsShow)
-            {
-                _talkWindow.AppendHorizontalRule();
-            }
-            else
-            {
-                _messageWindow.AppendHorizontalRule();
-                _logWindow.AppendHorizontalRule();
-                showMessageTime = 0;
-            }
+            AppendText("<link=\"HorizontalRule\"></link>");
+            //if (talk)
+            //{
+            //    _talkWindow.AppendHorizontalRule();
+            //}
+            //else
+            //{
+            //    _messageWindow.AppendHorizontalRule();
+            //    _logWindow.AppendHorizontalRule();
+            //    showMessageTime = 0;
+            //}
         }
 
         public void ClearText()
         {
-            _messageWindow.Clear();
-            _logWindow.Clear();
-            _talkWindow.Clear();
+            _messageBox.MessageBox.Clear();
+            //_logWindow.Clear();
+            _speechBox.MessageBox.Clear();
         }
     }
 }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using ListingMF;
 using Roguegard.CharacterCreation;
 using Roguegard.Device;
 
@@ -43,30 +44,30 @@ namespace Roguegard
             return 0;
         }
 
-        private class RogueMenu : IListMenu, IElementPresenter
+        private class RogueMenu : RogueMenuScreen
         {
             public LobbyMerchantBeApplied parent;
 
-            public void OpenMenu(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            private readonly ScrollViewTemplate<ScriptableStartingItem, RogueMenuManager, ReadOnlyMenuArg> view = new()
             {
-                var scroll = manager.GetView(DeviceKw.MenuScroll);
-                scroll.OpenView(this, parent._items, manager, self, user, arg);
-                ExitListMenuSelectOption.OpenLeftAnchorExit(manager);
-            }
+            };
 
-            public string GetItemName(object element, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
             {
-                return ((ScriptableStartingItem)element).Name;
-            }
+                view.Show(parent._items, manager, arg)
+                    ?.ElementNameGetter((item, manager, arg) =>
+                    {
+                        return item.Name;
+                    })
+                    .OnClickElement((item, manager, arg) =>
+                    {
+                        manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+                        manager.AddObject(DeviceKw.AppendText, item);
+                        manager.AddObject(DeviceKw.AppendText, "‚ðŽè‚É“ü‚ê‚½\n");
 
-            public void ActivateItem(object element, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-                manager.AddObject(DeviceKw.AppendText, element);
-                manager.AddObject(DeviceKw.AppendText, "‚ðŽè‚É“ü‚ê‚½\n");
-
-                var startingItem = (ScriptableStartingItem)element;
-                startingItem.Option.CreateObj(startingItem, self, Vector2Int.zero, RogueRandom.Primary);
+                        item.Option.CreateObj(item, arg.Self, Vector2Int.zero, RogueRandom.Primary);
+                    })
+                    .Build();
             }
         }
     }

@@ -22,7 +22,7 @@ namespace Roguegard
         private int maxMP;
         private int loadCapacity;
 
-        private static readonly LevelUpMenu levelUpMenu = new LevelUpMenu();
+        //private static readonly LevelUpMenu levelUpMenu = new LevelUpMenu();
 
         static ChooseFrom3LevelInfo()
         {
@@ -71,7 +71,7 @@ namespace Roguegard
                 {
                     RogueDevice.Add(DeviceKw.AppendText, DeviceKw.EndTalk);
                 }
-                RogueDevice.Primary.AddMenu(levelUpMenu, self, null, RogueMethodArgument.Identity);
+                //RogueDevice.Primary.AddMenu(levelUpMenu, self, null, RogueMethodArgument.Identity);
                 RogueDevice.Add(DeviceKw.AppendText, DeviceKw.HorizontalRule);
             }
             else
@@ -202,105 +202,105 @@ namespace Roguegard
             return clone;
         }
 
-        private class LevelUpMenu : IListMenu
-        {
-            private static IListMenuSelectOption[] selectOptions = new IListMenuSelectOption[]
-            {
-                new HPPlusSelectOption(),
-                new MPPlusSelectOption(),
-                new WeightLiftingSelectOption()
-            };
-            private static readonly SubmitMenu submitMenu = new SubmitMenu();
+        //private class LevelUpMenu : IListMenu
+        //{
+        //    private static IListMenuSelectOption[] selectOptions = new IListMenuSelectOption[]
+        //    {
+        //        new HPPlusSelectOption(),
+        //        new MPPlusSelectOption(),
+        //        new WeightLiftingSelectOption()
+        //    };
+        //    private static readonly SubmitMenu submitMenu = new SubmitMenu();
 
-            public void OpenMenu(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                manager.GetView(DeviceKw.MenuScroll).OpenView(SelectOptionPresenter.Instance, selectOptions, manager, self, user, arg);
-            }
+        //    public void OpenMenu(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+        //    {
+        //        manager.GetView(DeviceKw.MenuScroll).OpenView(SelectOptionPresenter.Instance, selectOptions, manager, self, user, arg);
+        //    }
 
-            private class HPPlusSelectOption : BaseListMenuSelectOption
-            {
-                public override string Name => "最大HP +5";
+        //    private class HPPlusSelectOption : BaseListMenuSelectOption
+        //    {
+        //        public override string Name => "最大HP +5";
 
-                public override void Activate(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-                {
-                    var commandArg = new RogueMethodArgument(count: 0);
-                    manager.OpenMenuAsDialog(submitMenu, self, user, commandArg);
-                }
-            }
+        //        public override void Activate(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+        //        {
+        //            var commandArg = new RogueMethodArgument(count: 0);
+        //            manager.OpenMenuAsDialog(submitMenu, self, user, commandArg);
+        //        }
+        //    }
 
-            private class MPPlusSelectOption : BaseListMenuSelectOption
-            {
-                public override string Name => "最大MP +5";
+        //    private class MPPlusSelectOption : BaseListMenuSelectOption
+        //    {
+        //        public override string Name => "最大MP +5";
 
-                public override void Activate(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-                {
-                    var commandArg = new RogueMethodArgument(count: 1);
-                    manager.OpenMenuAsDialog(submitMenu, self, user, commandArg);
-                }
-            }
+        //        public override void Activate(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+        //        {
+        //            var commandArg = new RogueMethodArgument(count: 1);
+        //            manager.OpenMenuAsDialog(submitMenu, self, user, commandArg);
+        //        }
+        //    }
 
-            private class WeightLiftingSelectOption : BaseListMenuSelectOption
-            {
-                public override string Name => "最大重量 +2";
+        //    private class WeightLiftingSelectOption : BaseListMenuSelectOption
+        //    {
+        //        public override string Name => "最大重量 +2";
 
-                public override void Activate(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-                {
-                    var commandArg = new RogueMethodArgument(count: 2);
-                    manager.OpenMenuAsDialog(submitMenu, self, user, commandArg);
-                }
-            }
-        }
+        //        public override void Activate(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+        //        {
+        //            var commandArg = new RogueMethodArgument(count: 2);
+        //            manager.OpenMenuAsDialog(submitMenu, self, user, commandArg);
+        //        }
+        //    }
+        //}
 
-        private class SubmitMenu : IListMenu
-        {
-            private static IListMenuSelectOption[] selectOptions = new IListMenuSelectOption[]
-            {
-                new SubmitSelectOption(),
-                ExitListMenuSelectOption.Instance
-            };
+        //private class SubmitMenu : IListMenu
+        //{
+        //    private static IListMenuSelectOption[] selectOptions = new IListMenuSelectOption[]
+        //    {
+        //        new SubmitSelectOption(),
+        //        ExitListMenuSelectOption.Instance
+        //    };
 
-            public void OpenMenu(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                manager.GetView(DeviceKw.MenuCommand).OpenView(SelectOptionPresenter.Instance, selectOptions, manager, self, user, arg);
-            }
+        //    public void OpenMenu(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+        //    {
+        //        manager.GetView(DeviceKw.MenuCommand).OpenView(SelectOptionPresenter.Instance, selectOptions, manager, self, user, arg);
+        //    }
 
-            private class SubmitSelectOption : BaseListMenuSelectOption
-            {
-                public override string Name => "決定";
+        //    private class SubmitSelectOption : BaseListMenuSelectOption
+        //    {
+        //        public override string Name => "決定";
 
-                public override void Activate(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-                {
-                    manager.Done();
-                    manager.AddInt(DeviceKw.StartTalk, 0);
-                    var levelInfo = (ChooseFrom3LevelInfo)self.Main.GetLevelInfo(self);
-                    switch (arg.Count)
-                    {
-                        case 0:
-                            levelInfo.maxHP += 5;
-                            self.Main.Stats.SetHP(self, self.Main.Stats.HP + 5, true);
-                            manager.AddObject(DeviceKw.AppendText, StatsKw.MaxHP.Name);
-                            manager.AddObject(DeviceKw.AppendText, "が5上がった\t\n");
-                            break;
-                        case 1:
-                            levelInfo.maxMP += 5;
-                            self.Main.Stats.SetMP(self, self.Main.Stats.MP + 5, true);
-                            manager.AddObject(DeviceKw.AppendText, StatsKw.MaxMP.Name);
-                            manager.AddObject(DeviceKw.AppendText, "が5上がった\t\n");
-                            break;
-                        case 2:
-                            levelInfo.loadCapacity += 2;
-                            manager.AddObject(DeviceKw.AppendText, StatsKw.LoadCapacity.Name);
-                            manager.AddObject(DeviceKw.AppendText, "が2上がった\t\n");
-                            break;
-                    }
+        //        public override void Activate(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+        //        {
+        //            manager.Done();
+        //            manager.AddInt(DeviceKw.StartTalk, 0);
+        //            var levelInfo = (ChooseFrom3LevelInfo)self.Main.GetLevelInfo(self);
+        //            switch (arg.Count)
+        //            {
+        //                case 0:
+        //                    levelInfo.maxHP += 5;
+        //                    self.Main.Stats.SetHP(self, self.Main.Stats.HP + 5, true);
+        //                    manager.AddObject(DeviceKw.AppendText, StatsKw.MaxHP.Name);
+        //                    manager.AddObject(DeviceKw.AppendText, "が5上がった\t\n");
+        //                    break;
+        //                case 1:
+        //                    levelInfo.maxMP += 5;
+        //                    self.Main.Stats.SetMP(self, self.Main.Stats.MP + 5, true);
+        //                    manager.AddObject(DeviceKw.AppendText, StatsKw.MaxMP.Name);
+        //                    manager.AddObject(DeviceKw.AppendText, "が5上がった\t\n");
+        //                    break;
+        //                case 2:
+        //                    levelInfo.loadCapacity += 2;
+        //                    manager.AddObject(DeviceKw.AppendText, StatsKw.LoadCapacity.Name);
+        //                    manager.AddObject(DeviceKw.AppendText, "が2上がった\t\n");
+        //                    break;
+        //            }
 
-                    if (self.Main.Stats.Lv == 10 || self.Main.Stats.Lv == 20)
-                    {
-                        manager.AddObject(DeviceKw.AppendText, StatsKw.ATK.Name);
-                        manager.AddObject(DeviceKw.AppendText, "が1上がった\t\n");
-                    }
-                }
-            }
-        }
+        //            if (self.Main.Stats.Lv == 10 || self.Main.Stats.Lv == 20)
+        //            {
+        //                manager.AddObject(DeviceKw.AppendText, StatsKw.ATK.Name);
+        //                manager.AddObject(DeviceKw.AppendText, "が1上がった\t\n");
+        //            }
+        //        }
+        //    }
+        //}
     }
 }

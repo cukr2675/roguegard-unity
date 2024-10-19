@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using ListingMF;
 using Roguegard;
 using Roguegard.Device;
 
@@ -10,27 +11,39 @@ namespace RoguegardUnity
     /// <summary>
     /// <see cref="RogueObj"/> に対するコマンド（食べる・投げるなど）を選択するメニュー。
     /// </summary>
-    public class ObjCommandMenu : IListMenu
+    public class ObjCommandMenu : RogueMenuScreen
     {
         private readonly List<IObjCommand> commands;
-        private readonly List<object> selectOptions;
+        private readonly List<IListMenuSelectOption> selectOptions;
+        private readonly SummaryMenuScreen summaryMenuScreen = new();
+        private readonly DetailsMenuScreen detailsMenuScreen = new();
 
         public IListMenuSelectOption Summary { get; }
         public IListMenuSelectOption Details { get; }
 
+        private readonly CommandListViewTemplate<IListMenuSelectOption, RogueMenuManager, ReadOnlyMenuArg> view = new()
+        {
+        };
+
         public ObjCommandMenu()
         {
             commands = new List<IObjCommand>();
-            selectOptions = new List<object>();
+            selectOptions = new List<IListMenuSelectOption>();
 
-            Summary = new SummarySelectOption();
-            Details = new DetailsSelectOption();
+            Summary = ListMenuSelectOption.Create<RogueMenuManager, ReadOnlyMenuArg>("つよさ", (manager, arg) =>
+            {
+                manager.PushMenuScreen(summaryMenuScreen, arg.Self, targetObj: arg.Arg.TargetObj, other: arg.Arg.Other);
+            });
+            Details = ListMenuSelectOption.Create<RogueMenuManager, ReadOnlyMenuArg>("説明", (manager, arg) =>
+            {
+                manager.PushMenuScreen(detailsMenuScreen, arg);
+            });
         }
 
-        void IListMenu.OpenMenu(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+        public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
         {
-            var tool = arg.Tool;
-            RoguegardSettings.ObjCommandTable.GetCommands(self, tool, commands);
+            var tool = arg.Arg.Tool;
+            RoguegardSettings.ObjCommandTable.GetCommands(arg.Self, tool, commands);
             selectOptions.Clear();
             foreach (var command in commands)
             {
@@ -38,83 +51,57 @@ namespace RoguegardUnity
             }
             selectOptions.Add(Details);
             selectOptions.Add(ExitListMenuSelectOption.Instance);
-            manager.GetView(DeviceKw.MenuCommand).OpenView(SelectOptionPresenter.Instance, selectOptions, manager, self, user, arg);
-
-            var caption = manager.GetView(DeviceKw.MenuCaption);
-            caption.OpenView(null, Spanning<object>.Empty, null, null, null, new(other: tool.Main.InfoSet));
+            view.Show(selectOptions, manager, arg)
+                ?.ElementNameGetter((selectOption, manager, arg) =>
+                {
+                    return selectOption.GetName(manager, arg);
+                })
+                .OnClickElement((selectOption, manager, arg) =>
+                {
+                    selectOption.HandleClick(manager, arg);
+                })
+                .Build();
         }
 
-        private class SummarySelectOption : BaseListMenuSelectOption
+        private class SummaryMenuScreen : RogueMenuScreen
         {
-            public override string Name => "つよさ";
-
-            private Menu menu = new();
-
-            public override void Activate(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            private readonly DialogViewTemplate<RogueMenuManager, ReadOnlyMenuArg> view = new()
             {
-                var openArg = new RogueMethodArgument(targetObj: arg.TargetObj, other: arg.Other);
-                manager.OpenMenu(menu, self, null, openArg);
-                manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-            }
+            };
 
-            private class Menu : IListMenu
+            public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
             {
-                public void OpenMenu(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+                object target;
+                if (arg.Arg.TargetObj != null)
                 {
-                    var summary = (SummaryMenuView)manager.GetView(DeviceKw.MenuSummary);
-                    summary.OpenView(SelectOptionPresenter.Instance, Spanning<object>.Empty, manager, self, user, arg);
-                    ExitListMenuSelectOption.OpenLeftAnchorExit(manager);
-
-                    if (arg.TargetObj != null)
-                    {
-                        summary.SetObj(arg.TargetObj);
-                    }
-                    else if (arg.Other is IRogueTile tile)
-                    {
-                        summary.SetTile(tile);
-                    }
-                    else
-                    {
-                        summary.SetOther(arg);
-                    }
+                    target = arg.Arg.TargetObj;
                 }
+                else if (arg.Arg.Other is IRogueTile tile)
+                {
+                    target = tile;
+                }
+                else
+                {
+                    target = arg;
+                }
+
+                view.Show(target?.ToString(), manager, arg)
+                    ?.Build();
             }
         }
 
-        private class DetailsSelectOption : IListMenuSelectOption
+        private class DetailsMenuScreen : RogueMenuScreen
         {
-            private static readonly Menu nextMenu = new Menu();
-
-            string IListMenuSelectOption.GetName(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            private readonly DialogViewTemplate<RogueMenuManager, ReadOnlyMenuArg> view = new()
             {
-                if (arg.Tool?.Main.InfoSet.Details == null) return "<#808080>説明";
-                else return "説明";
-            }
+            };
 
-            void IListMenuSelectOption.Activate(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
             {
-                if (arg.Tool?.Main.InfoSet.Details == null)
-                {
-                    manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Cancel);
-                    return;
-                }
+                var details = (arg.Arg.Tool ?? arg.Arg.TargetObj).Main.InfoSet.Details?.ToString();
 
-                manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-                manager.OpenMenu(nextMenu, self, user, arg);
-            }
-
-            private class Menu : IListMenu
-            {
-                private static readonly object[] elms = new object[0];
-
-                public void OpenMenu(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-                {
-                    var details = (DetailsMenuView)manager.GetView(DeviceKw.MenuDetails);
-                    details.OpenView(SelectOptionPresenter.Instance, elms, manager, self, user, arg);
-                    Debug.Log(arg.TargetObj + " , " + arg.Tool);
-                    details.SetObj(arg.Tool ?? arg.TargetObj);
-                    ExitListMenuSelectOption.OpenLeftAnchorExit(manager);
-                }
+                view.Show(details, manager, arg)
+                    ?.Build();
             }
         }
     }

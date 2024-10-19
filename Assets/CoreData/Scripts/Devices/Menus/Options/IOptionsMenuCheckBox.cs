@@ -6,10 +6,10 @@ namespace Roguegard.Device
 {
     public interface IOptionsMenuCheckBox
     {
-        string GetName(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg);
+        string GetName(RogueMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg);
 
-        bool GetValue(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg);
+        bool GetValue(RogueMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg);
 
-        void SetValue(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg, bool value);
+        void SetValue(RogueMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg, bool value);
     }
 }

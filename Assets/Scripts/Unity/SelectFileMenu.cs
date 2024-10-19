@@ -2,27 +2,57 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-using System.IO;
+using ListingMF;
 using Roguegard.Device;
 using Roguegard;
 
 namespace RoguegardUnity
 {
-    internal class SelectFileMenu : IListMenu
+    internal class SelectFileMenu : RogueMenuScreen
     {
         private readonly Presenter presenter;
 
-        private readonly List<object> objs = new();
+        private readonly List<RogueFile> objs = new();
         private readonly List<object> leftAnchorObjs = new();
 
-        private static readonly ImportSelectOption importSelectOption = new();
         private static readonly LoadingListMenu savingMenu = new LoadingListMenu("セーブ中…", "キャンセル", LoadingCancel);
         private static readonly LoadingListMenu loadingMenu = new LoadingListMenu("ロード中…", "キャンセル", LoadingCancel);
         private static readonly LoadingListMenu deletingMenu = new LoadingListMenu("削除中…", "キャンセル", LoadingCancel);
         private static readonly DialogListMenuSelectOption errorMsgDialog = new DialogListMenuSelectOption(("OK", ErrorMsgOK));
 
-        public delegate void SelectCallback(IListMenuManager manager, string path);
-        public delegate void AddCallback(IListMenuManager manager);
+        private SelectFileCommandMenu nextMenu;
+        private DialogListMenuSelectOption overwriteDialog;
+
+        public delegate void SelectCallback(RogueMenuManager manager, string path);
+        public delegate void AddCallback(RogueMenuManager manager);
+
+        private readonly ScrollViewTemplate<RogueFile, RogueMenuManager, ReadOnlyMenuArg> readView = new()
+        {
+            Title = ":Load",
+        };
+
+        private readonly ScrollViewTemplate<RogueFile, RogueMenuManager, ReadOnlyMenuArg> writeView = new()
+        {
+            Title = ":Save",
+            BackAnchorList = new IListMenuSelectOption[]
+            {
+                ListMenuSelectOption.Create<RogueMenuManager, ReadOnlyMenuArg>(":Import", (manager, arg) =>
+                {
+                    ShowSaving(manager);
+                    RogueFile.Import(StandardRogueDeviceSave.RootDirectory, errorMsg =>
+                    {
+                        if (errorMsg != null)
+                        {
+                            ShowErrorMsg(manager, errorMsg);
+                            return;
+                        }
+
+                        manager.Reopen();
+                    });
+                }),
+                ExitListMenuSelectOption.Instance,
+            }
+        };
 
         public SelectFileMenu(Type type, SelectCallback selectCallback, AddCallback addCallback = null)
         {
@@ -32,59 +62,99 @@ namespace RoguegardUnity
             presenter.addCallback = addCallback;
         }
 
-        public void OpenMenu(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+        public override void OpenScreen(in RogueMenuManager inManager, in ReadOnlyMenuArg inArg)
         {
+            var manager = inManager;
+            var arg = inArg;
             RogueFile.InitializeDirectory(StandardRogueDeviceSave.RootDirectory);
 
-            var filesArg = arg;
             StandardRogueDeviceSave.GetFiles(files =>
             {
                 objs.Clear();
                 if (presenter.addCallback != null) { objs.Add(null); }
                 objs.AddRange(files);
 
-                var scroll = manager.GetView(DeviceKw.MenuScroll);
-                scroll.OpenView(presenter, objs, manager, self, user, filesArg);
-                scroll.SetPosition(0f);
+                if (presenter.type == Type.Read)
+                {
+                    readView.Show(objs, manager, arg)
+                        ?.ElementNameGetter((file, manager, arg) =>
+                        {
+                            if (file == null) return ":+ New File";
 
-                var caption = manager.GetView(DeviceKw.MenuCaption);
-                caption.OpenView(
-                    SelectOptionPresenter.Instance, Spanning<object>.Empty, manager, null, null,
-                    new(other: presenter.type == Type.Read ? ":Load" : ":Save"));
+                            return file.Path.Substring(file.Path.LastIndexOf('/') + 1);
+                        })
+                        .OnClickElement((file, manager, arg) =>
+                        {
+                            if (file == null)
+                            {
+                                presenter.addCallback(manager);
+                            }
+                            else
+                            {
+                                if (nextMenu == null) { nextMenu = new SelectFileCommandMenu(presenter.selectCallback); }
 
-                leftAnchorObjs.Clear();
-                if (presenter.type == Type.Read) { leftAnchorObjs.Add(importSelectOption); }
-                leftAnchorObjs.Add(ExitListMenuSelectOption.Instance);
-                var leftAnchor = manager.GetView(DeviceKw.MenuLeftAnchor);
-                leftAnchor.OpenView(SelectOptionPresenter.Instance, leftAnchorObjs, manager, self, user, filesArg);
+                                manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+                                manager.PushMenuScreen(nextMenu, other: file.Path);
+                            }
+                        })
+                        .Build();
+                }
+                else // if (presenter.type == Type.Write)
+                {
+                    writeView.Show(objs, manager, arg)
+                        ?.ElementNameGetter((file, manager, arg) =>
+                        {
+                            if (file == null) return ":+ New File";
+
+                            return file.Path.Substring(file.Path.LastIndexOf('/') + 1);
+                        })
+                        .OnClickElement((file, manager, arg) =>
+                        {
+                            if (file == null)
+                            {
+                                presenter.addCallback(manager);
+                            }
+                            else
+                            {
+                                if (overwriteDialog == null) { overwriteDialog = new DialogListMenuSelectOption((":Overwrite", presenter.Yes)).AppendExit(); }
+
+                                manager.AddInt(DeviceKw.StartTalk, 0);
+                                manager.AddObject(DeviceKw.AppendText, ":OverwriteMsg::1");
+                                manager.AddObject(DeviceKw.AppendText, RogueFile.GetName(file.Path));
+                                manager.AddInt(DeviceKw.WaitEndOfTalk, 0);
+                                manager.PushMenuScreen(overwriteDialog.menuScreen, other: file.Path);
+                            }
+                        })
+                        .Build();
+                }
             });
         }
 
-        public static void ShowSaving(IListMenuManager manager)
+        public static void ShowSaving(RogueMenuManager manager)
         {
-            manager.OpenMenuAsDialog(savingMenu, null, null, RogueMethodArgument.Identity);
+            manager.PushMenuScreen(savingMenu);
         }
 
-        public static void ShowLoading(IListMenuManager manager)
+        public static void ShowLoading(RogueMenuManager manager)
         {
-            manager.OpenMenuAsDialog(loadingMenu, null, null, RogueMethodArgument.Identity);
+            manager.PushMenuScreen(loadingMenu);
         }
 
-        public static void ShowDeleting(IListMenuManager manager)
+        public static void ShowDeleting(RogueMenuManager manager)
         {
-            manager.OpenMenuAsDialog(deletingMenu, null, null, RogueMethodArgument.Identity);
+            manager.PushMenuScreen(deletingMenu);
         }
 
-        private static void LoadingCancel(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+        private static void LoadingCancel(RogueMenuManager manager, ReadOnlyMenuArg arg)
         {
             manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
         }
 
-        public static void ReopenCallback(IListMenuManager manager, string errorMsg)
+        public static void ReopenCallback(RogueMenuManager manager, string errorMsg)
         {
             if (errorMsg != null)
             {
-                manager.Back();
+                manager.HandleClickBack();
                 ShowErrorMsg(manager, errorMsg);
                 return;
             }
@@ -92,7 +162,7 @@ namespace RoguegardUnity
             manager.Reopen();
         }
 
-        public static void ShowErrorMsg(IListMenuManager manager, string errorMsg)
+        public static void ShowErrorMsg(RogueMenuManager manager, string errorMsg)
         {
             manager.AddInt(DeviceKw.StartTalk, 0);
             manager.AddObject(DeviceKw.AppendText, ":An error has occurred.");
@@ -100,88 +170,26 @@ namespace RoguegardUnity
             manager.AddObject(DeviceKw.AppendText, errorMsg);
             manager.AddObject(DeviceKw.AppendText, ")");
             manager.AddInt(DeviceKw.WaitEndOfTalk, 0);
-            manager.OpenMenuAsDialog(errorMsgDialog, null, null, RogueMethodArgument.Identity);
+            manager.PushMenuScreen(errorMsgDialog.menuScreen);
         }
 
-        private static void ErrorMsgOK(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+        private static void ErrorMsgOK(IListMenuManager manager, ReadOnlyMenuArg arg)
         {
-            manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-            manager.Back();
+            manager.HandleClickBack();
         }
 
-        private class Presenter : IElementPresenter
+        private class Presenter
         {
             public Type type;
             public SelectCallback selectCallback;
             public AddCallback addCallback;
 
-            private SelectFileCommandMenu nextMenu;
-            private DialogListMenuSelectOption overwriteDialog;
-
-            public string GetItemName(object element, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                if (element == null) return ":+ New File";
-                
-                var file = (RogueFile)element;
-                return file.Path.Substring(file.Path.LastIndexOf('/') + 1);
-            }
-
-            public void ActivateItem(object element, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                if (element == null)
-                {
-                    addCallback(manager);
-                }
-                else
-                {
-                    var file = (RogueFile)element;
-                    if (type == Type.Write)
-                    {
-                        if (overwriteDialog == null) { overwriteDialog = new DialogListMenuSelectOption((":Overwrite", Yes)).AppendExit(); }
-
-                        manager.AddInt(DeviceKw.StartTalk, 0);
-                        manager.AddObject(DeviceKw.AppendText, ":OverwriteMsg::1");
-                        manager.AddObject(DeviceKw.AppendText, RogueFile.GetName(file.Path));
-                        manager.AddInt(DeviceKw.WaitEndOfTalk, 0);
-                        manager.OpenMenuAsDialog(overwriteDialog, null, null, new(other: file.Path));
-                    }
-                    else
-                    {
-                        if (nextMenu == null) { nextMenu = new SelectFileCommandMenu(selectCallback); }
-
-                        manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-                        manager.OpenMenuAsDialog(nextMenu, null, null, new(other: file.Path));
-                    }
-                }
-            }
-
-            private void Yes(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public void Yes(RogueMenuManager manager, ReadOnlyMenuArg arg)
             {
                 manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
 
                 // セーブデータを上書き
-                selectCallback(manager, (string)arg.Other);
-            }
-        }
-
-        private class ImportSelectOption : BaseListMenuSelectOption
-        {
-            public override string Name => ":Import";
-
-            public override void Activate(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-                ShowSaving(manager);
-                RogueFile.Import(StandardRogueDeviceSave.RootDirectory, errorMsg =>
-                {
-                    if (errorMsg != null)
-                    {
-                        ShowErrorMsg(manager, errorMsg);
-                        return;
-                    }
-
-                    manager.Reopen();
-                });
+                selectCallback(manager, (string)arg.Arg.Other);
             }
         }
 

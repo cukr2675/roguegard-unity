@@ -3,21 +3,29 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using System.Linq;
+using ListingMF;
 
 namespace Roguegard.Device
 {
-    public class DialogListMenuSelectOption : BaseListMenuSelectOption, IListMenu
+    public class DialogListMenuSelectOption : BaseListMenuSelectOption
     {
-        public override string Name { get; }
-
         private readonly string message;
         private readonly IListMenuSelectOption[] selectOptions;
+        public readonly MenuScreen menuScreen;
 
         private DialogListMenuSelectOption(string name, string message, IEnumerable<IListMenuSelectOption> selectOptions)
         {
             Name = name;
-            this.message = message;
-            this.selectOptions = selectOptions?.ToArray() ?? new IListMenuSelectOption[0];
+            menuScreen = new MenuScreen()
+            {
+                message = message ?? "    ",
+                selectOptions = selectOptions?.ToArray() ?? new IListMenuSelectOption[0],
+            };
+
+            HandleClick = (manager, arg) =>
+            {
+                manager.PushMenuScreen(menuScreen, arg);
+            };
         }
 
         private DialogListMenuSelectOption(string name, string message, params IListMenuSelectOption[] selectOptions)
@@ -25,12 +33,12 @@ namespace Roguegard.Device
         {
         }
 
-        public DialogListMenuSelectOption(params (string, ListMenuAction)[] selectOptions)
+        public DialogListMenuSelectOption(params (string, HandleClickAction)[] selectOptions)
         {
             this.selectOptions = selectOptions?.Select(x => new ActionListMenuSelectOption(x.Item1, x.Item2)).ToArray() ?? new ActionListMenuSelectOption[0];
         }
 
-        public DialogListMenuSelectOption(string name, string message, params (string, ListMenuAction)[] selectOptions)
+        public DialogListMenuSelectOption(string name, string message, params (string, HandleClickAction)[] selectOptions)
         {
             Name = name;
             this.message = message;
@@ -43,32 +51,14 @@ namespace Roguegard.Device
             return selectOption;
         }
 
-        public override void Activate(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-        {
-            manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-            manager.OpenMenuAsDialog(this, self, user, arg);
-        }
-
-        void IListMenu.OpenMenu(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-        {
-            if (message != null)
-            {
-                manager.AddInt(DeviceKw.StartTalk, 0);
-                manager.AddObject(DeviceKw.AppendText, message);
-                manager.AddInt(DeviceKw.WaitEndOfTalk, 0);
-            }
-
-            manager.GetView(DeviceKw.MenuTalkSelect).OpenView(SelectOptionPresenter.Instance, selectOptions, manager, self, user, arg);
-        }
-
-        public static DialogListMenuSelectOption CreateExit(ListMenuAction saveAction, ListMenuAction notSaveAction = null)
+        public static DialogListMenuSelectOption CreateExit(HandleClickAction saveAction, HandleClickAction notSaveAction = null)
         {
             var selectOption = CreateExit(":Exit", ":ExitMsg", ":Overwrite", saveAction, ":DontSave", notSaveAction);
             return selectOption;
         }
 
         public static DialogListMenuSelectOption CreateExit(
-            string name, string message, string saveName, ListMenuAction saveAction, string notSaveName, ListMenuAction notSaveAction)
+            string name, string message, string saveName, HandleClickAction saveAction, string notSaveName, HandleClickAction notSaveAction)
         {
             var selectOption = new DialogListMenuSelectOption(
                 name, message,
@@ -81,12 +71,28 @@ namespace Roguegard.Device
             return selectOption;
         }
 
-        private static void NotSave(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+        private static void NotSave(IListMenuManager manager, ReadOnlyMenuArg arg)
         {
             // ‰½‚à‚¹‚¸•Â‚¶‚é
-            manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Cancel);
-            manager.Back();
-            manager.Back();
+            manager.HandleClickBack();
+            manager.HandleClickBack();
+        }
+
+        public class MenuScreen : RogueMenuScreen
+        {
+            public string message;
+            public IListMenuSelectOption[] selectOptions;
+
+            private readonly SpeechBoxViewTemplate<RogueMenuManager, ReadOnlyMenuArg> view = new()
+            {
+            };
+
+            public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
+            {
+                view.Show(message, manager, arg)
+                    ?.AppendRange(selectOptions)
+                    .Build();
+            }
         }
     }
 }

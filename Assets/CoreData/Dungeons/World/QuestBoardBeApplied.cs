@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using ListingMF;
 using Roguegard.Device;
 using Roguegard.CharacterCreation;
 
@@ -37,12 +38,16 @@ namespace Roguegard
             return 0;
         }
 
-        public class RogueMenu : IListMenu
+        public class RogueMenu : RogueMenuScreen
         {
-            private static readonly Presenter presenter = new Presenter();
-            private static readonly List<object> elms = new List<object>();
+            private static readonly List<DungeonQuest> elms = new List<DungeonQuest>();
+            private static readonly QuestViewMenu nextMenu = new QuestViewMenu();
 
-            public void OpenMenu(IListMenuManager manager, RogueObj player, RogueObj user, in RogueMethodArgument arg)
+            private readonly ScrollViewTemplate<DungeonQuest, RogueMenuManager, ReadOnlyMenuArg> view = new()
+            {
+            };
+
+            public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
             {
                 elms.Clear();
                 for (int i = 0; i < 4; i++)
@@ -51,37 +56,31 @@ namespace Roguegard
                     elms.Add(quest);
                 }
 
-                var scroll = manager.GetView(DeviceKw.MenuScroll);
-                scroll.OpenView(presenter, elms, manager, player, null, RogueMethodArgument.Identity);
-                ExitListMenuSelectOption.OpenLeftAnchorExit(manager);
+                view.Show(elms, manager, arg)
+                    ?.ElementNameGetter((quest, manager, arg) =>
+                    {
+                        return quest.Caption;
+                    })
+                    .OnClickElement((quest, manager, arg) =>
+                    {
+                        manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+                        manager.PushMenuScreen(nextMenu, arg.Self, other: quest);
+                    })
+                    .Build();
             }
 
-            private class Presenter : IElementPresenter
+            private class QuestViewMenu : RogueMenuScreen
             {
-                private static readonly QuestViewMenu nextMenu = new QuestViewMenu();
-
-                public string GetItemName(object element, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+                private readonly DialogViewTemplate<RogueMenuManager, ReadOnlyMenuArg> view = new()
                 {
-                    return ((DungeonQuest)element).Caption;
-                }
+                };
 
-                public void ActivateItem(object element, IListMenuManager manager, RogueObj player, RogueObj user, in RogueMethodArgument arg)
+                public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
                 {
-                    var quest = (DungeonQuest)element;
+                    var quest = (DungeonQuest)arg.Arg.Other;
 
-                    manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-                    manager.OpenMenu(nextMenu, player, null, new(other: quest));
-                }
-            }
-
-            private class QuestViewMenu : IListMenu
-            {
-                public void OpenMenu(IListMenuManager manager, RogueObj player, RogueObj user, in RogueMethodArgument arg)
-                {
-                    var quest = (DungeonQuest)arg.Other;
-                    var summary = (IDungeonQuestMenuView)manager.GetView(DeviceKw.MenuSummary);
-                    summary.OpenView(SelectOptionPresenter.Instance, Spanning<object>.Empty, manager, player, null, RogueMethodArgument.Identity);
-                    summary.SetQuest(player, quest, true);
+                    view.Show(quest.Caption, manager, arg)
+                        ?.Build();
                 }
             }
         }

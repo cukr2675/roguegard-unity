@@ -7,6 +7,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using MoonSharp.Interpreter;
 using MoonSharp.Interpreter.Interop;
+using ListingMF;
 using Roguegard.Extensions;
 using Roguegard.Device;
 
@@ -260,13 +261,13 @@ return {
                         var length = value.IndexOf('}', i) - i;
                         if (value[i + 1] == '>')
                         {
-                            stringBuilder.Append('\t');
+                            stringBuilder.Append("<link=\"HorizontalArrow\"></link>");
                             i += length;
                             continue;
                         }
                         if (value[i + 1] == 'v')
                         {
-                            stringBuilder.Append('\v');
+                            stringBuilder.Append("<link=\"VerticalArrow\"></link><link=\"PageBreak\"></link>");
                             i += length;
                             if (value[i + 1] == '\r' || value[i + 1] == '\n') break;
                             continue;
@@ -464,29 +465,26 @@ return {
             }
         }
 
-        private class SelectMenu : IListMenu, IElementPresenter
+        private class SelectMenu : RogueMenuScreen
         {
             public global::MoonSharp.Interpreter.Coroutine coroutine;
             public List<string> selectOptions = new();
             private static readonly DynValue[] args = new DynValue[1];
 
-            public void OpenMenu(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            private readonly CommandListViewTemplate<string, RogueMenuManager, ReadOnlyMenuArg> view = new()
             {
-                var view = manager.GetView(DeviceKw.MenuTalkSelect);
-                view.OpenView<string>(this, selectOptions, manager, self, user, arg);
-            }
+            };
 
-            public string GetItemName(object element, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
             {
-                return (string)element;
-            }
-
-            public void ActivateItem(object element, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-                manager.Done();
-                args[0] = DynValue.NewNumber(selectOptions.IndexOf((string)element) + 1);
-                coroutine.Resume(args);
+                view.Show(selectOptions, manager, arg)
+                    ?.OnClickElement((selectOption, manager, arg) =>
+                    {
+                        manager.Done();
+                        args[0] = DynValue.NewNumber(selectOptions.IndexOf(selectOption) + 1);
+                        coroutine.Resume(args);
+                    })
+                    .Build();
             }
         }
     }

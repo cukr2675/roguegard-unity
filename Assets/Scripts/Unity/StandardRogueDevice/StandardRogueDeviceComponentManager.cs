@@ -151,7 +151,7 @@ namespace RoguegardUnity
 
                 // ロード画面表示
                 var synchronizeMenu = new SynchronizeMenu();
-                menuController.OpenInitialMenu(synchronizeMenu, null, null, RogueMethodArgument.Identity);
+                menuController.PushInitialMenuScreen(synchronizeMenu);
 
                 // ダミーのセーブポイントを設定して入力待機ループを素通りする
                 memberInfo.SavePoint = dummySavePoint;

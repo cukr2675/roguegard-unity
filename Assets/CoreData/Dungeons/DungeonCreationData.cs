@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using ListingMF;
 using Roguegard.Device;
 using Roguegard.Extensions;
 
@@ -44,7 +45,13 @@ namespace Roguegard.CharacterCreation
 
         public IListMenuSelectOption CreateDungeonSelectOption()
         {
-            return new MenuSelectOption(this);
+            var floorMenu = new FloorMenu() { data = this };
+            return ListMenuSelectOption.Create<RogueMenuManager, ReadOnlyMenuArg>(DescriptionName, (manager, arg) =>
+            {
+                manager.AddObject(DeviceKw.EnqueueSE, CategoryKw.DownStairs);
+                manager.Done();
+                RogueDevice.Primary.AddMenu(floorMenu.MenuScreen, arg.Self, arg.User, RogueMethodArgument.Identity);
+            });
         }
 
         public void StartDungeon(RogueObj player, IRogueRandom random)
@@ -116,38 +123,17 @@ namespace Roguegard.CharacterCreation
             Debug.LogError($"{name} ({nameof(DungeonCreationData)}) の {nameof(IOpenEffect)} に {nameof(DungeonOpen)} が設定されていません。");
         }
 
-        private class MenuSelectOption : BaseListMenuSelectOption
-        {
-            private readonly DungeonCreationData data;
-            private readonly FloorMenu floorMenu;
-
-            public override string Name => data.DescriptionName;
-
-            public MenuSelectOption(DungeonCreationData data)
-            {
-                this.data = data;
-                floorMenu = new FloorMenu() { data = data };
-            }
-
-            public override void Activate(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                manager.AddObject(DeviceKw.EnqueueSE, CategoryKw.DownStairs);
-                manager.Done();
-                RogueDevice.Primary.AddMenu(floorMenu, self, user, RogueMethodArgument.Identity);
-            }
-        }
-
         private class FloorMenu : FloorMenuAfterLoadRogueMethod
         {
             public DungeonCreationData data;
 
-            public override string GetName(IListMenuManager manager, RogueObj player, RogueObj empty, in RogueMethodArgument arg)
+            protected override string GetName(RogueMenuManager manager, RogueObj player, RogueObj empty, in RogueMethodArgument arg)
             {
                 var initialLevelText = DungeonInfo.GetLevelText(data._levelType, 1);
                 return $"{data.DescriptionName}\n{initialLevelText}";
             }
 
-            public override void Activate(IListMenuManager manager, RogueObj player, RogueObj empty, in RogueMethodArgument arg)
+            protected override void Activate(RogueMenuManager manager, RogueObj player, RogueObj empty, in RogueMethodArgument arg)
             {
                 data.StartDungeon(player, RogueRandom.Primary);
                 data.StartFloor(player, RogueRandom.Primary);

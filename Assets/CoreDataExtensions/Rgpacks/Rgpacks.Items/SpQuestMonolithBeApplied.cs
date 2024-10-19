@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using TMPro;
+using ListingMF;
 using Roguegard.CharacterCreation;
 using Roguegard.Extensions;
 using Roguegard.Device;
@@ -24,149 +25,102 @@ namespace Roguegard.Rgpacks
             return false;
         }
 
-        private class Menu : BaseScrollListMenu<object>
+        private class Menu : RogueMenuScreen
         {
-            private readonly object[] elms;
+            private readonly SpQuestMonolithBeApplied parent;
+
+            private readonly MainMenuViewTemplate<RogueMenuManager, ReadOnlyMenuArg> view = new()
+            {
+                PrimaryCommandSubViewName = StandardSubViewTable.ScrollName,
+            };
 
             public Menu(SpQuestMonolithBeApplied parent)
             {
-                elms = new object[]
-                {
-                    new ShotSelectOption() { parent = parent },
-                    new SetMainChartSelectOption(),
-                    new PlaytestSelectOption(),
-                    new LeaveSelectOption(),
-                };
+                this.parent = parent;
             }
 
-            protected override Spanning<object> GetList(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
             {
-                return elms;
+                view.Show(manager, arg)
+                    ?
+                    .Option("ショップ", new ShopScreen() { parent = parent })
+                    .Option("メインチャート設定", new SetMainChartScreen())
+                    .Option("テストプレイ", Playtest)
+                    .Option("アトリエから出る", Leave)
+                    .Build();
             }
 
-            protected override string GetItemName(object element, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            private static void Playtest(RogueMenuManager manager, ReadOnlyMenuArg arg)
             {
-                return SelectOptionPresenter.Instance.GetItemName(element, manager, self, user, arg);
-            }
-
-            protected override void ActivateItem(object element, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                SelectOptionPresenter.Instance.ActivateItem(element, manager, self, user, arg);
-            }
-        }
-
-        private class ShotSelectOption : BaseScrollListMenu<ScriptableStartingItem>, IListMenuSelectOption
-        {
-            public SpQuestMonolithBeApplied parent;
-
-            public string GetName(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-                => "ショップ";
-
-            public void Activate(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-                manager.OpenMenu(this, self, null, RogueMethodArgument.Identity);
-            }
-
-            protected override Spanning<ScriptableStartingItem> GetList(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                return parent._shopItems;
-            }
-
-            protected override string GetItemName(
-                ScriptableStartingItem startingItem, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                return startingItem.Name;
-            }
-
-            protected override void ActivateItem(
-                ScriptableStartingItem startingItem, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-                manager.AddObject(DeviceKw.AppendText, startingItem);
-                manager.AddObject(DeviceKw.AppendText, "を手に入れた\n");
-                startingItem.Option.CreateObj(startingItem, self, Vector2Int.zero, RogueRandom.Primary);
-            }
-        }
-
-        private class SetMainChartSelectOption : IListMenuSelectOption, IListMenu
-        {
-            private readonly object[] elms = new object[]
-            {
-                new AssetID(),
-            };
-
-            public string GetName(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-                => "メインチャート設定";
-
-            public void Activate(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-
-                var monolith = arg.Tool;
-                manager.OpenMenu(this, null, null, new(tool: monolith));
-            }
-
-            public void OpenMenu(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                var monolith = arg.Tool;
-
-                var options = manager.GetView(DeviceKw.MenuOptions);
-                options.OpenView(SelectOptionPresenter.Instance, elms, manager, null, null, new(tool: monolith));
-                options.SetPosition(0f);
-                ExitListMenuSelectOption.OpenLeftAnchorExit(manager);
-            }
-
-            private class AssetID : IOptionsMenuText
-            {
-                public TMP_InputField.ContentType ContentType => TMP_InputField.ContentType.Standard;
-
-                public string GetName(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-                    => "アセットID";
-
-                public string GetValue(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-                {
-                    var monolith = arg.Tool;
-                    var info = SpQuestMonolithInfo.Get(monolith);
-                    return info.MainChart;
-                }
-
-                public void SetValue(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg, string value)
-                {
-                    var monolith = arg.Tool;
-                    var info = SpQuestMonolithInfo.Get(monolith);
-                    info.MainChart = value;
-                }
-            }
-        }
-
-        private class PlaytestSelectOption : IListMenuSelectOption
-        {
-            public string GetName(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-                => "テストプレイ";
-
-            public void Activate(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            {
-                var monolith = arg.Tool;
+                var monolith = arg.Arg.Tool;
                 var spQuestAtelier = monolith.Location;
                 var rgpack = Rgpacker.Pack(spQuestAtelier);
                 RogueDevice.Add(DeviceKw.StartPlaytest, rgpack);
             }
-        }
 
-        private class LeaveSelectOption : IListMenuSelectOption
-        {
-            public string GetName(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-                => "アトリエから出る";
-
-            public void Activate(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            private static void Leave(RogueMenuManager manager, ReadOnlyMenuArg arg)
             {
                 manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
                 manager.AddObject(DeviceKw.EnqueueSE, CategoryKw.DownStairs);
-                default(IActiveRogueMethodCaller).LocateSavePoint(self, null, 0f, RogueWorldSavePointInfo.Instance, true);
-                var memberInfo = LobbyMemberList.GetMemberInfo(self);
+                default(IActiveRogueMethodCaller).LocateSavePoint(arg.Self, null, 0f, RogueWorldSavePointInfo.Instance, true);
+                var memberInfo = LobbyMemberList.GetMemberInfo(arg.Self);
                 memberInfo.SavePoint = RogueWorldSavePointInfo.Instance;
                 manager.Done();
+            }
+        }
+
+        private class ShopScreen : RogueMenuScreen
+        {
+            public SpQuestMonolithBeApplied parent;
+
+            private readonly ScrollViewTemplate<ScriptableStartingItem, RogueMenuManager, ReadOnlyMenuArg> view = new()
+            {
+            };
+
+            public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
+            {
+                var list = parent._shopItems;
+
+                view.Show(list, manager, arg)
+                    ?.ElementNameGetter((item, manager, arg) =>
+                    {
+                        return item.Name;
+                    })
+                    .OnClickElement((item, manager, arg) =>
+                    {
+                        manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+                        manager.AddObject(DeviceKw.AppendText, item);
+                        manager.AddObject(DeviceKw.AppendText, "を手に入れた\n");
+                        item.Option.CreateObj(item, arg.Self, Vector2Int.zero, RogueRandom.Primary);
+                    })
+                    .Build();
+            }
+        }
+
+        private class SetMainChartScreen : RogueMenuScreen
+        {
+            private readonly DialogViewTemplate<RogueMenuManager, ReadOnlyMenuArg> view = new()
+            {
+                DialogSubViewName = StandardSubViewTable.WidgetsName,
+            };
+
+            public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
+            {
+                view.Show("", manager, arg)
+                    ?.Append(InputFieldViewWidget.CreateOption<RogueMenuManager, ReadOnlyMenuArg>(
+                        (manager, arg) =>
+                        {
+                            var monolith = arg.Arg.Tool;
+                            var info = SpQuestMonolithInfo.Get(monolith);
+                            return info.MainChart;
+                        },
+                        (manager, arg, value) =>
+                        {
+                            var monolith = arg.Arg.Tool;
+                            var info = SpQuestMonolithInfo.Get(monolith);
+                            info.MainChart = value;
+                        }))
+                    .Build();
             }
         }
     }
