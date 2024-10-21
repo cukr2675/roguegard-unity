@@ -277,7 +277,7 @@ namespace Save2IDB
             public string destPath = null;
             public int size = 0;
             public string type = null;
-            public System.DateTime lastModifiedDate = System.DateTime.MinValue;
+            public System.DateTime lastModified = System.DateTime.MinValue;
         }
     }
 }

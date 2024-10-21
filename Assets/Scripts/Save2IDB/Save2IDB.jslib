@@ -41,7 +41,7 @@ const Save2IDBPlugin = {
         },
 
         getStatsJson: (files) => {
-            const stats = files.map(({ name, destPath, size, type, lastModifiedDate }) => ({ name, destPath, size, type, lastModifiedDate }));
+            const stats = files.map(({ name, destPath, size, type, lastModified }) => ({ name, destPath, size, type, lastModified: new Date(lastModified) }));
             return JSON.stringify({ vs: stats }); // Convert to object because JsonUtility.FromJson cannot parse array.
         },
         
@@ -96,6 +96,7 @@ const Save2IDBPlugin = {
             for (const file of files) {
                 const buffer = await file.arrayBuffer();
                 FS.writeFile(file.destPath, new Uint8Array(buffer));
+                FS.utime(file.destPath, file.lastModified, file.lastModified);
             }
             FS.syncfs(() => {});
 
