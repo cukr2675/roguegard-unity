@@ -12,7 +12,9 @@ namespace ListingMF
 
         void HideAll(bool back);
 
-        void PushMenuScreen(IMenuScreen menuScreen, IListMenuArg arg);
+        string Localize(string text);
+
+        void PushMenuScreenExtension(object menuScreen, IListMenuArg arg);
 
         void HandleClickBack();
 

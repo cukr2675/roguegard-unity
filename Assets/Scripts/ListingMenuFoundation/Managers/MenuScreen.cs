@@ -7,7 +7,7 @@ namespace ListingMF
     /// <summary>
     /// メニューの画面単位のクラス
     /// </summary>
-    public abstract class MenuScreen<TMgr, TArg> : IMenuScreen
+    public abstract class MenuScreen<TMgr, TArg>
         where TMgr : IListMenuManager
         where TArg : IListMenuArg
     {
@@ -16,17 +16,14 @@ namespace ListingMF
         // ViewTemplate クラスのメソッドチェーンで誤って使用しないように in 引数にする
         public abstract void OpenScreen(in TMgr manager, in TArg arg);
 
-        public virtual void CloseScreen(in TMgr manager, bool back)
+        public virtual void CloseScreen(TMgr manager, bool back)
         {
             manager.HideAll(back);
         }
 
-        void IMenuScreen.OpenScreen(IListMenuManager manager, IListMenuArg arg)
+        public static implicit operator HandleClickElement<TMgr, TArg>(MenuScreen<TMgr, TArg> menuScreen)
         {
-            if (LMFAssert.Type<TMgr>(manager, out var tMgr, manager) ||
-                LMFAssert.Type<TArg>(arg, out var tArg, manager)) return;
-
-            OpenScreen(tMgr, tArg);
+            return (manager, arg) => manager.PushMenuScreenExtension(menuScreen, arg);
         }
     }
 }

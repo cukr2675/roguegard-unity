@@ -23,11 +23,8 @@ namespace RoguegardUnity
 
         [Space]
 
+        [SerializeField] private MenuController _menuController = null;
         [SerializeField] private TMP_Text _versionText = null;
-        [SerializeField] private Image _background = null;
-        [SerializeField] private Image _logo = null;
-        [SerializeField] private GridSubView _titleMenu = null;
-        [SerializeField] private TitleCredit _creditMenu = null;
 
         [Space]
 
@@ -42,19 +39,15 @@ namespace RoguegardUnity
         private AudioSource bgmAudioSourcePrefab;
         private StandardRogueDeviceInspector runtimeInspectorPrefab;
 
-        private MenuController menuController;
-
-        public void Initialize(
+        public void Show(
             RogueSpriteRendererPool spriteRendererPool,
-            MenuController menuControllerPrefab,
             RogueTilemapRenderer tilemapRendererPrefab,
             TouchController touchControllerPrefab,
             SoundTable soundTable,
             AudioMixer audioMixer,
             AudioSource seAudioSourcePrefab,
             AudioSource bgmAudioSourcePrefab,
-            StandardRogueDeviceInspector runtimeInspectorPrefab,
-            Sprite logo)
+            StandardRogueDeviceInspector runtimeInspectorPrefab)
         {
             this.spriteRendererPool = spriteRendererPool;
             this.tilemapRendererPrefab = tilemapRendererPrefab;
@@ -66,34 +59,35 @@ namespace RoguegardUnity
             this.runtimeInspectorPrefab = runtimeInspectorPrefab;
             DontDestroyOnLoad(spriteRendererPool.gameObject);
 
-            menuController = Instantiate(menuControllerPrefab);
             var soundController = new SoundController();
             soundController.Open(null, seAudioSourcePrefab, soundTable);
-            menuController.Initialize(soundController, spriteRendererPool, false);
+            _menuController.Initialize(soundController, spriteRendererPool, false);
 
-            _logo.sprite = logo;
-            _logo.SetNativeSize();
+            _menuController.OnError += () =>
+            {
+                // 例外発生時はメニューを開きなおす（操作不能になる可能性があるため）
+                _menuController.PushInitialMenuScreen(new MainScreen(this), enableTouchMask: false);
+            };
 
-            _creditMenu.Initialize();
             _versionText.text = Application.version;
-            _background.sprite = CoreTiles1.Grass.Icon;
-            var backgroundColor = CoreTiles1.Grass.Color;
-            backgroundColor.a = .375f;
-            _background.color = backgroundColor;
             WindowFrameList.GetWindowFrame(0, out var backgroundA, out var backgroundB);
             var windowColor = ColorPreset.GetColor(0);
             SetBackgroundSprite(backgroundA, backgroundB, windowColor);
-            menuController.SetWindowFrame(backgroundA, backgroundB, windowColor);
+            _menuController.SetWindowFrame(backgroundA, backgroundB, windowColor);
 
-            _titleMenu.Initialize();
-
-            menuController.PushInitialMenuScreen(new MainMenu(this), enableTouchMask: false);
+            _menuController.PushInitialMenuScreen(new MainScreen(this), enableTouchMask: false);
         }
 
         private void Update()
         {
             var deltaTime = 1;
-            menuController.EventManager.UpdateUI(deltaTime);
+            _menuController.EventManager.UpdateUI(deltaTime);
+
+            if (_menuController.IsDone)
+            {
+                _menuController.ResetDone();
+                _menuController.PushInitialMenuScreen(new MainScreen(this), enableTouchMask: false);
+            }
         }
 
         private void SetBackgroundSprite(Sprite sprite, Sprite spriteB, Color backgroundColor)
@@ -119,100 +113,62 @@ namespace RoguegardUnity
                 soundTable, audioMixer, seAudioSourcePrefab, bgmAudioSourcePrefab, runtimeInspectorPrefab);
         }
 
-        private class MainMenu : RogueMenuScreen
+        private class MainScreen : RogueMenuScreen
         {
             private readonly TitleMenu parent;
-            private readonly object[] elms;
+            private readonly MainMenuViewTemplate<RogueMenuManager, ReadOnlyMenuArg> view;
 
-            private IElementsSubViewStateProvider subViewStateProvider;
-
-            public MainMenu(TitleMenu parent)
+            public MainScreen(TitleMenu parent)
             {
                 this.parent = parent;
-                var nextMenu = new PlayMenu(parent);
-                var creditMenu = new CreditMenu() { parent = parent };
-                elms = new object[]
+
+                view = new()
                 {
-                    ListMenuSelectOption.Create<RogueMenuManager, ReadOnlyMenuArg>(":Play", (manager, arg) =>
-                    {
-                        manager.PushMenuScreen(nextMenu.selectFileMenu);
-                    }),
-                    ListMenuSelectOption.Create<RogueMenuManager, ReadOnlyMenuArg>(":Credit", (manager, arg) =>
-                    {
-                        manager.PushMenuScreen(creditMenu);
-                    }),
+                    PrimaryCommandSubViewName = MenuController.TitleMenuName,
                 };
             }
 
             public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
             {
-                parent._titleMenu.Show(elms, SelectOptionHandler.Instance, manager, arg, ref subViewStateProvider);
+                view.Show(manager, arg)
+                    ?
+                    .VariableOnce(out var newGameMenu, new NewGameScreen(parent))
+                    .VariableOnce(out var loadScreen, new LoadScreen(parent))
+
+                    .Option(":Play", SelectFileMenuScreen.Load(
+                        onSelectFile: (fileInfo, manager, arg) =>
+                        {
+                            manager.HandleClickBack();
+                            manager.PushMenuScreen(loadScreen, other: fileInfo.FullName);
+                        },
+                        onNewFile: (manager, arg) =>
+                        {
+                            var builder = RoguegardSettings.CharacterCreationDatabase.LoadPreset(0);
+                            RogueRandom.Primary = new RogueRandom();
+                            MessageWorkListener.ClearListeners();
+                            MessageWorkListener.AddListener(new DeviceMessageWorkListener());
+                            var player = builder.CreateObj(null, Vector2Int.zero, RogueRandom.Primary);
+                            manager.PushMenuScreen(newGameMenu, player, null, other: builder);
+                        }))
+
+                    .Option(":Credit", new CreditMenu() { parent = parent })
+
+                    .Build();
             }
         }
 
-        private class PlayMenu : RogueMenuScreen
-        {
-            private readonly TitleMenu parent;
-            private readonly NewGameMenu nextMenu;
-            public readonly SelectFileMenu selectFileMenu;
-
-            public PlayMenu(TitleMenu parent)
-            {
-                this.parent = parent;
-                nextMenu = new NewGameMenu(parent);
-
-                selectFileMenu = new SelectFileMenu(SelectFileMenu.Type.Read, (root, path) =>
-                {
-                    root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-                    root.HandleClickBack();
-                    SelectFileMenu.ShowLoading(root);
-
-                    FadeCanvas.FadeWithLoadScene($"{parent._nextSceneAddress}", () => Loaded(path));
-                },
-                (root) =>
-                {
-                    root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-
-                    var builder = RoguegardSettings.CharacterCreationDatabase.LoadPreset(0);
-                    RogueRandom.Primary = new RogueRandom();
-                    MessageWorkListener.ClearListeners();
-                    MessageWorkListener.AddListener(new DeviceMessageWorkListener());
-                    var player = builder.CreateObj(null, Vector2Int.zero, RogueRandom.Primary);
-                    root.PushMenuScreen(nextMenu, player, null, other: builder);
-                });
-            }
-
-            public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
-            {
-                manager.PushMenuScreen(selectFileMenu, arg);
-            }
-
-            private void Loaded(string path)
-            {
-                StandardRogueDevice device;
-                using (var stream = RogueFile.OpenRead(path))
-                {
-                    var name = RogueFile.GetName(path);
-                    var save = new StandardRogueDeviceSave();
-                    device = RogueDevice.LoadGame(save, stream);
-                    stream.Close();
-                }
-                parent.OpenDevice(device);
-            }
-        }
-
-        private class NewGameMenu : RogueMenuScreen
+        private class NewGameScreen : RogueMenuScreen
         {
             private readonly TitleMenu parent;
             private readonly object[] elms;
 
-            public NewGameMenu(TitleMenu parent)
+            public NewGameScreen(TitleMenu parent)
             {
                 this.parent = parent;
                 elms = new object[]
                 {
-                        DialogListMenuSelectOption.CreateExit(
-                            ":Done", ":DoneMsg", ":SaveAndStart", SaveAndStart, ":QuitWithoutSaving", null)
+                    ChoicesMenuScreen.CreateExit(
+                        ":DoneMsg", ":SaveAndStart", SaveAndStart, ":QuitWithoutSaving", null)
                 };
             }
 
@@ -238,9 +194,52 @@ namespace RoguegardUnity
             }
         }
 
+        private class LoadScreen : RogueMenuScreen
+        {
+            private readonly TitleMenu parent;
+            private readonly FadeOutInViewTemplate<RogueMenuManager, ReadOnlyMenuArg> view;
+
+            public LoadScreen(TitleMenu parent)
+            {
+                this.parent = parent;
+
+                view = new()
+                {
+                };
+            }
+
+            public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
+            {
+                view.FadeOut(manager, arg)
+                    ?
+                    .OnFadeOutCompleted((manager, arg) =>
+                    {
+                        var path = (string)arg.Arg.Other;
+
+                        var loadSceneOperation = Addressables.LoadSceneAsync(parent._nextSceneAddress, activateOnLoad: true);
+                        loadSceneOperation.Completed += _ =>
+                        {
+                            StandardRogueDevice device;
+                            using (var stream = RogueFile.OpenRead(path))
+                            {
+                                var name = RogueFile.GetName(path);
+                                var save = new StandardRogueDeviceSave();
+                                device = RogueDevice.LoadGame(save, stream);
+                                stream.Close();
+                            }
+                            parent.OpenDevice(device);
+                        };
+                    })
+
+                    .Build();
+            }
+        }
+
         private class CreditMenu : RogueMenuScreen
         {
             public TitleMenu parent;
+
+            private readonly CreditDetailsScreen nextScreen = new();
 
             private readonly ScrollViewTemplate<CreditData, RogueMenuManager, ReadOnlyMenuArg> view = new()
             {
@@ -250,15 +249,72 @@ namespace RoguegardUnity
             public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
             {
                 view.Show(parent._credits, manager, arg)
-                    ?.ElementNameGetter((credit, manager, arg) =>
+                    ?
+                    .ElementNameFrom((credit, manager, arg) =>
                     {
                         return credit.Name;
                     })
+
                     .OnClickElement((credit, manager, arg) =>
                     {
-                        parent._creditMenu.Show(credit, manager);
+                        manager.PushMenuScreen(nextScreen, other: credit);
+                        //parent._creditMenu.Show(credit, manager);
                     })
+
                     .Build();
+            }
+        }
+
+        private class CreditDetailsScreen : RogueMenuScreen
+        {
+            private readonly URLDialog nextScreen = new();
+
+            private readonly DialogViewTemplate<RogueMenuManager, ReadOnlyMenuArg> view = new()
+            {
+                DialogSubViewName = StandardSubViewTable.WidgetsName,
+                BackAnchorSubViewName = StandardSubViewTable.BackAnchorName,
+            };
+
+            public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
+            {
+                var credit = (CreditData)arg.Arg.Other;
+
+                view.Show(credit.Details, manager, arg)
+                    ?
+                    .OnClickLink((manager, arg, link) =>
+                    {
+                        manager.PushMenuScreen(nextScreen, other: link);
+                    })
+
+                    .Build();
+            }
+
+            private class URLDialog : RogueMenuScreen
+            {
+                private readonly SpeechBoxViewTemplate<RogueMenuManager, ReadOnlyMenuArg> view = new()
+                {
+                };
+
+                public override bool IsIncremental => true;
+
+                public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
+                {
+                    var url = (string)arg.Arg.Other;
+                    view.Show($"{url} へ移動しますか？", manager, arg)
+                        ?.Option(":Yes", (manager, arg) =>
+                        {
+                            var url = (string)arg.Arg.Other;
+                            manager.HandleClickBack();
+                            Application.OpenURL(url);
+                        })
+                        .Exit()
+                        .Build();
+                }
+
+                public override void CloseScreen(RogueMenuManager manager, bool back)
+                {
+                    view.HideSubViews(manager, back);
+                }
             }
         }
     }

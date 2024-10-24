@@ -13,8 +13,8 @@ namespace RoguegardUnity
     {
         private readonly StandardRogueDeviceComponentManager componentManager;
         private readonly TouchController touchController;
-        private readonly SelectFileMenu writeFileMenu;
-        private readonly SelectFileMenu readFileMenu;
+        private readonly SelectFileMenuScreen writeFileMenu;
+        private readonly SelectFileMenuScreen readFileMenu;
         private readonly AutoSaveMenu autoSaveMenu;
 
         private IReadOnlyDictionary<string, object> spQuestRgpack;
@@ -24,38 +24,37 @@ namespace RoguegardUnity
             this.componentManager = componentManager;
             this.touchController = touchController;
 
-            writeFileMenu = new SelectFileMenu(
-                SelectFileMenu.Type.Write,
-                (root, path) => SaveDelay(root, path, false),
-                (root) =>
+            writeFileMenu = SelectFileMenuScreen.Save(
+                onSelectFile: (fileInfo, manager, arg) =>
                 {
-                    root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-                    root.HandleClickBack();
-                    SelectFileMenu.ShowSaving(root);
+                    SaveDelay(manager, fileInfo.FullName, false);
+                },
+                onNewFile: (manager, arg) =>
+                {
+                    manager.HandleClickBack();
 
                     StandardRogueDeviceSave.GetNewNumberingPath(
-                        RoguegardSettings.DefaultSaveFileName, path => SaveDelay(root, path, false));
+                        RoguegardSettings.DefaultSaveFileName, path => SaveDelay(manager, path, false));
                 });
 
-            readFileMenu = new SelectFileMenu(SelectFileMenu.Type.Read, (root, path) =>
-            {
-                root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-                root.HandleClickBack();
-                SelectFileMenu.ShowLoading(root);
-
-                // 入力されたパスの Stream を開く
-                StandardRogueDeviceData loadDeviceData;
-                using (var stream = RogueFile.OpenRead(path))
+            readFileMenu = SelectFileMenuScreen.Load(
+                onSelectFile: (fileInfo, manager, arg) =>
                 {
-                    var save = new StandardRogueDeviceSave();
-                    loadDeviceData = save.LoadGameData(stream); // ここで逆シリアル化
-                }
-                root.Done();
+                    manager.HandleClickBack();
 
-                // ロードしたデータを適用
-                RogueRandom.Primary = loadDeviceData.CurrentRandom;
-                componentManager.OpenDelay(loadDeviceData);
-            });
+                    // 入力されたパスの Stream を開く
+                    StandardRogueDeviceData loadDeviceData;
+                    using (var stream = RogueFile.OpenRead(fileInfo.FullName))
+                    {
+                        var save = new StandardRogueDeviceSave();
+                        loadDeviceData = save.LoadGameData(stream); // ここで逆シリアル化
+                    }
+                    manager.Done();
+
+                    // ロードしたデータを適用
+                    RogueRandom.Primary = loadDeviceData.CurrentRandom;
+                    componentManager.OpenDelay(loadDeviceData);
+                });
 
             autoSaveMenu = new AutoSaveMenu() { parent = this };
         }
@@ -111,7 +110,7 @@ namespace RoguegardUnity
             {
                 manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
                 manager.HandleClickBack();
-                SelectFileMenu.ShowSaving(manager);
+                SelectFileMenuScreen.ShowSaving(manager);
             }
 
             FadeCanvas.StartCanvasCoroutine(Save(manager, path, autoSave));
@@ -290,7 +289,7 @@ namespace RoguegardUnity
             public override void OpenScreen(in RogueMenuManager inManager, in ReadOnlyMenuArg arg)
             {
                 var manager = inManager;
-                SelectFileMenu.ShowSaving(manager);
+                SelectFileMenuScreen.ShowSaving(manager);
                 StandardRogueDeviceSave.GetNewAutoSavePath("AutoSave.gard", path => parent.SaveDelay(manager, path, true));
             }
         }

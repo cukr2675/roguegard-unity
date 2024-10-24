@@ -4,29 +4,24 @@ using UnityEngine;
 
 namespace ListingMF
 {
-    public class DialogViewTemplate<TMgr, TArg> : ViewTemplate<TMgr, TArg>
+    public class DialogViewTemplate<TMgr, TArg> : ListViewTemplate<object, TMgr, TArg>
         where TMgr : IListMenuManager
         where TArg : IListMenuArg
     {
-        public string MenuName { get; set; }
         public string DialogSubViewName { get; set; } = StandardSubViewTable.DialogName;
         public string CaptionBoxSubViewName { get; set; } = StandardSubViewTable.CaptionBoxName;
+        public string BackAnchorSubViewName { get; set; } = null;
+        public List<IListMenuSelectOption> BackAnchorList { get; set; } = new() { ExitListMenuSelectOption.Instance };
 
         private object prevViewStateHolder;
         private IElementsSubViewStateProvider dialogSubViewStateProvider;
         private IElementsSubViewStateProvider captionBoxSubViewStateProvider;
+        private IElementsSubViewStateProvider backAnchorSubViewStateProvider;
 
-        private readonly List<object> list = new();
-        private readonly List<object> afterList = new();
-        private readonly ReadOnlyListConcat concatList;
-        private readonly List<object> captionBoxList = new();
+        private string message;
+        private event System.Action<TMgr, TArg, string> handleClickLink;
 
-        public DialogViewTemplate()
-        {
-            concatList = new ReadOnlyListConcat(list, afterList);
-        }
-
-        public FluentBuilder Show(string message, TMgr manager, TArg arg, object viewStateHolder = null)
+        public Builder Show(string message, TMgr manager, TArg arg, object viewStateHolder = null)
         {
             if (message == null) throw new System.ArgumentNullException(nameof(message));
             if (manager == null) throw new System.ArgumentNullException(nameof(manager));
@@ -36,60 +31,65 @@ namespace ListingMF
             {
                 dialogSubViewStateProvider?.Reset();
                 captionBoxSubViewStateProvider?.Reset();
+                backAnchorSubViewStateProvider?.Reset();
             }
             prevViewStateHolder = viewStateHolder;
 
             // スクロールのビューを表示
-            list.Clear();
-            list.Add(message);
-
-            // メニュー名を表示
-            captionBoxList.Clear();
-            if (MenuName != null) { captionBoxList.Add(MenuName); }
+            this.message = message;
 
             if (TryShowSubViews(manager, arg)) return null;
-            else return new FluentBuilder(this, manager, arg);
+            else return new Builder(this, manager, arg);
         }
 
         protected override void ShowSubViews(TMgr manager, TArg arg)
         {
+            OriginalList.Clear();
+            if (handleClickLink != null)
+            {
+                OriginalList.Add(LabelViewWidget.CreateOption(message, handleClickLink));
+            }
+            else
+            {
+                OriginalList.Add(message);
+            }
+
             manager
                 .GetSubView(DialogSubViewName)
-                .Show(concatList, SelectOptionHandler.Instance, manager, arg, ref dialogSubViewStateProvider);
+                .Show(List, SelectOptionHandler.Instance, manager, arg, ref dialogSubViewStateProvider);
 
-            if (MenuName != null)
+            if (Title != null)
             {
                 manager
                     .GetSubView(CaptionBoxSubViewName)
-                    .Show(captionBoxList, ElementToStringHandler.Instance, manager, arg, ref captionBoxSubViewStateProvider);
+                    .Show(TitleSingle, ElementToStringHandler.Instance, manager, arg, ref captionBoxSubViewStateProvider);
+            }
+
+            if (BackAnchorSubViewName != null)
+            {
+                manager
+                    .GetSubView(BackAnchorSubViewName)
+                    .Show(BackAnchorList, SelectOptionHandler.Instance, manager, arg, ref backAnchorSubViewStateProvider);
             }
         }
 
         public void HideSubViews(TMgr manager, bool back)
         {
             manager.GetSubView(DialogSubViewName).Hide(back);
-            if (MenuName != null) { manager.GetSubView(CaptionBoxSubViewName).Hide(back); }
+            if (Title != null) { manager.GetSubView(CaptionBoxSubViewName).Hide(back); }
         }
 
-        public class FluentBuilder : BaseFluentBuilder
+        public class Builder : BaseListBuilder<Builder>
         {
             private readonly DialogViewTemplate<TMgr, TArg> parent;
 
-            public FluentBuilder(DialogViewTemplate<TMgr, TArg> parent, TMgr manager, TArg arg)
+            public Builder(DialogViewTemplate<TMgr, TArg> parent, TMgr manager, TArg arg)
                 : base(parent, manager, arg)
             {
                 this.parent = parent;
             }
 
-            public FluentBuilder Append(object element)
-            {
-                AssertNotBuilded();
-
-                parent.afterList.Add(element);
-                return this;
-            }
-
-            public FluentBuilder AppendSelectOption(string name, ListMenuSelectOption<TMgr, TArg>.HandleClickAction handleClick)
+            public Builder AppendSelectOption(string name, HandleClickElement<TMgr, TArg> handleClick)
             {
                 AssertNotBuilded();
 
@@ -97,7 +97,7 @@ namespace ListingMF
                 return this;
             }
 
-            public FluentBuilder AppendSelectOptions(params (string, ListMenuSelectOption<TMgr, TArg>.HandleClickAction)[] selectOptions)
+            public Builder AppendSelectOptions(params (string, HandleClickElement<TMgr, TArg>)[] selectOptions)
             {
                 AssertNotBuilded();
 
@@ -109,61 +109,14 @@ namespace ListingMF
                 Append(stack);
                 return this;
             }
-        }
 
-        private class ReadOnlyListConcat : IReadOnlyList<object>
-        {
-            private readonly IReadOnlyList<object>[] lists;
-
-            public object this[int index]
+            public Builder OnClickLink(System.Action<TMgr, TArg, string> handleClickLink)
             {
-                get
-                {
-                    foreach (var list in lists)
-                    {
-                        if (index < list.Count)
-                        {
-                            return list[index];
-                        }
-                        else
-                        {
-                            index -= list.Count;
-                        }
-                    }
-                    throw new System.IndexOutOfRangeException();
-                }
-            }
+                AssertNotBuilded();
 
-            public int Count
-            {
-                get
-                {
-                    var sumCount = 0;
-                    foreach (var list in lists)
-                    {
-                        sumCount += list.Count;
-                    }
-                    return sumCount;
-                }
+                parent.handleClickLink += handleClickLink;
+                return this;
             }
-
-            public ReadOnlyListConcat(params IReadOnlyList<object>[] lists)
-            {
-                this.lists = lists;
-            }
-
-            public IEnumerator<object> GetEnumerator()
-            {
-                foreach (var list in lists)
-                {
-                    foreach (var item in list)
-                    {
-                        yield return item;
-                    }
-                }
-            }
-
-            IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
         }
     }
 }

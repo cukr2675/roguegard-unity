@@ -29,13 +29,12 @@ namespace RoguegardUnity
             }
         }
 
-        public static RogueFile[] GetFiles(string path)
+        public static FileInfo[] GetFiles(string path)
         {
             if (path.Contains('\\')) { path = path.Replace('\\', '/'); };
 
-            return Directory.GetFiles(path)
-                .Select(x => new RogueFile(x.Replace('\\', '/'), File.GetLastWriteTime(x)))
-                .OrderByDescending(x => x.LastModified).ToArray();
+            var directoryInfo = new DirectoryInfo(path);
+            return directoryInfo.GetFiles().OrderByDescending(x => x.LastWriteTime).ToArray();
         }
 
         public static FileStream Create(string path)

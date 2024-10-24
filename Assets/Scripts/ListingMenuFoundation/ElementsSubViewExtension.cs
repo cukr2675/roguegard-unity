@@ -9,7 +9,7 @@ namespace ListingMF
         public static void Show(
             this IElementsSubView subView, IReadOnlyList<object> list, IElementHandler handler,
             IListMenuManager manager, IListMenuArg arg, ref IElementsSubViewStateProvider stateProvider,
-            ElementsSubView.HandleEndAnimationAction handleEndAnimation = null)
+            ElementsSubView.HandleEndAnimation handleEndAnimation = null)
         {
             subView.SetParameters(list, handler, manager, arg, ref stateProvider);
             subView.Show(handleEndAnimation);

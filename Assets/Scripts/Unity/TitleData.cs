@@ -11,10 +11,9 @@ namespace RoguegardUnity
     {
         [SerializeField] private Sprite _progressCircle = null;
         [SerializeField] private RoguegardSettingsData _settings = null;
-        [SerializeField] private Sprite _titleLogo = null;
         [SerializeField] private TitleMenu _menuPrefab = null;
-        [SerializeField] private MenuController _menuControllerPrefab = null;
-        [Space]
+
+        [Header("Standard Rogue Device Components")]
         [SerializeField] private RogueSpriteRendererPool _spriteRendererPoolPrefab = null;
         [SerializeField] private RogueTilemapRenderer _tilemapRendererPrefab = null;
         [SerializeField] private TouchController _touchControllerPrefab = null;
@@ -27,7 +26,7 @@ namespace RoguegardUnity
         public Sprite ProgressCircle => _progressCircle;
         public RoguegardSettingsData Settings => _settings;
 
-        public void InstantiateTitleMenu()
+        public void ShowTitleMenu()
         {
             var titleOption = new RogueOptions();
             titleOption.Initialize(null, _audioMixer);
@@ -36,9 +35,9 @@ namespace RoguegardUnity
 
             var menu = Instantiate(_menuPrefab);
             var spriteRendererPool = Instantiate(_spriteRendererPoolPrefab);
-            menu.Initialize(
-                spriteRendererPool, _menuControllerPrefab, _tilemapRendererPrefab, _touchControllerPrefab,
-                _soundTable, _audioMixer, _seAudioSourcePrefab, _bgmAudioSourcePrefab, _runtimeInspectorPrefab, _titleLogo);
+            menu.Show(
+                spriteRendererPool, _tilemapRendererPrefab, _touchControllerPrefab,
+                _soundTable, _audioMixer, _seAudioSourcePrefab, _bgmAudioSourcePrefab, _runtimeInspectorPrefab);
         }
     }
 }

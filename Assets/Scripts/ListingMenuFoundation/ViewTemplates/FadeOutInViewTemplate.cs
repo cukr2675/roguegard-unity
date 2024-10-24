@@ -8,17 +8,16 @@ namespace ListingMF
         where TMgr : IListMenuManager
         where TArg : IListMenuArg
     {
-        public string MenuName { get; set; }
         public string FadeMaskSubViewName { get; set; } = StandardSubViewTable.FadeMaskName;
 
         private object prevViewStateHolder;
         private IElementsSubViewStateProvider fadeMaskSubViewStateProvider;
-        private event ListMenuSelectOption<TMgr, TArg>.HandleClickAction HandleFadeOut;
-        private event ListMenuSelectOption<TMgr, TArg>.HandleClickAction HandleFadeIn;
+        private event HandleClickElement<TMgr, TArg> HandleFadeOut;
+        private event HandleClickElement<TMgr, TArg> HandleFadeIn;
 
         private readonly List<object> widgetOptions = new();
-        private readonly ElementsSubView.HandleEndAnimationAction handleFadeOutAnimation;
-        private readonly ElementsSubView.HandleEndAnimationAction handleFadeInAnimation;
+        private readonly ElementsSubView.HandleEndAnimation handleFadeOutAnimation;
+        private readonly ElementsSubView.HandleEndAnimation handleFadeInAnimation;
 
         public FadeOutInViewTemplate()
         {
@@ -39,7 +38,7 @@ namespace ListingMF
             };
         }
 
-        public FluentBuilder FadeOut(TMgr manager, TArg arg, object viewStateHolder = null)
+        public Builder FadeOut(TMgr manager, TArg arg, object viewStateHolder = null)
         {
             if (manager == null) throw new System.ArgumentNullException(nameof(manager));
 
@@ -51,7 +50,7 @@ namespace ListingMF
             prevViewStateHolder = viewStateHolder;
 
             if (TryShowSubViews(manager, arg)) return null;
-            else return new FluentBuilder(this, manager, arg);
+            else return new Builder(this, manager, arg);
         }
 
         protected override void ShowSubViews(TMgr manager, TArg arg)
@@ -66,17 +65,17 @@ namespace ListingMF
             manager.GetSubView(FadeMaskSubViewName).Hide(back, handleFadeInAnimation);
         }
 
-        public class FluentBuilder : BaseFluentBuilder
+        public class Builder : BaseBuilder<Builder>
         {
             private readonly FadeOutInViewTemplate<TMgr, TArg> parent;
 
-            public FluentBuilder(FadeOutInViewTemplate<TMgr, TArg> parent, TMgr manager, TArg arg)
+            public Builder(FadeOutInViewTemplate<TMgr, TArg> parent, TMgr manager, TArg arg)
                 : base(parent, manager, arg)
             {
                 this.parent = parent;
             }
 
-            public FluentBuilder Append(object widgetOption)
+            public Builder Append(object widgetOption)
             {
                 AssertNotBuilded();
 
@@ -84,7 +83,7 @@ namespace ListingMF
                 return this;
             }
 
-            public FluentBuilder OnFadeOutCompleted(ListMenuSelectOption<TMgr, TArg>.HandleClickAction handleFadeOut)
+            public Builder OnFadeOutCompleted(HandleClickElement<TMgr, TArg> handleFadeOut)
             {
                 AssertNotBuilded();
 
@@ -92,7 +91,7 @@ namespace ListingMF
                 return this;
             }
 
-            public FluentBuilder OnFadeInCompleted(ListMenuSelectOption<TMgr, TArg>.HandleClickAction handleFadeIn)
+            public Builder OnFadeInCompleted(HandleClickElement<TMgr, TArg> handleFadeIn)
             {
                 AssertNotBuilded();
 

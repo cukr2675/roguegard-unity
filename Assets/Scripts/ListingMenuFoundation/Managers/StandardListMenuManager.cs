@@ -16,6 +16,8 @@ namespace ListingMF
     {
         public StandardSubViewTable StandardSubViewTable { get; private set; }
 
+        public event System.Action OnError;
+
         private readonly MenuScreenStack<TMgr, TArg> stack = new();
         private MenuScreenStack<TMgr, TArg>.StackItem reservedMenu;
 
@@ -52,19 +54,17 @@ namespace ListingMF
             try
             {
                 reservedMenu.MenuScreen.OpenScreen((TMgr)this, reservedMenu.Arg);
+                reservedMenu = null;
             }
             catch (System.Exception)
             {
-                Done(); // 例外発生時はメニューを閉じる（操作不能になる可能性があるため）
-                throw;
-            }
-            finally
-            {
                 reservedMenu = null;
+                OnError?.Invoke();
+                throw;
             }
         }
 
-        public IElementsSubView GetSubView(string subViewName)
+        public virtual IElementsSubView GetSubView(string subViewName)
         {
             return StandardSubViewTable.SubViews[subViewName];
         }
@@ -85,6 +85,8 @@ namespace ListingMF
             }
         }
 
+        public virtual string Localize(string text) => text;
+
         public void PushMenuScreen(MenuScreen<TMgr, TArg> menuScreen, TArg arg)
         {
             menuScreen.CloseScreen((TMgr)this, false);
@@ -92,7 +94,7 @@ namespace ListingMF
             reservedMenu = stack.Push(menuScreen, arg);
         }
 
-        void IListMenuManager.PushMenuScreen(IMenuScreen menuScreen, IListMenuArg arg)
+        void IListMenuManager.PushMenuScreenExtension(object menuScreen, IListMenuArg arg)
         {
             if (LMFAssert.Type<MenuScreen<TMgr, TArg>>(menuScreen, out var tMenuScreen) ||
                 LMFAssert.Type<TArg>(arg, out var tArg)) throw new System.ArgumentException();

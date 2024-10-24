@@ -160,7 +160,7 @@ MonoBehaviour:
   - {fileID: 5678886634637446028, guid: 671a5d8cb38f5204290f86291e905fe5, type: 3}
   - {fileID: 859463869150566348, guid: fc9a470b807619345bd82cdf9b901c0a, type: 3}
   - {fileID: 4618462730738538975, guid: ee480f78418f88e428e37f8f33a36ad8, type: 3}
-  - {fileID: -4715709573206829350, guid: 12f454ae69f3fca46bb474514435f1a5, type: 3}
+  - {fileID: 8256227690670107280, guid: 6e1a444262d905b4f86899edf0ca030e, type: 3}
   _fallbackViewElementPrefab: {fileID: 8923221682010575914, guid: dee7779fd70f5f847ae4fbdac79e7354, type: 3}
 --- !u!114 &8210026949675588516
 MonoBehaviour:
@@ -175,7 +175,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cursorPrefab: {fileID: 6051174446993013066, guid: e33fc1d4dab9a874787aa90ed7956a2d, type: 3}
-  _elasticity: 0.1
+  _elasticity: 0.01
   _selectedObj: {fileID: 0}
 --- !u!114 &2039689924187057438
 MonoBehaviour:
@@ -2220,6 +2220,10 @@ PrefabInstance:
     - target: {fileID: 906362540308625588, guid: 8d070c6e4f11fbd4da6ebc1d25fab236, type: 3}
       propertyPath: _selectable
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 906362540308625588, guid: 8d070c6e4f11fbd4da6ebc1d25fab236, type: 3}
+      propertyPath: _initTrigger
+      value: InitVisible
       objectReference: {fileID: 0}
     - target: {fileID: 906362540308625588, guid: 8d070c6e4f11fbd4da6ebc1d25fab236, type: 3}
       propertyPath: _isSelectable

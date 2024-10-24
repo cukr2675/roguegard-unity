@@ -8,6 +8,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 45156285185424374, guid: a5b1d2461a9af8c49a4be0c36b217e13, type: 3}
+      propertyPath: m_fontSize
+      value: 96
+      objectReference: {fileID: 0}
+    - target: {fileID: 45156285185424374, guid: a5b1d2461a9af8c49a4be0c36b217e13, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 96
+      objectReference: {fileID: 0}
     - target: {fileID: 215024385935134977, guid: a5b1d2461a9af8c49a4be0c36b217e13, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -18,7 +26,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 215024385935134977, guid: a5b1d2461a9af8c49a4be0c36b217e13, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 215024385935134977, guid: a5b1d2461a9af8c49a4be0c36b217e13, type: 3}
       propertyPath: m_AnchorMax.y
@@ -26,7 +34,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 215024385935134977, guid: a5b1d2461a9af8c49a4be0c36b217e13, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 215024385935134977, guid: a5b1d2461a9af8c49a4be0c36b217e13, type: 3}
       propertyPath: m_AnchorMin.y
@@ -34,11 +42,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 215024385935134977, guid: a5b1d2461a9af8c49a4be0c36b217e13, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 400
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 215024385935134977, guid: a5b1d2461a9af8c49a4be0c36b217e13, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 60
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 215024385935134977, guid: a5b1d2461a9af8c49a4be0c36b217e13, type: 3}
       propertyPath: m_LocalPosition.x
@@ -89,12 +97,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3115482206689591959, guid: a5b1d2461a9af8c49a4be0c36b217e13, type: 3}
+      propertyPath: m_fontSize
+      value: 96
+      objectReference: {fileID: 0}
+    - target: {fileID: 3115482206689591959, guid: a5b1d2461a9af8c49a4be0c36b217e13, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 96
+      objectReference: {fileID: 0}
+    - target: {fileID: 3115482206689591959, guid: a5b1d2461a9af8c49a4be0c36b217e13, type: 3}
       propertyPath: m_fontColor32.rgba
       value: 2163273968
       objectReference: {fileID: 0}
     - target: {fileID: 7504610908210163497, guid: a5b1d2461a9af8c49a4be0c36b217e13, type: 3}
       propertyPath: m_Name
-      value: InputField (LMF) Variant
+      value: LMF_InputFieldViewWidget
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

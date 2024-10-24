@@ -14,7 +14,6 @@ namespace Roguegard
         private static readonly List<RogueObj> elms = new();
 
         private static readonly CommandMenu nextMenu = new CommandMenu();
-        private static readonly DialogListMenuSelectOption callLobbyDialog = new DialogListMenuSelectOption(("ÇÕÇ¢", CallLobby)).AppendExit();
         private static readonly PartyBoardCharacterCreationMenu newMenu = new PartyBoardCharacterCreationMenu();
 
         private readonly ScrollViewTemplate<RogueObj, RogueMenuManager, ReadOnlyMenuArg> view = new()
@@ -36,7 +35,9 @@ namespace Roguegard
             elms.Add(null);
 
             view.Show(elms, manager, arg)
-                ?.ElementNameGetter((obj, manager, arg) =>
+                ?
+                
+                .ElementNameFrom((obj, manager, arg) =>
                 {
                     if (obj == null)
                     {
@@ -50,6 +51,8 @@ namespace Roguegard
                         else return name;
                     }
                 })
+
+                .VariableOnce(out ChoicesMenuScreen callLobbyDialog)
                 .OnClickElement((obj, manager, arg) =>
                 {
                     if (obj == null)
@@ -67,11 +70,12 @@ namespace Roguegard
                         if (info.Seat != null)
                         {
                             // ê»Ç…Ç¬Ç¢ÇƒÇ¢ÇÈÉLÉÉÉâÇÕÇªÇ±Ç©ÇÁåƒÇ—ñﬂÇ∑Ç©êqÇÀÇÈ
-                            manager.AddInt(DeviceKw.StartTalk, 0);
-                            manager.AddObject(DeviceKw.AppendText, obj);
-                            manager.AddObject(DeviceKw.AppendText, "ÇåƒÇ—ñﬂÇµÇ‹Ç∑Ç©ÅH");
-                            manager.AddInt(DeviceKw.WaitEndOfTalk, 0);
-                            manager.PushMenuScreen(callLobbyDialog.menuScreen, arg.Self, targetObj: obj);
+                            callLobbyDialog ??= new ChoicesMenuScreen(
+                                (manager, arg) => $"{arg.Arg.TargetObj}ÇåƒÇ—ñﬂÇµÇ‹Ç∑Ç©ÅH")
+                            .Option("ÇÕÇ¢", CallLobby)
+                            .Exit();
+
+                            manager.PushMenuScreen(callLobbyDialog, arg.Self, targetObj: obj);
                         }
                         else
                         {
@@ -79,6 +83,7 @@ namespace Roguegard
                         }
                     }
                 })
+
                 .Build();
         }
 

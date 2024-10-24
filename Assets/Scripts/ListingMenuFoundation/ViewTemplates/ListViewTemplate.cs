@@ -18,12 +18,12 @@ namespace ListingMF
             List = new ReadOnlyListConcat(beforeList, OriginalList, afterList);
         }
 
-        public abstract class ListFluentBuilder<TOut> : BaseFluentBuilder
-            where TOut : ListFluentBuilder<TOut>
+        public abstract class BaseListBuilder<TOut> : BaseBuilder<TOut>
+            where TOut : BaseListBuilder<TOut>
         {
             private ListViewTemplate<TElm, TMgr, TArg> parent;
 
-            protected ListFluentBuilder(ListViewTemplate<TElm, TMgr, TArg> parent, TMgr manager, TArg arg)
+            protected BaseListBuilder(ListViewTemplate<TElm, TMgr, TArg> parent, TMgr manager, TArg arg)
                 : base(parent, manager, arg)
             {
                 this.parent = parent;

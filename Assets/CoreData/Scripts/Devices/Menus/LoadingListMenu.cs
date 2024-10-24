@@ -10,8 +10,8 @@ namespace Roguegard.Device
     {
         private readonly string text;
         private readonly string buttonText;
-        private readonly ListMenuSelectOption<RogueMenuManager, ReadOnlyMenuArg>.HandleClickAction buttonAction;
-        private readonly ProgressBarViewWidget.GetProgressFunc<RogueMenuManager, ReadOnlyMenuArg> getProgress;
+        private readonly HandleClickElement<RogueMenuManager, ReadOnlyMenuArg> buttonAction;
+        private readonly ProgressBarViewWidget.GetProgress<RogueMenuManager, ReadOnlyMenuArg> getProgress;
         private readonly object[] elms;
 
         private float oldProgress;
@@ -22,13 +22,13 @@ namespace Roguegard.Device
 
         public LoadingListMenu(
             string text, string buttonText,
-            ListMenuSelectOption<RogueMenuManager, ReadOnlyMenuArg>.HandleClickAction buttonAction,
-            ProgressBarViewWidget.GetProgressFunc<RogueMenuManager, ReadOnlyMenuArg> updateAction = null)
+            HandleClickElement<RogueMenuManager, ReadOnlyMenuArg> buttonAction,
+            ProgressBarViewWidget.GetProgress<RogueMenuManager, ReadOnlyMenuArg> updateAction = null)
         {
             this.text = text;
             this.buttonText = buttonText;
             this.buttonAction = buttonAction;
-            this.getProgress = updateAction ?? delegate { return 1f; };
+            this.getProgress = updateAction ?? delegate { return 0f; };
         }
 
         public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)

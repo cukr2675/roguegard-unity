@@ -18,8 +18,8 @@ namespace ListingMF
             IReadOnlyList<object> list, IElementHandler handler, IListMenuManager manager, IListMenuArg arg,
             ref IElementsSubViewStateProvider stateProvider);
 
-        void Show(ElementsSubView.HandleEndAnimationAction handleEndAnimation = null);
+        void Show(ElementsSubView.HandleEndAnimation handleEndAnimation = null);
 
-        void Hide(bool back, ElementsSubView.HandleEndAnimationAction handleEndAnimation = null);
+        void Hide(bool back, ElementsSubView.HandleEndAnimation handleEndAnimation = null);
     }
 }

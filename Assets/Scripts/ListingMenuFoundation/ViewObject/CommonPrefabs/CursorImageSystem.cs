@@ -11,7 +11,7 @@ namespace ListingMF
     public class CursorImageSystem : MonoBehaviour
     {
         [SerializeField] private Image _cursorPrefab = null;
-        [SerializeField] private float _elasticity = .1f;
+        [SerializeField] private float _elasticity = .01f;
 
 #if UNITY_EDITOR
         [Space]
@@ -33,11 +33,12 @@ namespace ListingMF
 
             if (eventSystem.currentSelectedGameObject != null)
             {
+                var deltaElasticity = 1f - _elasticity / Time.deltaTime;
                 var selectedTransform = (RectTransform)eventSystem.currentSelectedGameObject.transform;
                 var cursorTransform = (RectTransform)cursorInstance.transform;
                 cursorTransform.SetParent(selectedTransform.parent, true);
-                cursorTransform.position = Vector3.Lerp(cursorTransform.position, selectedTransform.position, _elasticity);
-                cursorTransform.sizeDelta = Vector2.Lerp(cursorTransform.sizeDelta, selectedTransform.rect.size, _elasticity);
+                cursorTransform.position = Vector3.Lerp(cursorTransform.position, selectedTransform.position, deltaElasticity);
+                cursorTransform.sizeDelta = Vector2.Lerp(cursorTransform.sizeDelta, selectedTransform.rect.size, deltaElasticity);
                 cursorTransform.localScale = selectedTransform.localScale;
                 cursorInstance.enabled = true;
             }

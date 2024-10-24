@@ -15,12 +15,10 @@ namespace ListingMF
         [Space, SerializeField] private UnityEvent _onStartSpeech = null;
         [Space, SerializeField] private UnityEvent _onEndSpeech = null;
 
-        private readonly Queue<string> subViewNamesAfterCompletion = new();
-
         private bool isInitialized;
         private bool isSpeechingNow;
 
-        private event HandleEndAnimationAction OnCompleted;
+        private event HandleEndAnimation OnCompleted;
 
         public void Initialize()
         {
@@ -31,10 +29,6 @@ namespace ListingMF
             {
                 if (hiddenLinkID != _messageBox.HiddenLinkIDOnEOF) return;
 
-                while (subViewNamesAfterCompletion.TryDequeue(out var subViewName))
-                {
-                    Manager?.GetSubView(subViewName).Show();
-                }
                 OnCompleted?.Invoke(Manager, Arg);
                 OnCompleted = null;
             });
@@ -48,18 +42,14 @@ namespace ListingMF
             for (int i = 0; i < list.Count; i++)
             {
                 var name = handler.GetName(list[i], manager, arg);
+                name = manager.Localize(name);
                 _messageBox.Append(name);
             }
             SetArg(manager, arg);
             SetStatusCode(0);
         }
 
-        public void ShowScheduledAfterCompletion(string subViewName)
-        {
-            subViewNamesAfterCompletion.Enqueue(subViewName);
-        }
-
-        public void ShowScheduledAfterCompletion(HandleEndAnimationAction handleEndAnimation)
+        public void DoScheduledAfterCompletion(HandleEndAnimation handleEndAnimation)
         {
             OnCompleted += handleEndAnimation;
         }

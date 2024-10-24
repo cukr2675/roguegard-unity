@@ -37,7 +37,7 @@ namespace RoguegardUnity
                 .Build();
         }
 
-        public override void CloseScreen(in RogueMenuManager manager, bool back)
+        public override void CloseScreen(RogueMenuManager manager, bool back)
         {
             view.HideSubViews(manager, back);
         }

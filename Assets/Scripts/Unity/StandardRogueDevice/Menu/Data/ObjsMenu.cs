@@ -60,7 +60,7 @@ namespace RoguegardUnity
                 view.Title = Title;
                 if (SortIsEnabled)
                 {
-                    view.BackAnchorList = new IListMenuSelectOption[]
+                    view.BackAnchorList = new List<IListMenuSelectOption>
                     {
                         ListMenuSelectOption.Create<RogueMenuManager, ReadOnlyMenuArg>(":Sort", Sort),
                         ExitListMenuSelectOption.Instance
@@ -74,15 +74,18 @@ namespace RoguegardUnity
                 var viewStateHolder = GetViewStateHolder(manager, arg);
 
                 view.Show(list, manager, arg, viewStateHolder)
-                    ?.ElementNameGetter((obj, manager, arg) =>
+                    ?
+                    .ElementNameFrom((obj, manager, arg) =>
                     {
                         return obj.GetName();
                     })
+
                     .OnClickElement((obj, manager, arg) =>
                     {
                         // 選択したアイテムの情報と選択肢を表示する
                         manager.PushMenuScreen(commandMenu, arg.Self, null, targetObj: arg.Arg.TargetObj, tool: obj);
                     })
+
                     .Build();
             }
 

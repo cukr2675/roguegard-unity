@@ -6,8 +6,7 @@ namespace ListingMF
 {
     public static class ListMenuSelectOption
     {
-        public static ListMenuSelectOption<TMgr, TArg> Create<TMgr, TArg>(
-            string name, ListMenuSelectOption<TMgr, TArg>.HandleClickAction handleClick)
+        public static ListMenuSelectOption<TMgr, TArg> Create<TMgr, TArg>(string name, HandleClickElement<TMgr, TArg> handleClick)
             where TMgr : IListMenuManager
             where TArg : IListMenuArg
         {
@@ -24,9 +23,7 @@ namespace ListingMF
         where TArg : IListMenuArg
     {
         public string Name { get; set; }
-        public HandleClickAction HandleClick { get; set; }
-
-        public delegate void HandleClickAction(TMgr manager, TArg arg);
+        public HandleClickElement<TMgr, TArg> HandleClick { get; set; }
 
         string IListMenuSelectOption.GetName(IListMenuManager manager, IListMenuArg arg) => Name;
 

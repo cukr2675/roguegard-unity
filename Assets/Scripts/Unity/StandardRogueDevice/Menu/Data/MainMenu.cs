@@ -127,7 +127,7 @@ namespace RoguegardUnity
                 public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
                 {
                     view.Show(":GiveUpMsg", manager, arg)
-                        ?.AppendSelectOption(":Yes", (manager, arg) =>
+                        ?.Option(":Yes", (manager, arg) =>
                         {
                             manager.Done();
 

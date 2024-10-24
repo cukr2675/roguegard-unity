@@ -55,10 +55,12 @@ namespace Roguegard
             public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
             {
                 view.Show(parent._items, manager, arg)
-                    ?.ElementNameGetter((item, manager, arg) =>
+                    ?
+                    .ElementNameFrom((item, manager, arg) =>
                     {
                         return item.Name;
                     })
+
                     .OnClickElement((item, manager, arg) =>
                     {
                         manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
@@ -67,6 +69,7 @@ namespace Roguegard
 
                         item.Option.CreateObj(item, arg.Self, Vector2Int.zero, RogueRandom.Primary);
                     })
+
                     .Build();
             }
         }

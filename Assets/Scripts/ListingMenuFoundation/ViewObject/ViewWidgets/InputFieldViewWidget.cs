@@ -14,8 +14,7 @@ namespace ListingMF
         private IWidgetOption widgetOption;
         private TMP_InputField inputField;
 
-        public delegate string GetValueFunc<TMgr, TArg>(TMgr manager, TArg arg);
-        public delegate void HandleValueChangedAction<TMgr, TArg>(TMgr manager, TArg arg, string value);
+        public delegate void HandleValueChanged<TMgr, TArg>(TMgr manager, TArg arg, string value);
 
         public override bool TryInstantiateWidget(
             ElementsSubView elementsSubView, IElementHandler handler, object element, out ViewWidget viewWidget)
@@ -45,7 +44,7 @@ namespace ListingMF
         }
 
         public static IWidgetOption CreateOption<TMgr, TArg>(
-            GetValueFunc<TMgr, TArg> getValue, HandleValueChangedAction<TMgr, TArg> handleValueChanged)
+            GetElementName<TMgr, TArg> getValue, HandleValueChanged<TMgr, TArg> handleValueChanged)
         {
             return new WidgetOption<TMgr, TArg>()
             {
@@ -63,8 +62,8 @@ namespace ListingMF
 
         private class WidgetOption<TMgr, TArg> : IWidgetOption
         {
-            public GetValueFunc<TMgr, TArg> GetValue { get; set; }
-            public HandleValueChangedAction<TMgr, TArg> HandleValueChanged { get; set; }
+            public GetElementName<TMgr, TArg> GetValue { get; set; }
+            public HandleValueChanged<TMgr, TArg> HandleValueChanged { get; set; }
 
             string IWidgetOption.GetValue(IListMenuManager manager, IListMenuArg arg)
             {

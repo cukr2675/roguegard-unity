@@ -52,14 +52,17 @@ namespace RoguegardUnity
             selectOptions.Add(Details);
             selectOptions.Add(ExitListMenuSelectOption.Instance);
             view.Show(selectOptions, manager, arg)
-                ?.ElementNameGetter((selectOption, manager, arg) =>
+                ?
+                .ElementNameFrom((selectOption, manager, arg) =>
                 {
                     return selectOption.GetName(manager, arg);
                 })
+
                 .OnClickElement((selectOption, manager, arg) =>
                 {
                     selectOption.HandleClick(manager, arg);
                 })
+
                 .Build();
         }
 

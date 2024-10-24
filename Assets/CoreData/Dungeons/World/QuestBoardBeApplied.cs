@@ -57,15 +57,18 @@ namespace Roguegard
                 }
 
                 view.Show(elms, manager, arg)
-                    ?.ElementNameGetter((quest, manager, arg) =>
+                    ?
+                    .ElementNameFrom((quest, manager, arg) =>
                     {
                         return quest.Caption;
                     })
+
                     .OnClickElement((quest, manager, arg) =>
                     {
                         manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
                         manager.PushMenuScreen(nextMenu, arg.Self, other: quest);
                     })
+
                     .Build();
             }
 

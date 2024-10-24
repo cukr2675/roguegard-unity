@@ -18,7 +18,7 @@ namespace ListingMF
 
         private readonly ButtonElementHandler<TElm, TMgr, TArg> scrollSubViewHandler = new();
 
-        public FluentBuilder Show(
+        public Builder Show(
             IReadOnlyList<TElm> list, TMgr manager, TArg arg, object viewStateHolder = null, IReadOnlyList<object> backAnchorList = null)
         {
             if (list == null) throw new System.ArgumentNullException(nameof(list));
@@ -36,7 +36,7 @@ namespace ListingMF
             OriginalList.AddRange(list);
 
             if (TryShowSubViews(manager, arg)) return null;
-            else return new FluentBuilder(this, manager, arg);
+            else return new Builder(this, manager, arg);
         }
 
         protected override void ShowSubViews(TMgr manager, TArg arg)
@@ -59,17 +59,17 @@ namespace ListingMF
             if (Title != null) { manager.GetSubView(CaptionBoxSubViewName).Hide(back); }
         }
 
-        public class FluentBuilder : BaseFluentBuilder
+        public class Builder : BaseBuilder<Builder>
         {
             private readonly CommandListViewTemplate<TElm, TMgr, TArg> parent;
 
-            public FluentBuilder(CommandListViewTemplate<TElm, TMgr, TArg> parent, TMgr manager, TArg arg)
+            public Builder(CommandListViewTemplate<TElm, TMgr, TArg> parent, TMgr manager, TArg arg)
                 : base(parent, manager, arg)
             {
                 this.parent = parent;
             }
 
-            public FluentBuilder ElementNameGetter(ButtonElementHandler<TElm, TMgr, TArg>.GetNameFunc method)
+            public Builder ElementNameFrom(GetElementName<TElm, TMgr, TArg> method)
             {
                 AssertNotBuilded();
 
@@ -77,7 +77,7 @@ namespace ListingMF
                 return this;
             }
 
-            public FluentBuilder OnClickElement(ButtonElementHandler<TElm, TMgr, TArg>.HandleClickAction method)
+            public Builder OnClickElement(HandleClickElement<TElm, TMgr, TArg> method)
             {
                 AssertNotBuilded();
 

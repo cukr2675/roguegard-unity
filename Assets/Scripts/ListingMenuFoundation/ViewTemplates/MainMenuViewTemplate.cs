@@ -10,12 +10,15 @@ namespace ListingMF
     {
         public string PrimaryCommandSubViewName { get; set; } = StandardSubViewTable.PrimaryCommandName;
         public string CaptionBoxSubViewName { get; set; } = StandardSubViewTable.CaptionBoxName;
+        public string BackAnchorSubViewName { get; set; } = null;
+        public List<IListMenuSelectOption> BackAnchorList { get; set; } = new() { ExitListMenuSelectOption.Instance };
 
         private object prevViewStateHolder;
         private IElementsSubViewStateProvider primaryCommandSubViewStateProvider;
         private IElementsSubViewStateProvider captionBoxSubViewStateProvider;
+        private IElementsSubViewStateProvider backAnchorSubViewStateProvider;
 
-        public FluentBuilder Show(TMgr manager, TArg arg, object viewStateHolder = null)
+        public Builder Show(TMgr manager, TArg arg, object viewStateHolder = null)
         {
             if (manager == null) throw new System.ArgumentNullException(nameof(manager));
 
@@ -24,11 +27,12 @@ namespace ListingMF
             {
                 primaryCommandSubViewStateProvider?.Reset();
                 captionBoxSubViewStateProvider?.Reset();
+                backAnchorSubViewStateProvider?.Reset();
             }
             prevViewStateHolder = viewStateHolder;
 
             if (TryShowSubViews(manager, arg)) return null;
-            else return new FluentBuilder(this, manager, arg);
+            else return new Builder(this, manager, arg);
         }
 
         protected override void ShowSubViews(TMgr manager, TArg arg)
@@ -43,35 +47,38 @@ namespace ListingMF
                     .GetSubView(CaptionBoxSubViewName)
                     .Show(TitleSingle, ElementToStringHandler.Instance, manager, arg, ref captionBoxSubViewStateProvider);
             }
+
+            if (BackAnchorSubViewName != null)
+            {
+                manager
+                    .GetSubView(BackAnchorSubViewName)
+                    .Show(BackAnchorList, SelectOptionHandler.Instance, manager, arg, ref backAnchorSubViewStateProvider);
+            }
         }
 
         public void HideSubViews(TMgr manager, bool back)
         {
             manager.GetSubView(PrimaryCommandSubViewName).Hide(back);
             if (Title != null) { manager.GetSubView(CaptionBoxSubViewName).Hide(back); }
+            if (BackAnchorSubViewName != null) { manager.GetSubView(BackAnchorSubViewName).Hide(back); }
         }
 
-        public class FluentBuilder : ListFluentBuilder<FluentBuilder>
+        public class Builder : BaseListBuilder<Builder>
         {
             private readonly MainMenuViewTemplate<TMgr, TArg> parent;
 
-            public FluentBuilder(MainMenuViewTemplate<TMgr, TArg> parent, TMgr manager, TArg arg)
+            public Builder(MainMenuViewTemplate<TMgr, TArg> parent, TMgr manager, TArg arg)
                 : base(parent, manager, arg)
             {
                 this.parent = parent;
             }
 
-            public FluentBuilder Option(string name, ListMenuSelectOption<TMgr, TArg>.HandleClickAction handleClick)
+            public Builder Option(string name, HandleClickElement<TMgr, TArg> handleClick)
             {
                 return Append(ListMenuSelectOption.Create(name, handleClick));
             }
 
-            public FluentBuilder Option(string name, IMenuScreen menuScreen)
-            {
-                return Append(ListMenuSelectOption.Create(name, (TMgr manager, TArg arg) => manager.PushMenuScreen(menuScreen, arg)));
-            }
-
-            public FluentBuilder Exit()
+            public Builder Exit()
             {
                 return Append(ExitListMenuSelectOption.Instance);
             }

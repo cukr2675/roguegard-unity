@@ -11,6 +11,7 @@ namespace ListingMF
     public class WidgetsSubView : ElementsSubView
     {
         [SerializeField] private ScrollRect _scrollRect = null;
+        [SerializeField, Tooltip("Awake で起動するトリガー名　サブビューを表示状態で生成したいときに使う")] private string _initTrigger = null;
 
         [Header("Other")]
         [SerializeField] private bool _isSelectable = true;
@@ -40,6 +41,14 @@ namespace ListingMF
                 const float epsilon = 1e-4f;
                 if (marginHeight < epsilon) { _scrollRect.verticalNormalizedPosition = 0f; } // ゼロ除算対策
                 else { _scrollRect.verticalNormalizedPosition = 1f - (value / marginHeight); }
+            }
+        }
+
+        private void Awake()
+        {
+            if (!string.IsNullOrWhiteSpace(_initTrigger) && TryGetComponent<Animator>(out var animator))
+            {
+                animator.SetTrigger(_initTrigger);
             }
         }
 
@@ -106,7 +115,8 @@ namespace ListingMF
 
             // 最後の要素が一番上までスクロールできるスライダーサイズに変更
             var viewportHeight = _scrollRect.viewport.rect.height;
-            var contentHeight = viewportHeight + lastSumHeight;
+            //var contentHeight = viewportHeight + sumHeight;
+            var contentHeight = sumHeight;
             _scrollRect.content.sizeDelta = new Vector2(_scrollRect.content.sizeDelta.x, contentHeight);
 
             marginHeight = contentHeight - viewportHeight;

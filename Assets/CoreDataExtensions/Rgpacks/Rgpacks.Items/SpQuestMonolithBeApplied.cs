@@ -82,10 +82,12 @@ namespace Roguegard.Rgpacks
                 var list = parent._shopItems;
 
                 view.Show(list, manager, arg)
-                    ?.ElementNameGetter((item, manager, arg) =>
+                    ?
+                    .ElementNameFrom((item, manager, arg) =>
                     {
                         return item.Name;
                     })
+
                     .OnClickElement((item, manager, arg) =>
                     {
                         manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
@@ -93,6 +95,7 @@ namespace Roguegard.Rgpacks
                         manager.AddObject(DeviceKw.AppendText, "‚ðŽè‚É“ü‚ê‚½\n");
                         item.Option.CreateObj(item, arg.Self, Vector2Int.zero, RogueRandom.Primary);
                     })
+
                     .Build();
             }
         }

@@ -16,7 +16,7 @@ namespace ListingMF
         private IWidgetOption widgetOption;
         private Animator animator;
 
-        public delegate float GetProgressFunc<TMgr, TArg>(TMgr manager, TArg arg);
+        public delegate float GetProgress<TMgr, TArg>(TMgr manager, TArg arg);
 
         public override bool TryInstantiateWidget(
             ElementsSubView elementsSubView, IElementHandler handler, object element, out ViewWidget viewWidget)
@@ -48,7 +48,7 @@ namespace ListingMF
             }
         }
 
-        public static IWidgetOption CreateOption<TMgr, TArg>(GetProgressFunc<TMgr, TArg> getProgress)
+        public static IWidgetOption CreateOption<TMgr, TArg>(GetProgress<TMgr, TArg> getProgress)
         {
             return new WidgetOption<TMgr, TArg>()
             {
@@ -63,7 +63,7 @@ namespace ListingMF
 
         private class WidgetOption<TMgr, TArg> : IWidgetOption
         {
-            public GetProgressFunc<TMgr, TArg> GetProgress { get; set; }
+            public GetProgress<TMgr, TArg> GetProgress { get; set; }
 
             float IWidgetOption.GetProgress(IListMenuManager manager, IListMenuArg arg)
             {

@@ -18,29 +18,32 @@ namespace RoguegardUnity
 
         private void Start()
         {
+            // Roguegard 全体の初期化処理
             StaticID.Next();
             Application.targetFrameRate = 60;
             ObjformingLogger.Primary = new RoguegardObjformingLogger();
             //RogueMethodAspectState.Logger = new CoreRogueMethodAspectLogger();
 
+            // ゲーム開始
             StartCoroutine(Coroutine());
         }
 
         private IEnumerator Coroutine()
         {
-            // 読み込み進捗表示スプライト読み込み
+            // タイトル画面データ読み込み
             var loadTitleData = _titleData.LoadAssetAsync();
             yield return loadTitleData;
             if (loadTitleData.Status != AsyncOperationStatus.Succeeded) throw new RogueException($"{typeof(Sprite)} 読み込み失敗");
 
             var titleData = loadTitleData.Result;
 
+            // プログレスバースプライト設定
             _image.sprite = titleData.ProgressCircle;
             _image.color = Color.white;
             _image.SetNativeSize();
             Progress(.1f);
 
-            // 各要素読み込み
+            // Roguegard の各要素読み込み
             var coroutines = titleData.Settings.LoadAsync();
             for (int i = 0; i < coroutines.Length; i++)
             {
@@ -52,13 +55,16 @@ namespace RoguegardUnity
 
             yield return null;
 
-            // タイトルメニュー生成
+            // タイトルメニュー表示
             _image.enabled = false;
-            titleData.InstantiateTitleMenu();
+            titleData.ShowTitleMenu();
 
-            FadeCanvas.FadeIn();
+            //FadeCanvas.FadeIn();
         }
 
+        /// <summary>
+        /// プログレスバー更新処理
+        /// </summary>
         private void Progress(float progress)
         {
             _image.fillAmount = progress;
@@ -66,6 +72,7 @@ namespace RoguegardUnity
 
         private void Update()
         {
+            // ローディングアニメーション
             if (_image.enabled)
             {
                 var z = _image.rectTransform.eulerAngles.z + _imageRotationSpeed * Time.deltaTime;

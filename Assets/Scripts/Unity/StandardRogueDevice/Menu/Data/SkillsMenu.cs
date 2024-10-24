@@ -41,15 +41,18 @@ namespace RoguegardUnity
                 }
 
                 view.Show(list, manager, arg)
-                    ?.ElementNameGetter((skill, manager, arg) =>
+                    ?
+                    .ElementNameFrom((skill, manager, arg) =>
                     {
                         return skill.Name;
                     })
+
                     .OnClickElement((skill, manager, arg) =>
                     {
                         // 選択したスキルの情報と選択肢を表示する
                         manager.PushMenuScreen(menu, other: skill);
                     })
+
                     .Build();
             }
         }

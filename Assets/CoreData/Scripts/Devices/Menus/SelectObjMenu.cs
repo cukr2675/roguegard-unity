@@ -29,10 +29,12 @@ namespace Roguegard.Device
             }
 
             view.Show(list, manager, arg)
-                ?.ElementNameGetter((obj, manager, arg) =>
+                ?
+                .ElementNameFrom((obj, manager, arg) =>
                 {
                     return obj.GetName();
                 })
+
                 .OnClickElement((obj, manager, arg) =>
                 {
                     var device = RogueDeviceEffect.Get(arg.Self);
@@ -40,6 +42,7 @@ namespace Roguegard.Device
                     device.SetDeviceCommand(callback, arg.Self, callbackArg);
                     manager.Done();
                 })
+
                 .Build();
         }
     }

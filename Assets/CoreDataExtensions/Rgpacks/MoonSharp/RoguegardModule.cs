@@ -478,12 +478,14 @@ return {
             public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
             {
                 view.Show(selectOptions, manager, arg)
-                    ?.OnClickElement((selectOption, manager, arg) =>
+                    ?
+                    .OnClickElement((selectOption, manager, arg) =>
                     {
                         manager.Done();
                         args[0] = DynValue.NewNumber(selectOptions.IndexOf(selectOption) + 1);
                         coroutine.Resume(args);
                     })
+
                     .Build();
             }
         }

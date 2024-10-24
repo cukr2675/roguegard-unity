@@ -30,18 +30,18 @@ namespace RoguegardUnity
 
         public static bool FadingNow { get; private set; }
 
-        private void Awake()
-        {
-            DontDestroyOnLoad(gameObject);
-            GetValues(_fadeType, out fadeSpeed);
+        //private void Awake()
+        //{
+        //    DontDestroyOnLoad(gameObject);
+        //    GetValues(_fadeType, out fadeSpeed);
 
-            fadeTarget = 1f;
-            fadeProgress = fadeTarget;
+        //    fadeTarget = 1f;
+        //    fadeProgress = fadeTarget;
 
-            current = this;
+        //    current = this;
 
-            Update();
-        }
+        //    Update();
+        //}
 
         private static void GetValues(
             FadeType fadeType, out float fadeSpeed)
@@ -56,21 +56,21 @@ namespace RoguegardUnity
             }
         }
 
-        private void Update()
-        {
-            var deltaFade = fadeSpeed * Time.deltaTime;
-            fadeProgress = Mathf.MoveTowards(fadeProgress, fadeTarget, deltaFade);
+        //private void Update()
+        //{
+        //    var deltaFade = fadeSpeed * Time.deltaTime;
+        //    fadeProgress = Mathf.MoveTowards(fadeProgress, fadeTarget, deltaFade);
 
-            _targetImage.color = new Color(0f, 0f, 0f, fadeProgress);
+        //    _targetImage.color = new Color(0f, 0f, 0f, fadeProgress);
 
-            if (fadeProgress == fadeTarget)
-            {
-                // フェードが終了した場合、コンポーネントを無効化 (無駄な Update をなくす) したあとイベントを実行する (enabled をイベントで設定できるようにする)
-                enabled = false;
-                onFadeEnd?.Invoke();
-                _targetImage.StartCoroutine(ResetFadingNow());
-            }
-        }
+        //    if (fadeProgress == fadeTarget)
+        //    {
+        //        // フェードが終了した場合、コンポーネントを無効化 (無駄な Update をなくす) したあとイベントを実行する (enabled をイベントで設定できるようにする)
+        //        enabled = false;
+        //        onFadeEnd?.Invoke();
+        //        _targetImage.StartCoroutine(ResetFadingNow());
+        //    }
+        //}
 
         private static IEnumerator ResetFadingNow()
         {
@@ -140,6 +140,11 @@ namespace RoguegardUnity
 
         public static void StartCanvasCoroutine(IEnumerator routine)
         {
+            if (current == null)
+            {
+                current = new GameObject().AddComponent<FadeCanvas>();
+            }
+
             currentCoroutine = CreateCoroutine(routine);
             current.StartCoroutine(currentCoroutine);
         }

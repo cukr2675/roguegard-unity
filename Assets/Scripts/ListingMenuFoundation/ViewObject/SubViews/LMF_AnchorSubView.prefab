@@ -167,7 +167,7 @@ MonoBehaviour:
   _viewElementPrefab: {fileID: 8923221682010575914, guid: 7865de9e5a8e37348a39a053aa909d91, type: 3}
   _viewElementCount: {x: 1, y: 1}
   _extensionDirection: 1
-  _selectable: 0
+  _isSelectable: 1
 --- !u!1001 &4038606407322164914
 PrefabInstance:
   m_ObjectHideFlags: 0

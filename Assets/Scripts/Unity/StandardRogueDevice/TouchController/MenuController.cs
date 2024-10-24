@@ -41,6 +41,10 @@ namespace RoguegardUnity
         [SerializeField] private StatsWindow _statsWindow = null;
         public StatsWindow Stats => _statsWindow;
 
+        [Header("Title Only")]
+        [SerializeField] private GridSubView _titleMenu = null;
+        public static string TitleMenuName => "TitleMenu";
+
         //[SerializeField] private ScrollMenuView _scrollMenu = null;
 
         private MainMenu mainMenu;
@@ -89,6 +93,7 @@ namespace RoguegardUnity
             _textEditorMenu.Initialize();
             _paintMenu.Initialize();
             //_loadingMenu.Initialize();
+            if (_titleMenu != null) { _titleMenu.Initialize(); }
             var scrollSensitivity = 64f;
             SetScrollSensitivity(scrollSensitivity);
 
@@ -148,11 +153,23 @@ namespace RoguegardUnity
             }
         }
 
+        public override IElementsSubView GetSubView(string subViewName)
+        {
+            if (subViewName == TitleMenuName) return _titleMenu;
+            return base.GetSubView(subViewName);
+        }
+
         public override void HideAll(bool back = false)
         {
             base.HideAll(back);
             _textEditorMenu.Show(false);
             _statsWindow.Show(false);
+            if (_titleMenu != null) { _titleMenu.Hide(back); }
+        }
+
+        public override string Localize(string text)
+        {
+            return StandardRogueDeviceUtility.Localize(text);
         }
 
         public override void PushMenuScreen(

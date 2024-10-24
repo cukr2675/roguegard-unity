@@ -8,7 +8,6 @@ namespace ListingMF
         where TMgr : IListMenuManager
         where TArg : IListMenuArg
     {
-        public string MenuName { get; set; }
         public string SpeechBoxSubViewName { get; set; } = StandardSubViewTable.SpeechBoxName;
         public string ChoicesSubViewName { get; set; } = StandardSubViewTable.ChoicesName;
         public string CaptionBoxSubViewName { get; set; } = StandardSubViewTable.CaptionBoxName;
@@ -19,9 +18,8 @@ namespace ListingMF
         private IElementsSubViewStateProvider captionBoxSubViewStateProvider;
 
         private readonly string[] message = new string[1];
-        private readonly List<object> captionBoxList = new();
 
-        public FluentBuilder Show(string message, TMgr manager, TArg arg, object viewStateHolder = null)
+        public Builder Show(string message, TMgr manager, TArg arg, object viewStateHolder = null)
         {
             if (message == null) throw new System.ArgumentNullException(nameof(message));
             if (manager == null) throw new System.ArgumentNullException(nameof(manager));
@@ -38,29 +36,29 @@ namespace ListingMF
             // メッセージボックスのビューを表示
             this.message[0] = message;
 
-            // メニュー名を表示
-            captionBoxList.Clear();
-            if (MenuName != null) { captionBoxList.Add(MenuName); }
-
             if (TryShowSubViews(manager, arg)) return null;
-            else return new FluentBuilder(this, manager, arg);
+            else return new Builder(this, manager, arg);
         }
 
         protected override void ShowSubViews(TMgr manager, TArg arg)
         {
             if (LMFAssert.Type<MessageBoxSubView>(manager.GetSubView(SpeechBoxSubViewName), out var speechBoxSubView)) return;
+
             speechBoxSubView.Show(message, ElementToStringHandler.Instance, manager, arg, ref messageBoxSubViewStateProvider);
 
             manager
                 .GetSubView(ChoicesSubViewName)
                 .SetParameters(List, SelectOptionHandler.Instance, manager, arg, ref choicesSubViewStateProvider);
-            speechBoxSubView.ShowScheduledAfterCompletion(ChoicesSubViewName);
+            speechBoxSubView.DoScheduledAfterCompletion((manager, arg) =>
+            {
+                manager.GetSubView(ChoicesSubViewName).Show();
+            });
 
-            if (MenuName != null)
+            if (Title != null)
             {
                 manager
                     .GetSubView(CaptionBoxSubViewName)
-                    .Show(captionBoxList, ElementToStringHandler.Instance, manager, arg, ref captionBoxSubViewStateProvider);
+                    .Show(TitleSingle, ElementToStringHandler.Instance, manager, arg, ref captionBoxSubViewStateProvider);
             }
         }
 
@@ -68,20 +66,20 @@ namespace ListingMF
         {
             manager.GetSubView(SpeechBoxSubViewName).Hide(back);
             manager.GetSubView(ChoicesSubViewName).Hide(back);
-            if (MenuName != null) { manager.GetSubView(CaptionBoxSubViewName).Hide(back); }
+            if (Title != null) { manager.GetSubView(CaptionBoxSubViewName).Hide(back); }
         }
 
-        public class FluentBuilder : ListFluentBuilder<FluentBuilder>
+        public class Builder : BaseListBuilder<Builder>
         {
             private readonly SpeechBoxViewTemplate<TMgr, TArg> parent;
 
-            public FluentBuilder(SpeechBoxViewTemplate<TMgr, TArg> parent, TMgr manager, TArg arg)
+            public Builder(SpeechBoxViewTemplate<TMgr, TArg> parent, TMgr manager, TArg arg)
                 : base(parent, manager, arg)
             {
                 this.parent = parent;
             }
 
-            public FluentBuilder AppendSelectOption(string name, ListMenuSelectOption<TMgr, TArg>.HandleClickAction handleClick)
+            public Builder Option(string name, HandleClickElement<TMgr, TArg> handleClick)
             {
                 AssertNotBuilded();
 
@@ -89,7 +87,7 @@ namespace ListingMF
                 return this;
             }
 
-            public FluentBuilder Exit()
+            public Builder Exit()
             {
                 AssertNotBuilded();
 

@@ -25,7 +25,8 @@ namespace ListingMF
             this.handler = handler as IButtonElementHandler;
             this.element = element;
 
-            text.text = handler.GetName(element, Manager, Arg);
+            var baseText = handler.GetName(element, Manager, Arg);
+            text.text = Manager.Localize(baseText);
             //_text.color = new Color32(240, 240, 240, 255);
             //if (element is IListMenuIcon icon)
             //{

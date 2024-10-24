@@ -90,7 +90,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1177477052207806784, guid: 3ebc47c7d31e8af4dac2ec188e7f017c, type: 3}
       propertyPath: m_Name
-      value: LMF_WidgetsMenuView Variant
+      value: LMF_WidgetsSubView
       objectReference: {fileID: 0}
     - target: {fileID: 3716826475535348905, guid: 3ebc47c7d31e8af4dac2ec188e7f017c, type: 3}
       propertyPath: m_AnchorMax.x
@@ -138,5 +138,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _scrollRect: {fileID: 186880291570748327}
-  _ViewWidgetPrefabs: []
-  _fallbackViewElementPrefab: {fileID: 8923221682010575914, guid: 8a43e327414089a49af6ece9d72c7701, type: 3}
+  _defaultVisible: 0
+  _isSelectable: 1

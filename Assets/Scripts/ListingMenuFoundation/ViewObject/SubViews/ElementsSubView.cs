@@ -14,7 +14,7 @@ namespace ListingMF
         public IListMenuManager Manager { get; private set; }
         public IListMenuArg Arg { get; private set; }
 
-        private event HandleEndAnimationAction HandleEndAnimation;
+        private event HandleEndAnimation OnEndAnimation;
         private AnimatorTupple animator;
 
         protected ViewElement LastSelectedViewElement { get; private set; }
@@ -28,7 +28,7 @@ namespace ListingMF
 
         public virtual bool HasManagerLock { get; private set; }
 
-        public delegate void HandleEndAnimationAction(IListMenuManager manager, IListMenuArg arg);
+        public delegate void HandleEndAnimation(IListMenuManager manager, IListMenuArg arg);
 
         private const int backStatusCode = 2;
 
@@ -56,18 +56,18 @@ namespace ListingMF
             }
         }
 
-        public virtual void Show(HandleEndAnimationAction handleEndAnimation = null)
+        public virtual void Show(HandleEndAnimation handleEndAnimation = null)
         {
             SetBlock(false);
             AnimatorTupple.TrySetVisible(this, true);
 
             if (handleEndAnimation != null)
             {
-                HandleEndAnimation += handleEndAnimation;
+                OnEndAnimation += handleEndAnimation;
             }
         }
 
-        public virtual void Hide(bool back, HandleEndAnimationAction handleEndAnimation = null)
+        public virtual void Hide(bool back, HandleEndAnimation handleEndAnimation = null)
         {
             if (back) { SetStatusCode(backStatusCode); }
             SetBlock(true);
@@ -75,7 +75,7 @@ namespace ListingMF
 
             if (handleEndAnimation != null)
             {
-                HandleEndAnimation += handleEndAnimation;
+                OnEndAnimation += handleEndAnimation;
             }
         }
 
@@ -90,8 +90,8 @@ namespace ListingMF
         public void UnlockManager()
         {
             HasManagerLock = false;
-            HandleEndAnimation?.Invoke(Manager, Arg);
-            HandleEndAnimation = null;
+            OnEndAnimation?.Invoke(Manager, Arg);
+            OnEndAnimation = null;
         }
         public void PlayString(string value) => AnimatorTupple.Play(this, value);
         public void PlayObject(Object value) => AnimatorTupple.Play(this, value);
