@@ -12,8 +12,8 @@ namespace ListingMF
         [SerializeField] private MessageBox _messageBox = null;
         public MessageBox MessageBox => _messageBox;
 
-        [Space, SerializeField] private UnityEvent _onStartSpeech = null;
-        [Space, SerializeField] private UnityEvent _onEndSpeech = null;
+        [Space, SerializeField] private StartSpeechEvent _onStartSpeech = null;
+        [Space, SerializeField] private EndSpeechEvent _onEndSpeech = null;
 
         private bool isInitialized;
         private bool isSpeechingNow;
@@ -64,5 +64,8 @@ namespace ListingMF
                 isSpeechingNow = speechingNow;
             }
         }
+
+        [System.Serializable] public class StartSpeechEvent : UnityEvent { }
+        [System.Serializable] public class EndSpeechEvent : UnityEvent { }
     }
 }

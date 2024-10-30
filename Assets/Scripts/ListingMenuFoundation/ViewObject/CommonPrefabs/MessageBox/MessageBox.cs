@@ -45,8 +45,8 @@ namespace ListingMF
 
         [Space]
         [SerializeField, Tooltip("テキストを含まない<link>タグまで表示が到達したとき発火するイベント\n（上のプロパティから発行されるものも含む）")]
-        private UnityEvent<string> _onReachHiddenLink = null;
-        public UnityEvent<string> OnReachHiddenLink => _onReachHiddenLink;
+        private ReachHiddenLinkEvent _onReachHiddenLink = null;
+        public ReachHiddenLinkEvent OnReachHiddenLink => _onReachHiddenLink;
 
         private TextTypingEffect textTypingEffect;
         private TextHorizontalRuler textRuleEffect;
@@ -232,5 +232,7 @@ namespace ListingMF
             Static,
             Typing
         }
+
+        [System.Serializable] public class ReachHiddenLinkEvent : UnityEvent<string> { }
     }
 }

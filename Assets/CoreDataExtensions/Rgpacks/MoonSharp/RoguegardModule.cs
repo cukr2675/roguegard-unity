@@ -305,6 +305,7 @@ return {
             selectMenu.selectOptions.Clear();
             for (int i = 0; i < args.Count; i++)
             {
+                Debug.Log(args[i]);
                 var selectOption = args.AsType(i, name, DataType.String, false).String;
                 selectMenu.selectOptions.Add(selectOption);
             }
@@ -465,6 +466,31 @@ return {
             }
         }
 
+        private class SpeechMenu : RogueMenuScreen
+        {
+            public global::MoonSharp.Interpreter.Coroutine coroutine;
+            public string message;
+            private static readonly DynValue[] args = new DynValue[1];
+
+            private readonly SpeechBoxViewTemplate<RogueMenuManager, ReadOnlyMenuArg> view = new()
+            {
+            };
+
+            public override bool IsIncremental => true;
+
+            public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
+            {
+                view.ShowTemplate(message, manager, arg)
+                    ?
+                    .Build();
+            }
+
+            public override void CloseScreen(RogueMenuManager manager, bool back)
+            {
+                view.HideTemplate(manager, back);
+            }
+        }
+
         private class SelectMenu : RogueMenuScreen
         {
             public global::MoonSharp.Interpreter.Coroutine coroutine;
@@ -473,11 +499,14 @@ return {
 
             private readonly CommandListViewTemplate<string, RogueMenuManager, ReadOnlyMenuArg> view = new()
             {
+                SecodaryCommandSubViewName = StandardSubViewTable.ChoicesName,
             };
+
+            public override bool IsIncremental => true;
 
             public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
             {
-                view.Show(selectOptions, manager, arg)
+                view.ShowTemplate(selectOptions, manager, arg)
                     ?
                     .OnClickElement((selectOption, manager, arg) =>
                     {
@@ -487,6 +516,11 @@ return {
                     })
 
                     .Build();
+            }
+
+            public override void CloseScreen(RogueMenuManager manager, bool back)
+            {
+                view.HideTemplate(manager, back);
             }
         }
     }

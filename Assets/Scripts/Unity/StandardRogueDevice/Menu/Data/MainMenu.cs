@@ -32,7 +32,7 @@ namespace RoguegardUnity
 
         public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
         {
-            view.Show(manager, arg)
+            view.ShowTemplate(manager, arg)
                 ?
                 .Option(":Skills", skillsMenu.Use)
                 .Option(":Items", (manager, arg) => manager.PushMenuScreen(objsMenu.Items, arg.Self, null, targetObj: arg.Self))
@@ -50,6 +50,7 @@ namespace RoguegardUnity
             {
                 base.ShowSubViews(manager, arg);
 
+                // ダンジョン名とパーティの名前/HP/MPを表示
                 var parent = (MenuController)manager;
                 parent.Stats.SetText(arg.Self);
                 parent.Stats.SetDungeon(arg.Self.Location);
@@ -65,7 +66,7 @@ namespace RoguegardUnity
 
             public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
             {
-                view.Show("", manager, arg)
+                view.ShowTemplate("", manager, arg)
                     ?.Build();
             }
         }
@@ -86,7 +87,7 @@ namespace RoguegardUnity
                 var inLobby = RogueDevice.Primary.Player.Location == worldInfo.Lobby;
                 var openArg = new RogueMethodArgument(count: inLobby ? 1 : 0);
 
-                view.Show(manager, arg)
+                view.ShowTemplate(manager, arg)
                     ?
                     .Option(":Save", (manager, arg) =>
                     {
@@ -126,7 +127,7 @@ namespace RoguegardUnity
 
                 public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
                 {
-                    view.Show(":GiveUpMsg", manager, arg)
+                    view.ShowTemplate(":GiveUpMsg", manager, arg)
                         ?.Option(":Yes", (manager, arg) =>
                         {
                             manager.Done();
@@ -148,7 +149,7 @@ namespace RoguegardUnity
                 {
                     if (!DungeonQuestInfo.TryGetQuest(arg.Self, out var quest)) throw new RogueException();
 
-                    view.Show(quest.ToString(), manager, arg)
+                    view.ShowTemplate(quest.ToString(), manager, arg)
                         ?.Build();
                 }
             }

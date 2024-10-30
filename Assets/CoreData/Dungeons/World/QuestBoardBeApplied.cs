@@ -56,7 +56,7 @@ namespace Roguegard
                     elms.Add(quest);
                 }
 
-                view.Show(elms, manager, arg)
+                view.ShowTemplate(elms, manager, arg)
                     ?
                     .ElementNameFrom((quest, manager, arg) =>
                     {
@@ -82,7 +82,7 @@ namespace Roguegard
                 {
                     var quest = (DungeonQuest)arg.Arg.Other;
 
-                    view.Show(quest.Caption, manager, arg)
+                    view.ShowTemplate(quest.Caption, manager, arg)
                         ?.Build();
                 }
             }

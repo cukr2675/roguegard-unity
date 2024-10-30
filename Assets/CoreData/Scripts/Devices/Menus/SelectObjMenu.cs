@@ -28,7 +28,7 @@ namespace Roguegard.Device
                 list.Add(arg.Self.Space.Objs[i]);
             }
 
-            view.Show(list, manager, arg)
+            view.ShowTemplate(list, manager, arg)
                 ?
                 .ElementNameFrom((obj, manager, arg) =>
                 {

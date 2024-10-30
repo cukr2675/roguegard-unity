@@ -10,11 +10,20 @@ namespace ListingMF
             where TMgr : IListMenuManager
             where TArg : IListMenuArg
         {
-            return new ListMenuSelectOption<TMgr, TArg>()
-            {
-                Name = name,
-                HandleClick = handleClick
-            };
+            var instance = new ListMenuSelectOption<TMgr, TArg>();
+            instance.SetName(name);
+            instance.HandleClick = handleClick;
+            return instance;
+        }
+
+        public static ListMenuSelectOption<TMgr, TArg> Create<TMgr, TArg>(GetElementName<TMgr, TArg> getName, HandleClickElement<TMgr, TArg> handleClick)
+            where TMgr : IListMenuManager
+            where TArg : IListMenuArg
+        {
+            var instance = new ListMenuSelectOption<TMgr, TArg>();
+            instance.SetName(getName);
+            instance.HandleClick = handleClick;
+            return instance;
         }
     }
 
@@ -22,10 +31,38 @@ namespace ListingMF
         where TMgr : IListMenuManager
         where TArg : IListMenuArg
     {
-        public string Name { get; set; }
+        private string name;
+        private GetElementName<TMgr, TArg> getName;
+
         public HandleClickElement<TMgr, TArg> HandleClick { get; set; }
 
-        string IListMenuSelectOption.GetName(IListMenuManager manager, IListMenuArg arg) => Name;
+        public void SetName(string name)
+        {
+            if (name == null) throw new System.ArgumentNullException(nameof(name));
+
+            this.name = name;
+            getName = null;
+        }
+
+        public void SetName(GetElementName<TMgr, TArg> getName)
+        {
+            if (getName == null) throw new System.ArgumentNullException(nameof(getName));
+
+            this.getName = getName;
+            name = null;
+        }
+
+        string IListMenuSelectOption.GetName(IListMenuManager manager, IListMenuArg arg)
+        {
+            if (getName != null)
+            {
+                if (LMFAssert.Type<TMgr>(manager, out var tMgr) ||
+                    LMFAssert.Type<TArg>(arg, out var tArg)) return null;
+
+                return getName(tMgr, tArg);
+            }
+            else return name;
+        }
 
         void IListMenuSelectOption.HandleClick(IListMenuManager manager, IListMenuArg arg)
         {

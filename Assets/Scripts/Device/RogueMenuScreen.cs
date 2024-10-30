@@ -8,7 +8,11 @@ namespace Roguegard.Device
 {
     public abstract class RogueMenuManager : StandardListMenuManager<RogueMenuManager, ReadOnlyMenuArg>
     {
+        public static string CharacterCreationName => "CharacterCreation";
+
         public abstract string TextEditorValue { get; }
+
+        public abstract IListMenuSelectOption LoadPresetSelectOptionOfCharacterCreation { get; }
 
         public abstract void PushMenuScreen(
             MenuScreen<RogueMenuManager, ReadOnlyMenuArg> menuScreen,
@@ -21,8 +25,6 @@ namespace Roguegard.Device
             object other = null);
 
         public abstract void OpenTextEditor(string text);
-
-        public abstract void OpenCharacterCreationView(IListMenuSelectOption exit, ReadOnlyMenuArg arg);
 
         public void Reopen()
         {

@@ -33,7 +33,7 @@ namespace RoguegardUnity
                 partyMembers.Add(partyMemberObjs[i]);
             }
 
-            view.Show(partyMembers, manager, arg)
+            view.ShowTemplate(partyMembers, manager, arg)
                 ?.OnClickElement((partyMember, manager, arg) =>
                 {
                     // 選択したパーティメンバーの情報と選択肢を表示する

@@ -1,358 +1,340 @@
-//using System.Collections;
-//using System.Collections.Generic;
-//using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
-//using Roguegard;
-//using Roguegard.CharacterCreation;
-//using Roguegard.Device;
-//using TMPro;
+using Roguegard;
+using Roguegard.CharacterCreation;
+using Roguegard.Device;
+using TMPro;
+using ListingMF;
 
-//namespace RoguegardUnity
-//{
-//    public class CharacterCreationOptionMenu : BaseScrollListMenu<object>
-//    {
-//        protected override IKeyword ViewKeyword => DeviceKw.MenuOptions;
+namespace RoguegardUnity
+{
+    public class CharacterCreationOptionMenu : RogueMenuScreen
+    {
+        private readonly List<object> elms = new();
+        private readonly ICharacterCreationDatabase database;
+        private readonly CharacterCreationOptionsSelectOption selectOption;
+        private readonly RemoveSelectOption removeSelectOption;
 
-//        private readonly List<object> elms = new();
-//        private readonly ICharacterCreationDatabase database;
-//        private readonly CharacterCreationOptionsSelectOption selectOption;
-//        private readonly RemoveSelectOption removeSelectOption;
+        // selectOption と同時に出現するメンバーは別インスタンスにする。
+        private readonly CharacterCreationOptionsSelectOption singleItemMemberSelectOption;
+        private readonly CharacterCreationOptionsSelectOption alphabetTypeMemberSelectOption;
 
-//        // selectOption と同時に出現するメンバーは別インスタンスにする。
-//        private readonly CharacterCreationOptionsSelectOption singleItemMemberSelectOption;
-//        private readonly CharacterCreationOptionsSelectOption alphabetTypeMemberSelectOption;
+        private readonly VariableWidgetsViewTemplate<RogueMenuManager, ReadOnlyMenuArg> view;
 
-//        public CharacterCreationOptionMenu(ICharacterCreationDatabase database)
-//        {
-//            this.database = database;
-//            selectOption = new CharacterCreationOptionsSelectOption(database);
-//            removeSelectOption = new RemoveSelectOption();
+        public CharacterCreationOptionMenu(ICharacterCreationDatabase database)
+        {
+            this.database = database;
+            selectOption = new CharacterCreationOptionsSelectOption(database);
+            removeSelectOption = new RemoveSelectOption();
 
-//            singleItemMemberSelectOption = new CharacterCreationOptionsSelectOption(database);
-//            alphabetTypeMemberSelectOption = new CharacterCreationOptionsSelectOption(database);
-//        }
+            singleItemMemberSelectOption = new CharacterCreationOptionsSelectOption(database);
+            alphabetTypeMemberSelectOption = new CharacterCreationOptionsSelectOption(database);
 
-//        public void Set(CharacterCreationDataBuilder builder)
-//        {
-//            removeSelectOption.builder = builder;
-//        }
+            view = new()
+            {
+            };
+        }
 
-//        protected override Spanning<object> GetList(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-//        {
-//            if (arg.Other is RaceBuilder raceBuilder)
-//            {
-//                elms.Clear();
-//                elms.Add(new ShortNameOption(removeSelectOption.builder));
-//                elms.Add(selectOption.Set(raceBuilder));
-//                elms.Add(new GenderOption(database));
-//                elms.Add(new ColorPicker());
-//                AddMemberElements(raceBuilder);
-//            }
-//            else if (arg.Other is AppearanceBuilder appearanceBuilder)
-//            {
-//                elms.Clear();
-//                elms.Add(selectOption.Set(appearanceBuilder));
-//                elms.Add(new ColorPicker());
-//                AddMemberElements(appearanceBuilder);
-//                elms.Add(removeSelectOption);
-//            }
-//            else if (arg.Other is IntrinsicBuilder intrinsicBuilder)
-//            {
-//                elms.Clear();
-//                elms.Add(selectOption.Set(intrinsicBuilder));
-//                elms.Add(new NameOption());
-//                AddMemberElements(intrinsicBuilder);
-//                elms.Add(removeSelectOption);
-//            }
-//            else if (arg.Other is StartingItemBuilder startingItemBuilder)
-//            {
-//                elms.Clear();
-//                elms.Add(selectOption.Set(startingItemBuilder));
-//                elms.Add(new StackOption());
-//                AddMemberElements(startingItemBuilder);
-//                elms.Add(removeSelectOption);
-//            }
-//            return elms;
-//        }
+        public void Set(CharacterCreationDataBuilder builder)
+        {
+            removeSelectOption.builder = builder;
+        }
 
-//        private void AddMemberElements(IMemberable memberable)
-//        {
-//            for (int i = 0; i < memberable.MemberSources.Count; i++)
-//            {
-//                var member = memberable.GetMember(memberable.MemberSources[i]);
-//                if (member is SingleItemMember singleItemMember)
-//                {
-//                    elms.Add(singleItemMemberSelectOption.Set(singleItemMember));
-//                }
-//                else if (member is EquipMember equipMember)
-//                {
-//                    elms.Add(new IsEquippedSelectOption(equipMember));
-//                }
-//                else if (member is AlphabetTypeMember alphabetTypeMember && memberable is AppearanceBuilder appearanceBuilder)
-//                {
-//                    appearanceBuilder.Option.UpdateMemberRange(alphabetTypeMember, appearanceBuilder, removeSelectOption.builder);
-//                    elms.Add(alphabetTypeMemberSelectOption.Set(alphabetTypeMember));
-//                }
-//                else if (member is StandardRaceMember standardRaceMember && memberable is RaceBuilder raceBuilder)
-//                {
-//                    raceBuilder.Option.UpdateMemberRange(standardRaceMember, raceBuilder.Option, removeSelectOption.builder);
-//                    elms.Add(new CommonSlider(standardRaceMember, (IStandardRaceOption)raceBuilder.Option));
-//                }
-//            }
-//        }
+        public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
+        {
+            if (arg.Arg.Other is RaceBuilder raceBuilder)
+            {
+                elms.Clear();
+                elms.Add(
+                    new object[]
+                    {
+                        "職業／二つ名",
+                        InputFieldViewWidget.CreateOption<RogueMenuManager, ReadOnlyMenuArg>(
+                            (manager, arg) => removeSelectOption.builder.ShortName,
+                            (manager, arg, value) => removeSelectOption.builder.ShortName = value)
+                    });
+                elms.Add(selectOption.Set(raceBuilder));
+                elms.Add(
+                    new object[]
+                    {
+                        ListMenuSelectOption.Create<RogueMenuManager, ReadOnlyMenuArg>(
+                            (manager, arg) =>
+                            {
+                                if (arg.Arg.Other is RaceBuilder raceBuilder)
+                                {
+                                    return $"性別：{raceBuilder.Gender.Name}";
+                                }
+                                Debug.LogError("不正な型です。");
+                                return "性別：";
+                            },
+                            (manager, arg) =>
+                            {
+                                manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+                                if (arg.Arg.Other is RaceBuilder raceBuilder)
+                                {
+                                    var nextMenu = new SelectGenderMenu() { database = database };
+                                    manager.PushMenuScreen(nextMenu, arg.Self, other: arg.Arg.Other);
+                                    return;
+                                }
+                                Debug.LogError("不正な型です。");
+                            })
+                    });
+                elms.Add(
+                    ListMenuSelectOption.Create<RogueMenuManager, ReadOnlyMenuArg>(
+                        $"<#{ColorUtility.ToHtmlStringRGBA(raceBuilder.BodyColor)}>カラー",
+                        ColorPicker()));
+                AddMemberElements(raceBuilder);
+            }
+            else if (arg.Arg.Other is AppearanceBuilder appearanceBuilder)
+            {
+                elms.Clear();
+                elms.Add(selectOption.Set(appearanceBuilder));
+                elms.Add(
+                    ListMenuSelectOption.Create<RogueMenuManager, ReadOnlyMenuArg>(
+                        $"<#{ColorUtility.ToHtmlStringRGBA(appearanceBuilder.Color)}>カラー",
+                        ColorPicker()));
+                AddMemberElements(appearanceBuilder);
+                elms.Add(removeSelectOption);
+            }
+            else if (arg.Arg.Other is IntrinsicBuilder intrinsicBuilder)
+            {
+                elms.Clear();
+                elms.Add(selectOption.Set(intrinsicBuilder));
+                elms.Add(
+                    new object[]
+                    {
+                        "名前",
+                        InputFieldViewWidget.CreateOption<RogueMenuManager, ReadOnlyMenuArg>(
+                            (manager, arg) =>
+                            {
+                                if (arg.Arg.Other is IntrinsicBuilder intrinsicBuilder)
+                                {
+                                    return intrinsicBuilder.OptionName;
+                                }
+                                Debug.LogError("不正な型です。");
+                                return "???";
+                            },
+                            (manager, arg, value) =>
+                            {
+                                // 空欄の場合は上書きしないよう null にする
+                                if (string.IsNullOrWhiteSpace(value)) { value = null; }
 
-//        protected override string GetItemName(object element, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-//        {
-//            return SelectOptionPresenter.Instance.GetItemName(element, manager, self, user, arg);
-//        }
+                                if (arg.Arg.Other is IntrinsicBuilder intrinsicBuilder)
+                                {
+                                    return intrinsicBuilder.OptionName = value;
+                                }
+                                Debug.LogError("不正な型です。");
+                                return null;
+                            })
+                    });
+                AddMemberElements(intrinsicBuilder);
+                elms.Add(removeSelectOption);
+            }
+            else if (arg.Arg.Other is StartingItemBuilder startingItemBuilder)
+            {
+                elms.Clear();
+                elms.Add(selectOption.Set(startingItemBuilder));
+                elms.Add(
+                    new object[]
+                    {
+                        "個数",
+                        InputFieldViewWidget.CreateOption<RogueMenuManager, ReadOnlyMenuArg>(
+                            (manager, arg) =>
+                            {
+                                if (arg.Arg.Other is StartingItemBuilder startingItemBuilder)
+                                {
+                                    var value = startingItemBuilder.Stack
+                                        / RogueObj.GetMaxStack(startingItemBuilder.Option.InfoSet, StackOption.Default);
+                                    return value.ToString();
+                                }
+                                Debug.LogError("不正な型です。");
+                                return "0";
+                            },
+                            (manager, arg, valueString) =>
+                            {
+                                if (arg.Arg.Other is StartingItemBuilder startingItemBuilder && int.TryParse(valueString, out var value))
+                                {
+                                    startingItemBuilder.Stack = value * RogueObj.GetMaxStack(startingItemBuilder.Option.InfoSet, StackOption.Default);
+                                    if (startingItemBuilder.Stack <= 0) { startingItemBuilder.Stack = 1; }
+                                    return startingItemBuilder.Stack.ToString();
+                                }
+                                Debug.LogError("不正な型です。");
+                                return null;
+                            },
+                            TMP_InputField.ContentType.IntegerNumber)
+                    });
+                AddMemberElements(startingItemBuilder);
+                elms.Add(removeSelectOption);
+            }
 
-//        protected override void ActivateItem(object element, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-//        {
-//            SelectOptionPresenter.Instance.ActivateItem(element, manager, self, user, arg);
-//        }
+            view.ShowTemplate(elms, manager, arg)
+                ?
+                .Build();
+        }
 
-//        private class ShortNameOption : IOptionsMenuText
-//        {
-//            private readonly CharacterCreationDataBuilder builder;
-//            public TMP_InputField.ContentType ContentType => TMP_InputField.ContentType.Standard;
-//            public ShortNameOption(CharacterCreationDataBuilder builder) => this.builder = builder;
+        private void AddMemberElements(IMemberable memberable)
+        {
+            for (int i = 0; i < memberable.MemberSources.Count; i++)
+            {
+                var member = memberable.GetMember(memberable.MemberSources[i]);
+                if (member is SingleItemMember singleItemMember)
+                {
+                    elms.Add(singleItemMemberSelectOption.Set(singleItemMember));
+                }
+                else if (member is EquipMember equipMember)
+                {
+                    elms.Add(
+                        ListMenuSelectOption.Create<RogueMenuManager, ReadOnlyMenuArg>(
+                            (manager, arg) =>
+                            {
+                                return $"<#808080>装備する：{equipMember.IsEquipped}";
+                            },
+                            (manager, arg) =>
+                            {
+                                equipMember.IsEquipped = !equipMember.IsEquipped;
+                            }));
+                }
+                else if (member is AlphabetTypeMember alphabetTypeMember && memberable is AppearanceBuilder appearanceBuilder)
+                {
+                    appearanceBuilder.Option.UpdateMemberRange(alphabetTypeMember, appearanceBuilder, removeSelectOption.builder);
+                    elms.Add(alphabetTypeMemberSelectOption.Set(alphabetTypeMember));
+                }
+                else if (member is StandardRaceMember standardRaceMember && memberable is RaceBuilder raceBuilder)
+                {
+                    raceBuilder.Option.UpdateMemberRange(standardRaceMember, raceBuilder.Option, removeSelectOption.builder);
+                    var standardRaceOption = (IStandardRaceOption)raceBuilder.Option;
+                    elms.Add(
+                        new object[]
+                        {
+                            "サイズ",
+                            InputFieldViewWidget.CreateOption<RogueMenuManager, ReadOnlyMenuArg>(
+                                (manager, arg) => standardRaceMember.Size.ToString(),
+                                (manager, arg, valueString) =>
+                                {
+                                    if (!int.TryParse(valueString, out var value)) return valueString;
 
-//            public string GetName(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg) => "職業／二つ名";
-//            public string GetValue(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg) => builder.ShortName;
-//            public void SetValue(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg, string value) => builder.ShortName = value;
-//        }
+                                    standardRaceMember.Size = Mathf.Clamp(value, standardRaceOption.MinSize, standardRaceOption.MaxSize);
+                                    return standardRaceMember.Size.ToString();
+                                },
+                                TMP_InputField.ContentType.IntegerNumber)
+                        });
+                }
+            }
+        }
 
-//        private class NameOption : IOptionsMenuText
-//        {
-//            public TMP_InputField.ContentType ContentType => TMP_InputField.ContentType.Standard;
+        private ColorPickerMenuScreen<RogueMenuManager, ReadOnlyMenuArg> ColorPicker()
+        {
+            return new ColorPickerMenuScreen<RogueMenuManager, ReadOnlyMenuArg>(
+                (manager, arg) =>
+                {
+                    if (arg.Arg.Other is RaceBuilder raceBuilder)
+                    {
+                        return raceBuilder.BodyColor;
+                    }
+                    else if (arg.Arg.Other is AppearanceBuilder appearanceBuilder)
+                    {
+                        return appearanceBuilder.Color;
+                    }
+                    Debug.LogError("不正な型です。");
+                    return Color.white;
+                },
+                (manager, arg, color) =>
+                {
+                    if (arg.Arg.Other is RaceBuilder raceBuilder)
+                    {
+                        raceBuilder.BodyColor = color;
+                        return;
+                    }
+                    else if (arg.Arg.Other is AppearanceBuilder appearanceBuilder)
+                    {
+                        appearanceBuilder.Color = color;
+                        return;
+                    }
+                    Debug.LogError("不正な型です。");
+                });
+        }
 
-//            public string GetName(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg) => "名前";
+        private class RemoveSelectOption : IListMenuSelectOption
+        {
+            public CharacterCreationDataBuilder builder;
 
-//            public string GetValue(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-//            {
-//                if (arg.Other is IntrinsicBuilder intrinsicBuilder)
-//                {
-//                    return intrinsicBuilder.OptionName;
-//                }
-//                Debug.LogError("不正な型です。");
-//                return "???";
-//            }
+            string IListMenuSelectOption.GetName(IListMenuManager manager, IListMenuArg arg) => "<#f00>削除";
 
-//            public void SetValue(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg, string value)
-//            {
-//                // 空欄の場合は上書きしないよう null にする
-//                if (string.IsNullOrWhiteSpace(value)) { value = null; }
+            void IListMenuSelectOption.HandleClick(IListMenuManager iManager, IListMenuArg iArg)
+            {
+                var manager = (RogueMenuManager)iManager;
+                var arg = (ReadOnlyMenuArg)iArg;
 
-//                if (arg.Other is IntrinsicBuilder intrinsicBuilder)
-//                {
-//                    intrinsicBuilder.OptionName = value;
-//                }
-//                Debug.LogError("不正な型です。");
-//            }
-//        }
+                manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
 
-//        private class RemoveSelectOption : BaseListMenuSelectOption
-//        {
-//            public override string Name => "<#f00>削除";
+                if (arg.Arg.Other is IMemberable memberable)
+                {
+                    for (int i = 0; i < memberable.MemberSources.Count; i++)
+                    {
+                        var member = memberable.GetMember(memberable.MemberSources[i]);
+                        if (member is SingleItemMember singleItemMember)
+                        {
+                            // 見た目装備を削除したとき、その装備品を獲得する
+                            CharacterCreationAddMenu.ReceiveStartingItemOptionObj(singleItemMember.ItemOption, arg.Self);
+                        }
+                    }
+                }
 
-//            public CharacterCreationDataBuilder builder;
+                if (arg.Arg.Other is AppearanceBuilder appearanceBuilder)
+                {
+                    builder.Appearances.Remove(appearanceBuilder);
+                }
+                else if (arg.Arg.Other is IntrinsicBuilder intrinsicBuilder)
+                {
+                    builder.Intrinsics.Remove(intrinsicBuilder);
+                }
+                else if (arg.Arg.Other is StartingItemBuilder startingItemBuilder)
+                {
+                    // 初期アイテムを削除したとき、そのアイテムを獲得する
+                    CharacterCreationAddMenu.ReceiveStartingItemOptionObj(startingItemBuilder.Option, arg.Self);
+                    builder.StartingItemTable.Remove(startingItemBuilder, true);
+                }
+                manager.HandleClickBack();
+            }
+        }
 
-//            public override void Activate(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-//            {
-//                manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+        private class SelectGenderMenu : RogueMenuScreen
+        {
+            public ICharacterCreationDatabase database;
+            private RaceBuilder builder;
+            private readonly List<IRogueGender> list = new();
 
-//                if (arg.Other is IMemberable memberable)
-//                {
-//                    for (int i = 0; i < memberable.MemberSources.Count; i++)
-//                    {
-//                        var member = memberable.GetMember(memberable.MemberSources[i]);
-//                        if (member is SingleItemMember singleItemMember)
-//                        {
-//                            // 見た目装備を削除したとき、その装備品を獲得する
-//                            CharacterCreationAddMenu.ReceiveStartingItemOptionObj(singleItemMember.ItemOption, self);
-//                        }
-//                    }
-//                }
+            private readonly ScrollViewTemplate<IRogueGender, RogueMenuManager, ReadOnlyMenuArg> view = new()
+            {
+            };
 
-//                if (arg.Other is AppearanceBuilder appearanceBuilder)
-//                {
-//                    builder.Appearances.Remove(appearanceBuilder);
-//                }
-//                else if (arg.Other is IntrinsicBuilder intrinsicBuilder)
-//                {
-//                    builder.Intrinsics.Remove(intrinsicBuilder);
-//                }
-//                else if (arg.Other is StartingItemBuilder startingItemBuilder)
-//                {
-//                    // 初期アイテムを削除したとき、そのアイテムを獲得する
-//                    CharacterCreationAddMenu.ReceiveStartingItemOptionObj(startingItemBuilder.Option, self);
-//                    builder.StartingItemTable.Remove(startingItemBuilder, true);
-//                }
-//                manager.Back();
-//            }
-//        }
+            public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
+            {
+                builder = (RaceBuilder)arg.Arg.Other;
+                var genders = builder.Option.Genders;
+                list.Clear();
+                for (int i = 0; i < genders.Count; i++)
+                {
+                    list.Add(genders[i]);
+                }
 
-//        private class ColorPicker : IOptionsMenuColor
-//        {
-//            public string GetName(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-//            {
-//                if (arg.Other is RaceBuilder raceBuilder)
-//                {
-//                    return $"<#{ColorUtility.ToHtmlStringRGBA(raceBuilder.BodyColor)}>カラー";
-//                }
-//                else if (arg.Other is AppearanceBuilder appearanceBuilder)
-//                {
-//                    return $"<#{ColorUtility.ToHtmlStringRGBA(appearanceBuilder.Color)}>カラー";
-//                }
-//                Debug.LogError("不正な型です。");
-//                return "???";
-//            }
+                view.ShowTemplate(list, manager, arg)
+                    ?
+                    .ElementNameFrom((gender, manager, arg) =>
+                    {
+                        return gender.Name;
+                    })
 
-//            public Color GetValue(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-//            {
-//                if (arg.Other is RaceBuilder raceBuilder)
-//                {
-//                    return raceBuilder.BodyColor;
-//                }
-//                else if (arg.Other is AppearanceBuilder appearanceBuilder)
-//                {
-//                    return appearanceBuilder.Color;
-//                }
-//                Debug.LogError("不正な型です。");
-//                return Color.white;
-//            }
+                    .OnClickElement((gender, manager, arg) =>
+                    {
+                        builder.Gender = gender;
+                        manager.HandleClickBack();
+                    })
 
-//            public void SetValue(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg, Color value)
-//            {
-//                if (arg.Other is RaceBuilder raceBuilder)
-//                {
-//                    raceBuilder.BodyColor = value;
-//                    return;
-//                }
-//                else if (arg.Other is AppearanceBuilder appearanceBuilder)
-//                {
-//                    appearanceBuilder.Color = value;
-//                    return;
-//                }
-//                Debug.LogError("不正な型です。");
-//            }
-//        }
-
-//        private class GenderOption : IListMenuSelectOption
-//        {
-//            private readonly SelectGenderMenu nextMenu;
-//            public GenderOption(ICharacterCreationDatabase database) => nextMenu = new SelectGenderMenu() { database = database };
-
-//            public string GetName(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-//            {
-//                if (arg.Other is RaceBuilder raceBuilder)
-//                {
-//                    return $"性別：{raceBuilder.Gender.Name}";
-//                }
-//                Debug.LogError("不正な型です。");
-//                return "性別：";
-//            }
-
-//            public void Activate(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-//            {
-//                manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-//                if (arg.Other is RaceBuilder raceBuilder)
-//                {
-//                    manager.OpenMenu(nextMenu, self, null, new(other: arg.Other));
-//                    return;
-//                }
-//                Debug.LogError("不正な型です。");
-//            }
-//        }
-
-//        private class SelectGenderMenu : BaseScrollListMenu<IRogueGender>
-//        {
-//            public ICharacterCreationDatabase database;
-//            private RaceBuilder builder;
-
-//            protected override Spanning<IRogueGender> GetList(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-//            {
-//                builder = (RaceBuilder)arg.Other;
-//                return builder.Option.Genders;
-//            }
-
-//            protected override string GetItemName(IRogueGender gender, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-//            {
-//                return gender.Name;
-//            }
-
-//            protected override void ActivateItem(IRogueGender gender, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-//            {
-//                builder.Gender = gender;
-//                manager.Back();
-//            }
-//        }
-
-//        private class StackOption : IOptionsMenuSlider
-//        {
-//            public string GetName(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg) => "個数";
-
-//            public float GetValue(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-//            {
-//                if (arg.Other is StartingItemBuilder startingItemBuilder)
-//                {
-//                    return (float)startingItemBuilder.Stack / RogueObj.GetMaxStack(startingItemBuilder.Option.InfoSet, Roguegard.StackOption.Default);
-//                }
-//                Debug.LogError("不正な型です。");
-//                return 0;
-//            }
-
-//            public void SetValue(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg, float value)
-//            {
-//                if (arg.Other is StartingItemBuilder startingItemBuilder)
-//                {
-//                    startingItemBuilder.Stack = (int)(value * RogueObj.GetMaxStack(startingItemBuilder.Option.InfoSet, Roguegard.StackOption.Default));
-//                    if (startingItemBuilder.Stack <= 0) { startingItemBuilder.Stack = 1; }
-//                    return;
-//                }
-//                Debug.LogError("不正な型です。");
-//            }
-//        }
-
-//        private class IsEquippedSelectOption : IListMenuSelectOption
-//        {
-//            private readonly EquipMember equipMember;
-//            public IsEquippedSelectOption(EquipMember equipMember) => this.equipMember = equipMember;
-
-//            public string GetName(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-//            {
-//                return $"<#808080>装備する：{equipMember.IsEquipped}";
-//            }
-
-//            public void Activate(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-//            {
-//                manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Cancel);
-//                //equipMember.IsEquipped = !equipMember.IsEquipped;
-//            }
-//        }
-
-//        private class CommonSlider : IOptionsMenuSlider
-//        {
-//            private readonly StandardRaceMember standardRaceMember;
-//            private readonly IStandardRaceOption standardRaceOption;
-
-//            public CommonSlider(StandardRaceMember standardRaceMember, IStandardRaceOption standardRaceOption)
-//            {
-//                this.standardRaceMember = standardRaceMember;
-//                this.standardRaceOption = standardRaceOption;
-//            }
-
-//            public string GetName(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg) => "サイズ";
-
-//            public float GetValue(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-//            {
-//                return Mathf.InverseLerp(standardRaceOption.MinSize, standardRaceOption.MaxSize, standardRaceMember.Size);
-//            }
-
-//            public void SetValue(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg, float value)
-//            {
-//                standardRaceMember.Size = standardRaceOption.MinSize + Mathf.RoundToInt(value * (standardRaceOption.MaxSize - standardRaceOption.MinSize));
-//            }
-//        }
-//    }
-//}
+                    .Build();
+            }
+        }
+    }
+}

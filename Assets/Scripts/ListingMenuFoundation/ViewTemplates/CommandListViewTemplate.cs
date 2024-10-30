@@ -18,7 +18,7 @@ namespace ListingMF
 
         private readonly ButtonElementHandler<TElm, TMgr, TArg> scrollSubViewHandler = new();
 
-        public Builder Show(
+        public Builder ShowTemplate(
             IReadOnlyList<TElm> list, TMgr manager, TArg arg, object viewStateHolder = null, IReadOnlyList<object> backAnchorList = null)
         {
             if (list == null) throw new System.ArgumentNullException(nameof(list));
@@ -53,7 +53,7 @@ namespace ListingMF
             }
         }
 
-        public void HideSubViews(TMgr manager, bool back)
+        public void HideTemplate(TMgr manager, bool back)
         {
             manager.GetSubView(SecodaryCommandSubViewName).Hide(back);
             if (Title != null) { manager.GetSubView(CaptionBoxSubViewName).Hide(back); }

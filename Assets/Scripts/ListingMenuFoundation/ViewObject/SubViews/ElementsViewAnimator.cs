@@ -17,12 +17,12 @@ namespace ListingMF
         public string StatusCodeInteger => _statusCodeInteger;
 
         [Space]
-        [SerializeField] private UnityEvent<string> _onPlayString = null;
-        public UnityEvent<string> OnPlayString => _onPlayString;
+        [SerializeField] private PlayStringEvent _onPlayString = null;
+        public PlayStringEvent OnPlayString => _onPlayString;
 
         [Space]
-        [SerializeField] private UnityEvent<Object> _onPlayObject = null;
-        public UnityEvent<Object> OnPlayObject => _onPlayObject;
+        [SerializeField] private PlayObjectEvent _onPlayObject = null;
+        public PlayObjectEvent OnPlayObject => _onPlayObject;
 
         [Header("ViewElement")]
 
@@ -91,5 +91,8 @@ namespace ListingMF
                 prevSelectedGameObject = gameObject;
             }
         }
+
+        [System.Serializable] public class PlayStringEvent : UnityEvent<string> { }
+        [System.Serializable] public class PlayObjectEvent : UnityEvent<string> { }
     }
 }

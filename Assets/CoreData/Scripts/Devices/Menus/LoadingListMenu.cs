@@ -34,7 +34,7 @@ namespace Roguegard.Device
         public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
         {
             oldProgress = 0f;
-            view.Show(text, manager, arg)
+            view.ShowTemplate(text, manager, arg)
                 ?.Append(ProgressBarViewWidget.CreateOption<RogueMenuManager, ReadOnlyMenuArg>((manager, arg) =>
                 {
                     var progress = getProgress(manager, arg);

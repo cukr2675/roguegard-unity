@@ -35,14 +35,17 @@ namespace ListingMF
 
             var baseText = handler.GetName(element, Manager, Arg);
             _text.text = Manager.Localize(baseText);
-            //_text.color = new Color32(240, 240, 240, 255);
-            //if (element is IListMenuIcon icon)
+
+            //if (icon != null)
             //{
-            //    icon.GetIcon(view.Root, view.Self, view.User, view.Arg, out var sprite, out var color);
-            //    _icon.sprite = sprite;
-            //    _icon.color = color;
+            //    _icon.sprite = icon;
             //    _icon.SetNativeSize();
             //    _icon.enabled = true;
+            //}
+            //else
+            //{
+            //    _icon.sprite = null;
+            //    _icon.enabled = false;
             //}
         }
     }

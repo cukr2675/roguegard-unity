@@ -14,7 +14,7 @@ namespace ListingMF
         private readonly int maxLineCount;
         private readonly string pageTurnHiddenLinkID;
         private readonly string eofHiddenLinkID;
-        private readonly UnityEvent<string> onReachHiddenLink;
+        private readonly MessageBox.OnReachEvent onReachHiddenLink;
         private readonly TextHiddenLinkManager hiddenLinkManager;
         private readonly StringBuilder stringBuilder;
 
@@ -32,7 +32,7 @@ namespace ListingMF
         /// <param name="pageTurnHiddenLinkID">テキストが最大行数から下にはみ出たとき発行されるリンクID名</param>
         /// <param name="eofHiddenLinkID">テキストの終端の表示が完了したとき発行されるリンクID</param>
         public TextTypingEffect(
-            TMP_Text text, int maxLineCount, string pageTurnHiddenLinkID, string eofHiddenLinkID, UnityEvent<string> onReachHiddenLink)
+            TMP_Text text, int maxLineCount, string pageTurnHiddenLinkID, string eofHiddenLinkID, MessageBox.OnReachEvent onReachHiddenLink)
         {
             if (text.lineSpacing != 0f) { Debug.LogWarning($"{nameof(text.lineSpacing)} != 0 はサポートされていません。"); }
 

@@ -34,7 +34,7 @@ namespace Roguegard
             }
             elms.Add(null);
 
-            view.Show(elms, manager, arg)
+            view.ShowTemplate(elms, manager, arg)
                 ?
                 
                 .ElementNameFrom((obj, manager, arg) =>
@@ -112,7 +112,7 @@ namespace Roguegard
 
             public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
             {
-                view.Show(manager, arg)
+                view.ShowTemplate(manager, arg)
                     ?.Option("Œğ‘ã", Change)
                     .Option("‰Á“ü", Invite)
                     .Option("•ÒW", Edit)

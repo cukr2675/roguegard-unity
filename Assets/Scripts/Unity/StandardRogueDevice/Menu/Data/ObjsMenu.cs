@@ -46,7 +46,7 @@ namespace RoguegardUnity
 
             public RogueMenuScreen commandMenu;
 
-            private readonly ActionListMenuSelectOption sortSelectOption;
+            private readonly ListMenuSelectOption<RogueMenuManager, ReadOnlyMenuArg> sortSelectOption;
 
             private static CategorizedSortTable sortTable;
 
@@ -73,7 +73,7 @@ namespace RoguegardUnity
                 var list = GetObjs(arg.Self, arg.Arg.TargetObj);
                 var viewStateHolder = GetViewStateHolder(manager, arg);
 
-                view.Show(list, manager, arg, viewStateHolder)
+                view.ShowTemplate(list, manager, arg, viewStateHolder)
                     ?
                     .ElementNameFrom((obj, manager, arg) =>
                     {

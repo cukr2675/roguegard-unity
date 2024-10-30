@@ -4,12 +4,11 @@ using UnityEngine;
 
 using System.IO;
 using ListingMF;
-using Roguegard;
 using Roguegard.Device;
 
 namespace RoguegardUnity
 {
-    internal class SelectFileCommandMenu : RogueMenuScreen
+    internal class SelectFileCommandMenuScreen : RogueMenuScreen
     {
         private readonly HandleClickElement<FileInfo, RogueMenuManager, ReadOnlyMenuArg> selectCallback;
         private readonly RenameDialog renameDialog = new();
@@ -17,7 +16,7 @@ namespace RoguegardUnity
 
         public override bool IsIncremental => true;
 
-        public SelectFileCommandMenu(HandleClickElement<FileInfo, RogueMenuManager, ReadOnlyMenuArg> selectCallback)
+        public SelectFileCommandMenuScreen(HandleClickElement<FileInfo, RogueMenuManager, ReadOnlyMenuArg> selectCallback)
         {
             this.selectCallback = selectCallback;
 
@@ -32,7 +31,7 @@ namespace RoguegardUnity
             var text = RogueFile.GetName(((FileInfo)arg.Arg.Other).FullName) + "‚ðƒ[ƒh‚µ‚Ü‚·‚©H";
             view.Title = text;
 
-            view.Show(manager, arg)
+            view.ShowTemplate(manager, arg)
                 ?
                 .Option(":Load", (manager, arg) =>
                 {
@@ -67,7 +66,7 @@ namespace RoguegardUnity
 
         public override void CloseScreen(RogueMenuManager manager, bool back)
         {
-            view.HideSubViews(manager, back);
+            view.HideTemplate(manager, back);
         }
 
         private class Paths
@@ -90,7 +89,7 @@ namespace RoguegardUnity
                 var fileInfo = (FileInfo)arg.Arg.Other;
                 newName = fileInfo.Name;
 
-                view.Show("", manager, arg)
+                view.ShowTemplate("", manager, arg)
                     ?
                     .Append(InputFieldViewWidget.CreateOption<RogueMenuManager, ReadOnlyMenuArg>(
                         (manager, arg) =>
@@ -100,7 +99,7 @@ namespace RoguegardUnity
                         },
                         (manager, arg, value) =>
                         {
-                            newName = value;
+                            return newName = value;
                         })
                     )
 
@@ -131,7 +130,7 @@ namespace RoguegardUnity
 
             public override void CloseScreen(RogueMenuManager manager, bool back)
             {
-                view.HideSubViews(manager, back);
+                view.HideTemplate(manager, back);
             }
 
             private static void Overwrite(RogueMenuManager manager, ReadOnlyMenuArg arg)

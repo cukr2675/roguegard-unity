@@ -27,7 +27,7 @@ namespace RoguegardUnity
             HandleClickElement<RogueMenuManager, ReadOnlyMenuArg> onNewFile = null)
         {
             var instance = new SelectFileMenuScreen();
-            instance.nextScreen = new SelectFileCommandMenu(onSelectFile);
+            instance.nextScreen = new SelectFileCommandMenuScreen(onSelectFile);
             instance.onNewFile = onNewFile;
 
             instance.view = new()
@@ -58,7 +58,7 @@ namespace RoguegardUnity
         {
             var instance = new SelectFileMenuScreen();
             instance.nextScreen = new ChoicesMenuScreen(
-                (manager, arg) => $":OverwriteMsg::1::{((FileInfo)arg.Arg.Other).Name}")
+                (manager, arg) => $":OverwriteMsg::1::{((FileInfo)arg.Arg.Other).Name}<link=\"HorizontalArrow\"></link>aaa<link=\"VerticalArrow\"></link>bbbb")
                 .Option(":Overwrite", (manager, arg) => onSelectFile((FileInfo)arg.Arg.Other, manager, arg))
                 .Exit();
             instance.onNewFile = onNewFile;
@@ -75,7 +75,7 @@ namespace RoguegardUnity
             files.Clear();
             files.AddRange(StandardRogueDeviceSave.GetFiles());
 
-            view.Show(files, manager, arg)
+            view.ShowTemplate(files, manager, arg)
                 ?
                 .VariableOnce(out var newArg, new MenuArg())
 

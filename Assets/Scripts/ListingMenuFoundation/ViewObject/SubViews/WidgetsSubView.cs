@@ -113,9 +113,7 @@ namespace ListingMF
                 viewWidgetGameObjects.Add(viewWidget.gameObject);
             }
 
-            // 最後の要素が一番上までスクロールできるスライダーサイズに変更
             var viewportHeight = _scrollRect.viewport.rect.height;
-            //var contentHeight = viewportHeight + sumHeight;
             var contentHeight = sumHeight;
             _scrollRect.content.sizeDelta = new Vector2(_scrollRect.content.sizeDelta.x, contentHeight);
 

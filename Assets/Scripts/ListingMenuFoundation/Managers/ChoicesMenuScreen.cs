@@ -48,7 +48,7 @@ namespace ListingMF
         {
             var message = getMessage(manager, arg);
 
-            view.Show(message, manager, arg)
+            view.ShowTemplate(message, manager, arg)
                 ?
                 .AppendRange(selectOptions)
 
@@ -57,7 +57,7 @@ namespace ListingMF
 
         public override void CloseScreen(TMgr manager, bool back)
         {
-            view.HideSubViews(manager, back);
+            view.HideTemplate(manager, back);
         }
     }
 }

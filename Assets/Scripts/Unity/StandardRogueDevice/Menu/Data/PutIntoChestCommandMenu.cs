@@ -48,7 +48,7 @@ namespace RoguegardUnity
 
         public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
         {
-            view.Show(selectOptions, manager, arg)
+            view.ShowTemplate(selectOptions, manager, arg)
                 ?.Build();
         }
     }

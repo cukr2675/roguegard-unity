@@ -18,7 +18,7 @@ namespace ListingMF
         private IElementsSubViewStateProvider captionBoxSubViewStateProvider;
         private IElementsSubViewStateProvider backAnchorSubViewStateProvider;
 
-        public Builder Show(TMgr manager, TArg arg, object viewStateHolder = null)
+        public Builder ShowTemplate(TMgr manager, TArg arg, object viewStateHolder = null)
         {
             if (manager == null) throw new System.ArgumentNullException(nameof(manager));
 
@@ -56,7 +56,7 @@ namespace ListingMF
             }
         }
 
-        public void HideSubViews(TMgr manager, bool back)
+        public void HideTemplate(TMgr manager, bool back)
         {
             manager.GetSubView(PrimaryCommandSubViewName).Hide(back);
             if (Title != null) { manager.GetSubView(CaptionBoxSubViewName).Hide(back); }

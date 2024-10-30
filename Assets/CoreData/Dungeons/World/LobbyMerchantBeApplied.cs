@@ -54,7 +54,7 @@ namespace Roguegard
 
             public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
             {
-                view.Show(parent._items, manager, arg)
+                view.ShowTemplate(parent._items, manager, arg)
                     ?
                     .ElementNameFrom((item, manager, arg) =>
                     {

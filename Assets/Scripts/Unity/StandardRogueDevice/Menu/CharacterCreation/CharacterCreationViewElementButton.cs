@@ -5,13 +5,14 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
+using ListingMF;
 using Roguegard;
 using Roguegard.CharacterCreation;
 using Roguegard.Device;
 
 namespace RoguegardUnity
 {
-    public class CharacterCreationViewElementButton : MonoBehaviour, IPointerClickHandler
+    public class CharacterCreationViewElementButton : ViewElement, IPointerClickHandler
     {
         [SerializeField] private CanvasGroup _canvasGroup = null;
         [SerializeField] private Image _background = null;
@@ -29,9 +30,9 @@ namespace RoguegardUnity
 
         private const float lightRatio = 248f / 255f;
 
-        private ElementsView view;
+        private IElementsSubView view;
 
-        private IElementPresenter presenter;
+        private IButtonElementHandler presenter;
 
         private object source;
 
@@ -48,18 +49,13 @@ namespace RoguegardUnity
             RectTransform = GetComponent<RectTransform>();
         }
 
-        public void Initialize(ElementsView view)
-        {
-            this.view = view;
-        }
-
-        public void SetItem(IElementPresenter presenter, IReadOnlyIntrinsic intrinsic, ICharacterCreationData characterCreationData)
+        public void SetItem(IButtonElementHandler presenter, IReadOnlyIntrinsic intrinsic, ICharacterCreationData characterCreationData)
         {
             this.presenter = presenter;
             source = intrinsic;
             _icon.enabled = false;
 
-            var text = presenter.GetItemName(intrinsic, view.Root, view.Self, view.User, view.Arg);
+            var text = presenter.GetName(intrinsic, Manager, Arg);
             text = StandardRogueDeviceUtility.Localize(text);
             var lv = intrinsic.Option.GetLv(intrinsic, characterCreationData);
             _text.text = $"Lv{lv} {text}";
@@ -72,13 +68,13 @@ namespace RoguegardUnity
             ShowCaption(intrinsic.Option);
         }
 
-        public void SetItem(IElementPresenter presenter, IReadOnlyStartingItem startingItem)
+        public void SetItem(IButtonElementHandler presenter, IReadOnlyStartingItem startingItem)
         {
             this.presenter = presenter;
             source = startingItem;
             _icon.enabled = false;
 
-            var text = presenter.GetItemName(startingItem, view.Root, view.Self, view.User, view.Arg);
+            var text = presenter.GetName(startingItem, Manager, Arg);
             text = StandardRogueDeviceUtility.Localize(text);
             _text.text = text;
 
@@ -90,7 +86,7 @@ namespace RoguegardUnity
             ShowCaption(startingItem.Option);
         }
 
-        public void SetItem(IElementPresenter presenter, string text, string captionText)
+        public void SetItem(IButtonElementHandler presenter, string text, string captionText)
         {
             this.presenter = presenter;
             source = null;
@@ -133,7 +129,12 @@ namespace RoguegardUnity
 
         void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
         {
-            presenter.ActivateItem(source, view.Root, view.Self, view.User, view.Arg);
+            presenter.HandleClick(source, Manager, Arg);
+        }
+
+        public override void SetElement(IElementHandler handler, object element)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

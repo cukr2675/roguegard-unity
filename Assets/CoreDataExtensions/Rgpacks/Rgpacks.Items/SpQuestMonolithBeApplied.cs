@@ -41,7 +41,7 @@ namespace Roguegard.Rgpacks
 
             public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
             {
-                view.Show(manager, arg)
+                view.ShowTemplate(manager, arg)
                     ?
                     .Option("ショップ", new ShopScreen() { parent = parent })
                     .Option("メインチャート設定", new SetMainChartScreen())
@@ -81,7 +81,7 @@ namespace Roguegard.Rgpacks
             {
                 var list = parent._shopItems;
 
-                view.Show(list, manager, arg)
+                view.ShowTemplate(list, manager, arg)
                     ?
                     .ElementNameFrom((item, manager, arg) =>
                     {
@@ -109,7 +109,7 @@ namespace Roguegard.Rgpacks
 
             public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
             {
-                view.Show("", manager, arg)
+                view.ShowTemplate("", manager, arg)
                     ?.Append(InputFieldViewWidget.CreateOption<RogueMenuManager, ReadOnlyMenuArg>(
                         (manager, arg) =>
                         {
@@ -121,7 +121,7 @@ namespace Roguegard.Rgpacks
                         {
                             var monolith = arg.Arg.Tool;
                             var info = SpQuestMonolithInfo.Get(monolith);
-                            info.MainChart = value;
+                            return info.MainChart = value;
                         }))
                     .Build();
             }

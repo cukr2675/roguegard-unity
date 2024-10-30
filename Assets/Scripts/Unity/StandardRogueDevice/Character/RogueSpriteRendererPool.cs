@@ -171,6 +171,8 @@ namespace RoguegardUnity
                 var newObject = new GameObject("MenuRogueObjSpriteRenderer");
                 newObject.AddComponent<RectTransform>();
                 newObject.transform.SetParent(parent, false);
+                var canvasGroup = newObject.AddComponent<CanvasGroup>();
+                canvasGroup.ignoreParentGroups = true; // 親オブジェクトの CanvasGroup.alpha で服が透けて下が見えてしまうことを防ぐ
                 rogueObjSpriteRenderer = newObject.AddComponent<MenuRogueObjSpriteRenderer>();
                 rogueObjSpriteRenderer.Initialize(this);
             }

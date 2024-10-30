@@ -23,7 +23,7 @@ namespace RoguegardUnity
         public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
         {
             beforeProgress = 0f;
-            view.Show("¢ŠE‚Æ“¯Šú’†c", manager, arg)
+            view.ShowTemplate("¢ŠE‚Æ“¯Šú’†c", manager, arg)
                 ?.Append(ProgressBarViewWidget.CreateOption<RogueMenuManager, ReadOnlyMenuArg>((manager, arg) =>
                 {
                     if (Progress >= 1f && beforeProgress < 1f) { manager.Done(); }

@@ -21,7 +21,7 @@ namespace ListingMF
         private string message;
         private event System.Action<TMgr, TArg, string> handleClickLink;
 
-        public Builder Show(string message, TMgr manager, TArg arg, object viewStateHolder = null)
+        public Builder ShowTemplate(string message, TMgr manager, TArg arg, object viewStateHolder = null)
         {
             if (message == null) throw new System.ArgumentNullException(nameof(message));
             if (manager == null) throw new System.ArgumentNullException(nameof(manager));
@@ -73,7 +73,7 @@ namespace ListingMF
             }
         }
 
-        public void HideSubViews(TMgr manager, bool back)
+        public void HideTemplate(TMgr manager, bool back)
         {
             manager.GetSubView(DialogSubViewName).Hide(back);
             if (Title != null) { manager.GetSubView(CaptionBoxSubViewName).Hide(back); }

@@ -30,9 +30,8 @@ namespace ListingMF
                 }
                 else
                 {
-                    // 文字列にリンクを貼ったものを表示
-                    var baseText = Regex.Replace(text, @"(https?://\S+)", "<color=#8080ff><u><link>$1</link></u></color>");
-                    labelViewWidget._text.text = labelViewWidget.parent.Manager.Localize(baseText);
+                    // 文字列をローカライズだけして表示
+                    labelViewWidget._text.text = labelViewWidget.parent.Manager.Localize(text);
 
                     labelViewWidget._text.ForceMeshUpdate(true, true);
                     var rectTransform = (RectTransform)labelViewWidget.transform;

@@ -14,7 +14,7 @@ namespace ListingMF
         private IWidgetOption widgetOption;
         private TMP_InputField inputField;
 
-        public delegate void HandleValueChanged<TMgr, TArg>(TMgr manager, TArg arg, string value);
+        public delegate string HandleValueChanged<TMgr, TArg>(TMgr manager, TArg arg, string value);
 
         public override bool TryInstantiateWidget(
             ElementsSubView elementsSubView, IElementHandler handler, object element, out ViewWidget viewWidget)
@@ -36,18 +36,21 @@ namespace ListingMF
 
         private void Initialize()
         {
+            inputField.contentType = widgetOption.ContentType;
             inputField.SetTextWithoutNotify(widgetOption.GetValue(parent.Manager, parent.Arg));
             inputField.onValueChanged.AddListener(value =>
             {
-                widgetOption.HandleValueChanged(parent.Manager, parent.Arg, value);
+                inputField.SetTextWithoutNotify(widgetOption.HandleValueChanged(parent.Manager, parent.Arg, value));
             });
         }
 
         public static IWidgetOption CreateOption<TMgr, TArg>(
-            GetElementName<TMgr, TArg> getValue, HandleValueChanged<TMgr, TArg> handleValueChanged)
+            GetElementName<TMgr, TArg> getValue, HandleValueChanged<TMgr, TArg> handleValueChanged,
+            TMP_InputField.ContentType contentType = TMP_InputField.ContentType.Standard)
         {
             return new WidgetOption<TMgr, TArg>()
             {
+                ContentType = contentType,
                 GetValue = getValue,
                 HandleValueChanged = handleValueChanged
             };
@@ -55,13 +58,16 @@ namespace ListingMF
 
         public interface IWidgetOption
         {
+            TMP_InputField.ContentType ContentType { get; }
+
             string GetValue(IListMenuManager manager, IListMenuArg arg);
 
-            void HandleValueChanged(IListMenuManager manager, IListMenuArg arg, string value);
+            string HandleValueChanged(IListMenuManager manager, IListMenuArg arg, string value);
         }
 
         private class WidgetOption<TMgr, TArg> : IWidgetOption
         {
+            public TMP_InputField.ContentType ContentType { get; set; }
             public GetElementName<TMgr, TArg> GetValue { get; set; }
             public HandleValueChanged<TMgr, TArg> HandleValueChanged { get; set; }
 
@@ -73,12 +79,12 @@ namespace ListingMF
                 return GetValue(tMgr, tArg);
             }
 
-            void IWidgetOption.HandleValueChanged(IListMenuManager manager, IListMenuArg arg, string value)
+            string IWidgetOption.HandleValueChanged(IListMenuManager manager, IListMenuArg arg, string value)
             {
                 if (LMFAssert.Type<TMgr>(manager, out var tMgr) ||
-                    LMFAssert.Type<TArg>(arg, out var tArg)) return;
+                    LMFAssert.Type<TArg>(arg, out var tArg)) return null;
 
-                HandleValueChanged(tMgr, tArg, value);
+                return HandleValueChanged(tMgr, tArg, value);
             }
         }
     }

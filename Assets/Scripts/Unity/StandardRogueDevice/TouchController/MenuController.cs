@@ -32,8 +32,8 @@ namespace RoguegardUnity
         //[SerializeField] private SummaryMenuView _summaryMenu = null;
         //[SerializeField] private DetailsMenuView _detailsMenu = null;
         //[SerializeField] private OptionsMenuView _optionsMenu = null;
-        [SerializeField] private CharacterCreationMenuView _characterCreationMenu = null;
-        public CharacterCreationMenuView CharacterCreation => _characterCreationMenu;
+        [SerializeField] private CharacterCreationMenuView _characterCreation = null;
+        public CharacterCreationMenuView CharacterCreation => _characterCreation;
         [SerializeField] private TextEditorMenuView _textEditorMenu = null;
         public TextEditorMenuView TextEditor => _textEditorMenu;
         [SerializeField] private PaintMenuView _paintMenu = null;
@@ -70,6 +70,8 @@ namespace RoguegardUnity
 
         public override string TextEditorValue => _textEditorMenu.Text;
 
+        public override IListMenuSelectOption LoadPresetSelectOptionOfCharacterCreation => CharacterCreationMenuView.LoadPresetSelectOption;
+
         internal void Initialize(
             SoundController soundController, RogueSpriteRendererPool rendererPool, bool touchMaskIsEnabled = true)
         {
@@ -89,7 +91,7 @@ namespace RoguegardUnity
             //_scrollMenu.Initialize();
             //_summaryMenu.Initialize();
             //_optionsMenu.Initialize();
-            _characterCreationMenu.Initialize(rendererPool);
+            _characterCreation.Initialize(rendererPool);
             _textEditorMenu.Initialize();
             _paintMenu.Initialize();
             //_loadingMenu.Initialize();
@@ -155,6 +157,7 @@ namespace RoguegardUnity
 
         public override IElementsSubView GetSubView(string subViewName)
         {
+            if (subViewName == CharacterCreationName) return _characterCreation;
             if (subViewName == TitleMenuName) return _titleMenu;
             return base.GetSubView(subViewName);
         }
@@ -162,6 +165,7 @@ namespace RoguegardUnity
         public override void HideAll(bool back = false)
         {
             base.HideAll(back);
+            _characterCreation.Hide(back);
             _textEditorMenu.Show(false);
             _statsWindow.Show(false);
             if (_titleMenu != null) { _titleMenu.Hide(back); }
@@ -236,11 +240,6 @@ namespace RoguegardUnity
         public void CloseMenu()
         {
             Done();
-        }
-
-        public override void OpenCharacterCreationView(IListMenuSelectOption exit, ReadOnlyMenuArg arg)
-        {
-            _characterCreationMenu.OpenView<object>(SelectOptionHandler.Instance, new[] { exit }, this, arg.Self, arg.User, arg.Arg);
         }
 
         public override void AddInt(IKeyword keyword, int integer) => EventManager.Add(keyword, integer: integer);

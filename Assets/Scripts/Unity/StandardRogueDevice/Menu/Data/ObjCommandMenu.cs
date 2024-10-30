@@ -51,7 +51,7 @@ namespace RoguegardUnity
             }
             selectOptions.Add(Details);
             selectOptions.Add(ExitListMenuSelectOption.Instance);
-            view.Show(selectOptions, manager, arg)
+            view.ShowTemplate(selectOptions, manager, arg)
                 ?
                 .ElementNameFrom((selectOption, manager, arg) =>
                 {
@@ -88,7 +88,7 @@ namespace RoguegardUnity
                     target = arg;
                 }
 
-                view.Show(target?.ToString(), manager, arg)
+                view.ShowTemplate(target?.ToString(), manager, arg)
                     ?.Build();
             }
         }
@@ -103,7 +103,7 @@ namespace RoguegardUnity
             {
                 var details = (arg.Arg.Tool ?? arg.Arg.TargetObj).Main.InfoSet.Details?.ToString();
 
-                view.Show(details, manager, arg)
+                view.ShowTemplate(details, manager, arg)
                     ?.Build();
             }
         }

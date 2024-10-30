@@ -11,9 +11,6 @@ namespace ListingMF
         public GetElementName<TElm, TMgr, TArg> GetName { get; set; }
         public HandleClickElement<TElm, TMgr, TArg> HandleClick { get; set; }
 
-        //public delegate string GetNameFunc(TElm element, TMgr manager, TArg arg);
-        //public delegate void HandleClickAction(TElm element, TMgr manager, TArg arg);
-
         string IElementHandler.GetName(object element, IListMenuManager manager, IListMenuArg arg)
         {
             if (LMFAssert.Type<TElm>(element, out var tElm) ||

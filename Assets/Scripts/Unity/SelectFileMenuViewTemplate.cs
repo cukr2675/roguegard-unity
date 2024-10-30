@@ -23,7 +23,7 @@ namespace RoguegardUnity
 
         private readonly ElementHandler scrollSubViewHandler = new();
 
-        public Builder Show(
+        public Builder ShowTemplate(
             IReadOnlyList<FileInfo> list, RogueMenuManager manager, ReadOnlyMenuArg arg, object viewStateHolder = null)
         {
             if (list == null) throw new System.ArgumentNullException(nameof(list));
@@ -70,7 +70,7 @@ namespace RoguegardUnity
             }
         }
 
-        public void HideSubViews(RogueMenuManager manager, bool back)
+        public void HideTemplate(RogueMenuManager manager, bool back)
         {
             manager.GetSubView(ScrollSubViewName).Hide(back);
             if (Title != null) { manager.GetSubView(CaptionBoxSubViewName).Hide(back); }

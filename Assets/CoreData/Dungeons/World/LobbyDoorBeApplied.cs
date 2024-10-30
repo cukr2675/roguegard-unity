@@ -54,7 +54,7 @@ namespace Roguegard
                     selectOptions.Add(dungeonSelectOptions[i]);
                 }
 
-                view.Show(selectOptions, manager, arg)
+                view.ShowTemplate(selectOptions, manager, arg)
                     ?
                     .ElementNameFrom(SelectOptionHandler.Instance.GetName)
                     .OnClickElement(SelectOptionHandler.Instance.HandleClick)

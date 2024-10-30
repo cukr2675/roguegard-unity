@@ -21,8 +21,8 @@ namespace Roguegard
         {
             private static readonly object[] exit = new object[]
             {
-                new ActionListMenuSelectOption("é¿çs", Execute),
-                new ActionListMenuSelectOption("ï¬Ç∂ÇÈ", Exit),
+                ListMenuSelectOption.Create<RogueMenuManager, ReadOnlyMenuArg>("é¿çs", Execute),
+                ListMenuSelectOption.Create<RogueMenuManager, ReadOnlyMenuArg>("ï¬Ç∂ÇÈ", Exit),
             };
 
             private IElementsSubViewStateProvider stateProvider;

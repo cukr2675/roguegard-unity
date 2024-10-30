@@ -53,6 +53,7 @@ namespace Roguegard.Device
             // ‰½‚à‚¹‚¸•Â‚¶‚é
             manager.HandleClickBack();
             manager.HandleClickBack();
+            manager.HandleClickBack();
         }
 
         public ChoicesMenuScreen Option(string name, HandleClickElement<RogueMenuManager, ReadOnlyMenuArg> handleClick)

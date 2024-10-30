@@ -4,43 +4,37 @@ using UnityEngine;
 
 namespace ListingMF
 {
-    public class ScrollViewTemplate<TElm, TMgr, TArg> : ListViewTemplate<TElm, TMgr, TArg>
-        where TElm : class
+    public class VariableWidgetsViewTemplate<TMgr, TArg> : ListViewTemplate<object, TMgr, TArg>
         where TMgr : IListMenuManager
         where TArg : IListMenuArg
     {
-        public string ScrollSubViewName { get; set; } = StandardSubViewTable.ScrollName;
+        public string WidgetsSubViewName { get; set; } = StandardSubViewTable.WidgetsName;
         public string CaptionBoxSubViewName { get; set; } = StandardSubViewTable.CaptionBoxName;
         public string BackAnchorSubViewName { get; set; } = StandardSubViewTable.BackAnchorName;
         public List<IListMenuSelectOption> BackAnchorList { get; set; } = new() { ExitListMenuSelectOption.Instance };
 
         private object prevViewStateHolder;
-        private IElementsSubViewStateProvider scrollSubViewStateProvider;
+        private IElementsSubViewStateProvider primaryCommandSubViewStateProvider;
         private IElementsSubViewStateProvider captionBoxSubViewStateProvider;
         private IElementsSubViewStateProvider backAnchorSubViewStateProvider;
 
-        private readonly ButtonElementHandler<TElm, TMgr, TArg> scrollSubViewHandler = new();
-
-        public Builder ShowTemplate(
-            IReadOnlyList<TElm> list, TMgr manager, TArg arg, object viewStateHolder = null)
+        public Builder ShowTemplate(IReadOnlyList<object> widgetOptions, TMgr manager, TArg arg, object viewStateHolder = null)
         {
-            if (list == null) throw new System.ArgumentNullException(nameof(list));
             if (manager == null) throw new System.ArgumentNullException(nameof(manager));
 
             // 必要に応じてスクロール位置をリセット
             if (viewStateHolder != prevViewStateHolder)
             {
-                scrollSubViewStateProvider?.Reset();
+                primaryCommandSubViewStateProvider?.Reset();
                 captionBoxSubViewStateProvider?.Reset();
                 backAnchorSubViewStateProvider?.Reset();
             }
             prevViewStateHolder = viewStateHolder;
 
-            // スクロールのビューを表示
             OriginalList.Clear();
-            for (int i = 0; i < list.Count; i++)
+            for (int i = 0; i < widgetOptions.Count; i++)
             {
-                OriginalList.Add(list[i]);
+                OriginalList.Add(widgetOptions[i]);
             }
 
             if (TryShowSubViews(manager, arg)) return null;
@@ -50,8 +44,8 @@ namespace ListingMF
         protected override void ShowSubViews(TMgr manager, TArg arg)
         {
             manager
-                .GetSubView(ScrollSubViewName)
-                .Show(List, scrollSubViewHandler, manager, arg, ref scrollSubViewStateProvider);
+                .GetSubView(WidgetsSubViewName)
+                .Show(List, SelectOptionHandler.Instance, manager, arg, ref primaryCommandSubViewStateProvider);
 
             if (Title != null)
             {
@@ -60,7 +54,7 @@ namespace ListingMF
                     .Show(TitleSingle, ElementToStringHandler.Instance, manager, arg, ref captionBoxSubViewStateProvider);
             }
 
-            if (BackAnchorList != null)
+            if (BackAnchorSubViewName != null)
             {
                 manager
                     .GetSubView(BackAnchorSubViewName)
@@ -70,35 +64,19 @@ namespace ListingMF
 
         public void HideTemplate(TMgr manager, bool back)
         {
-            manager.GetSubView(ScrollSubViewName).Hide(back);
+            manager.GetSubView(WidgetsSubViewName).Hide(back);
             if (Title != null) { manager.GetSubView(CaptionBoxSubViewName).Hide(back); }
-            if (BackAnchorList != null) { manager.GetSubView(BackAnchorSubViewName).Hide(back); }
+            if (BackAnchorSubViewName != null) { manager.GetSubView(BackAnchorSubViewName).Hide(back); }
         }
 
         public class Builder : BaseListBuilder<Builder>
         {
-            private readonly ScrollViewTemplate<TElm, TMgr, TArg> parent;
+            private readonly VariableWidgetsViewTemplate<TMgr, TArg> parent;
 
-            public Builder(ScrollViewTemplate<TElm, TMgr, TArg> parent, TMgr manager, TArg arg)
+            public Builder(VariableWidgetsViewTemplate<TMgr, TArg> parent, TMgr manager, TArg arg)
                 : base(parent, manager, arg)
             {
                 this.parent = parent;
-            }
-
-            public Builder ElementNameFrom(GetElementName<TElm, TMgr, TArg> method)
-            {
-                AssertNotBuilded();
-
-                parent.scrollSubViewHandler.GetName = method;
-                return this;
-            }
-
-            public Builder OnClickElement(HandleClickElement<TElm, TMgr, TArg> method)
-            {
-                AssertNotBuilded();
-
-                parent.scrollSubViewHandler.HandleClick = method;
-                return this;
             }
         }
     }

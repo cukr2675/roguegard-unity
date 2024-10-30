@@ -11,5 +11,8 @@ namespace ListingMF
     public interface IElementHandler
     {
         string GetName(object element, IListMenuManager manager, IListMenuArg arg);
+
+        // アイコンを返す形式にするとラムダ式の記述が面倒になってしまう
+        //string GetName(object element, IListMenuManager manager, IListMenuArg arg, ref Sprite icon);
     }
 }

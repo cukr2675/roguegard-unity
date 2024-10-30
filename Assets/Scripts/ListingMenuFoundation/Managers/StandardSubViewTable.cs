@@ -43,6 +43,10 @@ namespace ListingMF
         public IElementsSubView Dialog => _dialog;
         public static string DialogName => "Dialog";
 
+        [SerializeField] private ColorPickerSubView _colorPicker = null;
+        public IElementsSubView ColorPicker => _colorPicker;
+        public static string ColorPickerName => "ColorPicker";
+
         [SerializeField] private MessageBoxSubView _messageBox = null;
         public MessageBoxSubView MessageBox => _messageBox;
         public static string MessageBoxName => "MessageBox";
@@ -78,6 +82,7 @@ namespace ListingMF
             _primaryCommand.Initialize();
             _captionBox.Initialize();
             _secondaryCommand.Initialize();
+            _colorPicker.Initialize();
             _messageBox.Initialize();
             _speechBox.Initialize();
             _choices.Initialize();
@@ -92,6 +97,7 @@ namespace ListingMF
                 { CaptionBoxName, _captionBox },
                 { SecondaryCommandName, _secondaryCommand },
                 { DialogName, _dialog },
+                { ColorPickerName, _colorPicker },
                 { MessageBoxName, _messageBox },
                 { SpeechBoxName, _speechBox },
                 { ChoicesName, _choices },

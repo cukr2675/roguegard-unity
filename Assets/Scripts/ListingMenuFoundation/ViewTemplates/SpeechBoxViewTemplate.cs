@@ -19,7 +19,7 @@ namespace ListingMF
 
         private readonly string[] message = new string[1];
 
-        public Builder Show(string message, TMgr manager, TArg arg, object viewStateHolder = null)
+        public Builder ShowTemplate(string message, TMgr manager, TArg arg, object viewStateHolder = null)
         {
             if (message == null) throw new System.ArgumentNullException(nameof(message));
             if (manager == null) throw new System.ArgumentNullException(nameof(manager));
@@ -62,7 +62,7 @@ namespace ListingMF
             }
         }
 
-        public void HideSubViews(TMgr manager, bool back)
+        public void HideTemplate(TMgr manager, bool back)
         {
             manager.GetSubView(SpeechBoxSubViewName).Hide(back);
             manager.GetSubView(ChoicesSubViewName).Hide(back);

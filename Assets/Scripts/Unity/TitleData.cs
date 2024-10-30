@@ -33,8 +33,10 @@ namespace RoguegardUnity
             titleOption.ClearWithoutSet();
             titleOption.Set(titleOption);
 
-            var menu = Instantiate(_menuPrefab);
             var spriteRendererPool = Instantiate(_spriteRendererPoolPrefab);
+            DontDestroyOnLoad(spriteRendererPool.gameObject);
+
+            var menu = Instantiate(_menuPrefab);
             menu.Show(
                 spriteRendererPool, _tilemapRendererPrefab, _touchControllerPrefab,
                 _soundTable, _audioMixer, _seAudioSourcePrefab, _bgmAudioSourcePrefab, _runtimeInspectorPrefab);

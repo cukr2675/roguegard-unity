@@ -28,8 +28,8 @@ namespace RoguegardUnity
                 Title = ":Skills",
             };
 
-            private readonly List<ISkill> list = new List<ISkill>();
-            private readonly SkillCommandMenu menu = new SkillCommandMenu();
+            private readonly List<ISkill> list = new();
+            private readonly SkillCommandMenu menu = new();
 
             public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
             {
@@ -40,7 +40,7 @@ namespace RoguegardUnity
                     list.Add(skills[i]);
                 }
 
-                view.Show(list, manager, arg)
+                view.ShowTemplate(list, manager, arg)
                     ?
                     .ElementNameFrom((skill, manager, arg) =>
                     {

@@ -10,12 +10,23 @@ namespace Roguegard
 {
     public class PartyBoardCharacterCreationMenu : RogueMenuScreen
     {
-        private readonly ListMenuSelectOption<RogueMenuManager, ReadOnlyMenuArg> exit
-            = ListMenuSelectOption.Create<RogueMenuManager, ReadOnlyMenuArg>("<", Save);
+        private readonly ScrollViewTemplate<object, RogueMenuManager, ReadOnlyMenuArg> view = new()
+        {
+            ScrollSubViewName = RogueMenuManager.CharacterCreationName,
+            BackAnchorList = new()
+            {
+                null,
+                ListMenuSelectOption.Create<RogueMenuManager, ReadOnlyMenuArg>("<", Save)
+            },
+        };
 
         public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
         {
-            manager.OpenCharacterCreationView(exit, arg);
+            view.BackAnchorList[0] = manager.LoadPresetSelectOptionOfCharacterCreation;
+
+            view.ShowTemplate(System.Array.Empty<object>(), manager, arg)
+                ?
+                .Build();
         }
 
         private static void Save(RogueMenuManager manager, ReadOnlyMenuArg arg)

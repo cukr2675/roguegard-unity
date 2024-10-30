@@ -25,7 +25,7 @@ namespace RoguegardUnity
 
             view.Title = selectedSkill.Details.ToString();
 
-            view.Show(manager, arg)
+            view.ShowTemplate(manager, arg)
                 ?.Option(":Use", (manager, arg) =>
                 {
                     var info = RogueDeviceEffect.Get(arg.Self);
@@ -39,7 +39,7 @@ namespace RoguegardUnity
 
         public override void CloseScreen(RogueMenuManager manager, bool back)
         {
-            view.HideSubViews(manager, back);
+            view.HideTemplate(manager, back);
         }
 
         private class CommandAction : IDeviceCommandAction

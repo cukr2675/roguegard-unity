@@ -75,7 +75,7 @@ namespace RoguegardUnity
         {
             _speechBox.Show();
             talk = true;
-            _speechBox.ShowScheduledAfterCompletion((manager, arg) => talk = false);
+            _speechBox.DoScheduledAfterCompletion((manager, arg) => talk = false);
             //_messageWindow.Show(false);
             //_talkWindow.StartTalk();
         }
