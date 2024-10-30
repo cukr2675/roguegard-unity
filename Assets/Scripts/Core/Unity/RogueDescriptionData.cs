@@ -7,8 +7,9 @@ namespace Roguegard
     public abstract class RogueDescriptionData : ScriptableObject, IRogueDescription
     {
         [SerializeField] private string _descriptionName = null;
+        protected string DescriptionNameSource => _descriptionName;
         [System.NonSerialized] private string _nameCache; // null Ç…Ç∑ÇÈÇΩÇﬂ NonSerialized Çê›íËÇ∑ÇÈ
-        public string DescriptionName
+        public virtual string DescriptionName
         {
             get
             {
