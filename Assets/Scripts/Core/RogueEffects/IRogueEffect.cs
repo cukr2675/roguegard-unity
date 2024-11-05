@@ -18,6 +18,7 @@ namespace Roguegard
         /// </summary>
         bool CanStack(RogueObj obj, RogueObj otherObj, IRogueEffect other);
 
+        // ShallowOrDeepCopy だと S から始まってしまう（頻繁に出現する Set... 等と被る）ため DeepOrShallowCopy
         IRogueEffect DeepOrShallowCopy(RogueObj self, RogueObj clonedSelf);
         IRogueEffect ReplaceCloned(RogueObj obj, RogueObj clonedObj);
     }
