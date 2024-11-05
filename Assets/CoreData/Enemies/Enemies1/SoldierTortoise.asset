@@ -133,7 +133,7 @@ MonoBehaviour:
       - rid: 962668970976739433
   - _option: {fileID: 11400000, guid: 4ed202ff619b0b744a4f0be7bca8218f, type: 2}
     _optionDescription: {fileID: 0}
-    _color: {r: 0.2509804, g: 0.2509804, b: 0.2509804, a: 1}
+    _color: {r: 0.50980395, g: 0.3529412, b: 0.27450982, a: 1}
     _members:
       _items:
       - rid: 962668970976739434
