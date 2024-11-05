@@ -33,7 +33,7 @@ namespace RoguegardUnity
                     info.SetDeviceCommand(commandAction, null, new(other: selectedSkill));
                     manager.Done();
                 })
-                .Exit()
+                .Back()
                 .Build();
         }
 

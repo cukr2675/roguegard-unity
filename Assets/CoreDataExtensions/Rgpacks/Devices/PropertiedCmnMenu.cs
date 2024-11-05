@@ -49,7 +49,7 @@ namespace Roguegard.Device
 
             view.ShowTemplate(elms, manager, arg)
                 ?
-                .InsertFirst(
+                .InsertNext(
                     new object[]
                     {
                         "アセットID",

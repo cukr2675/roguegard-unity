@@ -11,7 +11,7 @@ namespace ListingMF
         public string DialogSubViewName { get; set; } = StandardSubViewTable.DialogName;
         public string CaptionBoxSubViewName { get; set; } = StandardSubViewTable.CaptionBoxName;
         public string BackAnchorSubViewName { get; set; } = null;
-        public List<IListMenuSelectOption> BackAnchorList { get; set; } = new() { ExitListMenuSelectOption.Instance };
+        public List<ISelectOption> BackAnchorList { get; set; } = new() { BackSelectOption.Instance };
 
         private object prevViewStateHolder;
         private IElementsSubViewStateProvider dialogSubViewStateProvider;
@@ -19,7 +19,7 @@ namespace ListingMF
         private IElementsSubViewStateProvider backAnchorSubViewStateProvider;
 
         private string message;
-        private event System.Action<TMgr, TArg, string> handleClickLink;
+        private event HandleClickElement<string, TMgr, TArg> handleClickLink;
 
         public Builder ShowTemplate(string message, TMgr manager, TArg arg, object viewStateHolder = null)
         {
@@ -93,7 +93,7 @@ namespace ListingMF
             {
                 AssertNotBuilded();
 
-                Append(ListMenuSelectOption.Create(name, handleClick));
+                Append(SelectOption.Create(name, handleClick));
                 return this;
             }
 
@@ -104,13 +104,13 @@ namespace ListingMF
                 var stack = new List<object>();
                 foreach (var selectOption in selectOptions)
                 {
-                    stack.Add(ListMenuSelectOption.Create(selectOption.Item1, selectOption.Item2));
+                    stack.Add(SelectOption.Create(selectOption.Item1, selectOption.Item2));
                 }
                 Append(stack);
                 return this;
             }
 
-            public Builder OnClickLink(System.Action<TMgr, TArg, string> handleClickLink)
+            public Builder OnClickLink(HandleClickElement<string, TMgr, TArg> handleClickLink)
             {
                 AssertNotBuilded();
 

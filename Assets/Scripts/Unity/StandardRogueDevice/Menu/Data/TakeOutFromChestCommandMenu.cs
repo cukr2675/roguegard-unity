@@ -11,17 +11,17 @@ namespace RoguegardUnity
 {
     public class TakeOutFromChestCommandMenu : RogueMenuScreen
     {
-        private readonly IListMenuSelectOption[] selectOptions;
+        private readonly ISelectOption[] selectOptions;
 
-        private readonly CommandListViewTemplate<IListMenuSelectOption, RogueMenuManager, ReadOnlyMenuArg> view = new()
+        private readonly CommandListViewTemplate<ISelectOption, RogueMenuManager, ReadOnlyMenuArg> view = new()
         {
         };
 
         public TakeOutFromChestCommandMenu()
         {
-            selectOptions = new IListMenuSelectOption[]
+            selectOptions = new ISelectOption[]
             {
-                ListMenuSelectOption.Create<RogueMenuManager, ReadOnlyMenuArg>("取り出す", (manager, arg) =>
+                SelectOption.Create<RogueMenuManager, ReadOnlyMenuArg>("取り出す", (manager, arg) =>
                 {
                     manager.Done();
                     
@@ -34,7 +34,7 @@ namespace RoguegardUnity
                     RogueDevice.Add(DeviceKw.AppendText, arg.Arg.Tool);
                     RogueDevice.Add(DeviceKw.AppendText, "を取り出した\n");
                 }),
-                ExitListMenuSelectOption.Instance
+                BackSelectOption.Instance
             };
         }
 

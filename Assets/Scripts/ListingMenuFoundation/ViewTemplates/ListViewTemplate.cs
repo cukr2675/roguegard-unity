@@ -29,19 +29,19 @@ namespace ListingMF
                 this.parent = parent;
             }
 
-            public TOut InsertFirst(TElm element)
+            public TOut InsertNext(TElm element)
             {
                 AssertNotBuilded();
 
-                parent.beforeList.Insert(0, element);
+                parent.beforeList.Add(element);
                 return (TOut)this;
             }
 
-            public TOut InsertFirstRange(IEnumerable<TElm> elements)
+            public TOut InsertNextRange(IEnumerable<TElm> elements)
             {
                 AssertNotBuilded();
 
-                parent.afterList.InsertRange(0, elements);
+                parent.afterList.AddRange(elements);
                 return (TOut)this;
             }
 

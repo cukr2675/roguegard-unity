@@ -30,13 +30,15 @@ namespace RoguegardUnity
             instance.nextScreen = new SelectFileCommandMenuScreen(onSelectFile);
             instance.onNewFile = onNewFile;
 
+            var importScreen = new ImportScreen();
+
             instance.view = new()
             {
             };
             instance.view.BackAnchorList.Insert(0,
-                ListMenuSelectOption.Create<RogueMenuManager, ReadOnlyMenuArg>(":Import", (manager, arg) =>
+                SelectOption.Create<RogueMenuManager, ReadOnlyMenuArg>(":Import", (manager, arg) =>
                 {
-                    ShowSaving(manager);
+                    manager.PushMenuScreen(importScreen);
                     RogueFile.Import(StandardRogueDeviceSave.RootDirectory, errorMsg =>
                     {
                         if (errorMsg != null)
@@ -58,9 +60,9 @@ namespace RoguegardUnity
         {
             var instance = new SelectFileMenuScreen();
             instance.nextScreen = new ChoicesMenuScreen(
-                (manager, arg) => $":OverwriteMsg::1::{((FileInfo)arg.Arg.Other).Name}<link=\"HorizontalArrow\"></link>aaa<link=\"VerticalArrow\"></link>bbbb")
+                (manager, arg) => $":OverwriteMsg::1::{((FileInfo)arg.Arg.Other).Name}<link=\"VerticalArrow\"></link>")
                 .Option(":Overwrite", (manager, arg) => onSelectFile((FileInfo)arg.Arg.Other, manager, arg))
-                .Exit();
+                .Back();
             instance.onNewFile = onNewFile;
 
             instance.view = new()
@@ -82,7 +84,7 @@ namespace RoguegardUnity
                 .IfOnce(
                     onNewFile != null, x => x
                     
-                    .InsertFirst(ListMenuSelectOption.Create(":+ New File", onNewFile))
+                    .InsertNext(SelectOption.Create(":+ New File", onNewFile))
                     
                     )
 
@@ -93,7 +95,7 @@ namespace RoguegardUnity
                         newArg.Arg = new(other: fileInfo);
                         manager.PushMenuScreen(nextScreen, newArg.ReadOnly);
                     }
-                    else if (element is IListMenuSelectOption option) { option.HandleClick(manager, arg); }
+                    else if (element is ISelectOption option) { option.HandleClick(manager, arg); }
                     else throw new System.InvalidOperationException();
                 })
 
@@ -107,14 +109,13 @@ namespace RoguegardUnity
 
         private static void LoadingCancel(RogueMenuManager manager, ReadOnlyMenuArg arg)
         {
-            manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
         }
 
         public static void ReopenCallback(RogueMenuManager manager, string errorMsg)
         {
             if (errorMsg != null)
             {
-                manager.HandleClickBack();
+                manager.Back();
                 ShowErrorMsg(manager, errorMsg);
                 return;
             }
@@ -129,7 +130,31 @@ namespace RoguegardUnity
 
         private static void ErrorMsgOK(IListMenuManager manager, ReadOnlyMenuArg arg)
         {
-            manager.HandleClickBack();
+            manager.BackOption.HandleClick(manager, arg);
+        }
+
+        private class ImportScreen : RogueMenuScreen
+        {
+            private readonly DialogViewTemplate<RogueMenuManager, ReadOnlyMenuArg> view = new()
+            {
+                DialogSubViewName = StandardSubViewTable.OverlayName,
+            };
+
+            public override bool IsIncremental => true;
+
+            public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
+            {
+                view.ShowTemplate("インポート中…", manager, arg)
+                    ?
+                    .AppendSelectOption("キャンセル", (manager, arg) => manager.Back())
+
+                    .Build();
+            }
+
+            public override void CloseScreen(RogueMenuManager manager, bool back)
+            {
+                view.HideTemplate(manager, back);
+            }
         }
     }
 }

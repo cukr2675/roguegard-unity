@@ -75,7 +75,7 @@ namespace ListingMF
 
             // 新しい StateProvider に切り替える
             currentStateProvider = local;
-            VerticalAbsolutePosition = local.VerticalAbsolutePosition;
+            if (_scrollRect.vertical) { VerticalAbsolutePosition = local.VerticalAbsolutePosition; }
             if (_isSelectable) { local.ApplySelectedIndex(selectables); }
         }
 
@@ -122,7 +122,6 @@ namespace ListingMF
             // スクロールしない場合は中央に寄せる
             if (!_scrollRect.vertical)
             {
-                //_scrollRect.content.localPosition = new Vector3(0f, -sumHeight / 2f);
                 _scrollRect.content.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, (viewportHeight - sumHeight) / 2f, contentHeight);
             }
         }

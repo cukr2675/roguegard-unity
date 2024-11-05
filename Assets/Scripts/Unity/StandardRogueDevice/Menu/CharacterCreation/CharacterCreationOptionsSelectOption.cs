@@ -9,7 +9,7 @@ using ListingMF;
 
 namespace RoguegardUnity
 {
-    public class CharacterCreationOptionsSelectOption : IListMenuSelectOption
+    public class CharacterCreationOptionsSelectOption : ISelectOption
     {
         private object builder;
 
@@ -35,7 +35,7 @@ namespace RoguegardUnity
         public CharacterCreationOptionsSelectOption Set(SingleItemMember builder) => SetInner(builder);
         public CharacterCreationOptionsSelectOption Set(AlphabetTypeMember builder) => SetInner(builder);
 
-        string IListMenuSelectOption.GetName(IListMenuManager manager, IListMenuArg arg)
+        string ISelectOption.GetName(IListMenuManager manager, IListMenuArg arg)
         {
             if (builder is RaceBuilder raceBuilder)
             {
@@ -65,7 +65,9 @@ namespace RoguegardUnity
             return null;
         }
 
-        void IListMenuSelectOption.HandleClick(IListMenuManager iManager, IListMenuArg iArg)
+        string ISelectOption.GetStyle(IListMenuManager manager, IListMenuArg arg) => null;
+
+        void ISelectOption.HandleClick(IListMenuManager iManager, IListMenuArg iArg)
         {
             var manager = (RogueMenuManager)iManager;
             var arg = (ReadOnlyMenuArg)iArg;
@@ -135,7 +137,7 @@ namespace RoguegardUnity
                         {
                             alphabetTypeMember.TypeIndex = (int)element;
                         }
-                        manager.HandleClickBack();
+                        manager.Back();
                     })
 
                     .Build();

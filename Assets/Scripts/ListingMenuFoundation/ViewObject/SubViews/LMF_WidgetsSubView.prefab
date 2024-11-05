@@ -138,5 +138,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _scrollRect: {fileID: 186880291570748327}
-  _defaultVisible: 0
+  _initTrigger: 
   _isSelectable: 1

@@ -14,7 +14,7 @@ namespace RoguegardUnity
         public string ScrollSubViewName { get; set; } = StandardSubViewTable.ScrollName;
         public string CaptionBoxSubViewName { get; set; } = StandardSubViewTable.CaptionBoxName;
         public string BackAnchorSubViewName { get; set; } = StandardSubViewTable.BackAnchorName;
-        public List<IListMenuSelectOption> BackAnchorList { get; set; } = new() { ExitListMenuSelectOption.Instance };
+        public List<ISelectOption> BackAnchorList { get; set; } = new() { BackSelectOption.Instance };
 
         private object prevViewStateHolder;
         private IElementsSubViewStateProvider scrollSubViewStateProvider;
@@ -79,6 +79,22 @@ namespace RoguegardUnity
 
         private class ElementHandler : ButtonElementHandler<object, RogueMenuManager, ReadOnlyMenuArg>, IRogueElementHandler
         {
+            public ElementHandler()
+            {
+                GetName = (element, manager, arg) =>
+                {
+                    Color color = default;
+                    Sprite icon = default;
+                    Color iconColor = default;
+                    int? stack = default;
+                    float? stars = default;
+                    string infoText1 = default;
+                    string infoText2 = default;
+                    GetRogueInfo(element, manager, arg, out var name, ref color, ref icon, ref iconColor, ref stack, ref stars, ref infoText1, ref infoText2);
+                    return name;
+                };
+            }
+
             public void GetRogueInfo(
                 object element, RogueMenuManager manager, ReadOnlyMenuArg arg,
                 out string name, ref Color color, ref Sprite icon, ref Color iconColor,
@@ -89,7 +105,7 @@ namespace RoguegardUnity
                     name = fileInfo.Name;
                     infoText2 = fileInfo.LastWriteTime.ToString();
                 }
-                else if (element is IListMenuSelectOption option)
+                else if (element is ISelectOption option)
                 {
                     name = option.GetName(manager, arg);
                 }

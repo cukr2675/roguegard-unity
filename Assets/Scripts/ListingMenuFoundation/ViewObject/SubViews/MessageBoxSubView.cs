@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using UnityEngine.UI;
 using UnityEngine.Events;
 
 namespace ListingMF
@@ -12,6 +13,9 @@ namespace ListingMF
         [SerializeField] private MessageBox _messageBox = null;
         public MessageBox MessageBox => _messageBox;
 
+        [SerializeField] private ViewElement _blocker = null;
+
+        [Space, SerializeField] private Button.ButtonClickedEvent _onClickWithoutBlock = null;
         [Space, SerializeField] private StartSpeechEvent _onStartSpeech = null;
         [Space, SerializeField] private EndSpeechEvent _onEndSpeech = null;
 
@@ -32,6 +36,12 @@ namespace ListingMF
                 OnCompleted?.Invoke(Manager, Arg);
                 OnCompleted = null;
             });
+
+            _blocker.Initialize(this);
+            _blocker.SetElement(
+                SelectOptionHandler.Instance, SelectOption.Create<IListMenuManager, IListMenuArg>("", delegate { _onClickWithoutBlock.Invoke(); }));
+            _blocker.SetBlock(false);
+            _blocker.SetVisible(true, true);
         }
 
         public override void SetParameters(
@@ -65,6 +75,7 @@ namespace ListingMF
             }
         }
 
+        [System.Serializable] public class AdvanceTextEvent : UnityEvent { }
         [System.Serializable] public class StartSpeechEvent : UnityEvent { }
         [System.Serializable] public class EndSpeechEvent : UnityEvent { }
     }

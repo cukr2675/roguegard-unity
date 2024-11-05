@@ -129,7 +129,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _scrollRect: {fileID: 5669159721698462797}
-  _viewElementPrefab: {fileID: 8923221682010575914, guid: 8a43e327414089a49af6ece9d72c7701, type: 3}
+  _viewElementPrefab: {fileID: 7269713939000937424, guid: d354d178bc2881040a94b9b20efcfa9a, type: 3}
 --- !u!1001 &4729882049285855657
 PrefabInstance:
   m_ObjectHideFlags: 0

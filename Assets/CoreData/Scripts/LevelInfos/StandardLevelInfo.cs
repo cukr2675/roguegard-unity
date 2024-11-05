@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using ListingMF;
+using Roguegard.Device;
 using Roguegard.CharacterCreation;
 
 namespace Roguegard
@@ -17,6 +19,8 @@ namespace Roguegard
         private static readonly Dictionary<int, StandardLevelInfo> instances = new Dictionary<int, StandardLevelInfo>();
 
         private readonly int initialLv;
+
+        private static readonly LevelUpBonusScreen levelUpBonusScreen = new();
 
         static StandardLevelInfo()
         {
@@ -66,19 +70,17 @@ namespace Roguegard
             if (selfIsPlayerPartyMember)
             {
                 RogueDevice.Add(DeviceKw.EnqueueSEAndWait, StdKw.LevelUp);
-                RogueDevice.Add(DeviceKw.AppendText, DeviceKw.StartTalk);
-                RogueDevice.Add(DeviceKw.AppendText, self);
-                RogueDevice.Add(DeviceKw.AppendText, "はレベルが上がった！\t\n");
+                RogueDevice.Primary.AddMenu(levelUpBonusScreen, self, null, RogueMethodArgument.Identity);
             }
 
             // 偶数Lvに上がった時HPを、奇数Lvに上がった時MPを上げる。
+            levelUpBonusScreen.message = "";
             if (self.Main.Stats.Lv % 2 == 0)
             {
                 self.Main.Stats.SetHP(self, self.Main.Stats.HP + 2, true);
                 if (selfIsPlayerPartyMember)
                 {
-                    RogueDevice.Add(DeviceKw.AppendText, StatsKw.MaxHP);
-                    RogueDevice.Add(DeviceKw.AppendText, "が2上がった\t\n");
+                    levelUpBonusScreen.message += $"{StatsKw.MaxHP.Name}が2上がった\n";
                 }
             }
             else
@@ -86,8 +88,7 @@ namespace Roguegard
                 self.Main.Stats.SetMP(self, self.Main.Stats.MP + 2, true);
                 if (selfIsPlayerPartyMember)
                 {
-                    RogueDevice.Add(DeviceKw.AppendText, StatsKw.MaxMP);
-                    RogueDevice.Add(DeviceKw.AppendText, "が2上がった\t\n");
+                    levelUpBonusScreen.message += $"{StatsKw.MaxMP.Name}が2上がった\n";
                 }
             }
 
@@ -95,8 +96,7 @@ namespace Roguegard
             {
                 if (selfIsPlayerPartyMember)
                 {
-                    RogueDevice.Add(DeviceKw.AppendText, StatsKw.ATK);
-                    RogueDevice.Add(DeviceKw.AppendText, "が1上がった\t\n");
+                    levelUpBonusScreen.message += $"{StatsKw.ATK.Name}が1上がった\n";
                 }
             }
 
@@ -164,6 +164,24 @@ namespace Roguegard
         public override int GetHashCode()
         {
             return initialLv.GetHashCode();
+        }
+
+        private class LevelUpBonusScreen : RogueMenuScreen
+        {
+            public string message;
+
+            private readonly SpeechBoxViewTemplate<RogueMenuManager, ReadOnlyMenuArg> view = new()
+            {
+            };
+
+            public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
+            {
+                view.ShowTemplate($"{arg.Self.GetName()}はレベルが上がった！{view.VA}\n{message}", manager, arg)
+                    ?
+                    .OnCompleted((manager, arg) => manager.Done())
+
+                    .Build();
+            }
         }
     }
 }

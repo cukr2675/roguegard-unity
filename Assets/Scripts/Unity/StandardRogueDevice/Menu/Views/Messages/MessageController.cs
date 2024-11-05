@@ -11,91 +11,41 @@ namespace RoguegardUnity
 {
     public class MessageController : MonoBehaviour
     {
-        [SerializeField] private MessageWindow _messageWindow = null;
         [SerializeField] private LogMenuView _logWindow = null;
-        [SerializeField] private TalkWindow _talkWindow = null;
 
         [SerializeField] private MessageBoxSubView _messageBox = null;
-        [SerializeField] private MessageBoxSubView _speechBox = null;
 
+        private bool messageBoxIsVisible;
         private int showMessageTime;
         private const int messageTime = 3 * 60;
 
-        private bool lastTypewriting;
-
-        private bool talk;
-
-        public bool IsScrollingNow => _messageBox.MessageBox.IsInProgress || _speechBox.MessageBox.IsInProgress;
-
-        public bool IsTalkingNow => _speechBox.MessageBox.IsInProgress;
-
-        public ElementsView LogView => _logWindow;
-        public ElementsView TalkView => _talkWindow;
-
         internal void UpdateUI(SoundController soundController, int deltaTime)
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (messageBoxIsVisible && !_messageBox.MessageBox.IsInProgress)
             {
-                _speechBox.MessageBox.InvokeReachHiddenLink("Submit");
+                showMessageTime += deltaTime;
+                if (showMessageTime >= messageTime)
+                {
+                    _messageBox.Hide(false);
+                    messageBoxIsVisible = false;
+                }
             }
-
-
-            //_messageWindow.UpdateUI(deltaTime);
-            //if (_messageWindow.IsShow && !_messageWindow.IsScrollingNow)
-            //{
-            //    showMessageTime += deltaTime;
-            //    if (showMessageTime >= messageTime)
-            //    {
-            //        _messageWindow.Show(false);
-            //    }
-            //}
-
-            //_talkWindow.UpdateUI(deltaTime);
-            //if (lastTypewriting != _talkWindow.IsTypewritingNow)
-            //{
-            //    if (_talkWindow.IsTypewritingNow)
-            //    {
-            //        soundController.PlayLoop(DeviceKw.StartTalk);
-            //    }
-            //    else
-            //    {
-            //        soundController.SetLastLoop(DeviceKw.StartTalk);
-            //    }
-            //    lastTypewriting = _talkWindow.IsTypewritingNow;
-            //}
         }
 
-        public void ShowMessage(bool show)
+        public void ShowMessage()
         {
             _messageBox.Show();
-            //_messageWindow.Show(show);
-        }
-
-        public void StartTalk()
-        {
-            _speechBox.Show();
-            talk = true;
-            _speechBox.DoScheduledAfterCompletion((manager, arg) => talk = false);
-            //_messageWindow.Show(false);
-            //_talkWindow.StartTalk();
-        }
-
-        public void WaitEndOfTalk()
-        {
-            //_talkWindow.WaitEndOfTalk();
+            messageBoxIsVisible = true;
         }
 
         private void AppendText(string text)
         {
-            if (talk)
-            {
-                _speechBox.MessageBox.Append(text);
-            }
-            else
+
             {
                 _messageBox.MessageBox.Append(text);
                 //_logWindow.Append(text);
                 showMessageTime = 0;
+                ShowMessage();
             }
         }
 
@@ -191,7 +141,6 @@ namespace RoguegardUnity
         {
             _messageBox.MessageBox.Clear();
             //_logWindow.Clear();
-            _speechBox.MessageBox.Clear();
         }
     }
 }

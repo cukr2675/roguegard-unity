@@ -16,7 +16,7 @@ namespace Roguegard
             BackAnchorList = new()
             {
                 null,
-                ListMenuSelectOption.Create<RogueMenuManager, ReadOnlyMenuArg>("<", Save)
+                SelectOption.Create<RogueMenuManager, ReadOnlyMenuArg>("<", Save)
             },
         };
 
@@ -31,8 +31,6 @@ namespace Roguegard
 
         private static void Save(RogueMenuManager manager, ReadOnlyMenuArg arg)
         {
-            manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-
             if (arg.Arg.Other is CharacterCreationDataBuilder builder)
             {
                 // キャラクリ画面から戻ったとき、そのキャラを更新する
@@ -53,8 +51,7 @@ namespace Roguegard
                 info.CharacterCreationData = builder;
             }
 
-            manager.HandleClickBack();
-            manager.HandleClickBack();
+            manager.Back(2);
         }
     }
 }

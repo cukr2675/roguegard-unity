@@ -59,7 +59,7 @@ namespace RoguegardUnity
                 elms.Add(
                     new object[]
                     {
-                        ListMenuSelectOption.Create<RogueMenuManager, ReadOnlyMenuArg>(
+                        SelectOption.Create<RogueMenuManager, ReadOnlyMenuArg>(
                             (manager, arg) =>
                             {
                                 if (arg.Arg.Other is RaceBuilder raceBuilder)
@@ -71,7 +71,6 @@ namespace RoguegardUnity
                             },
                             (manager, arg) =>
                             {
-                                manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
                                 if (arg.Arg.Other is RaceBuilder raceBuilder)
                                 {
                                     var nextMenu = new SelectGenderMenu() { database = database };
@@ -82,7 +81,7 @@ namespace RoguegardUnity
                             })
                     });
                 elms.Add(
-                    ListMenuSelectOption.Create<RogueMenuManager, ReadOnlyMenuArg>(
+                    SelectOption.Create<RogueMenuManager, ReadOnlyMenuArg>(
                         $"<#{ColorUtility.ToHtmlStringRGBA(raceBuilder.BodyColor)}>カラー",
                         ColorPicker()));
                 AddMemberElements(raceBuilder);
@@ -92,7 +91,7 @@ namespace RoguegardUnity
                 elms.Clear();
                 elms.Add(selectOption.Set(appearanceBuilder));
                 elms.Add(
-                    ListMenuSelectOption.Create<RogueMenuManager, ReadOnlyMenuArg>(
+                    SelectOption.Create<RogueMenuManager, ReadOnlyMenuArg>(
                         $"<#{ColorUtility.ToHtmlStringRGBA(appearanceBuilder.Color)}>カラー",
                         ColorPicker()));
                 AddMemberElements(appearanceBuilder);
@@ -186,7 +185,7 @@ namespace RoguegardUnity
                 else if (member is EquipMember equipMember)
                 {
                     elms.Add(
-                        ListMenuSelectOption.Create<RogueMenuManager, ReadOnlyMenuArg>(
+                        SelectOption.Create<RogueMenuManager, ReadOnlyMenuArg>(
                             (manager, arg) =>
                             {
                                 return $"<#808080>装備する：{equipMember.IsEquipped}";
@@ -256,18 +255,18 @@ namespace RoguegardUnity
                 });
         }
 
-        private class RemoveSelectOption : IListMenuSelectOption
+        private class RemoveSelectOption : ISelectOption
         {
             public CharacterCreationDataBuilder builder;
 
-            string IListMenuSelectOption.GetName(IListMenuManager manager, IListMenuArg arg) => "<#f00>削除";
+            string ISelectOption.GetName(IListMenuManager manager, IListMenuArg arg) => "<#f00>削除";
 
-            void IListMenuSelectOption.HandleClick(IListMenuManager iManager, IListMenuArg iArg)
+            string ISelectOption.GetStyle(IListMenuManager manager, IListMenuArg arg) => null;
+
+            void ISelectOption.HandleClick(IListMenuManager iManager, IListMenuArg iArg)
             {
                 var manager = (RogueMenuManager)iManager;
                 var arg = (ReadOnlyMenuArg)iArg;
-
-                manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
 
                 if (arg.Arg.Other is IMemberable memberable)
                 {
@@ -296,7 +295,7 @@ namespace RoguegardUnity
                     CharacterCreationAddMenu.ReceiveStartingItemOptionObj(startingItemBuilder.Option, arg.Self);
                     builder.StartingItemTable.Remove(startingItemBuilder, true);
                 }
-                manager.HandleClickBack();
+                manager.Back();
             }
         }
 
@@ -330,7 +329,7 @@ namespace RoguegardUnity
                     .OnClickElement((gender, manager, arg) =>
                     {
                         builder.Gender = gender;
-                        manager.HandleClickBack();
+                        manager.Back();
                     })
 
                     .Build();

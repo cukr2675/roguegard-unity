@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6763049671958839971}
   - component: {fileID: 5371117456677525586}
   - component: {fileID: 8742495407364193031}
+  - component: {fileID: -1337285288289225406}
   - component: {fileID: 8256227690670107280}
   m_Layer: 5
   m_Name: LMF_LabelViewWidget
@@ -77,6 +78,27 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!95 &-1337285288289225406
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2814315742074529681}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 18481427a398ca4409a3541be4ea7349, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &8256227690670107280
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -90,6 +112,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _text: {fileID: 917425022116883279}
+  _defaultStyle: Submit
+  _onClickWithoutBlock:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -1337285288289225406}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: SetTrigger
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Click
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &6158920333407993764
 PrefabInstance:
   m_ObjectHideFlags: 0

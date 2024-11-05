@@ -19,16 +19,13 @@ namespace Roguegard
         int ISkillDescription.RequiredMP => 0;
         Spanning<IKeyword> ISkillDescription.AmmoCategories => Spanning<IKeyword>.Empty;
 
-        private RogueMenu rogueMenu;
+        private SpeechScreen rogueMenu;
 
         public bool Invoke(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
         {
             if (user == RogueDevice.Primary.Player)
             {
-                rogueMenu ??= new RogueMenu() { parent = this };
-                RogueDevice.Add(DeviceKw.AppendText, DeviceKw.StartTalk);
-                RogueDevice.Add(DeviceKw.AppendText, "商人「わたしは商人です でもまだ準備中です\n");
-                RogueDevice.Add(DeviceKw.AppendText, DeviceKw.EndTalk);
+                rogueMenu ??= new SpeechScreen() { parent = this };
                 RogueDevice.Primary.AddMenu(rogueMenu, user, null, RogueMethodArgument.Identity);
                 return true;
             }
@@ -42,6 +39,31 @@ namespace Roguegard
         {
             additionalEffect = false;
             return 0;
+        }
+
+        private class SpeechScreen : RogueMenuScreen
+        {
+            public LobbyMerchantBeApplied parent;
+
+            private readonly SpeechBoxViewTemplate<RogueMenuManager, ReadOnlyMenuArg> view = new()
+            {
+            };
+
+            public override bool IsIncremental => true;
+
+            public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
+            {
+                view.ShowTemplate($"商人「わたしは商人です でもまだ準備中です{view.VA}\n", manager, arg)
+                    ?
+                    .VariableOnce(out var nextScreen, new RogueMenu() { parent = parent })
+
+                    .OnCompleted((manager, arg) =>
+                    {
+                        manager.PushMenuScreen(nextScreen, arg.Self);
+                    })
+
+                    .Build();
+            }
         }
 
         private class RogueMenu : RogueMenuScreen
@@ -63,7 +85,6 @@ namespace Roguegard
 
                     .OnClickElement((item, manager, arg) =>
                     {
-                        manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
                         manager.AddObject(DeviceKw.AppendText, item);
                         manager.AddObject(DeviceKw.AppendText, "を手に入れた\n");
 

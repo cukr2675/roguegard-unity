@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using TMPro;
+using ListingMF;
 using Roguegard.CharacterCreation;
 using Roguegard.Device;
 using Roguegard.Extensions;
@@ -13,145 +14,145 @@ namespace Roguegard.Rgpacks
     {
         [SerializeField] private ScriptableStartingItem _newFloor = null;
 
-        //private Menu menu;
+        private Menu menu;
 
         public override bool Invoke(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
         {
-            //menu ??= new() { _newFloor = _newFloor };
+            menu ??= new() { _newFloor = _newFloor };
             var mysteryDioramaInfo = MysteryDioramaInfo.Get(self);
             if (mysteryDioramaInfo == null)
             {
                 MysteryDioramaInfo.SetTo(self);
             }
 
-            //RogueDevice.Primary.AddMenu(menu, user, null, new(targetObj: self));
+            RogueDevice.Primary.AddMenu(menu, user, null, new(targetObj: self));
             return false;
         }
 
-        //private class Menu : BaseScrollListMenu<object>
-        //{
-        //    public ScriptableStartingItem _newFloor;
+        private class Menu : RogueMenuScreen
+        {
+            public ScriptableStartingItem _newFloor;
 
-        //    private static readonly List<object> elms = new();
-        //    private static readonly AssetID assetID = new();
-        //    private static readonly FloorMenu nextMenu = new();
+            private static readonly List<object> elms = new();
 
-        //    protected override IKeyword ViewKeyword => DeviceKw.MenuOptions;
+            private readonly ScrollViewTemplate<object, RogueMenuManager, ReadOnlyMenuArg> view = new()
+            {
+                ScrollSubViewName = StandardSubViewTable.WidgetsName,
+            };
 
-        //    protected override Spanning<object> GetList(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-        //    {
-        //        var diorama = arg.TargetObj;
-        //        var dioramaFloorObjs = diorama.Space.Objs;
-        //        elms.Clear();
-        //        elms.Add(assetID);
-        //        for (int i = 0; i < dioramaFloorObjs.Count; i++)
-        //        {
-        //            var dioramaFloorObj = dioramaFloorObjs[i];
-        //            if (dioramaFloorObj == null) continue;
+            public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
+            {
+                var diorama = arg.Arg.TargetObj;
+                var dioramaFloorObjs = diorama.Space.Objs;
+                elms.Clear();
+                for (int i = 0; i < dioramaFloorObjs.Count; i++)
+                {
+                    var dioramaFloorObj = dioramaFloorObjs[i];
+                    if (dioramaFloorObj == null) continue;
 
-        //            elms.Add(dioramaFloorObj);
-        //        }
-        //        elms.Add(null);
-        //        return elms;
-        //    }
+                    elms.Add(dioramaFloorObj);
+                }
 
-        //    protected override string GetItemName(object element, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-        //    {
-        //        if (element is RogueObj dioramaFloorObj)
-        //        {
-        //            return dioramaFloorObj.GetName();
-        //        }
-        //        else if (element == null)
-        //        {
-        //            return "+ 階層を追加";
-        //        }
-        //        else
-        //        {
-        //            return SelectOptionPresenter.Instance.GetItemName(element, manager, self, user, arg);
-        //        }
-        //    }
+                view.ShowTemplate(elms, manager, arg)
+                    ?
+                    .InsertNext(
+                        new object[]
+                        {
+                            "アセットID",
+                            InputFieldViewWidget.CreateOption<RogueMenuManager, ReadOnlyMenuArg>(
+                                (manager, arg) =>
+                                {
+                                    var diorama = arg.Arg.TargetObj;
+                                    return NamingEffect.Get(diorama)?.Naming;
+                                },
+                                (manager, arg, value) =>
+                                {
+                                    var diorama = arg.Arg.TargetObj;
+                                    default(IActiveRogueMethodCaller).Affect(diorama, 1f, NamingEffect.Callback);
+                                    return NamingEffect.Get(diorama).Naming = value;
+                                })
+                        })
 
-        //    protected override void ActivateItem(object element, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-        //    {
-        //        if (element is RogueObj dioramaFloorObj)
-        //        {
-        //            manager.OpenMenu(nextMenu, self, null, new(targetObj: dioramaFloorObj));
-        //        }
-        //        else if (element == null)
-        //        {
-        //            var diorama = arg.TargetObj;
-        //            _newFloor.Option.CreateObj(_newFloor, diorama, Vector2Int.zero, RogueRandom.Primary);
-        //            manager.Reopen();
-        //        }
-        //        else
-        //        {
-        //            SelectOptionPresenter.Instance.ActivateItem(element, manager, self, user, arg);
-        //        }
-        //    }
-        //}
+                    .ElementNameFrom((element, manager, arg) =>
+                    {
+                        if (element is RogueObj dioramaFloorObj)
+                        {
+                            return dioramaFloorObj.GetName();
+                        }
+                        else
+                        {
+                            return SelectOptionHandler.Instance.GetName(element, manager, arg);
+                        }
+                    })
 
-        //private class AssetID : IOptionsMenuText
-        //{
-        //    public TMP_InputField.ContentType ContentType => TMP_InputField.ContentType.Standard;
+                    .VariableOnce(out var nextMenu, new FloorMenu())
+                    .OnClickElement((element, manager, arg) =>
+                    {
+                        if (element is RogueObj dioramaFloorObj)
+                        {
+                            manager.PushMenuScreen(nextMenu, arg.Self, targetObj: dioramaFloorObj);
+                        }
+                        else
+                        {
+                            SelectOptionHandler.Instance.HandleClick(element, manager, arg);
+                        }
+                    })
 
-        //    public string GetName(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-        //        => "アセットID";
+                    .Append(SelectOption.Create<RogueMenuManager, ReadOnlyMenuArg>(
+                        "+ 階層を追加",
+                        (manager, arg) =>
+                        {
+                            var diorama = arg.Arg.TargetObj;
+                            _newFloor.Option.CreateObj(_newFloor, diorama, Vector2Int.zero, RogueRandom.Primary);
+                            manager.Reopen();
+                        }))
 
-        //    public string GetValue(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-        //    {
-        //        var diorama = arg.TargetObj;
-        //        return NamingEffect.Get(diorama)?.Naming;
-        //    }
+                    .Build();
+            }
+        }
 
-        //    public void SetValue(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg, string value)
-        //    {
-        //        var diorama = arg.TargetObj;
-        //        default(IActiveRogueMethodCaller).Affect(diorama, 1f, NamingEffect.Callback);
-        //        NamingEffect.Get(diorama).Naming = value;
-        //    }
-        //}
+        private class FloorMenu : RogueMenuScreen
+        {
+            public ScriptableStartingItem _newFloor;
 
-        //private class FloorMenu : BaseScrollListMenu<object>
-        //{
-        //    public ScriptableStartingItem _newFloor;
+            private readonly DialogViewTemplate<RogueMenuManager, ReadOnlyMenuArg> view = new()
+            {
+                DialogSubViewName = StandardSubViewTable.WidgetsName,
+                BackAnchorSubViewName = StandardSubViewTable.BackAnchorName,
+            };
 
-        //    private static readonly object[] elms = new object[]
-        //    {
-        //        new AssetID(),
-        //        new EnterSelectOption()
-        //    };
+            public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
+            {
+                view.ShowTemplate("", manager, arg)
+                    ?
+                    .Append(
+                        new object[]
+                        {
+                            "アセットID",
+                            InputFieldViewWidget.CreateOption<RogueMenuManager, ReadOnlyMenuArg>(
+                                (manager, arg) =>
+                                {
+                                    var diorama = arg.Arg.TargetObj;
+                                    return NamingEffect.Get(diorama)?.Naming;
+                                },
+                                (manager, arg, value) =>
+                                {
+                                    var diorama = arg.Arg.TargetObj;
+                                    default(IActiveRogueMethodCaller).Affect(diorama, 1f, NamingEffect.Callback);
+                                    return NamingEffect.Get(diorama).Naming = value;
+                                })
+                        })
 
-        //    protected override IKeyword ViewKeyword => DeviceKw.MenuOptions;
+                    .AppendSelectOption(
+                        "入る", (manager, arg) =>
+                        {
+                            var dioramaFloor = arg.Arg.TargetObj;
+                            SpaceUtility.TryLocate(arg.Self, dioramaFloor, Vector2Int.one);
+                            manager.Done();
+                        })
 
-        //    protected override Spanning<object> GetList(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-        //    {
-        //        return elms;
-        //    }
-
-        //    protected override string GetItemName(object element, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-        //    {
-        //        return SelectOptionPresenter.Instance.GetItemName(element, manager, self, user, arg);
-        //    }
-
-        //    protected override void ActivateItem(object element, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-        //    {
-        //        SelectOptionPresenter.Instance.ActivateItem(element, manager, self, user, arg);
-        //    }
-        //}
-
-        //private class EnterSelectOption : IListMenuSelectOption
-        //{
-        //    public TMP_InputField.ContentType ContentType => TMP_InputField.ContentType.Standard;
-
-        //    public string GetName(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-        //        => "入る";
-
-        //    public void Activate(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-        //    {
-        //        var dioramaFloor = arg.TargetObj;
-        //        SpaceUtility.TryLocate(self, dioramaFloor, Vector2Int.one);
-        //        manager.Done();
-        //    }
-        //}
+                    .Build();
+            }
+        }
     }
 }

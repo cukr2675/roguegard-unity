@@ -39,11 +39,11 @@ namespace Roguegard
 
         private class RogueMenu : RogueMenuScreen
         {
-            private readonly ScrollViewTemplate<IListMenuSelectOption, RogueMenuManager, ReadOnlyMenuArg> view = new()
+            private readonly ScrollViewTemplate<ISelectOption, RogueMenuManager, ReadOnlyMenuArg> view = new()
             {
             };
 
-            private readonly List<IListMenuSelectOption> selectOptions = new();
+            private readonly List<ISelectOption> selectOptions = new();
 
             public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
             {

@@ -14,27 +14,27 @@ namespace RoguegardUnity
     public class ObjCommandMenu : RogueMenuScreen
     {
         private readonly List<IObjCommand> commands;
-        private readonly List<IListMenuSelectOption> selectOptions;
+        private readonly List<ISelectOption> selectOptions;
         private readonly SummaryMenuScreen summaryMenuScreen = new();
         private readonly DetailsMenuScreen detailsMenuScreen = new();
 
-        public IListMenuSelectOption Summary { get; }
-        public IListMenuSelectOption Details { get; }
+        public ISelectOption Summary { get; }
+        public ISelectOption Details { get; }
 
-        private readonly CommandListViewTemplate<IListMenuSelectOption, RogueMenuManager, ReadOnlyMenuArg> view = new()
+        private readonly CommandListViewTemplate<ISelectOption, RogueMenuManager, ReadOnlyMenuArg> view = new()
         {
         };
 
         public ObjCommandMenu()
         {
             commands = new List<IObjCommand>();
-            selectOptions = new List<IListMenuSelectOption>();
+            selectOptions = new List<ISelectOption>();
 
-            Summary = ListMenuSelectOption.Create<RogueMenuManager, ReadOnlyMenuArg>("つよさ", (manager, arg) =>
+            Summary = SelectOption.Create<RogueMenuManager, ReadOnlyMenuArg>("つよさ", (manager, arg) =>
             {
                 manager.PushMenuScreen(summaryMenuScreen, arg.Self, targetObj: arg.Arg.TargetObj, other: arg.Arg.Other);
             });
-            Details = ListMenuSelectOption.Create<RogueMenuManager, ReadOnlyMenuArg>("説明", (manager, arg) =>
+            Details = SelectOption.Create<RogueMenuManager, ReadOnlyMenuArg>("説明", (manager, arg) =>
             {
                 manager.PushMenuScreen(detailsMenuScreen, arg);
             });
@@ -50,7 +50,7 @@ namespace RoguegardUnity
                 selectOptions.Add(command.SelectOption);
             }
             selectOptions.Add(Details);
-            selectOptions.Add(ExitListMenuSelectOption.Instance);
+            selectOptions.Add(BackSelectOption.Instance);
             view.ShowTemplate(selectOptions, manager, arg)
                 ?
                 .ElementNameFrom((selectOption, manager, arg) =>

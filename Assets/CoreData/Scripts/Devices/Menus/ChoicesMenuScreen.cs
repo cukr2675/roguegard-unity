@@ -22,15 +22,15 @@ namespace Roguegard.Device
             screen = new ChoicesMenuScreen<RogueMenuManager, ReadOnlyMenuArg>(getMessage);
         }
 
-        public static ChoicesMenuScreen CreateExit(
+        public static ChoicesMenuScreen SaveBackDialog(
             HandleClickElement<RogueMenuManager, ReadOnlyMenuArg> saveAction,
             HandleClickElement<RogueMenuManager, ReadOnlyMenuArg> notSaveAction = null)
         {
-            var selectOption = CreateExit(":ExitMsg", ":Overwrite", saveAction, ":DontSave", notSaveAction);
+            var selectOption = SaveBackDialog(":SaveBackDialogMsg", ":Overwrite", saveAction, ":DontSave", notSaveAction);
             return selectOption;
         }
 
-        public static ChoicesMenuScreen CreateExit(
+        public static ChoicesMenuScreen SaveBackDialog(
             string message,
             string saveName, HandleClickElement<RogueMenuManager, ReadOnlyMenuArg> saveAction,
             string notSaveName, HandleClickElement<RogueMenuManager, ReadOnlyMenuArg> notSaveAction)
@@ -41,9 +41,9 @@ namespace Roguegard.Device
                 .Option(saveName, saveAction)
 
                 // •Û‘¶‚µ‚È‚¢ê‡‚ÍÄ“x•·‚­
-                .Option(notSaveName, new ChoicesMenuScreen(":SecondExitMsg").Option(notSaveName, notSaveAction ?? NotSave).Exit())
+                .Option(notSaveName, new ChoicesMenuScreen(":SaveBackDialogMsg::Second").Option(notSaveName, notSaveAction ?? NotSave).Option(":Cancel", Cancel))
 
-                .Exit();
+                .Option(":Cancel", (manager, arg) => manager.Back());
 
             return selectOption;
         }
@@ -51,9 +51,13 @@ namespace Roguegard.Device
         private static void NotSave(RogueMenuManager manager, ReadOnlyMenuArg arg)
         {
             // ‰½‚à‚¹‚¸•Â‚¶‚é
-            manager.HandleClickBack();
-            manager.HandleClickBack();
-            manager.HandleClickBack();
+            manager.Back(3);
+        }
+
+        private static void Cancel(RogueMenuManager manager, ReadOnlyMenuArg arg)
+        {
+            // ‰½‚à‚¹‚¸•Â‚¶‚é
+            manager.Back(2);
         }
 
         public ChoicesMenuScreen Option(string name, HandleClickElement<RogueMenuManager, ReadOnlyMenuArg> handleClick)
@@ -62,9 +66,9 @@ namespace Roguegard.Device
             return this;
         }
 
-        public ChoicesMenuScreen Exit()
+        public ChoicesMenuScreen Back()
         {
-            screen.Exit();
+            screen.Back();
             return this;
         }
 

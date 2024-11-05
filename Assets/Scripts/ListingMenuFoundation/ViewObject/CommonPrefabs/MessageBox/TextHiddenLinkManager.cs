@@ -19,6 +19,7 @@ namespace ListingMF
             {
                 var linkInfo = text.textInfo.linkInfo[i];
                 if (linkInfo.linkTextLength != 0) continue; // 文字数がゼロでない（'Hidden' でない）リンクタグは無視
+                if (linkInfo.linkTextfirstCharacterIndex < text.maxVisibleCharacters) continue; // 表示済みテキスト内のリンクタグは無視
 
                 var hiddenLinkID = text.text.Substring(linkInfo.linkIdFirstCharacterIndex, linkInfo.linkIdLength);
                 var item = new Item(hiddenLinkID, linkInfo.linkTextfirstCharacterIndex);
@@ -37,7 +38,7 @@ namespace ListingMF
             }
 
             var nextItem = items[nextItemIndex];
-            if (endCharacterIndex - 1 < nextItem.LinkTextFirstCharacterIndex)
+            if (endCharacterIndex < nextItem.LinkTextFirstCharacterIndex)
             {
                 hiddenLinkID = null;
                 linkCharacterIndex = default;

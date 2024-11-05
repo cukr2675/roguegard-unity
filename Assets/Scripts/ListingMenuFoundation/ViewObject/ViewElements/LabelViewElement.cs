@@ -17,10 +17,9 @@ namespace ListingMF
             TryGetComponent(out text);
         }
 
-        public override void SetElement(IElementHandler handler, object element)
+        protected override void InnerSetElement(IElementHandler handler, object element)
         {
-            var baseText = handler.GetName(element, Manager, Arg);
-            text.text = Manager.Localize(baseText);
+            text.text = Manager.Localize(name);
         }
     }
 }

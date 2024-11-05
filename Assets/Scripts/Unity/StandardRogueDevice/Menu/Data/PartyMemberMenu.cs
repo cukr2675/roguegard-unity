@@ -10,26 +10,26 @@ namespace RoguegardUnity
 {
     public class PartyMemberMenu : RogueMenuScreen
     {
-        private readonly IListMenuSelectOption[] selectOptions;
+        private readonly ISelectOption[] selectOptions;
 
-        private readonly CommandListViewTemplate<IListMenuSelectOption, RogueMenuManager, ReadOnlyMenuArg> view = new()
+        private readonly CommandListViewTemplate<ISelectOption, RogueMenuManager, ReadOnlyMenuArg> view = new()
         {
         };
 
         public PartyMemberMenu(ObjsMenu objsMenu, ObjCommandMenu objCommandMenu, SkillsMenu skillsMenu)
         {
-            selectOptions = new IListMenuSelectOption[]
+            selectOptions = new ISelectOption[]
             {
                 objCommandMenu.Summary,
-                ListMenuSelectOption.Create<RogueMenuManager, ReadOnlyMenuArg>(":Items", (manager, arg) =>
+                SelectOption.Create<RogueMenuManager, ReadOnlyMenuArg>(":Items", (manager, arg) =>
                 {
                     manager.PushMenuScreen(objsMenu.Items, arg.Self, targetObj: arg.Self);
                 }),
-                ListMenuSelectOption.Create<RogueMenuManager, ReadOnlyMenuArg>(":Skills", (manager, arg) =>
+                SelectOption.Create<RogueMenuManager, ReadOnlyMenuArg>(":Skills", (manager, arg) =>
                 {
                     manager.PushMenuScreen(skillsMenu.Use, arg.Self);
                 }),
-                ExitListMenuSelectOption.Instance
+                BackSelectOption.Instance
             };
         }
 

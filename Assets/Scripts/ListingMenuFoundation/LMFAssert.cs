@@ -21,7 +21,7 @@ namespace ListingMF
             else
             {
                 Debug.LogError($"{instance} ‚ğ {typeof(T)} ‚É•ÏŠ·‚Å‚«‚Ü‚¹‚ñB");
-                manager?.HandleClickError();
+                manager?.ErrorOption.HandleClick(manager, null);
 
                 castedInstance = default;
                 return true;

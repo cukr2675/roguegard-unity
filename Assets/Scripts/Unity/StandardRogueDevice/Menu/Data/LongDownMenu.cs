@@ -13,7 +13,7 @@ namespace RoguegardUnity
     /// </summary>
     public class LongDownMenu : RogueMenuScreen
     {
-        private readonly IListMenuSelectOption[] selectOptions;
+        private readonly ISelectOption[] selectOptions;
         private readonly RogueMenuScreen commandMenu;
 
         private readonly MainMenuViewTemplate<RogueMenuManager, ReadOnlyMenuArg> view = new()
@@ -22,7 +22,7 @@ namespace RoguegardUnity
 
         public LongDownMenu(ObjsMenu objsMenu, ObjCommandMenu objCommandMenu)
         {
-            selectOptions = new IListMenuSelectOption[]
+            selectOptions = new ISelectOption[]
             {
                 objCommandMenu.Summary,
                 objCommandMenu.Details,

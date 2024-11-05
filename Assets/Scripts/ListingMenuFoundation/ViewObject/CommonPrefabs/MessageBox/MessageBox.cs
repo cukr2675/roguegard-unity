@@ -62,8 +62,8 @@ namespace ListingMF
             set => _content.localPosition = new Vector3(0f, value);
         }
 
-        public bool IsInProgress => textTypingEffect.IsInProgress;
-        public bool IsTypingNow => enabled && _characterPerSecond > 0f && textTypingEffect.IsInProgress && !isScrollingNow;
+        public bool IsInProgress => !textTypingEffect.IsEOF;
+        public bool IsTypingNow => enabled && _characterPerSecond > 0f && !textTypingEffect.IsEOF && !isScrollingNow;
 
         private void Awake()
         {
@@ -109,9 +109,12 @@ namespace ListingMF
                     textTypingEffect.UpdateUI(deltaVisibleCharacters, linePosition);
                 }
             }
+        }
 
-            textRuleEffect.UpdateLines(ScrollPosition);
+        private void LateUpdate()
+        {
             ScrollPosition = Mathf.LerpUnclamped(startLineOffset, CalculateTargetTextOffset(), _normalizedLineOffset);
+            textRuleEffect.UpdateLines(ScrollPosition);
         }
 
         public Vector2 GetCurrentCharacterPosition(int deltaCharacterIndex, float normalizedX)
@@ -180,7 +183,7 @@ namespace ListingMF
         }
 
         /// <summary>
-        /// 行スクロールアニメーション完了時に呼び出すメソッド
+        /// 行スクロールアニメーション完了時にアニメーターから呼び出すメソッド
         /// </summary>
         public void EndScrollAndTrimBeforeAuto()
         {
@@ -193,7 +196,7 @@ namespace ListingMF
                 // タイピングエフェクトが無効の場合
 
                 // 全テキストが表示完了していなければ何もしない
-                if (textTypingEffect.IsInProgress) return;
+                if (!textTypingEffect.IsEOF) return;
 
                 // 表示に必要なくなったテキストを行単位で削除する
                 removedLineCount = textTypingEffect.TrimBeforeVisibleLine();

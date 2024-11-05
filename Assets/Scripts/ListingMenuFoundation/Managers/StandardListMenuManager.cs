@@ -25,7 +25,11 @@ namespace ListingMF
 
         public bool IsDone { get; private set; }
 
-        public virtual string BackName => "<";
+        public virtual ISelectOption BackOption { get; protected set; }
+            = SelectOption.Create<TMgr, TArg>("Back", (manager, arg) => manager.Back(), "Cancel");
+
+        public virtual ISelectOption ErrorOption { get; protected set; }
+            = SelectOption.Create<IListMenuManager, IListMenuArg>("<#F00>ERROR", delegate { }, "Cancel");
 
         private bool IsLocked
         {
@@ -77,6 +81,10 @@ namespace ListingMF
             }
         }
 
+        public virtual string Localize(string text) => text;
+
+        public virtual T Localize<T>(T obj) => obj;
+
         private void BlockAll()
         {
             foreach (var subView in StandardSubViewTable.SubViews.Values)
@@ -85,16 +93,14 @@ namespace ListingMF
             }
         }
 
-        public virtual string Localize(string text) => text;
-
-        public void PushMenuScreen(MenuScreen<TMgr, TArg> menuScreen, TArg arg)
+        public virtual void PushMenuScreen(MenuScreen<TMgr, TArg> menuScreen, TArg arg)
         {
             menuScreen.CloseScreen((TMgr)this, false);
             BlockAll();
             reservedMenu = stack.Push(menuScreen, arg);
         }
 
-        void IListMenuManager.PushMenuScreenExtension(object menuScreen, IListMenuArg arg)
+        void IListMenuManager.PushMenuScreenFromExtension(object menuScreen, IListMenuArg arg)
         {
             if (LMFAssert.Type<MenuScreen<TMgr, TArg>>(menuScreen, out var tMenuScreen) ||
                 LMFAssert.Type<TArg>(arg, out var tArg)) throw new System.ArgumentException();
@@ -109,14 +115,19 @@ namespace ListingMF
             StandardSubViewTable.SetBlocker(enableTouchMask);
         }
 
-        public virtual void HandleClickBack()
+        public void Back(int count = 1)
         {
-            var popItem = stack.Pop();
-            popItem.MenuScreen.CloseScreen((TMgr)this, true);
+            for (int i = 0; i < count; i++)
+            {
+                if (stack.Count == 0) break;
+
+                stack.Pop();
+            }
 
             if (stack.TryPeek(out var stackItem))
             {
                 // ひとつ前のメニューが存在する場合、そのメニューを開きなおす
+                stackItem.MenuScreen.CloseScreen((TMgr)this, true);
                 BlockAll();
                 reservedMenu = stackItem;
             }
@@ -127,19 +138,10 @@ namespace ListingMF
             }
         }
 
-        public virtual void HandleClickError()
-        {
-        }
-
-        public void Reopen()
-        {
-            //currentMenuIsDialog = true;
-            //Back();
-        }
-
         public void Done()
         {
             stack.Clear();
+            reservedMenu = null;
             HideAll();
             StandardSubViewTable.SetBlocker(false);
             IsDone = true;

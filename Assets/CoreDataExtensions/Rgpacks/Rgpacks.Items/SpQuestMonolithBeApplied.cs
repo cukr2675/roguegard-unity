@@ -60,7 +60,6 @@ namespace Roguegard.Rgpacks
 
             private static void Leave(RogueMenuManager manager, ReadOnlyMenuArg arg)
             {
-                manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
                 manager.AddObject(DeviceKw.EnqueueSE, CategoryKw.DownStairs);
                 default(IActiveRogueMethodCaller).LocateSavePoint(arg.Self, null, 0f, RogueWorldSavePointInfo.Instance, true);
                 var memberInfo = LobbyMemberList.GetMemberInfo(arg.Self);
@@ -90,7 +89,6 @@ namespace Roguegard.Rgpacks
 
                     .OnClickElement((item, manager, arg) =>
                     {
-                        manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
                         manager.AddObject(DeviceKw.AppendText, item);
                         manager.AddObject(DeviceKw.AppendText, "‚ðŽè‚É“ü‚ê‚½\n");
                         item.Option.CreateObj(item, arg.Self, Vector2Int.zero, RogueRandom.Primary);

@@ -180,7 +180,7 @@ AnimationClip:
     messageOptions: 0
   - time: 0.5
     functionName: InvokeReachHiddenLink
-    data: Submit
+    data: AdvanceText
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0

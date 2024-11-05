@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace ListingMF
 {
-    public class SpeechBoxViewTemplate<TMgr, TArg> : ListViewTemplate<IListMenuSelectOption, TMgr, TArg>
+    public class SpeechBoxViewTemplate<TMgr, TArg> : ListViewTemplate<ISelectOption, TMgr, TArg>
         where TMgr : IListMenuManager
         where TArg : IListMenuArg
     {
@@ -16,8 +16,11 @@ namespace ListingMF
         private IElementsSubViewStateProvider messageBoxSubViewStateProvider;
         private IElementsSubViewStateProvider choicesSubViewStateProvider;
         private IElementsSubViewStateProvider captionBoxSubViewStateProvider;
+        private event HandleClickElement<TMgr, TArg> OnCompleted;
 
         private readonly string[] message = new string[1];
+
+        public string VA => "<link=\"VerticalArrow\"></link>";
 
         public Builder ShowTemplate(string message, TMgr manager, TArg arg, object viewStateHolder = null)
         {
@@ -45,14 +48,24 @@ namespace ListingMF
             if (LMFAssert.Type<MessageBoxSubView>(manager.GetSubView(SpeechBoxSubViewName), out var speechBoxSubView)) return;
 
             speechBoxSubView.Show(message, ElementToStringHandler.Instance, manager, arg, ref messageBoxSubViewStateProvider);
-
-            manager
-                .GetSubView(ChoicesSubViewName)
-                .SetParameters(List, SelectOptionHandler.Instance, manager, arg, ref choicesSubViewStateProvider);
             speechBoxSubView.DoScheduledAfterCompletion((manager, arg) =>
             {
-                manager.GetSubView(ChoicesSubViewName).Show();
+                if (LMFAssert.Type<TMgr>(manager, out var tMgr, manager) ||
+                    LMFAssert.Type<TArg>(arg, out var tArg, manager)) return;
+
+                OnCompleted?.Invoke(tMgr, tArg);
             });
+
+            if (List.Count >= 1)
+            {
+                manager
+                    .GetSubView(ChoicesSubViewName)
+                    .SetParameters(List, SelectOptionHandler.Instance, manager, arg, ref choicesSubViewStateProvider);
+                speechBoxSubView.DoScheduledAfterCompletion((manager, arg) =>
+                {
+                    manager.GetSubView(ChoicesSubViewName).Show();
+                });
+            }
 
             if (Title != null)
             {
@@ -79,19 +92,27 @@ namespace ListingMF
                 this.parent = parent;
             }
 
+            public Builder OnCompleted(HandleClickElement<TMgr, TArg> onCompleted)
+            {
+                AssertNotBuilded();
+
+                parent.OnCompleted += onCompleted;
+                return this;
+            }
+
             public Builder Option(string name, HandleClickElement<TMgr, TArg> handleClick)
             {
                 AssertNotBuilded();
 
-                Append(ListMenuSelectOption.Create(name, handleClick));
+                Append(SelectOption.Create(name, handleClick));
                 return this;
             }
 
-            public Builder Exit()
+            public Builder Back()
             {
                 AssertNotBuilded();
 
-                Append(ExitListMenuSelectOption.Instance);
+                Append(BackSelectOption.Instance);
                 return this;
             }
         }

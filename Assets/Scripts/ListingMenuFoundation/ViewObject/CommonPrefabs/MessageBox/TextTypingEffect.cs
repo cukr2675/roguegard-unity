@@ -14,13 +14,14 @@ namespace ListingMF
         private readonly int maxLineCount;
         private readonly string pageTurnHiddenLinkID;
         private readonly string eofHiddenLinkID;
-        private readonly MessageBox.OnReachEvent onReachHiddenLink;
+        private readonly MessageBox.ReachHiddenLinkEvent onReachHiddenLink;
         private readonly TextHiddenLinkManager hiddenLinkManager;
         private readonly StringBuilder stringBuilder;
 
         private bool isDirty;
+        public bool IsEOF { get; private set; }
 
-        public bool IsInProgress => text.maxVisibleCharacters < text.textInfo.characterCount - (text.text.EndsWith(breakCharacter) ? 1 : 0);
+        private bool IsInProgress => text.maxVisibleCharacters < text.textInfo.characterCount;
 
         public float LineHeight { get; }
 
@@ -32,7 +33,7 @@ namespace ListingMF
         /// <param name="pageTurnHiddenLinkID">テキストが最大行数から下にはみ出たとき発行されるリンクID名</param>
         /// <param name="eofHiddenLinkID">テキストの終端の表示が完了したとき発行されるリンクID</param>
         public TextTypingEffect(
-            TMP_Text text, int maxLineCount, string pageTurnHiddenLinkID, string eofHiddenLinkID, MessageBox.OnReachEvent onReachHiddenLink)
+            TMP_Text text, int maxLineCount, string pageTurnHiddenLinkID, string eofHiddenLinkID, MessageBox.ReachHiddenLinkEvent onReachHiddenLink)
         {
             if (text.lineSpacing != 0f) { Debug.LogWarning($"{nameof(text.lineSpacing)} != 0 はサポートされていません。"); }
 
@@ -88,15 +89,6 @@ namespace ListingMF
             isDirty = true;
         }
 
-        public void AppendEndBreakCharacter()
-        {
-            if (stringBuilder[stringBuilder.Length - 1] != breakCharacter)
-            {
-                stringBuilder.Append(breakCharacter);
-                isDirty = true;
-            }
-        }
-
         private void Remove(int startIndex, int length)
         {
             stringBuilder.Remove(startIndex, length);
@@ -119,6 +111,7 @@ namespace ListingMF
             text.ForceMeshUpdate(true);
             hiddenLinkManager.UpdateLinks(text);
             isDirty = false;
+            IsEOF = text.text.Length == 0;
         }
 
         public void SeekToStartOfText()
@@ -136,7 +129,7 @@ namespace ListingMF
         /// </summary>
         public void UpdateUI(int linePosition)
         {
-            if (!IsInProgress) return;
+            if (IsEOF) return;
 
             // 1フレーム内で1行すべて表示する
             var overLineIndex = maxLineCount + linePosition;
@@ -148,7 +141,6 @@ namespace ListingMF
             else
             {
                 maxVisibleCharacters = text.textInfo.characterCount;
-                if (text.text.EndsWith(breakCharacter)) { maxVisibleCharacters--; }
             }
 
             // リンクを検知
@@ -165,6 +157,7 @@ namespace ListingMF
             if (!IsInProgress)
             {
                 // コンテキストをすべて表示し終えたら終端リンクIDを発行
+                IsEOF = true;
                 onReachHiddenLink.Invoke(eofHiddenLinkID);
                 return;
             }
@@ -177,11 +170,14 @@ namespace ListingMF
         /// </summary>
         public void UpdateUI(int deltaVisibleCharacters, int linePosition)
         {
-            if (!IsInProgress) return;
+            if (IsEOF) return;
 
             // リンクを検知
             if (hiddenLinkManager.ForwardDetect(text.maxVisibleCharacters + deltaVisibleCharacters, out var hiddenLinkID, out var linkCharacterIndex))
             {
+                // 表示位置が戻るのは未サポート
+                if (linkCharacterIndex < text.maxVisibleCharacters) throw new System.NotImplementedException();
+
                 text.maxVisibleCharacters = linkCharacterIndex;
                 onReachHiddenLink.Invoke(hiddenLinkID);
                 return;
@@ -194,6 +190,7 @@ namespace ListingMF
             if (!IsInProgress && linePosition >= text.textInfo.lineCount - maxLineCount)
             {
                 // コンテキストをすべて表示し終えたら終端リンクIDを発行
+                IsEOF = true;
                 onReachHiddenLink.Invoke(eofHiddenLinkID);
                 return;
             }
@@ -220,13 +217,14 @@ namespace ListingMF
             // はみ出しているテキストのうち改行以前を削除する
             // 改行以降を削除すると自動改行に影響が出て、はみ出していないテキストが変わってしまうことがある
 
-            var stringIndex = text.textInfo.characterInfo[text.maxVisibleCharacters - 1].index;
+            var characterIndex = Mathf.Clamp(text.maxVisibleCharacters - 1, 0, text.textInfo.characterCount - 1);
+            var stringIndex = text.textInfo.characterInfo[characterIndex].index;
 
             // テキストが改行で終わっている場合は1行だけ無視する
-            if (stringIndex >= 1 && text.text[stringIndex - 1] == breakCharacter) { stringIndex--; }
+            //if (stringIndex >= 1 && text.text.Length >= stringIndex + 2 && text.text[stringIndex + 1] == breakCharacter) { stringIndex--; }
 
             // 最後から maxLineCount 番目の改行コードの位置を取得する
-            for (int i = 0; i < maxLineCount - 1; i++)
+            for (int i = 0; i < maxLineCount; i++)
             {
                 if (stringIndex <= 0) break;
 
@@ -260,6 +258,7 @@ namespace ListingMF
             MeshUpdate(); // テキストの行数を更新する
             var beforeLineCount = text.textInfo.lineCount; // 削除前に取得
             Remove(0, linkStringIndex);
+            SeekToStartOfText();
             MeshUpdate(); // テキストの行数を更新する
             var removedLineCount = beforeLineCount - text.textInfo.lineCount; // 削除した行数を取得
 

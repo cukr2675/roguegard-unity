@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using TMPro;
 using ListingMF;
 using Roguegard;
 using Roguegard.CharacterCreation;
@@ -54,7 +55,7 @@ namespace RoguegardUnity
                 var parent = (MenuController)manager;
                 parent.Stats.SetText(arg.Self);
                 parent.Stats.SetDungeon(arg.Self.Location);
-                parent.Stats.Show(true);
+                parent.Stats.Show();
             }
         }
 
@@ -115,7 +116,7 @@ namespace RoguegardUnity
                         }
                     })
                     .Option(":Options", optionsMenu)
-                    .Exit()
+                    .Back()
                     .Build();
             }
 
@@ -134,7 +135,7 @@ namespace RoguegardUnity
 
                             default(IActiveRogueMethodCaller).Defeat(arg.Self, arg.User, 0f);
                         })
-                        .Exit()
+                        .Back()
                         .Build();
                 }
             }
@@ -157,96 +158,87 @@ namespace RoguegardUnity
 
         private class OptionsMenu : RogueMenuScreen
         {
-            //private static readonly object[] selectOptions = new object[]
-            //{
-            //    new OptionsMasterVolume(),
-            //    new OptionsWindowFrameType()
-            //};
+            private readonly DialogViewTemplate<RogueMenuManager, ReadOnlyMenuArg> view = new()
+            {
+                DialogSubViewName = StandardSubViewTable.WidgetsName,
+                BackAnchorSubViewName = StandardSubViewTable.BackAnchorName,
+            };
 
             public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
             {
-                throw new System.NotImplementedException();
+                view.ShowTemplate("", manager, arg)
+                    ?
+                    .Append(
+                        new object[]
+                        {
+                            "マスター音量",
+                            InputFieldViewWidget.CreateOption<RogueMenuManager, ReadOnlyMenuArg>(
+                                (manager, arg) =>
+                                {
+                                    var device = (StandardRogueDevice)RogueDevice.Primary;
+                                    return Mathf.FloorToInt(device.Options.MasterVolume * 100f).ToString();
+                                },
+                                (manager, arg, valueString) =>
+                                {
+                                    if (!int.TryParse(valueString, out var value)) { value = 0; }
+
+                                    value = Mathf.Clamp(value, 0, 100);
+                                    var device = (StandardRogueDevice)RogueDevice.Primary;
+                                    device.Options.SetMasterVolume(value / 100f);
+
+                                    // 音量確認用の効果音を鳴らす
+                                    manager.StandardSubViewTable.MessageBox.PlayString("Submit");
+
+                                    return value.ToString();
+                                },
+                                TMP_InputField.ContentType.IntegerNumber)
+                        })
+
+                    .VariableOnce(out var windowTypeScreen, new WindowTypeScreen())
+                    .AppendSelectOption("ウィンドウタイプ", windowTypeScreen)
+
+                    .Build();
             }
 
-            //protected override Spanning<object> GetList(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            //{
-            //    return selectOptions;
-            //}
+            private class WindowTypeScreen : RogueMenuScreen
+            {
+                private readonly List<object> elms = new();
 
-            //protected override string GetItemName(object element, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            //{
-            //    return SelectOptionPresenter.Instance.GetItemName(element, manager, self, user, arg);
-            //}
+                private readonly ScrollViewTemplate<object, RogueMenuManager, ReadOnlyMenuArg> view = new()
+                {
+                };
 
-            //protected override void ActivateItem(object element, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            //{
-            //    SelectOptionPresenter.Instance.ActivateItem(element, manager, self, user, arg);
-            //}
+                public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
+                {
+                    if (elms.Count != WindowFrameList.Count)
+                    {
+                        elms.Clear();
+                        for (int i = 0; i < WindowFrameList.Count; i++)
+                        {
+                            elms.Add(new object());
+                        }
+                    }
+
+                    view.ShowTemplate(elms, manager, arg)
+                        ?
+                        .ElementNameFrom((element, manager, arg) =>
+                        {
+                            var index = elms.IndexOf(element);
+                            return WindowFrameList.GetName(index);
+                        })
+
+                        .OnClickElement((element, manager, arg) =>
+                        {
+                            var index = elms.IndexOf(element);
+                            var device = (StandardRogueDevice)RogueDevice.Primary;
+                            device.Options.SetWindowFrame(index, device.Options.WindowFrameColor);
+
+                            manager.Back();
+                        })
+
+                        .Build();
+                }
+            }
         }
-
-        //private class OptionsMasterVolume : IOptionsMenuSlider
-        //{
-        //    public string GetName(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-        //    {
-        //        return "マスター音量";
-        //    }
-
-        //    public float GetValue(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-        //    {
-        //        var device = (StandardRogueDevice)RogueDevice.Primary;
-        //        return device.Options.MasterVolume;
-        //    }
-
-        //    public void SetValue(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg, float value)
-        //    {
-        //        var device = (StandardRogueDevice)RogueDevice.Primary;
-        //        device.Options.SetMasterVolume(value);
-        //    }
-        //}
-
-        //private class OptionsWindowFrameType : BaseListMenuSelectOption
-        //{
-        //    public override string Name => "ウィンドウタイプ";
-
-        //    private static readonly Menu nextMenu = new Menu();
-
-        //    public override void Activate(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-        //    {
-        //        manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-        //        manager.OpenMenu(nextMenu, self, user, RogueMethodArgument.Identity);
-        //    }
-
-        //    private class Menu : BaseScrollListMenu<int>
-        //    {
-        //        private static readonly List<int> elms = new();
-
-        //        protected override Spanning<int> GetList(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-        //        {
-        //            if (elms.Count != WindowFrameList.Count)
-        //            {
-        //                elms.Clear();
-        //                for (int i = 0; i < WindowFrameList.Count; i++)
-        //                {
-        //                    elms.Add(i);
-        //                }
-        //            }
-        //            return elms;
-        //        }
-
-        //        protected override string GetItemName(int index, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-        //        {
-        //            return WindowFrameList.GetName(index);
-        //        }
-
-        //        protected override void ActivateItem(int index, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-        //        {
-        //            var device = (StandardRogueDevice)RogueDevice.Primary;
-        //            device.Options.SetWindowFrame(index, device.Options.WindowFrameColor);
-
-        //            manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-        //            manager.Back();
-        //        }
-        //    }
-        //}
     }
 }

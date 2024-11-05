@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using System.Text;
+using ListingMF;
+using Roguegard.Device;
+
 namespace Roguegard.CharacterCreation
 {
     public class SlayingQuestObjective : AbilityIntrinsicOptionScript, IQuestEffectIntrinsicOptionScript
@@ -79,6 +83,9 @@ namespace Roguegard.CharacterCreation
             public QuestMember member;
             public int currentCount;
 
+            [System.NonSerialized] private readonly RewardsScreen rewardsScreen = new();
+            [System.NonSerialized] private readonly NotifyScreen notifyScreen = new();
+
             float IRogueObjUpdater.Order => -100f;
             float IRogueMethodPassiveAspect.Order => 0f;
 
@@ -96,36 +103,11 @@ namespace Roguegard.CharacterCreation
                     // 報酬を受け取る
                     if (RogueDevice.Primary.Player == self && DungeonQuestInfo.TryGetQuest(self, out var quest))
                     {
-                        RogueDevice.Add(DeviceKw.AppendText, DeviceKw.StartTalk);
-                        RogueDevice.Add(DeviceKw.AppendText, self);
-                        RogueDevice.Add(DeviceKw.AppendText, "は");
-                        RogueDevice.Add(DeviceKw.AppendText, quest);
-                        RogueDevice.Add(DeviceKw.AppendText, "をクリアした！");
-                        if (quest.LootTable.Count >= 1)
-                        {
-                            RogueDevice.Add(DeviceKw.AppendText, "\tその報酬として…");
-                        }
-                        for (int i = 0; i < quest.LootTable.Count; i++)
-                        {
-                            var loot = WeightedRogueObjGeneratorUtility.CreateObj(quest.LootTable[i], self, RogueRandom.Primary);
-                            RogueDevice.Add(DeviceKw.AppendText, "\t\n");
-                            if (loot.Main.InfoSet.Equals(RoguegardSettings.MoneyInfoSet))
-                            {
-                                RogueDevice.Add(DeviceKw.AppendText, loot.Stack);
-                                RogueDevice.Add(DeviceKw.AppendText, "G受け取った！");
-                            }
-                            else
-                            {
-                                RogueDevice.Add(DeviceKw.AppendText, loot);
-                                RogueDevice.Add(DeviceKw.AppendText, "を受け取った！");
-                            }
-                        }
-                        RogueDevice.Add(DeviceKw.AppendText, DeviceKw.EndTalk);
-
                         RogueDevice.Add(DeviceKw.AppendText, self);
                         RogueDevice.Add(DeviceKw.AppendText, "は");
                         RogueDevice.Add(DeviceKw.AppendText, quest);
                         RogueDevice.Add(DeviceKw.AppendText, "をクリアして 報酬を受け取った");
+                        RogueDevice.Primary.AddMenu(rewardsScreen, self, null, new(other: quest));
                     }
 
                     var clearMethod = new GoalDownStairsBeApplied();
@@ -148,9 +130,7 @@ namespace Roguegard.CharacterCreation
                 {
                     if (RogueDevice.Primary.Player == self)
                     {
-                        RogueDevice.Add(DeviceKw.AppendText, DeviceKw.StartTalk);
-                        RogueDevice.Add(DeviceKw.AppendText, "目標の階に到達しました");
-                        RogueDevice.Add(DeviceKw.AppendText, DeviceKw.EndTalk);
+                        RogueDevice.Primary.AddMenu(notifyScreen, self, null, RogueMethodArgument.Identity);
                     }
 
                     // 目標の階層への移動に成功したとき討伐対象を生成する。
@@ -204,6 +184,61 @@ namespace Roguegard.CharacterCreation
                     parent.currentCount++;
                 }
                 return result;
+            }
+        }
+
+        private class RewardsScreen : RogueMenuScreen
+        {
+            private readonly SpeechBoxViewTemplate<RogueMenuManager, ReadOnlyMenuArg> view = new()
+            {
+            };
+
+            public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
+            {
+                var self = arg.Self;
+                var quest = (DungeonQuest)arg.Arg.Other;
+                
+                var message = new StringBuilder();
+                message.Append(arg.Self.GetName()).Append("は").Append(quest).Append("をクリアした！");
+                if (quest.LootTable.Count >= 1)
+                {
+                    message.Append(view.VA).Append("その報酬として…");
+                }
+                for (int i = 0; i < quest.LootTable.Count; i++)
+                {
+                    var loot = WeightedRogueObjGeneratorUtility.CreateObj(quest.LootTable[i], self, RogueRandom.Primary);
+                    message.Append(view.VA).AppendLine();
+                    if (loot.Main.InfoSet.Equals(RoguegardSettings.MoneyInfoSet))
+                    {
+                        message.Append(loot.Stack).Append("G受け取った！");
+                    }
+                    else
+                    {
+                        message.Append(loot).Append("を受け取った！");
+                    }
+                }
+
+                view.ShowTemplate(message.ToString(), manager, arg)
+                    ?
+                    .OnCompleted((manager, arg) => manager.Done())
+
+                    .Build();
+            }
+        }
+
+        private class NotifyScreen : RogueMenuScreen
+        {
+            private readonly SpeechBoxViewTemplate<RogueMenuManager, ReadOnlyMenuArg> view = new()
+            {
+            };
+
+            public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
+            {
+                view.ShowTemplate($"目標の階に到達しました{view.VA}", manager, arg)
+                    ?
+                    .OnCompleted((manager, arg) => manager.Done())
+
+                    .Build();
             }
         }
     }

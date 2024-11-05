@@ -18,6 +18,11 @@ namespace RoguegardUnity
         [SerializeField] private TMP_Text _info1Text = null;
         [SerializeField] private TMP_Text _info2Text = null;
 
+        [Header("Animation")]
+        [SerializeField] private string _defaultStyle = "Submit";
+        [Space, SerializeField] private Button.ButtonClickedEvent _onClickWithoutBlock = null;
+        private Animator animator;
+
         private IButtonElementHandler handler;
         private object element;
 
@@ -28,11 +33,14 @@ namespace RoguegardUnity
             {
                 if (IsBlocked) return;
 
+                _onClickWithoutBlock.Invoke();
                 handler.HandleClick(element, Manager, Arg);
             });
+
+            TryGetComponent(out animator);
         }
 
-        public override void SetElement(IElementHandler handler, object element)
+        protected override void InnerSetElement(IElementHandler handler, object element)
         {
             this.handler = handler as IButtonElementHandler;
             this.element = element;
@@ -68,6 +76,17 @@ namespace RoguegardUnity
             else
             {
                 _icon.enabled = false;
+            }
+
+            if (animator != null)
+            {
+                var style = handler.GetStyle(element, Manager, Arg);
+                if (style == null) { style = _defaultStyle; }
+                for (int i = 0; i < animator.layerCount; i++)
+                {
+                    var weight = animator.GetLayerName(i) == style ? 1f : 0f;
+                    animator.SetLayerWeight(i, weight);
+                }
             }
 
             _stackText.text = stack.ToString();

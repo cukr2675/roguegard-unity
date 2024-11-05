@@ -136,7 +136,7 @@ namespace RoguegardUnity
             var separatorIndex = text.LastIndexOf("::");
             if (separatorIndex >= 0)
             {
-                var formatCountText = text.Substring(separatorIndex + 2);
+                var formatCountText = System.MemoryExtensions.AsSpan(text, separatorIndex + 2);
                 var formatCount = int.Parse(formatCountText);
 
                 for (int i = 0; i < formatCount; i++)

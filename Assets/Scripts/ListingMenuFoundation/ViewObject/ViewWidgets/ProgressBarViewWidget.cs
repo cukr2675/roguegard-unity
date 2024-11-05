@@ -12,14 +12,14 @@ namespace ListingMF
         [SerializeField] private Image[] _fillAmountTargetImages = null;
         [SerializeField] private string _fillAmountFloat = null;
 
-        private ElementsSubView parent;
+        private ElementsSubViewBase parent;
         private IWidgetOption widgetOption;
         private Animator animator;
 
         public delegate float GetProgress<TMgr, TArg>(TMgr manager, TArg arg);
 
         public override bool TryInstantiateWidget(
-            ElementsSubView elementsSubView, IElementHandler handler, object element, out ViewWidget viewWidget)
+            ElementsSubViewBase elementsSubView, IElementHandler handler, object element, out ViewWidget viewWidget)
         {
             if (!(element is IWidgetOption widgetOption))
             {

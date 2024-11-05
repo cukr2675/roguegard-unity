@@ -12,7 +12,7 @@ namespace ListingMF
         public string ScrollSubViewName { get; set; } = StandardSubViewTable.ScrollName;
         public string CaptionBoxSubViewName { get; set; } = StandardSubViewTable.CaptionBoxName;
         public string BackAnchorSubViewName { get; set; } = StandardSubViewTable.BackAnchorName;
-        public List<IListMenuSelectOption> BackAnchorList { get; set; } = new() { ExitListMenuSelectOption.Instance };
+        public List<ISelectOption> BackAnchorList { get; set; } = new() { BackSelectOption.Instance };
 
         private object prevViewStateHolder;
         private IElementsSubViewStateProvider scrollSubViewStateProvider;

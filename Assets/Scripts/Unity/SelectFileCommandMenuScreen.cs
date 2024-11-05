@@ -42,22 +42,22 @@ namespace RoguegardUnity
 
                 .Option(":Export", (manager, arg) =>
                 {
-                    manager.HandleClickBack();
+                    manager.Back();
 
-                    RogueFile.Export((string)arg.Arg.Other);
+                    RogueFile.Export(((FileInfo)arg.Arg.Other).FullName);
                     manager.Reopen();
                 })
 
-                .Option(":Delete", new ChoicesMenuScreen(":DeleteMsg").Option("<#f00>:Delete", DeleteYes).Exit())
+                .Option(":Delete", new ChoicesMenuScreen(":DeleteMsg").Option("<#f00>:Delete", DeleteYes).Back())
 
-                .Exit()
+                .Back()
 
                 .Build();
         }
 
         private static void DeleteYes(RogueMenuManager manager, ReadOnlyMenuArg arg)
         {
-            manager.HandleClickBack();
+            manager.Back();
 
             var fileInfo = (FileInfo)arg.Arg.Other;
             fileInfo.Delete();
@@ -103,26 +103,26 @@ namespace RoguegardUnity
                         })
                     )
 
-                    .VariableOnce(out var overwriteDialog, new ChoicesMenuScreen(":RenameOverride").Option(":Yes", Overwrite).Exit())
+                    .VariableOnce(out var overwriteDialog, new ChoicesMenuScreen(":RenameOverride").Option(":Yes", Overwrite).Back())
                     .Append(new object[]
                     {
-                        ListMenuSelectOption.Create<RogueMenuManager, ReadOnlyMenuArg>(":Rename", (manager, arg) =>
+                        SelectOption.Create<RogueMenuManager, ReadOnlyMenuArg>(":Rename", (manager, arg) =>
                         {
                             var fileInfo = (FileInfo)arg.Arg.Other;
                             var newPath = Path.Combine(fileInfo.DirectoryName, newName);
                             if (File.Exists(newPath))
                             {
-                                manager.HandleClickBack();
+                                manager.Back();
                                 manager.PushMenuScreen(overwriteDialog, other: new Paths() { path = fileInfo.FullName, newPath = newPath });
                             }
                             else
                             {
-                                manager.HandleClickBack();
+                                manager.Back();
                                 fileInfo.MoveTo(newPath);
                                 manager.Reopen();
                             }
                         }),
-                        ExitListMenuSelectOption.Instance
+                        BackSelectOption.Instance
                     })
 
                     .Build();
@@ -135,7 +135,7 @@ namespace RoguegardUnity
 
             private static void Overwrite(RogueMenuManager manager, ReadOnlyMenuArg arg)
             {
-                manager.HandleClickBack();
+                manager.Back();
 
                 var paths = (Paths)arg.Arg.Other;
                 File.Delete(paths.newPath);

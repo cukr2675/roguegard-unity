@@ -65,7 +65,6 @@ namespace Roguegard
 
                     .OnClickElement((quest, manager, arg) =>
                     {
-                        manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
                         manager.PushMenuScreen(nextMenu, arg.Self, other: quest);
                     })
 

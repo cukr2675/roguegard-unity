@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using ListingMF;
 using Roguegard.Device;
 
 namespace Roguegard
 {
     public class SeatBeApplied : BaseApplyRogueMethod
     {
-        //private static readonly Menu menu = new Menu();
+        private static readonly MenuScreen menu = new();
 
         public override bool Invoke(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
         {
@@ -31,69 +32,80 @@ namespace Roguegard
                 }
 
                 // íNÇ‡ç¿Ç¡ÇƒÇ¢Ç»Ç©Ç¡ÇΩÇÁç¿ÇÁÇπÇÈÉLÉÉÉâÇëIëÇ≥ÇπÇÈ
-                //RogueDevice.Primary.AddMenu(menu, user, null, new(targetObj: self));
+                RogueDevice.Primary.AddMenu(menu, user, null, new(targetObj: self));
                 return false;
             }
 
             return false;
         }
 
-        //private class Menu : IListMenu, IElementPresenter
-        //{
-        //    public void OpenMenu(IListMenuManager manager, RogueObj player, RogueObj user, in RogueMethodArgument arg)
-        //    {
-        //        var worldInfo = RogueWorldInfo.GetByCharacter(player);
-        //        var lobbyMembers = worldInfo.LobbyMembers.Members;
-        //        var scroll = manager.GetView(DeviceKw.MenuScroll);
-        //        scroll.OpenView(this, lobbyMembers, manager, player, null, arg);
-        //        ExitListMenuSelectOption.OpenLeftAnchorExit(manager);
-        //    }
+        private class MenuScreen : RogueMenuScreen
+        {
+            private readonly List<RogueObj> objs = new();
 
-        //    public string GetItemName(object element, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-        //    {
-        //        var obj = (RogueObj)element;
-        //        if (obj.Location == null)
-        //        {
-        //            return obj.GetName();
-        //        }
-        //        else
-        //        {
-        //            return "<#808080>" + obj.GetName();
-        //        }
-        //    }
+            private readonly ScrollViewTemplate<RogueObj, RogueMenuManager, ReadOnlyMenuArg> view = new()
+            {
+            };
 
-        //    public void ActivateItem(object element, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-        //    {
-        //        var lobbyMember = (RogueObj)element;
-        //        if (lobbyMember.Location == null)
-        //        {
-        //            manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-        //            manager.Done();
+            public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
+            {
+                var player = arg.Self;
+                var worldInfo = RogueWorldInfo.GetByCharacter(player);
+                var lobbyMembers = worldInfo.LobbyMembers.Members;
+                objs.Clear();
+                for (int i = 0; i < lobbyMembers.Count; i++)
+                {
+                    objs.Add(lobbyMembers[i]);
+                }
 
-        //            var info = LobbyMemberList.GetMemberInfo(lobbyMember);
-        //            info.Seat = arg.TargetObj;
+                view.ShowTemplate(objs, manager, arg)
+                    ?
+                    .ElementNameFrom((lobbyMember, manager, arg) =>
+                    {
+                        if (lobbyMember.Location == null)
+                        {
+                            return lobbyMember.GetName();
+                        }
+                        else
+                        {
+                            return "<#808080>" + lobbyMember.GetName();
+                        }
+                    })
 
-        //            info.ItemRegister.Clear();
-        //            var spaceObjs = lobbyMember.Space.Objs;
-        //            for (int i = 0; i < spaceObjs.Count; i++)
-        //            {
-        //                var item = spaceObjs[i];
-        //                if (item == null) continue;
+                    .OnClickElement((lobbyMember, manager, arg) =>
+                    {
+                        if (lobbyMember.Location == null)
+                        {
+                            manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+                            manager.Done();
 
-        //                info.ItemRegister.Add(item);
-        //            }
+                            var info = LobbyMemberList.GetMemberInfo(lobbyMember);
+                            info.Seat = arg.Arg.TargetObj;
 
-        //            var world = RogueWorldInfo.GetWorld(self);
-        //            SpaceUtility.TryLocate(lobbyMember, world);
-        //            info.SavePoint = RogueWorldSavePointInfo.Instance;
-        //            var mainParty = RogueDevice.Primary.Player.Main.Stats.Party;
-        //            lobbyMember.Main.Stats.TryAssignParty(lobbyMember, new RogueParty(mainParty.Faction, mainParty.TargetFactions));
-        //        }
-        //        else
-        //        {
-        //            manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Cancel);
-        //        }
-        //    }
-        //}
+                            info.ItemRegister.Clear();
+                            var spaceObjs = lobbyMember.Space.Objs;
+                            for (int i = 0; i < spaceObjs.Count; i++)
+                            {
+                                var item = spaceObjs[i];
+                                if (item == null) continue;
+
+                                info.ItemRegister.Add(item);
+                            }
+
+                            var world = RogueWorldInfo.GetWorld(arg.Self);
+                            SpaceUtility.TryLocate(lobbyMember, world);
+                            info.SavePoint = RogueWorldSavePointInfo.Instance;
+                            var mainParty = RogueDevice.Primary.Player.Main.Stats.Party;
+                            lobbyMember.Main.Stats.TryAssignParty(lobbyMember, new RogueParty(mainParty.Faction, mainParty.TargetFactions));
+                        }
+                        else
+                        {
+                            manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Cancel);
+                        }
+                    })
+
+                    .Build();
+            }
+        }
     }
 }

@@ -1,0 +1,1 @@
+メッセージのスクロールが行ごとに止まらないように見せるため EndScrollAndTrimBeforeAuto を早めに呼び出す

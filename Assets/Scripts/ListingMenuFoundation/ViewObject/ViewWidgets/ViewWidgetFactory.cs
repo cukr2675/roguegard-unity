@@ -10,7 +10,7 @@ namespace ListingMF
         [SerializeField] private ViewWidget[] _ViewWidgetPrefabs = null;
         [SerializeField] private ViewElement _fallbackViewElementPrefab = null;
 
-        public static bool TryCreateViewWidget(ElementsSubView elementsSubView, IElementHandler handler, object element, out RectTransform viewWidget)
+        public static bool TryCreateViewWidget(ElementsSubViewBase elementsSubView, IElementHandler handler, object element, out RectTransform viewWidget)
         {
             var transform = elementsSubView.transform;
             while (LMFUtility.TryGetComponentInRecursiveParents<ViewWidgetFactory>(transform, out var library))
@@ -23,7 +23,7 @@ namespace ListingMF
             return false;
         }
 
-        private bool TryCreate(ElementsSubView elementsSubView, IElementHandler handler, object element, out RectTransform viewWidget)
+        private bool TryCreate(ElementsSubViewBase elementsSubView, IElementHandler handler, object element, out RectTransform viewWidget)
         {
             foreach (var viewWidgetPrefab in _ViewWidgetPrefabs)
             {

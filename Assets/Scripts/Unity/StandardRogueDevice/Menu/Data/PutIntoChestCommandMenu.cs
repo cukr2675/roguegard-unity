@@ -11,17 +11,17 @@ namespace RoguegardUnity
 {
     public class PutIntoChestCommandMenu : RogueMenuScreen
     {
-        private readonly IListMenuSelectOption[] selectOptions;
+        private readonly ISelectOption[] selectOptions;
 
-        private readonly CommandListViewTemplate<IListMenuSelectOption, RogueMenuManager, ReadOnlyMenuArg> view = new()
+        private readonly CommandListViewTemplate<ISelectOption, RogueMenuManager, ReadOnlyMenuArg> view = new()
         {
         };
 
         public PutIntoChestCommandMenu()
         {
-            selectOptions = new IListMenuSelectOption[]
+            selectOptions = new ISelectOption[]
             {
-                ListMenuSelectOption.Create<RogueMenuManager, ReadOnlyMenuArg>("すべて入れる", (manager, arg) =>
+                SelectOption.Create<RogueMenuManager, ReadOnlyMenuArg>("すべて入れる", (manager, arg) =>
                 {
                     manager.Done();
                     
@@ -42,7 +42,7 @@ namespace RoguegardUnity
                     RogueDevice.Add(DeviceKw.AppendText, arg.Arg.TargetObj);
                     RogueDevice.Add(DeviceKw.AppendText, "に入れた\n");
                 }),
-                ExitListMenuSelectOption.Instance
+                BackSelectOption.Instance
             };
         }
 

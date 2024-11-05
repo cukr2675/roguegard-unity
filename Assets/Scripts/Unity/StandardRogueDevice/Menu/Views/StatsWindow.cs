@@ -4,12 +4,12 @@ using UnityEngine;
 
 using System.Text;
 using TMPro;
+using ListingMF;
 using Roguegard;
-using Roguegard.CharacterCreation;
 
 namespace RoguegardUnity
 {
-    public class StatsWindow : MenuWindow
+    public class StatsWindow : ElementsSubView
     {
         [SerializeField] private TMP_Text _text = null;
         [SerializeField] private TMP_Text _hpText = null;
@@ -20,6 +20,11 @@ namespace RoguegardUnity
         private static readonly StringBuilder hpTextBuilder = new StringBuilder();
         private static readonly StringBuilder mpTextBuilder = new StringBuilder();
         private static readonly RogueNameBuilder nameBuilder = new RogueNameBuilder();
+
+        public override void SetParameters(
+            IReadOnlyList<object> list, IElementHandler handler, IListMenuManager manager, IListMenuArg arg,
+            ref IElementsSubViewStateProvider stateProvider)
+            => new System.NotSupportedException();
 
         public void SetText(RogueObj obj)
         {

@@ -23,7 +23,7 @@ namespace ListingMF
 
         public static implicit operator HandleClickElement<TMgr, TArg>(MenuScreen<TMgr, TArg> menuScreen)
         {
-            return (manager, arg) => manager.PushMenuScreenExtension(menuScreen, arg);
+            return (manager, arg) => manager.PushMenuScreenFromExtension(menuScreen, arg);
         }
     }
 }

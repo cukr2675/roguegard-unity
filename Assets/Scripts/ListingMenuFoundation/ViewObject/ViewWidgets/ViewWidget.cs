@@ -14,8 +14,10 @@ namespace ListingMF
 
         protected internal bool IsBlocked { get; private set; }
 
+        protected virtual ElementsSubViewBase Parent => null;
+
         public abstract bool TryInstantiateWidget(
-            ElementsSubView elementsSubView, IElementHandler handler, object element, out ViewWidget viewWidget);
+            ElementsSubViewBase elementsSubView, IElementHandler handler, object element, out ViewWidget viewWidget);
 
         public virtual void SetBlock(bool block)
         {
@@ -46,5 +48,8 @@ namespace ListingMF
                 }
             }
         }
+
+        public void PlayString(string value) => Parent.PlayFromElement(value, this);
+        public void PlayObject(Object value) => Parent.PlayFromElement(value, this);
     }
 }

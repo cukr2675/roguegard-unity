@@ -43,7 +43,7 @@ namespace Roguegard.Device
 
                     return progress;
                 }))
-                .Append(ListMenuSelectOption.Create(buttonText, buttonAction))
+                .Append(SelectOption.Create(buttonText, buttonAction))
                 .Build();
         }
     }

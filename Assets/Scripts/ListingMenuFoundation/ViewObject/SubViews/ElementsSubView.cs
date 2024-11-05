@@ -2,20 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 
 namespace ListingMF
 {
     /// <summary>
     /// モデルのリストをコントローラで制御する UI のクラス。
     /// </summary>
-    public abstract class ElementsSubView : MonoBehaviour, IElementsSubView
+    public abstract class ElementsSubView : ElementsSubViewBase, IElementsSubView
     {
-        public IListMenuManager Manager { get; private set; }
-        public IListMenuArg Arg { get; private set; }
-
         private event HandleEndAnimation OnEndAnimation;
-        private AnimatorTupple animator;
 
         protected ViewElement LastSelectedViewElement { get; private set; }
 
@@ -23,8 +19,6 @@ namespace ListingMF
         /// <see cref="SetBlock"/> で <see cref="ViewElement.SetBlock"/> を呼び出す対象
         /// </summary>
         protected virtual IReadOnlyList<ViewElement> BlockableViewElements => System.Array.Empty<ViewElement>();
-
-        public bool IsBlocked { get; protected set; }
 
         public virtual bool HasManagerLock { get; private set; }
 
@@ -35,12 +29,6 @@ namespace ListingMF
         public abstract void SetParameters(
             IReadOnlyList<object> list, IElementHandler handler, IListMenuManager manager, IListMenuArg arg,
             ref IElementsSubViewStateProvider stateProvider);
-
-        protected void SetArg(IListMenuManager manager, IListMenuArg arg)
-        {
-            Manager = manager;
-            Arg = arg;
-        }
 
         public void SetStatusCode(int statusCode)
         {
@@ -79,7 +67,7 @@ namespace ListingMF
             }
         }
 
-        public void OnSelectViewElement(ViewElement viewElement, bool outOfRange)
+        public override void OnSelectViewElement(ViewElement viewElement, bool outOfRange)
         {
             LastSelectedViewElement = viewElement;
             AnimatorTupple.OnSelect(this, viewElement.gameObject, outOfRange);
@@ -93,75 +81,7 @@ namespace ListingMF
             OnEndAnimation?.Invoke(Manager, Arg);
             OnEndAnimation = null;
         }
-        public void PlayString(string value) => AnimatorTupple.Play(this, value);
-        public void PlayObject(Object value) => AnimatorTupple.Play(this, value);
-
-
-
-        private class AnimatorTupple
-        {
-            private readonly Animator animator;
-            private readonly ElementsViewAnimator viewAnimator;
-
-            private bool IsEnabled => animator != null && viewAnimator != null;
-
-            public AnimatorTupple(ElementsSubView elementsSubView)
-            {
-                elementsSubView.TryGetComponent(out animator);
-                viewAnimator = ElementsViewAnimator.Get(elementsSubView);
-            }
-
-            public static void TrySetVisible(ElementsSubView elementsSubView, bool visible)
-            {
-                if (elementsSubView.animator == null) { elementsSubView.animator = new AnimatorTupple(elementsSubView); }
-
-                var animator = elementsSubView.animator;
-                if (!animator.IsEnabled) return;
-
-                var parameterName = animator.viewAnimator.VisibleBool;
-                animator.animator.SetBool(parameterName, visible);
-            }
-
-            public static void TrySetStatusCode(ElementsSubView elementsSubView, int statusCode)
-            {
-                if (elementsSubView.animator == null) { elementsSubView.animator = new AnimatorTupple(elementsSubView); }
-
-                var animator = elementsSubView.animator;
-                if (!animator.IsEnabled) return;
-
-                var parameterName = animator.viewAnimator.StatusCodeInteger;
-                animator.animator.SetInteger(parameterName, statusCode);
-            }
-
-            public static void Play(ElementsSubView elementsSubView, string value)
-            {
-                if (elementsSubView.animator == null) { elementsSubView.animator = new AnimatorTupple(elementsSubView); }
-
-                var animator = elementsSubView.animator;
-                if (!animator.IsEnabled) return;
-
-                animator.viewAnimator.OnPlayString.Invoke(value);
-            }
-
-            public static void Play(ElementsSubView elementsSubView, Object value)
-            {
-                if (elementsSubView.animator == null) { elementsSubView.animator = new AnimatorTupple(elementsSubView); }
-
-                var animator = elementsSubView.animator;
-                if (!animator.IsEnabled) return;
-
-                animator.viewAnimator.OnPlayObject.Invoke(value);
-            }
-
-            public static void OnSelect(ElementsSubView elementsSubView, GameObject gameObject, bool outOfRange)
-            {
-                if (elementsSubView.animator == null) { elementsSubView.animator = new AnimatorTupple(elementsSubView); }
-
-                var animator = elementsSubView.animator;
-                if (!animator.IsEnabled) return;
-
-                animator.viewAnimator.OnSelect(gameObject, outOfRange);
-            }
-        }
+        public void PlayString(string value) => AnimatorTupple.Play(this, this, value);
+        public void PlayObject(Object value) => AnimatorTupple.Play(this, this, value);
     }
 }

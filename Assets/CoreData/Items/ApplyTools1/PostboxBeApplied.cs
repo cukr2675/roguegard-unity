@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using ListingMF;
 using Roguegard.CharacterCreation;
 using Roguegard.Device;
 
@@ -9,14 +10,14 @@ namespace Roguegard
 {
     public class PostboxBeApplied : BaseApplyRogueMethod
     {
-        //private static Menu menu;
+        private static MenuScreen menu;
 
         public override bool Invoke(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
         {
             if (user == RogueDevice.Primary.Player)
             {
-                //menu ??= new Menu();
-                //RogueDevice.Primary.AddMenu(menu, user, null, new(tool: self));
+                menu ??= new MenuScreen();
+                RogueDevice.Primary.AddMenu(menu, user, null, new(tool: self));
                 return false;
             }
             else
@@ -25,40 +26,50 @@ namespace Roguegard
             }
         }
 
-        //private class Menu : BaseScrollListMenu<RoguePost>
-        //{
-        //    private static readonly DetailsMenu nextMenu = new();
+        private class MenuScreen : RogueMenuScreen
+        {
+            private readonly List<RoguePost> posts = new();
 
-        //    protected override Spanning<RoguePost> GetList(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-        //    {
-        //        var info = PostboxInfo.Get(arg.Tool);
-        //        return info.Posts;
-        //    }
+            private readonly ScrollViewTemplate<RoguePost, RogueMenuManager, ReadOnlyMenuArg> view = new()
+            {
+            };
 
-        //    protected override string GetItemName(RoguePost element, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-        //    {
-        //        return element.Name;
-        //    }
+            public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
+            {
+                var info = PostboxInfo.Get(arg.Arg.Tool);
+                posts.Clear();
+                for (int i = 0; i < info.Posts.Count; i++)
+                {
+                    posts.Add(info.Posts[i]);
+                }
 
-        //    protected override void ActivateItem(RoguePost element, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-        //    {
-        //        manager.OpenMenu(nextMenu, null, null, new(other: element));
-        //    }
-        //}
+                view.ShowTemplate(posts, manager, arg)
+                    ?
+                    .ElementNameFrom((post, manager, arg) => post.Name)
 
-        //private class DetailsMenu : IListMenu
-        //{
-        //    private List<object> elms = new();
+                    .VariableOnce(out var nextScreen, new DetailsScreen())
+                    .OnClickElement((post, manager, arg) => manager.PushMenuScreen(nextScreen, other: post))
 
-        //    public void OpenMenu(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-        //    {
-        //        var post = arg.Other;
+                    .Build();
+            }
+        }
 
-        //        elms.Clear();
-        //        elms.Add(post);
-        //        manager.GetView(DeviceKw.MenuDetails).OpenView(SelectOptionPresenter.Instance, elms, manager, null, null, RogueMethodArgument.Identity);
-        //        ExitListMenuSelectOption.OpenLeftAnchorExit(manager);
-        //    }
-        //}
+        private class DetailsScreen : RogueMenuScreen
+        {
+            private readonly DialogViewTemplate<RogueMenuManager, ReadOnlyMenuArg> view = new()
+            {
+                DialogSubViewName = StandardSubViewTable.WidgetsName,
+                BackAnchorSubViewName = StandardSubViewTable.BackAnchorName,
+            };
+
+            public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
+            {
+                var post = (RoguePost)arg.Arg.Other;
+
+                view.ShowTemplate(post.Name, manager, arg)
+                    ?
+                    .Build();
+            }
+        }
     }
 }

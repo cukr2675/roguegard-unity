@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using TMPro;
+using ListingMF;
 using Roguegard.Device;
 using Roguegard.Extensions;
 
@@ -10,7 +11,7 @@ namespace Roguegard.Rgpacks
 {
     public class ChartPadBeApplied : BaseApplyRogueMethod
     {
-        //private static Menu menu;
+        private static Menu menu;
 
         public override bool Invoke(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
         {
@@ -20,81 +21,86 @@ namespace Roguegard.Rgpacks
                 ChartPadInfo.SetTo(self);
             }
 
-            //menu ??= new();
-            //RogueDevice.Primary.AddMenu(menu, user, null, new(targetObj: self));
+            menu ??= new();
+            RogueDevice.Primary.AddMenu(menu, user, null, new(targetObj: self));
             return false;
         }
 
-        //private class Menu : IListMenu, IElementPresenter
-        //{
-        //    private static readonly List<object> elms = new();
-        //    private static readonly PropertiedCmnMenu nextMenu = new();
-        //    private static readonly object assetId = new AssetID();
+        private class Menu : RogueMenuScreen
+        {
+            private static readonly List<object> elms = new();
 
-        //    public void OpenMenu(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-        //    {
-        //        var chartPad = arg.TargetObj;
-        //        var chartPadInfo = ChartPadInfo.Get(chartPad);
-        //        elms.Clear();
-        //        elms.Add(assetId);
-        //        for (int i = 0; i < chartPadInfo.Cmns.Count; i++)
-        //        {
-        //            elms.Add(chartPadInfo.Cmns[i]);
-        //        }
-        //        elms.Add(null);
-        //        var options = manager.GetView(DeviceKw.MenuOptions);
-        //        options.OpenView(this, elms, manager, self, user, new(targetObj: chartPad));
-        //        options.SetPosition(0f);
-        //        ExitListMenuSelectOption.OpenLeftAnchorExit(manager);
-        //    }
+            private readonly ScrollViewTemplate<object, RogueMenuManager, ReadOnlyMenuArg> view = new()
+            {
+                ScrollSubViewName = StandardSubViewTable.WidgetsName,
+            };
 
-        //    public string GetItemName(object element, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-        //    {
-        //        if (element == null) return "+ イベントを追加";
-        //        else return ((PropertiedCmnData)element).Cmn;
-        //    }
+            public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
+            {
+                var chartPad = arg.Arg.TargetObj;
+                var chartPadInfo = ChartPadInfo.Get(chartPad);
+                elms.Clear();
+                for (int i = 0; i < chartPadInfo.Cmns.Count; i++)
+                {
+                    elms.Add(chartPadInfo.Cmns[i]);
+                }
 
-        //    public void ActivateItem(object element, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-        //    {
-        //        var chartPad = arg.TargetObj;
-        //        var chartPadInfo = ChartPadInfo.Get(chartPad);
+                view.ShowTemplate(elms, manager, arg)
+                    ?
+                    .InsertNext(
+                        new object[]
+                        {
+                            "アセットID",
+                            InputFieldViewWidget.CreateOption<RogueMenuManager, ReadOnlyMenuArg>(
+                                (manager, arg) =>
+                                {
+                                    var chartPad = arg.Arg.TargetObj;
+                                    return NamingEffect.Get(chartPad)?.Naming;
+                                },
+                                (manager, arg, value) =>
+                                {
+                                    var chartPad = arg.Arg.TargetObj;
+                                    default(IActiveRogueMethodCaller).Affect(chartPad, 1f, NamingEffect.Callback);
+                                    return NamingEffect.Get(chartPad).Naming = value;
+                                })
+                        })
 
-        //        if (element == null)
-        //        {
-        //            manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+                    .Append(SelectOption.Create<RogueMenuManager, ReadOnlyMenuArg>(
+                        "+ イベントを追加", (manager, arg) =>
+                        {
+                            var chartPad = arg.Arg.TargetObj;
+                            var chartPadInfo = ChartPadInfo.Get(chartPad);
 
-        //            chartPadInfo.AddCmn();
-        //            manager.Reopen();
-        //        }
-        //        else
-        //        {
-        //            manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+                            chartPadInfo.AddCmn();
+                            manager.Reopen();
+                        }))
 
-        //            var cmnData = (PropertiedCmnData)element;
-        //            manager.OpenMenu(nextMenu, self, null, new(other: cmnData));
-        //        }
-        //    }
+                    .ElementNameFrom((element, manager, arg) =>
+                    {
+                        if (element == null) return "+ イベントを追加";
+                        else return ((PropertiedCmnData)element).Cmn;
+                    })
 
-        //    private class AssetID : IOptionsMenuText
-        //    {
-        //        public TMP_InputField.ContentType ContentType => TMP_InputField.ContentType.Standard;
+                    .VariableOnce(out var nextMenu, new PropertiedCmnMenu())
+                    .OnClickElement((element, manager, arg) =>
+                    {
+                        var chartPad = arg.Arg.TargetObj;
+                        var chartPadInfo = ChartPadInfo.Get(chartPad);
 
-        //        public string GetName(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-        //            => "アセットID";
+                        if (element == null)
+                        {
+                            chartPadInfo.AddCmn();
+                            manager.Reopen();
+                        }
+                        else
+                        {
+                            var cmnData = (PropertiedCmnData)element;
+                            manager.PushMenuScreen(nextMenu, arg.Self, other: cmnData);
+                        }
+                    })
 
-        //        public string GetValue(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-        //        {
-        //            var chartPad = arg.TargetObj;
-        //            return NamingEffect.Get(chartPad)?.Naming;
-        //        }
-
-        //        public void SetValue(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg, string value)
-        //        {
-        //            var chartPad = arg.TargetObj;
-        //            default(IActiveRogueMethodCaller).Affect(chartPad, 1f, NamingEffect.Callback);
-        //            NamingEffect.Get(chartPad).Naming = value;
-        //        }
-        //    }
-        //}
+                    .Build();
+            }
+        }
     }
 }

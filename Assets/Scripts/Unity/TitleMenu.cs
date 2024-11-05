@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using System.Text.RegularExpressions;
 using UnityEngine.Audio;
-using UnityEngine.UI;
 using UnityEngine.AddressableAssets;
 using TMPro;
 using ListingMF;
@@ -145,7 +145,7 @@ namespace RoguegardUnity
                         // つづきから
                         onSelectFile: (fileInfo, manager, arg) =>
                         {
-                            manager.HandleClickBack();
+                            manager.Back();
                             manager.PushMenuScreen(loadFadeOutScreen, other: fileInfo.FullName);
                         }))
 
@@ -176,8 +176,8 @@ namespace RoguegardUnity
                         null,
 
                         // キャラクタークリエイト完了ボタン
-                        ListMenuSelectOption.Create<RogueMenuManager, ReadOnlyMenuArg>(
-                            ":Done", ChoicesMenuScreen.CreateExit(":DoneMsg", ":SaveAndStart", loadFadeOutScreen, ":QuitWithoutSaving", null))
+                        SelectOption.Create<RogueMenuManager, ReadOnlyMenuArg>(
+                            ":Done", ChoicesMenuScreen.SaveBackDialog(":DoneMsg", ":SaveAndStart", loadFadeOutScreen, ":QuitWithoutSaving", null))
                     },
                 };
             }
@@ -301,11 +301,14 @@ namespace RoguegardUnity
                 {
                     var credit = (CreditData)arg.Arg.Other;
 
-                    view.ShowTemplate(credit.Details, manager, arg)
+                    // 文字列にリンクを貼ったものを表示
+                    var text = Regex.Replace(credit.Details, @"(https?://\S+)", "<color=#8080ff><u><link>$1</link></u></color>");
+
+                    view.ShowTemplate(text, manager, arg)
                         ?
                         .VariableOnce(out var nextScreen, new URLDialog())
 
-                        .OnClickLink((manager, arg, link) =>
+                        .OnClickLink((link, manager, arg) =>
                         {
                             manager.PushMenuScreen(nextScreen, other: link);
                         })
@@ -329,13 +332,16 @@ namespace RoguegardUnity
                 {
                     var url = (string)arg.Arg.Other;
                     view.ShowTemplate($"{url} へ移動しますか？", manager, arg)
-                        ?.Option(":Yes", (manager, arg) =>
+                        ?
+                        .Option(":Yes", (manager, arg) =>
                         {
                             var url = (string)arg.Arg.Other;
-                            manager.HandleClickBack();
+                            manager.Back();
                             Application.OpenURL(url);
                         })
-                        .Exit()
+
+                        .Back()
+
                         .Build();
                 }
 

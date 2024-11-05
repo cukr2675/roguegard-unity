@@ -13,7 +13,7 @@ namespace RoguegardUnity
     /// </summary>
     public class ObjsMenu
     {
-        public IListMenuSelectOption Close { get; }
+        public ISelectOption Close { get; }
 
         /// <summary>
         /// <see cref="RogueMethodArgument.TargetObj"/> のインベントリを開く
@@ -31,7 +31,7 @@ namespace RoguegardUnity
 
         public ObjsMenu(ObjCommandMenu commandMenu, PutIntoChestCommandMenu putInCommandMenu, TakeOutFromChestCommandMenu takeOutCommandMenu)
         {
-            Close = ListMenuSelectOption.Create<RogueMenuManager, ReadOnlyMenuArg>(":Close", (manager, arg) => manager.Done());
+            Close = SelectOption.Create<RogueMenuManager, ReadOnlyMenuArg>(":Close", (manager, arg) => manager.Done());
             Items = new ItemsMenu() { commandMenu = commandMenu };
             Ground = new GroundMenu() { commandMenu = commandMenu };
             PutIntoChest = new PutIntoChestMenu() { commandMenu = putInCommandMenu };
@@ -46,7 +46,7 @@ namespace RoguegardUnity
 
             public RogueMenuScreen commandMenu;
 
-            private readonly ListMenuSelectOption<RogueMenuManager, ReadOnlyMenuArg> sortSelectOption;
+            private readonly SelectOption<RogueMenuManager, ReadOnlyMenuArg> sortSelectOption;
 
             private static CategorizedSortTable sortTable;
 
@@ -60,10 +60,10 @@ namespace RoguegardUnity
                 view.Title = Title;
                 if (SortIsEnabled)
                 {
-                    view.BackAnchorList = new List<IListMenuSelectOption>
+                    view.BackAnchorList = new List<ISelectOption>
                     {
-                        ListMenuSelectOption.Create<RogueMenuManager, ReadOnlyMenuArg>(":Sort", Sort),
-                        ExitListMenuSelectOption.Instance
+                        SelectOption.Create<RogueMenuManager, ReadOnlyMenuArg>(":Sort", Sort),
+                        BackSelectOption.Instance
                     };
                 }
             }

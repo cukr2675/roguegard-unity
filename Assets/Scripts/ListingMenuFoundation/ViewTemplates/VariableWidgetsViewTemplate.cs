@@ -11,7 +11,7 @@ namespace ListingMF
         public string WidgetsSubViewName { get; set; } = StandardSubViewTable.WidgetsName;
         public string CaptionBoxSubViewName { get; set; } = StandardSubViewTable.CaptionBoxName;
         public string BackAnchorSubViewName { get; set; } = StandardSubViewTable.BackAnchorName;
-        public List<IListMenuSelectOption> BackAnchorList { get; set; } = new() { ExitListMenuSelectOption.Instance };
+        public List<ISelectOption> BackAnchorList { get; set; } = new() { BackSelectOption.Instance };
 
         private object prevViewStateHolder;
         private IElementsSubViewStateProvider primaryCommandSubViewStateProvider;

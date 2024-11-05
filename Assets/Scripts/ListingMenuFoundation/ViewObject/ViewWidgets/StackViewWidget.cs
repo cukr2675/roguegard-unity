@@ -11,7 +11,7 @@ namespace ListingMF
     public class StackViewWidget : ViewWidget
     {
         public override bool TryInstantiateWidget(
-            ElementsSubView elementsSubView, IElementHandler handler, object element, out ViewWidget stackViewWidget)
+            ElementsSubViewBase elementsSubView, IElementHandler handler, object element, out ViewWidget stackViewWidget)
         {
             if (!(element is IReadOnlyList<object> viewWidgets))
             {

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3909606108500751271}
   - component: {fileID: 6574846278367779654}
   - component: {fileID: 6051174446993013066}
+  - component: {fileID: 5185448041962310942}
   m_Layer: 5
   m_Name: CursorImage (LMF)
   m_TagString: Untagged
@@ -76,6 +77,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 0.5
+--- !u!225 &5185448041962310942
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1489631086464303594}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!1 &5655402266992291962
 GameObject:
   m_ObjectHideFlags: 0

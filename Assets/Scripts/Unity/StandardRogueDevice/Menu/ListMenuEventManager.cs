@@ -63,12 +63,10 @@ namespace RoguegardUnity
             }
             if (keyword == DeviceKw.StartTalk)
             {
-                messageController.StartTalk();
                 return;
             }
             if (keyword == DeviceKw.WaitEndOfTalk)
             {
-                messageController.WaitEndOfTalk();
                 return;
             }
             if (keyword == DeviceKw.EnqueueSE || keyword == DeviceKw.EnqueueSEAndWait)

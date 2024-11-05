@@ -47,7 +47,7 @@ namespace ListingMF
         public IElementsSubView ColorPicker => _colorPicker;
         public static string ColorPickerName => "ColorPicker";
 
-        [SerializeField] private MessageBoxSubView _messageBox = null;
+        [SerializeField] private MessageBoxSubView _messageBox = null; // Rgpack の rg.msg で表示するため名前はメッセージボックス
         public MessageBoxSubView MessageBox => _messageBox;
         public static string MessageBoxName => "MessageBox";
 
@@ -59,7 +59,7 @@ namespace ListingMF
         public IElementsSubView Overlay => _overlay;
         public static string OverlayName => "Overlay";
 
-        [SerializeField] private MessageBoxSubView _speechBox = null;
+        [SerializeField] private MessageBoxSubView _speechBox = null; // Rgpack の rg.say で表示するため名前はスピーチボックス
         public MessageBoxSubView SpeechBox => _speechBox;
         public static string SpeechBoxName => "SpeechBox";
 

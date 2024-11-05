@@ -14,7 +14,7 @@ namespace Roguegard
     /// </summary>
     public interface IObjCommand : IDeviceCommandAction
     {
-        IListMenuSelectOption SelectOption { get; }
+        ISelectOption SelectOption { get; }
 
         ISkillDescription GetSkillDescription(RogueObj self, RogueObj tool);
     }

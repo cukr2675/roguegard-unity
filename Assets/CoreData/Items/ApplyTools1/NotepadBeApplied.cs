@@ -19,16 +19,13 @@ namespace Roguegard
 
         private class Menu : RogueMenuScreen
         {
-            private static readonly object[] exit = new object[]
+            private static readonly object[] backAnchor = new object[]
             {
-                ListMenuSelectOption.Create<RogueMenuManager, ReadOnlyMenuArg>("é¿çs", Execute),
-                ListMenuSelectOption.Create<RogueMenuManager, ReadOnlyMenuArg>("ï¬Ç∂ÇÈ", Exit),
+                SelectOption.Create<RogueMenuManager, ReadOnlyMenuArg>("é¿çs", Execute),
+                SelectOption.Create<RogueMenuManager, ReadOnlyMenuArg>("ï¬Ç∂ÇÈ", Back),
             };
 
             private IElementsSubViewStateProvider stateProvider;
-
-            private readonly ListMenuSelectOption<RogueMenuManager, ReadOnlyMenuArg> exitOption
-                = ListMenuSelectOption.Create<RogueMenuManager, ReadOnlyMenuArg>("ï¬Ç∂ÇÈ", Exit);
 
             public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
             {
@@ -36,13 +33,11 @@ namespace Roguegard
                 var text = NotepadInfo.GetText(memo);
 
                 manager.OpenTextEditor(text);
-                manager.StandardSubViewTable.BackAnchor.Show(exit, SelectOptionHandler.Instance, manager, arg, ref stateProvider);
+                manager.StandardSubViewTable.BackAnchor.Show(backAnchor, SelectOptionHandler.Instance, manager, arg, ref stateProvider);
             }
 
-            private static void Exit(RogueMenuManager manager, ReadOnlyMenuArg arg)
+            private static void Back(RogueMenuManager manager, ReadOnlyMenuArg arg)
             {
-                manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-
                 NotepadInfo.SetTo(arg.Arg.Tool, manager.TextEditorValue);
                 manager.Done();
             }

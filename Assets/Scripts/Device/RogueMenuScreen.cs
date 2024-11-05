@@ -12,7 +12,7 @@ namespace Roguegard.Device
 
         public abstract string TextEditorValue { get; }
 
-        public abstract IListMenuSelectOption LoadPresetSelectOptionOfCharacterCreation { get; }
+        public abstract ISelectOption LoadPresetSelectOptionOfCharacterCreation { get; }
 
         public abstract void PushMenuScreen(
             MenuScreen<RogueMenuManager, ReadOnlyMenuArg> menuScreen,

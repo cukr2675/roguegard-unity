@@ -6,7 +6,9 @@ namespace ListingMF
 {
     public interface IListMenuManager
     {
-        string BackName { get; }
+        ISelectOption BackOption { get; }
+
+        ISelectOption ErrorOption { get; }
 
         IElementsSubView GetSubView(string subViewName);
 
@@ -14,10 +16,8 @@ namespace ListingMF
 
         string Localize(string text);
 
-        void PushMenuScreenExtension(object menuScreen, IListMenuArg arg);
+        T Localize<T>(T obj);
 
-        void HandleClickBack();
-
-        void HandleClickError();
+        void PushMenuScreenFromExtension(object menuScreen, IListMenuArg arg);
     }
 }

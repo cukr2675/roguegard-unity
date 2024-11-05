@@ -10,14 +10,14 @@ namespace ListingMF
     [RequireComponent(typeof(TMP_InputField))]
     public class InputFieldViewWidget : ViewWidget
     {
-        private ElementsSubView parent;
+        private ElementsSubViewBase parent;
         private IWidgetOption widgetOption;
         private TMP_InputField inputField;
 
         public delegate string HandleValueChanged<TMgr, TArg>(TMgr manager, TArg arg, string value);
 
         public override bool TryInstantiateWidget(
-            ElementsSubView elementsSubView, IElementHandler handler, object element, out ViewWidget viewWidget)
+            ElementsSubViewBase elementsSubView, IElementHandler handler, object element, out ViewWidget viewWidget)
         {
             if (!(element is IWidgetOption widgetOption))
             {

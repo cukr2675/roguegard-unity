@@ -18,6 +18,7 @@ namespace Roguegard.Rgpacks.MoonSharp
     {
         private const string moduleName = "roguegard";
         private static readonly StringBuilder stringBuilder = new();
+        private static readonly SpeechMenu speechMenu = new();
         private static readonly SelectMenu selectMenu = new();
         private static readonly Stack<Table> tableStack = new();
         private const int indentWidth = 2;
@@ -59,6 +60,13 @@ return function(type_name)
     end
 
     return type
+end
+"));
+
+            roguegardTable.Set("talkf", roguegardTable.OwnerScript.DoString(@"
+return function(a)
+    rg.__talkf(a)
+    return coroutine.yield()
 end
 "));
 
@@ -244,9 +252,9 @@ return {
         }
 
         [MoonSharpModuleMethod]
-        public static DynValue talkf(ScriptExecutionContext executionContext, CallbackArguments args)
+        public static DynValue __talkf(ScriptExecutionContext executionContext, CallbackArguments args)
         {
-            const string name = "talkf";
+            const string name = "__talkf";
             var text = args.AsType(0, name, DataType.String, false).String;
             var lines = Regex.Matches(text, @"\S.*(\r\n|\r|\n)?");
 
@@ -290,9 +298,12 @@ return {
                 }
             }
             if (stringBuilder.Length == 0) { stringBuilder.Append(" "); }
-            RogueDevice.Add(DeviceKw.AppendText, DeviceKw.StartTalk);
-            RogueDevice.Add(DeviceKw.AppendText, stringBuilder.ToString());
-            RogueDevice.Add(DeviceKw.AppendText, DeviceKw.EndTalk);
+            //RogueDevice.Add(DeviceKw.AppendText, DeviceKw.StartTalk);
+            //RogueDevice.Add(DeviceKw.AppendText, stringBuilder.ToString());
+            //RogueDevice.Add(DeviceKw.AppendText, DeviceKw.EndTalk);
+            speechMenu.coroutine = executionContext.GetCallingCoroutine();
+            speechMenu.message = stringBuilder.ToString();
+            RogueDevice.Primary.AddMenu(speechMenu, null, null, RogueMethodArgument.Identity);
             //RogueDevice.Add(DeviceKw.AppendText, DeviceKw.WaitEndOfTalk);
             return DynValue.Nil;
         }
@@ -470,24 +481,27 @@ return {
         {
             public global::MoonSharp.Interpreter.Coroutine coroutine;
             public string message;
-            private static readonly DynValue[] args = new DynValue[1];
-
-            private readonly SpeechBoxViewTemplate<RogueMenuManager, ReadOnlyMenuArg> view = new()
-            {
-            };
 
             public override bool IsIncremental => true;
 
             public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
             {
-                view.ShowTemplate(message, manager, arg)
-                    ?
-                    .Build();
+                manager.StandardSubViewTable.SpeechBox.MessageBox.Append(message);
+                manager.StandardSubViewTable.SpeechBox.Show();
+
+                manager.StandardSubViewTable.SpeechBox.DoScheduledAfterCompletion((iManager, arg) =>
+                {
+                    coroutine.Resume();
+
+                    var manager = (RogueMenuManager)iManager;
+                    manager.Done();
+                    manager.ResetDone();
+                    manager.StandardSubViewTable.SpeechBox.Show();
+                });
             }
 
             public override void CloseScreen(RogueMenuManager manager, bool back)
             {
-                view.HideTemplate(manager, back);
             }
         }
 

@@ -31,7 +31,7 @@ namespace RoguegardUnity
                 },
                 onNewFile: (manager, arg) =>
                 {
-                    manager.HandleClickBack();
+                    manager.Back();
 
                     StandardRogueDeviceSave.GetNewNumberingPath(
                         RoguegardSettings.DefaultSaveFileName, path => SaveDelay(manager, path, false));
@@ -40,7 +40,7 @@ namespace RoguegardUnity
             readFileMenu = SelectFileMenuScreen.Load(
                 onSelectFile: (fileInfo, manager, arg) =>
                 {
-                    manager.HandleClickBack();
+                    manager.Back();
 
                     // “ü—Í‚³‚ê‚½ƒpƒX‚Ì Stream ‚ðŠJ‚­
                     StandardRogueDeviceData loadDeviceData;
@@ -108,8 +108,7 @@ namespace RoguegardUnity
         {
             if (manager != null)
             {
-                manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-                manager.HandleClickBack();
+                manager.Back();
                 SelectFileMenuScreen.ShowSaving(manager);
             }
 

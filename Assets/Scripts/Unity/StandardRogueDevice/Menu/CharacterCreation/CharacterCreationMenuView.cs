@@ -31,17 +31,17 @@ namespace RoguegardUnity
 
         private IButtonElementHandler intrinsicPresenter;
         private IButtonElementHandler startingItemPresenter;
-        private static readonly IListMenuSelectOption intrinsicHeader
-            = ListMenuSelectOption.Create<RogueMenuManager, ReadOnlyMenuArg>("固有能力", delegate { });
-        private static readonly IListMenuSelectOption startingItemHeader
-            = ListMenuSelectOption.Create<RogueMenuManager, ReadOnlyMenuArg>("初期アイテム", delegate { });
+        private static readonly ISelectOption intrinsicHeader
+            = SelectOption.Create<RogueMenuManager, ReadOnlyMenuArg>("固有能力", delegate { });
+        private static readonly ISelectOption startingItemHeader
+            = SelectOption.Create<RogueMenuManager, ReadOnlyMenuArg>("初期アイテム", delegate { });
         private MenuRogueObjSpriteRenderer spriteRenderer;
-        private IListMenuSelectOption raceSelectOption;
-        private IListMenuSelectOption appearanceSelectOption;
+        private ISelectOption raceSelectOption;
+        private ISelectOption appearanceSelectOption;
         private AppearanceBuildersMenu appearanceBuildersMenu;
         private readonly List<MonoBehaviour> itemObjects = new List<MonoBehaviour>();
-        public static IListMenuSelectOption LoadPresetSelectOption { get; }
-            = ListMenuSelectOption.Create<RogueMenuManager, ReadOnlyMenuArg>(":Load", new LoadPresetMenu());
+        public static ISelectOption LoadPresetSelectOption { get; }
+            = SelectOption.Create<RogueMenuManager, ReadOnlyMenuArg>(":Load", new LoadPresetMenu());
         private static readonly object[] leftAnchorObjs = new object[2];
 
         private readonly List<ViewElement> _blockableViewElements = new();
@@ -59,11 +59,11 @@ namespace RoguegardUnity
             spriteRendererTransform.localScale = Vector3.one * 4f;
             _raceButton.Initialize(this);
             _appearanceButton.Initialize(this);
-            raceSelectOption = ListMenuSelectOption.Create<RogueMenuManager, ReadOnlyMenuArg>("", (manager, arg) =>
+            raceSelectOption = SelectOption.Create<RogueMenuManager, ReadOnlyMenuArg>("", (manager, arg) =>
             {
                 manager.PushMenuScreen(optionMenu, arg.Self, other: builder.Race);
             });
-            appearanceSelectOption = ListMenuSelectOption.Create<RogueMenuManager, ReadOnlyMenuArg>("", (manager, arg) =>
+            appearanceSelectOption = SelectOption.Create<RogueMenuManager, ReadOnlyMenuArg>("", (manager, arg) =>
             {
                 manager.PushMenuScreen(appearanceBuildersMenu, arg.Self, other: builder);
             });
@@ -234,7 +234,7 @@ namespace RoguegardUnity
             {
                 nextMenu = new ChoicesMenuScreen("ロードすると 編集中のキャラは消えてしまいますが よろしいですか？")
                     .Option("ロードする", Load)
-                    .Exit();
+                    .Back();
 
                 view = new()
                 {
@@ -270,12 +270,9 @@ namespace RoguegardUnity
 
             private void Load(RogueMenuManager manager, ReadOnlyMenuArg arg)
             {
-                manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-
                 var builder = (CharacterCreationDataBuilder)arg.Arg.Other;
                 builder.Set(element);
-                manager.HandleClickBack();
-                manager.HandleClickBack();
+                manager.Back(2);
             }
         }
     }

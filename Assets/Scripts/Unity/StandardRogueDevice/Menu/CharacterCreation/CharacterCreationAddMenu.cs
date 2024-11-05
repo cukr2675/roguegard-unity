@@ -64,7 +64,7 @@ namespace RoguegardUnity
                         ConsumeStartingItemOptionObj(startingItemBuilder.Option, arg.Self);
                     }
 
-                    manager.HandleClickBack();
+                    manager.Back();
                 })
 
                 .Build();

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-using UnityEngine.UI;
+using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
 
 namespace ListingMF
@@ -10,15 +10,46 @@ namespace ListingMF
     [AddComponentMenu("UI/Listing Menu Foundation/LMF Cursor Image System")]
     public class CursorImageSystem : MonoBehaviour
     {
-        [SerializeField] private Image _cursorPrefab = null;
+        [SerializeField] private CanvasGroup _cursorPrefab = null;
         [SerializeField] private float _elasticity = .01f;
+
+        [SerializeField] private InputActionReference _hideAction = null;
+        [SerializeField] private InputActionReference _showAction = null;
 
 #if UNITY_EDITOR
         [Space]
         [SerializeField] private GameObject _selectedObj = null;
 #endif
 
-        private Image cursorInstance;
+        private CanvasGroup cursorInstance;
+
+        private bool hide;
+
+        private void OnEnable()
+        {
+            _hideAction.action.performed += OnTouch;
+            _hideAction.action.Enable();
+            _showAction.action.performed += OnKey;
+            _showAction.action.Enable();
+        }
+
+        private void OnDisable()
+        {
+            _hideAction.action.performed -= OnTouch;
+            _hideAction.action.Disable();
+            _showAction.action.performed -= OnKey;
+            _showAction.action.Disable();
+        }
+
+        private void OnTouch(InputAction.CallbackContext context)
+        {
+            hide = true;
+        }
+
+        private void OnKey(InputAction.CallbackContext context)
+        {
+            hide = false;
+        }
 
         private void Update()
         {
@@ -40,11 +71,11 @@ namespace ListingMF
                 cursorTransform.position = Vector3.Lerp(cursorTransform.position, selectedTransform.position, deltaElasticity);
                 cursorTransform.sizeDelta = Vector2.Lerp(cursorTransform.sizeDelta, selectedTransform.rect.size, deltaElasticity);
                 cursorTransform.localScale = selectedTransform.localScale;
-                cursorInstance.enabled = true;
+                cursorInstance.alpha = hide ? 0f : 1f;
             }
             else
             {
-                cursorInstance.enabled = false;
+                cursorInstance.alpha = 0f;
             }
 
 #if UNITY_EDITOR

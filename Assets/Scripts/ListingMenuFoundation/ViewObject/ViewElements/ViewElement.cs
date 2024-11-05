@@ -4,13 +4,13 @@ using UnityEngine;
 
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 
 namespace ListingMF
 {
     [RequireComponent(typeof(CanvasGroup))]
     public abstract class ViewElement : MonoBehaviour, ISelectHandler
     {
-        private ElementsSubView parent;
         private Selectable selectable;
         private CanvasGroup canvasGroup;
 
@@ -26,15 +26,16 @@ namespace ListingMF
         /// </summary>
         protected bool IsBlocked { get; private set; }
 
-        protected IListMenuManager Manager => parent.Manager;
-        protected IListMenuArg Arg => parent.Arg;
+        protected IListMenuManager Manager => Parent.Manager;
+        protected IListMenuArg Arg => Parent.Arg;
+        protected ElementsSubViewBase Parent { get; private set; }
 
-        public void Initialize(ElementsSubView parent)
+        public void Initialize(ElementsSubViewBase parent)
         {
             if (parent == null) throw new System.ArgumentNullException(nameof(parent));
-            LMFAssert.NotInitialized(this, this.parent != null);
+            LMFAssert.NotInitialized(this, Parent != null);
 
-            this.parent = parent;
+            Parent = parent;
             selectable = GetComponent<Selectable>();
             TryGetComponent(out canvasGroup);
             SetBlock(parent.IsBlocked);
@@ -62,7 +63,13 @@ namespace ListingMF
             }
         }
 
-        public abstract void SetElement(IElementHandler handler, object element);
+        public void SetElement(IElementHandler handler, object element)
+        {
+            name = handler.GetName(element, Manager, Arg);
+            InnerSetElement(handler, element);
+        }
+
+        protected abstract void InnerSetElement(IElementHandler handler, object element);
 
         public void SetVisible(bool visible, bool outOfRange)
         {
@@ -72,10 +79,11 @@ namespace ListingMF
             isOutOfRange = outOfRange;
         }
 
-        void ISelectHandler.OnSelect(BaseEventData eventData)
-        {
-            parent.OnSelectViewElement(this, isOutOfRange);
-        }
+        void ISelectHandler.OnSelect(BaseEventData eventData) => Parent.OnSelectViewElement(this, isOutOfRange);
+
+        // Animation から呼び出すメソッド
+        public void PlayString(string value) => Parent.PlayFromElement(value, this);
+        public void PlayObject(Object value) => Parent.PlayFromElement(value, this);
 
 
 

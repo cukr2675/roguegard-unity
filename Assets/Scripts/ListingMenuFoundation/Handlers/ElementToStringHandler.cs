@@ -12,5 +12,15 @@ namespace ListingMF
         {
             return element?.ToString();
         }
+
+        Sprite IElementHandler.GetIcon(object element, IListMenuManager manager, IListMenuArg arg)
+        {
+            return null;
+        }
+
+        string IElementHandler.GetStyle(object element, IListMenuManager manager, IListMenuArg arg)
+        {
+            return null;
+        }
     }
 }

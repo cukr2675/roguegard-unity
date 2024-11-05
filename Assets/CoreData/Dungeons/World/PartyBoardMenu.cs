@@ -58,14 +58,12 @@ namespace Roguegard
                     if (obj == null)
                     {
                         // 新規メンバー作成
-                        manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
                         var builder = RoguegardSettings.CharacterCreationDatabase.LoadPreset(0);
                         manager.PushMenuScreen(newMenu, arg.Self, arg.User, other: builder);
                     }
                     else
                     {
                         // 既存メンバーのメニュー表示
-                        manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
                         var info = LobbyMemberList.GetMemberInfo(obj);
                         if (info.Seat != null)
                         {
@@ -73,7 +71,7 @@ namespace Roguegard
                             callLobbyDialog ??= new ChoicesMenuScreen(
                                 (manager, arg) => $"{arg.Arg.TargetObj}を呼び戻しますか？")
                             .Option("はい", CallLobby)
-                            .Exit();
+                            .Back();
 
                             manager.PushMenuScreen(callLobbyDialog, arg.Self, targetObj: obj);
                         }
@@ -89,8 +87,6 @@ namespace Roguegard
 
         private static void CallLobby(RogueMenuManager manager, ReadOnlyMenuArg arg)
         {
-            manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-
             // クエストを中止してキャラを席から呼び戻す
             var character = arg.Arg.TargetObj;
             var leader = character.Main.Stats.Party.Members[0];
@@ -99,7 +95,7 @@ namespace Roguegard
             var info = LobbyMemberList.GetMemberInfo(character);
             info.Seat = null;
 
-            manager.HandleClickBack();
+            manager.Back();
         }
 
         private class CommandMenu : RogueMenuScreen
@@ -116,7 +112,7 @@ namespace Roguegard
                     ?.Option("交代", Change)
                     .Option("加入", Invite)
                     .Option("編集", Edit)
-                    .Exit()
+                    .Back()
                     .Build();
             }
 

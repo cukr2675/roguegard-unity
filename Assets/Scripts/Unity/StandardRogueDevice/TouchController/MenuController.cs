@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using UnityEngine.UI;
-using TMPro;
 using ListingMF;
 using Roguegard;
 using Roguegard.Device;
@@ -15,46 +14,23 @@ namespace RoguegardUnity
     /// </summary>
     public class MenuController : RogueMenuManager
     {
-        //[SerializeField] private TMP_Text _floorTitleText = null;
-        //[SerializeField] private CanvasGroup _floorTitleGroup = null;
-        //[SerializeField] private Image _touchMask = null;
-
-        [Space]
-
-        //[SerializeField] private MessageController _messageController = null;
-        //[SerializeField] private CaptionWindow _captionWindow = null;
-        //[SerializeField] private ElementsView _thumbnailMenu = null;
-        //[SerializeField] private ElementsView _commandMenu = null;
-        //[SerializeField] private ElementsView _leftAnchorMenu = null;
-        //[SerializeField] private ElementsView _rightAnchorMenu = null;
-        //[SerializeField] private FloorMenuView _floorMenu = null;
-        //[SerializeField] private LoadingMenuView _loadingMenu = null;
-        //[SerializeField] private SummaryMenuView _summaryMenu = null;
-        //[SerializeField] private DetailsMenuView _detailsMenu = null;
-        //[SerializeField] private OptionsMenuView _optionsMenu = null;
+        [SerializeField] private StatsWindow _statsWindow = null;
+        public StatsWindow Stats => _statsWindow;
         [SerializeField] private CharacterCreationMenuView _characterCreation = null;
         public CharacterCreationMenuView CharacterCreation => _characterCreation;
         [SerializeField] private TextEditorMenuView _textEditorMenu = null;
         public TextEditorMenuView TextEditor => _textEditorMenu;
         [SerializeField] private PaintMenuView _paintMenu = null;
-        //[SerializeField] private ElementsView _talkSelectMenu = null;
-        [SerializeField] private StatsWindow _statsWindow = null;
-        public StatsWindow Stats => _statsWindow;
 
         [Header("Title Only")]
         [SerializeField] private GridSubView _titleMenu = null;
         public static string TitleMenuName => "TitleMenu";
 
-        //[SerializeField] private ScrollMenuView _scrollMenu = null;
-
         private MainMenu mainMenu;
         private LongDownMenu longDownMenu;
         private ObjsMenu objsMenu;
 
-        //private StandardMenuManager menuManager;
-
-        //internal ListMenuEventManager EventManager => menuManager.EventManager;
-
+        private SoundController soundController;
         internal ListMenuEventManager EventManager { get; private set; }
 
         /// <summary>
@@ -65,12 +41,12 @@ namespace RoguegardUnity
             StackCount >= 1 || EventManager.Wait;
 
         public bool TalkingWait =>
-            StandardSubViewTable.MessageBox.MessageBox.IsInProgress || StandardSubViewTable.SpeechBox.MessageBox.IsInProgress ||
+            StandardSubViewTable.SpeechBox.MessageBox.IsInProgress ||
             StackCount >= 1 || EventManager.Wait;
 
         public override string TextEditorValue => _textEditorMenu.Text;
 
-        public override IListMenuSelectOption LoadPresetSelectOptionOfCharacterCreation => CharacterCreationMenuView.LoadPresetSelectOption;
+        public override ISelectOption LoadPresetSelectOptionOfCharacterCreation => CharacterCreationMenuView.LoadPresetSelectOption;
 
         internal void Initialize(
             SoundController soundController, RogueSpriteRendererPool rendererPool, bool touchMaskIsEnabled = true)
@@ -87,40 +63,14 @@ namespace RoguegardUnity
             mainMenu = new MainMenu(objsMenu, skillsMenu, partyMenu);
             longDownMenu = new LongDownMenu(objsMenu, objCommandMenu);
 
-            //_touchMask.raycastTarget = false;
-            //_scrollMenu.Initialize();
-            //_summaryMenu.Initialize();
-            //_optionsMenu.Initialize();
             _characterCreation.Initialize(rendererPool);
             _textEditorMenu.Initialize();
             _paintMenu.Initialize();
-            //_loadingMenu.Initialize();
             if (_titleMenu != null) { _titleMenu.Initialize(); }
             var scrollSensitivity = 64f;
             SetScrollSensitivity(scrollSensitivity);
 
-            var table = new Dictionary<IKeyword, ElementsView>();
-            //table.Add(DeviceKw.MenuCaption, _captionWindow);
-            //table.Add(DeviceKw.MenuThumbnail, _thumbnailMenu);
-            //table.Add(DeviceKw.MenuScroll, _scrollMenu);
-            //table.Add(DeviceKw.MenuCommand, _commandMenu);
-            //table.Add(DeviceKw.MenuLeftAnchor, _leftAnchorMenu);
-            //table.Add(DeviceKw.MenuRightAnchor, _rightAnchorMenu);
-            //table.Add(DeviceKw.MenuFloor, _floorMenu);
-            //table.Add(DeviceKw.MenuLoading, _loadingMenu);
-            //table.Add(DeviceKw.MenuSummary, _summaryMenu);
-            //table.Add(DeviceKw.MenuDetails, _detailsMenu);
-            //table.Add(DeviceKw.MenuOptions, _optionsMenu);
-            //table.Add(DeviceKw.MenuCharacterCreation, _characterCreationMenu);
-            table.Add(DeviceKw.MenuTextEditor, _textEditorMenu);
-            table.Add(DeviceKw.MenuPaint, _paintMenu);
-            //table.Add(DeviceKw.MenuLog, _messageController.LogView);
-            //table.Add(DeviceKw.MenuTalk, _messageController.TalkView);
-            //table.Add(DeviceKw.MenuTalkSelect, _talkSelectMenu);
-            //menuManager = new StandardMenuManager(_touchMask, _messageController, _statsWindow, soundController, table);
-
-            //_touchMask.gameObject.SetActive(touchMaskIsEnabled);
-
+            this.soundController = soundController;
             EventManager = new ListMenuEventManager(GetComponent<MessageController>(), soundController);
         }
 
@@ -137,12 +87,12 @@ namespace RoguegardUnity
 
         public void SetWindowFrame(Sprite sprite, Sprite spriteB, Color backgroundColor)
         {
-            var backgrounds = GetComponentsInChildren<MenuWindowBackground>();
-            foreach (var background in backgrounds)
+            var panels = GetComponentsInChildren<TwoLayerPanel>();
+            foreach (var panel in panels)
             {
-                background.ImageA.sprite = sprite;
-                background.ImageA.color = backgroundColor;
-                background.ImageB.sprite = spriteB;
+                panel.Background.sprite = sprite;
+                panel.Background.color = backgroundColor;
+                panel.Foreground.sprite = spriteB;
             }
         }
 
@@ -166,8 +116,8 @@ namespace RoguegardUnity
         {
             base.HideAll(back);
             _characterCreation.Hide(back);
-            _textEditorMenu.Show(false);
-            _statsWindow.Show(false);
+            _textEditorMenu.Hide(back);
+            _statsWindow.Hide(back);
             if (_titleMenu != null) { _titleMenu.Hide(back); }
         }
 
@@ -217,8 +167,6 @@ namespace RoguegardUnity
 
         public void OpenLongDownMenu(RogueObj subject, Vector2Int position)
         {
-            EventManager.Add(DeviceKw.EnqueueSE, obj: DeviceKw.Submit);
-
             var view = ViewInfo.Get(subject);
             for (int i = 0; i < view.VisibleObjCount; i++)
             {
@@ -240,6 +188,26 @@ namespace RoguegardUnity
         public void CloseMenu()
         {
             Done();
+        }
+
+        public void Play(string value, Object sender)
+        {
+            if (value == "Submit")
+            {
+                AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+            }
+            else if (value == "Cancel")
+            {
+                AddObject(DeviceKw.EnqueueSE, DeviceKw.Cancel);
+            }
+            else if (value == "StartSpeech")
+            {
+                soundController.PlayLoop(DeviceKw.StartTalk);
+            }
+            else if (value == "EndSpeech")
+            {
+                soundController.SetLastLoop(DeviceKw.StartTalk);
+            }
         }
 
         public override void AddInt(IKeyword keyword, int integer) => EventManager.Add(keyword, integer: integer);
@@ -265,7 +233,7 @@ namespace RoguegardUnity
         public override void OpenTextEditor(string text)
         {
             _textEditorMenu.SetText(text);
-            _textEditorMenu.Show(true);
+            _textEditorMenu.Show();
         }
     }
 }

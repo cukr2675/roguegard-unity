@@ -4,14 +4,14 @@ using UnityEngine;
 
 namespace ListingMF
 {
-    public class MainMenuViewTemplate<TMgr, TArg> : ListViewTemplate<IListMenuSelectOption, TMgr, TArg>
+    public class MainMenuViewTemplate<TMgr, TArg> : ListViewTemplate<ISelectOption, TMgr, TArg>
         where TMgr : IListMenuManager
         where TArg : IListMenuArg
     {
         public string PrimaryCommandSubViewName { get; set; } = StandardSubViewTable.PrimaryCommandName;
         public string CaptionBoxSubViewName { get; set; } = StandardSubViewTable.CaptionBoxName;
         public string BackAnchorSubViewName { get; set; } = null;
-        public List<IListMenuSelectOption> BackAnchorList { get; set; } = new() { ExitListMenuSelectOption.Instance };
+        public List<ISelectOption> BackAnchorList { get; set; } = new() { BackSelectOption.Instance };
 
         private object prevViewStateHolder;
         private IElementsSubViewStateProvider primaryCommandSubViewStateProvider;
@@ -75,12 +75,12 @@ namespace ListingMF
 
             public Builder Option(string name, HandleClickElement<TMgr, TArg> handleClick)
             {
-                return Append(ListMenuSelectOption.Create(name, handleClick));
+                return Append(SelectOption.Create(name, handleClick));
             }
 
-            public Builder Exit()
+            public Builder Back()
             {
-                return Append(ExitListMenuSelectOption.Instance);
+                return Append(BackSelectOption.Instance);
             }
         }
     }
