@@ -23,7 +23,7 @@ namespace RoguegardUnity
         /// </summary>
         private class UseMenu : RogueMenuScreen
         {
-            private readonly ScrollViewTemplate<ISkill, RogueMenuManager, ReadOnlyMenuArg> view = new()
+            private readonly ScrollViewTemplate<ISkill, MMgr, MArg> view = new()
             {
                 Title = ":Skills",
             };
@@ -31,7 +31,7 @@ namespace RoguegardUnity
             private readonly List<ISkill> list = new();
             private readonly SkillCommandMenu menu = new();
 
-            public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
+            public override void OpenScreen(in MMgr manager, in MArg arg)
             {
                 var skills = arg.Self.Main.Skills;
                 list.Clear();

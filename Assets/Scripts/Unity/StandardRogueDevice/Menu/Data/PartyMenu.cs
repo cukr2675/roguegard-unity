@@ -14,7 +14,7 @@ namespace RoguegardUnity
 
         private readonly List<RogueObj> partyMembers = new();
 
-        private readonly ScrollViewTemplate<RogueObj, RogueMenuManager, ReadOnlyMenuArg> view = new()
+        private readonly ScrollViewTemplate<RogueObj, MMgr, MArg> view = new()
         {
             Title = ":Party",
         };
@@ -24,7 +24,7 @@ namespace RoguegardUnity
             this.memberMenu = memberMenu;
         }
 
-        public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
+        public override void OpenScreen(in MMgr manager, in MArg arg)
         {
             var partyMemberObjs = arg.Self.Main.Stats.Party.Members;
             partyMembers.Clear();

@@ -43,11 +43,11 @@ namespace Roguegard
             private static readonly List<DungeonQuest> elms = new List<DungeonQuest>();
             private static readonly QuestViewMenu nextMenu = new QuestViewMenu();
 
-            private readonly ScrollViewTemplate<DungeonQuest, RogueMenuManager, ReadOnlyMenuArg> view = new()
+            private readonly ScrollViewTemplate<DungeonQuest, MMgr, MArg> view = new()
             {
             };
 
-            public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
+            public override void OpenScreen(in MMgr manager, in MArg arg)
             {
                 elms.Clear();
                 for (int i = 0; i < 4; i++)
@@ -73,11 +73,11 @@ namespace Roguegard
 
             private class QuestViewMenu : RogueMenuScreen
             {
-                private readonly DialogViewTemplate<RogueMenuManager, ReadOnlyMenuArg> view = new()
+                private readonly DialogViewTemplate<MMgr, MArg> view = new()
                 {
                 };
 
-                public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
+                public override void OpenScreen(in MMgr manager, in MArg arg)
                 {
                     var quest = (DungeonQuest)arg.Arg.Other;
 

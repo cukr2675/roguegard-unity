@@ -104,7 +104,7 @@ namespace RoguegardUnity
             return false;
         }
 
-        private void SaveDelay(RogueMenuManager manager, string path, bool autoSave)
+        private void SaveDelay(MMgr manager, string path, bool autoSave)
         {
             if (manager != null)
             {
@@ -115,7 +115,7 @@ namespace RoguegardUnity
             FadeCanvas.StartCanvasCoroutine(Save(manager, path, autoSave));
         }
 
-        private IEnumerator Save(RogueMenuManager manager, string path, bool autoSave)
+        private IEnumerator Save(MMgr manager, string path, bool autoSave)
         {
             // RogueMethodAspectState ‚Ìˆ—‚ÌŠ®—¹‚ğ‘Ò‚Â
             yield return null;
@@ -285,7 +285,7 @@ namespace RoguegardUnity
         {
             public SaveDeviceEventHandler parent;
 
-            public override void OpenScreen(in RogueMenuManager inManager, in ReadOnlyMenuArg arg)
+            public override void OpenScreen(in MMgr inManager, in MArg arg)
             {
                 var manager = inManager;
                 SelectFileMenuScreen.ShowSaving(manager);

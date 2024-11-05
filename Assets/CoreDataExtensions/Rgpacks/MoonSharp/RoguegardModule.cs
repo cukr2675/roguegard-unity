@@ -484,7 +484,7 @@ return {
 
             public override bool IsIncremental => true;
 
-            public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
+            public override void OpenScreen(in MMgr manager, in MArg arg)
             {
                 manager.StandardSubViewTable.SpeechBox.MessageBox.Append(message);
                 manager.StandardSubViewTable.SpeechBox.Show();
@@ -493,14 +493,14 @@ return {
                 {
                     coroutine.Resume();
 
-                    var manager = (RogueMenuManager)iManager;
+                    var manager = (MMgr)iManager;
                     manager.Done();
                     manager.ResetDone();
                     manager.StandardSubViewTable.SpeechBox.Show();
                 });
             }
 
-            public override void CloseScreen(RogueMenuManager manager, bool back)
+            public override void CloseScreen(MMgr manager, bool back)
             {
             }
         }
@@ -511,14 +511,14 @@ return {
             public List<string> selectOptions = new();
             private static readonly DynValue[] args = new DynValue[1];
 
-            private readonly CommandListViewTemplate<string, RogueMenuManager, ReadOnlyMenuArg> view = new()
+            private readonly CommandListViewTemplate<string, MMgr, MArg> view = new()
             {
                 SecodaryCommandSubViewName = StandardSubViewTable.ChoicesName,
             };
 
             public override bool IsIncremental => true;
 
-            public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
+            public override void OpenScreen(in MMgr manager, in MArg arg)
             {
                 view.ShowTemplate(selectOptions, manager, arg)
                     ?
@@ -532,7 +532,7 @@ return {
                     .Build();
             }
 
-            public override void CloseScreen(RogueMenuManager manager, bool back)
+            public override void CloseScreen(MMgr manager, bool back)
             {
                 view.HideTemplate(manager, back);
             }

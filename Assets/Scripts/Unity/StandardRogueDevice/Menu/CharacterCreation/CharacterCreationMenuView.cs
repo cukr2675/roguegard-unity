@@ -32,16 +32,16 @@ namespace RoguegardUnity
         private IButtonElementHandler intrinsicPresenter;
         private IButtonElementHandler startingItemPresenter;
         private static readonly ISelectOption intrinsicHeader
-            = SelectOption.Create<RogueMenuManager, ReadOnlyMenuArg>("固有能力", delegate { });
+            = SelectOption.Create<MMgr, MArg>("固有能力", delegate { });
         private static readonly ISelectOption startingItemHeader
-            = SelectOption.Create<RogueMenuManager, ReadOnlyMenuArg>("初期アイテム", delegate { });
+            = SelectOption.Create<MMgr, MArg>("初期アイテム", delegate { });
         private MenuRogueObjSpriteRenderer spriteRenderer;
         private ISelectOption raceSelectOption;
         private ISelectOption appearanceSelectOption;
         private AppearanceBuildersMenu appearanceBuildersMenu;
         private readonly List<MonoBehaviour> itemObjects = new List<MonoBehaviour>();
         public static ISelectOption LoadPresetSelectOption { get; }
-            = SelectOption.Create<RogueMenuManager, ReadOnlyMenuArg>(":Load", new LoadPresetMenu());
+            = SelectOption.Create<MMgr, MArg>(":Load", new LoadPresetMenu());
         private static readonly object[] leftAnchorObjs = new object[2];
 
         private readonly List<ViewElement> _blockableViewElements = new();
@@ -59,11 +59,11 @@ namespace RoguegardUnity
             spriteRendererTransform.localScale = Vector3.one * 4f;
             _raceButton.Initialize(this);
             _appearanceButton.Initialize(this);
-            raceSelectOption = SelectOption.Create<RogueMenuManager, ReadOnlyMenuArg>("", (manager, arg) =>
+            raceSelectOption = SelectOption.Create<MMgr, MArg>("", (manager, arg) =>
             {
                 manager.PushMenuScreen(optionMenu, arg.Self, other: builder.Race);
             });
-            appearanceSelectOption = SelectOption.Create<RogueMenuManager, ReadOnlyMenuArg>("", (manager, arg) =>
+            appearanceSelectOption = SelectOption.Create<MMgr, MArg>("", (manager, arg) =>
             {
                 manager.PushMenuScreen(appearanceBuildersMenu, arg.Self, other: builder);
             });
@@ -74,7 +74,7 @@ namespace RoguegardUnity
             IReadOnlyList<object> list, IElementHandler handler, IListMenuManager manager, IListMenuArg iArg,
             ref IElementsSubViewStateProvider stateProvider)
         {
-            var arg = (ReadOnlyMenuArg)iArg;
+            var arg = (MArg)iArg;
             builder = (CharacterCreationDataBuilder)arg.Arg.Other;
             if (addMenu == null)
             {
@@ -90,7 +90,7 @@ namespace RoguegardUnity
 
             if (intrinsicPresenter == null)
             {
-                intrinsicPresenter = new ButtonElementHandler<IntrinsicBuilder, RogueMenuManager, ReadOnlyMenuArg>()
+                intrinsicPresenter = new ButtonElementHandler<IntrinsicBuilder, MMgr, MArg>()
                 {
                     GetName = (element, manager, arg) =>
                     {
@@ -104,7 +104,7 @@ namespace RoguegardUnity
                     },
                 };
 
-                startingItemPresenter = new ButtonElementHandler<StartingItemBuilder, RogueMenuManager, ReadOnlyMenuArg>()
+                startingItemPresenter = new ButtonElementHandler<StartingItemBuilder, MMgr, MArg>()
                 {
                     GetName = (element, manager, arg) =>
                     {
@@ -228,7 +228,7 @@ namespace RoguegardUnity
 
             private readonly ChoicesMenuScreen nextMenu;
 
-            private readonly ScrollViewTemplate<CharacterCreationDataBuilder, RogueMenuManager, ReadOnlyMenuArg> view;
+            private readonly ScrollViewTemplate<CharacterCreationDataBuilder, MMgr, MArg> view;
 
             public LoadPresetMenu()
             {
@@ -241,7 +241,7 @@ namespace RoguegardUnity
                 };
             }
 
-            public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
+            public override void OpenScreen(in MMgr manager, in MArg arg)
             {
                 if (presets == null)
                 {
@@ -268,7 +268,7 @@ namespace RoguegardUnity
                     .Build();
             }
 
-            private void Load(RogueMenuManager manager, ReadOnlyMenuArg arg)
+            private void Load(MMgr manager, MArg arg)
             {
                 var builder = (CharacterCreationDataBuilder)arg.Arg.Other;
                 builder.Set(element);

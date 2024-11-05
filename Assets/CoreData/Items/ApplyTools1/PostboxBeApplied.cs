@@ -30,11 +30,11 @@ namespace Roguegard
         {
             private readonly List<RoguePost> posts = new();
 
-            private readonly ScrollViewTemplate<RoguePost, RogueMenuManager, ReadOnlyMenuArg> view = new()
+            private readonly ScrollViewTemplate<RoguePost, MMgr, MArg> view = new()
             {
             };
 
-            public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
+            public override void OpenScreen(in MMgr manager, in MArg arg)
             {
                 var info = PostboxInfo.Get(arg.Arg.Tool);
                 posts.Clear();
@@ -56,13 +56,13 @@ namespace Roguegard
 
         private class DetailsScreen : RogueMenuScreen
         {
-            private readonly DialogViewTemplate<RogueMenuManager, ReadOnlyMenuArg> view = new()
+            private readonly DialogViewTemplate<MMgr, MArg> view = new()
             {
                 DialogSubViewName = StandardSubViewTable.WidgetsName,
                 BackAnchorSubViewName = StandardSubViewTable.BackAnchorName,
             };
 
-            public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
+            public override void OpenScreen(in MMgr manager, in MArg arg)
             {
                 var post = (RoguePost)arg.Arg.Other;
 

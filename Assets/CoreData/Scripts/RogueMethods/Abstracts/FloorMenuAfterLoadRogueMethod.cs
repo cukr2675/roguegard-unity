@@ -46,29 +46,29 @@ namespace Roguegard
             return true;
         }
 
-        protected abstract string GetName(RogueMenuManager manager, RogueObj player, RogueObj empty, in RogueMethodArgument arg);
+        protected abstract string GetName(MMgr manager, RogueObj player, RogueObj empty, in RogueMethodArgument arg);
 
-        protected abstract void Activate(RogueMenuManager manager, RogueObj player, RogueObj empty, in RogueMethodArgument arg);
+        protected abstract void Activate(MMgr manager, RogueObj player, RogueObj empty, in RogueMethodArgument arg);
 
         string ISelectOption.GetName(IListMenuManager manager, IListMenuArg arg)
         {
-            var args = (ReadOnlyMenuArg)arg;
-            return GetName((RogueMenuManager)manager, args.Self, args.User, args.Arg);
+            var args = (MArg)arg;
+            return GetName((MMgr)manager, args.Self, args.User, args.Arg);
         }
 
         string ISelectOption.GetStyle(IListMenuManager manager, IListMenuArg arg) => null;
 
         void ISelectOption.HandleClick(IListMenuManager manager, IListMenuArg arg)
         {
-            var args = (ReadOnlyMenuArg)arg;
-            Activate((RogueMenuManager)manager, args.Self, args.User, args.Arg);
+            var args = (MArg)arg;
+            Activate((MMgr)manager, args.Self, args.User, args.Arg);
         }
 
         private class Screen : RogueMenuScreen
         {
             public ISelectOption[] selectOptions;
 
-            private readonly FadeOutInViewTemplate<RogueMenuManager, ReadOnlyMenuArg> view = new()
+            private readonly FadeOutInViewTemplate<MMgr, MArg> view = new()
             {
             };
 
@@ -76,7 +76,7 @@ namespace Roguegard
 
             public override bool IsIncremental => true;
 
-            public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
+            public override void OpenScreen(in MMgr manager, in MArg arg)
             {
                 view.FadeOut(manager, arg)
                     ?
@@ -99,17 +99,17 @@ namespace Roguegard
                     .Build();
             }
 
-            public override void CloseScreen(RogueMenuManager manager, bool back)
+            public override void CloseScreen(MMgr manager, bool back)
             {
             }
 
-            private IEnumerator Wait2sDone(RogueMenuManager manager)
+            private IEnumerator Wait2sDone(MMgr manager)
             {
                 yield return new WaitForSeconds(2f);
 
                 manager.GetSubView(StandardSubViewTable.OverlayName).Hide(false, (manager, arg) =>
                 {
-                    ((RogueMenuManager)manager).Done();
+                    ((MMgr)manager).Done();
                 });
             }
         }

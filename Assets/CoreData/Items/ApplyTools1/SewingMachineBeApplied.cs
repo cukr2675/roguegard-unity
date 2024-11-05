@@ -24,11 +24,11 @@ namespace Roguegard
         {
             private readonly List<RogueObj> elms = new();
 
-            private readonly ScrollViewTemplate<RogueObj, RogueMenuManager, ReadOnlyMenuArg> view = new()
+            private readonly ScrollViewTemplate<RogueObj, MMgr, MArg> view = new()
             {
             };
 
-            public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
+            public override void OpenScreen(in MMgr manager, in MArg arg)
             {
                 var spaceObjs = arg.Self.Space.Objs;
                 elms.Clear();
@@ -79,20 +79,20 @@ namespace Roguegard
         {
             private static List<object> elms;
 
-            private readonly ScrollViewTemplate<object, RogueMenuManager, ReadOnlyMenuArg> view = new()
+            private readonly ScrollViewTemplate<object, MMgr, MArg> view = new()
             {
                 ScrollSubViewName = StandardSubViewTable.WidgetsName,
                 BackAnchorList = new()
                 {
-                    SelectOption.Create<RogueMenuManager, ReadOnlyMenuArg>(":Back", ChoicesMenuScreen.SaveBackDialog(Save)),
+                    SelectOption.Create<MMgr, MArg>(":Back", ChoicesMenuScreen.SaveBackDialog(Save)),
                 },
             };
 
-            public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
+            public override void OpenScreen(in MMgr manager, in MArg arg)
             {
                 if (elms == null)
                 {
-                    var colorPicker = new ColorPickerMenuScreen<RogueMenuManager, ReadOnlyMenuArg>(
+                    var colorPicker = new ColorPickerMenuScreen<MMgr, MArg>(
                         (manager, arg) =>
                         {
                             var data = (SewedEquipmentData)arg.Arg.Other;
@@ -109,7 +109,7 @@ namespace Roguegard
                         new object[]
                         {
                             "名前",
-                            InputFieldViewWidget.CreateOption<RogueMenuManager, ReadOnlyMenuArg>(
+                            InputFieldViewWidget.CreateOption<MMgr, MArg>(
                                 (manager, arg) =>
                                 {
                                     var data = (SewedEquipmentData)arg.Arg.Other;
@@ -122,19 +122,19 @@ namespace Roguegard
                                 }),
                         },
 
-                        SelectOption.Create<RogueMenuManager, ReadOnlyMenuArg>(
+                        SelectOption.Create<MMgr, MArg>(
                             (manager, arg) =>
                             {
                                 var data = (SewedEquipmentData)arg.Arg.Other;
                                 return $"<#{ColorUtility.ToHtmlStringRGBA(data.BoneSprites.MainColor)}>メインカラー";
                             }, colorPicker),
 
-                        SelectOption.Create<RogueMenuManager, ReadOnlyMenuArg>("装備部位", new EquipPartsScreen()),
+                        SelectOption.Create<MMgr, MArg>("装備部位", new EquipPartsScreen()),
 
                         new object[]
                         {
                             "順序",
-                            InputFieldViewWidget.CreateOption<RogueMenuManager, ReadOnlyMenuArg>(
+                            InputFieldViewWidget.CreateOption<MMgr, MArg>(
                                 (manager, arg) =>
                                 {
                                     var data = (SewedEquipmentData)arg.Arg.Other;
@@ -203,7 +203,7 @@ namespace Roguegard
                     .Build();
             }
 
-            private static void Save(RogueMenuManager manager, ReadOnlyMenuArg arg)
+            private static void Save(MMgr manager, MArg arg)
             {
                 manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
 
@@ -230,11 +230,11 @@ namespace Roguegard
         {
             private ISerializableKeyword[] elms;
 
-            private readonly ScrollViewTemplate<ISerializableKeyword, RogueMenuManager, ReadOnlyMenuArg> view = new()
+            private readonly ScrollViewTemplate<ISerializableKeyword, MMgr, MArg> view = new()
             {
             };
 
-            public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
+            public override void OpenScreen(in MMgr manager, in MArg arg)
             {
                 if (elms == null)
                 {

@@ -8,23 +8,23 @@ namespace Roguegard.Device
 {
     public class ChoicesMenuScreen : RogueMenuScreen
     {
-        private readonly ChoicesMenuScreen<RogueMenuManager, ReadOnlyMenuArg> screen;
+        private readonly ChoicesMenuScreen<MMgr, MArg> screen;
 
         public override bool IsIncremental => screen.IsIncremental;
 
         public ChoicesMenuScreen(string message)
         {
-            screen = new ChoicesMenuScreen<RogueMenuManager, ReadOnlyMenuArg>(message);
+            screen = new ChoicesMenuScreen<MMgr, MArg>(message);
         }
 
-        public ChoicesMenuScreen(GetElementName<RogueMenuManager, ReadOnlyMenuArg> getMessage)
+        public ChoicesMenuScreen(GetElementName<MMgr, MArg> getMessage)
         {
-            screen = new ChoicesMenuScreen<RogueMenuManager, ReadOnlyMenuArg>(getMessage);
+            screen = new ChoicesMenuScreen<MMgr, MArg>(getMessage);
         }
 
         public static ChoicesMenuScreen SaveBackDialog(
-            HandleClickElement<RogueMenuManager, ReadOnlyMenuArg> saveAction,
-            HandleClickElement<RogueMenuManager, ReadOnlyMenuArg> notSaveAction = null)
+            HandleClickElement<MMgr, MArg> saveAction,
+            HandleClickElement<MMgr, MArg> notSaveAction = null)
         {
             var selectOption = SaveBackDialog(":SaveBackDialogMsg", ":Overwrite", saveAction, ":DontSave", notSaveAction);
             return selectOption;
@@ -32,8 +32,8 @@ namespace Roguegard.Device
 
         public static ChoicesMenuScreen SaveBackDialog(
             string message,
-            string saveName, HandleClickElement<RogueMenuManager, ReadOnlyMenuArg> saveAction,
-            string notSaveName, HandleClickElement<RogueMenuManager, ReadOnlyMenuArg> notSaveAction)
+            string saveName, HandleClickElement<MMgr, MArg> saveAction,
+            string notSaveName, HandleClickElement<MMgr, MArg> notSaveAction)
         {
             var selectOption = new ChoicesMenuScreen(message)
 
@@ -48,19 +48,19 @@ namespace Roguegard.Device
             return selectOption;
         }
 
-        private static void NotSave(RogueMenuManager manager, ReadOnlyMenuArg arg)
+        private static void NotSave(MMgr manager, MArg arg)
         {
             // ‰½‚à‚¹‚¸•Â‚¶‚é
             manager.Back(3);
         }
 
-        private static void Cancel(RogueMenuManager manager, ReadOnlyMenuArg arg)
+        private static void Cancel(MMgr manager, MArg arg)
         {
             // ‰½‚à‚¹‚¸•Â‚¶‚é
             manager.Back(2);
         }
 
-        public ChoicesMenuScreen Option(string name, HandleClickElement<RogueMenuManager, ReadOnlyMenuArg> handleClick)
+        public ChoicesMenuScreen Option(string name, HandleClickElement<MMgr, MArg> handleClick)
         {
             screen.Option(name, handleClick);
             return this;
@@ -72,12 +72,12 @@ namespace Roguegard.Device
             return this;
         }
 
-        public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
+        public override void OpenScreen(in MMgr manager, in MArg arg)
         {
             screen.OpenScreen(manager, arg);
         }
 
-        public override void CloseScreen(RogueMenuManager manager, bool back)
+        public override void CloseScreen(MMgr manager, bool back)
         {
             screen.CloseScreen(manager, back);
         }

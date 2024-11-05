@@ -21,7 +21,7 @@ namespace RoguegardUnity
         public ISelectOption Summary { get; }
         public ISelectOption Details { get; }
 
-        private readonly CommandListViewTemplate<ISelectOption, RogueMenuManager, ReadOnlyMenuArg> view = new()
+        private readonly CommandListViewTemplate<ISelectOption, MMgr, MArg> view = new()
         {
         };
 
@@ -30,17 +30,17 @@ namespace RoguegardUnity
             commands = new List<IObjCommand>();
             selectOptions = new List<ISelectOption>();
 
-            Summary = SelectOption.Create<RogueMenuManager, ReadOnlyMenuArg>("つよさ", (manager, arg) =>
+            Summary = SelectOption.Create<MMgr, MArg>("つよさ", (manager, arg) =>
             {
                 manager.PushMenuScreen(summaryMenuScreen, arg.Self, targetObj: arg.Arg.TargetObj, other: arg.Arg.Other);
             });
-            Details = SelectOption.Create<RogueMenuManager, ReadOnlyMenuArg>("説明", (manager, arg) =>
+            Details = SelectOption.Create<MMgr, MArg>("説明", (manager, arg) =>
             {
                 manager.PushMenuScreen(detailsMenuScreen, arg);
             });
         }
 
-        public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
+        public override void OpenScreen(in MMgr manager, in MArg arg)
         {
             var tool = arg.Arg.Tool;
             RoguegardSettings.ObjCommandTable.GetCommands(arg.Self, tool, commands);
@@ -68,11 +68,11 @@ namespace RoguegardUnity
 
         private class SummaryMenuScreen : RogueMenuScreen
         {
-            private readonly DialogViewTemplate<RogueMenuManager, ReadOnlyMenuArg> view = new()
+            private readonly DialogViewTemplate<MMgr, MArg> view = new()
             {
             };
 
-            public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
+            public override void OpenScreen(in MMgr manager, in MArg arg)
             {
                 object target;
                 if (arg.Arg.TargetObj != null)
@@ -95,11 +95,11 @@ namespace RoguegardUnity
 
         private class DetailsMenuScreen : RogueMenuScreen
         {
-            private readonly DialogViewTemplate<RogueMenuManager, ReadOnlyMenuArg> view = new()
+            private readonly DialogViewTemplate<MMgr, MArg> view = new()
             {
             };
 
-            public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
+            public override void OpenScreen(in MMgr manager, in MArg arg)
             {
                 var details = (arg.Arg.Tool ?? arg.Arg.TargetObj).Main.InfoSet.Details?.ToString();
 

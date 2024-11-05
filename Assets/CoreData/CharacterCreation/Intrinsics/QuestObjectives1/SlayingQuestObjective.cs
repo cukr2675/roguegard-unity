@@ -189,11 +189,11 @@ namespace Roguegard.CharacterCreation
 
         private class RewardsScreen : RogueMenuScreen
         {
-            private readonly SpeechBoxViewTemplate<RogueMenuManager, ReadOnlyMenuArg> view = new()
+            private readonly SpeechBoxViewTemplate<MMgr, MArg> view = new()
             {
             };
 
-            public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
+            public override void OpenScreen(in MMgr manager, in MArg arg)
             {
                 var self = arg.Self;
                 var quest = (DungeonQuest)arg.Arg.Other;
@@ -228,11 +228,11 @@ namespace Roguegard.CharacterCreation
 
         private class NotifyScreen : RogueMenuScreen
         {
-            private readonly SpeechBoxViewTemplate<RogueMenuManager, ReadOnlyMenuArg> view = new()
+            private readonly SpeechBoxViewTemplate<MMgr, MArg> view = new()
             {
             };
 
-            public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
+            public override void OpenScreen(in MMgr manager, in MArg arg)
             {
                 view.ShowTemplate($"–Ú•W‚ÌŠK‚É“ž’B‚µ‚Ü‚µ‚½{view.VA}", manager, arg)
                     ?

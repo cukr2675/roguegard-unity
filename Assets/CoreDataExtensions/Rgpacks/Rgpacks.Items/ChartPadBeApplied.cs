@@ -30,12 +30,12 @@ namespace Roguegard.Rgpacks
         {
             private static readonly List<object> elms = new();
 
-            private readonly ScrollViewTemplate<object, RogueMenuManager, ReadOnlyMenuArg> view = new()
+            private readonly ScrollViewTemplate<object, MMgr, MArg> view = new()
             {
                 ScrollSubViewName = StandardSubViewTable.WidgetsName,
             };
 
-            public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
+            public override void OpenScreen(in MMgr manager, in MArg arg)
             {
                 var chartPad = arg.Arg.TargetObj;
                 var chartPadInfo = ChartPadInfo.Get(chartPad);
@@ -51,7 +51,7 @@ namespace Roguegard.Rgpacks
                         new object[]
                         {
                             "アセットID",
-                            InputFieldViewWidget.CreateOption<RogueMenuManager, ReadOnlyMenuArg>(
+                            InputFieldViewWidget.CreateOption<MMgr, MArg>(
                                 (manager, arg) =>
                                 {
                                     var chartPad = arg.Arg.TargetObj;
@@ -65,7 +65,7 @@ namespace Roguegard.Rgpacks
                                 })
                         })
 
-                    .Append(SelectOption.Create<RogueMenuManager, ReadOnlyMenuArg>(
+                    .Append(SelectOption.Create<MMgr, MArg>(
                         "+ イベントを追加", (manager, arg) =>
                         {
                             var chartPad = arg.Arg.TargetObj;

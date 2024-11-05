@@ -39,13 +39,13 @@ namespace Roguegard
 
         private class RogueMenu : RogueMenuScreen
         {
-            private readonly ScrollViewTemplate<ISelectOption, RogueMenuManager, ReadOnlyMenuArg> view = new()
+            private readonly ScrollViewTemplate<ISelectOption, MMgr, MArg> view = new()
             {
             };
 
             private readonly List<ISelectOption> selectOptions = new();
 
-            public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
+            public override void OpenScreen(in MMgr manager, in MArg arg)
             {
                 var dungeonSelectOptions = RoguegardSettings.DungeonSelectOption;
                 selectOptions.Clear();

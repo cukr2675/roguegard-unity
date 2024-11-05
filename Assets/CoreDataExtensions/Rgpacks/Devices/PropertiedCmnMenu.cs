@@ -12,11 +12,11 @@ namespace Roguegard.Device
     {
         private readonly List<object> elms = new();
 
-        private readonly VariableWidgetsViewTemplate<RogueMenuManager, ReadOnlyMenuArg> view = new()
+        private readonly VariableWidgetsViewTemplate<MMgr, MArg> view = new()
         {
         };
 
-        public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
+        public override void OpenScreen(in MMgr manager, in MArg arg)
         {
             var cmnData = (PropertiedCmnData)arg.Arg.Other;
 
@@ -38,7 +38,7 @@ namespace Roguegard.Device
                             new object[]
                             {
                                 pair.Key,
-                                InputFieldViewWidget.CreateOption<RogueMenuManager, ReadOnlyMenuArg>(
+                                InputFieldViewWidget.CreateOption<MMgr, MArg>(
                                     (manager, arg) => numberCmnProperty.Value.ToString(),
                                     (manager, arg, value) =>(numberCmnProperty.Value = float.Parse(value)).ToString(),
                                     TMP_InputField.ContentType.DecimalNumber)
@@ -53,7 +53,7 @@ namespace Roguegard.Device
                     new object[]
                     {
                         "アセットID",
-                        InputFieldViewWidget.CreateOption<RogueMenuManager, ReadOnlyMenuArg>(
+                        InputFieldViewWidget.CreateOption<MMgr, MArg>(
                             (manager, arg) => ((PropertiedCmnData)arg.Arg.Other).Cmn,
                             (manager, arg, value) => ((PropertiedCmnData)arg.Arg.Other).Cmn = value)
                     })

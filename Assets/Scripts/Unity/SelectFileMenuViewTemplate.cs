@@ -9,7 +9,7 @@ using Roguegard.Device;
 
 namespace RoguegardUnity
 {
-    public class SelectFileMenuViewTemplate : ListViewTemplate<object, RogueMenuManager, ReadOnlyMenuArg>
+    public class SelectFileMenuViewTemplate : ListViewTemplate<object, MMgr, MArg>
     {
         public string ScrollSubViewName { get; set; } = StandardSubViewTable.ScrollName;
         public string CaptionBoxSubViewName { get; set; } = StandardSubViewTable.CaptionBoxName;
@@ -24,7 +24,7 @@ namespace RoguegardUnity
         private readonly ElementHandler scrollSubViewHandler = new();
 
         public Builder ShowTemplate(
-            IReadOnlyList<FileInfo> list, RogueMenuManager manager, ReadOnlyMenuArg arg, object viewStateHolder = null)
+            IReadOnlyList<FileInfo> list, MMgr manager, MArg arg, object viewStateHolder = null)
         {
             if (list == null) throw new System.ArgumentNullException(nameof(list));
             if (manager == null) throw new System.ArgumentNullException(nameof(manager));
@@ -49,7 +49,7 @@ namespace RoguegardUnity
             else return new Builder(this, manager, arg);
         }
 
-        protected override void ShowSubViews(RogueMenuManager manager, ReadOnlyMenuArg arg)
+        protected override void ShowSubViews(MMgr manager, MArg arg)
         {
             manager
                 .GetSubView(ScrollSubViewName)
@@ -70,14 +70,14 @@ namespace RoguegardUnity
             }
         }
 
-        public void HideTemplate(RogueMenuManager manager, bool back)
+        public void HideTemplate(MMgr manager, bool back)
         {
             manager.GetSubView(ScrollSubViewName).Hide(back);
             if (Title != null) { manager.GetSubView(CaptionBoxSubViewName).Hide(back); }
             if (BackAnchorList != null) { manager.GetSubView(BackAnchorSubViewName).Hide(back); }
         }
 
-        private class ElementHandler : ButtonElementHandler<object, RogueMenuManager, ReadOnlyMenuArg>, IRogueElementHandler
+        private class ElementHandler : ButtonElementHandler<object, MMgr, MArg>, IRogueElementHandler
         {
             public ElementHandler()
             {
@@ -96,7 +96,7 @@ namespace RoguegardUnity
             }
 
             public void GetRogueInfo(
-                object element, RogueMenuManager manager, ReadOnlyMenuArg arg,
+                object element, MMgr manager, MArg arg,
                 out string name, ref Color color, ref Sprite icon, ref Color iconColor,
                 ref int? stack, ref float? stars, ref string infoText1, ref string infoText2)
             {
@@ -120,13 +120,13 @@ namespace RoguegardUnity
         {
             private readonly SelectFileMenuViewTemplate parent;
 
-            public Builder(SelectFileMenuViewTemplate parent, RogueMenuManager manager, ReadOnlyMenuArg arg)
+            public Builder(SelectFileMenuViewTemplate parent, MMgr manager, MArg arg)
                 : base(parent, manager, arg)
             {
                 this.parent = parent;
             }
 
-            public Builder OnClickElement(HandleClickElement<object, RogueMenuManager, ReadOnlyMenuArg> method)
+            public Builder OnClickElement(HandleClickElement<object, MMgr, MArg> method)
             {
                 AssertNotBuilded();
 

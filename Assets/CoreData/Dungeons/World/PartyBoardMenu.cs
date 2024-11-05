@@ -16,11 +16,11 @@ namespace Roguegard
         private static readonly CommandMenu nextMenu = new CommandMenu();
         private static readonly PartyBoardCharacterCreationMenu newMenu = new PartyBoardCharacterCreationMenu();
 
-        private readonly ScrollViewTemplate<RogueObj, RogueMenuManager, ReadOnlyMenuArg> view = new()
+        private readonly ScrollViewTemplate<RogueObj, MMgr, MArg> view = new()
         {
         };
 
-        public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
+        public override void OpenScreen(in MMgr manager, in MArg arg)
         {
             // ロビーメンバーの一覧を表示する
             var worldInfo = RogueWorldInfo.GetByCharacter(arg.Self);
@@ -85,7 +85,7 @@ namespace Roguegard
                 .Build();
         }
 
-        private static void CallLobby(RogueMenuManager manager, ReadOnlyMenuArg arg)
+        private static void CallLobby(MMgr manager, MArg arg)
         {
             // クエストを中止してキャラを席から呼び戻す
             var character = arg.Arg.TargetObj;
@@ -102,11 +102,11 @@ namespace Roguegard
         {
             private static readonly PartyBoardCharacterCreationMenu nextMenu = new PartyBoardCharacterCreationMenu();
 
-            private readonly MainMenuViewTemplate<RogueMenuManager, ReadOnlyMenuArg> view = new()
+            private readonly MainMenuViewTemplate<MMgr, MArg> view = new()
             {
             };
 
-            public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
+            public override void OpenScreen(in MMgr manager, in MArg arg)
             {
                 view.ShowTemplate(manager, arg)
                     ?.Option("交代", Change)
@@ -116,7 +116,7 @@ namespace Roguegard
                     .Build();
             }
 
-            private static void Change(RogueMenuManager manager, ReadOnlyMenuArg arg)
+            private static void Change(MMgr manager, MArg arg)
             {
                 // 席が設定されている場合は失敗させる
                 var info = LobbyMemberList.GetMemberInfo(arg.Arg.TargetObj);
@@ -147,7 +147,7 @@ namespace Roguegard
                 manager.Done();
             }
 
-            private static void Invite(RogueMenuManager manager, ReadOnlyMenuArg arg)
+            private static void Invite(MMgr manager, MArg arg)
             {
                 // 席が設定されている場合は失敗させる
                 var info = LobbyMemberList.GetMemberInfo(arg.Arg.TargetObj);
@@ -182,7 +182,7 @@ namespace Roguegard
                 manager.Done();
             }
 
-            private static void Edit(RogueMenuManager manager, ReadOnlyMenuArg arg)
+            private static void Edit(MMgr manager, MArg arg)
             {
                 // 席が設定されている場合は失敗させる
                 var info = LobbyMemberList.GetMemberInfo(arg.Arg.TargetObj);

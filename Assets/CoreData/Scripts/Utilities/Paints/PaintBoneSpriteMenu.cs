@@ -25,22 +25,22 @@ namespace Roguegard
             new PaintMenu(3),
         };
 
-        private readonly VariableWidgetsViewTemplate<RogueMenuManager, ReadOnlyMenuArg> view = new()
+        private readonly VariableWidgetsViewTemplate<MMgr, MArg> view = new()
         {
         };
 
-        public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
+        public override void OpenScreen(in MMgr manager, in MArg arg)
         {
             if (elms == null)
             {
                 elms = new List<object>
                 {
-                    SelectOption.Create<RogueMenuManager, ReadOnlyMenuArg>("部位を変更", new BoneMenu()),
+                    SelectOption.Create<MMgr, MArg>("部位を変更", new BoneMenu()),
 
                     new object[]
                     {
                         "中心点距離",
-                        InputFieldViewWidget.CreateOption<RogueMenuManager, ReadOnlyMenuArg>(
+                        InputFieldViewWidget.CreateOption<MMgr, MArg>(
                             (manager, arg) =>
                             {
                                 var table = (PaintBoneSpriteTable)arg.Arg.Other;
@@ -64,7 +64,7 @@ namespace Roguegard
                     new object[]
                     {
                         "上書き",
-                        InputFieldViewWidget.CreateOption<RogueMenuManager, ReadOnlyMenuArg>(
+                        InputFieldViewWidget.CreateOption<MMgr, MArg>(
                             (manager, arg) =>
                             {
                                 var table = (PaintBoneSpriteTable)arg.Arg.Other;
@@ -82,15 +82,15 @@ namespace Roguegard
                             }),
                     },
 
-                    SelectOption.Create<RogueMenuManager, ReadOnlyMenuArg>("正面を編集", paintMenus[0]),
+                    SelectOption.Create<MMgr, MArg>("正面を編集", paintMenus[0]),
 
-                    SelectOption.Create<RogueMenuManager, ReadOnlyMenuArg>("背面を編集", paintMenus[2]),
+                    SelectOption.Create<MMgr, MArg>("背面を編集", paintMenus[2]),
                 };
 
                 mirroring = new object[]
                 {
                     "ミラーリング",
-                    InputFieldViewWidget.CreateOption<RogueMenuManager, ReadOnlyMenuArg>(
+                    InputFieldViewWidget.CreateOption<MMgr, MArg>(
                         (manager, arg) =>
                         {
                             var table = (PaintBoneSpriteTable)arg.Arg.Other;
@@ -108,7 +108,7 @@ namespace Roguegard
                         }),
                 };
 
-                remove = SelectOption.Create<RogueMenuManager, ReadOnlyMenuArg>(
+                remove = SelectOption.Create<MMgr, MArg>(
                     "<#f00>削除",
                     (manager, arg) =>
                     {
@@ -152,11 +152,11 @@ namespace Roguegard
         {
             private static string[] elms;
 
-            private readonly ScrollViewTemplate<string, RogueMenuManager, ReadOnlyMenuArg> view = new()
+            private readonly ScrollViewTemplate<string, MMgr, MArg> view = new()
             {
             };
 
-            public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
+            public override void OpenScreen(in MMgr manager, in MArg arg)
             {
                 if (elms == null)
                 {
@@ -207,7 +207,7 @@ namespace Roguegard
                 //back = new[] { new ExitListMenuSelectOption(Back) };
             }
 
-            public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
+            public override void OpenScreen(in MMgr manager, in MArg arg)
             {
                 throw new System.NotImplementedException();
             }

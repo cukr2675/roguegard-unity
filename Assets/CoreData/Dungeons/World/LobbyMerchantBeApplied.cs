@@ -45,13 +45,13 @@ namespace Roguegard
         {
             public LobbyMerchantBeApplied parent;
 
-            private readonly SpeechBoxViewTemplate<RogueMenuManager, ReadOnlyMenuArg> view = new()
+            private readonly SpeechBoxViewTemplate<MMgr, MArg> view = new()
             {
             };
 
             public override bool IsIncremental => true;
 
-            public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
+            public override void OpenScreen(in MMgr manager, in MArg arg)
             {
                 view.ShowTemplate($"¤lu‚í‚½‚µ‚Í¤l‚Å‚· ‚Å‚à‚Ü‚¾€”õ’†‚Å‚·{view.VA}\n", manager, arg)
                     ?
@@ -70,11 +70,11 @@ namespace Roguegard
         {
             public LobbyMerchantBeApplied parent;
 
-            private readonly ScrollViewTemplate<ScriptableStartingItem, RogueMenuManager, ReadOnlyMenuArg> view = new()
+            private readonly ScrollViewTemplate<ScriptableStartingItem, MMgr, MArg> view = new()
             {
             };
 
-            public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
+            public override void OpenScreen(in MMgr manager, in MArg arg)
             {
                 view.ShowTemplate(parent._items, manager, arg)
                     ?

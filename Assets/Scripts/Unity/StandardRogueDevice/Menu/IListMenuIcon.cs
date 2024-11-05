@@ -6,6 +6,6 @@ namespace Roguegard.Device
 {
     internal interface IListMenuIcon
     {
-        public void GetIcon(RogueMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg, out Sprite sprite, out Color color);
+        public void GetIcon(MMgr manager, RogueObj self, RogueObj user, in RogueMethodArgument arg, out Sprite sprite, out Color color);
     }
 }

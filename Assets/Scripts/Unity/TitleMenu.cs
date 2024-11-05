@@ -109,7 +109,7 @@ namespace RoguegardUnity
         private class MainScreen : RogueMenuScreen
         {
             private readonly TitleMenu parent;
-            private readonly MainMenuViewTemplate<RogueMenuManager, ReadOnlyMenuArg> view;
+            private readonly MainMenuViewTemplate<MMgr, MArg> view;
 
             public MainScreen(TitleMenu parent)
             {
@@ -121,7 +121,7 @@ namespace RoguegardUnity
                 };
             }
 
-            public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
+            public override void OpenScreen(in MMgr manager, in MArg arg)
             {
                 view.ShowTemplate(manager, arg)
                     ?
@@ -163,26 +163,26 @@ namespace RoguegardUnity
         /// </summary>
         private class NewGameScreen : RogueMenuScreen
         {
-            private readonly ScrollViewTemplate<object, RogueMenuManager, ReadOnlyMenuArg> view;
+            private readonly ScrollViewTemplate<object, MMgr, MArg> view;
 
             public NewGameScreen(LoadFadeOutScreen loadFadeOutScreen)
             {
                 view = new()
                 {
-                    ScrollSubViewName = RogueMenuManager.CharacterCreationName,
+                    ScrollSubViewName = MMgr.CharacterCreationName,
                     BackAnchorList = new()
                     {
                         // プリセット読み込みボタン（OpenScreen で設定）
                         null,
 
                         // キャラクタークリエイト完了ボタン
-                        SelectOption.Create<RogueMenuManager, ReadOnlyMenuArg>(
+                        SelectOption.Create<MMgr, MArg>(
                             ":Done", ChoicesMenuScreen.SaveBackDialog(":DoneMsg", ":SaveAndStart", loadFadeOutScreen, ":QuitWithoutSaving", null))
                     },
                 };
             }
 
-            public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
+            public override void OpenScreen(in MMgr manager, in MArg arg)
             {
                 // プリセット読み込みボタンを設定する
                 view.BackAnchorList[0] = manager.LoadPresetSelectOptionOfCharacterCreation;
@@ -201,7 +201,7 @@ namespace RoguegardUnity
         private class LoadFadeOutScreen : RogueMenuScreen
         {
             private readonly TitleMenu parent;
-            private readonly FadeOutInViewTemplate<RogueMenuManager, ReadOnlyMenuArg> view;
+            private readonly FadeOutInViewTemplate<MMgr, MArg> view;
 
             public LoadFadeOutScreen(TitleMenu parent)
             {
@@ -212,7 +212,7 @@ namespace RoguegardUnity
                 };
             }
 
-            public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
+            public override void OpenScreen(in MMgr manager, in MArg arg)
             {
                 view.FadeOut(manager, arg)
                     ?
@@ -261,12 +261,12 @@ namespace RoguegardUnity
         {
             public IReadOnlyList<CreditData> credits;
 
-            private readonly ScrollViewTemplate<CreditData, RogueMenuManager, ReadOnlyMenuArg> view = new()
+            private readonly ScrollViewTemplate<CreditData, MMgr, MArg> view = new()
             {
                 Title = ":Credit",
             };
 
-            public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
+            public override void OpenScreen(in MMgr manager, in MArg arg)
             {
                 view.ShowTemplate(credits, manager, arg)
                     ?
@@ -291,13 +291,13 @@ namespace RoguegardUnity
             /// </summary>
             private class CreditDetailsScreen : RogueMenuScreen
             {
-                private readonly DialogViewTemplate<RogueMenuManager, ReadOnlyMenuArg> view = new()
+                private readonly DialogViewTemplate<MMgr, MArg> view = new()
                 {
                     DialogSubViewName = StandardSubViewTable.WidgetsName,
                     BackAnchorSubViewName = StandardSubViewTable.BackAnchorName,
                 };
 
-                public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
+                public override void OpenScreen(in MMgr manager, in MArg arg)
                 {
                     var credit = (CreditData)arg.Arg.Other;
 
@@ -322,13 +322,13 @@ namespace RoguegardUnity
             /// </summary>
             private class URLDialog : RogueMenuScreen
             {
-                private readonly SpeechBoxViewTemplate<RogueMenuManager, ReadOnlyMenuArg> view = new()
+                private readonly SpeechBoxViewTemplate<MMgr, MArg> view = new()
                 {
                 };
 
                 public override bool IsIncremental => true;
 
-                public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
+                public override void OpenScreen(in MMgr manager, in MArg arg)
                 {
                     var url = (string)arg.Arg.Other;
                     view.ShowTemplate($"{url} へ移動しますか？", manager, arg)
@@ -345,7 +345,7 @@ namespace RoguegardUnity
                         .Build();
                 }
 
-                public override void CloseScreen(RogueMenuManager manager, bool back)
+                public override void CloseScreen(MMgr manager, bool back)
                 {
                     view.HideTemplate(manager, back);
                 }

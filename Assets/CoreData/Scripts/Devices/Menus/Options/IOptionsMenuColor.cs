@@ -6,10 +6,10 @@ namespace Roguegard.Device
 {
     public interface IOptionsMenuColor
     {
-        string GetName(RogueMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg);
+        string GetName(MMgr manager, RogueObj self, RogueObj user, in RogueMethodArgument arg);
 
-        Color GetValue(RogueMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg);
+        Color GetValue(MMgr manager, RogueObj self, RogueObj user, in RogueMethodArgument arg);
 
-        void SetValue(RogueMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg, Color value);
+        void SetValue(MMgr manager, RogueObj self, RogueObj user, in RogueMethodArgument arg, Color value);
     }
 }

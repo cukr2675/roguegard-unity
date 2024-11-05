@@ -53,8 +53,8 @@ namespace RoguegardUnity
             string infoText1 = null;
             string infoText2 = null;
             if (handler is IRogueElementHandler rogueElementHandler &&
-                Manager is RogueMenuManager manager &&
-                Arg is ReadOnlyMenuArg arg)
+                Manager is MMgr manager &&
+                Arg is MArg arg)
             {
                 rogueElementHandler.GetRogueInfo(
                     element, manager, arg, out var name, ref color, ref icon, ref iconColor, ref stack, ref stars, ref infoText1, ref infoText2);

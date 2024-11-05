@@ -31,7 +31,7 @@ namespace RoguegardUnity
 
         public ObjsMenu(ObjCommandMenu commandMenu, PutIntoChestCommandMenu putInCommandMenu, TakeOutFromChestCommandMenu takeOutCommandMenu)
         {
-            Close = SelectOption.Create<RogueMenuManager, ReadOnlyMenuArg>(":Close", (manager, arg) => manager.Done());
+            Close = SelectOption.Create<MMgr, MArg>(":Close", (manager, arg) => manager.Done());
             Items = new ItemsMenu() { commandMenu = commandMenu };
             Ground = new GroundMenu() { commandMenu = commandMenu };
             PutIntoChest = new PutIntoChestMenu() { commandMenu = putInCommandMenu };
@@ -46,11 +46,11 @@ namespace RoguegardUnity
 
             public RogueMenuScreen commandMenu;
 
-            private readonly SelectOption<RogueMenuManager, ReadOnlyMenuArg> sortSelectOption;
+            private readonly SelectOption<MMgr, MArg> sortSelectOption;
 
             private static CategorizedSortTable sortTable;
 
-            private readonly ScrollViewTemplate<RogueObj, RogueMenuManager, ReadOnlyMenuArg> view = new()
+            private readonly ScrollViewTemplate<RogueObj, MMgr, MArg> view = new()
             {
             };
 
@@ -62,13 +62,13 @@ namespace RoguegardUnity
                 {
                     view.BackAnchorList = new List<ISelectOption>
                     {
-                        SelectOption.Create<RogueMenuManager, ReadOnlyMenuArg>(":Sort", Sort),
+                        SelectOption.Create<MMgr, MArg>(":Sort", Sort),
                         BackSelectOption.Instance
                     };
                 }
             }
 
-            public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
+            public override void OpenScreen(in MMgr manager, in MArg arg)
             {
                 var list = GetObjs(arg.Self, arg.Arg.TargetObj);
                 var viewStateHolder = GetViewStateHolder(manager, arg);
@@ -89,12 +89,12 @@ namespace RoguegardUnity
                     .Build();
             }
 
-            protected virtual object GetViewStateHolder(RogueMenuManager manager, ReadOnlyMenuArg arg)
+            protected virtual object GetViewStateHolder(MMgr manager, MArg arg)
                 => arg.Arg.TargetObj;
 
             protected abstract List<RogueObj> GetObjs(RogueObj self, RogueObj targetObj);
 
-            protected virtual float GetDefaultViewPosition(RogueMenuManager manager, ReadOnlyMenuArg arg)
+            protected virtual float GetDefaultViewPosition(MMgr manager, MArg arg)
             {
                 if (!Skip0WeightObjs) return 0f;
 
@@ -108,7 +108,7 @@ namespace RoguegardUnity
                 return 0f;
             }
 
-            private void Sort(RogueMenuManager manager, ReadOnlyMenuArg arg)
+            private void Sort(MMgr manager, MArg arg)
             {
                 //manager.AddObject(DeviceKw.EnqueueSE, StdKw.Sort);
 

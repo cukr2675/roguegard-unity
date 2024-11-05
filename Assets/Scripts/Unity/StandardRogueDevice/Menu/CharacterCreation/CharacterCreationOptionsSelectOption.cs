@@ -69,8 +69,8 @@ namespace RoguegardUnity
 
         void ISelectOption.HandleClick(IListMenuManager iManager, IListMenuArg iArg)
         {
-            var manager = (RogueMenuManager)iManager;
-            var arg = (ReadOnlyMenuArg)iArg;
+            var manager = (MMgr)iManager;
+            var arg = (MArg)iArg;
             manager.PushMenuScreen(nextMenu, arg.Self, other: builder);
         }
 
@@ -80,11 +80,11 @@ namespace RoguegardUnity
 
             public ICharacterCreationDatabase database;
 
-            private readonly ScrollViewTemplate<object, RogueMenuManager, ReadOnlyMenuArg> view = new()
+            private readonly ScrollViewTemplate<object, MMgr, MArg> view = new()
             {
             };
 
-            public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
+            public override void OpenScreen(in MMgr manager, in MArg arg)
             {
                 var builder = arg.Arg.Other;
 

@@ -21,7 +21,7 @@ namespace RoguegardUnity
         private readonly CharacterCreationOptionsSelectOption singleItemMemberSelectOption;
         private readonly CharacterCreationOptionsSelectOption alphabetTypeMemberSelectOption;
 
-        private readonly VariableWidgetsViewTemplate<RogueMenuManager, ReadOnlyMenuArg> view;
+        private readonly VariableWidgetsViewTemplate<MMgr, MArg> view;
 
         public CharacterCreationOptionMenu(ICharacterCreationDatabase database)
         {
@@ -42,7 +42,7 @@ namespace RoguegardUnity
             removeSelectOption.builder = builder;
         }
 
-        public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
+        public override void OpenScreen(in MMgr manager, in MArg arg)
         {
             if (arg.Arg.Other is RaceBuilder raceBuilder)
             {
@@ -51,7 +51,7 @@ namespace RoguegardUnity
                     new object[]
                     {
                         "職業／二つ名",
-                        InputFieldViewWidget.CreateOption<RogueMenuManager, ReadOnlyMenuArg>(
+                        InputFieldViewWidget.CreateOption<MMgr, MArg>(
                             (manager, arg) => removeSelectOption.builder.ShortName,
                             (manager, arg, value) => removeSelectOption.builder.ShortName = value)
                     });
@@ -59,7 +59,7 @@ namespace RoguegardUnity
                 elms.Add(
                     new object[]
                     {
-                        SelectOption.Create<RogueMenuManager, ReadOnlyMenuArg>(
+                        SelectOption.Create<MMgr, MArg>(
                             (manager, arg) =>
                             {
                                 if (arg.Arg.Other is RaceBuilder raceBuilder)
@@ -81,7 +81,7 @@ namespace RoguegardUnity
                             })
                     });
                 elms.Add(
-                    SelectOption.Create<RogueMenuManager, ReadOnlyMenuArg>(
+                    SelectOption.Create<MMgr, MArg>(
                         $"<#{ColorUtility.ToHtmlStringRGBA(raceBuilder.BodyColor)}>カラー",
                         ColorPicker()));
                 AddMemberElements(raceBuilder);
@@ -91,7 +91,7 @@ namespace RoguegardUnity
                 elms.Clear();
                 elms.Add(selectOption.Set(appearanceBuilder));
                 elms.Add(
-                    SelectOption.Create<RogueMenuManager, ReadOnlyMenuArg>(
+                    SelectOption.Create<MMgr, MArg>(
                         $"<#{ColorUtility.ToHtmlStringRGBA(appearanceBuilder.Color)}>カラー",
                         ColorPicker()));
                 AddMemberElements(appearanceBuilder);
@@ -105,7 +105,7 @@ namespace RoguegardUnity
                     new object[]
                     {
                         "名前",
-                        InputFieldViewWidget.CreateOption<RogueMenuManager, ReadOnlyMenuArg>(
+                        InputFieldViewWidget.CreateOption<MMgr, MArg>(
                             (manager, arg) =>
                             {
                                 if (arg.Arg.Other is IntrinsicBuilder intrinsicBuilder)
@@ -139,7 +139,7 @@ namespace RoguegardUnity
                     new object[]
                     {
                         "個数",
-                        InputFieldViewWidget.CreateOption<RogueMenuManager, ReadOnlyMenuArg>(
+                        InputFieldViewWidget.CreateOption<MMgr, MArg>(
                             (manager, arg) =>
                             {
                                 if (arg.Arg.Other is StartingItemBuilder startingItemBuilder)
@@ -185,7 +185,7 @@ namespace RoguegardUnity
                 else if (member is EquipMember equipMember)
                 {
                     elms.Add(
-                        SelectOption.Create<RogueMenuManager, ReadOnlyMenuArg>(
+                        SelectOption.Create<MMgr, MArg>(
                             (manager, arg) =>
                             {
                                 return $"<#808080>装備する：{equipMember.IsEquipped}";
@@ -208,7 +208,7 @@ namespace RoguegardUnity
                         new object[]
                         {
                             "サイズ",
-                            InputFieldViewWidget.CreateOption<RogueMenuManager, ReadOnlyMenuArg>(
+                            InputFieldViewWidget.CreateOption<MMgr, MArg>(
                                 (manager, arg) => standardRaceMember.Size.ToString(),
                                 (manager, arg, valueString) =>
                                 {
@@ -223,9 +223,9 @@ namespace RoguegardUnity
             }
         }
 
-        private ColorPickerMenuScreen<RogueMenuManager, ReadOnlyMenuArg> ColorPicker()
+        private ColorPickerMenuScreen<MMgr, MArg> ColorPicker()
         {
-            return new ColorPickerMenuScreen<RogueMenuManager, ReadOnlyMenuArg>(
+            return new ColorPickerMenuScreen<MMgr, MArg>(
                 (manager, arg) =>
                 {
                     if (arg.Arg.Other is RaceBuilder raceBuilder)
@@ -265,8 +265,8 @@ namespace RoguegardUnity
 
             void ISelectOption.HandleClick(IListMenuManager iManager, IListMenuArg iArg)
             {
-                var manager = (RogueMenuManager)iManager;
-                var arg = (ReadOnlyMenuArg)iArg;
+                var manager = (MMgr)iManager;
+                var arg = (MArg)iArg;
 
                 if (arg.Arg.Other is IMemberable memberable)
                 {
@@ -305,11 +305,11 @@ namespace RoguegardUnity
             private RaceBuilder builder;
             private readonly List<IRogueGender> list = new();
 
-            private readonly ScrollViewTemplate<IRogueGender, RogueMenuManager, ReadOnlyMenuArg> view = new()
+            private readonly ScrollViewTemplate<IRogueGender, MMgr, MArg> view = new()
             {
             };
 
-            public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
+            public override void OpenScreen(in MMgr manager, in MArg arg)
             {
                 builder = (RaceBuilder)arg.Arg.Other;
                 var genders = builder.Option.Genders;

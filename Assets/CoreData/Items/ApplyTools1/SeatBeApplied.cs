@@ -43,11 +43,11 @@ namespace Roguegard
         {
             private readonly List<RogueObj> objs = new();
 
-            private readonly ScrollViewTemplate<RogueObj, RogueMenuManager, ReadOnlyMenuArg> view = new()
+            private readonly ScrollViewTemplate<RogueObj, MMgr, MArg> view = new()
             {
             };
 
-            public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
+            public override void OpenScreen(in MMgr manager, in MArg arg)
             {
                 var player = arg.Self;
                 var worldInfo = RogueWorldInfo.GetByCharacter(player);

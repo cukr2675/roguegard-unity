@@ -15,16 +15,16 @@ namespace RoguegardUnity
 
         private float beforeProgress;
 
-        private readonly DialogViewTemplate<RogueMenuManager, ReadOnlyMenuArg> view = new()
+        private readonly DialogViewTemplate<MMgr, MArg> view = new()
         {
             DialogSubViewName = StandardSubViewTable.OverlayName,
         };
 
-        public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
+        public override void OpenScreen(in MMgr manager, in MArg arg)
         {
             beforeProgress = 0f;
             view.ShowTemplate("ê¢äEÇ∆ìØä˙íÜÅc", manager, arg)
-                ?.Append(ProgressBarViewWidget.CreateOption<RogueMenuManager, ReadOnlyMenuArg>((manager, arg) =>
+                ?.Append(ProgressBarViewWidget.CreateOption<MMgr, MArg>((manager, arg) =>
                 {
                     if (Progress >= 1f && beforeProgress < 1f) { manager.Done(); }
                     beforeProgress = Progress;

@@ -170,11 +170,11 @@ namespace Roguegard
         {
             public string message;
 
-            private readonly SpeechBoxViewTemplate<RogueMenuManager, ReadOnlyMenuArg> view = new()
+            private readonly SpeechBoxViewTemplate<MMgr, MArg> view = new()
             {
             };
 
-            public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
+            public override void OpenScreen(in MMgr manager, in MArg arg)
             {
                 view.ShowTemplate($"{arg.Self.GetName()}はレベルが上がった！{view.VA}\n{message}", manager, arg)
                     ?

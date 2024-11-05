@@ -15,7 +15,7 @@ namespace RoguegardUnity
     {
         private readonly ICharacterCreationDatabase database;
         private readonly List<object> elms;
-        private readonly ScrollViewTemplate<object, RogueMenuManager, ReadOnlyMenuArg> view;
+        private readonly ScrollViewTemplate<object, MMgr, MArg> view;
 
         private CharacterCreationDataBuilder builder;
 
@@ -34,7 +34,7 @@ namespace RoguegardUnity
             this.builder = builder;
         }
 
-        public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
+        public override void OpenScreen(in MMgr manager, in MArg arg)
         {
             elms.Clear();
             AddOptionsTo(elms, arg.Self, (System.Type)arg.Arg.Other, database);

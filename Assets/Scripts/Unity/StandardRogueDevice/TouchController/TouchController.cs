@@ -390,7 +390,7 @@ namespace RoguegardUnity
         {
             _inputController.SetEnabled(false);
             _headerController.UpdateHeader(player);
-            _menuController.PushInitialMenuScreen(menu, new MenuArg(self, user, arg).ReadOnly);
+            _menuController.PushInitialMenuScreen(menu, new MArg.Builder(self, user, arg).ReadOnly);
         }
 
         public void CloseMenu()

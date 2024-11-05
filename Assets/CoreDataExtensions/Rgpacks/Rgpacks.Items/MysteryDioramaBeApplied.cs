@@ -35,12 +35,12 @@ namespace Roguegard.Rgpacks
 
             private static readonly List<object> elms = new();
 
-            private readonly ScrollViewTemplate<object, RogueMenuManager, ReadOnlyMenuArg> view = new()
+            private readonly ScrollViewTemplate<object, MMgr, MArg> view = new()
             {
                 ScrollSubViewName = StandardSubViewTable.WidgetsName,
             };
 
-            public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
+            public override void OpenScreen(in MMgr manager, in MArg arg)
             {
                 var diorama = arg.Arg.TargetObj;
                 var dioramaFloorObjs = diorama.Space.Objs;
@@ -59,7 +59,7 @@ namespace Roguegard.Rgpacks
                         new object[]
                         {
                             "アセットID",
-                            InputFieldViewWidget.CreateOption<RogueMenuManager, ReadOnlyMenuArg>(
+                            InputFieldViewWidget.CreateOption<MMgr, MArg>(
                                 (manager, arg) =>
                                 {
                                     var diorama = arg.Arg.TargetObj;
@@ -98,7 +98,7 @@ namespace Roguegard.Rgpacks
                         }
                     })
 
-                    .Append(SelectOption.Create<RogueMenuManager, ReadOnlyMenuArg>(
+                    .Append(SelectOption.Create<MMgr, MArg>(
                         "+ 階層を追加",
                         (manager, arg) =>
                         {
@@ -115,13 +115,13 @@ namespace Roguegard.Rgpacks
         {
             public ScriptableStartingItem _newFloor;
 
-            private readonly DialogViewTemplate<RogueMenuManager, ReadOnlyMenuArg> view = new()
+            private readonly DialogViewTemplate<MMgr, MArg> view = new()
             {
                 DialogSubViewName = StandardSubViewTable.WidgetsName,
                 BackAnchorSubViewName = StandardSubViewTable.BackAnchorName,
             };
 
-            public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
+            public override void OpenScreen(in MMgr manager, in MArg arg)
             {
                 view.ShowTemplate("", manager, arg)
                     ?
@@ -129,7 +129,7 @@ namespace Roguegard.Rgpacks
                         new object[]
                         {
                             "アセットID",
-                            InputFieldViewWidget.CreateOption<RogueMenuManager, ReadOnlyMenuArg>(
+                            InputFieldViewWidget.CreateOption<MMgr, MArg>(
                                 (manager, arg) =>
                                 {
                                     var diorama = arg.Arg.TargetObj;

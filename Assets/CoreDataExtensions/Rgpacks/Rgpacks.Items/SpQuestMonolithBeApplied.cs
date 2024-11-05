@@ -29,7 +29,7 @@ namespace Roguegard.Rgpacks
         {
             private readonly SpQuestMonolithBeApplied parent;
 
-            private readonly MainMenuViewTemplate<RogueMenuManager, ReadOnlyMenuArg> view = new()
+            private readonly MainMenuViewTemplate<MMgr, MArg> view = new()
             {
                 PrimaryCommandSubViewName = StandardSubViewTable.ScrollName,
             };
@@ -39,7 +39,7 @@ namespace Roguegard.Rgpacks
                 this.parent = parent;
             }
 
-            public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
+            public override void OpenScreen(in MMgr manager, in MArg arg)
             {
                 view.ShowTemplate(manager, arg)
                     ?
@@ -50,7 +50,7 @@ namespace Roguegard.Rgpacks
                     .Build();
             }
 
-            private static void Playtest(RogueMenuManager manager, ReadOnlyMenuArg arg)
+            private static void Playtest(MMgr manager, MArg arg)
             {
                 var monolith = arg.Arg.Tool;
                 var spQuestAtelier = monolith.Location;
@@ -58,7 +58,7 @@ namespace Roguegard.Rgpacks
                 RogueDevice.Add(DeviceKw.StartPlaytest, rgpack);
             }
 
-            private static void Leave(RogueMenuManager manager, ReadOnlyMenuArg arg)
+            private static void Leave(MMgr manager, MArg arg)
             {
                 manager.AddObject(DeviceKw.EnqueueSE, CategoryKw.DownStairs);
                 default(IActiveRogueMethodCaller).LocateSavePoint(arg.Self, null, 0f, RogueWorldSavePointInfo.Instance, true);
@@ -72,11 +72,11 @@ namespace Roguegard.Rgpacks
         {
             public SpQuestMonolithBeApplied parent;
 
-            private readonly ScrollViewTemplate<ScriptableStartingItem, RogueMenuManager, ReadOnlyMenuArg> view = new()
+            private readonly ScrollViewTemplate<ScriptableStartingItem, MMgr, MArg> view = new()
             {
             };
 
-            public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
+            public override void OpenScreen(in MMgr manager, in MArg arg)
             {
                 var list = parent._shopItems;
 
@@ -100,15 +100,15 @@ namespace Roguegard.Rgpacks
 
         private class SetMainChartScreen : RogueMenuScreen
         {
-            private readonly DialogViewTemplate<RogueMenuManager, ReadOnlyMenuArg> view = new()
+            private readonly DialogViewTemplate<MMgr, MArg> view = new()
             {
                 DialogSubViewName = StandardSubViewTable.WidgetsName,
             };
 
-            public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
+            public override void OpenScreen(in MMgr manager, in MArg arg)
             {
                 view.ShowTemplate("", manager, arg)
-                    ?.Append(InputFieldViewWidget.CreateOption<RogueMenuManager, ReadOnlyMenuArg>(
+                    ?.Append(InputFieldViewWidget.CreateOption<MMgr, MArg>(
                         (manager, arg) =>
                         {
                             var monolith = arg.Arg.Tool;

@@ -12,7 +12,7 @@ namespace RoguegardUnity
     internal class SelectFileMenuScreen : RogueMenuScreen
     {
         private RogueMenuScreen nextScreen;
-        private HandleClickElement<RogueMenuManager, ReadOnlyMenuArg> onNewFile;
+        private HandleClickElement<MMgr, MArg> onNewFile;
         private SelectFileMenuViewTemplate view;
         private readonly List<FileInfo> files = new();
 
@@ -23,8 +23,8 @@ namespace RoguegardUnity
         private SelectFileMenuScreen() { }
 
         public static SelectFileMenuScreen Load(
-            HandleClickElement<FileInfo, RogueMenuManager, ReadOnlyMenuArg> onSelectFile,
-            HandleClickElement<RogueMenuManager, ReadOnlyMenuArg> onNewFile = null)
+            HandleClickElement<FileInfo, MMgr, MArg> onSelectFile,
+            HandleClickElement<MMgr, MArg> onNewFile = null)
         {
             var instance = new SelectFileMenuScreen();
             instance.nextScreen = new SelectFileCommandMenuScreen(onSelectFile);
@@ -36,7 +36,7 @@ namespace RoguegardUnity
             {
             };
             instance.view.BackAnchorList.Insert(0,
-                SelectOption.Create<RogueMenuManager, ReadOnlyMenuArg>(":Import", (manager, arg) =>
+                SelectOption.Create<MMgr, MArg>(":Import", (manager, arg) =>
                 {
                     manager.PushMenuScreen(importScreen);
                     RogueFile.Import(StandardRogueDeviceSave.RootDirectory, errorMsg =>
@@ -55,8 +55,8 @@ namespace RoguegardUnity
         }
 
         public static SelectFileMenuScreen Save(
-            HandleClickElement<FileInfo, RogueMenuManager, ReadOnlyMenuArg> onSelectFile,
-            HandleClickElement<RogueMenuManager, ReadOnlyMenuArg> onNewFile = null)
+            HandleClickElement<FileInfo, MMgr, MArg> onSelectFile,
+            HandleClickElement<MMgr, MArg> onNewFile = null)
         {
             var instance = new SelectFileMenuScreen();
             instance.nextScreen = new ChoicesMenuScreen(
@@ -72,14 +72,14 @@ namespace RoguegardUnity
             return instance;
         }
 
-        public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
+        public override void OpenScreen(in MMgr manager, in MArg arg)
         {
             files.Clear();
             files.AddRange(StandardRogueDeviceSave.GetFiles());
 
             view.ShowTemplate(files, manager, arg)
                 ?
-                .VariableOnce(out var newArg, new MenuArg())
+                .VariableOnce(out var newArg, new MArg.Builder())
 
                 .IfOnce(
                     onNewFile != null, x => x
@@ -102,16 +102,16 @@ namespace RoguegardUnity
                 .Build();
         }
 
-        public static void ShowSaving(RogueMenuManager manager)
+        public static void ShowSaving(MMgr manager)
         {
             manager.PushMenuScreen(savingMenu);
         }
 
-        private static void LoadingCancel(RogueMenuManager manager, ReadOnlyMenuArg arg)
+        private static void LoadingCancel(MMgr manager, MArg arg)
         {
         }
 
-        public static void ReopenCallback(RogueMenuManager manager, string errorMsg)
+        public static void ReopenCallback(MMgr manager, string errorMsg)
         {
             if (errorMsg != null)
             {
@@ -123,26 +123,26 @@ namespace RoguegardUnity
             manager.Reopen();
         }
 
-        public static void ShowErrorMsg(RogueMenuManager manager, string errorMsg)
+        public static void ShowErrorMsg(MMgr manager, string errorMsg)
         {
             manager.PushMenuScreen(errorMsgDialog, other: errorMsg);
         }
 
-        private static void ErrorMsgOK(IListMenuManager manager, ReadOnlyMenuArg arg)
+        private static void ErrorMsgOK(IListMenuManager manager, MArg arg)
         {
             manager.BackOption.HandleClick(manager, arg);
         }
 
         private class ImportScreen : RogueMenuScreen
         {
-            private readonly DialogViewTemplate<RogueMenuManager, ReadOnlyMenuArg> view = new()
+            private readonly DialogViewTemplate<MMgr, MArg> view = new()
             {
                 DialogSubViewName = StandardSubViewTable.OverlayName,
             };
 
             public override bool IsIncremental => true;
 
-            public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
+            public override void OpenScreen(in MMgr manager, in MArg arg)
             {
                 view.ShowTemplate("インポート中…", manager, arg)
                     ?
@@ -151,7 +151,7 @@ namespace RoguegardUnity
                     .Build();
             }
 
-            public override void CloseScreen(RogueMenuManager manager, bool back)
+            public override void CloseScreen(MMgr manager, bool back)
             {
                 view.HideTemplate(manager, back);
             }

@@ -12,7 +12,7 @@ namespace RoguegardUnity
     /// <summary>
     /// メニュー UI
     /// </summary>
-    public class MenuController : RogueMenuManager
+    public class MenuController : MMgr
     {
         [SerializeField] private StatsWindow _statsWindow = null;
         public StatsWindow Stats => _statsWindow;
@@ -127,7 +127,7 @@ namespace RoguegardUnity
         }
 
         public override void PushMenuScreen(
-            MenuScreen<RogueMenuManager, ReadOnlyMenuArg> menuScreen,
+            MenuScreen<MMgr, MArg> menuScreen,
             RogueObj self = null, RogueObj user = null,
             RogueObj targetObj = null,
             int count = default,
@@ -137,11 +137,11 @@ namespace RoguegardUnity
             object other = null)
         {
             var arg = new RogueMethodArgument(targetObj, count, vector, value, tool, other);
-            PushMenuScreen(menuScreen, new MenuArg(self, user, arg).ReadOnly);
+            PushMenuScreen(menuScreen, new MArg.Builder(self, user, arg).ReadOnly);
         }
 
         public void PushInitialMenuScreen(
-            MenuScreen<RogueMenuManager, ReadOnlyMenuArg> menuScreen,
+            MenuScreen<MMgr, MArg> menuScreen,
             RogueObj self = null, RogueObj user = null,
             RogueObj targetObj = null,
             int count = default,
@@ -152,7 +152,7 @@ namespace RoguegardUnity
             bool enableTouchMask = true)
         {
             var arg = new RogueMethodArgument(targetObj, count, vector, value, tool, other);
-            PushInitialMenuScreen(menuScreen, new MenuArg(self, user, arg).ReadOnly, enableTouchMask);
+            PushInitialMenuScreen(menuScreen, new MArg.Builder(self, user, arg).ReadOnly, enableTouchMask);
         }
 
         public void OpenMainMenu(RogueObj subject)

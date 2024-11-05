@@ -10,20 +10,20 @@ namespace Roguegard.Device
     {
         private readonly string text;
         private readonly string buttonText;
-        private readonly HandleClickElement<RogueMenuManager, ReadOnlyMenuArg> buttonAction;
-        private readonly ProgressBarViewWidget.GetProgress<RogueMenuManager, ReadOnlyMenuArg> getProgress;
+        private readonly HandleClickElement<MMgr, MArg> buttonAction;
+        private readonly ProgressBarViewWidget.GetProgress<MMgr, MArg> getProgress;
         private readonly object[] elms;
 
         private float oldProgress;
 
-        private readonly DialogViewTemplate<RogueMenuManager, ReadOnlyMenuArg> view = new()
+        private readonly DialogViewTemplate<MMgr, MArg> view = new()
         {
         };
 
         public LoadingListMenu(
             string text, string buttonText,
-            HandleClickElement<RogueMenuManager, ReadOnlyMenuArg> buttonAction,
-            ProgressBarViewWidget.GetProgress<RogueMenuManager, ReadOnlyMenuArg> updateAction = null)
+            HandleClickElement<MMgr, MArg> buttonAction,
+            ProgressBarViewWidget.GetProgress<MMgr, MArg> updateAction = null)
         {
             this.text = text;
             this.buttonText = buttonText;
@@ -31,11 +31,11 @@ namespace Roguegard.Device
             this.getProgress = updateAction ?? delegate { return 0f; };
         }
 
-        public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
+        public override void OpenScreen(in MMgr manager, in MArg arg)
         {
             oldProgress = 0f;
             view.ShowTemplate(text, manager, arg)
-                ?.Append(ProgressBarViewWidget.CreateOption<RogueMenuManager, ReadOnlyMenuArg>((manager, arg) =>
+                ?.Append(ProgressBarViewWidget.CreateOption<MMgr, MArg>((manager, arg) =>
                 {
                     var progress = getProgress(manager, arg);
                     if (progress >= 1f && oldProgress < 1f) { manager.Done(); }

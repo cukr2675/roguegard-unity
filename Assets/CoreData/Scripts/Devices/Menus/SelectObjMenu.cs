@@ -11,7 +11,7 @@ namespace Roguegard.Device
         private readonly IDeviceCommandAction callback;
         private readonly List<RogueObj> list = new();
 
-        private readonly ScrollViewTemplate<RogueObj, RogueMenuManager, ReadOnlyMenuArg> view = new()
+        private readonly ScrollViewTemplate<RogueObj, MMgr, MArg> view = new()
         {
         };
 
@@ -20,7 +20,7 @@ namespace Roguegard.Device
             this.callback = callback;
         }
 
-        public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
+        public override void OpenScreen(in MMgr manager, in MArg arg)
         {
             list.Clear();
             for (int i = 0; i < arg.Self.Space.Objs.Count; i++)

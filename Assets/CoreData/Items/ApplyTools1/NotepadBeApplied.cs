@@ -21,13 +21,13 @@ namespace Roguegard
         {
             private static readonly object[] backAnchor = new object[]
             {
-                SelectOption.Create<RogueMenuManager, ReadOnlyMenuArg>("é¿çs", Execute),
-                SelectOption.Create<RogueMenuManager, ReadOnlyMenuArg>("ï¬Ç∂ÇÈ", Back),
+                SelectOption.Create<MMgr, MArg>("é¿çs", Execute),
+                SelectOption.Create<MMgr, MArg>("ï¬Ç∂ÇÈ", Back),
             };
 
             private IElementsSubViewStateProvider stateProvider;
 
-            public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
+            public override void OpenScreen(in MMgr manager, in MArg arg)
             {
                 var memo = arg.Arg.Tool;
                 var text = NotepadInfo.GetText(memo);
@@ -36,13 +36,13 @@ namespace Roguegard
                 manager.StandardSubViewTable.BackAnchor.Show(backAnchor, SelectOptionHandler.Instance, manager, arg, ref stateProvider);
             }
 
-            private static void Back(RogueMenuManager manager, ReadOnlyMenuArg arg)
+            private static void Back(MMgr manager, MArg arg)
             {
                 NotepadInfo.SetTo(arg.Arg.Tool, manager.TextEditorValue);
                 manager.Done();
             }
 
-            private static void Execute(RogueMenuManager manager, ReadOnlyMenuArg arg)
+            private static void Execute(MMgr manager, MArg arg)
             {
                 //var scroll = manager.GetView(DeviceKw.MenuTextEditor);
                 //if (parent._inputField.text.StartsWith("#!lua"))

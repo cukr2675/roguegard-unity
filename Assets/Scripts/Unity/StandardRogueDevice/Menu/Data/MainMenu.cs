@@ -31,7 +31,7 @@ namespace RoguegardUnity
             this.partyMenu = partyMenu;
         }
 
-        public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
+        public override void OpenScreen(in MMgr manager, in MArg arg)
         {
             view.ShowTemplate(manager, arg)
                 ?
@@ -45,9 +45,9 @@ namespace RoguegardUnity
                 .Build();
         }
 
-        private class ViewTemplate : MainMenuViewTemplate<RogueMenuManager, ReadOnlyMenuArg>
+        private class ViewTemplate : MainMenuViewTemplate<MMgr, MArg>
         {
-            protected override void ShowSubViews(RogueMenuManager manager, ReadOnlyMenuArg arg)
+            protected override void ShowSubViews(MMgr manager, MArg arg)
             {
                 base.ShowSubViews(manager, arg);
 
@@ -61,11 +61,11 @@ namespace RoguegardUnity
 
         private class LogMenu : RogueMenuScreen
         {
-            private readonly DialogViewTemplate<RogueMenuManager, ReadOnlyMenuArg> view = new()
+            private readonly DialogViewTemplate<MMgr, MArg> view = new()
             {
             };
 
-            public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
+            public override void OpenScreen(in MMgr manager, in MArg arg)
             {
                 view.ShowTemplate("", manager, arg)
                     ?.Build();
@@ -78,11 +78,11 @@ namespace RoguegardUnity
             private readonly QuestMenu questMenu = new();
             private readonly OptionsMenu optionsMenu = new();
 
-            private readonly MainMenuViewTemplate<RogueMenuManager, ReadOnlyMenuArg> view = new()
+            private readonly MainMenuViewTemplate<MMgr, MArg> view = new()
             {
             };
 
-            public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
+            public override void OpenScreen(in MMgr manager, in MArg arg)
             {
                 var worldInfo = RogueWorldInfo.GetByCharacter(RogueDevice.Primary.Player);
                 var inLobby = RogueDevice.Primary.Player.Location == worldInfo.Lobby;
@@ -122,11 +122,11 @@ namespace RoguegardUnity
 
             private class GiveUpMenu : RogueMenuScreen
             {
-                private readonly SpeechBoxViewTemplate<RogueMenuManager, ReadOnlyMenuArg> view = new()
+                private readonly SpeechBoxViewTemplate<MMgr, MArg> view = new()
                 {
                 };
 
-                public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
+                public override void OpenScreen(in MMgr manager, in MArg arg)
                 {
                     view.ShowTemplate(":GiveUpMsg", manager, arg)
                         ?.Option(":Yes", (manager, arg) =>
@@ -142,11 +142,11 @@ namespace RoguegardUnity
 
             private class QuestMenu : RogueMenuScreen
             {
-                private readonly DialogViewTemplate<RogueMenuManager, ReadOnlyMenuArg> view = new()
+                private readonly DialogViewTemplate<MMgr, MArg> view = new()
                 {
                 };
 
-                public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
+                public override void OpenScreen(in MMgr manager, in MArg arg)
                 {
                     if (!DungeonQuestInfo.TryGetQuest(arg.Self, out var quest)) throw new RogueException();
 
@@ -158,13 +158,13 @@ namespace RoguegardUnity
 
         private class OptionsMenu : RogueMenuScreen
         {
-            private readonly DialogViewTemplate<RogueMenuManager, ReadOnlyMenuArg> view = new()
+            private readonly DialogViewTemplate<MMgr, MArg> view = new()
             {
                 DialogSubViewName = StandardSubViewTable.WidgetsName,
                 BackAnchorSubViewName = StandardSubViewTable.BackAnchorName,
             };
 
-            public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
+            public override void OpenScreen(in MMgr manager, in MArg arg)
             {
                 view.ShowTemplate("", manager, arg)
                     ?
@@ -172,7 +172,7 @@ namespace RoguegardUnity
                         new object[]
                         {
                             "マスター音量",
-                            InputFieldViewWidget.CreateOption<RogueMenuManager, ReadOnlyMenuArg>(
+                            InputFieldViewWidget.CreateOption<MMgr, MArg>(
                                 (manager, arg) =>
                                 {
                                     var device = (StandardRogueDevice)RogueDevice.Primary;
@@ -204,11 +204,11 @@ namespace RoguegardUnity
             {
                 private readonly List<object> elms = new();
 
-                private readonly ScrollViewTemplate<object, RogueMenuManager, ReadOnlyMenuArg> view = new()
+                private readonly ScrollViewTemplate<object, MMgr, MArg> view = new()
                 {
                 };
 
-                public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
+                public override void OpenScreen(in MMgr manager, in MArg arg)
                 {
                     if (elms.Count != WindowFrameList.Count)
                     {

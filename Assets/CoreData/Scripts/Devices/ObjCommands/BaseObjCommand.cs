@@ -14,13 +14,13 @@ namespace Roguegard
     {
         public abstract string Name { get; }
 
-        ISelectOption IObjCommand.SelectOption => menuSelectOption ??= SelectOption.Create<RogueMenuManager, ReadOnlyMenuArg>(Name, (manager, arg) =>
+        ISelectOption IObjCommand.SelectOption => menuSelectOption ??= SelectOption.Create<MMgr, MArg>(Name, (manager, arg) =>
         {
             var deviceInfo = RogueDeviceEffect.Get(arg.Self);
             deviceInfo.SetDeviceCommand(this, arg.User, arg.Arg);
             manager.Done();
         });
-        private SelectOption<RogueMenuManager, ReadOnlyMenuArg> menuSelectOption;
+        private SelectOption<MMgr, MArg> menuSelectOption;
 
         protected void EnqueueMessageRule(RogueObj self, IKeyword keyword)
         {

@@ -12,14 +12,14 @@ namespace RoguegardUnity
     {
         public override bool IsIncremental => true;
 
-        private readonly MainMenuViewTemplate<RogueMenuManager, ReadOnlyMenuArg> view = new()
+        private readonly MainMenuViewTemplate<MMgr, MArg> view = new()
         {
             PrimaryCommandSubViewName = StandardSubViewTable.SecondaryCommandName,
         };
 
         private readonly CommandAction commandAction = new();
 
-        public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
+        public override void OpenScreen(in MMgr manager, in MArg arg)
         {
             var selectedSkill = (ISkill)arg.Arg.Other;
 
@@ -37,7 +37,7 @@ namespace RoguegardUnity
                 .Build();
         }
 
-        public override void CloseScreen(RogueMenuManager manager, bool back)
+        public override void CloseScreen(MMgr manager, bool back)
         {
             view.HideTemplate(manager, back);
         }

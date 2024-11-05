@@ -13,7 +13,7 @@ namespace RoguegardUnity
     {
         private readonly ISelectOption[] selectOptions;
 
-        private readonly CommandListViewTemplate<ISelectOption, RogueMenuManager, ReadOnlyMenuArg> view = new()
+        private readonly CommandListViewTemplate<ISelectOption, MMgr, MArg> view = new()
         {
         };
 
@@ -21,7 +21,7 @@ namespace RoguegardUnity
         {
             selectOptions = new ISelectOption[]
             {
-                SelectOption.Create<RogueMenuManager, ReadOnlyMenuArg>("取り出す", (manager, arg) =>
+                SelectOption.Create<MMgr, MArg>("取り出す", (manager, arg) =>
                 {
                     manager.Done();
                     
@@ -38,7 +38,7 @@ namespace RoguegardUnity
             };
         }
 
-        public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
+        public override void OpenScreen(in MMgr manager, in MArg arg)
         {
             view.ShowTemplate(selectOptions, manager, arg)
                 ?.Build();

@@ -46,7 +46,7 @@ namespace Roguegard.CharacterCreation
         public ISelectOption CreateDungeonSelectOption()
         {
             var floorMenu = new FloorMenu() { data = this };
-            return SelectOption.Create<RogueMenuManager, ReadOnlyMenuArg>(DescriptionName, (manager, arg) =>
+            return SelectOption.Create<MMgr, MArg>(DescriptionName, (manager, arg) =>
             {
                 manager.AddObject(DeviceKw.EnqueueSE, CategoryKw.DownStairs);
                 manager.Done();
@@ -127,13 +127,13 @@ namespace Roguegard.CharacterCreation
         {
             public DungeonCreationData data;
 
-            protected override string GetName(RogueMenuManager manager, RogueObj player, RogueObj empty, in RogueMethodArgument arg)
+            protected override string GetName(MMgr manager, RogueObj player, RogueObj empty, in RogueMethodArgument arg)
             {
                 var initialLevelText = DungeonInfo.GetLevelText(data._levelType, 1);
                 return $"{data.DescriptionName}\n{initialLevelText}";
             }
 
-            protected override void Activate(RogueMenuManager manager, RogueObj player, RogueObj empty, in RogueMethodArgument arg)
+            protected override void Activate(MMgr manager, RogueObj player, RogueObj empty, in RogueMethodArgument arg)
             {
                 data.StartDungeon(player, RogueRandom.Primary);
                 data.StartFloor(player, RogueRandom.Primary);

@@ -16,7 +16,7 @@ namespace RoguegardUnity
         private readonly ISelectOption[] selectOptions;
         private readonly RogueMenuScreen commandMenu;
 
-        private readonly MainMenuViewTemplate<RogueMenuManager, ReadOnlyMenuArg> view = new()
+        private readonly MainMenuViewTemplate<MMgr, MArg> view = new()
         {
         };
 
@@ -31,13 +31,13 @@ namespace RoguegardUnity
             commandMenu = objCommandMenu;
         }
 
-        public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
+        public override void OpenScreen(in MMgr manager, in MArg arg)
         {
             if (arg.Arg.TargetObj != null && arg.Arg.TargetObj.HasCollider && (arg.Self.Position - arg.Arg.TargetObj.Position).sqrMagnitude <= 2 &&
                 RoguegardSettings.ObjCommandTable.Categories.Contains(arg.Arg.TargetObj.Main.InfoSet.Category))
             {
                 // 長押ししたアイテムと隣接していた場合、アイテム向けのメニューを表示する
-                commandMenu.OpenScreen(manager, new MenuArg(arg.Self, null, new(tool: arg.Arg.TargetObj)).ReadOnly);
+                commandMenu.OpenScreen(manager, new MArg.Builder(arg.Self, null, new(tool: arg.Arg.TargetObj)).ReadOnly);
                 return;
             }
 

@@ -21,11 +21,11 @@ namespace RoguegardUnity
         public CharacterCreationOptionMenu NextMenu { get; set; }
         public CharacterCreationAddMenu AddMenu { get; set; }
 
-        private readonly ScrollViewTemplate<object, RogueMenuManager, ReadOnlyMenuArg> view = new()
+        private readonly ScrollViewTemplate<object, MMgr, MArg> view = new()
         {
         };
 
-        public override void OpenScreen(in RogueMenuManager manager, in ReadOnlyMenuArg arg)
+        public override void OpenScreen(in MMgr manager, in MArg arg)
         {
             if (!(arg.Arg.Other is CharacterCreationDataBuilder builder)) throw new RogueException();
 
