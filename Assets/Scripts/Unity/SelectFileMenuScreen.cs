@@ -138,6 +138,7 @@ namespace RoguegardUnity
             private readonly DialogViewTemplate<MMgr, MArg> view = new()
             {
                 DialogSubViewName = StandardSubViewTable.OverlayName,
+                BackAnchorSubViewName = null,
             };
 
             public override bool IsIncremental => true;

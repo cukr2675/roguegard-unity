@@ -5,15 +5,13 @@ using UnityEngine;
 using System.Diagnostics;
 using ListingMF;
 using Roguegard;
-using Roguegard.Device;
 
 namespace RoguegardUnity
 {
     public class MessageController : MonoBehaviour
     {
-        [SerializeField] private LogMenuView _logWindow = null;
-
         [SerializeField] private MessageBoxSubView _messageBox = null;
+        [SerializeField] private MessageBoxSubView _logWindow = null;
 
         private bool messageBoxIsVisible;
         private int showMessageTime;
@@ -43,7 +41,7 @@ namespace RoguegardUnity
 
             {
                 _messageBox.MessageBox.Append(text);
-                //_logWindow.Append(text);
+                _logWindow.MessageBox.Append(text);
                 showMessageTime = 0;
                 ShowMessage();
             }

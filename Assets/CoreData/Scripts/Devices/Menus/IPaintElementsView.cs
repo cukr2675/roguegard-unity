@@ -7,7 +7,7 @@ using Roguegard.Device;
 
 namespace Roguegard
 {
-    public interface IPaintElementsView : IElementsView
+    public interface IPaintElementsView //: IElementsView
     {
         Spanning<DotterBoard> Boards { get; }
         Color32 MainColor { get; }

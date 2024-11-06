@@ -80,6 +80,7 @@ namespace RoguegardUnity
 
             private readonly DialogViewTemplate<MMgr, MArg> view = new()
             {
+                BackAnchorSubViewName = null,
             };
 
             public override bool IsIncremental => true;

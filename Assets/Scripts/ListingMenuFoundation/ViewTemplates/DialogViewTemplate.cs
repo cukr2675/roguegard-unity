@@ -10,7 +10,7 @@ namespace ListingMF
     {
         public string DialogSubViewName { get; set; } = StandardSubViewTable.DialogName;
         public string CaptionBoxSubViewName { get; set; } = StandardSubViewTable.CaptionBoxName;
-        public string BackAnchorSubViewName { get; set; } = null;
+        public string BackAnchorSubViewName { get; set; } = StandardSubViewTable.BackAnchorName;
         public List<ISelectOption> BackAnchorList { get; set; } = new() { BackSelectOption.Instance };
 
         private object prevViewStateHolder;

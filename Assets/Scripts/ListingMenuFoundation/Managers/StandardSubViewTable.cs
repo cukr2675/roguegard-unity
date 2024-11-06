@@ -19,6 +19,10 @@ namespace ListingMF
         public IElementsSubView Widgets => _widgets;
         public static string WidgetsName => "Widgets";
 
+        [SerializeField] private LongMessageSubView _longMessage = null;
+        public MessageBoxSubView LongMessage => _longMessage;
+        public static string LongMessageName => "LongMessage";
+
         [SerializeField] private GridSubView _backAnchor = null;
         public IElementsSubView BackAnchor => _backAnchor;
         public static string BackAnchorName => "BackAnchor";
@@ -77,6 +81,7 @@ namespace ListingMF
             isInitialized = true;
 
             _scroll.Initialize();
+            _longMessage.Initialize();
             _backAnchor.Initialize();
             _forwardAnchor.Initialize();
             _primaryCommand.Initialize();
@@ -91,6 +96,7 @@ namespace ListingMF
             {
                 { ScrollName, _scroll },
                 { WidgetsName, _widgets },
+                { LongMessageName, _longMessage },
                 { BackAnchorName, _backAnchor },
                 { ForwardAnchorName, _forwardAnchor },
                 { PrimaryCommandName, _primaryCommand },

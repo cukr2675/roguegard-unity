@@ -61,14 +61,17 @@ namespace RoguegardUnity
 
         private class LogMenu : RogueMenuScreen
         {
-            private readonly DialogViewTemplate<MMgr, MArg> view = new()
+            private readonly MainMenuViewTemplate<MMgr, MArg> view = new()
             {
+                PrimaryCommandSubViewName = StandardSubViewTable.LongMessageName,
+                BackAnchorSubViewName = StandardSubViewTable.BackAnchorName,
             };
 
             public override void OpenScreen(in MMgr manager, in MArg arg)
             {
-                view.ShowTemplate("", manager, arg)
-                    ?.Build();
+                view.ShowTemplate(manager, arg)
+                    ?
+                    .Build();
             }
         }
 
@@ -142,16 +145,11 @@ namespace RoguegardUnity
 
             private class QuestMenu : RogueMenuScreen
             {
-                private readonly DialogViewTemplate<MMgr, MArg> view = new()
-                {
-                };
-
                 public override void OpenScreen(in MMgr manager, in MArg arg)
                 {
                     if (!DungeonQuestInfo.TryGetQuest(arg.Self, out var quest)) throw new RogueException();
 
-                    view.ShowTemplate(quest.ToString(), manager, arg)
-                        ?.Build();
+                    manager.SetQuest(arg.Self, quest, false);
                 }
             }
         }
@@ -161,7 +159,6 @@ namespace RoguegardUnity
             private readonly DialogViewTemplate<MMgr, MArg> view = new()
             {
                 DialogSubViewName = StandardSubViewTable.WidgetsName,
-                BackAnchorSubViewName = StandardSubViewTable.BackAnchorName,
             };
 
             public override void OpenScreen(in MMgr manager, in MArg arg)

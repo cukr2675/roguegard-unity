@@ -18,20 +18,24 @@ namespace RoguegardUnity
         private readonly DialogViewTemplate<MMgr, MArg> view = new()
         {
             DialogSubViewName = StandardSubViewTable.OverlayName,
+            BackAnchorSubViewName = null,
         };
 
         public override void OpenScreen(in MMgr manager, in MArg arg)
         {
             beforeProgress = 0f;
             view.ShowTemplate("ê¢äEÇ∆ìØä˙íÜÅc", manager, arg)
-                ?.Append(ProgressBarViewWidget.CreateOption<MMgr, MArg>((manager, arg) =>
+                ?
+                .Append(ProgressBarViewWidget.CreateOption<MMgr, MArg>((manager, arg) =>
                 {
                     if (Progress >= 1f && beforeProgress < 1f) { manager.Done(); }
                     beforeProgress = Progress;
 
                     return Progress;
                 }))
+
                 .AppendSelectOption("ìØä˙ÇíÜé~", (manager, arg) => Interrupt = true)
+
                 .Build();
         }
     }

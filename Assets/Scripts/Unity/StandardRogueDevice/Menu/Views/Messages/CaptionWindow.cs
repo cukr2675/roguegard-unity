@@ -37,33 +37,30 @@ namespace RoguegardUnity
         //{
         //}
 
-        //public void ShowCaption(string text)
-        //{
-        //    if (text.StartsWith(':') && !StandardRogueDeviceUtility.TryLocalize(text, out text))
-        //    {
-        //        text = "";
-        //    }
-        //    _text.SetText(text);
-        //    MenuController.Show(_canvasGroup, true);
-        //}
+        public static string ShowCaption(string text)
+        {
+            if (text.StartsWith(':') && !StandardRogueDeviceUtility.TryLocalize(text, out text))
+            {
+                text = "";
+            }
+            return text;
+        }
 
-        //public void ShowCaption(IRogueDescription description)
-        //{
-        //    var text = description.Caption;
-        //    if (text == null)
-        //    {
-        //        var name = description.Name;
-        //        if (name.StartsWith(':'))
-        //        {
-        //            if (!StandardRogueDeviceUtility.TryLocalize($"{name}::c", out text))
-        //            {
-        //                text = "";
-        //            }
-        //        }
-        //    }
-
-        //    _text.SetText(text);
-        //    MenuController.Show(_canvasGroup, true);
-        //}
+        public static string ShowCaption(IRogueDescription description)
+        {
+            var text = description.Caption;
+            if (text == null)
+            {
+                var name = description.Name;
+                if (name.StartsWith(':'))
+                {
+                    if (!StandardRogueDeviceUtility.TryLocalize($"{name}::c", out text))
+                    {
+                        text = "";
+                    }
+                }
+            }
+            return text;
+        }
     }
 }

@@ -12,6 +12,8 @@ namespace Roguegard.Device
 
         public abstract string TextEditorValue { get; }
 
+        public abstract object Paint { get; }
+
         public abstract ISelectOption LoadPresetSelectOptionOfCharacterCreation { get; }
 
         public abstract void PushMenuScreen(
@@ -26,12 +28,12 @@ namespace Roguegard.Device
             object other = null);
 
         public abstract void OpenTextEditor(string text);
-
-        public void Reopen()
-        {
-            //currentMenuIsDialog = true;
-            //Back();
-        }
+        public abstract void SetObj(object obj);
+        public abstract void SetResult(RogueObj player, RogueObj dungeon);
+        public abstract void SetGameOver(RogueObj player, RogueObj dungeon);
+        public abstract void SetQuest(RogueObj player, object quest, bool showSubmitButton);
+        public abstract void SetPaint(
+            object dotterBoards, RogueObj self, object other, int count, bool showSplitLine, Vector2[] pivots, HandleClickElement<MMgr, MArg> back);
 
         public abstract void AddInt(IKeyword keyword, int integer);
         public abstract void AddFloat(IKeyword keyword, float number);

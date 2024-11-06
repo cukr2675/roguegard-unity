@@ -25,6 +25,8 @@ namespace RoguegardUnity
         {
         };
 
+        public override bool IsIncremental => true;
+
         public ObjCommandMenu()
         {
             commands = new List<IObjCommand>();
@@ -51,6 +53,9 @@ namespace RoguegardUnity
             }
             selectOptions.Add(Details);
             selectOptions.Add(BackSelectOption.Instance);
+
+            view.Title = CaptionWindow.ShowCaption(tool.Main.InfoSet);
+
             view.ShowTemplate(selectOptions, manager, arg)
                 ?
                 .ElementNameFrom((selectOption, manager, arg) =>
@@ -66,10 +71,16 @@ namespace RoguegardUnity
                 .Build();
         }
 
+        public override void CloseScreen(MMgr manager, bool back)
+        {
+            view.HideTemplate(manager, back);
+        }
+
         private class SummaryMenuScreen : RogueMenuScreen
         {
             private readonly DialogViewTemplate<MMgr, MArg> view = new()
             {
+                DialogSubViewName = StandardSubViewTable.WidgetsName,
             };
 
             public override void OpenScreen(in MMgr manager, in MArg arg)
@@ -88,8 +99,7 @@ namespace RoguegardUnity
                     target = arg;
                 }
 
-                view.ShowTemplate(target?.ToString(), manager, arg)
-                    ?.Build();
+                manager.SetObj(target);
             }
         }
 
@@ -97,14 +107,17 @@ namespace RoguegardUnity
         {
             private readonly DialogViewTemplate<MMgr, MArg> view = new()
             {
+                DialogSubViewName = StandardSubViewTable.WidgetsName,
             };
 
             public override void OpenScreen(in MMgr manager, in MArg arg)
             {
-                var details = (arg.Arg.Tool ?? arg.Arg.TargetObj).Main.InfoSet.Details?.ToString();
+                var obj = arg.Arg.Tool ?? arg.Arg.TargetObj;
+                var details = DetailsMenuView.SetDescription(obj.Main.InfoSet);
 
                 view.ShowTemplate(details, manager, arg)
-                    ?.Build();
+                    ?
+                    .Build();
             }
         }
     }

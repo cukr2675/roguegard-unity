@@ -209,62 +209,55 @@ namespace Roguegard
 
             public override void OpenScreen(in MMgr manager, in MArg arg)
             {
-                throw new System.NotImplementedException();
+                var table = (PaintBoneSpriteTable)arg.Arg.Other;
+                var itemIndex = arg.Arg.Count;
+                var boneSprite = (PaintBoneSprite)table.Items[itemIndex];
+                switch (directionIndex)
+                {
+                    case 0:
+                        elms[0] = boneSprite.NormalFront;
+                        break;
+                    case 1:
+                        elms[0] = boneSprite.NormalRear;
+                        break;
+                    case 2:
+                        elms[0] = boneSprite.BackFront;
+                        break;
+                    case 3:
+                        elms[0] = boneSprite.BackRear;
+                        break;
+                }
+                var showsSplitLine = boneSprite.ShowsSplitLine(elms[0], out pivots[0], out pivots[1]);
+                manager.SetPaint(elms, arg.Self, table, itemIndex, showsSplitLine, pivots, Back);
             }
 
-            //public void OpenMenu(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            //{
-            //    var table = (PaintBoneSpriteTable)arg.Other;
-            //    var itemIndex = arg.Count;
-            //    var boneSprite = (PaintBoneSprite)table.Items[itemIndex];
-            //    switch (directionIndex)
-            //    {
-            //        case 0:
-            //            elms[0] = boneSprite.NormalFront;
-            //            break;
-            //        case 1:
-            //            elms[0] = boneSprite.NormalRear;
-            //            break;
-            //        case 2:
-            //            elms[0] = boneSprite.BackFront;
-            //            break;
-            //        case 3:
-            //            elms[0] = boneSprite.BackRear;
-            //            break;
-            //    }
-            //    var showsSplitLine = boneSprite.ShowsSplitLine(elms[0], out pivots[0], out pivots[1]);
-            //    var paint = (IPaintElementsView)manager.GetView(DeviceKw.MenuPaint);
-            //    paint.OpenView(SelectOptionPresenter.Instance, elms, manager, self, null, new(other: table, count: itemIndex));
-            //    paint.ShowSplitLine(showsSplitLine, pivots);
-            //    var leftAnchor = manager.GetView(DeviceKw.MenuLeftAnchor);
-            //    leftAnchor.OpenView(SelectOptionPresenter.Instance, back, manager, self, null, new(other: table, count: itemIndex));
-            //}
+            private void Back(MMgr manager, MArg arg)
+            {
+                var table = (PaintBoneSpriteTable)arg.Arg.Other;
+                var itemIndex = arg.Arg.Count;
+                var boneSprite = (PaintBoneSprite)table.Items[itemIndex];
+                var paint = (IPaintElementsView)manager.Paint;
+                switch (directionIndex)
+                {
+                    case 0:
+                    case 1:
+                        paint.Boards[0].CopyTo(boneSprite.NormalFront);
+                        boneSprite.BackRear = boneSprite.NormalFront;
+                        break;
+                    case 2:
+                    case 3:
+                        paint.Boards[0].CopyTo(boneSprite.NormalRear);
+                        boneSprite.BackFront = boneSprite.NormalRear;
+                        break;
+                }
+                table.MainColor = paint.MainColor;
+                for (int i = 0; i < paint.Palette.Count; i++)
+                {
+                    table.SetPalette(i, paint.Palette[i]);
+                }
 
-            //private void Back(RogueMenuManager manager, ReadOnlyMenuArg arg)
-            //{
-            //    var table = (PaintBoneSpriteTable)arg.Arg.Other;
-            //    var itemIndex = arg.Arg.Count;
-            //    var boneSprite = (PaintBoneSprite)table.Items[itemIndex];
-            //    var paint = (IPaintElementsView)manager.GetView(DeviceKw.MenuPaint);
-            //    switch (directionIndex)
-            //    {
-            //        case 0:
-            //        case 1:
-            //            paint.Boards[0].CopyTo(boneSprite.NormalFront);
-            //            boneSprite.BackRear = boneSprite.NormalFront;
-            //            break;
-            //        case 2:
-            //        case 3:
-            //            paint.Boards[0].CopyTo(boneSprite.NormalRear);
-            //            boneSprite.BackFront = boneSprite.NormalRear;
-            //            break;
-            //    }
-            //    table.MainColor = paint.MainColor;
-            //    for (int i = 0; i < paint.Palette.Count; i++)
-            //    {
-            //        table.SetPalette(i, paint.Palette[i]);
-            //    }
-            //}
+                manager.Back();
+            }
         }
     }
 }

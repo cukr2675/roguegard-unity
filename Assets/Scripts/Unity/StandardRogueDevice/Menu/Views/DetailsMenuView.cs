@@ -46,21 +46,21 @@ namespace RoguegardUnity
         //    SetDescription(obj.Main.InfoSet);
         //}
 
-        //public void SetDescription(IRogueDescription description)
-        //{
-        //    var details = description.Details;
-        //    if (details != null)
-        //    {
-        //        _text.text = details.ToString();
-        //        return;
-        //    }
+        public static string SetDescription(IRogueDescription description)
+        {
+            var details = description.Details;
+            if (details != null)
+            {
+                return details.ToString();
+            }
 
-        //    var name = description.Name;
-        //    if (name.StartsWith(':'))
-        //    {
-        //        _text.text = StandardRogueDeviceUtility.Localize($"{name}::d");
-        //        return;
-        //    }
-        //}
+            var name = description.Name;
+            if (name.StartsWith(':'))
+            {
+                return StandardRogueDeviceUtility.Localize($"{name}::d");
+            }
+
+            return null;
+        }
     }
 }

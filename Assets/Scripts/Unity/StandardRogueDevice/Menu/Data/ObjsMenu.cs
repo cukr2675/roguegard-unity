@@ -46,8 +46,6 @@ namespace RoguegardUnity
 
             public RogueMenuScreen commandMenu;
 
-            private readonly SelectOption<MMgr, MArg> sortSelectOption;
-
             private static CategorizedSortTable sortTable;
 
             private readonly ScrollViewTemplate<RogueObj, MMgr, MArg> view = new()
@@ -62,7 +60,7 @@ namespace RoguegardUnity
                 {
                     view.BackAnchorList = new List<ISelectOption>
                     {
-                        SelectOption.Create<MMgr, MArg>(":Sort", Sort),
+                        SelectOption.Create<MMgr, MArg>(":Sort", Sort, "Sort"),
                         BackSelectOption.Instance
                     };
                 }
@@ -110,8 +108,6 @@ namespace RoguegardUnity
 
             private void Sort(MMgr manager, MArg arg)
             {
-                //manager.AddObject(DeviceKw.EnqueueSE, StdKw.Sort);
-
                 if (sortTable == null)
                 {
                     sortTable = new CategorizedSortTable(RoguegardSettings.ObjCommandTable.Categories);

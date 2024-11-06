@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using ListingMF;
 using Roguegard;
 using Roguegard.Device;
+using Roguegard.CharacterCreation;
 
 namespace RoguegardUnity
 {
@@ -16,6 +17,7 @@ namespace RoguegardUnity
     {
         [SerializeField] private StatsWindow _statsWindow = null;
         public StatsWindow Stats => _statsWindow;
+        [SerializeField] private SummaryMenuView _summary = null;
         [SerializeField] private CharacterCreationMenuView _characterCreation = null;
         public CharacterCreationMenuView CharacterCreation => _characterCreation;
         [SerializeField] private TextEditorMenuView _textEditorMenu = null;
@@ -48,9 +50,13 @@ namespace RoguegardUnity
 
         public override ISelectOption LoadPresetSelectOptionOfCharacterCreation => CharacterCreationMenuView.LoadPresetSelectOption;
 
+        public override object Paint => _paintMenu;
+
         internal void Initialize(
             SoundController soundController, RogueSpriteRendererPool rendererPool, bool touchMaskIsEnabled = true)
         {
+            BackOption = SelectOption.Create<MMgr, MArg>("<", (manager, arg) => manager.Back(), "Cancel");
+
             base.Initialize();
             var objCommandMenu = new ObjCommandMenu();
             var putInCommandMenu = new PutIntoChestCommandMenu();
@@ -63,6 +69,7 @@ namespace RoguegardUnity
             mainMenu = new MainMenu(objsMenu, skillsMenu, partyMenu);
             longDownMenu = new LongDownMenu(objsMenu, objCommandMenu);
 
+            _summary.Initialize();
             _characterCreation.Initialize(rendererPool);
             _textEditorMenu.Initialize();
             _paintMenu.Initialize();
@@ -115,9 +122,11 @@ namespace RoguegardUnity
         public override void HideAll(bool back = false)
         {
             base.HideAll(back);
+            _statsWindow.Hide(back);
+            _summary.Hide(back);
             _characterCreation.Hide(back);
             _textEditorMenu.Hide(back);
-            _statsWindow.Hide(back);
+            _paintMenu.Hide();
             if (_titleMenu != null) { _titleMenu.Hide(back); }
         }
 
@@ -234,6 +243,43 @@ namespace RoguegardUnity
         {
             _textEditorMenu.SetText(text);
             _textEditorMenu.Show();
+        }
+
+        public override void SetObj(object obj)
+        {
+            _summary.SetObj(this, obj);
+            _summary.Show();
+        }
+
+        public override void SetResult(RogueObj player, RogueObj dungeon)
+        {
+            _summary.SetResult(this, player, dungeon);
+            _summary.Show();
+        }
+
+        public override void SetGameOver(RogueObj player, RogueObj dungeon)
+        {
+            _summary.SetGameOver(this, player, dungeon);
+            _summary.Show();
+        }
+
+        public override void SetQuest(RogueObj player, object quest, bool showSubmitButton)
+        {
+            _summary.SetQuest(this, player, (DungeonQuest)quest, showSubmitButton);
+            _summary.Show();
+        }
+
+        public override void SetPaint(
+            object dotterBoards, RogueObj self, object other, int count, bool showSplitLine, Vector2[] pivots, HandleClickElement<MMgr, MArg> back)
+        {
+            _paintMenu.OpenView((RuntimeDotter.DotterBoard[])dotterBoards, self, other, count);
+            _paintMenu.ShowSplitLine(showSplitLine, pivots);
+
+            var arg = new MArg.Builder(self: self, arg: new(other: other, count: count));
+
+            IElementsSubViewStateProvider stateProvider = null;
+            StandardSubViewTable.BackAnchor.Show(new[] { SelectOption.Create("<", back) }, SelectOptionHandler.Instance, this, arg.ReadOnly, ref stateProvider);
+
         }
     }
 }

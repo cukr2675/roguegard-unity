@@ -37,11 +37,14 @@ namespace ListingMF
                 OnCompleted = null;
             });
 
-            _blocker.Initialize(this);
-            _blocker.SetElement(
-                SelectOptionHandler.Instance, SelectOption.Create<IListMenuManager, IListMenuArg>("", delegate { _onClickWithoutBlock.Invoke(); }));
-            _blocker.SetBlock(false);
-            _blocker.SetVisible(true, true);
+            if (_blocker != null)
+            {
+                _blocker.Initialize(this);
+                _blocker.SetElement(
+                    SelectOptionHandler.Instance, SelectOption.Create<IListMenuManager, IListMenuArg>("", delegate { _onClickWithoutBlock.Invoke(); }));
+                _blocker.SetBlock(false);
+                _blocker.SetVisible(true, true);
+            }
         }
 
         public override void SetParameters(
@@ -64,7 +67,7 @@ namespace ListingMF
             OnCompleted += handleEndAnimation;
         }
 
-        private void Update()
+        protected virtual void Update()
         {
             var speechingNow = _messageBox.IsTypingNow;
             if (speechingNow != isSpeechingNow)

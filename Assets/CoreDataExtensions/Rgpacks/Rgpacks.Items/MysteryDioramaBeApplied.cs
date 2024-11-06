@@ -118,7 +118,6 @@ namespace Roguegard.Rgpacks
             private readonly DialogViewTemplate<MMgr, MArg> view = new()
             {
                 DialogSubViewName = StandardSubViewTable.WidgetsName,
-                BackAnchorSubViewName = StandardSubViewTable.BackAnchorName,
             };
 
             public override void OpenScreen(in MMgr manager, in MArg arg)

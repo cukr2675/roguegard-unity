@@ -50,7 +50,7 @@ namespace RoguegardUnity
                     .OnClickElement((skill, manager, arg) =>
                     {
                         // 選択したスキルの情報と選択肢を表示する
-                        manager.PushMenuScreen(menu, other: skill);
+                        manager.PushMenuScreen(menu, arg.Self, other: skill);
                     })
 
                     .Build();

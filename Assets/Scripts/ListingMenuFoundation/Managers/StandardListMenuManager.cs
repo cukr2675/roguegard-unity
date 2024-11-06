@@ -117,17 +117,33 @@ namespace ListingMF
 
         public void Back(int count = 1)
         {
+            MenuScreenStack<TMgr, TArg>.StackItem lastItem = null;
             for (int i = 0; i < count; i++)
             {
                 if (stack.Count == 0) break;
 
-                stack.Pop();
+                lastItem = stack.Pop();
             }
+            lastItem.MenuScreen.CloseScreen((TMgr)this, true);
 
             if (stack.TryPeek(out var stackItem))
             {
                 // ひとつ前のメニューが存在する場合、そのメニューを開きなおす
-                stackItem.MenuScreen.CloseScreen((TMgr)this, true);
+                BlockAll();
+                reservedMenu = stackItem;
+            }
+            else
+            {
+                // メニューがない場合は終了する
+                Done();
+            }
+        }
+
+        public void Reopen()
+        {
+            if (stack.TryPeek(out var stackItem))
+            {
+                // ひとつ前のメニューが存在する場合、そのメニューを開きなおす
                 BlockAll();
                 reservedMenu = stackItem;
             }

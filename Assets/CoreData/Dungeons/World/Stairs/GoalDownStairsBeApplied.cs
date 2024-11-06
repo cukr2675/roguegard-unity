@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using ListingMF;
 using Roguegard.Device;
 using Roguegard.Extensions;
 
@@ -9,7 +10,7 @@ namespace Roguegard
 {
     public class GoalDownStairsBeApplied : BaseApplyRogueMethod
     {
-        //private static readonly ResultRogueMenu resultRogueMenu = new ResultRogueMenu();
+        private static readonly ResultRogueMenu resultRogueMenu = new();
 
         public override bool Invoke(RogueObj self, RogueObj player, float activationDepth, in RogueMethodArgument arg)
         {
@@ -28,7 +29,7 @@ namespace Roguegard
             if (player == RogueDevice.Primary.Player)
             {
                 // プレイヤー操作を要求するため、プレイヤーキャラのみ実行可能とする
-                //RogueDevice.Primary.AddMenu(resultRogueMenu, player, null, RogueMethodArgument.Identity);
+                RogueDevice.Primary.AddMenu(resultRogueMenu, player, null, RogueMethodArgument.Identity);
                 return false;
             }
             else if (activationDepth < 1f)
@@ -43,15 +44,14 @@ namespace Roguegard
             return false;
         }
 
-        //private class ResultRogueMenu : IListMenu
-        //{
-        //    public void OpenMenu(IListMenuManager manager, RogueObj player, RogueObj user, in RogueMethodArgument arg)
-        //    {
-        //        var dungeon = player.Location;
-        //        var summary = (IResultMenuView)manager.GetView(DeviceKw.MenuSummary);
-        //        summary.OpenView(SelectOptionPresenter.Instance, Spanning<object>.Empty, manager, player, user, arg);
-        //        summary.SetResult(player, dungeon);
-        //    }
-        //}
+        private class ResultRogueMenu : RogueMenuScreen
+        {
+            public override void OpenScreen(in MMgr manager, in MArg arg)
+            {
+                var player = arg.Self;
+                var dungeon = player.Location;
+                manager.SetResult(player, dungeon);
+            }
+        }
     }
 }

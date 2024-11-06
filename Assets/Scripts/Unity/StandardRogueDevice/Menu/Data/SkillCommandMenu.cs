@@ -23,7 +23,7 @@ namespace RoguegardUnity
         {
             var selectedSkill = (ISkill)arg.Arg.Other;
 
-            view.Title = selectedSkill.Details.ToString();
+            view.Title = CaptionWindow.ShowCaption(selectedSkill);
 
             view.ShowTemplate(manager, arg)
                 ?.Option(":Use", (manager, arg) =>

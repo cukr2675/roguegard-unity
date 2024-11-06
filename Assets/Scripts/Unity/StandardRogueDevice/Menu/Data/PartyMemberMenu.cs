@@ -3,40 +3,54 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using ListingMF;
-using Roguegard;
 using Roguegard.Device;
 
 namespace RoguegardUnity
 {
     public class PartyMemberMenu : RogueMenuScreen
     {
-        private readonly ISelectOption[] selectOptions;
+        private readonly ObjsMenu objsMenu;
+        private readonly ObjCommandMenu objCommandMenu;
+        private readonly SkillsMenu skillsMenu;
 
-        private readonly CommandListViewTemplate<ISelectOption, MMgr, MArg> view = new()
+        private readonly MainMenuViewTemplate<MMgr, MArg> view = new()
         {
+            PrimaryCommandSubViewName = StandardSubViewTable.SecondaryCommandName,
         };
+
+        public override bool IsIncremental => true;
 
         public PartyMemberMenu(ObjsMenu objsMenu, ObjCommandMenu objCommandMenu, SkillsMenu skillsMenu)
         {
-            selectOptions = new ISelectOption[]
-            {
-                objCommandMenu.Summary,
-                SelectOption.Create<MMgr, MArg>(":Items", (manager, arg) =>
-                {
-                    manager.PushMenuScreen(objsMenu.Items, arg.Self, targetObj: arg.Self);
-                }),
-                SelectOption.Create<MMgr, MArg>(":Skills", (manager, arg) =>
-                {
-                    manager.PushMenuScreen(skillsMenu.Use, arg.Self);
-                }),
-                BackSelectOption.Instance
-            };
+            this.objsMenu = objsMenu;
+            this.objCommandMenu = objCommandMenu;
+            this.skillsMenu = skillsMenu;
         }
 
         public override void OpenScreen(in MMgr manager, in MArg arg)
         {
-            view.ShowTemplate(selectOptions, manager, arg)
-                ?.Build();
+            view.ShowTemplate(manager, arg)
+                ?
+                .Append(objCommandMenu.Summary)
+
+                .Option(":Items", (manager, arg) =>
+                {
+                    manager.PushMenuScreen(objsMenu.Items, arg.Self, targetObj: arg.Self);
+                })
+
+                .Option(":Skills", (manager, arg) =>
+                {
+                    manager.PushMenuScreen(skillsMenu.Use, arg.Self);
+                })
+
+                .Back()
+
+                .Build();
+        }
+
+        public override void CloseScreen(MMgr manager, bool back)
+        {
+            view.HideTemplate(manager, back);
         }
     }
 }

@@ -73,16 +73,11 @@ namespace Roguegard
 
             private class QuestViewMenu : RogueMenuScreen
             {
-                private readonly DialogViewTemplate<MMgr, MArg> view = new()
-                {
-                };
-
                 public override void OpenScreen(in MMgr manager, in MArg arg)
                 {
                     var quest = (DungeonQuest)arg.Arg.Other;
 
-                    view.ShowTemplate(quest.Caption, manager, arg)
-                        ?.Build();
+                    manager.SetQuest(arg.Self, quest, true);
                 }
             }
         }
