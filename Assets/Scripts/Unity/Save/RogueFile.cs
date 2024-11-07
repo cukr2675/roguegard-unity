@@ -91,7 +91,7 @@ namespace RoguegardUnity
             if (path.Contains('\\')) { path = path.Replace('\\', '/'); };
 
             var importer = IDBImporter.InToDirectory(path);
-            importer.FilterAccept = ".gard,.zip";
+            //importer.FilterAccept = ".gard,.zip";
             importer.Completed += _ => callback(importer.ErrorMsg);
             importer.ShowDialog();
         }
