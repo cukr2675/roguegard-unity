@@ -20,7 +20,7 @@ namespace ListingMF
         /// </summary>
         protected virtual IReadOnlyList<ViewElement> BlockableViewElements => System.Array.Empty<ViewElement>();
 
-        public virtual bool HasManagerLock { get; private set; }
+        public bool HasManagerLock { get; private set; }
 
         public delegate void HandleEndAnimation(IListMenuManager manager, IListMenuArg arg);
 
