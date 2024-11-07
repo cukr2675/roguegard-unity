@@ -15,13 +15,14 @@ namespace ListingMF
         public void UpdateLinks(TMP_Text text)
         {
             items.Clear();
+            var value = text.text; // WebGL ビルドで text プロパティを複数回参照すると不正な値を取得してしまうためキャッシュ必須
             for (int i = 0; i < text.textInfo.linkCount; i++)
             {
                 var linkInfo = text.textInfo.linkInfo[i];
                 if (linkInfo.linkTextLength != 0) continue; // 文字数がゼロでない（'Hidden' でない）リンクタグは無視
                 if (linkInfo.linkTextfirstCharacterIndex < text.maxVisibleCharacters) continue; // 表示済みテキスト内のリンクタグは無視
 
-                var hiddenLinkID = text.text.Substring(linkInfo.linkIdFirstCharacterIndex, linkInfo.linkIdLength);
+                var hiddenLinkID = value.Substring(linkInfo.linkIdFirstCharacterIndex, linkInfo.linkIdLength);
                 var item = new Item(hiddenLinkID, linkInfo.linkTextfirstCharacterIndex);
                 items.Add(item);
             }
