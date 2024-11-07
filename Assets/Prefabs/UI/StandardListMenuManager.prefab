@@ -1212,6 +1212,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -5307896561031752095, guid: 5be8eb9e0a436de4480278aa42eba45b, type: 3}
+      propertyPath: _ViewWidgetPrefabs.Array.data[0]
+      value: 
+      objectReference: {fileID: 2558401128827049287, guid: f8f71cb0dda6db641af551996ef14355, type: 3}
     - target: {fileID: 674128764128042877, guid: 5be8eb9e0a436de4480278aa42eba45b, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -2168,6 +2172,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7212154080851218931, guid: 5be8eb9e0a436de4480278aa42eba45b, type: 3}
+      propertyPath: _viewElementPrefab
+      value: 
+      objectReference: {fileID: 4164266035904984322, guid: f26842e6c259d2c458971a612afcf3b5, type: 3}
     - target: {fileID: 7228801495282964173, guid: 5be8eb9e0a436de4480278aa42eba45b, type: 3}
       propertyPath: m_Size
       value: 1
@@ -5978,6 +5986,18 @@ PrefabInstance:
     - target: {fileID: 3716826475535348905, guid: 3ebc47c7d31e8af4dac2ec188e7f017c, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3716826475535348905, guid: 3ebc47c7d31e8af4dac2ec188e7f017c, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5635813799818916690, guid: 3ebc47c7d31e8af4dac2ec188e7f017c, type: 3}
+      propertyPath: m_Size
+      value: 0.64128685
+      objectReference: {fileID: 0}
+    - target: {fileID: 5635813799818916690, guid: 3ebc47c7d31e8af4dac2ec188e7f017c, type: 3}
+      propertyPath: m_Value
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
