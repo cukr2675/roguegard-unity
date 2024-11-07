@@ -124,7 +124,7 @@ namespace ListingMF
 
                 lastItem = stack.Pop();
             }
-            lastItem.MenuScreen.CloseScreen((TMgr)this, true);
+            lastItem?.MenuScreen.CloseScreen((TMgr)this, true);
 
             if (stack.TryPeek(out var stackItem))
             {
