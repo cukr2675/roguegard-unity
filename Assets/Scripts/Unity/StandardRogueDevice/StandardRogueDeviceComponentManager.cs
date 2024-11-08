@@ -158,7 +158,8 @@ namespace RoguegardUnity
                 var stopwatch = new System.Diagnostics.Stopwatch();
                 stopwatch.Start();
                 var coroutine = TickEnumerator.UpdateTurns(Player, Subject, turns, maxTurns * 1000, false);
-                var delayInterval = 250;
+                var delayInterval = System.TimeSpan.FromSeconds(.25);
+                var beforeTime = System.DateTime.Now;
                 yield return new WaitForSeconds(1f);
                 while (!synchronizeMenu.Interrupt)
                 {
@@ -175,9 +176,11 @@ namespace RoguegardUnity
                         Debug.LogError(e.StackTrace);
                         break;
                     }
-                    if (coroutine.Current % delayInterval == 0)
+                    var now = System.DateTime.Now;
+                    if ((now - beforeTime) > delayInterval)
                     {
                         synchronizeMenu.Progress = (float)coroutine.Current / turns;
+                        beforeTime = now;
                         yield return null;
                     }
                 }
