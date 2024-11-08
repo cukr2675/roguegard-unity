@@ -5,6 +5,7 @@ using UnityEngine;
 using ListingMF;
 using Roguegard;
 using Roguegard.Device;
+using Roguegard.Extensions;
 
 namespace RoguegardUnity
 {
@@ -41,8 +42,18 @@ namespace RoguegardUnity
             var dungeon = leaderCharacter.Location;
             SpaceUtility.TryLocate(leaderCharacter, componentManager.World);
 
-            componentManager.EventManager.AddMenu(gameOverMenu, leaderCharacter, null, new(targetObj: dungeon));
-            RogueDevice.Add(DeviceKw.EnqueueViewDequeueState, 0);
+            if (leaderCharacter == componentManager.Subject)
+            {
+                componentManager.EventManager.AddMenu(gameOverMenu, leaderCharacter, null, new(targetObj: dungeon));
+                RogueDevice.Add(DeviceKw.EnqueueViewDequeueState, 0);
+            }
+            else
+            {
+                default(IActiveRogueMethodCaller).LocateSavePoint(leaderCharacter, null, 0f, RogueWorldSavePointInfo.Instance, true);
+
+                var memberInfo = LobbyMemberList.GetMemberInfo(leaderCharacter);
+                memberInfo.SavePoint = RogueWorldSavePointInfo.Instance;
+            }
         }
 
         /// <summary>

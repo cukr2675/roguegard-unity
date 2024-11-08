@@ -221,10 +221,22 @@ namespace RoguegardUnity
             }
         }
 
-        public void LoadSavePoint(RogueObj obj)
+        public void LoadSavePoint(RogueObj obj, bool stack0ToGameOver = false)
         {
             var memberInfo = LobbyMemberList.GetMemberInfo(obj);
-            if (memberInfo.SavePoint == null || memberInfo.SavePoint == dummySavePoint) return;
+            if (memberInfo.SavePoint == dummySavePoint) return;
+
+            if (memberInfo.SavePoint == null)
+            {
+                if (!stack0ToGameOver || memberInfo.Seat == null) return;
+
+                if (obj.Stack == 0 || !RogueWorldInfo.TryGetWorld(obj, out _))
+                {
+                    // ゲームオーバー処理
+                    gameOverDeviceEventHandler.AfterGameOver(obj);
+                }
+                return;
+            }
 
             if (obj == Subject)
             {
@@ -246,7 +258,7 @@ namespace RoguegardUnity
                 var lobbyMembers = worldInfo.LobbyMembers.Members;
                 for (int i = 0; i < lobbyMembers.Count; i++)
                 {
-                    LoadSavePoint(lobbyMembers[i]);
+                    LoadSavePoint(lobbyMembers[i], true);
                 }
             }
 

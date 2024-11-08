@@ -43,6 +43,26 @@ namespace Roguegard
             }
         }
 
+        public static bool TryGetWorld(RogueObj self, out RogueObj world)
+        {
+            var location = self;
+            while (true)
+            {
+                if (location == null)
+                {
+                    world = null;
+                    return false;
+                }
+                if (location.TryGet<Info>(out _))
+                {
+                    world = location;
+                    return true;
+                }
+
+                location = location.Location;
+            }
+        }
+
         public static RogueWorldInfo GetByCharacter(RogueObj self)
         {
             var world = GetWorld(self);
