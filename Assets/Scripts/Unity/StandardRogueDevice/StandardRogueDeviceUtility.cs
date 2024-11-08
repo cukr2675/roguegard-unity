@@ -159,5 +159,50 @@ namespace RoguegardUnity
 
             return entry.GetLocalizedString(formatArgs);
         }
+
+
+
+        public static string GetCaption(string text)
+        {
+            if (text.StartsWith(':') && !StandardRogueDeviceUtility.TryLocalize(text, out text))
+            {
+                text = "";
+            }
+            return text;
+        }
+
+        public static string GetCaption(IRogueDescription description)
+        {
+            var text = description.Caption;
+            if (text == null)
+            {
+                var name = description.Name;
+                if (name.StartsWith(':'))
+                {
+                    if (!TryLocalize($"{name}::c", out text))
+                    {
+                        text = "";
+                    }
+                }
+            }
+            return text;
+        }
+
+        public static string GetDescription(IRogueDescription description)
+        {
+            var details = description.Details;
+            if (details != null)
+            {
+                return details.ToString();
+            }
+
+            var name = description.Name;
+            if (name.StartsWith(':'))
+            {
+                return Localize($"{name}::d");
+            }
+
+            return null;
+        }
     }
 }

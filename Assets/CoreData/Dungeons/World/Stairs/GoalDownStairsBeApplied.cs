@@ -50,7 +50,9 @@ namespace Roguegard
             {
                 var player = arg.Self;
                 var dungeon = player.Location;
-                manager.SetResult(player, dungeon);
+                var summary = RoguegardSubViews.GetSummary(manager);
+                summary.SetResult(player, dungeon, manager);
+                summary.Show();
             }
         }
     }

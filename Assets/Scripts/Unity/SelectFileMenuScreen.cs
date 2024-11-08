@@ -13,7 +13,7 @@ namespace RoguegardUnity
     {
         private RogueMenuScreen nextScreen;
         private HandleClickElement<MMgr, MArg> onNewFile;
-        private SelectFileMenuViewTemplate view;
+        private RogueScrollViewTemplate<object> view;
         private readonly List<FileInfo> files = new();
 
         private static readonly LoadingListMenu savingMenu = new LoadingListMenu("セーブ中…", "キャンセル", LoadingCancel);
@@ -87,6 +87,25 @@ namespace RoguegardUnity
                     .InsertNext(SelectOption.Create(":+ New File", onNewFile))
                     
                     )
+
+                .ElementInfoFrom((element, manager, arg) =>
+                {
+                    if (element is FileInfo fileInfo)
+                    {
+                        var name = fileInfo.Name;
+                        var infoText2 = fileInfo.LastWriteTime.ToString();
+                        return (name, null, infoText2);
+                    }
+                    else if (element is ISelectOption option)
+                    {
+                        var name = option.GetName(manager, arg);
+                        return (name, null, null);
+                    }
+                    else
+                    {
+                        throw new System.InvalidOperationException();
+                    }
+                })
 
                 .OnClickElement((element, manager, arg) =>
                 {

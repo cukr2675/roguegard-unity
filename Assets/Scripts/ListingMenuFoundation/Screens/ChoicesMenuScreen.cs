@@ -32,9 +32,9 @@ namespace ListingMF
             };
         }
 
-        public ChoicesMenuScreen<TMgr, TArg> Option(string name, HandleClickElement<TMgr, TArg> handleClick)
+        public ChoicesMenuScreen<TMgr, TArg> Option(string name, HandleClickElement<TMgr, TArg> onClick)
         {
-            selectOptions.Add(SelectOption.Create(name, handleClick));
+            selectOptions.Add(SelectOption.Create(name, onClick));
             return this;
         }
 

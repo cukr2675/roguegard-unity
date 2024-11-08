@@ -73,9 +73,9 @@ namespace ListingMF
                 this.parent = parent;
             }
 
-            public Builder Option(string name, HandleClickElement<TMgr, TArg> handleClick)
+            public Builder Option(string name, HandleClickElement<TMgr, TArg> onClick, string style = null)
             {
-                return Append(SelectOption.Create(name, handleClick));
+                return Append(SelectOption.Create(name, onClick, style));
             }
 
             public Builder Back()

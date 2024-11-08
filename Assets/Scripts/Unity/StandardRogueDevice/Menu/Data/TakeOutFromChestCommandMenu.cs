@@ -29,12 +29,11 @@ namespace RoguegardUnity
                     var chestInfo = ChestInfo.GetInfo(arg.Arg.TargetObj);
                     default(IActiveRogueMethodCaller).TakeOut(arg.Self, arg.Arg.TargetObj, chestInfo, arg.Arg.Tool, 0f);
 
-                    manager.AddObject(DeviceKw.EnqueueSE, MainInfoKw.PickUp);
                     RogueDevice.Add(DeviceKw.AppendText, arg.Arg.TargetObj);
                     RogueDevice.Add(DeviceKw.AppendText, "から");
                     RogueDevice.Add(DeviceKw.AppendText, arg.Arg.Tool);
                     RogueDevice.Add(DeviceKw.AppendText, "を取り出した\n");
-                })
+                }, "PickUp")
 
                 .Back()
 

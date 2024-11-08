@@ -20,9 +20,10 @@ namespace ListingMF
         /// </summary>
         protected virtual IReadOnlyList<ViewElement> BlockableViewElements => System.Array.Empty<ViewElement>();
 
+        /// <summary>
+        /// このプロパティが true のとき <see cref="IListMenuManager"/> の動作を停止させる。アニメーションを待機させるために使用する
+        /// </summary>
         public bool HasManagerLock { get; private set; }
-
-        public delegate void HandleEndAnimation(IListMenuManager manager, IListMenuArg arg);
 
         private const int backStatusCode = 2;
 
@@ -44,26 +45,26 @@ namespace ListingMF
             }
         }
 
-        public virtual void Show(HandleEndAnimation handleEndAnimation = null)
+        public virtual void Show(HandleEndAnimation onEndAnimation = null)
         {
             SetBlock(false);
             AnimatorTupple.TrySetVisible(this, true);
 
-            if (handleEndAnimation != null)
+            if (onEndAnimation != null)
             {
-                OnEndAnimation += handleEndAnimation;
+                OnEndAnimation += onEndAnimation;
             }
         }
 
-        public virtual void Hide(bool back, HandleEndAnimation handleEndAnimation = null)
+        public virtual void Hide(bool back, HandleEndAnimation onEndAnimation = null)
         {
             if (back) { SetStatusCode(backStatusCode); }
             SetBlock(true);
             AnimatorTupple.TrySetVisible(this, false);
 
-            if (handleEndAnimation != null)
+            if (onEndAnimation != null)
             {
-                OnEndAnimation += handleEndAnimation;
+                OnEndAnimation += onEndAnimation;
             }
         }
 

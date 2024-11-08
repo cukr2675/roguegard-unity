@@ -31,7 +31,7 @@ namespace ListingMF
                 text = MessageBox.GetComponentInChildren<TMP_Text>();
             }
 
-            _scrollRect.content.sizeDelta = new Vector2(_scrollRect.content.sizeDelta.x, text.renderedHeight);
+            _scrollRect.content.sizeDelta = new Vector2(_scrollRect.content.sizeDelta.x, Mathf.Max(text.renderedHeight, 0f));
         }
     }
 }

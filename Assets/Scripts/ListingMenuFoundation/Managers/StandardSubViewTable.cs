@@ -73,6 +73,21 @@ namespace ListingMF
 
         public IReadOnlyDictionary<string, ElementsSubView> SubViews { get; private set; }
 
+        /// <summary>
+        /// ‚¢‚¸‚ê‚©‚Ì <see cref="ElementsSubView.HasManagerLock"/> ‚ª true ‚Ì‚Æ‚« true ‚ðŽæ“¾‚·‚é
+        /// </summary>
+        public bool HasManagerLock
+        {
+            get
+            {
+                foreach (var pair in SubViews)
+                {
+                    if (pair.Value.HasManagerLock) return true;
+                }
+                return false;
+            }
+        }
+
         private bool isInitialized;
 
         public void Initialize()

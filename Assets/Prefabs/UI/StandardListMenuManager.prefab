@@ -52,7 +52,7 @@ GameObject:
   - component: {fileID: 5939153338456039072}
   - component: {fileID: 122713775467896458}
   m_Layer: 5
-  m_Name: PaintWindow
+  m_Name: PaintSubView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -143,7 +143,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 343f615916747d34eb5f220d7096cfa2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _canvasGroup: {fileID: 5939153338456039072}
   _toolSet: {fileID: 4569449133891919215}
   _splitLine: {fileID: 7451690180529649426}
   _upperPivot: {fileID: 4725509118835981466}
@@ -2239,10 +2238,10 @@ PrefabInstance:
       addedObject: {fileID: 7928644826153103522}
     - targetCorrespondingSourceObject: {fileID: 3592960528265980061, guid: 5be8eb9e0a436de4480278aa42eba45b, type: 3}
       insertIndex: 4
-      addedObject: {fileID: 4933279183031200037}
+      addedObject: {fileID: 3778817094413271432}
     - targetCorrespondingSourceObject: {fileID: 3592960528265980061, guid: 5be8eb9e0a436de4480278aa42eba45b, type: 3}
       insertIndex: 5
-      addedObject: {fileID: 3778817094413271432}
+      addedObject: {fileID: 4933279183031200037}
     - targetCorrespondingSourceObject: {fileID: 3592960528265980061, guid: 5be8eb9e0a436de4480278aa42eba45b, type: 3}
       insertIndex: 6
       addedObject: {fileID: 8921223320577416031}
@@ -2250,9 +2249,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2931214284997227569, guid: 5be8eb9e0a436de4480278aa42eba45b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1629327148685822779}
-    - targetCorrespondingSourceObject: {fileID: 2931214284997227569, guid: 5be8eb9e0a436de4480278aa42eba45b, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 6220052743948577925}
   m_SourcePrefab: {fileID: 100100000, guid: 5be8eb9e0a436de4480278aa42eba45b, type: 3}
 --- !u!1 &1147976371173468900 stripped
 GameObject:
@@ -2271,53 +2267,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dee565dbc3dc8fe44b70efd805002858, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _statsWindow: {fileID: 5370450463558817365}
+  _stats: {fileID: 5370450463558817365}
   _summary: {fileID: 7861572407568715607}
+  _textEditor: {fileID: 9161768773346529571}
   _characterCreation: {fileID: 5364893827397849727}
-  _textEditorMenu: {fileID: 9161768773346529571}
-  _paintMenu: {fileID: 122713775467896458}
+  _paint: {fileID: 122713775467896458}
   _titleMenu: {fileID: 0}
---- !u!114 &6220052743948577925
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1147976371173468900}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26465324100128445b01dad0a6a727ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _messageBox: {fileID: 8775457641289602917}
-  _logWindow: {fileID: 1161496416491518747}
---- !u!114 &1161496416491518747 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3989586082751899086, guid: 5be8eb9e0a436de4480278aa42eba45b, type: 3}
-  m_PrefabInstance: {fileID: 2829295970122555093}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 679b7640def12bd46b51fa8d6a1c7e81, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &1630143780421269064 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3592960528265980061, guid: 5be8eb9e0a436de4480278aa42eba45b, type: 3}
   m_PrefabInstance: {fileID: 2829295970122555093}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &8775457641289602917 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6812571345056205232, guid: 5be8eb9e0a436de4480278aa42eba45b, type: 3}
-  m_PrefabInstance: {fileID: 2829295970122555093}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 40f9f41cfb52c9a459b3fd2a5bf56557, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &2976186509640860013
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4353,7 +4313,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3886630998191265058, guid: f51bc7baf415485489819ee93ab5c0de, type: 3}
       propertyPath: m_Name
-      value: StatsWindow
+      value: StatsSubView
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4497,7 +4457,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1177477052207806784, guid: 3ebc47c7d31e8af4dac2ec188e7f017c, type: 3}
       propertyPath: m_Name
-      value: TextEditorWindow
+      value: TextEditorSubView
       objectReference: {fileID: 0}
     - target: {fileID: 3716826475535348905, guid: 3ebc47c7d31e8af4dac2ec188e7f017c, type: 3}
       propertyPath: m_AnchorMax.x
@@ -5973,7 +5933,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1177477052207806784, guid: 3ebc47c7d31e8af4dac2ec188e7f017c, type: 3}
       propertyPath: m_Name
-      value: SummaryWindow
+      value: SummarySubView
       objectReference: {fileID: 0}
     - target: {fileID: 3519301190486513262, guid: 3ebc47c7d31e8af4dac2ec188e7f017c, type: 3}
       propertyPath: m_SizeDelta.y

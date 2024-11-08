@@ -25,7 +25,7 @@ namespace RoguegardUnity
 
         public void UpdateUI(int deltaTime)
         {
-            messageController.UpdateUI(soundController, deltaTime);
+            messageController.UpdateUI(deltaTime);
             waitTimer.UpdateTimer(deltaTime);
         }
 

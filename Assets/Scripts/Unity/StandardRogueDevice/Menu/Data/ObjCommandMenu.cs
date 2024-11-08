@@ -54,7 +54,7 @@ namespace RoguegardUnity
             selectOptions.Add(Details);
             selectOptions.Add(BackSelectOption.Instance);
 
-            view.Title = CaptionWindow.ShowCaption(tool.Main.InfoSet);
+            view.Title = StandardRogueDeviceUtility.GetCaption(tool.Main.InfoSet);
 
             view.ShowTemplate(selectOptions, manager, arg)
                 ?
@@ -99,7 +99,9 @@ namespace RoguegardUnity
                     target = arg;
                 }
 
-                manager.SetObj(target);
+                var summary = RoguegardSubViews.GetSummary(manager);
+                summary.SetObj(target, manager);
+                summary.Show();
             }
         }
 
@@ -113,9 +115,11 @@ namespace RoguegardUnity
             public override void OpenScreen(in MMgr manager, in MArg arg)
             {
                 var obj = arg.Arg.Tool ?? arg.Arg.TargetObj;
-                var details = DetailsMenuView.SetDescription(obj.Main.InfoSet);
+                var description = obj?.Main.InfoSet ?? arg.Arg.Other as IRogueDescription;
+                var details = "";
+                if (description != null) { details = StandardRogueDeviceUtility.GetDescription(description); }
 
-                view.ShowTemplate(details, manager, arg)
+                view.ShowTemplate(details ?? "", manager, arg)
                     ?
                     .Build();
             }

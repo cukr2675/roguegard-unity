@@ -60,7 +60,7 @@ namespace ListingMF
                     .Show(TitleSingle, ElementToStringHandler.Instance, manager, arg, ref captionBoxSubViewStateProvider);
             }
 
-            if (BackAnchorList != null)
+            if (BackAnchorSubViewName != null)
             {
                 manager
                     .GetSubView(BackAnchorSubViewName)
@@ -72,7 +72,7 @@ namespace ListingMF
         {
             manager.GetSubView(ScrollSubViewName).Hide(back);
             if (Title != null) { manager.GetSubView(CaptionBoxSubViewName).Hide(back); }
-            if (BackAnchorList != null) { manager.GetSubView(BackAnchorSubViewName).Hide(back); }
+            if (BackAnchorSubViewName != null) { manager.GetSubView(BackAnchorSubViewName).Hide(back); }
         }
 
         public class Builder : BaseListBuilder<Builder>

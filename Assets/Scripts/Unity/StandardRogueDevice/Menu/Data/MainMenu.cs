@@ -149,7 +149,9 @@ namespace RoguegardUnity
                 {
                     if (!DungeonQuestInfo.TryGetQuest(arg.Self, out var quest)) throw new RogueException();
 
-                    manager.SetQuest(arg.Self, quest, false);
+                    var summary = RoguegardSubViews.GetSummary(manager);
+                    summary.SetQuest(arg.Self, quest, false, manager);
+                    summary.Show();
                 }
             }
         }

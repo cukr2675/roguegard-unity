@@ -21,4 +21,6 @@ namespace ListingMF
     public delegate void HandleClickElement<TElm, TMgr, TArg>(TElm element, TMgr manager, TArg arg);
 
     public delegate void HandleClickElement<TMgr, TArg>(TMgr manager, TArg arg);
+
+    public delegate void HandleEndAnimation(IListMenuManager manager, IListMenuArg arg);
 }

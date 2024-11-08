@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-using ListingMF;
 using Roguegard;
 using Roguegard.Device;
 
@@ -23,7 +22,7 @@ namespace RoguegardUnity
         /// </summary>
         private class UseMenu : RogueMenuScreen
         {
-            private readonly ScrollViewTemplate<ISkill, MMgr, MArg> view = new()
+            private readonly RogueScrollViewTemplate<ISkill> view = new()
             {
                 Title = ":Skills",
             };
@@ -42,9 +41,12 @@ namespace RoguegardUnity
 
                 view.ShowTemplate(list, manager, arg)
                     ?
-                    .ElementNameFrom((skill, manager, arg) =>
+                    .ElementInfoFrom((skill, manager, arg) =>
                     {
-                        return skill.Name;
+                        var obj = arg.Arg.TargetObj ?? arg.Self;
+
+                        var requiredMP = StatsEffectedValues.GetRequiredMP(obj, skill.RequiredMP);
+                        return (skill, null, $"{requiredMP} MP");
                     })
 
                     .OnClickElement((skill, manager, arg) =>

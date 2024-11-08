@@ -6,7 +6,6 @@ using UnityEngine.UI;
 using ListingMF;
 using Roguegard;
 using Roguegard.Device;
-using Roguegard.CharacterCreation;
 
 namespace RoguegardUnity
 {
@@ -15,14 +14,13 @@ namespace RoguegardUnity
     /// </summary>
     public class MenuController : MMgr
     {
-        [SerializeField] private StatsWindow _statsWindow = null;
-        public StatsWindow Stats => _statsWindow;
-        [SerializeField] private SummaryMenuView _summary = null;
-        [SerializeField] private CharacterCreationMenuView _characterCreation = null;
-        public CharacterCreationMenuView CharacterCreation => _characterCreation;
-        [SerializeField] private TextEditorMenuView _textEditorMenu = null;
-        public TextEditorMenuView TextEditor => _textEditorMenu;
-        [SerializeField] private PaintMenuView _paintMenu = null;
+        [SerializeField] private StatsSubView _stats = null;
+        [SerializeField] private SummarySubView _summary = null;
+        [SerializeField] private TextEditorSubView _textEditor = null;
+        [SerializeField] private CharacterCreationSubView _characterCreation = null;
+        [SerializeField] private PaintSubView _paint = null;
+
+        public StatsSubView Stats => _stats;
 
         [Header("Title Only")]
         [SerializeField] private GridSubView _titleMenu = null;
@@ -40,24 +38,18 @@ namespace RoguegardUnity
         /// </summary>
         public bool Wait =>
             StandardSubViewTable.MessageBox.MessageBox.IsInProgress || StandardSubViewTable.SpeechBox.MessageBox.IsInProgress ||
-            StackCount >= 1 || EventManager.Wait;
+            ShowsMenuScreen || EventManager.Wait;
 
         public bool TalkingWait =>
             StandardSubViewTable.SpeechBox.MessageBox.IsInProgress ||
-            StackCount >= 1 || EventManager.Wait;
-
-        public override string TextEditorValue => _textEditorMenu.Text;
-
-        public override ISelectOption LoadPresetSelectOptionOfCharacterCreation => CharacterCreationMenuView.LoadPresetSelectOption;
-
-        public override object Paint => _paintMenu;
+            ShowsMenuScreen || EventManager.Wait;
 
         internal void Initialize(
             SoundController soundController, RogueSpriteRendererPool rendererPool, bool touchMaskIsEnabled = true)
         {
             BackOption = SelectOption.Create<MMgr, MArg>("<", (manager, arg) => manager.Back(), "Cancel");
 
-            base.Initialize();
+            Initialize();
             var objCommandMenu = new ObjCommandMenu();
             var putInCommandMenu = new PutIntoChestCommandMenu();
             var takeOutCommandMenu = new TakeOutFromChestCommandMenu();
@@ -71,14 +63,12 @@ namespace RoguegardUnity
 
             _summary.Initialize();
             _characterCreation.Initialize(rendererPool);
-            _textEditorMenu.Initialize();
-            _paintMenu.Initialize();
             if (_titleMenu != null) { _titleMenu.Initialize(); }
             var scrollSensitivity = 64f;
             SetScrollSensitivity(scrollSensitivity);
 
             this.soundController = soundController;
-            EventManager = new ListMenuEventManager(GetComponent<MessageController>(), soundController);
+            EventManager = new ListMenuEventManager(new MessageController(StandardSubViewTable), soundController);
         }
 
         public void Open(RogueObj menuSubject)
@@ -114,7 +104,10 @@ namespace RoguegardUnity
 
         public override IElementsSubView GetSubView(string subViewName)
         {
-            if (subViewName == CharacterCreationName) return _characterCreation;
+            if (subViewName == RoguegardSubViews.Summary) return _summary;
+            if (subViewName == RoguegardSubViews.TextEditor) return _textEditor;
+            if (subViewName == RoguegardSubViews.CharacterCreation) return _characterCreation;
+            if (subViewName == RoguegardSubViews.Paint) return _paint;
             if (subViewName == TitleMenuName) return _titleMenu;
             return base.GetSubView(subViewName);
         }
@@ -122,11 +115,11 @@ namespace RoguegardUnity
         public override void HideAll(bool back = false)
         {
             base.HideAll(back);
-            _statsWindow.Hide(back);
+            _stats.Hide(back);
             _summary.Hide(back);
             _characterCreation.Hide(back);
-            _textEditorMenu.Hide(back);
-            _paintMenu.Hide();
+            _textEditor.Hide(back);
+            _paint.Hide(back);
             if (_titleMenu != null) { _titleMenu.Hide(back); }
         }
 
@@ -209,6 +202,14 @@ namespace RoguegardUnity
             {
                 AddObject(DeviceKw.EnqueueSE, DeviceKw.Cancel);
             }
+            else if (value == "Sort")
+            {
+                AddObject(DeviceKw.EnqueueSE, StdKw.Sort);
+            }
+            else if (value == "PickUp")
+            {
+                AddObject(DeviceKw.EnqueueSE, MainInfoKw.PickUp);
+            }
             else if (value == "StartSpeech")
             {
                 soundController.PlayLoop(DeviceKw.StartTalk);
@@ -237,49 +238,6 @@ namespace RoguegardUnity
                 canvasGroup.interactable = false;
                 canvasGroup.blocksRaycasts = false;
             }
-        }
-
-        public override void OpenTextEditor(string text)
-        {
-            _textEditorMenu.SetText(text);
-            _textEditorMenu.Show();
-        }
-
-        public override void SetObj(object obj)
-        {
-            _summary.SetObj(this, obj);
-            _summary.Show();
-        }
-
-        public override void SetResult(RogueObj player, RogueObj dungeon)
-        {
-            _summary.SetResult(this, player, dungeon);
-            _summary.Show();
-        }
-
-        public override void SetGameOver(RogueObj player, RogueObj dungeon)
-        {
-            _summary.SetGameOver(this, player, dungeon);
-            _summary.Show();
-        }
-
-        public override void SetQuest(RogueObj player, object quest, bool showSubmitButton)
-        {
-            _summary.SetQuest(this, player, (DungeonQuest)quest, showSubmitButton);
-            _summary.Show();
-        }
-
-        public override void SetPaint(
-            object dotterBoards, RogueObj self, object other, int count, bool showSplitLine, Vector2[] pivots, HandleClickElement<MMgr, MArg> back)
-        {
-            _paintMenu.OpenView((RuntimeDotter.DotterBoard[])dotterBoards, self, other, count);
-            _paintMenu.ShowSplitLine(showSplitLine, pivots);
-
-            var arg = new MArg.Builder(self: self, arg: new(other: other, count: count));
-
-            IElementsSubViewStateProvider stateProvider = null;
-            StandardSubViewTable.BackAnchor.Show(new[] { SelectOption.Create("<", back) }, SelectOptionHandler.Instance, this, arg.ReadOnly, ref stateProvider);
-
         }
     }
 }

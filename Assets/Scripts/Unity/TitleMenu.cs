@@ -169,7 +169,7 @@ namespace RoguegardUnity
             {
                 view = new()
                 {
-                    ScrollSubViewName = MMgr.CharacterCreationName,
+                    ScrollSubViewName = RoguegardSubViews.CharacterCreation,
                     BackAnchorList = new()
                     {
                         // プリセット読み込みボタン（OpenScreen で設定）
@@ -185,7 +185,8 @@ namespace RoguegardUnity
             public override void OpenScreen(in MMgr manager, in MArg arg)
             {
                 // プリセット読み込みボタンを設定する
-                view.BackAnchorList[0] = manager.LoadPresetSelectOptionOfCharacterCreation;
+                var characterCreation = RoguegardSubViews.GetCharacterCreation(manager);
+                view.BackAnchorList[0] = characterCreation.LoadPresetOption;
 
                 view.ShowTemplate(System.Array.Empty<object>(), manager, arg)
                     ?

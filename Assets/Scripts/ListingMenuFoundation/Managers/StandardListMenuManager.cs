@@ -7,6 +7,7 @@ namespace ListingMF
     [AddComponentMenu("UI/Listing Menu Foundation/LMF Standard List Menu Manager")]
     public class StandardListMenuManager : StandardListMenuManager<StandardListMenuManager, IListMenuArg>
     {
+        public new void Initialize() => base.Initialize();
     }
 
     [RequireComponent(typeof(StandardSubViewTable))]
@@ -21,7 +22,7 @@ namespace ListingMF
         private readonly MenuScreenStack<TMgr, TArg> stack = new();
         private MenuScreenStack<TMgr, TArg>.StackItem reservedMenu;
 
-        protected int StackCount => stack.Count;
+        public bool ShowsMenuScreen => stack.Count >= 1;
 
         public bool IsDone { get; private set; }
 
@@ -31,19 +32,7 @@ namespace ListingMF
         public virtual ISelectOption ErrorOption { get; protected set; }
             = SelectOption.Create<IListMenuManager, IListMenuArg>("<#F00>ERROR", delegate { }, "Cancel");
 
-        private bool IsLocked
-        {
-            get
-            {
-                foreach (var subView in StandardSubViewTable.SubViews.Values)
-                {
-                    if (subView.HasManagerLock) return true;
-                }
-                return false;
-            }
-        }
-
-        public void Initialize()
+        protected void Initialize()
         {
             StandardSubViewTable = GetComponent<StandardSubViewTable>();
             StandardSubViewTable.Initialize();
@@ -53,7 +42,7 @@ namespace ListingMF
         // アニメーションが再生されるのを待機するため Update ではなく LateUpdate にする
         private void LateUpdate()
         {
-            if (reservedMenu == null || IsLocked) return;
+            if (reservedMenu == null || StandardSubViewTable.HasManagerLock) return;
 
             try
             {
@@ -93,6 +82,9 @@ namespace ListingMF
             }
         }
 
+        /// <summary>
+        /// メニューを指定の画面へ進める
+        /// </summary>
         public virtual void PushMenuScreen(MenuScreen<TMgr, TArg> menuScreen, TArg arg)
         {
             menuScreen.CloseScreen((TMgr)this, false);
@@ -115,6 +107,9 @@ namespace ListingMF
             StandardSubViewTable.SetBlocker(enableTouchMask);
         }
 
+        /// <summary>
+        /// メニュー画面を指定の回数戻る
+        /// </summary>
         public void Back(int count = 1)
         {
             MenuScreenStack<TMgr, TArg>.StackItem lastItem = null;
@@ -125,20 +120,12 @@ namespace ListingMF
                 lastItem = stack.Pop();
             }
             lastItem?.MenuScreen.CloseScreen((TMgr)this, true);
-
-            if (stack.TryPeek(out var stackItem))
-            {
-                // ひとつ前のメニューが存在する場合、そのメニューを開きなおす
-                BlockAll();
-                reservedMenu = stackItem;
-            }
-            else
-            {
-                // メニューがない場合は終了する
-                Done();
-            }
+            Reopen();
         }
 
+        /// <summary>
+        /// 現在表示されているメニュー画面を更新する
+        /// </summary>
         public void Reopen()
         {
             if (stack.TryPeek(out var stackItem))
@@ -154,6 +141,9 @@ namespace ListingMF
             }
         }
 
+        /// <summary>
+        /// メニュー画面をすべて閉じる
+        /// </summary>
         public void Done()
         {
             stack.Clear();

@@ -60,9 +60,9 @@ namespace Roguegard.Device
             manager.Back(2);
         }
 
-        public ChoicesMenuScreen Option(string name, HandleClickElement<MMgr, MArg> handleClick)
+        public ChoicesMenuScreen Option(string name, HandleClickElement<MMgr, MArg> onClick)
         {
-            screen.Option(name, handleClick);
+            screen.Option(name, onClick);
             return this;
         }
 

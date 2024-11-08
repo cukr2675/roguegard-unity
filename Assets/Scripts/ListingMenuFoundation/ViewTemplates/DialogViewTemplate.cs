@@ -89,11 +89,11 @@ namespace ListingMF
                 this.parent = parent;
             }
 
-            public Builder AppendSelectOption(string name, HandleClickElement<TMgr, TArg> handleClick)
+            public Builder AppendSelectOption(string name, HandleClickElement<TMgr, TArg> onClick)
             {
                 AssertNotBuilded();
 
-                Append(SelectOption.Create(name, handleClick));
+                Append(SelectOption.Create(name, onClick));
                 return this;
             }
 
@@ -110,11 +110,11 @@ namespace ListingMF
                 return this;
             }
 
-            public Builder OnClickLink(HandleClickElement<string, TMgr, TArg> handleClickLink)
+            public Builder OnClickLink(HandleClickElement<string, TMgr, TArg> onClickLink)
             {
                 AssertNotBuilded();
 
-                parent.handleClickLink += handleClickLink;
+                parent.handleClickLink += onClickLink;
                 return this;
             }
         }

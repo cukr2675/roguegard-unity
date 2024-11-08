@@ -71,7 +71,9 @@ namespace RoguegardUnity
                 {
                     // リザルト表示 → ロビーへ帰還
                     var player = arg.Self;
-                    manager.SetGameOver(player, arg.Arg.TargetObj);
+                    var summary = RoguegardSubViews.GetSummary(manager);
+                    summary.SetGameOver(player, arg.Arg.TargetObj, manager);
+                    summary.Show();
                 }
             }
         }

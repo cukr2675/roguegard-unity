@@ -14,10 +14,10 @@ namespace ListingMF
 
         public override bool IsIncremental => true;
 
-        public ColorPickerMenuScreen(System.Func<TMgr, TArg, Color> getColor, System.Action<TMgr, TArg, Color> handleClose)
+        public ColorPickerMenuScreen(System.Func<TMgr, TArg, Color> getColor, System.Action<TMgr, TArg, Color> onClose)
         {
             this.getColor = getColor;
-            this.handleClose = handleClose;
+            this.handleClose = onClose;
             this.handleClose += (manager, arg, color) => manager.BackOption.HandleClick(manager, arg);
 
             view = new()
@@ -50,7 +50,7 @@ namespace ListingMF
         {
             private IElementsSubViewStateProvider colorPickerSubViewStateProvider;
             private Color color;
-            private event ColorPickerSubView.HandleClose OnClose;
+            private event ColorPickerSubView.HandleClose HandleClose;
 
             public Builder ShowTemplate(Color color, TMgr manager, TArg arg)
             {
@@ -66,7 +66,7 @@ namespace ListingMF
             {
                 if (LMFAssert.Type<ColorPickerSubView>(manager.GetSubView(StandardSubViewTable.ColorPickerName), out var colorPickerSubView)) return;
 
-                colorPickerSubView.SetParameters(color, OnClose, manager, arg, ref colorPickerSubViewStateProvider);
+                colorPickerSubView.SetParameters(color, HandleClose, manager, arg, ref colorPickerSubViewStateProvider);
                 colorPickerSubView.Show();
             }
 
@@ -85,11 +85,11 @@ namespace ListingMF
                     this.parent = parent;
                 }
 
-                public Builder OnClose(ColorPickerSubView.HandleClose handleClose)
+                public Builder OnClose(ColorPickerSubView.HandleClose onClose)
                 {
                     AssertNotBuilded();
 
-                    parent.OnClose += handleClose;
+                    parent.HandleClose += onClose;
                     return this;
                 }
             }

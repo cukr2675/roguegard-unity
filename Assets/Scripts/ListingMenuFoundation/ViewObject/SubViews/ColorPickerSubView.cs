@@ -34,7 +34,7 @@ namespace ListingMF
             => throw new System.NotSupportedException();
 
         public void SetParameters(
-            Color color, HandleClose handleClose, IListMenuManager manager, IListMenuArg arg,
+            Color color, HandleClose onClose, IListMenuManager manager, IListMenuArg arg,
             ref IElementsSubViewStateProvider stateProvider)
         {
             if (stateProvider == null) { stateProvider = new StateProvider(); }
@@ -48,7 +48,7 @@ namespace ListingMF
 
             // ï\é¶çXêV
             _colorPicker.CurrentColor = color;
-            this.handleClose = handleClose;
+            this.handleClose = onClose;
             SetArg(manager, arg);
             SetStatusCode(0);
 

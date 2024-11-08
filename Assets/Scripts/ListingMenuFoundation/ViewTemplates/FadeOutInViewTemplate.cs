@@ -16,12 +16,12 @@ namespace ListingMF
         private event HandleClickElement<TMgr, TArg> HandleFadeIn;
 
         private readonly List<object> widgetOptions = new();
-        private readonly ElementsSubView.HandleEndAnimation handleFadeOutAnimation;
-        private readonly ElementsSubView.HandleEndAnimation handleFadeInAnimation;
+        private readonly HandleEndAnimation onFadeOutAnimation;
+        private readonly HandleEndAnimation onFadeInAnimation;
 
         public FadeOutInViewTemplate()
         {
-            handleFadeOutAnimation = (manager, arg) =>
+            onFadeOutAnimation = (manager, arg) =>
             {
                 if (LMFAssert.Type<TMgr>(manager, out var tMgr)) return;
                 if (LMFAssert.Type<TArg>(arg, out var tArg)) return;
@@ -29,7 +29,7 @@ namespace ListingMF
                 HandleFadeOut?.Invoke(tMgr, tArg);
             };
 
-            handleFadeInAnimation = (manager, arg) =>
+            onFadeInAnimation = (manager, arg) =>
             {
                 if (LMFAssert.Type<TMgr>(manager, out var tMgr)) return;
                 if (LMFAssert.Type<TArg>(arg, out var tArg)) return;
@@ -57,12 +57,12 @@ namespace ListingMF
         {
             manager
                 .GetSubView(FadeMaskSubViewName)
-                .Show(widgetOptions, ElementToStringHandler.Instance, manager, arg, ref fadeMaskSubViewStateProvider, handleFadeOutAnimation);
+                .Show(widgetOptions, ElementToStringHandler.Instance, manager, arg, ref fadeMaskSubViewStateProvider, onFadeOutAnimation);
         }
 
         public void FadeIn(TMgr manager, bool back)
         {
-            manager.GetSubView(FadeMaskSubViewName).Hide(back, handleFadeInAnimation);
+            manager.GetSubView(FadeMaskSubViewName).Hide(back, onFadeInAnimation);
         }
 
         public class Builder : BaseBuilder<Builder>
@@ -83,19 +83,19 @@ namespace ListingMF
                 return this;
             }
 
-            public Builder OnFadeOutCompleted(HandleClickElement<TMgr, TArg> handleFadeOut)
+            public Builder OnFadeOutCompleted(HandleClickElement<TMgr, TArg> onFadeOut)
             {
                 AssertNotBuilded();
 
-                parent.HandleFadeOut += handleFadeOut;
+                parent.HandleFadeOut += onFadeOut;
                 return this;
             }
 
-            public Builder OnFadeInCompleted(HandleClickElement<TMgr, TArg> handleFadeIn)
+            public Builder OnFadeInCompleted(HandleClickElement<TMgr, TArg> onFadeIn)
             {
                 AssertNotBuilded();
 
-                parent.HandleFadeIn += handleFadeIn;
+                parent.HandleFadeIn += onFadeIn;
                 return this;
             }
         }

@@ -90,21 +90,21 @@ namespace ListingMF
             widgetOption.HandleClickLink(linkInfo.GetLinkText(), _parent.Manager, _parent.Arg);
         }
 
-        public static IWidgetOption CreateOption<TMgr, TArg>(string text, HandleClickElement<string, TMgr, TArg> handleClickLink = null)
+        public static IWidgetOption CreateOption<TMgr, TArg>(string text, HandleClickElement<string, TMgr, TArg> onClickLink = null)
         {
             return new WidgetOption<TMgr, TArg>()
             {
                 GetText = delegate { return text; },
-                HandleClickLink = handleClickLink
+                HandleClickLink = onClickLink
             };
         }
 
-        public static IWidgetOption CreateOption<TMgr, TArg>(GetElementName<TMgr, TArg> getText, HandleClickElement<string, TMgr, TArg> handleClickLink = null)
+        public static IWidgetOption CreateOption<TMgr, TArg>(GetElementName<TMgr, TArg> getText, HandleClickElement<string, TMgr, TArg> onClickLink = null)
         {
             return new WidgetOption<TMgr, TArg>()
             {
                 GetText = getText,
-                HandleClickLink = handleClickLink
+                HandleClickLink = onClickLink
             };
         }
 

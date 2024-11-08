@@ -100,11 +100,11 @@ namespace ListingMF
                 return this;
             }
 
-            public Builder Option(string name, HandleClickElement<TMgr, TArg> handleClick)
+            public Builder Option(string name, HandleClickElement<TMgr, TArg> onClick)
             {
                 AssertNotBuilded();
 
-                Append(SelectOption.Create(name, handleClick));
+                Append(SelectOption.Create(name, onClick));
                 return this;
             }
 

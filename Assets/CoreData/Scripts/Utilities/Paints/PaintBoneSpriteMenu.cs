@@ -194,17 +194,21 @@ namespace Roguegard
         private class PaintMenu : RogueMenuScreen
         {
             private readonly int directionIndex;
-            private readonly object[] back;
 
             private static readonly DotterBoard[] elms = new DotterBoard[1];
             private static readonly Vector2[] pivots = new Vector2[2];
+            private readonly object[] back;
 
             public PaintMenu(int directionIndex)
             {
                 if (directionIndex < 0 || 4 <= directionIndex) throw new System.ArgumentOutOfRangeException(nameof(directionIndex));
 
                 this.directionIndex = directionIndex;
-                //back = new[] { new ExitListMenuSelectOption(Back) };
+
+                back = new object[]
+                {
+                    SelectOption.Create<MMgr, MArg>("<", Back),
+                };
             }
 
             public override void OpenScreen(in MMgr manager, in MArg arg)
@@ -228,7 +232,15 @@ namespace Roguegard
                         break;
                 }
                 var showsSplitLine = boneSprite.ShowsSplitLine(elms[0], out pivots[0], out pivots[1]);
-                manager.SetPaint(elms, arg.Self, table, itemIndex, showsSplitLine, pivots, Back);
+
+                var paint = RoguegardSubViews.GetPaint(manager);
+                paint.SetPaint(elms, table, showsSplitLine, pivots);
+                paint.Show();
+
+                IElementsSubViewStateProvider stateProvider = null;
+                manager
+                    .GetSubView(StandardSubViewTable.BackAnchorName)
+                    .Show(back, SelectOptionHandler.Instance, manager, arg, ref stateProvider);
             }
 
             private void Back(MMgr manager, MArg arg)
@@ -236,7 +248,7 @@ namespace Roguegard
                 var table = (PaintBoneSpriteTable)arg.Arg.Other;
                 var itemIndex = arg.Arg.Count;
                 var boneSprite = (PaintBoneSprite)table.Items[itemIndex];
-                var paint = (IPaintElementsView)manager.Paint;
+                var paint = RoguegardSubViews.GetPaint(manager);
                 switch (directionIndex)
                 {
                     case 0:

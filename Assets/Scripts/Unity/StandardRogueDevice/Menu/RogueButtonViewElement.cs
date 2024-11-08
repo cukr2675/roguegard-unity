@@ -17,6 +17,8 @@ namespace RoguegardUnity
         [SerializeField] private TMP_Text _stackText = null;
         [SerializeField] private TMP_Text _info1Text = null;
         [SerializeField] private TMP_Text _info2Text = null;
+        [SerializeField] private TMP_Text _equipText = null;
+        private float iconWidth;
 
         [Header("Animation")]
         [SerializeField] private string _defaultStyle = "Submit";
@@ -26,8 +28,12 @@ namespace RoguegardUnity
         private IButtonElementHandler handler;
         private object element;
 
+        private static readonly RogueNameBuilder nameBuilder = new();
+
         private void Awake()
         {
+            iconWidth = _icon.rectTransform.rect.width;
+
             var button = GetComponent<Button>();
             button.onClick.AddListener(() =>
             {
@@ -52,13 +58,31 @@ namespace RoguegardUnity
             float? stars = null;
             string infoText1 = null;
             string infoText2 = null;
+            bool equipeed = false;
             if (handler is IRogueElementHandler rogueElementHandler &&
                 Manager is MMgr manager &&
                 Arg is MArg arg)
             {
                 rogueElementHandler.GetRogueInfo(
-                    element, manager, arg, out var name, ref color, ref icon, ref iconColor, ref stack, ref stars, ref infoText1, ref infoText2);
-                _nameText.text = Manager.Localize(name);
+                    element, manager, arg, out var nameObj, ref color, ref icon, ref iconColor, ref stack,
+                    ref stars, ref infoText1, ref infoText2, ref equipeed);
+                if (nameObj is RogueObj rogueObj)
+                {
+                    rogueObj.GetName(nameBuilder);
+                    StandardRogueDeviceUtility.Localize(nameBuilder);
+                    _nameText.text = nameBuilder.ToString();
+                }
+                else if (nameObj is ISkill skill)
+                {
+                    rogueObj = arg.Arg.TargetObj ?? arg.Self;
+                    SkillNameEffectStateInfo.GetEffectedName(nameBuilder, rogueObj, skill);
+                    StandardRogueDeviceUtility.Localize(nameBuilder);
+                    _nameText.text = nameBuilder.ToString();
+                }
+                else
+                {
+                    _nameText.text = Manager.Localize(nameObj.ToString());
+                }
             }
             else
             {
@@ -66,17 +90,14 @@ namespace RoguegardUnity
                 _nameText.text = Manager.Localize(baseText);
             }
             _nameText.color = color;
+            SetIcon(icon, iconColor);
+            if (stack != null) { _stackText.SetText("x{0}", stack.Value); }
+            else { _stackText.text = ""; }
+            _info1Text.text = infoText1;
+            _info2Text.text = infoText2;
+            _equipText.enabled = equipeed;
 
-            if (icon != null)
-            {
-                _icon.sprite = icon;
-                _icon.color = iconColor;
-                _icon.enabled = true;
-            }
-            else
-            {
-                _icon.enabled = false;
-            }
+
 
             if (animator != null)
             {
@@ -88,10 +109,25 @@ namespace RoguegardUnity
                     animator.SetLayerWeight(i, weight);
                 }
             }
+        }
 
-            _stackText.text = stack.ToString();
-            _info1Text.text = infoText1;
-            _info2Text.text = infoText2;
+        private void SetIcon(Sprite icon, Color iconColor)
+        {
+            if (icon == null)
+            {
+                _icon.enabled = false;
+                return;
+            }
+
+            _icon.sprite = icon;
+            _icon.color = iconColor;
+            _icon.enabled = true;
+            _icon.SetNativeSize();
+
+            // ƒAƒCƒRƒ“‚ð˜g“à‚ÉŽû‚ß‚é
+            var rectTransform = _icon.rectTransform;
+            var rectWidth = Mathf.Max(rectTransform.sizeDelta.x, rectTransform.sizeDelta.y);
+            rectTransform.sizeDelta *= iconWidth / Mathf.Max(RoguegardSettings.PixelsPerUnit, rectWidth);
         }
     }
 }

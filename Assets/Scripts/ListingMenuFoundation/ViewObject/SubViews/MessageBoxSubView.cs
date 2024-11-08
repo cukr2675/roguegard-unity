@@ -62,9 +62,9 @@ namespace ListingMF
             SetStatusCode(0);
         }
 
-        public void DoScheduledAfterCompletion(HandleEndAnimation handleEndAnimation)
+        public void DoScheduledAfterCompletion(HandleEndAnimation onEndAnimation)
         {
-            OnCompleted += handleEndAnimation;
+            OnCompleted += onEndAnimation;
         }
 
         protected virtual void Update()

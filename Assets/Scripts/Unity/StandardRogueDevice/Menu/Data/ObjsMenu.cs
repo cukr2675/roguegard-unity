@@ -4,6 +4,7 @@ using UnityEngine;
 
 using ListingMF;
 using Roguegard;
+using Roguegard.CharacterCreation;
 using Roguegard.Device;
 
 namespace RoguegardUnity
@@ -31,7 +32,7 @@ namespace RoguegardUnity
 
         public ObjsMenu(ObjCommandMenu commandMenu, PutIntoChestCommandMenu putInCommandMenu, TakeOutFromChestCommandMenu takeOutCommandMenu)
         {
-            Close = SelectOption.Create<MMgr, MArg>(":Close", (manager, arg) => manager.Done());
+            Close = SelectOption.Create<MMgr, MArg>(":Close", (manager, arg) => manager.Done(), "Cancel");
             Items = new ItemsMenu() { commandMenu = commandMenu };
             Ground = new GroundMenu() { commandMenu = commandMenu };
             PutIntoChest = new PutIntoChestMenu() { commandMenu = putInCommandMenu };
@@ -48,10 +49,9 @@ namespace RoguegardUnity
 
             private static CategorizedSortTable sortTable;
 
-            private readonly ScrollViewTemplate<RogueObj, MMgr, MArg> view = new()
+            private readonly RogueScrollViewTemplate<RogueObj> view = new()
             {
             };
-
 
             protected ScrollMenu()
             {
@@ -73,9 +73,20 @@ namespace RoguegardUnity
 
                 view.ShowTemplate(list, manager, arg, viewStateHolder)
                     ?
-                    .ElementNameFrom((obj, manager, arg) =>
+                    .ElementInfoFrom((obj, manager, arg) =>
                     {
-                        return obj.GetName();
+                        var icon = obj.Main.InfoSet.Icon;
+                        var color = RogueColorUtility.GetColor(obj);
+                        var stack = obj.Stack;
+
+                        var weight = WeightCalculator.Get(obj);
+                        var weightText = string.Format("重:{0:0.##}", weight.TotalWeight);
+
+                        var equipmentInfo = obj.Main.GetEquipmentInfo(obj);
+                        var vehicleInfo = VehicleInfo.Get(obj);
+                        var equipeed = equipmentInfo?.EquipIndex >= 0 || vehicleInfo?.Rider != null;
+
+                        return (obj, icon, color, stack, null, null, weightText, equipeed);
                     })
 
                     .OnClickElement((obj, manager, arg) =>

@@ -8,23 +8,29 @@ using Roguegard;
 
 namespace RoguegardUnity
 {
-    public class MessageController : MonoBehaviour
+    public class MessageController
     {
-        [SerializeField] private MessageBoxSubView _messageBox = null;
-        [SerializeField] private MessageBoxSubView _logWindow = null;
+        private readonly MessageBoxSubView messageSubView;
+        private readonly MessageBoxSubView logSubView;
 
         private bool messageBoxIsVisible;
         private int showMessageTime;
         private const int messageTime = 3 * 60;
 
-        internal void UpdateUI(SoundController soundController, int deltaTime)
+        public MessageController(StandardSubViewTable table)
         {
-            if (messageBoxIsVisible && !_messageBox.MessageBox.IsInProgress)
+            messageSubView = table.MessageBox;
+            logSubView = table.LongMessage;
+        }
+
+        internal void UpdateUI(int deltaTime)
+        {
+            if (messageBoxIsVisible && !messageSubView.MessageBox.IsInProgress)
             {
                 showMessageTime += deltaTime;
                 if (showMessageTime >= messageTime)
                 {
-                    _messageBox.Hide(false);
+                    messageSubView.Hide(false);
                     messageBoxIsVisible = false;
                 }
             }
@@ -32,19 +38,16 @@ namespace RoguegardUnity
 
         public void ShowMessage()
         {
-            _messageBox.Show();
+            messageSubView.Show();
             messageBoxIsVisible = true;
         }
 
         private void AppendText(string text)
         {
-
-            {
-                _messageBox.MessageBox.Append(text);
-                _logWindow.MessageBox.Append(text);
-                showMessageTime = 0;
-                ShowMessage();
-            }
+            messageSubView.MessageBox.Append(text);
+            logSubView.MessageBox.Append(text);
+            showMessageTime = 0;
+            ShowMessage();
         }
 
         private void AppendObj(RogueObj player, RogueObj obj)
@@ -93,52 +96,22 @@ namespace RoguegardUnity
         public void AppendInteger(int integer)
         {
             AppendText(integer.ToString());
-            //if (talk)
-            //{
-            //    _talkWindow.Append(integer);
-            //}
-            //else
-            //{
-            //    _messageWindow.Append(integer);
-            //    _logWindow.Append(integer);
-            //    showMessageTime = 0;
-            //}
         }
 
         public void AppendNumber(float number)
         {
             AppendText(number.ToString());
-            //if (talk)
-            //{
-            //    _talkWindow.Append(number);
-            //}
-            //else
-            //{
-            //    _messageWindow.Append(number);
-            //    _logWindow.Append(number);
-            //    showMessageTime = 0;
-            //}
         }
 
         public void AppendHorizontalRule()
         {
             AppendText("<link=\"HorizontalRule\"></link>");
-            //if (talk)
-            //{
-            //    _talkWindow.AppendHorizontalRule();
-            //}
-            //else
-            //{
-            //    _messageWindow.AppendHorizontalRule();
-            //    _logWindow.AppendHorizontalRule();
-            //    showMessageTime = 0;
-            //}
         }
 
         public void ClearText()
         {
-            _messageBox.MessageBox.Clear();
-            //_logWindow.Clear();
+            messageSubView.MessageBox.Clear();
+            logSubView.MessageBox.Clear();
         }
     }
 }

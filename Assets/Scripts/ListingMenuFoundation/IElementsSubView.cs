@@ -9,17 +9,12 @@ namespace ListingMF
     /// </summary>
     public interface IElementsSubView
     {
-        /// <summary>
-        /// このプロパティが true のとき <see cref="IListMenuManager"/> の動作を停止させる。アニメーションを待機させるために使用する
-        /// </summary>
-        bool HasManagerLock { get; }
-
         void SetParameters(
             IReadOnlyList<object> list, IElementHandler handler, IListMenuManager manager, IListMenuArg arg,
             ref IElementsSubViewStateProvider stateProvider);
 
-        void Show(ElementsSubView.HandleEndAnimation handleEndAnimation = null);
+        void Show(HandleEndAnimation onEndAnimation = null);
 
-        void Hide(bool back, ElementsSubView.HandleEndAnimation handleEndAnimation = null);
+        void Hide(bool back, HandleEndAnimation onEndAnimation = null);
     }
 }
