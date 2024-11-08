@@ -22,7 +22,7 @@ namespace Roguegard.CharacterCreation
                 IKeyword keyword, IRogueMethod method, RogueObj self, RogueObj target, float activationDepth, in RogueMethodArgument arg,
                 RogueMethodAspectState.ActiveChain chain)
             {
-                if (keyword == MainInfoKw.Hit && AttackUtility.GetUseValue(arg.RefValue))
+                if (keyword == MainInfoKw.Hit && AttackUtility.GetUseValue(arg.RefValue) && self.Location != null)
                 {
                     // 周囲8マスに敵が4体以上いるときダメージ追加
                     var enemyCount = 0;
