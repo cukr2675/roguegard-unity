@@ -41,13 +41,13 @@ namespace RoguegardUnity
                     manager.PushMenuScreen(importScreen);
                     RogueFile.Import(StandardRogueDeviceSave.RootDirectory, errorMsg =>
                     {
+                        manager.Back();
+
                         if (errorMsg != null)
                         {
                             ShowErrorMsg(manager, errorMsg);
                             return;
                         }
-
-                        manager.Reopen();
                     });
                 }));
 

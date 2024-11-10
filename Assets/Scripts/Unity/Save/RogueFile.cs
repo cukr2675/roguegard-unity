@@ -8,18 +8,9 @@ using Save2IDB;
 
 namespace RoguegardUnity
 {
-    public class RogueFile
+    public static class RogueFile
     {
-        public string Path { get; }
-        public System.DateTime LastModified { get; }
-
         public delegate void Callback(string errorMsg = null);
-
-        private RogueFile(string path, System.DateTime lastModified)
-        {
-            Path = path;
-            LastModified = lastModified;
-        }
 
         public static void InitializeDirectory(string path)
         {
@@ -92,7 +83,17 @@ namespace RoguegardUnity
 
             var importer = IDBImporter.InToDirectory(path);
             //importer.FilterAccept = ".gard,.zip";
-            importer.Completed += _ => callback(importer.ErrorMsg);
+            importer.Completed += _ =>
+            {
+                try
+                {
+                    callback(importer.ErrorMsg);
+                }
+                finally
+                {
+                    importer.Dispose();
+                }
+            };
             importer.ShowDialog();
         }
     }
