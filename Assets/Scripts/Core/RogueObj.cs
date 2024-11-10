@@ -69,7 +69,7 @@ namespace Roguegard
                 var spaceObj = spaceObjs[i];
                 if (spaceObj == null) continue;
 
-                // null の場合も ReplaceCloned で既存オブジェクトを null に置き換える
+                // null の場合も ReplaceObj で既存オブジェクトを null に置き換える
                 RogueObj clonedSpaceObj = null;
                 if (!excludeSpace)
                 {
@@ -86,12 +86,12 @@ namespace Roguegard
                 var keys = clone.infos.Keys.ToArray();
                 foreach (var pair in keys)
                 {
-                    var info = clone.infos[pair].ReplaceCloned(spaceObj, clonedSpaceObj);
+                    var info = clone.infos[pair].ReplaceObj(spaceObj, clonedSpaceObj);
                     if (info == null) continue;
 
                     clone.infos[pair] = info;
                 }
-                clone.Main.ReplaceCloned(spaceObj, clonedSpaceObj);
+                clone.Main.ReplaceObj(spaceObj, clonedSpaceObj);
             }
             return clone;
         }
@@ -270,39 +270,39 @@ namespace Roguegard
         }
 
         /// <summary>
-        /// このインスタンスに <paramref name="other"/> をスタックできるかを取得する。（<paramref name="other"/> へのスタックは保証しない）
+        /// このインスタンスに <paramref name="coming"/> をスタックできるかを取得する。（<paramref name="coming"/> へのスタックは保証しない）
         /// </summary>
-        public bool CanStack(RogueObj other)
+        public bool CanStack(RogueObj coming)
         {
-            if (other == null) return false;
+            if (coming == null) return false;
 
             // 子オブジェクトを持つオブジェクトをスタックすることはできない。
             if (Space.Objs.Count >= 1 || Space.Tilemap != null) return false;
-            if (other.Space.Objs.Count >= 1 || Space.Tilemap != null) return false;
+            if (coming.Space.Objs.Count >= 1 || Space.Tilemap != null) return false;
 
-            if (!Main.CanStack(this, other)) return false;
+            if (!Main.CanStack(this, coming)) return false;
 
             var infosCount = 0;
             foreach (var pair in infos)
             {
                 if (!pair.Value.CanStack(null)) { infosCount++; }
             }
-            var otherInfosCount = 0;
-            foreach (var pair in other.infos)
+            var comingInfosCount = 0;
+            foreach (var pair in coming.infos)
             {
-                if (!pair.Value.CanStack(null)) { otherInfosCount++; }
+                if (!pair.Value.CanStack(null)) { comingInfosCount++; }
             }
-            if (otherInfosCount != infosCount) return false;
+            if (comingInfosCount != infosCount) return false;
 
             foreach (var pair in infos)
             {
                 if (pair.Value.CanStack(null)) continue;
 
                 // 同じキーワードの項目がないとき false を返す。
-                if (!other.infos.TryGetValue(pair.Key, out var otherValue)) return false;
+                if (!coming.infos.TryGetValue(pair.Key, out var comingValue)) return false;
 
                 // スタック不可能な項目がひとつでも存在したら false を返す。
-                if (!pair.Value.CanStack(otherValue)) return false;
+                if (!pair.Value.CanStack(comingValue)) return false;
             }
             return true;
         }

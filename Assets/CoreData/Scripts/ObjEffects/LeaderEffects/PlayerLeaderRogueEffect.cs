@@ -31,11 +31,11 @@ namespace Roguegard
         }
 
         // プレイヤーパーティのリーダー用なのでスタックしない。
-        bool IRogueEffect.CanStack(RogueObj obj, RogueObj otherObj, IRogueEffect other) => false;
+        bool IRogueEffect.CanStack(RogueObj self, RogueObj comingObj, IRogueEffect coming) => false;
 
         // プレイヤーパーティのリーダー用なので複製しない。
         IRogueEffect IRogueEffect.DeepOrShallowCopy(RogueObj self, RogueObj clonedSelf) => null;
-        IRogueEffect IRogueEffect.ReplaceCloned(RogueObj obj, RogueObj clonedObj) => this;
+        IRogueEffect IRogueEffect.ReplaceObj(RogueObj obj, RogueObj clonedObj) => this;
 
         protected abstract class BasePartyMemberRogueEffect<T> : PartyMemberRogueEffect
             where T : IPlayerLeaderInfo

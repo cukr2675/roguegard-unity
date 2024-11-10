@@ -83,7 +83,7 @@ namespace Roguegard
             items.Clear();
         }
 
-        public void ReplaceCloned(RogueObj obj, RogueObj clonedObj)
+        public void ReplaceObj(RogueObj obj, RogueObj clonedObj)
         {
             foreach (var listItem in items)
             {

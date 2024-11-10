@@ -415,23 +415,23 @@ namespace Roguegard
             }
         }
 
-        public bool CanStack(RogueObj self, RogueObj other)
+        public bool CanStack(RogueObj self, RogueObj coming)
         {
-            if (!BaseInfoSet.Equals(other.Main.BaseInfoSet)) return false;
-            if (!(PolymorphInfoSet?.Equals(other.Main.PolymorphInfoSet) ?? other.Main.PolymorphInfoSet == null)) return false;
+            if (!BaseInfoSet.Equals(coming.Main.BaseInfoSet)) return false;
+            if (!(PolymorphInfoSet?.Equals(coming.Main.PolymorphInfoSet) ?? coming.Main.PolymorphInfoSet == null)) return false;
 
             var selfEquipmentInfo = GetEquipmentInfo(self);
-            var otherEquipmentInfo = other.Main.GetEquipmentInfo(other);
-            if (selfEquipmentInfo != null || otherEquipmentInfo != null)
+            var comingEquipmentInfo = coming.Main.GetEquipmentInfo(coming);
+            if (selfEquipmentInfo != null || comingEquipmentInfo != null)
             {
-                if (selfEquipmentInfo == null || otherEquipmentInfo == null) return false;
-                if (otherEquipmentInfo.EquipIndex != -1) return false;
+                if (selfEquipmentInfo == null || comingEquipmentInfo == null) return false;
+                if (comingEquipmentInfo.EquipIndex != -1) return false;
                 if (selfEquipmentInfo.EquipIndex != -1 && !selfEquipmentInfo.CanStackWhileEquipped) return false;
             }
 
-            if (!Stats.CanStack(other.Main.Stats)) return false;
-            if (Skills.Count >= 1 || other.Main.Skills.Count >= 1) return false;
-            if (!RogueEffects.CanStack(self, other)) return false;
+            if (!Stats.CanStack(coming.Main.Stats)) return false;
+            if (Skills.Count >= 1 || coming.Main.Skills.Count >= 1) return false;
+            if (!RogueEffects.CanStack(self, coming)) return false;
 
             return true;
         }
@@ -447,10 +447,10 @@ namespace Roguegard
             return clone;
         }
 
-        public void ReplaceCloned(RogueObj obj, RogueObj clonedObj)
+        public void ReplaceObj(RogueObj obj, RogueObj clonedObj)
         {
-            Stats.ReplaceCloned(obj, clonedObj);
-            RogueEffects.ReplaceCloned(obj, clonedObj);
+            Stats.ReplaceObj(obj, clonedObj);
+            RogueEffects.ReplaceObj(obj, clonedObj);
         }
     }
 }

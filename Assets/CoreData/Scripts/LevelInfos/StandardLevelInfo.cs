@@ -154,7 +154,7 @@ namespace Roguegard
             }
         }
 
-        public override bool CanStack(RogueObj obj, RogueObj otherObj, IRogueEffect other) => Equals(other);
+        public override bool CanStack(RogueObj self, RogueObj comingObj, IRogueEffect coming) => Equals(coming);
         public override IRogueEffect DeepOrShallowCopy(RogueObj self, RogueObj clonedSelf) => this;
 
         public override bool Equals(object obj)

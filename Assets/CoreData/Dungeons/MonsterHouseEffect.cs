@@ -61,8 +61,8 @@ namespace Roguegard
             return result;
         }
 
-        public bool CanStack(RogueObj obj, RogueObj otherObj, IRogueEffect other) => false;
+        public bool CanStack(RogueObj self, RogueObj comingObj, IRogueEffect coming) => false;
         public IRogueEffect DeepOrShallowCopy(RogueObj self, RogueObj clonedSelf) => this;
-        public IRogueEffect ReplaceCloned(RogueObj obj, RogueObj clonedObj) => this;
+        public IRogueEffect ReplaceObj(RogueObj obj, RogueObj clonedObj) => this;
     }
 }

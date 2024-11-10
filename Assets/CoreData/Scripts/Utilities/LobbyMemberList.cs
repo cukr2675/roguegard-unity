@@ -110,15 +110,15 @@ namespace Roguegard
                 return default;
             }
 
-            public bool CanStack(IRogueObjInfo other) => false;
+            public bool CanStack(IRogueObjInfo coming) => false;
             public IRogueObjInfo DeepOrShallowCopy(RogueObj self, RogueObj clonedSelf) => null;
-            public IRogueObjInfo ReplaceCloned(RogueObj obj, RogueObj clonedObj) => this;
+            public IRogueObjInfo ReplaceObj(RogueObj obj, RogueObj clonedObj) => this;
 
-            bool IRogueEffect.CanStack(RogueObj obj, RogueObj otherObj, IRogueEffect other) => false;
+            bool IRogueEffect.CanStack(RogueObj self, RogueObj comingObj, IRogueEffect coming) => false;
             IRogueEffect IRogueEffect.DeepOrShallowCopy(RogueObj self, RogueObj clonedSelf) => null;
-            IRogueEffect IRogueEffect.ReplaceCloned(RogueObj obj, RogueObj clonedObj)
+            IRogueEffect IRogueEffect.ReplaceObj(RogueObj obj, RogueObj clonedObj)
             {
-                info.ItemRegister.ReplaceCloned(obj, clonedObj);
+                info.ItemRegister.ReplaceObj(obj, clonedObj);
                 return this;
             }
         }

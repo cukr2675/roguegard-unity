@@ -77,9 +77,9 @@ namespace Roguegard
                 }
             }
 
-            bool IRogueObjInfo.CanStack(IRogueObjInfo other) => true;
+            bool IRogueObjInfo.CanStack(IRogueObjInfo coming) => true;
             IRogueObjInfo IRogueObjInfo.DeepOrShallowCopy(RogueObj self, RogueObj clonedSelf) => new Info();
-            IRogueObjInfo IRogueObjInfo.ReplaceCloned(RogueObj obj, RogueObj clonedObj) => this;
+            IRogueObjInfo IRogueObjInfo.ReplaceObj(RogueObj obj, RogueObj clonedObj) => this;
         }
     }
 }

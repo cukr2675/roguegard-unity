@@ -55,7 +55,7 @@ namespace Roguegard
         /// 装備状態のスタック判定は <see cref="MainRogueObjInfo.CanStack(RogueObj, RogueObj)"/> 内で行う。
         /// （<see cref="IEquipmentInfo.CanStackWhileEquipped"/> が絡むため）
         /// </summary>
-        bool IRogueEffect.CanStack(RogueObj obj, RogueObj otherObj, IRogueEffect other) => true;
+        bool IRogueEffect.CanStack(RogueObj self, RogueObj comingObj, IRogueEffect coming) => true;
 
         IRogueEffect IRogueEffect.DeepOrShallowCopy(RogueObj owner, RogueObj clonedOwner)
         {
@@ -64,7 +64,7 @@ namespace Roguegard
             return clone;
         }
 
-        IRogueEffect IRogueEffect.ReplaceCloned(RogueObj obj, RogueObj clonedObj)
+        IRogueEffect IRogueEffect.ReplaceObj(RogueObj obj, RogueObj clonedObj)
         {
             if (equipment == obj) { equipment = clonedObj; }
             return this;

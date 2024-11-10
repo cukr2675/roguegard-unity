@@ -118,9 +118,9 @@ namespace Roguegard.CharacterCreation
                 return result;
             }
 
-            public override bool CanStack(RogueObj obj, RogueObj otherObj, IRogueEffect other)
+            public override bool CanStack(RogueObj self, RogueObj comingObj, IRogueEffect coming)
 			{
-                return other is StatusEffect;
+                return coming is StatusEffect;
 			}
 
 			public override IRogueEffect DeepOrShallowCopy(RogueObj self, RogueObj clonedSelf)

@@ -25,9 +25,9 @@ namespace Roguegard
             }
         }
 
-        public override bool CanStack(RogueObj obj, RogueObj otherObj, IRogueEffect other)
+        public override bool CanStack(RogueObj self, RogueObj comingObj, IRogueEffect coming)
         {
-            return other is VisionStatusEffect effect && effect.Stack == Stack;
+            return coming is VisionStatusEffect effect && effect.Stack == Stack;
         }
 
         public override IRogueEffect DeepOrShallowCopy(RogueObj self, RogueObj clonedSelf)

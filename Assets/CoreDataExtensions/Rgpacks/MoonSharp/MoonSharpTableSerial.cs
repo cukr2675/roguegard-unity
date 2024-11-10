@@ -38,13 +38,13 @@ namespace Roguegard.Rgpacks.MoonSharp
             }
         }
 
-        public bool CanStack(MoonSharpTableSerial other)
+        public bool CanStack(MoonSharpTableSerial coming)
         {
-            if (other.sTable.Length != sTable.Length) return false;
+            if (coming.sTable.Length != sTable.Length) return false;
 
             foreach (var pair in sTable.Pairs)
             {
-                var otherValue = other.sTable.Get(pair.Key);
+                var otherValue = coming.sTable.Get(pair.Key);
                 if (!pair.Value.Equals(otherValue)) return false;
             }
             return true;
@@ -59,11 +59,11 @@ namespace Roguegard.Rgpacks.MoonSharp
         {
             var clone = new MoonSharpTableSerial();
             clone.SetTable(cloneTable);
-            clone.ReplaceCloned(self, clonedSelf);
+            clone.ReplaceObj(self, clonedSelf);
             return clone;
         }
 
-        public void ReplaceCloned(RogueObj obj, RogueObj clonedObj)
+        public void ReplaceObj(RogueObj obj, RogueObj clonedObj)
         {
             foreach (var pair in sTable.Pairs)
             {

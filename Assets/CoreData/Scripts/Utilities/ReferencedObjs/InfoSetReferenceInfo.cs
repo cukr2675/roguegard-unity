@@ -61,13 +61,13 @@ namespace Roguegard
 
             public bool IsExclusedWhenSerialize => false;
 
-            public bool CanStack(IRogueObjInfo other)
+            public bool CanStack(IRogueObjInfo coming)
             {
-                if (!(other is Info otherInfo)) return false;
-                if (info.Count != otherInfo.info.Count) return false;
+                if (!(coming is Info comingInfo)) return false;
+                if (info.Count != comingInfo.info.Count) return false;
                 for (int i = 0; i < info.Count; i++)
                 {
-                    if (!info.Get(i).Equals(otherInfo.info.Get(i))) return false;
+                    if (!info.Get(i).Equals(comingInfo.info.Get(i))) return false;
                 }
                 return true;
             }
@@ -77,7 +77,7 @@ namespace Roguegard
                 return new Info() { info = new InfoSetReferenceInfo(info.infoSets) };
             }
 
-            public IRogueObjInfo ReplaceCloned(RogueObj obj, RogueObj clonedObj)
+            public IRogueObjInfo ReplaceObj(RogueObj obj, RogueObj clonedObj)
             {
                 return this;
             }

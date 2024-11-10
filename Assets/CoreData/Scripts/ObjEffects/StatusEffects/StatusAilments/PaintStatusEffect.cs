@@ -28,9 +28,9 @@ namespace Roguegard
             NewAffectTo(target, user, activationDepth, arg, statusEffect);
         }
 
-        public override bool CanStack(RogueObj obj, RogueObj otherObj, IRogueEffect other)
+        public override bool CanStack(RogueObj self, RogueObj comingObj, IRogueEffect coming)
         {
-            return other is PaintStatusEffect effect && effect.LifeTime == LifeTime && effect.Stack == Stack;
+            return coming is PaintStatusEffect effect && effect.LifeTime == LifeTime && effect.Stack == Stack;
         }
 
         public override IRogueEffect DeepOrShallowCopy(RogueObj self, RogueObj clonedSelf)

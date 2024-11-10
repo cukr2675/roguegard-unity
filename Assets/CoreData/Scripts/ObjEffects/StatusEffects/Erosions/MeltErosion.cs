@@ -60,9 +60,9 @@ namespace Roguegard
             refName.Insert0("溶けた");
         }
 
-        public override bool CanStack(RogueObj obj, RogueObj otherObj, IRogueEffect other)
+        public override bool CanStack(RogueObj self, RogueObj comingObj, IRogueEffect coming)
         {
-            return other is MeltErosion erosion && erosion.Stack == Stack;
+            return coming is MeltErosion erosion && erosion.Stack == Stack;
         }
 
         public override IRogueEffect DeepOrShallowCopy(RogueObj self, RogueObj clonedSelf)

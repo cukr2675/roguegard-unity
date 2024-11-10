@@ -59,9 +59,9 @@ namespace Roguegard
             CoreEffecterBoneSpriteTables.GuruguruEyes.AddTo(boneSpriteTable);
         }
 
-        public override bool CanStack(RogueObj obj, RogueObj otherObj, IRogueEffect other)
+        public override bool CanStack(RogueObj self, RogueObj comingObj, IRogueEffect coming)
         {
-            return other is ConfusionStatusEffect effect && effect.LifeTime == LifeTime;
+            return coming is ConfusionStatusEffect effect && effect.LifeTime == LifeTime;
         }
 
         public override IRogueEffect DeepOrShallowCopy(RogueObj self, RogueObj clonedSelf)

@@ -62,7 +62,7 @@ namespace Roguegard.Rgpacks
 
             public bool IsExclusedWhenSerialize => false;
 
-            public bool CanStack(IRogueObjInfo other)
+            public bool CanStack(IRogueObjInfo coming)
             {
                 throw new System.NotImplementedException();
             }
@@ -72,7 +72,7 @@ namespace Roguegard.Rgpacks
                 throw new System.NotImplementedException();
             }
 
-            public IRogueObjInfo ReplaceCloned(RogueObj obj, RogueObj clonedObj)
+            public IRogueObjInfo ReplaceObj(RogueObj obj, RogueObj clonedObj)
             {
                 throw new System.NotImplementedException();
             }

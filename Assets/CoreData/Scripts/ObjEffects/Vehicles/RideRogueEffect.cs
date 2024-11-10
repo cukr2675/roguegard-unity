@@ -53,7 +53,7 @@ namespace Roguegard
             }
         }
 
-        bool IRogueEffect.CanStack(RogueObj obj, RogueObj otherObj, IRogueEffect other) => false;
+        bool IRogueEffect.CanStack(RogueObj self, RogueObj comingObj, IRogueEffect coming) => false;
 
         IRogueEffect IRogueEffect.DeepOrShallowCopy(RogueObj rider, RogueObj clonedRider)
         {
@@ -64,7 +64,7 @@ namespace Roguegard
             return clone;
         }
 
-        IRogueEffect IRogueEffect.ReplaceCloned(RogueObj obj, RogueObj clonedObj)
+        IRogueEffect IRogueEffect.ReplaceObj(RogueObj obj, RogueObj clonedObj)
         {
             if (vehicle == obj) { vehicle = clonedObj; }
             if (Rider == obj) { Rider = clonedObj; }

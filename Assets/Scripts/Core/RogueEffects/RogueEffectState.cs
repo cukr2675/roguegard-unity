@@ -99,29 +99,29 @@ namespace Roguegard
             openingNow.Value = false;
         }
 
-        internal bool CanStack(RogueObj self, RogueObj other)
+        internal bool CanStack(RogueObj self, RogueObj coming)
         {
             var selfIndex = 0;
-            var otherIndex = 0;
+            var comingIndex = 0;
             while (true)
             {
                 IRogueEffect selfEffect = null;
-                IRogueEffect otherEffect = null;
+                IRogueEffect comingEffect = null;
                 if (selfIndex < _effects.Count)
                 {
                     selfEffect = _effects[selfIndex];
                     selfIndex++;
-                    if (selfEffect.CanStack(self, other, null)) continue;
+                    if (selfEffect.CanStack(self, coming, null)) continue;
                 }
-                if (otherIndex < other.Main.RogueEffects._effects.Count)
+                if (comingIndex < coming.Main.RogueEffects._effects.Count)
                 {
-                    otherEffect = other.Main.RogueEffects._effects[otherIndex];
-                    otherIndex++;
-                    if (otherEffect.CanStack(self, other, null)) continue;
+                    comingEffect = coming.Main.RogueEffects._effects[comingIndex];
+                    comingIndex++;
+                    if (comingEffect.CanStack(self, coming, null)) continue;
                 }
-                if (selfEffect == null && otherEffect == null) break;
+                if (selfEffect == null && comingEffect == null) break;
 
-                if (selfEffect == null || otherEffect == null || !selfEffect.CanStack(self, other, otherEffect)) return false;
+                if (selfEffect == null || comingEffect == null || !selfEffect.CanStack(self, coming, comingEffect)) return false;
             }
             return true;
         }
@@ -137,11 +137,11 @@ namespace Roguegard
             return clone;
         }
 
-        internal void ReplaceCloned(RogueObj obj, RogueObj clonedObj)
+        internal void ReplaceObj(RogueObj obj, RogueObj clonedObj)
         {
             for (int i = 0; i < _effects.Count; i++)
             {
-                _effects[i] = _effects[i].ReplaceCloned(obj, clonedObj);
+                _effects[i] = _effects[i].ReplaceObj(obj, clonedObj);
             }
         }
     }

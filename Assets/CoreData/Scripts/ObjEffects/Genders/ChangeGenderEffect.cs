@@ -78,9 +78,9 @@ namespace Roguegard
 
             void IStatusEffect.GetEffectedName(RogueNameBuilder refName, RogueObj self) { }
 
-            bool IRogueEffect.CanStack(RogueObj obj, RogueObj otherObj, IRogueEffect other) => other == this;
+            bool IRogueEffect.CanStack(RogueObj self, RogueObj comingObj, IRogueEffect coming) => coming == this;
             IRogueEffect IRogueEffect.DeepOrShallowCopy(RogueObj self, RogueObj clonedSelf) => this;
-            IRogueEffect IRogueEffect.ReplaceCloned(RogueObj obj, RogueObj clonedObj) => this;
+            IRogueEffect IRogueEffect.ReplaceObj(RogueObj obj, RogueObj clonedObj) => this;
             public override bool Equals(object obj) => obj.GetType() == GetType();
             public override int GetHashCode() => GetType().GetHashCode();
         }

@@ -90,9 +90,9 @@ namespace Roguegard
             base.RemoveClose(self);
         }
 
-        public override bool CanStack(RogueObj obj, RogueObj otherObj, IRogueEffect other)
+        public override bool CanStack(RogueObj self, RogueObj comingObj, IRogueEffect coming)
         {
-            return other is PolymorphStatusEffect effect && effect.Stack == Stack && effect.LifeTime == LifeTime;
+            return coming is PolymorphStatusEffect effect && effect.Stack == Stack && effect.LifeTime == LifeTime;
         }
 
         public override IRogueEffect DeepOrShallowCopy(RogueObj self, RogueObj clonedSelf)

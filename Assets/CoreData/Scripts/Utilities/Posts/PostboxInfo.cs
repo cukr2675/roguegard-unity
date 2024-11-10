@@ -69,20 +69,13 @@ namespace Roguegard
 
             public bool IsExclusedWhenSerialize => false;
 
-            public bool CanStack(IRogueObjInfo other)
+            public bool CanStack(IRogueObjInfo coming)
             {
-                return other is Info otherInfo && info.Posts.Count == 0 && otherInfo.info.Posts.Count == 0;
+                return coming is Info otherInfo && info.Posts.Count == 0 && otherInfo.info.Posts.Count == 0;
             }
 
-            public IRogueObjInfo DeepOrShallowCopy(RogueObj self, RogueObj clonedSelf)
-            {
-                return null;
-            }
-
-            public IRogueObjInfo ReplaceCloned(RogueObj obj, RogueObj clonedObj)
-            {
-                return this;
-            }
+            public IRogueObjInfo DeepOrShallowCopy(RogueObj self, RogueObj clonedSelf) => null;
+            public IRogueObjInfo ReplaceObj(RogueObj obj, RogueObj clonedObj) => this;
         }
     }
 }

@@ -75,9 +75,9 @@ namespace Roguegard
             return chain.Invoke(keyword, method, self, target, activationDepth, arg);
         }
 
-        public override bool CanStack(RogueObj obj, RogueObj otherObj, IRogueEffect other)
+        public override bool CanStack(RogueObj self, RogueObj comingObj, IRogueEffect coming)
         {
-            return other is FearStatusEffect effect && effect.Stack == Stack && effect.LifeTime == LifeTime;
+            return coming is FearStatusEffect effect && effect.Stack == Stack && effect.LifeTime == LifeTime;
         }
 
         public override IRogueEffect DeepOrShallowCopy(RogueObj self, RogueObj clonedSelf)

@@ -14,12 +14,14 @@ namespace Roguegard
         void Open(RogueObj self);
 
         /// <summary>
-        /// <paramref name="other"/> == null のときも true を返す場合、スタック判定には関わらない。
+        /// <paramref name="coming"/> == null のときも true を返す場合、スタック判定には関わらない。
         /// </summary>
-        bool CanStack(RogueObj obj, RogueObj otherObj, IRogueEffect other);
+        bool CanStack(RogueObj self, RogueObj comingObj, IRogueEffect coming);
 
         // ShallowOrDeepCopy だと S から始まってしまう（頻繁に出現する Set... 等と被る）ため DeepOrShallowCopy
         IRogueEffect DeepOrShallowCopy(RogueObj self, RogueObj clonedSelf);
-        IRogueEffect ReplaceCloned(RogueObj obj, RogueObj clonedObj);
+
+        // 引数の RogueObj は self 以外にも置き換えるべきあらゆるオブジェクトが入るため、引数名は obj
+        IRogueEffect ReplaceObj(RogueObj obj, RogueObj clonedObj);
     }
 }

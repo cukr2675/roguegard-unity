@@ -21,7 +21,7 @@ namespace Roguegard
         /// <summary>
         /// <paramref name="other"/> == null のときも true を返す場合、スタック判定には関わらない。
         /// </summary>
-        bool CanStack(IRogueObjInfo other);
+        bool CanStack(IRogueObjInfo coming);
 
         /// <summary>
         /// <paramref name="self"/> を <paramref name="clonedSelf"/> に置き換えたクローンにあたるインスタンスを取得する。
@@ -33,6 +33,6 @@ namespace Roguegard
         /// このメソッドで複製前 <see cref="RogueObj"/> を複製後 <see cref="RogueObj"/> に置き換えることで、
         /// <see cref="RogueObj"/> の親子関係を保つ。
         /// </summary>
-        IRogueObjInfo ReplaceCloned(RogueObj obj, RogueObj clonedObj);
+        IRogueObjInfo ReplaceObj(RogueObj obj, RogueObj clonedObj);
     }
 }

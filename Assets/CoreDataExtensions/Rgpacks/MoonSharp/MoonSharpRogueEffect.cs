@@ -70,22 +70,22 @@ namespace Roguegard.Rgpacks.MoonSharp
             return passiveAspectMethod.Call().Boolean;
         }
 
-        public bool CanStack(RogueObj obj, RogueObj otherObj, IRogueEffect other)
+        public bool CanStack(RogueObj self, RogueObj comingObj, IRogueEffect coming)
         {
-            return other is MoonSharpRogueEffect effect && effect.type.Equals(type) && effect.serial.CanStack(serial);
+            return coming is MoonSharpRogueEffect effect && effect.type.Equals(type) && effect.serial.CanStack(serial);
         }
 
         public IRogueEffect DeepOrShallowCopy(RogueObj self, RogueObj clonedSelf)
         {
             var clone = new MoonSharpRogueEffect(type);
             serial.CopyTo(clone.serial);
-            serial.ReplaceCloned(self, clonedSelf);
+            serial.ReplaceObj(self, clonedSelf);
             return clone;
         }
 
-        public IRogueEffect ReplaceCloned(RogueObj obj, RogueObj clonedObj)
+        public IRogueEffect ReplaceObj(RogueObj obj, RogueObj clonedObj)
         {
-            serial.ReplaceCloned(obj, clonedObj);
+            serial.ReplaceObj(obj, clonedObj);
             return this;
         }
     }

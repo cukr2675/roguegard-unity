@@ -67,13 +67,13 @@ namespace Roguegard
                 }
             }
 
-            bool IRogueEffect.CanStack(RogueObj obj, RogueObj otherObj, IRogueEffect other)
+            bool IRogueEffect.CanStack(RogueObj self, RogueObj comingObj, IRogueEffect coming)
             {
-                return other is Effect colorOther && (Color)colorOther.color == color;
+                return coming is Effect colorOther && (Color)colorOther.color == color;
             }
 
             IRogueEffect IRogueEffect.DeepOrShallowCopy(RogueObj self, RogueObj clonedSelf) => this;
-            IRogueEffect IRogueEffect.ReplaceCloned(RogueObj obj, RogueObj clonedObj) => this;
+            IRogueEffect IRogueEffect.ReplaceObj(RogueObj obj, RogueObj clonedObj) => this;
         }
     }
 }

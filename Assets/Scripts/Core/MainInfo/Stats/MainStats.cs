@@ -198,12 +198,12 @@ namespace Roguegard
             }
         }
 
-        internal bool CanStack(MainStats other)
+        internal bool CanStack(MainStats coming)
         {
-            if (Party != null || other.Party != null) return false;
-            if (TargetObj != null || other.TargetObj != null) return false;
+            if (Party != null || coming.Party != null) return false;
+            if (TargetObj != null || coming.TargetObj != null) return false;
 
-            return HP == other.HP && MP == other.MP && Nutrition == other.Nutrition && Lv == other.Lv && TotalExp == other.TotalExp;
+            return HP == coming.HP && MP == coming.MP && Nutrition == coming.Nutrition && Lv == coming.Lv && TotalExp == coming.TotalExp;
         }
 
         internal MainStats Clone(RogueObj self, RogueObj clonedSelf)
@@ -222,7 +222,7 @@ namespace Roguegard
             return clone;
         }
 
-        internal void ReplaceCloned(RogueObj obj, RogueObj clonedObj)
+        internal void ReplaceObj(RogueObj obj, RogueObj clonedObj)
         {
             if (obj == TargetObj) { TargetObj = clonedObj; }
         }

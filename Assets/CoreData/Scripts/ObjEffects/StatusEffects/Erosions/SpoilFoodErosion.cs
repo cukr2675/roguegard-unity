@@ -64,9 +64,9 @@ namespace Roguegard
             refName.Insert0("くさった");
         }
 
-        public override bool CanStack(RogueObj obj, RogueObj otherObj, IRogueEffect other)
+        public override bool CanStack(RogueObj self, RogueObj comingObj, IRogueEffect coming)
         {
-            return other is SpoilFoodErosion erosion && erosion.Stack == Stack;
+            return coming is SpoilFoodErosion erosion && erosion.Stack == Stack;
         }
 
         public override IRogueEffect DeepOrShallowCopy(RogueObj self, RogueObj clonedSelf)

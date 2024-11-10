@@ -53,20 +53,9 @@ namespace Roguegard.Rgpacks
 
             public bool IsExclusedWhenSerialize => false;
 
-            public bool CanStack(IRogueObjInfo other)
-            {
-                return false;
-            }
-
-            public IRogueObjInfo DeepOrShallowCopy(RogueObj self, RogueObj clonedSelf)
-            {
-                return null;
-            }
-
-            public IRogueObjInfo ReplaceCloned(RogueObj obj, RogueObj clonedObj)
-            {
-                return this;
-            }
+            public bool CanStack(IRogueObjInfo coming) => false;
+            public IRogueObjInfo DeepOrShallowCopy(RogueObj self, RogueObj clonedSelf) => null;
+            public IRogueObjInfo ReplaceObj(RogueObj obj, RogueObj clonedObj) => this;
         }
     }
 }

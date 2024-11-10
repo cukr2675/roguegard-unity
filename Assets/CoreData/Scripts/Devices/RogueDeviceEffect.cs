@@ -87,8 +87,8 @@ namespace Roguegard.Device
             return result;
         }
 
-        bool IRogueEffect.CanStack(RogueObj obj, RogueObj otherObj, IRogueEffect other) => false;
+        bool IRogueEffect.CanStack(RogueObj self, RogueObj comingObj, IRogueEffect coming) => false;
         IRogueEffect IRogueEffect.DeepOrShallowCopy(RogueObj self, RogueObj clonedSelf) => null;
-        IRogueEffect IRogueEffect.ReplaceCloned(RogueObj obj, RogueObj clonedObj) => null;
+        IRogueEffect IRogueEffect.ReplaceObj(RogueObj obj, RogueObj clonedObj) => null;
     }
 }

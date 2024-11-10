@@ -36,7 +36,7 @@ namespace Roguegard
 
             public bool IsExclusedWhenSerialize => false;
 
-            public bool CanStack(IRogueObjInfo other)
+            public bool CanStack(IRogueObjInfo coming)
             {
                 return false;
             }
@@ -46,7 +46,7 @@ namespace Roguegard
                 return new Info() { text = text };
             }
 
-            public IRogueObjInfo ReplaceCloned(RogueObj obj, RogueObj clonedObj)
+            public IRogueObjInfo ReplaceObj(RogueObj obj, RogueObj clonedObj)
             {
                 return this;
             }

@@ -32,9 +32,9 @@ namespace Roguegard
             refName.Insert0(Naming);
         }
 
-        public override bool CanStack(RogueObj obj, RogueObj otherObj, IRogueEffect other)
+        public override bool CanStack(RogueObj self, RogueObj comingObj, IRogueEffect coming)
         {
-            return other is NamingEffect effect && effect.Naming == Naming && effect.NamingCaption == NamingCaption && effect.NamingDetails == NamingDetails;
+            return coming is NamingEffect effect && effect.Naming == Naming && effect.NamingCaption == NamingCaption && effect.NamingDetails == NamingDetails;
         }
 
         public override IRogueEffect DeepOrShallowCopy(RogueObj self, RogueObj clonedSelf)

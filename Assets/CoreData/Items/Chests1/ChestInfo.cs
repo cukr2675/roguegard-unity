@@ -61,20 +61,9 @@ namespace Roguegard
 
             public bool IsExclusedWhenSerialize => true;
 
-            public bool CanStack(IRogueObjInfo other)
-            {
-                return true;
-            }
-
-            public IRogueObjInfo DeepOrShallowCopy(RogueObj self, RogueObj clonedSelf)
-            {
-                return null;
-            }
-
-            public IRogueObjInfo ReplaceCloned(RogueObj obj, RogueObj clonedObj)
-            {
-                return this;
-            }
+            public bool CanStack(IRogueObjInfo coming) => true;
+            public IRogueObjInfo DeepOrShallowCopy(RogueObj self, RogueObj clonedSelf) => null;
+            public IRogueObjInfo ReplaceObj(RogueObj obj, RogueObj clonedObj) => this;
         }
     }
 }

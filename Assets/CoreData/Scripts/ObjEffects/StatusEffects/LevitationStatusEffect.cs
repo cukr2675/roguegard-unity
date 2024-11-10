@@ -48,9 +48,9 @@ namespace Roguegard
             return RogueEffectUtility.Remove(self, effect);
         }
 
-        public override bool CanStack(RogueObj obj, RogueObj otherObj, IRogueEffect other)
+        public override bool CanStack(RogueObj self, RogueObj comingObj, IRogueEffect coming)
         {
-            return other is LevitationStatusEffect effect && effect.Stack == Stack && effect.LifeTime == LifeTime;
+            return coming is LevitationStatusEffect effect && effect.Stack == Stack && effect.LifeTime == LifeTime;
         }
 
         public override IRogueEffect DeepOrShallowCopy(RogueObj self, RogueObj clonedSelf)

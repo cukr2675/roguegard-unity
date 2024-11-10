@@ -77,14 +77,14 @@ namespace Roguegard
         {
         }
 
-        public abstract bool CanStack(RogueObj obj, RogueObj otherObj, IRogueEffect other);
+        public abstract bool CanStack(RogueObj self, RogueObj comingObj, IRogueEffect coming);
 
         /// <summary>
         /// クローンを生成する場合、クローンの状態は現在の複製にする。
         /// </summary>
         public abstract IRogueEffect DeepOrShallowCopy(RogueObj self, RogueObj clonedSelf);
 
-        public virtual IRogueEffect ReplaceCloned(RogueObj obj, RogueObj clonedObj) => this;
+        public virtual IRogueEffect ReplaceObj(RogueObj obj, RogueObj clonedObj) => this;
 
         /// <summary>
         /// ステータスエフェクトが

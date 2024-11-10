@@ -173,9 +173,9 @@ namespace Roguegard
 
             bool IRogueObjInfo.IsExclusedWhenSerialize => false;
 
-            bool IRogueObjInfo.CanStack(IRogueObjInfo other) => false;
+            bool IRogueObjInfo.CanStack(IRogueObjInfo coming) => false;
             IRogueObjInfo IRogueObjInfo.DeepOrShallowCopy(RogueObj self, RogueObj clonedSelf) => null;
-            IRogueObjInfo IRogueObjInfo.ReplaceCloned(RogueObj obj, RogueObj clonedObj) => this;
+            IRogueObjInfo IRogueObjInfo.ReplaceObj(RogueObj obj, RogueObj clonedObj) => this;
         }
     }
 }

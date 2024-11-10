@@ -49,9 +49,9 @@ namespace Roguegard.CharacterCreation
 
             public bool IsExclusedWhenSerialize => true;
 
-            public bool CanStack(IRogueObjInfo other) => false;
+            public bool CanStack(IRogueObjInfo coming) => false;
             public IRogueObjInfo DeepOrShallowCopy(RogueObj self, RogueObj clonedSelf) => null;
-            public IRogueObjInfo ReplaceCloned(RogueObj obj, RogueObj clonedObj) => this;
+            public IRogueObjInfo ReplaceObj(RogueObj obj, RogueObj clonedObj) => this;
         }
     }
 }
