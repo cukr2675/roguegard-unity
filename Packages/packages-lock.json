@@ -310,6 +310,13 @@
       },
       "url": "https://packages.unity.com"
     },
+    "jp.cukr2675.save2idb": {
+      "version": "https://github.com/cukr2675/save2idb.git?path=Packages/Save2IDB",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "ce33412266e178de0b9b26d60beef03a6948e9b4"
+    },
     "moonsharp": {
       "version": "https://github.com/k0dep/MoonSharp.git#2.0.0",
       "depth": 0,
