@@ -9,6 +9,7 @@ namespace RoguegardUnity
     internal class SoundController
     {
         private Dictionary<IKeyword, Item> table;
+        private MonoBehaviour coroutineRunner;
         private AudioSource seAudioSourcePrefab;
         private int blankTimeSamples;
         private Transform sourceParent;
@@ -17,12 +18,13 @@ namespace RoguegardUnity
 
         public bool Wait => waitSource?.IsPlaying ?? false;
 
-        public void Open(Transform parent, AudioSource seAudioSourcePrefab, SoundTable soundTable)
+        public void Open(Transform parent, MonoBehaviour coroutineRunner, AudioSource seAudioSourcePrefab, SoundTable soundTable)
         {
             var name = "SoundController";
             sourceParent = new GameObject($"{name} - Parent").transform;
             sourceParent.SetParent(parent, false);
             table = new Dictionary<IKeyword, Item>();
+            this.coroutineRunner = coroutineRunner;
             this.seAudioSourcePrefab = seAudioSourcePrefab;
             blankTimeSamples = soundTable.BlankTimeSamples;
             foreach (var pair in soundTable)
@@ -128,7 +130,7 @@ namespace RoguegardUnity
                     source.PlayScheduled(startLoopTime + (double)delaySamples / AudioSettings.outputSampleRate);
                     loopCount++;
                 }
-                FadeCanvas.StartCanvasCoroutine(AudioLoopCoroutine());
+                parent.coroutineRunner.StartCoroutine(AudioLoopCoroutine());
             }
 
             public void SetLastLoop()

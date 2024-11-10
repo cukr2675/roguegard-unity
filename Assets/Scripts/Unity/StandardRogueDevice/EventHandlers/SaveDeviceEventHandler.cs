@@ -106,13 +106,9 @@ namespace RoguegardUnity
 
         private void SaveDelay(MMgr manager, string path, bool autoSave)
         {
-            if (manager != null)
-            {
-                manager.Back();
-                SelectFileMenuScreen.ShowSaving(manager);
-            }
-
-            FadeCanvas.StartCanvasCoroutine(Save(manager, path, autoSave));
+            manager.Back();
+            SelectFileMenuScreen.ShowSaving(manager);
+            manager.StartCoroutine(Save(manager, path, autoSave));
         }
 
         private IEnumerator Save(MMgr manager, string path, bool autoSave)

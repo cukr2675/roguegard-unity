@@ -46,6 +46,12 @@ namespace RoguegardUnity
         {
             parent = new GameObject($"{name} - Parent").transform;
 
+            // Unity の Update と Coroutine 実行用オブジェクト
+            var gameObject = new GameObject("Ticker");
+            gameObject.transform.SetParent(parent, false);
+            ticker = gameObject.AddComponent<RogueTicker>();
+            ticker.enabled = false;
+
             // キャラクター表示
             characterRenderSystem = new CharacterRenderSystem();
             characterRenderSystem.Open(parent, spriteRendererPool);
@@ -57,7 +63,7 @@ namespace RoguegardUnity
 
             // 音声再生
             var soundController = new SoundController();
-            soundController.Open(parent, seAudioSourcePrefab, soundTable);
+            soundController.Open(parent, ticker, seAudioSourcePrefab, soundTable);
 
             // UI表示
             touchController = Object.Instantiate(touchControllerPrefab, parent);
@@ -66,12 +72,6 @@ namespace RoguegardUnity
                 tilemapGrid.Tilemap, soundController, spriteRendererPool, () => autoPlayDeviceEventHandler.StopAutoPlay());
             touchController.GetInfo(out menuController, out var putIntoChestMenu, out var takeOutFromChestMenu);
             Application.logMessageReceived += OnLogMessageReceived;
-
-            // Unity の Update 実行用オブジェクト
-            var gameObject = new GameObject("Ticker");
-            gameObject.transform.SetParent(parent, false);
-            ticker = gameObject.AddComponent<RogueTicker>();
-            ticker.enabled = false;
 
             // オプション設定値
             Options = new RogueOptions();
@@ -100,7 +100,7 @@ namespace RoguegardUnity
 
         public void OpenDelay(StandardRogueDeviceData data)
         {
-            FadeCanvas.StartCanvasCoroutine(OpenCoroutine(data));
+            ticker.StartCoroutine(OpenCoroutine(data));
         }
 
         private IEnumerator OpenCoroutine(StandardRogueDeviceData data)

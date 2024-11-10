@@ -59,7 +59,7 @@ namespace RoguegardUnity
             this.runtimeInspectorPrefab = runtimeInspectorPrefab;
 
             var soundController = new SoundController();
-            soundController.Open(null, seAudioSourcePrefab, soundTable);
+            soundController.Open(null, this, seAudioSourcePrefab, soundTable);
 
             _versionText.text = Application.version;
 
