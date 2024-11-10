@@ -34,14 +34,18 @@ const Save2IDBPlugin = {
         },
 
         disposeImporter: (ohPtr) => {
-            if (!Save2IDB.importElements[ohPtr]) return;
-
-            document.body.removeChild(Save2IDB.importElements[ohPtr]);
+            const element = Save2IDB.importElements[ohPtr];
+            if (!element) return;
+            
+            for (const file of element.files) {
+                if (file.objectURL) { URL.revokeObjectURL(file.objectURL); } // For import to memory stream.
+            }
+            document.body.removeChild(element);
             delete Save2IDB.importElements[ohPtr];
         },
 
         getStatsJson: (files) => {
-            const stats = files.map(({ name, destPath, size, type, lastModified }) => ({ name, destPath, size, type, lastModified: new Date(lastModified) }));
+            const stats = files.map(({ name, destPath, size, type, lastModified, objectURL }) => ({ name, destPath, size, type, lastModified: new Date(lastModified), objectURL }));
             return JSON.stringify({ vs: stats }); // Convert to object because JsonUtility.FromJson cannot parse array.
         },
         
@@ -122,29 +126,13 @@ const Save2IDBPlugin = {
 
             // Callback with file stats
             const files = await Save2IDB.import(filterAccept, multiselect, ohPtr);
+            files.map(file => file.objectURL = URL.createObjectURL(file)); // For import to memory stream.
             const statsJson = Save2IDB.getStatsJson(files);
             Save2IDB.callbackText(thenCallback, ohPtr, statsJson);
 
         } catch (error) {
             console.error(`Save2IDB_ImportToMemoryStreamsAsync error: ${error}`);
             Save2IDB.callbackText(catchCallback, ohPtr, error);
-        }
-    },
-
-    Save2IDB_ReadInputtedFileAsync: async function (fileNamePtr, bytesPtr, ohPtr, readOhPtr, thenCallback, catchCallback) {
-        try {
-            const fileName = UTF8ToString(fileNamePtr);
-
-            // Copy the file to a MemoryStream
-            const files = Array.from(Save2IDB.importElements[ohPtr].files); // Get files inputted by user.
-            const file = files.find(file => file.name === fileName);
-            const buffer = await file.arrayBuffer();
-            Module.HEAPU8.set(new Uint8Array(buffer), bytesPtr);
-            Module.dynCall_vi(thenCallback, readOhPtr);
-
-        } catch (error) {
-            console.error(`Save2IDB_ReadInputtedFileAsync error: ${error}`);
-            Save2IDB.callbackText(catchCallback, readOhPtr, error);
         }
     }
 

@@ -7,6 +7,7 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
 using AOT;
+using UnityEngine.Networking;
 
 namespace Save2IDB
 {
@@ -33,11 +34,6 @@ namespace Save2IDB
         [DllImport("__Internal")]
         private static extern void Save2IDB_ImportToMemoryStreamsAsync(
             string filterAccept, bool multiselect, System.IntPtr ohPtr, ImportThenCallback thenCallback, IDBCommon.CatchCallback catchCallback);
-
-        [DllImport("__Internal")]
-        private static extern void Save2IDB_ReadInputtedFileAsync(
-            string fileName, byte[] bytesPtr,
-            System.IntPtr ohPtr, System.IntPtr readOhPtr, ReadThenCallback thenCallback, IDBCommon.CatchCallback catchCallback);
 
         [DllImport("__Internal")]
         private static extern void Save2IDB_DisposeImporter(System.IntPtr ohPtr);
@@ -186,7 +182,7 @@ namespace Save2IDB
             {
                 // To MemoryStreams
 
-                self.Done(stats.vs.Select(x => new MemoryStreamResult(self, x.name, x.size)).ToArray());
+                self.Done(stats.vs.Select(x => new MemoryStreamResult(self, x.name, x.objectURL)).ToArray());
             }
         }
 
@@ -235,37 +231,33 @@ namespace Save2IDB
         // To MemoryStreams
         private class MemoryStreamResult : ResultObj
         {
-            private readonly int fileSize;
+            private readonly string objectURL;
 
-            public MemoryStreamResult(IDBImporter parent, string fileName, int fileSize)
+            public MemoryStreamResult(IDBImporter parent, string fileName, string objectURL)
                 : base(parent)
             {
                 FileName = fileName;
-                this.fileSize = fileSize;
+                this.objectURL = objectURL;
             }
 
             protected override IDBOperationHandle<MemoryStream> InnerOpenMemoryStreamAsync()
             {
                 // Read a file inputted by user.
-                var operationHandle = new ReadOperationHandle();
-                operationHandle.MemoryStream = new MemoryStream();
-                operationHandle.MemoryStream.SetLength(fileSize);
-                var ohPtr = Unsafe.As<IDBImporter, System.IntPtr>(ref parent);
-                var readOhPtr = Unsafe.As<ReadOperationHandle, System.IntPtr>(ref operationHandle);
-                Save2IDB_ReadInputtedFileAsync(FileName, operationHandle.MemoryStream.GetBuffer(), ohPtr, readOhPtr, ReadThen, IDBCommon.Catch);
+                var operationHandle = new IDBOperationHandle<MemoryStream>();
+                var request = UnityWebRequest.Get(objectURL);
+                request.SendWebRequest().completed += _ =>
+                {
+                    if (request.result != UnityWebRequest.Result.Success)
+                    {
+                        Debug.LogError(request.error);
+                        return;
+                    }
+
+                    var buffer = request.downloadHandler.data;
+                    var memoryStream = new MemoryStream(buffer, 0, buffer.Length, true, true);
+                    operationHandle.Done(memoryStream);
+                };
                 return operationHandle;
-            }
-
-            [MonoPInvokeCallback(typeof(ImportThenCallback))]
-            private static void ReadThen(System.IntPtr ohPtr)
-            {
-                var operationHandle = Unsafe.As<System.IntPtr, ReadOperationHandle>(ref ohPtr);
-                operationHandle.Done(operationHandle.MemoryStream);
-            }
-
-            private class ReadOperationHandle : IDBOperationHandle<MemoryStream>
-            {
-                public MemoryStream MemoryStream { get; set; }
             }
         }
 
@@ -289,6 +281,7 @@ namespace Save2IDB
             public int size = 0;
             public string type = null;
             public System.DateTime lastModified = System.DateTime.MinValue;
+            public string objectURL = null;
         }
     }
 }
