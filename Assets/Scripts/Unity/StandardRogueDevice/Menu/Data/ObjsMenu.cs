@@ -125,9 +125,7 @@ namespace RoguegardUnity
                 }
 
                 // ソートしたあと開きなおす
-                var storageObjs = ChestInfo.GetStorage(arg.Arg.TargetObj);
-                if (storageObjs != null) { sortTable.Sort(arg.Arg.TargetObj); }
-                else { sortTable.Sort(arg.Arg.TargetObj); }
+                sortTable.Sort(arg.Arg.TargetObj);
                 manager.Reopen();
             }
         }
@@ -204,25 +202,12 @@ namespace RoguegardUnity
 
             protected override List<RogueObj> GetObjs(RogueObj self, RogueObj chest)
             {
-                var storageObjs = ChestInfo.GetStorage(chest);
-                if (storageObjs != null)
+                objs.Clear();
+                for (int i = 0; i < chest.Space.Objs.Count; i++)
                 {
-                    objs.Clear();
-                    for (int i = 0; i < storageObjs.Count; i++)
-                    {
-                        objs.Add(storageObjs[i]);
-                    }
-                    return objs;
+                    objs.Add(chest.Space.Objs[i]);
                 }
-                else
-                {
-                    objs.Clear();
-                    for (int i = 0; i < chest.Space.Objs.Count; i++)
-                    {
-                        objs.Add(chest.Space.Objs[i]);
-                    }
-                    return objs;
-                }
+                return objs;
             }
         }
     }

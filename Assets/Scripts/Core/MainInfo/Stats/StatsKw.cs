@@ -77,6 +77,9 @@ namespace Roguegard
         [SerializeField] private KeywordData _maxNutrition;
         public static IKeyword MaxNutrition => instance._maxNutrition;
 
+        [SerializeField] private KeywordData _asStorage;
+        public static IKeyword AsStorage => instance._asStorage;
+
         [SerializeField] private KeywordData _asTile;
         public static IKeyword AsTile => instance._asTile;
 

@@ -176,26 +176,29 @@ namespace RoguegardUnity
 
                     // 空間のオブジェクトの時間経過処理をする。
                     self.Space.RemoveAllNull();
-                    var objsCount = self.Space.Objs.Count; // 無限再帰対策として、オブジェクト数を固定しておく。
-                    for (int i = 0; i < objsCount; i++)
+                    if (!MovementCalculator.Get(self).AsStorage) // ストレージの中身は時間経過の対象外
                     {
-                        if (i >= self.Space.Objs.Count)
+                        var objsCount = self.Space.Objs.Count; // 無限再帰対策として、オブジェクト数を固定しておく。
+                        for (int i = 0; i < objsCount; i++)
                         {
-                            break;
+                            if (i >= self.Space.Objs.Count)
+                            {
+                                break;
+                            }
+
+                            var obj = self.Space.Objs[i];
+                            if (obj == null) continue;
+
+                            while (true)
+                            {
+                                var result = child.MoveNext(obj);
+                                if (result == Result.Next) break;
+
+                                yield return result;
+                            }
                         }
-
-                        var obj = self.Space.Objs[i];
-                        if (obj == null) continue;
-
-                        while (true)
-                        {
-                            var result = child.MoveNext(obj);
-                            if (result == Result.Next) break;
-
-                            yield return result;
-                        }
+                        self.Space.RemoveAllNull();
                     }
-                    self.Space.RemoveAllNull();
 
 
 

@@ -35,6 +35,7 @@ MonoBehaviour:
   _maxHP: {fileID: 11400000, guid: 34bd909233e3d5e4397e4d7b299db3db, type: 2}
   _maxMP: {fileID: 11400000, guid: e4f9aab0a8cb1e04e8ab0f17306ea4d7, type: 2}
   _maxNutrition: {fileID: 11400000, guid: 69b8ec28d7640af4b8b7c23b5282cf95, type: 2}
+  _asStorage: {fileID: 11400000, guid: 74a1ad3d03ac28340bdcbdbb63650d86, type: 2}
   _asTile: {fileID: 11400000, guid: d5fcda478cf3abe48b3a2758f8e5fafa, type: 2}
   _hasCollider: {fileID: 11400000, guid: d6f71cd7b24548f429ee68e90a2c29df, type: 2}
   _hasSightCollider: {fileID: 11400000, guid: 6b14136f1f339c747be8f73cb65eaf5d, type: 2}

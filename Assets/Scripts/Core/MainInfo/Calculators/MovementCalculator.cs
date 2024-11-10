@@ -13,6 +13,11 @@ namespace Roguegard
         public bool HasTileCollider { get; private set; }
         public bool HasSightCollider { get; private set; }
 
+        /// <summary>
+        /// このプロパティが true のとき、中身のオブジェクトは時間経過と重さ計算の対象外となる
+        /// </summary>
+        public bool AsStorage { get; private set; }
+
         float IRogueCalculator.MainBaseValue => value.BaseMainValue;
         float IRogueCalculator.MainValue => value.MainValue;
 
@@ -44,6 +49,7 @@ namespace Roguegard
             HasCollider = value.SubValues.Is(StatsKw.HasCollider);
             HasTileCollider = value.SubValues.Is(StatsKw.HasTileCollider);
             HasSightCollider = value.SubValues.Is(StatsKw.HasSightCollider);
+            AsStorage = value.SubValues.Is(StatsKw.AsStorage);
         }
 
         public float SubValues(IKeyword key) => value.SubValues[key];

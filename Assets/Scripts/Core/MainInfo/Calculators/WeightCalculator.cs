@@ -38,14 +38,17 @@ namespace Roguegard
             var selfWeight = self.Main.InfoSet.Weight;
 
             var spaceWeight = 0f;
-            var spaceObjs = self.Space.Objs;
-            for (int i = 0; i < spaceObjs.Count; i++)
+            if (!MovementCalculator.Get(self).AsStorage) // ストレージの中身は重さ計算しない
             {
-                var spaceObj = spaceObjs[i];
-                if (spaceObj == null) continue;
+                var spaceObjs = self.Space.Objs;
+                for (int i = 0; i < spaceObjs.Count; i++)
+                {
+                    var spaceObj = spaceObjs[i];
+                    if (spaceObj == null) continue;
 
-                var spaceObjWeight = spaceObj.Main.Calculators.GetWeight(spaceObj);
-                spaceWeight += spaceObjWeight.TotalWeight;
+                    var spaceObjWeight = spaceObj.Main.Calculators.GetWeight(spaceObj);
+                    spaceWeight += spaceObjWeight.TotalWeight;
+                }
             }
 
             value.Initialize(selfWeight);

@@ -19,6 +19,7 @@ namespace Roguegard
         {
             var chestInfo = new ChestInfo(this);
             Roguegard.ChestInfo.SetInfoTo(self, chestInfo);
+            if (_isStorage) { RogueEffectUtility.AddFromInfoSet(self, ValueEffect.Instance); }
             return raceOption;
         }
 
@@ -26,6 +27,7 @@ namespace Roguegard
             RogueObj self, MainInfoSetType infoSetType, bool base2Polymorph, IRaceOption raceOption, ICharacterCreationData characterCreationData)
         {
             Roguegard.ChestInfo.RemoveFrom(self);
+            if (_isStorage) { RogueEffectUtility.Remove(self, ValueEffect.Instance); }
         }
 
         public IRaceOption Reopen(
@@ -36,7 +38,6 @@ namespace Roguegard
 
         public void InitializeObj(RogueObj self, IRaceOption raceOption, ICharacterCreationData characterCreationData)
         {
-            if (_isStorage) { Roguegard.ChestInfo.SetStorageTo(self); }
         }
 
         private class ChestInfo : IChestInfo
@@ -75,27 +76,16 @@ namespace Roguegard
             public override bool Invoke(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
             {
                 var item = arg.TargetObj;
-                var chestInfo = Roguegard.ChestInfo.GetInfo(self);
-                var storageObjs = Roguegard.ChestInfo.GetStorage(self);
-                if (chestInfo != null && storageObjs != null)
+                var movement = MovementCalculator.Get(self);
+
+                var result = this.Locate(item, user, self, activationDepth);
+                if (!result) return false;
+
+                if (movement.AsStorage)
                 {
-                    var result = this.Locate(item, user, null, activationDepth);
-                    if (result)
-                    {
-                        var maxStack = item.GetMaxStack(StackOption.StackUnlimited);
-                        storageObjs.Stack(item, Vector2Int.zero, maxStack);
-                        if (item.Stack >= 1)
-                        {
-                            storageObjs.Add(item);
-                        }
-                    }
-                    return result;
+                    SpaceUtility.Restack(item, StackOption.StackUnlimited);
                 }
-                else
-                {
-                    var result = this.Locate(item, user, self, activationDepth);
-                    return result;
-                }
+                return true;
             }
         }
 
@@ -104,9 +94,9 @@ namespace Roguegard
             public override bool Invoke(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
             {
                 var item = arg.TargetObj;
-                var chestInfo = Roguegard.ChestInfo.GetInfo(self);
-                var storageObjs = Roguegard.ChestInfo.GetStorage(self);
-                if (chestInfo != null && storageObjs != null)
+                var movement = MovementCalculator.Get(self);
+
+                if (movement.AsStorage)
                 {
                     var maxStack = item.GetMaxStack(StackOption.Default);
                     if (item.Stack > maxStack)
@@ -116,14 +106,22 @@ namespace Roguegard
                     }
                 }
                 var result = this.Locate(item, user, user, activationDepth);
-                if (result)
-                {
-                    // 移動に成功したとき、ストレージ内のオブジェクトを消す。
-                    // 持ちきれないぶんをストレージに残す場合は消さない。
-                    storageObjs.Remove(item);
-                }
-
                 return result;
+            }
+        }
+
+        private class ValueEffect : IValueEffect
+        {
+            public static ValueEffect Instance { get; } = new();
+
+            public float Order => 0f;
+
+            public void AffectValue(IKeyword keyword, EffectableValue value, RogueObj self)
+            {
+                if (keyword == StatsKw.Movement)
+                {
+                    value.SubValues[StatsKw.AsStorage] = 1f;
+                }
             }
         }
     }

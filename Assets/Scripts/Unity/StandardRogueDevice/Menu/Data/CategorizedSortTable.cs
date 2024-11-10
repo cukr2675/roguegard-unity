@@ -36,8 +36,7 @@ namespace RoguegardUnity
             }
 
             // ƒAƒCƒeƒ€‚ð•À‚×‘Ö‚¦‚é
-            var storageObjs = ChestInfo.GetStorage(location);
-            var objs = storageObjs ?? location.Space.Objs;
+            var objs = location.Space.Objs;
             for (int i = 0; i < objs.Count; i++)
             {
                 var obj = objs[i];
@@ -83,8 +82,7 @@ namespace RoguegardUnity
                     }
                 }
             }
-            if (storageObjs != null) { storageObjs.Sort(mainBuffer); }
-            else { location.Space.Sort(mainBuffer); }
+            location.Space.Sort(mainBuffer);
         }
 
         private class OtherKeyword : IKeyword
