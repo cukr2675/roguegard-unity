@@ -17,15 +17,10 @@ namespace Save2IDB
         public static FileStream Open(string path, FileMode mode, FileAccess access = default, FileShare share = FileShare.Read)
         {
             access = GetAccess(mode, access);
-
-#if UNITY_WEBGL
             return new IDBFileStream(path, mode, access, share);
-#else
-            return new FileStream(path, mode, access, share);
-#endif
         }
 
-        internal static FileAccess GetAccess(FileMode mode, FileAccess access)
+        private static FileAccess GetAccess(FileMode mode, FileAccess access)
         {
             if (access != default) return access;
             if (mode == FileMode.Append) return FileAccess.Write;

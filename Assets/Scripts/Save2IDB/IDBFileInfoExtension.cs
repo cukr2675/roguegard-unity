@@ -17,7 +17,7 @@ namespace Save2IDB
         /// </param>
         public static void IDBOpen(this FileInfo info, FileMode mode, FileAccess access = default, FileShare share = FileShare.Read)
         {
-            IDBFile.Open(info.FullName, mode, IDBFile.GetAccess(mode, access), share);
+            IDBFile.Open(info.FullName, mode, access, share);
         }
     }
 }
