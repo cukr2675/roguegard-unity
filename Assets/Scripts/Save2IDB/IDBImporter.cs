@@ -126,23 +126,34 @@ namespace Save2IDB
         /// </summary>
         public IDBImporter ShowDialog()
         {
-            if (isDisposed) throw new System.ObjectDisposedException(nameof(IDBImporter));
-            if (isShown) throw new System.InvalidOperationException("Importer that have already been displayed cannot be displayed again.");
+            if (isDisposed)
+            {
+                Error($"{nameof(IDBImporter)} is disposed.");
+                return this;
+            }
+            if (isShown)
+            {
+                Error("Importer that have already been displayed cannot be displayed again.");
+                return this;
+            }
             isShown = true;
 
             if (path != null)
             {
                 // To file or Into directory
 
-                if (!path.EndsWith('/') && Multiselect) throw new System.InvalidOperationException(
-                    $"Attempted to multiselect import, but 'ToFile' operation.");
+                if (!path.EndsWith('/') && Multiselect)
+                {
+                    Error("Attempted to multiselect import, but 'ToFile' operation.");
+                    return this;
+                }
 
 #if UNITY_WEBGL && !UNITY_EDITOR
                 var self = this;
                 var selfPtr = Unsafe.As<IDBImporter, System.IntPtr>(ref self);
                 Save2IDB_ImportToAsync(path, Overwrite, FilterAccept, Multiselect, selfPtr, ImportThen, IDBCommon.Catch);
 #else
-                throw new System.NotSupportedException($"{nameof(IDBImporter)} is not supported on current platform.");
+                Error($"{nameof(IDBImporter)} is not supported on current platform.");
 #endif
             }
             else
@@ -154,7 +165,7 @@ namespace Save2IDB
                 var selfPtr = Unsafe.As<IDBImporter, System.IntPtr>(ref self);
                 Save2IDB_ImportToMemoryStreamsAsync(FilterAccept, Multiselect, selfPtr, ImportThen, IDBCommon.Catch);
 #else
-                throw new System.NotSupportedException($"{nameof(IDBImporter)} is not supported on current platform.");
+                Error($"{nameof(IDBImporter)} is not supported on current platform.");
 #endif
             }
             return this;

@@ -20,13 +20,13 @@ namespace Save2IDB
             Status = IDBOperationStatus.InProgress;
         }
 
-        internal void Done()
+        internal virtual void Done()
         {
             Status = IDBOperationStatus.Succeeded;
             OnCompleted();
         }
 
-        internal void Error(string errorMsg)
+        internal virtual void Error(string errorMsg)
         {
             ErrorMsg = errorMsg;
             Status = IDBOperationStatus.Failed;
@@ -67,7 +67,18 @@ namespace Save2IDB
         internal void Done(T result)
         {
             Result = result;
-            Done();
+            base.Done();
+        }
+
+        internal override void Done()
+        {
+            throw new System.NotSupportedException($"Use Done(T result) instead of Done().");
+        }
+
+        internal override void Error(string errorMsg)
+        {
+            Result = default;
+            base.Error(errorMsg);
         }
 
         protected override void OnCompleted()
