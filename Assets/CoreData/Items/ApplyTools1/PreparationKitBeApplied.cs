@@ -11,12 +11,12 @@ namespace Roguegard
     {
         [SerializeField] private ScriptableCharacterCreationData _potionInfoSet = null;
 
-        private readonly SelectObjMenu menu;
+        private readonly SelectObjMenuScreen menu;
 
         private PreparationKitBeApplied()
         {
             var callback = new SelectedRogueMethod() { parent = this };
-            menu = new SelectObjMenu(callback);
+            menu = new SelectObjMenuScreen(callback);
         }
 
         public override bool Invoke(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)

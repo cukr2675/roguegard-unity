@@ -23,9 +23,6 @@ namespace Roguegard
         [SerializeField] private KeywordData _changePlayer;
         public static IKeyword ChangePlayer => instance._changePlayer;
 
-        [SerializeField] private KeywordData _endTalk;
-        public static IKeyword EndTalk => instance._endTalk;
-
         [SerializeField] private KeywordData _enqueueInteger;
         public static IKeyword EnqueueInteger => instance._enqueueInteger;
 

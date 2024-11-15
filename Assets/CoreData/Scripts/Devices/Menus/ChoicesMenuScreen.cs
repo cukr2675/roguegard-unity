@@ -6,6 +6,9 @@ using ListingMF;
 
 namespace Roguegard.Device
 {
+    /// <summary>
+    /// メッセージと選択肢のメニュー画面
+    /// </summary>
     public class ChoicesMenuScreen : RogueMenuScreen
     {
         private readonly ChoicesMenuScreen<MMgr, MArg> screen;
@@ -22,6 +25,9 @@ namespace Roguegard.Device
             screen = new ChoicesMenuScreen<MMgr, MArg>(getMessage);
         }
 
+        /// <summary>
+        /// 「保存して戻りますか？」のダイアログ画面を生成する
+        /// </summary>
         public static ChoicesMenuScreen SaveBackDialog(
             HandleClickElement<MMgr, MArg> saveAction,
             HandleClickElement<MMgr, MArg> notSaveAction = null)
@@ -30,6 +36,9 @@ namespace Roguegard.Device
             return selectOption;
         }
 
+        /// <summary>
+        /// 「保存して戻りますか？」のダイアログ画面を生成する
+        /// </summary>
         public static ChoicesMenuScreen SaveBackDialog(
             string message,
             string saveName, HandleClickElement<MMgr, MArg> saveAction,

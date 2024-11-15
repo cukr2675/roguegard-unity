@@ -110,7 +110,6 @@ namespace Roguegard
                     {
                         resultScreen.message += $"{StatsKw.ATK.Name}が1上がった\n";
                     }
-                    RogueDevice.Add(DeviceKw.AppendText, DeviceKw.EndTalk);
                 }
             }
         }

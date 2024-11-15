@@ -59,7 +59,7 @@ namespace ListingMF
                 _onPlayObject.AddListener(Log);
             }
 
-            void Log(object value, Object sender)
+            void Log(object value, object sender)
             {
                 // Play をリクエストしたオブジェクトがアニメーターを持つ場合、その状態を表示する
                 animatorLog.Clear();
@@ -101,7 +101,7 @@ namespace ListingMF
                 Debug.Log($"<color=grey>Play:</color> {value} <color=grey>Sender:</color> {SenderToString(sender)} {animatorLog}");
             }
 
-            string SenderToString(Object sender)
+            string SenderToString(object sender)
             {
                 // ビュー要素は緑
                 if (sender is ViewElement || sender is GameObject) return $"<color=green>{sender}</color>";
@@ -162,7 +162,7 @@ namespace ListingMF
             }
         }
 
-        [System.Serializable] public class PlayStringEvent : UnityEvent<string, Object> { }
-        [System.Serializable] public class PlayObjectEvent : UnityEvent<Object, Object> { }
+        [System.Serializable] public class PlayStringEvent : UnityEvent<string, object> { }
+        [System.Serializable] public class PlayObjectEvent : UnityEvent<Object, object> { }
     }
 }

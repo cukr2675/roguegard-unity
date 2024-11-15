@@ -22,6 +22,5 @@ namespace Roguegard.Device
         public abstract void AddInt(IKeyword keyword, int integer);
         public abstract void AddFloat(IKeyword keyword, float number);
         public abstract void AddObject(IKeyword keyword, object obj);
-        public void AddWork(IKeyword keyword, in RogueCharacterWork work) => throw new System.NotSupportedException();
     }
 }

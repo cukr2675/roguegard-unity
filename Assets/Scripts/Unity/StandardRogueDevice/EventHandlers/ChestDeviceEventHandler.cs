@@ -13,12 +13,16 @@ namespace RoguegardUnity
         private readonly RogueMenuScreen putIntoChestMenu;
         private readonly RogueMenuScreen takeOutFromChestMenu;
 
-        public ChestDeviceEventHandler(
-            StandardRogueDeviceComponentManager componentManager, RogueMenuScreen putIntoChestMenu, RogueMenuScreen takeOutFromChestMenu)
+        public ChestDeviceEventHandler(StandardRogueDeviceComponentManager componentManager)
         {
             this.componentManager = componentManager;
-            this.putIntoChestMenu = putIntoChestMenu;
-            this.takeOutFromChestMenu = takeOutFromChestMenu;
+
+            var putInCommandMenu = new PutIntoChestCommandMenu();
+            var takeOutCommandMenu = new TakeOutFromChestCommandMenu();
+            var objsMenu = new ObjsMenu(null, putInCommandMenu, takeOutCommandMenu);
+
+            putIntoChestMenu = objsMenu.PutIntoChest;
+            takeOutFromChestMenu = objsMenu.TakeOutFromChest;
         }
 
         bool IStandardRogueDeviceEventHandler.TryHandle(IKeyword keyword, int integer, float number, object obj)

@@ -35,30 +35,22 @@ namespace RoguegardUnity
             while (messageWorkQueue.Count >= 1)
             {
                 messageWorkQueue.Dequeue(out var other, out var work, out var integer, out var number, out var stackTrace);
+
+                // キャラクターアニメーション
                 if (other == DeviceKw.EnqueueWork)
                 {
                     characterRenderSystem.Work(work, player, fastForward);
                     if (!work.Continues) break;
                 }
+
+                // メッセージボックス表示
                 else if (other == DeviceKw.EnqueueInteger)
                 {
-                    touchController.EventManager.AppendInteger(integer);
+                    touchController.EventManager.Add(DeviceKw.AppendText, integer: integer);
                 }
                 else if (other == DeviceKw.EnqueueNumber)
                 {
-                    touchController.EventManager.AppendNumber(number);
-                }
-                else if (other == DeviceKw.StartTalk)
-                {
-                    touchController.EventManager.Add((IKeyword)other);
-                }
-                else if (other == DeviceKw.EndTalk)
-                {
-                    break;
-                }
-                else if (other == DeviceKw.WaitEndOfTalk)
-                {
-                    touchController.EventManager.Add(DeviceKw.WaitEndOfTalk);
+                    touchController.EventManager.Add(DeviceKw.AppendText, number: number);
                 }
                 else if (other == DeviceKw.EnqueueMenu)
                 {
@@ -66,18 +58,31 @@ namespace RoguegardUnity
                     touchController.OpenMenu(subject, menu, self, user, arg);
                     break;
                 }
-                else if (other == DeviceKw.EnqueueSE || other == DeviceKw.EnqueueSEAndWait)
+                else if (other == DeviceKw.EnqueueSE)
                 {
                     messageWorkQueue.Dequeue(out var seName, out _, out _, out _, out _);
-                    touchController.EventManager.Add((IKeyword)other, obj: seName);
-                    if (other == DeviceKw.EnqueueSEAndWait) break;
+                    touchController.EventManager.Add(DeviceKw.EnqueueSE, obj: seName);
+                }
+                else if (other == DeviceKw.HorizontalRule)
+                {
+                    touchController.EventManager.AppendTextObj(player, other, stackTrace);
+                }
+
+                // 効果音再生
+                else if (other == DeviceKw.EnqueueSEAndWait)
+                {
+                    messageWorkQueue.Dequeue(out var seName, out _, out _, out _, out _);
+                    touchController.EventManager.Add(DeviceKw.EnqueueSEAndWait, obj: seName);
+                    break;
                 }
                 else if (other == DeviceKw.EnqueueWaitSeconds)
                 {
                     messageWorkQueue.Dequeue(out _, out _, out _, out var waitSeconds, out _);
-                    touchController.EventManager.Add((IKeyword)other, number: waitSeconds);
+                    touchController.EventManager.Add(DeviceKw.EnqueueWaitSeconds, number: waitSeconds);
                     break;
                 }
+
+                // 視界制御
                 else if (other == DeviceKw.EnqueueViewDequeueState)
                 {
                     var view = ViewInfo.Get(player);
@@ -85,14 +90,12 @@ namespace RoguegardUnity
                     view.ReadyView(player.Location);
                     view.AddView(player);
                 }
-                else if (other == DeviceKw.HorizontalRule)
-                {
-                    touchController.EventManager.Append(player, other, stackTrace);
-                }
+
+                // その他オブジェクトはメッセージボックス表示へ
                 else
                 {
                     other = StandardRogueDeviceUtility.LocalizeMessage(other, player, messageWorkQueue);
-                    touchController.EventManager.Append(player, other, stackTrace);
+                    touchController.EventManager.AppendTextObj(player, other, stackTrace);
                 }
             }
         }

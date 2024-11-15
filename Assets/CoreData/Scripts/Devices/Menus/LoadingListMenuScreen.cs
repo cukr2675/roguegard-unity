@@ -6,7 +6,7 @@ using ListingMF;
 
 namespace Roguegard.Device
 {
-    public class LoadingListMenu : RogueMenuScreen
+    public class LoadingListMenuScreen : RogueMenuScreen
     {
         private readonly string text;
         private readonly string buttonText;
@@ -21,7 +21,7 @@ namespace Roguegard.Device
             BackAnchorSubViewName = null,
         };
 
-        public LoadingListMenu(
+        public LoadingListMenuScreen(
             string text, string buttonText,
             HandleClickElement<MMgr, MArg> buttonAction,
             ProgressBarViewWidget.GetProgress<MMgr, MArg> updateAction = null)

@@ -64,8 +64,6 @@ namespace RoguegardUnity
             _summary.Initialize();
             _characterCreation.Initialize(rendererPool);
             if (_titleMenu != null) { _titleMenu.Initialize(); }
-            var scrollSensitivity = 64f;
-            SetScrollSensitivity(scrollSensitivity);
 
             this.soundController = soundController;
             EventManager = new ListMenuEventManager(new MessageController(StandardSubViewTable), soundController);
@@ -76,12 +74,6 @@ namespace RoguegardUnity
             EventManager.MenuSubject = menuSubject;
         }
 
-        public void GetInfo(out RogueMenuScreen putIntoChestMenu, out RogueMenuScreen takeOutFromChestMenu)
-        {
-            putIntoChestMenu = objsMenu.PutIntoChest;
-            takeOutFromChestMenu = objsMenu.TakeOutFromChest;
-        }
-
         public void SetWindowFrame(Sprite sprite, Sprite spriteB, Color backgroundColor)
         {
             var panels = GetComponentsInChildren<TwoLayerPanel>();
@@ -90,15 +82,6 @@ namespace RoguegardUnity
                 panel.Background.sprite = sprite;
                 panel.Background.color = backgroundColor;
                 panel.Foreground.sprite = spriteB;
-            }
-        }
-
-        private void SetScrollSensitivity(float value)
-        {
-            var scrollRects = GetComponentsInChildren<ScrollRect>();
-            foreach (var scrollRect in scrollRects)
-            {
-                scrollRect.scrollSensitivity = value;
             }
         }
 
@@ -117,8 +100,8 @@ namespace RoguegardUnity
             base.HideAll(back);
             _stats.Hide(back);
             _summary.Hide(back);
-            _characterCreation.Hide(back);
             _textEditor.Hide(back);
+            _characterCreation.Hide(back);
             _paint.Hide(back);
             if (_titleMenu != null) { _titleMenu.Hide(back); }
         }
@@ -187,28 +170,23 @@ namespace RoguegardUnity
             }
         }
 
-        public void CloseMenu()
-        {
-            Done();
-        }
-
-        public void Play(string value, Object sender)
+        public void Play(string value, object sender)
         {
             if (value == "Submit")
             {
-                AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+                EventManager.Add(DeviceKw.EnqueueSE, obj: DeviceKw.Submit);
             }
             else if (value == "Cancel")
             {
-                AddObject(DeviceKw.EnqueueSE, DeviceKw.Cancel);
+                EventManager.Add(DeviceKw.EnqueueSE, obj: DeviceKw.Cancel);
             }
             else if (value == "Sort")
             {
-                AddObject(DeviceKw.EnqueueSE, StdKw.Sort);
+                EventManager.Add(DeviceKw.EnqueueSE, obj: StdKw.Sort);
             }
             else if (value == "PickUp")
             {
-                AddObject(DeviceKw.EnqueueSE, MainInfoKw.PickUp);
+                EventManager.Add(DeviceKw.EnqueueSE, obj: MainInfoKw.PickUp);
             }
             else if (value == "StartSpeech")
             {
@@ -223,21 +201,5 @@ namespace RoguegardUnity
         public override void AddInt(IKeyword keyword, int integer) => EventManager.Add(keyword, integer: integer);
         public override void AddFloat(IKeyword keyword, float number) => EventManager.Add(keyword, number: number);
         public override void AddObject(IKeyword keyword, object obj) => EventManager.Add(keyword, obj: obj);
-
-        public static void Show(CanvasGroup canvasGroup, bool show)
-        {
-            if (show)
-            {
-                canvasGroup.alpha = 1f;
-                canvasGroup.interactable = true;
-                canvasGroup.blocksRaycasts = true;
-            }
-            else
-            {
-                canvasGroup.alpha = 0f;
-                canvasGroup.interactable = false;
-                canvasGroup.blocksRaycasts = false;
-            }
-        }
     }
 }

@@ -34,39 +34,21 @@ namespace RoguegardUnity
             messageController.ClearText();
         }
 
-        public void Append(RogueObj player, object obj, System.Diagnostics.StackTrace stackTrace)
+        public void AppendTextObj(RogueObj player, object obj, System.Diagnostics.StackTrace stackTrace)
         {
             messageController.Append(player, obj, stackTrace);
         }
 
-        public void AppendInteger(int integer)
-        {
-            messageController.AppendInteger(integer);
-        }
-
-        public void AppendNumber(float number)
-        {
-            messageController.AppendNumber(number);
-        }
-
-        public void Add(IKeyword keyword, int integer = 0, float number = 0f, object obj = null)
+        public void Add(IKeyword keyword, int integer = 0, float number = 0f, object obj = null, System.Diagnostics.StackTrace stackTrace = null)
         {
             if (keyword == null) throw new System.ArgumentNullException(nameof(keyword));
 
             if (keyword == DeviceKw.AppendText)
             {
-                if (obj is string text) { Append(MenuSubject, StandardRogueDeviceUtility.Localize(text), null); }
-                else if (obj != null) { Append(MenuSubject, obj, null); }
-                else if (number == 0f) { AppendInteger(integer); }
-                else { AppendNumber(number); }
-                return;
-            }
-            if (keyword == DeviceKw.StartTalk)
-            {
-                return;
-            }
-            if (keyword == DeviceKw.WaitEndOfTalk)
-            {
+                if (obj is string text) { AppendTextObj(MenuSubject, StandardRogueDeviceUtility.Localize(text), stackTrace); }
+                else if (obj != null) { AppendTextObj(MenuSubject, obj, stackTrace); }
+                else if (number == 0f) { messageController.AppendInteger(integer); }
+                else { messageController.AppendNumber(number); }
                 return;
             }
             if (keyword == DeviceKw.EnqueueSE || keyword == DeviceKw.EnqueueSEAndWait)

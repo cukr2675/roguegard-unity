@@ -16,7 +16,7 @@ namespace RoguegardUnity
         private RogueScrollViewTemplate<object> view;
         private readonly List<FileInfo> files = new();
 
-        private static readonly LoadingListMenu savingMenu = new LoadingListMenu("セーブ中…", "キャンセル", LoadingCancel);
+        private static readonly LoadingListMenuScreen savingMenu = new LoadingListMenuScreen("セーブ中…", "キャンセル", LoadingCancel);
         private static readonly ChoicesMenuScreen errorMsgDialog
             = new ChoicesMenuScreen((manager, arg) => $":An error has occurred.:, ({arg.Arg.Other})").Option("OK", ErrorMsgOK);
 

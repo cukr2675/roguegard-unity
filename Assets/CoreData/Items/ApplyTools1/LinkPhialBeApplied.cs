@@ -11,12 +11,12 @@ namespace Roguegard
     {
         [SerializeField] private ScriptableCharacterCreationData _potionInfoSet = null;
 
-        private readonly SelectObjMenu menu;
+        private readonly SelectObjMenuScreen menu;
 
         private LinkPhialBeApplied()
         {
             var callback = new SecondRogueMethod(this);
-            menu = new SelectObjMenu(callback);
+            menu = new SelectObjMenuScreen(callback);
         }
 
         public override bool Invoke(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
@@ -35,12 +35,12 @@ namespace Roguegard
         private class SecondRogueMethod : IDeviceCommandAction
         {
             private readonly SelectedRogueMethod callback;
-            private readonly SelectObjMenu menu;
+            private readonly SelectObjMenuScreen menu;
 
             public SecondRogueMethod(LinkPhialBeApplied parent)
             {
                 callback = new SelectedRogueMethod() { parent = parent };
-                menu = new SelectObjMenu(callback);
+                menu = new SelectObjMenuScreen(callback);
             }
 
             public bool CommandInvoke(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)

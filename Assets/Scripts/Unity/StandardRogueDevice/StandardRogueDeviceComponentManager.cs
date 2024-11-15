@@ -70,7 +70,7 @@ namespace RoguegardUnity
             var autoPlayDeviceEventHandler = new AutoPlayDeviceEventHandler(this, touchController, x => Subject = x);
             touchController.Initialize(
                 tilemapGrid.Tilemap, soundController, spriteRendererPool, () => autoPlayDeviceEventHandler.StopAutoPlay());
-            touchController.GetInfo(out menuController, out var putIntoChestMenu, out var takeOutFromChestMenu);
+            touchController.GetInfo(out menuController);
             Application.logMessageReceived += OnLogMessageReceived;
 
             // オプション設定値
@@ -88,7 +88,7 @@ namespace RoguegardUnity
                 new ChangePlayerDeviceEventHandler(this, touchController, ticker, x => Player = Subject = x),
                 autoPlayDeviceEventHandler,
 
-                new ChestDeviceEventHandler(this, putIntoChestMenu, takeOutFromChestMenu),
+                new ChestDeviceEventHandler(this),
             };
             EventManager = new StandardRogueDeviceEventManager(touchController, characterRenderSystem, eventHandlers);
 

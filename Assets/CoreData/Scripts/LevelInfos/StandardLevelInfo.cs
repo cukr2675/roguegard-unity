@@ -99,11 +99,6 @@ namespace Roguegard
                     levelUpBonusScreen.message += $"{StatsKw.ATK.Name}が1上がった\n";
                 }
             }
-
-            if (selfIsPlayerPartyMember)
-            {
-                RogueDevice.Add(DeviceKw.AppendText, DeviceKw.EndTalk);
-            }
         }
 
         public override void LevelDown(RogueObj self)

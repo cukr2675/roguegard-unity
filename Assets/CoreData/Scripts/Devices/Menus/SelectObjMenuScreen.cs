@@ -6,7 +6,7 @@ using ListingMF;
 
 namespace Roguegard.Device
 {
-    public class SelectObjMenu : RogueMenuScreen
+    public class SelectObjMenuScreen : RogueMenuScreen
     {
         private readonly IDeviceCommandAction callback;
         private readonly List<RogueObj> list = new();
@@ -15,7 +15,7 @@ namespace Roguegard.Device
         {
         };
 
-        public SelectObjMenu(IDeviceCommandAction callback)
+        public SelectObjMenuScreen(IDeviceCommandAction callback)
         {
             this.callback = callback;
         }
