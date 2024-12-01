@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -26,7 +26,7 @@ namespace Roguegard.Rgpacks.MoonSharp
             if (worldInfo.ChartState.TryGet<ChartPadReference>(chartSource, out var chartReference) &&
                 chartReference.CurrentCmn.FullID != argumentCmn.FullID)
             {
-                Debug.LogError($"w’è‚³‚ê‚½ Cmn ({argumentCmn.FullID}) ‚ªŒ»İ‚Ì Cmn ({chartReference.CurrentCmn?.FullID}) ‚Æˆê’v‚µ‚Ü‚¹‚ñB");
+                Debug.LogError($"æŒ‡å®šã•ã‚ŒãŸ Cmn ({argumentCmn.FullID}) ãŒç¾åœ¨ã® Cmn ({chartReference.CurrentCmn?.FullID}) ã¨ä¸€è‡´ã—ã¾ã›ã‚“ã€‚");
                 return;
             }
 

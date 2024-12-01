@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,7 +10,7 @@ namespace SDSSprite
         public static float LightDarkThreshold => .4f;
 
         /// <summary>
-        /// <paramref name="resolution"/> �ɕ��������p�x�̂����A�E�������甽���v���ł� <paramref name="degree"/> �x�����ڂɂ����邩���擾����B
+        /// <paramref name="resolution"/> 個に分割した角度のうち、右向きから反時計回りでの <paramref name="degree"/> 度が何個目にあたるかを取得する。
         /// </summary>
         private static int GetAngle(float degree, int resolution)
         {

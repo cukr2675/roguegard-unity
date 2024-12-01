@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -41,10 +41,10 @@ namespace Roguegard
                 {
                     if (RogueDevice.Primary.Subject.Main.Stats.Party.Members.Contains(user))
                     {
-                        RogueDevice.Add(DeviceKw.AppendText, "ƒ‚ƒ“ƒXƒ^[ƒnƒEƒX‚¾I\n");
+                        RogueDevice.Add(DeviceKw.AppendText, "ãƒ¢ãƒ³ã‚¹ã‚¿ãƒ¼ãƒã‚¦ã‚¹ã ï¼\n");
                     }
 
-                    // “G‚ğ¶¬
+                    // æ•µã‚’ç”Ÿæˆ
                     var enemies = floor.EnemyTable[0];
                     var random = RogueRandom.Primary;
                     for (int i = 0; i < 10; i++)
@@ -54,7 +54,7 @@ namespace Roguegard
                         WeightedRogueObjGeneratorUtility.CreateObj(enemies, self, position, random);
                     }
 
-                    // ƒGƒtƒFƒNƒg‚ğ‰ğœ
+                    // ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã‚’è§£é™¤
                     RogueEffectUtility.RemoveClose(self, this);
                 }
             }

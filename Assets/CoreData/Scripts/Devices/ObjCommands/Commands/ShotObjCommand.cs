@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,7 +6,7 @@ namespace Roguegard
 {
     public class ShotObjCommand : BaseObjCommand
     {
-        public override string Name => "撃つ";
+        public override string Name => "謦?▽";
 
         public override bool CommandInvoke(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
         {

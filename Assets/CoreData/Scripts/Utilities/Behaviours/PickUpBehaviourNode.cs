@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -31,14 +31,14 @@ namespace Roguegard
                 if (obj == null) continue;
                 if (obj.HasCollider || obj.AsTile) continue;
 
-                // Å‘åd—Ê‚ð’´‰ß‚·‚éƒAƒCƒeƒ€‚ÍE‚í‚È‚¢
+                // æœ€å¤§é‡é‡ã‚’è¶…éŽã™ã‚‹ã‚¢ã‚¤ãƒ†ãƒ ã¯æ‹¾ã‚ãªã„
                 var weight = WeightCalculator.Get(obj);
                 if (selfWeight.SpaceWeight + weight.TotalWeight > loadCapacity) continue;
 
                 var sqrDistance = (obj.Position - self.Position).sqrMagnitude;
                 if (sqrDistance < nearestSqrDistance)
                 {
-                    // Å’Z‹——£‚ðXV‚µ‚½‚Æ‚«A“G‚ðÝ’è‚·‚é
+                    // æœ€çŸ­è·é›¢ã‚’æ›´æ–°ã—ãŸã¨ãã€æ•µã‚’è¨­å®šã™ã‚‹
                     nearestSqrDistance = sqrDistance;
                     nearestItem = obj;
                 }
@@ -48,14 +48,14 @@ namespace Roguegard
             {
                 if (nearestItem.Position == self.Position)
                 {
-                    // ƒAƒCƒeƒ€‚Ìã‚É‚Â‚¢‚½‚çE‚¤
+                    // ã‚¢ã‚¤ãƒ†ãƒ ã®ä¸Šã«ã¤ã„ãŸã‚‰æ‹¾ã†
                     if (pickUp.CommandInvoke(self, null, activationDepth, new(tool: nearestItem)))
                     {
                         return RogueObjUpdaterContinueType.Break;
                     }
                 }
 
-                // ƒAƒCƒeƒ€‚ðŒ©‚Â‚¯‚½‚ç‚»‚±‚Ü‚ÅˆÚ“®
+                // ã‚¢ã‚¤ãƒ†ãƒ ã‚’è¦‹ã¤ã‘ãŸã‚‰ãã“ã¾ã§ç§»å‹•
                 if (!PathBuilder.UpdatePath(self, nearestItem.Position)) return RogueObjUpdaterContinueType.Continue;
                 if (!PathBuilder.TryGetNextDirection(self, out var nextDirection)) return RogueObjUpdaterContinueType.Continue;
 

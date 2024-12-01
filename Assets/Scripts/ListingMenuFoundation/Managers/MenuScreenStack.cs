@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -19,7 +19,7 @@ namespace ListingMF
 
         public StackItem Push(MenuScreen<TMgr, TArg> menuScreen, TArg arg)
         {
-            // ”ñ‘•ª‰æ–Ê‚ð’Ç‰Á‚·‚é‚Æ‚«A’¼‹ß‚Ì˜A‘±‚µ‚½‘•ª‰æ–Ê‚ð‚·‚×‚Äíœ‚·‚é
+            // éžå¢—åˆ†ç”»é¢ã‚’è¿½åŠ ã™ã‚‹ã¨ãã€ç›´è¿‘ã®é€£ç¶šã—ãŸå¢—åˆ†ç”»é¢ã‚’ã™ã¹ã¦å‰Šé™¤ã™ã‚‹
             if (!menuScreen.IsIncremental)
             {
                 for (int i = stack.Count - 1; i >= 0; i--)

@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,12 +15,12 @@ namespace ListingMF
         public void UpdateLinks(TMP_Text text)
         {
             items.Clear();
-            var value = text.text; // WebGL ƒrƒ‹ƒh‚Å text ƒvƒƒpƒeƒB‚ğ•¡”‰ñQÆ‚·‚é‚Æ•s³‚È’l‚ğæ“¾‚µ‚Ä‚µ‚Ü‚¤‚½‚ßƒLƒƒƒbƒVƒ…•K{
+            var value = text.text; // WebGL ãƒ“ãƒ«ãƒ‰ã§ text ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ã‚’è¤‡æ•°å›å‚ç…§ã™ã‚‹ã¨ä¸æ­£ãªå€¤ã‚’å–å¾—ã—ã¦ã—ã¾ã†ãŸã‚ã‚­ãƒ£ãƒƒã‚·ãƒ¥å¿…é ˆ
             for (int i = 0; i < text.textInfo.linkCount; i++)
             {
                 var linkInfo = text.textInfo.linkInfo[i];
-                if (linkInfo.linkTextLength != 0) continue; // •¶š”‚ªƒ[ƒ‚Å‚È‚¢i'Hidden' ‚Å‚È‚¢jƒŠƒ“ƒNƒ^ƒO‚Í–³‹
-                if (linkInfo.linkTextfirstCharacterIndex < text.maxVisibleCharacters) continue; // •\¦Ï‚İƒeƒLƒXƒg“à‚ÌƒŠƒ“ƒNƒ^ƒO‚Í–³‹
+                if (linkInfo.linkTextLength != 0) continue; // æ–‡å­—æ•°ãŒã‚¼ãƒ­ã§ãªã„ï¼ˆ'Hidden' ã§ãªã„ï¼‰ãƒªãƒ³ã‚¯ã‚¿ã‚°ã¯ç„¡è¦–
+                if (linkInfo.linkTextfirstCharacterIndex < text.maxVisibleCharacters) continue; // è¡¨ç¤ºæ¸ˆã¿ãƒ†ã‚­ã‚¹ãƒˆå†…ã®ãƒªãƒ³ã‚¯ã‚¿ã‚°ã¯ç„¡è¦–
 
                 var hiddenLinkID = value.Substring(linkInfo.linkIdFirstCharacterIndex, linkInfo.linkIdLength);
                 var item = new Item(hiddenLinkID, linkInfo.linkTextfirstCharacterIndex);

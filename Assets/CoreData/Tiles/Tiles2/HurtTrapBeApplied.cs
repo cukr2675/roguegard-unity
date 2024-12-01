@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,13 +15,13 @@ namespace Roguegard
             var userTile = arg.Other as UserRogueTile;
             if (userTile != null && !StatsEffectedValues.AreVS(userTile.User, user))
             {
-                // “G‘Î‚µ‚Ä‚¢‚È‚¢ƒLƒƒƒ‰‚ªã©‚ğ“¥‚ñ‚Å‚à‹N“®‚µ‚È‚¢‚æ‚¤‚É‚·‚é
+                // æ•µå¯¾ã—ã¦ã„ãªã„ã‚­ãƒ£ãƒ©ãŒç½ ã‚’è¸ã‚“ã§ã‚‚èµ·å‹•ã—ãªã„ã‚ˆã†ã«ã™ã‚‹
                 return false;
             }
 
             if (userTile != null)
             {
-                // Šî‘bUŒ‚—Í‚Ô‚ñ‚Ìƒ_ƒ[ƒW
+                // åŸºç¤æ”»æ’ƒåŠ›ã¶ã‚“ã®ãƒ€ãƒ¡ãƒ¼ã‚¸
                 using var damage = EffectableValue.Get();
                 StatsEffectedValues.GetATK(userTile.User, damage);
                 damage.Initialize(damage.BaseMainValue + _additionalDamage);
@@ -31,7 +31,7 @@ namespace Roguegard
             }
             else
             {
-                // 1 ‚Ìƒ_ƒ[ƒW
+                // 1 ã®ãƒ€ãƒ¡ãƒ¼ã‚¸
                 using var damage = EffectableValue.Get();
                 damage.Initialize(1 + _additionalDamage);
                 var result = this.Hurt(user, null, AttackUtility.GetActivationDepthCantCounter(activationDepth), damage);

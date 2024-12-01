@@ -1,4 +1,4 @@
-using System.Collections;
+Ôªøusing System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -183,7 +183,7 @@ namespace Roguegard.Rgpacks
                 var member = members[i];
                 if (member.Source == source) return member;
             }
-            throw new System.ArgumentException($"{source} ÇÃ {nameof(IMember)} Ç™å©Ç¬Ç©ÇËÇ‹ÇπÇÒÅB");
+            throw new System.ArgumentException($"{source} „ÅÆ {nameof(IMember)} „ÅåË¶ã„Å§„Åã„Çä„Åæ„Åõ„Çì„ÄÇ");
         }
 
         private class RogueMethod : IActiveRogueMethod, IApplyRogueMethod, IAffectRogueMethod, IChangeStateRogueMethod

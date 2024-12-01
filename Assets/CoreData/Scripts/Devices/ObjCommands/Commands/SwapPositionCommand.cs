@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,23 +7,23 @@ using Roguegard.Extensions;
 namespace Roguegard
 {
     /// <summary>
-    /// ‘¼‚ÌƒLƒƒƒ‰ƒNƒ^[‚ÆêŠ‚ğ“ü‚ê‘Ö‚¦‚éB¤l‚Æ“ü‚ê‘Ö‚í‚é‚±‚Æ‚Åã©‚ğ“¥‚Ü‚¹‚Ä‚µ‚Ü‚í‚È‚¢‚æ‚¤‚É <see cref="IMainInfoSet.Walk"/> ‚Æ‚Í‹æ•Ê‚·‚éB
+    /// ä»–ã®ã‚­ãƒ£ãƒ©ã‚¯ã‚¿ãƒ¼ã¨å ´æ‰€ã‚’å…¥ã‚Œæ›¿ãˆã‚‹ã€‚å•†äººã¨å…¥ã‚Œæ›¿ã‚ã‚‹ã“ã¨ã§ç½ ã‚’è¸ã¾ã›ã¦ã—ã¾ã‚ãªã„ã‚ˆã†ã« <see cref="IMainInfoSet.Walk"/> ã¨ã¯åŒºåˆ¥ã™ã‚‹ã€‚
     /// </summary>
     public class SwapPositionCommand : BaseObjCommand
     {
-        public override string Name => "ˆÊ’u“ü‘Ö";
+        public override string Name => "ä½ç½®å…¥æ›¿";
 
         public override bool CommandInvoke(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
         {
-            // ˆê“I‚É“–‚½‚è”»’è‚ğÁ‚·
+            // ä¸€æ™‚çš„ã«å½“ãŸã‚Šåˆ¤å®šã‚’æ¶ˆã™
             var target = arg.TargetObj;
             target.TryLocate(target.Position, target.AsTile, false, target.HasTileCollider, target.HasSightCollider);
 
-            // ƒ^[ƒQƒbƒg‚Éd‚È‚é‚æ‚¤ˆÚ“®‚·‚é
+            // ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã«é‡ãªã‚‹ã‚ˆã†ç§»å‹•ã™ã‚‹
             var direction = RogueDirection.FromSignOrLowerLeft(target.Position - self.Position);
             this.Walk(self, direction, activationDepth);
 
-            // ƒ^[ƒQƒbƒg‚ğ“ü‚ê‘Ö‚í‚è‚ÌˆÊ’u‚ÖˆÚ“®‚·‚é
+            // ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã‚’å…¥ã‚Œæ›¿ã‚ã‚Šã®ä½ç½®ã¸ç§»å‹•ã™ã‚‹
             return this.Walk(target, direction.Rotate(4), activationDepth);
         }
 

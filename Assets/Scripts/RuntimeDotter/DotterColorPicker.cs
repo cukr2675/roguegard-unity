@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -34,7 +34,7 @@ namespace RuntimeDotter
 
         private void Awake()
         {
-            // ƒvƒŠƒZƒbƒgãŒÀ‚É’B‚µ‚½‚çÅŒÃ‚ÌƒvƒŠƒZƒbƒg‚ğíœ‚·‚é
+            // ãƒ—ãƒªã‚»ãƒƒãƒˆä¸Šé™ã«é”ã—ãŸã‚‰æœ€å¤ã®ãƒ—ãƒªã‚»ãƒƒãƒˆã‚’å‰Šé™¤ã™ã‚‹
             if (_normalPicker != null)
             {
                 var normalPresets = _normalPicker.GetComponentInChildren<ColorPresets>();
@@ -62,7 +62,7 @@ namespace RuntimeDotter
         {
             if (afterOpen)
             {
-                // F‘I‘ğ‚µ‚½‚ ‚ÆÅ‰‚ÌF•ÒW‚É‚à‚Æ‚ÌF‚ğ—š—ğ‚É‰Á‚¦‚é
+                // è‰²é¸æŠã—ãŸã‚ã¨æœ€åˆã®è‰²ç·¨é›†æ™‚ã«ã‚‚ã¨ã®è‰²ã‚’å±¥æ­´ã«åŠ ãˆã‚‹
                 if (!_currentColor.IsShift && !normalPresetList.Colors.Contains(afterOpenColor)) { normalPresetList.AddColor(afterOpenColor); }
                 if (_currentColor.IsShift && !shiftPresetList.Colors.Contains(afterOpenColor)) { shiftPresetList.AddColor(afterOpenColor); }
                 afterOpen = false;
@@ -91,7 +91,7 @@ namespace RuntimeDotter
         {
             _currentColor = color;
 
-            afterOpen = false; // picker.CurrentColor ‚Ì setter ‚ÅƒvƒŠƒZƒbƒg‚ª’Ç‰Á‚³‚ê‚È‚¢‚æ‚¤ false ‚É‚·‚é
+            afterOpen = false; // picker.CurrentColor ã® setter ã§ãƒ—ãƒªã‚»ãƒƒãƒˆãŒè¿½åŠ ã•ã‚Œãªã„ã‚ˆã† false ã«ã™ã‚‹
             UpdateActive();
             afterOpen = true;
             afterOpenColor = color.ToPickerColor();
@@ -109,7 +109,7 @@ namespace RuntimeDotter
         }
 
         /// <summary>
-        /// <see cref="GameObject.active"/> == false ‚É‚·‚é‚Æ <see cref="ColorPicker"/> ‚Ì Start ‚ªÀs‚³‚ê‚È‚¢‚½‚ß <see cref="CanvasGroup"/> ‚ğg‚¤B
+        /// <see cref="GameObject.active"/> == false ã«ã™ã‚‹ã¨ <see cref="ColorPicker"/> ã® Start ãŒå®Ÿè¡Œã•ã‚Œãªã„ãŸã‚ <see cref="CanvasGroup"/> ã‚’ä½¿ã†ã€‚
         /// </summary>
         private static void SetShow(CanvasGroup group, bool show)
         {

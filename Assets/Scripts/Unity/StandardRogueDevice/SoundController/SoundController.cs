@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -106,7 +106,7 @@ namespace RoguegardUnity
             {
                 if (parent.blankTimeSamples == 0)
                 {
-                    // ‰¹º–`“ª‚Ì–³‰¹‚ª‚È‚¢‚Æ‚« AudioSource ‚Ğ‚Æ‚Â‚¾‚¯‚Åƒ‹[ƒvÄ¶‚·‚é
+                    // éŸ³å£°å†’é ­ã®ç„¡éŸ³ãŒãªã„ã¨ã AudioSource ã²ã¨ã¤ã ã‘ã§ãƒ«ãƒ¼ãƒ—å†ç”Ÿã™ã‚‹
                     var source = sources[0];
                     source.loop = true;
                     source.Play();
@@ -115,7 +115,7 @@ namespace RoguegardUnity
 
                 StopAll();
 
-                // ƒ‹[ƒvÄ¶‚É•K—v‚È AudioSource ‚Ì”‚ğŒvZ‚µ‚Ä’Ç‰Á‚·‚é
+                // ãƒ«ãƒ¼ãƒ—å†ç”Ÿã«å¿…è¦ãª AudioSource ã®æ•°ã‚’è¨ˆç®—ã—ã¦è¿½åŠ ã™ã‚‹
                 var clipSingleSamples = clip.samples - parent.blankTimeSamples;
                 var count = Mathf.CeilToInt((float)parent.blankTimeSamples / clipSingleSamples);
                 while (sources.Count < count) { Add(); }
@@ -137,7 +137,7 @@ namespace RoguegardUnity
             {
                 if (parent.blankTimeSamples == 0)
                 {
-                    // ‰¹º–`“ª‚Ì–³‰¹‚ª‚È‚¢‚Æ‚« AudioSource ‚Ğ‚Æ‚Â‚¾‚¯‚Åƒ‹[ƒvÄ¶‚·‚é
+                    // éŸ³å£°å†’é ­ã®ç„¡éŸ³ãŒãªã„ã¨ã AudioSource ã²ã¨ã¤ã ã‘ã§ãƒ«ãƒ¼ãƒ—å†ç”Ÿã™ã‚‹
                     var source = sources[0];
                     source.loop = false;
                     return;
@@ -146,7 +146,7 @@ namespace RoguegardUnity
                 isLoop = false;
                 foreach (var source in sources)
                 {
-                    // Ä¶’†‚Ì AudioSource ˆÈŠO‚ğ’â~‚·‚é
+                    // å†ç”Ÿä¸­ã® AudioSource ä»¥å¤–ã‚’åœæ­¢ã™ã‚‹
                     if (source.timeSamples <= parent.blankTimeSamples) { source.Stop(); }
                 }
             }

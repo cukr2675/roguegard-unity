@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -31,9 +31,9 @@ namespace Roguegard
                 return RogueObjUpdaterContinueType.Continue;
             }
 
-            // ƒƒr[‚©‚çƒ_ƒ“ƒWƒ‡ƒ“‚ÉˆÚ“®‚µ‚½‚Æ‚«“Še
+            // ãƒ­ãƒ“ãƒ¼ã‹ã‚‰ãƒ€ãƒ³ã‚¸ãƒ§ãƒ³ã«ç§»å‹•ã—ãŸã¨ãæŠ•ç¨¿
             var post = new RoguePost();
-            post.Name = $"{self.Location.Main.InfoSet.Name}‚Öo”­";
+            post.Name = $"{self.Location.Main.InfoSet.Name}ã¸å‡ºç™º";
             post.From = self;
             post.DateTime = RogueDateTime.UtcNow().ToString();
             postboxInfo.AddPost(post);

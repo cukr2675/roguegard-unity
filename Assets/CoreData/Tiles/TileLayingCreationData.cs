@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -17,7 +17,7 @@ namespace Roguegard.CharacterCreation
             IReadOnlyStartingItem startingItem, RogueObj location, Vector2Int position, IRogueRandom random, StackOption stackOption = StackOption.Default)
         {
             var member = RogueTileMember.GetMember(startingItem);
-            if (member.Tile == null) throw new RogueException("ƒ^ƒCƒ‹‚ªİ’è‚³‚ê‚Ä‚¢‚Ü‚¹‚ñB");
+            if (member.Tile == null) throw new RogueException("ã‚¿ã‚¤ãƒ«ãŒè¨­å®šã•ã‚Œã¦ã„ã¾ã›ã‚“ã€‚");
 
             location.Space.TrySet(member.Tile, position);
             return null;

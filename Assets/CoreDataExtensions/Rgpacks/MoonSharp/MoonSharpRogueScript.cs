@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -64,9 +64,9 @@ namespace Roguegard.Rgpacks.MoonSharp
             }
             //script.Globals.Set("__file", UserData.Create(new AnonWrapper<NotepadQuote>(code)));
 
-            // ˆË‘¶ŠÖŒW‚ğXV
+            // ä¾å­˜é–¢ä¿‚ã‚’æ›´æ–°
             //var loaded = ((AnonWrapper<List<NotepadQuote>>)script.Globals.Get("__loaded").UserData.Object).Value;
-            //loaded.Remove(code); // ‚·‚Å‚É“Ç‚İ‚Ü‚ê‚Ä‚¢‚éƒR[ƒh‚ªÄ“x“Ç‚İ‚Ü‚ê‚½‚ç––”ö‚ÖˆÚ“®‚³‚¹‚é
+            //loaded.Remove(code); // ã™ã§ã«èª­ã¿è¾¼ã¾ã‚Œã¦ã„ã‚‹ã‚³ãƒ¼ãƒ‰ãŒå†åº¦èª­ã¿è¾¼ã¾ã‚ŒãŸã‚‰æœ«å°¾ã¸ç§»å‹•ã•ã›ã‚‹
             //loaded.Add(code);
 
             var returnValue = script.DoString(code);

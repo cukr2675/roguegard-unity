@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,11 +15,11 @@ namespace Roguegard
             var userTile = arg.Other as UserRogueTile;
             if (userTile != null && !StatsEffectedValues.AreVS(userTile.User, user))
             {
-                // “G‘Î‚µ‚Ä‚¢‚È‚¢ƒLƒƒƒ‰‚ªã©‚ğ“¥‚ñ‚Å‚à‹N“®‚µ‚È‚¢‚æ‚¤‚É‚·‚é
+                // æ•µå¯¾ã—ã¦ã„ãªã„ã‚­ãƒ£ãƒ©ãŒç½ ã‚’è¸ã‚“ã§ã‚‚èµ·å‹•ã—ãªã„ã‚ˆã†ã«ã™ã‚‹
                 return false;
             }
 
-            // ƒ‰ƒ“ƒ_ƒ€‚ÈH‚×•¨‚ğæ“¾
+            // ãƒ©ãƒ³ãƒ€ãƒ ãªé£Ÿã¹ç‰©ã‚’å–å¾—
             var userItems = user.Space.Objs;
             foodIndices.Clear();
             for (int i = 0; i < userItems.Count; i++)
@@ -36,7 +36,7 @@ namespace Roguegard
                 var index = RogueRandom.Primary.Choice(foodIndices);
                 var food = userItems[index];
 
-                // •…‚ç‚¹‚é
+                // è…ã‚‰ã›ã‚‹
                 result = this.Affect(food, activationDepth, SpoilFoodErosion.Callback, user: userTile?.User);
             }
             else
@@ -47,7 +47,7 @@ namespace Roguegard
             if (!result && MessageWorkListener.TryOpenHandler(user.Location, user.Position, out var h))
             {
                 using var handler = h;
-                handler.AppendText("‰½‚à‹N‚±‚ç‚È‚©‚Á‚½").AppendText("\n");
+                handler.AppendText("ä½•ã‚‚èµ·ã“ã‚‰ãªã‹ã£ãŸ").AppendText("\n");
             }
             return true;
         }

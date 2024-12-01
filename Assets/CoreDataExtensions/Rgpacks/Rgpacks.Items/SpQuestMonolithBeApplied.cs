@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -43,10 +43,10 @@ namespace Roguegard.Rgpacks
             {
                 view.ShowTemplate(manager, arg)
                     ?
-                    .Option("ƒVƒ‡ƒbƒv", new ShopScreen() { parent = parent })
-                    .Option("ƒƒCƒ“ƒ`ƒƒ[ƒgİ’è", new SetMainChartScreen())
-                    .Option("ƒeƒXƒgƒvƒŒƒC", Playtest)
-                    .Option("ƒAƒgƒŠƒG‚©‚ço‚é", Leave)
+                    .Option("ã‚·ãƒ§ãƒƒãƒ—", new ShopScreen() { parent = parent })
+                    .Option("ãƒ¡ã‚¤ãƒ³ãƒãƒ£ãƒ¼ãƒˆè¨­å®š", new SetMainChartScreen())
+                    .Option("ãƒ†ã‚¹ãƒˆãƒ—ãƒ¬ã‚¤", Playtest)
+                    .Option("ã‚¢ãƒˆãƒªã‚¨ã‹ã‚‰å‡ºã‚‹", Leave)
                     .Build();
             }
 
@@ -90,7 +90,7 @@ namespace Roguegard.Rgpacks
                     .OnClickElement((item, manager, arg) =>
                     {
                         manager.AddObject(DeviceKw.AppendText, item);
-                        manager.AddObject(DeviceKw.AppendText, "‚ğè‚É“ü‚ê‚½\n");
+                        manager.AddObject(DeviceKw.AppendText, "ã‚’æ‰‹ã«å…¥ã‚ŒãŸ\n");
                         item.Option.CreateObj(item, arg.Self, Vector2Int.zero, RogueRandom.Primary);
                     })
 

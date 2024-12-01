@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -32,13 +32,13 @@ namespace Roguegard
 
                 if (player.Location != world)
                 {
-                    // ƒ[ƒ‹ƒh‚É‚¢‚È‚¢ê‡
+                    // ãƒ¯ãƒ¼ãƒ«ãƒ‰ã«ã„ãªã„å ´åˆ
 
-                    // ƒvƒŒƒCƒ„[ƒLƒƒƒ‰ƒNƒ^[‚Æƒp[ƒeƒBƒƒ“ƒo[‚Í•Ê‹óŠÔ‚ÉˆÚ“®‚³‚¹‚éB
+                    // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚­ãƒ£ãƒ©ã‚¯ã‚¿ãƒ¼ã¨ãƒ‘ãƒ¼ãƒ†ã‚£ãƒ¡ãƒ³ãƒãƒ¼ã¯åˆ¥ç©ºé–“ã«ç§»å‹•ã•ã›ã‚‹ã€‚
                     var result = this.LocateWithPartyMembers(player, null, world, activationDepth, true);
                     if (!result) return false;
 
-                    // Œ³‹‚½ƒ_ƒ“ƒWƒ‡ƒ“‚ÍÁ‚·B
+                    // å…ƒå±…ãŸãƒ€ãƒ³ã‚¸ãƒ§ãƒ³ã¯æ¶ˆã™ã€‚
                     if (dungeon != null)
                     {
                         dungeon.TrySetStack(0);
@@ -46,7 +46,7 @@ namespace Roguegard
                     }
                 }
 
-                // ƒp[ƒeƒBEƒŠ[ƒ_[ƒGƒtƒFƒNƒgEƒŒƒxƒ‹ƒAƒbƒvƒ{[ƒiƒX‚Ì‰Šú‰»
+                // ãƒ‘ãƒ¼ãƒ†ã‚£ãƒ»ãƒªãƒ¼ãƒ€ãƒ¼ã‚¨ãƒ•ã‚§ã‚¯ãƒˆãƒ»ãƒ¬ãƒ™ãƒ«ã‚¢ãƒƒãƒ—ãƒœãƒ¼ãƒŠã‚¹ã®åˆæœŸåŒ–
                 var party = new RogueParty(player.Main.InfoSet.Faction, player.Main.InfoSet.TargetFactions);
                 RoguePartyUtility.AssignWithPartyMembers(player, party);
 
@@ -54,7 +54,7 @@ namespace Roguegard
 
                 if (player == RogueDevice.Primary.Player)
                 {
-                    // ƒvƒŒƒCƒ„[ƒLƒƒƒ‰‚È‚çÅ‰‚ÍãŒü‚«
+                    // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚­ãƒ£ãƒ©ãªã‚‰æœ€åˆã¯ä¸Šå‘ã
                     player.Main.Stats.Direction = RogueDirection.Up;
                 }
 
@@ -66,7 +66,7 @@ namespace Roguegard
         {
             protected override string GetName(MMgr manager, RogueObj player, RogueObj empty, in RogueMethodArgument arg)
             {
-                return "ƒƒr[";
+                return "ãƒ­ãƒ“ãƒ¼";
             }
 
             protected override void Activate(MMgr manager, RogueObj player, RogueObj empty, in RogueMethodArgument arg)
@@ -77,7 +77,7 @@ namespace Roguegard
                 var memberInfo = LobbyMemberList.GetMemberInfo(player);
                 if (memberInfo.Seat != null && memberInfo.Seat.Location == null)
                 {
-                    // È‚ªÁ‚¦‚Ä‚¢‚½‚ç–³Œø‰»
+                    // å¸­ãŒæ¶ˆãˆã¦ã„ãŸã‚‰ç„¡åŠ¹åŒ–
                     memberInfo.Seat = null;
                 }
                 Vector2Int position;
@@ -87,17 +87,17 @@ namespace Roguegard
                 }
                 else
                 {
-                    // ƒŠƒXƒ|[ƒ“’n“_‚ªİ’è‚³‚ê‚Ä‚¢‚È‚¯‚ê‚Î‹K’è‚ÌˆÊ’u‚ğg—p
+                    // ãƒªã‚¹ãƒãƒ¼ãƒ³åœ°ç‚¹ãŒè¨­å®šã•ã‚Œã¦ã„ãªã‘ã‚Œã°è¦å®šã®ä½ç½®ã‚’ä½¿ç”¨
                     position = new Vector2Int(tilemap.Width / 2, 3);
                 }
                 if (!SpaceUtility.TryLocate(player, worldInfo.Lobby, position))
                 {
-                    // ˆÚ“®‚É¸”s‚µ‚½‚ç•Ç’Ê‰ßó‘Ô‚ÅˆÚ“®‚³‚¹‚é
+                    // ç§»å‹•ã«å¤±æ•—ã—ãŸã‚‰å£é€šéçŠ¶æ…‹ã§ç§»å‹•ã•ã›ã‚‹
                     var movement = MovementCalculator.Get(player);
                     if (!player.TryLocate(worldInfo.Lobby, position, movement.AsTile, false, false, movement.HasSightCollider, StackOption.Default))
-                        throw new RogueException("ƒZ[ƒuƒ|ƒCƒ“ƒg‚©‚ç‚Ì•œ‹A‚É¸”s‚µ‚Ü‚µ‚½B•œ‹AˆÊ’u‚ÉˆÚ“®‚Å‚«‚Ü‚¹‚ñB");
+                        throw new RogueException("ã‚»ãƒ¼ãƒ–ãƒã‚¤ãƒ³ãƒˆã‹ã‚‰ã®å¾©å¸°ã«å¤±æ•—ã—ã¾ã—ãŸã€‚å¾©å¸°ä½ç½®ã«ç§»å‹•ã§ãã¾ã›ã‚“ã€‚");
                 }
-                // ƒp[ƒeƒBƒƒ“ƒo[‚àˆÚ“®
+                // ãƒ‘ãƒ¼ãƒ†ã‚£ãƒ¡ãƒ³ãƒãƒ¼ã‚‚ç§»å‹•
                 if (player.Main.Stats.Party != null)
                 {
                     var partyMembers = player.Main.Stats.Party.Members;
@@ -108,7 +108,7 @@ namespace Roguegard
                         var memberMemberInfo = LobbyMemberList.GetMemberInfo(member);
                         if (memberMemberInfo.Seat.Location == null)
                         {
-                            // È‚ªÁ‚¦‚Ä‚¢‚½‚ç–³Œø‰»
+                            // å¸­ãŒæ¶ˆãˆã¦ã„ãŸã‚‰ç„¡åŠ¹åŒ–
                             memberMemberInfo.Seat = null;
                         }
                         if (memberMemberInfo.Seat != null && memberMemberInfo.Seat.Location == worldInfo.Lobby)
@@ -117,10 +117,10 @@ namespace Roguegard
                             if (SpaceUtility.TryLocate(member, worldInfo.Lobby, memberPosition)) continue;
                         }
 
-                        // ƒŠƒXƒ|[ƒ“’n“_‚ªİ’è‚³‚ê‚Ä‚¢‚È‚¯‚ê‚Î‹K’è‚ÌˆÊ’u‚ğg—p
+                        // ãƒªã‚¹ãƒãƒ¼ãƒ³åœ°ç‚¹ãŒè¨­å®šã•ã‚Œã¦ã„ãªã‘ã‚Œã°è¦å®šã®ä½ç½®ã‚’ä½¿ç”¨
                         if (!RoguePartyUtility.TryLocateNextToAnyMember(member, player.Main.Stats.Party))
                         {
-                            Debug.LogError($"{member} ‚ÌˆÚ“®‚É¸”s‚µ‚Ü‚µ‚½B");
+                            Debug.LogError($"{member} ã®ç§»å‹•ã«å¤±æ•—ã—ã¾ã—ãŸã€‚");
                         }
                     }
                 }
@@ -130,7 +130,7 @@ namespace Roguegard
         }
 
         /// <summary>
-        /// ƒƒr[‚ÌƒvƒŒƒCƒ„[ƒp[ƒeƒBƒƒ“ƒo[‚Í©‘R‰ñ•œ‚·‚éB
+        /// ãƒ­ãƒ“ãƒ¼ã®ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãƒ‘ãƒ¼ãƒ†ã‚£ãƒ¡ãƒ³ãƒãƒ¼ã¯è‡ªç„¶å›å¾©ã™ã‚‹ã€‚
         /// </summary>
         [Objforming.Formable]
         private class LobbyLeaderEffect : PlayerLeaderRogueEffect, IValueEffect, IRogueObjUpdater
@@ -150,10 +150,10 @@ namespace Roguegard
 
             RogueObjUpdaterContinueType IRogueObjUpdater.UpdateObj(RogueObj self, float activationDepth, ref int sectionIndex)
             {
-                // ƒŠ[ƒ_[‚Ì©‘R‰ñ•œ
+                // ãƒªãƒ¼ãƒ€ãƒ¼ã®è‡ªç„¶å›å¾©
                 self.Main.Stats.Regenerate(self);
 
-                // ƒp[ƒeƒBƒƒ“ƒo[‚É©‘R‰ñ•œŒø‰Ê‚ğ•t—^
+                // ãƒ‘ãƒ¼ãƒ†ã‚£ãƒ¡ãƒ³ãƒãƒ¼ã«è‡ªç„¶å›å¾©åŠ¹æœã‚’ä»˜ä¸
                 memberEffect.AffectToPartyMembersOf(self, false);
                 return default;
             }
@@ -162,7 +162,7 @@ namespace Roguegard
             public override int GetHashCode() => GetType().GetHashCode();
 
             /// <summary>
-            /// ‚±‚ÌƒGƒtƒFƒNƒg‚ª•t—^‚³‚ê‚Ä‚¢‚éƒIƒuƒWƒFƒNƒg‚Í©‘R‰ñ•œ‚ğ—LŒø‚É‚·‚éB
+            /// ã“ã®ã‚¨ãƒ•ã‚§ã‚¯ãƒˆãŒä»˜ä¸ã•ã‚Œã¦ã„ã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã¯è‡ªç„¶å›å¾©ã‚’æœ‰åŠ¹ã«ã™ã‚‹ã€‚
             /// </summary>
             [Objforming.Formable]
             private class MemberEffect : BasePartyMemberRogueEffect<LobbyLeaderEffect>

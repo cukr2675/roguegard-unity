@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -68,7 +68,7 @@ namespace Roguegard.Rgpacks
                 return new RelationOnlyComponent(instanceType);
             });
 
-            // T ‚ğ•Û‚µ‚¤‚éŒ^‚¾‚¯‚ğæ‚èo‚·
+            // T ã‚’ä¿æŒã—ã†ã‚‹å‹ã ã‘ã‚’å–ã‚Šå‡ºã™
             var relationalTypes = new List<System.Type>();
             var lastCount = relationalTypes.Count;
             relationalTypes.Add(type);
@@ -77,10 +77,10 @@ namespace Roguegard.Rgpacks
                 var count = relationalTypes.Count;
                 for (int i = lastCount; i < count; i++)
                 {
-                    // ’Ç‰Á‚³‚ê‚½Œ^‚ğæ“¾
+                    // è¿½åŠ ã•ã‚ŒãŸå‹ã‚’å–å¾—
                     var addedRelationalType = relationalTypes[i];
 
-                    // ‚Ü‚¾’Ç‰Á‚³‚ê‚Ä‚¢‚È‚¢Œ^‚Ì‚¤‚¿A’Ç‰Á‚³‚ê‚½Œ^‚ğƒƒ“ƒo[‚É‚ÂŒ^‚ğ’Ç‰Á‚·‚éB
+                    // ã¾ã è¿½åŠ ã•ã‚Œã¦ã„ãªã„å‹ã®ã†ã¡ã€è¿½åŠ ã•ã‚ŒãŸå‹ã‚’ãƒ¡ãƒ³ãƒãƒ¼ã«æŒã¤å‹ã‚’è¿½åŠ ã™ã‚‹ã€‚
                     foreach (var form in forms)
                     {
                         if (relationalTypes.Contains(form.InstanceType)) continue;
@@ -91,7 +91,7 @@ namespace Roguegard.Rgpacks
                     }
                 }
 
-                // ‰½‚à’Ç‰Á‚³‚ê‚È‚­‚È‚Á‚½‚çI—¹
+                // ä½•ã‚‚è¿½åŠ ã•ã‚Œãªããªã£ãŸã‚‰çµ‚äº†
                 if (lastCount == count) break;
 
                 lastCount = count;

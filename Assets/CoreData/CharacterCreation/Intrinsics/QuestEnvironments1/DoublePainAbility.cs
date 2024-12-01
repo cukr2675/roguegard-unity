@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -30,17 +30,17 @@ namespace Roguegard.CharacterCreation
         [Objforming.Formable]
         private class MemberEffect : StatusEffectPartyMemberRogueEffect<SortedIntrinsic>, IValueEffect
         {
-            // –hŒä—Í‚ÆƒK[ƒh‚ğ“K—p‚µ‚½‚ ‚Æ“ñ”{‚É‚·‚é
+            // é˜²å¾¡åŠ›ã¨ã‚¬ãƒ¼ãƒ‰ã‚’é©ç”¨ã—ãŸã‚ã¨äºŒå€ã«ã™ã‚‹
             float IValueEffect.Order => 10f;
 
             void IValueEffect.AffectValue(IKeyword keyword, EffectableValue value, RogueObj self)
             {
                 if (keyword == StatsKw.DEF && !value.SubValues.Is(StdKw.Heal))
                 {
-                    // ó‚¯‚éƒ_ƒ[ƒW“ñ”{
+                    // å—ã‘ã‚‹ãƒ€ãƒ¡ãƒ¼ã‚¸äºŒå€
                     value.MainValue *= 2f;
 
-                    // ƒK[ƒh–hŒä—Í‚à“ñ”{
+                    // ã‚¬ãƒ¼ãƒ‰é˜²å¾¡åŠ›ã‚‚äºŒå€
                     value.SubValues[StatsKw.GuardDEF] *= 2f;
                 }
             }

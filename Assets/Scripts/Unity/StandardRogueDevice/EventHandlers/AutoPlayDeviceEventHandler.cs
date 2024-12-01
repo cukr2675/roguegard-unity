@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -24,7 +24,7 @@ namespace RoguegardUnity
         {
             if (keyword == DeviceKw.StartAutoPlay && obj is RogueObj autoPlayObj)
             {
-                // ƒI[ƒgƒvƒŒƒCŠJn
+                // ã‚ªãƒ¼ãƒˆãƒ—ãƒ¬ã‚¤é–‹å§‹
                 setSubject(autoPlayObj);
                 touchController.MenuOpen(autoPlayObj, true);
                 componentManager.UpdateCharacters();

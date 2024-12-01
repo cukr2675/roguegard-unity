@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -61,7 +61,7 @@ namespace ListingMF
 
             void Log(object value, object sender)
             {
-                // Play ‚ğƒŠƒNƒGƒXƒg‚µ‚½ƒIƒuƒWƒFƒNƒg‚ªƒAƒjƒ[ƒ^[‚ğ‚Âê‡A‚»‚Ìó‘Ô‚ğ•\¦‚·‚é
+                // Play ã‚’ãƒªã‚¯ã‚¨ã‚¹ãƒˆã—ãŸã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãŒã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚¿ãƒ¼ã‚’æŒã¤å ´åˆã€ãã®çŠ¶æ…‹ã‚’è¡¨ç¤ºã™ã‚‹
                 animatorLog.Clear();
                 if ((sender is GameObject obj && obj.TryGetComponent<Animator>(out var animator)) ||
                     (sender is Component component && component.TryGetComponent(out animator)))
@@ -71,16 +71,16 @@ namespace ListingMF
                     var firstElement = true;
                     for (int i = 0; i < animator.layerCount; i++)
                     {
-                        // d‚İ‚ªƒ[ƒ‚ÌƒŒƒCƒ„[‚Í•\¦‚µ‚È‚¢
+                        // é‡ã¿ãŒã‚¼ãƒ­ã®ãƒ¬ã‚¤ãƒ¤ãƒ¼ã¯è¡¨ç¤ºã—ãªã„
                         if (animator.GetLayerWeight(i) == 0f) continue;
 
-                        // ‹æØ‚èƒJƒ“ƒ}
+                        // åŒºåˆ‡ã‚Šã‚«ãƒ³ãƒ
                         if (!firstElement) { animatorLog.Append(", "); }
 
-                        // Base Layer ‚ÍƒŒƒCƒ„[–¼‚ğ•\¦‚µ‚È‚¢
+                        // Base Layer ã¯ãƒ¬ã‚¤ãƒ¤ãƒ¼åã‚’è¡¨ç¤ºã—ãªã„
                         if (i >= 1) { animatorLog.Append("<color=grey>").Append(animator.GetLayerName(i)).Append(":</color> "); }
 
-                        // ƒŒƒCƒ„[‚ªÄ¶’†‚ÌƒXƒe[ƒg–¼‚ğ•\¦
+                        // ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒå†ç”Ÿä¸­ã®ã‚¹ãƒ†ãƒ¼ãƒˆåã‚’è¡¨ç¤º
                         animator.GetCurrentAnimatorClipInfo(i, clipInfos);
                         if (clipInfos.Count >= 1)
                         {
@@ -103,13 +103,13 @@ namespace ListingMF
 
             string SenderToString(object sender)
             {
-                // ƒrƒ…[—v‘f‚Í—Î
+                // ãƒ“ãƒ¥ãƒ¼è¦ç´ ã¯ç·‘
                 if (sender is ViewElement || sender is GameObject) return $"<color=green>{sender}</color>";
 
-                // ƒTƒuƒrƒ…[‚ÍÂ
+                // ã‚µãƒ–ãƒ“ãƒ¥ãƒ¼ã¯é’
                 else if (sender is IElementsSubView) return $"<color=blue>{sender}</color>";
 
-                // ‚»‚êˆÈŠO‚Í’ÊíF
+                // ãã‚Œä»¥å¤–ã¯é€šå¸¸è‰²
                 else return $"{sender}";
             }
 
@@ -138,7 +138,7 @@ namespace ListingMF
 
         public void OnSelect(GameObject gameObject, bool outOfRange)
         {
-            // €–Ú‘I‘ğ‚Ì Play ‚ğÀsi‘I‘ğ‚ğƒLƒƒƒ“ƒZƒ‹’†‚Í‰½‚à‚µ‚È‚¢j
+            // é …ç›®é¸æŠæ™‚ã® Play ã‚’å®Ÿè¡Œï¼ˆé¸æŠã‚’ã‚­ãƒ£ãƒ³ã‚»ãƒ«ä¸­ã¯ä½•ã‚‚ã—ãªã„ï¼‰
             if (!queuedCancelSelection)
             {
                 if (outOfRange)
@@ -151,7 +151,7 @@ namespace ListingMF
                 }
             }
 
-            // ”ÍˆÍŠO‚Ì€–Ú‚ğ‘I‘ğ‚µ‚½‚Æ‚«‘I‘ğ‚ğƒLƒƒƒ“ƒZƒ‹‚·‚é
+            // ç¯„å›²å¤–ã®é …ç›®ã‚’é¸æŠã—ãŸã¨ãé¸æŠã‚’ã‚­ãƒ£ãƒ³ã‚»ãƒ«ã™ã‚‹
             if (_cancelOnSelectOutOfRange && outOfRange)
             {
                 queuedCancelSelection = true;

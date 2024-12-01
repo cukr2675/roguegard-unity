@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -47,7 +47,7 @@ namespace Roguegard
                 RogueEffectUtility.AddFromRogueEffect(obj, effect);
             }
             if (priority <= effect.priority) throw new RogueException(
-                $"V‚µ‚¢ƒrƒwƒCƒrƒA‚Ì—Dæ“x ({priority}) ‚ÍŠù‘¶‚ÌƒrƒwƒCƒrƒA‚Ì—Dæ“x ({effect.priority}) ˆÈ‰º‚Ì‚½‚ßã‘‚«‚Å‚«‚Ü‚¹‚ñB");
+                $"æ–°ã—ã„ãƒ“ãƒ˜ã‚¤ãƒ“ã‚¢ã®å„ªå…ˆåº¦ ({priority}) ã¯æ—¢å­˜ã®ãƒ“ãƒ˜ã‚¤ãƒ“ã‚¢ã®å„ªå…ˆåº¦ ({effect.priority}) ä»¥ä¸‹ã®ãŸã‚ä¸Šæ›¸ãã§ãã¾ã›ã‚“ã€‚");
 
             effect.node = node;
             effect.priority = priority;

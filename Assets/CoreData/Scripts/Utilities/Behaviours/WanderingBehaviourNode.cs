@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,7 +16,7 @@ namespace Roguegard
             if (MovementUtility.TryGetApproachDirection(self, nextPosition, true, out var approachDirection))
             {
                 default(IActiveRogueMethodCaller).Walk(self, approachDirection, activationDepth);
-                walker.GetWalk(self, false); // ˆÚ“®‚µ‚½’¼Œã‚Ì‹ŠE‚ÅƒpƒX‚ğXV
+                walker.GetWalk(self, false); // ç§»å‹•ã—ãŸç›´å¾Œã®è¦–ç•Œã§ãƒ‘ã‚¹ã‚’æ›´æ–°
             }
             return RogueObjUpdaterContinueType.Break;
         }

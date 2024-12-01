@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,7 +8,7 @@ namespace Roguegard
     public class NamingEffect : StackableStatusEffect
     {
         /// <summary>
-        /// <see cref="RogueMethodArgument.Other"/> ‚Ì <see cref="string"/> ‚ğƒIƒuƒWƒFƒNƒg‚É–½–¼‚·‚é
+        /// <see cref="RogueMethodArgument.Other"/> ã® <see cref="string"/> ã‚’ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã«å‘½åã™ã‚‹
         /// </summary>
         public static IAffectCallback Callback { get; } = new AffectCallback(new NamingEffect());
 
@@ -28,7 +28,7 @@ namespace Roguegard
 
         public override void GetEffectedName(RogueNameBuilder refName, RogueObj self)
         {
-            refName.Insert0("‚Æ–¼•t‚¯‚ç‚ê‚½");
+            refName.Insert0("ã¨åä»˜ã‘ã‚‰ã‚ŒãŸ");
             refName.Insert0(Naming);
         }
 

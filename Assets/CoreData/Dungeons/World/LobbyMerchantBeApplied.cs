@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -53,7 +53,7 @@ namespace Roguegard
 
             public override void OpenScreen(in MMgr manager, in MArg arg)
             {
-                view.ShowTemplate($"¤lu‚í‚½‚µ‚Í¤l‚Å‚· ‚Å‚à‚Ü‚¾€”õ’†‚Å‚·{view.VA}\n", manager, arg)
+                view.ShowTemplate($"å•†äººã€Œã‚ãŸã—ã¯å•†äººã§ã™ ã§ã‚‚ã¾ã æº–å‚™ä¸­ã§ã™{view.VA}\n", manager, arg)
                     ?
                     .VariableOnce(out var nextScreen, new RogueMenu() { parent = parent })
 
@@ -86,7 +86,7 @@ namespace Roguegard
                     .OnClickElement((item, manager, arg) =>
                     {
                         manager.AddObject(DeviceKw.AppendText, item);
-                        manager.AddObject(DeviceKw.AppendText, "‚ğè‚É“ü‚ê‚½\n");
+                        manager.AddObject(DeviceKw.AppendText, "ã‚’æ‰‹ã«å…¥ã‚ŒãŸ\n");
 
                         item.Option.CreateObj(item, arg.Self, Vector2Int.zero, RogueRandom.Primary);
                     })

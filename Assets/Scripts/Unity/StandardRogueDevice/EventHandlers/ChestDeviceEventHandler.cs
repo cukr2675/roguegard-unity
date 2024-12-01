@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -30,13 +30,13 @@ namespace RoguegardUnity
             var player = componentManager.Player;
             if (keyword == StdKw.TakeOutFromChest && obj is RogueObj takeChest)
             {
-                // ƒ`ƒFƒXƒg‚©‚çƒAƒCƒeƒ€‚ğæ‚èo‚·
+                // ãƒã‚§ã‚¹ãƒˆã‹ã‚‰ã‚¢ã‚¤ãƒ†ãƒ ã‚’å–ã‚Šå‡ºã™
                 componentManager.EventManager.AddMenu(takeOutFromChestMenu, player, null, new(targetObj: takeChest));
                 return true;
             }
             if (keyword == StdKw.PutIntoChest && obj is RogueObj putChest)
             {
-                // ƒ`ƒFƒXƒg‚ÖƒAƒCƒeƒ€‚ğ“ü‚ê‚é
+                // ãƒã‚§ã‚¹ãƒˆã¸ã‚¢ã‚¤ãƒ†ãƒ ã‚’å…¥ã‚Œã‚‹
                 componentManager.EventManager.AddMenu(putIntoChestMenu, player, null, new(targetObj: putChest));
                 return true;
             }

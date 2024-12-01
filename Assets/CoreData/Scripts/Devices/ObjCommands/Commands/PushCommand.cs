@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,7 +8,7 @@ namespace Roguegard
 {
     public class PushCommand : BaseObjCommand
     {
-        public override string Name => "‰Ÿ‚·";
+        public override string Name => "æŠ¼ã™";
 
         private static readonly PushRogueMethod pushRogueMethod = new PushRogueMethod();
 
@@ -18,10 +18,10 @@ namespace Roguegard
             var result = RogueMethodAspectState.Invoke(StdKw.Push, pushRogueMethod, self, user, activationDepth, arg);
             if (!result) return false;
 
-            // ‰Ÿ‚·‚Ì‚É¬Œ÷‚µ‚½‚Æ‚«‰Ÿ‚µ‚½•ûŒü‚Éˆê•àˆÚ“®‚·‚éB
+            // æŠ¼ã™ã®ã«æˆåŠŸã—ãŸã¨ãæŠ¼ã—ãŸæ–¹å‘ã«ä¸€æ­©ç§»å‹•ã™ã‚‹ã€‚
             this.Walk(self, direction, activationDepth);
 
-            // ˆÚ“®‚Å‚«‚È‚­‚Ä‚à‰Ÿ‚¹‚½‚çƒ^[ƒ“Œo‰ß‚³‚¹‚é
+            // ç§»å‹•ã§ããªãã¦ã‚‚æŠ¼ã›ãŸã‚‰ã‚¿ãƒ¼ãƒ³çµŒéã•ã›ã‚‹
             return true;
         }
 

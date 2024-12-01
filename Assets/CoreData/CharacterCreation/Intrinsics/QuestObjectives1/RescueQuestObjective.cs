@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -32,7 +32,7 @@ namespace Roguegard.CharacterCreation
 
             var builder = new IntrinsicBuilder();
             builder.Option = parent;
-            builder.OptionCaption = $"{floor}F ‚Å {clientOption.Name} ‚ğ‹~•‚·‚é";
+            builder.OptionCaption = $"{floor}F ã§ {clientOption.Name} ã‚’æ•‘åŠ©ã™ã‚‹";
             var member = (QuestMember)builder.GetMember(QuestMember.SourceInstance);
             var client = member.Targets.Add();
             client.Option = clientOption;
@@ -68,11 +68,11 @@ namespace Roguegard.CharacterCreation
                 if (generate && self.Location.Space.Tilemap != null && DungeonInfo.TryGet(self.Location, out _) &&
                     self.Location.Main.Stats.Lv == member.TargetFloor)
                 {
-                    // –Ú•W‚ÌŠK‘w‚Ö‚ÌˆÚ“®‚É¬Œ÷‚µ‚½‚Æ‚« NPC ‚ğ¶¬‚·‚éB
+                    // ç›®æ¨™ã®éšå±¤ã¸ã®ç§»å‹•ã«æˆåŠŸã—ãŸã¨ã NPC ã‚’ç”Ÿæˆã™ã‚‹ã€‚
                     if (!self.Location.Space.TryGetRandomPositionInRoom(RogueRandom.Primary, out var position))
                     {
-                        // ¶¬‚É¸”s‚µ‚½‚çƒƒbƒZ[ƒW‚ğ•\¦
-                        RogueDevice.Add(DeviceKw.AppendText, "–Ú“I‚ÌŠK‘w‚É“’B‚µ‚½‚ª –Ú•W‚ªŒ©‚Â‚©‚ç‚È‚©‚Á‚½\n");
+                        // ç”Ÿæˆã«å¤±æ•—ã—ãŸã‚‰ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’è¡¨ç¤º
+                        RogueDevice.Add(DeviceKw.AppendText, "ç›®çš„ã®éšå±¤ã«åˆ°é”ã—ãŸãŒ ç›®æ¨™ãŒè¦‹ã¤ã‹ã‚‰ãªã‹ã£ãŸ\n");
                         return true;
                     }
 

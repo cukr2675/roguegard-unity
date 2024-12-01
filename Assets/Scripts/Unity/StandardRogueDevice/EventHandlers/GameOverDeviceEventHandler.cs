@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -31,14 +31,14 @@ namespace RoguegardUnity
         }
 
         /// <summary>
-        /// w’è‚Ì <see cref="RogueObj"/> ‚ğƒ[ƒ‹ƒh’¼‰º‚ÖˆÚ“®‚³‚¹‚éB’–Ú’†‚ÌƒLƒƒƒ‰‚Ìê‡‚ÍƒŠƒUƒ‹ƒg‚ğ•\¦‚·‚éB
+        /// æŒ‡å®šã® <see cref="RogueObj"/> ã‚’ãƒ¯ãƒ¼ãƒ«ãƒ‰ç›´ä¸‹ã¸ç§»å‹•ã•ã›ã‚‹ã€‚æ³¨ç›®ä¸­ã®ã‚­ãƒ£ãƒ©ã®å ´åˆã¯ãƒªã‚¶ãƒ«ãƒˆã‚’è¡¨ç¤ºã™ã‚‹ã€‚
         /// </summary>
         public void AfterGameOver(RogueObj leaderCharacter)
         {
-            // Á–Å‚ÅƒQ[ƒ€ƒI[ƒo[‚É‚È‚Á‚½‚Æ‚«‚Ì‚½‚ß‚ÉƒXƒ^ƒbƒN”‚ğİ’è‚·‚é
+            // æ¶ˆæ»…ã§ã‚²ãƒ¼ãƒ ã‚ªãƒ¼ãƒãƒ¼ã«ãªã£ãŸã¨ãã®ãŸã‚ã«ã‚¹ã‚¿ãƒƒã‚¯æ•°ã‚’è¨­å®šã™ã‚‹
             leaderCharacter.TrySetStack(1);
 
-            // ˆê“I‚Éƒ[ƒ‹ƒh’¼‰º‚ÖˆÚ“®
+            // ä¸€æ™‚çš„ã«ãƒ¯ãƒ¼ãƒ«ãƒ‰ç›´ä¸‹ã¸ç§»å‹•
             var dungeon = leaderCharacter.Location;
             SpaceUtility.TryLocate(leaderCharacter, componentManager.World);
 
@@ -57,7 +57,7 @@ namespace RoguegardUnity
         }
 
         /// <summary>
-        /// ƒƒO•\¦ ¨ ƒŠƒUƒ‹ƒg•\¦ ¨ ƒƒr[‚Ö‹AŠÒ
+        /// ãƒ­ã‚°è¡¨ç¤º â†’ ãƒªã‚¶ãƒ«ãƒˆè¡¨ç¤º â†’ ãƒ­ãƒ“ãƒ¼ã¸å¸°é‚„
         /// </summary>
         private class GameOverMenu : RogueMenuScreen
         {
@@ -70,7 +70,7 @@ namespace RoguegardUnity
 
             public override void OpenScreen(in MMgr manager, in MArg arg)
             {
-                // ƒƒO•\¦
+                // ãƒ­ã‚°è¡¨ç¤º
                 view.ShowTemplate(manager, arg)
                     ?
                     .Build();
@@ -80,7 +80,7 @@ namespace RoguegardUnity
             {
                 public override void OpenScreen(in MMgr manager, in MArg arg)
                 {
-                    // ƒŠƒUƒ‹ƒg•\¦ ¨ ƒƒr[‚Ö‹AŠÒ
+                    // ãƒªã‚¶ãƒ«ãƒˆè¡¨ç¤º â†’ ãƒ­ãƒ“ãƒ¼ã¸å¸°é‚„
                     var player = arg.Self;
                     var summary = RoguegardSubViews.GetSummary(manager);
                     summary.SetGameOver(player, arg.Arg.TargetObj, manager);

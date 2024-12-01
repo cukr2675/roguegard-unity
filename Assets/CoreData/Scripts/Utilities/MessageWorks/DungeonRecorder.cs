@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,20 +8,20 @@ using Roguegard.Extensions;
 
 namespace Roguegard
 {
-    // �Q�[��������^�悷����@�̔�r
-    // �E�A�j���[�V������ۑ�
-    // �@�@�\�ʏサ���Č��ł��Ȃ�
-    // �@�@�A�j���[�V�������V���A�����\�ɂ���K�v����i������ɂ��惆�[�U��`�A�j���[�V�����ŕK�v�j
-    // �E���[���h�S�̂ƃv���C���[�����ۑ�
-    // �@�@�Z�[�u�f�[�^����剻����
-    // �@�@�S�R�}���h���V���A�����\�ɂ���K�v����
-    // �@�@�o�[�W���j���O���K�v�@�����A�b�v�f�[�g��Web�A�v���Ƃ͑���������
-    // �E�^�撆�̓_���W�����P�ʂŐ؂藣��
-    // �@�@�o�O�𐶂݂₷���i�_���W�����O�����犱����Ă����m�ł��Ȃ��j
-    // �@�@���R�x��������i�^�撆�̃_���W�����ɂ͊O�����犱�s�j
-    // �@�@RogueRandom ��؂藣����悤�ɐ݌v�ύX���K�v
-    // �@�@�o�[�W���j���O���K�v�@�����A�b�v�f�[�g��Web�A�v���Ƃ͑���������
-    // �A�j���[�V�����ۑ��ɂ���
+    // ゲーム処理を録画する方法の比較
+    // ・アニメーションを保存
+    // 　　表面上しか再現できない
+    // 　　アニメーションをシリアル化可能にする必要あり（いずれにせよユーザ定義アニメーションで必要）
+    // ・ワールド全体とプレイヤー操作を保存
+    // 　　セーブデータが肥大化する
+    // 　　全コマンドをシリアル化可能にする必要あり
+    // 　　バージョニングが必要　強制アップデートのWebアプリとは相性が悪い
+    // ・録画中はダンジョン単位で切り離す
+    // 　　バグを生みやすい（ダンジョン外部から干渉されても検知できない）
+    // 　　自由度が下がる（録画中のダンジョンには外部から干渉不可）
+    // 　　RogueRandom を切り離せるように設計変更が必要
+    // 　　バージョニングが必要　強制アップデートのWebアプリとは相性が悪い
+    // アニメーション保存にする
 
     public class DungeonRecorder
     {
@@ -83,7 +83,7 @@ namespace Roguegard
 
         public void Play(RogueObj player)
         {
-            // Seed ���w�肵�ĊK�w����
+            // Seed を指定して階層生成
             var random = new RogueRandom(Quest.Seed);
             var world = RogueWorldInfo.GetWorld(player);
             var dungeon = Quest.Dungeon.CreateObj(world, Vector2Int.zero, random);

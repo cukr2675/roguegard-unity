@@ -1,11 +1,11 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace ListingMF
 {
     /// <summary>
-    /// ƒƒjƒ…[‚Ì‰æ–Ê’PˆÊ‚ÌƒNƒ‰ƒX
+    /// ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã®ç”»é¢å˜ä½ã®ã‚¯ãƒ©ã‚¹
     /// </summary>
     public abstract class MenuScreen<TMgr, TArg>
         where TMgr : IListMenuManager
@@ -13,7 +13,7 @@ namespace ListingMF
     {
         public virtual bool IsIncremental => false;
 
-        // ViewTemplate ƒNƒ‰ƒX‚Ìƒƒ\ƒbƒhƒ`ƒF[ƒ“‚ÅŒë‚Á‚Äg—p‚µ‚È‚¢‚æ‚¤‚É in ˆø”‚É‚·‚é
+        // ViewTemplate ã‚¯ãƒ©ã‚¹ã®ãƒ¡ã‚½ãƒƒãƒ‰ãƒã‚§ãƒ¼ãƒ³ã§èª¤ã£ã¦ä½¿ç”¨ã—ãªã„ã‚ˆã†ã« in å¼•æ•°ã«ã™ã‚‹
         public abstract void OpenScreen(in TMgr manager, in TArg arg);
 
         public virtual void CloseScreen(TMgr manager, bool back)

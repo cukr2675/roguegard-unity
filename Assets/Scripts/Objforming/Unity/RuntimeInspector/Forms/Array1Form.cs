@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,7 +8,7 @@ namespace Objforming.Unity.RuntimeInspector
     {
         public static RelationalForm Create(System.Type type, LinkElement linkElementPrefab)
         {
-            if (!type.IsArray) throw new System.ArgumentException($"w’è‚ÌŒ^ {type} ‚Í”z—ñŒ^‚Å‚Í‚ ‚è‚Ü‚¹‚ñB");
+            if (!type.IsArray) throw new System.ArgumentException($"æŒ‡å®šã®å‹ {type} ã¯é…åˆ—å‹ã§ã¯ã‚ã‚Šã¾ã›ã‚“ã€‚");
 
             var elementType = type.GetElementType();
             var formType = typeof(Array1Form<>).MakeGenericType(elementType);

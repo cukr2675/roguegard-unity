@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,7 +9,7 @@ namespace Roguegard.Rgpacks
         public static IScriptEvaluator DefaultEvaluator { get; set; }
 
         /// <summary>
-        /// w’è‚Ì <see cref="RogueObj"/> ˆÈ‰º‚Ì‚·‚×‚Ä‚ÌƒAƒZƒbƒg‚ğ Rgpack ‚ÉƒpƒbƒLƒ“ƒO‚·‚é
+        /// æŒ‡å®šã® <see cref="RogueObj"/> ä»¥ä¸‹ã®ã™ã¹ã¦ã®ã‚¢ã‚»ãƒƒãƒˆã‚’ Rgpack ã«ãƒ‘ãƒƒã‚­ãƒ³ã‚°ã™ã‚‹
         /// </summary>
         public static Dictionary<string, object> Pack(RogueObj rootObj)
         {

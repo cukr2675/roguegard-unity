@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -52,7 +52,7 @@ namespace Roguegard.Rgpacks
         //    protected override string GetItemName(object element, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         //    {
         //        if (element is EvtFairyInfo.Point point) return point.ChartCmn;
-        //        else return "+ Point ‚ð’Ç‰Á";
+        //        else return "+ Point ã‚’è¿½åŠ ";
         //    }
 
         //    protected override void ActivateItem(object element, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
@@ -81,7 +81,7 @@ namespace Roguegard.Rgpacks
         //    public TMP_InputField.ContentType ContentType => TMP_InputField.ContentType.Standard;
 
         //    public string GetName(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-        //        => "ƒAƒZƒbƒgID";
+        //        => "ã‚¢ã‚»ãƒƒãƒˆID";
 
         //    public string GetValue(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         //    {
@@ -102,7 +102,7 @@ namespace Roguegard.Rgpacks
         //    public TMP_InputField.ContentType ContentType => TMP_InputField.ContentType.Standard;
 
         //    public string GetName(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-        //        => "ƒ`ƒƒ[ƒgID";
+        //        => "ãƒãƒ£ãƒ¼ãƒˆID";
 
         //    public string GetValue(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         //    {
@@ -153,7 +153,7 @@ namespace Roguegard.Rgpacks
         //    public TMP_InputField.ContentType ContentType => TMP_InputField.ContentType.Standard;
 
         //    public string GetName(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-        //        => "ðŒCmn";
+        //        => "æ¡ä»¶Cmn";
 
         //    public string GetValue(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         //    {
@@ -173,7 +173,7 @@ namespace Roguegard.Rgpacks
         //    public TMP_InputField.ContentType ContentType => TMP_InputField.ContentType.Standard;
 
         //    public string GetName(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-        //        => "’Ç‰ÁðŒID";
+        //        => "è¿½åŠ æ¡ä»¶ID";
 
         //    public string GetValue(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         //    {
@@ -193,7 +193,7 @@ namespace Roguegard.Rgpacks
         //    public TMP_InputField.ContentType ContentType => TMP_InputField.ContentType.Standard;
 
         //    public string GetName(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-        //        => "Œ©‚½–ÚƒAƒZƒbƒgID";
+        //        => "è¦‹ãŸç›®ã‚¢ã‚»ãƒƒãƒˆID";
 
         //    public string GetValue(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         //    {
@@ -219,7 +219,7 @@ namespace Roguegard.Rgpacks
         //    };
 
         //    public string GetName(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-        //        => "ƒJƒeƒSƒŠ";
+        //        => "ã‚«ãƒ†ã‚´ãƒª";
 
         //    public void Activate(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         //    {

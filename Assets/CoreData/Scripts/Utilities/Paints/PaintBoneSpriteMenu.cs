@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -35,11 +35,11 @@ namespace Roguegard
             {
                 elms = new List<object>
                 {
-                    SelectOption.Create<MMgr, MArg>("•”ˆÊ‚ğ•ÏX", new BoneMenu()),
+                    SelectOption.Create<MMgr, MArg>("éƒ¨ä½ã‚’å¤‰æ›´", new BoneMenu()),
 
                     new object[]
                     {
-                        "’†S“_‹——£",
+                        "ä¸­å¿ƒç‚¹è·é›¢",
                         InputFieldViewWidget.CreateOption<MMgr, MArg>(
                             (manager, arg) =>
                             {
@@ -63,7 +63,7 @@ namespace Roguegard
 
                     new object[]
                     {
-                        "ã‘‚«",
+                        "ä¸Šæ›¸ã",
                         InputFieldViewWidget.CreateOption<MMgr, MArg>(
                             (manager, arg) =>
                             {
@@ -82,14 +82,14 @@ namespace Roguegard
                             }),
                     },
 
-                    SelectOption.Create<MMgr, MArg>("³–Ê‚ğ•ÒW", paintMenus[0]),
+                    SelectOption.Create<MMgr, MArg>("æ­£é¢ã‚’ç·¨é›†", paintMenus[0]),
 
-                    SelectOption.Create<MMgr, MArg>("”w–Ê‚ğ•ÒW", paintMenus[2]),
+                    SelectOption.Create<MMgr, MArg>("èƒŒé¢ã‚’ç·¨é›†", paintMenus[2]),
                 };
 
                 mirroring = new object[]
                 {
-                    "ƒ~ƒ‰[ƒŠƒ“ƒO",
+                    "ãƒŸãƒ©ãƒ¼ãƒªãƒ³ã‚°",
                     InputFieldViewWidget.CreateOption<MMgr, MArg>(
                         (manager, arg) =>
                         {
@@ -109,7 +109,7 @@ namespace Roguegard
                 };
 
                 remove = SelectOption.Create<MMgr, MArg>(
-                    "<#f00>íœ",
+                    "<#f00>å‰Šé™¤",
                     (manager, arg) =>
                     {
                         var table = (PaintBoneSpriteTable)arg.Arg.Other;
@@ -135,7 +135,7 @@ namespace Roguegard
             var table = (PaintBoneSpriteTable)arg.Arg.Other;
             var itemIndex = arg.Arg.Count;
 
-            // ˆê•”ƒ{[ƒ“‚Íƒ~ƒ‰[ƒŠƒ“ƒOİ’è‚ğ•\¦‚·‚é
+            // ä¸€éƒ¨ãƒœãƒ¼ãƒ³ã¯ãƒŸãƒ©ãƒ¼ãƒªãƒ³ã‚°è¨­å®šã‚’è¡¨ç¤ºã™ã‚‹
             elms.RemoveRange(5, elms.Count - 5);
             if (table.Items[itemIndex] is PaintBoneSprite paintBoneSprite && System.Array.IndexOf(mirroringBones, paintBoneSprite.Bone) != -1)
             {

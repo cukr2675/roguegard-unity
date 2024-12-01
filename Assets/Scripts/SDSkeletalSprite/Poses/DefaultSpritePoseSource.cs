@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,7 +14,7 @@ namespace SDSSprite
         {
             var table = new SpritePose();
             var transform = new BoneTransform(null, default, false, Vector3.zero, Quaternion.identity, Vector3.one, false, false, false);
-            table.AddBoneTransform(transform, BoneKeyword.Body); // ƒLƒƒƒ‰‚ÌŒü‚«‚Å¶‰E”½“]‚³‚¹‚é‚½‚ß Body ‚¾‚¯‚Íİ’è‚·‚é
+            table.AddBoneTransform(transform, BoneKeyword.Body); // ã‚­ãƒ£ãƒ©ã®å‘ãã§å·¦å³åè»¢ã•ã›ã‚‹ãŸã‚ Body ã ã‘ã¯è¨­å®šã™ã‚‹
             table.SetImmutable();
             source = new ImmutableSymmetricalSpritePoseSource(table);
         }

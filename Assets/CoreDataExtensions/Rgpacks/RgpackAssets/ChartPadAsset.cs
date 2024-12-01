@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -28,7 +28,7 @@ namespace Roguegard.Rgpacks
         {
             if (cmn == null)
             {
-                if (cmns.Length == 0) throw new RogueException($"ƒ`ƒƒ[ƒg {fullID} ‚Éƒ|ƒCƒ“ƒg‚ªˆê‚Â‚à‘¶İ‚µ‚Ü‚¹‚ñB");
+                if (cmns.Length == 0) throw new RogueException($"ãƒãƒ£ãƒ¼ãƒˆ {fullID} ã«ãƒã‚¤ãƒ³ãƒˆãŒä¸€ã¤ã‚‚å­˜åœ¨ã—ã¾ã›ã‚“ã€‚");
 
                 return cmns[0];
             }
@@ -42,7 +42,7 @@ namespace Roguegard.Rgpacks
                     break;
                 }
             }
-            if (cmnIndex == -1) throw new RogueException($"ƒCƒxƒ“ƒg ({cmn}) ‚ªŒ©‚Â‚©‚ç‚È‚¢‚½‚ßAŸ‚ÌƒCƒxƒ“ƒg‚ğæ“¾‚Å‚«‚Ü‚¹‚ñB");
+            if (cmnIndex == -1) throw new RogueException($"ã‚¤ãƒ™ãƒ³ãƒˆ ({cmn}) ãŒè¦‹ã¤ã‹ã‚‰ãªã„ãŸã‚ã€æ¬¡ã®ã‚¤ãƒ™ãƒ³ãƒˆã‚’å–å¾—ã§ãã¾ã›ã‚“ã€‚");
 
             if (cmnIndex < cmns.Length - 1)
             {

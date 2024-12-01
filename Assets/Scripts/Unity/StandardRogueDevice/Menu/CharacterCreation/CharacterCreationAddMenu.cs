@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -204,7 +204,7 @@ namespace RoguegardUnity
                 }
             }
 
-            // Œ©‚Â‚©‚ç‚È‚©‚Á‚½‚ç‰½‚à‚µ‚È‚¢
+            // è¦‹ã¤ã‹ã‚‰ãªã‹ã£ãŸã‚‰ä½•ã‚‚ã—ãªã„
         }
 
         public static void ReceiveStartingItemOptionObj(IStartingItemOption startingItemOption, RogueObj player)
@@ -226,7 +226,7 @@ namespace RoguegardUnity
                 }
             }
 
-            // Œ©‚Â‚©‚ç‚È‚¢‚©ƒXƒ^ƒbƒN‚Å‚«‚È‚©‚Á‚½‚çV‹KƒIƒuƒWƒFƒNƒg‚ğ¶¬‚µ‚ÄŠl“¾
+            // è¦‹ã¤ã‹ã‚‰ãªã„ã‹ã‚¹ã‚¿ãƒƒã‚¯ã§ããªã‹ã£ãŸã‚‰æ–°è¦ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ç”Ÿæˆã—ã¦ç²å¾—
             if (startingItemOption is ScriptableCharacterCreationData data)
             {
                 data.CreateObj(player, Vector2Int.zero, RogueRandom.Primary);

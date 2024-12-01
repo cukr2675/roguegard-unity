@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -24,21 +24,21 @@ namespace Roguegard.CharacterCreation
 
         protected static void LocatePartyMembers(RogueObj player, RogueObj floor, IRogueRandom random)
         {
-            // ƒp[ƒeƒBƒƒ“ƒo[‚ğˆÚ“®
+            // ãƒ‘ãƒ¼ãƒ†ã‚£ãƒ¡ãƒ³ãƒãƒ¼ã‚’ç§»å‹•
             var party = player.Main.Stats.Party;
             var members = party.Members;
             for (int i = 0; i < members.Count; i++)
             {
                 var member = members[i];
                 if (member == player) continue;
-                if (member.Main.Stats.HP <= 0 && StatsEffectedValues.GetMaxHP(member) >= 1) continue; // “|‚ê‚Ä‚¢‚½‚çˆÚ“®‚³‚¹‚È‚¢
+                if (member.Main.Stats.HP <= 0 && StatsEffectedValues.GetMaxHP(member) >= 1) continue; // å€’ã‚Œã¦ã„ãŸã‚‰ç§»å‹•ã•ã›ãªã„
                 if (default(IActiveRogueMethodCaller).LocateNextToAnyMember(member, null, 0f, party)) continue;
 
-                // ƒƒ“ƒo[‚ÌˆÚ“®‚É¸”s‚µ‚½‚çƒ‰ƒ“ƒ_ƒ€ˆÊ’u‚ÖˆÚ“®
+                // ãƒ¡ãƒ³ãƒãƒ¼ã®ç§»å‹•ã«å¤±æ•—ã—ãŸã‚‰ãƒ©ãƒ³ãƒ€ãƒ ä½ç½®ã¸ç§»å‹•
                 if (floor.Space.TryGetRandomPositionInRoom(random, out var position) &&
                     default(IActiveRogueMethodCaller).Locate(player, null, floor, position, 0f)) continue;
 
-                Debug.LogError("¶¬‚É¸”s‚µ‚Ü‚µ‚½B");
+                Debug.LogError("ç”Ÿæˆã«å¤±æ•—ã—ã¾ã—ãŸã€‚");
             }
         }
     }

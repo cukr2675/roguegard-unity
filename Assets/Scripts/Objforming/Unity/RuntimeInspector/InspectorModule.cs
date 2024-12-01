@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -40,7 +40,7 @@ namespace Objforming.Unity.RuntimeInspector
             foreach (var pair in dependencies)
             {
                 if (!moduleTable.TryGetModule(pair.Key, pair.Value, out var module)) throw new System.Exception(
-                    $"ƒ‚ƒWƒ…[ƒ‹ {pair.Key} : {pair.Value} ‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñ‚Å‚µ‚½B");
+                    $"ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ« {pair.Key} : {pair.Value} ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã§ã—ãŸã€‚");
 
                 var moduleAllConverters = module.GetAllForms(moduleTable);
                 allForms.AddComponents(moduleAllConverters);

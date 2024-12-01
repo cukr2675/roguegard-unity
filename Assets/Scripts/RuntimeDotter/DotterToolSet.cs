@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -55,13 +55,13 @@ namespace RuntimeDotter
                 {
                     prevPenPosition = penPosition;
 
-                    // ƒAƒ“ƒhƒD—p‚Ìƒ{[ƒh‚ğXV‚·‚é
+                    // ã‚¢ãƒ³ãƒ‰ã‚¥ç”¨ã®ãƒœãƒ¼ãƒ‰ã‚’æ›´æ–°ã™ã‚‹
                     _boardView.Board.CopyTo(undoBoard);
                     if (_undoRedoButton != null) { _undoRedoButton.transform.localScale = Vector3.one; }
                 }
-                else if (penPosition == prevPenPosition) return; // ƒyƒ“‚ª“®‚¢‚Ä‚¢‚È‚¢‚Æ‚«‰½‚à‚µ‚È‚¢
+                else if (penPosition == prevPenPosition) return; // ãƒšãƒ³ãŒå‹•ã„ã¦ã„ãªã„ã¨ãä½•ã‚‚ã—ãªã„
 
-                // ‘OƒtƒŒ[ƒ€‚ÌˆÊ’u‚©‚çŒ»İˆÊ’u‚Ü‚Å‚Ìü‚ğˆø‚­
+                // å‰ãƒ•ãƒ¬ãƒ¼ãƒ ã®ä½ç½®ã‹ã‚‰ç¾åœ¨ä½ç½®ã¾ã§ã®ç·šã‚’å¼•ã
                 var length = Vector2Int.Distance(prevPenPosition, penPosition);
                 length = Mathf.Max(length, 1f);
                 for (int j = 0; j < length; j++)
@@ -72,7 +72,7 @@ namespace RuntimeDotter
                 }
                 prevPenPosition = penPosition;
 
-                // XVŒ‹‰Ê‚ğ•\¦
+                // æ›´æ–°çµæœã‚’è¡¨ç¤º
                 _boardView.UpdateView(_paletteView.Palette, _paletteView.MainColor);
             }
             prevHold = hold;
@@ -80,15 +80,15 @@ namespace RuntimeDotter
 
         private void Undo()
         {
-            // Œ»İ‚Ìƒ{[ƒh‚ÆƒAƒ“ƒhƒD—pƒ{[ƒh‚ğ“ü‚ê‘Ö‚¦‚é
+            // ç¾åœ¨ã®ãƒœãƒ¼ãƒ‰ã¨ã‚¢ãƒ³ãƒ‰ã‚¥ç”¨ãƒœãƒ¼ãƒ‰ã‚’å…¥ã‚Œæ›¿ãˆã‚‹
             var tempBoard = _boardView.Board;
             _boardView.Load(undoBoard);
             undoBoard = tempBoard;
 
-            // XVŒ‹‰Ê‚ğ•\¦
+            // æ›´æ–°çµæœã‚’è¡¨ç¤º
             _boardView.UpdateView(_paletteView.Palette, _paletteView.MainColor);
 
-            // ƒAƒ“ƒhƒDƒAƒCƒRƒ“‚ğ¶‰E”½“]‚·‚é
+            // ã‚¢ãƒ³ãƒ‰ã‚¥ã‚¢ã‚¤ã‚³ãƒ³ã‚’å·¦å³åè»¢ã™ã‚‹
             if (_undoRedoButton != null)
             {
                 var scale = _undoRedoButton.image.transform.localScale;
@@ -99,23 +99,23 @@ namespace RuntimeDotter
 
         private void Copy()
         {
-            // Œ»İ‚Ìƒ{[ƒh‘S‘Ì‚ğƒNƒŠƒbƒvƒ{[ƒh‚Éİ’è‚·‚é
+            // ç¾åœ¨ã®ãƒœãƒ¼ãƒ‰å…¨ä½“ã‚’ã‚¯ãƒªãƒƒãƒ—ãƒœãƒ¼ãƒ‰ã«è¨­å®šã™ã‚‹
             GUIUtility.systemCopyBuffer = _boardView.Board.ToJson();
         }
 
         private void Paste()
         {
-            // ƒNƒŠƒbƒvƒ{[ƒh‚©‚çƒ{[ƒh‘S‘Ì‚ğƒy[ƒXƒg‚·‚é
+            // ã‚¯ãƒªãƒƒãƒ—ãƒœãƒ¼ãƒ‰ã‹ã‚‰ãƒœãƒ¼ãƒ‰å…¨ä½“ã‚’ãƒšãƒ¼ã‚¹ãƒˆã™ã‚‹
             var board = DotterBoard.FromJson(GUIUtility.systemCopyBuffer, _boardView.Board.PaletteSize);
 
-            // ƒAƒ“ƒhƒD—p‚Ìƒ{[ƒh‚ğXV‚·‚é
+            // ã‚¢ãƒ³ãƒ‰ã‚¥ç”¨ã®ãƒœãƒ¼ãƒ‰ã‚’æ›´æ–°ã™ã‚‹
             _boardView.Board.CopyTo(undoBoard);
             _undoRedoButton.transform.localScale = Vector3.one;
 
-            // ƒAƒ“ƒhƒD—pƒ{[ƒhXVŒãƒy[ƒXƒg
+            // ã‚¢ãƒ³ãƒ‰ã‚¥ç”¨ãƒœãƒ¼ãƒ‰æ›´æ–°å¾Œãƒšãƒ¼ã‚¹ãƒˆ
             board.CopyTo(_boardView.Board);
 
-            // XVŒ‹‰Ê‚ğ•\¦
+            // æ›´æ–°çµæœã‚’è¡¨ç¤º
             _boardView.UpdateView(_paletteView.Palette, _paletteView.MainColor);
         }
     }

@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -58,7 +58,7 @@ namespace Roguegard.Rgpacks
                     .InsertNext(
                         new object[]
                         {
-                            "ƒAƒZƒbƒgID",
+                            "ã‚¢ã‚»ãƒƒãƒˆID",
                             InputFieldViewWidget.CreateOption<MMgr, MArg>(
                                 (manager, arg) =>
                                 {
@@ -99,7 +99,7 @@ namespace Roguegard.Rgpacks
                     })
 
                     .Append(SelectOption.Create<MMgr, MArg>(
-                        "+ ŠK‘w‚ð’Ç‰Á",
+                        "+ éšŽå±¤ã‚’è¿½åŠ ",
                         (manager, arg) =>
                         {
                             var diorama = arg.Arg.TargetObj;
@@ -127,7 +127,7 @@ namespace Roguegard.Rgpacks
                     .Append(
                         new object[]
                         {
-                            "ƒAƒZƒbƒgID",
+                            "ã‚¢ã‚»ãƒƒãƒˆID",
                             InputFieldViewWidget.CreateOption<MMgr, MArg>(
                                 (manager, arg) =>
                                 {
@@ -143,7 +143,7 @@ namespace Roguegard.Rgpacks
                         })
 
                     .AppendSelectOption(
-                        "“ü‚é", (manager, arg) =>
+                        "å…¥ã‚‹", (manager, arg) =>
                         {
                             var dioramaFloor = arg.Arg.TargetObj;
                             SpaceUtility.TryLocate(arg.Self, dioramaFloor, Vector2Int.one);

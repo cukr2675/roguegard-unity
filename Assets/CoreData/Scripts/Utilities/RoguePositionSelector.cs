@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -32,7 +32,7 @@ namespace Roguegard
         }
 
         /// <summary>
-        /// w’è‚ÌˆÊ’u‚ª‚·‚Å‚Éƒ}ƒbƒsƒ“ƒO‚³‚ê‚Ä‚¢‚é‚©æ“¾‚·‚é
+        /// æŒ‡å®šã®ä½ç½®ãŒã™ã§ã«ãƒãƒƒãƒ”ãƒ³ã‚°ã•ã‚Œã¦ã„ã‚‹ã‹å–å¾—ã™ã‚‹
         /// </summary>
         private static bool Mapped(IRogueTilemapView view, int x, int y) => Mapped(view, new Vector2Int(x, y));
 
@@ -44,8 +44,8 @@ namespace Roguegard
 
         public bool TryGetTargetPosition(Vector2Int currentPosition, out Vector2Int targetPosition)
         {
-            // —Dæ“x‚ÌŒvZ
-            // ‹ß‚­‚ÄƒXƒRƒA‚ª‚‚¢‚Ù‚Ç—Dæ“x‚ª‚‚¢
+            // å„ªå…ˆåº¦ã®è¨ˆç®—
+            // è¿‘ãã¦ã‚¹ã‚³ã‚¢ãŒé«˜ã„ã»ã©å„ªå…ˆåº¦ãŒé«˜ã„
             var maxScore = 0f;
             Vector2Int maxItem = default;
             foreach (var item in items)

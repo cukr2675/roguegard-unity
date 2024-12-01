@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -46,26 +46,26 @@ namespace RoguegardUnity
         {
             parent = new GameObject($"{name} - Parent").transform;
 
-            // Unity ‚Ì Update ‚Æ Coroutine Às—pƒIƒuƒWƒFƒNƒg
+            // Unity ã® Update ã¨ Coroutine å®Ÿè¡Œç”¨ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
             var gameObject = new GameObject("Ticker");
             gameObject.transform.SetParent(parent, false);
             ticker = gameObject.AddComponent<RogueTicker>();
             ticker.enabled = false;
 
-            // ƒLƒƒƒ‰ƒNƒ^[•\¦
+            // ã‚­ãƒ£ãƒ©ã‚¯ã‚¿ãƒ¼è¡¨ç¤º
             characterRenderSystem = new CharacterRenderSystem();
             characterRenderSystem.Open(parent, spriteRendererPool);
 
-            // ƒ^ƒCƒ‹•\¦
+            // ã‚¿ã‚¤ãƒ«è¡¨ç¤º
             tilemapRenderSystem = new TilemapRenderSystem();
             var tilemapGrid = Object.Instantiate(tilemapRendererPrefab, parent);
             tilemapRenderSystem.Open(tilemapGrid);
 
-            // ‰¹ºÄ¶
+            // éŸ³å£°å†ç”Ÿ
             var soundController = new SoundController();
             soundController.Open(parent, ticker, seAudioSourcePrefab, soundTable);
 
-            // UI•\¦
+            // UIè¡¨ç¤º
             touchController = Object.Instantiate(touchControllerPrefab, parent);
             var autoPlayDeviceEventHandler = new AutoPlayDeviceEventHandler(this, touchController, x => Subject = x);
             touchController.Initialize(
@@ -73,11 +73,11 @@ namespace RoguegardUnity
             touchController.GetInfo(out menuController);
             Application.logMessageReceived += OnLogMessageReceived;
 
-            // ƒIƒvƒVƒ‡ƒ“İ’è’l
+            // ã‚ªãƒ—ã‚·ãƒ§ãƒ³è¨­å®šå€¤
             Options = new RogueOptions();
             Options.Initialize(menuController, audioMixer);
 
-            // ƒCƒxƒ“ƒgƒnƒ“ƒhƒ‰İ’è
+            // ã‚¤ãƒ™ãƒ³ãƒˆãƒãƒ³ãƒ‰ãƒ©è¨­å®š
             gameOverDeviceEventHandler = new GameOverDeviceEventHandler(this);
             dateTimeCallbackEventHandler = new DateTimeCallbackEventHandler();
             var eventHandlers = new IStandardRogueDeviceEventHandler[]
@@ -105,33 +105,33 @@ namespace RoguegardUnity
 
         private IEnumerator OpenCoroutine(StandardRogueDeviceData data)
         {
-            // StandardRogueDeviceData ‚ğ“K—p
+            // StandardRogueDeviceData ã‚’é©ç”¨
             EventManager.IsOpen = false;
             Player = data.Player;
             Subject = data.Subject;
             World = data.World;
             Options.Set(data.Options);
 
-            // ŠJ”­Òƒc[ƒ‹‚ğ‰Šú‰»
+            // é–‹ç™ºè€…ãƒ„ãƒ¼ãƒ«ã‚’åˆæœŸåŒ–
             var rootValue = new RogueObjList();
             rootValue.Add(data.World);
             runtimeInspector.SetRoot(rootValue);
 
-            // “K—pŒã‚Ì€”õˆ—
+            // é©ç”¨å¾Œã®æº–å‚™å‡¦ç†
             touchController.OpenWalker(Player);
             touchController.MenuOpen(Subject, Player != Subject);
             ticker.Reset();
 
-            // ƒZ[ƒuƒ|ƒCƒ“ƒg‚ğƒLƒƒƒbƒVƒ…
+            // ã‚»ãƒ¼ãƒ–ãƒã‚¤ãƒ³ãƒˆã‚’ã‚­ãƒ£ãƒƒã‚·ãƒ¥
             var memberInfo = LobbyMemberList.GetMemberInfo(Player);
             var playerSavePoint = memberInfo.SavePoint;
             memberInfo.SavePoint = null;
 
-            // ‘O‰ñƒZ[ƒu‚©‚ç‚ÌŒo‰ßŠÔ‚Åƒ^[ƒ“Œo‰ß
+            // å‰å›ã‚»ãƒ¼ãƒ–ã‹ã‚‰ã®çµŒéæ™‚é–“ã§ã‚¿ãƒ¼ãƒ³çµŒé
             System.Exception exception = null;
             if (data.SaveDateTime != null)
             {
-                // ƒ^[ƒ“Œo‰ß‘O‚É‹“_‚ğƒvƒŒƒCƒ„[‚ÖˆÚ“®‚·‚é
+                // ã‚¿ãƒ¼ãƒ³çµŒéå‰ã«è¦–ç‚¹ã‚’ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã¸ç§»å‹•ã™ã‚‹
                 var tempSubject = Subject;
                 if (tempSubject != Player)
                 {
@@ -147,13 +147,13 @@ namespace RoguegardUnity
 
                 var maxTurns = 10000;
                 var turns = Mathf.Min(seconds / secondsPerTurn, maxTurns);
-                AfterStepTurn(); // ƒZ[ƒuƒ|ƒCƒ“ƒg‚©‚ç•œ‹A‚³‚¹‚é
+                AfterStepTurn(); // ã‚»ãƒ¼ãƒ–ãƒã‚¤ãƒ³ãƒˆã‹ã‚‰å¾©å¸°ã•ã›ã‚‹
 
-                // ƒ[ƒh‰æ–Ê•\¦
+                // ãƒ­ãƒ¼ãƒ‰ç”»é¢è¡¨ç¤º
                 var synchronizeMenu = new SynchronizeMenu();
                 menuController.PushInitialMenuScreen(synchronizeMenu);
 
-                // ƒ_ƒ~[‚ÌƒZ[ƒuƒ|ƒCƒ“ƒg‚ğİ’è‚µ‚Ä“ü—Í‘Ò‹@ƒ‹[ƒv‚ğ‘f’Ê‚è‚·‚é
+                // ãƒ€ãƒŸãƒ¼ã®ã‚»ãƒ¼ãƒ–ãƒã‚¤ãƒ³ãƒˆã‚’è¨­å®šã—ã¦å…¥åŠ›å¾…æ©Ÿãƒ«ãƒ¼ãƒ—ã‚’ç´ é€šã‚Šã™ã‚‹
                 memberInfo.SavePoint = dummySavePoint;
                 var stopwatch = new System.Diagnostics.Stopwatch();
                 stopwatch.Start();
@@ -171,7 +171,7 @@ namespace RoguegardUnity
                     }
                     catch (System.Exception e)
                     {
-                        // —áŠO‚ğ•Û—¯‚µ‚Äˆ—‚ğ’†~
+                        // ä¾‹å¤–ã‚’ä¿ç•™ã—ã¦å‡¦ç†ã‚’ä¸­æ­¢
                         exception = e;
                         Debug.LogError(e.StackTrace);
                         break;
@@ -190,7 +190,7 @@ namespace RoguegardUnity
                 memberInfo.SavePoint = null;
                 dateTimeCallbackEventHandler.UseRealTime();
 
-                // ƒ^[ƒ“Œo‰ßŒã‚É‹“_‚ğ”íÊ‘Ì‚Ö–ß‚·
+                // ã‚¿ãƒ¼ãƒ³çµŒéå¾Œã«è¦–ç‚¹ã‚’è¢«å†™ä½“ã¸æˆ»ã™
                 if (tempSubject != Player)
                 {
                     Subject = tempSubject;
@@ -204,7 +204,7 @@ namespace RoguegardUnity
             memberInfo.SavePoint = playerSavePoint;
             LoadSavePoint(Player);
 
-            // •Û—¯‚µ‚½—áŠO‚ğ“Š‚°‚È‚¨‚·
+            // ä¿ç•™ã—ãŸä¾‹å¤–ã‚’æŠ•ã’ãªãŠã™
             if (exception != null) throw exception;
         }
 
@@ -216,8 +216,8 @@ namespace RoguegardUnity
 
         private void OnLogMessageReceived(string condition, string stackTrace, LogType type)
         {
-            // ƒƒjƒ…[‚ğŠJ‚¢‚Ä‚¢‚é‚Æ‚«ƒGƒ‰[‚ª”­¶‚·‚é‚Æs“®‚Å‚«‚È‚­‚È‚é‚±‚Æ‚ª‚ ‚é
-            // ‚»‚Ì‘Îô‚Æ‚µ‚ÄAƒGƒ‰[”­¶‚Íƒƒjƒ…[‚ğ•Â‚¶‚é
+            // ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã‚’é–‹ã„ã¦ã„ã‚‹ã¨ãã‚¨ãƒ©ãƒ¼ãŒç™ºç”Ÿã™ã‚‹ã¨è¡Œå‹•ã§ããªããªã‚‹ã“ã¨ãŒã‚ã‚‹
+            // ãã®å¯¾ç­–ã¨ã—ã¦ã€ã‚¨ãƒ©ãƒ¼ç™ºç”Ÿæ™‚ã¯ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã‚’é–‰ã˜ã‚‹
             if (type == LogType.Error || type == LogType.Exception)
             {
                 touchController.CloseMenu();
@@ -235,7 +235,7 @@ namespace RoguegardUnity
 
                 if (obj.Stack == 0 || !RogueWorldInfo.TryGetWorld(obj, out _))
                 {
-                    // ƒQ[ƒ€ƒI[ƒo[ˆ—
+                    // ã‚²ãƒ¼ãƒ ã‚ªãƒ¼ãƒãƒ¼å‡¦ç†
                     gameOverDeviceEventHandler.AfterGameOver(obj);
                 }
                 return;
@@ -252,11 +252,11 @@ namespace RoguegardUnity
 
         public void AfterStepTurn()
         {
-            // ƒZ[ƒu‘O‚É•œ‹A‚µ‚Ä‚µ‚Ü‚í‚È‚¢‚æ‚¤‚É‚·‚é
+            // ã‚»ãƒ¼ãƒ–å‰ã«å¾©å¸°ã—ã¦ã—ã¾ã‚ãªã„ã‚ˆã†ã«ã™ã‚‹
             var memberInfo = LobbyMemberList.GetMemberInfo(Player);
             if (memberInfo.SavePoint == null || memberInfo.SavePoint == dummySavePoint)
             {
-                // ƒZ[ƒuƒ|ƒCƒ“ƒg‚©‚ç•œ‹A‚·‚é
+                // ã‚»ãƒ¼ãƒ–ãƒã‚¤ãƒ³ãƒˆã‹ã‚‰å¾©å¸°ã™ã‚‹
                 var worldInfo = RogueWorldInfo.GetByCharacter(Player);
                 var lobbyMembers = worldInfo.LobbyMembers.Members;
                 for (int i = 0; i < lobbyMembers.Count; i++)
@@ -268,17 +268,17 @@ namespace RoguegardUnity
             characterRenderSystem.StartAnimation(Subject);
             EventManager.ResetCalledSynchronizedView();
 
-            // ƒNƒŠƒbƒN‚É‚æ‚éˆÚ“®’†‚ÉUŒ‚‚ğó‚¯‚é‚È‚ÇA“ü—Íó•t‚Å‚È‚¢ó‘Ô‚ÅŠ„‚è‚Ü‚ê‚½‚Æ‚«AˆÚ“®‚ğ’†~‚·‚éB
+            // ã‚¯ãƒªãƒƒã‚¯ã«ã‚ˆã‚‹ç§»å‹•ä¸­ã«æ”»æ’ƒã‚’å—ã‘ã‚‹ãªã©ã€å…¥åŠ›å—ä»˜ã§ãªã„çŠ¶æ…‹ã§å‰²ã‚Šè¾¼ã¾ã‚ŒãŸã¨ãã€ç§»å‹•ã‚’ä¸­æ­¢ã™ã‚‹ã€‚
             if (!touchController.WaitsForInput) { touchController.ClearInput(); }
         }
 
         public bool UpdateAndGetAllowStepTurn()
         {
             ////////////////////////////////////////////////////////////////////////
-            // ƒCƒxƒ“ƒgƒLƒ…[ˆ—‘O
+            // ã‚¤ãƒ™ãƒ³ãƒˆã‚­ãƒ¥ãƒ¼å‡¦ç†å‰
             ////////////////////////////////////////////////////////////////////////
 
-            // ƒ^ƒCƒ‹ƒ}ƒbƒvƒ^ƒbƒ`‚Æƒ{ƒ^ƒ“ UI ‚Ìˆ—
+            // ã‚¿ã‚¤ãƒ«ãƒãƒƒãƒ—ã‚¿ãƒƒãƒã¨ãƒœã‚¿ãƒ³ UI ã®å‡¦ç†
             var deltaTime = 1;
             var directional = characterRenderSystem.TryGetPositioning(Subject, out var playerPosition, out var playerDirection);
             touchController.EarlyUpdateController(directional, playerPosition, playerDirection, deltaTime);
@@ -286,7 +286,7 @@ namespace RoguegardUnity
 
 
             ////////////////////////////////////////////////////////////////////////
-            // ƒCƒxƒ“ƒgƒLƒ…[‚ª‹ó‚É‚È‚é‚Ü‚ÅA–ˆ Update ­‚µ‚¸‚Âˆ—‚·‚é
+            // ã‚¤ãƒ™ãƒ³ãƒˆã‚­ãƒ¥ãƒ¼ãŒç©ºã«ãªã‚‹ã¾ã§ã€æ¯ Update å°‘ã—ãšã¤å‡¦ç†ã™ã‚‹
             ////////////////////////////////////////////////////////////////////////
 
             var workingNow = characterRenderSystem.UpdateCharactersAndGetWorkingNow(Subject, !EventManager.Any, deltaTime, FastForward);
@@ -294,12 +294,12 @@ namespace RoguegardUnity
             {
                 if (EventManager.Any)
                 {
-                    // is’†‚Ì RogueCharacterWork ‚ª‘¶İ‚µ‚È‚¯‚ê‚ÎAŸ‚Ì RogueCharacterWork ‚ÉˆÚ‚éB
+                    // é€²è¡Œä¸­ã® RogueCharacterWork ãŒå­˜åœ¨ã—ãªã‘ã‚Œã°ã€æ¬¡ã® RogueCharacterWork ã«ç§»ã‚‹ã€‚
                     EventManager.Dequeue(Player, Subject, FastForward);
                 }
                 else if (characterRenderSystem.InAnimation)
                 {
-                    // Ÿ‚Ì RogueCharacterWork ‚ª‚È‚¯‚ê‚ÎA¡ƒ^[ƒ“‚ÌƒAƒjƒ[ƒVƒ‡ƒ“‚ğI—¹‚³‚¹‚éB
+                    // æ¬¡ã® RogueCharacterWork ãŒãªã‘ã‚Œã°ã€ä»Šã‚¿ãƒ¼ãƒ³ã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚’çµ‚äº†ã•ã›ã‚‹ã€‚
                     characterRenderSystem.EndAnimation(Subject, false);
                     touchController.NextTurn(Player, Subject);
                 }
@@ -309,21 +309,21 @@ namespace RoguegardUnity
 
 
             ////////////////////////////////////////////////////////////////////////
-            // ƒCƒxƒ“ƒgƒLƒ…[ˆ—Œã
+            // ã‚¤ãƒ™ãƒ³ãƒˆã‚­ãƒ¥ãƒ¼å‡¦ç†å¾Œ
             ////////////////////////////////////////////////////////////////////////
 
-            // playerPosition ‚É‚ÍƒIƒuƒWƒFƒNƒg‚ÌÀˆÊ’u‚Å‚Í‚È‚­•\¦—pƒXƒvƒ‰ƒCƒg‚ÌˆÊ’u‚ğg‚¤B
+            // playerPosition ã«ã¯ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®å®Ÿä½ç½®ã§ã¯ãªãè¡¨ç¤ºç”¨ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã®ä½ç½®ã‚’ä½¿ã†ã€‚
             if (characterRenderSystem.TryGetPositioning(Subject, out var position, out _)) { playerPosition = position; }
 
-            // ƒJƒƒ‰Eƒƒjƒ…[ˆ—
+            // ã‚«ãƒ¡ãƒ©ãƒ»ãƒ¡ãƒ‹ãƒ¥ãƒ¼å‡¦ç†
             touchController.LateUpdateController(Player, playerPosition, deltaTime);
 
-            // ƒLƒ…[Š®‘Sˆ—Œã
+            // ã‚­ãƒ¥ãƒ¼å®Œå…¨å‡¦ç†å¾Œ
             if (!characterRenderSystem.InAnimation)
             {
                 if (Player.Stack == 0)
                 {
-                    // ƒQ[ƒ€ƒI[ƒo[ˆ—
+                    // ã‚²ãƒ¼ãƒ ã‚ªãƒ¼ãƒãƒ¼å‡¦ç†
                     gameOverDeviceEventHandler.AfterGameOver(Player);
                 }
                 else
@@ -331,7 +331,7 @@ namespace RoguegardUnity
                     var worldInfo = RogueWorldInfo.GetByCharacter(Player);
                     if (menuController.Wait || menuController.TalkingWait || touchController.WaitsForInput || !worldInfo.ChartState.TryUpdate())
                     {
-                        // ƒRƒ}ƒ“ƒh“ü—Íˆ—‚ğs‚¤
+                        // ã‚³ãƒãƒ³ãƒ‰å…¥åŠ›å‡¦ç†ã‚’è¡Œã†
                         touchController.CommandProcessing(Player, Subject, FastForward);
                     }
                 }
@@ -341,12 +341,12 @@ namespace RoguegardUnity
 
         public void UpdateCharacters()
         {
-            // ‹óŠÔˆÚ“®‚É‘Š‘ÎˆÊ’u‚ª‚í‚©‚ç‚È‚¢‚æ‚¤‚ÉAƒJƒƒ‰ƒ‚[ƒh‚ğ‰ğœ‚·‚éB
-            // ƒƒO‚ğíœ‚·‚éB
+            // ç©ºé–“ç§»å‹•æ™‚ã«ç›¸å¯¾ä½ç½®ãŒã‚ã‹ã‚‰ãªã„ã‚ˆã†ã«ã€ã‚«ãƒ¡ãƒ©ãƒ¢ãƒ¼ãƒ‰ã‚’è§£é™¤ã™ã‚‹ã€‚
+            // ãƒ­ã‚°ã‚’å‰Šé™¤ã™ã‚‹ã€‚
             touchController.ResetUI();
             touchController.ClearInput();
 
-            // ƒAƒjƒ[ƒVƒ‡ƒ“‚ğƒŠƒZƒbƒg‚·‚éB
+            // ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚’ãƒªã‚»ãƒƒãƒˆã™ã‚‹ã€‚
             var deltaTime = 0;
             var fastForward = false;
             EventManager.Clear();
@@ -360,7 +360,7 @@ namespace RoguegardUnity
         }
 
         /// <summary>
-        /// <see cref="TickEnumerator"/> ‚Ås“®‚ğ’â~‚³‚¹‚é‚½‚ß‚ÌƒNƒ‰ƒX
+        /// <see cref="TickEnumerator"/> ã§è¡Œå‹•ã‚’åœæ­¢ã•ã›ã‚‹ãŸã‚ã®ã‚¯ãƒ©ã‚¹
         /// </summary>
         [Objforming.IgnoreRequireRelationalComponent]
         private class DummySavePoint : ISavePointInfo

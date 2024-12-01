@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -172,7 +172,7 @@ namespace Roguegard
 
             public void Dispose()
             {
-                // “¯‚¶ƒCƒ“ƒXƒ^ƒ“ƒX‚ğ“ñŒÂˆÈãƒv[ƒŠƒ“ƒO‚Å‚«‚È‚¢‚æ‚¤‚É‚·‚é
+                // åŒã˜ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’äºŒå€‹ä»¥ä¸Šãƒ—ãƒ¼ãƒªãƒ³ã‚°ã§ããªã„ã‚ˆã†ã«ã™ã‚‹
                 if (listeners.Count == 0) return;
 
                 listeners.Clear();

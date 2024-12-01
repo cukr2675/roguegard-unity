@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -21,7 +21,7 @@ namespace Roguegard.CharacterCreation
         }
 
         /// <summary>
-        /// ã‘‚«•s‰Â
+        /// ä¸Šæ›¸ãä¸å¯
         /// </summary>
         public static void SetTo(RogueObj self, DungeonQuest quest)
         {
@@ -31,7 +31,7 @@ namespace Roguegard.CharacterCreation
                 self.SetInfo(info);
             }
 
-            // ã‘‚«•s‰Â
+            // ä¸Šæ›¸ãä¸å¯
             if (info.quest != null) throw new RogueException();
 
             info.quest = quest;

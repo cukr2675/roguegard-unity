@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -33,9 +33,9 @@ namespace Roguegard.CharacterCreation
 
         public void Reopen(RogueObj self, MainInfoSetType infoSetType, int deltaLv)
         {
-            // ‚·‚×‚Ä‚ğ•Â‚¶‚Ä‚©‚çŠJ‚«‚È‚¨‚·‚ÆƒXƒLƒ‹‚Ì•À‚Ñ‚ª•Ï‚í‚Á‚Ä‚µ‚Ü‚¤‚½‚ßA
-            // Reopen ‘O‚ÌƒŒƒxƒ‹‚©‚çŒ»İ‚ÌƒŒƒxƒ‹‚Ü‚Å‚Ì Intrinsic ‚¾‚¯XV‚·‚éB
-            // “¯‚¶ Intrinsic ‚ğ•¡”‰ñK“¾‚µ‚È‚¢‚æ‚¤‹C‚ğ•t‚¯‚éB
+            // ã™ã¹ã¦ã‚’é–‰ã˜ã¦ã‹ã‚‰é–‹ããªãŠã™ã¨ã‚¹ã‚­ãƒ«ã®ä¸¦ã³ãŒå¤‰ã‚ã£ã¦ã—ã¾ã†ãŸã‚ã€
+            // Reopen å‰ã®ãƒ¬ãƒ™ãƒ«ã‹ã‚‰ç¾åœ¨ã®ãƒ¬ãƒ™ãƒ«ã¾ã§ã® Intrinsic ã ã‘æ›´æ–°ã™ã‚‹ã€‚
+            // åŒã˜ Intrinsic ã‚’è¤‡æ•°å›ç¿’å¾—ã—ãªã„ã‚ˆã†æ°—ã‚’ä»˜ã‘ã‚‹ã€‚
             var selfLv = self.Main.Stats.Lv;
             if (deltaLv == +1)
             {

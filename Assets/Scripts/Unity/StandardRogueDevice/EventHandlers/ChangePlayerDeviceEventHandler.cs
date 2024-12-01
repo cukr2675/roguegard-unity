@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -36,23 +36,23 @@ namespace RoguegardUnity
 
         private void OnChangePlayer(RogueObj player, RogueObj newPlayer)
         {
-            // ViewInfo ‚ğˆÚ“®‚³‚¹‚é
+            // ViewInfo ã‚’ç§»å‹•ã•ã›ã‚‹
             ViewInfo.RemoveFrom(player);
             ViewInfo.SetTo(newPlayer);
 
-            // PlayerLeaderInfo ‚ğˆÚ“®‚³‚¹‚é
+            // PlayerLeaderInfo ã‚’ç§»å‹•ã•ã›ã‚‹
             var playerLeaderInfo = player.Main.GetPlayerLeaderInfo(player);
             playerLeaderInfo?.Move(player, newPlayer);
 
-            // RogueDeviceEffect ‚ğˆÚ“®‚³‚¹‚é
+            // RogueDeviceEffect ã‚’ç§»å‹•ã•ã›ã‚‹
             var deviceEffect = RogueDeviceEffect.Get(player);
             deviceEffect.RemoveClose(player);
             RogueDeviceEffect.SetTo(newPlayer);
 
-            // ƒvƒŒƒCƒ„[ƒLƒƒƒ‰‚ğ•ÏX
+            // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚­ãƒ£ãƒ©ã‚’å¤‰æ›´
             setPlayer(newPlayer);
 
-            // •ÏXŒã‚Ì‰Šú‰»ˆ—
+            // å¤‰æ›´å¾Œã®åˆæœŸåŒ–å‡¦ç†
             touchController.OpenWalker(newPlayer);
             touchController.MenuOpen(newPlayer, false);
             ticker.Reset();

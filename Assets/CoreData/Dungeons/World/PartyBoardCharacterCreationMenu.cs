@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -22,7 +22,7 @@ namespace Roguegard
 
         public override void OpenScreen(in MMgr manager, in MArg arg)
         {
-            // ƒvƒŠƒZƒbƒg“Ç‚İ‚İƒ{ƒ^ƒ“‚ğİ’è‚·‚é
+            // ãƒ—ãƒªã‚»ãƒƒãƒˆèª­ã¿è¾¼ã¿ãƒœã‚¿ãƒ³ã‚’è¨­å®šã™ã‚‹
             var characterCreation = RoguegardSubViews.GetCharacterCreation(manager);
             view.BackAnchorList[0] = characterCreation.LoadPresetOption;
 
@@ -35,16 +35,16 @@ namespace Roguegard
         {
             if (arg.Arg.Other is CharacterCreationDataBuilder builder)
             {
-                // ƒLƒƒƒ‰ƒNƒŠ‰æ–Ê‚©‚ç–ß‚Á‚½‚Æ‚«A‚»‚ÌƒLƒƒƒ‰‚ğXV‚·‚é
+                // ã‚­ãƒ£ãƒ©ã‚¯ãƒªç”»é¢ã‹ã‚‰æˆ»ã£ãŸã¨ãã€ãã®ã‚­ãƒ£ãƒ©ã‚’æ›´æ–°ã™ã‚‹
                 var character = arg.Arg.TargetObj;
                 if (character != null)
                 {
-                    // •ÒWƒLƒƒƒ‰XV
+                    // ç·¨é›†ã‚­ãƒ£ãƒ©æ›´æ–°
                     character.Main.SetBaseInfoSet(character, builder.PrimaryInfoSet);
                 }
                 else
                 {
-                    // V‹KƒLƒƒƒ‰’Ç‰Á
+                    // æ–°è¦ã‚­ãƒ£ãƒ©è¿½åŠ 
                     var worldInfo = RogueWorldInfo.GetByCharacter(arg.Self);
                     character = builder.CreateObj(null, Vector2Int.zero, RogueRandom.Primary);
                     worldInfo.LobbyMembers.Add(character);

@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -39,20 +39,20 @@ namespace ListingMF
         {
             if (stateProvider == null) { stateProvider = new StateProvider(); }
             if (!(stateProvider is StateProvider local)) throw new System.ArgumentException(
-                $"{stateProvider} ‚Í {nameof(StateProvider)} ‚Å‚Í‚ ‚è‚Ü‚¹‚ñB");
+                $"{stateProvider} ã¯ {nameof(StateProvider)} ã§ã¯ã‚ã‚Šã¾ã›ã‚“ã€‚");
 
-            // Œ»İ‚Ì StateProvider ‚ğŠO‚·‘O‚Éó‘Ô‚ğ•Û‘¶‚·‚é
+            // ç¾åœ¨ã® StateProvider ã‚’å¤–ã™å‰ã«çŠ¶æ…‹ã‚’ä¿å­˜ã™ã‚‹
             if (currentStateProvider != null)
             {
             }
 
-            // •\¦XV
+            // è¡¨ç¤ºæ›´æ–°
             _colorPicker.CurrentColor = color;
             this.handleClose = onClose;
             SetArg(manager, arg);
             SetStatusCode(0);
 
-            // V‚µ‚¢ StateProvider ‚ÉØ‚è‘Ö‚¦‚é
+            // æ–°ã—ã„ StateProvider ã«åˆ‡ã‚Šæ›¿ãˆã‚‹
             currentStateProvider = local;
         }
 

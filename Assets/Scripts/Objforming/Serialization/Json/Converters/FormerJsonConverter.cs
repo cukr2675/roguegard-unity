@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -57,10 +57,10 @@ namespace Objforming.Serialization.Json
 
                 var propertyName = (string)reader.Value;
 
-                reader.Read(); // ƒL[‚ğ”ò‚Î‚·
+                reader.Read(); // ã‚­ãƒ¼ã‚’é£›ã°ã™
                 if (!Former.TryGetMemberByCamel(propertyName, out var member))
                 {
-                    reader.Skip(); // ’l‚ğ”ò‚Î‚·
+                    reader.Skip(); // å€¤ã‚’é£›ã°ã™
                     continue;
                 }
 

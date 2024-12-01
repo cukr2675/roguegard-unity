@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -7,7 +7,7 @@ using System.Reflection;
 namespace Objforming
 {
     /// <summary>
-    /// ‚±‚Ì‘®«‚ª•t—^‚³‚ê‚½•Ï”‚Í <see cref="Objforming"/> ‚É‚æ‚éƒVƒŠƒAƒ‹‰»‚Ì‘ÎÛŠO‚Æ‚·‚é
+    /// ã“ã®å±æ€§ãŒä»˜ä¸ã•ã‚ŒãŸå¤‰æ•°ã¯ <see cref="Objforming"/> ã«ã‚ˆã‚‹ã‚·ãƒªã‚¢ãƒ«åŒ–ã®å¯¾è±¡å¤–ã¨ã™ã‚‹
     /// </summary>
     [AttributeUsage(AttributeTargets.Field)]
     public class IgnoreMemberAttribute : Attribute

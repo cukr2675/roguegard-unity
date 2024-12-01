@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -62,7 +62,7 @@ namespace Roguegard
             var result = RogueMethodAspectState.Invoke(keyword, skill, self, user, activationDepth, arg);
             if (!result)
             {
-                Debug.Log($"{self} ‚ª {skill} ‚Ì”­“®‚É¸”s‚µ‚Ü‚µ‚½B‚±‚ê‚É‚æ‚è•s©‘R‚ÈƒAƒjƒ[ƒVƒ‡ƒ“‘Ò‹@‚ª‹N‚±‚é‚±‚Æ‚ª‚ ‚è‚Ü‚·B");
+                Debug.Log($"{self} ãŒ {skill} ã®ç™ºå‹•ã«å¤±æ•—ã—ã¾ã—ãŸã€‚ã“ã‚Œã«ã‚ˆã‚Šä¸è‡ªç„¶ãªã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³å¾…æ©ŸãŒèµ·ã“ã‚‹ã“ã¨ãŒã‚ã‚Šã¾ã™ã€‚");
             }
             return result;
         }

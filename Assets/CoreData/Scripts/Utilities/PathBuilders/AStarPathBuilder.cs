@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -30,13 +30,13 @@ namespace Roguegard
             path.Clear();
             if (!nodemap.Rect.Contains(targetPosition) || nodemap[targetPosition].HasCollider || targetPosition == self.Position)
             {
-                // ˆÚ“®‚Å‚«‚È‚¢ˆÊ’u‚ğw’è‚µ‚½ê‡AƒpƒX‚ğ¶¬‚¹‚¸‚É’¼i‚·‚é
+                // ç§»å‹•ã§ããªã„ä½ç½®ã‚’æŒ‡å®šã—ãŸå ´åˆã€ãƒ‘ã‚¹ã‚’ç”Ÿæˆã›ãšã«ç›´é€²ã™ã‚‹
                 return true;
             }
 
             nodemap.Reset();
 
-            // ŠJn’n“_‚ğŠJ‚­
+            // é–‹å§‹åœ°ç‚¹ã‚’é–‹ã
             var startPosition = self.Position;
             nodemap[startPosition].TryOpen(0, targetPosition - startPosition, -Vector2Int.one);
 
@@ -63,24 +63,24 @@ namespace Roguegard
             {
                 var deltaPosition = new RogueDirection(i).Forward;
                 var openPosition = position + deltaPosition;
-                if (!nodemap.Rect.Contains(openPosition)) continue; // ”ÍˆÍŠO‚ğœŠO‚·‚é
+                if (!nodemap.Rect.Contains(openPosition)) continue; // ç¯„å›²å¤–ã‚’é™¤å¤–ã™ã‚‹
 
-                // Î‚ß‚ÉˆÚ“®‚Å‚«‚È‚¢ê‡‚ğœŠO‚·‚é
+                // æ–œã‚ã«ç§»å‹•ã§ããªã„å ´åˆã‚’é™¤å¤–ã™ã‚‹
                 if (deltaPosition.x != 0 && deltaPosition.y != 0)
                 {
                     if (nodemap[openPosition.y, position.x].HasCornerCollider) continue;
                     if (nodemap[position.y, openPosition.x].HasCornerCollider) continue;
                 }
 
-                // ˆÚ“®‚Å‚«‚È‚¢ƒm[ƒh‚ğœŠO‚·‚é
+                // ç§»å‹•ã§ããªã„ãƒãƒ¼ãƒ‰ã‚’é™¤å¤–ã™ã‚‹
                 var openNode = nodemap[openPosition];
                 if (openNode.HasCollider) continue;
 
-                var costedG = positionNode.G + 1; // ˆÚ“®ƒRƒXƒg 1 ‚ğ‰ÂZ
+                var costedG = positionNode.G + 1; // ç§»å‹•ã‚³ã‚¹ãƒˆ 1 ã‚’å¯ç®—
                 var relativePosition = targetPosition - openPosition;
                 openNode.TryOpen(costedG, relativePosition, position);
 
-                // –Ú•WˆÊ’u‚É“’B‚µ‚½‚ç true
+                // ç›®æ¨™ä½ç½®ã«åˆ°é”ã—ãŸã‚‰ true
                 if (openPosition == targetPosition) return true;
             }
             return false;
@@ -88,7 +88,7 @@ namespace Roguegard
 
         private void SetPath(Vector2Int startPosition, Vector2Int targetPosition)
         {
-            // ƒm[ƒh‚Ìó‘Ô‚ğ‚à‚Æ‚ÉAŠJn’n“_‚©‚çƒS[ƒ‹‚Ü‚Å‚ÌƒpƒX‚ğŠm’è‚·‚éB
+            // ãƒãƒ¼ãƒ‰ã®çŠ¶æ…‹ã‚’ã‚‚ã¨ã«ã€é–‹å§‹åœ°ç‚¹ã‹ã‚‰ã‚´ãƒ¼ãƒ«ã¾ã§ã®ãƒ‘ã‚¹ã‚’ç¢ºå®šã™ã‚‹ã€‚
             path.Add(targetPosition);
             var node = nodemap[targetPosition];
             var size = nodemap.Rect.width * nodemap.Rect.height;
@@ -108,12 +108,12 @@ namespace Roguegard
             if (currentPosition == targetPosition) return false;
             if (path.Count == 0 && MovementUtility.TryGetApproachDirection(self, targetPosition, true, out nextDirection))
             {
-                // ƒpƒX‚ª‚È‚¢ê‡‚ÍAˆÚ“®‚Å‚«‚È‚¢ˆÊ’u‚ğw’è‚³‚ê‚Ä‚¢‚é‚Æ”»’f‚µ‚Ä’¼i‚·‚é
+                // ãƒ‘ã‚¹ãŒãªã„å ´åˆã¯ã€ç§»å‹•ã§ããªã„ä½ç½®ã‚’æŒ‡å®šã•ã‚Œã¦ã„ã‚‹ã¨åˆ¤æ–­ã—ã¦ç›´é€²ã™ã‚‹
                 return true;
             }
             else
             {
-                // ƒpƒX‚ğ‚½‚Ç‚é
+                // ãƒ‘ã‚¹ã‚’ãŸã©ã‚‹
                 for (int i = 0; i < path.Count - 1; i++)
                 {
                     var pathPoint = path[i];
@@ -135,7 +135,7 @@ namespace Roguegard
                 return true;
             }
 
-            Debug.LogError($"{nameof(AStarPathBuilder)}ƒGƒ‰[");
+            Debug.LogError($"{nameof(AStarPathBuilder)}ã‚¨ãƒ©ãƒ¼");
             return false;
         }
     }

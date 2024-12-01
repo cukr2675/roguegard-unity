@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -62,7 +62,7 @@ namespace RoguegardUnity
                 return;
             }
 
-            Debug.LogError($"{keyword.Name} ‚É‘Î‰‚·‚éƒL[ƒ[ƒh‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñBiobj: {obj}j");
+            Debug.LogError($"{keyword.Name} ã«å¯¾å¿œã™ã‚‹ã‚­ãƒ¼ãƒ¯ãƒ¼ãƒ‰ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã€‚ï¼ˆobj: {obj}ï¼‰");
         }
     }
 }

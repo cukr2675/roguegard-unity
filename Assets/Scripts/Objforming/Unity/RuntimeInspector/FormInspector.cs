@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -52,7 +52,7 @@ namespace Objforming.Unity.RuntimeInspector
         {
             if (Input.GetKeyDown(_keyCode) || GetDoubleTap())
             {
-                // ƒCƒ“ƒXƒyƒNƒ^[‚ğŠJ‚­/•Â‚¶‚é
+                // ã‚¤ãƒ³ã‚¹ãƒšã‚¯ã‚¿ãƒ¼ã‚’é–‹ã/é–‰ã˜ã‚‹
                 canvas.enabled = !canvas.enabled;
             }
         }
@@ -61,7 +61,7 @@ namespace Objforming.Unity.RuntimeInspector
         {
             var tripleTap = Input.touchCount >= _doubleTapFingers;
 
-            // 3–{wƒ^ƒbƒv‚µ‚½‚Æ‚«‚»‚Ìƒ^ƒbƒ`ƒCƒxƒ“ƒg‚Í–³Œø‰»‚·‚é
+            // 3æœ¬æŒ‡ã‚¿ãƒƒãƒ—ã—ãŸã¨ããã®ã‚¿ãƒƒãƒã‚¤ãƒ™ãƒ³ãƒˆã¯ç„¡åŠ¹åŒ–ã™ã‚‹
             eventSystem.enabled = !tripleTap;
             if (tripleTap != prevTripleTap)
             {
@@ -75,13 +75,13 @@ namespace Objforming.Unity.RuntimeInspector
                 }
             }
 
-            // 3–{wƒ^ƒbƒv‚ªI‚í‚Á‚½‚çƒ_ƒuƒ‹ƒ^ƒbƒvó•tŠJn
+            // 3æœ¬æŒ‡ã‚¿ãƒƒãƒ—ãŒçµ‚ã‚ã£ãŸã‚‰ãƒ€ãƒ–ãƒ«ã‚¿ãƒƒãƒ—å—ä»˜é–‹å§‹
             if (!tripleTap && prevTripleTap)
             {
                 doubleTapRemainingTime = _doubleTapInterval;
             }
 
-            // 3–{wƒ_ƒuƒ‹ƒ^ƒbƒv‚µ‚½‚Æ‚«ƒCƒ“ƒXƒyƒNƒ^[‚ğŠJ‚­
+            // 3æœ¬æŒ‡ãƒ€ãƒ–ãƒ«ã‚¿ãƒƒãƒ—ã—ãŸã¨ãã‚¤ãƒ³ã‚¹ãƒšã‚¯ã‚¿ãƒ¼ã‚’é–‹ã
             if (doubleTapRemainingTime > 0f)
             {
                 if (tripleTap)

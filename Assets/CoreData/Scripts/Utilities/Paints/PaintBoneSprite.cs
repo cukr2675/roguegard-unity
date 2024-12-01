@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -27,8 +27,8 @@ namespace Roguegard
         public bool IsFirst { get; set; }
         public bool OverridesSourceColor { get; set; }
 
-        // Pivot ‚Ì‹——£‚Í‰º¨ã¨‰º¨ã‚Ì‡‚ÅˆÚ“®‚³‚¹‚é
-        // ‚»‚Ì‚Ù‚¤‚ªƒAƒCƒRƒ“‚Æ‚È‚é“·•”‚ÌƒyƒCƒ“ƒg‚ª©‘R‚É‚È‚è‚â‚·‚¢
+        // Pivot ã®è·é›¢ã¯ä¸‹â†’ä¸Šâ†’ä¸‹â†’ä¸Šã®é †ã§ç§»å‹•ã•ã›ã‚‹
+        // ãã®ã»ã†ãŒã‚¢ã‚¤ã‚³ãƒ³ã¨ãªã‚‹èƒ´éƒ¨ã®ãƒšã‚¤ãƒ³ãƒˆãŒè‡ªç„¶ã«ãªã‚Šã‚„ã™ã„
         private Vector2Int UpperRelationalPivot => new Vector2Int(0, PivotDistance / 2);
         private Vector2Int LowerRelationalPivot => new Vector2Int(0, -(PivotDistance + 1) / 2);
 
@@ -144,13 +144,13 @@ namespace Roguegard
         }
 
         /// <summary>
-        /// ƒx[ƒXƒJƒ‰[‚ğã‘‚«‰Â”\‚©‚ğæ“¾‚·‚éB•K—v‚È”ÍˆÍ‚ª•s“§–¾F‚Å“h‚è‚Â‚Ô‚³‚ê‚Ä‚¢‚ê‚Îã‘‚«‰Â”\B
+        /// ãƒ™ãƒ¼ã‚¹ã‚«ãƒ©ãƒ¼ã‚’ä¸Šæ›¸ãå¯èƒ½ã‹ã‚’å–å¾—ã™ã‚‹ã€‚å¿…è¦ãªç¯„å›²ãŒä¸é€æ˜è‰²ã§å¡—ã‚Šã¤ã¶ã•ã‚Œã¦ã„ã‚Œã°ä¸Šæ›¸ãå¯èƒ½ã€‚
         /// </summary>
         private bool OverridesBaseColor(bool up, RectInt requiredFillRect, Spanning<ShiftableColor> palette)
         {
             if (NormalFront == null || BackFront == null) return false;
 
-            // PivotDistance ‚ª¬‚³‚¢‚Æ‚«ã‰º•ªŠ„‚Ì‰e‹¿‚Å‰B‚¹‚È‚¢‚±‚Æ‚ª‚ ‚é‚½‚ßAˆê’èˆÈ‰º‚Ì‚Æ‚« false ‚ğ•Ô‚·B
+            // PivotDistance ãŒå°ã•ã„ã¨ãä¸Šä¸‹åˆ†å‰²ã®å½±éŸ¿ã§éš ã›ãªã„ã“ã¨ãŒã‚ã‚‹ãŸã‚ã€ä¸€å®šä»¥ä¸‹ã®ã¨ã false ã‚’è¿”ã™ã€‚
             if (PivotDistance < 4) return false;
 
             var normalPivot = NormalFront.Size / 2;
@@ -215,7 +215,7 @@ namespace Roguegard
 
         private static Sprite ToSprite(DotterBoard board, Spanning<ShiftableColor> palette)
         {
-            // WebGL ‚Åƒhƒbƒg‚ª‚Â‚Ô‚ê‚È‚¢‚æ‚¤ƒ~ƒbƒvƒ}ƒbƒv‚ğ–³Œø‰»‚·‚é
+            // WebGL ã§ãƒ‰ãƒƒãƒˆãŒã¤ã¶ã‚Œãªã„ã‚ˆã†ãƒŸãƒƒãƒ—ãƒãƒƒãƒ—ã‚’ç„¡åŠ¹åŒ–ã™ã‚‹
             var texture = new Texture2D(board.Size.x, board.Size.y, TextureFormat.RGBA32, false);
             texture.filterMode = FilterMode.Point;
             board.SetPixelsTo(texture, palette.Span);
@@ -226,7 +226,7 @@ namespace Roguegard
 
         private void ToSprite(DotterBoard board, Spanning<ShiftableColor> palette, out Sprite upperSprite, out Sprite lowerSprite)
         {
-            // WebGL ‚Åƒhƒbƒg‚ª‚Â‚Ô‚ê‚È‚¢‚æ‚¤ƒ~ƒbƒvƒ}ƒbƒv‚ğ–³Œø‰»‚·‚é
+            // WebGL ã§ãƒ‰ãƒƒãƒˆãŒã¤ã¶ã‚Œãªã„ã‚ˆã†ãƒŸãƒƒãƒ—ãƒãƒƒãƒ—ã‚’ç„¡åŠ¹åŒ–ã™ã‚‹
             var texture = new Texture2D(board.Size.x, board.Size.y, TextureFormat.RGBA32, false);
             texture.filterMode = FilterMode.Point;
             board.SetPixelsTo(texture, palette.Span);

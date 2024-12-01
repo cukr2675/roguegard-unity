@@ -1,4 +1,4 @@
-using System.Collections;
+Ôªøusing System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -43,7 +43,7 @@ namespace ListingMF
 
         void IButtonElementHandler.HandleClick(object element, IListMenuManager manager, IListMenuArg arg)
         {
-            if (HandleClick == null) throw new System.InvalidOperationException($"{HandleClick} Ç™ null Ç≈Ç∑ÅB");
+            if (HandleClick == null) throw new System.InvalidOperationException($"{HandleClick} „Åå null „Åß„Åô„ÄÇ");
             if (LMFAssert.Type<TElm>(element, out var tElm, manager) ||
                 LMFAssert.Type<TMgr>(manager, out var tMgr, manager) ||
                 LMFAssert.Type<TArg>(arg, out var tArg, manager)) return;

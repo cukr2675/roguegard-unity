@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,7 +18,7 @@ namespace Roguegard
                 
                 if ((self.Position - obj.Position).sqrMagnitude <= 2 && obj.Main.InfoSet.Category == CategoryKw.MovableObstacle)
                 {
-                    // ‰Ÿ‚¹‚é‚à‚Ì‚Æ—×Ú‚µ‚Ä‚¢‚é‚Æ‚«A‚»‚ê‚ð‰Ÿ‚µ‚ÄˆÚ“®‚³‚¹‚é
+                    // æŠ¼ã›ã‚‹ã‚‚ã®ã¨éš£æŽ¥ã—ã¦ã„ã‚‹ã¨ãã€ãã‚Œã‚’æŠ¼ã—ã¦ç§»å‹•ã•ã›ã‚‹
                     pushCommand.CommandInvoke(self, null, activationDepth, new(targetObj: obj));
                     return RogueObjUpdaterContinueType.Break;
                 }

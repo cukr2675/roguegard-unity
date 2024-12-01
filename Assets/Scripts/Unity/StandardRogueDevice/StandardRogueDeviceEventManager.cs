@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -36,14 +36,14 @@ namespace RoguegardUnity
             {
                 messageWorkQueue.Dequeue(out var other, out var work, out var integer, out var number, out var stackTrace);
 
-                // ƒLƒƒƒ‰ƒNƒ^[ƒAƒjƒ[ƒVƒ‡ƒ“
+                // ã‚­ãƒ£ãƒ©ã‚¯ã‚¿ãƒ¼ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³
                 if (other == DeviceKw.EnqueueWork)
                 {
                     characterRenderSystem.Work(work, player, fastForward);
                     if (!work.Continues) break;
                 }
 
-                // ƒƒbƒZ[ƒWƒ{ƒbƒNƒX•\¦
+                // ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãƒœãƒƒã‚¯ã‚¹è¡¨ç¤º
                 else if (other == DeviceKw.EnqueueInteger)
                 {
                     touchController.EventManager.Add(DeviceKw.AppendText, integer: integer);
@@ -68,7 +68,7 @@ namespace RoguegardUnity
                     touchController.EventManager.AppendTextObj(player, other, stackTrace);
                 }
 
-                // Œø‰Ê‰¹Ä¶
+                // åŠ¹æœéŸ³å†ç”Ÿ
                 else if (other == DeviceKw.EnqueueSEAndWait)
                 {
                     messageWorkQueue.Dequeue(out var seName, out _, out _, out _, out _);
@@ -82,7 +82,7 @@ namespace RoguegardUnity
                     break;
                 }
 
-                // ‹ŠE§Œä
+                // è¦–ç•Œåˆ¶å¾¡
                 else if (other == DeviceKw.EnqueueViewDequeueState)
                 {
                     var view = ViewInfo.Get(player);
@@ -91,7 +91,7 @@ namespace RoguegardUnity
                     view.AddView(player);
                 }
 
-                // ‚»‚Ì‘¼ƒIƒuƒWƒFƒNƒg‚ÍƒƒbƒZ[ƒWƒ{ƒbƒNƒX•\¦‚Ö
+                // ãã®ä»–ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã¯ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãƒœãƒƒã‚¯ã‚¹è¡¨ç¤ºã¸
                 else
                 {
                     other = StandardRogueDeviceUtility.LocalizeMessage(other, player, messageWorkQueue);
@@ -103,7 +103,7 @@ namespace RoguegardUnity
         public void Add(IKeyword keyword, int integer = 0, float number = 0f, object obj = null)
         {
             ////////////////////////////////////////////////////////////////////////
-            // ƒQ[ƒ€“à“úæ“¾E‘Ò‹@E‚»‚Ì‘¼ƒCƒxƒ“ƒg
+            // ã‚²ãƒ¼ãƒ å†…æ—¥æ™‚å–å¾—ãƒ»å¾…æ©Ÿãƒ»ãã®ä»–ã‚¤ãƒ™ãƒ³ãƒˆ
             ////////////////////////////////////////////////////////////////////////
 
             if (keyword == DeviceKw.WaitForInput)
@@ -122,7 +122,7 @@ namespace RoguegardUnity
             if (!IsOpen) return;
 
             ////////////////////////////////////////////////////////////////////////
-            // ƒƒbƒZ[ƒW•\¦EŒø‰Ê‰¹Ä¶
+            // ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸è¡¨ç¤ºãƒ»åŠ¹æœéŸ³å†ç”Ÿ
             ////////////////////////////////////////////////////////////////////////
 
             if (keyword == DeviceKw.AppendText)
@@ -159,7 +159,7 @@ namespace RoguegardUnity
 
 
             ////////////////////////////////////////////////////////////////////////
-            // ƒLƒƒƒ‰‚ğ‰B‚·
+            // ã‚­ãƒ£ãƒ©ã‚’éš ã™
             ////////////////////////////////////////////////////////////////////////
 
             if (keyword == DeviceKw.InsertHideCharacterWork && obj is RogueObj hideObj)
@@ -171,7 +171,7 @@ namespace RoguegardUnity
 
 
             ////////////////////////////////////////////////////////////////////////
-            // ‹ŠEXV’x‰„
+            // è¦–ç•Œæ›´æ–°é…å»¶
             ////////////////////////////////////////////////////////////////////////
             
             if (keyword == DeviceKw.EnqueueViewDequeueState)
@@ -182,7 +182,7 @@ namespace RoguegardUnity
 
 
 
-            Debug.LogError($"{keyword?.Name ?? "null"} ‚É‘Î‰‚·‚éƒL[ƒ[ƒh‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñBiobj: {obj}j");
+            Debug.LogError($"{keyword?.Name ?? "null"} ã«å¯¾å¿œã™ã‚‹ã‚­ãƒ¼ãƒ¯ãƒ¼ãƒ‰ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã€‚ï¼ˆobj: {obj}ï¼‰");
         }
 
         public void AddWork(RogueObj player, IKeyword keyword, in RogueCharacterWork work, bool fastForward)
@@ -193,12 +193,12 @@ namespace RoguegardUnity
             {
                 if (messageWorkQueue.Count == 0 && work.Continues)
                 {
-                    // ˆÚ“®ƒ‚[ƒVƒ‡ƒ“‚È‚Ç‚ğ•¡”‚ÌƒIƒuƒWƒFƒNƒg‚Å“¯Ä¶‚·‚éB
+                    // ç§»å‹•ãƒ¢ãƒ¼ã‚·ãƒ§ãƒ³ãªã©ã‚’è¤‡æ•°ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã§åŒæ™‚å†ç”Ÿã™ã‚‹ã€‚
                     characterRenderSystem.Work(work, player, fastForward);
                 }
                 else
                 {
-                    // UŒ‚ƒ‚[ƒVƒ‡ƒ“‚È‚Ç‚ÌÄ¶‚ğ‘Ò‹@‚·‚éB
+                    // æ”»æ’ƒãƒ¢ãƒ¼ã‚·ãƒ§ãƒ³ãªã©ã®å†ç”Ÿã‚’å¾…æ©Ÿã™ã‚‹ã€‚
                     messageWorkQueue.EnqueueWork(work);
                     HasSynchronizedWork = true;
                 }

@@ -1,4 +1,4 @@
-using System.Collections;
+Ôªøusing System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -59,9 +59,9 @@ namespace RoguegardUnity
             }
             else if (builder is AlphabetTypeMember alphabetTypeMember)
             {
-                return $"É^ÉCÉv{alphabetTypeMember.Type}";
+                return $"„Çø„Ç§„Éó{alphabetTypeMember.Type}";
             }
-            Debug.LogError("ïsê≥Ç»å^Ç≈Ç∑ÅB");
+            Debug.LogError("‰∏çÊ≠£„Å™Âûã„Åß„Åô„ÄÇ");
             return null;
         }
 
@@ -101,9 +101,9 @@ namespace RoguegardUnity
                         }
                         else if (arg.Arg.Other is AlphabetTypeMember alphabetTypeMember)
                         {
-                            return $"É^ÉCÉv{alphabetTypeMember.Types[(int)element]}";
+                            return $"„Çø„Ç§„Éó{alphabetTypeMember.Types[(int)element]}";
                         }
-                        Debug.LogError("ïsê≥Ç»å^Ç≈Ç∑ÅB");
+                        Debug.LogError("‰∏çÊ≠£„Å™Âûã„Åß„Åô„ÄÇ");
                         return null;
                     })
 

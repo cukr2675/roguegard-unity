@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -36,7 +36,7 @@ namespace RoguegardUnity
             view.ShowTemplate(partyMembers, manager, arg)
                 ?.OnClickElement((partyMember, manager, arg) =>
                 {
-                    // ‘I‘ğ‚µ‚½ƒp[ƒeƒBƒƒ“ƒo[‚Ìî•ñ‚Æ‘I‘ğˆ‚ğ•\¦‚·‚é
+                    // é¸æŠã—ãŸãƒ‘ãƒ¼ãƒ†ã‚£ãƒ¡ãƒ³ãƒãƒ¼ã®æƒ…å ±ã¨é¸æŠè‚¢ã‚’è¡¨ç¤ºã™ã‚‹
                     manager.PushMenuScreen(memberMenu, arg.Self, targetObj: partyMember);
                 })
                 .Build();

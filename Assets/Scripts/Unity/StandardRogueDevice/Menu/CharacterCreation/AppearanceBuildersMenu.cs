@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -77,7 +77,7 @@ namespace RoguegardUnity
                     }
                     else
                     {
-                        return "+ Œ©‚½–Ú‚ğ’Ç‰Á";
+                        return "+ è¦‹ãŸç›®ã‚’è¿½åŠ ";
                     }
                 })
 

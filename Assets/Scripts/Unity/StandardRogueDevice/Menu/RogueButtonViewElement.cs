@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -124,7 +124,7 @@ namespace RoguegardUnity
             _icon.enabled = true;
             _icon.SetNativeSize();
 
-            // ƒAƒCƒRƒ“‚ğ˜g“à‚Éû‚ß‚é
+            // ã‚¢ã‚¤ã‚³ãƒ³ã‚’æ å†…ã«åã‚ã‚‹
             var rectTransform = _icon.rectTransform;
             var rectWidth = Mathf.Max(rectTransform.sizeDelta.x, rectTransform.sizeDelta.y);
             rectTransform.sizeDelta *= iconWidth / Mathf.Max(RoguegardSettings.PixelsPerUnit, rectWidth);

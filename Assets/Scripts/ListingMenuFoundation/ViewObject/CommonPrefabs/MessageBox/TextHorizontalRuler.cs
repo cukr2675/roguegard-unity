@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,7 +10,7 @@ namespace ListingMF
         private readonly float lineHeight;
 
         /// <summary>
-        /// ˆês‚²‚Æ‚ÌŒrü
+        /// ä¸€è¡Œã”ã¨ã®ç½«ç·š
         /// </summary>
         private readonly CanvasGroup[] rules;
 
@@ -21,7 +21,7 @@ namespace ListingMF
             this.rulesContent = rulesContent;
             this.lineHeight = lineHeight;
 
-            // Œrü UI ‚Ì¶¬
+            // ç½«ç·š UI ã®ç”Ÿæˆ
             rules = new CanvasGroup[maxLineCount];
             rulesIsEnabled = new List<bool>();
             for (int i = 0; i < maxLineCount; i++)
@@ -38,13 +38,13 @@ namespace ListingMF
                 rulesIsEnabled.Add(false);
             }
 
-            // ‰Šú‰»
+            // åˆæœŸåŒ–
             ClearLines();
         }
 
         public void AddLine(int lineNumber)
         {
-            // ƒeƒLƒXƒg‚É 1 s‚¸‚Â‘Î‰‚·‚éŒrü•\¦ƒtƒ‰ƒO‚ğ¶¬‚·‚é
+            // ãƒ†ã‚­ã‚¹ãƒˆã« 1 è¡Œãšã¤å¯¾å¿œã™ã‚‹ç½«ç·šè¡¨ç¤ºãƒ•ãƒ©ã‚°ã‚’ç”Ÿæˆã™ã‚‹
             while (rulesIsEnabled.Count <= lineNumber)
             {
                 rulesIsEnabled.Add(false);
@@ -54,7 +54,7 @@ namespace ListingMF
         }
 
         /// <summary>
-        /// ‚±‚ÌƒCƒ“ƒXƒ^ƒ“ƒX“à‚Ìsî•ñ‚ğíœ‚·‚é
+        /// ã“ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹å†…ã®è¡Œæƒ…å ±ã‚’å‰Šé™¤ã™ã‚‹
         /// </summary>
         public void RemoveLinesRange(int index, int count)
         {
@@ -63,7 +63,7 @@ namespace ListingMF
         }
 
         /// <summary>
-        /// ‚±‚ÌƒCƒ“ƒXƒ^ƒ“ƒX“à‚Ìsî•ñ‚ğ‚·‚×‚Äíœ‚µA•\¦‚àƒNƒŠƒA‚·‚é
+        /// ã“ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹å†…ã®è¡Œæƒ…å ±ã‚’ã™ã¹ã¦å‰Šé™¤ã—ã€è¡¨ç¤ºã‚‚ã‚¯ãƒªã‚¢ã™ã‚‹
         /// </summary>
         public void ClearLines()
         {
@@ -76,18 +76,18 @@ namespace ListingMF
         }
 
         /// <summary>
-        /// ƒXƒNƒ[ƒ‹ˆÚ“®‚·‚éƒeƒLƒXƒg•\¦—Ìˆæ‚É‡‚í‚¹‚ÄŒrü‚Ì•\¦ˆÊ’u‚ğØ‚è‘Ö‚¦‚Äg‚¢‚Ü‚í‚·B
-        /// ‚±‚ê‚É‚æ‚èÅ’áŒÀ‚ÌŒrüƒXƒvƒ‰ƒCƒg”‚Å•\Œ»‚Å‚«‚é
+        /// ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ç§»å‹•ã™ã‚‹ãƒ†ã‚­ã‚¹ãƒˆè¡¨ç¤ºé ˜åŸŸã«åˆã‚ã›ã¦ç½«ç·šã®è¡¨ç¤ºä½ç½®ã‚’åˆ‡ã‚Šæ›¿ãˆã¦ä½¿ã„ã¾ã‚ã™ã€‚
+        /// ã“ã‚Œã«ã‚ˆã‚Šæœ€ä½é™ã®ç½«ç·šã‚¹ãƒ—ãƒ©ã‚¤ãƒˆæ•°ã§è¡¨ç¾ã§ãã‚‹
         /// </summary>
         public void UpdateLines(float scrollPosition)
         {
-            // ƒeƒLƒXƒg•\¦—Ìˆæ‚É‡‚¤Œrü‚ÌƒCƒ“ƒfƒbƒNƒX‚ğæ“¾‚·‚é
+            // ãƒ†ã‚­ã‚¹ãƒˆè¡¨ç¤ºé ˜åŸŸã«åˆã†ç½«ç·šã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ã‚’å–å¾—ã™ã‚‹
             var ruleIndexOffset = Mathf.FloorToInt(scrollPosition / lineHeight);
 
-            // ƒeƒLƒXƒg•\¦—Ìˆæ‚É‡‚¤Å‰‚ÌŒrü‚ğ“KØ‚ÈˆÊ’u‚ÉˆÚ“®‚·‚é
+            // ãƒ†ã‚­ã‚¹ãƒˆè¡¨ç¤ºé ˜åŸŸã«åˆã†æœ€åˆã®ç½«ç·šã‚’é©åˆ‡ãªä½ç½®ã«ç§»å‹•ã™ã‚‹
             rulesContent.localPosition = new Vector3(0f, -lineHeight * ruleIndexOffset);
 
-            // Œrü‚Ì•\¦‚ğØ‚è‘Ö‚¦‚é
+            // ç½«ç·šã®è¡¨ç¤ºã‚’åˆ‡ã‚Šæ›¿ãˆã‚‹
             for (int i = 0; i < rules.Length; i++)
             {
                 var rule = rules[i];

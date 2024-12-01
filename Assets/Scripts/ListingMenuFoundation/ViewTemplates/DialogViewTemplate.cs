@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -26,7 +26,7 @@ namespace ListingMF
             if (message == null) throw new System.ArgumentNullException(nameof(message));
             if (manager == null) throw new System.ArgumentNullException(nameof(manager));
 
-            // •K—v‚É‰‚¶‚ÄƒXƒNƒ[ƒ‹ˆÊ’u‚ğƒŠƒZƒbƒg
+            // å¿…è¦ã«å¿œã˜ã¦ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ä½ç½®ã‚’ãƒªã‚»ãƒƒãƒˆ
             if (viewStateHolder != prevViewStateHolder)
             {
                 dialogSubViewStateProvider?.Reset();
@@ -35,7 +35,7 @@ namespace ListingMF
             }
             prevViewStateHolder = viewStateHolder;
 
-            // ƒXƒNƒ[ƒ‹‚Ìƒrƒ…[‚ğ•\¦
+            // ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ã®ãƒ“ãƒ¥ãƒ¼ã‚’è¡¨ç¤º
             this.message = message;
 
             if (TryShowSubViews(manager, arg)) return null;

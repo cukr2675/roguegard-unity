@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -20,7 +20,7 @@ namespace ListingMF
             }
             else
             {
-                Debug.LogError($"{instance} ‚ğ {typeof(T)} ‚É•ÏŠ·‚Å‚«‚Ü‚¹‚ñB");
+                Debug.LogError($"{instance} ã‚’ {typeof(T)} ã«å¤‰æ›ã§ãã¾ã›ã‚“ã€‚");
                 manager?.ErrorOption.HandleClick(manager, null);
 
                 castedInstance = default;
@@ -30,7 +30,7 @@ namespace ListingMF
 
         public static void NotInitialized(object self, bool initialized)
         {
-            if (initialized) throw new System.InvalidOperationException($"{self} ‚Í‰Šú‰»Ï‚İ‚Å‚·B");
+            if (initialized) throw new System.InvalidOperationException($"{self} ã¯åˆæœŸåŒ–æ¸ˆã¿ã§ã™ã€‚");
         }
     }
 }

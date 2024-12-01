@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -109,7 +109,7 @@ namespace RuntimeDotter
             editMainColor = false;
             if (ColorIndex != index)
             {
-                // F‘I‘ğ
+                // è‰²é¸æŠ
                 ColorIndex = index;
 
                 var item = (RectTransform)items[index].transform;
@@ -120,7 +120,7 @@ namespace RuntimeDotter
             }
             else
             {
-                // “¯‚¶F‚ğƒNƒŠƒbƒN‚µ‚½‚çF•ÒW‚ğŠJ‚­
+                // åŒã˜è‰²ã‚’ã‚¯ãƒªãƒƒã‚¯ã—ãŸã‚‰è‰²ç·¨é›†ã‚’é–‹ã
                 _picker.Open(_palette[index], false);
             }
         }

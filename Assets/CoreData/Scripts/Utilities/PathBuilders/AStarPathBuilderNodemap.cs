@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -71,7 +71,7 @@ namespace Roguegard
             {
                 if (tile == null && tileObj == null)
                 {
-                    // null ‚Íi“ü•s‰Â‚Æ‚µ‚Äˆµ‚¤B
+                    // null ã¯é€²å…¥ä¸å¯ã¨ã—ã¦æ‰±ã†ã€‚
                     return true;
                 }
                 else if (tileObj != null)
@@ -117,12 +117,12 @@ namespace Roguegard
             }
             if (minF != int.MaxValue)
             {
-                // targetPosition ‚ÉÅ‚à‹ß‚¢ˆÊ’u‚ğ•Ô‚·
+                // targetPosition ã«æœ€ã‚‚è¿‘ã„ä½ç½®ã‚’è¿”ã™
                 return true;
             }
             else
             {
-                // ‘Sƒm[ƒh‚ª•Â‚¶‚ç‚ê‚Ä‚¢‚½‚Æ‚« false
+                // å…¨ãƒãƒ¼ãƒ‰ãŒé–‰ã˜ã‚‰ã‚Œã¦ã„ãŸã¨ã false
                 position = Vector2Int.zero;
                 return false;
             }

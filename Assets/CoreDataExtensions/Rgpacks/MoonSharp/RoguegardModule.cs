@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -44,8 +44,8 @@ return function(type_name)
 end
 "));
 
-            // ƒGƒtƒFƒNƒgƒNƒ‰ƒX‚Ìƒeƒ“ƒvƒŒ[ƒg‚ğ¶¬‚·‚éŠÖ”
-            // ƒNƒ‰ƒX‚ğŒp³‚·‚éŠ´Šo‚ÅÀ‘•‚³‚¹‚é
+            // ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã‚¯ãƒ©ã‚¹ã®ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆã‚’ç”Ÿæˆã™ã‚‹é–¢æ•°
+            // ã‚¯ãƒ©ã‚¹ã‚’ç¶™æ‰¿ã™ã‚‹æ„Ÿè¦šã§å®Ÿè£…ã•ã›ã‚‹
             roguegardTable.Set("implements_effect", roguegardTable.OwnerScript.DoString(@"
 return function(type_name)
     type = {}
@@ -77,8 +77,8 @@ return function(a, b, c)
 end
 "));
 
-            // ƒGƒtƒFƒNƒgƒNƒ‰ƒX‚Ìƒeƒ“ƒvƒŒ[ƒg‚ğ¶¬‚·‚éŠÖ”
-            // ƒNƒ‰ƒX‚ğŒp³‚·‚éŠ´Šo‚ÅÀ‘•‚³‚¹‚é
+            // ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã‚¯ãƒ©ã‚¹ã®ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆã‚’ç”Ÿæˆã™ã‚‹é–¢æ•°
+            // ã‚¯ãƒ©ã‚¹ã‚’ç¶™æ‰¿ã™ã‚‹æ„Ÿè¦šã§å®Ÿè£…ã•ã›ã‚‹
             roguegardTable.Set("Cmn", roguegardTable.OwnerScript.DoString(@"
 return {
     ['new'] = function(self)
@@ -92,7 +92,7 @@ return {
 }
 "));
 
-            // require('roguegard') ‚ğ•K{‚É‚·‚é
+            // require('roguegard') ã‚’å¿…é ˆã«ã™ã‚‹
             globalTable.Remove(moduleName);
         }
 
@@ -119,7 +119,7 @@ return {
                     var table = obj.Table;
                     if (tableStack.Contains(table))
                     {
-                        // –³ŒÀÄ‹A‘Îô
+                        // ç„¡é™å†å¸°å¯¾ç­–
                         stringBuilder.Append("{...}");
                         return;
                     }
@@ -174,9 +174,9 @@ return {
             var rgpackID = RgpackReference.GetRgpackID(id, envRgpackID);
             var assetID = RgpackReference.GetAssetID(id);
 
-            if (!RgpackReference.TryGetRgpack(rgpackID, out var rgpack)) throw new RogueException($"Rgpack ({rgpackID}) ‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñB");
+            if (!RgpackReference.TryGetRgpack(rgpackID, out var rgpack)) throw new RogueException($"Rgpack ({rgpackID}) ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã€‚");
             if (!rgpack.TryGetAsset<object>(assetID, out var asset)) throw new RogueException(
-                $"Rgpack ({rgpackID}) ‚É ID ({assetID}) ‚Ìƒf[ƒ^‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñB");
+                $"Rgpack ({rgpackID}) ã« ID ({assetID}) ã®ãƒ‡ãƒ¼ã‚¿ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã€‚");
 
             if (asset is CharacterCreationPresetAsset characterCreationPresetAsset)
             {
@@ -221,7 +221,7 @@ return {
             const string name = "changePlayer";
             var newPlayer = args.AsType(0, name, DataType.UserData, false).CheckUserDataType<AnonWrapper<RogueObj>>(name).Value;
 
-            // ‹óŠÔˆÚ“®
+            // ç©ºé–“ç§»å‹•
             var self = RogueDevice.Primary.Player;
             var worldInfo = RogueWorldInfo.GetByCharacter(self);
             var location = self.Location;
@@ -232,7 +232,7 @@ return {
 
             worldInfo.LobbyMembers.Add(newPlayer);
 
-            // ƒp[ƒeƒBˆÚ“®
+            // ãƒ‘ãƒ¼ãƒ†ã‚£ç§»å‹•
             var party = self.Main.Stats.Party;
             self.Main.Stats.UnassignParty(self, party);
             newPlayer.Main.Stats.TryAssignParty(newPlayer, party);
@@ -284,9 +284,9 @@ return {
                         {
                             var id = value.Substring(i + 2, length - 2);
                             var rgpackID = "Playtest";
-                            if (!RgpackReference.TryGetRgpack(rgpackID, out var rgpack)) throw new RogueException($"Rgpack ({rgpackID}) ‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñB");
+                            if (!RgpackReference.TryGetRgpack(rgpackID, out var rgpack)) throw new RogueException($"Rgpack ({rgpackID}) ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã€‚");
                             if (!rgpack.TryGetAsset<object>(id, out var asset)) throw new RogueException(
-                                $"Rgpack ({rgpackID}) ‚É ID ({id}) ‚Ìƒf[ƒ^‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñB");
+                                $"Rgpack ({rgpackID}) ã« ID ({id}) ã®ãƒ‡ãƒ¼ã‚¿ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã€‚");
 
                             stringBuilder.Append(asset);
                             i += length;
@@ -339,9 +339,9 @@ return {
             //var files = executionContext.CurrentGlobalEnv.Get("__files");
             //if (files.IsNotNil())
             //{
-            //    // ˆË‘¶ŠÖŒW‚ªw’è‚³‚ê‚Ä‚¢‚é‚Æ‚«A‚»‚Ì’†‚©‚çƒCƒ“ƒ|[ƒg‚·‚é
+            //    // ä¾å­˜é–¢ä¿‚ãŒæŒ‡å®šã•ã‚Œã¦ã„ã‚‹ã¨ãã€ãã®ä¸­ã‹ã‚‰ã‚¤ãƒ³ãƒãƒ¼ãƒˆã™ã‚‹
             //    var sources = ((AnonWrapper<Dictionary<string, NotepadQuote>>)files.UserData.Object).Value;
-            //    if (!sources.TryGetValue(modname, out var source)) throw new RogueException($"ƒ‚ƒWƒ…[ƒ‹ {modname} ‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñB");
+            //    if (!sources.TryGetValue(modname, out var source)) throw new RogueException($"ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ« {modname} ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã€‚");
 
             //    return script.DoString(source);
             //}
@@ -349,7 +349,7 @@ return {
             //var casterData = executionContext.CurrentGlobalEnv.Get("__caster");
             //if (casterData.IsNotNil())
             //{
-            //    // ƒvƒŒƒCƒ„[‚ª”\“®“I‚ÉÀs‚µ‚½‚Æ‚«AŠ’†‚Ìƒƒ‚’ ƒAƒCƒeƒ€‚©‚çƒCƒ“ƒ|[ƒg‚·‚é
+            //    // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒèƒ½å‹•çš„ã«å®Ÿè¡Œã—ãŸã¨ãã€æ‰€æŒä¸­ã®ãƒ¡ãƒ¢å¸³ã‚¢ã‚¤ãƒ†ãƒ ã‹ã‚‰ã‚¤ãƒ³ãƒãƒ¼ãƒˆã™ã‚‹
             //    var caster = ((AnonWrapper<RogueObj>)casterData.UserData.Object).Value;
             //    var objs = caster.Space.Objs;
             //    for (int i = 0; i < objs.Count; i++)
@@ -360,14 +360,14 @@ return {
             //        var source = NotepadInfo.GetQuote(obj);
             //        return script.DoString(source, caster);
             //    }
-            //    throw new RogueException($"ƒ‚ƒWƒ…[ƒ‹ {modname} ‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñB");
+            //    throw new RogueException($"ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ« {modname} ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã€‚");
             //}
 
-            throw new RogueException("ƒ‚ƒWƒ…[ƒ‹‚ÌQÆæ‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñB");
+            throw new RogueException("ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«ã®å‚ç…§å…ˆãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã€‚");
         }
 
         /// <summary>
-        /// w’è‚Ì <see cref="RogueObj"/> ‚Éw’è‚ÌƒGƒtƒFƒNƒg‚ğ•t—^
+        /// æŒ‡å®šã® <see cref="RogueObj"/> ã«æŒ‡å®šã®ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã‚’ä»˜ä¸
         /// </summary>
         [MoonSharpModuleMethod]
         public static DynValue add_open(ScriptExecutionContext executionContext, CallbackArguments args)
@@ -441,13 +441,13 @@ return {
             //{
             //    const string name = "__new_event";
 
-            //    // lua ‘¤‚ÌƒCƒxƒ“ƒgƒe[ƒuƒ‹‚ğæ“¾
+            //    // lua å´ã®ã‚¤ãƒ™ãƒ³ãƒˆãƒ†ãƒ¼ãƒ–ãƒ«ã‚’å–å¾—
             //    var ev = args.AsType(0, name, DataType.Table, false).Table;
 
-            //    // ƒCƒxƒ“ƒg‚ÌŒ^î•ñ‚ğæ“¾
+            //    // ã‚¤ãƒ™ãƒ³ãƒˆã®å‹æƒ…å ±ã‚’å–å¾—
             //    var type = (MoonSharpScriptingType)ev.MetaTable.Get("__type").UserData.Object;
 
-            //    // ƒ[ƒOƒKƒ‹ƒh‘¤‚ÌƒCƒxƒ“ƒgƒCƒ“ƒXƒ^ƒ“ƒX‚ğ¶¬‚µ‚Äƒe[ƒuƒ‹‚Éİ’è
+            //    // ãƒ­ãƒ¼ã‚°ã‚¬ãƒ«ãƒ‰å´ã®ã‚¤ãƒ™ãƒ³ãƒˆã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ç”Ÿæˆã—ã¦ãƒ†ãƒ¼ãƒ–ãƒ«ã«è¨­å®š
             //    var scriptingEvent = new MoonSharpScriptingCmn(type);
             //    var scriptingEventWrapper = new AnonWrapper<MoonSharpScriptingCmn>(scriptingEvent);
             //    var scriptingEventValue = UserData.Create(scriptingEventWrapper);
@@ -461,13 +461,13 @@ return {
             {
                 const string name = "__new_effect";
 
-                // lua ‘¤‚ÌƒGƒtƒFƒNƒgƒe[ƒuƒ‹‚ğæ“¾
+                // lua å´ã®ã‚¨ãƒ•ã‚§ã‚¯ãƒˆãƒ†ãƒ¼ãƒ–ãƒ«ã‚’å–å¾—
                 var effect = args.AsType(0, name, DataType.Table, false).Table;
 
-                // ƒGƒtƒFƒNƒg‚ÌŒ^î•ñ‚ğæ“¾
+                // ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã®å‹æƒ…å ±ã‚’å–å¾—
                 var type = (MoonSharpScriptingType)effect.MetaTable.Get("__type").UserData.Object;
 
-                // ƒ[ƒOƒKƒ‹ƒh‘¤‚ÌƒGƒtƒFƒNƒgƒCƒ“ƒXƒ^ƒ“ƒX‚ğ¶¬‚µ‚Äƒe[ƒuƒ‹‚Éİ’è
+                // ãƒ­ãƒ¼ã‚°ã‚¬ãƒ«ãƒ‰å´ã®ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ç”Ÿæˆã—ã¦ãƒ†ãƒ¼ãƒ–ãƒ«ã«è¨­å®š
                 var rogueEffect = new MoonSharpRogueEffect(type);
                 var rogueEffectWrapper = new AnonWrapper<MoonSharpRogueEffect>(rogueEffect);
                 var rogueEffectValue = UserData.Create(rogueEffectWrapper);

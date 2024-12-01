@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,7 +7,7 @@ using ListingMF;
 namespace Roguegard.Device
 {
     /// <summary>
-    /// ƒƒbƒZ[ƒW‚Æ‘I‘ğˆ‚Ìƒƒjƒ…[‰æ–Ê
+    /// ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã¨é¸æŠè‚¢ã®ãƒ¡ãƒ‹ãƒ¥ãƒ¼ç”»é¢
     /// </summary>
     public class ChoicesMenuScreen : RogueMenuScreen
     {
@@ -26,7 +26,7 @@ namespace Roguegard.Device
         }
 
         /// <summary>
-        /// u•Û‘¶‚µ‚Ä–ß‚è‚Ü‚·‚©Hv‚Ìƒ_ƒCƒAƒƒO‰æ–Ê‚ğ¶¬‚·‚é
+        /// ã€Œä¿å­˜ã—ã¦æˆ»ã‚Šã¾ã™ã‹ï¼Ÿã€ã®ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ç”»é¢ã‚’ç”Ÿæˆã™ã‚‹
         /// </summary>
         public static ChoicesMenuScreen SaveBackDialog(
             HandleClickElement<MMgr, MArg> saveAction,
@@ -37,7 +37,7 @@ namespace Roguegard.Device
         }
 
         /// <summary>
-        /// u•Û‘¶‚µ‚Ä–ß‚è‚Ü‚·‚©Hv‚Ìƒ_ƒCƒAƒƒO‰æ–Ê‚ğ¶¬‚·‚é
+        /// ã€Œä¿å­˜ã—ã¦æˆ»ã‚Šã¾ã™ã‹ï¼Ÿã€ã®ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ç”»é¢ã‚’ç”Ÿæˆã™ã‚‹
         /// </summary>
         public static ChoicesMenuScreen SaveBackDialog(
             string message,
@@ -46,10 +46,10 @@ namespace Roguegard.Device
         {
             var selectOption = new ChoicesMenuScreen(message)
 
-                // •Û‘¶
+                // ä¿å­˜
                 .Option(saveName, saveAction)
 
-                // •Û‘¶‚µ‚È‚¢ê‡‚ÍÄ“x•·‚­
+                // ä¿å­˜ã—ãªã„å ´åˆã¯å†åº¦èã
                 .Option(notSaveName, new ChoicesMenuScreen(":SaveBackDialogMsg::Second").Option(notSaveName, notSaveAction ?? NotSave).Option(":Cancel", Cancel))
 
                 .Option(":Cancel", (manager, arg) => manager.Back());
@@ -59,13 +59,13 @@ namespace Roguegard.Device
 
         private static void NotSave(MMgr manager, MArg arg)
         {
-            // ‰½‚à‚¹‚¸•Â‚¶‚é
+            // ä½•ã‚‚ã›ãšé–‰ã˜ã‚‹
             manager.Back(3);
         }
 
         private static void Cancel(MMgr manager, MArg arg)
         {
-            // ‰½‚à‚¹‚¸•Â‚¶‚é
+            // ä½•ã‚‚ã›ãšé–‰ã˜ã‚‹
             manager.Back(2);
         }
 

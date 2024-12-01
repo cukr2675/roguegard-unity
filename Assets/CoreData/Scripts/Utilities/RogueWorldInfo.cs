@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -36,7 +36,7 @@ namespace Roguegard
             var location = self;
             while (true)
             {
-                if (location == null) throw new RogueException("ƒ[ƒ‹ƒh‚É‚ ‚½‚éƒIƒuƒWƒFƒNƒg‚ª‘¶İ‚µ‚Ü‚¹‚ñB");
+                if (location == null) throw new RogueException("ãƒ¯ãƒ¼ãƒ«ãƒ‰ã«ã‚ãŸã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãŒå­˜åœ¨ã—ã¾ã›ã‚“ã€‚");
                 if (location.TryGet<Info>(out _)) return location;
 
                 location = location.Location;

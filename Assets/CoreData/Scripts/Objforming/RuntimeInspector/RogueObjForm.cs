@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -32,7 +32,7 @@ namespace Roguegard.Objforming.RuntimeInspector
         {
             base.SetPageTo(inspector, value);
 
-            // ƒVƒŠƒAƒ‹‰»ƒ{ƒ^ƒ“‚ð•\Ž¦‚·‚é
+            // ã‚·ãƒªã‚¢ãƒ«åŒ–ãƒœã‚¿ãƒ³ã‚’è¡¨ç¤ºã™ã‚‹
             var obj = (RogueObj)value;
             var serializeButtonElement = Object.Instantiate(buttonElementPrefab, inspector.Page);
             serializeButtonElement.Initialize("Serialize", () => serializeAction(obj));

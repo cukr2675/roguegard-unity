@@ -1,11 +1,11 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace ListingMF
 {
     /// <summary>
-    /// •¡”‚ÌƒEƒBƒWƒFƒbƒg‚ğ‰¡•À‚Ñ‚É•\¦‚·‚é <see cref="ViewWidget"/>
+    /// è¤‡æ•°ã®ã‚¦ã‚£ã‚¸ã‚§ãƒƒãƒˆã‚’æ¨ªä¸¦ã³ã«è¡¨ç¤ºã™ã‚‹ <see cref="ViewWidget"/>
     /// </summary>
     [AddComponentMenu("UI/Listing Menu Foundation/View Widgets/LMF Stack View Widget")]
     public class StackViewWidget : ViewWidget
@@ -28,7 +28,7 @@ namespace ListingMF
             {
                 if (!ViewWidgetFactory.TryCreateViewWidget(elementsSubView, handler, viewWidgets[i], out var viewWidget))
                 {
-                    Debug.LogError($"{viewWidgets[i]} ‚Ì {nameof(ViewWidget)} ‚ğ¶¬‚Å‚«‚Ü‚¹‚ñB");
+                    Debug.LogError($"{viewWidgets[i]} ã® {nameof(ViewWidget)} ã‚’ç”Ÿæˆã§ãã¾ã›ã‚“ã€‚");
                     continue;
                 }
 

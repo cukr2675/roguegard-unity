@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -24,7 +24,7 @@ namespace ListingMF
             if (list == null) throw new System.ArgumentNullException(nameof(list));
             if (manager == null) throw new System.ArgumentNullException(nameof(manager));
 
-            // •K—v‚É‰‚¶‚ÄƒXƒNƒ[ƒ‹ˆÊ’u‚ğƒŠƒZƒbƒg
+            // å¿…è¦ã«å¿œã˜ã¦ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ä½ç½®ã‚’ãƒªã‚»ãƒƒãƒˆ
             if (viewStateHolder != prevViewStateHolder)
             {
                 scrollSubViewStateProvider?.Reset();

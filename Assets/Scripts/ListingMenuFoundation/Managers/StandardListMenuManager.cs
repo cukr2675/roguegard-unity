@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -39,7 +39,7 @@ namespace ListingMF
             HideAll();
         }
 
-        // ƒAƒjƒ[ƒVƒ‡ƒ“‚ªÄ¶‚³‚ê‚é‚Ì‚ğ‘Ò‹@‚·‚é‚½‚ß Update ‚Å‚Í‚È‚­ LateUpdate ‚É‚·‚é
+        // ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ãŒå†ç”Ÿã•ã‚Œã‚‹ã®ã‚’å¾…æ©Ÿã™ã‚‹ãŸã‚ Update ã§ã¯ãªã LateUpdate ã«ã™ã‚‹
         private void LateUpdate()
         {
             if (reservedMenu == null || StandardSubViewTable.HasManagerLock) return;
@@ -83,7 +83,7 @@ namespace ListingMF
         }
 
         /// <summary>
-        /// ƒƒjƒ…[‚ğw’è‚Ì‰æ–Ê‚Öi‚ß‚é
+        /// ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã‚’æŒ‡å®šã®ç”»é¢ã¸é€²ã‚ã‚‹
         /// </summary>
         public virtual void PushMenuScreen(MenuScreen<TMgr, TArg> menuScreen, TArg arg)
         {
@@ -108,7 +108,7 @@ namespace ListingMF
         }
 
         /// <summary>
-        /// ƒƒjƒ…[‰æ–Ê‚ğw’è‚Ì‰ñ”–ß‚é
+        /// ãƒ¡ãƒ‹ãƒ¥ãƒ¼ç”»é¢ã‚’æŒ‡å®šã®å›æ•°æˆ»ã‚‹
         /// </summary>
         public void Back(int count = 1)
         {
@@ -124,25 +124,25 @@ namespace ListingMF
         }
 
         /// <summary>
-        /// Œ»İ•\¦‚³‚ê‚Ä‚¢‚éƒƒjƒ…[‰æ–Ê‚ğXV‚·‚é
+        /// ç¾åœ¨è¡¨ç¤ºã•ã‚Œã¦ã„ã‚‹ãƒ¡ãƒ‹ãƒ¥ãƒ¼ç”»é¢ã‚’æ›´æ–°ã™ã‚‹
         /// </summary>
         public void Reopen()
         {
             if (stack.TryPeek(out var stackItem))
             {
-                // ‚Ğ‚Æ‚Â‘O‚Ìƒƒjƒ…[‚ª‘¶İ‚·‚éê‡A‚»‚Ìƒƒjƒ…[‚ğŠJ‚«‚È‚¨‚·
+                // ã²ã¨ã¤å‰ã®ãƒ¡ãƒ‹ãƒ¥ãƒ¼ãŒå­˜åœ¨ã™ã‚‹å ´åˆã€ãã®ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã‚’é–‹ããªãŠã™
                 BlockAll();
                 reservedMenu = stackItem;
             }
             else
             {
-                // ƒƒjƒ…[‚ª‚È‚¢ê‡‚ÍI—¹‚·‚é
+                // ãƒ¡ãƒ‹ãƒ¥ãƒ¼ãŒãªã„å ´åˆã¯çµ‚äº†ã™ã‚‹
                 Done();
             }
         }
 
         /// <summary>
-        /// ƒƒjƒ…[‰æ–Ê‚ğ‚·‚×‚Ä•Â‚¶‚é
+        /// ãƒ¡ãƒ‹ãƒ¥ãƒ¼ç”»é¢ã‚’ã™ã¹ã¦é–‰ã˜ã‚‹
         /// </summary>
         public void Done()
         {

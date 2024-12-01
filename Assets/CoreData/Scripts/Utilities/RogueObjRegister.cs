@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,7 +7,7 @@ using Roguegard.CharacterCreation;
 namespace Roguegard
 {
     /// <summary>
-    /// <see cref="LobbyMemberInfo.Seat"/> İ’è‚ÌŠ—LƒAƒCƒeƒ€‚Ìó‘Ô‚ğ‹L‰¯‚·‚éƒNƒ‰ƒX
+    /// <see cref="LobbyMemberInfo.Seat"/> è¨­å®šæ™‚ã®æ‰€æœ‰ã‚¢ã‚¤ãƒ†ãƒ ã®çŠ¶æ…‹ã‚’è¨˜æ†¶ã™ã‚‹ã‚¯ãƒ©ã‚¹
     /// </summary>
     [Objforming.Formable]
     public class RogueObjRegister
@@ -17,7 +17,7 @@ namespace Roguegard
         public int Count => items.Count;
 
         /// <summary>
-        /// <see cref="self"/> ‚ÌŒ»İ‚ÌŠƒAƒCƒeƒ€‚Ì’†‚©‚ç“o˜^‚³‚ê‚½Š—LƒAƒCƒeƒ€‚ğ’T‚·B“¯‚ÉŠ—LƒAƒCƒeƒ€‚Ì‘•”õó‘Ô‚Æ¶¬•û–@‚ğæ“¾‚·‚éB
+        /// <see cref="self"/> ã®ç¾åœ¨ã®æ‰€æŒã‚¢ã‚¤ãƒ†ãƒ ã®ä¸­ã‹ã‚‰ç™»éŒ²ã•ã‚ŒãŸæ‰€æœ‰ã‚¢ã‚¤ãƒ†ãƒ ã‚’æ¢ã™ã€‚åŒæ™‚ã«æ‰€æœ‰ã‚¢ã‚¤ãƒ†ãƒ ã®è£…å‚™çŠ¶æ…‹ã¨ç”Ÿæˆæ–¹æ³•ã‚’å–å¾—ã™ã‚‹ã€‚
         /// </summary>
         public RogueObj GetItem(RogueObj self, int index, out bool itemIsEquipped, out IReadOnlyStartingItem startingItem)
         {
@@ -46,7 +46,7 @@ namespace Roguegard
         }
 
         /// <summary>
-        /// w’è‚ÌƒAƒCƒeƒ€‚ğŠ—LƒAƒCƒeƒ€‚Æ‚µ‚Ä“o˜^‚·‚é
+        /// æŒ‡å®šã®ã‚¢ã‚¤ãƒ†ãƒ ã‚’æ‰€æœ‰ã‚¢ã‚¤ãƒ†ãƒ ã¨ã—ã¦ç™»éŒ²ã™ã‚‹
         /// </summary>
         public void Add(RogueObj item)
         {
@@ -71,7 +71,7 @@ namespace Roguegard
         }
 
         /// <summary>
-        /// w’è‚ÌƒCƒ“ƒfƒbƒNƒX‚ÌŠ—LƒAƒCƒeƒ€î•ñ‚ğã‘‚«‚·‚é
+        /// æŒ‡å®šã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ã®æ‰€æœ‰ã‚¢ã‚¤ãƒ†ãƒ æƒ…å ±ã‚’ä¸Šæ›¸ãã™ã‚‹
         /// </summary>
         public void SetItem(int index, RogueObj item)
         {

@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,7 +7,7 @@ using Roguegard.Extensions;
 namespace Roguegard
 {
     /// <summary>
-    /// ƒp[ƒeƒBƒŠ[ƒ_[‚É’Ç]‚·‚é <see cref="IRogueBehaviourNode"/>
+    /// ãƒ‘ãƒ¼ãƒ†ã‚£ãƒªãƒ¼ãƒ€ãƒ¼ã«è¿½å¾“ã™ã‚‹ <see cref="IRogueBehaviourNode"/>
     /// </summary>
     public class FollowLeaderBehaviourNode : IRogueBehaviourNode
     {
@@ -19,18 +19,18 @@ namespace Roguegard
             var leader = party.Members[0];
             if (party == null || leader == self || self.Location == null || self.Location != leader.Location) return RogueObjUpdaterContinueType.Continue;
 
-            // ƒŠ[ƒ_[‚Æ“¯‚¶‹óŠÔ‚É‚¢‚ê‚ÎƒŠ[ƒ_[‚Ì•ûŒü‚ğŒü‚­
+            // ãƒªãƒ¼ãƒ€ãƒ¼ã¨åŒã˜ç©ºé–“ã«ã„ã‚Œã°ãƒªãƒ¼ãƒ€ãƒ¼ã®æ–¹å‘ã‚’å‘ã
             self.Main.Stats.Direction = RogueDirection.FromSignOrLowerLeft(leader.Position - self.Position);
 
-            // ƒŠ[ƒ_[‚Æ—×‚è‡‚Á‚Ä‚¢‚½‚ç‹ß‚Ã‚­‚¾‚¯
-            // •s—pˆÓ‚ÈˆÚ“®‚ğ”ğ‚¯‚é
+            // ãƒªãƒ¼ãƒ€ãƒ¼ã¨éš£ã‚Šåˆã£ã¦ã„ãŸã‚‰è¿‘ã¥ãã ã‘
+            // ä¸ç”¨æ„ãªç§»å‹•ã‚’é¿ã‘ã‚‹
             var sqrDistance = (leader.Position - self.Position).sqrMagnitude;
             if (sqrDistance <= 1) return RogueObjUpdaterContinueType.Continue;
             if (sqrDistance <= 2)
             {
                 if (!MovementUtility.TryGetApproachDirection(self, leader.Position, true, out var direction)) return RogueObjUpdaterContinueType.Continue;
 
-                // Î‚ßˆÚ“®‚Å‚«‚éê‡‚Í‹ß‚Ã‚©‚È‚¢
+                // æ–œã‚ç§»å‹•ã§ãã‚‹å ´åˆã¯è¿‘ã¥ã‹ãªã„
                 var nearAngle = (int)RogueDirection.FromSignOrLowerLeft(leader.Position - self.Position);
                 var angle = (int)direction;
                 var near = new RogueDirection(nearAngle - (angle - nearAngle)).Forward;
@@ -41,7 +41,7 @@ namespace Roguegard
                 return RogueObjUpdaterContinueType.Break;
             }
 
-            // ƒŠ[ƒ_[‚ÌˆÊ’u‚Ü‚ÅˆÚ“®
+            // ãƒªãƒ¼ãƒ€ãƒ¼ã®ä½ç½®ã¾ã§ç§»å‹•
             if (!PathBuilder.UpdatePath(self, leader.Position)) return RogueObjUpdaterContinueType.Continue;
             if (!PathBuilder.TryGetNextDirection(self, out var nextDirection)) return RogueObjUpdaterContinueType.Continue;
             if (!default(IActiveRogueMethodCaller).Walk(self, nextDirection, activationDepth)) return RogueObjUpdaterContinueType.Continue;

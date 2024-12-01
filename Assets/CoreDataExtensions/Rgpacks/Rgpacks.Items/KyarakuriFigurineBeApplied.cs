@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -57,7 +57,7 @@ namespace Roguegard.Rgpacks
         //    public TMP_InputField.ContentType ContentType => TMP_InputField.ContentType.Standard;
 
         //    public string GetName(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-        //        => "ƒAƒZƒbƒgID";
+        //        => "ã‚¢ã‚»ãƒƒãƒˆID";
 
         //    public string GetValue(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         //    {
@@ -78,7 +78,7 @@ namespace Roguegard.Rgpacks
         //    private static readonly EditMenu nextMenu = new();
 
         //    public string GetName(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-        //        => "ƒLƒƒƒ‰ƒNƒŠİ’è";
+        //        => "ã‚­ãƒ£ãƒ©ã‚¯ãƒªè¨­å®š";
 
         //    public void Activate(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         //    {
@@ -106,7 +106,7 @@ namespace Roguegard.Rgpacks
 
         //        if (arg.Other is CharacterCreationDataBuilder builder)
         //        {
-        //            // ƒLƒƒƒ‰ƒNƒŠ‰æ–Ê‚©‚ç–ß‚Á‚½‚Æ‚«AlŒ`‚ğXV‚·‚é
+        //            // ã‚­ãƒ£ãƒ©ã‚¯ãƒªç”»é¢ã‹ã‚‰æˆ»ã£ãŸã¨ãã€äººå½¢ã‚’æ›´æ–°ã™ã‚‹
         //            var figurine = arg.TargetObj;
         //            KyarakuriFigurineInfo.SetTo(figurine, builder);
         //        }

@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -57,7 +57,7 @@ namespace Roguegard.CharacterCreation
         {
             if (DungeonQuestInfo.TryGetQuest(player, out var quest))
             {
-                throw new RogueException($"‚·‚Å‚ÉƒNƒGƒXƒg ({quest.Name}: {quest.Caption}) ‚ğŠJn‚µ‚Ä‚¢‚Ü‚·B");
+                throw new RogueException($"ã™ã§ã«ã‚¯ã‚¨ã‚¹ãƒˆ ({quest.Name}: {quest.Caption}) ã‚’é–‹å§‹ã—ã¦ã„ã¾ã™ã€‚");
             }
 
             RogueRandom.Primary = new RogueRandom(Seed);
@@ -86,7 +86,7 @@ namespace Roguegard.CharacterCreation
             {
                 if (!exitDungeon) return;
 
-                // ƒ_ƒ“ƒWƒ‡ƒ“‚©‚ç”²‚¯‚é‚Æ‚«ƒNƒGƒXƒg‚ğI—¹‚³‚¹‚é
+                // ãƒ€ãƒ³ã‚¸ãƒ§ãƒ³ã‹ã‚‰æŠœã‘ã‚‹ã¨ãã‚¯ã‚¨ã‚¹ãƒˆã‚’çµ‚äº†ã•ã›ã‚‹
                 self.Main.RogueEffects.Remove(this);
                 DungeonQuestInfo.RemoveFrom(self);
                 DungeonFloorCloserStateInfo.ReplaceWithNull(self, this);

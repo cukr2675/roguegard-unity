@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -67,11 +67,11 @@ namespace RoguegardUnity
         {
             if (show)
             {
-                // •ªŠ„ü‚ğ•\¦
+                // åˆ†å‰²ç·šã‚’è¡¨ç¤º
                 _splitLine.rectTransform.anchorMin = new Vector2(0f, .5f);
                 _splitLine.rectTransform.anchorMax = new Vector2(1f, .5f);
 
-                // ’†S“_‚ğ•\¦
+                // ä¸­å¿ƒç‚¹ã‚’è¡¨ç¤º
                 _upperPivot.rectTransform.anchorMin = _upperPivot.rectTransform.anchorMax = pivots[0];
                 _lowerPivot.rectTransform.anchorMin = _lowerPivot.rectTransform.anchorMax = pivots[1];
 

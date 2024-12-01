@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,7 +15,7 @@ namespace Roguegard.CharacterCreation
 
         public bool TryGetNewEquipmentTable(Spanning<IKeyword> equipParts, float order, out EffectableBoneSpriteTable table)
         {
-            // •”•ªˆê’v‚·‚é—v‘f‚ª‚ ‚Á‚½‚ç¸”s‚³‚¹‚é
+            // éƒ¨åˆ†ä¸€è‡´ã™ã‚‹è¦ç´ ãŒã‚ã£ãŸã‚‰å¤±æ•—ã•ã›ã‚‹
             foreach (var item in equipmentItems)
             {
                 for (int i = 0; i < item.EquipParts.Count; i++)
@@ -29,7 +29,7 @@ namespace Roguegard.CharacterCreation
             }
 
             {
-                // Š®‘Sˆê’v‚·‚é—v‘f‚ªŒ©‚Â‚©‚ç‚È‚¯‚ê‚ÎV‚µ‚­’Ç‰Á‚·‚é
+                // å®Œå…¨ä¸€è‡´ã™ã‚‹è¦ç´ ãŒè¦‹ã¤ã‹ã‚‰ãªã‘ã‚Œã°æ–°ã—ãè¿½åŠ ã™ã‚‹
                 var item = new EquipmentItem(equipParts, order);
                 equipmentItems.Add(item);
                 table = item.Table;
@@ -91,8 +91,8 @@ namespace Roguegard.CharacterCreation
 
             public void AffectSprite(RogueObj self, IReadOnlyNodeBone rootNode, EffectableBoneSpriteTable boneSpriteTable)
             {
-                // “¯ˆê•”ˆÊ‚Ü‚½‚Í Innerwear ‚É‰½‚©‘•”õ‚³‚ê‚Ä‚¢‚½‚çƒGƒtƒFƒNƒg–³Œø‰»
-                // i•”ˆÊ‚ªƒ[ƒ‚ÌƒGƒtƒFƒNƒg‚Í–³‹‚µ‚Ä•\¦j
+                // åŒä¸€éƒ¨ä½ã¾ãŸã¯ Innerwear ã«ä½•ã‹è£…å‚™ã•ã‚Œã¦ã„ãŸã‚‰ã‚¨ãƒ•ã‚§ã‚¯ãƒˆç„¡åŠ¹åŒ–
+                // ï¼ˆéƒ¨ä½ãŒã‚¼ãƒ­ã®ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã¯ç„¡è¦–ã—ã¦è¡¨ç¤ºï¼‰
                 if (_equipParts.Length >= 1)
                 {
                     for (int i = 0; i < _equipParts.Length; i++)

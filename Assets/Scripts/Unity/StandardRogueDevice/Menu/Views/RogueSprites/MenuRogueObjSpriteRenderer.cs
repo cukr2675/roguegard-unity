@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -30,13 +30,13 @@ namespace RoguegardUnity
             {
                 while (bones.Count < count)
                 {
-                    // �ǉ�
+                    // 追加
                     var image = parentPool.GetImage(transform);
                     bones.Add(new Bone(image));
                 }
                 if (bones.Count > count)
                 {
-                    // �폜
+                    // 削除
                     for (int i = count; i < bones.Count; i++)
                     {
                         parentPool.PoolImage(bones[i].image);

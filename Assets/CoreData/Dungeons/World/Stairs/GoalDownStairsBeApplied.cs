@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -28,7 +28,7 @@ namespace Roguegard
 
             if (player == RogueDevice.Primary.Player)
             {
-                // ƒvƒŒƒCƒ„[‘€ì‚ğ—v‹‚·‚é‚½‚ßAƒvƒŒƒCƒ„[ƒLƒƒƒ‰‚Ì‚İÀs‰Â”\‚Æ‚·‚é
+                // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼æ“ä½œã‚’è¦æ±‚ã™ã‚‹ãŸã‚ã€ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚­ãƒ£ãƒ©ã®ã¿å®Ÿè¡Œå¯èƒ½ã¨ã™ã‚‹
                 RogueDevice.Primary.AddMenu(resultRogueMenu, player, null, RogueMethodArgument.Identity);
                 return false;
             }

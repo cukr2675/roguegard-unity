@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,17 +13,17 @@ namespace SDSSprite
         Color Color { get; }
 
         /// <summary>
-        /// true �̂Ƃ��A���̃{�[�����x�[�X�J���[����㏑������B
+        /// true のとき、このボーンをベースカラーから上書きする。
         /// </summary>
         bool OverridesBaseColor { get; }
 
         /// <summary>
-        /// ���̃{�[���̃X�v���C�g�i�����܂ށj�݂̂����E���]����B <see cref="BoneTransform.LocalMirrorX"/> �ƈႢ�q�{�[���͂��̂܂܁B
+        /// このボーンのスプライト（装備含む）のみを左右反転する。 <see cref="BoneTransform.LocalMirrorX"/> と違い子ボーンはそのまま。
         /// </summary>
         bool FlipX { get; }
 
         /// <summary>
-        /// ���̃{�[���̃X�v���C�g�i�����܂ށj�݂̂��㉺���]����B <see cref="BoneTransform.LocalMirrorY"/> �ƈႢ�q�{�[���͂��̂܂܁B
+        /// このボーンのスプライト（装備含む）のみを上下反転する。 <see cref="BoneTransform.LocalMirrorY"/> と違い子ボーンはそのまま。
         /// </summary>
         bool FlipY { get; }
 
@@ -32,8 +32,8 @@ namespace SDSSprite
         Quaternion LocalRotation { get; }
 
         /// <summary>
-        /// �e�{�[���Ɖ�]�O�̎q�{�[���̑傫���B
-        /// <see cref="Transform.localScale"/> �ƈႢ��]��̎q�{�[�����g�k���Ȃ��B
+        /// 親ボーンと回転前の子ボーンの大きさ。
+        /// <see cref="Transform.localScale"/> と違い回転後の子ボーンを拡縮しない。
         /// </summary>
         Vector3 ScaleOfLocalByLocal { get; }
 

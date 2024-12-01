@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -54,7 +54,7 @@ namespace Roguegard
         {
             if (!boneSpriteTable.TryGetNewEquipmentTable(_equipParts, BoneSpriteEffectOrder, out var table))
             {
-                Debug.LogWarning("d•¡‚µ‚½‘•”õ•”ˆÊ‚ÌŒ©‚½–Ú‚ª‘¶İ‚µ‚Ü‚·B");
+                Debug.LogWarning("é‡è¤‡ã—ãŸè£…å‚™éƒ¨ä½ã®è¦‹ãŸç›®ãŒå­˜åœ¨ã—ã¾ã™ã€‚");
                 return;
             }
 

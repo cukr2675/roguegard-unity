@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,18 +11,18 @@ namespace Roguegard
             if (self.Location == null) return RogueObjUpdaterContinueType.Continue;
             if (!self.Location.Space.TryGetRoomView(self.Position, out var room, out _)) { room = new RectInt(); }
 
-            // “G‚ªƒvƒŒƒCƒ„[‚ğ•Ç‰z‚µ‚É@’m‚µ‚Ä‹ß‚Ã‚¢‚Ä‚µ‚Ü‚í‚È‚¢‚æ‚¤‚É‹ŠE‹——£‚ÍŒÅ’è
+            // æ•µãŒãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’å£è¶Šã—ã«å¯ŸçŸ¥ã—ã¦è¿‘ã¥ã„ã¦ã—ã¾ã‚ãªã„ã‚ˆã†ã«è¦–ç•Œè·é›¢ã¯å›ºå®š
             var visibleRadius = RoguegardSettings.DefaultVisibleRadius;
             var random = RogueRandom.Primary;
 
-            // ƒXƒLƒ‹EƒAƒCƒeƒ€g—p
+            // ã‚¹ã‚­ãƒ«ãƒ»ã‚¢ã‚¤ãƒ†ãƒ ä½¿ç”¨
             if (AutoAction.TryOtherAction(self, activationDepth, visibleRadius, room, random))
             {
                 self.Main.Stats.TargetObj = null;
                 return RogueObjUpdaterContinueType.Break;
             }
 
-            // ’ÊíUŒ‚
+            // é€šå¸¸æ”»æ’ƒ
             var attackSkill = AttackUtility.GetNormalAttackSkill(self);
             if (AutoAction.AutoSkill(MainInfoKw.Attack, attackSkill, self, self, activationDepth, null, visibleRadius, room, random))
             {
@@ -30,7 +30,7 @@ namespace Roguegard
                 return RogueObjUpdaterContinueType.Break;
             }
 
-            // ËŒ‚
+            // å°„æ’ƒ
             var throwSkill = self.Main.InfoSet.Attack;
             if (AutoAction.AutoSkill(MainInfoKw.Throw, throwSkill, self, self, activationDepth, null, visibleRadius, room, random))
             {

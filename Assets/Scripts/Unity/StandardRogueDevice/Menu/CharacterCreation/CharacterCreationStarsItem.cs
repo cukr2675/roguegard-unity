@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -22,7 +22,7 @@ namespace RoguegardUnity
         {
             TryInitialize();
 
-            // ¯‚Ì•\¦”‚ÆˆÊ’u‚ğİ’è
+            // æ˜Ÿã®è¡¨ç¤ºæ•°ã¨ä½ç½®ã‚’è¨­å®š
             if (1 <= count && count <= 5)
             {
                 var rectTransform = (RectTransform)transform;

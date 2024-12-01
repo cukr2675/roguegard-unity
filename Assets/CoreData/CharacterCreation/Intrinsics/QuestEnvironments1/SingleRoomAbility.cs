@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -32,7 +32,7 @@ namespace Roguegard.CharacterCreation
                 if (generate && self.Location.Space.Tilemap != null && DungeonInfo.TryGet(self.Location, out var info) &&
                     info.TryGetFloor(0, out var level))
                 {
-                    // ŠK‘w‚ğ•Ç‚Å–„‚ß‚é
+                    // éšå±¤ã‚’å£ã§åŸ‹ã‚ã‚‹
                     var tilemap = self.Location.Space.Tilemap;
                     for (int y = 0; y < tilemap.Height; y++)
                     {
@@ -42,13 +42,13 @@ namespace Roguegard.CharacterCreation
                         }
                     }
 
-                    // ŠK‘w‚Ì•”‰®‚ğ 10x10 ‚Ìˆê•”‰®‚¾‚¯‚É‚·‚é
-                    // ƒvƒŒƒCƒ„[‚ª•Ç‚É–„‚Ü‚ç‚È‚¢‚æ‚¤‚É‚·‚é
+                    // éšå±¤ã®éƒ¨å±‹ã‚’ 10x10 ã®ä¸€éƒ¨å±‹ã ã‘ã«ã™ã‚‹
+                    // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒå£ã«åŸ‹ã¾ã‚‰ãªã„ã‚ˆã†ã«ã™ã‚‹
                     var size = new Vector2Int(Mathf.Min(10, tilemap.Width), Mathf.Min(10, tilemap.Height));
                     var random = RogueRandom.Primary;
                     var room = new RectInt(self.Position, size);
                     var xMax = Mathf.Max(tilemap.Width - size.x, 0);
-                    room.x = Mathf.Clamp(room.x - 1 + random.Next(-size.x + 3, 0), 0, xMax); // ƒvƒŒƒCƒ„[‚ª•Ç‚É–„‚Ü‚ç‚È‚¢‚æ‚¤‚É‚·‚é
+                    room.x = Mathf.Clamp(room.x - 1 + random.Next(-size.x + 3, 0), 0, xMax); // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒå£ã«åŸ‹ã¾ã‚‰ãªã„ã‚ˆã†ã«ã™ã‚‹
                     var yMax = Mathf.Max(tilemap.Height - size.y, 0);
                     room.y = Mathf.Clamp(room.y - 1 + random.Next(-size.y + 3, 0), 0, yMax);
                     for (int y = room.yMin; y < room.yMax; y++)

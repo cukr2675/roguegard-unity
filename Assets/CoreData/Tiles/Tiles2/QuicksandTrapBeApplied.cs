@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,7 +12,7 @@ namespace Roguegard
         {
             if (arg.Other is UserRogueTile userTile && !StatsEffectedValues.AreVS(userTile.User, user))
             {
-                // “G‘Î‚µ‚Ä‚¢‚È‚¢ƒLƒƒƒ‰‚ªã©‚ğ“¥‚ñ‚Å‚à‹N“®‚µ‚È‚¢‚æ‚¤‚É‚·‚é
+                // æ•µå¯¾ã—ã¦ã„ãªã„ã‚­ãƒ£ãƒ©ãŒç½ ã‚’è¸ã‚“ã§ã‚‚èµ·å‹•ã—ãªã„ã‚ˆã†ã«ã™ã‚‹
                 return false;
             }
 
@@ -49,7 +49,7 @@ namespace Roguegard
             {
                 if (keyword == StatsKw.Speed)
                 {
-                    // s“®•s‰Â
+                    // è¡Œå‹•ä¸å¯
                     value.SubValues[StatsKw.BeInhibited] = 1f;
                 }
             }

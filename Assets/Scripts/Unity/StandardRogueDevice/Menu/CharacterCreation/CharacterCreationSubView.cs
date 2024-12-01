@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -32,9 +32,9 @@ namespace RoguegardUnity
         private IButtonElementHandler intrinsicPresenter;
         private IButtonElementHandler startingItemPresenter;
         private static readonly ISelectOption intrinsicHeader
-            = SelectOption.Create<MMgr, MArg>("ŒÅ—L”\—Í", delegate { });
+            = SelectOption.Create<MMgr, MArg>("å›ºæœ‰èƒ½åŠ›", delegate { });
         private static readonly ISelectOption startingItemHeader
-            = SelectOption.Create<MMgr, MArg>("‰ŠúƒAƒCƒeƒ€", delegate { });
+            = SelectOption.Create<MMgr, MArg>("åˆæœŸã‚¢ã‚¤ãƒ†ãƒ ", delegate { });
         private MenuRogueObjSpriteRenderer spriteRenderer;
         private ISelectOption raceSelectOption;
         private ISelectOption appearanceSelectOption;
@@ -96,7 +96,7 @@ namespace RoguegardUnity
                 {
                     GetName = (element, manager, arg) =>
                     {
-                        if (element == null) return "+ ŒÅ—L”\—Í‚ğ’Ç‰Á";
+                        if (element == null) return "+ å›ºæœ‰èƒ½åŠ›ã‚’è¿½åŠ ";
                         else return element.Name;
                     },
                     HandleClick = (element, manager, arg) =>
@@ -110,7 +110,7 @@ namespace RoguegardUnity
                 {
                     GetName = (element, manager, arg) =>
                     {
-                        if (element == null) return "+ ŒÅ—L”\—Í‚ğ’Ç‰Á";
+                        if (element == null) return "+ å›ºæœ‰èƒ½åŠ›ã‚’è¿½åŠ ";
                         else return element.Name;
                     },
                     HandleClick = (element, manager, arg) =>
@@ -165,7 +165,7 @@ namespace RoguegardUnity
                 var itemButton = Instantiate(_elementButtonPrefab, _secondParent);
                 SetTransform((RectTransform)itemButton.transform, ref sumHeight, ref odd);
                 itemButton.Initialize(this);
-                itemButton.SetItem(intrinsicPresenter, null, "+ ŒÅ—L”\—Í‚ğ’Ç‰Á");
+                itemButton.SetItem(intrinsicPresenter, null, "+ å›ºæœ‰èƒ½åŠ›ã‚’è¿½åŠ ");
                 itemObjects.Add(itemButton);
                 if (odd) { sumHeight += ((RectTransform)itemButton.transform).rect.height; }
             }
@@ -193,7 +193,7 @@ namespace RoguegardUnity
                 var itemButton = Instantiate(_elementButtonPrefab, _secondParent);
                 SetTransform((RectTransform)itemButton.transform, ref sumHeight, ref odd);
                 itemButton.Initialize(this);
-                itemButton.SetItem(startingItemPresenter, null, "+ ‰ŠúƒAƒCƒeƒ€‚ğ’Ç‰Á");
+                itemButton.SetItem(startingItemPresenter, null, "+ åˆæœŸã‚¢ã‚¤ãƒ†ãƒ ã‚’è¿½åŠ ");
                 itemObjects.Add(itemButton);
                 if (odd) { sumHeight += ((RectTransform)itemButton.transform).rect.height; }
             }
@@ -234,8 +234,8 @@ namespace RoguegardUnity
 
             public LoadPresetMenu()
             {
-                nextMenu = new ChoicesMenuScreen("ƒ[ƒh‚·‚é‚Æ •ÒW’†‚ÌƒLƒƒƒ‰‚ÍÁ‚¦‚Ä‚µ‚Ü‚¢‚Ü‚·‚ª ‚æ‚ë‚µ‚¢‚Å‚·‚©H")
-                    .Option("ƒ[ƒh‚·‚é", Load)
+                nextMenu = new ChoicesMenuScreen("ãƒ­ãƒ¼ãƒ‰ã™ã‚‹ã¨ ç·¨é›†ä¸­ã®ã‚­ãƒ£ãƒ©ã¯æ¶ˆãˆã¦ã—ã¾ã„ã¾ã™ãŒ ã‚ˆã‚ã—ã„ã§ã™ã‹ï¼Ÿ")
+                    .Option("ãƒ­ãƒ¼ãƒ‰ã™ã‚‹", Load)
                     .Back();
 
                 view = new()

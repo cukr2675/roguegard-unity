@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,12 +7,12 @@ namespace Roguegard
     internal class AStarPathBuilderNode
     {
         /// <summary>
-        /// true �̂Ƃ��A���̃m�[�h�̏�ɂ͈ړ��ł��Ȃ�
+        /// true のとき、このノードの上には移動できない
         /// </summary>
         public bool HasCollider { get; set; }
 
         /// <summary>
-        /// true �̂Ƃ��A���̃m�[�h�ׂ̗��΂߈ړ��Œʉ߂ł��Ȃ�
+        /// true のとき、このノードの隣を斜め移動で通過できない
         /// </summary>
         public bool HasCornerCollider { get; set; }
 

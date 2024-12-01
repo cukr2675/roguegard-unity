@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -55,7 +55,7 @@ namespace RuntimeDotter
                 for (int x = 0; x < Size.x; x++)
                 {
                     if (pixels[y][x] < 0 || paletteSize <= pixels[y][x]) throw new System.ArgumentException(
-                        $"{nameof(pixels)} ‚É 0 –¢–‚Ü‚½‚Í {paletteSize} ˆÈã‚Ìƒhƒbƒg‚ª‘¶İ‚µ‚Ü‚·B");
+                        $"{nameof(pixels)} ã« 0 æœªæº€ã¾ãŸã¯ {paletteSize} ä»¥ä¸Šã®ãƒ‰ãƒƒãƒˆãŒå­˜åœ¨ã—ã¾ã™ã€‚");
                 }
             }
         }
@@ -79,8 +79,8 @@ namespace RuntimeDotter
 
         public void CopyTo(DotterBoard board)
         {
-            if (board.Size != Size) throw new System.ArgumentException($"ˆø”‚Ì {nameof(DotterBoard)} ‚ÆƒTƒCƒY‚ªˆê’v‚µ‚Ü‚¹‚ñB");
-            if (board.PaletteSize != PaletteSize) throw new System.ArgumentException($"ˆø”‚Ì {nameof(DotterBoard)} ‚ÆƒpƒŒƒbƒgƒTƒCƒY‚ªˆê’v‚µ‚Ü‚¹‚ñB");
+            if (board.Size != Size) throw new System.ArgumentException($"å¼•æ•°ã® {nameof(DotterBoard)} ã¨ã‚µã‚¤ã‚ºãŒä¸€è‡´ã—ã¾ã›ã‚“ã€‚");
+            if (board.PaletteSize != PaletteSize) throw new System.ArgumentException($"å¼•æ•°ã® {nameof(DotterBoard)} ã¨ãƒ‘ãƒ¬ãƒƒãƒˆã‚µã‚¤ã‚ºãŒä¸€è‡´ã—ã¾ã›ã‚“ã€‚");
 
             for (int y = 0; y < Size.y; y++)
             {
@@ -94,7 +94,7 @@ namespace RuntimeDotter
         public void SetPixelsTo(Texture2D texture, IReadOnlyList<ShiftableColor> palette)
         {
             if (palette.Count != PaletteSize) throw new System.ArgumentException(
-                $"{nameof(palette)} ‚Ì—v‘f” ({palette.Count}) ‚ª {nameof(PaletteSize)} ({PaletteSize}) ‚Æˆê’v‚µ‚Ü‚¹‚ñB");
+                $"{nameof(palette)} ã®è¦ç´ æ•° ({palette.Count}) ãŒ {nameof(PaletteSize)} ({PaletteSize}) ã¨ä¸€è‡´ã—ã¾ã›ã‚“ã€‚");
 
             if (buffer == null || buffer.Length != texture.width * texture.height)
             {
@@ -115,7 +115,7 @@ namespace RuntimeDotter
         public void SetPixelsTo(Texture2D texture, System.ReadOnlySpan<ShiftableColor> palette)
         {
             if (palette.Length != PaletteSize) throw new System.ArgumentException(
-                $"{nameof(palette)} ‚Ì—v‘f” ({palette.Length}) ‚ª {nameof(PaletteSize)} ({PaletteSize}) ‚Æˆê’v‚µ‚Ü‚¹‚ñB");
+                $"{nameof(palette)} ã®è¦ç´ æ•° ({palette.Length}) ãŒ {nameof(PaletteSize)} ({PaletteSize}) ã¨ä¸€è‡´ã—ã¾ã›ã‚“ã€‚");
 
             if (buffer == null || buffer.Length != texture.width * texture.height)
             {

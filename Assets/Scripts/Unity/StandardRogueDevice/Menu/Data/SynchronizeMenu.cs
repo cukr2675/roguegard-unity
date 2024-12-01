@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -24,7 +24,7 @@ namespace RoguegardUnity
         public override void OpenScreen(in MMgr manager, in MArg arg)
         {
             beforeProgress = 0f;
-            view.ShowTemplate("¢ŠE‚Æ“¯Šú’†c", manager, arg)
+            view.ShowTemplate("ä¸–ç•Œã¨åŒæœŸä¸­â€¦", manager, arg)
                 ?
                 .Append(ProgressBarViewWidget.CreateOption<MMgr, MArg>((manager, arg) =>
                 {
@@ -34,7 +34,7 @@ namespace RoguegardUnity
                     return Progress;
                 }))
 
-                .AppendSelectOption("“¯Šú‚ğ’†~", (manager, arg) => Interrupt = true)
+                .AppendSelectOption("åŒæœŸã‚’ä¸­æ­¢", (manager, arg) => Interrupt = true)
 
                 .Build();
         }

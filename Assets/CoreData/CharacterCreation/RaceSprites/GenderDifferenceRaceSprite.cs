@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,7 +7,7 @@ using SDSSprite;
 namespace Roguegard.CharacterCreation
 {
     /// <summary>
-    /// «•Ê‚É‚æ‚Á‚ÄŒ©‚½–Ú‚ğ•Ï‚¦‚é <see cref="IRaceOptionSprite"/>
+    /// æ€§åˆ¥ã«ã‚ˆã£ã¦è¦‹ãŸç›®ã‚’å¤‰ãˆã‚‹ <see cref="IRaceOptionSprite"/>
     /// </summary>
     public class GenderDifferenceRaceSprite : ReferableScript, IRaceOptionSprite
     {

@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -55,7 +55,7 @@ namespace ListingMF
         {
             if (!cursorInstance)
             {
-                // ƒJ[ƒ\ƒ‹ƒIƒuƒWƒFƒNƒg‚ªíœ‚³‚ê‚½‚çÄ¶¬‚·‚é
+                // ã‚«ãƒ¼ã‚½ãƒ«ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãŒå‰Šé™¤ã•ã‚ŒãŸã‚‰å†ç”Ÿæˆã™ã‚‹
                 cursorInstance = Instantiate(_cursorPrefab);
             }
 

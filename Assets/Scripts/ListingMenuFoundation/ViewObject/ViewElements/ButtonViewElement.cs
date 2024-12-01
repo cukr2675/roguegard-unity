@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -70,7 +70,7 @@ namespace ListingMF
                 }
             }
 
-            // ‘O‰ñ‚ÌƒXƒ^ƒCƒ‹‚ğ‰ğœ‚·‚é
+            // å‰å›ã®ã‚¹ã‚¿ã‚¤ãƒ«ã‚’è§£é™¤ã™ã‚‹
             SetStyle(null);
 
             var newStyle = handler.GetStyle(element, Manager, Arg);
@@ -82,13 +82,13 @@ namespace ListingMF
         {
             if (newStyle == style) return;
 
-            // ‚±‚Ì’l‚ª true ‚Ì‚Æ‚«V‚µ‚¢ƒXƒ^ƒCƒ‹‚Ì“K—pA false ‚Ì‚Æ‚«İ’èÏ‚İƒXƒ^ƒCƒ‹‚Ì‰Šú‰»
+            // ã“ã®å€¤ãŒ true ã®ã¨ãæ–°ã—ã„ã‚¹ã‚¿ã‚¤ãƒ«ã®é©ç”¨ã€ false ã®ã¨ãè¨­å®šæ¸ˆã¿ã‚¹ã‚¿ã‚¤ãƒ«ã®åˆæœŸåŒ–
             var apply = newStyle != null;
 
-            // V‚µ‚¢ƒXƒ^ƒCƒ‹‚ğ•Û
+            // æ–°ã—ã„ã‚¹ã‚¿ã‚¤ãƒ«ã‚’ä¿æŒ
             if (apply) { style = newStyle; }
 
-            // ƒXƒ^ƒCƒ‹‚ğƒXƒy[ƒX‹æØ‚è‚Åˆ—‚·‚é
+            // ã‚¹ã‚¿ã‚¤ãƒ«ã‚’ã‚¹ãƒšãƒ¼ã‚¹åŒºåˆ‡ã‚Šã§å‡¦ç†ã™ã‚‹
             for (int i = 0; i < style.Length; i++)
             {
                 if ((i == 0 || style[i - 1] == ' ') && style[i] != ' ')
@@ -98,24 +98,24 @@ namespace ListingMF
                     if (styleItemLength == -1) { styleItemLength = style.Length - styleItemStart; }
                     i = styleItemStart + styleItemLength;
 
-                    // ƒXƒy[ƒX‹æØ‚è‚Åæ“¾‚µ‚½ƒXƒ^ƒCƒ‹–¼
+                    // ã‚¹ãƒšãƒ¼ã‚¹åŒºåˆ‡ã‚Šã§å–å¾—ã—ãŸã‚¹ã‚¿ã‚¤ãƒ«å
                     var styleItem = style.AsSpan(styleItemStart, styleItemLength);
 
-                    // AnimationController ‚ÌƒŒƒCƒ„[‚Ìd‚İ‚ğƒXƒ^ƒCƒ‹–¼‚Å•ÏX‚·‚é
+                    // AnimationController ã®ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®é‡ã¿ã‚’ã‚¹ã‚¿ã‚¤ãƒ«åã§å¤‰æ›´ã™ã‚‹
                     if (!styleItem.Contains(":".AsSpan(), StringComparison.CurrentCulture) && animator != null)
                     {
                         for (int j = 0; j < animator.layerCount; j++)
                         {
                             if (EqualsIgnoreWhiteSpace(animator.GetLayerName(j), styleItem))
                             {
-                                // ƒXƒ^ƒCƒ‹–¼‚Æˆê’v‚·‚éƒŒƒCƒ„[‚Ìd‚İ‚ğXV‚·‚é
+                                // ã‚¹ã‚¿ã‚¤ãƒ«åã¨ä¸€è‡´ã™ã‚‹ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®é‡ã¿ã‚’æ›´æ–°ã™ã‚‹
                                 var weight = apply ? 1f : 0f;
                                 animator.SetLayerWeight(j, weight);
                             }
                         }
                     }
 
-                    // ƒL[ƒoƒCƒ“ƒh
+                    // ã‚­ãƒ¼ãƒã‚¤ãƒ³ãƒ‰
                     if (styleItem.StartsWith("click:"))
                     {
                         if (apply) { Parent.Bind(styleItem.Slice("click:".Length), clickActionPerformed); }
@@ -124,7 +124,7 @@ namespace ListingMF
                 }
             }
 
-            // İ’èÏ‚İƒXƒ^ƒCƒ‹‚ğ”jŠü
+            // è¨­å®šæ¸ˆã¿ã‚¹ã‚¿ã‚¤ãƒ«ã‚’ç ´æ£„
             if (!apply) { style = null; }
         }
 
@@ -133,7 +133,7 @@ namespace ListingMF
             var styleIndex = 0;
             for (int i = 0; i < layerName.Length; i++)
             {
-                if (layerName[i] == ' ') continue; // ƒŒƒCƒ„[–¼‚Ì‹ó”’‚Í‚È‚¢‚à‚Ì‚Æ‚µ‚Ä”»’è‚·‚é
+                if (layerName[i] == ' ') continue; // ãƒ¬ã‚¤ãƒ¤ãƒ¼åã®ç©ºç™½ã¯ãªã„ã‚‚ã®ã¨ã—ã¦åˆ¤å®šã™ã‚‹
 
                 if (layerName[i] != style[styleIndex]) return false;
 
@@ -144,7 +144,7 @@ namespace ListingMF
 
         private void OnDestroy()
         {
-            // ƒL[ƒoƒCƒ“ƒh‚ğ‰ğœ‚·‚é‚½‚ß‚ÉƒXƒ^ƒCƒ‹‚ğƒŠƒZƒbƒg
+            // ã‚­ãƒ¼ãƒã‚¤ãƒ³ãƒ‰ã‚’è§£é™¤ã™ã‚‹ãŸã‚ã«ã‚¹ã‚¿ã‚¤ãƒ«ã‚’ãƒªã‚»ãƒƒãƒˆ
             SetStyle(null);
         }
     }

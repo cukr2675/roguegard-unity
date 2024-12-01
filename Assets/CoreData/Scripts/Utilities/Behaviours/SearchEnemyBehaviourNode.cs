@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,7 +13,7 @@ namespace Roguegard
             if (self.Location == null) return RogueObjUpdaterContinueType.Continue;
             if (!self.Location.Space.TryGetRoomView(self.Position, out var room, out _)) { room = new RectInt(); }
 
-            // “G‚ªƒvƒŒƒCƒ„[‚ð•Ç‰z‚µ‚ÉŽ@’m‚µ‚Ä‹ß‚Ã‚¢‚Ä‚µ‚Ü‚í‚È‚¢‚æ‚¤‚ÉŽ‹ŠE‹——£‚ÍŒÅ’è
+            // æ•µãŒãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’å£è¶Šã—ã«å¯ŸçŸ¥ã—ã¦è¿‘ã¥ã„ã¦ã—ã¾ã‚ãªã„ã‚ˆã†ã«è¦–ç•Œè·é›¢ã¯å›ºå®š
             var visibleRadius = RoguegardSettings.DefaultVisibleRadius;
             var sqrVisibleRadius = visibleRadius * visibleRadius;
 
@@ -25,19 +25,19 @@ namespace Roguegard
                 var obj = spaceObjs[i];
                 if (obj == null || !StatsEffectedValues.AreVS(self, obj)) continue;
 
-                // Ž‹ŠEŠO‚Ì“G‚ðœŠO‚·‚é
+                // è¦–ç•Œå¤–ã®æ•µã‚’é™¤å¤–ã™ã‚‹
                 var sqrDistance = (obj.Position - self.Position).sqrMagnitude;
                 if (sqrDistance >= sqrVisibleRadius && !room.Contains(obj.Position)) continue;
 
                 if (sqrDistance < nearestSqrDistance)
                 {
-                    // Å’Z‹——£‚ðXV‚µ‚½‚Æ‚«A“G‚ðÝ’è‚·‚é
+                    // æœ€çŸ­è·é›¢ã‚’æ›´æ–°ã—ãŸã¨ãã€æ•µã‚’è¨­å®šã™ã‚‹
                     nearestSqrDistance = sqrDistance;
                     nearestEnemy = obj;
                 }
             }
 
-            // Å‚à‹ß‚¢“G‚ð’ÇÕ‘ÎÛ‚ÉÝ’è‚·‚é
+            // æœ€ã‚‚è¿‘ã„æ•µã‚’è¿½è·¡å¯¾è±¡ã«è¨­å®šã™ã‚‹
             self.Main.Stats.TargetObj = nearestEnemy;
             return RogueObjUpdaterContinueType.Continue;
         }

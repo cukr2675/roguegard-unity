@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,7 +9,7 @@ namespace Roguegard.Extensions
     public static class RoguePartyUtility
     {
         /// <summary>
-        /// ƒ^[ƒQƒbƒgƒIƒuƒWƒFƒNƒg‚Ì—×‚ÖˆÚ“®‚·‚éB
+        /// ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®éš£ã¸ç§»å‹•ã™ã‚‹ã€‚
         /// </summary>
         public static bool LocateNextToObj(
             this IChangeStateRogueMethodCaller method, RogueObj self, RogueObj user, float activationDepth, RogueObj target)
@@ -25,7 +25,7 @@ namespace Roguegard.Extensions
         }
 
         /// <summary>
-        /// ‚¢‚¸‚ê‚©‚Ìƒp[ƒeƒBƒƒ“ƒo[‚Ì—×‚ÖˆÚ“®‚·‚éB‚½‚¾‚µƒŠ[ƒ_[‚Æ“¯‚¶‹óŠÔ‚ÉŒÀ’è‚³‚ê‚éB
+        /// ã„ãšã‚Œã‹ã®ãƒ‘ãƒ¼ãƒ†ã‚£ãƒ¡ãƒ³ãƒãƒ¼ã®éš£ã¸ç§»å‹•ã™ã‚‹ã€‚ãŸã ã—ãƒªãƒ¼ãƒ€ãƒ¼ã¨åŒã˜ç©ºé–“ã«é™å®šã•ã‚Œã‚‹ã€‚
         /// </summary>
         public static bool LocateNextToAnyMember(
             this IChangeStateRogueMethodCaller method, RogueObj self, RogueObj user, float activationDepth, RogueParty party)
@@ -43,7 +43,7 @@ namespace Roguegard.Extensions
         }
 
         /// <summary>
-        /// ‚¢‚¸‚ê‚©‚Ìƒp[ƒeƒBƒƒ“ƒo[‚Ì—×‚ÖˆÚ“®‚·‚éB‚½‚¾‚µƒŠ[ƒ_[‚Æ“¯‚¶‹óŠÔ‚ÉŒÀ’è‚³‚ê‚éB
+        /// ã„ãšã‚Œã‹ã®ãƒ‘ãƒ¼ãƒ†ã‚£ãƒ¡ãƒ³ãƒãƒ¼ã®éš£ã¸ç§»å‹•ã™ã‚‹ã€‚ãŸã ã—ãƒªãƒ¼ãƒ€ãƒ¼ã¨åŒã˜ç©ºé–“ã«é™å®šã•ã‚Œã‚‹ã€‚
         /// </summary>
         public static bool TryLocateNextToAnyMember(RogueObj self, RogueParty party)
         {
@@ -84,7 +84,7 @@ namespace Roguegard.Extensions
                     }
                     if (!method.Locate(member, user, location, activationDepth) && !SpaceUtility.TryLocate(member, location))
                     {
-                        Debug.LogError($"{member} ‚ÌˆÚ“®‚É¸”s‚µ‚Ü‚µ‚½B");
+                        Debug.LogError($"{member} ã®ç§»å‹•ã«å¤±æ•—ã—ã¾ã—ãŸã€‚");
                     }
                 }
             }
@@ -110,7 +110,7 @@ namespace Roguegard.Extensions
                     }
                     if (!SpaceUtility.TryLocate(member, location))
                     {
-                        Debug.LogError($"{member} ‚ÌˆÚ“®‚É¸”s‚µ‚Ü‚µ‚½B");
+                        Debug.LogError($"{member} ã®ç§»å‹•ã«å¤±æ•—ã—ã¾ã—ãŸã€‚");
                     }
                 }
             }
@@ -118,13 +118,13 @@ namespace Roguegard.Extensions
         }
 
         /// <summary>
-        /// ƒ_ƒ“ƒWƒ‡ƒ“‚É“Ë“üE’Eo‚µ‚½‚Æ‚«‚Ìˆ—BƒGƒtƒFƒNƒg‚Ì‰ğœEƒŒƒxƒ‹‰Šú‰»E‘S‰ñ•œ‚ğ‚¨‚±‚È‚¤B
+        /// ãƒ€ãƒ³ã‚¸ãƒ§ãƒ³ã«çªå…¥ãƒ»è„±å‡ºã—ãŸã¨ãã®å‡¦ç†ã€‚ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã®è§£é™¤ãƒ»ãƒ¬ãƒ™ãƒ«åˆæœŸåŒ–ãƒ»å…¨å›å¾©ã‚’ãŠã“ãªã†ã€‚
         /// </summary>
         public static void Reset(RogueParty party, IRogueEffect leaderEffect)
         {
             var partyMembers = party.Members;
             {
-                // ƒŠ[ƒ_[—pƒGƒtƒFƒNƒg‚ğİ’è
+                // ãƒªãƒ¼ãƒ€ãƒ¼ç”¨ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã‚’è¨­å®š
                 var leader = partyMembers[0];
                 leader.Main.RogueEffects.AddOpen(leader, leaderEffect);
             }
@@ -133,21 +133,21 @@ namespace Roguegard.Extensions
                 var member = partyMembers[i];
                 if (i != 0)
                 {
-                    // ƒŠ[ƒ_[ˆÈŠO‚ÍƒGƒtƒFƒNƒg‚ğ‰ğœ
+                    // ãƒªãƒ¼ãƒ€ãƒ¼ä»¥å¤–ã¯ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã‚’è§£é™¤
                     member.Main.UpdatePlayerLeaderInfo(member, null);
                 }
 
                 DungeonFloorCloserStateInfo.CloseAndRemoveNull(member, true);
 
-                // ƒŒƒxƒ‹K“¾ƒXƒLƒ‹‚ğ–Y‚ê‚³‚¹‚é
+                // ãƒ¬ãƒ™ãƒ«ç¿’å¾—ã‚¹ã‚­ãƒ«ã‚’å¿˜ã‚Œã•ã›ã‚‹
                 member.Main.Skills.Clear(MainInfoSetType.Base);
                 member.Main.Skills.Clear(MainInfoSetType.Polymorph);
 
-                // ƒŒƒxƒ‹‚ğ‰Šú‰»
+                // ãƒ¬ãƒ™ãƒ«ã‚’åˆæœŸåŒ–
                 RoguegardCharacterCreationSettings.LevelInfoInitializer.InitializeLv(member, 0);
                 RoguegardCharacterCreationSettings.LevelInfoInitializer.InitializeLv(member, 1);
 
-                // ’TõŠJn‘O‚É‘S‰ñ•œ‚·‚é
+                // æ¢ç´¢é–‹å§‹å‰ã«å…¨å›å¾©ã™ã‚‹
                 member.Main.Stats.Reset(member);
 
                 member.Main.Stats.Direction = RogueDirection.Down;

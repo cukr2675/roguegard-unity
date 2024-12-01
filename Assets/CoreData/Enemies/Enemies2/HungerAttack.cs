@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,7 +14,7 @@ namespace Roguegard
 
         public override string Name => MainInfoKw.Attack.Name;
         [System.NonSerialized] private string _caption;
-        public override string Caption => _caption ??= $"³–Ê‚Ì“G‚ÉUŒ‚—Íƒ_ƒ[ƒW\n{_affectRate * 100f:D}% ‚Å–• “x‚ğ {_nutritionDamage} ’á‰º";
+        public override string Caption => _caption ??= $"æ­£é¢ã®æ•µã«æ”»æ’ƒåŠ›ãƒ€ãƒ¡ãƒ¼ã‚¸\n{_affectRate * 100f:D}% ã§æº€è…¹åº¦ã‚’ {_nutritionDamage} ä½ä¸‹";
 
         public override IRogueMethodTarget Target => ForEnemyRogueMethodTarget.Instance;
         public override IRogueMethodRange Range => FrontRogueMethodRange.Instance;
@@ -25,13 +25,13 @@ namespace Roguegard
             if (RaycastAssert.RequireTarget(FrontRogueMethodRange.Instance, self, arg, out var target)) return false;
             MainCharacterWorkUtility.TryAddAttack(self);
 
-            // UŒ‚—Íƒ_ƒ[ƒW‚ÌUŒ‚
+            // æ”»æ’ƒåŠ›ãƒ€ãƒ¡ãƒ¼ã‚¸ã®æ”»æ’ƒ
             using var damageValue = EffectableValue.Get();
             StatsEffectedValues.GetATK(self, damageValue);
             var hit = this.TryHurt(target, self, activationDepth, damageValue);
             var defeated = this.TryDefeat(target, self, activationDepth, damageValue);
 
-            // “|‚ê‚Ä‚¢‚È‚¯‚ê‚ÎŠm—¦‚Å–• “x’á‰º
+            // å€’ã‚Œã¦ã„ãªã‘ã‚Œã°ç¢ºç‡ã§æº€è…¹åº¦ä½ä¸‹
             if (hit && !defeated)
             {
                 var randomValue = RogueRandom.Primary.NextFloat(0f, 1f);
@@ -51,7 +51,7 @@ namespace Roguegard
 
         public override int GetATK(RogueObj self, out bool additionalEffect)
         {
-            // UŒ‚—Íƒ_ƒ[ƒW‚ÌUŒ‚ + –• “x’á‰º
+            // æ”»æ’ƒåŠ›ãƒ€ãƒ¡ãƒ¼ã‚¸ã®æ”»æ’ƒ + æº€è…¹åº¦ä½ä¸‹
             using var damageValue = EffectableValue.Get();
             StatsEffectedValues.GetATK(self, damageValue);
             var hpDamage = Mathf.FloorToInt(damageValue.MainValue);

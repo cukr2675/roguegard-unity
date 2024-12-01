@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -30,12 +30,12 @@ namespace ListingMF
 
         private const char breakCharacter = '\n';
 
-        /// <param name="pageTurnHiddenLinkID">ƒeƒLƒXƒg‚ªÅ‘ås”‚©‚ç‰º‚É‚Í‚İo‚½‚Æ‚«”­s‚³‚ê‚éƒŠƒ“ƒNID–¼</param>
-        /// <param name="eofHiddenLinkID">ƒeƒLƒXƒg‚ÌI’[‚Ì•\¦‚ªŠ®—¹‚µ‚½‚Æ‚«”­s‚³‚ê‚éƒŠƒ“ƒNID</param>
+        /// <param name="pageTurnHiddenLinkID">ãƒ†ã‚­ã‚¹ãƒˆãŒæœ€å¤§è¡Œæ•°ã‹ã‚‰ä¸‹ã«ã¯ã¿å‡ºãŸã¨ãç™ºè¡Œã•ã‚Œã‚‹ãƒªãƒ³ã‚¯IDå</param>
+        /// <param name="eofHiddenLinkID">ãƒ†ã‚­ã‚¹ãƒˆã®çµ‚ç«¯ã®è¡¨ç¤ºãŒå®Œäº†ã—ãŸã¨ãç™ºè¡Œã•ã‚Œã‚‹ãƒªãƒ³ã‚¯ID</param>
         public TextTypingEffect(
             TMP_Text text, int maxLineCount, string pageTurnHiddenLinkID, string eofHiddenLinkID, MessageBox.ReachHiddenLinkEvent onReachHiddenLink)
         {
-            if (text.lineSpacing != 0f) { Debug.LogWarning($"{nameof(text.lineSpacing)} != 0 ‚ÍƒTƒ|[ƒg‚³‚ê‚Ä‚¢‚Ü‚¹‚ñB"); }
+            if (text.lineSpacing != 0f) { Debug.LogWarning($"{nameof(text.lineSpacing)} != 0 ã¯ã‚µãƒãƒ¼ãƒˆã•ã‚Œã¦ã„ã¾ã›ã‚“ã€‚"); }
 
             this.text = text;
             this.maxLineCount = maxLineCount;
@@ -44,7 +44,7 @@ namespace ListingMF
             this.onReachHiddenLink = onReachHiddenLink;
             hiddenLinkManager = new TextHiddenLinkManager();
 
-            // ƒTƒCƒYæ“¾—pƒeƒLƒXƒg‚ğİ’è‚µ‚Äˆês‚ ‚½‚è‚Ì•‚ğƒTƒ“ƒvƒŠƒ“ƒO‚·‚é
+            // ã‚µã‚¤ã‚ºå–å¾—ç”¨ãƒ†ã‚­ã‚¹ãƒˆã‚’è¨­å®šã—ã¦ä¸€è¡Œã‚ãŸã‚Šã®å¹…ã‚’ã‚µãƒ³ãƒ—ãƒªãƒ³ã‚°ã™ã‚‹
             const int samplingLineCount = 100;
             stringBuilder = new StringBuilder("_\n".Length * samplingLineCount);
             for (int i = 0; i < samplingLineCount; i++)
@@ -56,7 +56,7 @@ namespace ListingMF
             LineHeight = text.renderedHeight / samplingLineCount;
             if (LineHeight <= 0f) throw new System.InvalidOperationException();
 
-            // ‰Šú‰»
+            // åˆæœŸåŒ–
             Clear();
         }
 
@@ -104,7 +104,7 @@ namespace ListingMF
 
         public void MeshUpdate()
         {
-            // –ˆƒtƒŒ[ƒ€ŒÄ‚Ño‚·‚Æd‚¢‚Ì‚ÅXV‚Ì‚İŒÄ‚Ño‚·
+            // æ¯ãƒ•ãƒ¬ãƒ¼ãƒ å‘¼ã³å‡ºã™ã¨é‡ã„ã®ã§æ›´æ–°æ™‚ã®ã¿å‘¼ã³å‡ºã™
             if (!isDirty) return;
 
             text.SetText(stringBuilder);
@@ -125,13 +125,13 @@ namespace ListingMF
         }
 
         /// <summary>
-        /// 1s‚²‚Æ‚É•\¦
+        /// 1è¡Œã”ã¨ã«è¡¨ç¤º
         /// </summary>
         public void UpdateUI(int linePosition)
         {
             if (IsEOF) return;
 
-            // 1ƒtƒŒ[ƒ€“à‚Å1s‚·‚×‚Ä•\¦‚·‚é
+            // 1ãƒ•ãƒ¬ãƒ¼ãƒ å†…ã§1è¡Œã™ã¹ã¦è¡¨ç¤ºã™ã‚‹
             var overLineIndex = maxLineCount + linePosition;
             int maxVisibleCharacters;
             if (overLineIndex < text.textInfo.lineCount)
@@ -143,20 +143,20 @@ namespace ListingMF
                 maxVisibleCharacters = text.textInfo.characterCount;
             }
 
-            // ƒŠƒ“ƒN‚ğŒŸ’m
+            // ãƒªãƒ³ã‚¯ã‚’æ¤œçŸ¥
             while (hiddenLinkManager.ForwardDetect(maxVisibleCharacters, out var hiddenLinkID, out var linkCharacterIndex))
             {
                 text.maxVisibleCharacters = linkCharacterIndex;
                 onReachHiddenLink.Invoke(hiddenLinkID);
             }
 
-            // Ÿ‚Ìs‚ÌI‚í‚è‚Ü‚Å•\¦‚·‚é
+            // æ¬¡ã®è¡Œã®çµ‚ã‚ã‚Šã¾ã§è¡¨ç¤ºã™ã‚‹
             text.maxVisibleCharacters = maxVisibleCharacters;
 
-            // İ’è‚³‚ê‚½•¶š—ñ‚ÌI’[‚ğŒŸ’m
+            // è¨­å®šã•ã‚ŒãŸæ–‡å­—åˆ—ã®çµ‚ç«¯ã‚’æ¤œçŸ¥
             if (!IsInProgress)
             {
-                // ƒRƒ“ƒeƒLƒXƒg‚ğ‚·‚×‚Ä•\¦‚µI‚¦‚½‚çI’[ƒŠƒ“ƒNID‚ğ”­s
+                // ã‚³ãƒ³ãƒ†ã‚­ã‚¹ãƒˆã‚’ã™ã¹ã¦è¡¨ç¤ºã—çµ‚ãˆãŸã‚‰çµ‚ç«¯ãƒªãƒ³ã‚¯IDã‚’ç™ºè¡Œ
                 IsEOF = true;
                 onReachHiddenLink.Invoke(eofHiddenLinkID);
                 return;
@@ -166,16 +166,16 @@ namespace ListingMF
         }
 
         /// <summary>
-        /// ƒ^ƒCƒsƒ“ƒOƒGƒtƒFƒNƒgÄ¶
+        /// ã‚¿ã‚¤ãƒ”ãƒ³ã‚°ã‚¨ãƒ•ã‚§ã‚¯ãƒˆå†ç”Ÿ
         /// </summary>
         public void UpdateUI(int deltaVisibleCharacters, int linePosition)
         {
             if (IsEOF) return;
 
-            // ƒŠƒ“ƒN‚ğŒŸ’m
+            // ãƒªãƒ³ã‚¯ã‚’æ¤œçŸ¥
             if (hiddenLinkManager.ForwardDetect(text.maxVisibleCharacters + deltaVisibleCharacters, out var hiddenLinkID, out var linkCharacterIndex))
             {
-                // •\¦ˆÊ’u‚ª–ß‚é‚Ì‚Í–¢ƒTƒ|[ƒg
+                // è¡¨ç¤ºä½ç½®ãŒæˆ»ã‚‹ã®ã¯æœªã‚µãƒãƒ¼ãƒˆ
                 if (linkCharacterIndex < text.maxVisibleCharacters) throw new System.NotImplementedException();
 
                 text.maxVisibleCharacters = linkCharacterIndex;
@@ -183,26 +183,26 @@ namespace ListingMF
                 return;
             }
 
-            // ƒ^ƒCƒsƒ“ƒOƒGƒtƒFƒNƒg
+            // ã‚¿ã‚¤ãƒ”ãƒ³ã‚°ã‚¨ãƒ•ã‚§ã‚¯ãƒˆ
             text.maxVisibleCharacters += deltaVisibleCharacters;
 
-            // İ’è‚³‚ê‚½•¶š—ñ‚ÌI’[‚ğŒŸ’m
+            // è¨­å®šã•ã‚ŒãŸæ–‡å­—åˆ—ã®çµ‚ç«¯ã‚’æ¤œçŸ¥
             if (!IsInProgress && linePosition >= text.textInfo.lineCount - maxLineCount)
             {
-                // ƒRƒ“ƒeƒLƒXƒg‚ğ‚·‚×‚Ä•\¦‚µI‚¦‚½‚çI’[ƒŠƒ“ƒNID‚ğ”­s
+                // ã‚³ãƒ³ãƒ†ã‚­ã‚¹ãƒˆã‚’ã™ã¹ã¦è¡¨ç¤ºã—çµ‚ãˆãŸã‚‰çµ‚ç«¯ãƒªãƒ³ã‚¯IDã‚’ç™ºè¡Œ
                 IsEOF = true;
                 onReachHiddenLink.Invoke(eofHiddenLinkID);
                 return;
             }
 
-            // ƒeƒLƒXƒg‚ª‰º’[‚©‚ç‚Í‚İo‚µ‚½‚±‚Æ‚ğŒŸ’m
+            // ãƒ†ã‚­ã‚¹ãƒˆãŒä¸‹ç«¯ã‹ã‚‰ã¯ã¿å‡ºã—ãŸã“ã¨ã‚’æ¤œçŸ¥
             var overLineIndex = maxLineCount + linePosition;
             if (overLineIndex < text.textInfo.lineCount)
             {
                 var firstOverVisibleCharacterIndex = text.textInfo.lineInfo[overLineIndex].firstVisibleCharacterIndex;
                 if (text.maxVisibleCharacters >= firstOverVisibleCharacterIndex + 1)
                 {
-                    // ‚Í‚İo‚µ‚½‚ç‚Í‚İo‚µ‚½•ª‚ğ‚¢‚Á‚½‚ñÁ‚µ‚Ä‰üƒy[ƒW‚ğ”­s
+                    // ã¯ã¿å‡ºã—ãŸã‚‰ã¯ã¿å‡ºã—ãŸåˆ†ã‚’ã„ã£ãŸã‚“æ¶ˆã—ã¦æ”¹ãƒšãƒ¼ã‚¸ã‚’ç™ºè¡Œ
                     text.maxVisibleCharacters = firstOverVisibleCharacterIndex;
                     onReachHiddenLink.Invoke(pageTurnHiddenLinkID);
                 }
@@ -210,20 +210,20 @@ namespace ListingMF
         }
 
         /// <summary>
-        /// è‘O‘¤‚É‚Í‚İo‚µ‚½ƒeƒLƒXƒg‚ğíœ‚µAíœ‚µ‚½s”‚ğæ“¾‚·‚é
+        /// æ‰‹å‰å´ã«ã¯ã¿å‡ºã—ãŸãƒ†ã‚­ã‚¹ãƒˆã‚’å‰Šé™¤ã—ã€å‰Šé™¤ã—ãŸè¡Œæ•°ã‚’å–å¾—ã™ã‚‹
         /// </summary>
         public int TrimBeforeVisibleLine()
         {
-            // ‚Í‚İo‚µ‚Ä‚¢‚éƒeƒLƒXƒg‚Ì‚¤‚¿‰üsˆÈ‘O‚ğíœ‚·‚é
-            // ‰üsˆÈ~‚ğíœ‚·‚é‚Æ©“®‰üs‚É‰e‹¿‚ªo‚ÄA‚Í‚İo‚µ‚Ä‚¢‚È‚¢ƒeƒLƒXƒg‚ª•Ï‚í‚Á‚Ä‚µ‚Ü‚¤‚±‚Æ‚ª‚ ‚é
+            // ã¯ã¿å‡ºã—ã¦ã„ã‚‹ãƒ†ã‚­ã‚¹ãƒˆã®ã†ã¡æ”¹è¡Œä»¥å‰ã‚’å‰Šé™¤ã™ã‚‹
+            // æ”¹è¡Œä»¥é™ã‚’å‰Šé™¤ã™ã‚‹ã¨è‡ªå‹•æ”¹è¡Œã«å½±éŸ¿ãŒå‡ºã¦ã€ã¯ã¿å‡ºã—ã¦ã„ãªã„ãƒ†ã‚­ã‚¹ãƒˆãŒå¤‰ã‚ã£ã¦ã—ã¾ã†ã“ã¨ãŒã‚ã‚‹
 
             var characterIndex = Mathf.Clamp(text.maxVisibleCharacters - 1, 0, text.textInfo.characterCount - 1);
             var stringIndex = text.textInfo.characterInfo[characterIndex].index;
 
-            // ƒeƒLƒXƒg‚ª‰üs‚ÅI‚í‚Á‚Ä‚¢‚éê‡‚Í1s‚¾‚¯–³‹‚·‚é
+            // ãƒ†ã‚­ã‚¹ãƒˆãŒæ”¹è¡Œã§çµ‚ã‚ã£ã¦ã„ã‚‹å ´åˆã¯1è¡Œã ã‘ç„¡è¦–ã™ã‚‹
             //if (stringIndex >= 1 && text.text.Length >= stringIndex + 2 && text.text[stringIndex + 1] == breakCharacter) { stringIndex--; }
 
-            // ÅŒã‚©‚ç maxLineCount ”Ô–Ú‚Ì‰üsƒR[ƒh‚ÌˆÊ’u‚ğæ“¾‚·‚é
+            // æœ€å¾Œã‹ã‚‰ maxLineCount ç•ªç›®ã®æ”¹è¡Œã‚³ãƒ¼ãƒ‰ã®ä½ç½®ã‚’å–å¾—ã™ã‚‹
             for (int i = 0; i < maxLineCount; i++)
             {
                 if (stringIndex <= 0) break;
@@ -231,21 +231,21 @@ namespace ListingMF
                 stringIndex = text.text.LastIndexOf(breakCharacter, stringIndex - 1);
             }
 
-            // íœ‚Å‚«‚é•”•ª‚ªŒ©‚Â‚©‚ç‚È‚¢ê‡A‰½‚à‚µ‚È‚¢
+            // å‰Šé™¤ã§ãã‚‹éƒ¨åˆ†ãŒè¦‹ã¤ã‹ã‚‰ãªã„å ´åˆã€ä½•ã‚‚ã—ãªã„
             if (stringIndex <= 0) return 0;
 
-            // ƒeƒLƒXƒg‚ğíœ‚·‚éi‰üsƒR[ƒh‚àŠÜ‚ß‚Äíœj
-            MeshUpdate(); // ƒeƒLƒXƒg‚Ìs”‚ğXV‚·‚é
-            var beforeLineCount = text.textInfo.lineCount; // íœ‘O‚Éæ“¾
+            // ãƒ†ã‚­ã‚¹ãƒˆã‚’å‰Šé™¤ã™ã‚‹ï¼ˆæ”¹è¡Œã‚³ãƒ¼ãƒ‰ã‚‚å«ã‚ã¦å‰Šé™¤ï¼‰
+            MeshUpdate(); // ãƒ†ã‚­ã‚¹ãƒˆã®è¡Œæ•°ã‚’æ›´æ–°ã™ã‚‹
+            var beforeLineCount = text.textInfo.lineCount; // å‰Šé™¤å‰ã«å–å¾—
             Remove(0, stringIndex + 1);
-            MeshUpdate(); // ƒeƒLƒXƒg‚Ìs”‚ğXV‚·‚é
-            var removedLineCount = beforeLineCount - text.textInfo.lineCount; // íœ‚µ‚½s”‚ğæ“¾
+            MeshUpdate(); // ãƒ†ã‚­ã‚¹ãƒˆã®è¡Œæ•°ã‚’æ›´æ–°ã™ã‚‹
+            var removedLineCount = beforeLineCount - text.textInfo.lineCount; // å‰Šé™¤ã—ãŸè¡Œæ•°ã‚’å–å¾—
 
             return removedLineCount;
         }
 
         /// <summary>
-        /// w’è‚ÌƒŠƒ“ƒNID‚ÌÅ‰‚ÌoŒ»ˆÊ’u‚©‚çè‘O‚ğíœ‚µAˆê•”‚Å‚àíœ‚µ‚½s”‚ğæ“¾‚·‚é
+        /// æŒ‡å®šã®ãƒªãƒ³ã‚¯IDã®æœ€åˆã®å‡ºç¾ä½ç½®ã‹ã‚‰æ‰‹å‰ã‚’å‰Šé™¤ã—ã€ä¸€éƒ¨ã§ã‚‚å‰Šé™¤ã—ãŸè¡Œæ•°ã‚’å–å¾—ã™ã‚‹
         /// </summary>
         public int TrimBeforeFirstLinkID(string hiddenLinkID)
         {
@@ -254,15 +254,15 @@ namespace ListingMF
             var linkCharacterInfo = text.textInfo.characterInfo[linkCharacterIndex];
             var linkStringIndex = linkCharacterInfo.index;
 
-            // ƒeƒLƒXƒg‚ğíœ‚·‚é
-            MeshUpdate(); // ƒeƒLƒXƒg‚Ìs”‚ğXV‚·‚é
-            var beforeLineCount = text.textInfo.lineCount; // íœ‘O‚Éæ“¾
+            // ãƒ†ã‚­ã‚¹ãƒˆã‚’å‰Šé™¤ã™ã‚‹
+            MeshUpdate(); // ãƒ†ã‚­ã‚¹ãƒˆã®è¡Œæ•°ã‚’æ›´æ–°ã™ã‚‹
+            var beforeLineCount = text.textInfo.lineCount; // å‰Šé™¤å‰ã«å–å¾—
             Remove(0, linkStringIndex);
             SeekToStartOfText();
-            MeshUpdate(); // ƒeƒLƒXƒg‚Ìs”‚ğXV‚·‚é
-            var removedLineCount = beforeLineCount - text.textInfo.lineCount; // íœ‚µ‚½s”‚ğæ“¾
+            MeshUpdate(); // ãƒ†ã‚­ã‚¹ãƒˆã®è¡Œæ•°ã‚’æ›´æ–°ã™ã‚‹
+            var removedLineCount = beforeLineCount - text.textInfo.lineCount; // å‰Šé™¤ã—ãŸè¡Œæ•°ã‚’å–å¾—
 
-            // ƒŠƒ“ƒN‚ªn’[‚Ü‚½‚ÍI’[‚Å‚È‚¢ˆÊ’u‚É‚ ‚éê‡Aˆê•”‚ğíœ‚µ‚½s‚Æ‚µ‚Ä‰ÁZ
+            // ãƒªãƒ³ã‚¯ãŒå§‹ç«¯ã¾ãŸã¯çµ‚ç«¯ã§ãªã„ä½ç½®ã«ã‚ã‚‹å ´åˆã€ä¸€éƒ¨ã‚’å‰Šé™¤ã—ãŸè¡Œã¨ã—ã¦åŠ ç®—
             var linkCharacterLineInfo = text.textInfo.lineInfo[linkCharacterInfo.lineNumber];
             if (linkCharacterLineInfo.firstVisibleCharacterIndex != linkCharacterIndex ||
                 linkCharacterLineInfo.lastVisibleCharacterIndex != linkCharacterIndex)
@@ -274,7 +274,7 @@ namespace ListingMF
         }
 
         /// <summary>
-        /// Œ»İ‚Ì•\¦”ÍˆÍ‚ÌƒeƒLƒXƒg‚ğíœ‚·‚é
+        /// ç¾åœ¨ã®è¡¨ç¤ºç¯„å›²ã®ãƒ†ã‚­ã‚¹ãƒˆã‚’å‰Šé™¤ã™ã‚‹
         /// </summary>
         public void TrimBeforeVisibleCharacter()
         {
@@ -284,20 +284,20 @@ namespace ListingMF
         }
 
         /// <summary>
-        /// Œrü‚ğ•¶š‚Ìˆê‚Â‚Æ‚·‚é•û–@
+        /// ç½«ç·šã‚’æ–‡å­—ã®ä¸€ã¤ã¨ã™ã‚‹æ–¹æ³•
         /// </summary>
         private void SetUpHorizontalRule()
         {
             var faceInfo = text.font.faceInfo;
-            faceInfo.lineHeight = 66; // Œrü‚Ì—L–³‚Ås‚ª‚¸‚ê‚È‚¢’l‚É’²®‚·‚é
+            faceInfo.lineHeight = 66; // ç½«ç·šã®æœ‰ç„¡ã§è¡ŒãŒãšã‚Œãªã„å€¤ã«èª¿æ•´ã™ã‚‹
 
-            const int hrCharacter = -1; // Œrü‚É‚·‚é•¶šî•ñ‚ğw’è
+            const int hrCharacter = -1; // ç½«ç·šã«ã™ã‚‹æ–‡å­—æƒ…å ±ã‚’æŒ‡å®š
             var character = text.font.characterTable[hrCharacter];
             var metrics = character.glyph.metrics;
-            metrics.width = 1e+10f; // Œrü‚Ì‰¡•‚Í‚±‚ê‚Æ•¶š”‚Å’²®‚·‚é
+            metrics.width = 1e+10f; // ç½«ç·šã®æ¨ªå¹…ã¯ã“ã‚Œã¨æ–‡å­—æ•°ã§èª¿æ•´ã™ã‚‹
             metrics.height = 1e+9f;
             character.glyph.metrics = metrics;
-            character.scale = 1e-8f; // glyphTable[].scale ‚Æ‚Í•Ê•¨‚È‚Ì‚Å’ˆÓ
+            character.scale = 1e-8f; // glyphTable[].scale ã¨ã¯åˆ¥ç‰©ãªã®ã§æ³¨æ„
         }
     }
 }

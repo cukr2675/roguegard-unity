@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -27,7 +27,7 @@ namespace Roguegard
                 if (postboxInfo == null) return RogueObjUpdaterContinueType.Continue;
             }
 
-            // ŠK‘w‚ğˆÚ“®‚µ‚½‚ç”zMI—¹
+            // éšå±¤ã‚’ç§»å‹•ã—ãŸã‚‰é…ä¿¡çµ‚äº†
             if (postLocation != null && postLocation != self.Location)
             {
                 if (post != null)
@@ -39,10 +39,10 @@ namespace Roguegard
                 postLocation = null;
             }
 
-            // “¯‚¶ŠK‘w‚Å‚Íˆê‰ñ‚µ‚©“Še‚µ‚È‚¢
+            // åŒã˜éšå±¤ã§ã¯ä¸€å›ã—ã‹æŠ•ç¨¿ã—ãªã„
             if (postLocation != null) return RogueObjUpdaterContinueType.Continue;
 
-            // ƒNƒGƒXƒg’†‚Ì‚İ˜^‰æ‚·‚é
+            // ã‚¯ã‚¨ã‚¹ãƒˆä¸­ã®ã¿éŒ²ç”»ã™ã‚‹
             if (!DungeonQuestInfo.TryGetQuest(self, out var quest)) return RogueObjUpdaterContinueType.Continue;
 
             var enemyCount = 0;
@@ -55,20 +55,20 @@ namespace Roguegard
             }
             if (enemyCount < 10) return RogueObjUpdaterContinueType.Continue;
 
-            // Œ©‚¦‚Ä‚é“G‚Ì”‚ª 10 ˆÈã‚É‚È‚Á‚½‚ç”zMŠJn
+            // è¦‹ãˆã¦ã‚‹æ•µã®æ•°ãŒ 10 ä»¥ä¸Šã«ãªã£ãŸã‚‰é…ä¿¡é–‹å§‹
             post = new RoguePost();
-            post.Name = "ƒ‚ƒ“ƒXƒ^[ƒnƒEƒX‚É‘˜‹ö";
+            post.Name = "ãƒ¢ãƒ³ã‚¹ã‚¿ãƒ¼ãƒã‚¦ã‚¹ã«é­é‡";
             post.From = self;
             post.DateTime = RogueDateTime.UtcNow().ToString();
             post.LiveState = RoguePostLiveState.Live;
             postboxInfo.AddPost(post);
 
-            // ˜^‰æŠJn
+            // éŒ²ç”»é–‹å§‹
             var recorder = new DungeonRecorder(quest, self.Location.Main.Stats.Lv);
             recordingListener = new RecordingMessageWorkListener(self, recorder);
             MessageWorkListener.AddListener(recordingListener);
 
-            // “¯‚¶ŠK‘w‚Å‚Íˆê‰ñ‚µ‚©“Še‚µ‚È‚¢
+            // åŒã˜éšå±¤ã§ã¯ä¸€å›ã—ã‹æŠ•ç¨¿ã—ãªã„
             postLocation = self.Location;
 
             return RogueObjUpdaterContinueType.Continue;

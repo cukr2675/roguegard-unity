@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,7 +7,7 @@ using Roguegard;
 namespace RoguegardUnity
 {
     /// <summary>
-    /// ¢ŠE‚É“¯Šú’†AŒ»À‚ÌŠÔ‚Å‚Í‚È‚­ƒƒOƒKƒ‹¢ŠE‚ÌŠÔ‚ğƒR[ƒ‹ƒoƒbƒN‚·‚éƒCƒxƒ“ƒgƒnƒ“ƒhƒ‰B
+    /// ä¸–ç•Œã«åŒæœŸä¸­ã€ç¾å®Ÿã®æ™‚é–“ã§ã¯ãªããƒ­ã‚°ã‚¬ãƒ«ä¸–ç•Œã®æ™‚é–“ã‚’ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯ã™ã‚‹ã‚¤ãƒ™ãƒ³ãƒˆãƒãƒ³ãƒ‰ãƒ©ã€‚
     /// </summary>
     internal class DateTimeCallbackEventHandler : IStandardRogueDeviceEventHandler
     {

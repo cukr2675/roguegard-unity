@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -26,7 +26,7 @@ namespace RoguegardUnity
 
         public void Sort(RogueObj location)
         {
-            // ƒe[ƒuƒ‹‚ğ‰Šú‰»
+            // ãƒ†ãƒ¼ãƒ–ãƒ«ã‚’åˆæœŸåŒ–
             foreach (var pair in categorizedBufferTable)
             {
                 foreach (var listItem in pair.Value)
@@ -35,14 +35,14 @@ namespace RoguegardUnity
                 }
             }
 
-            // ƒAƒCƒeƒ€‚ğ•À‚×‘Ö‚¦‚é
+            // ã‚¢ã‚¤ãƒ†ãƒ ã‚’ä¸¦ã¹æ›¿ãˆã‚‹
             var objs = location.Space.Objs;
             for (int i = 0; i < objs.Count; i++)
             {
                 var obj = objs[i];
                 if (obj == null) continue;
 
-                // ƒIƒuƒWƒFƒNƒg‚ÌƒJƒeƒSƒŠ‚²‚Æ‚ÌƒŠƒXƒg‚ÉU‚è•ª‚¯‚é
+                // ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ã‚«ãƒ†ã‚´ãƒªã”ã¨ã®ãƒªã‚¹ãƒˆã«æŒ¯ã‚Šåˆ†ã‘ã‚‹
                 if (obj.Main.InfoSet.Category == null || !categorizedBufferTable.TryGetValue(obj.Main.InfoSet.Category, out var categorizedBuffers))
                 {
                     categorizedBuffers = categorizedBufferTable[other];
@@ -52,28 +52,28 @@ namespace RoguegardUnity
                 var vehicleInfo = VehicleInfo.Get(obj);
                 var equipped = equipmentInfo?.EquipIndex >= 0 || vehicleInfo?.Rider != null;
 
-                // d‚³ƒ[ƒ‚ÌƒAƒCƒeƒ€‚ğã‚É•À‚×‚é
+                // é‡ã•ã‚¼ãƒ­ã®ã‚¢ã‚¤ãƒ†ãƒ ã‚’ä¸Šã«ä¸¦ã¹ã‚‹
                 if (weight.TotalWeight <= 0f)
                 {
-                    // ‚»‚Ì’†‚Å‚à‘•”õÏ‚İ‚ÌƒAƒCƒeƒ€‚ğÅ‚àã‚É•À‚×‚é
+                    // ãã®ä¸­ã§ã‚‚è£…å‚™æ¸ˆã¿ã®ã‚¢ã‚¤ãƒ†ãƒ ã‚’æœ€ã‚‚ä¸Šã«ä¸¦ã¹ã‚‹
                     if (equipped) { categorizedBuffers[0].Add(obj); }
                     else { categorizedBuffers[1].Add(obj); }
                 }
                 else
                 {
-                    // ‘•”õÏ‚İ‚ÌƒAƒCƒeƒ€‚ğã‚É•À‚×‚é
+                    // è£…å‚™æ¸ˆã¿ã®ã‚¢ã‚¤ãƒ†ãƒ ã‚’ä¸Šã«ä¸¦ã¹ã‚‹
                     if (equipped) { categorizedBuffers[2].Add(obj); }
                     else { categorizedBuffers[3].Add(obj); }
                 }
             }
 
-            // ƒoƒbƒtƒ@‚ğ‚à‚Æ‚É•À‚×‘Ö‚¦‚é
+            // ãƒãƒƒãƒ•ã‚¡ã‚’ã‚‚ã¨ã«ä¸¦ã¹æ›¿ãˆã‚‹
             mainBuffer.Clear();
             foreach (var pair in categorizedBufferTable)
             {
                 foreach (var listItem in pair.Value)
                 {
-                    // “¯‚¶ƒNƒ‰ƒX‚ÌƒAƒCƒeƒ€‚Í–¼‘O‡‚Å•À‚×‚é
+                    // åŒã˜ã‚¯ãƒ©ã‚¹ã®ã‚¢ã‚¤ãƒ†ãƒ ã¯åå‰é †ã§ä¸¦ã¹ã‚‹
                     listItem.Sort(comparer);
 
                     for (int i = 0; i < listItem.Count; i++)

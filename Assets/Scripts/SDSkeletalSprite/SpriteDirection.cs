@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -93,7 +93,7 @@ namespace SDSSprite
         }
 
         /// <summary>
-        /// w’è‚Ì <see cref="Vector2Int"/> ‚Ì•„†i-1 or 0 or +1j‚©‚ç <see cref="SpriteDirection"/> ‚ğæ“¾‚·‚éB
+        /// æŒ‡å®šã® <see cref="Vector2Int"/> ã®ç¬¦å·ï¼ˆ-1 or 0 or +1ï¼‰ã‹ã‚‰ <see cref="SpriteDirection"/> ã‚’å–å¾—ã™ã‚‹ã€‚
         /// </summary>
         public static bool TryFromSign(Vector2Int vector, out SpriteDirection direction)
         {
@@ -115,7 +115,7 @@ namespace SDSSprite
         }
 
         /// <summary>
-        /// w’è‚Ì <see cref="Vector2Int"/> ‚Ì•„†i-1 or 0 or +1j‚©‚ç <see cref="SpriteDirection"/> ‚ğæ“¾‚·‚éB
+        /// æŒ‡å®šã® <see cref="Vector2Int"/> ã®ç¬¦å·ï¼ˆ-1 or 0 or +1ï¼‰ã‹ã‚‰ <see cref="SpriteDirection"/> ã‚’å–å¾—ã™ã‚‹ã€‚
         /// </summary>
         public static SpriteDirection FromSignOrLowerLeft(Vector2Int vector)
         {
@@ -129,7 +129,7 @@ namespace SDSSprite
         }
 
         /// <summary>
-        /// ”½Œv‰ñ‚è‚É <paramref name="angle"/> * 45 “x‰ñ“]‚µ‚½•ûŒü‚ğæ“¾‚·‚éB
+        /// åæ™‚è¨ˆå›ã‚Šã« <paramref name="angle"/> * 45 åº¦å›è»¢ã—ãŸæ–¹å‘ã‚’å–å¾—ã™ã‚‹ã€‚
         /// </summary>
         public SpriteDirection Rotate(int angle)
         {

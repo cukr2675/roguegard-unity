@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -35,7 +35,7 @@ namespace Roguegard.CharacterCreation
             var clone = new ItemMember();
             clone.builder = builder;
 
-            // CharacterCreationBuilder ¶¬‚É•K‚¸ Clone ‚ªÀs‚³‚ê‚é‚½‚ßA‚±‚Ìİ’è‚¾‚¯‚ÅƒVƒŠƒAƒ‹‰»‰Â”\
+            // CharacterCreationBuilder ç”Ÿæˆæ™‚ã«å¿…ãš Clone ãŒå®Ÿè¡Œã•ã‚Œã‚‹ãŸã‚ã€ã“ã®è¨­å®šã ã‘ã§ã‚·ãƒªã‚¢ãƒ«åŒ–å¯èƒ½
             if (clone.builder == null && _item?.Option != null) { clone.builder = new StartingItemBuilder(_item); }
 
             return clone;

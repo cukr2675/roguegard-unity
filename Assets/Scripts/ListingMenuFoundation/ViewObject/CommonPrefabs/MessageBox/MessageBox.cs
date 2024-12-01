@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,29 +14,29 @@ namespace ListingMF
         [SerializeField] private CanvasGroup _horizontalRulePrefab = null;
         [SerializeField] private RectTransform _content = null;
         [SerializeField] private RectTransform _rulesContent = null;
-        [SerializeField, Tooltip("1ƒy[ƒW‚ ‚½‚è‚ÌƒeƒLƒXƒg•\¦s”")] private int _maxLineCount = 1;
+        [SerializeField, Tooltip("1ãƒšãƒ¼ã‚¸ã‚ãŸã‚Šã®ãƒ†ã‚­ã‚¹ãƒˆè¡¨ç¤ºè¡Œæ•°")] private int _maxLineCount = 1;
 
         [Header("Display")]
-        [SerializeField, Tooltip("ƒeƒLƒXƒg•\¦ƒAƒjƒ[ƒVƒ‡ƒ“")] private VisibleMode _visibleMode = VisibleMode.Static;
-        [SerializeField, Tooltip("VisibleMode == Typing: ƒeƒLƒXƒg•\¦‘¬“x@ˆê•b‚ ‚½‚è‚Ì•¶š”")] private float _characterPerSecond = 60f;
+        [SerializeField, Tooltip("ãƒ†ã‚­ã‚¹ãƒˆè¡¨ç¤ºã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³")] private VisibleMode _visibleMode = VisibleMode.Static;
+        [SerializeField, Tooltip("VisibleMode == Typing: ãƒ†ã‚­ã‚¹ãƒˆè¡¨ç¤ºé€Ÿåº¦ã€€ä¸€ç§’ã‚ãŸã‚Šã®æ–‡å­—æ•°")] private float _characterPerSecond = 60f;
         public float CharacterPerSecond { get => _characterPerSecond; set => _characterPerSecond = value; }
-        [SerializeField, Tooltip("VisibleMode == Typing: ƒy[ƒW‹æØ‚è‚ÌƒŠƒ“ƒNID")] private string _pageBreakHiddenLinkID = "PageBreak";
-        [SerializeField, Tooltip("Œrü‚ÌƒŠƒ“ƒNID")] private string _horizontalRuleHiddenLinkID = "HorizontalRule";
+        [SerializeField, Tooltip("VisibleMode == Typing: ãƒšãƒ¼ã‚¸åŒºåˆ‡ã‚Šã®ãƒªãƒ³ã‚¯ID")] private string _pageBreakHiddenLinkID = "PageBreak";
+        [SerializeField, Tooltip("ç½«ç·šã®ãƒªãƒ³ã‚¯ID")] private string _horizontalRuleHiddenLinkID = "HorizontalRule";
 
         [Header("Animation")]
-        [SerializeField, Tooltip("0 (ƒXƒNƒ[ƒ‹ŠJnˆÊ’u) ` 1 (ƒXƒNƒ[ƒ‹–Ú•WˆÊ’u)\n*‰Šú’l‚Í 1 „§*")] private float _normalizedLineOffset = 1f;
+        [SerializeField, Tooltip("0 (ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«é–‹å§‹ä½ç½®) ï½ 1 (ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ç›®æ¨™ä½ç½®)\n*åˆæœŸå€¤ã¯ 1 æ¨å¥¨*")] private float _normalizedLineOffset = 1f;
         public float NormalizedLineOffset
         {
             get => _normalizedLineOffset;
             set => _normalizedLineOffset = value;
         }
-        [SerializeField, Tooltip("ƒeƒLƒXƒg‚ª‰º’[‚©‚ç‚Í‚İo‚µ‚½‚Æ‚«”­s‚³‚ê‚éƒŠƒ“ƒNID")] private string _hiddenLinkIDOnPageOver = "PageBreak";
+        [SerializeField, Tooltip("ãƒ†ã‚­ã‚¹ãƒˆãŒä¸‹ç«¯ã‹ã‚‰ã¯ã¿å‡ºã—ãŸã¨ãç™ºè¡Œã•ã‚Œã‚‹ãƒªãƒ³ã‚¯ID")] private string _hiddenLinkIDOnPageOver = "PageBreak";
         public string HiddenLinkIDOnPageOver
         {
             get => _hiddenLinkIDOnPageOver;
             set => _hiddenLinkIDOnPageOver = value;
         }
-        [SerializeField, Tooltip("ƒeƒLƒXƒg‚ÌI’[‚É“’B‚µ‚½‚Æ‚«”­s‚³‚ê‚éƒŠƒ“ƒNID")] private string _hiddenLinkIDOnEOF = "EOF";
+        [SerializeField, Tooltip("ãƒ†ã‚­ã‚¹ãƒˆã®çµ‚ç«¯ã«åˆ°é”ã—ãŸã¨ãç™ºè¡Œã•ã‚Œã‚‹ãƒªãƒ³ã‚¯ID")] private string _hiddenLinkIDOnEOF = "EOF";
         public string HiddenLinkIDOnEOF
         {
             get => _hiddenLinkIDOnEOF;
@@ -44,7 +44,7 @@ namespace ListingMF
         }
 
         [Space]
-        [SerializeField, Tooltip("ƒeƒLƒXƒg‚ğŠÜ‚Ü‚È‚¢<link>ƒ^ƒO‚Ü‚Å•\¦‚ª“’B‚µ‚½‚Æ‚«”­‰Î‚·‚éƒCƒxƒ“ƒg\niã‚ÌƒvƒƒpƒeƒB‚©‚ç”­s‚³‚ê‚é‚à‚Ì‚àŠÜ‚Şj")]
+        [SerializeField, Tooltip("ãƒ†ã‚­ã‚¹ãƒˆã‚’å«ã¾ãªã„<link>ã‚¿ã‚°ã¾ã§è¡¨ç¤ºãŒåˆ°é”ã—ãŸã¨ãç™ºç«ã™ã‚‹ã‚¤ãƒ™ãƒ³ãƒˆ\nï¼ˆä¸Šã®ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ã‹ã‚‰ç™ºè¡Œã•ã‚Œã‚‹ã‚‚ã®ã‚‚å«ã‚€ï¼‰")]
         private ReachHiddenLinkEvent _onReachHiddenLink = null;
         public ReachHiddenLinkEvent OnReachHiddenLink => _onReachHiddenLink;
 
@@ -72,7 +72,7 @@ namespace ListingMF
             SetTextTransform(_text.transform);
             SetTextTransform(_rulesContent);
 
-            // ‰Šú‰»
+            // åˆæœŸåŒ–
             Clear();
 
             _onReachHiddenLink.AddListener(hiddenLinkID =>
@@ -137,10 +137,10 @@ namespace ListingMF
 
         private void InsertHorizontalRule()
         {
-            // ˆê•¶š‚àİ’è‚³‚ê‚Ä‚¢‚È‚¢‚Æ‚«‚Í‰½‚à‚µ‚È‚¢
+            // ä¸€æ–‡å­—ã‚‚è¨­å®šã•ã‚Œã¦ã„ãªã„ã¨ãã¯ä½•ã‚‚ã—ãªã„
             if (textTypingEffect.LineCount == 0) return;
 
-            // ƒeƒLƒXƒg‚É 1 s‚¸‚Â‘Î‰‚·‚éŒrü•\¦ƒtƒ‰ƒO‚ğ¶¬‚·‚é
+            // ãƒ†ã‚­ã‚¹ãƒˆã« 1 è¡Œãšã¤å¯¾å¿œã™ã‚‹ç½«ç·šè¡¨ç¤ºãƒ•ãƒ©ã‚°ã‚’ç”Ÿæˆã™ã‚‹
             textTypingEffect.MeshUpdate();
             textRuleEffect.AddLine(textTypingEffect.VisibleLineNumber);
         }
@@ -156,7 +156,7 @@ namespace ListingMF
 
         private float CalculateTargetTextOffset()
         {
-            // ƒXƒNƒ[ƒ‹–Ú•W’n“_‚ÍƒeƒLƒXƒg‚ÌÅ‰º’[‚ª˜Io‚·‚éˆÊ’u
+            // ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ç›®æ¨™åœ°ç‚¹ã¯ãƒ†ã‚­ã‚¹ãƒˆã®æœ€ä¸‹ç«¯ãŒéœ²å‡ºã™ã‚‹ä½ç½®
             textTypingEffect.MeshUpdate();
             return textTypingEffect.LineHeight * linePosition;
         }
@@ -168,7 +168,7 @@ namespace ListingMF
         }
 
         /// <summary>
-        /// <see cref="VisibleMode.Static"/> ‚Ìê‡‚Í += 1 A <see cref="VisibleMode.Typing"/> ‚Ìê‡‚Í += <see cref="_maxLineCount"/>
+        /// <see cref="VisibleMode.Static"/> ã®å ´åˆã¯ += 1 ã€ <see cref="VisibleMode.Typing"/> ã®å ´åˆã¯ += <see cref="_maxLineCount"/>
         /// </summary>
         public void StartScrollAndAddLinePositionAuto(int multiplier)
         {
@@ -183,22 +183,22 @@ namespace ListingMF
         }
 
         /// <summary>
-        /// sƒXƒNƒ[ƒ‹ƒAƒjƒ[ƒVƒ‡ƒ“Š®—¹‚ÉƒAƒjƒ[ƒ^[‚©‚çŒÄ‚Ño‚·ƒƒ\ƒbƒh
+        /// è¡Œã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³å®Œäº†æ™‚ã«ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚¿ãƒ¼ã‹ã‚‰å‘¼ã³å‡ºã™ãƒ¡ã‚½ãƒƒãƒ‰
         /// </summary>
         public void EndScrollAndTrimBeforeAuto()
         {
             isScrollingNow = false;
 
-            // •\¦‚É•K—v‚È‚­‚È‚Á‚½ƒeƒLƒXƒg‚ğíœ‚·‚é
+            // è¡¨ç¤ºã«å¿…è¦ãªããªã£ãŸãƒ†ã‚­ã‚¹ãƒˆã‚’å‰Šé™¤ã™ã‚‹
             int removedLineCount;
             if (_visibleMode == VisibleMode.Static)
             {
-                // ƒ^ƒCƒsƒ“ƒOƒGƒtƒFƒNƒg‚ª–³Œø‚Ìê‡
+                // ã‚¿ã‚¤ãƒ”ãƒ³ã‚°ã‚¨ãƒ•ã‚§ã‚¯ãƒˆãŒç„¡åŠ¹ã®å ´åˆ
 
-                // ‘SƒeƒLƒXƒg‚ª•\¦Š®—¹‚µ‚Ä‚¢‚È‚¯‚ê‚Î‰½‚à‚µ‚È‚¢
+                // å…¨ãƒ†ã‚­ã‚¹ãƒˆãŒè¡¨ç¤ºå®Œäº†ã—ã¦ã„ãªã‘ã‚Œã°ä½•ã‚‚ã—ãªã„
                 if (!textTypingEffect.IsEOF) return;
 
-                // •\¦‚É•K—v‚È‚­‚È‚Á‚½ƒeƒLƒXƒg‚ğs’PˆÊ‚Åíœ‚·‚é
+                // è¡¨ç¤ºã«å¿…è¦ãªããªã£ãŸãƒ†ã‚­ã‚¹ãƒˆã‚’è¡Œå˜ä½ã§å‰Šé™¤ã™ã‚‹
                 removedLineCount = textTypingEffect.TrimBeforeVisibleLine();
                 if (removedLineCount == 0) return;
 
@@ -206,22 +206,22 @@ namespace ListingMF
             }
             else
             {
-                // ƒ^ƒCƒsƒ“ƒOƒGƒtƒFƒNƒg‚ª—LŒø‚Ìê‡
+                // ã‚¿ã‚¤ãƒ”ãƒ³ã‚°ã‚¨ãƒ•ã‚§ã‚¯ãƒˆãŒæœ‰åŠ¹ã®å ´åˆ
 
-                // ƒŠƒ“ƒNID‚Åíœ‚·‚é
+                // ãƒªãƒ³ã‚¯IDã§å‰Šé™¤ã™ã‚‹
                 removedLineCount = textTypingEffect.TrimBeforeFirstLinkID(_pageBreakHiddenLinkID);
                 if (removedLineCount == 0) return;
 
-                // ƒŠƒ“ƒNID‚Ì‘ã‚í‚è‚ÉŒ»İ•\¦ˆÊ’u‚Åíœ‚·‚é‚±‚Æ‚à‚Å‚«‚é‚ªAF•ÏXƒ^ƒO‚È‚Ç‚àíœ‚³‚ê‚Ä‚µ‚Ü‚¤
+                // ãƒªãƒ³ã‚¯IDã®ä»£ã‚ã‚Šã«ç¾åœ¨è¡¨ç¤ºä½ç½®ã§å‰Šé™¤ã™ã‚‹ã“ã¨ã‚‚ã§ãã‚‹ãŒã€è‰²å¤‰æ›´ã‚¿ã‚°ãªã©ã‚‚å‰Šé™¤ã•ã‚Œã¦ã—ã¾ã†
                 //textTypingEffect.TrimBeforeVisibleCharacter();
 
                 textTypingEffect.SeekToStartOfText();
             }
 
-            // ƒeƒLƒXƒg‚ğíœ‚µ‚½s”‚Ô‚ñŒrü‚àíœ
+            // ãƒ†ã‚­ã‚¹ãƒˆã‚’å‰Šé™¤ã—ãŸè¡Œæ•°ã¶ã‚“ç½«ç·šã‚‚å‰Šé™¤
             textRuleEffect.RemoveLinesRange(0, removedLineCount);
 
-            // ƒeƒLƒXƒg‚ğíœ‚µ‚½‚Ô‚ñs•\¦ˆÊ’u‚ğˆÚ“®
+            // ãƒ†ã‚­ã‚¹ãƒˆã‚’å‰Šé™¤ã—ãŸã¶ã‚“è¡Œè¡¨ç¤ºä½ç½®ã‚’ç§»å‹•
             linePosition = 0;
         }
 

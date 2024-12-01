@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -19,7 +19,7 @@ namespace Roguegard.Rgpacks
                 {
                     if (spaceObjs[i] == null) continue;
 
-                    // ƒXƒyƒNƒGƒ‚ƒmƒŠƒX‚ğŠÜ‚Ş‹óŠÔ‚ğƒAƒgƒŠƒG‚Æ‚µ‚Ä•Ô‚·
+                    // ã‚¹ãƒšã‚¯ã‚¨ãƒ¢ãƒãƒªã‚¹ã‚’å«ã‚€ç©ºé–“ã‚’ã‚¢ãƒˆãƒªã‚¨ã¨ã—ã¦è¿”ã™
                     var info = Get(spaceObjs[i]);
                     if (info != null) return location;
                 }
@@ -49,7 +49,7 @@ namespace Roguegard.Rgpacks
                 monolith.SetInfo(info);
             }
 
-            // ã‘‚«•s‰Â
+            // ä¸Šæ›¸ãä¸å¯
             if (info.info != null) throw new RogueException();
 
             info.info = new SpQuestMonolithInfo();

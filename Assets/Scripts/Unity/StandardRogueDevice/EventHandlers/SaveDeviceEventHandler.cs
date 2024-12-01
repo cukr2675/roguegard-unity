@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -42,16 +42,16 @@ namespace RoguegardUnity
                 {
                     manager.Back();
 
-                    // “ü—Í‚³‚ê‚½ƒpƒX‚Ì Stream ‚ğŠJ‚­
+                    // å…¥åŠ›ã•ã‚ŒãŸãƒ‘ã‚¹ã® Stream ã‚’é–‹ã
                     StandardRogueDeviceData loadDeviceData;
                     using (var stream = RogueFile.OpenRead(fileInfo.FullName))
                     {
                         var save = new StandardRogueDeviceSave();
-                        loadDeviceData = save.LoadGameData(stream); // ‚±‚±‚Å‹tƒVƒŠƒAƒ‹‰»
+                        loadDeviceData = save.LoadGameData(stream); // ã“ã“ã§é€†ã‚·ãƒªã‚¢ãƒ«åŒ–
                     }
                     manager.Done();
 
-                    // ƒ[ƒh‚µ‚½ƒf[ƒ^‚ğ“K—p
+                    // ãƒ­ãƒ¼ãƒ‰ã—ãŸãƒ‡ãƒ¼ã‚¿ã‚’é©ç”¨
                     RogueRandom.Primary = loadDeviceData.CurrentRandom;
                     componentManager.OpenDelay(loadDeviceData);
                 });
@@ -68,12 +68,12 @@ namespace RoguegardUnity
                 var subject = componentManager.Subject;
                 if (subject != componentManager.Player && (subject.Location == null || subject.Location.Main.Stats.Lv % 5 != 0))
                 {
-                    // ƒvƒŒƒCƒ„[ƒLƒƒƒ‰ƒNƒ^[ˆÈŠO‚É’–Ú‚µ‚Ä‚¢‚é‚Æ‚«A5‚Ì”{”‚ÌŠK‘w‚Ì‚İƒI[ƒgƒZ[ƒu‚Å‚«‚é
-                    // ‚»‚êˆÈŠO‚Í‰½‚à‚¹‚¸I—¹
+                    // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚­ãƒ£ãƒ©ã‚¯ã‚¿ãƒ¼ä»¥å¤–ã«æ³¨ç›®ã—ã¦ã„ã‚‹ã¨ãã€5ã®å€æ•°ã®éšå±¤ã®ã¿ã‚ªãƒ¼ãƒˆã‚»ãƒ¼ãƒ–ã§ãã‚‹
+                    // ãã‚Œä»¥å¤–ã¯ä½•ã‚‚ã›ãšçµ‚äº†
                     return true;
                 }
 
-                // ƒI[ƒgƒZ[ƒu
+                // ã‚ªãƒ¼ãƒˆã‚»ãƒ¼ãƒ–
                 touchController.OpenMenu(componentManager.Subject, autoSaveMenu, null, null, RogueMethodArgument.Identity);
                 return true;
             }
@@ -81,14 +81,14 @@ namespace RoguegardUnity
             {
                 if (componentManager.CantSave) return true;
 
-                // –¼‘O‚ğ•t‚¯‚ÄƒZ[ƒu
+                // åå‰ã‚’ä»˜ã‘ã¦ã‚»ãƒ¼ãƒ–
                 this.spQuestRgpack = null;
                 touchController.OpenMenu(componentManager.Subject, writeFileMenu, null, null, RogueMethodArgument.Identity);
                 return true;
             }
             if (keyword == DeviceKw.LoadGame)
             {
-                // ƒ[ƒh
+                // ãƒ­ãƒ¼ãƒ‰
                 touchController.OpenMenu(componentManager.Subject, readFileMenu, null, null, RogueMethodArgument.Identity);
                 return true;
             }
@@ -96,7 +96,7 @@ namespace RoguegardUnity
             {
                 if (componentManager.CantSave) return true;
 
-                // –¼‘O‚ğ•t‚¯‚ÄƒeƒXƒgƒvƒŒƒC
+                // åå‰ã‚’ä»˜ã‘ã¦ãƒ†ã‚¹ãƒˆãƒ—ãƒ¬ã‚¤
                 this.spQuestRgpack = spQuestRgpack;
                 touchController.OpenMenu(componentManager.Subject, writeFileMenu, null, null, RogueMethodArgument.Identity);
                 return true;
@@ -113,10 +113,10 @@ namespace RoguegardUnity
 
         private IEnumerator Save(MMgr manager, string path, bool autoSave)
         {
-            // RogueMethodAspectState ‚Ìˆ—‚ÌŠ®—¹‚ğ‘Ò‚Â
+            // RogueMethodAspectState ã®å‡¦ç†ã®å®Œäº†ã‚’å¾…ã¤
             yield return null;
 
-            // ƒZ[ƒu‘Oˆ—
+            // ã‚»ãƒ¼ãƒ–å‰å‡¦ç†
             var player = componentManager.Player;
             var subject = componentManager.Subject;
             var maxTurns = 1000;
@@ -134,7 +134,7 @@ namespace RoguegardUnity
             ClearViewInfoAfterLocate(player);
             ClearViewInfoAfterLocate(subject);
 
-            // ƒZ[ƒu—pƒf[ƒ^‚ğ¶¬
+            // ã‚»ãƒ¼ãƒ–ç”¨ãƒ‡ãƒ¼ã‚¿ã‚’ç”Ÿæˆ
             var data = new StandardRogueDeviceData();
             data.Player = player;
             data.Subject = componentManager.Subject;
@@ -146,7 +146,7 @@ namespace RoguegardUnity
             var name = RogueFile.GetName(path);
             var stream = RogueFile.Create(path);
             var save = new StandardRogueDeviceSave();
-            save.SaveGame(stream, name, data); // ‚±‚±‚ÅƒVƒŠƒAƒ‹‰»
+            save.SaveGame(stream, name, data); // ã“ã“ã§ã‚·ãƒªã‚¢ãƒ«åŒ–
             var loadRgpack = spQuestRgpack;
             spQuestRgpack = null;
             System.Action invoke = () =>
@@ -154,16 +154,16 @@ namespace RoguegardUnity
                 stream.Close();
                 manager?.Done();
 
-                // ƒZ[ƒuŠ®—¹ƒƒbƒZ[ƒW‚ğ•\¦
+                // ã‚»ãƒ¼ãƒ–å®Œäº†ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’è¡¨ç¤º
                 if (autoSave)
                 {
                     RogueDevice.Add(DeviceKw.AppendText, path);
-                    RogueDevice.Add(DeviceKw.AppendText, "‚ÉƒI[ƒgƒZ[ƒu‚µ‚Ü‚µ‚½\n");
+                    RogueDevice.Add(DeviceKw.AppendText, "ã«ã‚ªãƒ¼ãƒˆã‚»ãƒ¼ãƒ–ã—ã¾ã—ãŸ\n");
                 }
                 else
                 {
                     RogueDevice.Add(DeviceKw.AppendText, path);
-                    RogueDevice.Add(DeviceKw.AppendText, "‚ÉƒZ[ƒu‚µ‚Ü‚µ‚½\n");
+                    RogueDevice.Add(DeviceKw.AppendText, "ã«ã‚»ãƒ¼ãƒ–ã—ã¾ã—ãŸ\n");
                 }
 
                 if (loadRgpack != null)
@@ -184,7 +184,7 @@ namespace RoguegardUnity
                     var worldInfo = RogueWorldInfo.Get(spQuestDeviceData.World);
                     worldInfo.LobbyMembers.Add(player);
 
-                    // ƒp[ƒeƒBEƒŠ[ƒ_[ƒGƒtƒFƒNƒgEƒŒƒxƒ‹ƒAƒbƒvƒ{[ƒiƒX‚Ì‰Šú‰»
+                    // ãƒ‘ãƒ¼ãƒ†ã‚£ãƒ»ãƒªãƒ¼ãƒ€ãƒ¼ã‚¨ãƒ•ã‚§ã‚¯ãƒˆãƒ»ãƒ¬ãƒ™ãƒ«ã‚¢ãƒƒãƒ—ãƒœãƒ¼ãƒŠã‚¹ã®åˆæœŸåŒ–
                     var party = new RogueParty(player.Main.InfoSet.Faction, player.Main.InfoSet.TargetFactions);
                     RoguePartyUtility.AssignWithPartyMembers(player, party);
 
@@ -199,7 +199,7 @@ namespace RoguegardUnity
 
                     worldInfo.ChartState.PushNext(monolith.MainChartSource);
 
-                    // ƒ[ƒh‚µ‚½ƒf[ƒ^‚ğ“K—p
+                    // ãƒ­ãƒ¼ãƒ‰ã—ãŸãƒ‡ãƒ¼ã‚¿ã‚’é©ç”¨
                     RogueRandom.Primary = spQuestDeviceData.CurrentRandom;
                     componentManager.OpenDelay(spQuestDeviceData);
                 }
@@ -210,7 +210,7 @@ namespace RoguegardUnity
         }
 
         /// <summary>
-        /// ƒƒr[ƒƒ“ƒo[‚ªˆêl‚à‚¢‚È‚¢‹óŠÔ‚ğíœ‚·‚é
+        /// ãƒ­ãƒ“ãƒ¼ãƒ¡ãƒ³ãƒãƒ¼ãŒä¸€äººã‚‚ã„ãªã„ç©ºé–“ã‚’å‰Šé™¤ã™ã‚‹
         /// </summary>
         private void RemoveNoLobbyMemberLocations(RogueObj player)
         {
@@ -224,7 +224,7 @@ namespace RoguegardUnity
                 if (location == null || location == worldInfo.Lobby || ObjsIsIn(lobbyMembers, location)) continue;
 
                 location.TrySetStack(0);
-                Debug.LogError($"ƒƒr[ƒƒ“ƒo[‚ª‚¢‚È‚¢‹óŠÔ {location} ‚ğíœ‚µ‚Ü‚µ‚½B");
+                Debug.LogError($"ãƒ­ãƒ“ãƒ¼ãƒ¡ãƒ³ãƒãƒ¼ãŒã„ãªã„ç©ºé–“ {location} ã‚’å‰Šé™¤ã—ã¾ã—ãŸã€‚");
             }
 
             bool ObjIsIn(RogueObj obj, RogueObj space)
@@ -250,7 +250,7 @@ namespace RoguegardUnity
         }
 
         /// <summary>
-        /// ƒvƒŒƒCƒ„[ˆÈŠO‚Æ”íÊ‘ÌˆÈŠO‚Ìƒƒr[ƒƒ“ƒo[‚ª‚Â <see cref="ViewInfo"/> ‚ğíœ‚·‚é
+        /// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ä»¥å¤–ã¨è¢«å†™ä½“ä»¥å¤–ã®ãƒ­ãƒ“ãƒ¼ãƒ¡ãƒ³ãƒãƒ¼ãŒæŒã¤ <see cref="ViewInfo"/> ã‚’å‰Šé™¤ã™ã‚‹
         /// </summary>
         private void RemoveViewInfoHeldByLobbyMembers(RogueObj player, RogueObj subject)
         {
@@ -266,13 +266,13 @@ namespace RoguegardUnity
         }
 
         /// <summary>
-        /// ‹óŠÔˆÚ“®’¼Œã‚ÉƒZ[ƒu‚µ‚½‚Æ‚«AˆÚ“®‘O‚Ì‹óŠÔ‚Ìî•ñ‚ğ•Û‘¶‚µ‚È‚¢‚æ‚¤ˆ—‚·‚é
+        /// ç©ºé–“ç§»å‹•ç›´å¾Œã«ã‚»ãƒ¼ãƒ–ã—ãŸã¨ãã€ç§»å‹•å‰ã®ç©ºé–“ã®æƒ…å ±ã‚’ä¿å­˜ã—ãªã„ã‚ˆã†å‡¦ç†ã™ã‚‹
         /// </summary>
         private void ClearViewInfoAfterLocate(RogueObj obj)
         {
             if (ViewInfo.TryGet(obj, out var view) && obj.Location != view.Location)
             {
-                // ‹óŠÔˆÚ“®’¼Œã‚ÉƒZ[ƒu‚µ‚½‚Æ‚«AˆÚ“®‘O‚Ì‹óŠÔ‚Ìî•ñ‚ğ•Û‘¶‚µ‚È‚¢‚æ‚¤ˆ—‚·‚é
+                // ç©ºé–“ç§»å‹•ç›´å¾Œã«ã‚»ãƒ¼ãƒ–ã—ãŸã¨ãã€ç§»å‹•å‰ã®ç©ºé–“ã®æƒ…å ±ã‚’ä¿å­˜ã—ãªã„ã‚ˆã†å‡¦ç†ã™ã‚‹
                 view.ReadyView(obj.Location);
             }
         }

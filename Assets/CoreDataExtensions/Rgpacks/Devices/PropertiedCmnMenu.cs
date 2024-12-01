@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -23,7 +23,7 @@ namespace Roguegard.Device
             elms.Clear();
             if (!string.IsNullOrWhiteSpace(cmnData.Cmn))
             {
-                // ƒRƒ‚ƒ“ƒCƒxƒ“ƒg‚ÌƒvƒƒpƒeƒBˆê——‚ğæ“¾‚·‚é‚½‚ß‚Éƒrƒ‹ƒh‚·‚é
+                // ã‚³ãƒ¢ãƒ³ã‚¤ãƒ™ãƒ³ãƒˆã®ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ä¸€è¦§ã‚’å–å¾—ã™ã‚‹ãŸã‚ã«ãƒ“ãƒ«ãƒ‰ã™ã‚‹
                 var atelier = SpQuestMonolithInfo.GetAtelierByCharacter(arg.Self);
                 var rgpackDirectory = Rgpacker.Pack(atelier);
                 var rgpack = new Rgpack("Playtest", rgpackDirectory, Rgpacker.DefaultEvaluator);
@@ -52,7 +52,7 @@ namespace Roguegard.Device
                 .InsertNext(
                     new object[]
                     {
-                        "ƒAƒZƒbƒgID",
+                        "ã‚¢ã‚»ãƒƒãƒˆID",
                         InputFieldViewWidget.CreateOption<MMgr, MArg>(
                             (manager, arg) => ((PropertiedCmnData)arg.Arg.Other).Cmn,
                             (manager, arg, value) => ((PropertiedCmnData)arg.Arg.Other).Cmn = value)

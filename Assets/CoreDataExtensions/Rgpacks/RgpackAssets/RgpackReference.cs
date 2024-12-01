@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -17,7 +17,7 @@ namespace Roguegard.Rgpacks
             else if (id.StartsWith('.'))
             {
                 if (string.IsNullOrWhiteSpace(envRgpackID)) throw new RogueException(
-                    $"ƒhƒbƒg‚Ån‚Ü‚éID ({id}) ‚Ì“Ç‚İ‚İAŠÂ‹« RgpackID ‚ªw’è‚³‚ê‚Ü‚¹‚ñ‚Å‚µ‚½B");
+                    $"ãƒ‰ãƒƒãƒˆã§å§‹ã¾ã‚‹ID ({id}) ã®èª­ã¿è¾¼ã¿æ™‚ã€ç’°å¢ƒ RgpackID ãŒæŒ‡å®šã•ã‚Œã¾ã›ã‚“ã§ã—ãŸã€‚");
                 return envRgpackID;
             }
             else
@@ -41,7 +41,7 @@ namespace Roguegard.Rgpacks
         {
             var rgpackID = GetRgpackID(id, envRgpackID);
             if (!TryGetRgpack(rgpackID, out var rgpack)) throw new RogueException(
-                 $"Rgpack ({rgpackID}) ‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñB");
+                 $"Rgpack ({rgpackID}) ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã€‚");
 
             var assetID = GetAssetID(id);
             return rgpack.GetSubAssets<T>(assetID);
@@ -85,9 +85,9 @@ namespace Roguegard.Rgpacks
         private T GetAsset()
         {
             if (!RgpackReference.TryGetRgpack(RgpackID, out var rgpack)) throw new RogueException(
-                $"Rgpack ({RgpackID}) ‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñB");
+                $"Rgpack ({RgpackID}) ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã€‚");
             if (!rgpack.TryGetAsset<T>(AssetID, out var asset)) throw new RogueException(
-                $"Rgpack ({RgpackID}) ‚É ID ({AssetID}) ‚Ìƒf[ƒ^‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñB");
+                $"Rgpack ({RgpackID}) ã« ID ({AssetID}) ã®ãƒ‡ãƒ¼ã‚¿ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã€‚");
 
             return asset;
         }

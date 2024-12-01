@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -42,7 +42,7 @@ namespace Roguegard.Rgpacks
             notUsedKeys.Clear();
             notUsedKeys.AddRange(properties.Keys);
 
-            // •s‘«‚µ‚Ä‚¢‚éƒvƒƒpƒeƒB‚ğ’Ç‰Á + ƒL[‚ªˆê’v‚·‚é‚ªŒ^‚ªˆê’v‚µ‚È‚¢ƒvƒƒpƒeƒB‚ğ•ÏX
+            // ä¸è¶³ã—ã¦ã„ã‚‹ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ã‚’è¿½åŠ  + ã‚­ãƒ¼ãŒä¸€è‡´ã™ã‚‹ãŒå‹ãŒä¸€è‡´ã—ãªã„ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ã‚’å¤‰æ›´
             foreach (var pair in cmn.PropertySources)
             {
                 if (!properties.TryGetValue(pair.Key, out var property) ||
@@ -53,7 +53,7 @@ namespace Roguegard.Rgpacks
                 notUsedKeys.Remove(pair.Key);
             }
 
-            // –¢g—p‚ÌƒvƒƒpƒeƒB‚ğíœ
+            // æœªä½¿ç”¨ã®ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ã‚’å‰Šé™¤
             foreach (var notUsedKey in notUsedKeys)
             {
                 properties.Remove(notUsedKey);

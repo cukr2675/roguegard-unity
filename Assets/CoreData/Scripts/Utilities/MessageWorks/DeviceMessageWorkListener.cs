@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,7 +18,7 @@ namespace Roguegard.Device
             view.GetTile(position, out var visible, out _, out _, out _);
             if (visible) return true;
 
-            // ƒyƒCƒ“ƒg‚³‚ê‚Ä‚¢‚éƒIƒuƒWƒFƒNƒg‚ª‚¢‚éˆÊ’u‚ÍŒ©‚¦‚é
+            // ãƒšã‚¤ãƒ³ãƒˆã•ã‚Œã¦ã„ã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãŒã„ã‚‹ä½ç½®ã¯è¦‹ãˆã‚‹
             var obj = view.Location.Space.GetColliderObj(position);
             if (obj != null)
             {
@@ -26,8 +26,8 @@ namespace Roguegard.Device
                 if (objStatusEffectState.TryGetStatusEffect<PaintStatusEffect>(out _)) return true;
             }
 
-            // ‹ŠE”ÍˆÍŠO‚Ì”»’è‚ªo‚Ä‚àAXV‚µ‚Ä‚à‚¤ˆê“x‚·
-            // o‰ï‚¢‚ª‚µ‚ç‚Ì“G‚ğ•\¦‚·‚éÛ‚É—LŒø
+            // è¦–ç•Œç¯„å›²å¤–ã®åˆ¤å®šãŒå‡ºã¦ã‚‚ã€æ›´æ–°ã—ã¦ã‚‚ã†ä¸€åº¦è©¦ã™
+            // å‡ºä¼šã„ãŒã—ã‚‰ã®æ•µã‚’è¡¨ç¤ºã™ã‚‹éš›ã«æœ‰åŠ¹
             view.AddView(subject);
             view.GetTile(position, out visible, out _, out _, out _);
             return visible;

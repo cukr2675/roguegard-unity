@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -51,7 +51,7 @@ namespace ListingMF
         public IElementsSubView ColorPicker => _colorPicker;
         public static string ColorPickerName => "ColorPicker";
 
-        [SerializeField] private MessageBoxSubView _messageBox = null; // Rgpack ‚Ì rg.msg ‚Å•\¦‚·‚é‚½‚ß–¼‘O‚ÍƒƒbƒZ[ƒWƒ{ƒbƒNƒX
+        [SerializeField] private MessageBoxSubView _messageBox = null; // Rgpack ã® rg.msg ã§è¡¨ç¤ºã™ã‚‹ãŸã‚åå‰ã¯ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãƒœãƒƒã‚¯ã‚¹
         public MessageBoxSubView MessageBox => _messageBox;
         public static string MessageBoxName => "MessageBox";
 
@@ -63,7 +63,7 @@ namespace ListingMF
         public IElementsSubView Overlay => _overlay;
         public static string OverlayName => "Overlay";
 
-        [SerializeField] private MessageBoxSubView _speechBox = null; // Rgpack ‚Ì rg.say ‚Å•\¦‚·‚é‚½‚ß–¼‘O‚ÍƒXƒs[ƒ`ƒ{ƒbƒNƒX
+        [SerializeField] private MessageBoxSubView _speechBox = null; // Rgpack ã® rg.say ã§è¡¨ç¤ºã™ã‚‹ãŸã‚åå‰ã¯ã‚¹ãƒ”ãƒ¼ãƒãƒœãƒƒã‚¯ã‚¹
         public MessageBoxSubView SpeechBox => _speechBox;
         public static string SpeechBoxName => "SpeechBox";
 
@@ -74,7 +74,7 @@ namespace ListingMF
         public IReadOnlyDictionary<string, ElementsSubView> SubViews { get; private set; }
 
         /// <summary>
-        /// ‚¢‚¸‚ê‚©‚Ì <see cref="ElementsSubView.HasManagerLock"/> ‚ª true ‚Ì‚Æ‚« true ‚ğæ“¾‚·‚é
+        /// ã„ãšã‚Œã‹ã® <see cref="ElementsSubView.HasManagerLock"/> ãŒ true ã®ã¨ã true ã‚’å–å¾—ã™ã‚‹
         /// </summary>
         public bool HasManagerLock
         {

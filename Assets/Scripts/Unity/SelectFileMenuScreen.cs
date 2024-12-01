@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,7 +16,7 @@ namespace RoguegardUnity
         private RogueScrollViewTemplate<object> view;
         private readonly List<FileInfo> files = new();
 
-        private static readonly LoadingListMenuScreen savingMenu = new LoadingListMenuScreen("ƒZ[ƒu’†c", "ƒLƒƒƒ“ƒZƒ‹", LoadingCancel);
+        private static readonly LoadingListMenuScreen savingMenu = new LoadingListMenuScreen("ã‚»ãƒ¼ãƒ–ä¸­â€¦", "ã‚­ãƒ£ãƒ³ã‚»ãƒ«", LoadingCancel);
         private static readonly ChoicesMenuScreen errorMsgDialog
             = new ChoicesMenuScreen((manager, arg) => $":An error has occurred.:, ({arg.Arg.Other})").Option("OK", ErrorMsgOK);
 
@@ -164,9 +164,9 @@ namespace RoguegardUnity
 
             public override void OpenScreen(in MMgr manager, in MArg arg)
             {
-                view.ShowTemplate("ƒCƒ“ƒ|[ƒg’†c", manager, arg)
+                view.ShowTemplate("ã‚¤ãƒ³ãƒãƒ¼ãƒˆä¸­â€¦", manager, arg)
                     ?
-                    .AppendSelectOption("ƒLƒƒƒ“ƒZƒ‹", (manager, arg) => manager.Back())
+                    .AppendSelectOption("ã‚­ãƒ£ãƒ³ã‚»ãƒ«", (manager, arg) => manager.Back())
 
                     .Build();
             }

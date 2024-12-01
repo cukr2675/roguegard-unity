@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,7 +15,7 @@ namespace Roguegard.Rgpacks
 
         public override bool Invoke(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
         {
-            // ƒAƒgƒŠƒG‚É‹óŠÔ‚ªİ’è‚³‚ê‚Ä‚¢‚È‚¯‚ê‚ÎV‹Kì¬
+            // ã‚¢ãƒˆãƒªã‚¨ã«ç©ºé–“ãŒè¨­å®šã•ã‚Œã¦ã„ãªã‘ã‚Œã°æ–°è¦ä½œæˆ
             if (self.Space.Tilemap == null)
             {
                 var tilemap = CreateTilemap();
@@ -25,7 +25,7 @@ namespace Roguegard.Rgpacks
                 _monolith.Option.CreateObj(_monolith, self, new Vector2Int(1, 1), RogueRandom.Primary);
             }
 
-            // ƒAƒgƒŠƒG‚Ì’†‚Ö‹óŠÔˆÚ“®
+            // ã‚¢ãƒˆãƒªã‚¨ã®ä¸­ã¸ç©ºé–“ç§»å‹•
             RogueDevice.Add(DeviceKw.EnqueueSE, CategoryKw.DownStairs);
             this.Locate(user, null, self, new Vector2Int(2, 1), activationDepth);
             return false;
@@ -40,7 +40,7 @@ namespace Roguegard.Rgpacks
                 {
                     tilemap.Set(_groundTile, x, y);
 
-                    // ƒ}ƒbƒv’[‚Í•Ç
+                    // ãƒãƒƒãƒ—ç«¯ã¯å£
                     if (x == 0 || x == tilemap.Width - 1 || y == 0 || y == tilemap.Height - 1)
                     {
                         tilemap.Set(_wallTile, x, y);

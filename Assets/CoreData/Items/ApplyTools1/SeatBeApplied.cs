@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -25,13 +25,13 @@ namespace Roguegard
                     var memberInfo = LobbyMemberList.GetMemberInfo(member);
                     if (memberInfo.Seat == self)
                     {
-                        // ’N‚©À‚Á‚Ä‚¢‚½‚ç‚»‚ÌƒLƒƒƒ‰‚É’–Ú‚·‚é
+                        // èª°ã‹åº§ã£ã¦ã„ãŸã‚‰ãã®ã‚­ãƒ£ãƒ©ã«æ³¨ç›®ã™ã‚‹
                         RogueDevice.Add(DeviceKw.StartAutoPlay, member);
                         return false;
                     }
                 }
 
-                // ’N‚àÀ‚Á‚Ä‚¢‚È‚©‚Á‚½‚çÀ‚ç‚¹‚éƒLƒƒƒ‰‚ğ‘I‘ğ‚³‚¹‚é
+                // èª°ã‚‚åº§ã£ã¦ã„ãªã‹ã£ãŸã‚‰åº§ã‚‰ã›ã‚‹ã‚­ãƒ£ãƒ©ã‚’é¸æŠã•ã›ã‚‹
                 RogueDevice.Primary.AddMenu(menu, user, null, new(targetObj: self));
                 return false;
             }

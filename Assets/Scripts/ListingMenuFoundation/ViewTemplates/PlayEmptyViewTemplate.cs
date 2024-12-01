@@ -1,4 +1,4 @@
-using System.Collections;
+Ôªøusing System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,7 +14,7 @@ namespace ListingMF
             if (manager == null) throw new System.ArgumentNullException(nameof(manager));
 
             if (!(manager.GetSubView(EmptySubViewName) is ElementsSubView elementsSubView)) throw new System.InvalidOperationException(
-                $"{EmptySubViewName} ÇÃ SubView ÇÕ {nameof(ElementsSubView)} Ç≈ÇÕÇ†ÇËÇ‹ÇπÇÒÅB");
+                $"{EmptySubViewName} „ÅÆ SubView „ÅØ {nameof(ElementsSubView)} „Åß„ÅØ„ÅÇ„Çä„Åæ„Åõ„Çì„ÄÇ");
 
             elementsSubView.PlayString(value);
         }
@@ -25,7 +25,7 @@ namespace ListingMF
             if (manager == null) throw new System.ArgumentNullException(nameof(manager));
 
             if (!(manager.GetSubView(EmptySubViewName) is ElementsSubView elementsSubView)) throw new System.InvalidOperationException(
-                $"{EmptySubViewName} ÇÃ SubView ÇÕ {nameof(ElementsSubView)} Ç≈ÇÕÇ†ÇËÇ‹ÇπÇÒÅB");
+                $"{EmptySubViewName} „ÅÆ SubView „ÅØ {nameof(ElementsSubView)} „Åß„ÅØ„ÅÇ„Çä„Åæ„Åõ„Çì„ÄÇ");
 
             elementsSubView.PlayObject(value);
         }

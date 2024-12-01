@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -46,7 +46,7 @@ namespace Roguegard
                 }
                 var questTable = questBoardInfo.QuestTable;
 
-                // ƒNƒGƒXƒg‚ğ4ŒÂ‚»‚ë‚¦‚é
+                // ã‚¯ã‚¨ã‚¹ãƒˆã‚’4å€‹ãã‚ãˆã‚‹
                 var random = RogueRandom.Primary;
                 while (questTable.Count < 4)
                 {
@@ -54,7 +54,7 @@ namespace Roguegard
                     questTable.Add(quest);
                 }
 
-                // Å­l”ˆÈã‚Å‘Ò‚¿ŠÔ‚ªƒ[ƒ‚É‚È‚Á‚½ƒNƒGƒXƒg‚Ío”­‚³‚¹‚é
+                // æœ€å°‘äººæ•°ä»¥ä¸Šã§å¾…ã¡æ™‚é–“ãŒã‚¼ãƒ­ã«ãªã£ãŸã‚¯ã‚¨ã‚¹ãƒˆã¯å‡ºç™ºã•ã›ã‚‹
                 questTable.UpdateWeightTurns();
                 for (int i = 0; i < questTable.Count; i++)
                 {

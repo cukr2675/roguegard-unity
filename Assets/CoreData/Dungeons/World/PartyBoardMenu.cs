@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -22,7 +22,7 @@ namespace Roguegard
 
         public override void OpenScreen(in MMgr manager, in MArg arg)
         {
-            // ƒƒr[ƒƒ“ƒo[‚Ìˆê——‚ğ•\¦‚·‚é
+            // ãƒ­ãƒ“ãƒ¼ãƒ¡ãƒ³ãƒãƒ¼ã®ä¸€è¦§ã‚’è¡¨ç¤ºã™ã‚‹
             var worldInfo = RogueWorldInfo.GetByCharacter(arg.Self);
             var lobbyMembers = worldInfo.LobbyMembers.Members;
             elms.Clear();
@@ -41,13 +41,13 @@ namespace Roguegard
                 {
                     if (obj == null)
                     {
-                        return "+ ’Ç‰Á";
+                        return "+ è¿½åŠ ";
                     }
                     else
                     {
                         var info = LobbyMemberList.GetMemberInfo(obj);
                         var name = obj.GetName();
-                        if (info.Seat != null) return "<#ffff00>" + name; // È‚É‚Â‚¢‚Ä‚¢‚éƒLƒƒƒ‰‚Í•Êƒƒjƒ…[
+                        if (info.Seat != null) return "<#ffff00>" + name; // å¸­ã«ã¤ã„ã¦ã„ã‚‹ã‚­ãƒ£ãƒ©ã¯åˆ¥ãƒ¡ãƒ‹ãƒ¥ãƒ¼
                         else return name;
                     }
                 })
@@ -57,20 +57,20 @@ namespace Roguegard
                 {
                     if (obj == null)
                     {
-                        // V‹Kƒƒ“ƒo[ì¬
+                        // æ–°è¦ãƒ¡ãƒ³ãƒãƒ¼ä½œæˆ
                         var builder = RoguegardSettings.CharacterCreationDatabase.LoadPreset(0);
                         manager.PushMenuScreen(newMenu, arg.Self, arg.User, other: builder);
                     }
                     else
                     {
-                        // Šù‘¶ƒƒ“ƒo[‚Ìƒƒjƒ…[•\¦
+                        // æ—¢å­˜ãƒ¡ãƒ³ãƒãƒ¼ã®ãƒ¡ãƒ‹ãƒ¥ãƒ¼è¡¨ç¤º
                         var info = LobbyMemberList.GetMemberInfo(obj);
                         if (info.Seat != null)
                         {
-                            // È‚É‚Â‚¢‚Ä‚¢‚éƒLƒƒƒ‰‚Í‚»‚±‚©‚çŒÄ‚Ñ–ß‚·‚©q‚Ë‚é
+                            // å¸­ã«ã¤ã„ã¦ã„ã‚‹ã‚­ãƒ£ãƒ©ã¯ãã“ã‹ã‚‰å‘¼ã³æˆ»ã™ã‹å°‹ã­ã‚‹
                             callLobbyDialog ??= new ChoicesMenuScreen(
-                                (manager, arg) => $"{arg.Arg.TargetObj}‚ğŒÄ‚Ñ–ß‚µ‚Ü‚·‚©H")
-                            .Option("‚Í‚¢", CallLobby)
+                                (manager, arg) => $"{arg.Arg.TargetObj}ã‚’å‘¼ã³æˆ»ã—ã¾ã™ã‹ï¼Ÿ")
+                            .Option("ã¯ã„", CallLobby)
                             .Back();
 
                             manager.PushMenuScreen(callLobbyDialog, arg.Self, targetObj: obj);
@@ -87,7 +87,7 @@ namespace Roguegard
 
         private static void CallLobby(MMgr manager, MArg arg)
         {
-            // ƒNƒGƒXƒg‚ğ’†~‚µ‚ÄƒLƒƒƒ‰‚ğÈ‚©‚çŒÄ‚Ñ–ß‚·
+            // ã‚¯ã‚¨ã‚¹ãƒˆã‚’ä¸­æ­¢ã—ã¦ã‚­ãƒ£ãƒ©ã‚’å¸­ã‹ã‚‰å‘¼ã³æˆ»ã™
             var character = arg.Arg.TargetObj;
             var leader = character.Main.Stats.Party.Members[0];
             default(IActiveRogueMethodCaller).LocateSavePoint(leader, null, 0f, RogueWorldSavePointInfo.Instance, true);
@@ -109,16 +109,16 @@ namespace Roguegard
             public override void OpenScreen(in MMgr manager, in MArg arg)
             {
                 view.ShowTemplate(manager, arg)
-                    ?.Option("Œğ‘ã", Change)
-                    .Option("‰Á“ü", Invite)
-                    .Option("•ÒW", Edit)
+                    ?.Option("äº¤ä»£", Change)
+                    .Option("åŠ å…¥", Invite)
+                    .Option("ç·¨é›†", Edit)
                     .Back()
                     .Build();
             }
 
             private static void Change(MMgr manager, MArg arg)
             {
-                // È‚ªİ’è‚³‚ê‚Ä‚¢‚éê‡‚Í¸”s‚³‚¹‚é
+                // å¸­ãŒè¨­å®šã•ã‚Œã¦ã„ã‚‹å ´åˆã¯å¤±æ•—ã•ã›ã‚‹
                 var info = LobbyMemberList.GetMemberInfo(arg.Arg.TargetObj);
                 if (info?.Seat != null)
                 {
@@ -129,7 +129,7 @@ namespace Roguegard
                 manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
                 var newPlayer = arg.Arg.TargetObj;
 
-                // ‹óŠÔˆÚ“®
+                // ç©ºé–“ç§»å‹•
                 var self = arg.Self;
                 var location = self.Location;
                 var position = self.Position;
@@ -137,7 +137,7 @@ namespace Roguegard
                 SpaceUtility.TryLocate(newPlayer, location, position);
                 newPlayer.Main.Stats.Direction = RogueDirection.Down;
 
-                // ƒp[ƒeƒBˆÚ“®
+                // ãƒ‘ãƒ¼ãƒ†ã‚£ç§»å‹•
                 var party = self.Main.Stats.Party;
                 self.Main.Stats.UnassignParty(self, party);
                 newPlayer.Main.Stats.TryAssignParty(newPlayer, party);
@@ -149,7 +149,7 @@ namespace Roguegard
 
             private static void Invite(MMgr manager, MArg arg)
             {
-                // È‚ªİ’è‚³‚ê‚Ä‚¢‚éê‡‚Í¸”s‚³‚¹‚é
+                // å¸­ãŒè¨­å®šã•ã‚Œã¦ã„ã‚‹å ´åˆã¯å¤±æ•—ã•ã›ã‚‹
                 var info = LobbyMemberList.GetMemberInfo(arg.Arg.TargetObj);
                 if (info?.Seat != null)
                 {
@@ -160,12 +160,12 @@ namespace Roguegard
                 manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
                 var newMember = arg.Arg.TargetObj;
 
-                // ‹óŠÔˆÚ“®
+                // ç©ºé–“ç§»å‹•
                 var party = arg.Self.Main.Stats.Party;
                 if (!default(IChangeStateRogueMethodCaller).LocateNextToAnyMember(newMember, arg.Self, 0f, party)) return;
                 newMember.Main.Stats.Direction = RogueDirection.Down;
 
-                // ƒp[ƒeƒBˆÚ“®
+                // ãƒ‘ãƒ¼ãƒ†ã‚£ç§»å‹•
                 newMember.Main.Stats.TryAssignParty(newMember, party);
                 info.Seat = null;
                 info.SavePoint = null;
@@ -184,7 +184,7 @@ namespace Roguegard
 
             private static void Edit(MMgr manager, MArg arg)
             {
-                // È‚ªİ’è‚³‚ê‚Ä‚¢‚éê‡‚Í¸”s‚³‚¹‚é
+                // å¸­ãŒè¨­å®šã•ã‚Œã¦ã„ã‚‹å ´åˆã¯å¤±æ•—ã•ã›ã‚‹
                 var info = LobbyMemberList.GetMemberInfo(arg.Arg.TargetObj);
                 if (info?.Seat != null)
                 {

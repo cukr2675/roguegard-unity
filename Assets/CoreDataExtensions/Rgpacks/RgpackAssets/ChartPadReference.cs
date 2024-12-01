@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -25,9 +25,9 @@ namespace Roguegard.Rgpacks
         public void MoveNext()
         {
             var nextCmn = Asset.GetNextCmnFrom(CurrentCmn);
-            if (nextCmn == null) return; // I’[‚É’B‚µ‚Ä‚¢‚éê‡‚Í‰½‚à‚µ‚È‚¢
+            if (nextCmn == null) return; // çµ‚ç«¯ã«é”ã—ã¦ã„ã‚‹å ´åˆã¯ä½•ã‚‚ã—ãªã„
 
-            CurrentCmn = nextCmn.Cmn; // nextFrom() “à‚Åg—p‚·‚é‚½‚ßƒRƒ‚ƒ“ƒCƒxƒ“ƒgÀs‘O‚Éİ’è‚·‚é
+            CurrentCmn = nextCmn.Cmn; // nextFrom() å†…ã§ä½¿ç”¨ã™ã‚‹ãŸã‚ã‚³ãƒ¢ãƒ³ã‚¤ãƒ™ãƒ³ãƒˆå®Ÿè¡Œå‰ã«è¨­å®šã™ã‚‹
             nextCmn.Invoke();
         }
 

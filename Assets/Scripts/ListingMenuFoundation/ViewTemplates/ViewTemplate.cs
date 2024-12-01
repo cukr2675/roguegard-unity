@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -19,7 +19,7 @@ namespace ListingMF
         public bool IsBuilt { get; private set; }
 
         /// <summary>
-        /// ‚±‚Ìƒƒ\ƒbƒh‚ª¸”s‚·‚éifalse ‚ğ•Ô‚·j‚Æ‚«‚Ì‚İ FluentBuilder ‚ğ•Ô‚·‚æ‚¤‚ÉÀ‘•‚·‚é
+        /// ã“ã®ãƒ¡ã‚½ãƒƒãƒ‰ãŒå¤±æ•—ã™ã‚‹ï¼ˆfalse ã‚’è¿”ã™ï¼‰ã¨ãã®ã¿ FluentBuilder ã‚’è¿”ã™ã‚ˆã†ã«å®Ÿè£…ã™ã‚‹
         /// </summary>
         protected bool TryShowSubViews(TMgr manager, TArg arg)
         {
@@ -37,7 +37,7 @@ namespace ListingMF
         protected abstract void ShowSubViews(TMgr manager, TArg arg);
 
         /// <summary>
-        /// ƒtƒ‹ƒGƒ“ƒgƒrƒ‹ƒ_[ƒNƒ‰ƒX
+        /// ãƒ•ãƒ«ã‚¨ãƒ³ãƒˆãƒ“ãƒ«ãƒ€ãƒ¼ã‚¯ãƒ©ã‚¹
         /// </summary>
         public abstract class BaseBuilder<TOut>
             where TOut : BaseBuilder<TOut>
@@ -55,7 +55,7 @@ namespace ListingMF
 
             protected void AssertNotBuilded()
             {
-                if (parent.IsBuilt) throw new System.InvalidOperationException($"{parent} ‚Íƒrƒ‹ƒhÏ‚İ‚Å‚·B");
+                if (parent.IsBuilt) throw new System.InvalidOperationException($"{parent} ã¯ãƒ“ãƒ«ãƒ‰æ¸ˆã¿ã§ã™ã€‚");
             }
 
             public TOut VariableOnce<T>(out T variable, T defaultValue = default)

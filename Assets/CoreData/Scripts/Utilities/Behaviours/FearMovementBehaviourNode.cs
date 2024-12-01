@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,7 +15,7 @@ namespace Roguegard
             var movement = MovementCalculator.Get(self);
             if (!movement.SubIs(StdKw.Fear)) return RogueObjUpdaterContinueType.Continue;
 
-            // “G‚ªƒvƒŒƒCƒ„[‚ğ•Ç‰z‚µ‚É@’m‚µ‚Ä‹ß‚Ã‚¢‚Ä‚µ‚Ü‚í‚È‚¢‚æ‚¤‚É‹ŠE‹——£‚ÍŒÅ’è
+            // æ•µãŒãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’å£è¶Šã—ã«å¯ŸçŸ¥ã—ã¦è¿‘ã¥ã„ã¦ã—ã¾ã‚ãªã„ã‚ˆã†ã«è¦–ç•Œè·é›¢ã¯å›ºå®š
             var visibleRadius = RoguegardSettings.DefaultVisibleRadius;
             if (!self.Location.Space.TryGetRoomView(self.Position, out var room, out _)) { room = new RectInt(); }
 
@@ -29,12 +29,12 @@ namespace Roguegard
                 var distance = obj.Position - self.Position;
                 if (distance.sqrMagnitude >= sqrVisibleRadius && !room.Contains(obj.Position)) continue;
 
-                // “¦‚°‚é
+                // é€ƒã’ã‚‹
                 var targetPosition = walker.GetWalk(self, true);
                 if (RogueDirection.TryFromSign(targetPosition - self.Position, out var direction))
                 {
                     default(IActiveRogueMethodCaller).Walk(self, direction, activationDepth, true);
-                    walker.GetWalk(self, true); // ˆÚ“®‚µ‚½’¼Œã‚Ì‹ŠE‚ÅƒpƒX‚ğXV
+                    walker.GetWalk(self, true); // ç§»å‹•ã—ãŸç›´å¾Œã®è¦–ç•Œã§ãƒ‘ã‚¹ã‚’æ›´æ–°
                 }
                 return RogueObjUpdaterContinueType.Break;
             }

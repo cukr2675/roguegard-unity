@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,7 +8,7 @@ namespace Roguegard
     {
         [SerializeField] private string _descriptionName = null;
         protected string DescriptionNameSource => _descriptionName;
-        [System.NonSerialized] private string _nameCache; // null ‚É‚·‚é‚½‚ß NonSerialized ‚ğİ’è‚·‚é
+        [System.NonSerialized] private string _nameCache; // null ã«ã™ã‚‹ãŸã‚ NonSerialized ã‚’è¨­å®šã™ã‚‹
         public virtual string DescriptionName
         {
             get

@@ -1,11 +1,11 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace ListingMF
 {
     /// <summary>
-    /// İ’è‚³‚ê‚½ <see cref="IElementHandler"/> ‚ÆƒŠƒXƒg‚ğ‚à‚Æ‚É UI ‚ğ•\¦‚·‚éƒCƒ“ƒ^[ƒtƒF[ƒXB
+    /// è¨­å®šã•ã‚ŒãŸ <see cref="IElementHandler"/> ã¨ãƒªã‚¹ãƒˆã‚’ã‚‚ã¨ã« UI ã‚’è¡¨ç¤ºã™ã‚‹ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ãƒ¼ã‚¹ã€‚
     /// </summary>
     public interface IElementsSubView
     {

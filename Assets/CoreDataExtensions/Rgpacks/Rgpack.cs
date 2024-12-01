@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -26,14 +26,14 @@ namespace Roguegard.Rgpacks
                 var assetID = directoryName + pair.Key;
                 var fullID = ID + "." + assetID;
 
-                // ƒL[‚Éƒhƒbƒg (.) ‚ª‘¶İ‚·‚é‚Æ‚«A•¶š‚Ì’·‚³‚ª 1 ‚Å‚ ‚éA‚Ü‚½‚ÍI’[ˆÈŠO‚Éƒhƒbƒg‚ª‘¶İ‚·‚éê‡‚ÍŒx‚ğ•\¦‚µ‚Ä–³‹‚·‚é
+                // ã‚­ãƒ¼ã«ãƒ‰ãƒƒãƒˆ (.) ãŒå­˜åœ¨ã™ã‚‹ã¨ãã€æ–‡å­—ã®é•·ã•ãŒ 1 ã§ã‚ã‚‹ã€ã¾ãŸã¯çµ‚ç«¯ä»¥å¤–ã«ãƒ‰ãƒƒãƒˆãŒå­˜åœ¨ã™ã‚‹å ´åˆã¯è­¦å‘Šã‚’è¡¨ç¤ºã—ã¦ç„¡è¦–ã™ã‚‹
                 if (pair.Key.Contains('.') && (pair.Key.Length == 1 || pair.Key.IndexOf('.') != pair.Key.Length - 1))
                 {
-                    Debug.LogWarning($"•s³‚È–¼‘O ({fullID}) ‚ª‘¶İ‚µ‚Ü‚·B");
+                    Debug.LogWarning($"ä¸æ­£ãªåå‰ ({fullID}) ãŒå­˜åœ¨ã—ã¾ã™ã€‚");
                     continue;
                 }
 
-                // ƒTƒuƒfƒBƒŒƒNƒgƒŠ
+                // ã‚µãƒ–ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒª
                 if (pair.Key.EndsWith("."))
                 {
                     if (pair.Value is IReadOnlyDictionary<string, object> subDirectory)
@@ -43,7 +43,7 @@ namespace Roguegard.Rgpacks
                     continue;
                 }
 
-                // •¶š—ñ‚ÍƒXƒNƒŠƒvƒg‚Æ‚µ‚Ä•]‰¿‚·‚é
+                // æ–‡å­—åˆ—ã¯ã‚¹ã‚¯ãƒªãƒ—ãƒˆã¨ã—ã¦è©•ä¾¡ã™ã‚‹
                 if (pair.Value is string code)
                 {
                     var evaluatedPairs = evaluator.Evaluate(code);
@@ -54,7 +54,7 @@ namespace Roguegard.Rgpacks
                     continue;
                 }
                 
-                // ‚»‚Ì‘¼‚ÍƒAƒZƒbƒg‚É•ÏŠ·
+                // ãã®ä»–ã¯ã‚¢ã‚»ãƒƒãƒˆã«å¤‰æ›
                 if (pair.Value is CharacterCreationDataBuilder characterCreationDataBuilder)
                 {
                     table.Add(assetID, new CharacterCreationPresetAsset(characterCreationDataBuilder));

@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -17,16 +17,16 @@ namespace Roguegard
 
             var nearestQuestBoardInfo = GetNearestQuestBoardInfo(self);
 
-            // ƒNƒGƒXƒg‚ğó’Ï‚İ‚È‚ç‘Ò‹@‚·‚é
+            // ã‚¯ã‚¨ã‚¹ãƒˆã‚’å—æ³¨æ¸ˆã¿ãªã‚‰å¾…æ©Ÿã™ã‚‹
             if (nearestQuestBoardInfo.QuestTable.Contains(self.Main.Stats.Party)) return RogueObjUpdaterContinueType.Break;
 
             if (count <= 0)
             {
-                // c‚èƒJƒEƒ“ƒg‚ªİ’è‚³‚ê‚Ä‚¢‚È‚¯‚ê‚ÎA—”‚ÅƒJƒEƒ“ƒg‚ğİ’è‚·‚é
+                // æ®‹ã‚Šã‚«ã‚¦ãƒ³ãƒˆãŒè¨­å®šã•ã‚Œã¦ã„ãªã‘ã‚Œã°ã€ä¹±æ•°ã§ã‚«ã‚¦ãƒ³ãƒˆã‚’è¨­å®šã™ã‚‹
                 count = RogueRandom.Primary.Next(minCount, maxCount);
 
-                // “¯‚ÉŒ»İ‚Ìƒp[ƒeƒB‚©‚ç”²‚¯‚é
-                // ©•ª‚ªƒŠ[ƒ_[‚Ì‚Æ‚«‚Íƒp[ƒeƒB‚ğ‰ğ‘Ì‚·‚é
+                // åŒæ™‚ã«ç¾åœ¨ã®ãƒ‘ãƒ¼ãƒ†ã‚£ã‹ã‚‰æŠœã‘ã‚‹
+                // è‡ªåˆ†ãŒãƒªãƒ¼ãƒ€ãƒ¼ã®ã¨ãã¯ãƒ‘ãƒ¼ãƒ†ã‚£ã‚’è§£ä½“ã™ã‚‹
                 var party = self.Main.Stats.Party;
                 if (party != null)
                 {
@@ -47,14 +47,14 @@ namespace Roguegard
                 }
             }
 
-            // ƒJƒEƒ“ƒg‚ªƒ[ƒ‚É‚È‚é‘O‚ÉA“¯‚¶ƒNƒGƒXƒgƒ{[ƒh‚©‚çó’Ï‚İ‚Ìƒƒr[ƒƒ“ƒo[‚ª‚¢‚½‚ç‚»‚±‚ÉQ‰Á‚·‚é
+            // ã‚«ã‚¦ãƒ³ãƒˆãŒã‚¼ãƒ­ã«ãªã‚‹å‰ã«ã€åŒã˜ã‚¯ã‚¨ã‚¹ãƒˆãƒœãƒ¼ãƒ‰ã‹ã‚‰å—æ³¨æ¸ˆã¿ã®ãƒ­ãƒ“ãƒ¼ãƒ¡ãƒ³ãƒãƒ¼ãŒã„ãŸã‚‰ãã“ã«å‚åŠ ã™ã‚‹
             if (nearestQuestBoardInfo.TryAutoAssign(self))
             {
                 count = 0;
                 return RogueObjUpdaterContinueType.Break;
             }
 
-            // ƒJƒEƒ“ƒg‚ªƒ[ƒ‚É‚È‚Á‚½‚Æ‚«ƒNƒGƒXƒg‚ğó’
+            // ã‚«ã‚¦ãƒ³ãƒˆãŒã‚¼ãƒ­ã«ãªã£ãŸã¨ãã‚¯ã‚¨ã‚¹ãƒˆã‚’å—æ³¨
             count--;
             if (count <= 0)
             {

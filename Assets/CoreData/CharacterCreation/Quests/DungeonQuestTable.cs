@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,7 +15,7 @@ namespace Roguegard.CharacterCreation
         {
             var item = items[index];
 
-            // ƒp[ƒeƒBƒƒ“ƒo[‚ª‚¢‚È‚¢‚È‚ç‚»‚Ìƒp[ƒeƒB‚Ííœ‚·‚é
+            // ãƒ‘ãƒ¼ãƒ†ã‚£ãƒ¡ãƒ³ãƒãƒ¼ãŒã„ãªã„ãªã‚‰ãã®ãƒ‘ãƒ¼ãƒ†ã‚£ã¯å‰Šé™¤ã™ã‚‹
             if (item.party != null && item.party.Members.Count == 0)
             {
                 item.party = null;
@@ -33,8 +33,8 @@ namespace Roguegard.CharacterCreation
         public bool TryAcceptAt(int index, RogueParty party, int weightTurns)
         {
             var item = items[index];
-            if (item.party != null) return false; // ‘¼‚Ìƒp[ƒeƒB‚ªó’Ï‚İ
-            if (Contains(party)) return false; // ƒp[ƒeƒB‚ª‚·‚Å‚É‘¼‚ÌƒNƒGƒXƒg‚ğó’‚µ‚Ä‚¢‚é
+            if (item.party != null) return false; // ä»–ã®ãƒ‘ãƒ¼ãƒ†ã‚£ãŒå—æ³¨æ¸ˆã¿
+            if (Contains(party)) return false; // ãƒ‘ãƒ¼ãƒ†ã‚£ãŒã™ã§ã«ä»–ã®ã‚¯ã‚¨ã‚¹ãƒˆã‚’å—æ³¨ã—ã¦ã„ã‚‹
 
             item.party = party;
             item.weightTurns = weightTurns;

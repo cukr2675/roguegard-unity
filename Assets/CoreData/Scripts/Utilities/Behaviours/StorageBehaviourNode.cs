@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -42,12 +42,12 @@ namespace Roguegard
                     itemRegister.SetItem(i, item);
                 }
 
-                // ‘•”õ•i‚ğò‰»
+                // è£…å‚™å“ã‚’æµ„åŒ–
                 EquipmentUtility.Cleansing(item);
 
                 if (itemIsEquipped && item.Main.GetEquipmentInfo(item).EquipIndex == -1)
                 {
-                    // ‘•”õ•i‚ğ‘•”õ‚µ‚È‚¨‚·
+                    // è£…å‚™å“ã‚’è£…å‚™ã—ãªãŠã™
                     default(IActiveRogueMethodCaller).TryEquip(item, self, activationDepth);
                 }
             }
@@ -59,7 +59,7 @@ namespace Roguegard
                 var item = items[i];
                 if (item == null || itemRegister.Contains(item)) continue;
 
-                // ‚½‚¹‚½ƒAƒCƒeƒ€ˆÈŠO‚ğƒ`ƒFƒXƒg‚É‚µ‚Ü‚¤
+                // æŒãŸã›ãŸã‚¢ã‚¤ãƒ†ãƒ ä»¥å¤–ã‚’ãƒã‚§ã‚¹ãƒˆã«ã—ã¾ã†
                 RogueMethodAspectState.Invoke(MainInfoKw.Walk, chestInfo.TakeIn, nearestChest, self, activationDepth, new(targetObj: item));
             }
             return RogueObjUpdaterContinueType.Continue;

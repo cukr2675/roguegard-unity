@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -35,7 +35,7 @@ namespace Roguegard
 
                 if (obj.Position == self.Position)
                 {
-                    // ŠK’i‚É‚Â‚¢‚½‚çg‚¤
+                    // éšæ®µã«ã¤ã„ãŸã‚‰ä½¿ã†
                     if (obj.Main.InfoSet.Category == CategoryKw.LevelDownStairs)
                     {
                         if (apply.CommandInvoke(self, null, activationDepth, new(tool: obj)))
@@ -52,7 +52,7 @@ namespace Roguegard
                     }
                 }
 
-                // ŠK’i‚ğŒ©‚Â‚¯‚½‚ç‚»‚±‚Ü‚ÅˆÚ“®
+                // éšæ®µã‚’è¦‹ã¤ã‘ãŸã‚‰ãã“ã¾ã§ç§»å‹•
                 if (!PathBuilder.UpdatePath(self, obj.Position)) return RogueObjUpdaterContinueType.Continue;
                 if (!PathBuilder.TryGetNextDirection(self, out var nextDirection)) return RogueObjUpdaterContinueType.Continue;
 
@@ -70,7 +70,7 @@ namespace Roguegard
                 }
                 if (!selectedPositionIsEnabled)
                 {
-                    // ŠK’i‚ªŒ©‚Â‚©‚ç‚È‚©‚Á‚½‚ç’Tõ
+                    // éšæ®µãŒè¦‹ã¤ã‹ã‚‰ãªã‹ã£ãŸã‚‰æ¢ç´¢
                     if (!UpdateSelectedPosition(self, view)) return RogueObjUpdaterContinueType.Continue;
                 }
                 if (!PathBuilder.UpdatePath(self, selectedPosition) ||

@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -35,7 +35,7 @@ namespace Roguegard.Rgpacks
                 {
                     tilemap.Set(_groundTile, x, y);
 
-                    // ƒ}ƒbƒv’[‚Í•Ç
+                    // ãƒãƒƒãƒ—ç«¯ã¯å£
                     if (x == 0 || x == tilemap.Width - 1 || y == 0 || y == tilemap.Height - 1)
                     {
                         tilemap.Set(_wallTile, x, y);

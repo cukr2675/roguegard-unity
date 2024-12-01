@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -17,12 +17,12 @@ namespace ListingMF
         private Navigation notBlockedNavigation;
 
         /// <summary>
-        /// ‚±‚Ì’l‚ª true ‚Ì‚Æ‚«‘I‘ğ‚µ‚æ‚¤‚Æ‚µ‚Ä‚àƒLƒƒƒ“ƒZƒ‹‚·‚é
+        /// ã“ã®å€¤ãŒ true ã®ã¨ãé¸æŠã—ã‚ˆã†ã¨ã—ã¦ã‚‚ã‚­ãƒ£ãƒ³ã‚»ãƒ«ã™ã‚‹
         /// </summary>
         private bool isOutOfRange;
 
         /// <summary>
-        /// ‚±‚Ì’l‚ª true ‚Ì‚Æ‚«UIƒiƒrƒQ[ƒVƒ‡ƒ“‚É‚æ‚é‘I‘ğ‚ğ–³Œø‚É‚·‚é
+        /// ã“ã®å€¤ãŒ true ã®ã¨ãUIãƒŠãƒ“ã‚²ãƒ¼ã‚·ãƒ§ãƒ³ã«ã‚ˆã‚‹é¸æŠã‚’ç„¡åŠ¹ã«ã™ã‚‹
         /// </summary>
         protected bool IsBlocked { get; private set; }
 
@@ -81,7 +81,7 @@ namespace ListingMF
 
         void ISelectHandler.OnSelect(BaseEventData eventData) => Parent.OnSelectViewElement(this, isOutOfRange);
 
-        // Animation ‚©‚çŒÄ‚Ño‚·ƒƒ\ƒbƒh
+        // Animation ã‹ã‚‰å‘¼ã³å‡ºã™ãƒ¡ã‚½ãƒƒãƒ‰
         public void PlayString(string value) => Parent.PlayFromElement(value, this);
         public void PlayObject(Object value) => Parent.PlayFromElement(value, this);
 

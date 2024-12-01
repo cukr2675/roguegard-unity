@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -68,7 +68,7 @@ namespace ListingMF
             }
             else
             {
-                // •¶š—ñ‚ğƒ[ƒJƒ‰ƒCƒY‚µ‚Ä•\¦
+                // æ–‡å­—åˆ—ã‚’ãƒ­ãƒ¼ã‚«ãƒ©ã‚¤ã‚ºã—ã¦è¡¨ç¤º
                 _text.text = _parent.Manager.Localize(text);
 
                 _text.ForceMeshUpdate(true, true);

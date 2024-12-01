@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -45,7 +45,7 @@ namespace Roguegard
             }
             else
             {
-                throw new RogueException("ã‘‚«•s‰Â");
+                throw new RogueException("ä¸Šæ›¸ãä¸å¯");
             }
         }
 

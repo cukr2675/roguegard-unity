@@ -1,13 +1,13 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Roguegard.CharacterCreation
 {
     /// <summary>
-    /// <see cref="ScriptableObject"/> ‚É‚¹‚¸ <see cref="ScriptField{T}"/> ‚ÅÏ‚Ü‚¹‚é‚±‚Æ‚à‚Å‚«‚é‚ªA
-    /// <see cref="AppearanceOption"/> ‚â <see cref="IStartingItemOption"/> ‚Æ“¯‚¶‚æ‚¤‚É
-    /// <see cref="ScriptableObject"/> ‚Åˆµ‚¦‚½‚Ù‚¤‚ªˆ—‚Ì‹¤’Ê‰»‚ªŒ©‚ß‚é
+    /// <see cref="ScriptableObject"/> ã«ã›ãš <see cref="ScriptField{T}"/> ã§æ¸ˆã¾ã›ã‚‹ã“ã¨ã‚‚ã§ãã‚‹ãŒã€
+    /// <see cref="AppearanceOption"/> ã‚„ <see cref="IStartingItemOption"/> ã¨åŒã˜ã‚ˆã†ã«
+    /// <see cref="ScriptableObject"/> ã§æ‰±ãˆãŸã»ã†ãŒå‡¦ç†ã®å…±é€šåŒ–ãŒè¦‹è¾¼ã‚ã‚‹
     /// </summary>
     public abstract class IntrinsicOption : RogueDescriptionData, IIntrinsicOption
     {

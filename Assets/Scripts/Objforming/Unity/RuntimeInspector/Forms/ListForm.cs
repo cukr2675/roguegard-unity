@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,7 +9,7 @@ namespace Objforming.Unity.RuntimeInspector
         public static RelationalForm Create(System.Type type, LinkElement linkElementPrefab)
         {
             var typeDefinition = type.GetGenericTypeDefinition();
-            if (typeDefinition != typeof(List<>)) throw new System.ArgumentException($"w’è‚ÌŒ^ {type} ‚Í {typeof(List<>)} ‚Å‚Í‚ ‚è‚Ü‚¹‚ñB");
+            if (typeDefinition != typeof(List<>)) throw new System.ArgumentException($"æŒ‡å®šã®å‹ {type} ã¯ {typeof(List<>)} ã§ã¯ã‚ã‚Šã¾ã›ã‚“ã€‚");
 
             var formType = typeof(ListForm<>).MakeGenericType(type.GenericTypeArguments);
             return (RelationalForm)System.Activator.CreateInstance(formType, new object[] { linkElementPrefab });

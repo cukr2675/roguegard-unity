@@ -1,11 +1,11 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace ListingMF
 {
     /// <summary>
-    /// <see cref="MessageBox.NextCharacterPosition"/> ‚É’Ç]‚·‚éƒRƒ“ƒ|[ƒlƒ“ƒg
+    /// <see cref="MessageBox.NextCharacterPosition"/> ã«è¿½å¾“ã™ã‚‹ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆ
     /// </summary>
     [AddComponentMenu("UI/Listing Menu Foundation/LMF Message Arrow")]
     public class MessageArrow : MonoBehaviour

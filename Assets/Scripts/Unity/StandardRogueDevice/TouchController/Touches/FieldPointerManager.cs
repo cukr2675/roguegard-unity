@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -55,10 +55,10 @@ namespace RoguegardUnity
 
         public void UpdateField()
         {
-            // ’·‰Ÿ‚µ”»’è
+            // é•·æŠ¼ã—åˆ¤å®š
             if (readyToLongDown)
             {
-                // ’·‰Ÿ‚µŠÔ‚ªˆê’è‚ğ’´‚¦‚½‚Æ‚«Às
+                // é•·æŠ¼ã—æ™‚é–“ãŒä¸€å®šã‚’è¶…ãˆãŸã¨ãå®Ÿè¡Œ
                 if (downSeconds >= LongDownSeconds)
                 {
                     var pointer = pointer0.Data ?? pointer1.Data;
@@ -66,11 +66,11 @@ namespace RoguegardUnity
                     ClearTouches();
                 }
 
-                // ’·‰Ÿ‚µŠÔ‚ği‚ß‚é
+                // é•·æŠ¼ã—æ™‚é–“ã‚’é€²ã‚ã‚‹
                 downSeconds += Time.deltaTime;
             }
 
-            // ƒsƒ“ƒ`ƒCƒ“Eƒsƒ“ƒ`ƒAƒEƒg
+            // ãƒ”ãƒ³ãƒã‚¤ãƒ³ãƒ»ãƒ”ãƒ³ãƒã‚¢ã‚¦ãƒˆ
             var pinch = pointer0.IsHeldDown && pointer1.IsHeldDown;
             if (pinch)
             {
@@ -80,7 +80,7 @@ namespace RoguegardUnity
             }
             else if (lastPinch && info.PowedZoom >= 1f - ZoomClippingRadius)
             {
-                // ƒsƒ“ƒ`ƒCƒ“Eƒsƒ“ƒ`ƒAƒEƒgI—¹ŒãAƒNƒŠƒbƒv”ÍˆÍ“à‚È‚çƒY[ƒ€”{—¦‚ğ®”‚É‚·‚éBiƒhƒbƒg‚ğ³•ûŒ`‚É‚·‚é‚½‚ßj
+                // ãƒ”ãƒ³ãƒã‚¤ãƒ³ãƒ»ãƒ”ãƒ³ãƒã‚¢ã‚¦ãƒˆçµ‚äº†å¾Œã€ã‚¯ãƒªãƒƒãƒ—ç¯„å›²å†…ãªã‚‰ã‚ºãƒ¼ãƒ å€ç‡ã‚’æ•´æ•°ã«ã™ã‚‹ã€‚ï¼ˆãƒ‰ãƒƒãƒˆã‚’æ­£æ–¹å½¢ã«ã™ã‚‹ãŸã‚ï¼‰
                 var clippedPowedZoom = Mathf.Round(info.PowedZoom);
                 if (Mathf.Abs(info.PowedZoom - clippedPowedZoom) <= clippedPowedZoom * ZoomClippingRadius)
                 {
@@ -96,11 +96,11 @@ namespace RoguegardUnity
 
             if (pinchOnly)
             {
-                // pinchOnly == true ‚Ìƒsƒ“ƒ`ƒCƒ“Eƒsƒ“ƒ`ƒAƒEƒg’†‚ÍƒJƒƒ‰ˆÚ“®‚ğ–³Œø‰»‚·‚éB
+                // pinchOnly == true ã®ãƒ”ãƒ³ãƒã‚¤ãƒ³ãƒ»ãƒ”ãƒ³ãƒã‚¢ã‚¦ãƒˆä¸­ã¯ã‚«ãƒ¡ãƒ©ç§»å‹•ã‚’ç„¡åŠ¹åŒ–ã™ã‚‹ã€‚
                 if (pointer0.IsHeldDown && pointer1.IsHeldDown) return;
 
-                // pinchOnly == true ‚Ìƒsƒ“ƒ`ƒCƒ“Eƒsƒ“ƒ`ƒAƒEƒg‚ªI—¹‚µ‚½‚Æ‚«Ac‚Á‚½w‚Í”ñƒhƒ‰ƒbƒO‚ÌV‹Kƒ^ƒbƒ`ˆµ‚¢‚É‚·‚éB
-                // i‚½‚¾‚µƒNƒŠƒbƒN‚Í–³Œø‚Ì‚Ü‚Ü‚É‚·‚éj
+                // pinchOnly == true ã®ãƒ”ãƒ³ãƒã‚¤ãƒ³ãƒ»ãƒ”ãƒ³ãƒã‚¢ã‚¦ãƒˆãŒçµ‚äº†ã—ãŸã¨ãã€æ®‹ã£ãŸæŒ‡ã¯éãƒ‰ãƒ©ãƒƒã‚°ã®æ–°è¦ã‚¿ãƒƒãƒæ‰±ã„ã«ã™ã‚‹ã€‚
+                // ï¼ˆãŸã ã—ã‚¯ãƒªãƒƒã‚¯ã¯ç„¡åŠ¹ã®ã¾ã¾ã«ã™ã‚‹ï¼‰
                 if (pointer0.IsHeldDown)
                 {
                     pointer0.PressPosition = pointer0.Position;
@@ -116,14 +116,14 @@ namespace RoguegardUnity
 
             if (info.StartsDrag)
             {
-                // ƒhƒ‰ƒbƒO‚ğn‚ß‚½uŠÔ‚ÌƒXƒNƒ[ƒ‹‚Í–³Œø
+                // ãƒ‰ãƒ©ãƒƒã‚°ã‚’å§‹ã‚ãŸç¬é–“ã®ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ã¯ç„¡åŠ¹
                 info.DragRelativePosition = Vector2.zero;
             }
             else
             {
                 if (pointer0.IsHeldDown && pointer1.IsHeldDown)
                 {
-                    // ƒsƒ“ƒ`ƒCƒ“Eƒsƒ“ƒ`ƒAƒEƒg‚Ìw‚Æw‚Ì’†ŠÔ“_‚ÉƒY[ƒ€‚·‚é‚æ‚¤‚ÉAƒhƒ‰ƒbƒOˆÊ’u‚ğ•â³‚·‚éB
+                    // ãƒ”ãƒ³ãƒã‚¤ãƒ³ãƒ»ãƒ”ãƒ³ãƒã‚¢ã‚¦ãƒˆã®æŒ‡ã¨æŒ‡ã®ä¸­é–“ç‚¹ã«ã‚ºãƒ¼ãƒ ã™ã‚‹ã‚ˆã†ã«ã€ãƒ‰ãƒ©ãƒƒã‚°ä½ç½®ã‚’è£œæ­£ã™ã‚‹ã€‚
                     var pressPosition = (pointer0.PressPosition + pointer1.PressPosition) / 2f;
                     var screenCenter = new Vector2(Screen.width, Screen.height) / 2f;
                     info.DragRelativePosition = -(pressPosition - screenCenter) * (Mathf.Pow(2f, info.Zoom - pressZoom) - 1f);
@@ -142,17 +142,17 @@ namespace RoguegardUnity
                 }
             }
 
-            // ƒ^ƒbƒ`”»’è‚ªƒWƒƒƒ“ƒv‚·‚éŒ»Û‚ğŒyŒ¸‚·‚é
+            // ã‚¿ãƒƒãƒåˆ¤å®šãŒã‚¸ãƒ£ãƒ³ãƒ—ã™ã‚‹ç¾è±¡ã‚’è»½æ¸›ã™ã‚‹
             if (pointer0.IsHeldDown && pointer1.IsHeldDown)
             {
-                // “¯ƒ^ƒbƒ`’†‚Íw‚ÌŠÔ‚Ì‹——£‚ğ‹L˜^‚·‚é
+                // åŒæ™‚ã‚¿ãƒƒãƒä¸­ã¯æŒ‡ã®é–“ã®è·é›¢ã‚’è¨˜éŒ²ã™ã‚‹
                 lastDistance = Vector2.Distance(pointer0.Position, pointer1.Position);
                 antiJumpTimerSeconds = AntiJumpValidSeconds;
             }
             else if (antiJumpTimerSeconds > 0f && pointer0.IsHeldDown || pointer1.IsHeldDown)
             {
-                // •Ğ•û‚Ìw‚ğ—£‚µ‚½‚ ‚ÆA‹L˜^‚µ‚½‹——£‚æ‚è’·‚¢‹——£‚ğˆÚ“®‚µ‚Ä‚¢‚½‚ç‚»‚Ì‘€ì‚ğ–³Œø‰»‚·‚é
-                // ƒWƒƒƒ“ƒvŒ»Û‚Í˜A‘±‚µ‚Ä”­¶‚·‚é‚½‚ßA˜A‘±‚µ‚Ä–³Œø‰»‚Å‚«‚é‚æ‚¤‚É‚·‚é
+                // ç‰‡æ–¹ã®æŒ‡ã‚’é›¢ã—ãŸã‚ã¨ã€è¨˜éŒ²ã—ãŸè·é›¢ã‚ˆã‚Šé•·ã„è·é›¢ã‚’ç§»å‹•ã—ã¦ã„ãŸã‚‰ãã®æ“ä½œã‚’ç„¡åŠ¹åŒ–ã™ã‚‹
+                // ã‚¸ãƒ£ãƒ³ãƒ—ç¾è±¡ã¯é€£ç¶šã—ã¦ç™ºç”Ÿã™ã‚‹ãŸã‚ã€é€£ç¶šã—ã¦ç„¡åŠ¹åŒ–ã§ãã‚‹ã‚ˆã†ã«ã™ã‚‹
                 if (info.DragRelativePosition.magnitude * info.PowedZoom >= lastDistance - AntiJumpDistanceThreshold)
                 {
                     if (pointer0.IsHeldDown) { pointer0.PressPosition = pointer0.Position; }
@@ -177,8 +177,8 @@ namespace RoguegardUnity
 
         private void SetPointers(PointerEventData pointer0, PointerEventData pointer1)
         {
-            // ƒ^ƒbƒ`‚ğŠJnE’â~‚µ‚½‚Æ‚«A‚·‚Å‚Éƒ^ƒbƒ`’†‚Ìw‚àŠÜ‚ß‚Äƒ^ƒbƒ`ŠJnˆÊ’u‚ğÄİ’è‚·‚éBiV‹Kƒhƒ‰ƒbƒOŠJnˆµ‚¢‚É‚·‚éj
-            // ƒhƒ‰ƒbƒOŠJn‚ÌƒJƒN‚Â‚«‚ğ‰ñ”ğ‚·‚é‚½‚ßA‚à‚Æ‚Ì pressPosition ‚Íg‚í‚È‚¢B
+            // ã‚¿ãƒƒãƒã‚’é–‹å§‹ãƒ»åœæ­¢ã—ãŸã¨ãã€ã™ã§ã«ã‚¿ãƒƒãƒä¸­ã®æŒ‡ã‚‚å«ã‚ã¦ã‚¿ãƒƒãƒé–‹å§‹ä½ç½®ã‚’å†è¨­å®šã™ã‚‹ã€‚ï¼ˆæ–°è¦ãƒ‰ãƒ©ãƒƒã‚°é–‹å§‹æ‰±ã„ã«ã™ã‚‹ï¼‰
+            // ãƒ‰ãƒ©ãƒƒã‚°é–‹å§‹æ™‚ã®ã‚«ã‚¯ã¤ãã‚’å›é¿ã™ã‚‹ãŸã‚ã€ã‚‚ã¨ã® pressPosition ã¯ä½¿ã‚ãªã„ã€‚
             if (pointer0 != null) { pointer0.pressPosition = pointer0.position; }
             if (pointer1 != null) { pointer1.pressPosition = pointer1.position; }
             this.pointer0.SetEventData(pointer0);
@@ -189,11 +189,11 @@ namespace RoguegardUnity
         }
 
         /// <summary>
-        /// ‰æ–Ê‚ğ‰Ÿ‚µn‚ß‚½‚Æ‚«‚ÉŒÄ‚Ño‚·ƒƒ\ƒbƒh
+        /// ç”»é¢ã‚’æŠ¼ã—å§‹ã‚ãŸã¨ãã«å‘¼ã³å‡ºã™ãƒ¡ã‚½ãƒƒãƒ‰
         /// </summary>
         private void PointerDown(PointerEventData eventData)
         {
-            // WebGL ‚Å‚Í pointerId ‚Í 0 ‚©‚ç‚Ì˜A”Ô‚Å‚Í‚È‚¢
+            // WebGL ã§ã¯ pointerId ã¯ 0 ã‹ã‚‰ã®é€£ç•ªã§ã¯ãªã„
 
             if (eventData.pointerId == pointer0.PointerID || eventData.pointerId == pointer1.PointerID)
             {
@@ -211,18 +211,18 @@ namespace RoguegardUnity
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            // ƒ}ƒEƒX‚Ìê‡‚Í¶ƒNƒŠƒbƒN‚Ì‚İˆµ‚¤
-            // ƒ^ƒbƒ`‘€ì‚Å‚Í‚·‚×‚Ä¶ƒNƒŠƒbƒNˆµ‚¢
+            // ãƒã‚¦ã‚¹ã®å ´åˆã¯å·¦ã‚¯ãƒªãƒƒã‚¯ã®ã¿æ‰±ã†
+            // ã‚¿ãƒƒãƒæ“ä½œã§ã¯ã™ã¹ã¦å·¦ã‚¯ãƒªãƒƒã‚¯æ‰±ã„
             if (eventData.pointerId < 0 && eventData.button != PointerEventData.InputButton.Left) return;
 
             if (info.IsPointing)
             {
-                // Šù‚Éƒ|ƒCƒ“ƒeƒBƒ“ƒO‚³‚ê‚Ä‚¢‚½‚çƒLƒƒƒ“ƒZƒ‹‚·‚éB
+                // æ—¢ã«ãƒã‚¤ãƒ³ãƒ†ã‚£ãƒ³ã‚°ã•ã‚Œã¦ã„ãŸã‚‰ã‚­ãƒ£ãƒ³ã‚»ãƒ«ã™ã‚‹ã€‚
                 info.ClearPointing();
                 return;
             }
 
-            // ƒJƒƒ‰ƒ‚[ƒh‚Éƒ|ƒCƒ“ƒeƒBƒ“ƒO‚³‚ê‚½‚ç‘‘—‚è‚·‚éB
+            // ã‚«ãƒ¡ãƒ©ãƒ¢ãƒ¼ãƒ‰æ™‚ã«ãƒã‚¤ãƒ³ãƒ†ã‚£ãƒ³ã‚°ã•ã‚ŒãŸã‚‰æ—©é€ã‚Šã™ã‚‹ã€‚
             info.SetPointing(GetCellPoint(eventData.position), fastForward: cameraController.IsCameraMode);
 
             info.IsClick = true;
@@ -235,14 +235,14 @@ namespace RoguegardUnity
 
             if (pointer0.IsHeldDown && pointer1.IsHeldDown)
             {
-                // ˆêu‚Å‚à“ñ“_ƒ^ƒbƒvó‘Ô‚É‚È‚Á‚½‚Æ‚«Aƒhƒ‰ƒbƒOˆµ‚¢‚É‚·‚éB
+                // ä¸€ç¬ã§ã‚‚äºŒç‚¹ã‚¿ãƒƒãƒ—çŠ¶æ…‹ã«ãªã£ãŸã¨ãã€ãƒ‰ãƒ©ãƒƒã‚°æ‰±ã„ã«ã™ã‚‹ã€‚
                 pointer0.Dragging = true;
                 pointer0.EligibleForClick = false;
                 pointer1.Dragging = true;
                 pointer1.EligibleForClick = false;
                 readyToLongDown = false;
 
-                // ƒJƒƒ‰ƒ‚[ƒh‚ÉØ‚è‘Ö‚¦‚é‚æ‚èæ‚É“ñ“_ƒ^ƒbƒvó‘Ô‚É‚È‚Á‚½‚Æ‚«‚ÍAƒsƒ“ƒ`‘€ì‚Ì‚İ‚É‚·‚éB
+                // ã‚«ãƒ¡ãƒ©ãƒ¢ãƒ¼ãƒ‰ã«åˆ‡ã‚Šæ›¿ãˆã‚‹ã‚ˆã‚Šå…ˆã«äºŒç‚¹ã‚¿ãƒƒãƒ—çŠ¶æ…‹ã«ãªã£ãŸã¨ãã¯ã€ãƒ”ãƒ³ãƒæ“ä½œã®ã¿ã«ã™ã‚‹ã€‚
                 if (!cameraController.IsCameraMode) { pinchOnly = true; }
             }
         }
@@ -264,21 +264,21 @@ namespace RoguegardUnity
         {
             if (pointer0.PointerID != eventData.pointerId && pointer1.PointerID != eventData.pointerId)
             {
-                // ’†’f‚µ‚½ƒ^ƒbƒ`ˆ—‚ğÄŠJ‚·‚éB
-                // ’Êí‚Ìƒhƒ‰ƒbƒO‘€ì‚Æ‹æ•Ê‚·‚é‚½‚ßA‚¢‚¸‚ê‚Ì ID ‚Æ‚àˆê’v‚µ‚È‚¢‚±‚Æ‚ğŠm”F‚·‚éB
+                // ä¸­æ–­ã—ãŸã‚¿ãƒƒãƒå‡¦ç†ã‚’å†é–‹ã™ã‚‹ã€‚
+                // é€šå¸¸ã®ãƒ‰ãƒ©ãƒƒã‚°æ“ä½œã¨åŒºåˆ¥ã™ã‚‹ãŸã‚ã€ã„ãšã‚Œã® ID ã¨ã‚‚ä¸€è‡´ã—ãªã„ã“ã¨ã‚’ç¢ºèªã™ã‚‹ã€‚
                 PointerDown(eventData);
             }
         }
 
         public void OnBeginDrag(PointerEventData eventData)
         {
-            // ƒhƒ‰ƒbƒOŠJn‚ÍV‹Kƒ^ƒbƒ`ˆµ‚¢‚É‚·‚éB
+            // ãƒ‰ãƒ©ãƒƒã‚°é–‹å§‹ã¯æ–°è¦ã‚¿ãƒƒãƒæ‰±ã„ã«ã™ã‚‹ã€‚
             PointerDown(eventData);
 
-            // ƒhƒ‰ƒbƒO‚µ‚½‚çƒNƒŠƒbƒN‚ğ–³Œø‰»‚·‚éB
+            // ãƒ‰ãƒ©ãƒƒã‚°ã—ãŸã‚‰ã‚¯ãƒªãƒƒã‚¯ã‚’ç„¡åŠ¹åŒ–ã™ã‚‹ã€‚
             eventData.eligibleForClick = false;
 
-            // ƒhƒ‰ƒbƒO‚µ‚½‚ç’·‰Ÿ‚µ‚ğ–³Œø‰»‚·‚éB
+            // ãƒ‰ãƒ©ãƒƒã‚°ã—ãŸã‚‰é•·æŠ¼ã—ã‚’ç„¡åŠ¹åŒ–ã™ã‚‹ã€‚
             readyToLongDown = false;
         }
     }

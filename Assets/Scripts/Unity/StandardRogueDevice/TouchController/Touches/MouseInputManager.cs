@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -19,19 +19,19 @@ namespace RoguegardUnity
 
         public void Update(float deltaTime)
         {
-            // ƒ}ƒEƒXƒzƒC[ƒ‹‘€ì‚ğ–ˆƒtƒŒ[ƒ€æ“¾‚·‚é
+            // ãƒã‚¦ã‚¹ãƒ›ã‚¤ãƒ¼ãƒ«æ“ä½œã‚’æ¯ãƒ•ãƒ¬ãƒ¼ãƒ å–å¾—ã™ã‚‹
             scrollDelta += Input.mouseScrollDelta;
         }
 
         public void UpdateField()
         {
-            // ƒ}ƒEƒXƒzƒC[ƒ‹
+            // ãƒã‚¦ã‚¹ãƒ›ã‚¤ãƒ¼ãƒ«
             if (scrollDelta.y != 0f)
             {
                 var zoomIndex = GetZoomIndex(info.Zoom, scrollDelta.y);
                 var newZoom = WheelZoomingFilters[zoomIndex];
 
-                // ƒ}ƒEƒX‚ÌˆÊ’u‚ğ’†S‚ÉƒY[ƒ€‚·‚é‚æ‚¤‚ÉƒXƒNƒ[ƒ‹‚·‚é
+                // ãƒã‚¦ã‚¹ã®ä½ç½®ã‚’ä¸­å¿ƒã«ã‚ºãƒ¼ãƒ ã™ã‚‹ã‚ˆã†ã«ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ã™ã‚‹
                 var screenCenter = new Vector3(Screen.width, Screen.height) / 2f;
                 info.DeltaPosition = Input.mousePosition - screenCenter;
                 info.DeltaPosition *= (newZoom - info.Zoom) / 50f;

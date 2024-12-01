@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,7 +8,7 @@ using Roguegard.CharacterCreation;
 namespace Roguegard
 {
     /// <summary>
-    /// <see cref="CharacterCreation"/> ‚ÉˆË‘¶‚µ‚È‚¢À‘•‚É‚·‚é‚½‚ßA <see cref="ICharacterCreationData"/> ‚ğÀ‘•‚µ‚È‚¢
+    /// <see cref="CharacterCreation"/> ã«ä¾å­˜ã—ãªã„å®Ÿè£…ã«ã™ã‚‹ãŸã‚ã€ <see cref="ICharacterCreationData"/> ã‚’å®Ÿè£…ã—ãªã„
     /// </summary>
     [Objforming.Formable]
     public class SewedEquipmentInfoSet : IMainInfoSet
@@ -128,7 +128,7 @@ namespace Roguegard
             var stats = obj.Main.Stats;
             stats.Direction = RogueDirection.LowerLeft;
             stats.Reset(obj);
-            if (!SpaceUtility.TryLocate(obj, location, position, stackOption)) throw new RogueException("¶¬‚µ‚½ƒIƒuƒWƒFƒNƒg‚ÌˆÚ“®‚É¸”s‚µ‚Ü‚µ‚½B");
+            if (!SpaceUtility.TryLocate(obj, location, position, stackOption)) throw new RogueException("ç”Ÿæˆã—ãŸã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ç§»å‹•ã«å¤±æ•—ã—ã¾ã—ãŸã€‚");
 
             return obj;
         }

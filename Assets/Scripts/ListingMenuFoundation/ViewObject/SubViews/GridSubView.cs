@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -46,9 +46,9 @@ namespace ListingMF
         {
             if (stateProvider == null) { stateProvider = new StateProvider(); }
             if (!(stateProvider is StateProvider local)) throw new System.ArgumentException(
-                $"{stateProvider} ‚Í {nameof(StateProvider)} ‚Å‚Í‚ ‚è‚Ü‚¹‚ñB");
+                $"{stateProvider} ã¯ {nameof(StateProvider)} ã§ã¯ã‚ã‚Šã¾ã›ã‚“ã€‚");
 
-            // Œ»İ‚Ì StateProvider ‚ğŠO‚·‘O‚Éó‘Ô‚ğ•Û‘¶‚·‚é
+            // ç¾åœ¨ã® StateProvider ã‚’å¤–ã™å‰ã«çŠ¶æ…‹ã‚’ä¿å­˜ã™ã‚‹
             if (currentStateProvider != null)
             {
                 currentStateProvider.SelectedIndex = viewElements.IndexOf(LastSelectedViewElement);
@@ -59,7 +59,7 @@ namespace ListingMF
             UpdateElements(list);
             SetStatusCode(0);
 
-            // V‚µ‚¢ StateProvider ‚ÉØ‚è‘Ö‚¦‚é
+            // æ–°ã—ã„ StateProvider ã«åˆ‡ã‚Šæ›¿ãˆã‚‹
             currentStateProvider = local;
             if (_isSelectable) { local.ApplySelectedIndex(viewElements); }
         }
@@ -88,7 +88,7 @@ namespace ListingMF
         {
             if (viewElements.Count != count)
             {
-                // ‘«‚è‚È‚¢ ViewElement ‚ğ¶¬‚·‚é
+                // è¶³ã‚Šãªã„ ViewElement ã‚’ç”Ÿæˆã™ã‚‹
                 while (viewElements.Count < count)
                 {
                     var index = viewElements.Count;
@@ -108,7 +108,7 @@ namespace ListingMF
                     //ViewElement.SetVerticalNavigation(index >= 1 ? viewElements[index - 1] : null, viewElement);
                 }
 
-                // •s—v‚È ViewElement ‚Ííœ‚·‚é
+                // ä¸è¦ãª ViewElement ã¯å‰Šé™¤ã™ã‚‹
                 if (viewElements.Count > count)
                 {
                     for (int i = viewElements.Count - 1; i >= count; i--)
@@ -118,7 +118,7 @@ namespace ListingMF
                     viewElements.RemoveRange(count, viewElements.Count - count);
                 }
 
-                // ‘I‘ğˆ‚Ì—v‘f”‚É‡‚í‚¹‚ÄƒEƒBƒ“ƒhƒE‚ğŠg’£‚·‚é
+                // é¸æŠè‚¢ã®è¦ç´ æ•°ã«åˆã‚ã›ã¦ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚’æ‹¡å¼µã™ã‚‹
                 if (_extensionDirection == ExtensionDirection.Up)
                 {
                     var rectTransform = (RectTransform)transform;
@@ -172,7 +172,7 @@ namespace ListingMF
             {
                 if (SelectedIndex <= 0 || viewElements.Count <= SelectedIndex || EventSystem.current == null)
                 {
-                    // ‘I‘ğƒIƒuƒWƒFƒNƒg‚ªŒ©‚Â‚©‚ç‚È‚¯‚ê‚ÎÅ‰‚Ì€–Ú‚ğ‘I‘ğ
+                    // é¸æŠã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãŒè¦‹ã¤ã‹ã‚‰ãªã‘ã‚Œã°æœ€åˆã®é …ç›®ã‚’é¸æŠ
                     if (viewElements.Count >= 1)
                     {
                         EventSystem.current.SetSelectedGameObject(viewElements[0].gameObject);

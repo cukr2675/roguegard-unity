@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,7 +11,7 @@ namespace RoguegardUnity
         public PointerEventData Data { get; private set; }
 
         public bool IsHeldDown => Data != null;
-        public int PointerID => Data?.pointerId ?? -2; // -1 ‚Í Unity ‚Ì‹K’è’l‚Åg—pÏ‚İ‚È‚Ì‚Å -2 ‚ğg‚¤
+        public int PointerID => Data?.pointerId ?? -2; // -1 ã¯ Unity ã®è¦å®šå€¤ã§ä½¿ç”¨æ¸ˆã¿ãªã®ã§ -2 ã‚’ä½¿ã†
         public Vector2 Position
         {
             get => Data.position;
@@ -40,7 +40,7 @@ namespace RoguegardUnity
 
         public void Update(float deltaTime)
         {
-            // ˆê’èŠÔ•Ï‰»‚Ì‚È‚©‚Á‚½ƒhƒ‰ƒbƒO‘€ì‚Í’†’f‚·‚éB
+            // ä¸€å®šæ™‚é–“å¤‰åŒ–ã®ãªã‹ã£ãŸãƒ‰ãƒ©ãƒƒã‚°æ“ä½œã¯ä¸­æ–­ã™ã‚‹ã€‚
             if (IsHeldDown && Dragging)
             {
                 if (Position == lastPointerPosition)

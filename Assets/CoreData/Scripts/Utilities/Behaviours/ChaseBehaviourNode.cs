@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,7 +15,7 @@ namespace Roguegard
         {
             if (self.Location == null || self.Main.Stats.TargetObj == null) return RogueObjUpdaterContinueType.Continue;
 
-            // ‹ß‚Ã‚­Œo˜H‚ª¶¬‚Å‚«‚È‚¢ê‡‚Í‰½‚à‚µ‚È‚¢
+            // è¿‘ã¥ãçµŒè·¯ãŒç”Ÿæˆã§ããªã„å ´åˆã¯ä½•ã‚‚ã—ãªã„
             if (!TryUpdatePath(self)) return RogueObjUpdaterContinueType.Continue;
 
             var result = false;
@@ -26,13 +26,13 @@ namespace Roguegard
 
             if (result)
             {
-                // ˆÚ“®Œã‚ÌˆÊ’u‚ÅƒpƒX‚ğXV‚·‚é
+                // ç§»å‹•å¾Œã®ä½ç½®ã§ãƒ‘ã‚¹ã‚’æ›´æ–°ã™ã‚‹
                 TryUpdatePath(self);
                 return RogueObjUpdaterContinueType.Break;
             }
             else
             {
-                // ’ÇÕ‚Å‚«‚È‚©‚Á‚½‚Æ‚«ƒ^[ƒQƒbƒg‚ğŠO‚·
+                // è¿½è·¡ã§ããªã‹ã£ãŸã¨ãã‚¿ãƒ¼ã‚²ãƒƒãƒˆã‚’å¤–ã™
                 self.Main.Stats.TargetObj = null;
                 return RogueObjUpdaterContinueType.Continue;
             }
@@ -42,7 +42,7 @@ namespace Roguegard
         {
             if (!self.Location.Space.TryGetRoomView(self.Position, out var room, out _)) { room = new RectInt(); }
 
-            // “G‚ªƒvƒŒƒCƒ„[‚ğ•Ç‰z‚µ‚É@’m‚µ‚Ä‹ß‚Ã‚¢‚Ä‚µ‚Ü‚í‚È‚¢‚æ‚¤‚É‹ŠE‹——£‚ÍŒÅ’è
+            // æ•µãŒãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’å£è¶Šã—ã«å¯ŸçŸ¥ã—ã¦è¿‘ã¥ã„ã¦ã—ã¾ã‚ãªã„ã‚ˆã†ã«è¦–ç•Œè·é›¢ã¯å›ºå®š
             var visibleRadius = RoguegardSettings.DefaultVisibleRadius;
             var sqrVisibleRadius = visibleRadius * visibleRadius;
 
@@ -51,7 +51,7 @@ namespace Roguegard
             var sqrDistance = (targetObj.Position - self.Position).sqrMagnitude;
             if (sqrDistance < sqrVisibleRadius && room.Contains(targetObj.Position))
             {
-                // ’ÇÕ‘ÎÛ‚ª‹ŠE“à‚É‚¢‚é‚Æ‚«–ˆƒ^[ƒ“ƒpƒX‚ğ¶¬‚·‚é
+                // è¿½è·¡å¯¾è±¡ãŒè¦–ç•Œå†…ã«ã„ã‚‹ã¨ãæ¯ã‚¿ãƒ¼ãƒ³ãƒ‘ã‚¹ã‚’ç”Ÿæˆã™ã‚‹
                 var updateResult = PathBuilder.UpdatePath(self, targetObj.Position);
                 if (!updateResult) return false;
             }

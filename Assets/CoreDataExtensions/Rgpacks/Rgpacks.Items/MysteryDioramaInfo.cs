@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -22,7 +22,7 @@ namespace Roguegard.Rgpacks
         }
 
         /// <summary>
-        /// ã‘‚«•s‰Â
+        /// ä¸Šæ›¸ãä¸å¯
         /// </summary>
         public static void SetTo(RogueObj obj)
         {
@@ -32,7 +32,7 @@ namespace Roguegard.Rgpacks
                 obj.SetInfo(info);
             }
 
-            // ã‘‚«•s‰Â
+            // ä¸Šæ›¸ãä¸å¯
             if (info.info != null) throw new RogueException();
 
             info.info = new MysteryDioramaInfo();

@@ -1,4 +1,4 @@
-using System.Collections;
+Ôªøusing System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -28,7 +28,7 @@ namespace RoguegardUnity
 
         public override void OpenScreen(in MMgr manager, in MArg arg)
         {
-            var text = RogueFile.GetName(((FileInfo)arg.Arg.Other).FullName) + "ÇÉçÅ[ÉhÇµÇ‹Ç∑Ç©ÅH";
+            var text = RogueFile.GetName(((FileInfo)arg.Arg.Other).FullName) + "„Çí„É≠„Éº„Éâ„Åó„Åæ„Åô„ÅãÔºü";
             view.Title = text;
 
             view.ShowTemplate(manager, arg)

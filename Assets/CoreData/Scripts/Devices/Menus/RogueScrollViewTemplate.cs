@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -35,7 +35,7 @@ namespace Roguegard.Device
             if (list == null) throw new System.ArgumentNullException(nameof(list));
             if (manager == null) throw new System.ArgumentNullException(nameof(manager));
 
-            // •K—v‚É‰‚¶‚ÄƒXƒNƒ[ƒ‹ˆÊ’u‚ğƒŠƒZƒbƒg
+            // å¿…è¦ã«å¿œã˜ã¦ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ä½ç½®ã‚’ãƒªã‚»ãƒƒãƒˆ
             if (viewStateHolder != prevViewStateHolder)
             {
                 scrollSubViewStateProvider?.Reset();
@@ -44,7 +44,7 @@ namespace Roguegard.Device
             }
             prevViewStateHolder = viewStateHolder;
 
-            // ƒXƒNƒ[ƒ‹‚Ìƒrƒ…[‚ğ•\¦
+            // ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ã®ãƒ“ãƒ¥ãƒ¼ã‚’è¡¨ç¤º
             OriginalList.Clear();
             for (int i = 0; i < list.Count; i++)
             {
@@ -167,7 +167,7 @@ namespace Roguegard.Device
                 var manager = (MMgr)iManager;
                 var arg = (MArg)iArg;
 
-                // ‘I‘ğ‚µ‚½ƒXƒLƒ‹‚Ìî•ñ‚Æ‘I‘ğˆ‚ğ•\¦‚·‚é
+                // é¸æŠã—ãŸã‚¹ã‚­ãƒ«ã®æƒ…å ±ã¨é¸æŠè‚¢ã‚’è¡¨ç¤ºã™ã‚‹
                 HandleClick(element, manager, arg);
             }
         }

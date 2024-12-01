@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -50,7 +50,7 @@ namespace Roguegard.Rgpacks
                     .InsertNext(
                         new object[]
                         {
-                            "ƒAƒZƒbƒgID",
+                            "ã‚¢ã‚»ãƒƒãƒˆID",
                             InputFieldViewWidget.CreateOption<MMgr, MArg>(
                                 (manager, arg) =>
                                 {
@@ -66,7 +66,7 @@ namespace Roguegard.Rgpacks
                         })
 
                     .Append(SelectOption.Create<MMgr, MArg>(
-                        "+ ƒCƒxƒ“ƒg‚ð’Ç‰Á", (manager, arg) =>
+                        "+ ã‚¤ãƒ™ãƒ³ãƒˆã‚’è¿½åŠ ", (manager, arg) =>
                         {
                             var chartPad = arg.Arg.TargetObj;
                             var chartPadInfo = ChartPadInfo.Get(chartPad);
@@ -77,7 +77,7 @@ namespace Roguegard.Rgpacks
 
                     .ElementNameFrom((element, manager, arg) =>
                     {
-                        if (element == null) return "+ ƒCƒxƒ“ƒg‚ð’Ç‰Á";
+                        if (element == null) return "+ ã‚¤ãƒ™ãƒ³ãƒˆã‚’è¿½åŠ ";
                         else return ((PropertiedCmnData)element).Cmn;
                     })
 

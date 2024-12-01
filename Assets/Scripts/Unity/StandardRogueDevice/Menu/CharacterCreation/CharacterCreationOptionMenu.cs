@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -17,7 +17,7 @@ namespace RoguegardUnity
         private readonly CharacterCreationOptionsSelectOption selectOption;
         private readonly RemoveSelectOption removeSelectOption;
 
-        // selectOption ‚Æ“¯‚ÉoŒ»‚·‚éƒƒ“ƒo[‚Í•ÊƒCƒ“ƒXƒ^ƒ“ƒX‚É‚·‚éB
+        // selectOption ã¨åŒæ™‚ã«å‡ºç¾ã™ã‚‹ãƒ¡ãƒ³ãƒãƒ¼ã¯åˆ¥ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã«ã™ã‚‹ã€‚
         private readonly CharacterCreationOptionsSelectOption singleItemMemberSelectOption;
         private readonly CharacterCreationOptionsSelectOption alphabetTypeMemberSelectOption;
 
@@ -50,7 +50,7 @@ namespace RoguegardUnity
                 elms.Add(
                     new object[]
                     {
-                        "E‹Æ^“ñ‚Â–¼",
+                        "è·æ¥­ï¼äºŒã¤å",
                         InputFieldViewWidget.CreateOption<MMgr, MArg>(
                             (manager, arg) => removeSelectOption.builder.ShortName,
                             (manager, arg, value) => removeSelectOption.builder.ShortName = value)
@@ -64,10 +64,10 @@ namespace RoguegardUnity
                             {
                                 if (arg.Arg.Other is RaceBuilder raceBuilder)
                                 {
-                                    return $"«•ÊF{raceBuilder.Gender.Name}";
+                                    return $"æ€§åˆ¥ï¼š{raceBuilder.Gender.Name}";
                                 }
-                                Debug.LogError("•s³‚ÈŒ^‚Å‚·B");
-                                return "«•ÊF";
+                                Debug.LogError("ä¸æ­£ãªå‹ã§ã™ã€‚");
+                                return "æ€§åˆ¥ï¼š";
                             },
                             (manager, arg) =>
                             {
@@ -77,12 +77,12 @@ namespace RoguegardUnity
                                     manager.PushMenuScreen(nextMenu, arg.Self, other: arg.Arg.Other);
                                     return;
                                 }
-                                Debug.LogError("•s³‚ÈŒ^‚Å‚·B");
+                                Debug.LogError("ä¸æ­£ãªå‹ã§ã™ã€‚");
                             })
                     });
                 elms.Add(
                     SelectOption.Create<MMgr, MArg>(
-                        $"<#{ColorUtility.ToHtmlStringRGBA(raceBuilder.BodyColor)}>ƒJƒ‰[",
+                        $"<#{ColorUtility.ToHtmlStringRGBA(raceBuilder.BodyColor)}>ã‚«ãƒ©ãƒ¼",
                         ColorPicker()));
                 AddMemberElements(raceBuilder);
             }
@@ -92,7 +92,7 @@ namespace RoguegardUnity
                 elms.Add(selectOption.Set(appearanceBuilder));
                 elms.Add(
                     SelectOption.Create<MMgr, MArg>(
-                        $"<#{ColorUtility.ToHtmlStringRGBA(appearanceBuilder.Color)}>ƒJƒ‰[",
+                        $"<#{ColorUtility.ToHtmlStringRGBA(appearanceBuilder.Color)}>ã‚«ãƒ©ãƒ¼",
                         ColorPicker()));
                 AddMemberElements(appearanceBuilder);
                 elms.Add(removeSelectOption);
@@ -104,7 +104,7 @@ namespace RoguegardUnity
                 elms.Add(
                     new object[]
                     {
-                        "–¼‘O",
+                        "åå‰",
                         InputFieldViewWidget.CreateOption<MMgr, MArg>(
                             (manager, arg) =>
                             {
@@ -112,19 +112,19 @@ namespace RoguegardUnity
                                 {
                                     return intrinsicBuilder.OptionName;
                                 }
-                                Debug.LogError("•s³‚ÈŒ^‚Å‚·B");
+                                Debug.LogError("ä¸æ­£ãªå‹ã§ã™ã€‚");
                                 return "???";
                             },
                             (manager, arg, value) =>
                             {
-                                // ‹ó—“‚Ìê‡‚Íã‘‚«‚µ‚È‚¢‚æ‚¤ null ‚É‚·‚é
+                                // ç©ºæ¬„ã®å ´åˆã¯ä¸Šæ›¸ãã—ãªã„ã‚ˆã† null ã«ã™ã‚‹
                                 if (string.IsNullOrWhiteSpace(value)) { value = null; }
 
                                 if (arg.Arg.Other is IntrinsicBuilder intrinsicBuilder)
                                 {
                                     return intrinsicBuilder.OptionName = value;
                                 }
-                                Debug.LogError("•s³‚ÈŒ^‚Å‚·B");
+                                Debug.LogError("ä¸æ­£ãªå‹ã§ã™ã€‚");
                                 return null;
                             })
                     });
@@ -138,7 +138,7 @@ namespace RoguegardUnity
                 elms.Add(
                     new object[]
                     {
-                        "ŒÂ”",
+                        "å€‹æ•°",
                         InputFieldViewWidget.CreateOption<MMgr, MArg>(
                             (manager, arg) =>
                             {
@@ -148,7 +148,7 @@ namespace RoguegardUnity
                                         / RogueObj.GetMaxStack(startingItemBuilder.Option.InfoSet, StackOption.Default);
                                     return value.ToString();
                                 }
-                                Debug.LogError("•s³‚ÈŒ^‚Å‚·B");
+                                Debug.LogError("ä¸æ­£ãªå‹ã§ã™ã€‚");
                                 return "0";
                             },
                             (manager, arg, valueString) =>
@@ -159,7 +159,7 @@ namespace RoguegardUnity
                                     if (startingItemBuilder.Stack <= 0) { startingItemBuilder.Stack = 1; }
                                     return startingItemBuilder.Stack.ToString();
                                 }
-                                Debug.LogError("•s³‚ÈŒ^‚Å‚·B");
+                                Debug.LogError("ä¸æ­£ãªå‹ã§ã™ã€‚");
                                 return null;
                             },
                             TMP_InputField.ContentType.IntegerNumber)
@@ -188,7 +188,7 @@ namespace RoguegardUnity
                         SelectOption.Create<MMgr, MArg>(
                             (manager, arg) =>
                             {
-                                return $"<#808080>‘•”õ‚·‚éF{equipMember.IsEquipped}";
+                                return $"<#808080>è£…å‚™ã™ã‚‹ï¼š{equipMember.IsEquipped}";
                             },
                             (manager, arg) =>
                             {
@@ -207,7 +207,7 @@ namespace RoguegardUnity
                     elms.Add(
                         new object[]
                         {
-                            "ƒTƒCƒY",
+                            "ã‚µã‚¤ã‚º",
                             InputFieldViewWidget.CreateOption<MMgr, MArg>(
                                 (manager, arg) => standardRaceMember.Size.ToString(),
                                 (manager, arg, valueString) =>
@@ -236,7 +236,7 @@ namespace RoguegardUnity
                     {
                         return appearanceBuilder.Color;
                     }
-                    Debug.LogError("•s³‚ÈŒ^‚Å‚·B");
+                    Debug.LogError("ä¸æ­£ãªå‹ã§ã™ã€‚");
                     return Color.white;
                 },
                 (manager, arg, color) =>
@@ -251,7 +251,7 @@ namespace RoguegardUnity
                         appearanceBuilder.Color = color;
                         return;
                     }
-                    Debug.LogError("•s³‚ÈŒ^‚Å‚·B");
+                    Debug.LogError("ä¸æ­£ãªå‹ã§ã™ã€‚");
                 });
         }
 
@@ -259,7 +259,7 @@ namespace RoguegardUnity
         {
             public CharacterCreationDataBuilder builder;
 
-            string ISelectOption.GetName(IListMenuManager manager, IListMenuArg arg) => "<#f00>íœ";
+            string ISelectOption.GetName(IListMenuManager manager, IListMenuArg arg) => "<#f00>å‰Šé™¤";
 
             string ISelectOption.GetStyle(IListMenuManager manager, IListMenuArg arg) => null;
 
@@ -275,7 +275,7 @@ namespace RoguegardUnity
                         var member = memberable.GetMember(memberable.MemberSources[i]);
                         if (member is SingleItemMember singleItemMember)
                         {
-                            // Œ©‚½–Ú‘•”õ‚ğíœ‚µ‚½‚Æ‚«A‚»‚Ì‘•”õ•i‚ğŠl“¾‚·‚é
+                            // è¦‹ãŸç›®è£…å‚™ã‚’å‰Šé™¤ã—ãŸã¨ãã€ãã®è£…å‚™å“ã‚’ç²å¾—ã™ã‚‹
                             CharacterCreationAddMenu.ReceiveStartingItemOptionObj(singleItemMember.ItemOption, arg.Self);
                         }
                     }
@@ -291,7 +291,7 @@ namespace RoguegardUnity
                 }
                 else if (arg.Arg.Other is StartingItemBuilder startingItemBuilder)
                 {
-                    // ‰ŠúƒAƒCƒeƒ€‚ğíœ‚µ‚½‚Æ‚«A‚»‚ÌƒAƒCƒeƒ€‚ğŠl“¾‚·‚é
+                    // åˆæœŸã‚¢ã‚¤ãƒ†ãƒ ã‚’å‰Šé™¤ã—ãŸã¨ãã€ãã®ã‚¢ã‚¤ãƒ†ãƒ ã‚’ç²å¾—ã™ã‚‹
                     CharacterCreationAddMenu.ReceiveStartingItemOptionObj(startingItemBuilder.Option, arg.Self);
                     builder.StartingItemTable.Remove(startingItemBuilder, true);
                 }

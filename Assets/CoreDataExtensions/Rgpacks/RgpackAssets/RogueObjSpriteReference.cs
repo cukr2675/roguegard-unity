@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -34,7 +34,7 @@ namespace Roguegard.Rgpacks
             }
             else
             {
-                throw new RogueException($"{FullID} ({Asset.GetType()}) ‚ğƒXƒvƒ‰ƒCƒg‚É‚Å‚«‚Ü‚¹‚ñB");
+                throw new RogueException($"{FullID} ({Asset.GetType()}) ã‚’ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã«ã§ãã¾ã›ã‚“ã€‚");
             }
         }
 

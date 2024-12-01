@@ -1,4 +1,4 @@
-using System.Collections;
+Ôªøusing System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -21,8 +21,8 @@ namespace Roguegard
         {
             private static readonly object[] backAnchor = new object[]
             {
-                SelectOption.Create<MMgr, MArg>("é¿çs", Execute),
-                SelectOption.Create<MMgr, MArg>("ï¬Ç∂ÇÈ", Back),
+                SelectOption.Create<MMgr, MArg>("ÂÆüË°å", Execute),
+                SelectOption.Create<MMgr, MArg>("Èñâ„Åò„Çã", Back),
             };
 
             private IElementsSubViewStateProvider stateProvider;

@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -38,8 +38,8 @@ namespace Roguegard.CharacterCreation
 
             var builder = new IntrinsicBuilder();
             builder.Option = parent;
-            builder.OptionName = $"{targetOption.Name}“¢”°";
-            builder.OptionCaption = $"{floor}F ‚Å {targetOption.Name} ‚ğ {count} ‘Ì“¢”°‚·‚é";
+            builder.OptionName = $"{targetOption.Name}è¨ä¼";
+            builder.OptionCaption = $"{floor}F ã§ {targetOption.Name} ã‚’ {count} ä½“è¨ä¼ã™ã‚‹";
             var member = (QuestMember)builder.GetMember(QuestMember.SourceInstance);
             var target = member.Targets.Add();
             target.Option = targetOption;
@@ -98,15 +98,15 @@ namespace Roguegard.CharacterCreation
             {
                 if (currentCount >= member.Targets[0].Stack)
                 {
-                    // “¢”°”‚ª–Ú•W‚É“’B‚µ‚½‚Æ‚«ƒNƒŠƒA
+                    // è¨ä¼æ•°ãŒç›®æ¨™ã«åˆ°é”ã—ãŸã¨ãã‚¯ãƒªã‚¢
 
-                    // •ñV‚ğó‚¯æ‚é
+                    // å ±é…¬ã‚’å—ã‘å–ã‚‹
                     if (RogueDevice.Primary.Player == self && DungeonQuestInfo.TryGetQuest(self, out var quest))
                     {
                         RogueDevice.Add(DeviceKw.AppendText, self);
-                        RogueDevice.Add(DeviceKw.AppendText, "‚Í");
+                        RogueDevice.Add(DeviceKw.AppendText, "ã¯");
                         RogueDevice.Add(DeviceKw.AppendText, quest);
-                        RogueDevice.Add(DeviceKw.AppendText, "‚ğƒNƒŠƒA‚µ‚Ä •ñV‚ğó‚¯æ‚Á‚½");
+                        RogueDevice.Add(DeviceKw.AppendText, "ã‚’ã‚¯ãƒªã‚¢ã—ã¦ å ±é…¬ã‚’å—ã‘å–ã£ãŸ");
                         RogueDevice.Primary.AddMenu(rewardsScreen, self, null, new(other: quest));
                     }
 
@@ -133,20 +133,20 @@ namespace Roguegard.CharacterCreation
                         RogueDevice.Primary.AddMenu(notifyScreen, self, null, RogueMethodArgument.Identity);
                     }
 
-                    // –Ú•W‚ÌŠK‘w‚Ö‚ÌˆÚ“®‚É¬Œ÷‚µ‚½‚Æ‚«“¢”°‘ÎÛ‚ğ¶¬‚·‚éB
+                    // ç›®æ¨™ã®éšå±¤ã¸ã®ç§»å‹•ã«æˆåŠŸã—ãŸã¨ãè¨ä¼å¯¾è±¡ã‚’ç”Ÿæˆã™ã‚‹ã€‚
                     var targetEffect = new TargetEffect() { parent = this };
                     for (int i = 0; i < member.Targets[0].Stack; i++)
                     {
                         if (!self.Location.Space.TryGetRandomPositionInRoom(RogueRandom.Primary, out var position))
                         {
-                            // ¶¬‚É¸”s‚µ‚½‚ç‚»‚Ì‚Ô‚ñ‚Í“¢”°ˆµ‚¢‚Æ‚µ‚ÄƒJƒEƒ“ƒg‚·‚é
+                            // ç”Ÿæˆã«å¤±æ•—ã—ãŸã‚‰ãã®ã¶ã‚“ã¯è¨ä¼æ‰±ã„ã¨ã—ã¦ã‚«ã‚¦ãƒ³ãƒˆã™ã‚‹
                             currentCount++;
                             continue;
                         }
 
                         var target = member.Targets[0].Option.CreateObj(member.Targets[0], self.Location, position, RogueRandom.Primary);
                         target.TrySetStack(1);
-                        target.Main.RogueEffects.AddOpen(target, targetEffect); // “¢”°”‚ğƒJƒEƒ“ƒg‚·‚é‚½‚ß‚ÌƒGƒtƒFƒNƒg‚ğ•t—^
+                        target.Main.RogueEffects.AddOpen(target, targetEffect); // è¨ä¼æ•°ã‚’ã‚«ã‚¦ãƒ³ãƒˆã™ã‚‹ãŸã‚ã®ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã‚’ä»˜ä¸
                     }
                 }
                 return true;
@@ -180,7 +180,7 @@ namespace Roguegard.CharacterCreation
                 var result = chain.Invoke(keyword, method, self, user, activationDepth, arg);
                 if (result && keyword == MainInfoKw.BeDefeated)
                 {
-                    // “|‚³‚ê‚½‚Æ‚«ƒNƒGƒXƒg‚ÌŒ‚”j”‚ğ‰ÁZ‚·‚é
+                    // å€’ã•ã‚ŒãŸã¨ãã‚¯ã‚¨ã‚¹ãƒˆã®æ’ƒç ´æ•°ã‚’åŠ ç®—ã™ã‚‹
                     parent.currentCount++;
                 }
                 return result;
@@ -199,10 +199,10 @@ namespace Roguegard.CharacterCreation
                 var quest = (DungeonQuest)arg.Arg.Other;
                 
                 var message = new StringBuilder();
-                message.Append(arg.Self.GetName()).Append("‚Í").Append(quest).Append("‚ğƒNƒŠƒA‚µ‚½I");
+                message.Append(arg.Self.GetName()).Append("ã¯").Append(quest).Append("ã‚’ã‚¯ãƒªã‚¢ã—ãŸï¼");
                 if (quest.LootTable.Count >= 1)
                 {
-                    message.Append(view.VA).Append("‚»‚Ì•ñV‚Æ‚µ‚Äc");
+                    message.Append(view.VA).Append("ãã®å ±é…¬ã¨ã—ã¦â€¦");
                 }
                 for (int i = 0; i < quest.LootTable.Count; i++)
                 {
@@ -210,11 +210,11 @@ namespace Roguegard.CharacterCreation
                     message.Append(view.VA).AppendLine();
                     if (loot.Main.InfoSet.Equals(RoguegardSettings.MoneyInfoSet))
                     {
-                        message.Append(loot.Stack).Append("Gó‚¯æ‚Á‚½I");
+                        message.Append(loot.Stack).Append("Gå—ã‘å–ã£ãŸï¼");
                     }
                     else
                     {
-                        message.Append(loot).Append("‚ğó‚¯æ‚Á‚½I");
+                        message.Append(loot).Append("ã‚’å—ã‘å–ã£ãŸï¼");
                     }
                 }
 
@@ -234,7 +234,7 @@ namespace Roguegard.CharacterCreation
 
             public override void OpenScreen(in MMgr manager, in MArg arg)
             {
-                view.ShowTemplate($"–Ú•W‚ÌŠK‚É“’B‚µ‚Ü‚µ‚½{view.VA}", manager, arg)
+                view.ShowTemplate($"ç›®æ¨™ã®éšã«åˆ°é”ã—ã¾ã—ãŸ{view.VA}", manager, arg)
                     ?
                     .OnCompleted((manager, arg) => manager.Done())
 

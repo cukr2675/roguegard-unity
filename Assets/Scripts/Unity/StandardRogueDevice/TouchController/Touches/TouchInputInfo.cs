@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -21,7 +21,7 @@ namespace RoguegardUnity
 
         public float Zoom { get; set; }
 
-        // Zoom ^ 2 �ł͂Ȃ� 2 ^ Zoom �Ȃ̂� sqr �ł͂Ȃ�
+        // Zoom ^ 2 ではなく 2 ^ Zoom なので sqr ではない
         public float PowedZoom => Mathf.Pow(2f, Zoom);
 
         public void SetPointing(Vector2Int position, bool fastForward = false, bool longDown = false)

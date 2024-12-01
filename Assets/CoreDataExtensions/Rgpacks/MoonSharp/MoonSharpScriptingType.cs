@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -29,11 +29,11 @@ namespace Roguegard.Rgpacks.MoonSharp
         {
             //foreach (var cache in caches)
             //{
-            //    // –¼‘O‚ª“¯‚¶‚©‚Âƒ\[ƒX‚ğ–Ô—…‚·‚éƒLƒƒƒbƒVƒ…‚ğæ“¾
+            //    // åå‰ãŒåŒã˜ã‹ã¤ã‚½ãƒ¼ã‚¹ã‚’ç¶²ç¾…ã™ã‚‹ã‚­ãƒ£ãƒƒã‚·ãƒ¥ã‚’å–å¾—
             //    if (cache.Match(typeName, sources)) return cache;
             //}
             
-            // ƒLƒƒƒbƒVƒ…‚ªŒ©‚Â‚©‚ç‚È‚©‚Á‚½‚ç¶¬
+            // ã‚­ãƒ£ãƒƒã‚·ãƒ¥ãŒè¦‹ã¤ã‹ã‚‰ãªã‹ã£ãŸã‚‰ç”Ÿæˆ
             var type = new MoonSharpScriptingType(typeName, source);
             caches.Add(type);
             return type;

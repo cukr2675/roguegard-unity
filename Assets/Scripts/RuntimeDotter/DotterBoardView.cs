@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -28,7 +28,7 @@ namespace RuntimeDotter
         {
             if (boardTexture == null || boardTexture.width != board.Size.x || boardTexture.height != board.Size.y)
             {
-                // WebGL ‚Åƒhƒbƒg‚ª‚Â‚Ô‚ê‚È‚¢‚æ‚¤ƒ~ƒbƒvƒ}ƒbƒv‚ğ–³Œø‰»‚·‚é
+                // WebGL ã§ãƒ‰ãƒƒãƒˆãŒã¤ã¶ã‚Œãªã„ã‚ˆã†ãƒŸãƒƒãƒ—ãƒãƒƒãƒ—ã‚’ç„¡åŠ¹åŒ–ã™ã‚‹
                 boardTexture = new Texture2D(board.Size.x, board.Size.y, TextureFormat.RGBA32, false);
                 boardTexture.filterMode = FilterMode.Point;
                 _board.texture = boardTexture;
@@ -39,7 +39,7 @@ namespace RuntimeDotter
             Board = board;
             UpdatePenPosition(null);
 
-            // e—v‘f‚Ì‚‚³‚É‡‚í‚¹‚é
+            // è¦ªè¦ç´ ã®é«˜ã•ã«åˆã‚ã›ã‚‹
             var height = ((RectTransform)transform.parent.transform).rect.height;
             ((RectTransform)transform).sizeDelta = Vector2.one * height;
         }
@@ -68,7 +68,7 @@ namespace RuntimeDotter
                 }
             }
 
-            // ‰¡ü‚ğˆø‚­
+            // æ¨ªç·šã‚’å¼•ã
             for (int y = 0; y < size.y; y++)
             {
                 for (int x = 0; x < gridTexture.width; x++)
@@ -78,7 +78,7 @@ namespace RuntimeDotter
                 }
             }
 
-            // cü‚ğˆø‚­
+            // ç¸¦ç·šã‚’å¼•ã
             for (int x = 0; x < size.x; x++)
             {
                 for (int y = 0; y < gridTexture.height; y++)
@@ -88,7 +88,7 @@ namespace RuntimeDotter
                 }
             }
 
-            // ’†Sü‚ğˆø‚­
+            // ä¸­å¿ƒç·šã‚’å¼•ã
             {
                 var y = size.y / 2 * resolution;
                 for (int x = 0; x < gridTexture.width; x++)
@@ -114,7 +114,7 @@ namespace RuntimeDotter
 
         void IPointerDownHandler.OnPointerDown(PointerEventData eventData)
         {
-            // ƒhƒ‰ƒbƒOŠJn‚Ü‚Å‚Ì‚¸‚ê‚ğ‚È‚­‚·‚½‚ßAƒ}ƒEƒXƒ{ƒ^ƒ“‰Ÿ‰ºŒã‚·‚®‚Éƒhƒ‰ƒbƒOˆµ‚¢‚É‚·‚éB
+            // ãƒ‰ãƒ©ãƒƒã‚°é–‹å§‹ã¾ã§ã®ãšã‚Œã‚’ãªãã™ãŸã‚ã€ãƒã‚¦ã‚¹ãƒœã‚¿ãƒ³æŠ¼ä¸‹å¾Œã™ãã«ãƒ‰ãƒ©ãƒƒã‚°æ‰±ã„ã«ã™ã‚‹ã€‚
             eventData.dragging = true;
             pressPenPosition = penPosition;
         }

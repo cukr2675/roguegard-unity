@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,7 +15,7 @@ namespace Objforming.Unity.RuntimeInspector
 
         public sealed override void AppendElementTo(FormInspector inspector, string key, ElementValueGetter getter, ElementValueSetter setter)
         {
-            // ƒfƒtƒHƒ‹ƒg‚ÌÀ‘•‚Å‚Í‚±‚ÌƒtƒH[ƒ€‚Ö‚ÌƒŠƒ“ƒN‚ğ•\¦‚·‚é
+            // ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã®å®Ÿè£…ã§ã¯ã“ã®ãƒ•ã‚©ãƒ¼ãƒ ã¸ã®ãƒªãƒ³ã‚¯ã‚’è¡¨ç¤ºã™ã‚‹
             var linkElement = Object.Instantiate(linkElementPrefab, inspector.Page);
             var value = getter();
             linkElement.Initialize(inspector, key, value);

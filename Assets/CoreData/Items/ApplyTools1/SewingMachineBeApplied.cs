@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -45,7 +45,7 @@ namespace Roguegard
                     ?
                     .ElementNameFrom((item, manager, arg) =>
                     {
-                        if (item == null) return "+ V‚µ‚­ì‚é";
+                        if (item == null) return "+ æ–°ã—ãä½œã‚‹";
                         else return item.GetName();
                     })
 
@@ -54,7 +54,7 @@ namespace Roguegard
                     {
                         if (item == null)
                         {
-                            // ‘•”õ•i‚ğV‹Kì¬‚·‚éê‡‚Íƒf[ƒ^ƒNƒ‰ƒX‚ğ¶¬‚·‚é
+                            // è£…å‚™å“ã‚’æ–°è¦ä½œæˆã™ã‚‹å ´åˆã¯ãƒ‡ãƒ¼ã‚¿ã‚¯ãƒ©ã‚¹ã‚’ç”Ÿæˆã™ã‚‹
                             var data = new SewedEquipmentData();
                             for (int i = 0; i < RoguegardSettings.DefaultPalette.Count; i++)
                             {
@@ -65,7 +65,7 @@ namespace Roguegard
                         }
                         else if (item.Main.BaseInfoSet is SewedEquipmentInfoSet infoSet)
                         {
-                            // •Û‘¶‚¹‚¸I—¹‚Å‚«‚é‚æ‚¤‚É•¡»‚·‚é
+                            // ä¿å­˜ã›ãšçµ‚äº†ã§ãã‚‹ã‚ˆã†ã«è¤‡è£½ã™ã‚‹
                             var data = infoSet.GetDataClone();
                             manager.PushMenuScreen(nextScreen, arg.Self, other: data, targetObj: item);
                         }
@@ -108,7 +108,7 @@ namespace Roguegard
                     {
                         new object[]
                         {
-                            "–¼‘O",
+                            "åå‰",
                             InputFieldViewWidget.CreateOption<MMgr, MArg>(
                                 (manager, arg) =>
                                 {
@@ -126,14 +126,14 @@ namespace Roguegard
                             (manager, arg) =>
                             {
                                 var data = (SewedEquipmentData)arg.Arg.Other;
-                                return $"<#{ColorUtility.ToHtmlStringRGBA(data.BoneSprites.MainColor)}>ƒƒCƒ“ƒJƒ‰[";
+                                return $"<#{ColorUtility.ToHtmlStringRGBA(data.BoneSprites.MainColor)}>ãƒ¡ã‚¤ãƒ³ã‚«ãƒ©ãƒ¼";
                             }, colorPicker),
 
-                        SelectOption.Create<MMgr, MArg>("‘•”õ•”ˆÊ", new EquipPartsScreen()),
+                        SelectOption.Create<MMgr, MArg>("è£…å‚™éƒ¨ä½", new EquipPartsScreen()),
 
                         new object[]
                         {
-                            "‡˜",
+                            "é †åº",
                             InputFieldViewWidget.CreateOption<MMgr, MArg>(
                                 (manager, arg) =>
                                 {
@@ -170,7 +170,7 @@ namespace Roguegard
                     {
                         if (element is ISelectOption selectOption) return selectOption.GetName(manager, arg);
                         else if (element is PaintBoneSprite item) return item.Bone.Name;
-                        else return "+ ’Ç‰Á";
+                        else return "+ è¿½åŠ ";
                     })
 
                     .VariableOnce(out var nextScreen, new PaintBoneSpriteMenu())
@@ -182,13 +182,13 @@ namespace Roguegard
                         }
                         else if (element is PaintBoneSprite boneSprite)
                         {
-                            // •”ˆÊ•ÒW
+                            // éƒ¨ä½ç·¨é›†
                             var data = (SewedEquipmentData)arg.Arg.Other;
                             manager.PushMenuScreen(nextScreen, arg.Self, other: data.BoneSprites, count: data.BoneSprites.IndexOf(boneSprite));
                         }
                         else
                         {
-                            // •”ˆÊ’Ç‰Á
+                            // éƒ¨ä½è¿½åŠ 
                             var data = (SewedEquipmentData)arg.Arg.Other;
                             boneSprite = new PaintBoneSprite();
                             boneSprite.NormalFront = boneSprite.BackRear = new DotterBoard(new Vector2Int(32, 32), 16);
@@ -207,17 +207,17 @@ namespace Roguegard
             {
                 manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
 
-                // •ÒW‰æ–Ê‚©‚ç–ß‚Á‚½‚Æ‚«A‚»‚Ì‘•”õ•i‚ğXV‚·‚é
+                // ç·¨é›†ç”»é¢ã‹ã‚‰æˆ»ã£ãŸã¨ãã€ãã®è£…å‚™å“ã‚’æ›´æ–°ã™ã‚‹
                 var data = (SewedEquipmentData)arg.Arg.Other;
                 var equipment = arg.Arg.TargetObj;
                 if (equipment != null)
                 {
-                    // ‘•”õ•iXV
+                    // è£…å‚™å“æ›´æ–°
                     equipment.Main.SetBaseInfoSet(equipment, new SewedEquipmentInfoSet(data));
                 }
                 else
                 {
-                    // V‹K‘•”õ•i
+                    // æ–°è¦è£…å‚™å“
                     new SewedEquipmentInfoSet(data).CreateObj(arg.Self, Vector2Int.zero, RogueRandom.Primary);
                 }
 
@@ -263,7 +263,7 @@ namespace Roguegard
                     ?
                     .ElementNameFrom((part, manager, arg) =>
                     {
-                        if (part == null) return "‚»‚Ì‘¼";
+                        if (part == null) return "ãã®ä»–";
                         return part.Name;
                     })
 

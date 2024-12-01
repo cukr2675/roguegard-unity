@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -51,7 +51,7 @@ namespace Roguegard
                     if (obj.Main.InfoSet.Equals(parent._lobbyMerchant.Option.PrimaryInfoSet)) return default;
                 }
 
-                // ¤l‚ª‚¢‚È‚©‚Á‚½‚ç¶¬‚·‚é
+                // å•†äººãŒã„ãªã‹ã£ãŸã‚‰ç”Ÿæˆã™ã‚‹
                 var random = RogueRandom.Primary;
                 if (self.Space.TryGetRandomPositionInRoom(random, out var position))
                 {

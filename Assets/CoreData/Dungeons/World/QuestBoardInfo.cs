@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -39,7 +39,7 @@ namespace Roguegard
         }
 
         /// <summary>
-        /// ã‘‚«•s‰Â
+        /// ä¸Šæ›¸ãä¸å¯
         /// </summary>
         public static QuestBoardInfo SetTo(RogueObj obj)
         {
@@ -51,13 +51,13 @@ namespace Roguegard
             }
             else
             {
-                // ã‘‚«•s‰Â
+                // ä¸Šæ›¸ãä¸å¯
                 throw new RogueException();
             }
         }
 
         /// <summary>
-        /// ‚±‚Ì <see cref="QuestBoardInfo"/> ‚Ìİ’è‚ğ‚à‚Æ‚É©“®‚Åƒp[ƒeƒB‚ÉQ‰Á‚·‚é
+        /// ã“ã® <see cref="QuestBoardInfo"/> ã®è¨­å®šã‚’ã‚‚ã¨ã«è‡ªå‹•ã§ãƒ‘ãƒ¼ãƒ†ã‚£ã«å‚åŠ ã™ã‚‹
         /// </summary>
         public bool TryAutoAssign(RogueObj obj)
         {

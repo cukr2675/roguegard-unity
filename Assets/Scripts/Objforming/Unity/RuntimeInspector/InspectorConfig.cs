@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -48,7 +48,7 @@ namespace Objforming.Unity.RuntimeInspector
             }
             else
             {
-                throw new System.Exception($"{type} ‚É‘Î‰‚·‚éƒtƒH[ƒ€‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñB");
+                throw new System.Exception($"{type} ã«å¯¾å¿œã™ã‚‹ãƒ•ã‚©ãƒ¼ãƒ ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã€‚");
             }
         }
 
@@ -80,7 +80,7 @@ namespace Objforming.Unity.RuntimeInspector
             }
             else
             {
-                throw new System.Exception($"{type} ‚É‘Î‰‚·‚éƒtƒH[ƒ€‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñB");
+                throw new System.Exception($"{type} ã«å¯¾å¿œã™ã‚‹ãƒ•ã‚©ãƒ¼ãƒ ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã€‚");
             }
         }
     }

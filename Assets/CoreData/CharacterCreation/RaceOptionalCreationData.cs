@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,7 +7,7 @@ using SDSSprite;
 namespace Roguegard.CharacterCreation
 {
     /// <summary>
-    /// ‚±‚ÌƒAƒCƒeƒ€EƒLƒƒƒ‰ƒNƒ^[‚ª <see cref="IRaceOption"/> ‚Æ‚µ‚ÄQÆ‚Å‚«‚é‚±‚Æ‚ğ¦‚·ƒNƒ‰ƒX
+    /// ã“ã®ã‚¢ã‚¤ãƒ†ãƒ ãƒ»ã‚­ãƒ£ãƒ©ã‚¯ã‚¿ãƒ¼ãŒ <see cref="IRaceOption"/> ã¨ã—ã¦å‚ç…§ã§ãã‚‹ã“ã¨ã‚’ç¤ºã™ã‚¯ãƒ©ã‚¹
     /// </summary>
     public abstract class RaceOptionalCreationData : ScriptableCharacterCreationData, IRaceOption
     {
