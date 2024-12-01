@@ -42,7 +42,6 @@ namespace RoguegardUnity
         public bool WaitsForInput { get; set; }
 
         public bool InAnimation => WaitsForInput || _menuController.Wait;
-        public bool TalkingWait => _menuController.TalkingWait;
         public bool OpenGrid => _inputController.OpenGrid;
         public bool FastForward => _inputController.FastForward;
 

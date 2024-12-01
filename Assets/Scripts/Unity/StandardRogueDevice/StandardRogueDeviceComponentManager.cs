@@ -290,7 +290,7 @@ namespace RoguegardUnity
             ////////////////////////////////////////////////////////////////////////
 
             var workingNow = characterRenderSystem.UpdateCharactersAndGetWorkingNow(Subject, !EventManager.Any, deltaTime, FastForward);
-            if (!workingNow && !touchController.TalkingWait)
+            if (!workingNow && !menuController.TalkingWait)
             {
                 if (EventManager.Any)
                 {
