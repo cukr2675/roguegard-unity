@@ -25,7 +25,7 @@ namespace Roguegard.Rgpacks
         public string Caption => null;
         public IRogueDetails Details => null;
 
-        public IKeyword Category => point.Category == EvtFairyInfo.Category.ApplyTool ? CategoryKw.ApplyTool : CategoryKw.Trap;
+        public IKeyword Category => point.Category == EvtFairyCategory.ApplyTool ? CategoryKw.ApplyTool : CategoryKw.Trap;
 
         public int MaxHP => 0;
         public int MaxMP => 0;
@@ -36,7 +36,7 @@ namespace Roguegard.Rgpacks
 
         public ISerializableKeyword Faction => RoguegardSettings.DefaultRaceOption.Faction;
         public Spanning<ISerializableKeyword> TargetFactions => RoguegardSettings.DefaultRaceOption.TargetFactions;
-        public MainInfoSetAbility Ability => point.Category == EvtFairyInfo.Category.ApplyTool ? MainInfoSetAbility.WallObject : MainInfoSetAbility.TrapTile;
+        public MainInfoSetAbility Ability => point.Category == EvtFairyCategory.ApplyTool ? MainInfoSetAbility.WallObject : MainInfoSetAbility.TrapTile;
         public IRogueMaterial Material => RoguegardSettings.DefaultRaceOption.Material;
         public IRogueGender Gender => RoguegardSettings.DefaultRaceOption.Genders[0];
         public string HPName => null;

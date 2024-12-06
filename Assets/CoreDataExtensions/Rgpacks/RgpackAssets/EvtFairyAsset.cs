@@ -55,7 +55,7 @@ namespace Roguegard.Rgpacks
             public CmnReference ChartCmn { get; set; }
             public PropertiedCmnReference IfCmn { get; set; }
             public RogueObjSpriteReference Sprite { get; set; }
-            public EvtFairyInfo.Category Category { get; set; }
+            public EvtFairyCategory Category { get; set; }
             public PropertiedCmnReference Cmn { get; set; }
             public Vector2Int Position { get; set; }
 

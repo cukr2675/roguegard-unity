@@ -76,16 +76,9 @@ namespace Roguegard.Rgpacks
             public string ChartCmn { get; set; }
             public PropertiedCmnData IfCmn { get; set; }
             public string Sprite { get; set; }
-            public Category Category { get; set; }
+            public EvtFairyCategory Category { get; set; }
             public PropertiedCmnData Cmn { get; set; }
             public Vector2Int Position { get; set; }
-        }
-
-        [Objforming.Formable]
-        public enum Category
-        {
-            ApplyTool,
-            Trap
         }
     }
 }
