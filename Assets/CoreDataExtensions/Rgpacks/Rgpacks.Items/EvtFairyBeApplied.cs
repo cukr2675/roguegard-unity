@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using TMPro;
+using ListingMF;
 using Roguegard.Device;
 using Roguegard.Extensions;
 
@@ -10,266 +11,154 @@ namespace Roguegard.Rgpacks
 {
     public class EvtFairyBeApplied : BaseApplyRogueMethod
     {
-        //private static Menu menu;
+        private static Menu menu;
 
         public override bool Invoke(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
         {
-            //menu ??= new();
+            menu ??= new();
             var characterCreationInfo = EvtFairyInfo.Get(self);
             if (characterCreationInfo == null)
             {
                 EvtFairyInfo.SetTo(self);
             }
 
-            //RogueDevice.Primary.AddMenu(menu, user, null, new(targetObj: self));
+            RogueDevice.Primary.AddMenu(menu, user, null, new(targetObj: self));
             return false;
         }
 
-        //private class Menu : BaseScrollListMenu<object>
-        //{
-        //    private static readonly List<object> elms = new();
-        //    private static readonly AssetID assetID = new();
-        //    private static readonly RelatedChartID relatedChartID = new();
-        //    private static readonly PointMenu nextMenu = new();
+        private class Menu : RogueMenuScreen
+        {
+            private static readonly List<object> elms = new();
+            private static readonly PointMenu nextMenu = new();
 
-        //    protected override IKeyword ViewKeyword => DeviceKw.MenuOptions;
+            private readonly VariableWidgetsViewTemplate<MMgr, MArg> view = new()
+            {
+            };
 
-        //    protected override Spanning<object> GetList(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-        //    {
-        //        var fairy = arg.TargetObj;
-        //        var eventFairyInfo = EvtFairyInfo.Get(fairy);
-        //        elms.Clear();
-        //        elms.Add(assetID);
-        //        elms.Add(relatedChartID);
-        //        for (int i = 0; i < eventFairyInfo.Points.Count; i++)
-        //        {
-        //            elms.Add(eventFairyInfo.Points[i]);
-        //        }
-        //        elms.Add(null);
-        //        return elms;
-        //    }
+            public override void OpenScreen(in MMgr manager, in MArg arg)
+            {
+                var fairy = arg.Arg.TargetObj;
+                var eventFairyInfo = EvtFairyInfo.Get(fairy);
+                elms.Clear();
+                for (int i = 0; i < eventFairyInfo.Points.Count; i++)
+                {
+                    var point = eventFairyInfo.Points[i];
+                    elms.Add(
+                        SelectOption.Create<MMgr, MArg>(
+                            point.ChartCmn ?? "",
+                            (manager, arg) => { manager.PushMenuScreen(nextMenu, other: point); }));
+                }
 
-        //    protected override string GetItemName(object element, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-        //    {
-        //        if (element is EvtFairyInfo.Point point) return point.ChartCmn;
-        //        else return "+ Point を追加";
-        //    }
+                view.ShowTemplate(elms, manager, arg)
+                    ?
+                    .InsertNext(
+                        new object[]
+                        {
+                            "アセットID",
+                            InputFieldViewWidget.CreateOption<MMgr, MArg>(
+                                (manager, arg) => NamingEffect.Get(arg.Arg.TargetObj)?.Naming,
+                                (manager, arg, value) => {
+                                    var fairy = arg.Arg.TargetObj;
+                                    default(IActiveRogueMethodCaller).Affect(fairy, 1f, NamingEffect.Callback);
+                                    return NamingEffect.Get(fairy).Naming = value;
+                                })
+                        })
+                    .InsertNext(
+                        new object[]
+                        {
+                            "チャートID",
+                            InputFieldViewWidget.CreateOption<MMgr, MArg>(
+                                (manager, arg) => EvtFairyInfo.Get(arg.Arg.TargetObj).RelatedChart,
+                                (manager, arg, value) => EvtFairyInfo.Get(arg.Arg.TargetObj).RelatedChart = value)
+                        })
 
-        //    protected override void ActivateItem(object element, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-        //    {
-        //        if (element is EvtFairyInfo.Point point)
-        //        {
-        //            manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+                    .Append(
+                        SelectOption.Create<MMgr, MArg>("+ Point を追加", (manager, arg) =>
+                        {
+                            var fairy = arg.Arg.TargetObj;
+                            var eventFairyInfo = EvtFairyInfo.Get(fairy);
+                            eventFairyInfo.AddPoint();
+                            manager.Reopen();
+                        }))
 
-        //            manager.OpenMenu(nextMenu, null, null, new(other: point));
+                    .Build();
+            }
+        }
 
-        //        }
-        //        else
-        //        {
-        //            manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+        private class PointMenu : RogueMenuScreen
+        {
+            private readonly VariableWidgetsViewTemplate<MMgr, MArg> view = new()
+            {
+            };
 
-        //            var fairy = arg.TargetObj;
-        //            var eventFairyInfo = EvtFairyInfo.Get(fairy);
-        //            eventFairyInfo.AddPoint();
-        //            manager.Reopen();
-        //        }
-        //    }
-        //}
+            public override void OpenScreen(in MMgr manager, in MArg arg)
+            {
+                view.ShowTemplate(System.Array.Empty<object>(), manager, arg)
+                    ?
+                    .Append(
+                        new object[]
+                        {
+                            "条件Cmn",
+                            InputFieldViewWidget.CreateOption<MMgr, MArg>(
+                                (manager, arg) => ((EvtFairyInfo.Point)arg.Arg.Other).ChartCmn,
+                                (manager, arg, value) => ((EvtFairyInfo.Point)arg.Arg.Other).ChartCmn = value)
+                        })
+                    .Append(
+                        new object[]
+                        {
+                            "追加条件Cmn",
+                            InputFieldViewWidget.CreateOption<MMgr, MArg>(
+                                (manager, arg) => ((EvtFairyInfo.Point)arg.Arg.Other).IfCmn.Cmn,
+                                (manager, arg, value) => ((EvtFairyInfo.Point)arg.Arg.Other).IfCmn.Cmn = value)
+                        })
+                    .Append(
+                        new object[]
+                        {
+                            "見た目アセットID",
+                            InputFieldViewWidget.CreateOption<MMgr, MArg>(
+                                (manager, arg) => ((EvtFairyInfo.Point)arg.Arg.Other).Sprite,
+                                (manager, arg, value) => ((EvtFairyInfo.Point)arg.Arg.Other).Sprite = value)
+                        })
+                    .Append(SelectOption.Create<MMgr, MArg>("カテゴリ", new CategoryMenu()))
+                    .Append(
+                        new object[]
+                        {
+                            "Cmn",
+                            InputFieldViewWidget.CreateOption<MMgr, MArg>(
+                                (manager, arg) => ((EvtFairyInfo.Point)arg.Arg.Other).Cmn.Cmn,
+                                (manager, arg, value) => ((EvtFairyInfo.Point)arg.Arg.Other).Cmn.Cmn = value)
+                        })
 
-        //private class AssetID : IOptionsMenuText
-        //{
-        //    public TMP_InputField.ContentType ContentType => TMP_InputField.ContentType.Standard;
+                    .Build();
+            }
+        }
 
-        //    public string GetName(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-        //        => "アセットID";
+        private class CategoryMenu : RogueMenuScreen
+        {
+            private static readonly object[] elms = new object[]
+            {
+                EvtFairyCategory.ApplyTool,
+                EvtFairyCategory.Trap
+            };
 
-        //    public string GetValue(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-        //    {
-        //        var fairy = arg.TargetObj;
-        //        return NamingEffect.Get(fairy)?.Naming;
-        //    }
+            private readonly ScrollViewTemplate<object, MMgr, MArg> view = new()
+            {
+            };
 
-        //    public void SetValue(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg, string value)
-        //    {
-        //        var fairy = arg.TargetObj;
-        //        default(IActiveRogueMethodCaller).Affect(fairy, 1f, NamingEffect.Callback);
-        //        NamingEffect.Get(fairy).Naming = value;
-        //    }
-        //}
+            public override void OpenScreen(in MMgr manager, in MArg arg)
+            {
+                view.ShowTemplate(elms, manager, arg)
+                    ?
+                    .ElementNameFrom((category, manager, arg) => category.ToString())
+                    .OnClickElement((category, manager, arg) =>
+                    {
+                        var point = (EvtFairyInfo.Point)arg.Arg.Other;
+                        point.Category = (EvtFairyCategory)category;
+                        manager.Back();
+                    })
 
-        //private class RelatedChartID : IOptionsMenuText
-        //{
-        //    public TMP_InputField.ContentType ContentType => TMP_InputField.ContentType.Standard;
-
-        //    public string GetName(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-        //        => "チャートID";
-
-        //    public string GetValue(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-        //    {
-        //        var fairy = arg.TargetObj;
-        //        var eventFairyInfo = EvtFairyInfo.Get(fairy);
-        //        return eventFairyInfo.RelatedChart;
-        //    }
-
-        //    public void SetValue(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg, string value)
-        //    {
-        //        var fairy = arg.TargetObj;
-        //        var eventFairyInfo = EvtFairyInfo.Get(fairy);
-        //        eventFairyInfo.RelatedChart = value;
-        //    }
-        //}
-
-        //private class PointMenu : BaseScrollListMenu<object>
-        //{
-        //    private static readonly object[] elms = new object[]
-        //    {
-        //        new ConditionID(),
-        //        new AdditionalConditionID(),
-        //        new AppearanceAssetID(),
-        //        new CategoryMenu(),
-        //        new CmnID()
-        //    };
-
-        //    protected override IKeyword ViewKeyword => DeviceKw.MenuOptions;
-
-        //    protected override Spanning<object> GetList(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-        //    {
-        //        return elms;
-        //    }
-
-        //    protected override string GetItemName(object element, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-        //    {
-        //        return SelectOptionPresenter.Instance.GetItemName(element, manager, self, user, arg);
-        //    }
-
-        //    protected override void ActivateItem(object element, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-        //    {
-        //        SelectOptionPresenter.Instance.ActivateItem(element, manager, self, user, arg);
-        //    }
-        //}
-
-        //private class ConditionID : IOptionsMenuText
-        //{
-        //    public TMP_InputField.ContentType ContentType => TMP_InputField.ContentType.Standard;
-
-        //    public string GetName(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-        //        => "条件Cmn";
-
-        //    public string GetValue(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-        //    {
-        //        var point = (EvtFairyInfo.Point)arg.Other;
-        //        return point.ChartCmn;
-        //    }
-
-        //    public void SetValue(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg, string value)
-        //    {
-        //        var point = (EvtFairyInfo.Point)arg.Other;
-        //        point.ChartCmn = value;
-        //    }
-        //}
-
-        //private class AdditionalConditionID : IOptionsMenuText
-        //{
-        //    public TMP_InputField.ContentType ContentType => TMP_InputField.ContentType.Standard;
-
-        //    public string GetName(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-        //        => "追加条件ID";
-
-        //    public string GetValue(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-        //    {
-        //        var point = (EvtFairyInfo.Point)arg.Other;
-        //        return point.IfCmn.Cmn;
-        //    }
-
-        //    public void SetValue(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg, string value)
-        //    {
-        //        var point = (EvtFairyInfo.Point)arg.Other;
-        //        point.IfCmn.Cmn = value;
-        //    }
-        //}
-
-        //private class AppearanceAssetID : IOptionsMenuText
-        //{
-        //    public TMP_InputField.ContentType ContentType => TMP_InputField.ContentType.Standard;
-
-        //    public string GetName(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-        //        => "見た目アセットID";
-
-        //    public string GetValue(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-        //    {
-        //        var point = (EvtFairyInfo.Point)arg.Other;
-        //        return point.Sprite;
-        //    }
-
-        //    public void SetValue(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg, string value)
-        //    {
-        //        var point = (EvtFairyInfo.Point)arg.Other;
-        //        point.Sprite = value;
-        //    }
-        //}
-
-        //private class CategoryMenu : BaseScrollListMenu<EvtFairyInfo.Category>, IListMenuSelectOption
-        //{
-        //    public TMP_InputField.ContentType ContentType => TMP_InputField.ContentType.Standard;
-
-        //    private static readonly EvtFairyInfo.Category[] elms = new EvtFairyInfo.Category[]
-        //    {
-        //        EvtFairyInfo.Category.ApplyTool,
-        //        EvtFairyInfo.Category.Trap
-        //    };
-
-        //    public string GetName(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-        //        => "カテゴリ";
-
-        //    public void Activate(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-        //    {
-        //        manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-
-        //        var point = (EvtFairyInfo.Point)arg.Other;
-        //        manager.OpenMenu(this, null, null, new(other: point));
-        //    }
-
-        //    protected override Spanning<EvtFairyInfo.Category> GetList(
-        //        IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-        //    {
-        //        return elms;
-        //    }
-
-        //    protected override string GetItemName(
-        //        EvtFairyInfo.Category element, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-        //    {
-        //        return element.ToString();
-        //    }
-
-        //    protected override void ActivateItem(
-        //        EvtFairyInfo.Category element, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-        //    {
-        //        manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-
-        //        var point = (EvtFairyInfo.Point)arg.Other;
-        //        point.Category = element;
-        //        manager.Back();
-        //    }
-        //}
-
-        //private class CmnID : IOptionsMenuText
-        //{
-        //    public TMP_InputField.ContentType ContentType => TMP_InputField.ContentType.Standard;
-
-        //    public string GetName(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-        //        => "Cmn";
-
-        //    public string GetValue(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-        //    {
-        //        var point = (EvtFairyInfo.Point)arg.Other;
-        //        return point.Cmn.Cmn;
-        //    }
-
-        //    public void SetValue(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg, string value)
-        //    {
-        //        var point = (EvtFairyInfo.Point)arg.Other;
-        //        point.Cmn.Cmn = value;
-        //    }
-        //}
+                    .Build();
+            }
+        }
     }
 }

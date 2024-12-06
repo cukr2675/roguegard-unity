@@ -23,7 +23,7 @@ MonoBehaviour:
     _details:
       _script: {fileID: 0}
       _ref:
-        rid: -2
+        rid: 3003915687459815432
     _cost: 1
     _costIsUnknown: 0
     _genders: {fileID: 0}
@@ -84,7 +84,7 @@ MonoBehaviour:
     _beApplied:
       _script: {fileID: 11500000, guid: bc8d065af4f526044b16ce7072390eff, type: 3}
       _ref:
-        rid: 3003915687459815432
+        rid: 8602757254531514370
     _beThrown:
       _script: {fileID: 0}
       _ref:
@@ -118,6 +118,10 @@ MonoBehaviour:
     - rid: -2
       type: {class: , ns: , asm: }
     - rid: 3003915687459815432
+      type: {class: KyarakuriFigurineBeApplied, ns: Roguegard.Rgpacks, asm: Roguegard.Rgpacks}
+      data:
+        _assemblyReflectionAssetDummy: 
+    - rid: 8602757254531514370
       type: {class: KyarakuriFigurineBeApplied, ns: Roguegard.Rgpacks, asm: Roguegard.Rgpacks}
       data:
         _assemblyReflectionAssetDummy: 

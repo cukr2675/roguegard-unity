@@ -53,11 +53,15 @@ namespace Roguegard.Rgpacks
                     }
                     continue;
                 }
-                
+
                 // その他はアセットに変換
                 if (pair.Value is CharacterCreationDataBuilder characterCreationDataBuilder)
                 {
                     table.Add(assetID, new CharacterCreationPresetAsset(characterCreationDataBuilder));
+                }
+                if (pair.Value is RaceOptionalCreationData raceOptionalCreationData)
+                {
+                    table.Add(assetID, raceOptionalCreationData);
                 }
                 else if (pair.Value is KyarakuriClayInfo kyarakuriClayInfo)
                 {

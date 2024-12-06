@@ -131,6 +131,9 @@ namespace RoguegardUnity
                     }
                 }
                 RoguegardSettings.CharacterCreationDatabase = characterCreationDatabase;
+
+                assetTable = new Dictionary<string, object>(assetTable.Select(x => new KeyValuePair<string, object>(x.Key.Substring("Core.".Length), x.Value)));
+                RgpackReference.LoadRgpack(new Rgpack("Core", assetTable, Rgpacker.DefaultEvaluator));
             }
         }
 

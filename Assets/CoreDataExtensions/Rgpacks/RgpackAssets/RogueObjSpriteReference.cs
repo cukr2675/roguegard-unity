@@ -4,6 +4,7 @@ using UnityEngine;
 
 using SDSSprite;
 using UnityEngine.Tilemaps;
+using Roguegard.CharacterCreation;
 
 namespace Roguegard.Rgpacks
 {
@@ -20,16 +21,23 @@ namespace Roguegard.Rgpacks
 
         private void Initialize()
         {
+            var random = new RogueRandom(0);
             if (Asset is CharacterCreationPresetAsset characterCreationPresetAsset)
             {
-                var obj = characterCreationPresetAsset.LoadPreset().CreateObj(null, Vector2Int.zero, RogueRandom.Primary);
+                var obj = characterCreationPresetAsset.LoadPreset().CreateObj(null, Vector2Int.zero, random);
                 obj.Main.Sprite.Update(obj);
                 sprite = new ObjSprite() { info = obj.Main.Sprite };
             }
             else if (Asset is SewedEquipmentData sewedEquipmentData)
             {
                 var infoSet = new SewedEquipmentInfoSet(sewedEquipmentData);
-                var obj = infoSet.CreateObj(null, Vector2Int.zero, RogueRandom.Primary);
+                var obj = infoSet.CreateObj(null, Vector2Int.zero, random);
+                sprite = new ObjSprite() { info = obj.Main.Sprite };
+            }
+            else if (Asset is RaceOptionalCreationData raceOptionalCreationData)
+            {
+                var obj = raceOptionalCreationData.CreateObj(null, Vector2Int.zero, random);
+                obj.Main.Sprite.Update(obj);
                 sprite = new ObjSprite() { info = obj.Main.Sprite };
             }
             else
