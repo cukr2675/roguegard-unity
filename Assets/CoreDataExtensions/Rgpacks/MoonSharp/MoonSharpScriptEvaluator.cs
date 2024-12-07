@@ -20,20 +20,24 @@ namespace Roguegard.Rgpacks.MoonSharp
                 var value = pair.Value.Table;
                 if (value.MetaTable?.Get("__type").String == "Cmn")
                 {
-                    yield return new KeyValuePair<string, object>(pair.Key.String, new Cmn(value));
+                    yield return new KeyValuePair<string, object>(pair.Key.String, new Cmn(pair.Value));
                 }
             }
         }
 
         private class Cmn : ICmnAssset
         {
+            private readonly DynValue value;
             private readonly Table table;
+
+            private static readonly DynValue[] parameters = new DynValue[1];
 
             public IReadOnlyDictionary<string, ICmnPropertySource> PropertySources { get; }
 
-            public Cmn(Table table)
+            public Cmn(DynValue value)
             {
-                this.table = table;
+                this.value = value;
+                table = value.Table;
                 var propertySources = new Dictionary<string, ICmnPropertySource>();
                 foreach (var pair in table.Pairs)
                 {
@@ -56,7 +60,8 @@ namespace Roguegard.Rgpacks.MoonSharp
                 }
                 var function = table.Get("invoke").Function;
                 var coroutine = function.OwnerScript.CreateCoroutine(function).Coroutine;
-                var result = coroutine.Resume();
+                parameters[0] = value;
+                var result = coroutine.Resume(parameters);
                 if (result.Type == DataType.Number) return result.Number;
                 if (result.Type == DataType.Tuple)
                 {

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using MoonSharp.Interpreter;
-using Roguegard.CharacterCreation;
 using Roguegard.Extensions;
 
 namespace Roguegard.Rgpacks.MoonSharp

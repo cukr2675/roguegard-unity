@@ -29,10 +29,10 @@ namespace Roguegard.Rgpacks
         private class Menu : RogueMenuScreen
         {
             private static readonly List<object> elms = new();
+            private static readonly PropertiedCmnMenu nextMenu = new();
 
-            private readonly ScrollViewTemplate<object, MMgr, MArg> view = new()
+            private readonly VariableWidgetsViewTemplate<MMgr, MArg> view = new()
             {
-                ScrollSubViewName = StandardSubViewTable.WidgetsName,
             };
 
             public override void OpenScreen(in MMgr manager, in MArg arg)
@@ -42,7 +42,14 @@ namespace Roguegard.Rgpacks
                 elms.Clear();
                 for (int i = 0; i < chartPadInfo.Cmns.Count; i++)
                 {
-                    elms.Add(chartPadInfo.Cmns[i]);
+                    var cmn = chartPadInfo.Cmns[i];
+                    elms.Add(
+                        SelectOption.Create<MMgr, MArg>(
+                            cmn.Cmn ?? "[新しいコモンイベント]",
+                            (manager, arg) =>
+                            {
+                                manager.PushMenuScreen(nextMenu, arg.Self, other: cmn);
+                            }));
                 }
 
                 view.ShowTemplate(elms, manager, arg)
@@ -74,30 +81,6 @@ namespace Roguegard.Rgpacks
                             chartPadInfo.AddCmn();
                             manager.Reopen();
                         }))
-
-                    .ElementNameFrom((element, manager, arg) =>
-                    {
-                        if (element == null) return "+ イベントを追加";
-                        else return ((PropertiedCmnData)element).Cmn;
-                    })
-
-                    .VariableOnce(out var nextMenu, new PropertiedCmnMenu())
-                    .OnClickElement((element, manager, arg) =>
-                    {
-                        var chartPad = arg.Arg.TargetObj;
-                        var chartPadInfo = ChartPadInfo.Get(chartPad);
-
-                        if (element == null)
-                        {
-                            chartPadInfo.AddCmn();
-                            manager.Reopen();
-                        }
-                        else
-                        {
-                            var cmnData = (PropertiedCmnData)element;
-                            manager.PushMenuScreen(nextMenu, arg.Self, other: cmnData);
-                        }
-                    })
 
                     .Build();
             }

@@ -78,6 +78,10 @@ return {
         return o
     end,
 
+    ['__tostring'] = function(self)
+        return self.__type --.. ': ' .. string.format('%p', self)
+    end,
+
     ['__type'] = 'Cmn'
 }
 "));
