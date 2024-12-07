@@ -104,6 +104,7 @@ namespace RoguegardUnity
             }
 
             {
+                // プリセットと Core の AssetTable をキャラクリ用データベースに読み込み
                 var characterCreationDatabase = new CharacterCreationDatabase();
                 foreach (var preset in _presets)
                 {
@@ -131,7 +132,10 @@ namespace RoguegardUnity
                     }
                 }
                 RoguegardSettings.CharacterCreationDatabase = characterCreationDatabase;
-
+            }
+            {
+                // Core の AssetTable を Rgpack 化して読み込み
+                var assetTable = RoguegardSettings.GetAssetTable("Core");
                 assetTable = new Dictionary<string, object>(assetTable.Select(x => new KeyValuePair<string, object>(x.Key.Substring("Core.".Length), x.Value)));
                 RgpackReference.LoadRgpack(new Rgpack("Core", assetTable, Rgpacker.DefaultEvaluator));
             }

@@ -42,7 +42,7 @@ namespace Roguegard.Rgpacks
                     break;
                 }
             }
-            if (cmnIndex == -1) throw new RogueException($"イベント ({cmn}) が見つからないため、次のイベントを取得できません。");
+            if (cmnIndex == -1) throw new RogueException($"コモンイベント ({cmn}) が見つからないため、次のイベントを取得できません。");
 
             if (cmnIndex < cmns.Length - 1)
             {

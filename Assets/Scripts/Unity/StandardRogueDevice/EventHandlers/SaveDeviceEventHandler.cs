@@ -27,14 +27,19 @@ namespace RoguegardUnity
             writeFileMenu = SelectFileMenuScreen.Save(
                 onSelectFile: (fileInfo, manager, arg) =>
                 {
-                    SaveDelay(manager, fileInfo.FullName, false);
+                    SaveDelay(manager, fileInfo.FullName, false, spQuestRgpack);
+                    spQuestRgpack = null;
                 },
                 onNewFile: (manager, arg) =>
                 {
                     manager.Back();
 
                     StandardRogueDeviceSave.GetNewNumberingPath(
-                        RoguegardSettings.DefaultSaveFileName, path => SaveDelay(manager, path, false));
+                        RoguegardSettings.DefaultSaveFileName, path =>
+                        {
+                            SaveDelay(manager, path, false, spQuestRgpack);
+                            spQuestRgpack = null;
+                        });
                 });
 
             readFileMenu = SelectFileMenuScreen.Load(
@@ -104,14 +109,14 @@ namespace RoguegardUnity
             return false;
         }
 
-        private void SaveDelay(MMgr manager, string path, bool autoSave)
+        private void SaveDelay(MMgr manager, string path, bool autoSave, IReadOnlyDictionary<string, object> spQuestRgpack)
         {
             manager.Back();
             SelectFileMenuScreen.ShowSaving(manager);
-            manager.StartCoroutine(Save(manager, path, autoSave));
+            manager.StartCoroutine(Save(manager, path, autoSave, spQuestRgpack));
         }
 
-        private IEnumerator Save(MMgr manager, string path, bool autoSave)
+        private IEnumerator Save(MMgr manager, string path, bool autoSave, IReadOnlyDictionary<string, object> spQuestRgpack)
         {
             // RogueMethodAspectState の処理の完了を待つ
             yield return null;
@@ -147,66 +152,62 @@ namespace RoguegardUnity
             var stream = RogueFile.Create(path);
             var save = new StandardRogueDeviceSave();
             save.SaveGame(stream, name, data); // ここでシリアル化
-            var loadRgpack = spQuestRgpack;
-            spQuestRgpack = null;
-            System.Action invoke = () =>
+
+            stream.Close();
+            manager?.Done();
+
+            // セーブ完了メッセージを表示
+            if (autoSave)
             {
-                stream.Close();
-                manager?.Done();
+                RogueDevice.Add(DeviceKw.AppendText, path);
+                RogueDevice.Add(DeviceKw.AppendText, "にオートセーブしました\n");
+            }
+            else
+            {
+                RogueDevice.Add(DeviceKw.AppendText, path);
+                RogueDevice.Add(DeviceKw.AppendText, "にセーブしました\n");
+            }
 
-                // セーブ完了メッセージを表示
-                if (autoSave)
-                {
-                    RogueDevice.Add(DeviceKw.AppendText, path);
-                    RogueDevice.Add(DeviceKw.AppendText, "にオートセーブしました\n");
-                }
-                else
-                {
-                    RogueDevice.Add(DeviceKw.AppendText, path);
-                    RogueDevice.Add(DeviceKw.AppendText, "にセーブしました\n");
-                }
+            if (spQuestRgpack != null)
+            {
+                var rgpack = new Rgpack("Playtest", spQuestRgpack, Rgpacker.DefaultEvaluator);
+                if (!rgpack.TryGetAsset<SpQuestMonolithAsset>("__main", out var monolith)) throw new RogueException();
 
-                if (loadRgpack != null)
-                {
-                    var rgpack = new Rgpack("Playtest", loadRgpack, Rgpacker.DefaultEvaluator);
-                    if (!rgpack.TryGetAsset<SpQuestMonolithAsset>("__main", out var monolith)) throw new RogueException();
+                var random = new RogueRandom();
+                var spQuestDeviceData = new StandardRogueDeviceData();
+                spQuestDeviceData.CurrentRandom = random;
+                spQuestDeviceData.World = RoguegardSettings.WorldGenerator.CreateObj(null, Vector2Int.zero, random);
+                var preset = RoguegardSettings.CharacterCreationDatabase.LoadPreset(0);
+                preset.Name = "Playtest";
+                var rgpackPlayer = preset.CreateObj(spQuestDeviceData.World, Vector2Int.zero, random);
+                RogueDeviceEffect.SetTo(rgpackPlayer);
+                ViewInfo.SetTo(rgpackPlayer);
+                var worldInfo = RogueWorldInfo.Get(spQuestDeviceData.World);
+                worldInfo.LobbyMembers.Add(rgpackPlayer);
 
-                    var save = new StandardRogueDeviceSave();
-                    var random = new RogueRandom();
-                    var spQuestDeviceData = new StandardRogueDeviceData();
-                    spQuestDeviceData.CurrentRandom = random;
-                    spQuestDeviceData.World = RoguegardSettings.WorldGenerator.CreateObj(null, Vector2Int.zero, random);
-                    var preset = RoguegardSettings.CharacterCreationDatabase.LoadPreset(0);
-                    preset.Name = "Playtest";
-                    var player = preset.CreateObj(spQuestDeviceData.World, Vector2Int.zero, random);
-                    RogueDeviceEffect.SetTo(player);
-                    ViewInfo.SetTo(player);
-                    var worldInfo = RogueWorldInfo.Get(spQuestDeviceData.World);
-                    worldInfo.LobbyMembers.Add(player);
+                // パーティ・リーダーエフェクト・レベルアップボーナスの初期化
+                var party = new RogueParty(rgpackPlayer.Main.InfoSet.Faction, rgpackPlayer.Main.InfoSet.TargetFactions);
+                RoguePartyUtility.AssignWithPartyMembers(rgpackPlayer, party);
 
-                    // パーティ・リーダーエフェクト・レベルアップボーナスの初期化
-                    var party = new RogueParty(player.Main.InfoSet.Faction, player.Main.InfoSet.TargetFactions);
-                    RoguePartyUtility.AssignWithPartyMembers(player, party);
+                RoguePartyUtility.Reset(party, new UseNutritionLeaderEffect());
 
-                    RoguePartyUtility.Reset(party, new UseNutritionLeaderEffect());
+                spQuestDeviceData.Player = rgpackPlayer;
+                spQuestDeviceData.Subject = spQuestDeviceData.Player;
+                spQuestDeviceData.Options = data.Options;
 
-                    spQuestDeviceData.Player = player;
-                    spQuestDeviceData.Subject = spQuestDeviceData.Player;
-                    spQuestDeviceData.Options = data.Options;
+                RgpackReference.LoadRgpack(rgpack);
+                manager.Done();
 
-                    RgpackReference.LoadRgpack(rgpack);
-                    manager.Done();
+                worldInfo.ChartState.PushNext(monolith.MainChartSource);
 
-                    worldInfo.ChartState.PushNext(monolith.MainChartSource);
-
-                    // ロードしたデータを適用
-                    RogueRandom.Primary = spQuestDeviceData.CurrentRandom;
-                    componentManager.OpenDelay(spQuestDeviceData);
-                }
-            };
-            invoke();
-
-            if (loadRgpack == null) { componentManager.LoadSavePoint(player); }
+                // ロードしたデータを適用
+                RogueRandom.Primary = spQuestDeviceData.CurrentRandom;
+                componentManager.OpenDelay(spQuestDeviceData);
+            }
+            else
+            {
+                componentManager.LoadSavePoint(player);
+            }
         }
 
         /// <summary>
@@ -285,7 +286,7 @@ namespace RoguegardUnity
             {
                 var manager = inManager;
                 SelectFileMenuScreen.ShowSaving(manager);
-                StandardRogueDeviceSave.GetNewAutoSavePath("AutoSave.gard", path => parent.SaveDelay(manager, path, true));
+                StandardRogueDeviceSave.GetNewAutoSavePath("AutoSave.gard", path => parent.SaveDelay(manager, path, true, null));
             }
         }
     }
