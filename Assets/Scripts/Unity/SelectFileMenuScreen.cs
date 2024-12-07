@@ -60,7 +60,7 @@ namespace RoguegardUnity
         {
             var instance = new SelectFileMenuScreen();
             instance.nextScreen = new ChoicesMenuScreen(
-                (manager, arg) => $":OverwriteMsg::1::{((FileInfo)arg.Arg.Other).Name}<link=\"VerticalArrow\"></link>")
+                (manager, arg) => $":OverwriteMsg::1::{((FileInfo)arg.Arg.Other).Name}")
                 .Option(":Overwrite", (manager, arg) => onSelectFile((FileInfo)arg.Arg.Other, manager, arg))
                 .Back();
             instance.onNewFile = onNewFile;
