@@ -33,8 +33,9 @@ namespace ListingMF
             {
                 if (hiddenLinkID != _messageBox.HiddenLinkIDOnEOF) return;
 
-                OnCompleted?.Invoke(Manager, Arg);
+                var tempAction = OnCompleted;
                 OnCompleted = null;
+                tempAction?.Invoke(Manager, Arg);
             });
 
             if (_blocker != null)

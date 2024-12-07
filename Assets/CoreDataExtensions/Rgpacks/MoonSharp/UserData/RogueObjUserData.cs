@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using MoonSharp.Interpreter;
+using Roguegard.CharacterCreation;
 using Roguegard.Extensions;
 
 namespace Roguegard.Rgpacks.MoonSharp
@@ -33,5 +34,14 @@ namespace Roguegard.Rgpacks.MoonSharp
                 default(IActiveRogueMethodCaller).Walk(Obj, direction, 1f);
             }
         }
+
+        public override string ToString()
+        {
+            return Obj.GetName();
+        }
+
+        [MoonSharpUserDataMetamethod("__concat")] public static string Concat(RogueObjUserData o, string v) => o.ToString() + v;
+        [MoonSharpUserDataMetamethod("__concat")] public static string Concat(string v, RogueObjUserData o) => o.ToString() + v;
+        [MoonSharpUserDataMetamethod("__concat")] public static string Concat(RogueObjUserData o1, RogueObjUserData o2) => o1.ToString() + o2.ToString();
     }
 }

@@ -18,8 +18,6 @@ namespace Roguegard.Rgpacks.MoonSharp
     {
         private const string moduleName = "roguegard";
         private static readonly StringBuilder stringBuilder = new();
-        private static readonly SpeechMenu speechMenu = new();
-        private static readonly SelectMenu selectMenu = new();
         private static readonly Stack<Table> tableStack = new();
         private const int indentWidth = 2;
 
@@ -63,21 +61,13 @@ return function(type_name)
 end
 "));
 
-            roguegardTable.Set("talkf", roguegardTable.OwnerScript.DoString(@"
-return function(a)
-    rg.__talkf(a)
-    return coroutine.yield()
-end
-"));
+            // コルーチンを含む関数は MoonSharpModuleMethod では実装できないようなので DoString で実装する
+            foreach (var coroutineFunctionName in Internal.CoroutineFunctionNames)
+            {
+                AddCoroutineFunction(roguegardTable, coroutineFunctionName);
+            }
 
-            roguegardTable.Set("select", roguegardTable.OwnerScript.DoString(@"
-return function(a, b, c)
-    rg.__select(a, b, c)
-    return coroutine.yield()
-end
-"));
-
-            // エフェクトクラスのテンプレートを生成する関数
+            // コモンイベントクラスのテンプレートを生成する関数
             // クラスを継承する感覚で実装させる
             roguegardTable.Set("Cmn", roguegardTable.OwnerScript.DoString(@"
 return {
@@ -94,6 +84,16 @@ return {
 
             // require('roguegard') を必須にする
             globalTable.Remove(moduleName);
+        }
+
+        private static void AddCoroutineFunction(Table roguegardTable, string functionName)
+        {
+            roguegardTable.Set(functionName, roguegardTable.OwnerScript.DoString(@$"
+return function(...)
+    __rg.__{functionName}(...)
+    return coroutine.yield()
+end
+"));
         }
 
         [MoonSharpModuleMethod]
@@ -252,79 +252,6 @@ return {
         }
 
         [MoonSharpModuleMethod]
-        public static DynValue __talkf(ScriptExecutionContext executionContext, CallbackArguments args)
-        {
-            const string name = "__talkf";
-            var text = args.AsType(0, name, DataType.String, false).String;
-            var lines = Regex.Matches(text, @"\S.*(\r\n|\r|\n)?");
-
-            stringBuilder.Clear();
-            foreach (Match match in lines)
-            {
-                var value = match.Value;
-                for (int i = 0; i < match.Length; i++)
-                {
-                    if (value[i] == '{' && value[i + 1] != '{')
-                    {
-                        var length = value.IndexOf('}', i) - i;
-                        if (value[i + 1] == '>')
-                        {
-                            stringBuilder.Append("<link=\"HorizontalArrow\"></link>");
-                            i += length;
-                            continue;
-                        }
-                        if (value[i + 1] == 'v')
-                        {
-                            stringBuilder.Append("<link=\"VerticalArrow\"></link><link=\"PageBreak\"></link>");
-                            i += length;
-                            if (value[i + 1] == '\r' || value[i + 1] == '\n') break;
-                            continue;
-                        }
-                        if (value[i + 1] == '#')
-                        {
-                            var id = value.Substring(i + 2, length - 2);
-                            var rgpackID = "Playtest";
-                            if (!RgpackReference.TryGetRgpack(rgpackID, out var rgpack)) throw new RogueException($"Rgpack ({rgpackID}) が見つかりません。");
-                            if (!rgpack.TryGetAsset<object>(id, out var asset)) throw new RogueException(
-                                $"Rgpack ({rgpackID}) に ID ({id}) のデータが見つかりません。");
-
-                            stringBuilder.Append(asset);
-                            i += length;
-                            continue;
-                        }
-                    }
-
-                    stringBuilder.Append(value[i]);
-                }
-            }
-            if (stringBuilder.Length == 0) { stringBuilder.Append(" "); }
-            //RogueDevice.Add(DeviceKw.AppendText, DeviceKw.StartTalk);
-            //RogueDevice.Add(DeviceKw.AppendText, stringBuilder.ToString());
-            //RogueDevice.Add(DeviceKw.AppendText, DeviceKw.EndTalk);
-            speechMenu.coroutine = executionContext.GetCallingCoroutine();
-            speechMenu.message = stringBuilder.ToString();
-            RogueDevice.Primary.AddMenu(speechMenu, null, null, RogueMethodArgument.Identity);
-            //RogueDevice.Add(DeviceKw.AppendText, DeviceKw.WaitEndOfTalk);
-            return DynValue.Nil;
-        }
-
-        [MoonSharpModuleMethod]
-        public static DynValue __select(ScriptExecutionContext executionContext, CallbackArguments args)
-        {
-            const string name = "__select";
-            selectMenu.coroutine = executionContext.GetCallingCoroutine();
-            selectMenu.selectOptions.Clear();
-            for (int i = 0; i < args.Count; i++)
-            {
-                Debug.Log(args[i]);
-                var selectOption = args.AsType(i, name, DataType.String, false).String;
-                selectMenu.selectOptions.Add(selectOption);
-            }
-            RogueDevice.Primary.AddMenu(selectMenu, null, null, RogueMethodArgument.Identity);
-            return DynValue.Nil;
-        }
-
-        [MoonSharpModuleMethod]
         public static DynValue numberField(ScriptExecutionContext executionContext, CallbackArguments args)
         {
             return UserData.Create(new NumberCmnPropertyUserData());
@@ -423,38 +350,89 @@ return {
         {
             private const string moduleName = "__rg";
 
-            //[MoonSharpModuleMethod]
-            //public static DynValue __new_type(ScriptExecutionContext executionContext, CallbackArguments args)
-            //{
-            //    const string name = "__new_type";
-            //    var typeName = args.AsType(0, name, DataType.String, false).String;
-            //    var file = ((AnonWrapper<NotepadQuote>)executionContext.CurrentGlobalEnv.Get("__file").UserData.Object).Value;
-            //    var loaded = ((AnonWrapper<List<NotepadQuote>>)executionContext.CurrentGlobalEnv.Get("__loaded").UserData.Object).Value;
-            //    if (loaded.IndexOf(file) == -1) throw new RogueException();
+            public static string[] CoroutineFunctionNames => new[]
+            {
+                "say", "choices",
+            };
 
-            //    var type = MoonSharpScriptingType.Get(typeName, loaded.Skip(loaded.IndexOf(file)));
-            //    return UserData.Create(type);
-            //}
+            private static readonly SpeechMenu speechMenu = new();
+            private static readonly ChoicesMenu choicesMenu = new();
 
-            //[MoonSharpModuleMethod]
-            //public static DynValue __new_event(ScriptExecutionContext executionContext, CallbackArguments args)
-            //{
-            //    const string name = "__new_event";
+            [MoonSharpModuleMethod]
+            public static DynValue __say(ScriptExecutionContext executionContext, CallbackArguments args)
+            {
+                const string name = "__say";
+                var text = args.AsType(0, name, DataType.String, false).String;
+                var lines = Regex.Matches(text, @"\S.*(\r\n|\r|\n)?");
 
-            //    // lua 側のイベントテーブルを取得
-            //    var ev = args.AsType(0, name, DataType.Table, false).Table;
+                stringBuilder.Clear();
+                foreach (Match match in lines)
+                {
+                    var value = match.Value;
+                    for (int i = 0; i < match.Length; i++)
+                    {
+                        if (value[i] == '{' && value[i + 1] != '{')
+                        {
+                            var length = value.IndexOf('}', i) - i;
+                            if (value[i + 1] == '>')
+                            {
+                                stringBuilder.Append("<link=\"HorizontalArrow\"></link>");
+                                i += length;
+                                continue;
+                            }
+                            if (value[i + 1] == 'v')
+                            {
+                                stringBuilder.Append("<link=\"VerticalArrow\"></link><link=\"PageBreak\"></link>");
+                                i += length;
+                                if (value[i + 1] == '\r' || value[i + 1] == '\n') break;
+                                continue;
+                            }
+                            if (value[i + 1] == '#')
+                            {
+                                var id = value.Substring(i + 2, length - 2);
+                                var rgpackID = id.Substring(0, id.IndexOf('.'));
+                                var assetID = id.Substring(rgpackID.Length + 1);
+                                if (!RgpackReference.TryGetRgpack(rgpackID, out var rgpack)) throw new RogueException($"Rgpack ({rgpackID}) が見つかりません。");
+                                if (!rgpack.TryGetAsset<object>(assetID, out var asset)) throw new RogueException(
+                                    $"Rgpack ({rgpackID}) に ID ({assetID}) のデータが見つかりません。");
 
-            //    // イベントの型情報を取得
-            //    var type = (MoonSharpScriptingType)ev.MetaTable.Get("__type").UserData.Object;
+                                stringBuilder.Append(asset);
+                                i += length;
+                                continue;
+                            }
+                            {
+                                continue;
+                            }
+                        }
 
-            //    // ローグガルド側のイベントインスタンスを生成してテーブルに設定
-            //    var scriptingEvent = new MoonSharpScriptingCmn(type);
-            //    var scriptingEventWrapper = new AnonWrapper<MoonSharpScriptingCmn>(scriptingEvent);
-            //    var scriptingEventValue = UserData.Create(scriptingEventWrapper);
-            //    ev.Set("__rgins", scriptingEventValue);
+                        stringBuilder.Append(value[i]);
+                    }
+                }
+                if (stringBuilder.Length == 0) { stringBuilder.Append(" "); }
 
-            //    return DynValue.Nil;
-            //}
+                // 会話が読まれるまで待機
+                speechMenu.coroutine = executionContext.GetCallingCoroutine();
+                speechMenu.message = stringBuilder.ToString();
+                RogueDevice.Primary.AddMenu(speechMenu, null, null, RogueMethodArgument.Identity);
+                return DynValue.Nil;
+            }
+
+            [MoonSharpModuleMethod]
+            public static DynValue __choices(ScriptExecutionContext executionContext, CallbackArguments args)
+            {
+                const string name = "__choices";
+
+                // 選択肢が選択されるまで待機
+                choicesMenu.coroutine = executionContext.GetCallingCoroutine();
+                choicesMenu.selectOptions.Clear();
+                for (int i = 0; i < args.Count; i++)
+                {
+                    var selectOption = args.AsType(i, name, DataType.String, false).String;
+                    choicesMenu.selectOptions.Add(selectOption);
+                }
+                RogueDevice.Primary.AddMenu(choicesMenu, null, null, RogueMethodArgument.Identity);
+                return DynValue.Nil;
+            }
 
             [MoonSharpModuleMethod]
             public static DynValue __new_effect(ScriptExecutionContext executionContext, CallbackArguments args)
@@ -482,10 +460,18 @@ return {
             public global::MoonSharp.Interpreter.Coroutine coroutine;
             public string message;
 
+            public static bool isOpened;
+
             public override bool IsIncremental => true;
 
             public override void OpenScreen(in MMgr manager, in MArg arg)
             {
+                if (!isOpened)
+                {
+                    manager.StandardSubViewTable.SpeechBox.MessageBox.Clear();
+                    isOpened = true;
+                }
+
                 manager.StandardSubViewTable.SpeechBox.MessageBox.Append(message);
                 manager.StandardSubViewTable.SpeechBox.Show();
 
@@ -494,18 +480,38 @@ return {
                     coroutine.Resume();
 
                     var manager = (MMgr)iManager;
-                    manager.Done();
-                    manager.ResetDone();
-                    manager.StandardSubViewTable.SpeechBox.Show();
+                    if (coroutine.State == CoroutineState.Suspended)
+                    {
+                        // 次のアニメーションやメニューを受け取るためにいったん閉じる
+                        manager.Done();
+
+                        // スピーチボックスは表示したままにする
+                        manager.ResetDone();
+                        manager.StandardSubViewTable.SpeechBox.Show();
+                    }
+                    else
+                    {
+                        // 次のアニメーションやメニューがない場合はスピーチボックスを閉じる
+
+                        // AdvanceText のリセット用に VerticalArrow が余分に必要
+                        manager.StandardSubViewTable.SpeechBox.MessageBox.Append("<link=\"VerticalArrow\"></link><link=\"VerticalArrow\"></link>");
+                        manager.StandardSubViewTable.SpeechBox.DoScheduledAfterCompletion((iManager, arg) =>
+                        {
+                            var manager = (MMgr)iManager;
+                            manager.Done();
+                            isOpened = false;
+                        });
+                    }
                 });
             }
 
             public override void CloseScreen(MMgr manager, bool back)
             {
+                manager.StandardSubViewTable.MessageBox.Hide(back);
             }
         }
 
-        private class SelectMenu : RogueMenuScreen
+        private class ChoicesMenu : RogueMenuScreen
         {
             public global::MoonSharp.Interpreter.Coroutine coroutine;
             public List<string> selectOptions = new();
@@ -525,8 +531,14 @@ return {
                     .OnClickElement((selectOption, manager, arg) =>
                     {
                         manager.Done();
+                        manager.StandardSubViewTable.SpeechBox.MessageBox.Clear();
                         args[0] = DynValue.NewNumber(selectOptions.IndexOf(selectOption) + 1);
                         coroutine.Resume(args);
+
+                        if (coroutine.State == CoroutineState.Dead)
+                        {
+                            SpeechMenu.isOpened = false;
+                        }
                     })
 
                     .Build();
@@ -534,6 +546,8 @@ return {
 
             public override void CloseScreen(MMgr manager, bool back)
             {
+                if (!back) return;
+
                 view.HideTemplate(manager, back);
             }
         }
