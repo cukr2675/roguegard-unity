@@ -70,7 +70,7 @@ namespace ListingMF
             }
         }
 
-        public virtual string Localize(string text) => text;
+        public virtual string Localize(string text) => text.Normalize(System.Text.NormalizationForm.FormC); // TextMeshPro のために NFD を NFC に正規化する
 
         public virtual T Localize<T>(T obj) => obj;
 

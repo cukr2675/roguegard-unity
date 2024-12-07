@@ -108,7 +108,7 @@ namespace RoguegardUnity
 
         public override string Localize(string text)
         {
-            return StandardRogueDeviceUtility.Localize(text);
+            return base.Localize(StandardRogueDeviceUtility.Localize(text));
         }
 
         public override void PushMenuScreen(
