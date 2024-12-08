@@ -15,8 +15,12 @@ namespace Roguegard
             ScrollSubViewName = RoguegardSubViews.CharacterCreation,
             BackAnchorList = new()
             {
+                // プリセット読み込みボタン（OpenScreen で設定）
                 null,
-                SelectOption.Create<MMgr, MArg>("<", Save)
+
+                // キャラクタークリエイト完了ボタン
+                SelectOption.Create<MMgr, MArg>(
+                    ":Done", ChoicesMenuScreen.SaveBackDialog(Save, null))
             },
         };
 
