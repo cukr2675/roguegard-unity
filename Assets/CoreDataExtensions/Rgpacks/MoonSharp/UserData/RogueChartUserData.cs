@@ -11,7 +11,7 @@ namespace Roguegard.Rgpacks.MoonSharp
     {
         private readonly IRogueChartSource chartSource;
 
-        public RogueChartUserData(IRogueChartSource chartSource)
+        public RogueChartUserData(IRogueChartSource chartSource, Script ownerScript)
         {
             this.chartSource = chartSource;
         }
@@ -31,6 +31,29 @@ namespace Roguegard.Rgpacks.MoonSharp
             }
 
             worldInfo.ChartState.PushNext(chartSource);
+        }
+
+        public void setS(string key, string value)
+        {
+            var worldInfo = RogueWorldInfo.GetByCharacter(RogueDevice.Primary.Player);
+            if (worldInfo.ChartState.TryGet<ChartPadReference>(chartSource, out var chartReference, true))
+            {
+                chartReference.SerializableTable[key] = value;
+            }
+        }
+
+        public string getS(string key)
+        {
+            var worldInfo = RogueWorldInfo.GetByCharacter(RogueDevice.Primary.Player);
+            if (worldInfo.ChartState.TryGet<ChartPadReference>(chartSource, out var chartReference, true) &&
+                chartReference.SerializableTable.TryGetValue(key, out var value))
+            {
+                return value;
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }

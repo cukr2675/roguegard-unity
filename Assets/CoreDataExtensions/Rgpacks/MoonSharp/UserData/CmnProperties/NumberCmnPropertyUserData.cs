@@ -16,5 +16,14 @@ namespace Roguegard.Rgpacks.MoonSharp
             get => DynValue.NewNumber(_value);
             set => _value = (float?)value.CastToNumber() ?? 0f;
         }
+
+        public NumberCmnPropertyUserData()
+        {
+        }
+
+        public NumberCmnPropertyUserData(NumberCmnProperty cmnProperty)
+        {
+            _value = cmnProperty.Value;
+        }
     }
 }

@@ -46,7 +46,7 @@ namespace Roguegard.Rgpacks
                     elms.Add(
                         SelectOption.Create<MMgr, MArg>(
                             point.ChartCmn ?? "",
-                            (manager, arg) => { manager.PushMenuScreen(nextMenu, other: point); }));
+                            (manager, arg) => { manager.PushMenuScreen(nextMenu, arg.Self, other: point); }));
                 }
 
                 view.ShowTemplate(elms, manager, arg)
@@ -120,14 +120,10 @@ namespace Roguegard.Rgpacks
                                 (manager, arg, value) => ((EvtFairyInfo.Point)arg.Arg.Other).Sprite = value)
                         })
                     .Append(SelectOption.Create<MMgr, MArg>("カテゴリ", new CategoryMenu()))
-                    .Append(
-                        new object[]
-                        {
-                            "Cmn",
-                            InputFieldViewWidget.CreateOption<MMgr, MArg>(
-                                (manager, arg) => ((EvtFairyInfo.Point)arg.Arg.Other).Cmn.Cmn,
-                                (manager, arg, value) => ((EvtFairyInfo.Point)arg.Arg.Other).Cmn.Cmn = value)
-                        })
+                    .VariableOnce(out var cmnMenu, new PropertiedCmnMenu())
+                    .Append(SelectOption.Create<MMgr, MArg>(
+                        "Cmn",
+                        (manager, arg) => manager.PushMenuScreen(cmnMenu, arg.Self, other: ((EvtFairyInfo.Point)arg.Arg.Other).Cmn)))
 
                     .Build();
             }

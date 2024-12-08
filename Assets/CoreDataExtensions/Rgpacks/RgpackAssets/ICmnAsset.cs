@@ -8,6 +8,6 @@ namespace Roguegard.Rgpacks
     {
         IReadOnlyDictionary<string, ICmnPropertySource> PropertySources { get; }
 
-        object Invoke(IReadOnlyDictionary<string, ICmnProperty> properties);
+        object Invoke(IReadOnlyDictionary<string, ICmnProperty> properties, Spanning<object> arguments);
     }
 }

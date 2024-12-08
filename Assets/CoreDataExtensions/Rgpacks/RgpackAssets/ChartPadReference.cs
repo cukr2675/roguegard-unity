@@ -9,12 +9,15 @@ namespace Roguegard.Rgpacks
     {
         public CmnReference CurrentCmn { get; private set; }
 
+        public Dictionary<string, string> SerializableTable { get; set; }
+
         [System.NonSerialized] private IRogueChartSource _source;
         IRogueChartSource IRogueChart.Source => _source ??= new Source(FullID, RgpackID);
 
         private ChartPadReference(string id, string envRgpackID)
             : base(id, envRgpackID)
         {
+            SerializableTable = new Dictionary<string, string>();
         }
 
         public static IRogueChartSource CreateSource(string id, string envRgpackID)

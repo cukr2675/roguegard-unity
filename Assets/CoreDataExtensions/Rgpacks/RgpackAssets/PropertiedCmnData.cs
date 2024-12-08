@@ -36,6 +36,11 @@ namespace Roguegard.Rgpacks
             }
 
             var reference = new CmnReference(Cmn, envRgpackID);
+            if (!reference.AssetExists)
+            {
+                return null;
+            }
+
             var cmn = reference.Asset;
 
             properties ??= new Dictionary<string, ICmnProperty>();

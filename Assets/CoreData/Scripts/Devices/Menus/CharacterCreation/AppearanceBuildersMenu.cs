@@ -5,10 +5,8 @@ using UnityEngine;
 using SDSSprite;
 using ListingMF;
 using Roguegard.CharacterCreation;
-using Roguegard.Device;
-using Roguegard;
 
-namespace RoguegardUnity
+namespace Roguegard.Device
 {
     public class AppearanceBuildersMenu : RogueMenuScreen
     {

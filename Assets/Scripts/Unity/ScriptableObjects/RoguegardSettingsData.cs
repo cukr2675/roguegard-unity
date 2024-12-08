@@ -139,6 +139,36 @@ namespace RoguegardUnity
                 assetTable = new Dictionary<string, object>(assetTable.Select(x => new KeyValuePair<string, object>(x.Key.Substring("Core.".Length), x.Value)));
                 RgpackReference.LoadRgpack(new Rgpack("Core", assetTable, Rgpacker.DefaultEvaluator));
             }
+            {
+                // Rgpack モジュールを読み込み
+                var rgpack = new Dictionary<string, object>();
+                rgpack.Add("ChestChart", new ChartPadInfo());
+                rgpack.Add("ChestChart_lua", @"
+local Rg = require('roguegard')
+local m = {}
+
+m.LootCmn = Rg.Cmn:new()
+m.LootCmn.lootItem = Rg.startingItemField()
+function m.LootCmn:invoke(owner, user)
+    if owner.evtId == nil then
+        print('Error: ' .. owner .. ' is not Evt.')
+        return
+    end
+
+    local chestChart = Rg.ref('.ChestChart')
+    if chestChart.getS(owner.evtId) then
+        Rg.say([[宝箱はからっぽだった]])
+    else
+        local item = self.lootItem.createObj(user, 0, 0)
+        Rg.say(item..[[を手に入れた！]])
+        chestChart.setS(owner.evtId, 'true')
+    end
+end
+
+return m
+");
+                RgpackReference.LoadRgpack(new Rgpack("Rgpack", rgpack, Rgpacker.DefaultEvaluator));
+            }
         }
 
         public IEnumerator[] LoadAsync()

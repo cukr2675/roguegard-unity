@@ -28,7 +28,7 @@ namespace Roguegard.Rgpacks
         {
             if (cmn == null)
             {
-                if (cmns.Length == 0) throw new RogueException($"チャート {fullID} にポイントが一つも存在しません。");
+                if (cmns.Length == 0) return null;
 
                 return cmns[0];
             }

@@ -5,12 +5,16 @@ using UnityEngine;
 using TMPro;
 using ListingMF;
 using Roguegard.Rgpacks;
+using Roguegard.CharacterCreation;
 
 namespace Roguegard.Device
 {
     public class PropertiedCmnMenu : RogueMenuScreen
     {
         private readonly List<object> elms = new();
+
+        private CharacterCreationOptionMenu characterCreationOptionMenu;
+        private StartingItemTableMenu startingItemTableMenu;
 
         private readonly VariableWidgetsViewTemplate<MMgr, MArg> view = new()
         {
@@ -30,19 +34,39 @@ namespace Roguegard.Device
                 RgpackReference.LoadRgpack(rgpack);
 
                 var properties = cmnData.GetProperties(rgpack.ID);
-                foreach (var pair in properties)
+                if (properties != null)
                 {
-                    if (pair.Value is NumberCmnProperty numberCmnProperty)
+                    foreach (var pair in properties)
                     {
-                        elms.Add(
-                            new object[]
-                            {
+                        if (pair.Value is NumberCmnProperty numberCmnProperty)
+                        {
+                            elms.Add(
+                                new object[]
+                                {
                                 pair.Key,
                                 InputFieldViewWidget.CreateOption<MMgr, MArg>(
                                     (manager, arg) => numberCmnProperty.Value.ToString(),
-                                    (manager, arg, value) =>(numberCmnProperty.Value = float.Parse(value)).ToString(),
+                                    (manager, arg, value) => (numberCmnProperty.Value = float.Parse(value)).ToString(),
                                     TMP_InputField.ContentType.DecimalNumber)
-                            });
+                                });
+                        }
+                        else if (pair.Value is StartingItemCmnProperty startingItemCmnProperty)
+                        {
+                            characterCreationOptionMenu ??= new CharacterCreationOptionMenu(RoguegardSettings.CharacterCreationDatabase);
+                            startingItemCmnProperty.Value ??= new StartingItemBuilder() { Option = RoguegardSettings.CharacterCreationDatabase.StartingItemOptions[0] };
+                            elms.Add(
+                                SelectOption.Create<MMgr, MArg>(
+                                    pair.Key,
+                                    (manager, arg) => manager.PushMenuScreen(characterCreationOptionMenu, other: startingItemCmnProperty.Value)));
+                        }
+                        else if (pair.Value is StartingItemTableCmnProperty startingItemTableCmnProperty)
+                        {
+                            startingItemTableMenu ??= new StartingItemTableMenu();
+                            elms.Add(
+                                SelectOption.Create<MMgr, MArg>(
+                                    pair.Key,
+                                    (manager, arg) => manager.PushMenuScreen(startingItemTableMenu, other: startingItemTableCmnProperty)));
+                        }
                     }
                 }
             }
@@ -59,6 +83,68 @@ namespace Roguegard.Device
                     })
 
                 .Build();
+        }
+
+        private class StartingItemTableMenu : RogueMenuScreen
+        {
+            private readonly List<object> elms = new();
+            private readonly CharacterCreationDataBuilder builder = new();
+            private readonly CharacterCreationAddMenu characterCreationAddMenu = new(RoguegardSettings.CharacterCreationDatabase);
+            private readonly CharacterCreationOptionMenu characterCreationOptionMenu = new(RoguegardSettings.CharacterCreationDatabase);
+
+            private readonly ScrollViewTemplate<object, MMgr, MArg> view;
+
+            public StartingItemTableMenu()
+            {
+                view = new()
+                {
+                    BackAnchorList = new List<ISelectOption>()
+                    {
+                        SelectOption.Create<MMgr, MArg>(":Back", (manager, arg) =>
+                        {
+                            var startingItemTableCmnProperty = (StartingItemTableCmnProperty)arg.Arg.Other;
+                            startingItemTableCmnProperty.Value.Clear();
+                            startingItemTableCmnProperty.Value.AddClones(builder.StartingItemTable);
+                            manager.Back();
+                        }, "Cancel")
+                    }
+                };
+            }
+
+            public override void OpenScreen(in MMgr manager, in MArg arg)
+            {
+                var startingItemTableCmnProperty = (StartingItemTableCmnProperty)arg.Arg.Other;
+                var table = startingItemTableCmnProperty.Value;
+                builder.StartingItemTable.Clear();
+                builder.StartingItemTable.AddClones(table);
+                elms.Clear();
+                for (int i = 0; i < table.Count; i++)
+                {
+                    elms.Add(table[i][0]);
+                }
+
+                view.ShowTemplate(elms, manager, arg)
+                    ?
+                    .Append(SelectOption.Create<MMgr, MArg>(
+                        "+ アイテムを追加",
+                        (manager, arg) => manager.PushMenuScreen(characterCreationAddMenu, other: typeof(StartingItemBuilder))))
+
+                    .ElementNameFrom((element, manager, arg) =>
+                    {
+                        if (element is StartingItemBuilder startingItemBuilder) return startingItemBuilder.Name;
+                        else if (element is ISelectOption selectOption) return selectOption.GetName(manager, arg);
+                        else throw new RogueException();
+                    })
+
+                    .OnClickElement((element, manager, arg) =>
+                    {
+                        if (element is StartingItemBuilder startingItemBuilder) { manager.PushMenuScreen(characterCreationOptionMenu, other: startingItemBuilder); }
+                        else if (element is ISelectOption selectOption) { selectOption.HandleClick(manager, arg); }
+                        else throw new RogueException();
+                    })
+
+                    .Build();
+            }
         }
     }
 }

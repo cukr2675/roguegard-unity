@@ -2,12 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-using Roguegard;
-using Roguegard.CharacterCreation;
-using Roguegard.Device;
 using ListingMF;
+using Roguegard.CharacterCreation;
 
-namespace RoguegardUnity
+namespace Roguegard.Device
 {
     public class CharacterCreationOptionsSelectOption : ISelectOption
     {

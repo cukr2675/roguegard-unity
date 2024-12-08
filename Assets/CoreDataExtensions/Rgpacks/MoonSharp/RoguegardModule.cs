@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using MoonSharp.Interpreter;
@@ -67,8 +66,7 @@ end
                 AddCoroutineFunction(roguegardTable, coroutineFunctionName);
             }
 
-            // コモンイベントクラスのテンプレートを生成する関数
-            // クラスを継承する感覚で実装させる
+            // コモンイベントクラス
             roguegardTable.Set("Cmn", roguegardTable.OwnerScript.DoString(@"
 return {
     ['new'] = function(self)
@@ -173,8 +171,8 @@ end
         {
             const string name = "ref";
             var id = args.AsType(0, name, DataType.String, false).String;
-            var envRgpackID = executionContext.CurrentGlobalEnv.Get("__rgpack").String;
-            envRgpackID = "Playtest";
+            var envRgpackID = executionContext.OwnerScript.DoString("return __rgpack").String;
+            envRgpackID ??= "Playtest";
             var rgpackID = RgpackReference.GetRgpackID(id, envRgpackID);
             var assetID = RgpackReference.GetAssetID(id);
 
@@ -196,7 +194,7 @@ end
             }
             if (asset is ChartPadAsset chartPadAsset)
             {
-                return UserData.Create(new RogueChartUserData(chartPadAsset.ChartSource));
+                return UserData.Create(new RogueChartUserData(chartPadAsset.ChartSource, executionContext.OwnerScript));
             }
             throw new RogueException();
         }
@@ -217,6 +215,12 @@ end
                 return UserData.Create(new RogueObjUserData(obj));
             }
             return DynValue.Nil;
+        }
+
+        [MoonSharpModuleMethod]
+        public static DynValue getPlayer(ScriptExecutionContext executionContext, CallbackArguments args)
+        {
+            return UserData.Create(new RogueObjUserData(RogueDevice.Primary.Player));
         }
 
         [MoonSharpModuleMethod]
@@ -259,6 +263,18 @@ end
         public static DynValue numberField(ScriptExecutionContext executionContext, CallbackArguments args)
         {
             return UserData.Create(new NumberCmnPropertyUserData());
+        }
+
+        [MoonSharpModuleMethod]
+        public static DynValue startingItemField(ScriptExecutionContext executionContext, CallbackArguments args)
+        {
+            return UserData.Create(new StartingItemCmnPropertyUserData());
+        }
+
+        [MoonSharpModuleMethod]
+        public static DynValue startingItemTableField(ScriptExecutionContext executionContext, CallbackArguments args)
+        {
+            return UserData.Create(new StartingItemTableCmnPropertyUserData());
         }
 
         [MoonSharpModuleMethod]

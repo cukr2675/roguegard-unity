@@ -15,7 +15,7 @@ namespace Roguegard
             nextCharts.Add(source);
         }
 
-        public bool TryGet<T>(IRogueChartSource source, out T chart)
+        public bool TryGet<T>(IRogueChartSource source, out T chart, bool addWhenUndefined = false)
             where T : IRogueChart
         {
             for (int i = 0; i < charts.Count; i++)
@@ -33,8 +33,17 @@ namespace Roguegard
                     break;
                 }
             }
-            chart = default;
-            return false;
+            if (addWhenUndefined)
+            {
+                chart = (T)source.CreateChart();
+                charts.Add(chart);
+                return true;
+            }
+            else
+            {
+                chart = default;
+                return false;
+            }
         }
 
         public bool TryUpdate()

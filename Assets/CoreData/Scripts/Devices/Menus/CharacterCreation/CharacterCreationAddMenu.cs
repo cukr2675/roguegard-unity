@@ -3,13 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using SDSSprite;
-using Roguegard;
 using Roguegard.CharacterCreation;
-using Roguegard.Device;
 
 using ListingMF;
 
-namespace RoguegardUnity
+namespace Roguegard.Device
 {
     public class CharacterCreationAddMenu : RogueMenuScreen
     {
@@ -101,24 +99,35 @@ namespace RoguegardUnity
             }
             else if (builder is StartingItemBuilder || builder is SingleItemMember)
             {
-                var playerItems = player.Space.Objs;
-                for (int i = 0; i < playerItems.Count; i++)
+                if (player != null)
                 {
-                    var item = playerItems[i];
-                    if (item?.Main.BaseInfoSet is CharacterCreationInfoSet itemInfoSet &&
-                        itemInfoSet.Data is IStartingItemOption option &&
-                        item.Main.RogueEffects.Effects.Count <= 1 &&
-                        !elms.Contains(option))
+                    var playerItems = player.Space.Objs;
+                    for (int i = 0; i < playerItems.Count; i++)
                     {
-                        elms.Add(option);
+                        var item = playerItems[i];
+                        if (item?.Main.BaseInfoSet is CharacterCreationInfoSet itemInfoSet &&
+                            itemInfoSet.Data is IStartingItemOption option &&
+                            item.Main.RogueEffects.Effects.Count <= 1 &&
+                            !elms.Contains(option))
+                        {
+                            elms.Add(option);
+                        }
+                        if (item?.Main.BaseInfoSet is SewedEquipmentInfoSet &&
+                            item.Main.RogueEffects.Effects.Count <= 1)
+                        {
+                            var objOption = new ObjStartingItemOption();
+                            objOption.Obj = item.Clone();
+                            elms.Add(objOption);
+                            continue;
+                        }
                     }
-                    if (item?.Main.BaseInfoSet is SewedEquipmentInfoSet &&
-                        item.Main.RogueEffects.Effects.Count <= 1)
+                }
+                else
+                {
+                    for (int i = 0; i < database.StartingItemOptions.Count; i++)
                     {
-                        var objOption = new ObjStartingItemOption();
-                        objOption.Obj = item.Clone();
-                        elms.Add(objOption);
-                        continue;
+                        var option = database.StartingItemOptions[i];
+                        elms.Add(option);
                     }
                 }
             }
@@ -190,46 +199,52 @@ namespace RoguegardUnity
         {
             if (startingItemOption == null) throw new System.ArgumentNullException(nameof(startingItemOption));
 
-            var playerItems = player.Space.Objs;
-            for (int i = 0; i < playerItems.Count; i++)
+            if (player != null)
             {
-                var item = playerItems[i];
-                if (item?.Main.BaseInfoSet is CharacterCreationInfoSet itemInfoSet &&
-                    itemInfoSet.Data is IStartingItemOption option &&
-                    item.Main.RogueEffects.Effects.Count <= 1 &&
-                    option == startingItemOption)
+                var playerItems = player.Space.Objs;
+                for (int i = 0; i < playerItems.Count; i++)
                 {
-                    item.TrySetStack(item.Stack - 1);
-                    return;
+                    var item = playerItems[i];
+                    if (item?.Main.BaseInfoSet is CharacterCreationInfoSet itemInfoSet &&
+                        itemInfoSet.Data is IStartingItemOption option &&
+                        item.Main.RogueEffects.Effects.Count <= 1 &&
+                        option == startingItemOption)
+                    {
+                        item.TrySetStack(item.Stack - 1);
+                        return;
+                    }
                 }
-            }
 
-            // 見つからなかったら何もしない
+                // 見つからなかったら何もしない
+            }
         }
 
         public static void ReceiveStartingItemOptionObj(IStartingItemOption startingItemOption, RogueObj player)
         {
             if (startingItemOption == null) return;
 
-            var playerItems = player.Space.Objs;
-            for (int i = 0; i < playerItems.Count; i++)
+            if (player != null)
             {
-                var item = playerItems[i];
-                if (item?.Main.BaseInfoSet is CharacterCreationInfoSet itemInfoSet &&
-                    itemInfoSet.Data is IStartingItemOption option &&
-                    item.Main.RogueEffects.Effects.Count <= 1 &&
-                    option == startingItemOption &&
-                    item.Stack < item.GetMaxStack(StackOption.Default))
+                var playerItems = player.Space.Objs;
+                for (int i = 0; i < playerItems.Count; i++)
                 {
-                    item.TrySetStack(item.Stack + 1);
-                    return;
+                    var item = playerItems[i];
+                    if (item?.Main.BaseInfoSet is CharacterCreationInfoSet itemInfoSet &&
+                        itemInfoSet.Data is IStartingItemOption option &&
+                        item.Main.RogueEffects.Effects.Count <= 1 &&
+                        option == startingItemOption &&
+                        item.Stack < item.GetMaxStack(StackOption.Default))
+                    {
+                        item.TrySetStack(item.Stack + 1);
+                        return;
+                    }
                 }
-            }
 
-            // 見つからないかスタックできなかったら新規オブジェクトを生成して獲得
-            if (startingItemOption is ScriptableCharacterCreationData data)
-            {
-                data.CreateObj(player, Vector2Int.zero, RogueRandom.Primary);
+                // 見つからないかスタックできなかったら新規オブジェクトを生成して獲得
+                if (startingItemOption is ScriptableCharacterCreationData data)
+                {
+                    data.CreateObj(player, Vector2Int.zero, RogueRandom.Primary);
+                }
             }
         }
     }

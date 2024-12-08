@@ -10,8 +10,6 @@ namespace Roguegard.Rgpacks
         private readonly List<PropertiedCmnData> _cmns = new();
         public Spanning<PropertiedCmnData> Cmns => _cmns;
 
-        private ChartPadInfo() { }
-
         public PropertiedCmnData AddCmn()
         {
             var newCmn = new PropertiedCmnData();

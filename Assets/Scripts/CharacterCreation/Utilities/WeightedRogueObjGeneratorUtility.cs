@@ -39,23 +39,25 @@ namespace Roguegard
 
         public static void CreateObjs(
             Spanning<IWeightedRogueObjGeneratorList> weightedObjTable, RogueObj location, Vector2Int position, IRogueRandom random,
-            StackOption stackOption = StackOption.Default)
+            StackOption stackOption = StackOption.Default, RogueObjList generatedObjs = null)
         {
+            generatedObjs?.Clear();
             for (int i = 0; i < weightedObjTable.Count; i++)
             {
                 var weightedObjList = weightedObjTable[i];
-                CreateObj(weightedObjList, location, position, random, stackOption);
+                var generatedObj = CreateObj(weightedObjList, location, position, random, stackOption);
+                if (generatedObjs != null) { generatedObjs.Add(generatedObj); }
             }
         }
 
         public static void CreateObjs(
             Spanning<IWeightedRogueObjGeneratorList> weightedObjTable, RogueObj location, IRogueRandom random,
-            StackOption stackOption = StackOption.Default)
+            StackOption stackOption = StackOption.Default, RogueObjList generatedObjs = null)
         {
             if (location != null && location.Space.Tilemap != null)
                 throw new System.ArgumentException("タイルマップを持つオブジェクトへ移動する場合、位置（Position）が必要です。");
 
-            CreateObjs(weightedObjTable, location, Vector2Int.zero, random, stackOption);
+            CreateObjs(weightedObjTable, location, Vector2Int.zero, random, stackOption, generatedObjs);
         }
     }
 }

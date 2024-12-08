@@ -2,13 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-using Roguegard;
-using Roguegard.CharacterCreation;
-using Roguegard.Device;
 using TMPro;
 using ListingMF;
+using Roguegard.CharacterCreation;
 
-namespace RoguegardUnity
+namespace Roguegard.Device
 {
     public class CharacterCreationOptionMenu : RogueMenuScreen
     {
@@ -133,6 +131,7 @@ namespace RoguegardUnity
             }
             else if (arg.Arg.Other is StartingItemBuilder startingItemBuilder)
             {
+                Debug.Log("a");
                 elms.Clear();
                 elms.Add(selectOption.Set(startingItemBuilder));
                 elms.Add(
@@ -167,6 +166,7 @@ namespace RoguegardUnity
                 AddMemberElements(startingItemBuilder);
                 elms.Add(removeSelectOption);
             }
+            Debug.Log(arg.Arg.Other);
 
             view.ShowTemplate(elms, manager, arg)
                 ?

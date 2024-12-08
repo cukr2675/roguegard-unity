@@ -12,6 +12,16 @@ namespace Roguegard.Rgpacks.MoonSharp
     {
         public RogueObj Obj { get; }
 
+        public string evtId
+        {
+            get
+            {
+                if (!(Obj.Main.InfoSet is EvtFairyReference evt)) return null;
+
+                return evt.AssetID;
+            }
+        }
+
         public RogueObjUserData(RogueObj obj)
         {
             Obj = obj;

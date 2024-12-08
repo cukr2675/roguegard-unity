@@ -66,6 +66,16 @@ namespace Roguegard.Rgpacks
         [System.NonSerialized] private T _asset;
         protected T Asset => _asset ??= GetAsset();
 
+        public bool AssetExists
+        {
+            get
+            {
+                if (!RgpackReference.TryGetRgpack(RgpackID, out var rgpack)) return false;
+                if (!rgpack.TryGetAsset<T>(AssetID, out var asset)) return false;
+                return true;
+            }
+        }
+
         protected RgpackReference() { }
 
         protected RgpackReference(string id, string envRgpackID)

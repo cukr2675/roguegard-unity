@@ -25,7 +25,6 @@ namespace Roguegard.Rgpacks
                 newPoint.Category = infoPoint.Category;
                 newPoint.Cmn = infoPoint.Cmn.ToReference(envRgpackID);
                 newPoint.Position = infoPoint.Position;
-                newPoint.Position = new Vector2Int(3, 3);
                 points.Add(newPoint);
             }
 

@@ -45,7 +45,11 @@ namespace Roguegard.Rgpacks
                 }
 
                 var evtFairyInfo = EvtFairyInfo.Get(obj);
-                if (evtFairyInfo != null) { directory.Add(assetID, evtFairyInfo); }
+                if (evtFairyInfo != null)
+                {
+                    evtFairyInfo.Points[0].Position = obj.Position;
+                    directory.Add(assetID, evtFairyInfo);
+                }
 
                 var chartPadInfo = ChartPadInfo.Get(obj);
                 if (chartPadInfo != null) { directory.Add(assetID, chartPadInfo); }

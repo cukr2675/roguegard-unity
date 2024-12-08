@@ -46,7 +46,7 @@ namespace Roguegard.Rgpacks
                 // 文字列はスクリプトとして評価する
                 if (pair.Value is string code)
                 {
-                    var evaluatedPairs = evaluator.Evaluate(code);
+                    var evaluatedPairs = evaluator.Evaluate(code, ID);
                     foreach (var evaluatedPair in evaluatedPairs)
                     {
                         table.Add(evaluatedPair.Key, evaluatedPair.Value);

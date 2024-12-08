@@ -135,7 +135,7 @@ namespace Roguegard.Rgpacks
 
             public override bool Invoke(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
             {
-                cmn.Invoke();
+                cmn.Invoke(self, user, activationDepth, arg);
                 return true;
             }
         }
