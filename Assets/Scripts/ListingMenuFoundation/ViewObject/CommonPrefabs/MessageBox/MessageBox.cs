@@ -54,7 +54,7 @@ namespace ListingMF
         private float characterCount;
         private int linePosition;
         private float startLineOffset;
-        public bool isScrollingNow;
+        private bool _isScrollingNow;
 
         private float ScrollPosition
         {
@@ -63,7 +63,8 @@ namespace ListingMF
         }
 
         public bool IsInProgress => !textTypingEffect.IsEOF;
-        public bool IsTypingNow => enabled && _characterPerSecond > 0f && !textTypingEffect.IsEOF && !isScrollingNow;
+        public bool IsTypingNow => enabled && _characterPerSecond > 0f && !textTypingEffect.IsEOF && !_isScrollingNow;
+        public bool IsScrollingNow => _isScrollingNow;
 
         private void Awake()
         {
@@ -92,7 +93,7 @@ namespace ListingMF
 
         private void Update()
         {
-            if (!isScrollingNow)
+            if (!_isScrollingNow)
             {
                 startLineOffset = CalculateTargetTextOffset();
 
@@ -164,7 +165,7 @@ namespace ListingMF
         public void StartScrollAndAddLinePosition(int lines)
         {
             linePosition += lines;
-            isScrollingNow = true;
+            _isScrollingNow = true;
         }
 
         /// <summary>
@@ -174,12 +175,12 @@ namespace ListingMF
         {
             if (_visibleMode == VisibleMode.Static) { linePosition += 1 * multiplier; }
             else { linePosition += _maxLineCount * multiplier; }
-            isScrollingNow = true;
+            _isScrollingNow = true;
         }
 
         public void EndScroll()
         {
-            isScrollingNow = false;
+            _isScrollingNow = false;
         }
 
         /// <summary>
@@ -187,7 +188,7 @@ namespace ListingMF
         /// </summary>
         public void EndScrollAndTrimBeforeAuto()
         {
-            isScrollingNow = false;
+            _isScrollingNow = false;
 
             // 表示に必要なくなったテキストを削除する
             int removedLineCount;

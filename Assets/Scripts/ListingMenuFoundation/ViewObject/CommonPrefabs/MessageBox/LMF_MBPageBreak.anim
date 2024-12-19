@@ -180,6 +180,13 @@ AnimationClip:
     messageOptions: 0
   - time: 0.5
     functionName: InvokeReachHiddenLink
+    data: EndScroll
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.5
+    functionName: InvokeReachHiddenLink
     data: AdvanceText
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
