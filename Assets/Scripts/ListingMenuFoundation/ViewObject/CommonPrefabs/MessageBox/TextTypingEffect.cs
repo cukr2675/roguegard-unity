@@ -5,6 +5,7 @@ using UnityEngine;
 using System.Text;
 using UnityEngine.Events;
 using TMPro;
+using System.Linq;
 
 namespace ListingMF
 {
@@ -112,6 +113,7 @@ namespace ListingMF
             hiddenLinkManager.UpdateLinks(text);
             isDirty = false;
             IsEOF = text.text.Length == 0;
+            if (IsEOF) { onReachHiddenLink.Invoke(eofHiddenLinkID); }
         }
 
         public void SeekToStartOfText()
@@ -144,9 +146,9 @@ namespace ListingMF
             }
 
             // リンクを検知
-            while (hiddenLinkManager.ForwardDetect(maxVisibleCharacters, out var hiddenLinkID, out var linkCharacterIndex))
+            while (hiddenLinkManager.ForwardDetect(maxVisibleCharacters, out var hiddenLinkID, out var nextVisibleCharacters))
             {
-                text.maxVisibleCharacters = linkCharacterIndex;
+                text.maxVisibleCharacters = nextVisibleCharacters;
                 onReachHiddenLink.Invoke(hiddenLinkID);
             }
 
@@ -173,12 +175,12 @@ namespace ListingMF
             if (IsEOF) return;
 
             // リンクを検知
-            if (hiddenLinkManager.ForwardDetect(text.maxVisibleCharacters + deltaVisibleCharacters, out var hiddenLinkID, out var linkCharacterIndex))
+            if (hiddenLinkManager.ForwardDetect(text.maxVisibleCharacters + deltaVisibleCharacters, out var hiddenLinkID, out var nextVisibleCharacters))
             {
                 // 表示位置が戻るのは未サポート
-                if (linkCharacterIndex < text.maxVisibleCharacters) throw new System.NotImplementedException();
+                if (nextVisibleCharacters < text.maxVisibleCharacters) throw new System.NotImplementedException();
 
-                text.maxVisibleCharacters = linkCharacterIndex;
+                text.maxVisibleCharacters = nextVisibleCharacters;
                 onReachHiddenLink.Invoke(hiddenLinkID);
                 return;
             }
@@ -249,26 +251,15 @@ namespace ListingMF
         /// </summary>
         public int TrimBeforeFirstLinkID(string hiddenLinkID)
         {
-            if (!hiddenLinkManager.TryGetFirstHiddenLinkCharacterIndex(text.maxVisibleCharacters, hiddenLinkID, out var linkCharacterIndex)) return 0;
-
-            var linkCharacterInfo = text.textInfo.characterInfo[linkCharacterIndex];
-            var linkStringIndex = linkCharacterInfo.index;
+            if (!hiddenLinkManager.TryGetFirstHiddenLinkCharacterIndex(text.maxVisibleCharacters, hiddenLinkID, out var endLinkStringIndex)) return 0;
 
             // テキストを削除する
             MeshUpdate(); // テキストの行数を更新する
             var beforeLineCount = text.textInfo.lineCount; // 削除前に取得
-            Remove(0, linkStringIndex);
+            Remove(0, endLinkStringIndex);
             SeekToStartOfText();
             MeshUpdate(); // テキストの行数を更新する
-            var removedLineCount = beforeLineCount - text.textInfo.lineCount; // 削除した行数を取得
-
-            // リンクが始端または終端でない位置にある場合、一部を削除した行として加算
-            var linkCharacterLineInfo = text.textInfo.lineInfo[linkCharacterInfo.lineNumber];
-            if (linkCharacterLineInfo.firstVisibleCharacterIndex != linkCharacterIndex ||
-                linkCharacterLineInfo.lastVisibleCharacterIndex != linkCharacterIndex)
-            {
-                removedLineCount++;
-            }
+            var removedLineCount = beforeLineCount - text.textInfo.lineCount + 1; // 削除した行数を取得
 
             return removedLineCount;
         }

@@ -23,59 +23,72 @@ namespace ListingMF
                 if (linkInfo.linkTextfirstCharacterIndex < text.maxVisibleCharacters) continue; // 表示済みテキスト内のリンクタグは無視
 
                 var hiddenLinkID = value.Substring(linkInfo.linkIdFirstCharacterIndex, linkInfo.linkIdLength);
-                var item = new Item(hiddenLinkID, linkInfo.linkTextfirstCharacterIndex);
+
+                // <link="PageBreak"></link><color="red">example</color> のようなテキストだと、
+                // PageBreak の linkInfo.linkTextfirstCharacterIndex は赤字テキストの 'e' のインデックス (上の例だと38) となってしまう。
+                // （Substring(38) だと example</color> となり色が抜けてしまう）
+                //
+                // 確実に </link> 直後のインデックス (上の例だと25) を取得したいので自前で計算する。
+                // （Substring(25) は <color="red">example</color> となり赤字が維持される）
+                //
+                // <link="exam" attr="add"  ></link> のような最短でない形式はサポートしない
+                var endLinkStringIndex = linkInfo.linkIdFirstCharacterIndex + linkInfo.linkIdLength + "\"></link>".Length;
+
+                var item = new Item(hiddenLinkID, linkInfo.linkTextfirstCharacterIndex, endLinkStringIndex);
                 items.Add(item);
             }
             nextItemIndex = 0;
         }
 
-        public bool ForwardDetect(int endCharacterIndex, out string hiddenLinkID, out int linkCharacterIndex)
+        public bool ForwardDetect(int endCharacterIndex, out string hiddenLinkID, out int nextVisibleCharacters)
         {
             if (nextItemIndex >= items.Count)
             {
                 hiddenLinkID = null;
-                linkCharacterIndex = default;
+                nextVisibleCharacters = default;
                 return false;
             }
 
             var nextItem = items[nextItemIndex];
-            if (endCharacterIndex < nextItem.LinkTextFirstCharacterIndex)
+            if (endCharacterIndex < nextItem.NextVisibleCharacters)
             {
                 hiddenLinkID = null;
-                linkCharacterIndex = default;
+                nextVisibleCharacters = default;
                 return false;
             }
 
             nextItemIndex++;
 
             hiddenLinkID = nextItem.HiddenLinkID;
-            linkCharacterIndex = nextItem.LinkTextFirstCharacterIndex;
+            nextVisibleCharacters = nextItem.NextVisibleCharacters;
             return true;
         }
 
-        public bool TryGetFirstHiddenLinkCharacterIndex(int endCharacterIndex, string hiddenLinkID, out int linkCharacterIndex)
+        public bool TryGetFirstHiddenLinkCharacterIndex(int endCharacterIndex, string hiddenLinkID, out int endLinkStringIndex)
         {
             foreach (var item in items)
             {
-                if (item.LinkTextFirstCharacterIndex > endCharacterIndex) continue;
+                if (item.NextVisibleCharacters > endCharacterIndex) continue;
                 if (item.HiddenLinkID != hiddenLinkID) continue;
 
-                linkCharacterIndex = item.LinkTextFirstCharacterIndex;
+                endLinkStringIndex = item.EndLinkStringIndex;
                 return true;
             }
-            linkCharacterIndex = default;
+            endLinkStringIndex = default;
             return false;
         }
 
         private class Item
         {
             public string HiddenLinkID { get; }
-            public int LinkTextFirstCharacterIndex { get; }
+            public int NextVisibleCharacters { get; }
+            public int EndLinkStringIndex { get; }
 
-            public Item(string hiddenLinkID, int linkTextFirstCharacterIndex)
+            public Item(string hiddenLinkID, int nextVisibleCharacters, int endLinkStringIndex)
             {
                 HiddenLinkID = hiddenLinkID;
-                LinkTextFirstCharacterIndex = linkTextFirstCharacterIndex;
+                NextVisibleCharacters = nextVisibleCharacters;
+                EndLinkStringIndex = endLinkStringIndex;
             }
         }
     }
