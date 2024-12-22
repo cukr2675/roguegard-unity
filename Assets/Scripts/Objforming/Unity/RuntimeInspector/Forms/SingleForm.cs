@@ -28,7 +28,7 @@ namespace Objforming.Unity.RuntimeInspector
         public override void AppendElementTo(FormInspector inspector, string key, ElementValueGetter getter, ElementValueSetter setter)
         {
             var element = Object.Instantiate(inputElementPrefab, inspector.Page);
-            element.Initialize(inspector, key, getter, setter, TMP_InputField.ContentType.DecimalNumber);
+            element.Initialize(inspector, key, getter, x => setter(float.Parse(x)), TMP_InputField.ContentType.DecimalNumber);
         }
     }
 }
