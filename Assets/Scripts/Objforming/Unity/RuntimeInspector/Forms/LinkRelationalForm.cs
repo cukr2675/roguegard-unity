@@ -18,7 +18,7 @@ namespace Objforming.Unity.RuntimeInspector
             // デフォルトの実装ではこのフォームへのリンクを表示する
             var linkElement = Object.Instantiate(linkElementPrefab, inspector.Page);
             var value = getter();
-            linkElement.Initialize(inspector, key, value);
+            linkElement.Initialize(inspector, key, value, setter);
         }
     }
 }

@@ -31,7 +31,7 @@ namespace Objforming.Unity.RuntimeInspector
         private BaseInputModule inputModule;
         private InspectorConfig config;
 
-        private List<object> path;
+        private List<Item> path;
         private bool prevTripleTap;
         private float doubleTapRemainingTime;
 
@@ -44,7 +44,7 @@ namespace Objforming.Unity.RuntimeInspector
             inputModule = FindObjectOfType<BaseInputModule>();
             this.config = config;
 
-            path = new List<object>();
+            path = new List<Item>();
             _prevButton.onClick.AddListener(() => Prev());
         }
 
@@ -107,12 +107,12 @@ namespace Objforming.Unity.RuntimeInspector
             //Page.DetachChildren();
             _pageScrollRect.horizontalNormalizedPosition = 0f;
             path.Clear();
-            path.Add(root);
+            path.Add(new Item(root, null));
             UpdatePathText();
             config.SetFormTo(this, root);
         }
 
-        public void SetTarget(object target)
+        public void SetTarget(object target, ElementValueSetter parentSetter = null)
         {
             foreach (Transform child in Page)
             {
@@ -121,7 +121,7 @@ namespace Objforming.Unity.RuntimeInspector
             }
             //Page.DetachChildren();
             _pageScrollRect.horizontalNormalizedPosition = 0f;
-            path.Add(target);
+            path.Add(new Item(target, parentSetter));
             UpdatePathText();
             config.SetFormTo(this, target);
         }
@@ -129,6 +129,8 @@ namespace Objforming.Unity.RuntimeInspector
         private void Prev()
         {
             if (path.Count <= 1) return;
+
+            path[path.Count - 1].UpdateParent();
 
             foreach (Transform child in Page)
             {
@@ -139,20 +141,40 @@ namespace Objforming.Unity.RuntimeInspector
             _pageScrollRect.horizontalNormalizedPosition = 0f;
             path.RemoveAt(path.Count - 1);
             UpdatePathText();
-            config.SetFormTo(this, path[path.Count - 1]);
+            config.SetFormTo(this, path[path.Count - 1].Value);
         }
 
         private void UpdatePathText()
         {
             stringBuilder.Clear();
             //stringBuilder.AppendJoin("/", path);
-            stringBuilder.Append(path[path.Count - 1]);
+            stringBuilder.Append(path[path.Count - 1].Value);
             _pathText.SetText(stringBuilder);
         }
 
         public void AppendElement(string key, System.Type type, ElementValueGetter getter, ElementValueSetter setter)
         {
             config.AppendElementTo(this, key, type, getter, setter);
+        }
+
+        private class Item
+        {
+            public object Value { get; }
+            private readonly ElementValueSetter parentSetter;
+
+            public Item(object value, ElementValueSetter parentSetter)
+            {
+                Value = value;
+                this.parentSetter = parentSetter;
+            }
+
+            /// <summary>
+            /// インスペクタで更新された値で親インスタンスを更新する。値型の変更を適用するために使用する
+            /// </summary>
+            public void UpdateParent()
+            {
+                parentSetter?.Invoke(Value);
+            }
         }
     }
 }

@@ -13,12 +13,14 @@ namespace Objforming.Unity.RuntimeInspector
 
         private FormInspector inspector;
         private object value;
+        private ElementValueSetter setter;
 
-        public void Initialize(FormInspector inspector, string label, object value)
+        public void Initialize(FormInspector inspector, string label, object value, ElementValueSetter setter)
         {
             _label.text = $"<link>{label}</link>";
             this.inspector = inspector;
             this.value = value;
+            this.setter = setter;
         }
 
         void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
@@ -26,7 +28,7 @@ namespace Objforming.Unity.RuntimeInspector
             var linkIndex = TMP_TextUtilities.FindIntersectingLink(_label, eventData.position, null);
             if (linkIndex == -1) return;
 
-            inspector.SetTarget(value);
+            inspector.SetTarget(value, setter);
         }
     }
 }
