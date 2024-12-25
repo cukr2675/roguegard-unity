@@ -57,8 +57,8 @@ MonoBehaviour:
     _pixelLocalPosition: {x: 0, y: 9, z: 0}
     _localRotation: {x: 0, y: 0, z: 0, w: 1}
     _scaleOfLocalByLocal: {x: 1, y: 1, z: 1}
-    _normalOrderInParent: -1
-    _backOrderInParent: -1
+    _normalOrderInParent: 1
+    _backOrderInParent: 1
   - _boneName: {fileID: 11400000, guid: 390f9798da027d8489dbb8048e8dc2d3, type: 2}
     _parentBoneName: {fileID: 11400000, guid: a90fd0bc3132c214395dee60b9a645ae, type: 2}
     _sprite:
@@ -79,8 +79,8 @@ MonoBehaviour:
     _pixelLocalPosition: {x: 3, y: 9, z: 0}
     _localRotation: {x: 0, y: 0, z: 0, w: 1}
     _scaleOfLocalByLocal: {x: 1, y: 1, z: 1}
-    _normalOrderInParent: -2
-    _backOrderInParent: 3
+    _normalOrderInParent: 2
+    _backOrderInParent: -3
   - _boneName: {fileID: 11400000, guid: a0ccd12a7fd1b134aa832922cd725b6a, type: 2}
     _parentBoneName: {fileID: 11400000, guid: 390f9798da027d8489dbb8048e8dc2d3, type: 2}
     _sprite:
@@ -101,8 +101,8 @@ MonoBehaviour:
     _pixelLocalPosition: {x: 0, y: -9, z: 0}
     _localRotation: {x: 0, y: 0, z: 0, w: 1}
     _scaleOfLocalByLocal: {x: 1, y: 1, z: 1}
-    _normalOrderInParent: -1
-    _backOrderInParent: -1
+    _normalOrderInParent: 1
+    _backOrderInParent: 1
   - _boneName: {fileID: 11400000, guid: 943353eeb2ebaf94fa745edefc849f40, type: 2}
     _parentBoneName: {fileID: 11400000, guid: a90fd0bc3132c214395dee60b9a645ae, type: 2}
     _sprite:
@@ -123,8 +123,8 @@ MonoBehaviour:
     _pixelLocalPosition: {x: -3, y: 9, z: 0}
     _localRotation: {x: 0, y: 0, z: 0, w: 1}
     _scaleOfLocalByLocal: {x: 1, y: 1, z: 1}
-    _normalOrderInParent: 3
-    _backOrderInParent: -2
+    _normalOrderInParent: -3
+    _backOrderInParent: 2
   - _boneName: {fileID: 11400000, guid: 1662f711f4d0ab043b52727470bfc0f1, type: 2}
     _parentBoneName: {fileID: 11400000, guid: 943353eeb2ebaf94fa745edefc849f40, type: 2}
     _sprite:
@@ -145,8 +145,8 @@ MonoBehaviour:
     _pixelLocalPosition: {x: 0, y: -9, z: 0}
     _localRotation: {x: 0, y: 0, z: 0, w: 1}
     _scaleOfLocalByLocal: {x: 1, y: 1, z: 1}
-    _normalOrderInParent: -1
-    _backOrderInParent: -1
+    _normalOrderInParent: 1
+    _backOrderInParent: 1
   - _boneName: {fileID: 11400000, guid: ec4ed1a3457777a41ae301e2da2a42f0, type: 2}
     _parentBoneName: {fileID: 11400000, guid: a90fd0bc3132c214395dee60b9a645ae, type: 2}
     _sprite:
@@ -167,8 +167,8 @@ MonoBehaviour:
     _pixelLocalPosition: {x: 2, y: 0, z: 0}
     _localRotation: {x: 0, y: 0, z: 0, w: 1}
     _scaleOfLocalByLocal: {x: 1, y: 1, z: 1}
-    _normalOrderInParent: 1
-    _backOrderInParent: 2
+    _normalOrderInParent: -1
+    _backOrderInParent: -2
   - _boneName: {fileID: 11400000, guid: 4847823016e5d67428aa750b880935c9, type: 2}
     _parentBoneName: {fileID: 11400000, guid: ec4ed1a3457777a41ae301e2da2a42f0, type: 2}
     _sprite:
@@ -189,8 +189,8 @@ MonoBehaviour:
     _pixelLocalPosition: {x: 0, y: -10, z: 0}
     _localRotation: {x: 0, y: 0, z: 0, w: 1}
     _scaleOfLocalByLocal: {x: 1, y: 1, z: 1}
-    _normalOrderInParent: -1
-    _backOrderInParent: -1
+    _normalOrderInParent: 1
+    _backOrderInParent: 1
   - _boneName: {fileID: 11400000, guid: 6c5bf9f3253d7214bba7b3466b57517f, type: 2}
     _parentBoneName: {fileID: 11400000, guid: a90fd0bc3132c214395dee60b9a645ae, type: 2}
     _sprite:
@@ -211,8 +211,8 @@ MonoBehaviour:
     _pixelLocalPosition: {x: -1, y: 0, z: 0}
     _localRotation: {x: 0, y: 0, z: 0, w: 1}
     _scaleOfLocalByLocal: {x: 1, y: 1, z: 1}
-    _normalOrderInParent: 2
-    _backOrderInParent: 1
+    _normalOrderInParent: -2
+    _backOrderInParent: -1
   - _boneName: {fileID: 11400000, guid: 78416086f1e60f44ba37a2a278beedb7, type: 2}
     _parentBoneName: {fileID: 11400000, guid: 6c5bf9f3253d7214bba7b3466b57517f, type: 2}
     _sprite:
@@ -233,8 +233,8 @@ MonoBehaviour:
     _pixelLocalPosition: {x: 0, y: -10, z: 0}
     _localRotation: {x: 0, y: 0, z: 0, w: 1}
     _scaleOfLocalByLocal: {x: 1, y: 1, z: 1}
-    _normalOrderInParent: -1
-    _backOrderInParent: -1
+    _normalOrderInParent: 1
+    _backOrderInParent: 1
   - _boneName: {fileID: 11400000, guid: c66efafae0b82384d8b4212c78358e52, type: 2}
     _parentBoneName: {fileID: 11400000, guid: a90fd0bc3132c214395dee60b9a645ae, type: 2}
     _sprite:
@@ -255,8 +255,8 @@ MonoBehaviour:
     _pixelLocalPosition: {x: 0, y: 10, z: 0}
     _localRotation: {x: 0, y: 0, z: 0, w: 1}
     _scaleOfLocalByLocal: {x: 1, y: 1, z: 1}
-    _normalOrderInParent: -3
-    _backOrderInParent: -3
+    _normalOrderInParent: 3
+    _backOrderInParent: 3
   - _boneName: {fileID: 11400000, guid: ec68d48baa662234394a31361604143d, type: 2}
     _parentBoneName: {fileID: 11400000, guid: c66efafae0b82384d8b4212c78358e52, type: 2}
     _sprite:
@@ -277,8 +277,8 @@ MonoBehaviour:
     _pixelLocalPosition: {x: 0, y: 0, z: 0}
     _localRotation: {x: 0, y: 0, z: 0, w: 1}
     _scaleOfLocalByLocal: {x: 1, y: 1, z: 1}
-    _normalOrderInParent: -1
-    _backOrderInParent: -1
+    _normalOrderInParent: 1
+    _backOrderInParent: 1
   - _boneName: {fileID: 11400000, guid: f2969665be9ee4d41a5326de4f6eb085, type: 2}
     _parentBoneName: {fileID: 11400000, guid: c66efafae0b82384d8b4212c78358e52, type: 2}
     _sprite:
@@ -299,8 +299,8 @@ MonoBehaviour:
     _pixelLocalPosition: {x: 1, y: 7, z: 0}
     _localRotation: {x: 0, y: 0, z: 0, w: 1}
     _scaleOfLocalByLocal: {x: 1, y: 1, z: 1}
-    _normalOrderInParent: -3
-    _backOrderInParent: -3
+    _normalOrderInParent: 3
+    _backOrderInParent: 3
   - _boneName: {fileID: 11400000, guid: 052643cd6ce569142a49fa1980f8534a, type: 2}
     _parentBoneName: {fileID: 11400000, guid: c66efafae0b82384d8b4212c78358e52, type: 2}
     _sprite:
@@ -321,8 +321,8 @@ MonoBehaviour:
     _pixelLocalPosition: {x: -4, y: 7, z: 0}
     _localRotation: {x: 0, y: 0, z: 0, w: 1}
     _scaleOfLocalByLocal: {x: 1, y: 1, z: 1}
-    _normalOrderInParent: -2
-    _backOrderInParent: -2
+    _normalOrderInParent: 2
+    _backOrderInParent: 2
   - _boneName: {fileID: 11400000, guid: e661236c97c800748878a1b024edc24f, type: 2}
     _parentBoneName: {fileID: 11400000, guid: c66efafae0b82384d8b4212c78358e52, type: 2}
     _sprite:
@@ -343,8 +343,8 @@ MonoBehaviour:
     _pixelLocalPosition: {x: -1, y: 1, z: 0}
     _localRotation: {x: 0, y: 0, z: 0, w: 1}
     _scaleOfLocalByLocal: {x: 1, y: 1, z: 1}
-    _normalOrderInParent: -4
-    _backOrderInParent: -4
+    _normalOrderInParent: 4
+    _backOrderInParent: 4
   - _boneName: {fileID: 11400000, guid: d75b8d3f26400424498cb4eff95f5ddd, type: 2}
     _parentBoneName: {fileID: 11400000, guid: c66efafae0b82384d8b4212c78358e52, type: 2}
     _sprite:
@@ -365,8 +365,8 @@ MonoBehaviour:
     _pixelLocalPosition: {x: 1, y: 3, z: 0}
     _localRotation: {x: 0, y: 0, z: 0, w: 1}
     _scaleOfLocalByLocal: {x: 1, y: 1, z: 1}
-    _normalOrderInParent: -6
-    _backOrderInParent: -6
+    _normalOrderInParent: 6
+    _backOrderInParent: 6
   - _boneName: {fileID: 11400000, guid: c9d1479eeb1d2424ba5ab7f85da95ed0, type: 2}
     _parentBoneName: {fileID: 11400000, guid: c66efafae0b82384d8b4212c78358e52, type: 2}
     _sprite:
@@ -387,8 +387,8 @@ MonoBehaviour:
     _pixelLocalPosition: {x: -4, y: 3, z: 0}
     _localRotation: {x: 0, y: 0, z: 0, w: 1}
     _scaleOfLocalByLocal: {x: 1, y: 1, z: 1}
-    _normalOrderInParent: -5
-    _backOrderInParent: -5
+    _normalOrderInParent: 5
+    _backOrderInParent: 5
   - _boneName: {fileID: 11400000, guid: 971d59b81cdac6b499bf4f884f750bae, type: 2}
     _parentBoneName: {fileID: 11400000, guid: a90fd0bc3132c214395dee60b9a645ae, type: 2}
     _sprite:
@@ -409,8 +409,8 @@ MonoBehaviour:
     _pixelLocalPosition: {x: 0, y: 9, z: 0}
     _localRotation: {x: 0, y: 0, z: 0, w: 1}
     _scaleOfLocalByLocal: {x: 1, y: 1, z: 1}
-    _normalOrderInParent: -4
-    _backOrderInParent: -4
+    _normalOrderInParent: 4
+    _backOrderInParent: 4
   - _boneName: {fileID: 11400000, guid: 5ea5eef48e6079b43a6ac0722c5611ce, type: 2}
     _parentBoneName: {fileID: 11400000, guid: a90fd0bc3132c214395dee60b9a645ae, type: 2}
     _sprite:
@@ -431,8 +431,8 @@ MonoBehaviour:
     _pixelLocalPosition: {x: 1, y: 2, z: 0}
     _localRotation: {x: 0, y: 0, z: 0, w: 1}
     _scaleOfLocalByLocal: {x: 1, y: 1, z: 1}
-    _normalOrderInParent: -5
-    _backOrderInParent: -5
+    _normalOrderInParent: 5
+    _backOrderInParent: 5
   - _boneName: {fileID: 11400000, guid: aefbcbb4bd643564f93620264e4030c3, type: 2}
     _parentBoneName: {fileID: 11400000, guid: a90fd0bc3132c214395dee60b9a645ae, type: 2}
     _sprite:
@@ -453,8 +453,8 @@ MonoBehaviour:
     _pixelLocalPosition: {x: 0, y: 0, z: 0}
     _localRotation: {x: 0, y: 0, z: 0, w: 1}
     _scaleOfLocalByLocal: {x: 1, y: 1, z: 1}
-    _normalOrderInParent: -6
-    _backOrderInParent: -6
+    _normalOrderInParent: 6
+    _backOrderInParent: 6
   - _boneName: {fileID: 11400000, guid: 507f991f9ea9f0147895d4432af3c77e, type: 2}
     _parentBoneName: {fileID: 11400000, guid: c66efafae0b82384d8b4212c78358e52, type: 2}
     _sprite:
@@ -475,5 +475,5 @@ MonoBehaviour:
     _pixelLocalPosition: {x: 0, y: 0, z: 0}
     _localRotation: {x: 0, y: 0, z: 0, w: 1}
     _scaleOfLocalByLocal: {x: 1, y: 1, z: 1}
-    _normalOrderInParent: -7
-    _backOrderInParent: -7
+    _normalOrderInParent: 7
+    _backOrderInParent: 7

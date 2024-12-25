@@ -83,12 +83,14 @@ namespace SDSSprite
                 // SortingGroup はヒエラルキーで下にある（＝インデックスが大きい）ほど手前に表示される
                 //  -> BoneChildrenSorter では最初に裏地を Front から Rear へ向かって設定する
                 // そのため、インデックスが小さいほど手前とする。
-                if (orderInParent <= 0f)
+                // 一方、 Unity の Sprite の OrderInLayer や Canvas の SortOrder では値が大きいほど手前に表示される
+                // そのため、 OrderInParent が大きいほど表地を手前とする。
+                if (orderInParent >= 0f)
                 {
                     for (int i = 0; i < frontChildren.Count; i++)
                     {
                         var child = frontChildren[i];
-                        if (GetOrderInParent(child) >= orderInParent)
+                        if (GetOrderInParent(child) <= orderInParent)
                         {
                             frontChildren.Insert(i, bone);
                             return;
@@ -101,7 +103,7 @@ namespace SDSSprite
                     for (int i = 0; i < rearChildren.Count; i++)
                     {
                         var child = rearChildren[i];
-                        if (GetOrderInParent(child) >= orderInParent)
+                        if (GetOrderInParent(child) <= orderInParent)
                         {
                             rearChildren.Insert(i, bone);
                             return;

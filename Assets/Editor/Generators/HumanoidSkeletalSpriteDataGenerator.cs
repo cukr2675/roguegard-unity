@@ -30,11 +30,13 @@ namespace Roguegard.Editor
             data.Add(Hair.Create());
             data.Add(LeftEar.Create());
             data.Add(RightEar.Create());
+            data.Add(Mouth.Create());
             data.Add(LeftEye.Create());
             data.Add(RightEye.Create());
             data.Add(Wings.Create(size));
             data.Add(Tail.Create());
-            data.Add(Effect.Create());
+            data.Add(BodyEffect.Create());
+            data.Add(HeadEffect.Create());
             return true;
         }
 
@@ -111,8 +113,8 @@ namespace Roguegard.Editor
                 node.BoneName = RoguegardAssetDatabase.GetBoneKeyword("Body");
                 node.Sprite = GetSprite(bodyStature);
                 node.PixelLocalPosition = new Vector3(0f, statureRank);
-                node.NormalOrderInParent = 0f;
-                node.BackOrderInParent = 0f;
+                node.NormalOrderInParent = +0f;
+                node.BackOrderInParent = +0f;
                 node.OverridesBaseColor = false;
                 return node;
             }
@@ -137,8 +139,8 @@ namespace Roguegard.Editor
                 node.ParentBoneName = RoguegardAssetDatabase.GetBoneKeyword("Body");
                 node.Sprite = RoguegardAssetDatabase.CreateColorRangedBoneSpriteOrNull(false, "UpperBody{0}");
                 node.PixelLocalPosition = new Vector3(0f, statureRank);
-                node.NormalOrderInParent = -1f;
-                node.BackOrderInParent = -1f;
+                node.NormalOrderInParent = +1f;
+                node.BackOrderInParent = +1f;
                 node.OverridesBaseColor = false;
                 return node;
             }
@@ -154,8 +156,8 @@ namespace Roguegard.Editor
                 node.ParentBoneName = RoguegardAssetDatabase.GetBoneKeyword("Body");
                 node.Sprite = GetArmSprite(armStature);
                 node.PixelLocalPosition = new Vector3(3f, statureRank);
-                node.NormalOrderInParent = -2f;
-                node.BackOrderInParent = 3f;
+                node.NormalOrderInParent = +2f;
+                node.BackOrderInParent = -3f;
                 return node;
             }
         }
@@ -169,8 +171,8 @@ namespace Roguegard.Editor
                 node.BoneName = RoguegardAssetDatabase.GetBoneKeyword("LeftHand");
                 node.ParentBoneName = RoguegardAssetDatabase.GetBoneKeyword("LeftArm");
                 node.PixelLocalPosition = new Vector3(0f, statureRank);
-                node.NormalOrderInParent = -1f;
-                node.BackOrderInParent = -1f;
+                node.NormalOrderInParent = +1f;
+                node.BackOrderInParent = +1f;
                 return node;
             }
         }
@@ -186,8 +188,8 @@ namespace Roguegard.Editor
                 node.Sprite = GetArmSprite(armStature);
                 node.FlipX = true;
                 node.PixelLocalPosition = new Vector3(-3f, statureRank);
-                node.NormalOrderInParent = 3f;
-                node.BackOrderInParent = -2f;
+                node.NormalOrderInParent = -3f;
+                node.BackOrderInParent = +2f;
                 return node;
             }
         }
@@ -202,8 +204,8 @@ namespace Roguegard.Editor
                 node.ParentBoneName = RoguegardAssetDatabase.GetBoneKeyword("RightArm");
                 node.FlipX = true;
                 node.PixelLocalPosition = new Vector3(0f, statureRank);
-                node.NormalOrderInParent = -1f;
-                node.BackOrderInParent = -1f;
+                node.NormalOrderInParent = +1f;
+                node.BackOrderInParent = +1f;
                 return node;
             }
         }
@@ -217,8 +219,8 @@ namespace Roguegard.Editor
                 node.ParentBoneName = RoguegardAssetDatabase.GetBoneKeyword("Body");
                 node.Sprite = GetLegSprite(legStature);
                 node.PixelLocalPosition = new Vector3(2f, 0f);
-                node.NormalOrderInParent = 1f;
-                node.BackOrderInParent = 2f;
+                node.NormalOrderInParent = -1f;
+                node.BackOrderInParent = -2f;
                 return node;
             }
         }
@@ -232,8 +234,8 @@ namespace Roguegard.Editor
                 node.BoneName = RoguegardAssetDatabase.GetBoneKeyword("LeftFoot");
                 node.ParentBoneName = RoguegardAssetDatabase.GetBoneKeyword("LeftLeg");
                 node.PixelLocalPosition = new Vector3(0f, statureRank);
-                node.NormalOrderInParent = -1f;
-                node.BackOrderInParent = -1f;
+                node.NormalOrderInParent = +1f;
+                node.BackOrderInParent = +1f;
                 return node;
             }
         }
@@ -247,8 +249,8 @@ namespace Roguegard.Editor
                 node.ParentBoneName = RoguegardAssetDatabase.GetBoneKeyword("Body");
                 node.Sprite = GetLegSprite(legStature);
                 node.PixelLocalPosition = new Vector3(-1f, 0f);
-                node.NormalOrderInParent = 2f;
-                node.BackOrderInParent = 1f;
+                node.NormalOrderInParent = -2f;
+                node.BackOrderInParent = -1f;
                 return node;
             }
         }
@@ -262,8 +264,8 @@ namespace Roguegard.Editor
                 node.BoneName = RoguegardAssetDatabase.GetBoneKeyword("RightFoot");
                 node.ParentBoneName = RoguegardAssetDatabase.GetBoneKeyword("RightLeg");
                 node.PixelLocalPosition = new Vector3(0f, statureRank);
-                node.NormalOrderInParent = -1f;
-                node.BackOrderInParent = -1f;
+                node.NormalOrderInParent = +1f;
+                node.BackOrderInParent = +1f;
                 return node;
             }
         }
@@ -278,8 +280,8 @@ namespace Roguegard.Editor
                 node.ParentBoneName = RoguegardAssetDatabase.GetBoneKeyword("Body");
                 node.Sprite = RoguegardAssetDatabase.CreateColorRangedBoneSpriteOrNull(true, "Head{0}{1}");
                 node.PixelLocalPosition = new Vector3(0f, statureRank);
-                node.NormalOrderInParent = -3f;
-                node.BackOrderInParent = -3f;
+                node.NormalOrderInParent = +3f;
+                node.BackOrderInParent = +3f;
                 return node;
             }
         }
@@ -291,8 +293,8 @@ namespace Roguegard.Editor
                 var node = new SkeletalSpriteData.Node();
                 node.BoneName = RoguegardAssetDatabase.GetBoneKeyword("Hair");
                 node.ParentBoneName = RoguegardAssetDatabase.GetBoneKeyword("Head");
-                node.NormalOrderInParent = -1f;
-                node.BackOrderInParent = -1f;
+                node.NormalOrderInParent = +1f;
+                node.BackOrderInParent = +1f;
                 return node;
             }
         }
@@ -305,8 +307,8 @@ namespace Roguegard.Editor
                 node.BoneName = RoguegardAssetDatabase.GetBoneKeyword("LeftEar");
                 node.ParentBoneName = RoguegardAssetDatabase.GetBoneKeyword("Head");
                 node.PixelLocalPosition = new Vector3(1f, 7f);
-                node.NormalOrderInParent = -3f;
-                node.BackOrderInParent = -3f;
+                node.NormalOrderInParent = +3f;
+                node.BackOrderInParent = +3f;
                 return node;
             }
         }
@@ -319,8 +321,8 @@ namespace Roguegard.Editor
                 node.BoneName = RoguegardAssetDatabase.GetBoneKeyword("RightEar");
                 node.ParentBoneName = RoguegardAssetDatabase.GetBoneKeyword("Head");
                 node.PixelLocalPosition = new Vector3(-4f, 7f);
-                node.NormalOrderInParent = -2f;
-                node.BackOrderInParent = -2f;
+                node.NormalOrderInParent = +2f;
+                node.BackOrderInParent = +2f;
                 return node;
             }
         }
@@ -333,8 +335,8 @@ namespace Roguegard.Editor
                 node.BoneName = RoguegardAssetDatabase.GetBoneKeyword("LeftEye");
                 node.ParentBoneName = RoguegardAssetDatabase.GetBoneKeyword("Head");
                 node.PixelLocalPosition = new Vector3(1f, 3f);
-                node.NormalOrderInParent = -5f;
-                node.BackOrderInParent = -5f;
+                node.NormalOrderInParent = +6f;
+                node.BackOrderInParent = +6f;
                 return node;
             }
         }
@@ -347,8 +349,24 @@ namespace Roguegard.Editor
                 node.BoneName = RoguegardAssetDatabase.GetBoneKeyword("RightEye");
                 node.ParentBoneName = RoguegardAssetDatabase.GetBoneKeyword("Head");
                 node.PixelLocalPosition = new Vector3(-4f, 3f);
-                node.NormalOrderInParent = -4f;
-                node.BackOrderInParent = -4f;
+                node.NormalOrderInParent = +5f;
+                node.BackOrderInParent = +5f;
+                return node;
+            }
+        }
+
+        private static class Mouth
+        {
+            public static SkeletalSpriteData.Node Create()
+            {
+                var node = new SkeletalSpriteData.Node();
+                node.BoneName = RoguegardAssetDatabase.GetBoneKeyword("Mouth");
+                node.ParentBoneName = RoguegardAssetDatabase.GetBoneKeyword("Head");
+                var clearSprite = RoguegardAssetDatabase.GetSprite("clear");
+                node.Sprite = new ColorRangedBoneSprite(BoneSprite.CreateNFBR_NRBF(clearSprite, clearSprite));
+                node.PixelLocalPosition = new Vector3(-1f, 1f);
+                node.NormalOrderInParent = +4f;
+                node.BackOrderInParent = +4f;
                 return node;
             }
         }
@@ -362,8 +380,8 @@ namespace Roguegard.Editor
                 node.BoneName = RoguegardAssetDatabase.GetBoneKeyword("Wing");
                 node.ParentBoneName = RoguegardAssetDatabase.GetBoneKeyword("Body");
                 node.PixelLocalPosition = new Vector3(0f, statureRank);
-                node.NormalOrderInParent = -4f;
-                node.BackOrderInParent = -4f;
+                node.NormalOrderInParent = +4f;
+                node.BackOrderInParent = +4f;
                 return node;
             }
         }
@@ -376,23 +394,38 @@ namespace Roguegard.Editor
                 node.BoneName = RoguegardAssetDatabase.GetBoneKeyword("Tail");
                 node.ParentBoneName = RoguegardAssetDatabase.GetBoneKeyword("Body");
                 node.PixelLocalPosition = new Vector3(1f, 2f);
-                node.NormalOrderInParent = -5f;
-                node.BackOrderInParent = -5f;
+                node.NormalOrderInParent = +5f;
+                node.BackOrderInParent = +5f;
                 return node;
             }
         }
 
-        private static class Effect
+        private static class BodyEffect
         {
             public static SkeletalSpriteData.Node Create()
             {
                 var node = new SkeletalSpriteData.Node();
-                node.BoneName = RoguegardAssetDatabase.GetBoneKeyword("Effect");
+                node.BoneName = RoguegardAssetDatabase.GetBoneKeyword("BodyEffect");
                 node.ParentBoneName = RoguegardAssetDatabase.GetBoneKeyword("Body");
                 var clearSprite = RoguegardAssetDatabase.GetSprite("clear");
                 node.Sprite = new ColorRangedBoneSprite(BoneSprite.CreateNFBR_NRBF(clearSprite, clearSprite));
-                node.NormalOrderInParent = -6f;
-                node.BackOrderInParent = -6f;
+                node.NormalOrderInParent = +6f;
+                node.BackOrderInParent = +6f;
+                return node;
+            }
+        }
+
+        private static class HeadEffect
+        {
+            public static SkeletalSpriteData.Node Create()
+            {
+                var node = new SkeletalSpriteData.Node();
+                node.BoneName = RoguegardAssetDatabase.GetBoneKeyword("HeadEffect");
+                node.ParentBoneName = RoguegardAssetDatabase.GetBoneKeyword("Head");
+                var clearSprite = RoguegardAssetDatabase.GetSprite("clear");
+                node.Sprite = new ColorRangedBoneSprite(BoneSprite.CreateNFBR_NRBF(clearSprite, clearSprite));
+                node.NormalOrderInParent = +7f;
+                node.BackOrderInParent = +7f;
                 return node;
             }
         }
