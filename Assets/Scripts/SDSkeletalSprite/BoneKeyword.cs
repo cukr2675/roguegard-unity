@@ -24,10 +24,12 @@ namespace SDSSprite
         public static BoneKeyword RightEar { get; } = new BoneKeyword("RightEar");
         public static BoneKeyword LeftEye { get; } = new BoneKeyword("LeftEye");
         public static BoneKeyword RightEye { get; } = new BoneKeyword("RightEye");
+        public static BoneKeyword Mouth { get; } = new BoneKeyword("Mouth");
         public static BoneKeyword LeftWing { get; } = new BoneKeyword("LeftWing");
         public static BoneKeyword RightWing { get; } = new BoneKeyword("RightWing");
         public static BoneKeyword Tail { get; } = new BoneKeyword("Tail");
         public static BoneKeyword BodyEffect { get; } = new BoneKeyword("BodyEffect");
+        public static BoneKeyword HeadEffect { get; } = new BoneKeyword("HeadEffect");
         public static BoneKeyword Other { get; } = new BoneKeyword(null);
 
         public BoneKeyword(string name)
