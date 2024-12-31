@@ -12,6 +12,7 @@ namespace ListingMF
     {
         [SerializeField] private ScrollRect _scrollRect = null;
         [SerializeField] private ViewElement _viewElementPrefab = null;
+        [SerializeField] private float _elasticityToCursor = 0.2f;
         private float itemHeight;
         private bool isInitialized;
 
@@ -183,14 +184,14 @@ namespace ListingMF
             if (selectedElementTop > verticalAbsoluteTop) // 上にはみ出ているとき
             {
                 var targetPosition = Mathf.Max(-selectedElementTop, 0f);
-                VerticalAbsolutePosition = Mathf.Lerp(VerticalAbsolutePosition, targetPosition, _scrollRect.elasticity);
+                VerticalAbsolutePosition = Mathf.Lerp(VerticalAbsolutePosition, targetPosition, _elasticityToCursor);
             }
             else if (selectedElementBottom < verticalAbsoluteBottom)  // 下にはみ出ているとき
             {
                 var targetPosition = Mathf.Min(
                     -selectedElementBottom - _scrollRect.viewport.rect.height,
                     marginHeight - _scrollRect.viewport.rect.height + itemHeight);
-                VerticalAbsolutePosition = Mathf.Lerp(VerticalAbsolutePosition, targetPosition, _scrollRect.elasticity);
+                VerticalAbsolutePosition = Mathf.Lerp(VerticalAbsolutePosition, targetPosition, _elasticityToCursor);
             }
         }
 
