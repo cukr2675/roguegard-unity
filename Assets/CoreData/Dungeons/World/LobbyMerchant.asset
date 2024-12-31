@@ -194,6 +194,13 @@ MonoBehaviour:
           _members:
             _items:
             - rid: 2885636890002456581
+        - _option: {fileID: 11400000, guid: e3eb826f9c4d5de44a0f733925eb1926, type: 2}
+          _optionDescription: {fileID: 0}
+          _generatorWeight: 1
+          _stack: 1
+          _members:
+            _items:
+            - rid: 8602757367301931008
     - rid: 3586031133046603782
       type: {class: ConstantRaceSprite, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
       data:
@@ -217,3 +224,7 @@ MonoBehaviour:
       type: {class: SingleItemMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
       data:
         _item: {fileID: 11400000, guid: 421f78ec35012f04bbf710b8cd41c7d2, type: 2}
+    - rid: 8602757367301931008
+      type: {class: RogueTileMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
+      data:
+        _tile: {fileID: 11400000, guid: 289d2d375cda4a542bc0591e961cd7dc, type: 2}
