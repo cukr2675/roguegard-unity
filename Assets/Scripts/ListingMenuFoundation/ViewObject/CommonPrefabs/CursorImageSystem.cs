@@ -25,8 +25,12 @@ namespace ListingMF
 
         private bool hide;
 
+        private static CursorImageSystem current;
+        public static bool ShowCursor => !current.hide;
+
         private void OnEnable()
         {
+            current = this;
             _hideAction.action.performed += OnTouch;
             _hideAction.action.Enable();
             _showAction.action.performed += OnKey;
@@ -35,6 +39,7 @@ namespace ListingMF
 
         private void OnDisable()
         {
+            if (current == this) { current = null; }
             _hideAction.action.performed -= OnTouch;
             _hideAction.action.Disable();
             _showAction.action.performed -= OnKey;

@@ -167,6 +167,8 @@ namespace ListingMF
 
         private void LateUpdate()
         {
+            if (!CursorImageSystem.ShowCursor) return;
+
             // カーソル移動でスクロールする（はみ出ている項目を選択したときスクロールさせる）
             var selected = EventSystem.current != null ? EventSystem.current.currentSelectedGameObject : null;
             if (selected == null || !selected.transform.IsChildOf(_scrollRect.content)) return;
