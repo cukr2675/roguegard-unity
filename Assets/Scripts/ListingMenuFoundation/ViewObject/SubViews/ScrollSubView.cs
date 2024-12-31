@@ -167,6 +167,7 @@ namespace ListingMF
 
         private void LateUpdate()
         {
+            // カーソル移動でスクロールする（はみ出ている項目を選択したときスクロールさせる）
             var selected = EventSystem.current != null ? EventSystem.current.currentSelectedGameObject : null;
             if (selected == null || !selected.transform.IsChildOf(_scrollRect.content)) return;
 
@@ -177,16 +178,16 @@ namespace ListingMF
             var verticalAbsoluteBottom = Mathf.Lerp(-contentHeight, -contentHeight + marginHeight, _scrollRect.verticalNormalizedPosition);
             var selectedElementTop = selectedElementTransform.localPosition.y + selectedElementTransform.rect.yMax;
             var selectedElementBottom = selectedElementTransform.localPosition.y + selectedElementTransform.rect.yMin;
-            if (selectedElementTop > verticalAbsoluteTop)
+            if (selectedElementTop > verticalAbsoluteTop) // 上にはみ出ているとき
             {
                 var targetPosition = Mathf.Max(-selectedElementTop, 0f);
                 VerticalAbsolutePosition = Mathf.Lerp(VerticalAbsolutePosition, targetPosition, _scrollRect.elasticity);
             }
-            else if (selectedElementBottom < verticalAbsoluteBottom)
+            else if (selectedElementBottom < verticalAbsoluteBottom)  // 下にはみ出ているとき
             {
                 var targetPosition = Mathf.Min(
                     -selectedElementBottom - _scrollRect.viewport.rect.height,
-                    itemHeight * (viewElements.Count + 1) - _scrollRect.viewport.rect.height);
+                    marginHeight - _scrollRect.viewport.rect.height + itemHeight);
                 VerticalAbsolutePosition = Mathf.Lerp(VerticalAbsolutePosition, targetPosition, _scrollRect.elasticity);
             }
         }
