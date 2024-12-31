@@ -15,10 +15,12 @@ namespace RoguegardUnity
     public class MenuController : MMgr
     {
         [SerializeField] private StatsSubView _stats = null;
+        [SerializeField] private FaceSubView _face = null;
         [SerializeField] private SummarySubView _summary = null;
         [SerializeField] private TextEditorSubView _textEditor = null;
         [SerializeField] private CharacterCreationSubView _characterCreation = null;
         [SerializeField] private PaintSubView _paint = null;
+        [SerializeField] private DopesheetSubView _dopesheet = null;
 
         public StatsSubView Stats => _stats;
 
@@ -61,8 +63,10 @@ namespace RoguegardUnity
             mainMenu = new MainMenu(objsMenu, skillsMenu, partyMenu);
             longDownMenu = new LongDownMenu(objsMenu, objCommandMenu);
 
+            _face.Initialize(rendererPool);
             _summary.Initialize();
             _characterCreation.Initialize(rendererPool);
+            _dopesheet.Initialize();
             if (_titleMenu != null) { _titleMenu.Initialize(); }
 
             this.soundController = soundController;
@@ -87,10 +91,12 @@ namespace RoguegardUnity
 
         public override IElementsSubView GetSubView(string subViewName)
         {
+            if (subViewName == RoguegardSubViews.Face) return _face;
             if (subViewName == RoguegardSubViews.Summary) return _summary;
             if (subViewName == RoguegardSubViews.TextEditor) return _textEditor;
             if (subViewName == RoguegardSubViews.CharacterCreation) return _characterCreation;
             if (subViewName == RoguegardSubViews.Paint) return _paint;
+            if (subViewName == RoguegardSubViews.Dopesheet) return _dopesheet;
             if (subViewName == TitleMenuName) return _titleMenu;
             return base.GetSubView(subViewName);
         }
@@ -99,10 +105,12 @@ namespace RoguegardUnity
         {
             base.HideAll(back);
             _stats.Hide(back);
+            _face.Hide(back);
             _summary.Hide(back);
             _textEditor.Hide(back);
             _characterCreation.Hide(back);
             _paint.Hide(back);
+            _dopesheet.Hide(back);
             if (_titleMenu != null) { _titleMenu.Hide(back); }
         }
 
