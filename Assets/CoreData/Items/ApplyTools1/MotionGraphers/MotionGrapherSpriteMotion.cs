@@ -170,7 +170,7 @@ namespace Roguegard
                 }
 
                 // ImmutableSymmetricalSpritePoseSource の方向変更に対応するため Body が存在しなければ追加する
-                if (!baseSpritePose.BoneTransforms.Keys.Contains(BoneKeyword.Body))
+                if (!baseSpritePose.BoneTransforms.Keys.Contains(BoneKeyword.Body) && subSpriteMotions.Count == 0)
                 {
                     baseSpritePose.AddBoneTransform(new BoneTransform(
                         null, Color.white, false, Vector3.zero, Quaternion.identity, Vector3.one, false, false, false), BoneKeyword.Body);
