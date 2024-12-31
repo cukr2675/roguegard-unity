@@ -133,10 +133,25 @@ namespace RoguegardUnity
                 }
                 RoguegardSettings.CharacterCreationDatabase = characterCreationDatabase;
             }
+        }
+
+        public IEnumerator[] LoadAsync()
+        {
+            Init();
+
+            return _loaders.Select(x => x.LoadAsync())
+                .Append(LoadRgpack())
+                .ToArray();
+        }
+
+        private IEnumerator LoadRgpack()
+        {
             {
                 // Core の AssetTable を Rgpack 化して読み込み
-                var assetTable = RoguegardSettings.GetAssetTable("Core");
-                assetTable = new Dictionary<string, object>(assetTable.Select(x => new KeyValuePair<string, object>(x.Key.Substring("Core.".Length), x.Value)));
+                var assetTable = new Dictionary<string, object>(
+                    RoguegardSettings.GetAssetTable("Core").Select(x => new KeyValuePair<string, object>(x.Key.Substring("Core.".Length), x.Value)));
+                assetTable.Add("Smile", CoreFacials.Smile);
+                assetTable.Add("ColdLook", CoreFacials.ColdLook);
                 RgpackReference.LoadRgpack(new Rgpack("Core", assetTable, Rgpacker.DefaultEvaluator));
             }
             {
@@ -169,13 +184,7 @@ return m
 ");
                 RgpackReference.LoadRgpack(new Rgpack("Rgpack", rgpack, Rgpacker.DefaultEvaluator));
             }
-        }
-
-        public IEnumerator[] LoadAsync()
-        {
-            Init();
-
-            return _loaders.Select(x => x.LoadAsync()).ToArray();
+            yield break;
         }
 
         public void TestLoad()

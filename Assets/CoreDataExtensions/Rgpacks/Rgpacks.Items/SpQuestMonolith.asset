@@ -158,3 +158,26 @@ MonoBehaviour:
           _stack: 1
           _members:
             _items: []
+        - _option: {fileID: 11400000, guid: 6d695757045de3541a374597a46b2485, type: 2}
+          _optionDescription: {fileID: 0}
+          _generatorWeight: 1
+          _stack: 1
+          _members:
+            _items: []
+        - _option: {fileID: 11400000, guid: e91d25b4588208546a844f5bc4ae66ff, type: 2}
+          _optionDescription: {fileID: 0}
+          _generatorWeight: 1
+          _stack: 1
+          _members:
+            _items:
+            - rid: 8602757355083661315
+        - _option: {fileID: 11400000, guid: 2ebea39c206e2de49af27f531cdc7497, type: 2}
+          _optionDescription: {fileID: 0}
+          _generatorWeight: 1
+          _stack: 1
+          _members:
+            _items: []
+    - rid: 8602757355083661315
+      type: {class: RogueTileMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
+      data:
+        _tile: {fileID: 11400000, guid: 7b5f75e0ffd65ff4ab579674c671753c, type: 2}

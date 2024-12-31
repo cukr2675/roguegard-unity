@@ -30,6 +30,8 @@ namespace ListingMF
         protected IListMenuArg Arg => Parent.Arg;
         protected ElementsSubViewBase Parent { get; private set; }
 
+        public RectTransform RectTransform => (RectTransform)transform;
+
         public void Initialize(ElementsSubViewBase parent)
         {
             if (parent == null) throw new System.ArgumentNullException(nameof(parent));

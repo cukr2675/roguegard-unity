@@ -15,7 +15,7 @@ namespace Roguegard.Rgpacks
         [System.NonSerialized] private string _evtID;
         public string EvtID => _evtID ??= FullID.Substring(FullID.LastIndexOf('.') + 1);
 
-        [System.NonSerialized] private readonly EvtFairyAsset.Point point;
+        [System.NonSerialized] private readonly EvtFairyAsset.Page point;
 
         private const int initialLv = 0;
 
@@ -64,7 +64,7 @@ namespace Roguegard.Rgpacks
         public IApplyRogueMethod BeThrown => RoguegardSettings.DefaultRaceOption.BeThrown;
         public IApplyRogueMethod BeEaten => RoguegardSettings.DefaultRaceOption.BeEaten;
 
-        public EvtFairyReference(string id, string envRgpackID, EvtFairyAsset.Point point)
+        public EvtFairyReference(string id, string envRgpackID, EvtFairyAsset.Page point)
             : base(id, envRgpackID)
         {
             this.point = point;
@@ -124,7 +124,13 @@ namespace Roguegard.Rgpacks
             var stats = obj.Main.Stats;
             stats.Direction = RogueDirection.LowerLeft;
             stats.Reset(obj);
-            if (!SpaceUtility.TryLocate(obj, location, point.Position, stackOption)) throw new RogueException("生成したオブジェクトの移動に失敗しました。");
+            if (!SpaceUtility.TryLocate(obj, location, point.Position, stackOption))
+            {
+                // Evt は壁タイルに埋め込んで使用できる
+                var movement = MovementCalculator.Get(obj);
+                if (!obj.TryLocate(location, point.Position, movement.AsTile, movement.HasCollider, false, movement.HasSightCollider, stackOption))
+                    throw new RogueException("生成したオブジェクトの移動に失敗しました。");
+            }
 
             return obj;
         }

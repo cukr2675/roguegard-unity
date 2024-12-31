@@ -77,6 +77,7 @@ namespace ListingMF
         {
             manager.GetSubView(DialogSubViewName).Hide(back);
             if (Title != null) { manager.GetSubView(CaptionBoxSubViewName).Hide(back); }
+            if (BackAnchorSubViewName != null) { manager.GetSubView(BackAnchorSubViewName).Hide(back); }
         }
 
         public class Builder : BaseListBuilder<Builder>

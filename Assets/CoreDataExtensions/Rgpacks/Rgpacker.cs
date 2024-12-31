@@ -30,6 +30,9 @@ namespace Roguegard.Rgpacks
                 var kyarakuriClayInfo = KyarakuriClayInfo.Get(obj);
                 if (kyarakuriClayInfo != null) { directory.Add(assetID, kyarakuriClayInfo); }
 
+                var effectStickerInfo = EffectStickerInfo.Get(obj);
+                if (effectStickerInfo != null) { directory.Add(assetID, effectStickerInfo); }
+
                 var mysteryDioramaInfo = MysteryDioramaInfo.Get(obj);
                 if (mysteryDioramaInfo != null)
                 {
@@ -47,20 +50,33 @@ namespace Roguegard.Rgpacks
                 var evtFairyInfo = EvtFairyInfo.Get(obj);
                 if (evtFairyInfo != null)
                 {
-                    evtFairyInfo.Points[0].Position = obj.Position;
+                    evtFairyInfo.Pages[0].Position = obj.Position;
                     directory.Add(assetID, evtFairyInfo);
                 }
 
                 var chartPadInfo = ChartPadInfo.Get(obj);
                 if (chartPadInfo != null) { directory.Add(assetID, chartPadInfo); }
 
+                var sewedInfoSet = obj.Main.InfoSet as SewedEquipmentInfoSet;
+                if (sewedInfoSet != null)
+                {
+                    directory.Add(assetID, sewedInfoSet.GetDataClone());
+                }
+
+                var choreographerInfo = MotionGrapherInfo.Get(obj);
+                if (choreographerInfo != null)
+                {
+                    directory.Add(assetID, new MotionGrapherSpriteMotion(choreographerInfo));
+                }
+
                 var text = NotepadInfo.GetText(obj);
                 if (text != null) { directory.Add(assetID, text); }
             }
             else
             {
+                // 名前が設定されていない場合は UUID を設定
                 var text = NotepadInfo.GetText(obj);
-                if (text != null) { directory.Add("__script", text); }
+                if (text != null) { directory.Add($"__script: {System.Guid.NewGuid()}", text); }
             }
 
             var monolithInfo = SpQuestMonolithInfo.Get(obj);

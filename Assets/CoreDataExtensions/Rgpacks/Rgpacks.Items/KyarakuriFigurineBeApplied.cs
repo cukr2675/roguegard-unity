@@ -57,7 +57,7 @@ namespace Roguegard.Rgpacks
                         {
                             var figurine = arg.Arg.TargetObj;
                             var builder = new CharacterCreationDataBuilder(KyarakuriFigurineInfo.Get(figurine));
-                            manager.PushMenuScreen(nextMenu, targetObj: figurine, other: builder);
+                            manager.PushMenuScreen(nextMenu, arg.Self, targetObj: figurine, other: builder);
                         }))
 
                     .Build();

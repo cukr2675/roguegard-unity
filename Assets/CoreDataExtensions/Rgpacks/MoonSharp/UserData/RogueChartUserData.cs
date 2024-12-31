@@ -16,11 +16,11 @@ namespace Roguegard.Rgpacks.MoonSharp
             this.chartSource = chartSource;
         }
 
-        public void nextFrom(string chartCmnID)
+        public void nextFrom(string id, Script ownerScript)
         {
-            //var envRgpackID = executionContext.CurrentGlobalEnv.Get("__rgpack").String;
-            var envRgpackID = "Playtest";
-            var argumentCmn = new CmnReference(chartCmnID, envRgpackID);
+            var envRgpackId = ownerScript.DoString("return __rgpack").String;
+            envRgpackId ??= "Playtest";
+            var argumentCmn = new CmnReference(id, envRgpackId);
             var worldInfo = RogueWorldInfo.GetByCharacter(RogueDevice.Primary.Player);
 
             if (worldInfo.ChartState.TryGet<ChartPadReference>(chartSource, out var chartReference) &&

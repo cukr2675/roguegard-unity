@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using SDSSprite;
 using Roguegard.CharacterCreation;
 
 namespace Roguegard.Rgpacks
@@ -75,6 +76,10 @@ namespace Roguegard.Rgpacks
                 {
                     table.Add(assetID, new MapDioramaFloorAsset(mapDioramaFloorInfo, fullID));
                 }
+                else if (pair.Value is EffectStickerInfo effectStickerInfo)
+                {
+                    table.Add(assetID, new EffectStickerAsset(effectStickerInfo, ID, fullID));
+                }
                 else if (pair.Value is EvtFairyInfo evtFairyInfo)
                 {
                     table.Add(assetID, new EvtFairyAsset(evtFairyInfo, ID, fullID));
@@ -82,6 +87,14 @@ namespace Roguegard.Rgpacks
                 else if (pair.Value is ChartPadInfo chartPadInfo)
                 {
                     table.Add(assetID, new ChartPadAsset(chartPadInfo, ID, fullID));
+                }
+                else if (pair.Value is SewedEquipmentData sewedEquipmentData)
+                {
+                    table.Add(assetID, sewedEquipmentData);
+                }
+                else if (pair.Value is ISpriteMotion spriteMotion)
+                {
+                    table.Add(assetID, spriteMotion);
                 }
                 else if (pair.Value is SpQuestMonolithInfo monolithInfo)
                 {

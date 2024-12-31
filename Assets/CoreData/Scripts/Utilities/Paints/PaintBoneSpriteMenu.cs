@@ -234,7 +234,7 @@ namespace Roguegard
                 var showsSplitLine = boneSprite.ShowsSplitLine(elms[0], out pivots[0], out pivots[1]);
 
                 var paint = RoguegardSubViews.GetPaint(manager);
-                paint.SetPaint(elms, table, showsSplitLine, pivots);
+                paint.SetPaint(elms, table.Palette, table.MainColor, showsSplitLine, pivots);
                 paint.Show();
 
                 IElementsSubViewStateProvider stateProvider = null;

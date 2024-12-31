@@ -8,7 +8,7 @@ namespace Roguegard
     public class RogueChartState
     {
         private readonly List<IRogueChart> charts = new();
-        private readonly List<IRogueChartSource> nextCharts = new();
+        private readonly List<IRogueChartSource> nextCharts = new(); // シリアル化のため Queue にしない
 
         public void PushNext(IRogueChartSource source)
         {

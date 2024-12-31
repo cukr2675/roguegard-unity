@@ -196,7 +196,7 @@ namespace Roguegard
             return null;
         }
 
-        private BoneSprite ToBoneSprite(Spanning<ShiftableColor> palette)
+        public BoneSprite ToBoneSprite(Spanning<ShiftableColor> palette)
         {
             return new BoneSprite(
                 ToSprite(NormalFront, palette), ToSprite(NormalRear, palette),

@@ -23,6 +23,7 @@ namespace Roguegard
         private int normalBonesCount;
         private int backBonesCount;
         private SpritePose enabledImmutablePose;
+        private ISkeletalSpriteRenderController lastRenderController;
 
         private static readonly EffectableBoneSpriteTable boneSpriteTable = new EffectableBoneSpriteTable();
 
@@ -80,7 +81,10 @@ namespace Roguegard
         public void SetTo(ISkeletalSpriteRenderController renderController, SpritePose pose, SpriteDirection direction)
         {
             // 装備が変更されておらず、引数のポーズが前回のポーズと同じかつ不変であれば、更新する必要はない。
-            if (!wasChangedEquipments && enabledImmutablePose == pose) return;
+            // ただし RenderController が同一の場合に限る。
+            if (!wasChangedEquipments && enabledImmutablePose == pose && lastRenderController == renderController) return;
+
+            lastRenderController = renderController;
 
             UpdateIndex(pose.BoneOrder);
 

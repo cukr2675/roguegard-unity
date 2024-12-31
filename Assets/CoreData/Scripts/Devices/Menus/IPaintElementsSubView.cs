@@ -13,6 +13,6 @@ namespace Roguegard.Device
         Color32 MainColor { get; }
         Spanning<ShiftableColor> Palette { get; }
 
-        void SetPaint(IReadOnlyList<DotterBoard> dotterBoards, object other, bool showSplitLine, Vector2[] pivots);
+        void SetPaint(IReadOnlyList<DotterBoard> dotterBoards, Spanning<ShiftableColor> palette, Color32 mainColor, bool showSplitLine, Vector2[] pivots);
     }
 }

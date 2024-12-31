@@ -11,8 +11,8 @@ namespace Roguegard
     public class RogueTileInfoData : ScriptableRogueTileInfo
     {
         [SerializeField] private string _descriptionName = null;
-        private string _name;
-        protected override string DescriptionName => _name ??= (string.IsNullOrEmpty(_descriptionName) ? $":{name}" : _descriptionName);
+        [System.NonSerialized] private string _nameCache; // null にするため NonSerialized を設定する
+        protected override string DescriptionName => _nameCache ??= (string.IsNullOrWhiteSpace(_descriptionName) ? $":{name}" : _descriptionName);
 
         [SerializeField] private Sprite _icon = null;
         public override Sprite Icon => _icon;

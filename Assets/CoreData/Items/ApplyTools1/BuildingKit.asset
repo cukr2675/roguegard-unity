@@ -128,7 +128,7 @@ MonoBehaviour:
       type: {class: LayingKitBeApplied, ns: Roguegard, asm: Roguegard.CoreData}
       data:
         _assemblyReflectionAssetDummy: 
-        _tileLayer: 2
+        _tileLayer: 1
     - rid: 5141994151084818444
       type: {class: ConstantRaceWeight, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
       data:

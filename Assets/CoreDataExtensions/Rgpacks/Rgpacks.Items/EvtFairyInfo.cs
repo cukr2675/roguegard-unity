@@ -8,26 +8,26 @@ namespace Roguegard.Rgpacks
     public class EvtFairyInfo
     {
         public string RelatedChart { get; set; }
-        private readonly List<Point> _points = new();
+        private readonly List<Page> _pages = new();
 
-        public Spanning<Point> Points => _points;
+        public Spanning<Page> Pages => _pages;
 
         private EvtFairyInfo() { }
 
-        public Point AddPoint()
+        public Page AddPage()
         {
-            var point = new Point();
-            point.ChartCmn = null;
-            point.IfCmn = new PropertiedCmnData();
-            point.Sprite = null;
-            point.Cmn = new PropertiedCmnData();
-            _points.Add(point);
-            return point;
+            var page = new Page();
+            page.ChartCmn = null;
+            page.IfCmn = new PropertiedCmnData();
+            page.Sprite = null;
+            page.Cmn = new PropertiedCmnData();
+            _pages.Add(page);
+            return page;
         }
 
-        //public bool AddPointClones(IEnumerable<Point> points) => _points.AddRange(points.Select(x => x.Clone()));
-        public bool RemovePoint(Point point) => _points.Remove(point);
-        public void ClearPoints() => _points.Clear();
+        //public bool AddPageClones(IEnumerable<Page> pages) => _pages.AddRange(pages.Select(x => x.Clone()));
+        public bool RemovePage(Page page) => _pages.Remove(page);
+        public void ClearPages() => _pages.Clear();
 
         public static EvtFairyInfo Get(RogueObj obj)
         {
@@ -71,7 +71,7 @@ namespace Roguegard.Rgpacks
         }
 
         [Objforming.Formable]
-        public class Point
+        public class Page
         {
             public string ChartCmn { get; set; }
             public PropertiedCmnData IfCmn { get; set; }

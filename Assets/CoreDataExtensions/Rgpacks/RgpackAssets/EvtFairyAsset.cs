@@ -9,23 +9,23 @@ namespace Roguegard.Rgpacks
         private readonly string fullID;
 
         private readonly IRogueChartSource relatedChartSource;
-        private readonly List<Point> points;
+        private readonly List<Page> pages;
 
         public EvtFairyAsset(EvtFairyInfo info, string envRgpackID, string fullID)
         {
             relatedChartSource = ChartPadReference.CreateSource(info.RelatedChart, envRgpackID);
-            points = new List<Point>();
-            for (int i = 0; i < info.Points.Count; i++)
+            pages = new List<Page>();
+            for (int i = 0; i < info.Pages.Count; i++)
             {
-                var infoPoint = info.Points[i];
-                var newPoint = new Point();
-                newPoint.ChartCmn = new CmnReference(infoPoint.ChartCmn, envRgpackID);
-                newPoint.IfCmn = infoPoint.IfCmn.ToReference(envRgpackID);
-                newPoint.Sprite = new RogueObjSpriteReference(infoPoint.Sprite, envRgpackID);
-                newPoint.Category = infoPoint.Category;
-                newPoint.Cmn = infoPoint.Cmn.ToReference(envRgpackID);
-                newPoint.Position = infoPoint.Position;
-                points.Add(newPoint);
+                var infoPage = info.Pages[i];
+                var newPage = new Page();
+                newPage.ChartCmn = new CmnReference(infoPage.ChartCmn, envRgpackID);
+                newPage.IfCmn = infoPage.IfCmn.ToReference(envRgpackID);
+                newPage.Sprite = new RogueObjSpriteReference(infoPage.Sprite, envRgpackID);
+                newPage.Category = infoPage.Category;
+                newPage.Cmn = infoPage.Cmn.ToReference(envRgpackID);
+                newPage.Position = infoPage.Position;
+                pages.Add(newPage);
             }
 
             this.fullID = fullID;
@@ -36,20 +36,20 @@ namespace Roguegard.Rgpacks
             var worldInfo = RogueWorldInfo.GetByCharacter(RogueDevice.Primary.Player);
             if (worldInfo.ChartState.TryGet<ChartPadReference>(relatedChartSource, out var chart))
             {
-                foreach (var point in points)
+                foreach (var page in pages)
                 {
-                    //if (point.ChartCmn != currentCmn) continue;
+                    //if (page.ChartCmn != currentCmn) continue;
 
-                    //var ifCmn = point.IfCmn?.GetData<IScriptingCmn>();
+                    //var ifCmn = page.IfCmn?.GetData<IScriptingCmn>();
                     //ifCmn?.Invoke();
 
-                    return point.GetInfoSet(fullID, "");
+                    return page.GetInfoSet(fullID, "");
                 }
             }
-            return points[0].GetInfoSet(fullID, "");
+            return pages[0].GetInfoSet(fullID, "");
         }
 
-        public class Point
+        public class Page
         {
             public CmnReference ChartCmn { get; set; }
             public PropertiedCmnReference IfCmn { get; set; }

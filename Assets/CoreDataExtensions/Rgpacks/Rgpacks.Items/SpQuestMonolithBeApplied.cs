@@ -32,6 +32,7 @@ namespace Roguegard.Rgpacks
             private readonly MainMenuViewTemplate<MMgr, MArg> view = new()
             {
                 PrimaryCommandSubViewName = StandardSubViewTable.ScrollName,
+                BackAnchorSubViewName = StandardSubViewTable.BackAnchorName,
             };
 
             public Menu(SpQuestMonolithBeApplied parent)

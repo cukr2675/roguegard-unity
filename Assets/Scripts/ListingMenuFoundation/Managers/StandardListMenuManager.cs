@@ -112,14 +112,13 @@ namespace ListingMF
         /// </summary>
         public void Back(int count = 1)
         {
-            MenuScreenStack<TMgr, TArg>.StackItem lastItem = null;
             for (int i = 0; i < count; i++)
             {
                 if (stack.Count == 0) break;
 
-                lastItem = stack.Pop();
+                var item = stack.Pop();
+                item.MenuScreen.CloseScreen((TMgr)this, true);
             }
-            lastItem?.MenuScreen.CloseScreen((TMgr)this, true);
             Reopen();
         }
 

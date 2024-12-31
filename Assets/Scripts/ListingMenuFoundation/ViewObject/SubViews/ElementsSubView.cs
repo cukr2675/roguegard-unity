@@ -79,8 +79,9 @@ namespace ListingMF
         public void UnlockManager()
         {
             HasManagerLock = false;
-            OnEndAnimation?.Invoke(Manager, Arg);
+            var tempOnEndAnimation = OnEndAnimation;
             OnEndAnimation = null;
+            tempOnEndAnimation?.Invoke(Manager, Arg);
         }
         public void PlayString(string value) => AnimatorTupple.Play(this, this, value);
         public void PlayObject(Object value) => AnimatorTupple.Play(this, this, value);

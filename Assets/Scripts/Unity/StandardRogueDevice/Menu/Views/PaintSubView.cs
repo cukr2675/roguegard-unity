@@ -17,7 +17,6 @@ namespace RoguegardUnity
         [SerializeField] private Image _upperPivot = null;
         [SerializeField] private Image _lowerPivot = null;
 
-        private PaintBoneSpriteTable baseTable;
         private readonly List<DotterBoard> _boards = new();
         private readonly List<ShiftableColor> _palette = new();
 
@@ -50,17 +49,29 @@ namespace RoguegardUnity
             ref IElementsSubViewStateProvider stateProvider)
             => throw new System.NotSupportedException();
 
-        void IPaintElementsSubView.SetPaint(IReadOnlyList<DotterBoard> dotterBoards, object other, bool showSplitLine, Vector2[] pivots)
+        void IPaintElementsSubView.SetPaint(
+            IReadOnlyList<DotterBoard> dotterBoards, Spanning<ShiftableColor> palette, Color32 mainColor, bool showSplitLine, Vector2[] pivots)
         {
-            baseTable = (PaintBoneSpriteTable)other;
             _boards.Clear();
             for (int i = 0; i < dotterBoards.Count; i++)
             {
                 _boards.Add(dotterBoards[i]);
             }
-            _toolSet.Load(_boards[0], baseTable.Palette.ToArray(), baseTable.MainColor);
+            _toolSet.Load(_boards[0], palette.ToArray(), mainColor);
 
             ShowSplitLine(showSplitLine, pivots);
+        }
+
+        public override void Show(HandleEndAnimation onEndAnimation = null)
+        {
+            base.Show(onEndAnimation);
+            _toolSet.enabled = true;
+        }
+
+        public override void Hide(bool back, HandleEndAnimation onEndAnimation = null)
+        {
+            _toolSet.enabled = false;
+            base.Hide(back, onEndAnimation);
         }
 
         private void ShowSplitLine(bool show, Spanning<Vector2> pivots)

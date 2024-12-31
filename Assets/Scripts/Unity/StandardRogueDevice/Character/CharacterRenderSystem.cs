@@ -88,7 +88,7 @@ namespace RoguegardUnity
             foreach (var character in characters)
             {
                 // 動作進行中でなく、見えていないオブジェクトの場合、更新しない。
-                if (!character.WorkingNow && view != null && !view.ContainsVisible(character.Obj)) continue;
+                if (character.Obj != null && !character.WorkingNow && view != null && !view.ContainsVisible(character.Obj)) continue;
 
                 // 各オブジェクトのアニメーションを進行させる。
                 var speed = fastForward ? 4 : 1;

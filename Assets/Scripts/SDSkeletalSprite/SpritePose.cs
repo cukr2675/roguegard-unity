@@ -37,16 +37,41 @@ namespace SDSSprite
             _boneOrder = defaultBoneOrder;
         }
 
+        public void Clear()
+        {
+            if (IsImmutable) throw new System.Exception();
+
+            Back = false;
+            _boneTransforms.Clear();
+            _boneOrder = defaultBoneOrder;
+        }
+
         public void SetBack(bool back)
         {
             if (IsImmutable) throw new System.Exception();
             Back = back;
         }
 
+        public void SetBoneTransforms(SpritePose pose)
+        {
+            if (IsImmutable) throw new System.Exception();
+
+            foreach (var pair in pose._boneTransforms)
+            {
+                SetBoneTransform(pair.Value, pair.Key);
+            }
+        }
+
         public void AddBoneTransform(BoneTransform value, BoneKeyword name)
         {
             if (IsImmutable) throw new System.Exception();
             _boneTransforms.Add(name, value);
+        }
+
+        public void SetBoneTransform(BoneTransform value, BoneKeyword name)
+        {
+            if (IsImmutable) throw new System.Exception();
+            _boneTransforms[name] = value;
         }
 
         public void SetBoneOrder(BoneOrder boneOrder)

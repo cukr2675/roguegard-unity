@@ -42,8 +42,16 @@ MonoBehaviour:
     _asset: {fileID: 11400000, guid: ce1865f724ba5574f870c6a71f0cb03c, type: 2}
   - _key: Core.GroundCactus
     _asset: {fileID: 11400000, guid: 4ea6f0d99ab17c441ade1ca947411970, type: 2}
+  - _key: Core.Locker
+    _asset: {fileID: 11400000, guid: e8ce6f7fc0c76e94587907aecb7da61c, type: 2}
+  - _key: Core.MosaicTileFloor
+    _asset: {fileID: 11400000, guid: 63835237594bf0840af11576d9cad02d, type: 2}
+  - _key: Core.MosaicTileWall
+    _asset: {fileID: 11400000, guid: d0cc7c39cd0425b47b2fe8aa94ce589e, type: 2}
   - _key: Core.QuicksandTrap
     _asset: {fileID: 11400000, guid: 153bbdf0c4a4f854995cc319a214edd8, type: 2}
+  - _key: Core.Rack
+    _asset: {fileID: 11400000, guid: fe708bd3376b860479647599017767d4, type: 2}
   - _key: Core.Sand
     _asset: {fileID: 11400000, guid: 9842b0be999f5dd4c84281d6622f3ba0, type: 2}
   - _key: Core.SandWall

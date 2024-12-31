@@ -14,7 +14,7 @@ namespace Roguegard.Rgpacks
 
         public MysteryDioramaAsset(MysteryDioramaInfo info, string envRgpackID, string fullID)
         {
-            var point = new EvtFairyAsset.Point();
+            var point = new EvtFairyAsset.Page();
             infoSet = new EvtFairyReference(fullID, envRgpackID, point);
         }
 

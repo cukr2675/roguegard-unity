@@ -75,6 +75,8 @@ MonoBehaviour:
     _asset: {fileID: 11400000, guid: e3eb826f9c4d5de44a0f733925eb1926, type: 2}
   - _key: Core.LinkPhial
     _asset: {fileID: 11400000, guid: 0312ad7686bfa234a8c3b45adec535e1, type: 2}
+  - _key: Core.MotionGrapher
+    _asset: {fileID: 11400000, guid: 2ebea39c206e2de49af27f531cdc7497, type: 2}
   - _key: Core.Padleaf
     _asset: {fileID: 11400000, guid: cd01f3ba88a8e774b83eec58d0841b4c, type: 2}
   - _key: Core.Postbox
@@ -267,6 +269,8 @@ MonoBehaviour:
     _asset: {fileID: 11400000, guid: 54b7f1cb05acf694ca3545570d9e79e4, type: 2}
   - _key: Core.ChartPad
     _asset: {fileID: 11400000, guid: 62a14c733f982354aa9b56e6c8ef2c81, type: 2}
+  - _key: Core.EffectSticker
+    _asset: {fileID: 11400000, guid: 6d695757045de3541a374597a46b2485, type: 2}
   - _key: Core.EvtFairy
     _asset: {fileID: 11400000, guid: ffa8ea2797e10f24aaa019fb83e065dd, type: 2}
   - _key: Core.KyarakuriClay
