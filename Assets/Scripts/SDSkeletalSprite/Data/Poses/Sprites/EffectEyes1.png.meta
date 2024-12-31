@@ -248,6 +248,132 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: SqueezedEye2L_NF
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 26
+        width: 4
+        height: 6
+      alignment: 9
+      pivot: {x: 0.25, y: 0.16666667}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c19fde6faaee37d498d77d2a0be45723
+      internalID: 1639082987
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SmilingEyeL_NF
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 30
+        width: 4
+        height: 2
+      alignment: 9
+      pivot: {x: 0.25, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: da1faf7251375204bad3c16687ac99ff
+      internalID: 1663396259
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SmilingEyeR_NF
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 30
+        width: 3
+        height: 2
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aecf6097a35b778499a1c8ecca79d673
+      internalID: -1930416447
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ColdEyeL_NF
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 25
+        width: 5
+        height: 5
+      alignment: 9
+      pivot: {x: 0.4, y: 0.2}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 641e208a7acf39a4bbf635316a9a4702
+      internalID: -1671339024
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ColdEyeR_NF
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 25
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3022183113e3bab46988ffe29031cd42
+      internalID: -681214111
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SmilingMouth_NF
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 27
+        width: 3
+        height: 2
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c07ec1874afcf4d4ea2aba280399f6f8
+      internalID: -675579442
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -259,10 +385,18 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
+      BlushEffect_NFBR: -1817999049
       CloseEyeL_NF: -1559457059
       CloseEyeR_NF: -156647847
+      ColdEyeL_NF: -1671339024
+      ColdEyeR_NF: -681214111
+      EffectEyes1_1: 2063854530
       GuruguruEyeL_NF: -789280783
       GuruguruEyeR_NF: 43120990
+      SmilingEyeL_NF: 1663396259
+      SmilingEyeR_NF: -1930416447
+      SmilingMouth_NF: -675579442
+      SqueezedEye2L_NF: 1639082987
       SqueezedEyeL_NF: 2010396690
       SqueezedEyeR_NF: -671630792
   mipmapLimitGroupName: 
