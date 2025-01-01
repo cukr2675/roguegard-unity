@@ -11,7 +11,7 @@ namespace Roguegard
         IKeyword Category { get; }
 
         RogueTileLayer Layer { get; }
-        bool HasCollider { get; }
+        bool HasCollider { get; } // タイル化した RogueObj の HasCollider と共通のため HasTileCollider ではない
         bool HasSightCollider { get; }
 
         IAffectRogueMethod Hit { get; }

@@ -21,13 +21,21 @@ namespace Roguegard
 
         /// <summary>
         /// <see cref="HasCollider"/> が true のオブジェクトと衝突するかを取得する。
+        /// <see cref="AsTile"/> == true のオブジェクトでは、そのオブジェクトが <see cref="HasTileCollider"/> == true の他オブジェクトと衝突することを示す。
         /// </summary>
         public bool HasCollider { get; private set; }
 
         /// <summary>
         /// 固定されているオブジェクトまたはタイルと衝突するかを取得する。
+        /// <see cref="AsTile"/> == true のオブジェクトでは、そのオブジェクトが <see cref="RogueTileLayer.Building"/> 層に存在することを示す。
         /// </summary>
         public bool HasTileCollider { get; private set; }
+
+        // ・HasCollider と HasTileCollider のタイル化時の扱いについて
+        // 通常のキャラ (HasCollider = true, HasTileCollider = true) がタイル化したときは壁となる
+        // そのキャラに壁通過 (HasTileCollider = false) を付与すると床となるのは変（特に下の壁タイルを上書きして床となる場合）
+        // また、薬草などのアイテム (HasCollider = false, HasTileCollider = true) のそのままタイル化すると壁となるが床としたほうが自然
+        // そのためタイル化時の衝突は HasCollider で行う
 
         public bool HasSightCollider { get; private set; }
 
