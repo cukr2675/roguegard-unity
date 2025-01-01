@@ -309,11 +309,6 @@ namespace Roguegard
 
         public void TryOpenRogueEffects(RogueObj self)
         {
-            if (RogueEffectState.openingObj.Value != null) throw new RogueException(
-                $"{self} のエフェクト準備に失敗しました。 " +
-                $"いずれかの {nameof(RogueObj)} ({RogueEffectState.openingObj.Value}) " +
-                $"のエフェクト追加・準備中に新しいエフェクト準備を開始することはできません。");
-
             if (RogueEffectOpenState == RogueEffectOpenState.NotStarted) OpenRogueEffects(self);
         }
 
