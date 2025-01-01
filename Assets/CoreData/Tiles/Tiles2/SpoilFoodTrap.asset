@@ -34,15 +34,19 @@ MonoBehaviour:
     _ref:
       rid: -2
   _beApplied:
+    _script: {fileID: 0}
+    _ref:
+      rid: -2
+  _beSteppedOnAsTile:
     _script: {fileID: 11500000, guid: eda5aa1f925d05d458265389d8c3c324, type: 3}
     _ref:
-      rid: 3003915766944235528
+      rid: 438373115112456197
   references:
     version: 2
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
-    - rid: 3003915766944235528
-      type: {class: SpoilFoodTrapBeApplied, ns: Roguegard, asm: Roguegard.CoreData}
+    - rid: 438373115112456197
+      type: {class: SpoilFoodTrapBeSteppedOn, ns: Roguegard, asm: Roguegard.CoreData}
       data:
         _assemblyReflectionAssetDummy: 

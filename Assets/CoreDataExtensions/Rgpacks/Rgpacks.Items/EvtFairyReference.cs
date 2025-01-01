@@ -63,6 +63,7 @@ namespace Roguegard.Rgpacks
         public IApplyRogueMethod BeApplied => _beApplied ??= new BeAppliedRogueMethod() { cmn = point.Cmn };
         public IApplyRogueMethod BeThrown => RoguegardSettings.DefaultRaceOption.BeThrown;
         public IApplyRogueMethod BeEaten => RoguegardSettings.DefaultRaceOption.BeEaten;
+        public IApplyRogueMethod BeSteppedOnAsTile => RoguegardSettings.DefaultRaceOption.BeSteppedOnAsTile;
 
         public EvtFairyReference(string id, string envRgpackID, EvtFairyAsset.Page point)
             : base(id, envRgpackID)

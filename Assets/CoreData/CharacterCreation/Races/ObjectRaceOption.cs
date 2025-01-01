@@ -134,6 +134,9 @@ namespace Roguegard.CharacterCreation
         [SerializeField] private ScriptField<IApplyRogueMethod> _beEaten;
         public virtual IApplyRogueMethod BeEaten => _beEaten.Ref ?? RoguegardSettings.DefaultRaceOption.BeEaten;
 
+        [SerializeField] private ScriptField<IApplyRogueMethod> _beSteppedOnAsTile;
+        public virtual IApplyRogueMethod BeSteppedOnAsTile => _beSteppedOnAsTile.Ref ?? RoguegardSettings.DefaultRaceOption.BeSteppedOnAsTile;
+
 
 
         [Space]

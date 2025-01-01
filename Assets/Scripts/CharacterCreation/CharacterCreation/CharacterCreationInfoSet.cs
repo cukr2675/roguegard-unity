@@ -92,6 +92,7 @@ namespace Roguegard.CharacterCreation
         public IApplyRogueMethod BeApplied => CurrentRaceOption.BeApplied;
         public IApplyRogueMethod BeThrown => CurrentRaceOption.BeThrown;
         public IApplyRogueMethod BeEaten => CurrentRaceOption.BeEaten;
+        public IApplyRogueMethod BeSteppedOnAsTile => CurrentRaceOption.BeSteppedOnAsTile;
 
         [Objforming.CreateInstance]
         private CharacterCreationInfoSet() { }

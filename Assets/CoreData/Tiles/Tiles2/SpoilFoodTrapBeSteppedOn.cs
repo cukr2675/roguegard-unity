@@ -6,7 +6,7 @@ using Roguegard.Extensions;
 
 namespace Roguegard
 {
-    public class SpoilFoodTrapBeApplied : BaseApplyRogueMethod
+    public class SpoilFoodTrapBeSteppedOn : BaseApplyRogueMethod
     {
         private static readonly List<int> foodIndices = new();
 

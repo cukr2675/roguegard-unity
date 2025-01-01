@@ -46,6 +46,7 @@ namespace Roguegard.CharacterCreation
         IApplyRogueMethod IRaceOption.BeApplied => Race.Option.BeApplied;
         IApplyRogueMethod IRaceOption.BeThrown => Race.Option.BeThrown;
         IApplyRogueMethod IRaceOption.BeEaten => Race.Option.BeEaten;
+        IApplyRogueMethod IRaceOption.BeSteppedOnAsTile => Race.Option.BeSteppedOnAsTile;
 
         public virtual Spanning<IMemberSource> RaceOptionMemberSources => Spanning<IMemberSource>.Empty;
         Spanning<IMemberSource> IRaceOption.MemberSources => RaceOptionMemberSources;

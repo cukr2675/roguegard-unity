@@ -52,8 +52,8 @@ namespace Roguegard
         [SerializeField] private ScriptField<IAffectRogueMethod> _beDefeated = null;
         public override IAffectRogueMethod BeDefeated => _beDefeated.Ref;
 
-        [SerializeField] private ScriptField<IApplyRogueMethod> _beApplied = null;
-        public override IApplyRogueMethod BeApplied => _beApplied.Ref;
+        [SerializeField] private ScriptField<IApplyRogueMethod> _beSteppedOnAsTile = null;
+        public override IApplyRogueMethod BeSteppedOnAsTile => _beSteppedOnAsTile.Ref;
 
 
 

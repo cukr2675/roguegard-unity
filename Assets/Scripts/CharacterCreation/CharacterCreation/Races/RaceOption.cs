@@ -40,6 +40,7 @@ namespace Roguegard.CharacterCreation
         public abstract IApplyRogueMethod BeApplied { get; }
         public abstract IApplyRogueMethod BeThrown { get; }
         public abstract IApplyRogueMethod BeEaten { get; }
+        public abstract IApplyRogueMethod BeSteppedOnAsTile { get; }
         public abstract string Name { get; }
         public abstract Sprite Icon { get; }
         public abstract Color Color { get; }

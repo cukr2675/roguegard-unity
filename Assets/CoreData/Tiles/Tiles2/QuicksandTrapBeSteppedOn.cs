@@ -6,7 +6,7 @@ using Roguegard.Extensions;
 
 namespace Roguegard
 {
-    public class QuicksandTrapBeApplied : BaseApplyRogueMethod
+    public class QuicksandTrapBeSteppedOn : BaseApplyRogueMethod
     {
         public override bool Invoke(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
         {

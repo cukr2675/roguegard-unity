@@ -6,10 +6,8 @@ using Roguegard.Extensions;
 
 namespace Roguegard
 {
-    public class PoolBeApplied : BaseApplyRogueMethod
+    public class PoolBeSteppedOn : BaseApplyRogueMethod
     {
-        private PoolBeApplied() { }
-
         public override bool Invoke(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
         {
             if (activationDepth < 20f)

@@ -6,7 +6,7 @@ using Roguegard.Extensions;
 
 namespace Roguegard
 {
-    public class HurtTrapBeApplied : BaseApplyRogueMethod
+    public class HurtTrapBeSteppedOn : BaseApplyRogueMethod
     {
         [SerializeField] private int _additionalDamage = 0;
 

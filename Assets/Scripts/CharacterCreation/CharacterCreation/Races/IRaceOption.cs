@@ -51,6 +51,7 @@ namespace Roguegard.CharacterCreation
         IApplyRogueMethod BeApplied { get; }
         IApplyRogueMethod BeThrown { get; }
         IApplyRogueMethod BeEaten { get; }
+        IApplyRogueMethod BeSteppedOnAsTile { get; }
 
         Spanning<IMemberSource> MemberSources { get; }
 

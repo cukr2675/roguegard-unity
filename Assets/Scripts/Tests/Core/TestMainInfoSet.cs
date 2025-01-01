@@ -52,6 +52,7 @@ namespace Roguegard
         public IApplyRogueMethod BeApplied => TestRogueMethod.Instance;
         public IApplyRogueMethod BeThrown => TestRogueMethod.Instance;
         public IApplyRogueMethod BeEaten => TestRogueMethod.Instance;
+        public IApplyRogueMethod BeSteppedOnAsTile => TestRogueMethod.Instance;
 
         public IMainInfoSet Open(RogueObj self, MainInfoSetType infoSetType, bool polymorph2Base)
         {

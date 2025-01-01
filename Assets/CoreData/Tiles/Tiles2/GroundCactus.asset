@@ -34,16 +34,20 @@ MonoBehaviour:
     _ref:
       rid: -2
   _beApplied:
+    _script: {fileID: 0}
+    _ref:
+      rid: -2
+  _beSteppedOnAsTile:
     _script: {fileID: 11500000, guid: a0e2647d2f8ccdc4697cc0da83599b5d, type: 3}
     _ref:
-      rid: 3003915766944235527
+      rid: 438373115112456199
   references:
     version: 2
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
-    - rid: 3003915766944235527
-      type: {class: HurtTrapBeApplied, ns: Roguegard, asm: Roguegard.CoreData}
+    - rid: 438373115112456199
+      type: {class: HurtTrapBeSteppedOn, ns: Roguegard, asm: Roguegard.CoreData}
       data:
         _assemblyReflectionAssetDummy: 
         _additionalDamage: 0

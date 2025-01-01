@@ -6,7 +6,7 @@ using Roguegard.Extensions;
 
 namespace Roguegard
 {
-    public class ThronsTrapBeApplied : BaseApplyRogueMethod
+    public class ThronsTrapBeSteppedOn : BaseApplyRogueMethod
     {
         [SerializeField] private ScriptableRogueTileInfo trapTileInfo = null;
 

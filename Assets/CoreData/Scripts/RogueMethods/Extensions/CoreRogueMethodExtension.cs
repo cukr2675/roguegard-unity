@@ -68,12 +68,12 @@ namespace Roguegard.Extensions
             {
                 var arg = new RogueMethodArgument(other: tile);
                 return RogueMethodAspectState.Invoke(
-                    StdKw.StepOn, tile.Info.BeApplied, null, self, activationDepth, arg);
+                    StdKw.StepOn, tile.Info.BeSteppedOnAsTile, null, self, activationDepth, arg);
             }
             else if (tileObj != null && tileObj.AsTile && tileObj.HasTileCollider)
             {
                 return RogueMethodAspectState.Invoke(
-                    StdKw.StepOn, tileObj.Main.InfoSet.BeApplied, tileObj, self, activationDepth, RogueMethodArgument.Identity);
+                    StdKw.StepOn, tileObj.Main.InfoSet.BeSteppedOnAsTile, tileObj, self, activationDepth, RogueMethodArgument.Identity);
             }
             return false;
         }

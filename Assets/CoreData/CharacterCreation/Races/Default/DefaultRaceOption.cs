@@ -76,6 +76,9 @@ namespace Roguegard.CharacterCreation
         [SerializeField] private ScriptField<IApplyRogueMethod> _beEaten;
         public virtual IApplyRogueMethod BeEaten => _beEaten.Ref;
 
+        [SerializeField] private ScriptField<IApplyRogueMethod> _beSteppedOnAsTile;
+        public virtual IApplyRogueMethod BeSteppedOnAsTile => _beSteppedOnAsTile.Ref;
+
         [Space]
         [SerializeField] private ScriptField<IRaceOptionWeight> _weight;
         [SerializeField] private ScriptField<IRaceOptionSprite> _sprite;

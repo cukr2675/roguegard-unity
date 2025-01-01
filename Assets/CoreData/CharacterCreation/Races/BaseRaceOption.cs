@@ -51,6 +51,7 @@ namespace Roguegard.CharacterCreation
         public override IApplyRogueMethod BeApplied => _main.BeApplied;
         public override IApplyRogueMethod BeThrown => _main.BeThrown;
         public override IApplyRogueMethod BeEaten => _main.BeEaten;
+        public override IApplyRogueMethod BeSteppedOnAsTile => _main.BeSteppedOnAsTile;
 
         public override IRaceOption Open(
             RogueObj self, MainInfoSetType infoSetType, bool polymorph2Base, IRaceOption raceOption, ICharacterCreationData characterCreationData)

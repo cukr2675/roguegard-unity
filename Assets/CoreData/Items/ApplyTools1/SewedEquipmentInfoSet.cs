@@ -60,6 +60,7 @@ namespace Roguegard
         public IApplyRogueMethod BeApplied => RoguegardSettings.DefaultRaceOption.BeApplied;
         public IApplyRogueMethod BeThrown => RoguegardSettings.DefaultRaceOption.BeThrown;
         public IApplyRogueMethod BeEaten => RoguegardSettings.DefaultRaceOption.BeEaten;
+        public IApplyRogueMethod BeSteppedOnAsTile => RoguegardSettings.DefaultRaceOption.BeSteppedOnAsTile;
 
         public SewedEquipmentInfoSet(SewedEquipmentData data)
         {

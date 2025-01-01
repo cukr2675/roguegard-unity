@@ -24,6 +24,6 @@ namespace Roguegard
 
         public abstract IAffectRogueMethod Hit { get; }
         public abstract IAffectRogueMethod BeDefeated { get; }
-        public abstract IApplyRogueMethod BeApplied { get; }
+        public abstract IApplyRogueMethod BeSteppedOnAsTile { get; }
     }
 }

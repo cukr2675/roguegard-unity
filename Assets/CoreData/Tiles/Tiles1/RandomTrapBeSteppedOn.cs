@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Roguegard
 {
-    public class RandomTrapBeApplied : BaseApplyRogueMethod
+    public class RandomTrapBeSteppedOn : BaseApplyRogueMethod
     {
         [SerializeField] private RogueTileInfoData[] _traps = null;
 
@@ -26,7 +26,7 @@ namespace Roguegard
             var laying = user.Location.Space.TrySet(trap, user.Position, true);
             if (laying && activationDepth < 1f)
             {
-                RogueMethodAspectState.Invoke(StdKw.StepOn, trap.Info.BeApplied, null, user, 1f, new(other: trap));
+                RogueMethodAspectState.Invoke(StdKw.StepOn, trap.Info.BeSteppedOnAsTile, null, user, 1f, new(other: trap));
             }
             else if (MessageWorkListener.TryOpenHandler(user.Location, user.Position, out var h))
             {

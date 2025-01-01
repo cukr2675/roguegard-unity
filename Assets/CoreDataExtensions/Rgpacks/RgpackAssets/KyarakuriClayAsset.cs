@@ -69,6 +69,7 @@ namespace Roguegard.Rgpacks
         public IApplyRogueMethod BeApplied { get; }
         public IApplyRogueMethod BeThrown { get; }
         public IApplyRogueMethod BeEaten { get; }
+        public IApplyRogueMethod BeSteppedOnAsTile { get; }
 
         public Spanning<IRaceOption> GrowingOptions => Spanning<IRaceOption>.Empty;
         public Spanning<IRogueGender> Genders => RoguegardSettings.DefaultRaceOption.Genders;

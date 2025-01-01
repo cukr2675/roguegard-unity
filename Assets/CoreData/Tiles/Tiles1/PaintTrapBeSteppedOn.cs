@@ -6,7 +6,7 @@ using Roguegard.Extensions;
 
 namespace Roguegard
 {
-    public class PaintTrapBeApplied : BaseApplyRogueMethod
+    public class PaintTrapBeSteppedOn : BaseApplyRogueMethod
     {
         public override bool Invoke(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
         {

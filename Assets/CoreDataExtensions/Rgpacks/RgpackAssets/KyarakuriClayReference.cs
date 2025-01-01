@@ -65,6 +65,7 @@ namespace Roguegard.Rgpacks
         IApplyRogueMethod IRaceOption.BeApplied => Asset.BeApplied;
         IApplyRogueMethod IRaceOption.BeThrown => Asset.BeThrown;
         IApplyRogueMethod IRaceOption.BeEaten => Asset.BeEaten;
+        IApplyRogueMethod IRaceOption.BeSteppedOnAsTile => Asset.BeSteppedOnAsTile;
 
         Spanning<IMemberSource> IRaceOption.MemberSources => Asset.RaceOptionMemberSources;
         Spanning<IMemberSource> IStartingItemOption.MemberSources => Asset.StartingItemOptionMemberSources;
