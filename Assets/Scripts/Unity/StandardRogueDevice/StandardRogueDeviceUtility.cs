@@ -152,8 +152,61 @@ namespace RoguegardUnity
                     }
                     else
                     {
-                        formatArgs.Add(LocalizeMessage(other, player, null));
+                        formatArgs.Add(LocalizeMessage(other, player, (MessageWorkQueue)null));
                     }
+                }
+            }
+
+            return entry.GetLocalizedString(formatArgs);
+        }
+
+        internal static string LocalizeMessage(object other, params string[] args)
+        {
+            var player = RogueDevice.Primary.Player;
+            if (other is RogueObj obj)
+            {
+                var color = GetColor(player, obj);
+                var rgba = ColorUtility.ToHtmlStringRGBA(color);
+                obj.GetName(nameBuilder);
+                Localize(nameBuilder);
+                return $"<color=#{rgba}>{nameBuilder}</color>";
+            }
+            else if (other is IRogueDescription description)
+            {
+                return Localize(description.Name);
+            }
+            else if (other is string text)
+            {
+                if (text.StartsWith(':'))
+                {
+                    return LocalizeMessage(text, player, args);
+                }
+                else
+                {
+                    return Localize(text);
+                }
+            }
+            else
+            {
+                return other.ToString();
+            }
+        }
+
+        private static string LocalizeMessage(string text, RogueObj player, string[] args)
+        {
+            text = text.Substring(1);
+            if (!RogueLocalizedStringTable.TryGetEntry(text, out var entry)) return text;
+
+            formatArgs.Clear();
+            var separatorIndex = text.LastIndexOf("::");
+            if (separatorIndex >= 0)
+            {
+                var formatCountText = System.MemoryExtensions.AsSpan(text, separatorIndex + 2);
+                var formatCount = int.Parse(formatCountText);
+
+                for (int i = 0; i < formatCount; i++)
+                {
+                    formatArgs.Add(LocalizeMessage(args[i], player, (MessageWorkQueue)null));
                 }
             }
 

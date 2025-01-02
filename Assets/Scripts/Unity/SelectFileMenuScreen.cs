@@ -4,7 +4,6 @@ using UnityEngine;
 
 using System.IO;
 using ListingMF;
-using Roguegard;
 using Roguegard.Device;
 
 namespace RoguegardUnity
@@ -60,7 +59,7 @@ namespace RoguegardUnity
         {
             var instance = new SelectFileMenuScreen();
             instance.nextScreen = new ChoicesMenuScreen(
-                (manager, arg) => $":OverwriteMsg::1::{((FileInfo)arg.Arg.Other).Name}")
+                (manager, arg) => StandardRogueDeviceUtility.LocalizeMessage(":OverwriteMsg::1", ((FileInfo)arg.Arg.Other).Name))
                 .Option(":Overwrite", (manager, arg) => onSelectFile((FileInfo)arg.Arg.Other, manager, arg))
                 .Back();
             instance.onNewFile = onNewFile;

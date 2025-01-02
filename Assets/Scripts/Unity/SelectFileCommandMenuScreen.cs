@@ -11,7 +11,6 @@ namespace RoguegardUnity
     internal class SelectFileCommandMenuScreen : RogueMenuScreen
     {
         private readonly HandleClickElement<FileInfo, MMgr, MArg> selectCallback;
-        private readonly RenameDialog renameDialog = new();
         private readonly MainMenuViewTemplate<MMgr, MArg> view;
 
         public override bool IsIncremental => true;
@@ -38,17 +37,15 @@ namespace RoguegardUnity
                     selectCallback((FileInfo)arg.Arg.Other, manager, arg);
                 })
 
-                .Option(":Rename", renameDialog)
+                .Option(":Rename", new RenameDialog())
 
                 .Option(":Export", (manager, arg) =>
                 {
-                    manager.Back();
-
                     RogueFile.Export(((FileInfo)arg.Arg.Other).FullName);
-                    manager.Reopen();
+                    manager.Back();
                 })
 
-                .Option(":Delete", new ChoicesMenuScreen(":DeleteMsg").Option("<#f00>:Delete", DeleteYes).Back())
+                .Option("<#f00>:Delete", new ChoicesMenuScreen(":DeleteMsg").Option("<#f00>:Delete", DeleteYes).Back())
 
                 .Back()
 
@@ -57,11 +54,9 @@ namespace RoguegardUnity
 
         private static void DeleteYes(MMgr manager, MArg arg)
         {
-            manager.Back();
-
             var fileInfo = (FileInfo)arg.Arg.Other;
             fileInfo.Delete();
-            manager.Reopen();
+            manager.Back(2);
         }
 
         public override void CloseScreen(MMgr manager, bool back)
@@ -88,19 +83,20 @@ namespace RoguegardUnity
             public override void OpenScreen(in MMgr manager, in MArg arg)
             {
                 var fileInfo = (FileInfo)arg.Arg.Other;
-                newName = fileInfo.Name;
+                newName = Path.GetFileNameWithoutExtension(fileInfo.Name);
 
                 view.ShowTemplate("", manager, arg)
                     ?
                     .Append(InputFieldViewWidget.CreateOption<MMgr, MArg>(
                         (manager, arg) =>
                         {
-                            var fileInfo = (FileInfo)arg.Arg.Other;
-                            return fileInfo.Name;
+                            return newName;
                         },
                         (manager, arg, value) =>
                         {
-                            return newName = value;
+                            var invalidCharIndex = value.IndexOfAny(Path.GetInvalidFileNameChars());
+                            if (invalidCharIndex >= 0) return newName;
+                            else return newName = value;
                         })
                     )
 
@@ -109,18 +105,19 @@ namespace RoguegardUnity
                     {
                         SelectOption.Create<MMgr, MArg>(":Rename", (manager, arg) =>
                         {
+                            if (string.IsNullOrWhiteSpace(newName))return;
+
                             var fileInfo = (FileInfo)arg.Arg.Other;
-                            var newPath = Path.Combine(fileInfo.DirectoryName, newName);
-                            if (File.Exists(newPath))
+                            var newPath = Path.Combine(fileInfo.DirectoryName, $"{newName}{Path.GetExtension(fileInfo.Name)}");
+                            if (newName != Path.GetFileNameWithoutExtension(fileInfo.Name) && File.Exists(newPath))
                             {
-                                manager.Back();
+                                manager.Back(2);
                                 manager.PushMenuScreen(overwriteDialog, other: new Paths() { path = fileInfo.FullName, newPath = newPath });
                             }
                             else
                             {
-                                manager.Back();
                                 fileInfo.MoveTo(newPath);
-                                manager.Reopen();
+                                manager.Back(2);
                             }
                         }),
                         BackSelectOption.Instance
