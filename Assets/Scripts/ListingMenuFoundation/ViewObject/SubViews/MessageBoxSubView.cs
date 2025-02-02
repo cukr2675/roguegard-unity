@@ -42,7 +42,7 @@ namespace ListingMF
             {
                 _blocker.Initialize(this);
                 _blocker.SetElement(
-                    SelectOptionHandler.Instance, SelectOption.Create<IListMenuManager, IListMenuArg>("", delegate { _onClickWithoutBlock.Invoke(); }));
+                    SelectOption.Create<IListMenuManager, IListMenuArg>("", delegate { _onClickWithoutBlock.Invoke(); }), SelectOptionHandler.Instance);
                 _blocker.SetBlock(false);
                 _blocker.SetVisible(true, true);
             }

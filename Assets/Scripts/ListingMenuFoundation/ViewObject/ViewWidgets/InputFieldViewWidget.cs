@@ -10,14 +10,17 @@ namespace ListingMF
     [RequireComponent(typeof(TMP_InputField))]
     public class InputFieldViewWidget : ViewWidget
     {
-        private ElementsSubViewBase parent;
         private IWidgetOption widgetOption;
+        private ElementsSubViewBase _parent;
         private TMP_InputField inputField;
+
+        public override string WidgetName => widgetOption.Name;
+        protected override ElementsSubViewBase Parent => _parent;
 
         public delegate string HandleValueChanged<TMgr, TArg>(TMgr manager, TArg arg, string value);
 
         public override bool TryInstantiateWidget(
-            ElementsSubViewBase elementsSubView, IElementHandler handler, object element, out ViewWidget viewWidget)
+            object element, IElementHandler handler, ElementsSubViewBase elementsSubView, out ViewWidget viewWidget)
         {
             if (!(element is IWidgetOption widgetOption))
             {
@@ -26,7 +29,7 @@ namespace ListingMF
             }
 
             var inputFieldViewWidget = Instantiate(this);
-            inputFieldViewWidget.parent = elementsSubView;
+            inputFieldViewWidget._parent = elementsSubView;
             inputFieldViewWidget.widgetOption = widgetOption;
             inputFieldViewWidget.inputField = inputFieldViewWidget.GetComponent<TMP_InputField>();
             inputFieldViewWidget.Initialize();
@@ -37,19 +40,20 @@ namespace ListingMF
         private void Initialize()
         {
             inputField.contentType = widgetOption.ContentType;
-            inputField.SetTextWithoutNotify(widgetOption.GetValue(parent.Manager, parent.Arg));
+            inputField.SetTextWithoutNotify(widgetOption.GetValue(_parent.Manager, _parent.Arg));
             inputField.onValueChanged.AddListener(value =>
             {
-                inputField.SetTextWithoutNotify(widgetOption.HandleValueChanged(parent.Manager, parent.Arg, value));
+                inputField.SetTextWithoutNotify(widgetOption.HandleValueChanged(_parent.Manager, _parent.Arg, value));
             });
         }
 
         public static IWidgetOption CreateOption<TMgr, TArg>(
             GetElementName<TMgr, TArg> getValue, HandleValueChanged<TMgr, TArg> handleValueChanged,
-            TMP_InputField.ContentType contentType = TMP_InputField.ContentType.Standard)
+            TMP_InputField.ContentType contentType = TMP_InputField.ContentType.Standard, string name = null)
         {
             return new WidgetOption<TMgr, TArg>()
             {
+                Name = name ?? EmitIdentity("InputFieldViewWidget"),
                 ContentType = contentType,
                 GetValue = getValue,
                 HandleValueChanged = handleValueChanged
@@ -58,6 +62,8 @@ namespace ListingMF
 
         public interface IWidgetOption
         {
+            string Name { get; }
+
             TMP_InputField.ContentType ContentType { get; }
 
             string GetValue(IListMenuManager manager, IListMenuArg arg);
@@ -67,6 +73,7 @@ namespace ListingMF
 
         private class WidgetOption<TMgr, TArg> : IWidgetOption
         {
+            public string Name { get; set; }
             public TMP_InputField.ContentType ContentType { get; set; }
             public GetElementName<TMgr, TArg> GetValue { get; set; }
             public HandleValueChanged<TMgr, TArg> HandleValueChanged { get; set; }

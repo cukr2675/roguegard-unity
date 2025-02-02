@@ -115,7 +115,7 @@ namespace Roguegard
                         var table = (PaintBoneSpriteTable)arg.Arg.Other;
                         var itemIndex = arg.Arg.Count;
                         table.RemoveAt(itemIndex);
-                        manager.Back();
+                        manager.PopMenuScreen();
                     });
 
                 mirroringBones = new[]
@@ -184,7 +184,7 @@ namespace Roguegard
 
                         boneSprite.Bone = new BoneKeyword(boneName);
 
-                        manager.Back();
+                        manager.PopMenuScreen();
                     })
 
                     .Build();
@@ -268,7 +268,7 @@ namespace Roguegard
                     table.SetPalette(i, paint.Palette[i]);
                 }
 
-                manager.Back();
+                manager.PopMenuScreen();
             }
         }
     }

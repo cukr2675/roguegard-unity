@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-using UnityEngine.InputSystem;
-
 namespace ListingMF
 {
     /// <summary>
@@ -13,10 +11,11 @@ namespace ListingMF
     {
         private event HandleEndAnimation OnEndAnimation;
 
+        protected GameObject LastSelectedObj { get; private set; }
         protected ViewElement LastSelectedViewElement { get; private set; }
 
         /// <summary>
-        /// <see cref="SetBlock"/> で <see cref="ViewElement.SetBlock"/> を呼び出す対象
+        /// SubView のUI操作ブロック (<see cref="SetBlock"/>) で要素のUI操作ブロック (<see cref="ViewElement.SetBlock"/>) を呼び出す対象のリスト
         /// </summary>
         protected virtual IReadOnlyList<ViewElement> BlockableViewElements => System.Array.Empty<ViewElement>();
 
@@ -36,6 +35,9 @@ namespace ListingMF
             AnimatorTupple.TrySetStatusCode(this, statusCode);
         }
 
+        /// <summary>
+        /// この SubView のUI操作をブロックしてプレイヤーからの操作を防ぐ（使用例: ダイアログの後ろで表示されているメニューをブロックする）
+        /// </summary>
         public virtual void SetBlock(bool block)
         {
             IsBlocked = block;
@@ -68,10 +70,11 @@ namespace ListingMF
             }
         }
 
-        public override void OnSelectViewElement(ViewElement viewElement, bool outOfRange)
+        public override void OnSelectViewElement(GameObject selectedObj, bool outOfRange)
         {
-            LastSelectedViewElement = viewElement;
-            AnimatorTupple.OnSelect(this, viewElement.gameObject, outOfRange);
+            LastSelectedObj = selectedObj;
+            LastSelectedViewElement = selectedObj.GetComponent<ViewElement>();
+            AnimatorTupple.OnSelect(this, selectedObj, outOfRange);
         }
 
         // Animation から呼び出すメソッド

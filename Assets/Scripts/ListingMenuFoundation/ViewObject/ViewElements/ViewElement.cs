@@ -4,7 +4,6 @@ using UnityEngine;
 
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-using UnityEngine.InputSystem;
 
 namespace ListingMF
 {
@@ -30,6 +29,8 @@ namespace ListingMF
         protected IListMenuArg Arg => Parent.Arg;
         protected ElementsSubViewBase Parent { get; private set; }
 
+        public string ElementName { get; private set; }
+
         public RectTransform RectTransform => (RectTransform)transform;
 
         public void Initialize(ElementsSubViewBase parent)
@@ -43,6 +44,9 @@ namespace ListingMF
             SetBlock(parent.IsBlocked);
         }
 
+        /// <summary>
+        /// この要素のUI操作をブロックしてプレイヤーからの操作を防ぐ
+        /// </summary>
         public void SetBlock(bool block)
         {
             if (IsBlocked == block) return;
@@ -65,13 +69,13 @@ namespace ListingMF
             }
         }
 
-        public void SetElement(IElementHandler handler, object element)
+        public void SetElement(object element, IElementHandler handler)
         {
-            name = handler.GetName(element, Manager, Arg);
-            InnerSetElement(handler, element);
+            name = ElementName = handler.GetName(element, Manager, Arg);
+            InnerSetElement(element, handler);
         }
 
-        protected abstract void InnerSetElement(IElementHandler handler, object element);
+        protected abstract void InnerSetElement(object element, IElementHandler handler);
 
         public void SetVisible(bool visible, bool outOfRange)
         {
@@ -81,7 +85,7 @@ namespace ListingMF
             isOutOfRange = outOfRange;
         }
 
-        void ISelectHandler.OnSelect(BaseEventData eventData) => Parent.OnSelectViewElement(this, isOutOfRange);
+        void ISelectHandler.OnSelect(BaseEventData eventData) => Parent.OnSelectViewElement(gameObject, isOutOfRange);
 
         // Animation から呼び出すメソッド
         public void PlayString(string value) => Parent.PlayFromElement(value, this);
@@ -89,7 +93,10 @@ namespace ListingMF
 
 
 
-        public static void SetVerticalNavigation(IReadOnlyList<ViewElement> viewElements, int index)
+        /// <summary>
+        /// 縦並びの <see cref="ViewElement"/> の <see cref="Selectable.navigation"/> を初期化する
+        /// </summary>
+        internal static void SetVerticalNavigation(IReadOnlyList<ViewElement> viewElements, int index)
         {
             var prevViewElement = index >= 1 ? viewElements[index - 1] : null;
             var centerViewElement = viewElements[index];

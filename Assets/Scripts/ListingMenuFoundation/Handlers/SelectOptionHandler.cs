@@ -1,8 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.InputSystem;
 
 namespace ListingMF
 {
@@ -18,11 +16,6 @@ namespace ListingMF
             if (LMFAssert.Type<ISelectOption>(element, out var selectOption)) return string.Empty;
 
             return selectOption.GetName(manager, arg);
-        }
-
-        public Sprite GetIcon(object element, IListMenuManager manager, IListMenuArg arg)
-        {
-            return null;
         }
 
         public string GetStyle(object element, IListMenuManager manager, IListMenuArg arg)

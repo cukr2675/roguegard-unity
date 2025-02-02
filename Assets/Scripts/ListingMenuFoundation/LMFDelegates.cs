@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-using UnityEngine.InputSystem;
-
 namespace ListingMF
 {
     public delegate string GetElementName<TElm, TMgr, TArg>(TElm element, TMgr manager, TArg arg);

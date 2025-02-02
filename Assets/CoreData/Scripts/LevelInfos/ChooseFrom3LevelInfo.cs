@@ -206,7 +206,7 @@ namespace Roguegard
 
             public override void OpenScreen(in MMgr manager, in MArg arg)
             {
-                view.ShowTemplate(arg.Self.GetName() + "はレベルが上がった！<link=\"VerticalArrow\"></link>", manager, arg)
+                view.ShowTemplate(arg.Self.GetName() + "はレベルが上がった！{v}", manager, arg)
                     ?
                     .OnCompleted(new SelectScreen())
 
@@ -224,7 +224,7 @@ namespace Roguegard
                 {
                     view.ShowTemplate(manager, arg)
                         ?
-                        .VariableOnce(out var nextScreen, new ConfirmScreen())
+                        .VarOnce(out var nextScreen, new ConfirmScreen())
 
                         .Option("最大HP +5", (manager, arg) =>
                         {
@@ -299,7 +299,7 @@ namespace Roguegard
                         .Build();
                 }
 
-                public override void CloseScreen(MMgr manager, bool back)
+                public override void CloseScreenView(MMgr manager, bool back)
                 {
                     view.HideTemplate(manager, back);
                 }
@@ -316,7 +316,7 @@ namespace Roguegard
 
             public override void OpenScreen(in MMgr manager, in MArg arg)
             {
-                view.ShowTemplate(message + view.VA, manager, arg)
+                view.ShowTemplate(message + "{v}", manager, arg)
                     ?
                     .OnCompleted((manager, arg) => manager.Done())
 

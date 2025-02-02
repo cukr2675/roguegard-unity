@@ -1,1 +1,0 @@
-AdvanceText の連打対策のため PageBreak -> Exit の HasExitTime = true

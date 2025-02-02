@@ -8,6 +8,9 @@ using TMPro;
 
 namespace ListingMF
 {
+    /// <summary>
+    /// テキストを表示する <see cref="ViewWidget"/>。リンククリック機能付き
+    /// </summary>
     [AddComponentMenu("UI/Listing Menu Foundation/View Widgets/LMF Label View Widget")]
     public class LabelViewWidget : ViewWidget, IPointerClickHandler
     {
@@ -17,13 +20,13 @@ namespace ListingMF
         [SerializeField] private string _defaultStyle = "Submit";
         [Space, SerializeField] private Button.ButtonClickedEvent _onClickWithoutBlock = null;
 
+        private IWidgetOption widgetOption;
         private ElementsSubViewBase _parent;
+
         protected override ElementsSubViewBase Parent => _parent;
 
-        private IWidgetOption widgetOption;
-
         public override bool TryInstantiateWidget(
-            ElementsSubViewBase elementsSubView, IElementHandler handler, object element, out ViewWidget viewWidget)
+            object element, IElementHandler handler, ElementsSubViewBase elementsSubView, out ViewWidget viewWidget)
         {
             if (element is string text)
             {
@@ -99,7 +102,8 @@ namespace ListingMF
             };
         }
 
-        public static IWidgetOption CreateOption<TMgr, TArg>(GetElementName<TMgr, TArg> getText, HandleClickElement<string, TMgr, TArg> onClickLink = null)
+        public static IWidgetOption CreateOption<TMgr, TArg>(
+            GetElementName<TMgr, TArg> getText, HandleClickElement<string, TMgr, TArg> onClickLink = null)
         {
             return new WidgetOption<TMgr, TArg>()
             {
@@ -117,6 +121,7 @@ namespace ListingMF
 
         private class WidgetOption<TMgr, TArg> : IWidgetOption
         {
+            public string WidgetName { get; set; }
             public GetElementName<TMgr, TArg> GetText { get; set; }
             public HandleClickElement<string, TMgr, TArg> HandleClickLink { get; set; }
 

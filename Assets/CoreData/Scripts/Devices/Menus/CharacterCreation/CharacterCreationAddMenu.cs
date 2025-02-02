@@ -62,7 +62,7 @@ namespace Roguegard.Device
                         ConsumeStartingItemOptionObj(startingItemBuilder.Option, arg.Self);
                     }
 
-                    manager.Back();
+                    manager.PopMenuScreen();
                 })
 
                 .Build();

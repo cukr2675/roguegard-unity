@@ -44,7 +44,7 @@ namespace RoguegardUnity
             this.editInfo = editInfo;
         }
 
-        protected override void InnerSetElement(IElementHandler handler, object element)
+        protected override void InnerSetElement(object element, IElementHandler handler)
         {
             editList = element;
 
@@ -149,7 +149,7 @@ namespace RoguegardUnity
                             {
                                 if (value != null) { editList.Set(targetTime, value.Value); }
                                 else { editList.Remove(targetTime); }
-                                manager.Back();
+                                manager.PopMenuScreen();
                             }),
                             BackSelectOption.Instance
                         })
@@ -171,7 +171,7 @@ namespace RoguegardUnity
                 }
             }
 
-            public override void CloseScreen(MMgr manager, bool back)
+            public override void CloseScreenView(MMgr manager, bool back)
             {
                 view.HideTemplate(manager, back);
             }
@@ -230,7 +230,7 @@ namespace RoguegardUnity
                     .Build();
             }
 
-            public override void CloseScreen(MMgr manager, bool back)
+            public override void CloseScreenView(MMgr manager, bool back)
             {
                 view.HideTemplate(manager, back);
             }
@@ -316,7 +316,7 @@ namespace RoguegardUnity
                     editInfo.SetPalette(i, paint.Palette[i]);
                 }
 
-                manager.Back();
+                manager.PopMenuScreen();
             }
         }
     }

@@ -40,7 +40,7 @@ namespace RoguegardUnity
                     manager.PushMenuScreen(importScreen);
                     RogueFile.Import(StandardRogueDeviceSave.RootDirectory, errorMsg =>
                     {
-                        manager.Back();
+                        manager.PopMenuScreen();
 
                         if (errorMsg != null)
                         {
@@ -78,9 +78,9 @@ namespace RoguegardUnity
 
             view.ShowTemplate(files, manager, arg)
                 ?
-                .VariableOnce(out var newArg, new MArg.Builder())
+                .VarOnce(out var newArg, new MArg.Builder())
 
-                .IfOnce(
+                .If(
                     onNewFile != null, x => x
                     
                     .InsertNext(SelectOption.Create(":+ New File", onNewFile))
@@ -92,8 +92,9 @@ namespace RoguegardUnity
                     if (element is FileInfo fileInfo)
                     {
                         var name = fileInfo.Name;
+                        var infoText1 = $"{fileInfo.Length / 1000:N0}KB";
                         var infoText2 = fileInfo.LastWriteTime.ToString();
-                        return (name, null, infoText2);
+                        return (name, infoText1, infoText2);
                     }
                     else if (element is ISelectOption option)
                     {
@@ -133,7 +134,7 @@ namespace RoguegardUnity
         {
             if (errorMsg != null)
             {
-                manager.Back();
+                manager.PopMenuScreen();
                 ShowErrorMsg(manager, errorMsg);
                 return;
             }
@@ -165,12 +166,12 @@ namespace RoguegardUnity
             {
                 view.ShowTemplate("インポート中…", manager, arg)
                     ?
-                    .AppendSelectOption("キャンセル", (manager, arg) => manager.Back())
+                    .Option("キャンセル", (manager, arg) => manager.PopMenuScreen())
 
                     .Build();
             }
 
-            public override void CloseScreen(MMgr manager, bool back)
+            public override void CloseScreenView(MMgr manager, bool back)
             {
                 view.HideTemplate(manager, back);
             }

@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace ListingMF
 {
+    /// <summary>
+    /// テキストと項目を表示する ViewTemplate
+    /// </summary>
     public class DialogViewTemplate<TMgr, TArg> : ListViewTemplate<object, TMgr, TArg>
         where TMgr : IListMenuManager
         where TArg : IListMenuArg
@@ -90,15 +93,15 @@ namespace ListingMF
                 this.parent = parent;
             }
 
-            public Builder AppendSelectOption(string name, HandleClickElement<TMgr, TArg> onClick)
+            public Builder Option(string name, HandleClickElement<TMgr, TArg> onClick, string style = null)
             {
                 AssertNotBuilded();
 
-                Append(SelectOption.Create(name, onClick));
+                Append(SelectOption.Create(name, onClick, style));
                 return this;
             }
 
-            public Builder AppendSelectOptions(params (string, HandleClickElement<TMgr, TArg>)[] selectOptions)
+            public Builder StackOptions(params (string, HandleClickElement<TMgr, TArg>)[] selectOptions)
             {
                 AssertNotBuilded();
 

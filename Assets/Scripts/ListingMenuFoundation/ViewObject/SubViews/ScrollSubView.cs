@@ -11,10 +11,14 @@ namespace ListingMF
     public class ScrollSubView : ElementsSubView
     {
         [SerializeField] private ScrollRect _scrollRect = null;
+
         [SerializeField] private ViewElement _viewElementPrefab = null;
+
+        [Tooltip("カーソル移動に合わせてスクロールする速さ")]
         [SerializeField] private float _elasticityToCursor = 0.2f;
-        private float itemHeight;
+
         private bool isInitialized;
+        private float itemHeight;
 
         private IElementHandler handler;
         private readonly List<object> list = new();
@@ -51,6 +55,7 @@ namespace ListingMF
 
             itemHeight = _viewElementPrefab.GetComponent<RectTransform>().rect.height;
             _scrollRect.onValueChanged.AddListener((x) => UpdateElements());
+            _scrollRect.horizontal = false;
         }
 
         public override void SetParameters(
@@ -116,7 +121,7 @@ namespace ListingMF
                     continue;
                 }
 
-                viewElement.SetElement(handler, list[elementIndex]);
+                viewElement.SetElement(list[elementIndex], handler);
                 viewElement.SetVisible(true, false);
             }
 

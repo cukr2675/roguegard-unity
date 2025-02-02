@@ -66,20 +66,10 @@ namespace RoguegardUnity
 
             view.ShowTemplate(selectOptions, manager, arg)
                 ?
-                .ElementNameFrom((selectOption, manager, arg) =>
-                {
-                    return selectOption.GetName(manager, arg);
-                })
-
-                .OnClickElement((selectOption, manager, arg) =>
-                {
-                    selectOption.HandleClick(manager, arg);
-                })
-
                 .Build();
         }
 
-        public override void CloseScreen(MMgr manager, bool back)
+        public override void CloseScreenView(MMgr manager, bool back)
         {
             view.HideTemplate(manager, back);
         }
@@ -174,7 +164,7 @@ namespace RoguegardUnity
                             {
                                 NamingEffect.Get(obj).Naming = newName;
                             }
-                            manager.Back(2);
+                            manager.PopMenuScreen(2);
                             manager.Reopen();
                         }),
                         BackSelectOption.Instance
@@ -183,7 +173,7 @@ namespace RoguegardUnity
                     .Build();
             }
 
-            public override void CloseScreen(MMgr manager, bool back)
+            public override void CloseScreenView(MMgr manager, bool back)
             {
                 view.HideTemplate(manager, back);
             }

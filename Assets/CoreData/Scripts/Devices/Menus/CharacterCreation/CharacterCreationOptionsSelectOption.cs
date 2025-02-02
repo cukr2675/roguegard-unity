@@ -135,7 +135,7 @@ namespace Roguegard.Device
                         {
                             alphabetTypeMember.TypeIndex = (int)element;
                         }
-                        manager.Back();
+                        manager.PopMenuScreen();
                     })
 
                     .Build();

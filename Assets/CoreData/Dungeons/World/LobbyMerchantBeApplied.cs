@@ -53,9 +53,9 @@ namespace Roguegard
 
             public override void OpenScreen(in MMgr manager, in MArg arg)
             {
-                view.ShowTemplate($"商人「わたしは商人です でもまだ準備中です{view.VA}\n", manager, arg)
+                view.ShowTemplate($"商人「わたしは商人です でもまだ準備中です{{v}}\n", manager, arg)
                     ?
-                    .VariableOnce(out var nextScreen, new RogueMenu() { parent = parent })
+                    .VarOnce(out var nextScreen, new RogueMenu() { parent = parent })
 
                     .OnCompleted((manager, arg) =>
                     {

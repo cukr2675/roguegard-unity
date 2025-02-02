@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace ListingMF
 {
+    /// <summary>
+    /// 項目数が可変のメニュー向け ViewTemplate
+    /// </summary>
     public class CommandListViewTemplate<TElm, TMgr, TArg> : ListViewTemplate<TElm, TMgr, TArg>
         where TElm : class
         where TMgr : IListMenuManager
@@ -11,15 +14,28 @@ namespace ListingMF
     {
         public string SecodaryCommandSubViewName { get; set; } = StandardSubViewTable.SecondaryCommandName;
         public string CaptionBoxSubViewName { get; set; } = StandardSubViewTable.CaptionBoxName;
+        public string BackAnchorSubViewName { get; set; } = null;
+        public List<ISelectOption> BackAnchorList { get; set; } = new() { BackSelectOption.Instance };
+
+        /// <summary>
+        /// このインスタンスのデリゲート実行前に <see cref="SelectOptionHandler"/> の処理を挟む
+        /// (リストの前後に <see cref="ISelectOption"/> を入れる場合を想定)
+        /// </summary>
+        public bool EnableSelectOptionProxy
+        {
+            get => secodaryCommandSubViewHandler.EnableSelectOptionProxy;
+            set => secodaryCommandSubViewHandler.EnableSelectOptionProxy = value;
+        }
 
         private object prevViewStateHolder;
-        private IElementsSubViewStateProvider scrollSubViewStateProvider;
+        private IElementsSubViewStateProvider secodaryCommandSubViewStateProvider;
         private IElementsSubViewStateProvider captionBoxSubViewStateProvider;
+        private IElementsSubViewStateProvider backAnchorSubViewStateProvider;
 
-        private readonly ButtonElementHandler<TElm, TMgr, TArg> scrollSubViewHandler = new();
+        private readonly ButtonElementHandler<TElm, TMgr, TArg> secodaryCommandSubViewHandler = new();
 
         public Builder ShowTemplate(
-            IReadOnlyList<TElm> list, TMgr manager, TArg arg, object viewStateHolder = null, IReadOnlyList<object> backAnchorList = null)
+            IReadOnlyList<TElm> list, TMgr manager, TArg arg, object viewStateHolder = null)
         {
             if (list == null) throw new System.ArgumentNullException(nameof(list));
             if (manager == null) throw new System.ArgumentNullException(nameof(manager));
@@ -27,8 +43,9 @@ namespace ListingMF
             // 必要に応じてスクロール位置をリセット
             if (viewStateHolder != prevViewStateHolder)
             {
-                scrollSubViewStateProvider?.Reset();
+                secodaryCommandSubViewStateProvider?.Reset();
                 captionBoxSubViewStateProvider?.Reset();
+                backAnchorSubViewStateProvider?.Reset();
             }
             prevViewStateHolder = viewStateHolder;
 
@@ -43,7 +60,7 @@ namespace ListingMF
         {
             manager
                 .GetSubView(SecodaryCommandSubViewName)
-                .Show(List, scrollSubViewHandler, manager, arg, ref scrollSubViewStateProvider);
+                .Show(List, secodaryCommandSubViewHandler, manager, arg, ref secodaryCommandSubViewStateProvider);
 
             if (Title != null)
             {
@@ -51,12 +68,20 @@ namespace ListingMF
                     .GetSubView(CaptionBoxSubViewName)
                     .Show(TitleSingle, ElementToStringHandler.Instance, manager, arg, ref captionBoxSubViewStateProvider);
             }
+
+            if (BackAnchorSubViewName != null)
+            {
+                manager
+                    .GetSubView(BackAnchorSubViewName)
+                    .Show(BackAnchorList, SelectOptionHandler.Instance, manager, arg, ref backAnchorSubViewStateProvider);
+            }
         }
 
         public void HideTemplate(TMgr manager, bool back)
         {
             manager.GetSubView(SecodaryCommandSubViewName).Hide(back);
             if (Title != null) { manager.GetSubView(CaptionBoxSubViewName).Hide(back); }
+            if (BackAnchorSubViewName != null) { manager.GetSubView(BackAnchorSubViewName).Hide(back); }
         }
 
         public class Builder : BaseBuilder<Builder>
@@ -73,7 +98,7 @@ namespace ListingMF
             {
                 AssertNotBuilded();
 
-                parent.scrollSubViewHandler.GetName = method;
+                parent.secodaryCommandSubViewHandler.GetName = method;
                 return this;
             }
 
@@ -81,7 +106,7 @@ namespace ListingMF
             {
                 AssertNotBuilded();
 
-                parent.scrollSubViewHandler.HandleClick = method;
+                parent.secodaryCommandSubViewHandler.HandleClick = method;
                 return this;
             }
         }

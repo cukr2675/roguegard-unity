@@ -12,11 +12,9 @@ namespace ListingMF
     {
         string GetName(object element, IListMenuManager manager, IListMenuArg arg);
 
-        // アイコンを返す形式にするとラムダ式の記述が面倒になってしまう
-        // （ラムダ式で Name Icon Style をまとめて返す場合はタプルを使う）
-        //string GetName(object element, IListMenuManager manager, IListMenuArg arg, ref Sprite icon);
-
-        Sprite GetIcon(object element, IListMenuManager manager, IListMenuArg arg);
+        // Roguegard の実装を見ると、アイコン以外の情報も同時に返すほうが効率的なため使用していない
+        // GetName はデバッグにも使用できるが GetIcon は不向き
+        //Sprite GetIcon(object element, IListMenuManager manager, IListMenuArg arg);
 
         string GetStyle(object element, IListMenuManager manager, IListMenuArg arg);
     }

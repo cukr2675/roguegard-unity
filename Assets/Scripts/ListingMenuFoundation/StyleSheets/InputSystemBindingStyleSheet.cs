@@ -7,10 +7,13 @@ using UnityEngine.InputSystem;
 
 namespace ListingMF
 {
+    /// <summary>
+    /// 要素のスタイルでキーバインドするスタイルシート。このオブジェクトの下の <see cref="ElementsSubView"/> に影響を与える
+    /// </summary>
     [AddComponentMenu("UI/Listing Menu Foundation/LMF Input System Binding Style Sheet")]
     public class InputSystemBindingStyleSheet : MonoBehaviour
     {
-        [SerializeField] Binding[] _bindings = null;
+        [SerializeField] private Binding[] _bindings = null;
 
         public static InputSystemBindingStyleSheet Get(Component obj)
         {
@@ -44,9 +47,10 @@ namespace ListingMF
             if (TryGetAction(style, out var action)) return;
 
             action.performed -= performed;
+            //action.Disable(); // バインディングされているアクションが一つとは限らないため無効化しない
         }
 
-        [System.Serializable]
+        [Serializable]
         private class Binding
         {
             [SerializeField] private string _style;

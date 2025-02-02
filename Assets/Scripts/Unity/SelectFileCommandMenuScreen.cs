@@ -42,7 +42,7 @@ namespace RoguegardUnity
                 .Option(":Export", (manager, arg) =>
                 {
                     RogueFile.Export(((FileInfo)arg.Arg.Other).FullName);
-                    manager.Back();
+                    manager.PopMenuScreen();
                 })
 
                 .Option("<#f00>:Delete", new ChoicesMenuScreen(":DeleteMsg").Option("<#f00>:Delete", DeleteYes).Back())
@@ -56,10 +56,10 @@ namespace RoguegardUnity
         {
             var fileInfo = (FileInfo)arg.Arg.Other;
             fileInfo.Delete();
-            manager.Back(2);
+            manager.PopMenuScreen(2);
         }
 
-        public override void CloseScreen(MMgr manager, bool back)
+        public override void CloseScreenView(MMgr manager, bool back)
         {
             view.HideTemplate(manager, back);
         }
@@ -100,7 +100,7 @@ namespace RoguegardUnity
                         })
                     )
 
-                    .VariableOnce(out var overwriteDialog, new ChoicesMenuScreen(":RenameOverride").Option(":Yes", Overwrite).Back())
+                    .VarOnce(out var overwriteDialog, new ChoicesMenuScreen(":RenameOverride").Option(":Yes", Overwrite).Back())
                     .Append(new object[]
                     {
                         SelectOption.Create<MMgr, MArg>(":Rename", (manager, arg) =>
@@ -111,13 +111,13 @@ namespace RoguegardUnity
                             var newPath = Path.Combine(fileInfo.DirectoryName, $"{newName}{Path.GetExtension(fileInfo.Name)}");
                             if (newName != Path.GetFileNameWithoutExtension(fileInfo.Name) && File.Exists(newPath))
                             {
-                                manager.Back(2);
+                                manager.PopMenuScreen(2);
                                 manager.PushMenuScreen(overwriteDialog, other: new Paths() { path = fileInfo.FullName, newPath = newPath });
                             }
                             else
                             {
                                 fileInfo.MoveTo(newPath);
-                                manager.Back(2);
+                                manager.PopMenuScreen(2);
                             }
                         }),
                         BackSelectOption.Instance
@@ -126,14 +126,14 @@ namespace RoguegardUnity
                     .Build();
             }
 
-            public override void CloseScreen(MMgr manager, bool back)
+            public override void CloseScreenView(MMgr manager, bool back)
             {
                 view.HideTemplate(manager, back);
             }
 
             private static void Overwrite(MMgr manager, MArg arg)
             {
-                manager.Back();
+                manager.PopMenuScreen();
 
                 var paths = (Paths)arg.Arg.Other;
                 File.Delete(paths.newPath);

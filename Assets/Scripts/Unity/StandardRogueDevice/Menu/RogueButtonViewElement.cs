@@ -46,7 +46,7 @@ namespace RoguegardUnity
             TryGetComponent(out animator);
         }
 
-        protected override void InnerSetElement(IElementHandler handler, object element)
+        protected override void InnerSetElement(object element, IElementHandler handler)
         {
             this.handler = handler as IButtonElementHandler;
             this.element = element;

@@ -193,8 +193,8 @@ namespace RoguegardUnity
                                 TMP_InputField.ContentType.IntegerNumber)
                         })
 
-                    .VariableOnce(out var windowTypeScreen, new WindowTypeScreen())
-                    .AppendSelectOption("ウィンドウタイプ", windowTypeScreen)
+                    .VarOnce(out var windowTypeScreen, new WindowTypeScreen())
+                    .Option("ウィンドウタイプ", windowTypeScreen)
 
                     .Build();
             }
@@ -232,7 +232,7 @@ namespace RoguegardUnity
                             var device = (StandardRogueDevice)RogueDevice.Primary;
                             device.Options.SetWindowFrame(index, device.Options.WindowFrameColor);
 
-                            manager.Back();
+                            manager.PopMenuScreen();
                         })
 
                         .Build();

@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace ListingMF
 {
+    /// <summary>
+    /// 画面のフェードアウト/フェードインを扱う ViewTemplate
+    /// </summary>
     public class FadeOutInViewTemplate<TMgr, TArg> : ViewTemplate<TMgr, TArg>
         where TMgr : IListMenuManager
         where TArg : IListMenuArg

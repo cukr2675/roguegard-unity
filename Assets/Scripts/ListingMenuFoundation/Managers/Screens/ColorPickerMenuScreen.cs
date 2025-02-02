@@ -17,8 +17,8 @@ namespace ListingMF
         public ColorPickerMenuScreen(System.Func<TMgr, TArg, Color> getColor, System.Action<TMgr, TArg, Color> onClose)
         {
             this.getColor = getColor;
-            this.handleClose = onClose;
-            this.handleClose += (manager, arg, color) => manager.BackOption.HandleClick(manager, arg);
+            handleClose = onClose;
+            handleClose += (manager, arg, color) => manager.BackOption.HandleClick(manager, arg);
 
             view = new()
             {
@@ -41,7 +41,7 @@ namespace ListingMF
                 .Build();
         }
 
-        public override void CloseScreen(TMgr manager, bool back)
+        public override void CloseScreenView(TMgr manager, bool back)
         {
             view.HideTemplate(manager, back);
         }

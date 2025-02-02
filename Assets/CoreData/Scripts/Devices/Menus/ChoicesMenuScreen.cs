@@ -52,7 +52,7 @@ namespace Roguegard.Device
                 // 保存しない場合は再度聞く
                 .Option(notSaveName, new ChoicesMenuScreen(":SaveBackDialogMsg::Second").Option(notSaveName, notSaveAction ?? NotSave).Option(":Cancel", Cancel))
 
-                .Option(":Cancel", (manager, arg) => manager.Back());
+                .Option(":Cancel", (manager, arg) => manager.PopMenuScreen());
 
             return selectOption;
         }
@@ -60,13 +60,13 @@ namespace Roguegard.Device
         private static void NotSave(MMgr manager, MArg arg)
         {
             // 何もせず閉じる
-            manager.Back(3);
+            manager.PopMenuScreen(3);
         }
 
         private static void Cancel(MMgr manager, MArg arg)
         {
             // 何もせず閉じる
-            manager.Back(2);
+            manager.PopMenuScreen(2);
         }
 
         public ChoicesMenuScreen Option(string name, HandleClickElement<MMgr, MArg> onClick)
@@ -86,9 +86,9 @@ namespace Roguegard.Device
             screen.OpenScreen(manager, arg);
         }
 
-        public override void CloseScreen(MMgr manager, bool back)
+        public override void CloseScreenView(MMgr manager, bool back)
         {
-            screen.CloseScreen(manager, back);
+            screen.CloseScreenView(manager, back);
         }
     }
 }

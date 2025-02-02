@@ -15,11 +15,18 @@ namespace ListingMF
         private Vector2 margin;
 
         [Header("Layout")]
+
+        [Tooltip("グリッド分割数")]
         [SerializeField] private Vector2Int _viewElementCount = Vector2Int.one;
+
+        [Tooltip("拡張方向（はい/いいえ等の選択肢用）")]
         [SerializeField] private ExtensionDirection _extensionDirection = ExtensionDirection.NotExtend;
 
         [Header("Other")]
+
+        [Tooltip("この値が true のときカーソル移動の対象となる")]
         [SerializeField] private bool _isSelectable = true;
+
         private bool isInitialized;
 
         private IElementHandler handler;
@@ -66,6 +73,7 @@ namespace ListingMF
 
         private void UpdateElements(IReadOnlyList<object> list)
         {
+            // 表示要素を生成/削除
             if (_extensionDirection != ExtensionDirection.NotExtend)
             {
                 AdjustViewElements(list.Count);
@@ -77,10 +85,11 @@ namespace ListingMF
                 AdjustViewElements(length);
             }
 
+            // 表示要素に値とハンドラを注入
             for (int i = 0; i < viewElements.Count; i++)
             {
                 var itemButton = viewElements[i];
-                itemButton.SetElement(handler, list[i]);
+                itemButton.SetElement(list[i], handler);
             }
         }
 
@@ -134,6 +143,7 @@ namespace ListingMF
         {
             if (_content == null) return;
 
+            // ボタン配置グリッドプレビュー
             var contentTransform = _content.transform;
             var rect = ((RectTransform)contentTransform).rect;
             var size = rect.size * contentTransform.lossyScale;

@@ -56,8 +56,6 @@ namespace Roguegard
 
                 view.ShowTemplate(selectOptions, manager, arg)
                     ?
-                    .ElementNameFrom(SelectOptionHandler.Instance.GetName)
-                    .OnClickElement(SelectOptionHandler.Instance.HandleClick)
                     .Build();
             }
         }

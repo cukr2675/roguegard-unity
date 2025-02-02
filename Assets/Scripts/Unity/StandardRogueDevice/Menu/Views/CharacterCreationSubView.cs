@@ -149,7 +149,7 @@ namespace RoguegardUnity
                 sumHeight += ((RectTransform)header.transform).rect.height;
                 odd = false;
                 header.Initialize(this);
-                header.SetElement(SelectOptionHandler.Instance, intrinsicHeader);
+                header.SetElement(intrinsicHeader, SelectOptionHandler.Instance);
                 itemObjects.Add(header);
             }
             for (int i = 0; i < builder.Intrinsics.Count; i++)
@@ -177,7 +177,7 @@ namespace RoguegardUnity
                 sumHeight += ((RectTransform)header.transform).rect.height;
                 odd = false;
                 header.Initialize(this);
-                header.SetElement(SelectOptionHandler.Instance, startingItemHeader);
+                header.SetElement(startingItemHeader, SelectOptionHandler.Instance);
                 itemObjects.Add(header);
             }
             for (int i = 0; i < builder.StartingItemTable.Count; i++)
@@ -200,9 +200,9 @@ namespace RoguegardUnity
             _scrollRect.content.SetInsetAndSizeFromParentEdge(
                 RectTransform.Edge.Top, 0, _firstParent.rect.height + sumHeight);
 
-            _raceButton.SetElement(SelectOptionHandler.Instance, raceSelectOption);
+            _raceButton.SetElement(raceSelectOption, SelectOptionHandler.Instance);
             _blockableViewElements.Add(_raceButton);
-            _appearanceButton.SetElement(SelectOptionHandler.Instance, appearanceSelectOption);
+            _appearanceButton.SetElement(appearanceSelectOption, SelectOptionHandler.Instance);
             _blockableViewElements.Add(_appearanceButton);
         }
 
@@ -274,7 +274,7 @@ namespace RoguegardUnity
             {
                 var builder = (CharacterCreationDataBuilder)arg.Arg.Other;
                 builder.Set(element);
-                manager.Back(2);
+                manager.PopMenuScreen(2);
             }
         }
     }

@@ -202,12 +202,12 @@ namespace Roguegard.CharacterCreation
                 message.Append(arg.Self.GetName()).Append("は").Append(quest).Append("をクリアした！");
                 if (quest.LootTable.Count >= 1)
                 {
-                    message.Append(view.VA).Append("その報酬として…");
+                    message.Append("{v}その報酬として…");
                 }
                 for (int i = 0; i < quest.LootTable.Count; i++)
                 {
                     var loot = WeightedRogueObjGeneratorUtility.CreateObj(quest.LootTable[i], self, RogueRandom.Primary);
-                    message.Append(view.VA).AppendLine();
+                    message.Append("{v}").AppendLine();
                     if (loot.Main.InfoSet.Equals(RoguegardSettings.MoneyInfoSet))
                     {
                         message.Append(loot.Stack).Append("G受け取った！");
@@ -234,7 +234,7 @@ namespace Roguegard.CharacterCreation
 
             public override void OpenScreen(in MMgr manager, in MArg arg)
             {
-                view.ShowTemplate($"目標の階に到達しました{view.VA}", manager, arg)
+                view.ShowTemplate($"目標の階に到達しました{{v}}", manager, arg)
                     ?
                     .OnCompleted((manager, arg) => manager.Done())
 

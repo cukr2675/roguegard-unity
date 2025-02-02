@@ -43,7 +43,7 @@ namespace ListingMF
             TryGetComponent(out animator);
         }
 
-        protected override void InnerSetElement(IElementHandler handler, object element)
+        protected override void InnerSetElement(object element, IElementHandler handler)
         {
             this.handler = handler as IButtonElementHandler;
             this.element = element;
@@ -53,13 +53,14 @@ namespace ListingMF
                 _text.text = Manager.Localize(name);
             }
 
-            if (_icon != null)
+            if (_icon != null && handler is IColoredIconElementHandler iconElementHandler)
             {
-                var baseIcon = handler.GetIcon(element, Manager, Arg);
-                var icon = Manager.Localize(baseIcon);
-                if (icon != null)
+                iconElementHandler.GetIcon(element, Manager, Arg, out var iconSprite, out var iconColor);
+                iconSprite = Manager.Localize(iconSprite);
+                if (iconSprite != null)
                 {
-                    _icon.sprite = icon;
+                    _icon.sprite = iconSprite;
+                    _icon.color = iconColor;
                     _icon.SetNativeSize();
                     _icon.enabled = true;
                 }
@@ -84,6 +85,8 @@ namespace ListingMF
 
             // この値が true のとき新しいスタイルの適用、 false のとき設定済みスタイルの初期化
             var apply = newStyle != null;
+
+            if (apply && style != null) throw new InvalidOperationException($"スタイル ({style}) 解除前に新しいスタイルを適用することはできません。");
 
             // 新しいスタイルを保持
             if (apply) { style = newStyle; }
@@ -128,7 +131,7 @@ namespace ListingMF
             if (!apply) { style = null; }
         }
 
-        private static bool EqualsIgnoreWhiteSpace(string layerName, System.ReadOnlySpan<char> style)
+        private static bool EqualsIgnoreWhiteSpace(string layerName, ReadOnlySpan<char> style)
         {
             var styleIndex = 0;
             for (int i = 0; i < layerName.Length; i++)

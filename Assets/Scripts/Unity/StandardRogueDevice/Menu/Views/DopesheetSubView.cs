@@ -162,10 +162,10 @@ namespace RoguegardUnity
                 var headerWidth = _floatingContent.rect.width;
                 var header = Instantiate(_itemHeaderPrefab, _scrollRect.content);
                 header.Initialize(this);
-                header.SetElement(SelectOptionHandler.Instance, SelectOption.Create<MMgr, MArg>("+ ボーンを追加", (manager, arg) =>
+                header.SetElement(SelectOption.Create<MMgr, MArg>("+ ボーンを追加", (manager, arg) =>
                 {
                     manager.PushMenuScreen(newBoneMenu, other: editInfo);
-                }));
+                }), SelectOptionHandler.Instance);
                 header.RectTransform.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, y, _itemHeight);
                 header.RectTransform.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Left, 0f, headerWidth);
                 viewElements.Add(header);
@@ -173,7 +173,7 @@ namespace RoguegardUnity
                 sumHeight += _itemHeight;
             }
             {
-                _menuButton.SetElement(SelectOptionHandler.Instance, SelectOption.Create<MMgr, MArg>("...", menuScreen));
+                _menuButton.SetElement(SelectOption.Create<MMgr, MArg>("...", menuScreen), SelectOptionHandler.Instance);
             }
 
             var scrollRect = _scrollRect.viewport.rect;
@@ -191,17 +191,17 @@ namespace RoguegardUnity
 
             var header = Instantiate(_itemHeaderPrefab, _scrollRect.content);
             header.Initialize(this);
-            header.SetElement(SelectOptionHandler.Instance, SelectOption.Create<MMgr, MArg>(name, (manager, arg) =>
+            header.SetElement(SelectOption.Create<MMgr, MArg>(name, (manager, arg) =>
             {
                 manager.PushMenuScreen(
                     new ChoicesMenuScreen($"{name} を削除しますか？")
                     .Option(":Yes", (manager, arg) =>
                     {
                         handleRemove(manager, arg);
-                        manager.Back();
+                        manager.PopMenuScreen();
                     })
                     .Back(), arg);
-            }));
+            }), SelectOptionHandler.Instance);
             header.RectTransform.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, y, _itemHeight);
             header.RectTransform.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Left, 0f, headerWidth);
             viewElements.Add(header);
@@ -209,7 +209,7 @@ namespace RoguegardUnity
             var lane = Instantiate(_itemLanePrefab, _scrollRect.content);
             lane.Initialize(this);
             lane.SetParent(_timeScale, editInfo);
-            lane.SetElement(ElementToStringHandler.Instance, keyFrameList);
+            lane.SetElement(keyFrameList, ElementToStringHandler.Instance);
             lane.RectTransform.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, y, _itemHeight);
             lane.RectTransform.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Left, headerWidth, _width - headerWidth);
             viewElements.Add(lane);
@@ -276,7 +276,7 @@ namespace RoguegardUnity
                         return boneName;
                     })
 
-                    .VariableOnce(out var referenceMenu, new ReferenceNameMenuScreen())
+                    .VarOnce(out var referenceMenu, new ReferenceNameMenuScreen())
                     .OnClickElement((boneName, manager, arg) =>
                     {
                         var editInfo = (MotionGrapherInfo)arg.Arg.Other;
@@ -287,7 +287,7 @@ namespace RoguegardUnity
                         else
                         {
                             ((SpriteMotionGrapherTrack)editInfo.Tracks[editInfo.Tracks.Count - 1]).AddBone(boneName);
-                            manager.Back();
+                            manager.PopMenuScreen();
                         }
                     })
 
@@ -306,7 +306,7 @@ namespace RoguegardUnity
             {
                 view.ShowTemplate(string.Empty, manager, arg)
                     ?
-                    .VariableOnce(out string id)
+                    .VarOnce(out string id)
                     .Append(InputFieldViewWidget.CreateOption<MMgr, MArg>(
                         (manager, arg) => id,
                         (manager, arg, value) => id = value))
@@ -320,7 +320,7 @@ namespace RoguegardUnity
                                 var newTrack = new SubTimelineMotionGrapherTrack();
                                 newTrack.AddClip(new RgpackReferenceTimelineClip() { Id = id });
                                 editInfo.InsertTrack(0, newTrack);
-                                manager.Back(2);
+                                manager.PopMenuScreen(2);
                             }),
                             BackSelectOption.Instance
                         })
@@ -374,7 +374,7 @@ namespace RoguegardUnity
                         var editInfo = (MotionGrapherInfo)arg.Arg.Other;
                         RogueDevice.AddWork(DeviceKw.EnqueueWork, RogueCharacterWork.CreateSpriteMotion(arg.Self, new MotionGrapherSpriteMotion(editInfo), true));
 
-                        manager.Back(2);
+                        manager.PopMenuScreen(2);
                     }))
 
                     .Build();

@@ -132,7 +132,7 @@ namespace RoguegardUnity
             presenter.HandleClick(source, Manager, Arg);
         }
 
-        protected override void InnerSetElement(IElementHandler handler, object element)
+        protected override void InnerSetElement(object element, IElementHandler handler)
         {
             throw new System.NotImplementedException();
         }

@@ -52,7 +52,7 @@ namespace Roguegard
                     }
                 })
 
-                .VariableOnce(out ChoicesMenuScreen callLobbyDialog)
+                .VarOnce(out ChoicesMenuScreen callLobbyDialog)
                 .OnClickElement((obj, manager, arg) =>
                 {
                     if (obj == null)
@@ -95,7 +95,7 @@ namespace Roguegard
             var info = LobbyMemberList.GetMemberInfo(character);
             info.Seat = null;
 
-            manager.Back();
+            manager.PopMenuScreen();
         }
 
         private class CommandMenu : RogueMenuScreen

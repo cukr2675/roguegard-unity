@@ -12,14 +12,17 @@ namespace ListingMF
         [SerializeField] private Image[] _fillAmountTargetImages = null;
         [SerializeField] private string _fillAmountFloat = null;
 
-        private ElementsSubViewBase parent;
         private IWidgetOption widgetOption;
+        private ElementsSubViewBase _parent;
         private Animator animator;
+
+        public override string WidgetName => widgetOption.Name;
+        protected override ElementsSubViewBase Parent => _parent;
 
         public delegate float GetProgress<TMgr, TArg>(TMgr manager, TArg arg);
 
         public override bool TryInstantiateWidget(
-            ElementsSubViewBase elementsSubView, IElementHandler handler, object element, out ViewWidget viewWidget)
+            object element, IElementHandler handler, ElementsSubViewBase elementsSubView, out ViewWidget viewWidget)
         {
             if (!(element is IWidgetOption widgetOption))
             {
@@ -28,7 +31,7 @@ namespace ListingMF
             }
 
             var progressBarViewWidget = Instantiate(this);
-            progressBarViewWidget.parent = elementsSubView;
+            progressBarViewWidget._parent = elementsSubView;
             progressBarViewWidget.widgetOption = widgetOption;
             progressBarViewWidget.animator = progressBarViewWidget.GetComponent<Animator>();
             viewWidget = progressBarViewWidget;
@@ -37,7 +40,7 @@ namespace ListingMF
 
         private void Update()
         {
-            var fillAmount = widgetOption.GetProgress(parent.Manager, parent.Arg);
+            var fillAmount = widgetOption.GetProgress(_parent.Manager, _parent.Arg);
             foreach (var image in _fillAmountTargetImages)
             {
                 image.fillAmount = fillAmount;
@@ -48,21 +51,25 @@ namespace ListingMF
             }
         }
 
-        public static IWidgetOption CreateOption<TMgr, TArg>(GetProgress<TMgr, TArg> getProgress)
+        public static IWidgetOption CreateOption<TMgr, TArg>(GetProgress<TMgr, TArg> getProgress, string name = null)
         {
             return new WidgetOption<TMgr, TArg>()
             {
+                Name = name ?? EmitIdentity("ProgressBarViewWidget"),
                 GetProgress = getProgress
             };
         }
 
         public interface IWidgetOption
         {
+            string Name { get; }
+
             float GetProgress(IListMenuManager manager, IListMenuArg arg);
         }
 
         private class WidgetOption<TMgr, TArg> : IWidgetOption
         {
+            public string Name { get; set; }
             public GetProgress<TMgr, TArg> GetProgress { get; set; }
 
             float IWidgetOption.GetProgress(IListMenuManager manager, IListMenuArg arg)

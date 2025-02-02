@@ -8,27 +8,38 @@ using UnityEngine.EventSystems;
 
 namespace ListingMF
 {
+    /// <summary>
+    /// SubView のアニメーターパラメータ名と LMF Play を制御するコンポーネント。このオブジェクトの下の <see cref="ElementsSubView"/> に影響を与える
+    /// </summary>
     [AddComponentMenu("UI/Listing Menu Foundation/LMF Elements View Animator")]
     public class ElementsViewAnimator : MonoBehaviour
     {
+        [Tooltip("SubView の AnimatorController の表示/非表示パラメータ名")]
         [SerializeField] private string _visibleBool = "IsVisible";
         public string VisibleBool => _visibleBool;
 
+        [Tooltip("SubView の AnimatorController のステータスコードパラメータ名")]
         [SerializeField] private string _statusCodeInteger = "StatusCode";
         public string StatusCodeInteger => _statusCodeInteger;
 
         [Space]
+
+        [Tooltip("LMF Play イベント (string 引数)")]
         [SerializeField] private PlayStringEvent _onPlayString = null;
         public PlayStringEvent OnPlayString => _onPlayString;
 
         [Space]
+
+        [Tooltip("LMF Play イベント (object 引数)")]
         [SerializeField] private PlayObjectEvent _onPlayObject = null;
         public PlayObjectEvent OnPlayObject => _onPlayObject;
 
         [Header("ViewElement")]
 
+        [Tooltip("範囲内でカーソル移動したとき再生")]
         [SerializeField] private string _playOnSelect = "Select";
 
+        [Tooltip("範囲外にカーソル移動しようとしたとき再生")]
         [SerializeField] private string _playOnSelectOutOfRange = "SelectOutOfRange";
 
         [SerializeField] private bool _cancelOnSelectOutOfRange = true;
@@ -41,7 +52,14 @@ namespace ListingMF
         private static readonly List<AnimatorClipInfo> clipInfos = new();
 #endif
 
+        /// <summary>
+        /// ひとつ前にカーソルで選択されていた項目。選択をはじきたい項目が選択された際この変数の項目に戻す
+        /// </summary>
         private GameObject prevSelectedGameObject;
+
+        /// <summary>
+        /// カーソル移動キャンセル予約状態
+        /// </summary>
         private bool queuedCancelSelection;
 
         public static ElementsViewAnimator Get(Component obj)
@@ -106,7 +124,7 @@ namespace ListingMF
                 // ビュー要素は緑
                 if (sender is ViewElement || sender is GameObject) return $"<color=green>{sender}</color>";
 
-                // サブビューは青
+                // SubView は青
                 else if (sender is IElementsSubView) return $"<color=blue>{sender}</color>";
 
                 // それ以外は通常色
@@ -129,6 +147,7 @@ namespace ListingMF
 
         private void Update()
         {
+            // 予約されたカーソル移動キャンセル処理を実行する
             if (queuedCancelSelection)
             {
                 EventSystem.current.SetSelectedGameObject(prevSelectedGameObject);
@@ -138,26 +157,22 @@ namespace ListingMF
 
         public void OnSelect(GameObject gameObject, bool outOfRange)
         {
-            // 項目選択時の Play を実行（選択をキャンセル中は何もしない）
+            // カーソル移動時の Play を実行（カーソル移動キャンセル予約中は何もしない）
             if (!queuedCancelSelection)
             {
-                if (outOfRange)
-                {
-                    _onPlayString.Invoke(_playOnSelectOutOfRange, gameObject);
-                }
-                else
-                {
-                    _onPlayString.Invoke(_playOnSelect, gameObject);
-                }
+                if (_cancelOnSelectOutOfRange && outOfRange) { _onPlayString.Invoke(_playOnSelectOutOfRange, gameObject); } // 範囲外にカーソル移動しようとしたとき再生
+                else { _onPlayString.Invoke(_playOnSelect, gameObject); } // 範囲内でカーソル移動したとき再生
             }
 
-            // 範囲外の項目を選択したとき選択をキャンセルする
             if (_cancelOnSelectOutOfRange && outOfRange)
             {
+                // 範囲外にカーソル移動したときカーソルを戻す
+                // 即戻すと無限再帰となるためカーソル移動キャンセル処理を予約
                 queuedCancelSelection = true;
             }
             else
             {
+                // 範囲内の項目を選択したとき選択履歴を更新する
                 prevSelectedGameObject = gameObject;
             }
         }

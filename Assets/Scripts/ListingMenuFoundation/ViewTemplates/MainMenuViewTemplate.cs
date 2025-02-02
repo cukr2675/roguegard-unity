@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace ListingMF
 {
+    /// <summary>
+    /// 項目数が固定のメニュー向け ViewTemplate
+    /// </summary>
     public class MainMenuViewTemplate<TMgr, TArg> : ListViewTemplate<ISelectOption, TMgr, TArg>
         where TMgr : IListMenuManager
         where TArg : IListMenuArg

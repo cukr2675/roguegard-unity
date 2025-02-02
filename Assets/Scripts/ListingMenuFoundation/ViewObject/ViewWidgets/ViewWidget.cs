@@ -7,6 +7,9 @@ using UnityEngine.EventSystems;
 
 namespace ListingMF
 {
+    /// <summary>
+    /// <see cref="WidgetsSubView"/> 用の要素コンポーネント。 <see cref="ViewElement"/> と違い表示ごとに再生成される
+    /// </summary>
     public abstract class ViewWidget : MonoBehaviour
     {
         private Selectable[] selectables;
@@ -14,10 +17,15 @@ namespace ListingMF
 
         protected internal bool IsBlocked { get; private set; }
 
+        public virtual string WidgetName => null;
         protected virtual ElementsSubViewBase Parent => null;
 
+        private static int widgetIdentity = 0;
+
         public abstract bool TryInstantiateWidget(
-            ElementsSubViewBase elementsSubView, IElementHandler handler, object element, out ViewWidget viewWidget);
+            object element, IElementHandler handler, ElementsSubViewBase elementsSubView, out ViewWidget viewWidget);
+
+        protected static string EmitIdentity(string header) => $"{header}({widgetIdentity++})";
 
         public virtual void SetBlock(bool block)
         {

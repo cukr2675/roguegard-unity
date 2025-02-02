@@ -27,7 +27,7 @@ namespace ListingMF
         public bool IsDone { get; private set; }
 
         public virtual ISelectOption BackOption { get; protected set; }
-            = SelectOption.Create<TMgr, TArg>("Back", (manager, arg) => manager.Back(), "Cancel");
+            = SelectOption.Create<TMgr, TArg>("Back", (manager, arg) => manager.PopMenuScreen(), "Cancel");
 
         public virtual ISelectOption ErrorOption { get; protected set; }
             = SelectOption.Create<IListMenuManager, IListMenuArg>("<#F00>ERROR", delegate { }, "Cancel");
@@ -87,7 +87,7 @@ namespace ListingMF
         /// </summary>
         public virtual void PushMenuScreen(MenuScreen<TMgr, TArg> menuScreen, TArg arg)
         {
-            menuScreen.CloseScreen((TMgr)this, false);
+            menuScreen.CloseScreenView((TMgr)this, false);
             BlockAll();
             reservedMenu = stack.Push(menuScreen, arg);
         }
@@ -110,14 +110,14 @@ namespace ListingMF
         /// <summary>
         /// メニュー画面を指定の回数戻る
         /// </summary>
-        public void Back(int count = 1)
+        public void PopMenuScreen(int count = 1)
         {
             for (int i = 0; i < count; i++)
             {
                 if (stack.Count == 0) break;
 
                 var item = stack.Pop();
-                item.MenuScreen.CloseScreen((TMgr)this, true);
+                item.MenuScreen.CloseScreenView((TMgr)this, true);
             }
             Reopen();
         }

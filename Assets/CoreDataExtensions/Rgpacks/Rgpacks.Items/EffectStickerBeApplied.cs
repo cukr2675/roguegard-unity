@@ -48,7 +48,7 @@ namespace Roguegard.Rgpacks
                                 })
                         })
 
-                    .VariableOnce(out var cmnMenu, new PropertiedCmnMenu())
+                    .VarOnce(out var cmnMenu, new PropertiedCmnMenu())
                     .Append(SelectOption.Create<MMgr, MArg>(
                         "Update",
                         (manager, arg) => manager.PushMenuScreen(cmnMenu, arg.Self, other: EffectStickerInfo.Get(arg.Arg.TargetObj).Update)))

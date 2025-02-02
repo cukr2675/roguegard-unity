@@ -32,7 +32,7 @@ namespace RoguegardUnity
                 },
                 onNewFile: (manager, arg) =>
                 {
-                    manager.Back();
+                    manager.PopMenuScreen();
 
                     StandardRogueDeviceSave.GetNewNumberingPath(
                         RoguegardSettings.DefaultSaveFileName, path =>
@@ -45,7 +45,7 @@ namespace RoguegardUnity
             readFileMenu = SelectFileMenuScreen.Load(
                 onSelectFile: (fileInfo, manager, arg) =>
                 {
-                    manager.Back();
+                    manager.PopMenuScreen();
 
                     // 入力されたパスの Stream を開く
                     StandardRogueDeviceData loadDeviceData;
@@ -111,7 +111,7 @@ namespace RoguegardUnity
 
         private void SaveDelay(MMgr manager, string path, bool autoSave, IReadOnlyDictionary<string, object> spQuestRgpack)
         {
-            manager.Back();
+            manager.PopMenuScreen();
             SelectFileMenuScreen.ShowSaving(manager);
             manager.StartCoroutine(Save(manager, path, autoSave, spQuestRgpack));
         }

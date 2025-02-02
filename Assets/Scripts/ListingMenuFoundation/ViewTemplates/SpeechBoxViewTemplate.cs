@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace ListingMF
 {
+    /// <summary>
+    /// 会話ボックスと選択肢を扱う ViewTemplate
+    /// </summary>
     public class SpeechBoxViewTemplate<TMgr, TArg> : ListViewTemplate<ISelectOption, TMgr, TArg>
         where TMgr : IListMenuManager
         where TArg : IListMenuArg
@@ -11,6 +14,11 @@ namespace ListingMF
         public string SpeechBoxSubViewName { get; set; } = StandardSubViewTable.SpeechBoxName;
         public string ChoicesSubViewName { get; set; } = StandardSubViewTable.ChoicesName;
         public string CaptionBoxSubViewName { get; set; } = StandardSubViewTable.CaptionBoxName;
+        public List<StringReplacer> MessageReplacers { get; set; } = new List<StringReplacer>()
+        {
+            new("{v}", "<link=\"VerticalArrow\"></link><link=\"PageBreak\"></link>"),
+            new("{>}", "<link=\"HorizontalArrow\"></link>"),
+        };
 
         private object prevViewStateHolder;
         private IElementsSubViewStateProvider messageBoxSubViewStateProvider;
@@ -19,8 +27,6 @@ namespace ListingMF
         private event HandleClickElement<TMgr, TArg> OnCompleted;
 
         private readonly string[] message = new string[1];
-
-        public string VA => "<link=\"VerticalArrow\"></link>";
 
         public Builder ShowTemplate(string message, TMgr manager, TArg arg, object viewStateHolder = null)
         {
@@ -35,6 +41,12 @@ namespace ListingMF
                 captionBoxSubViewStateProvider?.Reset();
             }
             prevViewStateHolder = viewStateHolder;
+
+            // 文字送り矢印などを処理する
+            foreach (var replacer in MessageReplacers)
+            {
+                message = replacer.Replace(message);
+            }
 
             // メッセージボックスのビューを表示
             this.message[0] = message;
@@ -115,6 +127,20 @@ namespace ListingMF
                 Append(BackSelectOption.Instance);
                 return this;
             }
+        }
+
+        public class StringReplacer
+        {
+            public string From { get; }
+            public string To { get; }
+
+            public StringReplacer(string from, string to)
+            {
+                From = from;
+                To = to;
+            }
+
+            public string Replace(string value) => value.Replace(From, To, System.StringComparison.OrdinalIgnoreCase);
         }
     }
 }

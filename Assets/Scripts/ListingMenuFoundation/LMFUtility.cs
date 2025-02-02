@@ -6,6 +6,9 @@ namespace ListingMF
 {
     internal static class LMFUtility
     {
+        /// <summary>
+        /// <paramref name="transform"/> の親の <typeparamref name="T"/> 型のコンポーネントを再帰検索する
+        /// </summary>
         public static bool TryGetComponentInRecursiveParents<T>(Transform transform, out T component)
             where T : Component
         {

@@ -58,9 +58,17 @@ namespace ListingMF
                 if (parent.IsBuilt) throw new System.InvalidOperationException($"{parent} はビルド済みです。");
             }
 
-            public TOut VariableOnce<T>(out T variable, T defaultValue = default)
+            public TOut VarOnce<T>(out T variable, T defaultValue = default)
             {
                 variable = defaultValue;
+                return (TOut)this;
+            }
+
+            public TOut If(bool condition, System.Action<TOut> action)
+            {
+                if (action == null) throw new System.ArgumentNullException(nameof(action));
+
+                if (condition) { action((TOut)this); }
                 return (TOut)this;
             }
 
@@ -95,14 +103,6 @@ namespace ListingMF
             public TOut DoOnce<T1, T2, T3, T4>(System.Func<(T1, T2, T3, T4)> func, out T1 result1, out T2 result2, out T3 result3, out T4 result4)
             {
                 (result1, result2, result3, result4) = func?.Invoke() ?? throw new System.ArgumentNullException(nameof(func));
-                return (TOut)this;
-            }
-
-            public TOut IfOnce(bool condition, System.Action<TOut> action)
-            {
-                if (action == null) throw new System.ArgumentNullException(nameof(action));
-
-                if (condition) { action((TOut)this); }
                 return (TOut)this;
             }
 

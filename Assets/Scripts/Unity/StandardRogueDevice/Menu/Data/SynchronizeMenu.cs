@@ -34,7 +34,7 @@ namespace RoguegardUnity
                     return Progress;
                 }))
 
-                .AppendSelectOption("同期を中止", (manager, arg) => Interrupt = true)
+                .Option("同期を中止", (manager, arg) => Interrupt = true)
 
                 .Build();
         }

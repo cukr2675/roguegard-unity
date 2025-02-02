@@ -11,7 +11,7 @@ namespace ListingMF
     public class StackViewWidget : ViewWidget
     {
         public override bool TryInstantiateWidget(
-            ElementsSubViewBase elementsSubView, IElementHandler handler, object element, out ViewWidget stackViewWidget)
+            object element, IElementHandler handler, ElementsSubViewBase elementsSubView, out ViewWidget stackViewWidget)
         {
             if (!(element is IReadOnlyList<object> viewWidgets))
             {
@@ -26,7 +26,7 @@ namespace ListingMF
             var viewElementWidth = 1f / viewWidgets.Count;
             for (int i = 0; i < viewWidgets.Count; i++)
             {
-                if (!ViewWidgetFactory.TryCreateViewWidget(elementsSubView, handler, viewWidgets[i], out var viewWidget))
+                if (!ViewWidgetFactory.TryCreateViewWidget(viewWidgets[i], handler, elementsSubView, out var viewWidget))
                 {
                     Debug.LogError($"{viewWidgets[i]} の {nameof(ViewWidget)} を生成できません。");
                     continue;

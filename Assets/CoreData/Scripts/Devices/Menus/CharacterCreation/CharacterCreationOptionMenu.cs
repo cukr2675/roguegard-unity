@@ -295,7 +295,7 @@ namespace Roguegard.Device
                     CharacterCreationAddMenu.ReceiveStartingItemOptionObj(startingItemBuilder.Option, arg.Self);
                     builder.StartingItemTable.Remove(startingItemBuilder, true);
                 }
-                manager.Back();
+                manager.PopMenuScreen();
             }
         }
 
@@ -329,7 +329,7 @@ namespace Roguegard.Device
                     .OnClickElement((gender, manager, arg) =>
                     {
                         builder.Gender = gender;
-                        manager.Back();
+                        manager.PopMenuScreen();
                     })
 
                     .Build();

@@ -7,7 +7,7 @@ using Roguegard;
 namespace RoguegardUnity
 {
     /// <summary>
-    /// 世界に同期中、現実の時間ではなくログガル世界の時間をコールバックするイベントハンドラ。
+    /// 世界に同期中、現実の時間ではなく Roguegard ゲーム世界の時間をコールバックするイベントハンドラ。
     /// </summary>
     internal class DateTimeCallbackEventHandler : IStandardRogueDeviceEventHandler
     {

@@ -125,8 +125,8 @@ namespace RoguegardUnity
             {
                 view.ShowTemplate(manager, arg)
                     ?
-                    .VariableOnce(out var loadFadeOutScreen, new LoadFadeOutScreen(parent))
-                    .VariableOnce(out var newGameMenu, new NewGameScreen(loadFadeOutScreen))
+                    .VarOnce(out var loadFadeOutScreen, new LoadFadeOutScreen(parent))
+                    .VarOnce(out var newGameMenu, new NewGameScreen(loadFadeOutScreen))
 
                     // はじめる
                     .Option(":Play", SelectFileMenuScreen.Load(
@@ -145,7 +145,7 @@ namespace RoguegardUnity
                         // つづきから
                         onSelectFile: (fileInfo, manager, arg) =>
                         {
-                            manager.Back();
+                            manager.PopMenuScreen();
                             manager.PushMenuScreen(loadFadeOutScreen, other: fileInfo.FullName);
                         }))
 
@@ -271,7 +271,7 @@ namespace RoguegardUnity
             {
                 view.ShowTemplate(credits, manager, arg)
                     ?
-                    .VariableOnce(out var nextScreen, new CreditDetailsScreen())
+                    .VarOnce(out var nextScreen, new CreditDetailsScreen())
 
                     .ElementNameFrom((credit, manager, arg) =>
                     {
@@ -302,11 +302,13 @@ namespace RoguegardUnity
                     var credit = (CreditData)arg.Arg.Other;
 
                     // 文字列にリンクを貼ったものを表示
-                    var text = Regex.Replace(credit.Details, @"(https?://\S+)", "<color=#8080ff><u><link>$1</link></u></color>");
+                    var text = Regex.Replace(credit.Details, @"(https?://[a-zA-Z0-9@:%_\\+\-.~#?&/=]+)", "<color=#8080ff><u><link>$1</link></u></color>");
 
                     view.ShowTemplate(text, manager, arg)
                         ?
-                        .VariableOnce(out var nextScreen, new URLDialog())
+                        .VarOnce(out var viewWidth, 8000f)
+                        .Append(ContentSizeHeaderViewWidget.CreateOption(viewWidth))
+                        .VarOnce(out var nextScreen, new URLDialog())
 
                         .OnClickLink((link, manager, arg) =>
                         {
@@ -336,7 +338,7 @@ namespace RoguegardUnity
                         .Option(":Yes", (manager, arg) =>
                         {
                             var url = (string)arg.Arg.Other;
-                            manager.Back();
+                            manager.PopMenuScreen();
                             Application.OpenURL(url);
                         })
 
@@ -345,7 +347,7 @@ namespace RoguegardUnity
                         .Build();
                 }
 
-                public override void CloseScreen(MMgr manager, bool back)
+                public override void CloseScreenView(MMgr manager, bool back)
                 {
                     view.HideTemplate(manager, back);
                 }

@@ -28,7 +28,7 @@ namespace Roguegard
             if (MessageWorkListener.TryOpenHandler(self.Location, self.Position, out var h))
             {
                 using var handler = h;
-                handler.AppendText(self).AppendText("縺ｯ").AppendText(ammo).AppendText("繧呈兜縺偵◆?―n");
+                handler.AppendText(self).AppendText("は").AppendText(ammo).AppendText("を投げた！\n");
                 handler.EnqueueSE(MainInfoKw.Skill);
                 handler.EnqueueWork(RogueCharacterWork.CreateSpriteMotion(self, CoreMotions.Discus, false));
             }

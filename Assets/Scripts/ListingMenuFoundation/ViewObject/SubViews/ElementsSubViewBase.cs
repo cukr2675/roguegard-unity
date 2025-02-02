@@ -25,7 +25,7 @@ namespace ListingMF
             Arg = arg;
         }
 
-        public abstract void OnSelectViewElement(ViewElement viewElement, bool outOfRange);
+        public abstract void OnSelectViewElement(GameObject selectedObj, bool outOfRange);
 
         // ViewElement から呼び出すメソッド
         public void PlayFromElement(string value, Object element) => AnimatorTupple.Play(this, element, value);

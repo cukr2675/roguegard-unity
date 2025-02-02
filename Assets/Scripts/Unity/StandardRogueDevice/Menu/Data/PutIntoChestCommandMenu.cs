@@ -49,7 +49,7 @@ namespace RoguegardUnity
                 .Build();
         }
 
-        public override void CloseScreen(MMgr manager, bool back)
+        public override void CloseScreenView(MMgr manager, bool back)
         {
             view.HideTemplate(manager, back);
         }

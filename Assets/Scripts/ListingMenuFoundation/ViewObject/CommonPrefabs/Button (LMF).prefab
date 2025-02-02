@@ -59,13 +59,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 9bd93b091ab6e554f8d2081162d260dd, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9896f2023e2f13b478df68f156706a58, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -209,6 +209,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Text (LMF)
       objectReference: {fileID: 0}
+    - target: {fileID: 6468216191216407787, guid: fb2945a726658cc40853d1dabf981f86, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 7670974690536288066, guid: 672eb0804d93fb143aa99c7b454b00e0, type: 2}
     - target: {fileID: 6468216191216407787, guid: fb2945a726658cc40853d1dabf981f86, type: 3}
       propertyPath: m_HorizontalAlignment
       value: 2

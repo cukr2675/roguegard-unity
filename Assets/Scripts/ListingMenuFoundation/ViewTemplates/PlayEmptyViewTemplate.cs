@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace ListingMF
 {
+    /// <summary>
+    /// ビューを変更せずに LMF Play を再生するためのクラス
+    /// </summary>
     public class PlayEmptyViewTemplate
     {
         public string EmptySubViewName { get; set; } = StandardSubViewTable.ScrollName;

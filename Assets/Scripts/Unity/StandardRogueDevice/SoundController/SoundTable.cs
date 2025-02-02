@@ -9,7 +9,8 @@ namespace RoguegardUnity
     [CreateAssetMenu(menuName = "RoguegardData/Settings/SoundTable")]
     public class SoundTable : ScriptableObject, IEnumerable<KeyValuePair<IKeyword, AudioClip>>
     {
-        [SerializeField, Tooltip("音声冒頭の無音の長さを指定する")] private int _blankTimeSamples = 44100 / 10; // 0.1秒
+        [Tooltip("音声冒頭の無音の長さを指定する")]
+        [SerializeField] private int _blankTimeSamples = 44100 / 10; // 0.1秒
         public int BlankTimeSamples => _blankTimeSamples;
 
         [SerializeField] private Item[] _items = null;

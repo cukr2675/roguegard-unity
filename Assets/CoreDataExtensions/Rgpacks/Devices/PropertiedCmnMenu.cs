@@ -105,7 +105,7 @@ namespace Roguegard.Device
                             var startingItemTableCmnProperty = (StartingItemTableCmnProperty)arg.Arg.Other;
                             startingItemTableCmnProperty.Value.Clear();
                             startingItemTableCmnProperty.Value.AddClones(builder.StartingItemTable);
-                            manager.Back();
+                            manager.PopMenuScreen();
                         }, "Cancel")
                     }
                 };
@@ -132,14 +132,12 @@ namespace Roguegard.Device
                     .ElementNameFrom((element, manager, arg) =>
                     {
                         if (element is StartingItemBuilder startingItemBuilder) return startingItemBuilder.Name;
-                        else if (element is ISelectOption selectOption) return selectOption.GetName(manager, arg);
                         else throw new RogueException();
                     })
 
                     .OnClickElement((element, manager, arg) =>
                     {
                         if (element is StartingItemBuilder startingItemBuilder) { manager.PushMenuScreen(characterCreationOptionMenu, other: startingItemBuilder); }
-                        else if (element is ISelectOption selectOption) { selectOption.HandleClick(manager, arg); }
                         else throw new RogueException();
                     })
 

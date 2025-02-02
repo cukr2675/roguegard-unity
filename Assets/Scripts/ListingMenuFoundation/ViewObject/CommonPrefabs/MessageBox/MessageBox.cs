@@ -17,26 +17,40 @@ namespace ListingMF
         [SerializeField, Tooltip("1ページあたりのテキスト表示行数")] private int _maxLineCount = 1;
 
         [Header("Display")]
-        [SerializeField, Tooltip("テキスト表示アニメーション")] private VisibleMode _visibleMode = VisibleMode.Static;
-        [SerializeField, Tooltip("VisibleMode == Typing: テキスト表示速度　一秒あたりの文字数")] private float _characterPerSecond = 60f;
+
+        [Tooltip("テキスト表示アニメーション")]
+        [SerializeField] private VisibleMode _visibleMode = VisibleMode.Static;
+
+        [Tooltip("VisibleMode == Typing: テキスト表示速度　一秒あたりの文字数")]
+        [SerializeField] private float _characterPerSecond = 60f;
         public float CharacterPerSecond { get => _characterPerSecond; set => _characterPerSecond = value; }
-        [SerializeField, Tooltip("VisibleMode == Typing: ページ区切りのリンクID")] private string _pageBreakHiddenLinkID = "PageBreak";
-        [SerializeField, Tooltip("罫線のリンクID")] private string _horizontalRuleHiddenLinkID = "HorizontalRule";
+
+        [Tooltip("VisibleMode == Typing: ページ区切りのリンクID")]
+        [SerializeField] private string _pageBreakHiddenLinkID = "PageBreak";
+
+        [Tooltip("罫線のリンクID")]
+        [SerializeField] private string _horizontalRuleHiddenLinkID = "HorizontalRule";
 
         [Header("Animation")]
-        [SerializeField, Tooltip("0 (スクロール開始位置) ～ 1 (スクロール目標位置)\n*初期値は 1 推奨*")] private float _normalizedLineOffset = 1f;
+
+        [Tooltip("0 (スクロール開始位置) ～ 1 (スクロール目標位置)\n*初期値は 1 推奨*")]
+        [SerializeField] private float _normalizedLineOffset = 1f;
         public float NormalizedLineOffset
         {
             get => _normalizedLineOffset;
             set => _normalizedLineOffset = value;
         }
-        [SerializeField, Tooltip("テキストが下端からはみ出したとき発行されるリンクID")] private string _hiddenLinkIDOnPageOver = "PageBreak";
+
+        [Tooltip("テキストが下端からはみ出したとき発行されるリンクID")]
+        [SerializeField] private string _hiddenLinkIDOnPageOver = "PageBreak";
         public string HiddenLinkIDOnPageOver
         {
             get => _hiddenLinkIDOnPageOver;
             set => _hiddenLinkIDOnPageOver = value;
         }
-        [SerializeField, Tooltip("テキストの終端に到達したとき発行されるリンクID")] private string _hiddenLinkIDOnEOF = "EOF";
+
+        [Tooltip("テキストの終端に到達したとき発行されるリンクID")]
+        [SerializeField] private string _hiddenLinkIDOnEOF = "EOF";
         public string HiddenLinkIDOnEOF
         {
             get => _hiddenLinkIDOnEOF;
@@ -44,7 +58,9 @@ namespace ListingMF
         }
 
         [Space]
-        [SerializeField, Tooltip("テキストを含まない<link>タグまで表示が到達したとき発火するイベント\n（上のプロパティから発行されるものも含む）")]
+
+        [Tooltip("テキストを含まない<link>タグまで表示が到達したとき発火するイベント\n（上のプロパティから発行されるものも含む）")]
+        [SerializeField]
         private ReachHiddenLinkEvent _onReachHiddenLink = null;
         public ReachHiddenLinkEvent OnReachHiddenLink => _onReachHiddenLink;
 

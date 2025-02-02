@@ -85,7 +85,7 @@ namespace Roguegard.Rgpacks
                         }
                     })
 
-                    .VariableOnce(out var nextMenu, new FloorMenu())
+                    .VarOnce(out var nextMenu, new FloorMenu())
                     .OnClickElement((element, manager, arg) =>
                     {
                         if (element is RogueObj dioramaFloorObj)
@@ -142,7 +142,7 @@ namespace Roguegard.Rgpacks
                                 })
                         })
 
-                    .AppendSelectOption(
+                    .Option(
                         "入る", (manager, arg) =>
                         {
                             var dioramaFloor = arg.Arg.TargetObj;

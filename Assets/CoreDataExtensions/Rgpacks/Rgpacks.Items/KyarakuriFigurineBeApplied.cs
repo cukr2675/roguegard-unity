@@ -50,7 +50,7 @@ namespace Roguegard.Rgpacks
                                 })
                         })
 
-                    .VariableOnce(out var nextMenu, new EditMenu())
+                    .VarOnce(out var nextMenu, new EditMenu())
                     .Append(SelectOption.Create<MMgr, MArg>(
                         "キャラクリ設定",
                         (manager, arg) =>
@@ -100,7 +100,7 @@ namespace Roguegard.Rgpacks
                     KyarakuriFigurineInfo.SetTo(figurine, builder);
                 }
 
-                manager.Back(2);
+                manager.PopMenuScreen(2);
             }
         }
     }

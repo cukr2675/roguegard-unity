@@ -72,10 +72,13 @@ namespace ListingMF
                 var deltaElasticity = 1f - _elasticity / Time.deltaTime;
                 var selectedTransform = (RectTransform)eventSystem.currentSelectedGameObject.transform;
                 var cursorTransform = (RectTransform)cursorInstance.transform;
-                cursorTransform.SetParent(selectedTransform.parent, true);
+                var relativeScale = (Vector2)selectedTransform.lossyScale;
+                relativeScale.x /= cursorTransform.lossyScale.x;
+                relativeScale.y /= cursorTransform.lossyScale.y;
+                cursorTransform.SetParent(transform, true);
                 cursorTransform.position = Vector3.Lerp(cursorTransform.position, selectedTransform.position, deltaElasticity);
-                cursorTransform.sizeDelta = Vector2.Lerp(cursorTransform.sizeDelta, selectedTransform.rect.size, deltaElasticity);
-                cursorTransform.localScale = selectedTransform.localScale;
+                cursorTransform.sizeDelta = Vector2.Lerp(cursorTransform.sizeDelta, selectedTransform.rect.size * relativeScale, deltaElasticity);
+                cursorTransform.localScale = _cursorPrefab.transform.localScale;
                 cursorInstance.alpha = hide ? 0f : 1f;
             }
             else

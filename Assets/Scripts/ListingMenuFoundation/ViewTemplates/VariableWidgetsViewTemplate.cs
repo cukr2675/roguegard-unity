@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace ListingMF
 {
+    /// <summary>
+    /// 項目数が可変のウィジェットメニュー向け ViewTemplate
+    /// </summary>
     public class VariableWidgetsViewTemplate<TMgr, TArg> : ListViewTemplate<object, TMgr, TArg>
         where TMgr : IListMenuManager
         where TArg : IListMenuArg

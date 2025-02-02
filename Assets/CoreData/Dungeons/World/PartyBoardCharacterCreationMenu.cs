@@ -57,7 +57,7 @@ namespace Roguegard
                 info.CharacterCreationData = builder;
             }
 
-            manager.Back(2);
+            manager.PopMenuScreen(2);
         }
     }
 }

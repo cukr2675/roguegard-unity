@@ -49,7 +49,7 @@ namespace Roguegard
                         else return item.GetName();
                     })
 
-                    .VariableOnce(out var nextScreen, new SewingScreen())
+                    .VarOnce(out var nextScreen, new SewingScreen())
                     .OnClickElement((item, manager, arg) =>
                     {
                         if (item == null)
@@ -168,19 +168,14 @@ namespace Roguegard
                     ?
                     .ElementNameFrom((element, manager, arg) =>
                     {
-                        if (element is ISelectOption selectOption) return selectOption.GetName(manager, arg);
-                        else if (element is PaintBoneSprite item) return item.Bone.Name;
+                        if (element is PaintBoneSprite item) return item.Bone.Name;
                         else return "+ 追加";
                     })
 
-                    .VariableOnce(out var nextScreen, new PaintBoneSpriteMenu())
+                    .VarOnce(out var nextScreen, new PaintBoneSpriteMenu())
                     .OnClickElement((element, manager, arg) =>
                     {
-                        if (element is ISelectOption selectOption)
-                        {
-                            selectOption.HandleClick(manager, arg);
-                        }
-                        else if (element is PaintBoneSprite boneSprite)
+                        if (element is PaintBoneSprite boneSprite)
                         {
                             // 部位編集
                             var data = (SewedEquipmentData)arg.Arg.Other;
@@ -221,8 +216,7 @@ namespace Roguegard
                     new SewedEquipmentInfoSet(data).CreateObj(arg.Self, Vector2Int.zero, RogueRandom.Primary);
                 }
 
-                manager.Back();
-                manager.Back();
+                manager.PopMenuScreen(2);
             }
         }
 
@@ -284,7 +278,7 @@ namespace Roguegard
                             }
                         }
 
-                        manager.Back();
+                        manager.PopMenuScreen();
                     })
 
                     .Build();

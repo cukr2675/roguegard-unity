@@ -55,7 +55,7 @@ namespace ListingMF
                 .Build();
         }
 
-        public override void CloseScreen(TMgr manager, bool back)
+        public override void CloseScreenView(TMgr manager, bool back)
         {
             view.HideTemplate(manager, back);
         }

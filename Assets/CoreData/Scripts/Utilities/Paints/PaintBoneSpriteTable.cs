@@ -24,7 +24,7 @@ namespace Roguegard
         }
 
         [Objforming.CreateInstance]
-        private PaintBoneSpriteTable(bool flag) { }
+        private PaintBoneSpriteTable(bool dummy) { }
 
         public PaintBoneSpriteTable(PaintBoneSpriteTable table)
         {

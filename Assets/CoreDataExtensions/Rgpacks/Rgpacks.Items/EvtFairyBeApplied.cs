@@ -119,7 +119,7 @@ namespace Roguegard.Rgpacks
                                 (manager, arg, value) => ((EvtFairyInfo.Page)arg.Arg.Other).Sprite = value)
                         })
                     .Append(SelectOption.Create<MMgr, MArg>("カテゴリ", new CategoryMenu()))
-                    .VariableOnce(out var cmnMenu, new PropertiedCmnMenu())
+                    .VarOnce(out var cmnMenu, new PropertiedCmnMenu())
                     .Append(SelectOption.Create<MMgr, MArg>(
                         "Cmn",
                         (manager, arg) => manager.PushMenuScreen(cmnMenu, arg.Self, other: ((EvtFairyInfo.Page)arg.Arg.Other).Cmn)))
@@ -149,7 +149,7 @@ namespace Roguegard.Rgpacks
                     {
                         var page = (EvtFairyInfo.Page)arg.Arg.Other;
                         page.Category = (EvtFairyCategory)category;
-                        manager.Back();
+                        manager.PopMenuScreen();
                     })
 
                     .Build();

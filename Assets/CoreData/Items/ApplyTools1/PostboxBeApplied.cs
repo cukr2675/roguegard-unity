@@ -47,7 +47,7 @@ namespace Roguegard
                     ?
                     .ElementNameFrom((post, manager, arg) => post.Name)
 
-                    .VariableOnce(out var nextScreen, new DetailsScreen())
+                    .VarOnce(out var nextScreen, new DetailsScreen())
                     .OnClickElement((post, manager, arg) => manager.PushMenuScreen(nextScreen, other: post))
 
                     .Build();

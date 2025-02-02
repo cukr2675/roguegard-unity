@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace ListingMF
 {
+    /// <summary>
+    /// 項目のスクロールが必要なメニュー向け ViewTemplate
+    /// </summary>
     public class ScrollViewTemplate<TElm, TMgr, TArg> : ListViewTemplate<TElm, TMgr, TArg>
         where TElm : class
         where TMgr : IListMenuManager
@@ -13,6 +16,16 @@ namespace ListingMF
         public string CaptionBoxSubViewName { get; set; } = StandardSubViewTable.CaptionBoxName;
         public string BackAnchorSubViewName { get; set; } = StandardSubViewTable.BackAnchorName;
         public List<ISelectOption> BackAnchorList { get; set; } = new() { BackSelectOption.Instance };
+
+        /// <summary>
+        /// このインスタンスのデリゲート実行前に <see cref="SelectOptionHandler"/> の処理を挟む
+        /// (リストの前後に <see cref="ISelectOption"/> を入れる場合を想定)
+        /// </summary>
+        public bool EnableSelectOptionProxy
+        {
+            get => scrollSubViewHandler.EnableSelectOptionProxy;
+            set => scrollSubViewHandler.EnableSelectOptionProxy = value;
+        }
 
         private object prevViewStateHolder;
         private IElementsSubViewStateProvider scrollSubViewStateProvider;

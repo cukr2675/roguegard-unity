@@ -187,7 +187,7 @@ namespace Roguegard.Rgpacks.MoonSharp
                 });
             }
 
-            public override void CloseScreen(MMgr manager, bool back)
+            public override void CloseScreenView(MMgr manager, bool back)
             {
                 manager.StandardSubViewTable.MessageBox.Hide(back);
             }
@@ -234,7 +234,7 @@ namespace Roguegard.Rgpacks.MoonSharp
                     .Build();
             }
 
-            public override void CloseScreen(MMgr manager, bool back)
+            public override void CloseScreenView(MMgr manager, bool back)
             {
                 if (!back) return;
 
@@ -259,7 +259,7 @@ namespace Roguegard.Rgpacks.MoonSharp
                 if (fadeInAction == null)
                 {
                     var actionManager = manager;
-                    fadeInAction = () => actionManager.Back();
+                    fadeInAction = () => actionManager.PopMenuScreen();
                 }
 
                 view.FadeOut(manager, arg)
@@ -279,7 +279,7 @@ namespace Roguegard.Rgpacks.MoonSharp
                     .Build();
             }
 
-            public override void CloseScreen(MMgr manager, bool back)
+            public override void CloseScreenView(MMgr manager, bool back)
             {
                 view.FadeIn(manager, back);
             }

@@ -48,7 +48,7 @@ namespace ListingMF
 
             // 表示更新
             _colorPicker.CurrentColor = color;
-            this.handleClose = onClose;
+            handleClose = onClose;
             SetArg(manager, arg);
             SetStatusCode(0);
 
