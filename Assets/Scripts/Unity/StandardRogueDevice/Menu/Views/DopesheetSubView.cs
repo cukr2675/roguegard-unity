@@ -271,13 +271,13 @@ namespace RoguegardUnity
             {
                 view.ShowTemplate(boneNames, manager, arg)
                     ?
-                    .ElementNameFrom((boneName, manager, arg) =>
+                    .NameFrom((boneName, manager, arg) =>
                     {
                         return boneName;
                     })
 
                     .VarOnce(out var referenceMenu, new ReferenceNameMenuScreen())
-                    .OnClickElement((boneName, manager, arg) =>
+                    .OnClick((boneName, manager, arg) =>
                     {
                         var editInfo = (MotionGrapherInfo)arg.Arg.Other;
                         if (boneName == "外部参照")

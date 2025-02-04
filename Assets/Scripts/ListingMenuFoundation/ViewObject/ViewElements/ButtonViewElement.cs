@@ -107,6 +107,7 @@ namespace ListingMF
                     // AnimationController のレイヤーの重みをスタイル名で変更する
                     if (!styleItem.Contains(":".AsSpan(), StringComparison.CurrentCulture) && animator != null)
                     {
+                        var any = false;
                         for (int j = 0; j < animator.layerCount; j++)
                         {
                             if (EqualsIgnoreWhiteSpace(animator.GetLayerName(j), styleItem))
@@ -114,7 +115,14 @@ namespace ListingMF
                                 // スタイル名と一致するレイヤーの重みを更新する
                                 var weight = apply ? 1f : 0f;
                                 animator.SetLayerWeight(j, weight);
+                                any = true;
                             }
+                        }
+
+                        if (apply && !any)
+                        {
+                            // レイヤーが見つからなければ警告
+                            Debug.LogWarning($"レイヤー {new string(styleItem)} が見つかりませんでした。存在するレイヤー: {string.Join(", ", GetLayerNames(animator))}");
                         }
                     }
 
@@ -143,6 +151,14 @@ namespace ListingMF
                 styleIndex++;
             }
             return true;
+        }
+
+        private static IEnumerable<string> GetLayerNames(Animator animator)
+        {
+            for (int i = 0; i < animator.layerCount; i++)
+            {
+                yield return animator.GetLayerName(i);
+            }
         }
 
         private void OnDestroy()

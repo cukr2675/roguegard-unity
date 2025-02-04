@@ -66,7 +66,7 @@ namespace RoguegardUnity
             }
 
             var index = 0;
-            while (text[index] == '<')
+            while (index < text.Length && text[index] == '<')
             {
                 var closeIndex = text.IndexOf('>', index);
                 if (closeIndex == -1) break;
@@ -74,7 +74,7 @@ namespace RoguegardUnity
                 index = closeIndex + 1;
             }
 
-            if (text[index] == ':')
+            if (index < text.Length && text[index] == ':')
             {
                 var head = text.Substring(0, index);
                 text = text.Substring(index + 1);

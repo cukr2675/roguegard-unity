@@ -174,9 +174,9 @@ namespace Roguegard
 
                 view.ShowTemplate(elms, manager, arg)
                     ?
-                    .ElementNameFrom((boneName, manager, arg) => boneName)
+                    .NameFrom((boneName, manager, arg) => boneName)
 
-                    .OnClickElement((boneName, manager, arg) =>
+                    .OnClick((boneName, manager, arg) =>
                     {
                         var table = (PaintBoneSpriteTable)arg.Arg.Other;
                         var itemIndex = arg.Arg.Count;

@@ -73,7 +73,7 @@ namespace Roguegard.Rgpacks
                                 })
                         })
 
-                    .ElementNameFrom((element, manager, arg) =>
+                    .NameFrom((element, manager, arg) =>
                     {
                         if (element is RogueObj dioramaFloorObj)
                         {
@@ -86,7 +86,7 @@ namespace Roguegard.Rgpacks
                     })
 
                     .VarOnce(out var nextMenu, new FloorMenu())
-                    .OnClickElement((element, manager, arg) =>
+                    .OnClick((element, manager, arg) =>
                     {
                         if (element is RogueObj dioramaFloorObj)
                         {

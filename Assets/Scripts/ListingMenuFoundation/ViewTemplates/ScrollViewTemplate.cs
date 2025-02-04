@@ -88,7 +88,7 @@ namespace ListingMF
             if (BackAnchorSubViewName != null) { manager.GetSubView(BackAnchorSubViewName).Hide(back); }
         }
 
-        public class Builder : BaseListBuilder<Builder>
+        public class Builder : BaseListBuilder<Builder>, IButtonElementHandlerBuilder<TElm, TMgr, TArg, Builder>
         {
             private readonly ScrollViewTemplate<TElm, TMgr, TArg> parent;
 
@@ -98,19 +98,31 @@ namespace ListingMF
                 this.parent = parent;
             }
 
-            public Builder ElementNameFrom(GetElementName<TElm, TMgr, TArg> method)
+            public Builder NameFrom(GetElementName<TElm, TMgr, TArg> nameFrom)
             {
                 AssertNotBuilded();
 
-                parent.scrollSubViewHandler.GetName = method;
+                if (parent.scrollSubViewHandler.GetName != null) { Debug.LogWarning($"{nameof(NameFrom)} が多重購読されました。"); }
+
+                parent.scrollSubViewHandler.GetName += nameFrom;
                 return this;
             }
 
-            public Builder OnClickElement(HandleClickElement<TElm, TMgr, TArg> method)
+            public Builder StyleFrom(GetElementStyle<TElm, TMgr, TArg> styleFrom)
             {
                 AssertNotBuilded();
 
-                parent.scrollSubViewHandler.HandleClick = method;
+                if (parent.scrollSubViewHandler.GetStyle != null) { Debug.LogWarning($"{nameof(StyleFrom)} が多重購読されました。"); }
+
+                parent.scrollSubViewHandler.GetStyle += styleFrom;
+                return this;
+            }
+
+            public Builder OnClick(HandleClickElement<TElm, TMgr, TArg> onClick)
+            {
+                AssertNotBuilded();
+
+                parent.scrollSubViewHandler.HandleClick += onClick;
                 return this;
             }
         }

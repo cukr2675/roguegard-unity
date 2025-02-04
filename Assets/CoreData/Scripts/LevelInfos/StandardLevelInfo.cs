@@ -171,7 +171,7 @@ namespace Roguegard
 
             public override void OpenScreen(in MMgr manager, in MArg arg)
             {
-                view.ShowTemplate($"{arg.Self.GetName()}はレベルが上がった！{{v}}\n{message}", manager, arg)
+                view.ShowTemplate($"{arg.Self.GetName()}はレベルが上がった！{{v}}{message}", manager, arg)
                     ?
                     .OnCompleted((manager, arg) => manager.Done())
 

@@ -58,12 +58,12 @@ namespace Roguegard
 
                 view.ShowTemplate(elms, manager, arg)
                     ?
-                    .ElementNameFrom((quest, manager, arg) =>
+                    .NameFrom((quest, manager, arg) =>
                     {
                         return quest.Caption;
                     })
 
-                    .OnClickElement((quest, manager, arg) =>
+                    .OnClick((quest, manager, arg) =>
                     {
                         manager.PushMenuScreen(nextMenu, arg.Self, other: quest);
                     })

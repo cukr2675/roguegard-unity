@@ -43,14 +43,14 @@ namespace Roguegard
 
                 view.ShowTemplate(elms, manager, arg)
                     ?
-                    .ElementNameFrom((item, manager, arg) =>
+                    .NameFrom((item, manager, arg) =>
                     {
                         if (item == null) return "+ 新しく作る";
                         else return item.GetName();
                     })
 
                     .VarOnce(out var nextScreen, new SewingScreen())
-                    .OnClickElement((item, manager, arg) =>
+                    .OnClick((item, manager, arg) =>
                     {
                         if (item == null)
                         {
@@ -166,14 +166,14 @@ namespace Roguegard
 
                 view.ShowTemplate(elms, manager, arg)
                     ?
-                    .ElementNameFrom((element, manager, arg) =>
+                    .NameFrom((element, manager, arg) =>
                     {
                         if (element is PaintBoneSprite item) return item.Bone.Name;
                         else return "+ 追加";
                     })
 
                     .VarOnce(out var nextScreen, new PaintBoneSpriteMenu())
-                    .OnClickElement((element, manager, arg) =>
+                    .OnClick((element, manager, arg) =>
                     {
                         if (element is PaintBoneSprite boneSprite)
                         {
@@ -255,13 +255,13 @@ namespace Roguegard
 
                 view.ShowTemplate(elms, manager, arg)
                     ?
-                    .ElementNameFrom((part, manager, arg) =>
+                    .NameFrom((part, manager, arg) =>
                     {
                         if (part == null) return "その他";
                         return part.Name;
                     })
 
-                    .OnClickElement((part, manager, arg) =>
+                    .OnClick((part, manager, arg) =>
                     {
                         var data = (SewedEquipmentData)arg.Arg.Other;
                         if (part == null)

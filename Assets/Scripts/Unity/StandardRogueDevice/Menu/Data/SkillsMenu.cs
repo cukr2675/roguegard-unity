@@ -41,7 +41,7 @@ namespace RoguegardUnity
 
                 view.ShowTemplate(list, manager, arg)
                     ?
-                    .ElementInfoFrom((skill, manager, arg) =>
+                    .InfoFrom((skill, manager, arg) =>
                     {
                         var obj = arg.Arg.TargetObj ?? arg.Self;
 
@@ -49,7 +49,7 @@ namespace RoguegardUnity
                         return (skill, null, $"{requiredMP} MP");
                     })
 
-                    .OnClickElement((skill, manager, arg) =>
+                    .OnClick((skill, manager, arg) =>
                     {
                         // 選択したスキルの情報と選択肢を表示する
                         manager.PushMenuScreen(menu, arg.Self, other: skill);

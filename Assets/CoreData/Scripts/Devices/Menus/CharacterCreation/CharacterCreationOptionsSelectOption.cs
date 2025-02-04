@@ -91,7 +91,7 @@ namespace Roguegard.Device
 
                 view.ShowTemplate(elms, manager, arg, builder?.GetType())
                     ?
-                    .ElementNameFrom((element, manager, arg) =>
+                    .NameFrom((element, manager, arg) =>
                     {
                         if (element is IRogueDescription description)
                         {
@@ -105,7 +105,7 @@ namespace Roguegard.Device
                         return null;
                     })
 
-                    .OnClickElement((element, manager, arg) =>
+                    .OnClick((element, manager, arg) =>
                     {
                         if (arg.Arg.Other is RaceBuilder raceBuilder)
                         {

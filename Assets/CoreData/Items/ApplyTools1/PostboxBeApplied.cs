@@ -45,10 +45,10 @@ namespace Roguegard
 
                 view.ShowTemplate(posts, manager, arg)
                     ?
-                    .ElementNameFrom((post, manager, arg) => post.Name)
+                    .NameFrom((post, manager, arg) => post.Name)
 
                     .VarOnce(out var nextScreen, new DetailsScreen())
-                    .OnClickElement((post, manager, arg) => manager.PushMenuScreen(nextScreen, other: post))
+                    .OnClick((post, manager, arg) => manager.PushMenuScreen(nextScreen, other: post))
 
                     .Build();
             }

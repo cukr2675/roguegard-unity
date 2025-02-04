@@ -64,15 +64,7 @@ namespace ListingMF
                 return (TOut)this;
             }
 
-            public TOut If(bool condition, System.Action<TOut> action)
-            {
-                if (action == null) throw new System.ArgumentNullException(nameof(action));
-
-                if (condition) { action((TOut)this); }
-                return (TOut)this;
-            }
-
-            public TOut DoOnce(System.Action action)
+            public TOut Init(System.Action action)
             {
                 if (action == null) throw new System.ArgumentNullException(nameof(action));
 
@@ -80,7 +72,15 @@ namespace ListingMF
                 return (TOut)this;
             }
 
-            public TOut DoOnce<T1>(System.Func<T1> func, out T1 result)
+            public TOut InitIf(bool condition, System.Action<TOut> action)
+            {
+                if (action == null) throw new System.ArgumentNullException(nameof(action));
+
+                if (condition) { action((TOut)this); }
+                return (TOut)this;
+            }
+
+            internal TOut DoOnce<T1>(System.Func<T1> func, out T1 result)
             {
                 if (func == null) throw new System.ArgumentNullException(nameof(func));
 
@@ -88,19 +88,19 @@ namespace ListingMF
                 return (TOut)this;
             }
 
-            public TOut DoOnce<T1, T2>(System.Func<(T1, T2)> func, out T1 result1, out T2 result2)
+            internal TOut DoOnce<T1, T2>(System.Func<(T1, T2)> func, out T1 result1, out T2 result2)
             {
                 (result1, result2) = func?.Invoke() ?? throw new System.ArgumentNullException(nameof(func));
                 return (TOut)this;
             }
 
-            public TOut DoOnce<T1, T2, T3>(System.Func<(T1, T2, T3)> func, out T1 result1, out T2 result2, out T3 result3)
+            internal TOut DoOnce<T1, T2, T3>(System.Func<(T1, T2, T3)> func, out T1 result1, out T2 result2, out T3 result3)
             {
                 (result1, result2, result3) = func?.Invoke() ?? throw new System.ArgumentNullException(nameof(func));
                 return (TOut)this;
             }
 
-            public TOut DoOnce<T1, T2, T3, T4>(System.Func<(T1, T2, T3, T4)> func, out T1 result1, out T2 result2, out T3 result3, out T4 result4)
+            internal TOut DoOnce<T1, T2, T3, T4>(System.Func<(T1, T2, T3, T4)> func, out T1 result1, out T2 result2, out T3 result3, out T4 result4)
             {
                 (result1, result2, result3, result4) = func?.Invoke() ?? throw new System.ArgumentNullException(nameof(func));
                 return (TOut)this;

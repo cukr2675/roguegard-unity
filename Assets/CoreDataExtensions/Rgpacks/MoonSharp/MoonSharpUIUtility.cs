@@ -210,7 +210,7 @@ namespace Roguegard.Rgpacks.MoonSharp
             {
                 view.ShowTemplate(selectOptions, manager, arg)
                     ?
-                    .OnClickElement((selectOption, manager, arg) =>
+                    .OnClick((selectOption, manager, arg) =>
                     {
                         manager.Done();
                         manager.StandardSubViewTable.SpeechBox.MessageBox.Clear();

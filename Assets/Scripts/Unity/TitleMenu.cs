@@ -273,12 +273,12 @@ namespace RoguegardUnity
                     ?
                     .VarOnce(out var nextScreen, new CreditDetailsScreen())
 
-                    .ElementNameFrom((credit, manager, arg) =>
+                    .NameFrom((credit, manager, arg) =>
                     {
                         return credit.Name;
                     })
 
-                    .OnClickElement((credit, manager, arg) =>
+                    .OnClick((credit, manager, arg) =>
                     {
                         manager.PushMenuScreen(nextScreen, other: credit);
                         //parent._creditMenu.Show(credit, manager);

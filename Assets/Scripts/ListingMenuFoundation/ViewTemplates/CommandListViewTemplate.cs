@@ -84,7 +84,7 @@ namespace ListingMF
             if (BackAnchorSubViewName != null) { manager.GetSubView(BackAnchorSubViewName).Hide(back); }
         }
 
-        public class Builder : BaseBuilder<Builder>
+        public class Builder : BaseBuilder<Builder>, IButtonElementHandlerBuilder<TElm, TMgr, TArg, Builder>
         {
             private readonly CommandListViewTemplate<TElm, TMgr, TArg> parent;
 
@@ -94,19 +94,31 @@ namespace ListingMF
                 this.parent = parent;
             }
 
-            public Builder ElementNameFrom(GetElementName<TElm, TMgr, TArg> method)
+            public Builder NameFrom(GetElementName<TElm, TMgr, TArg> nameFrom)
             {
                 AssertNotBuilded();
 
-                parent.secodaryCommandSubViewHandler.GetName = method;
+                if (parent.secodaryCommandSubViewHandler.GetName != null) { Debug.LogWarning($"{nameof(NameFrom)} が多重購読されました。"); }
+
+                parent.secodaryCommandSubViewHandler.GetName += nameFrom;
                 return this;
             }
 
-            public Builder OnClickElement(HandleClickElement<TElm, TMgr, TArg> method)
+            public Builder StyleFrom(GetElementStyle<TElm, TMgr, TArg> styleFrom)
             {
                 AssertNotBuilded();
 
-                parent.secodaryCommandSubViewHandler.HandleClick = method;
+                if (parent.secodaryCommandSubViewHandler.GetStyle != null) { Debug.LogWarning($"{nameof(StyleFrom)} が多重購読されました。"); }
+
+                parent.secodaryCommandSubViewHandler.GetStyle += styleFrom;
+                return this;
+            }
+
+            public Builder OnClick(HandleClickElement<TElm, TMgr, TArg> onClick)
+            {
+                AssertNotBuilded();
+
+                parent.secodaryCommandSubViewHandler.HandleClick += onClick;
                 return this;
             }
         }

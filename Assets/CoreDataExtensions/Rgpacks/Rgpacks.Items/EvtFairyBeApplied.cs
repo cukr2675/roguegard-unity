@@ -144,8 +144,8 @@ namespace Roguegard.Rgpacks
             {
                 view.ShowTemplate(elms, manager, arg)
                     ?
-                    .ElementNameFrom((category, manager, arg) => category.ToString())
-                    .OnClickElement((category, manager, arg) =>
+                    .NameFrom((category, manager, arg) => category.ToString())
+                    .OnClick((category, manager, arg) =>
                     {
                         var page = (EvtFairyInfo.Page)arg.Arg.Other;
                         page.Category = (EvtFairyCategory)category;

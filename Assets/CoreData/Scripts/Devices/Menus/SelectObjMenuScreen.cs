@@ -30,12 +30,12 @@ namespace Roguegard.Device
 
             view.ShowTemplate(list, manager, arg)
                 ?
-                .ElementNameFrom((obj, manager, arg) =>
+                .NameFrom((obj, manager, arg) =>
                 {
                     return obj.GetName();
                 })
 
-                .OnClickElement((obj, manager, arg) =>
+                .OnClick((obj, manager, arg) =>
                 {
                     var device = RogueDeviceEffect.Get(arg.Self);
                     var callbackArg = new RogueMethodArgument(tool: obj);

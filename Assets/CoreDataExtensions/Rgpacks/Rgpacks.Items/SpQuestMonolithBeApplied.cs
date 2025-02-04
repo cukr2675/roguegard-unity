@@ -83,12 +83,12 @@ namespace Roguegard.Rgpacks
 
                 view.ShowTemplate(list, manager, arg)
                     ?
-                    .ElementNameFrom((item, manager, arg) =>
+                    .NameFrom((item, manager, arg) =>
                     {
                         return item.Name;
                     })
 
-                    .OnClickElement((item, manager, arg) =>
+                    .OnClick((item, manager, arg) =>
                     {
                         manager.AddObject(DeviceKw.AppendText, item);
                         manager.AddObject(DeviceKw.AppendText, "を手に入れた\n");

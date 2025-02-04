@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using System.Text.RegularExpressions;
+
 namespace ListingMF
 {
     /// <summary>
@@ -16,6 +18,7 @@ namespace ListingMF
         public string CaptionBoxSubViewName { get; set; } = StandardSubViewTable.CaptionBoxName;
         public List<StringReplacer> MessageReplacers { get; set; } = new List<StringReplacer>()
         {
+            new("{v}$", "<link=\"VerticalArrow\"></link>"),
             new("{v}", "<link=\"VerticalArrow\"></link><link=\"PageBreak\"></link>"),
             new("{>}", "<link=\"HorizontalArrow\"></link>"),
         };
@@ -45,7 +48,7 @@ namespace ListingMF
             // 文字送り矢印などを処理する
             foreach (var replacer in MessageReplacers)
             {
-                message = replacer.Replace(message);
+                message = Regex.Replace(message, replacer.From, replacer.To, RegexOptions.IgnoreCase);
             }
 
             // メッセージボックスのビューを表示

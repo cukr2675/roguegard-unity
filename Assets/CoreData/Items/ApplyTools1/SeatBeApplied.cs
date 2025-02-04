@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using ListingMF;
+using ListingMF.R3;
 using Roguegard.Device;
 
 namespace Roguegard
@@ -60,21 +61,17 @@ namespace Roguegard
 
                 view.ShowTemplate(objs, manager, arg)
                     ?
-                    .ElementNameFrom((lobbyMember, manager, arg) =>
-                    {
-                        if (lobbyMember.Location == null)
-                        {
-                            return lobbyMember.GetName();
-                        }
-                        else
-                        {
-                            return "<#808080>" + lobbyMember.GetName();
-                        }
-                    })
+                    .R3(out var r3)
 
-                    .OnClickElement((lobbyMember, manager, arg) =>
-                    {
-                        if (lobbyMember.Location == null)
+                    .Init(
+                        () => r3
+                        .WithoutHandle()
+                        .NameFrom((lobbyMember, manager, arg) => lobbyMember.GetName()))
+
+                    .Init(
+                        () => r3
+                        .WhereElm(lo => lo.Location == null)
+                        .OnClick((lobbyMember, manager, arg) =>
                         {
                             manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
                             manager.Done();
@@ -97,12 +94,12 @@ namespace Roguegard
                             info.SavePoint = RogueWorldSavePointInfo.Instance;
                             var mainParty = RogueDevice.Primary.Player.Main.Stats.Party;
                             lobbyMember.Main.Stats.TryAssignParty(lobbyMember, new RogueParty(mainParty.Faction, mainParty.TargetFactions));
-                        }
-                        else
-                        {
-                            manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Cancel);
-                        }
-                    })
+                        }))
+
+                    .Init(
+                        () => r3
+                        .NotHandled()
+                        .StyleFrom("Disabled"))
 
                     .Build();
             }

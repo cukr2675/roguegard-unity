@@ -36,7 +36,7 @@ namespace ListingMF
 
         public void Bind(ReadOnlySpan<char> style, Action<InputAction.CallbackContext> performed)
         {
-            if (TryGetAction(style, out var action)) return;
+            if (!TryGetAction(style, out var action)) return;
 
             action.performed += performed;
             action.Enable();
@@ -44,7 +44,7 @@ namespace ListingMF
 
         public void Unbind(ReadOnlySpan<char> style, Action<InputAction.CallbackContext> performed)
         {
-            if (TryGetAction(style, out var action)) return;
+            if (!TryGetAction(style, out var action)) return;
 
             action.performed -= performed;
             //action.Disable(); // バインディングされているアクションが一つとは限らないため無効化しない
@@ -56,7 +56,7 @@ namespace ListingMF
             [SerializeField] private string _style;
             public ReadOnlySpan<char> Style => MemoryExtensions.AsSpan(_style);
 
-            [SerializeField] private InputAction _action;
+            [SerializeField] private InputActionReference _action;
             public InputAction Action => _action;
         }
     }

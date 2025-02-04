@@ -80,14 +80,14 @@ namespace RoguegardUnity
                 ?
                 .VarOnce(out var newArg, new MArg.Builder())
 
-                .If(
+                .InitIf(
                     onNewFile != null, x => x
                     
                     .InsertNext(SelectOption.Create(":+ New File", onNewFile))
                     
                     )
 
-                .ElementInfoFrom((element, manager, arg) =>
+                .InfoFrom((element, manager, arg) =>
                 {
                     if (element is FileInfo fileInfo)
                     {
@@ -107,7 +107,7 @@ namespace RoguegardUnity
                     }
                 })
 
-                .OnClickElement((element, manager, arg) =>
+                .OnClick((element, manager, arg) =>
                 {
                     if (element is FileInfo fileInfo)
                     {

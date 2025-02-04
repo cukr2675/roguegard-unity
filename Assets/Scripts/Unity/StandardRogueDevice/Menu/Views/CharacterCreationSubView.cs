@@ -256,12 +256,12 @@ namespace RoguegardUnity
 
                 view.ShowTemplate(presets, manager, arg)
                     ?
-                    .ElementNameFrom((preset, manager, arg) =>
+                    .NameFrom((preset, manager, arg) =>
                     {
                         return preset.ShortName;
                     })
 
-                    .OnClickElement((preset, manager, arg) =>
+                    .OnClick((preset, manager, arg) =>
                     {
                         element = preset;
                         manager.PushMenuScreen(nextMenu, other: (CharacterCreationDataBuilder)arg.Arg.Other);

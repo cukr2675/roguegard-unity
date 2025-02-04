@@ -321,12 +321,12 @@ namespace Roguegard.Device
 
                 view.ShowTemplate(list, manager, arg)
                     ?
-                    .ElementNameFrom((gender, manager, arg) =>
+                    .NameFrom((gender, manager, arg) =>
                     {
                         return gender.Name;
                     })
 
-                    .OnClickElement((gender, manager, arg) =>
+                    .OnClick((gender, manager, arg) =>
                     {
                         builder.Gender = gender;
                         manager.PopMenuScreen();

@@ -27,7 +27,7 @@ namespace ListingMF
         public bool IsDone { get; private set; }
 
         public virtual ISelectOption BackOption { get; protected set; }
-            = SelectOption.Create<TMgr, TArg>("Back", (manager, arg) => manager.PopMenuScreen(), "Cancel");
+            = SelectOption.Create<TMgr, TArg>("Back", (manager, arg) => manager.PopMenuScreen(), "Cancel click:Cancel");
 
         public virtual ISelectOption ErrorOption { get; protected set; }
             = SelectOption.Create<IListMenuManager, IListMenuArg>("<#F00>ERROR", delegate { }, "Cancel");
@@ -70,7 +70,7 @@ namespace ListingMF
             }
         }
 
-        public virtual string Localize(string text) => text.Normalize(System.Text.NormalizationForm.FormC); // TextMeshPro のために NFD を NFC に正規化する
+        public virtual string Localize(string text) => text?.Normalize(System.Text.NormalizationForm.FormC); // TextMeshPro のために NFD を NFC に正規化する
 
         public virtual T Localize<T>(T obj) => obj;
 

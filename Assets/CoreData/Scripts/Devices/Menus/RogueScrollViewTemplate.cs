@@ -93,7 +93,7 @@ namespace Roguegard.Device
                 this.parent = parent;
             }
 
-            public Builder ElementInfoFrom(GetInfo method)
+            public Builder InfoFrom(GetInfo method)
             {
                 AssertNotBuilded();
 
@@ -105,7 +105,7 @@ namespace Roguegard.Device
                 return this;
             }
 
-            public Builder ElementInfoFrom(GetInfo<string, string> method)
+            public Builder InfoFrom(GetInfo<string, string> method)
             {
                 AssertNotBuilded();
 
@@ -117,7 +117,7 @@ namespace Roguegard.Device
                 return this;
             }
 
-            public Builder ElementInfoFrom(GetInfo<Sprite, Color, int?, float?, string, string, bool> method)
+            public Builder InfoFrom(GetInfo<Sprite, Color, int?, float?, string, string, bool> method)
             {
                 AssertNotBuilded();
 
@@ -129,7 +129,7 @@ namespace Roguegard.Device
                 return this;
             }
 
-            public Builder OnClickElement(HandleClickElement<T, MMgr, MArg> method)
+            public Builder OnClick(HandleClickElement<T, MMgr, MArg> method)
             {
                 AssertNotBuilded();
 

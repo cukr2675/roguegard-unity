@@ -39,9 +39,9 @@ namespace Roguegard.Device
 
             view.ShowTemplate(elms, manager, arg)
                 ?
-                .ElementNameFrom((element, manager, arg) => ((IRogueDescription)element).Name)
+                .NameFrom((element, manager, arg) => ((IRogueDescription)element).Name)
 
-                .OnClickElement((element, manager, arg) =>
+                .OnClick((element, manager, arg) =>
                 {
                     var builderType = (System.Type)arg.Arg.Other;
                     if (builderType == typeof(AppearanceBuilder))

@@ -73,7 +73,7 @@ namespace RoguegardUnity
 
                 view.ShowTemplate(list, manager, arg, viewStateHolder)
                     ?
-                    .ElementInfoFrom((obj, manager, arg) =>
+                    .InfoFrom((obj, manager, arg) =>
                     {
                         var icon = obj.Main.InfoSet.Icon;
                         var color = RogueColorUtility.GetColor(obj);
@@ -89,7 +89,7 @@ namespace RoguegardUnity
                         return (obj, icon, color, stack, null, null, weightText, equipeed);
                     })
 
-                    .OnClickElement((obj, manager, arg) =>
+                    .OnClick((obj, manager, arg) =>
                     {
                         // 選択したアイテムの情報と選択肢を表示する
                         manager.PushMenuScreen(commandMenu, arg.Self, null, targetObj: arg.Arg.TargetObj, tool: obj);

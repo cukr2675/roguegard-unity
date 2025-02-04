@@ -49,7 +49,7 @@ namespace RoguegardUnity
         internal void Initialize(
             SoundController soundController, RogueSpriteRendererPool rendererPool, bool touchMaskIsEnabled = true)
         {
-            BackOption = SelectOption.Create<MMgr, MArg>("<", (manager, arg) => manager.PopMenuScreen(), "Cancel");
+            BackOption = SelectOption.Create<MMgr, MArg>("<", (manager, arg) => manager.PopMenuScreen(), "Cancel click:Cancel");
 
             Initialize();
             var objCommandMenu = new ObjCommandMenu();

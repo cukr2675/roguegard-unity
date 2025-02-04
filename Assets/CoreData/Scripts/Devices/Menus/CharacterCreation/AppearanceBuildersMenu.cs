@@ -67,7 +67,7 @@ namespace Roguegard.Device
 
             view.ShowTemplate(elms, manager, arg)
                 ?
-                .ElementNameFrom((element, manager, arg) =>
+                .NameFrom((element, manager, arg) =>
                 {
                     if (element is AppearanceBuilder builder)
                     {
@@ -79,7 +79,7 @@ namespace Roguegard.Device
                     }
                 })
 
-                .OnClickElement((element, manager, arg) =>
+                .OnClick((element, manager, arg) =>
                 {
                     if (element is AppearanceBuilder builder)
                     {

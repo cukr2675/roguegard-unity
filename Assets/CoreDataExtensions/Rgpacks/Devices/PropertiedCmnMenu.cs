@@ -129,13 +129,13 @@ namespace Roguegard.Device
                         "+ アイテムを追加",
                         (manager, arg) => manager.PushMenuScreen(characterCreationAddMenu, other: typeof(StartingItemBuilder))))
 
-                    .ElementNameFrom((element, manager, arg) =>
+                    .NameFrom((element, manager, arg) =>
                     {
                         if (element is StartingItemBuilder startingItemBuilder) return startingItemBuilder.Name;
                         else throw new RogueException();
                     })
 
-                    .OnClickElement((element, manager, arg) =>
+                    .OnClick((element, manager, arg) =>
                     {
                         if (element is StartingItemBuilder startingItemBuilder) { manager.PushMenuScreen(characterCreationOptionMenu, other: startingItemBuilder); }
                         else throw new RogueException();

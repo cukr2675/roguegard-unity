@@ -34,7 +34,7 @@ namespace RoguegardUnity
             }
 
             view.ShowTemplate(partyMembers, manager, arg)
-                ?.OnClickElement((partyMember, manager, arg) =>
+                ?.OnClick((partyMember, manager, arg) =>
                 {
                     // 選択したパーティメンバーの情報と選択肢を表示する
                     manager.PushMenuScreen(memberMenu, arg.Self, targetObj: partyMember);

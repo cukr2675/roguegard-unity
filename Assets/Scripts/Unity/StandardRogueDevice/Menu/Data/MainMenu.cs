@@ -220,13 +220,13 @@ namespace RoguegardUnity
 
                     view.ShowTemplate(elms, manager, arg)
                         ?
-                        .ElementNameFrom((element, manager, arg) =>
+                        .NameFrom((element, manager, arg) =>
                         {
                             var index = elms.IndexOf(element);
                             return WindowFrameList.GetName(index);
                         })
 
-                        .OnClickElement((element, manager, arg) =>
+                        .OnClick((element, manager, arg) =>
                         {
                             var index = elms.IndexOf(element);
                             var device = (StandardRogueDevice)RogueDevice.Primary;

@@ -16,7 +16,6 @@ namespace ListingMF
         private ElementsSubViewBase _parent;
         private Animator animator;
 
-        public override string WidgetName => widgetOption.Name;
         protected override ElementsSubViewBase Parent => _parent;
 
         public delegate float GetProgress<TMgr, TArg>(TMgr manager, TArg arg);
@@ -55,15 +54,12 @@ namespace ListingMF
         {
             return new WidgetOption<TMgr, TArg>()
             {
-                Name = name ?? EmitIdentity("ProgressBarViewWidget"),
                 GetProgress = getProgress
             };
         }
 
         public interface IWidgetOption
         {
-            string Name { get; }
-
             float GetProgress(IListMenuManager manager, IListMenuArg arg);
         }
 

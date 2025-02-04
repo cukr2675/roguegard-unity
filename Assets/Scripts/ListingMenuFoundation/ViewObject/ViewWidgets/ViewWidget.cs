@@ -17,7 +17,11 @@ namespace ListingMF
 
         protected internal bool IsBlocked { get; private set; }
 
+        /// <summary>
+        /// このウィジェットが Selectable であればオーバーライドする
+        /// </summary>
         public virtual string WidgetName => null;
+
         protected virtual ElementsSubViewBase Parent => null;
 
         private static int widgetIdentity = 0;

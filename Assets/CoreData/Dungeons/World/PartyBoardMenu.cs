@@ -37,7 +37,7 @@ namespace Roguegard
             view.ShowTemplate(elms, manager, arg)
                 ?
                 
-                .ElementNameFrom((obj, manager, arg) =>
+                .NameFrom((obj, manager, arg) =>
                 {
                     if (obj == null)
                     {
@@ -53,7 +53,7 @@ namespace Roguegard
                 })
 
                 .VarOnce(out ChoicesMenuScreen callLobbyDialog)
-                .OnClickElement((obj, manager, arg) =>
+                .OnClick((obj, manager, arg) =>
                 {
                     if (obj == null)
                     {

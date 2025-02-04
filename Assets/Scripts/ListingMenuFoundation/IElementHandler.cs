@@ -12,10 +12,17 @@ namespace ListingMF
     {
         string GetName(object element, IListMenuManager manager, IListMenuArg arg);
 
+        // 右クリックなど種類が増えるとメソッド一つでは足りない
+        // メソッドが増えると実装が面倒
+        // 戻るボタンは常に esc キーをバインドするのであれば Style と統合したほうがスムーズ
+        //InputAction GetKeyBind(object element, IListMenuManager manager, IListMenuArg arg);
+
         // Roguegard の実装を見ると、アイコン以外の情報も同時に返すほうが効率的なため使用していない
+        // 使用するとしてもキーバインドと同じように Style でキーワードを渡すべき？
         // GetName はデバッグにも使用できるが GetIcon は不向き
         //Sprite GetIcon(object element, IListMenuManager manager, IListMenuArg arg);
 
+        // Name と Style はラベルをはじめとしたほとんどのコントロールで使うため実装する
         string GetStyle(object element, IListMenuManager manager, IListMenuArg arg);
     }
 }

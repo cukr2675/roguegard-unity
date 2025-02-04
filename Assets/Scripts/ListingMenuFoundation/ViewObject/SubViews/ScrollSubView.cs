@@ -94,10 +94,11 @@ namespace ListingMF
         {
             // ScrollRect の縦幅を埋められる ViewElement の数に変更
             var scrollRectHeight = _scrollRect.viewport.rect.height;
-            AdjustViewElements(Mathf.CeilToInt(scrollRectHeight / itemHeight) + 2);
+            AdjustViewElements(Mathf.CeilToInt(scrollRectHeight / itemHeight) + 2); // カーソルスクロール用に上下にはみ出る要素を1つずつ追加
 
             // 最後の要素が一番上までスクロールできるスライダーサイズに変更
             var contentHeight = scrollRectHeight + itemHeight * (list.Count - 1);
+            if (CursorImageSystem.ShowCursor) { contentHeight = itemHeight * list.Count; } // カーソルスクロール中はスクロールバーが余ると変なので要素数と合わせる
             _scrollRect.content.sizeDelta = new Vector2(_scrollRect.content.sizeDelta.x, contentHeight);
 
             marginHeight = contentHeight - scrollRectHeight;
@@ -191,11 +192,9 @@ namespace ListingMF
                 var targetPosition = Mathf.Max(-selectedElementTop, 0f);
                 VerticalAbsolutePosition = Mathf.Lerp(VerticalAbsolutePosition, targetPosition, _elasticityToCursor);
             }
-            else if (selectedElementBottom < verticalAbsoluteBottom)  // 下にはみ出ているとき
+            else if (selectedElementBottom < verticalAbsoluteBottom) // 下にはみ出ているとき
             {
-                var targetPosition = Mathf.Min(
-                    -selectedElementBottom - _scrollRect.viewport.rect.height,
-                    marginHeight - _scrollRect.viewport.rect.height + itemHeight);
+                var targetPosition = Mathf.Min(-selectedElementBottom - _scrollRect.viewport.rect.height, marginHeight);
                 VerticalAbsolutePosition = Mathf.Lerp(VerticalAbsolutePosition, targetPosition, _elasticityToCursor);
             }
         }
