@@ -143,7 +143,12 @@ namespace Roguegard.Device
             public GetInfo<Color?, Sprite, Color?, int?, float?, string, string, bool> GetInfo { get; set; }
             public HandleClickElement<T, MMgr, MArg> HandleClick { get; set; }
 
-            public string GetName(object element, IListMenuManager manager, IListMenuArg arg) => "Skill";
+            public string GetName(object elementObj, IListMenuManager manager, IListMenuArg arg)
+            {
+                var element = (T)elementObj;
+                var info = GetInfo(element, (MMgr)manager, (MArg)arg);
+                return info.Item1.ToString();
+            }
 
             public void GetRogueInfo(
                 object elementObj, MMgr manager, MArg arg,

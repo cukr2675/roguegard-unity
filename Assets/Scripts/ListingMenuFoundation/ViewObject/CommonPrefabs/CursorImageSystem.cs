@@ -4,6 +4,7 @@ using UnityEngine;
 
 using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 namespace ListingMF
 {
@@ -75,8 +76,9 @@ namespace ListingMF
                 var relativeScale = (Vector2)selectedTransform.lossyScale;
                 relativeScale.x /= cursorTransform.lossyScale.x;
                 relativeScale.y /= cursorTransform.lossyScale.y;
-                cursorTransform.SetParent(transform, true);
-                cursorTransform.position = Vector3.Lerp(cursorTransform.position, selectedTransform.position, deltaElasticity);
+                cursorTransform.SetParent(GetUncontrolledParent(selectedTransform.parent), true);
+                var targetPosition = selectedTransform.position + (Vector3)(selectedTransform.rect.center * relativeScale / 2f);
+                cursorTransform.position = Vector3.Lerp(cursorTransform.position, targetPosition, deltaElasticity);
                 cursorTransform.sizeDelta = Vector2.Lerp(cursorTransform.sizeDelta, selectedTransform.rect.size * relativeScale, deltaElasticity);
                 cursorTransform.localScale = _cursorPrefab.transform.localScale;
                 cursorInstance.alpha = hide ? 0f : 1f;
@@ -89,6 +91,21 @@ namespace ListingMF
 #if UNITY_EDITOR
             _selectedObj = eventSystem.currentSelectedGameObject;
 #endif
+        }
+
+        /// <summary>
+        /// <see cref="LayoutGroup"/> に制御されない直近の親を取得する
+        /// </summary>
+        private static Transform GetUncontrolledParent(Transform transform)
+        {
+            while (LMFUtility.TryGetComponentInRecursiveParents<LayoutGroup>(transform, out var layoutGroup))
+            {
+                // 親にコントロールを制御するコンポーネントが存在する場合、そのコンポーネント上を対象として再検証
+                transform = layoutGroup.transform.parent;
+            }
+
+            // 親にコントロールを制御するコンポーネントが存在しなければ、この Transform 直下に移動する
+            return transform;
         }
     }
 }

@@ -44,8 +44,7 @@ namespace RoguegardUnity
             = SelectOption.Create<MMgr, MArg>(":Load", new LoadPresetMenu());
         private static readonly object[] leftAnchorObjs = new object[2];
 
-        private readonly List<ViewElement> _blockableViewElements = new();
-        protected override IReadOnlyList<ViewElement> BlockableViewElements => _blockableViewElements;
+        private readonly List<ViewElement> viewElements = new();
 
         ISelectOption ICharacterCreationElementsSubView.LoadPresetOption => LoadPresetSelectOption;
 
@@ -88,7 +87,7 @@ namespace RoguegardUnity
             appearanceBuildersMenu.NextMenu = optionMenu;
             appearanceBuildersMenu.AddMenu = addMenu;
 
-            _blockableViewElements.Clear();
+            viewElements.Clear();
 
             if (intrinsicPresenter == null)
             {
@@ -201,9 +200,9 @@ namespace RoguegardUnity
                 RectTransform.Edge.Top, 0, _firstParent.rect.height + sumHeight);
 
             _raceButton.SetElement(raceSelectOption, SelectOptionHandler.Instance);
-            _blockableViewElements.Add(_raceButton);
+            viewElements.Add(_raceButton);
             _appearanceButton.SetElement(appearanceSelectOption, SelectOptionHandler.Instance);
-            _blockableViewElements.Add(_appearanceButton);
+            viewElements.Add(_appearanceButton);
         }
 
         private static void SetTransform(RectTransform itemTransform, ref float sumHeight, ref bool odd)

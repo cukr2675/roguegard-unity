@@ -7,24 +7,25 @@ namespace ListingMF
     /// <summary>
     /// モデルのリストをコントローラで制御する UI のクラス。
     /// </summary>
+    [RequireComponent(typeof(CanvasGroup))]
     public abstract class ElementsSubView : ElementsSubViewBase, IElementsSubView
     {
+        private CanvasGroup canvasGroup;
+
         private event HandleEndAnimation OnEndAnimation;
 
+        /// <summary>
+        /// この SubView 内で最後に選択された <see cref="GameObject"/>
+        /// </summary>
         protected GameObject LastSelectedObj { get; private set; }
         protected ViewElement LastSelectedViewElement { get; private set; }
-
-        /// <summary>
-        /// SubView のUI操作ブロック (<see cref="SetBlock"/>) で要素のUI操作ブロック (<see cref="ViewElement.SetBlock"/>) を呼び出す対象のリスト
-        /// </summary>
-        protected virtual IReadOnlyList<ViewElement> BlockableViewElements => System.Array.Empty<ViewElement>();
 
         /// <summary>
         /// このプロパティが true のとき <see cref="IListMenuManager"/> の動作を停止させる。アニメーションを待機させるために使用する
         /// </summary>
         public bool HasManagerLock { get; private set; }
 
-        private const int backStatusCode = 2;
+        private const int backStatusCode = 1;
 
         public abstract void SetParameters(
             IReadOnlyList<object> list, IElementHandler handler, IListMenuManager manager, IListMenuArg arg,
@@ -38,18 +39,16 @@ namespace ListingMF
         /// <summary>
         /// この SubView のUI操作をブロックしてプレイヤーからの操作を防ぐ（使用例: ダイアログの後ろで表示されているメニューをブロックする）
         /// </summary>
-        public virtual void SetBlock(bool block)
+        public virtual void SetInteractable(bool interactable)
         {
-            IsBlocked = block;
-            for (int i = 0; i < BlockableViewElements.Count; i++)
-            {
-                BlockableViewElements[i].SetBlock(block);
-            }
+            if (canvasGroup == null) { canvasGroup = GetComponent<CanvasGroup>(); }
+
+            canvasGroup.interactable = interactable;
         }
 
         public virtual void Show(HandleEndAnimation onEndAnimation = null)
         {
-            SetBlock(false);
+            SetInteractable(true);
             AnimatorTupple.TrySetVisible(this, true);
 
             if (onEndAnimation != null)
@@ -61,7 +60,7 @@ namespace ListingMF
         public virtual void Hide(bool back, HandleEndAnimation onEndAnimation = null)
         {
             if (back) { SetStatusCode(backStatusCode); }
-            SetBlock(true);
+            SetInteractable(false);
             AnimatorTupple.TrySetVisible(this, false);
 
             if (onEndAnimation != null)
@@ -72,9 +71,19 @@ namespace ListingMF
 
         public override void OnSelectViewElement(GameObject selectedObj, bool outOfRange)
         {
-            LastSelectedObj = selectedObj;
-            LastSelectedViewElement = selectedObj.GetComponent<ViewElement>();
+            if (!outOfRange)
+            {
+                LastSelectedObj = selectedObj;
+                LastSelectedViewElement = selectedObj.GetComponent<ViewElement>();
+            }
             AnimatorTupple.OnSelect(this, selectedObj, outOfRange);
+        }
+
+        public override void QueueSelect(GameObject sender, GameObject to, CursorPlay play)
+        {
+            LastSelectedObj = to;
+            LastSelectedViewElement = to.GetComponent<ViewElement>();
+            AnimatorTupple.QueueSelect(this, sender, to, play);
         }
 
         // Animation から呼び出すメソッド

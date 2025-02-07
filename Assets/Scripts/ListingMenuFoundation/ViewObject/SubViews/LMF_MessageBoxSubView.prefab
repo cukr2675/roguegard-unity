@@ -186,9 +186,6 @@ MonoBehaviour:
   _icon: {fileID: 0}
   _text: {fileID: 0}
   _defaultStyle: Default
-  _onClickWithoutBlock:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1001 &315519824231538956
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1480211806318440620, guid: 671a5d8cb38f5204290f86291e905fe5, type: 3}
       propertyPath: m_Name
-      value: LMF_InputFieldViewWidget Variant
+      value: RogueInputFieldViewWidget Variant
       objectReference: {fileID: 0}
     - target: {fileID: 9103064151389212292, guid: 671a5d8cb38f5204290f86291e905fe5, type: 3}
       propertyPath: m_Pivot.x

@@ -31,7 +31,6 @@ namespace RoguegardUnity
         private const int buttonsCount = 3;
 
         private readonly List<ViewElement> viewElements = new();
-        protected override IReadOnlyList<ViewElement> BlockableViewElements => viewElements;
         private StateProvider currentStateProvider;
         private readonly MenuScreen menuScreen = new();
 

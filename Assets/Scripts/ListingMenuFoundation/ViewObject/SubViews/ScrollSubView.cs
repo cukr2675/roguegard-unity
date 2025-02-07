@@ -4,6 +4,7 @@ using UnityEngine;
 
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using System.Linq;
 
 namespace ListingMF
 {
@@ -23,7 +24,6 @@ namespace ListingMF
         private IElementHandler handler;
         private readonly List<object> list = new();
         private readonly List<ViewElement> viewElements = new();
-        protected override IReadOnlyList<ViewElement> BlockableViewElements => viewElements;
         private StateProvider currentStateProvider;
 
         private int lastItemOffset;
@@ -81,6 +81,7 @@ namespace ListingMF
                 this.list.Add(list[i]);
             }
             SetArg(manager, arg);
+            InitElements();
             UpdateElements();
             SetStatusCode(0);
 
@@ -88,6 +89,15 @@ namespace ListingMF
             currentStateProvider = local;
             VerticalAbsolutePosition = local.VerticalAbsolutePosition;
             local.ApplySelectedIndex(viewElements);
+        }
+
+        private void InitElements()
+        {
+            for (int i = 0; i < viewElements.Count; i++)
+            {
+                var viewElement = viewElements[i];
+                viewElement.ClearElementName();
+            }
         }
 
         private void UpdateElements()
@@ -134,8 +144,17 @@ namespace ListingMF
                 if (selectedIndex != -1)
                 {
                     var i = selectedIndex - elementsOffset + lastItemOffset;
-                    if (i < 0 || viewElements.Count <= i) { EventSystem.current.SetSelectedGameObject(null); }
-                    else { EventSystem.current.SetSelectedGameObject(viewElements[i].gameObject); }
+                    if (i < 0 || viewElements.Count <= i)
+                    {
+                        QueueSelect(gameObject, null, CursorPlay.None);
+                    }
+                    else
+                    {
+                        QueueSelect(gameObject, viewElements[i].gameObject, CursorPlay.None);
+
+                        // ↑のようにカーソル移動キューが処理されるのを待っても↓コメントのように直接設定しても選択タイミングは変わらない
+                        //EventSystem.current.SetSelectedGameObject(viewElements[i].gameObject);
+                    }
                 }
             }
             lastItemOffset = elementsOffset;
@@ -215,9 +234,9 @@ namespace ListingMF
                 if (SelectedIndex <= 0 || viewElements.Count <= SelectedIndex || EventSystem.current == null)
                 {
                     // 選択オブジェクトが見つからなければ最初の項目を選択
-                    if (viewElements.Count >= 2)
+                    if (viewElements.Any(x => x.ElementName != null))
                     {
-                        EventSystem.current.SetSelectedGameObject(viewElements[1].gameObject);
+                        EventSystem.current.SetSelectedGameObject(viewElements.First(x => x.ElementName != null).gameObject);
                     }
                     return;
                 }

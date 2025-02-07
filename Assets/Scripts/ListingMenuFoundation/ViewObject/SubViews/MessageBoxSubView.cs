@@ -15,7 +15,7 @@ namespace ListingMF
 
         [SerializeField] private ViewElement _blocker = null;
 
-        [Space, SerializeField] private Button.ButtonClickedEvent _onClickWithoutBlock = null;
+        [Space, SerializeField] private Button.ButtonClickedEvent _onClick = null;
         [Space, SerializeField] private StartSpeechEvent _onStartSpeech = null;
         [Space, SerializeField] private EndSpeechEvent _onEndSpeech = null;
 
@@ -42,8 +42,7 @@ namespace ListingMF
             {
                 _blocker.Initialize(this);
                 _blocker.SetElement(
-                    SelectOption.Create<IListMenuManager, IListMenuArg>("", delegate { _onClickWithoutBlock.Invoke(); }), SelectOptionHandler.Instance);
-                _blocker.SetBlock(false);
+                    SelectOption.Create<IListMenuManager, IListMenuArg>("", delegate { _onClick.Invoke(); }), SelectOptionHandler.Instance);
                 _blocker.SetVisible(true, true);
             }
         }

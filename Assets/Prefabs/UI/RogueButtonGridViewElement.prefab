@@ -122,7 +122,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6553400345048325022, guid: d354d178bc2881040a94b9b20efcfa9a, type: 3}
       propertyPath: m_Name
-      value: LMF_ButtonGridViewElement
+      value: RogueButtonGridViewElement
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

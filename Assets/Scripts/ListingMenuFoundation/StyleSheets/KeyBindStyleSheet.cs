@@ -10,14 +10,14 @@ namespace ListingMF
     /// <summary>
     /// 要素のスタイルでキーバインドするスタイルシート。このオブジェクトの下の <see cref="ElementsSubView"/> に影響を与える
     /// </summary>
-    [AddComponentMenu("UI/Listing Menu Foundation/LMF Input System Binding Style Sheet")]
-    public class InputSystemBindingStyleSheet : MonoBehaviour
+    [AddComponentMenu("UI/Listing Menu Foundation/LMF Key Bind Style Sheet")]
+    public class KeyBindStyleSheet : MonoBehaviour
     {
         [SerializeField] private Binding[] _bindings = null;
 
-        public static InputSystemBindingStyleSheet Get(Component obj)
+        public static KeyBindStyleSheet Get(Component obj)
         {
-            LMFUtility.TryGetComponentInRecursiveParents<InputSystemBindingStyleSheet>(obj.transform, out var viewAnimator);
+            LMFUtility.TryGetComponentInRecursiveParents<KeyBindStyleSheet>(obj.transform, out var viewAnimator);
             return viewAnimator;
         }
 
@@ -34,7 +34,7 @@ namespace ListingMF
             return false;
         }
 
-        public void Bind(ReadOnlySpan<char> style, Action<InputAction.CallbackContext> performed)
+        public void KeyBind(ReadOnlySpan<char> style, Action<InputAction.CallbackContext> performed)
         {
             if (!TryGetAction(style, out var action)) return;
 
@@ -48,6 +48,14 @@ namespace ListingMF
 
             action.performed -= performed;
             //action.Disable(); // バインディングされているアクションが一つとは限らないため無効化しない
+        }
+
+        private void OnDestroy()
+        {
+            foreach (var binding in _bindings)
+            {
+                binding.Action?.Disable();
+            }
         }
 
         [Serializable]

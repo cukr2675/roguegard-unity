@@ -14,8 +14,6 @@ namespace ListingMF
         public IListMenuManager Manager { get; private set; }
         public IListMenuArg Arg { get; private set; }
 
-        public bool IsBlocked { get; protected set; }
-
         private AnimatorTupple animator;
         private BindingTuple binding;
 
@@ -26,12 +24,13 @@ namespace ListingMF
         }
 
         public abstract void OnSelectViewElement(GameObject selectedObj, bool outOfRange);
+        public abstract void QueueSelect(GameObject from, GameObject to, CursorPlay play);
 
         // ViewElement から呼び出すメソッド
         public void PlayFromElement(string value, Object element) => AnimatorTupple.Play(this, element, value);
         public void PlayFromElement(Object value, Object element) => AnimatorTupple.Play(this, element, value);
-        public void Bind(System.ReadOnlySpan<char> style, System.Action<InputAction.CallbackContext> performed)
-            => BindingTuple.Bind(this, style, performed);
+        public void KeyBind(System.ReadOnlySpan<char> style, System.Action<InputAction.CallbackContext> performed)
+            => BindingTuple.KeyBind(this, style, performed);
         public void Unbind(System.ReadOnlySpan<char> style, System.Action<InputAction.CallbackContext> performed)
             => BindingTuple.Unbind(this, style, performed);
 
@@ -91,26 +90,34 @@ namespace ListingMF
 
                 animator.viewAnimator.OnSelect(gameObject, outOfRange);
             }
+
+            public static void QueueSelect(ElementsSubViewBase elementsSubView, GameObject sender, GameObject to, CursorPlay play)
+            {
+                var animator = elementsSubView.animator ??= new AnimatorTupple(elementsSubView);
+                if (!animator.IsEnabled) return;
+
+                animator.viewAnimator.QueueSelect(sender, to, play);
+            }
         }
 
         internal class BindingTuple
         {
-            private readonly InputSystemBindingStyleSheet inputSystemBindingStyleSheet;
+            private readonly KeyBindStyleSheet inputSystemBindingStyleSheet;
 
             private bool IsEnabled => inputSystemBindingStyleSheet != null;
 
             public BindingTuple(ElementsSubViewBase elementsSubView)
             {
-                inputSystemBindingStyleSheet = InputSystemBindingStyleSheet.Get(elementsSubView);
+                inputSystemBindingStyleSheet = KeyBindStyleSheet.Get(elementsSubView);
             }
 
-            public static void Bind(
+            public static void KeyBind(
                 ElementsSubViewBase elementsSubView, System.ReadOnlySpan<char> style, System.Action<InputAction.CallbackContext> performed)
             {
                 var binding = elementsSubView.binding ??= new BindingTuple(elementsSubView);
                 if (!binding.IsEnabled) return;
 
-                binding.inputSystemBindingStyleSheet.Bind(style, performed);
+                binding.inputSystemBindingStyleSheet.KeyBind(style, performed);
             }
 
             public static void Unbind(

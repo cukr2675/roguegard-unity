@@ -32,6 +32,11 @@ namespace ListingMF
         public virtual ISelectOption ErrorOption { get; protected set; }
             = SelectOption.Create<IListMenuManager, IListMenuArg>("<#F00>ERROR", delegate { }, "Cancel");
 
+        /// <summary>
+        /// この値が true の間は予約されたメニューを表示しない。遷移アニメーション用
+        /// </summary>
+        protected virtual bool HasManagerLock => StandardSubViewTable.HasManagerLock;
+
         protected void Initialize()
         {
             StandardSubViewTable = GetComponent<StandardSubViewTable>();
@@ -42,7 +47,7 @@ namespace ListingMF
         // アニメーションが再生されるのを待機するため Update ではなく LateUpdate にする
         private void LateUpdate()
         {
-            if (reservedMenu == null || StandardSubViewTable.HasManagerLock) return;
+            if (reservedMenu == null || HasManagerLock) return;
 
             try
             {
@@ -78,7 +83,7 @@ namespace ListingMF
         {
             foreach (var subView in StandardSubViewTable.SubViews.Values)
             {
-                subView.SetBlock(true);
+                subView.SetInteractable(false);
             }
         }
 

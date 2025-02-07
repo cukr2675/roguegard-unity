@@ -18,7 +18,7 @@ namespace ListingMF
 
         [Header("Animation")]
         [SerializeField] private string _defaultStyle = "Submit";
-        [Space, SerializeField] private Button.ButtonClickedEvent _onClickWithoutBlock = null;
+        [Space, SerializeField] private Button.ButtonClickedEvent _onClick = null;
 
         private IWidgetOption widgetOption;
         private ElementsSubViewBase _parent;
@@ -87,7 +87,7 @@ namespace ListingMF
             var linkIndex = TMP_TextUtilities.FindIntersectingLink(_text, eventData.position, null);
             if (linkIndex == -1) return;
 
-            _onClickWithoutBlock.Invoke();
+            _onClick.Invoke();
 
             var linkInfo = _text.textInfo.linkInfo[linkIndex];
             widgetOption.HandleClickLink(linkInfo.GetLinkText(), _parent.Manager, _parent.Arg);

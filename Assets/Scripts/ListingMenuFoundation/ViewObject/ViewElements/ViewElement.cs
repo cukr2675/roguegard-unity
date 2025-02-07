@@ -13,17 +13,10 @@ namespace ListingMF
         private Selectable selectable;
         private CanvasGroup canvasGroup;
 
-        private Navigation notBlockedNavigation;
-
         /// <summary>
-        /// この値が true のとき選択しようとしてもキャンセルする
+        /// この値が true のとき選択しようとしてもキャンセルする（キャンセル効果音を再生するため選択自体は可能にする）
         /// </summary>
         private bool isOutOfRange;
-
-        /// <summary>
-        /// この値が true のときUIナビゲーションによる選択を無効にする
-        /// </summary>
-        protected bool IsBlocked { get; private set; }
 
         protected IListMenuManager Manager => Parent.Manager;
         protected IListMenuArg Arg => Parent.Arg;
@@ -41,32 +34,6 @@ namespace ListingMF
             Parent = parent;
             selectable = GetComponent<Selectable>();
             TryGetComponent(out canvasGroup);
-            SetBlock(parent.IsBlocked);
-        }
-
-        /// <summary>
-        /// この要素のUI操作をブロックしてプレイヤーからの操作を防ぐ
-        /// </summary>
-        public void SetBlock(bool block)
-        {
-            if (IsBlocked == block) return;
-
-            IsBlocked = block;
-            if (selectable == null) return;
-
-            if (block)
-            {
-                notBlockedNavigation = selectable.navigation;
-                selectable.navigation = new Navigation() { mode = Navigation.Mode.None };
-                if (EventSystem.current != null && EventSystem.current.currentSelectedGameObject == gameObject)
-                {
-                    EventSystem.current.SetSelectedGameObject(null);
-                }
-            }
-            else
-            {
-                selectable.navigation = notBlockedNavigation;
-            }
         }
 
         public void SetElement(object element, IElementHandler handler)
@@ -76,6 +43,12 @@ namespace ListingMF
         }
 
         protected abstract void InnerSetElement(object element, IElementHandler handler);
+
+        public void ClearElementName()
+        {
+            ElementName = null;
+            name = "null";
+        }
 
         public void SetVisible(bool visible, bool outOfRange)
         {
@@ -94,21 +67,18 @@ namespace ListingMF
 
 
         /// <summary>
-        /// 縦並びの <see cref="ViewElement"/> の <see cref="Selectable.navigation"/> を初期化する
+        /// 縦並びの <see cref="ViewElement"/> の <see cref="Selectable.navigation"/> を設定する
         /// </summary>
-        internal static void SetVerticalNavigation(IReadOnlyList<ViewElement> viewElements, int index)
+        public static void SetVerticalNavigation(IReadOnlyList<ViewElement> viewElements, int index)
         {
-            var prevViewElement = index >= 1 ? viewElements[index - 1] : null;
-            var centerViewElement = viewElements[index];
-            var nextViewElement = index < viewElements.Count - 1 ? viewElements[index + 1] : null;
-            var prevSelectable = GetSelectable(prevViewElement);
-            var centerSelectable = GetSelectable(centerViewElement);
-            var nextSelectable = GetSelectable(nextViewElement);
+            var prevSelectable = index >= 1 ? viewElements[index - 1].selectable : null;
+            var centerSelectable = viewElements[index].selectable;
+            var nextSelectable = index < viewElements.Count - 1 ? viewElements[index + 1].selectable : null;
             if (centerSelectable == null) return;
 
             if (prevSelectable != null)
             {
-                prevViewElement.notBlockedNavigation = prevSelectable.navigation = new Navigation()
+                prevSelectable.navigation = new Navigation()
                 {
                     mode = Navigation.Mode.Explicit,
                     selectOnUp = prevSelectable.navigation.selectOnUp,
@@ -116,7 +86,7 @@ namespace ListingMF
                 };
             }
 
-            centerViewElement.notBlockedNavigation = centerSelectable.navigation = new Navigation()
+            centerSelectable.navigation = new Navigation()
             {
                 mode = Navigation.Mode.Explicit,
                 selectOnUp = prevSelectable,
@@ -125,15 +95,13 @@ namespace ListingMF
 
             if (nextSelectable != null)
             {
-                nextViewElement.notBlockedNavigation = nextSelectable.navigation = new Navigation()
+                nextSelectable.navigation = new Navigation()
                 {
                     mode = Navigation.Mode.Explicit,
                     selectOnUp = centerSelectable,
                     selectOnDown = nextSelectable.navigation.selectOnDown,
                 };
             }
-
-            Selectable GetSelectable(ViewElement viewElement) => viewElement != null ? viewElement.selectable : null;
         }
     }
 }

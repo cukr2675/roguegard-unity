@@ -23,7 +23,6 @@ namespace ListingMF
 
         private IElementHandler handler;
         private readonly List<ViewElement> viewElements = new();
-        protected override IReadOnlyList<ViewElement> BlockableViewElements => viewElements;
         private readonly List<ViewWidget> viewWidgets = new();
         private Selectable selectable;
         private readonly List<GameObject> viewWidgetRootObjs = new();
@@ -164,15 +163,6 @@ namespace ListingMF
             if (!_scrollRect.vertical)
             {
                 _scrollRect.content.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, (viewportSize.y - sumHeight) / 2f, contentSize.y);
-            }
-        }
-
-        public override void SetBlock(bool block)
-        {
-            base.SetBlock(block);
-            foreach (var viewWidget in viewWidgets)
-            {
-                viewWidget.SetBlock(block);
             }
         }
 

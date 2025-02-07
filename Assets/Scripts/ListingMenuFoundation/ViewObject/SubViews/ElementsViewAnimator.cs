@@ -42,8 +42,6 @@ namespace ListingMF
         [Tooltip("範囲外にカーソル移動しようとしたとき再生")]
         [SerializeField] private string _playOnSelectOutOfRange = "SelectOutOfRange";
 
-        [SerializeField] private bool _cancelOnSelectOutOfRange = true;
-
 #if UNITY_EDITOR
         [Header("Debug (Editor Only)")]
         [SerializeField] private bool _log = false;
@@ -55,7 +53,7 @@ namespace ListingMF
         /// <summary>
         /// ひとつ前にカーソルで選択されていた項目。選択をはじきたい項目が選択された際この変数の項目に戻す
         /// </summary>
-        private GameObject prevSelectedGameObject;
+        private GameObject lastSelectedGameObject;
 
         /// <summary>
         /// カーソル移動キャンセル予約状態
@@ -147,24 +145,41 @@ namespace ListingMF
 
         private void Update()
         {
-            // 予約されたカーソル移動キャンセル処理を実行する
+            // 予約されたカーソル移動処理を実行する
             if (queuedCancelSelection)
             {
-                EventSystem.current.SetSelectedGameObject(prevSelectedGameObject);
+                if (_log) { Debug.Log($"Selection was canceled {EventSystem.current.currentSelectedGameObject} -> {lastSelectedGameObject}"); }
+               
+                EventSystem.current.SetSelectedGameObject(lastSelectedGameObject);
                 queuedCancelSelection = false;
+            }
+
+        }
+
+        private void LateUpdate()
+        {
+            // 監視されていないカーソル移動を検知する
+            var currentSelectedGameObject = EventSystem.current.currentSelectedGameObject;
+            if (currentSelectedGameObject != lastSelectedGameObject)
+            {
+                // カーソル移動時の Play を実行
+                _onPlayString.Invoke(_playOnSelect, currentSelectedGameObject);
+
+                // 選択履歴を更新する
+                lastSelectedGameObject = currentSelectedGameObject;
             }
         }
 
         public void OnSelect(GameObject gameObject, bool outOfRange)
         {
-            // カーソル移動時の Play を実行（カーソル移動キャンセル予約中は何もしない）
-            if (!queuedCancelSelection)
+            // カーソル移動時の Play を実行
+            if (gameObject != lastSelectedGameObject) // QueueSelect で移動していた場合は再生しない（QueueSelect で再生しない場合は鳴らないようにする）
             {
-                if (_cancelOnSelectOutOfRange && outOfRange) { _onPlayString.Invoke(_playOnSelectOutOfRange, gameObject); } // 範囲外にカーソル移動しようとしたとき再生
+                if (outOfRange) { _onPlayString.Invoke(_playOnSelectOutOfRange, gameObject); } // 範囲外にカーソル移動しようとしたとき再生
                 else { _onPlayString.Invoke(_playOnSelect, gameObject); } // 範囲内でカーソル移動したとき再生
             }
 
-            if (_cancelOnSelectOutOfRange && outOfRange)
+            if (outOfRange)
             {
                 // 範囲外にカーソル移動したときカーソルを戻す
                 // 即戻すと無限再帰となるためカーソル移動キャンセル処理を予約
@@ -173,8 +188,30 @@ namespace ListingMF
             else
             {
                 // 範囲内の項目を選択したとき選択履歴を更新する
-                prevSelectedGameObject = gameObject;
+                lastSelectedGameObject = gameObject;
             }
+        }
+
+        public void QueueSelect(GameObject sender, GameObject to, CursorPlay play)
+        {
+            // カーソル移動時の Play を実行
+            if (play == CursorPlay.SelectOutOfRange) { _onPlayString.Invoke(_playOnSelectOutOfRange, sender); }
+            else if (play == CursorPlay.Select) { _onPlayString.Invoke(_playOnSelect, sender); }
+
+            // 即移動させると無限再帰となるためカーソル移動処理を予約
+            lastSelectedGameObject = to;
+            queuedCancelSelection = true;
+        }
+
+        public void QueueSelectToLastSelectedObj(GameObject sender, CursorPlay play)
+        {
+            // カーソル移動時の Play を実行
+            if (play == CursorPlay.SelectOutOfRange) { _onPlayString.Invoke(_playOnSelectOutOfRange, sender); }
+            else if (play == CursorPlay.Select) { _onPlayString.Invoke(_playOnSelect, sender); }
+
+            // 範囲外にカーソル移動したときなどにカーソルを戻す
+            // 即戻すと無限再帰となるためカーソル移動キャンセル処理を予約
+            queuedCancelSelection = true;
         }
 
         [System.Serializable] public class PlayStringEvent : UnityEvent<string, object> { }

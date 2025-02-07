@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 namespace ListingMF
 {
@@ -31,7 +32,6 @@ namespace ListingMF
 
         private IElementHandler handler;
         private readonly List<ViewElement> viewElements = new();
-        protected override IReadOnlyList<ViewElement> BlockableViewElements => viewElements;
         private StateProvider currentStateProvider;
 
         public void Initialize()
@@ -106,7 +106,11 @@ namespace ListingMF
 
                     var viewElement = Instantiate(_viewElementPrefab, _content.transform);
                     viewElement.Initialize(this);
-                    viewElement.SetVisible(true, !_isSelectable);
+                    viewElement.SetVisible(true, false);
+                    if (viewElement.TryGetComponent<Selectable>(out var selectable))
+                    {
+                        selectable.navigation = new Navigation() { mode = _isSelectable ? Navigation.Mode.Automatic : Navigation.Mode.None };
+                    }
                     var itemButtonTransform = (RectTransform)viewElement.transform;
                     itemButtonTransform.anchorMin = new Vector2(0f, 0f);
                     itemButtonTransform.anchorMax = new Vector2(1f, 0f);

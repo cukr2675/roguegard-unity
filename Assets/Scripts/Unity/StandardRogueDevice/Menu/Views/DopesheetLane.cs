@@ -22,7 +22,7 @@ namespace RoguegardUnity
 
         [Header("Animation")]
         [SerializeField] private string _defaultStyle = "Submit";
-        [Space, SerializeField] private Button.ButtonClickedEvent _onClickWithoutBlock = null;
+        [Space, SerializeField] private Button.ButtonClickedEvent _onClick = null;
         private Animator animator;
 
         private readonly FloatDialog floatDialog = new();

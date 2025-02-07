@@ -5,6 +5,7 @@ using UnityEngine;
 using System;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using TMPro;
 
 namespace ListingMF
@@ -15,12 +16,10 @@ namespace ListingMF
     {
         [SerializeField] private Image _icon = null;
         [SerializeField] private TMP_Text _text = null;
-        private Button button;
         private Action<InputAction.CallbackContext> clickActionPerformed;
 
         [Header("Animation")]
         [SerializeField] private string _defaultStyle = "Submit";
-        [Space, SerializeField] private Button.ButtonClickedEvent _onClickWithoutBlock = null;
         private Animator animator;
 
         private IButtonElementHandler handler;
@@ -29,16 +28,13 @@ namespace ListingMF
 
         private void Awake()
         {
-            button = GetComponent<Button>();
+            var button = GetComponent<Button>();
             button.onClick.AddListener(() =>
             {
-                if (IsBlocked) return;
-
-                _onClickWithoutBlock.Invoke();
                 handler.HandleClick(element, Manager, Arg);
             });
 
-            clickActionPerformed = ctx => button.onClick.Invoke();
+            clickActionPerformed = ctx => ExecuteEvents.Execute(gameObject, new BaseEventData(EventSystem.current), ExecuteEvents.submitHandler);
 
             TryGetComponent(out animator);
         }
@@ -129,7 +125,7 @@ namespace ListingMF
                     // キーバインド
                     if (styleItem.StartsWith("click:"))
                     {
-                        if (apply) { Parent.Bind(styleItem.Slice("click:".Length), clickActionPerformed); }
+                        if (apply) { Parent.KeyBind(styleItem.Slice("click:".Length), clickActionPerformed); }
                         else { Parent.Unbind(styleItem.Slice("click:".Length), clickActionPerformed); }
                     }
                 }

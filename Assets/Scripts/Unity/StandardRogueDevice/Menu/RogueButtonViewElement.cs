@@ -22,7 +22,6 @@ namespace RoguegardUnity
 
         [Header("Animation")]
         [SerializeField] private string _defaultStyle = "Submit";
-        [Space, SerializeField] private Button.ButtonClickedEvent _onClickWithoutBlock = null;
         private Animator animator;
 
         private IButtonElementHandler handler;
@@ -37,9 +36,6 @@ namespace RoguegardUnity
             var button = GetComponent<Button>();
             button.onClick.AddListener(() =>
             {
-                if (IsBlocked) return;
-
-                _onClickWithoutBlock.Invoke();
                 handler.HandleClick(element, Manager, Arg);
             });
 

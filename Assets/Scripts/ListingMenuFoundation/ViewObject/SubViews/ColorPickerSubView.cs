@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using HSVPicker;
 
 namespace ListingMF
@@ -13,6 +14,7 @@ namespace ListingMF
         [SerializeField] private ColorPicker _colorPicker = null;
         public ColorPicker ColorPicker => _colorPicker;
         [SerializeField] private Button _closeButton = null;
+        [SerializeField] private Selectable _initialSelectable = null;
         private bool isInitialized;
 
         private HandleClose handleClose;
@@ -54,6 +56,7 @@ namespace ListingMF
 
             // 新しい StateProvider に切り替える
             currentStateProvider = local;
+            EventSystem.current.SetSelectedGameObject(_initialSelectable.gameObject);
         }
 
         private class StateProvider : IElementsSubViewStateProvider
