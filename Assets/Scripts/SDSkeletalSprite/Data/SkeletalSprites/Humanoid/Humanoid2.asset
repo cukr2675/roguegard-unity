@@ -409,8 +409,8 @@ MonoBehaviour:
     _pixelLocalPosition: {x: 0, y: 5, z: 0}
     _localRotation: {x: 0, y: 0, z: 0, w: 1}
     _scaleOfLocalByLocal: {x: 1, y: 1, z: 1}
-    _normalOrderInParent: 4
-    _backOrderInParent: 4
+    _normalOrderInParent: 5
+    _backOrderInParent: 5
   - _boneName: {fileID: 11400000, guid: 5ea5eef48e6079b43a6ac0722c5611ce, type: 2}
     _parentBoneName: {fileID: 11400000, guid: a90fd0bc3132c214395dee60b9a645ae, type: 2}
     _sprite:
@@ -431,8 +431,8 @@ MonoBehaviour:
     _pixelLocalPosition: {x: 1, y: 2, z: 0}
     _localRotation: {x: 0, y: 0, z: 0, w: 1}
     _scaleOfLocalByLocal: {x: 1, y: 1, z: 1}
-    _normalOrderInParent: 5
-    _backOrderInParent: 5
+    _normalOrderInParent: 4
+    _backOrderInParent: 4
   - _boneName: {fileID: 11400000, guid: aefbcbb4bd643564f93620264e4030c3, type: 2}
     _parentBoneName: {fileID: 11400000, guid: a90fd0bc3132c214395dee60b9a645ae, type: 2}
     _sprite:
