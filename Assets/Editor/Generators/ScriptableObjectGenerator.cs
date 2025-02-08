@@ -4,6 +4,7 @@ using UnityEngine;
 
 using System.IO;
 using UnityEditor;
+using ListingMF;
 
 namespace Roguegard.Editor
 {
@@ -16,7 +17,7 @@ namespace Roguegard.Editor
         protected virtual int Start => 1;
         protected virtual int Length => 999;
 
-        protected sealed override void Generate()
+        public sealed override void Generate()
         {
             string oldName = null;
             for (int i = Start; i < Start + Length; i++)

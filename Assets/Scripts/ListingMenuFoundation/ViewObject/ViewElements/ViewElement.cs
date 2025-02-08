@@ -42,29 +42,50 @@ namespace ListingMF
             InnerSetElement(element, handler);
         }
 
-        protected abstract void InnerSetElement(object element, IElementHandler handler);
-
-        public void ClearElementName()
+        public void ClearElement()
         {
             ElementName = null;
             name = "null";
+            InnerSetElement(null, ElementToStringHandler.Instance);
         }
+
+        protected abstract void InnerSetElement(object element, IElementHandler handler);
 
         public void SetVisible(bool visible, bool outOfRange)
         {
             canvasGroup.alpha = visible ? 1f : 0f;
-            canvasGroup.interactable = visible;
             canvasGroup.blocksRaycasts = visible;
             isOutOfRange = outOfRange;
         }
 
-        void ISelectHandler.OnSelect(BaseEventData eventData) => Parent.OnSelectViewElement(gameObject, isOutOfRange);
+        void ISelectHandler.OnSelect(BaseEventData eventData)
+        {
+            if (selectable.IsInteractable()) { Parent.OnSelectViewElement(gameObject, isOutOfRange); }
+            else { Parent.QueueSelectToLastSelectedObj(gameObject, CursorPlay.None); }
+        }
 
         // Animation から呼び出すメソッド
         public void PlayString(string value) => Parent.PlayFromElement(value, this);
         public void PlayObject(Object value) => Parent.PlayFromElement(value, this);
 
 
+
+        /// <summary>
+        /// 指定のリストで最初に出現する <see cref="ViewElement.ElementName"/> != null のインスタンスを取得する
+        /// </summary>
+        public static bool TryFirstNotNull(IReadOnlyList<ViewElement> viewElements, out ViewElement firstViewElement)
+        {
+            for (int i = 0; i < viewElements.Count; i++)
+            {
+                if (viewElements[i].ElementName != null)
+                {
+                    firstViewElement= viewElements[i];
+                    return true;
+                }
+            }
+            firstViewElement = null;
+            return false;
+        }
 
         /// <summary>
         /// 縦並びの <see cref="ViewElement"/> の <see cref="Selectable.navigation"/> を設定する

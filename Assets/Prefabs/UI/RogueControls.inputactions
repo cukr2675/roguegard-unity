@@ -1,0 +1,34 @@
+{
+    "name": "RogueControls",
+    "maps": [
+        {
+            "name": "LMF_KeyBind",
+            "id": "8acf74f5-34fe-48e4-a4cf-26651b816b38",
+            "actions": [
+                {
+                    "name": "Sp1",
+                    "type": "Button",
+                    "id": "5f334456-344d-4b8d-9690-9d122d01d319",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "b5844933-8d66-4dcf-b578-44794265706e",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Sp1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

@@ -2,17 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using UnityEngine.EventSystems;
 using TMPro;
 
 namespace ListingMF
 {
     [AddComponentMenu("UI/Listing Menu Foundation/View Widgets/LMF Input Field View Widget")]
     [RequireComponent(typeof(TMP_InputField))]
-    public class InputFieldViewWidget : ViewWidget
+    public class InputFieldViewWidget : ViewWidget, ISelectHandler
     {
         private IWidgetOption widgetOption;
         private ElementsSubViewBase _parent;
         private TMP_InputField inputField;
+        private bool queuedDeactivateInputField;
 
         public override string WidgetName => widgetOption.Name;
         protected override ElementsSubViewBase Parent => _parent;
@@ -58,6 +60,20 @@ namespace ListingMF
                 GetValue = getValue,
                 HandleValueChanged = handleValueChanged
             };
+        }
+
+        void ISelectHandler.OnSelect(BaseEventData eventData)
+        {
+            queuedDeactivateInputField = true;
+        }
+
+        private void LateUpdate()
+        {
+            if (queuedDeactivateInputField)
+            {
+                inputField.DeactivateInputField();
+                queuedDeactivateInputField = false;
+            }
         }
 
         public interface IWidgetOption

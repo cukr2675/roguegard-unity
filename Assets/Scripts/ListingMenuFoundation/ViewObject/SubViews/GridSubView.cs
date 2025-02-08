@@ -68,7 +68,7 @@ namespace ListingMF
 
             // 新しい StateProvider に切り替える
             currentStateProvider = local;
-            if (_isSelectable) { local.ApplySelectedIndex(viewElements); }
+            if (_isSelectable) { local.ApplySelectedIndex(this); }
         }
 
         private void UpdateElements(IReadOnlyList<object> list)
@@ -182,19 +182,20 @@ namespace ListingMF
                 SelectedIndex = -1;
             }
 
-            public void ApplySelectedIndex(List<ViewElement> viewElements)
+            public void ApplySelectedIndex(GridSubView subView)
             {
-                if (SelectedIndex <= 0 || viewElements.Count <= SelectedIndex || EventSystem.current == null)
+                if (SelectedIndex <= 0 || subView.viewElements.Count <= SelectedIndex || EventSystem.current == null)
                 {
                     // 選択オブジェクトが見つからなければ最初の項目を選択
-                    if (viewElements.Count >= 1)
+                    if (ViewElement.TryFirstNotNull(subView.viewElements, out var first))
                     {
-                        EventSystem.current.SetSelectedGameObject(viewElements[0].gameObject);
+                        //EventSystem.current.SetSelectedGameObject(first.gameObject); // これだと Show メソッドで interactable が true になる前に選択してしまう
+                        subView.QueueSelect(subView.gameObject, first.gameObject, CursorPlay.None);
                     }
                     return;
                 }
 
-                EventSystem.current.SetSelectedGameObject(viewElements[SelectedIndex].gameObject);
+                subView.QueueSelect(subView.gameObject, subView.viewElements[SelectedIndex].gameObject, CursorPlay.None);
             }
         }
     }

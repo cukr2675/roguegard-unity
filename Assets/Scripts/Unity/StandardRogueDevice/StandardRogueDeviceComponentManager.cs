@@ -94,6 +94,7 @@ namespace RoguegardUnity
 
             runtimeInspector = Object.Instantiate(runtimeInspectorPrefab, parent);
             runtimeInspector.Initialize();
+            runtimeInspector.gameObject.SetActive(false);
 
             ticker.enabled = true;
         }

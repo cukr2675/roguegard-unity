@@ -245,10 +245,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 2804510219497649922, guid: 966b92a00cf9ece4dae2dd78cfd9309f, type: 3}
-      propertyPath: m_Navigation.m_Mode
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4794436543709572419, guid: 966b92a00cf9ece4dae2dd78cfd9309f, type: 3}
       propertyPath: m_Name
       value: ScrollRect

@@ -8,8 +8,8 @@ using UnityEditor;
 
 namespace ListingMF.Editor
 {
-    [CreateAssetMenu(menuName = "ListingMenuFoundation/CharacterFileGenerator")]
-    public class CharacterFileGenerator : ScriptableObject
+    [CreateAssetMenu(menuName = "Listing Menu Foundation/Character File Generator")]
+    public class CharacterFileGenerator : ScriptableGenerator
     {
         [Header("ASCII")]
         [SerializeField] private bool _includeASCII = true;
@@ -39,7 +39,9 @@ namespace ListingMF.Editor
         [Header("Manual")]
         [SerializeField, TextArea(3, 6)] private string _otherCharacters = "♥";
 
-        private void Generate()
+        protected override string IconSearchFilter => "LMF_Icon";
+
+        public override void Generate()
         {
             var thisPath = AssetDatabase.GetAssetPath(this);
             var thisDirectory = Path.GetDirectoryName(thisPath);
@@ -117,22 +119,10 @@ namespace ListingMF.Editor
             }
         }
 
-        [CustomEditor(typeof(CharacterFileGenerator))]
-        [CanEditMultipleObjects]
-        private class Editor : UnityEditor.Editor
-        {
-            public override void OnInspectorGUI()
-            {
-                base.OnInspectorGUI();
-
-                if (GUILayout.Button("Generate"))
-                {
-                    foreach (var target in targets)
-                    {
-                        ((CharacterFileGenerator)target).Generate();
-                    }
-                }
-            }
-        }
+        //[CustomEditor(typeof(CharacterFileGenerator), true)]
+        //[CanEditMultipleObjects]
+        //private class PrivateEditor : Editor
+        //{
+        //}
     }
 }

@@ -48,7 +48,7 @@ namespace RoguegardUnity
                             return;
                         }
                     });
-                }));
+                }, "Submit click:Sp1"));
 
             return instance;
         }

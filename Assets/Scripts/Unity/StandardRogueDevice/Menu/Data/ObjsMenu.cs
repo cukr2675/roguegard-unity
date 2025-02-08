@@ -60,7 +60,7 @@ namespace RoguegardUnity
                 {
                     view.BackAnchorList = new List<ISelectOption>
                     {
-                        SelectOption.Create<MMgr, MArg>(":Sort", Sort, "Sort"),
+                        SelectOption.Create<MMgr, MArg>(":Sort", Sort, "Sort click:Sp1"),
                         BackSelectOption.Instance
                     };
                 }

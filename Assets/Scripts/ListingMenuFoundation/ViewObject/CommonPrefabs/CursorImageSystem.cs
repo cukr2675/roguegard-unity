@@ -78,8 +78,18 @@ namespace ListingMF
                 relativeScale.y /= cursorTransform.lossyScale.y;
                 cursorTransform.SetParent(GetUncontrolledParent(selectedTransform.parent), true);
                 var targetPosition = selectedTransform.position + (Vector3)(selectedTransform.rect.center * relativeScale / 2f);
-                cursorTransform.position = Vector3.Lerp(cursorTransform.position, targetPosition, deltaElasticity);
-                cursorTransform.sizeDelta = Vector2.Lerp(cursorTransform.sizeDelta, selectedTransform.rect.size * relativeScale, deltaElasticity);
+                targetPosition = Vector3.Lerp(cursorTransform.position, targetPosition, deltaElasticity);
+                var targetSizeDelta = Vector2.Lerp(cursorTransform.sizeDelta, selectedTransform.rect.size * relativeScale, deltaElasticity);
+                if (float.IsNaN(targetPosition.x) || float.IsNaN(targetPosition.y) || float.IsNaN(targetPosition.z) ||
+                    float.IsNaN(targetSizeDelta.x) || float.IsNaN(targetSizeDelta.y))
+                {
+                    Debug.LogWarning($"不正な項目 {eventSystem.currentSelectedGameObject} が選択されました。");
+                    eventSystem.SetSelectedGameObject(null);
+                    Destroy(cursorInstance.gameObject);
+                    return;
+                }
+                cursorTransform.position = targetPosition;
+                cursorTransform.sizeDelta = targetSizeDelta;
                 cursorTransform.localScale = _cursorPrefab.transform.localScale;
                 cursorInstance.alpha = hide ? 0f : 1f;
             }

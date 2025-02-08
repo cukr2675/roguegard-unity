@@ -15,7 +15,7 @@ namespace ListingMF
         public IListMenuArg Arg { get; private set; }
 
         private AnimatorTupple animator;
-        private BindingTuple binding;
+        private KeyBindTuple binding;
 
         protected void SetArg(IListMenuManager manager, IListMenuArg arg)
         {
@@ -24,15 +24,18 @@ namespace ListingMF
         }
 
         public abstract void OnSelectViewElement(GameObject selectedObj, bool outOfRange);
-        public abstract void QueueSelect(GameObject from, GameObject to, CursorPlay play);
+        public abstract void QueueSelect(GameObject sender, GameObject to, CursorPlay play);
+        public abstract void QueueSelectToLastSelectedObj(GameObject sender, CursorPlay play);
 
         // ViewElement から呼び出すメソッド
         public void PlayFromElement(string value, Object element) => AnimatorTupple.Play(this, element, value);
         public void PlayFromElement(Object value, Object element) => AnimatorTupple.Play(this, element, value);
+        public bool TryGetKeyIcon(System.ReadOnlySpan<char> style, out string keyText, out Sprite keySprite)
+            => KeyBindTuple.TryGetKeyIcon(this, style, out keyText, out keySprite);
         public void KeyBind(System.ReadOnlySpan<char> style, System.Action<InputAction.CallbackContext> performed)
-            => BindingTuple.KeyBind(this, style, performed);
+            => KeyBindTuple.KeyBind(this, style, performed);
         public void Unbind(System.ReadOnlySpan<char> style, System.Action<InputAction.CallbackContext> performed)
-            => BindingTuple.Unbind(this, style, performed);
+            => KeyBindTuple.Unbind(this, style, performed);
 
 
 
@@ -98,35 +101,57 @@ namespace ListingMF
 
                 animator.viewAnimator.QueueSelect(sender, to, play);
             }
+
+            public static void QueueSelectToLastSelectedObj(ElementsSubViewBase elementsSubView, GameObject sender, CursorPlay play)
+            {
+                var animator = elementsSubView.animator ??= new AnimatorTupple(elementsSubView);
+                if (!animator.IsEnabled) return;
+
+                animator.viewAnimator.QueueSelectToLastSelectedObj(sender, play);
+            }
         }
 
-        internal class BindingTuple
+        internal class KeyBindTuple
         {
-            private readonly KeyBindStyleSheet inputSystemBindingStyleSheet;
+            private readonly KeyBindStyleSheet keyBindStyleSheet;
 
-            private bool IsEnabled => inputSystemBindingStyleSheet != null;
+            private bool IsEnabled => keyBindStyleSheet != null;
 
-            public BindingTuple(ElementsSubViewBase elementsSubView)
+            public KeyBindTuple(ElementsSubViewBase elementsSubView)
             {
-                inputSystemBindingStyleSheet = KeyBindStyleSheet.Get(elementsSubView);
+                keyBindStyleSheet = KeyBindStyleSheet.Get(elementsSubView);
+            }
+
+            public static bool TryGetKeyIcon(
+                ElementsSubViewBase elementsSubView, System.ReadOnlySpan<char> style, out string keyText, out Sprite keySprite)
+            {
+                var binding = elementsSubView.binding ??= new KeyBindTuple(elementsSubView);
+                if (!binding.IsEnabled)
+                {
+                    keyText = null;
+                    keySprite = null;
+                    return false;
+                }
+
+                return binding.keyBindStyleSheet.TryGetKeyIcon(style, out keyText, out keySprite);
             }
 
             public static void KeyBind(
                 ElementsSubViewBase elementsSubView, System.ReadOnlySpan<char> style, System.Action<InputAction.CallbackContext> performed)
             {
-                var binding = elementsSubView.binding ??= new BindingTuple(elementsSubView);
+                var binding = elementsSubView.binding ??= new KeyBindTuple(elementsSubView);
                 if (!binding.IsEnabled) return;
 
-                binding.inputSystemBindingStyleSheet.KeyBind(style, performed);
+                binding.keyBindStyleSheet.KeyBind(style, performed);
             }
 
             public static void Unbind(
                 ElementsSubViewBase elementsSubView, System.ReadOnlySpan<char> style, System.Action<InputAction.CallbackContext> performed)
             {
-                var binding = elementsSubView.binding ??= new BindingTuple(elementsSubView);
+                var binding = elementsSubView.binding ??= new KeyBindTuple(elementsSubView);
                 if (!binding.IsEnabled) return;
 
-                binding.inputSystemBindingStyleSheet.Unbind(style, performed);
+                binding.keyBindStyleSheet.Unbind(style, performed);
             }
         }
     }

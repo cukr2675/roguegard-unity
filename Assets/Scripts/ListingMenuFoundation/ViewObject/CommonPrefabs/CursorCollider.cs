@@ -12,39 +12,46 @@ namespace ListingMF
     /// UIナビゲーションの仕様上このオブジェクトのサイズはカーソル移動に影響しないので注意
     /// </summary>
     [AddComponentMenu("UI/Listing Menu Foundation/LMF Cursor Collider")]
-    public class CursorCollider : Selectable
+    [RequireComponent(typeof(Selectable))]
+    public class CursorCollider : MonoBehaviour, ISelectHandler
     {
         [Header("Cursor Collision")]
         [Tooltip("このオブジェクトにカーソルが衝突したときの動作を変更する\nfalse: カーソル移動をキャンセル\ntrue: 親 Selectable にカーソル移動先を変更")]
         [SerializeField] private bool _isTrigger = false;
 
+        private Selectable selectable;
         private Selectable parentSelectable;
         private ElementsViewAnimator parentAnimator;
         private bool queuedDisableInteractable;
 
-        protected override void Awake()
+        private void Awake()
         {
-            base.Awake();
+            selectable = GetComponent<Selectable>();
             LMFUtility.TryGetComponentInRecursiveParents(transform.parent, out parentSelectable);
-            LMFUtility.TryGetComponentInRecursiveParents(transform, out parentAnimator);
         }
 
         private void Update()
         {
             if (queuedDisableInteractable)
             {
-                interactable = false;
+                selectable.interactable = false;
                 queuedDisableInteractable = false;
             }
 
-            if (!interactable && parentSelectable.IsInteractable())
+            if (_isTrigger && !selectable.interactable && parentSelectable.IsInteractable())
             {
-                interactable = EventSystem.current.currentSelectedGameObject != parentSelectable;
+                selectable.interactable = EventSystem.current.currentSelectedGameObject != parentSelectable;
             }
         }
 
-        public override void OnSelect(BaseEventData eventData)
+        void ISelectHandler.OnSelect(BaseEventData eventData)
         {
+            if (parentAnimator == null)
+            {
+                // Awake で設定すると早すぎる場合があるのでここで評価
+                LMFUtility.TryGetComponentInRecursiveParents(transform, out parentAnimator);
+            }
+
             if (_isTrigger)
             {
                 queuedDisableInteractable = true;
@@ -55,5 +62,23 @@ namespace ListingMF
                 parentAnimator.QueueSelectToLastSelectedObj(gameObject, CursorPlay.None);
             }
         }
+
+        #region Editor Only
+
+#if UNITY_EDITOR
+        private void OnDrawGizmos()
+        {
+            if (!UnityEditor.EditorPrefs.GetBool("SelectableEditor.ShowNavigation")) return;
+
+            var rect = ((RectTransform)transform).rect;
+            var center = rect.center * transform.lossyScale;
+            var position = (Vector2)transform.position + center;
+            Gizmos.color = new Color(0f, 1f, 0f, .2f);
+            Gizmos.matrix = Matrix4x4.Translate(position) * Matrix4x4.Rotate(Quaternion.Euler(0f, 0f, 45f));
+            Gizmos.DrawWireCube(Vector3.zero, Vector3.one * 25f); // サイズは適当
+        }
+#endif
+
+        #endregion
     }
 }

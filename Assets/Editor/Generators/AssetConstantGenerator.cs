@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using UnityEditor;
+using ListingMF;
 
 namespace Roguegard.Editor
 {
@@ -32,7 +33,7 @@ namespace Roguegard.Editor
             }
         }
 
-        protected sealed override void Generate()
+        public sealed override void Generate()
         {
             var thisPath = AssetDatabase.GetAssetPath(this);
             var thisDirectory = Path.GetDirectoryName(thisPath);

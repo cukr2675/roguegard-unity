@@ -16,6 +16,7 @@ namespace ListingMF
     {
         [SerializeField] private Image _icon = null;
         [SerializeField] private TMP_Text _text = null;
+        [SerializeField] private KeyIcon _keyIcon = null;
         private Action<InputAction.CallbackContext> clickActionPerformed;
 
         [Header("Animation")]
@@ -125,8 +126,22 @@ namespace ListingMF
                     // キーバインド
                     if (styleItem.StartsWith("click:"))
                     {
-                        if (apply) { Parent.KeyBind(styleItem.Slice("click:".Length), clickActionPerformed); }
-                        else { Parent.Unbind(styleItem.Slice("click:".Length), clickActionPerformed); }
+                        if (apply)
+                        {
+                            Parent.KeyBind(styleItem.Slice("click:".Length), clickActionPerformed);
+                            if (_keyIcon != null && Parent.TryGetKeyIcon(styleItem.Slice("click:".Length), out var keyText, out var keySprite))
+                            {
+                                _keyIcon.SetKeyIcon(keyText, keySprite);
+                            }
+                        }
+                        else
+                        {
+                            Parent.Unbind(styleItem.Slice("click:".Length), clickActionPerformed);
+                            if (_keyIcon != null)
+                            {
+                                _keyIcon.ClearKeyIcon();
+                            }
+                        }
                     }
                 }
             }

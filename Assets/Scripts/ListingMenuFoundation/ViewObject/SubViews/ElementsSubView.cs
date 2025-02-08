@@ -25,6 +25,16 @@ namespace ListingMF
         /// </summary>
         public bool HasManagerLock { get; private set; }
 
+        public bool Interactable
+        {
+            get
+            {
+                if (canvasGroup == null) { canvasGroup = GetComponent<CanvasGroup>(); }
+
+                return canvasGroup.interactable;
+            }
+        }
+
         private const int backStatusCode = 1;
 
         public abstract void SetParameters(
@@ -79,11 +89,19 @@ namespace ListingMF
             AnimatorTupple.OnSelect(this, selectedObj, outOfRange);
         }
 
+        /// <summary>
+        /// カーソルを移動させる。使用時は一番上に表示されているメニューのカーソル移動（特に初期選択）を阻害しないように気を付ける
+        /// </summary>
         public override void QueueSelect(GameObject sender, GameObject to, CursorPlay play)
         {
             LastSelectedObj = to;
-            LastSelectedViewElement = to.GetComponent<ViewElement>();
+            LastSelectedViewElement = to != null ? to.GetComponent<ViewElement>() : null;
             AnimatorTupple.QueueSelect(this, sender, to, play);
+        }
+
+        public override void QueueSelectToLastSelectedObj(GameObject sender, CursorPlay play)
+        {
+            AnimatorTupple.QueueSelectToLastSelectedObj(this, sender, play);
         }
 
         // Animation から呼び出すメソッド

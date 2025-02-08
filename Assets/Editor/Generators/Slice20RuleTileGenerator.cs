@@ -6,6 +6,7 @@ using System.Linq;
 using System.IO;
 using UnityEditor;
 using UnityEditor.U2D.Sprites;
+using ListingMF;
 
 namespace Roguegard.Editor
 {
@@ -289,7 +290,7 @@ namespace Roguegard.Editor
             }
         }
 
-        protected override void Generate()
+        public override void Generate()
         {
             var tileSize = _tileSizePixel;
             var tileCenter = _tileCenterPixel;

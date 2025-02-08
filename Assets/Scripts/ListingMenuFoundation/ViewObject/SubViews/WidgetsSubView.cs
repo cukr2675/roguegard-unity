@@ -24,7 +24,7 @@ namespace ListingMF
         private IElementHandler handler;
         private readonly List<ViewElement> viewElements = new();
         private readonly List<ViewWidget> viewWidgets = new();
-        private Selectable selectable;
+        private Selectable fallbackSelectable;
         private readonly List<GameObject> viewWidgetRootObjs = new();
         private StateProvider currentStateProvider;
 
@@ -102,7 +102,7 @@ namespace ListingMF
             currentStateProvider = local;
             if (_scrollRect.vertical) { VerticalAbsolutePosition = local.VerticalAbsolutePosition; }
             HorizontalAbsolutePosition = local.HorizontalAbsolutePosition;
-            if (_isSelectable) { local.ApplySelectedIndex(viewElements, viewWidgets, selectable); }
+            if (_isSelectable) { local.ApplySelectedIndex(this); }
         }
 
         private void UpdateElements(IReadOnlyList<object> list)
@@ -126,7 +126,7 @@ namespace ListingMF
             }
             viewElements.Clear();
             viewWidgets.Clear();
-            selectable = null;
+            fallbackSelectable = null;
             viewWidgetRootObjs.Clear();
 
             // 今回必要なウィジェットを生成
@@ -147,7 +147,7 @@ namespace ListingMF
 
                 viewElements.AddRange(viewWidget.GetComponentsInChildren<ViewElement>());
                 viewWidgets.AddRange(viewWidget.GetComponentsInChildren<ViewWidget>());
-                if (selectable == null) { selectable = viewWidget.GetComponentInChildren<Selectable>(); }
+                if (fallbackSelectable == null) { fallbackSelectable = viewWidget.GetComponentInChildren<Selectable>(); }
                 viewWidgetRootObjs.Add(viewWidget.gameObject);
             }
 
@@ -216,28 +216,30 @@ namespace ListingMF
                 }
             }
 
-            public void ApplySelectedIndex(List<ViewElement> elements, List<ViewWidget> widgets, Selectable fallbackSelectable)
+            public void ApplySelectedIndex(WidgetsSubView subView)
             {
                 if (SelectedName != null)
                 {
                     if (SelectedIsWidget)
                     {
-                        foreach (var widget in widgets)
+                        foreach (var widget in subView.viewWidgets)
                         {
                             if (widget.WidgetName == SelectedName)
                             {
-                                EventSystem.current.SetSelectedGameObject(widget.gameObject);
+                                //EventSystem.current.SetSelectedGameObject(widget.gameObject); // これだと Show メソッドで interactable が true になる前に選択してしまう
+                                subView.QueueSelect(subView.gameObject, widget.gameObject, CursorPlay.None);
                                 return;
                             }
                         }
                     }
                     else
                     {
-                        foreach (var element in elements)
+                        foreach (var element in subView.viewElements)
                         {
                             if (element.ElementName == SelectedName)
                             {
-                                EventSystem.current.SetSelectedGameObject(element.gameObject);
+                                //EventSystem.current.SetSelectedGameObject(element.gameObject); // これだと Show メソッドで interactable が true になる前に選択してしまう
+                                subView.QueueSelect(subView.gameObject, element.gameObject, CursorPlay.None);
                                 return;
                             }
                         }
@@ -245,7 +247,7 @@ namespace ListingMF
                 }
 
                 // 選択オブジェクトが見つからなければ最初の項目を選択
-                if (fallbackSelectable != null) { EventSystem.current.SetSelectedGameObject(fallbackSelectable.gameObject); }
+                if (subView.fallbackSelectable != null) { subView.QueueSelect(subView.gameObject, subView.fallbackSelectable.gameObject, CursorPlay.None); }
             }
         }
     }

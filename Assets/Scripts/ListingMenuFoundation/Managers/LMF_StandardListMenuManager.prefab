@@ -145,7 +145,6 @@ MonoBehaviour:
       m_Calls: []
   _playOnSelect: Select
   _playOnSelectOutOfRange: SelectOutOfRange
-  _cancelOnSelectOutOfRange: 1
   _log: 0
 --- !u!114 &-5307896561031752095
 MonoBehaviour:
@@ -178,9 +177,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fa9bc96c1c1ac14485942628667ecff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _keyboardIconBackground: {fileID: 21300000, guid: 2bcf20111cfa4044e8d34272b07652e2, type: 3}
   _bindings:
-  - _style: Cancel
-    _action: {fileID: 3510485718312938927, guid: 3b64fd5dc26924744aff4bbfeae4b445, type: 3}
+  - _action: {fileID: 3510485718312938927, guid: 3b64fd5dc26924744aff4bbfeae4b445, type: 3}
 --- !u!114 &8210026949675588516
 MonoBehaviour:
   m_ObjectHideFlags: 0

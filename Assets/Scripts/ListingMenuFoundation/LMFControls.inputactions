@@ -94,7 +94,7 @@
             ]
         },
         {
-            "name": "LMF_Binding",
+            "name": "LMF_KeyBind",
             "id": "8acf74f5-34fe-48e4-a4cf-26651b816b38",
             "actions": [
                 {

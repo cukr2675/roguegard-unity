@@ -162,8 +162,8 @@ namespace ListingMF
             var currentSelectedGameObject = EventSystem.current.currentSelectedGameObject;
             if (currentSelectedGameObject != lastSelectedGameObject)
             {
-                // カーソル移動時の Play を実行
-                _onPlayString.Invoke(_playOnSelect, currentSelectedGameObject);
+                // カーソル移動時の Play を実行（タッチ操作中は再生しない）
+                if (CursorImageSystem.ShowCursor) { _onPlayString.Invoke(_playOnSelect, currentSelectedGameObject); }
 
                 // 選択履歴を更新する
                 lastSelectedGameObject = currentSelectedGameObject;
@@ -173,7 +173,8 @@ namespace ListingMF
         public void OnSelect(GameObject gameObject, bool outOfRange)
         {
             // カーソル移動時の Play を実行
-            if (gameObject != lastSelectedGameObject) // QueueSelect で移動していた場合は再生しない（QueueSelect で再生しない場合は鳴らないようにする）
+            if (gameObject != lastSelectedGameObject && // QueueSelect で移動していた場合は再生しない（QueueSelect で再生しない場合は鳴らないようにする）
+                CursorImageSystem.ShowCursor) // タッチ操作中は再生しない
             {
                 if (outOfRange) { _onPlayString.Invoke(_playOnSelectOutOfRange, gameObject); } // 範囲外にカーソル移動しようとしたとき再生
                 else { _onPlayString.Invoke(_playOnSelect, gameObject); } // 範囲内でカーソル移動したとき再生

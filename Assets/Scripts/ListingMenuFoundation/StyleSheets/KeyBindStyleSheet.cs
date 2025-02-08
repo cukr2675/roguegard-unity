@@ -13,15 +13,17 @@ namespace ListingMF
     [AddComponentMenu("UI/Listing Menu Foundation/LMF Key Bind Style Sheet")]
     public class KeyBindStyleSheet : MonoBehaviour
     {
+        [SerializeField] private Sprite _keyboardIconBackground = null;
+
         [SerializeField] private Binding[] _bindings = null;
 
         public static KeyBindStyleSheet Get(Component obj)
         {
-            LMFUtility.TryGetComponentInRecursiveParents<KeyBindStyleSheet>(obj.transform, out var viewAnimator);
-            return viewAnimator;
+            LMFUtility.TryGetComponentInRecursiveParents<KeyBindStyleSheet>(obj.transform, out var styleSheet);
+            return styleSheet;
         }
 
-        private bool TryGetAction(ReadOnlySpan<char> style, out InputAction action)
+        public bool TryGetAction(ReadOnlySpan<char> style, out InputAction action)
         {
             foreach (var binding in _bindings)
             {
@@ -32,6 +34,20 @@ namespace ListingMF
             }
             action = null;
             return false;
+        }
+
+        public bool TryGetKeyIcon(ReadOnlySpan<char> style, out string keyText, out Sprite keySprite)
+        {
+            if (!TryGetAction(style, out var action))
+            {
+                keyText = null;
+                keySprite = null;
+                return false;
+            }
+
+            keyText = action.GetBindingDisplayString();
+            keySprite = _keyboardIconBackground;
+            return true;
         }
 
         public void KeyBind(ReadOnlySpan<char> style, Action<InputAction.CallbackContext> performed)
@@ -61,10 +77,10 @@ namespace ListingMF
         [Serializable]
         private class Binding
         {
-            [SerializeField] private string _style;
-            public ReadOnlySpan<char> Style => MemoryExtensions.AsSpan(_style);
+            //[SerializeField] private string _style;
+            public ReadOnlySpan<char> Style => MemoryExtensions.AsSpan(_action.action.name);
 
-            [SerializeField] private InputActionReference _action;
+            [SerializeField] public InputActionReference _action;
             public InputAction Action => _action;
         }
     }

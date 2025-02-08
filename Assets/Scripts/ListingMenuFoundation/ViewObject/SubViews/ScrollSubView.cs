@@ -4,7 +4,6 @@ using UnityEngine;
 
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-using System.Linq;
 
 namespace ListingMF
 {
@@ -88,7 +87,7 @@ namespace ListingMF
             // 新しい StateProvider に切り替える
             currentStateProvider = local;
             VerticalAbsolutePosition = local.VerticalAbsolutePosition;
-            local.ApplySelectedIndex(viewElements);
+            local.ApplySelectedIndex(this);
         }
 
         private void InitElements()
@@ -96,7 +95,7 @@ namespace ListingMF
             for (int i = 0; i < viewElements.Count; i++)
             {
                 var viewElement = viewElements[i];
-                viewElement.ClearElementName();
+                viewElement.ClearElement();
             }
         }
 
@@ -128,6 +127,7 @@ namespace ListingMF
                 if (elementIndex < 0 || list.Count <= elementIndex)
                 {
                     // 範囲外の ViewElement は非表示
+                    viewElement.ClearElement();
                     viewElement.SetVisible(false, true);
                     continue;
                 }
@@ -138,7 +138,9 @@ namespace ListingMF
 
             // スクロールによって選択中の要素が変わらないよう調整
             var selected = EventSystem.current != null ? EventSystem.current.currentSelectedGameObject : null;
-            if (selected != null && selected.transform.IsChildOf(_scrollRect.content) && selected.TryGetComponent<ViewElement>(out var selectedElement))
+            if (selected != null && selected.transform.IsChildOf(_scrollRect.content) && selected.TryGetComponent<ViewElement>(out var selectedElement) &&
+
+                Interactable) // 上に表示されているメニューに影響を与えないようにする。これがないとコマンドメニュー表示時の初期選択を上書きしてしまうことがある
             {
                 var selectedIndex = viewElements.IndexOf(selectedElement);
                 if (selectedIndex != -1)
@@ -175,7 +177,7 @@ namespace ListingMF
                     viewElementTransform.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Left, 0f, _scrollRect.content.rect.width);
 
                     viewElements.Add(viewElement);
-                    ViewElement.SetVerticalNavigation(viewElements, viewElements.Count - 1);
+                    ViewElement.SetVerticalNavigation(viewElements, viewElements.Count - 1); // ナビゲーションを明示したほうが長押し移動がスムーズになる？
                 }
 
                 // 不要な ViewElement は削除する
@@ -229,19 +231,20 @@ namespace ListingMF
                 SelectedIndex = -1;
             }
 
-            public void ApplySelectedIndex(List<ViewElement> viewElements)
+            public void ApplySelectedIndex(ScrollSubView subView)
             {
-                if (SelectedIndex <= 0 || viewElements.Count <= SelectedIndex || EventSystem.current == null)
+                if (SelectedIndex <= 0 || subView.viewElements.Count <= SelectedIndex || EventSystem.current == null)
                 {
                     // 選択オブジェクトが見つからなければ最初の項目を選択
-                    if (viewElements.Any(x => x.ElementName != null))
+                    if (ViewElement.TryFirstNotNull(subView.viewElements, out var first))
                     {
-                        EventSystem.current.SetSelectedGameObject(viewElements.First(x => x.ElementName != null).gameObject);
+                        //EventSystem.current.SetSelectedGameObject(first.gameObject); // これだと Show メソッドで interactable が true になる前に選択してしまう
+                        subView.QueueSelect(subView.gameObject, first.gameObject, CursorPlay.None);
                     }
                     return;
                 }
 
-                EventSystem.current.SetSelectedGameObject(viewElements[SelectedIndex].gameObject);
+                subView.QueueSelect(subView.gameObject, subView.viewElements[SelectedIndex].gameObject, CursorPlay.None);
             }
         }
     }

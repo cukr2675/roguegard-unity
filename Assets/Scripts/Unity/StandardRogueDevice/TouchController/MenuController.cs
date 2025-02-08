@@ -46,6 +46,10 @@ namespace RoguegardUnity
             StandardSubViewTable.SpeechBox.MessageBox.IsInProgress ||
             ShowsMenuScreen || EventManager.Wait;
 
+        protected override bool HasManagerLock =>
+            base.HasManagerLock || _stats.HasManagerLock || _face.HasManagerLock || _summary.HasManagerLock || _textEditor.HasManagerLock ||
+            _characterCreation.HasManagerLock || _paint.HasManagerLock || _dopesheet.HasManagerLock || (_titleMenu != null && _titleMenu.HasManagerLock);
+
         internal void Initialize(
             SoundController soundController, RogueSpriteRendererPool rendererPool, bool touchMaskIsEnabled = true)
         {
@@ -184,7 +188,11 @@ namespace RoguegardUnity
             {
                 EventManager.Add(DeviceKw.EnqueueSE, obj: DeviceKw.Submit);
             }
-            else if (value == "Cancel")
+            else if (value == "Select")
+            {
+                EventManager.Add(DeviceKw.EnqueueSE, obj: DeviceKw.Submit);
+            }
+            else if (value == "Cancel" || value == "SelectOutOfRange")
             {
                 EventManager.Add(DeviceKw.EnqueueSE, obj: DeviceKw.Cancel);
             }
