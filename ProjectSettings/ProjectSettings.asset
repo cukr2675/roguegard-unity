@@ -306,7 +306,7 @@ PlayerSettings:
     MANIFEST_DISPLAY: 
     MANIFEST_ORIENTATION: landscape
     PIXELATED: 1
-    SHORT_NAME: "\u30ED\u30B0\u30AC\u30EB"
+    SHORT_NAME: "\u30ED\u30FC\u30AC\u30EB"
   mobileMTRendering:
     Android: 1
     iPhone: 1
