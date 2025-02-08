@@ -4,7 +4,7 @@ using UnityEngine;
 
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using OchalikeSprite;
+using SDSSprite;
 using ListingMF;
 using Roguegard;
 using Roguegard.Device;

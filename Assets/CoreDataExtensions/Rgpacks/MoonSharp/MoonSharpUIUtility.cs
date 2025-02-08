@@ -5,7 +5,7 @@ using UnityEngine;
 using System.Text;
 using System.Text.RegularExpressions;
 using ListingMF;
-using OchalikeSprite;
+using SDSSprite;
 using MoonSharp.Interpreter;
 using Roguegard.Device;
 

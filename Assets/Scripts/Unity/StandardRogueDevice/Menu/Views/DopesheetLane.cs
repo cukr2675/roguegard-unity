@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using TMPro;
 using ListingMF;
-using OchalikeSprite;
+using SDSSprite;
 using RuntimeDotter;
 using Roguegard;
 using Roguegard.Device;

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using ListingMF;
-using OchalikeSprite;
+using SDSSprite;
 using Roguegard;
 using Roguegard.Device;
 

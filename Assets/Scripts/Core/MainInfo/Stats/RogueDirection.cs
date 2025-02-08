@@ -168,9 +168,9 @@ namespace Roguegard
         //    return new RogueDirection(angleIndex);
         //}
 
-        public static implicit operator OchalikeSprite.SpriteDirection(RogueDirection direction)
+        public static implicit operator SDSSprite.SpriteDirection(RogueDirection direction)
         {
-            return new OchalikeSprite.SpriteDirection(direction.angle);
+            return new SDSSprite.SpriteDirection(direction.angle);
         }
     }
 }

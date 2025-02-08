@@ -8,7 +8,7 @@ using System.Text.RegularExpressions;
 using System.IO;
 using UnityEditor;
 using UnityEditorInternal;
-using OchalikeSprite;
+using SDSSprite;
 
 namespace Roguegard.Editor
 {
