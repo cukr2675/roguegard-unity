@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-using SDSSprite;
+using OchalikeSprite;
 using Roguegard.Extensions;
 
 namespace Roguegard.CharacterCreation

@@ -10,7 +10,7 @@ using MoonSharp.Interpreter.Interop;
 using ListingMF;
 using Roguegard.Extensions;
 using Roguegard.Device;
-using SDSSprite;
+using OchalikeSprite;
 
 namespace Roguegard.Rgpacks.MoonSharp
 {
