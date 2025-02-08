@@ -24,6 +24,9 @@ namespace ListingMF.Audio
         [System.Serializable]
         public class Item
         {
+            [SerializeField] private string _playName;
+            public string PlayName { get => _playName; set => _playName = value; }
+
             [SerializeField] private AudioClip _audioClip;
             public AudioClip AudioClip { get => _audioClip; set => _audioClip = value; }
 

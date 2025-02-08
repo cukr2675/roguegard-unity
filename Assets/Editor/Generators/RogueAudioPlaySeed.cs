@@ -28,13 +28,14 @@ namespace Roguegard.Editor
                 // wavファイルを生成
                 var item = _items[i];
                 var audioClip = item.CreateAudioClip(blankSamples);
-                var targetPath = $@"{directory}\{item.PlayName}.wav";
+                var targetPath = $@"{directory}\{item.PlayName}.g.wav";
                 SaveAsWav(audioClip, targetPath);
                 EditorUtility.SetDirty(audioClip);
                 AssetDatabase.ImportAsset(targetPath);
 
                 // 実際に使用する AudioClip を取得
                 var resultItem = new AudioPlayTable.Item();
+                resultItem.PlayName = item.PlayName;
                 resultItem.AudioClip = AssetDatabase.LoadAssetAtPath<AudioClip>(targetPath);
                 resultItem.AudioMixerGroup = _audioMixerGroup;
                 resultItem.PlayBehaviour = _playBehaviour;

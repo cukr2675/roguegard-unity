@@ -49,7 +49,7 @@ namespace ListingMF.Audio
             foreach (var item in audioPlayTable.Items)
             {
                 var source = new Item(this, item.AudioClip, item.AudioMixerGroup, item.PlayBehaviour);
-                table.Add(item.AudioClip.name, source);
+                table.Add(item.PlayName, source);
             }
         }
 

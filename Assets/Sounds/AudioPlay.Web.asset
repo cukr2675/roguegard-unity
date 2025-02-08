@@ -14,99 +14,131 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _blankSamples: 4410
   _items:
-  - _audioClip: {fileID: 8300000, guid: b153ad8267b15a047897c12153e341bc, type: 3}
+  - _playName: Submit
+    _audioClip: {fileID: 8300000, guid: 62e42fa6b73283f47bef86cfd95d1726, type: 3}
     _audioMixerGroup: {fileID: 24300002, guid: 557080067eb351944861920837fdcdfe, type: 2}
     _playBehaviour: 0
-  - _audioClip: {fileID: 8300000, guid: d007872abcb252043bd912261dc6e9b8, type: 3}
+  - _playName: Cancel
+    _audioClip: {fileID: 8300000, guid: 7bdd64b7da0760b4f921289be36973e5, type: 3}
     _audioMixerGroup: {fileID: 24300002, guid: 557080067eb351944861920837fdcdfe, type: 2}
     _playBehaviour: 0
-  - _audioClip: {fileID: 8300000, guid: ecace78c4a096eb4eb096fc9186e1fa5, type: 3}
+  - _playName: "\u30D2\u30C3\u30C8"
+    _audioClip: {fileID: 8300000, guid: 6add6e0c62999d94693f6777ba70f215, type: 3}
     _audioMixerGroup: {fileID: 24300002, guid: 557080067eb351944861920837fdcdfe, type: 2}
     _playBehaviour: 0
-  - _audioClip: {fileID: 8300000, guid: 8c0fb61b809ee1547a5c434b8fc341d8, type: 3}
+  - _playName: NoDamage
+    _audioClip: {fileID: 8300000, guid: 2675aa8c5e4de5c45b908c258b465788, type: 3}
     _audioMixerGroup: {fileID: 24300002, guid: 557080067eb351944861920837fdcdfe, type: 2}
     _playBehaviour: 0
-  - _audioClip: {fileID: 8300000, guid: af7502edb1adc5543996cd172da9ef7b, type: 3}
+  - _playName: "\u901A\u5E38\u653B\u6483"
+    _audioClip: {fileID: 8300000, guid: 7242826a0caca9c40bcf3c48e41a712b, type: 3}
     _audioMixerGroup: {fileID: 24300002, guid: 557080067eb351944861920837fdcdfe, type: 2}
     _playBehaviour: 0
-  - _audioClip: {fileID: 8300000, guid: bd7cd43f0605202458866d91c7b6c05e, type: 3}
+  - _playName: "\u62FE\u3046"
+    _audioClip: {fileID: 8300000, guid: f3e0a30c066a663498e7c47b54284c93, type: 3}
     _audioMixerGroup: {fileID: 24300002, guid: 557080067eb351944861920837fdcdfe, type: 2}
     _playBehaviour: 0
-  - _audioClip: {fileID: 8300000, guid: f156b9a17194ea14f86bfd37976ff8d8, type: 3}
+  - _playName: Bomb
+    _audioClip: {fileID: 8300000, guid: 9866ef52025f28b42b0a1bffd4b33951, type: 3}
     _audioMixerGroup: {fileID: 24300002, guid: 557080067eb351944861920837fdcdfe, type: 2}
     _playBehaviour: 0
-  - _audioClip: {fileID: 8300000, guid: 63587831f52568648a169206a5160661, type: 3}
+  - _playName: "\u30AC\u30FC\u30C9"
+    _audioClip: {fileID: 8300000, guid: fd86a5fbf2a19fb40917d0af0d8472ad, type: 3}
     _audioMixerGroup: {fileID: 24300002, guid: 557080067eb351944861920837fdcdfe, type: 2}
     _playBehaviour: 0
-  - _audioClip: {fileID: 8300000, guid: 45e6ecd7dcb7fb84b94496a009374578, type: 3}
+  - _playName: StatusEffect
+    _audioClip: {fileID: 8300000, guid: 7daae84f6f01af14da255ece505f5072, type: 3}
     _audioMixerGroup: {fileID: 24300002, guid: 557080067eb351944861920837fdcdfe, type: 2}
     _playBehaviour: 0
-  - _audioClip: {fileID: 8300000, guid: 4b40e16c40e53b144966635d9832fc1f, type: 3}
+  - _playName: Confusion
+    _audioClip: {fileID: 8300000, guid: c7a023a6b2a2c924db9890b52577b4bd, type: 3}
     _audioMixerGroup: {fileID: 24300002, guid: 557080067eb351944861920837fdcdfe, type: 2}
     _playBehaviour: 0
-  - _audioClip: {fileID: 8300000, guid: de477b083be7b094fb8e073916247482, type: 3}
+  - _playName: "\u653E\u305F\u308C\u308B"
+    _audioClip: {fileID: 8300000, guid: c5fa96d2dbf5b8b40a0296dcec82a67c, type: 3}
     _audioMixerGroup: {fileID: 24300002, guid: 557080067eb351944861920837fdcdfe, type: 2}
     _playBehaviour: 0
-  - _audioClip: {fileID: 8300000, guid: b22e13b27d3580a43a972c8a0764e559, type: 3}
+  - _playName: "\u30B9\u30AD\u30EB"
+    _audioClip: {fileID: 8300000, guid: 393bddf4492b17949bb41f807e9e5304, type: 3}
     _audioMixerGroup: {fileID: 24300002, guid: 557080067eb351944861920837fdcdfe, type: 2}
     _playBehaviour: 0
-  - _audioClip: {fileID: 8300000, guid: a3398fcc3ee3e244a875e78f4ca79357, type: 3}
+  - _playName: "\u6295\u3052\u3089\u308C\u308B"
+    _audioClip: {fileID: 8300000, guid: 89fc3c82e95a9d341ac3b77aae0b5f0c, type: 3}
     _audioMixerGroup: {fileID: 24300002, guid: 557080067eb351944861920837fdcdfe, type: 2}
     _playBehaviour: 0
-  - _audioClip: {fileID: 8300000, guid: 1adf24224893bf0479668a41fa1ae246, type: 3}
+  - _playName: "\u88C5\u5099"
+    _audioClip: {fileID: 8300000, guid: 5306212cfee14e844a15b77f2b8cb0a9, type: 3}
     _audioMixerGroup: {fileID: 24300002, guid: 557080067eb351944861920837fdcdfe, type: 2}
     _playBehaviour: 0
-  - _audioClip: {fileID: 8300000, guid: cd2c7fa0a1088714c9efda04ed992083, type: 3}
+  - _playName: Paralysis
+    _audioClip: {fileID: 8300000, guid: 7d78330fbebef0043bc38d28e464ab1a, type: 3}
     _audioMixerGroup: {fileID: 24300002, guid: 557080067eb351944861920837fdcdfe, type: 2}
     _playBehaviour: 0
-  - _audioClip: {fileID: 8300000, guid: 5952831a06c0ce44c9f30750766bde09, type: 3}
+  - _playName: PowerSlash
+    _audioClip: {fileID: 8300000, guid: 0b223985d07ff484baf6c79f1383307a, type: 3}
     _audioMixerGroup: {fileID: 24300002, guid: 557080067eb351944861920837fdcdfe, type: 2}
     _playBehaviour: 0
-  - _audioClip: {fileID: 8300000, guid: fe4e7f222d713ef4c8eafdd0c50bb202, type: 3}
+  - _playName: Sort
+    _audioClip: {fileID: 8300000, guid: fb9f8e8d5690a63449d77322da99e0e8, type: 3}
     _audioMixerGroup: {fileID: 24300002, guid: 557080067eb351944861920837fdcdfe, type: 2}
     _playBehaviour: 0
-  - _audioClip: {fileID: 8300000, guid: bbd64fae019d30d4fa475d053868da47, type: 3}
+  - _playName: "\u56DE\u5FA9"
+    _audioClip: {fileID: 8300000, guid: 0e7ee777b32490545b68231f9f477847, type: 3}
     _audioMixerGroup: {fileID: 24300002, guid: 557080067eb351944861920837fdcdfe, type: 2}
     _playBehaviour: 0
-  - _audioClip: {fileID: 8300000, guid: 7a51874135532924480958f0af805023, type: 3}
+  - _playName: "\u884C\u52D5\u4E0D\u80FD"
+    _audioClip: {fileID: 8300000, guid: 5e78a66b41425404f8e7845fe987a9c1, type: 3}
     _audioMixerGroup: {fileID: 24300002, guid: 557080067eb351944861920837fdcdfe, type: 2}
     _playBehaviour: 0
-  - _audioClip: {fileID: 8300000, guid: cb7a820077a808f4f89d832d80d3f7b1, type: 3}
+  - _playName: GunThrow
+    _audioClip: {fileID: 8300000, guid: b0bc18e5edfa20d4d818e553d28e2e80, type: 3}
     _audioMixerGroup: {fileID: 24300002, guid: 557080067eb351944861920837fdcdfe, type: 2}
     _playBehaviour: 0
-  - _audioClip: {fileID: 8300000, guid: 4325e5adf2d74ab4f9d963187e208544, type: 3}
+  - _playName: Poison
+    _audioClip: {fileID: 8300000, guid: 25891d7c9d6555549b03cade0fcca335, type: 3}
     _audioMixerGroup: {fileID: 24300002, guid: 557080067eb351944861920837fdcdfe, type: 2}
     _playBehaviour: 0
-  - _audioClip: {fileID: 8300000, guid: 5cd67ba7632dad34bae985a13fc1c86a, type: 3}
+  - _playName: Pyro
+    _audioClip: {fileID: 8300000, guid: 7266ae7da58ecd94b88dc829217a4987, type: 3}
     _audioMixerGroup: {fileID: 24300002, guid: 557080067eb351944861920837fdcdfe, type: 2}
     _playBehaviour: 0
-  - _audioClip: {fileID: 8300000, guid: f6f8c0910b052a94eb78377ec6dace2d, type: 3}
+  - _playName: LevelUp
+    _audioClip: {fileID: 8300000, guid: 4004515ee9e45524b8f32cda0aab3344, type: 3}
     _audioMixerGroup: {fileID: 24300002, guid: 557080067eb351944861920837fdcdfe, type: 2}
     _playBehaviour: 0
-  - _audioClip: {fileID: 8300000, guid: 41cdee52a1d32024d9fc6fd9d44f28d5, type: 3}
+  - _playName: LevelDown
+    _audioClip: {fileID: 8300000, guid: da3ec090c2e18734c83ebdb5a1df5617, type: 3}
     _audioMixerGroup: {fileID: 24300002, guid: 557080067eb351944861920837fdcdfe, type: 2}
     _playBehaviour: 0
-  - _audioClip: {fileID: 8300000, guid: ee6dd18b0b9efc249891987c2cdd9fec, type: 3}
+  - _playName: "\u30D0\u30D5"
+    _audioClip: {fileID: 8300000, guid: cc486082b8d109841bbd8b1e7cdf3353, type: 3}
     _audioMixerGroup: {fileID: 24300002, guid: 557080067eb351944861920837fdcdfe, type: 2}
     _playBehaviour: 0
-  - _audioClip: {fileID: 8300000, guid: 57166fe87fe99b545bdbaef749f2e900, type: 3}
+  - _playName: "\u30C7\u30D0\u30D5"
+    _audioClip: {fileID: 8300000, guid: 67ce445e4895a114ab7db414b1843db3, type: 3}
     _audioMixerGroup: {fileID: 24300002, guid: 557080067eb351944861920837fdcdfe, type: 2}
     _playBehaviour: 0
-  - _audioClip: {fileID: 8300000, guid: e24347bcc86975144a1b2f704502bfa5, type: 3}
+  - _playName: StartTalk
+    _audioClip: {fileID: 8300000, guid: cc7526f2118c8a8429b46ebc89cdbd5b, type: 3}
     _audioMixerGroup: {fileID: 24300002, guid: 557080067eb351944861920837fdcdfe, type: 2}
     _playBehaviour: 0
-  - _audioClip: {fileID: 8300000, guid: d92843ad301af35479cdc5557ae06ae1, type: 3}
+  - _playName: "\u98DF\u3079\u308B"
+    _audioClip: {fileID: 8300000, guid: e27ec681e4bd4d542a97ff8d68946ca5, type: 3}
     _audioMixerGroup: {fileID: 24300002, guid: 557080067eb351944861920837fdcdfe, type: 2}
     _playBehaviour: 0
-  - _audioClip: {fileID: 8300000, guid: 061ece71b68551046ab084622e51d38e, type: 3}
+  - _playName: Teleport
+    _audioClip: {fileID: 8300000, guid: 8eec922141b52d347bf4eaf3ec24028a, type: 3}
     _audioMixerGroup: {fileID: 24300002, guid: 557080067eb351944861920837fdcdfe, type: 2}
     _playBehaviour: 0
-  - _audioClip: {fileID: 8300000, guid: e142613741bbe1a4597e4a2f15d13ca2, type: 3}
+  - _playName: "\u4E0B\u308A\u968E\u6BB5"
+    _audioClip: {fileID: 8300000, guid: 76889c0e1d2e20c41890fc8f40b7ae01, type: 3}
     _audioMixerGroup: {fileID: 24300002, guid: 557080067eb351944861920837fdcdfe, type: 2}
     _playBehaviour: 0
-  - _audioClip: {fileID: 8300000, guid: bf5e5fa6ba7b6d543b55a68429735b5c, type: 3}
+  - _playName: GameClear
+    _audioClip: {fileID: 8300000, guid: 56ab57ef59a37b24ca188428eea055ce, type: 3}
     _audioMixerGroup: {fileID: 24300002, guid: 557080067eb351944861920837fdcdfe, type: 2}
     _playBehaviour: 0
-  - _audioClip: {fileID: 8300000, guid: 8fb3fd7fc82eea4429b15f06e35a156d, type: 3}
+  - _playName: GameOver
+    _audioClip: {fileID: 8300000, guid: 5be9fae8310bf744cb0f17bd3d2e2a8a, type: 3}
     _audioMixerGroup: {fileID: 24300002, guid: 557080067eb351944861920837fdcdfe, type: 2}
     _playBehaviour: 0
