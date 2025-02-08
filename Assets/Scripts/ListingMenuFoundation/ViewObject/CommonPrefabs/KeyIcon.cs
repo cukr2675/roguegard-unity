@@ -13,7 +13,7 @@ namespace ListingMF
     {
         [SerializeField] private TMP_Text _keyText = null;
         [SerializeField] private Image _keySprite = null;
-        [SerializeField] private Vector2 _textMargin = Vector2.zero;
+        [SerializeField] private Vector2 _padding = Vector2.zero;
 
         private LayoutElement layoutElement;
         private RectTransform keySpriteTransform;
@@ -29,8 +29,8 @@ namespace ListingMF
         {
             _keyText.text = keyText;
             _keyText.ForceMeshUpdate(true, true);
-            layoutElement.preferredWidth = _keyText.preferredWidth + _textMargin.x * 2f;
-            layoutElement.preferredHeight = _keyText.preferredHeight + _textMargin.y * 2f;
+            layoutElement.preferredWidth = _keyText.preferredWidth + _padding.x * 2f;
+            layoutElement.preferredHeight = _keyText.preferredHeight + _padding.y * 2f;
             _keySprite.sprite = keySprite;
             gameObject.SetActive(true);
         }

@@ -112,7 +112,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _keyText: {fileID: 5808397416052080275}
   _keySprite: {fileID: 6051174446993013066}
-  _textMargin: {x: 12, y: 0}
+  _padding: {x: 12, y: 0}
 --- !u!1001 &673335388629559928
 PrefabInstance:
   m_ObjectHideFlags: 0
