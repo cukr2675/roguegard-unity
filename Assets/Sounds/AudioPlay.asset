@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae2c715d3ca40764e87456f0290ea4c0, type: 3}
+  m_Name: AudioPlay
+  m_EditorClassIdentifier: 
+  _platforms:
+  - _platformName: Default
+    _blankSamples: 0
+  - _platformName: Web
+    _blankSamples: 4410
+  _seeds:
+  - {fileID: 11400000, guid: 8103ad7fd63bb434e9eda75edde711bb, type: 2}

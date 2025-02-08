@@ -380,8 +380,8 @@ namespace Roguegard.Editor
                 node.BoneName = RoguegardAssetDatabase.GetBoneKeyword("Wing");
                 node.ParentBoneName = RoguegardAssetDatabase.GetBoneKeyword("Body");
                 node.PixelLocalPosition = new Vector3(0f, statureRank);
-                node.NormalOrderInParent = +4f;
-                node.BackOrderInParent = +4f;
+                node.NormalOrderInParent = +5f;
+                node.BackOrderInParent = +5f;
                 return node;
             }
         }
@@ -394,8 +394,8 @@ namespace Roguegard.Editor
                 node.BoneName = RoguegardAssetDatabase.GetBoneKeyword("Tail");
                 node.ParentBoneName = RoguegardAssetDatabase.GetBoneKeyword("Body");
                 node.PixelLocalPosition = new Vector3(1f, 2f);
-                node.NormalOrderInParent = +5f;
-                node.BackOrderInParent = +5f;
+                node.NormalOrderInParent = +4f;
+                node.BackOrderInParent = +4f;
                 return node;
             }
         }

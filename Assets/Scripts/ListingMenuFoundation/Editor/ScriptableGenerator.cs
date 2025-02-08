@@ -4,7 +4,7 @@ using UnityEngine;
 
 using UnityEditor;
 
-namespace ListingMF
+namespace ListingMF.Editor
 {
     public abstract class ScriptableGenerator : ScriptableObject
     {
@@ -14,7 +14,7 @@ namespace ListingMF
 
         [CustomEditor(typeof(ScriptableGenerator), true)]
         [CanEditMultipleObjects]
-        protected class Editor : UnityEditor.Editor
+        protected class ScriptableGeneratorEditor : UnityEditor.Editor
         {
             public override void OnInspectorGUI()
             {
@@ -34,24 +34,19 @@ namespace ListingMF
                 var iconSearchFilter = ((ScriptableGenerator)target).IconSearchFilter;
                 if (iconSearchFilter != null)
                 {
-                    var iconGuids = AssetDatabase.FindAssets(iconSearchFilter, new[] { "Assets", "Packages" });
+                    var iconGuids = AssetDatabase.FindAssets($"{iconSearchFilter} t:sprite", new[] { "Assets", "Packages" });
                     foreach (var iconGuid in iconGuids)
                     {
                         var iconPath = AssetDatabase.GUIDToAssetPath(iconGuid);
-                        var icon = AssetDatabase.LoadAssetAtPath<Object>(iconPath);
-                        if (icon is Sprite)
-                        {
-                            var tempPreview = AssetPreview.GetAssetPreview(icon);
-                            var preview = new Texture2D(width, height);
-                            EditorUtility.CopySerialized(tempPreview, preview);
-                            return preview;
-                        }
-                        else if (icon is Texture texture) // Compression == None でないとエラーになる
-                        {
-                            var preview = new Texture2D(width, height);
-                            EditorUtility.CopySerialized(texture, preview);
-                            return preview;
-                        }
+                        var icon = AssetDatabase.LoadAssetAtPath<Sprite>(iconPath);
+                        if (icon == null) continue;
+
+                        var tempPreview = AssetPreview.GetAssetPreview(icon);
+                        if (tempPreview == null) continue;
+
+                        var preview = new Texture2D(width, height);
+                        EditorUtility.CopySerialized(tempPreview, preview);
+                        return preview;
                     }
                 }
 

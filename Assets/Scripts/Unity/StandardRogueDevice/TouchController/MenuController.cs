@@ -4,6 +4,7 @@ using UnityEngine;
 
 using UnityEngine.UI;
 using ListingMF;
+using ListingMF.Audio;
 using Roguegard;
 using Roguegard.Device;
 
@@ -14,6 +15,7 @@ namespace RoguegardUnity
     /// </summary>
     public class MenuController : MMgr
     {
+        [SerializeField] private WebOtherAudioPlayHandler _audioPlayHandler = null;
         [SerializeField] private StatsSubView _stats = null;
         [SerializeField] private FaceSubView _face = null;
         [SerializeField] private SummarySubView _summary = null;
@@ -32,7 +34,6 @@ namespace RoguegardUnity
         private LongDownMenu longDownMenu;
         private ObjsMenu objsMenu;
 
-        private SoundController soundController;
         internal ListMenuEventManager EventManager { get; private set; }
 
         /// <summary>
@@ -50,8 +51,7 @@ namespace RoguegardUnity
             base.HasManagerLock || _stats.HasManagerLock || _face.HasManagerLock || _summary.HasManagerLock || _textEditor.HasManagerLock ||
             _characterCreation.HasManagerLock || _paint.HasManagerLock || _dopesheet.HasManagerLock || (_titleMenu != null && _titleMenu.HasManagerLock);
 
-        internal void Initialize(
-            SoundController soundController, RogueSpriteRendererPool rendererPool, bool touchMaskIsEnabled = true)
+        internal void Initialize(RogueSpriteRendererPool rendererPool, bool touchMaskIsEnabled = true)
         {
             BackOption = SelectOption.Create<MMgr, MArg>("<", (manager, arg) => manager.PopMenuScreen(), "Cancel click:Cancel");
 
@@ -73,8 +73,7 @@ namespace RoguegardUnity
             _dopesheet.Initialize();
             if (_titleMenu != null) { _titleMenu.Initialize(); }
 
-            this.soundController = soundController;
-            EventManager = new ListMenuEventManager(new MessageController(StandardSubViewTable), soundController);
+            EventManager = new ListMenuEventManager(new MessageController(StandardSubViewTable), _audioPlayHandler);
         }
 
         public void Open(RogueObj menuSubject)
@@ -184,33 +183,21 @@ namespace RoguegardUnity
 
         public void Play(string value, object sender)
         {
-            if (value == "Submit")
+            if (value == "Select")
             {
                 EventManager.Add(DeviceKw.EnqueueSE, obj: DeviceKw.Submit);
             }
-            else if (value == "Select")
-            {
-                EventManager.Add(DeviceKw.EnqueueSE, obj: DeviceKw.Submit);
-            }
-            else if (value == "Cancel" || value == "SelectOutOfRange")
+            else if (value == "SelectOutOfRange")
             {
                 EventManager.Add(DeviceKw.EnqueueSE, obj: DeviceKw.Cancel);
             }
-            else if (value == "Sort")
-            {
-                EventManager.Add(DeviceKw.EnqueueSE, obj: StdKw.Sort);
-            }
-            else if (value == "PickUp")
-            {
-                EventManager.Add(DeviceKw.EnqueueSE, obj: MainInfoKw.PickUp);
-            }
             else if (value == "StartSpeech")
             {
-                soundController.PlayLoop(DeviceKw.StartTalk);
+                _audioPlayHandler.PlayLoop(DeviceKw.StartTalk.Name);
             }
             else if (value == "EndSpeech")
             {
-                soundController.SetLastLoop(DeviceKw.StartTalk);
+                _audioPlayHandler.SetLastLoop(DeviceKw.StartTalk.Name);
             }
         }
 

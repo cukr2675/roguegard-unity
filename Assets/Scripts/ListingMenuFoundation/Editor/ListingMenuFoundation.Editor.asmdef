@@ -1,7 +1,9 @@
 {
     "name": "ListingMenuFoundation.Editor",
     "rootNamespace": "ListingMF.Editor",
-    "references": [],
+    "references": [
+        "GUID:39cbc532d78a39c47a64cb722d1c8a72"
+    ],
     "includePlatforms": [
         "Editor"
     ],

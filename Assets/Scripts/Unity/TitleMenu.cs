@@ -33,39 +33,27 @@ namespace RoguegardUnity
         private RogueSpriteRendererPool spriteRendererPool;
         private RogueTilemapRenderer tilemapRendererPrefab;
         private TouchController touchControllerPrefab;
-        private SoundTable soundTable;
         private AudioMixer audioMixer;
-        private AudioSource seAudioSourcePrefab;
-        private AudioSource bgmAudioSourcePrefab;
         private StandardRogueDeviceInspector runtimeInspectorPrefab;
 
         public void Show(
             RogueSpriteRendererPool spriteRendererPool,
             RogueTilemapRenderer tilemapRendererPrefab,
             TouchController touchControllerPrefab,
-            SoundTable soundTable,
             AudioMixer audioMixer,
-            AudioSource seAudioSourcePrefab,
-            AudioSource bgmAudioSourcePrefab,
             StandardRogueDeviceInspector runtimeInspectorPrefab)
         {
             this.spriteRendererPool = spriteRendererPool;
             this.tilemapRendererPrefab = tilemapRendererPrefab;
             this.touchControllerPrefab = touchControllerPrefab;
-            this.soundTable = soundTable;
             this.audioMixer = audioMixer;
-            this.seAudioSourcePrefab = seAudioSourcePrefab;
-            this.bgmAudioSourcePrefab = bgmAudioSourcePrefab;
             this.runtimeInspectorPrefab = runtimeInspectorPrefab;
-
-            var soundController = new SoundController();
-            soundController.Open(null, this, seAudioSourcePrefab, soundTable);
 
             _versionText.text = Application.version;
 
 
 
-            _menuController.Initialize(soundController, spriteRendererPool, false);
+            _menuController.Initialize(spriteRendererPool, false);
 
             _menuController.OnError += () =>
             {
@@ -97,8 +85,7 @@ namespace RoguegardUnity
             MessageWorkListener.AddListener(new DeviceMessageWorkListener());
 
             device.Open(
-                spriteRendererPool, tilemapRendererPrefab, touchControllerPrefab,
-                soundTable, audioMixer, seAudioSourcePrefab, bgmAudioSourcePrefab, runtimeInspectorPrefab);
+                spriteRendererPool, tilemapRendererPrefab, touchControllerPrefab, audioMixer, runtimeInspectorPrefab);
         }
 
 

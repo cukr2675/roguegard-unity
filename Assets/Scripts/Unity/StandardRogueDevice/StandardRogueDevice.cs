@@ -36,17 +36,13 @@ namespace RoguegardUnity
             RogueSpriteRendererPool spriteRendererPool,
             RogueTilemapRenderer tilemapRendererPrefab,
             TouchController touchControllerPrefab,
-            SoundTable soundTable,
             AudioMixer audioMixer,
-            AudioSource seAudioSourcePrefab,
-            AudioSource bgmAudioSourcePrefab,
             StandardRogueDeviceInspector runtimeInspectorPrefab)
         {
             var name = "StandardDevice";
             componentManager = new StandardRogueDeviceComponentManager();
             componentManager.Initialize(
-                name, spriteRendererPool, tilemapRendererPrefab, touchControllerPrefab,
-                soundTable, audioMixer, seAudioSourcePrefab, bgmAudioSourcePrefab, runtimeInspectorPrefab);
+                name, spriteRendererPool, tilemapRendererPrefab, touchControllerPrefab, audioMixer, runtimeInspectorPrefab);
             componentManager.OpenDelay(data);
             data = null;
         }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 using System.IO;
 using UnityEditor;
-using ListingMF;
+using ListingMF.Editor;
 
 namespace Roguegard.Editor
 {

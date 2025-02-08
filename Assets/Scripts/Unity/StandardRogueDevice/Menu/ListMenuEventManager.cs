@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using ListingMF.Audio;
 using Roguegard;
 
 namespace RoguegardUnity
@@ -9,17 +10,17 @@ namespace RoguegardUnity
     internal class ListMenuEventManager
     {
         private readonly MessageController messageController;
-        private readonly SoundController soundController;
+        private readonly WebOtherAudioPlayHandler audioPlayHandler;
         private readonly WaitTimer waitTimer;
 
         public RogueObj MenuSubject { get; set; }
 
-        public bool Wait => soundController.Wait || waitTimer.Wait;
+        public bool Wait => audioPlayHandler.Wait || waitTimer.Wait;
 
-        public ListMenuEventManager(MessageController messageController, SoundController soundController)
+        public ListMenuEventManager(MessageController messageController, WebOtherAudioPlayHandler audioPlayHandler)
         {
             this.messageController = messageController;
-            this.soundController = soundController;
+            this.audioPlayHandler = audioPlayHandler;
             waitTimer = new WaitTimer();
         }
 
@@ -53,7 +54,7 @@ namespace RoguegardUnity
             }
             if (keyword == DeviceKw.EnqueueSE || keyword == DeviceKw.EnqueueSEAndWait)
             {
-                soundController.Play((IKeyword)obj, keyword == DeviceKw.EnqueueSEAndWait);
+                audioPlayHandler.Play(((IKeyword)obj).Name, keyword == DeviceKw.EnqueueSEAndWait);
                 return;
             }
             if (keyword == DeviceKw.EnqueueWaitSeconds)

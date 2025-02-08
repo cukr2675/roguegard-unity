@@ -69,11 +69,13 @@ namespace ListingMF
         private void OnDrawGizmos()
         {
             if (!UnityEditor.EditorPrefs.GetBool("SelectableEditor.ShowNavigation")) return;
+            if (UnityEditor.Selection.activeGameObject == null) return;
+            if (!UnityEditor.Selection.activeGameObject.GetComponent<Selectable>()) return;
 
             var rect = ((RectTransform)transform).rect;
             var center = rect.center * transform.lossyScale;
             var position = (Vector2)transform.position + center;
-            Gizmos.color = new Color(0f, 1f, 0f, .2f);
+            Gizmos.color = new Color(0f, 1f, 0f, .25f);
             Gizmos.matrix = Matrix4x4.Translate(position) * Matrix4x4.Rotate(Quaternion.Euler(0f, 0f, 45f));
             Gizmos.DrawWireCube(Vector3.zero, Vector3.one * 25f); // サイズは適当
         }

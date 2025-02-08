@@ -48,12 +48,11 @@ namespace RoguegardUnity
         private static readonly PushCommand pushCommand = new PushCommand();
         private static readonly SwapPositionCommand swapPositionCommand = new SwapPositionCommand();
 
-        internal void Initialize(
-            Tilemap tilemap, SoundController soundController, RogueSpriteRendererPool rendererPool, System.Action stopAutoPlay)
+        internal void Initialize(Tilemap tilemap, RogueSpriteRendererPool rendererPool, System.Action stopAutoPlay)
         {
             _inputController.LongPressThresholdTurns = 4;
             _inputController.Initialize(tilemap, false, false, stopAutoPlay);
-            _menuController.Initialize(soundController, rendererPool);
+            _menuController.Initialize(rendererPool);
             _headerController.Initialize();
         }
 

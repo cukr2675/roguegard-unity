@@ -38,10 +38,7 @@ namespace RoguegardUnity
             RogueSpriteRendererPool spriteRendererPool,
             RogueTilemapRenderer tilemapRendererPrefab,
             TouchController touchControllerPrefab,
-            SoundTable soundTable,
             AudioMixer audioMixer,
-            AudioSource seAudioSourcePrefab,
-            AudioSource bgmAudioSourcePrefab,
             StandardRogueDeviceInspector runtimeInspectorPrefab)
         {
             parent = new GameObject($"{name} - Parent").transform;
@@ -61,15 +58,10 @@ namespace RoguegardUnity
             var tilemapGrid = Object.Instantiate(tilemapRendererPrefab, parent);
             tilemapRenderSystem.Open(tilemapGrid);
 
-            // 音声再生
-            var soundController = new SoundController();
-            soundController.Open(parent, ticker, seAudioSourcePrefab, soundTable);
-
             // UI表示
             touchController = Object.Instantiate(touchControllerPrefab, parent);
             var autoPlayDeviceEventHandler = new AutoPlayDeviceEventHandler(this, touchController, x => Subject = x);
-            touchController.Initialize(
-                tilemapGrid.Tilemap, soundController, spriteRendererPool, () => autoPlayDeviceEventHandler.StopAutoPlay());
+            touchController.Initialize(tilemapGrid.Tilemap, spriteRendererPool, () => autoPlayDeviceEventHandler.StopAutoPlay());
             touchController.GetInfo(out menuController);
             Application.logMessageReceived += OnLogMessageReceived;
 
