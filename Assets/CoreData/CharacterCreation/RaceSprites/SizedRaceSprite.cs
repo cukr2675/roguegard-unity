@@ -19,7 +19,8 @@ namespace Roguegard.CharacterCreation
 
             var bodyColor = characterCreationData.Race.BodyColor;
             var hairColor = RogueColorUtility.GetHairColor(characterCreationData);
-            mainBone = item.Bone.CreateBone(bodyColor, hairColor.maxColorComponent);
+            var bright = OchalikeSpritesUtility.GetBright(hairColor);
+            mainBone = item.Bone.CreateBone(bodyColor, bright);
 
             morph = new AppearanceMorph();
         }

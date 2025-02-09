@@ -7,7 +7,55 @@ namespace OchalikeSprites
     public static class OchalikeSpritesUtility
     {
         public static int DefaultPixelsPerUnit => 32;
-        public static float LightDarkThreshold => .4f;
+
+        private static Color EyelidColor => Color.white * .25f; // まぶたの色
+        private static float LightDarkThreshold => 40f;
+
+        public static bool GetBright(Color color) => GetBright(color, LightDarkThreshold);
+
+        private static bool GetBright(Color color, float lightDarkThreshold)
+        {
+            return CalculateCIE76(color, EyelidColor) >= lightDarkThreshold;
+        }
+
+        private static float CalculateCIE76(Color color1, Color color2)
+        {
+            var xyz1 = RGBtoXYZ(color1);
+            var xyz2 = RGBtoXYZ(color2);
+
+            var lab1 = XYZtoLab(xyz1);
+            var lab2 = XYZtoLab(xyz2);
+
+            return Vector3.Distance(lab1, lab2);
+        }
+
+        private static Vector3 RGBtoXYZ(Color sRGB)
+        {
+            var r = sRGB.r > 0.04045f ? Mathf.Pow((sRGB.r + 0.055f) / 1.055f, 2.4f) : (sRGB.r / 12.92f);
+            var g = sRGB.g > 0.04045f ? Mathf.Pow((sRGB.g + 0.055f) / 1.055f, 2.4f) : (sRGB.g / 12.92f);
+            var b = sRGB.b > 0.04045f ? Mathf.Pow((sRGB.b + 0.055f) / 1.055f, 2.4f) : (sRGB.b / 12.92f);
+
+            var x = r * 0.4124564f + g * 0.3575761f + b * 0.1804375f;
+            var y = r * 0.2126729f + g * 0.7151522f + b * 0.0721750f;
+            var z = r * 0.0193339f + g * 0.1191920f + b * 0.9503041f;
+            return new Vector3(x, y, z);
+        }
+
+        private static Vector3 XYZtoLab(Vector3 xyz)
+        {
+            var x = xyz.x / 0.95047f;
+            var y = xyz.y / 1.00000f;
+            var z = xyz.z / 1.08883f;
+
+            x = x > 0.008856f ? Mathf.Pow(x, 1.0f / 3.0f) : (7.787f * x) + (16.0f / 116.0f);
+            y = y > 0.008856f ? Mathf.Pow(y, 1.0f / 3.0f) : (7.787f * y) + (16.0f / 116.0f);
+            z = z > 0.008856f ? Mathf.Pow(z, 1.0f / 3.0f) : (7.787f * z) + (16.0f / 116.0f);
+
+            var L = (116.0f * y) - 16.0f;
+            var a = 500.0f * (x - y);
+            var b = 200.0f * (y - z);
+            return new Vector3(L, a, b);
+        }
 
         /// <summary>
         /// <paramref name="resolution"/> 個に分割した角度のうち、右向きから反時計回りでの <paramref name="degree"/> 度が何個目にあたるかを取得する。

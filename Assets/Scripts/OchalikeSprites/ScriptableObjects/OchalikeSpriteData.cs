@@ -10,9 +10,6 @@ namespace OchalikeSprites
         [SerializeField] private int _pixelsPerUnit = OchalikeSpritesUtility.DefaultPixelsPerUnit;
         public int PixelsPerUnit { get => _pixelsPerUnit; set => _pixelsPerUnit = value; }
 
-        [SerializeField] private float _lightDarkThreshold = OchalikeSpritesUtility.LightDarkThreshold;
-        public float LightDarkThreshold { get => _lightDarkThreshold; set => _lightDarkThreshold = value; }
-
         [SerializeField] private List<Bone> _bones = new List<Bone>();
 
         public Bone this[int index]
@@ -33,9 +30,8 @@ namespace OchalikeSprites
             _bones.Clear();
         }
 
-        public OchalikeBone CreateBone(Color bareColor, float brightness)
+        public OchalikeBone CreateBone(Color bareColor, bool bright)
         {
-            var bright = brightness >= _lightDarkThreshold;
             return Recursion(0);
 
             OchalikeBone Recursion(int index)
