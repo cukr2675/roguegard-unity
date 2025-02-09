@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using MoonSharp.Interpreter;
-using SDSSprite;
+using OchalikeSprites;
 
 namespace Roguegard.Rgpacks.MoonSharp
 {

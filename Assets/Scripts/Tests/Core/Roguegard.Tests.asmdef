@@ -3,7 +3,7 @@
     "rootNamespace": "Roguegard",
     "references": [
         "Roguegard",
-        "SDSkeletalSprite"
+        "OchalikeSprites"
     ],
     "includePlatforms": [
         "Editor"

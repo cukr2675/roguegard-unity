@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using ListingMF;
-using SDSSprite;
+using OchalikeSprites;
 using Roguegard;
 using Roguegard.Device;
 using Roguegard.CharacterCreation;

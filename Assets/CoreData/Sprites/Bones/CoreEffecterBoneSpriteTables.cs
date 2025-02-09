@@ -8,8 +8,8 @@ namespace Roguegard
     {
         private static CoreEffecterBoneSpriteTables instance;
 
-        [SerializeField] private SDSSprite.EffecterBoneSpriteTableData _guruguruEyes;
-        public static SDSSprite.EffecterBoneSpriteTableData GuruguruEyes => instance._guruguruEyes;
+        [SerializeField] private OchalikeSprites.EffecterBoneSpriteTableData _guruguruEyes;
+        public static OchalikeSprites.EffecterBoneSpriteTableData GuruguruEyes => instance._guruguruEyes;
 
         public override IEnumerator LoadAsync()
         {

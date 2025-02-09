@@ -4,7 +4,7 @@ using UnityEngine;
 
 using TMPro;
 using ListingMF;
-using SDSSprite;
+using OchalikeSprites;
 using RuntimeDotter;
 using Roguegard.Device;
 
