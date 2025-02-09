@@ -15,31 +15,31 @@ namespace Roguegard.CharacterCreation
 
         public void GetSpriteValues(
             IRaceOption raceOption, ICharacterCreationData characterCreationData, IRogueGender gender,
-            out NodeBone mainNode, out AppearanceBoneSpriteTable boneSpriteTable)
+            out OchalikeBone mainBone, out AppearanceBoneSpriteTable boneSpriteTable)
         {
             var item = GetItem(gender);
 
             var bodyColor = characterCreationData.Race.BodyColor;
             var hairColor = RogueColorUtility.GetHairColor(characterCreationData);
-            mainNode = item.Bone.CreateNodeBone(bodyColor, hairColor.maxColorComponent);
+            mainBone = item.Bone.CreateBone(bodyColor, hairColor.maxColorComponent);
 
             boneSpriteTable = new AppearanceBoneSpriteTable();
 
             for (int i = 0; i < item.Appearances.Count; i++)
             {
                 var appearance = item.Appearances[i];
-                appearance.Option.Affect(mainNode, boneSpriteTable, appearance, characterCreationData);
+                appearance.Option.Affect(mainBone, boneSpriteTable, appearance, characterCreationData);
             }
         }
 
         public void GetObjSprite(
-            IRaceOption raceOption, ICharacterCreationData characterCreationData, IRogueGender gender, RogueObj self, IReadOnlyNodeBone nodeBone,
+            IRaceOption raceOption, ICharacterCreationData characterCreationData, IRogueGender gender, RogueObj self, IReadOnlyOchalikeBone mainBone,
             out IRogueObjSprite objSprite, out ISpriteMotionSet motionSet)
         {
             var infoSet = self.Main.InfoSet;
-            if (nodeBone != null)
+            if (mainBone != null)
             {
-                objSprite = BoneRogueSprite.CreateOrReuse(self, nodeBone, infoSet.Icon, infoSet.Color);
+                objSprite = OchalikeRogueSprite.CreateOrReuse(self, mainBone, infoSet.Icon, infoSet.Color);
             }
             else
             {
@@ -66,8 +66,8 @@ namespace Roguegard.CharacterCreation
             [SerializeField] private RogueGender _gender = null;
             public IRogueGender Gender => _gender;
 
-            [SerializeField] private SkeletalSpriteData _bone = null;
-            public SkeletalSpriteData Bone => _bone;
+            [SerializeField] private OchalikeSpriteData _bone = null;
+            public OchalikeSpriteData Bone => _bone;
 
             [SerializeField] private SpriteMotionSetData _motionSet = null;
             public SpriteMotionSetData MotionSet => _motionSet;

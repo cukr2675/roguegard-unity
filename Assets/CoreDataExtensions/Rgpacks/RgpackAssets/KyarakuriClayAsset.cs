@@ -134,22 +134,22 @@ namespace Roguegard.Rgpacks
 
         public void GetSpriteValues(
             IRaceOption raceOption, ICharacterCreationData characterCreationData, IRogueGender gender,
-            out NodeBone mainNode, out AppearanceBoneSpriteTable boneSpriteTable)
+            out OchalikeBone mainBone, out AppearanceBoneSpriteTable boneSpriteTable)
         {
             if (raceSpriteCmn != null)
             {
                 var tuple = ((object, object))raceSpriteCmn.Invoke();
-                mainNode = (NodeBone)tuple.Item1;
+                mainBone = (OchalikeBone)tuple.Item1;
                 boneSpriteTable = (AppearanceBoneSpriteTable)tuple.Item2;
             }
             else
             {
-                RoguegardSettings.DefaultRaceOption.GetSpriteValues(raceOption, characterCreationData, gender, out mainNode, out boneSpriteTable);
+                RoguegardSettings.DefaultRaceOption.GetSpriteValues(raceOption, characterCreationData, gender, out mainBone, out boneSpriteTable);
             }
         }
 
         public void GetObjSprite(
-            IRaceOption raceOption, ICharacterCreationData characterCreationData, IRogueGender gender, RogueObj self, IReadOnlyNodeBone nodeBone,
+            IRaceOption raceOption, ICharacterCreationData characterCreationData, IRogueGender gender, RogueObj self, IReadOnlyOchalikeBone mainBone,
             out IRogueObjSprite objSprite, out ISpriteMotionSet motionSet)
         {
             if (raceSpriteCmn != null)
@@ -160,7 +160,7 @@ namespace Roguegard.Rgpacks
             }
             else
             {
-                RoguegardSettings.DefaultRaceOption.GetObjSprite(raceOption, characterCreationData, gender, self, nodeBone, out objSprite, out motionSet);
+                RoguegardSettings.DefaultRaceOption.GetObjSprite(raceOption, characterCreationData, gender, self, mainBone, out objSprite, out motionSet);
             }
         }
 

@@ -26,7 +26,7 @@ namespace Roguegard.CharacterCreation
             return new Color(red, green, blue, alpha);
         }
 
-        public static Color GetFirstColor(BoneKeyword boneName, IReadOnlyNodeBone rootNode, EffectableBoneSpriteTable boneSpriteTable)
+        public static Color GetFirstColor(BoneKeyword boneName, IReadOnlyOchalikeBone rootBone, EffectableBoneSpriteTable boneSpriteTable)
         {
             var sprite = boneSpriteTable.GetSprite(boneName);
             if (sprite.OverridesSourceColor)
@@ -34,16 +34,16 @@ namespace Roguegard.CharacterCreation
                 return sprite.FirstColor;
             }
 
-            var bone = Recursion(rootNode);
+            var bone = Recursion(rootBone);
             return bone.Color;
 
-            IReadOnlyNodeBone Recursion(IReadOnlyNodeBone node)
+            IReadOnlyOchalikeBone Recursion(IReadOnlyOchalikeBone bone)
             {
-                if (node.Name == boneName) return node;
+                if (bone.Name == boneName) return bone;
 
-                for (int i = 0; i < node.Children.Count; i++)
+                for (int i = 0; i < bone.Children.Count; i++)
                 {
-                    var result = Recursion(node.Children[i]);
+                    var result = Recursion(bone.Children[i]);
                     if (result != null) return result;
                 }
                 return null;

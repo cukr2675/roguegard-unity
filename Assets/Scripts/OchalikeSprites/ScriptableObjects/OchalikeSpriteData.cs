@@ -4,8 +4,8 @@ using UnityEngine;
 
 namespace OchalikeSprites
 {
-    [CreateAssetMenu(menuName = "Ochalike Sprites/Skeletal Sprite")]
-    public class SkeletalSpriteData : ScriptableObject
+    [CreateAssetMenu(menuName = "Ochalike Sprites/Ochalike Sprite")]
+    public class OchalikeSpriteData : ScriptableObject
     {
         [SerializeField] private int _pixelsPerUnit = OchalikeSpritesUtility.DefaultPixelsPerUnit;
         public int PixelsPerUnit { get => _pixelsPerUnit; set => _pixelsPerUnit = value; }
@@ -13,58 +13,58 @@ namespace OchalikeSprites
         [SerializeField] private float _lightDarkThreshold = OchalikeSpritesUtility.LightDarkThreshold;
         public float LightDarkThreshold { get => _lightDarkThreshold; set => _lightDarkThreshold = value; }
 
-        [SerializeField] private List<Node> _nodes = new List<Node>();
+        [SerializeField] private List<Bone> _bones = new List<Bone>();
 
-        public Node this[int index]
+        public Bone this[int index]
         {
-            get => _nodes[index];
-            set => _nodes[index] = value;
+            get => _bones[index];
+            set => _bones[index] = value;
         }
 
-        public int Count => _nodes.Count;
+        public int Count => _bones.Count;
 
-        public void Add(Node node)
+        public void Add(Bone bone)
         {
-            _nodes.Add(node);
+            _bones.Add(bone);
         }
 
-        public void ClearNodes()
+        public void ClearBones()
         {
-            _nodes.Clear();
+            _bones.Clear();
         }
 
-        public NodeBone CreateNodeBone(Color color, float brightness)
+        public OchalikeBone CreateBone(Color color, float brightness)
         {
             var bright = brightness >= _lightDarkThreshold;
             return Recursion(0);
 
-            NodeBone Recursion(int index)
+            OchalikeBone Recursion(int index)
             {
-                var node = _nodes[index];
-                var bone = node.ToBone(color, bright, _pixelsPerUnit);
+                var bone = _bones[index];
+                var result = bone.ToBone(color, bright, _pixelsPerUnit);
                 var startIndex = index + 1;
-                for (int i = startIndex; i < _nodes.Count; i++)
+                for (int i = startIndex; i < _bones.Count; i++)
                 {
-                    var itemNode = _nodes[i];
-                    if (itemNode.ParentBoneName != node.BoneName) continue;
+                    var itemBone = _bones[i];
+                    if (itemBone.ParentBoneName != bone.BoneName) continue;
 
                     var child = Recursion(i);
-                    bone.Children.Add(child);
+                    result.Children.Add(child);
                 }
-                return bone;
+                return result;
             }
         }
 
         private void OnValidate()
         {
-            foreach (var node in _nodes)
+            foreach (var bone in _bones)
             {
-                if (node.LocalRotation.Equals(default)) node.LocalRotation = Quaternion.identity;
+                if (bone.LocalRotation.Equals(default)) bone.LocalRotation = Quaternion.identity;
             }
         }
 
         [System.Serializable]
-        public class Node
+        public class Bone
         {
             [SerializeField] private BoneKeywordData _boneName = null;
             public BoneKeywordData BoneName { get => _boneName; set => _boneName = value; }
@@ -101,9 +101,9 @@ namespace OchalikeSprites
             [SerializeField] private float _backOrderInParent = 0f;
             public float BackOrderInParent { get => _backOrderInParent; set => _backOrderInParent = value; }
 
-            public NodeBone ToBone(Color color, bool bright, int pixelsPerUnit)
+            public OchalikeBone ToBone(Color color, bool bright, int pixelsPerUnit)
             {
-                var bone = new NodeBone();
+                var bone = new OchalikeBone();
                 bone.Name = _boneName;
                 bone.Sprite = _sprite.GetSprite(bright);
                 bone.Color = color;

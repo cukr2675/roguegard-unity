@@ -114,13 +114,13 @@ namespace Roguegard.Rgpacks
 
         void IRaceOption.GetSpriteValues(
             IRaceOption raceOption, ICharacterCreationData characterCreationData, IRogueGender gender,
-            out NodeBone mainNode, out AppearanceBoneSpriteTable boneSpriteTable)
-            => Asset.GetSpriteValues(raceOption, characterCreationData, gender, out mainNode, out boneSpriteTable);
+            out OchalikeBone mainBone, out AppearanceBoneSpriteTable boneSpriteTable)
+            => Asset.GetSpriteValues(raceOption, characterCreationData, gender, out mainBone, out boneSpriteTable);
 
         void IRaceOption.GetObjSprite(
-            IRaceOption raceOption, ICharacterCreationData characterCreationData, IRogueGender gender, RogueObj self, IReadOnlyNodeBone nodeBone,
+            IRaceOption raceOption, ICharacterCreationData characterCreationData, IRogueGender gender, RogueObj self, IReadOnlyOchalikeBone mainBone,
             out IRogueObjSprite objSprite, out ISpriteMotionSet motionSet)
-            => Asset.GetObjSprite(raceOption, characterCreationData, gender, self, nodeBone, out objSprite, out motionSet);
+            => Asset.GetObjSprite(raceOption, characterCreationData, gender, self, mainBone, out objSprite, out motionSet);
 
         void IRaceOption.UpdateMemberRange(IMember member, IRaceOption raceOption, ICharacterCreationData characterCreationData)
             => Asset.RaceOptionUpdateMemberRange(member, raceOption, characterCreationData);

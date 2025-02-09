@@ -10,7 +10,7 @@ namespace Roguegard.CharacterCreation
     public interface IAppearanceOption : IRogueDescription
     {
         /// <summary>
-        /// この <see cref="IAppearanceOption"/> の前提となる <see cref="NodeBone"/> の名前を取得する。
+        /// この <see cref="IAppearanceOption"/> の前提となる <see cref="OchalikeBone"/> の名前を取得する。
         /// null のときは自由枠とする。
         /// </summary>
         BoneKeyword BoneName { get; }
@@ -20,6 +20,6 @@ namespace Roguegard.CharacterCreation
         void UpdateMemberRange(IMember member, IReadOnlyAppearance appearance, ICharacterCreationData characterCreationData);
 
         void Affect(
-            NodeBone mainNode, AppearanceBoneSpriteTable boneSpriteTable, IReadOnlyAppearance appearance, ICharacterCreationData characterCreationData);
+            OchalikeBone mainBone, AppearanceBoneSpriteTable boneSpriteTable, IReadOnlyAppearance appearance, ICharacterCreationData characterCreationData);
     }
 }

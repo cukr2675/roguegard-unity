@@ -8,10 +8,10 @@ using OchalikeSprites;
 namespace Roguegard
 {
     // CharacterCreation で bodyColor からスプライトの種類を変えることがあるため BaseColoredSprite は実装しない。
-    public class BoneRogueSprite : IRogueObjSprite
+    public class OchalikeRogueSprite : IRogueObjSprite
     {
-        private IReadOnlyNodeBone rootNode;
-        private SkeletalSpriteNode root;
+        private IReadOnlyOchalikeBone rootBone;
+        private OchalikeSpriteNode root;
 
         private TileObject _tile;
         public TileBase Tile => _tile;
@@ -23,29 +23,29 @@ namespace Roguegard
         private int normalBonesCount;
         private int backBonesCount;
         private SpritePose enabledImmutablePose;
-        private ISkeletalSpriteRenderController lastRenderController;
+        private IOchalikeSpriteRenderController lastRenderController;
 
         private static readonly EffectableBoneSpriteTable boneSpriteTable = new EffectableBoneSpriteTable();
 
-        private BoneRogueSprite()
+        private OchalikeRogueSprite()
         {
         }
 
         /// <summary>
         /// 引数の値が <paramref name="sprite"/> と一致するなら <paramref name="sprite"/> を取得し、違うなら新しく生成する。
         /// </summary>
-        public static BoneRogueSprite CreateOrReuse(RogueObj self, IReadOnlyNodeBone nodeBone, Sprite sprite, Color effectedColor)
+        public static OchalikeRogueSprite CreateOrReuse(RogueObj self, IReadOnlyOchalikeBone mainBone, Sprite sprite, Color effectedColor)
         {
-            if (self.Main.Sprite.Sprite is BoneRogueSprite objSprite && nodeBone == objSprite.rootNode &&
+            if (self.Main.Sprite.Sprite is OchalikeRogueSprite objSprite && mainBone == objSprite.rootBone &&
                 sprite == objSprite._tile.sprite && effectedColor == objSprite.EffectedColor)
             {
                 return objSprite;
             }
             else
             {
-                var instance = new BoneRogueSprite();
-                instance.rootNode = nodeBone;
-                instance.root = new SkeletalSpriteNode(nodeBone);
+                var instance = new OchalikeRogueSprite();
+                instance.rootBone = mainBone;
+                instance.root = new OchalikeSpriteNode(mainBone);
                 instance._tile = ScriptableObject.CreateInstance<TileObject>();
                 instance._tile.sprite = sprite;
                 instance.EffectedColor = effectedColor;
@@ -61,7 +61,7 @@ namespace Roguegard
             for (int i = 0; i < effects.Count; i++)
             {
                 var effect = effects[i];
-                effect.AffectSprite(self, rootNode, boneSpriteTable);
+                effect.AffectSprite(self, rootBone, boneSpriteTable);
             }
             root.ApplyTable(boneSpriteTable);
             wasChangedEquipments = true;
@@ -78,7 +78,7 @@ namespace Roguegard
             enabledOrder = boneOrder;
         }
 
-        public void SetTo(ISkeletalSpriteRenderController renderController, SpritePose pose, SpriteDirection direction)
+        public void SetTo(IOchalikeSpriteRenderController renderController, SpritePose pose, SpriteDirection direction)
         {
             // 装備が変更されておらず、引数のポーズが前回のポーズと同じかつ不変であれば、更新する必要はない。
             // ただし RenderController が同一の場合に限る。

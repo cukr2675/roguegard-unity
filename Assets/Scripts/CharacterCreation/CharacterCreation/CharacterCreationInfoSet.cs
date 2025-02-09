@@ -45,7 +45,7 @@ namespace Roguegard.CharacterCreation
         private readonly IRogueGender _gender;
 
         [System.NonSerialized] private float _weight;
-        [System.NonSerialized] private IReadOnlyNodeBone nodeBone;
+        [System.NonSerialized] private IReadOnlyOchalikeBone mainBone;
         [System.NonSerialized] private AppearanceBoneSpriteTable characterBoneSpriteTable;
 
         public IKeyword Category => CurrentRaceOption.Category;
@@ -58,7 +58,7 @@ namespace Roguegard.CharacterCreation
         {
             get
             {
-                if (nodeBone == null) { Reload(); }
+                if (mainBone == null) { Reload(); }
 
                 return _weight;
             }
@@ -113,23 +113,23 @@ namespace Roguegard.CharacterCreation
         {
             _currentRaceOption = null;
             _weight = CurrentRaceOption.GetWeight(CurrentRaceOption, Data);
-            CurrentRaceOption.GetSpriteValues(CurrentRaceOption, Data, _gender, out var mainNode, out characterBoneSpriteTable);
+            CurrentRaceOption.GetSpriteValues(CurrentRaceOption, Data, _gender, out var mainBone, out characterBoneSpriteTable);
 
-            if (mainNode != null)
+            if (mainBone != null)
             {
                 var appearances = Data.Appearances;
                 for (int i = 0; i < appearances.Count; i++)
                 {
                     var appearance = appearances[i];
-                    appearance.Option.Affect(mainNode, characterBoneSpriteTable, appearance, Data);
+                    appearance.Option.Affect(mainBone, characterBoneSpriteTable, appearance, Data);
                 }
-                nodeBone = mainNode;
+                this.mainBone = mainBone;
             }
         }
 
         public IMainInfoSet Open(RogueObj self, MainInfoSetType infoSetType, bool polymorph2Base)
         {
-            if (nodeBone == null) { Reload(); }
+            if (mainBone == null) { Reload(); }
 
             var newRaceOption = CurrentRaceOption.Open(self, infoSetType, polymorph2Base, CurrentRaceOption, Data);
             characterBoneSpriteTable.AddEffectFromInfoSet(self);
@@ -144,7 +144,7 @@ namespace Roguegard.CharacterCreation
 
         public void Close(RogueObj self, MainInfoSetType infoSetType, bool base2Polymorph)
         {
-            if (nodeBone == null) { Reload(); }
+            if (mainBone == null) { Reload(); }
 
             CurrentRaceOption.Close(self, infoSetType, base2Polymorph, CurrentRaceOption, Data);
             characterBoneSpriteTable.Remove(self);
@@ -175,9 +175,9 @@ namespace Roguegard.CharacterCreation
 
         public void GetObjSprite(RogueObj self, out IRogueObjSprite objSprite, out ISpriteMotionSet motionSet)
         {
-            if (nodeBone == null) { Reload(); }
+            if (mainBone == null) { Reload(); }
 
-            CurrentRaceOption.GetObjSprite(CurrentRaceOption, Data, _gender, self, nodeBone, out objSprite, out motionSet);
+            CurrentRaceOption.GetObjSprite(CurrentRaceOption, Data, _gender, self, mainBone, out objSprite, out motionSet);
         }
 
         public RogueObj CreateObj(RogueObj location, Vector2Int position, IRogueRandom random, StackOption stackOption = StackOption.Default)

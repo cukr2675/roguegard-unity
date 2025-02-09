@@ -41,7 +41,7 @@ namespace Roguegard
             }
         }
 
-        public void SetTo(ISkeletalSpriteRenderController renderController, SpritePose pose, SpriteDirection direction)
+        public void SetTo(IOchalikeSpriteRenderController renderController, SpritePose pose, SpriteDirection direction)
         {
             var angleIndex = (int)direction;
             var sprite = angleIndex % 2 == 0 ? spriteLeft : spriteLowerLeft;

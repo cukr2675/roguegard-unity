@@ -10,6 +10,6 @@ namespace OchalikeSprites
     /// </summary>
     public interface ISpriteMotion
     {
-        void ApplyTo(int animationTime, SpriteDirection direction, ref SkeletalSpriteTransform transform, out bool endOfMotion);
+        void ApplyTo(int animationTime, SpriteDirection direction, ref OchalikeSpriteTransform transform, out bool endOfMotion);
     }
 }

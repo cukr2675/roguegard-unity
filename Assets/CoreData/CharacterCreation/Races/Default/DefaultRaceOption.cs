@@ -101,16 +101,16 @@ namespace Roguegard.CharacterCreation
 
         public void GetSpriteValues(
             IRaceOption raceOption, ICharacterCreationData characterCreationData, IRogueGender gender,
-            out NodeBone mainNode, out AppearanceBoneSpriteTable boneSpriteTable)
+            out OchalikeBone mainBone, out AppearanceBoneSpriteTable boneSpriteTable)
         {
-            _sprite.Ref.GetSpriteValues(raceOption, characterCreationData, gender, out mainNode, out boneSpriteTable);
+            _sprite.Ref.GetSpriteValues(raceOption, characterCreationData, gender, out mainBone, out boneSpriteTable);
         }
 
         public void GetObjSprite(
-            IRaceOption raceOption, ICharacterCreationData characterCreationData, IRogueGender gender, RogueObj self, IReadOnlyNodeBone nodeBone,
+            IRaceOption raceOption, ICharacterCreationData characterCreationData, IRogueGender gender, RogueObj self, IReadOnlyOchalikeBone mainBone,
             out IRogueObjSprite objSprite, out ISpriteMotionSet motionSet)
         {
-            _sprite.Ref.GetObjSprite(raceOption, characterCreationData, gender, self, nodeBone, out objSprite, out motionSet);
+            _sprite.Ref.GetObjSprite(raceOption, characterCreationData, gender, self, mainBone, out objSprite, out motionSet);
         }
     }
 }

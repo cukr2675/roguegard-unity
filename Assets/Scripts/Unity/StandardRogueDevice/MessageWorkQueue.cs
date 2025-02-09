@@ -159,7 +159,7 @@ namespace RoguegardUnity
             public override IKeyword Keyword => null;
 
             public override void ApplyTo(
-                ISpriteMotionSet motionSet, int animationTime, SpriteDirection direction, ref SkeletalSpriteTransform transform, out bool endOfMotion)
+                ISpriteMotionSet motionSet, int animationTime, SpriteDirection direction, ref OchalikeSpriteTransform transform, out bool endOfMotion)
             {
                 transform.Scale = Vector3.zero;
                 endOfMotion = true;

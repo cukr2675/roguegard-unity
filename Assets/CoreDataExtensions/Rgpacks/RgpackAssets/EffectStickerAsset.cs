@@ -42,7 +42,7 @@ namespace Roguegard.Rgpacks
             return RogueObjUpdaterContinueType.Break;
         }
 
-        void IBoneSpriteEffect.AffectSprite(RogueObj self, IReadOnlyNodeBone rootNode, EffectableBoneSpriteTable boneSpriteTable)
+        void IBoneSpriteEffect.AffectSprite(RogueObj self, IReadOnlyOchalikeBone rootBone, EffectableBoneSpriteTable boneSpriteTable)
         {
             _sprite.AddTo(boneSpriteTable);
         }

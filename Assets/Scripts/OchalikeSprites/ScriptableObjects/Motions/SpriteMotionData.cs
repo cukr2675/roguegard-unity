@@ -6,6 +6,6 @@ namespace OchalikeSprites
 {
     public abstract class SpriteMotionData : ScriptableObject, ISpriteMotion
     {
-        public abstract void ApplyTo(int animationTime, SpriteDirection direction, ref SkeletalSpriteTransform transform, out bool endOfMotion);
+        public abstract void ApplyTo(int animationTime, SpriteDirection direction, ref OchalikeSpriteTransform transform, out bool endOfMotion);
     }
 }

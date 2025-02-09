@@ -34,7 +34,7 @@ namespace RoguegardUnity
             var obj = mArg.Arg.TargetObj;
             var facial = (ISpriteMotion)mArg.Arg.Other;
             obj.Main.Sprite.Update(obj);
-            var spriteTransform = SkeletalSpriteTransform.Identity;
+            var spriteTransform = OchalikeSpriteTransform.Identity;
             if (facial != null)
             {
                 facial.ApplyTo(0, RogueDirection.Right, ref spriteTransform, out _);

@@ -8,29 +8,29 @@ namespace Roguegard.CharacterCreation
 {
     public class ConstantRaceSprite : ReferableScript, IRaceOptionSprite
     {
-        [SerializeField] private SkeletalSpriteData _bone = null;
+        [SerializeField] private OchalikeSpriteData _bone = null;
 
         [SerializeField] private SpriteMotionSetData _motionSet = null;
 
         public void GetSpriteValues(
             IRaceOption raceOption, ICharacterCreationData characterCreationData, IRogueGender gender,
-            out NodeBone mainNode, out AppearanceBoneSpriteTable boneSpriteTable)
+            out OchalikeBone mainBone, out AppearanceBoneSpriteTable boneSpriteTable)
         {
             var bodyColor = characterCreationData.Race.BodyColor;
             var hairColor = RogueColorUtility.GetHairColor(characterCreationData);
-            if (_bone != null) { mainNode = _bone.CreateNodeBone(bodyColor, hairColor.maxColorComponent); }
-            else { mainNode = null; }
+            if (_bone != null) { mainBone = _bone.CreateBone(bodyColor, hairColor.maxColorComponent); }
+            else { mainBone = null; }
             boneSpriteTable = new AppearanceBoneSpriteTable();
         }
 
         public void GetObjSprite(
-            IRaceOption raceOption, ICharacterCreationData characterCreationData, IRogueGender gender, RogueObj self, IReadOnlyNodeBone nodeBone,
+            IRaceOption raceOption, ICharacterCreationData characterCreationData, IRogueGender gender, RogueObj self, IReadOnlyOchalikeBone mainBone,
             out IRogueObjSprite objSprite, out ISpriteMotionSet motionSet)
         {
             var infoSet = self.Main.InfoSet;
-            if (nodeBone != null)
+            if (mainBone != null)
             {
-                objSprite = BoneRogueSprite.CreateOrReuse(self, nodeBone, infoSet.Icon, infoSet.Color);
+                objSprite = OchalikeRogueSprite.CreateOrReuse(self, mainBone, infoSet.Icon, infoSet.Color);
             }
             else
             {

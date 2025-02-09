@@ -65,7 +65,7 @@ namespace RoguegardUnity
         private bool SetTo(RogueObj obj, ISpriteMotion spriteMotion, int spriteMotionAnimationTime, RogueDirection direction, int motionEffectAnimationTime)
         {
             var motionSet = obj.Main.Sprite.MotionSet;
-            var transform = SkeletalSpriteTransform.Identity;
+            var transform = OchalikeSpriteTransform.Identity;
             IKeyword keyword = null;
             bool endOfMotion;
             if (spriteMotion is IRogueSpriteMotion rogueSpriteMotion)
@@ -121,7 +121,7 @@ namespace RoguegardUnity
         {
             effectSprite ??= ColoredRogueSprite.Create(null, RoguegardSettings.BoneSpriteBaseColor);
 
-            var transform = SkeletalSpriteTransform.Identity;
+            var transform = OchalikeSpriteTransform.Identity;
             spriteMotion.ApplyTo(motionEffectAnimationTime, direction, ref transform, out var endOfMotion);
 
             var x = Mathf.Round(transform.Position.x * RoguegardSettings.PixelsPerUnit) / RoguegardSettings.PixelsPerUnit;

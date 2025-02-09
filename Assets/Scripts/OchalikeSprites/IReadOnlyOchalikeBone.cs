@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace OchalikeSprites
 {
-    public interface IReadOnlyNodeBone
+    public interface IReadOnlyOchalikeBone
     {
         BoneKeyword Name { get; }
 
@@ -41,6 +41,6 @@ namespace OchalikeSprites
 
         float BackOrderInParent { get; }
 
-        IReadOnlyList<IReadOnlyNodeBone> Children { get; }
+        IReadOnlyList<IReadOnlyOchalikeBone> Children { get; }
     }
 }

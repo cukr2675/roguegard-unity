@@ -92,7 +92,7 @@ namespace Roguegard
             };
         }
 
-        void IBoneSpriteEffect.AffectSprite(RogueObj self, IReadOnlyNodeBone rootNode, EffectableBoneSpriteTable boneSpriteTable)
+        void IBoneSpriteEffect.AffectSprite(RogueObj self, IReadOnlyOchalikeBone rootBone, EffectableBoneSpriteTable boneSpriteTable)
         {
             // 目の色を変更
             var color = new Color32(255, 0, 255, 255);

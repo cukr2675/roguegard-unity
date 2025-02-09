@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace OchalikeSprites
 {
-    public interface ISkeletalSpriteRenderController
+    public interface IOchalikeSpriteRenderController
     {
         int Count { get; }
 

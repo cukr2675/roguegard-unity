@@ -118,7 +118,7 @@ namespace Roguegard.CharacterCreation
             void IStatusEffect.GetEffectedName(RogueNameBuilder refName, RogueObj self) { }
 
             void ISpriteMotionEffect.ApplyTo(
-                ISpriteMotionSet motionSet, IKeyword keyword, int animationTime, RogueDirection direction, ref SkeletalSpriteTransform transform)
+                ISpriteMotionSet motionSet, IKeyword keyword, int animationTime, RogueDirection direction, ref OchalikeSpriteTransform transform)
             {
                 LevitationStatusEffect.MotionApplyTo(motionSet, keyword, animationTime, direction, ref transform);
             }

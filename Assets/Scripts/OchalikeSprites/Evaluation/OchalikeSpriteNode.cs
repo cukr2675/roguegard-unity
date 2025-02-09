@@ -4,16 +4,16 @@ using UnityEngine;
 
 namespace OchalikeSprites
 {
-    public class SkeletalSpriteNode : ISortableBone<SkeletalSpriteNode>
+    public class OchalikeSpriteNode : ISortableBone<OchalikeSpriteNode>
     {
-        public readonly IReadOnlyNodeBone source;
+        public readonly IReadOnlyOchalikeBone source;
 
-        BoneKeyword ISortableBone<SkeletalSpriteNode>.Name => source.Name;
-        float ISortableBone<SkeletalSpriteNode>.NormalOrderInParent => source.NormalOrderInParent;
-        float ISortableBone<SkeletalSpriteNode>.BackOrderInParent => source.BackOrderInParent;
+        BoneKeyword ISortableBone<OchalikeSpriteNode>.Name => source.Name;
+        float ISortableBone<OchalikeSpriteNode>.NormalOrderInParent => source.NormalOrderInParent;
+        float ISortableBone<OchalikeSpriteNode>.BackOrderInParent => source.BackOrderInParent;
 
-        private readonly BoneChildren<SkeletalSpriteNode> _children;
-        ISortableBoneChildren<SkeletalSpriteNode> ISortableBone<SkeletalSpriteNode>.Children => _children;
+        private readonly BoneChildren<OchalikeSpriteNode> _children;
+        ISortableBoneChildren<OchalikeSpriteNode> ISortableBone<OchalikeSpriteNode>.Children => _children;
 
         public BoneBack.Type LocalBack { get; set; }
         public int NormalFrontSpriteCount { get; set; }
@@ -31,42 +31,42 @@ namespace OchalikeSprites
         private readonly List<Color> equipmentColors;
         private bool overridesBaseColor;
 
-        public SkeletalSpriteNode(IReadOnlyNodeBone nodeBone)
+        public OchalikeSpriteNode(IReadOnlyOchalikeBone bone)
         {
-            source = nodeBone;
-            _children = new BoneChildren<SkeletalSpriteNode>();
+            source = bone;
+            _children = new BoneChildren<OchalikeSpriteNode>();
             equipmentSprites = new List<BoneSprite>();
             equipmentColors = new List<Color>();
-            for (int i = 0; i < nodeBone.Children.Count; i++)
+            for (int i = 0; i < bone.Children.Count; i++)
             {
-                var childBone = nodeBone.Children[i];
-                var child = new SkeletalSpriteNode(childBone);
+                var childBone = bone.Children[i];
+                var child = new OchalikeSpriteNode(childBone);
                 _children.AddChild(child);
             }
         }
 
-        public SkeletalSpriteNode(SkeletalSpriteNode node)
+        public OchalikeSpriteNode(OchalikeSpriteNode node)
         {
             source = node.source;
-            _children = new BoneChildren<SkeletalSpriteNode>();
+            _children = new BoneChildren<OchalikeSpriteNode>();
             equipmentSprites = new List<BoneSprite>();
             equipmentColors = new List<Color>();
             for (int i = 0; i < node._children.Count; i++)
             {
                 var childBone = node._children[i];
-                var child = new SkeletalSpriteNode(childBone);
+                var child = new OchalikeSpriteNode(childBone);
                 _children.AddChild(child);
             }
         }
 
-        private bool Equals(IReadOnlyNodeBone nodeBone)
+        private bool Equals(IReadOnlyOchalikeBone bone)
         {
-            if (nodeBone != source) return false;
-            if (nodeBone.Children.Count != _children.Count) return false;
+            if (bone != source) return false;
+            if (bone.Children.Count != _children.Count) return false;
             for (int i = 0; i < _children.Count; i++)
             {
                 var child = _children[i];
-                var boneChild = nodeBone.Children[i];
+                var boneChild = bone.Children[i];
                 if (!child.Equals(boneChild)) return false;
             }
             return true;
@@ -114,7 +114,7 @@ namespace OchalikeSprites
         }
 
         public void SetTo(
-            ISkeletalSpriteRenderController renderController,
+            IOchalikeSpriteRenderController renderController,
             IReadOnlyDictionary<BoneKeyword, BoneTransform> boneTransforms, bool poseBack,
             Vector3 parentPosition, Quaternion parentRotation, Vector3 scaleOfLocalByParent,
             bool parentMirrorX, bool parentMirrorY, Color baseColor)

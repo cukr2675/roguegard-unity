@@ -37,7 +37,7 @@ namespace Roguegard
             spriteMotionState.Update();
         }
 
-        public void SetTo(ISkeletalSpriteRenderController renderController, SpritePose pose, SpriteDirection direction)
+        public void SetTo(IOchalikeSpriteRenderController renderController, SpritePose pose, SpriteDirection direction)
         {
             objSprite.SetTo(renderController, pose, direction);
         }

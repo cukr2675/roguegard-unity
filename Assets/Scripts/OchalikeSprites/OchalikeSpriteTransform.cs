@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace OchalikeSprites
 {
-    public ref struct SkeletalSpriteTransform
+    public ref struct OchalikeSpriteTransform
     {
         public Vector3 Position { get; set; }
         public Quaternion Rotation { get; set; }
@@ -12,9 +12,9 @@ namespace OchalikeSprites
         public IDirectionalSpritePoseSource PoseSource { get; set; }
         public SpriteDirection Direction { get; set; }
 
-        public static SkeletalSpriteTransform Identity => new SkeletalSpriteTransform(false);
+        public static OchalikeSpriteTransform Identity => new OchalikeSpriteTransform(false);
 
-        private SkeletalSpriteTransform(bool flag)
+        private OchalikeSpriteTransform(bool flag)
         {
             Position = Vector3.zero;
             Rotation = Quaternion.identity;

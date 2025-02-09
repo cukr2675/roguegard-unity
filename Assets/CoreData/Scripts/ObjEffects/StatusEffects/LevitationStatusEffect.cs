@@ -38,7 +38,7 @@ namespace Roguegard
         }
 
         public static void MotionApplyTo(
-            ISpriteMotionSet motionSet, IKeyword keyword, int animationTime, RogueDirection direction, ref SkeletalSpriteTransform transform)
+            ISpriteMotionSet motionSet, IKeyword keyword, int animationTime, RogueDirection direction, ref OchalikeSpriteTransform transform)
         {
             Motion.Instance.ApplyTo(motionSet, animationTime, direction, ref transform, out _);
         }
@@ -97,7 +97,7 @@ namespace Roguegard
             }
 
             void ISpriteMotionEffect.ApplyTo(
-                ISpriteMotionSet motionSet, IKeyword keyword, int animationTime, RogueDirection direction, ref SkeletalSpriteTransform transform)
+                ISpriteMotionSet motionSet, IKeyword keyword, int animationTime, RogueDirection direction, ref OchalikeSpriteTransform transform)
             {
                 Motion.Instance.ApplyTo(motionSet, animationTime, direction, ref transform, out _);
             }
@@ -120,7 +120,7 @@ namespace Roguegard
             };
 
             public override void ApplyTo(
-                ISpriteMotionSet motionSet, int animationTime, SpriteDirection direction, ref SkeletalSpriteTransform transform, out bool endOfMotion)
+                ISpriteMotionSet motionSet, int animationTime, SpriteDirection direction, ref OchalikeSpriteTransform transform, out bool endOfMotion)
             {
                 var index = animationTime / 8 % positions.Length;
                 transform.Position = positions[index] + Vector3.up * (4f / RoguegardSettings.PixelsPerUnit);

@@ -28,7 +28,7 @@ namespace OchalikeSprites
             coloredPoseTable = new Dictionary<IDirectionalSpritePoseSource, IDirectionalSpritePoseSource>();
         }
 
-        public void ApplyTo(int animationTime, SpriteDirection direction, ref SkeletalSpriteTransform transform, out bool endOfMotion)
+        public void ApplyTo(int animationTime, SpriteDirection direction, ref OchalikeSpriteTransform transform, out bool endOfMotion)
         {
             baseMotion.ApplyTo(animationTime, direction, ref transform, out endOfMotion);
 

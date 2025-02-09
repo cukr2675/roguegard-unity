@@ -42,7 +42,7 @@ namespace Roguegard
             }
         }
 
-        public void ApplyTo(int animationTime, SpriteDirection direction, ref SkeletalSpriteTransform transform, out bool endOfMotion)
+        public void ApplyTo(int animationTime, SpriteDirection direction, ref OchalikeSpriteTransform transform, out bool endOfMotion)
         {
             if (poses == null) { Initialize(); }
 
@@ -202,7 +202,7 @@ namespace Roguegard
                 {
                     var subSpriteMotion = subSpriteMotions[i];
                     var animationTime = Mathf.FloorToInt(AsynchronousKeyTime * 60f);
-                    var transform = SkeletalSpriteTransform.Identity;
+                    var transform = OchalikeSpriteTransform.Identity;
                     subSpriteMotion.ApplyTo(animationTime, direction, ref transform, out _);
 
                     var subSpritePose = transform.PoseSource.GetSpritePose(direction);

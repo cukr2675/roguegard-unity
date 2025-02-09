@@ -26,7 +26,7 @@ namespace Roguegard
         }
 
         public override void ApplyTo(
-            ISpriteMotionSet motionSet, int animationTime, SpriteDirection direction, ref SkeletalSpriteTransform transform, out bool endOfMotion)
+            ISpriteMotionSet motionSet, int animationTime, SpriteDirection direction, ref OchalikeSpriteTransform transform, out bool endOfMotion)
         {
             motionSet.GetPose(Keyword, animationTime, direction, ref transform, out endOfMotion);
         }

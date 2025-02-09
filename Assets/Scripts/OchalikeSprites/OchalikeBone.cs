@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace OchalikeSprites
 {
-    public class NodeBone : IReadOnlyNodeBone
+    public class OchalikeBone : IReadOnlyOchalikeBone
     {
         public BoneKeyword Name { get; set; }
         public BoneSprite Sprite { get; set; }
@@ -18,8 +18,8 @@ namespace OchalikeSprites
         public float NormalOrderInParent { get; set; }
         public float BackOrderInParent { get; set; }
 
-        public BoneList Children { get; } = new BoneList();
+        public OchalikeBoneList Children { get; } = new OchalikeBoneList();
 
-        IReadOnlyList<IReadOnlyNodeBone> IReadOnlyNodeBone.Children => Children;
+        IReadOnlyList<IReadOnlyOchalikeBone> IReadOnlyOchalikeBone.Children => Children;
     }
 }

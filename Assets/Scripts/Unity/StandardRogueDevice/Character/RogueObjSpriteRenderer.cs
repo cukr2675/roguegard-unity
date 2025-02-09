@@ -7,7 +7,7 @@ using OchalikeSprites;
 
 namespace RoguegardUnity
 {
-    public class RogueObjSpriteRenderer : MonoBehaviour, ISkeletalSpriteRenderController
+    public class RogueObjSpriteRenderer : MonoBehaviour, IOchalikeSpriteRenderController
     {
         /// <summary>
         /// このインスタンスを生成・プーリングする親

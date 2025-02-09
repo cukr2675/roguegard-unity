@@ -75,7 +75,7 @@ namespace Roguegard
         }
 
         public void ApplyTo(
-            ISpriteMotionSet motionSet, IKeyword keyword, int animationTime, RogueDirection direction, ref SkeletalSpriteTransform transform)
+            ISpriteMotionSet motionSet, IKeyword keyword, int animationTime, RogueDirection direction, ref OchalikeSpriteTransform transform)
         {
             for (int i = 0; i < showEffects.Count; i++)
             {

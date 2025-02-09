@@ -12,26 +12,26 @@ namespace Roguegard.CharacterCreation
 
         public void GetSpriteValues(
             IRaceOption raceOption, ICharacterCreationData characterCreationData, IRogueGender gender,
-            out NodeBone mainNode, out AppearanceBoneSpriteTable boneSpriteTable)
+            out OchalikeBone mainBone, out AppearanceBoneSpriteTable boneSpriteTable)
         {
             var standardMember = StandardRaceMember.GetMember(characterCreationData.Race);
             var item = _items[standardMember.Size];
 
             var bodyColor = characterCreationData.Race.BodyColor;
             var hairColor = RogueColorUtility.GetHairColor(characterCreationData);
-            mainNode = item.Bone.CreateNodeBone(bodyColor, hairColor.maxColorComponent);
+            mainBone = item.Bone.CreateBone(bodyColor, hairColor.maxColorComponent);
 
             boneSpriteTable = new AppearanceBoneSpriteTable();
         }
 
         public void GetObjSprite(
-            IRaceOption raceOption, ICharacterCreationData characterCreationData, IRogueGender gender, RogueObj self, IReadOnlyNodeBone nodeBone,
+            IRaceOption raceOption, ICharacterCreationData characterCreationData, IRogueGender gender, RogueObj self, IReadOnlyOchalikeBone mainBone,
             out IRogueObjSprite objSprite, out ISpriteMotionSet motionSet)
         {
             var infoSet = self.Main.InfoSet;
-            if (nodeBone != null)
+            if (mainBone != null)
             {
-                objSprite = BoneRogueSprite.CreateOrReuse(self, nodeBone, infoSet.Icon, infoSet.Color);
+                objSprite = OchalikeRogueSprite.CreateOrReuse(self, mainBone, infoSet.Icon, infoSet.Color);
             }
             else
             {
@@ -47,8 +47,8 @@ namespace Roguegard.CharacterCreation
         [System.Serializable]
         public class Item
         {
-            [SerializeField] private SkeletalSpriteData _bone = null;
-            public SkeletalSpriteData Bone => _bone;
+            [SerializeField] private OchalikeSpriteData _bone = null;
+            public OchalikeSpriteData Bone => _bone;
 
             [SerializeField] private SpriteMotionSetData _motionSet = null;
             public SpriteMotionSetData MotionSet => _motionSet;

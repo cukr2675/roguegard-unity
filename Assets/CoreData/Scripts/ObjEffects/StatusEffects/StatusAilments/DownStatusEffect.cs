@@ -61,7 +61,7 @@ namespace Roguegard
         }
 
         void ISpriteMotionEffect.ApplyTo(
-            ISpriteMotionSet motionSet, IKeyword keyword, int animationTime, RogueDirection direction, ref SkeletalSpriteTransform transform)
+            ISpriteMotionSet motionSet, IKeyword keyword, int animationTime, RogueDirection direction, ref OchalikeSpriteTransform transform)
         {
             if (keyword != MainInfoKw.Hit && keyword != MainInfoKw.BeDefeated)
             {

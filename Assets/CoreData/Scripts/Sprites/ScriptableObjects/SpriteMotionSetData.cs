@@ -28,7 +28,7 @@ namespace Roguegard
         }
 
         void ISpriteMotionSet.GetPose(
-            IKeyword keyword, int animationTime, SpriteDirection direction, ref SkeletalSpriteTransform transform, out bool endOfMotion)
+            IKeyword keyword, int animationTime, SpriteDirection direction, ref OchalikeSpriteTransform transform, out bool endOfMotion)
         {
             if (!TryGetValue(keyword, out var value))
             {

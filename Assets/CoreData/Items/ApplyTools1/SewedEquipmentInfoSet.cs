@@ -171,7 +171,7 @@ namespace Roguegard
                 equipmentSpriteState.Remove(this);
             }
 
-            void IBoneSpriteEffect.AffectSprite(RogueObj owner, IReadOnlyNodeBone rootNode, EffectableBoneSpriteTable boneSpriteTable)
+            void IBoneSpriteEffect.AffectSprite(RogueObj owner, IReadOnlyOchalikeBone rootBone, EffectableBoneSpriteTable boneSpriteTable)
             {
                 if (!colorIsInitialized)
                 {

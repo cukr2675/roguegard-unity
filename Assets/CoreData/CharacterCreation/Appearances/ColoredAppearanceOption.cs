@@ -19,11 +19,11 @@ namespace Roguegard.CharacterCreation
         protected abstract BoneSprite GetSprite(IReadOnlyAppearance appearance, ICharacterCreationData characterCreationData);
 
         public sealed override void Affect(
-            NodeBone mainNode, AppearanceBoneSpriteTable boneSpriteTable, IReadOnlyAppearance appearance, ICharacterCreationData characterCreationData)
+            OchalikeBone mainBone, AppearanceBoneSpriteTable boneSpriteTable, IReadOnlyAppearance appearance, ICharacterCreationData characterCreationData)
         {
             if (IsBone)
             {
-                Recursion(mainNode);
+                Recursion(mainBone);
             }
             else
             {
@@ -32,11 +32,11 @@ namespace Roguegard.CharacterCreation
                 return;
             }
 
-            void Recursion(NodeBone node)
+            void Recursion(OchalikeBone bone)
             {
-                for (int i = 0; i < node.Children.Count; i++)
+                for (int i = 0; i < bone.Children.Count; i++)
                 {
-                    var child = node.Children[i];
+                    var child = bone.Children[i];
                     if (child.Name == BoneName)
                     {
                         var sprite = GetSprite(appearance, characterCreationData);
