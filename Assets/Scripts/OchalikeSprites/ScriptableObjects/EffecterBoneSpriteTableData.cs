@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace OchalikeSprites
 {
+    // EffectableBoneSpriteTable とは違いエフェクトをかけるだけなので Effecter
     [CreateAssetMenu(menuName = "Ochalike Sprites/Effecter Bone Sprite Table")]
     public class EffecterBoneSpriteTableData : ScriptableObject
     {

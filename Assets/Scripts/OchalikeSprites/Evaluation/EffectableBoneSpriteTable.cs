@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace OchalikeSprites
 {
+    // Roguegard の EffectableValue にならったクラス名
     public class EffectableBoneSpriteTable
     {
         private readonly Dictionary<BoneKeyword, Item> items = new Dictionary<BoneKeyword, Item>();
