@@ -96,8 +96,8 @@ namespace Roguegard
         {
             // 目の色を変更
             var color = new Color32(255, 0, 255, 255);
-            ochalikeMorph.SetFirstSprite(BoneKeyword.LeftEye, morphBareColor: color);
-            ochalikeMorph.SetFirstSprite(BoneKeyword.RightEye, morphBareColor: color);
+            ochalikeMorph.SetBareSprite(BoneKeyword.LeftEye, morphBareColor: color);
+            ochalikeMorph.SetBareSprite(BoneKeyword.RightEye, morphBareColor: color);
         }
     }
 }

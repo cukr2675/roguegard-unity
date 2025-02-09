@@ -12,16 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 724c4bdca52bc374fba6e995eaf69c69, type: 3}
   m_Name: Empty
   m_EditorClassIdentifier: 
+  _pixelsPerUnit: 32
   _items:
   - _boneName: {fileID: 11400000, guid: a90fd0bc3132c214395dee60b9a645ae, type: 2}
-    _overridesSourceSprite: 0
-    _boneSprite:
+    _hasPoseBareSprite: 0
+    _poseBareSprite:
       _normalFront: {fileID: 0}
       _normalRear: {fileID: 0}
       _backFront: {fileID: 0}
       _backRear: {fileID: 0}
-    _overridesSourceColor: 0
-    _color: {r: 1, g: 1, b: 1, a: 1}
+    _hasPoseBareColor: 0
+    _poseBareColor: {r: 1, g: 1, b: 1, a: 1}
     _pixelLocalPosition: {x: 0, y: 0, z: 0}
     _localRotation: {x: 0, y: 0, z: 0, w: 1}
     _scaleOfLocalByLocal: {x: 1, y: 1, z: 1}

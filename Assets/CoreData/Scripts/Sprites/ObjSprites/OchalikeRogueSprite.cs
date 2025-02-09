@@ -7,7 +7,7 @@ using OchalikeSprites;
 
 namespace Roguegard
 {
-    // CharacterCreation で bodyColor からスプライトの種類を変えることがあるため BaseColoredSprite は実装しない。
+    // CharacterCreation で bodyColor からスプライトの種類を変えることがあるため ColoredOchalikeRogueSprite は実装しない。
     public class OchalikeRogueSprite : IRogueObjSprite
     {
         private IReadOnlyOchalikeBone rootBone;

@@ -30,7 +30,7 @@ namespace OchalikeSprites
         public static BoneKeyword Tail { get; } = new BoneKeyword("Tail");
         public static BoneKeyword BodyEffect { get; } = new BoneKeyword("BodyEffect");
         public static BoneKeyword HeadEffect { get; } = new BoneKeyword("HeadEffect");
-        public static BoneKeyword Other { get; } = new BoneKeyword(null); // TODO: All?
+        public static BoneKeyword Free { get; } = new BoneKeyword(string.Empty);
 
         public BoneKeyword(string name)
         {

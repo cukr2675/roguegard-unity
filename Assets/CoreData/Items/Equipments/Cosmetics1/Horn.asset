@@ -93,6 +93,10 @@ MonoBehaviour:
       _script: {fileID: 0}
       _ref:
         rid: -2
+    _beSteppedOnAsTile:
+      _script: {fileID: 0}
+      _ref:
+        rid: -2
     _equipmentState: {fileID: 0}
     _weight:
       _script: {fileID: 0}
@@ -114,6 +118,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: a9b106ec03139934fa761fa7f6484de4, type: 2}
     _canStackWhileEquipped: 0
     _boneSpriteTable: {fileID: 11400000, guid: f87ba0fe2ef941344975409f1553a25a, type: 2}
+    _ochalikeMorph: {fileID: 11400000, guid: f87ba0fe2ef941344975409f1553a25a, type: 2}
     _eyeDropBoneName: {fileID: 0}
     _overridesBoneSpriteEffectOrder: 1
     _boneSpriteEffectOrder: 3.9

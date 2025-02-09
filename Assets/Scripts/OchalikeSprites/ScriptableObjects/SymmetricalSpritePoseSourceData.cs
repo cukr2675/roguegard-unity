@@ -52,19 +52,15 @@ namespace OchalikeSprites
             [SerializeField] private BoneKeywordData _boneName;
             public BoneKeyword BoneName => _boneName;
 
-            [Tooltip("BareSprite を上書きする。最初から BareSprite が存在しなければ変化しない")]
-            [SerializeField] private bool _overridesSourceSprite;
-            public bool OverridesSourceSprite { get => _overridesSourceSprite; set => _overridesSourceSprite = value; }
+            [Tooltip("MorphedBareSprite を上書きする。最初から BareSprite が存在しなければ変化しない")]
+            [SerializeField] private bool _hasPoseBareSprite;
+            [SerializeField] private BoneSprite _poseBareSprite;
+            public BoneSprite PoseBareSprite => _hasPoseBareSprite ? _poseBareSprite : null;
 
-            [SerializeField] private BoneSprite _boneSprite;
-            public BoneSprite BoneSprite { get => _boneSprite; set => _boneSprite = value; }
-
-            [Tooltip("BareColor を上書きする")]
-            [SerializeField] private bool _overridesSourceColor;
-            public bool OverridesSourceColor { get => _overridesSourceColor; set => _overridesSourceColor = value; }
-
-            [SerializeField] private Color _color;
-            public Color Color { get => _color; set => _color = value; }
+            [Tooltip("MorphedBareColor を上書きする")]
+            [SerializeField] private bool _hasPoseBareColor;
+            [SerializeField] private Color _poseBareColor;
+            public Color? PoseBareColor => _hasPoseBareColor ? _poseBareColor : null;
 
             [SerializeField] private Vector3 _pixelLocalPosition;
             public Vector3 PixelLocalPosition { get => _pixelLocalPosition; set => _pixelLocalPosition = value; }
@@ -87,8 +83,7 @@ namespace OchalikeSprites
             public SpritePoseBoneTransform ToBoneTransform(int pixelsPerUnit)
             {
                 return new SpritePoseBoneTransform(
-                    OverridesSourceSprite ? BoneSprite : null, OverridesSourceColor ? Color : null,
-                    PixelLocalPosition / pixelsPerUnit, LocalRotation, ScaleOfLocalByLocal,
+                    PoseBareSprite, PoseBareColor, PixelLocalPosition / pixelsPerUnit, LocalRotation, ScaleOfLocalByLocal,
                     TransformsInRootParent, LocalMirrorX, LocalMirrorY);
             }
 

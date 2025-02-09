@@ -12,18 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ff905651ac553e458ac896bdf1ceec6, type: 3}
   m_Name: HideFootwearBoneSprites
   m_EditorClassIdentifier: 
+  a: 1
   _items:
   - _name: {fileID: 11400000, guid: 4847823016e5d67428aa750b880935c9, type: 2}
-    _hasFirstSprite: 0
-    _firstSprite:
+    _hasMorphBareSprite: 0
+    _morphBareSprite:
       _normalFront: {fileID: 0}
       _normalRear: {fileID: 0}
       _backFront: {fileID: 0}
       _backRear: {fileID: 0}
-    _firstColor: {r: 1, g: 1, b: 1, a: 1}
-    _firstColorIsFixed: 0
-    _overridesSourceColor: 0
-    _overridesBaseColor: 0
+    _morphBareColor: {r: 1, g: 1, b: 1, a: 1}
+    _morphBareColorIsFixed: 0
+    _hasMorphBareColor: 0
+    _overridesOnDefaultColor: 0
     _equipmentSprites:
     - _sprite:
         _normalFront: {fileID: -1337617543, guid: de92a0e3e26e6f943a6f5f473ca7ecad, type: 3}
@@ -33,16 +34,16 @@ MonoBehaviour:
       _color: {r: 1, g: 1, b: 1, a: 1}
       _colorIsFixed: 0
   - _name: {fileID: 11400000, guid: 78416086f1e60f44ba37a2a278beedb7, type: 2}
-    _hasFirstSprite: 0
-    _firstSprite:
+    _hasMorphBareSprite: 0
+    _morphBareSprite:
       _normalFront: {fileID: 0}
       _normalRear: {fileID: 0}
       _backFront: {fileID: 0}
       _backRear: {fileID: 0}
-    _firstColor: {r: 1, g: 1, b: 1, a: 1}
-    _firstColorIsFixed: 0
-    _overridesSourceColor: 0
-    _overridesBaseColor: 0
+    _morphBareColor: {r: 1, g: 1, b: 1, a: 1}
+    _morphBareColorIsFixed: 0
+    _hasMorphBareColor: 0
+    _overridesOnDefaultColor: 0
     _equipmentSprites:
     - _sprite:
         _normalFront: {fileID: -1337617543, guid: de92a0e3e26e6f943a6f5f473ca7ecad, type: 3}

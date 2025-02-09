@@ -24,8 +24,8 @@ namespace Roguegard
         }
 
         public bool Mirroring { get; set; }
-        public bool IsFirst { get; set; }
-        public bool OverridesSourceColor { get; set; }
+        public bool IsBare { get; set; } // MorphBare と PoseBare 両方を表現する
+        public bool HasBareColor { get; set; }
 
         // Pivot の距離は下→上→下→上の順で移動させる
         // そのほうがアイコンとなる胴部のペイントが自然になりやすい
@@ -45,8 +45,8 @@ namespace Roguegard
             clone.PivotDistance = PivotDistance;
             clone.Bone = Bone;
             clone.Mirroring = Mirroring;
-            clone.IsFirst = IsFirst;
-            clone.OverridesSourceColor = OverridesSourceColor;
+            clone.IsBare = IsBare;
+            clone.HasBareColor = HasBareColor;
             return clone;
         }
 
@@ -73,11 +73,11 @@ namespace Roguegard
         {
             if (Bone == BoneKeyword.Body)
             {
-                var overridesUpperBaseColor = OverridesBaseColor(true, upperBodyRect, palette);
-                var overridesLowerBaseColor = OverridesBaseColor(false, bodyRect, palette);
+                var overridesUpperDefaultColor = OverridesOnDefaultColor(true, upperBodyRect, palette);
+                var overridesLowerDefaultColor = OverridesOnDefaultColor(false, bodyRect, palette);
                 ToBoneSprite(palette, out var upperBoneSprite, out var lowerBoneSprite);
-                AddTo(ochalikeMorph, BoneKeyword.UpperBody, upperBoneSprite, mainColor, overridesUpperBaseColor);
-                AddTo(ochalikeMorph, BoneKeyword.Body, lowerBoneSprite, mainColor, overridesLowerBaseColor);
+                AddTo(ochalikeMorph, BoneKeyword.UpperBody, upperBoneSprite, mainColor, overridesUpperDefaultColor);
+                AddTo(ochalikeMorph, BoneKeyword.Body, lowerBoneSprite, mainColor, overridesLowerDefaultColor);
             }
             else if (Bone == BoneKeyword.LeftArm)
             {
@@ -130,23 +130,23 @@ namespace Roguegard
             }
         }
 
-        private void AddTo(OchalikeMorph ochalikeMorph, BoneKeyword name, BoneSprite sprite, Color color, bool overridesBaseColor = false)
+        private void AddTo(OchalikeMorph ochalikeMorph, BoneKeyword name, BoneSprite sprite, Color color, bool overridesOnDefaultColor = false)
         {
-            if (IsFirst)
+            if (IsBare)
             {
-                if (OverridesSourceColor) { ochalikeMorph.SetFirstSprite(name, sprite, color, true); }
-                else { ochalikeMorph.SetFirstSprite(name, sprite, null, overridesBaseColor); }
+                if (HasBareColor) { ochalikeMorph.SetBareSprite(name, sprite, color, true); }
+                else { ochalikeMorph.SetBareSprite(name, sprite, null, overridesOnDefaultColor); }
             }
             else
             {
-                ochalikeMorph.AddEquipmentSprite(name, sprite, color, overridesBaseColor);
+                ochalikeMorph.AddEquipmentSprite(name, sprite, color, overridesOnDefaultColor);
             }
         }
 
         /// <summary>
         /// ベースカラーを上書き可能かを取得する。必要な範囲が不透明色で塗りつぶされていれば上書き可能。
         /// </summary>
-        private bool OverridesBaseColor(bool up, RectInt requiredFillRect, Spanning<ShiftableColor> palette)
+        private bool OverridesOnDefaultColor(bool up, RectInt requiredFillRect, Spanning<ShiftableColor> palette)
         {
             if (NormalFront == null || BackFront == null) return false;
 

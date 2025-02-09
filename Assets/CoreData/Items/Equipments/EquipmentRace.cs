@@ -19,7 +19,7 @@ namespace Roguegard.CharacterCreation
 
         [SerializeField] private bool _canStackWhileEquipped;
 
-        [SerializeField] private OchalikeMorphData _boneSpriteTable;
+        [SerializeField] private OchalikeMorphData _ochalikeMorph;
 
         [Tooltip("この値が設定されているとき、装備者の指定のボーンの色をスポイトする")]
         [SerializeField] private BoneKeywordData _eyeDropBoneName;
@@ -56,7 +56,7 @@ namespace Roguegard.CharacterCreation
                 return;
             }
 
-            _boneSpriteTable?.ColoredAddTo(table, color);
+            _ochalikeMorph?.ColoredAddTo(table, color);
         }
 
         protected class EquipmentInfo<T> : BaseEquipmentInfo, IBoneSpriteEffect
@@ -85,7 +85,7 @@ namespace Roguegard.CharacterCreation
             protected override void AddEffect(RogueObj equipment)
             {
                 var owner = equipment.Location;
-                if (Data._boneSpriteTable != null)
+                if (Data._ochalikeMorph != null)
                 {
                     var equipmentSpriteState = owner.Main.GetBoneSpriteEffectState(owner);
                     equipmentSpriteState.AddFromRogueEffect(owner, this);
@@ -114,7 +114,7 @@ namespace Roguegard.CharacterCreation
                 if (Data._eyeDropBoneName != null)
                 {
                     var color = RogueColorUtility.GetMorphedBareColor(Data._eyeDropBoneName, rootBone, ochalikeMorph);
-                    Data._boneSpriteTable?.ColoredAddTo(ochalikeMorph, color);
+                    Data._ochalikeMorph?.ColoredAddTo(ochalikeMorph, color);
                     return;
                 }
 
@@ -123,7 +123,7 @@ namespace Roguegard.CharacterCreation
                     color = RogueColorUtility.GetColor(self);
                     colorIsInitialized = true;
                 }
-                Data._boneSpriteTable?.ColoredAddTo(ochalikeMorph, color);
+                Data._ochalikeMorph?.ColoredAddTo(ochalikeMorph, color);
             }
         }
     }

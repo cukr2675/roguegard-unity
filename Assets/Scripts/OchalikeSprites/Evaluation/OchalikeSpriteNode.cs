@@ -72,13 +72,13 @@ namespace OchalikeSprites
             return true;
         }
 
-        private void SetBareSprite(OchalikeMorph.RefItem item)
+        private void SetBareSprite(OchalikeMorph.RefItem morphItem)
         {
-            bareSprite = item.MorphBareSprite ?? source.BareSprite;
-            bareColor = item.MorphBareColor ?? source.BareColor;
+            bareSprite = morphItem.MorphBareSprite ?? source.BareSprite;
+            bareColor = morphItem.MorphBareColor ?? source.BareColor;
             equipmentSprites.Clear();
             equipmentColors.Clear();
-            overridesOnDefaultColor = source.OverridesOnDefaultColor || item.OverridesOnDefaultColor;
+            overridesOnDefaultColor = source.OverridesOnDefaultColor || morphItem.OverridesOnDefaultColor;
             NormalFrontSpriteCount = 0;
             NormalRearSpriteCount = 0;
             BackFrontSpriteCount = 0;

@@ -155,7 +155,7 @@ namespace Roguegard.Device
                 for (int i = 0; i < database.AppearanceOptions.Count; i++)
                 {
                     var option = database.AppearanceOptions[i];
-                    if (option.BoneName == BoneKeyword.Other)
+                    if (option.BoneName == BoneKeyword.Free)
                     {
                         elms.Add(option);
                     }

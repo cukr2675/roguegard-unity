@@ -33,7 +33,7 @@ namespace OchalikeSprites
             _bones.Clear();
         }
 
-        public OchalikeBone CreateBone(Color color, float brightness)
+        public OchalikeBone CreateBone(Color bareColor, float brightness)
         {
             var bright = brightness >= _lightDarkThreshold;
             return Recursion(0);
@@ -41,7 +41,7 @@ namespace OchalikeSprites
             OchalikeBone Recursion(int index)
             {
                 var bone = _bones[index];
-                var result = bone.ToBone(color, bright, _pixelsPerUnit);
+                var result = bone.ToBone(bareColor, bright, _pixelsPerUnit);
                 var startIndex = index + 1;
                 for (int i = startIndex; i < _bones.Count; i++)
                 {
@@ -74,8 +74,8 @@ namespace OchalikeSprites
 
             [Space]
 
-            [SerializeField] private ColorRangedBoneSprite _sprite = null;
-            public ColorRangedBoneSprite Sprite { get => _sprite; set => _sprite = value; } // TODO:
+            [SerializeField] private ColorRangedBoneSprite _bareSprite = null;
+            public ColorRangedBoneSprite BareSprite { get => _bareSprite; set => _bareSprite = value; }
 
             [SerializeField] private bool _overridesOnDefaultColor = true;
             public bool OverridesOnDefaultColor { get => _overridesOnDefaultColor; set => _overridesOnDefaultColor = value; }
@@ -101,12 +101,12 @@ namespace OchalikeSprites
             [SerializeField] private float _backOrderInParent = 0f;
             public float BackOrderInParent { get => _backOrderInParent; set => _backOrderInParent = value; }
 
-            public OchalikeBone ToBone(Color color, bool bright, int pixelsPerUnit)
+            public OchalikeBone ToBone(Color bareColor, bool bright, int pixelsPerUnit)
             {
                 var bone = new OchalikeBone();
                 bone.Name = _boneName;
-                bone.BareSprite = _sprite.GetSprite(bright);
-                bone.BareColor = color;
+                bone.BareSprite = _bareSprite.GetSprite(bright);
+                bone.BareColor = bareColor;
                 bone.OverridesOnDefaultColor = _overridesOnDefaultColor;
                 bone.FlipX = _flipX;
                 bone.FlipY = _flipY;

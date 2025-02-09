@@ -111,7 +111,7 @@ namespace Roguegard.Editor
                 var statureRank = GetBodyStatureRank(legStature);
                 var bone = new OchalikeSpriteData.Bone();
                 bone.BoneName = RoguegardAssetDatabase.GetBoneKeyword("Body");
-                bone.Sprite = GetSprite(bodyStature);
+                bone.BareSprite = GetSprite(bodyStature);
                 bone.PixelLocalPosition = new Vector3(0f, statureRank);
                 bone.NormalOrderInParent = +0f;
                 bone.BackOrderInParent = +0f;
@@ -137,7 +137,7 @@ namespace Roguegard.Editor
                 var bone = new OchalikeSpriteData.Bone();
                 bone.BoneName = RoguegardAssetDatabase.GetBoneKeyword("UpperBody");
                 bone.ParentBoneName = RoguegardAssetDatabase.GetBoneKeyword("Body");
-                bone.Sprite = RoguegardAssetDatabase.CreateColorRangedBoneSpriteOrNull(false, "UpperBody{0}");
+                bone.BareSprite = RoguegardAssetDatabase.CreateColorRangedBoneSpriteOrNull(false, "UpperBody{0}");
                 bone.PixelLocalPosition = new Vector3(0f, statureRank);
                 bone.NormalOrderInParent = +1f;
                 bone.BackOrderInParent = +1f;
@@ -154,7 +154,7 @@ namespace Roguegard.Editor
                 var bone = new OchalikeSpriteData.Bone();
                 bone.BoneName = RoguegardAssetDatabase.GetBoneKeyword("LeftArm");
                 bone.ParentBoneName = RoguegardAssetDatabase.GetBoneKeyword("Body");
-                bone.Sprite = GetArmSprite(armStature);
+                bone.BareSprite = GetArmSprite(armStature);
                 bone.PixelLocalPosition = new Vector3(3f, statureRank);
                 bone.NormalOrderInParent = +2f;
                 bone.BackOrderInParent = -3f;
@@ -185,7 +185,7 @@ namespace Roguegard.Editor
                 var bone = new OchalikeSpriteData.Bone();
                 bone.BoneName = RoguegardAssetDatabase.GetBoneKeyword("RightArm");
                 bone.ParentBoneName = RoguegardAssetDatabase.GetBoneKeyword("Body");
-                bone.Sprite = GetArmSprite(armStature);
+                bone.BareSprite = GetArmSprite(armStature);
                 bone.FlipX = true;
                 bone.PixelLocalPosition = new Vector3(-3f, statureRank);
                 bone.NormalOrderInParent = -3f;
@@ -217,7 +217,7 @@ namespace Roguegard.Editor
                 var bone = new OchalikeSpriteData.Bone();
                 bone.BoneName = RoguegardAssetDatabase.GetBoneKeyword("LeftLeg");
                 bone.ParentBoneName = RoguegardAssetDatabase.GetBoneKeyword("Body");
-                bone.Sprite = GetLegSprite(legStature);
+                bone.BareSprite = GetLegSprite(legStature);
                 bone.PixelLocalPosition = new Vector3(2f, 0f);
                 bone.NormalOrderInParent = -1f;
                 bone.BackOrderInParent = -2f;
@@ -247,7 +247,7 @@ namespace Roguegard.Editor
                 var bone = new OchalikeSpriteData.Bone();
                 bone.BoneName = RoguegardAssetDatabase.GetBoneKeyword("RightLeg");
                 bone.ParentBoneName = RoguegardAssetDatabase.GetBoneKeyword("Body");
-                bone.Sprite = GetLegSprite(legStature);
+                bone.BareSprite = GetLegSprite(legStature);
                 bone.PixelLocalPosition = new Vector3(-1f, 0f);
                 bone.NormalOrderInParent = -2f;
                 bone.BackOrderInParent = -1f;
@@ -278,7 +278,7 @@ namespace Roguegard.Editor
                 var bone = new OchalikeSpriteData.Bone();
                 bone.BoneName = RoguegardAssetDatabase.GetBoneKeyword("Head");
                 bone.ParentBoneName = RoguegardAssetDatabase.GetBoneKeyword("Body");
-                bone.Sprite = RoguegardAssetDatabase.CreateColorRangedBoneSpriteOrNull(true, "Head{0}{1}");
+                bone.BareSprite = RoguegardAssetDatabase.CreateColorRangedBoneSpriteOrNull(true, "Head{0}{1}");
                 bone.PixelLocalPosition = new Vector3(0f, statureRank);
                 bone.NormalOrderInParent = +3f;
                 bone.BackOrderInParent = +3f;
@@ -363,7 +363,7 @@ namespace Roguegard.Editor
                 bone.BoneName = RoguegardAssetDatabase.GetBoneKeyword("Mouth");
                 bone.ParentBoneName = RoguegardAssetDatabase.GetBoneKeyword("Head");
                 var clearSprite = RoguegardAssetDatabase.GetSprite("clear");
-                bone.Sprite = new ColorRangedBoneSprite(BoneSprite.CreateNFBR_NRBF(clearSprite, clearSprite));
+                bone.BareSprite = new ColorRangedBoneSprite(BoneSprite.CreateNFBR_NRBF(clearSprite, clearSprite));
                 bone.PixelLocalPosition = new Vector3(-1f, 1f);
                 bone.NormalOrderInParent = +4f;
                 bone.BackOrderInParent = +4f;
@@ -408,7 +408,7 @@ namespace Roguegard.Editor
                 bone.BoneName = RoguegardAssetDatabase.GetBoneKeyword("BodyEffect");
                 bone.ParentBoneName = RoguegardAssetDatabase.GetBoneKeyword("Body");
                 var clearSprite = RoguegardAssetDatabase.GetSprite("clear");
-                bone.Sprite = new ColorRangedBoneSprite(BoneSprite.CreateNFBR_NRBF(clearSprite, clearSprite));
+                bone.BareSprite = new ColorRangedBoneSprite(BoneSprite.CreateNFBR_NRBF(clearSprite, clearSprite));
                 bone.NormalOrderInParent = +6f;
                 bone.BackOrderInParent = +6f;
                 return bone;
@@ -423,7 +423,7 @@ namespace Roguegard.Editor
                 bone.BoneName = RoguegardAssetDatabase.GetBoneKeyword("HeadEffect");
                 bone.ParentBoneName = RoguegardAssetDatabase.GetBoneKeyword("Head");
                 var clearSprite = RoguegardAssetDatabase.GetSprite("clear");
-                bone.Sprite = new ColorRangedBoneSprite(BoneSprite.CreateNFBR_NRBF(clearSprite, clearSprite));
+                bone.BareSprite = new ColorRangedBoneSprite(BoneSprite.CreateNFBR_NRBF(clearSprite, clearSprite));
                 bone.NormalOrderInParent = +7f;
                 bone.BackOrderInParent = +7f;
                 return bone;

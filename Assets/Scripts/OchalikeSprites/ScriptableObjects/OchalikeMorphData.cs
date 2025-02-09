@@ -16,13 +16,13 @@ namespace OchalikeSprites
                 // BareSprite/Color が設定されている場合のみ EquipmentList.Clear して設定
                 if (item.MorphBareSprite != null || item.MorphBareColor != null)
                 {
-                    ochalikeMorph.SetFirstSprite(item.Name, item.MorphBareSprite, item.MorphBareColor, item.OverridesBaseColor);
+                    ochalikeMorph.SetBareSprite(item.Name, item.MorphBareSprite, item.MorphBareColor, item.OverridesOnDefaultColor);
                 }
 
                 for (int i = 0; i < item.EquipmentSprites.Length; i++)
                 {
                     var equipmentPair = item.EquipmentSprites[i];
-                    ochalikeMorph.AddEquipmentSprite(item.Name, equipmentPair.Sprite, equipmentPair.Color, item.OverridesBaseColor);
+                    ochalikeMorph.AddEquipmentSprite(item.Name, equipmentPair.Sprite, equipmentPair.Color, item.OverridesOnDefaultColor);
                 }
             }
         }
@@ -34,13 +34,13 @@ namespace OchalikeSprites
                 // BareSprite/Color が設定されている場合のみ EquipmentList.Clear して設定
                 if (item.MorphBareSprite != null || item.MorphBareColor != null)
                 {
-                    ochalikeMorph.SetFirstSprite(item.Name, item.MorphBareSprite, item.GetMorphBareColor(toColor), item.OverridesBaseColor);
+                    ochalikeMorph.SetBareSprite(item.Name, item.MorphBareSprite, item.GetMorphBareColor(toColor), item.OverridesOnDefaultColor);
                 }
 
                 for (int i = 0; i < item.EquipmentSprites.Length; i++)
                 {
                     var equipmentPair = item.EquipmentSprites[i];
-                    ochalikeMorph.AddEquipmentSprite(item.Name, equipmentPair.Sprite, equipmentPair.GetColor(toColor), item.OverridesBaseColor);
+                    ochalikeMorph.AddEquipmentSprite(item.Name, equipmentPair.Sprite, equipmentPair.GetColor(toColor), item.OverridesOnDefaultColor);
                 }
             }
         }
@@ -52,39 +52,28 @@ namespace OchalikeSprites
             internal BoneKeyword Name => _name;
 
             [Tooltip("BareSprite を上書きする")]
-            [SerializeField] private bool _hasFirstSprite;
-            internal bool HasFirstSprite => _hasFirstSprite; // TODO: 
+            [SerializeField] private bool _hasMorphBareSprite;
+            [SerializeField] private BoneSprite _morphBareSprite;
+            internal BoneSprite MorphBareSprite => _hasMorphBareSprite ? _morphBareSprite : null;
 
-            [SerializeField] private BoneSprite _firstSprite;
-            internal BoneSprite FirstSprite => _firstSprite;
-
-            //[Tooltip("BareColor を上書きする")]
-            //[SerializeField] private bool _hasBareColor;
-            //internal bool HasBareColor => _hasBareColor;
-
-            [SerializeField] private Color _firstColor;
-            internal Color FirstColor => _firstColor;
-
-            internal BoneSprite MorphBareSprite => _hasFirstSprite ? _firstSprite : null;
-            internal Color? MorphBareColor => _overridesSourceColor ? _firstColor : null;
+            [Tooltip("BareColor を上書きする")]
+            [SerializeField] private bool _hasMorphBareColor;
+            [SerializeField] private Color _morphBareColor;
+            internal Color? MorphBareColor => _hasMorphBareColor ? _morphBareColor : null;
 
             [Tooltip("この値が true のとき着色の対象外となる")]
-            [SerializeField] private bool _firstColorIsFixed;
-            internal bool FirstColorIsFixed => _firstColorIsFixed;
+            [SerializeField] private bool _morphBareColorIsFixed;
 
-            [SerializeField] private bool _overridesSourceColor;
-            //internal bool OverridesSourceColor => _overridesSourceColor;
-
-            [SerializeField] private bool _overridesBaseColor;
-            internal bool OverridesBaseColor => _overridesBaseColor;
+            [SerializeField] private bool _overridesOnDefaultColor;
+            internal bool OverridesOnDefaultColor => _overridesOnDefaultColor;
 
             [SerializeField] private BoneSpriteColorPair[] _equipmentSprites;
             internal System.ReadOnlySpan<BoneSpriteColorPair> EquipmentSprites => _equipmentSprites;
 
             internal Color? GetMorphBareColor(Color toColor)
             {
-                if (!_overridesSourceColor) return null;
-                else if (_firstColorIsFixed) return _firstColor;
+                if (!_hasMorphBareColor) return null;
+                else if (_morphBareColorIsFixed) return _morphBareColor;
                 else return toColor;
             }
         }

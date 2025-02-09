@@ -70,15 +70,15 @@ namespace Roguegard
                                 var table = (PaintBoneSpriteTable)arg.Arg.Other;
                                 var itemIndex = arg.Arg.Count;
                                 var boneSprite = (PaintBoneSprite)table.Items[itemIndex];
-                                return boneSprite.IsFirst ? "T" : "";
+                                return boneSprite.IsBare ? "T" : "";
                             },
                             (manager, arg, value) =>
                             {
                                 var table = (PaintBoneSpriteTable)arg.Arg.Other;
                                 var itemIndex = arg.Arg.Count;
                                 var boneSprite = (PaintBoneSprite)table.Items[itemIndex];
-                                boneSprite.IsFirst = !string.IsNullOrWhiteSpace(value);
-                                return boneSprite.IsFirst ? "T" : "";
+                                boneSprite.IsBare = !string.IsNullOrWhiteSpace(value);
+                                return boneSprite.IsBare ? "T" : "";
                             }),
                     },
 

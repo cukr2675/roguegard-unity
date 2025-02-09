@@ -13,7 +13,7 @@ namespace OchalikeSprites
         private readonly Dictionary<IDirectionalSpritePoseSource, IDirectionalSpritePoseSource> coloredPoseTable;
 
         public VariantSpriteMotion(ISpriteMotion baseMotion, Color poseBareColor)
-            : this(baseMotion, BoneKeyword.Other, null, poseBareColor)
+            : this(baseMotion, BoneKeyword.Free, null, poseBareColor)
         {
         }
 

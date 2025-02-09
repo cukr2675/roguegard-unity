@@ -12,18 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ff905651ac553e458ac896bdf1ceec6, type: 3}
   m_Name: MufflerBoneSprites
   m_EditorClassIdentifier: 
+  a: 1
   _items:
   - _name: {fileID: 11400000, guid: c66efafae0b82384d8b4212c78358e52, type: 2}
-    _hasFirstSprite: 0
-    _firstSprite:
+    _hasMorphBareSprite: 0
+    _morphBareSprite:
       _normalFront: {fileID: 0}
       _normalRear: {fileID: 0}
       _backFront: {fileID: 0}
       _backRear: {fileID: 0}
-    _firstColor: {r: 1, g: 1, b: 1, a: 1}
-    _firstColorIsFixed: 0
-    _overridesSourceColor: 0
-    _overridesBaseColor: 0
+    _morphBareColor: {r: 1, g: 1, b: 1, a: 1}
+    _morphBareColorIsFixed: 0
+    _hasMorphBareColor: 0
+    _overridesOnDefaultColor: 0
     _equipmentSprites:
     - _sprite:
         _normalFront: {fileID: 1827395112, guid: ec906a9335ac9e04392c3104aa5b7617, type: 3}

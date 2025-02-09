@@ -12,6 +12,7 @@ namespace OchalikeSprites
     {
         private readonly SpritePose[] poses;
 
+        /// <param name="variantTargetBoneName">変更対象の <see cref="OchalikeBone.Name"/> 。 <see cref="BoneKeyword.Free"/> の場合はすべてのボーンが対象</param>
         public ImmutableVariantSpritePoseSource(
             IDirectionalSpritePoseSource poseSource, BoneKeyword variantTargetBoneName, BoneSprite poseBareSprite, Color? poseBareColor)
         {
@@ -32,7 +33,7 @@ namespace OchalikeSprites
             foreach (var pair in basePose.BoneTransforms)
             {
                 var boneTransform = pair.Value;
-                if (variantTargetBoneName == BoneKeyword.Other || pair.Key == variantTargetBoneName) // TODO:
+                if (variantTargetBoneName == BoneKeyword.Free || pair.Key == variantTargetBoneName)
                 {
                     // 元となる BoneTransform で BareColor を上書きしなければ派生ポーズでも上書きしない
                     // 角度をつけるだけの BoneTransform の色が変わってしまうと使い勝手が悪いため（例: 斬撃エフェクトの色は変えたいが腕の色はそのままにしたい）

@@ -7,6 +7,8 @@ namespace OchalikeSprites
     // 用途: つけっぱなしにするもの
     // 例: キャラクリ、装備、持続エフェクト（混乱中のぐるぐる目など）
 
+    // 命名メモ: OchalikeWear だと BareSprite とかあるのが変なので OchalikeMorph
+
     /// <summary>
     /// <see cref="OchalikeSpriteData"/> のボーン構造と位置はそのままに見た目を変更するクラス。
     /// 処理順は <see cref="OchalikeBone"/> と <see cref="SpritePose"/> の中間に位置する
@@ -45,9 +47,13 @@ namespace OchalikeSprites
         /// <summary>
         /// <see cref="Item.equipmentSprites"/> をクリアして <see cref="Item.MorphBareSprite"/> を設定する
         /// </summary>
-        /// <param name="overridesBaseColor">true のとき素体のスプライトの色をベースカラーから上書きする。</param>
-        public void SetFirstSprite(BoneKeyword name, BoneSprite morphBareSprite = null, Color? morphBareColor = null, bool overridesBaseColor = false)
+        /// <param name="overridesOnDefaultColor">true のとき素体のスプライトの色をベースカラーから上書きする。</param>
+        public void SetBareSprite(BoneKeyword name, BoneSprite morphBareSprite = null, Color? morphBareColor = null, bool overridesOnDefaultColor = false)
         {
+            // AddTo の動作と合わせるため両方 null は例外を投げる
+            if (morphBareSprite == null && morphBareColor == null) throw new System.ArgumentException(
+                $"{nameof(morphBareSprite)} と {nameof(morphBareColor)} の両方を null にすることはできません。");
+
             if (!items.TryGetValue(name, out var item))
             {
                 item = CreateItem();
@@ -55,13 +61,13 @@ namespace OchalikeSprites
             }
             item.MorphBareSprite = morphBareSprite;
             item.MorphBareColor = morphBareColor;
-            item.OverridesOnDefaultColor = overridesBaseColor;
+            item.OverridesOnDefaultColor = overridesOnDefaultColor;
             item.equipmentSprites.Clear();
             item.equipmentColors.Clear();
         }
 
-        /// <param name="overridesBaseColor">true かつ <paramref name="color"/> の不透明度が 100% のとき素体のスプライトの色をベースカラーから上書きする。</param>
-        public void AddEquipmentSprite(BoneKeyword name, BoneSprite sprite, Color color, bool overridesBaseColor = false)
+        /// <param name="overridesOnDefaultColor">true かつ <paramref name="color"/> の不透明度が 100% のとき素体のスプライトの色をベースカラーから上書きする。</param>
+        public void AddEquipmentSprite(BoneKeyword name, BoneSprite sprite, Color color, bool overridesOnDefaultColor = false)
         {
             if (sprite == null) throw new System.ArgumentNullException(nameof(sprite));
 
@@ -72,7 +78,7 @@ namespace OchalikeSprites
                 item.equipmentSprites.Clear();
                 item.equipmentColors.Clear();
             }
-            item.OverridesOnDefaultColor |= overridesBaseColor && color.a >= 1f;
+            item.OverridesOnDefaultColor |= overridesOnDefaultColor && color.a >= 1f;
             item.equipmentSprites.Add(sprite);
             item.equipmentColors.Add(color);
         }
