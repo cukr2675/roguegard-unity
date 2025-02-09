@@ -24,7 +24,7 @@ namespace Roguegard
         /// </summary>
         public static int PixelsPerUnit { get; set; }
 
-        public static Color BoneSpriteBaseColor { get; set; }
+        public static Color DefaultColor { get; set; }
 
         /// <summary>
         /// customShift シェーダーの明度補正値

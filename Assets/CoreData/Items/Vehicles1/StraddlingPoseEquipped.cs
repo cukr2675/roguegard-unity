@@ -48,7 +48,7 @@ namespace Roguegard.CharacterCreation
                     if (PoseSource == null)
                     {
                         var color = RogueColorUtility.GetColor(equipment);
-                        PoseSource = new ImmutableVariantSpritePoseSource(parent._pose, parent._vehicleBoneName, parent._vehicleBoneSprite, true, color);
+                        PoseSource = new ImmutableVariantSpritePoseSource(parent._pose, parent._vehicleBoneName, parent._vehicleBoneSprite, color);
                     }
 
                     transform.PoseSource = PoseSource;

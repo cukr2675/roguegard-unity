@@ -26,16 +26,16 @@ namespace Roguegard.CharacterCreation
             return new Color(red, green, blue, alpha);
         }
 
-        public static Color GetFirstColor(BoneKeyword boneName, IReadOnlyOchalikeBone rootBone, EffectableBoneSpriteTable boneSpriteTable)
+        public static Color GetMorphedBareColor(BoneKeyword boneName, IReadOnlyOchalikeBone rootBone, OchalikeMorph ochalikeMorph)
         {
-            var sprite = boneSpriteTable.GetSprite(boneName);
-            if (sprite.OverridesSourceColor)
+            var sprite = ochalikeMorph.GetSprite(boneName);
+            if (sprite.MorphBareColor.HasValue)
             {
-                return sprite.FirstColor;
+                return sprite.MorphBareColor.Value;
             }
 
             var bone = Recursion(rootBone);
-            return bone.Color;
+            return bone.BareColor;
 
             IReadOnlyOchalikeBone Recursion(IReadOnlyOchalikeBone bone)
             {

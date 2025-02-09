@@ -61,10 +61,10 @@ namespace Roguegard.CharacterCreation
             }
         }
 
-        public void Affect(AppearanceBoneSpriteTable boneSpriteTable, Color color)
+        public void Affect(AppearanceMorph morph, Color color)
         {
             TryInitialize();
-            _race.Affect(boneSpriteTable, color);
+            _race.Affect(morph, color);
         }
 
         protected override void Initialize()

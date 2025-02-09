@@ -21,7 +21,6 @@ namespace Roguegard.CharacterCreation
         }
 
         public abstract void Affect(
-            OchalikeBone mainBone, AppearanceBoneSpriteTable boneSpriteTable,
-            IReadOnlyAppearance appearance, ICharacterCreationData characterCreationData);
+            OchalikeBone mainBone, AppearanceMorph morph, IReadOnlyAppearance appearance, ICharacterCreationData characterCreationData);
     }
 }

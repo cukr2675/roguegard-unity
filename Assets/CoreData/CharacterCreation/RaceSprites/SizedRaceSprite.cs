@@ -12,7 +12,7 @@ namespace Roguegard.CharacterCreation
 
         public void GetSpriteValues(
             IRaceOption raceOption, ICharacterCreationData characterCreationData, IRogueGender gender,
-            out OchalikeBone mainBone, out AppearanceBoneSpriteTable boneSpriteTable)
+            out OchalikeBone mainBone, out AppearanceMorph morph)
         {
             var standardMember = StandardRaceMember.GetMember(characterCreationData.Race);
             var item = _items[standardMember.Size];
@@ -21,7 +21,7 @@ namespace Roguegard.CharacterCreation
             var hairColor = RogueColorUtility.GetHairColor(characterCreationData);
             mainBone = item.Bone.CreateBone(bodyColor, hairColor.maxColorComponent);
 
-            boneSpriteTable = new AppearanceBoneSpriteTable();
+            morph = new AppearanceMorph();
         }
 
         public void GetObjSprite(

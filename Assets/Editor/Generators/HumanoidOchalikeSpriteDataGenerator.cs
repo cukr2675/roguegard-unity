@@ -98,7 +98,7 @@ namespace Roguegard.Editor
         {
             public BaseBone()
             {
-                OverridesBaseColor = true;
+                OverridesOnDefaultColor = true;
                 FlipX = false;
                 FlipY = false;
             }
@@ -115,7 +115,7 @@ namespace Roguegard.Editor
                 bone.PixelLocalPosition = new Vector3(0f, statureRank);
                 bone.NormalOrderInParent = +0f;
                 bone.BackOrderInParent = +0f;
-                bone.OverridesBaseColor = false;
+                bone.OverridesOnDefaultColor = false;
                 return bone;
             }
 
@@ -141,7 +141,7 @@ namespace Roguegard.Editor
                 bone.PixelLocalPosition = new Vector3(0f, statureRank);
                 bone.NormalOrderInParent = +1f;
                 bone.BackOrderInParent = +1f;
-                bone.OverridesBaseColor = false;
+                bone.OverridesOnDefaultColor = false;
                 return bone;
             }
         }

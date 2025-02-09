@@ -134,17 +134,17 @@ namespace Roguegard.Rgpacks
 
         public void GetSpriteValues(
             IRaceOption raceOption, ICharacterCreationData characterCreationData, IRogueGender gender,
-            out OchalikeBone mainBone, out AppearanceBoneSpriteTable boneSpriteTable)
+            out OchalikeBone mainBone, out AppearanceMorph morph)
         {
             if (raceSpriteCmn != null)
             {
                 var tuple = ((object, object))raceSpriteCmn.Invoke();
                 mainBone = (OchalikeBone)tuple.Item1;
-                boneSpriteTable = (AppearanceBoneSpriteTable)tuple.Item2;
+                morph = (AppearanceMorph)tuple.Item2;
             }
             else
             {
-                RoguegardSettings.DefaultRaceOption.GetSpriteValues(raceOption, characterCreationData, gender, out mainBone, out boneSpriteTable);
+                RoguegardSettings.DefaultRaceOption.GetSpriteValues(raceOption, characterCreationData, gender, out mainBone, out morph);
             }
         }
 

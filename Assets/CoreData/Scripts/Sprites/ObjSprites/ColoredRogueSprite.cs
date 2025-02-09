@@ -45,8 +45,8 @@ namespace Roguegard
             renderController.AdjustBones(1);
             if (pose.BoneTransforms.TryGetValue(BoneKeyword.Body, out var transform))
             {
-                var sprite = transform.Sprite != null ? transform.Sprite.NormalFront : _tile.sprite;
-                var color = transform.OverridesSourceColor ? transform.Color : EffectedColor;
+                var sprite = transform.PoseBareSprite != null ? transform.PoseBareSprite.NormalFront : _tile.sprite;
+                var color = transform.PoseBareColor != null ? transform.PoseBareColor.Value : EffectedColor;
                 renderController.SetBoneSprite(
                     0, BoneKeyword.Body.Name, sprite, color, transform.LocalMirrorX, transform.LocalMirrorY,
                     transform.LocalPosition, transform.LocalRotation, transform.ScaleOfLocalByLocal);

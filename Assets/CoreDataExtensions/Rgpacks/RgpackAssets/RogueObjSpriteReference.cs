@@ -11,7 +11,7 @@ namespace Roguegard.Rgpacks
     public class RogueObjSpriteReference : RgpackReference<object>
     {
         private ObjSprite sprite;
-        private EffectableBoneSpriteTable boneSpriteTable;
+        private OchalikeMorph ochalikeMorph;
 
         private RogueObjSpriteReference() { }
 
@@ -34,7 +34,7 @@ namespace Roguegard.Rgpacks
                 var infoSet = new SewedEquipmentInfoSet(sewedEquipmentData);
                 var obj = infoSet.CreateObj(null, Vector2Int.zero, random);
                 sprite = new ObjSprite() { info = obj.Main.Sprite };
-                boneSpriteTable = sewedEquipmentData.BoneSprites.GetEffectableTable();
+                ochalikeMorph = sewedEquipmentData.BoneSprites.GetOchalikeMorph();
             }
             else if (Asset is RaceOptionalCreationData raceOptionalCreationData)
             {
@@ -62,12 +62,12 @@ namespace Roguegard.Rgpacks
             return sprite.info.MotionSet;
         }
 
-        public void AddTo(EffectableBoneSpriteTable table)
+        public void AddTo(OchalikeMorph ochalikeMorph)
         {
             if (sprite == null) { Initialize(); }
-            if (boneSpriteTable == null) throw new System.InvalidOperationException();
+            if (this.ochalikeMorph == null) throw new System.InvalidOperationException();
 
-            boneSpriteTable.AddTo(table);
+            this.ochalikeMorph.AddTo(ochalikeMorph);
         }
 
         private class ObjSprite : IRogueObjSprite

@@ -142,7 +142,7 @@ namespace Roguegard
 
             private readonly SewedEquipmentData data;
             private readonly RogueObj self;
-            private readonly EffectableBoneSpriteTable table;
+            private readonly OchalikeMorph ochalikeMorph;
             private bool colorIsInitialized;
             private Color color;
 
@@ -150,14 +150,14 @@ namespace Roguegard
             {
                 this.data = data;
                 this.self = self;
-                table = data.BoneSprites.GetEffectableTable();
+                ochalikeMorph = data.BoneSprites.GetOchalikeMorph();
                 colorIsInitialized = false;
             }
 
             protected override void AddEffect(RogueObj equipment)
             {
                 var owner = equipment.Location;
-                if (table.Any)
+                if (ochalikeMorph.Any)
                 {
                     var equipmentSpriteState = owner.Main.GetBoneSpriteEffectState(owner);
                     equipmentSpriteState.AddFromRogueEffect(owner, this);
@@ -171,14 +171,14 @@ namespace Roguegard
                 equipmentSpriteState.Remove(this);
             }
 
-            void IBoneSpriteEffect.AffectSprite(RogueObj owner, IReadOnlyOchalikeBone rootBone, EffectableBoneSpriteTable boneSpriteTable)
+            void IBoneSpriteEffect.AffectSprite(RogueObj owner, IReadOnlyOchalikeBone rootBone, OchalikeMorph ochalikeMorph)
             {
                 if (!colorIsInitialized)
                 {
                     color = RogueColorUtility.GetColor(self);
                     colorIsInitialized = true;
                 }
-                table.ColoredAddTo(boneSpriteTable, color);
+                this.ochalikeMorph.ColoredAddTo(ochalikeMorph, color);
             }
         }
     }

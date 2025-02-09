@@ -9,6 +9,15 @@ namespace OchalikeSprites
     // ・ランタイムではスプライトを変更する AnimationClip を動的生成できないため (AnimationUtility.SetEditorCurve がエディタでしか使えない)
     // ・AnimationClip で1フレーム内に複数の AnimationEvent を設定すると Animation ビュー上で重なって表示されて面倒なため
 
+    // 用途: 一時的に有効にするもの
+    // 例: モーション、表情
+
+    // 命名メモ: ISpriteMotion にならって OchalikePose ではなく SpritePose
+
+    /// <summary>
+    /// <see cref="OchalikeSpriteData"/> のポージングをするクラス。
+    /// <see cref="OchalikeBone"/> を <see cref="OchalikeMorph"/> で変更を加えたところに位置・角度・スプライト・色などを変更する
+    /// </summary>
     public class SpritePose
     {
         /// <summary>
@@ -17,12 +26,12 @@ namespace OchalikeSprites
         public bool IsImmutable { get; private set; }
 
         /// <summary>
-        /// true のとき、この <see cref="SpritePose"/> を適用した <see cref="RogueObjSprite"/> を背中向きにする。
+        /// true のとき、この <see cref="SpritePose"/> を適用した <see cref="OchalikeSpriteData"/> を背中向きにする。
         /// </summary>
         public bool Back { get; private set; }
 
-        private readonly Dictionary<BoneKeyword, BoneTransform> _boneTransforms;
-        public IReadOnlyDictionary<BoneKeyword, BoneTransform> BoneTransforms => _boneTransforms;
+        private readonly Dictionary<BoneKeyword, SpritePoseBoneTransform> _boneTransforms;
+        public IReadOnlyDictionary<BoneKeyword, SpritePoseBoneTransform> BoneTransforms => _boneTransforms;
 
         private BoneOrder _boneOrder;
         public BoneOrder BoneOrder => _boneOrder;
@@ -33,7 +42,7 @@ namespace OchalikeSprites
         {
             IsImmutable = false;
             Back = false;
-            _boneTransforms = new Dictionary<BoneKeyword, BoneTransform>();
+            _boneTransforms = new Dictionary<BoneKeyword, SpritePoseBoneTransform>();
             _boneOrder = defaultBoneOrder;
         }
 
@@ -62,13 +71,13 @@ namespace OchalikeSprites
             }
         }
 
-        public void AddBoneTransform(BoneTransform value, BoneKeyword name)
+        public void AddBoneTransform(SpritePoseBoneTransform value, BoneKeyword name)
         {
             if (IsImmutable) throw new System.Exception();
             _boneTransforms.Add(name, value);
         }
 
-        public void SetBoneTransform(BoneTransform value, BoneKeyword name)
+        public void SetBoneTransform(SpritePoseBoneTransform value, BoneKeyword name)
         {
             if (IsImmutable) throw new System.Exception();
             _boneTransforms[name] = value;

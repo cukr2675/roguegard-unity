@@ -19,7 +19,7 @@ namespace Roguegard.CharacterCreation
         protected abstract BoneSprite GetSprite(IReadOnlyAppearance appearance, ICharacterCreationData characterCreationData);
 
         public sealed override void Affect(
-            OchalikeBone mainBone, AppearanceBoneSpriteTable boneSpriteTable, IReadOnlyAppearance appearance, ICharacterCreationData characterCreationData)
+            OchalikeBone mainBone, AppearanceMorph morph, IReadOnlyAppearance appearance, ICharacterCreationData characterCreationData)
         {
             if (IsBone)
             {
@@ -28,7 +28,7 @@ namespace Roguegard.CharacterCreation
             else
             {
                 var sprite = GetSprite(appearance, characterCreationData);
-                boneSpriteTable.BaseTable.AddEquipmentSprite(BoneName, sprite, appearance.Color);
+                morph.BaseEffectOchalikeMorph.AddEquipmentSprite(BoneName, sprite, appearance.Color);
                 return;
             }
 
@@ -40,8 +40,8 @@ namespace Roguegard.CharacterCreation
                     if (child.Name == BoneName)
                     {
                         var sprite = GetSprite(appearance, characterCreationData);
-                        child.Sprite = sprite;
-                        child.Color = appearance.Color;
+                        child.BareSprite = sprite;
+                        child.BareColor = appearance.Color;
                     }
                     Recursion(child);
                 }

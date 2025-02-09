@@ -9,23 +9,23 @@ namespace OchalikeSprites
     /// </summary>
     public class ImmutableSymmetricalSpritePoseSource : IDirectionalSpritePoseSource
     {
-        private readonly SpritePose lowerLeftTransformTable;
-        private readonly SpritePose lowerRightTransformTable;
-        private readonly SpritePose upperLeftTransformTable;
-        private readonly SpritePose upperRightTransformTable;
+        private readonly SpritePose lowerLeftPose;
+        private readonly SpritePose lowerRightPose;
+        private readonly SpritePose upperLeftPose;
+        private readonly SpritePose upperRightPose;
 
-        public ImmutableSymmetricalSpritePoseSource(SpritePose immutableLowerLeftSpritePose, bool nonUp = false)
+        public ImmutableSymmetricalSpritePoseSource(SpritePose immutableLowerLeftPose, bool nonUp = false)
         {
-            lowerLeftTransformTable = immutableLowerLeftSpritePose;
-            if (!lowerLeftTransformTable.IsImmutable) throw new System.Exception($"{nameof(immutableLowerLeftSpritePose)} が Immutable ではありません。");
+            lowerLeftPose = immutableLowerLeftPose;
+            if (!lowerLeftPose.IsImmutable) throw new System.Exception($"{nameof(immutableLowerLeftPose)} が Immutable ではありません。");
 
-            var rightDownTransformTable = new SpritePose();
-            rightDownTransformTable.SetBack(lowerLeftTransformTable.Back);
-            var leftUpTransformTable = new SpritePose();
-            leftUpTransformTable.SetBack(!lowerLeftTransformTable.Back);
-            var rightUpTransformTable = new SpritePose();
-            rightUpTransformTable.SetBack(!lowerLeftTransformTable.Back);
-            foreach (var leftDownPair in lowerLeftTransformTable.BoneTransforms)
+            var rightDownPose = new SpritePose();
+            rightDownPose.SetBack(lowerLeftPose.Back);
+            var leftUpPose = new SpritePose();
+            leftUpPose.SetBack(!lowerLeftPose.Back);
+            var rightUpPose = new SpritePose();
+            rightUpPose.SetBack(!lowerLeftPose.Back);
+            foreach (var leftDownPair in lowerLeftPose.BoneTransforms)
             {
                 var key = leftDownPair.Key;
                 var leftDownTransform = leftDownPair.Value;
@@ -33,42 +33,42 @@ namespace OchalikeSprites
                 {
                     // 左右方向で反転するため、 Body のみ反転処理する。
                     var rightDownTransform = CreateMirroredX(leftDownTransform);
-                    rightDownTransformTable.AddBoneTransform(rightDownTransform, key);
-                    leftUpTransformTable.AddBoneTransform(leftDownTransform, key);
-                    rightUpTransformTable.AddBoneTransform(rightDownTransform, key);
+                    rightDownPose.AddBoneTransform(rightDownTransform, key);
+                    leftUpPose.AddBoneTransform(leftDownTransform, key);
+                    rightUpPose.AddBoneTransform(rightDownTransform, key);
                 }
                 else
                 {
-                    rightDownTransformTable.AddBoneTransform(leftDownTransform, key);
-                    leftUpTransformTable.AddBoneTransform(leftDownTransform, key);
-                    rightUpTransformTable.AddBoneTransform(leftDownTransform, key);
+                    rightDownPose.AddBoneTransform(leftDownTransform, key);
+                    leftUpPose.AddBoneTransform(leftDownTransform, key);
+                    rightUpPose.AddBoneTransform(leftDownTransform, key);
                 }
             }
-            rightDownTransformTable.SetBoneOrder(lowerLeftTransformTable.BoneOrder);
-            rightDownTransformTable.SetImmutable();
-            leftUpTransformTable.SetBoneOrder(lowerLeftTransformTable.BoneOrder);
-            leftUpTransformTable.SetImmutable();
-            rightUpTransformTable.SetBoneOrder(lowerLeftTransformTable.BoneOrder);
-            rightUpTransformTable.SetImmutable();
+            rightDownPose.SetBoneOrder(lowerLeftPose.BoneOrder);
+            rightDownPose.SetImmutable();
+            leftUpPose.SetBoneOrder(lowerLeftPose.BoneOrder);
+            leftUpPose.SetImmutable();
+            rightUpPose.SetBoneOrder(lowerLeftPose.BoneOrder);
+            rightUpPose.SetImmutable();
 
-            lowerRightTransformTable = rightDownTransformTable;
+            lowerRightPose = rightDownPose;
             if (nonUp)
             {
-                upperLeftTransformTable = lowerLeftTransformTable;
-                upperRightTransformTable = rightDownTransformTable;
+                upperLeftPose = lowerLeftPose;
+                upperRightPose = rightDownPose;
             }
             else
             {
-                upperLeftTransformTable = leftUpTransformTable;
-                upperRightTransformTable = rightUpTransformTable;
+                upperLeftPose = leftUpPose;
+                upperRightPose = rightUpPose;
             }
 
-            static BoneTransform CreateMirroredX(BoneTransform t)
+            static SpritePoseBoneTransform CreateMirroredX(SpritePoseBoneTransform t)
             {
                 var position = new Vector3(-t.LocalPosition.x, t.LocalPosition.y, t.LocalPosition.z);
                 var mirrorX = !t.LocalMirrorX;
-                return new BoneTransform(
-                    t.Sprite, t.Color, t.OverridesSourceColor, position, t.LocalRotation, t.ScaleOfLocalByLocal,
+                return new SpritePoseBoneTransform(
+                    t.PoseBareSprite, t.PoseBareColor, position, t.LocalRotation, t.ScaleOfLocalByLocal,
                     t.TransformsInRootParent, mirrorX, t.LocalMirrorY);
             }
         }
@@ -79,21 +79,21 @@ namespace OchalikeSprites
                 direction == SpriteDirection.LowerLeft ||
                 direction == SpriteDirection.Left)
             {
-                return lowerLeftTransformTable;
+                return lowerLeftPose;
             }
             if (direction == SpriteDirection.LowerRight ||
                 direction == SpriteDirection.Right)
             {
-                return lowerRightTransformTable;
+                return lowerRightPose;
             }
             if (direction == SpriteDirection.UpperLeft)
             {
-                return upperLeftTransformTable;
+                return upperLeftPose;
             }
             if (direction == SpriteDirection.Up ||
                 direction == SpriteDirection.UpperRight)
             {
-                return upperRightTransformTable;
+                return upperRightPose;
             }
             throw new System.Exception();
         }

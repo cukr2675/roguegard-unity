@@ -153,8 +153,8 @@ namespace Roguegard
                                 boneReorderTable[new BoneKeyword(bone.BoneName)] = reorder;
                             }
 
-                            var transform = new BoneTransform(
-                                boneSprite, info.MainColor, false,
+                            var transform = new SpritePoseBoneTransform(
+                                boneSprite, info.MainColor,
                                 new Vector3(positionX, positionY, positionZ) / RoguegardSettings.PixelsPerUnit,
                                 Quaternion.Euler(rotationX, rotationY, rotationZ),
                                 Vector3.one, false, false, false);
@@ -172,8 +172,8 @@ namespace Roguegard
                 // ImmutableSymmetricalSpritePoseSource の方向変更に対応するため Body が存在しなければ追加する
                 if (!baseSpritePose.BoneTransforms.Keys.Contains(BoneKeyword.Body) && subSpriteMotions.Count == 0)
                 {
-                    baseSpritePose.AddBoneTransform(new BoneTransform(
-                        null, Color.white, false, Vector3.zero, Quaternion.identity, Vector3.one, false, false, false), BoneKeyword.Body);
+                    baseSpritePose.AddBoneTransform(new SpritePoseBoneTransform(
+                        null, null, Vector3.zero, Quaternion.identity, Vector3.one, false, false, false), BoneKeyword.Body);
                 }
 
                 // 並べ替え情報を適用

@@ -8,22 +8,22 @@ namespace OchalikeSprites
     {
         BoneKeyword Name { get; }
 
-        BoneSprite Sprite { get; }
+        BoneSprite BareSprite { get; }
 
-        Color Color { get; }
+        Color BareColor { get; }
 
         /// <summary>
         /// true のとき、このボーンをベースカラーから上書きする。
         /// </summary>
-        bool OverridesBaseColor { get; }
+        bool OverridesOnDefaultColor { get; }
 
         /// <summary>
-        /// このボーンのスプライト（装備含む）のみを左右反転する。 <see cref="BoneTransform.LocalMirrorX"/> と違い子ボーンはそのまま。
+        /// このボーンのスプライト（装備含む）のみを左右反転する。 <see cref="SpritePoseBoneTransform.LocalMirrorX"/> と違い子ボーンはそのまま。
         /// </summary>
         bool FlipX { get; }
 
         /// <summary>
-        /// このボーンのスプライト（装備含む）のみを上下反転する。 <see cref="BoneTransform.LocalMirrorY"/> と違い子ボーンはそのまま。
+        /// このボーンのスプライト（装備含む）のみを上下反転する。 <see cref="SpritePoseBoneTransform.LocalMirrorY"/> と違い子ボーンはそのまま。
         /// </summary>
         bool FlipY { get; }
 

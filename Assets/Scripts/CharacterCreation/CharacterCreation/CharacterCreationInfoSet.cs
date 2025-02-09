@@ -46,7 +46,7 @@ namespace Roguegard.CharacterCreation
 
         [System.NonSerialized] private float _weight;
         [System.NonSerialized] private IReadOnlyOchalikeBone mainBone;
-        [System.NonSerialized] private AppearanceBoneSpriteTable characterBoneSpriteTable;
+        [System.NonSerialized] private AppearanceMorph characterMorph;
 
         public IKeyword Category => CurrentRaceOption.Category;
 
@@ -113,7 +113,7 @@ namespace Roguegard.CharacterCreation
         {
             _currentRaceOption = null;
             _weight = CurrentRaceOption.GetWeight(CurrentRaceOption, Data);
-            CurrentRaceOption.GetSpriteValues(CurrentRaceOption, Data, _gender, out var mainBone, out characterBoneSpriteTable);
+            CurrentRaceOption.GetSpriteValues(CurrentRaceOption, Data, _gender, out var mainBone, out characterMorph);
 
             if (mainBone != null)
             {
@@ -121,7 +121,7 @@ namespace Roguegard.CharacterCreation
                 for (int i = 0; i < appearances.Count; i++)
                 {
                     var appearance = appearances[i];
-                    appearance.Option.Affect(mainBone, characterBoneSpriteTable, appearance, Data);
+                    appearance.Option.Affect(mainBone, characterMorph, appearance, Data);
                 }
                 this.mainBone = mainBone;
             }
@@ -132,7 +132,7 @@ namespace Roguegard.CharacterCreation
             if (mainBone == null) { Reload(); }
 
             var newRaceOption = CurrentRaceOption.Open(self, infoSetType, polymorph2Base, CurrentRaceOption, Data);
-            characterBoneSpriteTable.AddEffectFromInfoSet(self);
+            characterMorph.AddEffectFromInfoSet(self);
             Data.SortedIntrinsics.Open(self, infoSetType, polymorph2Base);
 
             if (newRaceOption == CurrentRaceOption) return this;
@@ -147,7 +147,7 @@ namespace Roguegard.CharacterCreation
             if (mainBone == null) { Reload(); }
 
             CurrentRaceOption.Close(self, infoSetType, base2Polymorph, CurrentRaceOption, Data);
-            characterBoneSpriteTable.Remove(self);
+            characterMorph.Remove(self);
             Data.SortedIntrinsics.Close(self, infoSetType, base2Polymorph);
         }
 

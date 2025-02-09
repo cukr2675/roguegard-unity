@@ -114,8 +114,8 @@ namespace Roguegard.Rgpacks
 
         void IRaceOption.GetSpriteValues(
             IRaceOption raceOption, ICharacterCreationData characterCreationData, IRogueGender gender,
-            out OchalikeBone mainBone, out AppearanceBoneSpriteTable boneSpriteTable)
-            => Asset.GetSpriteValues(raceOption, characterCreationData, gender, out mainBone, out boneSpriteTable);
+            out OchalikeBone mainBone, out AppearanceMorph morph)
+            => Asset.GetSpriteValues(raceOption, characterCreationData, gender, out mainBone, out morph);
 
         void IRaceOption.GetObjSprite(
             IRaceOption raceOption, ICharacterCreationData characterCreationData, IRogueGender gender, RogueObj self, IReadOnlyOchalikeBone mainBone,

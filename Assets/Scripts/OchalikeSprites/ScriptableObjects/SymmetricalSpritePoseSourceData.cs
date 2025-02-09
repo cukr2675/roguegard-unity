@@ -18,17 +18,17 @@ namespace OchalikeSprites
 
         private void Initialize()
         {
-            var spritePose = new SpritePose();
+            var pose = new SpritePose();
             foreach (var item in _items)
             {
-                spritePose.AddBoneTransform(item.ToBoneTransform(_pixelsPerUnit), item.BoneName);
+                pose.AddBoneTransform(item.ToBoneTransform(_pixelsPerUnit), item.BoneName);
             }
             var localBacks = _localBacks.Select(x => x.ToStruct());
             var reorders = _reorders.Select(x => x.ToStruct());
             var boneOrder = new BoneOrder(localBacks, reorders);
-            spritePose.SetBoneOrder(boneOrder);
-            spritePose.SetImmutable();
-            poseSource = new ImmutableSymmetricalSpritePoseSource(spritePose);
+            pose.SetBoneOrder(boneOrder);
+            pose.SetImmutable();
+            poseSource = new ImmutableSymmetricalSpritePoseSource(pose);
         }
 
         public override SpritePose GetSpritePose(SpriteDirection direction)
@@ -52,12 +52,14 @@ namespace OchalikeSprites
             [SerializeField] private BoneKeywordData _boneName;
             public BoneKeyword BoneName => _boneName;
 
+            [Tooltip("BareSprite を上書きする。最初から BareSprite が存在しなければ変化しない")]
             [SerializeField] private bool _overridesSourceSprite;
             public bool OverridesSourceSprite { get => _overridesSourceSprite; set => _overridesSourceSprite = value; }
 
             [SerializeField] private BoneSprite _boneSprite;
             public BoneSprite BoneSprite { get => _boneSprite; set => _boneSprite = value; }
 
+            [Tooltip("BareColor を上書きする")]
             [SerializeField] private bool _overridesSourceColor;
             public bool OverridesSourceColor { get => _overridesSourceColor; set => _overridesSourceColor = value; }
 
@@ -82,10 +84,10 @@ namespace OchalikeSprites
             [SerializeField] private bool _localMirrorY;
             public bool LocalMirrorY { get => _localMirrorY; set => _localMirrorY = value; }
 
-            public BoneTransform ToBoneTransform(int pixelsPerUnit)
+            public SpritePoseBoneTransform ToBoneTransform(int pixelsPerUnit)
             {
-                return new BoneTransform(
-                    OverridesSourceSprite ? BoneSprite : null, Color, OverridesSourceColor,
+                return new SpritePoseBoneTransform(
+                    OverridesSourceSprite ? BoneSprite : null, OverridesSourceColor ? Color : null,
                     PixelLocalPosition / pixelsPerUnit, LocalRotation, ScaleOfLocalByLocal,
                     TransformsInRootParent, LocalMirrorX, LocalMirrorY);
             }

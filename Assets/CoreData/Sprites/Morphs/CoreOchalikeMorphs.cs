@@ -4,12 +4,12 @@ using UnityEngine;
 
 namespace Roguegard
 {
-    public class CoreEffecterBoneSpriteTables : ScriptableLoader
+    public class CoreOchalikeMorphs : ScriptableLoader
     {
-        private static CoreEffecterBoneSpriteTables instance;
+        private static CoreOchalikeMorphs instance;
 
-        [SerializeField] private OchalikeSprites.EffecterBoneSpriteTableData _guruguruEyes;
-        public static OchalikeSprites.EffecterBoneSpriteTableData GuruguruEyes => instance._guruguruEyes;
+        [SerializeField] private OchalikeSprites.OchalikeMorphData _guruguruEyes;
+        public static OchalikeSprites.OchalikeMorphData GuruguruEyes => instance._guruguruEyes;
 
         public override IEnumerator LoadAsync()
         {

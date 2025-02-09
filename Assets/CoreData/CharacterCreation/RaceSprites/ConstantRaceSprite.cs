@@ -14,13 +14,13 @@ namespace Roguegard.CharacterCreation
 
         public void GetSpriteValues(
             IRaceOption raceOption, ICharacterCreationData characterCreationData, IRogueGender gender,
-            out OchalikeBone mainBone, out AppearanceBoneSpriteTable boneSpriteTable)
+            out OchalikeBone mainBone, out AppearanceMorph morph)
         {
             var bodyColor = characterCreationData.Race.BodyColor;
             var hairColor = RogueColorUtility.GetHairColor(characterCreationData);
             if (_bone != null) { mainBone = _bone.CreateBone(bodyColor, hairColor.maxColorComponent); }
             else { mainBone = null; }
-            boneSpriteTable = new AppearanceBoneSpriteTable();
+            morph = new AppearanceMorph();
         }
 
         public void GetObjSprite(

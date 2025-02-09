@@ -6,14 +6,14 @@ using OchalikeSprites;
 
 namespace Roguegard.CharacterCreation
 {
-    public class AppearanceBoneSpriteTable
+    public class AppearanceMorph
     {
         private readonly BaseEffect baseEffect = new BaseEffect();
         private readonly List<EquipmentItem> equipmentItems = new List<EquipmentItem>();
 
-        public EffectableBoneSpriteTable BaseTable => baseEffect.Table;
+        public OchalikeMorph BaseEffectOchalikeMorph => baseEffect.OchalikeMorph;
 
-        public bool TryGetNewEquipmentTable(Spanning<IKeyword> equipParts, float order, out EffectableBoneSpriteTable table)
+        public bool TryGetNewEquipmentTable(Spanning<IKeyword> equipParts, float order, out OchalikeMorph ochalikeMorph)
         {
             // 部分一致する要素があったら失敗させる
             foreach (var item in equipmentItems)
@@ -22,7 +22,7 @@ namespace Roguegard.CharacterCreation
                 {
                     if (equipParts.Contains(item.EquipParts[i]))
                     {
-                        table = null;
+                        ochalikeMorph = null;
                         return false;
                     }
                 }
@@ -32,14 +32,14 @@ namespace Roguegard.CharacterCreation
                 // 完全一致する要素が見つからなければ新しく追加する
                 var item = new EquipmentItem(equipParts, order);
                 equipmentItems.Add(item);
-                table = item.Table;
+                ochalikeMorph = item.OchalikeMorph;
                 return true;
             }
         }
 
         public void AddEffectFromInfoSet(RogueObj self)
         {
-            if (BaseTable.Any)
+            if (BaseEffectOchalikeMorph.Any)
             {
                 RogueEffectUtility.AddFromInfoSet(self, baseEffect);
             }
@@ -51,7 +51,7 @@ namespace Roguegard.CharacterCreation
 
         public void Remove(RogueObj self)
         {
-            if (BaseTable.Any)
+            if (BaseEffectOchalikeMorph.Any)
             {
                 RogueEffectUtility.Remove(self, baseEffect);
             }
@@ -61,15 +61,16 @@ namespace Roguegard.CharacterCreation
             }
         }
 
+        // 命名メモ: AddEquipment も使用するので BareEffect ではない
         private class BaseEffect : IBoneSpriteEffect
         {
             public float Order => -200f;
 
-            public EffectableBoneSpriteTable Table { get; } = new EffectableBoneSpriteTable();
+            public OchalikeMorph OchalikeMorph { get; } = new OchalikeMorph();
 
-            public void AffectSprite(RogueObj self, IReadOnlyOchalikeBone rootBone, EffectableBoneSpriteTable boneSpriteTable)
+            public void AffectSprite(RogueObj self, IReadOnlyOchalikeBone rootBone, OchalikeMorph ochalikeMorph)
             {
-                Table.AddTo(boneSpriteTable);
+                OchalikeMorph.AddTo(ochalikeMorph);
             }
         }
 
@@ -80,16 +81,16 @@ namespace Roguegard.CharacterCreation
 
             public float Order { get; }
 
-            public EffectableBoneSpriteTable Table { get; }
+            public OchalikeMorph OchalikeMorph { get; }
 
             public EquipmentItem(Spanning<IKeyword> equipParts, float order)
             {
                 _equipParts = equipParts.ToArray();
                 Order = order;
-                Table = new EffectableBoneSpriteTable();
+                OchalikeMorph = new OchalikeMorph();
             }
 
-            public void AffectSprite(RogueObj self, IReadOnlyOchalikeBone rootBone, EffectableBoneSpriteTable boneSpriteTable)
+            public void AffectSprite(RogueObj self, IReadOnlyOchalikeBone rootBone, OchalikeMorph ochalikeMorph)
             {
                 // 同一部位または Innerwear に何か装備されていたらエフェクト無効化
                 // （部位がゼロのエフェクトは無視して表示）
@@ -102,7 +103,7 @@ namespace Roguegard.CharacterCreation
                     if (Any(self, RoguegardCharacterCreationSettings.EquipPartOfInnerwear)) return;
                 }
 
-                Table.AddTo(boneSpriteTable);
+                OchalikeMorph.AddTo(ochalikeMorph);
             }
 
             private static bool Any(RogueObj self, IKeyword equipPart)

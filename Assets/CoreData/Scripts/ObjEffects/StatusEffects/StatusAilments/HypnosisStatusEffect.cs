@@ -92,12 +92,12 @@ namespace Roguegard
             };
         }
 
-        void IBoneSpriteEffect.AffectSprite(RogueObj self, IReadOnlyOchalikeBone rootBone, EffectableBoneSpriteTable boneSpriteTable)
+        void IBoneSpriteEffect.AffectSprite(RogueObj self, IReadOnlyOchalikeBone rootBone, OchalikeMorph ochalikeMorph)
         {
             // 目の色を変更
             var color = new Color32(255, 0, 255, 255);
-            boneSpriteTable.SetFirstSprite(BoneKeyword.LeftEye, color);
-            boneSpriteTable.SetFirstSprite(BoneKeyword.RightEye, color);
+            ochalikeMorph.SetFirstSprite(BoneKeyword.LeftEye, morphBareColor: color);
+            ochalikeMorph.SetFirstSprite(BoneKeyword.RightEye, morphBareColor: color);
         }
     }
 }

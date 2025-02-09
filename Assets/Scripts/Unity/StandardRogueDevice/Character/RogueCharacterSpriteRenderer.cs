@@ -85,7 +85,7 @@ namespace RoguegardUnity
             var y = Mathf.Round(transform.Position.y * RoguegardSettings.PixelsPerUnit) / RoguegardSettings.PixelsPerUnit;
             transform.Position = new Vector3(x, y);
 
-            if (transform.PoseSource == null) { transform.PoseSource = DefaultSpriteMotionPoseSource.Instance; }
+            if (transform.PoseSource == null) { transform.PoseSource = DefaultSpritePoseSource.Instance; }
             var pose = transform.PoseSource.GetSpritePose(transform.Direction);
             obj.Main.Sprite.SetTo(mainRenderer, pose, direction);
             var rendererTransform = mainRenderer.transform;
@@ -119,7 +119,7 @@ namespace RoguegardUnity
 
         private static bool SetTo(RogueObjSpriteRenderer renderer, ISpriteMotion spriteMotion, int motionEffectAnimationTime, RogueDirection direction)
         {
-            effectSprite ??= ColoredRogueSprite.Create(null, RoguegardSettings.BoneSpriteBaseColor);
+            effectSprite ??= ColoredRogueSprite.Create(null, RoguegardSettings.DefaultColor);
 
             var transform = OchalikeSpriteTransform.Identity;
             spriteMotion.ApplyTo(motionEffectAnimationTime, direction, ref transform, out var endOfMotion);
@@ -128,7 +128,7 @@ namespace RoguegardUnity
             var y = Mathf.Round(transform.Position.y * RoguegardSettings.PixelsPerUnit) / RoguegardSettings.PixelsPerUnit;
             transform.Position = new Vector3(x, y);
 
-            if (transform.PoseSource == null) { transform.PoseSource = DefaultSpriteMotionPoseSource.Instance; }
+            if (transform.PoseSource == null) { transform.PoseSource = DefaultSpritePoseSource.Instance; }
             var pose = transform.PoseSource.GetSpritePose(transform.Direction);
             effectSprite.SetTo(renderer, pose, direction);
             var rendererTransform = renderer.transform;

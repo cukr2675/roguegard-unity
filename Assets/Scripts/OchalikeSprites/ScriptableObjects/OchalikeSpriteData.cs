@@ -75,10 +75,10 @@ namespace OchalikeSprites
             [Space]
 
             [SerializeField] private ColorRangedBoneSprite _sprite = null;
-            public ColorRangedBoneSprite Sprite { get => _sprite; set => _sprite = value; }
+            public ColorRangedBoneSprite Sprite { get => _sprite; set => _sprite = value; } // TODO:
 
-            [SerializeField] private bool _overridesBaseColor = true;
-            public bool OverridesBaseColor { get => _overridesBaseColor; set => _overridesBaseColor = value; }
+            [SerializeField] private bool _overridesOnDefaultColor = true;
+            public bool OverridesOnDefaultColor { get => _overridesOnDefaultColor; set => _overridesOnDefaultColor = value; }
 
             [SerializeField] private bool _flipX = false;
             public bool FlipX { get => _flipX; set => _flipX = value; }
@@ -105,9 +105,9 @@ namespace OchalikeSprites
             {
                 var bone = new OchalikeBone();
                 bone.Name = _boneName;
-                bone.Sprite = _sprite.GetSprite(bright);
-                bone.Color = color;
-                bone.OverridesBaseColor = _overridesBaseColor;
+                bone.BareSprite = _sprite.GetSprite(bright);
+                bone.BareColor = color;
+                bone.OverridesOnDefaultColor = _overridesOnDefaultColor;
                 bone.FlipX = _flipX;
                 bone.FlipY = _flipY;
                 bone.LocalPosition = _pixelLocalPosition / pixelsPerUnit;

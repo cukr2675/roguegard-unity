@@ -6,6 +6,9 @@ using OchalikeSprites;
 
 namespace Roguegard
 {
+    /// <summary>
+    /// <see cref="ScriptableObject"/> を継承した <see cref="RogueSpriteMotion"/>
+    /// </summary>
     public abstract class RogueSpriteMotionData : SpriteMotionData, IRogueSpriteMotion
     {
         public abstract IKeyword Keyword { get; }

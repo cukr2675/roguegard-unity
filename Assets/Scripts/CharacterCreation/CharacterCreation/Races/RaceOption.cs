@@ -62,7 +62,7 @@ namespace Roguegard.CharacterCreation
 
         public abstract void GetSpriteValues(
             IRaceOption raceOption, ICharacterCreationData characterCreationData, IRogueGender gender,
-            out OchalikeBone mainBone, out AppearanceBoneSpriteTable boneSpriteTable);
+            out OchalikeBone mainBone, out AppearanceMorph morph);
 
         public abstract void GetObjSprite(
             IRaceOption raceOption, ICharacterCreationData characterCreationData, IRogueGender gender, RogueObj self, IReadOnlyOchalikeBone mainBone,

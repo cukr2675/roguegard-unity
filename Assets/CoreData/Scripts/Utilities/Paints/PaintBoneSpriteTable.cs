@@ -4,6 +4,7 @@ using UnityEngine;
 
 using OchalikeSprites;
 using RuntimeDotter;
+using System;
 
 namespace Roguegard
 {
@@ -60,14 +61,14 @@ namespace Roguegard
             _palette[index] = color;
         }
 
-        public EffectableBoneSpriteTable GetEffectableTable()
+        public OchalikeMorph GetOchalikeMorph()
         {
-            var table = new EffectableBoneSpriteTable();
+            var ochalikeMorph = new OchalikeMorph();
             foreach (var item in _items)
             {
-                item.AddTo(table, MainColor, _palette);
+                item.AddTo(ochalikeMorph, MainColor, _palette);
             }
-            return table;
+            return ochalikeMorph;
         }
 
         public Sprite GetIcon()

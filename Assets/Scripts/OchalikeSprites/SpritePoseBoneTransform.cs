@@ -4,13 +4,11 @@ using UnityEngine;
 
 namespace OchalikeSprites
 {
-    public class BoneTransform
+    public class SpritePoseBoneTransform
     {
-        public BoneSprite Sprite { get; }
+        public BoneSprite PoseBareSprite { get; }
 
-        public Color Color { get; }
-
-        public bool OverridesSourceColor { get; }
+        public Color? PoseBareColor { get; }
 
         public Vector3 LocalPosition { get; }
 
@@ -42,8 +40,8 @@ namespace OchalikeSprites
         /// </summary>
         public bool LocalMirrorY { get; }
 
-        public BoneTransform(
-            BoneSprite sprite, Color color, bool overridesSourceColor,
+        public SpritePoseBoneTransform(
+            BoneSprite poseBareSprite, Color? poseBareColor,
             Vector3 localPosition, Quaternion localRotation, Vector3 scaleOfLocalByLocal, bool transformsInRootParent,
             bool localMirrorX, bool localMirrorY)
         {
@@ -53,9 +51,8 @@ namespace OchalikeSprites
             TransformsInRootParent = transformsInRootParent;
             LocalMirrorX = localMirrorX;
             LocalMirrorY = localMirrorY;
-            Sprite = sprite;
-            Color = color;
-            OverridesSourceColor = overridesSourceColor;
+            PoseBareSprite = poseBareSprite;
+            PoseBareColor = poseBareColor;
         }
     }
 }

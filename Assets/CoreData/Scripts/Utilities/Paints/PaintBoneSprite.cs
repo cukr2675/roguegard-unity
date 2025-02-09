@@ -69,77 +69,77 @@ namespace Roguegard
             }
         }
 
-        public void AddTo(EffectableBoneSpriteTable table, Color mainColor, Spanning<ShiftableColor> palette)
+        public void AddTo(OchalikeMorph ochalikeMorph, Color mainColor, Spanning<ShiftableColor> palette)
         {
             if (Bone == BoneKeyword.Body)
             {
                 var overridesUpperBaseColor = OverridesBaseColor(true, upperBodyRect, palette);
                 var overridesLowerBaseColor = OverridesBaseColor(false, bodyRect, palette);
                 ToBoneSprite(palette, out var upperBoneSprite, out var lowerBoneSprite);
-                AddTo(table, BoneKeyword.UpperBody, upperBoneSprite, mainColor, overridesUpperBaseColor);
-                AddTo(table, BoneKeyword.Body, lowerBoneSprite, mainColor, overridesLowerBaseColor);
+                AddTo(ochalikeMorph, BoneKeyword.UpperBody, upperBoneSprite, mainColor, overridesUpperBaseColor);
+                AddTo(ochalikeMorph, BoneKeyword.Body, lowerBoneSprite, mainColor, overridesLowerBaseColor);
             }
             else if (Bone == BoneKeyword.LeftArm)
             {
                 ToBoneSprite(palette, out var upperBoneSprite, out var lowerBoneSprite);
-                AddTo(table, BoneKeyword.LeftArm, upperBoneSprite, mainColor);
-                AddTo(table, BoneKeyword.LeftHand, lowerBoneSprite, mainColor);
+                AddTo(ochalikeMorph, BoneKeyword.LeftArm, upperBoneSprite, mainColor);
+                AddTo(ochalikeMorph, BoneKeyword.LeftHand, lowerBoneSprite, mainColor);
                 if (Mirroring)
                 {
-                    AddTo(table, BoneKeyword.RightArm, upperBoneSprite, mainColor);
-                    AddTo(table, BoneKeyword.RightHand, lowerBoneSprite, mainColor);
+                    AddTo(ochalikeMorph, BoneKeyword.RightArm, upperBoneSprite, mainColor);
+                    AddTo(ochalikeMorph, BoneKeyword.RightHand, lowerBoneSprite, mainColor);
                 }
             }
             else if (Bone == BoneKeyword.LeftLeg)
             {
                 ToBoneSprite(palette, out var upperBoneSprite, out var lowerBoneSprite);
-                AddTo(table, BoneKeyword.LeftLeg, upperBoneSprite, mainColor);
-                AddTo(table, BoneKeyword.LeftFoot, lowerBoneSprite, mainColor);
+                AddTo(ochalikeMorph, BoneKeyword.LeftLeg, upperBoneSprite, mainColor);
+                AddTo(ochalikeMorph, BoneKeyword.LeftFoot, lowerBoneSprite, mainColor);
                 if (Mirroring)
                 {
-                    AddTo(table, BoneKeyword.RightLeg, upperBoneSprite, mainColor);
-                    AddTo(table, BoneKeyword.RightFoot, lowerBoneSprite, mainColor);
+                    AddTo(ochalikeMorph, BoneKeyword.RightLeg, upperBoneSprite, mainColor);
+                    AddTo(ochalikeMorph, BoneKeyword.RightFoot, lowerBoneSprite, mainColor);
                 }
             }
             else if (Bone == BoneKeyword.RightArm)
             {
                 ToBoneSprite(palette, out var upperBoneSprite, out var lowerBoneSprite);
-                AddTo(table, BoneKeyword.RightArm, upperBoneSprite, mainColor);
-                AddTo(table, BoneKeyword.RightHand, lowerBoneSprite, mainColor);
+                AddTo(ochalikeMorph, BoneKeyword.RightArm, upperBoneSprite, mainColor);
+                AddTo(ochalikeMorph, BoneKeyword.RightHand, lowerBoneSprite, mainColor);
                 if (Mirroring)
                 {
-                    AddTo(table, BoneKeyword.LeftArm, upperBoneSprite, mainColor);
-                    AddTo(table, BoneKeyword.LeftHand, lowerBoneSprite, mainColor);
+                    AddTo(ochalikeMorph, BoneKeyword.LeftArm, upperBoneSprite, mainColor);
+                    AddTo(ochalikeMorph, BoneKeyword.LeftHand, lowerBoneSprite, mainColor);
                 }
             }
             else if (Bone == BoneKeyword.RightLeg)
             {
                 ToBoneSprite(palette, out var upperBoneSprite, out var lowerBoneSprite);
-                AddTo(table, BoneKeyword.RightLeg, upperBoneSprite, mainColor);
-                AddTo(table, BoneKeyword.RightFoot, lowerBoneSprite, mainColor);
+                AddTo(ochalikeMorph, BoneKeyword.RightLeg, upperBoneSprite, mainColor);
+                AddTo(ochalikeMorph, BoneKeyword.RightFoot, lowerBoneSprite, mainColor);
                 if (Mirroring)
                 {
-                    AddTo(table, BoneKeyword.LeftLeg, upperBoneSprite, mainColor);
-                    AddTo(table, BoneKeyword.LeftFoot, lowerBoneSprite, mainColor);
+                    AddTo(ochalikeMorph, BoneKeyword.LeftLeg, upperBoneSprite, mainColor);
+                    AddTo(ochalikeMorph, BoneKeyword.LeftFoot, lowerBoneSprite, mainColor);
                 }
             }
             else
             {
                 var sprite = ToBoneSprite(palette);
-                AddTo(table, Bone, sprite, mainColor);
+                AddTo(ochalikeMorph, Bone, sprite, mainColor);
             }
         }
 
-        private void AddTo(EffectableBoneSpriteTable table, BoneKeyword name, BoneSprite sprite, Color color, bool overridesBaseColor = false)
+        private void AddTo(OchalikeMorph ochalikeMorph, BoneKeyword name, BoneSprite sprite, Color color, bool overridesBaseColor = false)
         {
             if (IsFirst)
             {
-                if (OverridesSourceColor) { table.SetFirstSprite(name, sprite, color, true); }
-                else { table.SetFirstSprite(name, sprite, overridesBaseColor); }
+                if (OverridesSourceColor) { ochalikeMorph.SetFirstSprite(name, sprite, color, true); }
+                else { ochalikeMorph.SetFirstSprite(name, sprite, null, overridesBaseColor); }
             }
             else
             {
-                table.AddEquipmentSprite(name, sprite, color, overridesBaseColor);
+                ochalikeMorph.AddEquipmentSprite(name, sprite, color, overridesBaseColor);
             }
         }
 

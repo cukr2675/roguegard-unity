@@ -42,7 +42,7 @@ namespace RoguegardUnity
         [Header("Sprites")]
         [Tooltip("ローグガルドで標準の PixelsPerUnit 。ドットキャラの解像度と素材の流用しやすさを考慮して 32 にする")]
         [SerializeField] private int _pixelsPerUnit = 32;
-        [SerializeField] private Color _boneSpriteBaseColor = Color.white;
+        [SerializeField] private Color _defaultColor = Color.white;
         [Tooltip("customShift シェーダーの明度補正値")]
         [SerializeField] private float _lightRatio = 248f / 255f;
 
@@ -73,7 +73,7 @@ namespace RoguegardUnity
             RoguegardSettings.KeywordsNotEnqueueMessageRule = _keywordsNotEnqueueMessageRule;
 
             RoguegardSettings.PixelsPerUnit = _pixelsPerUnit;
-            RoguegardSettings.BoneSpriteBaseColor = _boneSpriteBaseColor;
+            RoguegardSettings.DefaultColor = _defaultColor;
             RoguegardSettings.LightRatio = _lightRatio;
 
             RoguegardSettings.DefaultSaveFileName = _defaultSaveFileName;

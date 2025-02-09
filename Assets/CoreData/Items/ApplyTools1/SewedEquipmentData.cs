@@ -50,15 +50,15 @@ namespace Roguegard
             _equipParts = parts.ToArray();
         }
 
-        public void Affect(AppearanceBoneSpriteTable boneSpriteTable, Color color)
+        public void Affect(AppearanceMorph morph, Color color)
         {
-            if (!boneSpriteTable.TryGetNewEquipmentTable(_equipParts, BoneSpriteEffectOrder, out var table))
+            if (!morph.TryGetNewEquipmentTable(_equipParts, BoneSpriteEffectOrder, out var table))
             {
                 Debug.LogWarning("重複した装備部位の見た目が存在します。");
                 return;
             }
 
-            BoneSprites.GetEffectableTable().ColoredAddTo(table, color);
+            BoneSprites.GetOchalikeMorph().ColoredAddTo(table, color);
         }
     }
 }

@@ -25,11 +25,11 @@ namespace OchalikeSprites
         public int BackPoseFrontSpriteIndex { get; set; }
         public int BackPoseRearSpriteIndex { get; set; }
 
-        private BoneSprite primarySprite;
-        private Color primaryColor;
+        private BoneSprite bareSprite;
+        private Color bareColor;
         private readonly List<BoneSprite> equipmentSprites;
         private readonly List<Color> equipmentColors;
-        private bool overridesBaseColor;
+        private bool overridesOnDefaultColor;
 
         public OchalikeSpriteNode(IReadOnlyOchalikeBone bone)
         {
@@ -72,30 +72,30 @@ namespace OchalikeSprites
             return true;
         }
 
-        private void SetBaseSprite(EffectableBoneSpriteTable.RefItem item)
+        private void SetBareSprite(OchalikeMorph.RefItem item)
         {
-            primarySprite = item.FirstSprite ?? source.Sprite;
-            primaryColor = item.OverridesSourceColor ? item.FirstColor : source.Color;
+            bareSprite = item.MorphBareSprite ?? source.BareSprite;
+            bareColor = item.MorphBareColor ?? source.BareColor;
             equipmentSprites.Clear();
             equipmentColors.Clear();
-            overridesBaseColor = source.OverridesBaseColor || item.OverridesBaseColor;
+            overridesOnDefaultColor = source.OverridesOnDefaultColor || item.OverridesOnDefaultColor;
             NormalFrontSpriteCount = 0;
             NormalRearSpriteCount = 0;
             BackFrontSpriteCount = 0;
             BackRearSpriteCount = 0;
-            if (primarySprite != null)
+            if (bareSprite != null)
             {
-                if (primarySprite.NormalFront != null) NormalFrontSpriteCount = 1;
-                if (primarySprite.NormalRear != null) NormalRearSpriteCount = 1;
-                if (primarySprite.BackFront != null) BackFrontSpriteCount = 1;
-                if (primarySprite.BackRear != null) BackRearSpriteCount = 1;
+                if (bareSprite.NormalFront != null) NormalFrontSpriteCount = 1;
+                if (bareSprite.NormalRear != null) NormalRearSpriteCount = 1;
+                if (bareSprite.BackFront != null) BackFrontSpriteCount = 1;
+                if (bareSprite.BackRear != null) BackRearSpriteCount = 1;
             }
         }
 
-        public void ApplyTable(EffectableBoneSpriteTable boneSpriteTable)
+        public void ApplyTable(OchalikeMorph ochalikeMorph)
         {
-            var item = boneSpriteTable.GetSprite(source.Name);
-            SetBaseSprite(item);
+            var item = ochalikeMorph.GetSprite(source.Name);
+            SetBareSprite(item);
             for (int i = 0; i < item.EquipmentSpriteCount; i++)
             {
                 item.GetEquipmentSprite(i, out var sprite, out var color);
@@ -109,15 +109,15 @@ namespace OchalikeSprites
             for (int i = 0; i < _children.Count; i++)
             {
                 var child = _children[i];
-                child.ApplyTable(boneSpriteTable);
+                child.ApplyTable(ochalikeMorph);
             }
         }
 
         public void SetTo(
             IOchalikeSpriteRenderController renderController,
-            IReadOnlyDictionary<BoneKeyword, BoneTransform> boneTransforms, bool poseBack,
+            IReadOnlyDictionary<BoneKeyword, SpritePoseBoneTransform> boneTransforms, bool poseBack,
             Vector3 parentPosition, Quaternion parentRotation, Vector3 scaleOfLocalByParent,
-            bool parentMirrorX, bool parentMirrorY, Color baseColor)
+            bool parentMirrorX, bool parentMirrorY, Color defaultColor)
         {
             // 位置計算
             var position = source.LocalPosition;
@@ -135,9 +135,8 @@ namespace OchalikeSprites
                 BoneBack.Type.ForcedBack => true,
                 _ => throw new System.Exception()
             };
-            BoneSprite poseSprite = null;
-            Color poseColor = default;
-            var poseOverridesSourceColor = false;
+            BoneSprite poseBareSprite = null;
+            Color? poseBareColor = default;
             if (boneTransforms.TryGetValue(source.Name, out var transform))
             {
                 if (transform.TransformsInRootParent)
@@ -151,9 +150,8 @@ namespace OchalikeSprites
                 scale = Vector3.Scale(scale, transform.ScaleOfLocalByLocal);
                 mirrorX ^= transform.LocalMirrorX;
                 mirrorY ^= transform.LocalMirrorY;
-                poseSprite = transform.Sprite;
-                poseColor = transform.Color;
-                poseOverridesSourceColor = transform.OverridesSourceColor;
+                poseBareSprite = transform.PoseBareSprite;
+                poseBareColor = transform.PoseBareColor;
             }
             if (parentMirrorX) { position.x = -position.x; }
             if (parentMirrorY) { position.y = -position.y; }
@@ -177,19 +175,18 @@ namespace OchalikeSprites
             {
                 var frontIndex = 0;
                 var rearIndex = 0;
-                if (primarySprite != null)
+                if (bareSprite != null)
                 {
-                    if (poseSprite != null || poseOverridesSourceColor)
+                    var boneSprite = bareSprite;
+                    var color = overridesOnDefaultColor ? bareColor : defaultColor;
+                    if (poseBareSprite != null || poseBareColor != null)
                     {
-                        var boneSprite = poseSprite ?? primarySprite;
-                        var color = overridesBaseColor ? primaryColor : baseColor;
-                        color = poseOverridesSourceColor ? poseColor : color;
+                        boneSprite = poseBareSprite ?? boneSprite;
+                        color = poseBareColor ?? color;
                         SetPoseSprite(boneSprite, color, ref frontIndex, ref rearIndex);
                     }
                     else
                     {
-                        var boneSprite = primarySprite;
-                        var color = overridesBaseColor ? primaryColor : baseColor;
                         SetSprite(boneSprite, color, ref frontIndex, ref rearIndex);
                     }
                 }
@@ -205,7 +202,7 @@ namespace OchalikeSprites
             for (int i = 0; i < _children.Count; i++)
             {
                 var child = _children[i];
-                child.SetTo(renderController, boneTransforms, poseBack, position, rotation, scale, mirrorX, mirrorY, baseColor);
+                child.SetTo(renderController, boneTransforms, poseBack, position, rotation, scale, mirrorX, mirrorY, defaultColor);
             }
 
             void SetSprite(BoneSprite boneSprite, Color color, ref int frontIndex, ref int rearIndex)
@@ -234,7 +231,7 @@ namespace OchalikeSprites
             // ポーズスプライトの上書き前のスプライトが null であった場合は上書きしない。
             void SetPoseSprite(BoneSprite boneSprite, Color color, ref int frontIndex, ref int rearIndex)
             {
-                if (primarySprite != null && primarySprite.GetFrontSprite(back) != null)
+                if (bareSprite != null && bareSprite.GetFrontSprite(back) != null)
                 {
                     var frontSprite = boneSprite.GetFrontSprite(back);
                     var frontBonesIndex = poseBack ? BackPoseFrontSpriteIndex : NormalPoseFrontSpriteIndex;
@@ -243,7 +240,7 @@ namespace OchalikeSprites
                         index, source.Name.Name, frontSprite, color, flipX, flipY, position, rotation, scale);
                     frontIndex++;
                 }
-                if (primarySprite != null && primarySprite.GetRearSprite(back) != null)
+                if (bareSprite != null && bareSprite.GetRearSprite(back) != null)
                 {
                     var rearSprite = boneSprite.GetRearSprite(back);
                     var rearBonesIndex = poseBack ? BackPoseRearSpriteIndex : NormalPoseRearSpriteIndex;

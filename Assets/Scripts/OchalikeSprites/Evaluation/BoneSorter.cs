@@ -9,11 +9,11 @@ namespace OchalikeSprites
         public static int SetIndexAndGetCount<T>(T bone, BoneOrder boneOrder, bool back)
             where T : ISortableBone<T>
         {
-            Stacka<T>.boneStack.Clear();
+            StaticStack<T>.boneStack.Clear();
             var bonesCount = SetChildIndex(bone, boneOrder, BoneBack.Type.ForPose, back, 0);
-            while (Stacka<T>.boneStack.Count >= 1)
+            while (StaticStack<T>.boneStack.Count >= 1)
             {
-                var childBone = Stacka<T>.boneStack.Pop();
+                var childBone = StaticStack<T>.boneStack.Pop();
                 int frontSpriteCount;
                 if (back)
                 {
@@ -128,7 +128,7 @@ namespace OchalikeSprites
                     }
                 }
                 SetRearIndex(bone, bonesCount);
-                Stacka<T>.boneStack.Push(bone);
+                StaticStack<T>.boneStack.Push(bone);
                 var rearSpriteCount = backValue ? bone.BackRearSpriteCount : bone.NormalRearSpriteCount;
                 bonesCount += rearSpriteCount;
                 for (int j = 0; j < rearChildren.Count; j++)
@@ -181,7 +181,7 @@ namespace OchalikeSprites
             }
         }
 
-        private static class Stacka<T>
+        private static class StaticStack<T>
             where T : ISortableBone<T>
         {
             public static readonly Stack<T> boneStack = new Stack<T>();

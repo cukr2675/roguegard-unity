@@ -4,12 +4,16 @@ using UnityEngine;
 
 namespace OchalikeSprites
 {
+    /// <summary>
+    /// <see cref="OchalikeSpriteData"/> を構成するボーン。
+    /// これをもとに <see cref="OchalikeMorph"/> と <see cref="SpritePose"/> の効果を受ける
+    /// </summary>
     public class OchalikeBone : IReadOnlyOchalikeBone
     {
         public BoneKeyword Name { get; set; }
-        public BoneSprite Sprite { get; set; }
-        public Color Color { get; set; }
-        public bool OverridesBaseColor { get; set; }
+        public BoneSprite BareSprite { get; set; }
+        public Color BareColor { get; set; }
+        public bool OverridesOnDefaultColor { get; set; }
         public bool FlipX { get; set; }
         public bool FlipY { get; set; }
         public Vector3 LocalPosition { get; set; }

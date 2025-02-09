@@ -54,9 +54,9 @@ namespace Roguegard
             return chain.Invoke(keyword, method, self, user, activationDepth, arg1);
         }
 
-        void IBoneSpriteEffect.AffectSprite(RogueObj self, IReadOnlyOchalikeBone rootBone, EffectableBoneSpriteTable boneSpriteTable)
+        void IBoneSpriteEffect.AffectSprite(RogueObj self, IReadOnlyOchalikeBone rootBone, OchalikeMorph ochalikeMorph)
         {
-            CoreEffecterBoneSpriteTables.GuruguruEyes.AddTo(boneSpriteTable);
+            CoreOchalikeMorphs.GuruguruEyes.AddTo(ochalikeMorph);
         }
 
         public override bool CanStack(RogueObj self, RogueObj comingObj, IRogueEffect coming)

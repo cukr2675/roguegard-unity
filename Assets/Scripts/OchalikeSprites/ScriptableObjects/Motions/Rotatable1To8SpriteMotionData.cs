@@ -57,7 +57,7 @@ namespace OchalikeSprites
         private class Item : IDirectionalSpritePoseSource
         {
             [SerializeField] private Sprite _rightSprite;
-            private SpritePose spritePose;
+            private SpritePose pose;
 
             [SerializeField] private Color _color;
 
@@ -81,18 +81,18 @@ namespace OchalikeSprites
 
             public SpritePose GetSpritePose(SpriteDirection direction)
             {
-                if (spritePose == null)
+                if (pose == null)
                 {
-                    if (_rightSprite == null) return DefaultSpriteMotionPoseSource.Instance.GetSpritePose(direction);
+                    if (_rightSprite == null) return DefaultSpritePoseSource.Instance.GetSpritePose(direction);
 
-                    spritePose = new SpritePose();
+                    pose = new SpritePose();
                     var boneSprite = BoneSprite.CreateNF(_rightSprite);
-                    var transform = new BoneTransform(boneSprite, _color, true, Vector3.zero, Quaternion.identity, Vector3.one, false, false, false);
-                    spritePose.AddBoneTransform(transform, BoneKeyword.Body);
-                    spritePose.SetImmutable();
+                    var transform = new SpritePoseBoneTransform(boneSprite, _color, Vector3.zero, Quaternion.identity, Vector3.one, false, false, false);
+                    pose.AddBoneTransform(transform, BoneKeyword.Body);
+                    pose.SetImmutable();
                 }
 
-                return spritePose;
+                return pose;
             }
 
             public void Validate()

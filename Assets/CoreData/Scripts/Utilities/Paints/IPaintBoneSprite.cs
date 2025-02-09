@@ -10,7 +10,7 @@ namespace Roguegard
     [Objforming.RequireRelationalComponent]
     public interface IPaintBoneSprite
     {
-        void AddTo(EffectableBoneSpriteTable table, Color mainColor, Spanning<ShiftableColor> palette);
+        void AddTo(OchalikeMorph ochalikeMorph, Color mainColor, Spanning<ShiftableColor> palette);
 
         Sprite GetIcon(Spanning<ShiftableColor> palette);
 

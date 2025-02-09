@@ -19,7 +19,7 @@ namespace Roguegard.CharacterCreation
 
         [SerializeField] private bool _canStackWhileEquipped;
 
-        [SerializeField] private EffecterBoneSpriteTableData _boneSpriteTable;
+        [SerializeField] private OchalikeMorphData _boneSpriteTable;
 
         [Tooltip("この値が設定されているとき、装備者の指定のボーンの色をスポイトする")]
         [SerializeField] private BoneKeywordData _eyeDropBoneName;
@@ -48,9 +48,9 @@ namespace Roguegard.CharacterCreation
             }
         }
 
-        public void Affect(AppearanceBoneSpriteTable boneSpriteTable, Color color)
+        public void Affect(AppearanceMorph morph, Color color)
         {
-            if (!boneSpriteTable.TryGetNewEquipmentTable(_isCosmetic ? Spanning<IKeyword>.Empty : _equipParts, _boneSpriteEffectOrder, out var table))
+            if (!morph.TryGetNewEquipmentTable(_isCosmetic ? Spanning<IKeyword>.Empty : _equipParts, _boneSpriteEffectOrder, out var table))
             {
                 Debug.LogWarning("重複した装備部位の見た目が存在します。");
                 return;
@@ -109,12 +109,12 @@ namespace Roguegard.CharacterCreation
                 }
             }
 
-            void IBoneSpriteEffect.AffectSprite(RogueObj owner, IReadOnlyOchalikeBone rootBone, EffectableBoneSpriteTable boneSpriteTable)
+            void IBoneSpriteEffect.AffectSprite(RogueObj owner, IReadOnlyOchalikeBone rootBone, OchalikeMorph ochalikeMorph)
             {
                 if (Data._eyeDropBoneName != null)
                 {
-                    var color = RogueColorUtility.GetFirstColor(Data._eyeDropBoneName, rootBone, boneSpriteTable);
-                    Data._boneSpriteTable?.ColoredAddTo(boneSpriteTable, color);
+                    var color = RogueColorUtility.GetMorphedBareColor(Data._eyeDropBoneName, rootBone, ochalikeMorph);
+                    Data._boneSpriteTable?.ColoredAddTo(ochalikeMorph, color);
                     return;
                 }
 
@@ -123,7 +123,7 @@ namespace Roguegard.CharacterCreation
                     color = RogueColorUtility.GetColor(self);
                     colorIsInitialized = true;
                 }
-                Data._boneSpriteTable?.ColoredAddTo(boneSpriteTable, color);
+                Data._boneSpriteTable?.ColoredAddTo(ochalikeMorph, color);
             }
         }
     }

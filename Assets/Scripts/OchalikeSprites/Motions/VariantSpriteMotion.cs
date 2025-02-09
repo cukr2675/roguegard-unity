@@ -7,24 +7,22 @@ namespace OchalikeSprites
     public class VariantSpriteMotion : ISpriteMotion
     {
         private readonly ISpriteMotion baseMotion;
-        private readonly BoneKeyword boneName;
-        private readonly BoneSprite sprite;
-        private readonly bool overridesColor;
-        private readonly Color color;
+        private readonly BoneKeyword variantTargetBoneName;
+        private readonly BoneSprite poseBareSprite;
+        private readonly Color? poseBareColor;
         private readonly Dictionary<IDirectionalSpritePoseSource, IDirectionalSpritePoseSource> coloredPoseTable;
 
-        public VariantSpriteMotion(ISpriteMotion baseMotion, Color color)
-            : this(baseMotion, BoneKeyword.Other, null, true, color)
+        public VariantSpriteMotion(ISpriteMotion baseMotion, Color poseBareColor)
+            : this(baseMotion, BoneKeyword.Other, null, poseBareColor)
         {
         }
 
-        public VariantSpriteMotion(ISpriteMotion baseMotion, BoneKeyword boneName, BoneSprite sprite, bool overridesColor, Color color)
+        public VariantSpriteMotion(ISpriteMotion baseMotion, BoneKeyword variantTargetBoneName, BoneSprite poseBareSprite, Color? poseBareColor)
         {
             this.baseMotion = baseMotion;
-            this.boneName = boneName;
-            this.sprite = sprite;
-            this.overridesColor = overridesColor;
-            this.color = color;
+            this.variantTargetBoneName = variantTargetBoneName;
+            this.poseBareSprite = poseBareSprite;
+            this.poseBareColor = poseBareColor;
             coloredPoseTable = new Dictionary<IDirectionalSpritePoseSource, IDirectionalSpritePoseSource>();
         }
 
@@ -34,7 +32,7 @@ namespace OchalikeSprites
 
             if (!coloredPoseTable.TryGetValue(transform.PoseSource, out var coloredPoseSource))
             {
-                coloredPoseSource = new ImmutableVariantSpritePoseSource(transform.PoseSource, boneName, sprite, overridesColor, color);
+                coloredPoseSource = new ImmutableVariantSpritePoseSource(transform.PoseSource, variantTargetBoneName, poseBareSprite, poseBareColor);
                 coloredPoseTable.Add(transform.PoseSource, coloredPoseSource);
             }
             transform.PoseSource = coloredPoseSource;

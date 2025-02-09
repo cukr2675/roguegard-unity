@@ -25,7 +25,7 @@ namespace Roguegard
         private SpritePose enabledImmutablePose;
         private IOchalikeSpriteRenderController lastRenderController;
 
-        private static readonly EffectableBoneSpriteTable boneSpriteTable = new EffectableBoneSpriteTable();
+        private static readonly OchalikeMorph ochalikeMorph = new();
 
         private OchalikeRogueSprite()
         {
@@ -56,14 +56,14 @@ namespace Roguegard
         public void SetBoneSpriteEffects(RogueObj self, Spanning<IBoneSpriteEffect> effects)
         {
             // IBoneSpriteEffect と IRogueObjSprite の実装をできるだけ切り離すため、テーブルは空の状態で開始する。（バージョンで変更できる？）
-            boneSpriteTable.Clear();
+            ochalikeMorph.Clear();
 
             for (int i = 0; i < effects.Count; i++)
             {
                 var effect = effects[i];
-                effect.AffectSprite(self, rootBone, boneSpriteTable);
+                effect.AffectSprite(self, rootBone, ochalikeMorph);
             }
-            root.ApplyTable(boneSpriteTable);
+            root.ApplyTable(ochalikeMorph);
             wasChangedEquipments = true;
         }
 
@@ -94,7 +94,7 @@ namespace Roguegard
 
             root.SetTo(
                 renderController, pose.BoneTransforms, pose.Back, Vector2.zero, Quaternion.identity, Vector3.one, false, false,
-                RoguegardSettings.BoneSpriteBaseColor);
+                RoguegardSettings.DefaultColor);
 
             if (pose.IsImmutable) enabledImmutablePose = pose;
             else enabledImmutablePose = null;
