@@ -26,7 +26,7 @@ namespace Objforming
         /// <summary>
         /// LowerCamelCase での <see cref="Name"/> を取得する
         /// </summary>
-        public string CamelName => _camelName ??= Regex.Replace(Name, @"^[A-Z]+", x => x.Value.ToLowerInvariant()); // 先頭の連続した大文字をすべて小文字にする
+        public string CamelName => _camelName ??= char.ToLowerInvariant(Name[0]) + Name.Substring(1); // 先頭の大文字のみ置き換える
         [NonSerialized] private string _camelName;
 
         private FormerMember() { }
