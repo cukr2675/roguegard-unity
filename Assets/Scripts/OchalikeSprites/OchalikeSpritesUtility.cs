@@ -8,14 +8,19 @@ namespace OchalikeSprites
     {
         public static int DefaultPixelsPerUnit => 32;
 
-        private static Color EyelidColor => Color.white * .25f; // まぶたの色
-        private static float LightDarkThreshold => 40f;
+        private static float LightDarkThreshold => .4f;
 
-        public static bool GetBright(Color color) => GetBright(color, LightDarkThreshold);
-
-        private static bool GetBright(Color color, float lightDarkThreshold)
+        /// <summary>
+        /// まぶたの色と被るか判定する。被る場合は別タイプのまぶた色を使用する
+        /// </summary>
+        public static bool GetBright(Color color)
         {
-            return CalculateCIE76(color, EyelidColor) >= lightDarkThreshold;
+            // ユークリッド距離で十分そうなので使わない
+            //return CalculateCIE76(color, Color.white * .25f) >= LightDarkThreshold * 100f;
+
+            var c = new Vector3(color.r, color.g, color.b);
+            var eyelidColor = Vector3.one * .25f; // まぶたの色
+            return Vector3.Distance(c, eyelidColor) >= LightDarkThreshold;
         }
 
         private static float CalculateCIE76(Color color1, Color color2)
