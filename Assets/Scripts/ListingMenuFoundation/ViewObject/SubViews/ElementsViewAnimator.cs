@@ -148,8 +148,10 @@ namespace ListingMF
             // 予約されたカーソル移動処理を実行する
             if (queuedCancelSelection)
             {
+#if UNITY_EDITOR
                 if (_log) { Debug.Log($"Selection was canceled {EventSystem.current.currentSelectedGameObject} -> {lastSelectedGameObject}"); }
-               
+#endif
+
                 EventSystem.current.SetSelectedGameObject(lastSelectedGameObject);
                 queuedCancelSelection = false;
             }
