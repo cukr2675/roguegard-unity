@@ -90,6 +90,7 @@ namespace RoguegardUnity
 
         private static int GetFirstNumber(string x)
         {
+            x = Path.GetFileName(x); // フルパスだと親ディレクトリの数値に反応してしまうためファイル名に変換する
             var matches = Regex.Matches(x, @"\d+");
             if (matches.Count >= 1) return int.Parse(matches[0].Value);
             else return 0;
