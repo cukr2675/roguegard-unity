@@ -28,8 +28,8 @@ MonoBehaviour:
     _costIsUnknown: 0
     _genders: {fileID: 0}
     _category: {fileID: 11400000, guid: 766475a356f5fb341bff16744b3b5d4c, type: 2}
-    _maxHP: 0
-    _maxMP: 0
+    _maxHp: 0
+    _maxMp: 0
     _atk: 0
     _def: 0
     _loadCapacity: 0
@@ -93,6 +93,10 @@ MonoBehaviour:
       _script: {fileID: 0}
       _ref:
         rid: -2
+    _beSteppedOnAsTile:
+      _script: {fileID: 0}
+      _ref:
+        rid: -2
     _equipmentState: {fileID: 0}
     _weight:
       _script: {fileID: 0}
@@ -124,6 +128,7 @@ MonoBehaviour:
       type: {class: ChestOpen, ns: Roguegard, asm: Roguegard.CoreData}
       data:
         _assemblyReflectionAssetDummy: 
+        _isStorage: 0
         _beOpened:
           _script: {fileID: 0}
           _ref:

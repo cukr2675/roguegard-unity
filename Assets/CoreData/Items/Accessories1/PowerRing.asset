@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PowerRing
   m_EditorClassIdentifier: 
   _overridesCost: 0
-  _cost: 0
+  _cost: 1
   _costIsUnknown: 0
   _race:
     _name: "\u30D1\u30EF\u30FC\u30EA\u30F3\u30B0"
@@ -28,8 +28,8 @@ MonoBehaviour:
     _costIsUnknown: 0
     _genders: {fileID: 0}
     _category: {fileID: 11400000, guid: 75e1343f76d38ef47996f24301d8239f, type: 2}
-    _maxHP: 0
-    _maxMP: 0
+    _maxHp: 0
+    _maxMp: 0
     _atk: 1
     _def: 0
     _loadCapacity: 0
@@ -93,7 +93,7 @@ MonoBehaviour:
       _script: {fileID: 0}
       _ref:
         rid: -2
-    _beSteppedOnTile:
+    _beSteppedOnAsTile:
       _script: {fileID: 0}
       _ref:
         rid: -2
@@ -113,11 +113,12 @@ MonoBehaviour:
     _mpName: 
     _members:
       _items: []
+    _isCosmetic: 0
     _equipParts:
     - {fileID: 11400000, guid: 343599ea2c47b7545949b99582567a27, type: 2}
-    _isNotStackableWhileEquipped: 1
-    _boneSpriteTable:
-      _items: []
+    _canStackWhileEquipped: 0
+    _ochalikeMorph: {fileID: 0}
+    _eyeDropBoneName: {fileID: 0}
     _overridesBoneSpriteEffectOrder: 0
     _boneSpriteEffectOrder: 2
     _beEquipped:

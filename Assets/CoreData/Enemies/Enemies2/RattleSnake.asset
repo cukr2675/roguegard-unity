@@ -28,8 +28,8 @@ MonoBehaviour:
     _costIsUnknown: 0
     _genders: {fileID: 11400000, guid: 658fa402d7dcb0b47839b92ab0071d42, type: 2}
     _category: {fileID: 0}
-    _maxHP: 4
-    _maxMP: 0
+    _maxHp: 4
+    _maxMp: 0
     _atk: 1
     _def: 0
     _loadCapacity: 0
@@ -90,6 +90,10 @@ MonoBehaviour:
       _ref:
         rid: -2
     _beEaten:
+      _script: {fileID: 0}
+      _ref:
+        rid: -2
+    _beSteppedOnAsTile:
       _script: {fileID: 0}
       _ref:
         rid: -2

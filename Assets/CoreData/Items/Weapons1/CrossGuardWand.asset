@@ -28,8 +28,8 @@ MonoBehaviour:
     _costIsUnknown: 0
     _genders: {fileID: 0}
     _category: {fileID: 11400000, guid: 75e1343f76d38ef47996f24301d8239f, type: 2}
-    _maxHP: 0
-    _maxMP: 0
+    _maxHp: 0
+    _maxMp: 0
     _atk: 0
     _def: 0
     _loadCapacity: 0
@@ -93,6 +93,10 @@ MonoBehaviour:
       _script: {fileID: 0}
       _ref:
         rid: -2
+    _beSteppedOnAsTile:
+      _script: {fileID: 0}
+      _ref:
+        rid: -2
     _equipmentState: {fileID: 0}
     _weight:
       _script: {fileID: 0}
@@ -113,8 +117,7 @@ MonoBehaviour:
     _equipParts:
     - {fileID: 11400000, guid: 718e67db40cd23d4086eca400d42c82a, type: 2}
     _canStackWhileEquipped: 0
-    _boneSpriteTable:
-      _items: []
+    _ochalikeMorph: {fileID: 0}
     _eyeDropBoneName: {fileID: 0}
     _overridesBoneSpriteEffectOrder: 0
     _boneSpriteEffectOrder: 6

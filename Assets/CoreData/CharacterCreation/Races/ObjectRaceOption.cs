@@ -55,11 +55,11 @@ namespace Roguegard.CharacterCreation
 
 
         [Space]
-        [SerializeField] private int _maxHP;
-        public int MaxHp => _maxHP;
+        [SerializeField, UnityEngine.Serialization.FormerlySerializedAs("_maxHP")] private int _maxHp;
+        public int MaxHp => _maxHp;
 
-        [SerializeField] private int _maxMP;
-        public int MaxMp => _maxMP;
+        [SerializeField, UnityEngine.Serialization.FormerlySerializedAs("_maxMP")] private int _maxMp;
+        public int MaxMp => _maxMp;
 
         [SerializeField] private int _atk;
         public int Atk => _atk;

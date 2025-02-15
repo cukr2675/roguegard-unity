@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PotionOfVision
   m_EditorClassIdentifier: 
   _overridesCost: 0
-  _cost: 0
+  _cost: 1
   _costIsUnknown: 0
   _race:
     _name: "\u8996\u754C\u306E\u30DD\u30FC\u30B7\u30E7\u30F3"
@@ -28,8 +28,8 @@ MonoBehaviour:
     _costIsUnknown: 0
     _genders: {fileID: 0}
     _category: {fileID: 11400000, guid: 9c6e8e727efe732498ae632d55564cc3, type: 2}
-    _maxHP: 0
-    _maxMP: 0
+    _maxHp: 0
+    _maxMp: 0
     _atk: 0
     _def: 0
     _loadCapacity: 0
@@ -93,7 +93,7 @@ MonoBehaviour:
       _script: {fileID: 11500000, guid: 1d36eb66ccee1b3448a1e985906e2a5c, type: 3}
       _ref:
         rid: 2628609657810452713
-    _beSteppedOnTile:
+    _beSteppedOnAsTile:
       _script: {fileID: 0}
       _ref:
         rid: -2

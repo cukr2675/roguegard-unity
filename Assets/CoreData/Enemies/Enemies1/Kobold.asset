@@ -28,8 +28,8 @@ MonoBehaviour:
     _costIsUnknown: 0
     _genders: {fileID: 0}
     _category: {fileID: 0}
-    _maxHP: 3
-    _maxMP: 2
+    _maxHp: 3
+    _maxMp: 2
     _atk: 1
     _def: 0
     _loadCapacity: 0
@@ -90,6 +90,10 @@ MonoBehaviour:
       _ref:
         rid: -2
     _beEaten:
+      _script: {fileID: 0}
+      _ref:
+        rid: -2
+    _beSteppedOnAsTile:
       _script: {fileID: 0}
       _ref:
         rid: -2

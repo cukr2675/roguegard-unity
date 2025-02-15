@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: WandOfFire
   m_EditorClassIdentifier: 
   _overridesCost: 0
-  _cost: 0
+  _cost: 1
   _costIsUnknown: 0
   _race:
     _name: "\u708E\u306E\u6756"
@@ -28,8 +28,8 @@ MonoBehaviour:
     _costIsUnknown: 0
     _genders: {fileID: 0}
     _category: {fileID: 0}
-    _maxHP: 0
-    _maxMP: 0
+    _maxHp: 0
+    _maxMp: 0
     _atk: 0
     _def: 0
     _loadCapacity: 0
@@ -93,7 +93,7 @@ MonoBehaviour:
       _script: {fileID: 0}
       _ref:
         rid: -2
-    _beSteppedOnTile:
+    _beSteppedOnAsTile:
       _script: {fileID: 0}
       _ref:
         rid: -2
