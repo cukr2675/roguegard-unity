@@ -33,7 +33,7 @@ namespace Roguegard.Device
                 var rgpack = new Rgpack("Playtest", rgpackDirectory, Rgpacker.DefaultEvaluator);
                 RgpackReference.LoadRgpack(rgpack);
 
-                var properties = cmnData.GetProperties(rgpack.ID);
+                var properties = cmnData.GetProperties(rgpack.Id);
                 if (properties != null)
                 {
                     foreach (var pair in properties)

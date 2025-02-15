@@ -143,7 +143,7 @@ MonoBehaviour:
     - rid: -2
       type: {class: , ns: , asm: }
     - rid: 992949845300346881
-      type: {class: ATKDEFEquipped, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
+      type: {class: AtkDefEquipped, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
       data:
         _assemblyReflectionAssetDummy: 
     - rid: 992949884101853185

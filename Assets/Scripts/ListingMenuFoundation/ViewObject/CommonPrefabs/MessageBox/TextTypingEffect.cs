@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using System.Text;
-using UnityEngine.Events;
 using TMPro;
-using System.Linq;
 
 namespace ListingMF
 {
@@ -13,14 +11,14 @@ namespace ListingMF
     {
         private readonly TMP_Text text;
         private readonly int maxLineCount;
-        private readonly string pageTurnHiddenLinkID;
-        private readonly string eofHiddenLinkID;
+        private readonly string pageTurnHiddenLinkId;
+        private readonly string eofHiddenLinkId;
         private readonly MessageBox.ReachHiddenLinkEvent onReachHiddenLink;
         private readonly TextHiddenLinkManager hiddenLinkManager;
         private readonly StringBuilder stringBuilder;
 
         private bool isDirty;
-        public bool IsEOF { get; private set; }
+        public bool IsEof { get; private set; }
 
         private bool IsInProgress => text.maxVisibleCharacters < text.textInfo.characterCount;
 
@@ -31,17 +29,17 @@ namespace ListingMF
 
         private const char breakCharacter = '\n';
 
-        /// <param name="pageTurnHiddenLinkID">テキストが最大行数から下にはみ出たとき発行されるリンクID名</param>
-        /// <param name="eofHiddenLinkID">テキストの終端の表示が完了したとき発行されるリンクID</param>
+        /// <param name="pageTurnHiddenLinkId">テキストが最大行数から下にはみ出たとき発行されるリンクID名</param>
+        /// <param name="eofHiddenLinkId">テキストの終端の表示が完了したとき発行されるリンクID</param>
         public TextTypingEffect(
-            TMP_Text text, int maxLineCount, string pageTurnHiddenLinkID, string eofHiddenLinkID, MessageBox.ReachHiddenLinkEvent onReachHiddenLink)
+            TMP_Text text, int maxLineCount, string pageTurnHiddenLinkId, string eofHiddenLinkId, MessageBox.ReachHiddenLinkEvent onReachHiddenLink)
         {
             if (text.lineSpacing != 0f) { Debug.LogWarning($"{nameof(text.lineSpacing)} != 0 はサポートされていません。"); }
 
             this.text = text;
             this.maxLineCount = maxLineCount;
-            this.pageTurnHiddenLinkID = pageTurnHiddenLinkID;
-            this.eofHiddenLinkID = eofHiddenLinkID;
+            this.pageTurnHiddenLinkId = pageTurnHiddenLinkId;
+            this.eofHiddenLinkId = eofHiddenLinkId;
             this.onReachHiddenLink = onReachHiddenLink;
             hiddenLinkManager = new TextHiddenLinkManager();
 
@@ -112,8 +110,8 @@ namespace ListingMF
             text.ForceMeshUpdate(true);
             hiddenLinkManager.UpdateLinks(text);
             isDirty = false;
-            IsEOF = text.text.Length == 0;
-            if (IsEOF) { onReachHiddenLink.Invoke(eofHiddenLinkID); }
+            IsEof = text.text.Length == 0;
+            if (IsEof) { onReachHiddenLink.Invoke(eofHiddenLinkId); }
         }
 
         public void SeekToStartOfText()
@@ -131,7 +129,7 @@ namespace ListingMF
         /// </summary>
         public void UpdateUI(int linePosition)
         {
-            if (IsEOF) return;
+            if (IsEof) return;
 
             // 1フレーム内で1行すべて表示する
             var overLineIndex = maxLineCount + linePosition;
@@ -146,10 +144,10 @@ namespace ListingMF
             }
 
             // リンクを検知
-            while (hiddenLinkManager.ForwardDetect(maxVisibleCharacters, out var hiddenLinkID, out var nextVisibleCharacters))
+            while (hiddenLinkManager.ForwardDetect(maxVisibleCharacters, out var hiddenLinkId, out var nextVisibleCharacters))
             {
                 text.maxVisibleCharacters = nextVisibleCharacters;
-                onReachHiddenLink.Invoke(hiddenLinkID);
+                onReachHiddenLink.Invoke(hiddenLinkId);
             }
 
             // 次の行の終わりまで表示する
@@ -159,12 +157,12 @@ namespace ListingMF
             if (!IsInProgress)
             {
                 // コンテキストをすべて表示し終えたら終端リンクIDを発行
-                IsEOF = true;
-                onReachHiddenLink.Invoke(eofHiddenLinkID);
+                IsEof = true;
+                onReachHiddenLink.Invoke(eofHiddenLinkId);
                 return;
             }
 
-            onReachHiddenLink.Invoke(pageTurnHiddenLinkID);
+            onReachHiddenLink.Invoke(pageTurnHiddenLinkId);
         }
 
         /// <summary>
@@ -172,16 +170,16 @@ namespace ListingMF
         /// </summary>
         public void UpdateUI(int deltaVisibleCharacters, int linePosition)
         {
-            if (IsEOF) return;
+            if (IsEof) return;
 
             // リンクを検知
-            if (hiddenLinkManager.ForwardDetect(text.maxVisibleCharacters + deltaVisibleCharacters, out var hiddenLinkID, out var nextVisibleCharacters))
+            if (hiddenLinkManager.ForwardDetect(text.maxVisibleCharacters + deltaVisibleCharacters, out var hiddenLinkId, out var nextVisibleCharacters))
             {
                 // 表示位置が戻るのは未サポート
                 if (nextVisibleCharacters < text.maxVisibleCharacters) throw new System.NotImplementedException();
 
                 text.maxVisibleCharacters = nextVisibleCharacters;
-                onReachHiddenLink.Invoke(hiddenLinkID);
+                onReachHiddenLink.Invoke(hiddenLinkId);
                 return;
             }
 
@@ -192,8 +190,8 @@ namespace ListingMF
             if (!IsInProgress && linePosition >= text.textInfo.lineCount - maxLineCount)
             {
                 // コンテキストをすべて表示し終えたら終端リンクIDを発行
-                IsEOF = true;
-                onReachHiddenLink.Invoke(eofHiddenLinkID);
+                IsEof = true;
+                onReachHiddenLink.Invoke(eofHiddenLinkId);
                 return;
             }
 
@@ -206,7 +204,7 @@ namespace ListingMF
                 {
                     // はみ出したらはみ出した分をいったん消して改ページを発行
                     text.maxVisibleCharacters = firstOverVisibleCharacterIndex;
-                    onReachHiddenLink.Invoke(pageTurnHiddenLinkID);
+                    onReachHiddenLink.Invoke(pageTurnHiddenLinkId);
                 }
             }
         }
@@ -249,9 +247,9 @@ namespace ListingMF
         /// <summary>
         /// 指定のリンクIDの最初の出現位置から手前を削除し、一部でも削除した行数を取得する
         /// </summary>
-        public int TrimBeforeFirstLinkID(string hiddenLinkID)
+        public int TrimBeforeFirstLinkId(string hiddenLinkId)
         {
-            if (!hiddenLinkManager.TryGetFirstHiddenLinkCharacterIndex(text.maxVisibleCharacters, hiddenLinkID, out var endLinkStringIndex)) return 0;
+            if (!hiddenLinkManager.TryGetFirstHiddenLinkCharacterIndex(text.maxVisibleCharacters, hiddenLinkId, out var endLinkStringIndex)) return 0;
 
             // テキストを削除する
             MeshUpdate(); // テキストの行数を更新する

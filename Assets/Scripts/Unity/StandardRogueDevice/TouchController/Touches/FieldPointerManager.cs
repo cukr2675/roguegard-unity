@@ -195,7 +195,7 @@ namespace RoguegardUnity
         {
             // WebGL では pointerId は 0 からの連番ではない
 
-            if (eventData.pointerId == pointer0.PointerID || eventData.pointerId == pointer1.PointerID)
+            if (eventData.pointerId == pointer0.PointerId || eventData.pointerId == pointer1.PointerId)
             {
                 SetPointers(pointer0.Data, pointer1.Data);
             }
@@ -249,11 +249,11 @@ namespace RoguegardUnity
 
         public void OnPointerUp(PointerEventData eventData)
         {
-            if (eventData.pointerId == pointer0.PointerID)
+            if (eventData.pointerId == pointer0.PointerId)
             {
                 SetPointers(null, pointer1.Data);
             }
-            else if (eventData.pointerId == pointer1.PointerID)
+            else if (eventData.pointerId == pointer1.PointerId)
             {
                 SetPointers(pointer0.Data, null);
             }
@@ -262,7 +262,7 @@ namespace RoguegardUnity
 
         public void OnDrag(PointerEventData eventData)
         {
-            if (pointer0.PointerID != eventData.pointerId && pointer1.PointerID != eventData.pointerId)
+            if (pointer0.PointerId != eventData.pointerId && pointer1.PointerId != eventData.pointerId)
             {
                 // 中断したタッチ処理を再開する。
                 // 通常のドラッグ操作と区別するため、いずれの ID とも一致しないことを確認する。

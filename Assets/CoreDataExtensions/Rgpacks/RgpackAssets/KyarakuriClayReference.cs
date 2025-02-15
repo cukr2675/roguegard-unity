@@ -36,10 +36,10 @@ namespace Roguegard.Rgpacks
 
         IKeyword IRaceOption.Category => Asset.Category;
 
-        int IRaceOption.MaxHP => Asset.MaxHP;
-        int IRaceOption.MaxMP => Asset.MaxMP;
-        int IRaceOption.ATK => Asset.ATK;
-        int IRaceOption.DEF => Asset.DEF;
+        int IRaceOption.MaxHp => Asset.MaxHp;
+        int IRaceOption.MaxMp => Asset.MaxMp;
+        int IRaceOption.Atk => Asset.Atk;
+        int IRaceOption.Def => Asset.Def;
         float IRaceOption.LoadCapacity => Asset.LoadCapacity;
         ISerializableKeyword IRaceOption.Faction => Asset.Faction;
         Spanning<ISerializableKeyword> IRaceOption.TargetFactions => Asset.TargetFactions;
@@ -86,8 +86,8 @@ namespace Roguegard.Rgpacks
 
         private KyarakuriClayReference() { }
 
-        public KyarakuriClayReference(string id, string envRgpackID)
-            : base(id, envRgpackID)
+        public KyarakuriClayReference(string id, string envRgpackId)
+            : base(id, envRgpackId)
         {
         }
 
@@ -162,12 +162,12 @@ namespace Roguegard.Rgpacks
 
         public override bool Equals(object obj)
         {
-            return obj is KyarakuriClayReference reference && reference.FullID == FullID;
+            return obj is KyarakuriClayReference reference && reference.FullId == FullId;
         }
 
         public override int GetHashCode()
         {
-            return FullID.GetHashCode();
+            return FullId.GetHashCode();
         }
     }
 }

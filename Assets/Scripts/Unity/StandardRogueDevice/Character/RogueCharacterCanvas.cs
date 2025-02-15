@@ -11,7 +11,7 @@ namespace RoguegardUnity
     {
         [SerializeField] private Canvas _canvas = null;
         [SerializeField] private PopNumber _popNumber = null;
-        [SerializeField] private HPGauge _hpGauge = null;
+        [SerializeField] private HpGauge _hpGauge = null;
 
         public void Initialize(RogueObj obj)
         {
@@ -19,7 +19,7 @@ namespace RoguegardUnity
             _popNumber.Initialize();
             if (obj != null)
             {
-                SetHP(obj);
+                SetHp(obj);
                 _hpGauge.SetVisible(true);
             }
             else
@@ -34,11 +34,11 @@ namespace RoguegardUnity
             _hpGauge.Damage(number);
         }
 
-        public void SetHP(RogueObj obj)
+        public void SetHp(RogueObj obj)
         {
-            var hp = obj.Main.Stats.HP;
-            var maxHP = StatsEffectedValues.GetMaxHP(obj);
-            _hpGauge.SetHP(hp, maxHP);
+            var hp = obj.Main.Stats.Hp;
+            var maxHp = StatsEffectedValues.GetMaxHp(obj);
+            _hpGauge.SetHp(hp, maxHp);
         }
 
         public void UpdateCanvas(RogueObj obj, RogueObj player, int deltaTime)

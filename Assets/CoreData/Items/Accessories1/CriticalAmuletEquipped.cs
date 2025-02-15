@@ -19,7 +19,7 @@ namespace Roguegard.CharacterCreation
 
             void IValueEffect.AffectValue(IKeyword keyword, EffectableValue value, RogueObj self)
             {
-                if (keyword == StatsKw.ATK)
+                if (keyword == StatsKw.Atk)
                 {
                     // 会心率 +100%
                     value.SubValues[StatsKw.CriticalRate] += 1f;

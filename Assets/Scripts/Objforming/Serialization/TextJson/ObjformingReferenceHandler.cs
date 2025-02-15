@@ -22,7 +22,7 @@ namespace Objforming.Serialization.TextJson
 
         private class Resolver : ReferenceResolver
         {
-            private readonly Dictionary<object, string> instance2IDTable;
+            private readonly Dictionary<object, string> instance2IdTable;
             private readonly Dictionary<string, object> id2InstanceTable = new Dictionary<string, object>();
             private int referenceIndex = 0;
 
@@ -30,7 +30,7 @@ namespace Objforming.Serialization.TextJson
             {
                 if (enabledReferenceMerge)
                 {
-                    instance2IDTable = new Dictionary<object, string>();
+                    instance2IdTable = new Dictionary<object, string>();
                 }
                 else
                 {
@@ -40,7 +40,7 @@ namespace Objforming.Serialization.TextJson
 
             public override string GetReference(object value, out bool alreadyExists)
             {
-                if (instance2IDTable.TryGetValue(value, out string reference))
+                if (instance2IdTable.TryGetValue(value, out string reference))
                 {
                     alreadyExists = true;
                     return reference;
@@ -49,7 +49,7 @@ namespace Objforming.Serialization.TextJson
                 {
                     referenceIndex++;
                     reference = referenceIndex.ToString();
-                    instance2IDTable.Add(value, reference);
+                    instance2IdTable.Add(value, reference);
 
                     alreadyExists = false;
                     return reference;

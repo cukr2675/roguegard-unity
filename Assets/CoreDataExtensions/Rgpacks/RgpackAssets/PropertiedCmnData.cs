@@ -27,7 +27,7 @@ namespace Roguegard.Rgpacks
         [Objforming.CreateInstance]
         private PropertiedCmnData(bool dummy) { }
 
-        public IReadOnlyDictionary<string, ICmnProperty> GetProperties(string envRgpackID)
+        public IReadOnlyDictionary<string, ICmnProperty> GetProperties(string envRgpackId)
         {
             if (string.IsNullOrWhiteSpace(Cmn))
             {
@@ -35,7 +35,7 @@ namespace Roguegard.Rgpacks
                 return properties;
             }
 
-            var reference = new CmnReference(Cmn, envRgpackID);
+            var reference = new CmnReference(Cmn, envRgpackId);
             if (!reference.AssetExists)
             {
                 return null;
@@ -67,9 +67,9 @@ namespace Roguegard.Rgpacks
             return properties;
         }
 
-        public PropertiedCmnReference ToReference(string envRgpackID)
+        public PropertiedCmnReference ToReference(string envRgpackId)
         {
-            return new PropertiedCmnReference(this, envRgpackID, properties);
+            return new PropertiedCmnReference(this, envRgpackId, properties);
         }
     }
 }

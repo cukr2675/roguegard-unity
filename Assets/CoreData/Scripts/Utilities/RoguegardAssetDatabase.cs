@@ -100,11 +100,11 @@ namespace Roguegard.Editor
         public static string GetNearestPath(string path, string filter)
         {
             var directory = Path.GetDirectoryName(path);
-            var allAssetGUIDs = AssetDatabase.FindAssets(filter);
+            var allAssetGuids = AssetDatabase.FindAssets(filter);
             string nearestAssetPath = null;
-            foreach (var assetGUID in allAssetGUIDs)
+            foreach (var assetGuid in allAssetGuids)
             {
-                var assetPath = AssetDatabase.GUIDToAssetPath(assetGUID);
+                var assetPath = AssetDatabase.GUIDToAssetPath(assetGuid);
                 var assetDirectory = Path.GetDirectoryName(assetPath);
 
                 // path と同一または親のフォルダにあるアセットを取得する。

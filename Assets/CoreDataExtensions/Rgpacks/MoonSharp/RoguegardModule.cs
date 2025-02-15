@@ -194,14 +194,14 @@ end
         {
             const string name = "ref";
             var id = args.AsType(0, name, DataType.String, false).String;
-            var envRgpackID = executionContext.OwnerScript.DoString("return __rgpack").String;
-            envRgpackID ??= "Playtest";
-            var rgpackID = RgpackReference.GetRgpackID(id, envRgpackID);
-            var assetID = RgpackReference.GetAssetID(id);
+            var envRgpackId = executionContext.OwnerScript.DoString("return __rgpack").String;
+            envRgpackId ??= "Playtest";
+            var rgpackId = RgpackReference.GetRgpackId(id, envRgpackId);
+            var assetId = RgpackReference.GetAssetId(id);
 
-            if (!RgpackReference.TryGetRgpack(rgpackID, out var rgpack)) throw new RogueException($"Rgpack ({rgpackID}) が見つかりません。");
-            if (!rgpack.TryGetAsset<object>(assetID, out var asset)) throw new RogueException(
-                $"Rgpack ({rgpackID}) に ID ({assetID}) のデータが見つかりません。");
+            if (!RgpackReference.TryGetRgpack(rgpackId, out var rgpack)) throw new RogueException($"Rgpack ({rgpackId}) が見つかりません。");
+            if (!rgpack.TryGetAsset<object>(assetId, out var asset)) throw new RogueException(
+                $"Rgpack ({rgpackId}) に ID ({assetId}) のデータが見つかりません。");
 
             if (asset is CharacterCreationPresetAsset characterCreationPresetAsset)
             {
@@ -230,14 +230,14 @@ end
         public static DynValue find(ScriptExecutionContext executionContext, CallbackArguments args)
         {
             const string name = "find";
-            var evtID = args.AsType(0, name, DataType.String, false).String;
+            var evtId = args.AsType(0, name, DataType.String, false).String;
 
             var location = RogueDevice.Primary.Player.Location;
             var locationObjs = location.Space.Objs;
             for (int i = 0; i < locationObjs.Count; i++)
             {
                 var obj = locationObjs[i];
-                if (obj == null || !(obj.Main.InfoSet is EvtFairyReference infoSet) || infoSet.EvtID != evtID) continue;
+                if (obj == null || !(obj.Main.InfoSet is EvtFairyReference infoSet) || infoSet.EvtId != evtId) continue;
 
                 return UserData.Create(new RogueObjUserData(obj, executionContext));
             }

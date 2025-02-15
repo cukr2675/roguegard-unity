@@ -27,7 +27,7 @@ namespace Roguegard.CharacterCreation
                 var result = chain.Invoke(keyword, method, self, user, activationDepth, arg);
                 if (result && activationDepth < 1f && method is ISkill skill)
                 {
-                    var atk = skill.GetATK(self, out var additionalEffect);
+                    var atk = skill.GetAtk(self, out var additionalEffect);
                     if (atk <= 0 && additionalEffect)
                     {
                         // 攻撃スキルでなく、追加効果を持つとき通常攻撃する

@@ -7,8 +7,8 @@ namespace Roguegard
     [Objforming.Formable]
     public class MainStats
     {
-        public int HP { get; private set; }
-        public int MP { get; private set; }
+        public int Hp { get; private set; }
+        public int Mp { get; private set; }
         public int Nutrition { get; private set; }
         public int Lv { get; private set; } = 1;
         public int TotalExp { get; private set; }
@@ -18,46 +18,46 @@ namespace Roguegard
         public RogueDirection Direction { get; set; }
         public int ChargedSpeed { get; set; }
 
-        public int RegenerationHPPermille { get; private set; }
-        public int RegenerationMPPermille { get; private set; }
+        public int RegenerationHpPermille { get; private set; }
+        public int RegenerationMpPermille { get; private set; }
 
         public void Reset(RogueObj self)
         {
-            // オーバーヒールをリセットするために MaxHP を設定
-            SetHP(self, StatsEffectedValues.GetMaxHP(self));
-            SetMP(self, StatsEffectedValues.GetMaxMP(self));
+            // オーバーヒールをリセットするために MaxHp を設定
+            SetHp(self, StatsEffectedValues.GetMaxHp(self));
+            SetMp(self, StatsEffectedValues.GetMaxMp(self));
             SetNutrition(self, StatsEffectedValues.GetMaxNutrition(self));
         }
 
-        public void SetHP(RogueObj self, int hp, bool over = false)
+        public void SetHp(RogueObj self, int hp, bool over = false)
         {
-            if (over || hp <= HP)
+            if (over || hp <= Hp)
             {
                 // HP 上限を超えて回復できる　減少する場合は最大値を気にする必要がないためそのまま設定
-                HP = hp;
+                Hp = hp;
             }
             else
             {
                 // HP 上限または上限を突破した HP を超えないようにする
-                var maxHP = StatsEffectedValues.GetMaxHP(self);
-                maxHP = Mathf.Max(maxHP, HP);
-                HP = Mathf.Min(hp, maxHP);
+                var maxHp = StatsEffectedValues.GetMaxHp(self);
+                maxHp = Mathf.Max(maxHp, Hp);
+                Hp = Mathf.Min(hp, maxHp);
             }
         }
 
-        public void SetMP(RogueObj self, int mp, bool over = false)
+        public void SetMp(RogueObj self, int mp, bool over = false)
         {
-            if (over || mp <= MP)
+            if (over || mp <= Mp)
             {
                 // MP 上限を超えて回復できる　減少する場合は最大値を気にする必要がないためそのまま設定
-                MP = mp;
+                Mp = mp;
             }
             else
             {
                 // MP 上限または上限を突破した MP を超えないようにする
-                var maxMP = StatsEffectedValues.GetMaxMP(self);
-                maxMP = Mathf.Max(maxMP, MP);
-                MP = Mathf.Min(mp, maxMP);
+                var maxMp = StatsEffectedValues.GetMaxMp(self);
+                maxMp = Mathf.Max(maxMp, Mp);
+                Mp = Mathf.Min(mp, maxMp);
             }
         }
 
@@ -165,35 +165,35 @@ namespace Roguegard
 
         public void Regenerate(RogueObj self)
         {
-            if (HP >= StatsEffectedValues.GetMaxHP(self))
+            if (Hp >= StatsEffectedValues.GetMaxHp(self))
             {
                 // 最大の場合は自然回復ターン数をリセット
-                RegenerationHPPermille = 0;
+                RegenerationHpPermille = 0;
             }
             else
             {
-                var regeneration = StatsEffectedValues.GetRegenerationHPPermille(self);
-                RegenerationHPPermille += regeneration;
-                if (RegenerationHPPermille >= 1000)
+                var regeneration = StatsEffectedValues.GetRegenerationHpPermille(self);
+                RegenerationHpPermille += regeneration;
+                if (RegenerationHpPermille >= 1000)
                 {
-                    SetHP(self, HP + 1);
-                    RegenerationHPPermille = 0;
+                    SetHp(self, Hp + 1);
+                    RegenerationHpPermille = 0;
                 }
             }
 
-            if (MP >= StatsEffectedValues.GetMaxMP(self))
+            if (Mp >= StatsEffectedValues.GetMaxMp(self))
             {
                 // 最大の場合は自然回復ターン数をリセット
-                RegenerationMPPermille = 0;
+                RegenerationMpPermille = 0;
             }
             else
             {
-                var regeneration = StatsEffectedValues.GetRegenerationMPPermille(self);
-                RegenerationMPPermille += regeneration;
-                if (RegenerationMPPermille >= 1000)
+                var regeneration = StatsEffectedValues.GetRegenerationMpPermille(self);
+                RegenerationMpPermille += regeneration;
+                if (RegenerationMpPermille >= 1000)
                 {
-                    SetMP(self, MP + 1);
-                    RegenerationMPPermille = 0;
+                    SetMp(self, Mp + 1);
+                    RegenerationMpPermille = 0;
                 }
             }
         }
@@ -203,22 +203,22 @@ namespace Roguegard
             if (Party != null || coming.Party != null) return false;
             if (TargetObj != null || coming.TargetObj != null) return false;
 
-            return HP == coming.HP && MP == coming.MP && Nutrition == coming.Nutrition && Lv == coming.Lv && TotalExp == coming.TotalExp;
+            return Hp == coming.Hp && Mp == coming.Mp && Nutrition == coming.Nutrition && Lv == coming.Lv && TotalExp == coming.TotalExp;
         }
 
         internal MainStats Clone(RogueObj self, RogueObj clonedSelf)
         {
             var clone = new MainStats();
-            clone.HP = HP;
-            clone.MP = MP;
+            clone.Hp = Hp;
+            clone.Mp = Mp;
             clone.Nutrition = Nutrition;
             clone.Lv = Lv;
             clone.TotalExp = TotalExp;
             clone.TargetObj = TargetObj == self ? clonedSelf : TargetObj;
             clone.Direction = Direction;
             clone.ChargedSpeed = ChargedSpeed;
-            clone.RegenerationHPPermille = RegenerationHPPermille;
-            clone.RegenerationMPPermille = RegenerationMPPermille;
+            clone.RegenerationHpPermille = RegenerationHpPermille;
+            clone.RegenerationMpPermille = RegenerationMpPermille;
             return clone;
         }
 

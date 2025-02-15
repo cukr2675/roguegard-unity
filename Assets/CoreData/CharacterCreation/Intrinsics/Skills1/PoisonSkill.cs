@@ -6,7 +6,7 @@ using Roguegard.Extensions;
 
 namespace Roguegard.CharacterCreation
 {
-    public class PoisonSkill : MPSkillIntrinsicOptionScript
+    public class PoisonSkill : MpSkillIntrinsicOptionScript
     {
         public override ISortedIntrinsic CreateSortedIntrinsic(
             ScriptIntrinsicOption parent, IReadOnlyIntrinsic intrinsic, ICharacterCreationData characterCreationData, int lv)
@@ -15,11 +15,11 @@ namespace Roguegard.CharacterCreation
         }
 
         [Objforming.Formable]
-        private class SortedIntrinsic : MPSkillSortedIntrinsic<SortedIntrinsic>
+        private class SortedIntrinsic : MpSkillSortedIntrinsic<SortedIntrinsic>
         {
             public override IRogueMethodTarget Target => ForEnemyRogueMethodTarget.Instance;
             public override IRogueMethodRange Range => FrontRogueMethodRange.Instance;
-            public override int RequiredMP => 2;
+            public override int RequiredMp => 2;
 
             private SortedIntrinsic() : base(null, 0) { }
 
@@ -43,7 +43,7 @@ namespace Roguegard.CharacterCreation
                 return true;
             }
 
-            public override int GetATK(RogueObj self, out bool additionalEffect)
+            public override int GetAtk(RogueObj self, out bool additionalEffect)
             {
                 // 毒付与
                 additionalEffect = true;

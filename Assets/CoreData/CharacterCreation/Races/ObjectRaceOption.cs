@@ -56,16 +56,16 @@ namespace Roguegard.CharacterCreation
 
         [Space]
         [SerializeField] private int _maxHP;
-        public int MaxHP => _maxHP;
+        public int MaxHp => _maxHP;
 
         [SerializeField] private int _maxMP;
-        public int MaxMP => _maxMP;
+        public int MaxMp => _maxMP;
 
         [SerializeField] private int _atk;
-        public int ATK => _atk;
+        public int Atk => _atk;
 
         [SerializeField] private int _def;
-        public int DEF => _def;
+        public int Def => _def;
 
         [SerializeField] private float _loadCapacity;
         public float LoadCapacity => _loadCapacity;

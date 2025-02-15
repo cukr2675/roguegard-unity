@@ -44,18 +44,18 @@ namespace RoguegardUnity
             _text0.SetText(textBuilder);
 
             textBuilder.Clear();
-            var maxHP = StatsEffectedValues.GetMaxHP(player);
-            textBuilder.Append(stats.HP).Append("/").Append(maxHP);
+            var maxHp = StatsEffectedValues.GetMaxHp(player);
+            textBuilder.Append(stats.Hp).Append("/").Append(maxHp);
             _text1.SetText(textBuilder);
 
-            _hpBackground1.fillAmount = Mathf.Min((float)maxHP / 100, .1f);
+            _hpBackground1.fillAmount = Mathf.Min((float)maxHp / 100, .1f);
             _hpBackground2.fillAmount = _hpBackground1.fillAmount;
-            _hpGauge.fillAmount = (float)stats.HP / maxHP * _hpBackground1.fillAmount;
+            _hpGauge.fillAmount = (float)stats.Hp / maxHp * _hpBackground1.fillAmount;
 
             _text2.SetText("MP ");
 
             textBuilder.Clear();
-            textBuilder.Append(stats.MP).Append("/").Append(StatsEffectedValues.GetMaxMP(player));
+            textBuilder.Append(stats.Mp).Append("/").Append(StatsEffectedValues.GetMaxMp(player));
             _text3.SetText(textBuilder);
         }
     }

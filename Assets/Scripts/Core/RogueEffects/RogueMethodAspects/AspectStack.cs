@@ -14,14 +14,14 @@ namespace Roguegard
         {
             var pair = pairs[pairs.Count - 1];
             index = pair.Index;
-            id = pair.ID;
+            id = pair.Id;
         }
 
         public void SetPeek(int index, int id)
         {
             var pair = pairs[pairs.Count - 1];
             pair.Index = index;
-            pair.ID = id;
+            pair.Id = id;
             pairs[pairs.Count - 1] = pair;
         }
 
@@ -72,14 +72,14 @@ namespace Roguegard
 
             public int Index { get; set; }
 
-            public int ID { get; set; }
+            public int Id { get; set; }
 
             public Pair(int rank, float activationDepth)
             {
                 Rank = rank;
                 ActivationDepth = activationDepth;
                 Index = 0;
-                ID = -1;
+                Id = -1;
             }
         }
     }

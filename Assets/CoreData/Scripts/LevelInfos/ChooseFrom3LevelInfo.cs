@@ -19,8 +19,8 @@ namespace Roguegard
 
         float IValueEffect.Order => -100f;
 
-        private int maxHP;
-        private int maxMP;
+        private int maxHp;
+        private int maxMp;
         private int loadCapacity;
 
         private static readonly LevelUpBonusScreen levelUpBonusScreen = new();
@@ -81,19 +81,19 @@ namespace Roguegard
                 switch (RogueRandom.Primary.Next(0, 3))
                 {
                     case 0:
-                        maxHP += 5;
-                        self.Main.Stats.SetHP(self, self.Main.Stats.HP + 5, true);
+                        maxHp += 5;
+                        self.Main.Stats.SetHp(self, self.Main.Stats.Hp + 5, true);
                         if (selfIsPlayerPartyMember)
                         {
-                            resultScreen.message = $"{StatsKw.MaxHP.Name}が5上がった\n";
+                            resultScreen.message = $"{StatsKw.MaxHp.Name}が5上がった\n";
                         }
                         break;
                     case 1:
-                        maxMP += 5;
-                        self.Main.Stats.SetMP(self, self.Main.Stats.MP + 5, true);
+                        maxMp += 5;
+                        self.Main.Stats.SetMp(self, self.Main.Stats.Mp + 5, true);
                         if (selfIsPlayerPartyMember)
                         {
-                            resultScreen.message = $"{StatsKw.MaxMP.Name}が5上がった\n";
+                            resultScreen.message = $"{StatsKw.MaxMp.Name}が5上がった\n";
                         }
                         break;
                     case 2:
@@ -108,7 +108,7 @@ namespace Roguegard
                 {
                     if (self.Main.Stats.Lv == 10 || self.Main.Stats.Lv == 20)
                     {
-                        resultScreen.message += $"{StatsKw.ATK.Name}が1上がった\n";
+                        resultScreen.message += $"{StatsKw.Atk.Name}が1上がった\n";
                     }
                 }
             }
@@ -125,27 +125,27 @@ namespace Roguegard
 
             // 上がった能力をランダムで選んで下げる。
             var count = 0;
-            count += maxHP >= 1 ? 1 : 0;
-            count += maxMP >= 1 ? 1 : 0;
+            count += maxHp >= 1 ? 1 : 0;
+            count += maxMp >= 1 ? 1 : 0;
             count += loadCapacity >= 1 ? 1 : 0;
             var random = RogueRandom.Primary.Next(0, count);
-            if (maxHP >= 1)
+            if (maxHp >= 1)
             {
                 if (random == 0)
                 {
-                    maxHP -= 5;
-                    self.Main.Stats.SetHP(self, self.Main.Stats.HP - 5);
-                    if (self.Main.Stats.HP <= 0) { self.Main.Stats.SetHP(self, 1); } // レベルダウンによって倒れることはない
+                    maxHp -= 5;
+                    self.Main.Stats.SetHp(self, self.Main.Stats.Hp - 5);
+                    if (self.Main.Stats.Hp <= 0) { self.Main.Stats.SetHp(self, 1); } // レベルダウンによって倒れることはない
                     return;
                 }
                 random--;
             }
-            if (maxMP >= 1)
+            if (maxMp >= 1)
             {
                 if (random == 0)
                 {
-                    maxMP -= 5;
-                    self.Main.Stats.SetMP(self, self.Main.Stats.MP - 5);
+                    maxMp -= 5;
+                    self.Main.Stats.SetMp(self, self.Main.Stats.Mp - 5);
                     return;
                 }
                 random--;
@@ -163,19 +163,19 @@ namespace Roguegard
 
         void IValueEffect.AffectValue(IKeyword keyword, EffectableValue value, RogueObj self)
         {
-            if (keyword == StatsKw.MaxHP)
+            if (keyword == StatsKw.MaxHp)
             {
-                value.MainValue += maxHP;
+                value.MainValue += maxHp;
             }
-            else if (keyword == StatsKw.MaxMP)
+            else if (keyword == StatsKw.MaxMp)
             {
-                value.MainValue += maxMP;
+                value.MainValue += maxMp;
             }
             else if (keyword == StatsKw.LoadCapacity)
             {
                 value.MainValue += loadCapacity;
             }
-            else if (keyword == StatsKw.ATK)
+            else if (keyword == StatsKw.Atk)
             {
                 // 10Lv ごとに基礎攻撃力+1（2まで）
                 var rank = Mathf.Min(self.Main.Stats.Lv / 10, 2);
@@ -192,8 +192,8 @@ namespace Roguegard
         public override IRogueEffect DeepOrShallowCopy(RogueObj self, RogueObj clonedSelf)
         {
             var clone = new ChooseFrom3LevelInfo();
-            clone.maxHP = maxHP;
-            clone.maxMP = maxMP;
+            clone.maxHp = maxHp;
+            clone.maxMp = maxMp;
             clone.loadCapacity = loadCapacity;
             return clone;
         }
@@ -266,7 +266,7 @@ namespace Roguegard
                             var levelInfo = (ChooseFrom3LevelInfo)self.Main.GetLevelInfo(self);
                             if (self.Main.Stats.Lv == 10 || self.Main.Stats.Lv == 20)
                             {
-                                nextScreen.message = $"{StatsKw.ATK.Name}が1上がった<link=\"HorizontalArrow\"></link>\n";
+                                nextScreen.message = $"{StatsKw.Atk.Name}が1上がった<link=\"HorizontalArrow\"></link>\n";
                             }
                             else
                             {
@@ -275,15 +275,15 @@ namespace Roguegard
                             switch (arg.Arg.Count)
                             {
                                 case 0:
-                                    levelInfo.maxHP += 5;
-                                    self.Main.Stats.SetHP(self, self.Main.Stats.HP + 5, true);
-                                    nextScreen.message += $"{StatsKw.MaxHP.Name}が5上がった";
+                                    levelInfo.maxHp += 5;
+                                    self.Main.Stats.SetHp(self, self.Main.Stats.Hp + 5, true);
+                                    nextScreen.message += $"{StatsKw.MaxHp.Name}が5上がった";
                                     manager.PushMenuScreen(nextScreen);
                                     break;
                                 case 1:
-                                    levelInfo.maxMP += 5;
-                                    self.Main.Stats.SetMP(self, self.Main.Stats.MP + 5, true);
-                                    nextScreen.message += $"{StatsKw.MaxMP.Name}が5上がった";
+                                    levelInfo.maxMp += 5;
+                                    self.Main.Stats.SetMp(self, self.Main.Stats.Mp + 5, true);
+                                    nextScreen.message += $"{StatsKw.MaxMp.Name}が5上がった";
                                     manager.PushMenuScreen(nextScreen);
                                     break;
                                 case 2:

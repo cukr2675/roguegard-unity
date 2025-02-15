@@ -17,7 +17,7 @@ namespace Roguegard.Rgpacks.MoonSharp
             cmnProperty = StartingItemCmnProperty.Default;
         }
 
-        public StartingItemCmnPropertyUserData(StartingItemCmnProperty cmnProperty, string envRgpackID)
+        public StartingItemCmnPropertyUserData(StartingItemCmnProperty cmnProperty, string envRgpackId)
         {
             this.cmnProperty = cmnProperty;
         }

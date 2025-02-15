@@ -16,15 +16,15 @@ MonoBehaviour:
   m_TableCollectionNameGuidString: df5b92953b451f34b9c73858241a0560
   m_Entries:
   - m_Id: 61347074048
-    m_Key: HP::d
+    m_Key: Hp::d
     m_Metadata:
       m_Items: []
   - m_Id: 206717456384
-    m_Key: MaxHP::d
+    m_Key: MaxHp::d
     m_Metadata:
       m_Items: []
   - m_Id: 261713170432
-    m_Key: MP::d
+    m_Key: Mp::d
     m_Metadata:
       m_Items: []
   m_Metadata:

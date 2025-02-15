@@ -11,24 +11,24 @@ namespace Roguegard
     {
         private static readonly EffectableValue value = EffectableValue.Get();
 
-        public static int GetMaxHP(RogueObj self)
+        public static int GetMaxHp(RogueObj self)
         {
-            value.Initialize(self.Main.InfoSet.MaxHP);
-            ValueEffectState.AffectValue(StatsKw.MaxHP, value, self);
+            value.Initialize(self.Main.InfoSet.MaxHp);
+            ValueEffectState.AffectValue(StatsKw.MaxHp, value, self);
             return Mathf.FloorToInt(value.MainValue);
         }
 
-        public static int GetMaxMP(RogueObj self)
+        public static int GetMaxMp(RogueObj self)
         {
-            value.Initialize(self.Main.InfoSet.MaxMP);
-            ValueEffectState.AffectValue(StatsKw.MaxMP, value, self);
+            value.Initialize(self.Main.InfoSet.MaxMp);
+            ValueEffectState.AffectValue(StatsKw.MaxMp, value, self);
             return Mathf.FloorToInt(value.MainValue);
         }
 
-        public static int GetRequiredMP(RogueObj self, float baseRequiredMP)
+        public static int GetRequiredMp(RogueObj self, float baseRequiredMp)
         {
-            value.Initialize(baseRequiredMP);
-            ValueEffectState.AffectValue(StatsKw.RequiredMP, value, self);
+            value.Initialize(baseRequiredMp);
+            ValueEffectState.AffectValue(StatsKw.RequiredMp, value, self);
             return Mathf.Max(Mathf.FloorToInt(value.MainValue), 1);
         }
 
@@ -51,37 +51,37 @@ namespace Roguegard
             return Mathf.FloorToInt(value.MainValue * coefficient);
         }
 
-        public static int GetRegenerationHPPermille(RogueObj self)
+        public static int GetRegenerationHpPermille(RogueObj self)
         {
-            var maxHP = GetMaxHP(self);
-            value.Initialize(maxHP);
-            value.MainValue = self.Main.Stats.Nutrition >= 1 ? maxHP * 5 : 0; // 基本は最大値の 0.5%
-            ValueEffectState.AffectValue(StatsKw.HPRegenerationPermille, value, self);
+            var maxHp = GetMaxHp(self);
+            value.Initialize(maxHp);
+            value.MainValue = self.Main.Stats.Nutrition >= 1 ? maxHp * 5 : 0; // 基本は最大値の 0.5%
+            ValueEffectState.AffectValue(StatsKw.HpRegenerationPermille, value, self);
             return Mathf.FloorToInt(value.MainValue);
         }
 
-        public static int GetRegenerationMPPermille(RogueObj self)
+        public static int GetRegenerationMpPermille(RogueObj self)
         {
-            var maxMP = GetMaxMP(self);
-            value.Initialize(maxMP);
-            value.MainValue = self.Main.Stats.Nutrition >= 1 ? maxMP * 2 : 0; // 基本は最大値の 0.2%
-            ValueEffectState.AffectValue(StatsKw.MPRegenerationPermille, value, self);
+            var maxMp = GetMaxMp(self);
+            value.Initialize(maxMp);
+            value.MainValue = self.Main.Stats.Nutrition >= 1 ? maxMp * 2 : 0; // 基本は最大値の 0.2%
+            ValueEffectState.AffectValue(StatsKw.MpRegenerationPermille, value, self);
             return Mathf.FloorToInt(value.MainValue);
         }
 
-        public static void GetATK(RogueObj self, EffectableValue refATKValue)
+        public static void GetAtk(RogueObj self, EffectableValue refAtkValue)
         {
-            refATKValue.Initialize(self.Main.InfoSet.ATK);
-            refATKValue.SubValues[StatsKw.CriticalATK] = 1f; // 基本会心攻撃力は 1
-            ValueEffectState.AffectValue(StatsKw.ATK, refATKValue, self);
+            refAtkValue.Initialize(self.Main.InfoSet.Atk);
+            refAtkValue.SubValues[StatsKw.CriticalAtk] = 1f; // 基本会心攻撃力は 1
+            ValueEffectState.AffectValue(StatsKw.Atk, refAtkValue, self);
         }
 
-        public static int GetDEF(RogueObj self)
+        public static int GetDef(RogueObj self)
         {
             value.Initialize(0f);
-            value.MainValue -= self.Main.InfoSet.DEF;
-            value.SubValues[StatsKw.GuardDEF] += 1f; // 基本ガード防御力は 1
-            ValueEffectState.AffectValue(StatsKw.DEF, value, self);
+            value.MainValue -= self.Main.InfoSet.Def;
+            value.SubValues[StatsKw.GuardDef] += 1f; // 基本ガード防御力は 1
+            ValueEffectState.AffectValue(StatsKw.Def, value, self);
             var def = -Mathf.FloorToInt(value.MainValue);
             return def;
         }
@@ -89,16 +89,16 @@ namespace Roguegard
         public static int GetDamage(RogueObj self, EffectableValue refDamageValue, IRogueRandom random, out bool critical, out bool guard)
         {
             refDamageValue.BaseMainValue = refDamageValue.MainValue;
-            refDamageValue.MainValue -= self.Main.InfoSet.DEF;
-            refDamageValue.SubValues[StatsKw.GuardDEF] += 1f; // 基本ガード防御力は 1
-            ValueEffectState.AffectValue(StatsKw.DEF, refDamageValue, self);
+            refDamageValue.MainValue -= self.Main.InfoSet.Def;
+            refDamageValue.SubValues[StatsKw.GuardDef] += 1f; // 基本ガード防御力は 1
+            ValueEffectState.AffectValue(StatsKw.Def, refDamageValue, self);
 
             // 会心成功時、会心攻撃力を足す。
             critical = refDamageValue.SubValues[StatsKw.CriticalRate] >= 1f;
             if (!critical) { critical = random.NextFloat(0f, 1f) < refDamageValue.SubValues[StatsKw.CriticalRate]; }
             if (critical)
             {
-                refDamageValue.MainValue += refDamageValue.SubValues[StatsKw.CriticalATK];
+                refDamageValue.MainValue += refDamageValue.SubValues[StatsKw.CriticalAtk];
                 refDamageValue.SubValues[StatsKw.Critical] = 1f;
             }
 
@@ -107,7 +107,7 @@ namespace Roguegard
             if (!guard) { guard = random.NextFloat(0f, 1f) < refDamageValue.SubValues[StatsKw.GuardRate]; }
             if (guard)
             {
-                refDamageValue.MainValue -= refDamageValue.SubValues[StatsKw.GuardDEF];
+                refDamageValue.MainValue -= refDamageValue.SubValues[StatsKw.GuardDef];
                 refDamageValue.SubValues[StatsKw.Guard] = 1f;
             }
 

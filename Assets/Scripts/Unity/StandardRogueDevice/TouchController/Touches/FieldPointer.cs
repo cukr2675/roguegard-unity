@@ -11,7 +11,7 @@ namespace RoguegardUnity
         public PointerEventData Data { get; private set; }
 
         public bool IsHeldDown => Data != null;
-        public int PointerID => Data?.pointerId ?? -2; // -1 は Unity の規定値で使用済みなので -2 を使う
+        public int PointerId => Data?.pointerId ?? -2; // -1 は Unity の規定値で使用済みなので -2 を使う
         public Vector2 Position
         {
             get => Data.position;

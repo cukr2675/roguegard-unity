@@ -7,14 +7,14 @@ using Roguegard.Extensions;
 namespace Roguegard
 {
     [Objforming.Formable]
-    public class RustAttack : MPSkill
+    public class RustAttack : MpSkill
     {
         public override string Name => MainInfoKw.Attack.Name;
         public override string Caption => "鉄製の装備を50%で解除させる";
 
         public override IRogueMethodTarget Target => ForEnemyRogueMethodTarget.Instance;
         public override IRogueMethodRange Range => FrontRogueMethodRange.Instance;
-        public override int RequiredMP => 0;
+        public override int RequiredMp => 0;
 
         private static readonly CommonAttack common = new CommonAttack();
         private static readonly List<RogueObj> equipments = new List<RogueObj>();
@@ -25,7 +25,7 @@ namespace Roguegard
             MainCharacterWorkUtility.TryAddAttack(self);
 
             using var damageValue = EffectableValue.Get();
-            StatsEffectedValues.GetATK(self, damageValue);
+            StatsEffectedValues.GetAtk(self, damageValue);
             var hurted = this.TryHurt(target, self, activationDepth, damageValue);
             var defeated = this.TryDefeat(target, self, activationDepth, damageValue);
 
@@ -70,10 +70,10 @@ namespace Roguegard
             }
         }
 
-        public override int GetATK(RogueObj self, out bool additionalEffect)
+        public override int GetAtk(RogueObj self, out bool additionalEffect)
         {
             additionalEffect = true;
-            return common.GetATK(self, out _);
+            return common.GetAtk(self, out _);
         }
     }
 }

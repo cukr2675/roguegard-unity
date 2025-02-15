@@ -58,7 +58,7 @@ namespace Roguegard
 
                     // 基礎攻撃力ぶんの継続ダメージ
                     using var damage = EffectableValue.Get();
-                    StatsEffectedValues.GetATK(user, damage);
+                    StatsEffectedValues.GetAtk(user, damage);
                     damage.Initialize(damage.BaseMainValue);
                     this.Hurt(self, user, AttackUtility.GetActivationDepthCantCounter(activationDepth), damage);
                     this.TryDefeat(self, user, activationDepth, damage);

@@ -16,7 +16,7 @@ namespace Roguegard
 
         IRogueMethodTarget ISkillDescription.Target => null;
         IRogueMethodRange ISkillDescription.Range => null;
-        int ISkillDescription.RequiredMP => 0;
+        int ISkillDescription.RequiredMp => 0;
         Spanning<IKeyword> ISkillDescription.AmmoCategories => Spanning<IKeyword>.Empty;
 
         private SpeechScreen rogueMenu;
@@ -35,7 +35,7 @@ namespace Roguegard
             }
         }
 
-        int ISkillDescription.GetATK(RogueObj self, out bool additionalEffect)
+        int ISkillDescription.GetAtk(RogueObj self, out bool additionalEffect)
         {
             additionalEffect = false;
             return 0;

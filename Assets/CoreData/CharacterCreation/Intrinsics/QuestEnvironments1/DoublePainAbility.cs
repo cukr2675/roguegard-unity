@@ -35,13 +35,13 @@ namespace Roguegard.CharacterCreation
 
             void IValueEffect.AffectValue(IKeyword keyword, EffectableValue value, RogueObj self)
             {
-                if (keyword == StatsKw.DEF && !value.SubValues.Is(StdKw.Heal))
+                if (keyword == StatsKw.Def && !value.SubValues.Is(StdKw.Heal))
                 {
                     // 受けるダメージ二倍
                     value.MainValue *= 2f;
 
                     // ガード防御力も二倍
-                    value.SubValues[StatsKw.GuardDEF] *= 2f;
+                    value.SubValues[StatsKw.GuardDef] *= 2f;
                 }
             }
         }

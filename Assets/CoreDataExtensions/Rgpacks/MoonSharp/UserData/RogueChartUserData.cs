@@ -24,9 +24,9 @@ namespace Roguegard.Rgpacks.MoonSharp
             var worldInfo = RogueWorldInfo.GetByCharacter(RogueDevice.Primary.Player);
 
             if (worldInfo.ChartState.TryGet<ChartPadReference>(chartSource, out var chartReference) &&
-                chartReference.CurrentCmn.FullID != argumentCmn.FullID)
+                chartReference.CurrentCmn.FullId != argumentCmn.FullId)
             {
-                Debug.LogError($"指定された Cmn ({argumentCmn.FullID}) が現在の Cmn ({chartReference.CurrentCmn?.FullID}) と一致しません。");
+                Debug.LogError($"指定された Cmn ({argumentCmn.FullId}) が現在の Cmn ({chartReference.CurrentCmn?.FullId}) と一致しません。");
                 return;
             }
 

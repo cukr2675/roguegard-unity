@@ -7,14 +7,14 @@ using Roguegard.Extensions;
 namespace Roguegard
 {
     [Objforming.Formable]
-    public class MeltAttack : MPSkill
+    public class MeltAttack : MpSkill
     {
         public override string Name => MainInfoKw.Attack.Name;
         public override string Caption => "装備を溶かす";
 
         public override IRogueMethodTarget Target => ForEnemyRogueMethodTarget.Instance;
         public override IRogueMethodRange Range => FrontRogueMethodRange.Instance;
-        public override int RequiredMP => 0;
+        public override int RequiredMp => 0;
 
         private static readonly CommonAttack common = new CommonAttack();
 
@@ -24,7 +24,7 @@ namespace Roguegard
             MainCharacterWorkUtility.TryAddAttack(self);
 
             using var damageValue = EffectableValue.Get();
-            StatsEffectedValues.GetATK(self, damageValue);
+            StatsEffectedValues.GetAtk(self, damageValue);
             var hurted = this.TryHurt(target, self, activationDepth, damageValue);
             var defeated = this.TryDefeat(target, self, activationDepth, damageValue);
 
@@ -37,10 +37,10 @@ namespace Roguegard
             return true;
         }
 
-        public override int GetATK(RogueObj self, out bool additionalEffect)
+        public override int GetAtk(RogueObj self, out bool additionalEffect)
         {
             additionalEffect = true;
-            return common.GetATK(self, out _);
+            return common.GetAtk(self, out _);
         }
     }
 }

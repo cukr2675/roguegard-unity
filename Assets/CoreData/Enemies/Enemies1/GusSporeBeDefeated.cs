@@ -52,7 +52,7 @@ namespace Roguegard
                 var target = targets[i];
                 var dropPosition = target.Position;
                 using var damageValue = EffectableValue.Get();
-                StatsEffectedValues.GetATK(self, damageValue);
+                StatsEffectedValues.GetAtk(self, damageValue);
                 damageValue.MainValue += 2f;
                 default(IAffectRogueMethodCaller).TryHurt(target, user, AttackUtility.GetActivationDepthCantCounter(nextActivationDepth), damageValue);
                 var defeated = default(IAffectRogueMethodCaller).TryDefeat(target, user, nextActivationDepth, damageValue);

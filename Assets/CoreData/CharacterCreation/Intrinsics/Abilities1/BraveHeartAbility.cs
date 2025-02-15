@@ -41,8 +41,8 @@ namespace Roguegard.CharacterCreation
                 if (result && keyword == StdKw.LoseExp && self.Main.Stats.Lv > beforeLv)
                 {
                     // 経験値取得でレベルが上がったとき HP と MP を全回復し、状態異常をすべて解除する
-                    self.Main.Stats.SetHP(self, int.MaxValue);
-                    self.Main.Stats.SetMP(self, int.MaxValue);
+                    self.Main.Stats.SetHp(self, int.MaxValue);
+                    self.Main.Stats.SetMp(self, int.MaxValue);
                     var statusEffectState = self.Main.GetStatusEffectState(self);
                     var statusEffects = statusEffectState.StatusEffects;
                     for (int i = statusEffects.Count - 1; i >= 0; i--)

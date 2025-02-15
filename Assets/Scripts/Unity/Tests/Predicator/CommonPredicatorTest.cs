@@ -20,7 +20,7 @@ namespace RoguegardUnity.Tests
         public void PoolingTest()
         {
             _settings.TestLoad();
-            StaticID.Next();
+            StaticId.Next();
 
             var random = new RogueRandom(0);
             var player = _player.CreateObj(null, Vector2Int.zero, random);
@@ -31,7 +31,7 @@ namespace RoguegardUnity.Tests
             var methodTargets = RoguegardTestReflectionUtility.GetInstancesOfInherited<IRogueMethodTarget>(assemblies);
             foreach (var methodTarget in methodTargets)
             {
-                StaticID.Next();
+                StaticId.Next();
 
                 using var predicator1 = methodTarget.GetPredicator(player, 0f, tool);
                 if (predicator1 == null)

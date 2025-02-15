@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,7 +9,7 @@ namespace Roguegard
         private static StatsKw instance;
 
         [SerializeField] private KeywordData _atk;
-        public static IKeyword ATK => instance._atk;
+        public static IKeyword Atk => instance._atk;
 
         [SerializeField] private KeywordData _cost;
         public static IKeyword Cost => instance._cost;
@@ -17,14 +17,14 @@ namespace Roguegard
         [SerializeField] private KeywordData _critical;
         public static IKeyword Critical => instance._critical;
 
-        [SerializeField] private KeywordData _criticalATK;
-        public static IKeyword CriticalATK => instance._criticalATK;
+        [SerializeField] private KeywordData _criticalAtk;
+        public static IKeyword CriticalAtk => instance._criticalAtk;
 
         [SerializeField] private KeywordData _criticalRate;
         public static IKeyword CriticalRate => instance._criticalRate;
 
         [SerializeField] private KeywordData _def;
-        public static IKeyword DEF => instance._def;
+        public static IKeyword Def => instance._def;
 
         [SerializeField] private KeywordData _exp;
         public static IKeyword Exp => instance._exp;
@@ -50,17 +50,17 @@ namespace Roguegard
         [SerializeField] private KeywordData _guard;
         public static IKeyword Guard => instance._guard;
 
-        [SerializeField] private KeywordData _guardDEF;
-        public static IKeyword GuardDEF => instance._guardDEF;
+        [SerializeField] private KeywordData _guardDef;
+        public static IKeyword GuardDef => instance._guardDef;
 
         [SerializeField] private KeywordData _guardRate;
         public static IKeyword GuardRate => instance._guardRate;
 
         [SerializeField] private KeywordData _hp;
-        public static IKeyword HP => instance._hp;
+        public static IKeyword Hp => instance._hp;
 
-        [SerializeField] private KeywordData _hpregenerationPermille;
-        public static IKeyword HPRegenerationPermille => instance._hpregenerationPermille;
+        [SerializeField] private KeywordData _hpRegenerationPermille;
+        public static IKeyword HpRegenerationPermille => instance._hpRegenerationPermille;
 
         [SerializeField] private KeywordData _loadCapacity;
         public static IKeyword LoadCapacity => instance._loadCapacity;
@@ -68,11 +68,11 @@ namespace Roguegard
         [SerializeField] private KeywordData _material;
         public static IKeyword Material => instance._material;
 
-        [SerializeField] private KeywordData _maxHP;
-        public static IKeyword MaxHP => instance._maxHP;
+        [SerializeField] private KeywordData _maxHp;
+        public static IKeyword MaxHp => instance._maxHp;
 
-        [SerializeField] private KeywordData _maxMP;
-        public static IKeyword MaxMP => instance._maxMP;
+        [SerializeField] private KeywordData _maxMp;
+        public static IKeyword MaxMp => instance._maxMp;
 
         [SerializeField] private KeywordData _maxNutrition;
         public static IKeyword MaxNutrition => instance._maxNutrition;
@@ -96,13 +96,13 @@ namespace Roguegard
         public static IKeyword Movement => instance._movement;
 
         [SerializeField] private KeywordData _mp;
-        public static IKeyword MP => instance._mp;
+        public static IKeyword Mp => instance._mp;
 
-        [SerializeField] private KeywordData _mpregenerationPermille;
-        public static IKeyword MPRegenerationPermille => instance._mpregenerationPermille;
+        [SerializeField] private KeywordData _mpRegenerationPermille;
+        public static IKeyword MpRegenerationPermille => instance._mpRegenerationPermille;
 
-        [SerializeField] private KeywordData _requiredMP;
-        public static IKeyword RequiredMP => instance._requiredMP;
+        [SerializeField] private KeywordData _requiredMp;
+        public static IKeyword RequiredMp => instance._requiredMp;
 
         [SerializeField] private KeywordData _spaceWeight;
         public static IKeyword SpaceWeight => instance._spaceWeight;

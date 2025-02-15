@@ -7,13 +7,13 @@ using Roguegard.Extensions;
 namespace Roguegard
 {
     [Objforming.Formable]
-    public class CommonThrow : MPSkill
+    public class CommonThrow : MpSkill
     {
         public override string Name => MainInfoKw.Throw.Name;
 
         public override IRogueMethodTarget Target => DependsOnThrownRogueMethodTarget.Instance;
         public override IRogueMethodRange Range => DependsOnThrownRogueMethodRange.Instance;
-        public override int RequiredMP => 0;
+        public override int RequiredMp => 0;
 
         protected override bool Activate(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
         {

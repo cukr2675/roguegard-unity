@@ -20,7 +20,7 @@ namespace Roguegard.CharacterCreation
 
             void IValueEffect.AffectValue(IKeyword keyword, EffectableValue value, RogueObj self)
             {
-                if (keyword == StatsKw.DEF && value.SubValues[StatsKw.GuardRate] > 0f && value.SubValues[ElementKw.Thunder] > 0f)
+                if (keyword == StatsKw.Def && value.SubValues[StatsKw.GuardRate] > 0f && value.SubValues[ElementKw.Thunder] > 0f)
                 {
                     // 雷属性ダメージをガードしうるとき10%でガード
                     value.SubValues[StatsKw.GuardRate] = AttackUtility.Cup(value.SubValues[StatsKw.GuardRate], 0.1f);

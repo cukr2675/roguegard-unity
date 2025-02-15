@@ -13,8 +13,8 @@ namespace Roguegard.CharacterCreation
         public string OptionCaption { get; set; }
         public IRogueDetails OptionDetails { get; set; }
         public IRogueGender Gender { get; set; }
-        public string HPName { get; set; }
-        public string MPName { get; set; }
+        public string HpName { get; set; }
+        public string MpName { get; set; }
 
         private readonly List<IMember> members = new List<IMember>();
 
@@ -44,8 +44,8 @@ namespace Roguegard.CharacterCreation
             OptionCaption = race.OptionCaption;
             OptionDetails = race.OptionDetails;
             Gender = race.Gender;
-            HPName = race.HPName;
-            MPName = race.MPName;
+            HpName = race.HpName;
+            MpName = race.MpName;
             members.Clear();
             for (int i = 0; i < Option.MemberSources.Count; i++)
             {

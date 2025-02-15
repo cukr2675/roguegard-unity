@@ -21,29 +21,29 @@ namespace Roguegard.Rgpacks
         private static void AddAllAssetsTo(Dictionary<string, object> directory, RogueObj obj)
         {
             var useSubDirectory = false;
-            var assetID = NamingEffect.Get(obj)?.Naming;
-            if (assetID != null)
+            var assetId = NamingEffect.Get(obj)?.Naming;
+            if (assetId != null)
             {
                 var characterCreationDataBuilder = KyarakuriFigurineInfo.Get(obj);
-                if (characterCreationDataBuilder != null) { directory.Add(assetID, characterCreationDataBuilder); }
+                if (characterCreationDataBuilder != null) { directory.Add(assetId, characterCreationDataBuilder); }
 
                 var kyarakuriClayInfo = KyarakuriClayInfo.Get(obj);
-                if (kyarakuriClayInfo != null) { directory.Add(assetID, kyarakuriClayInfo); }
+                if (kyarakuriClayInfo != null) { directory.Add(assetId, kyarakuriClayInfo); }
 
                 var effectStickerInfo = EffectStickerInfo.Get(obj);
-                if (effectStickerInfo != null) { directory.Add(assetID, effectStickerInfo); }
+                if (effectStickerInfo != null) { directory.Add(assetId, effectStickerInfo); }
 
                 var mysteryDioramaInfo = MysteryDioramaInfo.Get(obj);
                 if (mysteryDioramaInfo != null)
                 {
-                    directory.Add(assetID, mysteryDioramaInfo);
+                    directory.Add(assetId, mysteryDioramaInfo);
                     useSubDirectory = true;
                 }
 
                 var dioramaFloorInfo = DioramaFloorInfo.Get(obj);
                 if (dioramaFloorInfo is MapDioramaFloorInfo)
                 {
-                    directory.Add(assetID, new MapDioramaFloorInfo(obj));
+                    directory.Add(assetId, new MapDioramaFloorInfo(obj));
                     useSubDirectory = true;
                 }
 
@@ -51,30 +51,30 @@ namespace Roguegard.Rgpacks
                 if (evtFairyInfo != null)
                 {
                     evtFairyInfo.Pages[0].Position = obj.Position;
-                    directory.Add(assetID, evtFairyInfo);
+                    directory.Add(assetId, evtFairyInfo);
                 }
 
                 var chartPadInfo = ChartPadInfo.Get(obj);
-                if (chartPadInfo != null) { directory.Add(assetID, chartPadInfo); }
+                if (chartPadInfo != null) { directory.Add(assetId, chartPadInfo); }
 
                 var sewedInfoSet = obj.Main.InfoSet as SewedEquipmentInfoSet;
                 if (sewedInfoSet != null)
                 {
-                    directory.Add(assetID, sewedInfoSet.GetDataClone());
+                    directory.Add(assetId, sewedInfoSet.GetDataClone());
                 }
 
                 var choreographerInfo = MotionGrapherInfo.Get(obj);
                 if (choreographerInfo != null)
                 {
-                    directory.Add(assetID, new MotionGrapherSpriteMotion(choreographerInfo));
+                    directory.Add(assetId, new MotionGrapherSpriteMotion(choreographerInfo));
                 }
 
                 var text = NotepadInfo.GetText(obj);
-                if (text != null) { directory.Add(assetID, text); }
+                if (text != null) { directory.Add(assetId, text); }
             }
             else
             {
-                // 名前が設定されていない場合は UUID を設定
+                // 名前が設定されていない場合は GUID を設定
                 var text = NotepadInfo.GetText(obj);
                 if (text != null) { directory.Add($"__script: {System.Guid.NewGuid()}", text); }
             }
@@ -93,7 +93,7 @@ namespace Roguegard.Rgpacks
 
                     AddAllAssetsTo(subDirectory, spaceObj);
                 }
-                directory.Add($"{assetID}.", subDirectory);
+                directory.Add($"{assetId}.", subDirectory);
             }
             else
             {

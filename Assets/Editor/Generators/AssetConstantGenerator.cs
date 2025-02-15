@@ -41,8 +41,8 @@ namespace Roguegard.Editor
             if (targetPath == thisPath) throw new RogueException();
 
             var targetFolderPath = AssetDatabase.GetAssetPath(_targetFolder);
-            var assetGUIDs = AssetDatabase.FindAssets(FindFilter, new[] { targetFolderPath });
-            var assetItems = assetGUIDs.Select(x => new Item(x)).ToArray();
+            var assetGuids = AssetDatabase.FindAssets(FindFilter, new[] { targetFolderPath });
+            var assetItems = assetGuids.Select(x => new Item(x)).ToArray();
 
             var writer = new StreamWriter(targetPath);
 
@@ -97,7 +97,7 @@ namespace {_namespaceName}
 
         private class Item
         {
-            public string GUID { get; }
+            public string Guid { get; }
             public Object Asset { get; }
             public string Name { get; }
             public string FieldName { get; }
@@ -105,7 +105,7 @@ namespace {_namespaceName}
 
             public Item(string guid)
             {
-                GUID = guid;
+                Guid = guid;
                 var path = AssetDatabase.GUIDToAssetPath(guid);
                 Asset = AssetDatabase.LoadAssetAtPath<Object>(path);
                 Name = Path.GetFileNameWithoutExtension(path);

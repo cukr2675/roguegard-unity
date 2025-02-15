@@ -9,19 +9,19 @@ namespace Roguegard.Rgpacks
     {
         public new ICmnAssset Asset => base.Asset;
 
-        public CmnReference(string id, string envRgpackID)
-            : base(id, envRgpackID)
+        public CmnReference(string id, string envRgpackId)
+            : base(id, envRgpackId)
         {
         }
 
         public override bool Equals(object obj)
         {
-            return obj is CmnReference reference && reference.FullID == FullID;
+            return obj is CmnReference reference && reference.FullId == FullId;
         }
 
         public override int GetHashCode()
         {
-            return FullID.GetHashCode();
+            return FullId.GetHashCode();
         }
     }
 }

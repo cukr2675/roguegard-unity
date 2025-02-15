@@ -17,10 +17,10 @@ namespace Roguegard.CharacterCreation
 
         IKeyword IRaceOption.Category => Race.Option.Category;
 
-        int IRaceOption.MaxHP => Race.Option.MaxHP;
-        int IRaceOption.MaxMP => Race.Option.MaxMP;
-        int IRaceOption.ATK => Race.Option.ATK;
-        int IRaceOption.DEF => Race.Option.DEF;
+        int IRaceOption.MaxHp => Race.Option.MaxHp;
+        int IRaceOption.MaxMp => Race.Option.MaxMp;
+        int IRaceOption.Atk => Race.Option.Atk;
+        int IRaceOption.Def => Race.Option.Def;
         float IRaceOption.LoadCapacity => Race.Option.LoadCapacity;
         ISerializableKeyword IRaceOption.Faction => Race.Option.Faction;
         Spanning<ISerializableKeyword> IRaceOption.TargetFactions => Race.Option.TargetFactions;

@@ -7,13 +7,13 @@ using Roguegard.Extensions;
 namespace Roguegard
 {
     [Objforming.Formable]
-    public class BoneSpearAttack : MPSkill
+    public class BoneSpearAttack : MpSkill
     {
         public override string Name => MainInfoKw.Attack.Name;
 
         public override IRogueMethodTarget Target => ForEnemyRogueMethodTarget.Instance;
         public override IRogueMethodRange Range => Away2TilesRogueMethodRange.Instance;
-        public override int RequiredMP => 0;
+        public override int RequiredMp => 0;
 
         protected override bool Activate(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
         {
@@ -22,18 +22,18 @@ namespace Roguegard
 
             // 攻撃力+1ダメージの攻撃。
             using var damageValue = EffectableValue.Get();
-            StatsEffectedValues.GetATK(user, damageValue);
+            StatsEffectedValues.GetAtk(user, damageValue);
             damageValue.MainValue += 1;
             this.TryHurt(target, user, activationDepth, damageValue);
             this.TryDefeat(target, user, activationDepth, damageValue);
             return true;
         }
 
-        public override int GetATK(RogueObj self, out bool additionalEffect)
+        public override int GetAtk(RogueObj self, out bool additionalEffect)
         {
             // 攻撃力+1ダメージの攻撃。
             using var damageValue = EffectableValue.Get();
-            StatsEffectedValues.GetATK(self, damageValue);
+            StatsEffectedValues.GetAtk(self, damageValue);
             damageValue.MainValue += 1;
 
             var hpDamage = Mathf.FloorToInt(damageValue.MainValue);

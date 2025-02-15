@@ -6,29 +6,29 @@ namespace Roguegard.Rgpacks
 {
     public class EvtFairyAsset : IEvtAsset
     {
-        private readonly string fullID;
+        private readonly string fullId;
 
         private readonly IRogueChartSource relatedChartSource;
         private readonly List<Page> pages;
 
-        public EvtFairyAsset(EvtFairyInfo info, string envRgpackID, string fullID)
+        public EvtFairyAsset(EvtFairyInfo info, string envRgpackId, string fullId)
         {
-            relatedChartSource = ChartPadReference.CreateSource(info.RelatedChart, envRgpackID);
+            relatedChartSource = ChartPadReference.CreateSource(info.RelatedChart, envRgpackId);
             pages = new List<Page>();
             for (int i = 0; i < info.Pages.Count; i++)
             {
                 var infoPage = info.Pages[i];
                 var newPage = new Page();
-                newPage.ChartCmn = new CmnReference(infoPage.ChartCmn, envRgpackID);
-                newPage.IfCmn = infoPage.IfCmn.ToReference(envRgpackID);
-                newPage.Sprite = new RogueObjSpriteReference(infoPage.Sprite, envRgpackID);
+                newPage.ChartCmn = new CmnReference(infoPage.ChartCmn, envRgpackId);
+                newPage.IfCmn = infoPage.IfCmn.ToReference(envRgpackId);
+                newPage.Sprite = new RogueObjSpriteReference(infoPage.Sprite, envRgpackId);
                 newPage.Category = infoPage.Category;
-                newPage.Cmn = infoPage.Cmn.ToReference(envRgpackID);
+                newPage.Cmn = infoPage.Cmn.ToReference(envRgpackId);
                 newPage.Position = infoPage.Position;
                 pages.Add(newPage);
             }
 
-            this.fullID = fullID;
+            this.fullId = fullId;
         }
 
         public EvtFairyReference GetInfoSet()
@@ -43,10 +43,10 @@ namespace Roguegard.Rgpacks
                     //var ifCmn = page.IfCmn?.GetData<IScriptingCmn>();
                     //ifCmn?.Invoke();
 
-                    return page.GetInfoSet(fullID, "");
+                    return page.GetInfoSet(fullId, "");
                 }
             }
-            return pages[0].GetInfoSet(fullID, "");
+            return pages[0].GetInfoSet(fullId, "");
         }
 
         public class Page
@@ -60,11 +60,11 @@ namespace Roguegard.Rgpacks
 
             private EvtFairyReference infoSet;
 
-            public EvtFairyReference GetInfoSet(string id, string envRgpackID)
+            public EvtFairyReference GetInfoSet(string id, string envRgpackId)
             {
                 if (infoSet == null)
                 {
-                    infoSet = new EvtFairyReference(id, envRgpackID, this);
+                    infoSet = new EvtFairyReference(id, envRgpackId, this);
                 }
                 return infoSet;
             }

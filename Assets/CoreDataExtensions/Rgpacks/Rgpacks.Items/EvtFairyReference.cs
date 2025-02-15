@@ -12,8 +12,8 @@ namespace Roguegard.Rgpacks
     [Objforming.Formable]
     public class EvtFairyReference : RgpackReference<IEvtAsset>, IMainInfoSet
     {
-        [System.NonSerialized] private string _evtID;
-        public string EvtID => _evtID ??= FullID.Substring(FullID.LastIndexOf('.') + 1);
+        [System.NonSerialized] private string _evtId;
+        public string EvtId => _evtId ??= FullId.Substring(FullId.LastIndexOf('.') + 1);
 
         [System.NonSerialized] private readonly EvtFairyAsset.Page point;
 
@@ -27,10 +27,10 @@ namespace Roguegard.Rgpacks
 
         public IKeyword Category => point.Category == EvtFairyCategory.ApplyTool ? CategoryKw.ApplyTool : CategoryKw.Trap;
 
-        public int MaxHP => 0;
-        public int MaxMP => 0;
-        public int ATK => 0;
-        public int DEF => 0;
+        public int MaxHp => 0;
+        public int MaxMp => 0;
+        public int Atk => 0;
+        public int Def => 0;
         public float Weight => 0f;
         public float LoadCapacity => 0f;
 
@@ -39,8 +39,8 @@ namespace Roguegard.Rgpacks
         public MainInfoSetAbility Ability => point.Category == EvtFairyCategory.ApplyTool ? MainInfoSetAbility.WallObject : MainInfoSetAbility.TrapTile;
         public IRogueMaterial Material => RoguegardSettings.DefaultRaceOption.Material;
         public IRogueGender Gender => RoguegardSettings.DefaultRaceOption.Genders[0];
-        public string HPName => null;
-        public string MPName => null;
+        public string HpName => null;
+        public string MpName => null;
         public float Cost => 0f;
         public bool CostIsUnknown => false;
 
@@ -65,8 +65,8 @@ namespace Roguegard.Rgpacks
         public IApplyRogueMethod BeEaten => RoguegardSettings.DefaultRaceOption.BeEaten;
         public IApplyRogueMethod BeSteppedOnAsTile => RoguegardSettings.DefaultRaceOption.BeSteppedOnAsTile;
 
-        public EvtFairyReference(string id, string envRgpackID, EvtFairyAsset.Page point)
-            : base(id, envRgpackID)
+        public EvtFairyReference(string id, string envRgpackId, EvtFairyAsset.Page point)
+            : base(id, envRgpackId)
         {
             this.point = point;
         }
@@ -103,12 +103,12 @@ namespace Roguegard.Rgpacks
 
         public bool Equals(IMainInfoSet other)
         {
-            return other is EvtFairyReference info && info.FullID == FullID;
+            return other is EvtFairyReference info && info.FullId == FullId;
         }
 
         public override bool Equals(object obj)
         {
-            return obj is EvtFairyReference info && info.FullID == FullID;
+            return obj is EvtFairyReference info && info.FullId == FullId;
         }
 
         public override int GetHashCode()

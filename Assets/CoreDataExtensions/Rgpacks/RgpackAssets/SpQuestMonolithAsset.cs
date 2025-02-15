@@ -8,9 +8,9 @@ namespace Roguegard.Rgpacks
     {
         public IRogueChartSource MainChartSource { get; }
 
-        public SpQuestMonolithAsset(SpQuestMonolithInfo info, string envRgpackID)
+        public SpQuestMonolithAsset(SpQuestMonolithInfo info, string envRgpackId)
         {
-            MainChartSource = ChartPadReference.CreateSource(info.MainChart, envRgpackID);
+            MainChartSource = ChartPadReference.CreateSource(info.MainChart, envRgpackId);
         }
     }
 }

@@ -10,19 +10,19 @@ namespace Roguegard.Rgpacks
     {
         public new IStartingItemOption Asset => base.Asset;
 
-        public StartingItemOptionReference(string id, string envRgpackID)
-            : base(id, envRgpackID)
+        public StartingItemOptionReference(string id, string envRgpackId)
+            : base(id, envRgpackId)
         {
         }
 
         public override bool Equals(object obj)
         {
-            return obj is CmnReference reference && reference.FullID == FullID;
+            return obj is CmnReference reference && reference.FullId == FullId;
         }
 
         public override int GetHashCode()
         {
-            return FullID.GetHashCode();
+            return FullId.GetHashCode();
         }
     }
 }

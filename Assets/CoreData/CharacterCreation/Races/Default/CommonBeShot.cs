@@ -30,7 +30,7 @@ namespace Roguegard
             else
             {
                 // 引き継がない場合は攻撃力ダメージの攻撃。
-                StatsEffectedValues.GetATK(user, damageValue);
+                StatsEffectedValues.GetAtk(user, damageValue);
             }
             this.TryHurt(target, user, activationDepth, damageValue);
             this.TryDefeat(target, user, activationDepth, damageValue);

@@ -9,7 +9,7 @@ namespace Roguegard
         private readonly List<ActiveItem> actives;
         private readonly List<PassiveItem> passives;
 
-        private int nextID;
+        private int nextId;
 
         private static readonly StaticInitializable<AspectStack> stack = new StaticInitializable<AspectStack>(() => new AspectStack());
 
@@ -21,7 +21,7 @@ namespace Roguegard
         {
             actives = new List<ActiveItem>();
             passives = new List<PassiveItem>();
-            nextID = 0;
+            nextId = 0;
         }
 
         public void AddActiveFromInfoSet(RogueObj self, IRogueMethodActiveAspect aspect)
@@ -29,8 +29,8 @@ namespace Roguegard
             if (self.Main.RogueEffectOpenState == RogueEffectOpenState.OpeningEffects) throw new RogueException();
             if (aspect == null) throw new System.ArgumentNullException(nameof(aspect));
 
-            var newItem = new ActiveItem(aspect, nextID);
-            nextID++;
+            var newItem = new ActiveItem(aspect, nextId);
+            nextId++;
             for (int i = 0; i < actives.Count; i++)
             {
                 // 同じ Order の要素が存在するときその手前に追加する。
@@ -48,8 +48,8 @@ namespace Roguegard
             if (self.Main.RogueEffectOpenState == RogueEffectOpenState.OpeningInfoSet) throw new RogueException();
             if (aspect == null) throw new System.ArgumentNullException(nameof(aspect));
 
-            var newItem = new ActiveItem(aspect, nextID);
-            nextID++;
+            var newItem = new ActiveItem(aspect, nextId);
+            nextId++;
             for (int i = actives.Count - 1; i >= 0; i--)
             {
                 // 同じ Order の要素が存在するときその後ろに追加する。
@@ -87,8 +87,8 @@ namespace Roguegard
             if (self.Main.RogueEffectOpenState == RogueEffectOpenState.OpeningEffects) throw new RogueException();
             if (aspect == null) throw new System.ArgumentNullException(nameof(aspect));
 
-            var newItem = new PassiveItem(aspect, nextID);
-            nextID++;
+            var newItem = new PassiveItem(aspect, nextId);
+            nextId++;
             for (int i = 0; i < passives.Count; i++)
             {
                 // 同じ Order の要素が存在するときその手前に追加する。
@@ -106,8 +106,8 @@ namespace Roguegard
             if (self.Main.RogueEffectOpenState == RogueEffectOpenState.OpeningInfoSet) throw new RogueException();
             if (aspect == null) throw new System.ArgumentNullException(nameof(aspect));
 
-            var newItem = new PassiveItem(aspect, nextID);
-            nextID++;
+            var newItem = new PassiveItem(aspect, nextId);
+            nextId++;
             for (int i = passives.Count - 1; i >= 0; i--)
             {
                 // 同じ Order の要素が存在するときその後ろに追加する。
@@ -236,7 +236,7 @@ namespace Roguegard
 
             Logger?.LogActiveAspect(item.Aspect, keyword, method, self, target, activationDepth, arg);
 
-            stack.Value.SetPeek(index, actives[index].ID);
+            stack.Value.SetPeek(index, actives[index].Id);
             var chain = new ActiveChain(this);
             var result = item.Aspect.ActiveInvoke(keyword, method, self, target, activationDepth, arg, chain);
 
@@ -248,7 +248,7 @@ namespace Roguegard
                 for (; index < actives.Count; index++)
                 {
                     var item = actives[index];
-                    if (item.ID == id)
+                    if (item.Id == id)
                     {
                         // ID が一致した場合は null でない要素まで探索する。
                         index++;
@@ -284,7 +284,7 @@ namespace Roguegard
 
             Logger?.LogPassiveAspect(item.Aspect, keyword, method, self, user, activationDepth, arg);
 
-            stack.Value.SetPeek(index, passives[index].ID);
+            stack.Value.SetPeek(index, passives[index].Id);
             var chain = new PassiveChain(this);
             var result = item.Aspect.PassiveInvoke(keyword, method, self, user, activationDepth, arg, chain);
 
@@ -296,7 +296,7 @@ namespace Roguegard
                 for (; index < passives.Count; index++)
                 {
                     var item = passives[index];
-                    if (item.ID == id)
+                    if (item.Id == id)
                     {
                         // ID が一致した場合は null でない要素まで探索する。
                         index++;
@@ -325,22 +325,22 @@ namespace Roguegard
         private struct ActiveItem
         {
             public IRogueMethodActiveAspect Aspect;
-            public readonly int ID;
+            public readonly int Id;
             public ActiveItem(IRogueMethodActiveAspect activeAspect, int id)
             {
                 Aspect = activeAspect;
-                ID = id;
+                Id = id;
             }
         }
 
         private struct PassiveItem
         {
             public IRogueMethodPassiveAspect Aspect;
-            public readonly int ID;
+            public readonly int Id;
             public PassiveItem(IRogueMethodPassiveAspect passiveAspect, int id)
             {
                 Aspect = passiveAspect;
-                ID = id;
+                Id = id;
             }
         }
 

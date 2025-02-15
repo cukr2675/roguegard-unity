@@ -53,8 +53,8 @@ namespace RoguegardUnity
             obj.GetName(nameBuilder);
             StandardRogueDeviceUtility.Localize(nameBuilder);
             textBuilder.AppendLine(nameBuilder.ToString());
-            hpTextBuilder.Append(mainStats.HP).Append(" / ").Append(StatsEffectedValues.GetMaxHP(obj)).AppendLine();
-            mpTextBuilder.Append(mainStats.MP).Append(" / ").Append(StatsEffectedValues.GetMaxMP(obj)).AppendLine();
+            hpTextBuilder.Append(mainStats.Hp).Append(" / ").Append(StatsEffectedValues.GetMaxHp(obj)).AppendLine();
+            mpTextBuilder.Append(mainStats.Mp).Append(" / ").Append(StatsEffectedValues.GetMaxMp(obj)).AppendLine();
 
             _text.SetText(textBuilder);
             _hpText.SetText(hpTextBuilder);

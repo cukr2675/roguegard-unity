@@ -29,7 +29,7 @@ namespace Roguegard
 
         void IValueEffect.AffectValue(IKeyword keyword, EffectableValue value, RogueObj self)
         {
-            if (keyword == StatsKw.DEF)
+            if (keyword == StatsKw.Def)
             {
                 // 防御力 -1 (IValueEffect.Order: -1 につき防御力 0 未満にはならない)
                 value.MainValue = Mathf.Min(value.MainValue + 2f, value.BaseMainValue);

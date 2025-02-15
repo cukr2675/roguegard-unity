@@ -40,7 +40,7 @@ namespace Roguegard.CharacterCreation
 
             public RogueObjUpdaterContinueType UpdateObj(RogueObj self, float activationDepth, ref int sectionIndex)
             {
-                if (self.Main.Stats.MP == 0)
+                if (self.Main.Stats.Mp == 0)
                 {
                     // 恐怖状態にする
                     this.Affect(self, activationDepth, FearStatusEffect.Callback);
@@ -53,7 +53,7 @@ namespace Roguegard.CharacterCreation
                 RogueMethodAspectState.ActiveChain chain)
             {
                 var result = chain.Invoke(keyword, method, self, target, activationDepth, arg);
-                if (keyword == MainInfoKw.Skill && self.Main.Stats.MP == 0)
+                if (keyword == MainInfoKw.Skill && self.Main.Stats.Mp == 0)
                 {
                     // 恐怖状態にする
                     this.Affect(self, activationDepth, FearStatusEffect.Callback);

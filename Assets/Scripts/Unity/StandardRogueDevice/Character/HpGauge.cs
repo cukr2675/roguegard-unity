@@ -7,7 +7,7 @@ using Roguegard;
 
 namespace RoguegardUnity
 {
-    public class HPGauge : MonoBehaviour
+    public class HpGauge : MonoBehaviour
     {
         [SerializeField] private CanvasGroup _canvasGroup = null;
         [SerializeField] private Image _gauge = null;
@@ -20,7 +20,7 @@ namespace RoguegardUnity
         [SerializeField] private Sprite _clearSprite = null;
 
         private int hp;
-        private int maxHP;
+        private int maxHp;
 
         public void SetVisible(bool visible)
         {
@@ -60,24 +60,24 @@ namespace RoguegardUnity
         public void Damage(int damage)
         {
             hp -= damage;
-            SetHP(hp, maxHP);
+            SetHp(hp, maxHp);
         }
 
-        public void SetHP(int hp, int maxHP)
+        public void SetHp(int hp, int maxHp)
         {
             hp = Mathf.Max(hp, 0);
-            maxHP = Mathf.Max(maxHP, 0);
+            maxHp = Mathf.Max(maxHp, 0);
 
             this.hp = hp;
-            this.maxHP = maxHP;
-            if (maxHP == 0f)
+            this.maxHp = maxHp;
+            if (maxHp == 0f)
             {
                 // ゼロ除算対策
                 _gauge.rectTransform.anchorMax = new Vector2(0f, 1f);
             }
             else
             {
-                _gauge.rectTransform.anchorMax = new Vector2((float)hp / maxHP, 1f);
+                _gauge.rectTransform.anchorMax = new Vector2((float)hp / maxHp, 1f);
             }
 
             if (hp < 10000)

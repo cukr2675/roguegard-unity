@@ -9,13 +9,13 @@ namespace Roguegard.Rgpacks
 {
     public class Rgpack
     {
-        public string ID { get; }
+        public string Id { get; }
 
         private readonly Dictionary<string, object> table;
 
         public Rgpack(string id, IReadOnlyDictionary<string, object> directory, IScriptEvaluator evaluator)
         {
-            ID = id;
+            Id = id;
             table = new Dictionary<string, object>();
             Add(directory, evaluator, "");
         }
@@ -24,13 +24,13 @@ namespace Roguegard.Rgpacks
         {
             foreach (var pair in directory)
             {
-                var assetID = directoryName + pair.Key;
-                var fullID = ID + "." + assetID;
+                var assetId = directoryName + pair.Key;
+                var fullId = Id + "." + assetId;
 
                 // キーにドット (.) が存在するとき、文字の長さが 1 である、または終端以外にドットが存在する場合は警告を表示して無視する
                 if (pair.Key.Contains('.') && (pair.Key.Length == 1 || pair.Key.IndexOf('.') != pair.Key.Length - 1))
                 {
-                    Debug.LogWarning($"不正な名前 ({fullID}) が存在します。");
+                    Debug.LogWarning($"不正な名前 ({fullId}) が存在します。");
                     continue;
                 }
 
@@ -39,7 +39,7 @@ namespace Roguegard.Rgpacks
                 {
                     if (pair.Value is IReadOnlyDictionary<string, object> subDirectory)
                     {
-                        Add(subDirectory, evaluator, assetID);
+                        Add(subDirectory, evaluator, assetId);
                     }
                     continue;
                 }
@@ -47,7 +47,7 @@ namespace Roguegard.Rgpacks
                 // 文字列はスクリプトとして評価する
                 if (pair.Value is string code)
                 {
-                    var evaluatedPairs = evaluator.Evaluate(code, ID);
+                    var evaluatedPairs = evaluator.Evaluate(code, Id);
                     foreach (var evaluatedPair in evaluatedPairs)
                     {
                         table.Add(evaluatedPair.Key, evaluatedPair.Value);
@@ -58,47 +58,47 @@ namespace Roguegard.Rgpacks
                 // その他はアセットに変換
                 if (pair.Value is CharacterCreationDataBuilder characterCreationDataBuilder)
                 {
-                    table.Add(assetID, new CharacterCreationPresetAsset(characterCreationDataBuilder));
+                    table.Add(assetId, new CharacterCreationPresetAsset(characterCreationDataBuilder));
                 }
                 if (pair.Value is RaceOptionalCreationData raceOptionalCreationData)
                 {
-                    table.Add(assetID, raceOptionalCreationData);
+                    table.Add(assetId, raceOptionalCreationData);
                 }
                 else if (pair.Value is KyarakuriClayInfo kyarakuriClayInfo)
                 {
-                    table.Add(assetID, new KyarakuriClayAsset(kyarakuriClayInfo, ID, fullID));
+                    table.Add(assetId, new KyarakuriClayAsset(kyarakuriClayInfo, Id, fullId));
                 }
                 else if (pair.Value is MysteryDioramaInfo mysteryDioramaInfo)
                 {
-                    table.Add(assetID, new MysteryDioramaAsset(mysteryDioramaInfo, ID, fullID));
+                    table.Add(assetId, new MysteryDioramaAsset(mysteryDioramaInfo, Id, fullId));
                 }
                 else if (pair.Value is MapDioramaFloorInfo mapDioramaFloorInfo)
                 {
-                    table.Add(assetID, new MapDioramaFloorAsset(mapDioramaFloorInfo, fullID));
+                    table.Add(assetId, new MapDioramaFloorAsset(mapDioramaFloorInfo, fullId));
                 }
                 else if (pair.Value is EffectStickerInfo effectStickerInfo)
                 {
-                    table.Add(assetID, new EffectStickerAsset(effectStickerInfo, ID, fullID));
+                    table.Add(assetId, new EffectStickerAsset(effectStickerInfo, Id, fullId));
                 }
                 else if (pair.Value is EvtFairyInfo evtFairyInfo)
                 {
-                    table.Add(assetID, new EvtFairyAsset(evtFairyInfo, ID, fullID));
+                    table.Add(assetId, new EvtFairyAsset(evtFairyInfo, Id, fullId));
                 }
                 else if (pair.Value is ChartPadInfo chartPadInfo)
                 {
-                    table.Add(assetID, new ChartPadAsset(chartPadInfo, ID, fullID));
+                    table.Add(assetId, new ChartPadAsset(chartPadInfo, Id, fullId));
                 }
                 else if (pair.Value is SewedEquipmentData sewedEquipmentData)
                 {
-                    table.Add(assetID, sewedEquipmentData);
+                    table.Add(assetId, sewedEquipmentData);
                 }
                 else if (pair.Value is ISpriteMotion spriteMotion)
                 {
-                    table.Add(assetID, spriteMotion);
+                    table.Add(assetId, spriteMotion);
                 }
                 else if (pair.Value is SpQuestMonolithInfo monolithInfo)
                 {
-                    table.Add(assetID, new SpQuestMonolithAsset(monolithInfo, ID));
+                    table.Add(assetId, new SpQuestMonolithAsset(monolithInfo, Id));
                 }
             }
         }

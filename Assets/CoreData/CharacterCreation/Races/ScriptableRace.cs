@@ -23,10 +23,10 @@ namespace Roguegard.CharacterCreation
         public IRogueGender Gender => _gender;
 
         [SerializeField] private string _hpName;
-        public string HPName => _hpName;
+        public string HpName => _hpName;
 
         [SerializeField] private string _mpName;
-        public string MPName => _mpName;
+        public string MpName => _mpName;
 
         [SerializeField] private MemberList _members;
 

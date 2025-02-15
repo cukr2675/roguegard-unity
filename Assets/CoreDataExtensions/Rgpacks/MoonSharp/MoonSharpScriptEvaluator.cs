@@ -9,7 +9,7 @@ namespace Roguegard.Rgpacks.MoonSharp
 {
     public class MoonSharpScriptEvaluator : ReferableScript, IScriptEvaluator
     {
-        public IEnumerable<KeyValuePair<string, object>> Evaluate(string code, string envRgpackID)
+        public IEnumerable<KeyValuePair<string, object>> Evaluate(string code, string envRgpackId)
         {
             var script = new MoonSharpRogueScript();
             //var module = Script.RunString(code);
@@ -21,7 +21,7 @@ namespace Roguegard.Rgpacks.MoonSharp
                 var value = pair.Value.Table;
                 if (value.MetaTable?.Get("__type").String == "Cmn")
                 {
-                    yield return new KeyValuePair<string, object>(pair.Key.String, new Cmn(pair.Value, envRgpackID));
+                    yield return new KeyValuePair<string, object>(pair.Key.String, new Cmn(pair.Value, envRgpackId));
                 }
             }
         }
@@ -30,17 +30,17 @@ namespace Roguegard.Rgpacks.MoonSharp
         {
             private readonly DynValue value;
             private readonly Table table;
-            private readonly string envRgpackID;
+            private readonly string envRgpackId;
 
             private static readonly List<DynValue> dynArguments = new();
 
             public IReadOnlyDictionary<string, ICmnPropertySource> PropertySources { get; }
 
-            public Cmn(DynValue value, string envRgpackID)
+            public Cmn(DynValue value, string envRgpackId)
             {
                 this.value = value;
                 table = value.Table;
-                this.envRgpackID = envRgpackID;
+                this.envRgpackId = envRgpackId;
 
                 var propertySources = new Dictionary<string, ICmnPropertySource>();
                 foreach (var pair in table.Pairs)
@@ -74,11 +74,11 @@ namespace Roguegard.Rgpacks.MoonSharp
                         }
                         else if (pair.Value is StartingItemCmnProperty startingItemCmnProperty)
                         {
-                            table.Set(pair.Key, UserData.Create(new StartingItemCmnPropertyUserData(startingItemCmnProperty, envRgpackID)));
+                            table.Set(pair.Key, UserData.Create(new StartingItemCmnPropertyUserData(startingItemCmnProperty, envRgpackId)));
                         }
                         else if (pair.Value is StartingItemTableCmnProperty startingItemTableCmnProperty)
                         {
-                            table.Set(pair.Key, UserData.Create(new StartingItemTableCmnPropertyUserData(startingItemTableCmnProperty, envRgpackID)));
+                            table.Set(pair.Key, UserData.Create(new StartingItemTableCmnPropertyUserData(startingItemTableCmnProperty, envRgpackId)));
                         }
                     }
                 }
@@ -99,7 +99,7 @@ namespace Roguegard.Rgpacks.MoonSharp
                 }
 
                 var oldRgpackId = function.OwnerScript.Globals.Get("__rgpack");
-                function.OwnerScript.Globals.Set("__rgpack", DynValue.NewString(envRgpackID));
+                function.OwnerScript.Globals.Set("__rgpack", DynValue.NewString(envRgpackId));
 
                 DynValue result;
                 try

@@ -246,15 +246,15 @@ namespace RoguegardUnity
             rightRBuilder.Append(levelInfo.NextTotalExps[stats.Lv] - stats.TotalExp).AppendLine();
 
             leftLBuilder.AppendLine("　HP：");
-            leftRBuilder.Append(stats.HP).Append(" / ").Append(StatsEffectedValues.GetMaxHP(obj)).AppendLine();
+            leftRBuilder.Append(stats.Hp).Append(" / ").Append(StatsEffectedValues.GetMaxHp(obj)).AppendLine();
             rightLBuilder.AppendLine("　MP：");
-            rightRBuilder.Append(stats.MP).Append(" / ").Append(StatsEffectedValues.GetMaxMP(obj)).AppendLine();
+            rightRBuilder.Append(stats.Mp).Append(" / ").Append(StatsEffectedValues.GetMaxMp(obj)).AppendLine();
 
-            var atk = GetATKText(obj);
+            var atk = GetAtkText(obj);
             leftLBuilder.AppendLine("攻撃：");
             leftRBuilder.AppendLine(atk);
             rightLBuilder.AppendLine("防御：");
-            rightRBuilder.Append(StatsEffectedValues.GetDEF(obj)).AppendLine();
+            rightRBuilder.Append(StatsEffectedValues.GetDef(obj)).AppendLine();
 
             var weight = WeightCalculator.Get(obj);
             leftLBuilder.AppendLine("重量：");
@@ -279,10 +279,10 @@ namespace RoguegardUnity
             else return "-";
         }
 
-        private static string GetATKText(RogueObj obj)
+        private static string GetAtkText(RogueObj obj)
         {
             using var atkValue = EffectableValue.Get();
-            StatsEffectedValues.GetATK(obj, atkValue);
+            StatsEffectedValues.GetAtk(obj, atkValue);
             if (atkValue.BaseMainValue == atkValue.MainValue)
             {
                 return atkValue.MainValue.ToString();
@@ -313,7 +313,7 @@ namespace RoguegardUnity
 
             void AppendSkill(ISkill skill, string name)
             {
-                var atk = skill.GetATK(obj, out var additionalEffect);
+                var atk = skill.GetAtk(obj, out var additionalEffect);
                 var additionalEffectText = additionalEffect ? "+α" : "";
                 leftLBuilder.AppendLine(name);
                 leftRBuilder.AppendLine();

@@ -33,7 +33,7 @@ namespace RoguegardUnity.Editor
                 _settings.TestLoad();
                 RogueRandom.Primary = new RogueRandom(0);
                 MessageWorkListener.ClearListeners();
-                StaticID.Next();
+                StaticId.Next();
             }
 
             pool = GetComponentInChildren<RogueSpriteRendererPool>();

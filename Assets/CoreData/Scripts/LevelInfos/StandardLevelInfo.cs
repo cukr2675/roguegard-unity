@@ -77,18 +77,18 @@ namespace Roguegard
             levelUpBonusScreen.message = "";
             if (self.Main.Stats.Lv % 2 == 0)
             {
-                self.Main.Stats.SetHP(self, self.Main.Stats.HP + 2, true);
+                self.Main.Stats.SetHp(self, self.Main.Stats.Hp + 2, true);
                 if (selfIsPlayerPartyMember)
                 {
-                    levelUpBonusScreen.message += $"{StatsKw.MaxHP.Name}が2上がった\n";
+                    levelUpBonusScreen.message += $"{StatsKw.MaxHp.Name}が2上がった\n";
                 }
             }
             else
             {
-                self.Main.Stats.SetMP(self, self.Main.Stats.MP + 2, true);
+                self.Main.Stats.SetMp(self, self.Main.Stats.Mp + 2, true);
                 if (selfIsPlayerPartyMember)
                 {
-                    levelUpBonusScreen.message += $"{StatsKw.MaxMP.Name}が2上がった\n";
+                    levelUpBonusScreen.message += $"{StatsKw.MaxMp.Name}が2上がった\n";
                 }
             }
 
@@ -96,7 +96,7 @@ namespace Roguegard
             {
                 if (selfIsPlayerPartyMember)
                 {
-                    levelUpBonusScreen.message += $"{StatsKw.ATK.Name}が1上がった\n";
+                    levelUpBonusScreen.message += $"{StatsKw.Atk.Name}が1上がった\n";
                 }
             }
         }
@@ -119,28 +119,28 @@ namespace Roguegard
             // 奇数Lvに下がった時HPを、偶数Lvに下がった時MPを下げる。
             if (self.Main.Stats.Lv % 2 == 1)
             {
-                self.Main.Stats.SetHP(self, self.Main.Stats.HP - 2);
-                if (self.Main.Stats.HP <= 0) { self.Main.Stats.SetHP(self, 1); } // レベルダウンによって倒れることはない
+                self.Main.Stats.SetHp(self, self.Main.Stats.Hp - 2);
+                if (self.Main.Stats.Hp <= 0) { self.Main.Stats.SetHp(self, 1); } // レベルダウンによって倒れることはない
             }
             else
             {
-                self.Main.Stats.SetMP(self, self.Main.Stats.MP - 2);
+                self.Main.Stats.SetMp(self, self.Main.Stats.Mp - 2);
             }
         }
 
         void IValueEffect.AffectValue(IKeyword keyword, EffectableValue value, RogueObj self)
         {
-            if (keyword == StatsKw.MaxHP)
+            if (keyword == StatsKw.MaxHp)
             {
                 var rank = Mathf.Max(self.Main.Stats.Lv - initialLv + 1, 0) / 2;
                 value.MainValue += rank * 2;
             }
-            else if (keyword == StatsKw.MaxMP)
+            else if (keyword == StatsKw.MaxMp)
             {
                 var rank = Mathf.Max(self.Main.Stats.Lv - initialLv, 0) / 2;
                 value.MainValue += rank * 2;
             }
-            else if (keyword == StatsKw.ATK)
+            else if (keyword == StatsKw.Atk)
             {
                 // 10Lv ごとに基礎攻撃力+1（2まで）
                 var rank = Mathf.Max(Mathf.Clamp(self.Main.Stats.Lv / 10, 0, 2) - Mathf.Clamp(initialLv / 10, 0, 2), 0);

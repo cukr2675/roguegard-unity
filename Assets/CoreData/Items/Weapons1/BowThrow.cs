@@ -7,7 +7,7 @@ using Roguegard.Extensions;
 namespace Roguegard
 {
     [Objforming.Formable]
-    public class BowThrow : MPSkill
+    public class BowThrow : MpSkill
     {
 		public override string Name => MainInfoKw.Throw.Name;
 
@@ -15,7 +15,7 @@ namespace Roguegard
 		public override IRogueMethodRange Range => DependsOnShotRogueMethodRange.Instance;
         public override Spanning<IKeyword> AmmoCategories => lazyAmmoCategories.Value;
         private static readonly System.Lazy<IKeyword[]> lazyAmmoCategories = new System.Lazy<IKeyword[]>(() => new IKeyword[] { AmmoKw.Arrow });
-        public override int RequiredMP => 0;
+        public override int RequiredMp => 0;
 
         protected override bool Activate(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
         {
@@ -32,7 +32,7 @@ namespace Roguegard
             }
         }
 
-        public override int GetATK(RogueObj self, out bool additionalEffect)
+        public override int GetAtk(RogueObj self, out bool additionalEffect)
         {
             additionalEffect = true;
             return 0;

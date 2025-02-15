@@ -6,7 +6,7 @@ using Roguegard.Extensions;
 
 namespace Roguegard.CharacterCreation
 {
-    public class ShieldJumpSkill : MPSkillIntrinsicOptionScript
+    public class ShieldJumpSkill : MpSkillIntrinsicOptionScript
     {
         public override ISortedIntrinsic CreateSortedIntrinsic(
             ScriptIntrinsicOption parent, IReadOnlyIntrinsic intrinsic, ICharacterCreationData characterCreationData, int lv)
@@ -15,11 +15,11 @@ namespace Roguegard.CharacterCreation
         }
 
         [Objforming.Formable]
-        private class SortedIntrinsic : MPSkillSortedIntrinsic<SortedIntrinsic>
+        private class SortedIntrinsic : MpSkillSortedIntrinsic<SortedIntrinsic>
         {
             public override IRogueMethodTarget Target => ForPartyMemberRogueMethodTarget.Instance;
             public override IRogueMethodRange Range => UserRogueMethodRange.Instance;
-            public override int RequiredMP => 1;
+            public override int RequiredMp => 1;
 
             private SortedIntrinsic() : base(null, 0) { }
 
@@ -38,7 +38,7 @@ namespace Roguegard.CharacterCreation
                 return true;
             }
 
-            public override int GetATK(RogueObj self, out bool additionalEffect)
+            public override int GetAtk(RogueObj self, out bool additionalEffect)
             {
                 additionalEffect = true;
                 return 0;
@@ -61,7 +61,7 @@ namespace Roguegard.CharacterCreation
 
             void IValueEffect.AffectValue(IKeyword keyword, EffectableValue value, RogueObj self)
             {
-                if (keyword == StatsKw.DEF)
+                if (keyword == StatsKw.Def)
                 {
                     // 防御力 +1
                     value.MainValue -= 1f;
@@ -102,7 +102,7 @@ namespace Roguegard.CharacterCreation
                     {
                         // 正面2マス先に誰かいるときそれに攻撃力(x2)+2ダメージ
                         using var damage = EffectableValue.Get();
-                        StatsEffectedValues.GetATK(self, damage);
+                        StatsEffectedValues.GetAtk(self, damage);
                         damage.MainValue += damage.BaseMainValue + 2;
                         default(IAffectRogueMethodCaller).Hurt(targetObj, self, 1f, damage);
                         jumpBack = true;

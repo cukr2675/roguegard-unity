@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Roguegard
 {
-    public abstract class MPSkill : ReferableScript, ISkill
+    public abstract class MpSkill : ReferableScript, ISkill
     {
         public abstract string Name { get; }
         public virtual Sprite Icon => null;
@@ -14,16 +14,16 @@ namespace Roguegard
 
         public abstract IRogueMethodTarget Target { get; }
         public abstract IRogueMethodRange Range { get; }
-        public abstract int RequiredMP { get; }
+        public abstract int RequiredMp { get; }
         public virtual Spanning<IKeyword> AmmoCategories => Spanning<IKeyword>.Empty;
 
         public bool Invoke(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
         {
-            int requiredMP;
-            if (RequiredMP >= 1)
+            int requiredMp;
+            if (RequiredMp >= 1)
             {
-                requiredMP = StatsEffectedValues.GetRequiredMP(self, RequiredMP);
-                if (self.Main.Stats.MP < requiredMP)
+                requiredMp = StatsEffectedValues.GetRequiredMp(self, RequiredMp);
+                if (self.Main.Stats.Mp < requiredMp)
                 {
                     if (RogueDevice.Primary.Player == self)
                     {
@@ -34,25 +34,25 @@ namespace Roguegard
             }
             else
             {
-                requiredMP = 0;
+                requiredMp = 0;
             }
 
             // スキルによって MP を回復することを考慮して、あらかじめ消費しておく
             var stats = self.Main.Stats;
-            var beforeMP = stats.MP;
-            stats.SetMP(self, stats.MP - requiredMP);
+            var beforeMp = stats.Mp;
+            stats.SetMp(self, stats.Mp - requiredMp);
 
             var result = Activate(self, user, activationDepth, arg);
             if (!result)
             {
                 // 失敗したら MP を元に戻す
-                stats.SetMP(self, beforeMP, true);
+                stats.SetMp(self, beforeMp, true);
             }
             return result;
         }
         protected abstract bool Activate(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg);
 
-        public virtual int GetATK(RogueObj self, out bool additionalEffect)
+        public virtual int GetAtk(RogueObj self, out bool additionalEffect)
         {
             additionalEffect = false;
             return 0;
@@ -65,7 +65,7 @@ namespace Roguegard
 
         public override bool Equals(object obj)
         {
-            return obj is MPSkill other && Equals(other);
+            return obj is MpSkill other && Equals(other);
         }
 
         public override int GetHashCode()

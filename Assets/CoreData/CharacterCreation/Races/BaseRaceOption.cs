@@ -24,10 +24,10 @@ namespace Roguegard.CharacterCreation
 
         public override IKeyword Category => _main.Category;
 
-        public override int MaxHP => _main.MaxHP;
-        public override int MaxMP => _main.MaxMP;
-        public override int ATK => _main.ATK;
-        public override int DEF => _main.DEF;
+        public override int MaxHp => _main.MaxHp;
+        public override int MaxMp => _main.MaxMp;
+        public override int Atk => _main.Atk;
+        public override int Def => _main.Def;
         public override float LoadCapacity => _main.LoadCapacity;
         public override ISerializableKeyword Faction => _main.Faction;
         public override Spanning<ISerializableKeyword> TargetFactions => _main.TargetFactions;

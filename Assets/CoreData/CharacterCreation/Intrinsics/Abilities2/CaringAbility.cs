@@ -29,7 +29,7 @@ namespace Roguegard.CharacterCreation
 
             void IValueEffect.AffectValue(IKeyword keyword, EffectableValue value, RogueObj self)
             {
-                if (keyword == StatsKw.DEF)
+                if (keyword == StatsKw.Def)
                 {
                     // ガード率-10%
                     value.SubValues[StatsKw.GuardRate] -= 0.1f;
@@ -44,7 +44,7 @@ namespace Roguegard.CharacterCreation
 
             void IValueEffect.AffectValue(IKeyword keyword, EffectableValue value, RogueObj self)
             {
-                if (keyword == StatsKw.DEF && value.SubValues[StatsKw.GuardRate] > 0f)
+                if (keyword == StatsKw.Def && value.SubValues[StatsKw.GuardRate] > 0f)
                 {
                     // ガードしうるとき10%でガード
                     value.SubValues[StatsKw.GuardRate] = AttackUtility.Cup(value.SubValues[StatsKw.GuardRate], 0.1f);

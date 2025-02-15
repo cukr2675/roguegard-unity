@@ -9,10 +9,10 @@ namespace Roguegard.Rgpacks
     {
         public string Name { get; set; }
 
-        public int MaxHP { get; set; }
-        public int MaxMP { get; set; }
-        public int ATK { get; set; }
-        public int DEF { get; set; }
+        public int MaxHp { get; set; }
+        public int MaxMp { get; set; }
+        public int Atk { get; set; }
+        public int Def { get; set; }
         public float LoadCapacity { get; set; }
 
         public PropertiedCmnData Walk { get; set; }

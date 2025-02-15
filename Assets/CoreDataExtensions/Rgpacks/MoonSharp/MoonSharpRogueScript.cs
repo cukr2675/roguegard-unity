@@ -12,7 +12,7 @@ namespace Roguegard.Rgpacks.MoonSharp
     {
         private Script script;
         private bool initial;
-        private StaticID staticID;
+        private StaticId staticId;
 
         private readonly string[] sources;
 
@@ -37,7 +37,7 @@ namespace Roguegard.Rgpacks.MoonSharp
 
         internal DynValue DoString(string code, RogueObj caster = null)
         {
-            if (!staticID.IsValid)
+            if (!staticId.IsValid)
             {
                 script = new Script();
                 script.Options.DebugPrint = x => Debug.Log(x);
@@ -49,7 +49,7 @@ namespace Roguegard.Rgpacks.MoonSharp
                 //}
                 //script.Globals.Set("__loaded", UserData.Create(new AnonWrapper<List<NotepadQuote>>(new List<NotepadQuote>())));
                 initial = true;
-                staticID = StaticID.Current;
+                staticId = StaticId.Current;
             }
 
             var oldCaster = script.Globals.Get("__caster");

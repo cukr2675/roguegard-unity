@@ -16,7 +16,7 @@ namespace Roguegard
 
         public IRogueMethodTarget Target => null;
         public IRogueMethodRange Range => null;
-        public int RequiredMP => 0;
+        public int RequiredMp => 0;
         public Spanning<IKeyword> AmmoCategories => Spanning<IKeyword>.Empty;
         public Spanning<IKeyword> Edibles => Spanning<IKeyword>.Empty;
 
@@ -26,7 +26,7 @@ namespace Roguegard
             return true;
         }
 
-        public int GetATK(RogueObj self, out bool additionalEffect)
+        public int GetAtk(RogueObj self, out bool additionalEffect)
         {
             additionalEffect = false;
             return 0;

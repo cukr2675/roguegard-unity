@@ -53,7 +53,7 @@ namespace Roguegard
                 // 行動不可
                 value.SubValues[StatsKw.BeInhibited] = 1f;
             }
-            else if (keyword == StatsKw.DEF)
+            else if (keyword == StatsKw.Def)
             {
                 // 防御力 -2 (IValueEffect.Order: -1 につき防御力 0 未満にはならない)
                 value.MainValue = Mathf.Min(value.MainValue + 2f, value.BaseMainValue);

@@ -19,7 +19,7 @@ namespace RoguegardUnity
         private void Start()
         {
             // Roguegard 全体の初期化処理
-            StaticID.Next();
+            StaticId.Next();
             Application.targetFrameRate = 60;
             ObjformingLogger.Primary = new RoguegardObjformingLogger();
             //RogueMethodAspectState.Logger = new CoreRogueMethodAspectLogger();

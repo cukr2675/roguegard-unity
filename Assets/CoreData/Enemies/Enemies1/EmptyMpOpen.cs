@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Roguegard.CharacterCreation
 {
-    public class EmptyMPOpen : ReferableScript, IOpenEffect
+    public class EmptyMpOpen : ReferableScript, IOpenEffect
     {
         public IRaceOption Open(
             RogueObj self, MainInfoSetType infoSetType, bool polymorph2Base, IRaceOption raceOption, ICharacterCreationData characterCreationData)
@@ -25,7 +25,7 @@ namespace Roguegard.CharacterCreation
 
         public void InitializeObj(RogueObj self, IRaceOption raceOption, ICharacterCreationData characterCreationData)
         {
-            self.Main.Stats.SetMP(self, 0);
+            self.Main.Stats.SetMp(self, 0);
         }
     }
 }

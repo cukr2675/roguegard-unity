@@ -7,9 +7,9 @@ namespace Roguegard.CharacterCreation
     /// <summary>
     /// <see cref="EquipmentCreationData"/> の攻撃力と防御力を参照して、装備者にバフをかける。
     /// </summary>
-    public class ATKDEFEquipped : ReferableScript, IEquippedEffectSource
+    public class AtkDefEquipped : ReferableScript, IEquippedEffectSource
     {
-        private ATKDEFEquipped() { }
+        private AtkDefEquipped() { }
 
         IEquippedEffect IEquippedEffectSource.CreateOrReuse(RogueObj equipment, IEquippedEffect effect)
         {
@@ -25,13 +25,13 @@ namespace Roguegard.CharacterCreation
 
             void IValueEffect.AffectValue(IKeyword keyword, EffectableValue value, RogueObj self)
             {
-                if (keyword == StatsKw.ATK)
+                if (keyword == StatsKw.Atk)
                 {
-                    value.MainValue += equipment.Main.InfoSet.ATK;
+                    value.MainValue += equipment.Main.InfoSet.Atk;
                 }
-                if (keyword == StatsKw.DEF)
+                if (keyword == StatsKw.Def)
                 {
-                    value.MainValue -= equipment.Main.InfoSet.DEF;
+                    value.MainValue -= equipment.Main.InfoSet.Def;
                 }
             }
         }

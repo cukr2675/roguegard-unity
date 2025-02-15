@@ -8,7 +8,7 @@ namespace Roguegard.Rgpacks
     {
         private static readonly Dictionary<string, Rgpack> loadedRgpackTable = new();
 
-        public static string GetRgpackID(string id, string envRgpackID)
+        public static string GetRgpackId(string id, string envRgpackId)
         {
             if (id == null)
             {
@@ -16,9 +16,9 @@ namespace Roguegard.Rgpacks
             }
             else if (id.StartsWith('.'))
             {
-                if (string.IsNullOrWhiteSpace(envRgpackID)) throw new RogueException(
-                    $"ドットで始まるID ({id}) の読み込み時、環境 RgpackID が指定されませんでした。");
-                return envRgpackID;
+                if (string.IsNullOrWhiteSpace(envRgpackId)) throw new RogueException(
+                    $"ドットで始まるID ({id}) の読み込み時、環境 RgpackId が指定されませんでした。");
+                return envRgpackId;
             }
             else
             {
@@ -26,42 +26,42 @@ namespace Roguegard.Rgpacks
             }
         }
 
-        public static string GetAssetID(string id)
+        public static string GetAssetId(string id)
         {
             if (id == null) return "";
             return id.Substring(id.IndexOf('.') + 1);
         }
 
-        public static bool TryGetRgpack(string rgpackID, out Rgpack rgpack)
+        public static bool TryGetRgpack(string rgpackId, out Rgpack rgpack)
         {
-            return loadedRgpackTable.TryGetValue(rgpackID, out rgpack);
+            return loadedRgpackTable.TryGetValue(rgpackId, out rgpack);
         }
 
-        public static IEnumerable<T> GetSubAssets<T>(string id, string envRgpackID)
+        public static IEnumerable<T> GetSubAssets<T>(string id, string envRgpackId)
         {
-            var rgpackID = GetRgpackID(id, envRgpackID);
-            if (!TryGetRgpack(rgpackID, out var rgpack)) throw new RogueException(
-                 $"Rgpack ({rgpackID}) が見つかりません。");
+            var rgpackId = GetRgpackId(id, envRgpackId);
+            if (!TryGetRgpack(rgpackId, out var rgpack)) throw new RogueException(
+                 $"Rgpack ({rgpackId}) が見つかりません。");
 
-            var assetID = GetAssetID(id);
-            return rgpack.GetSubAssets<T>(assetID);
+            var assetId = GetAssetId(id);
+            return rgpack.GetSubAssets<T>(assetId);
         }
 
         public static void LoadRgpack(Rgpack rgpack)
         {
-            loadedRgpackTable[rgpack.ID] = rgpack;
+            loadedRgpackTable[rgpack.Id] = rgpack;
         }
     }
 
     public abstract class RgpackReference<T>
     {
-        public string FullID { get; }
+        public string FullId { get; }
 
-        [System.NonSerialized] private string _rgpackID;
-        public string RgpackID => _rgpackID ??= FullID is null ? "" : FullID.Substring(0, FullID.IndexOf('.'));
+        [System.NonSerialized] private string _rgpackId;
+        public string RgpackId => _rgpackId ??= FullId is null ? "" : FullId.Substring(0, FullId.IndexOf('.'));
 
-        [System.NonSerialized] private string _assetID;
-        public string AssetID => _assetID ??= FullID is null ? "" : FullID.Substring(FullID.IndexOf('.') + 1);
+        [System.NonSerialized] private string _assetId;
+        public string AssetId => _assetId ??= FullId is null ? "" : FullId.Substring(FullId.IndexOf('.') + 1);
 
         [System.NonSerialized] private T _asset;
         protected T Asset => _asset ??= GetAsset();
@@ -70,34 +70,34 @@ namespace Roguegard.Rgpacks
         {
             get
             {
-                if (!RgpackReference.TryGetRgpack(RgpackID, out var rgpack)) return false;
-                if (!rgpack.TryGetAsset<T>(AssetID, out var asset)) return false;
+                if (!RgpackReference.TryGetRgpack(RgpackId, out var rgpack)) return false;
+                if (!rgpack.TryGetAsset<T>(AssetId, out var asset)) return false;
                 return true;
             }
         }
 
         protected RgpackReference() { }
 
-        protected RgpackReference(string id, string envRgpackID)
+        protected RgpackReference(string id, string envRgpackId)
         {
             if (string.IsNullOrWhiteSpace(id)) return;
 
             if (id.StartsWith("."))
             {
-                FullID = envRgpackID + id;
+                FullId = envRgpackId + id;
             }
             else
             {
-                FullID = id;
+                FullId = id;
             }
         }
 
         private T GetAsset()
         {
-            if (!RgpackReference.TryGetRgpack(RgpackID, out var rgpack)) throw new RogueException(
-                $"Rgpack ({RgpackID}) が見つかりません。");
-            if (!rgpack.TryGetAsset<T>(AssetID, out var asset)) throw new RogueException(
-                $"Rgpack ({RgpackID}) に ID ({AssetID}) のデータが見つかりません。");
+            if (!RgpackReference.TryGetRgpack(RgpackId, out var rgpack)) throw new RogueException(
+                $"Rgpack ({RgpackId}) が見つかりません。");
+            if (!rgpack.TryGetAsset<T>(AssetId, out var asset)) throw new RogueException(
+                $"Rgpack ({RgpackId}) に ID ({AssetId}) のデータが見つかりません。");
 
             return asset;
         }

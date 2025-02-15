@@ -29,7 +29,7 @@ namespace Roguegard.Rgpacks
         //{
         //    private static readonly List<object> elms = new List<object>()
         //    {
-        //        new AssetID(),
+        //        new AssetId(),
         //        new RaceWeight()
         //    };
 
@@ -51,7 +51,7 @@ namespace Roguegard.Rgpacks
         //        SelectOptionPresenter.Instance.ActivateItem(element, manager, self, user, arg);
         //    }
 
-        //    private class AssetID : IOptionsMenuText
+        //    private class AssetId : IOptionsMenuText
         //    {
         //        public TMP_InputField.ContentType ContentType => TMP_InputField.ContentType.Standard;
 

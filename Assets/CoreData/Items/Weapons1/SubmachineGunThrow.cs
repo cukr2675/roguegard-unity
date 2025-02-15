@@ -7,7 +7,7 @@ using Roguegard.Extensions;
 namespace Roguegard
 {
     [Objforming.Formable]
-    public class SubmachineGunThrow : MPSkill
+    public class SubmachineGunThrow : MpSkill
     {
         public override string Name => MainInfoKw.Throw.Name;
 
@@ -15,7 +15,7 @@ namespace Roguegard
         public override IRogueMethodRange Range => DependsOnShotRogueMethodRange.Instance;
         public override Spanning<IKeyword> AmmoCategories => lazyAmmoCategories.Value;
         private static readonly System.Lazy<IKeyword[]> lazyAmmoCategories = new System.Lazy<IKeyword[]>(() => new IKeyword[] { AmmoKw.Bullet });
-        public override int RequiredMP => 0;
+        public override int RequiredMp => 0;
 
         protected override bool Activate(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
         {
@@ -24,7 +24,7 @@ namespace Roguegard
             // (基礎攻撃力x2) 回射撃する。
             int count;
             using var atkValue = EffectableValue.Get();
-            StatsEffectedValues.GetATK(user, atkValue);
+            StatsEffectedValues.GetAtk(user, atkValue);
             count = Mathf.FloorToInt(atkValue.BaseMainValue) * 2;
             count = Mathf.Max(count, 1);
 
@@ -46,7 +46,7 @@ namespace Roguegard
             return true;
         }
 
-        public override int GetATK(RogueObj self, out bool additionalEffect)
+        public override int GetAtk(RogueObj self, out bool additionalEffect)
         {
             var ammo = EquipmentUtility.GetAmmo(self, out _);
             throw new System.NotImplementedException();

@@ -12,20 +12,20 @@ namespace Roguegard.Rgpacks
 
         public bool TryGet<T>(out T value)
         {
-            //var envRgpackID = executionContext.OwnerScript.DoString("return __rgpack").String;
-            var envRgpackID = "Playtest";
-            var rgpackID = RgpackReference.GetRgpackID(Id, envRgpackID);
-            var assetID = RgpackReference.GetAssetID(Id);
+            //var envRgpackId = executionContext.OwnerScript.DoString("return __rgpack").String;
+            var envRgpackId = "Playtest";
+            var rgpackId = RgpackReference.GetRgpackId(Id, envRgpackId);
+            var assetId = RgpackReference.GetAssetId(Id);
 
-            if (!RgpackReference.TryGetRgpack(rgpackID, out var rgpack))
+            if (!RgpackReference.TryGetRgpack(rgpackId, out var rgpack))
             {
-                //Debug.LogError($"Rgpack ({rgpackID}) が見つかりません。");
+                //Debug.LogError($"Rgpack ({rgpackId}) が見つかりません。");
                 value = default;
                 return false;
             }
-            if (!rgpack.TryGetAsset<T>(assetID, out var spriteMotion))
+            if (!rgpack.TryGetAsset<T>(assetId, out var spriteMotion))
             {
-                //Debug.LogError($"Rgpack ({rgpackID}) に ID ({assetID}) のデータが見つかりません。");
+                //Debug.LogError($"Rgpack ({rgpackId}) に ID ({assetId}) のデータが見つかりません。");
                 value = default;
                 return false;
             }

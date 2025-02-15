@@ -45,8 +45,8 @@ namespace RoguegardUnity
                     {
                         var obj = arg.Arg.TargetObj ?? arg.Self;
 
-                        var requiredMP = StatsEffectedValues.GetRequiredMP(obj, skill.RequiredMP);
-                        return (skill, null, $"{requiredMP} MP");
+                        var requiredMp = StatsEffectedValues.GetRequiredMp(obj, skill.RequiredMp);
+                        return (skill, null, $"{requiredMp} MP");
                     })
 
                     .OnClick((skill, manager, arg) =>

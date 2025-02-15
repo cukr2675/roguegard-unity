@@ -8,14 +8,14 @@ namespace Roguegard.Rgpacks
 {
     public class MapDioramaFloorAsset : IDioramaFloorAsset
     {
-        private readonly string fullID;
+        private readonly string fullId;
         private readonly RogueTilemap tilemap;
 
         private EvtFairyAsset[] evts;
 
-        public MapDioramaFloorAsset(MapDioramaFloorInfo info, string fullID)
+        public MapDioramaFloorAsset(MapDioramaFloorInfo info, string fullId)
         {
-            this.fullID = fullID;
+            this.fullId = fullId;
             tilemap = new RogueTilemap(info.Tilemap);
         }
 
@@ -23,7 +23,7 @@ namespace Roguegard.Rgpacks
         {
             if (evts == null)
             {
-                evts = RgpackReference.GetSubAssets<EvtFairyAsset>(fullID, "").ToArray();
+                evts = RgpackReference.GetSubAssets<EvtFairyAsset>(fullId, "").ToArray();
             }
 
             var tilemap = new RogueTilemap(this.tilemap);

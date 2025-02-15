@@ -22,10 +22,10 @@ namespace Roguegard.CharacterCreation
 
         IKeyword Category { get; }
 
-        int MaxHP { get; }
-        int MaxMP { get; }
-        int ATK { get; }
-        int DEF { get; }
+        int MaxHp { get; }
+        int MaxMp { get; }
+        int Atk { get; }
+        int Def { get; }
         float LoadCapacity { get; }
         ISerializableKeyword Faction { get; }
         Spanning<ISerializableKeyword> TargetFactions { get; }

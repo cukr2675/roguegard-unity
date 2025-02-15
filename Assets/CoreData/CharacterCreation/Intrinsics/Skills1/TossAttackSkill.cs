@@ -5,12 +5,12 @@ using UnityEngine;
 namespace Roguegard
 {
     [Objforming.Formable]
-    public class TossAttackSkill : MPSkill
+    public class TossAttackSkill : MpSkill
     {
         public override string Name => "ぶん投げる";
         public override IRogueMethodTarget Target => ForEnemyRogueMethodTarget.Instance;
         public override IRogueMethodRange Range => LineOfSight10RogueMethodRange.Instance;
-        public override int RequiredMP => 2;
+        public override int RequiredMp => 2;
 
         protected override bool Activate(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
         {
@@ -37,18 +37,18 @@ namespace Roguegard
 
             // 攻撃力+2ダメージの攻撃
             using var damageValue = EffectableValue.Get();
-            StatsEffectedValues.GetATK(self, damageValue);
+            StatsEffectedValues.GetAtk(self, damageValue);
             damageValue.MainValue += 2;
             //this.TryHurt(target, self, activationDepth, damageValue);
             //this.TryDefeat(target, self, activationDepth, damageValue);
             return true;
         }
 
-        public override int GetATK(RogueObj self, out bool additionalEffect)
+        public override int GetAtk(RogueObj self, out bool additionalEffect)
         {
             // 攻撃力+2ダメージの攻撃
             using var damageValue = EffectableValue.Get();
-            StatsEffectedValues.GetATK(self, damageValue);
+            StatsEffectedValues.GetAtk(self, damageValue);
             damageValue.MainValue += 2;
             var hpDamage = Mathf.FloorToInt(damageValue.MainValue);
             additionalEffect = false;

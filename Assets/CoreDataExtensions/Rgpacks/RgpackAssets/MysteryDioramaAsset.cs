@@ -12,17 +12,17 @@ namespace Roguegard.Rgpacks
 
         private IDioramaFloorAsset[] floors;
 
-        public MysteryDioramaAsset(MysteryDioramaInfo info, string envRgpackID, string fullID)
+        public MysteryDioramaAsset(MysteryDioramaInfo info, string envRgpackId, string fullId)
         {
             var point = new EvtFairyAsset.Page();
-            infoSet = new EvtFairyReference(fullID, envRgpackID, point);
+            infoSet = new EvtFairyReference(fullId, envRgpackId, point);
         }
 
         public RogueObj StartDungeon(RogueObj player, IRogueRandom random)
         {
             if (floors == null)
             {
-                floors = RgpackReference.GetSubAssets<IDioramaFloorAsset>(infoSet.FullID, infoSet.RgpackID).ToArray();
+                floors = RgpackReference.GetSubAssets<IDioramaFloorAsset>(infoSet.FullId, infoSet.RgpackId).ToArray();
             }
 
             var world = RogueWorldInfo.GetWorld(player);

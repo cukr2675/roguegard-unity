@@ -16,10 +16,10 @@ namespace Roguegard.Rgpacks
         private RogueObjSpriteReference _sprite;
         float IBoneSpriteEffect.Order => 0f;
 
-        public EffectStickerAsset(EffectStickerInfo info, string envRgpackID, string fullID)
+        public EffectStickerAsset(EffectStickerInfo info, string envRgpackId, string fullId)
         {
-            _update = info.Update.ToReference(envRgpackID);
-            _sprite = new RogueObjSpriteReference(info.Sprite, envRgpackID);
+            _update = info.Update.ToReference(envRgpackId);
+            _sprite = new RogueObjSpriteReference(info.Sprite, envRgpackId);
         }
 
         public void Open(RogueObj self)

@@ -26,7 +26,7 @@ namespace RoguegardUnity
         public void RecursiveCloneAndLocateSelf()
         {
             _settings.TestLoad();
-            StaticID.Next();
+            StaticId.Next();
 
             RogueDevice.NewGame(new Save() { data = _locateSelfTester });
 
@@ -38,7 +38,7 @@ namespace RoguegardUnity
         public void RecursiveCloneAndLocateLocation()
         {
             _settings.TestLoad();
-            StaticID.Next();
+            StaticId.Next();
 
             RogueDevice.NewGame(new Save() { data = _locateLocationTester });
 

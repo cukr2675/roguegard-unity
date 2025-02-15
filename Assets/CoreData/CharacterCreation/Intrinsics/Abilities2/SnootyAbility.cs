@@ -35,7 +35,7 @@ namespace Roguegard.CharacterCreation
 
             void IValueEffect.AffectValue(IKeyword keyword, EffectableValue value, RogueObj self)
             {
-                if (keyword == StatsKw.ATK && buffIsEnabled && value.SubValues[StatsKw.CriticalRate] > 0f)
+                if (keyword == StatsKw.Atk && buffIsEnabled && value.SubValues[StatsKw.CriticalRate] > 0f)
                 {
                     // 会心ダメージが発生しうるとき会心率+5%
                     value.SubValues[StatsKw.CriticalRate] += 0.05f;

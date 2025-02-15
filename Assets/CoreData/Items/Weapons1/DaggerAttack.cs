@@ -7,7 +7,7 @@ using Roguegard.Extensions;
 namespace Roguegard
 {
     [Objforming.Formable]
-    public class DaggerAttack : MPSkill
+    public class DaggerAttack : MpSkill
     {
         [SerializeField] private int _addDamage = 0;
 
@@ -15,7 +15,7 @@ namespace Roguegard
 
         public override IRogueMethodTarget Target => ForEnemyRogueMethodTarget.Instance;
         public override IRogueMethodRange Range => FrontRogueMethodRange.Instance;
-        public override int RequiredMP => 0;
+        public override int RequiredMp => 0;
 
         protected override bool Activate(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
         {
@@ -24,7 +24,7 @@ namespace Roguegard
             // 攻撃力ダメージの2回攻撃
             using var damageValue = EffectableValue.Get();
             MainCharacterWorkUtility.TryAddAttack(self);
-            StatsEffectedValues.GetATK(user, damageValue);
+            StatsEffectedValues.GetAtk(user, damageValue);
             damageValue.MainValue += _addDamage;
             this.TryHurt(target, user, activationDepth, damageValue);
 
@@ -32,7 +32,7 @@ namespace Roguegard
             {
                 var target2 = AttackUtility.GetTargetForward(FrontRogueMethodRange.Instance, self);
                 MainCharacterWorkUtility.TryAddAttack(self);
-                StatsEffectedValues.GetATK(user, damageValue);
+                StatsEffectedValues.GetAtk(user, damageValue);
                 damageValue.MainValue += _addDamage;
                 this.TryHurt(target2, user, activationDepth, damageValue);
                 this.TryDefeat(target2, self, activationDepth, damageValue);
@@ -41,11 +41,11 @@ namespace Roguegard
             return true;
         }
 
-        public override int GetATK(RogueObj self, out bool additionalEffect)
+        public override int GetAtk(RogueObj self, out bool additionalEffect)
         {
             // 攻撃力ダメージの2回攻撃
             using var damageValue = EffectableValue.Get();
-            StatsEffectedValues.GetATK(self, damageValue);
+            StatsEffectedValues.GetAtk(self, damageValue);
             var hpDamage = Mathf.FloorToInt(damageValue.MainValue) + _addDamage;
             additionalEffect = false;
             return hpDamage * 2;

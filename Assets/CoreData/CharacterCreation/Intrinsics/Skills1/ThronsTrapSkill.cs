@@ -6,7 +6,7 @@ using Roguegard.Extensions;
 
 namespace Roguegard.CharacterCreation
 {
-    public class ThronsTrapSkill : MPSkillIntrinsicOptionScript
+    public class ThronsTrapSkill : MpSkillIntrinsicOptionScript
     {
         public override ISortedIntrinsic CreateSortedIntrinsic(
             ScriptIntrinsicOption parent, IReadOnlyIntrinsic intrinsic, ICharacterCreationData characterCreationData, int lv)
@@ -15,11 +15,11 @@ namespace Roguegard.CharacterCreation
         }
 
         [Objforming.Formable]
-        private class SortedIntrinsic : MPSkillSortedIntrinsic<SortedIntrinsic>
+        private class SortedIntrinsic : MpSkillSortedIntrinsic<SortedIntrinsic>
         {
             public override IRogueMethodTarget Target => ForEnemyRogueMethodTarget.Instance;
             public override IRogueMethodRange Range => FacingAnd2FlankingRogueMethodRange.Instance;
-            public override int RequiredMP => 3;
+            public override int RequiredMp => 3;
 
             private SortedIntrinsic() : base(null, 0) { }
 
@@ -61,7 +61,7 @@ namespace Roguegard.CharacterCreation
                 }
             }
 
-            public override int GetATK(RogueObj self, out bool additionalEffect)
+            public override int GetAtk(RogueObj self, out bool additionalEffect)
             {
                 additionalEffect = true;
                 return 0;

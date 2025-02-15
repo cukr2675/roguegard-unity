@@ -36,10 +36,10 @@ namespace Roguegard
             IKeyword keyword, ISkill skill, RogueObj self, RogueObj user, float activationDepth,
             RogueObj tool, float visibleRadius, RectInt room, IRogueRandom random, bool enqueueMessageRule = false)
         {
-            if (skill.RequiredMP >= 1)
+            if (skill.RequiredMp >= 1)
             {
-                var requiredMP = StatsEffectedValues.GetRequiredMP(self, skill.RequiredMP);
-                if (self.Main.Stats.MP < requiredMP) return false;
+                var requiredMp = StatsEffectedValues.GetRequiredMp(self, skill.RequiredMp);
+                if (self.Main.Stats.Mp < requiredMp) return false;
             }
 
             using var predicator = skill.Target?.GetPredicator(self, 0f, tool);

@@ -40,9 +40,9 @@ namespace Objforming.Serialization.TextJson
             if (values.Count == 0) return;
 
             // 最初のメンバーが登録済みであれば、すべて登録されていると判断して何もしない
-            var firstID = values.First().Value.First().Key;
+            var firstId = values.First().Value.First().Key;
             var referenceResolver = options.ReferenceHandler.CreateResolver();
-            if (referenceResolver.ResolveReference(firstID) != null) return;
+            if (referenceResolver.ResolveReference(firstId) != null) return;
 
             foreach (var table in values.Values)
             {

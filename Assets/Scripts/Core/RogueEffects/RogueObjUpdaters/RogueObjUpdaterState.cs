@@ -80,7 +80,7 @@ namespace Roguegard
                 {
                     throw new RogueException(
                         $"{nameof(IndexManager)} の状態が不正です。 " +
-                        $"{nameof(IRogueObjUpdater)} の実行中に {nameof(StaticID.Next)} が呼び出された可能性があります。");
+                        $"{nameof(IRogueObjUpdater)} の実行中に {nameof(StaticId.Next)} が呼び出された可能性があります。");
                 }
                 else if (continueType == RogueObjUpdaterContinueType.Continue)
                 {

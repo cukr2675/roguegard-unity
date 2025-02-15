@@ -26,10 +26,10 @@ namespace ListingMF
         public float CharacterPerSecond { get => _characterPerSecond; set => _characterPerSecond = value; }
 
         [Tooltip("VisibleMode == Typing: ページ区切りのリンクID")]
-        [SerializeField] private string _pageBreakHiddenLinkID = "PageBreak";
+        [SerializeField] private string _pageBreakHiddenLinkId = "PageBreak";
 
         [Tooltip("罫線のリンクID")]
-        [SerializeField] private string _horizontalRuleHiddenLinkID = "HorizontalRule";
+        [SerializeField] private string _horizontalRuleHiddenLinkId = "HorizontalRule";
 
         [Header("Animation")]
 
@@ -42,19 +42,19 @@ namespace ListingMF
         }
 
         [Tooltip("テキストが下端からはみ出したとき発行されるリンクID")]
-        [SerializeField] private string _hiddenLinkIDOnPageOver = "PageBreak";
-        public string HiddenLinkIDOnPageOver
+        [SerializeField] private string _hiddenLinkIdOnPageOver = "PageBreak";
+        public string HiddenLinkIdOnPageOver
         {
-            get => _hiddenLinkIDOnPageOver;
-            set => _hiddenLinkIDOnPageOver = value;
+            get => _hiddenLinkIdOnPageOver;
+            set => _hiddenLinkIdOnPageOver = value;
         }
 
         [Tooltip("テキストの終端に到達したとき発行されるリンクID")]
-        [SerializeField] private string _hiddenLinkIDOnEOF = "EOF";
-        public string HiddenLinkIDOnEOF
+        [SerializeField] private string _hiddenLinkIdOnEof = "EOF";
+        public string HiddenLinkIdOnEof
         {
-            get => _hiddenLinkIDOnEOF;
-            set => _hiddenLinkIDOnEOF = value;
+            get => _hiddenLinkIdOnEof;
+            set => _hiddenLinkIdOnEof = value;
         }
 
         [Space]
@@ -78,13 +78,13 @@ namespace ListingMF
             set => _content.localPosition = new Vector3(0f, value);
         }
 
-        public bool IsInProgress => !textTypingEffect.IsEOF;
-        public bool IsTypingNow => enabled && _characterPerSecond > 0f && !textTypingEffect.IsEOF && !_isScrollingNow;
+        public bool IsInProgress => !textTypingEffect.IsEof;
+        public bool IsTypingNow => enabled && _characterPerSecond > 0f && !textTypingEffect.IsEof && !_isScrollingNow;
         public bool IsScrollingNow => _isScrollingNow;
 
         private void Awake()
         {
-            textTypingEffect = new TextTypingEffect(_text, _maxLineCount, _hiddenLinkIDOnPageOver, _hiddenLinkIDOnEOF, _onReachHiddenLink);
+            textTypingEffect = new TextTypingEffect(_text, _maxLineCount, _hiddenLinkIdOnPageOver, _hiddenLinkIdOnEof, _onReachHiddenLink);
             textRuleEffect = new TextHorizontalRuler(_horizontalRulePrefab, _rulesContent, _maxLineCount, textTypingEffect.LineHeight, _text.margin.y);
             SetTextTransform(_text.transform);
             SetTextTransform(_rulesContent);
@@ -92,9 +92,9 @@ namespace ListingMF
             // 初期化
             Clear();
 
-            _onReachHiddenLink.AddListener(hiddenLinkID =>
+            _onReachHiddenLink.AddListener(hiddenLinkId =>
             {
-                if (hiddenLinkID == _horizontalRuleHiddenLinkID) { InsertHorizontalRule(); }
+                if (hiddenLinkId == _horizontalRuleHiddenLinkId) { InsertHorizontalRule(); }
             });
 
             void SetTextTransform(Transform transform)
@@ -213,7 +213,7 @@ namespace ListingMF
                 // タイピングエフェクトが無効の場合
 
                 // 全テキストが表示完了していなければ何もしない
-                if (!textTypingEffect.IsEOF) return;
+                if (!textTypingEffect.IsEof) return;
 
                 // 表示に必要なくなったテキストを行単位で削除する
                 removedLineCount = textTypingEffect.TrimBeforeVisibleLine();
@@ -226,7 +226,7 @@ namespace ListingMF
                 // タイピングエフェクトが有効の場合
 
                 // リンクIDで削除する
-                removedLineCount = textTypingEffect.TrimBeforeFirstLinkID(_pageBreakHiddenLinkID);
+                removedLineCount = textTypingEffect.TrimBeforeFirstLinkId(_pageBreakHiddenLinkId);
                 if (removedLineCount == 0) return;
 
                 // リンクIDの代わりに現在表示位置で削除することもできるが、色変更タグなども削除されてしまう
@@ -242,9 +242,9 @@ namespace ListingMF
             linePosition = 0;
         }
 
-        public void InvokeReachHiddenLink(string hiddenLinkID)
+        public void InvokeReachHiddenLink(string hiddenLinkId)
         {
-            _onReachHiddenLink.Invoke(hiddenLinkID);
+            _onReachHiddenLink.Invoke(hiddenLinkId);
         }
 
         private enum VisibleMode

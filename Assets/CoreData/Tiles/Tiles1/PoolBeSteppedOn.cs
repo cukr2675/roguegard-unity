@@ -23,7 +23,7 @@ namespace Roguegard
 
                     // 水上を移動できないキャラのとき、最大 HP の半分のダメージを与える
                     using var damageValue = EffectableValue.Get();
-                    var baseDamage = Mathf.FloorToInt(StatsEffectedValues.GetMaxHP(user) / 2f);
+                    var baseDamage = Mathf.FloorToInt(StatsEffectedValues.GetMaxHp(user) / 2f);
                     damageValue.Initialize(baseDamage);
                     this.Hurt(user, self, AttackUtility.GetActivationDepthCantCounter(activationDepth), damageValue);
                     if (this.TryDefeat(user, self, activationDepth, damageValue)) return true;

@@ -31,7 +31,7 @@ namespace Roguegard.CharacterCreation
             {
                 var member = members[i];
                 if (member == player) continue;
-                if (member.Main.Stats.HP <= 0 && StatsEffectedValues.GetMaxHP(member) >= 1) continue; // 倒れていたら移動させない
+                if (member.Main.Stats.Hp <= 0 && StatsEffectedValues.GetMaxHp(member) >= 1) continue; // 倒れていたら移動させない
                 if (default(IActiveRogueMethodCaller).LocateNextToAnyMember(member, null, 0f, party)) continue;
 
                 // メンバーの移動に失敗したらランダム位置へ移動

@@ -7,7 +7,7 @@ using Roguegard.Extensions;
 namespace Roguegard
 {
     [Objforming.Formable]
-    public class PoisonAttack : MPSkill
+    public class PoisonAttack : MpSkill
     {
         [SerializeField] private float _affectRate = 0.1f;
 
@@ -17,7 +17,7 @@ namespace Roguegard
 
         public override IRogueMethodTarget Target => ForEnemyRogueMethodTarget.Instance;
         public override IRogueMethodRange Range => FrontRogueMethodRange.Instance;
-        public override int RequiredMP => 0;
+        public override int RequiredMp => 0;
 
         protected override bool Activate(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
         {
@@ -26,7 +26,7 @@ namespace Roguegard
 
             // 攻撃力ダメージの攻撃
             using var damageValue = EffectableValue.Get();
-            StatsEffectedValues.GetATK(self, damageValue);
+            StatsEffectedValues.GetAtk(self, damageValue);
             var hit = this.TryHurt(target, self, activationDepth, damageValue);
             var defeated = this.TryDefeat(target, self, activationDepth, damageValue);
 
@@ -43,11 +43,11 @@ namespace Roguegard
             return true;
         }
 
-        public override int GetATK(RogueObj self, out bool additionalEffect)
+        public override int GetAtk(RogueObj self, out bool additionalEffect)
         {
             // 攻撃力ダメージの攻撃 + 毒付与
             using var damageValue = EffectableValue.Get();
-            StatsEffectedValues.GetATK(self, damageValue);
+            StatsEffectedValues.GetAtk(self, damageValue);
             var hpDamage = Mathf.FloorToInt(damageValue.MainValue);
             additionalEffect = true;
             return hpDamage;

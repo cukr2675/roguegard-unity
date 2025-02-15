@@ -78,7 +78,7 @@ namespace Roguegard.CharacterCreation
 
             void IValueEffect.AffectValue(IKeyword keyword, EffectableValue value, RogueObj self)
             {
-                if (keyword == StatsKw.DEF)
+                if (keyword == StatsKw.Def)
                 {
                     // 剣を振ったら次のターンまで 40% でガード
                     value.SubValues[StatsKw.GuardRate] = AttackUtility.Cup(value.SubValues[StatsKw.GuardRate], 0.4f);

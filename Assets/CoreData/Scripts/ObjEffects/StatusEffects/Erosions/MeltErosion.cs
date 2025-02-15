@@ -76,7 +76,7 @@ namespace Roguegard
 
             public void AffectValue(IKeyword keyword, EffectableValue value, RogueObj self)
             {
-                if (keyword == StatsKw.DEF)
+                if (keyword == StatsKw.Def)
                 {
                     // ガード率 -10%
                     value.SubValues[StatsKw.GuardRate] -= .1f;

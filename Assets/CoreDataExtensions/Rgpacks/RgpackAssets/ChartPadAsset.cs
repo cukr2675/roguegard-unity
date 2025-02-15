@@ -6,22 +6,22 @@ namespace Roguegard.Rgpacks
 {
     public class ChartPadAsset
     {
-        private readonly string fullID;
+        private readonly string fullId;
 
         private readonly PropertiedCmnReference[] cmns;
 
         public IRogueChartSource ChartSource { get; }
 
-        public ChartPadAsset(ChartPadInfo info, string envRgpackID, string fullID)
+        public ChartPadAsset(ChartPadInfo info, string envRgpackId, string fullId)
         {
-            this.fullID = fullID;
+            this.fullId = fullId;
             cmns = new PropertiedCmnReference[info.Cmns.Count];
             for (int i = 0; i < info.Cmns.Count; i++)
             {
-                cmns[i] = info.Cmns[i].ToReference(envRgpackID);
+                cmns[i] = info.Cmns[i].ToReference(envRgpackId);
             }
 
-            ChartSource = ChartPadReference.CreateSource(fullID, envRgpackID);
+            ChartSource = ChartPadReference.CreateSource(fullId, envRgpackId);
         }
 
         public PropertiedCmnReference GetNextCmnFrom(CmnReference cmn)
@@ -36,7 +36,7 @@ namespace Roguegard.Rgpacks
             var cmnIndex = -1;
             for (int i = 0; i < cmns.Length; i++)
             {
-                if (cmns[i].Cmn.FullID == cmn.FullID)
+                if (cmns[i].Cmn.FullId == cmn.FullId)
                 {
                     cmnIndex = i;
                     break;

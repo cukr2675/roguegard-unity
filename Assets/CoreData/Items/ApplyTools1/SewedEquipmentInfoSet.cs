@@ -25,10 +25,10 @@ namespace Roguegard
 
         public IKeyword Category => CategoryKw.Equipment;
 
-        public int MaxHP => 0;
-        public int MaxMP => 0;
-        public int ATK => 0;
-        public int DEF => 0;
+        public int MaxHp => 0;
+        public int MaxMp => 0;
+        public int Atk => 0;
+        public int Def => 0;
         public float Weight => 0f;
         public float LoadCapacity => 0f;
 
@@ -37,8 +37,8 @@ namespace Roguegard
         public MainInfoSetAbility Ability => MainInfoSetAbility.Object;
         public IRogueMaterial Material => RoguegardSettings.DefaultRaceOption.Material;
         public IRogueGender Gender => RoguegardSettings.DefaultRaceOption.Genders[0];
-        public string HPName => null;
-        public string MPName => null;
+        public string HpName => null;
+        public string MpName => null;
         public float Cost => 0f;
         public bool CostIsUnknown => false;
 

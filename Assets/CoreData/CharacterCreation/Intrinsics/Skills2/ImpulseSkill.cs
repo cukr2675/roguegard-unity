@@ -6,7 +6,7 @@ using Roguegard.Extensions;
 
 namespace Roguegard.CharacterCreation
 {
-    public class ImpulseSkill : MPSkillIntrinsicOptionScript
+    public class ImpulseSkill : MpSkillIntrinsicOptionScript
     {
         public override ISortedIntrinsic CreateSortedIntrinsic(
             ScriptIntrinsicOption parent, IReadOnlyIntrinsic intrinsic, ICharacterCreationData characterCreationData, int lv)
@@ -15,11 +15,11 @@ namespace Roguegard.CharacterCreation
         }
 
         [Objforming.Formable]
-        private class SortedIntrinsic : MPSkillSortedIntrinsic<SortedIntrinsic>
+        private class SortedIntrinsic : MpSkillSortedIntrinsic<SortedIntrinsic>
         {
             public override IRogueMethodTarget Target => ForEnemyRogueMethodTarget.Instance;
             public override IRogueMethodRange Range => Within1TileRogueMethodRange.Instance;
-            public override int RequiredMP => 12;
+            public override int RequiredMp => 12;
 
             private const float paralyzeRate = 0.5f;
             private const float maxParalyzeActivationDepth = 10f;
@@ -47,7 +47,7 @@ namespace Roguegard.CharacterCreation
                     if (obj == null || !StatsEffectedValues.AreVS(self, obj)) continue;
 
                     using var damageValue = EffectableValue.Get();
-                    StatsEffectedValues.GetATK(self, damageValue);
+                    StatsEffectedValues.GetAtk(self, damageValue);
                     damageValue.MainValue += damageValue.BaseMainValue + 2;
                     damageValue.SubValues[MainInfoKw.Skill] = 1f;
                     damageValue.SubValues[ElementKw.Thunder] = 1f;
@@ -85,11 +85,11 @@ namespace Roguegard.CharacterCreation
                 }
             }
 
-            public override int GetATK(RogueObj self, out bool additionalEffect)
+            public override int GetAtk(RogueObj self, out bool additionalEffect)
             {
                 // 攻撃力(x2)ダメージの攻撃 + 麻痺付与
                 using var damageValue = EffectableValue.Get();
-                StatsEffectedValues.GetATK(self, damageValue);
+                StatsEffectedValues.GetAtk(self, damageValue);
                 damageValue.MainValue += damageValue.BaseMainValue + 2;
 
                 var hpDamage = Mathf.FloorToInt(damageValue.MainValue);

@@ -6,18 +6,18 @@ using Newtonsoft.Json;
 
 namespace Objforming.Serialization.Json
 {
-    public class NonIDNonTypeFormerJsonConverter : FormerJsonConverter
+    public class NonIdNonTypeFormerJsonConverter : FormerJsonConverter
     {
-        public NonIDNonTypeFormerJsonConverter(Former former)
+        public NonIdNonTypeFormerJsonConverter(Former former)
             : base(former)
         {
         }
 
-        public static new NonIDNonTypeFormerJsonConverter Create(Type type, bool force = false, bool includeObjectMember = false)
+        public static new NonIdNonTypeFormerJsonConverter Create(Type type, bool force = false, bool includeObjectMember = false)
         {
             var members = FormerMember.Generate(type, force, includeObjectMember);
             var former = new Former(type, members);
-            return new NonIDNonTypeFormerJsonConverter(former);
+            return new NonIdNonTypeFormerJsonConverter(former);
         }
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)

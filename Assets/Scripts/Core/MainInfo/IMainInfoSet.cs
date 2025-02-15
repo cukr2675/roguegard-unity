@@ -9,10 +9,10 @@ namespace Roguegard
     {
         IKeyword Category { get; }
 
-        int MaxHP { get; }
-        int MaxMP { get; }
-        int ATK { get; }
-        int DEF { get; }
+        int MaxHp { get; }
+        int MaxMp { get; }
+        int Atk { get; }
+        int Def { get; }
         float Weight { get; }
         float LoadCapacity { get; }
         ISerializableKeyword Faction { get; }
@@ -22,8 +22,8 @@ namespace Roguegard
         MainInfoSetAbility Ability { get; }
         IRogueMaterial Material { get; }
         IRogueGender Gender { get; }
-        string HPName { get; }
-        string MPName { get; }
+        string HpName { get; }
+        string MpName { get; }
         float Cost { get; }
         bool CostIsUnknown { get; }
 

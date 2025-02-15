@@ -12,9 +12,9 @@ namespace Roguegard.Rgpacks
 
         private static readonly object[] rogueMethodArguments = new object[4];
 
-        public PropertiedCmnReference(PropertiedCmnData data, string envRgpackID, IReadOnlyDictionary<string, ICmnProperty> properties)
+        public PropertiedCmnReference(PropertiedCmnData data, string envRgpackId, IReadOnlyDictionary<string, ICmnProperty> properties)
         {
-            Cmn = new CmnReference(data.Cmn, envRgpackID);
+            Cmn = new CmnReference(data.Cmn, envRgpackId);
             this.properties = new Dictionary<string, ICmnProperty>(properties);
         }
 

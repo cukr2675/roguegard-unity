@@ -13,7 +13,7 @@ namespace Roguegard.CharacterCreation
         IRogueDetails OptionDetails { get; }
         int Lv { get; }
         IRogueGender Gender { get; }
-        string HPName { get; }
-        string MPName { get; }
+        string HpName { get; }
+        string MpName { get; }
     }
 }

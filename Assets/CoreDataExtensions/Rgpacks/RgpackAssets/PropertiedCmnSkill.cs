@@ -17,17 +17,17 @@ namespace Roguegard.Rgpacks
 
         public IRogueMethodTarget Target => ForEnemyRogueMethodTarget.Instance;
         public IRogueMethodRange Range => FrontRogueMethodRange.Instance;
-        public int RequiredMP => 0;
+        public int RequiredMp => 0;
         public Spanning<IKeyword> AmmoCategories => Spanning<IKeyword>.Empty;
 
-        private PropertiedCmnSkill(PropertiedCmnData data, string envRgpackID)
+        private PropertiedCmnSkill(PropertiedCmnData data, string envRgpackId)
         {
-            reference = data.ToReference(envRgpackID);
+            reference = data.ToReference(envRgpackId);
         }
 
-        public static ISkill Create(PropertiedCmnData data, string envRgpackID, ISkill defaultMethod)
+        public static ISkill Create(PropertiedCmnData data, string envRgpackId, ISkill defaultMethod)
         {
-            return string.IsNullOrWhiteSpace(data.Cmn) ? defaultMethod : new PropertiedCmnSkill(data, envRgpackID);
+            return string.IsNullOrWhiteSpace(data.Cmn) ? defaultMethod : new PropertiedCmnSkill(data, envRgpackId);
         }
 
         public bool Invoke(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
@@ -36,7 +36,7 @@ namespace Roguegard.Rgpacks
             return result == null || result is bool boolean && boolean == true;
         }
 
-        public int GetATK(RogueObj self, out bool additionalEffect)
+        public int GetAtk(RogueObj self, out bool additionalEffect)
         {
             additionalEffect = false;
             return 0;

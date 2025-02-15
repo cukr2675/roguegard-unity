@@ -46,7 +46,7 @@ namespace Roguegard
                 {
                     if (!enemyPositions.Contains(position)) { enemyPositions.Add(position); }
                 }
-                else if (RogueParty.Equals(self, target) && target.Main.Stats.HP < StatsEffectedValues.GetMaxHP(target))
+                else if (RogueParty.Equals(self, target) && target.Main.Stats.Hp < StatsEffectedValues.GetMaxHp(target))
                 {
                     partyMemberPositions.AddUnique(position, target);
                 }

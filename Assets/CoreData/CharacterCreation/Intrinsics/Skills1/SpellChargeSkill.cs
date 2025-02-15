@@ -7,7 +7,7 @@ using Roguegard.Extensions;
 
 namespace Roguegard.CharacterCreation
 {
-    public class SpellChargeSkill : MPSkillIntrinsicOptionScript
+    public class SpellChargeSkill : MpSkillIntrinsicOptionScript
     {
         public override ISortedIntrinsic CreateSortedIntrinsic(
             ScriptIntrinsicOption parent, IReadOnlyIntrinsic intrinsic, ICharacterCreationData characterCreationData, int lv)
@@ -16,11 +16,11 @@ namespace Roguegard.CharacterCreation
         }
 
         [Objforming.Formable]
-        private class SortedIntrinsic : MPSkillSortedIntrinsic<SortedIntrinsic>
+        private class SortedIntrinsic : MpSkillSortedIntrinsic<SortedIntrinsic>
         {
             public override IRogueMethodTarget Target => ForPartyMemberRogueMethodTarget.Instance;
             public override IRogueMethodRange Range => UserRogueMethodRange.Instance;
-            public override int RequiredMP => 1;
+            public override int RequiredMp => 1;
 
             private SortedIntrinsic() : base(null, 0) { }
 
@@ -57,9 +57,9 @@ namespace Roguegard.CharacterCreation
                 {
                     if (MessageWorkListener.TryOpenHandler(target.Location, target.Position, out var h))
                     {
-                        effect ??= new VariantSpriteMotion(CoreMotions.Buff, StatsKw.ATK.Color);
+                        effect ??= new VariantSpriteMotion(CoreMotions.Buff, StatsKw.Atk.Color);
                         using var handler = h;
-                        handler.AppendText(":StatusUpMsg::4").AppendText(target).AppendText(MainInfoKw.Skill).AppendText(StatsKw.ATK).AppendText(2);
+                        handler.AppendText(":StatusUpMsg::4").AppendText(target).AppendText(MainInfoKw.Skill).AppendText(StatsKw.Atk).AppendText(2);
                         handler.AppendText("\n");
                         handler.EnqueueWork(RogueCharacterWork.CreateEffect(target.Position, effect, false));
                     }

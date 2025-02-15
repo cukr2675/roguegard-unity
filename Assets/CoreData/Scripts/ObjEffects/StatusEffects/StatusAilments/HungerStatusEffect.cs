@@ -62,7 +62,7 @@ namespace Roguegard
             {
                 // リーダーが空腹のときはダメージを受ける。
                 const int autoDamage = 1;
-                mainStats.SetHP(self, mainStats.HP - autoDamage);
+                mainStats.SetHp(self, mainStats.Hp - autoDamage);
                 if (messageIndex == 0f)
                 {
                     if (RogueDevice.Primary.Player == self)
@@ -80,7 +80,7 @@ namespace Roguegard
                     messageIndex++;
                 }
 
-                if (mainStats.HP <= 0f)
+                if (mainStats.Hp <= 0f)
                 {
                     this.Defeat(self, null, activationDepth);
                 }

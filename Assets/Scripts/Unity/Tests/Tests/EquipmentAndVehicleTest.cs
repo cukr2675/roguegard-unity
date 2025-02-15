@@ -28,7 +28,7 @@ namespace RoguegardUnity.Tests
             ObjformingLogger.Primary = new RoguegardObjformingLogger();
             RogueRandom.Primary = new RogueRandom(0);
             MessageWorkListener.ClearListeners();
-            StaticID.Next();
+            StaticId.Next();
 
             var random = RogueRandom.Primary;
             var player = _player.CreateObj(null, Vector2Int.zero, random);
@@ -93,7 +93,7 @@ namespace RoguegardUnity.Tests
             ObjformingLogger.Primary = new RoguegardObjformingLogger();
             RogueRandom.Primary = new RogueRandom(0);
             MessageWorkListener.ClearListeners();
-            StaticID.Next();
+            StaticId.Next();
 
             var random = RogueRandom.Primary;
             var player = _player.CreateObj(null, Vector2Int.zero, random);

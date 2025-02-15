@@ -29,9 +29,9 @@ namespace ListingMF
             LMFAssert.NotInitialized(this, isInitialized);
             isInitialized = true;
 
-            _messageBox.OnReachHiddenLink.AddListener(hiddenLinkID =>
+            _messageBox.OnReachHiddenLink.AddListener(hiddenLinkId =>
             {
-                if (hiddenLinkID != _messageBox.HiddenLinkIDOnEOF) return;
+                if (hiddenLinkId != _messageBox.HiddenLinkIdOnEof) return;
 
                 var tempAction = OnCompleted;
                 OnCompleted = null;

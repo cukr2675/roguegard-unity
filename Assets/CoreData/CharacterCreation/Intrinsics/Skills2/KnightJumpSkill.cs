@@ -6,7 +6,7 @@ using Roguegard.Extensions;
 
 namespace Roguegard.CharacterCreation
 {
-    public class KnightJumpSkill : MPSkillIntrinsicOptionScript
+    public class KnightJumpSkill : MpSkillIntrinsicOptionScript
     {
         public override ISortedIntrinsic CreateSortedIntrinsic(
             ScriptIntrinsicOption parent, IReadOnlyIntrinsic intrinsic, ICharacterCreationData characterCreationData, int lv)
@@ -15,11 +15,11 @@ namespace Roguegard.CharacterCreation
         }
 
         [Objforming.Formable]
-        private class SortedIntrinsic : MPSkillSortedIntrinsic<SortedIntrinsic>
+        private class SortedIntrinsic : MpSkillSortedIntrinsic<SortedIntrinsic>
         {
             public override IRogueMethodTarget Target => ForEnemyRogueMethodTarget.Instance;
             public override IRogueMethodRange Range => KnightJumpRogueMethodRange.Instance;
-            public override int RequiredMP => 0;
+            public override int RequiredMp => 0;
 
             private SortedIntrinsic() : base(null, 0) { }
 
@@ -53,7 +53,7 @@ namespace Roguegard.CharacterCreation
                 {
                     // 正面2マス先に誰かいるときそれに攻撃力(x2)ダメージ
                     using var damage = EffectableValue.Get();
-                    StatsEffectedValues.GetATK(self, damage);
+                    StatsEffectedValues.GetAtk(self, damage);
                     damage.MainValue += damage.BaseMainValue;
                     default(IAffectRogueMethodCaller).Hurt(targets[0], self, 1f, damage);
                     jumpBack = true;
@@ -67,11 +67,11 @@ namespace Roguegard.CharacterCreation
                 return true;
             }
 
-            public override int GetATK(RogueObj self, out bool additionalEffect)
+            public override int GetAtk(RogueObj self, out bool additionalEffect)
             {
                 // 攻撃力(x2)ダメージの攻撃。
                 using var damageValue = EffectableValue.Get();
-                StatsEffectedValues.GetATK(self, damageValue);
+                StatsEffectedValues.GetAtk(self, damageValue);
                 damageValue.MainValue += damageValue.BaseMainValue;
 
                 var hpDamage = Mathf.FloorToInt(damageValue.MainValue);

@@ -8,7 +8,7 @@ namespace Roguegard.Device
     public class RogueDeviceEffect : IRogueEffect, IRogueObjUpdater
     {
         /// <summary>
-        /// 例外発生時に無限ループしないために <see cref="StaticID"/> でリセットする
+        /// 例外発生時に無限ループしないために <see cref="StaticId"/> でリセットする
         /// </summary>
         [System.NonSerialized] private StaticInitializable<IDeviceCommandAction> commandAction = new StaticInitializable<IDeviceCommandAction>(() => null);
 

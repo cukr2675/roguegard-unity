@@ -82,7 +82,7 @@ namespace Roguegard.CharacterCreation
                     // 騎乗中は飛行状態にする。
                     value.SubValues[StdKw.Levitation] = 1f;
                 }
-                if (keyword == StatsKw.MPRegenerationPermille)
+                if (keyword == StatsKw.MpRegenerationPermille)
                 {
                     // 騎乗中はMP自然回復を止める。
                     value.MainValue = 0f;
@@ -97,8 +97,8 @@ namespace Roguegard.CharacterCreation
                 {
                     // 騎乗中は移動時に MP-1
                     var stats = self.Main.Stats;
-                    stats.SetMP(self, stats.MP - 1);
-                    if (stats.MP == 0 && activationDepth < 1f)
+                    stats.SetMp(self, stats.Mp - 1);
+                    if (stats.Mp == 0 && activationDepth < 1f)
                     {
                         // MP が切れたら降ろす
                         var vehicle = RideRogueEffect.GetVehicle(self);

@@ -12,17 +12,17 @@ namespace Roguegard.Rgpacks
         public Dictionary<string, string> SerializableTable { get; set; }
 
         [System.NonSerialized] private IRogueChartSource _source;
-        IRogueChartSource IRogueChart.Source => _source ??= new Source(FullID, RgpackID);
+        IRogueChartSource IRogueChart.Source => _source ??= new Source(FullId, RgpackId);
 
-        private ChartPadReference(string id, string envRgpackID)
-            : base(id, envRgpackID)
+        private ChartPadReference(string id, string envRgpackId)
+            : base(id, envRgpackId)
         {
             SerializableTable = new Dictionary<string, string>();
         }
 
-        public static IRogueChartSource CreateSource(string id, string envRgpackID)
+        public static IRogueChartSource CreateSource(string id, string envRgpackId)
         {
-            return new Source(id, envRgpackID);
+            return new Source(id, envRgpackId);
         }
 
         public void MoveNext()
@@ -39,29 +39,29 @@ namespace Roguegard.Rgpacks
         {
             public CmnReference CurrentCmn { get; set; }
 
-            public Source(string id, string envRgpackID)
-                : base(id, envRgpackID)
+            public Source(string id, string envRgpackId)
+                : base(id, envRgpackId)
             {
             }
 
             public IRogueChart CreateChart()
             {
-                return new ChartPadReference(FullID, RgpackID);
+                return new ChartPadReference(FullId, RgpackId);
             }
 
             public bool Equals(IRogueChartSource other)
             {
-                return other is Source reference && reference.FullID == FullID;
+                return other is Source reference && reference.FullId == FullId;
             }
 
             public override bool Equals(object obj)
             {
-                return obj is Source reference && reference.FullID == FullID;
+                return obj is Source reference && reference.FullId == FullId;
             }
 
             public override int GetHashCode()
             {
-                return FullID.GetHashCode();
+                return FullId.GetHashCode();
             }
         }
     }

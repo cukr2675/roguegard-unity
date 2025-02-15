@@ -24,8 +24,8 @@ namespace Roguegard.Rgpacks
 
         public int Lv => 0;
         public IRogueGender Gender => RoguegardSettings.DefaultRaceOption.Genders[0];
-        public string HPName => null;
-        public string MPName => null;
+        public string HpName => null;
+        public string MpName => null;
         private MemberList _members = new MemberList();
 
         public string Name => info.Name;
@@ -36,10 +36,10 @@ namespace Roguegard.Rgpacks
 
         public IKeyword Category => null;
 
-        public int MaxHP => info.MaxHP;
-        public int MaxMP => info.MaxMP;
-        public int ATK => info.ATK;
-        public int DEF => info.DEF;
+        public int MaxHp => info.MaxHp;
+        public int MaxMp => info.MaxMp;
+        public int Atk => info.Atk;
+        public int Def => info.Def;
         public float LoadCapacity => info.LoadCapacity;
 
         public ISerializableKeyword Faction => null;
@@ -76,28 +76,28 @@ namespace Roguegard.Rgpacks
         public Spanning<IMemberSource> RaceOptionMemberSources => Spanning<IMemberSource>.Empty;
         public Spanning<IMemberSource> StartingItemOptionMemberSources => Spanning<IMemberSource>.Empty;
 
-        public KyarakuriClayAsset(KyarakuriClayInfo info, string envRgpackID, string fullID)
+        public KyarakuriClayAsset(KyarakuriClayInfo info, string envRgpackId, string fullId)
         {
             this.info = info;
-            Reference = new KyarakuriClayReference(fullID, envRgpackID);
-            if (info.RaceWeight != null) { raceWeightCmn = info.RaceWeight.ToReference(envRgpackID); }
-            if (info.RaceSprite != null) { raceSpriteCmn = info.RaceSprite.ToReference(envRgpackID); }
+            Reference = new KyarakuriClayReference(fullId, envRgpackId);
+            if (info.RaceWeight != null) { raceWeightCmn = info.RaceWeight.ToReference(envRgpackId); }
+            if (info.RaceSprite != null) { raceSpriteCmn = info.RaceSprite.ToReference(envRgpackId); }
 
-            Walk = RogueMethod.Create(info.Walk, envRgpackID, RoguegardSettings.DefaultRaceOption.Walk);
-            Wait = RogueMethod.Create(info.Wait, envRgpackID, RoguegardSettings.DefaultRaceOption.Wait);
-            Attack = PropertiedCmnSkill.Create(info.Attack, envRgpackID, RoguegardSettings.DefaultRaceOption.Attack);
-            Throw = PropertiedCmnSkill.Create(info.Throw, envRgpackID, RoguegardSettings.DefaultRaceOption.Throw);
-            PickUp = RogueMethod.Create(info.PickUp, envRgpackID, RoguegardSettings.DefaultRaceOption.PickUp);
-            Put = RogueMethod.Create(info.Put, envRgpackID, RoguegardSettings.DefaultRaceOption.Put);
+            Walk = RogueMethod.Create(info.Walk, envRgpackId, RoguegardSettings.DefaultRaceOption.Walk);
+            Wait = RogueMethod.Create(info.Wait, envRgpackId, RoguegardSettings.DefaultRaceOption.Wait);
+            Attack = PropertiedCmnSkill.Create(info.Attack, envRgpackId, RoguegardSettings.DefaultRaceOption.Attack);
+            Throw = PropertiedCmnSkill.Create(info.Throw, envRgpackId, RoguegardSettings.DefaultRaceOption.Throw);
+            PickUp = RogueMethod.Create(info.PickUp, envRgpackId, RoguegardSettings.DefaultRaceOption.PickUp);
+            Put = RogueMethod.Create(info.Put, envRgpackId, RoguegardSettings.DefaultRaceOption.Put);
 
-            Hit = RogueMethod.Create(info.Hit, envRgpackID, RoguegardSettings.DefaultRaceOption.Hit);
-            BeDefeated = RogueMethod.Create(info.BeDefeated, envRgpackID, RoguegardSettings.DefaultRaceOption.BeDefeated);
-            Locate = RogueMethod.Create(info.Locate, envRgpackID, RoguegardSettings.DefaultRaceOption.Locate);
-            Polymorph = RogueMethod.Create(info.Polymorph, envRgpackID, RoguegardSettings.DefaultRaceOption.Polymorph);
+            Hit = RogueMethod.Create(info.Hit, envRgpackId, RoguegardSettings.DefaultRaceOption.Hit);
+            BeDefeated = RogueMethod.Create(info.BeDefeated, envRgpackId, RoguegardSettings.DefaultRaceOption.BeDefeated);
+            Locate = RogueMethod.Create(info.Locate, envRgpackId, RoguegardSettings.DefaultRaceOption.Locate);
+            Polymorph = RogueMethod.Create(info.Polymorph, envRgpackId, RoguegardSettings.DefaultRaceOption.Polymorph);
 
-            BeApplied = RogueMethod.Create(info.BeApplied, envRgpackID, RoguegardSettings.DefaultRaceOption.BeApplied);
-            BeThrown = RogueMethod.Create(info.BeThrown, envRgpackID, RoguegardSettings.DefaultRaceOption.BeThrown);
-            BeEaten = RogueMethod.Create(info.BeEaten, envRgpackID, RoguegardSettings.DefaultRaceOption.BeEaten);
+            BeApplied = RogueMethod.Create(info.BeApplied, envRgpackId, RoguegardSettings.DefaultRaceOption.BeApplied);
+            BeThrown = RogueMethod.Create(info.BeThrown, envRgpackId, RoguegardSettings.DefaultRaceOption.BeThrown);
+            BeEaten = RogueMethod.Create(info.BeEaten, envRgpackId, RoguegardSettings.DefaultRaceOption.BeEaten);
         }
 
         public IRaceOption Open(
@@ -199,32 +199,32 @@ namespace Roguegard.Rgpacks
 
             public IRogueMethodTarget Target => ForEnemyRogueMethodTarget.Instance;
             public IRogueMethodRange Range => FrontRogueMethodRange.Instance;
-            public int RequiredMP => 0;
+            public int RequiredMp => 0;
             public Spanning<IKeyword> AmmoCategories => Spanning<IKeyword>.Empty;
 
-            private RogueMethod(PropertiedCmnData data, string envRgpackID)
+            private RogueMethod(PropertiedCmnData data, string envRgpackId)
             {
-                reference = data.ToReference(envRgpackID);
+                reference = data.ToReference(envRgpackId);
             }
 
-            public static IActiveRogueMethod Create(PropertiedCmnData data, string envRgpackID, IActiveRogueMethod defaultMethod)
+            public static IActiveRogueMethod Create(PropertiedCmnData data, string envRgpackId, IActiveRogueMethod defaultMethod)
             {
-                return string.IsNullOrWhiteSpace(data.Cmn) ? defaultMethod : new RogueMethod(data, envRgpackID);
+                return string.IsNullOrWhiteSpace(data.Cmn) ? defaultMethod : new RogueMethod(data, envRgpackId);
             }
 
-            public static IApplyRogueMethod Create(PropertiedCmnData data, string envRgpackID, IApplyRogueMethod defaultMethod)
+            public static IApplyRogueMethod Create(PropertiedCmnData data, string envRgpackId, IApplyRogueMethod defaultMethod)
             {
-                return string.IsNullOrWhiteSpace(data.Cmn) ? defaultMethod : new RogueMethod(data, envRgpackID);
+                return string.IsNullOrWhiteSpace(data.Cmn) ? defaultMethod : new RogueMethod(data, envRgpackId);
             }
 
-            public static IAffectRogueMethod Create(PropertiedCmnData data, string envRgpackID, IAffectRogueMethod defaultMethod)
+            public static IAffectRogueMethod Create(PropertiedCmnData data, string envRgpackId, IAffectRogueMethod defaultMethod)
             {
-                return string.IsNullOrWhiteSpace(data.Cmn) ? defaultMethod : new RogueMethod(data, envRgpackID);
+                return string.IsNullOrWhiteSpace(data.Cmn) ? defaultMethod : new RogueMethod(data, envRgpackId);
             }
 
-            public static IChangeStateRogueMethod Create(PropertiedCmnData data, string envRgpackID, IChangeStateRogueMethod defaultMethod)
+            public static IChangeStateRogueMethod Create(PropertiedCmnData data, string envRgpackId, IChangeStateRogueMethod defaultMethod)
             {
-                return string.IsNullOrWhiteSpace(data.Cmn) ? defaultMethod : new RogueMethod(data, envRgpackID);
+                return string.IsNullOrWhiteSpace(data.Cmn) ? defaultMethod : new RogueMethod(data, envRgpackId);
             }
 
             public bool Invoke(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
@@ -233,7 +233,7 @@ namespace Roguegard.Rgpacks
                 return result == null || result is bool boolean && boolean == true;
             }
 
-            public int GetATK(RogueObj self, out bool additionalEffect)
+            public int GetAtk(RogueObj self, out bool additionalEffect)
             {
                 additionalEffect = false;
                 return 0;

@@ -36,7 +36,7 @@ namespace Roguegard.CharacterCreation
 
             void IValueEffect.AffectValue(IKeyword keyword, EffectableValue value, RogueObj self)
             {
-                if (buffCount >= 1 && keyword == StatsKw.ATK)
+                if (buffCount >= 1 && keyword == StatsKw.Atk)
                 {
                     value.SubValues[StatsKw.CriticalRate] += .5f;
                 }

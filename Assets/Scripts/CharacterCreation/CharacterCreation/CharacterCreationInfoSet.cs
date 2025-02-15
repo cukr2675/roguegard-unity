@@ -50,10 +50,10 @@ namespace Roguegard.CharacterCreation
 
         public IKeyword Category => CurrentRaceOption.Category;
 
-		public int MaxHP => CurrentRaceOption.MaxHP;
-        public int MaxMP => CurrentRaceOption.MaxMP;
-        public int ATK => CurrentRaceOption.ATK;
-        public int DEF => CurrentRaceOption.DEF;
+		public int MaxHp => CurrentRaceOption.MaxHp;
+        public int MaxMp => CurrentRaceOption.MaxMp;
+        public int Atk => CurrentRaceOption.Atk;
+        public int Def => CurrentRaceOption.Def;
         public float Weight
         {
             get
@@ -70,8 +70,8 @@ namespace Roguegard.CharacterCreation
         public MainInfoSetAbility Ability => CurrentRaceOption.Ability;
         public IRogueMaterial Material => CurrentRaceOption.Material;
         public IRogueGender Gender => Data.Race.Gender ?? _gender;
-        public string HPName => Data.Race.HPName;
-        public string MPName => Data.Race.MPName;
+        public string HpName => Data.Race.HpName;
+        public string MpName => Data.Race.MpName;
         public float Cost => Data.Cost;
         public bool CostIsUnknown => Data.CostIsUnknown;
         public Spanning<IWeightedRogueObjGeneratorList> LootTable => CurrentRaceOption.LootTable;

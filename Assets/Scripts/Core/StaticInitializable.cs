@@ -6,7 +6,7 @@ namespace Roguegard
 {
     public class StaticInitializable<T>
     {
-        private StaticID staticID;
+        private StaticId staticId;
 
         private readonly Initializer initializer;
 
@@ -16,7 +16,7 @@ namespace Roguegard
         {
             get
             {
-                if (staticID.IsValid) return _value;
+                if (staticId.IsValid) return _value;
 
                 Value = initializer();
                 return _value;
@@ -24,7 +24,7 @@ namespace Roguegard
             set
             {
                 _value = value;
-                staticID = StaticID.Current;
+                staticId = StaticId.Current;
             }
         }
 
@@ -34,7 +34,7 @@ namespace Roguegard
         {
             this.initializer = initializer;
             _value = default;
-            staticID = default;
+            staticId = default;
         }
 
         //public static implicit operator T(StaticInitializable<T> value)

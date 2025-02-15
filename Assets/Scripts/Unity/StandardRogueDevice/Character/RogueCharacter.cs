@@ -167,7 +167,7 @@ namespace RoguegardUnity
             if (completelyEnd) { SetSpriteMotion(KeywordSpriteMotion.Wait, true); }
 
             // HP のずれを直す。
-            _canvas.SetHP(Obj);
+            _canvas.SetHp(Obj);
         }
 
         public void UpdateCharacter(RogueObj player, int deltaTime)

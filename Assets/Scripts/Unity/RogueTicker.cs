@@ -19,8 +19,8 @@ namespace RoguegardUnity
             if (updating)
             {
                 // 処理が中断されたとき例外が発生したとみなして、静的フィールドを初期化する。
-                Debug.Log($"{nameof(StaticID.Next)}");
-                StaticID.Next();
+                Debug.Log($"{nameof(StaticId.Next)}");
+                StaticId.Next();
             }
             updating = true;
             tick.Update(_stop ? 0 : 10);
@@ -36,7 +36,7 @@ namespace RoguegardUnity
 
         public void Reset()
         {
-            StaticID.Next();
+            StaticId.Next();
             tick = new TickEnumerator();
         }
     }

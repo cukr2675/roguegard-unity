@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Roguegard.CharacterCreation
 {
-    public class PaintTrapSkill : MPSkillIntrinsicOptionScript
+    public class PaintTrapSkill : MpSkillIntrinsicOptionScript
     {
         public override ISortedIntrinsic CreateSortedIntrinsic(
             ScriptIntrinsicOption parent, IReadOnlyIntrinsic intrinsic, ICharacterCreationData characterCreationData, int lv)
@@ -13,11 +13,11 @@ namespace Roguegard.CharacterCreation
         }
 
         [Objforming.Formable]
-        private class SortedIntrinsic : MPSkillSortedIntrinsic<SortedIntrinsic>
+        private class SortedIntrinsic : MpSkillSortedIntrinsic<SortedIntrinsic>
         {
             public override IRogueMethodTarget Target => null;
             public override IRogueMethodRange Range => null;
-            public override int RequiredMP => 1;
+            public override int RequiredMp => 1;
 
             private SortedIntrinsic() : base(null, 0) { }
 
@@ -39,7 +39,7 @@ namespace Roguegard.CharacterCreation
                 return true;
             }
 
-            public override int GetATK(RogueObj self, out bool additionalEffect)
+            public override int GetAtk(RogueObj self, out bool additionalEffect)
             {
                 additionalEffect = true;
                 return 0;

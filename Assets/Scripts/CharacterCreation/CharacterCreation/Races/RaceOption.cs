@@ -16,10 +16,10 @@ namespace Roguegard.CharacterCreation
         public abstract bool CostIsUnknown { get; }
         public abstract Spanning<IRogueGender> Genders { get; }
         public abstract IKeyword Category { get; }
-        public abstract int MaxHP { get; }
-        public abstract int MaxMP { get; }
-        public abstract int ATK { get; }
-        public abstract int DEF { get; }
+        public abstract int MaxHp { get; }
+        public abstract int MaxMp { get; }
+        public abstract int Atk { get; }
+        public abstract int Def { get; }
         public abstract float LoadCapacity { get; }
         public abstract ISerializableKeyword Faction { get; }
         public abstract Spanning<ISerializableKeyword> TargetFactions { get; }

@@ -27,7 +27,7 @@ namespace Roguegard
                 var visible = MessageWorkListener.TryOpenHandler(self.Location, self.Position, out var handler);
                 if (heal)
                 {
-                    stats.SetHP(self, stats.HP + damage);
+                    stats.SetHp(self, stats.Hp + damage);
                     if (visible)
                     {
                         if (damage == 0)
@@ -43,7 +43,7 @@ namespace Roguegard
                 }
                 else
                 {
-                    stats.SetHP(self, stats.HP - damage);
+                    stats.SetHp(self, stats.Hp - damage);
                     if (visible)
                     {
                         if (damage == 0)
@@ -83,7 +83,7 @@ namespace Roguegard
                     handler.Dispose();
                 }
 
-                if (stats.HP <= 0)
+                if (stats.Hp <= 0)
                 {
                     damageValue.SubValues[MainInfoKw.BeDefeated] = 1f;
                 }

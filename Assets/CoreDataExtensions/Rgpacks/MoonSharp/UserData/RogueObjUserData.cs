@@ -19,7 +19,7 @@ namespace Roguegard.Rgpacks.MoonSharp
             {
                 if (!(Obj.Main.InfoSet is EvtFairyReference evt)) return null;
 
-                return evt.AssetID;
+                return evt.AssetId;
             }
         }
 
@@ -71,16 +71,16 @@ namespace Roguegard.Rgpacks.MoonSharp
 
         public void addEffect(string id)
         {
-            //var envRgpackID = executionContext.OwnerScript.DoString("return __rgpack").String;
-            var envRgpackID = "Playtest";
-            var rgpackID = RgpackReference.GetRgpackID(id, envRgpackID);
-            var assetID = RgpackReference.GetAssetID(id);
+            //var envRgpackId = executionContext.OwnerScript.DoString("return __rgpack").String;
+            var envRgpackId = "Playtest";
+            var rgpackId = RgpackReference.GetRgpackId(id, envRgpackId);
+            var assetId = RgpackReference.GetAssetId(id);
 
-            if (!RgpackReference.TryGetRgpack(rgpackID, out var rgpack)) throw new RogueException($"Rgpack ({rgpackID}) が見つかりません。");
-            if (!rgpack.TryGetAsset<EffectStickerAsset>(assetID, out var asset)) throw new RogueException(
-                $"Rgpack ({rgpackID}) に ID ({assetID}) のデータが見つかりません。");
+            if (!RgpackReference.TryGetRgpack(rgpackId, out var rgpack)) throw new RogueException($"Rgpack ({rgpackId}) が見つかりません。");
+            if (!rgpack.TryGetAsset<EffectStickerAsset>(assetId, out var asset)) throw new RogueException(
+                $"Rgpack ({rgpackId}) に ID ({assetId}) のデータが見つかりません。");
 
-            Obj.Main.RogueEffects.AddOpen(Obj, new EffectStickerReference(id, rgpackID));
+            Obj.Main.RogueEffects.AddOpen(Obj, new EffectStickerReference(id, rgpackId));
         }
 
         private readonly DynValue _says;
@@ -109,14 +109,14 @@ namespace Roguegard.Rgpacks.MoonSharp
 
         public void setMotion(string id)
         {
-            //var envRgpackID = executionContext.OwnerScript.DoString("return __rgpack").String;
-            var envRgpackID = "Playtest";
-            var rgpackID = RgpackReference.GetRgpackID(id, envRgpackID);
-            var assetID = RgpackReference.GetAssetID(id);
+            //var envRgpackId = executionContext.OwnerScript.DoString("return __rgpack").String;
+            var envRgpackId = "Playtest";
+            var rgpackId = RgpackReference.GetRgpackId(id, envRgpackId);
+            var assetId = RgpackReference.GetAssetId(id);
 
-            if (!RgpackReference.TryGetRgpack(rgpackID, out var rgpack)) throw new RogueException($"Rgpack ({rgpackID}) が見つかりません。");
-            if (!rgpack.TryGetAsset<ISpriteMotion>(assetID, out var asset)) throw new RogueException(
-                $"Rgpack ({rgpackID}) に ID ({assetID}) のデータが見つかりません。");
+            if (!RgpackReference.TryGetRgpack(rgpackId, out var rgpack)) throw new RogueException($"Rgpack ({rgpackId}) が見つかりません。");
+            if (!rgpack.TryGetAsset<ISpriteMotion>(assetId, out var asset)) throw new RogueException(
+                $"Rgpack ({rgpackId}) に ID ({assetId}) のデータが見つかりません。");
 
             RogueDevice.AddWork(DeviceKw.EnqueueWork, RogueCharacterWork.CreateSpriteMotion(Obj, asset, true));
         }

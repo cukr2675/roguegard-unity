@@ -15,8 +15,8 @@ namespace Roguegard.Rgpacks
 
         private RogueObjSpriteReference() { }
 
-        public RogueObjSpriteReference(string id, string envRgpackID)
-            : base(id, envRgpackID)
+        public RogueObjSpriteReference(string id, string envRgpackId)
+            : base(id, envRgpackId)
         {
         }
 
@@ -44,7 +44,7 @@ namespace Roguegard.Rgpacks
             }
             else
             {
-                throw new RogueException($"{FullID} ({Asset.GetType()}) をスプライトにできません。");
+                throw new RogueException($"{FullId} ({Asset.GetType()}) をスプライトにできません。");
             }
         }
 

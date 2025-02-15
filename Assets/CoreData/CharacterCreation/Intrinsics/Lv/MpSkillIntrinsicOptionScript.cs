@@ -4,13 +4,13 @@ using UnityEngine;
 
 namespace Roguegard.CharacterCreation
 {
-    public abstract class MPSkillIntrinsicOptionScript : ScriptIntrinsicOption.Script
+    public abstract class MpSkillIntrinsicOptionScript : ScriptIntrinsicOption.Script
     {
         /// <summary>
         /// <see cref="parent"/> を型ごとに別の変数とするためジェネリック型にしている
         /// </summary>
-        public abstract class MPSkillSortedIntrinsic<T> : ReferableScript, ISkill, ISortedIntrinsic
-            where T : MPSkillSortedIntrinsic<T>
+        public abstract class MpSkillSortedIntrinsic<T> : ReferableScript, ISkill, ISortedIntrinsic
+            where T : MpSkillSortedIntrinsic<T>
         {
             private static ScriptIntrinsicOption parent;
 
@@ -22,14 +22,14 @@ namespace Roguegard.CharacterCreation
 
             public abstract IRogueMethodTarget Target { get; }
             public abstract IRogueMethodRange Range { get; }
-            public abstract int RequiredMP { get; }
+            public abstract int RequiredMp { get; }
             public virtual Spanning<IKeyword> AmmoCategories => Spanning<IKeyword>.Empty;
 
             public int Lv { get; }
 
-            protected MPSkillSortedIntrinsic(ScriptIntrinsicOption parent, int lv)
+            protected MpSkillSortedIntrinsic(ScriptIntrinsicOption parent, int lv)
             {
-                if (parent != null) { MPSkillSortedIntrinsic<T>.parent = parent; }
+                if (parent != null) { MpSkillSortedIntrinsic<T>.parent = parent; }
                 Lv = lv;
             }
 
@@ -45,11 +45,11 @@ namespace Roguegard.CharacterCreation
                     return false;
                 }
 
-                int requiredMP;
-                if (RequiredMP >= 1)
+                int requiredMp;
+                if (RequiredMp >= 1)
                 {
-                    requiredMP = StatsEffectedValues.GetRequiredMP(self, RequiredMP);
-                    if (self.Main.Stats.MP < requiredMP)
+                    requiredMp = StatsEffectedValues.GetRequiredMp(self, RequiredMp);
+                    if (self.Main.Stats.Mp < requiredMp)
                     {
                         if (RogueDevice.Primary.Player == self)
                         {
@@ -60,25 +60,25 @@ namespace Roguegard.CharacterCreation
                 }
                 else
                 {
-                    requiredMP = 0;
+                    requiredMp = 0;
                 }
 
                 // スキルによって MP を回復することを考慮して、あらかじめ消費しておく
                 var stats = self.Main.Stats;
-                var beforeMP = stats.MP;
-                stats.SetMP(self, stats.MP - requiredMP);
+                var beforeMp = stats.Mp;
+                stats.SetMp(self, stats.Mp - requiredMp);
 
                 var result = Activate(self, user, activationDepth, arg);
                 if (!result)
                 {
                     // 失敗したら MP を元に戻す
-                    stats.SetMP(self, beforeMP, true);
+                    stats.SetMp(self, beforeMp, true);
                 }
                 return result;
             }
             protected abstract bool Activate(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg);
 
-            public virtual int GetATK(RogueObj self, out bool additionalEffect)
+            public virtual int GetAtk(RogueObj self, out bool additionalEffect)
             {
                 additionalEffect = false;
                 return 0;
@@ -118,19 +118,19 @@ namespace Roguegard.CharacterCreation
                 self.Main.Skills.Remove(this, infoSetType);
             }
 
-            public virtual bool Equals(MPSkillSortedIntrinsic<T> other)
+            public virtual bool Equals(MpSkillSortedIntrinsic<T> other)
             {
                 return other.GetType() == GetType() && other.Lv == Lv;
             }
 
             public bool Equals(ISkill obj)
             {
-                return obj is MPSkillSortedIntrinsic<T> other && Equals(other);
+                return obj is MpSkillSortedIntrinsic<T> other && Equals(other);
             }
 
             public override bool Equals(object obj)
             {
-                return obj is MPSkillSortedIntrinsic<T> other && Equals(other);
+                return obj is MpSkillSortedIntrinsic<T> other && Equals(other);
             }
 
             public override int GetHashCode()
