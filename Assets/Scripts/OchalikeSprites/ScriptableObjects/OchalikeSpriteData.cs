@@ -30,14 +30,14 @@ namespace OchalikeSprites
             _bones.Clear();
         }
 
-        public OchalikeBone CreateBone(Color bareColor, bool bright)
+        public OchalikeBone CreateBone(Color bareColor, bool useDarkOutline)
         {
             return Recursion(0);
 
             OchalikeBone Recursion(int index)
             {
                 var bone = _bones[index];
-                var result = bone.ToBone(bareColor, bright, _pixelsPerUnit);
+                var result = bone.ToBone(bareColor, useDarkOutline, _pixelsPerUnit);
                 var startIndex = index + 1;
                 for (int i = startIndex; i < _bones.Count; i++)
                 {
@@ -97,11 +97,11 @@ namespace OchalikeSprites
             [SerializeField] private float _backOrderInParent = 0f;
             public float BackOrderInParent { get => _backOrderInParent; set => _backOrderInParent = value; }
 
-            public OchalikeBone ToBone(Color bareColor, bool bright, int pixelsPerUnit)
+            public OchalikeBone ToBone(Color bareColor, bool useDarkOutline, int pixelsPerUnit)
             {
                 var bone = new OchalikeBone();
                 bone.Name = _boneName;
-                bone.BareSprite = _bareSprite.GetSprite(bright);
+                bone.BareSprite = _bareSprite.GetSprite(useDarkOutline);
                 bone.BareColor = bareColor;
                 bone.OverridesOnDefaultColor = _overridesOnDefaultColor;
                 bone.FlipX = _flipX;

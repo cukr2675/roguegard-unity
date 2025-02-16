@@ -32,10 +32,10 @@ namespace OchalikeSprites
             _isColorRanged = true;
         }
 
-        public BoneSprite GetSprite(bool bright)
+        public BoneSprite GetSprite(bool useDarkOutline)
         {
-            if (!_isColorRanged || bright) return _spriteOrLightSprite;
-            else return _darkSprite;
+            if (_isColorRanged && useDarkOutline) return _darkSprite;
+            else return _spriteOrLightSprite;
         }
 
         public void Validate()

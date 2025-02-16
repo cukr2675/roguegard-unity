@@ -1,0 +1,18 @@
+{
+    "name": "OchalikeSprites.Editor",
+    "rootNamespace": "OchalikeSprites.Editor",
+    "references": [
+        "GUID:7dfbf61cc65360d44a5ad1b24fe31a31"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

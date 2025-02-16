@@ -18,8 +18,8 @@ namespace Roguegard.CharacterCreation
         {
             var bodyColor = characterCreationData.Race.BodyColor;
             var hairColor = RogueColorUtility.GetHairColor(characterCreationData);
-            var bright = OchalikeSpritesUtility.GetBright(hairColor);
-            if (_bone != null) { mainBone = _bone.CreateBone(bodyColor, bright); }
+            var useDarkOutline = OchalikeSpritesUtility.IsSimilarToLightOutline(hairColor);
+            if (_bone != null) { mainBone = _bone.CreateBone(bodyColor, useDarkOutline); }
             else { mainBone = null; }
             morph = new AppearanceMorph();
         }

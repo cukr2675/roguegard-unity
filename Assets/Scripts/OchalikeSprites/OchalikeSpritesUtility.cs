@@ -11,16 +11,16 @@ namespace OchalikeSprites
         private static float LightDarkThreshold => .4f;
 
         /// <summary>
-        /// まぶたの色と被るか判定する。被る場合は別タイプのまぶた色を使用する
+        /// 指定の色がグレーの輪郭線と被るか判定する。被る場合は黒い輪郭線を使用する
         /// </summary>
-        public static bool GetBright(Color color)
+        public static bool IsSimilarToLightOutline(Color hairColor)
         {
             // ユークリッド距離で十分そうなので使わない
-            //return CalculateCIE76(color, Color.white * .25f) >= LightDarkThreshold * 100f;
+            //return CalculateCIE76(hairColor, Color.white * .25f) < LightDarkThreshold * 100f;
 
-            var c = new Vector3(color.r, color.g, color.b);
-            var eyelidColor = Vector3.one * .25f; // まぶたの色
-            return Vector3.Distance(c, eyelidColor) >= LightDarkThreshold;
+            var c = new Vector3(hairColor.r, hairColor.g, hairColor.b);
+            var eyelidColor = Vector3.one * .25f; // 輪郭線のグレー
+            return Vector3.Distance(c, eyelidColor) < LightDarkThreshold;
         }
 
         private static float CalculateCIE76(Color color1, Color color2)
