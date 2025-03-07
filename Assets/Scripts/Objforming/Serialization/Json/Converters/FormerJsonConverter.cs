@@ -60,14 +60,8 @@ namespace Objforming.Serialization.Json
                 reader.Read(); // キーを飛ばす
                 if (!Former.TryGetMemberByCamel(propertyName, out var member))
                 {
-                    if (reader.TokenType == JsonToken.StartObject || reader.TokenType == JsonToken.StartArray)
-                    {
-                        reader.Skip(); // 値を飛ばす
-                    }
-                    else
-                    {
-                        reader.Read(); // 値を飛ばす
-                    }
+                    reader.Skip(); // 配列またはオブジェクトを飛ばす
+                    reader.Read(); // 数値、文字列、boolean、nullまたは配列とオブジェクトの終端を飛ばす
                     continue;
                 }
 
