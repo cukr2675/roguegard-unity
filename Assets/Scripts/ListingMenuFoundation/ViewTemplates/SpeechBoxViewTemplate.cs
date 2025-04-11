@@ -18,8 +18,8 @@ namespace ListingMF
         public string CaptionBoxSubViewName { get; set; } = StandardSubViewTable.CaptionBoxName;
         public List<StringReplacer> MessageReplacers { get; set; } = new List<StringReplacer>()
         {
-            new("{v}$", "<link=\"VerticalArrow\"></link>"),
-            new("{v}", "<link=\"VerticalArrow\"></link><link=\"PageBreak\"></link>"),
+            new("{v}[\r\n|\r|\n]?$", "<link=\"VerticalArrow\"></link>"),
+            new("{v}[\r\n|\r|\n]?", "\n<link=\"VerticalArrow\"></link><link=\"PageBreak\"></link>"), // 中央揃え・右寄せに対応するため改行する
             new("{>}", "<link=\"HorizontalArrow\"></link>"),
         };
 
@@ -48,7 +48,7 @@ namespace ListingMF
             // 文字送り矢印などを処理する
             foreach (var replacer in MessageReplacers)
             {
-                message = Regex.Replace(message, replacer.From, replacer.To, RegexOptions.IgnoreCase);
+                message = Regex.Replace(message, replacer.From, replacer.GetTo(manager, arg), RegexOptions.IgnoreCase);
             }
 
             // メッセージボックスのビューを表示
@@ -135,15 +135,30 @@ namespace ListingMF
         public class StringReplacer
         {
             public string From { get; }
-            public string To { get; }
+            private readonly GetElementName<TMgr, TArg> to;
 
             public StringReplacer(string from, string to)
             {
+                if (from == null) throw new System.ArgumentNullException(nameof(from));
+                if (to == null) throw new System.ArgumentNullException(nameof(to));
+
                 From = from;
-                To = to;
+                this.to = delegate { return to; };
             }
 
-            public string Replace(string value) => value.Replace(From, To, System.StringComparison.OrdinalIgnoreCase);
+            public StringReplacer(string from, GetElementName<TMgr, TArg> to)
+            {
+                if (from == null) throw new System.ArgumentNullException(nameof(from));
+                if (to == null) throw new System.ArgumentNullException(nameof(to));
+
+                From = from;
+                this.to = to;
+            }
+
+            public string GetTo(TMgr manager, TArg arg)
+            {
+                return to(manager, arg);
+            }
         }
     }
 }

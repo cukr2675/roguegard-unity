@@ -12,24 +12,30 @@ namespace ListingMF
         private readonly List<ISelectOption> selectOptions = new();
         private readonly SpeechBoxViewTemplate<TMgr, TArg> view;
 
-        public override bool IsIncremental => true;
+        public override bool IsIncremental { get; }
 
-        public ChoicesMenuScreen(string message)
+        public ChoicesMenuScreen(string message, bool isIncremental = true, string speechBoxSubViewName = null, string choicesSubViewName = null)
         {
             getMessage = delegate { return message; };
+            IsIncremental = isIncremental;
 
             view = new()
             {
             };
+            if (speechBoxSubViewName != null) { view.SpeechBoxSubViewName = speechBoxSubViewName; }
+            if (choicesSubViewName != null) { view.ChoicesSubViewName = choicesSubViewName; }
         }
 
-        public ChoicesMenuScreen(GetElementName<TMgr, TArg> getMessage)
+        public ChoicesMenuScreen(GetElementName<TMgr, TArg> getMessage, bool isIncremental = true, string speechBoxSubViewName = null, string choicesSubViewName = null)
         {
             this.getMessage = getMessage;
+            IsIncremental = isIncremental;
 
             view = new()
             {
             };
+            if (speechBoxSubViewName != null) { view.SpeechBoxSubViewName = speechBoxSubViewName; }
+            if (choicesSubViewName != null) { view.ChoicesSubViewName = choicesSubViewName; }
         }
 
         public ChoicesMenuScreen<TMgr, TArg> Option(string name, HandleClickElement<TMgr, TArg> onClick)
@@ -38,9 +44,16 @@ namespace ListingMF
             return this;
         }
 
-        public ChoicesMenuScreen<TMgr, TArg> Back()
+        public ChoicesMenuScreen<TMgr, TArg> Back(string name = null)
         {
-            selectOptions.Add(BackSelectOption.Instance);
+            if (name == null)
+            {
+                selectOptions.Add(BackSelectOption.Instance);
+            }
+            else
+            {
+                selectOptions.Add(BackSelectOption.Create<TMgr, TArg>(name));
+            }
             return this;
         }
 
@@ -57,7 +70,8 @@ namespace ListingMF
 
         public override void CloseScreenView(TMgr manager, bool back)
         {
-            view.HideTemplate(manager, back);
+            if (IsIncremental) { view.HideTemplate(manager, back); }
+            else { base.CloseScreenView(manager, back); }
         }
     }
 }

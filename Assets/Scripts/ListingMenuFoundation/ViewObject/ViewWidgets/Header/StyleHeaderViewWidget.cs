@@ -4,8 +4,8 @@ using UnityEngine;
 
 namespace ListingMF
 {
-    [AddComponentMenu("UI/Listing Menu Foundation/View Widgets/Headers/LMF Content Size Header View Widget")]
-    public class ContentSizeHeaderViewWidget : ViewWidget
+    [AddComponentMenu("UI/Listing Menu Foundation/View Widgets/Headers/LMF Style Header View Widget")]
+    public class StyleSizeHeaderViewWidget : ViewWidget
     {
         private ElementsSubViewBase _parent;
         protected override ElementsSubViewBase Parent => _parent;
@@ -21,7 +21,7 @@ namespace ListingMF
 
             if (elementsSubView is WidgetsSubView widgetsSubView)
             {
-                widgetsSubView.SetContentWidth(widgetOption.Width);
+                widgetsSubView.SetStyle(widgetOption.Style);
             }
 
             var headerViewWidget = Instantiate(this);
@@ -30,22 +30,22 @@ namespace ListingMF
             return true;
         }
 
-        public static IWidgetOption CreateOption(float width)
+        public static IWidgetOption CreateOption(string style)
         {
             return new WidgetOption()
             {
-                Width = width,
+                Style = style,
             };
         }
 
         public interface IWidgetOption
         {
-            float Width { get; }
+            string Style { get; }
         }
 
         private class WidgetOption : IWidgetOption
         {
-            public float Width { get; set; }
+            public string Style { get; set; }
         }
     }
 }

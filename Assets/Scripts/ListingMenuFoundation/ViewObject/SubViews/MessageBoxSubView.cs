@@ -52,12 +52,16 @@ namespace ListingMF
             ref IElementsSubViewStateProvider stateProvider)
         {
             _messageBox.Clear();
-            for (int i = 0; i < list.Count; i++)
+            OnEndAnimation += (manager, arg) =>
             {
-                var name = handler.GetName(list[i], manager, arg);
-                name = manager.Localize(name);
-                _messageBox.Append(name);
-            }
+                // メッセージボックスの表示アニメーションが完了してから文字を表示する
+                for (int i = 0; i < list.Count; i++)
+                {
+                    var name = handler.GetName(list[i], manager, arg);
+                    name = manager.Localize(name);
+                    _messageBox.Append(name);
+                }
+            };
             SetArg(manager, arg);
             SetStatusCode(0);
         }

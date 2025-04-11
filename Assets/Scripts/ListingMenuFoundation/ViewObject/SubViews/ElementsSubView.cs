@@ -12,7 +12,7 @@ namespace ListingMF
     {
         private CanvasGroup canvasGroup;
 
-        private event HandleEndAnimation OnEndAnimation;
+        protected event HandleEndAnimation OnEndAnimation;
 
         /// <summary>
         /// この SubView 内で最後に選択された <see cref="GameObject"/>

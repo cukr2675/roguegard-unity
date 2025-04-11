@@ -46,7 +46,7 @@ namespace ListingMF
         {
             ElementName = null;
             name = "null";
-            InnerSetElement(null, ElementToStringHandler.Instance);
+            if (Manager != null) { InnerSetElement(null, ElementToStringHandler.Instance); }
         }
 
         protected abstract void InnerSetElement(object element, IElementHandler handler);
@@ -58,10 +58,20 @@ namespace ListingMF
             isOutOfRange = outOfRange;
         }
 
-        void ISelectHandler.OnSelect(BaseEventData eventData)
+        void ISelectHandler.OnSelect(BaseEventData eventData) => OnSelect(eventData);
+
+        protected virtual void OnSelect(BaseEventData eventData)
         {
-            if (selectable.IsInteractable()) { Parent.OnSelectViewElement(gameObject, isOutOfRange); }
-            else { Parent.QueueSelectToLastSelectedObj(gameObject, CursorPlay.None); }
+            try
+            {
+                if (selectable.IsInteractable()) { Parent.OnSelectViewElement(gameObject, isOutOfRange); }
+                else { Parent.QueueSelectToLastSelectedObj(gameObject, CursorPlay.None); }
+            }
+            catch
+            {
+                Debug.LogError($"Error from {this}");
+                throw;
+            }
         }
 
         // Animation から呼び出すメソッド
@@ -90,12 +100,18 @@ namespace ListingMF
         /// <summary>
         /// 縦並びの <see cref="ViewElement"/> の <see cref="Selectable.navigation"/> を設定する
         /// </summary>
-        public static void SetVerticalNavigation(IReadOnlyList<ViewElement> viewElements, int index)
+        public static void SetVerticalNavigation(IReadOnlyList<ViewElement> viewElements, int index, bool loop = false)
         {
             var prevSelectable = index >= 1 ? viewElements[index - 1].selectable : null;
             var centerSelectable = viewElements[index].selectable;
             var nextSelectable = index < viewElements.Count - 1 ? viewElements[index + 1].selectable : null;
             if (centerSelectable == null) return;
+
+            if (loop)
+            {
+                if (prevSelectable == null) { prevSelectable = viewElements[viewElements.Count - 1].selectable; }
+                if (nextSelectable == null) { nextSelectable = viewElements[0].selectable; }
+            }
 
             if (prevSelectable != null)
             {
@@ -121,6 +137,50 @@ namespace ListingMF
                     mode = Navigation.Mode.Explicit,
                     selectOnUp = centerSelectable,
                     selectOnDown = nextSelectable.navigation.selectOnDown,
+                };
+            }
+        }
+
+        /// <summary>
+        /// 横並びの <see cref="ViewElement"/> の <see cref="Selectable.navigation"/> を設定する
+        /// </summary>
+        public static void SetHorizontalNavigation(IReadOnlyList<ViewElement> viewElements, int index, bool loop = false)
+        {
+            var prevSelectable = index >= 1 ? viewElements[index - 1].selectable : null;
+            var centerSelectable = viewElements[index].selectable;
+            var nextSelectable = index < viewElements.Count - 1 ? viewElements[index + 1].selectable : null;
+            if (centerSelectable == null) return;
+
+            if (loop)
+            {
+                if (prevSelectable == null) { prevSelectable = viewElements[viewElements.Count - 1].selectable; }
+                if (nextSelectable == null) { nextSelectable = viewElements[0].selectable; }
+            }
+
+            if (prevSelectable != null)
+            {
+                prevSelectable.navigation = new Navigation()
+                {
+                    mode = Navigation.Mode.Explicit,
+                    selectOnLeft = prevSelectable.navigation.selectOnLeft,
+                    selectOnRight = centerSelectable,
+                };
+            }
+
+            centerSelectable.navigation = new Navigation()
+            {
+                mode = Navigation.Mode.Explicit,
+                selectOnLeft = prevSelectable,
+                selectOnRight = nextSelectable,
+            };
+
+            if (nextSelectable != null)
+            {
+                nextSelectable.navigation = new Navigation()
+                {
+                    mode = Navigation.Mode.Explicit,
+                    selectOnLeft = centerSelectable,
+                    selectOnRight = nextSelectable.navigation.selectOnRight,
                 };
             }
         }

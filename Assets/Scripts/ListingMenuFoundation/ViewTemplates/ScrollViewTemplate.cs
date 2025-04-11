@@ -41,12 +41,7 @@ namespace ListingMF
             if (manager == null) throw new System.ArgumentNullException(nameof(manager));
 
             // 必要に応じてスクロール位置をリセット
-            if (viewStateHolder != prevViewStateHolder)
-            {
-                scrollSubViewStateProvider?.Reset();
-                captionBoxSubViewStateProvider?.Reset();
-                backAnchorSubViewStateProvider?.Reset();
-            }
+            if (viewStateHolder != prevViewStateHolder) { ResetSubViewStateProviders(); }
             prevViewStateHolder = viewStateHolder;
 
             // スクロールのビューを表示
@@ -58,6 +53,13 @@ namespace ListingMF
 
             if (TryShowSubViews(manager, arg)) return null;
             else return new Builder(this, manager, arg);
+        }
+
+        protected virtual void ResetSubViewStateProviders()
+        {
+            scrollSubViewStateProvider?.Reset();
+            captionBoxSubViewStateProvider?.Reset();
+            backAnchorSubViewStateProvider?.Reset();
         }
 
         protected override void ShowSubViews(TMgr manager, TArg arg)
@@ -81,7 +83,7 @@ namespace ListingMF
             }
         }
 
-        public void HideTemplate(TMgr manager, bool back)
+        public virtual void HideTemplate(TMgr manager, bool back)
         {
             manager.GetSubView(ScrollSubViewName).Hide(back);
             if (Title != null) { manager.GetSubView(CaptionBoxSubViewName).Hide(back); }

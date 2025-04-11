@@ -59,17 +59,17 @@ MonoBehaviour:
   _maxLineCount: 3
   _visibleMode: 0
   _characterPerSecond: 60
-  _pageBreakHiddenLinkID: PageBreak
-  _horizontalRuleHiddenLinkID: HorizontalRule
+  _pageBreakHiddenLinkId: PageBreak
+  _horizontalRuleHiddenLinkId: HorizontalRule
   _normalizedLineOffset: 1
-  _hiddenLinkIDOnPageOver: PageBreak
-  _hiddenLinkIDOnEOF: EOF
+  _hiddenLinkIdOnPageOver: PageBreak
+  _hiddenLinkIdOnEof: EOF
   _onReachHiddenLink:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6861246000892186305}
-        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-        m_MethodName: SetTrigger
+      - m_Target: {fileID: 975628348070615968}
+        m_TargetAssemblyTypeName: ListingMF.MessageBox, ListingMenuFoundation
+        m_MethodName: SetAnimatorTriggerIfExists
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -79,10 +79,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  isScrollingNow: 0
 --- !u!95 &6861246000892186305
 Animator:
-  serializedVersion: 5
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -96,6 +95,7 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
@@ -397,6 +397,10 @@ PrefabInstance:
       value: 64
       objectReference: {fileID: 0}
     - target: {fileID: 6468216191216407787, guid: fb2945a726658cc40853d1dabf981f86, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 76dea937368cf534da357a41cdf6a363, type: 2}
+    - target: {fileID: 6468216191216407787, guid: fb2945a726658cc40853d1dabf981f86, type: 3}
       propertyPath: m_fontSizeBase
       value: 64
       objectReference: {fileID: 0}
@@ -407,7 +411,11 @@ PrefabInstance:
     - target: {fileID: 6468216191216407787, guid: fb2945a726658cc40853d1dabf981f86, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 7670974690536288066, guid: 672eb0804d93fb143aa99c7b454b00e0, type: 2}
+      objectReference: {fileID: 3399108625678817844, guid: 76dea937368cf534da357a41cdf6a363, type: 2}
+    - target: {fileID: 6468216191216407787, guid: fb2945a726658cc40853d1dabf981f86, type: 3}
+      propertyPath: m_TextWrappingMode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6468216191216407787, guid: fb2945a726658cc40853d1dabf981f86, type: 3}
       propertyPath: m_VerticalAlignment
       value: 256
@@ -415,6 +423,10 @@ PrefabInstance:
     - target: {fileID: 6468216191216407787, guid: fb2945a726658cc40853d1dabf981f86, type: 3}
       propertyPath: m_enableWordWrapping
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6468216191216407787, guid: fb2945a726658cc40853d1dabf981f86, type: 3}
+      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
+      value: 1801810542
       objectReference: {fileID: 0}
     - target: {fileID: 9156808011773085696, guid: fb2945a726658cc40853d1dabf981f86, type: 3}
       propertyPath: m_Pivot.x

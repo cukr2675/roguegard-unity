@@ -66,6 +66,7 @@ namespace ListingMF
 
         private TextTypingEffect textTypingEffect;
         private TextHorizontalRuler textRuleEffect;
+        private Animator animator;
 
         private float characterCount;
         private int linePosition;
@@ -245,6 +246,24 @@ namespace ListingMF
         public void InvokeReachHiddenLink(string hiddenLinkId)
         {
             _onReachHiddenLink.Invoke(hiddenLinkId);
+        }
+
+        /// <summary>
+        /// 指定の名前のトリガーが存在するとき、そのトリガーを有効にする。
+        /// アニメーターと関係のない HiddenLink を使用したいとき使う
+        /// </summary>
+        public void SetAnimatorTriggerIfExists(string name)
+        {
+            if (animator == null && !TryGetComponent(out animator)) return;
+
+            foreach (var parameters in animator.parameters)
+            {
+                if (parameters.name == name)
+                {
+                    animator.SetTrigger(name);
+                    break;
+                }
+            }
         }
 
         private enum VisibleMode

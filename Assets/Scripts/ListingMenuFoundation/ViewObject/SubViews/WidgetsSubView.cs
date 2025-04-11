@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using System;
 using UnityEngine.UI;
-using UnityEngine.EventSystems;
 
 namespace ListingMF
 {
@@ -16,6 +16,10 @@ namespace ListingMF
         [Tooltip("Awake で起動するトリガー名\nこの SubView を表示状態で生成したいときに使う")]
         [SerializeField] private string _initTrigger = null;
 
+        [Header("Animation")]
+        [SerializeField] private string _defaultStyle = null;
+        private Animator animator;
+
         [Header("Other")]
 
         [Tooltip("この値が true のときカーソル移動の対象となる")]
@@ -27,6 +31,7 @@ namespace ListingMF
         private Selectable fallbackSelectable;
         private readonly List<GameObject> viewWidgetRootObjs = new();
         private StateProvider currentStateProvider;
+        private string style;
 
         /// <summary>
         /// スクロールバーの遊び
@@ -70,9 +75,10 @@ namespace ListingMF
 
         private void Awake()
         {
-            if (!string.IsNullOrWhiteSpace(_initTrigger) && TryGetComponent<Animator>(out var animator))
+            if (TryGetComponent(out animator))
             {
-                animator.SetTrigger(_initTrigger);
+                if (!string.IsNullOrWhiteSpace(_defaultStyle)) { SetStyle(_defaultStyle); }
+                if (!string.IsNullOrWhiteSpace(_initTrigger) && TryGetComponent(out animator)) { animator.SetTrigger(_initTrigger); }
             }
         }
 
@@ -110,6 +116,9 @@ namespace ListingMF
             // ビューの状態を初期化
             _scrollRect.horizontal = false;
             fixedContentWidth = false;
+
+            // 前回のスタイルを解除する
+            SetStyle(null);
 
             var viewportSize = _scrollRect.viewport.rect.size;
             var contentSize = new Vector2(viewportSize.x, 0f);
@@ -151,6 +160,9 @@ namespace ListingMF
                 viewWidgetRootObjs.Add(viewWidget.gameObject);
             }
 
+            // スタイルが設定されていなければデフォルトを使用
+            if (style == null && !string.IsNullOrWhiteSpace(_defaultStyle)) { SetStyle(_defaultStyle); }
+
             contentSize.y = sumHeight;
             if (fixedContentWidth) { contentSize.x = _scrollRect.content.sizeDelta.x; }
 
@@ -177,6 +189,81 @@ namespace ListingMF
             _scrollRect.content.sizeDelta = new Vector2(contentWidth, _scrollRect.content.sizeDelta.y);
             marginSize.x = contentWidth - viewportWidth;
             fixedContentWidth = true;
+        }
+
+        public void SetStyle(string newStyle)
+        {
+            if (newStyle == style) return;
+
+            // この値が true のとき新しいスタイルの適用、 false のとき設定済みスタイルの初期化
+            var apply = newStyle != null;
+
+            if (apply && style != null) throw new InvalidOperationException($"スタイル ({style}) 解除前に新しいスタイルを適用することはできません。");
+
+            // 新しいスタイルを保持
+            if (apply) { style = newStyle; }
+
+            // スタイルをスペース区切りで処理する
+            for (int i = 0; i < style.Length; i++)
+            {
+                if ((i == 0 || style[i - 1] == ' ') && style[i] != ' ')
+                {
+                    var styleItemStart = i;
+                    var styleItemLength = style.IndexOf(' ', styleItemStart);
+                    if (styleItemLength == -1) { styleItemLength = style.Length - styleItemStart; }
+                    i = styleItemStart + styleItemLength;
+
+                    // スペース区切りで取得したスタイル名
+                    var styleItem = style.AsSpan(styleItemStart, styleItemLength);
+
+                    // AnimationController のレイヤーの重みをスタイル名で変更する
+                    if (!styleItem.Contains(":".AsSpan(), StringComparison.CurrentCulture) && animator != null)
+                    {
+                        var any = false;
+                        for (int j = 0; j < animator.layerCount; j++)
+                        {
+                            if (EqualsIgnoreWhiteSpace(animator.GetLayerName(j), styleItem))
+                            {
+                                // スタイル名と一致するレイヤーの重みを更新する
+                                var weight = apply ? 1f : 0f;
+                                animator.SetLayerWeight(j, weight);
+                                any = true;
+                            }
+                        }
+
+                        if (apply && !any)
+                        {
+                            // レイヤーが見つからなければ警告
+                            Debug.LogWarning($"レイヤー {new string(styleItem)} が見つかりませんでした。存在するレイヤー: {string.Join(", ", GetLayerNames(animator))}");
+                        }
+                    }
+                }
+            }
+
+            // 設定済みスタイルを破棄
+            if (!apply) { style = null; }
+        }
+
+        private static bool EqualsIgnoreWhiteSpace(string layerName, ReadOnlySpan<char> style)
+        {
+            var styleIndex = 0;
+            for (int i = 0; i < layerName.Length; i++)
+            {
+                if (layerName[i] == ' ') continue; // レイヤー名の空白はないものとして判定する
+
+                if (layerName[i] != style[styleIndex]) return false;
+
+                styleIndex++;
+            }
+            return true;
+        }
+
+        private static IEnumerable<string> GetLayerNames(Animator animator)
+        {
+            for (int i = 0; i < animator.layerCount; i++)
+            {
+                yield return animator.GetLayerName(i);
+            }
         }
 
         private class StateProvider : IElementsSubViewStateProvider

@@ -110,7 +110,7 @@ namespace ListingMF
             text.ForceMeshUpdate(true);
             hiddenLinkManager.UpdateLinks(text);
             isDirty = false;
-            IsEof = text.text.Length == 0;
+            IsEof = stringBuilder.Length == 0; // text.text は WebGL で誤った文字列を取得してしまうため stringBuilder から取得する
             if (IsEof) { onReachHiddenLink.Invoke(eofHiddenLinkId); }
         }
 

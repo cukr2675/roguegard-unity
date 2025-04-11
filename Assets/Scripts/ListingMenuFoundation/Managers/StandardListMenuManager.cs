@@ -18,6 +18,7 @@ namespace ListingMF
         public StandardSubViewTable StandardSubViewTable { get; private set; }
 
         public event System.Action OnError;
+        public event System.Action OnDone;
 
         private readonly MenuScreenStack<TMgr, TArg> stack = new();
         private MenuScreenStack<TMgr, TArg>.StackItem reservedMenu;
@@ -155,6 +156,7 @@ namespace ListingMF
             HideAll();
             StandardSubViewTable.SetBlocker(false);
             IsDone = true;
+            OnDone?.Invoke();
         }
 
         public void ResetDone()
