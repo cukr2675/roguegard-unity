@@ -1,9 +1,9 @@
 fileFormatVersion: 2
-guid: eadd615260332ec4cac4029b847a234f
+guid: b67514bbcff16b5419823a25b405c678
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
-  serializedVersion: 12
+  serializedVersion: 13
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -67,7 +67,7 @@ TextureImporter:
   swizzle: 50462976
   cookieLightType: 1
   platformSettings:
-  - serializedVersion: 3
+  - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 128
     resizeAlgorithm: 0
@@ -80,7 +80,7 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
+  - serializedVersion: 4
     buildTarget: Standalone
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -93,7 +93,7 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
+  - serializedVersion: 4
     buildTarget: Server
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -106,7 +106,7 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
+  - serializedVersion: 4
     buildTarget: WebGL
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -133,6 +133,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.55, y: -0.46153846}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -154,6 +155,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.55, y: -0.46153846}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -175,6 +177,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.29411766, y: -0.33333334}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -196,6 +199,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.42857143, y: -1.3333334}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -217,6 +221,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.44444445, y: 0.071428575}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -238,6 +243,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.44444445, y: 0.071428575}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -259,6 +265,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.5, y: -1.75}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -269,7 +276,162 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: PriestHeadwear_NF
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 65
+        width: 20
+        height: 9
+      alignment: 9
+      pivot: {x: 0.45, y: -0.44444445}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c220487f39034064bae129656d7ad07d
+      internalID: -205614338
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PriestHeadwear_BF
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 55
+        width: 21
+        height: 10
+      alignment: 9
+      pivot: {x: 0.42857143, y: -0.2}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e2b6f76341f5698418cb4a21ff07c467
+      internalID: -1117725088
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MagesHat_NF
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 99
+        width: 29
+        height: 13
+      alignment: 9
+      pivot: {x: 0.4827586, y: -0.3846154}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f2d6ca5fa564cae4fbf3731ecbea63c5
+      internalID: -828201170
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MagesHat_NR
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 94
+        width: 30
+        height: 5
+      alignment: 9
+      pivot: {x: 0.46666667, y: -0.4}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 671ed68a0d62bb64da55d068b0114de5
+      internalID: -1366413516
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MagesHat_BF
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 78
+        width: 29
+        height: 16
+      alignment: 9
+      pivot: {x: 0.4827586, y: -0.125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6a5ea9ab3d37d6546865132ba235c96b
+      internalID: -885118535
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RoughSeasBand_NF
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 112
+        width: 2
+        height: 4
+      alignment: 9
+      pivot: {x: -2, y: -1.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9b4bd06eb20e0da43b4ddd6687a4a900
+      internalID: 2010853625
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SideFrillHeadband_NFBR
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 112
+        width: 15
+        height: 7
+      alignment: 9
+      pivot: {x: 0.33333334, y: -0.5714286}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ceafd4f5ac4dc5a4a959b7d0fb954ede
+      internalID: -1448715413
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
+    customData: 
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
@@ -279,14 +441,23 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
     nameFileIdTable:
       DiademOfBrave_NF: -693634052
       FlightHat_BF: -388090836
       FlightHat_NF: 1071780184
       IllusionBand_BF: 65722407
       IllusionBand_NFBR: -1265775385
+      MagesHat_BF: -885118535
+      MagesHat_NF: -828201170
+      MagesHat_NR: -1366413516
+      PriestHeadwear_BF: -1117725088
+      PriestHeadwear_NF: -205614338
+      RoughSeasBand_NF: 2010853625
       Shako_BF: -118468796
       Shako_NF: 279867003
+      SideFrillHeadband_NFBR: -1448715413
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

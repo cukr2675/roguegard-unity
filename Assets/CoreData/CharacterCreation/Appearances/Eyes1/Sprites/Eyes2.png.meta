@@ -123,7 +123,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Eye20RA0_NF
+      name: Eye17RA0_NF
       rect:
         serializedVersion: 2
         x: 0
@@ -137,14 +137,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dfe01ec506ea7bf46a91f9dfbadbc328
-      internalID: -313256244
+      spriteID: 4845ef5bf371bc04c921d545f44e8c54
+      internalID: -1635538659
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Eye20RA1_NF
+      name: Eye17RA1_NF
       rect:
         serializedVersion: 2
         x: 0
@@ -158,14 +158,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6317ccbb1decd7c45a1f0220049e41ed
-      internalID: 1823416206
+      spriteID: 70bd2e3e30574b843847cada2940af96
+      internalID: 323502227
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Eye20RB0_NF
+      name: Eye17RB0_NF
       rect:
         serializedVersion: 2
         x: 6
@@ -179,14 +179,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 92c1e6f89c4687743a47833486c7dfe2
-      internalID: -1844165589
+      spriteID: 034763c4ffd815a47954dd236c0121c8
+      internalID: -835667772
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Eye20RB1_NF
+      name: Eye17RB1_NF
       rect:
         serializedVersion: 2
         x: 6
@@ -200,14 +200,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d2522809bd787e9468844923b5189ced
-      internalID: 1328424487
+      spriteID: fe48378b4c902394b8dbb8d5296a2900
+      internalID: 1152161770
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Eye20RC0_NF
+      name: Eye17RC0_NF
       rect:
         serializedVersion: 2
         x: 12
@@ -221,14 +221,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d14a74cd9ba603d4a8cad655745a3575
-      internalID: 991963909
+      spriteID: 13e4ef0a81ff1c34b8a7440f79f7c096
+      internalID: 556841533
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Eye20RC1_NF
+      name: Eye17RC1_NF
       rect:
         serializedVersion: 2
         x: 12
@@ -242,14 +242,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 68eaf59f864e6e645921524449539019
-      internalID: -176257877
+      spriteID: 426dc37f666e86d419f60e8a6adb12a4
+      internalID: 1943522019
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Eye20RD0_NF
+      name: Eye17RD0_NF
       rect:
         serializedVersion: 2
         x: 18
@@ -263,14 +263,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b4e9fca180055f8498758c6b98e4d008
-      internalID: 1029845987
+      spriteID: 1f2fc30a35d743749956bee09cd440a6
+      internalID: -517238987
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Eye20RD1_NF
+      name: Eye17RD1_NF
       rect:
         serializedVersion: 2
         x: 18
@@ -284,14 +284,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6bead118c58bd484f94d0017dcc295a0
-      internalID: 1202595692
+      spriteID: 4fb157a4e1d9a0a42b0fc0e968d3b86c
+      internalID: -197868496
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Eye20LA0_NF
+      name: Eye17LA0_NF
       rect:
         serializedVersion: 2
         x: 3
@@ -305,14 +305,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a0736f5128aebfc4080f23f4a677f811
-      internalID: 246264298
+      spriteID: 6ba766d35051af24390c558451583955
+      internalID: -36109086
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Eye20LA1_NF
+      name: Eye17LA1_NF
       rect:
         serializedVersion: 2
         x: 3
@@ -326,14 +326,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ca8da6876aae0004795b6883d02b7a4b
-      internalID: 1775272076
+      spriteID: 3a7dfa4ec21690946aaf33711c3ffe30
+      internalID: 1266424336
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Eye20LB0_NF
+      name: Eye17LB0_NF
       rect:
         serializedVersion: 2
         x: 9
@@ -347,14 +347,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: eb07f626042a7a24ba4dc0763c13e62f
-      internalID: -1756708350
+      spriteID: 6f28a34d27990a542b3a621dedc98a1f
+      internalID: -2012454802
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Eye20LB1_NF
+      name: Eye17LB1_NF
       rect:
         serializedVersion: 2
         x: 9
@@ -368,14 +368,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1b5972021f44d304c8496de6ce8ff3f4
-      internalID: -19978308
+      spriteID: c1ecf2c6912daa747a276aa1ccc4ff8f
+      internalID: -377031411
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Eye20LC0_NF
+      name: Eye17LC0_NF
       rect:
         serializedVersion: 2
         x: 15
@@ -389,14 +389,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3f730d7eee812cd44adf603896b568ca
-      internalID: -105122268
+      spriteID: c289e4322efe69744ba28b5b50cbd2e9
+      internalID: -1219245653
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Eye20LC1_NF
+      name: Eye17LC1_NF
       rect:
         serializedVersion: 2
         x: 15
@@ -410,14 +410,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e25e70b421a89284faf0dae48bec0034
-      internalID: -356286169
+      spriteID: 89befb919f81bfc49a7278957dcbf7ee
+      internalID: -633146775
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Eye20LD0_NF
+      name: Eye17LD0_NF
       rect:
         serializedVersion: 2
         x: 21
@@ -431,14 +431,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 47ae7829cd10dde458ea6e3da2825e27
-      internalID: -1031054317
+      spriteID: 0eb52ec376b9a7245b3b0a2c559fb735
+      internalID: -986772241
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Eye20LD1_NF
+      name: Eye17LD1_NF
       rect:
         serializedVersion: 2
         x: 21
@@ -452,8 +452,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3b2cf26fe9d99ea42ac1f7ee9091d223
-      internalID: 1626361058
+      spriteID: 8d20a73321526bd4298550ce717ec6b4
+      internalID: -1883653427
       vertices: []
       indices: 
       edges: []

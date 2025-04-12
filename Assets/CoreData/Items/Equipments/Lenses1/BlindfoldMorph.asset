@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ff905651ac553e458ac896bdf1ceec6, type: 3}
   m_Name: BlindfoldMorph
   m_EditorClassIdentifier: 
-  a: 1
   _items:
   - _name: {fileID: 11400000, guid: d75b8d3f26400424498cb4eff95f5ddd, type: 2}
     _hasMorphBareSprite: 1
@@ -21,13 +20,13 @@ MonoBehaviour:
       _normalRear: {fileID: 0}
       _backFront: {fileID: 0}
       _backRear: {fileID: 0}
+    _hasMorphBareColor: 0
     _morphBareColor: {r: 1, g: 1, b: 1, a: 1}
     _morphBareColorIsFixed: 0
-    _hasMorphBareColor: 0
     _overridesOnDefaultColor: 0
     _equipmentSprites:
     - _sprite:
-        _normalFront: {fileID: -4628747989415327827, guid: c5e4dd9e37df35848a679656bb606de5, type: 3}
+        _normalFront: {fileID: 657288026, guid: a0d232aff9562d445a2cdd176728e442, type: 3}
         _normalRear: {fileID: 0}
         _backFront: {fileID: 0}
         _backRear: {fileID: 0}
@@ -40,8 +39,8 @@ MonoBehaviour:
       _normalRear: {fileID: 0}
       _backFront: {fileID: 0}
       _backRear: {fileID: 0}
+    _hasMorphBareColor: 0
     _morphBareColor: {r: 1, g: 1, b: 1, a: 1}
     _morphBareColorIsFixed: 0
-    _hasMorphBareColor: 0
     _overridesOnDefaultColor: 0
     _equipmentSprites: []

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Eye10R
   m_EditorClassIdentifier: 
   _descriptionName: "\u76EE10"
-  _icon: {fileID: 1226825483, guid: 7460fdaf1dc29ca49bb0b719cad192bc, type: 3}
+  _icon: {fileID: 120784801, guid: 7460fdaf1dc29ca49bb0b719cad192bc, type: 3}
   _color: {r: 1, g: 1, b: 1, a: 1}
   _caption: 
   _details:
@@ -25,45 +25,45 @@ MonoBehaviour:
   _table:
   - _isColorRanged: 1
     _spriteOrLightSprite:
-      _normalFront: {fileID: 1226825483, guid: 7460fdaf1dc29ca49bb0b719cad192bc, type: 3}
+      _normalFront: {fileID: 120784801, guid: 7460fdaf1dc29ca49bb0b719cad192bc, type: 3}
       _normalRear: {fileID: 0}
       _backFront: {fileID: 0}
       _backRear: {fileID: 0}
     _darkSprite:
-      _normalFront: {fileID: -1761397412, guid: 7460fdaf1dc29ca49bb0b719cad192bc, type: 3}
+      _normalFront: {fileID: 980882007, guid: 7460fdaf1dc29ca49bb0b719cad192bc, type: 3}
       _normalRear: {fileID: 0}
       _backFront: {fileID: 0}
       _backRear: {fileID: 0}
   - _isColorRanged: 1
     _spriteOrLightSprite:
-      _normalFront: {fileID: -1420442686, guid: 7460fdaf1dc29ca49bb0b719cad192bc, type: 3}
+      _normalFront: {fileID: 1133430744, guid: 7460fdaf1dc29ca49bb0b719cad192bc, type: 3}
       _normalRear: {fileID: 0}
       _backFront: {fileID: 0}
       _backRear: {fileID: 0}
     _darkSprite:
-      _normalFront: {fileID: -1111467745, guid: 7460fdaf1dc29ca49bb0b719cad192bc, type: 3}
+      _normalFront: {fileID: 23657628, guid: 7460fdaf1dc29ca49bb0b719cad192bc, type: 3}
       _normalRear: {fileID: 0}
       _backFront: {fileID: 0}
       _backRear: {fileID: 0}
   - _isColorRanged: 1
     _spriteOrLightSprite:
-      _normalFront: {fileID: 679444365, guid: 7460fdaf1dc29ca49bb0b719cad192bc, type: 3}
+      _normalFront: {fileID: 1926316127, guid: 7460fdaf1dc29ca49bb0b719cad192bc, type: 3}
       _normalRear: {fileID: 0}
       _backFront: {fileID: 0}
       _backRear: {fileID: 0}
     _darkSprite:
-      _normalFront: {fileID: 467590988, guid: 7460fdaf1dc29ca49bb0b719cad192bc, type: 3}
+      _normalFront: {fileID: 522021768, guid: 7460fdaf1dc29ca49bb0b719cad192bc, type: 3}
       _normalRear: {fileID: 0}
       _backFront: {fileID: 0}
       _backRear: {fileID: 0}
   - _isColorRanged: 1
     _spriteOrLightSprite:
-      _normalFront: {fileID: -652294215, guid: 7460fdaf1dc29ca49bb0b719cad192bc, type: 3}
+      _normalFront: {fileID: -701499358, guid: 7460fdaf1dc29ca49bb0b719cad192bc, type: 3}
       _normalRear: {fileID: 0}
       _backFront: {fileID: 0}
       _backRear: {fileID: 0}
     _darkSprite:
-      _normalFront: {fileID: 305016195, guid: 7460fdaf1dc29ca49bb0b719cad192bc, type: 3}
+      _normalFront: {fileID: 1971854813, guid: 7460fdaf1dc29ca49bb0b719cad192bc, type: 3}
       _normalRear: {fileID: 0}
       _backFront: {fileID: 0}
       _backRear: {fileID: 0}

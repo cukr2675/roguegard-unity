@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ff905651ac553e458ac896bdf1ceec6, type: 3}
   m_Name: HornMorph
   m_EditorClassIdentifier: 
-  a: 1
   _items:
   - _name: {fileID: 11400000, guid: ec68d48baa662234394a31361604143d, type: 2}
     _hasMorphBareSprite: 0
@@ -21,15 +20,15 @@ MonoBehaviour:
       _normalRear: {fileID: 0}
       _backFront: {fileID: 0}
       _backRear: {fileID: 0}
+    _hasMorphBareColor: 0
     _morphBareColor: {r: 1, g: 1, b: 1, a: 1}
     _morphBareColorIsFixed: 0
-    _hasMorphBareColor: 0
     _overridesOnDefaultColor: 0
     _equipmentSprites:
     - _sprite:
-        _normalFront: {fileID: 1895795045, guid: 6a76f83f271204a45b8c9c778cf89534, type: 3}
-        _normalRear: {fileID: -1895408437, guid: 6a76f83f271204a45b8c9c778cf89534, type: 3}
-        _backFront: {fileID: -1895408437, guid: 6a76f83f271204a45b8c9c778cf89534, type: 3}
-        _backRear: {fileID: 1895795045, guid: 6a76f83f271204a45b8c9c778cf89534, type: 3}
+        _normalFront: {fileID: 1722061652, guid: 40c71f15d26832846a0eb4a89b3c8e54, type: 3}
+        _normalRear: {fileID: -194968174, guid: 40c71f15d26832846a0eb4a89b3c8e54, type: 3}
+        _backFront: {fileID: -194968174, guid: 40c71f15d26832846a0eb4a89b3c8e54, type: 3}
+        _backRear: {fileID: 1722061652, guid: 40c71f15d26832846a0eb4a89b3c8e54, type: 3}
       _color: {r: 1, g: 1, b: 1, a: 1}
       _colorIsFixed: 0

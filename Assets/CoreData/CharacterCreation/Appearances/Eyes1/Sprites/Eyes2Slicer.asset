@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _targetTexture: {fileID: 2800000, guid: 5f3252285c7b2b04cab5e503bf085574, type: 3}
   _slicers:
-  - _format: Eye20R{0}{1}_NF
+  - _format: Eye17R{0}{1}_NF
     _rect:
       x: 0
       y: 56
@@ -23,7 +23,7 @@ MonoBehaviour:
     _pixelSize: {x: 4, y: 4}
     _padding: {x: 2, y: 0}
     _pixelPivot: {x: 3, y: 1}
-  - _format: Eye20L{0}{1}_NF
+  - _format: Eye17L{0}{1}_NF
     _rect:
       x: 3
       y: 56

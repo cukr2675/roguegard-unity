@@ -3,7 +3,7 @@ guid: ec906a9335ac9e04392c3104aa5b7617
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
-  serializedVersion: 12
+  serializedVersion: 13
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -67,9 +67,9 @@ TextureImporter:
   swizzle: 50462976
   cookieLightType: 1
   platformSettings:
-  - serializedVersion: 3
+  - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 64
+    maxTextureSize: 128
     resizeAlgorithm: 0
     textureFormat: 4
     textureCompression: 1
@@ -80,7 +80,7 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
+  - serializedVersion: 4
     buildTarget: Standalone
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -93,7 +93,7 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
+  - serializedVersion: 4
     buildTarget: Server
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -106,7 +106,7 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
+  - serializedVersion: 4
     buildTarget: WebGL
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -127,12 +127,13 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 50
+        y: 114
         width: 21
         height: 14
       alignment: 9
       pivot: {x: 0.42857143, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -148,12 +149,13 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 19
+        y: 83
         width: 21
         height: 14
       alignment: 9
       pivot: {x: 0.42857143, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -169,12 +171,13 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 21
-        y: 59
+        y: 123
         width: 15
         height: 5
       alignment: 9
       pivot: {x: 0.6666667, y: 0.2}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -190,12 +193,13 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 33
+        y: 97
         width: 19
         height: 17
       alignment: 9
       pivot: {x: 0.47368422, y: 0.9411765}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -211,12 +215,13 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 2
+        y: 66
         width: 19
         height: 17
       alignment: 9
       pivot: {x: 0.47368422, y: 0.9411765}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -232,12 +237,13 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 21
-        y: 57
+        y: 121
         width: 9
         height: 2
       alignment: 9
       pivot: {x: 0.5555556, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -253,12 +259,13 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 21
-        y: 48
+        y: 112
         width: 10
         height: 9
       alignment: 9
       pivot: {x: 0.5, y: 0.7777778}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -273,13 +280,14 @@ TextureImporter:
       name: HoodlessCloak_Head_NF
       rect:
         serializedVersion: 2
-        x: 41
-        y: 62
+        x: 21
+        y: 110
         width: 6
         height: 2
       alignment: 9
       pivot: {x: 0.6666667, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -294,13 +302,14 @@ TextureImporter:
       name: HoodlessCloak_Wings_NR
       rect:
         serializedVersion: 2
-        x: 36
-        y: 47
+        x: 0
+        y: 51
         width: 19
         height: 15
       alignment: 9
       pivot: {x: 0.47368422, y: 0.8666667}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -315,13 +324,14 @@ TextureImporter:
       name: HoodlessCloak_Wings_BF
       rect:
         serializedVersion: 2
-        x: 36
-        y: 32
+        x: 0
+        y: 36
         width: 19
         height: 15
       alignment: 9
       pivot: {x: 0.47368422, y: 0.8666667}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -343,6 +353,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.5714286, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -353,7 +364,162 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: DesertCloak_Wings_NR
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 23
+        width: 20
+        height: 13
+      alignment: 9
+      pivot: {x: 0.5, y: 0.9230769}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7227cf91a7805af4dabe942101c7f53b
+      internalID: 1297981872
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DesertCloak_Wings_BF
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 10
+        width: 20
+        height: 13
+      alignment: 9
+      pivot: {x: 0.45, y: 0.9230769}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 67a16d14e10f6c84797c6f128d3d9ba6
+      internalID: 1972629715
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DesertCloak_UpperBody_NF
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 107
+        width: 5
+        height: 3
+      alignment: 9
+      pivot: {x: 0.8, y: 0.6666667}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 49ab56120f0fe314c94bb00f5c1f30f5
+      internalID: -2128675363
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DesertCloak_Arm_NFBF
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 104
+        width: 5
+        height: 6
+      alignment: 9
+      pivot: {x: 0.4, y: 0.6666667}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1f8640738bd228f4c9d540da1f4e132d
+      internalID: 1119549128
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShortCloak_UpperBody_NF
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 102
+        width: 5
+        height: 5
+      alignment: 9
+      pivot: {x: 0.8, y: 0.8}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1ea5e1de0fdf25b4e9b4d020e9c635a7
+      internalID: 791350053
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShortCloak_Arm_NFBF
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 94
+        width: 7
+        height: 8
+      alignment: 9
+      pivot: {x: 0.42857143, y: 0.75}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bf568a13d8b0d9b46a6de45bd002e51d
+      internalID: 1518287281
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShortCloak_Wings_NRBF
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 123
+        width: 14
+        height: 5
+      alignment: 9
+      pivot: {x: 0.5, y: 0.8}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0705acb0c01022a4bbe2211d64550793
+      internalID: 378681101
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
+    customData: 
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
@@ -363,7 +529,13 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
     nameFileIdTable:
+      DesertCloak_Arm_NFBF: 1119549128
+      DesertCloak_UpperBody_NF: -2128675363
+      DesertCloak_Wings_BF: 1972629715
+      DesertCloak_Wings_NR: 1297981872
       HoodedCloak_Hair_NF: 1393399366
       HoodedCloak_Hair_NRBF: -1721060242
       HoodedCloak_LeftEye_NF: 2131531776
@@ -375,6 +547,9 @@ TextureImporter:
       HoodlessCloak_Wings_NR: 457133670
       Muffler_BF: -660644238
       Muffler_NF: 1827395112
+      ShortCloak_Arm_NFBF: 1518287281
+      ShortCloak_UpperBody_NF: 791350053
+      ShortCloak_Wings_NRBF: 378681101
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

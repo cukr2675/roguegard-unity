@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: affde6d6b08392d4bb0b2e249363d22d, type: 3}
   m_Name: AnimalHead
   m_EditorClassIdentifier: 
-  _descriptionName: "\u30B4\u30D6\u30EA\u30F3\u982D"
+  _descriptionName: "\u30A2\u30CB\u30DE\u30EB\u982D"
   _icon: {fileID: 232541735, guid: 9da13b7471ed81649be9ee18bea48cf0, type: 3}
   _color: {r: 1, g: 1, b: 1, a: 1}
   _caption: 
@@ -30,26 +30,6 @@ MonoBehaviour:
       _backFront: {fileID: -1981145755, guid: 9da13b7471ed81649be9ee18bea48cf0, type: 3}
       _backRear: {fileID: 0}
     _darkSprite:
-      _normalFront: {fileID: 0}
-      _normalRear: {fileID: 0}
-      _backFront: {fileID: 0}
-      _backRear: {fileID: 0}
-    _spriteOrLightRed:
-      _normalFront: {fileID: 232541735, guid: 9da13b7471ed81649be9ee18bea48cf0, type: 3}
-      _normalRear: {fileID: 0}
-      _backFront: {fileID: -1981145755, guid: 9da13b7471ed81649be9ee18bea48cf0, type: 3}
-      _backRear: {fileID: 0}
-    _darkRed:
-      _normalFront: {fileID: 0}
-      _normalRear: {fileID: 0}
-      _backFront: {fileID: 0}
-      _backRear: {fileID: 0}
-    _lightOther:
-      _normalFront: {fileID: 0}
-      _normalRear: {fileID: 0}
-      _backFront: {fileID: 0}
-      _backRear: {fileID: 0}
-    _darkOther:
       _normalFront: {fileID: 0}
       _normalRear: {fileID: 0}
       _backFront: {fileID: 0}

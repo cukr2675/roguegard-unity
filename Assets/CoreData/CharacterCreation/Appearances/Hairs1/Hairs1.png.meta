@@ -273,7 +273,7 @@ TextureImporter:
       name: Hair2_NRBF
       rect:
         serializedVersion: 2
-        x: 0
+        x: 7
         y: 45
         width: 18
         height: 17
@@ -417,69 +417,6 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Horn_NRBF
-      rect:
-        serializedVersion: 2
-        x: 18
-        y: 36
-        width: 5
-        height: 9
-      alignment: 9
-      pivot: {x: 1.8, y: -0.6666667}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 24bc56a669878ef4ca5d9057bf8764a4
-      internalID: -1895408437
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Horn_NFBR
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 36
-        width: 5
-        height: 9
-      alignment: 9
-      pivot: {x: -1, y: -0.6666667}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c28d9e24b51647849931bbdbfda856b1
-      internalID: 1895795045
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Horn
-      rect:
-        serializedVersion: 2
-        x: 18
-        y: 36
-        width: 19
-        height: 9
-      alignment: 9
-      pivot: {x: 0.47368422, y: -0.6666667}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e6a31d48d62741e488d7c95bee66b52e
-      internalID: 1163767589
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: Hair7_NF
       rect:
         serializedVersion: 2
@@ -568,7 +505,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 18
-        y: 22
+        y: 31
         width: 19
         height: 14
       alignment: 9
@@ -589,7 +526,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 18
-        y: 7
+        y: 16
         width: 19
         height: 15
       alignment: 9
@@ -601,6 +538,300 @@ TextureImporter:
       bones: []
       spriteID: 7be4ef9d6ce239a449a1c2ee00e1ab83
       internalID: -1662926823
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hair10_NFBR
+      rect:
+        serializedVersion: 2
+        x: 60
+        y: 115
+        width: 17
+        height: 13
+      alignment: 9
+      pivot: {x: 0.47058824, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a727b011f10e9eb4994f66066d931c8d
+      internalID: 401660358
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hair10_BF
+      rect:
+        serializedVersion: 2
+        x: 60
+        y: 102
+        width: 17
+        height: 13
+      alignment: 9
+      pivot: {x: 0.47058824, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4245d3323068d774daa82601045b3716
+      internalID: 1474681422
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hair12_NF
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 58
+        width: 21
+        height: 14
+      alignment: 9
+      pivot: {x: 0.42857143, y: 0.071428575}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 813b5114b004bca42b1a91501147d633
+      internalID: 670762480
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hair12_BF
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 44
+        width: 21
+        height: 14
+      alignment: 9
+      pivot: {x: 0.42857143, y: 0.14285715}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 577f68a29f5580540ab242e0dcbc94dc
+      internalID: -170173339
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hair13_NF
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 30
+        width: 23
+        height: 14
+      alignment: 9
+      pivot: {x: 0.4347826, y: 0.071428575}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b8fa869b2143ea540be6e28e59b8162d
+      internalID: -2033821408
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hair13_BF
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 16
+        width: 23
+        height: 14
+      alignment: 9
+      pivot: {x: 0.4347826, y: 0.071428575}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 24cc2fb1dae433440b8b2bc2fb27983c
+      internalID: 655694400
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hair14_NF
+      rect:
+        serializedVersion: 2
+        x: 60
+        y: 88
+        width: 17
+        height: 14
+      alignment: 9
+      pivot: {x: 0.47058824, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6963fc3aa07b56247bb7d391a186465c
+      internalID: -814425075
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hair14_BF
+      rect:
+        serializedVersion: 2
+        x: 60
+        y: 74
+        width: 17
+        height: 14
+      alignment: 9
+      pivot: {x: 0.47058824, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 71770c701d775a849b6665c8504cdd22
+      internalID: -717656182
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hair11_NF
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 86
+        width: 21
+        height: 14
+      alignment: 9
+      pivot: {x: 0.42857143, y: 0.071428575}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5b2c3b055f93a7747bbbcdffd0b9be86
+      internalID: 646893162
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hair11_BF
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 72
+        width: 21
+        height: 14
+      alignment: 9
+      pivot: {x: 0.42857143, y: 0.14285715}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 26a6889bc869cc54c82658a50c22c111
+      internalID: 1089178890
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hair15_NF
+      rect:
+        serializedVersion: 2
+        x: 77
+        y: 114
+        width: 19
+        height: 14
+      alignment: 9
+      pivot: {x: 0.47368422, y: 0.071428575}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dc551f94f09926e498cbc54256c6c4eb
+      internalID: 1727414046
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hair15_NRBF
+      rect:
+        serializedVersion: 2
+        x: 77
+        y: 99
+        width: 19
+        height: 15
+      alignment: 9
+      pivot: {x: 0.47368422, y: 0.13333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 09a9506ccf577534d8a61c260f8b2206
+      internalID: -89819379
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hairs1_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 49
+        width: 18
+        height: 13
+      alignment: 9
+      pivot: {x: 0.5, y: -0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6d48b99fc0a72fd40a8cbf275785f9b2
+      internalID: -670016009
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hairs1_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 45
+        width: 18
+        height: 4
+      alignment: 9
+      pivot: {x: 0.5, y: 0.75}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5747aeb7ab6133c4ebb46ca21393287d
+      internalID: 658363404
       vertices: []
       indices: 
       edges: []
@@ -618,6 +849,18 @@ TextureImporter:
     nameFileIdTable:
       Hair0_NF: -191872435
       Hair0_NRBF: -1436159364
+      Hair10_BF: 1474681422
+      Hair10_NFBR: 401660358
+      Hair11_BF: 1089178890
+      Hair11_NF: 646893162
+      Hair12_BF: -170173339
+      Hair12_NF: 670762480
+      Hair13_BF: 655694400
+      Hair13_NF: -2033821408
+      Hair14_BF: -717656182
+      Hair14_NF: -814425075
+      Hair15_NF: 1727414046
+      Hair15_NRBF: -89819379
       Hair1_NF: -2027155852
       Hair1_NRBF: -1829226555
       Hair2_NF: 962637264
@@ -636,6 +879,8 @@ TextureImporter:
       Hair8_NRBF: -923531408
       Hair9_NF: 63536072
       Hair9_NRBF: -1662926823
+      Hairs1_0: -670016009
+      Hairs1_1: 658363404
       Horn: 1163767589
       Horn_NFBR: 1895795045
       Horn_NRBF: -1895408437

@@ -40,13 +40,13 @@ MonoBehaviour:
       _items: []
   - _option: {fileID: 11400000, guid: ad25def6e15c6a3478d6c76f941c0e1d, type: 2}
     _optionDescription: {fileID: 0}
-    _color: {r: 0.34509805, g: 0.21960784, b: 0.21960784, a: 1}
+    _color: {r: 0.1764706, g: 0.1764706, b: 0.43137255, a: 1}
     _members:
       _items:
       - rid: 3003915766944235554
   - _option: {fileID: 11400000, guid: 10f1ae5e8ee7f6d4fa343c7fc85cceef, type: 2}
     _optionDescription: {fileID: 0}
-    _color: {r: 0.34509805, g: 0.21960784, b: 0.21960784, a: 1}
+    _color: {r: 0.1764706, g: 0.1764706, b: 0.43137255, a: 1}
     _members:
       _items:
       - rid: 3003915766944235556

@@ -3,7 +3,7 @@ guid: 6eb590d0a69e3664199180daf0498368
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
-  serializedVersion: 12
+  serializedVersion: 13
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -67,7 +67,7 @@ TextureImporter:
   swizzle: 50462976
   cookieLightType: 1
   platformSettings:
-  - serializedVersion: 3
+  - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 64
     resizeAlgorithm: 0
@@ -80,7 +80,7 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
+  - serializedVersion: 4
     buildTarget: Standalone
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -93,7 +93,7 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
+  - serializedVersion: 4
     buildTarget: Server
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -106,11 +106,24 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
+  - serializedVersion: 4
     buildTarget: WebGL
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 64
+    resizeAlgorithm: 0
+    textureFormat: 4
     textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
@@ -133,6 +146,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.5, y: 0.42857143}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -154,6 +168,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.5, y: 0.8}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -175,6 +190,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.5, y: -0.6666667}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -196,6 +212,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.5, y: 0.8}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -217,6 +234,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.5, y: -1}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -238,6 +256,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.5, y: 0.46153846}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -259,6 +278,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.5, y: 0.75}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -280,6 +300,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.5, y: 0.33333334}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -301,6 +322,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.5, y: 0.8333333}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -322,6 +344,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.4, y: -0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -343,6 +366,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.5, y: 0.8}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -364,6 +388,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.5, y: -0.6666667}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -385,6 +410,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.5, y: 0.75}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -406,6 +432,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.5, y: 0.33333334}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -427,6 +454,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.5, y: 0.46153846}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -448,6 +476,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.5, y: 0.75}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -469,6 +498,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.5, y: 0.33333334}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -490,6 +520,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.5, y: 0.75}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -511,6 +542,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.5, y: 0.33333334}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -532,6 +564,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.5, y: 0.75}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -553,6 +586,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.5, y: -0.2}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -574,6 +608,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.5, y: 0.75}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -595,6 +630,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.44444445, y: 0.46153846}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -616,6 +652,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.44444445, y: 0.375}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -637,6 +674,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.5, y: 0.8}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -658,6 +696,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.5, y: 0.42857143}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -679,6 +718,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.5, y: 0.75}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -700,6 +740,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.5, y: 0.33333334}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -721,6 +762,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.5, y: 0.46153846}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -742,6 +784,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.4, y: -0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -763,6 +806,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.5, y: 0.8333333}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -784,6 +828,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.5, y: 0.75}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -805,6 +850,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.5, y: 0.33333334}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -826,6 +872,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -847,6 +894,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.5, y: 0.8}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -868,6 +916,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.5, y: 0.375}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -889,6 +938,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.5, y: 0.8}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -910,6 +960,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.5, y: 0.375}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -931,6 +982,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -952,6 +1004,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -962,7 +1015,844 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: ShortRobe_UpperBody_NF
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 19
+        width: 8
+        height: 5
+      alignment: 9
+      pivot: {x: 0.5, y: 0.8}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 83dc26f5061c88e4cac80979eb4f8a16
+      internalID: 1843841498
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShortRobe_Body_NF
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 12
+        width: 10
+        height: 7
+      alignment: 9
+      pivot: {x: 0.5, y: 0.14285715}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6a16beaafde2e0546bd48b97bd492adf
+      internalID: -2101880556
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShortRobe_UpperBody_BF
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 19
+        width: 8
+        height: 5
+      alignment: 9
+      pivot: {x: 0.5, y: 0.8}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fdcb9ae3e1e91f24db651e1a01a3429c
+      internalID: 1802640980
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShortRobe_Body_BF
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 12
+        width: 10
+        height: 7
+      alignment: 9
+      pivot: {x: 0.5, y: 0.14285715}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f436061d416567d4eb96b1b2e937d0af
+      internalID: 1525743759
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShortRobe_Arm_NFBF
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 38
+        width: 4
+        height: 6
+      alignment: 9
+      pivot: {x: 0.5, y: 0.8333333}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c01457e51a815c845907b790f17a257a
+      internalID: 982851715
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShortRobe_Hand_NFBF
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 34
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.4, y: -0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 493355ba8e2423f40ab153a48dbb65d3
+      internalID: -1039398668
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BaggyHoodie
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 11
+        width: 10
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b0bca5eafc2fb6e4abccbe0fccde2b8f
+      internalID: -2054980098
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BaggyHoodie_UpperBody_NF
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 21
+        width: 8
+        height: 4
+      alignment: 9
+      pivot: {x: 0.5, y: 0.75}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a1ff1bb01fc77004b865ca12152b968a
+      internalID: 126701709
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BaggyHoodie_Body_NF
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 11
+        width: 10
+        height: 10
+      alignment: 9
+      pivot: {x: 0.5, y: 0.4}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9518adf9798e1294b83de94da97a73b6
+      internalID: -404025993
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BaggyHoodie_UpperBody_BF
+      rect:
+        serializedVersion: 2
+        x: 29
+        y: 21
+        width: 8
+        height: 4
+      alignment: 9
+      pivot: {x: 0.5, y: 0.75}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b82307393d1cf1c4e9e444a670885331
+      internalID: 1832723853
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BaggyHoodie_Body_BF
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 11
+        width: 10
+        height: 10
+      alignment: 9
+      pivot: {x: 0.5, y: 0.4}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5a773266dde649243ab3297f29d807a4
+      internalID: 498457841
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BaggyHoodie_Arm_NFBF
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 28
+        width: 4
+        height: 6
+      alignment: 9
+      pivot: {x: 0.5, y: 0.8333333}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 97bcc6ac9097751488daafe719240991
+      internalID: 1043164725
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BaggyHoodie_Hand_NFBF
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 20
+        width: 5
+        height: 8
+      alignment: 9
+      pivot: {x: 0.6, y: 0.375}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3a7b1cd69e572e14bb0358ce4f28a11a
+      internalID: -358654339
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LinenClothes
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 10
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 32690fec410834c4186eb0676315a613
+      internalID: -591569784
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LinenClothes_UpperBody_NF
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 8
+        width: 8
+        height: 4
+      alignment: 9
+      pivot: {x: 0.5, y: 0.75}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a771c66109b480245b1a7aba487478aa
+      internalID: 538944327
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LinenClothes_Body_NF
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1
+        width: 10
+        height: 7
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2857143}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2132dec6746fcb0478c0ae453259c2bb
+      internalID: 998424149
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LinenClothes_UpperBody_BF
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 8
+        width: 8
+        height: 4
+      alignment: 9
+      pivot: {x: 0.5, y: 0.75}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 431907efa12fd4d4496e5a474a80ed8e
+      internalID: 1906927662
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LinenClothes_Body_BF
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 1
+        width: 10
+        height: 7
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2857143}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6d136e86c49b71b4d834e70f7b9720db
+      internalID: 418442124
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DressShirt
+      rect:
+        serializedVersion: 2
+        x: 47
+        y: 57
+        width: 8
+        height: 7
+      alignment: 9
+      pivot: {x: 0.5, y: 0.42857143}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4caa4a02193ca7148a40bd821eb52611
+      internalID: 1216674836
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DressShirt_UpperBody_NF
+      rect:
+        serializedVersion: 2
+        x: 47
+        y: 59
+        width: 8
+        height: 5
+      alignment: 9
+      pivot: {x: 0.5, y: 0.8}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 19d900b9f3eebb941aa5d1c72bb33bb8
+      internalID: -847277779
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DressShirt_Body_NF
+      rect:
+        serializedVersion: 2
+        x: 47
+        y: 57
+        width: 8
+        height: 3
+      alignment: 9
+      pivot: {x: 0.5, y: -0.6666667}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 265b939b92a9463499c12f6e9277698c
+      internalID: -247143937
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DressShirt_UpperBody_BF
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 59
+        width: 8
+        height: 5
+      alignment: 9
+      pivot: {x: 0.5, y: 0.8}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 33282a455341356439454a75b36e1681
+      internalID: 1379738286
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DressShirt_Body_BF
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 57
+        width: 8
+        height: 3
+      alignment: 9
+      pivot: {x: 0.5, y: -0.6666667}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1b9c08cd2bd7aa249908dc9521c908e7
+      internalID: -455173696
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DressShirt_Arm_NFBF
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 52
+        width: 4
+        height: 5
+      alignment: 9
+      pivot: {x: 0.5, y: 0.8}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 801d907d0233d2e47a0976387bd061ce
+      internalID: 1490729460
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShortSleeves
+      rect:
+        serializedVersion: 2
+        x: 47
+        y: 50
+        width: 8
+        height: 7
+      alignment: 9
+      pivot: {x: 0.5, y: 0.42857143}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ee69e5ec5eeb17542b353224778ab9f2
+      internalID: -59596074
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShortSleeves_UpperBody_NF
+      rect:
+        serializedVersion: 2
+        x: 47
+        y: 52
+        width: 8
+        height: 5
+      alignment: 9
+      pivot: {x: 0.5, y: 0.8}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c302855732089f142a46ff965dcebd20
+      internalID: 1575979288
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShortSleeves_Body_NF
+      rect:
+        serializedVersion: 2
+        x: 47
+        y: 50
+        width: 8
+        height: 3
+      alignment: 9
+      pivot: {x: 0.5, y: -0.6666667}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 68c596184f0971742bb07b5bc8d74835
+      internalID: -1751730228
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShortSleeves_UpperBody_BF
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 52
+        width: 8
+        height: 5
+      alignment: 9
+      pivot: {x: 0.5, y: 0.8}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2672cba70f9d87b4e9eac73607bcb0a2
+      internalID: -948498404
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShortSleeves_Body_BF
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 50
+        width: 8
+        height: 3
+      alignment: 9
+      pivot: {x: 0.5, y: -0.6666667}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 65bfc578e8f6b25478bfe05366e50961
+      internalID: -728728627
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShortSleeves_Arm_NFBF
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 47
+        width: 4
+        height: 3
+      alignment: 9
+      pivot: {x: 0.5, y: 0.6666667}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1a090785537134c4b95bbbdbd9b2a26c
+      internalID: 1929003482
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OversizeHoodie
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 0
+        width: 10
+        height: 11
+      alignment: 9
+      pivot: {x: 0.5, y: 0.45454547}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 173ffe6a4d7e1434dbdbd4be1d834b07
+      internalID: -1567330791
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OversizeHoodie_UpperBody_NF
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 7
+        width: 8
+        height: 4
+      alignment: 9
+      pivot: {x: 0.5, y: 0.75}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 37a090c07819648488a59320209210ce
+      internalID: 1222239034
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OversizeHoodie_Body_NF
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 0
+        width: 10
+        height: 7
+      alignment: 9
+      pivot: {x: 0.5, y: 0.14285715}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7c935ac45bfee6e4a973b2036df4abc9
+      internalID: -201832054
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OversizeHoodie_UpperBody_BF
+      rect:
+        serializedVersion: 2
+        x: 29
+        y: 7
+        width: 8
+        height: 4
+      alignment: 9
+      pivot: {x: 0.5, y: 0.75}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9f129eeaa7512164b8206fc06cf6f2da
+      internalID: 606422590
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OversizeHoodie_Body_BF
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 0
+        width: 10
+        height: 7
+      alignment: 9
+      pivot: {x: 0.5, y: 0.14285715}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3426817f7d3b9ad45bb40140065cdbe5
+      internalID: 1063690721
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OversizeHoodie_Arm_NFBF
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 15
+        width: 4
+        height: 5
+      alignment: 9
+      pivot: {x: 0.5, y: 0.8}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 51413fc627f51714e864f9f547626291
+      internalID: -535232767
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OversizeHoodie_Hand_NFBF
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 8
+        width: 5
+        height: 7
+      alignment: 9
+      pivot: {x: 0.6, y: 0.14285715}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6ec3123d7d02dc84ea7c9c574025f98b
+      internalID: -521732341
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DressShirt_Hand_NFBF
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 50
+        width: 4
+        height: 3
+      alignment: 9
+      pivot: {x: 0.5, y: -0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6b9423377b599e1438f46cc3ada6821d
+      internalID: 1900083364
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
+    customData: 
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
@@ -972,7 +1862,16 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
     nameFileIdTable:
+      BaggyHoodie: -2054980098
+      BaggyHoodie_Arm_NFBF: 1043164725
+      BaggyHoodie_Body_BF: 498457841
+      BaggyHoodie_Body_NF: -404025993
+      BaggyHoodie_Hand_NFBF: -358654339
+      BaggyHoodie_UpperBody_BF: 1832723853
+      BaggyHoodie_UpperBody_NF: 126701709
       CamisoleDress: -1135179505
       CamisoleDress_Body_BF: -1087773322
       CamisoleDress_Body_NF: -804008388
@@ -992,6 +1891,13 @@ TextureImporter:
       CavalryRobe_Hand_NFBF: -654929124
       CavalryRobe_UpperBody_BF: 363934055
       CavalryRobe_UpperBody_NF: 934986129
+      DressShirt: 1216674836
+      DressShirt_Arm_NFBF: 1490729460
+      DressShirt_Body_BF: -455173696
+      DressShirt_Body_NF: -247143937
+      DressShirt_Hand_NFBF: 1900083364
+      DressShirt_UpperBody_BF: 1379738286
+      DressShirt_UpperBody_NF: -847277779
       HeroicCostume: -2006770886
       HeroicCostume_Body_BF: 1716850496
       HeroicCostume_Body_NF: 913441373
@@ -1006,6 +1912,30 @@ TextureImporter:
       LaceUpShirt_Hand_NFBF: -1024374986
       LaceUpShirt_UpperBody_BF: 1624763838
       LaceUpShirt_UpperBody_NF: 1992403056
+      LinenClothes: -591569784
+      LinenClothes_Body_BF: 418442124
+      LinenClothes_Body_NF: 998424149
+      LinenClothes_UpperBody_BF: 1906927662
+      LinenClothes_UpperBody_NF: 538944327
+      OversizeHoodie: -1567330791
+      OversizeHoodie_Arm_NFBF: -535232767
+      OversizeHoodie_Body_BF: 1063690721
+      OversizeHoodie_Body_NF: -201832054
+      OversizeHoodie_Hand_NFBF: -521732341
+      OversizeHoodie_UpperBody_BF: 606422590
+      OversizeHoodie_UpperBody_NF: 1222239034
+      ShortRobe_Arm_NFBF: 982851715
+      ShortRobe_Body_BF: 1525743759
+      ShortRobe_Body_NF: -2101880556
+      ShortRobe_Hand_NFBF: -1039398668
+      ShortRobe_UpperBody_BF: 1802640980
+      ShortRobe_UpperBody_NF: 1843841498
+      ShortSleeves: -59596074
+      ShortSleeves_Arm_NFBF: 1929003482
+      ShortSleeves_Body_BF: -728728627
+      ShortSleeves_Body_NF: -1751730228
+      ShortSleeves_UpperBody_BF: -948498404
+      ShortSleeves_UpperBody_NF: 1575979288
       Tanktop: 1810044930
       Tanktop_Body_NFBF: -361051830
       Tanktop_UpperBody_BF: -1681575655

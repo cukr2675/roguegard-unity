@@ -76,7 +76,7 @@ namespace Roguegard
                 var overridesUpperDefaultColor = OverridesOnDefaultColor(true, upperBodyRect, palette);
                 var overridesLowerDefaultColor = OverridesOnDefaultColor(false, bodyRect, palette);
                 ToBoneSprite(palette, out var upperBoneSprite, out var lowerBoneSprite);
-                AddTo(ochalikeMorph, BoneKeyword.UpperBody, upperBoneSprite, mainColor, overridesUpperDefaultColor);
+                AddTo(ochalikeMorph, BoneKeyword.Chest, upperBoneSprite, mainColor, overridesUpperDefaultColor);
                 AddTo(ochalikeMorph, BoneKeyword.Body, lowerBoneSprite, mainColor, overridesLowerDefaultColor);
             }
             else if (Bone == BoneKeyword.LeftArm)

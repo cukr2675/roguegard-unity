@@ -228,7 +228,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Kobold_Head_NF
+      name: Animal_Head_NF
       rect:
         serializedVersion: 2
         x: 18
@@ -249,7 +249,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Kobold_Head_BF
+      name: Animal_Head_BF
       rect:
         serializedVersion: 2
         x: 18
@@ -301,12 +301,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
+      Animal_Head_BF: -1981145755
+      Animal_Head_NF: 232541735
       Ball: -1813662470
       FloatingEye: -10307334
       Goblin_Head_BF: -550886237
       Goblin_Head_NF: -2136853133
-      Kobold_Head_BF: -1981145755
-      Kobold_Head_NF: 232541735
       Monster1_3: -280277169
       MonsterShell: -1505659251
       Slime: -813302980

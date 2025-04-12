@@ -3,7 +3,7 @@ guid: 91f7407251227b244a23d77c1aa47e41
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
-  serializedVersion: 12
+  serializedVersion: 13
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -67,7 +67,7 @@ TextureImporter:
   swizzle: 50462976
   cookieLightType: 1
   platformSettings:
-  - serializedVersion: 3
+  - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 64
     resizeAlgorithm: 0
@@ -80,7 +80,7 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
+  - serializedVersion: 4
     buildTarget: Standalone
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -93,7 +93,7 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
+  - serializedVersion: 4
     buildTarget: Server
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -106,7 +106,7 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
+  - serializedVersion: 4
     buildTarget: WebGL
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -133,6 +133,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -154,6 +155,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.5, y: 0.33333334}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -175,6 +177,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.6, y: 0.8333333}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -196,6 +199,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.5, y: -0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -217,6 +221,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.5, y: 0.33333334}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -238,6 +243,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -259,6 +265,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -280,6 +287,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.5, y: 0.6666667}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -301,6 +309,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -322,6 +331,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -333,16 +343,17 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ShortPants_NF
+      name: ShortPantsA_Body_NF
       rect:
         serializedVersion: 2
         x: 0
-        y: 44
+        y: 31
         width: 8
         height: 3
       alignment: 9
       pivot: {x: 0.5, y: 0.33333334}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -354,16 +365,17 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ShortPants_BF
+      name: ShortPantsA_Body_BF
       rect:
         serializedVersion: 2
         x: 0
-        y: 41
+        y: 28
         width: 8
         height: 3
       alignment: 9
       pivot: {x: 0.5, y: 0.33333334}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -385,6 +397,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -406,6 +419,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.5, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -427,6 +441,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.5, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -448,6 +463,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.5, y: 0.8333333}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -469,6 +485,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.5714286, y: 0.8333333}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -479,7 +496,250 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: ShortPantsA_Leg_NFBF
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 34
+        width: 5
+        height: 3
+      alignment: 9
+      pivot: {x: 0.6, y: 0.6666667}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a9b3ddf388b36cd4f88a9fa790901f77
+      internalID: -728436496
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShortPantsA
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 34
+        width: 8
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5065d1fbbf47664458c32d8fd787fb9c
+      internalID: -1645624586
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HunterGrass_Body_NRBF
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 16
+        width: 10
+        height: 9
+      alignment: 9
+      pivot: {x: 0.5, y: 0.7777778}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ddfc1e66643c0f449976f2c4d2846a48
+      internalID: 1626412239
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PleatedShorts_Body_NF
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 13
+        width: 10
+        height: 3
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b9b98c09cd032e7409f30d14c8685bd2
+      internalID: 154709575
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PleatedShorts_Body_BF
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 10
+        width: 10
+        height: 3
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 12c03dd32fb485343a22473395a19bc0
+      internalID: -1138390295
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ToolSkirt_NF
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 56
+        width: 16
+        height: 8
+      alignment: 9
+      pivot: {x: 0.5, y: 0.625}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 58374878b089a96428bcbedc34e74256
+      internalID: -196027133
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ToolSkirt_BF
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 48
+        width: 16
+        height: 8
+      alignment: 9
+      pivot: {x: 0.5, y: 0.625}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 17af7f04257e21248aa5724a1669406d
+      internalID: 449634798
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShortPantsB
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 24
+        width: 8
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3a468daf482a27749aa1a01a300ca5b5
+      internalID: 999598069
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShortPantsB_Body_NF
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 21
+        width: 8
+        height: 3
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 77de59b489965b94197406917b95b5f4
+      internalID: 1650984729
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShortPantsB_Body_BF
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 18
+        width: 8
+        height: 3
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f7768b37a2d39894db509ff65f33136b
+      internalID: -1166439891
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShortPantsB_Leg_NFBF
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 24
+        width: 5
+        height: 3
+      alignment: 9
+      pivot: {x: 0.6, y: 0.6666667}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 95f0456f7ae44ac4ba425f4d48994292
+      internalID: -328681639
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
+    customData: 
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
@@ -489,6 +749,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
     nameFileIdTable:
       GrassSkirt: -188945855
       GrassSkirt_Body_BF: 439183725
@@ -500,13 +762,26 @@ TextureImporter:
       HeroicBottoms_Body_NF: 245554097
       HeroicBottoms_LegL_NFBF: 351945832
       HeroicBottoms_LegR_NFBF: 2009795110
-      ShortPants_BF: -803128026
-      ShortPants_NF: -1217500966
+      HotPants: -1181396287
+      HotPants_Body_NF: 1371627556
+      HunterGrass_Body_NRBF: 1626412239
+      PleatedShorts_Body_BF: -1138390295
+      PleatedShorts_Body_NF: 154709575
+      ShortPantsA: -1645624586
+      ShortPantsA_Body_BF: -803128026
+      ShortPantsA_Body_NF: -1217500966
+      ShortPantsA_Leg_NFBF: -728436496
+      ShortPantsB: 999598069
+      ShortPantsB_Body_BF: -1166439891
+      ShortPantsB_Body_NF: 1650984729
+      ShortPantsB_Leg_NFBF: -328681639
       Slacks: 439634420
       Slacks_Body_BF: 1415107432
       Slacks_Body_NF: 1176625386
       Slacks_Foot_NFBF: -221411359
       Slacks_Leg_NFBF: -132853358
+      ToolSkirt_BF: 449634798
+      ToolSkirt_NF: -196027133
       Trousers_RightFoot_NFBF: -1451995503
       Trousers_RightLeg_NFBF: -288306736
   mipmapLimitGroupName: 
