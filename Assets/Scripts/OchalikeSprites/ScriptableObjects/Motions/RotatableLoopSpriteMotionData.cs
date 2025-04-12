@@ -19,9 +19,17 @@ namespace OchalikeSprites
             {
                 oneLoopWait += item.Wait;
             }
-            var sumWait = oneLoopWait * _loopCount;
 
-            var index = Mathf.Min(animationTime, sumWait - 1);
+            int index;
+            if (_loopCount >= 1)
+            {
+                var sumWait = oneLoopWait * _loopCount;
+                index = Mathf.Min(animationTime, sumWait - 1);
+            }
+            else
+            {
+                index = animationTime;
+            }
             var sum = 0;
             Item current = null;
             foreach (var item in _items)
@@ -41,7 +49,16 @@ namespace OchalikeSprites
             transform.Scale = current.Scale;
             transform.PoseSource = current.PoseSource;
             transform.Direction = SpriteDirection.FromDegree(degree);
-            endOfMotion = index >= sumWait - 1;
+
+            if (_loopCount >= 1)
+            {
+                var sumWait = oneLoopWait * _loopCount;
+                endOfMotion = index >= sumWait - 1;
+            }
+            else
+            {
+                endOfMotion = false;
+            }
         }
 
         private void OnValidate()

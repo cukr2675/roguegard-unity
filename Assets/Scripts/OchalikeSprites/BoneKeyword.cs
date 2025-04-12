@@ -9,7 +9,7 @@ namespace OchalikeSprites
         public string Name { get; }
 
         public static BoneKeyword Body { get; } = new BoneKeyword("Body");
-        public static BoneKeyword UpperBody { get; } = new BoneKeyword("UpperBody");
+        public static BoneKeyword Chest { get; } = new BoneKeyword("Chest");
         public static BoneKeyword LeftArm { get; } = new BoneKeyword("LeftArm");
         public static BoneKeyword LeftHand { get; } = new BoneKeyword("LeftHand");
         public static BoneKeyword RightArm { get; } = new BoneKeyword("RightArm");

@@ -30,6 +30,14 @@ namespace OchalikeSprites
             _bones.Clear();
         }
 
+        public OchalikeBone CreateBoneWithHairColor(Color bareColor, OchalikeMorph morph)
+        {
+            var morphItem = morph.GetSprite(BoneKeyword.Hair);
+            var hairColor = morphItem.MorphBareColor ?? Color.black;
+            var useDarkOutline = OchalikeSpritesUtility.IsSimilarToLightOutline(hairColor);
+            return CreateBone(bareColor, useDarkOutline);
+        }
+
         public OchalikeBone CreateBone(Color bareColor, bool useDarkOutline)
         {
             return Recursion(0);

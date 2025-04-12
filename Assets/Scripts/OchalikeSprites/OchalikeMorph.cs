@@ -59,8 +59,8 @@ namespace OchalikeSprites
                 item = CreateItem();
                 items.Add(name, item);
             }
-            item.MorphBareSprite = morphBareSprite;
-            item.MorphBareColor = morphBareColor;
+            item.MorphBareSprite = morphBareSprite ?? item.MorphBareSprite;
+            item.MorphBareColor = morphBareColor ?? item.MorphBareColor;
             item.OverridesOnDefaultColor = overridesOnDefaultColor;
             item.equipmentSprites.Clear();
             item.equipmentColors.Clear();
