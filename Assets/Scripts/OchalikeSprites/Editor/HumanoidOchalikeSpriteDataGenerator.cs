@@ -6,7 +6,7 @@ using UnityEditor;
 
 namespace OchalikeSprites.Editor
 {
-    //[CreateAssetMenu(menuName = "Ochalike Sprites/Editor/Humanoid Ochalike Sprite Generator")]
+    [CreateAssetMenu(menuName = "Ochalike Sprites/Editor/Humanoid Ochalike Sprite Generator")]
     public class HumanoidOchalikeSpriteDataGenerator : ScriptableObjectGenerator<OchalikeSpriteData>
     {
         [SerializeField] private DefaultAsset _spritesFolder = null;

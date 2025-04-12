@@ -1,0 +1,803 @@
+fileFormatVersion: 2
+guid: 40c71f15d26832846a0eb4a89b3c8e54
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 64
+    resizeAlgorithm: 0
+    textureFormat: 4
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: OSpR_SmallApron
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 55
+        width: 7
+        height: 9
+      alignment: 9
+      pivot: {x: 0.42857143, y: 0.44444445}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 02c19fc81c9c20b42b7cf9368c8c0b70
+      internalID: -503997925
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_SmallApron_Body_NF
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 55
+        width: 5
+        height: 5
+      alignment: 9
+      pivot: {x: 0.6, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e3440f2fd6c93da4eb892ff093d86bde
+      internalID: -818371452
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_SmallApron_Chest_NF
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 59
+        width: 7
+        height: 5
+      alignment: 9
+      pivot: {x: 0.42857143, y: 0.8}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3c117f9e8c662084597ce3ae0ba4d3a3
+      internalID: -84174130
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_SmallApron_Body_BF
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 55
+        width: 8
+        height: 5
+      alignment: 9
+      pivot: {x: 0.625, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e551e8bd8b875e949a743f266c758fe6
+      internalID: 105282757
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_SmallApron_Chest_BF
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 59
+        width: 7
+        height: 5
+      alignment: 9
+      pivot: {x: 0.71428573, y: 0.8}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 16acde68efd4499428106af3047345da
+      internalID: 450335025
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_FoxEarR_NR
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 45
+        width: 7
+        height: 10
+      alignment: 9
+      pivot: {x: 0.5714286, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c1f8945be2660ee4594df52575a5535c
+      internalID: 1535068500
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_FoxEarL_NF
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 45
+        width: 7
+        height: 10
+      alignment: 9
+      pivot: {x: -0.14285715, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2c2d35179afbcf941b42f46edf82c3de
+      internalID: -640875693
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_FoxEarR_BF
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 37
+        width: 7
+        height: 8
+      alignment: 9
+      pivot: {x: 0.5714286, y: -0.125}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6e56508526629714080b606572988e82
+      internalID: 1417667851
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_FoxEarL_BR
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 35
+        width: 7
+        height: 10
+      alignment: 9
+      pivot: {x: -0.14285715, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: df01f11740e6fac45bb9abb82efb851c
+      internalID: -1646815746
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_DogNose_NF
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 35
+        width: 6
+        height: 2
+      alignment: 9
+      pivot: {x: 1, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4a959c11fa6533849ae75c84523cede6
+      internalID: 14496699
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_HeadMark_Line_NF
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 34
+        width: 11
+        height: 1
+      alignment: 9
+      pivot: {x: 0.54545456, y: -1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9691713ca01682648affebf655e68913
+      internalID: -1036298006
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_HeadMark_TwoLines_NF
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 32
+        width: 11
+        height: 2
+      alignment: 9
+      pivot: {x: 0.54545456, y: -0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c948991784bf8ca4ca5db51c969dc5be
+      internalID: 449971441
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_FighterBandage_Hand_NFBF
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 28
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4bd1f3941a9f4334090463cbc4905d7a
+      internalID: -594099631
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_FighterBandage_Foot_NF
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 30
+        width: 4
+        height: 2
+      alignment: 9
+      pivot: {x: 0.5, y: -0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3853355a9e53b454399a6b1a7161ead3
+      internalID: 583764534
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_FighterBandage_Foot_BF
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 30
+        width: 4
+        height: 2
+      alignment: 9
+      pivot: {x: 0.5, y: -0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 13c78b613f63dc64bb8b36a21b625bad
+      internalID: -236494696
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_GoldTrimmedShoulderArmor_NF
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 61
+        width: 14
+        height: 3
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fc5cb49a24a0d0442b9f3c37d3b8d06b
+      internalID: -834868669
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_GoldTrimmedShoulderArmor_BF
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 58
+        width: 14
+        height: 3
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ba749c2c8ed973440914d96ce1a2060c
+      internalID: -2031566907
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_ArmMark_Line_NFBF
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 34
+        width: 2
+        height: 1
+      alignment: 9
+      pivot: {x: 0.5, y: 2}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4484ce1c14fb6ff4aae0d397c48f2309
+      internalID: -389667309
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_AntennaeL_NFBR
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 52
+        width: 4
+        height: 6
+      alignment: 9
+      pivot: {x: 0.25, y: -0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e06dd0cfce3315949ba65751602789a4
+      internalID: -1082057303
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_AntennaeR_NFBR
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 53
+        width: 6
+        height: 5
+      alignment: 9
+      pivot: {x: 0.8333333, y: -0.4}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9835442de19212949a7e3e7ee86af66a
+      internalID: 1030545920
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_DroppyAntennaeR_NFBR
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 45
+        width: 7
+        height: 7
+      alignment: 9
+      pivot: {x: 0.85714287, y: 0.5714286}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a24458bc72f71d941ba1c8dd26f48b60
+      internalID: 2094869458
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_DroppyAntennaeLB_NFBR
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 45
+        width: 7
+        height: 7
+      alignment: 9
+      pivot: {x: 0, y: 0.5714286}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b337fea25dff92d4183ee7d3be3e2f60
+      internalID: 1688522412
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_DroppyAntennaeLA_NFBR
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 38
+        width: 5
+        height: 7
+      alignment: 9
+      pivot: {x: 0, y: 0.5714286}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c48440a61d39da842a8cfe02a2362a3c
+      internalID: 1431442085
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_LensHairAccessory_NF
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 55
+        width: 3
+        height: 3
+      alignment: 9
+      pivot: {x: -1, y: -2.3333333}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1e8359a902b66024d9ac3167b837f1c9
+      internalID: -335595921
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_WolfTail_NRBF
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 19
+        width: 7
+        height: 9
+      alignment: 9
+      pivot: {x: 0.14285715, y: 0.7777778}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bbe07fa383c892c42ad2eb7c6818e5db
+      internalID: -684376093
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_DevilWings_NRBF
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 33
+        width: 14
+        height: 5
+      alignment: 9
+      pivot: {x: 0.42857143, y: 0.8}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 372fe2b60c05c234a8fe7b22e0733681
+      internalID: 429267363
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_DevilTail_NRBF
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 38
+        width: 8
+        height: 7
+      alignment: 9
+      pivot: {x: 0, y: 0.85714287}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0ced2f317e9db3f4da7e39b365727e85
+      internalID: -400104568
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Horn
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 55
+        width: 19
+        height: 9
+      alignment: 9
+      pivot: {x: 0.47368422, y: 0.6666667}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d660ab28846394444945d2ded41bb5b7
+      internalID: 155195976
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Horn_NRBF
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 55
+        width: 5
+        height: 9
+      alignment: 9
+      pivot: {x: 1.8, y: -0.6666667}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 59b86aa4c7772c446840ae831526b968
+      internalID: -194968174
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Horn_NFBR
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 55
+        width: 5
+        height: 9
+      alignment: 9
+      pivot: {x: -1, y: -0.6666667}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 26c62fab4a2840743882039755a6b231
+      internalID: 1722061652
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      Glasses: -523832504
+      GoldTrimmedShoulderArmor_LeftArm_NFBF: -600863844
+      GoldTrimmedShoulderArmor_RightArm_NFBF: -1100039732
+      OSpR_AntennaeL_NFBR: -1082057303
+      OSpR_AntennaeR_NFBR: 1030545920
+      OSpR_ArmMark_Line_NFBF: -389667309
+      OSpR_DevilTail_NRBF: -400104568
+      OSpR_DevilWings_NRBF: 429267363
+      OSpR_DogNose_NF: 14496699
+      OSpR_DroppyAntennaeLA_NFBR: 1431442085
+      OSpR_DroppyAntennaeLB_NFBR: 1688522412
+      OSpR_DroppyAntennaeR_NFBR: 2094869458
+      OSpR_FighterBandage_Foot_BF: -236494696
+      OSpR_FighterBandage_Foot_NF: 583764534
+      OSpR_FighterBandage_Hand_NFBF: -594099631
+      OSpR_FoxEarL_BR: -1646815746
+      OSpR_FoxEarL_NF: -640875693
+      OSpR_FoxEarR_BF: 1417667851
+      OSpR_FoxEarR_NR: 1535068500
+      OSpR_GoldTrimmedShoulderArmor_BF: -2031566907
+      OSpR_GoldTrimmedShoulderArmor_NF: -834868669
+      OSpR_HeadMark_Line_NF: -1036298006
+      OSpR_HeadMark_TwoLines_NF: 449971441
+      OSpR_Horn: 155195976
+      OSpR_Horn_NFBR: 1722061652
+      OSpR_Horn_NRBF: -194968174
+      OSpR_LensHairAccessory_NF: -335595921
+      OSpR_SmallApron: -503997925
+      OSpR_SmallApron_Body_BF: 105282757
+      OSpR_SmallApron_Body_NF: -818371452
+      OSpR_SmallApron_Chest_BF: 450335025
+      OSpR_SmallApron_Chest_NF: -84174130
+      OSpR_WolfTail_NRBF: -684376093
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
