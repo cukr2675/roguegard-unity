@@ -1,0 +1,406 @@
+fileFormatVersion: 2
+guid: 1dbdd348f2e5d504eb67276112af86e7
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 1
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 32
+    resizeAlgorithm: 0
+    textureFormat: 4
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: OSpR_CloseEyeL_NF
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 31
+        width: 4
+        height: 1
+      alignment: 9
+      pivot: {x: 0.25, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a3c08dd1c35c58740a02e84930c935bd
+      internalID: -1559457059
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_CloseEyeR_NF
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 31
+        width: 3
+        height: 1
+      alignment: 9
+      pivot: {x: 0.6666667, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bc9ca20d69f278e439c45cca7c8815b2
+      internalID: -156647847
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_SqueezedEyeL_NF
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 29
+        width: 3
+        height: 3
+      alignment: 9
+      pivot: {x: 0.33333334, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 63344328f5e1ab04c81017d5f7bae4a7
+      internalID: 2010396690
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_SqueezedEyeR_NF
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 29
+        width: 3
+        height: 3
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a108e82a9205f594cb3a43d6f9f403a1
+      internalID: -671630792
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_GuruguruEyeR_NF
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 25
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d93fe6fd80e988f45860ac2e607f9bee
+      internalID: 43120990
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GuruguruEyeL_NF
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 25
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3e81a112b1fa76d4c81d3a15191d7207
+      internalID: -789280783
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_SqueezedEye2L_NF
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 26
+        width: 4
+        height: 6
+      alignment: 9
+      pivot: {x: 0.25, y: 0.16666667}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c19fde6faaee37d498d77d2a0be45723
+      internalID: 1639082987
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_SmilingEyeL_NF
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 30
+        width: 4
+        height: 2
+      alignment: 9
+      pivot: {x: 0.25, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: da1faf7251375204bad3c16687ac99ff
+      internalID: 1663396259
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_SmilingEyeR_NF
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 30
+        width: 3
+        height: 2
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aecf6097a35b778499a1c8ecca79d673
+      internalID: -1930416447
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_ColdEyeL_NF
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 25
+        width: 5
+        height: 5
+      alignment: 9
+      pivot: {x: 0.4, y: 0.2}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 641e208a7acf39a4bbf635316a9a4702
+      internalID: -1671339024
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_ColdEyeR_NF
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 25
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3022183113e3bab46988ffe29031cd42
+      internalID: -681214111
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_SmilingMouth_NF
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 27
+        width: 3
+        height: 2
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c07ec1874afcf4d4ea2aba280399f6f8
+      internalID: -675579442
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      BlushEffect_NFBR: -1817999049
+      EffectEyes1_1: 2063854530
+      GuruguruEyeL_NF: -789280783
+      OSpR_CloseEyeL_NF: -1559457059
+      OSpR_CloseEyeR_NF: -156647847
+      OSpR_ColdEyeL_NF: -1671339024
+      OSpR_ColdEyeR_NF: -681214111
+      OSpR_GuruguruEyeR_NF: 43120990
+      OSpR_SmilingEyeL_NF: 1663396259
+      OSpR_SmilingEyeR_NF: -1930416447
+      OSpR_SmilingMouth_NF: -675579442
+      OSpR_SqueezedEye2L_NF: 1639082987
+      OSpR_SqueezedEyeL_NF: 2010396690
+      OSpR_SqueezedEyeR_NF: -671630792
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

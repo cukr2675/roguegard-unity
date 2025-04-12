@@ -46,20 +46,20 @@ namespace OchalikeSprites.Editor
 
         private static ColorRangedBoneSprite GetArmSprite(int armStature, string[] searchInFolders)
         {
-            if (armStature >= 9) return OchalikeSpritesAssetDatabase.CreateColorRangedBoneSpriteOrNull(false, "OSp_Humanoid_Arm9{0}", searchInFolders);
-            if (armStature >= 7) return OchalikeSpritesAssetDatabase.CreateColorRangedBoneSpriteOrNull(false, "OSp_Humanoid_Arm7{0}", searchInFolders);
-            if (armStature >= 5) return OchalikeSpritesAssetDatabase.CreateColorRangedBoneSpriteOrNull(false, "OSp_Humanoid_Arm5{0}", searchInFolders);
-            if (armStature >= 3) return OchalikeSpritesAssetDatabase.CreateColorRangedBoneSpriteOrNull(false, "OSp_Humanoid_Arm3{0}", searchInFolders);
-            return OchalikeSpritesAssetDatabase.CreateColorRangedBoneSpriteOrNull(false, "OSp_Humanoid_Arm1{0}", searchInFolders);
+            if (armStature >= 9) return OchalikeSpritesAssetDatabase.CreateColorRangedBoneSpriteOrNull(false, "OSpR_Humanoid_Arm9{0}", searchInFolders);
+            if (armStature >= 7) return OchalikeSpritesAssetDatabase.CreateColorRangedBoneSpriteOrNull(false, "OSpR_Humanoid_Arm7{0}", searchInFolders);
+            if (armStature >= 5) return OchalikeSpritesAssetDatabase.CreateColorRangedBoneSpriteOrNull(false, "OSpR_Humanoid_Arm5{0}", searchInFolders);
+            if (armStature >= 3) return OchalikeSpritesAssetDatabase.CreateColorRangedBoneSpriteOrNull(false, "OSpR_Humanoid_Arm3{0}", searchInFolders);
+            return OchalikeSpritesAssetDatabase.CreateColorRangedBoneSpriteOrNull(false, "OSpR_Humanoid_Arm1{0}", searchInFolders);
         }
 
         private static ColorRangedBoneSprite GetLegSprite(int legStature, string[] searchInFolders)
         {
-            if (legStature >= 8) return OchalikeSpritesAssetDatabase.CreateColorRangedBoneSpriteOrNull(false, "OSp_Humanoid_Leg8{0}", searchInFolders);
-            if (legStature >= 6) return OchalikeSpritesAssetDatabase.CreateColorRangedBoneSpriteOrNull(false, "OSp_Humanoid_Leg6{0}", searchInFolders);
-            if (legStature >= 4) return OchalikeSpritesAssetDatabase.CreateColorRangedBoneSpriteOrNull(false, "OSp_Humanoid_Leg4{0}", searchInFolders);
-            if (legStature >= 2) return OchalikeSpritesAssetDatabase.CreateColorRangedBoneSpriteOrNull(false, "OSp_Humanoid_Leg2{0}", searchInFolders);
-            return OchalikeSpritesAssetDatabase.CreateColorRangedBoneSpriteOrNull(false, "OSp_Humanoid_Leg0{0}", searchInFolders);
+            if (legStature >= 8) return OchalikeSpritesAssetDatabase.CreateColorRangedBoneSpriteOrNull(false, "OSpR_Humanoid_Leg8{0}", searchInFolders);
+            if (legStature >= 6) return OchalikeSpritesAssetDatabase.CreateColorRangedBoneSpriteOrNull(false, "OSpR_Humanoid_Leg6{0}", searchInFolders);
+            if (legStature >= 4) return OchalikeSpritesAssetDatabase.CreateColorRangedBoneSpriteOrNull(false, "OSpR_Humanoid_Leg4{0}", searchInFolders);
+            if (legStature >= 2) return OchalikeSpritesAssetDatabase.CreateColorRangedBoneSpriteOrNull(false, "OSpR_Humanoid_Leg2{0}", searchInFolders);
+            return OchalikeSpritesAssetDatabase.CreateColorRangedBoneSpriteOrNull(false, "OSpR_Humanoid_Leg0{0}", searchInFolders);
         }
 
         private static int GetChestStatureRank(int bodyStature)
@@ -125,11 +125,11 @@ namespace OchalikeSprites.Editor
 
             private static ColorRangedBoneSprite GetSprite(int bodyStature, string[] searchInFolders)
             {
-                if (bodyStature >= 9) return OchalikeSpritesAssetDatabase.CreateColorRangedBoneSpriteOrNull(false, "OSp_Humanoid_Body9{0}", searchInFolders);
-                if (bodyStature >= 7) return OchalikeSpritesAssetDatabase.CreateColorRangedBoneSpriteOrNull(false, "OSp_Humanoid_Body7{0}", searchInFolders);
-                if (bodyStature >= 5) return OchalikeSpritesAssetDatabase.CreateColorRangedBoneSpriteOrNull(false, "OSp_Humanoid_Body5{0}", searchInFolders);
-                if (bodyStature >= 3) return OchalikeSpritesAssetDatabase.CreateColorRangedBoneSpriteOrNull(false, "OSp_Humanoid_Body3{0}", searchInFolders);
-                return OchalikeSpritesAssetDatabase.CreateColorRangedBoneSpriteOrNull(false, "OSp_Humanoid_Body1{0}", searchInFolders);
+                if (bodyStature >= 9) return OchalikeSpritesAssetDatabase.CreateColorRangedBoneSpriteOrNull(false, "OSpR_Humanoid_Body9{0}", searchInFolders);
+                if (bodyStature >= 7) return OchalikeSpritesAssetDatabase.CreateColorRangedBoneSpriteOrNull(false, "OSpR_Humanoid_Body7{0}", searchInFolders);
+                if (bodyStature >= 5) return OchalikeSpritesAssetDatabase.CreateColorRangedBoneSpriteOrNull(false, "OSpR_Humanoid_Body5{0}", searchInFolders);
+                if (bodyStature >= 3) return OchalikeSpritesAssetDatabase.CreateColorRangedBoneSpriteOrNull(false, "OSpR_Humanoid_Body3{0}", searchInFolders);
+                return OchalikeSpritesAssetDatabase.CreateColorRangedBoneSpriteOrNull(false, "OSpR_Humanoid_Body1{0}", searchInFolders);
             }
         }
 
@@ -141,7 +141,7 @@ namespace OchalikeSprites.Editor
                 var bone = new OchalikeSpriteData.Bone();
                 bone.BoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("Chest");
                 bone.ParentBoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("Body");
-                bone.BareSprite = OchalikeSpritesAssetDatabase.CreateColorRangedBoneSpriteOrNull(false, "OSp_Humanoid_Chest{0}", searchInFolders);
+                bone.BareSprite = OchalikeSpritesAssetDatabase.CreateColorRangedBoneSpriteOrNull(false, "OSpR_Humanoid_Chest{0}", searchInFolders);
                 bone.PixelLocalPosition = new Vector3(0f, statureRank);
                 bone.NormalOrderInParent = +1f;
                 bone.BackOrderInParent = +1f;
@@ -282,7 +282,7 @@ namespace OchalikeSprites.Editor
                 var bone = new OchalikeSpriteData.Bone();
                 bone.BoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("Head");
                 bone.ParentBoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("Body");
-                bone.BareSprite = OchalikeSpritesAssetDatabase.CreateColorRangedBoneSpriteOrNull(true, "OSp_Humanoid_Head{0}{1}", searchInFolders);
+                bone.BareSprite = OchalikeSpritesAssetDatabase.CreateColorRangedBoneSpriteOrNull(true, "OSpR_Humanoid_Head{0}{1}", searchInFolders);
                 bone.PixelLocalPosition = new Vector3(0f, statureRank);
                 bone.NormalOrderInParent = +3f;
                 bone.BackOrderInParent = +3f;
@@ -366,7 +366,7 @@ namespace OchalikeSprites.Editor
                 var bone = new OchalikeSpriteData.Bone();
                 bone.BoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("Mouth");
                 bone.ParentBoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("Head");
-                var clearSprite = OchalikeSpritesAssetDatabase.GetSprite("OSp_Humanoid_Clear", searchInFolders);
+                var clearSprite = OchalikeSpritesAssetDatabase.GetSprite("OSpR_Humanoid_Clear", searchInFolders);
                 bone.BareSprite = new ColorRangedBoneSprite(BoneSprite.CreateNFBR_NRBF(clearSprite, clearSprite));
                 bone.PixelLocalPosition = new Vector3(-1f, 1f);
                 bone.NormalOrderInParent = +4f;
@@ -411,7 +411,7 @@ namespace OchalikeSprites.Editor
                 var bone = new OchalikeSpriteData.Bone();
                 bone.BoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("BodyEffect");
                 bone.ParentBoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("Body");
-                var clearSprite = OchalikeSpritesAssetDatabase.GetSprite("OSp_Humanoid_Clear", searchInFolders);
+                var clearSprite = OchalikeSpritesAssetDatabase.GetSprite("OSpR_Humanoid_Clear", searchInFolders);
                 bone.BareSprite = new ColorRangedBoneSprite(BoneSprite.CreateNFBR_NRBF(clearSprite, clearSprite));
                 bone.NormalOrderInParent = +6f;
                 bone.BackOrderInParent = +6f;
@@ -426,7 +426,7 @@ namespace OchalikeSprites.Editor
                 var bone = new OchalikeSpriteData.Bone();
                 bone.BoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("HeadEffect");
                 bone.ParentBoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("Head");
-                var clearSprite = OchalikeSpritesAssetDatabase.GetSprite("OSp_Humanoid_Clear", searchInFolders);
+                var clearSprite = OchalikeSpritesAssetDatabase.GetSprite("OSpR_Humanoid_Clear", searchInFolders);
                 bone.BareSprite = new ColorRangedBoneSprite(BoneSprite.CreateNFBR_NRBF(clearSprite, clearSprite));
                 bone.NormalOrderInParent = +7f;
                 bone.BackOrderInParent = +7f;
