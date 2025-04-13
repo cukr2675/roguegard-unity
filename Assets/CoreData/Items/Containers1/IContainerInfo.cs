@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Roguegard
 {
-    public interface IChestInfo
+    public interface IContainerInfo
     {
         IApplyRogueMethod BeOpened { get; }
         IApplyRogueMethod TakeIn { get; }

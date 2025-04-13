@@ -9,7 +9,7 @@ using Roguegard.Extensions;
 
 namespace RoguegardUnity
 {
-    public class PutIntoChestCommandMenu : RogueMenuScreen
+    public class PutIntoContainerCommandMenu : RogueMenuScreen
     {
         private readonly MainMenuViewTemplate<MMgr, MArg> view = new()
         {
@@ -26,14 +26,14 @@ namespace RoguegardUnity
                 {
                     manager.Done();
 
-                    var chestInfo = ChestInfo.GetInfo(arg.Arg.TargetObj);
+                    var containerInfo = ContainerInfo.GetInfo(arg.Arg.TargetObj);
                     var selfObjs = arg.Self.Space.Objs;
                     for (int i = 0; i < selfObjs.Count; i++)
                     {
                         var obj = selfObjs[i];
                         if (obj == null || !obj.CanStack(arg.Arg.Tool)) continue;
 
-                        default(IActiveRogueMethodCaller).PutIn(arg.Self, arg.Arg.TargetObj, chestInfo, obj, 0f);
+                        default(IActiveRogueMethodCaller).PutIn(arg.Self, arg.Arg.TargetObj, containerInfo, obj, 0f);
                     }
 
                     manager.AddObject(DeviceKw.EnqueueSE, MainInfoKw.Put);

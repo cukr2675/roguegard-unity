@@ -16,21 +16,21 @@ namespace Roguegard
             if (memberInfo == null) return RogueObjUpdaterContinueType.Continue;
 
             var spaceObjs = self.Location.Space.Objs;
-            RogueObj nearestChest = null;
+            RogueObj nearestContainer = null;
             int nearestSqrDistance = int.MaxValue;
             for (int i = 0; i < spaceObjs.Count; i++)
             {
                 var obj = spaceObjs[i];
-                if (obj == null || obj.Main.InfoSet.Category != CategoryKw.Chest) continue;
+                if (obj == null || obj.Main.InfoSet.Category != CategoryKw.Container) continue;
 
                 var sqrDistance = (obj.Position - self.Position).sqrMagnitude;
                 if (sqrDistance < nearestSqrDistance)
                 {
-                    nearestChest = obj;
+                    nearestContainer = obj;
                     nearestSqrDistance = sqrDistance;
                 }
             }
-            if (nearestChest == null) return RogueObjUpdaterContinueType.Continue;
+            if (nearestContainer == null) return RogueObjUpdaterContinueType.Continue;
 
             var itemRegister = memberInfo.ItemRegister;
             for (int i = 0; i < itemRegister.Count; i++)
@@ -52,15 +52,15 @@ namespace Roguegard
                 }
             }
 
-            var chestInfo = ChestInfo.GetInfo(nearestChest);
+            var containerInfo = ContainerInfo.GetInfo(nearestContainer);
             var items = self.Space.Objs;
             for (int i = 0; i < items.Count; i++)
             {
                 var item = items[i];
                 if (item == null || itemRegister.Contains(item)) continue;
 
-                // 持たせたアイテム以外をチェストにしまう
-                RogueMethodAspectState.Invoke(MainInfoKw.Walk, chestInfo.TakeIn, nearestChest, self, activationDepth, new(targetObj: item));
+                // 持たせたアイテム以外を入れ物にしまう
+                RogueMethodAspectState.Invoke(MainInfoKw.Walk, containerInfo.TakeIn, nearestContainer, self, activationDepth, new(targetObj: item));
             }
             return RogueObjUpdaterContinueType.Continue;
         }

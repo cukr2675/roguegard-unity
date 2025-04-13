@@ -157,8 +157,8 @@ namespace RoguegardUnity
             {
                 // Rgpack モジュールを読み込み
                 var rgpack = new Dictionary<string, object>();
-                rgpack.Add("ChestChart", new ChartPadInfo());
-                rgpack.Add("ChestChart_lua", @"
+                rgpack.Add("LootChart", new ChartPadInfo());
+                rgpack.Add("LootChart_lua", @"
 local Rg = require('roguegard')
 local m = {}
 
@@ -170,13 +170,13 @@ function m.LootCmn:invoke(owner, user)
         return
     end
 
-    local chestChart = Rg.ref('.ChestChart')
-    if chestChart.getS(owner.evtId) then
+    local lootChart = Rg.ref('.LootChart')
+    if lootChart.getS(owner.evtId) then
         Rg.say([[宝箱はからっぽだった]])
     else
         local item = self.lootItem.createObj(user, 0, 0)
         Rg.say(item..[[を手に入れた！]])
-        chestChart.setS(owner.evtId, 'true')
+        lootChart.setS(owner.evtId, 'true')
     end
 end
 

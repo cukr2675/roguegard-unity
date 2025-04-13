@@ -26,17 +26,17 @@ namespace RoguegardUnity
         /// </summary>
         public RogueMenuScreen Ground { get; }
 
-        public RogueMenuScreen PutIntoChest { get; }
+        public RogueMenuScreen PutIntoContainer { get; }
 
-        public RogueMenuScreen TakeOutFromChest { get; }
+        public RogueMenuScreen TakeOutOfContainer { get; }
 
-        public ObjsMenu(ObjCommandMenu commandMenu, PutIntoChestCommandMenu putInCommandMenu, TakeOutFromChestCommandMenu takeOutCommandMenu)
+        public ObjsMenu(ObjCommandMenu commandMenu, PutIntoContainerCommandMenu putInCommandMenu, TakeOutOfContainerCommandMenu takeOutCommandMenu)
         {
             Close = SelectOption.Create<MMgr, MArg>(":Close", (manager, arg) => manager.Done(), "Cancel");
             Items = new ItemsMenu() { commandMenu = commandMenu };
             Ground = new GroundMenu() { commandMenu = commandMenu };
-            PutIntoChest = new PutIntoChestMenu() { commandMenu = putInCommandMenu };
-            TakeOutFromChest = new TakeOutFromChestMenu() { commandMenu = takeOutCommandMenu };
+            PutIntoContainer = new PutIntoContainerMenu() { commandMenu = putInCommandMenu };
+            TakeOutOfContainer = new TakeOutOfContainerMenu() { commandMenu = takeOutCommandMenu };
         }
 
         private abstract class ScrollMenu : RogueMenuScreen
@@ -175,7 +175,7 @@ namespace RoguegardUnity
             }
         }
 
-        private class PutIntoChestMenu : ScrollMenu
+        private class PutIntoContainerMenu : ScrollMenu
         {
             protected override string Title => ":Put in what?";
 
@@ -193,19 +193,19 @@ namespace RoguegardUnity
             }
         }
 
-        private class TakeOutFromChestMenu : ScrollMenu
+        private class TakeOutOfContainerMenu : ScrollMenu
         {
             protected override string Title => ":Take out what?";
             protected override bool SortIsEnabled => true;
 
             private readonly List<RogueObj> objs = new();
 
-            protected override List<RogueObj> GetObjs(RogueObj self, RogueObj chest)
+            protected override List<RogueObj> GetObjs(RogueObj self, RogueObj container)
             {
                 objs.Clear();
-                for (int i = 0; i < chest.Space.Objs.Count; i++)
+                for (int i = 0; i < container.Space.Objs.Count; i++)
                 {
-                    objs.Add(chest.Space.Objs[i]);
+                    objs.Add(container.Space.Objs[i]);
                 }
                 return objs;
             }

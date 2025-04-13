@@ -57,8 +57,8 @@ namespace RoguegardUnity
 
             Initialize();
             var objCommandMenu = new ObjCommandMenu();
-            var putInCommandMenu = new PutIntoChestCommandMenu();
-            var takeOutCommandMenu = new TakeOutFromChestCommandMenu();
+            var putInCommandMenu = new PutIntoContainerCommandMenu();
+            var takeOutCommandMenu = new TakeOutOfContainerCommandMenu();
 
             objsMenu = new ObjsMenu(objCommandMenu, putInCommandMenu, takeOutCommandMenu);
             var skillsMenu = new SkillsMenu();

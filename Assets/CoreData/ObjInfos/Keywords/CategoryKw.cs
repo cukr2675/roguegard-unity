@@ -11,8 +11,8 @@ namespace Roguegard
         [SerializeField] private KeywordData _applyTool;
         public static IKeyword ApplyTool => instance._applyTool;
 
-        [SerializeField] private KeywordData _chest;
-        public static IKeyword Chest => instance._chest;
+        [SerializeField] private KeywordData _container;
+        public static IKeyword Container => instance._container;
 
         [SerializeField] private KeywordData _downStairs;
         public static IKeyword DownStairs => instance._downStairs;

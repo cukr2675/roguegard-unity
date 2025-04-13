@@ -21,7 +21,7 @@ MonoBehaviour:
   _levitation: {fileID: 11400000, guid: cd911045b2b22cf45b9b9db71abd6c74, type: 2}
   _poolMovement: {fileID: 11400000, guid: b1cdb1fd0ab29bf44b29f21947aae7ac, type: 2}
   _push: {fileID: 11400000, guid: fc4491f4fbb5eb94bb921cab39ea6d72, type: 2}
-  _putIntoChest: {fileID: 11400000, guid: da26baec2cb359047a66b30eb81bcdeb, type: 2}
+  _putIntoContainer: {fileID: 11400000, guid: da26baec2cb359047a66b30eb81bcdeb, type: 2}
   _read: {fileID: 11400000, guid: 4b445525e5f70b348ab4cc5edee0d0c1, type: 2}
   _ride: {fileID: 11400000, guid: d7d230a866f54fd49b62c300a5d60766, type: 2}
   _bomb: {fileID: 11400000, guid: a26a90deae8095045966b0c212870423, type: 2}
@@ -39,7 +39,7 @@ MonoBehaviour:
   _teleport: {fileID: 11400000, guid: 5925c16daa9ed0e448bfe86d7dd6eb04, type: 2}
   _digestion: {fileID: 11400000, guid: c7d47254baafb4c46b0abdf1fb1b0c7d, type: 2}
   _stepOn: {fileID: 11400000, guid: c350d9d20ad39b342b90deb772e2acdf, type: 2}
-  _takeOutFromChest: {fileID: 11400000, guid: 02ffc6984775b03449c645db286db91c, type: 2}
+  _takeOutOfContainer: {fileID: 11400000, guid: 02ffc6984775b03449c645db286db91c, type: 2}
   _turn: {fileID: 11400000, guid: 8eb2d3314cf0c7349ae5e0c218f1c2da, type: 2}
   _unride: {fileID: 11400000, guid: cce152351f814d1418fb9250f4e5605c, type: 2}
   _vehicle: {fileID: 11400000, guid: 93e0fdc6d2e91b74a805580f797533a4, type: 2}

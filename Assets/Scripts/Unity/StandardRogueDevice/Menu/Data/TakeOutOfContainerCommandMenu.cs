@@ -9,7 +9,7 @@ using Roguegard.Extensions;
 
 namespace RoguegardUnity
 {
-    public class TakeOutFromChestCommandMenu : RogueMenuScreen
+    public class TakeOutOfContainerCommandMenu : RogueMenuScreen
     {
         private readonly MainMenuViewTemplate<MMgr, MArg> view = new()
         {
@@ -26,8 +26,8 @@ namespace RoguegardUnity
                 {
                     manager.Done();
 
-                    var chestInfo = ChestInfo.GetInfo(arg.Arg.TargetObj);
-                    default(IActiveRogueMethodCaller).TakeOut(arg.Self, arg.Arg.TargetObj, chestInfo, arg.Arg.Tool, 0f);
+                    var containerInfo = ContainerInfo.GetInfo(arg.Arg.TargetObj);
+                    default(IActiveRogueMethodCaller).TakeOut(arg.Self, arg.Arg.TargetObj, containerInfo, arg.Arg.Tool, 0f);
 
                     RogueDevice.Add(DeviceKw.AppendText, arg.Arg.TargetObj);
                     RogueDevice.Add(DeviceKw.AppendText, "から");

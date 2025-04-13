@@ -80,7 +80,7 @@ namespace RoguegardUnity
                 new ChangePlayerDeviceEventHandler(this, touchController, ticker, x => Player = Subject = x),
                 autoPlayDeviceEventHandler,
 
-                new ChestDeviceEventHandler(this),
+                new ContainerDeviceEventHandler(this),
             };
             EventManager = new StandardRogueDeviceEventManager(touchController, characterRenderSystem, eventHandlers);
 

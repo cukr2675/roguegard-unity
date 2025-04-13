@@ -4,9 +4,9 @@ using UnityEngine;
 
 namespace Roguegard
 {
-    public static class ChestInfo
+    public static class ContainerInfo
     {
-        public static IChestInfo GetInfo(RogueObj obj)
+        public static IContainerInfo GetInfo(RogueObj obj)
         {
             obj.Main.TryOpenRogueEffects(obj);
 
@@ -23,9 +23,9 @@ namespace Roguegard
         /// <summary>
         /// 上書き不可
         /// </summary>
-        public static void SetInfoTo(RogueObj obj, IChestInfo chestInfo)
+        public static void SetInfoTo(RogueObj obj, IContainerInfo containerInfo)
         {
-            if (chestInfo == null) throw new System.ArgumentNullException(nameof(chestInfo));
+            if (containerInfo == null) throw new System.ArgumentNullException(nameof(containerInfo));
 
             if (!obj.TryGet<Info>(out var info))
             {
@@ -36,7 +36,7 @@ namespace Roguegard
             // 上書き不可
             if (info.info != null) throw new RogueException();
 
-            info.info = chestInfo;
+            info.info = containerInfo;
         }
 
         public static void RemoveFrom(RogueObj obj)
@@ -51,7 +51,7 @@ namespace Roguegard
         private class Info : IRogueObjInfo
         {
             [System.NonSerialized]
-            public IChestInfo info;
+            public IContainerInfo info;
 
             // RogueObj.Space ではないストレージ用リストは使用不可能
             // ロビーメンバーの呼び戻し機能などで中のオブジェクトがひとりでに移動することがあり、

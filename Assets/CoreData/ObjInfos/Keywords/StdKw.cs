@@ -35,8 +35,8 @@ namespace Roguegard
         [SerializeField] private KeywordData _push;
         public static IKeyword Push => instance._push;
 
-        [SerializeField] private KeywordData _putIntoChest;
-        public static IKeyword PutIntoChest => instance._putIntoChest;
+        [SerializeField] private KeywordData _putIntoContainer;
+        public static IKeyword PutIntoContainer => instance._putIntoContainer;
 
         [SerializeField] private KeywordData _read;
         public static IKeyword Read => instance._read;
@@ -89,8 +89,8 @@ namespace Roguegard
         [SerializeField] private KeywordData _stepOn;
         public static IKeyword StepOn => instance._stepOn;
 
-        [SerializeField] private KeywordData _takeOutFromChest;
-        public static IKeyword TakeOutFromChest => instance._takeOutFromChest;
+        [SerializeField] private KeywordData _takeOutOfContainer;
+        public static IKeyword TakeOutOfContainer => instance._takeOutOfContainer;
 
         [SerializeField] private KeywordData _turn;
         public static IKeyword Turn => instance._turn;

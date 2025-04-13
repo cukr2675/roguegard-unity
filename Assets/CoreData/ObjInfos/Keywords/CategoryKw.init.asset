@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: CategoryKw.init
   m_EditorClassIdentifier: 
   _applyTool: {fileID: 11400000, guid: 0082811a5684dae4babc72d3c932f4a5, type: 2}
-  _chest: {fileID: 11400000, guid: 766475a356f5fb341bff16744b3b5d4c, type: 2}
+  _container: {fileID: 11400000, guid: 766475a356f5fb341bff16744b3b5d4c, type: 2}
   _downStairs: {fileID: 11400000, guid: 9f936bdb399bae2429058d8a76d54f7c, type: 2}
   _drink: {fileID: 11400000, guid: 9c6e8e727efe732498ae632d55564cc3, type: 2}
   _equipment: {fileID: 11400000, guid: 75e1343f76d38ef47996f24301d8239f, type: 2}

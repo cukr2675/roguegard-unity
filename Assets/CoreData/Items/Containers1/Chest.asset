@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 797073a39246ce24195bfdd54b79f0dc, type: 3}
-  m_Name: Storage
+  m_Name: Chest
   m_EditorClassIdentifier: 
   _overridesCost: 0
   _cost: 0
   _costIsUnknown: 0
   _race:
-    _name: "\u5009\u5EAB"
-    _icon: {fileID: -1362082320, guid: 2c3b84187a5a624489356b62e46bf28e, type: 3}
-    _color: {r: 0.6039216, g: 0.40462807, b: 0.30588236, a: 1}
+    _name: "\u7BB1"
+    _icon: {fileID: -7854557981505934654, guid: 12a1a85046ed6d54e850e8a2b99fa7e9, type: 3}
+    _color: {r: 0.6886792, g: 0.38606042, b: 0.17801704, a: 1}
     _caption: 
     _details:
       _script: {fileID: 0}
@@ -34,8 +34,8 @@ MonoBehaviour:
     _def: 0
     _loadCapacity: 0
     _faction: {fileID: 0}
-    _ability: 3
-    _material: {fileID: 0}
+    _ability: 4
+    _material: {fileID: 11400000, guid: e4aec123d7b1f8d4b8b561083a916f85, type: 2}
     _lootTable: []
     _walk:
       _script: {fileID: 0}
@@ -109,7 +109,7 @@ MonoBehaviour:
     _openEffects:
     - _script: {fileID: 11500000, guid: 4321c5056fb7cc248a8c256476b44a8a, type: 3}
       _ref:
-        rid: 7978898133563211785
+        rid: 7157730830016839683
     _lv: 0
     _gender: {fileID: 0}
     _hpName: 
@@ -124,11 +124,11 @@ MonoBehaviour:
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
-    - rid: 7978898133563211785
-      type: {class: ChestOpen, ns: Roguegard, asm: Roguegard.CoreData}
+    - rid: 7157730830016839683
+      type: {class: ContainerOpen, ns: Roguegard, asm: Roguegard.CoreData}
       data:
         _assemblyReflectionAssetDummy: 
-        _isStorage: 1
+        _isStorage: 0
         _beOpened:
           _script: {fileID: 0}
           _ref:

@@ -12,17 +12,17 @@ namespace Roguegard.Extensions
         private static readonly SwapPositionCommand swapPositionCommand = new SwapPositionCommand();
 
         public static bool PutIn(
-            this IApplyRogueMethodCaller method, RogueObj self, RogueObj chest, IChestInfo chestInfo, RogueObj obj, float activationDepth)
+            this IApplyRogueMethodCaller method, RogueObj self, RogueObj container, IContainerInfo containerInfo, RogueObj obj, float activationDepth)
         {
             var arg = new RogueMethodArgument(targetObj: obj);
-            return RogueMethodAspectState.Invoke(MainInfoKw.Walk, chestInfo.TakeIn, chest, self, activationDepth, arg);
+            return RogueMethodAspectState.Invoke(MainInfoKw.Walk, containerInfo.TakeIn, container, self, activationDepth, arg);
         }
 
         public static bool TakeOut(
-            this IApplyRogueMethodCaller method, RogueObj self, RogueObj chest, IChestInfo chestInfo, RogueObj obj, float activationDepth)
+            this IApplyRogueMethodCaller method, RogueObj self, RogueObj container, IContainerInfo containerInfo, RogueObj obj, float activationDepth)
         {
             var arg = new RogueMethodArgument(targetObj: obj);
-            return RogueMethodAspectState.Invoke(MainInfoKw.Walk, chestInfo.PutOut, chest, self, activationDepth, arg);
+            return RogueMethodAspectState.Invoke(MainInfoKw.Walk, containerInfo.PutOut, container, self, activationDepth, arg);
         }
 
         public static bool Walk(

@@ -7,7 +7,7 @@ using Roguegard.CharacterCreation;
 
 namespace Roguegard
 {
-    public class ChestOpen : ReferableScript, IOpenEffect
+    public class ContainerOpen : ReferableScript, IOpenEffect
     {
         [SerializeField] private bool _isStorage;
         [SerializeField] private ScriptField<IApplyRogueMethod> _beOpened;
@@ -17,8 +17,8 @@ namespace Roguegard
         public IRaceOption Open(
             RogueObj self, MainInfoSetType infoSetType, bool polymorph2Base, IRaceOption raceOption, ICharacterCreationData characterCreationData)
         {
-            var chestInfo = new ChestInfo(this);
-            Roguegard.ChestInfo.SetInfoTo(self, chestInfo);
+            var containerInfo = new ContainerInfo(this);
+            Roguegard.ContainerInfo.SetInfoTo(self, containerInfo);
             if (_isStorage) { RogueEffectUtility.AddFromInfoSet(self, ValueEffect.Instance); }
             return raceOption;
         }
@@ -26,7 +26,7 @@ namespace Roguegard
         public void Close(
             RogueObj self, MainInfoSetType infoSetType, bool base2Polymorph, IRaceOption raceOption, ICharacterCreationData characterCreationData)
         {
-            Roguegard.ChestInfo.RemoveFrom(self);
+            Roguegard.ContainerInfo.RemoveFrom(self);
             if (_isStorage) { RogueEffectUtility.Remove(self, ValueEffect.Instance); }
         }
 
@@ -40,9 +40,9 @@ namespace Roguegard
         {
         }
 
-        private class ChestInfo : IChestInfo
+        private class ContainerInfo : IContainerInfo
         {
-            private readonly ChestOpen data;
+            private readonly ContainerOpen data;
 
             public IApplyRogueMethod BeOpened => data._beOpened.Ref ?? baseBeOpened;
             public IApplyRogueMethod TakeIn => data._takeIn.Ref ?? baseTakeIn;
@@ -52,7 +52,7 @@ namespace Roguegard
             private static readonly IApplyRogueMethod baseTakeIn = new TakeInRogueMethod();
             private static readonly IApplyRogueMethod basePutOut = new PutOutRogueMethod();
 
-            public ChestInfo(ChestOpen data)
+            public ContainerInfo(ContainerOpen data)
             {
                 this.data = data;
             }
@@ -64,8 +64,8 @@ namespace Roguegard
             {
                 if (RogueDevice.Primary.Player == user)
                 {
-                    if (arg.Count == 1) { RogueDevice.Add(StdKw.PutIntoChest, self); }
-                    else { RogueDevice.Add(StdKw.TakeOutFromChest, self); }
+                    if (arg.Count == 1) { RogueDevice.Add(StdKw.PutIntoContainer, self); }
+                    else { RogueDevice.Add(StdKw.TakeOutOfContainer, self); }
                 }
                 return true;
             }
