@@ -123,7 +123,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: OSpR_SmallApron
+      name: OSpR_SimpleAccentApron
       rect:
         serializedVersion: 2
         x: 0
@@ -144,7 +144,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: OSpR_SmallApron_Body_NF
+      name: OSpR_SimpleAccentApron_Body_NF
       rect:
         serializedVersion: 2
         x: 0
@@ -165,7 +165,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: OSpR_SmallApron_Chest_NF
+      name: OSpR_SimpleAccentApron_Chest_NF
       rect:
         serializedVersion: 2
         x: 0
@@ -186,7 +186,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: OSpR_SmallApron_Body_BF
+      name: OSpR_SimpleAccentApron_Body_BF
       rect:
         serializedVersion: 2
         x: 6
@@ -207,7 +207,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: OSpR_SmallApron_Chest_BF
+      name: OSpR_SimpleAccentApron_Chest_BF
       rect:
         serializedVersion: 2
         x: 7
@@ -543,7 +543,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: OSpR_DroppyAntennaeR_NFBR
+      name: OSpR_DroopyAntennaeR_NFBR
       rect:
         serializedVersion: 2
         x: 14
@@ -564,7 +564,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: OSpR_DroppyAntennaeLB_NFBR
+      name: OSpR_DroopyAntennaeLB_NFBR
       rect:
         serializedVersion: 2
         x: 19
@@ -585,7 +585,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: OSpR_DroppyAntennaeLA_NFBR
+      name: OSpR_DroopyAntennaeLA_NFBR
       rect:
         serializedVersion: 2
         x: 14
@@ -772,9 +772,9 @@ TextureImporter:
       OSpR_DevilTail_NRBF: -400104568
       OSpR_DevilWings_NRBF: 429267363
       OSpR_DogNose_NF: 14496699
-      OSpR_DroppyAntennaeLA_NFBR: 1431442085
-      OSpR_DroppyAntennaeLB_NFBR: 1688522412
-      OSpR_DroppyAntennaeR_NFBR: 2094869458
+      OSpR_DroopyAntennaeLA_NFBR: 1431442085
+      OSpR_DroopyAntennaeLB_NFBR: 1688522412
+      OSpR_DroopyAntennaeR_NFBR: 2094869458
       OSpR_FighterBandage_Foot_BF: -236494696
       OSpR_FighterBandage_Foot_NF: 583764534
       OSpR_FighterBandage_Hand_NFBF: -594099631
@@ -790,11 +790,11 @@ TextureImporter:
       OSpR_Horn_NFBR: 1722061652
       OSpR_Horn_NRBF: -194968174
       OSpR_LensHairAccessory_NF: -335595921
-      OSpR_SmallApron: -503997925
-      OSpR_SmallApron_Body_BF: 105282757
-      OSpR_SmallApron_Body_NF: -818371452
-      OSpR_SmallApron_Chest_BF: 450335025
-      OSpR_SmallApron_Chest_NF: -84174130
+      OSpR_SimpleAccentApron: -503997925
+      OSpR_SimpleAccentApron_Body_BF: 105282757
+      OSpR_SimpleAccentApron_Body_NF: -818371452
+      OSpR_SimpleAccentApron_Chest_BF: 450335025
+      OSpR_SimpleAccentApron_Chest_NF: -84174130
       OSpR_WolfTail_NRBF: -684376093
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0

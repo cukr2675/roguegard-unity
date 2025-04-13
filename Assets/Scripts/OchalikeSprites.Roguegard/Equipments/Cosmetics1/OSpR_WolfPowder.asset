@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4ff905651ac553e458ac896bdf1ceec6, type: 3}
-  m_Name: WolfPowderMorph
+  m_Name: OSpR_WolfPowder
   m_EditorClassIdentifier: 
   _items:
   - _name: {fileID: 11400000, guid: f2969665be9ee4d41a5326de4f6eb085, type: 2}
