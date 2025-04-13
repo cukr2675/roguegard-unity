@@ -10,7 +10,7 @@ using Roguegard.Device;
 
 namespace Roguegard.Rgpacks
 {
-    public class SpQuestMonolithBeApplied : BaseApplyRogueMethod
+    public class ScenarioMonolithBeApplied : BaseApplyRogueMethod
     {
         [SerializeField, ElementDescription("_option")] private ScriptableStartingItem[] _shopItems = null;
 
@@ -19,7 +19,7 @@ namespace Roguegard.Rgpacks
         public override bool Invoke(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
         {
             menu ??= new(this);
-            if (SpQuestMonolithInfo.Get(self) == null) { SpQuestMonolithInfo.SetTo(self); }
+            if (ScenarioMonolithInfo.Get(self) == null) { ScenarioMonolithInfo.SetTo(self); }
 
             RogueDevice.Primary.AddMenu(menu, user, null, new(tool: self));
             return false;
@@ -27,7 +27,7 @@ namespace Roguegard.Rgpacks
 
         private class Menu : RogueMenuScreen
         {
-            private readonly SpQuestMonolithBeApplied parent;
+            private readonly ScenarioMonolithBeApplied parent;
 
             private readonly MainMenuViewTemplate<MMgr, MArg> view = new()
             {
@@ -35,7 +35,7 @@ namespace Roguegard.Rgpacks
                 BackAnchorSubViewName = StandardSubViewTable.BackAnchorName,
             };
 
-            public Menu(SpQuestMonolithBeApplied parent)
+            public Menu(ScenarioMonolithBeApplied parent)
             {
                 this.parent = parent;
             }
@@ -54,8 +54,8 @@ namespace Roguegard.Rgpacks
             private static void Playtest(MMgr manager, MArg arg)
             {
                 var monolith = arg.Arg.Tool;
-                var spQuestAtelier = monolith.Location;
-                var rgpack = Rgpacker.Pack(spQuestAtelier);
+                var scenarioAtelier = monolith.Location;
+                var rgpack = Rgpacker.Pack(scenarioAtelier);
                 RogueDevice.Add(DeviceKw.StartPlaytest, rgpack);
             }
 
@@ -71,7 +71,7 @@ namespace Roguegard.Rgpacks
 
         private class ShopScreen : RogueMenuScreen
         {
-            public SpQuestMonolithBeApplied parent;
+            public ScenarioMonolithBeApplied parent;
 
             private readonly ScrollViewTemplate<ScriptableStartingItem, MMgr, MArg> view = new()
             {
@@ -113,13 +113,13 @@ namespace Roguegard.Rgpacks
                         (manager, arg) =>
                         {
                             var monolith = arg.Arg.Tool;
-                            var info = SpQuestMonolithInfo.Get(monolith);
+                            var info = ScenarioMonolithInfo.Get(monolith);
                             return info.MainChart;
                         },
                         (manager, arg, value) =>
                         {
                             var monolith = arg.Arg.Tool;
-                            var info = SpQuestMonolithInfo.Get(monolith);
+                            var info = ScenarioMonolithInfo.Get(monolith);
                             return info.MainChart = value;
                         }))
                     .Build();

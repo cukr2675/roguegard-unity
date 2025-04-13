@@ -17,7 +17,7 @@ namespace RoguegardUnity
         private readonly SelectFileMenuScreen readFileMenu;
         private readonly AutoSaveMenu autoSaveMenu;
 
-        private IReadOnlyDictionary<string, object> spQuestRgpack;
+        private IReadOnlyDictionary<string, object> scenarioRgpack;
 
         public SaveDeviceEventHandler(StandardRogueDeviceComponentManager componentManager, TouchController touchController)
         {
@@ -27,8 +27,8 @@ namespace RoguegardUnity
             writeFileMenu = SelectFileMenuScreen.Save(
                 onSelectFile: (fileInfo, manager, arg) =>
                 {
-                    SaveDelay(manager, fileInfo.FullName, false, spQuestRgpack);
-                    spQuestRgpack = null;
+                    SaveDelay(manager, fileInfo.FullName, false, scenarioRgpack);
+                    scenarioRgpack = null;
                 },
                 onNewFile: (manager, arg) =>
                 {
@@ -37,8 +37,8 @@ namespace RoguegardUnity
                     StandardRogueDeviceSave.GetNewNumberingPath(
                         RoguegardSettings.DefaultSaveFileName, path =>
                         {
-                            SaveDelay(manager, path, false, spQuestRgpack);
-                            spQuestRgpack = null;
+                            SaveDelay(manager, path, false, scenarioRgpack);
+                            scenarioRgpack = null;
                         });
                 });
 
@@ -87,7 +87,7 @@ namespace RoguegardUnity
                 if (componentManager.CantSave) return true;
 
                 // 名前を付けてセーブ
-                this.spQuestRgpack = null;
+                this.scenarioRgpack = null;
                 touchController.OpenMenu(componentManager.Subject, writeFileMenu, null, null, RogueMethodArgument.Identity);
                 return true;
             }
@@ -97,26 +97,26 @@ namespace RoguegardUnity
                 touchController.OpenMenu(componentManager.Subject, readFileMenu, null, null, RogueMethodArgument.Identity);
                 return true;
             }
-            if (keyword == DeviceKw.StartPlaytest && obj is IReadOnlyDictionary<string, object> spQuestRgpack)
+            if (keyword == DeviceKw.StartPlaytest && obj is IReadOnlyDictionary<string, object> scenarioRgpack)
             {
                 if (componentManager.CantSave) return true;
 
                 // 名前を付けてテストプレイ
-                this.spQuestRgpack = spQuestRgpack;
+                this.scenarioRgpack = scenarioRgpack;
                 touchController.OpenMenu(componentManager.Subject, writeFileMenu, null, null, RogueMethodArgument.Identity);
                 return true;
             }
             return false;
         }
 
-        private void SaveDelay(MMgr manager, string path, bool autoSave, IReadOnlyDictionary<string, object> spQuestRgpack)
+        private void SaveDelay(MMgr manager, string path, bool autoSave, IReadOnlyDictionary<string, object> scenarioRgpack)
         {
             manager.PopMenuScreen();
             SelectFileMenuScreen.ShowSaving(manager);
-            manager.StartCoroutine(Save(manager, path, autoSave, spQuestRgpack));
+            manager.StartCoroutine(Save(manager, path, autoSave, scenarioRgpack));
         }
 
-        private IEnumerator Save(MMgr manager, string path, bool autoSave, IReadOnlyDictionary<string, object> spQuestRgpack)
+        private IEnumerator Save(MMgr manager, string path, bool autoSave, IReadOnlyDictionary<string, object> scenarioRgpack)
         {
             // RogueMethodAspectState の処理の完了を待つ
             yield return null;
@@ -168,21 +168,21 @@ namespace RoguegardUnity
                 RogueDevice.Add(DeviceKw.AppendText, "にセーブしました\n");
             }
 
-            if (spQuestRgpack != null)
+            if (scenarioRgpack != null)
             {
-                var rgpack = new Rgpack("Playtest", spQuestRgpack, Rgpacker.DefaultEvaluator);
-                if (!rgpack.TryGetAsset<SpQuestMonolithAsset>("__main", out var monolith)) throw new RogueException();
+                var rgpack = new Rgpack("Playtest", scenarioRgpack, Rgpacker.DefaultEvaluator);
+                if (!rgpack.TryGetAsset<ScenarioMonolithAsset>("__main", out var monolith)) throw new RogueException();
 
                 var random = new RogueRandom();
-                var spQuestDeviceData = new StandardRogueDeviceData();
-                spQuestDeviceData.CurrentRandom = random;
-                spQuestDeviceData.World = RoguegardSettings.WorldGenerator.CreateObj(null, Vector2Int.zero, random);
+                var scenarioDeviceData = new StandardRogueDeviceData();
+                scenarioDeviceData.CurrentRandom = random;
+                scenarioDeviceData.World = RoguegardSettings.WorldGenerator.CreateObj(null, Vector2Int.zero, random);
                 var preset = RoguegardSettings.CharacterCreationDatabase.LoadPreset(0);
                 preset.Name = "Playtest";
-                var rgpackPlayer = preset.CreateObj(spQuestDeviceData.World, Vector2Int.zero, random);
+                var rgpackPlayer = preset.CreateObj(scenarioDeviceData.World, Vector2Int.zero, random);
                 RogueDeviceEffect.SetTo(rgpackPlayer);
                 ViewInfo.SetTo(rgpackPlayer);
-                var worldInfo = RogueWorldInfo.Get(spQuestDeviceData.World);
+                var worldInfo = RogueWorldInfo.Get(scenarioDeviceData.World);
                 worldInfo.LobbyMembers.Add(rgpackPlayer);
 
                 // パーティ・リーダーエフェクト・レベルアップボーナスの初期化
@@ -191,9 +191,9 @@ namespace RoguegardUnity
 
                 RoguePartyUtility.Reset(party, new UseNutritionLeaderEffect());
 
-                spQuestDeviceData.Player = rgpackPlayer;
-                spQuestDeviceData.Subject = spQuestDeviceData.Player;
-                spQuestDeviceData.Options = data.Options;
+                scenarioDeviceData.Player = rgpackPlayer;
+                scenarioDeviceData.Subject = scenarioDeviceData.Player;
+                scenarioDeviceData.Options = data.Options;
 
                 RgpackReference.LoadRgpack(rgpack);
                 manager.Done();
@@ -201,8 +201,8 @@ namespace RoguegardUnity
                 worldInfo.ChartState.PushNext(monolith.MainChartSource);
 
                 // ロードしたデータを適用
-                RogueRandom.Primary = spQuestDeviceData.CurrentRandom;
-                componentManager.OpenDelay(spQuestDeviceData);
+                RogueRandom.Primary = scenarioDeviceData.CurrentRandom;
+                componentManager.OpenDelay(scenarioDeviceData);
             }
             else
             {

@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 797073a39246ce24195bfdd54b79f0dc, type: 3}
-  m_Name: SpQuestAtelier
+  m_Name: ScenarioAtelier
   m_EditorClassIdentifier: 
   _overridesCost: 0
   _cost: 0
   _costIsUnknown: 0
   _race:
-    _name: "\u30B9\u30DA\u30AF\u30A8\u30A2\u30C8\u30EA\u30A8"
+    _name: "\u30B7\u30CA\u30EA\u30AA\u30A2\u30C8\u30EA\u30A8"
     _icon: {fileID: 427690671, guid: 2c3b84187a5a624489356b62e46bf28e, type: 3}
     _color: {r: 0.9622642, g: 0.78332096, b: 0.27687788, a: 1}
     _caption: 
@@ -122,7 +122,7 @@ MonoBehaviour:
     - rid: -2
       type: {class: , ns: , asm: }
     - rid: 2885636890002456578
-      type: {class: SpQuestAtelierBeApplied, ns: Roguegard.Rgpacks, asm: Roguegard.Rgpacks}
+      type: {class: ScenarioAtelierBeApplied, ns: Roguegard.Rgpacks, asm: Roguegard.Rgpacks}
       data:
         _assemblyReflectionAssetDummy: 
         _monolith:

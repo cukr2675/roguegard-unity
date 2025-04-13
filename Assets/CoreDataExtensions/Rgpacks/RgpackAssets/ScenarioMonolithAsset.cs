@@ -4,11 +4,11 @@ using UnityEngine;
 
 namespace Roguegard.Rgpacks
 {
-    public class SpQuestMonolithAsset
+    public class ScenarioMonolithAsset
     {
         public IRogueChartSource MainChartSource { get; }
 
-        public SpQuestMonolithAsset(SpQuestMonolithInfo info, string envRgpackId)
+        public ScenarioMonolithAsset(ScenarioMonolithInfo info, string envRgpackId)
         {
             MainChartSource = ChartPadReference.CreateSource(info.MainChart, envRgpackId);
         }

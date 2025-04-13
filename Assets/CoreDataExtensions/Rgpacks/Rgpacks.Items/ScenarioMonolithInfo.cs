@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Roguegard.Rgpacks
 {
     [Objforming.Formable]
-    public class SpQuestMonolithInfo
+    public class ScenarioMonolithInfo
     {
         public string MainChart { get; set; }
 
@@ -19,7 +19,7 @@ namespace Roguegard.Rgpacks
                 {
                     if (spaceObjs[i] == null) continue;
 
-                    // スペクエモノリスを含む空間をアトリエとして返す
+                    // シナリオモノリスを含む空間をアトリエとして返す
                     var info = Get(spaceObjs[i]);
                     if (info != null) return location;
                 }
@@ -29,7 +29,7 @@ namespace Roguegard.Rgpacks
             return null;
         }
 
-        public static SpQuestMonolithInfo Get(RogueObj monolith)
+        public static ScenarioMonolithInfo Get(RogueObj monolith)
         {
             if (monolith.TryGet<Info>(out var info))
             {
@@ -52,13 +52,13 @@ namespace Roguegard.Rgpacks
             // 上書き不可
             if (info.info != null) throw new RogueException();
 
-            info.info = new SpQuestMonolithInfo();
+            info.info = new ScenarioMonolithInfo();
         }
 
         [Objforming.Formable]
         private class Info : IRogueObjInfo
         {
-            public SpQuestMonolithInfo info;
+            public ScenarioMonolithInfo info;
 
             public bool IsExclusedWhenSerialize => false;
 

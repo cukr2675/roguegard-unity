@@ -79,7 +79,7 @@ namespace Roguegard.Rgpacks
                 if (text != null) { directory.Add($"__script: {System.Guid.NewGuid()}", text); }
             }
 
-            var monolithInfo = SpQuestMonolithInfo.Get(obj);
+            var monolithInfo = ScenarioMonolithInfo.Get(obj);
             if (monolithInfo != null) { directory.Add("__main", monolithInfo); }
 
             if (useSubDirectory)

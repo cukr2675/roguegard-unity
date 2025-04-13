@@ -7,7 +7,7 @@ using Roguegard.Extensions;
 
 namespace Roguegard.Rgpacks
 {
-    public class SpQuestAtelierBeApplied : BaseApplyRogueMethod
+    public class ScenarioAtelierBeApplied : BaseApplyRogueMethod
     {
         [SerializeField] private ScriptableStartingItem _monolith = null;
         [SerializeField] private RogueTileInfoData _groundTile = null;

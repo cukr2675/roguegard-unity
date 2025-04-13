@@ -28,7 +28,7 @@ namespace Roguegard.Device
             if (!string.IsNullOrWhiteSpace(cmnData.Cmn))
             {
                 // コモンイベントのプロパティ一覧を取得するためにビルドする
-                var atelier = SpQuestMonolithInfo.GetAtelierByCharacter(arg.Self);
+                var atelier = ScenarioMonolithInfo.GetAtelierByCharacter(arg.Self);
                 var rgpackDirectory = Rgpacker.Pack(atelier);
                 var rgpack = new Rgpack("Playtest", rgpackDirectory, Rgpacker.DefaultEvaluator);
                 RgpackReference.LoadRgpack(rgpack);

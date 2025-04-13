@@ -96,9 +96,9 @@ namespace Roguegard.Rgpacks
                 {
                     table.Add(assetId, spriteMotion);
                 }
-                else if (pair.Value is SpQuestMonolithInfo monolithInfo)
+                else if (pair.Value is ScenarioMonolithInfo monolithInfo)
                 {
-                    table.Add(assetId, new SpQuestMonolithAsset(monolithInfo, Id));
+                    table.Add(assetId, new ScenarioMonolithAsset(monolithInfo, Id));
                 }
             }
         }
