@@ -1,0 +1,292 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+using System.Text;
+using TMPro;
+
+namespace Lysionium
+{
+    internal class TextTypingEffect
+    {
+        private readonly TMP_Text text;
+        private readonly int maxLineCount;
+        private readonly string pageTurnHiddenLinkId;
+        private readonly string eofHiddenLinkId;
+        private readonly MessageBox.ReachHiddenLinkEvent onReachHiddenLink;
+        private readonly TextHiddenLinkManager hiddenLinkManager;
+        private readonly StringBuilder stringBuilder;
+
+        private bool isDirty;
+        public bool IsEof { get; private set; }
+
+        private bool IsInProgress => text.maxVisibleCharacters < text.textInfo.characterCount;
+
+        public float LineHeight { get; }
+
+        public int LineCount => text.textInfo.lineCount;
+        public int VisibleLineNumber => text.textInfo.characterInfo[text.maxVisibleCharacters].lineNumber;
+
+        private const char breakCharacter = '\n';
+
+        /// <param name="pageTurnHiddenLinkId">テキストが最大行数から下にはみ出たとき発行されるリンクID名</param>
+        /// <param name="eofHiddenLinkId">テキストの終端の表示が完了したとき発行されるリンクID</param>
+        public TextTypingEffect(
+            TMP_Text text, int maxLineCount, string pageTurnHiddenLinkId, string eofHiddenLinkId, MessageBox.ReachHiddenLinkEvent onReachHiddenLink)
+        {
+            if (text.lineSpacing != 0f) { Debug.LogWarning($"{nameof(text.lineSpacing)} != 0 はサポートされていません。"); }
+
+            this.text = text;
+            this.maxLineCount = maxLineCount;
+            this.pageTurnHiddenLinkId = pageTurnHiddenLinkId;
+            this.eofHiddenLinkId = eofHiddenLinkId;
+            this.onReachHiddenLink = onReachHiddenLink;
+            hiddenLinkManager = new TextHiddenLinkManager();
+
+            // サイズ取得用テキストを設定して一行あたりの幅をサンプリングする
+            const int samplingLineCount = 100;
+            stringBuilder = new StringBuilder("_\n".Length * samplingLineCount);
+            for (int i = 0; i < samplingLineCount; i++)
+            {
+                stringBuilder.Append("_\n");
+            }
+            text.SetText(stringBuilder);
+            text.ForceMeshUpdate(true);
+            LineHeight = text.renderedHeight / samplingLineCount;
+            if (LineHeight <= 0f) throw new System.InvalidOperationException();
+
+            // 初期化
+            Clear();
+        }
+
+        public Vector2 GetCurrentCharacterPosition(int deltaCharacterIndex, float normalizedX)
+        {
+            if (text.maxVisibleCharacters == 0) return Vector2.zero;
+
+            var info = text.textInfo.characterInfo[text.maxVisibleCharacters - 1 + deltaCharacterIndex];
+            var left = (info.topLeft.x + info.bottomLeft.x) / 2f;
+            var right = (info.topRight.x + info.bottomRight.x) / 2f;
+            var y = -(info.lineNumber - 1) * LineHeight;
+            return new Vector2(Mathf.LerpUnclamped(left, right, normalizedX), y);
+        }
+
+        public void Append(string text)
+        {
+            stringBuilder.Append(text);
+            isDirty = true;
+        }
+
+        public void Append(int integer)
+        {
+            stringBuilder.Append(integer);
+            isDirty = true;
+        }
+
+        public void Append(float number)
+        {
+            stringBuilder.Append(number);
+            isDirty = true;
+        }
+
+        private void Remove(int startIndex, int length)
+        {
+            stringBuilder.Remove(startIndex, length);
+            isDirty = true;
+        }
+
+        public void Clear()
+        {
+            stringBuilder.Clear();
+            isDirty = true;
+            MeshUpdate();
+        }
+
+        public void MeshUpdate()
+        {
+            // 毎フレーム呼び出すと重いので更新時のみ呼び出す
+            if (!isDirty) return;
+
+            text.SetText(stringBuilder);
+            text.ForceMeshUpdate(true);
+            hiddenLinkManager.UpdateLinks(text);
+            isDirty = false;
+            IsEof = stringBuilder.Length == 0; // text.text は WebGL で誤った文字列を取得してしまうため stringBuilder から取得する
+            if (IsEof) { onReachHiddenLink.Invoke(eofHiddenLinkId); }
+        }
+
+        public void SeekToStartOfText()
+        {
+            text.maxVisibleCharacters = 0;
+        }
+
+        public void SeekToEndOfText()
+        {
+            text.maxVisibleCharacters = text.textInfo.characterCount;
+        }
+
+        /// <summary>
+        /// 1行ごとに表示
+        /// </summary>
+        public void UpdateUI(int linePosition)
+        {
+            if (IsEof) return;
+
+            // 1フレーム内で1行すべて表示する
+            var overLineIndex = maxLineCount + linePosition;
+            int maxVisibleCharacters;
+            if (overLineIndex < text.textInfo.lineCount)
+            {
+                maxVisibleCharacters = text.textInfo.lineInfo[overLineIndex].lastVisibleCharacterIndex + 1;
+            }
+            else
+            {
+                maxVisibleCharacters = text.textInfo.characterCount;
+            }
+
+            // リンクを検知
+            while (hiddenLinkManager.ForwardDetect(maxVisibleCharacters, out var hiddenLinkId, out var nextVisibleCharacters))
+            {
+                text.maxVisibleCharacters = nextVisibleCharacters;
+                onReachHiddenLink.Invoke(hiddenLinkId);
+            }
+
+            // 次の行の終わりまで表示する
+            text.maxVisibleCharacters = maxVisibleCharacters;
+
+            // 設定された文字列の終端を検知
+            if (!IsInProgress)
+            {
+                // コンテキストをすべて表示し終えたら終端リンクIDを発行
+                IsEof = true;
+                onReachHiddenLink.Invoke(eofHiddenLinkId);
+                return;
+            }
+
+            onReachHiddenLink.Invoke(pageTurnHiddenLinkId);
+        }
+
+        /// <summary>
+        /// タイピングエフェクト再生
+        /// </summary>
+        public void UpdateUI(int deltaVisibleCharacters, int linePosition)
+        {
+            if (IsEof) return;
+
+            // リンクを検知
+            if (hiddenLinkManager.ForwardDetect(text.maxVisibleCharacters + deltaVisibleCharacters, out var hiddenLinkId, out var nextVisibleCharacters))
+            {
+                // 表示位置が戻るのは未サポート
+                if (nextVisibleCharacters < text.maxVisibleCharacters) throw new System.NotImplementedException();
+
+                text.maxVisibleCharacters = nextVisibleCharacters;
+                onReachHiddenLink.Invoke(hiddenLinkId);
+                return;
+            }
+
+            // タイピングエフェクト
+            text.maxVisibleCharacters += deltaVisibleCharacters;
+
+            // 設定された文字列の終端を検知
+            if (!IsInProgress && linePosition >= text.textInfo.lineCount - maxLineCount)
+            {
+                // コンテキストをすべて表示し終えたら終端リンクIDを発行
+                IsEof = true;
+                onReachHiddenLink.Invoke(eofHiddenLinkId);
+                return;
+            }
+
+            // テキストが下端からはみ出したことを検知
+            var overLineIndex = maxLineCount + linePosition;
+            if (overLineIndex < text.textInfo.lineCount)
+            {
+                var firstOverVisibleCharacterIndex = text.textInfo.lineInfo[overLineIndex].firstVisibleCharacterIndex;
+                if (text.maxVisibleCharacters >= firstOverVisibleCharacterIndex + 1)
+                {
+                    // はみ出したらはみ出した分をいったん消して改ページを発行
+                    text.maxVisibleCharacters = firstOverVisibleCharacterIndex;
+                    onReachHiddenLink.Invoke(pageTurnHiddenLinkId);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 手前側にはみ出したテキストを削除し、削除した行数を取得する
+        /// </summary>
+        public int TrimBeforeVisibleLine()
+        {
+            // はみ出しているテキストのうち改行以前を削除する
+            // 改行以降を削除すると自動改行に影響が出て、はみ出していないテキストが変わってしまうことがある
+
+            var characterIndex = Mathf.Clamp(text.maxVisibleCharacters - 1, 0, text.textInfo.characterCount - 1);
+            var stringIndex = text.textInfo.characterInfo[characterIndex].index;
+
+            // テキストが改行で終わっている場合は1行だけ無視する
+            //if (stringIndex >= 1 && text.text.Length >= stringIndex + 2 && text.text[stringIndex + 1] == breakCharacter) { stringIndex--; }
+
+            // 最後から maxLineCount 番目の改行コードの位置を取得する
+            for (int i = 0; i < maxLineCount; i++)
+            {
+                if (stringIndex <= 0) break;
+
+                stringIndex = text.text.LastIndexOf(breakCharacter, stringIndex - 1);
+            }
+
+            // 削除できる部分が見つからない場合、何もしない
+            if (stringIndex <= 0) return 0;
+
+            // テキストを削除する（改行コードも含めて削除）
+            MeshUpdate(); // テキストの行数を更新する
+            var beforeLineCount = text.textInfo.lineCount; // 削除前に取得
+            Remove(0, stringIndex + 1);
+            MeshUpdate(); // テキストの行数を更新する
+            var removedLineCount = beforeLineCount - text.textInfo.lineCount; // 削除した行数を取得
+
+            return removedLineCount;
+        }
+
+        /// <summary>
+        /// 指定のリンクIDの最初の出現位置から手前を削除し、一部でも削除した行数を取得する
+        /// </summary>
+        public int TrimBeforeFirstLinkId(string hiddenLinkId)
+        {
+            if (!hiddenLinkManager.TryGetFirstHiddenLinkCharacterIndex(text.maxVisibleCharacters, hiddenLinkId, out var endLinkStringIndex)) return 0;
+
+            // テキストを削除する
+            MeshUpdate(); // テキストの行数を更新する
+            var beforeLineCount = text.textInfo.lineCount; // 削除前に取得
+            Remove(0, endLinkStringIndex);
+            SeekToStartOfText();
+            MeshUpdate(); // テキストの行数を更新する
+            var removedLineCount = beforeLineCount - text.textInfo.lineCount + 1; // 削除した行数を取得
+
+            return removedLineCount;
+        }
+
+        /// <summary>
+        /// 現在の表示範囲のテキストを削除する
+        /// </summary>
+        public void TrimBeforeVisibleCharacter()
+        {
+            var visibleStringIndex = text.textInfo.characterInfo[text.maxVisibleCharacters].index;
+            Remove(0, visibleStringIndex);
+            MeshUpdate();
+        }
+
+        /// <summary>
+        /// 罫線を文字の一つとする方法
+        /// </summary>
+        private void SetUpHorizontalRule()
+        {
+            var faceInfo = text.font.faceInfo;
+            faceInfo.lineHeight = 66; // 罫線の有無で行がずれない値に調整する
+
+            const int hrCharacter = -1; // 罫線にする文字情報を指定
+            var character = text.font.characterTable[hrCharacter];
+            var metrics = character.glyph.metrics;
+            metrics.width = 1e+10f; // 罫線の横幅はこれと文字数で調整する
+            metrics.height = 1e+9f;
+            character.glyph.metrics = metrics;
+            character.scale = 1e-8f; // glyphTable[].scale とは別物なので注意
+        }
+    }
+}

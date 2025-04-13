@@ -1,0 +1,18 @@
+{
+    "name": "Lysionium.R3",
+    "rootNamespace": "Lysionium.R3",
+    "references": [
+        "GUID:39cbc532d78a39c47a64cb722d1c8a72"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "R3.dll"
+    ],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -32,7 +32,7 @@ namespace Roguegard
         private Vector2Int UpperRelationalPivot => new Vector2Int(0, PivotDistance / 2);
         private Vector2Int LowerRelationalPivot => new Vector2Int(0, -(PivotDistance + 1) / 2);
 
-        private static readonly RectInt upperBodyRect = new RectInt(-3, -2, 6, 2);
+        private static readonly RectInt chestRect = new RectInt(-3, -2, 6, 2);
         private static readonly RectInt bodyRect = new RectInt(-4, 0, 8, 2);
 
         public IPaintBoneSprite Clone()
@@ -73,7 +73,7 @@ namespace Roguegard
         {
             if (Bone == BoneKeyword.Body)
             {
-                var overridesUpperDefaultColor = OverridesOnDefaultColor(true, upperBodyRect, palette);
+                var overridesUpperDefaultColor = OverridesOnDefaultColor(true, chestRect, palette);
                 var overridesLowerDefaultColor = OverridesOnDefaultColor(false, bodyRect, palette);
                 ToBoneSprite(palette, out var upperBoneSprite, out var lowerBoneSprite);
                 AddTo(ochalikeMorph, BoneKeyword.Chest, upperBoneSprite, mainColor, overridesUpperDefaultColor);

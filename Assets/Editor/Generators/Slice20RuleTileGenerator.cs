@@ -6,7 +6,7 @@ using System.Linq;
 using System.IO;
 using UnityEditor;
 using UnityEditor.U2D.Sprites;
-using ListingMF.Editor;
+using Lysionium.Editor;
 
 namespace Roguegard.Editor
 {

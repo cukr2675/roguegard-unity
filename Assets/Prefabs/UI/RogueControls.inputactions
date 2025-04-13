@@ -2,7 +2,7 @@
     "name": "RogueControls",
     "maps": [
         {
-            "name": "LMF_KeyBind",
+            "name": "LUI_KeyBind",
             "id": "8acf74f5-34fe-48e4-a4cf-26651b816b38",
             "actions": [
                 {
