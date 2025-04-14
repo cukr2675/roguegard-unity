@@ -281,7 +281,7 @@ MonoBehaviour:
     _asset: {fileID: 11400000, guid: f2beb08d304645b498645c85ab0577ec, type: 2}
   - _key: Core.MysteryDiorama
     _asset: {fileID: 11400000, guid: 9ebac40cd5e157c478f8e7b999db4715, type: 2}
-  - _key: Core.SpQuestAtelier
+  - _key: Core.ScenarioAtelier
     _asset: {fileID: 11400000, guid: 2a072d3fd47c2c042a0917960d61e113, type: 2}
-  - _key: Core.SpQuestMonolith
+  - _key: Core.ScenarioMonolith
     _asset: {fileID: 11400000, guid: bd14012f6e0dbfb48a7212b62078599d, type: 2}
