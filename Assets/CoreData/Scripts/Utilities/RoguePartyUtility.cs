@@ -67,6 +67,9 @@ namespace Roguegard.Extensions
         public static bool LocateWithPartyMembers(
             this IChangeStateRogueMethodCaller method, RogueObj self, RogueObj user, RogueObj location, float activationDepth, bool resetStack)
         {
+            if (location.Space.Tilemap != null) throw new System.ArgumentException(
+                $"移動先 ({location.Location}>{location}) はタイルマップを持ちます。タイルマップを持つ空間に移動することはできません。");
+
             if (self.Stack == 0 && resetStack) { self.TrySetStack(1); }
             var result = method.Locate(self, user, location, activationDepth);
             var party = self.Main.Stats.Party;
