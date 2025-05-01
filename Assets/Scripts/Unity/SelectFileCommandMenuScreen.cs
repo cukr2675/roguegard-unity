@@ -87,7 +87,7 @@ namespace RoguegardUnity
 
                 view.ShowTemplate("", manager, arg)
                     ?
-                    .Append(InputFieldViewWidget.CreateOption<MMgr, MArg>(
+                    .Tail(InputFieldViewWidget.CreateOption<MMgr, MArg>(
                         (manager, arg) =>
                         {
                             return newName;
@@ -101,7 +101,7 @@ namespace RoguegardUnity
                     )
 
                     .VarOnce(out var overwriteDialog, new ChoicesMenuScreen(":RenameOverride").Option(":Yes", Overwrite).Back())
-                    .Append(new object[]
+                    .Tail(new object[]
                     {
                         SelectOption.Create<MMgr, MArg>(":Rename", (manager, arg) =>
                         {

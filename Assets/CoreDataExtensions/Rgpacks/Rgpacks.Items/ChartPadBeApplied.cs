@@ -54,7 +54,7 @@ namespace Roguegard.Rgpacks
 
                 view.ShowTemplate(elms, manager, arg)
                     ?
-                    .InsertNext(
+                    .Head(
                         new object[]
                         {
                             "アセットID",
@@ -72,7 +72,7 @@ namespace Roguegard.Rgpacks
                                 })
                         })
 
-                    .Append(SelectOption.Create<MMgr, MArg>(
+                    .Tail(SelectOption.Create<MMgr, MArg>(
                         "+ イベントを追加", (manager, arg) =>
                         {
                             var chartPad = arg.Arg.TargetObj;

@@ -294,7 +294,7 @@ namespace RoguegardUnity
                     view.ShowTemplate(text, manager, arg)
                         ?
                         .VarOnce(out var viewWidth, 8000f)
-                        .Append(ContentSizeHeaderViewWidget.CreateOption(viewWidth))
+                        .Tail(ContentSizeMetaWidget.CreateOption(viewWidth))
                         .VarOnce(out var nextScreen, new URLDialog())
 
                         .OnClickLink((link, manager, arg) =>

@@ -87,7 +87,7 @@ namespace Lysionium
 
                 public Builder OnClose(ColorPickerSubView.HandleClose onClose)
                 {
-                    AssertNotBuilded();
+                    AssertNotBuilt();
 
                     parent.HandleClose += onClose;
                     return this;

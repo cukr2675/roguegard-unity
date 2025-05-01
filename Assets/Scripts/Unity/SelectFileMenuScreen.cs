@@ -83,7 +83,7 @@ namespace RoguegardUnity
                 .InitIf(
                     onNewFile != null, x => x
                     
-                    .InsertNext(SelectOption.Create(":+ New File", onNewFile))
+                    .Head(SelectOption.Create(":+ New File", onNewFile))
                     
                     )
 

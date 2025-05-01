@@ -53,7 +53,7 @@ namespace Lysionium
                 this.arg = arg;
             }
 
-            protected void AssertNotBuilded()
+            protected void AssertNotBuilt()
             {
                 if (parent.IsBuilt) throw new System.InvalidOperationException($"{parent} はビルド済みです。");
             }
@@ -108,7 +108,7 @@ namespace Lysionium
 
             public void Build()
             {
-                AssertNotBuilded();
+                AssertNotBuilt();
                 parent.IsBuilt = true;
                 parent.ShowSubViews(manager, arg);
             }

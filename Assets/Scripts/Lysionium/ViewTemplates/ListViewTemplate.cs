@@ -5,17 +5,18 @@ using UnityEngine;
 namespace Lysionium
 {
     public abstract class ListViewTemplate<TElm, TMgr, TArg> : ViewTemplate<TMgr, TArg>
+        where TElm : class
         where TMgr : IListMenuManager
         where TArg : IListMenuArg
     {
-        private readonly List<TElm> beforeList = new();
+        private readonly List<object> headList = new();
         protected List<TElm> OriginalList { get; } = new();
-        private readonly List<TElm> afterList = new();
-        protected IReadOnlyList<TElm> List { get; }
+        private readonly List<object> tailList = new();
+        protected IReadOnlyList<object> List { get; }
 
         protected ListViewTemplate()
         {
-            List = new ReadOnlyListConcat(beforeList, OriginalList, afterList);
+            List = new ReadOnlyListConcat(headList, OriginalList, tailList);
         }
 
         public abstract class BaseListBuilder<TOut> : BaseBuilder<TOut>
@@ -29,44 +30,60 @@ namespace Lysionium
                 this.parent = parent;
             }
 
-            public TOut InsertNext(TElm element)
+            public TOut Head(TElm element)
             {
-                AssertNotBuilded();
+                AssertNotBuilt();
 
-                parent.beforeList.Add(element);
+                parent.headList.Add(element);
                 return (TOut)this;
             }
 
-            public TOut InsertNextRange(IEnumerable<TElm> elements)
+            public TOut HeadRange(IEnumerable<TElm> elements)
             {
-                AssertNotBuilded();
+                AssertNotBuilt();
 
-                parent.afterList.AddRange(elements);
+                parent.tailList.AddRange(elements);
                 return (TOut)this;
             }
 
-            public TOut Append(TElm element)
+            public TOut HeadOption(string name, HandleClickElement<TMgr, TArg> onClick, string style = null)
             {
-                AssertNotBuilded();
+                AssertNotBuilt();
 
-                parent.afterList.Add(element);
+                parent.headList.Add(SelectOption.Create(name, onClick, style));
                 return (TOut)this;
             }
 
-            public TOut AppendRange(IEnumerable<TElm> elements)
+            public TOut Tail(TElm element)
             {
-                AssertNotBuilded();
+                AssertNotBuilt();
 
-                parent.afterList.AddRange(elements);
+                parent.tailList.Add(element);
+                return (TOut)this;
+            }
+
+            public TOut TailRange(IEnumerable<TElm> elements)
+            {
+                AssertNotBuilt();
+
+                parent.tailList.AddRange(elements);
+                return (TOut)this;
+            }
+
+            public TOut TailOption(string name, HandleClickElement<TMgr, TArg> onClick, string style = null)
+            {
+                AssertNotBuilt();
+
+                parent.tailList.Add(SelectOption.Create(name, onClick, style));
                 return (TOut)this;
             }
         }
 
-        private class ReadOnlyListConcat : IReadOnlyList<TElm>
+        private class ReadOnlyListConcat : IReadOnlyList<object>
         {
-            private readonly IReadOnlyList<TElm>[] lists;
+            private readonly IReadOnlyList<object>[] lists;
 
-            public TElm this[int index]
+            public object this[int index]
             {
                 get
                 {
@@ -92,12 +109,12 @@ namespace Lysionium
                 }
             }
 
-            public ReadOnlyListConcat(params IReadOnlyList<TElm>[] lists)
+            public ReadOnlyListConcat(params IReadOnlyList<object>[] lists)
             {
                 this.lists = lists;
             }
 
-            public IEnumerator<TElm> GetEnumerator()
+            public IEnumerator<object> GetEnumerator()
             {
                 foreach (var list in lists)
                 {

@@ -42,7 +42,7 @@ namespace RoguegardUnity
             }
 
             view.ShowTemplate(manager, arg)
-                ?.AppendRange(selectOptions)
+                ?.TailRange(selectOptions)
                 .Build();
         }
     }

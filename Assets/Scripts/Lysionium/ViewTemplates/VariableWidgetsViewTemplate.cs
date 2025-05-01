@@ -81,6 +81,16 @@ namespace Lysionium
             {
                 this.parent = parent;
             }
+
+            public Builder HeadStack(params object[] elements)
+            {
+                return Head(elements);
+            }
+
+            public Builder TailStack(params object[] elements)
+            {
+                return Tail(elements);
+            }
         }
     }
 }

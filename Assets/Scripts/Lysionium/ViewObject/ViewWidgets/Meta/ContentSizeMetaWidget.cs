@@ -4,8 +4,8 @@ using UnityEngine;
 
 namespace Lysionium
 {
-    [AddComponentMenu("UI/Lysionium/View Widgets/Headers/LUI Style Header View Widget")]
-    public class StyleSizeHeaderViewWidget : ViewWidget
+    [AddComponentMenu("UI/Lysionium/View Widgets/Meta/LUI Content Size Meta Widget")]
+    public class ContentSizeMetaWidget : ViewWidget
     {
         private ElementsSubViewBase _parent;
         protected override ElementsSubViewBase Parent => _parent;
@@ -21,31 +21,31 @@ namespace Lysionium
 
             if (elementsSubView is WidgetsSubView widgetsSubView)
             {
-                widgetsSubView.SetStyle(widgetOption.Style);
+                widgetsSubView.SetContentWidth(widgetOption.Width);
             }
 
-            var headerViewWidget = Instantiate(this);
-            headerViewWidget._parent = elementsSubView;
-            viewWidget = headerViewWidget;
+            var metaWidget = Instantiate(this);
+            metaWidget._parent = elementsSubView;
+            viewWidget = metaWidget;
             return true;
         }
 
-        public static IWidgetOption CreateOption(string style)
+        public static IWidgetOption CreateOption(float width)
         {
             return new WidgetOption()
             {
-                Style = style,
+                Width = width,
             };
         }
 
         public interface IWidgetOption
         {
-            string Style { get; }
+            float Width { get; }
         }
 
         private class WidgetOption : IWidgetOption
         {
-            public string Style { get; set; }
+            public float Width { get; set; }
         }
     }
 }

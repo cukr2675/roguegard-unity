@@ -306,11 +306,11 @@ namespace RoguegardUnity
                 view.ShowTemplate(string.Empty, manager, arg)
                     ?
                     .VarOnce(out string id)
-                    .Append(InputFieldViewWidget.CreateOption<MMgr, MArg>(
+                    .Tail(InputFieldViewWidget.CreateOption<MMgr, MArg>(
                         (manager, arg) => id,
                         (manager, arg, value) => id = value))
 
-                    .Append(
+                    .Tail(
                         new object[]
                         {
                             SelectOption.Create<MMgr, MArg>("追加", (manager, arg) =>
@@ -338,7 +338,7 @@ namespace RoguegardUnity
             {
                 view.ShowTemplate(System.Array.Empty<object>(), manager, arg)
                     ?
-                    .Append(
+                    .Tail(
                         new object[]
                         {
                             "ループ回数",
@@ -353,7 +353,7 @@ namespace RoguegardUnity
                                 })
                         })
 
-                    .Append(
+                    .Tail(
                         new object[]
                         {
                             "再生速度",
@@ -368,7 +368,7 @@ namespace RoguegardUnity
                                 })
                         })
 
-                    .Append(SelectOption.Create<MMgr, MArg>("編集終了", (manager, arg) =>
+                    .Tail(SelectOption.Create<MMgr, MArg>("編集終了", (manager, arg) =>
                     {
                         var editInfo = (MotionGrapherInfo)arg.Arg.Other;
                         RogueDevice.AddWork(DeviceKw.EnqueueWork, RogueCharacterWork.CreateSpriteMotion(arg.Self, new MotionGrapherSpriteMotion(editInfo), true));

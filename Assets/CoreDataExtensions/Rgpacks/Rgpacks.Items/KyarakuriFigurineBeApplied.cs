@@ -36,7 +36,7 @@ namespace Roguegard.Rgpacks
             {
                 view.ShowTemplate(System.Array.Empty<object>(), manager, arg)
                     ?
-                    .Append(
+                    .Tail(
                         new object[]
                         {
                             "アセットID",
@@ -51,7 +51,7 @@ namespace Roguegard.Rgpacks
                         })
 
                     .VarOnce(out var nextMenu, new EditMenu())
-                    .Append(SelectOption.Create<MMgr, MArg>(
+                    .Tail(SelectOption.Create<MMgr, MArg>(
                         "キャラクリ設定",
                         (manager, arg) =>
                         {

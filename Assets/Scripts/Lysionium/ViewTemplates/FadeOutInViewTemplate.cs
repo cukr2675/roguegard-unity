@@ -80,7 +80,7 @@ namespace Lysionium
 
             public Builder Append(object widgetOption)
             {
-                AssertNotBuilded();
+                AssertNotBuilt();
 
                 parent.widgetOptions.Add(widgetOption);
                 return this;
@@ -88,7 +88,7 @@ namespace Lysionium
 
             public Builder OnFadeOutCompleted(HandleClickElement<TMgr, TArg> onFadeOut)
             {
-                AssertNotBuilded();
+                AssertNotBuilt();
 
                 parent.HandleFadeOut += onFadeOut;
                 return this;
@@ -96,7 +96,7 @@ namespace Lysionium
 
             public Builder OnFadeInCompleted(HandleClickElement<TMgr, TArg> onFadeIn)
             {
-                AssertNotBuilded();
+                AssertNotBuilt();
 
                 parent.HandleFadeIn += onFadeIn;
                 return this;

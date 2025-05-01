@@ -109,7 +109,7 @@ namespace Lysionium
 
             public Builder OnCompleted(HandleClickElement<TMgr, TArg> onCompleted)
             {
-                AssertNotBuilded();
+                AssertNotBuilt();
 
                 parent.OnCompleted += onCompleted;
                 return this;
@@ -117,17 +117,17 @@ namespace Lysionium
 
             public Builder Option(string name, HandleClickElement<TMgr, TArg> onClick)
             {
-                AssertNotBuilded();
+                AssertNotBuilt();
 
-                Append(SelectOption.Create(name, onClick));
+                Tail(SelectOption.Create(name, onClick));
                 return this;
             }
 
             public Builder Back()
             {
-                AssertNotBuilded();
+                AssertNotBuilt();
 
-                Append(BackSelectOption.Instance);
+                Tail(BackSelectOption.Instance);
                 return this;
             }
         }

@@ -55,7 +55,7 @@ namespace Roguegard.Rgpacks
 
                 view.ShowTemplate(elms, manager, arg)
                     ?
-                    .InsertNext(
+                    .Head(
                         new object[]
                         {
                             "アセットID",
@@ -98,7 +98,7 @@ namespace Roguegard.Rgpacks
                         }
                     })
 
-                    .Append(SelectOption.Create<MMgr, MArg>(
+                    .Tail(SelectOption.Create<MMgr, MArg>(
                         "+ 階層を追加",
                         (manager, arg) =>
                         {
@@ -124,7 +124,7 @@ namespace Roguegard.Rgpacks
             {
                 view.ShowTemplate("", manager, arg)
                     ?
-                    .Append(
+                    .Tail(
                         new object[]
                         {
                             "アセットID",

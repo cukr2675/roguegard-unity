@@ -134,7 +134,7 @@ namespace RoguegardUnity
 
                 view.ShowTemplate(string.Empty, manager, arg)
                     ?
-                    .Append(
+                    .Tail(
                         new object[]
                         {
                             InputFieldViewWidget.CreateOption<MMgr, MArg>(
@@ -142,7 +142,7 @@ namespace RoguegardUnity
                                 (manager, arg, value) => SetKeyFrame(value)),
                         })
 
-                    .Append(
+                    .Tail(
                         new object[]
                         {
                             SelectOption.Create<MMgr, MArg>(":Submit", (manager, arg) =>
@@ -215,7 +215,7 @@ namespace RoguegardUnity
 
                 view.ShowTemplate(string.Empty, manager, arg)
                     ?
-                    .Append(SelectOption.Create<MMgr, MArg>(":Edit", (manager, arg) =>
+                    .Tail(SelectOption.Create<MMgr, MArg>(":Edit", (manager, arg) =>
                     {
                         manager.PushMenuScreen(nextMenu, arg);
                     }))
@@ -225,7 +225,7 @@ namespace RoguegardUnity
                     //    manager.Back();
                     //}))
 
-                    .Append(BackSelectOption.Instance)
+                    .Tail(BackSelectOption.Instance)
 
                     .Build();
             }

@@ -31,7 +31,7 @@ namespace RoguegardUnity
         {
             view.ShowTemplate(manager, arg)
                 ?
-                .Append(objCommandMenu.Summary)
+                .Tail(objCommandMenu.Summary)
 
                 .Option(":Items", (manager, arg) =>
                 {

@@ -35,7 +35,7 @@ namespace Roguegard.Rgpacks
             {
                 view.ShowTemplate(System.Array.Empty<object>(), manager, arg)
                     ?
-                    .Append(
+                    .Tail(
                         new object[]
                         {
                             "アセットID",
@@ -49,11 +49,11 @@ namespace Roguegard.Rgpacks
                         })
 
                     .VarOnce(out var cmnMenu, new PropertiedCmnMenu())
-                    .Append(SelectOption.Create<MMgr, MArg>(
+                    .Tail(SelectOption.Create<MMgr, MArg>(
                         "Update",
                         (manager, arg) => manager.PushMenuScreen(cmnMenu, arg.Self, other: EffectStickerInfo.Get(arg.Arg.TargetObj).Update)))
 
-                    .Append(
+                    .Tail(
                         new object[]
                         {
                             "スプライト",

@@ -80,12 +80,12 @@ namespace Lysionium
 
             public Builder Option(string name, HandleClickElement<TMgr, TArg> onClick, string style = null)
             {
-                return Append(SelectOption.Create(name, onClick, style));
+                return Tail(SelectOption.Create(name, onClick, style));
             }
 
             public Builder Back()
             {
-                return Append(BackSelectOption.Instance);
+                return Tail(BackSelectOption.Instance);
             }
         }
     }

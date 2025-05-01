@@ -109,7 +109,7 @@ namespace Roguegard.Rgpacks
             public override void OpenScreen(in MMgr manager, in MArg arg)
             {
                 view.ShowTemplate("", manager, arg)
-                    ?.Append(InputFieldViewWidget.CreateOption<MMgr, MArg>(
+                    ?.Tail(InputFieldViewWidget.CreateOption<MMgr, MArg>(
                         (manager, arg) =>
                         {
                             var monolith = arg.Arg.Tool;

@@ -41,7 +41,7 @@ namespace RoguegardUnity
                 .Option(":Party", partyMenu)
                 .Option(":Log", logMenu)
                 .Option(":Others", othersMenu)
-                .Append(objsMenu.Close)
+                .Tail(objsMenu.Close)
                 .Build();
         }
 
@@ -167,7 +167,7 @@ namespace RoguegardUnity
             {
                 view.ShowTemplate("", manager, arg)
                     ?
-                    .Append(
+                    .Tail(
                         new object[]
                         {
                             "マスター音量",

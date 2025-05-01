@@ -102,7 +102,7 @@ namespace Lysionium
 
             public Builder NameFrom(GetElementName<TElm, TMgr, TArg> nameFrom)
             {
-                AssertNotBuilded();
+                AssertNotBuilt();
 
                 if (parent.scrollSubViewHandler.GetName != null) { Debug.LogWarning($"{nameof(NameFrom)} が多重購読されました。"); }
 
@@ -112,7 +112,7 @@ namespace Lysionium
 
             public Builder StyleFrom(GetElementStyle<TElm, TMgr, TArg> styleFrom)
             {
-                AssertNotBuilded();
+                AssertNotBuilt();
 
                 if (parent.scrollSubViewHandler.GetStyle != null) { Debug.LogWarning($"{nameof(StyleFrom)} が多重購読されました。"); }
 
@@ -122,7 +122,7 @@ namespace Lysionium
 
             public Builder OnClick(HandleClickElement<TElm, TMgr, TArg> onClick)
             {
-                AssertNotBuilded();
+                AssertNotBuilt();
 
                 parent.scrollSubViewHandler.HandleClick += onClick;
                 return this;

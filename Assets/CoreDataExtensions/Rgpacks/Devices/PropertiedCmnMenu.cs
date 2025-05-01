@@ -73,14 +73,9 @@ namespace Roguegard.Device
 
             view.ShowTemplate(elms, manager, arg)
                 ?
-                .InsertNext(
-                    new object[]
-                    {
-                        "アセットID",
-                        InputFieldViewWidget.CreateOption<MMgr, MArg>(
-                            (manager, arg) => ((PropertiedCmnData)arg.Arg.Other).Cmn,
-                            (manager, arg, value) => ((PropertiedCmnData)arg.Arg.Other).Cmn = value)
-                    })
+                .HeadStack("アセットID", InputFieldViewWidget.CreateOption<MMgr, MArg>(
+                    (manager, arg) => ((PropertiedCmnData)arg.Arg.Other).Cmn,
+                    (manager, arg, value) => ((PropertiedCmnData)arg.Arg.Other).Cmn = value))
 
                 .Build();
         }
@@ -125,7 +120,7 @@ namespace Roguegard.Device
 
                 view.ShowTemplate(elms, manager, arg)
                     ?
-                    .Append(SelectOption.Create<MMgr, MArg>(
+                    .Tail(SelectOption.Create<MMgr, MArg>(
                         "+ アイテムを追加",
                         (manager, arg) => manager.PushMenuScreen(characterCreationAddMenu, other: typeof(StartingItemBuilder))))
 

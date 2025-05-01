@@ -95,28 +95,28 @@ namespace Lysionium
 
             public Builder Option(string name, HandleClickElement<TMgr, TArg> onClick, string style = null)
             {
-                AssertNotBuilded();
+                AssertNotBuilt();
 
-                Append(SelectOption.Create(name, onClick, style));
+                Tail(SelectOption.Create(name, onClick, style));
                 return this;
             }
 
             public Builder StackOptions(params (string, HandleClickElement<TMgr, TArg>)[] selectOptions)
             {
-                AssertNotBuilded();
+                AssertNotBuilt();
 
                 var stack = new List<object>();
                 foreach (var selectOption in selectOptions)
                 {
                     stack.Add(SelectOption.Create(selectOption.Item1, selectOption.Item2));
                 }
-                Append(stack);
+                Tail(stack);
                 return this;
             }
 
             public Builder OnClickLink(HandleClickElement<string, TMgr, TArg> onClickLink)
             {
-                AssertNotBuilded();
+                AssertNotBuilt();
 
                 parent.handleClickLink += onClickLink;
                 return this;

@@ -50,7 +50,7 @@ namespace Roguegard.Rgpacks
 
                 view.ShowTemplate(elms, manager, arg)
                     ?
-                    .InsertNext(
+                    .Head(
                         new object[]
                         {
                             "アセットID",
@@ -62,7 +62,7 @@ namespace Roguegard.Rgpacks
                                     return NamingEffect.Get(fairy).Naming = value;
                                 })
                         })
-                    .InsertNext(
+                    .Head(
                         new object[]
                         {
                             "チャートID",
@@ -71,7 +71,7 @@ namespace Roguegard.Rgpacks
                                 (manager, arg, value) => EvtFairyInfo.Get(arg.Arg.TargetObj).RelatedChart = value)
                         })
 
-                    .Append(
+                    .Tail(
                         SelectOption.Create<MMgr, MArg>("+ ページを追加", (manager, arg) =>
                         {
                             var fairy = arg.Arg.TargetObj;
@@ -94,7 +94,7 @@ namespace Roguegard.Rgpacks
             {
                 view.ShowTemplate(System.Array.Empty<object>(), manager, arg)
                     ?
-                    .Append(
+                    .Tail(
                         new object[]
                         {
                             "条件Cmn",
@@ -102,7 +102,7 @@ namespace Roguegard.Rgpacks
                                 (manager, arg) => ((EvtFairyInfo.Page)arg.Arg.Other).ChartCmn,
                                 (manager, arg, value) => ((EvtFairyInfo.Page)arg.Arg.Other).ChartCmn = value)
                         })
-                    .Append(
+                    .Tail(
                         new object[]
                         {
                             "追加条件Cmn",
@@ -110,7 +110,7 @@ namespace Roguegard.Rgpacks
                                 (manager, arg) => ((EvtFairyInfo.Page)arg.Arg.Other).IfCmn.Cmn,
                                 (manager, arg, value) => ((EvtFairyInfo.Page)arg.Arg.Other).IfCmn.Cmn = value)
                         })
-                    .Append(
+                    .Tail(
                         new object[]
                         {
                             "見た目アセットID",
@@ -118,9 +118,9 @@ namespace Roguegard.Rgpacks
                                 (manager, arg) => ((EvtFairyInfo.Page)arg.Arg.Other).Sprite,
                                 (manager, arg, value) => ((EvtFairyInfo.Page)arg.Arg.Other).Sprite = value)
                         })
-                    .Append(SelectOption.Create<MMgr, MArg>("カテゴリ", new CategoryMenu()))
+                    .Tail(SelectOption.Create<MMgr, MArg>("カテゴリ", new CategoryMenu()))
                     .VarOnce(out var cmnMenu, new PropertiedCmnMenu())
-                    .Append(SelectOption.Create<MMgr, MArg>(
+                    .Tail(SelectOption.Create<MMgr, MArg>(
                         "Cmn",
                         (manager, arg) => manager.PushMenuScreen(cmnMenu, arg.Self, other: ((EvtFairyInfo.Page)arg.Arg.Other).Cmn)))
 

@@ -95,7 +95,7 @@ namespace Roguegard.Device
 
             public Builder InfoFrom(GetInfo method)
             {
-                AssertNotBuilded();
+                AssertNotBuilt();
 
                 parent.scrollSubViewHandler.GetInfo = (element, manager, arg) =>
                 {
@@ -107,7 +107,7 @@ namespace Roguegard.Device
 
             public Builder InfoFrom(GetInfo<string, string> method)
             {
-                AssertNotBuilded();
+                AssertNotBuilt();
 
                 parent.scrollSubViewHandler.GetInfo = (element, manager, arg) =>
                 {
@@ -119,7 +119,7 @@ namespace Roguegard.Device
 
             public Builder InfoFrom(GetInfo<Sprite, Color, int?, float?, string, string, bool> method)
             {
-                AssertNotBuilded();
+                AssertNotBuilt();
 
                 parent.scrollSubViewHandler.GetInfo = (element, manager, arg) =>
                 {
@@ -131,7 +131,7 @@ namespace Roguegard.Device
 
             public Builder OnClick(HandleClickElement<T, MMgr, MArg> method)
             {
-                AssertNotBuilded();
+                AssertNotBuilt();
 
                 parent.scrollSubViewHandler.HandleClick = method;
                 return this;
