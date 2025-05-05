@@ -55,9 +55,9 @@ namespace Lysionium.R3
             {
                 if (!(x.Ctx is Context ctx)) return;
 
-                if (LUIAssert.Type<TElm>(x.Value, out var tElm) ||
-                    LUIAssert.Type<TMgr>(x.Manager, out var tMgr) ||
-                    LUIAssert.Type<TArg>(x.Arg, out var tArg)) return;
+                if (LocalAssert.Type<TElm>(x.Value, out var tElm) ||
+                    LocalAssert.Type<TMgr>(x.Manager, out var tMgr) ||
+                    LocalAssert.Type<TArg>(x.Arg, out var tArg)) return;
 
                 ctx.ReturnValue = getName(tElm, tMgr, tArg);
             });
@@ -83,14 +83,39 @@ namespace Lysionium.R3
             {
                 if (!(x.Ctx is Context)) return;
 
-                if (LUIAssert.Type<TElm>(x.Value, out var tElm) ||
-                    LUIAssert.Type<TMgr>(x.Manager, out var tMgr) ||
-                    LUIAssert.Type<TArg>(x.Arg, out var tArg)) return;
+                if (LocalAssert.Type<TElm>(x.Value, out var tElm) ||
+                    LocalAssert.Type<TMgr>(x.Manager, out var tMgr) ||
+                    LocalAssert.Type<TArg>(x.Arg, out var tArg)) return;
 
                 onClick(tElm, tMgr, tArg);
             });
         }
 
         private class Context : R3RuleContext { }
+    }
+
+    internal static class LocalAssert
+    {
+        public static bool Type<T>(object instance, out T castedInstance, IListMenuManager manager = null)
+        {
+            if (instance is T tInstance)
+            {
+                castedInstance = tInstance;
+                return false;
+            }
+            else if (instance == null)
+            {
+                castedInstance = default;
+                return false;
+            }
+            else
+            {
+                Debug.LogError($"{instance} を {typeof(T)} に変換できません。");
+                manager?.ErrorOption.HandleClick(manager, null);
+
+                castedInstance = default;
+                return true;
+            }
+        }
     }
 }
