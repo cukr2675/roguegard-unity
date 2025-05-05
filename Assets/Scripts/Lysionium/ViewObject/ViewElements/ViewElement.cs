@@ -39,17 +39,17 @@ namespace Lysionium
         public void SetElement(object element, IElementHandler handler)
         {
             name = ElementName = handler.GetName(element, Manager, Arg);
-            InnerSetElement(element, handler);
+            SetElementCore(element, handler);
         }
 
         public void ClearElement()
         {
             ElementName = null;
             name = "null";
-            if (Manager != null) { InnerSetElement(null, ElementToStringHandler.Instance); }
+            if (Manager != null) { SetElementCore(null, ElementToStringHandler.Instance); }
         }
 
-        protected abstract void InnerSetElement(object element, IElementHandler handler);
+        protected abstract void SetElementCore(object element, IElementHandler handler);
 
         public void SetVisible(bool visible, bool outOfRange)
         {

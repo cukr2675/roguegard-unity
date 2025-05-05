@@ -40,7 +40,7 @@ namespace Lysionium
             TryGetComponent(out animator);
         }
 
-        protected override void InnerSetElement(object element, IElementHandler handler)
+        protected override void SetElementCore(object element, IElementHandler handler)
         {
             this.handler = handler as IButtonElementHandler;
             this.element = element;
