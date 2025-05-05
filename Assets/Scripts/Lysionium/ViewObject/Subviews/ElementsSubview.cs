@@ -41,7 +41,7 @@ namespace Lysionium
 
         public void CommonInit()
         {
-            LUIAssert.NotInitialized(this, isInitialized);
+            LuiAssert.NotInitialized(this, isInitialized);
             isInitialized = true;
             CommonInitCore();
         }

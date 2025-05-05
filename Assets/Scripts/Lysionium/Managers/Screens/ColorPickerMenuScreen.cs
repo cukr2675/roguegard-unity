@@ -33,8 +33,8 @@ namespace Lysionium
                 ?
                 .OnClose((manager, arg, color) =>
                 {
-                    if (LUIAssert.Type<TMgr>(manager, out var tMgr, manager) ||
-                        LUIAssert.Type<TArg>(arg, out var tArg, manager)) return;
+                    if (LuiAssert.Type<TMgr>(manager, out var tMgr, manager) ||
+                        LuiAssert.Type<TArg>(arg, out var tArg, manager)) return;
 
                     handleClose(tMgr, tArg, color);
                 })
@@ -64,7 +64,7 @@ namespace Lysionium
 
             protected override void ShowSubviews(TMgr manager, TArg arg)
             {
-                if (LUIAssert.Type<ColorPickerSubview>(manager.GetSubview(StandardSubviewTable.ColorPickerName), out var colorPickerSubview)) return;
+                if (LuiAssert.Type<ColorPickerSubview>(manager.GetSubview(StandardSubviewTable.ColorPickerName), out var colorPickerSubview)) return;
 
                 colorPickerSubview.SetParameters(color, HandleClose, manager, arg, ref colorPickerSubviewStateProvider);
                 colorPickerSubview.Show();

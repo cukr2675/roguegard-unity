@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Lysionium
 {
-    internal static class LUIUtility
+    internal static class LuiUtility
     {
         /// <summary>
         /// <paramref name="transform"/> の親の <typeparamref name="T"/> 型のコンポーネントを再帰検索する

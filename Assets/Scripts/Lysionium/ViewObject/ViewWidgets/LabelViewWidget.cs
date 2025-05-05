@@ -127,16 +127,16 @@ namespace Lysionium
 
             string IWidgetOption.GetText(IListMenuManager manager, IListMenuArg arg)
             {
-                if (LUIAssert.Type<TMgr>(manager, out var tMgr) ||
-                    LUIAssert.Type<TArg>(arg, out var tArg)) return manager.ErrorOption.GetName(manager, arg);
+                if (LuiAssert.Type<TMgr>(manager, out var tMgr) ||
+                    LuiAssert.Type<TArg>(arg, out var tArg)) return manager.ErrorOption.GetName(manager, arg);
 
                 return GetText(tMgr, tArg);
             }
 
             void IWidgetOption.HandleClickLink(string link, IListMenuManager manager, IListMenuArg arg)
             {
-                if (LUIAssert.Type<TMgr>(manager, out var tMgr) ||
-                    LUIAssert.Type<TArg>(arg, out var tArg)) return;
+                if (LuiAssert.Type<TMgr>(manager, out var tMgr) ||
+                    LuiAssert.Type<TArg>(arg, out var tArg)) return;
 
                 HandleClickLink?.Invoke(link, tMgr, tArg);
             }

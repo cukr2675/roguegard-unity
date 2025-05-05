@@ -96,16 +96,16 @@ namespace Lysionium
 
             string IWidgetOption.GetValue(IListMenuManager manager, IListMenuArg arg)
             {
-                if (LUIAssert.Type<TMgr>(manager, out var tMgr) ||
-                    LUIAssert.Type<TArg>(arg, out var tArg)) return null;
+                if (LuiAssert.Type<TMgr>(manager, out var tMgr) ||
+                    LuiAssert.Type<TArg>(arg, out var tArg)) return null;
 
                 return GetValue(tMgr, tArg);
             }
 
             string IWidgetOption.HandleValueChanged(IListMenuManager manager, IListMenuArg arg, string value)
             {
-                if (LUIAssert.Type<TMgr>(manager, out var tMgr) ||
-                    LUIAssert.Type<TArg>(arg, out var tArg)) return null;
+                if (LuiAssert.Type<TMgr>(manager, out var tMgr) ||
+                    LuiAssert.Type<TArg>(arg, out var tArg)) return null;
 
                 return HandleValueChanged(tMgr, tArg, value);
             }

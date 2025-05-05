@@ -62,7 +62,7 @@ namespace Lysionium
 
         public static ElementsViewAnimator Get(Component obj)
         {
-            LUIUtility.TryGetComponentInRecursiveParents<ElementsViewAnimator>(obj.transform, out var viewAnimator);
+            LuiUtility.TryGetComponentInRecursiveParents<ElementsViewAnimator>(obj.transform, out var viewAnimator);
             return viewAnimator;
         }
 

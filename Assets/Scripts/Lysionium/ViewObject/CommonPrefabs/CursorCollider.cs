@@ -27,7 +27,7 @@ namespace Lysionium
         private void Awake()
         {
             selectable = GetComponent<Selectable>();
-            LUIUtility.TryGetComponentInRecursiveParents(transform.parent, out parentSelectable);
+            LuiUtility.TryGetComponentInRecursiveParents(transform.parent, out parentSelectable);
         }
 
         private void Update()
@@ -49,7 +49,7 @@ namespace Lysionium
             if (parentAnimator == null)
             {
                 // Awake で設定すると早すぎる場合があるのでここで評価
-                LUIUtility.TryGetComponentInRecursiveParents(transform, out parentAnimator);
+                LuiUtility.TryGetComponentInRecursiveParents(transform, out parentAnimator);
             }
 
             if (_isTrigger)

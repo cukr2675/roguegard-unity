@@ -29,7 +29,7 @@ namespace Lysionium
         public void Initialize(ElementsSubviewBase parent)
         {
             if (parent == null) throw new System.ArgumentNullException(nameof(parent));
-            LUIAssert.NotInitialized(this, Parent != null);
+            LuiAssert.NotInitialized(this, Parent != null);
 
             Parent = parent;
             selectable = GetComponent<Selectable>();

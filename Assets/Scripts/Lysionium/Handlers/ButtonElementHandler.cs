@@ -27,9 +27,9 @@ namespace Lysionium
         {
             if (EnableSelectOptionProxy && element is ISelectOption) { return SelectOptionHandler.Instance.GetName(element, manager, arg); }
 
-            if (LUIAssert.Type<TElm>(element, out var tElm) ||
-                LUIAssert.Type<TMgr>(manager, out var tMgr) ||
-                LUIAssert.Type<TArg>(arg, out var tArg)) return manager.ErrorOption.GetName(manager, arg);
+            if (LuiAssert.Type<TElm>(element, out var tElm) ||
+                LuiAssert.Type<TMgr>(manager, out var tMgr) ||
+                LuiAssert.Type<TArg>(arg, out var tArg)) return manager.ErrorOption.GetName(manager, arg);
 
             if (GetName != null) return GetName(tElm, tMgr, tArg);
             else return element?.ToString() ?? "null";
@@ -39,9 +39,9 @@ namespace Lysionium
         {
             if (EnableSelectOptionProxy && element is ISelectOption) { return SelectOptionHandler.Instance.GetStyle(element, manager, arg); }
 
-            if (LUIAssert.Type<TElm>(element, out var tElm) ||
-                LUIAssert.Type<TMgr>(manager, out var tMgr) ||
-                LUIAssert.Type<TArg>(arg, out var tArg)) return manager.ErrorOption.GetStyle(manager, arg);
+            if (LuiAssert.Type<TElm>(element, out var tElm) ||
+                LuiAssert.Type<TMgr>(manager, out var tMgr) ||
+                LuiAssert.Type<TArg>(arg, out var tArg)) return manager.ErrorOption.GetStyle(manager, arg);
 
             return GetStyle?.Invoke(tElm, tMgr, tArg);
         }
@@ -55,9 +55,9 @@ namespace Lysionium
             }
 
             if (HandleClick == null) throw new System.InvalidOperationException($"{HandleClick} が null です。");
-            if (LUIAssert.Type<TElm>(element, out var tElm, manager) ||
-                LUIAssert.Type<TMgr>(manager, out var tMgr, manager) ||
-                LUIAssert.Type<TArg>(arg, out var tArg, manager)) return;
+            if (LuiAssert.Type<TElm>(element, out var tElm, manager) ||
+                LuiAssert.Type<TMgr>(manager, out var tMgr, manager) ||
+                LuiAssert.Type<TArg>(arg, out var tArg, manager)) return;
 
             HandleClick(tElm, tMgr, tArg);
         }

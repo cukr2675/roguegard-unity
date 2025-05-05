@@ -19,7 +19,7 @@ namespace Lysionium
 
         public static KeyBindStyleSheet Get(Component obj)
         {
-            LUIUtility.TryGetComponentInRecursiveParents<KeyBindStyleSheet>(obj.transform, out var styleSheet);
+            LuiUtility.TryGetComponentInRecursiveParents<KeyBindStyleSheet>(obj.transform, out var styleSheet);
             return styleSheet;
         }
 

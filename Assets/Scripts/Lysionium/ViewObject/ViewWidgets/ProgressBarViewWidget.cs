@@ -70,8 +70,8 @@ namespace Lysionium
 
             float IWidgetOption.GetProgress(IListMenuManager manager, IListMenuArg arg)
             {
-                if (LUIAssert.Type<TMgr>(manager, out var tMgr) ||
-                    LUIAssert.Type<TArg>(arg, out var tArg)) return 0f;
+                if (LuiAssert.Type<TMgr>(manager, out var tMgr) ||
+                    LuiAssert.Type<TArg>(arg, out var tArg)) return 0f;
 
                 return GetProgress(tMgr, tArg);
             }

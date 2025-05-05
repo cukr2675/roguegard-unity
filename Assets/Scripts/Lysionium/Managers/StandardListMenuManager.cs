@@ -100,8 +100,8 @@ namespace Lysionium
 
         void IListMenuManager.PushMenuScreenFromExtension(object menuScreen, IListMenuArg arg)
         {
-            if (LUIAssert.Type<MenuScreen<TMgr, TArg>>(menuScreen, out var tMenuScreen) ||
-                LUIAssert.Type<TArg>(arg, out var tArg)) throw new System.ArgumentException();
+            if (LuiAssert.Type<MenuScreen<TMgr, TArg>>(menuScreen, out var tMenuScreen) ||
+                LuiAssert.Type<TArg>(arg, out var tArg)) throw new System.ArgumentException();
 
             PushMenuScreen(tMenuScreen, tArg);
         }

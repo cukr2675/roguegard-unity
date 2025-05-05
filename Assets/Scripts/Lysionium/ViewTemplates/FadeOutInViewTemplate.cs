@@ -26,16 +26,16 @@ namespace Lysionium
         {
             onFadeOutAnimation = (manager, arg) =>
             {
-                if (LUIAssert.Type<TMgr>(manager, out var tMgr)) return;
-                if (LUIAssert.Type<TArg>(arg, out var tArg)) return;
+                if (LuiAssert.Type<TMgr>(manager, out var tMgr)) return;
+                if (LuiAssert.Type<TArg>(arg, out var tArg)) return;
 
                 HandleFadeOut?.Invoke(tMgr, tArg);
             };
 
             onFadeInAnimation = (manager, arg) =>
             {
-                if (LUIAssert.Type<TMgr>(manager, out var tMgr)) return;
-                if (LUIAssert.Type<TArg>(arg, out var tArg)) return;
+                if (LuiAssert.Type<TMgr>(manager, out var tMgr)) return;
+                if (LuiAssert.Type<TArg>(arg, out var tArg)) return;
 
                 HandleFadeIn?.Invoke(tMgr, tArg);
             };

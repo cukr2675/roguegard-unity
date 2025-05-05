@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Lysionium
 {
-    internal static class LUIAssert
+    internal static class LuiAssert
     {
         public static bool Type<T>(object instance, out T castedInstance, IListMenuManager manager = null)
         {

@@ -13,21 +13,21 @@ namespace Lysionium
 
         public string GetName(object element, IListMenuManager manager, IListMenuArg arg)
         {
-            if (LUIAssert.Type<ISelectOption>(element, out var selectOption)) return string.Empty;
+            if (LuiAssert.Type<ISelectOption>(element, out var selectOption)) return string.Empty;
 
             return selectOption.GetName(manager, arg);
         }
 
         public string GetStyle(object element, IListMenuManager manager, IListMenuArg arg)
         {
-            if (LUIAssert.Type<ISelectOption>(element, out var selectOption)) return string.Empty;
+            if (LuiAssert.Type<ISelectOption>(element, out var selectOption)) return string.Empty;
 
             return selectOption.GetStyle(manager, arg);
         }
 
         public void HandleClick(object element, IListMenuManager manager, IListMenuArg arg)
         {
-            if (LUIAssert.Type<ISelectOption>(element, out var selectOption, manager)) return;
+            if (LuiAssert.Type<ISelectOption>(element, out var selectOption, manager)) return;
 
             selectOption.HandleClick(manager, arg);
         }

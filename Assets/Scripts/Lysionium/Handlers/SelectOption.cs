@@ -62,8 +62,8 @@ namespace Lysionium
         {
             if (getName != null)
             {
-                if (LUIAssert.Type<TMgr>(manager, out var tMgr) ||
-                    LUIAssert.Type<TArg>(arg, out var tArg)) return null;
+                if (LuiAssert.Type<TMgr>(manager, out var tMgr) ||
+                    LuiAssert.Type<TArg>(arg, out var tArg)) return null;
 
                 return getName(tMgr, tArg);
             }
@@ -77,8 +77,8 @@ namespace Lysionium
 
         void ISelectOption.HandleClick(IListMenuManager manager, IListMenuArg arg)
         {
-            if (LUIAssert.Type<TMgr>(manager, out var tMgr, manager) ||
-                LUIAssert.Type<TArg>(arg, out var tArg, manager)) return;
+            if (LuiAssert.Type<TMgr>(manager, out var tMgr, manager) ||
+                LuiAssert.Type<TArg>(arg, out var tArg, manager)) return;
 
             HandleClick(tMgr, tArg);
         }
