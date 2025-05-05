@@ -14,7 +14,7 @@ namespace RoguegardUnity
 
         private readonly MainMenuViewTemplate<MMgr, MArg> view = new()
         {
-            PrimaryCommandSubViewName = StandardSubViewTable.SecondaryCommandName,
+            PrimaryCommandSubviewName = StandardSubviewTable.SecondaryCommandName,
         };
 
         private readonly CommandAction commandAction = new();

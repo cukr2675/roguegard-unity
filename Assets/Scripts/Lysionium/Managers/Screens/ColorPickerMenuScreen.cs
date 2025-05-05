@@ -48,9 +48,9 @@ namespace Lysionium
 
         private class ViewTemplate : ViewTemplate<TMgr, TArg>
         {
-            private IElementsSubViewStateProvider colorPickerSubViewStateProvider;
+            private IElementsSubviewStateProvider colorPickerSubviewStateProvider;
             private Color color;
-            private event ColorPickerSubView.HandleClose HandleClose;
+            private event ColorPickerSubview.HandleClose HandleClose;
 
             public Builder ShowTemplate(Color color, TMgr manager, TArg arg)
             {
@@ -58,21 +58,21 @@ namespace Lysionium
 
                 this.color = color;
 
-                if (TryShowSubViews(manager, arg)) return null;
+                if (TryShowSubviews(manager, arg)) return null;
                 else return new Builder(this, manager, arg);
             }
 
-            protected override void ShowSubViews(TMgr manager, TArg arg)
+            protected override void ShowSubviews(TMgr manager, TArg arg)
             {
-                if (LUIAssert.Type<ColorPickerSubView>(manager.GetSubView(StandardSubViewTable.ColorPickerName), out var colorPickerSubView)) return;
+                if (LUIAssert.Type<ColorPickerSubview>(manager.GetSubview(StandardSubviewTable.ColorPickerName), out var colorPickerSubview)) return;
 
-                colorPickerSubView.SetParameters(color, HandleClose, manager, arg, ref colorPickerSubViewStateProvider);
-                colorPickerSubView.Show();
+                colorPickerSubview.SetParameters(color, HandleClose, manager, arg, ref colorPickerSubviewStateProvider);
+                colorPickerSubview.Show();
             }
 
             public void HideTemplate(TMgr manager, bool back)
             {
-                manager.GetSubView(StandardSubViewTable.ColorPickerName).Hide(back);
+                manager.GetSubview(StandardSubviewTable.ColorPickerName).Hide(back);
             }
 
             public class Builder : BaseBuilder<Builder>
@@ -85,7 +85,7 @@ namespace Lysionium
                     this.parent = parent;
                 }
 
-                public Builder OnClose(ColorPickerSubView.HandleClose onClose)
+                public Builder OnClose(ColorPickerSubview.HandleClose onClose)
                 {
                     AssertNotBuilt();
 

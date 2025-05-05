@@ -10,7 +10,7 @@ namespace Lysionium
 
         ISelectOption ErrorOption { get; }
 
-        IElementsSubView GetSubView(string subViewName);
+        IElementsSubview GetSubview(string subviewName);
 
         void HideAll(bool back);
 

@@ -8,7 +8,7 @@ using UnityEngine.EventSystems;
 namespace Lysionium
 {
     /// <summary>
-    /// <see cref="WidgetsSubView"/> 用の要素コンポーネント。 <see cref="ViewElement"/> と違い表示ごとに再生成される
+    /// <see cref="WidgetsSubview"/> 用の要素コンポーネント。 <see cref="ViewElement"/> と違い表示ごとに再生成される
     /// </summary>
     public abstract class ViewWidget : MonoBehaviour
     {
@@ -17,12 +17,12 @@ namespace Lysionium
         /// </summary>
         public virtual string WidgetName => null;
 
-        protected virtual ElementsSubViewBase Parent => null;
+        protected virtual ElementsSubviewBase Parent => null;
 
         private static int widgetIdentity = 0;
 
         public abstract bool TryInstantiateWidget(
-            object element, IElementHandler handler, ElementsSubViewBase elementsSubView, out ViewWidget viewWidget);
+            object element, IElementHandler handler, ElementsSubviewBase elementsSubview, out ViewWidget viewWidget);
 
         protected static string EmitIdentity(string header) => $"{header}({widgetIdentity++})";
 

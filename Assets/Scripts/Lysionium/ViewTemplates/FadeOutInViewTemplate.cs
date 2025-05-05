@@ -11,10 +11,10 @@ namespace Lysionium
         where TMgr : IListMenuManager
         where TArg : IListMenuArg
     {
-        public string FadeMaskSubViewName { get; set; } = StandardSubViewTable.FadeMaskName;
+        public string FadeMaskSubviewName { get; set; } = StandardSubviewTable.FadeMaskName;
 
         private object prevViewStateHolder;
-        private IElementsSubViewStateProvider fadeMaskSubViewStateProvider;
+        private IElementsSubviewStateProvider fadeMaskSubviewStateProvider;
         private event HandleClickElement<TMgr, TArg> HandleFadeOut;
         private event HandleClickElement<TMgr, TArg> HandleFadeIn;
 
@@ -48,24 +48,24 @@ namespace Lysionium
             // 必要に応じてスクロール位置をリセット
             if (viewStateHolder != prevViewStateHolder)
             {
-                fadeMaskSubViewStateProvider?.Reset();
+                fadeMaskSubviewStateProvider?.Reset();
             }
             prevViewStateHolder = viewStateHolder;
 
-            if (TryShowSubViews(manager, arg)) return null;
+            if (TryShowSubviews(manager, arg)) return null;
             else return new Builder(this, manager, arg);
         }
 
-        protected override void ShowSubViews(TMgr manager, TArg arg)
+        protected override void ShowSubviews(TMgr manager, TArg arg)
         {
             manager
-                .GetSubView(FadeMaskSubViewName)
-                .Show(widgetOptions, ElementToStringHandler.Instance, manager, arg, ref fadeMaskSubViewStateProvider, onFadeOutAnimation);
+                .GetSubview(FadeMaskSubviewName)
+                .Show(widgetOptions, ElementToStringHandler.Instance, manager, arg, ref fadeMaskSubviewStateProvider, onFadeOutAnimation);
         }
 
         public void FadeIn(TMgr manager, bool back)
         {
-            manager.GetSubView(FadeMaskSubViewName).Hide(back, onFadeInAnimation);
+            manager.GetSubview(FadeMaskSubviewName).Hide(back, onFadeInAnimation);
         }
 
         public class Builder : BaseBuilder<Builder>

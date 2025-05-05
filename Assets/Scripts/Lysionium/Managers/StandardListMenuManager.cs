@@ -10,12 +10,12 @@ namespace Lysionium
         public void Initialize() => CommonInit();
     }
 
-    [RequireComponent(typeof(StandardSubViewTable))]
+    [RequireComponent(typeof(StandardSubviewTable))]
     public abstract class StandardListMenuManager<TMgr, TArg> : MonoBehaviour, IListMenuManager
         where TMgr : StandardListMenuManager<TMgr, TArg>
         where TArg : IListMenuArg
     {
-        public StandardSubViewTable StandardSubViewTable { get; private set; }
+        public StandardSubviewTable StandardSubviewTable { get; private set; }
 
         public event System.Action OnError;
         public event System.Action OnDone;
@@ -36,12 +36,12 @@ namespace Lysionium
         /// <summary>
         /// この値が true の間は予約されたメニューを表示しない。遷移アニメーション用
         /// </summary>
-        protected virtual bool HasManagerLock => StandardSubViewTable.HasManagerLock;
+        protected virtual bool HasManagerLock => StandardSubviewTable.HasManagerLock;
 
         protected void CommonInit()
         {
-            StandardSubViewTable = GetComponent<StandardSubViewTable>();
-            StandardSubViewTable.CommonInit();
+            StandardSubviewTable = GetComponent<StandardSubviewTable>();
+            StandardSubviewTable.CommonInit();
             HideAll();
         }
 
@@ -63,16 +63,16 @@ namespace Lysionium
             }
         }
 
-        public virtual IElementsSubView GetSubView(string subViewName)
+        public virtual IElementsSubview GetSubview(string subviewName)
         {
-            return StandardSubViewTable.SubViews[subViewName];
+            return StandardSubviewTable.Subviews[subviewName];
         }
 
         public virtual void HideAll(bool back = false)
         {
-            foreach (var subView in StandardSubViewTable.SubViews.Values)
+            foreach (var subview in StandardSubviewTable.Subviews.Values)
             {
-                subView.Hide(back);
+                subview.Hide(back);
             }
         }
 
@@ -82,9 +82,9 @@ namespace Lysionium
 
         private void BlockAll()
         {
-            foreach (var subView in StandardSubViewTable.SubViews.Values)
+            foreach (var subview in StandardSubviewTable.Subviews.Values)
             {
-                subView.SetInteractable(false);
+                subview.SetInteractable(false);
             }
         }
 
@@ -110,7 +110,7 @@ namespace Lysionium
         {
             stack.Clear();
             PushMenuScreen(menu, arg);
-            StandardSubViewTable.SetBlocker(enableTouchMask);
+            StandardSubviewTable.SetBlocker(enableTouchMask);
         }
 
         /// <summary>
@@ -154,7 +154,7 @@ namespace Lysionium
             stack.Clear();
             reservedMenu = null;
             HideAll();
-            StandardSubViewTable.SetBlocker(false);
+            StandardSubviewTable.SetBlocker(false);
             IsDone = true;
             OnDone?.Invoke();
         }

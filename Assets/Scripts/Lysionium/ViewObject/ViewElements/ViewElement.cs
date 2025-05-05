@@ -20,13 +20,13 @@ namespace Lysionium
 
         protected IListMenuManager Manager => Parent.Manager;
         protected IListMenuArg Arg => Parent.Arg;
-        protected ElementsSubViewBase Parent { get; private set; }
+        protected ElementsSubviewBase Parent { get; private set; }
 
         public string ElementName { get; private set; }
 
         public RectTransform RectTransform => (RectTransform)transform;
 
-        public void Initialize(ElementsSubViewBase parent)
+        public void Initialize(ElementsSubviewBase parent)
         {
             if (parent == null) throw new System.ArgumentNullException(nameof(parent));
             LUIAssert.NotInitialized(this, Parent != null);

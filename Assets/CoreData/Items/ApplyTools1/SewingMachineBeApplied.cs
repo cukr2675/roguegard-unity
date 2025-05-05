@@ -81,7 +81,7 @@ namespace Roguegard
 
             private readonly ScrollViewTemplate<object, MMgr, MArg> view = new()
             {
-                ScrollSubViewName = StandardSubViewTable.WidgetsName,
+                ScrollSubviewName = StandardSubviewTable.WidgetsName,
                 BackAnchorList = new()
                 {
                     SelectOption.Create<MMgr, MArg>(":Back", ChoicesMenuScreen.SaveBackDialog(Save)),

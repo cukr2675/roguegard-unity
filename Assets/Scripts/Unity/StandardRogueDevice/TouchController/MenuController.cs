@@ -16,18 +16,18 @@ namespace RoguegardUnity
     public class MenuController : MMgr
     {
         [SerializeField] private WebOtherAudioPlayHandler _audioPlayHandler = null;
-        [SerializeField] private StatsSubView _stats = null;
-        [SerializeField] private FaceSubView _face = null;
-        [SerializeField] private SummarySubView _summary = null;
-        [SerializeField] private TextEditorSubView _textEditor = null;
-        [SerializeField] private CharacterCreationSubView _characterCreation = null;
-        [SerializeField] private PaintSubView _paint = null;
-        [SerializeField] private DopesheetSubView _dopesheet = null;
+        [SerializeField] private StatsSubview _stats = null;
+        [SerializeField] private FaceSubview _face = null;
+        [SerializeField] private SummarySubview _summary = null;
+        [SerializeField] private TextEditorSubview _textEditor = null;
+        [SerializeField] private CharacterCreationSubview _characterCreation = null;
+        [SerializeField] private PaintSubview _paint = null;
+        [SerializeField] private DopesheetSubview _dopesheet = null;
 
-        public StatsSubView Stats => _stats;
+        public StatsSubview Stats => _stats;
 
         [Header("Title Only")]
-        [SerializeField] private GridSubView _titleMenu = null;
+        [SerializeField] private GridSubview _titleMenu = null;
         public static string TitleMenuName => "TitleMenu";
 
         private MainMenu mainMenu;
@@ -40,11 +40,11 @@ namespace RoguegardUnity
         /// メッセージがアニメーション中 or メニュー操作中は待機
         /// </summary>
         public bool Wait =>
-            StandardSubViewTable.MessageBox.MessageBox.IsInProgress || StandardSubViewTable.SpeechBox.MessageBox.IsInProgress ||
+            StandardSubviewTable.MessageBox.MessageBox.IsInProgress || StandardSubviewTable.SpeechBox.MessageBox.IsInProgress ||
             ShowsMenuScreen || EventManager.Wait;
 
         public bool TalkingWait =>
-            StandardSubViewTable.SpeechBox.MessageBox.IsInProgress ||
+            StandardSubviewTable.SpeechBox.MessageBox.IsInProgress ||
             ShowsMenuScreen || EventManager.Wait;
 
         protected override bool HasManagerLock =>
@@ -71,9 +71,9 @@ namespace RoguegardUnity
             _summary.Initialize();
             _characterCreation.Initialize(rendererPool);
             _dopesheet.Initialize();
-            if (_titleMenu != null) { _titleMenu.Initialize(); }
+            if (_titleMenu != null) { _titleMenu.CommonInit(); }
 
-            EventManager = new ListMenuEventManager(new MessageController(StandardSubViewTable), _audioPlayHandler);
+            EventManager = new ListMenuEventManager(new MessageController(StandardSubviewTable), _audioPlayHandler);
         }
 
         public void Open(RogueObj menuSubject)
@@ -92,16 +92,16 @@ namespace RoguegardUnity
             }
         }
 
-        public override IElementsSubView GetSubView(string subViewName)
+        public override IElementsSubview GetSubview(string subviewName)
         {
-            if (subViewName == RoguegardSubViews.Face) return _face;
-            if (subViewName == RoguegardSubViews.Summary) return _summary;
-            if (subViewName == RoguegardSubViews.TextEditor) return _textEditor;
-            if (subViewName == RoguegardSubViews.CharacterCreation) return _characterCreation;
-            if (subViewName == RoguegardSubViews.Paint) return _paint;
-            if (subViewName == RoguegardSubViews.Dopesheet) return _dopesheet;
-            if (subViewName == TitleMenuName) return _titleMenu;
-            return base.GetSubView(subViewName);
+            if (subviewName == RoguegardSubviews.Face) return _face;
+            if (subviewName == RoguegardSubviews.Summary) return _summary;
+            if (subviewName == RoguegardSubviews.TextEditor) return _textEditor;
+            if (subviewName == RoguegardSubviews.CharacterCreation) return _characterCreation;
+            if (subviewName == RoguegardSubviews.Paint) return _paint;
+            if (subviewName == RoguegardSubviews.Dopesheet) return _dopesheet;
+            if (subviewName == TitleMenuName) return _titleMenu;
+            return base.GetSubview(subviewName);
         }
 
         public override void HideAll(bool back = false)

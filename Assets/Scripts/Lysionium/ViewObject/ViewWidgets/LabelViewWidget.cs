@@ -21,26 +21,26 @@ namespace Lysionium
         [Space, SerializeField] private Button.ButtonClickedEvent _onClick = null;
 
         private IWidgetOption widgetOption;
-        private ElementsSubViewBase _parent;
+        private ElementsSubviewBase _parent;
 
-        protected override ElementsSubViewBase Parent => _parent;
+        protected override ElementsSubviewBase Parent => _parent;
 
         public override bool TryInstantiateWidget(
-            object element, IElementHandler handler, ElementsSubViewBase elementsSubView, out ViewWidget viewWidget)
+            object element, IElementHandler handler, ElementsSubviewBase elementsSubview, out ViewWidget viewWidget)
         {
             if (element is string text)
             {
-                var labelViewWidget = Instantiate(this, elementsSubView.transform);
-                labelViewWidget._parent = elementsSubView;
+                var labelViewWidget = Instantiate(this, elementsSubview.transform);
+                labelViewWidget._parent = elementsSubview;
                 labelViewWidget.Initialize(text);
                 viewWidget = labelViewWidget;
                 return true;
             }
             else if (element is IWidgetOption widgetOption)
             {
-                var baseText = widgetOption.GetText(elementsSubView.Manager, elementsSubView.Arg);
-                var labelViewWidget = Instantiate(this, elementsSubView.transform);
-                labelViewWidget._parent = elementsSubView;
+                var baseText = widgetOption.GetText(elementsSubview.Manager, elementsSubview.Arg);
+                var labelViewWidget = Instantiate(this, elementsSubview.transform);
+                labelViewWidget._parent = elementsSubview;
                 labelViewWidget.widgetOption = widgetOption;
                 labelViewWidget.Initialize(baseText);
                 viewWidget = labelViewWidget;

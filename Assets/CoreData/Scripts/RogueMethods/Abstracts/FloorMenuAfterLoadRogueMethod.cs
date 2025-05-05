@@ -72,7 +72,7 @@ namespace Roguegard
             {
             };
 
-            private IElementsSubViewStateProvider stateProvider;
+            private IElementsSubviewStateProvider stateProvider;
 
             public override bool IsIncremental => true;
 
@@ -89,7 +89,7 @@ namespace Roguegard
                         }
 
                         selectOptions[0].HandleClick(manager, arg);
-                        manager.GetSubView(StandardSubViewTable.OverlayName).Show(
+                        manager.GetSubview(StandardSubviewTable.OverlayName).Show(
                             new[] {
                                 $"<align=\"center\"><size=+32>{arg.Self.Location.GetName()} {levelText}"
                             }, ElementToStringHandler.Instance, manager, arg, ref stateProvider);
@@ -107,7 +107,7 @@ namespace Roguegard
             {
                 yield return new WaitForSeconds(2f);
 
-                manager.GetSubView(StandardSubViewTable.OverlayName).Hide(false, (manager, arg) =>
+                manager.GetSubview(StandardSubviewTable.OverlayName).Hide(false, (manager, arg) =>
                 {
                     ((MMgr)manager).Done();
                 });

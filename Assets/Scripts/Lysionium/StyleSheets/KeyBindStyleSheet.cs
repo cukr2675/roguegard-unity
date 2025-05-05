@@ -8,7 +8,7 @@ using UnityEngine.InputSystem;
 namespace Lysionium
 {
     /// <summary>
-    /// 要素のスタイルでキーバインドするスタイルシート。このオブジェクトの下の <see cref="ElementsSubView"/> に影響を与える
+    /// 要素のスタイルでキーバインドするスタイルシート。このオブジェクトの下の <see cref="ElementsSubview"/> に影響を与える
     /// </summary>
     [AddComponentMenu("UI/Lysionium/LUI Key Bind Style Sheet")]
     public class KeyBindStyleSheet : MonoBehaviour

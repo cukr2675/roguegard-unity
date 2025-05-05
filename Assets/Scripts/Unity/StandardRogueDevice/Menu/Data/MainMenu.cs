@@ -47,9 +47,9 @@ namespace RoguegardUnity
 
         private class ViewTemplate : MainMenuViewTemplate<MMgr, MArg>
         {
-            protected override void ShowSubViews(MMgr manager, MArg arg)
+            protected override void ShowSubviews(MMgr manager, MArg arg)
             {
-                base.ShowSubViews(manager, arg);
+                base.ShowSubviews(manager, arg);
 
                 // ダンジョン名とパーティの名前/HP/MPを表示
                 var parent = (MenuController)manager;
@@ -63,8 +63,8 @@ namespace RoguegardUnity
         {
             private readonly MainMenuViewTemplate<MMgr, MArg> view = new()
             {
-                PrimaryCommandSubViewName = StandardSubViewTable.LongMessageName,
-                BackAnchorSubViewName = StandardSubViewTable.BackAnchorName,
+                PrimaryCommandSubviewName = StandardSubviewTable.LongMessageName,
+                BackAnchorSubviewName = StandardSubviewTable.BackAnchorName,
             };
 
             public override void OpenScreen(in MMgr manager, in MArg arg)
@@ -149,7 +149,7 @@ namespace RoguegardUnity
                 {
                     if (!DungeonQuestInfo.TryGetQuest(arg.Self, out var quest)) throw new RogueException();
 
-                    var summary = RoguegardSubViews.GetSummary(manager);
+                    var summary = RoguegardSubviews.GetSummary(manager);
                     summary.SetQuest(arg.Self, quest, false, manager);
                     summary.Show();
                 }
@@ -160,7 +160,7 @@ namespace RoguegardUnity
         {
             private readonly DialogViewTemplate<MMgr, MArg> view = new()
             {
-                DialogSubViewName = StandardSubViewTable.WidgetsName,
+                DialogSubviewName = StandardSubviewTable.WidgetsName,
             };
 
             public override void OpenScreen(in MMgr manager, in MArg arg)
@@ -186,7 +186,7 @@ namespace RoguegardUnity
                                     device.Options.SetMasterVolume(value / 100f);
 
                                     // 音量確認用の効果音を鳴らす
-                                    manager.StandardSubViewTable.MessageBox.PlayString("Submit");
+                                    manager.StandardSubviewTable.MessageBox.PlayString("Submit");
 
                                     return value.ToString();
                                 },

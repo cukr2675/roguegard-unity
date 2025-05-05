@@ -78,7 +78,7 @@ namespace RoguegardUnity
         {
             private readonly DialogViewTemplate<MMgr, MArg> view = new()
             {
-                DialogSubViewName = StandardSubViewTable.WidgetsName,
+                DialogSubviewName = StandardSubviewTable.WidgetsName,
             };
 
             public override void OpenScreen(in MMgr manager, in MArg arg)
@@ -97,7 +97,7 @@ namespace RoguegardUnity
                     target = arg;
                 }
 
-                var summary = RoguegardSubViews.GetSummary(manager);
+                var summary = RoguegardSubviews.GetSummary(manager);
                 summary.SetObj(target, manager);
                 summary.Show();
             }
@@ -107,7 +107,7 @@ namespace RoguegardUnity
         {
             private readonly DialogViewTemplate<MMgr, MArg> view = new()
             {
-                DialogSubViewName = StandardSubViewTable.WidgetsName,
+                DialogSubviewName = StandardSubviewTable.WidgetsName,
             };
 
             public override void OpenScreen(in MMgr manager, in MArg arg)
@@ -129,7 +129,7 @@ namespace RoguegardUnity
 
             private readonly DialogViewTemplate<MMgr, MArg> view = new()
             {
-                BackAnchorSubViewName = null,
+                BackAnchorSubviewName = null,
             };
 
             public override bool IsIncremental => true;

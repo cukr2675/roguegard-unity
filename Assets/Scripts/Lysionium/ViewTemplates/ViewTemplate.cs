@@ -21,11 +21,11 @@ namespace Lysionium
         /// <summary>
         /// このメソッドが失敗する（false を返す）ときのみ FluentBuilder を返すように実装する
         /// </summary>
-        protected bool TryShowSubViews(TMgr manager, TArg arg)
+        protected bool TryShowSubviews(TMgr manager, TArg arg)
         {
             if (IsBuilt)
             {
-                ShowSubViews(manager, arg);
+                ShowSubviews(manager, arg);
                 return true;
             }
             else
@@ -34,7 +34,7 @@ namespace Lysionium
             }
         }
 
-        protected abstract void ShowSubViews(TMgr manager, TArg arg);
+        protected abstract void ShowSubviews(TMgr manager, TArg arg);
 
         /// <summary>
         /// フルエントビルダークラス
@@ -110,7 +110,7 @@ namespace Lysionium
             {
                 AssertNotBuilt();
                 parent.IsBuilt = true;
-                parent.ShowSubViews(manager, arg);
+                parent.ShowSubviews(manager, arg);
             }
         }
     }

@@ -9,17 +9,17 @@ namespace Roguegard.Device
     public class RogueScrollViewTemplate<T> : ListViewTemplate<T, MMgr, MArg>
         where T : class
     {
-        public string ScrollSubViewName { get; set; } = StandardSubViewTable.ScrollName;
-        public string CaptionBoxSubViewName { get; set; } = StandardSubViewTable.CaptionBoxName;
-        public string BackAnchorSubViewName { get; set; } = StandardSubViewTable.BackAnchorName;
+        public string ScrollSubviewName { get; set; } = StandardSubviewTable.ScrollName;
+        public string CaptionBoxSubviewName { get; set; } = StandardSubviewTable.CaptionBoxName;
+        public string BackAnchorSubviewName { get; set; } = StandardSubviewTable.BackAnchorName;
         public List<ISelectOption> BackAnchorList { get; set; } = new() { BackSelectOption.Instance };
 
         private object prevViewStateHolder;
-        private IElementsSubViewStateProvider scrollSubViewStateProvider;
-        private IElementsSubViewStateProvider captionBoxSubViewStateProvider;
-        private IElementsSubViewStateProvider backAnchorSubViewStateProvider;
+        private IElementsSubviewStateProvider scrollSubviewStateProvider;
+        private IElementsSubviewStateProvider captionBoxSubviewStateProvider;
+        private IElementsSubviewStateProvider backAnchorSubviewStateProvider;
 
-        private readonly ElementHandler scrollSubViewHandler = new();
+        private readonly ElementHandler scrollSubviewHandler = new();
 
         public delegate object GetInfo(T element, MMgr manager, MArg arg);
         public delegate (object, T1) GetInfo<T1>(T element, MMgr manager, MArg arg);
@@ -38,9 +38,9 @@ namespace Roguegard.Device
             // 必要に応じてスクロール位置をリセット
             if (viewStateHolder != prevViewStateHolder)
             {
-                scrollSubViewStateProvider?.Reset();
-                captionBoxSubViewStateProvider?.Reset();
-                backAnchorSubViewStateProvider?.Reset();
+                scrollSubviewStateProvider?.Reset();
+                captionBoxSubviewStateProvider?.Reset();
+                backAnchorSubviewStateProvider?.Reset();
             }
             prevViewStateHolder = viewStateHolder;
 
@@ -51,36 +51,36 @@ namespace Roguegard.Device
                 OriginalList.Add(list[i]);
             }
 
-            if (TryShowSubViews(manager, arg)) return null;
+            if (TryShowSubviews(manager, arg)) return null;
             else return new Builder(this, manager, arg);
         }
 
-        protected override void ShowSubViews(MMgr manager, MArg arg)
+        protected override void ShowSubviews(MMgr manager, MArg arg)
         {
             manager
-                .GetSubView(ScrollSubViewName)
-                .Show(List, scrollSubViewHandler, manager, arg, ref scrollSubViewStateProvider);
+                .GetSubview(ScrollSubviewName)
+                .Show(List, scrollSubviewHandler, manager, arg, ref scrollSubviewStateProvider);
 
             if (Title != null)
             {
                 manager
-                    .GetSubView(CaptionBoxSubViewName)
-                    .Show(TitleSingle, ElementToStringHandler.Instance, manager, arg, ref captionBoxSubViewStateProvider);
+                    .GetSubview(CaptionBoxSubviewName)
+                    .Show(TitleSingle, ElementToStringHandler.Instance, manager, arg, ref captionBoxSubviewStateProvider);
             }
 
-            if (BackAnchorSubViewName != null)
+            if (BackAnchorSubviewName != null)
             {
                 manager
-                    .GetSubView(BackAnchorSubViewName)
-                    .Show(BackAnchorList, SelectOptionHandler.Instance, manager, arg, ref backAnchorSubViewStateProvider);
+                    .GetSubview(BackAnchorSubviewName)
+                    .Show(BackAnchorList, SelectOptionHandler.Instance, manager, arg, ref backAnchorSubviewStateProvider);
             }
         }
 
         public void HideTemplate(MMgr manager, bool back)
         {
-            manager.GetSubView(ScrollSubViewName).Hide(back);
-            if (Title != null) { manager.GetSubView(CaptionBoxSubViewName).Hide(back); }
-            if (BackAnchorSubViewName != null) { manager.GetSubView(BackAnchorSubViewName).Hide(back); }
+            manager.GetSubview(ScrollSubviewName).Hide(back);
+            if (Title != null) { manager.GetSubview(CaptionBoxSubviewName).Hide(back); }
+            if (BackAnchorSubviewName != null) { manager.GetSubview(BackAnchorSubviewName).Hide(back); }
         }
 
         public class Builder : BaseListBuilder<Builder>
@@ -97,7 +97,7 @@ namespace Roguegard.Device
             {
                 AssertNotBuilt();
 
-                parent.scrollSubViewHandler.GetInfo = (element, manager, arg) =>
+                parent.scrollSubviewHandler.GetInfo = (element, manager, arg) =>
                 {
                     var nameObj = method(element, manager, arg);
                     return (nameObj, null, null, null, null, null, null, null, false);
@@ -109,7 +109,7 @@ namespace Roguegard.Device
             {
                 AssertNotBuilt();
 
-                parent.scrollSubViewHandler.GetInfo = (element, manager, arg) =>
+                parent.scrollSubviewHandler.GetInfo = (element, manager, arg) =>
                 {
                     var info = method(element, manager, arg);
                     return (info.Item1, null, null, null, null, null, info.Item2, info.Item3, false);
@@ -121,7 +121,7 @@ namespace Roguegard.Device
             {
                 AssertNotBuilt();
 
-                parent.scrollSubViewHandler.GetInfo = (element, manager, arg) =>
+                parent.scrollSubviewHandler.GetInfo = (element, manager, arg) =>
                 {
                     var info = method(element, manager, arg);
                     return (info.Item1, null, info.Item2, info.Item3, info.Item4, info.Item5, info.Item6, info.Item7, info.Item8);
@@ -133,7 +133,7 @@ namespace Roguegard.Device
             {
                 AssertNotBuilt();
 
-                parent.scrollSubViewHandler.HandleClick = method;
+                parent.scrollSubviewHandler.HandleClick = method;
                 return this;
             }
         }

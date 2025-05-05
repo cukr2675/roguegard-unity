@@ -21,7 +21,7 @@ namespace RoguegardUnity
 
             view = new()
             {
-                PrimaryCommandSubViewName = StandardSubViewTable.SecondaryCommandName,
+                PrimaryCommandSubviewName = StandardSubviewTable.SecondaryCommandName,
             };
         }
 
@@ -75,7 +75,7 @@ namespace RoguegardUnity
 
             private readonly DialogViewTemplate<MMgr, MArg> view = new()
             {
-                BackAnchorSubViewName = null,
+                BackAnchorSubviewName = null,
             };
 
             public override bool IsIncremental => true;

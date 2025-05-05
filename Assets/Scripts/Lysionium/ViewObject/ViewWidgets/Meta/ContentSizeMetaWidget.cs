@@ -7,11 +7,11 @@ namespace Lysionium
     [AddComponentMenu("UI/Lysionium/View Widgets/Meta/LUI Content Size Meta Widget")]
     public class ContentSizeMetaWidget : ViewWidget
     {
-        private ElementsSubViewBase _parent;
-        protected override ElementsSubViewBase Parent => _parent;
+        private ElementsSubviewBase _parent;
+        protected override ElementsSubviewBase Parent => _parent;
 
         public override bool TryInstantiateWidget(
-            object element, IElementHandler handler, ElementsSubViewBase elementsSubView, out ViewWidget viewWidget)
+            object element, IElementHandler handler, ElementsSubviewBase elementsSubview, out ViewWidget viewWidget)
         {
             if (!(element is IWidgetOption widgetOption))
             {
@@ -19,13 +19,13 @@ namespace Lysionium
                 return false;
             }
 
-            if (elementsSubView is WidgetsSubView widgetsSubView)
+            if (elementsSubview is WidgetsSubview widgetsSubview)
             {
-                widgetsSubView.SetContentWidth(widgetOption.Width);
+                widgetsSubview.SetContentWidth(widgetOption.Width);
             }
 
             var metaWidget = Instantiate(this);
-            metaWidget._parent = elementsSubView;
+            metaWidget._parent = elementsSubview;
             viewWidget = metaWidget;
             return true;
         }

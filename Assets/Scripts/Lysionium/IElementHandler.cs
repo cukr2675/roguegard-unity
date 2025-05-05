@@ -4,8 +4,13 @@ using UnityEngine;
 
 namespace Lysionium
 {
+    // Lysionium.HandlerRules のように Observer 風に GetName や HandleClick に分岐させればハンドラのダウンキャストを無くせるが
+    // ・ViewElement が利用するハンドラをインターフェースとして保持できないため、依存関係が不明瞭になる
+    // ・ハンドラの実装と呼び出しが直感的ではなくなる（参照やスタックトレースが追いづらくなる）
+    // などデメリットがある
+
     /// <summary>
-    /// <see cref="IElementsSubView"/> に各要素をどのように扱わせるかを設定するインターフェース。
+    /// <see cref="IElementsSubview"/> に各要素をどのように扱わせるかを設定するインターフェース。
     /// 一つのメニュー画面が複数の <see cref="IElementHandler"/> を持つ可能性があるため分けて考える。
     /// </summary>
     public interface IElementHandler

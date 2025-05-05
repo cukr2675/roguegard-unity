@@ -30,7 +30,7 @@ namespace RoguegardUnity
 
         private const float lightRatio = 248f / 255f;
 
-        private IElementsSubView view;
+        private IElementsSubview view;
 
         private IButtonElementHandler presenter;
 

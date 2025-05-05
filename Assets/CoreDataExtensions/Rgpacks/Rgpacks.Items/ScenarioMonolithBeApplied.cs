@@ -31,8 +31,8 @@ namespace Roguegard.Rgpacks
 
             private readonly MainMenuViewTemplate<MMgr, MArg> view = new()
             {
-                PrimaryCommandSubViewName = StandardSubViewTable.ScrollName,
-                BackAnchorSubViewName = StandardSubViewTable.BackAnchorName,
+                PrimaryCommandSubviewName = StandardSubviewTable.ScrollName,
+                BackAnchorSubviewName = StandardSubviewTable.BackAnchorName,
             };
 
             public Menu(ScenarioMonolithBeApplied parent)
@@ -103,7 +103,7 @@ namespace Roguegard.Rgpacks
         {
             private readonly DialogViewTemplate<MMgr, MArg> view = new()
             {
-                DialogSubViewName = StandardSubViewTable.WidgetsName,
+                DialogSubviewName = StandardSubviewTable.WidgetsName,
             };
 
             public override void OpenScreen(in MMgr manager, in MArg arg)

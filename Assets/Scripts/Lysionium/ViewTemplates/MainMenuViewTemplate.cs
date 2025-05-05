@@ -11,61 +11,61 @@ namespace Lysionium
         where TMgr : IListMenuManager
         where TArg : IListMenuArg
     {
-        public string PrimaryCommandSubViewName { get; set; } = StandardSubViewTable.PrimaryCommandName;
-        public string CaptionBoxSubViewName { get; set; } = StandardSubViewTable.CaptionBoxName;
-        public string BackAnchorSubViewName { get; set; } = null;
+        public string PrimaryCommandSubviewName { get; set; } = StandardSubviewTable.PrimaryCommandName;
+        public string CaptionBoxSubviewName { get; set; } = StandardSubviewTable.CaptionBoxName;
+        public string BackAnchorSubviewName { get; set; } = null;
         public List<ISelectOption> BackAnchorList { get; set; } = new() { BackSelectOption.Instance };
 
         private object prevViewStateHolder;
-        private IElementsSubViewStateProvider primaryCommandSubViewStateProvider;
-        private IElementsSubViewStateProvider captionBoxSubViewStateProvider;
-        private IElementsSubViewStateProvider backAnchorSubViewStateProvider;
+        private IElementsSubviewStateProvider primaryCommandSubviewStateProvider;
+        private IElementsSubviewStateProvider captionBoxSubviewStateProvider;
+        private IElementsSubviewStateProvider backAnchorSubviewStateProvider;
 
         public Builder ShowTemplate(TMgr manager, TArg arg, object viewStateHolder = null)
         {
             if (manager == null) throw new System.ArgumentNullException(nameof(manager));
 
             // 必要に応じてスクロール位置をリセット
-            if (viewStateHolder != prevViewStateHolder) { ResetSubViewStateProviders(); }
+            if (viewStateHolder != prevViewStateHolder) { ResetSubviewStateProviders(); }
             prevViewStateHolder = viewStateHolder;
 
-            if (TryShowSubViews(manager, arg)) return null;
+            if (TryShowSubviews(manager, arg)) return null;
             else return new Builder(this, manager, arg);
         }
 
-        protected virtual void ResetSubViewStateProviders()
+        protected virtual void ResetSubviewStateProviders()
         {
-            primaryCommandSubViewStateProvider?.Reset();
-            captionBoxSubViewStateProvider?.Reset();
-            backAnchorSubViewStateProvider?.Reset();
+            primaryCommandSubviewStateProvider?.Reset();
+            captionBoxSubviewStateProvider?.Reset();
+            backAnchorSubviewStateProvider?.Reset();
         }
 
-        protected override void ShowSubViews(TMgr manager, TArg arg)
+        protected override void ShowSubviews(TMgr manager, TArg arg)
         {
             manager
-                .GetSubView(PrimaryCommandSubViewName)
-                .Show(List, SelectOptionHandler.Instance, manager, arg, ref primaryCommandSubViewStateProvider);
+                .GetSubview(PrimaryCommandSubviewName)
+                .Show(List, SelectOptionHandler.Instance, manager, arg, ref primaryCommandSubviewStateProvider);
 
             if (Title != null)
             {
                 manager
-                    .GetSubView(CaptionBoxSubViewName)
-                    .Show(TitleSingle, ElementToStringHandler.Instance, manager, arg, ref captionBoxSubViewStateProvider);
+                    .GetSubview(CaptionBoxSubviewName)
+                    .Show(TitleSingle, ElementToStringHandler.Instance, manager, arg, ref captionBoxSubviewStateProvider);
             }
 
-            if (BackAnchorSubViewName != null)
+            if (BackAnchorSubviewName != null)
             {
                 manager
-                    .GetSubView(BackAnchorSubViewName)
-                    .Show(BackAnchorList, SelectOptionHandler.Instance, manager, arg, ref backAnchorSubViewStateProvider);
+                    .GetSubview(BackAnchorSubviewName)
+                    .Show(BackAnchorList, SelectOptionHandler.Instance, manager, arg, ref backAnchorSubviewStateProvider);
             }
         }
 
         public virtual void HideTemplate(TMgr manager, bool back)
         {
-            manager.GetSubView(PrimaryCommandSubViewName).Hide(back);
-            if (Title != null) { manager.GetSubView(CaptionBoxSubViewName).Hide(back); }
-            if (BackAnchorSubViewName != null) { manager.GetSubView(BackAnchorSubViewName).Hide(back); }
+            manager.GetSubview(PrimaryCommandSubviewName).Hide(back);
+            if (Title != null) { manager.GetSubview(CaptionBoxSubviewName).Hide(back); }
+            if (BackAnchorSubviewName != null) { manager.GetSubview(BackAnchorSubviewName).Hide(back); }
         }
 
         public class Builder : BaseListBuilder<Builder>

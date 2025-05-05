@@ -27,12 +27,12 @@ namespace Roguegard
 
         private class Menu : RogueMenuScreen
         {
-            private IElementsSubViewStateProvider subViewStateProvider;
+            private IElementsSubviewStateProvider subviewStateProvider;
 
             public override void OpenScreen(in MMgr manager, in MArg arg)
             {
-                var dopesheetSubView = RoguegardSubViews.GetDopesheet(manager);
-                dopesheetSubView.Show(System.Array.Empty<object>(), null, manager, arg, ref subViewStateProvider);
+                var dopesheetSubview = RoguegardSubviews.GetDopesheet(manager);
+                dopesheetSubview.Show(System.Array.Empty<object>(), null, manager, arg, ref subviewStateProvider);
             }
         }
     }

@@ -110,7 +110,7 @@ namespace RoguegardUnity
 
             private readonly DialogViewTemplate<MMgr, MArg> view = new()
             {
-                BackAnchorSubViewName = null,
+                BackAnchorSubviewName = null,
             };
 
             public override bool IsIncremental => true;
@@ -187,7 +187,7 @@ namespace RoguegardUnity
 
             private readonly DialogViewTemplate<MMgr, MArg> view = new()
             {
-                BackAnchorSubViewName = null,
+                BackAnchorSubviewName = null,
             };
 
             public override bool IsIncremental => true;
@@ -284,19 +284,19 @@ namespace RoguegardUnity
                 }
                 var showsSplitLine = boneSprite.ShowsSplitLine(elms[0], out pivots[0], out pivots[1]);
 
-                var paint = RoguegardSubViews.GetPaint(manager);
+                var paint = RoguegardSubviews.GetPaint(manager);
                 paint.SetPaint(elms, editInfo.Palette, editInfo.MainColor, showsSplitLine, pivots);
                 paint.Show();
 
-                IElementsSubViewStateProvider stateProvider = null;
+                IElementsSubviewStateProvider stateProvider = null;
                 manager
-                    .GetSubView(StandardSubViewTable.BackAnchorName)
+                    .GetSubview(StandardSubviewTable.BackAnchorName)
                     .Show(back, SelectOptionHandler.Instance, manager, arg, ref stateProvider);
             }
 
             private void Back(MMgr manager, MArg arg)
             {
-                var paint = RoguegardSubViews.GetPaint(manager);
+                var paint = RoguegardSubviews.GetPaint(manager);
                 switch (directionIndex)
                 {
                     case 0:

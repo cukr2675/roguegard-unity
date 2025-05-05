@@ -14,7 +14,7 @@ namespace Lysionium
 
         public override bool IsIncremental { get; }
 
-        public ChoicesMenuScreen(string message, bool isIncremental = true, string speechBoxSubViewName = null, string choicesSubViewName = null)
+        public ChoicesMenuScreen(string message, bool isIncremental = true, string speechBoxSubviewName = null, string choicesSubviewName = null)
         {
             getMessage = delegate { return message; };
             IsIncremental = isIncremental;
@@ -22,11 +22,11 @@ namespace Lysionium
             view = new()
             {
             };
-            if (speechBoxSubViewName != null) { view.SpeechBoxSubViewName = speechBoxSubViewName; }
-            if (choicesSubViewName != null) { view.ChoicesSubViewName = choicesSubViewName; }
+            if (speechBoxSubviewName != null) { view.SpeechBoxSubviewName = speechBoxSubviewName; }
+            if (choicesSubviewName != null) { view.ChoicesSubviewName = choicesSubviewName; }
         }
 
-        public ChoicesMenuScreen(GetElementName<TMgr, TArg> getMessage, bool isIncremental = true, string speechBoxSubViewName = null, string choicesSubViewName = null)
+        public ChoicesMenuScreen(GetElementName<TMgr, TArg> getMessage, bool isIncremental = true, string speechBoxSubviewName = null, string choicesSubviewName = null)
         {
             this.getMessage = getMessage;
             IsIncremental = isIncremental;
@@ -34,8 +34,8 @@ namespace Lysionium
             view = new()
             {
             };
-            if (speechBoxSubViewName != null) { view.SpeechBoxSubViewName = speechBoxSubViewName; }
-            if (choicesSubViewName != null) { view.ChoicesSubViewName = choicesSubViewName; }
+            if (speechBoxSubviewName != null) { view.SpeechBoxSubviewName = speechBoxSubviewName; }
+            if (choicesSubviewName != null) { view.ChoicesSubviewName = choicesSubviewName; }
         }
 
         public ChoicesMenuScreen<TMgr, TArg> Option(string name, HandleClickElement<TMgr, TArg> onClick)

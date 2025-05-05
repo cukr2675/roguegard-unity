@@ -9,17 +9,17 @@ namespace Lysionium
     /// </summary>
     public class PlayEmptyViewTemplate
     {
-        public string EmptySubViewName { get; set; } = StandardSubViewTable.ScrollName;
+        public string EmptySubviewName { get; set; } = StandardSubviewTable.ScrollName;
 
         public void Play(string value, IListMenuManager manager)
         {
             if (value == null) throw new System.ArgumentNullException(nameof(value));
             if (manager == null) throw new System.ArgumentNullException(nameof(manager));
 
-            if (!(manager.GetSubView(EmptySubViewName) is ElementsSubView elementsSubView)) throw new System.InvalidOperationException(
-                $"{EmptySubViewName} の SubView は {nameof(ElementsSubView)} ではありません。");
+            if (!(manager.GetSubview(EmptySubviewName) is ElementsSubview elementsSubview)) throw new System.InvalidOperationException(
+                $"{EmptySubviewName} の Subview は {nameof(ElementsSubview)} ではありません。");
 
-            elementsSubView.PlayString(value);
+            elementsSubview.PlayString(value);
         }
 
         public void Play(Object value, IListMenuManager manager)
@@ -27,10 +27,10 @@ namespace Lysionium
             if (value == null) throw new System.ArgumentNullException(nameof(value));
             if (manager == null) throw new System.ArgumentNullException(nameof(manager));
 
-            if (!(manager.GetSubView(EmptySubViewName) is ElementsSubView elementsSubView)) throw new System.InvalidOperationException(
-                $"{EmptySubViewName} の SubView は {nameof(ElementsSubView)} ではありません。");
+            if (!(manager.GetSubview(EmptySubviewName) is ElementsSubview elementsSubview)) throw new System.InvalidOperationException(
+                $"{EmptySubviewName} の Subview は {nameof(ElementsSubview)} ではありません。");
 
-            elementsSubView.PlayObject(value);
+            elementsSubview.PlayObject(value);
         }
     }
 }

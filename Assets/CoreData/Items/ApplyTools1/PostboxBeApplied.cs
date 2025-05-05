@@ -58,7 +58,7 @@ namespace Roguegard
         {
             private readonly DialogViewTemplate<MMgr, MArg> view = new()
             {
-                DialogSubViewName = StandardSubViewTable.WidgetsName,
+                DialogSubviewName = StandardSubviewTable.WidgetsName,
             };
 
             public override void OpenScreen(in MMgr manager, in MArg arg)

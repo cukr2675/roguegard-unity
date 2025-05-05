@@ -25,22 +25,22 @@ namespace Roguegard
                 SelectOption.Create<MMgr, MArg>("閉じる", Back),
             };
 
-            private IElementsSubViewStateProvider stateProvider;
+            private IElementsSubviewStateProvider stateProvider;
 
             public override void OpenScreen(in MMgr manager, in MArg arg)
             {
                 var memo = arg.Arg.Tool;
                 var text = NotepadInfo.GetText(memo);
 
-                var textEditor = RoguegardSubViews.GetTextEditor(manager);
+                var textEditor = RoguegardSubviews.GetTextEditor(manager);
                 textEditor.Text = text;
                 textEditor.Show();
-                manager.StandardSubViewTable.BackAnchor.Show(backAnchor, SelectOptionHandler.Instance, manager, arg, ref stateProvider);
+                manager.StandardSubviewTable.BackAnchor.Show(backAnchor, SelectOptionHandler.Instance, manager, arg, ref stateProvider);
             }
 
             private static void Back(MMgr manager, MArg arg)
             {
-                var textEditor = RoguegardSubViews.GetTextEditor(manager);
+                var textEditor = RoguegardSubviews.GetTextEditor(manager);
                 NotepadInfo.SetTo(arg.Arg.Tool, textEditor.Text);
                 manager.Done();
             }

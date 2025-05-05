@@ -104,7 +104,7 @@ namespace RoguegardUnity
 
                 view = new()
                 {
-                    PrimaryCommandSubViewName = MenuController.TitleMenuName,
+                    PrimaryCommandSubviewName = MenuController.TitleMenuName,
                 };
             }
 
@@ -156,7 +156,7 @@ namespace RoguegardUnity
             {
                 view = new()
                 {
-                    ScrollSubViewName = RoguegardSubViews.CharacterCreation,
+                    ScrollSubviewName = RoguegardSubviews.CharacterCreation,
                     BackAnchorList = new()
                     {
                         // プリセット読み込みボタン（OpenScreen で設定）
@@ -172,7 +172,7 @@ namespace RoguegardUnity
             public override void OpenScreen(in MMgr manager, in MArg arg)
             {
                 // プリセット読み込みボタンを設定する
-                var characterCreation = RoguegardSubViews.GetCharacterCreation(manager);
+                var characterCreation = RoguegardSubviews.GetCharacterCreation(manager);
                 view.BackAnchorList[0] = characterCreation.LoadPresetOption;
 
                 view.ShowTemplate(System.Array.Empty<object>(), manager, arg)
@@ -281,7 +281,7 @@ namespace RoguegardUnity
             {
                 private readonly DialogViewTemplate<MMgr, MArg> view = new()
                 {
-                    DialogSubViewName = StandardSubViewTable.WidgetsName,
+                    DialogSubviewName = StandardSubviewTable.WidgetsName,
                 };
 
                 public override void OpenScreen(in MMgr manager, in MArg arg)

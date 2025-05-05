@@ -12,17 +12,17 @@ namespace Lysionium
     public class InputFieldViewWidget : ViewWidget, ISelectHandler
     {
         private IWidgetOption widgetOption;
-        private ElementsSubViewBase _parent;
+        private ElementsSubviewBase _parent;
         private TMP_InputField inputField;
         private bool queuedDeactivateInputField;
 
         public override string WidgetName => widgetOption.Name;
-        protected override ElementsSubViewBase Parent => _parent;
+        protected override ElementsSubviewBase Parent => _parent;
 
         public delegate string HandleValueChanged<TMgr, TArg>(TMgr manager, TArg arg, string value);
 
         public override bool TryInstantiateWidget(
-            object element, IElementHandler handler, ElementsSubViewBase elementsSubView, out ViewWidget viewWidget)
+            object element, IElementHandler handler, ElementsSubviewBase elementsSubview, out ViewWidget viewWidget)
         {
             if (!(element is IWidgetOption widgetOption))
             {
@@ -31,7 +31,7 @@ namespace Lysionium
             }
 
             var inputFieldViewWidget = Instantiate(this);
-            inputFieldViewWidget._parent = elementsSubView;
+            inputFieldViewWidget._parent = elementsSubview;
             inputFieldViewWidget.widgetOption = widgetOption;
             inputFieldViewWidget.inputField = inputFieldViewWidget.GetComponent<TMP_InputField>();
             inputFieldViewWidget.Initialize();

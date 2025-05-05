@@ -124,7 +124,7 @@ namespace Roguegard.Rgpacks.MoonSharp
 
             public static bool isOpened;
 
-            private IElementsSubViewStateProvider faceStateProvider;
+            private IElementsSubviewStateProvider faceStateProvider;
 
             public override bool IsIncremental => true;
 
@@ -132,20 +132,20 @@ namespace Roguegard.Rgpacks.MoonSharp
             {
                 if (!isOpened)
                 {
-                    manager.StandardSubViewTable.SpeechBox.MessageBox.Clear();
+                    manager.StandardSubviewTable.SpeechBox.MessageBox.Clear();
                     isOpened = true;
                 }
 
-                manager.StandardSubViewTable.SpeechBox.MessageBox.Append(message);
-                manager.StandardSubViewTable.SpeechBox.Show();
+                manager.StandardSubviewTable.SpeechBox.MessageBox.Append(message);
+                manager.StandardSubviewTable.SpeechBox.Show();
 
                 var showFace = arg.Arg.TargetObj != null;
                 if (showFace)
                 {
-                    RoguegardSubViews.GetFace(manager).Show(null, null, manager, arg, ref faceStateProvider);
+                    RoguegardSubviews.GetFace(manager).Show(null, null, manager, arg, ref faceStateProvider);
                 }
 
-                manager.StandardSubViewTable.SpeechBox.DoScheduledAfterCompletion((iManager, iArg) =>
+                manager.StandardSubviewTable.SpeechBox.DoScheduledAfterCompletion((iManager, iArg) =>
                 {
                     try
                     {
@@ -165,10 +165,10 @@ namespace Roguegard.Rgpacks.MoonSharp
 
                         // スピーチボックスと顔グラフィックは表示したままにする
                         manager.ResetDone();
-                        manager.StandardSubViewTable.SpeechBox.Show();
+                        manager.StandardSubviewTable.SpeechBox.Show();
                         if (showFace)
                         {
-                            RoguegardSubViews.GetFace(manager).Show();
+                            RoguegardSubviews.GetFace(manager).Show();
                         }
                     }
                     else
@@ -176,8 +176,8 @@ namespace Roguegard.Rgpacks.MoonSharp
                         // 次のアニメーションやメニューがない場合はスピーチボックスを閉じる
 
                         // AdvanceText のリセット用に VerticalArrow が余分に必要
-                        manager.StandardSubViewTable.SpeechBox.MessageBox.Append("<link=\"VerticalArrow\"></link><link=\"VerticalArrow\"></link>");
-                        manager.StandardSubViewTable.SpeechBox.DoScheduledAfterCompletion((iManager, arg) =>
+                        manager.StandardSubviewTable.SpeechBox.MessageBox.Append("<link=\"VerticalArrow\"></link><link=\"VerticalArrow\"></link>");
+                        manager.StandardSubviewTable.SpeechBox.DoScheduledAfterCompletion((iManager, arg) =>
                         {
                             var manager = (MMgr)iManager;
                             manager.Done();
@@ -189,7 +189,7 @@ namespace Roguegard.Rgpacks.MoonSharp
 
             public override void CloseScreenView(MMgr manager, bool back)
             {
-                manager.StandardSubViewTable.MessageBox.Hide(back);
+                manager.StandardSubviewTable.MessageBox.Hide(back);
             }
         }
 
@@ -201,7 +201,7 @@ namespace Roguegard.Rgpacks.MoonSharp
 
             private readonly CommandListViewTemplate<string, MMgr, MArg> view = new()
             {
-                SecodaryCommandSubViewName = StandardSubViewTable.ChoicesName,
+                SecodaryCommandSubviewName = StandardSubviewTable.ChoicesName,
             };
 
             public override bool IsIncremental => true;
@@ -213,7 +213,7 @@ namespace Roguegard.Rgpacks.MoonSharp
                     .OnClick((selectOption, manager, arg) =>
                     {
                         manager.Done();
-                        manager.StandardSubViewTable.SpeechBox.MessageBox.Clear();
+                        manager.StandardSubviewTable.SpeechBox.MessageBox.Clear();
                         args[0] = DynValue.NewNumber(selectOptions.IndexOf(selectOption) + 1);
                         try
                         {

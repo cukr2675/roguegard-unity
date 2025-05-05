@@ -233,13 +233,13 @@ namespace Roguegard
                 }
                 var showsSplitLine = boneSprite.ShowsSplitLine(elms[0], out pivots[0], out pivots[1]);
 
-                var paint = RoguegardSubViews.GetPaint(manager);
+                var paint = RoguegardSubviews.GetPaint(manager);
                 paint.SetPaint(elms, table.Palette, table.MainColor, showsSplitLine, pivots);
                 paint.Show();
 
-                IElementsSubViewStateProvider stateProvider = null;
+                IElementsSubviewStateProvider stateProvider = null;
                 manager
-                    .GetSubView(StandardSubViewTable.BackAnchorName)
+                    .GetSubview(StandardSubviewTable.BackAnchorName)
                     .Show(back, SelectOptionHandler.Instance, manager, arg, ref stateProvider);
             }
 
@@ -248,7 +248,7 @@ namespace Roguegard
                 var table = (PaintBoneSpriteTable)arg.Arg.Other;
                 var itemIndex = arg.Arg.Count;
                 var boneSprite = (PaintBoneSprite)table.Items[itemIndex];
-                var paint = RoguegardSubViews.GetPaint(manager);
+                var paint = RoguegardSubviews.GetPaint(manager);
                 switch (directionIndex)
                 {
                     case 0:

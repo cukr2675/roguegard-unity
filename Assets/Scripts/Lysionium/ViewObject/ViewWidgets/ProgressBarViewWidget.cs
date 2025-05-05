@@ -13,15 +13,15 @@ namespace Lysionium
         [SerializeField] private string _fillAmountFloat = null;
 
         private IWidgetOption widgetOption;
-        private ElementsSubViewBase _parent;
+        private ElementsSubviewBase _parent;
         private Animator animator;
 
-        protected override ElementsSubViewBase Parent => _parent;
+        protected override ElementsSubviewBase Parent => _parent;
 
         public delegate float GetProgress<TMgr, TArg>(TMgr manager, TArg arg);
 
         public override bool TryInstantiateWidget(
-            object element, IElementHandler handler, ElementsSubViewBase elementsSubView, out ViewWidget viewWidget)
+            object element, IElementHandler handler, ElementsSubviewBase elementsSubview, out ViewWidget viewWidget)
         {
             if (!(element is IWidgetOption widgetOption))
             {
@@ -30,7 +30,7 @@ namespace Lysionium
             }
 
             var progressBarViewWidget = Instantiate(this);
-            progressBarViewWidget._parent = elementsSubView;
+            progressBarViewWidget._parent = elementsSubview;
             progressBarViewWidget.widgetOption = widgetOption;
             progressBarViewWidget.animator = progressBarViewWidget.GetComponent<Animator>();
             viewWidget = progressBarViewWidget;

@@ -10,27 +10,27 @@ namespace RoguegardUnity
 {
     public class MessageController
     {
-        private readonly MessageBoxSubView messageSubView;
-        private readonly MessageBoxSubView logSubView;
+        private readonly MessageBoxSubview messageSubview;
+        private readonly MessageBoxSubview logSubview;
 
         private bool messageBoxIsVisible;
         private int showMessageTime;
         private const int messageTime = 3 * 60;
 
-        public MessageController(StandardSubViewTable table)
+        public MessageController(StandardSubviewTable table)
         {
-            messageSubView = table.MessageBox;
-            logSubView = table.LongMessage;
+            messageSubview = table.MessageBox;
+            logSubview = table.LongMessage;
         }
 
         internal void UpdateUI(int deltaTime)
         {
-            if (messageBoxIsVisible && !messageSubView.MessageBox.IsInProgress)
+            if (messageBoxIsVisible && !messageSubview.MessageBox.IsInProgress)
             {
                 showMessageTime += deltaTime;
                 if (showMessageTime >= messageTime)
                 {
-                    messageSubView.Hide(false);
+                    messageSubview.Hide(false);
                     messageBoxIsVisible = false;
                 }
             }
@@ -38,14 +38,14 @@ namespace RoguegardUnity
 
         public void ShowMessage()
         {
-            messageSubView.Show();
+            messageSubview.Show();
             messageBoxIsVisible = true;
         }
 
         private void AppendText(string text)
         {
-            messageSubView.MessageBox.Append(text);
-            logSubView.MessageBox.Append(text);
+            messageSubview.MessageBox.Append(text);
+            logSubview.MessageBox.Append(text);
             showMessageTime = 0;
             ShowMessage();
         }
@@ -110,8 +110,8 @@ namespace RoguegardUnity
 
         public void ClearText()
         {
-            messageSubView.MessageBox.Clear();
-            logSubView.MessageBox.Clear();
+            messageSubview.MessageBox.Clear();
+            logSubview.MessageBox.Clear();
         }
     }
 }

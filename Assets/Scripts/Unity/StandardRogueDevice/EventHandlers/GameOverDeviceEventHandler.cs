@@ -63,8 +63,8 @@ namespace RoguegardUnity
         {
             private readonly MainMenuViewTemplate<MMgr, MArg> view = new()
             {
-                PrimaryCommandSubViewName = StandardSubViewTable.LongMessageName,
-                BackAnchorSubViewName = StandardSubViewTable.ForwardAnchorName,
+                PrimaryCommandSubviewName = StandardSubviewTable.LongMessageName,
+                BackAnchorSubviewName = StandardSubviewTable.ForwardAnchorName,
                 BackAnchorList = new List<ISelectOption>() { SelectOption.Create<MMgr, MArg>("OK", new NextMenu()) },
             };
 
@@ -82,7 +82,7 @@ namespace RoguegardUnity
                 {
                     // リザルト表示 → ロビーへ帰還
                     var player = arg.Self;
-                    var summary = RoguegardSubViews.GetSummary(manager);
+                    var summary = RoguegardSubviews.GetSummary(manager);
                     summary.SetGameOver(player, arg.Arg.TargetObj, manager);
                     summary.Show();
                 }
