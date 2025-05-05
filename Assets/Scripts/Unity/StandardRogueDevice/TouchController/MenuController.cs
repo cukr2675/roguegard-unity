@@ -104,6 +104,19 @@ namespace RoguegardUnity
             return base.GetSubview(subviewName);
         }
 
+        protected override void BlockAll()
+        {
+            base.BlockAll();
+            _stats.SetInteractable(false);
+            _face.SetInteractable(false);
+            _summary.SetInteractable(false);
+            _textEditor.SetInteractable(false);
+            _characterCreation.SetInteractable(false);
+            _paint.SetInteractable(false);
+            _dopesheet.SetInteractable(false);
+            if (_titleMenu != null) { _titleMenu.SetInteractable(false); }
+        }
+
         public override void HideAll(bool back = false)
         {
             base.HideAll(back);

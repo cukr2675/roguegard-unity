@@ -68,6 +68,14 @@ namespace Lysionium
             return StandardSubviewTable.Subviews[subviewName];
         }
 
+        protected virtual void BlockAll()
+        {
+            foreach (var subview in StandardSubviewTable.Subviews.Values)
+            {
+                subview.SetInteractable(false);
+            }
+        }
+
         public virtual void HideAll(bool back = false)
         {
             foreach (var subview in StandardSubviewTable.Subviews.Values)
@@ -79,14 +87,6 @@ namespace Lysionium
         public virtual string Localize(string text) => text?.Normalize(System.Text.NormalizationForm.FormC); // TextMeshPro のために NFD を NFC に正規化する
 
         public virtual T Localize<T>(T obj) => obj;
-
-        private void BlockAll()
-        {
-            foreach (var subview in StandardSubviewTable.Subviews.Values)
-            {
-                subview.SetInteractable(false);
-            }
-        }
 
         /// <summary>
         /// メニューを指定の画面へ進める
