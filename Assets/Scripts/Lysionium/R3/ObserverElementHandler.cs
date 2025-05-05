@@ -6,7 +6,7 @@ using R3;
 
 namespace Lysionium.R3
 {
-    public interface IObserverElementHandler : IElementHandler
+    internal interface IObserverElementHandler : IElementHandler
     {
         void OnNext(object element, IListMenuManager manager, IListMenuArg arg, R3RuleContext ctx);
 
@@ -21,7 +21,7 @@ namespace Lysionium.R3
         }
     }
 
-    public class ObserverElementHandler : IObserverElementHandler, System.IDisposable
+    internal class ObserverElementHandler : IObserverElementHandler, System.IDisposable
     {
         public Subject<R3RuleArg<object, IListMenuManager, IListMenuArg, object, object>> Subject { get; } = new();
 
@@ -36,7 +36,7 @@ namespace Lysionium.R3
         }
     }
 
-    public static class GetNameExtension
+    internal static class GetNameExtension
     {
         private static Context ctx = new();
 
@@ -66,7 +66,7 @@ namespace Lysionium.R3
         private class Context : R3RuleContext<string> { }
     }
 
-    public static class OnClickExtension
+    internal static class OnClickExtension
     {
         private static Context ctx = new();
 
