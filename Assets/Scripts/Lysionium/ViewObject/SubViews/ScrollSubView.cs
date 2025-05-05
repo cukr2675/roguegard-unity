@@ -17,7 +17,6 @@ namespace Lysionium
         [Tooltip("カーソル移動に合わせてスクロールする速さ")]
         [SerializeField] private float _elasticityToCursor = 0.2f;
 
-        private bool isInitialized;
         private float itemHeight;
 
         private IElementHandler handler;
@@ -47,11 +46,8 @@ namespace Lysionium
             }
         }
 
-        public void Initialize()
+        protected override void CommonInitCore()
         {
-            LUIAssert.NotInitialized(this, isInitialized);
-            isInitialized = true;
-
             itemHeight = _viewElementPrefab.GetComponent<RectTransform>().rect.height;
             _scrollRect.onValueChanged.AddListener((x) => UpdateElements());
             _scrollRect.horizontal = false;

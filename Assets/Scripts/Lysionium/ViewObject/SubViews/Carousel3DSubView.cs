@@ -24,7 +24,6 @@ namespace Lysionium
         [Tooltip("指定のインデックスまで回転する速さ")]
         [SerializeField] private float _elasticity = 0.2f;
 
-        private bool isInitialized;
         private float itemHeight;
 
         private IElementHandler handler;
@@ -48,12 +47,10 @@ namespace Lysionium
 
         private event HandleEndAnimation OnEndRotateAngle;
 
-        public void Initialize()
+        protected override void CommonInitCore()
         {
-            LUIAssert.NotInitialized(this, isInitialized);
             itemHeight = _viewElementPrefab.GetComponent<RectTransform>().rect.height;
             beforeAngleDegree = -1f;
-            isInitialized = true;
 
             if (_prevButton != null)
             {

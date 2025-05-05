@@ -19,16 +19,12 @@ namespace Lysionium
         [Space, SerializeField] private StartSpeechEvent _onStartSpeech = null;
         [Space, SerializeField] private EndSpeechEvent _onEndSpeech = null;
 
-        private bool isInitialized;
         private bool isSpeechingNow;
 
         private event HandleEndAnimation OnCompleted;
 
-        public void Initialize()
+        protected override void CommonInitCore()
         {
-            LUIAssert.NotInitialized(this, isInitialized);
-            isInitialized = true;
-
             _messageBox.OnReachHiddenLink.AddListener(hiddenLinkId =>
             {
                 if (hiddenLinkId != _messageBox.HiddenLinkIdOnEof) return;

@@ -55,7 +55,7 @@ namespace RoguegardUnity
         {
             BackOption = SelectOption.Create<MMgr, MArg>("<", (manager, arg) => manager.PopMenuScreen(), "Cancel click:Cancel");
 
-            Initialize();
+            CommonInit();
             var objCommandMenu = new ObjCommandMenu();
             var putInCommandMenu = new PutIntoContainerCommandMenu();
             var takeOutCommandMenu = new TakeOutOfContainerCommandMenu();

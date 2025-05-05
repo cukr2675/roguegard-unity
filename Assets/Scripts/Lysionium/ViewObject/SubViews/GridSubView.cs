@@ -28,17 +28,12 @@ namespace Lysionium
         [Tooltip("この値が true のときカーソル移動の対象となる")]
         [SerializeField] private bool _isSelectable = true;
 
-        private bool isInitialized;
-
         private IElementHandler handler;
         private readonly List<ViewElement> viewElements = new();
         private StateProvider currentStateProvider;
 
-        public void Initialize()
+        protected override void CommonInitCore()
         {
-            LUIAssert.NotInitialized(this, isInitialized);
-            isInitialized = true;
-
             var contentRectTransform = (RectTransform)_content.transform;
             var rect = contentRectTransform.rect;
             itemSize = rect.size / _viewElementCount;

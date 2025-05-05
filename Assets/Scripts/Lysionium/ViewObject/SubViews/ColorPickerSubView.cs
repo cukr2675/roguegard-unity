@@ -15,18 +15,14 @@ namespace Lysionium
         public ColorPicker ColorPicker => _colorPicker;
         [SerializeField] private Button _closeButton = null;
         [SerializeField] private Selectable _initialSelectable = null;
-        private bool isInitialized;
 
         private HandleClose handleClose;
         private StateProvider currentStateProvider;
 
         public delegate void HandleClose(IListMenuManager manager, IListMenuArg arg, Color color);
 
-        public void Initialize()
+        protected override void CommonInitCore()
         {
-            LUIAssert.NotInitialized(this, isInitialized);
-            isInitialized = true;
-
             _closeButton.onClick.AddListener(() => handleClose?.Invoke(Manager, Arg, _colorPicker.CurrentColor));
         }
 

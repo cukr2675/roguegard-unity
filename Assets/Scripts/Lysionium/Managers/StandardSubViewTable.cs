@@ -11,11 +11,11 @@ namespace Lysionium
     {
         [SerializeField] private Image _blocker = null;
 
-        [SerializeField] private ScrollSubView _scroll = null;
+        [SerializeField] private ElementsSubView _scroll = null;
         public IElementsSubView Scroll => _scroll;
         public static string ScrollName => "Scroll";
 
-        [SerializeField] private WidgetsSubView _widgets = null;
+        [SerializeField] private ElementsSubView _widgets = null;
         public IElementsSubView Widgets => _widgets;
         public static string WidgetsName => "Widgets";
 
@@ -23,31 +23,31 @@ namespace Lysionium
         public MessageBoxSubView LongMessage => _longMessage;
         public static string LongMessageName => "LongMessage";
 
-        [SerializeField] private GridSubView _backAnchor = null;
+        [SerializeField] private ElementsSubView _backAnchor = null;
         public IElementsSubView BackAnchor => _backAnchor;
         public static string BackAnchorName => "BackAnchor";
 
-        [SerializeField] private GridSubView _forwardAnchor = null;
+        [SerializeField] private ElementsSubView _forwardAnchor = null;
         public IElementsSubView ForwardAnchor => _forwardAnchor;
         public static string ForwardAnchorName => "ForwardAnchor";
 
-        [SerializeField] private GridSubView _primaryCommand = null;
+        [SerializeField] private ElementsSubView _primaryCommand = null;
         public IElementsSubView PrimaryCommand => _primaryCommand;
         public static string PrimaryCommandName => "PrimaryCommand";
 
-        [SerializeField] private GridSubView _captionBox = null;
+        [SerializeField] private ElementsSubView _captionBox = null;
         public IElementsSubView CaptionBox => _captionBox;
         public static string CaptionBoxName => "CaptionBox";
 
-        [SerializeField] private GridSubView _secondaryCommand = null;
+        [SerializeField] private ElementsSubView _secondaryCommand = null;
         public IElementsSubView SecondaryCommand => _secondaryCommand;
         public static string SecondaryCommandName => "SecondaryCommand";
 
-        [SerializeField] private WidgetsSubView _dialog = null;
+        [SerializeField] private ElementsSubView _dialog = null;
         public IElementsSubView Dialog => _dialog;
         public static string DialogName => "Dialog";
 
-        [SerializeField] private ColorPickerSubView _colorPicker = null;
+        [SerializeField] private ElementsSubView _colorPicker = null;
         public IElementsSubView ColorPicker => _colorPicker;
         public static string ColorPickerName => "ColorPicker";
 
@@ -55,11 +55,11 @@ namespace Lysionium
         public MessageBoxSubView MessageBox => _messageBox;
         public static string MessageBoxName => "MessageBox";
 
-        [SerializeField] private WidgetsSubView _fadeMask = null;
+        [SerializeField] private ElementsSubView _fadeMask = null;
         public IElementsSubView FadeMask => _fadeMask;
         public static string FadeMaskName => "FadeMask";
 
-        [SerializeField] private WidgetsSubView _overlay = null;
+        [SerializeField] private ElementsSubView _overlay = null;
         public IElementsSubView Overlay => _overlay;
         public static string OverlayName => "Overlay";
 
@@ -67,7 +67,7 @@ namespace Lysionium
         public MessageBoxSubView SpeechBox => _speechBox;
         public static string SpeechBoxName => "SpeechBox";
 
-        [SerializeField] private GridSubView _choices = null;
+        [SerializeField] private ElementsSubView _choices = null;
         public IElementsSubView Choices => _choices;
         public static string ChoicesName => "Choices";
 
@@ -90,22 +90,26 @@ namespace Lysionium
 
         private bool isInitialized;
 
-        public void Initialize()
+        public void CommonInit()
         {
             LUIAssert.NotInitialized(this, isInitialized);
             isInitialized = true;
 
-            _scroll.Initialize();
-            _longMessage.Initialize();
-            _backAnchor.Initialize();
-            _forwardAnchor.Initialize();
-            _primaryCommand.Initialize();
-            _captionBox.Initialize();
-            _secondaryCommand.Initialize();
-            _colorPicker.Initialize();
-            _messageBox.Initialize();
-            _speechBox.Initialize();
-            _choices.Initialize();
+            _scroll.CommonInit();
+            _widgets.CommonInit();
+            _longMessage.CommonInit();
+            _backAnchor.CommonInit();
+            _forwardAnchor.CommonInit();
+            _primaryCommand.CommonInit();
+            _captionBox.CommonInit();
+            _secondaryCommand.CommonInit();
+            _dialog.CommonInit();
+            _colorPicker.CommonInit();
+            _messageBox.CommonInit();
+            _fadeMask.CommonInit();
+            _overlay.CommonInit();
+            _speechBox.CommonInit();
+            _choices.CommonInit();
 
             SubViews = new Dictionary<string, ElementsSubView>()
             {

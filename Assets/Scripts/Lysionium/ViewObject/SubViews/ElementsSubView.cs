@@ -35,7 +35,18 @@ namespace Lysionium
             }
         }
 
+        private bool isInitialized;
+
         private const int backStatusCode = 1;
+
+        public void CommonInit()
+        {
+            LUIAssert.NotInitialized(this, isInitialized);
+            isInitialized = true;
+            CommonInitCore();
+        }
+
+        protected virtual void CommonInitCore() { }
 
         public abstract void SetParameters(
             IReadOnlyList<object> list, IElementHandler handler, IListMenuManager manager, IListMenuArg arg,

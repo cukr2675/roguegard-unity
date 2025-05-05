@@ -7,7 +7,7 @@ namespace Lysionium
     [AddComponentMenu("UI/Lysionium/LUI Standard List Menu Manager")]
     public class StandardListMenuManager : StandardListMenuManager<StandardListMenuManager, IListMenuArg>
     {
-        public new void Initialize() => base.Initialize();
+        public void Initialize() => CommonInit();
     }
 
     [RequireComponent(typeof(StandardSubViewTable))]
@@ -38,10 +38,10 @@ namespace Lysionium
         /// </summary>
         protected virtual bool HasManagerLock => StandardSubViewTable.HasManagerLock;
 
-        protected void Initialize()
+        protected void CommonInit()
         {
             StandardSubViewTable = GetComponent<StandardSubViewTable>();
-            StandardSubViewTable.Initialize();
+            StandardSubViewTable.CommonInit();
             HideAll();
         }
 
