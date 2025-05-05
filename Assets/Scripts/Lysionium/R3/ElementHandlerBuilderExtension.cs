@@ -9,9 +9,9 @@ namespace Lysionium.R3
     public static class ElementHandlerBuilderExtension
     {
         public static TOut R3<TElm, TMgr, TArg, TOut>(
-            this IElementHandlerBuilder<TElm, TMgr, TArg, TOut> builder, out Subject<LUIR3Arg<TElm, TMgr, TArg, TOut, TElm>> subject)
+            this IElementHandlerBuilder<TElm, TMgr, TArg, TOut> builder, out Subject<R3RuleArg<TElm, TMgr, TArg, TOut, TElm>> subject)
         {
-            subject = new Subject<LUIR3Arg<TElm, TMgr, TArg, TOut, TElm>>();
+            subject = new Subject<R3RuleArg<TElm, TMgr, TArg, TOut, TElm>>();
             SubscribeElementHandler(builder, subject);
 
             if (builder is IButtonElementHandlerBuilder<TElm, TMgr, TArg, TOut> buttonsBuilder)
@@ -22,56 +22,56 @@ namespace Lysionium.R3
             return (TOut)builder;
         }
 
-        public static LUIR3HandledObservable<TElm, TMgr, TArg, TBuilder, TValue> Handle<TElm, TMgr, TArg, TBuilder, TValue>(
-            this Observable<LUIR3Arg<TElm, TMgr, TArg, TBuilder, TValue>> observable)
+        public static ObservedHandlerSubject<TElm, TMgr, TArg, TBuilder, TValue> Handle<TElm, TMgr, TArg, TBuilder, TValue>(
+            this Observable<R3RuleArg<TElm, TMgr, TArg, TBuilder, TValue>> source)
         {
-            return LUIR3HandledObservable<TElm, TMgr, TArg, TBuilder, TValue>.Handle(observable, true);
+            return ObservedHandlerSubject<TElm, TMgr, TArg, TBuilder, TValue>.Handle(source, true);
         }
 
-        public static LUIR3HandledObservable<TElm, TMgr, TArg, TBuilder, TValue> WithoutHandle<TElm, TMgr, TArg, TBuilder, TValue>(
-            this Observable<LUIR3Arg<TElm, TMgr, TArg, TBuilder, TValue>> observable)
+        public static ObservedHandlerSubject<TElm, TMgr, TArg, TBuilder, TValue> WithoutHandle<TElm, TMgr, TArg, TBuilder, TValue>(
+            this Observable<R3RuleArg<TElm, TMgr, TArg, TBuilder, TValue>> source)
         {
-            return LUIR3HandledObservable<TElm, TMgr, TArg, TBuilder, TValue>.Handle(observable, false);
+            return ObservedHandlerSubject<TElm, TMgr, TArg, TBuilder, TValue>.Handle(source, false);
         }
 
-        public static Observable<LUIR3Arg<TElm, TMgr, TArg, TBuilder, TValue>> NotHandled<TElm, TMgr, TArg, TBuilder, TValue>(
-            this Observable<LUIR3Arg<TElm, TMgr, TArg, TBuilder, TValue>> observable)
+        public static Observable<R3RuleArg<TElm, TMgr, TArg, TBuilder, TValue>> NotHandled<TElm, TMgr, TArg, TBuilder, TValue>(
+            this Observable<R3RuleArg<TElm, TMgr, TArg, TBuilder, TValue>> source)
         {
-            return observable.Where(x => !x.Info.IsHandled);
+            return source.Where(x => !x.Ctx.IsHandled);
         }
 
-        internal static Observable<LUIR3Arg<TElm, TMgr, TArg, TBuilder, TValue>> Fallback<TElm, TMgr, TArg, TBuilder, TValue>(
-            this Observable<LUIR3Arg<TElm, TMgr, TArg, TBuilder, TValue>> observable)
+        internal static Observable<R3RuleArg<TElm, TMgr, TArg, TBuilder, TValue>> Fallback<TElm, TMgr, TArg, TBuilder, TValue>(
+            this Observable<R3RuleArg<TElm, TMgr, TArg, TBuilder, TValue>> source)
         {
-            return observable.Where(x => ((LUIR3Info<object>)x.Info).ReturnValue == null);
+            return source.Where(x => ((R3RuleContext<object>)x.Ctx).ReturnValue == null);
         }
 
-        public static Observable<LUIR3Arg<TElm, TMgr, TArg, TBuilder, TValue>> Where<TElm, TMgr, TArg, TBuilder, TValue>(
-            this Observable<LUIR3Arg<TElm, TMgr, TArg, TBuilder, TValue>> observable, System.Func<TValue, TMgr, TArg, bool> predicate)
+        public static Observable<R3RuleArg<TElm, TMgr, TArg, TBuilder, TValue>> Where<TElm, TMgr, TArg, TBuilder, TValue>(
+            this Observable<R3RuleArg<TElm, TMgr, TArg, TBuilder, TValue>> source, System.Func<TValue, TMgr, TArg, bool> predicate)
         {
-            return observable.Where(x => predicate(x.Value, x.Manager, x.Arg));
+            return source.Where(x => predicate(x.Value, x.Manager, x.Arg));
         }
 
-        public static Observable<LUIR3Arg<TElm, TMgr, TArg, TBuilder, TValue>> WhereElm<TElm, TMgr, TArg, TBuilder, TValue>(
-            this Observable<LUIR3Arg<TElm, TMgr, TArg, TBuilder, TValue>> observable, System.Func<TValue, bool> predicate)
+        public static Observable<R3RuleArg<TElm, TMgr, TArg, TBuilder, TValue>> WhereElm<TElm, TMgr, TArg, TBuilder, TValue>(
+            this Observable<R3RuleArg<TElm, TMgr, TArg, TBuilder, TValue>> source, System.Func<TValue, bool> predicate)
         {
-            return observable.Where(x => predicate(x.Value));
+            return source.Where(x => predicate(x.Value));
         }
 
-        public static Observable<LUIR3Arg<TElm, TMgr, TArg, TBuilder, TOutValue>> Select<TElm, TMgr, TArg, TBuilder, TInValue, TOutValue>(
-            this Observable<LUIR3Arg<TElm, TMgr, TArg, TBuilder, TInValue>> observable, System.Func<TInValue, TMgr, TArg, TOutValue> selector)
+        public static Observable<R3RuleArg<TElm, TMgr, TArg, TBuilder, TOutValue>> Select<TElm, TMgr, TArg, TBuilder, TInValue, TOutValue>(
+            this Observable<R3RuleArg<TElm, TMgr, TArg, TBuilder, TInValue>> source, System.Func<TInValue, TMgr, TArg, TOutValue> selector)
         {
-            return observable.Select(x =>
+            return source.Select(x =>
             {
                 var value = selector(x.Value, x.Manager, x.Arg);
                 return x.SetValue(value);
             });
         }
 
-        public static Observable<LUIR3Arg<TElm, TMgr, TArg, TBuilder, TOutValue>> SelectElm<TElm, TMgr, TArg, TBuilder, TInValue, TOutValue>(
-            this Observable<LUIR3Arg<TElm, TMgr, TArg, TBuilder, TInValue>> observable, System.Func<TInValue, TOutValue> selector)
+        public static Observable<R3RuleArg<TElm, TMgr, TArg, TBuilder, TOutValue>> SelectElm<TElm, TMgr, TArg, TBuilder, TInValue, TOutValue>(
+            this Observable<R3RuleArg<TElm, TMgr, TArg, TBuilder, TInValue>> source, System.Func<TInValue, TOutValue> selector)
         {
-            return observable.Select(x =>
+            return source.Select(x =>
             {
                 var value = selector(x.Value);
                 return x.SetValue(value);
@@ -81,25 +81,25 @@ namespace Lysionium.R3
 
 
         public static TOut SubscribeElementHandler<TElm, TMgr, TArg, TOut>(
-            this IElementHandlerBuilder<TElm, TMgr, TArg, TOut> builder, Subject<LUIR3Arg<TElm, TMgr, TArg, TOut, TElm>> subject)
+            this IElementHandlerBuilder<TElm, TMgr, TArg, TOut> builder, Subject<R3RuleArg<TElm, TMgr, TArg, TOut, TElm>> subject)
         {
             if (builder == null) throw new System.ArgumentNullException(nameof(builder));
             if (subject == null) throw new System.ArgumentNullException(nameof(subject));
 
-            var nameFromInfo = new NameFromInfo();
+            var nameFromCtx = new NameFromContext();
             builder.NameFrom((element, manager, arg) =>
             {
-                using var _ = nameFromInfo.OpenSelf();
-                subject.OnNext(new LUIR3Arg<TElm, TMgr, TArg, TOut, TElm>(element, manager, arg, nameFromInfo));
-                return nameFromInfo.ReturnValue;
+                using var _ = nameFromCtx.OpenSelf();
+                subject.OnNext(new R3RuleArg<TElm, TMgr, TArg, TOut, TElm>(element, manager, arg, nameFromCtx));
+                return nameFromCtx.ReturnValue;
             });
 
-            var styleFromInfo = new StyleFromInfo();
+            var styleFromCtx = new StyleFromContext();
             builder.StyleFrom((element, manager, arg) =>
             {
-                using var _ = styleFromInfo.OpenSelf();
-                subject.OnNext(new LUIR3Arg<TElm, TMgr, TArg, TOut, TElm>(element, manager, arg, styleFromInfo));
-                return styleFromInfo.ReturnValue;
+                using var _ = styleFromCtx.OpenSelf();
+                subject.OnNext(new R3RuleArg<TElm, TMgr, TArg, TOut, TElm>(element, manager, arg, styleFromCtx));
+                return styleFromCtx.ReturnValue;
             });
 
             return (TOut)builder;
@@ -108,78 +108,69 @@ namespace Lysionium.R3
         /// <summary>
         /// 暗黙の Handle() 呼び出し
         /// </summary>
-        public static LUIR3HandledObservable<TElm, TMgr, TArg, TBuilder, TValue> NameFrom<TElm, TMgr, TArg, TBuilder, TValue>(
-            this Observable<LUIR3Arg<TElm, TMgr, TArg, TBuilder, TValue>> observable, GetElementName<TValue, TMgr, TArg> nameFrom)
+        public static ObservedHandlerSubject<TElm, TMgr, TArg, TBuilder, TValue> NameFrom<TElm, TMgr, TArg, TBuilder, TValue>(
+            this Observable<R3RuleArg<TElm, TMgr, TArg, TBuilder, TValue>> source, GetElementName<TValue, TMgr, TArg> nameFrom)
             where TBuilder : IElementHandlerBuilder<TElm, TMgr, TArg, TBuilder>
-            => observable.Handle().NameFrom(nameFrom);
+            => source.Handle().NameFrom(nameFrom);
 
-        public static LUIR3HandledObservable<TElm, TMgr, TArg, TBuilder, TValue> NameFrom<TElm, TMgr, TArg, TBuilder, TValue>(
-            this LUIR3HandledObservable<TElm, TMgr, TArg, TBuilder, TValue> observable, GetElementName<TValue, TMgr, TArg> nameFrom)
+        public static ObservedHandlerSubject<TElm, TMgr, TArg, TBuilder, TValue> NameFrom<TElm, TMgr, TArg, TBuilder, TValue>(
+            this ObservedHandlerSubject<TElm, TMgr, TArg, TBuilder, TValue> source, GetElementName<TValue, TMgr, TArg> nameFrom)
             where TBuilder : IElementHandlerBuilder<TElm, TMgr, TArg, TBuilder>
         {
-            if (observable == null) throw new System.ArgumentNullException(nameof(observable));
+            if (source == null) throw new System.ArgumentNullException(nameof(source));
             if (nameFrom == null) throw new System.ArgumentNullException(nameof(nameFrom));
 
-            observable.Add(
-                _ => _
-                .Where(x => x.Info is NameFromInfo)
-                .Subscribe(x =>
-                {
-                    ((NameFromInfo)x.Info).ReturnValue = nameFrom(x.Value, x.Manager, x.Arg);
-                }));
-            return observable;
+            source.SubscribeOf<NameFromContext>((value, manager, arg, ctx) =>
+            {
+                ctx.ReturnValue = nameFrom(value, manager, arg);
+            });
+            return source;
         }
 
         /// <summary>
         /// 暗黙の Handle() 呼び出し
         /// </summary>
-        public static LUIR3HandledObservable<TElm, TMgr, TArg, TBuilder, TValue> StyleFrom<TElm, TMgr, TArg, TBuilder, TValue>(
-            this Observable<LUIR3Arg<TElm, TMgr, TArg, TBuilder, TValue>> observable, GetElementName<TValue, TMgr, TArg> styleFrom)
+        public static ObservedHandlerSubject<TElm, TMgr, TArg, TBuilder, TValue> StyleFrom<TElm, TMgr, TArg, TBuilder, TValue>(
+            this Observable<R3RuleArg<TElm, TMgr, TArg, TBuilder, TValue>> source, GetElementName<TValue, TMgr, TArg> styleFrom)
             where TBuilder : IElementHandlerBuilder<TElm, TMgr, TArg, TBuilder>
-            => observable.Handle().StyleFrom(styleFrom);
+            => source.Handle().StyleFrom(styleFrom);
 
-        public static LUIR3HandledObservable<TElm, TMgr, TArg, TBuilder, TValue> StyleFrom<TElm, TMgr, TArg, TBuilder, TValue>(
-            this LUIR3HandledObservable<TElm, TMgr, TArg, TBuilder, TValue> observable, GetElementName<TValue, TMgr, TArg> styleFrom)
+        public static ObservedHandlerSubject<TElm, TMgr, TArg, TBuilder, TValue> StyleFrom<TElm, TMgr, TArg, TBuilder, TValue>(
+            this ObservedHandlerSubject<TElm, TMgr, TArg, TBuilder, TValue> source, GetElementName<TValue, TMgr, TArg> styleFrom)
             where TBuilder : IElementHandlerBuilder<TElm, TMgr, TArg, TBuilder>
         {
-            if (observable == null) throw new System.ArgumentNullException(nameof(observable));
+            if (source == null) throw new System.ArgumentNullException(nameof(source));
             if (styleFrom == null) throw new System.ArgumentNullException(nameof(styleFrom));
 
-            observable.Add(
-                _ => _
-                .Where(x => x.Info is StyleFromInfo)
-                .Subscribe(x =>
-                {
-                    ((StyleFromInfo)x.Info).ReturnValue = styleFrom(x.Value, x.Manager, x.Arg);
-                }));
-            return observable;
+            source.SubscribeOf<StyleFromContext>((value, manager, arg, ctx) =>
+            {
+                ctx.ReturnValue = styleFrom(value, manager, arg);
+            });
+            return source;
         }
 
         /// <summary>
         /// 暗黙の Handle() 呼び出し
         /// </summary>
-        public static LUIR3HandledObservable<TElm, TMgr, TArg, TBuilder, TValue> StyleFrom<TElm, TMgr, TArg, TBuilder, TValue>(
-            this Observable<LUIR3Arg<TElm, TMgr, TArg, TBuilder, TValue>> observable, string style)
+        public static ObservedHandlerSubject<TElm, TMgr, TArg, TBuilder, TValue> StyleFrom<TElm, TMgr, TArg, TBuilder, TValue>(
+            this Observable<R3RuleArg<TElm, TMgr, TArg, TBuilder, TValue>> source, string style)
             where TBuilder : IElementHandlerBuilder<TElm, TMgr, TArg, TBuilder>
-            => observable.Handle().StyleFrom(style);
+            => source.Handle().StyleFrom(style);
 
-        public static LUIR3HandledObservable<TElm, TMgr, TArg, TBuilder, TValue> StyleFrom<TElm, TMgr, TArg, TBuilder, TValue>(
-            this LUIR3HandledObservable<TElm, TMgr, TArg, TBuilder, TValue> observable, string style)
+        public static ObservedHandlerSubject<TElm, TMgr, TArg, TBuilder, TValue> StyleFrom<TElm, TMgr, TArg, TBuilder, TValue>(
+            this ObservedHandlerSubject<TElm, TMgr, TArg, TBuilder, TValue> source, string style)
             where TBuilder : IElementHandlerBuilder<TElm, TMgr, TArg, TBuilder>
         {
-            if (observable == null) throw new System.ArgumentNullException(nameof(observable));
+            if (source == null) throw new System.ArgumentNullException(nameof(source));
 
-            observable.Add(
-                _ => _
-                .Where(x => x.Info is StyleFromInfo)
-                .Subscribe(x =>
-                {
-                    ((StyleFromInfo)x.Info).ReturnValue = style;
-                }));
-            return observable;
+            source.SubscribeOf<StyleFromContext>((value, manager, arg, ctx) =>
+            {
+                ctx.ReturnValue = style;
+            });
+            return source;
         }
 
-        private class NameFromInfo : LUIR3Info<string> { }
-        private class StyleFromInfo : LUIR3Info<string> { }
+        private class NameFromContext : R3RuleContext<string> { }
+        private class StyleFromContext : R3RuleContext<string> { }
     }
 }

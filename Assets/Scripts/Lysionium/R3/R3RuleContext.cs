@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Lysionium.R3
 {
-    public abstract class LUIR3Info : System.IDisposable
+    public abstract class R3RuleContext : System.IDisposable
     {
         private bool isOpening;
         
@@ -13,7 +13,7 @@ namespace Lysionium.R3
         /// </summary>
         public bool IsHandled { get; private set; }
 
-        public virtual LUIR3Info OpenSelf()
+        public virtual R3RuleContext OpenSelf()
         {
             // 無限再帰対策
             if (isOpening) throw new System.InvalidOperationException($"{GetType()} はすでに開かれています。");
@@ -33,11 +33,11 @@ namespace Lysionium.R3
         }
     }
 
-    public abstract class LUIR3Info<T> : LUIR3Info
+    public abstract class R3RuleContext<T> : R3RuleContext
     {
         public T ReturnValue { get; set; }
 
-        public override LUIR3Info OpenSelf()
+        public override R3RuleContext OpenSelf()
         {
             base.OpenSelf();
             ReturnValue = default;
