@@ -47,12 +47,21 @@ namespace Lysionium.Audio.Editor
                 if (File.Exists(targetPath))
                 {
                     EditorUtility.SetDirty(target);
-                    AssetDatabase.ImportAsset(targetPath);
                 }
                 else
                 {
                     AssetDatabase.CreateAsset(target, targetPath);
                 }
+            }
+            {
+                // ダーティフラグを解除
+                foreach (var seed in _seeds)
+                {
+                    seed.ClearSeedIsDirty();
+                }
+
+                // 最後にまとめてインポート
+                AssetDatabase.ImportAsset(thisDirectory);
             }
         }
 

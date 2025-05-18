@@ -4,6 +4,7 @@ using UnityEngine;
 
 using System.IO;
 using System.Text;
+using System.Linq;
 using UnityEngine.Audio;
 using UnityEditor;
 
@@ -16,36 +17,71 @@ namespace Lysionium.Audio.Editor
 
         [SerializeField] private AudioPlayTable.PlayBehaviour _playBehaviour = AudioPlayTable.PlayBehaviour.SE;
 
+        [SerializeField] private bool _normalize = true;
+
+        [SerializeField] private bool _isDirty = true;
+
         [SerializeField] private Item[] _items = null;
+
+        public override void ClearSeedIsDirty()
+        {
+            _isDirty = false;
+            EditorUtility.SetDirty(this);
+        }
 
         public override AudioPlayTable.Item[] CreatePlayItems(string directory, int blankSamples)
         {
-            var result = new AudioPlayTable.Item[_items.Length];
-            for (int i = 0; i < _items.Length; i++)
+            if (_isDirty)
             {
-                // wavファイルを生成
-                var item = _items[i];
-                var audioClip = item.CreateAudioClip(blankSamples);
-                var targetPath = $@"{directory}\{item.PlayName}.g.wav";
-                SaveAsWav(audioClip, targetPath);
-                EditorUtility.SetDirty(audioClip);
-                AssetDatabase.ImportAsset(targetPath);
+                var result = new AudioPlayTable.Item[_items.Length];
+                for (int i = 0; i < _items.Length; i++)
+                {
+                    // wavファイルを生成
+                    var item = _items[i];
+                    var audioClip = item.CreateAudioClip(blankSamples);
+                    var targetPath = $@"{directory}\{item.PlayName}.g.wav";
+                    var created = !File.Exists(targetPath);
+                    SaveAsWav(audioClip, targetPath, _normalize);
+                    EditorUtility.SetDirty(audioClip);
+                    AssetDatabase.ImportAsset(targetPath);
 
-                // 実際に使用する AudioClip を取得
-                var resultItem = new AudioPlayTable.Item();
-                resultItem.PlayName = item.PlayName;
-                resultItem.AudioClip = AssetDatabase.LoadAssetAtPath<AudioClip>(targetPath);
-                resultItem.AudioMixerGroup = _audioMixerGroup;
-                resultItem.PlayBehaviour = _playBehaviour;
-                result[i] = resultItem;
+                    // 実際に使用する AudioClip を取得
+                    var resultItem = new AudioPlayTable.Item();
+                    resultItem.PlayName = item.PlayName;
+                    resultItem.AudioClip = AssetDatabase.LoadAssetAtPath<AudioClip>(targetPath);
+                    resultItem.AudioMixerGroup = _audioMixerGroup;
+                    resultItem.PlayBehaviour = _playBehaviour;
+                    result[i] = resultItem;
+                }
+                return result;
             }
-            return result;
+            else
+            {
+
+                var result = new AudioPlayTable.Item[_items.Length];
+                for (int i = 0; i < _items.Length; i++)
+                {
+                    var item = _items[i];
+                    var targetPath = $@"{directory}\{item.PlayName}.g.wav";
+
+                    // 実際に使用する AudioClip を取得
+                    var resultItem = new AudioPlayTable.Item();
+                    resultItem.PlayName = item.PlayName;
+                    resultItem.AudioClip = AssetDatabase.LoadAssetAtPath<AudioClip>(targetPath);
+                    if (resultItem.AudioClip == null) throw new System.Exception($"AudioClip ({targetPath}) が見つかりません。");
+                    resultItem.AudioMixerGroup = _audioMixerGroup;
+                    resultItem.PlayBehaviour = _playBehaviour;
+                    result[i] = resultItem;
+                }
+                return result;
+            }
         }
 
-        private static void SaveAsWav(AudioClip audioClip, string filePath)
+        private static void SaveAsWav(AudioClip audioClip, string filePath, bool normalize)
         {
             var samples = new float[audioClip.samples * audioClip.channels];
             audioClip.GetData(samples, 0);
+            var peak = samples.Max(sample => Mathf.Abs(sample));
 
             using var fileStream = new FileStream(filePath, FileMode.Create);
             using var binaryWriter = new BinaryWriter(fileStream);
@@ -54,10 +90,21 @@ namespace Lysionium.Audio.Editor
             binaryWriter.Write(new byte[44]);
 
             // 波形データを 16bit PCM で書き込む
-            foreach (var sample in samples)
+            if (normalize)
             {
-                var value = (short)(sample * short.MaxValue);
-                binaryWriter.Write(value);
+                foreach (var sample in samples)
+                {
+                    var value = (short)(sample / peak * short.MaxValue);
+                    binaryWriter.Write(value);
+                }
+            }
+            else
+            {
+                foreach (var sample in samples)
+                {
+                    var value = (short)(sample * short.MaxValue);
+                    binaryWriter.Write(value);
+                }
             }
 
             // 最終的なwavヘッダーを書き込む
@@ -99,7 +146,7 @@ namespace Lysionium.Audio.Editor
 
 
         [System.Serializable]
-        private class Item
+        internal class Item
         {
             [SerializeField] private string _playName;
             public string PlayName => string.IsNullOrWhiteSpace(_playName) ? _originalClip.name : _playName;
@@ -109,7 +156,6 @@ namespace Lysionium.Audio.Editor
 
             [SerializeField] private int _startSample;
             [SerializeField] private int _endSample;
-            private RangeInt TrimRange => new RangeInt(_startSample, _endSample - _startSample);
 
             public AudioClip CreateAudioClip(int blankSamples)
             {
@@ -117,13 +163,20 @@ namespace Lysionium.Audio.Editor
                 if (_originalClip.loadType != AudioClipLoadType.DecompressOnLoad) throw new System.InvalidOperationException(
                     $"{_originalClip} の {nameof(_originalClip.loadType)} が {AudioClipLoadType.DecompressOnLoad} ではありません。");
 
-                if (TrimRange.end > _originalClip.samples) throw new System.InvalidOperationException(
-                    $"{_originalClip} ({TrimRange.start} - {TrimRange.end}) の切り抜き範囲はサンプル数 ({_originalClip.samples}) の範囲外です。");
+                var s = GetSubSample(_startSample);
+                var e = GetSubSample(_endSample);
+                var trimRange = new RangeInt(s, e - s);
+
+                if (trimRange.length < 0) throw new System.InvalidOperationException(
+                    $"{_originalClip} ({trimRange.start} - {trimRange.end}) の切り抜き範囲が不正です。 (長さ: {trimRange.length})");
+
+                if (trimRange.start < 0 || _originalClip.samples <= trimRange.end) throw new System.InvalidOperationException(
+                    $"{_originalClip} ({trimRange.start} - {trimRange.end}) の切り抜き範囲はサンプル数 (0 - {_originalClip.samples}) の範囲外です。");
 
                 var sampleRate = _originalClip.frequency;
                 var channels = _originalClip.channels;
-                var startSample = TrimRange.start * channels;
-                var endSample = TrimRange.end * channels;
+                var startSample = trimRange.start * channels;
+                var endSample = trimRange.end * channels;
                 var length = endSample - startSample;
                 var blankLength = blankSamples * channels;
 
@@ -136,6 +189,12 @@ namespace Lysionium.Audio.Editor
                 var result = AudioClip.Create(_originalClip.name + ".trim.wav", trimmedData.Length / channels, channels, sampleRate, false);
                 result.SetData(trimmedData, 0);
                 return result;
+            }
+
+            private int GetSubSample(int sample)
+            {
+                if (sample >= 0) return sample;
+                else return _originalClip.samples + sample;
             }
         }
     }
