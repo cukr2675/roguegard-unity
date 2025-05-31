@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace OchalikeSprites
 {
-    public readonly struct BoneKeyword
+    public readonly struct BoneKeyword : System.IEquatable<BoneKeyword>
     {
         public string Name { get; }
 
@@ -20,13 +20,13 @@ namespace OchalikeSprites
         public static BoneKeyword RightFoot { get; } = new BoneKeyword("RightFoot");
         public static BoneKeyword Head { get; } = new BoneKeyword("Head");
         public static BoneKeyword Hair { get; } = new BoneKeyword("Hair");
+        public static BoneKeyword LongHair { get; } = new BoneKeyword("LongHair");
         public static BoneKeyword LeftEar { get; } = new BoneKeyword("LeftEar");
         public static BoneKeyword RightEar { get; } = new BoneKeyword("RightEar");
         public static BoneKeyword LeftEye { get; } = new BoneKeyword("LeftEye");
         public static BoneKeyword RightEye { get; } = new BoneKeyword("RightEye");
         public static BoneKeyword Mouth { get; } = new BoneKeyword("Mouth");
-        public static BoneKeyword LeftWing { get; } = new BoneKeyword("LeftWing");
-        public static BoneKeyword RightWing { get; } = new BoneKeyword("RightWing");
+        public static BoneKeyword Wings { get; } = new BoneKeyword("Wings");
         public static BoneKeyword Tail { get; } = new BoneKeyword("Tail");
         public static BoneKeyword BodyEffect { get; } = new BoneKeyword("BodyEffect");
         public static BoneKeyword HeadEffect { get; } = new BoneKeyword("HeadEffect");
@@ -37,14 +37,24 @@ namespace OchalikeSprites
             Name = name;
         }
 
+        public bool Equals(BoneKeyword other)
+        {
+            return Name == other.Name;
+        }
+
         public override bool Equals(object obj)
         {
-            return obj is BoneKeyword boneKeyword && Name == boneKeyword.Name;
+            return obj is BoneKeyword other && Name == other.Name;
         }
 
         public override int GetHashCode()
         {
             return Name.GetHashCode();
+        }
+
+        public override string ToString()
+        {
+            return $"Bone_{Name}";
         }
 
         public static bool operator ==(BoneKeyword left, BoneKeyword right)
