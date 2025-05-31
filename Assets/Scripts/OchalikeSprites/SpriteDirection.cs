@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace OchalikeSprites
 {
-    public class SpriteDirection : System.IEquatable<SpriteDirection>
+    public struct SpriteDirection : System.IEquatable<SpriteDirection>
     {
         private readonly int angle;
 
