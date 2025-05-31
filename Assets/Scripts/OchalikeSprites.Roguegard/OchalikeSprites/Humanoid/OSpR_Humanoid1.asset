@@ -410,6 +410,28 @@ MonoBehaviour:
     _scaleOfLocalByLocal: {x: 1, y: 1, z: 1}
     _normalOrderInParent: 5
     _backOrderInParent: 5
+  - _boneName: {fileID: 11400000, guid: 2844f7f86a89d3e4a9090bc08925d32f, type: 2}
+    _parentBoneName: {fileID: 11400000, guid: 971d59b81cdac6b499bf4f884f750bae, type: 2}
+    _bareSprite:
+      _isColorRanged: 0
+      _spriteOrLightSprite:
+        _normalFront: {fileID: 0}
+        _normalRear: {fileID: 0}
+        _backFront: {fileID: 0}
+        _backRear: {fileID: 0}
+      _darkSprite:
+        _normalFront: {fileID: 0}
+        _normalRear: {fileID: 0}
+        _backFront: {fileID: 0}
+        _backRear: {fileID: 0}
+    _overridesOnDefaultColor: 1
+    _flipX: 0
+    _flipY: 0
+    _pixelLocalPosition: {x: 0, y: 0, z: 0}
+    _localRotation: {x: 0, y: 0, z: 0, w: 1}
+    _scaleOfLocalByLocal: {x: 1, y: 1, z: 1}
+    _normalOrderInParent: 1
+    _backOrderInParent: 1
   - _boneName: {fileID: 11400000, guid: 5ea5eef48e6079b43a6ac0722c5611ce, type: 2}
     _parentBoneName: {fileID: 11400000, guid: a90fd0bc3132c214395dee60b9a645ae, type: 2}
     _bareSprite:
