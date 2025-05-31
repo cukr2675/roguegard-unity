@@ -14,6 +14,12 @@ namespace OchalikeSprites.Editor
         [SerializeField] private Texture2D _targetTexture = null;
         public Texture2D TargetTexture { get => _targetTexture; set => _targetTexture = value; }
 
+        [SerializeField] private string _formatPrefix = null;
+        public string FormatPrefix { get => _formatPrefix; set => _formatPrefix = value; }
+
+        [SerializeField] private string _formatSuffix = null;
+        public string FormatSuffix { get => _formatSuffix; set => _formatSuffix = value; }
+
         [SerializeField] private List<Slicer> _slicers = null;
         public List<Slicer> Slicers { get => _slicers; set => _slicers = value; }
 
@@ -30,7 +36,7 @@ namespace OchalikeSprites.Editor
 
             var provider = factory.GetSpriteEditorDataProviderFromObject(importer);
             provider.InitSpriteEditorDataProvider();
-            provider.SetSpriteRects(Slicers.SelectMany(x => x).ToArray());
+            provider.SetSpriteRects(Slicers.SelectMany(x => x.ToSpriteRects(FormatPrefix, FormatSuffix)).ToArray());
             provider.Apply();
 
             EditorUtility.SetDirty(_targetTexture);
@@ -57,7 +63,7 @@ namespace OchalikeSprites.Editor
         }
 
         [System.Serializable]
-        public class Slicer : IEnumerable<SpriteRect>
+        public class Slicer
         {
             [SerializeField] private string _format;
             public string Format { get => _format; set => _format = value; }
@@ -82,7 +88,7 @@ namespace OchalikeSprites.Editor
                 _pixelSize.y = Mathf.Clamp(PixelSize.y, 1, int.MaxValue);
             }
 
-            public IEnumerator<SpriteRect> GetEnumerator()
+            public IEnumerable<SpriteRect> ToSpriteRects(string formatPrefix, string formatSuffix)
             {
                 if (PixelSize.x <= 0 || PixelSize.y <= 0) throw new System.InvalidOperationException();
 
@@ -92,10 +98,10 @@ namespace OchalikeSprites.Editor
                 for (int x = Rect.xMin; x + PixelSize.x <= Rect.xMax; x += PixelSize.x + Padding.x) // x 軸は左から右へ
                 {
                     index.y = 0;
-                    for (int y = Rect.yMax; y - PixelSize.y >= Rect.yMin; y -= PixelSize.y + Padding.y) // y 軸は上から下へ
+                    for (int y = Rect.yMax; y - PixelSize.y >= Rect.yMin; y -= PixelSize.y + Padding.y) // y 軸は上から下へ (画像編集ソフトに合わせた方向)
                     {
                         var sprite = new SpriteRect();
-                        sprite.name = string.Format(Format, alphabets[index.x], index.y);
+                        sprite.name = string.Format(formatPrefix + Format + formatSuffix, alphabets[index.x], index.y);
                         sprite.rect = UnityEngine.Rect.MinMaxRect(x, y - PixelSize.y, x + PixelSize.x, y);
                         sprite.alignment = SpriteAlignment.Custom;
                         sprite.pivot = pivot;
@@ -105,11 +111,6 @@ namespace OchalikeSprites.Editor
                     }
                     index.x++;
                 }
-            }
-
-            IEnumerator IEnumerable.GetEnumerator()
-            {
-                return GetEnumerator();
             }
         }
 

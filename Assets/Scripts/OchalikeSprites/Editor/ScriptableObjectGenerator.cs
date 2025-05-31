@@ -13,8 +13,12 @@ namespace OchalikeSprites.Editor
         [SerializeField] private string _generationNameFormat = null;
         public string GenerationNameFormat { get => _generationNameFormat; set => _generationNameFormat = value; }
 
+        // Start = 0 よりも 1 のほうが TrySetObject の戻り値 false によってデータが一つも出力されないといったことが起こりにくい。
+        // 一件も出力されないのは様々な原因が考えられるが、一つ足りないだけなら比較的直しやすい。
         protected virtual int Start => 1;
-        protected virtual int Length => 999;
+
+        // 実装ミス対策でループ回数に制限をつける
+        protected virtual int Length => 99;
 
         public sealed override void Generate()
         {
@@ -38,12 +42,17 @@ namespace OchalikeSprites.Editor
                 if (File.Exists(targetPath))
                 {
                     EditorUtility.SetDirty(target);
-                    AssetDatabase.ImportAsset(targetPath);
                 }
                 else
                 {
                     AssetDatabase.CreateAsset(target, targetPath);
                 }
+            }
+            {
+                // 最後にまとめてインポート
+                var thisPath = AssetDatabase.GetAssetPath(this);
+                var thisDirectory = Path.GetDirectoryName(thisPath);
+                AssetDatabase.ImportAsset(thisDirectory);
             }
         }
 

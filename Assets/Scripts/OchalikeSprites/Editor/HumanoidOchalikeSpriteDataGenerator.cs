@@ -38,6 +38,7 @@ namespace OchalikeSprites.Editor
             data.Add(LeftEye.Create());
             data.Add(RightEye.Create());
             data.Add(Wings.Create(size));
+            data.Add(LongHair.Create());
             data.Add(Tail.Create());
             data.Add(BodyEffect.Create(searchInFolders));
             data.Add(HeadEffect.Create(searchInFolders));
@@ -386,6 +387,19 @@ namespace OchalikeSprites.Editor
                 bone.PixelLocalPosition = new Vector3(0f, statureRank);
                 bone.NormalOrderInParent = +5f;
                 bone.BackOrderInParent = +5f;
+                return bone;
+            }
+        }
+
+        private static class LongHair
+        {
+            public static OchalikeSpriteData.Bone Create()
+            {
+                var bone = new OchalikeSpriteData.Bone();
+                bone.BoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("LongHair");
+                bone.ParentBoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("Wings");
+                bone.NormalOrderInParent = +1f;
+                bone.BackOrderInParent = +1f;
                 return bone;
             }
         }
