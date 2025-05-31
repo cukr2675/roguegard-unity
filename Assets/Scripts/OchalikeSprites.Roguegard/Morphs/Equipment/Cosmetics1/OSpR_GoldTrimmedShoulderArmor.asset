@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ff905651ac553e458ac896bdf1ceec6, type: 3}
   m_Name: OSpR_GoldTrimmedShoulderArmor
   m_EditorClassIdentifier: 
-  a: 1
   _items:
   - _name: {fileID: 11400000, guid: 971d59b81cdac6b499bf4f884f750bae, type: 2}
     _hasMorphBareSprite: 0
@@ -21,9 +20,9 @@ MonoBehaviour:
       _normalRear: {fileID: 0}
       _backFront: {fileID: 0}
       _backRear: {fileID: 0}
+    _hasMorphBareColor: 0
     _morphBareColor: {r: 1, g: 1, b: 1, a: 1}
     _morphBareColorIsFixed: 0
-    _hasMorphBareColor: 0
     _overridesOnDefaultColor: 0
     _equipmentSprites:
     - _sprite:
@@ -31,5 +30,5 @@ MonoBehaviour:
         _normalRear: {fileID: 0}
         _backFront: {fileID: -2031566907, guid: 40c71f15d26832846a0eb4a89b3c8e54, type: 3}
         _backRear: {fileID: 0}
-      _color: {r: 1, g: 1, b: 1, a: 1}
+      _color: {r: 0.078431375, g: 0.3137255, b: 0.8784314, a: 1}
       _colorIsFixed: 0

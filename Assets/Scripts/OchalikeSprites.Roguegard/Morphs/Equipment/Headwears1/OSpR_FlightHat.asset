@@ -30,5 +30,5 @@ MonoBehaviour:
         _normalRear: {fileID: 0}
         _backFront: {fileID: -388090836, guid: b67514bbcff16b5419823a25b405c678, type: 3}
         _backRear: {fileID: 0}
-      _color: {r: 1, g: 1, b: 1, a: 1}
+      _color: {r: 0.6039216, g: 0.34901962, b: 0.10980392, a: 1}
       _colorIsFixed: 0

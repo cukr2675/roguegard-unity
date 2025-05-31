@@ -21,7 +21,7 @@ MonoBehaviour:
       _backFront: {fileID: 429267363, guid: 40c71f15d26832846a0eb4a89b3c8e54, type: 3}
       _backRear: {fileID: 0}
     _hasMorphBareColor: 1
-    _morphBareColor: {r: 1, g: 1, b: 1, a: 1}
+    _morphBareColor: {r: 0.23137255, g: 0.13333334, b: 0.19215687, a: 1}
     _morphBareColorIsFixed: 0
     _overridesOnDefaultColor: 0
     _equipmentSprites: []
@@ -33,7 +33,7 @@ MonoBehaviour:
       _backFront: {fileID: -400104568, guid: 40c71f15d26832846a0eb4a89b3c8e54, type: 3}
       _backRear: {fileID: 0}
     _hasMorphBareColor: 1
-    _morphBareColor: {r: 1, g: 1, b: 1, a: 1}
+    _morphBareColor: {r: 0.23137255, g: 0.13333334, b: 0.19215687, a: 1}
     _morphBareColorIsFixed: 0
     _overridesOnDefaultColor: 0
     _equipmentSprites: []

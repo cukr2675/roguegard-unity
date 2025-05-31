@@ -30,7 +30,7 @@ MonoBehaviour:
         _normalRear: {fileID: 0}
         _backFront: {fileID: -455173696, guid: 6eb590d0a69e3664199180daf0498368, type: 3}
         _backRear: {fileID: 0}
-      _color: {r: 1, g: 1, b: 1, a: 1}
+      _color: {r: 0.7529412, g: 0.7529412, b: 0.7529412, a: 1}
       _colorIsFixed: 0
   - _name: {fileID: 11400000, guid: 1974de15d93c82241bdd964fc44a5b9e, type: 2}
     _hasMorphBareSprite: 0
@@ -49,7 +49,7 @@ MonoBehaviour:
         _normalRear: {fileID: 0}
         _backFront: {fileID: 1379738286, guid: 6eb590d0a69e3664199180daf0498368, type: 3}
         _backRear: {fileID: 0}
-      _color: {r: 1, g: 1, b: 1, a: 1}
+      _color: {r: 0.7529412, g: 0.7529412, b: 0.7529412, a: 1}
       _colorIsFixed: 0
   - _name: {fileID: 11400000, guid: 390f9798da027d8489dbb8048e8dc2d3, type: 2}
     _hasMorphBareSprite: 0
@@ -68,7 +68,7 @@ MonoBehaviour:
         _normalRear: {fileID: 0}
         _backFront: {fileID: 1490729460, guid: 6eb590d0a69e3664199180daf0498368, type: 3}
         _backRear: {fileID: 0}
-      _color: {r: 1, g: 1, b: 1, a: 1}
+      _color: {r: 0.7529412, g: 0.7529412, b: 0.7529412, a: 1}
       _colorIsFixed: 0
   - _name: {fileID: 11400000, guid: 943353eeb2ebaf94fa745edefc849f40, type: 2}
     _hasMorphBareSprite: 0
@@ -87,7 +87,7 @@ MonoBehaviour:
         _normalRear: {fileID: 0}
         _backFront: {fileID: 1490729460, guid: 6eb590d0a69e3664199180daf0498368, type: 3}
         _backRear: {fileID: 0}
-      _color: {r: 1, g: 1, b: 1, a: 1}
+      _color: {r: 0.7529412, g: 0.7529412, b: 0.7529412, a: 1}
       _colorIsFixed: 0
   - _name: {fileID: 11400000, guid: a0ccd12a7fd1b134aa832922cd725b6a, type: 2}
     _hasMorphBareSprite: 0
@@ -106,7 +106,7 @@ MonoBehaviour:
         _normalRear: {fileID: 0}
         _backFront: {fileID: 1900083364, guid: 6eb590d0a69e3664199180daf0498368, type: 3}
         _backRear: {fileID: 0}
-      _color: {r: 1, g: 1, b: 1, a: 1}
+      _color: {r: 0.7529412, g: 0.7529412, b: 0.7529412, a: 1}
       _colorIsFixed: 0
   - _name: {fileID: 11400000, guid: 1662f711f4d0ab043b52727470bfc0f1, type: 2}
     _hasMorphBareSprite: 0
@@ -125,5 +125,5 @@ MonoBehaviour:
         _normalRear: {fileID: 0}
         _backFront: {fileID: 1900083364, guid: 6eb590d0a69e3664199180daf0498368, type: 3}
         _backRear: {fileID: 0}
-      _color: {r: 1, g: 1, b: 1, a: 1}
+      _color: {r: 0.7529412, g: 0.7529412, b: 0.7529412, a: 1}
       _colorIsFixed: 0

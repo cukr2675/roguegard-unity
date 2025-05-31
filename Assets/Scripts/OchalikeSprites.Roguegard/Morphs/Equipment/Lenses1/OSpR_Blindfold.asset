@@ -30,7 +30,7 @@ MonoBehaviour:
         _normalRear: {fileID: 0}
         _backFront: {fileID: 0}
         _backRear: {fileID: 0}
-      _color: {r: 1, g: 1, b: 1, a: 1}
+      _color: {r: 0.20392157, g: 0.2509804, b: 0.35686275, a: 1}
       _colorIsFixed: 0
   - _name: {fileID: 11400000, guid: c9d1479eeb1d2424ba5ab7f85da95ed0, type: 2}
     _hasMorphBareSprite: 1

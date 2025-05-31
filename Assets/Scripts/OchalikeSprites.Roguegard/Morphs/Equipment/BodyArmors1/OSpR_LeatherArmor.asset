@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ff905651ac553e458ac896bdf1ceec6, type: 3}
   m_Name: OSpR_LeatherArmor
   m_EditorClassIdentifier: 
-  a: 1
   _items:
   - _name: {fileID: 11400000, guid: a90fd0bc3132c214395dee60b9a645ae, type: 2}
     _hasMorphBareSprite: 0
@@ -21,9 +20,9 @@ MonoBehaviour:
       _normalRear: {fileID: 0}
       _backFront: {fileID: 0}
       _backRear: {fileID: 0}
+    _hasMorphBareColor: 0
     _morphBareColor: {r: 1, g: 1, b: 1, a: 1}
     _morphBareColorIsFixed: 0
-    _hasMorphBareColor: 0
     _overridesOnDefaultColor: 0
     _equipmentSprites:
     - _sprite:
@@ -31,7 +30,7 @@ MonoBehaviour:
         _normalRear: {fileID: 0}
         _backFront: {fileID: 335947373, guid: ea6e08f75be6f3c4fa443acba9f4735a, type: 3}
         _backRear: {fileID: 0}
-      _color: {r: 1, g: 1, b: 1, a: 1}
+      _color: {r: 0.54901963, g: 0.11764706, b: 0.11764706, a: 1}
       _colorIsFixed: 0
   - _name: {fileID: 11400000, guid: 1974de15d93c82241bdd964fc44a5b9e, type: 2}
     _hasMorphBareSprite: 0
@@ -40,9 +39,9 @@ MonoBehaviour:
       _normalRear: {fileID: 0}
       _backFront: {fileID: 0}
       _backRear: {fileID: 0}
+    _hasMorphBareColor: 0
     _morphBareColor: {r: 1, g: 1, b: 1, a: 1}
     _morphBareColorIsFixed: 0
-    _hasMorphBareColor: 0
     _overridesOnDefaultColor: 0
     _equipmentSprites:
     - _sprite:
@@ -50,7 +49,7 @@ MonoBehaviour:
         _normalRear: {fileID: 0}
         _backFront: {fileID: 737992294, guid: ea6e08f75be6f3c4fa443acba9f4735a, type: 3}
         _backRear: {fileID: 0}
-      _color: {r: 1, g: 1, b: 1, a: 1}
+      _color: {r: 0.54901963, g: 0.11764706, b: 0.11764706, a: 1}
       _colorIsFixed: 0
   - _name: {fileID: 11400000, guid: 390f9798da027d8489dbb8048e8dc2d3, type: 2}
     _hasMorphBareSprite: 0
@@ -59,9 +58,9 @@ MonoBehaviour:
       _normalRear: {fileID: 0}
       _backFront: {fileID: 0}
       _backRear: {fileID: 0}
+    _hasMorphBareColor: 0
     _morphBareColor: {r: 1, g: 1, b: 1, a: 1}
     _morphBareColorIsFixed: 0
-    _hasMorphBareColor: 0
     _overridesOnDefaultColor: 0
     _equipmentSprites:
     - _sprite:
@@ -69,7 +68,7 @@ MonoBehaviour:
         _normalRear: {fileID: 0}
         _backFront: {fileID: 1875293526, guid: ea6e08f75be6f3c4fa443acba9f4735a, type: 3}
         _backRear: {fileID: 0}
-      _color: {r: 1, g: 1, b: 1, a: 1}
+      _color: {r: 0.54901963, g: 0.11764706, b: 0.11764706, a: 1}
       _colorIsFixed: 0
   - _name: {fileID: 11400000, guid: 943353eeb2ebaf94fa745edefc849f40, type: 2}
     _hasMorphBareSprite: 0
@@ -78,9 +77,9 @@ MonoBehaviour:
       _normalRear: {fileID: 0}
       _backFront: {fileID: 0}
       _backRear: {fileID: 0}
+    _hasMorphBareColor: 0
     _morphBareColor: {r: 1, g: 1, b: 1, a: 1}
     _morphBareColorIsFixed: 0
-    _hasMorphBareColor: 0
     _overridesOnDefaultColor: 0
     _equipmentSprites:
     - _sprite:
@@ -88,5 +87,5 @@ MonoBehaviour:
         _normalRear: {fileID: 0}
         _backFront: {fileID: 1875293526, guid: ea6e08f75be6f3c4fa443acba9f4735a, type: 3}
         _backRear: {fileID: 0}
-      _color: {r: 1, g: 1, b: 1, a: 1}
+      _color: {r: 0.54901963, g: 0.11764706, b: 0.11764706, a: 1}
       _colorIsFixed: 0

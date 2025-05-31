@@ -3,7 +3,7 @@ guid: ec906a9335ac9e04392c3104aa5b7617
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
-  serializedVersion: 12
+  serializedVersion: 13
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -67,7 +67,7 @@ TextureImporter:
   swizzle: 50462976
   cookieLightType: 1
   platformSettings:
-  - serializedVersion: 3
+  - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 128
     resizeAlgorithm: 0
@@ -80,7 +80,7 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
+  - serializedVersion: 4
     buildTarget: Standalone
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -93,7 +93,7 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
+  - serializedVersion: 4
     buildTarget: Server
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -106,11 +106,24 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
+  - serializedVersion: 4
     buildTarget: WebGL
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 128
+    resizeAlgorithm: 0
+    textureFormat: 4
     textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
@@ -133,6 +146,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.42857143, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -154,6 +168,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.42857143, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -175,6 +190,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.6666667, y: 0.2}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -196,6 +212,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.47368422, y: 0.9411765}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -217,6 +234,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.47368422, y: 0.9411765}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -238,6 +256,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.5555556, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -259,6 +278,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.5, y: 0.7777778}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -280,6 +300,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.6666667, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -301,6 +322,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.47368422, y: 0.8666667}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -322,6 +344,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.47368422, y: 0.92857146}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -343,6 +366,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.5714286, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -364,6 +388,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.5, y: 0.9230769}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -385,6 +410,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.45, y: 0.9230769}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -406,6 +432,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.8, y: 0.6666667}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -427,6 +454,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.4, y: 0.6666667}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -448,6 +476,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.8, y: 0.8}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -469,6 +498,7 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.5, y: 0.6666667}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -483,13 +513,14 @@ TextureImporter:
       name: OSpR_ShortCloak_Wings_NRBF
       rect:
         serializedVersion: 2
-        x: 36
-        y: 123
+        x: 21
+        y: 91
         width: 14
         height: 5
       alignment: 9
       pivot: {x: 0.5, y: 0.8}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -500,7 +531,140 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: OSpR_AsymmetricalCloak_Head_NF
+      rect:
+        serializedVersion: 2
+        x: 27
+        y: 102
+        width: 6
+        height: 2
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c82c903b14073c646a3d62314b669869
+      internalID: 827894823
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_AsymmetricalCloak_Head_BF
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 76
+        width: 7
+        height: 2
+      alignment: 9
+      pivot: {x: 0.5714286, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 847b8b067d33f0c4fa26c69a275f2b22
+      internalID: 1253300446
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_AsymmetricalCloak_Arm_NFBF
+      rect:
+        serializedVersion: 2
+        x: 27
+        y: 97
+        width: 5
+        height: 5
+      alignment: 9
+      pivot: {x: 0.4, y: 0.6}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bc522b6ee78d01f41bef09da3e0da69a
+      internalID: -2106406977
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_AsymmetricalCloak_Chest_NF
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 78
+        width: 12
+        height: 13
+      alignment: 9
+      pivot: {x: 0.33333334, y: 0.9230769}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 87fbb3be7dcba9c4fad6e6818ca17788
+      internalID: 2127346548
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_AsymmetricalCloak_Chest_NRBF
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 64
+        width: 15
+        height: 13
+      alignment: 9
+      pivot: {x: 0.53333336, y: 0.9230769}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0a6d34c27582b804e99408a4d4a8e153
+      internalID: 1062797788
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_AsymmetricalCloak_Hand_NFBF
+      rect:
+        serializedVersion: 2
+        x: 30
+        y: 96
+        width: 2
+        height: 1
+      alignment: 9
+      pivot: {x: -0.5, y: -3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a8ed942b5ede56442b3ccb1b7d7cd940
+      internalID: -193727582
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
+    customData: 
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
@@ -510,7 +674,15 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
     nameFileIdTable:
+      OSpR_AsymmetricalCloak_Arm_NFBF: -2106406977
+      OSpR_AsymmetricalCloak_Chest_NF: 2127346548
+      OSpR_AsymmetricalCloak_Chest_NRBF: 1062797788
+      OSpR_AsymmetricalCloak_Hand_NFBF: -193727582
+      OSpR_AsymmetricalCloak_Head_BF: 1253300446
+      OSpR_AsymmetricalCloak_Head_NF: 827894823
       OSpR_DesertCloak_Arm_NFBF: 1119549128
       OSpR_DesertCloak_Chest_NF: -2128675363
       OSpR_DesertCloak_Wings_BF: 1972629715

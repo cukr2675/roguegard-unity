@@ -30,5 +30,17 @@ MonoBehaviour:
         _normalRear: {fileID: 0}
         _backFront: {fileID: 65722407, guid: b67514bbcff16b5419823a25b405c678, type: 3}
         _backRear: {fileID: -1265775385, guid: b67514bbcff16b5419823a25b405c678, type: 3}
-      _color: {r: 1, g: 1, b: 1, a: 1}
+      _color: {r: 0, g: 0.5019608, b: 0, a: 1}
       _colorIsFixed: 0
+  - _name: {fileID: 11400000, guid: 2844f7f86a89d3e4a9090bc08925d32f, type: 2}
+    _hasMorphBareSprite: 1
+    _morphBareSprite:
+      _normalFront: {fileID: 0}
+      _normalRear: {fileID: 1793524334, guid: 6a76f83f271204a45b8c9c778cf89534, type: 3}
+      _backFront: {fileID: 1793524334, guid: 6a76f83f271204a45b8c9c778cf89534, type: 3}
+      _backRear: {fileID: 0}
+    _hasMorphBareColor: 0
+    _morphBareColor: {r: 1, g: 1, b: 1, a: 1}
+    _morphBareColorIsFixed: 0
+    _overridesOnDefaultColor: 0
+    _equipmentSprites: []
