@@ -105,6 +105,9 @@ namespace OchalikeSprites
                 string name, Sprite sprite, Color color, bool flipX, bool flipY,
                 Vector3 localPosition, Quaternion localRotation, Vector3 localScale)
             {
+#if UNITY_EDITOR
+                if (spriteRenderer.sprite != null) { Debug.LogWarning($"スプライトの上書きが発生しました。 ({spriteRenderer.gameObject.name} -> {name})"); }
+#endif
                 spriteRenderer.gameObject.name = name;
                 spriteRenderer.sprite = sprite;
                 spriteRenderer.color = color;

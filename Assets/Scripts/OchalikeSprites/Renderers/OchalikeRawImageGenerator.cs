@@ -180,7 +180,7 @@ namespace OchalikeSprites
             public void SetBoneSprite(
                 int index, string name, Sprite sprite, Color color, bool flipX, bool flipY, Vector3 localPosition, Quaternion localRotation, Vector3 localScale)
             {
-                bones[index].SetSprite(sprite, color, flipX, flipY, localPosition + offset, localRotation, localScale);
+                bones[index].SetSprite(name, sprite, color, flipX, flipY, localPosition + offset, localRotation, localScale);
             }
 
             public void RenderTo(RenderTexture renderTexture)
@@ -198,6 +198,7 @@ namespace OchalikeSprites
         private class Bone
         {
             public Material material;
+            private string name;
             private Sprite sprite;
             private Color color;
             private bool flipX, flipY;
@@ -211,9 +212,13 @@ namespace OchalikeSprites
             }
 
             public void SetSprite(
-                Sprite sprite, Color color, bool flipX, bool flipY,
+                string name, Sprite sprite, Color color, bool flipX, bool flipY,
                 Vector3 localPosition, Quaternion localRotation, Vector3 localScale)
             {
+#if UNITY_EDITOR
+                if (this.sprite != null) { Debug.LogWarning($"スプライトの上書きが発生しました。 ({this.name} -> {name})"); }
+#endif
+                this.name = name;
                 this.sprite = sprite;
                 this.color = color;
                 this.flipX = flipX;
