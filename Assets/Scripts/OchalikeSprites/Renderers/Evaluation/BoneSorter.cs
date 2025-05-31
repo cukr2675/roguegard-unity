@@ -6,31 +6,33 @@ namespace OchalikeSprites
 {
     public static class BoneSorter
     {
-        public static int SetIndexAndGetCount<T>(T bone, BoneOrder boneOrder, bool back)
+        public static int SetIndexAndGetCount<T>(T bone, BoneOrder boneOrder, bool poseBack)
             where T : ISortableBone<T>
         {
             StaticStack<T>.boneStack.Clear();
-            var bonesCount = SetChildIndex(bone, boneOrder, BoneBack.Type.ForPose, back, 0);
+            var bonesCount = SetChildIndex(bone, boneOrder, BoneBack.Type.ForPose, poseBack, 0);
             while (StaticStack<T>.boneStack.Count >= 1)
             {
                 var childBone = StaticStack<T>.boneStack.Pop();
-                int frontSpriteCount;
-                if (back)
+                var isBack = childBone.LocalBack switch
                 {
-                    childBone.BackPoseFrontSpriteIndex = bonesCount;
-                    frontSpriteCount = childBone.BackFrontSpriteCount;
-                }
-                else
-                {
-                    childBone.NormalPoseFrontSpriteIndex = bonesCount;
-                    frontSpriteCount = childBone.NormalFrontSpriteCount;
-                }
+                    BoneBack.Type.ForPose => poseBack,
+                    BoneBack.Type.InversePose => !poseBack,
+                    BoneBack.Type.ForcedNormal => false,
+                    BoneBack.Type.ForcedBack => true,
+                    _ => throw new System.Exception()
+                };
+
+                if (poseBack) { childBone.BackPoseFrontSpriteIndex = bonesCount; }
+                else { childBone.NormalPoseFrontSpriteIndex = bonesCount; }
+
+                var frontSpriteCount = isBack ? childBone.BackFrontSpriteCount : childBone.NormalFrontSpriteCount;
                 bonesCount += frontSpriteCount;
             }
             return bonesCount;
         }
 
-        private static int SetChildIndex<T>(T bone, BoneOrder boneOrder, BoneBack.Type back, bool poseBack, int bonesCount)
+        private static int SetChildIndex<T>(T bone, BoneOrder boneOrder, BoneBack.Type backType, bool poseBack, int bonesCount)
             where T : ISortableBone<T>
         {
             for (int i = 0; i < boneOrder.LocalBacks.Count; i++)
@@ -38,12 +40,12 @@ namespace OchalikeSprites
                 var boneBack = boneOrder.LocalBacks[i];
                 if (boneBack.Name == bone.Name)
                 {
-                    back = boneBack.LocalBack;
+                    backType = boneBack.LocalBack;
                     break;
                 }
             }
-            bone.LocalBack = back;
-            var backValue = back switch
+            bone.LocalBack = backType;
+            var isBack = backType switch
             {
                 BoneBack.Type.ForPose => poseBack,
                 BoneBack.Type.InversePose => !poseBack,
@@ -54,7 +56,7 @@ namespace OchalikeSprites
 
             var boneChildren = bone.Children;
             IReadOnlyList<T> frontChildren, rearChildren;
-            if (backValue)
+            if (isBack)
             {
                 frontChildren = boneChildren.BackFrontChildren;
                 rearChildren = boneChildren.BackRearChildren;
@@ -92,7 +94,7 @@ namespace OchalikeSprites
                     {
                         if (boneReorder.Reorder == BoneReorder.Type.Front)
                         {
-                            bonesCount = SetChildIndex(child, boneOrder, back, poseBack, bonesCount);
+                            bonesCount = SetChildIndex(child, boneOrder, backType, poseBack, bonesCount);
                         }
                         else if (boneReorder.Reorder == BoneReorder.Type.Rear)
                         {
@@ -107,7 +109,7 @@ namespace OchalikeSprites
                     {
                         if (boneReorder.Reorder == BoneReorder.Type.Front)
                         {
-                            bonesCount = SetChildIndex(child, boneOrder, back, poseBack, bonesCount);
+                            bonesCount = SetChildIndex(child, boneOrder, backType, poseBack, bonesCount);
                         }
                         else if (boneReorder.Reorder == BoneReorder.Type.Rear)
                         {
@@ -124,19 +126,19 @@ namespace OchalikeSprites
                     var child = frontChildren[j];
                     if (GetRearIndex(child) == -1)
                     {
-                        bonesCount = SetChildIndex(child, boneOrder, back, poseBack, bonesCount);
+                        bonesCount = SetChildIndex(child, boneOrder, backType, poseBack, bonesCount);
                     }
                 }
                 SetRearIndex(bone, bonesCount);
                 StaticStack<T>.boneStack.Push(bone);
-                var rearSpriteCount = backValue ? bone.BackRearSpriteCount : bone.NormalRearSpriteCount;
+                var rearSpriteCount = isBack ? bone.BackRearSpriteCount : bone.NormalRearSpriteCount;
                 bonesCount += rearSpriteCount;
                 for (int j = 0; j < rearChildren.Count; j++)
                 {
                     var child = rearChildren[j];
                     if (GetRearIndex(child) == -1)
                     {
-                        bonesCount = SetChildIndex(child, boneOrder, back, poseBack, bonesCount);
+                        bonesCount = SetChildIndex(child, boneOrder, backType, poseBack, bonesCount);
                     }
                 }
             }
@@ -154,7 +156,7 @@ namespace OchalikeSprites
                     var child = frontChildren[j];
                     if (child.Name == name)
                     {
-                        bonesCount = SetChildIndex(child, boneOrder, back, poseBack, bonesCount);
+                        bonesCount = SetChildIndex(child, boneOrder, backType, poseBack, bonesCount);
                     }
                 }
                 for (int j = 0; j < rearChildren.Count; j++)
@@ -162,7 +164,7 @@ namespace OchalikeSprites
                     var child = rearChildren[j];
                     if (child.Name == name)
                     {
-                        bonesCount = SetChildIndex(child, boneOrder, back, poseBack, bonesCount);
+                        bonesCount = SetChildIndex(child, boneOrder, backType, poseBack, bonesCount);
                     }
                 }
             }
@@ -170,13 +172,13 @@ namespace OchalikeSprites
 
             int GetRearIndex(T bone)
             {
-                if (backValue) return bone.BackPoseRearSpriteIndex;
+                if (poseBack) return bone.BackPoseRearSpriteIndex;
                 else return bone.NormalPoseRearSpriteIndex;
             }
 
             void SetRearIndex(T bone, int index)
             {
-                if (backValue) bone.BackPoseRearSpriteIndex = index;
+                if (poseBack) bone.BackPoseRearSpriteIndex = index;
                 else bone.NormalPoseRearSpriteIndex = index;
             }
         }

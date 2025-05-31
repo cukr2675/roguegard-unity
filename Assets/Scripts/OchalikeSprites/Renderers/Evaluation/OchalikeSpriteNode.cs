@@ -127,7 +127,7 @@ namespace OchalikeSprites
             var flipY = source.FlipY;
             var mirrorX = parentMirrorX;
             var mirrorY = parentMirrorY;
-            var back = LocalBack switch
+            var isBack = LocalBack switch
             {
                 BoneBack.Type.ForPose => poseBack,
                 BoneBack.Type.InversePose => !poseBack,
@@ -212,7 +212,7 @@ namespace OchalikeSprites
 
             void SetSprite(BoneSprite boneSprite, Color color, ref int frontIndex, ref int rearIndex)
             {
-                var frontSprite = boneSprite.GetFrontSprite(back);
+                var frontSprite = boneSprite.GetFrontSprite(isBack);
                 if (frontSprite != null)
                 {
                     var frontBonesIndex = poseBack ? BackPoseFrontSpriteIndex : NormalPoseFrontSpriteIndex;
@@ -222,7 +222,7 @@ namespace OchalikeSprites
                     frontIndex++;
                 }
 
-                var rearSprite = boneSprite.GetRearSprite(back);
+                var rearSprite = boneSprite.GetRearSprite(isBack);
                 if (rearSprite != null)
                 {
                     var rearBonesIndex = poseBack ? BackPoseRearSpriteIndex : NormalPoseRearSpriteIndex;
@@ -236,18 +236,18 @@ namespace OchalikeSprites
             // ポーズスプライトの上書き前のスプライトが null であった場合は上書きしない。
             void SetPoseSprite(BoneSprite boneSprite, Color color, ref int frontIndex, ref int rearIndex)
             {
-                if (bareSprite != null && bareSprite.GetFrontSprite(back) != null)
+                if (bareSprite != null && bareSprite.GetFrontSprite(isBack) != null)
                 {
-                    var frontSprite = boneSprite.GetFrontSprite(back);
+                    var frontSprite = boneSprite.GetFrontSprite(isBack);
                     var frontBonesIndex = poseBack ? BackPoseFrontSpriteIndex : NormalPoseFrontSpriteIndex;
                     var index = frontBonesIndex + frontIndex;
                     renderController.SetBoneSprite(
                         index, source.Name.Name, frontSprite, color, flipX, flipY, position, rotation, scale);
                     frontIndex++;
                 }
-                if (bareSprite != null && bareSprite.GetRearSprite(back) != null)
+                if (bareSprite != null && bareSprite.GetRearSprite(isBack) != null)
                 {
-                    var rearSprite = boneSprite.GetRearSprite(back);
+                    var rearSprite = boneSprite.GetRearSprite(isBack);
                     var rearBonesIndex = poseBack ? BackPoseRearSpriteIndex : NormalPoseRearSpriteIndex;
                     var index = rearBonesIndex + rearIndex;
                     renderController.SetBoneSprite(
