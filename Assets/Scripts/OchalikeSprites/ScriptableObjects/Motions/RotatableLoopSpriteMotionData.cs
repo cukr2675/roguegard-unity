@@ -32,12 +32,14 @@ namespace OchalikeSprites
             }
             var sum = 0;
             Item current = null;
+            var first = false;
             foreach (var item in _items)
             {
                 sum += item.Wait;
                 if ((index % oneLoopWait) < sum)
                 {
                     current = item;
+                    if (index % oneLoopWait == sum - item.Wait + 1 || item.Wait == 1) { first = true; }
                     break;
                 }
             }
@@ -49,6 +51,7 @@ namespace OchalikeSprites
             transform.Scale = current.Scale;
             transform.PoseSource = current.PoseSource;
             transform.Direction = SpriteDirection.FromDegree(degree);
+            if (first) { transform.Play = current.Play; } // 切り替わった瞬間だけ再生
 
             if (_loopCount >= 1)
             {
@@ -89,6 +92,9 @@ namespace OchalikeSprites
 
             [SerializeField] private float _degree;
             public float Degree => _degree;
+
+            [SerializeField] private string _play;
+            public string Play => _play;
 
             [SerializeField] private int _wait;
             public int Wait => _wait;

@@ -25,12 +25,14 @@ namespace OchalikeSprites
             else index = Mathf.Min(animationTime, sumWait - 1);
             var sum = 0;
             Item current = null;
+            var first = false;
             foreach (var item in _items)
             {
                 sum += item.Wait;
                 if (index < sum)
                 {
                     current = item;
+                    if (index == sum - item.Wait + 1 || item.Wait == 1) { first = true; }
                     break;
                 }
             }
@@ -42,6 +44,7 @@ namespace OchalikeSprites
             transform.Scale = current.Scale;
             transform.PoseSource = current;
             transform.Direction = SpriteDirection.FromDegree(degree);
+            if (first) { transform.Play = current.Play; } // 切り替わった瞬間だけ再生
             endOfMotion = index >= sumWait - 1;
         }
 
@@ -75,6 +78,9 @@ namespace OchalikeSprites
 
             [SerializeField] private float _degree;
             public float Degree => _degree;
+
+            [SerializeField] private string _play;
+            public string Play => _play;
 
             [SerializeField] private int _wait;
             public int Wait => _wait;
