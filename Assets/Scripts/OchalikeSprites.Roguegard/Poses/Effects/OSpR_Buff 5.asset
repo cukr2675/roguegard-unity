@@ -22,7 +22,7 @@ MonoBehaviour:
       _backFront: {fileID: 0}
       _backRear: {fileID: 0}
     _hasPoseBareColor: 1
-    _poseBareColor: {r: 1, g: 1, b: 1, a: 1}
+    _poseBareColor: {r: 1, g: 0.2477299, b: 0, a: 1}
     _pixelLocalPosition: {x: 0, y: 8, z: 0}
     _localRotation: {x: 0, y: 0, z: 0, w: 1}
     _scaleOfLocalByLocal: {x: 1, y: 1, z: 1}
