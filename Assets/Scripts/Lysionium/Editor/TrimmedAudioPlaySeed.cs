@@ -15,7 +15,7 @@ namespace Lysionium.Audio.Editor
     {
         [SerializeField] private AudioMixerGroup _audioMixerGroup = null;
 
-        [SerializeField] private AudioPlayTable.PlayBehaviour _playBehaviour = AudioPlayTable.PlayBehaviour.SE;
+        [SerializeField] private AudioPlayTable.PlayBehaviour _playBehaviour = AudioPlayTable.PlayBehaviour.Sfx;
 
         [SerializeField] private bool _normalize = true;
 

@@ -10,6 +10,7 @@ namespace Lysionium.Audio
     public class WebOtherAudioPlayHandler : MonoBehaviour
     {
         [SerializeField] private AudioSource _audioSourcePrefab = null;
+        [SerializeField] private string _stopBgmPlayName = null;
 
 #if UNITY_EDITOR || !UNITY_WEBGL
         [Space]
@@ -30,6 +31,7 @@ namespace Lysionium.Audio
         private int blankSamples;
 
         private Item waitSource;
+        private Item bgmSource;
 
         public bool Wait => waitSource?.IsPlaying ?? false;
 
@@ -60,16 +62,21 @@ namespace Lysionium.Audio
 
         public void Play(string name, bool wait)
         {
+            if (name == _stopBgmPlayName)
+            {
+                StopBgm();
+                return;
+            }
             if (!table.TryGetValue(name, out var item)) return;
+
+            waitSource = wait ? item : null;
 
             switch (item.PlayType)
             {
-                case AudioPlayTable.PlayBehaviour.SE:
-                    waitSource = wait ? item : null;
+                case AudioPlayTable.PlayBehaviour.Sfx:
                     item.Play();
                     break;
-                case AudioPlayTable.PlayBehaviour.SEOneShot:
-                    waitSource = wait ? item : null;
+                case AudioPlayTable.PlayBehaviour.SfxOneShot:
 #if UNITY_EDITOR
                     if (_simulateWeb)
                     {
@@ -83,9 +90,12 @@ namespace Lysionium.Audio
                     item.PlayOneShot();
 #endif
                     break;
-                case AudioPlayTable.PlayBehaviour.BGM:
-                case AudioPlayTable.PlayBehaviour.BGMOnce:
-                    throw new System.NotImplementedException();
+                case AudioPlayTable.PlayBehaviour.Bgm:
+                case AudioPlayTable.PlayBehaviour.BgmOnce:
+                    bgmSource?.StopAll();
+                    bgmSource = item;
+                    item.PlayLoop();
+                    break;
                 case AudioPlayTable.PlayBehaviour.Manual:
                 default:
                     break;
@@ -104,6 +114,12 @@ namespace Lysionium.Audio
             if (!table.TryGetValue(name, out var item)) return;
 
             item.SetLastLoop();
+        }
+
+        public void StopBgm()
+        {
+            bgmSource?.StopAll();
+            bgmSource = null;
         }
 
         private class Item
@@ -139,8 +155,9 @@ namespace Lysionium.Audio
                 sources.Add(source);
             }
 
-            private void StopAll()
+            public void StopAll()
             {
+                isLoop = false;
                 foreach (var source in sources)
                 {
                     source.Stop();

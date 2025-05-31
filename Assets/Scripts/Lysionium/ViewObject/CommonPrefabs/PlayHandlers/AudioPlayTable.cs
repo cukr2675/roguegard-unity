@@ -42,22 +42,22 @@ namespace Lysionium.Audio
             /// <summary>
             /// 音が重ならない一回再生
             /// </summary>
-            SE,
+            Sfx,
 
             /// <summary>
-            /// 音が重なる一回再生（WebGLでは <see cref="SE"/> と同様）
+            /// 音が重なる一回再生（WebGLでは <see cref="Sfx"/> と同様）
             /// </summary>
-            SEOneShot,
+            SfxOneShot,
 
             /// <summary>
             /// BGMとしてループ再生する。二つ目のBGMを再生すると前のBGMは停止する
             /// </summary>
-            BGM,
+            Bgm,
 
             /// <summary>
             /// BGMとして一回再生する。二つ目のBGMを再生すると前のBGMは停止する
             /// </summary>
-            BGMOnce,
+            BgmOnce,
 
             /// <summary>
             /// 何もしない
