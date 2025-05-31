@@ -124,12 +124,10 @@ namespace Roguegard
                     BoneKeyword.LeftLeg,
                     BoneKeyword.LeftEye,
                     BoneKeyword.LeftEar,
-                    BoneKeyword.LeftWing,
                     BoneKeyword.RightArm,
                     BoneKeyword.RightLeg,
                     BoneKeyword.RightEye,
                     BoneKeyword.RightEar,
-                    BoneKeyword.RightWing,
                 };
             }
             var table = (PaintBoneSpriteTable)arg.Arg.Other;
