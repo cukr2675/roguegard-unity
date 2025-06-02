@@ -33,14 +33,6 @@ namespace Lysionium
                 OnCompleted = null;
                 tempAction?.Invoke(Manager, Arg);
             });
-
-            if (_blocker != null)
-            {
-                _blocker.Initialize(this);
-                _blocker.SetElement(
-                    SelectOption.Create<IListMenuManager, IListMenuArg>("", delegate { _onClick.Invoke(); }), SelectOptionHandler.Instance);
-                _blocker.SetVisible(true, true);
-            }
         }
 
         public override void SetParameters(
@@ -60,6 +52,14 @@ namespace Lysionium
             };
             SetArg(manager, arg);
             SetStatusCode(0);
+
+            if (_blocker != null)
+            {
+                _blocker.Initialize(this);
+                _blocker.SetElement(
+                    SelectOption.Create<IListMenuManager, IListMenuArg>("", delegate { _onClick.Invoke(); }), SelectOptionHandler.Instance);
+                _blocker.SetVisible(true, true);
+            }
         }
 
         public void DoScheduledAfterCompletion(HandleEndAnimation onEndAnimation)

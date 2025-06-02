@@ -51,21 +51,6 @@ namespace Lysionium
         {
             itemHeight = _viewElementPrefab.GetComponent<RectTransform>().rect.height;
             beforeAngleDegree = -1f;
-
-            if (_prevButton != null)
-            {
-                _prevButton.Initialize(this);
-                _prevButton.SetElement(
-                    SelectOption.Create<IListMenuManager, IListMenuArg>("", delegate { FocusAngleIndex(AngleIndex - 1); }), SelectOptionHandler.Instance);
-                _prevButton.SetVisible(true, true);
-            }
-            if (_nextButton != null)
-            {
-                _nextButton.Initialize(this);
-                _nextButton.SetElement(
-                    SelectOption.Create<IListMenuManager, IListMenuArg>("", delegate { FocusAngleIndex(AngleIndex + 1); }), SelectOptionHandler.Instance);
-                _nextButton.SetVisible(true, true);
-            }
         }
 
         /// <summary>
@@ -173,6 +158,21 @@ namespace Lysionium
             {
                 var viewElement = viewElements[i];
                 viewElement.SetElement(list[i], handler);
+            }
+
+            if (_prevButton != null)
+            {
+                _prevButton.Initialize(this);
+                _prevButton.SetElement(
+                    SelectOption.Create<IListMenuManager, IListMenuArg>("", delegate { FocusAngleIndex(AngleIndex - 1); }), SelectOptionHandler.Instance);
+                _prevButton.SetVisible(true, true);
+            }
+            if (_nextButton != null)
+            {
+                _nextButton.Initialize(this);
+                _nextButton.SetElement(
+                    SelectOption.Create<IListMenuManager, IListMenuArg>("", delegate { FocusAngleIndex(AngleIndex + 1); }), SelectOptionHandler.Instance);
+                _nextButton.SetVisible(true, true);
             }
         }
 

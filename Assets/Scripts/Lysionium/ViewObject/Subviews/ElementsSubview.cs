@@ -46,6 +46,11 @@ namespace Lysionium
             CommonInitCore();
         }
 
+        /// <summary>
+        /// <see cref="CommonInit"/> 内で呼び出すメソッド。
+        /// 言語変更などで <see cref="IListMenuManager.Localize"/> が変わる可能性があるため、
+        /// このメソッド内で <see cref="ViewElement.SetElement"/> を呼び出してはならない
+        /// </summary>
         protected virtual void CommonInitCore() { }
 
         public abstract void SetParameters(
