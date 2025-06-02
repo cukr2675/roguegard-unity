@@ -15,8 +15,11 @@ namespace Lysionium.HandlerRules
             var onClickCtx = new OnClickContext();
             builder.OnClick((element, manager, arg) =>
             {
-                using var _ = onClickCtx.OpenSelf();
-                subject.OnNext(element, manager, arg, onClickCtx);
+                lock (onClickCtx)
+                {
+                    using var _ = onClickCtx.OpenSelf();
+                    subject.OnNext(element, manager, arg, onClickCtx);
+                }
             });
 
             return (TOut)builder;

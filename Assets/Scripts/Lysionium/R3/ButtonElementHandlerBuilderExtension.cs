@@ -17,8 +17,11 @@ namespace Lysionium.R3
             var onClickCtx = new OnClickContext();
             builder.OnClick((element, manager, arg) =>
             {
-                using var _ = onClickCtx.OpenSelf();
-                subject.OnNext(new R3RuleArg<TElm, TMgr, TArg, TOut, TElm>(element, manager, arg, onClickCtx));
+                lock (onClickCtx)
+                {
+                    using var _ = onClickCtx.OpenSelf();
+                    subject.OnNext(new R3RuleArg<TElm, TMgr, TArg, TOut, TElm>(element, manager, arg, onClickCtx));
+                }
             });
 
             return (TOut)builder;

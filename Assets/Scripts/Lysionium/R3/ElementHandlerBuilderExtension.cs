@@ -89,17 +89,23 @@ namespace Lysionium.R3
             var nameFromCtx = new NameFromContext();
             builder.NameFrom((element, manager, arg) =>
             {
-                using var _ = nameFromCtx.OpenSelf();
-                subject.OnNext(new R3RuleArg<TElm, TMgr, TArg, TOut, TElm>(element, manager, arg, nameFromCtx));
-                return nameFromCtx.ReturnValue;
+                lock (nameFromCtx)
+                {
+                    using var _ = nameFromCtx.OpenSelf();
+                    subject.OnNext(new R3RuleArg<TElm, TMgr, TArg, TOut, TElm>(element, manager, arg, nameFromCtx));
+                    return nameFromCtx.ReturnValue;
+                }
             });
 
             var styleFromCtx = new StyleFromContext();
             builder.StyleFrom((element, manager, arg) =>
             {
-                using var _ = styleFromCtx.OpenSelf();
-                subject.OnNext(new R3RuleArg<TElm, TMgr, TArg, TOut, TElm>(element, manager, arg, styleFromCtx));
-                return styleFromCtx.ReturnValue;
+                lock (styleFromCtx)
+                {
+                    using var _ = styleFromCtx.OpenSelf();
+                    subject.OnNext(new R3RuleArg<TElm, TMgr, TArg, TOut, TElm>(element, manager, arg, styleFromCtx));
+                    return styleFromCtx.ReturnValue;
+                }
             });
 
             return (TOut)builder;
