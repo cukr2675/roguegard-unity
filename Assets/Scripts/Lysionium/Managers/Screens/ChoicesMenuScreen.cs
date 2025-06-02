@@ -38,9 +38,9 @@ namespace Lysionium
             if (choicesSubviewName != null) { view.ChoicesSubviewName = choicesSubviewName; }
         }
 
-        public ChoicesMenuScreen<TMgr, TArg> Option(string name, HandleClickElement<TMgr, TArg> onClick)
+        public ChoicesMenuScreen<TMgr, TArg> Option(string name, HandleClickElement<TMgr, TArg> onClick, string style = null)
         {
-            selectOptions.Add(SelectOption.Create(name, onClick));
+            selectOptions.Add(SelectOption.Create(name, onClick, style));
             return this;
         }
 
