@@ -4,6 +4,8 @@ using UnityEngine;
 
 namespace Roguegard
 {
+    // 命名メモ: RogueMethod 単位でのアスペクトのため Interceptor ではなく Aspect
+
     public interface IRogueMethodPassiveAspect
     {
         float Order { get; }
