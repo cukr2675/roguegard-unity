@@ -13,120 +13,10 @@ MonoBehaviour:
   m_Name: Localization-String-Tables-Japanese (Japan) (ja-JP)
   m_EditorClassIdentifier: 
   m_GroupName: Localization-String-Tables-Japanese (Japan) (ja-JP)
-  m_Data:
-    m_SerializedData: []
   m_GUID: afada6e6f9b5dea498f28901110b2683
   m_SerializeEntries:
-  - m_GUID: 8a2f336be202f1d48b202f2419657fe9
-    m_Address: KwStats_ja-JP
-    m_ReadOnly: 1
-    m_SerializedLabels:
-    - Locale-ja-JP
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 248a611d0725d63428682b150e343414
-    m_Address: CoreApplyTool1_ja-JP
-    m_ReadOnly: 1
-    m_SerializedLabels:
-    - Locale-ja-JP
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 5aca9b1552508fc4a888da0075f1356c
-    m_Address: CoreStatusEffect1_ja-JP
-    m_ReadOnly: 1
-    m_SerializedLabels:
-    - Locale-ja-JP
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 396bf79a2c23f2e4b960b68041784fb3
-    m_Address: CoreMainInfoKw_ja-JP
-    m_ReadOnly: 1
-    m_SerializedLabels:
-    - Locale-ja-JP
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: b8160decb5f5d5647ae0065e5b66f740
-    m_Address: CoreSkill1_ja-JP
-    m_ReadOnly: 1
-    m_SerializedLabels:
-    - Locale-ja-JP
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: a62ccff1ee0cd76489d09d00ffa75b5a
-    m_Address: CoreBodyArmor1_ja-JP
-    m_ReadOnly: 1
-    m_SerializedLabels:
-    - Locale-ja-JP
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 463a6f8d17d29ef4682e251326baadab
-    m_Address: CoreMonster1_ja-JP
-    m_ReadOnly: 1
-    m_SerializedLabels:
-    - Locale-ja-JP
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: c359ff04847d6d04bbbeae8c434c232d
-    m_Address: CoreWeapon1_ja-JP
-    m_ReadOnly: 1
-    m_SerializedLabels:
-    - Locale-ja-JP
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 935fdb114c5293b48a008019780e5e9b
-    m_Address: CoreAmmo1_ja-JP
-    m_ReadOnly: 1
-    m_SerializedLabels:
-    - Locale-ja-JP
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 18ddd86b63c12314c8daea35439de1cf
-    m_Address: CoreAbility1_ja-JP
-    m_ReadOnly: 1
-    m_SerializedLabels:
-    - Locale-ja-JP
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: f4ef8c15963b145448a329f6dbc1d135
-    m_Address: CoreTile1_ja-JP
-    m_ReadOnly: 1
-    m_SerializedLabels:
-    - Locale-ja-JP
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 5ae7899b1c896234a857d9604581ceb9
-    m_Address: UnityDevice_ja-JP
-    m_ReadOnly: 1
-    m_SerializedLabels:
-    - Locale-ja-JP
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 19ffaa6d65548144bad24886f21590d2
-    m_Address: CoreQuestEnvironment1_ja-JP
-    m_ReadOnly: 1
-    m_SerializedLabels:
-    - Locale-ja-JP
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 137155464690ba84e9a771a405742317
-    m_Address: CoreQuestObjectives1_ja-JP
-    m_ReadOnly: 1
-    m_SerializedLabels:
-    - Locale-ja-JP
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: e82ba5ca3399c274e8147c79c94a9f34
-    m_Address: CoreMoney1_ja-JP
-    m_ReadOnly: 1
-    m_SerializedLabels:
-    - Locale-ja-JP
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: d1b43eab609ad2543b3bc615d3a9c0e4
-    m_Address: CoreHerb1_ja-JP
-    m_ReadOnly: 1
-    m_SerializedLabels:
-    - Locale-ja-JP
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: a82531a1110391146a0c136de0a530bf
-    m_Address: CoreFood1_ja-JP
-    m_ReadOnly: 1
-    m_SerializedLabels:
-    - Locale-ja-JP
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 1342b9a969ce2e541b56bf8f7dbdaecf
-    m_Address: CoreBoots1_ja-JP
-    m_ReadOnly: 1
-    m_SerializedLabels:
-    - Locale-ja-JP
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 83a4d961720bad240b0e74dce04cea28
-    m_Address: CoreBottoms1_ja-JP
+  - m_GUID: 02332b1fa1bbd2146bb83e6a694c3f5c
+    m_Address: CoreCosmetic1_ja-JP
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-ja-JP
@@ -137,38 +27,38 @@ MonoBehaviour:
     m_SerializedLabels:
     - Locale-ja-JP
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 02332b1fa1bbd2146bb83e6a694c3f5c
-    m_Address: CoreCosmetic1_ja-JP
+  - m_GUID: 1342b9a969ce2e541b56bf8f7dbdaecf
+    m_Address: CoreBoots1_ja-JP
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-ja-JP
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: c93c0880382acd04ea50d9e10b9309a0
-    m_Address: CoreGloves1_ja-JP
+  - m_GUID: 137155464690ba84e9a771a405742317
+    m_Address: CoreQuestObjectives1_ja-JP
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-ja-JP
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 43d93d6488cc4ba43b9c17d87f8b766f
-    m_Address: CoreHeadwear1_ja-JP
+  - m_GUID: 18ddd86b63c12314c8daea35439de1cf
+    m_Address: CoreAbility1_ja-JP
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-ja-JP
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 632af3db7b9212540b9b43c36ac468be
-    m_Address: CoreLenses1_ja-JP
+  - m_GUID: 19ffaa6d65548144bad24886f21590d2
+    m_Address: CoreQuestEnvironment1_ja-JP
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-ja-JP
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: e95e8a9699bee024fb9d6ff8e26048e4
-    m_Address: CoreShield1_ja-JP
+  - m_GUID: 248a611d0725d63428682b150e343414
+    m_Address: CoreApplyTool1_ja-JP
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-ja-JP
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 43ba1398980aa6d4295eb22a95071631
-    m_Address: CoreSocks1_ja-JP
+  - m_GUID: 396bf79a2c23f2e4b960b68041784fb3
+    m_Address: CoreMainInfoKw_ja-JP
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-ja-JP
@@ -179,26 +69,38 @@ MonoBehaviour:
     m_SerializedLabels:
     - Locale-ja-JP
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: b16869f8cd192a1419904b45e685eccd
-    m_Address: CoreScroll1_ja-JP
+  - m_GUID: 43ba1398980aa6d4295eb22a95071631
+    m_Address: CoreSocks1_ja-JP
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-ja-JP
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 7fdd0675b3e5158449023a2384ade7e5
-    m_Address: CoreVehicle1_ja-JP
+  - m_GUID: 43d93d6488cc4ba43b9c17d87f8b766f
+    m_Address: CoreHeadwear1_ja-JP
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-ja-JP
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 8b3ae6bc7c235224bad1a4501c56899d
-    m_Address: UnityTitle_ja-JP
+  - m_GUID: 463a6f8d17d29ef4682e251326baadab
+    m_Address: CoreMonster1_ja-JP
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-ja-JP
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: b30c739affe5b0648afcd2dcabc9d394
-    m_Address: CoreAbility2_ja-JP
+  - m_GUID: 5aca9b1552508fc4a888da0075f1356c
+    m_Address: CoreStatusEffect1_ja-JP
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ja-JP
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5ae7899b1c896234a857d9604581ceb9
+    m_Address: UnityDevice_ja-JP
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ja-JP
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 632af3db7b9212540b9b43c36ac468be
+    m_Address: CoreLenses1_ja-JP
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-ja-JP
@@ -209,8 +111,104 @@ MonoBehaviour:
     m_SerializedLabels:
     - Locale-ja-JP
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7fdd0675b3e5158449023a2384ade7e5
+    m_Address: CoreVehicle1_ja-JP
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ja-JP
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 83a4d961720bad240b0e74dce04cea28
+    m_Address: CoreBottoms1_ja-JP
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ja-JP
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8a2f336be202f1d48b202f2419657fe9
+    m_Address: KwStats_ja-JP
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ja-JP
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8b3ae6bc7c235224bad1a4501c56899d
+    m_Address: UnityTitle_ja-JP
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ja-JP
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 935fdb114c5293b48a008019780e5e9b
+    m_Address: CoreAmmo1_ja-JP
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ja-JP
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 9cca3a5c18d697b45a47e9e32dfe359e
     m_Address: CoreMonster2_ja-JP
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ja-JP
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a62ccff1ee0cd76489d09d00ffa75b5a
+    m_Address: CoreBodyArmor1_ja-JP
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ja-JP
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a82531a1110391146a0c136de0a530bf
+    m_Address: CoreFood1_ja-JP
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ja-JP
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b16869f8cd192a1419904b45e685eccd
+    m_Address: CoreScroll1_ja-JP
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ja-JP
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b30c739affe5b0648afcd2dcabc9d394
+    m_Address: CoreAbility2_ja-JP
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ja-JP
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b8160decb5f5d5647ae0065e5b66f740
+    m_Address: CoreSkill1_ja-JP
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ja-JP
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c359ff04847d6d04bbbeae8c434c232d
+    m_Address: CoreWeapon1_ja-JP
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ja-JP
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c93c0880382acd04ea50d9e10b9309a0
+    m_Address: CoreGloves1_ja-JP
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ja-JP
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d1b43eab609ad2543b3bc615d3a9c0e4
+    m_Address: CoreHerb1_ja-JP
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ja-JP
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e82ba5ca3399c274e8147c79c94a9f34
+    m_Address: CoreMoney1_ja-JP
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ja-JP
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e95e8a9699bee024fb9d6ff8e26048e4
+    m_Address: CoreShield1_ja-JP
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ja-JP
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f4ef8c15963b145448a329f6dbc1d135
+    m_Address: CoreTile1_ja-JP
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-ja-JP

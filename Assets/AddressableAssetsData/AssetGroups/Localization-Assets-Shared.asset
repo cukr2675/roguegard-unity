@@ -13,17 +13,10 @@ MonoBehaviour:
   m_Name: Localization-Assets-Shared
   m_EditorClassIdentifier: 
   m_GroupName: Localization-Assets-Shared
-  m_Data:
-    m_SerializedData: []
   m_GUID: 4430074c4db89314eaf3efb0a46c996c
   m_SerializeEntries:
-  - m_GUID: df5b92953b451f34b9c73858241a0560
-    m_Address: Assets/CoreData/ObjInfos/Keywords/Stats/KwStats Shared Data.asset
-    m_ReadOnly: 1
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 471e6e46f5f53cd4ea869959d99c8f58
-    m_Address: Assets/CoreData/Items/ApplyTools1/CoreApplyTool1 Shared Data.asset
+  - m_GUID: 02c943ae6ef2dd44da613361c54aff3a
+    m_Address: Assets/CoreData/Items/Foods/Herbs/CoreHerb1 Shared Data.asset
     m_ReadOnly: 1
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -33,15 +26,28 @@ MonoBehaviour:
     m_ReadOnly: 1
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: f5ef8ac2d097b254cb472b5c8fc39d11
-    m_Address: Assets/CoreData/ObjInfos/Keywords/MainInfos/CoreMainInfoKw Shared
-      Data.asset
+  - m_GUID: 1857f1517ba18e644a959e4e157de281
+    m_Address: Assets/CoreData/Items/Equipments/Headwears1/CoreHeadwear1 Shared Data.asset
     m_ReadOnly: 1
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 6c37925a1dd53c34e86c29d66acefec5
-    m_Address: Assets/CoreData/CharacterCreation/Intrinsics/Skills1/CoreSkill1 Shared
-      Data.asset
+  - m_GUID: 19cddf0deba7cc2408d3a984f89285cc
+    m_Address: Assets/Texts/Tables/UnityTitle/UnityTitle Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1e8f867f86a9c9a4780bf6f89f66e202
+    m_Address: Assets/CoreData/Items/Equipments/Boots1/CoreBoots1 Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 467eceb5ad3534f459e581adb587c1cc
+    m_Address: Assets/CoreData/Items/Equipments/Bottoms1/CoreBottoms1 Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 471e6e46f5f53cd4ea869959d99c8f58
+    m_Address: Assets/CoreData/Items/ApplyTools1/CoreApplyTool1 Shared Data.asset
     m_ReadOnly: 1
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -51,40 +57,29 @@ MonoBehaviour:
     m_ReadOnly: 1
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4a11a1d786a51d94986c84d2261f8c78
+    m_Address: Assets/CoreData/Items/Equipments/Cloaks1/CoreCloak1 Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6c37925a1dd53c34e86c29d66acefec5
+    m_Address: Assets/CoreData/CharacterCreation/Intrinsics/Skills1/CoreSkill1 Shared
+      Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 77d57214937a1bf449e8b02d08d71e14
     m_Address: Assets/CoreData/Monsters/1/CoreMonster1 Shared Data.asset
     m_ReadOnly: 1
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: b21260393adc74243be97600119c567a
-    m_Address: Assets/CoreData/Items/Weapons1/CoreWeapon1 Shared Data.asset
+  - m_GUID: 82e775d00540f8c429c094575a87127d
+    m_Address: Assets/CoreData/Items/Equipments/Lenses1/CoreLenses1 Shared Data.asset
     m_ReadOnly: 1
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: b528029067f6ae540bcc4ec632efa656
-    m_Address: Assets/CoreData/Items/Ammos1/CoreAmmo1 Shared Data.asset
-    m_ReadOnly: 1
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: c6142c37dd1530b44bb22abd576d46fe
-    m_Address: Assets/CoreData/CharacterCreation/Intrinsics/Abilities1/CoreAbility1
-      Shared Data.asset
-    m_ReadOnly: 1
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: e2911fb43e85d98418a51de5d8c818f7
-    m_Address: Assets/CoreData/Tiles/1/CoreTile1 Shared Data.asset
-    m_ReadOnly: 1
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: f442e2877505c5d4391852a201825d92
-    m_Address: Assets/Texts/Tables/UnityDevice/UnityDevice Shared Data.asset
-    m_ReadOnly: 1
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: e63f09f9c5874394ab2eec6f3b815aa6
-    m_Address: Assets/CoreData/CharacterCreation/Intrinsics/QuestEnvironments1/CoreQuestEnvironment1
-      Shared Data.asset
+  - m_GUID: 84aa6107a0523104fad134b24521f4b5
+    m_Address: Assets/CoreData/Items/Foods/Foods/CoreFood1 Shared Data.asset
     m_ReadOnly: 1
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -99,63 +94,46 @@ MonoBehaviour:
     m_ReadOnly: 1
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 02c943ae6ef2dd44da613361c54aff3a
-    m_Address: Assets/CoreData/Items/Foods/Herbs/CoreHerb1 Shared Data.asset
-    m_ReadOnly: 1
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 84aa6107a0523104fad134b24521f4b5
-    m_Address: Assets/CoreData/Items/Foods/Foods/CoreFood1 Shared Data.asset
-    m_ReadOnly: 1
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 1e8f867f86a9c9a4780bf6f89f66e202
-    m_Address: Assets/CoreData/Items/Equipments/Boots1/CoreBoots1 Shared Data.asset
-    m_ReadOnly: 1
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 467eceb5ad3534f459e581adb587c1cc
-    m_Address: Assets/CoreData/Items/Equipments/Bottoms1/CoreBottoms1 Shared Data.asset
-    m_ReadOnly: 1
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 4a11a1d786a51d94986c84d2261f8c78
-    m_Address: Assets/CoreData/Items/Equipments/Cloaks1/CoreCloak1 Shared Data.asset
-    m_ReadOnly: 1
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: dbf9c54f527d06a46916cb02102375a4
-    m_Address: Assets/CoreData/Items/Equipments/Cosmetics1/CoreCosmetic1 Shared Data.asset
-    m_ReadOnly: 1
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: cb93b46e15c562047b0c3d545b80b57d
-    m_Address: Assets/CoreData/Items/Equipments/Gloves1/CoreGloves1 Shared Data.asset
-    m_ReadOnly: 1
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 1857f1517ba18e644a959e4e157de281
-    m_Address: Assets/CoreData/Items/Equipments/Headwears1/CoreHeadwear1 Shared Data.asset
-    m_ReadOnly: 1
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 82e775d00540f8c429c094575a87127d
-    m_Address: Assets/CoreData/Items/Equipments/Lenses1/CoreLenses1 Shared Data.asset
-    m_ReadOnly: 1
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 93b7e5700a5deb64ab64b94eb4e8b006
     m_Address: Assets/CoreData/Items/Equipments/Shields1/CoreShield1 Shared Data.asset
     m_ReadOnly: 1
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: f7125d9797867b0429993bbe8aa15f73
-    m_Address: Assets/CoreData/Items/Equipments/Socks1/CoreSocks1 Shared Data.asset
+  - m_GUID: 9e0467894ee990040984e2bef89bc1b5
+    m_Address: Assets/CoreData/CharacterCreation/Intrinsics/Skills2/CoreSkill2 Shared
+      Data.asset
     m_ReadOnly: 1
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: dbbeb42f0b89a7642aea349f302888b9
-    m_Address: Assets/CoreData/Items/Equipments/Tops1/CoreTops1 Shared Data.asset
+  - m_GUID: a0b9afa696ca7054ea5bd7a5a40de2a7
+    m_Address: Assets/CoreData/CharacterCreation/Intrinsics/Abilities2/CoreAbility2
+      Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b21260393adc74243be97600119c567a
+    m_Address: Assets/CoreData/Items/Weapons1/CoreWeapon1 Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b2668dcadfbcf604bb71da1a851df79b
+    m_Address: Assets/CoreData/Enemies/Enemies2/CoreMonster2 Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b528029067f6ae540bcc4ec632efa656
+    m_Address: Assets/CoreData/Items/Ammos1/CoreAmmo1 Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c6142c37dd1530b44bb22abd576d46fe
+    m_Address: Assets/CoreData/CharacterCreation/Intrinsics/Abilities1/CoreAbility1
+      Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cb93b46e15c562047b0c3d545b80b57d
+    m_Address: Assets/CoreData/Items/Equipments/Gloves1/CoreGloves1 Shared Data.asset
     m_ReadOnly: 1
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -169,25 +147,45 @@ MonoBehaviour:
     m_ReadOnly: 1
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 19cddf0deba7cc2408d3a984f89285cc
-    m_Address: Assets/Texts/Tables/UnityTitle/UnityTitle Shared Data.asset
+  - m_GUID: dbbeb42f0b89a7642aea349f302888b9
+    m_Address: Assets/CoreData/Items/Equipments/Tops1/CoreTops1 Shared Data.asset
     m_ReadOnly: 1
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: a0b9afa696ca7054ea5bd7a5a40de2a7
-    m_Address: Assets/CoreData/CharacterCreation/Intrinsics/Abilities2/CoreAbility2
+  - m_GUID: dbf9c54f527d06a46916cb02102375a4
+    m_Address: Assets/CoreData/Items/Equipments/Cosmetics1/CoreCosmetic1 Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: df5b92953b451f34b9c73858241a0560
+    m_Address: Assets/CoreData/ObjInfos/Keywords/Stats/KwStats Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e2911fb43e85d98418a51de5d8c818f7
+    m_Address: Assets/CoreData/Tiles/1/CoreTile1 Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e63f09f9c5874394ab2eec6f3b815aa6
+    m_Address: Assets/CoreData/CharacterCreation/Intrinsics/QuestEnvironments1/CoreQuestEnvironment1
       Shared Data.asset
     m_ReadOnly: 1
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 9e0467894ee990040984e2bef89bc1b5
-    m_Address: Assets/CoreData/CharacterCreation/Intrinsics/Skills2/CoreSkill2 Shared
+  - m_GUID: f442e2877505c5d4391852a201825d92
+    m_Address: Assets/Texts/Tables/UnityDevice/UnityDevice Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f5ef8ac2d097b254cb472b5c8fc39d11
+    m_Address: Assets/CoreData/ObjInfos/Keywords/MainInfos/CoreMainInfoKw Shared
       Data.asset
     m_ReadOnly: 1
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: b2668dcadfbcf604bb71da1a851df79b
-    m_Address: Assets/CoreData/Enemies/Enemies2/CoreMonster2 Shared Data.asset
+  - m_GUID: f7125d9797867b0429993bbe8aa15f73
+    m_Address: Assets/CoreData/Items/Equipments/Socks1/CoreSocks1 Shared Data.asset
     m_ReadOnly: 1
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

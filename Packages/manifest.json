@@ -1,22 +1,23 @@
 {
   "dependencies": {
     "com.judahperez.hsvcolorpicker": "3.3.0",
-    "com.unity.addressables": "1.21.19",
-    "com.unity.collab-proxy": "2.2.0",
-    "com.unity.feature.2d": "2.0.0",
-    "com.unity.ide.rider": "3.0.26",
-    "com.unity.ide.visualstudio": "2.0.22",
-    "com.unity.inputsystem": "1.7.0",
-    "com.unity.localization": "1.4.5",
-    "com.unity.render-pipelines.universal": "14.0.9",
-    "com.unity.test-framework": "1.1.33",
-    "com.unity.textmeshpro": "3.0.6",
-    "com.unity.timeline": "1.7.6",
-    "com.unity.ugui": "1.0.0",
-    "com.unity.visualscripting": "1.9.1",
+    "com.unity.addressables": "2.4.3",
+    "com.unity.collab-proxy": "2.7.1",
+    "com.unity.feature.2d": "2.0.1",
+    "com.unity.ide.rider": "3.0.36",
+    "com.unity.ide.visualstudio": "2.0.23",
+    "com.unity.inputsystem": "1.14.0",
+    "com.unity.localization": "1.5.2",
+    "com.unity.multiplayer.center": "1.0.0",
+    "com.unity.render-pipelines.universal": "17.0.4",
+    "com.unity.test-framework": "1.5.1",
+    "com.unity.timeline": "1.8.7",
+    "com.unity.ugui": "2.0.0",
+    "com.unity.visualscripting": "1.9.6",
     "jp.cukr2675.save2idb": "https://github.com/cukr2675/save2idb.git?path=Packages/Save2IDB",
-    "moonsharp": "https://github.com/k0dep/MoonSharp.git#2.0.0",
+    "org.nuget.r3": "1.2.9",
     "org.nuget.system.text.json": "7.0.3",
+    "com.unity.modules.accessibility": "1.0.0",
     "com.unity.modules.ai": "1.0.0",
     "com.unity.modules.androidjni": "1.0.0",
     "com.unity.modules.animation": "1.0.0",
@@ -52,7 +53,7 @@
   "scopedRegistries": [
     {
       "name": "Unity NuGet",
-      "url": "https://unitynuget-registry.azurewebsites.net",
+      "url": "https://unitynuget-registry.openupm.com",
       "scopes": [
         "org.nuget"
       ]

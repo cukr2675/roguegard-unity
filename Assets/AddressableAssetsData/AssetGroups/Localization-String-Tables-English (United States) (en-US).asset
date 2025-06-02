@@ -13,30 +13,10 @@ MonoBehaviour:
   m_Name: Localization-String-Tables-English (United States) (en-US)
   m_EditorClassIdentifier: 
   m_GroupName: Localization-String-Tables-English (United States) (en-US)
-  m_Data:
-    m_SerializedData: []
   m_GUID: 91dab08dcd53e9445895102554e0a42d
   m_SerializeEntries:
-  - m_GUID: 8cb3d121e29b89c4c936bf045c72847e
-    m_Address: KwStats_en-US
-    m_ReadOnly: 1
-    m_SerializedLabels:
-    - Locale-en-US
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: d6a3b618073ce814d811c1b35cbc61e4
-    m_Address: CoreApplyTool1_en-US
-    m_ReadOnly: 1
-    m_SerializedLabels:
-    - Locale-en-US
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: e15b11a8e23361746b152dd641191dea
-    m_Address: CoreStatusEffect1_en-US
-    m_ReadOnly: 1
-    m_SerializedLabels:
-    - Locale-en-US
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 9160cf7558ea03143b2a53354932e646
-    m_Address: CoreMainInfoKw_en-US
+  - m_GUID: 0207f7c51e678f247af7261d3d0f582c
+    m_Address: CoreShield1_en-US
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-en-US
@@ -47,26 +27,14 @@ MonoBehaviour:
     m_SerializedLabels:
     - Locale-en-US
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: ca971574cfd217740acfd48801946368
-    m_Address: CoreBodyArmor1_en-US
+  - m_GUID: 063195888fdca904bb1de5cf5253f870
+    m_Address: UnityDevice_en-US
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-en-US
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 55e8e193ab8ecb740b5a65c60bef7da0
-    m_Address: CoreMonster1_en-US
-    m_ReadOnly: 1
-    m_SerializedLabels:
-    - Locale-en-US
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 1a1e34bf101004e47b296ca61f03fab1
-    m_Address: CoreWeapon1_en-US
-    m_ReadOnly: 1
-    m_SerializedLabels:
-    - Locale-en-US
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 1657c5b256e3a0f4ca5d700284970132
-    m_Address: CoreAmmo1_en-US
+  - m_GUID: 081bca694c1aac84f8375e433f7de4ce
+    m_Address: CoreAbility2_en-US
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-en-US
@@ -77,14 +45,20 @@ MonoBehaviour:
     m_SerializedLabels:
     - Locale-en-US
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 71ffa699cf149de4188aff26db154c31
-    m_Address: CoreTile1_en-US
+  - m_GUID: 0e1ca126ff12b5a4ab65c6fde0a76580
+    m_Address: CoreCosmetic1_en-US
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-en-US
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 063195888fdca904bb1de5cf5253f870
-    m_Address: UnityDevice_en-US
+  - m_GUID: 1657c5b256e3a0f4ca5d700284970132
+    m_Address: CoreAmmo1_en-US
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en-US
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1a1e34bf101004e47b296ca61f03fab1
+    m_Address: CoreWeapon1_en-US
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-en-US
@@ -95,8 +69,134 @@ MonoBehaviour:
     m_SerializedLabels:
     - Locale-en-US
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 26cfa21335ac112419e429cee2fe7f5c
+    m_Address: CoreTops1_en-US
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en-US
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2a66a8b4740f1454bb583757357a8649
+    m_Address: CoreSkill2_en-US
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en-US
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2cf0142efaecf8348b79466f8e9b48b7
+    m_Address: UnityTitle_en-US
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en-US
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 39e8e01c0f6f7f744a98d18a1d61ebc4
+    m_Address: CoreHeadwear1_en-US
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en-US
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3a72e8161d2e8e346badf423563cfeb8
+    m_Address: CoreFood1_en-US
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en-US
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 55e8e193ab8ecb740b5a65c60bef7da0
+    m_Address: CoreMonster1_en-US
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en-US
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 66784b09bc9cbaa49bdf7fe88f9a107b
+    m_Address: CoreGloves1_en-US
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en-US
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 69763492ff9c6984a8f9af355b7876b7
+    m_Address: CoreCloak1_en-US
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en-US
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 71ffa699cf149de4188aff26db154c31
+    m_Address: CoreTile1_en-US
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en-US
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8043b819991719845ae1988d45713999
+    m_Address: CoreMonster2_en-US
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en-US
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 837e58f40bbf0eb42aa5760da2e89713
+    m_Address: CoreSocks1_en-US
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en-US
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8b148e2409d7c2941bb92f9e2a2fcd5d
+    m_Address: CoreBottoms1_en-US
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en-US
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8cb3d121e29b89c4c936bf045c72847e
+    m_Address: KwStats_en-US
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en-US
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 8e718a9678496f14f8cc24700aa4126f
     m_Address: CoreQuestObjectives1_en-US
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en-US
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9160cf7558ea03143b2a53354932e646
+    m_Address: CoreMainInfoKw_en-US
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en-US
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a6f460b0aec588c4c9f4fb1c7eb1c680
+    m_Address: CoreVehicle1_en-US
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en-US
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: addadfba430b831458d64eec530d8721
+    m_Address: CoreBoots1_en-US
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en-US
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ca971574cfd217740acfd48801946368
+    m_Address: CoreBodyArmor1_en-US
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en-US
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d6a3b618073ce814d811c1b35cbc61e4
+    m_Address: CoreApplyTool1_en-US
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en-US
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e05216f3ece548a408175652c106d8d4
+    m_Address: CoreLenses1_en-US
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en-US
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e15b11a8e23361746b152dd641191dea
+    m_Address: CoreStatusEffect1_en-US
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en-US
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f6d2dd7f6e110cd478fc5537324706d5
+    m_Address: CoreScroll1_en-US
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-en-US
@@ -109,108 +209,6 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: fab7782cfb4abdb4f947e3e48187e046
     m_Address: CoreHerb1_en-US
-    m_ReadOnly: 1
-    m_SerializedLabels:
-    - Locale-en-US
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 3a72e8161d2e8e346badf423563cfeb8
-    m_Address: CoreFood1_en-US
-    m_ReadOnly: 1
-    m_SerializedLabels:
-    - Locale-en-US
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: addadfba430b831458d64eec530d8721
-    m_Address: CoreBoots1_en-US
-    m_ReadOnly: 1
-    m_SerializedLabels:
-    - Locale-en-US
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 8b148e2409d7c2941bb92f9e2a2fcd5d
-    m_Address: CoreBottoms1_en-US
-    m_ReadOnly: 1
-    m_SerializedLabels:
-    - Locale-en-US
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 69763492ff9c6984a8f9af355b7876b7
-    m_Address: CoreCloak1_en-US
-    m_ReadOnly: 1
-    m_SerializedLabels:
-    - Locale-en-US
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 0e1ca126ff12b5a4ab65c6fde0a76580
-    m_Address: CoreCosmetic1_en-US
-    m_ReadOnly: 1
-    m_SerializedLabels:
-    - Locale-en-US
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 66784b09bc9cbaa49bdf7fe88f9a107b
-    m_Address: CoreGloves1_en-US
-    m_ReadOnly: 1
-    m_SerializedLabels:
-    - Locale-en-US
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 39e8e01c0f6f7f744a98d18a1d61ebc4
-    m_Address: CoreHeadwear1_en-US
-    m_ReadOnly: 1
-    m_SerializedLabels:
-    - Locale-en-US
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: e05216f3ece548a408175652c106d8d4
-    m_Address: CoreLenses1_en-US
-    m_ReadOnly: 1
-    m_SerializedLabels:
-    - Locale-en-US
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 0207f7c51e678f247af7261d3d0f582c
-    m_Address: CoreShield1_en-US
-    m_ReadOnly: 1
-    m_SerializedLabels:
-    - Locale-en-US
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 837e58f40bbf0eb42aa5760da2e89713
-    m_Address: CoreSocks1_en-US
-    m_ReadOnly: 1
-    m_SerializedLabels:
-    - Locale-en-US
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 26cfa21335ac112419e429cee2fe7f5c
-    m_Address: CoreTops1_en-US
-    m_ReadOnly: 1
-    m_SerializedLabels:
-    - Locale-en-US
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: f6d2dd7f6e110cd478fc5537324706d5
-    m_Address: CoreScroll1_en-US
-    m_ReadOnly: 1
-    m_SerializedLabels:
-    - Locale-en-US
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: a6f460b0aec588c4c9f4fb1c7eb1c680
-    m_Address: CoreVehicle1_en-US
-    m_ReadOnly: 1
-    m_SerializedLabels:
-    - Locale-en-US
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 2cf0142efaecf8348b79466f8e9b48b7
-    m_Address: UnityTitle_en-US
-    m_ReadOnly: 1
-    m_SerializedLabels:
-    - Locale-en-US
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 081bca694c1aac84f8375e433f7de4ce
-    m_Address: CoreAbility2_en-US
-    m_ReadOnly: 1
-    m_SerializedLabels:
-    - Locale-en-US
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 2a66a8b4740f1454bb583757357a8649
-    m_Address: CoreSkill2_en-US
-    m_ReadOnly: 1
-    m_SerializedLabels:
-    - Locale-en-US
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 8043b819991719845ae1988d45713999
-    m_Address: CoreMonster2_en-US
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-en-US
