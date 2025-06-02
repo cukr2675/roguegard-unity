@@ -16,9 +16,15 @@ namespace Roguegard.Editor
     {
         [SerializeField] private AudioMixerGroup _audioMixerGroup = null;
 
-        [SerializeField] private AudioPlayTable.PlayBehaviour _playBehaviour = AudioPlayTable.PlayBehaviour.SE;
+        [SerializeField] private AudioPlayTable.PlayBehaviour _playBehaviour = AudioPlayTable.PlayBehaviour.Sfx;
 
         [SerializeField] private Item[] _items = null;
+
+        public override void ClearSeedIsDirty()
+        {
+            //_isDirty = false;
+            //EditorUtility.SetDirty(this);
+        }
 
         public override AudioPlayTable.Item[] CreatePlayItems(string directory, int blankSamples)
         {
