@@ -69,14 +69,13 @@ namespace Lysionium
         private void Awake()
         {
 #if UNITY_EDITOR
-            if (_log)
-            {
-                _onPlayString.AddListener(Log);
-                _onPlayObject.AddListener(Log);
-            }
+            _onPlayString.AddListener(Log);
+            _onPlayObject.AddListener(Log);
 
             void Log(object value, object sender)
             {
+                if (!_log) return;
+
                 // Play をリクエストしたオブジェクトがアニメーターを持つ場合、その状態を表示する
                 animatorLog.Clear();
                 if ((sender is GameObject obj && obj.TryGetComponent<Animator>(out var animator)) ||
