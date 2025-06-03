@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Roguegard
 {
-    public class RogueException : System.Exception
+    public class RogueException : System.InvalidOperationException
     {
         public RogueException() { }
 
