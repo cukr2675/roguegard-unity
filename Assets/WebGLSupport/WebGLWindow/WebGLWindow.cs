@@ -11,6 +11,9 @@ namespace WebGLSupport
         [DllImport("__Internal")]
         public static extern void WebGLWindowInit();
         [DllImport("__Internal")]
+        public static extern void WebGLWindowUninit();
+
+        [DllImport("__Internal")]
         public static extern void WebGLWindowOnFocus(Action cb);
 
         [DllImport("__Internal")]
@@ -24,14 +27,26 @@ namespace WebGLSupport
 
         [DllImport("__Internal")]
         public static extern string WebGLWindowGetCanvasName();
+
+        [DllImport("__Internal")]
+        public static extern void MakeFullscreen(string str);
+
+        [DllImport("__Internal")]
+        public static extern void ExitFullscreen();
+
+        [DllImport("__Internal")]
+        public static extern bool IsFullscreen();
 #else
         public static void WebGLWindowInit() { }
+        public static void WebGLWindowUninit() { }
         public static void WebGLWindowOnFocus(Action cb) { }
         public static void WebGLWindowOnBlur(Action cb) { }
         public static void WebGLWindowOnResize(Action cb) { }
         public static void WebGLWindowInjectFullscreen() { }
         public static string WebGLWindowGetCanvasName() { return ""; }
-
+        public static void MakeFullscreen(string str) { }
+        public static void ExitFullscreen() { }
+        public static bool IsFullscreen() { return false; }
 #endif
 
     }
@@ -55,6 +70,13 @@ namespace WebGLSupport
             WebGLWindowPlugin.WebGLWindowOnBlur(OnWindowBlur);
             WebGLWindowPlugin.WebGLWindowOnResize(OnWindowResize);
             WebGLWindowPlugin.WebGLWindowInjectFullscreen();
+
+            Application.quitting += Uninit;
+        }
+        static void Uninit()
+        {
+            WebGLWindowPlugin.WebGLWindowUninit();
+            Application.quitting -= Uninit;
         }
 
         [MonoPInvokeCallback(typeof(Action))]
@@ -88,5 +110,29 @@ namespace WebGLSupport
             return WebGLWindowPlugin.WebGLWindowGetCanvasName();
         }
 
+        public static void MakeFullscreen(string fullscreenElementName = null)
+        {
+            WebGLWindowPlugin.MakeFullscreen(fullscreenElementName ?? GetCanvasName());
+        }
+
+        public static void ExitFullscreen()
+        {
+            WebGLWindowPlugin.ExitFullscreen();
+        }
+        public static bool IsFullscreen()
+        {
+            return WebGLWindowPlugin.IsFullscreen();
+        }
+        public static void SwitchFullscreen()
+        {
+            if (IsFullscreen())
+            {
+                ExitFullscreen();
+            }
+            else
+            {
+                MakeFullscreen();
+            }
+        }
     }
 }
