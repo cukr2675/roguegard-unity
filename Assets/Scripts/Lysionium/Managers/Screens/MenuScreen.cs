@@ -27,7 +27,7 @@ namespace Lysionium
         /// 画面UIを閉じるメソッド。 <see cref="IsIncremental"/> によって実行されないことがあるためビジネスロジック関連の処理は禁止。
         /// <para>メモ: この画面のUI表示前に独自の遷移アニメーションをトリガーしたい場合や <see cref="IsIncremental"/> == true のときオーバーライドする</para>
         /// </summary>
-        public virtual void CloseScreenView(TMgr manager, bool back)
+        public virtual void CloseScreenView(TMgr manager, bool back) // 命名メモ：表示処理のみ扱うことを推奨するため View をつける
         {
             manager.HideAll(back);
         }
