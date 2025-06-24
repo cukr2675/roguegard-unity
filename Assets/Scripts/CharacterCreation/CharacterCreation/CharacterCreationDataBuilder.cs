@@ -18,6 +18,11 @@ namespace Roguegard.CharacterCreation
         public AppearanceBuilderList Appearances { get; }
         public IntrinsicBuilderList Intrinsics { get; }
         public StartingItemBuilderTable StartingItemTable { get; }
+        // 命名メモ: LootBuilderTable StartingLootTable { get; } にするのもいいが "LootTable" が入ると倒したときの動作を連想させてしまうので StartingItem
+        // あくまでキャラクリシステムから着想を得た名前にする
+        // IStartingItemOption は初期アイテムとして選択できるもの、 IIntrinsicOption は固有能力として選択できるもの、といったように説明しやすい
+        // ILootOption だとドロップアイテムとして選択できるものとなりわかりづらい（キャラクリでドロップアイテムの変更は一般的ではない）
+        // IDropOption も同じ理由で却下
 
         [System.NonSerialized] private SortedIntrinsicList sortedIntrinsics;
         [System.NonSerialized] private GrowingInfoSetTable growingInfoSets;
