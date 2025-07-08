@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2481148761547060382, guid: d907f5fababbe514eae39032125b56e6, type: 3}
       propertyPath: m_Name
-      value: LMF_ButtonScrollViewElement
+      value: LUI_ButtonScrollViewElement
       objectReference: {fileID: 0}
     - target: {fileID: 5246166795572705979, guid: d907f5fababbe514eae39032125b56e6, type: 3}
       propertyPath: m_Pivot.x
@@ -112,11 +112,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 7269713939000937424}
   m_SourcePrefab: {fileID: 100100000, guid: d907f5fababbe514eae39032125b56e6, type: 3}
---- !u!95 &1488571757171486679 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 7797117864536441047, guid: d907f5fababbe514eae39032125b56e6, type: 3}
-  m_PrefabInstance: {fileID: 8690985497313324800}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &2875311238398194000 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6880300753698102864, guid: d907f5fababbe514eae39032125b56e6, type: 3}
@@ -147,19 +142,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _icon: {fileID: 0}
   _text: {fileID: 2875311238398194000}
+  _keyIcon: {fileID: 0}
   _defaultStyle: Submit
-  _onClickWithoutBlock:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1488571757171486679}
-        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-        m_MethodName: SetTrigger
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Click
-          m_BoolArgument: 0
-        m_CallState: 2

@@ -90,7 +90,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3602637787708728867, guid: f5f8e9b6b892206468cc81a8f1000e32, type: 3}
       propertyPath: m_Name
-      value: SliderVertical (LMF)
+      value: SliderVertical (LUI)
       objectReference: {fileID: 0}
     - target: {fileID: 5479053773847686327, guid: f5f8e9b6b892206468cc81a8f1000e32, type: 3}
       propertyPath: m_SizeDelta.x

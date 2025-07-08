@@ -215,7 +215,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3886630998191265058, guid: f51bc7baf415485489819ee93ab5c0de, type: 3}
       propertyPath: m_Name
-      value: LMF_Carousel3DSubView
+      value: LUI_Carousel3DSubview
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -250,7 +250,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fada365a434c2b418b147989fc52ab2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _axisPosition: {x: 0, y: 0}
+  _axisAnchoredPosition: {x: 0, y: 0}
   _axisRotation: {x: 0.25881904, y: 0, z: 0, w: 0.9659258}
   _radius: 1
   _content: {fileID: 3519301190486513262}

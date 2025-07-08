@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2948285241476790876, guid: fb2945a726658cc40853d1dabf981f86, type: 3}
       propertyPath: m_Name
-      value: LMF_LabelViewElement
+      value: LUI_LabelViewElement
       objectReference: {fileID: 0}
     - target: {fileID: 6468216191216407787, guid: fb2945a726658cc40853d1dabf981f86, type: 3}
       propertyPath: m_fontSize

@@ -1955,7 +1955,7 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5608674004883516873}
     - target: {fileID: 11423364, guid: 916ee089a0d7b63419075f91e1c657ec, type: 3}
-      propertyPath: Setup.ColorCode.Elements.Array.data[0]
+      propertyPath: 'Setup.ColorCode.Elements.Array.data[0]'
       value: 
       objectReference: {fileID: 650124557309275252}
     - target: {fileID: 11459056, guid: 916ee089a0d7b63419075f91e1c657ec, type: 3}

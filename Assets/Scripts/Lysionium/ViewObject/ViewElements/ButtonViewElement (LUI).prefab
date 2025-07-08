@@ -42,7 +42,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3329933306899071122, guid: d6fceb097ed8604418b67a80afb9efee, type: 3}
       propertyPath: m_Name
-      value: ButtonViewElement (LMF)
+      value: ButtonViewElement (LUI)
       objectReference: {fileID: 0}
     - target: {fileID: 4942317908229410487, guid: d6fceb097ed8604418b67a80afb9efee, type: 3}
       propertyPath: m_LocalPosition.x
@@ -114,7 +114,7 @@ CanvasGroup:
   m_IgnoreParentGroups: 0
 --- !u!95 &7797117864536441047
 Animator:
-  serializedVersion: 5
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -128,6 +128,7 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1

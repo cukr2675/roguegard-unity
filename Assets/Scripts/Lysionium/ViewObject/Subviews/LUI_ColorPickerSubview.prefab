@@ -1189,7 +1189,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3886630998191265058, guid: f51bc7baf415485489819ee93ab5c0de, type: 3}
       propertyPath: m_Name
-      value: LUI_ColorPickerSubView
+      value: LUI_ColorPickerSubview
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

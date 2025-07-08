@@ -110,7 +110,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7504610908210163497, guid: a5b1d2461a9af8c49a4be0c36b217e13, type: 3}
       propertyPath: m_Name
-      value: LMF_InputFieldViewWidget
+      value: LUI_InputFieldViewWidget
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
