@@ -1,19 +1,19 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace OchalikeSprites
 {
-    public class OchalikeSpriteNode : ISortableBone<OchalikeSpriteNode>
+    public class OchalikeEvaluatorNode : ISortableBone<OchalikeEvaluatorNode>
     {
         public readonly IReadOnlyOchalikeBone source;
 
-        BoneKeyword ISortableBone<OchalikeSpriteNode>.Name => source.Name;
-        float ISortableBone<OchalikeSpriteNode>.NormalOrderInParent => source.NormalOrderInParent;
-        float ISortableBone<OchalikeSpriteNode>.BackOrderInParent => source.BackOrderInParent;
+        BoneKeyword ISortableBone<OchalikeEvaluatorNode>.Name => source.Name;
+        float ISortableBone<OchalikeEvaluatorNode>.NormalOrderInParent => source.NormalOrderInParent;
+        float ISortableBone<OchalikeEvaluatorNode>.BackOrderInParent => source.BackOrderInParent;
 
-        private readonly BoneChildren<OchalikeSpriteNode> _children;
-        ISortableBoneChildren<OchalikeSpriteNode> ISortableBone<OchalikeSpriteNode>.Children => _children;
+        private readonly BoneChildren<OchalikeEvaluatorNode> _children;
+        ISortableBoneChildren<OchalikeEvaluatorNode> ISortableBone<OchalikeEvaluatorNode>.Children => _children;
 
         public BoneBack.Type LocalBack { get; set; }
         public int NormalFrontSpriteCount { get; set; }
@@ -31,30 +31,30 @@ namespace OchalikeSprites
         private readonly List<Color> equipmentColors;
         private bool overridesOnDefaultColor;
 
-        public OchalikeSpriteNode(IReadOnlyOchalikeBone bone)
+        public OchalikeEvaluatorNode(IReadOnlyOchalikeBone bone)
         {
             source = bone;
-            _children = new BoneChildren<OchalikeSpriteNode>();
+            _children = new BoneChildren<OchalikeEvaluatorNode>();
             equipmentSprites = new List<BoneSprite>();
             equipmentColors = new List<Color>();
             for (int i = 0; i < bone.Children.Count; i++)
             {
                 var childBone = bone.Children[i];
-                var child = new OchalikeSpriteNode(childBone);
+                var child = new OchalikeEvaluatorNode(childBone);
                 _children.AddChild(child);
             }
         }
 
-        public OchalikeSpriteNode(OchalikeSpriteNode node)
+        public OchalikeEvaluatorNode(OchalikeEvaluatorNode node)
         {
             source = node.source;
-            _children = new BoneChildren<OchalikeSpriteNode>();
+            _children = new BoneChildren<OchalikeEvaluatorNode>();
             equipmentSprites = new List<BoneSprite>();
             equipmentColors = new List<Color>();
             for (int i = 0; i < node._children.Count; i++)
             {
                 var childBone = node._children[i];
-                var child = new OchalikeSpriteNode(childBone);
+                var child = new OchalikeEvaluatorNode(childBone);
                 _children.AddChild(child);
             }
         }
