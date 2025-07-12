@@ -20,6 +20,9 @@ namespace OchalikeSprites.Editor
         public bool IsPlaying { get; private set; } = false;
         private double beforeTimeSinceStartup = 0.0;
         private float animationTime = 0f;
+        private float playbackSpeed = 1f;
+        private static readonly float[] playbackSpeeds = new[] { 0.25f, 0.5f, 1f, 2f, 4f };
+        private static readonly string[] playbackSpeedDisplays = new[] { "x0.25", "x0.5", "x1", "x2", "x4" };
 
         /// <summary>
         /// <see cref="OnPreviewGUI"/> と <see cref="OnPreviewSettings"/> で変更があったとき呼び出されるイベント
@@ -84,8 +87,11 @@ namespace OchalikeSprites.Editor
         public void OnPreviewGUI(Rect r, Texture preview)
         {
             var titleHeight = EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing * 2;
-            var playButtonRect = new Rect(0f, titleHeight, 64f, EditorGUIUtility.singleLineHeight);
-            var seekBarRect = new Rect(playButtonRect.width, titleHeight, r.width - playButtonRect.width, EditorGUIUtility.singleLineHeight);
+            var playButtonWidth = 64f;
+            var playbackSpeedWidth = 64f;
+            var playButtonRect = new Rect(0f, titleHeight, playButtonWidth, EditorGUIUtility.singleLineHeight);
+            var seekBarRect = new Rect(playButtonWidth, titleHeight, r.width - playButtonWidth - playbackSpeedWidth, EditorGUIUtility.singleLineHeight);
+            var playbackSpeedRect = new Rect(r.width - playbackSpeedWidth, titleHeight, playbackSpeedWidth, EditorGUIUtility.singleLineHeight);
 
             EditorGUI.BeginChangeCheck();
 
@@ -106,6 +112,7 @@ namespace OchalikeSprites.Editor
                 }
             }
             animationTime = GUI.HorizontalSlider(seekBarRect, animationTime, 0f, 100f);
+            playbackSpeed = playbackSpeeds[EditorGUI.Popup(playbackSpeedRect, System.Array.IndexOf(playbackSpeeds, playbackSpeed), playbackSpeedDisplays)];
 
             if (EditorGUI.EndChangeCheck()) { OnUpdatePreview?.Invoke(); }
 
@@ -117,7 +124,7 @@ namespace OchalikeSprites.Editor
             var deltaTime = (float)(EditorApplication.timeSinceStartup - beforeTimeSinceStartup);
             beforeTimeSinceStartup = EditorApplication.timeSinceStartup;
 
-            animationTime = Mathf.Repeat(animationTime + deltaTime * 60f, 100f);
+            animationTime = Mathf.Repeat(animationTime + deltaTime * 60f * playbackSpeed, 100f);
             OnUpdatePreview?.Invoke();
         }
 
