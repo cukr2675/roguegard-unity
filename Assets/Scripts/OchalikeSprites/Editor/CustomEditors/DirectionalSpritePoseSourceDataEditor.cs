@@ -50,7 +50,7 @@ namespace OchalikeSprites.Editor
                     var renderController = new OchalikeTextureRenderController();
                     renderController.Set(ochalikeSprite, morph, spriteTransform, defaultColor);
                     renderController.PositionOffset = new Vector3(0f, -0.25f);
-                    renderController.Scale /= 2f;
+                    renderController.ScaleOffset = Vector3.one / 2f;
                     renderController.RenderTo(preview);
                 });
         }

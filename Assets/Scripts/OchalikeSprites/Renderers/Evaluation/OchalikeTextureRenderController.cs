@@ -11,11 +11,13 @@ namespace OchalikeSprites
         public Quaternion Rotation { get; set; }
         public Vector3 Scale { get; set; }
         public Vector3 PositionOffset { get; set; } = DefaultPositionOffset;
+        public Vector3 ScaleOffset { get; set; } = DefaultScaleOffset;
         public Material Material { get; set; } = new Material(Shader.Find("Ochalike Sprites/Sprites/Custom Shift"));
 
         public int Count => bones.Count;
 
         public static Vector3 DefaultPositionOffset => new(0f, -0.75f);
+        public static Vector3 DefaultScaleOffset => Vector3.one;
 
         public void Set(IReadOnlyOchalikeBone ochalikeSprite, OchalikeMorph morph, OchalikeSpriteTransform spriteTransform, Color defaultColor)
         {
@@ -71,7 +73,7 @@ namespace OchalikeSprites
                 GL.Clear(true, true, Color.clear);
                 foreach (var bone in bones)
                 {
-                    bone.GLDraw(renderTexture, Position + PositionOffset, Rotation, Scale, Material);
+                    bone.GLDraw(renderTexture, Vector3.Scale(Position, ScaleOffset) + PositionOffset, Rotation, Vector3.Scale(Scale, ScaleOffset), Material);
                 }
             }
             finally
