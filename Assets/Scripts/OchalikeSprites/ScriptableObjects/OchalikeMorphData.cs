@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,6 +8,11 @@ namespace OchalikeSprites
     public class OchalikeMorphData : ScriptableObject
     {
         [SerializeField] private Item[] _items = null;
+
+#if UNITY_EDITOR
+        [Header("Editor Only")]
+        [SerializeField] private OchalikeSpriteData _previewOchalikeSprite = null;
+#endif
 
         public void AddTo(OchalikeMorph ochalikeMorph)
         {

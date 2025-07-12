@@ -23,7 +23,7 @@ namespace OchalikeSprites
         private RenderTexture renderTexture;
         private RenderController renderController;
 
-        private OchalikeSpriteNode root;
+        private OchalikeEvaluatorNode root;
         private ISpriteMotion motion;
         private int motionTime;
         private BoneOrder enabledOrder;
@@ -66,12 +66,12 @@ namespace OchalikeSprites
 
             if (ochalikeSprite != null)
             {
-                root = new OchalikeSpriteNode(ochalikeSprite);
+                root = new OchalikeEvaluatorNode(ochalikeSprite);
             }
             else if (root == null && _ochalikeSprite != null)
             {
                 ochalikeSprite = _ochalikeSprite.CreateBone(_bareColor, _useDarkOutline);
-                root = new OchalikeSpriteNode(ochalikeSprite);
+                root = new OchalikeEvaluatorNode(ochalikeSprite);
                 var rootMorph = new OchalikeMorph();
                 _morph.AddTo(rootMorph);
                 root.ApplyTable(rootMorph);

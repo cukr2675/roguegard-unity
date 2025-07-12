@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 114a2777e18778b4ca93f5388be802e3, type: 3}
   m_Name: OSpR_BeDefeated
   m_EditorClassIdentifier: 
+  _pixelsPerUnit: 32
   _loopCount: 15
+  _direction: 0
   _items:
   - _poseSource: {fileID: 11400000, guid: 2f6fb66bdb0d8934bac4173d86409555, type: 2}
     _pixelPosition: {x: 0, y: 0, z: 0}
@@ -20,6 +22,7 @@ MonoBehaviour:
     _rotation: {x: 0, y: 0, z: 0, w: 1}
     _scale: {x: 1, y: 1, z: 1}
     _degree: 0
+    _play: 
     _wait: 1
   - _poseSource: {fileID: 11400000, guid: 2f6fb66bdb0d8934bac4173d86409555, type: 2}
     _pixelPosition: {x: 0, y: 0, z: 0}
@@ -27,4 +30,6 @@ MonoBehaviour:
     _rotation: {x: 0, y: 0, z: 0, w: 1}
     _scale: {x: 0, y: 0, z: 0}
     _degree: 0
+    _play: 
     _wait: 1
+  _previewOchalikeSprite: {fileID: 11400000, guid: 41113a2e6e61ac547b7c4c7da3a45789, type: 2}

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bef39a5e05a158d4aaa5bd757199184c, type: 3}
   m_Name: OSpR_Humanoid7NoDamage
   m_EditorClassIdentifier: 
+  _pixelsPerUnit: 32
   _isLoop: 0
   _direction: 0
   _items:
@@ -21,6 +22,7 @@ MonoBehaviour:
     _rotation: {x: 0, y: 0, z: 0, w: 1}
     _scale: {x: 1, y: 1, z: 1}
     _degree: 0
+    _play: 
     _wait: 2
   - _poseSource: {fileID: 11400000, guid: cb6184a66f7accf45a2096fb0ad8c9ea, type: 2}
     _pixelPosition: {x: -1, y: 0, z: 0}
@@ -28,6 +30,7 @@ MonoBehaviour:
     _rotation: {x: 0, y: 0, z: 0, w: 1}
     _scale: {x: 1, y: 1, z: 1}
     _degree: 0
+    _play: 
     _wait: 2
   - _poseSource: {fileID: 11400000, guid: cb6184a66f7accf45a2096fb0ad8c9ea, type: 2}
     _pixelPosition: {x: 1, y: 0, z: 0}
@@ -35,6 +38,7 @@ MonoBehaviour:
     _rotation: {x: 0, y: 0, z: 0, w: 1}
     _scale: {x: 1, y: 1, z: 1}
     _degree: 0
+    _play: 
     _wait: 2
   - _poseSource: {fileID: 11400000, guid: cb6184a66f7accf45a2096fb0ad8c9ea, type: 2}
     _pixelPosition: {x: 0, y: 0, z: 0}
@@ -42,6 +46,7 @@ MonoBehaviour:
     _rotation: {x: 0, y: 0, z: 0, w: 1}
     _scale: {x: 1, y: 1, z: 1}
     _degree: 0
+    _play: 
     _wait: 2
   - _poseSource: {fileID: 11400000, guid: cb6184a66f7accf45a2096fb0ad8c9ea, type: 2}
     _pixelPosition: {x: -1, y: 0, z: 0}
@@ -49,6 +54,7 @@ MonoBehaviour:
     _rotation: {x: 0, y: 0, z: 0, w: 1}
     _scale: {x: 1, y: 1, z: 1}
     _degree: 0
+    _play: 
     _wait: 2
   - _poseSource: {fileID: 11400000, guid: cb6184a66f7accf45a2096fb0ad8c9ea, type: 2}
     _pixelPosition: {x: 0, y: 0, z: 0}
@@ -56,4 +62,6 @@ MonoBehaviour:
     _rotation: {x: 0, y: 0, z: 0, w: 1}
     _scale: {x: 1, y: 1, z: 1}
     _degree: 0
+    _play: 
     _wait: 2
+  _previewOchalikeSprite: {fileID: 11400000, guid: 431c37f1690795147a09f0fa91718a49, type: 2}

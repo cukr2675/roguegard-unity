@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bef39a5e05a158d4aaa5bd757199184c, type: 3}
   m_Name: OSpR_Sleep
   m_EditorClassIdentifier: 
-  _keyword: {fileID: 0}
+  _pixelsPerUnit: 32
   _isLoop: 1
+  _direction: 0
   _items:
   - _poseSource: {fileID: 11400000, guid: afdbfd528c1a0cf48883eb932432896d, type: 2}
     _pixelPosition: {x: 0, y: 0, z: 0}
@@ -21,6 +22,7 @@ MonoBehaviour:
     _rotation: {x: 0, y: 0, z: 0, w: 1}
     _scale: {x: 1, y: 1, z: 1}
     _degree: 0
+    _play: 
     _wait: 30
   - _poseSource: {fileID: 11400000, guid: bc65c16db25fab74f833eef64c04f334, type: 2}
     _pixelPosition: {x: 0, y: 0, z: 0}
@@ -28,4 +30,6 @@ MonoBehaviour:
     _rotation: {x: 0, y: 0, z: 0, w: 1}
     _scale: {x: 1, y: 1, z: 1}
     _degree: 0
+    _play: 
     _wait: 30
+  _previewOchalikeSprite: {fileID: 11400000, guid: 41113a2e6e61ac547b7c4c7da3a45789, type: 2}

@@ -1,0 +1,70 @@
+using UnityEditor;
+using UnityEngine;
+using System.Reflection;
+
+namespace OchalikeSprites.Editor
+{
+    [CustomEditor(typeof(DirectionalSpritePoseSourceData), true)]
+    [CanEditMultipleObjects]
+    public class DirectionalSpritePoseSourceDataEditor : UnityEditor.Editor
+    {
+        private RenderTexture preview;
+
+        protected virtual void OnEnable()
+        {
+            preview = RenderTexture.GetTemporary(128, 128, 1);
+            preview.autoGenerateMips = false;
+            preview.filterMode = FilterMode.Point;
+            UpdatePreview();
+
+            OchalikeSpritePreview.Primary.OnUpdatePreview += UpdatePreview;
+        }
+
+        protected virtual void OnDisable()
+        {
+            if (preview != null) { RenderTexture.ReleaseTemporary(preview); }
+
+            OchalikeSpritePreview.Primary.OnUpdatePreview -= UpdatePreview;
+        }
+
+        private void UpdatePreview()
+        {
+            var data = (DirectionalSpritePoseSourceData)target;
+            OchalikeSpritePreview.Primary.RenderTo(
+                preview,
+                step2GetOchalikeSprite: (ochalikeSpriteData, bareColor, morph) =>
+                {
+                    if (ochalikeSpriteData == null) { ochalikeSpriteData = OchalikeSpritePreview.GetOchalikeSpriteData(data); }
+                    if (ochalikeSpriteData == null) return OchalikeBone.CreateClearOchalikeSprite(bareColor);
+                    else return ochalikeSpriteData.CreateBoneWithHairColor(bareColor, morph);
+                },
+                step3GetSpriteTransform: (_, direction, animationTime) =>
+                {
+                    var spriteTransform = OchalikeSpriteTransform.Identity;
+                    spriteTransform.PoseSource = data;
+                    spriteTransform.Direction = direction;
+                    return spriteTransform;
+                },
+                step4Render: (preview, ochalikeSprite, morph, spriteTransform, defaultColor) =>
+                {
+                    var renderController = new OchalikeTextureRenderController();
+                    renderController.Set(ochalikeSprite, morph, spriteTransform, defaultColor);
+                    renderController.PositionOffset = new Vector3(0f, -0.25f);
+                    renderController.Scale /= 2f;
+                    renderController.RenderTo(preview);
+                });
+        }
+
+        public override void OnInspectorGUI()
+        {
+            base.OnInspectorGUI();
+            UpdatePreview();
+        }
+        public override bool HasPreviewGUI() => targets.Length == 1;
+        public override bool RequiresConstantRepaint() => OchalikeSpritePreview.Primary.IsPlaying;
+        public override void OnPreviewGUI(Rect r, GUIStyle background) => OchalikeSpritePreview.Primary.OnPreviewGUI(r, preview);
+        public override void OnPreviewSettings() => OchalikeSpritePreview.Primary.OnPreviewSettings(enableMotionData: false);
+        public override Texture2D RenderStaticPreview(string assetPath, Object[] subAssets, int width, int height)
+            => OchalikeSpritePreview.Primary.RenderStaticPreview(width, height, preview);
+    }
+}

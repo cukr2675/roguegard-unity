@@ -11,7 +11,7 @@ namespace Roguegard
     public class OchalikeRogueSprite : IRogueObjSprite
     {
         private IReadOnlyOchalikeBone rootBone;
-        private OchalikeSpriteNode root;
+        private OchalikeEvaluatorNode root;
 
         private TileObject _tile;
         public TileBase Tile => _tile;
@@ -45,7 +45,7 @@ namespace Roguegard
             {
                 var instance = new OchalikeRogueSprite();
                 instance.rootBone = mainBone;
-                instance.root = new OchalikeSpriteNode(mainBone);
+                instance.root = new OchalikeEvaluatorNode(mainBone);
                 instance._tile = ScriptableObject.CreateInstance<TileObject>();
                 instance._tile.sprite = sprite;
                 instance.EffectedColor = effectedColor;

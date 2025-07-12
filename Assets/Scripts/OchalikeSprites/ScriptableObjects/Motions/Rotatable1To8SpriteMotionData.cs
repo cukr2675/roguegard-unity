@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,6 +11,11 @@ namespace OchalikeSprites
         [SerializeField] private bool _isLoop = true;
         [SerializeField] private SpriteMotionDirectionType _direction = SpriteMotionDirectionType.Linear;
         [SerializeField] private List<Item> _items = null;
+
+#if UNITY_EDITOR
+        [Header("Editor Only")]
+        [SerializeField] private OchalikeSpriteData _previewOchalikeSprite = null;
+#endif
 
         public override void ApplyTo(int animationTime, SpriteDirection direction, ref OchalikeSpriteTransform transform, out bool endOfMotion)
         {

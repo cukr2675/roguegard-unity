@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,7 +14,13 @@ namespace OchalikeSprites
         [SerializeField] private List<BackItem> _localBacks = null;
         [SerializeField] private List<ReorderItem> _reorders = null;
 
+#if UNITY_EDITOR
+        [Header("Editor Only")]
+        [SerializeField] private OchalikeSpriteData _previewOchalikeSprite = null;
+#endif
+
         [System.NonSerialized] private ImmutableSymmetricalSpritePoseSource poseSource;
+        [System.NonSerialized] private bool isDirty;
 
         private void Initialize()
         {
@@ -33,7 +39,7 @@ namespace OchalikeSprites
 
         public override SpritePose GetSpritePose(SpriteDirection direction)
         {
-            if (poseSource == null) { Initialize(); }
+            if (poseSource == null || isDirty) { Initialize(); }
 
             return poseSource.GetSpritePose(direction);
         }
@@ -44,6 +50,7 @@ namespace OchalikeSprites
             {
                 item?.Validate();
             }
+            isDirty = true;
         }
 
         [System.Serializable]

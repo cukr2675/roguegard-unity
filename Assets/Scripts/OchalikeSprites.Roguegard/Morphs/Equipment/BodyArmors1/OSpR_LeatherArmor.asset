@@ -89,3 +89,4 @@ MonoBehaviour:
         _backRear: {fileID: 0}
       _color: {r: 0.54901963, g: 0.11764706, b: 0.11764706, a: 1}
       _colorIsFixed: 0
+  _previewOchalikeSprite: {fileID: 11400000, guid: 41113a2e6e61ac547b7c4c7da3a45789, type: 2}

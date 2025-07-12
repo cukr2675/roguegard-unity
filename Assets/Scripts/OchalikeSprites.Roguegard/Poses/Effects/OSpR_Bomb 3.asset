@@ -31,3 +31,4 @@ MonoBehaviour:
     _localMirrorY: 0
   _localBacks: []
   _reorders: []
+  _previewOchalikeSprite: {fileID: 0}

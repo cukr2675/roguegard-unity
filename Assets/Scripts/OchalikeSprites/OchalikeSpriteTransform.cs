@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,7 +9,20 @@ namespace OchalikeSprites
         public Vector3 Position { get; set; }
         public Quaternion Rotation { get; set; }
         public Vector3 Scale { get; set; }
-        public IDirectionalSpritePoseSource PoseSource { get; set; }
+        private IDirectionalSpritePoseSource _poseSource;
+        public IDirectionalSpritePoseSource PoseSource
+        {
+            get => _poseSource ?? DefaultSpritePoseSource.Instance;
+            set
+            {
+                if (value == null && !poseSourceNullWarned)
+                {
+                    Debug.LogWarning($"{nameof(PoseSource)} に null が設定されました。");
+                    poseSourceNullWarned = true;
+                }
+                _poseSource = value;
+            }
+        }
         public SpriteDirection Direction { get; set; }
 
         /// <summary>
@@ -20,12 +33,14 @@ namespace OchalikeSprites
 
         public static OchalikeSpriteTransform Identity => new OchalikeSpriteTransform(false);
 
+        private static bool poseSourceNullWarned = false;
+
         private OchalikeSpriteTransform(bool flag)
         {
             Position = Vector3.zero;
             Rotation = Quaternion.identity;
             Scale = Vector3.one;
-            PoseSource = null;
+            _poseSource = DefaultSpritePoseSource.Instance;
             Direction = SpriteDirection.Down;
             Play = null;
         }

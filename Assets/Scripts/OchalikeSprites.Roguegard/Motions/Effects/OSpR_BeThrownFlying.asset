@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bef39a5e05a158d4aaa5bd757199184c, type: 3}
   m_Name: OSpR_BeThrownFlying
   m_EditorClassIdentifier: 
+  _pixelsPerUnit: 32
+  _isLoop: 1
+  _direction: 0
   _items:
   - _poseSource: {fileID: 11400000, guid: 2f6fb66bdb0d8934bac4173d86409555, type: 2}
     _pixelPosition: {x: 0, y: 8, z: 0}
@@ -19,5 +22,6 @@ MonoBehaviour:
     _rotation: {x: 0, y: 0, z: 0, w: 1}
     _scale: {x: 1, y: 1, z: 1}
     _degree: 0
+    _play: 
     _wait: 1
-  _isLoop: 1
+  _previewOchalikeSprite: {fileID: 0}
