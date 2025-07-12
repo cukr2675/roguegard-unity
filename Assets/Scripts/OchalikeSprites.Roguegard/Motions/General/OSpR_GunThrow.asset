@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: OSpR_GunThrow
   m_EditorClassIdentifier: 
   _pixelsPerUnit: 32
-  _isLoop: 0
+  _loopCount: 1
   _direction: 0
   _items:
   - _poseSource: {fileID: 11400000, guid: 7b65fe1844baa414980127f4bcf99531, type: 2}

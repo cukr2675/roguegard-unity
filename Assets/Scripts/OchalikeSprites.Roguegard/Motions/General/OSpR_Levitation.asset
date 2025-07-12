@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: OSpR_Levitation
   m_EditorClassIdentifier: 
   _pixelsPerUnit: 32
-  _isLoop: 1
+  _loopCount: 0
   _direction: 0
   _items:
   - _poseSource: {fileID: 0}

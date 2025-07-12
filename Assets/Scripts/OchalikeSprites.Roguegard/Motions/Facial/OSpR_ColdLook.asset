@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: OSpR_ColdLook
   m_EditorClassIdentifier: 
   _pixelsPerUnit: 32
-  _isLoop: 0
+  _loopCount: 1
   _direction: 0
   _items:
   - _poseSource: {fileID: 11400000, guid: 7ae648339b74c3c459f543c4906cea78, type: 2}

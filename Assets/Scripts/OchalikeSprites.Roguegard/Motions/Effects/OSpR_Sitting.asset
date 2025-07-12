@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: OSpR_Sitting
   m_EditorClassIdentifier: 
   _pixelsPerUnit: 32
-  _isLoop: 0
+  _loopCount: 1
   _direction: 0
   _items:
   - _poseSource: {fileID: 11400000, guid: 4e57c0df0ed5aee42a6f5200bb168bd3, type: 2}

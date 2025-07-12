@@ -8,7 +8,7 @@ namespace OchalikeSprites
     public class RotatableSpriteMotionData : SpriteMotionData
     {
         [SerializeField] private int _pixelsPerUnit = OchalikeSpritesUtility.DefaultPixelsPerUnit;
-        [SerializeField] private bool _isLoop = true;
+        [SerializeField] private int _loopCount = 0;
         [SerializeField] private SpriteMotionDirectionType _direction = SpriteMotionDirectionType.Linear;
         [SerializeField] private List<Item> _items = null;
 
@@ -19,25 +19,25 @@ namespace OchalikeSprites
 
         public override void ApplyTo(int animationTime, SpriteDirection direction, ref OchalikeSpriteTransform transform, out bool endOfMotion)
         {
-            var sumWait = 0;
+            var oneLoopWait = 0;
             foreach (var item in _items)
             {
-                sumWait += item.Wait;
+                oneLoopWait += item.Wait;
             }
 
             int index;
-            if (_isLoop) index = animationTime % sumWait;
-            else index = Mathf.Min(animationTime, sumWait - 1);
+            if (_loopCount >= 1) { index = Mathf.Min(animationTime, oneLoopWait * _loopCount - 1); }
+            else { index = animationTime; }
             var sum = 0;
             Item current = null;
             var first = false;
             foreach (var item in _items)
             {
                 sum += item.Wait;
-                if (index < sum)
+                if ((index % oneLoopWait) < sum)
                 {
                     current = item;
-                    if (index == sum - item.Wait + 1 || item.Wait == 1) { first = true; }
+                    if (index % oneLoopWait == sum - item.Wait + 1 || item.Wait == 1) { first = true; }
                     break;
                 }
             }
@@ -50,7 +50,16 @@ namespace OchalikeSprites
             transform.PoseSource = current.PoseSource;
             transform.Direction = SpriteDirection.FromDegree(degree);
             if (first) { transform.Play = current.Play; } // 切り替わった瞬間だけ再生
-            endOfMotion = index >= sumWait - 1;
+
+            if (_loopCount >= 1)
+            {
+                var sumWait = oneLoopWait * _loopCount;
+                endOfMotion = index >= sumWait - 1;
+            }
+            else
+            {
+                endOfMotion = false;
+            }
         }
 
         private void OnValidate()

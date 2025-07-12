@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: OSpR_Damage
   m_EditorClassIdentifier: 
   _pixelsPerUnit: 32
-  _isLoop: 0
+  _loopCount: 1
   _direction: 0
   _items:
   - _poseSource: {fileID: 11400000, guid: fa07b5d35ddf34142a6053da43ec87fb, type: 2}

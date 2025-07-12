@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: OSpR_Sleep
   m_EditorClassIdentifier: 
   _pixelsPerUnit: 32
-  _isLoop: 1
+  _loopCount: 0
   _direction: 0
   _items:
   - _poseSource: {fileID: 11400000, guid: afdbfd528c1a0cf48883eb932432896d, type: 2}

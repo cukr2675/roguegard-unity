@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: OSpR_Humanoid1Walk
   m_EditorClassIdentifier: 
   _pixelsPerUnit: 32
-  _isLoop: 1
+  _loopCount: 0
   _direction: 0
   _items:
   - _poseSource: {fileID: 11400000, guid: f3dbeffb292b6e04887f927a693d4830, type: 2}

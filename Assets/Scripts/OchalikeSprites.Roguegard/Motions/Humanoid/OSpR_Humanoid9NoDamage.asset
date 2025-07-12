@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: OSpR_Humanoid9NoDamage
   m_EditorClassIdentifier: 
   _pixelsPerUnit: 32
-  _isLoop: 0
+  _loopCount: 1
   _direction: 0
   _items:
   - _poseSource: {fileID: 11400000, guid: 5d168ef74bae01d42b3384907eb2abf4, type: 2}

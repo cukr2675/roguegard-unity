@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: OSpR_Humanoid5Wait
   m_EditorClassIdentifier: 
   _pixelsPerUnit: 32
-  _isLoop: 1
+  _loopCount: 0
   _direction: 0
   _items:
   - _poseSource: {fileID: 11400000, guid: f99677898e225bb4793d38e87019bf60, type: 2}

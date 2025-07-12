@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: OSp_HideMotion
   m_EditorClassIdentifier: 
   _pixelsPerUnit: 32
-  _isLoop: 0
+  _loopCount: 1
   _direction: 0
   _items:
   - _poseSource: {fileID: 11400000, guid: 873abfd3f956396428b0466ae58b2c45, type: 2}
@@ -22,4 +22,6 @@ MonoBehaviour:
     _rotation: {x: 0, y: 0, z: 0, w: 1}
     _scale: {x: 0, y: 0, z: 0}
     _degree: 0
+    _play: 
     _wait: 0
+  _previewOchalikeSprite: {fileID: 0}

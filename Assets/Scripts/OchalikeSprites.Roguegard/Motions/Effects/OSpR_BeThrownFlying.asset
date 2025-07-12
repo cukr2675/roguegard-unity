@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: OSpR_BeThrownFlying
   m_EditorClassIdentifier: 
   _pixelsPerUnit: 32
-  _isLoop: 1
+  _loopCount: 0
   _direction: 0
   _items:
   - _poseSource: {fileID: 11400000, guid: 2f6fb66bdb0d8934bac4173d86409555, type: 2}

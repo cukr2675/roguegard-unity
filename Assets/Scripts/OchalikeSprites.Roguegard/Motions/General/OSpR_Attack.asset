@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: OSpR_Attack
   m_EditorClassIdentifier: 
   _pixelsPerUnit: 32
-  _isLoop: 0
+  _loopCount: 1
   _direction: 0
   _items:
   - _poseSource: {fileID: 11400000, guid: cee29c444cef45c45b50a89ad1949bcd, type: 2}
