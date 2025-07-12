@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,6 +6,8 @@ using System.Linq;
 
 namespace Roguegard
 {
+    // 命名メモ: オブジェクト指向でのオブジェクトであることを示すため RogueObj
+    // RogueEntiry だと ECS と混同しやすく RogueActor だとアイテムに不向き＋オブジェクト指向を連想しにくい
     [Objforming.Formable]
     public class RogueObj
     {

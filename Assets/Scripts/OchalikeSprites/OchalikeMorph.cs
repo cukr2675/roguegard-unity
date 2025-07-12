@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,7 +7,9 @@ namespace OchalikeSprites
     // 用途: つけっぱなしにするもの
     // 例: キャラクリ、装備、持続エフェクト（混乱中のぐるぐる目など）
 
-    // 命名メモ: OchalikeWear だと BareSprite とかあるのが変なので OchalikeMorph
+    // 命名メモ:
+    // OchalikeWear だと BareSprite とかあるのが変なので OchalikeMorph
+    // OchalikeMakeup だと服にも使うことがわかりにくくなる
 
     /// <summary>
     /// <see cref="OchalikeSpriteData"/> のボーン構造と位置はそのままに見た目を変更するクラス。
