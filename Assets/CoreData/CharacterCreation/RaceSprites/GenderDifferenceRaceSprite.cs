@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -22,7 +22,7 @@ namespace Roguegard.CharacterCreation
             var bodyColor = characterCreationData.Race.BodyColor;
             var hairColor = RogueColorUtility.GetHairColor(characterCreationData);
             var useDarkOutline = OchalikeSpritesUtility.IsSimilarToLightOutline(hairColor);
-            mainBone = item.Bone.CreateBone(bodyColor, useDarkOutline);
+            mainBone = item.Bone.CreateOchalikeSprite(bodyColor, useDarkOutline);
 
             morph = new AppearanceMorph();
 

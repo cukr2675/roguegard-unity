@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -70,7 +70,7 @@ namespace OchalikeSprites
             }
             else if (root == null && _ochalikeSprite != null)
             {
-                ochalikeSprite = _ochalikeSprite.CreateBone(_bareColor, _useDarkOutline);
+                ochalikeSprite = _ochalikeSprite.CreateOchalikeSprite(_bareColor, _useDarkOutline);
                 root = new OchalikeEvaluatorNode(ochalikeSprite);
                 var rootMorph = new OchalikeMorph();
                 _morph.AddTo(rootMorph);

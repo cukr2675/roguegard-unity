@@ -58,7 +58,7 @@ namespace OchalikeSprites.Editor
             };
             step2GetOchalikeSprite ??= (ochalikeSpriteData, bareColor, morph) =>
             {
-                if (ochalikeSpriteData != null) return ochalikeSpriteData.CreateBoneWithHairColor(bareColor, morph);
+                if (ochalikeSpriteData != null) return ochalikeSpriteData.CreateOchalikeSpriteWithHairColor(bareColor, morph);
                 else return OchalikeBone.CreateClearOchalikeSprite(bareColor);
             };
             step3GetSpriteTransform ??= (motionData, direction, animationTime) =>

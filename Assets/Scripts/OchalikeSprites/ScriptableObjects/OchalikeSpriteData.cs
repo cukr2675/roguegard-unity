@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -30,15 +30,15 @@ namespace OchalikeSprites
             _bones.Clear();
         }
 
-        public OchalikeBone CreateBoneWithHairColor(Color bareColor, OchalikeMorph morph)
+        public OchalikeBone CreateOchalikeSpriteWithHairColor(Color bareColor, OchalikeMorph morph)
         {
             var morphItem = morph.GetSprite(BoneKeyword.Hair);
             var hairColor = morphItem.MorphBareColor ?? Color.black;
             var useDarkOutline = OchalikeSpritesUtility.IsSimilarToLightOutline(hairColor);
-            return CreateBone(bareColor, useDarkOutline);
+            return CreateOchalikeSprite(bareColor, useDarkOutline);
         }
 
-        public OchalikeBone CreateBone(Color bareColor, bool useDarkOutline)
+        public OchalikeBone CreateOchalikeSprite(Color bareColor, bool useDarkOutline)
         {
             return Recursion(0);
 

@@ -30,7 +30,7 @@ namespace OchalikeSprites.Editor
             var data = (OchalikeSpriteData)target;
             OchalikeSpritePreview.Primary.RenderTo(
                 preview,
-                step2GetOchalikeSprite: (_, bareColor, morph) => data.CreateBoneWithHairColor(bareColor, morph));
+                step2GetOchalikeSprite: (_, bareColor, morph) => data.CreateOchalikeSpriteWithHairColor(bareColor, morph));
         }
 
         public override bool HasPreviewGUI() => targets.Length == 1;
