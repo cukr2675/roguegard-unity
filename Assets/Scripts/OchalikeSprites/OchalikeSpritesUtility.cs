@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,25 +16,25 @@ namespace OchalikeSprites
         public static bool IsSimilarToLightOutline(Color hairColor)
         {
             // ユークリッド距離で十分そうなので使わない
-            //return CalculateCIE76(hairColor, Color.white * .25f) < LightDarkThreshold * 100f;
+            //return CalculateCie76(hairColor, Color.white * .25f) < LightDarkThreshold * 100f;
 
             var c = new Vector3(hairColor.r, hairColor.g, hairColor.b);
-            var eyelidColor = Vector3.one * .25f; // 輪郭線のグレー
-            return Vector3.Distance(c, eyelidColor) < LightDarkThreshold;
+            var outlineColor = Vector3.one * .25f; // まぶたと顔の輪郭線のグレー
+            return Vector3.Distance(c, outlineColor) < LightDarkThreshold;
         }
 
-        private static float CalculateCIE76(Color color1, Color color2)
+        private static float CalculateCie76(Color color1, Color color2)
         {
-            var xyz1 = RGBtoXYZ(color1);
-            var xyz2 = RGBtoXYZ(color2);
+            var xyz1 = Rgb2Xyz(color1);
+            var xyz2 = Rgb2Xyz(color2);
 
-            var lab1 = XYZtoLab(xyz1);
-            var lab2 = XYZtoLab(xyz2);
+            var lab1 = Xyz2Lab(xyz1);
+            var lab2 = Xyz2Lab(xyz2);
 
             return Vector3.Distance(lab1, lab2);
         }
 
-        private static Vector3 RGBtoXYZ(Color sRGB)
+        private static Vector3 Rgb2Xyz(Color sRGB)
         {
             var r = sRGB.r > 0.04045f ? Mathf.Pow((sRGB.r + 0.055f) / 1.055f, 2.4f) : (sRGB.r / 12.92f);
             var g = sRGB.g > 0.04045f ? Mathf.Pow((sRGB.g + 0.055f) / 1.055f, 2.4f) : (sRGB.g / 12.92f);
@@ -46,7 +46,7 @@ namespace OchalikeSprites
             return new Vector3(x, y, z);
         }
 
-        private static Vector3 XYZtoLab(Vector3 xyz)
+        private static Vector3 Xyz2Lab(Vector3 xyz)
         {
             var x = xyz.x / 0.95047f;
             var y = xyz.y / 1.00000f;
