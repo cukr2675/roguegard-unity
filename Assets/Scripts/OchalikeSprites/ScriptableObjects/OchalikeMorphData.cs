@@ -51,23 +51,23 @@ namespace OchalikeSprites
         }
 
         [System.Serializable]
-        public sealed class Item // エディタ拡張のために型だけ public にする
+        private class Item
         {
             [SerializeField] private BoneKeywordData _name;
             internal BoneKeyword Name => _name;
 
             [Tooltip("BareSprite を上書きする")]
             [SerializeField] private bool _hasMorphBareSprite;
-            [SerializeField] private BoneSprite _morphBareSprite;
+            [SerializeField, VisibleBy(nameof(_hasMorphBareSprite))] private BoneSprite _morphBareSprite;
             internal BoneSprite MorphBareSprite => _hasMorphBareSprite ? _morphBareSprite : null;
 
             [Tooltip("BareColor を上書きする")]
             [SerializeField] private bool _hasMorphBareColor;
-            [SerializeField] private Color _morphBareColor;
+            [SerializeField, VisibleBy(nameof(_hasMorphBareColor), nameof(_morphBareColorIsFixed))] private Color _morphBareColor;
             internal Color? MorphBareColor => _hasMorphBareColor ? _morphBareColor : null;
 
             [Tooltip("この値が true のとき着色の対象外となる")]
-            [SerializeField] private bool _morphBareColorIsFixed;
+            [SerializeField, HideInInspector] private bool _morphBareColorIsFixed;
 
             [SerializeField] private bool _overridesOnDefaultColor;
             internal bool OverridesOnDefaultColor => _overridesOnDefaultColor;
@@ -84,15 +84,15 @@ namespace OchalikeSprites
         }
 
         [System.Serializable]
-        public sealed class BoneSpriteColorPair // エディタ拡張のために型だけ public にする
+        private class BoneSpriteColorPair
         {
             [SerializeField] private BoneSprite _sprite;
             internal BoneSprite Sprite => _sprite;
 
-            [SerializeField] private Color _color;
+            [SerializeField, VisibleBy(null, nameof(_colorIsFixed))] private Color _color;
             internal Color Color => _color;
 
-            [SerializeField] private bool _colorIsFixed;
+            [SerializeField, HideInInspector] private bool _colorIsFixed;
             internal bool ColorIsFixed => _colorIsFixed;
 
             internal Color GetColor(Color toColor)

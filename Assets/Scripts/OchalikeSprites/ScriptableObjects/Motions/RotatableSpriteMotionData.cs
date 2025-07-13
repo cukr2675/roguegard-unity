@@ -24,6 +24,11 @@ namespace OchalikeSprites
             {
                 oneLoopWait += item.Wait;
             }
+            if (oneLoopWait <= 0)
+            {
+                endOfMotion = true;
+                return;
+            }
 
             int index;
             if (_loopCount >= 1) { index = Mathf.Min(animationTime, oneLoopWait * _loopCount - 1); }

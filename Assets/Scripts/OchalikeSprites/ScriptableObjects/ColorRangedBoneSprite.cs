@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,9 +7,11 @@ namespace OchalikeSprites
     [System.Serializable]
     public class ColorRangedBoneSprite
     {
-        [SerializeField] private bool _isColorRanged;
         [SerializeField] private BoneSprite _spriteOrLightSprite;
-        [SerializeField] private BoneSprite _darkSprite;
+        [SerializeField] private bool _isColorRanged;
+        [SerializeField, VisibleBy(nameof(_isColorRanged))] private BoneSprite _darkSprite;
+        // 基本はグレーのまぶたと顔の輪郭線を使い、グレーと重複する色の場合は例外として黒を使用する
+        // 黒を基本とするよりもグレーを基本としたほうが使い分け基準の説明が容易
 
         public bool IsColorRanged => _isColorRanged;
         public BoneSprite Sprite => !_isColorRanged ? _spriteOrLightSprite : throw new System.Exception();

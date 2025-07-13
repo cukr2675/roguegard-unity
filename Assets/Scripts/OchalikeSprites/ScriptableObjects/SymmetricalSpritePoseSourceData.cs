@@ -61,12 +61,12 @@ namespace OchalikeSprites
 
             [Tooltip("MorphedBareSprite を上書きする。最初から BareSprite が存在しなければ変化しない")]
             [SerializeField] private bool _hasPoseBareSprite;
-            [SerializeField] private BoneSprite _poseBareSprite;
+            [SerializeField, VisibleBy(nameof(_hasPoseBareSprite))] private BoneSprite _poseBareSprite;
             public BoneSprite PoseBareSprite => _hasPoseBareSprite ? _poseBareSprite : null;
 
             [Tooltip("MorphedBareColor を上書きする")]
             [SerializeField] private bool _hasPoseBareColor;
-            [SerializeField] private Color _poseBareColor;
+            [SerializeField, VisibleBy(nameof(_hasPoseBareColor))] private Color _poseBareColor;
             public Color? PoseBareColor => _hasPoseBareColor ? _poseBareColor : null;
 
             [SerializeField] private Vector3 _pixelLocalPosition;
