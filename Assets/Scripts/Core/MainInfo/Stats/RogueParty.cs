@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,7 +10,7 @@ namespace Roguegard
     public class RogueParty
     {
         private readonly List<RogueObj> _members;
-        public Spanning<RogueObj> Members => _members;
+        public Spanning<RogueObj> Members => Spanning.Get(_members);
 
         public ISerializableKeyword Faction { get; set; }
 

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -218,7 +218,7 @@ namespace Roguegard
             // WebGL でドットがつぶれないようミップマップを無効化する
             var texture = new Texture2D(board.Size.x, board.Size.y, TextureFormat.RGBA32, false);
             texture.filterMode = FilterMode.Point;
-            board.SetPixelsTo(texture, palette.Span);
+            board.SetPixelsTo(texture, palette);
             texture.Apply();
             var sprite = Sprite.Create(texture, board.Rect, new Vector2(.5f, .5f), RoguegardSettings.PixelsPerUnit);
             return sprite;
@@ -229,7 +229,7 @@ namespace Roguegard
             // WebGL でドットがつぶれないようミップマップを無効化する
             var texture = new Texture2D(board.Size.x, board.Size.y, TextureFormat.RGBA32, false);
             texture.filterMode = FilterMode.Point;
-            board.SetPixelsTo(texture, palette.Span);
+            board.SetPixelsTo(texture, palette);
             texture.Apply();
             var splittedSize = new Vector2(board.Size.x, board.Size.y / 2);
             var upperPivot = (new Vector2Int(board.Size.x / 2, 0) + UpperRelationalPivot) / splittedSize;

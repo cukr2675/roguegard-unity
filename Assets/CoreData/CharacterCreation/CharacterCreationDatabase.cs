@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,17 +9,17 @@ namespace Roguegard.CharacterCreation
         private List<CharacterCreationDataBuilder> _presets = new List<CharacterCreationDataBuilder>();
         public int PresetsCount => _presets.Count;
 
-        private List<IRaceOption> _raceOptions = new List<IRaceOption>();
-        public Spanning<IRaceOption> RaceOptions => _raceOptions;
+        private List<IRaceOption> _raceOptions = new();
+        public Spanning<IRaceOption> RaceOptions => Spanning.Get(_raceOptions);
 
-        private List<IAppearanceOption> _appearanceOptions = new List<IAppearanceOption>();
-        public Spanning<IAppearanceOption> AppearanceOptions => _appearanceOptions;
+        private List<IAppearanceOption> _appearanceOptions = new();
+        public Spanning<IAppearanceOption> AppearanceOptions => Spanning.Get(_appearanceOptions);
 
-        private List<IIntrinsicOption> _intrinsicOptions = new List<IIntrinsicOption>();
-        public Spanning<IIntrinsicOption> IntrinsicOptions => _intrinsicOptions;
+        private List<IIntrinsicOption> _intrinsicOptions = new();
+        public Spanning<IIntrinsicOption> IntrinsicOptions => Spanning.Get(_intrinsicOptions);
 
-        private List<IStartingItemOption> _startingItemOptions = new List<IStartingItemOption>();
-        public Spanning<IStartingItemOption> StartingItemOptions => _startingItemOptions;
+        private List<IStartingItemOption> _startingItemOptions = new();
+        public Spanning<IStartingItemOption> StartingItemOptions => Spanning.Get(_startingItemOptions);
 
         public CharacterCreationDataBuilder LoadPreset(int index)
         {

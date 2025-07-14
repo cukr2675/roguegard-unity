@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -25,7 +25,7 @@ namespace RoguegardUnity
             get
             {
                 _boards[0] = _toolSet.Board;
-                return _boards;
+                return Spanning.Get(_boards);
             }
         }
 
@@ -40,7 +40,7 @@ namespace RoguegardUnity
                 {
                     _palette.Add(_toolSet.Palette[i]);
                 }
-                return _palette;
+                return Spanning.Get(_palette);
             }
         }
 

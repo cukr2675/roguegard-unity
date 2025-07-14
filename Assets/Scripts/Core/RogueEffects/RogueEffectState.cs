@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,10 +9,10 @@ namespace Roguegard
     {
         private readonly List<IRogueEffect> _effects;
 
-        public Spanning<IRogueEffect> Effects => _effects;
+        public Spanning<IRogueEffect> Effects => Spanning.Get(_effects);
 
-        internal static StaticInitializable<RogueObj> openingObj = new StaticInitializable<RogueObj>(() => null);
-        internal static StaticInitializable<bool> openingNow = new StaticInitializable<bool>(() => false);
+        internal static StaticInitializable<RogueObj> openingObj = new(() => null);
+        internal static StaticInitializable<bool> openingNow = new(() => false);
 
         [Objforming.CreateInstance]
         private RogueEffectState(bool dummy) { }

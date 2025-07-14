@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -53,6 +53,6 @@ namespace Roguegard.CharacterCreation
         public IEnumerator<StartingItemBuilderList> GetEnumerator() => table.GetEnumerator();
         IEnumerator IEnumerable.GetEnumerator() => table.GetEnumerator();
         public static implicit operator Spanning<IWeightedRogueObjGeneratorList>(StartingItemBuilderTable table)
-            => Spanning<IWeightedRogueObjGeneratorList>.Create(table.table);
+            => Spanning.Get<IWeightedRogueObjGeneratorList>(table.table);
     }
 }

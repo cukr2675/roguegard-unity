@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -28,7 +28,7 @@ namespace Roguegard.CharacterCreation
             }
         }
 
-        public Spanning<IWeightedRogueObjGenerator> Spanning => Spanning<IWeightedRogueObjGenerator>.Create(builders);
+        public Spanning<IWeightedRogueObjGenerator> Spanning => Roguegard.Spanning.Get<IWeightedRogueObjGenerator>(builders);
 
         int IWeightedRogueObjGeneratorList.MinFrequency => 1;
         int IWeightedRogueObjGeneratorList.MaxFrequency => 1;

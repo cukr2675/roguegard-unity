@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,7 +10,7 @@ namespace Roguegard
     public class MotionGrapherInfo : ISubTimelineClip
     {
         private List<IMotionGrapherTrack> _tracks;
-        public Spanning<IMotionGrapherTrack> Tracks => _tracks;
+        public Spanning<IMotionGrapherTrack> Tracks => Spanning.Get(_tracks);
 
         public int LoopCount { get; set; }
 

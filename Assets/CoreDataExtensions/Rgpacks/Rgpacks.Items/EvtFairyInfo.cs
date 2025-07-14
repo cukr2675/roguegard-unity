@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,9 +8,9 @@ namespace Roguegard.Rgpacks
     public class EvtFairyInfo
     {
         public string RelatedChart { get; set; }
-        private readonly List<Page> _pages = new();
 
-        public Spanning<Page> Pages => _pages;
+        private readonly List<Page> _pages = new();
+        public Spanning<Page> Pages => Spanning.Get(_pages);
 
         private EvtFairyInfo() { }
 

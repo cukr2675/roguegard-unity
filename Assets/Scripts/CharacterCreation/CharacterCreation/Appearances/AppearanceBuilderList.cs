@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -62,6 +62,6 @@ namespace Roguegard.CharacterCreation
         public IEnumerator<AppearanceBuilder> GetEnumerator() => builders.GetEnumerator();
         IEnumerator IEnumerable.GetEnumerator() => builders.GetEnumerator();
         public static implicit operator Spanning<IReadOnlyAppearance>(AppearanceBuilderList list)
-            => Spanning<IReadOnlyAppearance>.Create(list.builders);
+            => Spanning.Get<IReadOnlyAppearance>(list.builders);
     }
 }

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,13 +13,13 @@ namespace Roguegard
         private bool isDirty;
         private readonly List<IStatusEffect> _statusEffectsWithHeadIcon;
 
-        public Spanning<IStatusEffect> StatusEffects => _statusEffects;
+        public Spanning<IStatusEffect> StatusEffects => Spanning.Get(_statusEffects);
 
         public Spanning<IStatusEffect> StatusEffectsWithHeadIcon
         {
             get
             {
-                if (!isDirty) return _statusEffectsWithHeadIcon;
+                if (!isDirty) return Spanning.Get(_statusEffectsWithHeadIcon);
 
                 isDirty = false;
                 _statusEffectsWithHeadIcon.Clear();
@@ -27,7 +27,7 @@ namespace Roguegard
                 {
                     if (statusEffect.HeadIcon != null) { _statusEffectsWithHeadIcon.Add(statusEffect); }
                 }
-                return _statusEffectsWithHeadIcon;
+                return Spanning.Get(_statusEffectsWithHeadIcon);
             }
         }
 

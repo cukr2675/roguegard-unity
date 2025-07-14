@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,7 +10,7 @@ namespace Roguegard
     public class SpriteMotionGrapherTrack : IMotionGrapherTrack
     {
         private List<Bone> _bones;
-        public Spanning<Bone> Bones => _bones;
+        public Spanning<Bone> Bones => Spanning.Get(_bones);
 
         public SpriteMotionGrapherTrack()
         {

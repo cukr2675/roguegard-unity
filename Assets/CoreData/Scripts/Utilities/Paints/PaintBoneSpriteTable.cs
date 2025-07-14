@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,8 +11,8 @@ namespace Roguegard
     [Objforming.Formable]
     public class PaintBoneSpriteTable
     {
-        private readonly List<IPaintBoneSprite> _items = new List<IPaintBoneSprite>();
-        public Spanning<IPaintBoneSprite> Items => _items;
+        private readonly List<IPaintBoneSprite> _items = new();
+        public Spanning<IPaintBoneSprite> Items => Spanning.Get(_items);
 
         public Color32 MainColor { get; set; }
 

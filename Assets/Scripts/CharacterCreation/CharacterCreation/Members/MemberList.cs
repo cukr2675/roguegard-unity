@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -28,6 +28,6 @@ namespace Roguegard.CharacterCreation
         }
 
         private IEnumerator<IMember> GetEnumerator() => _items.GetEnumerator();
-        public static implicit operator Spanning<IMember>(MemberList list) => list._items;
+        public static implicit operator Spanning<IMember>(MemberList list) => Spanning.Get(list._items);
     }
 }

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,8 +8,8 @@ namespace Roguegard
 {
     public class RogueNameBuilder
     {
-        private readonly List<string> _texts = new List<string>();
-        public Spanning<string> Texts => _texts;
+        private readonly List<string> _texts = new();
+        public Spanning<string> Texts => Spanning.Get(_texts);
 
         public int Bonus { get; set; }
 

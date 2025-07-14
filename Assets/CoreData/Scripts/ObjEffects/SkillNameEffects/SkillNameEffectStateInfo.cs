@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -49,9 +49,8 @@ namespace Roguegard
         [Objforming.IgnoreRequireRelationalComponent]
         private class Info : IRogueObjInfo
         {
-            private readonly List<ISkillNameEffect> _skillNameEffects = new List<ISkillNameEffect>();
-
-            public Spanning<ISkillNameEffect> SkillNameEffects => _skillNameEffects;
+            private readonly List<ISkillNameEffect> _skillNameEffects = new();
+            public Spanning<ISkillNameEffect> SkillNameEffects => Spanning.Get(_skillNameEffects);
 
             bool IRogueObjInfo.IsExclusedWhenSerialize => true;
 

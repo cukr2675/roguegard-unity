@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -63,7 +63,7 @@ namespace Roguegard
         {
             if (!forced && !isDirty) return;
 
-            selfSprite?.SetBoneSpriteEffects(self, effects);
+            selfSprite?.SetBoneSpriteEffects(self, Spanning.Get(effects));
             isDirty = false;
         }
     }

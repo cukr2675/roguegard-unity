@@ -1,9 +1,18 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Roguegard
 {
+    public static class Spanning
+    {
+        public static Spanning<T> Get<T>(IReadOnlyList<T> list)
+        {
+            return Spanning<T>.Get(list);
+            //return new System.ReadOnlySpan<T>(System.Runtime.CompilerServices.Unsafe.As<System.Runtime.CompilerServices.StrongBox<T[]>>(list).Value, 0, list.Count);
+        }
+    }
+
     public readonly ref struct Spanning<T>
     {
         private readonly IReadOnlyList<T> _list;
@@ -25,8 +34,6 @@ namespace Roguegard
 
         public int Count => _count;
 
-        public System.ReadOnlySpan<T> Span => new System.Span<T>(ToArray(), 0, _count);
-
         public static Spanning<T> Empty => _empty;
         private static readonly T[] _empty = new T[0];
 
@@ -38,7 +45,7 @@ namespace Roguegard
             _count = array.Length;
         }
 
-        private Spanning(IReadOnlyList<T> list, int count)
+        private Spanning(IReadOnlyList<T> list)
         {
             if (list == null) throw new System.ArgumentNullException(nameof(list));
 #if UNITY_EDITOR
@@ -48,7 +55,7 @@ namespace Roguegard
 #endif
 
             _list = list;
-            _count = count;
+            _count = list.Count;
         }
 
         public T[] ToArray()
@@ -61,65 +68,64 @@ namespace Roguegard
             return result;
         }
 
-        /// <summary>
-        /// Unsafe を使用するとき、 int[] など値型配列から object[] への型変換ができないため使わない
-        /// </summary>
-        [System.Obsolete]
-        private Spanning<TTo> Cast<TTo>()
-        {
-            return new Spanning<TTo>((IReadOnlyList<TTo>)_list, _count);
-        }
+        internal static Spanning<T> Get(IReadOnlyList<T> list) => new(list);
+        public static implicit operator Spanning<T>(T[] array) => new(array);
+        public static implicit operator System.ReadOnlySpan<T>(Spanning<T> spanning) => new(spanning.ToArray(), 0, spanning._count);
+        public Enumerator GetEnumerator() => new Enumerator(_list, _count);
 
-        public static Spanning<T> Create<TFrom, TFromElm>(TFrom list)
-            where TFrom : List<TFromElm>, IReadOnlyList<T>
+        public ref struct Enumerator
         {
-            return new Spanning<T>(list, list.Count);
-        }
+            private readonly IReadOnlyList<T> list;
+            private readonly int count;
+            private int index;
 
-        public static Spanning<T> Create<TFrom>(TFrom list)
-            where TFrom : IList, IReadOnlyList<T>
-        {
-            return new Spanning<T>(list, ((IReadOnlyList<T>)list).Count);
-        }
+            public T Current => list[index];
 
-        public static implicit operator Spanning<T>(T[] array)
-        {
-            return new Spanning<T>(array);
-        }
+            public Enumerator(IReadOnlyList<T> list, int count)
+            {
+                this.list = list;
+                this.count = count;
+                index = -1;
+            }
 
-        public static implicit operator Spanning<T>(List<T> list)
-        {
-            return new Spanning<T>(list, list.Count);
+            public bool MoveNext()
+            {
+                index++;
+                return index < count;
+            }
         }
     }
 
     //    public readonly ref struct Spanning<T>
     //    {
-    //        private readonly T[] array;
+    //        private readonly T[] _array;
     //        private readonly int _count;
 
-    //        public T this[int index] => array[index];
+    //        public T this[int index] => _array[index];
 
     //        public int Count => _count;
 
     //        public static Spanning<T> Empty => _empty;
     //        private static readonly T[] _empty = new T[0];
 
-    //        private Spanning(T[] array, int count, IReadOnlyList<T> list)
+    //        private Spanning(T[] array)
     //        {
-    //            this.array = array;
-    //            _count = count;
+    //            if (array == null) throw new System.ArgumentNullException(nameof(array));
+
+    //            _array = array;
+    //            _count = array.Length;
     //        }
 
     //        private Spanning(IReadOnlyList<T> list)
     //        {
+    //            if (list == null) throw new System.ArgumentNullException(nameof(list));
     //#if UNITY_EDITOR
     //            var type = list.GetType();
     //            if (!type.IsGenericType || type.GetGenericTypeDefinition() != typeof(List<>)) throw new System.ArgumentException(
     //                $"{typeof(List<>)} でないインスタンスで {typeof(Spanning<>)} を生成しようとしました。");
     //#endif
 
-    //            array = default;
+    //            _array = System.Runtime.CompilerServices.Unsafe.As<System.Runtime.CompilerServices.StrongBox<T[]>>(list).Value;
     //            _count = list.Count;
     //        }
 
@@ -128,31 +134,36 @@ namespace Roguegard
     //            var result = new T[_count];
     //            for (int i = 0; i < _count; i++)
     //            {
-    //                result[i] = array[i];
+    //                result[i] = _array[i];
     //            }
     //            return result;
     //        }
 
-    //        public static Spanning<T> Create<TFrom, TFromElm>(TFrom list)
-    //            where TFrom : List<TFromElm>, IReadOnlyList<T>
-    //        {
-    //            return new Spanning<T>(list);
-    //        }
+    //        internal static Spanning<T> Get(IReadOnlyList<T> list) => new(list);
+    //        public static implicit operator Spanning<T>(T[] array) => new(array);
+    //        public static implicit operator System.ReadOnlySpan<T>(Spanning<T> spanning) => new(spanning._array, 0, spanning._count);
+    //        public Enumerator GetEnumerator() => new Enumerator(_array, _count);
 
-    //        public static Spanning<T> Create<TFrom>(TFrom list)
-    //            where TFrom : IList, IReadOnlyList<T>
+    //        public ref struct Enumerator
     //        {
-    //            return new Spanning<T>(list);
-    //        }
+    //            private readonly T[] array;
+    //            private readonly int count;
+    //            private int index;
 
-    //        public static implicit operator Spanning<T>(T[] array)
-    //        {
-    //            return new Spanning<T>(array, array.Length, array);
-    //        }
+    //            public T Current => array[index];
 
-    //        public static implicit operator Spanning<T>(List<T> list)
-    //        {
-    //            return new Spanning<T>();
+    //            public Enumerator(T[] array, int count)
+    //            {
+    //                this.array = array;
+    //                this.count = count;
+    //                index = -1;
+    //            }
+
+    //            public bool MoveNext()
+    //            {
+    //                index++;
+    //                return index < count;
+    //            }
     //        }
     //    }
 }

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,7 +9,7 @@ namespace Roguegard
     public class RogueDungeonRoomsBuilder
     {
         private readonly List<RogueDungeonRoom> _rooms;
-        public Spanning<RogueDungeonRoom> Rooms => _rooms;
+        public Spanning<RogueDungeonRoom> Rooms => Spanning.Get(_rooms);
 
         private readonly List<RectInt> corridors;
 

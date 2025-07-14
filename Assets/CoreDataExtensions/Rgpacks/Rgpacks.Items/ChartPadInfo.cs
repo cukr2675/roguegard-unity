@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,7 +8,7 @@ namespace Roguegard.Rgpacks
     public class ChartPadInfo
     {
         private readonly List<PropertiedCmnData> _cmns = new();
-        public Spanning<PropertiedCmnData> Cmns => _cmns;
+        public Spanning<PropertiedCmnData> Cmns => Spanning.Get(_cmns);
 
         public PropertiedCmnData AddCmn()
         {

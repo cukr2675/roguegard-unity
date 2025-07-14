@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -64,7 +64,7 @@ namespace Roguegard
 
         private static readonly List<ISelectOption> _dungeonSelectOption = new List<ISelectOption>();
 
-        public static Spanning<ISelectOption> DungeonSelectOption => _dungeonSelectOption;
+        public static Spanning<ISelectOption> DungeonSelectOption => Spanning.Get(_dungeonSelectOption);
 
         private static readonly Dictionary<string, Dictionary<string, object>> _assetTables = new Dictionary<string, Dictionary<string, object>>();
 

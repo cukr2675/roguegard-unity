@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,9 +7,8 @@ namespace Roguegard
     [Objforming.Formable]
     public class LobbyMemberList
     {
-        private readonly List<RogueObj> _members = new List<RogueObj>();
-
-        public Spanning<RogueObj> Members => _members;
+        private readonly List<RogueObj> _members = new();
+        public Spanning<RogueObj> Members => Spanning.Get(_members);
 
         public void Add(RogueObj character)
         {

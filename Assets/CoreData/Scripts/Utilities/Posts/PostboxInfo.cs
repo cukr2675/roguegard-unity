@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,8 +8,7 @@ namespace Roguegard
     public class PostboxInfo
     {
         private readonly List<RoguePost> _posts;
-
-        public Spanning<RoguePost> Posts => _posts;
+        public Spanning<RoguePost> Posts => Spanning.Get(_posts);
 
         public int MaxPosts { get; set; }
 

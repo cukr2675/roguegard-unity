@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,12 +6,12 @@ namespace Roguegard
 {
     public class RoguePredicatorPositionList
     {
-        private readonly Dictionary<Vector2Int, RogueObjList> table = new Dictionary<Vector2Int, RogueObjList>();
-        private readonly List<Vector2Int> _positions = new List<Vector2Int>();
+        private readonly Dictionary<Vector2Int, RogueObjList> table = new();
+        private readonly List<Vector2Int> _positions = new();
 
-        public Spanning<Vector2Int> Positions => _positions;
+        public Spanning<Vector2Int> Positions => Spanning.Get(_positions);
 
-        private static readonly Stack<RogueObjList> pool = new Stack<RogueObjList>();
+        private static readonly Stack<RogueObjList> pool = new();
 
         public Spanning<RogueObj> GetObjs(Vector2Int position)
         {

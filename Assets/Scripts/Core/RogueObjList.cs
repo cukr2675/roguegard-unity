@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -143,6 +143,6 @@ namespace Roguegard
             }
         }
 
-        public static implicit operator Spanning<RogueObj>(RogueObjList list) => list.objs;
+        public static implicit operator Spanning<RogueObj>(RogueObjList list) => Spanning.Get(list.objs);
     }
 }
