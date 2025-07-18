@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -92,10 +92,9 @@ namespace RoguegardUnity
         private static bool LobbyMembersIsIn(RogueObj player, RogueObj space)
         {
             var worldInfo = RogueWorldInfo.GetByCharacter(player);
-            var lobbyMembers = worldInfo.LobbyMembers.Members;
-            for (int j = 0; j < lobbyMembers.Count; j++)
+            foreach (var lobbyMember in worldInfo.LobbyMembers.Members)
             {
-                if (ObjIsIn(lobbyMembers[j], space)) return true;
+                if (ObjIsIn(lobbyMember, space)) return true;
             }
             return false;
         }
@@ -110,10 +109,8 @@ namespace RoguegardUnity
             // 子オブジェクトの処理
 
             // 空間のオブジェクトの更新フラグリセット処理をする。
-            var objs = self.Space.Objs;
-            for (int i = 0; i < objs.Count; i++)
+            foreach (var obj in self.Space.Objs)
             {
-                var obj = objs[i];
                 if (obj == null) continue;
 
                 ResetTick(obj);

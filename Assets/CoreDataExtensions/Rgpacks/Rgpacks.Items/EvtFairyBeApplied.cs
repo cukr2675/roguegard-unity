@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -39,9 +39,8 @@ namespace Roguegard.Rgpacks
                 var fairy = arg.Arg.TargetObj;
                 var eventFairyInfo = EvtFairyInfo.Get(fairy);
                 elms.Clear();
-                for (int i = 0; i < eventFairyInfo.Pages.Count; i++)
+                foreach (var page in eventFairyInfo.Pages)
                 {
-                    var page = eventFairyInfo.Pages[i];
                     elms.Add(
                         SelectOption.Create<MMgr, MArg>(
                             page.ChartCmn ?? "",

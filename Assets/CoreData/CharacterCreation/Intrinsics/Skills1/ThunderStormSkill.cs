@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -50,10 +50,9 @@ namespace Roguegard.CharacterCreation
                 }
                 Range.Predicate(predicator, user, 0f, null, visibleRadius, room);
                 predicator.EndPredicate();
-                var objs = predicator.GetObjs(user.Position);
-                for (int i = 0; i < objs.Count; i++)
+                foreach (var target in predicator.GetObjs(user.Position))
                 {
-                    this.TryHurt(objs[i], self, activationDepth, damage);
+                    this.TryHurt(target, self, activationDepth, damage);
                 }
                 return true;
             }

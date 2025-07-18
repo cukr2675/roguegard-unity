@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -90,12 +90,7 @@ namespace Roguegard
 
         public static bool MatchAmmo(IAmmoEquipmentInfo ammoInfo, Spanning<IKeyword> ammoCategories)
         {
-            var ammoCategory = ammoInfo.AmmoCategory;
-            for (int i = 0; i < ammoCategories.Count; i++)
-            {
-                if (ammoCategories[i] == ammoCategory) return true;
-            }
-            return false;
+            return ammoCategories.Contains(ammoInfo.AmmoCategory);
         }
 
         /// <summary>
@@ -105,9 +100,9 @@ namespace Roguegard
         {
             var equipmentState = obj.Main.GetEquipmentState(obj);
             equipParts.Clear();
-            for (int i = 0; i < equipmentState.Parts.Count; i++)
+            foreach (var equipPart in equipmentState.Parts)
             {
-                equipParts.Add(equipmentState.Parts[i]);
+                equipParts.Add(equipPart);
             }
 
             for (int i = equipmentState.Parts.Count - 1; i >= 0; i--)
@@ -135,9 +130,9 @@ namespace Roguegard
         {
             var equipmentState = obj.Main.GetEquipmentState(obj);
             equipParts.Clear();
-            for (int i = 0; i < equipmentState.Parts.Count; i++)
+            foreach (var equipPart in equipmentState.Parts)
             {
-                equipParts.Add(equipmentState.Parts[i]);
+                equipParts.Add(equipPart);
             }
 
             for (int i = equipmentState.Parts.Count - 1; i >= 0; i--)
@@ -167,9 +162,9 @@ namespace Roguegard
         {
             var equipmentState = obj.Main.GetEquipmentState(obj);
             equipParts.Clear();
-            for (int i = 0; i < equipmentState.Parts.Count; i++)
+            foreach (var equipPart in equipmentState.Parts)
             {
-                equipParts.Add(equipmentState.Parts[i]);
+                equipParts.Add(equipPart);
             }
 
             for (int i = equipmentState.Parts.Count - 1; i >= 0; i--)
@@ -200,9 +195,9 @@ namespace Roguegard
         {
             var equipmentState = obj.Main.GetEquipmentState(obj);
             equipParts.Clear();
-            for (int i = 0; i < equipmentState.Parts.Count; i++)
+            foreach (var equipPart in equipmentState.Parts)
             {
-                equipParts.Add(equipmentState.Parts[i]);
+                equipParts.Add(equipPart);
             }
 
             for (int i = equipmentState.Parts.Count - 1; i >= 0; i--)
@@ -236,14 +231,14 @@ namespace Roguegard
             if (equipment == null) throw new System.ArgumentNullException(nameof(equipment));
 
             var statusEffectState = equipment.Main.GetStatusEffectState(equipment);
-            for (int j = 0; j < statusEffectState.StatusEffects.Count; j++)
+            for (int i = 0; i < statusEffectState.StatusEffects.Count; i++)
             {
-                var statusEffect = statusEffectState.StatusEffects[j];
+                var statusEffect = statusEffectState.StatusEffects[i];
                 if (statusEffect.EffectCategory == EffectCategoryKw.Erosion &&
                     statusEffect is IClosableStatusEffect closable)
                 {
                     closable.RemoveClose(equipment);
-                    j--;
+                    i--;
                 }
             }
         }

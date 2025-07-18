@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -45,10 +45,8 @@ namespace Roguegard
         private static PostboxInfo GetLobbyPostboxInfo(RogueObj self, out RogueObj postbox)
         {
             var worldInfo = RogueWorldInfo.GetByCharacter(self);
-            var lobbyObjs = worldInfo.Lobby.Space.Objs;
-            for (int i = 0; i < lobbyObjs.Count; i++)
+            foreach (var obj in worldInfo.Lobby.Space.Objs)
             {
-                var obj = lobbyObjs[i];
                 if (obj == null) continue;
 
                 var info = PostboxInfo.Get(obj);

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -99,9 +99,8 @@ namespace RoguegardUnity
             }
 
             membersBuffer.Clear();
-            for (int i = 0; i < memberSources.Count; i++)
+            foreach (var source in memberSources)
             {
-                var source = memberSources[i];
                 var member = FirstOrDefault(source);
                 if (member != null) { membersBuffer.Add(member.Clone()); } // 参照越しに変更されないようにクローンを使用する。
                 else { membersBuffer.Add(source.CreateMember()); } // 元のリストになければ新規作成する。

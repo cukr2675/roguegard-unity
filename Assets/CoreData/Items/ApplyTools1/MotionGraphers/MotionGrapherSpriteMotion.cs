@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -21,9 +21,8 @@ namespace Roguegard
         {
             // このモーションの同期再生部分のキータイム一覧を取得する（SubTimelineTrack などの非同期再生部分は除く）
             var keyTimes = new List<float>();
-            for (int i = 0; i < info.Tracks.Count; i++)
+            foreach (var track in info.Tracks)
             {
-                var track = info.Tracks[i];
                 if (track is SpriteMotionGrapherTrack spriteMotionTrack)
                 {
                     keyTimes.AddRange(spriteMotionTrack.SelectKeyTimes());
@@ -117,14 +116,12 @@ namespace Roguegard
                 resultBoneReorderIndexTable = new Dictionary<BoneKeyword, int>();
 
                 baseSpritePose = new SpritePose();
-                for (int i = 0; i < info.Tracks.Count; i++)
+                foreach (var track in info.Tracks)
                 {
-                    var track = info.Tracks[i];
                     if (track is SpriteMotionGrapherTrack spriteMotionTrack)
                     {
-                        for (int j = 0; j < spriteMotionTrack.Bones.Count; j++)
+                        foreach (var bone in spriteMotionTrack.Bones)
                         {
-                            var bone = spriteMotionTrack.Bones[j];
                             var boneName = new BoneKeyword(bone.BoneName);
                             var beforeTransform = beforePose?.baseSpritePose.BoneTransforms[boneName];
                             var positionX = beforeTransform?.LocalPosition.x ?? 0f;

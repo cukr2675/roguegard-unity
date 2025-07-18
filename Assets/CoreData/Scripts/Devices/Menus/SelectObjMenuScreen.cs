@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -23,9 +23,9 @@ namespace Roguegard.Device
         public override void OpenScreen(in MMgr manager, in MArg arg)
         {
             list.Clear();
-            for (int i = 0; i < arg.Self.Space.Objs.Count; i++)
+            foreach (var obj in arg.Self.Space.Objs)
             {
-                list.Add(arg.Self.Space.Objs[i]);
+                list.Add(obj);
             }
 
             view.ShowTemplate(list, manager, arg)

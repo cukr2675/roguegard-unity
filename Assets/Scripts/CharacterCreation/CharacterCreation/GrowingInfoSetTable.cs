@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -24,9 +24,8 @@ namespace Roguegard.CharacterCreation
                 {
                     var growingOption = growingOptions[i];
                     var genderTable = new Dictionary<IRogueGender, CharacterCreationInfoSet>();
-                    for (int j = 0; j < genders.Count; j++)
+                    foreach (var gender in genders)
                     {
-                        var gender = genders[j];
                         genderTable.Add(gender, new CharacterCreationInfoSet(data, i, gender));
                     }
                     table.Add(growingOption, genderTable);
@@ -36,9 +35,8 @@ namespace Roguegard.CharacterCreation
             {
                 table = new Dictionary<IRaceOption, Dictionary<IRogueGender, CharacterCreationInfoSet>>();
                 var genderTable = new Dictionary<IRogueGender, CharacterCreationInfoSet>();
-                for (int j = 0; j < genders.Count; j++)
+                foreach (var gender in genders)
                 {
-                    var gender = genders[j];
                     genderTable.Add(gender, new CharacterCreationInfoSet(data, 0, gender));
                 }
                 table.Add(raceOption, genderTable);

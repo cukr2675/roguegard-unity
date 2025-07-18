@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -58,9 +58,8 @@ namespace Roguegard
             // IBoneSpriteEffect と IRogueObjSprite の実装をできるだけ切り離すため、テーブルは空の状態で開始する。（バージョンで変更できる？）
             ochalikeMorph.Clear();
 
-            for (int i = 0; i < effects.Count; i++)
+            foreach (var effect in effects)
             {
-                var effect = effects[i];
                 effect.AffectSprite(self, rootBone, ochalikeMorph);
             }
             root.ApplyTable(ochalikeMorph);

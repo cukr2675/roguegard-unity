@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -139,14 +139,14 @@ namespace Roguegard
             if (!ContainsGround(_roomWallTiles)) { Debug.LogError($"[{this}] {nameof(_roomWallTiles)} に {RogueTileLayer.Ground} が含まれません。"); }
             for (int i = 0; i < _corridorTiles.Length; i++)
             {
-                if (!ContainsGround(_corridorTiles[i])) { Debug.LogError($"[{this}] {nameof(_corridorTiles)}[{i}] に {RogueTileLayer.Ground} が含まれません。"); }
+                if (!ContainsGround(_corridorTiles[i].Array)) { Debug.LogError($"[{this}] {nameof(_corridorTiles)}[{i}] に {RogueTileLayer.Ground} が含まれません。"); }
             }
 
-            bool ContainsGround(Spanning<IRogueTile> tiles)
+            bool ContainsGround(IRogueTile[] tiles)
             {
-                for (int i = 0; i < tiles.Count; i++)
+                foreach (var tile in tiles)
                 {
-                    if (tiles[i].Info.Layer == RogueTileLayer.Ground) return true;
+                    if (tile.Info.Layer == RogueTileLayer.Ground) return true;
                 }
                 return false;
             }
@@ -158,8 +158,6 @@ namespace Roguegard
             [SerializeField] private RogueTileInfoData[] _tiles = null;
 
             public IRogueTile[] Array => _tiles;
-
-            public static implicit operator Spanning<IRogueTile>(TileArray tiles) => tiles._tiles;
         }
     }
 }

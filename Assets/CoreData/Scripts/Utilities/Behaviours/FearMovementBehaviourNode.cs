@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -20,10 +20,8 @@ namespace Roguegard
             if (!self.Location.Space.TryGetRoomView(self.Position, out var room, out _)) { room = new RectInt(); }
 
             var sqrVisibleRadius = visibleRadius * visibleRadius;
-            var objs = self.Location.Space.Objs;
-            for (int i = 0; i < objs.Count; i++)
+            foreach (var obj in self.Location.Space.Objs)
             {
-                var obj = objs[i];
                 if (obj == null || !StatsEffectedValues.AreVS(self, obj)) continue;
 
                 var distance = obj.Position - self.Position;

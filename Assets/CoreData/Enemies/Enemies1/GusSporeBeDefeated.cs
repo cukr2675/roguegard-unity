@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -45,11 +45,9 @@ namespace Roguegard
             // 倒れたキャラクターを消す。
             self.TrySetStack(0, user);
 
-            var targets = predicator.GetObjs(lootPosition);
-            for (int i = 0; i < targets.Count; i++)
+            foreach (var target in predicator.GetObjs(lootPosition))
             {
                 // 周囲1マスに攻撃力+2ダメージ
-                var target = targets[i];
                 var dropPosition = target.Position;
                 using var damageValue = EffectableValue.Get();
                 StatsEffectedValues.GetAtk(self, damageValue);

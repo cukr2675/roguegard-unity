@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -74,10 +74,8 @@ namespace Roguegard
             AddEffect(equipment);
 
             // 装備品にかかったステータスエフェクトの一部を付与する。
-            var equipmentEffects = equipment.Main.RogueEffects.Effects;
-            for (int i = 0; i < equipmentEffects.Count; i++)
+            foreach (var effect in equipment.Main.RogueEffects.Effects)
             {
-                var effect = equipmentEffects[i];
                 if (effect is IEquipmentRogueEffect equipmentEffect)
                 {
                     equipmentEffect.OpenEquip(equipment);
@@ -102,9 +100,8 @@ namespace Roguegard
         {
             var owner = equipment.Location;
             var ownerEquipmentState = owner.Main.GetEquipmentState(owner);
-            for (int i = 0; i < EquipParts.Count; i++)
+            foreach (var equipPart in EquipParts)
             {
-                var equipPart = EquipParts[i];
                 var length = ownerEquipmentState.GetLength(equipPart);
                 for (int j = 0; j < length; j++)
                 {
@@ -118,10 +115,8 @@ namespace Roguegard
             RemoveEffect(equipment);
 
             // 装備品にかかったステータスエフェクトの一部を解除する。
-            var equipmentEffects = equipment.Main.RogueEffects.Effects;
-            for (int i = 0; i < equipmentEffects.Count; i++)
+            foreach (var effect in equipment.Main.RogueEffects.Effects)
             {
-                var effect = equipmentEffects[i];
                 if (effect is IEquipmentRogueEffect equipmentEffect)
                 {
                     equipmentEffect.CloseEquip(equipment);

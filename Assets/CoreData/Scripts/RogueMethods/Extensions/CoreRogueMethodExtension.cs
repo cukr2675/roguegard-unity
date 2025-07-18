@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -168,7 +168,7 @@ namespace Roguegard.Extensions
             {
                 // パーティメンバー全員に経験値を与える
                 var partyMembers = user.Main.Stats.Party.Members;
-                for (int i = 0; i < partyMembers.Count; i++)
+                for (int i = 0; i < partyMembers.Count; i++) // レベルアップでパーティメンバー数が変わる可能性がある
                 {
                     using var expValue = EffectableValue.Get();
                     expValue.Initialize(target.Main.Stats.Lv);

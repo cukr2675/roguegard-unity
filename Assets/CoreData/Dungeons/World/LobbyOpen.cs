@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -42,10 +42,8 @@ namespace Roguegard
 
             public RogueObjUpdaterContinueType UpdateObj(RogueObj self, float activationDepth, ref int sectionIndex)
             {
-                var spaceObjs = self.Space.Objs;
-                for (int i = 0; i < spaceObjs.Count; i++)
+                foreach (var obj in self.Space.Objs)
                 {
-                    var obj = spaceObjs[i];
                     if (obj == null) continue;
 
                     if (obj.Main.InfoSet.Equals(parent._lobbyMerchant.Option.PrimaryInfoSet)) return default;

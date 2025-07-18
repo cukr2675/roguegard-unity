@@ -26,9 +26,8 @@ namespace Roguegard.CharacterCreation
 
             morph = new AppearanceMorph();
 
-            for (int i = 0; i < item.Appearances.Count; i++)
+            foreach (var appearance in item.Appearances)
             {
-                var appearance = item.Appearances[i];
                 appearance.Option.Affect(mainBone, morph, appearance, characterCreationData);
             }
         }

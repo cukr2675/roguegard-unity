@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -53,12 +53,9 @@ namespace Roguegard.CharacterCreation
         public static Color GetHairColor(ICharacterCreationData characterCreationData)
         {
             var appearances = characterCreationData.Appearances;
-            for (int i = 0; i < appearances.Count; i++)
+            foreach (var appearance in appearances)
             {
-                var appearance = appearances[i];
-                if (appearance.Option?.BoneName != BoneKeyword.Hair) continue;
-
-                return appearance.Color;
+                if (appearance.Option?.BoneName == BoneKeyword.Hair) return appearance.Color;
             }
             return Color.white;
         }

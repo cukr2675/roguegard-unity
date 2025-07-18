@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -25,10 +25,8 @@ namespace Roguegard
             itemIsEquipped = listItem.IsEquipped;
             startingItem = listItem.StartingItem;
 
-            var spaceObjs = self.Space.Objs;
-            for (int i = 0; i < spaceObjs.Count; i++)
+            foreach (var obj in self.Space.Objs)
             {
-                var obj = spaceObjs[i];
                 if (obj == null || obj.Main.Stats != listItem.MainStats) continue;
 
                 return obj;

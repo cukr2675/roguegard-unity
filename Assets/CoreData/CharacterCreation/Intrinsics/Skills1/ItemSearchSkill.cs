@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -31,11 +31,9 @@ namespace Roguegard.CharacterCreation
                 if (!ViewInfo.TryGet(leader, out var viewInfo)) return false;
 
                 // 階層全体のアイテムを視界に追加
-                var locationObjs = self.Location.Space.Objs;
                 var any = false;
-                for (int i = 0; i < locationObjs.Count; i++)
+                foreach (var obj in self.Location.Space.Objs)
                 {
-                    var obj = locationObjs[i];
                     if (obj == null || obj.HasCollider || obj.AsTile) continue;
 
                     viewInfo.AddVisibleObj(obj, true); // オブジェクトだけだと見づらいのでタイルも表示する

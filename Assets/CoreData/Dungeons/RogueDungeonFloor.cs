@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -26,10 +26,8 @@ namespace Roguegard.CharacterCreation
         {
             // パーティメンバーを移動
             var party = player.Main.Stats.Party;
-            var members = party.Members;
-            for (int i = 0; i < members.Count; i++)
+            foreach (var member in party.Members)
             {
-                var member = members[i];
                 if (member == player) continue;
                 if (member.Main.Stats.Hp <= 0 && StatsEffectedValues.GetMaxHp(member) >= 1) continue; // 倒れていたら移動させない
                 if (default(IActiveRogueMethodCaller).LocateNextToAnyMember(member, null, 0f, party)) continue;

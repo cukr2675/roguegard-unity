@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -168,11 +168,9 @@ namespace RoguegardUnity
                 // 足元を調べる
                 //////////////////////////////////////////////////////////////////////////
 
-                var objs = player.Location.Space.Objs;
                 RogueObj groundObj = null;
-                for (int i = 0; i < objs.Count; i++)
+                foreach (var obj in player.Location.Space.Objs)
                 {
-                    var obj = objs[i];
                     if (obj == null || obj.Position != player.Position || obj == player) continue;
 
                     if (obj.AsTile) continue;

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -116,9 +116,9 @@ namespace Roguegard.CharacterCreation
         {
             base.OnValidate();
 
-            for (int i = 0; i < _race.OpenEffectSources.Count; i++)
+            foreach (var openEffectSource in _race.OpenEffectSources)
             {
-                if (_race.OpenEffectSources[i].Ref?.GetType() == typeof(DungeonOpen)) return;
+                if (openEffectSource.Ref?.GetType() == typeof(DungeonOpen)) return;
             }
             Debug.LogError($"{name} ({nameof(DungeonCreationData)}) の {nameof(IOpenEffect)} に {nameof(DungeonOpen)} が設定されていません。");
         }

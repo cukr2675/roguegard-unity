@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -31,10 +31,9 @@ namespace Roguegard
             }
             Range.Predicate(predicator, user, 0f, null, visibleRadius, room);
             predicator.EndPredicate();
-            var objs = predicator.GetObjs(user.Position);
-            for (int i = 0; i < objs.Count; i++)
+            foreach (var target in predicator.GetObjs(user.Position))
             {
-                this.TryAffect(objs[i], activationDepth, ConfusionStatusEffect.Callback, self, user);
+                this.TryAffect(target, activationDepth, ConfusionStatusEffect.Callback, self, user);
             }
             return true;
         }

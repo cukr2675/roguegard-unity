@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -86,9 +86,9 @@ namespace Roguegard.Rgpacks.MoonSharp
                 var coroutine = function.OwnerScript.CreateCoroutine(function).Coroutine;
                 dynArguments.Clear();
                 dynArguments.Add(value); // self
-                for (int i = 0; i < arguments.Count; i++)
+                foreach (var argument in arguments)
                 {
-                    if (arguments[i] is RogueObj obj)
+                    if (argument is RogueObj obj)
                     {
                         dynArguments.Add(UserData.Create(new RogueObjUserData(obj)));
                     }

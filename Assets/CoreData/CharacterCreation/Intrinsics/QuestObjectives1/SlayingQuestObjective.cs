@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -20,10 +20,8 @@ namespace Roguegard.CharacterCreation
             if (options == null)
             {
                 options = new List<IStartingItemOption>();
-                var allOptions = RoguegardSettings.CharacterCreationDatabase.StartingItemOptions;
-                for (int i = 0; i < allOptions.Count; i++)
+                foreach (var optionValue in RoguegardSettings.CharacterCreationDatabase.StartingItemOptions)
                 {
-                    var optionValue = allOptions[i];
                     if (ReferenceEquals(optionValue.InfoSet.Faction, _targetFaction))
                     {
                         options.Add(optionValue);
@@ -204,9 +202,9 @@ namespace Roguegard.CharacterCreation
                 {
                     message.Append("{v}その報酬として…");
                 }
-                for (int i = 0; i < quest.LootTable.Count; i++)
+                foreach (var lootTableRow in quest.LootTable)
                 {
-                    var loot = WeightedRogueObjGeneratorUtility.CreateObj(quest.LootTable[i], self, RogueRandom.Primary);
+                    var loot = WeightedRogueObjGeneratorUtility.CreateObj(lootTableRow, self, RogueRandom.Primary);
                     message.Append("{v}").AppendLine();
                     if (loot.Main.InfoSet.Equals(RoguegardSettings.MoneyInfoSet))
                     {

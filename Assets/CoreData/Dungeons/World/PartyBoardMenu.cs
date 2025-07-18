@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -24,13 +24,12 @@ namespace Roguegard
         {
             // ロビーメンバーの一覧を表示する
             var worldInfo = RogueWorldInfo.GetByCharacter(arg.Self);
-            var lobbyMembers = worldInfo.LobbyMembers.Members;
             elms.Clear();
-            for (int i = 0; i < lobbyMembers.Count; i++)
+            foreach (var lobbyMember in worldInfo.LobbyMembers.Members)
             {
-                if (lobbyMembers[i] == null) continue;
+                if (lobbyMember == null) continue;
 
-                elms.Add(lobbyMembers[i]);
+                elms.Add(lobbyMember);
             }
             elms.Add(null);
 
@@ -170,10 +169,8 @@ namespace Roguegard
                 info.Seat = null;
                 info.SavePoint = null;
                 info.ItemRegister.Clear();
-                var spaceObjs = newMember.Space.Objs;
-                for (int i = 0; i < spaceObjs.Count; i++)
+                foreach (var item in newMember.Space.Objs)
                 {
-                    var item = spaceObjs[i];
                     if (item == null) continue;
 
                     info.ItemRegister.Add(item);

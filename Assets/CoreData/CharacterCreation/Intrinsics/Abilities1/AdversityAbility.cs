@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -26,10 +26,8 @@ namespace Roguegard.CharacterCreation
                 {
                     // 周囲8マスに敵が4体以上いるときダメージ追加
                     var enemyCount = 0;
-                    var spaceObjs = self.Location.Space.Objs;
-                    for (int i = 0; i < spaceObjs.Count; i++)
+                    foreach (var obj in self.Location.Space.Objs)
                     {
-                        var obj = spaceObjs[i];
                         if (obj == null) continue;
 
                         if (RogueMethodUtility.GetAdjacent(self, obj) && StatsEffectedValues.AreVS(self, obj)) { enemyCount++; }

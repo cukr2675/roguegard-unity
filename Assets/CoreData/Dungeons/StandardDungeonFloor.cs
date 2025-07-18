@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -118,11 +118,9 @@ namespace Roguegard.CharacterCreation
                 var enemyFaction = enemyTable[0].Option.Race.Option.Faction;
                 var enemyMaxCount = enemyTable.MinFrequency; // 最小湧き数に合わせる
 
-                var spaceObjs = self.Space.Objs;
                 var enemyCount = 0;
-                for (int i = 0; i < spaceObjs.Count; i++)
+                foreach (var obj in self.Space.Objs)
                 {
-                    var obj = spaceObjs[i];
                     if (obj == null) continue;
 
                     // 敵対キャラを数える

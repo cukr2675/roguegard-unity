@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -92,12 +92,10 @@ namespace Roguegard
 
             // 周囲のオブジェクトを視界に追加する。
             // ペイントされたオブジェクトも追加する
-            var locationObjs = locationSpace.Objs;
             var selfPosition = (Vector2)self.Position;
             var viewSqrRadius = visibleRadius * visibleRadius;
-            for (int i = 0; i < locationObjs.Count; i++)
+            foreach (var locationObj in locationSpace.Objs)
             {
-                var locationObj = locationObjs[i];
                 if (locationObj == null) continue;
 
                 var relativePosition = locationObj.Position - selfPosition;
@@ -120,9 +118,9 @@ namespace Roguegard
             // 同じ部屋のオブジェクトを視界に追加する。
             if (locationSpace.TryGetRoomView(position, out _, out var roomObjs))
             {
-                for (int i = 0; i < roomObjs.Count; i++)
+                foreach (var roomObj in roomObjs)
                 {
-                    AddUnique(roomObjs[i]);
+                    AddUnique(roomObj);
                 }
             }
         }
@@ -174,9 +172,8 @@ namespace Roguegard
                     }
                 }
 
-                for (int j = 0; j < roomObjs.Count; j++)
+                foreach (var obj in roomObjs)
                 {
-                    var obj = roomObjs[j];
                     if (obj == null || !obj.AsTile) continue;
 
                     var groundTile = space.Tilemap.Get(obj.Position, RogueTileLayer.Ground);
@@ -186,9 +183,9 @@ namespace Roguegard
 
             bool TryGetTileObj(Spanning<RogueObj> roomObjs, Vector2Int position, out RogueObj obj)
             {
-                for (int i = 0; i < roomObjs.Count; i++)
+                foreach (var item in roomObjs)
                 {
-                    obj = roomObjs[i];
+                    obj = item;
                     if (obj == null || !obj.AsTile || obj.Position != position) continue;
 
                     return true;

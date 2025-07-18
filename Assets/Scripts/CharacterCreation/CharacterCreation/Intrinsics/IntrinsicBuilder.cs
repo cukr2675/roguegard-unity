@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -47,9 +47,8 @@ namespace Roguegard.CharacterCreation
             OptionCaption = intrinsic.OptionCaption;
             OptionDetails = intrinsic.OptionDetails;
             members.Clear();
-            for (int i = 0; i < Option.MemberSources.Count; i++)
+            foreach (var memberSource in Option.MemberSources)
             {
-                var memberSource = Option.MemberSources[i];
                 var member = intrinsic.GetMember(memberSource);
                 members.Add(member.Clone());
             }

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,10 +18,8 @@ namespace Roguegard
             IRoguePredicator predicator, RogueObj self, float predictionDepth, RogueObj tool, float visibleRadius, RectInt room)
         {
             var sqrVisibleRadius = visibleRadius * visibleRadius;
-            var spaceObjs = self.Location.Space.Objs;
-            for (int i = 0; i < spaceObjs.Count; i++)
+            foreach (var obj in self.Location.Space.Objs)
             {
-                var obj = spaceObjs[i];
                 if (obj == null) continue;
 
                 var distance = obj.Position - self.Position;
@@ -35,10 +33,8 @@ namespace Roguegard
         public void Predicate(
             IRoguePredicator predicator, RogueObj self, float predictionDepth, RogueObj tool, Vector2Int targetPosition)
         {
-            var spaceObjs = self.Location.Space.Objs;
-            for (int i = 0; i < spaceObjs.Count; i++)
+            foreach (var obj in self.Location.Space.Objs)
             {
-                var obj = spaceObjs[i];
                 if (obj == null || obj.Position != targetPosition) continue;
 
                 predicator.Predicate(self, obj, self.Position);

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -43,11 +43,9 @@ namespace Roguegard.Rgpacks
             public override void OpenScreen(in MMgr manager, in MArg arg)
             {
                 var diorama = arg.Arg.TargetObj;
-                var dioramaFloorObjs = diorama.Space.Objs;
                 elms.Clear();
-                for (int i = 0; i < dioramaFloorObjs.Count; i++)
+                foreach (var dioramaFloorObj in diorama.Space.Objs)
                 {
-                    var dioramaFloorObj = dioramaFloorObjs[i];
                     if (dioramaFloorObj == null) continue;
 
                     elms.Add(dioramaFloorObj);

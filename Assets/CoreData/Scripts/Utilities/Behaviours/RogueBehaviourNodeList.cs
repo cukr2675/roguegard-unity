@@ -1,12 +1,12 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Roguegard
 {
-    public class RogueBehaviourNodeList //: IReadOnlyList<IRogueBehaviourNode>
+    public class RogueBehaviourNodeList
     {
-        private readonly List<IRogueBehaviourNode> nodes = new List<IRogueBehaviourNode>();
+        private readonly List<IRogueBehaviourNode> nodes = new();
 
         public RogueObjUpdaterContinueType Tick(RogueObj self, float activationDepth)
         {

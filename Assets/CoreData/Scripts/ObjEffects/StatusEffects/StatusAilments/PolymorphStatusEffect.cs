@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -44,10 +44,8 @@ namespace Roguegard
                 var effect = (PolymorphStatusEffect)statusEffect;
                 effect.equipments.Clear();
                 var equipmentState = target.Main.GetEquipmentState(target);
-                var parts = equipmentState.Parts;
-                for (int i = 0; i < parts.Count; i++)
+                foreach (var part in equipmentState.Parts)
                 {
-                    var part = parts[i];
                     var length = equipmentState.GetLength(part);
                     for (int j = 0; j < length; j++)
                     {

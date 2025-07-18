@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -175,9 +175,9 @@ namespace Roguegard.Device
 
         private void AddMemberElements(IMemberable memberable)
         {
-            for (int i = 0; i < memberable.MemberSources.Count; i++)
+            foreach (var memberSource in memberable.MemberSources)
             {
-                var member = memberable.GetMember(memberable.MemberSources[i]);
+                var member = memberable.GetMember(memberSource);
                 if (member is SingleItemMember singleItemMember)
                 {
                     elms.Add(singleItemMemberSelectOption.Set(singleItemMember));
@@ -270,9 +270,9 @@ namespace Roguegard.Device
 
                 if (arg.Arg.Other is IMemberable memberable)
                 {
-                    for (int i = 0; i < memberable.MemberSources.Count; i++)
+                    foreach (var memberSource in memberable.MemberSources)
                     {
-                        var member = memberable.GetMember(memberable.MemberSources[i]);
+                        var member = memberable.GetMember(memberSource);
                         if (member is SingleItemMember singleItemMember)
                         {
                             // 見た目装備を削除したとき、その装備品を獲得する
@@ -312,11 +312,10 @@ namespace Roguegard.Device
             public override void OpenScreen(in MMgr manager, in MArg arg)
             {
                 builder = (RaceBuilder)arg.Arg.Other;
-                var genders = builder.Option.Genders;
                 list.Clear();
-                for (int i = 0; i < genders.Count; i++)
+                foreach (var gender in builder.Option.Genders)
                 {
-                    list.Add(genders[i]);
+                    list.Add(gender);
                 }
 
                 view.ShowTemplate(list, manager, arg)

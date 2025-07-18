@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -21,11 +21,9 @@ namespace Roguegard.CharacterCreation
             if (dungeons == null)
             {
                 dungeons = new List<DungeonCreationData>();
-                var allOptions = RoguegardSettings.CharacterCreationDatabase.StartingItemOptions;
-                for (int i = 0; i < allOptions.Count; i++)
+                foreach (var optionValue in RoguegardSettings.CharacterCreationDatabase.StartingItemOptions)
                 {
-                    var value = allOptions[i];
-                    if (value is DungeonCreationData dungeonValue)
+                    if (optionValue is DungeonCreationData dungeonValue)
                     {
                         if (dungeonValue.Floors.Count == 0) continue;
 

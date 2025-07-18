@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -356,10 +356,9 @@ namespace Roguegard
         {
             if (from == null) return;
 
-            for (int i = 0; i < from.Parts.Count; i++)
+            foreach (var fromPart in from.Parts)
             {
-                var fromPart = from.Parts[i];
-                if (to == null || !Contains(to.Parts, fromPart))
+                if (to == null || !to.Parts.Contains(fromPart))
                 {
                     // 移動先に同一の部位が存在しないときは解除する。
                     Unequip(fromPart);
@@ -368,15 +367,6 @@ namespace Roguegard
                 {
                     Reequip(fromPart);
                 }
-            }
-
-            bool Contains(Spanning<IKeyword> list, IKeyword item)
-            {
-                for (int i = 0; i < list.Count; i++)
-                {
-                    if (list[i] == item) return true;
-                }
-                return false;
             }
 
             void Unequip(IKeyword fromPart)

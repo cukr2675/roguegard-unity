@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -30,10 +30,8 @@ namespace Roguegard.CharacterCreation
                 // 同じフロアにいる敵を隣に引き寄せる
                 var random = RogueRandom.Primary;
                 var location = self.Location;
-                var locationObjs = location.Space.Objs;
-                for (int i = 0; i < locationObjs.Count; i++)
+                foreach (var obj in location.Space.Objs)
                 {
-                    var obj = locationObjs[i];
                     if (obj == null || !StatsEffectedValues.AreVS(self, obj)) continue;
 
                     // 隣に引き寄せる

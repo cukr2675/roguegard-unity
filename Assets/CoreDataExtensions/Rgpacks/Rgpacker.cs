@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -85,10 +85,8 @@ namespace Roguegard.Rgpacks
             if (useSubDirectory)
             {
                 var subDirectory = new Dictionary<string, object>();
-                var spaceObjs = obj.Space.Objs;
-                for (int i = 0; i < spaceObjs.Count; i++)
+                foreach (var spaceObj in obj.Space.Objs)
                 {
-                    var spaceObj = spaceObjs[i];
                     if (spaceObj == null) continue;
 
                     AddAllAssetsTo(subDirectory, spaceObj);
@@ -97,10 +95,8 @@ namespace Roguegard.Rgpacks
             }
             else
             {
-                var spaceObjs = obj.Space.Objs;
-                for (int i = 0; i < spaceObjs.Count; i++)
+                foreach (var spaceObj in obj.Space.Objs)
                 {
-                    var spaceObj = spaceObjs[i];
                     if (spaceObj == null) continue;
 
                     AddAllAssetsTo(directory, spaceObj);

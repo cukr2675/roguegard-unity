@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -38,9 +38,8 @@ namespace Roguegard
             {
                 equipments.Clear();
                 var equipmentState = target.Main.GetEquipmentState(target);
-                for (int i = 0; i < equipmentState.Parts.Count; i++)
+                foreach (var part in equipmentState.Parts)
                 {
-                    var part = equipmentState.Parts[i];
                     var length = equipmentState.GetLength(part);
                     for (int j = 0; j < length; j++)
                     {

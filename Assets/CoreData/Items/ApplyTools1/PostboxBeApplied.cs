@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -38,9 +38,9 @@ namespace Roguegard
             {
                 var info = PostboxInfo.Get(arg.Arg.Tool);
                 posts.Clear();
-                for (int i = 0; i < info.Posts.Count; i++)
+                foreach (var post in info.Posts)
                 {
-                    posts.Add(info.Posts[i]);
+                    posts.Add(post);
                 }
 
                 view.ShowTemplate(posts, manager, arg)

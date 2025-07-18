@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -26,11 +26,10 @@ namespace RoguegardUnity
 
         public override void OpenScreen(in MMgr manager, in MArg arg)
         {
-            var partyMemberObjs = arg.Self.Main.Stats.Party.Members;
             partyMembers.Clear();
-            for (int i = 0; i < partyMemberObjs.Count; i++)
+            foreach (var partyMemberObj in arg.Self.Main.Stats.Party.Members)
             {
-                partyMembers.Add(partyMemberObjs[i]);
+                partyMembers.Add(partyMemberObj);
             }
 
             view.ShowTemplate(partyMembers, manager, arg)

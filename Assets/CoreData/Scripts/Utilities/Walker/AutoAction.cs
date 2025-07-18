@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -95,11 +95,9 @@ namespace Roguegard
         {
             if (self.Space == null) return false;
 
-            var spaceObjs = self.Space.Objs;
             items.Clear();
-            for (int i = 0; i < spaceObjs.Count; i++)
+            foreach (var spaceObj in self.Space.Objs)
             {
-                var spaceObj = spaceObjs[i];
                 if (spaceObj == null) continue;
 
                 if (!SpaceUtility.ObjIsGlued(spaceObj))

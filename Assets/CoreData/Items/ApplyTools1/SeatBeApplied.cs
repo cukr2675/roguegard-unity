@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -17,17 +17,15 @@ namespace Roguegard
             var worldInfo = RogueWorldInfo.GetByCharacter(self);
             if (self.Location == worldInfo.Lobby)
             {
-                var lobbyMembers = worldInfo.LobbyMembers.Members;
-                for (int i = 0; i < lobbyMembers.Count; i++)
+                foreach (var lobbyMember in worldInfo.LobbyMembers.Members)
                 {
-                    var member = lobbyMembers[i];
-                    if (member == null) continue;
+                    if (lobbyMember == null) continue;
 
-                    var memberInfo = LobbyMemberList.GetMemberInfo(member);
+                    var memberInfo = LobbyMemberList.GetMemberInfo(lobbyMember);
                     if (memberInfo.Seat == self)
                     {
                         // 誰か座っていたらそのキャラに注目する
-                        RogueDevice.Add(DeviceKw.StartAutoPlay, member);
+                        RogueDevice.Add(DeviceKw.StartAutoPlay, lobbyMember);
                         return false;
                     }
                 }
@@ -52,11 +50,10 @@ namespace Roguegard
             {
                 var player = arg.Self;
                 var worldInfo = RogueWorldInfo.GetByCharacter(player);
-                var lobbyMembers = worldInfo.LobbyMembers.Members;
                 objs.Clear();
-                for (int i = 0; i < lobbyMembers.Count; i++)
+                foreach (var lobbyMember in worldInfo.LobbyMembers.Members)
                 {
-                    objs.Add(lobbyMembers[i]);
+                    objs.Add(lobbyMember);
                 }
 
                 view.ShowTemplate(objs, manager, arg)
@@ -80,10 +77,8 @@ namespace Roguegard
                             info.Seat = arg.Arg.TargetObj;
 
                             info.ItemRegister.Clear();
-                            var spaceObjs = lobbyMember.Space.Objs;
-                            for (int i = 0; i < spaceObjs.Count; i++)
+                            foreach (var item in lobbyMember.Space.Objs)
                             {
-                                var item = spaceObjs[i];
                                 if (item == null) continue;
 
                                 info.ItemRegister.Add(item);

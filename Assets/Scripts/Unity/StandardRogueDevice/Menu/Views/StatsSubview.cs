@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -36,10 +36,8 @@ namespace RoguegardUnity
             textBuilder.AppendLine($"満腹度：{mainStats.Nutrition} / {StatsEffectedValues.GetMaxNutrition(obj)}");
             hpTextBuilder.AppendLine();
             var totalMoney = 0;
-            var spaceObjs = obj.Space.Objs;
-            for (int i = 0; i < spaceObjs.Count; i++)
+            foreach (var spaceObj in obj.Space.Objs)
             {
-                var spaceObj = spaceObjs[i];
                 if (spaceObj == null || !spaceObj.Main.InfoSet.Equals(RoguegardSettings.MoneyInfoSet)) continue;
 
                 totalMoney += spaceObj.Stack;

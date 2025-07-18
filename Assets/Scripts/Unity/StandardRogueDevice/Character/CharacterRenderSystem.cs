@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -42,10 +42,9 @@ namespace RoguegardUnity
                 if (player.Main.Stats.Party != null)
                 {
                     // パーティメンバー全員の視界を追加する
-                    var partyMembers = player.Main.Stats.Party.Members;
-                    for (int i = 0; i < partyMembers.Count; i++)
+                    foreach (var partyMember in player.Main.Stats.Party.Members)
                     {
-                        view.AddView(partyMembers[i]);
+                        view.AddView(partyMember);
                     }
                 }
                 else
@@ -75,9 +74,8 @@ namespace RoguegardUnity
             if (ViewInfo.TryGet(player, out var view)) { tilemap = view; }
             else { tilemap = player.Location.Space; }
 
-            for (int i = 0; i < tilemap.VisibleObjs.Count; i++)
+            foreach (var visibleObj in tilemap.VisibleObjs)
             {
-                var visibleObj = tilemap.VisibleObjs[i];
                 if (visibleObj == null || visibleObj.AsTile) continue; // null とタイルはスプライトにしない。
 
                 GetCharacter(visibleObj);
@@ -136,9 +134,8 @@ namespace RoguegardUnity
             }
 
             // 視界内に存在するオブジェクトのスプライトを追加する。
-            for (int i = 0; i < tilemap.VisibleObjs.Count; i++)
+            foreach (var visibleObj in tilemap.VisibleObjs)
             {
-                var visibleObj = tilemap.VisibleObjs[i];
                 if (visibleObj == null || visibleObj.AsTile) continue; // null とタイルはスプライトにしない。
 
                 visibleObj.Main.Sprite.Update(visibleObj);

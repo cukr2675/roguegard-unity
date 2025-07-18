@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -17,10 +17,9 @@ namespace Roguegard
             }
             else
             {
-                var partyMembers = self.Main.Stats.Party.Members;
-                for (int i = 0; i < partyMembers.Count; i++)
+                foreach (var partyMember in self.Main.Stats.Party.Members)
                 {
-                    Add(partyMembers[i]);
+                    Add(partyMember);
                 }
             }
 
@@ -58,10 +57,9 @@ namespace Roguegard
                 }
                 else
                 {
-                    var partyMembers = self.Main.Stats.Party.Members;
-                    for (int i = 0; i < partyMembers.Count; i++)
+                    foreach (var partyMember in self.Main.Stats.Party.Members)
                     {
-                        if (MemberIsEffecter(partyMembers[i])) return true;
+                        if (MemberIsEffecter(partyMember)) return true;
                     }
                     return false;
                 }

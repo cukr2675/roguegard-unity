@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,7 +18,7 @@ namespace Roguegard
             }
 
             var spaceObjs = user.Space.Objs;
-            for (int i = 0; i < spaceObjs.Count; i++)
+            for (int i = 0; i < spaceObjs.Count; i++) // 浄化によってオブジェクト数が変わる可能性がある
             {
                 var obj = spaceObjs[i];
                 if (obj == null) continue;

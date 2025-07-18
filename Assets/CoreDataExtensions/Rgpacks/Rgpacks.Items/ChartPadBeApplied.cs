@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -40,9 +40,8 @@ namespace Roguegard.Rgpacks
                 var chartPad = arg.Arg.TargetObj;
                 var chartPadInfo = ChartPadInfo.Get(chartPad);
                 elms.Clear();
-                for (int i = 0; i < chartPadInfo.Cmns.Count; i++)
+                foreach (var cmn in chartPadInfo.Cmns)
                 {
-                    var cmn = chartPadInfo.Cmns[i];
                     elms.Add(
                         SelectOption.Create<MMgr, MArg>(
                             cmn.Cmn ?? "[新しいコモンイベント]",

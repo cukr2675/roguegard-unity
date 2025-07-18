@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,9 +18,9 @@ namespace Roguegard.CharacterCreation
             // 部分一致する要素があったら失敗させる
             foreach (var item in equipmentItems)
             {
-                for (int i = 0; i < item.EquipParts.Count; i++)
+                foreach (var equipPart in item.EquipParts)
                 {
-                    if (equipParts.Contains(item.EquipParts[i]))
+                    if (equipParts.Contains(equipPart))
                     {
                         ochalikeMorph = null;
                         return false;

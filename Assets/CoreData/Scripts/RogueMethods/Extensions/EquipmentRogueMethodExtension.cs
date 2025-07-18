@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -25,9 +25,8 @@ namespace Roguegard.Extensions
             if (replaceEquipments)
             {
                 // 既に何か装備していたら外す
-                for (int i = 0; i < equipParts.Count; i++)
+                foreach (var equipPart in equipParts)
                 {
-                    var equipPart = equipParts[i];
                     var equipIndex = EquipmentUtility.GetEquipIndex(ownerEquipmentState, equipPart);
                     var preEquipment = ownerEquipmentState.GetEquipment(equipPart, equipIndex);
                     if (preEquipment != null) { method.TryUnequip(preEquipment, user, activationDepth, true); }

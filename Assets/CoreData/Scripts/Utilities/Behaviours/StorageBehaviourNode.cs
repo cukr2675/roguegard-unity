@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,12 +15,10 @@ namespace Roguegard
             var memberInfo = LobbyMemberList.GetMemberInfo(self);
             if (memberInfo == null) return RogueObjUpdaterContinueType.Continue;
 
-            var spaceObjs = self.Location.Space.Objs;
             RogueObj nearestContainer = null;
             int nearestSqrDistance = int.MaxValue;
-            for (int i = 0; i < spaceObjs.Count; i++)
+            foreach (var obj in self.Location.Space.Objs)
             {
-                var obj = spaceObjs[i];
                 if (obj == null || obj.Main.InfoSet.Category != CategoryKw.Container) continue;
 
                 var sqrDistance = (obj.Position - self.Position).sqrMagnitude;
@@ -54,7 +52,7 @@ namespace Roguegard
 
             var containerInfo = ContainerInfo.GetInfo(nearestContainer);
             var items = self.Space.Objs;
-            for (int i = 0; i < items.Count; i++)
+            for (int i = 0; i < items.Count; i++) // アイテムの移動でオブジェクト数が増加する可能性がある
             {
                 var item = items[i];
                 if (item == null || itemRegister.Contains(item)) continue;

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -142,12 +142,11 @@ namespace RoguegardUnity
             {
                 // お金を取り除いたリストを生成
                 objs.Clear();
-                var spaceObjs = targetObj.Space.Objs;
-                for (int i = 0; i < spaceObjs.Count; i++)
+                foreach (var spaceObj in targetObj.Space.Objs)
                 {
-                    if (spaceObjs[i] == null || spaceObjs[i].Main.InfoSet.Equals(RoguegardSettings.MoneyInfoSet)) continue;
+                    if (spaceObj == null || spaceObj.Main.InfoSet.Equals(RoguegardSettings.MoneyInfoSet)) continue;
 
-                    objs.Add(spaceObjs[i]);
+                    objs.Add(spaceObj);
                 }
                 return objs;
             }
@@ -161,12 +160,10 @@ namespace RoguegardUnity
 
             protected override List<RogueObj> GetObjs(RogueObj self, RogueObj targetObj)
             {
-                var locationObjs = targetObj.Location.Space.Objs;
                 var targetPosition = targetObj.Position;
                 objs.Clear();
-                for (int i = 0; i < locationObjs.Count; i++)
+                foreach (var obj in targetObj.Location.Space.Objs)
                 {
-                    var obj = locationObjs[i];
                     if (obj == null || obj == targetObj || obj.Position != targetPosition) continue;
 
                     objs.Add(obj);
@@ -184,10 +181,9 @@ namespace RoguegardUnity
             protected override List<RogueObj> GetObjs(RogueObj self, RogueObj targetObj)
             {
                 objs.Clear();
-                var spaceObjs = self.Space.Objs;
-                for (int i = 0; i < spaceObjs.Count; i++)
+                foreach (var spaceObj in self.Space.Objs)
                 {
-                    objs.Add(spaceObjs[i]);
+                    objs.Add(spaceObj);
                 }
                 return objs;
             }
@@ -203,9 +199,9 @@ namespace RoguegardUnity
             protected override List<RogueObj> GetObjs(RogueObj self, RogueObj container)
             {
                 objs.Clear();
-                for (int i = 0; i < container.Space.Objs.Count; i++)
+                foreach (var obj in container.Space.Objs)
                 {
-                    objs.Add(container.Space.Objs[i]);
+                    objs.Add(obj);
                 }
                 return objs;
             }

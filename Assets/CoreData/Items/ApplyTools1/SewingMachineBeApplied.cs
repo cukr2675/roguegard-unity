@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -30,11 +30,9 @@ namespace Roguegard
 
             public override void OpenScreen(in MMgr manager, in MArg arg)
             {
-                var spaceObjs = arg.Self.Space.Objs;
                 elms.Clear();
-                for (int i = 0; i < spaceObjs.Count; i++)
+                foreach (var obj in arg.Self.Space.Objs)
                 {
-                    var obj = spaceObjs[i];
                     if (obj == null) continue;
 
                     elms.Add(obj);
@@ -157,9 +155,8 @@ namespace Roguegard
                 var equipment = arg.Arg.TargetObj;
 
                 elms.RemoveRange(4, elms.Count - 4);
-                for (int i = 0; i < data.BoneSprites.Items.Count; i++)
+                foreach (var item in data.BoneSprites.Items)
                 {
-                    var item = data.BoneSprites.Items[i];
                     elms.Add(item);
                 }
                 elms.Add(null);

@@ -8,6 +8,7 @@ namespace Roguegard
 {
     // 命名メモ: オブジェクト指向でのオブジェクトであることを示すため RogueObj
     // RogueEntiry だと ECS と混同しやすく RogueActor だとアイテムに不向き＋オブジェクト指向を連想しにくい
+    // ゲーム内でキャラクターやアイテムをひっくるめて「オブジェクト」と呼べるようにしたい
     [Objforming.Formable]
     public class RogueObj
     {
@@ -73,10 +74,8 @@ namespace Roguegard
             if (!excludeSpace) { clone.Space = new RogueSpace(Space); }
             else { clone.Space = new RogueSpace(); }
 
-            var spaceObjs = Space.Objs;
-            for (int i = 0; i < spaceObjs.Count; i++)
+            foreach (var spaceObj in Space.Objs)
             {
-                var spaceObj = spaceObjs[i];
                 if (spaceObj == null) continue;
 
                 // null の場合も ReplaceObj で既存オブジェクトを null に置き換える

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -106,10 +106,9 @@ namespace Roguegard
 
         private static bool TryGetEquals(IMainInfoSet infoSet, Vector2Int position, RogueObj location, out RogueObj obj)
         {
-            var locationObjs = location.Space.Objs;
-            for (int i = 0; i < locationObjs.Count; i++)
+            foreach (var item in location.Space.Objs)
             {
-                obj = locationObjs[i];
+                obj = item;
                 if (obj.Position == position && obj.Main.InfoSet.Equals(infoSet)) return true;
             }
             obj = null;

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -184,9 +184,8 @@ namespace Roguegard
                 // 部屋の敵に近づく
                 if (player.Location.Space.TryGetRoomView(currentPosition, out _, out var roomObjs))
                 {
-                    for (int i = 0; i < roomObjs.Count; i++)
+                    foreach (var roomObj in roomObjs)
                     {
-                        var roomObj = roomObjs[i];
                         if (roomObj == null || !StatsEffectedValues.AreVS(player, roomObj)) continue;
 
                         lastTargetPosition = roomObj.Position;
@@ -200,10 +199,8 @@ namespace Roguegard
                 {
                     var visibleRadius = RoguegardSettings.DefaultVisibleRadius;
                     var sqrVisibleRadius = visibleRadius * visibleRadius;
-                    var locationObjs = player.Location.Space.Objs;
-                    for (int i = 0; i < locationObjs.Count; i++)
+                    foreach (var locationObj in player.Location.Space.Objs)
                     {
-                        var locationObj = locationObjs[i];
                         if (locationObj == null || !StatsEffectedValues.AreVS(player, locationObj)) continue;
 
                         var relativePosition = locationObj.Position - currentPosition;

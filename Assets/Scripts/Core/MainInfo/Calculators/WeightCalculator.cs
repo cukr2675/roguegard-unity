@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -40,10 +40,8 @@ namespace Roguegard
             var spaceWeight = 0f;
             if (!MovementCalculator.Get(self).AsStorage) // ストレージの中身は重さ計算しない
             {
-                var spaceObjs = self.Space.Objs;
-                for (int i = 0; i < spaceObjs.Count; i++)
+                foreach (var spaceObj in self.Space.Objs)
                 {
-                    var spaceObj = spaceObjs[i];
                     if (spaceObj == null) continue;
 
                     var spaceObjWeight = spaceObj.Main.Calculators.GetWeight(spaceObj);

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,13 +14,12 @@ namespace Roguegard.Rgpacks
             var location = character;
             while (location != null)
             {
-                var spaceObjs = location.Space.Objs;
-                for (int i = 0; i < spaceObjs.Count; i++)
+                foreach (var spaceObj in location.Space.Objs)
                 {
-                    if (spaceObjs[i] == null) continue;
+                    if (spaceObj == null) continue;
 
                     // シナリオモノリスを含む空間をアトリエとして返す
-                    var info = Get(spaceObjs[i]);
+                    var info = Get(spaceObj);
                     if (info != null) return location;
                 }
 

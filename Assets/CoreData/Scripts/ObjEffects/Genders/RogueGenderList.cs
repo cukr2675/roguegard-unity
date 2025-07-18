@@ -13,6 +13,6 @@ namespace Roguegard
 
         public int Count => _genders.Length;
 
-        public Spanning<IRogueGender> Span => Spanning.Get<IRogueGender>(_genders);
+        public Spanning<IRogueGender> Span => _genders;
     }
 }

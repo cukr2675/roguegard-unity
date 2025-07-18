@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -233,10 +233,8 @@ end
             var evtId = args.AsType(0, name, DataType.String, false).String;
 
             var location = RogueDevice.Primary.Player.Location;
-            var locationObjs = location.Space.Objs;
-            for (int i = 0; i < locationObjs.Count; i++)
+            foreach (var obj in location.Space.Objs)
             {
-                var obj = locationObjs[i];
                 if (obj == null || !(obj.Main.InfoSet is EvtFairyReference infoSet) || infoSet.EvtId != evtId) continue;
 
                 return UserData.Create(new RogueObjUserData(obj, executionContext));

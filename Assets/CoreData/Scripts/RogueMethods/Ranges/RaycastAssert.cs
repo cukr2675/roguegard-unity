@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -77,10 +77,9 @@ namespace Roguegard
 
             if (arg.TargetObj == null) return false;
 
-            var targets = predicator.GetObjs(position);
-            for (int i = 0; i < targets.Count; i++)
+            foreach (var target in predicator.GetObjs(position))
             {
-                if (targets[i] == arg.TargetObj) return false;
+                if (target == arg.TargetObj) return false;
             }
             return true;
         }

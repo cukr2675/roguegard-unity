@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -68,12 +68,10 @@ namespace Roguegard
 
         private static QuestBoardInfo GetNearestQuestBoardInfo(RogueObj self)
         {
-            var locationObjs = self.Location.Space.Objs;
             QuestBoardInfo nearestQuestBoardInfo = null;
             var nearestSqrDistance = int.MaxValue;
-            for (int i = 0; i < locationObjs.Count; i++)
+            foreach (var obj in self.Location.Space.Objs)
             {
-                var obj = locationObjs[i];
                 if (obj == null) continue;
 
                 var info = QuestBoardInfo.Get(obj);

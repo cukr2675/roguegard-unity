@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -47,11 +47,10 @@ namespace Roguegard
 
             public override void OpenScreen(in MMgr manager, in MArg arg)
             {
-                var dungeonSelectOptions = RoguegardSettings.DungeonSelectOption;
                 selectOptions.Clear();
-                for (int i = 0; i < dungeonSelectOptions.Count; i++)
+                foreach (var option in RoguegardSettings.DungeonSelectOption)
                 {
-                    selectOptions.Add(dungeonSelectOptions[i]);
+                    selectOptions.Add(option);
                 }
 
                 view.ShowTemplate(selectOptions, manager, arg)

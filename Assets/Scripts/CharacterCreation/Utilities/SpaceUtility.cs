@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -96,9 +96,8 @@ namespace Roguegard
         public static void GetTop(RogueSpace space, Vector2Int position, out RogueObj tileObj, out IRogueTile tile)
         {
             tileObj = null;
-            for (int i = 0; i < space.Objs.Count; i++)
+            foreach (var spaceObj in space.Objs)
             {
-                var spaceObj = space.Objs[i];
                 if (spaceObj == null || spaceObj.Position != position) continue;
 
                 if (spaceObj.AsTile)

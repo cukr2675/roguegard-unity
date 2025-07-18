@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -24,9 +24,9 @@ namespace Roguegard
             using var value = EffectableValue.Get();
             StatsEffectedValues.GetMaterial(tool, value);
             var edible = false;
-            for (int i = 0; i < Edibles.Count; i++)
+            foreach (var edibleKeyword in Edibles)
             {
-                if (value.SubValues.Is(Edibles[i]))
+                if (value.SubValues.Is(edibleKeyword))
                 {
                     edible = true;
                     break;

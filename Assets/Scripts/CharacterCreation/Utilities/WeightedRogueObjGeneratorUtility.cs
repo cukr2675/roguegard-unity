@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -42,9 +42,8 @@ namespace Roguegard
             StackOption stackOption = StackOption.Default, RogueObjList generatedObjs = null)
         {
             generatedObjs?.Clear();
-            for (int i = 0; i < weightedObjTable.Count; i++)
+            foreach (var weightedObjList in weightedObjTable)
             {
-                var weightedObjList = weightedObjTable[i];
                 var generatedObj = CreateObj(weightedObjList, location, position, random, stackOption);
                 if (generatedObjs != null) { generatedObjs.Add(generatedObj); }
             }

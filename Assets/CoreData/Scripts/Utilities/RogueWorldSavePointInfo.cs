@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -100,10 +100,8 @@ namespace Roguegard
                 // パーティメンバーも移動
                 if (player.Main.Stats.Party != null)
                 {
-                    var partyMembers = player.Main.Stats.Party.Members;
-                    for (int i = 0; i < partyMembers.Count; i++)
+                    foreach (var member in player.Main.Stats.Party.Members)
                     {
-                        var member = partyMembers[i];
                         if (member == player) continue;
                         var memberMemberInfo = LobbyMemberList.GetMemberInfo(member);
                         if (memberMemberInfo.Seat.Location == null)

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -32,9 +32,8 @@ namespace Roguegard.Extensions
         {
             var partyMembers = party.Members;
             var targetLocation = partyMembers[0].Location;
-            for (int i = 0; i < partyMembers.Count; i++)
+            foreach (var member in partyMembers)
             {
-                var member = partyMembers[i];
                 if (member == null || member.Location != targetLocation) continue;
 
                 if (method.LocateNextToObj(self, user, activationDepth, member)) return true;
@@ -49,9 +48,8 @@ namespace Roguegard.Extensions
         {
             var partyMembers = party.Members;
             var targetLocation = partyMembers[0].Location;
-            for (int i = 0; i < partyMembers.Count; i++)
+            foreach (var member in partyMembers)
             {
-                var member = partyMembers[i];
                 if (member == null || member.Location != targetLocation) continue;
 
                 for (int j = 0; j < 8; j++)
@@ -75,10 +73,8 @@ namespace Roguegard.Extensions
             var party = self.Main.Stats.Party;
             if (result && party != null)
             {
-                var partyMembers = party.Members;
-                for (int i = 0; i < partyMembers.Count; i++)
+                foreach (var member in party.Members)
                 {
-                    var member = partyMembers[i];
                     if (member == self) continue;
                     if (member.Stack == 0)
                     {
@@ -101,10 +97,8 @@ namespace Roguegard.Extensions
             var party = self.Main.Stats.Party;
             if (result && party != null)
             {
-                var partyMembers = party.Members;
-                for (int i = 0; i < partyMembers.Count; i++)
+                foreach (var member in party.Members)
                 {
-                    var member = partyMembers[i];
                     if (member == self) continue;
                     if (member.Stack == 0)
                     {
@@ -131,7 +125,7 @@ namespace Roguegard.Extensions
                 var leader = partyMembers[0];
                 leader.Main.RogueEffects.AddOpen(leader, leaderEffect);
             }
-            for (int i = 0; i < partyMembers.Count; i++)
+            for (int i = 0; i < partyMembers.Count; i++) // エフェクト解除等でパーティメンバー数が変化する可能性がある
             {
                 var member = partyMembers[i];
                 if (i != 0)
@@ -160,7 +154,7 @@ namespace Roguegard.Extensions
         public static void CloseDungeonFloorClosers(RogueParty party, bool exitDungeon)
         {
             var partyMembers = party.Members;
-            for (int i = 0; i < partyMembers.Count; i++)
+            for (int i = 0; i < partyMembers.Count; i++) // エフェクト解除でパーティメンバー数が変化する可能性がある
             {
                 var member = partyMembers[i];
                 DungeonFloorCloserStateInfo.CloseAndRemoveNull(member, exitDungeon);

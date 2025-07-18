@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,9 +15,8 @@ namespace Roguegard.Rgpacks
         {
             relatedChartSource = ChartPadReference.CreateSource(info.RelatedChart, envRgpackId);
             pages = new List<Page>();
-            for (int i = 0; i < info.Pages.Count; i++)
+            foreach (var infoPage in info.Pages)
             {
-                var infoPage = info.Pages[i];
                 var newPage = new Page();
                 newPage.ChartCmn = new CmnReference(infoPage.ChartCmn, envRgpackId);
                 newPage.IfCmn = infoPage.IfCmn.ToReference(envRgpackId);

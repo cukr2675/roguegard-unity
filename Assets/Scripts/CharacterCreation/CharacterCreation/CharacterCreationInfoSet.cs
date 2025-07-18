@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -118,9 +118,8 @@ namespace Roguegard.CharacterCreation
             if (mainBone != null)
             {
                 var appearances = Data.Appearances;
-                for (int i = 0; i < appearances.Count; i++)
+                foreach (var appearance in appearances)
                 {
-                    var appearance = appearances[i];
                     appearance.Option.Affect(mainBone, characterMorph, appearance, Data);
                 }
                 this.mainBone = mainBone;

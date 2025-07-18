@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -163,21 +163,21 @@ namespace RoguegardUnity
             leftLBuilder.AppendLine("場所：");
             leftLBuilder.AppendLine(quest.Dungeon.DescriptionName);
             leftLBuilder.AppendLine("達成条件：");
-            for (int i = 0; i < quest.Objectives.Count; i++)
+            foreach (var objective in quest.Objectives)
             {
-                leftLBuilder.AppendLine(quest.Objectives[i].Caption);
+                leftLBuilder.AppendLine(objective.Caption);
             }
             leftLBuilder.AppendLine("環境：");
-            for (int i = 0; i < quest.Environments.Count; i++)
+            foreach (var environment in quest.Environments)
             {
-                leftLBuilder.AppendLine(quest.Environments[i].Name);
+                leftLBuilder.AppendLine(environment.Name);
             }
             leftLBuilder.AppendLine("報酬：");
             var any = false;
             var plusAlpha = false;
-            for (int i = 0; i < quest.LootTable.Count; i++)
+            foreach (var lootTableRow in quest.LootTable)
             {
-                var loots = quest.LootTable[i].Spanning;
+                var loots = lootTableRow.Spanning;
                 if (loots.Count == 1)
                 {
                     var loot = loots[0];
@@ -329,10 +329,8 @@ namespace RoguegardUnity
             rightLBuilder.AppendLine();
             rightRBuilder.AppendLine();
 
-            var loots = obj.Main.InfoSet.LootTable;
-            for (int i = 0; i < loots.Count; i++)
+            foreach (var lootList in obj.Main.InfoSet.LootTable)
             {
-                var lootList = loots[i];
             }
         }
 

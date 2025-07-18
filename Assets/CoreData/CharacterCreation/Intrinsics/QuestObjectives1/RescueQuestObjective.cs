@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,10 +14,8 @@ namespace Roguegard.CharacterCreation
             if (options == null)
             {
                 options = new List<IStartingItemOption>();
-                var allOptions = RoguegardSettings.CharacterCreationDatabase.StartingItemOptions;
-                for (int i = 0; i < allOptions.Count; i++)
+                foreach (var optionValue in RoguegardSettings.CharacterCreationDatabase.StartingItemOptions)
                 {
-                    var optionValue = allOptions[i];
                     if (optionValue.InfoSet.Ability.HasFlag(MainInfoSetAbility.HasCollider) &&
                         optionValue.InfoSet.Ability.HasFlag(MainInfoSetAbility.Movable))
                     {

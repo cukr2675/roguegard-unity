@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -160,11 +160,7 @@ namespace Roguegard
 
             GetFaction(self, selfStats.Party, out _, out var targetFactions);
             GetFaction(obj, objParty, out var objFaction, out _);
-            for (int i = 0; i < targetFactions.Count; i++)
-            {
-                if (targetFactions[i] == objFaction) return true;
-            }
-            return false;
+            return targetFactions.Contains(objFaction);
 
             static void GetFaction(RogueObj obj, RogueParty party, out ISerializableKeyword faction, out Spanning<ISerializableKeyword> targetFactions)
             {

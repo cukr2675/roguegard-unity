@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -46,16 +46,15 @@ namespace Roguegard.CharacterCreation
                     RogueDevice.AddWork(DeviceKw.EnqueueWork, work);
                 }
 
-                var targets = predicator.GetObjs(position);
-                for (int i = 0; i < targets.Count; i++)
+                foreach (var target in predicator.GetObjs(position))
                 {
                     // 攻撃力(x2)+2ダメージの攻撃。
                     using var damageValue = EffectableValue.Get();
                     StatsEffectedValues.GetAtk(self, damageValue);
                     damageValue.MainValue += damageValue.BaseMainValue + 2;
                     damageValue.SubValues[MainInfoKw.Skill] = 1f;
-                    this.TryHurt(targets[i], self, activationDepth, damageValue);
-                    this.TryDefeat(targets[i], self, activationDepth, damageValue);
+                    this.TryHurt(target, self, activationDepth, damageValue);
+                    this.TryDefeat(target, self, activationDepth, damageValue);
                 }
                 return true;
             }

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -72,17 +72,15 @@ namespace Roguegard.Device
         {
             if (builder is RaceBuilder)
             {
-                for (int i = 0; i < database.RaceOptions.Count; i++)
+                foreach (var option in database.RaceOptions)
                 {
-                    var option = database.RaceOptions[i];
                     elms.Add(option);
                 }
             }
             else if (builder is AppearanceBuilder appearanceBuilder)
             {
-                for (int i = 0; i < database.AppearanceOptions.Count; i++)
+                foreach (var option in database.AppearanceOptions)
                 {
-                    var option = database.AppearanceOptions[i];
                     if (appearanceBuilder.Option != null && option.BoneName == appearanceBuilder.Option.BoneName)
                     {
                         elms.Add(option);
@@ -91,9 +89,8 @@ namespace Roguegard.Device
             }
             else if (builder is IntrinsicBuilder)
             {
-                for (int i = 0; i < database.IntrinsicOptions.Count; i++)
+                foreach (var option in database.IntrinsicOptions)
                 {
-                    var option = database.IntrinsicOptions[i];
                     elms.Add(option);
                 }
             }
@@ -101,10 +98,8 @@ namespace Roguegard.Device
             {
                 if (player != null)
                 {
-                    var playerItems = player.Space.Objs;
-                    for (int i = 0; i < playerItems.Count; i++)
+                    foreach (var item in player.Space.Objs)
                     {
-                        var item = playerItems[i];
                         if (item?.Main.BaseInfoSet is CharacterCreationInfoSet itemInfoSet &&
                             itemInfoSet.Data is IStartingItemOption option &&
                             item.Main.RogueEffects.Effects.Count <= 1 &&
@@ -124,9 +119,8 @@ namespace Roguegard.Device
                 }
                 else
                 {
-                    for (int i = 0; i < database.StartingItemOptions.Count; i++)
+                    foreach (var option in database.StartingItemOptions)
                     {
-                        var option = database.StartingItemOptions[i];
                         elms.Add(option);
                     }
                 }
@@ -144,17 +138,15 @@ namespace Roguegard.Device
         {
             if (builderType == typeof(RaceBuilder))
             {
-                for (int i = 0; i < database.AppearanceOptions.Count; i++)
+                foreach (var option in database.AppearanceOptions)
                 {
-                    var option = database.AppearanceOptions[i];
                     elms.Add(option);
                 }
             }
             else if (builderType == typeof(AppearanceBuilder))
             {
-                for (int i = 0; i < database.AppearanceOptions.Count; i++)
+                foreach (var option in database.AppearanceOptions)
                 {
-                    var option = database.AppearanceOptions[i];
                     if (option.BoneName == BoneKeyword.Free)
                     {
                         elms.Add(option);
@@ -163,18 +155,15 @@ namespace Roguegard.Device
             }
             else if (builderType == typeof(IntrinsicBuilder))
             {
-                for (int i = 0; i < database.IntrinsicOptions.Count; i++)
+                foreach (var option in database.IntrinsicOptions)
                 {
-                    var option = database.IntrinsicOptions[i];
                     elms.Add(option);
                 }
             }
             else if (builderType == typeof(StartingItemBuilder) || builderType == typeof(SingleItemMember))
             {
-                var playerItems = player.Space.Objs;
-                for (int i = 0; i < playerItems.Count; i++)
+                foreach (var item in player.Space.Objs)
                 {
-                    var item = playerItems[i];
                     if (item?.Main.BaseInfoSet is CharacterCreationInfoSet itemInfoSet &&
                         itemInfoSet.Data is IStartingItemOption option &&
                         item.Main.RogueEffects.Effects.Count <= 1 &&
@@ -201,10 +190,8 @@ namespace Roguegard.Device
 
             if (player != null)
             {
-                var playerItems = player.Space.Objs;
-                for (int i = 0; i < playerItems.Count; i++)
+                foreach (var item in player.Space.Objs)
                 {
-                    var item = playerItems[i];
                     if (item?.Main.BaseInfoSet is CharacterCreationInfoSet itemInfoSet &&
                         itemInfoSet.Data is IStartingItemOption option &&
                         item.Main.RogueEffects.Effects.Count <= 1 &&
@@ -225,10 +212,8 @@ namespace Roguegard.Device
 
             if (player != null)
             {
-                var playerItems = player.Space.Objs;
-                for (int i = 0; i < playerItems.Count; i++)
+                foreach (var item in player.Space.Objs)
                 {
-                    var item = playerItems[i];
                     if (item?.Main.BaseInfoSet is CharacterCreationInfoSet itemInfoSet &&
                         itemInfoSet.Data is IStartingItemOption option &&
                         item.Main.RogueEffects.Effects.Count <= 1 &&

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -93,9 +93,9 @@ namespace Roguegard
             {
                 tilemap[y][x][z] = null;
             }
-            for (int i = 0; i < tiles.Count; i++)
+            foreach (var tile in tiles)
             {
-                Set(tiles[i], x, y);
+                Set(tile, x, y);
             }
         }
     }

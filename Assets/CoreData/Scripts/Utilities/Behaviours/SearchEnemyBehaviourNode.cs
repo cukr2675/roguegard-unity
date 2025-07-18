@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -17,12 +17,10 @@ namespace Roguegard
             var visibleRadius = RoguegardSettings.DefaultVisibleRadius;
             var sqrVisibleRadius = visibleRadius * visibleRadius;
 
-            var spaceObjs = self.Location.Space.Objs;
             RogueObj nearestEnemy = null;
             var nearestSqrDistance = DistanceThreshold * DistanceThreshold;
-            for (int i = 0; i < spaceObjs.Count; i++)
+            foreach (var obj in self.Location.Space.Objs)
             {
-                var obj = spaceObjs[i];
                 if (obj == null || !StatsEffectedValues.AreVS(self, obj)) continue;
 
                 // 視界外の敵を除外する

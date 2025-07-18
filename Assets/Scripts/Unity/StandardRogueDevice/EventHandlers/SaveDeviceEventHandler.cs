@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -219,9 +219,8 @@ namespace RoguegardUnity
             var lobbyMembers = worldInfo.LobbyMembers.Members;
             var world = RogueWorldInfo.GetWorld(player);
             var locations = world.Space.Objs;
-            for (int i = 0; i < locations.Count; i++)
+            foreach (var location in locations)
             {
-                var location = locations[i];
                 if (location == null || location == worldInfo.Lobby || ObjsIsIn(lobbyMembers, location)) continue;
 
                 location.TrySetStack(0);
@@ -242,9 +241,9 @@ namespace RoguegardUnity
 
             bool ObjsIsIn(Spanning<RogueObj> objs, RogueObj space)
             {
-                for (int j = 0; j < objs.Count; j++)
+                foreach (var obj in objs)
                 {
-                    if (ObjIsIn(objs[j], space)) return true;
+                    if (ObjIsIn(obj, space)) return true;
                 }
                 return false;
             }
@@ -256,10 +255,8 @@ namespace RoguegardUnity
         private void RemoveViewInfoHeldByLobbyMembers(RogueObj player, RogueObj subject)
         {
             var worldInfo = RogueWorldInfo.GetByCharacter(player);
-            var lobbyMembers = worldInfo.LobbyMembers.Members;
-            for (int i = 0; i < lobbyMembers.Count; i++)
+            foreach (var member in worldInfo.LobbyMembers.Members)
             {
-                var member = lobbyMembers[i];
                 if (member == null || member == player || member == subject) continue;
 
                 ViewInfo.RemoveFrom(member);

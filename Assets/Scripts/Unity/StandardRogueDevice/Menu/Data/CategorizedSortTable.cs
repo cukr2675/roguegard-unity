@@ -17,9 +17,9 @@ namespace RoguegardUnity
         public CategorizedSortTable(Spanning<IKeyword> categories)
         {
             categorizedBufferTable = new Dictionary<IKeyword, RogueObjList[]>();
-            for (int i = 0; i < categories.Count; i++)
+            foreach (var category in categories)
             {
-                categorizedBufferTable.Add(categories[i], new[] { new RogueObjList(), new RogueObjList(), new RogueObjList(), new RogueObjList() });
+                categorizedBufferTable.Add(category, new[] { new RogueObjList(), new RogueObjList(), new RogueObjList(), new RogueObjList() });
             }
             categorizedBufferTable.Add(other, new[] { new RogueObjList(), new RogueObjList(), new RogueObjList(), new RogueObjList() });
         }

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -36,21 +36,20 @@ namespace Roguegard.CharacterCreation
                     MainCharacterWorkUtility.TryAddSkill(self);
                 }
 
-                var targets = predicator.GetObjs(position);
-                for (int i = 0; i < targets.Count; i++)
+                foreach (var target in predicator.GetObjs(position))
                 {
                     // 攻撃力(x2)ダメージの攻撃
                     using var damageValue = EffectableValue.Get();
                     StatsEffectedValues.GetAtk(self, damageValue);
                     damageValue.MainValue += damageValue.BaseMainValue;
                     damageValue.SubValues[MainInfoKw.Skill] = 1f;
-                    var result = this.TryHurt(targets[i], self, activationDepth, damageValue);
-                    this.TryDefeat(targets[i], self, activationDepth, damageValue);
+                    var result = this.TryHurt(target, self, activationDepth, damageValue);
+                    this.TryDefeat(target, self, activationDepth, damageValue);
 
                     if (result && !damageValue.SubValues.Is(MainInfoKw.BeDefeated) && RogueRandom.Primary.NextFloat(0f, 1f) <= .3f)
                     {
                         // 倒していなければ 30% でひるみ付与
-                        this.Affect(targets[i], activationDepth, ParalysisStatusEffect.Callback, null, self, damageValue);
+                        this.Affect(target, activationDepth, ParalysisStatusEffect.Callback, null, self, damageValue);
                     }
                 }
                 return true;
