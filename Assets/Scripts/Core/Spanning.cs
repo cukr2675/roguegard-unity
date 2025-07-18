@@ -71,7 +71,7 @@ namespace Roguegard
         internal static Spanning<T> Get(IReadOnlyList<T> list) => new(list);
         public static implicit operator Spanning<T>(T[] array) => new(array);
         public static implicit operator System.ReadOnlySpan<T>(Spanning<T> spanning) => new(spanning.ToArray(), 0, spanning._count);
-        public Enumerator GetEnumerator() => new Enumerator(_list, _count);
+        public Enumerator GetEnumerator() => new(_list, _count);
 
         public ref struct Enumerator
         {
@@ -90,6 +90,8 @@ namespace Roguegard
 
             public bool MoveNext()
             {
+                if (list.Count != count) throw new System.InvalidOperationException("ループ中のリストサイズが変更されました。");
+
                 index++;
                 return index < count;
             }
@@ -142,7 +144,7 @@ namespace Roguegard
     //        internal static Spanning<T> Get(IReadOnlyList<T> list) => new(list);
     //        public static implicit operator Spanning<T>(T[] array) => new(array);
     //        public static implicit operator System.ReadOnlySpan<T>(Spanning<T> spanning) => new(spanning._array, 0, spanning._count);
-    //        public Enumerator GetEnumerator() => new Enumerator(_array, _count);
+    //        public Enumerator GetEnumerator() => new(_array, _count);
 
     //        public ref struct Enumerator
     //        {
