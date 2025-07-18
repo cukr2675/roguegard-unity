@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,9 +10,9 @@ namespace RoguegardUnity
     {
         private readonly Dictionary<IKeyword, RogueObjList[]> categorizedBufferTable;
 
-        private static readonly OtherKeyword other = new OtherKeyword();
-        private static readonly Comparer comparer = new Comparer();
-        private static readonly RogueObjList mainBuffer = new RogueObjList();
+        private static readonly OtherKeyword other = new();
+        private static readonly Comparer comparer = new();
+        private static readonly RogueObjList mainBuffer = new();
 
         public CategorizedSortTable(Spanning<IKeyword> categories)
         {
@@ -82,7 +82,7 @@ namespace RoguegardUnity
                     }
                 }
             }
-            location.Space.Sort(mainBuffer);
+            location.Space.Sort(mainBuffer.Span);
         }
 
         private class OtherKeyword : IKeyword

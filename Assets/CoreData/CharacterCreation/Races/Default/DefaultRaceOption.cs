@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,7 +13,7 @@ namespace Roguegard.CharacterCreation
     public class DefaultRaceOption : ScriptableObject
     {
         [SerializeField] private RogueGenderList _genders;
-        public Spanning<IRogueGender> Genders => _genders;
+        public Spanning<IRogueGender> Genders => _genders.Span;
 
         [Space]
         [SerializeField] private KeywordData _category;

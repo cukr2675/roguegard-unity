@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -19,17 +19,17 @@ namespace Roguegard.CharacterCreation
         public int Seed { get; }
 
         private readonly IntrinsicBuilderList _objectives;
-        public Spanning<IReadOnlyIntrinsic> Objectives => _objectives;
+        public Spanning<IReadOnlyIntrinsic> Objectives => _objectives.Span;
 
         private readonly IntrinsicBuilderList _environments;
-        public Spanning<IReadOnlyIntrinsic> Environments => _environments;
+        public Spanning<IReadOnlyIntrinsic> Environments => _environments.Span;
 
         [System.NonSerialized] private ISortedIntrinsicList _sortedEffects;
         private ISortedIntrinsicList SortedEffects
             => _sortedEffects ??= new SortedIntrinsicList(_objectives.Concat(_environments), defaultCharacterCreationData);
 
         private readonly StartingItemBuilderTable _lootTable;
-        public Spanning<IWeightedRogueObjGeneratorList> LootTable => _lootTable;
+        public Spanning<IWeightedRogueObjGeneratorList> LootTable => _lootTable.Span;
 
         private static readonly ICharacterCreationData defaultCharacterCreationData = new CharacterCreationDataBuilder();
 

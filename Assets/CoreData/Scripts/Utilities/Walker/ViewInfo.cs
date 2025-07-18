@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,7 +16,7 @@ namespace Roguegard
 
         Vector2Int IRogueTilemapView.Size => new Vector2Int(Width, Height);
 
-        Spanning<RogueObj> IRogueTilemapView.VisibleObjs => viewMap.VisibleObjs;
+        Spanning<RogueObj> IRogueTilemapView.VisibleObjs => viewMap.VisibleObjs.Span;
 
         public int VisibleObjCount => viewMap.VisibleObjs.Count;
 

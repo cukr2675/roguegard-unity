@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -32,7 +32,7 @@ namespace Roguegard.CharacterCreation
         string IRogueDescription.Caption => Race.Caption;
 
         IReadOnlyRace ICharacterCreationData.Race => Race;
-        Spanning<IReadOnlyAppearance> ICharacterCreationData.Appearances => Appearances;
+        Spanning<IReadOnlyAppearance> ICharacterCreationData.Appearances => Appearances.Span;
         ISortedIntrinsicList ICharacterCreationData.SortedIntrinsics
         {
             get
@@ -41,7 +41,7 @@ namespace Roguegard.CharacterCreation
                 return sortedIntrinsics;
             }
         }
-        Spanning<IWeightedRogueObjGeneratorList> ICharacterCreationData.StartingItemTable => StartingItemTable;
+        Spanning<IWeightedRogueObjGeneratorList> ICharacterCreationData.StartingItemTable => StartingItemTable.Span;
 
         public IMainInfoSet PrimaryInfoSet => TryGetGrowingInfoSet(Race.Option, Race.Gender, out var value) ? value : throw new RogueException();
 

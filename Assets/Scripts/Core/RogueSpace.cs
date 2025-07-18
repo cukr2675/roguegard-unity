@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,7 +10,7 @@ namespace Roguegard
         /// <summary>
         /// 空間移動により null が含まれる可能性があるため、要素の null チェック必須。
         /// </summary>
-        public Spanning<RogueObj> Objs => _objs;
+        public Spanning<RogueObj> Objs => _objs.Span;
 
         private RogueObjList _objs;
 
@@ -31,7 +31,7 @@ namespace Roguegard
 
         Vector2Int IRogueTilemapView.Size => Tilemap?.Rect.size ?? Vector2Int.zero;
 
-        Spanning<RogueObj> IRogueTilemapView.VisibleObjs => _objs;
+        Spanning<RogueObj> IRogueTilemapView.VisibleObjs => _objs.Span;
 
         private static readonly RectInt[] empty = new RectInt[0];
         private static readonly RogueObjList buffer = new RogueObjList();
@@ -121,7 +121,7 @@ namespace Roguegard
         public void GetRoom(int roomIndex, out RectInt room, out Spanning<RogueObj> roomObjs)
         {
             room = rooms[roomIndex];
-            roomObjs = this.roomObjs[roomIndex];
+            roomObjs = this.roomObjs[roomIndex].Span;
         }
 
         /// <summary>
@@ -139,7 +139,7 @@ namespace Roguegard
                 if (!includeRect.Contains(position)) continue;
 
                 room = rect;
-                roomObjs = this.roomObjs[i];
+                roomObjs = this.roomObjs[i].Span;
                 return true;
             }
             roomObjs = default;

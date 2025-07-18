@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -26,7 +26,7 @@ namespace Roguegard.Rgpacks.MoonSharp
 
         public RogueObjUserData[] CreateObj(RogueObjUserData location, int x, int y)
         {
-            WeightedRogueObjGeneratorUtility.CreateObjs(cmnProperty.Value, location.Obj, new(x, y), RogueRandom.Primary, generatedObjs: generatedObjs);
+            WeightedRogueObjGeneratorUtility.CreateObjs(cmnProperty.Value.Span, location.Obj, new(x, y), RogueRandom.Primary, generatedObjs: generatedObjs);
 
             var result = new RogueObjUserData[generatedObjs.Count];
             for (int i = 0; i < generatedObjs.Count; i++)

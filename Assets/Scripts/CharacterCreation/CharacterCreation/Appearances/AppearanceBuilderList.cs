@@ -10,11 +10,13 @@ namespace Roguegard.CharacterCreation
     [Objforming.Formable]
     public class AppearanceBuilderList : IEnumerable<AppearanceBuilder>
     {
-        private readonly List<AppearanceBuilder> builders = new List<AppearanceBuilder>();
+        private readonly List<AppearanceBuilder> builders = new();
 
         public AppearanceBuilder this[int index] => builders[index];
 
         public int Count => builders.Count;
+
+        public Spanning<IReadOnlyAppearance> Span => Spanning.Get<IReadOnlyAppearance>(builders);
 
         public bool TryGetBuilder(BoneKeyword boneName, out AppearanceBuilder builder)
         {
@@ -61,7 +63,5 @@ namespace Roguegard.CharacterCreation
 
         public IEnumerator<AppearanceBuilder> GetEnumerator() => builders.GetEnumerator();
         IEnumerator IEnumerable.GetEnumerator() => builders.GetEnumerator();
-        public static implicit operator Spanning<IReadOnlyAppearance>(AppearanceBuilderList list)
-            => Spanning.Get<IReadOnlyAppearance>(list.builders);
     }
 }

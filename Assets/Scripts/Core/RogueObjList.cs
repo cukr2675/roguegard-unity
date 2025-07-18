@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Roguegard
 {
     [Objforming.Formable]
-    public class RogueObjList //: IReadOnlyList<RogueObj>
+    public class RogueObjList
     {
         private readonly List<RogueObj> objs;
 
@@ -16,6 +16,8 @@ namespace Roguegard
         }
 
         public int Count => objs.Count;
+
+        public Spanning<RogueObj> Span => Spanning.Get(objs);
 
         [Objforming.CreateInstance]
         private RogueObjList(bool dummy) { }
@@ -129,8 +131,6 @@ namespace Roguegard
             return result;
         }
 
-        private IEnumerator<RogueObj> GetEnumerator() => objs.GetEnumerator();
-
         public override string ToString()
         {
             if (Count == 1)
@@ -142,7 +142,5 @@ namespace Roguegard
                 return $"{Count} items in {nameof(RogueObjList)}";
             }
         }
-
-        public static implicit operator Spanning<RogueObj>(RogueObjList list) => Spanning.Get(list.objs);
     }
 }

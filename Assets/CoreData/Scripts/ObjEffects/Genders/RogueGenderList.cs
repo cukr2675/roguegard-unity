@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,7 +13,6 @@ namespace Roguegard
 
         public int Count => _genders.Length;
 
-        private IEnumerator<RogueGender> GetEnumerator() => ((IEnumerable<RogueGender>)_genders).GetEnumerator();
-        public static implicit operator Spanning<IRogueGender>(RogueGenderList list) => list._genders;
+        public Spanning<IRogueGender> Span => Spanning.Get<IRogueGender>(_genders);
     }
 }

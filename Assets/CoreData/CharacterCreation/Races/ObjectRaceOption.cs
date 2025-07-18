@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -44,7 +44,7 @@ namespace Roguegard.CharacterCreation
 
         [Space]
         [SerializeField] private RogueGenderList _genders;
-        public Spanning<IRogueGender> Genders => _genders ?? RoguegardSettings.DefaultRaceOption.Genders;
+        public Spanning<IRogueGender> Genders => _genders ? _genders.Span : RoguegardSettings.DefaultRaceOption.Genders;
 
 
 

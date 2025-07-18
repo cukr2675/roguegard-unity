@@ -7,11 +7,13 @@ namespace Roguegard.CharacterCreation
     [Objforming.Formable]
     public class StartingItemBuilderTable : IEnumerable<StartingItemBuilderList>
     {
-        private readonly List<StartingItemBuilderList> table = new List<StartingItemBuilderList>();
+        private readonly List<StartingItemBuilderList> table = new();
 
         public StartingItemBuilderList this[int index] => table[index];
 
         public int Count => table.Count;
+
+        public Spanning<IWeightedRogueObjGeneratorList> Span => Spanning.Get<IWeightedRogueObjGeneratorList>(table);
 
         public StartingItemBuilderList Add()
         {
@@ -52,7 +54,5 @@ namespace Roguegard.CharacterCreation
 
         public IEnumerator<StartingItemBuilderList> GetEnumerator() => table.GetEnumerator();
         IEnumerator IEnumerable.GetEnumerator() => table.GetEnumerator();
-        public static implicit operator Spanning<IWeightedRogueObjGeneratorList>(StartingItemBuilderTable table)
-            => Spanning.Get<IWeightedRogueObjGeneratorList>(table.table);
     }
 }

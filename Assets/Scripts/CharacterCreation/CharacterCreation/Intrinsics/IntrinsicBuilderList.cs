@@ -9,11 +9,13 @@ namespace Roguegard.CharacterCreation
     [Objforming.Formable]
     public class IntrinsicBuilderList : IEnumerable<IntrinsicBuilder>//, IReadOnlyList<IntrinsicBuilder>
     {
-        private readonly List<IntrinsicBuilder> builders = new List<IntrinsicBuilder>();
+        private readonly List<IntrinsicBuilder> builders = new();
 
         public IntrinsicBuilder this[int index] => builders[index];
 
         public int Count => builders.Count;
+
+        public Spanning<IReadOnlyIntrinsic> Span => Spanning.Get<IReadOnlyIntrinsic>(builders);
 
         public IntrinsicBuilder Add()
         {
@@ -39,7 +41,5 @@ namespace Roguegard.CharacterCreation
 
         public IEnumerator<IntrinsicBuilder> GetEnumerator() => builders.GetEnumerator();
         IEnumerator IEnumerable.GetEnumerator() => builders.GetEnumerator();
-        public static implicit operator Spanning<IReadOnlyIntrinsic>(IntrinsicBuilderList list)
-            => Spanning.Get<IReadOnlyIntrinsic>(list.builders);
     }
 }

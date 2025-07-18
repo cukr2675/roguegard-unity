@@ -9,13 +9,15 @@ namespace Roguegard.CharacterCreation
     /// リストに対して PropertyDrawer は無効なので専用のクラスが必要。
     /// </summary>
     [System.Serializable]
-    public class MemberList //: IReadOnlyList<IMember>
+    public class MemberList
     {
         [SerializeReference] private List<IMember> _items = new List<IMember>();
 
         public IMember this[int index] => _items[index];
 
         public int Count => _items.Count;
+
+        public Spanning<IMember> Span => Spanning.Get(_items);
 
         public void Add(IMember member)
         {
@@ -26,8 +28,5 @@ namespace Roguegard.CharacterCreation
         {
             _items.Clear();
         }
-
-        private IEnumerator<IMember> GetEnumerator() => _items.GetEnumerator();
-        public static implicit operator Spanning<IMember>(MemberList list) => Spanning.Get(list._items);
     }
 }

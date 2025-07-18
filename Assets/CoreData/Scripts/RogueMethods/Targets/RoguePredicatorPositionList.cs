@@ -15,7 +15,7 @@ namespace Roguegard
 
         public Spanning<RogueObj> GetObjs(Vector2Int position)
         {
-            if (table.TryGetValue(position, out var objs)) return objs;
+            if (table.TryGetValue(position, out var objs)) return objs.Span;
             else return Spanning<RogueObj>.Empty;
         }
 

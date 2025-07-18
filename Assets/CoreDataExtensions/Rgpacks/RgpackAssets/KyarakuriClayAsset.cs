@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -178,10 +178,8 @@ namespace Roguegard.Rgpacks
 
         IReadOnlyMember IMemberable.GetMember(IMemberSource source)
         {
-            var members = (Spanning<IMember>)_members;
-            for (int i = 0; i < members.Count; i++)
+            foreach (var member in _members.Span)
             {
-                var member = members[i];
                 if (member.Source == source) return member;
             }
             throw new System.ArgumentException($"{source} の {nameof(IMember)} が見つかりません。");
