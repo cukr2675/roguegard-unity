@@ -1,17 +1,15 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Roguegard.CharacterCreation
 {
     [System.Serializable]
-    public class ScriptableStartingItemList : IWeightedRogueObjGeneratorList//, IReadOnlyList<ScriptableStartingItem>
+    public class ScriptableStartingItemList : IWeightedRogueObjGeneratorList
     {
         [SerializeField, ElementDescription("_option")] private ScriptableStartingItem[] _items;
 
         public ScriptableStartingItem this[int index] => _items[index];
-
-        private int Count => _items.Length;
 
         public float TotalWeight
         {
@@ -30,10 +28,5 @@ namespace Roguegard.CharacterCreation
 
         int IWeightedRogueObjGeneratorList.MinFrequency => 1;
         int IWeightedRogueObjGeneratorList.MaxFrequency => 1;
-
-        private IEnumerator<ScriptableStartingItem> GetEnumerator()
-        {
-            return ((IEnumerable<ScriptableStartingItem>)_items).GetEnumerator();
-        }
     }
 }

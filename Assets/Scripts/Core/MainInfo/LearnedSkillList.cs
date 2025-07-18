@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,9 +7,9 @@ using System.Linq;
 namespace Roguegard
 {
     [Objforming.Formable]
-    public class LearnedSkillList //: IReadOnlyList<ISkill>
+    public class LearnedSkillList
     {
-        private readonly List<LearnedSkill> skills = new List<LearnedSkill>();
+        private readonly List<LearnedSkill> skills = new();
 
         public ISkill this[int index] => skills[index].Skill;
 
@@ -54,8 +54,6 @@ namespace Roguegard
             }
             return skills.Contains(item);
         }
-
-        private IEnumerator<ISkill> GetEnumerator() => skills.Select(x => x.Skill).GetEnumerator();
 
         [Objforming.Formable]
         private struct LearnedSkill : System.IEquatable<LearnedSkill>

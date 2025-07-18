@@ -1,10 +1,10 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Roguegard
 {
-    public interface IWeightedRogueObjGeneratorList //: IReadOnlyList<IWeightedRogueObjGenerator>
+    public interface IWeightedRogueObjGeneratorList
     {
         float TotalWeight { get; }
 

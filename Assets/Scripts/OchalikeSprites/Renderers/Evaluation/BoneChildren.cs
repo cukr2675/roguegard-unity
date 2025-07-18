@@ -1,10 +1,10 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace OchalikeSprites
 {
-    internal class BoneChildren<T> : ISortableBoneChildren<T>//, IReadOnlyList<T>
+    internal class BoneChildren<T> : ISortableBoneChildren<T>
         where T : ISortableBone<T>
     {
         /// <summary>
@@ -117,18 +117,6 @@ namespace OchalikeSprites
                     if (back) return bone.BackOrderInParent;
                     else return bone.NormalOrderInParent;
                 }
-            }
-        }
-
-        private IEnumerator<T> GetEnumerator()
-        {
-            for (int i = 0; i < _normalFrontChildren.Count; i++)
-            {
-                yield return _normalFrontChildren[i];
-            }
-            for (int i = 0; i < _normalRearChildren.Count; i++)
-            {
-                yield return _normalRearChildren[i];
             }
         }
     }
