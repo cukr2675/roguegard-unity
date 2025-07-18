@@ -75,10 +75,10 @@ namespace Roguegard.CharacterCreation
             money.Option = _money;
             money.Stack = Mathf.FloorToInt(-cost * _moneyPerQuestCost);
             //var dungeonItemTable = dungeon.Levels[dungeon.Levels.Count - 1].ItemTable;
-            //if (dungeonItemTable.Count >= 1 && dungeonItemTable[0].Spanning.Count >= 1)
+            //if (dungeonItemTable.Count >= 1 && dungeonItemTable[0].Span.Count >= 1)
             //{
             //    var item = lootTable.Add().Add();
-            //    item.Option = dungeonItemTable[0].Spanning[0].InfoSet;
+            //    item.Option = dungeonItemTable[0].Span[0].InfoSet;
             //}
             return lootTable;
         }

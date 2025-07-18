@@ -11,7 +11,7 @@ namespace Roguegard
             StackOption stackOption = StackOption.Default)
         {
             var sumWeight = random.NextFloat(0f, weightedObjList.TotalWeight);
-            var weightedObjs = weightedObjList.Spanning;
+            var weightedObjs = weightedObjList.Span;
             if (weightedObjs.Count == 0) throw new RogueException($"{weightedObjList} の生成候補オブジェクトが一つも存在しません。");
 
             for (int i = 0; i < weightedObjs.Count - 1; i++)

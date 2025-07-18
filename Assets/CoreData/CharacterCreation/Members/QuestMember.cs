@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,7 +14,7 @@ namespace Roguegard.CharacterCreation
         public StartingItemBuilderList Targets { get; } = new StartingItemBuilderList();
         public int TargetFloor { get; set; }
 
-        Spanning<IWeightedRogueObjGenerator> IReadOnlyQuestMember.Targets => Targets.Spanning;
+        Spanning<IWeightedRogueObjGenerator> IReadOnlyQuestMember.Targets => Targets.Span;
 
         public static IReadOnlyQuestMember GetMember(IMemberable memberable)
         {

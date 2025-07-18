@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -99,7 +99,7 @@ namespace Roguegard.CharacterCreation
 
             float IWeightedRogueObjGeneratorList.TotalWeight => 1f;
 
-            public Spanning<IWeightedRogueObjGenerator> Spanning
+            public Spanning<IWeightedRogueObjGenerator> Span
             {
                 get
                 {

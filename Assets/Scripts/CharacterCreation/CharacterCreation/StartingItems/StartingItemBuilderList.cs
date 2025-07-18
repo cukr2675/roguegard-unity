@@ -28,7 +28,7 @@ namespace Roguegard.CharacterCreation
             }
         }
 
-        public Spanning<IWeightedRogueObjGenerator> Spanning => Roguegard.Spanning.Get<IWeightedRogueObjGenerator>(builders);
+        public Spanning<IWeightedRogueObjGenerator> Span => Spanning.Get<IWeightedRogueObjGenerator>(builders);
 
         int IWeightedRogueObjGeneratorList.MinFrequency => 1;
         int IWeightedRogueObjGeneratorList.MaxFrequency => 1;

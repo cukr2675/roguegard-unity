@@ -8,7 +8,7 @@ namespace Roguegard
     {
         float TotalWeight { get; }
 
-        Spanning<IWeightedRogueObjGenerator> Spanning { get; }
+        Spanning<IWeightedRogueObjGenerator> Span { get; }
 
         int MinFrequency { get; }
 

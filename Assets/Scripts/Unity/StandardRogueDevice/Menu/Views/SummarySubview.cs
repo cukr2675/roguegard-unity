@@ -177,7 +177,7 @@ namespace RoguegardUnity
             var plusAlpha = false;
             foreach (var lootTableRow in quest.LootTable)
             {
-                var loots = lootTableRow.Spanning;
+                var loots = lootTableRow.Span;
                 if (loots.Count == 1)
                 {
                     var loot = loots[0];
