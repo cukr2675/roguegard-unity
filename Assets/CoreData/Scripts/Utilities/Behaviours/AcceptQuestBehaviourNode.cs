@@ -32,7 +32,7 @@ namespace Roguegard
                 {
                     if (party.Members[0] == self)
                     {
-                        while (party.Members.Count >= 1)
+                        while (party.Members.Length >= 1)
                         {
                             var member = party.Members[0];
                             var mainParty = RogueDevice.Primary.Player.Main.Stats.Party;

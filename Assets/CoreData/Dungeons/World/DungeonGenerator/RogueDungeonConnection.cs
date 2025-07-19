@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -55,7 +55,7 @@ namespace Roguegard
 
         public void SetTile(RogueTilemap tilemap, Spanning<IRogueTile[]> corridorTiles, int index)
         {
-            if (Corridor.height == corridorTiles.Count)
+            if (Corridor.height == corridorTiles.Length)
             {
                 // 通路が横長
                 SetHorizontalCorridorTile(tilemap, corridorTiles, index);
@@ -63,7 +63,7 @@ namespace Roguegard
                 SetPositionToHorizontalCorridorTile(tilemap, corridorTiles, index, Position0, Position1);
                 SetPositionToHorizontalCorridorTile(tilemap, corridorTiles, index, Position1, Position0);
             }
-            else if (Corridor.width == corridorTiles.Count)
+            else if (Corridor.width == corridorTiles.Length)
             {
                 // 通路が縦長
                 SetVerticalCorridorTile(tilemap, corridorTiles, index);
@@ -80,8 +80,8 @@ namespace Roguegard
         private void SetPositionToHorizontalCorridorTile(
             RogueTilemap tilemap, Spanning<IRogueTile[]> corridorTiles, int index, Vector2Int position, Vector2Int to)
         {
-            var center = corridorTiles.Count / 2;
-            var x = position.x + index - corridorTiles.Count + 1;
+            var center = corridorTiles.Length / 2;
+            var x = position.x + index - corridorTiles.Length + 1;
             var startY = Mathf.Min(position.y, Corridor.yMin + center);
             var endY = Mathf.Max(position.y, Corridor.yMin + center - 1);
             for (int y = startY; y <= endY; y++)
@@ -93,8 +93,8 @@ namespace Roguegard
         private void SetPositionToVerticalCorridorTile(
             RogueTilemap tilemap, Spanning<IRogueTile[]> corridorTiles, int index, Vector2Int position, Vector2Int to)
         {
-            var center = corridorTiles.Count / 2;
-            var y = position.y + index - corridorTiles.Count + 1;
+            var center = corridorTiles.Length / 2;
+            var y = position.y + index - corridorTiles.Length + 1;
             var startX = Mathf.Min(position.x, Corridor.xMin + center);
             var endX = Mathf.Max(position.x, Corridor.xMin + center - 1);
             for (int x = startX; x <= endX; x++)
@@ -105,11 +105,11 @@ namespace Roguegard
 
         private void SetHorizontalCorridorTile(RogueTilemap tilemap, Spanning<IRogueTile[]> corridorTiles, int index)
         {
-            var center = corridorTiles.Count / 2;
-            var even = (corridorTiles.Count + 1) % 2;
+            var center = corridorTiles.Length / 2;
+            var even = (corridorTiles.Length + 1) % 2;
             //if (index == corridorTiles.Count / 2) { even = 0; }
             var side = index - center;
-            if (corridorTiles.Count % 2 == 0 && side < 0) { side++; }
+            if (corridorTiles.Length % 2 == 0 && side < 0) { side++; }
             var sideSign = System.Math.Sign(side);
             side = Mathf.Abs(side);
 
@@ -129,11 +129,11 @@ namespace Roguegard
 
         private void SetVerticalCorridorTile(RogueTilemap tilemap, Spanning<IRogueTile[]> corridorTiles, int index)
         {
-            var center = corridorTiles.Count / 2;
-            var even = (corridorTiles.Count + 1) % 2;
+            var center = corridorTiles.Length / 2;
+            var even = (corridorTiles.Length + 1) % 2;
             //if (index == corridorTiles.Count / 2) { even = 0; }
             var side = index - center;
-            if (corridorTiles.Count % 2 == 0 && side < 0) { side++; }
+            if (corridorTiles.Length % 2 == 0 && side < 0) { side++; }
             var sideSign = System.Math.Sign(side);
             side = Mathf.Abs(side);
 
@@ -153,10 +153,10 @@ namespace Roguegard
 
         private void SetEvenTile(RogueTilemap tilemap, Spanning<IRogueTile[]> corridorTiles, int index)
         {
-            if (corridorTiles.Count % 2 == 1 && index == corridorTiles.Count / 2 - 1) return;
+            if (corridorTiles.Length % 2 == 1 && index == corridorTiles.Length / 2 - 1) return;
 
-            index = corridorTiles.Count / 2;
-            if (Corridor.height == corridorTiles.Count)
+            index = corridorTiles.Length / 2;
+            if (Corridor.height == corridorTiles.Length)
             {
                 // 通路が横長
                 var y = Corridor.yMin + index;
@@ -164,7 +164,7 @@ namespace Roguegard
                 //var x = Mathf.Max(Position0.x, Position1.x) - 1;
                 tilemap.Replace(corridorTiles[index - 1], x, y);
             }
-            else if (Corridor.width == corridorTiles.Count)
+            else if (Corridor.width == corridorTiles.Length)
             {
                 // 通路が縦長
                 var x = Corridor.xMin + index;

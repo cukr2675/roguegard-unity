@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -311,7 +311,7 @@ namespace RoguegardUnity
                         break;
                 }
                 editInfo.MainColor = paint.MainColor;
-                for (int i = 0; i < paint.Palette.Count; i++)
+                for (int i = 0; i < paint.Palette.Length; i++)
                 {
                     editInfo.SetPalette(i, paint.Palette[i]);
                 }

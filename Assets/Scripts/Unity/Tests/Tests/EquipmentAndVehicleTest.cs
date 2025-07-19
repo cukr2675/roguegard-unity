@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using NUnit.Framework;
 using UnityEngine;
@@ -61,7 +61,7 @@ namespace RoguegardUnity.Tests
 
             var jPlayer = SerialCopy(player);
 
-            var jVehicle = jPlayer.Space.Objs[jPlayer.Space.Objs.Count - 1];
+            var jVehicle = jPlayer.Space.Objs[jPlayer.Space.Objs.Length - 1];
             if (jVehicle.GetName() != vehicle.GetName())
             {
                 Debug.LogError($"{jVehicle} != {vehicle}");
@@ -127,7 +127,7 @@ namespace RoguegardUnity.Tests
 
             var jPlayer = SerialCopy(player);
 
-            var jEquipment = jPlayer.Space.Objs[jPlayer.Space.Objs.Count - 1];
+            var jEquipment = jPlayer.Space.Objs[jPlayer.Space.Objs.Length - 1];
             if (jEquipment.GetName() != equipment.GetName())
             {
                 Debug.LogError($"{jEquipment} != {equipment}");

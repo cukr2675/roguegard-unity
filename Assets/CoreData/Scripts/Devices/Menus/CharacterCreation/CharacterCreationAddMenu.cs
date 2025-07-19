@@ -102,13 +102,13 @@ namespace Roguegard.Device
                     {
                         if (item?.Main.BaseInfoSet is CharacterCreationInfoSet itemInfoSet &&
                             itemInfoSet.Data is IStartingItemOption option &&
-                            item.Main.RogueEffects.Effects.Count <= 1 &&
+                            item.Main.RogueEffects.Effects.Length <= 1 &&
                             !elms.Contains(option))
                         {
                             elms.Add(option);
                         }
                         if (item?.Main.BaseInfoSet is SewedEquipmentInfoSet &&
-                            item.Main.RogueEffects.Effects.Count <= 1)
+                            item.Main.RogueEffects.Effects.Length <= 1)
                         {
                             var objOption = new ObjStartingItemOption();
                             objOption.Obj = item.Clone();
@@ -127,7 +127,7 @@ namespace Roguegard.Device
             }
             else if (builder is AlphabetTypeMember alphabetTypeMember)
             {
-                for (int i = 0; i < alphabetTypeMember.Types.Count; i++)
+                for (int i = 0; i < alphabetTypeMember.Types.Length; i++)
                 {
                     elms.Add(i);
                 }
@@ -166,14 +166,14 @@ namespace Roguegard.Device
                 {
                     if (item?.Main.BaseInfoSet is CharacterCreationInfoSet itemInfoSet &&
                         itemInfoSet.Data is IStartingItemOption option &&
-                        item.Main.RogueEffects.Effects.Count <= 1 &&
+                        item.Main.RogueEffects.Effects.Length <= 1 &&
                         !elms.Contains(option))
                     {
                         elms.Add(option);
                         continue;
                     }
                     if (item?.Main.BaseInfoSet is SewedEquipmentInfoSet &&
-                        item.Main.RogueEffects.Effects.Count <= 1)
+                        item.Main.RogueEffects.Effects.Length <= 1)
                     {
                         var objOption = new ObjStartingItemOption();
                         objOption.Obj = item.Clone();
@@ -194,7 +194,7 @@ namespace Roguegard.Device
                 {
                     if (item?.Main.BaseInfoSet is CharacterCreationInfoSet itemInfoSet &&
                         itemInfoSet.Data is IStartingItemOption option &&
-                        item.Main.RogueEffects.Effects.Count <= 1 &&
+                        item.Main.RogueEffects.Effects.Length <= 1 &&
                         option == startingItemOption)
                     {
                         item.TrySetStack(item.Stack - 1);
@@ -216,7 +216,7 @@ namespace Roguegard.Device
                 {
                     if (item?.Main.BaseInfoSet is CharacterCreationInfoSet itemInfoSet &&
                         itemInfoSet.Data is IStartingItemOption option &&
-                        item.Main.RogueEffects.Effects.Count <= 1 &&
+                        item.Main.RogueEffects.Effects.Length <= 1 &&
                         option == startingItemOption &&
                         item.Stack < item.GetMaxStack(StackOption.Default))
                     {

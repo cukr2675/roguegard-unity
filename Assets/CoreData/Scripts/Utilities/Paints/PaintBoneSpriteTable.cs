@@ -21,7 +21,7 @@ namespace Roguegard
 
         public PaintBoneSpriteTable()
         {
-            _palette = new ShiftableColor[RoguegardSettings.DefaultPalette.Count];
+            _palette = new ShiftableColor[RoguegardSettings.DefaultPalette.Length];
         }
 
         [Objforming.CreateInstance]

@@ -52,7 +52,7 @@ namespace Roguegard
             this.equipEffect = equipEffect;
 
             var ownerEquipmentState = owner.Main.GetEquipmentState(owner);
-            for (int i = 0; i < EquipParts.Count; i++)
+            for (int i = 0; i < EquipParts.Length; i++)
             {
                 var equipPart = EquipParts[i];
                 int equipIndex;

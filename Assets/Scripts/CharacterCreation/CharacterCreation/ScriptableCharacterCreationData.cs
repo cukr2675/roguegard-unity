@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -98,7 +98,7 @@ namespace Roguegard.CharacterCreation
 
         private IRogueGender GetRandomGender(IRogueRandom random)
         {
-            var index = random.Next(0, Race.Option.Genders.Count);
+            var index = random.Next(0, Race.Option.Genders.Length);
             return Race.Option.Genders[index];
         }
 

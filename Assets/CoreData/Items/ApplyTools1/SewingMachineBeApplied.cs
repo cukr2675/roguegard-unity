@@ -54,7 +54,7 @@ namespace Roguegard
                         {
                             // 装備品を新規作成する場合はデータクラスを生成する
                             var data = new SewedEquipmentData();
-                            for (int i = 0; i < RoguegardSettings.DefaultPalette.Count; i++)
+                            for (int i = 0; i < RoguegardSettings.DefaultPalette.Length; i++)
                             {
                                 data.BoneSprites.SetPalette(i, RoguegardSettings.DefaultPalette[i]);
                             }

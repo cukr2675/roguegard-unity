@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,8 +15,8 @@ namespace Roguegard.Rgpacks
         public ChartPadAsset(ChartPadInfo info, string envRgpackId, string fullId)
         {
             this.fullId = fullId;
-            cmns = new PropertiedCmnReference[info.Cmns.Count];
-            for (int i = 0; i < info.Cmns.Count; i++)
+            cmns = new PropertiedCmnReference[info.Cmns.Length];
+            for (int i = 0; i < info.Cmns.Length; i++)
             {
                 cmns[i] = info.Cmns[i].ToReference(envRgpackId);
             }

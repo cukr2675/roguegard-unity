@@ -125,7 +125,7 @@ namespace Roguegard.Extensions
                 var leader = partyMembers[0];
                 leader.Main.RogueEffects.AddOpen(leader, leaderEffect);
             }
-            for (int i = 0; i < partyMembers.Count; i++) // エフェクト解除等でパーティメンバー数が変化する可能性がある
+            for (int i = 0; i < partyMembers.Length; i++) // エフェクト解除等でパーティメンバー数が変化する可能性がある
             {
                 var member = partyMembers[i];
                 if (i != 0)
@@ -154,7 +154,7 @@ namespace Roguegard.Extensions
         public static void CloseDungeonFloorClosers(RogueParty party, bool exitDungeon)
         {
             var partyMembers = party.Members;
-            for (int i = 0; i < partyMembers.Count; i++) // エフェクト解除でパーティメンバー数が変化する可能性がある
+            for (int i = 0; i < partyMembers.Length; i++) // エフェクト解除でパーティメンバー数が変化する可能性がある
             {
                 var member = partyMembers[i];
                 DungeonFloorCloserStateInfo.CloseAndRemoveNull(member, exitDungeon);
@@ -166,7 +166,7 @@ namespace Roguegard.Extensions
             var from = self.Main.Stats.Party;
             if (from != null)
             {
-                while (from.Members.Count >= 1)
+                while (from.Members.Length >= 1)
                 {
                     var member = from.Members[0];
                     member.Main.Stats.TryAssignParty(member, to);

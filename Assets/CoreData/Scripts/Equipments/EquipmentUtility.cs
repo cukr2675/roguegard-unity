@@ -105,7 +105,7 @@ namespace Roguegard
                 equipParts.Add(equipPart);
             }
 
-            for (int i = equipmentState.Parts.Count - 1; i >= 0; i--)
+            for (int i = equipmentState.Parts.Length - 1; i >= 0; i--)
             {
                 var equipPartIndex = random.Next(0, equipParts.Count);
                 var equipPart = equipParts[equipPartIndex];
@@ -135,7 +135,7 @@ namespace Roguegard
                 equipParts.Add(equipPart);
             }
 
-            for (int i = equipmentState.Parts.Count - 1; i >= 0; i--)
+            for (int i = equipmentState.Parts.Length - 1; i >= 0; i--)
             {
                 var equipPartIndex = random.Next(0, equipParts.Count);
                 var equipPart = equipParts[equipPartIndex];
@@ -167,7 +167,7 @@ namespace Roguegard
                 equipParts.Add(equipPart);
             }
 
-            for (int i = equipmentState.Parts.Count - 1; i >= 0; i--)
+            for (int i = equipmentState.Parts.Length - 1; i >= 0; i--)
             {
                 var equipPartIndex = random.Next(0, equipParts.Count);
                 var equipPart = equipParts[equipPartIndex];
@@ -200,7 +200,7 @@ namespace Roguegard
                 equipParts.Add(equipPart);
             }
 
-            for (int i = equipmentState.Parts.Count - 1; i >= 0; i--)
+            for (int i = equipmentState.Parts.Length - 1; i >= 0; i--)
             {
                 var equipPartIndex = random.Next(0, equipParts.Count);
                 var equipPart = equipParts[equipPartIndex];
@@ -231,7 +231,7 @@ namespace Roguegard
             if (equipment == null) throw new System.ArgumentNullException(nameof(equipment));
 
             var statusEffectState = equipment.Main.GetStatusEffectState(equipment);
-            for (int i = 0; i < statusEffectState.StatusEffects.Count; i++)
+            for (int i = 0; i < statusEffectState.StatusEffects.Length; i++)
             {
                 var statusEffect = statusEffectState.StatusEffects[i];
                 if (statusEffect.EffectCategory == EffectCategoryKw.Erosion &&

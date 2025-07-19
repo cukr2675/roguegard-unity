@@ -37,7 +37,7 @@ namespace RoguegardUnity
 
             // アイテムを並べ替える
             var objs = location.Space.Objs;
-            for (int i = 0; i < objs.Count; i++)
+            for (int i = 0; i < objs.Length; i++)
             {
                 var obj = objs[i];
                 if (obj == null) continue;

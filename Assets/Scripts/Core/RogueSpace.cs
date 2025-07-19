@@ -96,7 +96,7 @@ namespace Roguegard
 
         public void SetRooms(Spanning<RectInt> rooms)
         {
-            this.rooms = new RectInt[rooms.Count];
+            this.rooms = new RectInt[rooms.Length];
             roomObjs = new RogueObjList[this.rooms.Length];
             for (int i = 0; i < this.rooms.Length; i++)
             {

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -44,7 +44,7 @@ namespace Roguegard.CharacterCreation
 
                 var targets = predicator.GetObjs(position);
                 var jumpBack = false;
-                if (targets.Count == 0)
+                if (targets.Length == 0)
                 {
                     // 正面2マス先に何もなければそこに移動する
                     jumpBack = !SpaceUtility.TryLocate(self, self.Location, targetPosition);

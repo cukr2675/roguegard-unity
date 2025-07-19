@@ -28,7 +28,7 @@ namespace RoguegardUnity
 
                     var containerInfo = ContainerInfo.GetInfo(arg.Arg.TargetObj);
                     var selfObjs = arg.Self.Space.Objs;
-                    for (int i = 0; i < selfObjs.Count; i++) // アイテムの移動でオブジェクト数が増加する可能性がある
+                    for (int i = 0; i < selfObjs.Length; i++) // アイテムの移動でオブジェクト数が増加する可能性がある
                     {
                         var obj = selfObjs[i];
                         if (obj == null || !obj.CanStack(arg.Arg.Tool)) continue;

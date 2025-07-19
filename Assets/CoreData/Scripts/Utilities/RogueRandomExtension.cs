@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -26,7 +26,7 @@ namespace Roguegard
 
         public static T Choice<T>(this IRogueRandom random, Spanning<T> span)
         {
-            var index = random.Next(0, span.Count);
+            var index = random.Next(0, span.Length);
             return span[index];
         }
     }

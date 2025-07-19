@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -59,7 +59,7 @@ namespace Roguegard
                 for (int i = 0; i < questTable.Count; i++)
                 {
                     questTable.GetItem(i, out var quest, out var party, out var weightTurns);
-                    if (party == null || party.Members.Count < questBoardInfo.MinPartySize || weightTurns >= 1) continue;
+                    if (party == null || party.Members.Length < questBoardInfo.MinPartySize || weightTurns >= 1) continue;
 
                     quest.Start(party.Members[0]);
                     questTable.RemoveAt(i);

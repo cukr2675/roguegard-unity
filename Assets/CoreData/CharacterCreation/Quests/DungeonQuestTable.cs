@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,7 +16,7 @@ namespace Roguegard.CharacterCreation
             var item = items[index];
 
             // パーティメンバーがいないならそのパーティは削除する
-            if (item.party != null && item.party.Members.Count == 0)
+            if (item.party != null && item.party.Members.Length == 0)
             {
                 item.party = null;
                 item.weightTurns = 0;

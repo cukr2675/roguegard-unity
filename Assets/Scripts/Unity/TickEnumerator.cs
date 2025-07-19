@@ -41,7 +41,7 @@ namespace RoguegardUnity
             var iteration = 0;
             for (int turns = 0; turns < maxTurns; turns++)
             {
-                for (int i = 0; i < world.Space.Objs.Count; i++) // Update と同じ時間経過順を保つ
+                for (int i = 0; i < world.Space.Objs.Length; i++) // Update と同じ時間経過順を保つ
                 {
                     var location = world.Space.Objs[i];
                     if (location == null) continue;
@@ -175,10 +175,10 @@ namespace RoguegardUnity
                     self.Space.RemoveAllNull();
                     if (!MovementCalculator.Get(self).AsStorage) // ストレージの中身は時間経過の対象外
                     {
-                        var objsCount = self.Space.Objs.Count; // 無限再帰対策として、オブジェクト数を固定しておく。
+                        var objsCount = self.Space.Objs.Length; // 無限再帰対策として、オブジェクト数を固定しておく。
                         for (int i = 0; i < objsCount; i++)
                         {
-                            if (i >= self.Space.Objs.Count)
+                            if (i >= self.Space.Objs.Length)
                             {
                                 break;
                             }

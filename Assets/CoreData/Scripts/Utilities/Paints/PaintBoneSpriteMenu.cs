@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -261,7 +261,7 @@ namespace Roguegard
                         break;
                 }
                 table.MainColor = paint.MainColor;
-                for (int i = 0; i < paint.Palette.Count; i++)
+                for (int i = 0; i < paint.Palette.Length; i++)
                 {
                     table.SetPalette(i, paint.Palette[i]);
                 }

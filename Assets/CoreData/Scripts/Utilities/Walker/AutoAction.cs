@@ -15,7 +15,7 @@ namespace Roguegard
         {
             var skills = self.Main.Skills;
             var items = self.Space.Objs;
-            var actionLength = skills.Count + items.Count;
+            var actionLength = skills.Count + items.Length;
             var actionIndex = random.Next(0, actionLength);
             if (actionIndex < skills.Count)
             {
@@ -24,7 +24,7 @@ namespace Roguegard
                 return skillResult;
             }
             actionIndex -= skills.Count;
-            if (actionIndex < items.Count)
+            if (actionIndex < items.Length)
             {
                 var item = items[actionIndex];
                 return AutoItem(item, self, self, activationDepth, visibleRadius, room, random);
@@ -47,7 +47,7 @@ namespace Roguegard
 
             skill.Range?.Predicate(predicator, self, 0f, tool, visibleRadius, room);
             predicator.EndPredicate();
-            if (predicator.Positions.Count == 0) return false;
+            if (predicator.Positions.Length == 0) return false;
 
             if (enqueueMessageRule && !RoguegardSettings.KeywordsNotEnqueueMessageRule.Contains(keyword) &&
                 MessageWorkListener.TryOpenHandler(self.Location, self.Position, out var h))
@@ -56,7 +56,7 @@ namespace Roguegard
                 handler.AppendText(DeviceKw.HorizontalRule);
             }
 
-            var positionIndex = random.Next(0, predicator.Positions.Count);
+            var positionIndex = random.Next(0, predicator.Positions.Length);
             var position = predicator.Positions[positionIndex];
             var arg = new RogueMethodArgument(targetPosition: position);
             var result = RogueMethodAspectState.Invoke(keyword, skill, self, user, activationDepth, arg);
@@ -80,9 +80,9 @@ namespace Roguegard
 
                 skillDescription.Range?.Predicate(predicator, self, 0f, item, visibleRadius, room);
                 predicator.EndPredicate();
-                if (predicator.Positions.Count >= 1)
+                if (predicator.Positions.Length >= 1)
                 {
-                    var positionIndex = random.Next(0, predicator.Positions.Count);
+                    var positionIndex = random.Next(0, predicator.Positions.Length);
                     var arg = new RogueMethodArgument(tool: item, targetPosition: predicator.Positions[positionIndex]);
                     var result = option.CommandInvoke(self, user, activationDepth, arg);
                     if (result) return true;
@@ -127,9 +127,9 @@ namespace Roguegard
 
                 skillDescription.Range?.Predicate(predicator, self, 0f, item, visibleRadius, room);
                 predicator.EndPredicate();
-                if (predicator.Positions.Count >= 1)
+                if (predicator.Positions.Length >= 1)
                 {
-                    var positionIndex = random.Next(0, predicator.Positions.Count);
+                    var positionIndex = random.Next(0, predicator.Positions.Length);
                     var arg = new RogueMethodArgument(tool: item, targetPosition: predicator.Positions[positionIndex]);
                     var result = option.CommandInvoke(self, user, activationDepth, arg);
                     if (result) return true;

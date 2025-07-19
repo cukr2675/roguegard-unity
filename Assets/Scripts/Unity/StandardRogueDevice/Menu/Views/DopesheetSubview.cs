@@ -96,7 +96,7 @@ namespace RoguegardUnity
             }
 
             var editInfo = (MotionGrapherInfo)((MArg)arg).Arg.Other;
-            if (editInfo.Tracks.Count == 0)
+            if (editInfo.Tracks.Length == 0)
             {
                 editInfo.AddTrack(new SpriteMotionGrapherTrack());
             }
@@ -125,12 +125,12 @@ namespace RoguegardUnity
             viewElements.RemoveRange(buttonsCount, viewElements.Count - buttonsCount);
 
             var sumHeight = 0f;
-            for (int i = 0; i < editInfo.Tracks.Count; i++)
+            for (int i = 0; i < editInfo.Tracks.Length; i++)
             {
                 var track = editInfo.Tracks[i];
                 if (track is SpriteMotionGrapherTrack spriteMotionTrack)
                 {
-                    for (int j = 0; j < spriteMotionTrack.Bones.Count; j++)
+                    for (int j = 0; j < spriteMotionTrack.Bones.Length; j++)
                     {
                         var bone = spriteMotionTrack.Bones[j];
                         var removeIndex = j;
@@ -285,7 +285,7 @@ namespace RoguegardUnity
                         }
                         else
                         {
-                            ((SpriteMotionGrapherTrack)editInfo.Tracks[editInfo.Tracks.Count - 1]).AddBone(boneName);
+                            ((SpriteMotionGrapherTrack)editInfo.Tracks[editInfo.Tracks.Length - 1]).AddBone(boneName);
                             manager.PopMenuScreen();
                         }
                     })

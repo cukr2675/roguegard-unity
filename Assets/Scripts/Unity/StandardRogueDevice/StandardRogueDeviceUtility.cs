@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -90,7 +90,7 @@ namespace RoguegardUnity
 
         public static void Localize(RogueNameBuilder refName)
         {
-            for (int i = 0; i < refName.Texts.Count; i++)
+            for (int i = 0; i < refName.Texts.Length; i++)
             {
                 refName.Set(i, Localize(refName.Texts[i]));
             }

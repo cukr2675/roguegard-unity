@@ -10,7 +10,7 @@ namespace Roguegard
 
         public static int IndexOf<T>(this Spanning<T> spanning, T value)
         {
-            for (int i = 0; i < spanning.Count; i++)
+            for (int i = 0; i < spanning.Length; i++)
             {
                 if (spanning[i]?.Equals(value) ?? value == null) return i;
             }

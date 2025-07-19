@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -37,7 +37,7 @@ namespace Roguegard
             {
                 self.Space.GetRoom(RoomIndex, out var monsterHouse, out _);
                 if (self.Space.TryGetRoomView(user.Position, out var userRoom, out _) && userRoom.Equals(monsterHouse) &&
-                    (DungeonInfo.Get(self)?.TryGetFloor(self.Main.Stats.Lv, out floor) ?? false) && floor.EnemyTable.Count >= 1)
+                    (DungeonInfo.Get(self)?.TryGetFloor(self.Main.Stats.Lv, out floor) ?? false) && floor.EnemyTable.Length >= 1)
                 {
                     if (RogueDevice.Primary.Subject.Main.Stats.Party.Members.Contains(user))
                     {

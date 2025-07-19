@@ -91,7 +91,7 @@ namespace Roguegard
 
         public void Sort(Spanning<RogueObj> sorted)
         {
-            if (sorted.Count != Count) throw new System.ArgumentException("要素数が一致しません。");
+            if (sorted.Length != Count) throw new System.ArgumentException("要素数が一致しません。");
 
             // 例外を投げるときソートをキャンセルしたいので、一通り例外判定してからソートする
             foreach (var obj in objs)

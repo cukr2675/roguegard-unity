@@ -52,7 +52,7 @@ namespace Roguegard
 
             var containerInfo = ContainerInfo.GetInfo(nearestContainer);
             var items = self.Space.Objs;
-            for (int i = 0; i < items.Count; i++) // アイテムの移動でオブジェクト数が増加する可能性がある
+            for (int i = 0; i < items.Length; i++) // アイテムの移動でオブジェクト数が増加する可能性がある
             {
                 var item = items[i];
                 if (item == null || itemRegister.Contains(item)) continue;

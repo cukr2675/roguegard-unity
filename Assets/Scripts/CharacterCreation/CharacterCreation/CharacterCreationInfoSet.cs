@@ -25,13 +25,13 @@ namespace Roguegard.CharacterCreation
             {
                 if (_currentRaceOption != null) return _currentRaceOption;
 
-                if (Data.Race.Option.GrowingOptions.Count == 0)
+                if (Data.Race.Option.GrowingOptions.Length == 0)
                 {
                     _currentRaceOption = Data.Race.Option;
                 }
                 else
                 {
-                    if (currentRaceOptionIndex >= Data.Race.Option.GrowingOptions.Count)
+                    if (currentRaceOptionIndex >= Data.Race.Option.GrowingOptions.Length)
                     {
                         Debug.LogWarning($"{nameof(currentRaceOptionIndex)} ({currentRaceOptionIndex}) が不正です。");
                         currentRaceOptionIndex = Data.Race.Option.GrowingOptions.IndexOf(Data.Race.Option);
@@ -204,7 +204,7 @@ namespace Roguegard.CharacterCreation
             // キャラは下向き　アイテムは矢の向きを考慮して左下向き
             stats.Direction = infoSet.Ability.HasFlag(MainInfoSetAbility.HasCollider) ? RogueDirection.Down : RogueDirection.LowerLeft;
             stats.Reset(obj);
-            if (startingItems.Count >= 1) { WeightedRogueObjGeneratorUtility.CreateObjs(startingItems, obj, random); }
+            if (startingItems.Length >= 1) { WeightedRogueObjGeneratorUtility.CreateObjs(startingItems, obj, random); }
             if (!SpaceUtility.TryLocate(obj, location, position, stackOption)) throw new RogueException("生成したオブジェクトの移動に失敗しました。");
 
             return obj;

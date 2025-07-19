@@ -12,9 +12,9 @@ namespace Roguegard
         {
             var sumWeight = random.NextFloat(0f, weightedObjList.TotalWeight);
             var weightedObjs = weightedObjList.Span;
-            if (weightedObjs.Count == 0) throw new RogueException($"{weightedObjList} の生成候補オブジェクトが一つも存在しません。");
+            if (weightedObjs.Length == 0) throw new RogueException($"{weightedObjList} の生成候補オブジェクトが一つも存在しません。");
 
-            for (int i = 0; i < weightedObjs.Count - 1; i++)
+            for (int i = 0; i < weightedObjs.Length - 1; i++)
             {
                 var item = weightedObjs[i];
                 sumWeight -= item.Weight;
@@ -22,7 +22,7 @@ namespace Roguegard
             }
             {
                 // 計算誤差を考慮して最後のオブジェクトを生成する。
-                var item = weightedObjs[weightedObjs.Count - 1];
+                var item = weightedObjs[weightedObjs.Length - 1];
                 return item.CreateObj(location, position, random, stackOption);
             }
         }

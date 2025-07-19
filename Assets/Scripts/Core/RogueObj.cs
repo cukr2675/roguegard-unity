@@ -188,7 +188,7 @@ namespace Roguegard
 
         public bool TrySetStack(int stack, RogueObj user = null)
         {
-            if (stack >= 2 && Space != null && Space.Objs.Count >= 1)
+            if (stack >= 2 && Space != null && Space.Objs.Length >= 1)
             {
                 // 子オブジェクトを持つオブジェクトをスタックすることはできない。
                 return false;
@@ -285,8 +285,8 @@ namespace Roguegard
             if (coming == null) return false;
 
             // 子オブジェクトを持つオブジェクトをスタックすることはできない。
-            if (Space.Objs.Count >= 1 || Space.Tilemap != null) return false;
-            if (coming.Space.Objs.Count >= 1 || Space.Tilemap != null) return false;
+            if (Space.Objs.Length >= 1 || Space.Tilemap != null) return false;
+            if (coming.Space.Objs.Length >= 1 || Space.Tilemap != null) return false;
 
             if (!Main.CanStack(this, coming)) return false;
 

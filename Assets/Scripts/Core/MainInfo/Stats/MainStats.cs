@@ -94,7 +94,7 @@ namespace Roguegard
                 if (levelInfo != null)
                 {
                     levelInfo.LevelUp(self);
-                    if (Lv >= levelInfo.NextTotalExps.Count) { TotalExp = levelInfo.NextTotalExps[^1]; }
+                    if (Lv >= levelInfo.NextTotalExps.Length) { TotalExp = levelInfo.NextTotalExps[^1]; }
                     else if (Lv <= 0) { TotalExp = 0; }
                     else { TotalExp = levelInfo.NextTotalExps[Lv - 1]; }
                 }
@@ -112,7 +112,7 @@ namespace Roguegard
                 if (levelInfo != null)
                 {
                     levelInfo.LevelDown(self);
-                    if (Lv >= levelInfo.NextTotalExps.Count) { TotalExp = levelInfo.NextTotalExps[^1]; }
+                    if (Lv >= levelInfo.NextTotalExps.Length) { TotalExp = levelInfo.NextTotalExps[^1]; }
                     else if (Lv <= 0) { TotalExp = 0; }
                     else { TotalExp = levelInfo.NextTotalExps[Lv - 1]; }
                 }
@@ -129,11 +129,11 @@ namespace Roguegard
             if (deltaExp >= 1)
             {
                 var totalExp = TotalExp + deltaExp;
-                while (Lv < levelInfo.NextTotalExps.Count && totalExp >= levelInfo.NextTotalExps[Lv])
+                while (Lv < levelInfo.NextTotalExps.Length && totalExp >= levelInfo.NextTotalExps[Lv])
                 {
                     SetLv(self, Lv + 1);
                 }
-                if (Lv < levelInfo.NextTotalExps.Count) { TotalExp = totalExp; }
+                if (Lv < levelInfo.NextTotalExps.Length) { TotalExp = totalExp; }
             }
             else if (deltaExp <= -1)
             {

@@ -17,10 +17,10 @@ namespace Roguegard.CharacterCreation
             var raceOption = race.Option;
             var growingOptions = raceOption.GrowingOptions;
             var genders = raceOption.Genders;
-            if (growingOptions.Count >= 1)
+            if (growingOptions.Length >= 1)
             {
                 table = new Dictionary<IRaceOption, Dictionary<IRogueGender, CharacterCreationInfoSet>>();
-                for (int i = 0; i < growingOptions.Count; i++)
+                for (int i = 0; i < growingOptions.Length; i++)
                 {
                     var growingOption = growingOptions[i];
                     var genderTable = new Dictionary<IRogueGender, CharacterCreationInfoSet>();

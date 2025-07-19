@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -70,7 +70,7 @@ namespace RoguegardUnity
             {
                 normalAttack.Range?.Predicate(predicator, self, 0f, null, self.Position + self.Main.Stats.Direction.Forward);
                 predicator.EndPredicate();
-                if (predicator.Positions.Count >= 1)
+                if (predicator.Positions.Length >= 1)
                 {
                     var objs = predicator.GetObjs(predicator.Positions[0]);
                     if (!viewMap.ContainsVisible(objs[0])) return null;

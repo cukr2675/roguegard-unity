@@ -70,7 +70,7 @@ namespace Roguegard
 
             public bool CanStack(IRogueObjInfo coming)
             {
-                return coming is Info otherInfo && info.Posts.Count == 0 && otherInfo.info.Posts.Count == 0;
+                return coming is Info otherInfo && info.Posts.Length == 0 && otherInfo.info.Posts.Length == 0;
             }
 
             public IRogueObjInfo DeepOrShallowCopy(RogueObj self, RogueObj clonedSelf) => null;

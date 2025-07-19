@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -49,9 +49,9 @@ namespace RoguegardUnity
             // ステータスエフェクトの頭上アイコンの設定
             var statusEffectState = obj.Main.GetStatusEffectState(obj);
             var statusEffects = statusEffectState.StatusEffectsWithHeadIcon;
-            if (statusEffects.Count >= 1)
+            if (statusEffects.Length >= 1)
             {
-                var headIconIndex = motionEffectAnimationTime % headIconCount % statusEffects.Count;
+                var headIconIndex = motionEffectAnimationTime % headIconCount % statusEffects.Length;
                 var iconSpriteMotion = statusEffects[headIconIndex].HeadIcon;
                 SetTo(statusEffectIconRenderer, iconSpriteMotion, motionEffectAnimationTime, RogueDirection.Down);
             }

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -45,7 +45,7 @@ namespace Roguegard.CharacterCreation
                     self.Main.Stats.SetMp(self, int.MaxValue);
                     var statusEffectState = self.Main.GetStatusEffectState(self);
                     var statusEffects = statusEffectState.StatusEffects;
-                    for (int i = statusEffects.Count - 1; i >= 0; i--)
+                    for (int i = statusEffects.Length - 1; i >= 0; i--)
                     {
                         var statusEffect = statusEffects[i];
                         if (statusEffect.EffectCategory == EffectCategoryKw.StatusAilment &&

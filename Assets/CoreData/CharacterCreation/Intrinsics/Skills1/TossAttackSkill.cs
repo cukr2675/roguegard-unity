@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -17,7 +17,7 @@ namespace Roguegard
             using var predicator = ForAllRogueMethodTarget.Instance.GetPredicator(self, 0f, null);
             Within1TileRogueMethodRange.Instance.Predicate(predicator, self, 0f, null, self.Position);
             var objs = predicator.GetObjs(self.Position);
-            if (objs.Count >= 1)
+            if (objs.Length >= 1)
             {
                 if (RogueDevice.Primary.Player == self)
                 {

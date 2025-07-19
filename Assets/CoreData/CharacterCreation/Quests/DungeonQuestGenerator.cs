@@ -25,7 +25,7 @@ namespace Roguegard.CharacterCreation
                 {
                     if (optionValue is DungeonCreationData dungeonValue)
                     {
-                        if (dungeonValue.Floors.Count == 0) continue;
+                        if (dungeonValue.Floors.Length == 0) continue;
 
                         dungeons.Add(dungeonValue);
                     }

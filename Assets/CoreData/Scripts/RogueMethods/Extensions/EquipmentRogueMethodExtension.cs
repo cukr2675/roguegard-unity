@@ -34,7 +34,7 @@ namespace Roguegard.Extensions
             }
 
             // 装備する
-            var count = equipParts.Count >= 1 ? EquipmentUtility.GetEquipIndex(ownerEquipmentState, equipParts[0]) : 0;
+            var count = equipParts.Length >= 1 ? EquipmentUtility.GetEquipIndex(ownerEquipmentState, equipParts[0]) : 0;
             var equipArg = new RogueMethodArgument(count: count);
             var equipResult = RogueMethodAspectState.Invoke(
                 MainInfoKw.Equip, equipmentInfo.BeEquipped, equipment, user, activationDepth, equipArg);

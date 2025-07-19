@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -64,11 +64,11 @@ namespace Roguegard
             for (int i = 0; i < QuestTable.Count; i++)
             {
                 QuestTable.GetItem(i, out _, out var party, out _);
-                if (party == null || party.Members.Count >= MaxPartySize) continue;
+                if (party == null || party.Members.Length >= MaxPartySize) continue;
 
                 if (obj.Main.Stats.TryAssignParty(obj, party))
                 {
-                    if (party.Members.Count == MinPartySize) { QuestTable.TryAcceptAt(i, party, WeightTurnsAfterAccept); }
+                    if (party.Members.Length == MinPartySize) { QuestTable.TryAcceptAt(i, party, WeightTurnsAfterAccept); }
                     return true;
                 }
             }

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -30,7 +30,7 @@ namespace Roguegard.CharacterCreation
                 if (generate && self.Location?.Space.Tilemap != null &&
                     DungeonInfo.TryGet(self.Location, out var dungeonInfo) &&
                     dungeonInfo.TryGetFloor(self.Location.Main.Stats.Lv, out var level) &&
-                    level.ItemTable.Count >= 1)
+                    level.ItemTable.Length >= 1)
                 {
                     // 階層移動に成功したとき 10% でアイテムを追加生成する。
                     var random = RogueRandom.Primary;

@@ -19,19 +19,19 @@ namespace Roguegard
         /// <summary>
         /// <see cref="List{T}"/> を扱う場合、後から要素数が変化する可能性があるため記憶する
         /// </summary>
-        private readonly int _count;
+        private readonly int _length;
 
         public T this[int index]
         {
             get
             {
-                if (index >= _count) { Debug.LogWarning("添え字の範囲外です。"); }
+                if (index >= _length) { Debug.LogWarning("添え字の範囲外です。"); }
 
                 return _list[index];
             }
         }
 
-        public int Count => _count;
+        public int Length => _length;
 
         public static Spanning<T> Empty => _empty;
         private static readonly T[] _empty = new T[0];
@@ -39,7 +39,7 @@ namespace Roguegard
         private Spanning(T[] array)
         {
             _list = array;
-            _count = array.Length;
+            _length = array.Length;
         }
 
         private Spanning(IReadOnlyList<T> list)
@@ -51,13 +51,13 @@ namespace Roguegard
 #endif
 
             _list = list;
-            _count = list.Count;
+            _length = list.Count;
         }
 
         public T[] ToArray()
         {
-            var result = new T[_count];
-            for (int i = 0; i < _count; i++)
+            var result = new T[_length];
+            for (int i = 0; i < _length; i++)
             {
                 result[i] = _list[i];
             }
@@ -66,30 +66,30 @@ namespace Roguegard
 
         internal static Spanning<T> Get(IReadOnlyList<T> list) => list != null ? new(list) : Empty;
         public static implicit operator Spanning<T>(T[] array) => array != null ? new(array) : Empty;
-        public static implicit operator System.ReadOnlySpan<T>(Spanning<T> spanning) => new(spanning.ToArray(), 0, spanning._count);
-        public Enumerator GetEnumerator() => new(_list, _count);
+        public static implicit operator System.ReadOnlySpan<T>(Spanning<T> spanning) => new(spanning.ToArray(), 0, spanning._length);
+        public Enumerator GetEnumerator() => new(_list, _length);
 
         public ref struct Enumerator
         {
             private readonly IReadOnlyList<T> list;
-            private readonly int count;
+            private readonly int length;
             private int index;
 
             public readonly T Current => list[index];
 
-            public Enumerator(IReadOnlyList<T> list, int count)
+            public Enumerator(IReadOnlyList<T> list, int length)
             {
                 this.list = list;
-                this.count = count;
+                this.length = length;
                 index = -1;
             }
 
             public bool MoveNext()
             {
-                if (list.Count != count) throw new System.InvalidOperationException("ループ中のリストサイズが変更されました。");
+                if (list.Count != length) throw new System.InvalidOperationException("ループ中のリストサイズが変更されました。");
 
                 index++;
-                return index < count;
+                return index < length;
             }
         }
     }
@@ -97,11 +97,11 @@ namespace Roguegard
     //    public readonly ref struct Spanning<T>
     //    {
     //        private readonly T[] _array;
-    //        private readonly int _count;
+    //        private readonly int _length;
 
     //        public T this[int index] => _array[index];
 
-    //        public int Count => _count;
+    //        public int Length => _length;
 
     //        public static Spanning<T> Empty => _empty;
     //        private static readonly T[] _empty = new T[0];
@@ -109,7 +109,7 @@ namespace Roguegard
     //        private Spanning(T[] array)
     //        {
     //            _array = array;
-    //            _count = array.Length;
+    //            _length = array.Length;
     //        }
 
     //        private Spanning(IReadOnlyList<T> list)
@@ -121,13 +121,13 @@ namespace Roguegard
     //#endif
 
     //            _array = System.Runtime.CompilerServices.Unsafe.As<System.Runtime.CompilerServices.StrongBox<T[]>>(list).Value;
-    //            _count = list.Count;
+    //            _length = list.Count;
     //        }
 
     //        public T[] ToArray()
     //        {
-    //            var result = new T[_count];
-    //            for (int i = 0; i < _count; i++)
+    //            var result = new T[_length];
+    //            for (int i = 0; i < _length; i++)
     //            {
     //                result[i] = _array[i];
     //            }
@@ -136,28 +136,28 @@ namespace Roguegard
 
     //        internal static Spanning<T> Get(IReadOnlyList<T> list) => list != null ? new(list) : Empty;
     //        public static implicit operator Spanning<T>(T[] array) => array != null ? new(array) : Empty;
-    //        public static implicit operator System.ReadOnlySpan<T>(Spanning<T> spanning) => new(spanning._array, 0, spanning._count);
-    //        public Enumerator GetEnumerator() => new(_array, _count);
+    //        public static implicit operator System.ReadOnlySpan<T>(Spanning<T> spanning) => new(spanning._array, 0, spanning._length);
+    //        public Enumerator GetEnumerator() => new(_array, _length);
 
     //        public ref struct Enumerator
     //        {
     //            private readonly T[] array;
-    //            private readonly int count;
+    //            private readonly int length;
     //            private int index;
 
     //            public readonly T Current => array[index];
 
-    //            public Enumerator(T[] array, int count)
+    //            public Enumerator(T[] array, int length)
     //            {
     //                this.array = array;
-    //                this.count = count;
+    //                this.length = length;
     //                index = -1;
     //            }
 
     //            public bool MoveNext()
     //            {
     //                index++;
-    //                return index < count;
+    //                return index < length;
     //            }
     //        }
     //    }

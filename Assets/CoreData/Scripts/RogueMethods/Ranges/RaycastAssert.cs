@@ -73,7 +73,7 @@ namespace Roguegard
             self.Main.Stats.Direction = direction;
             if (!arg.TryGetTargetPosition(out position)) { position = self.Position + direction.Forward; }
             range.Predicate(predicator, self, 0f, null, position);
-            if (predicator.Positions.Count == 0) return true;
+            if (predicator.Positions.Length == 0) return true;
 
             if (arg.TargetObj == null) return false;
 

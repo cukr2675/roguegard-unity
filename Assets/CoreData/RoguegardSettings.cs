@@ -36,7 +36,7 @@ namespace Roguegard
         public static Spanning<ShiftableColor> DefaultPalette
         {
             get => _defaultPalette;
-            set => _defaultPalette = (value.Count == paletteLength ? value.ToArray() : throw new RogueException());
+            set => _defaultPalette = (value.Length == paletteLength ? value.ToArray() : throw new RogueException());
         }
 
         public static Color White => Color.white * LightRatio;

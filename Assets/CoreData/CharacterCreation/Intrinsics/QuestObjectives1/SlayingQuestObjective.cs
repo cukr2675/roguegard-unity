@@ -30,7 +30,7 @@ namespace Roguegard.CharacterCreation
             }
 
             var targetOption = random.Choice(options);
-            var maxFloor = dungeon.Floors[dungeon.Floors.Count - 1].EndLv - 1;
+            var maxFloor = dungeon.Floors[dungeon.Floors.Length - 1].EndLv - 1;
             var count = random.Next(3, 5);
             var floor = random.Next(1, maxFloor);
 
@@ -198,7 +198,7 @@ namespace Roguegard.CharacterCreation
                 
                 var message = new StringBuilder();
                 message.Append(arg.Self.GetName()).Append("は").Append(quest).Append("をクリアした！");
-                if (quest.LootTable.Count >= 1)
+                if (quest.LootTable.Length >= 1)
                 {
                     message.Append("{v}その報酬として…");
                 }

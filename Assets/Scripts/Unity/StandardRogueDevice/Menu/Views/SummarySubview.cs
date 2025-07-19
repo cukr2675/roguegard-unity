@@ -178,7 +178,7 @@ namespace RoguegardUnity
             foreach (var lootTableRow in quest.LootTable)
             {
                 var loots = lootTableRow.Span;
-                if (loots.Count == 1)
+                if (loots.Length == 1)
                 {
                     var loot = loots[0];
                     leftLBuilder.Append(loot.InfoSet.Name);
@@ -190,7 +190,7 @@ namespace RoguegardUnity
                     leftLBuilder.AppendLine();
                     any = true;
                 }
-                else if (loots.Count >= 2)
+                else if (loots.Length >= 2)
                 {
                     plusAlpha = true;
                     any = true;

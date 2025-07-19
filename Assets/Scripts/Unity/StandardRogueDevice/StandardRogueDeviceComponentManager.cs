@@ -252,7 +252,7 @@ namespace RoguegardUnity
                 // セーブポイントから復帰する
                 var worldInfo = RogueWorldInfo.GetByCharacter(Player);
                 var lobbyMembers = worldInfo.LobbyMembers.Members;
-                for (int i = 0; i < lobbyMembers.Count; i++) // 復帰でロビーメンバー数が変化する可能性がある
+                for (int i = 0; i < lobbyMembers.Length; i++) // 復帰でロビーメンバー数が変化する可能性がある
                 {
                     LoadSavePoint(lobbyMembers[i], true);
                 }

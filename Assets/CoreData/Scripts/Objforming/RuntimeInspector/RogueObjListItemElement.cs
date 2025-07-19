@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -24,7 +24,7 @@ namespace Roguegard.Objforming.RuntimeInspector
             var listMember = rogueSpaceFormer.GetMemberByCamel("objs");
             _spaceButton.onClick.AddListener(() =>
             {
-                if (value.Space.Objs.Count == 0)
+                if (value.Space.Objs.Length == 0)
                 {
                     inspector.SetTarget(value);
                 }

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -22,7 +22,7 @@ namespace Roguegard
             // ランダムな食べ物を取得
             var userItems = user.Space.Objs;
             foodIndices.Clear();
-            for (int i = 0; i < userItems.Count; i++)
+            for (int i = 0; i < userItems.Length; i++)
             {
                 var item = userItems[i];
                 if (item == null || item.Main.InfoSet.Category != CategoryKw.Food) continue;

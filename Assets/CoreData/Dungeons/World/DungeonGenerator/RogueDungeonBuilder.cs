@@ -51,7 +51,7 @@ namespace Roguegard
                 var room0Index = roomsBuilder.Rooms.IndexOf(room0);
                 ConnectRooms(room0Index, random);
             }
-            else if (roomsBuilder.Rooms.Count == 2)
+            else if (roomsBuilder.Rooms.Length == 2)
             {
                 // 最初の分割では分割後の部屋同士をつなぐ（最初の分割ではどちらの部屋も接続を持たない）
                 _connectors.Add(new RogueDungeonConnector(room0, room1));
@@ -70,7 +70,7 @@ namespace Roguegard
             {
                 _connectors.Add(new RogueDungeonConnector(room, connectRoom));
             }
-            else if (roomsBuilder.Rooms.Count != 1)
+            else if (roomsBuilder.Rooms.Length != 1)
             {
                 Debug.LogError("不正なダンジョン生成処理です。通路のない部屋が発生している可能性があります。");
             }

@@ -55,12 +55,12 @@ namespace Roguegard
             var additionalCorridorCount = random.Next(_minAdditionalCorridors, _maxAdditionalCorridors);
             for (int i = 0; i < additionalCorridorCount; i++)
             {
-                var roomIndex = random.Next(0, builder.Rooms.Count);
+                var roomIndex = random.Next(0, builder.Rooms.Length);
                 builder.ConnectRooms(roomIndex, random);
             }
 
             // 各部屋のサイズを決める
-            var shrinkedRooms = new ShrinkedDungeonRoom[builder.Rooms.Count];
+            var shrinkedRooms = new ShrinkedDungeonRoom[builder.Rooms.Length];
             for (int i = 0; i < shrinkedRooms.Length; i++)
             {
                 var room = builder.Rooms[i];
@@ -69,7 +69,7 @@ namespace Roguegard
             }
 
             // 各部屋の入口を決める
-            var connections = new RogueDungeonConnection[builder.Connectors.Count];
+            var connections = new RogueDungeonConnection[builder.Connectors.Length];
             for (int i = 0; i < connections.Length; i++)
             {
                 var connector = builder.Connectors[i];
@@ -107,7 +107,7 @@ namespace Roguegard
             {
                 shrinkedRoom.SetTile(tilemap, _roomGroundTiles, _roomWallTiles);
             }
-            for (int i = 0; i < CorridorTiles.Count / 2; i++)
+            for (int i = 0; i < CorridorTiles.Length / 2; i++)
             {
                 foreach (var connection in connections)
                 {
@@ -115,14 +115,14 @@ namespace Roguegard
                 }
                 foreach (var connection in connections)
                 {
-                    connection.SetTile(tilemap, CorridorTiles, CorridorTiles.Count - 1 - i);
+                    connection.SetTile(tilemap, CorridorTiles, CorridorTiles.Length - 1 - i);
                 }
             }
-            if (CorridorTiles.Count % 2 == 1)
+            if (CorridorTiles.Length % 2 == 1)
             {
                 foreach (var connection in connections)
                 {
-                    connection.SetTile(tilemap, CorridorTiles, CorridorTiles.Count / 2);
+                    connection.SetTile(tilemap, CorridorTiles, CorridorTiles.Length / 2);
                 }
             }
 

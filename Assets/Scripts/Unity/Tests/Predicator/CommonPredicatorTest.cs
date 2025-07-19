@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using NUnit.Framework;
 using UnityEngine;
@@ -42,14 +42,14 @@ namespace RoguegardUnity.Tests
 
                 predicator1.Predicate(player, enemy, Vector2Int.zero);
                 predicator1.EndPredicate();
-                var predicator1Count = predicator1.Positions.Count;
+                var predicator1Count = predicator1.Positions.Length;
 
                 using var predicator2 = methodTarget.GetPredicator(player, 0f, tool);
                 predicator2.Predicate(player, enemy, Vector2Int.zero);
                 predicator2.EndPredicate();
-                var predicator2Count = predicator2.Positions.Count;
+                var predicator2Count = predicator2.Positions.Length;
 
-                if (predicator1.Positions.Count != predicator1Count && predicator2.Positions.Count != predicator2Count)
+                if (predicator1.Positions.Length != predicator1Count && predicator2.Positions.Length != predicator2Count)
                 {
                     Debug.LogError($"[{methodTarget.GetType()}] プーリング：失敗");
                 }
