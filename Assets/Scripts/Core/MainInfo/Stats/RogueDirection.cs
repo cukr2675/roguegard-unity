@@ -1,30 +1,30 @@
-﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Roguegard
 {
+    // OchalikeSprites.SpriteDirection と同一の実装だが、依存を弱めるために別定義にする
+    // 命名メモ: RogueDirection8 は冗長 (ローグライクなので8方向は連想しやすいはず？)
     [Objforming.Formable]
-    public struct RogueDirection : System.IEquatable<RogueDirection>
+    public readonly struct RogueDirection : System.IEquatable<RogueDirection>
     {
         private readonly int angle;
 
         public Vector2Int Forward => forwards[angle];
         public float Degree => angle * 45f;
 
-        private static readonly Vector2Int[] forwards = new Vector2Int[]
+        private static readonly Vector2Int[] forwards =
         {
-            new Vector2Int(+1, +0),
-            new Vector2Int(+1, +1),
-            new Vector2Int(+0, +1),
-            new Vector2Int(-1, +1),
-            new Vector2Int(-1, +0),
-            new Vector2Int(-1, -1),
-            new Vector2Int(+0, -1),
-            new Vector2Int(+1, -1),
+            new(+1, +0),
+            new(+1, +1),
+            new(+0, +1),
+            new(-1, +1),
+            new(-1, +0),
+            new(-1, -1),
+            new(+0, -1),
+            new(+1, -1),
         };
 
-        private static readonly string[] texts = new string[]
+        private static readonly string[] texts =
         {
             "Right",
             "UpperRight",
@@ -36,14 +36,14 @@ namespace Roguegard
             "LowerRight",
         };
 
-        public static RogueDirection Right => new RogueDirection(0);
-        public static RogueDirection UpperRight => new RogueDirection(1);
-        public static RogueDirection Up => new RogueDirection(2);
-        public static RogueDirection UpperLeft => new RogueDirection(3);
-        public static RogueDirection Left => new RogueDirection(4);
-        public static RogueDirection LowerLeft => new RogueDirection(5);
-        public static RogueDirection Down => new RogueDirection(6);
-        public static RogueDirection LowerRight => new RogueDirection(7);
+        public static RogueDirection Right => new(0);
+        public static RogueDirection UpperRight => new(1);
+        public static RogueDirection Up => new(2);
+        public static RogueDirection UpperLeft => new(3);
+        public static RogueDirection Left => new(4);
+        public static RogueDirection LowerLeft => new(5);
+        public static RogueDirection Down => new(6);
+        public static RogueDirection LowerRight => new(7);
 
         public RogueDirection(int angle)
         {
@@ -110,9 +110,6 @@ namespace Roguegard
             var index = System.Array.IndexOf(forwards, sign);
             direction = new RogueDirection(index);
             return true;
-
-            //var degree = Mathf.Atan2(vector.y, vector.x) * Mathf.Rad2Deg;
-            //direction = FromDegree(degree);
         }
 
         /// <summary>
@@ -160,13 +157,6 @@ namespace Roguegard
         {
             return direction.angle;
         }
-
-        //public static explicit operator RogueDirection(int angleIndex)
-        //{
-        //    if (angleIndex < 0 || 8 <= angleIndex) throw new System.ArgumentOutOfRangeException(nameof(angleIndex));
-
-        //    return new RogueDirection(angleIndex);
-        //}
 
         public static implicit operator OchalikeSprites.SpriteDirection(RogueDirection direction)
         {

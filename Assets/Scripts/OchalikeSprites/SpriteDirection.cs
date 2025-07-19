@@ -1,29 +1,28 @@
-﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace OchalikeSprites
 {
-    public struct SpriteDirection : System.IEquatable<SpriteDirection>
+    // 命名メモ: RogueDirection がベースのため SpringDirection8 ではない
+    public readonly struct SpriteDirection : System.IEquatable<SpriteDirection>
     {
         private readonly int angle;
 
         public Vector2Int Forward => forwards[angle];
         public float Degree => angle * 45f;
 
-        private static readonly Vector2Int[] forwards = new Vector2Int[]
+        private static readonly Vector2Int[] forwards =
         {
-            new Vector2Int(+1, +0),
-            new Vector2Int(+1, +1),
-            new Vector2Int(+0, +1),
-            new Vector2Int(-1, +1),
-            new Vector2Int(-1, +0),
-            new Vector2Int(-1, -1),
-            new Vector2Int(+0, -1),
-            new Vector2Int(+1, -1),
+            new(+1, +0),
+            new(+1, +1),
+            new(+0, +1),
+            new(-1, +1),
+            new(-1, +0),
+            new(-1, -1),
+            new(+0, -1),
+            new(+1, -1),
         };
 
-        private static readonly string[] texts = new string[]
+        private static readonly string[] texts =
         {
             "Right",
             "UpperRight",
@@ -35,14 +34,14 @@ namespace OchalikeSprites
             "LowerRight",
         };
 
-        public static SpriteDirection Right => new SpriteDirection(0);
-        public static SpriteDirection UpperRight => new SpriteDirection(1);
-        public static SpriteDirection Up => new SpriteDirection(2);
-        public static SpriteDirection UpperLeft => new SpriteDirection(3);
-        public static SpriteDirection Left => new SpriteDirection(4);
-        public static SpriteDirection LowerLeft => new SpriteDirection(5);
-        public static SpriteDirection Down => new SpriteDirection(6);
-        public static SpriteDirection LowerRight => new SpriteDirection(7);
+        public static SpriteDirection Right => new(0);
+        public static SpriteDirection UpperRight => new(1);
+        public static SpriteDirection Up => new(2);
+        public static SpriteDirection UpperLeft => new(3);
+        public static SpriteDirection Left => new(4);
+        public static SpriteDirection LowerLeft => new(5);
+        public static SpriteDirection Down => new(6);
+        public static SpriteDirection LowerRight => new(7);
 
         public SpriteDirection(int angle)
         {
@@ -109,9 +108,6 @@ namespace OchalikeSprites
             var index = System.Array.IndexOf(forwards, sign);
             direction = new SpriteDirection(index);
             return true;
-
-            //var degree = Mathf.Atan2(vector.y, vector.x) * Mathf.Rad2Deg;
-            //direction = FromDegree(degree);
         }
 
         /// <summary>
@@ -159,12 +155,5 @@ namespace OchalikeSprites
         {
             return direction.angle;
         }
-
-        //public static explicit operator Direction8(int angleIndex)
-        //{
-        //    if (angleIndex < 0 || 8 <= angleIndex) throw new System.ArgumentOutOfRangeException(nameof(angleIndex));
-
-        //    return new Direction8(angleIndex);
-        //}
     }
 }
