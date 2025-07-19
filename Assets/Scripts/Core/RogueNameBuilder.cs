@@ -1,7 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-
 using System.Text;
 
 namespace Roguegard
@@ -13,7 +10,7 @@ namespace Roguegard
 
         public int Bonus { get; set; }
 
-        private static readonly StringBuilder builder = new StringBuilder();
+        private static readonly StringBuilder builder = new();
 
         public void Append(string text)
         {

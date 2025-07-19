@@ -1,5 +1,3 @@
-﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Roguegard
@@ -96,7 +94,7 @@ namespace Roguegard
                 if (levelInfo != null)
                 {
                     levelInfo.LevelUp(self);
-                    if (Lv >= levelInfo.NextTotalExps.Count) { TotalExp = levelInfo.NextTotalExps[levelInfo.NextTotalExps.Count - 1]; }
+                    if (Lv >= levelInfo.NextTotalExps.Count) { TotalExp = levelInfo.NextTotalExps[^1]; }
                     else if (Lv <= 0) { TotalExp = 0; }
                     else { TotalExp = levelInfo.NextTotalExps[Lv - 1]; }
                 }
@@ -114,7 +112,7 @@ namespace Roguegard
                 if (levelInfo != null)
                 {
                     levelInfo.LevelDown(self);
-                    if (Lv >= levelInfo.NextTotalExps.Count) { TotalExp = levelInfo.NextTotalExps[levelInfo.NextTotalExps.Count - 1]; }
+                    if (Lv >= levelInfo.NextTotalExps.Count) { TotalExp = levelInfo.NextTotalExps[^1]; }
                     else if (Lv <= 0) { TotalExp = 0; }
                     else { TotalExp = levelInfo.NextTotalExps[Lv - 1]; }
                 }
@@ -208,17 +206,19 @@ namespace Roguegard
 
         internal MainStats Clone(RogueObj self, RogueObj clonedSelf)
         {
-            var clone = new MainStats();
-            clone.Hp = Hp;
-            clone.Mp = Mp;
-            clone.Nutrition = Nutrition;
-            clone.Lv = Lv;
-            clone.TotalExp = TotalExp;
-            clone.TargetObj = TargetObj == self ? clonedSelf : TargetObj;
-            clone.Direction = Direction;
-            clone.ChargedSpeed = ChargedSpeed;
-            clone.RegenerationHpPermille = RegenerationHpPermille;
-            clone.RegenerationMpPermille = RegenerationMpPermille;
+            var clone = new MainStats
+            {
+                Hp = Hp,
+                Mp = Mp,
+                Nutrition = Nutrition,
+                Lv = Lv,
+                TotalExp = TotalExp,
+                TargetObj = TargetObj == self ? clonedSelf : TargetObj,
+                Direction = Direction,
+                ChargedSpeed = ChargedSpeed,
+                RegenerationHpPermille = RegenerationHpPermille,
+                RegenerationMpPermille = RegenerationMpPermille
+            };
             return clone;
         }
 

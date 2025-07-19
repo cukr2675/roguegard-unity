@@ -1,7 +1,3 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 namespace Roguegard
 {
     /// <summary>
@@ -9,7 +5,7 @@ namespace Roguegard
     /// bool を複数持つ構造体でも良いが、エディタでの見やすさとエディタ拡張スクリプト数の増大を抑えられる点から列挙型にする。
     /// </summary>
     [System.Flags]
-    public enum MainInfoSetAbility //: byte
+    public enum MainInfoSetAbility
     {
         AsTile = 1,
         HasCollider = 2,

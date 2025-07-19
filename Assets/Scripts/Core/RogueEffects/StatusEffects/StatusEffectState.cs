@@ -1,17 +1,13 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-
-using System.Text;
 
 namespace Roguegard
 {
     public class StatusEffectState
     {
-        private readonly List<IStatusEffect> _statusEffects;
+        private readonly List<IStatusEffect> _statusEffects = new();
 
         private bool isDirty;
-        private readonly List<IStatusEffect> _statusEffectsWithHeadIcon;
+        private readonly List<IStatusEffect> _statusEffectsWithHeadIcon = new();
 
         public Spanning<IStatusEffect> StatusEffects => Spanning.Get(_statusEffects);
 
@@ -29,12 +25,6 @@ namespace Roguegard
                 }
                 return Spanning.Get(_statusEffectsWithHeadIcon);
             }
-        }
-
-        public StatusEffectState()
-        {
-            _statusEffects = new List<IStatusEffect>();
-            _statusEffectsWithHeadIcon = new List<IStatusEffect>();
         }
 
         public void AddFromInfoSet(RogueObj self, IStatusEffect statusEffect)

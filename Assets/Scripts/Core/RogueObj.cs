@@ -1,8 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using UnityEngine;
 
 namespace Roguegard
 {
@@ -46,8 +45,8 @@ namespace Roguegard
 
         private readonly Dictionary<System.Type, IRogueObjInfo> infos;
 
-        [Objforming.CreateInstance]
-        private RogueObj(bool dummy) { }
+        [Objforming.CreateInstance, SuppressMessage("Style", "IDE0051")]
+        private RogueObj(bool _) { }
 
         public RogueObj()
         {

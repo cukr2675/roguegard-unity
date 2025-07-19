@@ -1,19 +1,12 @@
-﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace Roguegard
 {
     public class RogueObjUpdaterState
     {
-        private readonly List<IRogueObjUpdater> updaters;
+        private readonly List<IRogueObjUpdater> updaters = new();
 
-        private static readonly StaticInitializable<IndexManager> indexManager = new StaticInitializable<IndexManager>(() => new IndexManager());
-
-        public RogueObjUpdaterState()
-        {
-            updaters = new List<IRogueObjUpdater>();
-        }
+        private static readonly StaticInitializable<IndexManager> indexManager = new(() => new IndexManager());
 
         public void AddFromInfoSet(RogueObj self, IRogueObjUpdater updater)
         {
@@ -98,7 +91,7 @@ namespace Roguegard
 
         private class IndexManager
         {
-            private readonly List<Item> items = new List<Item>();
+            private readonly List<Item> items = new();
 
             public bool Any => items.Count >= 1;
 
@@ -112,7 +105,7 @@ namespace Roguegard
                 }
                 else
                 {
-                    item = items[items.Count - 1];
+                    item = items[^1];
                     if (activationDepth < item.ActivationDepth)
                     {
                         throw new RogueException();
@@ -132,10 +125,10 @@ namespace Roguegard
 
             public void SetPeekIndex(int updaterIndex, int sectionIndex)
             {
-                var item = items[items.Count - 1];
+                var item = items[^1];
                 item.UpdaterIndex = updaterIndex;
                 item.SectionIndex = sectionIndex;
-                items[items.Count - 1] = item;
+                items[^1] = item;
             }
 
             public void Pop()

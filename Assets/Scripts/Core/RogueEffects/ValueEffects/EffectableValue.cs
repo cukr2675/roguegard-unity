@@ -1,6 +1,4 @@
-﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace Roguegard
 {
@@ -8,17 +6,17 @@ namespace Roguegard
     {
         public float BaseMainValue { get; set; }
         public float MainValue { get; set; }
-        public KeywordValueTable SubValues { get; } = new KeywordValueTable();
+        public KeywordValueTable SubValues { get; } = new();
 
-        private static readonly Stack<EffectableValue> stack = new Stack<EffectableValue>();
+        private static readonly Stack<EffectableValue> poolingStack = new();
 
         private EffectableValue() { }
 
         public static EffectableValue Get()
         {
-            if (stack.Count >= 1)
+            if (poolingStack.Count >= 1)
             {
-                return stack.Pop();
+                return poolingStack.Pop();
             }
             else
             {
@@ -42,7 +40,7 @@ namespace Roguegard
 
         public void Dispose()
         {
-            stack.Push(this);
+            poolingStack.Push(this);
         }
     }
 }

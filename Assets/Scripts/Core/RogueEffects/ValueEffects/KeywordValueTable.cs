@@ -1,6 +1,4 @@
-﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace Roguegard
 {
@@ -9,7 +7,7 @@ namespace Roguegard
     /// </summary>
     public class KeywordValueTable
     {
-        private readonly Dictionary<IKeyword, float> subValues = new Dictionary<IKeyword, float>();
+        private readonly Dictionary<IKeyword, float> subValues = new();
 
         public float this[IKeyword key]
         {

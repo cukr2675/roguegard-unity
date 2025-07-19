@@ -1,8 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-
-using System.Linq;
 
 namespace Roguegard
 {
@@ -56,7 +52,7 @@ namespace Roguegard
         }
 
         [Objforming.Formable]
-        private struct LearnedSkill : System.IEquatable<LearnedSkill>
+        private readonly struct LearnedSkill : System.IEquatable<LearnedSkill>
         {
             public ISkill Skill { get; }
 

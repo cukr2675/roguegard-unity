@@ -1,8 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-
-using System.Linq;
 
 namespace Roguegard
 {
@@ -14,7 +10,7 @@ namespace Roguegard
 
         public ISerializableKeyword Faction { get; set; }
 
-        private ISerializableKeyword[] _targetFactions;
+        private readonly ISerializableKeyword[] _targetFactions;
         public Spanning<ISerializableKeyword> TargetFactions => _targetFactions;
 
         [Objforming.CreateInstance]

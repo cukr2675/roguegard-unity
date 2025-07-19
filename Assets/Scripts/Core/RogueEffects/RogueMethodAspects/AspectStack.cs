@@ -1,35 +1,33 @@
-﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace Roguegard
 {
     internal class AspectStack
     {
-        private readonly List<Pair> pairs = new List<Pair>();
+        private readonly List<Pair> pairs = new();
 
         public bool ContainsItem => pairs.Count >= 1;
 
         public void GetPeek(out int index, out int id)
         {
-            var pair = pairs[pairs.Count - 1];
+            var pair = pairs[^1];
             index = pair.Index;
             id = pair.Id;
         }
 
         public void SetPeek(int index, int id)
         {
-            var pair = pairs[pairs.Count - 1];
+            var pair = pairs[^1];
             pair.Index = index;
             pair.Id = id;
-            pairs[pairs.Count - 1] = pair;
+            pairs[^1] = pair;
         }
 
         public void Push(int rank, float activationDepth)
         {
             if (pairs.Count >= 1)
             {
-                var peek = pairs[pairs.Count - 1];
+                var peek = pairs[^1];
                 if (activationDepth < peek.ActivationDepth) throw new RogueException(
                     $"{nameof(IRogueMethod)} の実行順が不正です。" +
                     $"activationDepth{peek.ActivationDepth} から activationDepth{activationDepth} を実行しました。");
@@ -66,9 +64,9 @@ namespace Roguegard
 
         private struct Pair
         {
-            public int Rank { get; }
+            public readonly int Rank { get; }
 
-            public float ActivationDepth { get; }
+            public readonly float ActivationDepth { get; }
 
             public int Index { get; set; }
 

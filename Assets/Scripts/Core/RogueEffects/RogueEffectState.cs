@@ -1,6 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Roguegard
 {
@@ -14,8 +13,8 @@ namespace Roguegard
         internal static StaticInitializable<RogueObj> openingObj = new(() => null);
         internal static StaticInitializable<bool> openingNow = new(() => false);
 
-        [Objforming.CreateInstance]
-        private RogueEffectState(bool dummy) { }
+        [Objforming.CreateInstance, SuppressMessage("Style", "IDE0051")]
+        private RogueEffectState(bool _) { }
 
         public RogueEffectState()
         {

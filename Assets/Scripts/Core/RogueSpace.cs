@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using UnityEngine;
 
 namespace Roguegard
@@ -7,44 +6,40 @@ namespace Roguegard
     [Objforming.Formable]
     public class RogueSpace : IRogueTilemapView
     {
+        private readonly RogueObjList _objs;
+
         /// <summary>
         /// 空間移動により null が含まれる可能性があるため、要素の null チェック必須。
         /// </summary>
         public Spanning<RogueObj> Objs => _objs.Span;
 
-        private RogueObjList _objs;
-
         public RogueTilemap Tilemap { get; private set; }
 
         private RogueObj[][] colliderMap;
-
-        private RogueObj[][] tileColliderMap;
+        private RogueObj[][] asTileColliderMap;
 
         private RectInt[] rooms;
-
         private RogueObjList[] roomObjs;
-
-        [System.NonSerialized] private RogueSpaceRandom _spaceRandom;
-        private RogueSpaceRandom spaceRandom => _spaceRandom ??= new RogueSpaceRandom(this);
-
         public int RoomCount => rooms?.Length ?? 0;
 
-        Vector2Int IRogueTilemapView.Size => Tilemap?.Rect.size ?? Vector2Int.zero;
+        [System.NonSerialized] private RogueSpaceRandom _spaceRandom;
+        private RogueSpaceRandom SpaceRandom => _spaceRandom ??= new RogueSpaceRandom(this);
 
+        Vector2Int IRogueTilemapView.Size => Tilemap?.Rect.size ?? Vector2Int.zero;
         Spanning<RogueObj> IRogueTilemapView.VisibleObjs => _objs.Span;
 
-        private static readonly RectInt[] empty = new RectInt[0];
-        private static readonly RogueObjList buffer = new RogueObjList();
-
+        private static readonly RectInt[] noRooms = new RectInt[0];
+        private static readonly RogueObjList[] noRoomObjs = new RogueObjList[0];
         private const bool cantViewRoomFromSide = true;
 
-        [Objforming.CreateInstance]
-        private RogueSpace(bool flag) { }
+        [Objforming.CreateInstance, SuppressMessage("Style", "IDE0051")]
+        private RogueSpace(bool _) { }
 
         internal RogueSpace()
         {
             _objs = new RogueObjList();
-            rooms = empty;
+            rooms = noRooms;
+            roomObjs = noRoomObjs;
         }
 
         internal RogueSpace(RogueSpace space)
@@ -52,6 +47,7 @@ namespace Roguegard
             _objs = new RogueObjList();
             if (space.Tilemap != null) { Tilemap = new RogueTilemap(space.Tilemap); }
             rooms = space.rooms;
+            roomObjs = new RogueObjList[space.rooms.Length];
         }
 
         public RogueObj GetColliderObj(Vector2Int position)
@@ -68,26 +64,25 @@ namespace Roguegard
 
             // colliderMap の初期化
             colliderMap = new RogueObj[tilemap.Height][];
-            tileColliderMap = new RogueObj[tilemap.Height][];
+            asTileColliderMap = new RogueObj[tilemap.Height][];
             for (int y = 0; y < tilemap.Height; y++)
             {
                 colliderMap[y] = new RogueObj[tilemap.Width];
-                tileColliderMap[y] = new RogueObj[tilemap.Width];
+                asTileColliderMap[y] = new RogueObj[tilemap.Width];
             }
 
             // colliderMap を現在のオブジェクトで設定する。
-            for (int i = 0; i < _objs.Count; i++)
+            foreach (var obj in _objs.Span)
             {
-                var obj = _objs[i];
                 if (obj == null || !obj.HasCollider) continue;
 
                 var position = obj.Position;
                 if (obj.AsTile)
                 {
-                    if (tileColliderMap[position.y][position.x] != null)
+                    if (asTileColliderMap[position.y][position.x] != null)
                         throw new RogueException("当たり判定のあるオブジェクトが重なっています。");
 
-                    tileColliderMap[position.y][position.x] = obj;
+                    asTileColliderMap[position.y][position.x] = obj;
                 }
                 else
                 {
@@ -106,13 +101,13 @@ namespace Roguegard
             for (int i = 0; i < this.rooms.Length; i++)
             {
                 var room = rooms[i];
-                if (room.width < 2 || room.height < 2) throw new System.ArgumentException("部屋のサイズは 2 以上である必要があります。");
+                if (room.width < 2 || room.height < 2) throw new System.ArgumentException("部屋のサイズは 2x2 以上である必要があります。");
 
                 this.rooms[i] = room;
                 roomObjs[i] = new RogueObjList();
             }
 
-            spaceRandom.Reset(this);
+            SpaceRandom.Reset(this);
         }
 
         /// <summary>
@@ -131,7 +126,6 @@ namespace Roguegard
         /// </summary>
         public bool TryGetRoomView(Vector2Int position, out RectInt room, out Spanning<RogueObj> roomObjs)
         {
-            room = new RectInt();
             for (int i = 0; i < rooms.Length; i++)
             {
                 var rect = rooms[i];
@@ -142,14 +136,13 @@ namespace Roguegard
                 roomObjs = this.roomObjs[i].Span;
                 return true;
             }
+            room = default;
             roomObjs = default;
             return false;
         }
 
         private void UpdateRoom(RogueObj obj, Vector2Int position)
         {
-            if (rooms == null) return;
-
             var yet = true; // 一つのオブジェクトは一つの部屋のみに属する。
             for (int i = 0; i < rooms.Length; i++)
             {
@@ -169,14 +162,14 @@ namespace Roguegard
         {
             if (Tilemap == null) throw new RogueException($"{Tilemap} の設定されていない空間からランダム位置を取得することはできません。");
 
-            return spaceRandom.TryGetRandomPositionInRoom(this, random, out position);
+            return SpaceRandom.TryGetRandomPositionInRoom(this, random, out position);
         }
 
         public bool TryGetRandomPositionInRoom(IRogueRandom random, int roomIndex, out Vector2Int position)
         {
             if (Tilemap == null) throw new RogueException($"{Tilemap} の設定されていない空間からランダム位置を取得することはできません。");
 
-            return spaceRandom.GetRandomPositionInRoom(this, random, roomIndex, out position);
+            return SpaceRandom.GetRandomPositionInRoom(this, random, roomIndex, out position);
         }
 
         public bool CollideAt(Vector2Int position, bool collide = true, bool tileCollide = true)
@@ -186,18 +179,22 @@ namespace Roguegard
 
             if (!Tilemap.Rect.Contains(position))
             {
+                // タイルマップ範囲外と衝突
                 return true;
             }
             else if (collide && colliderMap[position.y][position.x] != null)
             {
+                // オブジェクト同士の衝突
                 return true;
             }
-            else if (tileCollide && (tileColliderMap[position.y][position.x] != null || Tilemap.GetTop(position).Info.HasCollider))
+            else if (tileCollide && (asTileColliderMap[position.y][position.x] != null || Tilemap.GetTop(position).Info.HasCollider))
             {
+                // タイルオブジェクトまたはタイルと衝突
                 return true;
             }
             else
             {
+                // 衝突なし
                 return false;
             }
         }
@@ -225,22 +222,22 @@ namespace Roguegard
                     var oldPosition = obj.Position;
                     if (obj.AsTile)
                     {
-                        tileColliderMap[oldPosition.y][oldPosition.x] = null;
+                        asTileColliderMap[oldPosition.y][oldPosition.x] = null;
                     }
                     else
                     {
                         colliderMap[oldPosition.y][oldPosition.x] = null;
                     }
-                    spaceRandom.AddRandomPosition(this, oldPosition);
+                    SpaceRandom.AddRandomPosition(this, oldPosition);
                 }
             }
 
             if (collide && Tilemap != null)
             {
-                spaceRandom.RemoveRandomPosition(this, position);
+                SpaceRandom.RemoveRandomPosition(this, position);
                 if (asTile)
                 {
-                    tileColliderMap[position.y][position.x] = obj;
+                    asTileColliderMap[position.y][position.x] = obj;
                 }
                 else
                 {
@@ -268,23 +265,27 @@ namespace Roguegard
                 var oldPosition = obj.Position;
                 if (obj.AsTile)
                 {
-                    tileColliderMap[oldPosition.y][oldPosition.x] = null;
+                    asTileColliderMap[oldPosition.y][oldPosition.x] = null;
                 }
                 else
                 {
                     colliderMap[oldPosition.y][oldPosition.x] = null;
                 }
-                spaceRandom.AddRandomPosition(this, oldPosition);
+                SpaceRandom.AddRandomPosition(this, oldPosition);
             }
 
-            if (rooms == null) return;
-
-            for (int i = 0; i < rooms.Length; i++)
+            if (roomObjs == null)
             {
-                var roomObjIndex = roomObjs[i].IndexOf(obj);
+                rooms = noRooms;
+                roomObjs = noRoomObjs;
+            }
+
+            foreach (var objs in roomObjs)
+            {
+                var roomObjIndex = objs.IndexOf(obj);
                 if (roomObjIndex == -1) continue;
 
-                roomObjs[i][roomObjIndex] = null;
+                objs[roomObjIndex] = null;
             }
         }
 
@@ -295,14 +296,17 @@ namespace Roguegard
                 if (_objs[i] == null) _objs.RemoveAt(i);
             }
 
-            if (roomObjs == null) return;
-
-            for (int i = 0; i < roomObjs.Length; i++)
+            if (roomObjs == null)
             {
-                var objs = roomObjs[i];
-                for (int j = objs.Count - 1; j >= 0; j--)
+                rooms = noRooms;
+                roomObjs = noRoomObjs;
+            }
+
+            foreach (var objs in roomObjs)
+            {
+                for (int i = objs.Count - 1; i >= 0; i--)
                 {
-                    if (objs[j] == null) objs.RemoveAt(j);
+                    if (objs[i] == null) objs.RemoveAt(i);
                 }
             }
         }
@@ -317,36 +321,43 @@ namespace Roguegard
             return _objs.Stack(obj, position, maxStack);
         }
 
+        /// <summary>
+        /// 指定位置+レイヤーのタイル設定可否を取得する。タイル同士の衝突に <see cref="IRogueTileInfo.HasCollider"/> は影響しないので注意。
+        /// </summary>
+        /// <param name="overwrite">true のとき指定位置+レイヤーにタイルが存在しても衝突しない</param>
+        /// <param name="bury">true のとき指定位置+レイヤーが埋まっていても、上層のタイルやオブジェクトと衝突しない</param>
         public bool TileCollideAt(Vector2Int position, RogueTileLayer layer, bool collide, bool overwrite = false, bool bury = false)
         {
-            // タイル範囲外に衝突したら移動失敗
+            // タイルマップ範囲外に衝突
             if (Tilemap == null || CollideAt(position, false, false)) return true;
 
             // すでに敷かれているタイルを上書きしない
-            if (!overwrite && Tilemap.Get(position, layer) != null) return true;
+            if (!overwrite && Tilemap.Get(position, layer) != null) return true; // 指定位置+レイヤーの既存タイルと衝突
 
             // すでに敷かれているタイルの下に潜り込ませない
             if (!bury)
             {
                 var topTile = Tilemap.GetTop(position);
-                if (topTile.Info.Layer > layer) return true;
+                if (topTile.Info.Layer > layer) return true; // 指定位置+レイヤーが埋まっているため上層のタイルと衝突
 
-                for (int i = 0; i < _objs.Count; i++)
+                foreach (var obj in _objs.Span)
                 {
-                    var obj = _objs[i];
                     if (obj == null || obj.Position != position) continue;
 
-                    // AsTile == true のオブジェクトの下に潜り込ませない
-                    if (obj.AsTile) return true;
+                    if (obj.AsTile) return true; // 指定位置が埋まっているため上層のタイルオブジェクトと衝突
 
-                    // オブジェクトを壁タイルに埋めない
-                    if (obj.HasTileCollider && collide) return true;
+                    if (obj.HasTileCollider && collide) return true; // 指定位置がオブジェクトに乗られているため衝突
+                    // 設計メモ: bury = true で壁タイルの下に埋められるならオブジェクトが重なっている壁タイルの下にも埋められるべきなので、
+                    // オブジェクト衝突は bury の影響を受ける
+                    // ゲーム表示上ではオブジェクトが壁タイルに埋まっているとする場合でも、内部処理的には上からObj→BuildingTile→GroundTileとしたほうがスムーズ
                 }
             }
 
             return false;
         }
 
+        /// <param name="overwrite">true のとき指定位置+レイヤーにタイルが存在しても衝突しない</param>
+        /// <param name="bury">true のとき指定位置+レイヤーが埋まっていても、上層のタイルやオブジェクトと衝突しない</param>
         public bool TrySet(IRogueTile tile, Vector2Int position, bool overwrite = false, bool bury = false)
         {
             if (tile == null) throw new System.ArgumentNullException(nameof(tile));
@@ -355,14 +366,14 @@ namespace Roguegard
             //var topTile = Tilemap.GetTop(position);
             //if (tile.Info.HasCollider || tile.Info.Layer != RogueTileLayer.Ground)
             //{
-            //    spaceRandom.RemoveRandomPosition(this, position);
+            //    SpaceRandom.RemoveRandomPosition(this, position);
             //}
             Tilemap.Set(tile, position);
             //if (topTile.Info.HasCollider || topTile.Info.Layer != RogueTileLayer.Ground)
             //{
-            //    spaceRandom.AddRandomPosition(this, position);
+            //    SpaceRandom.AddRandomPosition(this, position);
             //}
-            spaceRandom.Reset(this);
+            SpaceRandom.Reset(this);
             return true;
         }
 
@@ -374,9 +385,9 @@ namespace Roguegard
             Tilemap.Remove(position, layer);
             //if (topTile.Info.HasCollider || topTile.Info.Layer != RogueTileLayer.Ground)
             //{
-            //    spaceRandom.AddRandomPosition(this, position);
+            //    SpaceRandom.AddRandomPosition(this, position);
             //}
-            spaceRandom.Reset(this);
+            SpaceRandom.Reset(this);
             return true;
         }
 
@@ -399,7 +410,7 @@ namespace Roguegard
             visible = true;
             groundTile = Tilemap.Get(position, RogueTileLayer.Ground);
             buildingTile = Tilemap.Get(position, RogueTileLayer.Building);
-            tileObj = tileColliderMap[position.y][position.x];
+            tileObj = asTileColliderMap[position.y][position.x];
 
             // 当たり判定のないタイルのオブジェクトを取得する（階段など）
             for (int i = 0; i < _objs.Count; i++)

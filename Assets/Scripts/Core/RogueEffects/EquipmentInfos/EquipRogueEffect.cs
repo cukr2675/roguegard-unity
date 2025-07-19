@@ -1,7 +1,3 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 namespace Roguegard
 {
     /// <summary>
@@ -59,8 +55,7 @@ namespace Roguegard
 
         IRogueEffect IRogueEffect.DeepOrShallowCopy(RogueObj owner, RogueObj clonedOwner)
         {
-            var clone = new EquipRogueEffect(equipment);
-            clone.Index = Index;
+            var clone = new EquipRogueEffect(equipment) { Index = Index };
             return clone;
         }
 

@@ -1,4 +1,3 @@
-﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,7 +7,7 @@ namespace Roguegard
     {
         private readonly List<IValueEffect> effects;
 
-        private static readonly StaticInitializable<bool> recursion = new StaticInitializable<bool>(() => false);
+        private static readonly StaticInitializable<bool> recursion = new(() => false);
 
         public ValueEffectState()
         {

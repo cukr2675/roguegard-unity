@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using UnityEngine;
 
 namespace Roguegard
@@ -67,10 +66,10 @@ namespace Roguegard
         [System.NonSerialized] private BoneSpriteEffectState boneSpriteEffectState;
         [System.NonSerialized] private SpriteMotionEffectState spriteMotionEffectState;
 
-        private static readonly StaticInitializable<bool> recursion = new StaticInitializable<bool>(() => false);
+        private static readonly StaticInitializable<bool> recursion = new(() => false);
 
-        [Objforming.CreateInstance]
-        private MainRogueObjInfo(bool dummy)
+        [Objforming.CreateInstance, SuppressMessage("Style", "IDE0051")]
+        private MainRogueObjInfo(bool _)
         {
             Sprite = new MainSpriteInfo();
             Calculators = new RogueCalculatorInfo();

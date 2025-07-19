@@ -1,20 +1,11 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace Roguegard
 {
     public class BoneSpriteEffectState
     {
-        private readonly List<IBoneSpriteEffect> effects;
-
-        private bool isDirty;
-
-        public BoneSpriteEffectState()
-        {
-            effects = new List<IBoneSpriteEffect>();
-            isDirty = true;
-        }
+        private readonly List<IBoneSpriteEffect> effects = new();
+        private bool isDirty = true;
 
         public void AddFromInfoSet(RogueObj self, IBoneSpriteEffect effect)
         {

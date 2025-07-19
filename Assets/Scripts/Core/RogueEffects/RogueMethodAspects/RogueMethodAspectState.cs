@@ -1,28 +1,19 @@
-﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace Roguegard
 {
     public class RogueMethodAspectState
     {
-        private readonly List<ActiveItem> actives;
-        private readonly List<PassiveItem> passives;
+        private readonly List<ActiveItem> actives = new();
+        private readonly List<PassiveItem> passives = new();
 
-        private int nextId;
+        private int nextId = 0;
 
-        private static readonly StaticInitializable<AspectStack> stack = new StaticInitializable<AspectStack>(() => new AspectStack());
+        private static readonly StaticInitializable<AspectStack> stack = new(() => new AspectStack());
 
         public static bool ActivatingNow => stack.Value.ContainsItem;
 
         public static IRogueMethodAspectLogger Logger { get; set; }
-
-        public RogueMethodAspectState()
-        {
-            actives = new List<ActiveItem>();
-            passives = new List<PassiveItem>();
-            nextId = 0;
-        }
 
         public void AddActiveFromInfoSet(RogueObj self, IRogueMethodActiveAspect aspect)
         {
@@ -344,7 +335,7 @@ namespace Roguegard
             }
         }
 
-        public ref struct ActiveChain
+        public readonly ref struct ActiveChain
         {
             private readonly RogueMethodAspectState state;
             internal ActiveChain(RogueMethodAspectState state) { this.state = state; }
@@ -353,7 +344,7 @@ namespace Roguegard
                 => state.ActiveInvoke(keyword, method, self, target, activationDepth, arg);
         }
 
-        public ref struct PassiveChain
+        public readonly ref struct PassiveChain
         {
             private readonly RogueMethodAspectState state;
             internal PassiveChain(RogueMethodAspectState state) { this.state = state; }

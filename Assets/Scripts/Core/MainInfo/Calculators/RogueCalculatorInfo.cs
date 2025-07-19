@@ -1,15 +1,13 @@
-﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace Roguegard
 {
     public class RogueCalculatorInfo
     {
-        private readonly Item<SpeedCalculator> speedItem = new Item<SpeedCalculator>(new SpeedCalculator());
-        private readonly Item<MovementCalculator> movementItem = new Item<MovementCalculator>(new MovementCalculator());
-        private readonly Item<WeightCalculator> weightItem = new Item<WeightCalculator>(new WeightCalculator());
-        private readonly Dictionary<IRogueCalculatorSource, Item> items = new Dictionary<IRogueCalculatorSource, Item>();
+        private readonly Item<SpeedCalculator> speedItem = new(new SpeedCalculator());
+        private readonly Item<MovementCalculator> movementItem = new(new MovementCalculator());
+        private readonly Item<WeightCalculator> weightItem = new(new WeightCalculator());
+        private readonly Dictionary<IRogueCalculatorSource, Item> items = new();
 
         internal SpeedCalculator GetSpeed(RogueObj self) => speedItem.Get(self);
         internal void SetDirtyOfSpeed() => speedItem.SetDirty();

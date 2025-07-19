@@ -1,5 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using UnityEngine;
 
 namespace Roguegard
@@ -19,8 +19,8 @@ namespace Roguegard
 
         public Spanning<RogueObj> Span => Spanning.Get(objs);
 
-        [Objforming.CreateInstance]
-        private RogueObjList(bool dummy) { }
+        [Objforming.CreateInstance, SuppressMessage("Style", "IDE0051")]
+        private RogueObjList(bool _) { }
 
         public RogueObjList()
         {

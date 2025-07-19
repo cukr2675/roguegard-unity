@@ -1,10 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Roguegard
 {
-    [CreateAssetMenu(menuName = "RoguegardData/Keyword/Default")]
+    [CreateAssetMenu(menuName = "Roguegard/Keyword/Default")]
     public class KeywordData : RogueDescriptionData, IKeyword
     {
     }

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Roguegard
@@ -13,7 +11,7 @@ namespace Roguegard
 
         public int Height => tilemap.Length;
 
-        public RectInt Rect => new RectInt(0, 0, Width, Height);
+        public RectInt Rect => new(0, 0, Width, Height);
 
         private const int depth = 2;
 

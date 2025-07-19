@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -48,7 +48,6 @@ namespace Roguegard.Editor
 
             writer.Write(
 $@"using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace {_namespaceName}

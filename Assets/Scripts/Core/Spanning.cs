@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -39,15 +38,12 @@ namespace Roguegard
 
         private Spanning(T[] array)
         {
-            if (array == null) throw new System.ArgumentNullException(nameof(array));
-
             _list = array;
             _count = array.Length;
         }
 
         private Spanning(IReadOnlyList<T> list)
         {
-            if (list == null) throw new System.ArgumentNullException(nameof(list));
 #if UNITY_EDITOR
             var type = list.GetType();
             if (!type.IsGenericType || type.GetGenericTypeDefinition() != typeof(List<>)) throw new System.ArgumentException(
@@ -68,8 +64,8 @@ namespace Roguegard
             return result;
         }
 
-        internal static Spanning<T> Get(IReadOnlyList<T> list) => new(list);
-        public static implicit operator Spanning<T>(T[] array) => new(array);
+        internal static Spanning<T> Get(IReadOnlyList<T> list) => list != null ? new(list) : Empty;
+        public static implicit operator Spanning<T>(T[] array) => array != null ? new(array) : Empty;
         public static implicit operator System.ReadOnlySpan<T>(Spanning<T> spanning) => new(spanning.ToArray(), 0, spanning._count);
         public Enumerator GetEnumerator() => new(_list, _count);
 
@@ -79,7 +75,7 @@ namespace Roguegard
             private readonly int count;
             private int index;
 
-            public T Current => list[index];
+            public readonly T Current => list[index];
 
             public Enumerator(IReadOnlyList<T> list, int count)
             {
@@ -112,15 +108,12 @@ namespace Roguegard
 
     //        private Spanning(T[] array)
     //        {
-    //            if (array == null) throw new System.ArgumentNullException(nameof(array));
-
     //            _array = array;
     //            _count = array.Length;
     //        }
 
     //        private Spanning(IReadOnlyList<T> list)
     //        {
-    //            if (list == null) throw new System.ArgumentNullException(nameof(list));
     //#if UNITY_EDITOR
     //            var type = list.GetType();
     //            if (!type.IsGenericType || type.GetGenericTypeDefinition() != typeof(List<>)) throw new System.ArgumentException(
@@ -141,8 +134,8 @@ namespace Roguegard
     //            return result;
     //        }
 
-    //        internal static Spanning<T> Get(IReadOnlyList<T> list) => new(list);
-    //        public static implicit operator Spanning<T>(T[] array) => new(array);
+    //        internal static Spanning<T> Get(IReadOnlyList<T> list) => list != null ? new(list) : Empty;
+    //        public static implicit operator Spanning<T>(T[] array) => array != null ? new(array) : Empty;
     //        public static implicit operator System.ReadOnlySpan<T>(Spanning<T> spanning) => new(spanning._array, 0, spanning._count);
     //        public Enumerator GetEnumerator() => new(_array, _count);
 
@@ -152,7 +145,7 @@ namespace Roguegard
     //            private readonly int count;
     //            private int index;
 
-    //            public T Current => array[index];
+    //            public readonly T Current => array[index];
 
     //            public Enumerator(T[] array, int count)
     //            {

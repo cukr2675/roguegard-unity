@@ -1,7 +1,3 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 namespace Roguegard
 {
     public class StaticInitializable<T>
@@ -36,10 +32,5 @@ namespace Roguegard
             _value = default;
             staticId = default;
         }
-
-        //public static implicit operator T(StaticInitializable<T> value)
-        //{
-        //    return value.Value;
-        //}
     }
 }

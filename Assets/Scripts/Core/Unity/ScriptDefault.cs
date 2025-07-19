@@ -1,14 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
+using System.Collections;
 using System.Reflection;
+using UnityEngine;
 
 namespace Roguegard.CharacterCreation
 {
     /// <summary>
     /// <see cref="ReferableScript"/> の初期値に相当する値を設定するクラス。
-    /// これを使用する場合 IL2CPP Code Generation が Faster (smaller) builds に制限されてしまう
     /// </summary>
     internal class ScriptDefault<T>
     {

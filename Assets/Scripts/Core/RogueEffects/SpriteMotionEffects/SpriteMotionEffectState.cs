@@ -1,23 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 using OchalikeSprites;
+using System.Collections.Generic;
 
 namespace Roguegard
 {
     public class SpriteMotionEffectState
     {
-        private readonly List<ISpriteMotionEffect> bufferEffects;
-        private readonly List<ISpriteMotionEffect> showEffects;
-        private bool showEffectsIsDirty;
+        private readonly List<ISpriteMotionEffect> bufferEffects = new();
+        private readonly List<ISpriteMotionEffect> showEffects = new();
 
-        public SpriteMotionEffectState()
-        {
-            bufferEffects = new List<ISpriteMotionEffect>();
-            showEffects = new List<ISpriteMotionEffect>();
-            showEffectsIsDirty = true;
-        }
+        private bool showEffectsIsDirty = true;
 
         public void AddFromInfoSet(RogueObj self, ISpriteMotionEffect effect)
         {
