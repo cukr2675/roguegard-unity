@@ -63,7 +63,7 @@ namespace OchalikeSprites
             }
             else
             {
-                endOfMotion = false;
+                endOfMotion = index >= oneLoopWait - 1;
             }
         }
 
