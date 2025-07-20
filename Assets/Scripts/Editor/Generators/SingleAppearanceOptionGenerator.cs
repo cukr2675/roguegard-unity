@@ -1,13 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 using OchalikeSprites;
 using Roguegard.Editor;
+using UnityEngine;
 
 namespace Roguegard.CharacterCreation.Editor
 {
-    [CreateAssetMenu(menuName = "RoguegardData/CharacterCreation/Appearance/SingleGenerator")]
+    [CreateAssetMenu(menuName = "Roguegard/Character Creation/Appearance/Single Generator")]
     public class SingleAppearanceOptionGenerator : ScriptableObjectGenerator<SingleAppearanceOption>
     {
         [SerializeField] private string _descriptionNameFormat = null;

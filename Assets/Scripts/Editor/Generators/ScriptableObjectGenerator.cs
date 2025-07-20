@@ -1,10 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
+using Lysionium.Editor;
 using System.IO;
 using UnityEditor;
-using Lysionium.Editor;
+using UnityEngine;
 
 namespace Roguegard.Editor
 {
@@ -32,7 +29,7 @@ namespace Roguegard.Editor
                 if (targetPath == thisPath) throw new RogueException("生成によるジェネレータアセットの上書きは禁止です。");
 
                 var target = AssetDatabase.LoadAssetAtPath<T>(targetPath);
-                if (target == null) { target = CreateInstance<T>(); }
+                if (!target) { target = CreateInstance<T>(); }
                 var result = TrySetObject(target, i);
                 if (!result) break;
 

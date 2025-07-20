@@ -1,19 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
+using Lysionium.Editor;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using UnityEditor;
-using Lysionium.Editor;
+using UnityEngine;
 
 namespace Roguegard.Editor
 {
     // >生成コードがこのクラスを継承することで一つの ScriptableObject で済ませられる？
     // 「t:ScriptableGenerator」または「t:ScriptableLoader」のどちらかが検索できなくなるので微妙
 
-    [CreateAssetMenu(menuName = "RoguegardData/Editor/ConstantGenerator")]
+    [CreateAssetMenu(menuName = "Roguegard/Editor/Asset Constant Generator")]
     public class AssetConstantGenerator : ScriptableGenerator
     {
         [SerializeField] private string _namespaceName = null;

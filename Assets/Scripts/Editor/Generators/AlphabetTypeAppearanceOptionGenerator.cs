@@ -1,13 +1,11 @@
-﻿using System.Collections;
+using OchalikeSprites;
+using Roguegard.Editor;
 using System.Collections.Generic;
 using UnityEngine;
 
-using OchalikeSprites;
-using Roguegard.Editor;
-
 namespace Roguegard.CharacterCreation.Editor
 {
-    [CreateAssetMenu(menuName = "RoguegardData/CharacterCreation/Appearance/AlphabetGenerator")]
+    [CreateAssetMenu(menuName = "Roguegard/Character Creation/Appearance/Alphabet Generator")]
     public class AlphabetTypeAppearanceOptionGenerator : ScriptableObjectGenerator<AlphabetTypeAppearanceOption>
     {
         [SerializeField] private string _descriptionNameFormat = null;

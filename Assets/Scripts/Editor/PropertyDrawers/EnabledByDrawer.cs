@@ -1,8 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 using UnityEditor;
+using UnityEngine;
 
 namespace Roguegard.Editor
 {
@@ -13,7 +10,7 @@ namespace Roguegard.Editor
         {
             var attribute = (EnabledByAttribute)this.attribute;
             var path = property.propertyPath;
-            path = path.Substring(0, path.LastIndexOf('.') + 1);
+            path = path[..(path.LastIndexOf('.') + 1)];
             var booleanPath = path + attribute.BooleanName;
             var boolean = property.serializedObject.FindProperty(booleanPath);
             var disabled = !boolean.boolValue;

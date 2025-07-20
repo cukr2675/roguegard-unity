@@ -1,16 +1,14 @@
-﻿using System.Collections;
+using Lysionium.Editor;
 using System.Collections.Generic;
-using UnityEngine;
-
-using System.Linq;
 using System.IO;
+using System.Linq;
 using UnityEditor;
 using UnityEditor.U2D.Sprites;
-using Lysionium.Editor;
+using UnityEngine;
 
 namespace Roguegard.Editor
 {
-    [CreateAssetMenu(menuName = "RoguegardData/Editor/Slice20RuleTileGenerator")]
+    [CreateAssetMenu(menuName = "Roguegard/Editor/Slice 20 Rule Tile Generator")]
     public class Slice20RuleTileGenerator : ScriptableGenerator
     {
         [SerializeField] private Texture2D _source = null;
@@ -330,8 +328,10 @@ namespace Roguegard.Editor
             }
 
             // スライスしたスプライトをテクスチャへ書き込む
-            var texture = new Texture2D(tileSize.x * 12, tileSize.y * 4, TextureFormat.RGBA32, false);
-            texture.filterMode = FilterMode.Point;
+            var texture = new Texture2D(tileSize.x * 12, tileSize.y * 4, TextureFormat.RGBA32, false)
+            {
+                filterMode = FilterMode.Point
+            };
             foreach (var slicer in slicers)
             {
                 slicer.SetPixelsTo(texture, sprites, tileSize, tileCenter);
@@ -402,7 +402,7 @@ namespace Roguegard.Editor
                 var y = Y * tileSize.y;
                 texture.SetPixels32(x, y, tileSize.x, tileSize.y, pixels, 0);
 
-                RectInt MinMaxRect(int xmin, int ymin, int xmax, int ymax) => new RectInt(xmin, ymin, xmax - xmin, ymax - ymin);
+                static RectInt MinMaxRect(int xmin, int ymin, int xmax, int ymax) => new(xmin, ymin, xmax - xmin, ymax - ymin);
             }
 
             private static void GetPixelsNonAlloc(Sprite sprite, Color32[] pixels, Vector2Int tileSize, RectInt indexRect)
@@ -420,8 +420,7 @@ namespace Roguegard.Editor
 
             public SpriteRect GetSpriteRect(string name, Vector2Int tileSize)
             {
-                var spriteRect = new SpriteRect();
-                spriteRect.name = $"{name}_{Index}";
+                var spriteRect = new SpriteRect { name = $"{name}_{Index}" };
                 var position = new Vector2Int(X, Y) * tileSize;
                 spriteRect.rect = new Rect(position, tileSize);
                 spriteRect.alignment = SpriteAlignment.Center;
@@ -431,8 +430,10 @@ namespace Roguegard.Editor
             public RuleTile.TilingRule GetTilingRule(string name)
             {
                 var sprite = RoguegardAssetDatabase.GetSprite($"{name}_{Index}");
-                var tilingRule = new RuleTile.TilingRule();
-                tilingRule.m_Sprites = new[] { sprite };
+                var tilingRule = new RuleTile.TilingRule
+                {
+                    m_Sprites = new[] { sprite }
+                };
                 tilingRule.ApplyNeighbors(Neighbors);
                 return tilingRule;
             }

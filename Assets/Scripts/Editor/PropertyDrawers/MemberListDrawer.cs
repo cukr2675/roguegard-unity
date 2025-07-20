@@ -1,10 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-using UnityEditor;
 using Roguegard;
 using Roguegard.CharacterCreation;
+using System.Collections.Generic;
+using UnityEditor;
+using UnityEngine;
 
 namespace RoguegardUnity
 {
@@ -13,7 +11,7 @@ namespace RoguegardUnity
     {
         private readonly bool showAsInlineProperties = true;
 
-        private static readonly List<IMember> membersBuffer = new List<IMember>();
+        private static readonly List<IMember> membersBuffer = new();
 
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
@@ -64,7 +62,7 @@ namespace RoguegardUnity
             {
                 var path = property.propertyPath;
                 var length = path.LastIndexOf('.');
-                var parentPath = path.Substring(0, length);
+                var parentPath = path[..length];
                 var parent = property.serializedObject.FindProperty(parentPath);
 
                 var _option = parent.FindPropertyRelative("_option");

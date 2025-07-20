@@ -1,12 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-using UnityEditor;
 using OchalikeSprites;
-using System.Linq;
-using RoguegardUnity;
 using OchalikeSprites.Editor;
+using RoguegardUnity;
+using System.Linq;
+using UnityEditor;
+using UnityEngine;
 
 namespace Roguegard.CharacterCreation.Editor
 {
@@ -41,8 +38,8 @@ namespace Roguegard.CharacterCreation.Editor
         {
             if (RoguegardSettings.DefaultRaceOption == null)
             {
-                var settingsGuid = AssetDatabase.FindAssets($"t:{nameof(RoguegardSettingsData)}").FirstOrDefault();
-                if (settingsGuid == null) throw new System.InvalidOperationException($"{nameof(RoguegardSettingsData)} が見つかりません。");
+                var settingsGuid = AssetDatabase.FindAssets($"t:{nameof(RoguegardSettingsData)}").FirstOrDefault()
+                    ?? throw new System.InvalidOperationException($"{nameof(RoguegardSettingsData)} が見つかりません。");
 
                 var settingsPath = AssetDatabase.GUIDToAssetPath(settingsGuid);
                 var settings = AssetDatabase.LoadAssetAtPath<RoguegardSettingsData>(settingsPath);
@@ -77,10 +74,12 @@ namespace Roguegard.CharacterCreation.Editor
                 },
                 step4Render: (preview, _, _, spriteTransform, defaultColor) =>
                 {
-                    var renderController = new OchalikeTextureRenderController();
-                    renderController.Position = spriteTransform.Position;
-                    renderController.Rotation = spriteTransform.Rotation;
-                    renderController.Scale = spriteTransform.Scale;
+                    var renderController = new OchalikeTextureRenderController
+                    {
+                        Position = spriteTransform.Position,
+                        Rotation = spriteTransform.Rotation,
+                        Scale = spriteTransform.Scale
+                    };
                     obj.Main.Sprite.SetTo(renderController, spriteTransform.PoseSource.GetSpritePose(spriteTransform.Direction), spriteTransform.Direction);
                     renderController.RenderTo(preview);
                 });

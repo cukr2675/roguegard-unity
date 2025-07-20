@@ -1,13 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 using System.Linq;
-using System.IO;
-using System.Text.RegularExpressions;
 using System.Reflection;
+using System.Text.RegularExpressions;
 using UnityEditor;
-using UnityEditorInternal;
+using UnityEngine;
 
 namespace Roguegard.Editor
 {
@@ -46,7 +41,7 @@ namespace Roguegard.Editor
             {
                 var typeName = _ref.managedReferenceFieldTypename;
                 var lastIndex = typeName.LastIndexOf('.');
-                typeName = typeName.Substring(lastIndex + 1);
+                typeName = typeName[(lastIndex + 1)..];
                 if (script.objectReferenceValue != null)
                 {
                     FieldAsset.name = $"Missing ({typeName})";
@@ -118,10 +113,10 @@ namespace Roguegard.Editor
 
             // C# ファイルからそこで定義されている型を取得する。
             var match = Regex.Match(script.text, @"namespace [a-z_A-Z]\w*(\.[a-z_A-Z]\w*)*");
-            var namespaceName = match.Value.Substring("namespace ".Length);
+            var namespaceName = match.Value["namespace ".Length..];
             var scriptPath = AssetDatabase.GetAssetPath(script);
-            var assemblyName = RoguegardAssetDatabase.GetAssemblyName(scriptPath);
-            if (assemblyName == null) throw new System.NotSupportedException("Assembly Definition に含まれていないスクリプトは非対応です。");
+            var assemblyName = RoguegardAssetDatabase.GetAssemblyName(scriptPath)
+                ?? throw new System.NotSupportedException("Assembly Definition に含まれていないスクリプトは非対応です。");
 
             var name = $"{namespaceName}.{script.name}, {assemblyName}";
             var type = System.Type.GetType(name);

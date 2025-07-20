@@ -1,17 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-using System.IO;
-using System.Text;
-using UnityEngine.Audio;
-using UnityEditor;
 using Lysionium.Audio;
 using Lysionium.Audio.Editor;
+using System.IO;
+using System.Text;
+using UnityEditor;
+using UnityEngine;
+using UnityEngine.Audio;
 
 namespace Roguegard.Editor
 {
-    [CreateAssetMenu(menuName = "RoguegardData/Settings/RogueAudioPlaySeed")]
+    [CreateAssetMenu(menuName = "Roguegard/Settings/Rogue Audio Play Seed")]
     public class RogueAudioPlaySeed : AudioPlaySeed
     {
         [SerializeField] private AudioMixerGroup _audioMixerGroup = null;
@@ -40,12 +37,13 @@ namespace Roguegard.Editor
                 AssetDatabase.ImportAsset(targetPath);
 
                 // 実際に使用する AudioClip を取得
-                var resultItem = new AudioPlayTable.Item();
-                resultItem.PlayName = item.PlayName;
-                resultItem.AudioClip = AssetDatabase.LoadAssetAtPath<AudioClip>(targetPath);
-                resultItem.AudioMixerGroup = _audioMixerGroup;
-                resultItem.PlayBehaviour = _playBehaviour;
-                result[i] = resultItem;
+                result[i] = new AudioPlayTable.Item
+                {
+                    PlayName = item.PlayName,
+                    AudioClip = AssetDatabase.LoadAssetAtPath<AudioClip>(targetPath),
+                    AudioMixerGroup = _audioMixerGroup,
+                    PlayBehaviour = _playBehaviour
+                };
             }
             return result;
         }

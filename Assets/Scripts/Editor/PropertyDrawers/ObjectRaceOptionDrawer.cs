@@ -1,12 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
+using Roguegard;
+using Roguegard.CharacterCreation;
 using System.Linq;
 using System.Reflection;
 using UnityEditor;
-using Roguegard;
-using Roguegard.CharacterCreation;
+using UnityEngine;
 
 namespace RoguegardUnity
 {
