@@ -1,7 +1,3 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 namespace OchalikeSprites
 {
     // 命名メモ: OchalikeSprite や OchalikeMorph ほどの独自性がないうえ、振付けの杖などで表出頻度が高いので OchalikeMotion ではなく SpriteMotion

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace OchalikeSprites
@@ -11,7 +9,7 @@ namespace OchalikeSprites
 
 #if UNITY_EDITOR
         [Header("Editor Only")]
-        [SerializeField] private OchalikeSpriteData _previewOchalikeSprite = null;
+        [SerializeField] internal OchalikeSpriteData _previewOchalikeSprite = null; // PropertyDrawer で使用
 #endif
 
         public void AddTo(OchalikeMorph ochalikeMorph)

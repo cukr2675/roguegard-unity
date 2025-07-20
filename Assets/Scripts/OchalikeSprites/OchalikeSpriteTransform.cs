@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace OchalikeSprites
@@ -12,7 +10,7 @@ namespace OchalikeSprites
         private IDirectionalSpritePoseSource _poseSource;
         public IDirectionalSpritePoseSource PoseSource
         {
-            get => _poseSource ?? DefaultSpritePoseSource.Instance;
+            readonly get => _poseSource ?? DefaultSpritePoseSource.Instance;
             set
             {
                 if (value == null && !poseSourceNullWarned)
@@ -31,11 +29,11 @@ namespace OchalikeSprites
         /// </summary>
         public string Play { get; set; }
 
-        public static OchalikeSpriteTransform Identity => new OchalikeSpriteTransform(false);
+        public static OchalikeSpriteTransform Identity => new(false);
 
         private static bool poseSourceNullWarned = false;
 
-        private OchalikeSpriteTransform(bool flag)
+        private OchalikeSpriteTransform(bool _)
         {
             Position = Vector3.zero;
             Rotation = Quaternion.identity;

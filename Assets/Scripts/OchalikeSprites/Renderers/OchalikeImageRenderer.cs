@@ -1,7 +1,5 @@
-﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 using UnityEngine.UI;
 
 namespace OchalikeSprites
@@ -62,7 +60,7 @@ namespace OchalikeSprites
             bones[index].SetSprite(name, sprite, color, flipX, flipY, localPosition, localRotation, localScale);
         }
 
-        private struct Bone
+        private readonly struct Bone
         {
             private readonly OchalikeImageRenderer parent;
             public readonly Image image;

@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -177,8 +176,8 @@ namespace OchalikeSprites
             public BoneSprite MorphBareSprite { get; set; }
             public Color? MorphBareColor { get; set; }
             public bool OverridesOnDefaultColor { get; set; }
-            public readonly List<BoneSprite> equipmentSprites = new List<BoneSprite>();
-            public readonly List<Color> equipmentColors = new List<Color>();
+            public readonly List<BoneSprite> equipmentSprites = new();
+            public readonly List<Color> equipmentColors = new();
 
             public int EquipmentSpriteCount => equipmentSprites.Count;
 

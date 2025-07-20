@@ -1,5 +1,3 @@
-﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace OchalikeSprites
@@ -40,86 +38,86 @@ namespace OchalikeSprites
 
 
         public static BoneSprite CreateNF(Sprite nfSprite)
-            => new BoneSprite(nfSprite, null, null, null);
+            => new(nfSprite, null, null, null);
 
         public static BoneSprite CreateNFBF(Sprite nfbfSprite)
-            => new BoneSprite(nfbfSprite, null, nfbfSprite, null);
+            => new(nfbfSprite, null, nfbfSprite, null);
 
         public static BoneSprite CreateNFBR(Sprite nfbrSprite)
-            => new BoneSprite(nfbrSprite, null, null, nfbrSprite);
+            => new(nfbrSprite, null, null, nfbrSprite);
 
         public static BoneSprite CreateNR(Sprite nrSprite)
-            => new BoneSprite(null, nrSprite, null, null);
+            => new(null, nrSprite, null, null);
 
         public static BoneSprite CreateNRBF(Sprite nrbfSprite)
-            => new BoneSprite(null, nrbfSprite, nrbfSprite, null);
+            => new(null, nrbfSprite, nrbfSprite, null);
 
         public static BoneSprite CreateNRBR(Sprite nrbrSprite)
-            => new BoneSprite(null, nrbrSprite, null, nrbrSprite);
+            => new(null, nrbrSprite, null, nrbrSprite);
 
         public static BoneSprite CreateBF(Sprite bfSprite)
-            => new BoneSprite(null, null, bfSprite, null);
+            => new(null, null, bfSprite, null);
 
         public static BoneSprite CreateBR(Sprite brSprite)
-            => new BoneSprite(null, null, null, brSprite);
+            => new(null, null, null, brSprite);
 
 
 
         public static BoneSprite CreateNF_NR(Sprite nfSprite, Sprite nrSprite)
-            => new BoneSprite(nfSprite, nrSprite, null, null);
+            => new(nfSprite, nrSprite, null, null);
 
         public static BoneSprite CreateNFBF_NR(Sprite nfbfSprite, Sprite nrSprite)
-            => new BoneSprite(nfbfSprite, nrSprite, nfbfSprite, null);
+            => new(nfbfSprite, nrSprite, nfbfSprite, null);
 
         public static BoneSprite CreateNFBR_NR(Sprite nfbrSprite, Sprite nrSprite)
-            => new BoneSprite(nfbrSprite, nrSprite, null, nfbrSprite);
+            => new(nfbrSprite, nrSprite, null, nfbrSprite);
 
         public static BoneSprite CreateBF_NR(Sprite bfSprite, Sprite nrSprite)
-            => new BoneSprite(null, nrSprite, bfSprite, null);
+            => new(null, nrSprite, bfSprite, null);
 
         public static BoneSprite CreateBR_NR(Sprite brSprite, Sprite nrSprite)
-            => new BoneSprite(null, nrSprite, null, brSprite);
+            => new(null, nrSprite, null, brSprite);
 
 
 
         public static BoneSprite CreateNF_NRBF(Sprite nfSprite, Sprite nrbfSprite)
-            => new BoneSprite(nfSprite, nrbfSprite, nrbfSprite, null);
+            => new(nfSprite, nrbfSprite, nrbfSprite, null);
 
         public static BoneSprite CreateNFBR_NRBF(Sprite nfbrSprite, Sprite nrbfSprite)
-            => new BoneSprite(nfbrSprite, nrbfSprite, nrbfSprite, nfbrSprite);
+            => new(nfbrSprite, nrbfSprite, nrbfSprite, nfbrSprite);
 
         public static BoneSprite CreateBR_NRBF(Sprite brSprite, Sprite nrbfSprite)
-            => new BoneSprite(null, nrbfSprite, nrbfSprite, brSprite);
+            => new(null, nrbfSprite, nrbfSprite, brSprite);
 
 
 
         public static BoneSprite CreateNF_NRBR(Sprite nfSprite, Sprite nrbrSprite)
-            => new BoneSprite(nfSprite, nrbrSprite, null, nrbrSprite);
+            => new(nfSprite, nrbrSprite, null, nrbrSprite);
 
         public static BoneSprite CreateNFBF_NRBR(Sprite nfbfSprite, Sprite nrbrSprite)
-            => new BoneSprite(nfbfSprite, nrbrSprite, nfbfSprite, nrbrSprite);
+            => new(nfbfSprite, nrbrSprite, nfbfSprite, nrbrSprite);
 
         public static BoneSprite CreateBF_NRBR(Sprite bfSprite, Sprite nrbrSprite)
-            => new BoneSprite(null, nrbrSprite, bfSprite, nrbrSprite);
+            => new(null, nrbrSprite, bfSprite, nrbrSprite);
 
 
 
         public static BoneSprite CreateNF_BF(Sprite nfSprite, Sprite bfSprite)
-            => new BoneSprite(nfSprite, null, bfSprite, null);
+            => new(nfSprite, null, bfSprite, null);
 
         public static BoneSprite CreateNFBR_BF(Sprite nfbrSprite, Sprite bfSprite)
-            => new BoneSprite(nfbrSprite, null, bfSprite, nfbrSprite);
+            => new(nfbrSprite, null, bfSprite, nfbrSprite);
 
         public static BoneSprite CreateBR_BF(Sprite brSprite, Sprite bfSprite)
-            => new BoneSprite(null, null, bfSprite, brSprite);
+            => new(null, null, bfSprite, brSprite);
 
 
 
         public static BoneSprite CreateNF_BR(Sprite nfSprite, Sprite brSprite)
-            => new BoneSprite(nfSprite, null, null, brSprite);
+            => new(nfSprite, null, null, brSprite);
 
         public static BoneSprite CreateNFBF_BR(Sprite nfbfSprite, Sprite brSprite)
-            => new BoneSprite(nfbfSprite, null, nfbfSprite, brSprite);
+            => new(nfbfSprite, null, nfbfSprite, brSprite);
 
 
 

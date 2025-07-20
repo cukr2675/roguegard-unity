@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,7 +13,7 @@ namespace OchalikeSprites
 
 #if UNITY_EDITOR
         [Header("Editor Only")]
-        [SerializeField] private OchalikeSpriteData _previewOchalikeSprite = null;
+        [SerializeField] internal OchalikeSpriteData _previewOchalikeSprite = null; // PropertyDrawer で使用する
 #endif
 
         public override void ApplyTo(int animationTime, SpriteDirection direction, ref OchalikeSpriteTransform transform, out bool endOfMotion)

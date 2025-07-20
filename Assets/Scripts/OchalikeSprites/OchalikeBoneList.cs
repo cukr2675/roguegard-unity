@@ -1,14 +1,12 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-
 using System.Linq;
 
 namespace OchalikeSprites
 {
     public class OchalikeBoneList : IList<OchalikeBone>, IReadOnlyList<IReadOnlyOchalikeBone>
     {
-        private readonly List<OchalikeBone> bones = new List<OchalikeBone>();
+        private readonly List<OchalikeBone> bones = new();
 
         public OchalikeBone this[int index]
         {

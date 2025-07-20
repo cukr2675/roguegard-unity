@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -28,13 +27,14 @@ namespace OchalikeSprites
 
         public static OchalikeBone CreateClearOchalikeSprite(Color bareColor)
         {
-            var ochalikeSprite = new OchalikeBone();
-            ochalikeSprite.Name = BoneKeyword.Body;
             var clearSprite = Sprite.Create(Texture2D.blackTexture, Rect.zero, Vector2.zero);
-            ochalikeSprite.BareSprite = BoneSprite.CreateNFBR_NRBF(clearSprite, clearSprite);
-            ochalikeSprite.BareColor = bareColor;
-            ochalikeSprite.OverridesOnDefaultColor = true;
-            return ochalikeSprite;
+            return new OchalikeBone
+            {
+                Name = BoneKeyword.Body,
+                BareSprite = BoneSprite.CreateNFBR_NRBF(clearSprite, clearSprite),
+                BareColor = bareColor,
+                OverridesOnDefaultColor = true
+            };
         }
     }
 }

@@ -1,8 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using UnityEngine;
 
 namespace OchalikeSprites
 {
@@ -16,7 +15,7 @@ namespace OchalikeSprites
 
 #if UNITY_EDITOR
         [Header("Editor Only")]
-        [SerializeField] private OchalikeSpriteData _previewOchalikeSprite = null;
+        [SerializeField] internal OchalikeSpriteData _previewOchalikeSprite = null; // PropertyDrawer で使用
 #endif
 
         [System.NonSerialized] private ImmutableSymmetricalSpritePoseSource poseSource;

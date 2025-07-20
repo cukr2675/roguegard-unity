@@ -1,6 +1,4 @@
-﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace OchalikeSprites
 {
@@ -36,7 +34,7 @@ namespace OchalikeSprites
         private BoneOrder _boneOrder;
         public BoneOrder BoneOrder => _boneOrder;
 
-        private static readonly BoneOrder defaultBoneOrder = new BoneOrder(new BoneBack[0], new BoneReorder[0]);
+        private static readonly BoneOrder defaultBoneOrder = new(new BoneBack[0], new BoneReorder[0]);
 
         public SpritePose()
         {

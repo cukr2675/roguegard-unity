@@ -1,13 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 namespace OchalikeSprites
 {
     /// <summary>
     /// <see cref="Name"/> で指定したボーンを前か後ろに向ける。
     /// </summary>
-    public struct BoneBack : System.IEquatable<BoneBack>
+    public readonly struct BoneBack : System.IEquatable<BoneBack>
     {
         public BoneKeyword Name { get; }
 

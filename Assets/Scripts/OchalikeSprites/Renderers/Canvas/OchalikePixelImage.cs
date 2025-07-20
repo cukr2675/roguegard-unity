@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace OchalikeSprites
@@ -8,7 +8,7 @@ namespace OchalikeSprites
     public class OchalikePixelImage : MonoBehaviour
     {
         [SerializeField] private Camera _sourceCamera = null;
-        [SerializeField] private Vector2Int _screenSize = new Vector2Int(1920, 1080);
+        [SerializeField] private Vector2Int _screenSize = new(1920, 1080);
         [SerializeField] private int _pixelsPerUnit = OchalikeSpritesUtility.DefaultPixelsPerUnit;
         [SerializeField] private float _zoom = 4f;
 

@@ -1,6 +1,4 @@
-﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace OchalikeSprites
 {
@@ -186,7 +184,7 @@ namespace OchalikeSprites
         private static class StaticStack<T>
             where T : ISortableBone<T>
         {
-            public static readonly Stack<T> boneStack = new Stack<T>();
+            public static readonly Stack<T> boneStack = new();
         }
     }
 }

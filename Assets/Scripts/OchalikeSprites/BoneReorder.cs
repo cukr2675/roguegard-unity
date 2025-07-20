@@ -1,13 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 namespace OchalikeSprites
 {
     /// <summary>
     /// <see cref="Name"/> で指定したボーンを手前か奥に再配置する。
     /// </summary>
-    public struct BoneReorder : System.IEquatable<BoneReorder>
+    public readonly struct BoneReorder : System.IEquatable<BoneReorder>
     {
         public BoneKeyword Name { get; }
 

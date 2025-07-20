@@ -1,7 +1,5 @@
-﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 using UnityEngine.Rendering;
 
 namespace OchalikeSprites
@@ -92,7 +90,7 @@ namespace OchalikeSprites
             }
         }
 
-        private struct Bone
+        private readonly struct Bone
         {
             public readonly SpriteRenderer spriteRenderer;
 
@@ -114,8 +112,7 @@ namespace OchalikeSprites
                 spriteRenderer.flipX = flipX;
                 spriteRenderer.flipY = flipY;
                 var transform = spriteRenderer.transform;
-                transform.localPosition = localPosition;
-                transform.localRotation = localRotation;
+                transform.SetLocalPositionAndRotation(localPosition, localRotation);
                 transform.localScale = localScale;
             }
 

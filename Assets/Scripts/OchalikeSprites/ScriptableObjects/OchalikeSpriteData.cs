@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,7 +9,7 @@ namespace OchalikeSprites
         [SerializeField] private int _pixelsPerUnit = OchalikeSpritesUtility.DefaultPixelsPerUnit;
         public int PixelsPerUnit { get => _pixelsPerUnit; set => _pixelsPerUnit = value; }
 
-        [SerializeField] private List<Bone> _bones = new List<Bone>();
+        [SerializeField] private List<Bone> _bones = new();
 
         public Bone this[int index]
         {
@@ -107,19 +106,20 @@ namespace OchalikeSprites
 
             public OchalikeBone ToBone(Color bareColor, bool useDarkOutline, int pixelsPerUnit)
             {
-                var bone = new OchalikeBone();
-                bone.Name = _boneName;
-                bone.BareSprite = _bareSprite.GetSprite(useDarkOutline);
-                bone.BareColor = bareColor;
-                bone.OverridesOnDefaultColor = _overridesOnDefaultColor;
-                bone.FlipX = _flipX;
-                bone.FlipY = _flipY;
-                bone.LocalPosition = _pixelLocalPosition / pixelsPerUnit;
-                bone.LocalRotation = _localRotation;
-                bone.ScaleOfLocalByLocal = _scaleOfLocalByLocal;
-                bone.NormalOrderInParent = _normalOrderInParent;
-                bone.BackOrderInParent = _backOrderInParent;
-                return bone;
+                return new OchalikeBone
+                {
+                    Name = _boneName,
+                    BareSprite = _bareSprite.GetSprite(useDarkOutline),
+                    BareColor = bareColor,
+                    OverridesOnDefaultColor = _overridesOnDefaultColor,
+                    FlipX = _flipX,
+                    FlipY = _flipY,
+                    LocalPosition = _pixelLocalPosition / pixelsPerUnit,
+                    LocalRotation = _localRotation,
+                    ScaleOfLocalByLocal = _scaleOfLocalByLocal,
+                    NormalOrderInParent = _normalOrderInParent,
+                    BackOrderInParent = _backOrderInParent
+                };
             }
         }
     }
