@@ -1,6 +1,5 @@
 using UnityEditor;
 using UnityEngine;
-using System.Reflection;
 
 namespace OchalikeSprites.Editor
 {

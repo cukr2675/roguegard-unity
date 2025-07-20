@@ -1,10 +1,8 @@
-﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-
 using System.Linq;
 using UnityEditor;
 using UnityEditor.U2D.Sprites;
+using UnityEngine;
 
 namespace OchalikeSprites.Editor
 {
@@ -23,7 +21,7 @@ namespace OchalikeSprites.Editor
         [SerializeField] private List<Slicer> _slicers = null;
         public List<Slicer> Slicers { get => _slicers; set => _slicers = value; }
 
-        private static readonly List<string> formats = new List<string>();
+        private static readonly List<string> formats = new();
 
         private void StartSlice()
         {
@@ -100,13 +98,13 @@ namespace OchalikeSprites.Editor
                     index.y = 0;
                     for (int y = Rect.yMax; y - PixelSize.y >= Rect.yMin; y -= PixelSize.y + Padding.y) // y 軸は上から下へ (画像編集ソフトに合わせた方向)
                     {
-                        var sprite = new SpriteRect();
-                        sprite.name = string.Format(formatPrefix + Format + formatSuffix, alphabets[index.x], index.y);
-                        sprite.rect = UnityEngine.Rect.MinMaxRect(x, y - PixelSize.y, x + PixelSize.x, y);
-                        sprite.alignment = SpriteAlignment.Custom;
-                        sprite.pivot = pivot;
-                        yield return sprite;
-
+                        yield return new SpriteRect
+                        {
+                            name = string.Format(formatPrefix + Format + formatSuffix, alphabets[index.x], index.y),
+                            rect = UnityEngine.Rect.MinMaxRect(x, y - PixelSize.y, x + PixelSize.x, y),
+                            alignment = SpriteAlignment.Custom,
+                            pivot = pivot
+                        };
                         index.y++;
                     }
                     index.x++;

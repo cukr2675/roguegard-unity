@@ -1,9 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 using System.IO;
 using UnityEditor;
+using UnityEngine;
 
 namespace OchalikeSprites.Editor
 {
@@ -35,7 +32,7 @@ namespace OchalikeSprites.Editor
                 if (targetPath == thisPath) throw new System.InvalidOperationException("生成によるジェネレータアセットの上書きは禁止です。");
 
                 var target = AssetDatabase.LoadAssetAtPath<T>(targetPath);
-                if (target == null) { target = CreateInstance<T>(); }
+                if (!target) { target = CreateInstance<T>(); }
                 var result = TrySetObject(target, i);
                 if (!result) break;
 

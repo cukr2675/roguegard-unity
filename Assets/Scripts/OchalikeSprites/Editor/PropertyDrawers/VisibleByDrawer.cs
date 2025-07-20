@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 using UnityEditor;
+using UnityEngine;
 
 namespace OchalikeSprites.Editor
 {
@@ -15,7 +12,7 @@ namespace OchalikeSprites.Editor
         {
             var attribute = (VisibleByAttribute)this.attribute;
             var path = property.propertyPath;
-            path = path.Substring(0, path.LastIndexOf('.') + 1);
+            path = path[..(path.LastIndexOf('.') + 1)];
             var disabled = false;
             if (attribute.BooleanName != null)
             {
@@ -51,7 +48,7 @@ namespace OchalikeSprites.Editor
         {
             var attribute = (VisibleByAttribute)this.attribute;
             var path = property.propertyPath;
-            path = path.Substring(0, path.LastIndexOf('.') + 1);
+            path = path[..(path.LastIndexOf('.') + 1)];
             var disabled = false;
             if (attribute.BooleanName != null)
             {

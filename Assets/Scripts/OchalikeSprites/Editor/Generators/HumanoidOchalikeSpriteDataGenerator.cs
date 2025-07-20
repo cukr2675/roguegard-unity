@@ -1,8 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 using UnityEditor;
+using UnityEngine;
 
 namespace OchalikeSprites.Editor
 {
@@ -23,13 +20,13 @@ namespace OchalikeSprites.Editor
             data.Add(Body.Create(size, size, searchInFolders));
             data.Add(Chest.Create(size, searchInFolders));
             data.Add(LeftArm.Create(size, size, searchInFolders));
-            data.Add(LeftHand.Create(size, searchInFolders));
+            data.Add(LeftHand.Create(size));
             data.Add(RightArm.Create(size, size, searchInFolders));
-            data.Add(RightHand.Create(size, searchInFolders));
+            data.Add(RightHand.Create(size));
             data.Add(LeftLeg.Create(size, searchInFolders));
-            data.Add(LeftFoot.Create(size, searchInFolders));
+            data.Add(LeftFoot.Create(size));
             data.Add(RightLeg.Create(size, searchInFolders));
-            data.Add(RightFoot.Create(size, searchInFolders));
+            data.Add(RightFoot.Create(size));
             data.Add(Head.Create(size, searchInFolders));
             data.Add(Hair.Create());
             data.Add(LeftEar.Create());
@@ -114,14 +111,15 @@ namespace OchalikeSprites.Editor
             public static OchalikeSpriteData.Bone Create(int bodyStature, int legStature, string[] searchInFolders)
             {
                 var statureRank = GetBodyStatureRank(legStature);
-                var bone = new OchalikeSpriteData.Bone();
-                bone.BoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("Body");
-                bone.BareSprite = GetSprite(bodyStature, searchInFolders);
-                bone.PixelLocalPosition = new Vector3(0f, statureRank);
-                bone.NormalOrderInParent = +0f;
-                bone.BackOrderInParent = +0f;
-                bone.OverridesOnDefaultColor = false;
-                return bone;
+                return new OchalikeSpriteData.Bone
+                {
+                    BoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("Body"),
+                    BareSprite = GetSprite(bodyStature, searchInFolders),
+                    PixelLocalPosition = new Vector3(0f, statureRank),
+                    NormalOrderInParent = +0f,
+                    BackOrderInParent = +0f,
+                    OverridesOnDefaultColor = false
+                };
             }
 
             private static ColorRangedBoneSprite GetSprite(int bodyStature, string[] searchInFolders)
@@ -139,15 +137,16 @@ namespace OchalikeSprites.Editor
             public static OchalikeSpriteData.Bone Create(int bodyStature, string[] searchInFolders)
             {
                 var statureRank = GetChestStatureRank(bodyStature);
-                var bone = new OchalikeSpriteData.Bone();
-                bone.BoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("Chest");
-                bone.ParentBoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("Body");
-                bone.BareSprite = OchalikeSpritesAssetDatabase.CreateColorRangedBoneSpriteOrNull(false, "OSpR_Humanoid_Chest{0}", searchInFolders);
-                bone.PixelLocalPosition = new Vector3(0f, statureRank);
-                bone.NormalOrderInParent = +1f;
-                bone.BackOrderInParent = +1f;
-                bone.OverridesOnDefaultColor = false;
-                return bone;
+                return new OchalikeSpriteData.Bone
+                {
+                    BoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("Chest"),
+                    ParentBoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("Body"),
+                    BareSprite = OchalikeSpritesAssetDatabase.CreateColorRangedBoneSpriteOrNull(false, "OSpR_Humanoid_Chest{0}", searchInFolders),
+                    PixelLocalPosition = new Vector3(0f, statureRank),
+                    NormalOrderInParent = +1f,
+                    BackOrderInParent = +1f,
+                    OverridesOnDefaultColor = false
+                };
             }
         }
 
@@ -156,29 +155,31 @@ namespace OchalikeSprites.Editor
             public static OchalikeSpriteData.Bone Create(int bodyStature, int armStature, string[] searchInFolders)
             {
                 var statureRank = GetChestStatureRank(bodyStature);
-                var bone = new OchalikeSpriteData.Bone();
-                bone.BoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("LeftArm");
-                bone.ParentBoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("Body");
-                bone.BareSprite = GetArmSprite(armStature, searchInFolders);
-                bone.PixelLocalPosition = new Vector3(3f, statureRank);
-                bone.NormalOrderInParent = +2f;
-                bone.BackOrderInParent = -3f;
-                return bone;
+                return new OchalikeSpriteData.Bone
+                {
+                    BoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("LeftArm"),
+                    ParentBoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("Body"),
+                    BareSprite = GetArmSprite(armStature, searchInFolders),
+                    PixelLocalPosition = new Vector3(3f, statureRank),
+                    NormalOrderInParent = +2f,
+                    BackOrderInParent = -3f
+                };
             }
         }
 
         private static class LeftHand
         {
-            public static OchalikeSpriteData.Bone Create(int armStature, string[] searchInFolders)
+            public static OchalikeSpriteData.Bone Create(int armStature)
             {
                 var statureRank = GetHandStatureRank(armStature);
-                var bone = new OchalikeSpriteData.Bone();
-                bone.BoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("LeftHand");
-                bone.ParentBoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("LeftArm");
-                bone.PixelLocalPosition = new Vector3(0f, statureRank);
-                bone.NormalOrderInParent = +1f;
-                bone.BackOrderInParent = +1f;
-                return bone;
+                return new OchalikeSpriteData.Bone
+                {
+                    BoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("LeftHand"),
+                    ParentBoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("LeftArm"),
+                    PixelLocalPosition = new Vector3(0f, statureRank),
+                    NormalOrderInParent = +1f,
+                    BackOrderInParent = +1f
+                };
             }
         }
 
@@ -187,31 +188,33 @@ namespace OchalikeSprites.Editor
             public static OchalikeSpriteData.Bone Create(int bodyStature, int armStature, string[] searchInFolders)
             {
                 var statureRank = GetChestStatureRank(bodyStature);
-                var bone = new OchalikeSpriteData.Bone();
-                bone.BoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("RightArm");
-                bone.ParentBoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("Body");
-                bone.BareSprite = GetArmSprite(armStature, searchInFolders);
-                bone.FlipX = true;
-                bone.PixelLocalPosition = new Vector3(-3f, statureRank);
-                bone.NormalOrderInParent = -3f;
-                bone.BackOrderInParent = +2f;
-                return bone;
+                return new OchalikeSpriteData.Bone
+                {
+                    BoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("RightArm"),
+                    ParentBoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("Body"),
+                    BareSprite = GetArmSprite(armStature, searchInFolders),
+                    FlipX = true,
+                    PixelLocalPosition = new Vector3(-3f, statureRank),
+                    NormalOrderInParent = -3f,
+                    BackOrderInParent = +2f
+                };
             }
         }
 
         private static class RightHand
         {
-            public static OchalikeSpriteData.Bone Create(int armStature, string[] searchInFolders)
+            public static OchalikeSpriteData.Bone Create(int armStature)
             {
                 var statureRank = GetHandStatureRank(armStature);
-                var bone = new OchalikeSpriteData.Bone();
-                bone.BoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("RightHand");
-                bone.ParentBoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("RightArm");
-                bone.FlipX = true;
-                bone.PixelLocalPosition = new Vector3(0f, statureRank);
-                bone.NormalOrderInParent = +1f;
-                bone.BackOrderInParent = +1f;
-                return bone;
+                return new OchalikeSpriteData.Bone
+                {
+                    BoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("RightHand"),
+                    ParentBoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("RightArm"),
+                    FlipX = true,
+                    PixelLocalPosition = new Vector3(0f, statureRank),
+                    NormalOrderInParent = +1f,
+                    BackOrderInParent = +1f
+                };
             }
         }
 
@@ -219,29 +222,31 @@ namespace OchalikeSprites.Editor
         {
             public static OchalikeSpriteData.Bone Create(int legStature, string[] searchInFolders)
             {
-                var bone = new OchalikeSpriteData.Bone();
-                bone.BoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("LeftLeg");
-                bone.ParentBoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("Body");
-                bone.BareSprite = GetLegSprite(legStature, searchInFolders);
-                bone.PixelLocalPosition = new Vector3(2f, 0f);
-                bone.NormalOrderInParent = -1f;
-                bone.BackOrderInParent = -2f;
-                return bone;
+                return new OchalikeSpriteData.Bone
+                {
+                    BoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("LeftLeg"),
+                    ParentBoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("Body"),
+                    BareSprite = GetLegSprite(legStature, searchInFolders),
+                    PixelLocalPosition = new Vector3(2f, 0f),
+                    NormalOrderInParent = -1f,
+                    BackOrderInParent = -2f
+                };
             }
         }
 
         private static class LeftFoot
         {
-            public static OchalikeSpriteData.Bone Create(int legStature, string[] searchInFolders)
+            public static OchalikeSpriteData.Bone Create(int legStature)
             {
                 var statureRank = GetFootStatureRank(legStature);
-                var bone = new OchalikeSpriteData.Bone();
-                bone.BoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("LeftFoot");
-                bone.ParentBoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("LeftLeg");
-                bone.PixelLocalPosition = new Vector3(0f, statureRank);
-                bone.NormalOrderInParent = +1f;
-                bone.BackOrderInParent = +1f;
-                return bone;
+                return new OchalikeSpriteData.Bone
+                {
+                    BoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("LeftFoot"),
+                    ParentBoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("LeftLeg"),
+                    PixelLocalPosition = new Vector3(0f, statureRank),
+                    NormalOrderInParent = +1f,
+                    BackOrderInParent = +1f
+                };
             }
         }
 
@@ -249,29 +254,31 @@ namespace OchalikeSprites.Editor
         {
             public static OchalikeSpriteData.Bone Create(int legStature, string[] searchInFolders)
             {
-                var bone = new OchalikeSpriteData.Bone();
-                bone.BoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("RightLeg");
-                bone.ParentBoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("Body");
-                bone.BareSprite = GetLegSprite(legStature, searchInFolders);
-                bone.PixelLocalPosition = new Vector3(-1f, 0f);
-                bone.NormalOrderInParent = -2f;
-                bone.BackOrderInParent = -1f;
-                return bone;
+                return new OchalikeSpriteData.Bone
+                {
+                    BoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("RightLeg"),
+                    ParentBoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("Body"),
+                    BareSprite = GetLegSprite(legStature, searchInFolders),
+                    PixelLocalPosition = new Vector3(-1f, 0f),
+                    NormalOrderInParent = -2f,
+                    BackOrderInParent = -1f
+                };
             }
         }
 
         private static class RightFoot
         {
-            public static OchalikeSpriteData.Bone Create(int legStature, string[] searchInFolders)
+            public static OchalikeSpriteData.Bone Create(int legStature)
             {
                 var statureRank = GetFootStatureRank(legStature);
-                var bone = new OchalikeSpriteData.Bone();
-                bone.BoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("RightFoot");
-                bone.ParentBoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("RightLeg");
-                bone.PixelLocalPosition = new Vector3(0f, statureRank);
-                bone.NormalOrderInParent = +1f;
-                bone.BackOrderInParent = +1f;
-                return bone;
+                return new OchalikeSpriteData.Bone
+                {
+                    BoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("RightFoot"),
+                    ParentBoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("RightLeg"),
+                    PixelLocalPosition = new Vector3(0f, statureRank),
+                    NormalOrderInParent = +1f,
+                    BackOrderInParent = +1f
+                };
             }
         }
 
@@ -280,14 +287,15 @@ namespace OchalikeSprites.Editor
             public static OchalikeSpriteData.Bone Create(int bodyStature, string[] searchInFolders)
             {
                 var statureRank = GetHeadStatureRank(bodyStature);
-                var bone = new OchalikeSpriteData.Bone();
-                bone.BoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("Head");
-                bone.ParentBoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("Body");
-                bone.BareSprite = OchalikeSpritesAssetDatabase.CreateColorRangedBoneSpriteOrNull(true, "OSpR_Humanoid_Head{0}{1}", searchInFolders);
-                bone.PixelLocalPosition = new Vector3(0f, statureRank);
-                bone.NormalOrderInParent = +3f;
-                bone.BackOrderInParent = +3f;
-                return bone;
+                return new OchalikeSpriteData.Bone
+                {
+                    BoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("Head"),
+                    ParentBoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("Body"),
+                    BareSprite = OchalikeSpritesAssetDatabase.CreateColorRangedBoneSpriteOrNull(true, "OSpR_Humanoid_Head{0}{1}", searchInFolders),
+                    PixelLocalPosition = new Vector3(0f, statureRank),
+                    NormalOrderInParent = +3f,
+                    BackOrderInParent = +3f
+                };
             }
         }
 
@@ -295,12 +303,13 @@ namespace OchalikeSprites.Editor
         {
             public static OchalikeSpriteData.Bone Create()
             {
-                var bone = new OchalikeSpriteData.Bone();
-                bone.BoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("Hair");
-                bone.ParentBoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("Head");
-                bone.NormalOrderInParent = +1f;
-                bone.BackOrderInParent = +1f;
-                return bone;
+                return new OchalikeSpriteData.Bone
+                {
+                    BoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("Hair"),
+                    ParentBoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("Head"),
+                    NormalOrderInParent = +1f,
+                    BackOrderInParent = +1f
+                };
             }
         }
 
@@ -308,13 +317,14 @@ namespace OchalikeSprites.Editor
         {
             public static OchalikeSpriteData.Bone Create()
             {
-                var bone = new OchalikeSpriteData.Bone();
-                bone.BoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("LeftEar");
-                bone.ParentBoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("Head");
-                bone.PixelLocalPosition = new Vector3(1f, 7f);
-                bone.NormalOrderInParent = +3f;
-                bone.BackOrderInParent = +3f;
-                return bone;
+                return new OchalikeSpriteData.Bone
+                {
+                    BoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("LeftEar"),
+                    ParentBoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("Head"),
+                    PixelLocalPosition = new Vector3(1f, 7f),
+                    NormalOrderInParent = +3f,
+                    BackOrderInParent = +3f
+                };
             }
         }
 
@@ -322,13 +332,14 @@ namespace OchalikeSprites.Editor
         {
             public static OchalikeSpriteData.Bone Create()
             {
-                var bone = new OchalikeSpriteData.Bone();
-                bone.BoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("RightEar");
-                bone.ParentBoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("Head");
-                bone.PixelLocalPosition = new Vector3(-4f, 7f);
-                bone.NormalOrderInParent = +2f;
-                bone.BackOrderInParent = +2f;
-                return bone;
+                return new OchalikeSpriteData.Bone
+                {
+                    BoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("RightEar"),
+                    ParentBoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("Head"),
+                    PixelLocalPosition = new Vector3(-4f, 7f),
+                    NormalOrderInParent = +2f,
+                    BackOrderInParent = +2f
+                };
             }
         }
 
@@ -336,13 +347,14 @@ namespace OchalikeSprites.Editor
         {
             public static OchalikeSpriteData.Bone Create()
             {
-                var bone = new OchalikeSpriteData.Bone();
-                bone.BoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("LeftEye");
-                bone.ParentBoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("Head");
-                bone.PixelLocalPosition = new Vector3(1f, 3f);
-                bone.NormalOrderInParent = +6f;
-                bone.BackOrderInParent = +6f;
-                return bone;
+                return new OchalikeSpriteData.Bone
+                {
+                    BoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("LeftEye"),
+                    ParentBoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("Head"),
+                    PixelLocalPosition = new Vector3(1f, 3f),
+                    NormalOrderInParent = +6f,
+                    BackOrderInParent = +6f
+                };
             }
         }
 
@@ -350,13 +362,14 @@ namespace OchalikeSprites.Editor
         {
             public static OchalikeSpriteData.Bone Create()
             {
-                var bone = new OchalikeSpriteData.Bone();
-                bone.BoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("RightEye");
-                bone.ParentBoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("Head");
-                bone.PixelLocalPosition = new Vector3(-4f, 3f);
-                bone.NormalOrderInParent = +5f;
-                bone.BackOrderInParent = +5f;
-                return bone;
+                return new OchalikeSpriteData.Bone
+                {
+                    BoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("RightEye"),
+                    ParentBoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("Head"),
+                    PixelLocalPosition = new Vector3(-4f, 3f),
+                    NormalOrderInParent = +5f,
+                    BackOrderInParent = +5f
+                };
             }
         }
 
@@ -364,15 +377,16 @@ namespace OchalikeSprites.Editor
         {
             public static OchalikeSpriteData.Bone Create(string[] searchInFolders)
             {
-                var bone = new OchalikeSpriteData.Bone();
-                bone.BoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("Mouth");
-                bone.ParentBoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("Head");
                 var clearSprite = OchalikeSpritesAssetDatabase.GetSprite("OSpR_Humanoid_Clear", searchInFolders);
-                bone.BareSprite = new ColorRangedBoneSprite(BoneSprite.CreateNFBR_NRBF(clearSprite, clearSprite));
-                bone.PixelLocalPosition = new Vector3(-1f, 1f);
-                bone.NormalOrderInParent = +4f;
-                bone.BackOrderInParent = +4f;
-                return bone;
+                return new OchalikeSpriteData.Bone
+                {
+                    BoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("Mouth"),
+                    ParentBoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("Head"),
+                    BareSprite = new ColorRangedBoneSprite(BoneSprite.CreateNFBR_NRBF(clearSprite, clearSprite)),
+                    PixelLocalPosition = new Vector3(-1f, 1f),
+                    NormalOrderInParent = +4f,
+                    BackOrderInParent = +4f
+                };
             }
         }
 
@@ -381,13 +395,14 @@ namespace OchalikeSprites.Editor
             public static OchalikeSpriteData.Bone Create(int bodyStature)
             {
                 var statureRank = GetChestStatureRank(bodyStature);
-                var bone = new OchalikeSpriteData.Bone();
-                bone.BoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("Wing");
-                bone.ParentBoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("Body");
-                bone.PixelLocalPosition = new Vector3(0f, statureRank);
-                bone.NormalOrderInParent = +5f;
-                bone.BackOrderInParent = +5f;
-                return bone;
+                return new OchalikeSpriteData.Bone
+                {
+                    BoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("Wing"),
+                    ParentBoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("Body"),
+                    PixelLocalPosition = new Vector3(0f, statureRank),
+                    NormalOrderInParent = +5f,
+                    BackOrderInParent = +5f
+                };
             }
         }
 
@@ -395,12 +410,13 @@ namespace OchalikeSprites.Editor
         {
             public static OchalikeSpriteData.Bone Create()
             {
-                var bone = new OchalikeSpriteData.Bone();
-                bone.BoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("LongHair");
-                bone.ParentBoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("Wings");
-                bone.NormalOrderInParent = +1f;
-                bone.BackOrderInParent = +1f;
-                return bone;
+                return new OchalikeSpriteData.Bone
+                {
+                    BoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("LongHair"),
+                    ParentBoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("Wings"),
+                    NormalOrderInParent = +1f,
+                    BackOrderInParent = +1f
+                };
             }
         }
 
@@ -408,13 +424,14 @@ namespace OchalikeSprites.Editor
         {
             public static OchalikeSpriteData.Bone Create()
             {
-                var bone = new OchalikeSpriteData.Bone();
-                bone.BoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("Tail");
-                bone.ParentBoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("Body");
-                bone.PixelLocalPosition = new Vector3(1f, 2f);
-                bone.NormalOrderInParent = +4f;
-                bone.BackOrderInParent = +4f;
-                return bone;
+                return new OchalikeSpriteData.Bone
+                {
+                    BoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("Tail"),
+                    ParentBoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("Body"),
+                    PixelLocalPosition = new Vector3(1f, 2f),
+                    NormalOrderInParent = +4f,
+                    BackOrderInParent = +4f
+                };
             }
         }
 
@@ -422,14 +439,15 @@ namespace OchalikeSprites.Editor
         {
             public static OchalikeSpriteData.Bone Create(string[] searchInFolders)
             {
-                var bone = new OchalikeSpriteData.Bone();
-                bone.BoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("BodyEffect");
-                bone.ParentBoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("Body");
                 var clearSprite = OchalikeSpritesAssetDatabase.GetSprite("OSpR_Humanoid_Clear", searchInFolders);
-                bone.BareSprite = new ColorRangedBoneSprite(BoneSprite.CreateNFBR_NRBF(clearSprite, clearSprite));
-                bone.NormalOrderInParent = +6f;
-                bone.BackOrderInParent = +6f;
-                return bone;
+                return new OchalikeSpriteData.Bone
+                {
+                    BoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("BodyEffect"),
+                    ParentBoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("Body"),
+                    BareSprite = new ColorRangedBoneSprite(BoneSprite.CreateNFBR_NRBF(clearSprite, clearSprite)),
+                    NormalOrderInParent = +6f,
+                    BackOrderInParent = +6f
+                };
             }
         }
 
@@ -437,14 +455,15 @@ namespace OchalikeSprites.Editor
         {
             public static OchalikeSpriteData.Bone Create(string[] searchInFolders)
             {
-                var bone = new OchalikeSpriteData.Bone();
-                bone.BoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("HeadEffect");
-                bone.ParentBoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("Head");
                 var clearSprite = OchalikeSpritesAssetDatabase.GetSprite("OSpR_Humanoid_Clear", searchInFolders);
-                bone.BareSprite = new ColorRangedBoneSprite(BoneSprite.CreateNFBR_NRBF(clearSprite, clearSprite));
-                bone.NormalOrderInParent = +7f;
-                bone.BackOrderInParent = +7f;
-                return bone;
+                return new OchalikeSpriteData.Bone
+                {
+                    BoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("HeadEffect"),
+                    ParentBoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("Head"),
+                    BareSprite = new ColorRangedBoneSprite(BoneSprite.CreateNFBR_NRBF(clearSprite, clearSprite)),
+                    NormalOrderInParent = +7f,
+                    BackOrderInParent = +7f
+                };
             }
         }
     }

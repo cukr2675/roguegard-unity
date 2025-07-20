@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using UnityEngine;
 using UnityEditor;
+using UnityEngine;
 
 namespace OchalikeSprites.Editor
 {
@@ -69,7 +69,7 @@ namespace OchalikeSprites.Editor
                     continue;
                 }
 
-                var spriteSuffix = sprite.name.Substring(spriteSuffixOffset + 1);
+                var spriteSuffix = sprite.name[(spriteSuffixOffset + 1)..];
                 if (spriteSuffix.Contains("NF")) { normalFront = sprite; }
                 if (spriteSuffix.Contains("NR")) { normalRear = sprite; }
                 if (spriteSuffix.Contains("BF")) { backFront = sprite; }
