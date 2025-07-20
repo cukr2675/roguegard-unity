@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Roguegard.CharacterCreation
@@ -12,6 +10,7 @@ namespace Roguegard.CharacterCreation
         IStartingItemOption IReadOnlyStartingItem.Option => _option;
 
         [SerializeField] private ScriptableOptionDescription _optionDescription = null;
+        private ScriptableOptionDescription OptionDescription => ScriptableOptionDescription.IdentityOr(_optionDescription);
 
         [SerializeField] private float _generatorWeight;
         public float GeneratorWeight
@@ -25,18 +24,17 @@ namespace Roguegard.CharacterCreation
 
         [SerializeField] private MemberList _members;
 
-        public string Name => _optionDescription?.DescriptionName ?? _option.DescriptionName;
-        public Sprite Icon => _optionDescription?.Icon ?? _option.Race.Icon;
-        public Color Color => (_optionDescription?.ColorIsEnabled ?? false) ? _optionDescription.Color : _option.Race.Color;
-        public string Caption => _optionDescription?.Caption ?? _option.Caption;
-        public IRogueDetails Details => _optionDescription?.Details ?? _option.Details;
+        public string Name => OptionDescription.DescriptionName ?? _option.DescriptionName;
+        public Sprite Icon => OptionDescription.Icon ? OptionDescription.Icon : _option.Race.Icon;
+        public Color Color => OptionDescription.ColorOfEnabled ?? _option.Race.Color;
+        public string Caption => OptionDescription.Caption ?? _option.Caption;
+        public IRogueDetails Details => OptionDescription.Details ?? _option.Details;
 
-        string IReadOnlyStartingItem.OptionName => _optionDescription?.DescriptionName;
-        Sprite IReadOnlyStartingItem.OptionIcon => _optionDescription?.Icon;
-        bool IReadOnlyStartingItem.OptionColorIsEnabled => _optionDescription?.ColorIsEnabled ?? false;
-        Color IReadOnlyStartingItem.OptionColor => _optionDescription?.Color ?? default;
-        string IReadOnlyStartingItem.OptionCaption => _optionDescription?.Caption;
-        IRogueDetails IReadOnlyStartingItem.OptionDetails => _optionDescription?.Details;
+        string IReadOnlyStartingItem.OptionName => OptionDescription.DescriptionName;
+        Sprite IReadOnlyStartingItem.OptionIcon => OptionDescription.Icon;
+        Color? IReadOnlyStartingItem.OptionColor => OptionDescription.ColorOfEnabled;
+        string IReadOnlyStartingItem.OptionCaption => OptionDescription.Caption;
+        IRogueDetails IReadOnlyStartingItem.OptionDetails => OptionDescription.Details;
         IRogueGender IReadOnlyStartingItem.OptionGender => null;
 
         IMainInfoSet IRogueObjGenerator.InfoSet => _option.PrimaryInfoSet;

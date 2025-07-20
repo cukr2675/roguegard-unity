@@ -1,7 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-
 using System.Linq;
 
 namespace Roguegard.CharacterCreation
@@ -9,7 +7,7 @@ namespace Roguegard.CharacterCreation
     [Objforming.Formable]
     public class StartingItemBuilderList : IWeightedRogueObjGeneratorList, IEnumerable<StartingItemBuilder>
     {
-        private readonly List<StartingItemBuilder> builders = new List<StartingItemBuilder>();
+        private readonly List<StartingItemBuilder> builders = new();
 
         public StartingItemBuilder this[int index] => builders[index];
 

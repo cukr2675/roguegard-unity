@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Roguegard.CharacterCreation
@@ -12,20 +10,21 @@ namespace Roguegard.CharacterCreation
         IAppearanceOption IReadOnlyAppearance.Option => _option;
 
         [SerializeField] private ScriptableOptionDescription _optionDescription = null;
+        private ScriptableOptionDescription OptionDescription => ScriptableOptionDescription.IdentityOr(_optionDescription);
 
         [SerializeField] private Color _color;
         public Color Color => _color;
 
         [SerializeField] private MemberList _members;
 
-        public string Name => _optionDescription?.DescriptionName ?? _option.DescriptionName;
+        public string Name => OptionDescription.DescriptionName ?? _option.DescriptionName;
         public Sprite Icon => _option.Icon;
-        public string Caption => _optionDescription?.Caption ?? _option.Caption;
-        public IRogueDetails Details => _optionDescription?.Details ?? _option.Details;
+        public string Caption => OptionDescription.Caption ?? _option.Caption;
+        public IRogueDetails Details => OptionDescription.Details ?? _option.Details;
 
-        string IReadOnlyAppearance.OptionName => _optionDescription?.DescriptionName;
-        string IReadOnlyAppearance.OptionCaption => _optionDescription?.Caption;
-        IRogueDetails IReadOnlyAppearance.OptionDetails => _optionDescription?.Details;
+        string IReadOnlyAppearance.OptionName => OptionDescription.DescriptionName;
+        string IReadOnlyAppearance.OptionCaption => OptionDescription.Caption;
+        IRogueDetails IReadOnlyAppearance.OptionDetails => OptionDescription.Details;
         Spanning<IMemberSource> IMemberable.MemberSources => _option.MemberSources;
 
         IReadOnlyMember IMemberable.GetMember(IMemberSource source)

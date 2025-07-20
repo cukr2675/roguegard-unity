@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,14 +15,7 @@ namespace Roguegard.CharacterCreation
     {
         [SerializeField] private TextAsset _json = null;
 
-        private RogueObj CloneBase
-        {
-            get
-            {
-                if (_cloneBase == null) { _cloneBase = Deserialize(_json.text); }
-                return _cloneBase;
-            }
-        }
+        private RogueObj CloneBase => _cloneBase ??= Deserialize(_json.text);
         private RogueObj _cloneBase;
 
         protected override bool HasNotInfoSet => true;
@@ -51,7 +44,7 @@ namespace Roguegard.CharacterCreation
             if (!SpaceUtility.TryLocate(obj, location, position, stackOption)) throw new RogueException("生成したオブジェクトの移動に失敗しました。");
 
             obj.TrySetStack(startingItem.Stack);
-            if (startingItem.OptionColorIsEnabled) { ColoringEffect.ColorChange(obj, startingItem.OptionColor); }
+            if (startingItem.OptionColor != null) { ColoringEffect.ColorChange(obj, startingItem.OptionColor.Value); }
 
             return obj;
         }

@@ -1,5 +1,3 @@
-﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Roguegard.CharacterCreation
@@ -9,8 +7,7 @@ namespace Roguegard.CharacterCreation
         IIntrinsicOption Option { get; }
         string OptionName { get; }
         Sprite OptionIcon { get; }
-        bool OptionColorIsEnabled { get; }
-        Color OptionColor { get; }
+        Color? OptionColor { get; }
         string OptionCaption { get; }
         IRogueDetails OptionDetails { get; }
     }

@@ -1,15 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 using OchalikeSprites;
+using System.Collections.Generic;
 
 namespace Roguegard.CharacterCreation
 {
     public class AppearanceMorph
     {
-        private readonly BaseEffect baseEffect = new BaseEffect();
-        private readonly List<EquipmentItem> equipmentItems = new List<EquipmentItem>();
+        private readonly BaseEffect baseEffect = new();
+        private readonly List<EquipmentItem> equipmentItems = new();
 
         public OchalikeMorph BaseEffectOchalikeMorph => baseEffect.OchalikeMorph;
 

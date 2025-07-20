@@ -1,12 +1,10 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace Roguegard.CharacterCreation
 {
     public class GrowingInfoSetTable
     {
-        private Dictionary<IRaceOption, Dictionary<IRogueGender, CharacterCreationInfoSet>> table;
+        private readonly Dictionary<IRaceOption, Dictionary<IRogueGender, CharacterCreationInfoSet>> table;
 
         public CharacterCreationInfoSet this[IRaceOption growingOption, IRogueGender gender]
             => table[growingOption][gender];

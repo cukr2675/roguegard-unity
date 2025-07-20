@@ -21,17 +21,42 @@ namespace Roguegard
         }
         string IRogueDescription.Name => DescriptionName;
 
+
+
         [SerializeField] private Sprite _icon = null;
+
+        /// <summary>
+        /// デフォルト: null
+        /// </summary>
         public Sprite Icon { get => _icon; set => _icon = value; }
 
+
+
         [SerializeField] private Color _color = Color.white;
+
+        /// <summary>
+        /// デフォルト: <see cref="Color.white"/>
+        /// </summary>
         public Color Color { get => _color; set => _color = value; }
 
+
+
         [SerializeField] private string _caption = null;
+
+        /// <summary>
+        /// デフォルト: null
+        /// </summary>
         public string Caption { get => _caption; set => _caption = value; }
 
+
+
         [SerializeField] private ScriptField<IRogueDetails> _details = null;
-        public IRogueDetails Details => _details.Ref;
+
+        /// <summary>
+        /// デフォルト: null
+        /// </summary>
+        public IRogueDetails Details => _details?.Ref;
+
         private ScriptField<IRogueDetails> DetailsSource { get => _details; set => _details = value; }
     }
 }

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Roguegard.CharacterCreation
@@ -105,8 +103,6 @@ namespace Roguegard.CharacterCreation
         public virtual RogueObj CreateObj(
             IReadOnlyStartingItem startingItem, RogueObj location, Vector2Int position, IRogueRandom random, StackOption stackOption = StackOption.Default)
         {
-            //var obj = CreateObj(location, position, random, stackOption, startingItem.OptionGender);
-
             var raceOption = Race.Option;
             var gender = startingItem.OptionGender ?? Race.Gender ?? GetRandomGender(random);
             if (!InfoSets.TryGetValue(raceOption, gender, out var infoSet)) throw new RogueException();
@@ -114,7 +110,7 @@ namespace Roguegard.CharacterCreation
             var obj = infoSet.CreateObj(location, position, random, stackOption);
 
             obj.TrySetStack(startingItem.Stack);
-            if (startingItem.OptionColorIsEnabled) { ColoringEffect.ColorChange(obj, startingItem.OptionColor); }
+            if (startingItem.OptionColor != null) { ColoringEffect.ColorChange(obj, startingItem.OptionColor.Value); }
 
             return obj;
         }
@@ -134,10 +130,6 @@ namespace Roguegard.CharacterCreation
 
         protected virtual void Initialize()
         {
-#if UNITY_EDITOR
-            //Debug.Log($"{name ?? "null"}.OnEnable()");
-#endif
-
             _infoSets = new GrowingInfoSetTable(this);
         }
 
@@ -153,8 +145,7 @@ namespace Roguegard.CharacterCreation
             public IStartingItemOption Option { get; }
             public string OptionName => null;
             public Sprite OptionIcon => null;
-            public bool OptionColorIsEnabled => false;
-            public Color OptionColor => Color.white;
+            public Color? OptionColor => null;
             public string OptionCaption => null;
             public IRogueDetails OptionDetails => null;
             public float GeneratorWeight => 0f;

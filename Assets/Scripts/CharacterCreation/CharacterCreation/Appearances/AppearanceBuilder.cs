@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,7 +12,7 @@ namespace Roguegard.CharacterCreation
         public string OptionCaption { get; set; }
         public IRogueDetails OptionDetails { get; set; }
 
-        private readonly List<IMember> members = new List<IMember>();
+        private readonly List<IMember> members = new();
 
         public string Name => Option.Name;
         public Sprite Icon => Option.Icon;

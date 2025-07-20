@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,7 +10,7 @@ namespace Roguegard.CharacterCreation
     [System.Serializable]
     public class MemberList
     {
-        [SerializeReference] private List<IMember> _items = new List<IMember>();
+        [SerializeReference] private List<IMember> _items = new();
 
         public IMember this[int index] => _items[index];
 
