@@ -41,7 +41,7 @@ namespace Roguegard
 
         public bool HasSightCollider { get; private set; }
 
-        public MainRogueObjInfo Main { get; set; }
+        public MainRogueObjInfo Main { get; private set; }
 
         private readonly Dictionary<System.Type, IRogueObjInfo> infos;
 
@@ -53,6 +53,7 @@ namespace Roguegard
             infos = new Dictionary<System.Type, IRogueObjInfo>();
             Stack = 1;
             Space = new RogueSpace();
+            Main = new MainRogueObjInfo();
         }
 
         /// <summary>

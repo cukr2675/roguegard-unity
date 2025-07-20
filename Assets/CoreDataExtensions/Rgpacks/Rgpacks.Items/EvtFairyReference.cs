@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -119,7 +119,6 @@ namespace Roguegard.Rgpacks
         public RogueObj CreateObj(RogueObj location, IRogueRandom random, StackOption stackOption = StackOption.Default)
         {
             var obj = new RogueObj();
-            obj.Main = new MainRogueObjInfo();
             obj.Main.SetBaseInfoSet(obj, this);
             RoguegardCharacterCreationSettings.LevelInfoInitializer.InitializeLv(obj, initialLv);
             var stats = obj.Main.Stats;

@@ -194,7 +194,6 @@ namespace Roguegard.CharacterCreation
             StackOption stackOption = StackOption.Default, int initialLv = 0)
         {
             var obj = new RogueObj();
-            obj.Main = new MainRogueObjInfo();
             obj.Main.SetBaseInfoSet(obj, infoSet);
             RoguegardCharacterCreationSettings.LevelInfoInitializer.InitializeLv(obj, initialLv);
             var stats = obj.Main.Stats;

@@ -422,10 +422,11 @@ namespace Roguegard
 
         public MainRogueObjInfo Clone(RogueObj self, RogueObj clonedSelf)
         {
-            var clone = new MainRogueObjInfo();
-            clonedSelf.Main = clone;
-            clone.Stats = Stats.Clone(self, clonedSelf);
-            clone.RogueEffects = RogueEffects.Clone(self, clonedSelf);
+            var clone = new MainRogueObjInfo
+            {
+                Stats = Stats.Clone(self, clonedSelf),
+                RogueEffects = RogueEffects.Clone(self, clonedSelf)
+            };
             clone.SetBaseInfoSet(clonedSelf, BaseInfoSet);
             if (PolymorphInfoSet != null) { clone.Polymorph(clonedSelf, PolymorphInfoSet); }
             return clone;
