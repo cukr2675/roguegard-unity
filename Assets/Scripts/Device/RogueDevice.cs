@@ -1,9 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-using System.IO;
 using Roguegard.Device;
+using System.IO;
 
 namespace Roguegard
 {
