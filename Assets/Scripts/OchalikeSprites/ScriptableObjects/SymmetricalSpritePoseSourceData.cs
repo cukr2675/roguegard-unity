@@ -20,7 +20,6 @@ namespace OchalikeSprites
 #endif
 
         [System.NonSerialized] private ImmutableSymmetricalSpritePoseSource poseSource;
-        [System.NonSerialized] private bool isDirty;
 
         private void Initialize()
         {
@@ -39,7 +38,7 @@ namespace OchalikeSprites
 
         public override SpritePose GetSpritePose(SpriteDirection direction)
         {
-            if (poseSource == null || isDirty) { Initialize(); }
+            if (poseSource == null) { Initialize(); }
 
             return poseSource.GetSpritePose(direction);
         }
@@ -50,7 +49,7 @@ namespace OchalikeSprites
             {
                 item?.Validate();
             }
-            isDirty = true;
+            poseSource = null;
         }
 
         [System.Serializable]
