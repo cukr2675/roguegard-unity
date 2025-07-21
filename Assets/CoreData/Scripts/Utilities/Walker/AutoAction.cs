@@ -1,15 +1,12 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-using Roguegard.Extensions;
 
 namespace Roguegard
 {
     internal static class AutoAction
     {
-        private static readonly List<IObjCommand> options = new List<IObjCommand>();
-        private static readonly List<RogueObj> items = new List<RogueObj>();
+        private static readonly List<IObjCommand> options = new();
+        private static readonly List<RogueObj> items = new();
 
         public static bool TryOtherAction(RogueObj self, float activationDepth, float visibleRadius, RectInt room, IRogueRandom random)
         {

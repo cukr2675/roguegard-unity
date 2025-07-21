@@ -1,7 +1,3 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 using Roguegard.Extensions;
 
 namespace Roguegard
@@ -18,7 +14,7 @@ namespace Roguegard
 
         float IRogueMethodPassiveAspect.Order => 0f;
 
-        private static readonly AttackRogueMethod attack = new AttackRogueMethod();
+        private static readonly AttackRogueMethod attack = new();
 
         private AutoCounterStatusEffect() { }
 
@@ -31,7 +27,7 @@ namespace Roguegard
 
             if (keyword == MainInfoKw.Hit && activationDepth < 1f && user != null && arg.RefValue?.MainValue > 0f)
             {
-                result |= Counter(arg.RefValue);
+                Counter(arg.RefValue);
             }
             return true;
 

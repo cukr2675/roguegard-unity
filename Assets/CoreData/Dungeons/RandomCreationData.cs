@@ -1,10 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Roguegard.CharacterCreation
 {
-    [CreateAssetMenu(menuName = "RoguegardData/CharacterCreation/Data/Random")]
+    [CreateAssetMenu(menuName = "Roguegard/Character Creation/Data/Random")]
     [Objforming.IgnoreRequireRelationalComponent]
     public class RandomCreationData : ScriptableCharacterCreationData
     {

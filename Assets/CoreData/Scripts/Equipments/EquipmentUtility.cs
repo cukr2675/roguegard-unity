@@ -1,12 +1,10 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace Roguegard
 {
     public static class EquipmentUtility
     {
-        private static readonly List<IKeyword> equipParts = new List<IKeyword>();
+        private static readonly List<IKeyword> equipParts = new();
 
         /// <summary>
         /// 0 からチェックして空いている装備インデックスを取得する。

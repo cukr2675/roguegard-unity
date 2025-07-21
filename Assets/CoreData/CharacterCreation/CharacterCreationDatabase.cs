@@ -1,24 +1,22 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace Roguegard.CharacterCreation
 {
     public class CharacterCreationDatabase : ICharacterCreationDatabase
     {
-        private List<CharacterCreationDataBuilder> _presets = new List<CharacterCreationDataBuilder>();
+        private readonly List<CharacterCreationDataBuilder> _presets = new();
         public int PresetsCount => _presets.Count;
 
-        private List<IRaceOption> _raceOptions = new();
+        private readonly List<IRaceOption> _raceOptions = new();
         public Spanning<IRaceOption> RaceOptions => Spanning.Get(_raceOptions);
 
-        private List<IAppearanceOption> _appearanceOptions = new();
+        private readonly List<IAppearanceOption> _appearanceOptions = new();
         public Spanning<IAppearanceOption> AppearanceOptions => Spanning.Get(_appearanceOptions);
 
-        private List<IIntrinsicOption> _intrinsicOptions = new();
+        private readonly List<IIntrinsicOption> _intrinsicOptions = new();
         public Spanning<IIntrinsicOption> IntrinsicOptions => Spanning.Get(_intrinsicOptions);
 
-        private List<IStartingItemOption> _startingItemOptions = new();
+        private readonly List<IStartingItemOption> _startingItemOptions = new();
         public Spanning<IStartingItemOption> StartingItemOptions => Spanning.Get(_startingItemOptions);
 
         public CharacterCreationDataBuilder LoadPreset(int index)

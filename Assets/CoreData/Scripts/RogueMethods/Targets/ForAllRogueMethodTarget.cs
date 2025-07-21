@@ -1,4 +1,3 @@
-﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -17,7 +16,7 @@ namespace Roguegard
         string IRogueDescription.Caption => null;
         IRogueDetails IRogueDescription.Details => null;
 
-        private static readonly Stack<Predicator> predicators = new Stack<Predicator>();
+        private static readonly Stack<Predicator> predicators = new();
 
         public IRoguePredicator GetPredicator(RogueObj self, float predictionDepth, RogueObj tool)
         {
@@ -32,7 +31,7 @@ namespace Roguegard
 
         private class Predicator : IRoguePredicator
         {
-            public readonly RoguePredicatorPositionList _positions = new RoguePredicatorPositionList();
+            public readonly RoguePredicatorPositionList _positions = new();
 
             public Spanning<Vector2Int> Positions => _positions.Positions;
 

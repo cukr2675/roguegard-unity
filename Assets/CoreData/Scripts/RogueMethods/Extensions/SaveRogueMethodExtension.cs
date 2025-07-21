@@ -1,9 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Roguegard.Extensions
 {
+    [SuppressMessage("Style", "IDE0060")]
     public static class SaveRogueMethodExtension
     {
         public static bool LocateSavePoint(

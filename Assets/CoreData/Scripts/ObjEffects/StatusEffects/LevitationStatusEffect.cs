@@ -1,8 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 using OchalikeSprites;
+using UnityEngine;
 
 namespace Roguegard
 {
@@ -16,7 +13,7 @@ namespace Roguegard
         protected override int MaxStack => 1;
         protected override int InitialLifeTime => 50;
 
-        private static readonly Effect effect = new Effect();
+        private static readonly Effect effect = new();
 
         private LevitationStatusEffect() { }
 
@@ -38,7 +35,7 @@ namespace Roguegard
         }
 
         public static void MotionApplyTo(
-            ISpriteMotionSet motionSet, IKeyword keyword, int animationTime, RogueDirection direction, ref OchalikeSpriteTransform transform)
+            ISpriteMotionSet motionSet, int animationTime, RogueDirection direction, ref OchalikeSpriteTransform transform)
         {
             Motion.Instance.ApplyTo(motionSet, animationTime, direction, ref transform, out _);
         }

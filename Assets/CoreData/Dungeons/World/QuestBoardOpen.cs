@@ -1,14 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 using Roguegard.CharacterCreation;
 
 namespace Roguegard
 {
     public class QuestBoardOpen : ReferableScript, IOpenEffect
     {
-        private static readonly Effect effect = new Effect();
+        private static readonly Effect effect = new();
 
         public IRaceOption Open(
             RogueObj self, MainInfoSetType infoSetType, bool polymorph2Base, IRaceOption raceOption, ICharacterCreationData characterCreationData)
@@ -39,11 +35,7 @@ namespace Roguegard
 
             public RogueObjUpdaterContinueType UpdateObj(RogueObj self, float activationDepth, ref int sectionIndex)
             {
-                var questBoardInfo = QuestBoardInfo.Get(self);
-                if (questBoardInfo == null)
-                {
-                    questBoardInfo = QuestBoardInfo.SetTo(self);
-                }
+                var questBoardInfo = QuestBoardInfo.Get(self) ?? QuestBoardInfo.SetTo(self);
                 var questTable = questBoardInfo.QuestTable;
 
                 // クエストを4個そろえる

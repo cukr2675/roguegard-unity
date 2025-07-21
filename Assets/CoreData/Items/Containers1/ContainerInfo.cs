@@ -1,7 +1,3 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 namespace Roguegard
 {
     public static class ContainerInfo
@@ -25,8 +21,6 @@ namespace Roguegard
         /// </summary>
         public static void SetInfoTo(RogueObj obj, IContainerInfo containerInfo)
         {
-            if (containerInfo == null) throw new System.ArgumentNullException(nameof(containerInfo));
-
             if (!obj.TryGet<Info>(out var info))
             {
                 info = new Info();
@@ -36,7 +30,7 @@ namespace Roguegard
             // 上書き不可
             if (info.info != null) throw new RogueException();
 
-            info.info = containerInfo;
+            info.info = containerInfo ?? throw new System.ArgumentNullException(nameof(containerInfo));
         }
 
         public static void RemoveFrom(RogueObj obj)

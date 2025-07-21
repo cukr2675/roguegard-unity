@@ -1,5 +1,3 @@
-﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Roguegard
@@ -16,10 +14,7 @@ namespace Roguegard
 
         public void Predicate(IRoguePredicator predicator, RogueObj self, float predictionDepth, RogueObj ammo, float visibleRadius, RectInt room)
         {
-            if (ammo == null)
-            {
-                ammo = EquipmentUtility.GetAmmo(self, out _);
-            }
+            ammo ??= EquipmentUtility.GetAmmo(self, out _);
             if (ammo == null || predictionDepth >= 1f) return;
 
             var ammoRange = ammo.Main.InfoSet.BeThrown?.Range;
@@ -28,10 +23,7 @@ namespace Roguegard
 
         public void Predicate(IRoguePredicator predicator, RogueObj self, float predictionDepth, RogueObj ammo, Vector2Int targetPosition)
         {
-            if (ammo == null)
-            {
-                ammo = EquipmentUtility.GetAmmo(self, out _);
-            }
+            ammo ??= EquipmentUtility.GetAmmo(self, out _);
             if (ammo == null || predictionDepth >= 1f) return;
 
             var ammoRange = ammo.Main.InfoSet.BeThrown?.Range;

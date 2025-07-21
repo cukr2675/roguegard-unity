@@ -1,6 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace Roguegard
 {
@@ -14,8 +12,10 @@ namespace Roguegard
         {
             if (_members.Contains(character)) return;
 
-            var memberEffect = new MemberEffect();
-            memberEffect.info = new LobbyMemberInfo();
+            var memberEffect = new MemberEffect
+            {
+                info = new LobbyMemberInfo()
+            };
             character.Main.RogueEffects.AddOpen(character, memberEffect);
             _members.Add(character);
         }
@@ -81,15 +81,18 @@ namespace Roguegard
                     ifInLobby.OtherNode.Add(new AttackBehaviourNode());
                     ifInLobby.OtherNode.Add(new PushObstacleBehaviourNode());
 
-                    var pickUp = new PickUpBehaviourNode();
-                    pickUp.DistanceThreshold = 10;
-                    pickUp.PathBuilder = new AStarPathBuilder(RoguegardSettings.MaxTilemapSize);
+                    var pickUp = new PickUpBehaviourNode
+                    {
+                        DistanceThreshold = 10,
+                        PathBuilder = new AStarPathBuilder(RoguegardSettings.MaxTilemapSize)
+                    };
                     ifInLobby.OtherNode.Add(pickUp);
 
-                    var explore = new ExploreForStairsBehaviourNode();
-                    explore.PathBuilder = pickUp.PathBuilder;
-                    explore.PositionSelector = new RoguePositionSelector();
-                    ifInLobby.OtherNode.Add(explore);
+                    ifInLobby.OtherNode.Add(new ExploreForStairsBehaviourNode
+                    {
+                        PathBuilder = pickUp.PathBuilder,
+                        PositionSelector = new RoguePositionSelector()
+                    });
 
                     var node = new RogueBehaviourNodeList();
                     //node.Add(new PostQuestBehaviourNode());
@@ -101,9 +104,10 @@ namespace Roguegard
                 {
                     var node = new RogueBehaviourNodeList();
                     node.Add(new AttackBehaviourNode());
-                    var follow = new FollowLeaderBehaviourNode();
-                    follow.PathBuilder = new AStarPathBuilder(RoguegardSettings.MaxTilemapSize);
-                    node.Add(follow);
+                    node.Add(new FollowLeaderBehaviourNode
+                    {
+                        PathBuilder = new AStarPathBuilder(RoguegardSettings.MaxTilemapSize)
+                    });
                     RogueBehaviourNodeEffect.SetBehaviourNode(self, node, priority);
                 }
                 return default;

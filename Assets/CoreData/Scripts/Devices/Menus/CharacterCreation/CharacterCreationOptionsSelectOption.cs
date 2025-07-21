@@ -1,9 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 using Lysionium;
 using Roguegard.CharacterCreation;
+using System.Collections.Generic;
+using UnityEngine;
 
 namespace Roguegard.Device
 {
@@ -20,9 +18,7 @@ namespace Roguegard.Device
 
         private CharacterCreationOptionsSelectOption SetInner(object builder)
         {
-            if (builder == null) throw new System.ArgumentNullException(nameof(builder));
-
-            this.builder = builder;
+            this.builder = builder ?? throw new System.ArgumentNullException(nameof(builder));
             return this;
         }
 

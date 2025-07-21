@@ -1,12 +1,11 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-
 using System.Linq;
+using UnityEngine;
 
 namespace Roguegard.CharacterCreation
 {
-    [CreateAssetMenu(menuName = "RoguegardData/EquipmentState")]
+    [CreateAssetMenu(menuName = "Roguegard/Equipment State")]
     public class EquipmentStateData : ScriptableObject, IEnumerable<KeyValuePair<IKeyword, int>>
     {
         [SerializeField] private List<Item> _items = null;

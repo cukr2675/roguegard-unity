@@ -1,5 +1,3 @@
-﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Roguegard
@@ -29,7 +27,7 @@ namespace Roguegard
             if (rideEffect == null)
             {
                 addEffect = true;
-                if (this.rideEffect == null) { this.rideEffect = new RideRogueEffect(vehicle); }
+                this.rideEffect ??= new RideRogueEffect(vehicle);
                 rideEffect = this.rideEffect;
             }
             else if (this.rideEffect != null && this.rideEffect.Rider != null)

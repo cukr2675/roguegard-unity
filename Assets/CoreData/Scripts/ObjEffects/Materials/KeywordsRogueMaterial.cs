@@ -1,10 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Roguegard
 {
-    [CreateAssetMenu(menuName = "RoguegardData/Material")]
+    [CreateAssetMenu(menuName = "Roguegard/Material")]
     public class KeywordsRogueMaterial : RogueMaterial
     {
         [SerializeField] private KeywordData[] _keywords = null;

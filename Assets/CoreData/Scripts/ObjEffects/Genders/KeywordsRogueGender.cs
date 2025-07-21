@@ -1,10 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Roguegard
 {
-    [CreateAssetMenu(menuName = "RoguegardData/Gender")]
+    [CreateAssetMenu(menuName = "Roguegard/Gender")]
     [Objforming.Referable]
     public class KeywordsRogueGender : RogueGender
     {

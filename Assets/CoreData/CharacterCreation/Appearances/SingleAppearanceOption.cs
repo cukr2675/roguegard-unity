@@ -1,12 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 using OchalikeSprites;
+using UnityEngine;
 
 namespace Roguegard.CharacterCreation
 {
-    [CreateAssetMenu(menuName = "RoguegardData/CharacterCreation/AppearanceOption/Single")]
+    [CreateAssetMenu(menuName = "Roguegard/Character Creation/Appearance Option/Single")]
     [Objforming.Referable]
     public class SingleAppearanceOption : ColoredAppearanceOption
     {

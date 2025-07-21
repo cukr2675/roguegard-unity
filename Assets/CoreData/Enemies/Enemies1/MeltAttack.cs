@@ -1,7 +1,3 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 using Roguegard.Extensions;
 
 namespace Roguegard
@@ -16,7 +12,7 @@ namespace Roguegard
         public override IRogueMethodRange Range => FrontRogueMethodRange.Instance;
         public override int RequiredMp => 0;
 
-        private static readonly CommonAttack common = new CommonAttack();
+        private static readonly CommonAttack common = new();
 
         protected override bool Activate(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
         {

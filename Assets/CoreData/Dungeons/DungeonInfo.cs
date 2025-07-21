@@ -1,8 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 using Roguegard.CharacterCreation;
+using System.Collections.Generic;
 
 namespace Roguegard
 {
@@ -25,7 +22,7 @@ namespace Roguegard
         private int dungeonSeed;
 
         [System.NonSerialized]
-        private readonly List<int> floorSeeds = new List<int>();
+        private readonly List<int> floorSeeds = new();
 
         [System.NonSerialized]
         private RogueRandom random;
@@ -115,9 +112,10 @@ namespace Roguegard
         {
             if (!dungeon.TryGet<Info>(out var info))
             {
-                info = new Info();
-                info.info = new DungeonInfo();
-                dungeon.SetInfo(info);
+                dungeon.SetInfo(new Info
+                {
+                    info = new DungeonInfo()
+                });
             }
 
             // 上書き不可
@@ -130,15 +128,12 @@ namespace Roguegard
 
         public static string GetLevelText(DungeonLevelType levelType, int lv)
         {
-            switch (levelType)
+            return levelType switch
             {
-                case DungeonLevelType.Down:
-                    return $"B{lv}F";
-                case DungeonLevelType.Up:
-                    return $"{lv}F";
-                default:
-                    return null;
-            }
+                DungeonLevelType.Down => $"B{lv}F",
+                DungeonLevelType.Up => $"{lv}F",
+                _ => null,
+            };
         }
 
         public static float GetLocationVisibleRadius(RogueObj obj)
@@ -154,9 +149,10 @@ namespace Roguegard
         {
             if (!dungeon.TryGet<Info>(out var info))
             {
-                info = new Info();
-                info.info = new DungeonInfo();
-                dungeon.SetInfo(info);
+                dungeon.SetInfo(new Info
+                {
+                    info = new DungeonInfo()
+                });
             }
 
             // 上書き不可

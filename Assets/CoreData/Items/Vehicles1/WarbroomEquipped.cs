@@ -1,8 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 using OchalikeSprites;
+using UnityEngine;
 
 namespace Roguegard.CharacterCreation
 {
@@ -44,8 +41,7 @@ namespace Roguegard.CharacterCreation
             public Effect(RogueObj effecter)
             {
                 Effecter = effecter;
-                statusEffect = new StatusEffect();
-                statusEffect.parent = this;
+                statusEffect = new StatusEffect { parent = this };
             }
 
             public override void AddEffect(RogueObj vehicle, RogueObj owner)
@@ -120,7 +116,7 @@ namespace Roguegard.CharacterCreation
             void ISpriteMotionEffect.ApplyTo(
                 ISpriteMotionSet motionSet, IKeyword keyword, int animationTime, RogueDirection direction, ref OchalikeSpriteTransform transform)
             {
-                LevitationStatusEffect.MotionApplyTo(motionSet, keyword, animationTime, direction, ref transform);
+                LevitationStatusEffect.MotionApplyTo(motionSet, animationTime, direction, ref transform);
             }
 
             private class StatusEffect : IStatusEffect

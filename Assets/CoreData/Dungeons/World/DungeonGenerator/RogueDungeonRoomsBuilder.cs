@@ -1,8 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-
 using System.Linq;
+using UnityEngine;
 
 namespace Roguegard
 {
@@ -13,8 +11,8 @@ namespace Roguegard
 
         private readonly List<RectInt> corridors;
 
-        private static readonly List<int> dividableRoomIndices = new List<int>();
-        private static readonly List<Direction> directions = new List<Direction>();
+        private static readonly List<int> dividableRoomIndices = new();
+        private static readonly List<Direction> directions = new();
 
         public RogueDungeonRoomsBuilder(Vector2Int size)
         {
@@ -140,24 +138,14 @@ namespace Roguegard
             var direction = random.Choice(directions);
 
             // 決定した方向から接続する部屋をランダムで取得する
-            RogueDungeonRoom[] connectRooms;
-            switch (direction)
+            RogueDungeonRoom[] connectRooms = direction switch
             {
-                case Direction.Right:
-                    connectRooms = GetConnectedRoomsFromLeft(room.RightCorridor);
-                    break;
-                case Direction.Left:
-                    connectRooms = GetConnectedRoomsFromRight(room.LeftCorridor);
-                    break;
-                case Direction.Up:
-                    connectRooms = GetConnectedRoomsFromDown(room.UpCorridor);
-                    break;
-                case Direction.Down:
-                    connectRooms = GetConnectedRoomsFromUp(room.DownCorridor);
-                    break;
-                default:
-                    throw new RogueException();
-            }
+                Direction.Right => GetConnectedRoomsFromLeft(room.RightCorridor),
+                Direction.Left => GetConnectedRoomsFromRight(room.LeftCorridor),
+                Direction.Up => GetConnectedRoomsFromDown(room.UpCorridor),
+                Direction.Down => GetConnectedRoomsFromUp(room.DownCorridor),
+                _ => throw new RogueException(),
+            };
             connectRoom = random.Choice(connectRooms);
             return true;
         }

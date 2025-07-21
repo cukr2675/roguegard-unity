@@ -2,11 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-using System.Linq;
-
 namespace Roguegard.CharacterCreation
 {
-    [CreateAssetMenu(menuName = "RoguegardData/CharacterCreation/Data/Preset")]
+    [CreateAssetMenu(menuName = "Roguegard/Character Creation/Data/Preset")]
     [Objforming.IgnoreRequireRelationalComponent]
     public class PresetCreationData : ScriptableCharacterCreationData
     {
@@ -37,12 +35,14 @@ namespace Roguegard.CharacterCreation
 
         public CharacterCreationDataBuilder ToBuilder()
         {
-            var builder = new CharacterCreationDataBuilder();
-            builder.Name = DescriptionName;
-            builder.ShortName = ShortName;
-            builder.Details = Details;
-            builder.Cost = Cost;
-            builder.CostIsUnknown = CostIsUnknown;
+            var builder = new CharacterCreationDataBuilder
+            {
+                Name = DescriptionName,
+                ShortName = ShortName,
+                Details = Details,
+                Cost = Cost,
+                CostIsUnknown = CostIsUnknown
+            };
             builder.Race.Set(_race);
             builder.Appearances.AddClones(_appearances);
             builder.Intrinsics.AddClones(_intrinsics);

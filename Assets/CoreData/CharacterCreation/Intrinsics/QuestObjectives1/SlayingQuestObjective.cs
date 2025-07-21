@@ -1,10 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-using System.Text;
 using Lysionium;
 using Roguegard.Device;
+using System.Collections.Generic;
+using System.Text;
+using UnityEngine;
 
 namespace Roguegard.CharacterCreation
 {
@@ -30,14 +28,16 @@ namespace Roguegard.CharacterCreation
             }
 
             var targetOption = random.Choice(options);
-            var maxFloor = dungeon.Floors[dungeon.Floors.Length - 1].EndLv - 1;
+            var maxFloor = dungeon.Floors[^1].EndLv - 1;
             var count = random.Next(3, 5);
             var floor = random.Next(1, maxFloor);
 
-            var builder = new IntrinsicBuilder();
-            builder.Option = parent;
-            builder.OptionName = $"{targetOption.Name}討伐";
-            builder.OptionCaption = $"{floor}F で {targetOption.Name} を {count} 体討伐する";
+            var builder = new IntrinsicBuilder
+            {
+                Option = parent,
+                OptionName = $"{targetOption.Name}討伐",
+                OptionCaption = $"{floor}F で {targetOption.Name} を {count} 体討伐する"
+            };
             var member = (QuestMember)builder.GetMember(QuestMember.SourceInstance);
             var target = member.Targets.Add();
             target.Option = targetOption;

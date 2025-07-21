@@ -1,11 +1,8 @@
-using System.Collections;
+using Lysionium;
+using Roguegard.CharacterCreation;
+using RuntimeDotter;
 using System.Collections.Generic;
 using UnityEngine;
-
-using Lysionium;
-using RuntimeDotter;
-using Roguegard.CharacterCreation;
-using Roguegard.Device;
 
 namespace Roguegard
 {
@@ -62,11 +59,11 @@ namespace Roguegard
 
         public static IJsonSerializationSetting JsonSerialization { get; set; }
 
-        private static readonly List<ISelectOption> _dungeonSelectOption = new List<ISelectOption>();
+        private static readonly List<ISelectOption> _dungeonSelectOption = new();
 
         public static Spanning<ISelectOption> DungeonSelectOption => Spanning.Get(_dungeonSelectOption);
 
-        private static readonly Dictionary<string, Dictionary<string, object>> _assetTables = new Dictionary<string, Dictionary<string, object>>();
+        private static readonly Dictionary<string, Dictionary<string, object>> _assetTables = new();
 
         public static void AddDungeonSelectOption(ISelectOption dungeonSelectOption)
         {
@@ -83,7 +80,7 @@ namespace Roguegard
             foreach (var pair in table)
             {
                 var spaceLength = pair.Key.LastIndexOf('.');
-                var space = pair.Key.Substring(0, spaceLength);
+                var space = pair.Key[..spaceLength];
                 if (!_assetTables.TryGetValue(space, out var assetTable))
                 {
                     assetTable = new Dictionary<string, object>();

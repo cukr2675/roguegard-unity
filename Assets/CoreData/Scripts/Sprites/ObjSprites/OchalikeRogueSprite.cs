@@ -1,9 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-using UnityEngine.Tilemaps;
 using OchalikeSprites;
+using UnityEngine;
+using UnityEngine.Tilemaps;
 
 namespace Roguegard
 {
@@ -43,13 +40,15 @@ namespace Roguegard
             }
             else
             {
-                var instance = new OchalikeRogueSprite();
-                instance.rootBone = mainBone;
-                instance.root = new OchalikeEvaluatorNode(mainBone);
-                instance._tile = ScriptableObject.CreateInstance<TileObject>();
-                instance._tile.sprite = sprite;
-                instance.EffectedColor = effectedColor;
-                return instance;
+                var tile = ScriptableObject.CreateInstance<TileObject>();
+                tile.sprite = sprite;
+                return new OchalikeRogueSprite
+                {
+                    rootBone = mainBone,
+                    root = new OchalikeEvaluatorNode(mainBone),
+                    _tile = tile,
+                    EffectedColor = effectedColor
+                };
             }
         }
 

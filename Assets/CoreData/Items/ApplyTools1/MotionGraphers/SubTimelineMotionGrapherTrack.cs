@@ -1,6 +1,5 @@
-﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Roguegard
 {
@@ -9,12 +8,13 @@ namespace Roguegard
     {
         private readonly List<ISubTimelineClip> clips;
 
+        [Objforming.CreateInstance, SuppressMessage("Style", "IDE0051")]
+        private SubTimelineMotionGrapherTrack(bool _) { }
+
         public SubTimelineMotionGrapherTrack()
         {
             clips = new List<ISubTimelineClip>();
         }
-
-        [Objforming.CreateInstance] private SubTimelineMotionGrapherTrack(bool dummy) { }
 
         public void AddClip(ISubTimelineClip clip)
         {
@@ -31,7 +31,7 @@ namespace Roguegard
             }
             else
             {
-                value = clips[clips.Count - 1];
+                value = clips[^1];
                 return true;
             }
         }

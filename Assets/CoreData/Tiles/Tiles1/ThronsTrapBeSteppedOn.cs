@@ -1,8 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 using Roguegard.Extensions;
+using UnityEngine;
 
 namespace Roguegard
 {
@@ -20,7 +17,7 @@ namespace Roguegard
                 return false;
             }
 
-            if (callback == null) { callback = Effect.CreateCallback(trapTileInfo); }
+            callback ??= Effect.CreateCallback(trapTileInfo);
             return this.TryAffect(user, activationDepth, callback);
         }
 

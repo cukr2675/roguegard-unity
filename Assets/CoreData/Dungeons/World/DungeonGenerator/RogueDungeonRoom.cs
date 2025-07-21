@@ -1,5 +1,3 @@
-﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Roguegard
@@ -33,12 +31,13 @@ namespace Roguegard
         private RogueDungeonRoom Reshape(int? xMin = null, int? yMin = null, int? width = null, int? height = null)
         {
             var rect = ToRect(xMin, yMin, width, height);
-            var room = new RogueDungeonRoom(rect.position, rect.size);
-            room.RightCorridor = RightCorridor;
-            room.LeftCorridor = LeftCorridor;
-            room.UpCorridor = UpCorridor;
-            room.DownCorridor = DownCorridor;
-            return room;
+            return new RogueDungeonRoom(rect.position, rect.size)
+            {
+                RightCorridor = RightCorridor,
+                LeftCorridor = LeftCorridor,
+                UpCorridor = UpCorridor,
+                DownCorridor = DownCorridor
+            };
         }
 
         private RectInt ToRect(int? xMin = null, int? yMin = null, int? width = null, int? height = null)

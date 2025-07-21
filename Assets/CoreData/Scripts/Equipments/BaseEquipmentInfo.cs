@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Roguegard
@@ -40,7 +38,7 @@ namespace Roguegard
             if (equipEffect == null)
             {
                 addEffect = true;
-                if (this.equipEffect == null) { this.equipEffect = new EquipRogueEffect(equipment); }
+                this.equipEffect ??= new EquipRogueEffect(equipment);
                 equipEffect = this.equipEffect;
             }
             if (this.equipEffect != null && this.equipEffect.Index >= 0)

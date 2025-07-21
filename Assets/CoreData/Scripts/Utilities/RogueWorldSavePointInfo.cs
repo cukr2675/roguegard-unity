@@ -1,10 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-using Roguegard.CharacterCreation;
 using Roguegard.Device;
 using Roguegard.Extensions;
+using UnityEngine;
 
 namespace Roguegard
 {
@@ -19,7 +15,7 @@ namespace Roguegard
         public IApplyRogueMethod AfterLoad => _afterLoad;
         private static readonly IApplyRogueMethod _afterLoad = new AfterLoadRogueMethod();
 
-        private static readonly LobbyLeaderEffect lobbyLeaderEffect = new LobbyLeaderEffect();
+        private static readonly LobbyLeaderEffect lobbyLeaderEffect = new();
 
         private class BeforeSaveRogueMethod : BaseApplyRogueMethod
         {
@@ -136,7 +132,7 @@ namespace Roguegard
             float IValueEffect.Order => 0f;
             float IRogueObjUpdater.Order => 100f;
 
-            private static readonly MemberEffect memberEffect = new MemberEffect();
+            private static readonly MemberEffect memberEffect = new();
 
             void IValueEffect.AffectValue(IKeyword keyword, EffectableValue value, RogueObj self)
             {

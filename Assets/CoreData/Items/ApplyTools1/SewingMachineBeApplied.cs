@@ -1,12 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-using TMPro;
 using Lysionium;
 using OchalikeSprites;
-using RuntimeDotter;
 using Roguegard.Device;
+using RuntimeDotter;
+using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
 
 namespace Roguegard
 {
@@ -210,7 +208,7 @@ namespace Roguegard
                 else
                 {
                     // 新規装備品
-                    new SewedEquipmentInfoSet(data).CreateObj(arg.Self, Vector2Int.zero, RogueRandom.Primary);
+                    new SewedEquipmentInfoSet(data).CreateObj(arg.Self, Vector2Int.zero);
                 }
 
                 manager.PopMenuScreen(2);
@@ -227,28 +225,25 @@ namespace Roguegard
 
             public override void OpenScreen(in MMgr manager, in MArg arg)
             {
-                if (elms == null)
+                elms ??= new ISerializableKeyword[]
                 {
-                    elms = new ISerializableKeyword[]
-                    {
-                        //EquipKw.Shield,
-                        //EquipKw.Weapon,
-                        //EquipKw.Ammo,
-                        EquipKw.Headwear,
-                        EquipKw.Cloak,
-                        //EquipKw.Accessory,
-                        //EquipKw.BodyArmor,
-                        EquipKw.Tops,
-                        EquipKw.Boots,
-                        EquipKw.Bottoms,
-                        EquipKw.Lenses,
-                        EquipKw.FaceMask,
-                        EquipKw.Gloves,
-                        EquipKw.Socks,
-                        EquipKw.Innerwear,
-                        null
-                    };
-                }
+                    //EquipKw.Shield,
+                    //EquipKw.Weapon,
+                    //EquipKw.Ammo,
+                    EquipKw.Headwear,
+                    EquipKw.Cloak,
+                    //EquipKw.Accessory,
+                    //EquipKw.BodyArmor,
+                    EquipKw.Tops,
+                    EquipKw.Boots,
+                    EquipKw.Bottoms,
+                    EquipKw.Lenses,
+                    EquipKw.FaceMask,
+                    EquipKw.Gloves,
+                    EquipKw.Socks,
+                    EquipKw.Innerwear,
+                    null
+                };
 
                 view.ShowTemplate(elms, manager, arg)
                     ?

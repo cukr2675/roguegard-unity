@@ -1,6 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace Roguegard
 {
@@ -46,9 +44,10 @@ namespace Roguegard
         {
             if (!obj.TryGet<Info>(out _))
             {
-                var info = new Info();
-                info.info = new PostboxInfo();
-                obj.SetInfo(info);
+                obj.SetInfo(new Info
+                {
+                    info = new PostboxInfo()
+                });
             }
             else
             {

@@ -1,15 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 using System.IO;
+using UnityEngine;
 
 namespace Roguegard.CharacterCreation
 {
     /// <summary>
     /// Json テキストからなる <see cref="RogueObj"/> のクローンを生成する <see cref="ScriptableCharacterCreationData"/>
     /// </summary>
-    [CreateAssetMenu(menuName = "RoguegardData/CharacterCreation/Data/Json")]
+    [CreateAssetMenu(menuName = "Roguegard/Character Creation/Data/Json")]
     [Objforming.IgnoreRequireRelationalComponent]
     public class JsonCreationData : ScriptableCharacterCreationData
     {

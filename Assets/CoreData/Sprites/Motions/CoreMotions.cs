@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 using OchalikeSprites;
+using System.Collections;
+using UnityEngine;
 
 namespace Roguegard
 {

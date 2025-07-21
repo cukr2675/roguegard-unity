@@ -1,6 +1,4 @@
-﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace Roguegard
 {
@@ -41,7 +39,7 @@ namespace Roguegard
         [Objforming.IgnoreRequireRelationalComponent]
         private class Info : IRogueObjInfo
         {
-            private readonly List<IDungeonFloorCloser> closers = new List<IDungeonFloorCloser>();
+            private readonly List<IDungeonFloorCloser> closers = new();
 
             bool IRogueObjInfo.IsExclusedWhenSerialize => true;
 

@@ -1,5 +1,3 @@
-﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Roguegard
@@ -15,7 +13,7 @@ namespace Roguegard
                 // 敵対していないキャラが罠を踏んでも起動しないようにする
                 return false;
             }
-            if (!(arg.Other is IRogueTile tile)) return false;
+            if (arg.Other is not IRogueTile tile) return false;
             if (user.Location.Space.Tilemap.GetTop(user.Position).Info != tile.Info)
             {
                 // 無関係のタイルは置き換えない

@@ -1,7 +1,3 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 namespace Roguegard.CharacterCreation
 {
     public class OneHandedSwordAbility : AbilityIntrinsicOptionScript
@@ -69,7 +65,7 @@ namespace Roguegard.CharacterCreation
 
             float IValueEffect.Order => AttackUtility.BaseCupValueEffectOrder;
 
-            private static Effect instance = new Effect();
+            private static readonly Effect instance = new();
 
             public static void AffectTo(RogueObj obj)
             {
@@ -89,10 +85,11 @@ namespace Roguegard.CharacterCreation
 
             public override IRogueEffect DeepOrShallowCopy(RogueObj self, RogueObj clonedSelf)
             {
-                var clone = new Effect();
-                clone.LifeTime = LifeTime;
-                clone.Stack = Stack;
-                return clone;
+                return new Effect
+                {
+                    LifeTime = LifeTime,
+                    Stack = Stack
+                };
             }
         }
     }

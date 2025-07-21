@@ -1,12 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
 using UnityEngine.Tilemaps;
 
 namespace Roguegard
 {
-    [CreateAssetMenu(menuName = "RoguegardData/Tiles/TileInfo")]
+    [CreateAssetMenu(menuName = "Roguegard/Tiles/Tile Info")]
     [Objforming.Referable]
     public class RogueTileInfoData : ScriptableRogueTileInfo
     {

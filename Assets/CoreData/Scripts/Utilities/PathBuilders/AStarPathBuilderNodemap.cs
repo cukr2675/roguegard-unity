@@ -1,5 +1,3 @@
-﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Roguegard
@@ -56,7 +54,7 @@ namespace Roguegard
                     tilemap.GetTile(new Vector2Int(x, y), out _, out var groundTile, out var buildingTile, out var tileObj);
                     var topTile = buildingTile ?? groundTile;
                     var collide = GetCollider(topTile, tileObj);
-                    var cornerCollide = collide && (topTile != null ? topTile.Info.Category != CategoryKw.Pool : true);
+                    var cornerCollide = collide && (topTile == null || topTile.Info.Category != CategoryKw.Pool);
                     if (collide != node.HasCollider || cornerCollide != node.HasCornerCollider)
                     {
                         node.HasCollider = collide;

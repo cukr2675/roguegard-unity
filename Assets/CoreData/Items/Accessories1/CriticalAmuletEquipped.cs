@@ -1,12 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 namespace Roguegard.CharacterCreation
 {
     public class CriticalAmuletEquipped : ReferableScript, IEquippedEffectSource
     {
-        private static readonly Effect effect = new Effect();
+        private static readonly Effect effect = new();
 
         IEquippedEffect IEquippedEffectSource.CreateOrReuse(RogueObj equipment, IEquippedEffect effect)
         {

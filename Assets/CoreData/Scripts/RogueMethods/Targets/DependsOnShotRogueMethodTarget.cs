@@ -1,5 +1,3 @@
-﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Roguegard
@@ -16,10 +14,7 @@ namespace Roguegard
 
         public IRoguePredicator GetPredicator(RogueObj self, float predictionDepth, RogueObj ammo)
         {
-            if (ammo == null)
-            {
-                ammo = EquipmentUtility.GetAmmo(self, out _);
-            }
+            ammo ??= EquipmentUtility.GetAmmo(self, out _);
             if (ammo == null || predictionDepth >= 1f) return null;
 
             var ammoInfo = EquipmentUtility.GetAmmoInfo(ammo);

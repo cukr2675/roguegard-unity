@@ -1,7 +1,3 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 namespace Roguegard
 {
     /// <summary>
@@ -59,8 +55,7 @@ namespace Roguegard
         {
             if (rider != Rider) throw new RogueException();
 
-            var clone = new RideRogueEffect(vehicle);
-            clone.Rider = clonedRider;
+            var clone = new RideRogueEffect(vehicle) { Rider = clonedRider };
             return clone;
         }
 

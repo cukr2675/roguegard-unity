@@ -1,7 +1,3 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 namespace Roguegard.CharacterCreation
 {
     public class ShieldThrowingAbility : AbilityIntrinsicOptionScript
@@ -16,7 +12,7 @@ namespace Roguegard.CharacterCreation
         {
             float IRogueMethodActiveAspect.Order => 0f;
 
-            private static readonly CommonBeShot beShotMethod = new CommonBeShot();
+            private static readonly CommonBeShot beShotMethod = new();
 
             public SortedIntrinsic(int lv) : base(lv) { }
 

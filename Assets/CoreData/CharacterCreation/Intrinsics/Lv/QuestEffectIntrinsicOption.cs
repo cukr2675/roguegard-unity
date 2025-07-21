@@ -1,10 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Roguegard.CharacterCreation
 {
-    [CreateAssetMenu(menuName = "RoguegardData/CharacterCreation/Intrinsic/QuestEffect")]
+    [CreateAssetMenu(menuName = "Roguegard/Character Creation/Intrinsic/Quest Effect")]
     [Objforming.Referable]
     public class QuestEffectIntrinsicOption : ScriptIntrinsicOption
     {
@@ -20,9 +18,10 @@ namespace Roguegard.CharacterCreation
             }
             else
             {
-                var builder = new IntrinsicBuilder();
-                builder.Option = this;
-                return builder;
+                return new IntrinsicBuilder
+                {
+                    Option = this
+                };
             }
         }
     }

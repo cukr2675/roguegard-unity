@@ -1,5 +1,3 @@
-﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Roguegard.CharacterCreation
@@ -29,9 +27,10 @@ namespace Roguegard.CharacterCreation
 
         public IMember Clone()
         {
-            var clone = new EquipMember();
-            clone.IsEquipped = _isEquipped;
-            return clone;
+            return new EquipMember
+            {
+                IsEquipped = _isEquipped
+            };
         }
 
         private class SourceType : IMemberSource

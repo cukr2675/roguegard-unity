@@ -1,10 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Roguegard
 {
-    [CreateAssetMenu(menuName = "RoguegardData/GenderList")]
+    [CreateAssetMenu(menuName = "Roguegard/Gender List")]
     public class RogueGenderList : ScriptableObject
     {
         [SerializeField] private RogueGender[] _genders = null;

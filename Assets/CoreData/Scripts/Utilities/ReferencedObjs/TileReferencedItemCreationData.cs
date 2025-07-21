@@ -1,10 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Roguegard.CharacterCreation
 {
-    [CreateAssetMenu(menuName = "RoguegardData/CharacterCreation/Data/TileReferencedItem")]
+    [CreateAssetMenu(menuName = "Roguegard/Character Creation/Data/Tile Referenced Item")]
     [Objforming.Referable]
     public class TileReferencedItemCreationData : ItemCreationData
     {

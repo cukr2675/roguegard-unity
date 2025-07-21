@@ -1,10 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Roguegard.CharacterCreation
 {
-    [CreateAssetMenu(menuName = "RoguegardData/CharacterCreation/Data/Singleton/TileLaying")]
+    [CreateAssetMenu(menuName = "Roguegard/Character Creation/Data/Singleton/Tile Laying")]
     [Objforming.IgnoreRequireRelationalComponent]
     public class TileLayingCreationData : ScriptableCharacterCreationData
     {

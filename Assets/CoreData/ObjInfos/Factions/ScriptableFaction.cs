@@ -1,10 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Roguegard.CharacterCreation
 {
-    [CreateAssetMenu(menuName = "RoguegardData/CharacterCreation/Race/Faction")]
+    [CreateAssetMenu(menuName = "Roguegard/Character Creation/Race/Faction")]
     public class ScriptableFaction : ScriptableObject
     {
         [SerializeField] private SerializableKeywordData _faction;

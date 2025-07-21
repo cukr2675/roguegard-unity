@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 using Roguegard.Extensions;
+using System.Collections.Generic;
 
 namespace Roguegard
 {

@@ -1,14 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 using Roguegard.Extensions;
 
 namespace Roguegard.CharacterCreation
 {
     public class RandomWalkOpen : ReferableScript, IOpenEffect
     {
-        private static readonly Effect effect = new Effect();
+        private static readonly Effect effect = new();
 
         public IRaceOption Open(
             RogueObj self, MainInfoSetType infoSetType, bool polymorph2Base, IRaceOption raceOption, ICharacterCreationData characterCreationData)

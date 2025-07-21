@@ -1,5 +1,3 @@
-﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Roguegard.CharacterCreation
@@ -29,11 +27,12 @@ namespace Roguegard.CharacterCreation
 
         public IMember Clone()
         {
-            var clone = new StandardRaceMember();
-            clone.Size = _size;
-            clone.TypeIndex = _typeIndex;
-            clone.MotionSetIndex = _motionSetIndex;
-            return clone;
+            return new StandardRaceMember
+            {
+                Size = _size,
+                TypeIndex = _typeIndex,
+                MotionSetIndex = _motionSetIndex
+            };
         }
 
         private class SourceType : IMemberSource

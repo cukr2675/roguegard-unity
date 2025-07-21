@@ -1,7 +1,3 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 namespace Roguegard
 {
     /// <summary>
@@ -32,8 +28,6 @@ namespace Roguegard
         /// </summary>
         public static void SetTo(RogueObj vehicle, IVehicleInfo vehicleInfo)
         {
-            if (vehicleInfo == null) throw new System.ArgumentNullException(nameof(vehicleInfo));
-
             if (!vehicle.TryGet<Info>(out var info))
             {
                 info = new Info();
@@ -43,7 +37,7 @@ namespace Roguegard
             // 上書き不可
             if (info.info != null) throw new RogueException();
 
-            info.info = vehicleInfo;
+            info.info = vehicleInfo ?? throw new System.ArgumentNullException(nameof(vehicleInfo));
         }
 
         public static void RemoveFrom(RogueObj vehicle)

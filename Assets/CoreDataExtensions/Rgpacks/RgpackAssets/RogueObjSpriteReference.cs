@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -32,7 +32,7 @@ namespace Roguegard.Rgpacks
             else if (Asset is SewedEquipmentData sewedEquipmentData)
             {
                 var infoSet = new SewedEquipmentInfoSet(sewedEquipmentData);
-                var obj = infoSet.CreateObj(null, Vector2Int.zero, random);
+                var obj = infoSet.CreateObj(null, Vector2Int.zero);
                 sprite = new ObjSprite() { info = obj.Main.Sprite };
                 ochalikeMorph = sewedEquipmentData.BoneSprites.GetOchalikeMorph();
             }

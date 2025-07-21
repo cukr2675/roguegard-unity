@@ -1,7 +1,5 @@
-﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
 namespace Roguegard
@@ -20,7 +18,8 @@ namespace Roguegard
             items = new List<KeyFrame>();
         }
 
-        [Objforming.CreateInstance] private PaintKeyFrameList(bool dummy) { }
+        [Objforming.CreateInstance, SuppressMessage("Style", "IDE0051")]
+        private PaintKeyFrameList(bool _) { }
 
         public bool TryGetValue(float time, out IPaintBoneSprite value)
         {

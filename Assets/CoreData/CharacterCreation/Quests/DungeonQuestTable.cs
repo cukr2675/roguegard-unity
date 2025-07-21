@@ -1,13 +1,11 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace Roguegard.CharacterCreation
 {
     [Objforming.Formable]
     public class DungeonQuestTable
     {
-        private readonly List<Item> items = new List<Item>();
+        private readonly List<Item> items = new();
 
         public int Count => items.Count;
 

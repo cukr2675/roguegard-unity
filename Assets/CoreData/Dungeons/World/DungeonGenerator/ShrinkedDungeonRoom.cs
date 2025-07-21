@@ -1,4 +1,3 @@
-﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -19,7 +18,7 @@ namespace Roguegard
         private readonly List<int> upVariablePositions;
         private readonly List<int> downVariablePositions;
 
-        private static readonly List<int> positions = new List<int>();
+        private static readonly List<int> positions = new();
         private const int roomWallWidth = 1;
 
         public ShrinkedDungeonRoom(RogueDungeonRoom room, RectInt rect)
@@ -123,7 +122,7 @@ namespace Roguegard
             {
                 // 入口の設定に十分な幅がないとき、最大位置を返す
                 Debug.LogWarning("通路の幅が部屋の幅を超えています。");
-                var position = variablePositions[variablePositions.Count - 1];
+                var position = variablePositions[^1];
                 corridorPositions.Add(position);
                 variablePositions.Clear();
                 return position;

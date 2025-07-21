@@ -1,10 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Roguegard
 {
-    [CreateAssetMenu(menuName = "RoguegardData/Keyword/Equip")]
+    [CreateAssetMenu(menuName = "Roguegard/Keyword/Equip")]
     [Objforming.Referable]
     public class EquipKeywordData : SerializableKeywordData
     {

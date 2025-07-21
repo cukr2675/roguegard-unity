@@ -1,10 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 using Lysionium;
-using Roguegard.Device;
 using Roguegard.CharacterCreation;
+using Roguegard.Device;
+using System.Collections.Generic;
 
 namespace Roguegard
 {
@@ -17,7 +14,7 @@ namespace Roguegard
         int ISkillDescription.RequiredMp => 0;
         Spanning<IKeyword> ISkillDescription.AmmoCategories => Spanning<IKeyword>.Empty;
 
-        private static readonly RogueMenu rogueMenu = new RogueMenu();
+        private static readonly RogueMenu rogueMenu = new();
 
         public bool Invoke(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
         {
@@ -40,8 +37,8 @@ namespace Roguegard
 
         public class RogueMenu : RogueMenuScreen
         {
-            private static readonly List<DungeonQuest> elms = new List<DungeonQuest>();
-            private static readonly QuestViewMenu nextMenu = new QuestViewMenu();
+            private static readonly List<DungeonQuest> elms = new();
+            private static readonly QuestViewMenu nextMenu = new();
 
             private readonly ScrollViewTemplate<DungeonQuest, MMgr, MArg> view = new()
             {

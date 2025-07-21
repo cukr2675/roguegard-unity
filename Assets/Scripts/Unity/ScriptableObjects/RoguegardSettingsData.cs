@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -28,7 +28,7 @@ namespace RoguegardUnity
 
         [SerializeField] private ItemCreationData _money = null;
 
-        [SerializeField] private Vector2Int _maxTilemapSize = new Vector2Int(y: 64, x: 96);
+        [SerializeField] private Vector2Int _maxTilemapSize = new(y: 64, x: 96);
         // y: 64 透明マップのチップを4x4としたとき、縦幅を256に収めるサイズ
         // x: 96 縦幅に対して16:9に収まるサイズ
 
@@ -149,16 +149,19 @@ namespace RoguegardUnity
             {
                 // Core の AssetTable を Rgpack 化して読み込み
                 var assetTable = new Dictionary<string, object>(
-                    RoguegardSettings.GetAssetTable("Core").Select(x => new KeyValuePair<string, object>(x.Key.Substring("Core.".Length), x.Value)));
-                assetTable.Add("Smile", CoreFacials.Smile);
-                assetTable.Add("ColdLook", CoreFacials.ColdLook);
+                    RoguegardSettings.GetAssetTable("Core").Select(x => new KeyValuePair<string, object>(x.Key["Core.".Length..], x.Value)))
+                {
+                    { "Smile", CoreFacials.Smile },
+                    { "ColdLook", CoreFacials.ColdLook }
+                };
                 RgpackReference.LoadRgpack(new Rgpack("Core", assetTable, Rgpacker.DefaultEvaluator));
             }
             {
                 // Rgpack モジュールを読み込み
-                var rgpack = new Dictionary<string, object>();
-                rgpack.Add("LootChart", new ChartPadInfo());
-                rgpack.Add("LootChart_lua", @"
+                var rgpack = new Dictionary<string, object>
+                {
+                    { "LootChart", new ChartPadInfo() },
+                    { "LootChart_lua", @"
 local Rg = require('roguegard')
 local m = {}
 
@@ -181,7 +184,8 @@ function m.LootCmn:invoke(owner, user)
 end
 
 return m
-");
+" }
+                };
                 RgpackReference.LoadRgpack(new Rgpack("Rgpack", rgpack, Rgpacker.DefaultEvaluator));
             }
             yield break;

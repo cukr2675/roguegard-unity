@@ -1,11 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
+using Lysionium;
 using OchalikeSprites;
 using Roguegard.CharacterCreation;
-
-using Lysionium;
+using System.Collections.Generic;
+using UnityEngine;
 
 namespace Roguegard.Device
 {
@@ -110,9 +107,7 @@ namespace Roguegard.Device
                         if (item?.Main.BaseInfoSet is SewedEquipmentInfoSet &&
                             item.Main.RogueEffects.Effects.Length <= 1)
                         {
-                            var objOption = new ObjStartingItemOption();
-                            objOption.Obj = item.Clone();
-                            elms.Add(objOption);
+                            elms.Add(new ObjStartingItemOption { Obj = item.Clone() });
                             continue;
                         }
                     }
@@ -175,9 +170,7 @@ namespace Roguegard.Device
                     if (item?.Main.BaseInfoSet is SewedEquipmentInfoSet &&
                         item.Main.RogueEffects.Effects.Length <= 1)
                     {
-                        var objOption = new ObjStartingItemOption();
-                        objOption.Obj = item.Clone();
-                        elms.Add(objOption);
+                        elms.Add(new ObjStartingItemOption { Obj = item.Clone() });
                         continue;
                     }
                 }

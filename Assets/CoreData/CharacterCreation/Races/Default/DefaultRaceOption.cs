@@ -1,15 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 using OchalikeSprites;
+using UnityEngine;
 
 namespace Roguegard.CharacterCreation
 {
     /// <summary>
     /// <see cref="ObjectRaceOption"/> がデフォルトで返す値。
     /// </summary>
-    [CreateAssetMenu(menuName = "RoguegardData/CharacterCreation/Race/Default")]
+    [CreateAssetMenu(menuName = "Roguegard/Character Creation/Race/Default")]
     public class DefaultRaceOption : ScriptableObject
     {
         [SerializeField] private RogueGenderList _genders;

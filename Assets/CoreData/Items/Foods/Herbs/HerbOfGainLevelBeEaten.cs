@@ -1,9 +1,3 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-using Roguegard.Extensions;
-
 namespace Roguegard
 {
     public class HerbOfGainLevelBeEaten : BaseBeEatenRogueMethod
@@ -13,7 +7,7 @@ namespace Roguegard
         public override IRogueMethodTarget Target => ForPartyMemberRogueMethodTarget.Instance;
         public override IRogueMethodRange Range => UserRogueMethodRange.Instance;
 
-        private static LoseExpRogueMethod loseExp = new LoseExpRogueMethod();
+        private static readonly LoseExpRogueMethod loseExp = new();
 
         protected override void BeEaten(RogueObj self, RogueObj user, float activationDepth)
         {

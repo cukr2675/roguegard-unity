@@ -1,7 +1,3 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 namespace Roguegard
 {
     public class PartyBoardBeApplied : ReferableScript, IApplyRogueMethod
@@ -13,7 +9,7 @@ namespace Roguegard
         int ISkillDescription.RequiredMp => 0;
         Spanning<IKeyword> ISkillDescription.AmmoCategories => Spanning<IKeyword>.Empty;
 
-        private static readonly PartyBoardMenu menu = new PartyBoardMenu();
+        private static readonly PartyBoardMenu menu = new();
 
         public bool Invoke(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
         {

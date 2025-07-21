@@ -1,7 +1,3 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 namespace Roguegard.CharacterCreation
 {
     public class CaringAbility : PartyAbilityIntrinsicOptionScript
@@ -17,7 +13,7 @@ namespace Roguegard.CharacterCreation
             float IRogueObjUpdater.Order => 100f;
             float IValueEffect.Order => 0f;
 
-            private static readonly MemberEffect memberEffect = new MemberEffect();
+            private static readonly MemberEffect memberEffect = new();
 
             public SortedIntrinsic(int lv) : base(lv) { }
 

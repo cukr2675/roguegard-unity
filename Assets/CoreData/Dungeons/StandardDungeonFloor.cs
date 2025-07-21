@@ -1,12 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 using Roguegard.Extensions;
+using UnityEngine;
 
 namespace Roguegard.CharacterCreation
 {
-    [CreateAssetMenu(menuName = "RoguegardData/Dungeon/Floors/Standard")]
+    [CreateAssetMenu(menuName = "Roguegard/Dungeon/Floors/Standard")]
     public class StandardDungeonFloor : RogueDungeonFloor
     {
         [SerializeField] private RogueDungeonGenerator _dungeonGenerator = null;
@@ -35,10 +32,11 @@ namespace Roguegard.CharacterCreation
             {
                 floor.Main.Stats.SetLv(floor, lv);
                 _dungeonGenerator.Generate(floor.Space, random);
-                
-                var effect = new Effect();
-                effect.lv = lv;
-                floor.Main.RogueEffects.AddOpen(floor, effect);
+
+                floor.Main.RogueEffects.AddOpen(floor, new Effect
+                {
+                    lv = lv
+                });
 
                 var monsterHouse = random.NextFloat(0f, 1f);
                 if (monsterHouse <= _monsterHouseRate)
@@ -105,7 +103,7 @@ namespace Roguegard.CharacterCreation
                 {
                     if (!DungeonInfo.TryGet(self, out var info) ||
                         !info.TryGetFloor(lv, out var floor) ||
-                        !(floor is StandardDungeonFloor standardFloor))
+                        floor is not StandardDungeonFloor standardFloor)
                     {
                         Debug.LogError("ダンジョン階層データの取得に失敗しました。");
                         return default;

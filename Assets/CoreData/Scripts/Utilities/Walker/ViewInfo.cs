@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Roguegard
@@ -7,14 +5,14 @@ namespace Roguegard
     [Objforming.Formable]
     public class ViewInfo : IRogueTilemapView
     {
-        [System.NonSerialized] private ViewMap viewMap;
+        [System.NonSerialized] private readonly ViewMap viewMap;
 
         [field: System.NonSerialized] public bool QueueHasItem { get; private set; }
 
         public int Width => viewMap.Width;
         public int Height => viewMap.Height;
 
-        Vector2Int IRogueTilemapView.Size => new Vector2Int(Width, Height);
+        Vector2Int IRogueTilemapView.Size => new(Width, Height);
 
         Spanning<RogueObj> IRogueTilemapView.VisibleObjs => viewMap.VisibleObjs.Span;
 
@@ -27,7 +25,7 @@ namespace Roguegard
             viewMap = new ViewMap(RoguegardSettings.MaxTilemapSize);
         }
 
-        private ViewInfo(bool flag)
+        private ViewInfo(bool _)
         {
             viewMap = new ViewMap(RoguegardSettings.MaxTilemapSize);
         }
@@ -115,8 +113,10 @@ namespace Roguegard
 
         public static ViewInfo SetTo(RogueObj obj)
         {
-            var info = new Info();
-            info.info = new ViewInfo(false);
+            var info = new Info
+            {
+                info = new ViewInfo(false)
+            };
             obj.SetInfo(info);
             return info.info;
         }

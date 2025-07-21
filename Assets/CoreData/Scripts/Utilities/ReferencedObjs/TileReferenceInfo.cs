@@ -1,6 +1,4 @@
-﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace Roguegard
 {
@@ -39,9 +37,10 @@ namespace Roguegard
         {
             if (!obj.TryGet<Info>(out _))
             {
-                var info = new Info();
-                info.info = new TileReferenceInfo(tiles);
-                obj.SetInfo(info);
+                obj.SetInfo(new Info
+                {
+                    info = new TileReferenceInfo(tiles)
+                });
             }
             else
             {
@@ -63,7 +62,7 @@ namespace Roguegard
 
             public bool CanStack(IRogueObjInfo coming)
             {
-                if (!(coming is Info comingInfo)) return false;
+                if (coming is not Info comingInfo) return false;
                 if (info.Count != comingInfo.info.Count) return false;
                 for (int i = 0; i < info.Count; i++)
                 {

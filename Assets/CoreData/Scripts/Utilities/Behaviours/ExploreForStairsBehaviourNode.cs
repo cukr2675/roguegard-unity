@@ -1,8 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 using Roguegard.Extensions;
+using UnityEngine;
 
 namespace Roguegard
 {
@@ -14,8 +11,8 @@ namespace Roguegard
         private bool selectedPositionIsEnabled;
         private Vector2Int selectedPosition;
 
-        private static readonly CommandFloorDownStairs apply = new CommandFloorDownStairs();
-        private static readonly CommandDownStairs apply2 = new CommandDownStairs();
+        private static readonly CommandFloorDownStairs apply = new();
+        private static readonly CommandDownStairs apply2 = new();
 
         public RogueObjUpdaterContinueType Tick(RogueObj self, float activationDepth)
         {
@@ -61,10 +58,9 @@ namespace Roguegard
                 return RogueObjUpdaterContinueType.Break;
             }
             {
-                RogueDirection nextDirection = default;
                 if (!selectedPositionIsEnabled ||
                     !PathBuilder.UpdatePath(self, selectedPosition) ||
-                    !PathBuilder.TryGetNextDirection(self, out nextDirection))
+                    !PathBuilder.TryGetNextDirection(self, out _))
                 {
                     selectedPositionIsEnabled = false;
                 }
@@ -74,7 +70,7 @@ namespace Roguegard
                     if (!UpdateSelectedPosition(self, view)) return RogueObjUpdaterContinueType.Continue;
                 }
                 if (!PathBuilder.UpdatePath(self, selectedPosition) ||
-                    !PathBuilder.TryGetNextDirection(self, out nextDirection)) return RogueObjUpdaterContinueType.Continue;
+                    !PathBuilder.TryGetNextDirection(self, out var nextDirection)) return RogueObjUpdaterContinueType.Continue;
 
                 default(IActiveRogueMethodCaller).Walk(self, nextDirection, activationDepth, true);
                 return RogueObjUpdaterContinueType.Break;

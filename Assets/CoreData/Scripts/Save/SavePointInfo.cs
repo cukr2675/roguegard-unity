@@ -1,5 +1,3 @@
-﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Roguegard
@@ -28,9 +26,7 @@ namespace Roguegard
                 return;
             }
 
-            var objInfo = new Info();
-            objInfo.info = info;
-            obj.SetInfo(objInfo);
+            obj.SetInfo(new Info { info = info });
         }
 
         public static void RemoveFrom(RogueObj obj)

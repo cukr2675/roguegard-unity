@@ -1,5 +1,3 @@
-﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Roguegard.CharacterCreation
@@ -15,15 +13,8 @@ namespace Roguegard.CharacterCreation
         private IStartingItemOption _itemOption;
         public IStartingItemOption ItemOption
         {
-            get
-            {
-                if (_itemOption == null) { _itemOption = _item; }
-                return _itemOption;
-            }
-            set
-            {
-                _itemOption = value;
-            }
+            get => _itemOption ??= _item;
+            set => _itemOption = value;
         }
 
         private SingleItemMember() { }
@@ -35,9 +26,10 @@ namespace Roguegard.CharacterCreation
 
         public IMember Clone()
         {
-            var clone = new SingleItemMember();
-            clone._itemOption = _itemOption ?? _item; // CharacterCreationBuilder 生成時に必ず Clone が実行されるため、この設定だけでシリアル化可能
-            return clone;
+            return new SingleItemMember
+            {
+                _itemOption = _itemOption ?? _item // CharacterCreationBuilder 生成時に必ず Clone が実行されるため、この設定だけでシリアル化可能
+            };
         }
 
         private class SourceType : IMemberSource

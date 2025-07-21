@@ -1,5 +1,3 @@
-﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Roguegard
@@ -12,10 +10,7 @@ namespace Roguegard
 
         public override bool Invoke(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
         {
-            if (closer == null)
-            {
-                closer = new Closer(_skill.Ref);
-            }
+            closer ??= new Closer(_skill.Ref);
 
             user.Main.Skills.Add(_skill.Ref, MainInfoSetType.Other);
             user.Main.RogueEffects.AddOpen(user, closer);

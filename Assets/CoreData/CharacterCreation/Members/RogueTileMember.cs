@@ -1,5 +1,3 @@
-﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Roguegard.CharacterCreation
@@ -23,9 +21,10 @@ namespace Roguegard.CharacterCreation
 
         public IMember Clone()
         {
-            var clone = new RogueTileMember();
-            clone._tile = _tile;
-            return clone;
+            return new RogueTileMember
+            {
+                _tile = _tile
+            };
         }
 
         private class SourceType : IMemberSource

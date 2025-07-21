@@ -1,11 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
 namespace Roguegard
 {
-    [CreateAssetMenu(menuName = "RoguegardData/Tiles/NullEquivalentRuleTile")]
+    [CreateAssetMenu(menuName = "Roguegard/Tiles/Rule Tile/Null Equivalent Rule Tile")]
     public class NullEquivalentRuleTile : RuleTile
     {
         public override bool RuleMatch(int neighbor, TileBase other)

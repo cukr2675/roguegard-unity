@@ -1,11 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 using Lysionium;
 using Roguegard.CharacterCreation;
 using Roguegard.Device;
 using Roguegard.Extensions;
+using System.Collections.Generic;
 
 namespace Roguegard
 {
@@ -13,8 +10,8 @@ namespace Roguegard
     {
         private static readonly List<RogueObj> elms = new();
 
-        private static readonly CommandMenu nextMenu = new CommandMenu();
-        private static readonly PartyBoardCharacterCreationMenu newMenu = new PartyBoardCharacterCreationMenu();
+        private static readonly CommandMenu nextMenu = new();
+        private static readonly PartyBoardCharacterCreationMenu newMenu = new();
 
         private readonly ScrollViewTemplate<RogueObj, MMgr, MArg> view = new()
         {
@@ -99,7 +96,7 @@ namespace Roguegard
 
         private class CommandMenu : RogueMenuScreen
         {
-            private static readonly PartyBoardCharacterCreationMenu nextMenu = new PartyBoardCharacterCreationMenu();
+            private static readonly PartyBoardCharacterCreationMenu nextMenu = new();
 
             private readonly MainMenuViewTemplate<MMgr, MArg> view = new()
             {

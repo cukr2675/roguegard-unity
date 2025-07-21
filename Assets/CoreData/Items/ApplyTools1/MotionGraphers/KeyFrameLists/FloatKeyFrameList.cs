@@ -1,8 +1,7 @@
-﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using UnityEngine;
 
 namespace Roguegard
 {
@@ -20,7 +19,8 @@ namespace Roguegard
             items = new List<KeyFrame>();
         }
 
-        [Objforming.CreateInstance] private FloatKeyFrameList(bool dummy) { }
+        [Objforming.CreateInstance, SuppressMessage("Style", "IDE0051")]
+        private FloatKeyFrameList(bool _) { }
 
         public bool TryGetValue(float time, out float value)
         {
@@ -48,7 +48,7 @@ namespace Roguegard
                 var rate = Mathf.InverseLerp(items[i - 1].Time, items[i].Time, time);
                 return Mathf.Lerp(items[i - 1].Value, items[i].Value, rate);
             }
-            return items[items.Count - 1].Value;
+            return items[^1].Value;
         }
 
         private int IndexOf(float time)

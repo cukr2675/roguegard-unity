@@ -1,7 +1,3 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 namespace Roguegard.Device
 {
     [Objforming.Formable]
@@ -10,7 +6,7 @@ namespace Roguegard.Device
         /// <summary>
         /// 例外発生時に無限ループしないために <see cref="StaticId"/> でリセットする
         /// </summary>
-        [System.NonSerialized] private StaticInitializable<IDeviceCommandAction> commandAction = new StaticInitializable<IDeviceCommandAction>(() => null);
+        [System.NonSerialized] private readonly StaticInitializable<IDeviceCommandAction> commandAction = new(() => null);
 
         [System.NonSerialized] private RogueObj commandUser;
         [System.NonSerialized] private RogueMethodArgument commandArg;

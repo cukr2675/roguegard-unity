@@ -1,10 +1,9 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Roguegard.CharacterCreation
 {
-    [CreateAssetMenu(menuName = "RoguegardData/DungeonQuestGenerator")]
+    [CreateAssetMenu(menuName = "Roguegard/Dungeon Quest Generator")]
     public class DungeonQuestGenerator : ScriptableObject
     {
         [SerializeField] private QuestEffectIntrinsicOption[] _objectiveEffects = null;

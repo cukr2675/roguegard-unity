@@ -1,14 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 using Lysionium;
 using Roguegard.Device;
 using Roguegard.Extensions;
+using UnityEngine;
 
 namespace Roguegard.CharacterCreation
 {
-    [CreateAssetMenu(menuName = "RoguegardData/CharacterCreation/Data/Location/Dungeon")]
+    [CreateAssetMenu(menuName = "Roguegard/Character Creation/Data/Location/Dungeon")]
     [Objforming.Referable]
     public class DungeonCreationData : ScriptableCharacterCreationData
     {
@@ -41,7 +38,7 @@ namespace Roguegard.CharacterCreation
 
         // ターン経過で満腹度消費
         // 自然回復あり
-        private static readonly UseNutritionLeaderEffect useNutritionLeaderEffect = new UseNutritionLeaderEffect();
+        private static readonly UseNutritionLeaderEffect useNutritionLeaderEffect = new();
 
         public ISelectOption CreateDungeonSelectOption()
         {

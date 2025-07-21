@@ -1,8 +1,6 @@
-using System.Collections;
+using RuntimeDotter;
 using System.Collections.Generic;
 using UnityEngine;
-
-using RuntimeDotter;
 
 namespace Roguegard
 {
@@ -71,12 +69,14 @@ namespace Roguegard
             // 上書き不可
             if (info.info != null) throw new RogueException();
 
-            info.info = new MotionGrapherInfo();
-            info.info._tracks = new List<IMotionGrapherTrack>();
-            info.info.LoopCount = 0; // 無限ループ
-            info.info.PlaybackSpeed = 1f;
-            info.info.MainColor = Color.white;
-            info.info._palette = RoguegardSettings.DefaultPalette.ToArray();
+            info.info = new MotionGrapherInfo
+            {
+                _tracks = new List<IMotionGrapherTrack>(),
+                LoopCount = 0, // 無限ループ
+                PlaybackSpeed = 1f,
+                MainColor = Color.white,
+                _palette = RoguegardSettings.DefaultPalette.ToArray()
+            };
         }
 
         bool ISubTimelineClip.TryGet<T>(out T value)

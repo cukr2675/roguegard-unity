@@ -1,5 +1,3 @@
-﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Roguegard.CharacterCreation
@@ -13,14 +11,7 @@ namespace Roguegard.CharacterCreation
 
         [SerializeField, Objforming.IgnoreMember] private ScriptableStartingItem _item;
         private StartingItemBuilder builder;
-        public StartingItemBuilder Item
-        {
-            get
-            {
-                if (builder == null) { builder = new StartingItemBuilder(_item); }
-                return builder;
-            }
-        }
+        public StartingItemBuilder Item => builder ??= new StartingItemBuilder(_item);
         IReadOnlyStartingItem IReadOnlyItemMember.Item => Item;
 
         private ItemMember() { }
@@ -32,8 +23,7 @@ namespace Roguegard.CharacterCreation
 
         public IMember Clone()
         {
-            var clone = new ItemMember();
-            clone.builder = builder;
+            var clone = new ItemMember { builder = builder };
 
             // CharacterCreationBuilder 生成時に必ず Clone が実行されるため、この設定だけでシリアル化可能
             if (clone.builder == null && _item?.Option != null) { clone.builder = new StartingItemBuilder(_item); }

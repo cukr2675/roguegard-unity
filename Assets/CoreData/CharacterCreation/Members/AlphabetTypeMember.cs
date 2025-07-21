@@ -1,8 +1,6 @@
-﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-
 using System.Linq;
+using UnityEngine;
 
 namespace Roguegard.CharacterCreation
 {
@@ -18,7 +16,7 @@ namespace Roguegard.CharacterCreation
 
         public string Type => typeChars[_typeIndex].ToString();
 
-        [System.NonSerialized] private readonly List<Sprite> typeItems = new List<Sprite>();
+        [System.NonSerialized] private readonly List<Sprite> typeItems = new();
         [System.NonSerialized] private string[] _types;
         public Spanning<string> Types
         {
@@ -52,9 +50,10 @@ namespace Roguegard.CharacterCreation
 
         public IMember Clone()
         {
-            var clone = new AlphabetTypeMember();
-            clone._typeIndex = _typeIndex;
-            return clone;
+            return new AlphabetTypeMember
+            {
+                _typeIndex = _typeIndex
+            };
         }
 
         private class SourceType : IMemberSource

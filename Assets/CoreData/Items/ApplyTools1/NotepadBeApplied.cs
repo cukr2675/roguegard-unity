@@ -1,7 +1,3 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 using Lysionium;
 using Roguegard.Device;
 
@@ -9,7 +5,7 @@ namespace Roguegard
 {
     public class NotepadBeApplied : BaseApplyRogueMethod
     {
-        private static readonly Menu menu = new Menu();
+        private static readonly Menu menu = new();
 
         public override bool Invoke(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
         {

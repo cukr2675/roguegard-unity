@@ -1,9 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-using System.Linq;
 using OchalikeSprites;
+using System.Linq;
+using UnityEngine;
 
 namespace Roguegard.CharacterCreation
 {
@@ -56,7 +53,7 @@ namespace Roguegard.CharacterCreation
                 return;
             }
 
-            _ochalikeMorph?.ColoredAddTo(table, color);
+            if (_ochalikeMorph != null) { _ochalikeMorph.ColoredAddTo(table, color); }
         }
 
         protected class EquipmentInfo<T> : BaseEquipmentInfo, IBoneSpriteEffect
@@ -114,7 +111,7 @@ namespace Roguegard.CharacterCreation
                 if (Data._eyeDropBoneName != null)
                 {
                     var color = RogueColorUtility.GetMorphedBareColor(Data._eyeDropBoneName, rootBone, ochalikeMorph);
-                    Data._ochalikeMorph?.ColoredAddTo(ochalikeMorph, color);
+                    if (Data._ochalikeMorph != null) { Data._ochalikeMorph.ColoredAddTo(ochalikeMorph, color); }
                     return;
                 }
 
@@ -123,7 +120,7 @@ namespace Roguegard.CharacterCreation
                     color = RogueColorUtility.GetColor(self);
                     colorIsInitialized = true;
                 }
-                Data._ochalikeMorph?.ColoredAddTo(ochalikeMorph, color);
+                if (Data._ochalikeMorph != null) { Data._ochalikeMorph.ColoredAddTo(ochalikeMorph, color); }
             }
         }
     }

@@ -1,7 +1,3 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 namespace Roguegard.CharacterCreation
 {
     public class WanderingOpen : ReferableScript, IOpenEffect
@@ -31,7 +27,7 @@ namespace Roguegard.CharacterCreation
 
         private class Effect : IRogueObjUpdater
         {
-            private static readonly Effect instance = new Effect();
+            private static readonly Effect instance = new();
 
             float IRogueObjUpdater.Order => -priority;
 

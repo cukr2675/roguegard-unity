@@ -1,12 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 using Roguegard.Extensions;
+using UnityEngine;
 
 namespace Roguegard.CharacterCreation
 {
-    [CreateAssetMenu(menuName = "RoguegardData/Dungeon/Floors/Goal")]
+    [CreateAssetMenu(menuName = "Roguegard/Dungeon/Floors/Goal")]
     public class GoalDungeonFloor : RogueDungeonFloor
     {
         [SerializeField] private RogueDungeonGenerator _dungeonGenerator = null;
@@ -83,13 +80,13 @@ namespace Roguegard.CharacterCreation
             for (int i = 0; i < _items.Length; i++)
             {
                 var position = floor.Space.Tilemap.Rect.size / 2 + GetItemPosition(i, _items.Length);
-                _items[i].GenerateFloor(player, floor, position, random);
+                _items[i].GenerateFloor(floor, position, random);
             }
 
             // ゴールを生成
             {
                 var position = floor.Space.Tilemap.Rect.size / 2 + Vector2Int.up * 5;
-                _goalItem.GenerateFloor(player, floor, position, random);
+                _goalItem.GenerateFloor(floor, position, random);
             }
 
             // 空間移動後は obj.Main.IsTicked = true になる。

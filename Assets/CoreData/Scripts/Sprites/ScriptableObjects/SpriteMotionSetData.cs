@@ -1,12 +1,10 @@
-﻿using System.Collections;
+using OchalikeSprites;
 using System.Collections.Generic;
 using UnityEngine;
 
-using OchalikeSprites;
-
 namespace Roguegard
 {
-    [CreateAssetMenu(menuName = "RoguegardData/Sprite/MotionSet")]
+    [CreateAssetMenu(menuName = "Roguegard/Sprite/Motion Set")]
     public class SpriteMotionSetData : ScriptableObject, ISpriteMotionSet
     {
         [SerializeField] private List<Item> _items = null;
@@ -33,7 +31,7 @@ namespace Roguegard
             if (!TryGetValue(keyword, out var value))
             {
                 // キーワードと一致するモーションが存在しない場合、代わりに最初のモーションを使う。
-                if (firstValue == null) { firstValue = _items[0].Value; }
+                firstValue ??= _items[0].Value;
                 value = firstValue;
             }
 

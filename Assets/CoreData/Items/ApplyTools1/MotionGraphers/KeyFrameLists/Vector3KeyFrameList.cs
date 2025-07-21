@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Roguegard
 {
@@ -18,6 +16,7 @@ namespace Roguegard
             ZKeys = new FloatKeyFrameList();
         }
 
-        [Objforming.CreateInstance] private Vector3KeyFrameList(bool dummy) { }
+        [Objforming.CreateInstance, SuppressMessage("Style", "IDE0051")]
+        private Vector3KeyFrameList(bool _) { }
     }
 }

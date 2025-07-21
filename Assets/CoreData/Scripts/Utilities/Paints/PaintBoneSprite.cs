@@ -1,9 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 using OchalikeSprites;
 using RuntimeDotter;
+using UnityEngine;
 
 namespace Roguegard
 {
@@ -19,7 +16,7 @@ namespace Roguegard
         private string _bone;
         public BoneKeyword Bone
         {
-            get => new BoneKeyword(_bone);
+            get => new(_bone);
             set => _bone = value.Name;
         }
 
@@ -29,25 +26,26 @@ namespace Roguegard
 
         // Pivot の距離は下→上→下→上の順で移動させる
         // そのほうがアイコンとなる胴部のペイントが自然になりやすい
-        private Vector2Int UpperRelationalPivot => new Vector2Int(0, PivotDistance / 2);
-        private Vector2Int LowerRelationalPivot => new Vector2Int(0, -(PivotDistance + 1) / 2);
+        private Vector2Int UpperRelationalPivot => new(0, PivotDistance / 2);
+        private Vector2Int LowerRelationalPivot => new(0, -(PivotDistance + 1) / 2);
 
-        private static readonly RectInt chestRect = new RectInt(-3, -2, 6, 2);
-        private static readonly RectInt bodyRect = new RectInt(-4, 0, 8, 2);
+        private static readonly RectInt chestRect = new(-3, -2, 6, 2);
+        private static readonly RectInt bodyRect = new(-4, 0, 8, 2);
 
         public IPaintBoneSprite Clone()
         {
-            var clone = new PaintBoneSprite();
-            clone.NormalFront = new DotterBoard(NormalFront);
-            clone.NormalRear = new DotterBoard(NormalRear);
-            clone.BackFront = new DotterBoard(BackFront);
-            clone.BackRear = new DotterBoard(BackRear);
-            clone.PivotDistance = PivotDistance;
-            clone.Bone = Bone;
-            clone.Mirroring = Mirroring;
-            clone.IsBare = IsBare;
-            clone.HasBareColor = HasBareColor;
-            return clone;
+            return new PaintBoneSprite
+            {
+                NormalFront = new DotterBoard(NormalFront),
+                NormalRear = new DotterBoard(NormalRear),
+                BackFront = new DotterBoard(BackFront),
+                BackRear = new DotterBoard(BackRear),
+                PivotDistance = PivotDistance,
+                Bone = Bone,
+                Mirroring = Mirroring,
+                IsBare = IsBare,
+                HasBareColor = HasBareColor
+            };
         }
 
         public bool ShowsSplitLine(DotterBoard board, out Vector2 upperPivot, out Vector2 lowerPivot)
@@ -216,8 +214,7 @@ namespace Roguegard
         private static Sprite ToSprite(DotterBoard board, Spanning<ShiftableColor> palette)
         {
             // WebGL でドットがつぶれないようミップマップを無効化する
-            var texture = new Texture2D(board.Size.x, board.Size.y, TextureFormat.RGBA32, false);
-            texture.filterMode = FilterMode.Point;
+            var texture = new Texture2D(board.Size.x, board.Size.y, TextureFormat.RGBA32, false) { filterMode = FilterMode.Point };
             board.SetPixelsTo(texture, palette);
             texture.Apply();
             var sprite = Sprite.Create(texture, board.Rect, new Vector2(.5f, .5f), RoguegardSettings.PixelsPerUnit);
@@ -227,8 +224,7 @@ namespace Roguegard
         private void ToSprite(DotterBoard board, Spanning<ShiftableColor> palette, out Sprite upperSprite, out Sprite lowerSprite)
         {
             // WebGL でドットがつぶれないようミップマップを無効化する
-            var texture = new Texture2D(board.Size.x, board.Size.y, TextureFormat.RGBA32, false);
-            texture.filterMode = FilterMode.Point;
+            var texture = new Texture2D(board.Size.x, board.Size.y, TextureFormat.RGBA32, false) { filterMode = FilterMode.Point };
             board.SetPixelsTo(texture, palette);
             texture.Apply();
             var splittedSize = new Vector2(board.Size.x, board.Size.y / 2);

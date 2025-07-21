@@ -1,14 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 using Roguegard.Extensions;
+using UnityEngine;
 
 namespace Roguegard
 {
     public class FearMovementBehaviourNode : IRogueBehaviourNode
     {
-        private WanderingWalker walker = new WanderingWalker(RoguegardSettings.MaxTilemapSize);
+        private readonly WanderingWalker walker = new(RoguegardSettings.MaxTilemapSize);
 
         public RogueObjUpdaterContinueType Tick(RogueObj self, float activationDepth)
         {

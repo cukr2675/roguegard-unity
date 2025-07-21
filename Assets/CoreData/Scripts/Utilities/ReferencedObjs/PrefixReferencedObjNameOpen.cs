@@ -1,5 +1,3 @@
-﻿using System.Collections;
-using System.Collections.Generic;
 using OchalikeSprites;
 using UnityEngine;
 
@@ -7,7 +5,7 @@ namespace Roguegard.CharacterCreation
 {
     public class PrefixReferencedObjNameOpen : ReferableScript, IOpenEffect
     {
-        private static readonly StatusEffect statusEffect = new StatusEffect();
+        private static readonly StatusEffect statusEffect = new();
 
         public IRaceOption Open(
             RogueObj self, MainInfoSetType infoSetType, bool polymorph2Base, IRaceOption raceOption, ICharacterCreationData characterCreationData)

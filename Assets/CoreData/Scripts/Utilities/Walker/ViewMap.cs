@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Roguegard
@@ -12,13 +10,13 @@ namespace Roguegard
         // オブジェクトが変化すると視界記憶上のオブジェクトも変化する。
         public RogueObjList VisibleObjs { get; private set; }
 
-        private bool[][] visibles;
+        private readonly bool[][] visibles;
 
-        private IRogueTile[][] groundTilemap;
+        private readonly IRogueTile[][] groundTilemap;
 
-        private IRogueTile[][] buildingTilemap;
+        private readonly IRogueTile[][] buildingTilemap;
 
-        private RogueObj[][] tilemapObjs;
+        private readonly RogueObj[][] tilemapObjs;
 
         public int Width => visibles[0].Length;
 
@@ -181,7 +179,7 @@ namespace Roguegard
                 }
             }
 
-            bool TryGetTileObj(Spanning<RogueObj> roomObjs, Vector2Int position, out RogueObj obj)
+            static bool TryGetTileObj(Spanning<RogueObj> roomObjs, Vector2Int position, out RogueObj obj)
             {
                 foreach (var item in roomObjs)
                 {

@@ -1,12 +1,10 @@
-﻿using System.Collections;
+using OchalikeSprites;
 using System.Collections.Generic;
 using UnityEngine;
 
-using OchalikeSprites;
-
 namespace Roguegard.CharacterCreation
 {
-    [CreateAssetMenu(menuName = "RoguegardData/CharacterCreation/AppearanceOption/Alphabet")]
+    [CreateAssetMenu(menuName = "Roguegard/Character Creation/Appearance Option/Alphabet")]
     [Objforming.Referable]
     public class AlphabetTypeAppearanceOption : ColoredAppearanceOption
     {

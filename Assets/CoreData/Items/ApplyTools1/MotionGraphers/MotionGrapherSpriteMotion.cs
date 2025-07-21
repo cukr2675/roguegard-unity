@@ -1,9 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-using System.Linq;
 using OchalikeSprites;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 
 namespace Roguegard
 {
@@ -50,18 +48,18 @@ namespace Roguegard
             var asynchronousFloatTime = floatTime;
 
             // ループ回数適用
-            if (poses.Count >= 2 && poses[poses.Count - 1].KeyTime != 0f)
+            if (poses.Count >= 2 && poses[^1].KeyTime != 0f)
             {
-                var loopIndex = floatTime / poses[poses.Count - 1].KeyTime;
+                var loopIndex = floatTime / poses[^1].KeyTime;
                 if (info.LoopCount >= 1 && loopIndex >= info.LoopCount)
                 {
                     // ループ終了したら最後のポーズで停止
-                    floatTime = poses[poses.Count - 1].KeyTime;
+                    floatTime = poses[^1].KeyTime;
                 }
                 else
                 {
                     // ループ終了していない場合のループ処理
-                    floatTime = Mathf.Repeat(floatTime, poses[poses.Count - 1].KeyTime);
+                    floatTime = Mathf.Repeat(floatTime, poses[^1].KeyTime);
                 }
             }
 
@@ -131,8 +129,7 @@ namespace Roguegard
                             var rotationY = beforeTransform?.LocalRotation.eulerAngles.y ?? 0f;
                             var rotationZ = beforeTransform?.LocalRotation.eulerAngles.z ?? 0f;
 
-                            float value;
-                            if (bone.Position.XKeys.TryGetValue(keyTime, out value)) { positionX = value; }
+                            if (bone.Position.XKeys.TryGetValue(keyTime, out var value)) { positionX = value; }
                             if (bone.Position.YKeys.TryGetValue(keyTime, out value)) { positionY = value; }
                             if (bone.Position.ZKeys.TryGetValue(keyTime, out value)) { positionZ = value; }
                             if (bone.Rotation.XKeys.TryGetValue(keyTime, out value)) { rotationX = value; }

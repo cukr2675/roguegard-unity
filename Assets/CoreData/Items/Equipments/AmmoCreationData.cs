@@ -1,10 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Roguegard.CharacterCreation
 {
-    [CreateAssetMenu(menuName = "RoguegardData/CharacterCreation/Data/Ammo")]
+    [CreateAssetMenu(menuName = "Roguegard/Character Creation/Data/Ammo")]
     [Objforming.Referable]
     public class AmmoCreationData : ScriptableCharacterCreationData
     {

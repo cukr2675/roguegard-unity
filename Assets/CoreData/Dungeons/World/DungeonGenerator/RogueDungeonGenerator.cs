@@ -1,12 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 using System.Linq;
+using UnityEngine;
 
 namespace Roguegard
 {
-    [CreateAssetMenu(menuName = "RoguegardData/Dungeon/Map/Generator")]
+    [CreateAssetMenu(menuName = "Roguegard/Dungeon/Map/Generator")]
     public class RogueDungeonGenerator : ScriptableObject
     {
         [SerializeField] private Vector2Int _floorSize;
@@ -142,7 +139,7 @@ namespace Roguegard
                 if (!ContainsGround(_corridorTiles[i].Array)) { Debug.LogError($"[{this}] {nameof(_corridorTiles)}[{i}] に {RogueTileLayer.Ground} が含まれません。"); }
             }
 
-            bool ContainsGround(IRogueTile[] tiles)
+            static bool ContainsGround(IRogueTile[] tiles)
             {
                 foreach (var tile in tiles)
                 {

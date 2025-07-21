@@ -1,20 +1,17 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-using OchalikeSprites;
 using Lysionium;
+using OchalikeSprites;
 using Roguegard.CharacterCreation;
+using System.Collections.Generic;
 
 namespace Roguegard.Device
 {
     public class AppearanceBuildersMenu : RogueMenuScreen
     {
         private readonly List<object> elms = new();
-        private static readonly object addLeftEyeElement = new object();
-        private static readonly object addRightEyeElement = new object();
-        private static readonly object addHairElement = new object();
-        private static readonly object addOtherElement = new object();
+        private static readonly object addLeftEyeElement = new();
+        private static readonly object addRightEyeElement = new();
+        private static readonly object addHairElement = new();
+        private static readonly object addOtherElement = new();
 
         public CharacterCreationOptionMenu NextMenu { get; set; }
         public CharacterCreationAddMenu AddMenu { get; set; }
@@ -25,7 +22,7 @@ namespace Roguegard.Device
 
         public override void OpenScreen(in MMgr manager, in MArg arg)
         {
-            if (!(arg.Arg.Other is CharacterCreationDataBuilder builder)) throw new RogueException();
+            if (arg.Arg.Other is not CharacterCreationDataBuilder builder) throw new RogueException();
 
             elms.Clear();
 

@@ -1,15 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using UnityEngine;
 
 namespace Roguegard.Extensions
 {
+    [SuppressMessage("Style", "IDE0060")]
     public static class CoreRogueMethodExtension
     {
-        private static readonly LoseExpRogueMethod loseExp = new LoseExpRogueMethod();
-        private static readonly TryAnyRogueMethod tryAnyRogueMethod = new TryAnyRogueMethod();
-        private static readonly TryAnyKeyword tryAnyKeyword = new TryAnyKeyword();
-        private static readonly SwapPositionCommand swapPositionCommand = new SwapPositionCommand();
+        private static readonly LoseExpRogueMethod loseExp = new();
+        private static readonly TryAnyRogueMethod tryAnyRogueMethod = new();
+        private static readonly TryAnyKeyword tryAnyKeyword = new();
+        private static readonly SwapPositionCommand swapPositionCommand = new();
 
         public static bool PutIn(
             this IApplyRogueMethodCaller method, RogueObj self, RogueObj container, IContainerInfo containerInfo, RogueObj obj, float activationDepth)

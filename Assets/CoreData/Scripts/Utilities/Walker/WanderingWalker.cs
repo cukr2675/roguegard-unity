@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,24 +6,24 @@ namespace Roguegard
     [Objforming.Formable]
     public class WanderingWalker
     {
-        private Vector2Int lastTargetPosition = new Vector2Int(-1, -1);
+        private Vector2Int lastTargetPosition = new(-1, -1);
 
-        private Cell[][] tile;
+        private readonly Cell[][] tile;
 
         private RectInt rect;
 
-        private List<Vector2Int> path;
+        private readonly List<Vector2Int> path;
 
-        private Vector2Int[] deltas = new Vector2Int[]
+        private readonly Vector2Int[] deltas = new Vector2Int[]
         {
-            new Vector2Int(1, 0),
-            new Vector2Int(-1, 0),
-            new Vector2Int(0, 1),
-            new Vector2Int(0, -1),
-            new Vector2Int(1, 1),
-            new Vector2Int(1, -1),
-            new Vector2Int(-1, 1),
-            new Vector2Int(-1, -1),
+            new(1, 0),
+            new(-1, 0),
+            new(0, 1),
+            new(0, -1),
+            new(1, 1),
+            new(1, -1),
+            new(-1, 1),
+            new(-1, -1),
         };
 
         [Objforming.CreateInstance]
@@ -272,7 +271,7 @@ namespace Roguegard
                     var collide = spaceStatus.CollideAt(new Vector2Int(x, y), true, true);
                     var tile = spaceStatus.Tilemap.GetTop(new Vector2Int(x, y));
                     var canWalkOn = !collide && tile.Info.Category != CategoryKw.Pool;
-                    var canAcrossOn = canWalkOn || (tile != null ? tile.Info.Category == CategoryKw.Pool : false);
+                    var canAcrossOn = canWalkOn || (tile != null && tile.Info.Category == CategoryKw.Pool);
                     if (canWalkOn != cell.CanWalkOn || canAcrossOn != cell.CanAcrossOn)
                     {
                         cell.CanWalkOn = canWalkOn;

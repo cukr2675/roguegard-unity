@@ -1,7 +1,3 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 using Roguegard.Extensions;
 
 namespace Roguegard
@@ -11,7 +7,7 @@ namespace Roguegard
         public int DistanceThreshold { get; set; }
         public IPathBuilder PathBuilder { get; set; }
 
-        private static readonly PickUpObjCommand pickUp = new PickUpObjCommand();
+        private static readonly PickUpObjCommand pickUp = new();
 
         public RogueObjUpdaterContinueType Tick(RogueObj self, float activationDepth)
         {

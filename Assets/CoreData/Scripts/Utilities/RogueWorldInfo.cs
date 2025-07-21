@@ -1,7 +1,3 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 namespace Roguegard
 {
     [Objforming.Formable]
@@ -24,9 +20,10 @@ namespace Roguegard
 
         public static void SetTo(RogueObj world, RogueObj lobby)
         {
-            var info = new Info();
-            info.info = new RogueWorldInfo(lobby);
-            world.SetInfo(info);
+            world.SetInfo(new Info
+            {
+                info = new RogueWorldInfo(lobby)
+            });
         }
 
         public static RogueObj GetWorld(RogueObj self)

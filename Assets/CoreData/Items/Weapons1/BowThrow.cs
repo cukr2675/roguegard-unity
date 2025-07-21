@@ -1,7 +1,3 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 using Roguegard.Extensions;
 
 namespace Roguegard
@@ -14,7 +10,7 @@ namespace Roguegard
 		public override IRogueMethodTarget Target => DependsOnShotRogueMethodTarget.Instance;
 		public override IRogueMethodRange Range => DependsOnShotRogueMethodRange.Instance;
         public override Spanning<IKeyword> AmmoCategories => lazyAmmoCategories.Value;
-        private static readonly System.Lazy<IKeyword[]> lazyAmmoCategories = new System.Lazy<IKeyword[]>(() => new IKeyword[] { AmmoKw.Arrow });
+        private static readonly System.Lazy<IKeyword[]> lazyAmmoCategories = new(() => new IKeyword[] { AmmoKw.Arrow });
         public override int RequiredMp => 0;
 
         protected override bool Activate(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)

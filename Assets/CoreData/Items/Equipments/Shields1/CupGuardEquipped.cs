@@ -1,5 +1,3 @@
-﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Roguegard.CharacterCreation
@@ -12,7 +10,7 @@ namespace Roguegard.CharacterCreation
 
         IEquippedEffect IEquippedEffectSource.CreateOrReuse(RogueObj equipment, IEquippedEffect effect)
         {
-            if (effect1 == null) { effect1 = new Effect() { parent = this }; }
+            effect1 ??= new Effect() { parent = this };
             return effect1;
         }
 

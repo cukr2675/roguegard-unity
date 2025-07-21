@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Roguegard
@@ -60,16 +58,16 @@ namespace Roguegard
                 // 通路が横長
                 SetHorizontalCorridorTile(tilemap, corridorTiles, index);
                 //SetEvenTile(tilemap, corridorTiles, index);
-                SetPositionToHorizontalCorridorTile(tilemap, corridorTiles, index, Position0, Position1);
-                SetPositionToHorizontalCorridorTile(tilemap, corridorTiles, index, Position1, Position0);
+                SetPositionToHorizontalCorridorTile(tilemap, corridorTiles, index, Position0);
+                SetPositionToHorizontalCorridorTile(tilemap, corridorTiles, index, Position1);
             }
             else if (Corridor.width == corridorTiles.Length)
             {
                 // 通路が縦長
                 SetVerticalCorridorTile(tilemap, corridorTiles, index);
                 //SetEvenTile(tilemap, corridorTiles, index);
-                SetPositionToVerticalCorridorTile(tilemap, corridorTiles, index, Position0, Position1);
-                SetPositionToVerticalCorridorTile(tilemap, corridorTiles, index, Position1, Position0);
+                SetPositionToVerticalCorridorTile(tilemap, corridorTiles, index, Position0);
+                SetPositionToVerticalCorridorTile(tilemap, corridorTiles, index, Position1);
             }
             else
             {
@@ -78,7 +76,7 @@ namespace Roguegard
         }
 
         private void SetPositionToHorizontalCorridorTile(
-            RogueTilemap tilemap, Spanning<IRogueTile[]> corridorTiles, int index, Vector2Int position, Vector2Int to)
+            RogueTilemap tilemap, Spanning<IRogueTile[]> corridorTiles, int index, Vector2Int position)
         {
             var center = corridorTiles.Length / 2;
             var x = position.x + index - corridorTiles.Length + 1;
@@ -91,7 +89,7 @@ namespace Roguegard
         }
 
         private void SetPositionToVerticalCorridorTile(
-            RogueTilemap tilemap, Spanning<IRogueTile[]> corridorTiles, int index, Vector2Int position, Vector2Int to)
+            RogueTilemap tilemap, Spanning<IRogueTile[]> corridorTiles, int index, Vector2Int position)
         {
             var center = corridorTiles.Length / 2;
             var y = position.y + index - corridorTiles.Length + 1;

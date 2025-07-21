@@ -1,10 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Roguegard.CharacterCreation
 {
-    [CreateAssetMenu(menuName = "RoguegardData/CharacterCreation/Data/InfoSetSourcedItem")]
+    [CreateAssetMenu(menuName = "Roguegard/Character Creation/Data/Info Set Referenced Item")]
     [Objforming.Referable]
     public class InfoSetReferencedItemCreationData : ItemCreationData
     {

@@ -1,10 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Roguegard.CharacterCreation
 {
-    [CreateAssetMenu(menuName = "RoguegardData/CharacterCreation/Data/Equipment")]
+    [CreateAssetMenu(menuName = "Roguegard/Character Creation/Data/Equipment")]
     [Objforming.Referable]
     public class EquipmentCreationData : ScriptableCharacterCreationData
     {

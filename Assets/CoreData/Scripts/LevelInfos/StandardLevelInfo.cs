@@ -1,10 +1,8 @@
-﻿using System.Collections;
+using Lysionium;
+using Roguegard.CharacterCreation;
+using Roguegard.Device;
 using System.Collections.Generic;
 using UnityEngine;
-
-using Lysionium;
-using Roguegard.Device;
-using Roguegard.CharacterCreation;
 
 namespace Roguegard
 {
@@ -16,7 +14,7 @@ namespace Roguegard
 
         float IValueEffect.Order => -100f;
 
-        private static readonly Dictionary<int, StandardLevelInfo> instances = new Dictionary<int, StandardLevelInfo>();
+        private static readonly Dictionary<int, StandardLevelInfo> instances = new();
 
         private readonly int initialLv;
 

@@ -1,7 +1,3 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 using OchalikeSprites;
 
 namespace Roguegard
@@ -20,7 +16,7 @@ namespace Roguegard
         float IRogueMethodPassiveAspect.Order => -1f; // 引数変更のため -1
         float IBoneSpriteEffect.Order => 0f;
 
-        private static readonly RogueMethodArgumentBuilder argBuilder = new RogueMethodArgumentBuilder();
+        private static readonly RogueMethodArgumentBuilder argBuilder = new();
 
         private ConfusionStatusEffect() { }
 

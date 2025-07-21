@@ -1,9 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using UnityEngine;
 
 namespace Roguegard.Extensions
 {
+    [SuppressMessage("Style", "IDE0060")]
     public static class EquipmentRogueMethodExtension
     {
         public static bool TryEquip(

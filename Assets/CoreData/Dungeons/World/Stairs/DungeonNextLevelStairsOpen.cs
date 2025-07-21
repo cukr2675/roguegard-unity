@@ -1,9 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-using Roguegard.Extensions;
 using Roguegard.Device;
+using Roguegard.Extensions;
+using UnityEngine;
 
 namespace Roguegard.CharacterCreation
 {

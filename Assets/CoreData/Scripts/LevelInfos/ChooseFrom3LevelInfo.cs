@@ -1,10 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 using Lysionium;
 using Roguegard.CharacterCreation;
 using Roguegard.Device;
+using UnityEngine;
 
 namespace Roguegard
 {
@@ -191,11 +188,12 @@ namespace Roguegard
 
         public override IRogueEffect DeepOrShallowCopy(RogueObj self, RogueObj clonedSelf)
         {
-            var clone = new ChooseFrom3LevelInfo();
-            clone.maxHp = maxHp;
-            clone.maxMp = maxMp;
-            clone.loadCapacity = loadCapacity;
-            return clone;
+            return new ChooseFrom3LevelInfo
+            {
+                maxHp = maxHp,
+                maxMp = maxMp,
+                loadCapacity = loadCapacity
+            };
         }
 
         private class LevelUpBonusScreen : RogueMenuScreen

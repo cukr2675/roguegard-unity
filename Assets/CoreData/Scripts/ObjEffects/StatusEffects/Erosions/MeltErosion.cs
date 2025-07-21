@@ -1,7 +1,3 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 using Roguegard.Extensions;
 
 namespace Roguegard
@@ -15,7 +11,7 @@ namespace Roguegard
         public override IKeyword EffectCategory => EffectCategoryKw.Erosion;
         protected override int MaxStack => 1;
 
-        [System.NonSerialized] private readonly EquipmentEffect equipmentEffect = new EquipmentEffect();
+        [System.NonSerialized] private readonly EquipmentEffect equipmentEffect = new();
 
         private MeltErosion() { }
 

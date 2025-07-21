@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 using Roguegard.CharacterCreation;
+using System.Collections.Generic;
 
 namespace Roguegard
 {
@@ -12,22 +9,22 @@ namespace Roguegard
     [Objforming.Formable]
     public class RogueObjRegister
     {
-        private readonly List<Item> items = new List<Item>();
+        private readonly List<Possessions> possessions = new();
 
-        public int Count => items.Count;
+        public int Count => possessions.Count;
 
         /// <summary>
         /// <see cref="self"/> の現在の所持アイテムの中から登録された所有アイテムを探す。同時に所有アイテムの装備状態と生成方法を取得する。
         /// </summary>
         public RogueObj GetItem(RogueObj self, int index, out bool itemIsEquipped, out IReadOnlyStartingItem startingItem)
         {
-            var listItem = items[index];
-            itemIsEquipped = listItem.IsEquipped;
-            startingItem = listItem.StartingItem;
+            var possession = possessions[index];
+            itemIsEquipped = possession.IsEquipped;
+            startingItem = possession.StartingItem;
 
             foreach (var obj in self.Space.Objs)
             {
-                if (obj == null || obj.Main.Stats != listItem.MainStats) continue;
+                if (obj == null || obj.Main.Stats != possession.MainStats) continue;
 
                 return obj;
             }
@@ -36,9 +33,9 @@ namespace Roguegard
 
         public bool Contains(RogueObj item)
         {
-            foreach (var listItem in items)
+            foreach (var possession in possessions)
             {
-                if (listItem.MainStats == item.Main.Stats) return true;
+                if (possession.MainStats == item.Main.Stats) return true;
             }
             return false;
         }
@@ -48,8 +45,10 @@ namespace Roguegard
         /// </summary>
         public void Add(RogueObj item)
         {
-            var newItem = new Item();
-            newItem.MainStats = item.Main.Stats;
+            var newPossession = new Possessions
+            {
+                MainStats = item.Main.Stats
+            };
 
             var startingItem = new StartingItemBuilder();
             if (item.Main.BaseInfoSet is CharacterCreationInfoSet itemInfoSet && itemInfoSet.Data is IStartingItemOption option)
@@ -57,15 +56,15 @@ namespace Roguegard
                 startingItem.Option = option;
             }
             startingItem.Stack = 1;
-            newItem.StartingItem = startingItem;
+            newPossession.StartingItem = startingItem;
 
             var equipmentInfo = item.Main.GetEquipmentInfo(item);
             if (equipmentInfo != null)
             {
-                newItem.IsEquipped = equipmentInfo.EquipIndex != -1;
+                newPossession.IsEquipped = equipmentInfo.EquipIndex != -1;
             }
 
-            items.Add(newItem);
+            possessions.Add(newPossession);
         }
 
         /// <summary>
@@ -73,17 +72,17 @@ namespace Roguegard
         /// </summary>
         public void SetItem(int index, RogueObj item)
         {
-            items[index].MainStats = item.Main.Stats;
+            possessions[index].MainStats = item.Main.Stats;
         }
 
         public void Clear()
         {
-            items.Clear();
+            possessions.Clear();
         }
 
         public void ReplaceObj(RogueObj obj, RogueObj clonedObj)
         {
-            foreach (var listItem in items)
+            foreach (var listItem in possessions)
             {
                 if (listItem.MainStats == obj.Main.Stats)
                 {
@@ -94,7 +93,7 @@ namespace Roguegard
         }
 
         [Objforming.Formable]
-        private class Item
+        private class Possessions
         {
             public MainStats MainStats { get; set; }
             public bool IsEquipped { get; set; }

@@ -1,10 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 using OchalikeSprites;
 using RuntimeDotter;
-using System;
+using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+using UnityEngine;
 
 namespace Roguegard
 {
@@ -24,8 +22,8 @@ namespace Roguegard
             _palette = new ShiftableColor[RoguegardSettings.DefaultPalette.Length];
         }
 
-        [Objforming.CreateInstance]
-        private PaintBoneSpriteTable(bool dummy) { }
+        [Objforming.CreateInstance, SuppressMessage("Style", "IDE0051")]
+        private PaintBoneSpriteTable(bool _) { }
 
         public PaintBoneSpriteTable(PaintBoneSpriteTable table)
         {

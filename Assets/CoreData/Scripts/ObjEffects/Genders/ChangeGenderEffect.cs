@@ -1,14 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 using OchalikeSprites;
+using UnityEngine;
 
 namespace Roguegard
 {
     public static class ChangeGenderEffect
     {
-        private static readonly Effect effect = new Effect();
+        private static readonly Effect effect = new();
 
         public static bool GetChanged(RogueObj obj)
         {

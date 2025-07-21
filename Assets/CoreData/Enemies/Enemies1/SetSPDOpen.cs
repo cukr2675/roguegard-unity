@@ -1,5 +1,3 @@
-﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Roguegard.CharacterCreation
@@ -15,11 +13,7 @@ namespace Roguegard.CharacterCreation
         public IRaceOption Open(
             RogueObj self, MainInfoSetType infoSetType, bool polymorph2Base, IRaceOption raceOption, ICharacterCreationData characterCreationData)
         {
-            if (effect == null)
-            {
-                effect = new Effect();
-                effect.spd = _spd;
-            }
+            effect ??= new Effect { spd = _spd };
 
             RogueEffectUtility.AddFromInfoSet(self, effect);
             SpeedCalculator.SetDirty(self);

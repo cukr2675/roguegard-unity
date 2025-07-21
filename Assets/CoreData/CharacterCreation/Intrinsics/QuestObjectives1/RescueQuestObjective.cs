@@ -1,6 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace Roguegard.CharacterCreation
 {
@@ -25,12 +23,14 @@ namespace Roguegard.CharacterCreation
             }
 
             var clientOption = random.Choice(options);
-            var maxFloor = dungeon.Floors[dungeon.Floors.Length - 1].EndLv - 1;
+            var maxFloor = dungeon.Floors[^1].EndLv - 1;
             var floor = random.Next(1, maxFloor);
 
-            var builder = new IntrinsicBuilder();
-            builder.Option = parent;
-            builder.OptionCaption = $"{floor}F で {clientOption.Name} を救助する";
+            var builder = new IntrinsicBuilder
+            {
+                Option = parent,
+                OptionCaption = $"{floor}F で {clientOption.Name} を救助する"
+            };
             var member = (QuestMember)builder.GetMember(QuestMember.SourceInstance);
             var client = member.Targets.Add();
             client.Option = clientOption;

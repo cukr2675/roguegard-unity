@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 using Roguegard.CharacterCreation;
 
 namespace Roguegard
@@ -17,9 +13,10 @@ namespace Roguegard
 
         public static void SetTo(RogueObj location, int roomIndex)
         {
-            var effect = new MonsterHouseEffect();
-            effect.RoomIndex = roomIndex;
-            location.Main.RogueEffects.AddOpen(location, effect);
+            location.Main.RogueEffects.AddOpen(location, new MonsterHouseEffect
+            {
+                RoomIndex = roomIndex
+            });
         }
 
         public void Open(RogueObj self)

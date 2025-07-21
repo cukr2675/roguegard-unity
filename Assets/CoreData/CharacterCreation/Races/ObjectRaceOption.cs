@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 using OchalikeSprites;
+using UnityEngine;
 
 namespace Roguegard.CharacterCreation
 {
@@ -50,7 +47,7 @@ namespace Roguegard.CharacterCreation
 
         [Space]
         [SerializeField] private KeywordData _category;
-        public IKeyword Category => _category ?? RoguegardSettings.DefaultRaceOption.Category;
+        public IKeyword Category => _category ? _category : RoguegardSettings.DefaultRaceOption.Category;
 
 
 
@@ -71,14 +68,14 @@ namespace Roguegard.CharacterCreation
         public float LoadCapacity => _loadCapacity;
 
         [SerializeField] private ScriptableFaction _faction;
-        public ISerializableKeyword Faction => _faction?.Faction ?? RoguegardSettings.DefaultRaceOption.Faction;
-        public Spanning<ISerializableKeyword> TargetFactions => _faction != null ? _faction.TargetFactions : RoguegardSettings.DefaultRaceOption.TargetFactions;
+        public ISerializableKeyword Faction => _faction ? _faction.Faction : RoguegardSettings.DefaultRaceOption.Faction;
+        public Spanning<ISerializableKeyword> TargetFactions => _faction ? _faction.TargetFactions : RoguegardSettings.DefaultRaceOption.TargetFactions;
 
         [SerializeField] private MainInfoSetAbility _ability;
         public MainInfoSetAbility Ability => _ability;
 
         [SerializeField] private RogueMaterial _material;
-        public IRogueMaterial Material => _material ?? RoguegardSettings.DefaultRaceOption.Material;
+        public IRogueMaterial Material => _material ? _material : RoguegardSettings.DefaultRaceOption.Material;
 
         [SerializeField] private ScriptableStartingItemList[] _lootTable;
         public Spanning<IWeightedRogueObjGeneratorList> LootTable => _lootTable;

@@ -1,14 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 namespace Roguegard
 {
     internal class ExampleCalculator : IRogueCalculator
     {
         private readonly EffectableValue value = EffectableValue.Get();
 
-        private static readonly Source source = new Source();
+        private static readonly Source source = new();
 
         float IRogueCalculator.MainBaseValue => value.BaseMainValue;
         float IRogueCalculator.MainValue => value.MainValue;

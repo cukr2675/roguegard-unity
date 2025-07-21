@@ -1,10 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 using Roguegard.CharacterCreation;
 using Roguegard.Device;
 using Roguegard.Extensions;
+using UnityEngine;
 
 namespace Roguegard
 {
@@ -29,7 +26,7 @@ namespace Roguegard
         public int FloorLv { get; }
         public MessageWorkList List { get; }
 
-        private PlayCommand playCommand;
+        private readonly PlayCommand playCommand;
 
         public DungeonRecorder(DungeonQuest quest, int floorLv)
         {

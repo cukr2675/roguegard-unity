@@ -1,7 +1,3 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 using Roguegard.Extensions;
 
 namespace Roguegard
@@ -10,7 +6,7 @@ namespace Roguegard
     {
         public override string Name => "押す";
 
-        private static readonly PushRogueMethod pushRogueMethod = new PushRogueMethod();
+        private static readonly PushRogueMethod pushRogueMethod = new();
 
         public override bool CommandInvoke(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
         {

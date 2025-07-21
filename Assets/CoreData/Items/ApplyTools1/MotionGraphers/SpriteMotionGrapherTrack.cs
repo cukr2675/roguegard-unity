@@ -1,7 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
 namespace Roguegard
@@ -9,21 +7,23 @@ namespace Roguegard
     [Objforming.Formable]
     public class SpriteMotionGrapherTrack : IMotionGrapherTrack
     {
-        private List<Bone> _bones;
+        private readonly List<Bone> _bones;
         public Spanning<Bone> Bones => Spanning.Get(_bones);
+
+        [Objforming.CreateInstance, SuppressMessage("Style", "IDE0051")]
+        private SpriteMotionGrapherTrack(bool _) { }
 
         public SpriteMotionGrapherTrack()
         {
             _bones = new List<Bone>();
         }
 
-        [Objforming.CreateInstance] private SpriteMotionGrapherTrack(bool dummy) { }
-
         public void AddBone(string boneName)
         {
-            var bone = new Bone();
-            bone.BoneName = boneName;
-            _bones.Add(bone);
+            _bones.Add(new Bone
+            {
+                BoneName = boneName
+            });
         }
 
         public void RemoveBoneAt(int index)
@@ -33,8 +33,7 @@ namespace Roguegard
 
         public float[] SelectKeyTimes()
         {
-            var times = new HashSet<float>();
-            times.Add(0f);
+            var times = new HashSet<float> { 0f };
             for (int i = 0; i < _bones.Count; i++)
             {
                 var bone = _bones[i];
@@ -74,7 +73,8 @@ namespace Roguegard
                 Reorder = new FloatKeyFrameList();
             }
 
-            [Objforming.CreateInstance] private Bone(bool dummy) { }
+            [Objforming.CreateInstance, SuppressMessage("Style", "IDE0051")]
+            private Bone(bool _) { }
         }
     }
 }

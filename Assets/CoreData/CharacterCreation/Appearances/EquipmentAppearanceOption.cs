@@ -1,8 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 using OchalikeSprites;
+using UnityEngine;
 
 namespace Roguegard.CharacterCreation
 {
@@ -10,7 +7,7 @@ namespace Roguegard.CharacterCreation
     /// 装備品をアイテムではなく見た目として扱うクラス。
     /// <see cref="EquipKeywordData.Order"/> の影響を受けないので、付与する順番に気を付ける。
     /// </summary>
-    [CreateAssetMenu(menuName = "RoguegardData/CharacterCreation/AppearanceOption/Singleton/Equipment")]
+    [CreateAssetMenu(menuName = "Roguegard/Character Creation/Appearance Option/Singleton/Equipment")]
     [Objforming.Referable]
     public class EquipmentAppearanceOption : AppearanceOption
     {

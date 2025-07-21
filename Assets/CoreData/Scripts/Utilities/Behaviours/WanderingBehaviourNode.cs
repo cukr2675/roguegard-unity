@@ -1,14 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 using Roguegard.Extensions;
 
 namespace Roguegard
 {
     public class WanderingBehaviourNode : IRogueBehaviourNode
     {
-        private WanderingWalker walker = new WanderingWalker(RoguegardSettings.MaxTilemapSize);
+        private readonly WanderingWalker walker = new(RoguegardSettings.MaxTilemapSize);
 
         public RogueObjUpdaterContinueType Tick(RogueObj self, float activationDepth)
         {

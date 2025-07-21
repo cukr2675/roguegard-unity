@@ -1,8 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 using OchalikeSprites;
+using UnityEngine;
 
 namespace Roguegard
 {
@@ -38,8 +35,6 @@ namespace Roguegard
 
         public static void SetBehaviourNode(RogueObj obj, RogueBehaviourNodeList node, float priority)
         {
-            if (node == null) throw new System.ArgumentNullException(nameof(node));
-
             var statusEffectState = obj.Main.GetStatusEffectState(obj);
             if (!statusEffectState.TryGetStatusEffect<RogueBehaviourNodeEffect>(out var effect))
             {
@@ -49,7 +44,7 @@ namespace Roguegard
             if (priority <= effect.priority) throw new RogueException(
                 $"新しいビヘイビアの優先度 ({priority}) は既存のビヘイビアの優先度 ({effect.priority}) 以下のため上書きできません。");
 
-            effect.node = node;
+            effect.node = node ?? throw new System.ArgumentNullException(nameof(node));
             effect.priority = priority;
         }
 

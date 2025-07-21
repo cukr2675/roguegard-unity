@@ -1,8 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 using OchalikeSprites;
+using UnityEngine;
 
 namespace Roguegard
 {
@@ -13,7 +10,7 @@ namespace Roguegard
     {
         public abstract IKeyword Keyword { get; }
 
-        private static readonly MotionSet motionSet = new MotionSet();
+        private static readonly MotionSet motionSet = new();
 
         public abstract void ApplyTo(
             ISpriteMotionSet motionSet, int animationTime, SpriteDirection direction, ref OchalikeSpriteTransform transform, out bool endOfMotion);

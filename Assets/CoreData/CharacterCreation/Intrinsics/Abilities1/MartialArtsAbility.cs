@@ -1,7 +1,3 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 namespace Roguegard.CharacterCreation
 {
     public class MartialArtsAbility : AbilityIntrinsicOptionScript
@@ -16,7 +12,7 @@ namespace Roguegard.CharacterCreation
         {
             float IRogueMethodPassiveAspect.Order => 0f;
 
-            private static readonly RogueMethodArgumentBuilder argumentBuilder = new RogueMethodArgumentBuilder();
+            private static readonly RogueMethodArgumentBuilder argumentBuilder = new();
 
             public SortedIntrinsic(int lv) : base(lv) { }
 

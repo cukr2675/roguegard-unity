@@ -1,9 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 using Lysionium;
 using Roguegard.Device;
+using System.Collections.Generic;
 
 namespace Roguegard
 {
@@ -16,7 +13,7 @@ namespace Roguegard
         int ISkillDescription.RequiredMp => 0;
         Spanning<IKeyword> ISkillDescription.AmmoCategories => Spanning<IKeyword>.Empty;
 
-        private static readonly RogueMenu rogueMenu = new RogueMenu();
+        private static readonly RogueMenu rogueMenu = new();
 
         public bool Invoke(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
         {

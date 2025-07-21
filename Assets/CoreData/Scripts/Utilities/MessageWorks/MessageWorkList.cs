@@ -1,33 +1,31 @@
-﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace Roguegard
 {
     public class MessageWorkList
     {
-        private readonly List<Item> items = new();
+        private readonly List<Tuple> works = new();
 
-        public int Count => items.Count;
+        public int Count => works.Count;
 
         public void Get(int index, out object other, out RogueCharacterWork work)
         {
-            var item = items[index];
-            other = item.Other;
-            work = item.Work;
+            var tuple = works[index];
+            other = tuple.Other;
+            work = tuple.Work;
         }
 
         public void Add(object other)
         {
-            items.Add(new Item() { Other = other });
+            works.Add(new Tuple() { Other = other });
         }
 
         public void Add(RogueCharacterWork work)
         {
-            items.Add(new Item() { Other = DeviceKw.EnqueueWork, Work = work });
+            works.Add(new Tuple() { Other = DeviceKw.EnqueueWork, Work = work });
         }
 
-        private class Item
+        private class Tuple
         {
             public object Other { get; set; }
             public RogueCharacterWork Work { get; set; }

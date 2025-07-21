@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 using Roguegard.CharacterCreation;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Roguegard
 {
@@ -23,8 +20,8 @@ namespace Roguegard
             WeightTurnsAfterAccept = 10;
         }
 
-        [Objforming.CreateInstance]
-        private QuestBoardInfo(bool flag) { }
+        [Objforming.CreateInstance, SuppressMessage("Style", "IDE0051")]
+        private QuestBoardInfo(bool _) { }
 
         public static QuestBoardInfo Get(RogueObj obj)
         {
@@ -78,7 +75,7 @@ namespace Roguegard
         [Objforming.Formable]
         private class Info : IRogueObjInfo
         {
-            public QuestBoardInfo info = new QuestBoardInfo();
+            public QuestBoardInfo info = new();
 
             public bool IsExclusedWhenSerialize => false;
 

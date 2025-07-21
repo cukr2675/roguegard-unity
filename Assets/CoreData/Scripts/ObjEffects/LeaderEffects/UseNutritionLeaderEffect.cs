@@ -1,7 +1,3 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 namespace Roguegard
 {
     /// <summary>
@@ -14,7 +10,7 @@ namespace Roguegard
         float IRogueObjUpdater.Order => 100f;
         float IRogueMethodPassiveAspect.Order => -10f;
 
-        private static readonly MemberEffect memberEffect = new MemberEffect();
+        private static readonly MemberEffect memberEffect = new();
 
         RogueObjUpdaterContinueType IRogueObjUpdater.UpdateObj(RogueObj self, float activationDepth, ref int sectionIndex)
         {

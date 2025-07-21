@@ -1,9 +1,7 @@
-﻿using System.Collections;
+using Lysionium;
+using RuntimeDotter;
 using System.Collections.Generic;
 using UnityEngine;
-
-using RuntimeDotter;
-using Lysionium;
 
 namespace Roguegard.Device
 {

@@ -1,9 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 using OchalikeSprites;
 using Roguegard.CharacterCreation;
+using UnityEngine;
 
 namespace Roguegard
 {
@@ -120,7 +117,7 @@ namespace Roguegard
         }
 
         public RogueObj CreateObj(
-            RogueObj location, Vector2Int position, IRogueRandom random, StackOption stackOption = StackOption.Default)
+            RogueObj location, Vector2Int position, StackOption stackOption = StackOption.Default)
         {
             var obj = new RogueObj();
             obj.Main.SetBaseInfoSet(obj, this);

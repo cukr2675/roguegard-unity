@@ -1,7 +1,3 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 namespace Roguegard
 {
     public abstract class BaseLevelInfo : ReferableScript, IRogueEffect, ILevelInfo

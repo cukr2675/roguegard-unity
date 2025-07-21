@@ -1,5 +1,3 @@
-﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Roguegard.CharacterCreation
@@ -32,7 +30,7 @@ namespace Roguegard.CharacterCreation
             }
         }
 
-        public void GenerateFloor(RogueObj player, RogueObj floor, Vector2Int position, IRogueRandom random, int frequency = -1)
+        public void GenerateFloor(RogueObj floor, Vector2Int position, IRogueRandom random, int frequency = -1)
         {
             if (frequency == -1)
             {

@@ -1,10 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Roguegard.CharacterCreation
 {
-    [CreateAssetMenu(menuName = "RoguegardData/CharacterCreation/Intrinsic/Script")]
+    [CreateAssetMenu(menuName = "Roguegard/Character Creation/Intrinsic/Script")]
     [Objforming.Referable]
     public class ScriptIntrinsicOption : IntrinsicOption
     {

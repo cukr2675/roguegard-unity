@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 namespace Roguegard
 {
     public class PostQuestBehaviourNode : IRogueBehaviourNode
@@ -32,11 +28,12 @@ namespace Roguegard
             }
 
             // ロビーからダンジョンに移動したとき投稿
-            var post = new RoguePost();
-            post.Name = $"{self.Location.Main.InfoSet.Name}へ出発";
-            post.From = self;
-            post.DateTime = RogueDateTime.UtcNow().ToString();
-            postboxInfo.AddPost(post);
+            postboxInfo.AddPost(new RoguePost
+            {
+                Name = $"{self.Location.Main.InfoSet.Name}へ出発",
+                From = self,
+                DateTime = RogueDateTime.UtcNow().ToString()
+            });
             lobby = false;
 
             return RogueObjUpdaterContinueType.Continue;

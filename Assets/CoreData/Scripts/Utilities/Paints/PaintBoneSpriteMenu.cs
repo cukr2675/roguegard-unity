@@ -1,12 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-using TMPro;
 using Lysionium;
 using OchalikeSprites;
-using RuntimeDotter;
 using Roguegard.Device;
+using RuntimeDotter;
+using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
 
 namespace Roguegard
 {
@@ -156,19 +154,16 @@ namespace Roguegard
 
             public override void OpenScreen(in MMgr manager, in MArg arg)
             {
-                if (elms == null)
+                elms ??= new[]
                 {
-                    elms = new[]
-                    {
-                        BoneKeyword.Body.Name,
-                        BoneKeyword.LeftArm.Name,
-                        BoneKeyword.RightArm.Name,
-                        BoneKeyword.LeftLeg.Name,
-                        BoneKeyword.RightLeg.Name,
-                        BoneKeyword.Hair.Name,
-                        BoneKeyword.Head.Name,
-                    };
-                }
+                    BoneKeyword.Body.Name,
+                    BoneKeyword.LeftArm.Name,
+                    BoneKeyword.RightArm.Name,
+                    BoneKeyword.LeftLeg.Name,
+                    BoneKeyword.RightLeg.Name,
+                    BoneKeyword.Hair.Name,
+                    BoneKeyword.Head.Name,
+                };
 
                 view.ShowTemplate(elms, manager, arg)
                     ?

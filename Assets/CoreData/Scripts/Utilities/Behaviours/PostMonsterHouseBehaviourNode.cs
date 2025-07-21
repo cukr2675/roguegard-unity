@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 using Roguegard.CharacterCreation;
 
 namespace Roguegard
@@ -11,10 +7,8 @@ namespace Roguegard
         private PostboxInfo postboxInfo;
         private RogueObj postbox;
         private RogueObj postLocation;
-        private RoguePost post;
+        private readonly RoguePost post;
         private RecordingMessageWorkListener recordingListener;
-
-        [System.Obsolete] public static DungeonRecorder test;
 
         public RogueObjUpdaterContinueType Tick(RogueObj self, float activationDepth)
         {
@@ -33,7 +27,6 @@ namespace Roguegard
                 if (post != null)
                 {
                     MessageWorkListener.RemoveListener(recordingListener);
-                    test = recordingListener.Recorder;
                     post.LiveState = RoguePostLiveState.Done;
                 }
                 postLocation = null;
@@ -56,12 +49,13 @@ namespace Roguegard
             if (enemyCount < 10) return RogueObjUpdaterContinueType.Continue;
 
             // 見えてる敵の数が 10 以上になったら配信開始
-            post = new RoguePost();
-            post.Name = "モンスターハウスに遭遇";
-            post.From = self;
-            post.DateTime = RogueDateTime.UtcNow().ToString();
-            post.LiveState = RoguePostLiveState.Live;
-            postboxInfo.AddPost(post);
+            postboxInfo.AddPost(new RoguePost
+            {
+                Name = "モンスターハウスに遭遇",
+                From = self,
+                DateTime = RogueDateTime.UtcNow().ToString(),
+                LiveState = RoguePostLiveState.Live
+            });
 
             // 録画開始
             var recorder = new DungeonRecorder(quest, self.Location.Main.Stats.Lv);

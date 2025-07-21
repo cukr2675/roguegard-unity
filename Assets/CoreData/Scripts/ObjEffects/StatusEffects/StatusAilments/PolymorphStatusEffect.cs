@@ -1,13 +1,11 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace Roguegard
 {
     [Objforming.Formable]
     public class PolymorphStatusEffect : TimeLimitedStackableStatusEffect
     {
-        private static readonly PolymorphStatusEffect instance = new PolymorphStatusEffect();
+        private static readonly PolymorphStatusEffect instance = new();
 
         public override string Name => "変化";
         public override IKeyword EffectCategory => EffectCategoryKw.StatusAilment;
@@ -17,7 +15,7 @@ namespace Roguegard
         /// <summary>
         /// 変化前の装備状態を記憶するテーブル。
         /// </summary>
-        private readonly Dictionary<RogueObj, int> equipments = new Dictionary<RogueObj, int>();
+        private readonly Dictionary<RogueObj, int> equipments = new();
 
         private PolymorphStatusEffect() { }
 
@@ -29,7 +27,7 @@ namespace Roguegard
 
         protected override IRogueEffect AffectTo(RogueObj target, RogueObj user, float activationDepth, in RogueMethodArgument arg)
         {
-            if (!(arg.Other is IMainInfoSet)) return null;
+            if (arg.Other is not IMainInfoSet) return null;
 
             return base.AffectTo(target, user, activationDepth, arg);
         }

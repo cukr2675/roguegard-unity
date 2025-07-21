@@ -1,10 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Roguegard.CharacterCreation
 {
-    [CreateAssetMenu(menuName = "RoguegardData/CharacterCreation/Race/StandardRaceOption")]
+    [CreateAssetMenu(menuName = "Roguegard/Character Creation/Race/Standard Race Option")]
     [Objforming.Referable]
     public class StandardRaceOption : BaseRaceOption, IStandardRaceOption
     {

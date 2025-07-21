@@ -1,9 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-using UnityEngine.Tilemaps;
 using OchalikeSprites;
+using UnityEngine;
+using UnityEngine.Tilemaps;
 
 namespace Roguegard
 {
@@ -20,11 +17,13 @@ namespace Roguegard
 
         public static ColoredRogueSprite Create(Sprite sprite, Color effectedColor)
         {
-            var coloredSprite = new ColoredRogueSprite();
-            coloredSprite._tile = ScriptableObject.CreateInstance<TileObject>();
-            coloredSprite._tile.sprite = sprite;
-            coloredSprite.EffectedColor = effectedColor;
-            return coloredSprite;
+            var tile = ScriptableObject.CreateInstance<TileObject>();
+            tile.sprite = sprite;
+            return new ColoredRogueSprite
+            {
+                _tile = tile,
+                EffectedColor = effectedColor
+            };
         }
 
         public static ColoredRogueSprite CreateOrReuse(RogueObj self, Sprite sprite, Color effectedColor)

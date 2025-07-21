@@ -1,10 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 using OchalikeSprites;
 using Roguegard.CharacterCreation;
 using Roguegard.Extensions;
+using UnityEngine;
 
 namespace Roguegard
 {
@@ -12,7 +9,7 @@ namespace Roguegard
     {
         [SerializeField] private ScriptableStartingItem _dropItem = null;
 
-        private static readonly CommonBeDefeated common = new CommonBeDefeated();
+        private static readonly CommonBeDefeated common = new();
         private static VariantSpriteMotion bombMotion;
 
         private GusSporeBeDefeated() { }
@@ -57,7 +54,7 @@ namespace Roguegard
                 if (!defeated) continue;
 
                 // 爆発で敵を倒したとき、アイテムを生成する。
-                _dropItem.Option?.CreateObj(_dropItem, lootLocation, dropPosition, RogueRandom.Primary);
+                if (_dropItem.Option != null) { _dropItem.Option.CreateObj(_dropItem, lootLocation, dropPosition, RogueRandom.Primary); }
             }
 
             // アイテムドロップ

@@ -1,12 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 namespace Roguegard
 {
     public class PushObstacleBehaviourNode : IRogueBehaviourNode
     {
-        private static readonly PushCommand pushCommand = new PushCommand();
+        private static readonly PushCommand pushCommand = new();
 
         public RogueObjUpdaterContinueType Tick(RogueObj self, float activationDepth)
         {

@@ -1,14 +1,12 @@
-﻿#if UNITY_EDITOR
-using System.Collections;
+#if UNITY_EDITOR
+using OchalikeSprites;
 using System.Collections.Generic;
-using UnityEngine;
-
+using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
-using System.IO;
 using UnityEditor;
 using UnityEditorInternal;
-using OchalikeSprites;
+using UnityEngine;
 
 namespace Roguegard.Editor
 {
@@ -75,7 +73,7 @@ namespace Roguegard.Editor
                     continue;
                 }
 
-                var spriteSuffix = sprite.name.Substring(spriteSuffixOffset + 1);
+                var spriteSuffix = sprite.name[(spriteSuffixOffset + 1)..];
                 if (spriteSuffix.Contains("NF")) { normalFront = sprite; }
                 if (spriteSuffix.Contains("NR")) { normalRear = sprite; }
                 if (spriteSuffix.Contains("BF")) { backFront = sprite; }

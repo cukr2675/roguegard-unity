@@ -1,5 +1,3 @@
-﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Roguegard
@@ -63,7 +61,7 @@ namespace Roguegard
 
         public static bool GetUseValue(EffectableValue damageValue)
         {
-            return damageValue != null ? damageValue.MainValue != 0f : false;
+            return damageValue != null && damageValue.MainValue != 0f;
         }
     }
 }

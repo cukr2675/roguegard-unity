@@ -1,4 +1,3 @@
-﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,11 +5,14 @@ namespace Roguegard
 {
     public class RoguePositionSelector
     {
-        private readonly List<Vector2Int> items = new List<Vector2Int>();
+        /// <summary>
+        /// 位置候補リスト
+        /// </summary>
+        private readonly List<Vector2Int> possiblePositions = new();
 
         public void Update(IRogueTilemapView view)
         {
-            items.Clear();
+            possiblePositions.Clear();
             var size = view.Size;
             for (int y = 0; y < size.y; y++)
             {
@@ -25,7 +27,7 @@ namespace Roguegard
 
                     if (!Mapped(view, x - 1, y) || !Mapped(view, x + 1, y) || !Mapped(view, x, y - 1) || !Mapped(view, x, y + 1))
                     {
-                        items.Add(position);
+                        possiblePositions.Add(position);
                     }
                 }
             }
@@ -47,21 +49,21 @@ namespace Roguegard
             // 優先度の計算
             // 近くてスコアが高いほど優先度が高い
             var maxScore = 0f;
-            Vector2Int maxItem = default;
-            foreach (var item in items)
+            Vector2Int maxPosition = default;
+            foreach (var possiblePosition in possiblePositions)
             {
-                var relationalPosition = item - currentPosition;
+                var relationalPosition = possiblePosition - currentPosition;
                 var score = 10f / (Mathf.Abs(relationalPosition.x) + Mathf.Abs(relationalPosition.y));
                 if (score > maxScore)
                 {
                     maxScore = score;
-                    maxItem = item;
+                    maxPosition = possiblePosition;
                 }
             }
 
             if (maxScore > 0f)
             {
-                targetPosition = maxItem;
+                targetPosition = maxPosition;
                 return true;
             }
             else
