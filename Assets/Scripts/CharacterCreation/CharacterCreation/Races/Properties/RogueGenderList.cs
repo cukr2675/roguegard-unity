@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Roguegard
 {
-    [CreateAssetMenu(menuName = "Roguegard/Gender List")]
+    [CreateAssetMenu(menuName = "Roguegard/Character Creation/Race Property/Gender List")]
     public class RogueGenderList : ScriptableObject
     {
         [SerializeField] private RogueGender[] _genders = null;

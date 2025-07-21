@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Roguegard
 {
-    [CreateAssetMenu(menuName = "Roguegard/Material")]
+    [CreateAssetMenu(menuName = "Roguegard/Character Creation/Race Property/Material")]
     public class KeywordsRogueMaterial : RogueMaterial
     {
         [SerializeField] private KeywordData[] _keywords = null;

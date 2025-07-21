@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Roguegard
 {
-    [CreateAssetMenu(menuName = "Roguegard/Gender")]
+    [CreateAssetMenu(menuName = "Roguegard/Character Creation/Race Property/Gender")]
     [Objforming.Referable]
     public class KeywordsRogueGender : RogueGender
     {

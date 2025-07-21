@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Roguegard.CharacterCreation
 {
-    [CreateAssetMenu(menuName = "Roguegard/Equipment State")]
+    [CreateAssetMenu(menuName = "Roguegard/Character Creation/Race Property/Equipment State")]
     public class EquipmentStateData : ScriptableObject, IEnumerable<KeyValuePair<IKeyword, int>>
     {
         [SerializeField] private List<Item> _items = null;
