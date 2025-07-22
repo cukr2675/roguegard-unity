@@ -4,7 +4,7 @@ namespace Roguegard
 {
     public class RandomTrapBeSteppedOn : BaseApplyRogueMethod
     {
-        [SerializeField] private RogueTileInfoData[] _traps = null;
+        [SerializeField] private StandardRogueTileInfoAsset[] _traps = null;
 
         public override bool Invoke(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
         {

@@ -5,7 +5,7 @@ namespace Roguegard.CharacterCreation
         public IRaceOption Open(RogueObj self, MainInfoSetType infoSetType, bool polymorph2Base, IRaceOption raceOption, ICharacterCreationData characterCreationData)
         {
             // ダンジョンの階層データを公開する
-            var dungeon = (DungeonCreationData)characterCreationData;
+            var dungeon = (DungeonCreationDataAsset)characterCreationData;
             DungeonInfo.SetFloorsTo(self, dungeon.Floors, dungeon.LevelType, dungeon.VisibleRadius);
             return raceOption;
         }

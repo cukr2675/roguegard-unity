@@ -1,9 +1,9 @@
 namespace Roguegard.CharacterCreation
 {
-    public class HardyAbility : PartyAbilityIntrinsicOptionScript
+    public class HardyAbility : PartyAbilityIntrinsicScript
     {
 		public override ISortedIntrinsic CreateSortedIntrinsic(
-            ScriptIntrinsicOption parent, IReadOnlyIntrinsic intrinsic, ICharacterCreationData characterCreationData, int lv)
+            ScriptIntrinsicOptionAsset parent, IReadOnlyIntrinsic intrinsic, ICharacterCreationData characterCreationData, int lv)
         {
             return new SortedIntrinsic(lv);
         }

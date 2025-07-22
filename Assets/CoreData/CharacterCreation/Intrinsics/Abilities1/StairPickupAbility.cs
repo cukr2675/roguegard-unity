@@ -1,6 +1,6 @@
 namespace Roguegard.CharacterCreation
 {
-    public class StairPickupAbility : ToolAbilityIntrinsicOptionScript
+    public class StairPickupAbility : ToolAbilityIntrinsicScript
     {
         protected override float GetCost(
             IReadOnlyIntrinsic intrinsic, ICharacterCreationData characterCreationData, IReadOnlyStartingItem tool, out bool costIsUnknown)

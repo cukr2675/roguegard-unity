@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Roguegard.CharacterCreation
 {
-    public class CostedRaceWeight : ReferableScript, IRaceOptionWeight
+    public class CostedRaceWeight : ReferableScript, IRaceWeight
     {
         public float GetWeight(IRaceOption raceOption, ICharacterCreationData characterCreationData)
         {

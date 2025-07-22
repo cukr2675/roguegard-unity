@@ -4,7 +4,7 @@ namespace Roguegard.CharacterCreation
 {
     public class OnChangeGederOpen : ReferableScript, IOpenEffect
     {
-        [SerializeField] private ScriptableCharacterCreationData _to = null;
+        [SerializeField] private CharacterCreationDataAsset _to = null;
 
         public IRaceOption Open(
             RogueObj self, MainInfoSetType infoSetType, bool polymorph2Base, IRaceOption raceOption, ICharacterCreationData characterCreationData)

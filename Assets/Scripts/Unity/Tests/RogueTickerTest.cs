@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using NUnit.Framework;
 using UnityEngine;
@@ -19,8 +19,8 @@ namespace RoguegardUnity
     {
         [SerializeField] private RoguegardSettingsData _settings = null;
 
-        [SerializeField] private ScriptableCharacterCreationData _locateSelfTester = null;
-        [SerializeField] private ScriptableCharacterCreationData _locateLocationTester = null;
+        [SerializeField] private CharacterCreationDataAsset _locateSelfTester = null;
+        [SerializeField] private CharacterCreationDataAsset _locateLocationTester = null;
 
         [Test]
         public void RecursiveCloneAndLocateSelf()
@@ -48,7 +48,7 @@ namespace RoguegardUnity
 
         private class Save : IRogueDeviceSave<Device>
         {
-            public ScriptableCharacterCreationData data;
+            public CharacterCreationDataAsset data;
 
             public Device NewGame()
             {

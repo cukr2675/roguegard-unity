@@ -29,7 +29,7 @@ namespace Roguegard
             RogueMethodAspectState.PassiveChain chain)
         {
             var result = chain.Invoke(keyword, method, self, user, activationDepth, arg);
-            RogueDungeonFloor floor = null;
+            DungeonFloorAsset floor = null;
             if (result && keyword == StdKw.BeEntered && RoomIndex < self.Space.RoomCount)
             {
                 self.Space.GetRoom(RoomIndex, out var monsterHouse, out _);

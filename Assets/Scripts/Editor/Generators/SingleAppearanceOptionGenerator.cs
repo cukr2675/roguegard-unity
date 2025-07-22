@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Roguegard.CharacterCreation.Editor
 {
     [CreateAssetMenu(menuName = "Roguegard/Character Creation/Appearance/Single Generator")]
-    public class SingleAppearanceOptionGenerator : ScriptableObjectGenerator<SingleAppearanceOption>
+    public class SingleAppearanceOptionGenerator : ScriptableObjectGenerator<SingleAppearanceOptionAsset>
     {
         [SerializeField] private string _descriptionNameFormat = null;
         public string DescriptionNameFormat { get => _descriptionNameFormat; set => _descriptionNameFormat = value; }
@@ -22,7 +22,7 @@ namespace Roguegard.CharacterCreation.Editor
         [SerializeField] private bool _isColorRanged = false;
         public bool IsColorRanged { get => _isColorRanged; set => _isColorRanged = value; }
 
-        protected override bool TrySetObject(SingleAppearanceOption option, int index)
+        protected override bool TrySetObject(SingleAppearanceOptionAsset option, int index)
         {
             var sprite = RoguegardAssetDatabase.CreateColorRangedBoneSpriteOrNull(_isColorRanged, _spriteNameFormat, index);
             if (sprite == null) return false;

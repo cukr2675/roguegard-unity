@@ -11,7 +11,7 @@ namespace Roguegard.CharacterCreation
         [SerializeField] private int _lv;
         public int Lv => _lv;
 
-        [SerializeField] private RogueGender _gender;
+        [SerializeField] private RogueGenderAsset _gender;
         public IRogueGender Gender => _gender;
 
         [SerializeField] private string _hpName;

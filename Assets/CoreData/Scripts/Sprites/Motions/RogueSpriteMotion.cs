@@ -3,7 +3,7 @@ using OchalikeSprites;
 namespace Roguegard
 {
     /// <summary>
-    /// 関連: <see cref="RogueSpriteMotionData"/>
+    /// 関連: <see cref="RogueSpriteMotionAsset"/>
     /// </summary>
     public abstract class RogueSpriteMotion : IRogueSpriteMotion
     {

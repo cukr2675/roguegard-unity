@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Roguegard.CharacterCreation
@@ -7,11 +5,11 @@ namespace Roguegard.CharacterCreation
     [System.Serializable]
     public class ScriptableIntrinsic : IReadOnlyIntrinsic
     {
-        [SerializeField] private IntrinsicOption _option;
+        [SerializeField] private IntrinsicOptionAsset _option;
         public IIntrinsicOption Option => _option;
 
-        [SerializeField] private ScriptableOptionDescription _optionDescription = null;
-        private ScriptableOptionDescription OptionDescription => ScriptableOptionDescription.IdentityOr(_optionDescription);
+        [SerializeField] private OptionDescriptionAsset _optionDescription = null;
+        private OptionDescriptionAsset OptionDescription => OptionDescriptionAsset.IdentityOr(_optionDescription);
 
         [SerializeField] private MemberList _members;
 

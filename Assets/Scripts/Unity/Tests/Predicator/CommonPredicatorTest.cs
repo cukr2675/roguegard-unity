@@ -12,9 +12,9 @@ namespace RoguegardUnity.Tests
     public class CommonPredicatorTest : ScriptableObject
     {
         [SerializeField] private RoguegardSettingsData _settings = null;
-        [SerializeField] private ScriptableCharacterCreationData _player = null;
-        [SerializeField] private ScriptableCharacterCreationData _enemy = null;
-        [SerializeField] private ScriptableCharacterCreationData _tool = null;
+        [SerializeField] private CharacterCreationDataAsset _player = null;
+        [SerializeField] private CharacterCreationDataAsset _enemy = null;
+        [SerializeField] private CharacterCreationDataAsset _tool = null;
 
         [Test]
         public void PoolingTest()

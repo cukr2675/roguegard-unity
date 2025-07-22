@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,8 +10,8 @@ namespace Roguegard.Rgpacks
     public class ScenarioAtelierBeApplied : BaseApplyRogueMethod
     {
         [SerializeField] private ScriptableStartingItem _monolith = null;
-        [SerializeField] private RogueTileInfoData _groundTile = null;
-        [SerializeField] private RogueTileInfoData _wallTile = null;
+        [SerializeField] private StandardRogueTileInfoAsset _groundTile = null;
+        [SerializeField] private StandardRogueTileInfoAsset _wallTile = null;
 
         public override bool Invoke(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
         {

@@ -5,12 +5,12 @@ namespace Roguegard.CharacterCreation
     [System.Serializable]
     public class ScriptableStartingItem : IReadOnlyStartingItem, IWeightedRogueObjGenerator
     {
-        [SerializeField] private ScriptableCharacterCreationData _option;
-        public ScriptableCharacterCreationData Option => _option;
+        [SerializeField] private CharacterCreationDataAsset _option;
+        public CharacterCreationDataAsset Option => _option;
         IStartingItemOption IReadOnlyStartingItem.Option => _option;
 
-        [SerializeField] private ScriptableOptionDescription _optionDescription = null;
-        private ScriptableOptionDescription OptionDescription => ScriptableOptionDescription.IdentityOr(_optionDescription);
+        [SerializeField] private OptionDescriptionAsset _optionDescription = null;
+        private OptionDescriptionAsset OptionDescription => OptionDescriptionAsset.IdentityOr(_optionDescription);
 
         [SerializeField] private float _generatorWeight;
         public float GeneratorWeight

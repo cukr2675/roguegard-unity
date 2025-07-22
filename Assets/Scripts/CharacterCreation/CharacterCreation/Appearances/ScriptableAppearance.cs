@@ -5,12 +5,12 @@ namespace Roguegard.CharacterCreation
     [System.Serializable]
     public class ScriptableAppearance : IReadOnlyAppearance
     {
-        [SerializeField] private AppearanceOption _option;
-        public AppearanceOption Option => _option;
+        [SerializeField] private AppearanceOptionAsset _option;
+        public AppearanceOptionAsset Option => _option;
         IAppearanceOption IReadOnlyAppearance.Option => _option;
 
-        [SerializeField] private ScriptableOptionDescription _optionDescription = null;
-        private ScriptableOptionDescription OptionDescription => ScriptableOptionDescription.IdentityOr(_optionDescription);
+        [SerializeField] private OptionDescriptionAsset _optionDescription = null;
+        private OptionDescriptionAsset OptionDescription => OptionDescriptionAsset.IdentityOr(_optionDescription);
 
         [SerializeField] private Color _color;
         public Color Color => _color;

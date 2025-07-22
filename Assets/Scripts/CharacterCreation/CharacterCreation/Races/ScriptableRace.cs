@@ -8,17 +8,17 @@ namespace Roguegard.CharacterCreation
         /// <summary>
         /// 進化によって変わることはない
         /// </summary>
-        [SerializeField] private RaceOption _option;
-        public RaceOption Option => _option;
+        [SerializeField] private RaceOptionAsset _option;
+        public RaceOptionAsset Option => _option;
         IRaceOption IReadOnlyRace.Option => Option;
 
-        [SerializeField] private ScriptableOptionDescription _optionDescription = null;
-        private ScriptableOptionDescription OptionDescription => ScriptableOptionDescription.IdentityOr(_optionDescription);
+        [SerializeField] private OptionDescriptionAsset _optionDescription = null;
+        private OptionDescriptionAsset OptionDescription => OptionDescriptionAsset.IdentityOr(_optionDescription);
 
         [SerializeField] private Color _bodyColor;
         public Color BodyColor => _bodyColor;
 
-        [SerializeField] private RogueGender _gender;
+        [SerializeField] private RogueGenderAsset _gender;
         public IRogueGender Gender => _gender;
 
         [SerializeField] private string _hpName;

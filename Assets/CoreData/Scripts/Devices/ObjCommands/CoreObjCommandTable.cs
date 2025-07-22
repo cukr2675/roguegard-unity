@@ -127,8 +127,8 @@ namespace Roguegard
         [System.Serializable]
         private class Item
         {
-            [SerializeField] private KeywordData _keyword;
-            public KeywordData Keyword => _keyword;
+            [SerializeField] private KeywordAsset _keyword;
+            public KeywordAsset Keyword => _keyword;
 
             [SerializeField] private ScriptField<IObjCommand>[] _commands;
 

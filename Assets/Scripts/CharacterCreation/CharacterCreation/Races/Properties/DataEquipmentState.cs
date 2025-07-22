@@ -4,13 +4,13 @@ namespace Roguegard.CharacterCreation
 {
     public class DataEquipmentState : IEquipmentState
     {
-        private readonly EquipmentStateData data;
+        private readonly EquipmentStateAsset data;
 
         private readonly Dictionary<IKeyword, RogueObj[]> table;
 
         public Spanning<IKeyword> Parts => data.Parts;
 
-        private DataEquipmentState(EquipmentStateData data)
+        private DataEquipmentState(EquipmentStateAsset data)
         {
             this.data = data;
             table = new Dictionary<IKeyword, RogueObj[]>();
@@ -21,7 +21,7 @@ namespace Roguegard.CharacterCreation
             }
         }
 
-        public static DataEquipmentState CreateOrReuse(RogueObj self, EquipmentStateData data)
+        public static DataEquipmentState CreateOrReuse(RogueObj self, EquipmentStateAsset data)
         {
             var equipmentState = self.Main.GetEquipmentState(self);
             if (equipmentState is DataEquipmentState dataState && dataState.data == data) return dataState;

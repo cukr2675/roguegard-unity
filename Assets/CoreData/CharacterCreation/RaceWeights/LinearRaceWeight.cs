@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Roguegard.CharacterCreation
 {
-    public class LinearRaceWeight : ReferableScript, IRaceOptionWeight
+    public class LinearRaceWeight : ReferableScript, IRaceWeight
     {
         [SerializeField] private float _slope = 0f;
         public float Slope => _slope;

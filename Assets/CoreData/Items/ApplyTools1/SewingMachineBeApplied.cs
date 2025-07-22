@@ -264,7 +264,7 @@ namespace Roguegard
                         {
                             data.SetEquipParts(new[] { part });
 
-                            if (part is EquipKeywordData keyword)
+                            if (part is EquipKeywordAsset keyword)
                             {
                                 data.BoneSpriteEffectOrder = keyword.Order;
                             }

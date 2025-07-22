@@ -7,13 +7,13 @@ namespace Roguegard
     {
         private static AmmoKw instance;
 
-        [SerializeField] private KeywordData _arrow;
+        [SerializeField] private KeywordAsset _arrow;
         public static IKeyword Arrow => instance._arrow;
 
-        [SerializeField] private KeywordData _bullet;
+        [SerializeField] private KeywordAsset _bullet;
         public static IKeyword Bullet => instance._bullet;
 
-        [SerializeField] private KeywordData _throwingKnife;
+        [SerializeField] private KeywordAsset _throwingKnife;
         public static IKeyword ThrowingKnife => instance._throwingKnife;
 
         public override IEnumerator LoadAsync()

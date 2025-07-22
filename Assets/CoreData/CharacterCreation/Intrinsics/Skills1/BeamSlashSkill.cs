@@ -4,10 +4,10 @@ using UnityEngine;
 
 namespace Roguegard.CharacterCreation
 {
-    public class BeamSlashSkill : MpSkillIntrinsicOptionScript
+    public class BeamSlashSkill : MpSkillIntrinsicScript
     {
         public override ISortedIntrinsic CreateSortedIntrinsic(
-            ScriptIntrinsicOption parent, IReadOnlyIntrinsic intrinsic, ICharacterCreationData characterCreationData, int lv)
+            ScriptIntrinsicOptionAsset parent, IReadOnlyIntrinsic intrinsic, ICharacterCreationData characterCreationData, int lv)
         {
             return new SortedIntrinsic(parent, lv);
         }
@@ -23,7 +23,7 @@ namespace Roguegard.CharacterCreation
 
             private SortedIntrinsic() : base(null, 0) { }
 
-            public SortedIntrinsic(ScriptIntrinsicOption parent, int lv) : base(parent, lv) { }
+            public SortedIntrinsic(ScriptIntrinsicOptionAsset parent, int lv) : base(parent, lv) { }
 
             protected override bool Activate(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
             {

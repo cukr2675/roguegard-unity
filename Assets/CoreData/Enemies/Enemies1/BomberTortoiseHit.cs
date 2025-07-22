@@ -5,7 +5,7 @@ namespace Roguegard
 {
     public class BomberTortoiseHit : ReferableScript, IAffectRogueMethod
     {
-        [SerializeField] private ScriptableCharacterCreationData _bomberShell = null;
+        [SerializeField] private CharacterCreationDataAsset _bomberShell = null;
 
         private BomberTortoiseHit() { }
 

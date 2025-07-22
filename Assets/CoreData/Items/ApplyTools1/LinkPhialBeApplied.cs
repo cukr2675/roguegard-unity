@@ -6,7 +6,7 @@ namespace Roguegard
 {
     public class LinkPhialBeApplied : BaseApplyRogueMethod
     {
-        [SerializeField] private ScriptableCharacterCreationData _potionInfoSet = null;
+        [SerializeField] private CharacterCreationDataAsset _potionInfoSet = null;
 
         private readonly SelectObjMenuScreen menu;
 

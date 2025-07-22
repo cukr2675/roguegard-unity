@@ -7,22 +7,22 @@ namespace Roguegard
     {
         private static CharacterCreationKw instance;
 
-        [SerializeField] private KeywordData _alpha;
+        [SerializeField] private KeywordAsset _alpha;
         public static IKeyword Alpha => instance._alpha;
 
-        [SerializeField] private KeywordData _blue;
+        [SerializeField] private KeywordAsset _blue;
         public static IKeyword Blue => instance._blue;
 
-        [SerializeField] private KeywordData _color;
+        [SerializeField] private KeywordAsset _color;
         public static IKeyword Color => instance._color;
 
-        [SerializeField] private KeywordData _glued;
+        [SerializeField] private KeywordAsset _glued;
         public static IKeyword Glued => instance._glued;
 
-        [SerializeField] private KeywordData _green;
+        [SerializeField] private KeywordAsset _green;
         public static IKeyword Green => instance._green;
 
-        [SerializeField] private KeywordData _red;
+        [SerializeField] private KeywordAsset _red;
         public static IKeyword Red => instance._red;
 
         public override IEnumerator LoadAsync()

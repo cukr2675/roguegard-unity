@@ -17,9 +17,9 @@ namespace RoguegardUnity.Tests
     {
         [SerializeField] private RoguegardSettingsData _settings = null;
 
-        [SerializeField] private ScriptableCharacterCreationData _player = null;
-        [SerializeField] private ScriptableCharacterCreationData _vehicle = null;
-        [SerializeField] private ScriptableCharacterCreationData _equipment = null;
+        [SerializeField] private CharacterCreationDataAsset _player = null;
+        [SerializeField] private CharacterCreationDataAsset _vehicle = null;
+        [SerializeField] private CharacterCreationDataAsset _equipment = null;
 
         [Test]
         public void RideTest()

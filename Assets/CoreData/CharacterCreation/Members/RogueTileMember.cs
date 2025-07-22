@@ -9,7 +9,7 @@ namespace Roguegard.CharacterCreation
 
         IMemberSource IReadOnlyMember.Source => SourceInstance;
 
-        [SerializeField, Objforming.IgnoreMember] private ScriptableRogueTile _tile;
+        [SerializeField, Objforming.IgnoreMember] private RogueTileAsset _tile;
         public IRogueTile Tile => _tile;
 
         private RogueTileMember() { }

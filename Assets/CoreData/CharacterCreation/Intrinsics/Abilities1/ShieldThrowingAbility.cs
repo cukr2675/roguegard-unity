@@ -1,9 +1,9 @@
 namespace Roguegard.CharacterCreation
 {
-    public class ShieldThrowingAbility : AbilityIntrinsicOptionScript
+    public class ShieldThrowingAbility : AbilityIntrinsicScript
     {
 		public override ISortedIntrinsic CreateSortedIntrinsic(
-            ScriptIntrinsicOption parent, IReadOnlyIntrinsic intrinsic, ICharacterCreationData characterCreationData, int lv)
+            ScriptIntrinsicOptionAsset parent, IReadOnlyIntrinsic intrinsic, ICharacterCreationData characterCreationData, int lv)
 		{
             return new SortedIntrinsic(lv);
 		}

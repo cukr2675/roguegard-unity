@@ -2,10 +2,10 @@ using Roguegard.Extensions;
 
 namespace Roguegard.CharacterCreation
 {
-    public class MultitaskAbility : AbilityIntrinsicOptionScript
+    public class MultitaskAbility : AbilityIntrinsicScript
     {
         public override ISortedIntrinsic CreateSortedIntrinsic(
-            ScriptIntrinsicOption parent, IReadOnlyIntrinsic intrinsic, ICharacterCreationData characterCreationData, int lv)
+            ScriptIntrinsicOptionAsset parent, IReadOnlyIntrinsic intrinsic, ICharacterCreationData characterCreationData, int lv)
         {
             return new SortedIntrinsic(lv);
         }

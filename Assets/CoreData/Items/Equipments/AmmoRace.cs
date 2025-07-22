@@ -8,7 +8,7 @@ namespace Roguegard.CharacterCreation
     {
         [Header("AmmoRace")]
 
-        [SerializeField] private KeywordData _ammoCategory;
+        [SerializeField] private KeywordAsset _ammoCategory;
 
         [SerializeField] private ScriptField<IApplyRogueMethod> _beShot;
 

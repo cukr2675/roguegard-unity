@@ -9,7 +9,7 @@ namespace Roguegard.CharacterCreation
 
         IMemberSource IReadOnlyMember.Source => SourceInstance;
 
-        [SerializeField, Objforming.IgnoreMember] private ScriptableCharacterCreationData _item;
+        [SerializeField, Objforming.IgnoreMember] private CharacterCreationDataAsset _item;
         private IStartingItemOption _itemOption;
         public IStartingItemOption ItemOption
         {

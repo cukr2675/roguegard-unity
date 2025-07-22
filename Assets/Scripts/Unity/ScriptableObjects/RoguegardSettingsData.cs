@@ -21,12 +21,12 @@ namespace RoguegardUnity
 #endif
 
         [Header("Initial Assets")]
-        [SerializeField] private ItemCreationData _world = null;
-        [SerializeField] private LobbyCreationData _lobby = null;
+        [SerializeField] private ItemCreationDataAsset _world = null;
+        [SerializeField] private LobbyCreationDataAsset _lobby = null;
         [Space]
-        [SerializeField] private PresetCreationData[] _presets = null;
+        [SerializeField] private PresetCreationDataAsset[] _presets = null;
 
-        [SerializeField] private ItemCreationData _money = null;
+        [SerializeField] private ItemCreationDataAsset _money = null;
 
         [SerializeField] private Vector2Int _maxTilemapSize = new(y: 64, x: 96);
         // y: 64 透明マップのチップを4x4としたとき、縦幅を256に収めるサイズ
@@ -37,7 +37,7 @@ namespace RoguegardUnity
         [SerializeField] private Color[] _defaultPalette = null;
 
         [Tooltip("メッセージを横線で分割しない行動を指定する")]
-        [SerializeField] private KeywordData[] _keywordsNotEnqueueMessageRule = null;
+        [SerializeField] private KeywordAsset[] _keywordsNotEnqueueMessageRule = null;
 
         [Header("Sprites")]
         [Tooltip("ローグガルドで標準の PixelsPerUnit 。ドットキャラの解像度と素材の流用しやすさを考慮して 32 にする")]
@@ -54,10 +54,10 @@ namespace RoguegardUnity
 
         [Header("Global Assets")]
         [SerializeField] private ScriptField<ILevelInfoInitializer> _levelInfoInitializer = null;
-        [SerializeField] private EquipKeywordData _equipPartOfInnerwear = null;
-        [SerializeField] private DefaultRaceOption _defaultRaceOption = null;
+        [SerializeField] private EquipKeywordAsset _equipPartOfInnerwear = null;
+        [SerializeField] private DefaultRaceOptionAsset _defaultRaceOption = null;
         [SerializeField] private ObjCommandTable _objCommandTable = null;
-        [SerializeField] private DungeonQuestGenerator _dungeonQuestGenerator = null;
+        [SerializeField] private DungeonQuestGeneratorAsset _dungeonQuestGenerator = null;
         [SerializeField] private RogueAssetTable[] _assetTables = null;
 
         [Header("Scriptable Loaders")]
@@ -95,7 +95,7 @@ namespace RoguegardUnity
 
                 foreach (var pair in assetTable)
                 {
-                    if (pair.Value is DungeonCreationData dungeonData)
+                    if (pair.Value is DungeonCreationDataAsset dungeonData)
                     {
                         var dungeonSelectOption = dungeonData.CreateDungeonSelectOption();
                         RoguegardSettings.AddDungeonSelectOption(dungeonSelectOption);
@@ -122,7 +122,7 @@ namespace RoguegardUnity
                     {
                         characterCreationDatabase.AddAppearanceOption(appearanceOption);
                     }
-                    else if (asset is IIntrinsicOption intrinsicOption && intrinsicOption is not QuestEffectIntrinsicOption)
+                    else if (asset is IIntrinsicOption intrinsicOption && intrinsicOption is not QuestEffectIntrinsicOptionAsset)
                     {
                         characterCreationDatabase.AddIntrinsicOption(intrinsicOption);
                     }

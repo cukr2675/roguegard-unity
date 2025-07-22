@@ -12,7 +12,7 @@ namespace Roguegard.CharacterCreation
 
         [SerializeField] private bool _isCosmetic;
 
-        [SerializeField] private EquipKeywordData[] _equipParts;
+        [SerializeField] private EquipKeywordAsset[] _equipParts;
 
         [SerializeField] private bool _canStackWhileEquipped;
 

@@ -2,12 +2,12 @@ using System.Collections.Generic;
 
 namespace Roguegard.CharacterCreation
 {
-    public class RescueQuestObjective : AbilityIntrinsicOptionScript, IQuestEffectIntrinsicOptionScript
+    public class RescueQuestObjective : AbilityIntrinsicScript, IQuestEffectIntrinsicScript
     {
         private static List<IStartingItemOption> options;
 
         public IntrinsicBuilder GenerateEffect(
-            QuestEffectIntrinsicOption parent, DungeonCreationData dungeon, ICharacterCreationDatabase database, IRogueRandom random)
+            QuestEffectIntrinsicOptionAsset parent, DungeonCreationDataAsset dungeon, ICharacterCreationDatabase database, IRogueRandom random)
         {
             if (options == null)
             {
@@ -40,7 +40,7 @@ namespace Roguegard.CharacterCreation
         }
 
         public override ISortedIntrinsic CreateSortedIntrinsic(
-            ScriptIntrinsicOption parent, IReadOnlyIntrinsic intrinsic, ICharacterCreationData characterCreationData, int lv)
+            ScriptIntrinsicOptionAsset parent, IReadOnlyIntrinsic intrinsic, ICharacterCreationData characterCreationData, int lv)
         {
             var member = (QuestMember)QuestMember.GetMember(intrinsic);
             return new SortedIntrinsic(lv) { member = member };

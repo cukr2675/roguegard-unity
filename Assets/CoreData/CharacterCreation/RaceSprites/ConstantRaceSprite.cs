@@ -3,11 +3,11 @@ using UnityEngine;
 
 namespace Roguegard.CharacterCreation
 {
-    public class ConstantRaceSprite : ReferableScript, IRaceOptionSprite
+    public class ConstantRaceSprite : ReferableScript, IRaceSprite
     {
         [SerializeField] private OchalikeSpriteData _bone = null;
 
-        [SerializeField] private SpriteMotionSetData _motionSet = null;
+        [SerializeField] private SpriteMotionSetAsset _motionSet = null;
 
         public void GetSpriteValues(
             IRaceOption raceOption, ICharacterCreationData characterCreationData, IRogueGender gender,

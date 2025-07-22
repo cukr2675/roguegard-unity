@@ -1,9 +1,9 @@
 namespace Roguegard.CharacterCreation
 {
-    public class RestEfficiency1Ability : PartyAbilityIntrinsicOptionScript
+    public class RestEfficiency1Ability : PartyAbilityIntrinsicScript
     {
         public override ISortedIntrinsic CreateSortedIntrinsic(
-            ScriptIntrinsicOption parent, IReadOnlyIntrinsic intrinsic, ICharacterCreationData characterCreationData, int lv)
+            ScriptIntrinsicOptionAsset parent, IReadOnlyIntrinsic intrinsic, ICharacterCreationData characterCreationData, int lv)
         {
             return new SortedIntrinsic(lv);
         }

@@ -1,9 +1,9 @@
 namespace Roguegard.CharacterCreation
 {
-    public class SnootyAbility : AbilityIntrinsicOptionScript
+    public class SnootyAbility : AbilityIntrinsicScript
     {
 		public override ISortedIntrinsic CreateSortedIntrinsic(
-            ScriptIntrinsicOption parent, IReadOnlyIntrinsic intrinsic, ICharacterCreationData characterCreationData, int lv)
+            ScriptIntrinsicOptionAsset parent, IReadOnlyIntrinsic intrinsic, ICharacterCreationData characterCreationData, int lv)
         {
             return new SortedIntrinsic(lv);
         }

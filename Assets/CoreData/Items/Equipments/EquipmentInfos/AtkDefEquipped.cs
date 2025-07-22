@@ -1,7 +1,7 @@
 namespace Roguegard.CharacterCreation
 {
     /// <summary>
-    /// <see cref="EquipmentCreationData"/> の攻撃力と防御力を参照して、装備者にバフをかける。
+    /// <see cref="EquipmentCreationDataAsset"/> の攻撃力と防御力を参照して、装備者にバフをかける。
     /// </summary>
     public class AtkDefEquipped : ReferableScript, IEquippedEffectSource
     {

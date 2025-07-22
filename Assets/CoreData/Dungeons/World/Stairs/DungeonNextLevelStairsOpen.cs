@@ -6,7 +6,7 @@ namespace Roguegard.CharacterCreation
 {
     public class DungeonNextLevelStairsOpen : ReferableScript, IOpenEffect
     {
-        [SerializeField] private DungeonCreationData _data = null;
+        [SerializeField] private DungeonCreationDataAsset _data = null;
 
         private DungeonNextLevelStairsOpen() { }
 
@@ -37,7 +37,7 @@ namespace Roguegard.CharacterCreation
         [Objforming.Formable]
         private class SavePoint : ISavePointInfo
         {
-            private readonly DungeonCreationData data;
+            private readonly DungeonCreationDataAsset data;
 
             public IApplyRogueMethod BeforeSave => _beforeSave;
             private static readonly IApplyRogueMethod _beforeSave = new BeforeSaveRogueMethod();
@@ -47,7 +47,7 @@ namespace Roguegard.CharacterCreation
 
             private SavePoint() { }
 
-            public SavePoint(DungeonCreationData data)
+            public SavePoint(DungeonCreationDataAsset data)
             {
                 this.data = data;
             }
@@ -87,9 +87,9 @@ namespace Roguegard.CharacterCreation
 
         private class AfterLoadRogueMethod : FloorMenuAfterLoadRogueMethod
         {
-            private readonly DungeonCreationData data;
+            private readonly DungeonCreationDataAsset data;
 
-            public AfterLoadRogueMethod(DungeonCreationData data)
+            public AfterLoadRogueMethod(DungeonCreationDataAsset data)
             {
                 this.data = data;
             }

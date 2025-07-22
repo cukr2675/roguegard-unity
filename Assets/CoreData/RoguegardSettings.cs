@@ -49,13 +49,13 @@ namespace Roguegard
 
         public static string DefaultSaveFileName { get; set; }
 
-        public static DefaultRaceOption DefaultRaceOption { get; set; }
+        public static DefaultRaceOptionAsset DefaultRaceOption { get; set; }
 
         public static ObjCommandTable ObjCommandTable { get; set; }
 
         public static ICharacterCreationDatabase CharacterCreationDatabase { get; set; }
 
-        public static DungeonQuestGenerator DungeonQuestGenerator { get; set; }
+        public static DungeonQuestGeneratorAsset DungeonQuestGenerator { get; set; }
 
         public static IJsonSerializationSetting JsonSerialization { get; set; }
 

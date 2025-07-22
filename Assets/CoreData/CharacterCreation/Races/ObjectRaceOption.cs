@@ -40,13 +40,13 @@ namespace Roguegard.CharacterCreation
 
 
         [Space]
-        [SerializeField] private RogueGenderList _genders;
+        [SerializeField] private RogueGenderListAsset _genders;
         public Spanning<IRogueGender> Genders => _genders ? _genders.Span : RoguegardSettings.DefaultRaceOption.Genders;
 
 
 
         [Space]
-        [SerializeField] private KeywordData _category;
+        [SerializeField] private KeywordAsset _category;
         public IKeyword Category => _category ? _category : RoguegardSettings.DefaultRaceOption.Category;
 
 
@@ -67,14 +67,14 @@ namespace Roguegard.CharacterCreation
         [SerializeField] private float _loadCapacity;
         public float LoadCapacity => _loadCapacity;
 
-        [SerializeField] private ScriptableFaction _faction;
+        [SerializeField] private FactionAsset _faction;
         public ISerializableKeyword Faction => _faction ? _faction.Faction : RoguegardSettings.DefaultRaceOption.Faction;
         public Spanning<ISerializableKeyword> TargetFactions => _faction ? _faction.TargetFactions : RoguegardSettings.DefaultRaceOption.TargetFactions;
 
         [SerializeField] private MainInfoSetAbility _ability;
         public MainInfoSetAbility Ability => _ability;
 
-        [SerializeField] private RogueMaterial _material;
+        [SerializeField] private RogueMaterialAsset _material;
         public IRogueMaterial Material => _material ? _material : RoguegardSettings.DefaultRaceOption.Material;
 
         [SerializeField] private ScriptableStartingItemList[] _lootTable;
@@ -137,9 +137,9 @@ namespace Roguegard.CharacterCreation
 
 
         [Space]
-        [SerializeField] private EquipmentStateData _equipmentState;
-        [SerializeField] private ScriptField<IRaceOptionWeight> _weight;
-        [SerializeField] private ScriptField<IRaceOptionSprite> _sprite;
+        [SerializeField] private EquipmentStateAsset _equipmentState;
+        [SerializeField] private ScriptField<IRaceWeight> _weight;
+        [SerializeField] private ScriptField<IRaceSprite> _sprite;
         [SerializeField] private ScriptField<IOpenEffect>[] _openEffects;
         public Spanning<ScriptField<IOpenEffect>> OpenEffectSources => _openEffects;
 

@@ -107,7 +107,7 @@ namespace Roguegard.Editor
         [System.Serializable]
         private class Item
         {
-            [SerializeField] private KeywordData _playName;
+            [SerializeField] private KeywordAsset _playName;
             public string PlayName => _playName.DescriptionName;
 
             [SerializeField] private AudioClip _originalClip;

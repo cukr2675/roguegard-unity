@@ -7,13 +7,13 @@ namespace Roguegard
     {
         private static ElementKw instance;
 
-        [SerializeField] private KeywordData _fire;
+        [SerializeField] private KeywordAsset _fire;
         public static IKeyword Fire => instance._fire;
 
-        [SerializeField] private KeywordData _ice;
+        [SerializeField] private KeywordAsset _ice;
         public static IKeyword Ice => instance._ice;
 
-        [SerializeField] private KeywordData _thunder;
+        [SerializeField] private KeywordAsset _thunder;
         public static IKeyword Thunder => instance._thunder;
 
         public override IEnumerator LoadAsync()

@@ -5,7 +5,7 @@ namespace Roguegard
 {
     public class ThronsTrapBeSteppedOn : BaseApplyRogueMethod
     {
-        [SerializeField] private ScriptableRogueTileInfo trapTileInfo = null;
+        [SerializeField] private RogueTileInfoAsset trapTileInfo = null;
 
         private IAffectCallback callback;
 

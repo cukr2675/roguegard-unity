@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Roguegard.CharacterCreation.Editor
 {
     [CreateAssetMenu(menuName = "Roguegard/Character Creation/Appearance/Alphabet Generator")]
-    public class AlphabetTypeAppearanceOptionGenerator : ScriptableObjectGenerator<AlphabetTypeAppearanceOption>
+    public class AlphabetTypeAppearanceOptionGenerator : ScriptableObjectGenerator<AlphabetTypeAppearanceOptionAsset>
     {
         [SerializeField] private string _descriptionNameFormat = null;
         public string DescriptionNameFormat { get => _descriptionNameFormat; set => _descriptionNameFormat = value; }
@@ -25,7 +25,7 @@ namespace Roguegard.CharacterCreation.Editor
 
         private static readonly char[] alphabets = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray();
 
-        protected override bool TrySetObject(AlphabetTypeAppearanceOption option, int index)
+        protected override bool TrySetObject(AlphabetTypeAppearanceOptionAsset option, int index)
         {
             var table = new List<ColorRangedBoneSprite>();
             foreach (var j in alphabets)

@@ -219,7 +219,7 @@ namespace Roguegard.Device
                 }
 
                 // 見つからないかスタックできなかったら新規オブジェクトを生成して獲得
-                if (startingItemOption is ScriptableCharacterCreationData data)
+                if (startingItemOption is CharacterCreationDataAsset data)
                 {
                     data.CreateObj(player, Vector2Int.zero, RogueRandom.Primary);
                 }

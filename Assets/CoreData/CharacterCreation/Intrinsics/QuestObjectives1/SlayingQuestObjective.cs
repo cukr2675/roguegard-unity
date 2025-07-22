@@ -6,14 +6,14 @@ using UnityEngine;
 
 namespace Roguegard.CharacterCreation
 {
-    public class SlayingQuestObjective : AbilityIntrinsicOptionScript, IQuestEffectIntrinsicOptionScript
+    public class SlayingQuestObjective : AbilityIntrinsicScript, IQuestEffectIntrinsicScript
     {
-        [SerializeField] private KeywordData _targetFaction = null;
+        [SerializeField] private KeywordAsset _targetFaction = null;
 
         private static List<IStartingItemOption> options;
 
         public IntrinsicBuilder GenerateEffect(
-            QuestEffectIntrinsicOption parent, DungeonCreationData dungeon, ICharacterCreationDatabase database, IRogueRandom random)
+            QuestEffectIntrinsicOptionAsset parent, DungeonCreationDataAsset dungeon, ICharacterCreationDatabase database, IRogueRandom random)
         {
             if (options == null)
             {
@@ -47,7 +47,7 @@ namespace Roguegard.CharacterCreation
         }
 
         public override ISortedIntrinsic CreateSortedIntrinsic(
-            ScriptIntrinsicOption parent, IReadOnlyIntrinsic intrinsic, ICharacterCreationData characterCreationData, int lv)
+            ScriptIntrinsicOptionAsset parent, IReadOnlyIntrinsic intrinsic, ICharacterCreationData characterCreationData, int lv)
         {
             var member = (QuestMember)QuestMember.GetMember(intrinsic);
             return new SortedIntrinsic(lv) { member = member };

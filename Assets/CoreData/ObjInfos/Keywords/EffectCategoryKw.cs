@@ -7,19 +7,19 @@ namespace Roguegard
     {
         private static EffectCategoryKw instance;
 
-        [SerializeField] private KeywordData _buff;
+        [SerializeField] private KeywordAsset _buff;
         public static IKeyword Buff => instance._buff;
 
-        [SerializeField] private KeywordData _debuff;
+        [SerializeField] private KeywordAsset _debuff;
         public static IKeyword Debuff => instance._debuff;
 
-        [SerializeField] private KeywordData _dummy;
+        [SerializeField] private KeywordAsset _dummy;
         public static IKeyword Dummy => instance._dummy;
 
-        [SerializeField] private KeywordData _erosion;
+        [SerializeField] private KeywordAsset _erosion;
         public static IKeyword Erosion => instance._erosion;
 
-        [SerializeField] private KeywordData _statusAilment;
+        [SerializeField] private KeywordAsset _statusAilment;
         public static IKeyword StatusAilment => instance._statusAilment;
 
         public override IEnumerator LoadAsync()

@@ -4,9 +4,9 @@ using UnityEngine;
 namespace Roguegard.CharacterCreation
 {
     /// <summary>
-    /// 性別によって見た目を変える <see cref="IRaceOptionSprite"/>
+    /// 性別によって見た目を変える <see cref="IRaceSprite"/>
     /// </summary>
-    public class GenderDifferenceRaceSprite : ReferableScript, IRaceOptionSprite
+    public class GenderDifferenceRaceSprite : ReferableScript, IRaceSprite
     {
         [SerializeField] private Item[] _items = null;
 
@@ -60,14 +60,14 @@ namespace Roguegard.CharacterCreation
         [System.Serializable]
         public class Item
         {
-            [SerializeField] private RogueGender _gender = null;
+            [SerializeField] private RogueGenderAsset _gender = null;
             public IRogueGender Gender => _gender;
 
             [SerializeField] private OchalikeSpriteData _bone = null;
             public OchalikeSpriteData Bone => _bone;
 
-            [SerializeField] private SpriteMotionSetData _motionSet = null;
-            public SpriteMotionSetData MotionSet => _motionSet;
+            [SerializeField] private SpriteMotionSetAsset _motionSet = null;
+            public SpriteMotionSetAsset MotionSet => _motionSet;
 
             [SerializeField, ElementDescription("_option")] private ScriptableAppearance[] _appearances = null;
             public Spanning<ScriptableAppearance> Appearances => _appearances;

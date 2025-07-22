@@ -10,7 +10,7 @@ namespace Roguegard
     public class DungeonInfo
     {
         [System.NonSerialized]
-        private RogueDungeonFloor[] floors;
+        private DungeonFloorAsset[] floors;
 
         [System.NonSerialized]
         private DungeonLevelType levelType;
@@ -33,7 +33,7 @@ namespace Roguegard
             return GetLevelText(levelType, lv);
         }
 
-        public bool TryGetFloor(int lv, out RogueDungeonFloor floor)
+        public bool TryGetFloor(int lv, out DungeonFloorAsset floor)
         {
             foreach (var item in floors)
             {
@@ -108,7 +108,7 @@ namespace Roguegard
             return dungeon;
         }
 
-        public static void SetFloorsTo(RogueObj dungeon, Spanning<RogueDungeonFloor> floors, DungeonLevelType levelType, float visibleRadius)
+        public static void SetFloorsTo(RogueObj dungeon, Spanning<DungeonFloorAsset> floors, DungeonLevelType levelType, float visibleRadius)
         {
             if (!dungeon.TryGet<Info>(out var info))
             {

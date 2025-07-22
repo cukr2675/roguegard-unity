@@ -36,7 +36,7 @@ namespace Roguegard.Rgpacks
                 sprite = new ObjSprite() { info = obj.Main.Sprite };
                 ochalikeMorph = sewedEquipmentData.BoneSprites.GetOchalikeMorph();
             }
-            else if (Asset is RaceOptionalCreationData raceOptionalCreationData)
+            else if (Asset is RaceOptionalCreationDataAsset raceOptionalCreationData)
             {
                 var obj = raceOptionalCreationData.CreateObj(null, Vector2Int.zero, random);
                 obj.Main.Sprite.Update(obj);

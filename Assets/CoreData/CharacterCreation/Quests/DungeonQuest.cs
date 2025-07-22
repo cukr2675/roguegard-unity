@@ -13,7 +13,7 @@ namespace Roguegard.CharacterCreation
         public string Caption => _objectives[0].Caption;
         public IRogueDetails Details => _objectives[0].Details;
 
-        public DungeonCreationData Dungeon { get; }
+        public DungeonCreationDataAsset Dungeon { get; }
         public int Seed { get; }
 
         private readonly IntrinsicBuilderList _objectives;
@@ -36,7 +36,7 @@ namespace Roguegard.CharacterCreation
         }
 
         public DungeonQuest(
-            DungeonCreationData dungeon, int seed, IEnumerable<IReadOnlyIntrinsic> objectives, IEnumerable<IReadOnlyIntrinsic> environments,
+            DungeonCreationDataAsset dungeon, int seed, IEnumerable<IReadOnlyIntrinsic> objectives, IEnumerable<IReadOnlyIntrinsic> environments,
             IEnumerable<IEnumerable<IReadOnlyStartingItem>> lootTable)
         {
             if (!objectives.Any()) throw new System.ArgumentException();

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,8 +8,8 @@ namespace Roguegard.Rgpacks
 {
     public class MapDioramaFloorOpen : ReferableScript, IOpenEffect
     {
-        [SerializeField] private RogueTileInfoData _groundTile = null;
-        [SerializeField] private RogueTileInfoData _wallTile = null;
+        [SerializeField] private StandardRogueTileInfoAsset _groundTile = null;
+        [SerializeField] private StandardRogueTileInfoAsset _wallTile = null;
 
         public IRaceOption Open(
             RogueObj self, MainInfoSetType infoSetType, bool polymorph2Base, IRaceOption raceOption, ICharacterCreationData characterCreationData)

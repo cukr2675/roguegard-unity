@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Roguegard.CharacterCreation
 {
-    public class SizedRaceSprite : ReferableScript, IRaceOptionSprite
+    public class SizedRaceSprite : ReferableScript, IRaceSprite
     {
         [SerializeField] private Item[] _items = null;
 
@@ -48,8 +48,8 @@ namespace Roguegard.CharacterCreation
             [SerializeField] private OchalikeSpriteData _bone = null;
             public OchalikeSpriteData Bone => _bone;
 
-            [SerializeField] private SpriteMotionSetData _motionSet = null;
-            public SpriteMotionSetData MotionSet => _motionSet;
+            [SerializeField] private SpriteMotionSetAsset _motionSet = null;
+            public SpriteMotionSetAsset MotionSet => _motionSet;
         }
     }
 }

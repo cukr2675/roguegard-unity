@@ -7,49 +7,49 @@ namespace Roguegard
     {
         private static EquipKw instance;
 
-        [SerializeField] private EquipKeywordData _accessory;
+        [SerializeField] private EquipKeywordAsset _accessory;
         public static ISerializableKeyword Accessory => instance._accessory;
 
-        [SerializeField] private EquipKeywordData _ammo;
+        [SerializeField] private EquipKeywordAsset _ammo;
         public static ISerializableKeyword Ammo => instance._ammo;
 
-        [SerializeField] private EquipKeywordData _bodyArmor;
+        [SerializeField] private EquipKeywordAsset _bodyArmor;
         public static ISerializableKeyword BodyArmor => instance._bodyArmor;
 
-        [SerializeField] private EquipKeywordData _boots;
+        [SerializeField] private EquipKeywordAsset _boots;
         public static ISerializableKeyword Boots => instance._boots;
 
-        [SerializeField] private EquipKeywordData _bottoms;
+        [SerializeField] private EquipKeywordAsset _bottoms;
         public static ISerializableKeyword Bottoms => instance._bottoms;
 
-        [SerializeField] private EquipKeywordData _cloak;
+        [SerializeField] private EquipKeywordAsset _cloak;
         public static ISerializableKeyword Cloak => instance._cloak;
 
-        [SerializeField] private EquipKeywordData _faceMask;
+        [SerializeField] private EquipKeywordAsset _faceMask;
         public static ISerializableKeyword FaceMask => instance._faceMask;
 
-        [SerializeField] private EquipKeywordData _gloves;
+        [SerializeField] private EquipKeywordAsset _gloves;
         public static ISerializableKeyword Gloves => instance._gloves;
 
-        [SerializeField] private EquipKeywordData _headwear;
+        [SerializeField] private EquipKeywordAsset _headwear;
         public static ISerializableKeyword Headwear => instance._headwear;
 
-        [SerializeField] private EquipKeywordData _innerwear;
+        [SerializeField] private EquipKeywordAsset _innerwear;
         public static ISerializableKeyword Innerwear => instance._innerwear;
 
-        [SerializeField] private EquipKeywordData _lenses;
+        [SerializeField] private EquipKeywordAsset _lenses;
         public static ISerializableKeyword Lenses => instance._lenses;
 
-        [SerializeField] private EquipKeywordData _shield;
+        [SerializeField] private EquipKeywordAsset _shield;
         public static ISerializableKeyword Shield => instance._shield;
 
-        [SerializeField] private EquipKeywordData _socks;
+        [SerializeField] private EquipKeywordAsset _socks;
         public static ISerializableKeyword Socks => instance._socks;
 
-        [SerializeField] private EquipKeywordData _tops;
+        [SerializeField] private EquipKeywordAsset _tops;
         public static ISerializableKeyword Tops => instance._tops;
 
-        [SerializeField] private EquipKeywordData _weapon;
+        [SerializeField] private EquipKeywordAsset _weapon;
         public static ISerializableKeyword Weapon => instance._weapon;
 
         public override IEnumerator LoadAsync()

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -60,7 +60,7 @@ namespace Roguegard.Rgpacks
                 {
                     table.Add(assetId, new CharacterCreationPresetAsset(characterCreationDataBuilder));
                 }
-                if (pair.Value is RaceOptionalCreationData raceOptionalCreationData)
+                if (pair.Value is RaceOptionalCreationDataAsset raceOptionalCreationData)
                 {
                     table.Add(assetId, raceOptionalCreationData);
                 }
