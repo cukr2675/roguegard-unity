@@ -9,8 +9,8 @@ namespace Roguegard.CharacterCreation
 
         IMemberSource IReadOnlyMember.Source => SourceInstance;
 
-        [SerializeField, Objforming.IgnoreMember] private RogueTileAsset _tile;
-        public IRogueTile Tile => _tile;
+        [SerializeField, Objforming.IgnoreMember] private RogueTileAsset _editorTile;
+        public IRogueTile Tile => _editorTile;
 
         private RogueTileMember() { }
 
@@ -23,7 +23,7 @@ namespace Roguegard.CharacterCreation
         {
             return new RogueTileMember
             {
-                _tile = _tile
+                _editorTile = _editorTile
             };
         }
 

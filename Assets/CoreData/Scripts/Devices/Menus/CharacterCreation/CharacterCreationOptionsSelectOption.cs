@@ -7,7 +7,7 @@ namespace Roguegard.Device
 {
     public class CharacterCreationOptionsSelectOption : ISelectOption
     {
-        private object builder;
+        private object editTarget;
 
         private readonly SelectOptionMenu nextMenu;
 
@@ -16,42 +16,42 @@ namespace Roguegard.Device
             nextMenu = new SelectOptionMenu() { database = database };
         }
 
-        private CharacterCreationOptionsSelectOption SetInner(object builder)
+        private CharacterCreationOptionsSelectOption SetInner(object editTarget)
         {
-            this.builder = builder ?? throw new System.ArgumentNullException(nameof(builder));
+            this.editTarget = editTarget ?? throw new System.ArgumentNullException(nameof(editTarget));
             return this;
         }
 
-        public CharacterCreationOptionsSelectOption Set(Race builder) => SetInner(builder);
-        public CharacterCreationOptionsSelectOption Set(Appearance builder) => SetInner(builder);
-        public CharacterCreationOptionsSelectOption Set(Intrinsic builder) => SetInner(builder);
-        public CharacterCreationOptionsSelectOption Set(StartingItem builder) => SetInner(builder);
-        public CharacterCreationOptionsSelectOption Set(SingleItemMember builder) => SetInner(builder);
-        public CharacterCreationOptionsSelectOption Set(AlphabetTypeMember builder) => SetInner(builder);
+        public CharacterCreationOptionsSelectOption Set(Race race) => SetInner(race);
+        public CharacterCreationOptionsSelectOption Set(Appearance appearance) => SetInner(appearance);
+        public CharacterCreationOptionsSelectOption Set(Intrinsic intrinsic) => SetInner(intrinsic);
+        public CharacterCreationOptionsSelectOption Set(StartingItem startingItem) => SetInner(startingItem);
+        public CharacterCreationOptionsSelectOption Set(SingleItemMember singleItemMember) => SetInner(singleItemMember);
+        public CharacterCreationOptionsSelectOption Set(AlphabetTypeMember alphabetTypeMember) => SetInner(alphabetTypeMember);
 
         string ISelectOption.GetName(IListMenuManager manager, IListMenuArg arg)
         {
-            if (builder is Race raceBuilder)
+            if (editTarget is Race race)
             {
-                return raceBuilder.Option.Name;
+                return race.Option.Name;
             }
-            else if (builder is Appearance appearanceBuilder)
+            else if (editTarget is Appearance appearance)
             {
-                return appearanceBuilder.Option.Name;
+                return appearance.Option.Name;
             }
-            else if (builder is Intrinsic intrinsicBuilder)
+            else if (editTarget is Intrinsic intrinsic)
             {
-                return intrinsicBuilder.Option.Name;
+                return intrinsic.Option.Name;
             }
-            else if (builder is StartingItem startingItemBuilder)
+            else if (editTarget is StartingItem startingItem)
             {
-                return startingItemBuilder.Option.Name;
+                return startingItem.Option.Name;
             }
-            else if (builder is SingleItemMember singleItemMember)
+            else if (editTarget is SingleItemMember singleItemMember)
             {
                 return singleItemMember.ItemOption?.Name;
             }
-            else if (builder is AlphabetTypeMember alphabetTypeMember)
+            else if (editTarget is AlphabetTypeMember alphabetTypeMember)
             {
                 return $"タイプ{alphabetTypeMember.Type}";
             }
@@ -65,7 +65,7 @@ namespace Roguegard.Device
         {
             var manager = (MMgr)iManager;
             var arg = (MArg)iArg;
-            manager.PushMenuScreen(nextMenu, arg.Self, other: builder);
+            manager.PushMenuScreen(nextMenu, arg.Self, other: editTarget);
         }
 
         private class SelectOptionMenu : RogueMenuScreen
@@ -80,12 +80,12 @@ namespace Roguegard.Device
 
             public override void OpenScreen(in MMgr manager, in MArg arg)
             {
-                var builder = arg.Arg.Other;
+                var editTarget = arg.Arg.Other;
 
                 elms.Clear();
-                CharacterCreationAddMenu.AddOptionsTo(elms, arg.Self, builder, database);
+                CharacterCreationAddMenu.AddOptionsTo(elms, arg.Self, editTarget, database);
 
-                view.ShowTemplate(elms, manager, arg, builder?.GetType())
+                view.ShowTemplate(elms, manager, arg, editTarget?.GetType())
                     ?
                     .NameFrom((element, manager, arg) =>
                     {
@@ -103,23 +103,23 @@ namespace Roguegard.Device
 
                     .OnClick((element, manager, arg) =>
                     {
-                        if (arg.Arg.Other is Race raceBuilder)
+                        if (arg.Arg.Other is Race race)
                         {
-                            raceBuilder.Option = (IRaceOption)element;
+                            race.Option = (IRaceOption)element;
                         }
-                        else if (arg.Arg.Other is Appearance appearanceBuilder)
+                        else if (arg.Arg.Other is Appearance appearance)
                         {
-                            appearanceBuilder.Option = (IAppearanceOption)element;
+                            appearance.Option = (IAppearanceOption)element;
                         }
-                        else if (arg.Arg.Other is Intrinsic intrinsicBuilder)
+                        else if (arg.Arg.Other is Intrinsic intrinsic)
                         {
-                            intrinsicBuilder.Option = (IIntrinsicOption)element;
+                            intrinsic.Option = (IIntrinsicOption)element;
                         }
-                        else if (arg.Arg.Other is StartingItem startingItemBuilder)
+                        else if (arg.Arg.Other is StartingItem startingItem)
                         {
-                            CharacterCreationAddMenu.ReceiveStartingItemOptionObj(startingItemBuilder.Option, arg.Self);
-                            startingItemBuilder.Option = (IStartingItemOption)element;
-                            CharacterCreationAddMenu.ConsumeStartingItemOptionObj(startingItemBuilder.Option, arg.Self);
+                            CharacterCreationAddMenu.ReceiveStartingItemOptionObj(startingItem.Option, arg.Self);
+                            startingItem.Option = (IStartingItemOption)element;
+                            CharacterCreationAddMenu.ConsumeStartingItemOptionObj(startingItem.Option, arg.Self);
                         }
                         else if (arg.Arg.Other is SingleItemMember singleItemMember)
                         {

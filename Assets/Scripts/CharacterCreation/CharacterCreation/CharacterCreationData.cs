@@ -51,22 +51,22 @@ namespace Roguegard.CharacterCreation
             StartingItemTable = new StartingItemTable();
         }
 
-        public CharacterCreationData(CharacterCreationData builder)
+        public CharacterCreationData(CharacterCreationData characterCreationData)
         {
-            Name = builder.Name;
-            ShortName = builder.ShortName;
-            Details = builder.Details;
-            Cost = builder.Cost;
-            CostIsUnknown = builder.CostIsUnknown;
-            Lv = builder.Lv;
+            Name = characterCreationData.Name;
+            ShortName = characterCreationData.ShortName;
+            Details = characterCreationData.Details;
+            Cost = characterCreationData.Cost;
+            CostIsUnknown = characterCreationData.CostIsUnknown;
+            Lv = characterCreationData.Lv;
 
-            Race = new Race(builder.Race);
+            Race = new Race(characterCreationData.Race);
             Appearances = new AppearanceList();
-            Appearances.AddClones(builder.Appearances);
+            Appearances.AddClones(characterCreationData.Appearances);
             Intrinsics = new IntrinsicList();
-            Intrinsics.AddClones(builder.Intrinsics);
+            Intrinsics.AddClones(characterCreationData.Intrinsics);
             StartingItemTable = new StartingItemTable();
-            StartingItemTable.AddClones(builder.StartingItemTable);
+            StartingItemTable.AddClones(characterCreationData.StartingItemTable);
         }
 
         public void Set(CharacterCreationData builder)

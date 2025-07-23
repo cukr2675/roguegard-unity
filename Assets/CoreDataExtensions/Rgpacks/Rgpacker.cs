@@ -24,8 +24,8 @@ namespace Roguegard.Rgpacks
             var assetId = NamingEffect.Get(obj)?.Naming;
             if (assetId != null)
             {
-                var characterCreationDataBuilder = KyarakuriFigurineInfo.Get(obj);
-                if (characterCreationDataBuilder != null) { directory.Add(assetId, characterCreationDataBuilder); }
+                var characterCreationData = KyarakuriFigurineInfo.Get(obj);
+                if (characterCreationData != null) { directory.Add(assetId, characterCreationData); }
 
                 var kyarakuriClayInfo = KyarakuriClayInfo.Get(obj);
                 if (kyarakuriClayInfo != null) { directory.Add(assetId, kyarakuriClayInfo); }

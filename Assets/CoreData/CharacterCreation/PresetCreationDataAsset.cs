@@ -33,9 +33,9 @@ namespace Roguegard.CharacterCreation
         public override Spanning<IWeightedRogueObjGeneratorList> StartingItemTable => _startingItemTable;
         protected override bool HasNotInfoSet => true;
 
-        public CharacterCreationData ToBuilder()
+        public CharacterCreationData ToData()
         {
-            var builder = new CharacterCreationData
+            var data = new CharacterCreationData
             {
                 Name = DescriptionName,
                 ShortName = ShortName,
@@ -43,11 +43,11 @@ namespace Roguegard.CharacterCreation
                 Cost = Cost,
                 CostIsUnknown = CostIsUnknown
             };
-            builder.Race.Set(_race);
-            builder.Appearances.AddClones(_appearances);
-            builder.Intrinsics.AddClones(_intrinsics);
-            builder.StartingItemTable.AddClones(_startingItemTable);
-            return builder;
+            data.Race.Set(_race);
+            data.Appearances.AddClones(_appearances);
+            data.Intrinsics.AddClones(_intrinsics);
+            data.StartingItemTable.AddClones(_startingItemTable);
+            return data;
         }
 
         protected override void Initialize()
@@ -59,8 +59,8 @@ namespace Roguegard.CharacterCreation
         public override RogueObj CreateObj(
             IReadOnlyStartingItem startingItem, RogueObj location, Vector2Int position, IRogueRandom random, StackOption stackOption = StackOption.Default)
         {
-            // このインスタンスのシリアル化を避けるため、 Builder の CreateObj を使う
-            return ToBuilder().CreateObj(location, position, random, stackOption);
+            // このインスタンスのシリアル化を避けるため、 ToData() の CreateObj を使う
+            return ToData().CreateObj(location, position, random, stackOption);
         }
 
         protected override void OnValidate()

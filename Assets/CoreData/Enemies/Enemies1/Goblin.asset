@@ -158,7 +158,7 @@ MonoBehaviour:
     - rid: 962669152430194759
       type: {class: SingleItemMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
       data:
-        _item: {fileID: 11400000, guid: b883c1a5004f31345b36f35e20036591, type: 2}
+        _editorItemOption: {fileID: 11400000, guid: b883c1a5004f31345b36f35e20036591, type: 2}
     - rid: 2120727422300324144
       type: {class: ConstantRaceSprite, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
       data:

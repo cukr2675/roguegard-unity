@@ -83,7 +83,7 @@ namespace Roguegard.Device
         private class StartingItemTableMenu : RogueMenuScreen
         {
             private readonly List<object> elms = new();
-            private readonly CharacterCreationData builder = new();
+            private readonly CharacterCreationData characterCreationData = new();
             private readonly CharacterCreationAddMenu characterCreationAddMenu = new(RoguegardSettings.CharacterCreationDatabase);
             private readonly CharacterCreationOptionMenu characterCreationOptionMenu = new(RoguegardSettings.CharacterCreationDatabase);
 
@@ -99,7 +99,7 @@ namespace Roguegard.Device
                         {
                             var startingItemTableCmnProperty = (StartingItemTableCmnProperty)arg.Arg.Other;
                             startingItemTableCmnProperty.Value.Clear();
-                            startingItemTableCmnProperty.Value.AddClones(builder.StartingItemTable);
+                            startingItemTableCmnProperty.Value.AddClones(characterCreationData.StartingItemTable);
                             manager.PopMenuScreen();
                         }, "Cancel")
                     }
@@ -110,8 +110,8 @@ namespace Roguegard.Device
             {
                 var startingItemTableCmnProperty = (StartingItemTableCmnProperty)arg.Arg.Other;
                 var table = startingItemTableCmnProperty.Value;
-                builder.StartingItemTable.Clear();
-                builder.StartingItemTable.AddClones(table);
+                characterCreationData.StartingItemTable.Clear();
+                characterCreationData.StartingItemTable.AddClones(table);
                 elms.Clear();
                 for (int i = 0; i < table.Count; i++)
                 {
@@ -126,13 +126,13 @@ namespace Roguegard.Device
 
                     .NameFrom((element, manager, arg) =>
                     {
-                        if (element is StartingItem startingItemBuilder) return startingItemBuilder.Name;
+                        if (element is StartingItem startingItem) return startingItem.Name;
                         else throw new RogueException();
                     })
 
                     .OnClick((element, manager, arg) =>
                     {
-                        if (element is StartingItem startingItemBuilder) { manager.PushMenuScreen(characterCreationOptionMenu, other: startingItemBuilder); }
+                        if (element is StartingItem startingItem) { manager.PushMenuScreen(characterCreationOptionMenu, other: startingItem); }
                         else throw new RogueException();
                     })
 

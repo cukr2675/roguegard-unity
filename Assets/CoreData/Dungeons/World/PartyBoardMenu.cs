@@ -54,8 +54,8 @@ namespace Roguegard
                     if (obj == null)
                     {
                         // 新規メンバー作成
-                        var builder = RoguegardSettings.CharacterCreationDatabase.LoadPreset(0);
-                        manager.PushMenuScreen(newMenu, arg.Self, arg.User, other: builder);
+                        var characterCreationData = RoguegardSettings.CharacterCreationDatabase.LoadPreset(0);
+                        manager.PushMenuScreen(newMenu, arg.Self, arg.User, other: characterCreationData);
                     }
                     else
                     {
@@ -187,10 +187,10 @@ namespace Roguegard
                 }
 
                 var character = arg.Arg.TargetObj;
-                var builder = new CharacterCreationData(info.CharacterCreationData);
+                var characterCreationData = new CharacterCreationData(info.CharacterCreationData);
 
                 manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-                manager.PushMenuScreen(nextMenu, arg.Self, arg.User, targetObj: character, other: builder);
+                manager.PushMenuScreen(nextMenu, arg.Self, arg.User, targetObj: character, other: characterCreationData);
             }
         }
     }

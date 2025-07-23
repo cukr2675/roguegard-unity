@@ -12,7 +12,7 @@ namespace Roguegard.Device
         private readonly List<object> elms;
         private readonly ScrollViewTemplate<object, MMgr, MArg> view;
 
-        private CharacterCreationData builder;
+        private CharacterCreationData characterCreationData;
 
         public CharacterCreationAddMenu(ICharacterCreationDatabase database)
         {
@@ -24,9 +24,9 @@ namespace Roguegard.Device
             };
         }
 
-        public void Set(CharacterCreationData builder)
+        public void Set(CharacterCreationData characterCreationData)
         {
-            this.builder = builder;
+            this.characterCreationData = characterCreationData;
         }
 
         public override void OpenScreen(in MMgr manager, in MArg arg)
@@ -40,23 +40,23 @@ namespace Roguegard.Device
 
                 .OnClick((element, manager, arg) =>
                 {
-                    var builderType = (System.Type)arg.Arg.Other;
-                    if (builderType == typeof(Appearance))
+                    var editTargetType = (System.Type)arg.Arg.Other;
+                    if (editTargetType == typeof(Appearance))
                     {
-                        var appearanceBuilder = builder.Appearances.Add();
-                        appearanceBuilder.Option = (IAppearanceOption)element;
+                        var appearance = characterCreationData.Appearances.Add();
+                        appearance.Option = (IAppearanceOption)element;
                     }
-                    else if (builderType == typeof(Intrinsic))
+                    else if (editTargetType == typeof(Intrinsic))
                     {
-                        var intrinsicBuilder = builder.Intrinsics.Add();
-                        intrinsicBuilder.Option = (IIntrinsicOption)element;
+                        var intrinsic = characterCreationData.Intrinsics.Add();
+                        intrinsic.Option = (IIntrinsicOption)element;
                     }
-                    else if (builderType == typeof(StartingItem))
+                    else if (editTargetType == typeof(StartingItem))
                     {
-                        var startingItemBuilder = builder.StartingItemTable.Add().Add();
-                        startingItemBuilder.Option = (IStartingItemOption)element;
-                        startingItemBuilder.Stack = 1;
-                        ConsumeStartingItemOptionObj(startingItemBuilder.Option, arg.Self);
+                        var startingItem = characterCreationData.StartingItemTable.Add().Add();
+                        startingItem.Option = (IStartingItemOption)element;
+                        startingItem.Stack = 1;
+                        ConsumeStartingItemOptionObj(startingItem.Option, arg.Self);
                     }
 
                     manager.PopMenuScreen();
@@ -65,33 +65,33 @@ namespace Roguegard.Device
                 .Build();
         }
 
-        public static void AddOptionsTo(List<object> elms, RogueObj player, object builder, ICharacterCreationDatabase database)
+        public static void AddOptionsTo(List<object> elms, RogueObj player, object editTarget, ICharacterCreationDatabase database)
         {
-            if (builder is Race)
+            if (editTarget is Race)
             {
                 foreach (var option in database.RaceOptions)
                 {
                     elms.Add(option);
                 }
             }
-            else if (builder is Appearance appearanceBuilder)
+            else if (editTarget is Appearance appearance)
             {
                 foreach (var option in database.AppearanceOptions)
                 {
-                    if (appearanceBuilder.Option != null && option.BoneName == appearanceBuilder.Option.BoneName)
+                    if (appearance.Option != null && option.BoneName == appearance.Option.BoneName)
                     {
                         elms.Add(option);
                     }
                 }
             }
-            else if (builder is Intrinsic)
+            else if (editTarget is Intrinsic)
             {
                 foreach (var option in database.IntrinsicOptions)
                 {
                     elms.Add(option);
                 }
             }
-            else if (builder is StartingItem || builder is SingleItemMember)
+            else if (editTarget is StartingItem || editTarget is SingleItemMember)
             {
                 if (player != null)
                 {
@@ -120,7 +120,7 @@ namespace Roguegard.Device
                     }
                 }
             }
-            else if (builder is AlphabetTypeMember alphabetTypeMember)
+            else if (editTarget is AlphabetTypeMember alphabetTypeMember)
             {
                 for (int i = 0; i < alphabetTypeMember.Types.Length; i++)
                 {
@@ -129,16 +129,16 @@ namespace Roguegard.Device
             }
         }
 
-        public static void AddOptionsTo(List<object> elms, RogueObj player, System.Type builderType, ICharacterCreationDatabase database)
+        public static void AddOptionsTo(List<object> elms, RogueObj player, System.Type editTargetType, ICharacterCreationDatabase database)
         {
-            if (builderType == typeof(Race))
+            if (editTargetType == typeof(Race))
             {
                 foreach (var option in database.AppearanceOptions)
                 {
                     elms.Add(option);
                 }
             }
-            else if (builderType == typeof(Appearance))
+            else if (editTargetType == typeof(Appearance))
             {
                 foreach (var option in database.AppearanceOptions)
                 {
@@ -148,14 +148,14 @@ namespace Roguegard.Device
                     }
                 }
             }
-            else if (builderType == typeof(Intrinsic))
+            else if (editTargetType == typeof(Intrinsic))
             {
                 foreach (var option in database.IntrinsicOptions)
                 {
                     elms.Add(option);
                 }
             }
-            else if (builderType == typeof(StartingItem) || builderType == typeof(SingleItemMember))
+            else if (editTargetType == typeof(StartingItem) || editTargetType == typeof(SingleItemMember))
             {
                 foreach (var item in player.Space.Objs)
                 {

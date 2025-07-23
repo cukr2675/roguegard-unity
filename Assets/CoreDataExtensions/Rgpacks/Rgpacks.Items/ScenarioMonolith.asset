@@ -184,4 +184,4 @@ MonoBehaviour:
     - rid: 8602757355083661315
       type: {class: RogueTileMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
       data:
-        _tile: {fileID: 11400000, guid: 7b5f75e0ffd65ff4ab579674c671753c, type: 2}
+        _editorTile: {fileID: 11400000, guid: 7b5f75e0ffd65ff4ab579674c671753c, type: 2}

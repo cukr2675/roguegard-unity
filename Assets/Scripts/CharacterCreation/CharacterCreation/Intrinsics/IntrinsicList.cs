@@ -7,37 +7,37 @@ namespace Roguegard.CharacterCreation
     [Objforming.Formable]
     public class IntrinsicList : IEnumerable<Intrinsic>
     {
-        private readonly List<Intrinsic> builders = new();
+        private readonly List<Intrinsic> list = new();
 
-        public Intrinsic this[int index] => builders[index];
+        public Intrinsic this[int index] => list[index];
 
-        public int Count => builders.Count;
+        public int Count => list.Count;
 
-        public Spanning<IReadOnlyIntrinsic> Span => Spanning.Get<IReadOnlyIntrinsic>(builders);
+        public Spanning<IReadOnlyIntrinsic> Span => Spanning.Get<IReadOnlyIntrinsic>(list);
 
         public Intrinsic Add()
         {
-            var builder = new Intrinsic();
-            builders.Add(builder);
-            return builder;
+            var intrinsic = new Intrinsic();
+            list.Add(intrinsic);
+            return intrinsic;
         }
 
         public void AddClones(IEnumerable<IReadOnlyIntrinsic> intrinsics)
         {
-            builders.AddRange(intrinsics.Select(x => new Intrinsic(x)));
+            list.AddRange(intrinsics.Select(x => new Intrinsic(x)));
         }
 
-        public bool Remove(Intrinsic builder)
+        public bool Remove(Intrinsic intrinsic)
         {
-            return builders.Remove(builder);
+            return list.Remove(intrinsic);
         }
 
         public void Clear()
         {
-            builders.Clear();
+            list.Clear();
         }
 
-        public IEnumerator<Intrinsic> GetEnumerator() => builders.GetEnumerator();
-        IEnumerator IEnumerable.GetEnumerator() => builders.GetEnumerator();
+        public IEnumerator<Intrinsic> GetEnumerator() => list.GetEnumerator();
+        IEnumerator IEnumerable.GetEnumerator() => list.GetEnumerator();
     }
 }

@@ -33,14 +33,14 @@ namespace Roguegard.Device
             };
         }
 
-        public void Set(CharacterCreationData builder)
+        public void Set(CharacterCreationData characterCreationData)
         {
-            removeSelectOption.builder = builder;
+            removeSelectOption.characterCreationData = characterCreationData;
         }
 
         public override void OpenScreen(in MMgr manager, in MArg arg)
         {
-            if (arg.Arg.Other is Race raceBuilder)
+            if (arg.Arg.Other is Race race)
             {
                 elms.Clear();
                 elms.Add(
@@ -48,26 +48,26 @@ namespace Roguegard.Device
                     {
                         "職業／二つ名",
                         InputFieldViewWidget.CreateOption<MMgr, MArg>(
-                            (manager, arg) => removeSelectOption.builder.ShortName,
-                            (manager, arg, value) => removeSelectOption.builder.ShortName = value)
+                            (manager, arg) => removeSelectOption.characterCreationData.ShortName,
+                            (manager, arg, value) => removeSelectOption.characterCreationData.ShortName = value)
                     });
-                elms.Add(selectOption.Set(raceBuilder));
+                elms.Add(selectOption.Set(race));
                 elms.Add(
                     new object[]
                     {
                         SelectOption.Create<MMgr, MArg>(
                             (manager, arg) =>
                             {
-                                if (arg.Arg.Other is Race raceBuilder)
+                                if (arg.Arg.Other is Race race)
                                 {
-                                    return $"性別：{raceBuilder.Gender.Name}";
+                                    return $"性別：{race.Gender.Name}";
                                 }
                                 Debug.LogError("不正な型です。");
                                 return "性別：";
                             },
                             (manager, arg) =>
                             {
-                                if (arg.Arg.Other is Race raceBuilder)
+                                if (arg.Arg.Other is Race race)
                                 {
                                     var nextMenu = new SelectGenderMenu() { database = database };
                                     manager.PushMenuScreen(nextMenu, arg.Self, other: arg.Arg.Other);
@@ -78,25 +78,25 @@ namespace Roguegard.Device
                     });
                 elms.Add(
                     SelectOption.Create<MMgr, MArg>(
-                        $"<#{ColorUtility.ToHtmlStringRGBA(raceBuilder.BodyColor)}>カラー",
+                        $"<#{ColorUtility.ToHtmlStringRGBA(race.BodyColor)}>カラー",
                         ColorPicker()));
-                AddMemberElements(raceBuilder);
+                AddMemberElements(race);
             }
-            else if (arg.Arg.Other is Appearance appearanceBuilder)
+            else if (arg.Arg.Other is Appearance appearance)
             {
                 elms.Clear();
-                elms.Add(selectOption.Set(appearanceBuilder));
+                elms.Add(selectOption.Set(appearance));
                 elms.Add(
                     SelectOption.Create<MMgr, MArg>(
-                        $"<#{ColorUtility.ToHtmlStringRGBA(appearanceBuilder.Color)}>カラー",
+                        $"<#{ColorUtility.ToHtmlStringRGBA(appearance.Color)}>カラー",
                         ColorPicker()));
-                AddMemberElements(appearanceBuilder);
+                AddMemberElements(appearance);
                 elms.Add(removeSelectOption);
             }
-            else if (arg.Arg.Other is Intrinsic intrinsicBuilder)
+            else if (arg.Arg.Other is Intrinsic intrinsic)
             {
                 elms.Clear();
-                elms.Add(selectOption.Set(intrinsicBuilder));
+                elms.Add(selectOption.Set(intrinsic));
                 elms.Add(
                     new object[]
                     {
@@ -104,9 +104,9 @@ namespace Roguegard.Device
                         InputFieldViewWidget.CreateOption<MMgr, MArg>(
                             (manager, arg) =>
                             {
-                                if (arg.Arg.Other is Intrinsic intrinsicBuilder)
+                                if (arg.Arg.Other is Intrinsic intrinsic)
                                 {
-                                    return intrinsicBuilder.OptionName;
+                                    return intrinsic.OptionName;
                                 }
                                 Debug.LogError("不正な型です。");
                                 return "???";
@@ -116,22 +116,22 @@ namespace Roguegard.Device
                                 // 空欄の場合は上書きしないよう null にする
                                 if (string.IsNullOrWhiteSpace(value)) { value = null; }
 
-                                if (arg.Arg.Other is Intrinsic intrinsicBuilder)
+                                if (arg.Arg.Other is Intrinsic intrinsic)
                                 {
-                                    return intrinsicBuilder.OptionName = value;
+                                    return intrinsic.OptionName = value;
                                 }
                                 Debug.LogError("不正な型です。");
                                 return null;
                             })
                     });
-                AddMemberElements(intrinsicBuilder);
+                AddMemberElements(intrinsic);
                 elms.Add(removeSelectOption);
             }
-            else if (arg.Arg.Other is StartingItem startingItemBuilder)
+            else if (arg.Arg.Other is StartingItem startingItem)
             {
                 Debug.Log("a");
                 elms.Clear();
-                elms.Add(selectOption.Set(startingItemBuilder));
+                elms.Add(selectOption.Set(startingItem));
                 elms.Add(
                     new object[]
                     {
@@ -139,10 +139,10 @@ namespace Roguegard.Device
                         InputFieldViewWidget.CreateOption<MMgr, MArg>(
                             (manager, arg) =>
                             {
-                                if (arg.Arg.Other is StartingItem startingItemBuilder)
+                                if (arg.Arg.Other is StartingItem startingItem)
                                 {
-                                    var value = startingItemBuilder.Stack
-                                        / RogueObj.GetMaxStack(startingItemBuilder.Option.InfoSet, StackOption.Default);
+                                    var value = startingItem.Stack
+                                        / RogueObj.GetMaxStack(startingItem.Option.InfoSet, StackOption.Default);
                                     return value.ToString();
                                 }
                                 Debug.LogError("不正な型です。");
@@ -150,18 +150,18 @@ namespace Roguegard.Device
                             },
                             (manager, arg, valueString) =>
                             {
-                                if (arg.Arg.Other is StartingItem startingItemBuilder && int.TryParse(valueString, out var value))
+                                if (arg.Arg.Other is StartingItem startingItem && int.TryParse(valueString, out var value))
                                 {
-                                    startingItemBuilder.Stack = value * RogueObj.GetMaxStack(startingItemBuilder.Option.InfoSet, StackOption.Default);
-                                    if (startingItemBuilder.Stack <= 0) { startingItemBuilder.Stack = 1; }
-                                    return startingItemBuilder.Stack.ToString();
+                                    startingItem.Stack = value * RogueObj.GetMaxStack(startingItem.Option.InfoSet, StackOption.Default);
+                                    if (startingItem.Stack <= 0) { startingItem.Stack = 1; }
+                                    return startingItem.Stack.ToString();
                                 }
                                 Debug.LogError("不正な型です。");
                                 return null;
                             },
                             TMP_InputField.ContentType.IntegerNumber)
                     });
-                AddMemberElements(startingItemBuilder);
+                AddMemberElements(startingItem);
                 elms.Add(removeSelectOption);
             }
             Debug.Log(arg.Arg.Other);
@@ -193,15 +193,15 @@ namespace Roguegard.Device
                                 equipMember.IsEquipped = !equipMember.IsEquipped;
                             }));
                 }
-                else if (member is AlphabetTypeMember alphabetTypeMember && memberable is Appearance appearanceBuilder)
+                else if (member is AlphabetTypeMember alphabetTypeMember && memberable is Appearance appearance)
                 {
-                    appearanceBuilder.Option.UpdateMemberRange(alphabetTypeMember, appearanceBuilder, removeSelectOption.builder);
+                    appearance.Option.UpdateMemberRange(alphabetTypeMember, appearance, removeSelectOption.characterCreationData);
                     elms.Add(alphabetTypeMemberSelectOption.Set(alphabetTypeMember));
                 }
-                else if (member is StandardRaceMember standardRaceMember && memberable is Race raceBuilder)
+                else if (member is StandardRaceMember standardRaceMember && memberable is Race race)
                 {
-                    raceBuilder.Option.UpdateMemberRange(standardRaceMember, raceBuilder.Option, removeSelectOption.builder);
-                    var standardRaceOption = (IStandardRaceOption)raceBuilder.Option;
+                    race.Option.UpdateMemberRange(standardRaceMember, race.Option, removeSelectOption.characterCreationData);
+                    var standardRaceOption = (IStandardRaceOption)race.Option;
                     elms.Add(
                         new object[]
                         {
@@ -226,27 +226,27 @@ namespace Roguegard.Device
             return new ColorPickerMenuScreen<MMgr, MArg>(
                 (manager, arg) =>
                 {
-                    if (arg.Arg.Other is Race raceBuilder)
+                    if (arg.Arg.Other is Race race)
                     {
-                        return raceBuilder.BodyColor;
+                        return race.BodyColor;
                     }
-                    else if (arg.Arg.Other is Appearance appearanceBuilder)
+                    else if (arg.Arg.Other is Appearance appearance)
                     {
-                        return appearanceBuilder.Color;
+                        return appearance.Color;
                     }
                     Debug.LogError("不正な型です。");
                     return Color.white;
                 },
                 (manager, arg, color) =>
                 {
-                    if (arg.Arg.Other is Race raceBuilder)
+                    if (arg.Arg.Other is Race race)
                     {
-                        raceBuilder.BodyColor = color;
+                        race.BodyColor = color;
                         return;
                     }
-                    else if (arg.Arg.Other is Appearance appearanceBuilder)
+                    else if (arg.Arg.Other is Appearance appearance)
                     {
-                        appearanceBuilder.Color = color;
+                        appearance.Color = color;
                         return;
                     }
                     Debug.LogError("不正な型です。");
@@ -255,7 +255,7 @@ namespace Roguegard.Device
 
         private class RemoveSelectOption : ISelectOption
         {
-            public CharacterCreationData builder;
+            public CharacterCreationData characterCreationData;
 
             string ISelectOption.GetName(IListMenuManager manager, IListMenuArg arg) => "<#f00>削除";
 
@@ -279,19 +279,19 @@ namespace Roguegard.Device
                     }
                 }
 
-                if (arg.Arg.Other is Appearance appearanceBuilder)
+                if (arg.Arg.Other is Appearance appearance)
                 {
-                    builder.Appearances.Remove(appearanceBuilder);
+                    characterCreationData.Appearances.Remove(appearance);
                 }
-                else if (arg.Arg.Other is Intrinsic intrinsicBuilder)
+                else if (arg.Arg.Other is Intrinsic intrinsic)
                 {
-                    builder.Intrinsics.Remove(intrinsicBuilder);
+                    characterCreationData.Intrinsics.Remove(intrinsic);
                 }
-                else if (arg.Arg.Other is StartingItem startingItemBuilder)
+                else if (arg.Arg.Other is StartingItem startingItem)
                 {
                     // 初期アイテムを削除したとき、そのアイテムを獲得する
-                    CharacterCreationAddMenu.ReceiveStartingItemOptionObj(startingItemBuilder.Option, arg.Self);
-                    builder.StartingItemTable.Remove(startingItemBuilder, true);
+                    CharacterCreationAddMenu.ReceiveStartingItemOptionObj(startingItem.Option, arg.Self);
+                    characterCreationData.StartingItemTable.Remove(startingItem, true);
                 }
                 manager.PopMenuScreen();
             }
@@ -300,7 +300,7 @@ namespace Roguegard.Device
         private class SelectGenderMenu : RogueMenuScreen
         {
             public ICharacterCreationDatabase database;
-            private Race builder;
+            private Race race;
             private readonly List<IRogueGender> list = new();
 
             private readonly ScrollViewTemplate<IRogueGender, MMgr, MArg> view = new()
@@ -309,9 +309,9 @@ namespace Roguegard.Device
 
             public override void OpenScreen(in MMgr manager, in MArg arg)
             {
-                builder = (Race)arg.Arg.Other;
+                race = (Race)arg.Arg.Other;
                 list.Clear();
-                foreach (var gender in builder.Option.Genders)
+                foreach (var gender in race.Option.Genders)
                 {
                     list.Add(gender);
                 }
@@ -325,7 +325,7 @@ namespace Roguegard.Device
 
                     .OnClick((gender, manager, arg) =>
                     {
-                        builder.Gender = gender;
+                        race.Gender = gender;
                         manager.PopMenuScreen();
                     })
 

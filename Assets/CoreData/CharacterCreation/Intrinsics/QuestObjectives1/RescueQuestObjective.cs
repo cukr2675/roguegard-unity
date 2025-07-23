@@ -26,17 +26,17 @@ namespace Roguegard.CharacterCreation
             var maxFloor = dungeon.Floors[^1].EndLv - 1;
             var floor = random.Next(1, maxFloor);
 
-            var builder = new Intrinsic
+            var intrinsic = new Intrinsic
             {
                 Option = parent,
                 OptionCaption = $"{floor}F で {clientOption.Name} を救助する"
             };
-            var member = (QuestMember)builder.GetMember(QuestMember.SourceInstance);
+            var member = (QuestMember)intrinsic.GetMember(QuestMember.SourceInstance);
             var client = member.Targets.Add();
             client.Option = clientOption;
             client.Stack = 1;
             member.TargetFloor = floor;
-            return builder;
+            return intrinsic;
         }
 
         public override ISortedIntrinsic CreateSortedIntrinsic(

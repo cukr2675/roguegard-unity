@@ -7,48 +7,48 @@ namespace Roguegard.CharacterCreation
     [Objforming.Formable]
     public class StartingItemList : IWeightedRogueObjGeneratorList, IEnumerable<StartingItem>
     {
-        private readonly List<StartingItem> builders = new();
+        private readonly List<StartingItem> list = new();
 
-        public StartingItem this[int index] => builders[index];
+        public StartingItem this[int index] => list[index];
 
-        public int Count => builders.Count;
+        public int Count => list.Count;
 
         public float TotalWeight
         {
             get
             {
                 var totalWeight = 0f;
-                foreach (var builder in builders)
+                foreach (var listStartingItem in list)
                 {
-                    totalWeight += builder.GeneratorWeight;
+                    totalWeight += listStartingItem.GeneratorWeight;
                 }
                 return totalWeight;
             }
         }
 
-        public Spanning<IWeightedRogueObjGenerator> Span => Spanning.Get<IWeightedRogueObjGenerator>(builders);
+        public Spanning<IWeightedRogueObjGenerator> Span => Spanning.Get<IWeightedRogueObjGenerator>(list);
 
         int IWeightedRogueObjGeneratorList.MinFrequency => 1;
         int IWeightedRogueObjGeneratorList.MaxFrequency => 1;
 
         public StartingItem Add()
         {
-            var builder = new StartingItem();
-            builders.Add(builder);
-            return builder;
+            var startingItem = new StartingItem();
+            list.Add(startingItem);
+            return startingItem;
         }
 
         public void AddClones(IEnumerable<IReadOnlyStartingItem> startingItems)
         {
-            builders.AddRange(startingItems.Select(x => new StartingItem(x)));
+            list.AddRange(startingItems.Select(x => new StartingItem(x)));
         }
 
-        public bool Remove(StartingItem builder)
+        public bool Remove(StartingItem startingItem)
         {
-            return builders.Remove(builder);
+            return list.Remove(startingItem);
         }
 
-        public IEnumerator<StartingItem> GetEnumerator() => builders.GetEnumerator();
-        IEnumerator IEnumerable.GetEnumerator() => builders.GetEnumerator();
+        public IEnumerator<StartingItem> GetEnumerator() => list.GetEnumerator();
+        IEnumerator IEnumerable.GetEnumerator() => list.GetEnumerator();
     }
 }

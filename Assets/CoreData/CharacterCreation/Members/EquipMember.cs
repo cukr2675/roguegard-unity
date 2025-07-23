@@ -20,7 +20,7 @@ namespace Roguegard.CharacterCreation
             return (IReadOnlyEquipMember)memberable.GetMember(SourceInstance);
         }
 
-        public static EquipMember GetMember(IMemberableBuilder memberable)
+        public static EquipMember GetMember(IMemberable memberable)
         {
             return (EquipMember)memberable.GetMember(SourceInstance);
         }

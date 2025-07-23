@@ -9,11 +9,11 @@ namespace Roguegard.CharacterCreation
 
         IMemberSource IReadOnlyMember.Source => SourceInstance;
 
-        [SerializeField, Objforming.IgnoreMember] private CharacterCreationDataAsset _item;
+        [SerializeField, Objforming.IgnoreMember] private CharacterCreationDataAsset _editorItemOption;
         private IStartingItemOption _itemOption;
         public IStartingItemOption ItemOption
         {
-            get => _itemOption ??= _item;
+            get => _itemOption ??= _editorItemOption;
             set => _itemOption = value;
         }
 
@@ -28,7 +28,7 @@ namespace Roguegard.CharacterCreation
         {
             return new SingleItemMember
             {
-                _itemOption = _itemOption ?? _item // CharacterCreationBuilder 生成時に必ず Clone が実行されるため、この設定だけでシリアル化可能
+                _itemOption = _itemOption ?? _editorItemOption // CharacterCreationData 生成時に必ず Clone が実行されるため、この設定だけでシリアル化可能
             };
         }
 

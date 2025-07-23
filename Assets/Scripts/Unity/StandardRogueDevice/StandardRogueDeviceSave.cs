@@ -38,15 +38,15 @@ namespace RoguegardUnity
 
         private static readonly NewGamePointInfo newGamePointInfo = new NewGamePointInfo();
 
-        private readonly CharacterCreationData characterCreationDataBuilder;
+        private readonly CharacterCreationData characterCreationData;
 
         public StandardRogueDeviceSave()
         {
         }
 
-        public StandardRogueDeviceSave(CharacterCreationData characterCreationDataBuilder)
+        public StandardRogueDeviceSave(CharacterCreationData characterCreationData)
         {
-            this.characterCreationDataBuilder = new CharacterCreationData(characterCreationDataBuilder);
+            this.characterCreationData = new CharacterCreationData(characterCreationData);
         }
 
         public static IEnumerable<FileInfo> GetFiles()
@@ -102,11 +102,11 @@ namespace RoguegardUnity
 
             // キャラクターを生成
             var world = RoguegardSettings.WorldGenerator.CreateObj(null, Vector2Int.zero, random);
-            var player = characterCreationDataBuilder.CreateObj(world, Vector2Int.zero, random);
+            var player = characterCreationData.CreateObj(world, Vector2Int.zero, random);
             var worldInfo = RogueWorldInfo.Get(world);
             worldInfo.LobbyMembers.Add(player);
             var memberInfo = LobbyMemberList.GetMemberInfo(player);
-            memberInfo.CharacterCreationData = characterCreationDataBuilder;
+            memberInfo.CharacterCreationData = characterCreationData;
             memberInfo.SavePoint = newGamePointInfo;
             ViewInfo.SetTo(player);
 

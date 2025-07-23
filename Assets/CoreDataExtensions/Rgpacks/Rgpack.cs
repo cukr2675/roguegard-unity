@@ -56,9 +56,9 @@ namespace Roguegard.Rgpacks
                 }
 
                 // その他はアセットに変換
-                if (pair.Value is CharacterCreationData characterCreationDataBuilder)
+                if (pair.Value is CharacterCreationData characterCreationData)
                 {
-                    table.Add(assetId, new CharacterCreationPresetAsset(characterCreationDataBuilder));
+                    table.Add(assetId, new CharacterCreationPresetAsset(characterCreationData));
                 }
                 if (pair.Value is RaceOptionalCreationDataAsset raceOptionalCreationData)
                 {

@@ -16,9 +16,9 @@ namespace Roguegard.CharacterCreation
 
         public StartingItemList Add()
         {
-            var builders = new StartingItemList();
-            table.Add(builders);
-            return builders;
+            var list = new StartingItemList();
+            table.Add(list);
+            return list;
         }
 
         public void AddClones(IEnumerable<IEnumerable<IReadOnlyStartingItem>> startingItemTable)
@@ -31,12 +31,12 @@ namespace Roguegard.CharacterCreation
             }
         }
 
-        public bool Remove(StartingItem builder, bool removeEmptyList)
+        public bool Remove(StartingItem startingItem, bool removeEmptyList)
         {
             var any = false;
             for (int i = 0; i < table.Count; i++)
             {
-                any |= table[i].Remove(builder);
+                any |= table[i].Remove(startingItem);
                 if (removeEmptyList && table[i].Count == 0)
                 {
                     table.RemoveAt(i);

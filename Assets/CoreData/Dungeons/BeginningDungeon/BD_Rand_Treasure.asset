@@ -37,8 +37,8 @@ MonoBehaviour:
     - rid: 928021298735481091
       type: {class: RogueTileMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
       data:
-        _tile: {fileID: 11400000, guid: 8dab63605c378de4a895690f47728e39, type: 2}
+        _editorTile: {fileID: 11400000, guid: 8dab63605c378de4a895690f47728e39, type: 2}
     - rid: 928021298735481095
       type: {class: RogueTileMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
       data:
-        _tile: {fileID: 11400000, guid: 44985f674517d934f9cfca6b10f538c6, type: 2}
+        _editorTile: {fileID: 11400000, guid: 44985f674517d934f9cfca6b10f538c6, type: 2}

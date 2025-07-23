@@ -165,11 +165,11 @@ MonoBehaviour:
     - rid: 3586031465861742615
       type: {class: SingleItemMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
       data:
-        _item: {fileID: 11400000, guid: 484c9e93d0225ff488ce80e02e35c043, type: 2}
+        _editorItemOption: {fileID: 11400000, guid: 484c9e93d0225ff488ce80e02e35c043, type: 2}
     - rid: 3586031465861742616
       type: {class: SingleItemMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
       data:
-        _item: {fileID: 11400000, guid: 59b398754a4dfe74eb23064857cccd7a, type: 2}
+        _editorItemOption: {fileID: 11400000, guid: 59b398754a4dfe74eb23064857cccd7a, type: 2}
     - rid: 3586031465861742622
       type: {class: BomberTortoiseHit, ns: Roguegard, asm: Roguegard.CoreData}
       data:

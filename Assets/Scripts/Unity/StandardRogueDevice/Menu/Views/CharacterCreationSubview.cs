@@ -25,7 +25,7 @@ namespace RoguegardUnity
         [SerializeField] private LabelViewElement _headerPrefab = null;
         [SerializeField] private CharacterCreationViewElementButton _elementButtonPrefab = null;
 
-        private CharacterCreationData builder;
+        private CharacterCreationData characterCreationData;
         private CharacterCreationAddMenu addMenu;
         private CharacterCreationOptionMenu optionMenu;
 
@@ -38,7 +38,7 @@ namespace RoguegardUnity
         private MenuRogueObjSpriteRenderer spriteRenderer;
         private ISelectOption raceSelectOption;
         private ISelectOption appearanceSelectOption;
-        private AppearanceBuildersMenu appearanceBuildersMenu;
+        private AppearanceEditingMenu appearanceEditingMenu;
         private readonly List<MonoBehaviour> itemObjects = new List<MonoBehaviour>();
         private static ISelectOption LoadPresetSelectOption { get; }
             = SelectOption.Create<MMgr, MArg>(":Load", new LoadPresetMenu());
@@ -50,7 +50,7 @@ namespace RoguegardUnity
 
         public void Initialize(RogueSpriteRendererPool rendererPool)
         {
-            appearanceBuildersMenu = new AppearanceBuildersMenu();
+            appearanceEditingMenu = new AppearanceEditingMenu();
             spriteRenderer = rendererPool.GetMenuRogueSpriteRenderer(_appearanceParent);
             var spriteRendererTransform = spriteRenderer.GetComponent<RectTransform>();
             spriteRendererTransform.anchorMin = spriteRendererTransform.anchorMax = new Vector2(.5f, 0f);
@@ -62,13 +62,13 @@ namespace RoguegardUnity
             _appearanceButton.Initialize(this);
             raceSelectOption = SelectOption.Create<MMgr, MArg>("", (manager, arg) =>
             {
-                manager.PushMenuScreen(optionMenu, arg.Self, other: builder.Race);
+                manager.PushMenuScreen(optionMenu, arg.Self, other: characterCreationData.Race);
             });
             appearanceSelectOption = SelectOption.Create<MMgr, MArg>("", (manager, arg) =>
             {
-                manager.PushMenuScreen(appearanceBuildersMenu, arg.Self, other: builder);
+                manager.PushMenuScreen(appearanceEditingMenu, arg.Self, other: characterCreationData);
             });
-            _nameField.onValueChanged.AddListener(text => builder.Name = text);
+            _nameField.onValueChanged.AddListener(text => characterCreationData.Name = text);
         }
 
         public override void SetParameters(
@@ -76,16 +76,16 @@ namespace RoguegardUnity
             ref IElementsSubviewStateProvider stateProvider)
         {
             var arg = (MArg)iArg;
-            builder = (CharacterCreationData)arg.Arg.Other;
+            characterCreationData = (CharacterCreationData)arg.Arg.Other;
             if (addMenu == null)
             {
                 addMenu = new CharacterCreationAddMenu(RoguegardSettings.CharacterCreationDatabase);
                 optionMenu = new CharacterCreationOptionMenu(RoguegardSettings.CharacterCreationDatabase);
             }
-            addMenu.Set(builder);
-            optionMenu.Set(builder);
-            appearanceBuildersMenu.NextMenu = optionMenu;
-            appearanceBuildersMenu.AddMenu = addMenu;
+            addMenu.Set(characterCreationData);
+            optionMenu.Set(characterCreationData);
+            appearanceEditingMenu.NextMenu = optionMenu;
+            appearanceEditingMenu.AddMenu = addMenu;
 
             viewElements.Clear();
 
@@ -123,16 +123,16 @@ namespace RoguegardUnity
             SetArg(manager, arg);
 
             var random = new RogueRandom(0);
-            var obj = new CharacterCreationData(builder).CreateObj(null, Vector2Int.zero, random);
+            var obj = new CharacterCreationData(characterCreationData).CreateObj(null, Vector2Int.zero, random);
             obj.Main.Sprite.Update(obj);
             var spriteTransform = OchalikeSpriteTransform.Identity;
             KeywordSpriteMotion.Wait.ApplyTo(obj.Main.Sprite.MotionSet, 0, RogueDirection.Down, ref spriteTransform, out _);
             obj.Main.Sprite.SetTo(spriteRenderer, spriteTransform.PoseSource.GetSpritePose(spriteTransform.Direction), spriteTransform.Direction);
 
-            _nameField.text = builder.Name;
-            builder.UpdateCost();
-            var stars = RoguegardCharacterCreationSettings.GetCharacterStars(builder.Cost);
-            _stars.SetStars(stars, builder.CostIsUnknown);
+            _nameField.text = characterCreationData.Name;
+            characterCreationData.UpdateCost();
+            var stars = RoguegardCharacterCreationSettings.GetCharacterStars(characterCreationData.Cost);
+            _stars.SetStars(stars, characterCreationData.CostIsUnknown);
 
             foreach (var itemObject in itemObjects)
             {
@@ -151,13 +151,13 @@ namespace RoguegardUnity
                 header.SetElement(intrinsicHeader, SelectOptionHandler.Instance);
                 itemObjects.Add(header);
             }
-            for (int i = 0; i < builder.Intrinsics.Count; i++)
+            for (int i = 0; i < characterCreationData.Intrinsics.Count; i++)
             {
-                var intrinsic = builder.Intrinsics[i];
+                var intrinsic = characterCreationData.Intrinsics[i];
                 var itemButton = Instantiate(_elementButtonPrefab, _secondParent);
                 SetTransform((RectTransform)itemButton.transform, ref sumHeight, ref odd);
                 itemButton.Initialize(this);
-                itemButton.SetItem(intrinsicPresenter, intrinsic, builder);
+                itemButton.SetItem(intrinsicPresenter, intrinsic, characterCreationData);
                 itemObjects.Add(itemButton);
             }
             {
@@ -179,9 +179,9 @@ namespace RoguegardUnity
                 header.SetElement(startingItemHeader, SelectOptionHandler.Instance);
                 itemObjects.Add(header);
             }
-            for (int i = 0; i < builder.StartingItemTable.Count; i++)
+            for (int i = 0; i < characterCreationData.StartingItemTable.Count; i++)
             {
-                var startingItem = builder.StartingItemTable[i][0];
+                var startingItem = characterCreationData.StartingItemTable[i][0];
                 var itemButton = Instantiate(_elementButtonPrefab, _secondParent);
                 SetTransform((RectTransform)itemButton.transform, ref sumHeight, ref odd);
                 itemButton.Initialize(this);
@@ -271,8 +271,8 @@ namespace RoguegardUnity
 
             private void Load(MMgr manager, MArg arg)
             {
-                var builder = (CharacterCreationData)arg.Arg.Other;
-                builder.Set(element);
+                var characterCreationData = (CharacterCreationData)arg.Arg.Other;
+                characterCreationData.Set(element);
                 manager.PopMenuScreen(2);
             }
         }

@@ -179,11 +179,11 @@ MonoBehaviour:
     - rid: 962669199347417145
       type: {class: SingleItemMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
       data:
-        _item: {fileID: 11400000, guid: 9e011b7400977ac48bd09d64774ddf4e, type: 2}
+        _editorItemOption: {fileID: 11400000, guid: 9e011b7400977ac48bd09d64774ddf4e, type: 2}
     - rid: 962669199347417146
       type: {class: SingleItemMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
       data:
-        _item: {fileID: 11400000, guid: b883c1a5004f31345b36f35e20036591, type: 2}
+        _editorItemOption: {fileID: 11400000, guid: b883c1a5004f31345b36f35e20036591, type: 2}
     - rid: 2120727422300324144
       type: {class: ConstantRaceSprite, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
       data:
@@ -197,4 +197,4 @@ MonoBehaviour:
     - rid: 5681463001098223616
       type: {class: SingleItemMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
       data:
-        _item: {fileID: 11400000, guid: 7c3453877e1e52149b90cb9081517d51, type: 2}
+        _editorItemOption: {fileID: 11400000, guid: 7c3453877e1e52149b90cb9081517d51, type: 2}

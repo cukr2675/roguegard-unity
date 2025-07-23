@@ -8,58 +8,58 @@ namespace Roguegard.CharacterCreation
     [Objforming.Formable]
     public class AppearanceList : IEnumerable<Appearance>
     {
-        private readonly List<Appearance> builders = new();
+        private readonly List<Appearance> list = new();
 
-        public Appearance this[int index] => builders[index];
+        public Appearance this[int index] => list[index];
 
-        public int Count => builders.Count;
+        public int Count => list.Count;
 
-        public Spanning<IReadOnlyAppearance> Span => Spanning.Get<IReadOnlyAppearance>(builders);
+        public Spanning<IReadOnlyAppearance> Span => Spanning.Get<IReadOnlyAppearance>(list);
 
-        public bool TryGetBuilder(BoneKeyword boneName, out Appearance builder)
+        public bool TryGetValue(BoneKeyword boneName, out Appearance appearance)
         {
-            foreach (var item in builders)
+            foreach (var listAppearance in list)
             {
-                if (item.Option.BoneName == boneName)
+                if (listAppearance.Option.BoneName == boneName)
                 {
-                    builder = item;
+                    appearance = listAppearance;
                     return true;
                 }
             }
-            builder = null;
+            appearance = null;
             return false;
         }
 
         public Appearance Add()
         {
-            var builder = new Appearance();
-            builders.Add(builder);
-            return builder;
+            var appearance = new Appearance();
+            list.Add(appearance);
+            return appearance;
         }
 
         public void AddClones(IEnumerable<IReadOnlyAppearance> appearances)
         {
-            builders.AddRange(appearances.Select(x => new Appearance(x)));
+            list.AddRange(appearances.Select(x => new Appearance(x)));
         }
 
-        public bool Remove(Appearance builder)
+        public bool Remove(Appearance appearance)
         {
-            return builders.Remove(builder);
+            return list.Remove(appearance);
         }
 
         public void Clear()
         {
-            builders.Clear();
+            list.Clear();
         }
 
         public AppearanceList Clone()
         {
             var clone = new AppearanceList();
-            clone.builders.AddRange(builders);
+            clone.list.AddRange(list);
             return clone;
         }
 
-        public IEnumerator<Appearance> GetEnumerator() => builders.GetEnumerator();
-        IEnumerator IEnumerable.GetEnumerator() => builders.GetEnumerator();
+        public IEnumerator<Appearance> GetEnumerator() => list.GetEnumerator();
+        IEnumerator IEnumerable.GetEnumerator() => list.GetEnumerator();
     }
 }

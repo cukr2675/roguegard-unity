@@ -34,24 +34,24 @@ namespace Roguegard
 
         private static void Save(MMgr manager, MArg arg)
         {
-            if (arg.Arg.Other is CharacterCreationData builder)
+            if (arg.Arg.Other is CharacterCreationData characterCreationData)
             {
                 // キャラクリ画面から戻ったとき、そのキャラを更新する
                 var character = arg.Arg.TargetObj;
                 if (character != null)
                 {
                     // 編集キャラ更新
-                    character.Main.SetBaseInfoSet(character, builder.PrimaryInfoSet);
+                    character.Main.SetBaseInfoSet(character, characterCreationData.PrimaryInfoSet);
                 }
                 else
                 {
                     // 新規キャラ追加
                     var worldInfo = RogueWorldInfo.GetByCharacter(arg.Self);
-                    character = builder.CreateObj(null, Vector2Int.zero, RogueRandom.Primary);
+                    character = characterCreationData.CreateObj(null, Vector2Int.zero, RogueRandom.Primary);
                     worldInfo.LobbyMembers.Add(character);
                 }
                 var info = LobbyMemberList.GetMemberInfo(character);
-                info.CharacterCreationData = builder;
+                info.CharacterCreationData = characterCreationData;
             }
 
             manager.PopMenuScreen(2);

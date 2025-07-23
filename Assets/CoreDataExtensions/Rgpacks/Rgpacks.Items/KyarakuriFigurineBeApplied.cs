@@ -56,8 +56,8 @@ namespace Roguegard.Rgpacks
                         (manager, arg) =>
                         {
                             var figurine = arg.Arg.TargetObj;
-                            var builder = new CharacterCreationData(KyarakuriFigurineInfo.Get(figurine));
-                            manager.PushMenuScreen(nextMenu, arg.Self, targetObj: figurine, other: builder);
+                            var characterCreationData = new CharacterCreationData(KyarakuriFigurineInfo.Get(figurine));
+                            manager.PushMenuScreen(nextMenu, arg.Self, targetObj: figurine, other: characterCreationData);
                         }))
 
                     .Build();
@@ -93,11 +93,11 @@ namespace Roguegard.Rgpacks
 
             private static void Save(MMgr manager, MArg arg)
             {
-                if (arg.Arg.Other is CharacterCreationData builder)
+                if (arg.Arg.Other is CharacterCreationData characterCreationData)
                 {
                     // キャラクリ画面から戻ったとき、人形を更新する
                     var figurine = arg.Arg.TargetObj;
-                    KyarakuriFigurineInfo.SetTo(figurine, builder);
+                    KyarakuriFigurineInfo.SetTo(figurine, characterCreationData);
                 }
 
                 manager.PopMenuScreen(2);

@@ -121,12 +121,12 @@ namespace RoguegardUnity
                         // はじめから
                         onNewFile: (manager, arg) =>
                         {
-                            var builder = RoguegardSettings.CharacterCreationDatabase.LoadPreset(0);
+                            var characterCreationData = RoguegardSettings.CharacterCreationDatabase.LoadPreset(0);
                             RogueRandom.Primary = new RogueRandom();
                             MessageWorkListener.ClearListeners();
                             MessageWorkListener.AddListener(new DeviceMessageWorkListener());
-                            var player = builder.CreateObj(null, Vector2Int.zero, RogueRandom.Primary);
-                            manager.PushMenuScreen(newGameMenu, player, null, other: builder);
+                            var player = characterCreationData.CreateObj(null, Vector2Int.zero, RogueRandom.Primary);
+                            manager.PushMenuScreen(newGameMenu, player, null, other: characterCreationData);
                         },
 
                         // つづきから
@@ -206,13 +206,13 @@ namespace RoguegardUnity
                     ?
                     .OnFadeOutCompleted((manager, arg) =>
                     {
-                        if (arg.Arg.Other is CharacterCreationData builder)
+                        if (arg.Arg.Other is CharacterCreationData characterCreationData)
                         {
                             // クリエイトしたキャラクターで開始
                             var loadSceneOperation = Addressables.LoadSceneAsync(parent._nextSceneAddress, activateOnLoad: true);
                             loadSceneOperation.Completed += _ =>
                             {
-                                var save = new StandardRogueDeviceSave(builder);
+                                var save = new StandardRogueDeviceSave(characterCreationData);
                                 var device = RogueDevice.NewGame(save);
                                 parent.OpenDevice(device);
                             };

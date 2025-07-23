@@ -9,9 +9,9 @@ namespace Roguegard.CharacterCreation
 
         IMemberSource IReadOnlyMember.Source => SourceInstance;
 
-        [SerializeField, Objforming.IgnoreMember] private AssetStartingItem _item;
-        private StartingItem builder;
-        public StartingItem Item => builder ??= new StartingItem(_item);
+        [SerializeField, Objforming.IgnoreMember] private AssetStartingItem _editorItem;
+        private StartingItem _item;
+        public StartingItem Item => _item ??= new StartingItem(_editorItem);
         IReadOnlyStartingItem IReadOnlyItemMember.Item => Item;
 
         private ItemMember() { }
@@ -23,10 +23,10 @@ namespace Roguegard.CharacterCreation
 
         public IMember Clone()
         {
-            var clone = new ItemMember { builder = builder };
+            var clone = new ItemMember { _item = _item };
 
-            // CharacterCreationBuilder 生成時に必ず Clone が実行されるため、この設定だけでシリアル化可能
-            if (clone.builder == null && _item?.Option != null) { clone.builder = new StartingItem(_item); }
+            // CharacterCreationData 生成時に必ず Clone が実行されるため、この設定だけでシリアル化可能
+            if (clone._item == null && _editorItem?.Option != null) { clone._item = new StartingItem(_editorItem); }
 
             return clone;
         }

@@ -32,18 +32,18 @@ namespace Roguegard.CharacterCreation
             var count = random.Next(3, 5);
             var floor = random.Next(1, maxFloor);
 
-            var builder = new Intrinsic
+            var intrinsic = new Intrinsic
             {
                 Option = parent,
                 OptionName = $"{targetOption.Name}討伐",
                 OptionCaption = $"{floor}F で {targetOption.Name} を {count} 体討伐する"
             };
-            var member = (QuestMember)builder.GetMember(QuestMember.SourceInstance);
+            var member = (QuestMember)intrinsic.GetMember(QuestMember.SourceInstance);
             var target = member.Targets.Add();
             target.Option = targetOption;
             target.Stack = count;
             member.TargetFloor = floor;
-            return builder;
+            return intrinsic;
         }
 
         public override ISortedIntrinsic CreateSortedIntrinsic(

@@ -179,23 +179,23 @@ MonoBehaviour:
     - rid: 3003915766944235564
       type: {class: SingleItemMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
       data:
-        _item: {fileID: 11400000, guid: e3e656abb3457b0449495a5b6866bca1, type: 2}
+        _editorItemOption: {fileID: 11400000, guid: e3e656abb3457b0449495a5b6866bca1, type: 2}
     - rid: 3003915766944235565
       type: {class: SingleItemMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
       data:
-        _item: {fileID: 11400000, guid: 9f3cb6d6459b2ef45bfbb4e9356b64ef, type: 2}
+        _editorItemOption: {fileID: 11400000, guid: 9f3cb6d6459b2ef45bfbb4e9356b64ef, type: 2}
     - rid: 3003915766944235575
       type: {class: SingleItemMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
       data:
-        _item: {fileID: 11400000, guid: 6782dacad4dffe345a4e70f80da8d307, type: 2}
+        _editorItemOption: {fileID: 11400000, guid: 6782dacad4dffe345a4e70f80da8d307, type: 2}
     - rid: 3003915766944235576
       type: {class: SingleItemMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
       data:
-        _item: {fileID: 11400000, guid: 3cbb80ae0e063b64d92630f91d8d6d3c, type: 2}
+        _editorItemOption: {fileID: 11400000, guid: 3cbb80ae0e063b64d92630f91d8d6d3c, type: 2}
     - rid: 3003915766944235582
       type: {class: SingleItemMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
       data:
-        _item: {fileID: 11400000, guid: dd989dc40571bfc48ad5b17101be0c12, type: 2}
+        _editorItemOption: {fileID: 11400000, guid: dd989dc40571bfc48ad5b17101be0c12, type: 2}
     - rid: 3003915766944235591
       type: {class: EquipMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
       data:

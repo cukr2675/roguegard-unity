@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Roguegard.Device
 {
-    public class AppearanceBuildersMenu : RogueMenuScreen
+    public class AppearanceEditingMenu : RogueMenuScreen
     {
         private readonly List<object> elms = new();
         private static readonly object addLeftEyeElement = new();
@@ -22,43 +22,43 @@ namespace Roguegard.Device
 
         public override void OpenScreen(in MMgr manager, in MArg arg)
         {
-            if (arg.Arg.Other is not CharacterCreationData builder) throw new RogueException();
+            if (arg.Arg.Other is not CharacterCreationData characterCreationData) throw new RogueException();
 
             elms.Clear();
 
-            if (builder.Appearances.TryGetBuilder(BoneKeyword.LeftEye, out var leftEyeBuilder))
+            if (characterCreationData.Appearances.TryGetValue(BoneKeyword.LeftEye, out var leftEye))
             {
-                elms.Add(leftEyeBuilder);
+                elms.Add(leftEye);
             }
             else
             {
                 elms.Add(addLeftEyeElement);
             }
 
-            if (builder.Appearances.TryGetBuilder(BoneKeyword.RightEye, out var rightEyeBuilder))
+            if (characterCreationData.Appearances.TryGetValue(BoneKeyword.RightEye, out var rightEye))
             {
-                elms.Add(rightEyeBuilder);
+                elms.Add(rightEye);
             }
             else
             {
                 elms.Add(addRightEyeElement);
             }
 
-            if (builder.Appearances.TryGetBuilder(BoneKeyword.Hair, out var hairBuilder))
+            if (characterCreationData.Appearances.TryGetValue(BoneKeyword.Hair, out var hair))
             {
-                elms.Add(hairBuilder);
+                elms.Add(hair);
             }
             else
             {
                 elms.Add(addHairElement);
             }
 
-            for (int i = 0; i < builder.Appearances.Count; i++)
+            for (int i = 0; i < characterCreationData.Appearances.Count; i++)
             {
-                var appearanceBuilder = builder.Appearances[i];
-                if (elms.Contains(appearanceBuilder)) continue;
+                var appearance = characterCreationData.Appearances[i];
+                if (elms.Contains(appearance)) continue;
 
-                elms.Add(appearanceBuilder);
+                elms.Add(appearance);
             }
             elms.Add(addOtherElement);
 
@@ -66,9 +66,9 @@ namespace Roguegard.Device
                 ?
                 .NameFrom((element, manager, arg) =>
                 {
-                    if (element is Appearance builder)
+                    if (element is Appearance appearance)
                     {
-                        return builder.Name;
+                        return appearance.Name;
                     }
                     else
                     {
@@ -78,9 +78,9 @@ namespace Roguegard.Device
 
                 .OnClick((element, manager, arg) =>
                 {
-                    if (element is Appearance builder)
+                    if (element is Appearance appearance)
                     {
-                        manager.PushMenuScreen(NextMenu, arg.Self, other: builder);
+                        manager.PushMenuScreen(NextMenu, arg.Self, other: appearance);
                     }
                     else
                     {

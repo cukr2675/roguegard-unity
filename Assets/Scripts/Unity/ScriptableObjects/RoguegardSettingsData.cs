@@ -108,7 +108,7 @@ namespace RoguegardUnity
                 var characterCreationDatabase = new CharacterCreationDatabase();
                 foreach (var preset in _presets)
                 {
-                    characterCreationDatabase.AddPreset(preset.ToBuilder());
+                    characterCreationDatabase.AddPreset(preset.ToData());
                 }
 
                 var assetTable = RoguegardSettings.GetAssetTable("Core");

@@ -13,8 +13,7 @@ namespace Roguegard.CharacterCreation
         {
             if (ScriptRef is IQuestEffectIntrinsicScript script)
             {
-                var builder = script.GenerateEffect(this, dungeon, database, random);
-                return builder;
+                return script.GenerateEffect(this, dungeon, database, random);
             }
             else
             {
