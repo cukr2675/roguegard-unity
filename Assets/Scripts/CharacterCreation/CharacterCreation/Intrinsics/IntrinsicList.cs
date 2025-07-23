@@ -5,29 +5,29 @@ using System.Linq;
 namespace Roguegard.CharacterCreation
 {
     [Objforming.Formable]
-    public class IntrinsicBuilderList : IEnumerable<IntrinsicBuilder>
+    public class IntrinsicList : IEnumerable<Intrinsic>
     {
-        private readonly List<IntrinsicBuilder> builders = new();
+        private readonly List<Intrinsic> builders = new();
 
-        public IntrinsicBuilder this[int index] => builders[index];
+        public Intrinsic this[int index] => builders[index];
 
         public int Count => builders.Count;
 
         public Spanning<IReadOnlyIntrinsic> Span => Spanning.Get<IReadOnlyIntrinsic>(builders);
 
-        public IntrinsicBuilder Add()
+        public Intrinsic Add()
         {
-            var builder = new IntrinsicBuilder();
+            var builder = new Intrinsic();
             builders.Add(builder);
             return builder;
         }
 
         public void AddClones(IEnumerable<IReadOnlyIntrinsic> intrinsics)
         {
-            builders.AddRange(intrinsics.Select(x => new IntrinsicBuilder(x)));
+            builders.AddRange(intrinsics.Select(x => new Intrinsic(x)));
         }
 
-        public bool Remove(IntrinsicBuilder builder)
+        public bool Remove(Intrinsic builder)
         {
             return builders.Remove(builder);
         }
@@ -37,7 +37,7 @@ namespace Roguegard.CharacterCreation
             builders.Clear();
         }
 
-        public IEnumerator<IntrinsicBuilder> GetEnumerator() => builders.GetEnumerator();
+        public IEnumerator<Intrinsic> GetEnumerator() => builders.GetEnumerator();
         IEnumerator IEnumerable.GetEnumerator() => builders.GetEnumerator();
     }
 }

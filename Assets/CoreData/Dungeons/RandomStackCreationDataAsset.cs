@@ -2,11 +2,11 @@ using UnityEngine;
 
 namespace Roguegard.CharacterCreation
 {
-    [CreateAssetMenu(menuName = "Roguegard/Character Creation/Data/Random Stack")]
+    [CreateAssetMenu(menuName = "Roguegard/Character Creation/Character Creation Data/Random Stack")]
     [Objforming.IgnoreRequireRelationalComponent]
     public class RandomStackCreationDataAsset : CharacterCreationDataAsset
     {
-        [SerializeField] private ScriptableStartingItemList _items = null;
+        [SerializeField] private AssetStartingItemList _items = null;
 
         [SerializeField] private int minDeltaStack = 0;
 

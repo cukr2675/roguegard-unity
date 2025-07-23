@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -25,7 +25,7 @@ namespace RoguegardUnity
         [SerializeField] private LabelViewElement _headerPrefab = null;
         [SerializeField] private CharacterCreationViewElementButton _elementButtonPrefab = null;
 
-        private CharacterCreationDataBuilder builder;
+        private CharacterCreationData builder;
         private CharacterCreationAddMenu addMenu;
         private CharacterCreationOptionMenu optionMenu;
 
@@ -76,7 +76,7 @@ namespace RoguegardUnity
             ref IElementsSubviewStateProvider stateProvider)
         {
             var arg = (MArg)iArg;
-            builder = (CharacterCreationDataBuilder)arg.Arg.Other;
+            builder = (CharacterCreationData)arg.Arg.Other;
             if (addMenu == null)
             {
                 addMenu = new CharacterCreationAddMenu(RoguegardSettings.CharacterCreationDatabase);
@@ -91,7 +91,7 @@ namespace RoguegardUnity
 
             if (intrinsicPresenter == null)
             {
-                intrinsicPresenter = new ButtonElementHandler<IntrinsicBuilder, MMgr, MArg>()
+                intrinsicPresenter = new ButtonElementHandler<Intrinsic, MMgr, MArg>()
                 {
                     GetName = (element, manager, arg) =>
                     {
@@ -100,12 +100,12 @@ namespace RoguegardUnity
                     },
                     HandleClick = (element, manager, arg) =>
                     {
-                        if (element == null) { manager.PushMenuScreen(addMenu, arg.Self, other: typeof(IntrinsicBuilder)); }
+                        if (element == null) { manager.PushMenuScreen(addMenu, arg.Self, other: typeof(Intrinsic)); }
                         else { manager.PushMenuScreen(optionMenu, arg.Self, other: element); }
                     },
                 };
 
-                startingItemPresenter = new ButtonElementHandler<StartingItemBuilder, MMgr, MArg>()
+                startingItemPresenter = new ButtonElementHandler<StartingItem, MMgr, MArg>()
                 {
                     GetName = (element, manager, arg) =>
                     {
@@ -114,7 +114,7 @@ namespace RoguegardUnity
                     },
                     HandleClick = (element, manager, arg) =>
                     {
-                        if (element == null) { manager.PushMenuScreen(addMenu, arg.Self, other: typeof(StartingItemBuilder)); }
+                        if (element == null) { manager.PushMenuScreen(addMenu, arg.Self, other: typeof(StartingItem)); }
                         else { manager.PushMenuScreen(optionMenu, arg.Self, other: element); }
                     },
                 };
@@ -123,7 +123,7 @@ namespace RoguegardUnity
             SetArg(manager, arg);
 
             var random = new RogueRandom(0);
-            var obj = new CharacterCreationDataBuilder(builder).CreateObj(null, Vector2Int.zero, random);
+            var obj = new CharacterCreationData(builder).CreateObj(null, Vector2Int.zero, random);
             obj.Main.Sprite.Update(obj);
             var spriteTransform = OchalikeSpriteTransform.Identity;
             KeywordSpriteMotion.Wait.ApplyTo(obj.Main.Sprite.MotionSet, 0, RogueDirection.Down, ref spriteTransform, out _);
@@ -223,13 +223,13 @@ namespace RoguegardUnity
 
         private class LoadPresetMenu : RogueMenuScreen
         {
-            private static List<CharacterCreationDataBuilder> presets;
+            private static List<CharacterCreationData> presets;
 
-            private CharacterCreationDataBuilder element;
+            private CharacterCreationData element;
 
             private readonly ChoicesMenuScreen nextMenu;
 
-            private readonly ScrollViewTemplate<CharacterCreationDataBuilder, MMgr, MArg> view;
+            private readonly ScrollViewTemplate<CharacterCreationData, MMgr, MArg> view;
 
             public LoadPresetMenu()
             {
@@ -246,7 +246,7 @@ namespace RoguegardUnity
             {
                 if (presets == null)
                 {
-                    presets = new List<CharacterCreationDataBuilder>();
+                    presets = new List<CharacterCreationData>();
                     for (int i = 0; i < RoguegardSettings.CharacterCreationDatabase.PresetsCount; i++)
                     {
                         presets.Add(RoguegardSettings.CharacterCreationDatabase.LoadPreset(i));
@@ -263,7 +263,7 @@ namespace RoguegardUnity
                     .OnClick((preset, manager, arg) =>
                     {
                         element = preset;
-                        manager.PushMenuScreen(nextMenu, other: (CharacterCreationDataBuilder)arg.Arg.Other);
+                        manager.PushMenuScreen(nextMenu, other: (CharacterCreationData)arg.Arg.Other);
                     })
 
                     .Build();
@@ -271,7 +271,7 @@ namespace RoguegardUnity
 
             private void Load(MMgr manager, MArg arg)
             {
-                var builder = (CharacterCreationDataBuilder)arg.Arg.Other;
+                var builder = (CharacterCreationData)arg.Arg.Other;
                 builder.Set(element);
                 manager.PopMenuScreen(2);
             }

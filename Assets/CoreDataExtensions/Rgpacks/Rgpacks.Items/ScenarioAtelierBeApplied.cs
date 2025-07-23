@@ -9,7 +9,7 @@ namespace Roguegard.Rgpacks
 {
     public class ScenarioAtelierBeApplied : BaseApplyRogueMethod
     {
-        [SerializeField] private ScriptableStartingItem _monolith = null;
+        [SerializeField] private AssetStartingItem _monolith = null;
         [SerializeField] private StandardRogueTileInfoAsset _groundTile = null;
         [SerializeField] private StandardRogueTileInfoAsset _wallTile = null;
 

@@ -3,7 +3,7 @@ using UnityEngine;
 namespace Roguegard.CharacterCreation
 {
     /// <summary>
-    /// <see cref="ScriptableObject"/> にせず <see cref="ScriptField{T}"/> で済ませることもできるが、
+    /// <see cref="ScriptableObject"/> にせず <see cref="ScriptRef{T}"/> で済ませることもできるが、
     /// <see cref="AppearanceOptionAsset"/> や <see cref="IStartingItemOption"/> と同じように
     /// <see cref="ScriptableObject"/> で扱えたほうが処理の共通化が見込める
     /// </summary>

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Roguegard.CharacterCreation
 {
-    [CreateAssetMenu(menuName = "Roguegard/Character Creation/Appearance Option/Single")]
+    [CreateAssetMenu(menuName = "Roguegard/Character Creation/Appearance/Single")]
     [Objforming.Referable]
     public class SingleAppearanceOptionAsset : ColoredAppearanceOptionAsset
     {

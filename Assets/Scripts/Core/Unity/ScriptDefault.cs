@@ -14,7 +14,7 @@ namespace Roguegard.CharacterCreation
 
     internal class ScriptDefault : ScriptableLoader
     {
-        [SerializeField] private ScriptField<object> _asset = null;
+        [SerializeField] private ScriptRef<object> _asset = null;
 
         public override IEnumerator LoadAsync()
         {

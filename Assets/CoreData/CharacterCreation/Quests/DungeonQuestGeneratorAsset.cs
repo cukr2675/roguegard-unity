@@ -13,7 +13,7 @@ namespace Roguegard.CharacterCreation
 
         private static List<DungeonCreationDataAsset> dungeons;
 
-        private static readonly ICharacterCreationData defaultCharacterCreationData = new CharacterCreationDataBuilder();
+        private static readonly ICharacterCreationData defaultCharacterCreationData = new CharacterCreationData();
 
         public DungeonQuest GenerateQuest(IRogueRandom random)
         {
@@ -67,9 +67,9 @@ namespace Roguegard.CharacterCreation
             return new[] { environment };
         }
 
-        private StartingItemBuilderTable GenerateLootTable(float cost, DungeonCreationDataAsset dungeon, IRogueRandom random)
+        private StartingItemTable GenerateLootTable(float cost, DungeonCreationDataAsset dungeon, IRogueRandom random)
         {
-            var lootTable = new StartingItemBuilderTable();
+            var lootTable = new StartingItemTable();
             var money = lootTable.Add().Add();
             money.Option = _money;
             money.Stack = Mathf.FloorToInt(-cost * _moneyPerQuestCost);

@@ -7,12 +7,12 @@ namespace Roguegard.CharacterCreation
 
         IMemberSource IReadOnlyMember.Source => SourceInstance;
 
-        public StartingItemBuilderList Targets { get; } = new StartingItemBuilderList();
+        public StartingItemList Targets { get; } = new StartingItemList();
         public int TargetFloor { get; set; }
 
         Spanning<IWeightedRogueObjGenerator> IReadOnlyQuestMember.Targets => Targets.Span;
 
-        public static IReadOnlyQuestMember GetMember(IMemberable memberable)
+        public static IReadOnlyQuestMember GetMember(IReadOnlyMemberable memberable)
         {
             return (IReadOnlyQuestMember)memberable.GetMember(SourceInstance);
         }

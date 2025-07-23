@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,16 +8,16 @@ namespace Roguegard.Rgpacks
 {
     public class CharacterCreationPresetAsset
     {
-        private readonly CharacterCreationDataBuilder preset;
+        private readonly CharacterCreationData preset;
 
-        public CharacterCreationPresetAsset(CharacterCreationDataBuilder preset)
+        public CharacterCreationPresetAsset(CharacterCreationData preset)
         {
             this.preset = preset;
         }
 
-        public CharacterCreationDataBuilder LoadPreset()
+        public CharacterCreationData LoadPreset()
         {
-            return new CharacterCreationDataBuilder(preset);
+            return new CharacterCreationData(preset);
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -56,7 +56,7 @@ namespace Roguegard.Rgpacks
                         (manager, arg) =>
                         {
                             var figurine = arg.Arg.TargetObj;
-                            var builder = new CharacterCreationDataBuilder(KyarakuriFigurineInfo.Get(figurine));
+                            var builder = new CharacterCreationData(KyarakuriFigurineInfo.Get(figurine));
                             manager.PushMenuScreen(nextMenu, arg.Self, targetObj: figurine, other: builder);
                         }))
 
@@ -93,7 +93,7 @@ namespace Roguegard.Rgpacks
 
             private static void Save(MMgr manager, MArg arg)
             {
-                if (arg.Arg.Other is CharacterCreationDataBuilder builder)
+                if (arg.Arg.Other is CharacterCreationData builder)
                 {
                     // キャラクリ画面から戻ったとき、人形を更新する
                     var figurine = arg.Arg.TargetObj;

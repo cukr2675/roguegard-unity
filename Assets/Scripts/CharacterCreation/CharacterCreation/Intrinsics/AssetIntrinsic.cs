@@ -3,7 +3,7 @@ using UnityEngine;
 namespace Roguegard.CharacterCreation
 {
     [System.Serializable]
-    public class ScriptableIntrinsic : IReadOnlyIntrinsic
+    public class AssetIntrinsic : IReadOnlyIntrinsic
     {
         [SerializeField] private IntrinsicOptionAsset _option;
         public IIntrinsicOption Option => _option;
@@ -24,9 +24,9 @@ namespace Roguegard.CharacterCreation
         Color? IReadOnlyIntrinsic.OptionColor => OptionDescription.ColorOfEnabled;
         string IReadOnlyIntrinsic.OptionCaption => OptionDescription.Caption;
         IRogueDetails IReadOnlyIntrinsic.OptionDetails => OptionDescription.Details;
-        Spanning<IMemberSource> IMemberable.MemberSources => _option.MemberSources;
+        Spanning<IMemberSource> IReadOnlyMemberable.MemberSources => _option.MemberSources;
 
-        IReadOnlyMember IMemberable.GetMember(IMemberSource source)
+        IReadOnlyMember IReadOnlyMemberable.GetMember(IMemberSource source)
         {
             foreach (var member in _members.Span)
             {

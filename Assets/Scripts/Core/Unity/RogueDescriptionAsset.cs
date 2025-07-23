@@ -52,13 +52,13 @@ namespace Roguegard
 
 
 
-        [SerializeField] private ScriptField<IRogueDetails> _details = null;
+        [SerializeField] private ScriptRef<IRogueDetails> _details = null;
 
         /// <summary>
         /// デフォルト: null
         /// </summary>
         public IRogueDetails Details => _details?.Ref;
 
-        private ScriptField<IRogueDetails> DetailsSource { get => _details; set => _details = value; }
+        private ScriptRef<IRogueDetails> DetailsSource { get => _details; set => _details = value; }
     }
 }

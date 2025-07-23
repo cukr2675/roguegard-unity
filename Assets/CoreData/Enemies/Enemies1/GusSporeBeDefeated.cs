@@ -7,7 +7,7 @@ namespace Roguegard
 {
     public class GusSporeBeDefeated : ReferableScript, IAffectRogueMethod
     {
-        [SerializeField] private ScriptableStartingItem _dropItem = null;
+        [SerializeField] private AssetStartingItem _dropItem = null;
 
         private static readonly CommonBeDefeated common = new();
         private static VariantSpriteMotion bombMotion;

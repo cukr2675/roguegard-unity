@@ -4,19 +4,19 @@ using System.Collections.Generic;
 namespace Roguegard.CharacterCreation
 {
     [Objforming.Formable]
-    public class StartingItemBuilderTable : IEnumerable<StartingItemBuilderList>
+    public class StartingItemTable : IEnumerable<StartingItemList>
     {
-        private readonly List<StartingItemBuilderList> table = new();
+        private readonly List<StartingItemList> table = new();
 
-        public StartingItemBuilderList this[int index] => table[index];
+        public StartingItemList this[int index] => table[index];
 
         public int Count => table.Count;
 
         public Spanning<IWeightedRogueObjGeneratorList> Span => Spanning.Get<IWeightedRogueObjGeneratorList>(table);
 
-        public StartingItemBuilderList Add()
+        public StartingItemList Add()
         {
-            var builders = new StartingItemBuilderList();
+            var builders = new StartingItemList();
             table.Add(builders);
             return builders;
         }
@@ -25,13 +25,13 @@ namespace Roguegard.CharacterCreation
         {
             foreach (var startingItemList in startingItemTable)
             {
-                var list = new StartingItemBuilderList();
+                var list = new StartingItemList();
                 list.AddClones(startingItemList);
                 table.Add(list);
             }
         }
 
-        public bool Remove(StartingItemBuilder builder, bool removeEmptyList)
+        public bool Remove(StartingItem builder, bool removeEmptyList)
         {
             var any = false;
             for (int i = 0; i < table.Count; i++)
@@ -51,7 +51,7 @@ namespace Roguegard.CharacterCreation
             table.Clear();
         }
 
-        public IEnumerator<StartingItemBuilderList> GetEnumerator() => table.GetEnumerator();
+        public IEnumerator<StartingItemList> GetEnumerator() => table.GetEnumerator();
         IEnumerator IEnumerable.GetEnumerator() => table.GetEnumerator();
     }
 }

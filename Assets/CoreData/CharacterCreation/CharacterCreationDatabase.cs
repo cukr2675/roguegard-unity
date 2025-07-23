@@ -4,7 +4,7 @@ namespace Roguegard.CharacterCreation
 {
     public class CharacterCreationDatabase : ICharacterCreationDatabase
     {
-        private readonly List<CharacterCreationDataBuilder> _presets = new();
+        private readonly List<CharacterCreationData> _presets = new();
         public int PresetsCount => _presets.Count;
 
         private readonly List<IRaceOption> _raceOptions = new();
@@ -19,12 +19,12 @@ namespace Roguegard.CharacterCreation
         private readonly List<IStartingItemOption> _startingItemOptions = new();
         public Spanning<IStartingItemOption> StartingItemOptions => Spanning.Get(_startingItemOptions);
 
-        public CharacterCreationDataBuilder LoadPreset(int index)
+        public CharacterCreationData LoadPreset(int index)
         {
-            return new CharacterCreationDataBuilder(_presets[index]);
+            return new CharacterCreationData(_presets[index]);
         }
 
-        public void AddPreset(CharacterCreationDataBuilder preset)
+        public void AddPreset(CharacterCreationData preset)
         {
             _presets.Add(preset);
         }

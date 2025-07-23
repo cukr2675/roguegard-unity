@@ -4,7 +4,7 @@ namespace Roguegard.CharacterCreation
 {
     [System.Serializable]
     [Objforming.IgnoreRequireRelationalComponent]
-    public class FoodRace : ObjectRace
+    public class FoodRace : InlineRace
     {
         public override IApplyRogueMethod BeThrown
             => base.BeThrown != RoguegardSettings.DefaultRaceOption.BeThrown ? base.BeThrown : (virtualBeThrown ??= new BeThrownRogueMethod(this));

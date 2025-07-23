@@ -1,6 +1,6 @@
 namespace Roguegard.CharacterCreation
 {
-    public interface IMemberableBuilder : IMemberable
+    public interface IMemberableBuilder : IReadOnlyMemberable
     {
     }
 }

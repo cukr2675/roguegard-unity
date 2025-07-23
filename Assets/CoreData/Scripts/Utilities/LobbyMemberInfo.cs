@@ -5,7 +5,7 @@ namespace Roguegard
     [Objforming.Formable]
     public class LobbyMemberInfo
     {
-        public CharacterCreationDataBuilder CharacterCreationData { get; set; }
+        public CharacterCreationData CharacterCreationData { get; set; }
 
         public ISavePointInfo SavePoint { get; set; }
 

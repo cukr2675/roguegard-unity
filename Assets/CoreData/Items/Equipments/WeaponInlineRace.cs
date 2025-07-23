@@ -4,12 +4,12 @@ namespace Roguegard.CharacterCreation
 {
     [System.Serializable]
     [Objforming.IgnoreRequireRelationalComponent]
-    public class WeaponRace : EquipmentRace
+    public class WeaponRace : EquipmentInlineRace
     {
         [Header("WeaponRace")]
 
-        [SerializeField] private ScriptField<ISkill> _weaponAttack;
-        [SerializeField] private ScriptField<ISkill> _weaponThrow;
+        [SerializeField] private ScriptRef<ISkill> _weaponAttack;
+        [SerializeField] private ScriptRef<ISkill> _weaponThrow;
 
         public override IEquipmentInfo GetEquipmentInfo(RogueObj self, IRaceOption raceOption, ICharacterCreationData characterCreationData)
         {

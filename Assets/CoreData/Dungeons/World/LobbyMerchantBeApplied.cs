@@ -9,7 +9,7 @@ namespace Roguegard
     {
         private LobbyMerchantBeApplied() { }
 
-        [SerializeField, ElementDescription("_option")] private ScriptableStartingItem[] _items = null;
+        [SerializeField, ElementDescription("_option")] private AssetStartingItem[] _items = null;
 
         IRogueMethodTarget ISkillDescription.Target => null;
         IRogueMethodRange ISkillDescription.Range => null;
@@ -67,7 +67,7 @@ namespace Roguegard
         {
             public LobbyMerchantBeApplied parent;
 
-            private readonly ScrollViewTemplate<ScriptableStartingItem, MMgr, MArg> view = new()
+            private readonly ScrollViewTemplate<AssetStartingItem, MMgr, MArg> view = new()
             {
             };
 

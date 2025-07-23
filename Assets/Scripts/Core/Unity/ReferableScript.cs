@@ -19,7 +19,7 @@ namespace Roguegard
 #endif
 
         /// <summary>
-        /// <see cref="ScriptField{T}"/> とアセンブリを合わせる。
+        /// <see cref="ScriptRef{T}"/> とアセンブリを合わせる。
         /// </summary>
         public class AssemblyReflectionAssetDummyAttribute : PropertyAttribute
         {

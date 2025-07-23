@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Roguegard.CharacterCreation
 {
     [Objforming.Formable]
-    public class StartingItemBuilder : IReadOnlyStartingItem, IWeightedRogueObjGenerator, IMemberableBuilder
+    public class StartingItem : IReadOnlyStartingItem, IWeightedRogueObjGenerator, IMemberableBuilder
     {
         public IStartingItemOption Option { get; set; }
         public string OptionName { get; set; }
@@ -30,13 +30,13 @@ namespace Roguegard.CharacterCreation
         float IWeightedRogueObjGenerator.Weight => GeneratorWeight;
         Color? IReadOnlyStartingItem.OptionColor => OptionColor;
         IRogueGender IReadOnlyStartingItem.OptionGender => null;
-        Spanning<IMemberSource> IMemberable.MemberSources => Option.MemberSources;
+        Spanning<IMemberSource> IReadOnlyMemberable.MemberSources => Option.MemberSources;
 
-        public StartingItemBuilder()
+        public StartingItem()
         {
         }
 
-        public StartingItemBuilder(IReadOnlyStartingItem startingItem)
+        public StartingItem(IReadOnlyStartingItem startingItem)
         {
             Set(startingItem);
         }
@@ -64,7 +64,7 @@ namespace Roguegard.CharacterCreation
             return Option.CreateObj(this, location, position, random, stackOption);
         }
 
-        IReadOnlyMember IMemberable.GetMember(IMemberSource source)
+        IReadOnlyMember IReadOnlyMemberable.GetMember(IMemberSource source)
         {
             foreach (var member in members)
             {

@@ -3,7 +3,7 @@ using UnityEngine;
 namespace Roguegard
 {
     [System.Serializable]
-    public class ScriptField<T>
+    public class ScriptRef<T>
     {
 #if UNITY_EDITOR
         [SerializeField] private UnityEditor.MonoScript _script;

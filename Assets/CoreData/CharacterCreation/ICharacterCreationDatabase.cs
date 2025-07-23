@@ -12,6 +12,6 @@ namespace Roguegard.CharacterCreation
 
         Spanning<IStartingItemOption> StartingItemOptions { get; }
 
-        public CharacterCreationDataBuilder LoadPreset(int index);
+        public CharacterCreationData LoadPreset(int index);
     }
 }

@@ -38,15 +38,15 @@ namespace RoguegardUnity
 
         private static readonly NewGamePointInfo newGamePointInfo = new NewGamePointInfo();
 
-        private readonly CharacterCreationDataBuilder characterCreationDataBuilder;
+        private readonly CharacterCreationData characterCreationDataBuilder;
 
         public StandardRogueDeviceSave()
         {
         }
 
-        public StandardRogueDeviceSave(CharacterCreationDataBuilder characterCreationDataBuilder)
+        public StandardRogueDeviceSave(CharacterCreationData characterCreationDataBuilder)
         {
-            this.characterCreationDataBuilder = new CharacterCreationDataBuilder(characterCreationDataBuilder);
+            this.characterCreationDataBuilder = new CharacterCreationData(characterCreationDataBuilder);
         }
 
         public static IEnumerable<FileInfo> GetFiles()

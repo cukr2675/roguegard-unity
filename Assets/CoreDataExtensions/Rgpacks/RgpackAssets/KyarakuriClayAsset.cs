@@ -20,7 +20,7 @@ namespace Roguegard.Rgpacks
         Color IReadOnlyRace.BodyColor => Color;
         string IReadOnlyRace.OptionCaption => null;
         IRogueDetails IReadOnlyRace.OptionDetails => null;
-        Spanning<IMemberSource> IMemberable.MemberSources => RaceOptionMemberSources;
+        Spanning<IMemberSource> IReadOnlyMemberable.MemberSources => RaceOptionMemberSources;
 
         public int Lv => 0;
         public IRogueGender Gender => RoguegardSettings.DefaultRaceOption.Genders[0];
@@ -176,7 +176,7 @@ namespace Roguegard.Rgpacks
         {
         }
 
-        IReadOnlyMember IMemberable.GetMember(IMemberSource source)
+        IReadOnlyMember IReadOnlyMemberable.GetMember(IMemberSource source)
         {
             foreach (var member in _members.Span)
             {

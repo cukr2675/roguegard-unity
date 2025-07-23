@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,11 +13,11 @@ namespace Roguegard.Rgpacks
 
         ICmnPropertySource ICmnProperty.Source => SourceInstance;
 
-        public StartingItemBuilderTable Value { get; set; }
+        public StartingItemTable Value { get; set; }
 
         public static StartingItemTableCmnProperty Default { get; } = new StartingItemTableCmnProperty()
         {
-            Value = new StartingItemBuilderTable()
+            Value = new StartingItemTable()
         };
 
         private StartingItemTableCmnProperty() { }

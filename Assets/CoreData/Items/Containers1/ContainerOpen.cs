@@ -7,9 +7,9 @@ namespace Roguegard
     public class ContainerOpen : ReferableScript, IOpenEffect
     {
         [SerializeField] private bool _isStorage;
-        [SerializeField] private ScriptField<IApplyRogueMethod> _beOpened;
-        [SerializeField] private ScriptField<IApplyRogueMethod> _takeIn;
-        [SerializeField] private ScriptField<IApplyRogueMethod> _putOut;
+        [SerializeField] private ScriptRef<IApplyRogueMethod> _beOpened;
+        [SerializeField] private ScriptRef<IApplyRogueMethod> _takeIn;
+        [SerializeField] private ScriptRef<IApplyRogueMethod> _putOut;
 
         public IRaceOption Open(
             RogueObj self, MainInfoSetType infoSetType, bool polymorph2Base, IRaceOption raceOption, ICharacterCreationData characterCreationData)

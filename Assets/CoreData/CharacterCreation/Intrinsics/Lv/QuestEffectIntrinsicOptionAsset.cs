@@ -9,7 +9,7 @@ namespace Roguegard.CharacterCreation
         private static readonly IMemberSource[] _memberSources = new[] { QuestMember.SourceInstance };
         public override Spanning<IMemberSource> MemberSources => _memberSources;
 
-        public IntrinsicBuilder GenerateEffect(DungeonCreationDataAsset dungeon, ICharacterCreationDatabase database, IRogueRandom random)
+        public Intrinsic GenerateEffect(DungeonCreationDataAsset dungeon, ICharacterCreationDatabase database, IRogueRandom random)
         {
             if (ScriptRef is IQuestEffectIntrinsicScript script)
             {
@@ -18,7 +18,7 @@ namespace Roguegard.CharacterCreation
             }
             else
             {
-                return new IntrinsicBuilder
+                return new Intrinsic
                 {
                     Option = this
                 };

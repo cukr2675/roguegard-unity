@@ -6,7 +6,7 @@ namespace Roguegard.CharacterCreation
     {
         private static List<IStartingItemOption> options;
 
-        public IntrinsicBuilder GenerateEffect(
+        public Intrinsic GenerateEffect(
             QuestEffectIntrinsicOptionAsset parent, DungeonCreationDataAsset dungeon, ICharacterCreationDatabase database, IRogueRandom random)
         {
             if (options == null)
@@ -26,7 +26,7 @@ namespace Roguegard.CharacterCreation
             var maxFloor = dungeon.Floors[^1].EndLv - 1;
             var floor = random.Next(1, maxFloor);
 
-            var builder = new IntrinsicBuilder
+            var builder = new Intrinsic
             {
                 Option = parent,
                 OptionCaption = $"{floor}F で {clientOption.Name} を救助する"

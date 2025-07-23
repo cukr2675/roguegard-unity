@@ -21,12 +21,12 @@ namespace RoguegardUnity
 #endif
 
         [Header("Initial Assets")]
-        [SerializeField] private ItemCreationDataAsset _world = null;
+        [SerializeField] private ObjectCreationDataAsset _world = null;
         [SerializeField] private LobbyCreationDataAsset _lobby = null;
         [Space]
         [SerializeField] private PresetCreationDataAsset[] _presets = null;
 
-        [SerializeField] private ItemCreationDataAsset _money = null;
+        [SerializeField] private ObjectCreationDataAsset _money = null;
 
         [SerializeField] private Vector2Int _maxTilemapSize = new(y: 64, x: 96);
         // y: 64 透明マップのチップを4x4としたとき、縦幅を256に収めるサイズ
@@ -50,10 +50,10 @@ namespace RoguegardUnity
         [SerializeField] private string _defaultSaveFileName = "Data.gard";
 
         [Header("Scripting")]
-        [SerializeField] private ScriptField<IScriptEvaluator>[] _scriptEvaluators = null;
+        [SerializeField] private ScriptRef<IScriptEvaluator>[] _scriptEvaluators = null;
 
         [Header("Global Assets")]
-        [SerializeField] private ScriptField<ILevelInfoInitializer> _levelInfoInitializer = null;
+        [SerializeField] private ScriptRef<ILevelInfoInitializer> _levelInfoInitializer = null;
         [SerializeField] private EquipKeywordAsset _equipPartOfInnerwear = null;
         [SerializeField] private DefaultRaceOptionAsset _defaultRaceOption = null;
         [SerializeField] private ObjCommandTable _objCommandTable = null;

@@ -3,7 +3,7 @@ using UnityEngine;
 namespace Roguegard.CharacterCreation
 {
     [Objforming.Formable]
-    public class CharacterCreationDataBuilder : ICharacterCreationData
+    public class CharacterCreationData : ICharacterCreationData
     {
         public string Name { get; set; }
         public string ShortName { get; set; }
@@ -12,10 +12,10 @@ namespace Roguegard.CharacterCreation
         public bool CostIsUnknown { get; set; }
         public int Lv { get; set; }
 
-        public RaceBuilder Race { get; }
-        public AppearanceBuilderList Appearances { get; }
-        public IntrinsicBuilderList Intrinsics { get; }
-        public StartingItemBuilderTable StartingItemTable { get; }
+        public Race Race { get; }
+        public AppearanceList Appearances { get; }
+        public IntrinsicList Intrinsics { get; }
+        public StartingItemTable StartingItemTable { get; }
         // 命名メモ: LootBuilderTable StartingLootTable { get; } にするのもいいが "LootTable" が入ると倒したときの動作を連想させてしまうので StartingItem
         // あくまでキャラクリシステムから着想を得た名前にする
         // IStartingItemOption は初期アイテムとして選択できるもの、 IIntrinsicOption は固有能力として選択できるもの、といったように説明しやすい
@@ -43,15 +43,15 @@ namespace Roguegard.CharacterCreation
 
         public IMainInfoSet PrimaryInfoSet => TryGetGrowingInfoSet(Race.Option, Race.Gender, out var value) ? value : throw new RogueException();
 
-        public CharacterCreationDataBuilder()
+        public CharacterCreationData()
         {
-            Race = new RaceBuilder();
-            Appearances = new AppearanceBuilderList();
-            Intrinsics = new IntrinsicBuilderList();
-            StartingItemTable = new StartingItemBuilderTable();
+            Race = new Race();
+            Appearances = new AppearanceList();
+            Intrinsics = new IntrinsicList();
+            StartingItemTable = new StartingItemTable();
         }
 
-        public CharacterCreationDataBuilder(CharacterCreationDataBuilder builder)
+        public CharacterCreationData(CharacterCreationData builder)
         {
             Name = builder.Name;
             ShortName = builder.ShortName;
@@ -60,16 +60,16 @@ namespace Roguegard.CharacterCreation
             CostIsUnknown = builder.CostIsUnknown;
             Lv = builder.Lv;
 
-            Race = new RaceBuilder(builder.Race);
-            Appearances = new AppearanceBuilderList();
+            Race = new Race(builder.Race);
+            Appearances = new AppearanceList();
             Appearances.AddClones(builder.Appearances);
-            Intrinsics = new IntrinsicBuilderList();
+            Intrinsics = new IntrinsicList();
             Intrinsics.AddClones(builder.Intrinsics);
-            StartingItemTable = new StartingItemBuilderTable();
+            StartingItemTable = new StartingItemTable();
             StartingItemTable.AddClones(builder.StartingItemTable);
         }
 
-        public void Set(CharacterCreationDataBuilder builder)
+        public void Set(CharacterCreationData builder)
         {
             Name = builder.Name;
             ShortName = builder.ShortName;

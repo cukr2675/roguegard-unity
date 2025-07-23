@@ -2,11 +2,11 @@ using UnityEngine;
 
 namespace Roguegard.CharacterCreation
 {
-    [CreateAssetMenu(menuName = "Roguegard/Character Creation/Data/Random")]
+    [CreateAssetMenu(menuName = "Roguegard/Character Creation/Character Creation Data/Random")]
     [Objforming.IgnoreRequireRelationalComponent]
     public class RandomCreationDataAsset : CharacterCreationDataAsset
     {
-        [SerializeField] private ScriptableStartingItemList _items = null;
+        [SerializeField] private AssetStartingItemList _items = null;
 
         protected override bool HasNotInfoSet => true;
 

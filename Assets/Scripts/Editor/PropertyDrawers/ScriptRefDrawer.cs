@@ -6,9 +6,9 @@ using UnityEngine;
 
 namespace Roguegard.Editor
 {
-    [CustomPropertyDrawer(typeof(ScriptField<>))]
+    [CustomPropertyDrawer(typeof(ScriptRef<>))]
     [CanEditMultipleObjects]
-    public class ScriptFieldDrawer : PropertyDrawer
+    public class ScriptRefDrawer : PropertyDrawer
     {
         private static MonoScript _fieldAsset;
 

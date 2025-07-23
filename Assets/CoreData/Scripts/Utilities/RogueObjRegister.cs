@@ -50,7 +50,7 @@ namespace Roguegard
                 MainStats = item.Main.Stats
             };
 
-            var startingItem = new StartingItemBuilder();
+            var startingItem = new StartingItem();
             if (item.Main.BaseInfoSet is CharacterCreationInfoSet itemInfoSet && itemInfoSet.Data is IStartingItemOption option)
             {
                 startingItem.Option = option;
@@ -97,7 +97,7 @@ namespace Roguegard
         {
             public MainStats MainStats { get; set; }
             public bool IsEquipped { get; set; }
-            public StartingItemBuilder StartingItem { get; set; }
+            public StartingItem StartingItem { get; set; }
         }
     }
 }

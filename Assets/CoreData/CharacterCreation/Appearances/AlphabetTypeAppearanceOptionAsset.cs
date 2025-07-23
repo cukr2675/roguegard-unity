@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Roguegard.CharacterCreation
 {
-    [CreateAssetMenu(menuName = "Roguegard/Character Creation/Appearance Option/Alphabet Type")]
+    [CreateAssetMenu(menuName = "Roguegard/Character Creation/Appearance/Alphabet Type")]
     [Objforming.Referable]
     public class AlphabetTypeAppearanceOptionAsset : ColoredAppearanceOptionAsset
     {

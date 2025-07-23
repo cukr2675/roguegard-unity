@@ -3,7 +3,7 @@ using UnityEngine;
 namespace Roguegard.CharacterCreation
 {
     [System.Serializable]
-    public class ScriptableStartingItem : IReadOnlyStartingItem, IWeightedRogueObjGenerator
+    public class AssetStartingItem : IReadOnlyStartingItem, IWeightedRogueObjGenerator
     {
         [SerializeField] private CharacterCreationDataAsset _option;
         public CharacterCreationDataAsset Option => _option;
@@ -41,9 +41,9 @@ namespace Roguegard.CharacterCreation
         int IRogueObjGenerator.Lv => _option.Race.Lv;
         Spanning<IWeightedRogueObjGeneratorList> IRogueObjGenerator.StartingItemTable => _option.StartingItemTable;
         float IWeightedRogueObjGenerator.Weight => _generatorWeight;
-        Spanning<IMemberSource> IMemberable.MemberSources => _option.StartingItemOptionMemberSources;
+        Spanning<IMemberSource> IReadOnlyMemberable.MemberSources => _option.StartingItemOptionMemberSources;
 
-        IReadOnlyMember IMemberable.GetMember(IMemberSource source)
+        IReadOnlyMember IReadOnlyMemberable.GetMember(IMemberSource source)
         {
             foreach (var member in _members.Span)
             {

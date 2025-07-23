@@ -22,7 +22,7 @@ namespace Roguegard
         [SerializeField] private string _caption = null;
         public override string Caption => _caption;
 
-        [SerializeField] private ScriptField<IRogueDetails> _details = null;
+        [SerializeField] private ScriptRef<IRogueDetails> _details = null;
         public override IRogueDetails Details => _details.Ref;
 
 
@@ -43,13 +43,13 @@ namespace Roguegard
 
 
 
-        [SerializeField] private ScriptField<IAffectRogueMethod> _hit = null;
+        [SerializeField] private ScriptRef<IAffectRogueMethod> _hit = null;
         public override IAffectRogueMethod Hit => _hit.Ref;
 
-        [SerializeField] private ScriptField<IAffectRogueMethod> _beDefeated = null;
+        [SerializeField] private ScriptRef<IAffectRogueMethod> _beDefeated = null;
         public override IAffectRogueMethod BeDefeated => _beDefeated.Ref;
 
-        [SerializeField] private ScriptField<IApplyRogueMethod> _beSteppedOnAsTile = null;
+        [SerializeField] private ScriptRef<IApplyRogueMethod> _beSteppedOnAsTile = null;
         public override IApplyRogueMethod BeSteppedOnAsTile => _beSteppedOnAsTile.Ref;
 
 

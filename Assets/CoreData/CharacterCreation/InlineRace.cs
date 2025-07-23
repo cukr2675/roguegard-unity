@@ -4,7 +4,7 @@ namespace Roguegard.CharacterCreation
 {
     [System.Serializable]
     [Objforming.IgnoreRequireRelationalComponent]
-    public class ObjectRace : ObjectRaceOption, IReadOnlyRace
+    public class InlineRace : InlineRaceOption, IReadOnlyRace
     {
         [Header("Race")]
 
@@ -27,9 +27,9 @@ namespace Roguegard.CharacterCreation
         Color IReadOnlyRace.BodyColor => Color;
         string IReadOnlyRace.OptionCaption => null;
         IRogueDetails IReadOnlyRace.OptionDetails => null;
-        Spanning<IMemberSource> IMemberable.MemberSources => ((IRaceOption)this).MemberSources;
+        Spanning<IMemberSource> IReadOnlyMemberable.MemberSources => ((IRaceOption)this).MemberSources;
 
-        IReadOnlyMember IMemberable.GetMember(IMemberSource source)
+        IReadOnlyMember IReadOnlyMemberable.GetMember(IMemberSource source)
         {
             foreach (var member in _members.Span)
             {

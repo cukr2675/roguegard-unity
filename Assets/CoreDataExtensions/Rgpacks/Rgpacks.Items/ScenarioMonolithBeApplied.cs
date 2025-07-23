@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,7 +12,7 @@ namespace Roguegard.Rgpacks
 {
     public class ScenarioMonolithBeApplied : BaseApplyRogueMethod
     {
-        [SerializeField, ElementDescription("_option")] private ScriptableStartingItem[] _shopItems = null;
+        [SerializeField, ElementDescription("_option")] private AssetStartingItem[] _shopItems = null;
 
         private Menu menu;
 
@@ -73,7 +73,7 @@ namespace Roguegard.Rgpacks
         {
             public ScenarioMonolithBeApplied parent;
 
-            private readonly ScrollViewTemplate<ScriptableStartingItem, MMgr, MArg> view = new()
+            private readonly ScrollViewTemplate<AssetStartingItem, MMgr, MArg> view = new()
             {
             };
 

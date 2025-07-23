@@ -3,7 +3,7 @@ using UnityEngine;
 namespace Roguegard.CharacterCreation
 {
     [System.Serializable]
-    public class ScriptableAppearance : IReadOnlyAppearance
+    public class AssetAppearance : IReadOnlyAppearance
     {
         [SerializeField] private AppearanceOptionAsset _option;
         public AppearanceOptionAsset Option => _option;
@@ -25,9 +25,9 @@ namespace Roguegard.CharacterCreation
         string IReadOnlyAppearance.OptionName => OptionDescription.DescriptionName;
         string IReadOnlyAppearance.OptionCaption => OptionDescription.Caption;
         IRogueDetails IReadOnlyAppearance.OptionDetails => OptionDescription.Details;
-        Spanning<IMemberSource> IMemberable.MemberSources => _option.MemberSources;
+        Spanning<IMemberSource> IReadOnlyMemberable.MemberSources => _option.MemberSources;
 
-        IReadOnlyMember IMemberable.GetMember(IMemberSource source)
+        IReadOnlyMember IReadOnlyMemberable.GetMember(IMemberSource source)
         {
             foreach (var member in _members.Span)
             {

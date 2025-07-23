@@ -22,7 +22,7 @@ namespace Roguegard.Device
 
         public override void OpenScreen(in MMgr manager, in MArg arg)
         {
-            if (arg.Arg.Other is not CharacterCreationDataBuilder builder) throw new RogueException();
+            if (arg.Arg.Other is not CharacterCreationData builder) throw new RogueException();
 
             elms.Clear();
 
@@ -66,7 +66,7 @@ namespace Roguegard.Device
                 ?
                 .NameFrom((element, manager, arg) =>
                 {
-                    if (element is AppearanceBuilder builder)
+                    if (element is Appearance builder)
                     {
                         return builder.Name;
                     }
@@ -78,13 +78,13 @@ namespace Roguegard.Device
 
                 .OnClick((element, manager, arg) =>
                 {
-                    if (element is AppearanceBuilder builder)
+                    if (element is Appearance builder)
                     {
                         manager.PushMenuScreen(NextMenu, arg.Self, other: builder);
                     }
                     else
                     {
-                        manager.PushMenuScreen(AddMenu, arg.Self, other: typeof(AppearanceBuilder));
+                        manager.PushMenuScreen(AddMenu, arg.Self, other: typeof(Appearance));
                     }
                 })
 

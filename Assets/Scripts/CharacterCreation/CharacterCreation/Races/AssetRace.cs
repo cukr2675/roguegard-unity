@@ -3,7 +3,7 @@ using UnityEngine;
 namespace Roguegard.CharacterCreation
 {
     [System.Serializable]
-    public class ScriptableRace : IReadOnlyRace
+    public class AssetRace : IReadOnlyRace
     {
         /// <summary>
         /// 進化によって変わることはない
@@ -39,9 +39,9 @@ namespace Roguegard.CharacterCreation
         string IReadOnlyRace.OptionCaption => OptionDescription.Caption;
         IRogueDetails IReadOnlyRace.OptionDetails => OptionDescription.Details;
         int IReadOnlyRace.Lv => 1;
-        Spanning<IMemberSource> IMemberable.MemberSources => _option.MemberSources;
+        Spanning<IMemberSource> IReadOnlyMemberable.MemberSources => _option.MemberSources;
 
-        IReadOnlyMember IMemberable.GetMember(IMemberSource source)
+        IReadOnlyMember IReadOnlyMemberable.GetMember(IMemberSource source)
         {
             foreach (var member in _members.Span)
             {

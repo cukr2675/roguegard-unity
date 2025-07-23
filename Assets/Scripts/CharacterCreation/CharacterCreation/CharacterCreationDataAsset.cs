@@ -158,7 +158,7 @@ namespace Roguegard.CharacterCreation
             public string Caption => Option.Caption;
             public IRogueDetails Details => Option.Details;
 
-            Spanning<IMemberSource> IMemberable.MemberSources => Option.MemberSources;
+            Spanning<IMemberSource> IReadOnlyMemberable.MemberSources => Option.MemberSources;
 
             public IReadOnlyMember GetMember(IMemberSource source) => source.CreateMember();
 

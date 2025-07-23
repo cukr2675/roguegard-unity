@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Roguegard.CharacterCreation.Editor
 {
-    [CreateAssetMenu(menuName = "Roguegard/Character Creation/Appearance/Alphabet Generator")]
+    [CreateAssetMenu(menuName = "Roguegard/Character Creation/Appearance/Alphabet Type Generator")]
     public class AlphabetTypeAppearanceOptionGenerator : ScriptableObjectGenerator<AlphabetTypeAppearanceOptionAsset>
     {
         [SerializeField] private string _descriptionNameFormat = null;

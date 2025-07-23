@@ -2,14 +2,14 @@ using UnityEngine;
 
 namespace Roguegard.CharacterCreation
 {
-    [CreateAssetMenu(menuName = "Roguegard/Character Creation/Data/Location/Lobby")]
+    [CreateAssetMenu(menuName = "Roguegard/Character Creation/Character Creation Data/Location/Lobby")]
     [Objforming.Referable]
     public class LobbyCreationDataAsset : CharacterCreationDataAsset
     {
-        [SerializeField] private ObjectRace _race = null;
-        [SerializeField, ElementDescription("_option")] private ScriptableAppearance[] _appearances = null;
-        [SerializeField, ElementDescription("_option")] private ScriptableIntrinsic[] _intrinsics = null;
-        [SerializeField] private ScriptableStartingItemList[] _startingItemTable = null;
+        [SerializeField] private InlineRace _race = null;
+        [SerializeField, ElementDescription("_option")] private AssetAppearance[] _appearances = null;
+        [SerializeField, ElementDescription("_option")] private AssetIntrinsic[] _intrinsics = null;
+        [SerializeField] private AssetStartingItemList[] _startingItemTable = null;
 
         [System.NonSerialized] private SortedIntrinsicList sortedIntrinsics;
 
@@ -23,13 +23,13 @@ namespace Roguegard.CharacterCreation
         [SerializeField] private RogueTileAsset _ground = null;
         [SerializeField] private RogueTileAsset _roomWall = null;
         [SerializeField] private RogueTileAsset _wall = null;
-        [SerializeField] private ScriptableStartingItem _doorL = null;
-        [SerializeField] private ScriptableStartingItem _doorR = null;
-        [SerializeField] private ScriptableStartingItem _partyBoard = null;
-        [SerializeField] private ScriptableStartingItem _questBoard = null;
-        [SerializeField] private ScriptableStartingItem _storage = null;
-        [SerializeField] private ScriptableStartingItem _seat = null;
-        [SerializeField] private ScriptableStartingItem _sewingMachine = null;
+        [SerializeField] private AssetStartingItem _doorL = null;
+        [SerializeField] private AssetStartingItem _doorR = null;
+        [SerializeField] private AssetStartingItem _partyBoard = null;
+        [SerializeField] private AssetStartingItem _questBoard = null;
+        [SerializeField] private AssetStartingItem _storage = null;
+        [SerializeField] private AssetStartingItem _seat = null;
+        [SerializeField] private AssetStartingItem _sewingMachine = null;
 
         private const int w = 6;
 

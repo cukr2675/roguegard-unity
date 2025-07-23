@@ -6,17 +6,17 @@ using System.Linq;
 namespace Roguegard.CharacterCreation
 {
     [Objforming.Formable]
-    public class AppearanceBuilderList : IEnumerable<AppearanceBuilder>
+    public class AppearanceList : IEnumerable<Appearance>
     {
-        private readonly List<AppearanceBuilder> builders = new();
+        private readonly List<Appearance> builders = new();
 
-        public AppearanceBuilder this[int index] => builders[index];
+        public Appearance this[int index] => builders[index];
 
         public int Count => builders.Count;
 
         public Spanning<IReadOnlyAppearance> Span => Spanning.Get<IReadOnlyAppearance>(builders);
 
-        public bool TryGetBuilder(BoneKeyword boneName, out AppearanceBuilder builder)
+        public bool TryGetBuilder(BoneKeyword boneName, out Appearance builder)
         {
             foreach (var item in builders)
             {
@@ -30,19 +30,19 @@ namespace Roguegard.CharacterCreation
             return false;
         }
 
-        public AppearanceBuilder Add()
+        public Appearance Add()
         {
-            var builder = new AppearanceBuilder();
+            var builder = new Appearance();
             builders.Add(builder);
             return builder;
         }
 
         public void AddClones(IEnumerable<IReadOnlyAppearance> appearances)
         {
-            builders.AddRange(appearances.Select(x => new AppearanceBuilder(x)));
+            builders.AddRange(appearances.Select(x => new Appearance(x)));
         }
 
-        public bool Remove(AppearanceBuilder builder)
+        public bool Remove(Appearance builder)
         {
             return builders.Remove(builder);
         }
@@ -52,14 +52,14 @@ namespace Roguegard.CharacterCreation
             builders.Clear();
         }
 
-        public AppearanceBuilderList Clone()
+        public AppearanceList Clone()
         {
-            var clone = new AppearanceBuilderList();
+            var clone = new AppearanceList();
             clone.builders.AddRange(builders);
             return clone;
         }
 
-        public IEnumerator<AppearanceBuilder> GetEnumerator() => builders.GetEnumerator();
+        public IEnumerator<Appearance> GetEnumerator() => builders.GetEnumerator();
         IEnumerator IEnumerable.GetEnumerator() => builders.GetEnumerator();
     }
 }

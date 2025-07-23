@@ -5,14 +5,14 @@ using UnityEngine;
 
 namespace Roguegard.CharacterCreation
 {
-    [CreateAssetMenu(menuName = "Roguegard/Character Creation/Data/Location/Dungeon")]
+    [CreateAssetMenu(menuName = "Roguegard/Character Creation/Character Creation Data/Location/Dungeon")]
     [Objforming.Referable]
     public class DungeonCreationDataAsset : CharacterCreationDataAsset
     {
-        [SerializeField] private ObjectRace _race = null;
-        [SerializeField, ElementDescription("_option")] private ScriptableAppearance[] _appearances = null;
-        [SerializeField, ElementDescription("_option")] private ScriptableIntrinsic[] _intrinsics = null;
-        [SerializeField] private ScriptableStartingItemList[] _startingItemTable = null;
+        [SerializeField] private InlineRace _race = null;
+        [SerializeField, ElementDescription("_option")] private AssetAppearance[] _appearances = null;
+        [SerializeField, ElementDescription("_option")] private AssetIntrinsic[] _intrinsics = null;
+        [SerializeField] private AssetStartingItemList[] _startingItemTable = null;
 
         [System.NonSerialized] private SortedIntrinsicList sortedIntrinsics;
 
@@ -25,7 +25,7 @@ namespace Roguegard.CharacterCreation
 
         [Header("DungeonData")]
         [SerializeField] private FactionAsset _playerFaction = null;
-        [SerializeField] private ScriptField<ILevelInfoInitializer>[] _playerLevelInfos = null;
+        [SerializeField] private ScriptRef<ILevelInfoInitializer>[] _playerLevelInfos = null;
 
         [SerializeField] private DungeonLevelType _levelType = DungeonLevelType.Down;
         public DungeonLevelType LevelType => _levelType;

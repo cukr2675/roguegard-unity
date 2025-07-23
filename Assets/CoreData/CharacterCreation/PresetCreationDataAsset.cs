@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Roguegard.CharacterCreation
 {
-    [CreateAssetMenu(menuName = "Roguegard/Character Creation/Data/Preset")]
+    [CreateAssetMenu(menuName = "Roguegard/Character Creation/Character Creation Data/Preset")]
     [Objforming.IgnoreRequireRelationalComponent]
     public class PresetCreationDataAsset : CharacterCreationDataAsset
     {
@@ -17,12 +17,12 @@ namespace Roguegard.CharacterCreation
         [SerializeField] private string _caption = null;
         public override string Caption => _caption;
 
-        [SerializeField] private ScriptField<IRogueDetails> _details = null;
+        [SerializeField] private ScriptRef<IRogueDetails> _details = null;
         public override IRogueDetails Details => _details.Ref;
 
-        [SerializeField] private ScriptableRace _race = null;
-        [SerializeField, ElementDescription("_option")] private ScriptableAppearance[] _appearances = null;
-        [SerializeField, ElementDescription("_option")] private ScriptableIntrinsic[] _intrinsics = null;
+        [SerializeField] private AssetRace _race = null;
+        [SerializeField, ElementDescription("_option")] private AssetAppearance[] _appearances = null;
+        [SerializeField, ElementDescription("_option")] private AssetIntrinsic[] _intrinsics = null;
         [SerializeField] private StartingItem[] _startingItemTable = null;
 
         [System.NonSerialized] private SortedIntrinsicList sortedIntrinsics;
@@ -33,9 +33,9 @@ namespace Roguegard.CharacterCreation
         public override Spanning<IWeightedRogueObjGeneratorList> StartingItemTable => _startingItemTable;
         protected override bool HasNotInfoSet => true;
 
-        public CharacterCreationDataBuilder ToBuilder()
+        public CharacterCreationData ToBuilder()
         {
-            var builder = new CharacterCreationDataBuilder
+            var builder = new CharacterCreationData
             {
                 Name = DescriptionName,
                 ShortName = ShortName,
@@ -93,7 +93,7 @@ namespace Roguegard.CharacterCreation
         /// プリセットは初期アイテムをランダムにしない。
         /// </summary>
         [System.Serializable]
-        private class StartingItem : ScriptableStartingItem, IWeightedRogueObjGeneratorList, IEnumerable<IReadOnlyStartingItem>
+        private class StartingItem : AssetStartingItem, IWeightedRogueObjGeneratorList, IEnumerable<IReadOnlyStartingItem>
         {
             [System.NonSerialized] private StartingItem[] array;
 

@@ -7,8 +7,8 @@ using UnityEngine;
 
 namespace RoguegardUnity
 {
-    [CustomPropertyDrawer(typeof(ObjectRaceOption), true)]
-    public class ObjectRaceOptionDrawer : PropertyDrawer
+    [CustomPropertyDrawer(typeof(InlineRaceOption), true)]
+    public class InlineRaceOptionDrawer : PropertyDrawer
     {
         private static int selected;
         private static readonly string[] items = new[] { "Active Properties", "All Properties" };
@@ -101,7 +101,7 @@ namespace RoguegardUnity
 
             if (property.propertyType == SerializedPropertyType.ObjectReference && property.objectReferenceValue == null) return true;
 
-            if (property.type == typeof(ScriptField<>).Name)
+            if (property.type == typeof(ScriptRef<>).Name)
             {
                 var script = property.FindPropertyRelative("_script");
                 if (script != null && script.objectReferenceValue == null) return true;

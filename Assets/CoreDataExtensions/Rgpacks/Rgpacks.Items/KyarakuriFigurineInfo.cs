@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,7 +8,7 @@ namespace Roguegard.Rgpacks
 {
     public static class KyarakuriFigurineInfo
     {
-        public static CharacterCreationDataBuilder Get(RogueObj obj)
+        public static CharacterCreationData Get(RogueObj obj)
         {
             if (obj.TryGet<Info>(out var info))
             {
@@ -23,7 +23,7 @@ namespace Roguegard.Rgpacks
         /// <summary>
         /// 上書き不可
         /// </summary>
-        public static void SetTo(RogueObj obj, CharacterCreationDataBuilder data)
+        public static void SetTo(RogueObj obj, CharacterCreationData data)
         {
             if (!obj.TryGet<Info>(out var info))
             {
@@ -37,7 +37,7 @@ namespace Roguegard.Rgpacks
         [Objforming.Formable]
         private class Info : IRogueObjInfo
         {
-            public CharacterCreationDataBuilder data;
+            public CharacterCreationData data;
 
             public bool IsExclusedWhenSerialize => false;
 

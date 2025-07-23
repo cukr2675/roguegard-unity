@@ -3,7 +3,7 @@ using UnityEngine;
 namespace Roguegard.CharacterCreation
 {
     [System.Serializable]
-    public class RandomRoomObjTable : ScriptableStartingItemList, IWeightedRogueObjGeneratorList
+    public class RandomRoomObjTable : AssetStartingItemList, IWeightedRogueObjGeneratorList
     {
         [SerializeField] private int _minFrequency = 0;
         public int MinFrequency => _minFrequency;

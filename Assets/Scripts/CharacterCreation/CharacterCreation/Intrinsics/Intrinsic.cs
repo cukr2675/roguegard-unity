@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Roguegard.CharacterCreation
 {
     [Objforming.Formable]
-    public class IntrinsicBuilder : IReadOnlyIntrinsic
+    public class Intrinsic : IReadOnlyIntrinsic
     {
         public IIntrinsicOption Option { get; set; }
         public string OptionName { get; set; }
@@ -22,13 +22,13 @@ namespace Roguegard.CharacterCreation
         public string Caption => OptionCaption ?? Option.Caption;
         public IRogueDetails Details => OptionDetails ?? Option.Details;
         Color? IReadOnlyIntrinsic.OptionColor => OptionColor;
-        Spanning<IMemberSource> IMemberable.MemberSources => Option.MemberSources;
+        Spanning<IMemberSource> IReadOnlyMemberable.MemberSources => Option.MemberSources;
 
-        public IntrinsicBuilder()
+        public Intrinsic()
         {
         }
 
-        public IntrinsicBuilder(IReadOnlyIntrinsic intrinsic)
+        public Intrinsic(IReadOnlyIntrinsic intrinsic)
         {
             Set(intrinsic);
         }
@@ -60,7 +60,7 @@ namespace Roguegard.CharacterCreation
             return member;
         }
 
-        IReadOnlyMember IMemberable.GetMember(IMemberSource source)
+        IReadOnlyMember IReadOnlyMemberable.GetMember(IMemberSource source)
         {
             foreach (var member in members)
             {

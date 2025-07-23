@@ -9,7 +9,7 @@ namespace Roguegard.CharacterCreation
         [SerializeField] private int _baseLv = 1;
         [SerializeField] private float _baseCost = 0f;
         [SerializeField] private bool _baseCostIsUnknown = false;
-        [SerializeField] private ScriptField<IntrinsicScript> _script = null;
+        [SerializeField] private ScriptRef<IntrinsicScript> _script = null;
         protected IntrinsicScript ScriptRef => _script.Ref;
 
         public override Spanning<IMemberSource> MemberSources => _script.Ref.MemberSources;

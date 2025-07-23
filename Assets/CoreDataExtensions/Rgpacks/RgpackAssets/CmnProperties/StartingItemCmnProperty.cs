@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,11 +13,11 @@ namespace Roguegard.Rgpacks
 
         ICmnPropertySource ICmnProperty.Source => SourceInstance;
 
-        public StartingItemBuilder Value { get; set; }
+        public StartingItem Value { get; set; }
 
         public static StartingItemCmnProperty Default { get; } = new StartingItemCmnProperty()
         {
-            Value = new StartingItemBuilder()
+            Value = new StartingItem()
             {
                 Option = RoguegardSettings.CharacterCreationDatabase.StartingItemOptions[0]
             }

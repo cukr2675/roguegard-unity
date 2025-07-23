@@ -3,11 +3,11 @@ using UnityEngine;
 namespace Roguegard.CharacterCreation
 {
     [System.Serializable]
-    public class ScriptableStartingItemList : IWeightedRogueObjGeneratorList
+    public class AssetStartingItemList : IWeightedRogueObjGeneratorList
     {
-        [SerializeField, ElementDescription("_option")] private ScriptableStartingItem[] _items;
+        [SerializeField, ElementDescription("_option")] private AssetStartingItem[] _items;
 
-        public ScriptableStartingItem this[int index] => _items[index];
+        public AssetStartingItem this[int index] => _items[index];
 
         public float TotalWeight
         {

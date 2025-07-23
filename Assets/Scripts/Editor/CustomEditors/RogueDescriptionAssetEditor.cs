@@ -7,7 +7,7 @@ namespace Roguegard.CharacterCreation.Editor
     /// Project ビューにアイコン（<see cref="RogueDescriptionAsset.Icon"/>）を表示させるエディタ拡張
     /// </summary>
     [CustomEditor(typeof(RogueDescriptionAsset), true)]
-    public class RogueDescriptionDataEditor : UnityEditor.Editor
+    public class RogueDescriptionAssetEditor : UnityEditor.Editor
     {
         public override Texture2D RenderStaticPreview(string assetPath, Object[] subAssets, int width, int height)
         {

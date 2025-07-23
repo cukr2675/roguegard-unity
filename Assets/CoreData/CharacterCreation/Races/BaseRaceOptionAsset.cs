@@ -6,7 +6,7 @@ namespace Roguegard.CharacterCreation
     public abstract class BaseRaceOptionAsset : RaceOptionAsset
     {
         // Sources プロパティなどは _main ではなくこのクラスの継承によって変更させるため、 _main の型は変更不可にする。
-        [SerializeField] private ObjectRaceOption _main = null;
+        [SerializeField] private InlineRaceOption _main = null;
 
         public override string Name => _main.Name;
         public override Sprite Icon => _main.Icon;

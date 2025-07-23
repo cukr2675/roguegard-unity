@@ -187,7 +187,7 @@ namespace Roguegard
                 }
 
                 var character = arg.Arg.TargetObj;
-                var builder = new CharacterCreationDataBuilder(info.CharacterCreationData);
+                var builder = new CharacterCreationData(info.CharacterCreationData);
 
                 manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
                 manager.PushMenuScreen(nextMenu, arg.Self, arg.User, targetObj: character, other: builder);

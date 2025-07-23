@@ -12,7 +12,7 @@ namespace Roguegard.Rgpacks
 {
     public class MysteryDioramaBeApplied : BaseApplyRogueMethod
     {
-        [SerializeField] private ScriptableStartingItem _newFloor = null;
+        [SerializeField] private AssetStartingItem _newFloor = null;
 
         private Menu menu;
 
@@ -31,7 +31,7 @@ namespace Roguegard.Rgpacks
 
         private class Menu : RogueMenuScreen
         {
-            public ScriptableStartingItem _newFloor;
+            public AssetStartingItem _newFloor;
 
             private static readonly List<object> elms = new();
 
@@ -111,7 +111,7 @@ namespace Roguegard.Rgpacks
 
         private class FloorMenu : RogueMenuScreen
         {
-            public ScriptableStartingItem _newFloor;
+            public AssetStartingItem _newFloor;
 
             private readonly DialogViewTemplate<MMgr, MArg> view = new()
             {

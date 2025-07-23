@@ -2,14 +2,14 @@ using UnityEngine;
 
 namespace Roguegard.CharacterCreation
 {
-    [CreateAssetMenu(menuName = "Roguegard/Character Creation/Data/Weapon")]
+    [CreateAssetMenu(menuName = "Roguegard/Character Creation/Character Creation Data/Weapon")]
     [Objforming.Referable]
     public class WeaponCreationDataAsset : CharacterCreationDataAsset
     {
         [SerializeField] private WeaponRace _race = null;
-        [SerializeField, ElementDescription("_option")] private ScriptableAppearance[] _appearances = null;
-        [SerializeField, ElementDescription("_option")] private ScriptableIntrinsic[] _intrinsics = null;
-        [SerializeField] private ScriptableStartingItemList[] _startingItemTable = null;
+        [SerializeField, ElementDescription("_option")] private AssetAppearance[] _appearances = null;
+        [SerializeField, ElementDescription("_option")] private AssetIntrinsic[] _intrinsics = null;
+        [SerializeField] private AssetStartingItemList[] _startingItemTable = null;
 
         [System.NonSerialized] private SortedIntrinsicList sortedIntrinsics;
 

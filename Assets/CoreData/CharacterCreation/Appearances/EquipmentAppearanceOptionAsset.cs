@@ -7,7 +7,7 @@ namespace Roguegard.CharacterCreation
     /// 装備品をアイテムではなく見た目として扱うクラス。
     /// <see cref="EquipKeywordAsset.Order"/> の影響を受けないので、付与する順番に気を付ける。
     /// </summary>
-    [CreateAssetMenu(menuName = "Roguegard/Character Creation/Appearance Option/Singleton/Equipment")]
+    [CreateAssetMenu(menuName = "Roguegard/Character Creation/Appearance/Singleton/Equipment")]
     [Objforming.Referable]
     public class EquipmentAppearanceOptionAsset : AppearanceOptionAsset
     {

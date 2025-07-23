@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Roguegard.CharacterCreation
 {
     [Objforming.Formable]
-    public class AppearanceBuilder : IReadOnlyAppearance
+    public class Appearance : IReadOnlyAppearance
     {
         public IAppearanceOption Option { get; set; }
         public string OptionName { get; set; }
@@ -19,13 +19,13 @@ namespace Roguegard.CharacterCreation
         Color IRogueDescription.Color => Color;
         public string Caption => Option.Caption;
         public IRogueDetails Details => Option.Details;
-        Spanning<IMemberSource> IMemberable.MemberSources => Option.MemberSources;
+        Spanning<IMemberSource> IReadOnlyMemberable.MemberSources => Option.MemberSources;
 
-        public AppearanceBuilder()
+        public Appearance()
         {
         }
 
-        public AppearanceBuilder(IReadOnlyAppearance appearance)
+        public Appearance(IReadOnlyAppearance appearance)
         {
             Set(appearance);
         }
@@ -45,7 +45,7 @@ namespace Roguegard.CharacterCreation
             }
         }
 
-        IReadOnlyMember IMemberable.GetMember(IMemberSource source)
+        IReadOnlyMember IReadOnlyMemberable.GetMember(IMemberSource source)
         {
             foreach (var member in members)
             {
@@ -58,9 +58,9 @@ namespace Roguegard.CharacterCreation
             }
         }
 
-        public AppearanceBuilder Clone()
+        public Appearance Clone()
         {
-            return new AppearanceBuilder(this);
+            return new Appearance(this);
         }
     }
 }

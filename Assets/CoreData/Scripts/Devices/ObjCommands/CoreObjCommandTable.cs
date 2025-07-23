@@ -9,17 +9,17 @@ namespace Roguegard
     {
         [SerializeField] private Item[] _items = null;
 
-        [SerializeField] private ScriptField<IObjCommand>[] _equipOptions;
-        [SerializeField] private ScriptField<IObjCommand>[] _unequipOptions;
+        [SerializeField] private ScriptRef<IObjCommand>[] _equipOptions;
+        [SerializeField] private ScriptRef<IObjCommand>[] _unequipOptions;
 
-        [SerializeField] private ScriptField<IObjCommand>[] _rideOptions;
-        [SerializeField] private ScriptField<IObjCommand>[] _unrideOptions;
+        [SerializeField] private ScriptRef<IObjCommand>[] _rideOptions;
+        [SerializeField] private ScriptRef<IObjCommand>[] _unrideOptions;
 
-        [SerializeField] private ScriptField<IObjCommand>[] _itemsOptions;
-        [SerializeField] private ScriptField<IObjCommand>[] _groundOptions;
+        [SerializeField] private ScriptRef<IObjCommand>[] _itemsOptions;
+        [SerializeField] private ScriptRef<IObjCommand>[] _groundOptions;
 
-        [SerializeField] private ScriptField<IObjCommand> _shotOption;
-        [SerializeField] private ScriptField<IObjCommand> _throwOption;
+        [SerializeField] private ScriptRef<IObjCommand> _shotOption;
+        [SerializeField] private ScriptRef<IObjCommand> _throwOption;
 
         private Dictionary<IKeyword, IObjCommand[]> optionTable;
 
@@ -115,7 +115,7 @@ namespace Roguegard
                 AddRange(_itemsOptions);
             }
 
-            void AddRange(ScriptField<IObjCommand>[] array)
+            void AddRange(ScriptRef<IObjCommand>[] array)
             {
                 foreach (var item in array)
                 {
@@ -130,7 +130,7 @@ namespace Roguegard
             [SerializeField] private KeywordAsset _keyword;
             public KeywordAsset Keyword => _keyword;
 
-            [SerializeField] private ScriptField<IObjCommand>[] _commands;
+            [SerializeField] private ScriptRef<IObjCommand>[] _commands;
 
             public IObjCommand[] GetCommands() => _commands.Select(x => x.Ref).ToArray();
         }

@@ -5,11 +5,11 @@ using System.Linq;
 namespace Roguegard.CharacterCreation
 {
     [Objforming.Formable]
-    public class StartingItemBuilderList : IWeightedRogueObjGeneratorList, IEnumerable<StartingItemBuilder>
+    public class StartingItemList : IWeightedRogueObjGeneratorList, IEnumerable<StartingItem>
     {
-        private readonly List<StartingItemBuilder> builders = new();
+        private readonly List<StartingItem> builders = new();
 
-        public StartingItemBuilder this[int index] => builders[index];
+        public StartingItem this[int index] => builders[index];
 
         public int Count => builders.Count;
 
@@ -31,24 +31,24 @@ namespace Roguegard.CharacterCreation
         int IWeightedRogueObjGeneratorList.MinFrequency => 1;
         int IWeightedRogueObjGeneratorList.MaxFrequency => 1;
 
-        public StartingItemBuilder Add()
+        public StartingItem Add()
         {
-            var builder = new StartingItemBuilder();
+            var builder = new StartingItem();
             builders.Add(builder);
             return builder;
         }
 
         public void AddClones(IEnumerable<IReadOnlyStartingItem> startingItems)
         {
-            builders.AddRange(startingItems.Select(x => new StartingItemBuilder(x)));
+            builders.AddRange(startingItems.Select(x => new StartingItem(x)));
         }
 
-        public bool Remove(StartingItemBuilder builder)
+        public bool Remove(StartingItem builder)
         {
             return builders.Remove(builder);
         }
 
-        public IEnumerator<StartingItemBuilder> GetEnumerator() => builders.GetEnumerator();
+        public IEnumerator<StartingItem> GetEnumerator() => builders.GetEnumerator();
         IEnumerator IEnumerable.GetEnumerator() => builders.GetEnumerator();
     }
 }

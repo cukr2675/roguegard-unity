@@ -34,7 +34,7 @@ namespace Roguegard
 
         private static void Save(MMgr manager, MArg arg)
         {
-            if (arg.Arg.Other is CharacterCreationDataBuilder builder)
+            if (arg.Arg.Other is CharacterCreationData builder)
             {
                 // キャラクリ画面から戻ったとき、そのキャラを更新する
                 var character = arg.Arg.TargetObj;

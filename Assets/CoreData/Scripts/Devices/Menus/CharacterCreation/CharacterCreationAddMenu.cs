@@ -12,7 +12,7 @@ namespace Roguegard.Device
         private readonly List<object> elms;
         private readonly ScrollViewTemplate<object, MMgr, MArg> view;
 
-        private CharacterCreationDataBuilder builder;
+        private CharacterCreationData builder;
 
         public CharacterCreationAddMenu(ICharacterCreationDatabase database)
         {
@@ -24,7 +24,7 @@ namespace Roguegard.Device
             };
         }
 
-        public void Set(CharacterCreationDataBuilder builder)
+        public void Set(CharacterCreationData builder)
         {
             this.builder = builder;
         }
@@ -41,17 +41,17 @@ namespace Roguegard.Device
                 .OnClick((element, manager, arg) =>
                 {
                     var builderType = (System.Type)arg.Arg.Other;
-                    if (builderType == typeof(AppearanceBuilder))
+                    if (builderType == typeof(Appearance))
                     {
                         var appearanceBuilder = builder.Appearances.Add();
                         appearanceBuilder.Option = (IAppearanceOption)element;
                     }
-                    else if (builderType == typeof(IntrinsicBuilder))
+                    else if (builderType == typeof(Intrinsic))
                     {
                         var intrinsicBuilder = builder.Intrinsics.Add();
                         intrinsicBuilder.Option = (IIntrinsicOption)element;
                     }
-                    else if (builderType == typeof(StartingItemBuilder))
+                    else if (builderType == typeof(StartingItem))
                     {
                         var startingItemBuilder = builder.StartingItemTable.Add().Add();
                         startingItemBuilder.Option = (IStartingItemOption)element;
@@ -67,14 +67,14 @@ namespace Roguegard.Device
 
         public static void AddOptionsTo(List<object> elms, RogueObj player, object builder, ICharacterCreationDatabase database)
         {
-            if (builder is RaceBuilder)
+            if (builder is Race)
             {
                 foreach (var option in database.RaceOptions)
                 {
                     elms.Add(option);
                 }
             }
-            else if (builder is AppearanceBuilder appearanceBuilder)
+            else if (builder is Appearance appearanceBuilder)
             {
                 foreach (var option in database.AppearanceOptions)
                 {
@@ -84,14 +84,14 @@ namespace Roguegard.Device
                     }
                 }
             }
-            else if (builder is IntrinsicBuilder)
+            else if (builder is Intrinsic)
             {
                 foreach (var option in database.IntrinsicOptions)
                 {
                     elms.Add(option);
                 }
             }
-            else if (builder is StartingItemBuilder || builder is SingleItemMember)
+            else if (builder is StartingItem || builder is SingleItemMember)
             {
                 if (player != null)
                 {
@@ -131,14 +131,14 @@ namespace Roguegard.Device
 
         public static void AddOptionsTo(List<object> elms, RogueObj player, System.Type builderType, ICharacterCreationDatabase database)
         {
-            if (builderType == typeof(RaceBuilder))
+            if (builderType == typeof(Race))
             {
                 foreach (var option in database.AppearanceOptions)
                 {
                     elms.Add(option);
                 }
             }
-            else if (builderType == typeof(AppearanceBuilder))
+            else if (builderType == typeof(Appearance))
             {
                 foreach (var option in database.AppearanceOptions)
                 {
@@ -148,14 +148,14 @@ namespace Roguegard.Device
                     }
                 }
             }
-            else if (builderType == typeof(IntrinsicBuilder))
+            else if (builderType == typeof(Intrinsic))
             {
                 foreach (var option in database.IntrinsicOptions)
                 {
                     elms.Add(option);
                 }
             }
-            else if (builderType == typeof(StartingItemBuilder) || builderType == typeof(SingleItemMember))
+            else if (builderType == typeof(StartingItem) || builderType == typeof(SingleItemMember))
             {
                 foreach (var item in player.Space.Objs)
                 {

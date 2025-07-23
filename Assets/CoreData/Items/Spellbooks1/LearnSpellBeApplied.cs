@@ -4,7 +4,7 @@ namespace Roguegard
 {
     public class LearnSpellBeApplied : BaseApplyRogueMethod
     {
-        [SerializeField] private ScriptField<ISkill> _skill = null;
+        [SerializeField] private ScriptRef<ISkill> _skill = null;
 
         private Closer closer;
 

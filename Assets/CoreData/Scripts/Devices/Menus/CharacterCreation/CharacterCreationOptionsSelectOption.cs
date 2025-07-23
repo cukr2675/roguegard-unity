@@ -22,28 +22,28 @@ namespace Roguegard.Device
             return this;
         }
 
-        public CharacterCreationOptionsSelectOption Set(RaceBuilder builder) => SetInner(builder);
-        public CharacterCreationOptionsSelectOption Set(AppearanceBuilder builder) => SetInner(builder);
-        public CharacterCreationOptionsSelectOption Set(IntrinsicBuilder builder) => SetInner(builder);
-        public CharacterCreationOptionsSelectOption Set(StartingItemBuilder builder) => SetInner(builder);
+        public CharacterCreationOptionsSelectOption Set(Race builder) => SetInner(builder);
+        public CharacterCreationOptionsSelectOption Set(Appearance builder) => SetInner(builder);
+        public CharacterCreationOptionsSelectOption Set(Intrinsic builder) => SetInner(builder);
+        public CharacterCreationOptionsSelectOption Set(StartingItem builder) => SetInner(builder);
         public CharacterCreationOptionsSelectOption Set(SingleItemMember builder) => SetInner(builder);
         public CharacterCreationOptionsSelectOption Set(AlphabetTypeMember builder) => SetInner(builder);
 
         string ISelectOption.GetName(IListMenuManager manager, IListMenuArg arg)
         {
-            if (builder is RaceBuilder raceBuilder)
+            if (builder is Race raceBuilder)
             {
                 return raceBuilder.Option.Name;
             }
-            else if (builder is AppearanceBuilder appearanceBuilder)
+            else if (builder is Appearance appearanceBuilder)
             {
                 return appearanceBuilder.Option.Name;
             }
-            else if (builder is IntrinsicBuilder intrinsicBuilder)
+            else if (builder is Intrinsic intrinsicBuilder)
             {
                 return intrinsicBuilder.Option.Name;
             }
-            else if (builder is StartingItemBuilder startingItemBuilder)
+            else if (builder is StartingItem startingItemBuilder)
             {
                 return startingItemBuilder.Option.Name;
             }
@@ -103,19 +103,19 @@ namespace Roguegard.Device
 
                     .OnClick((element, manager, arg) =>
                     {
-                        if (arg.Arg.Other is RaceBuilder raceBuilder)
+                        if (arg.Arg.Other is Race raceBuilder)
                         {
                             raceBuilder.Option = (IRaceOption)element;
                         }
-                        else if (arg.Arg.Other is AppearanceBuilder appearanceBuilder)
+                        else if (arg.Arg.Other is Appearance appearanceBuilder)
                         {
                             appearanceBuilder.Option = (IAppearanceOption)element;
                         }
-                        else if (arg.Arg.Other is IntrinsicBuilder intrinsicBuilder)
+                        else if (arg.Arg.Other is Intrinsic intrinsicBuilder)
                         {
                             intrinsicBuilder.Option = (IIntrinsicOption)element;
                         }
-                        else if (arg.Arg.Other is StartingItemBuilder startingItemBuilder)
+                        else if (arg.Arg.Other is StartingItem startingItemBuilder)
                         {
                             CharacterCreationAddMenu.ReceiveStartingItemOptionObj(startingItemBuilder.Option, arg.Self);
                             startingItemBuilder.Option = (IStartingItemOption)element;

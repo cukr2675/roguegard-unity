@@ -6,9 +6,9 @@ namespace Roguegard.CharacterCreation
 {
     public class VehicleOpen : ReferableScript, IOpenEffect
     {
-        [SerializeField] private ScriptField<IApplyRogueMethod> _beRidden;
-        [SerializeField] private ScriptField<IApplyRogueMethod> _beUnridden;
-        [SerializeField] private ScriptField<IEquippedEffectSource>[] _equippedEffectSources;
+        [SerializeField] private ScriptRef<IApplyRogueMethod> _beRidden;
+        [SerializeField] private ScriptRef<IApplyRogueMethod> _beUnridden;
+        [SerializeField] private ScriptRef<IEquippedEffectSource>[] _equippedEffectSources;
 
         private VehicleOpen() { }
 

@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Roguegard.CharacterCreation
 {
-    public interface IReadOnlyStartingItem : IRogueDescription, IMemberable
+    public interface IReadOnlyStartingItem : IRogueDescription, IReadOnlyMemberable
     {
         IStartingItemOption Option { get; }
         string OptionName { get; }

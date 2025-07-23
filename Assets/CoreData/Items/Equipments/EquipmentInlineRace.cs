@@ -6,7 +6,7 @@ namespace Roguegard.CharacterCreation
 {
     [System.Serializable]
     [Objforming.IgnoreRequireRelationalComponent]
-    public class EquipmentRace : ObjectRace
+    public class EquipmentInlineRace : InlineRace
     {
         [Header("EquipmentRace")]
 
@@ -25,15 +25,15 @@ namespace Roguegard.CharacterCreation
 
         [SerializeField, EnabledBy(nameof(_overridesBoneSpriteEffectOrder))] private float _boneSpriteEffectOrder;
 
-        [SerializeField] private ScriptField<IApplyRogueMethod> _beEquipped;
+        [SerializeField] private ScriptRef<IApplyRogueMethod> _beEquipped;
 
-        [SerializeField] private ScriptField<IChangeEffectRogueMethod> _beUnequipped;
+        [SerializeField] private ScriptRef<IChangeEffectRogueMethod> _beUnequipped;
 
-        [SerializeField] private ScriptField<IEquippedEffectSource>[] _equippedEffectSources;
+        [SerializeField] private ScriptRef<IEquippedEffectSource>[] _equippedEffectSources;
 
         public override IEquipmentInfo GetEquipmentInfo(RogueObj self, IRaceOption raceOption, ICharacterCreationData characterCreationData)
         {
-            var info = new EquipmentInfo<EquipmentRace>(this, self);
+            var info = new EquipmentInfo<EquipmentInlineRace>(this, self);
             return info;
         }
 
@@ -57,7 +57,7 @@ namespace Roguegard.CharacterCreation
         }
 
         protected class EquipmentInfo<T> : BaseEquipmentInfo, IBoneSpriteEffect
-            where T : EquipmentRace
+            where T : EquipmentInlineRace
         {
             public override Spanning<IKeyword> EquipParts => Data._isCosmetic ? Spanning<IKeyword>.Empty : Data._equipParts;
             public override bool CanStackWhileEquipped => Data._canStackWhileEquipped;

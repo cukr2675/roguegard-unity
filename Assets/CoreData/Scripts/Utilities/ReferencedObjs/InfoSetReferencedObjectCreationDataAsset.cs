@@ -2,9 +2,9 @@ using UnityEngine;
 
 namespace Roguegard.CharacterCreation
 {
-    [CreateAssetMenu(menuName = "Roguegard/Character Creation/Data/Info Set Referenced Item")]
+    [CreateAssetMenu(menuName = "Roguegard/Character Creation/Character Creation Data/Info Set Referenced Object")]
     [Objforming.Referable]
-    public class InfoSetReferencedItemCreationDataAsset : ItemCreationDataAsset
+    public class InfoSetReferencedObjectCreationDataAsset : ObjectCreationDataAsset
     {
         public override Spanning<IMemberSource> StartingItemOptionMemberSources => _startingItemOptionMemberSources;
         private static readonly IMemberSource[] _startingItemOptionMemberSources = new IMemberSource[] { SingleItemMember.SourceInstance };

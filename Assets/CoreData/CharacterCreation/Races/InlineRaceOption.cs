@@ -5,7 +5,7 @@ namespace Roguegard.CharacterCreation
 {
     [System.Serializable]
     [Objforming.IgnoreRequireRelationalComponent]
-    public class ObjectRaceOption : IRaceOption
+    public class InlineRaceOption : IRaceOption
     {
         [SerializeField] private string _name;
         public string Name => _name;
@@ -19,7 +19,7 @@ namespace Roguegard.CharacterCreation
         [SerializeField] private string _caption;
         public string Caption => _caption;
 
-        [SerializeField] private ScriptField<IRogueDetails> _details;
+        [SerializeField] private ScriptRef<IRogueDetails> _details;
         public IRogueDetails Details => _details.Ref;
 
 
@@ -77,71 +77,71 @@ namespace Roguegard.CharacterCreation
         [SerializeField] private RogueMaterialAsset _material;
         public IRogueMaterial Material => _material ? _material : RoguegardSettings.DefaultRaceOption.Material;
 
-        [SerializeField] private ScriptableStartingItemList[] _lootTable;
+        [SerializeField] private AssetStartingItemList[] _lootTable;
         public Spanning<IWeightedRogueObjGeneratorList> LootTable => _lootTable;
 
 
 
         [Space]
-        [SerializeField] private ScriptField<IActiveRogueMethod> _walk;
+        [SerializeField] private ScriptRef<IActiveRogueMethod> _walk;
         public virtual IActiveRogueMethod Walk => _walk.Ref ?? RoguegardSettings.DefaultRaceOption.Walk;
 
-        [SerializeField] private ScriptField<IActiveRogueMethod> _wait;
+        [SerializeField] private ScriptRef<IActiveRogueMethod> _wait;
         public virtual IActiveRogueMethod Wait => _wait.Ref ?? RoguegardSettings.DefaultRaceOption.Wait;
 
-        [SerializeField] private ScriptField<ISkill> _attack;
+        [SerializeField] private ScriptRef<ISkill> _attack;
         public virtual ISkill Attack => _attack.Ref ?? RoguegardSettings.DefaultRaceOption.Attack;
 
-        [SerializeField] private ScriptField<ISkill> _throw;
+        [SerializeField] private ScriptRef<ISkill> _throw;
         public virtual ISkill Throw => _throw.Ref ?? RoguegardSettings.DefaultRaceOption.Throw;
 
-        [SerializeField] private ScriptField<IActiveRogueMethod> _pickUp;
+        [SerializeField] private ScriptRef<IActiveRogueMethod> _pickUp;
         public virtual IActiveRogueMethod PickUp => _pickUp.Ref ?? RoguegardSettings.DefaultRaceOption.PickUp;
 
-        [SerializeField] private ScriptField<IActiveRogueMethod> _put;
+        [SerializeField] private ScriptRef<IActiveRogueMethod> _put;
         public virtual IActiveRogueMethod Put => _put.Ref ?? RoguegardSettings.DefaultRaceOption.Put;
 
-        [SerializeField] private ScriptField<IEatActiveRogueMethod> _eat;
+        [SerializeField] private ScriptRef<IEatActiveRogueMethod> _eat;
         public virtual IEatActiveRogueMethod Eat => _eat.Ref ?? RoguegardSettings.DefaultRaceOption.Eat;
 
 
 
         [Space]
-        [SerializeField] private ScriptField<IAffectRogueMethod> _hit;
+        [SerializeField] private ScriptRef<IAffectRogueMethod> _hit;
         public virtual IAffectRogueMethod Hit => _hit.Ref ?? RoguegardSettings.DefaultRaceOption.Hit;
 
-        [SerializeField] private ScriptField<IAffectRogueMethod> _beDefeated;
+        [SerializeField] private ScriptRef<IAffectRogueMethod> _beDefeated;
         public virtual IAffectRogueMethod BeDefeated => _beDefeated.Ref ?? RoguegardSettings.DefaultRaceOption.BeDefeated;
 
-        [SerializeField] private ScriptField<IChangeStateRogueMethod> _locate;
+        [SerializeField] private ScriptRef<IChangeStateRogueMethod> _locate;
         public virtual IChangeStateRogueMethod Locate => _locate.Ref ?? RoguegardSettings.DefaultRaceOption.Locate;
 
-        [SerializeField] private ScriptField<IChangeStateRogueMethod> _polymorph;
+        [SerializeField] private ScriptRef<IChangeStateRogueMethod> _polymorph;
         public virtual IChangeStateRogueMethod Polymorph => _polymorph.Ref ?? RoguegardSettings.DefaultRaceOption.Polymorph;
 
 
 
         [Space]
-        [SerializeField] private ScriptField<IApplyRogueMethod> _beApplied;
+        [SerializeField] private ScriptRef<IApplyRogueMethod> _beApplied;
         public virtual IApplyRogueMethod BeApplied => _beApplied.Ref ?? RoguegardSettings.DefaultRaceOption.BeApplied;
 
-        [SerializeField] private ScriptField<IApplyRogueMethod> _beThrown;
+        [SerializeField] private ScriptRef<IApplyRogueMethod> _beThrown;
         public virtual IApplyRogueMethod BeThrown => _beThrown.Ref ?? RoguegardSettings.DefaultRaceOption.BeThrown;
 
-        [SerializeField] private ScriptField<IApplyRogueMethod> _beEaten;
+        [SerializeField] private ScriptRef<IApplyRogueMethod> _beEaten;
         public virtual IApplyRogueMethod BeEaten => _beEaten.Ref ?? RoguegardSettings.DefaultRaceOption.BeEaten;
 
-        [SerializeField] private ScriptField<IApplyRogueMethod> _beSteppedOnAsTile;
+        [SerializeField] private ScriptRef<IApplyRogueMethod> _beSteppedOnAsTile;
         public virtual IApplyRogueMethod BeSteppedOnAsTile => _beSteppedOnAsTile.Ref ?? RoguegardSettings.DefaultRaceOption.BeSteppedOnAsTile;
 
 
 
         [Space]
         [SerializeField] private EquipmentStateAsset _equipmentState;
-        [SerializeField] private ScriptField<IRaceWeight> _weight;
-        [SerializeField] private ScriptField<IRaceSprite> _sprite;
-        [SerializeField] private ScriptField<IOpenEffect>[] _openEffects;
-        public Spanning<ScriptField<IOpenEffect>> OpenEffectSources => _openEffects;
+        [SerializeField] private ScriptRef<IRaceWeight> _weight;
+        [SerializeField] private ScriptRef<IRaceSprite> _sprite;
+        [SerializeField] private ScriptRef<IOpenEffect>[] _openEffects;
+        public Spanning<ScriptRef<IOpenEffect>> OpenEffectSources => _openEffects;
 
         public virtual IRaceOption Open(
             RogueObj self, MainInfoSetType infoSetType, bool polymorph2Base, IRaceOption raceOption, ICharacterCreationData characterCreationData)

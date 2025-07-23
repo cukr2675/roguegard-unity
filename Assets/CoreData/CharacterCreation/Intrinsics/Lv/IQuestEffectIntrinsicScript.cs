@@ -2,7 +2,7 @@ namespace Roguegard.CharacterCreation
 {
     public interface IQuestEffectIntrinsicScript
     {
-        IntrinsicBuilder GenerateEffect(
+        Intrinsic GenerateEffect(
             QuestEffectIntrinsicOptionAsset parent, DungeonCreationDataAsset dungeon, ICharacterCreationDatabase database, IRogueRandom random);
     }
 }

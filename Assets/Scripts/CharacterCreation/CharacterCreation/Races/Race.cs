@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Roguegard.CharacterCreation
 {
     [Objforming.Formable]
-    public class RaceBuilder : IReadOnlyRace
+    public class Race : IReadOnlyRace
     {
         public IRaceOption Option { get; set; }
         public string OptionName { get; set; }
@@ -24,13 +24,13 @@ namespace Roguegard.CharacterCreation
         public IRogueDetails Details => OptionDetails ?? Option.Details;
         Color IReadOnlyRace.BodyColor => BodyColor;
         int IReadOnlyRace.Lv => 1;
-        Spanning<IMemberSource> IMemberable.MemberSources => Option.MemberSources;
+        Spanning<IMemberSource> IReadOnlyMemberable.MemberSources => Option.MemberSources;
 
-        public RaceBuilder()
+        public Race()
         {
         }
 
-        public RaceBuilder(IReadOnlyRace race)
+        public Race(IReadOnlyRace race)
         {
             Set(race);
         }
@@ -53,7 +53,7 @@ namespace Roguegard.CharacterCreation
             }
         }
 
-        IReadOnlyMember IMemberable.GetMember(IMemberSource source)
+        IReadOnlyMember IReadOnlyMemberable.GetMember(IMemberSource source)
         {
             foreach (var member in members)
             {

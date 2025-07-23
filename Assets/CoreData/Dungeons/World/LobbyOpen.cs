@@ -5,7 +5,7 @@ namespace Roguegard
 {
     public class LobbyOpen : ReferableScript, IOpenEffect
     {
-        [SerializeField] private ScriptableStartingItem _lobbyMerchant = null;
+        [SerializeField] private AssetStartingItem _lobbyMerchant = null;
 
         private Updater updater;
 

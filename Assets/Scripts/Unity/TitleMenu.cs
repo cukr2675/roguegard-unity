@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -206,7 +206,7 @@ namespace RoguegardUnity
                     ?
                     .OnFadeOutCompleted((manager, arg) =>
                     {
-                        if (arg.Arg.Other is CharacterCreationDataBuilder builder)
+                        if (arg.Arg.Other is CharacterCreationData builder)
                         {
                             // クリエイトしたキャラクターで開始
                             var loadSceneOperation = Addressables.LoadSceneAsync(parent._nextSceneAddress, activateOnLoad: true);

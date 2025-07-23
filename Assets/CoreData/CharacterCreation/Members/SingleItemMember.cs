@@ -19,7 +19,7 @@ namespace Roguegard.CharacterCreation
 
         private SingleItemMember() { }
 
-        public static IReadOnlySingleItemMember GetMember(IMemberable intrinsic)
+        public static IReadOnlySingleItemMember GetMember(IReadOnlyMemberable intrinsic)
         {
             return (IReadOnlySingleItemMember)intrinsic.GetMember(SourceInstance);
         }

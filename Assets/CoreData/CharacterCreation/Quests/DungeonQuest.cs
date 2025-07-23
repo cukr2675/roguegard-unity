@@ -16,20 +16,20 @@ namespace Roguegard.CharacterCreation
         public DungeonCreationDataAsset Dungeon { get; }
         public int Seed { get; }
 
-        private readonly IntrinsicBuilderList _objectives;
+        private readonly IntrinsicList _objectives;
         public Spanning<IReadOnlyIntrinsic> Objectives => _objectives.Span;
 
-        private readonly IntrinsicBuilderList _environments;
+        private readonly IntrinsicList _environments;
         public Spanning<IReadOnlyIntrinsic> Environments => _environments.Span;
 
         [System.NonSerialized] private ISortedIntrinsicList _sortedEffects;
         private ISortedIntrinsicList SortedEffects
             => _sortedEffects ??= new SortedIntrinsicList(_objectives.Concat(_environments), defaultCharacterCreationData);
 
-        private readonly StartingItemBuilderTable _lootTable;
+        private readonly StartingItemTable _lootTable;
         public Spanning<IWeightedRogueObjGeneratorList> LootTable => _lootTable.Span;
 
-        private static readonly ICharacterCreationData defaultCharacterCreationData = new CharacterCreationDataBuilder();
+        private static readonly ICharacterCreationData defaultCharacterCreationData = new CharacterCreationData();
 
         private DungeonQuest()
         {
@@ -43,11 +43,11 @@ namespace Roguegard.CharacterCreation
 
             Dungeon = dungeon;
             Seed = seed;
-            _objectives = new IntrinsicBuilderList();
+            _objectives = new IntrinsicList();
             _objectives.AddClones(objectives);
-            _environments = new IntrinsicBuilderList();
+            _environments = new IntrinsicList();
             _environments.AddClones(environments);
-            _lootTable = new StartingItemBuilderTable();
+            _lootTable = new StartingItemTable();
             _lootTable.AddClones(lootTable);
         }
 

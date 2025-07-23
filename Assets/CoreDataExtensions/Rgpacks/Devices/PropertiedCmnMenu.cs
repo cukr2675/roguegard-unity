@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -53,7 +53,7 @@ namespace Roguegard.Device
                         else if (pair.Value is StartingItemCmnProperty startingItemCmnProperty)
                         {
                             characterCreationOptionMenu ??= new CharacterCreationOptionMenu(RoguegardSettings.CharacterCreationDatabase);
-                            startingItemCmnProperty.Value ??= new StartingItemBuilder() { Option = RoguegardSettings.CharacterCreationDatabase.StartingItemOptions[0] };
+                            startingItemCmnProperty.Value ??= new StartingItem() { Option = RoguegardSettings.CharacterCreationDatabase.StartingItemOptions[0] };
                             elms.Add(
                                 SelectOption.Create<MMgr, MArg>(
                                     pair.Key,
@@ -83,7 +83,7 @@ namespace Roguegard.Device
         private class StartingItemTableMenu : RogueMenuScreen
         {
             private readonly List<object> elms = new();
-            private readonly CharacterCreationDataBuilder builder = new();
+            private readonly CharacterCreationData builder = new();
             private readonly CharacterCreationAddMenu characterCreationAddMenu = new(RoguegardSettings.CharacterCreationDatabase);
             private readonly CharacterCreationOptionMenu characterCreationOptionMenu = new(RoguegardSettings.CharacterCreationDatabase);
 
@@ -122,17 +122,17 @@ namespace Roguegard.Device
                     ?
                     .Tail(SelectOption.Create<MMgr, MArg>(
                         "+ アイテムを追加",
-                        (manager, arg) => manager.PushMenuScreen(characterCreationAddMenu, other: typeof(StartingItemBuilder))))
+                        (manager, arg) => manager.PushMenuScreen(characterCreationAddMenu, other: typeof(StartingItem))))
 
                     .NameFrom((element, manager, arg) =>
                     {
-                        if (element is StartingItemBuilder startingItemBuilder) return startingItemBuilder.Name;
+                        if (element is StartingItem startingItemBuilder) return startingItemBuilder.Name;
                         else throw new RogueException();
                     })
 
                     .OnClick((element, manager, arg) =>
                     {
-                        if (element is StartingItemBuilder startingItemBuilder) { manager.PushMenuScreen(characterCreationOptionMenu, other: startingItemBuilder); }
+                        if (element is StartingItem startingItemBuilder) { manager.PushMenuScreen(characterCreationOptionMenu, other: startingItemBuilder); }
                         else throw new RogueException();
                     })
 

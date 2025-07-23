@@ -5,7 +5,7 @@ namespace Roguegard
 {
     public class ScrollOfStinkingCloudBeApplied : ConsumeApplyRogueMethod
     {
-        [SerializeField] private ScriptableStartingItem _stinkingCloud = null;
+        [SerializeField] private AssetStartingItem _stinkingCloud = null;
 
         public override IRogueMethodTarget Target => ForEnemyRogueMethodTarget.Instance;
         public override IRogueMethodRange Range => InTheRoomRogueMethodRange.Instance;

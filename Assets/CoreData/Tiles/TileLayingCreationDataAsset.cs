@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Roguegard.CharacterCreation
 {
-    [CreateAssetMenu(menuName = "Roguegard/Character Creation/Data/Singleton/Tile Laying")]
+    [CreateAssetMenu(menuName = "Roguegard/Character Creation/Character Creation Data/Singleton/Tile Laying")]
     [Objforming.IgnoreRequireRelationalComponent]
     public class TileLayingCreationDataAsset : CharacterCreationDataAsset
     {

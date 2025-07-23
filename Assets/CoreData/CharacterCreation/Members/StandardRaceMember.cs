@@ -20,7 +20,7 @@ namespace Roguegard.CharacterCreation
 
         private StandardRaceMember() { }
 
-        public static IReadOnlyStandardRaceMember GetMember(IMemberable race)
+        public static IReadOnlyStandardRaceMember GetMember(IReadOnlyMemberable race)
         {
             return (IReadOnlyStandardRaceMember)race.GetMember(SourceInstance);
         }
