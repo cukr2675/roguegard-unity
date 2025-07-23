@@ -3,7 +3,7 @@ using UnityEngine;
 namespace Roguegard.CharacterCreation
 {
     [Objforming.RequireRelationalComponent]
-    public interface IStartingItemOption : IRogueDescription
+    public interface IStartingItemOption : IRogueDescribable
     {
         IMainInfoSet InfoSet { get; }
         int Lv { get; }

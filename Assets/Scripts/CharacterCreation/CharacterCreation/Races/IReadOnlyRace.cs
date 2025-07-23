@@ -2,13 +2,13 @@ using UnityEngine;
 
 namespace Roguegard.CharacterCreation
 {
-    public interface IReadOnlyRace : IRogueDescription, IReadOnlyMemberable
+    public interface IReadOnlyRace : IRogueDescribable, IReadOnlyMemberable
     {
         IRaceOption Option { get; }
-        string OptionName { get; }
+        string CustomName { get; }
         Color BodyColor { get; }
-        string OptionCaption { get; }
-        IRogueDetails OptionDetails { get; }
+        string CustomCaption { get; }
+        IRogueDetails CustomDetails { get; }
         int Lv { get; }
         IRogueGender Gender { get; }
         string HpName { get; }

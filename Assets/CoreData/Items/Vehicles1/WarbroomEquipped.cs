@@ -21,11 +21,11 @@ namespace Roguegard.CharacterCreation
 
         private class Effect : BaseEquippedEffect, IStatusEffect, IValueEffect, IRogueMethodPassiveAspect, ISpriteMotionEffect
         {
-            string IRogueDescription.Name => "飛行";
-            Sprite IRogueDescription.Icon => null;
-            Color IRogueDescription.Color => Color.white;
-            string IRogueDescription.Caption => null;
-            IRogueDetails IRogueDescription.Details => null;
+            string IRogueDescribable.Name => "飛行";
+            Sprite IRogueDescribable.Icon => null;
+            Color IRogueDescribable.Color => Color.white;
+            string IRogueDescribable.Caption => null;
+            IRogueDetails IRogueDescribable.Details => null;
             ISpriteMotion IStatusEffect.HeadIcon => null;
 
             public IKeyword EffectCategory => StdKw.Vehicle;

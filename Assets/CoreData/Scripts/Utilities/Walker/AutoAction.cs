@@ -69,13 +69,13 @@ namespace Roguegard
             RoguegardSettings.ObjCommandTable.GetCommands(self, item, options);
             foreach (var option in options)
             {
-                var skillDescription = option.GetSkillDescription(self, item);
-                if (skillDescription == null) continue;
+                var skillDescribable = option.GetSkillDescribable(self, item);
+                if (skillDescribable == null) continue;
 
-                using var predicator = skillDescription.Target?.GetPredicator(self, 0f, item);
+                using var predicator = skillDescribable.Target?.GetPredicator(self, 0f, item);
                 if (predicator == null) continue;
 
-                skillDescription.Range?.Predicate(predicator, self, 0f, item, visibleRadius, room);
+                skillDescribable.Range?.Predicate(predicator, self, 0f, item, visibleRadius, room);
                 predicator.EndPredicate();
                 if (predicator.Positions.Length >= 1)
                 {
@@ -115,14 +115,14 @@ namespace Roguegard
             RoguegardSettings.ObjCommandTable.GetCommands(self, item, options);
             foreach (var option in options)
             {
-                var skillDescription = option.GetSkillDescription(self, item);
-                if (skillDescription == null) continue;
+                var skillDescribable = option.GetSkillDescribable(self, item);
+                if (skillDescribable == null) continue;
 
-                var target = GetTarget(skillDescription.Target);
+                var target = GetTarget(skillDescribable.Target);
                 using var predicator = target?.GetPredicator(self, 0f, item);
                 if (predicator == null) continue;
 
-                skillDescription.Range?.Predicate(predicator, self, 0f, item, visibleRadius, room);
+                skillDescribable.Range?.Predicate(predicator, self, 0f, item, visibleRadius, room);
                 predicator.EndPredicate();
                 if (predicator.Positions.Length >= 1)
                 {

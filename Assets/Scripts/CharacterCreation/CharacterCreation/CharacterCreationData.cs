@@ -25,9 +25,9 @@ namespace Roguegard.CharacterCreation
         [System.NonSerialized] private SortedIntrinsicList sortedIntrinsics;
         [System.NonSerialized] private GrowingInfoSetTable growingInfoSets;
 
-        Sprite IRogueDescription.Icon => Race.Option.Icon;
-        Color IRogueDescription.Color => Race.Option.Color;
-        string IRogueDescription.Caption => Race.Caption;
+        Sprite IRogueDescribable.Icon => Race.Option.Icon;
+        Color IRogueDescribable.Color => Race.Option.Color;
+        string IRogueDescribable.Caption => Race.Caption;
 
         IReadOnlyRace ICharacterCreationData.Race => Race;
         Spanning<IReadOnlyAppearance> ICharacterCreationData.Appearances => Appearances.Span;

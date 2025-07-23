@@ -1,7 +1,7 @@
 namespace Roguegard.CharacterCreation
 {
     [Objforming.RequireRelationalComponent]
-    public interface IIntrinsicOption : IRogueDescription
+    public interface IIntrinsicOption : IRogueDescribable
     {
         Spanning<IMemberSource> MemberSources { get; }
 

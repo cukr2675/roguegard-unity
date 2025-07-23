@@ -11,11 +11,11 @@ namespace Roguegard
         IKeyword IStatusEffect.EffectCategory => EffectCategoryKw.Dummy;
         RogueObj IStatusEffect.Effecter => null;
         ISpriteMotion IStatusEffect.HeadIcon => null;
-        string IRogueDescription.Name => null;
-        Sprite IRogueDescription.Icon => null;
-        Color IRogueDescription.Color => Color.white;
-        string IRogueDescription.Caption => null;
-        IRogueDetails IRogueDescription.Details => null;
+        string IRogueDescribable.Name => null;
+        Sprite IRogueDescribable.Icon => null;
+        Color IRogueDescribable.Color => Color.white;
+        string IRogueDescribable.Caption => null;
+        IRogueDetails IRogueDescribable.Details => null;
         float IStatusEffect.Order => 0f;
 
         float IRogueObjUpdater.Order => 1f;

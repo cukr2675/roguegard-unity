@@ -127,7 +127,7 @@ MonoBehaviour:
         _assemblyReflectionAssetDummy: 
         _stinkingCloud:
           _option: {fileID: 11400000, guid: 6ed06a5cd1f62944381062e6761f6870, type: 2}
-          _optionDescription: {fileID: 0}
+          _optionCustom: {fileID: 0}
           _generatorWeight: 1
           _stack: 1
           _members:

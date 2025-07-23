@@ -106,7 +106,7 @@ namespace Roguegard.Device
                             {
                                 if (arg.Arg.Other is Intrinsic intrinsic)
                                 {
-                                    return intrinsic.OptionName;
+                                    return intrinsic.CustomName;
                                 }
                                 Debug.LogError("不正な型です。");
                                 return "???";
@@ -118,7 +118,7 @@ namespace Roguegard.Device
 
                                 if (arg.Arg.Other is Intrinsic intrinsic)
                                 {
-                                    return intrinsic.OptionName = value;
+                                    return intrinsic.CustomName = value;
                                 }
                                 Debug.LogError("不正な型です。");
                                 return null;

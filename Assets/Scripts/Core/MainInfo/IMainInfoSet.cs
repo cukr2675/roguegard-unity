@@ -1,7 +1,7 @@
 namespace Roguegard
 {
     [Objforming.RequireRelationalComponent]
-    public interface IMainInfoSet : IRogueDescription, System.IEquatable<IMainInfoSet>
+    public interface IMainInfoSet : IRogueDescribable, System.IEquatable<IMainInfoSet>
     {
         IKeyword Category { get; }
 

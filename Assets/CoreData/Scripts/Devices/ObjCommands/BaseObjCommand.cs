@@ -30,6 +30,6 @@ namespace Roguegard
 
         public abstract bool CommandInvoke(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg);
 
-        public abstract ISkillDescription GetSkillDescription(RogueObj self, RogueObj tool);
+        public abstract ISkillDescribable GetSkillDescribable(RogueObj self, RogueObj tool);
     }
 }

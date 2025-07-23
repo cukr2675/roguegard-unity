@@ -1,7 +1,7 @@
 namespace Roguegard.CharacterCreation
 {
     [Objforming.RequireRelationalComponent]
-    public interface ICharacterCreationData : IRogueDescription
+    public interface ICharacterCreationData : IRogueDescribable
     {
         float Cost { get; }
         bool CostIsUnknown { get; }

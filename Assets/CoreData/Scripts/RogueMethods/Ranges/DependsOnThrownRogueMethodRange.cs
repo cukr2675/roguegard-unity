@@ -7,10 +7,10 @@ namespace Roguegard
         public static DependsOnThrownRogueMethodRange Instance { get; } = new DependsOnThrownRogueMethodRange();
 
         public string Name => "弾による";
-        Sprite IRogueDescription.Icon => null;
-        Color IRogueDescription.Color => Color.white;
-        string IRogueDescription.Caption => null;
-        IRogueDetails IRogueDescription.Details => null;
+        Sprite IRogueDescribable.Icon => null;
+        Color IRogueDescribable.Color => Color.white;
+        string IRogueDescribable.Caption => null;
+        IRogueDetails IRogueDescribable.Details => null;
 
         public void Predicate(IRoguePredicator predicator, RogueObj self, float predictionDepth, RogueObj ammo, float visibleRadius, RectInt room)
         {

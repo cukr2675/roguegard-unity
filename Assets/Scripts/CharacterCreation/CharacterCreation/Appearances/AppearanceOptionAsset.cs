@@ -2,7 +2,7 @@ using OchalikeSprites;
 
 namespace Roguegard.CharacterCreation
 {
-    public abstract class AppearanceOptionAsset : RogueDescriptionAsset, IAppearanceOption
+    public abstract class AppearanceOptionAsset : RogueDescribableAsset, IAppearanceOption
     {
         /// <summary>
         /// この <see cref="AppearanceOptionAsset"/> の前提となる <see cref="OchalikeBone"/> の名前を取得する。

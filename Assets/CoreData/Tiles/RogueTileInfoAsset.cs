@@ -7,7 +7,7 @@ namespace Roguegard
         public sealed override IRogueTileInfo Info => this;
 
         protected abstract string DescriptionName { get; }
-        string IRogueDescription.Name => DescriptionName;
+        string IRogueDescribable.Name => DescriptionName;
         public abstract Sprite Icon { get; }
         public abstract Color Color { get; }
         public override Color EffectedColor => Color;

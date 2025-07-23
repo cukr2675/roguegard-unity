@@ -9,8 +9,8 @@ namespace Roguegard.CharacterCreation
         public CharacterCreationDataAsset Option => _option;
         IStartingItemOption IReadOnlyStartingItem.Option => _option;
 
-        [SerializeField] private OptionDescriptionAsset _optionDescription = null;
-        private OptionDescriptionAsset OptionDescription => OptionDescriptionAsset.IdentityOr(_optionDescription);
+        [SerializeField] private OptionCustomAsset _optionCustom = null;
+        private OptionCustomAsset OptionCustom => OptionCustomAsset.IdentityOr(_optionCustom);
 
         [SerializeField] private float _generatorWeight;
         public float GeneratorWeight
@@ -24,18 +24,18 @@ namespace Roguegard.CharacterCreation
 
         [SerializeField] private MemberList _members;
 
-        public string Name => OptionDescription.DescriptionName ?? _option.DescriptionName;
-        public Sprite Icon => OptionDescription.Icon ? OptionDescription.Icon : _option.Race.Icon;
-        public Color Color => OptionDescription.ColorOfEnabled ?? _option.Race.Color;
-        public string Caption => OptionDescription.Caption ?? _option.Caption;
-        public IRogueDetails Details => OptionDescription.Details ?? _option.Details;
+        public string Name => OptionCustom.DescriptionName ?? _option.DescriptionName;
+        public Sprite Icon => OptionCustom.Icon ? OptionCustom.Icon : _option.Race.Icon;
+        public Color Color => OptionCustom.ColorOfEnabled ?? _option.Race.Color;
+        public string Caption => OptionCustom.Caption ?? _option.Caption;
+        public IRogueDetails Details => OptionCustom.Details ?? _option.Details;
 
-        string IReadOnlyStartingItem.OptionName => OptionDescription.DescriptionName;
-        Sprite IReadOnlyStartingItem.OptionIcon => OptionDescription.Icon;
-        Color? IReadOnlyStartingItem.OptionColor => OptionDescription.ColorOfEnabled;
-        string IReadOnlyStartingItem.OptionCaption => OptionDescription.Caption;
-        IRogueDetails IReadOnlyStartingItem.OptionDetails => OptionDescription.Details;
-        IRogueGender IReadOnlyStartingItem.OptionGender => null;
+        string IReadOnlyStartingItem.CustomName => OptionCustom.DescriptionName;
+        Sprite IReadOnlyStartingItem.CustomIcon => OptionCustom.Icon;
+        Color? IReadOnlyStartingItem.CustomColor => OptionCustom.ColorOfEnabled;
+        string IReadOnlyStartingItem.CustomCaption => OptionCustom.Caption;
+        IRogueDetails IReadOnlyStartingItem.CustomDetails => OptionCustom.Details;
+        IRogueGender IReadOnlyStartingItem.CustomGender => null;
 
         IMainInfoSet IRogueObjGenerator.InfoSet => _option.PrimaryInfoSet;
         int IRogueObjGenerator.Lv => _option.Race.Lv;

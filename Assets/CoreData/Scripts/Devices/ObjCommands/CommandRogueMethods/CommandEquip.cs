@@ -45,7 +45,7 @@ namespace Roguegard
             return RogueMethodAspectState.Invoke(Keyword, this, self, user, activationDepth, arg);
         }
 
-        public override ISkillDescription GetSkillDescription(RogueObj self, RogueObj tool)
+        public override ISkillDescribable GetSkillDescribable(RogueObj self, RogueObj tool)
         {
             var equipmentInfo = tool?.Main.GetEquipmentInfo(tool);
             return equipmentInfo?.BeEquipped;

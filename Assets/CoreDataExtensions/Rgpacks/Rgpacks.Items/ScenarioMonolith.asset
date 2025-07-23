@@ -127,56 +127,56 @@ MonoBehaviour:
         _assemblyReflectionAssetDummy: 
         _shopItems:
         - _option: {fileID: 11400000, guid: 62a14c733f982354aa9b56e6c8ef2c81, type: 2}
-          _optionDescription: {fileID: 0}
+          _optionCustom: {fileID: 0}
           _generatorWeight: 1
           _stack: 1
           _members:
             _items: []
         - _option: {fileID: 11400000, guid: df60cc758c9870849a5ea7fcd651045b, type: 2}
-          _optionDescription: {fileID: 0}
+          _optionCustom: {fileID: 0}
           _generatorWeight: 1
           _stack: 1
           _members:
             _items: []
         - _option: {fileID: 11400000, guid: cd01f3ba88a8e774b83eec58d0841b4c, type: 2}
-          _optionDescription: {fileID: 0}
+          _optionCustom: {fileID: 0}
           _generatorWeight: 1
           _stack: 1
           _members:
             _items: []
         - _option: {fileID: 11400000, guid: ffa8ea2797e10f24aaa019fb83e065dd, type: 2}
-          _optionDescription: {fileID: 0}
+          _optionCustom: {fileID: 0}
           _generatorWeight: 1
           _stack: 1
           _members:
             _items: []
         - _option: {fileID: 11400000, guid: 9ebac40cd5e157c478f8e7b999db4715, type: 2}
-          _optionDescription: {fileID: 0}
+          _optionCustom: {fileID: 0}
           _generatorWeight: 1
           _stack: 1
           _members:
             _items: []
         - _option: {fileID: 11400000, guid: 50071604c072db046bff36b1339f2914, type: 2}
-          _optionDescription: {fileID: 0}
+          _optionCustom: {fileID: 0}
           _generatorWeight: 1
           _stack: 1
           _members:
             _items: []
         - _option: {fileID: 11400000, guid: 6d695757045de3541a374597a46b2485, type: 2}
-          _optionDescription: {fileID: 0}
+          _optionCustom: {fileID: 0}
           _generatorWeight: 1
           _stack: 1
           _members:
             _items: []
         - _option: {fileID: 11400000, guid: e91d25b4588208546a844f5bc4ae66ff, type: 2}
-          _optionDescription: {fileID: 0}
+          _optionCustom: {fileID: 0}
           _generatorWeight: 1
           _stack: 1
           _members:
             _items:
             - rid: 8602757355083661315
         - _option: {fileID: 11400000, guid: 2ebea39c206e2de49af27f531cdc7497, type: 2}
-          _optionDescription: {fileID: 0}
+          _optionCustom: {fileID: 0}
           _generatorWeight: 1
           _stack: 1
           _members:

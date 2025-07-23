@@ -7,7 +7,7 @@ namespace Roguegard.CharacterCreation
     /// <see cref="AppearanceOptionAsset"/> や <see cref="IStartingItemOption"/> と同じように
     /// <see cref="ScriptableObject"/> で扱えたほうが処理の共通化が見込める
     /// </summary>
-    public abstract class IntrinsicOptionAsset : RogueDescriptionAsset, IIntrinsicOption
+    public abstract class IntrinsicOptionAsset : RogueDescribableAsset, IIntrinsicOption
     {
         public virtual Spanning<IMemberSource> MemberSources => Spanning<IMemberSource>.Empty;
 

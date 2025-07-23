@@ -89,9 +89,9 @@ namespace Roguegard.Device
                     ?
                     .NameFrom((element, manager, arg) =>
                     {
-                        if (element is IRogueDescription description)
+                        if (element is IRogueDescribable describable)
                         {
-                            return description.Name;
+                            return describable.Name;
                         }
                         else if (arg.Arg.Other is AlphabetTypeMember alphabetTypeMember)
                         {

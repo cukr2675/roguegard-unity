@@ -135,7 +135,7 @@ MonoBehaviour:
         _assemblyReflectionAssetDummy: 
         _dropItem:
           _option: {fileID: 0}
-          _optionDescription: {fileID: 0}
+          _optionCustom: {fileID: 0}
           _generatorWeight: 0
           _stack: 0
           _members:

@@ -106,9 +106,9 @@ namespace RoguegardUnity
                 Localize(nameBuilder);
                 return $"<color=#{rgba}>{nameBuilder}</color>";
             }
-            else if (other is IRogueDescription description)
+            else if (other is IRogueDescribable describable)
             {
-                return Localize(description.Name);
+                return Localize(describable.Name);
             }
             else if (other is string text)
             {
@@ -171,9 +171,9 @@ namespace RoguegardUnity
                 Localize(nameBuilder);
                 return $"<color=#{rgba}>{nameBuilder}</color>";
             }
-            else if (other is IRogueDescription description)
+            else if (other is IRogueDescribable describable)
             {
-                return Localize(description.Name);
+                return Localize(describable.Name);
             }
             else if (other is string text)
             {
@@ -224,12 +224,12 @@ namespace RoguegardUnity
             return text;
         }
 
-        public static string GetCaption(IRogueDescription description)
+        public static string GetCaption(IRogueDescribable describable)
         {
-            var text = description.Caption;
+            var text = describable.Caption;
             if (text == null)
             {
-                var name = description.Name;
+                var name = describable.Name;
                 if (name.StartsWith(':'))
                 {
                     if (!TryLocalize($"{name}::c", out text))
@@ -241,15 +241,15 @@ namespace RoguegardUnity
             return text;
         }
 
-        public static string GetDescription(IRogueDescription description)
+        public static string GetDescription(IRogueDescribable describable)
         {
-            var details = description.Details;
+            var details = describable.Details;
             if (details != null)
             {
                 return details.ToString();
             }
 
-            var name = description.Name;
+            var name = describable.Name;
             if (name.StartsWith(':'))
             {
                 return Localize($"{name}::d");

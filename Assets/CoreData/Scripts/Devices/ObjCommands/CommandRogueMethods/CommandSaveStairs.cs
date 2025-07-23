@@ -29,7 +29,7 @@ namespace Roguegard
             return true;
         }
 
-        public override ISkillDescription GetSkillDescription(RogueObj self, RogueObj tool)
+        public override ISkillDescribable GetSkillDescribable(RogueObj self, RogueObj tool)
         {
             return null;
         }

@@ -23,7 +23,7 @@ namespace Roguegard
             return this.Walk(target, direction.Rotate(4), activationDepth);
         }
 
-        public override ISkillDescription GetSkillDescription(RogueObj self, RogueObj tool)
+        public override ISkillDescribable GetSkillDescribable(RogueObj self, RogueObj tool)
         {
             return null;
         }

@@ -1,7 +1,7 @@
 namespace Roguegard
 {
     [Objforming.RequireRelationalComponent]
-    public interface IRogueTileInfo : IRogueTile, IRogueDescription
+    public interface IRogueTileInfo : IRogueTile, IRogueDescribable
     {
         IKeyword Category { get; }
 

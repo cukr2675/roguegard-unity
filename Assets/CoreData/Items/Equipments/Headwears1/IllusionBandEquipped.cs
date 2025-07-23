@@ -19,11 +19,11 @@ namespace Roguegard.CharacterCreation
 
         private class Effect : BaseEquippedEffect, IStatusEffect, IValueEffect
         {
-            string IRogueDescription.Name => "異性幻像";
-            Sprite IRogueDescription.Icon => null;
-            Color IRogueDescription.Color => Color.white;
-            string IRogueDescription.Caption => "男性は女性 女性は男性と 間違われる状態";
-            IRogueDetails IRogueDescription.Details => null;
+            string IRogueDescribable.Name => "異性幻像";
+            Sprite IRogueDescribable.Icon => null;
+            Color IRogueDescribable.Color => Color.white;
+            string IRogueDescribable.Caption => "男性は女性 女性は男性と 間違われる状態";
+            IRogueDetails IRogueDescribable.Details => null;
             IKeyword IStatusEffect.EffectCategory => CategoryKw.Equipment;
             ISpriteMotion IStatusEffect.HeadIcon => null;
             float IStatusEffect.Order => 0f;

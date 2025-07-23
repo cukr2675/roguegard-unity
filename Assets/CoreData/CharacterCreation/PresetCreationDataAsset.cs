@@ -21,8 +21,8 @@ namespace Roguegard.CharacterCreation
         public override IRogueDetails Details => _details.Ref;
 
         [SerializeField] private AssetRace _race = null;
-        [SerializeField, ElementDescription("_option")] private AssetAppearance[] _appearances = null;
-        [SerializeField, ElementDescription("_option")] private AssetIntrinsic[] _intrinsics = null;
+        [SerializeField, DescribeElement] private AssetAppearance[] _appearances = null;
+        [SerializeField, DescribeElement] private AssetIntrinsic[] _intrinsics = null;
         [SerializeField] private StartingItem[] _startingItemTable = null;
 
         [System.NonSerialized] private SortedIntrinsicList sortedIntrinsics;

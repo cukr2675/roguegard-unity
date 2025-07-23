@@ -18,7 +18,7 @@ MonoBehaviour:
   _items:
     _items:
     - _option: {fileID: 11400000, guid: 9b83f15992282fe4da1b7cf4afd77a1e, type: 2}
-      _optionDescription: {fileID: 0}
+      _optionCustom: {fileID: 0}
       _generatorWeight: 1
       _stack: 1
       _isIntrinsicItem: 0
@@ -26,7 +26,7 @@ MonoBehaviour:
         _items:
         - rid: 962668678494027809
     - _option: {fileID: 11400000, guid: ea18f387027e3e24d90b989888903f11, type: 2}
-      _optionDescription: {fileID: 0}
+      _optionCustom: {fileID: 0}
       _generatorWeight: 1
       _stack: 1
       _isIntrinsicItem: 0
@@ -34,7 +34,7 @@ MonoBehaviour:
         _items:
         - rid: 962668678494027810
     - _option: {fileID: 11400000, guid: fbb788ca451157c4f9f87858f725882e, type: 2}
-      _optionDescription: {fileID: 0}
+      _optionCustom: {fileID: 0}
       _generatorWeight: 1
       _stack: 1
       _isIntrinsicItem: 0
@@ -42,7 +42,7 @@ MonoBehaviour:
         _items:
         - rid: 962668678494027811
     - _option: {fileID: 11400000, guid: 9c0ef51caf67c914a83313801032c993, type: 2}
-      _optionDescription: {fileID: 0}
+      _optionCustom: {fileID: 0}
       _generatorWeight: 1
       _stack: 1
       _isIntrinsicItem: 0

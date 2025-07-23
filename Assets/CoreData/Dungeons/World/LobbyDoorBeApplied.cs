@@ -8,10 +8,10 @@ namespace Roguegard
     {
         private LobbyDoorBeApplied() { }
 
-        IRogueMethodTarget ISkillDescription.Target => null;
-        IRogueMethodRange ISkillDescription.Range => null;
-        int ISkillDescription.RequiredMp => 0;
-        Spanning<IKeyword> ISkillDescription.AmmoCategories => Spanning<IKeyword>.Empty;
+        IRogueMethodTarget ISkillDescribable.Target => null;
+        IRogueMethodRange ISkillDescribable.Range => null;
+        int ISkillDescribable.RequiredMp => 0;
+        Spanning<IKeyword> ISkillDescribable.AmmoCategories => Spanning<IKeyword>.Empty;
 
         private static readonly RogueMenu rogueMenu = new();
 
@@ -28,7 +28,7 @@ namespace Roguegard
             }
         }
 
-        int ISkillDescription.GetAtk(RogueObj self, out bool additionalEffect)
+        int ISkillDescribable.GetAtk(RogueObj self, out bool additionalEffect)
         {
             additionalEffect = false;
             return 0;

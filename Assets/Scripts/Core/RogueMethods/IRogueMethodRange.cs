@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Roguegard
 {
-    public interface IRogueMethodRange : IRogueDescription
+    public interface IRogueMethodRange : IRogueDescribable
     {
         void Predicate(
             IRoguePredicator predicator, RogueObj self, float predictionDepth, RogueObj tool, float visibleRadius, RectInt room);

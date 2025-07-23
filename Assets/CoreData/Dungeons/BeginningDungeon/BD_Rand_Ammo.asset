@@ -18,7 +18,7 @@ MonoBehaviour:
   _items:
     _items:
     - _option: {fileID: 11400000, guid: 5fe1c775da394924f852bc28469a0756, type: 2}
-      _optionDescription: {fileID: 0}
+      _optionCustom: {fileID: 0}
       _generatorWeight: 1
       _stack: 7
       _isIntrinsicItem: 0
@@ -26,7 +26,7 @@ MonoBehaviour:
         _items:
         - rid: 962668678494027860
     - _option: {fileID: 11400000, guid: cb94158c0ce227b478eaf371070ba86b, type: 2}
-      _optionDescription: {fileID: 0}
+      _optionCustom: {fileID: 0}
       _generatorWeight: 1
       _stack: 7
       _isIntrinsicItem: 0

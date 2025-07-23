@@ -54,7 +54,7 @@ namespace Roguegard.CharacterCreation
 
         public virtual string DescriptionName => Race?.Name ?? "";
         [System.NonSerialized] private string _name; // null にするために NonSerialized にする
-        string IRogueDescription.Name => DescriptionName.Length >= 1 ? DescriptionName : (_name ??= $":{name}");
+        string IRogueDescribable.Name => DescriptionName.Length >= 1 ? DescriptionName : (_name ??= $":{name}");
         public virtual Sprite Icon => Race?.Icon;
         public virtual Color Color => Race.Color;
         public virtual string Caption => null;
@@ -104,13 +104,13 @@ namespace Roguegard.CharacterCreation
             IReadOnlyStartingItem startingItem, RogueObj location, Vector2Int position, IRogueRandom random, StackOption stackOption = StackOption.Default)
         {
             var raceOption = Race.Option;
-            var gender = startingItem.OptionGender ?? Race.Gender ?? GetRandomGender(random);
+            var gender = startingItem.CustomGender ?? Race.Gender ?? GetRandomGender(random);
             if (!InfoSets.TryGetValue(raceOption, gender, out var infoSet)) throw new RogueException();
 
             var obj = infoSet.CreateObj(location, position, random, stackOption);
 
             obj.TrySetStack(startingItem.Stack);
-            if (startingItem.OptionColor != null) { ColoringEffect.ColorChange(obj, startingItem.OptionColor.Value); }
+            if (startingItem.CustomColor != null) { ColoringEffect.ColorChange(obj, startingItem.CustomColor.Value); }
 
             return obj;
         }
@@ -143,14 +143,14 @@ namespace Roguegard.CharacterCreation
         private class DefaultItem : IReadOnlyStartingItem
         {
             public IStartingItemOption Option { get; }
-            public string OptionName => null;
-            public Sprite OptionIcon => null;
-            public Color? OptionColor => null;
-            public string OptionCaption => null;
-            public IRogueDetails OptionDetails => null;
+            public string CustomName => null;
+            public Sprite CustomIcon => null;
+            public Color? CustomColor => null;
+            public string CustomCaption => null;
+            public IRogueDetails CustomDetails => null;
             public float GeneratorWeight => 0f;
             public int Stack => 1;
-            public IRogueGender OptionGender { get; }
+            public IRogueGender CustomGender { get; }
 
             public string Name => Option.Name;
             public Sprite Icon => Option.Icon;
@@ -165,7 +165,7 @@ namespace Roguegard.CharacterCreation
             public DefaultItem(IStartingItemOption option, IRogueGender optionGender)
             {
                 Option = option;
-                OptionGender = optionGender;
+                CustomGender = optionGender;
             }
         }
     }

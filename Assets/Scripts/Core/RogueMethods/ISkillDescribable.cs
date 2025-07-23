@@ -1,6 +1,6 @@
 namespace Roguegard
 {
-    public interface ISkillDescription
+    public interface ISkillDescribable
     {
         IRogueMethodTarget Target { get; }
         IRogueMethodRange Range { get; }

@@ -16,10 +16,10 @@ namespace Roguegard.Rgpacks
         private readonly PropertiedCmnReference raceSpriteCmn;
 
         IRaceOption IReadOnlyRace.Option => Reference;
-        string IReadOnlyRace.OptionName => null;
+        string IReadOnlyRace.CustomName => null;
         Color IReadOnlyRace.BodyColor => Color;
-        string IReadOnlyRace.OptionCaption => null;
-        IRogueDetails IReadOnlyRace.OptionDetails => null;
+        string IReadOnlyRace.CustomCaption => null;
+        IRogueDetails IReadOnlyRace.CustomDetails => null;
         Spanning<IMemberSource> IReadOnlyMemberable.MemberSources => RaceOptionMemberSources;
 
         public int Lv => 0;

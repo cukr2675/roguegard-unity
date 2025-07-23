@@ -12,8 +12,8 @@ namespace Roguegard.CharacterCreation
         public RaceOptionAsset Option => _option;
         IRaceOption IReadOnlyRace.Option => Option;
 
-        [SerializeField] private OptionDescriptionAsset _optionDescription = null;
-        private OptionDescriptionAsset OptionDescription => OptionDescriptionAsset.IdentityOr(_optionDescription);
+        [SerializeField] private OptionCustomAsset _optionCustom = null;
+        private OptionCustomAsset OptionCustom => OptionCustomAsset.IdentityOr(_optionCustom);
 
         [SerializeField] private Color _bodyColor;
         public Color BodyColor => _bodyColor;
@@ -29,15 +29,15 @@ namespace Roguegard.CharacterCreation
 
         [SerializeField] private MemberList _members;
 
-        public string Name => OptionDescription.DescriptionName ?? _option.Name;
+        public string Name => OptionCustom.DescriptionName ?? _option.Name;
         public Sprite Icon => _option.Icon;
-        Color IRogueDescription.Color => _option.Color;
-        public string Caption => OptionDescription.Caption ?? _option.Caption;
-        public IRogueDetails Details => OptionDescription.Details ?? _option.Details;
+        Color IRogueDescribable.Color => _option.Color;
+        public string Caption => OptionCustom.Caption ?? _option.Caption;
+        public IRogueDetails Details => OptionCustom.Details ?? _option.Details;
 
-        string IReadOnlyRace.OptionName => OptionDescription.DescriptionName;
-        string IReadOnlyRace.OptionCaption => OptionDescription.Caption;
-        IRogueDetails IReadOnlyRace.OptionDetails => OptionDescription.Details;
+        string IReadOnlyRace.CustomName => OptionCustom.DescriptionName;
+        string IReadOnlyRace.CustomCaption => OptionCustom.Caption;
+        IRogueDetails IReadOnlyRace.CustomDetails => OptionCustom.Details;
         int IReadOnlyRace.Lv => 1;
         Spanning<IMemberSource> IReadOnlyMemberable.MemberSources => _option.MemberSources;
 

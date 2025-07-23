@@ -3,7 +3,7 @@ using OchalikeSprites;
 namespace Roguegard.CharacterCreation
 {
     [Objforming.RequireRelationalComponent]
-    public interface IAppearanceOption : IRogueDescription
+    public interface IAppearanceOption : IRogueDescribable
     {
         /// <summary>
         /// この <see cref="IAppearanceOption"/> の前提となる <see cref="OchalikeBone"/> の名前を取得する。

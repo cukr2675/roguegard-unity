@@ -7,16 +7,16 @@ namespace Roguegard.CharacterCreation
     public class Appearance : IReadOnlyAppearance
     {
         public IAppearanceOption Option { get; set; }
-        public string OptionName { get; set; }
+        public string CustomName { get; set; }
         public Color32 Color { get; set; }
-        public string OptionCaption { get; set; }
-        public IRogueDetails OptionDetails { get; set; }
+        public string CustomCaption { get; set; }
+        public IRogueDetails CustomDetails { get; set; }
 
         private readonly List<IMember> members = new();
 
         public string Name => Option.Name;
         public Sprite Icon => Option.Icon;
-        Color IRogueDescription.Color => Color;
+        Color IRogueDescribable.Color => Color;
         public string Caption => Option.Caption;
         public IRogueDetails Details => Option.Details;
         Spanning<IMemberSource> IReadOnlyMemberable.MemberSources => Option.MemberSources;
@@ -33,10 +33,10 @@ namespace Roguegard.CharacterCreation
         public void Set(IReadOnlyAppearance appearance)
         {
             Option = appearance.Option;
-            OptionName = appearance.OptionName;
+            CustomName = appearance.CustomName;
             Color = appearance.Color;
-            OptionCaption = appearance.OptionCaption;
-            OptionDetails = appearance.OptionDetails;
+            CustomCaption = appearance.CustomCaption;
+            CustomDetails = appearance.CustomDetails;
             members.Clear();
             foreach (var memberSource in Option.MemberSources)
             {

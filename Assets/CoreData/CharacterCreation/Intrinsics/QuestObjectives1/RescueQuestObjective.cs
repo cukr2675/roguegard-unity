@@ -29,7 +29,7 @@ namespace Roguegard.CharacterCreation
             var intrinsic = new Intrinsic
             {
                 Option = parent,
-                OptionCaption = $"{floor}F で {clientOption.Name} を救助する"
+                CustomCaption = $"{floor}F で {clientOption.Name} を救助する"
             };
             var member = (QuestMember)intrinsic.GetMember(QuestMember.SourceInstance);
             var client = member.Targets.Add();

@@ -12,7 +12,7 @@ namespace Roguegard
             return RogueMethodAspectState.Invoke(keyword, throwMethod, self, user, activationDepth, arg);
         }
 
-        public override ISkillDescription GetSkillDescription(RogueObj self, RogueObj tool)
+        public override ISkillDescribable GetSkillDescribable(RogueObj self, RogueObj tool)
         {
             return self.Main.InfoSet.Throw;
         }

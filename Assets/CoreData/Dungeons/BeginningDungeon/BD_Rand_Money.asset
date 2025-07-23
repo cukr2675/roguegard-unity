@@ -18,7 +18,7 @@ MonoBehaviour:
   _items:
     _items:
     - _option: {fileID: 11400000, guid: da554bc0ed96cf24bae4bd414b9cb53f, type: 2}
-      _optionDescription: {fileID: 0}
+      _optionCustom: {fileID: 0}
       _generatorWeight: 1
       _stack: 30
       _members:

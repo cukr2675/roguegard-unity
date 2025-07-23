@@ -12,7 +12,7 @@ namespace Roguegard.Rgpacks
 {
     public class ScenarioMonolithBeApplied : BaseApplyRogueMethod
     {
-        [SerializeField, ElementDescription("_option")] private AssetStartingItem[] _shopItems = null;
+        [SerializeField, DescribeElement] private AssetStartingItem[] _shopItems = null;
 
         private Menu menu;
 

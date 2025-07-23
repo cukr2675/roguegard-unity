@@ -8,22 +8,22 @@ namespace Roguegard.CharacterCreation
         [SerializeField] private IntrinsicOptionAsset _option;
         public IIntrinsicOption Option => _option;
 
-        [SerializeField] private OptionDescriptionAsset _optionDescription = null;
-        private OptionDescriptionAsset OptionDescription => OptionDescriptionAsset.IdentityOr(_optionDescription);
+        [SerializeField] private OptionCustomAsset _optionCustom = null;
+        private OptionCustomAsset OptionCustom => OptionCustomAsset.IdentityOr(_optionCustom);
 
         [SerializeField] private MemberList _members;
 
-        public string Name => OptionDescription.DescriptionName ?? Option.Name;
-        public Sprite Icon => OptionDescription.Icon ? OptionDescription.Icon : Option.Icon;
-        public Color Color => OptionDescription.ColorOfEnabled ?? Option.Color;
-        public string Caption => OptionDescription.Caption ?? Option.Caption;
-        public IRogueDetails Details => OptionDescription.Details ?? Option.Details;
+        public string Name => OptionCustom.DescriptionName ?? Option.Name;
+        public Sprite Icon => OptionCustom.Icon ? OptionCustom.Icon : Option.Icon;
+        public Color Color => OptionCustom.ColorOfEnabled ?? Option.Color;
+        public string Caption => OptionCustom.Caption ?? Option.Caption;
+        public IRogueDetails Details => OptionCustom.Details ?? Option.Details;
 
-        string IReadOnlyIntrinsic.OptionName => OptionDescription.DescriptionName;
-        Sprite IReadOnlyIntrinsic.OptionIcon => OptionDescription.Icon;
-        Color? IReadOnlyIntrinsic.OptionColor => OptionDescription.ColorOfEnabled;
-        string IReadOnlyIntrinsic.OptionCaption => OptionDescription.Caption;
-        IRogueDetails IReadOnlyIntrinsic.OptionDetails => OptionDescription.Details;
+        string IReadOnlyIntrinsic.CustomName => OptionCustom.DescriptionName;
+        Sprite IReadOnlyIntrinsic.CustomIcon => OptionCustom.Icon;
+        Color? IReadOnlyIntrinsic.CustomColor => OptionCustom.ColorOfEnabled;
+        string IReadOnlyIntrinsic.CustomCaption => OptionCustom.Caption;
+        IRogueDetails IReadOnlyIntrinsic.CustomDetails => OptionCustom.Details;
         Spanning<IMemberSource> IReadOnlyMemberable.MemberSources => _option.MemberSources;
 
         IReadOnlyMember IReadOnlyMemberable.GetMember(IMemberSource source)

@@ -23,10 +23,10 @@ namespace Roguegard.CharacterCreation
         [SerializeField] private MemberList _members;
 
         IRaceOption IReadOnlyRace.Option => this;
-        string IReadOnlyRace.OptionName => null;
+        string IReadOnlyRace.CustomName => null;
         Color IReadOnlyRace.BodyColor => Color;
-        string IReadOnlyRace.OptionCaption => null;
-        IRogueDetails IReadOnlyRace.OptionDetails => null;
+        string IReadOnlyRace.CustomCaption => null;
+        IRogueDetails IReadOnlyRace.CustomDetails => null;
         Spanning<IMemberSource> IReadOnlyMemberable.MemberSources => ((IRaceOption)this).MemberSources;
 
         IReadOnlyMember IReadOnlyMemberable.GetMember(IMemberSource source)

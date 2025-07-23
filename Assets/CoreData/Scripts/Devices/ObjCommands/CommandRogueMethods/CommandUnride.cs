@@ -17,7 +17,7 @@ namespace Roguegard
             return result;
         }
 
-        public override ISkillDescription GetSkillDescription(RogueObj self, RogueObj tool)
+        public override ISkillDescribable GetSkillDescribable(RogueObj self, RogueObj tool)
         {
             var vehicle = RideRogueEffect.GetVehicle(self);
             if (vehicle == null) return null;

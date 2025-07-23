@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -82,9 +82,9 @@ namespace RoguegardUnity
             {
                 AppendHorizontalRule();
             }
-            else if (obj is IRogueDescription description)
+            else if (obj is IRogueDescribable describable)
             {
-                AppendText(description.Name);
+                AppendText(describable.Name);
             }
             else
             {

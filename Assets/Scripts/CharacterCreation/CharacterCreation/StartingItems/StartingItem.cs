@@ -7,29 +7,29 @@ namespace Roguegard.CharacterCreation
     public class StartingItem : IReadOnlyStartingItem, IWeightedRogueObjGenerator, IMemberable
     {
         public IStartingItemOption Option { get; set; }
-        public string OptionName { get; set; }
+        public string CustomName { get; set; }
         //public Sprite OptionIcon { get; set; }
-        public Sprite OptionIcon { get => null; set { } }
+        public Sprite CustomIcon { get => null; set { } }
         public Color32? OptionColor { get; set; }
-        public string OptionCaption { get; set; }
-        public IRogueDetails OptionDetails { get; set; }
+        public string CustomCaption { get; set; }
+        public IRogueDetails CustomDetails { get; set; }
         public float GeneratorWeight { get; set; }
         public int Stack { get; set; }
 
         private readonly List<IMember> members = new();
 
-        public string Name => OptionName ?? Option.Name;
-        public Sprite Icon => OptionIcon ? OptionIcon : Option.Icon;
+        public string Name => CustomName ?? Option.Name;
+        public Sprite Icon => CustomIcon ? CustomIcon : Option.Icon;
         public Color Color => OptionColor ?? Option.Color;
-        public string Caption => OptionCaption ?? Option.Caption;
-        public IRogueDetails Details => OptionDetails ?? Option.Details;
+        public string Caption => CustomCaption ?? Option.Caption;
+        public IRogueDetails Details => CustomDetails ?? Option.Details;
 
         IMainInfoSet IRogueObjGenerator.InfoSet => Option.InfoSet;
         int IRogueObjGenerator.Lv => Option.Lv;
         Spanning<IWeightedRogueObjGeneratorList> IRogueObjGenerator.StartingItemTable => Option.StartingItemTable;
         float IWeightedRogueObjGenerator.Weight => GeneratorWeight;
-        Color? IReadOnlyStartingItem.OptionColor => OptionColor;
-        IRogueGender IReadOnlyStartingItem.OptionGender => null;
+        Color? IReadOnlyStartingItem.CustomColor => OptionColor;
+        IRogueGender IReadOnlyStartingItem.CustomGender => null;
         Spanning<IMemberSource> IReadOnlyMemberable.MemberSources => Option.MemberSources;
 
         public StartingItem()
@@ -44,11 +44,11 @@ namespace Roguegard.CharacterCreation
         public void Set(IReadOnlyStartingItem startingItem)
         {
             Option = startingItem.Option;
-            OptionName = startingItem.OptionName;
-            OptionIcon = startingItem.OptionIcon;
-            OptionColor = startingItem.OptionColor;
-            OptionCaption = startingItem.OptionCaption;
-            OptionDetails = startingItem.OptionDetails;
+            CustomName = startingItem.CustomName;
+            CustomIcon = startingItem.CustomIcon;
+            OptionColor = startingItem.CustomColor;
+            CustomCaption = startingItem.CustomCaption;
+            CustomDetails = startingItem.CustomDetails;
             GeneratorWeight = startingItem.GeneratorWeight;
             Stack = startingItem.Stack;
             members.Clear();

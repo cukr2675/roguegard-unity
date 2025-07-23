@@ -24,7 +24,7 @@ MonoBehaviour:
       rid: -2
   _race:
     _option: {fileID: 11400000, guid: 864040daa0485e54294ecafa67d1fd53, type: 2}
-    _optionDescription: {fileID: 0}
+    _optionCustom: {fileID: 0}
     _bodyColor: {r: 1, g: 0.85882354, b: 0.7176471, a: 1}
     _gender: {fileID: 11400000, guid: 4768b495a0252a9479576904ae785ceb, type: 2}
     _hpName: 
@@ -34,103 +34,103 @@ MonoBehaviour:
       - rid: 3586031399449133059
   _appearances:
   - _option: {fileID: 11400000, guid: 54cdab0d11c6db542b51520f5f22bcb3, type: 2}
-    _optionDescription: {fileID: 0}
+    _optionCustom: {fileID: 0}
     _color: {r: 0.23921569, g: 0.02745098, b: 0.02745098, a: 1}
     _members:
       _items:
       - rid: 1446735840404570112
   - _option: {fileID: 11400000, guid: 3a926326bb517db4fbedf45fb3388617, type: 2}
-    _optionDescription: {fileID: 0}
+    _optionCustom: {fileID: 0}
     _color: {r: 0.23921569, g: 0.02745098, b: 0.02745098, a: 1}
     _members:
       _items:
       - rid: 1446735840404570113
   - _option: {fileID: 11400000, guid: dd45398b31707594396bf2674adc6041, type: 2}
-    _optionDescription: {fileID: 0}
+    _optionCustom: {fileID: 0}
     _color: {r: 0.39607844, g: 0.3529412, b: 0.35686275, a: 1}
     _members:
       _items: []
   - _option: {fileID: 11400000, guid: 4ed202ff619b0b744a4f0be7bca8218f, type: 2}
-    _optionDescription: {fileID: 0}
+    _optionCustom: {fileID: 0}
     _color: {r: 1, g: 1, b: 1, a: 1}
     _members:
       _items:
       - rid: 3586031450886242306
   - _option: {fileID: 11400000, guid: 4ed202ff619b0b744a4f0be7bca8218f, type: 2}
-    _optionDescription: {fileID: 0}
+    _optionCustom: {fileID: 0}
     _color: {r: 1, g: 1, b: 1, a: 1}
     _members:
       _items:
       - rid: 3586031450886242307
   - _option: {fileID: 11400000, guid: 4ed202ff619b0b744a4f0be7bca8218f, type: 2}
-    _optionDescription: {fileID: 0}
+    _optionCustom: {fileID: 0}
     _color: {r: 0.54901963, g: 0.11764706, b: 0.11764706, a: 1}
     _members:
       _items:
       - rid: 3586031450886242309
   - _option: {fileID: 11400000, guid: 4ed202ff619b0b744a4f0be7bca8218f, type: 2}
-    _optionDescription: {fileID: 0}
+    _optionCustom: {fileID: 0}
     _color: {r: 0.54901963, g: 0.11764706, b: 0.11764706, a: 1}
     _members:
       _items:
       - rid: 3586031450886242308
   _intrinsics:
   - _option: {fileID: 11400000, guid: 7237a7ac9886c524b94c9f5c41c7dbb1, type: 2}
-    _optionDescription: {fileID: 0}
+    _optionCustom: {fileID: 0}
     _members:
       _items: []
   - _option: {fileID: 11400000, guid: 793b3d8d5c68c4c49bc674ed303450cc, type: 2}
-    _optionDescription: {fileID: 0}
+    _optionCustom: {fileID: 0}
     _members:
       _items: []
   - _option: {fileID: 11400000, guid: 245d8f8ab4398584597e5e7a8daee26d, type: 2}
-    _optionDescription: {fileID: 0}
+    _optionCustom: {fileID: 0}
     _members:
       _items: []
   - _option: {fileID: 11400000, guid: 50e7661b619f0594c995fdc30a9a620d, type: 2}
-    _optionDescription: {fileID: 0}
+    _optionCustom: {fileID: 0}
     _members:
       _items: []
   - _option: {fileID: 11400000, guid: abc2162f941202b43a04d8665a50aee9, type: 2}
-    _optionDescription: {fileID: 0}
+    _optionCustom: {fileID: 0}
     _members:
       _items: []
   - _option: {fileID: 11400000, guid: 9f5d6b5e0d2c89943ac5a29ce8ca926c, type: 2}
-    _optionDescription: {fileID: 0}
+    _optionCustom: {fileID: 0}
     _members:
       _items: []
   - _option: {fileID: 11400000, guid: 9552d2d8dd264c845b3d7e4a78116514, type: 2}
-    _optionDescription: {fileID: 0}
+    _optionCustom: {fileID: 0}
     _members:
       _items: []
   - _option: {fileID: 11400000, guid: f6f603905d9d8804eb1478e66e094fdf, type: 2}
-    _optionDescription: {fileID: 0}
+    _optionCustom: {fileID: 0}
     _members:
       _items: []
   _startingItemTable:
   - _option: {fileID: 11400000, guid: b26d960eb0d95d14b95ca347ed298797, type: 2}
-    _optionDescription: {fileID: 0}
+    _optionCustom: {fileID: 0}
     _generatorWeight: 1
     _stack: 1
     _members:
       _items:
       - rid: 3586031465861742635
   - _option: {fileID: 11400000, guid: 9b83f15992282fe4da1b7cf4afd77a1e, type: 2}
-    _optionDescription: {fileID: 0}
+    _optionCustom: {fileID: 0}
     _generatorWeight: 1
     _stack: 1
     _members:
       _items:
       - rid: 3586031465861742598
   - _option: {fileID: 11400000, guid: 08cdd8218a3404f4989c90dd592bc34e, type: 2}
-    _optionDescription: {fileID: 0}
+    _optionCustom: {fileID: 0}
     _generatorWeight: 1
     _stack: 1
     _members:
       _items:
       - rid: 3586031450886242315
   - _option: {fileID: 11400000, guid: c77d11f069e6ec940be8252663cbeff4, type: 2}
-    _optionDescription: {fileID: 0}
+    _optionCustom: {fileID: 0}
     _generatorWeight: 1
     _stack: 1
     _members:

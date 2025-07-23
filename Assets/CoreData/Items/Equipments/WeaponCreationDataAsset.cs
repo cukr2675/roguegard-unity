@@ -7,8 +7,8 @@ namespace Roguegard.CharacterCreation
     public class WeaponCreationDataAsset : CharacterCreationDataAsset
     {
         [SerializeField] private WeaponRace _race = null;
-        [SerializeField, ElementDescription("_option")] private AssetAppearance[] _appearances = null;
-        [SerializeField, ElementDescription("_option")] private AssetIntrinsic[] _intrinsics = null;
+        [SerializeField, DescribeElement] private AssetAppearance[] _appearances = null;
+        [SerializeField, DescribeElement] private AssetIntrinsic[] _intrinsics = null;
         [SerializeField] private AssetStartingItemList[] _startingItemTable = null;
 
         [System.NonSerialized] private SortedIntrinsicList sortedIntrinsics;

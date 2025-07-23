@@ -19,11 +19,11 @@ namespace Roguegard.CharacterCreation
 
         private class Effect : BaseEquippedEffect, IStatusEffect, IValueEffect
         {
-            string IRogueDescription.Name => "盲目";
-            Sprite IRogueDescription.Icon => null;
-            Color IRogueDescription.Color => Color.white;
-            string IRogueDescription.Caption => null;
-            IRogueDetails IRogueDescription.Details => null;
+            string IRogueDescribable.Name => "盲目";
+            Sprite IRogueDescribable.Icon => null;
+            Color IRogueDescribable.Color => Color.white;
+            string IRogueDescribable.Caption => null;
+            IRogueDetails IRogueDescribable.Details => null;
             IKeyword IStatusEffect.EffectCategory => CategoryKw.Equipment;
             ISpriteMotion IStatusEffect.HeadIcon => null;
             float IStatusEffect.Order => 0f;

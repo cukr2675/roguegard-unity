@@ -35,8 +35,8 @@ namespace Roguegard.CharacterCreation
             var intrinsic = new Intrinsic
             {
                 Option = parent,
-                OptionName = $"{targetOption.Name}討伐",
-                OptionCaption = $"{floor}F で {targetOption.Name} を {count} 体討伐する"
+                CustomName = $"{targetOption.Name}討伐",
+                CustomCaption = $"{floor}F で {targetOption.Name} を {count} 体討伐する"
             };
             var member = (QuestMember)intrinsic.GetMember(QuestMember.SourceInstance);
             var target = member.Targets.Add();

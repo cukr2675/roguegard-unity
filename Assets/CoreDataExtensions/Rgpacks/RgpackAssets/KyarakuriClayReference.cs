@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -19,11 +19,11 @@ namespace Roguegard.Rgpacks
         ISortedIntrinsicList ICharacterCreationData.SortedIntrinsics => _sortedIntrinsics ??= new SortedIntrinsicList(new IReadOnlyIntrinsic[0], this);
         Spanning<IWeightedRogueObjGeneratorList> ICharacterCreationData.StartingItemTable => Spanning<IWeightedRogueObjGeneratorList>.Empty;
 
-        string IRogueDescription.Name => Asset.Name;
-        Sprite IRogueDescription.Icon => Asset.Icon;
-        Color IRogueDescription.Color => Asset.Color;
-        string IRogueDescription.Caption => Asset.Caption;
-        IRogueDetails IRogueDescription.Details => Asset.Details;
+        string IRogueDescribable.Name => Asset.Name;
+        Sprite IRogueDescribable.Icon => Asset.Icon;
+        Color IRogueDescribable.Color => Asset.Color;
+        string IRogueDescribable.Caption => Asset.Caption;
+        IRogueDetails IRogueDescribable.Details => Asset.Details;
 
         float ICharacterCreationData.Cost => Asset.Cost;
         float IRaceOption.Cost => Asset.Cost;

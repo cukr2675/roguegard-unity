@@ -8,10 +8,10 @@ namespace Roguegard
         public abstract string Name { get; }
         public abstract Spanning<IKeyword> Edibles { get; }
 
-        Sprite IRogueDescription.Icon => null;
-        Color IRogueDescription.Color => Color.white;
-        string IRogueDescription.Caption => null;
-        IRogueDetails IRogueDescription.Details => null;
+        Sprite IRogueDescribable.Icon => null;
+        Color IRogueDescribable.Color => Color.white;
+        string IRogueDescribable.Caption => null;
+        IRogueDetails IRogueDescribable.Details => null;
 
         private bool ContainsEdible(RogueObj tool)
         {

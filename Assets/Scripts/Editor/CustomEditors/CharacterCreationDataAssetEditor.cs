@@ -8,7 +8,7 @@ using UnityEngine;
 namespace Roguegard.CharacterCreation.Editor
 {
     /// <summary>
-    /// Project ビューにアイコン（<see cref="RogueDescriptionAsset.Icon"/>）を表示させるエディタ拡張
+    /// Project ビューにアイコン（<see cref="RogueDescribableAsset.Icon"/>）を表示させるエディタ拡張
     /// </summary>
     [CustomEditor(typeof(CharacterCreationDataAsset), true)]
     public class CharacterCreationDataAssetEditor : UnityEditor.Editor

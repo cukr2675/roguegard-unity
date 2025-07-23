@@ -9,22 +9,22 @@ namespace Roguegard.CharacterCreation
         public AppearanceOptionAsset Option => _option;
         IAppearanceOption IReadOnlyAppearance.Option => _option;
 
-        [SerializeField] private OptionDescriptionAsset _optionDescription = null;
-        private OptionDescriptionAsset OptionDescription => OptionDescriptionAsset.IdentityOr(_optionDescription);
+        [SerializeField] private OptionCustomAsset _optionCustom = null;
+        private OptionCustomAsset OptionCustom => OptionCustomAsset.IdentityOr(_optionCustom);
 
         [SerializeField] private Color _color;
         public Color Color => _color;
 
         [SerializeField] private MemberList _members;
 
-        public string Name => OptionDescription.DescriptionName ?? _option.DescriptionName;
+        public string Name => OptionCustom.DescriptionName ?? _option.DescriptionName;
         public Sprite Icon => _option.Icon;
-        public string Caption => OptionDescription.Caption ?? _option.Caption;
-        public IRogueDetails Details => OptionDescription.Details ?? _option.Details;
+        public string Caption => OptionCustom.Caption ?? _option.Caption;
+        public IRogueDetails Details => OptionCustom.Details ?? _option.Details;
 
-        string IReadOnlyAppearance.OptionName => OptionDescription.DescriptionName;
-        string IReadOnlyAppearance.OptionCaption => OptionDescription.Caption;
-        IRogueDetails IReadOnlyAppearance.OptionDetails => OptionDescription.Details;
+        string IReadOnlyAppearance.CustomName => OptionCustom.DescriptionName;
+        string IReadOnlyAppearance.CustomCaption => OptionCustom.Caption;
+        IRogueDetails IReadOnlyAppearance.CustomDetails => OptionCustom.Details;
         Spanning<IMemberSource> IReadOnlyMemberable.MemberSources => _option.MemberSources;
 
         IReadOnlyMember IReadOnlyMemberable.GetMember(IMemberSource source)

@@ -3,15 +3,15 @@ using UnityEngine;
 
 namespace Roguegard.Editor
 {
-    [CustomPropertyDrawer(typeof(ElementDescriptionAttribute))]
-    public class ElementDescriptionDrawer : PropertyDrawer
+    [CustomPropertyDrawer(typeof(DescribeElementAttribute))]
+    public class DescribeElementDrawer : PropertyDrawer
     {
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
-            var attribute = (ElementDescriptionAttribute)this.attribute;
-            var objPath = $"{property.propertyPath}.{attribute.DescriptionVariableName}";
+            var attribute = (DescribeElementAttribute)this.attribute;
+            var objPath = $"{property.propertyPath}.{attribute.DescribeVariableName}";
             var objProperty = property.serializedObject.FindProperty(objPath);
-            var obj = (IRogueDescription)objProperty.objectReferenceValue;
+            var obj = (IRogueDescribable)objProperty.objectReferenceValue;
             if (obj == null)
             {
                 EditorGUI.PropertyField(position, property, true);

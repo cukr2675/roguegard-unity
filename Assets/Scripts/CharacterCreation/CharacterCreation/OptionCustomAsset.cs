@@ -2,8 +2,8 @@ using UnityEngine;
 
 namespace Roguegard.CharacterCreation
 {
-    [CreateAssetMenu(menuName = "Roguegard/Character Creation/Option Description")]
-    public class OptionDescriptionAsset : RogueDescriptionAsset
+    [CreateAssetMenu(menuName = "Roguegard/Character Creation/Option Custom")]
+    public class OptionCustomAsset : RogueDescribableAsset
     {
         /// <summary>
         /// デフォルト: null
@@ -23,24 +23,24 @@ namespace Roguegard.CharacterCreation
 
         public Color? ColorOfEnabled => ColorIsEnabled ? Color : null;
 
-        private static OptionDescriptionAsset _identity;
+        private static OptionCustomAsset _identity;
 
         /// <summary>
         /// デフォルト値を持つインスタンスを取得する
         /// </summary>
-        public static OptionDescriptionAsset Identity
+        public static OptionCustomAsset Identity
         {
             get
             {
                 if (_identity == null)
                 {
-                    _identity = CreateInstance<OptionDescriptionAsset>();
+                    _identity = CreateInstance<OptionCustomAsset>();
                 }
                 return _identity;
             }
         }
 
-        public static OptionDescriptionAsset IdentityOr(OptionDescriptionAsset value)
+        public static OptionCustomAsset IdentityOr(OptionCustomAsset value)
         {
             if (value != null) return value;
             else return Identity;

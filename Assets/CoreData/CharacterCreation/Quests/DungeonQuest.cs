@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Roguegard.CharacterCreation
 {
     [Objforming.Formable]
-    public class DungeonQuest : IRogueDescription
+    public class DungeonQuest : IRogueDescribable
     {
         public string Name => _objectives[0].Name;
         public Sprite Icon => _objectives[0].Icon;

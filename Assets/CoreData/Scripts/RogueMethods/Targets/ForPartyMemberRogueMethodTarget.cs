@@ -8,10 +8,10 @@ namespace Roguegard
         public static ForPartyMemberRogueMethodTarget Instance { get; } = new ForPartyMemberRogueMethodTarget();
 
         public string Name => "味方";
-        Sprite IRogueDescription.Icon => null;
-        Color IRogueDescription.Color => Color.white;
-        string IRogueDescription.Caption => null;
-        IRogueDetails IRogueDescription.Details => null;
+        Sprite IRogueDescribable.Icon => null;
+        Color IRogueDescribable.Color => Color.white;
+        string IRogueDescribable.Caption => null;
+        IRogueDetails IRogueDescribable.Details => null;
 
         private static readonly Stack<Predicator> predicators = new();
 

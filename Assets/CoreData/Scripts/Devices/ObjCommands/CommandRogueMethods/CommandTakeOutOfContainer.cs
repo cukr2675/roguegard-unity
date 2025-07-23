@@ -16,7 +16,7 @@ namespace Roguegard
             return RogueMethodAspectState.Invoke(MainInfoKw.BeApplied, containerInfo.BeOpened, arg.Tool, self, activationDepth, takeOutArg);
         }
 
-        public override ISkillDescription GetSkillDescription(RogueObj self, RogueObj tool)
+        public override ISkillDescribable GetSkillDescribable(RogueObj self, RogueObj tool)
         {
             return null;
         }

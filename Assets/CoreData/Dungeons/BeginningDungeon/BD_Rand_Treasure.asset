@@ -18,14 +18,14 @@ MonoBehaviour:
   _items:
     _items:
     - _option: {fileID: 11400000, guid: e3eb826f9c4d5de44a0f733925eb1926, type: 2}
-      _optionDescription: {fileID: 0}
+      _optionCustom: {fileID: 0}
       _generatorWeight: 1
       _stack: 1
       _members:
         _items:
         - rid: 928021298735481091
     - _option: {fileID: 11400000, guid: e91d25b4588208546a844f5bc4ae66ff, type: 2}
-      _optionDescription: {fileID: 0}
+      _optionCustom: {fileID: 0}
       _generatorWeight: 1
       _stack: 1
       _members:

@@ -119,7 +119,7 @@ MonoBehaviour:
   _appearances: []
   _intrinsics:
   - _option: {fileID: 11400000, guid: d7fba64b6f0f1414baca32c6486d5e8f, type: 2}
-    _optionDescription: {fileID: 0}
+    _optionCustom: {fileID: 0}
     _members:
       _items: []
   _startingItemTable: []

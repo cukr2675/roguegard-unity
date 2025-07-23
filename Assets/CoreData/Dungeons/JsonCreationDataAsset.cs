@@ -41,7 +41,7 @@ namespace Roguegard.CharacterCreation
             if (!SpaceUtility.TryLocate(obj, location, position, stackOption)) throw new RogueException("生成したオブジェクトの移動に失敗しました。");
 
             obj.TrySetStack(startingItem.Stack);
-            if (startingItem.OptionColor != null) { ColoringEffect.ColorChange(obj, startingItem.OptionColor.Value); }
+            if (startingItem.CustomColor != null) { ColoringEffect.ColorChange(obj, startingItem.CustomColor.Value); }
 
             return obj;
         }

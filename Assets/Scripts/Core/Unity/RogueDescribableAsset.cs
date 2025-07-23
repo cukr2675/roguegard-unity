@@ -2,9 +2,9 @@ using UnityEngine;
 
 namespace Roguegard
 {
-    // 命名メモ: RogueDescriptionData だと非 ScriptableObject のデータと名の付くクラスと区別しづらいため RogueDescriptionAsset
+    // 命名メモ: RogueDescribableData だと非 ScriptableObject のデータと名の付くクラスと区別しづらいため RogueDescribableAsset
     // Asset とはいっても画像や音声のようなリソースを持つわけではない
-    public abstract class RogueDescriptionAsset : ScriptableObject, IRogueDescription
+    public abstract class RogueDescribableAsset : ScriptableObject, IRogueDescribable
     {
         [SerializeField] private string _descriptionName = null;
         protected string DescriptionNameSource => _descriptionName;
@@ -21,7 +21,7 @@ namespace Roguegard
                 _nameCache = null;
             }
         }
-        string IRogueDescription.Name => DescriptionName;
+        string IRogueDescribable.Name => DescriptionName;
 
 
 

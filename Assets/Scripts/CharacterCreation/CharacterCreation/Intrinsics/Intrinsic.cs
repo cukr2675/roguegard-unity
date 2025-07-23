@@ -7,21 +7,21 @@ namespace Roguegard.CharacterCreation
     public class Intrinsic : IReadOnlyIntrinsic
     {
         public IIntrinsicOption Option { get; set; }
-        public string OptionName { get; set; }
+        public string CustomName { get; set; }
         //public Sprite OptionIcon { get; set; }
-        public Sprite OptionIcon { get => null; set { } }
+        public Sprite CustomIcon { get => null; set { } }
         public Color32? OptionColor { get; set; }
-        public string OptionCaption { get; set; }
-        public IRogueDetails OptionDetails { get; set; }
+        public string CustomCaption { get; set; }
+        public IRogueDetails CustomDetails { get; set; }
 
         private readonly List<IMember> members = new();
 
-        public string Name => OptionName ?? Option.Name;
-        public Sprite Icon => OptionIcon ? OptionIcon : Option.Icon;
+        public string Name => CustomName ?? Option.Name;
+        public Sprite Icon => CustomIcon ? CustomIcon : Option.Icon;
         public Color Color => OptionColor ?? Option.Color;
-        public string Caption => OptionCaption ?? Option.Caption;
-        public IRogueDetails Details => OptionDetails ?? Option.Details;
-        Color? IReadOnlyIntrinsic.OptionColor => OptionColor;
+        public string Caption => CustomCaption ?? Option.Caption;
+        public IRogueDetails Details => CustomDetails ?? Option.Details;
+        Color? IReadOnlyIntrinsic.CustomColor => OptionColor;
         Spanning<IMemberSource> IReadOnlyMemberable.MemberSources => Option.MemberSources;
 
         public Intrinsic()
@@ -36,11 +36,11 @@ namespace Roguegard.CharacterCreation
         public void Set(IReadOnlyIntrinsic intrinsic)
         {
             Option = intrinsic.Option;
-            OptionName = intrinsic.OptionName;
-            OptionIcon = intrinsic.OptionIcon;
-            OptionColor = intrinsic.OptionColor;
-            OptionCaption = intrinsic.OptionCaption;
-            OptionDetails = intrinsic.OptionDetails;
+            CustomName = intrinsic.CustomName;
+            CustomIcon = intrinsic.CustomIcon;
+            OptionColor = intrinsic.CustomColor;
+            CustomCaption = intrinsic.CustomCaption;
+            CustomDetails = intrinsic.CustomDetails;
             members.Clear();
             foreach (var memberSource in Option.MemberSources)
             {

@@ -127,7 +127,7 @@ MonoBehaviour:
         _assemblyReflectionAssetDummy: 
         _newFloor:
           _option: {fileID: 11400000, guid: f2beb08d304645b498645c85ab0577ec, type: 2}
-          _optionDescription: {fileID: 0}
+          _optionCustom: {fileID: 0}
           _generatorWeight: 1
           _stack: 1
           _members:

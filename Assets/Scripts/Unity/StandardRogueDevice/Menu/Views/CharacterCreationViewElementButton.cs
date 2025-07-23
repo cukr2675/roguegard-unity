@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -107,12 +107,12 @@ namespace RoguegardUnity
             return _colorManyStars;
         }
 
-        private void ShowCaption(IRogueDescription description)
+        private void ShowCaption(IRogueDescribable describable)
         {
-            var text = description.Caption;
+            var text = describable.Caption;
             if (string.IsNullOrWhiteSpace(text))
             {
-                var name = description.Name;
+                var name = describable.Name;
                 if (name.StartsWith(':'))
                 {
                     if (!StandardRogueDeviceUtility.TryLocalize($"{name}::c", out text) &&

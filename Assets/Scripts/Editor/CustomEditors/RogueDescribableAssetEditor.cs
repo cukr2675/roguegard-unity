@@ -4,14 +4,14 @@ using UnityEngine;
 namespace Roguegard.CharacterCreation.Editor
 {
     /// <summary>
-    /// Project ビューにアイコン（<see cref="RogueDescriptionAsset.Icon"/>）を表示させるエディタ拡張
+    /// Project ビューにアイコン（<see cref="RogueDescribableAsset.Icon"/>）を表示させるエディタ拡張
     /// </summary>
-    [CustomEditor(typeof(RogueDescriptionAsset), true)]
-    public class RogueDescriptionAssetEditor : UnityEditor.Editor
+    [CustomEditor(typeof(RogueDescribableAsset), true)]
+    public class RogueDescribableAssetEditor : UnityEditor.Editor
     {
         public override Texture2D RenderStaticPreview(string assetPath, Object[] subAssets, int width, int height)
         {
-            var data = (RogueDescriptionAsset)target;
+            var data = (RogueDescribableAsset)target;
             var icon = data.Icon;
             if (icon == null) return base.RenderStaticPreview(assetPath, subAssets, width, height);
 

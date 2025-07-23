@@ -5,7 +5,7 @@ namespace Roguegard.CharacterCreation
     [System.Serializable]
     public class AssetStartingItemList : IWeightedRogueObjGeneratorList
     {
-        [SerializeField, ElementDescription("_option")] private AssetStartingItem[] _items;
+        [SerializeField, DescribeElement] private AssetStartingItem[] _items;
 
         public AssetStartingItem this[int index] => _items[index];
 

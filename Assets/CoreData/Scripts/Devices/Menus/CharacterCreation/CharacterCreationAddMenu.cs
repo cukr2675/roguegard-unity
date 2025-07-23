@@ -36,7 +36,7 @@ namespace Roguegard.Device
 
             view.ShowTemplate(elms, manager, arg)
                 ?
-                .NameFrom((element, manager, arg) => ((IRogueDescription)element).Name)
+                .NameFrom((element, manager, arg) => ((IRogueDescribable)element).Name)
 
                 .OnClick((element, manager, arg) =>
                 {

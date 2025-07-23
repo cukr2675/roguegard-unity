@@ -7,9 +7,9 @@ namespace Roguegard
         public static LineOfSight10RogueMethodRange Instance { get; } = new LineOfSight10RogueMethodRange();
 
         public string Name => "直線上10マス";
-        Sprite IRogueDescription.Icon => null;
-        Color IRogueDescription.Color => Color.white;
-        string IRogueDescription.Caption => "直線上10マスまで届く 障害物があるとそこで止まる";
+        Sprite IRogueDescribable.Icon => null;
+        Color IRogueDescribable.Color => Color.white;
+        string IRogueDescribable.Caption => "直線上10マスまで届く 障害物があるとそこで止まる";
         public IRogueDetails Details => null;
 
         public void Predicate(

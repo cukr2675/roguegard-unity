@@ -5,13 +5,13 @@ namespace Roguegard
 {
     /// <summary>
     /// <see cref="ObjCommandTable"/> の項目となる <see cref="IDeviceCommandAction"/> 。
-    /// <see cref="IDeviceCommandAction"/> と違い <see cref="ISkillDescription"/> を返すため、
+    /// <see cref="IDeviceCommandAction"/> と違い <see cref="ISkillDescribable"/> を返すため、
     /// PointAttackCommandAction のようにメソッドを試行するクラスには適用しない。
     /// </summary>
     public interface IObjCommand : IDeviceCommandAction
     {
         ISelectOption SelectOption { get; }
 
-        ISkillDescription GetSkillDescription(RogueObj self, RogueObj tool);
+        ISkillDescribable GetSkillDescribable(RogueObj self, RogueObj tool);
     }
 }

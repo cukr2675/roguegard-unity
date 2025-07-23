@@ -11,10 +11,10 @@ namespace Roguegard
         public static ForEnemyRogueMethodTarget Instance { get; } = new ForEnemyRogueMethodTarget();
 
         public string Name => "敵";
-        Sprite IRogueDescription.Icon => null;
-        Color IRogueDescription.Color => Color.white;
-        string IRogueDescription.Caption => null;
-        IRogueDetails IRogueDescription.Details => null;
+        Sprite IRogueDescribable.Icon => null;
+        Color IRogueDescribable.Color => Color.white;
+        string IRogueDescribable.Caption => null;
+        IRogueDetails IRogueDescribable.Details => null;
 
         private static readonly Stack<Predicator> predicators = new();
 

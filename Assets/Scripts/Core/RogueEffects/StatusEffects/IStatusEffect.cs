@@ -2,7 +2,7 @@ using OchalikeSprites;
 
 namespace Roguegard
 {
-    public interface IStatusEffect : IRogueDescription
+    public interface IStatusEffect : IRogueDescribable
     {
         IKeyword EffectCategory { get; }
 

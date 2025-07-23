@@ -3,7 +3,7 @@ using OchalikeSprites;
 namespace Roguegard.CharacterCreation
 {
     [Objforming.RequireRelationalComponent]
-    public interface IRaceOption : IRogueDescription
+    public interface IRaceOption : IRogueDescribable
     {
         /// <summary>
         /// この <see cref="IRaceOption"/> の進化・退化先。 <see cref="CharacterCreationInfoSet"/> のキャッシュに必要。

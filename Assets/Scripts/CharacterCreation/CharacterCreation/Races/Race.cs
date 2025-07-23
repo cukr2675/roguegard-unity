@@ -7,21 +7,21 @@ namespace Roguegard.CharacterCreation
     public class Race : IReadOnlyRace
     {
         public IRaceOption Option { get; set; }
-        public string OptionName { get; set; }
+        public string CustomName { get; set; }
         public Color32 BodyColor { get; set; }
-        public string OptionCaption { get; set; }
-        public IRogueDetails OptionDetails { get; set; }
+        public string CustomCaption { get; set; }
+        public IRogueDetails CustomDetails { get; set; }
         public IRogueGender Gender { get; set; }
         public string HpName { get; set; }
         public string MpName { get; set; }
 
         private readonly List<IMember> members = new();
 
-        public string Name => OptionName ?? Option.Name;
+        public string Name => CustomName ?? Option.Name;
         public Sprite Icon => Option.Icon;
-        Color IRogueDescription.Color => Option.Color;
-        public string Caption => OptionCaption ?? Option.Caption;
-        public IRogueDetails Details => OptionDetails ?? Option.Details;
+        Color IRogueDescribable.Color => Option.Color;
+        public string Caption => CustomCaption ?? Option.Caption;
+        public IRogueDetails Details => CustomDetails ?? Option.Details;
         Color IReadOnlyRace.BodyColor => BodyColor;
         int IReadOnlyRace.Lv => 1;
         Spanning<IMemberSource> IReadOnlyMemberable.MemberSources => Option.MemberSources;
@@ -38,10 +38,10 @@ namespace Roguegard.CharacterCreation
         public void Set(IReadOnlyRace race)
         {
             Option = race.Option;
-            OptionName = race.OptionName;
+            CustomName = race.CustomName;
             BodyColor = race.BodyColor;
-            OptionCaption = race.OptionCaption;
-            OptionDetails = race.OptionDetails;
+            CustomCaption = race.CustomCaption;
+            CustomDetails = race.CustomDetails;
             Gender = race.Gender;
             HpName = race.HpName;
             MpName = race.MpName;

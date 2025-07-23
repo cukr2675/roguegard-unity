@@ -1,10 +1,10 @@
 namespace Roguegard.CharacterCreation
 {
-    public interface IReadOnlyAppearance : IRogueDescription, IReadOnlyMemberable
+    public interface IReadOnlyAppearance : IRogueDescribable, IReadOnlyMemberable
     {
         IAppearanceOption Option { get; }
-        string OptionName { get; }
-        string OptionCaption { get; }
-        IRogueDetails OptionDetails { get; }
+        string CustomName { get; }
+        string CustomCaption { get; }
+        IRogueDetails CustomDetails { get; }
     }
 }

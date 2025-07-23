@@ -1,6 +1,6 @@
 namespace Roguegard
 {
-    public interface IEatActiveRogueMethod : IActiveRogueMethod, IRogueDescription
+    public interface IEatActiveRogueMethod : IActiveRogueMethod, IRogueDescribable
     {
         Spanning<IKeyword> Edibles { get; }
     }

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -113,9 +113,9 @@ namespace RoguegardUnity
             public override void OpenScreen(in MMgr manager, in MArg arg)
             {
                 var obj = arg.Arg.Tool ?? arg.Arg.TargetObj;
-                var description = obj?.Main.InfoSet ?? arg.Arg.Other as IRogueDescription;
+                var describable = obj?.Main.InfoSet ?? arg.Arg.Other as IRogueDescribable;
                 var details = "";
-                if (description != null) { details = StandardRogueDeviceUtility.GetDescription(description); }
+                if (describable != null) { details = StandardRogueDeviceUtility.GetDescription(describable); }
 
                 view.ShowTemplate(details ?? "", manager, arg)
                     ?

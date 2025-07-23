@@ -1,6 +1,6 @@
 namespace Roguegard
 {
-    public interface IRogueMaterial : IRogueDescription
+    public interface IRogueMaterial : IRogueDescribable
     {
         void AffectValue(EffectableValue value, RogueObj self);
     }
