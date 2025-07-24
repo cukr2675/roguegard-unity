@@ -355,44 +355,44 @@ namespace Roguegard
         {
             if (from == null) return;
 
-            foreach (var fromPart in from.Parts)
+            foreach (var fromSlot in from.Slots)
             {
-                if (to == null || !to.Parts.Contains(fromPart))
+                if (to == null || !to.Slots.Contains(fromSlot))
                 {
                     // 移動先に同一の部位が存在しないときは解除する。
-                    Unequip(fromPart);
+                    Unequip(fromSlot);
                 }
                 else
                 {
-                    Reequip(fromPart);
+                    Reequip(fromSlot);
                 }
             }
 
-            void Unequip(IKeyword fromPart)
+            void Unequip(IKeyword fromSlot)
             {
-                var fromLength = from.GetLength(fromPart);
+                var fromLength = from.GetLength(fromSlot);
                 for (int i = 0; i < fromLength; i++)
                 {
-                    var fromEquipment = from.GetEquipment(fromPart, i);
+                    var fromEquipment = from.GetEquipment(fromSlot, i);
                     var fromEquipmentInfo = fromEquipment.Main.GetEquipmentInfo(fromEquipment);
                     fromEquipmentInfo.RemoveClose(fromEquipment);
                 }
             }
 
-            void Reequip(IKeyword fromPart)
+            void Reequip(IKeyword fromSlot)
             {
-                var fromLength = from.GetLength(fromPart);
-                var toLength = to.GetLength(fromPart);
+                var fromLength = from.GetLength(fromSlot);
+                var toLength = to.GetLength(fromSlot);
                 var reequipLength = Mathf.Min(fromLength, toLength);
                 for (int i = 0; i < reequipLength; i++)
                 {
-                    var reequipEquipment = from.GetEquipment(fromPart, i);
-                    to.SetEquipment(fromPart, i, reequipEquipment);
+                    var reequipEquipment = from.GetEquipment(fromSlot, i);
+                    to.SetEquipment(fromSlot, i, reequipEquipment);
                 }
                 for (int i = reequipLength; i < fromLength; i++)
                 {
                     // 移動しきれないぶんは解除する。
-                    var fromEquipment = from.GetEquipment(fromPart, i);
+                    var fromEquipment = from.GetEquipment(fromSlot, i);
                     var fromEquipmentInfo = fromEquipment.Main.GetEquipmentInfo(fromEquipment);
                     fromEquipmentInfo.RemoveClose(fromEquipment);
                 }

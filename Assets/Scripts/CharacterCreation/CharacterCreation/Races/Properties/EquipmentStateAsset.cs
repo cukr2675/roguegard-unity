@@ -10,15 +10,15 @@ namespace Roguegard.CharacterCreation
     {
         [SerializeField] private List<Item> _items = null;
 
-        [System.NonSerialized] private IKeyword[] partsList;
+        [System.NonSerialized] private IKeyword[] slotsList;
 
-        public Spanning<IKeyword> Parts => partsList ??= _items.Select(x => x.Part).ToArray();
+        public Spanning<IKeyword> Slots => slotsList ??= _items.Select(x => x.Slot).ToArray();
 
         public IEnumerator<KeyValuePair<IKeyword, int>> GetEnumerator()
         {
             foreach (var item in _items)
             {
-                yield return new KeyValuePair<IKeyword, int>(item.Part, item.Length);
+                yield return new KeyValuePair<IKeyword, int>(item.Slot, item.Length);
             }
         }
 
@@ -30,8 +30,8 @@ namespace Roguegard.CharacterCreation
         [System.Serializable]
         private class Item
         {
-            [SerializeField] private KeywordAsset _part;
-            public IKeyword Part => _part;
+            [SerializeField] private KeywordAsset _slot;
+            public IKeyword Slot => _slot;
 
             [SerializeField] private int _length;
             public int Length => _length;

@@ -132,7 +132,7 @@ namespace Roguegard
 
         protected class EquipmentInfo : BaseEquipmentInfo, IBoneSpriteEffect
         {
-            public override Spanning<IKeyword> EquipParts => data.EquipParts;
+            public override Spanning<IKeyword> EquipmentSlots => data.EquipmentSlots;
             public override bool CanStackWhileEquipped => false;
             float IBoneSpriteEffect.Order => data.BoneSpriteEffectOrder;
 

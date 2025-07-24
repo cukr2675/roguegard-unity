@@ -12,7 +12,7 @@ namespace Roguegard
         /// <summary>
         /// 重複した部位の指定禁止
         /// </summary>
-        public abstract Spanning<IKeyword> EquipParts { get; }
+        public abstract Spanning<IKeyword> EquipmentSlots { get; }
 
         public int EquipIndex => equipEffect?.Index ?? -1;
 
@@ -50,13 +50,13 @@ namespace Roguegard
             this.equipEffect = equipEffect;
 
             var ownerEquipmentState = owner.Main.GetEquipmentState(owner);
-            for (int i = 0; i < EquipParts.Length; i++)
+            for (int i = 0; i < EquipmentSlots.Length; i++)
             {
-                var equipPart = EquipParts[i];
+                var equipmentSlot = EquipmentSlots[i];
                 int equipIndex;
                 if (i == 0) { equipIndex = index; } // 最初の部位だけ外部からの指定を受ける。
-                else { equipIndex = EquipmentUtility.GetEquipIndex(ownerEquipmentState, equipPart); }
-                var equipment1 = ownerEquipmentState.GetEquipment(equipPart, equipIndex);
+                else { equipIndex = EquipmentUtility.GetEquipIndex(ownerEquipmentState, equipmentSlot); }
+                var equipment1 = ownerEquipmentState.GetEquipment(equipmentSlot, equipIndex);
                 if (equipment1 != null)
                 {
                     // 既に枠が埋まっていたら失敗させる。
@@ -65,7 +65,7 @@ namespace Roguegard
                     return false;
                 }
 
-                ownerEquipmentState.SetEquipment(equipPart, equipIndex, equipment);
+                ownerEquipmentState.SetEquipment(equipmentSlot, equipIndex, equipment);
             }
 
             if (addEffect) { owner.Main.RogueEffects.AddOpen(owner, equipEffect); }
@@ -98,15 +98,15 @@ namespace Roguegard
         {
             var owner = equipment.Location;
             var ownerEquipmentState = owner.Main.GetEquipmentState(owner);
-            foreach (var equipPart in EquipParts)
+            foreach (var equipmentSlot in EquipmentSlots)
             {
-                var length = ownerEquipmentState.GetLength(equipPart);
+                var length = ownerEquipmentState.GetLength(equipmentSlot);
                 for (int j = 0; j < length; j++)
                 {
-                    var equipment1 = ownerEquipmentState.GetEquipment(equipPart, j);
+                    var equipment1 = ownerEquipmentState.GetEquipment(equipmentSlot, j);
                     if (equipment1 != equipment) continue;
 
-                    ownerEquipmentState.RemoveEquipment(equipPart, j);
+                    ownerEquipmentState.RemoveEquipment(equipmentSlot, j);
                 }
             }
 

@@ -2,7 +2,7 @@ namespace Roguegard
 {
     public interface IEquipmentInfo
     {
-        Spanning<IKeyword> EquipParts { get; }
+        Spanning<IKeyword> EquipmentSlots { get; }
 
         /// <summary>
         /// -1 のとき未装備。

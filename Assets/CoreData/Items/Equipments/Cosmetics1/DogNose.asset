@@ -114,7 +114,7 @@ MonoBehaviour:
     _members:
       _items: []
     _isCosmetic: 1
-    _equipParts:
+    _equipmentSlots:
     - {fileID: 11400000, guid: 0a5066941778bef46a99ac2da12b129b, type: 2}
     _canStackWhileEquipped: 0
     _ochalikeMorph: {fileID: 11400000, guid: 8c78a667d93ea4e47b12bbb49269f4b9, type: 2}

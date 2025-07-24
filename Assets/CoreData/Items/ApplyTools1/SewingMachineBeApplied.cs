@@ -125,7 +125,7 @@ namespace Roguegard
                                 return $"<#{ColorUtility.ToHtmlStringRGBA(data.BoneSprites.MainColor)}>メインカラー";
                             }, colorPicker),
 
-                        SelectOption.Create<MMgr, MArg>("装備部位", new EquipPartsScreen()),
+                        SelectOption.Create<MMgr, MArg>("装備部位", new EquipmentSlotsScreen()),
 
                         new object[]
                         {
@@ -215,7 +215,7 @@ namespace Roguegard
             }
         }
 
-        private class EquipPartsScreen : RogueMenuScreen
+        private class EquipmentSlotsScreen : RogueMenuScreen
         {
             private ISerializableKeyword[] elms;
 
@@ -247,24 +247,24 @@ namespace Roguegard
 
                 view.ShowTemplate(elms, manager, arg)
                     ?
-                    .NameFrom((part, manager, arg) =>
+                    .NameFrom((slot, manager, arg) =>
                     {
-                        if (part == null) return "その他";
-                        return part.Name;
+                        if (slot == null) return "その他";
+                        return slot.Name;
                     })
 
-                    .OnClick((part, manager, arg) =>
+                    .OnClick((slot, manager, arg) =>
                     {
                         var data = (SewedEquipmentData)arg.Arg.Other;
-                        if (part == null)
+                        if (slot == null)
                         {
-                            data.SetEquipParts(Spanning<ISerializableKeyword>.Empty);
+                            data.SetEquipmentSlots(Spanning<ISerializableKeyword>.Empty);
                         }
                         else
                         {
-                            data.SetEquipParts(new[] { part });
+                            data.SetEquipmentSlots(new[] { slot });
 
-                            if (part is EquipKeywordAsset keyword)
+                            if (slot is EquipKeywordAsset keyword)
                             {
                                 data.BoneSpriteEffectOrder = keyword.Order;
                             }

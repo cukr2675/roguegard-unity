@@ -20,21 +20,21 @@ namespace Roguegard.Extensions
                 return false;
             }
 
-            var equipParts = equipmentInfo.EquipParts;
+            var equipmentSlots = equipmentInfo.EquipmentSlots;
 
             if (replaceEquipments)
             {
                 // 既に何か装備していたら外す
-                foreach (var equipPart in equipParts)
+                foreach (var equipmentSlot in equipmentSlots)
                 {
-                    var equipIndex = EquipmentUtility.GetEquipIndex(ownerEquipmentState, equipPart);
-                    var preEquipment = ownerEquipmentState.GetEquipment(equipPart, equipIndex);
+                    var equipIndex = EquipmentUtility.GetEquipIndex(ownerEquipmentState, equipmentSlot);
+                    var preEquipment = ownerEquipmentState.GetEquipment(equipmentSlot, equipIndex);
                     if (preEquipment != null) { method.TryUnequip(preEquipment, user, activationDepth, true); }
                 }
             }
 
             // 装備する
-            var count = equipParts.Length >= 1 ? EquipmentUtility.GetEquipIndex(ownerEquipmentState, equipParts[0]) : 0;
+            var count = equipmentSlots.Length >= 1 ? EquipmentUtility.GetEquipIndex(ownerEquipmentState, equipmentSlots[0]) : 0;
             var equipArg = new RogueMethodArgument(count: count);
             var equipResult = RogueMethodAspectState.Invoke(
                 MainInfoKw.Equip, equipmentInfo.BeEquipped, equipment, user, activationDepth, equipArg);

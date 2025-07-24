@@ -12,7 +12,7 @@ namespace Roguegard.CharacterCreation
 
         [SerializeField] private bool _isCosmetic;
 
-        [SerializeField] private EquipKeywordAsset[] _equipParts;
+        [SerializeField] private EquipKeywordAsset[] _equipmentSlots;
 
         [SerializeField] private bool _canStackWhileEquipped;
 
@@ -39,15 +39,15 @@ namespace Roguegard.CharacterCreation
 
         public void Validate()
         {
-            if (!_overridesBoneSpriteEffectOrder && _equipParts.Length >= 1 && _equipParts[0] != null)
+            if (!_overridesBoneSpriteEffectOrder && _equipmentSlots.Length >= 1 && _equipmentSlots[0] != null)
             {
-                _boneSpriteEffectOrder = _equipParts[0].Order;
+                _boneSpriteEffectOrder = _equipmentSlots[0].Order;
             }
         }
 
         public void Affect(AppearanceMorph morph, Color color)
         {
-            if (!morph.TryGetNewEquipmentTable(_isCosmetic ? Spanning<IKeyword>.Empty : _equipParts, _boneSpriteEffectOrder, out var table))
+            if (!morph.TryGetNewEquipmentTable(_isCosmetic ? Spanning<IKeyword>.Empty : _equipmentSlots, _boneSpriteEffectOrder, out var table))
             {
                 Debug.LogWarning("重複した装備部位の見た目が存在します。");
                 return;
@@ -59,7 +59,7 @@ namespace Roguegard.CharacterCreation
         protected class EquipmentInfo<T> : BaseEquipmentInfo, IBoneSpriteEffect
             where T : EquipmentInlineRace
         {
-            public override Spanning<IKeyword> EquipParts => Data._isCosmetic ? Spanning<IKeyword>.Empty : Data._equipParts;
+            public override Spanning<IKeyword> EquipmentSlots => Data._isCosmetic ? Spanning<IKeyword>.Empty : Data._equipmentSlots;
             public override bool CanStackWhileEquipped => Data._canStackWhileEquipped;
             public override IApplyRogueMethod BeEquipped => Data._beEquipped.Ref ?? base.BeEquipped;
             public override IChangeEffectRogueMethod BeUnequipped => Data._beUnequipped.Ref ?? base.BeUnequipped;

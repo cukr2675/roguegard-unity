@@ -9,8 +9,8 @@ namespace Roguegard
     {
         public string Name { get; set; }
 
-        private ISerializableKeyword[] _equipParts;
-        public Spanning<IKeyword> EquipParts => _equipParts;
+        private ISerializableKeyword[] _equipmentSlots;
+        public Spanning<IKeyword> EquipmentSlots => _equipmentSlots;
 
         public float BoneSpriteEffectOrder { get; set; }
 
@@ -29,7 +29,7 @@ namespace Roguegard
         public SewedEquipmentData()
         {
             Name = "";
-            _equipParts = new ISerializableKeyword[0];
+            _equipmentSlots = new ISerializableKeyword[0];
             BoneSpriteEffectOrder = 0;
             BoneSprites = new PaintBoneSpriteTable();
         }
@@ -37,19 +37,19 @@ namespace Roguegard
         public SewedEquipmentData(SewedEquipmentData data)
         {
             Name = data.Name;
-            _equipParts = data._equipParts?.ToArray();
+            _equipmentSlots = data._equipmentSlots?.ToArray();
             BoneSpriteEffectOrder = data.BoneSpriteEffectOrder;
             BoneSprites = new PaintBoneSpriteTable(data.BoneSprites);
         }
 
-        public void SetEquipParts(Spanning<ISerializableKeyword> parts)
+        public void SetEquipmentSlots(Spanning<ISerializableKeyword> equipmentSlots)
         {
-            _equipParts = parts.ToArray();
+            _equipmentSlots = equipmentSlots.ToArray();
         }
 
         public void Affect(AppearanceMorph morph, Color color)
         {
-            if (!morph.TryGetNewEquipmentTable(_equipParts, BoneSpriteEffectOrder, out var table))
+            if (!morph.TryGetNewEquipmentTable(_equipmentSlots, BoneSpriteEffectOrder, out var table))
             {
                 Debug.LogWarning("重複した装備部位の見た目が存在します。");
                 return;

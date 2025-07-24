@@ -42,12 +42,12 @@ namespace Roguegard
                 var effect = (PolymorphStatusEffect)statusEffect;
                 effect.equipments.Clear();
                 var equipmentState = target.Main.GetEquipmentState(target);
-                foreach (var part in equipmentState.Parts)
+                foreach (var slot in equipmentState.Slots)
                 {
-                    var length = equipmentState.GetLength(part);
+                    var length = equipmentState.GetLength(slot);
                     for (int j = 0; j < length; j++)
                     {
-                        var equipment = equipmentState.GetEquipment(part, j);
+                        var equipment = equipmentState.GetEquipment(slot, j);
                         if (equipment == null) continue;
 
                         var equipmentInfo = equipment.Main.GetEquipmentInfo(equipment);
@@ -78,7 +78,7 @@ namespace Roguegard
                 if (equipment.Location != self) continue;
 
                 // 装備枠が埋まっていたら装備しない。
-                if (equipmentState.GetEquipment(equipmentInfo.EquipParts[0], index) != null) continue;
+                if (equipmentState.GetEquipment(equipmentInfo.EquipmentSlots[0], index) != null) continue;
 
                 equipmentInfo.TryOpen(equipment, index);
             }

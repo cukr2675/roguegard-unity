@@ -10,14 +10,14 @@ namespace Roguegard.CharacterCreation
 
         public OchalikeMorph BaseEffectOchalikeMorph => baseEffect.OchalikeMorph;
 
-        public bool TryGetNewEquipmentTable(Spanning<IKeyword> equipParts, float order, out OchalikeMorph ochalikeMorph)
+        public bool TryGetNewEquipmentTable(Spanning<IKeyword> equipmentSlots, float order, out OchalikeMorph ochalikeMorph)
         {
             // 部分一致する要素があったら失敗させる
             foreach (var item in equipmentItems)
             {
-                foreach (var equipPart in item.EquipParts)
+                foreach (var equipmentSlot in item.EquipmentSlots)
                 {
-                    if (equipParts.Contains(equipPart))
+                    if (equipmentSlots.Contains(equipmentSlot))
                     {
                         ochalikeMorph = null;
                         return false;
@@ -27,7 +27,7 @@ namespace Roguegard.CharacterCreation
 
             {
                 // 完全一致する要素が見つからなければ新しく追加する
-                var item = new EquipmentItem(equipParts, order);
+                var item = new EquipmentItem(equipmentSlots, order);
                 equipmentItems.Add(item);
                 ochalikeMorph = item.OchalikeMorph;
                 return true;
@@ -73,16 +73,16 @@ namespace Roguegard.CharacterCreation
 
         private class EquipmentItem : IBoneSpriteEffect
         {
-            private readonly IKeyword[] _equipParts;
-            public Spanning<IKeyword> EquipParts => _equipParts;
+            private readonly IKeyword[] _equipmentSlots;
+            public Spanning<IKeyword> EquipmentSlots => _equipmentSlots;
 
             public float Order { get; }
 
             public OchalikeMorph OchalikeMorph { get; }
 
-            public EquipmentItem(Spanning<IKeyword> equipParts, float order)
+            public EquipmentItem(Spanning<IKeyword> equipmentSlots, float order)
             {
-                _equipParts = equipParts.ToArray();
+                _equipmentSlots = equipmentSlots.ToArray();
                 Order = order;
                 OchalikeMorph = new OchalikeMorph();
             }
@@ -91,25 +91,25 @@ namespace Roguegard.CharacterCreation
             {
                 // 同一部位または Innerwear に何か装備されていたらエフェクト無効化
                 // （部位がゼロのエフェクトは無視して表示）
-                if (_equipParts.Length >= 1)
+                if (_equipmentSlots.Length >= 1)
                 {
-                    for (int i = 0; i < _equipParts.Length; i++)
+                    for (int i = 0; i < _equipmentSlots.Length; i++)
                     {
-                        if (Any(self, _equipParts[i])) return;
+                        if (Any(self, _equipmentSlots[i])) return;
                     }
-                    if (Any(self, RoguegardCharacterCreationSettings.EquipPartOfInnerwear)) return;
+                    if (Any(self, RoguegardCharacterCreationSettings.EquipmentSlotOfInnerwear)) return;
                 }
 
                 OchalikeMorph.AddTo(ochalikeMorph);
             }
 
-            private static bool Any(RogueObj self, IKeyword equipPart)
+            private static bool Any(RogueObj self, IKeyword equipmentSlot)
             {
                 var equipmentState = self.Main.GetEquipmentState(self);
-                var length = equipmentState?.GetLength(equipPart) ?? 0;
+                var length = equipmentState?.GetLength(equipmentSlot) ?? 0;
                 for (int i = 0; i < length; i++)
                 {
-                    var equipment = equipmentState.GetEquipment(equipPart, i);
+                    var equipment = equipmentState.GetEquipment(equipmentSlot, i);
                     if (equipment != null) return true;
                 }
                 return false;

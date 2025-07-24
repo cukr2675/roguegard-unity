@@ -35,12 +35,12 @@ namespace Roguegard
             {
                 equipments.Clear();
                 var equipmentState = target.Main.GetEquipmentState(target);
-                foreach (var part in equipmentState.Parts)
+                foreach (var slot in equipmentState.Slots)
                 {
-                    var length = equipmentState.GetLength(part);
+                    var length = equipmentState.GetLength(slot);
                     for (int j = 0; j < length; j++)
                     {
-                        var equipment = equipmentState.GetEquipment(part, j);
+                        var equipment = equipmentState.GetEquipment(slot, j);
                         if (equipment == null) continue;
 
                         var cost = StatsEffectedValues.GetCost(equipment);

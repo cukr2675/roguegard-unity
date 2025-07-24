@@ -4,7 +4,7 @@ namespace Roguegard
 {
     public static class EquipmentUtility
     {
-        private static readonly List<IKeyword> equipParts = new();
+        private static readonly List<IKeyword> equipmentSlots = new();
 
         /// <summary>
         /// 0 からチェックして空いている装備インデックスを取得する。
@@ -97,22 +97,22 @@ namespace Roguegard
         private static RogueObj GetRandomEquipment(RogueObj obj, IRogueRandom random)
         {
             var equipmentState = obj.Main.GetEquipmentState(obj);
-            equipParts.Clear();
-            foreach (var equipPart in equipmentState.Parts)
+            equipmentSlots.Clear();
+            foreach (var slot in equipmentState.Slots)
             {
-                equipParts.Add(equipPart);
+                equipmentSlots.Add(slot);
             }
 
-            for (int i = equipmentState.Parts.Length - 1; i >= 0; i--)
+            for (int i = equipmentState.Slots.Length - 1; i >= 0; i--)
             {
-                var equipPartIndex = random.Next(0, equipParts.Count);
-                var equipPart = equipParts[equipPartIndex];
-                equipParts.RemoveAt(equipPartIndex);
+                var slotIndex = random.Next(0, equipmentSlots.Count);
+                var slot = equipmentSlots[slotIndex];
+                equipmentSlots.RemoveAt(slotIndex);
 
-                var length = equipmentState.GetLength(equipPart);
+                var length = equipmentState.GetLength(slot);
                 for (int j = 0; j < length; j++)
                 {
-                    var equipment = equipmentState.GetEquipment(equipPart, j);
+                    var equipment = equipmentState.GetEquipment(slot, j);
                     if (equipment == null) continue;
 
                     return equipment;
@@ -127,22 +127,22 @@ namespace Roguegard
         private static RogueObj GetRandomEquipmentWithoutCostume(RogueObj obj, IRogueRandom random)
         {
             var equipmentState = obj.Main.GetEquipmentState(obj);
-            equipParts.Clear();
-            foreach (var equipPart in equipmentState.Parts)
+            equipmentSlots.Clear();
+            foreach (var slot in equipmentState.Slots)
             {
-                equipParts.Add(equipPart);
+                equipmentSlots.Add(slot);
             }
 
-            for (int i = equipmentState.Parts.Length - 1; i >= 0; i--)
+            for (int i = equipmentState.Slots.Length - 1; i >= 0; i--)
             {
-                var equipPartIndex = random.Next(0, equipParts.Count);
-                var equipPart = equipParts[equipPartIndex];
-                equipParts.RemoveAt(equipPartIndex);
+                var slotIndex = random.Next(0, equipmentSlots.Count);
+                var slot = equipmentSlots[slotIndex];
+                equipmentSlots.RemoveAt(slotIndex);
 
-                var length = equipmentState.GetLength(equipPart);
+                var length = equipmentState.GetLength(slot);
                 for (int j = 0; j < length; j++)
                 {
-                    var equipment = equipmentState.GetEquipment(equipPart, j);
+                    var equipment = equipmentState.GetEquipment(slot, j);
                     if (equipment == null) continue;
 
                     if (equipment.Main.InfoSet.Cost <= 0f) continue; // コストがゼロの装備品は含めない。
@@ -159,22 +159,22 @@ namespace Roguegard
         public static RogueObj GetRandomArmor(RogueObj obj, IRogueRandom random)
         {
             var equipmentState = obj.Main.GetEquipmentState(obj);
-            equipParts.Clear();
-            foreach (var equipPart in equipmentState.Parts)
+            equipmentSlots.Clear();
+            foreach (var slot in equipmentState.Slots)
             {
-                equipParts.Add(equipPart);
+                equipmentSlots.Add(slot);
             }
 
-            for (int i = equipmentState.Parts.Length - 1; i >= 0; i--)
+            for (int i = equipmentState.Slots.Length - 1; i >= 0; i--)
             {
-                var equipPartIndex = random.Next(0, equipParts.Count);
-                var equipPart = equipParts[equipPartIndex];
-                equipParts.RemoveAt(equipPartIndex);
+                var slotIndex = random.Next(0, equipmentSlots.Count);
+                var slot = equipmentSlots[slotIndex];
+                equipmentSlots.RemoveAt(slotIndex);
 
-                var length = equipmentState.GetLength(equipPart);
+                var length = equipmentState.GetLength(slot);
                 for (int j = 0; j < length; j++)
                 {
-                    var equipment = equipmentState.GetEquipment(equipPart, j);
+                    var equipment = equipmentState.GetEquipment(slot, j);
                     if (equipment == null) continue;
 
                     var equipmentInfo = equipment.Main.GetEquipmentInfo(equipment);
@@ -192,22 +192,22 @@ namespace Roguegard
         private static RogueObj GetRandomArmorWithoutCostume(RogueObj obj, IRogueRandom random)
         {
             var equipmentState = obj.Main.GetEquipmentState(obj);
-            equipParts.Clear();
-            foreach (var equipPart in equipmentState.Parts)
+            equipmentSlots.Clear();
+            foreach (var slot in equipmentState.Slots)
             {
-                equipParts.Add(equipPart);
+                equipmentSlots.Add(slot);
             }
 
-            for (int i = equipmentState.Parts.Length - 1; i >= 0; i--)
+            for (int i = equipmentState.Slots.Length - 1; i >= 0; i--)
             {
-                var equipPartIndex = random.Next(0, equipParts.Count);
-                var equipPart = equipParts[equipPartIndex];
-                equipParts.RemoveAt(equipPartIndex);
+                var slotIndex = random.Next(0, equipmentSlots.Count);
+                var slot = equipmentSlots[slotIndex];
+                equipmentSlots.RemoveAt(slotIndex);
 
-                var length = equipmentState.GetLength(equipPart);
+                var length = equipmentState.GetLength(slot);
                 for (int j = 0; j < length; j++)
                 {
-                    var equipment = equipmentState.GetEquipment(equipPart, j);
+                    var equipment = equipmentState.GetEquipment(slot, j);
                     if (equipment == null) continue;
 
                     if (equipment.Main.InfoSet.Cost <= 0f) continue; // コストがゼロの装備品は含めない。

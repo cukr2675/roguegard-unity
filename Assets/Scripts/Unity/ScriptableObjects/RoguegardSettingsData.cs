@@ -54,7 +54,7 @@ namespace RoguegardUnity
 
         [Header("Global Assets")]
         [SerializeField] private ScriptRef<ILevelInfoInitializer> _levelInfoInitializer = null;
-        [SerializeField] private EquipKeywordAsset _equipPartOfInnerwear = null;
+        [SerializeField] private EquipKeywordAsset _equipmentSlotOfInnerwear = null;
         [SerializeField] private DefaultRaceOptionAsset _defaultRaceOption = null;
         [SerializeField] private ObjCommandTable _objCommandTable = null;
         [SerializeField] private DungeonQuestGeneratorAsset _dungeonQuestGenerator = null;
@@ -79,7 +79,7 @@ namespace RoguegardUnity
             RoguegardSettings.DefaultSaveFileName = _defaultSaveFileName;
 
             RoguegardCharacterCreationSettings.LevelInfoInitializer = _levelInfoInitializer.Ref;
-            RoguegardCharacterCreationSettings.EquipPartOfInnerwear = _equipPartOfInnerwear;
+            RoguegardCharacterCreationSettings.EquipmentSlotOfInnerwear = _equipmentSlotOfInnerwear;
             RoguegardSettings.DefaultRaceOption = _defaultRaceOption;
             RoguegardSettings.ObjCommandTable = _objCommandTable;
             RoguegardSettings.DungeonQuestGenerator = _dungeonQuestGenerator;

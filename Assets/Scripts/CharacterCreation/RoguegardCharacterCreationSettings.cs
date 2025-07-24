@@ -6,7 +6,7 @@ namespace Roguegard.CharacterCreation
     {
         public static ILevelInfoInitializer LevelInfoInitializer { get; set; }
 
-        public static IKeyword EquipPartOfInnerwear { get; set; }
+        public static IKeyword EquipmentSlotOfInnerwear { get; set; }
 
         public static int GetCharacterStars(float cost)
         {

@@ -2,7 +2,7 @@ namespace Roguegard
 {
     public interface IEquipmentState
     {
-        Spanning<IKeyword> Parts { get; }
+        Spanning<IKeyword> Slots { get; }
 
         int GetLength(IKeyword keyword);
 

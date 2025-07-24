@@ -8,7 +8,7 @@ namespace Roguegard.CharacterCreation
 
         private readonly Dictionary<IKeyword, RogueObj[]> table;
 
-        public Spanning<IKeyword> Parts => data.Parts;
+        public Spanning<IKeyword> Slots => data.Slots;
 
         private DataEquipmentState(EquipmentStateAsset data)
         {
