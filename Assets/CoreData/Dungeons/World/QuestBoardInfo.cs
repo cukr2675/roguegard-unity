@@ -49,7 +49,7 @@ namespace Roguegard
             else
             {
                 // 上書き不可
-                throw new RogueException();
+                throw new System.InvalidOperationException();
             }
         }
 

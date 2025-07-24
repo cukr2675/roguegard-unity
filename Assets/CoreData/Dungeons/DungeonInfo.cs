@@ -48,7 +48,7 @@ namespace Roguegard
 
         public bool TryGetRandom(int lv, out IRogueRandom random)
         {
-            if (!hasDungeonSeed) throw new RogueException("このダンジョンはシード値を持っていません。");
+            if (!hasDungeonSeed) throw new System.InvalidOperationException("このダンジョンはシード値を持っていません。");
 
             var floorSeed = GetFloorSeed(lv);
             random = new RogueRandom(floorSeed);
@@ -119,7 +119,7 @@ namespace Roguegard
             }
 
             // 上書き不可
-            if (info.info.floors != null) throw new RogueException();
+            if (info.info.floors != null) throw new System.InvalidOperationException();
 
             info.info.floors = floors.ToArray();
             info.info.levelType = levelType;
@@ -156,7 +156,7 @@ namespace Roguegard
             }
 
             // 上書き不可
-            if (info.info.hasDungeonSeed) throw new RogueException();
+            if (info.info.hasDungeonSeed) throw new System.InvalidOperationException();
 
             info.info.hasDungeonSeed = true;
             info.info.dungeonSeed = dungeonSeed;

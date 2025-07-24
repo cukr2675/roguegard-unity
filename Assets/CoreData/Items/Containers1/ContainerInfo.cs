@@ -28,7 +28,7 @@ namespace Roguegard
             }
 
             // 上書き不可
-            if (info.info != null) throw new RogueException();
+            if (info.info != null) throw new System.InvalidOperationException();
 
             info.info = containerInfo ?? throw new System.ArgumentNullException(nameof(containerInfo));
         }

@@ -89,7 +89,7 @@ namespace RoguegardUnity
             else
             {
                 UnityEngine.Debug.LogError(stackTrace.ToString());
-                throw new RogueException();
+                throw new System.InvalidOperationException();
             }
         }
 

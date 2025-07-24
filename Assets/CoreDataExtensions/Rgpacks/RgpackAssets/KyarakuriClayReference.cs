@@ -149,7 +149,7 @@ namespace Roguegard.Rgpacks
 
         public RogueObj CreateObj(RogueObj location, Vector2Int position, IRogueRandom random, StackOption stackOption = StackOption.Default)
         {
-            if (!InfoSets.TryGetValue(this, Asset.Gender, out var infoSet)) throw new RogueException();
+            if (!InfoSets.TryGetValue(this, Asset.Gender, out var infoSet)) throw new System.InvalidOperationException();
 
             return infoSet.CreateObj(location, position, random, stackOption);
         }

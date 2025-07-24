@@ -171,7 +171,7 @@ namespace RoguegardUnity
             if (scenarioRgpack != null)
             {
                 var rgpack = new Rgpack("Playtest", scenarioRgpack, Rgpacker.DefaultEvaluator);
-                if (!rgpack.TryGetAsset<ScenarioMonolithAsset>("__main", out var monolith)) throw new RogueException();
+                if (!rgpack.TryGetAsset<ScenarioMonolithAsset>("__main", out var monolith)) throw new System.InvalidOperationException();
 
                 var random = new RogueRandom();
                 var scenarioDeviceData = new StandardRogueDeviceData();

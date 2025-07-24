@@ -54,7 +54,7 @@ namespace Roguegard
 
             public void AddFromInfoSet(RogueObj self, ISkillNameEffect skillNameEffect)
             {
-                if (self.Main.RogueEffectOpenState == RogueEffectOpenState.OpeningEffects) throw new RogueException();
+                if (self.Main.RogueEffectOpenState == RogueEffectOpenState.OpeningEffects) throw new System.InvalidOperationException();
                 if (skillNameEffect == null) throw new System.ArgumentNullException(nameof(skillNameEffect));
 
                 for (int i = 0; i < _skillNameEffects.Count; i++)
@@ -71,7 +71,7 @@ namespace Roguegard
 
             public void AddFromRogueEffect(RogueObj self, ISkillNameEffect skillNameEffect)
             {
-                if (self.Main.RogueEffectOpenState == RogueEffectOpenState.OpeningInfoSet) throw new RogueException();
+                if (self.Main.RogueEffectOpenState == RogueEffectOpenState.OpeningInfoSet) throw new System.InvalidOperationException();
                 if (skillNameEffect == null) throw new System.ArgumentNullException(nameof(skillNameEffect));
 
                 for (int i = _skillNameEffects.Count - 1; i >= 0; i--)

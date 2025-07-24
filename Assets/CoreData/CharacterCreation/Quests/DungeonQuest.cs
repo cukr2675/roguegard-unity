@@ -55,7 +55,7 @@ namespace Roguegard.CharacterCreation
         {
             if (DungeonQuestInfo.TryGetQuest(player, out var quest))
             {
-                throw new RogueException($"すでにクエスト ({quest.Name}: {quest.Caption}) を開始しています。");
+                throw new System.InvalidOperationException($"すでにクエスト ({quest.Name}: {quest.Caption}) を開始しています。");
             }
 
             RogueRandom.Primary = new RogueRandom(Seed);

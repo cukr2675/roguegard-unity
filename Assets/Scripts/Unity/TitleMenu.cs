@@ -233,7 +233,7 @@ namespace RoguegardUnity
                                 parent.OpenDevice(device);
                             };
                         }
-                        else throw new RogueException("Unexpected operation.");
+                        else throw new System.InvalidOperationException("Unexpected operation.");
                     })
 
                     .Build();

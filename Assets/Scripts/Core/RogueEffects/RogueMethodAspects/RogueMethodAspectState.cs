@@ -17,7 +17,7 @@ namespace Roguegard
 
         public void AddActiveFromInfoSet(RogueObj self, IRogueMethodActiveAspect aspect)
         {
-            if (self.Main.RogueEffectOpenState == RogueEffectOpenState.OpeningEffects) throw new RogueException();
+            if (self.Main.RogueEffectOpenState == RogueEffectOpenState.OpeningEffects) throw new System.InvalidOperationException();
             if (aspect == null) throw new System.ArgumentNullException(nameof(aspect));
 
             var newItem = new ActiveItem(aspect, nextId);
@@ -36,7 +36,7 @@ namespace Roguegard
 
         public void AddActiveFromRogueEffect(RogueObj self, IRogueMethodActiveAspect aspect)
         {
-            if (self.Main.RogueEffectOpenState == RogueEffectOpenState.OpeningInfoSet) throw new RogueException();
+            if (self.Main.RogueEffectOpenState == RogueEffectOpenState.OpeningInfoSet) throw new System.InvalidOperationException();
             if (aspect == null) throw new System.ArgumentNullException(nameof(aspect));
 
             var newItem = new ActiveItem(aspect, nextId);
@@ -75,7 +75,7 @@ namespace Roguegard
 
         public void AddPassiveFromInfoSet(RogueObj self, IRogueMethodPassiveAspect aspect)
         {
-            if (self.Main.RogueEffectOpenState == RogueEffectOpenState.OpeningEffects) throw new RogueException();
+            if (self.Main.RogueEffectOpenState == RogueEffectOpenState.OpeningEffects) throw new System.InvalidOperationException();
             if (aspect == null) throw new System.ArgumentNullException(nameof(aspect));
 
             var newItem = new PassiveItem(aspect, nextId);
@@ -94,7 +94,7 @@ namespace Roguegard
 
         public void AddPassiveFromRogueEffect(RogueObj self, IRogueMethodPassiveAspect aspect)
         {
-            if (self.Main.RogueEffectOpenState == RogueEffectOpenState.OpeningInfoSet) throw new RogueException();
+            if (self.Main.RogueEffectOpenState == RogueEffectOpenState.OpeningInfoSet) throw new System.InvalidOperationException();
             if (aspect == null) throw new System.ArgumentNullException(nameof(aspect));
 
             var newItem = new PassiveItem(aspect, nextId);
@@ -133,7 +133,7 @@ namespace Roguegard
 
         public void RemoveAllNull()
         {
-            if (stack.Value.ContainsItem) throw new RogueException();
+            if (stack.Value.ContainsItem) throw new System.InvalidOperationException();
 
             for (int i = actives.Count - 1; i >= 0; i--)
             {

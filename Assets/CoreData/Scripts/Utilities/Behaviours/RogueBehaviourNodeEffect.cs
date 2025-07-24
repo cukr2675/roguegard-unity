@@ -41,7 +41,7 @@ namespace Roguegard
                 effect = new RogueBehaviourNodeEffect();
                 RogueEffectUtility.AddFromRogueEffect(obj, effect);
             }
-            if (priority <= effect.priority) throw new RogueException(
+            if (priority <= effect.priority) throw new System.InvalidOperationException(
                 $"新しいビヘイビアの優先度 ({priority}) は既存のビヘイビアの優先度 ({effect.priority}) 以下のため上書きできません。");
 
             effect.node = node ?? throw new System.ArgumentNullException(nameof(node));

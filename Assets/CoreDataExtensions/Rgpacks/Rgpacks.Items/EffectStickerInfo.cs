@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -39,7 +39,7 @@ namespace Roguegard.Rgpacks
             }
 
             // 上書き不可
-            if (info.info != null) throw new RogueException();
+            if (info.info != null) throw new System.InvalidOperationException();
 
             info.info = new EffectStickerInfo();
             info.info.Update = new PropertiedCmnData();

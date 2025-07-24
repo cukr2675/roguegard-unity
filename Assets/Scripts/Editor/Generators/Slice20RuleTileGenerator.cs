@@ -268,7 +268,7 @@ namespace Roguegard.Editor
         private static Dictionary<Vector3Int, int> GetNeighbors(string str)
         {
             str = str.Replace(" ", "").Replace("\n", "").Replace("\r", "");
-            if (str.Length != 9) throw new RogueException(str);
+            if (str.Length != 9) throw new System.InvalidOperationException(str);
 
             var neighbors = new Dictionary<Vector3Int, int>();
             Add(-1, +1, str[0]);
@@ -292,7 +292,7 @@ namespace Roguegard.Editor
         {
             var tileSize = _tileSizePixel;
             var tileCenter = _tileCenterPixel;
-            if (_source.width != tileSize.x * 3 || _source.height != tileSize.y * 2) throw new RogueException(
+            if (_source.width != tileSize.x * 3 || _source.height != tileSize.y * 2) throw new System.InvalidOperationException(
                 $"テクスチャのサイズが {tileSize.x * 3}x{tileSize.y * 2} ではありません。");
 
             // source を 24 分割したスプライトを生成する

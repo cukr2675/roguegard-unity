@@ -14,11 +14,11 @@ namespace Roguegard.Extensions
                 CategoryKw.DownStairs, savePointInfo.BeforeSave, tool, player, activationDepth, RogueMethodArgument.Identity);
             if (!result)
             {
-                if (!force) throw new RogueException();
+                if (!force) throw new System.InvalidOperationException();
 
                 // 失敗した場合は割り込みなしで再試行する
                 result = savePointInfo.BeforeSave.Invoke(tool, player, activationDepth, RogueMethodArgument.Identity);
-                if (!result) throw new RogueException();
+                if (!result) throw new System.InvalidOperationException();
             }
             return result;
         }
@@ -34,7 +34,7 @@ namespace Roguegard.Extensions
             {
                 // 失敗した場合は割り込みなしで再試行する
                 result = savePointInfo.AfterLoad.Invoke(null, player, activationDepth, RogueMethodArgument.Identity);
-                if (!result) throw new RogueException();
+                if (!result) throw new System.InvalidOperationException();
             }
             return result;
         }

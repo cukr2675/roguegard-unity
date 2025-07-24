@@ -22,7 +22,7 @@ namespace Roguegard.Device
 
         public override void OpenScreen(in MMgr manager, in MArg arg)
         {
-            if (arg.Arg.Other is not CharacterCreationData characterCreationData) throw new RogueException();
+            if (arg.Arg.Other is not CharacterCreationData characterCreationData) throw new System.InvalidOperationException();
 
             elms.Clear();
 

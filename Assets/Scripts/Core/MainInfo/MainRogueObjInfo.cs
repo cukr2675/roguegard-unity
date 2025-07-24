@@ -125,7 +125,7 @@ namespace Roguegard
                     ReopenInfoSet(self);
                     break;
                 default:
-                    throw new RogueException();
+                    throw new System.InvalidOperationException();
             }
             SpeedCalculator.SetDirty(self);
             MovementCalculator.SetDirty(self);
@@ -172,7 +172,7 @@ namespace Roguegard
                         ReopenInfoSet(self);
                         break;
                     default:
-                        throw new RogueException();
+                        throw new System.InvalidOperationException();
                 }
             }
             else if (infoSet.Equals(BaseInfoSet))
@@ -190,7 +190,7 @@ namespace Roguegard
                         ReopenInfoSet(self);
                         break;
                     default:
-                        throw new RogueException();
+                        throw new System.InvalidOperationException();
                 }
             }
             else
@@ -208,7 +208,7 @@ namespace Roguegard
                         ReopenInfoSet(self);
                         break;
                     default:
-                        throw new RogueException();
+                        throw new System.InvalidOperationException();
                 }
             }
             SpeedCalculator.SetDirty(self);
@@ -313,7 +313,7 @@ namespace Roguegard
 
         private void OpenRogueEffects(RogueObj self)
         {
-            if (RogueEffectOpenState != RogueEffectOpenState.NotStarted) throw new RogueException();
+            if (RogueEffectOpenState != RogueEffectOpenState.NotStarted) throw new System.InvalidOperationException();
 
             statusEffectState = new StatusEffectState();
             valueEffectState = new ValueEffectState();

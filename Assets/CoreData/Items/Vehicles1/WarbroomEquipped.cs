@@ -46,7 +46,7 @@ namespace Roguegard.CharacterCreation
 
             public override void AddEffect(RogueObj vehicle, RogueObj owner)
             {
-                if (vehicle.Location != owner) throw new RogueException();
+                if (vehicle.Location != owner) throw new System.InvalidOperationException();
 
                 owner.Main.Stats.ChargedSpeed++;
 
@@ -58,7 +58,7 @@ namespace Roguegard.CharacterCreation
 
             public override void RemoveEffect(RogueObj vehicle, RogueObj owner)
             {
-                if (vehicle.Location != owner) throw new RogueException();
+                if (vehicle.Location != owner) throw new System.InvalidOperationException();
 
                 SpeedCalculator.SetDirty(owner);
                 MovementCalculator.SetDirty(owner);

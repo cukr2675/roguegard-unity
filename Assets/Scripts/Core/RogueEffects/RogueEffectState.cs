@@ -29,10 +29,10 @@ namespace Roguegard
                 _effects.Add(effect);
                 return;
             }
-            if (self.Main.RogueEffectOpenState != RogueEffectOpenState.Finished) throw new RogueException(
+            if (self.Main.RogueEffectOpenState != RogueEffectOpenState.Finished) throw new System.InvalidOperationException(
                 $"{self} への {nameof(IRogueEffect)} ({effect}) の付与に失敗しました。 " +
                 $"{nameof(RogueObj)} のエフェクト準備中に新しいエフェクトを追加することはできません。");
-            //if (openingObj.Value != null) throw new RogueException(
+            //if (openingObj.Value != null) throw new System.InvalidOperationException(
             //    $"{self} への {nameof(IRogueEffect)} ({effect}) の付与に失敗しました。 " +
             //    $"いずれかの {nameof(RogueObj)} ({openingObj.Value}) のエフェクト追加・準備中に新しいエフェクトを追加することはできません。");
 
@@ -49,7 +49,7 @@ namespace Roguegard
         /// </summary>
         public bool Remove(IRogueEffect effect)
         {
-            if (openingObj.Value != null && openingNow.Value) throw new RogueException(
+            if (openingObj.Value != null && openingNow.Value) throw new System.InvalidOperationException(
                 $"{nameof(IRogueEffect)} ({effect}) の削除に失敗しました。 " +
                 $"いずれかの {nameof(RogueObj)} ({openingObj.Value}) のエフェクト準備中にエフェクトを削除することはできません。");
 
@@ -84,7 +84,7 @@ namespace Roguegard
 
         internal void Open(RogueObj self)
         {
-            if (openingObj.Value != null) throw new RogueException(
+            if (openingObj.Value != null) throw new System.InvalidOperationException(
                 $"{self} のエフェクト準備に失敗しました。 " +
                 $"いずれかの {nameof(RogueObj)} ({openingObj.Value}) のエフェクト追加・準備中に新しいエフェクト準備を開始することはできません。");
 

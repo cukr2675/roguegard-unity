@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,7 +16,7 @@ namespace Roguegard.Rgpacks
             }
             else if (id.StartsWith('.'))
             {
-                if (string.IsNullOrWhiteSpace(envRgpackId)) throw new RogueException(
+                if (string.IsNullOrWhiteSpace(envRgpackId)) throw new System.InvalidOperationException(
                     $"ドットで始まるID ({id}) の読み込み時、環境 RgpackId が指定されませんでした。");
                 return envRgpackId;
             }
@@ -40,7 +40,7 @@ namespace Roguegard.Rgpacks
         public static IEnumerable<T> GetSubAssets<T>(string id, string envRgpackId)
         {
             var rgpackId = GetRgpackId(id, envRgpackId);
-            if (!TryGetRgpack(rgpackId, out var rgpack)) throw new RogueException(
+            if (!TryGetRgpack(rgpackId, out var rgpack)) throw new System.InvalidOperationException(
                  $"Rgpack ({rgpackId}) が見つかりません。");
 
             var assetId = GetAssetId(id);
@@ -94,9 +94,9 @@ namespace Roguegard.Rgpacks
 
         private T GetAsset()
         {
-            if (!RgpackReference.TryGetRgpack(RgpackId, out var rgpack)) throw new RogueException(
+            if (!RgpackReference.TryGetRgpack(RgpackId, out var rgpack)) throw new System.InvalidOperationException(
                 $"Rgpack ({RgpackId}) が見つかりません。");
-            if (!rgpack.TryGetAsset<T>(AssetId, out var asset)) throw new RogueException(
+            if (!rgpack.TryGetAsset<T>(AssetId, out var asset)) throw new System.InvalidOperationException(
                 $"Rgpack ({RgpackId}) に ID ({AssetId}) のデータが見つかりません。");
 
             return asset;

@@ -201,7 +201,7 @@ namespace Roguegard.CharacterCreation
             stats.Direction = infoSet.Ability.HasFlag(MainInfoSetAbility.HasCollider) ? RogueDirection.Down : RogueDirection.LowerLeft;
             stats.Reset(obj);
             if (startingItems.Length >= 1) { WeightedRogueObjGeneratorUtility.CreateObjs(startingItems, obj, random); }
-            if (!SpaceUtility.TryLocate(obj, location, position, stackOption)) throw new RogueException("生成したオブジェクトの移動に失敗しました。");
+            if (!SpaceUtility.TryLocate(obj, location, position, stackOption)) throw new System.InvalidOperationException("生成したオブジェクトの移動に失敗しました。");
 
             return obj;
         }

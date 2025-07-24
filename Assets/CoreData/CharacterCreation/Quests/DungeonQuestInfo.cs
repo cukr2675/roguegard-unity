@@ -28,7 +28,7 @@ namespace Roguegard.CharacterCreation
             }
 
             // 上書き不可
-            if (info.quest != null) throw new RogueException();
+            if (info.quest != null) throw new System.InvalidOperationException();
 
             info.quest = quest;
         }

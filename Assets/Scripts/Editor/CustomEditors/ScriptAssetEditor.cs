@@ -1,4 +1,4 @@
-﻿//using System.Collections;
+//using System.Collections;
 //using System.Collections.Generic;
 //using UnityEngine;
 
@@ -32,7 +32,7 @@
 //                var scriptPath = AssetDatabase.GetAssetPath(script);
 //                var scriptDirectory = Path.GetDirectoryName(scriptPath);
 //                var targetPath = $@"{scriptDirectory}\{targetName}.asset";
-//                if (targetPath == scriptPath) throw new RogueException("生成によるジェネレータアセットの上書きは禁止です。");
+//                if (targetPath == scriptPath) throw new System.InvalidOperationException("生成によるジェネレータアセットの上書きは禁止です。");
 
 //                var asset = AssetDatabase.LoadAssetAtPath<AssemblyDefaultAsset>(targetPath);
 //                if (asset == null) { asset = CreateInstance<AssemblyDefaultAsset>(); }

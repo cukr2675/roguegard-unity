@@ -28,10 +28,10 @@ namespace Roguegard
             if (pairs.Count >= 1)
             {
                 var peek = pairs[^1];
-                if (activationDepth < peek.ActivationDepth) throw new RogueException(
+                if (activationDepth < peek.ActivationDepth) throw new System.InvalidOperationException(
                     $"{nameof(IRogueMethod)} の実行順が不正です。" +
                     $"activationDepth{peek.ActivationDepth} から activationDepth{activationDepth} を実行しました。");
-                if (activationDepth == peek.ActivationDepth && rank <= peek.Rank) throw new RogueException(
+                if (activationDepth == peek.ActivationDepth && rank <= peek.Rank) throw new System.InvalidOperationException(
                     $"{nameof(IRogueMethod)} の実行順が不正です。" +
                     $"{GetRankName(peek.Rank)} から {GetRankName(rank)} を実行しました。");
             }
@@ -58,7 +58,7 @@ namespace Roguegard
                 2 => "Affect",
                 3 => "ChangeState",
                 4 => "ChangeEffect",
-                _ => throw new RogueException(),
+                _ => throw new System.InvalidOperationException(),
             };
         }
 

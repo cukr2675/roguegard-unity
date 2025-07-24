@@ -10,7 +10,7 @@ namespace Roguegard
         {
             var sumWeight = random.NextFloat(0f, weightedObjList.TotalWeight);
             var weightedObjs = weightedObjList.Span;
-            if (weightedObjs.Length == 0) throw new RogueException($"{weightedObjList} の生成候補オブジェクトが一つも存在しません。");
+            if (weightedObjs.Length == 0) throw new System.InvalidOperationException($"{weightedObjList} の生成候補オブジェクトが一つも存在しません。");
 
             for (int i = 0; i < weightedObjs.Length - 1; i++)
             {

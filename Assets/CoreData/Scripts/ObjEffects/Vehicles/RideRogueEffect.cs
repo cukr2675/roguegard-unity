@@ -53,7 +53,7 @@ namespace Roguegard
 
         IRogueEffect IRogueEffect.DeepOrShallowCopy(RogueObj rider, RogueObj clonedRider)
         {
-            if (rider != Rider) throw new RogueException();
+            if (rider != Rider) throw new System.InvalidOperationException();
 
             var clone = new RideRogueEffect(vehicle) { Rider = clonedRider };
             return clone;

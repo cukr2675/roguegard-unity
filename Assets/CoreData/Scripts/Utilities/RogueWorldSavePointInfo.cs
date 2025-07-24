@@ -91,7 +91,7 @@ namespace Roguegard
                     // 移動に失敗したら壁通過状態で移動させる
                     var movement = MovementCalculator.Get(player);
                     if (!player.TryLocate(worldInfo.Lobby, position, movement.AsTile, false, false, movement.HasSightCollider, StackOption.Default))
-                        throw new RogueException("セーブポイントからの復帰に失敗しました。復帰位置に移動できません。");
+                        throw new System.InvalidOperationException("セーブポイントからの復帰に失敗しました。復帰位置に移動できません。");
                 }
                 // パーティメンバーも移動
                 if (player.Main.Stats.Party != null)

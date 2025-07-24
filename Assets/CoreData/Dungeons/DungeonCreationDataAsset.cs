@@ -64,7 +64,7 @@ namespace Roguegard.CharacterCreation
             DungeonInfo.SetSeedTo(dungeon, dungeonSeed);
 
             RoguePartyUtility.Reset(party, useNutritionLeaderEffect);
-            if (!RoguePartyUtility.TryLocateWithPartyMembers(player, dungeon, true)) throw new RogueException();
+            if (!RoguePartyUtility.TryLocateWithPartyMembers(player, dungeon, true)) throw new System.InvalidOperationException();
 
             // リーダーのレベルアップボーナスは HP, MP, 最大重量 から選択
             _playerLevelInfos[0].Ref.InitializeLv(player, 1);
@@ -87,7 +87,7 @@ namespace Roguegard.CharacterCreation
                 level.GenerateFloor(player, floor, random);
                 return;
             }
-            throw new RogueException();
+            throw new System.InvalidOperationException();
         }
 
         protected override void Initialize()

@@ -91,7 +91,7 @@ namespace Roguegard
             }
             else
             {
-                throw new RogueException("縦にも横にも分割できません。");
+                throw new System.InvalidOperationException("縦にも横にも分割できません。");
             }
             dividedRoom0 = _rooms[roomIndex];
             dividedRoom1 = _rooms[roomIndex + 1];
@@ -144,7 +144,7 @@ namespace Roguegard
                 Direction.Left => GetConnectedRoomsFromRight(room.LeftCorridor),
                 Direction.Up => GetConnectedRoomsFromDown(room.UpCorridor),
                 Direction.Down => GetConnectedRoomsFromUp(room.DownCorridor),
-                _ => throw new RogueException(),
+                _ => throw new System.InvalidOperationException(),
             };
             connectRoom = random.Choice(connectRooms);
             return true;

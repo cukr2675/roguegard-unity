@@ -10,7 +10,7 @@ namespace Roguegard
 
         public void AddFromInfoSet(RogueObj self, IRogueObjUpdater updater)
         {
-            if (self.Main.RogueEffectOpenState == RogueEffectOpenState.OpeningEffects) throw new RogueException();
+            if (self.Main.RogueEffectOpenState == RogueEffectOpenState.OpeningEffects) throw new System.InvalidOperationException();
             if (updater == null) throw new System.ArgumentNullException(nameof(updater));
 
             for (int i = 0; i < updaters.Count; i++)
@@ -28,7 +28,7 @@ namespace Roguegard
 
         public void AddFromRogueEffect(RogueObj self, IRogueObjUpdater updater)
         {
-            if (self.Main.RogueEffectOpenState == RogueEffectOpenState.OpeningInfoSet) throw new RogueException();
+            if (self.Main.RogueEffectOpenState == RogueEffectOpenState.OpeningInfoSet) throw new System.InvalidOperationException();
             if (updater == null) throw new System.ArgumentNullException(nameof(updater));
 
             for (int i = updaters.Count - 1; i >= 0; i--)
@@ -71,7 +71,7 @@ namespace Roguegard
                 var continueType = updater.UpdateObj(self, activationDepth, ref sectionIndex);
                 if (!indexManager.Value.Any)
                 {
-                    throw new RogueException(
+                    throw new System.InvalidOperationException(
                         $"{nameof(IndexManager)} の状態が不正です。 " +
                         $"{nameof(IRogueObjUpdater)} の実行中に {nameof(StaticId.Next)} が呼び出された可能性があります。");
                 }
@@ -108,7 +108,7 @@ namespace Roguegard
                     item = items[^1];
                     if (activationDepth < item.ActivationDepth)
                     {
-                        throw new RogueException();
+                        throw new System.InvalidOperationException();
                     }
                     else if (activationDepth == item.ActivationDepth)
                     {

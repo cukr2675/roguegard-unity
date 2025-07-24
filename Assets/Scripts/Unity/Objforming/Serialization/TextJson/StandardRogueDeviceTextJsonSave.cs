@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -55,7 +55,7 @@ namespace RoguegardUnity
                 var jObj = JObject.Load(reader);
 
                 var typeName = jObj["type"].ToString();
-                if (typeName != TypeName) throw new RogueException($"type ({typeName}) が {TypeName} と一致しません。");
+                if (typeName != TypeName) throw new System.InvalidOperationException($"type ({typeName}) が {TypeName} と一致しません。");
             }
             stream.Position = 0;
 

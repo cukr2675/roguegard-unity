@@ -129,7 +129,7 @@ namespace Roguegard.Rgpacks
                 // Evt は壁タイルに埋め込んで使用できる
                 var movement = MovementCalculator.Get(obj);
                 if (!obj.TryLocate(location, point.Position, movement.AsTile, movement.HasCollider, false, movement.HasSightCollider, stackOption))
-                    throw new RogueException("生成したオブジェクトの移動に失敗しました。");
+                    throw new System.InvalidOperationException("生成したオブジェクトの移動に失敗しました。");
             }
 
             return obj;

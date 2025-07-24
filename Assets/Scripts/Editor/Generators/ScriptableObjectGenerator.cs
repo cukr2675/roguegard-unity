@@ -20,13 +20,13 @@ namespace Roguegard.Editor
             for (int i = Start; i < Start + Length; i++)
             {
                 var targetName = string.Format(_generationNameFormat, i);
-                if (targetName == oldName) throw new RogueException("生成したアセットを次の生成で上書きしようとしました。");
+                if (targetName == oldName) throw new System.InvalidOperationException("生成したアセットを次の生成で上書きしようとしました。");
                 oldName = targetName;
 
                 var thisPath = AssetDatabase.GetAssetPath(this);
                 var thisDirectory = Path.GetDirectoryName(thisPath);
                 var targetPath = $@"{thisDirectory}\{targetName}.asset";
-                if (targetPath == thisPath) throw new RogueException("生成によるジェネレータアセットの上書きは禁止です。");
+                if (targetPath == thisPath) throw new System.InvalidOperationException("生成によるジェネレータアセットの上書きは禁止です。");
 
                 var target = AssetDatabase.LoadAssetAtPath<T>(targetPath);
                 if (!target) { target = CreateInstance<T>(); }

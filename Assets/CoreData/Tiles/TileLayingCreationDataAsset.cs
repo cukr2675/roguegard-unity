@@ -15,7 +15,7 @@ namespace Roguegard.CharacterCreation
             IReadOnlyStartingItem startingItem, RogueObj location, Vector2Int position, IRogueRandom random, StackOption stackOption = StackOption.Default)
         {
             var member = RogueTileMember.GetMember(startingItem);
-            if (member.Tile == null) throw new RogueException("タイルが設定されていません。");
+            if (member.Tile == null) throw new System.InvalidOperationException("タイルが設定されていません。");
 
             location.Space.TrySet(member.Tile, position);
             return null;

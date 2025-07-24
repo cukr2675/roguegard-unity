@@ -35,12 +35,12 @@ namespace Roguegard.CharacterCreation
 
         private static void Equip(RogueObj equipment, RogueObj self)
         {
-            if (RogueMethodAspectState.ActivatingNow) throw new RogueException();
+            if (RogueMethodAspectState.ActivatingNow) throw new System.InvalidOperationException();
 
             var equipmentInfo = equipment.Main.GetEquipmentInfo(equipment);
-            if (!SpaceUtility.TryLocate(equipment, self)) throw new RogueException();
+            if (!SpaceUtility.TryLocate(equipment, self)) throw new System.InvalidOperationException();
 
-            if (!equipmentInfo.BeEquipped.Invoke(equipment, null, 0f, RogueMethodArgument.Identity)) throw new RogueException();
+            if (!equipmentInfo.BeEquipped.Invoke(equipment, null, 0f, RogueMethodArgument.Identity)) throw new System.InvalidOperationException();
         }
 
         /// <summary>
@@ -48,8 +48,8 @@ namespace Roguegard.CharacterCreation
         /// </summary>
         private static void PreEquip(RogueObj equipment, RogueObj self)
         {
-            if (RogueMethodAspectState.ActivatingNow) throw new RogueException();
-            if (equipment.Location != self) throw new RogueException();
+            if (RogueMethodAspectState.ActivatingNow) throw new System.InvalidOperationException();
+            if (equipment.Location != self) throw new System.InvalidOperationException();
 
             if (self != null)
             {

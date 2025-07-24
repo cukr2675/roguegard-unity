@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -76,8 +76,8 @@ namespace Roguegard.Rgpacks.MoonSharp
             var rgpackId = RgpackReference.GetRgpackId(id, envRgpackId);
             var assetId = RgpackReference.GetAssetId(id);
 
-            if (!RgpackReference.TryGetRgpack(rgpackId, out var rgpack)) throw new RogueException($"Rgpack ({rgpackId}) が見つかりません。");
-            if (!rgpack.TryGetAsset<EffectStickerAsset>(assetId, out var asset)) throw new RogueException(
+            if (!RgpackReference.TryGetRgpack(rgpackId, out var rgpack)) throw new System.InvalidOperationException($"Rgpack ({rgpackId}) が見つかりません。");
+            if (!rgpack.TryGetAsset<EffectStickerAsset>(assetId, out var asset)) throw new System.InvalidOperationException(
                 $"Rgpack ({rgpackId}) に ID ({assetId}) のデータが見つかりません。");
 
             Obj.Main.RogueEffects.AddOpen(Obj, new EffectStickerReference(id, rgpackId));
@@ -114,8 +114,8 @@ namespace Roguegard.Rgpacks.MoonSharp
             var rgpackId = RgpackReference.GetRgpackId(id, envRgpackId);
             var assetId = RgpackReference.GetAssetId(id);
 
-            if (!RgpackReference.TryGetRgpack(rgpackId, out var rgpack)) throw new RogueException($"Rgpack ({rgpackId}) が見つかりません。");
-            if (!rgpack.TryGetAsset<ISpriteMotion>(assetId, out var asset)) throw new RogueException(
+            if (!RgpackReference.TryGetRgpack(rgpackId, out var rgpack)) throw new System.InvalidOperationException($"Rgpack ({rgpackId}) が見つかりません。");
+            if (!rgpack.TryGetAsset<ISpriteMotion>(assetId, out var asset)) throw new System.InvalidOperationException(
                 $"Rgpack ({rgpackId}) に ID ({assetId}) のデータが見つかりません。");
 
             RogueDevice.AddWork(DeviceKw.EnqueueWork, RogueCharacterWork.CreateSpriteMotion(Obj, asset, true));

@@ -33,7 +33,7 @@ namespace Roguegard
             var location = self;
             while (true)
             {
-                if (location == null) throw new RogueException("ワールドにあたるオブジェクトが存在しません。");
+                if (location == null) throw new System.InvalidOperationException("ワールドにあたるオブジェクトが存在しません。");
                 if (location.TryGet<Info>(out _)) return location;
 
                 location = location.Location;

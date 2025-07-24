@@ -44,7 +44,7 @@ namespace Roguegard.Rgpacks
             }
             else
             {
-                throw new RogueException($"{FullId} ({Asset.GetType()}) をスプライトにできません。");
+                throw new System.InvalidOperationException($"{FullId} ({Asset.GetType()}) をスプライトにできません。");
             }
         }
 

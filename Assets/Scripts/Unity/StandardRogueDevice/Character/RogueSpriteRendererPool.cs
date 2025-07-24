@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -23,9 +23,9 @@ namespace RoguegardUnity
 
         private void Awake()
         {
-            if (_spriteRendererPrefab == null) throw new RogueException($"{nameof(_spriteRendererPrefab)} が設定されていません。");
-            if (_characterPrefab == null) throw new RogueException($"{nameof(_characterPrefab)} が設定されていません。");
-            if (_imagePrefab == null) throw new RogueException($"{nameof(_imagePrefab)} が設定されていません。");
+            if (_spriteRendererPrefab == null) throw new System.InvalidOperationException($"{nameof(_spriteRendererPrefab)} が設定されていません。");
+            if (_characterPrefab == null) throw new System.InvalidOperationException($"{nameof(_characterPrefab)} が設定されていません。");
+            if (_imagePrefab == null) throw new System.InvalidOperationException($"{nameof(_imagePrefab)} が設定されていません。");
         }
 
         public void PoolSpriteRenderer(SpriteRenderer spriteRenderer)

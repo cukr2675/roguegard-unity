@@ -52,7 +52,7 @@ namespace Roguegard
 
         public RogueObj GetColliderObj(Vector2Int position)
         {
-            if (Tilemap == null) throw new RogueException($"この空間はタイルマップを持ちません。");
+            if (Tilemap == null) throw new System.InvalidOperationException($"この空間はタイルマップを持ちません。");
             if (!Tilemap.Rect.Contains(position)) return null;
 
             return colliderMap[position.y][position.x];
@@ -80,14 +80,14 @@ namespace Roguegard
                 if (obj.AsTile)
                 {
                     if (asTileColliderMap[position.y][position.x] != null)
-                        throw new RogueException("当たり判定のあるオブジェクトが重なっています。");
+                        throw new System.InvalidOperationException("当たり判定のあるオブジェクトが重なっています。");
 
                     asTileColliderMap[position.y][position.x] = obj;
                 }
                 else
                 {
                     if (colliderMap[position.y][position.x] != null)
-                        throw new RogueException("当たり判定のあるオブジェクトが重なっています。");
+                        throw new System.InvalidOperationException("当たり判定のあるオブジェクトが重なっています。");
 
                     colliderMap[position.y][position.x] = obj;
                 }
@@ -160,14 +160,14 @@ namespace Roguegard
 
         public bool TryGetRandomPositionInRoom(IRogueRandom random, out Vector2Int position)
         {
-            if (Tilemap == null) throw new RogueException($"{Tilemap} の設定されていない空間からランダム位置を取得することはできません。");
+            if (Tilemap == null) throw new System.InvalidOperationException($"{Tilemap} の設定されていない空間からランダム位置を取得することはできません。");
 
             return SpaceRandom.TryGetRandomPositionInRoom(this, random, out position);
         }
 
         public bool TryGetRandomPositionInRoom(IRogueRandom random, int roomIndex, out Vector2Int position)
         {
-            if (Tilemap == null) throw new RogueException($"{Tilemap} の設定されていない空間からランダム位置を取得することはできません。");
+            if (Tilemap == null) throw new System.InvalidOperationException($"{Tilemap} の設定されていない空間からランダム位置を取得することはできません。");
 
             return SpaceRandom.GetRandomPositionInRoom(this, random, roomIndex, out position);
         }
@@ -256,7 +256,7 @@ namespace Roguegard
         internal void ReplaceWithNull(RogueObj obj)
         {
             var index = _objs.IndexOf(obj);
-            if (index == -1) throw new RogueException();
+            if (index == -1) throw new System.InvalidOperationException();
 
             _objs[index] = null;
 

@@ -199,8 +199,8 @@ end
             var rgpackId = RgpackReference.GetRgpackId(id, envRgpackId);
             var assetId = RgpackReference.GetAssetId(id);
 
-            if (!RgpackReference.TryGetRgpack(rgpackId, out var rgpack)) throw new RogueException($"Rgpack ({rgpackId}) が見つかりません。");
-            if (!rgpack.TryGetAsset<object>(assetId, out var asset)) throw new RogueException(
+            if (!RgpackReference.TryGetRgpack(rgpackId, out var rgpack)) throw new System.InvalidOperationException($"Rgpack ({rgpackId}) が見つかりません。");
+            if (!rgpack.TryGetAsset<object>(assetId, out var asset)) throw new System.InvalidOperationException(
                 $"Rgpack ({rgpackId}) に ID ({assetId}) のデータが見つかりません。");
 
             if (asset is CharacterCreationPresetAsset characterCreationPresetAsset)
@@ -223,7 +223,7 @@ end
             {
                 return UserData.Create(new SpriteMotionUserData(spriteMotion));
             }
-            throw new RogueException();
+            throw new System.InvalidOperationException();
         }
 
         [MoonSharpModuleMethod]
@@ -313,7 +313,7 @@ end
             //{
             //    // 依存関係が指定されているとき、その中からインポートする
             //    var sources = ((AnonWrapper<Dictionary<string, NotepadQuote>>)files.UserData.Object).Value;
-            //    if (!sources.TryGetValue(modname, out var source)) throw new RogueException($"モジュール {modname} が見つかりません。");
+            //    if (!sources.TryGetValue(modname, out var source)) throw new System.InvalidOperationException($"モジュール {modname} が見つかりません。");
 
             //    return script.DoString(source);
             //}
@@ -332,10 +332,10 @@ end
             //        var source = NotepadInfo.GetQuote(obj);
             //        return script.DoString(source, caster);
             //    }
-            //    throw new RogueException($"モジュール {modname} が見つかりません。");
+            //    throw new System.InvalidOperationException($"モジュール {modname} が見つかりません。");
             //}
 
-            throw new RogueException("モジュールの参照先が見つかりません。");
+            throw new System.InvalidOperationException("モジュールの参照先が見つかりません。");
         }
 
         /// <summary>

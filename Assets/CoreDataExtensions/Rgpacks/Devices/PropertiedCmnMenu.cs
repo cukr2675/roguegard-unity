@@ -127,13 +127,13 @@ namespace Roguegard.Device
                     .NameFrom((element, manager, arg) =>
                     {
                         if (element is StartingItem startingItem) return startingItem.Name;
-                        else throw new RogueException();
+                        else throw new System.InvalidOperationException();
                     })
 
                     .OnClick((element, manager, arg) =>
                     {
                         if (element is StartingItem startingItem) { manager.PushMenuScreen(characterCreationOptionMenu, other: startingItem); }
-                        else throw new RogueException();
+                        else throw new System.InvalidOperationException();
                     })
 
                     .Build();

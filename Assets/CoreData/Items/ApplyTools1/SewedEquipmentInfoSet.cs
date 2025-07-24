@@ -125,7 +125,7 @@ namespace Roguegard
             var stats = obj.Main.Stats;
             stats.Direction = RogueDirection.LowerLeft;
             stats.Reset(obj);
-            if (!SpaceUtility.TryLocate(obj, location, position, stackOption)) throw new RogueException("生成したオブジェクトの移動に失敗しました。");
+            if (!SpaceUtility.TryLocate(obj, location, position, stackOption)) throw new System.InvalidOperationException("生成したオブジェクトの移動に失敗しました。");
 
             return obj;
         }

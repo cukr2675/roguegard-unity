@@ -35,7 +35,7 @@ namespace Roguegard.Editor
             var thisPath = AssetDatabase.GetAssetPath(this);
             var thisDirectory = Path.GetDirectoryName(thisPath);
             var targetPath = $@"{thisDirectory}\{name}.cs";
-            if (targetPath == thisPath) throw new RogueException();
+            if (targetPath == thisPath) throw new System.InvalidOperationException();
 
             var targetFolderPath = AssetDatabase.GetAssetPath(_targetFolder);
             var assetGuids = AssetDatabase.FindAssets(FindFilter, new[] { targetFolderPath });
@@ -79,7 +79,7 @@ namespace {_namespaceName}
 {"#if UNITY_EDITOR"}
             instance = this;
 {"#else"}
-            throw new RogueException(""This method is Editor Only."");
+            throw new System.InvalidOperationException(""This method is Editor Only."");
 {"#endif"}
         }}
     }}
@@ -144,7 +144,7 @@ namespace {_namespaceName}
                         var targetPath = AssetDatabase.GetAssetPath(target);
                         var targetDirectory = Path.GetDirectoryName(targetPath);
                         var assetPath = $@"{targetDirectory}\{assetName}.init.asset";
-                        if (assetPath == targetPath) throw new RogueException("生成によるジェネレータアセットの上書きは禁止です。");
+                        if (assetPath == targetPath) throw new System.InvalidOperationException("生成によるジェネレータアセットの上書きは禁止です。");
 
                         var assemblyName = RoguegardAssetDatabase.GetAssemblyName(targetPath);
                         var assetType = System.Type.GetType($"{target._namespaceName}.{ target.name}, {assemblyName}");
@@ -186,7 +186,7 @@ namespace {_namespaceName}
                     var targetPath = AssetDatabase.GetAssetPath(target);
                     var targetDirectory = Path.GetDirectoryName(targetPath);
                     var assetPath = $@"{targetDirectory}\{assetName}.init.asset";
-                    if (assetPath == targetPath) throw new RogueException("生成によるジェネレータアセットの上書きは禁止です。");
+                    if (assetPath == targetPath) throw new System.InvalidOperationException("生成によるジェネレータアセットの上書きは禁止です。");
 
                     var assemblyName = RoguegardAssetDatabase.GetAssemblyName(targetPath);
                     var assetType = System.Type.GetType($"{target._namespaceName}.{ target.name}, {assemblyName}");

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -206,7 +206,7 @@ namespace RoguegardUnity
                 direction = RogueDirection.LowerRight;
                 return true;
             }
-            else throw new RogueException();
+            else throw new System.InvalidOperationException();
         }
 
         private void SetDrag(bool drag)

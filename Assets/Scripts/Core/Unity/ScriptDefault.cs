@@ -21,7 +21,7 @@ namespace Roguegard.CharacterCreation
             var type = typeof(ScriptDefault<>).MakeGenericType(_asset.GetType());
             var refProperty = type.GetRuntimeProperty("Ref");
             var refValue = refProperty.GetValue(null);
-            if (refValue != null) throw new RogueException($"{type}.Ref は上書きできません。");
+            if (refValue != null) throw new System.InvalidOperationException($"{type}.Ref は上書きできません。");
 
             refProperty.SetValue(null, _asset);
             yield break;
@@ -33,7 +33,7 @@ namespace Roguegard.CharacterCreation
             var type = typeof(ScriptDefault<>).MakeGenericType(_asset.GetType());
             var refProperty = type.GetRuntimeProperty("Ref");
             var refValue = refProperty.GetValue(null);
-            if (refValue != null) throw new RogueException($"{type}.Ref は上書きできません。");
+            if (refValue != null) throw new System.InvalidOperationException($"{type}.Ref は上書きできません。");
 
             refProperty.SetValue(null, _asset);
 #endif

@@ -33,7 +33,7 @@ namespace Roguegard.CharacterCreation
         {
             var obj = Obj.Clone();
             obj.TrySetStack(startingItem.Stack);
-            if (!SpaceUtility.TryLocate(obj, location, position, stackOption)) throw new RogueException();
+            if (!SpaceUtility.TryLocate(obj, location, position, stackOption)) throw new System.InvalidOperationException();
 
             return obj;
         }

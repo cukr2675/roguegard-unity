@@ -34,7 +34,7 @@ namespace Roguegard.Device
 
         public void SetDeviceCommand(IDeviceCommandAction action, RogueObj user, in RogueMethodArgument arg)
         {
-            if (commandAction.Value != null) throw new RogueException($"{nameof(commandAction)} を上書きすることはできません。");
+            if (commandAction.Value != null) throw new System.InvalidOperationException($"{nameof(commandAction)} を上書きすることはできません。");
 
             commandAction.Value = action;
             commandUser = user;

@@ -116,7 +116,7 @@ namespace Roguegard.Editor
                 else if (assetDirectory.Length == Path.GetDirectoryName(nearestAssetPath).Length)
                 {
                     // 同一フォルダに適合ファイルが複数存在する場合、例外を投げる。
-                    throw new RogueException($"同一フォルダ内に {filter} に適合するファイルが複数存在します。");
+                    throw new System.InvalidOperationException($"同一フォルダ内に {filter} に適合するファイルが複数存在します。");
                 }
             }
             return nearestAssetPath;

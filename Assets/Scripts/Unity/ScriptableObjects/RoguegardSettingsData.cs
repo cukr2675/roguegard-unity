@@ -201,7 +201,7 @@ return m
                 loader.TestLoad();
             }
 #else
-            throw new RogueException($"{nameof(TestLoad)} はエディタ専用メソッドです。");
+            throw new System.InvalidOperationException($"{nameof(TestLoad)} はエディタ専用メソッドです。");
 #endif
         }
 

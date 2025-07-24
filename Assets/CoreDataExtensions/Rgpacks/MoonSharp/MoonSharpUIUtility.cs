@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -51,8 +51,8 @@ namespace Roguegard.Rgpacks.MoonSharp
                             var id = value.Substring(i + 2, length - 2);
                             var rgpackId = id.Substring(0, id.IndexOf('.'));
                             var assetId = id.Substring(rgpackId.Length + 1);
-                            if (!RgpackReference.TryGetRgpack(rgpackId, out var rgpack)) throw new RogueException($"Rgpack ({rgpackId}) が見つかりません。");
-                            if (!rgpack.TryGetAsset<object>(assetId, out var asset)) throw new RogueException(
+                            if (!RgpackReference.TryGetRgpack(rgpackId, out var rgpack)) throw new System.InvalidOperationException($"Rgpack ({rgpackId}) が見つかりません。");
+                            if (!rgpack.TryGetAsset<object>(assetId, out var asset)) throw new System.InvalidOperationException(
                                 $"Rgpack ({rgpackId}) に ID ({assetId}) のデータが見つかりません。");
 
                             stringBuilder.Append(asset);
@@ -76,8 +76,8 @@ namespace Roguegard.Rgpacks.MoonSharp
                 var rgpackId = RgpackReference.GetRgpackId(facialId, envRgpackId);
                 var assetId = RgpackReference.GetAssetId(facialId);
 
-                if (!RgpackReference.TryGetRgpack(rgpackId, out var rgpack)) throw new RogueException($"Rgpack ({rgpackId}) が見つかりません。");
-                if (!rgpack.TryGetAsset<ISpriteMotion>(assetId, out facial)) throw new RogueException(
+                if (!RgpackReference.TryGetRgpack(rgpackId, out var rgpack)) throw new System.InvalidOperationException($"Rgpack ({rgpackId}) が見つかりません。");
+                if (!rgpack.TryGetAsset<ISpriteMotion>(assetId, out facial)) throw new System.InvalidOperationException(
                     $"Rgpack ({rgpackId}) に ID ({assetId}) のデータが見つかりません。");
 
                 RogueDevice.AddWork(DeviceKw.EnqueueWork, RogueCharacterWork.CreateSpriteMotion(faceObj, facial, true));

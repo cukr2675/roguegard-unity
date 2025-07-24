@@ -12,7 +12,7 @@ namespace Roguegard
 
         public void AddFromInfoSet(RogueObj self, ISpriteMotionEffect effect)
         {
-            if (self.Main.RogueEffectOpenState == RogueEffectOpenState.OpeningEffects) throw new RogueException();
+            if (self.Main.RogueEffectOpenState == RogueEffectOpenState.OpeningEffects) throw new System.InvalidOperationException();
             if (effect == null) throw new System.ArgumentNullException(nameof(effect));
 
             showEffectsIsDirty = true;
@@ -30,7 +30,7 @@ namespace Roguegard
 
         public void AddFromRogueEffect(RogueObj self, ISpriteMotionEffect effect)
         {
-            if (self.Main.RogueEffectOpenState == RogueEffectOpenState.OpeningInfoSet) throw new RogueException();
+            if (self.Main.RogueEffectOpenState == RogueEffectOpenState.OpeningInfoSet) throw new System.InvalidOperationException();
             if (effect == null) throw new System.ArgumentNullException(nameof(effect));
 
             showEffectsIsDirty = true;

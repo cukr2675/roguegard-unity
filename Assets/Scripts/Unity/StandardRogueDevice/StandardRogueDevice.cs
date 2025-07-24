@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -27,7 +27,7 @@ namespace RoguegardUnity
 
         public void GetInfo(out IRogueRandom random)
         {
-            if (data == null) throw new RogueException();
+            if (data == null) throw new System.InvalidOperationException();
 
             random = data.CurrentRandom;
         }

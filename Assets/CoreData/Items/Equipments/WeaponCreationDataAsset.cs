@@ -38,8 +38,8 @@ namespace Roguegard.CharacterCreation
         /// </summary>
         private static void PreEquip(RogueObj equipment, RogueObj self)
         {
-            if (RogueMethodAspectState.ActivatingNow) throw new RogueException();
-            if (!SpaceUtility.TryLocate(equipment, self)) throw new RogueException();
+            if (RogueMethodAspectState.ActivatingNow) throw new System.InvalidOperationException();
+            if (!SpaceUtility.TryLocate(equipment, self)) throw new System.InvalidOperationException();
 
             if (self != null)
             {

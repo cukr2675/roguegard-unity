@@ -44,7 +44,7 @@ namespace Roguegard
             }
             else
             {
-                throw new RogueException("上書き不可");
+                throw new System.InvalidOperationException("上書き不可");
             }
         }
 

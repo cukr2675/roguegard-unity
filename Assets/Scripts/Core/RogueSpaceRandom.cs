@@ -41,7 +41,7 @@ namespace Roguegard
                     index++;
                 }
             }
-            throw new RogueException(GroundInRoomCount.ToString());
+            throw new System.InvalidOperationException(GroundInRoomCount.ToString());
         }
 
         public bool GetRandomPositionInRoom(RogueSpace space, IRogueRandom random, int roomIndex, out Vector2Int position)
@@ -68,7 +68,7 @@ namespace Roguegard
                     index++;
                 }
             }
-            throw new RogueException(groundInRoomCounts[roomIndex].ToString());
+            throw new System.InvalidOperationException(groundInRoomCounts[roomIndex].ToString());
         }
 
         public void Reset(RogueSpace space)

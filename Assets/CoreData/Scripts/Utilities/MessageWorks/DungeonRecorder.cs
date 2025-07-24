@@ -87,8 +87,8 @@ namespace Roguegard
             var dungeonSeed = random.Next(int.MinValue, int.MaxValue);
             DungeonInfo.SetSeedTo(dungeon, dungeonSeed);
             var dungeonInfo = DungeonInfo.Get(dungeon);
-            if (!dungeonInfo.TryGetRandom(FloorLv, out var floorRandom)) throw new RogueException();
-            if (!dungeonInfo.TryGetFloor(FloorLv, out var level)) throw new RogueException();
+            if (!dungeonInfo.TryGetRandom(FloorLv, out var floorRandom)) throw new System.InvalidOperationException();
+            if (!dungeonInfo.TryGetFloor(FloorLv, out var level)) throw new System.InvalidOperationException();
 
             var floor = Quest.Dungeon.CreateObj(dungeon, Vector2Int.zero, floorRandom);
             level.GenerateFloor(player, floor, floorRandom);

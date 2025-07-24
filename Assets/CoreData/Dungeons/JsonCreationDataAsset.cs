@@ -38,7 +38,7 @@ namespace Roguegard.CharacterCreation
             IReadOnlyStartingItem startingItem, RogueObj location, Vector2Int position, IRogueRandom random, StackOption stackOption = StackOption.Default)
         {
             var obj = CloneBase.Clone();
-            if (!SpaceUtility.TryLocate(obj, location, position, stackOption)) throw new RogueException("生成したオブジェクトの移動に失敗しました。");
+            if (!SpaceUtility.TryLocate(obj, location, position, stackOption)) throw new System.InvalidOperationException("生成したオブジェクトの移動に失敗しました。");
 
             obj.TrySetStack(startingItem.Stack);
             if (startingItem.CustomColor != null) { ColoringEffect.ColorChange(obj, startingItem.CustomColor.Value); }

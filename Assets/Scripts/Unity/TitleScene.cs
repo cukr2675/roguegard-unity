@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -33,7 +33,7 @@ namespace RoguegardUnity
             // タイトル画面データ読み込み
             var loadTitleData = _titleData.LoadAssetAsync();
             yield return loadTitleData;
-            if (loadTitleData.Status != AsyncOperationStatus.Succeeded) throw new RogueException($"{typeof(Sprite)} 読み込み失敗");
+            if (loadTitleData.Status != AsyncOperationStatus.Succeeded) throw new System.InvalidOperationException($"{typeof(Sprite)} 読み込み失敗");
 
             var titleData = loadTitleData.Result;
 

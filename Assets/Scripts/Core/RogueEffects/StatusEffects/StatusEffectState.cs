@@ -29,7 +29,7 @@ namespace Roguegard
 
         public void AddFromInfoSet(RogueObj self, IStatusEffect statusEffect)
         {
-            if (self.Main.RogueEffectOpenState == RogueEffectOpenState.OpeningEffects) throw new RogueException();
+            if (self.Main.RogueEffectOpenState == RogueEffectOpenState.OpeningEffects) throw new System.InvalidOperationException();
             if (statusEffect == null) throw new System.ArgumentNullException(nameof(statusEffect));
 
             isDirty = true;
@@ -47,7 +47,7 @@ namespace Roguegard
 
         public void AddFromRogueEffect(RogueObj self, IStatusEffect statusEffect)
         {
-            if (self.Main.RogueEffectOpenState == RogueEffectOpenState.OpeningInfoSet) throw new RogueException();
+            if (self.Main.RogueEffectOpenState == RogueEffectOpenState.OpeningInfoSet) throw new System.InvalidOperationException();
             if (statusEffect == null) throw new System.ArgumentNullException(nameof(statusEffect));
 
             isDirty = true;

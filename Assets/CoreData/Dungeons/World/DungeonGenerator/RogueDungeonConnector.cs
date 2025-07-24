@@ -15,7 +15,7 @@ namespace Roguegard
         {
             Room0 = room0;
             Room1 = room1;
-            if (!room0.TryGetSharedCorridor(room1, out var corridor)) throw new RogueException("共通の通路を持たない部屋を接続しようとしました。");
+            if (!room0.TryGetSharedCorridor(room1, out var corridor)) throw new System.InvalidOperationException("共通の通路を持たない部屋を接続しようとしました。");
 
             Corridor = corridor;
         }
@@ -43,7 +43,7 @@ namespace Roguegard
             if (aHasCorridor && bHasCorridor) return random.Choice(a, b);
             if (aHasCorridor && !bHasCorridor) return a;
             if (!aHasCorridor && bHasCorridor) return b;
-            throw new RogueException("共通の通路を持たない部屋を接続しようとしました。");
+            throw new System.InvalidOperationException("共通の通路を持たない部屋を接続しようとしました。");
         }
     }
 }

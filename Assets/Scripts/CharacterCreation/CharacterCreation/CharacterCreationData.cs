@@ -41,7 +41,7 @@ namespace Roguegard.CharacterCreation
         }
         Spanning<IWeightedRogueObjGeneratorList> ICharacterCreationData.StartingItemTable => StartingItemTable.Span;
 
-        public IMainInfoSet PrimaryInfoSet => TryGetGrowingInfoSet(Race.Option, Race.Gender, out var value) ? value : throw new RogueException();
+        public IMainInfoSet PrimaryInfoSet => TryGetGrowingInfoSet(Race.Option, Race.Gender, out var value) ? value : throw new System.InvalidOperationException();
 
         public CharacterCreationData()
         {
@@ -109,7 +109,7 @@ namespace Roguegard.CharacterCreation
         public RogueObj CreateObj(RogueObj location, Vector2Int position, IRogueRandom random, StackOption stackOption = StackOption.Default)
         {
             if (growingInfoSets == null) { UpdateData(); }
-            if (!growingInfoSets.TryGetValue(Race.Option, Race.Gender, out var infoSet)) throw new RogueException();
+            if (!growingInfoSets.TryGetValue(Race.Option, Race.Gender, out var infoSet)) throw new System.InvalidOperationException();
 
             return infoSet.CreateObj(location, position, random, stackOption);
         }

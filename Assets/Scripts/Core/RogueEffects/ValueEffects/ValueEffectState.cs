@@ -16,7 +16,7 @@ namespace Roguegard
 
         public void AddFromInfoSet(RogueObj self, IValueEffect effect)
         {
-            if (self.Main.RogueEffectOpenState == RogueEffectOpenState.OpeningEffects) throw new RogueException();
+            if (self.Main.RogueEffectOpenState == RogueEffectOpenState.OpeningEffects) throw new System.InvalidOperationException();
             if (effect == null) throw new System.ArgumentNullException(nameof(effect));
 
             for (int i = 0; i < effects.Count; i++)
@@ -33,7 +33,7 @@ namespace Roguegard
 
         public void AddFromRogueEffect(RogueObj self, IValueEffect effect)
         {
-            if (self.Main.RogueEffectOpenState == RogueEffectOpenState.OpeningInfoSet) throw new RogueException();
+            if (self.Main.RogueEffectOpenState == RogueEffectOpenState.OpeningInfoSet) throw new System.InvalidOperationException();
             if (effect == null) throw new System.ArgumentNullException(nameof(effect));
 
             for (int i = effects.Count - 1; i >= 0; i--)

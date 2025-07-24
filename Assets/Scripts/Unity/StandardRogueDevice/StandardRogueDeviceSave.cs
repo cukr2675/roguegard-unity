@@ -150,7 +150,7 @@ namespace RoguegardUnity
         {
             using var archive = new ZipArchive(stream, ZipArchiveMode.Read, true);
             var entry = archive.Entries.FirstOrDefault(x => x.Name.EndsWith(".json"));
-            if (entry == null) throw new RogueException("読み込んだファイル内で .json ファイルが見つかりません。");
+            if (entry == null) throw new System.InvalidOperationException("読み込んだファイル内で .json ファイルが見つかりません。");
             using var streamReader = new StreamReader(entry.Open());
             using var reader = new JsonTextReader(streamReader);
 
@@ -158,7 +158,7 @@ namespace RoguegardUnity
             var jObj = JObject.Load(reader);
 
             var typeName = jObj["type"].ToString();
-            if (typeName != TypeName) throw new RogueException($"type ({typeName}) が {TypeName} と一致しません。");
+            if (typeName != TypeName) throw new System.InvalidOperationException($"type ({typeName}) が {TypeName} と一致しません。");
 
             using var dataReader = jObj["data"].CreateReader();
             var data = config.Deserialize<StandardRogueDeviceData>(dataReader);
@@ -260,9 +260,9 @@ namespace RoguegardUnity
         {
             public override bool Invoke(RogueObj self, RogueObj player, float activationDepth, in RogueMethodArgument arg)
             {
-                if (activationDepth != 0f) throw new RogueException();
-                if (!default(IActiveRogueMethodCaller).LocateSavePoint(player, null, 1f, RogueWorldSavePointInfo.Instance, true)) throw new RogueException();
-                if (!default(IActiveRogueMethodCaller).LoadSavePoint(player, 1f, RogueWorldSavePointInfo.Instance)) throw new RogueException();
+                if (activationDepth != 0f) throw new System.InvalidOperationException();
+                if (!default(IActiveRogueMethodCaller).LocateSavePoint(player, null, 1f, RogueWorldSavePointInfo.Instance, true)) throw new System.InvalidOperationException();
+                if (!default(IActiveRogueMethodCaller).LoadSavePoint(player, 1f, RogueWorldSavePointInfo.Instance)) throw new System.InvalidOperationException();
                 return true;
             }
         }

@@ -46,7 +46,7 @@ namespace Roguegard
             }
             else
             {
-                throw new RogueException();
+                throw new System.InvalidOperationException();
             }
             return new RogueDungeonConnection(position0, corridor, position1);
         }
@@ -71,7 +71,7 @@ namespace Roguegard
             }
             else
             {
-                throw new RogueException();
+                throw new System.InvalidOperationException();
             }
         }
 
@@ -172,7 +172,7 @@ namespace Roguegard
             }
             else
             {
-                throw new RogueException();
+                throw new System.InvalidOperationException();
             }
         }
     }

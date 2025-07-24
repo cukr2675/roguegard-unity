@@ -104,7 +104,7 @@ namespace Roguegard
 
             public Pose(MotionGrapherInfo info, float keyTime, Pose beforePose, Dictionary<BoneKeyword, float> boneReorderTable)
             {
-                if (recursionStack.Value.Contains(info)) throw new RogueException($"無限再帰が発生しました。\n{string.Join(" -> ", recursionStack.Value)}");
+                if (recursionStack.Value.Contains(info)) throw new System.InvalidOperationException($"無限再帰が発生しました。\n{string.Join(" -> ", recursionStack.Value)}");
                 recursionStack.Value.Push(info);
 
                 KeyTime = keyTime;

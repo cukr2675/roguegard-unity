@@ -42,7 +42,7 @@ namespace Roguegard
 #if UNITY_EDITOR
             instance = this;
 #else
-            throw new RogueException("This method is Editor Only.");
+            throw new System.InvalidOperationException("This method is Editor Only.");
 #endif
         }
     }

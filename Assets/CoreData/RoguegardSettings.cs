@@ -33,7 +33,7 @@ namespace Roguegard
         public static Spanning<ShiftableColor> DefaultPalette
         {
             get => _defaultPalette;
-            set => _defaultPalette = (value.Length == paletteLength ? value.ToArray() : throw new RogueException());
+            set => _defaultPalette = (value.Length == paletteLength ? value.ToArray() : throw new System.InvalidOperationException());
         }
 
         public static Color White => Color.white * LightRatio;
@@ -89,7 +89,7 @@ namespace Roguegard
 
                 if (assetTable.ContainsKey(pair.Key))
                 {
-                    throw new RogueException($"{pair.Key} が重複しています。（{pair.Value}, already exists {assetTable[pair.Key]}）");
+                    throw new System.InvalidOperationException($"{pair.Key} が重複しています。（{pair.Value}, already exists {assetTable[pair.Key]}）");
                 }
 
                 assetTable.Add(pair.Key, pair.Value);

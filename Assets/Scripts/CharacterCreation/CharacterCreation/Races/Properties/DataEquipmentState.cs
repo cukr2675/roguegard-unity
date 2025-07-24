@@ -55,7 +55,7 @@ namespace Roguegard.CharacterCreation
         public void SetEquipment(IKeyword keyword, int index, RogueObj equipment)
         {
             var array = table[keyword];
-            if (array[index] != null) throw new RogueException();
+            if (array[index] != null) throw new System.InvalidOperationException();
 
             array[index] = equipment;
         }
@@ -63,7 +63,7 @@ namespace Roguegard.CharacterCreation
         public void RemoveEquipment(IKeyword keyword, int index)
         {
             var array = table[keyword];
-            if (array[index] == null) throw new RogueException();
+            if (array[index] == null) throw new System.InvalidOperationException();
 
             array[index] = null;
         }

@@ -9,7 +9,7 @@ namespace Roguegard
 
         public void AddFromInfoSet(RogueObj self, IBoneSpriteEffect effect)
         {
-            if (self.Main.RogueEffectOpenState == RogueEffectOpenState.OpeningEffects) throw new RogueException();
+            if (self.Main.RogueEffectOpenState == RogueEffectOpenState.OpeningEffects) throw new System.InvalidOperationException();
             if (effect == null) throw new System.ArgumentNullException(nameof(effect));
 
             isDirty = true;
@@ -27,7 +27,7 @@ namespace Roguegard
 
         public void AddFromRogueEffect(RogueObj self, IBoneSpriteEffect effect)
         {
-            if (self.Main.RogueEffectOpenState == RogueEffectOpenState.OpeningInfoSet) throw new RogueException();
+            if (self.Main.RogueEffectOpenState == RogueEffectOpenState.OpeningInfoSet) throw new System.InvalidOperationException();
             if (effect == null) throw new System.ArgumentNullException(nameof(effect));
 
             isDirty = true;

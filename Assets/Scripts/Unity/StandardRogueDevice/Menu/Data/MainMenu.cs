@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -147,7 +147,7 @@ namespace RoguegardUnity
             {
                 public override void OpenScreen(in MMgr manager, in MArg arg)
                 {
-                    if (!DungeonQuestInfo.TryGetQuest(arg.Self, out var quest)) throw new RogueException();
+                    if (!DungeonQuestInfo.TryGetQuest(arg.Self, out var quest)) throw new System.InvalidOperationException();
 
                     var summary = RoguegardSubviews.GetSummary(manager);
                     summary.SetQuest(arg.Self, quest, false, manager);

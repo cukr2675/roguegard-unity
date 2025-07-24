@@ -114,7 +114,7 @@ namespace Roguegard
             path.Add(backPosition);
             return true;
 
-            throw new RogueException();
+            throw new System.InvalidOperationException();
 
             bool OpenAround(Vector2Int position, out Vector2Int targetPosition)
             {
@@ -256,7 +256,7 @@ namespace Roguegard
                 return path[i + 1];
             }
 
-            throw new RogueException();
+            throw new System.InvalidOperationException();
         }
 
         private bool UpdateTile(RogueSpace spaceStatus)

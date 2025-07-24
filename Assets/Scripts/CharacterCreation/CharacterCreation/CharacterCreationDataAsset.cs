@@ -105,7 +105,7 @@ namespace Roguegard.CharacterCreation
         {
             var raceOption = Race.Option;
             var gender = startingItem.CustomGender ?? Race.Gender ?? GetRandomGender(random);
-            if (!InfoSets.TryGetValue(raceOption, gender, out var infoSet)) throw new RogueException();
+            if (!InfoSets.TryGetValue(raceOption, gender, out var infoSet)) throw new System.InvalidOperationException();
 
             var obj = infoSet.CreateObj(location, position, random, stackOption);
 
@@ -124,7 +124,7 @@ namespace Roguegard.CharacterCreation
 
         protected void TryInitialize()
         {
-            if (HasNotInfoSet) throw new RogueException($"{DescriptionName} は {nameof(IMainInfoSet)} を持ちません。");
+            if (HasNotInfoSet) throw new System.InvalidOperationException($"{DescriptionName} は {nameof(IMainInfoSet)} を持ちません。");
             if (_infoSets == null) { Initialize(); }
         }
 
