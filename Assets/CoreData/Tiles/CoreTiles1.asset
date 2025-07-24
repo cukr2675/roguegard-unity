@@ -14,7 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _namespaceName: Roguegard
   _targetFolder: {fileID: 102900000, guid: b645e61fa94363b4f916f567a22aad1c, type: 3}
-  _assetTypeName: RogueTileInfoData
   _assetTypeNames:
-  - RogueTileInfoData
-  _propertyTypeName: RogueTileInfo
+  - StandardRogueTileInfoAsset
+  _propertyTypeName: IRogueTileInfo

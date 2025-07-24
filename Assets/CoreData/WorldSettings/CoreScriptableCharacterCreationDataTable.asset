@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: CoreScriptableCharacterCreationDataTable
   m_EditorClassIdentifier: 
   _namespace: Core
-  _filter: t:ScriptableCharacterCreationData
+  _filter: t:CharacterCreationDataAsset
   _targetFolders:
   - {fileID: 102900000, guid: 4f6c1aac6e3db484a8592e46d74553c5, type: 3}
   - {fileID: 102900000, guid: 447ac99ae37cf834fac7fc8e0aba79ae, type: 3}

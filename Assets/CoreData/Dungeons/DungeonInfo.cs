@@ -112,10 +112,11 @@ namespace Roguegard
         {
             if (!dungeon.TryGet<Info>(out var info))
             {
-                dungeon.SetInfo(new Info
+                info = new Info
                 {
                     info = new DungeonInfo()
-                });
+                };
+                dungeon.SetInfo(info);
             }
 
             // 上書き不可

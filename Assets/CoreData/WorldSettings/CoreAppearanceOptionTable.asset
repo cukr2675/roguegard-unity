@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: CoreAppearanceOptionTable
   m_EditorClassIdentifier: 
   _namespace: Core
-  _filter: t:AppearanceOption
+  _filter: t:AppearanceOptionAsset
   _targetFolders:
   - {fileID: 102900000, guid: 49a475dab3f1bb94ab754c0c58f2ca86, type: 3}
   _items:

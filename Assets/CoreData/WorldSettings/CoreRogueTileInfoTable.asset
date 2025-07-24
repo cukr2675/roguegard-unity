@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: CoreRogueTileInfoTable
   m_EditorClassIdentifier: 
   _namespace: Core
-  _filter: t:RogueTileInfoData
+  _filter: t:RogueTileInfoAsset
   _targetFolders:
   - {fileID: 102900000, guid: 222d7e4e1141c4849ba4aded40361463, type: 3}
   - {fileID: 102900000, guid: f327df6ee002dd54e8398f6e44441aba, type: 3}

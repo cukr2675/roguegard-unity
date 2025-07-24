@@ -14,7 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _namespaceName: Roguegard
   _targetFolder: {fileID: 102900000, guid: 0ec4b1fc7f8bffa47886f7cb69ab54d3, type: 3}
-  _assetTypeName: KeywordData
   _assetTypeNames:
-  - KeywordData
+  - KeywordAsset
   _propertyTypeName: IKeyword

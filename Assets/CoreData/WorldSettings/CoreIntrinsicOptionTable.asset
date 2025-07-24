@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: CoreIntrinsicOptionTable
   m_EditorClassIdentifier: 
   _namespace: Core
-  _filter: t:IntrinsicOption
+  _filter: t:IntrinsicOptionAsset
   _targetFolders:
   - {fileID: 102900000, guid: 41129aed52e2bab43b40d39b23ed9f4f, type: 3}
   _items:

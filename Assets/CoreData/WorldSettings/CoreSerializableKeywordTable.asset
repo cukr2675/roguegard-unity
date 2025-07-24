@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: CoreSerializableKeywordTable
   m_EditorClassIdentifier: 
   _namespace: Core
-  _filter: t:SerializableKeywordData
+  _filter: t:SerializableKeywordAsset
   _targetFolders:
   - {fileID: 102900000, guid: bcde7f3237d579f4fa870173efd0291c, type: 3}
   _items:
