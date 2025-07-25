@@ -51,7 +51,7 @@ namespace Roguegard
                         if (equipment == null) continue;
 
                         var equipmentInfo = equipment.Main.GetEquipmentInfo(equipment);
-                        var index = equipmentInfo.EquipIndex;
+                        var index = equipmentInfo.EquippedSubslot;
                         effect.equipments[equipment] = index;
                     }
                 }

@@ -84,7 +84,7 @@ namespace RoguegardUnity
 
                         var equipmentInfo = obj.Main.GetEquipmentInfo(obj);
                         var vehicleInfo = VehicleInfo.Get(obj);
-                        var equipeed = equipmentInfo?.EquipIndex >= 0 || vehicleInfo?.Rider != null;
+                        var equipeed = equipmentInfo?.EquippedSubslot >= 0 || vehicleInfo?.Rider != null;
 
                         return (obj, icon, color, stack, null, null, weightText, equipeed);
                     })

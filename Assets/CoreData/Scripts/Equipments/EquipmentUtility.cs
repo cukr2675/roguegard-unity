@@ -10,7 +10,7 @@ namespace Roguegard
         /// 0 からチェックして空いている装備インデックスを取得する。
         /// どの装備インデックスも空いていなかったら最後のインデックスを取得する。
         /// </summary>
-        public static int GetEquipIndex(IEquipmentState equipmentState, IKeyword keyword)
+        public static int GetEquipmentSubslot(IEquipmentState equipmentState, IKeyword keyword)
         {
             var length = equipmentState.GetLength(keyword);
             for (int i = 0; i < length; i++)

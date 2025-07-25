@@ -50,7 +50,7 @@ namespace RoguegardUnity
                 var weight = WeightCalculator.Get(obj);
                 var equipmentInfo = obj.Main.GetEquipmentInfo(obj);
                 var vehicleInfo = VehicleInfo.Get(obj);
-                var equipped = equipmentInfo?.EquipIndex >= 0 || vehicleInfo?.Rider != null;
+                var equipped = equipmentInfo?.EquippedSubslot >= 0 || vehicleInfo?.Rider != null;
 
                 // 重さゼロのアイテムを上に並べる
                 if (weight.TotalWeight <= 0f)

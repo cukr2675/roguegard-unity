@@ -14,7 +14,7 @@ namespace Roguegard
         /// </summary>
         public abstract Spanning<IKeyword> EquipmentSlots { get; }
 
-        public int EquipIndex => equipEffect?.Index ?? -1;
+        public int EquippedSubslot => equipEffect?.EquipmentSubslot ?? -1;
 
         public virtual bool CanStackWhileEquipped => false;
 
@@ -24,7 +24,7 @@ namespace Roguegard
         public virtual IChangeEffectRogueMethod BeUnequipped => _beUnequipped;
         private static readonly IChangeEffectRogueMethod _beUnequipped = new BeUnequippedRogueMethod();
 
-        bool IEquipmentInfo.TryOpen(RogueObj equipment, int index, EquipRogueEffect equipEffect)
+        bool IEquipmentInfo.TryOpen(RogueObj equipment, int equipmentSubslot, EquipRogueEffect equipEffect)
         {
             var owner = equipment.Location;
             var equipmentInfo = equipment.Main.GetEquipmentInfo(equipment);
@@ -41,22 +41,22 @@ namespace Roguegard
                 this.equipEffect ??= new EquipRogueEffect(equipment);
                 equipEffect = this.equipEffect;
             }
-            if (this.equipEffect != null && this.equipEffect.Index >= 0)
+            if (this.equipEffect != null && this.equipEffect.EquipmentSubslot >= 0)
             {
                 // すでに装備されていたら失敗させる。
                 return false;
             }
-            equipEffect.SetIndex(index);
+            equipEffect.SetEquipmentSubslot(equipmentSubslot);
             this.equipEffect = equipEffect;
 
             var ownerEquipmentState = owner.Main.GetEquipmentState(owner);
             for (int i = 0; i < EquipmentSlots.Length; i++)
             {
                 var equipmentSlot = EquipmentSlots[i];
-                int equipIndex;
-                if (i == 0) { equipIndex = index; } // 最初の部位だけ外部からの指定を受ける。
-                else { equipIndex = EquipmentUtility.GetEquipIndex(ownerEquipmentState, equipmentSlot); }
-                var equipment1 = ownerEquipmentState.GetEquipment(equipmentSlot, equipIndex);
+                int subslot;
+                if (i == 0) { subslot = equipmentSubslot; } // 最初の部位だけ外部からの指定を受ける。
+                else { subslot = EquipmentUtility.GetEquipmentSubslot(ownerEquipmentState, equipmentSlot); }
+                var equipment1 = ownerEquipmentState.GetEquipment(equipmentSlot, subslot);
                 if (equipment1 != null)
                 {
                     // 既に枠が埋まっていたら失敗させる。
@@ -65,7 +65,7 @@ namespace Roguegard
                     return false;
                 }
 
-                ownerEquipmentState.SetEquipment(equipmentSlot, equipIndex, equipment);
+                ownerEquipmentState.SetEquipment(equipmentSlot, subslot, equipment);
             }
 
             if (addEffect) { owner.Main.RogueEffects.AddOpen(owner, equipEffect); }
@@ -144,7 +144,7 @@ namespace Roguegard
                     info = self.Main.GetEquipmentInfo(self);
                 }
 
-                if (info.EquipIndex >= 0)
+                if (info.EquippedSubslot >= 0)
                 {
                     // 既に誰かに装備されている場合は失敗させる。
                     Debug.LogError("この装備品は既に装備されています。");

@@ -101,7 +101,7 @@ namespace Roguegard
                 Debug.LogError($"変化中に {nameof(SetBaseInfoSet)} を実行することはできません。");
                 return;
             }
-            if (equipmentInfo != null && equipmentInfo.EquipIndex >= 0)
+            if (equipmentInfo != null && equipmentInfo.EquippedSubslot >= 0)
             {
                 Debug.LogError("装備中の装備品を変化させることはできません。変化前に解除してください。");
                 return;
@@ -147,7 +147,7 @@ namespace Roguegard
                 Debug.LogError($"引数 {nameof(infoSet)} が null です。");
                 return;
             }
-            if (equipmentInfo != null && equipmentInfo.EquipIndex >= 0)
+            if (equipmentInfo != null && equipmentInfo.EquippedSubslot >= 0)
             {
                 Debug.LogError("装備中の装備品を変化させることはできません。変化前に解除してください。");
                 return;
@@ -409,8 +409,8 @@ namespace Roguegard
             if (selfEquipmentInfo != null || comingEquipmentInfo != null)
             {
                 if (selfEquipmentInfo == null || comingEquipmentInfo == null) return false;
-                if (comingEquipmentInfo.EquipIndex != -1) return false;
-                if (selfEquipmentInfo.EquipIndex != -1 && !selfEquipmentInfo.CanStackWhileEquipped) return false;
+                if (comingEquipmentInfo.EquippedSubslot != -1) return false;
+                if (selfEquipmentInfo.EquippedSubslot != -1 && !selfEquipmentInfo.CanStackWhileEquipped) return false;
             }
 
             if (!Stats.CanStack(coming.Main.Stats)) return false;

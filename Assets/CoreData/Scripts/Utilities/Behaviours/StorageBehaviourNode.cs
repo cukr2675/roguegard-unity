@@ -40,7 +40,7 @@ namespace Roguegard
                 // 装備品を浄化
                 EquipmentUtility.Cleansing(item);
 
-                if (itemIsEquipped && item.Main.GetEquipmentInfo(item).EquipIndex == -1)
+                if (itemIsEquipped && item.Main.GetEquipmentInfo(item).EquippedSubslot == -1)
                 {
                     // 装備品を装備しなおす
                     default(IActiveRogueMethodCaller).TryEquip(item, self, activationDepth);

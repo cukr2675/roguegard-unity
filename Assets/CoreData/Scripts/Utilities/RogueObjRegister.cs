@@ -61,7 +61,7 @@ namespace Roguegard
             var equipmentInfo = item.Main.GetEquipmentInfo(item);
             if (equipmentInfo != null)
             {
-                newPossession.IsEquipped = equipmentInfo.EquipIndex != -1;
+                newPossession.IsEquipped = equipmentInfo.EquippedSubslot != -1;
             }
 
             possessions.Add(newPossession);

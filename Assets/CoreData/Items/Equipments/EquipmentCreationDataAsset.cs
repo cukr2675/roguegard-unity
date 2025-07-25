@@ -54,7 +54,7 @@ namespace Roguegard.CharacterCreation
             if (self != null)
             {
                 var equipEffect = new EquipRogueEffect(equipment); // 生成時点で装備済みにする
-                equipEffect.SetIndex(0);
+                equipEffect.SetEquipmentSubslot(0);
                 self.Main.RogueEffects.AddOpen(self, equipEffect);
             }
         }

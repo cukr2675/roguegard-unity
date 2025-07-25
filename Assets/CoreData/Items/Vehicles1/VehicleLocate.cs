@@ -11,7 +11,7 @@ namespace Roguegard
             if (SpaceUtility.ObjIsGlued(self)) return false;
 
             var selfEquipmentInfo = self.Main.GetEquipmentInfo(self);
-            if (selfEquipmentInfo != null && selfEquipmentInfo.EquipIndex >= 0)
+            if (selfEquipmentInfo != null && selfEquipmentInfo.EquippedSubslot >= 0)
             {
                 // 装備されている装備品を空間移動させる場合、取り外してから移動させる。
                 // 取り外せないときは移動を失敗させる。

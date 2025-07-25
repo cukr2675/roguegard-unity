@@ -19,8 +19,8 @@ namespace Roguegard
             if (selfEquipmentInfo != null)
             {
                 // 装備品自体を変化させるとき（装備者を変化させるわけではない）
-                var equipIndex = selfEquipmentInfo.EquipIndex;
-                if (equipIndex >= 0)
+                var equippedSubslot = selfEquipmentInfo.EquippedSubslot;
+                if (equippedSubslot >= 0)
                 {
                     // 装備品を変化させる場合、装備を解除してから変化させる。
                     selfEquipmentInfo.RemoveClose(self);
@@ -29,10 +29,10 @@ namespace Roguegard
                 self.Main.Polymorph(self, infoSet);
 
                 var polymorphedEquipmentInfo = self.Main.GetEquipmentInfo(self);
-                if (equipIndex >= 0 && polymorphedEquipmentInfo != null)
+                if (equippedSubslot >= 0 && polymorphedEquipmentInfo != null)
                 {
                     // 変化前に装備されていた場合、変化後の装備品を装備する。
-                    polymorphedEquipmentInfo.TryOpen(self, equipIndex);
+                    polymorphedEquipmentInfo.TryOpen(self, equippedSubslot);
                 }
             }
             else if (vehicleInfo != null)

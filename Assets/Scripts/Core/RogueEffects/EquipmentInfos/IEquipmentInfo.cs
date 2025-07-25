@@ -7,7 +7,7 @@ namespace Roguegard
         /// <summary>
         /// -1 のとき未装備。
         /// </summary>
-        int EquipIndex { get; }
+        int EquippedSubslot { get; }
 
         bool CanStackWhileEquipped { get; }
 

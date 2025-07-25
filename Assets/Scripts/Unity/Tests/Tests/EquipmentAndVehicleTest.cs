@@ -107,12 +107,12 @@ namespace RoguegardUnity.Tests
             }
             Debug.Log($"{player} は {equipment} を装備しました。");
 
-            if (equipmentInfo.EquipIndex == -1)
+            if (equipmentInfo.EquippedSubslot == -1)
             {
-                Debug.LogError($"{nameof(equipmentInfo.EquipIndex)} == {-1}");
+                Debug.LogError($"{nameof(equipmentInfo.EquippedSubslot)} == {-1}");
                 return;
             }
-            Debug.Log($"{nameof(equipmentInfo.EquipIndex)} != {-1}");
+            Debug.Log($"{nameof(equipmentInfo.EquippedSubslot)} != {-1}");
 
             var equipmentState = player.Main.GetEquipmentState(player);
             var equipEquipment = equipmentState.GetEquipment(EquipKw.Bottoms, 0);
@@ -136,7 +136,7 @@ namespace RoguegardUnity.Tests
             Debug.Log($"{jEquipment} == {equipment}");
 
             var jEquipmentInfo = jEquipment.Main.GetEquipmentInfo(jEquipment);
-            if (jEquipmentInfo.EquipIndex == -1)
+            if (jEquipmentInfo.EquippedSubslot == -1)
             {
                 Debug.LogError($"シリアル化で装備が解除されました。");
                 return;

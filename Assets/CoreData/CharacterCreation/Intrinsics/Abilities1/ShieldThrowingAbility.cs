@@ -23,7 +23,7 @@ namespace Roguegard.CharacterCreation
                 if (keyword == MainInfoKw.BeThrown && target != null)
                 {
                     var shieldInfo = target.Main.GetEquipmentInfo(target);
-                    if (shieldInfo != null && shieldInfo.EquipmentSlots.Contains(EquipKw.Shield) && shieldInfo.EquipIndex != -1)
+                    if (shieldInfo != null && shieldInfo.EquipmentSlots.Contains(EquipKw.Shield) && shieldInfo.EquippedSubslot != -1)
                     {
                         // 装備している盾を投げたとき、当たった敵に攻撃力ダメージを与えるようにメソッドを変更する
                         return chain.Invoke(keyword, beShotMethod, self, target, activationDepth, arg);

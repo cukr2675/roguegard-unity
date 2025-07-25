@@ -60,7 +60,7 @@ namespace Roguegard
             var toolVehicleInfo = VehicleInfo.Get(tool);
             if (category == CategoryKw.Equipment && toolEquipmentInfo != null)
             {
-                if (toolEquipmentInfo.EquipIndex >= 0)
+                if (toolEquipmentInfo.EquippedSubslot >= 0)
                 {
                     AddRange(_unequipOptions);
                 }

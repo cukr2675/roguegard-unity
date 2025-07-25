@@ -11,7 +11,7 @@ namespace Roguegard
         /// <summary>
         /// -1 のとき未装備。
         /// </summary>
-        public int Index { get; private set; }
+        public int EquipmentSubslot { get; private set; }
 
         private RogueObj equipment;
 
@@ -21,14 +21,14 @@ namespace Roguegard
         public EquipRogueEffect(RogueObj equipment)
         {
             this.equipment = equipment;
-            Index = -1;
+            EquipmentSubslot = -1;
         }
 
-        public void SetIndex(int index)
+        public void SetEquipmentSubslot(int equipmentSubslot)
         {
-            if (index < 0) throw new System.ArgumentOutOfRangeException(nameof(index));
+            if (equipmentSubslot < 0) throw new System.ArgumentOutOfRangeException(nameof(equipmentSubslot));
 
-            Index = index;
+            EquipmentSubslot = equipmentSubslot;
         }
 
         /// <summary>
@@ -38,13 +38,13 @@ namespace Roguegard
         public void RemoveClose(RogueObj owner)
         {
             owner.Main.RogueEffects.Remove(this);
-            Index = -1;
+            EquipmentSubslot = -1;
         }
 
         void IRogueEffect.Open(RogueObj owner)
         {
             var info = equipment.Main.GetEquipmentInfo(equipment);
-            info.TryOpen(equipment, Index, this);
+            info.TryOpen(equipment, EquipmentSubslot, this);
         }
 
         /// <summary>
@@ -55,7 +55,7 @@ namespace Roguegard
 
         IRogueEffect IRogueEffect.DeepOrShallowCopy(RogueObj owner, RogueObj clonedOwner)
         {
-            var clone = new EquipRogueEffect(equipment) { Index = Index };
+            var clone = new EquipRogueEffect(equipment) { EquipmentSubslot = EquipmentSubslot };
             return clone;
         }
 
