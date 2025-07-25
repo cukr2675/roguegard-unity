@@ -1,5 +1,7 @@
 namespace Roguegard
 {
+    // 命名メモ: アビリティの効果なども含むためこのインターフェース自体はステータスエフェクトではない
+
     /// <summary>
     /// <see cref="RogueObj"/> にシリアル化しても残るエフェクトを付与する。
     /// 連想配列で保存する <see cref="IRogueObjInfo"/> と違いリストで保存される。
