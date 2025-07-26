@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d804a0563fa5a446810471ce0060b35, type: 3}
   m_Name: Human
   m_EditorClassIdentifier: 
-  _main:
+  _base:
     _name: "\u4EBA\u9593"
     _icon: {fileID: 0}
     _color: {r: 1, g: 1, b: 1, a: 1}
