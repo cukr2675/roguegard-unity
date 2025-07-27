@@ -1,6 +1,8 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
+using System;
 
 namespace Lysionium
 {
@@ -13,33 +15,93 @@ namespace Lysionium
         public override bool TryInstantiateWidget(
             object element, IElementHandler handler, ElementsSubviewBase elementsSubview, out ViewWidget stackViewWidget)
         {
-            if (!(element is IReadOnlyList<object> viewWidgets))
+            if (element is IWidgetOption viewWidgets)
             {
-                stackViewWidget = null;
-                return false;
-            }
+                stackViewWidget = Instantiate(this);
+                var content = (RectTransform)stackViewWidget.transform;
 
-            stackViewWidget = Instantiate(this);
-            var content = (RectTransform)stackViewWidget.transform;
-
-            var maxHeight = 0f;
-            var viewElementWidth = 1f / viewWidgets.Count;
-            for (int i = 0; i < viewWidgets.Count; i++)
-            {
-                if (!ViewWidgetFactory.TryCreateViewWidget(viewWidgets[i], handler, elementsSubview, out var viewWidget))
+                var children = viewWidgets.Children;
+                var widths = new float[children.Count];
+                var totalWidth = 0f;
+                for (int i = 0; i < children.Count; i++)
                 {
-                    Debug.LogError($"{viewWidgets[i]} の {nameof(ViewWidget)} を生成できません。");
-                    continue;
+                    var width = children[i].width;
+                    if (!width.EndsWith('*')) throw new System.NotImplementedException();
+
+                    totalWidth += widths[i] = float.Parse(width.AsSpan(0, width.Length - 1));
                 }
 
-                viewWidget.SetParent(content, false);
-                viewWidget.anchorMin = new Vector2(i * viewElementWidth, viewWidget.anchorMin.y);
-                viewWidget.anchorMax = new Vector2((i + 1) * viewElementWidth, viewWidget.anchorMax.y);
-                viewWidget.sizeDelta = new Vector2(0f, viewWidget.sizeDelta.y);
-                maxHeight = Mathf.Max(maxHeight, viewWidget.rect.height);
+                var sumWidth = 0f;
+                var maxHeight = 0f;
+                for (int i = 0; i < children.Count; i++)
+                {
+                    if (!ViewWidgetFactory.TryCreateViewWidget(children[i].element, handler, elementsSubview, out var viewWidget))
+                    {
+                        Debug.LogError($"{children[i]} の {nameof(ViewWidget)} を生成できません。");
+                        continue;
+                    }
+
+                    viewWidget.SetParent(content, false);
+                    viewWidget.anchorMin = new Vector2(sumWidth / totalWidth, viewWidget.anchorMin.y);
+                    sumWidth += widths[i];
+                    viewWidget.anchorMax = new Vector2(sumWidth / totalWidth, viewWidget.anchorMax.y);
+                    viewWidget.sizeDelta = new Vector2(0f, viewWidget.sizeDelta.y);
+                    maxHeight = Mathf.Max(maxHeight, viewWidget.rect.height);
+                }
+                content.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, 0f, maxHeight);
+                return true;
             }
-            content.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, 0f, maxHeight);
-            return true;
+
+            if (element is IReadOnlyList<object> oldViewWidgets)
+            {
+                Debug.LogWarning("Obsolete");
+
+                stackViewWidget = Instantiate(this);
+                var content = (RectTransform)stackViewWidget.transform;
+
+                var maxHeight = 0f;
+                var viewElementWidth = 1f / oldViewWidgets.Count;
+                for (int i = 0; i < oldViewWidgets.Count; i++)
+                {
+                    if (!ViewWidgetFactory.TryCreateViewWidget(oldViewWidgets[i], handler, elementsSubview, out var viewWidget))
+                    {
+                        Debug.LogError($"{oldViewWidgets[i]} の {nameof(ViewWidget)} を生成できません。");
+                        continue;
+                    }
+
+                    viewWidget.SetParent(content, false);
+                    viewWidget.anchorMin = new Vector2(i * viewElementWidth, viewWidget.anchorMin.y);
+                    viewWidget.anchorMax = new Vector2((i + 1) * viewElementWidth, viewWidget.anchorMax.y);
+                    viewWidget.sizeDelta = new Vector2(0f, viewWidget.sizeDelta.y);
+                    maxHeight = Mathf.Max(maxHeight, viewWidget.rect.height);
+                }
+                content.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, 0f, maxHeight);
+                return true;
+            }
+
+            stackViewWidget = null;
+            return false;
+        }
+
+        public static IWidgetOption CreateOption(params (string width, object element)[] children)
+        {
+            return new WidgetOption()
+            {
+                Name = EmitIdentity("StackViewWidget"),
+                Children = children,
+            };
+        }
+
+        public interface IWidgetOption
+        {
+            string Name { get; }
+            public IReadOnlyList<(string width, object element)> Children { get; }
+        }
+
+        private class WidgetOption : IWidgetOption
+        {
+            public string Name { get; set; }
+            public IReadOnlyList<(string width, object element)> Children { get; set; }
         }
     }
 }

@@ -1,6 +1,8 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
+using System.Linq;
 
 namespace Lysionium
 {
@@ -84,12 +86,12 @@ namespace Lysionium
 
             public Builder HeadStack(params object[] elements)
             {
-                return Head(elements);
+                return Head(StackViewWidget.CreateOption(elements.Select(x => ("1*", x)).ToArray()));
             }
 
             public Builder TailStack(params object[] elements)
             {
-                return Tail(elements);
+                return Tail(StackViewWidget.CreateOption(elements.Select(x => ("1*", x)).ToArray()));
             }
         }
     }
