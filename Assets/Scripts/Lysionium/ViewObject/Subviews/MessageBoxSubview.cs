@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -33,6 +33,11 @@ namespace Lysionium
                 OnCompleted = null;
                 tempAction?.Invoke(Manager, Arg);
             });
+
+            if (_blocker != null)
+            {
+                _blocker.Initialize(this);
+            }
         }
 
         public override void SetParameters(
@@ -55,7 +60,6 @@ namespace Lysionium
 
             if (_blocker != null)
             {
-                _blocker.Initialize(this);
                 _blocker.SetElement(
                     SelectOption.Create<IListMenuManager, IListMenuArg>("", delegate { _onClick.Invoke(); }), SelectOptionHandler.Instance);
                 _blocker.SetVisible(true, true);
