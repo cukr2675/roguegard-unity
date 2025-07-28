@@ -2,11 +2,9 @@ using UnityEngine;
 
 namespace Roguegard.CharacterCreation
 {
-    // 命名メモ: インスタンスとしての「オブジェクト」は "Obj" で、分類としての「オブジェクト」は "Object"
-    // InfoSetReferencedFoodCreationDataAsset が存在するため InfoSetReferencedObj ではなく InfoSetReferencedObject にする
-    [CreateAssetMenu(menuName = "Roguegard/Character Creation/Character Creation Data/Info Set Referenced Object")]
+    [CreateAssetMenu(menuName = "Roguegard/Character Creation/Character Creation Data/Info Set Referenced Food")]
     [Objforming.Referable]
-    public class InfoSetReferencedObjectCreationDataAsset : ObjectCreationDataAsset
+    public class InfoSetReferencedFoodCreationDataAsset : FoodCreationDataAsset
     {
         public override Spanning<IMemberSource> StartingItemOptionMemberSources => _startingItemOptionMemberSources;
         private static readonly IMemberSource[] _startingItemOptionMemberSources = new IMemberSource[] { SingleItemMember.SourceInstance };

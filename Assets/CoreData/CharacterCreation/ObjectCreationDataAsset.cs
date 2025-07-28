@@ -2,6 +2,9 @@ using UnityEngine;
 
 namespace Roguegard.CharacterCreation
 {
+    // 命名メモ: インスタンスとしての「オブジェクト」は "Obj" で、分類としての「オブジェクト」は "Object"
+    // ObjCreationDataAsset にするとクラス名に Obj がつかないもの (FoodCreationDataAsset 等) が Obj ではないと連想してしまう
+    // FoodObjCreationDataAsset にするのは冗長
     [CreateAssetMenu(menuName = "Roguegard/Character Creation/Character Creation Data/Object")]
     [Objforming.Referable]
     public class ObjectCreationDataAsset : RaceOptionalCreationDataAsset
