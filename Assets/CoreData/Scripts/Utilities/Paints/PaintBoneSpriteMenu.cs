@@ -230,10 +230,10 @@ namespace Roguegard
                 paint.SetPaint(elms, table.Palette, table.MainColor, showsSplitLine, pivots);
                 paint.Show();
 
-                IElementsSubviewStateProvider stateProvider = null;
+                ISubviewStateProvider stateProvider = null;
                 manager
                     .GetSubview(StandardSubviewTable.BackAnchorName)
-                    .Show(back, SelectOptionHandler.Instance, manager, arg, ref stateProvider);
+                    .Show(back, SelectOptionViewItemHandler.Instance, manager, arg, ref stateProvider);
             }
 
             private void Back(MMgr manager, MArg arg)

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,7 +10,7 @@ using Roguegard.Device;
 
 namespace RoguegardUnity
 {
-    public class RogueButtonViewElement : ViewElement
+    public class RogueButtonViewElement : ViewItem
     {
         [SerializeField] private Image _icon = null;
         [SerializeField] private TMP_Text _nameText = null;
@@ -24,7 +24,7 @@ namespace RoguegardUnity
         [SerializeField] private string _defaultStyle = "Submit";
         private Animator animator;
 
-        private IButtonElementHandler handler;
+        private IButtonViewItemHandler handler;
         private object element;
 
         private static readonly RogueNameBuilder nameBuilder = new();
@@ -42,9 +42,9 @@ namespace RoguegardUnity
             TryGetComponent(out animator);
         }
 
-        protected override void SetElementCore(object element, IElementHandler handler)
+        protected override void BindCore(object element, IViewItemHandler handler)
         {
-            this.handler = handler as IButtonElementHandler;
+            this.handler = handler as IButtonViewItemHandler;
             this.element = element;
 
             var color = RoguegardSettings.White;

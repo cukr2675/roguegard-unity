@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -21,7 +21,7 @@ namespace Lysionium
 
         private Selectable selectable;
         private Selectable parentSelectable;
-        private ElementsViewAnimator parentAnimator;
+        private SubviewAnimator parentAnimator;
         private bool queuedDisableInteractable;
 
         private void Awake()

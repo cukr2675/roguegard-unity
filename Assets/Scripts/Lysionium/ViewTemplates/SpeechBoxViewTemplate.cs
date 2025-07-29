@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -24,10 +24,10 @@ namespace Lysionium
         };
 
         private object prevViewStateHolder;
-        private IElementsSubviewStateProvider messageBoxSubviewStateProvider;
-        private IElementsSubviewStateProvider choicesSubviewStateProvider;
-        private IElementsSubviewStateProvider captionBoxSubviewStateProvider;
-        private event HandleClickElement<TMgr, TArg> OnCompleted;
+        private ISubviewStateProvider messageBoxSubviewStateProvider;
+        private ISubviewStateProvider choicesSubviewStateProvider;
+        private ISubviewStateProvider captionBoxSubviewStateProvider;
+        private event ClickItemHandler<TMgr, TArg> OnCompleted;
 
         private readonly string[] message = new string[1];
 
@@ -62,7 +62,7 @@ namespace Lysionium
         {
             if (LuiAssert.Type<MessageBoxSubview>(manager.GetSubview(SpeechBoxSubviewName), out var speechBoxSubview)) return;
 
-            speechBoxSubview.Show(message, ElementToStringHandler.Instance, manager, arg, ref messageBoxSubviewStateProvider);
+            speechBoxSubview.Show(message, ToStringViewItemHandler.Instance, manager, arg, ref messageBoxSubviewStateProvider);
             speechBoxSubview.DoScheduledAfterCompletion((manager, arg) =>
             {
                 if (LuiAssert.Type<TMgr>(manager, out var tMgr, manager) ||
@@ -75,7 +75,7 @@ namespace Lysionium
             {
                 manager
                     .GetSubview(ChoicesSubviewName)
-                    .SetParameters(List, SelectOptionHandler.Instance, manager, arg, ref choicesSubviewStateProvider);
+                    .SetParameters(List, SelectOptionViewItemHandler.Instance, manager, arg, ref choicesSubviewStateProvider);
                 speechBoxSubview.DoScheduledAfterCompletion((manager, arg) =>
                 {
                     manager.GetSubview(ChoicesSubviewName).Show();
@@ -86,7 +86,7 @@ namespace Lysionium
             {
                 manager
                     .GetSubview(CaptionBoxSubviewName)
-                    .Show(TitleSingle, ElementToStringHandler.Instance, manager, arg, ref captionBoxSubviewStateProvider);
+                    .Show(TitleSingle, ToStringViewItemHandler.Instance, manager, arg, ref captionBoxSubviewStateProvider);
             }
         }
 
@@ -107,7 +107,7 @@ namespace Lysionium
                 this.parent = parent;
             }
 
-            public Builder OnCompleted(HandleClickElement<TMgr, TArg> onCompleted)
+            public Builder OnCompleted(ClickItemHandler<TMgr, TArg> onCompleted)
             {
                 AssertNotBuilt();
 
@@ -115,7 +115,7 @@ namespace Lysionium
                 return this;
             }
 
-            public Builder Option(string name, HandleClickElement<TMgr, TArg> onClick)
+            public Builder Option(string name, ClickItemHandler<TMgr, TArg> onClick)
             {
                 AssertNotBuilt();
 
@@ -135,7 +135,7 @@ namespace Lysionium
         public class StringReplacer
         {
             public string From { get; }
-            private readonly GetElementName<TMgr, TArg> to;
+            private readonly ItemNameSelector<TMgr, TArg> to;
 
             public StringReplacer(string from, string to)
             {
@@ -146,7 +146,7 @@ namespace Lysionium
                 this.to = delegate { return to; };
             }
 
-            public StringReplacer(string from, GetElementName<TMgr, TArg> to)
+            public StringReplacer(string from, ItemNameSelector<TMgr, TArg> to)
             {
                 if (from == null) throw new System.ArgumentNullException(nameof(from));
                 if (to == null) throw new System.ArgumentNullException(nameof(to));

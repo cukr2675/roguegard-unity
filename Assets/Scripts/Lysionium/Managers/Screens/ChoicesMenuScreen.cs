@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,7 +8,7 @@ namespace Lysionium
         where TMgr : IListMenuManager
         where TArg : IListMenuArg
     {
-        private readonly GetElementName<TMgr, TArg> getMessage;
+        private readonly ItemNameSelector<TMgr, TArg> getMessage;
         private readonly List<ISelectOption> selectOptions = new();
         private readonly SpeechBoxViewTemplate<TMgr, TArg> view;
 
@@ -26,7 +26,7 @@ namespace Lysionium
             if (choicesSubviewName != null) { view.ChoicesSubviewName = choicesSubviewName; }
         }
 
-        public ChoicesMenuScreen(GetElementName<TMgr, TArg> getMessage, bool isIncremental = true, string speechBoxSubviewName = null, string choicesSubviewName = null)
+        public ChoicesMenuScreen(ItemNameSelector<TMgr, TArg> getMessage, bool isIncremental = true, string speechBoxSubviewName = null, string choicesSubviewName = null)
         {
             this.getMessage = getMessage;
             IsIncremental = isIncremental;
@@ -38,7 +38,7 @@ namespace Lysionium
             if (choicesSubviewName != null) { view.ChoicesSubviewName = choicesSubviewName; }
         }
 
-        public ChoicesMenuScreen<TMgr, TArg> Option(string name, HandleClickElement<TMgr, TArg> onClick, string style = null)
+        public ChoicesMenuScreen<TMgr, TArg> Option(string name, ClickItemHandler<TMgr, TArg> onClick, string style = null)
         {
             selectOptions.Add(SelectOption.Create(name, onClick, style));
             return this;

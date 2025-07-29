@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,13 +14,13 @@ namespace Lysionium
         public string FadeMaskSubviewName { get; set; } = StandardSubviewTable.FadeMaskName;
 
         private object prevViewStateHolder;
-        private IElementsSubviewStateProvider fadeMaskSubviewStateProvider;
-        private event HandleClickElement<TMgr, TArg> HandleFadeOut;
-        private event HandleClickElement<TMgr, TArg> HandleFadeIn;
+        private ISubviewStateProvider fadeMaskSubviewStateProvider;
+        private event ClickItemHandler<TMgr, TArg> HandleFadeOut;
+        private event ClickItemHandler<TMgr, TArg> HandleFadeIn;
 
         private readonly List<object> widgetOptions = new();
-        private readonly HandleEndAnimation onFadeOutAnimation;
-        private readonly HandleEndAnimation onFadeInAnimation;
+        private readonly EndAnimationHandler onFadeOutAnimation;
+        private readonly EndAnimationHandler onFadeInAnimation;
 
         public FadeOutInViewTemplate()
         {
@@ -60,7 +60,7 @@ namespace Lysionium
         {
             manager
                 .GetSubview(FadeMaskSubviewName)
-                .Show(widgetOptions, ElementToStringHandler.Instance, manager, arg, ref fadeMaskSubviewStateProvider, onFadeOutAnimation);
+                .Show(widgetOptions, ToStringViewItemHandler.Instance, manager, arg, ref fadeMaskSubviewStateProvider, onFadeOutAnimation);
         }
 
         public void FadeIn(TMgr manager, bool back)
@@ -86,7 +86,7 @@ namespace Lysionium
                 return this;
             }
 
-            public Builder OnFadeOutCompleted(HandleClickElement<TMgr, TArg> onFadeOut)
+            public Builder OnFadeOutCompleted(ClickItemHandler<TMgr, TArg> onFadeOut)
             {
                 AssertNotBuilt();
 
@@ -94,7 +94,7 @@ namespace Lysionium
                 return this;
             }
 
-            public Builder OnFadeInCompleted(HandleClickElement<TMgr, TArg> onFadeIn)
+            public Builder OnFadeInCompleted(ClickItemHandler<TMgr, TArg> onFadeIn)
             {
                 AssertNotBuilt();
 

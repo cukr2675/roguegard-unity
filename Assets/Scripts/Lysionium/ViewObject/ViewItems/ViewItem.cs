@@ -1,14 +1,12 @@
-﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 namespace Lysionium
 {
     [RequireComponent(typeof(CanvasGroup))]
-    public abstract class ViewElement : MonoBehaviour, ISelectHandler
+    public abstract class ViewItem : MonoBehaviour, ISelectHandler
     {
         private Selectable selectable;
         private CanvasGroup canvasGroup;
@@ -20,13 +18,13 @@ namespace Lysionium
 
         protected IListMenuManager Manager => Parent.Manager;
         protected IListMenuArg Arg => Parent.Arg;
-        protected ElementsSubviewBase Parent { get; private set; }
+        protected SubviewBase Parent { get; private set; }
 
-        public string ElementName { get; private set; }
+        public string ItemName { get; private set; }
 
         public RectTransform RectTransform => (RectTransform)transform;
 
-        public void Initialize(ElementsSubviewBase parent)
+        public void Initialize(SubviewBase parent)
         {
             if (parent == null) throw new System.ArgumentNullException(nameof(parent));
             LuiAssert.NotInitialized(this, Parent != null);
@@ -36,20 +34,20 @@ namespace Lysionium
             TryGetComponent(out canvasGroup);
         }
 
-        public void SetElement(object element, IElementHandler handler)
+        public void Bind(object item, IViewItemHandler handler)
         {
-            name = ElementName = handler.GetName(element, Manager, Arg);
-            SetElementCore(element, handler);
+            name = ItemName = handler.GetName(item, Manager, Arg);
+            BindCore(item, handler);
         }
 
-        public void ClearElement()
+        public void Unbind()
         {
-            ElementName = null;
+            ItemName = null;
             name = "null";
-            if (Manager != null) { SetElementCore(null, ElementToStringHandler.Instance); }
+            if (Manager != null) { BindCore(null, ToStringViewItemHandler.Instance); }
         }
 
-        protected abstract void SetElementCore(object element, IElementHandler handler);
+        protected abstract void BindCore(object item, IViewItemHandler handler);
 
         public void SetVisible(bool visible, bool outOfRange)
         {
@@ -64,7 +62,7 @@ namespace Lysionium
         {
             try
             {
-                if (selectable.IsInteractable()) { Parent.OnSelectViewElement(gameObject, isOutOfRange); }
+                if (selectable.IsInteractable()) { Parent.OnSelectItem(gameObject, isOutOfRange); }
                 else { Parent.QueueSelectToLastSelectedObj(gameObject, CursorPlay.None); }
             }
             catch
@@ -75,42 +73,42 @@ namespace Lysionium
         }
 
         // Animation から呼び出すメソッド
-        public void PlayString(string value) => Parent.PlayFromElement(value, this);
-        public void PlayObject(Object value) => Parent.PlayFromElement(value, this);
+        public void PlayString(string value) => Parent.PlayFromItem(value, this);
+        public void PlayObject(Object value) => Parent.PlayFromItem(value, this);
 
 
 
         /// <summary>
-        /// 指定のリストで最初に出現する <see cref="ViewElement.ElementName"/> != null のインスタンスを取得する
+        /// 指定のリストで最初に出現する <see cref="ItemName"/> != null のインスタンスを取得する
         /// </summary>
-        public static bool TryFirstNotNull(IReadOnlyList<ViewElement> viewElements, out ViewElement firstViewElement)
+        public static bool TryFirstNotNull(IReadOnlyList<ViewItem> viewItems, out ViewItem firstViewItem)
         {
-            for (int i = 0; i < viewElements.Count; i++)
+            for (int i = 0; i < viewItems.Count; i++)
             {
-                if (viewElements[i].ElementName != null)
+                if (viewItems[i].ItemName != null)
                 {
-                    firstViewElement= viewElements[i];
+                    firstViewItem= viewItems[i];
                     return true;
                 }
             }
-            firstViewElement = null;
+            firstViewItem = null;
             return false;
         }
 
         /// <summary>
-        /// 縦並びの <see cref="ViewElement"/> の <see cref="Selectable.navigation"/> を設定する
+        /// 縦並びの <see cref="ViewItem"/> の <see cref="Selectable.navigation"/> を設定する
         /// </summary>
-        public static void SetVerticalNavigation(IReadOnlyList<ViewElement> viewElements, int index, bool loop = false)
+        public static void SetVerticalNavigation(IReadOnlyList<ViewItem> viewItems, int index, bool loop = false)
         {
-            var prevSelectable = index >= 1 ? viewElements[index - 1].selectable : null;
-            var centerSelectable = viewElements[index].selectable;
-            var nextSelectable = index < viewElements.Count - 1 ? viewElements[index + 1].selectable : null;
+            var prevSelectable = index >= 1 ? viewItems[index - 1].selectable : null;
+            var centerSelectable = viewItems[index].selectable;
+            var nextSelectable = index < viewItems.Count - 1 ? viewItems[index + 1].selectable : null;
             if (centerSelectable == null) return;
 
             if (loop)
             {
-                if (prevSelectable == null) { prevSelectable = viewElements[viewElements.Count - 1].selectable; }
-                if (nextSelectable == null) { nextSelectable = viewElements[0].selectable; }
+                if (prevSelectable == null) { prevSelectable = viewItems[viewItems.Count - 1].selectable; }
+                if (nextSelectable == null) { nextSelectable = viewItems[0].selectable; }
             }
 
             if (prevSelectable != null)
@@ -142,19 +140,19 @@ namespace Lysionium
         }
 
         /// <summary>
-        /// 横並びの <see cref="ViewElement"/> の <see cref="Selectable.navigation"/> を設定する
+        /// 横並びの <see cref="ViewItem"/> の <see cref="Selectable.navigation"/> を設定する
         /// </summary>
-        public static void SetHorizontalNavigation(IReadOnlyList<ViewElement> viewElements, int index, bool loop = false)
+        public static void SetHorizontalNavigation(IReadOnlyList<ViewItem> viewItems, int index, bool loop = false)
         {
-            var prevSelectable = index >= 1 ? viewElements[index - 1].selectable : null;
-            var centerSelectable = viewElements[index].selectable;
-            var nextSelectable = index < viewElements.Count - 1 ? viewElements[index + 1].selectable : null;
+            var prevSelectable = index >= 1 ? viewItems[index - 1].selectable : null;
+            var centerSelectable = viewItems[index].selectable;
+            var nextSelectable = index < viewItems.Count - 1 ? viewItems[index + 1].selectable : null;
             if (centerSelectable == null) return;
 
             if (loop)
             {
-                if (prevSelectable == null) { prevSelectable = viewElements[viewElements.Count - 1].selectable; }
-                if (nextSelectable == null) { nextSelectable = viewElements[0].selectable; }
+                if (prevSelectable == null) { prevSelectable = viewItems[viewItems.Count - 1].selectable; }
+                if (nextSelectable == null) { nextSelectable = viewItems[0].selectable; }
             }
 
             if (prevSelectable != null)

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -8694767070496774842}
   - component: {fileID: -2353685262609151345}
   m_Layer: 5
-  m_Name: ElementsSubview (LUI)
+  m_Name: Subview (LUI)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

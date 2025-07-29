@@ -70,7 +70,7 @@ namespace Roguegard
             {
             };
 
-            private IElementsSubviewStateProvider stateProvider;
+            private ISubviewStateProvider stateProvider;
 
             public override bool IsIncremental => true;
 
@@ -90,7 +90,7 @@ namespace Roguegard
                         manager.GetSubview(StandardSubviewTable.OverlayName).Show(
                             new[] {
                                 $"<align=\"center\"><size=+32>{arg.Self.Location.GetName()} {levelText}"
-                            }, ElementToStringHandler.Instance, manager, arg, ref stateProvider);
+                            }, ToStringViewItemHandler.Instance, manager, arg, ref stateProvider);
                         manager.StartCoroutine(Wait2sDone(manager));
                     })
 

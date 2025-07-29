@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,7 +9,7 @@ namespace Lysionium.R3
     public static class ButtonElementHandlerBuilderExtension
     {
         public static TOut SubscribeButtonElementHandler<TElm, TMgr, TArg, TOut>(
-            this IButtonElementHandlerBuilder<TElm, TMgr, TArg, TOut> builder, Subject<R3RuleArg<TElm, TMgr, TArg, TOut, TElm>> subject)
+            this IButtonViewItemHandlerBuilder<TElm, TMgr, TArg, TOut> builder, Subject<R3RuleArg<TElm, TMgr, TArg, TOut, TElm>> subject)
         {
             if (builder == null) throw new System.ArgumentNullException(nameof(builder));
             if (subject == null) throw new System.ArgumentNullException(nameof(subject));
@@ -31,13 +31,13 @@ namespace Lysionium.R3
         /// 暗黙の Handle() 呼び出し
         /// </summary>
         public static ObservedHandlerSubject<TElm, TMgr, TArg, TBuilder, TValue> OnClick<TElm, TMgr, TArg, TBuilder, TValue>(
-            this Observable<R3RuleArg<TElm, TMgr, TArg, TBuilder, TValue>> source, HandleClickElement<TValue, TMgr, TArg> onClick)
-            where TBuilder : IButtonElementHandlerBuilder<TElm, TMgr, TArg, TBuilder>
+            this Observable<R3RuleArg<TElm, TMgr, TArg, TBuilder, TValue>> source, ClickItemHandler<TValue, TMgr, TArg> onClick)
+            where TBuilder : IButtonViewItemHandlerBuilder<TElm, TMgr, TArg, TBuilder>
             => source.Handle().OnClick(onClick);
 
         public static ObservedHandlerSubject<TElm, TMgr, TArg, TBuilder, TValue> OnClick<TElm, TMgr, TArg, TBuilder, TValue>(
-            this ObservedHandlerSubject<TElm, TMgr, TArg, TBuilder, TValue> source, HandleClickElement<TValue, TMgr, TArg> onClick)
-            where TBuilder : IButtonElementHandlerBuilder<TElm, TMgr, TArg, TBuilder>
+            this ObservedHandlerSubject<TElm, TMgr, TArg, TBuilder, TValue> source, ClickItemHandler<TValue, TMgr, TArg> onClick)
+            where TBuilder : IButtonViewItemHandlerBuilder<TElm, TMgr, TArg, TBuilder>
         {
             if (source == null) throw new System.ArgumentNullException(nameof(source));
             if (onClick == null) throw new System.ArgumentNullException(nameof(onClick));

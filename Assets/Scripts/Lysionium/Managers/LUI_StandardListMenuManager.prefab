@@ -166,7 +166,7 @@ MonoBehaviour:
   - {fileID: 8256227690670107280, guid: 6e1a444262d905b4f86899edf0ca030e, type: 3}
   - {fileID: 7519001842080328853, guid: 73bec8fb319d8664cbd059b3ee46544d, type: 3}
   - {fileID: 7774432689125128864, guid: f38f15f58b5abbf469eedeb31b18fe10, type: 3}
-  _fallbackViewElementPrefab: {fileID: 1146772535148585045, guid: fccb5e44de539b142a6b24e2b4bdf788, type: 3}
+  _fallbackViewItemPrefab: {fileID: 1146772535148585045, guid: fccb5e44de539b142a6b24e2b4bdf788, type: 3}
 --- !u!114 &49504067754419800
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1123,8 +1123,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _content: {fileID: 510806672258910197}
-  _viewElementPrefab: {fileID: 6695564391999450363, guid: a0b57d8fc9417ce418d15089b20a17ad, type: 3}
-  _viewElementCount: {x: 1, y: 1}
+  _viewItemPrefab: {fileID: 6695564391999450363, guid: a0b57d8fc9417ce418d15089b20a17ad, type: 3}
+  _viewItemCount: {x: 1, y: 1}
   _extensionDirection: 0
   _isSelectable: 0
 --- !u!224 &3848127613067255233 stripped

@@ -124,7 +124,7 @@ namespace Roguegard.Rgpacks.MoonSharp
 
             public static bool isOpened;
 
-            private IElementsSubviewStateProvider faceStateProvider;
+            private ISubviewStateProvider faceStateProvider;
 
             public override bool IsIncremental => true;
 

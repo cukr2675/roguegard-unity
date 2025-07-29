@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,9 +10,9 @@ using TMPro;
 
 namespace Lysionium
 {
-    [AddComponentMenu("UI/Lysionium/View Elements/LUI Button View Element")]
+    [AddComponentMenu("UI/Lysionium/View Items/LUI Button View Item")]
     [RequireComponent(typeof(Button))]
-    public class ButtonViewElement : ViewElement
+    public class ButtonViewItem : ViewItem
     {
         [SerializeField] private Image _icon = null;
         [SerializeField] private TMP_Text _text = null;
@@ -23,8 +23,8 @@ namespace Lysionium
         [SerializeField] private string _defaultStyle = "Submit";
         private Animator animator;
 
-        private IButtonElementHandler handler;
-        private object element;
+        private IButtonViewItemHandler handler;
+        private object item;
         private string style;
 
         private void Awake()
@@ -32,7 +32,7 @@ namespace Lysionium
             var button = GetComponent<Button>();
             button.onClick.AddListener(() =>
             {
-                handler.HandleClick(element, Manager, Arg);
+                handler.HandleClick(item, Manager, Arg);
             });
 
             clickActionPerformed = ctx => ExecuteEvents.Execute(gameObject, new BaseEventData(EventSystem.current), ExecuteEvents.submitHandler);
@@ -40,19 +40,19 @@ namespace Lysionium
             TryGetComponent(out animator);
         }
 
-        protected override void SetElementCore(object element, IElementHandler handler)
+        protected override void BindCore(object item, IViewItemHandler handler)
         {
-            this.handler = handler as IButtonElementHandler;
-            this.element = element;
+            this.handler = handler as IButtonViewItemHandler;
+            this.item = item;
 
             if (_text != null)
             {
                 _text.text = Manager.Localize(name);
             }
 
-            if (_icon != null && handler is IColoredIconElementHandler iconElementHandler)
+            if (_icon != null && handler is IColoredIconViewItemHandler iconViewItemHandler)
             {
-                iconElementHandler.GetIcon(element, Manager, Arg, out var iconSprite, out var iconColor);
+                iconViewItemHandler.GetIcon(item, Manager, Arg, out var iconSprite, out var iconColor);
                 iconSprite = Manager.Localize(iconSprite);
                 if (iconSprite != null)
                 {
@@ -71,7 +71,7 @@ namespace Lysionium
             // 前回のスタイルを解除する
             SetStyle(null);
 
-            var newStyle = handler.GetStyle(element, Manager, Arg);
+            var newStyle = handler.GetStyle(item, Manager, Arg);
             if (newStyle == null) { newStyle = _defaultStyle; }
             SetStyle(newStyle);
         }

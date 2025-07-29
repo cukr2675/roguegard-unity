@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -35,7 +35,7 @@ namespace Lysionium
         /// <summary>
         /// このメニューを開くクリックアクションに変換する。単純な遷移ならこれで楽できる
         /// </summary>
-        public static implicit operator HandleClickElement<TMgr, TArg>(MenuScreen<TMgr, TArg> menuScreen)
+        public static implicit operator ClickItemHandler<TMgr, TArg>(MenuScreen<TMgr, TArg> menuScreen)
         {
             return (manager, arg) => manager.PushMenuScreenFromExtension(menuScreen, arg);
         }

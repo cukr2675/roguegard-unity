@@ -1,5 +1,3 @@
-﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Lysionium
@@ -16,10 +14,10 @@ namespace Lysionium
             if (value == null) throw new System.ArgumentNullException(nameof(value));
             if (manager == null) throw new System.ArgumentNullException(nameof(manager));
 
-            if (!(manager.GetSubview(EmptySubviewName) is ElementsSubview elementsSubview)) throw new System.InvalidOperationException(
-                $"{EmptySubviewName} の Subview は {nameof(ElementsSubview)} ではありません。");
+            if (manager.GetSubview(EmptySubviewName) is not Subview subview) throw new System.InvalidOperationException(
+                $"{EmptySubviewName} の Subview は {nameof(Subview)} ではありません。");
 
-            elementsSubview.PlayString(value);
+            subview.PlayString(value);
         }
 
         public void Play(Object value, IListMenuManager manager)
@@ -27,10 +25,10 @@ namespace Lysionium
             if (value == null) throw new System.ArgumentNullException(nameof(value));
             if (manager == null) throw new System.ArgumentNullException(nameof(manager));
 
-            if (!(manager.GetSubview(EmptySubviewName) is ElementsSubview elementsSubview)) throw new System.InvalidOperationException(
-                $"{EmptySubviewName} の Subview は {nameof(ElementsSubview)} ではありません。");
+            if (manager.GetSubview(EmptySubviewName) is not Subview subview) throw new System.InvalidOperationException(
+                $"{EmptySubviewName} の Subview は {nameof(Subview)} ではありません。");
 
-            elementsSubview.PlayObject(value);
+            subview.PlayObject(value);
         }
     }
 }

@@ -13,7 +13,7 @@ using Roguegard.Device;
 
 namespace RoguegardUnity
 {
-    public class DopesheetLane : ViewElement, IPointerClickHandler
+    public class DopesheetLane : ViewItem, IPointerClickHandler
     {
         [SerializeField] private Image _keyIconPrefab = null;
         private List<Image> keyIcons = new();
@@ -44,7 +44,7 @@ namespace RoguegardUnity
             this.editInfo = editInfo;
         }
 
-        protected override void SetElementCore(object element, IElementHandler handler)
+        protected override void BindCore(object element, IViewItemHandler handler)
         {
             editList = element;
 
@@ -288,10 +288,10 @@ namespace RoguegardUnity
                 paint.SetPaint(elms, editInfo.Palette, editInfo.MainColor, showsSplitLine, pivots);
                 paint.Show();
 
-                IElementsSubviewStateProvider stateProvider = null;
+                ISubviewStateProvider stateProvider = null;
                 manager
                     .GetSubview(StandardSubviewTable.BackAnchorName)
-                    .Show(back, SelectOptionHandler.Instance, manager, arg, ref stateProvider);
+                    .Show(back, SelectOptionViewItemHandler.Instance, manager, arg, ref stateProvider);
             }
 
             private void Back(MMgr manager, MArg arg)

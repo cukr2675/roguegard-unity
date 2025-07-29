@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Roguegard.Device
 {
-    public interface IRogueElementHandler : IElementHandler
+    public interface IRogueElementHandler : IViewItemHandler
     {
         void GetRogueInfo(
             object element, MMgr manager, MArg arg,

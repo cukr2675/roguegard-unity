@@ -12,16 +12,16 @@ using Roguegard.Rgpacks;
 
 namespace RoguegardUnity
 {
-    public class DopesheetSubview : ElementsSubview
+    public class DopesheetSubview : Subview
     {
         [SerializeField] private ScrollRect _scrollRect = null;
         [SerializeField] private RectTransform _floatingContent = null;
-        [SerializeField] private ButtonViewElement _menuButton = null;
-        [SerializeField] private ButtonViewElement _playButton = null;
+        [SerializeField] private ButtonViewItem _menuButton = null;
+        [SerializeField] private ButtonViewItem _playButton = null;
         [SerializeField] private Slider _seekBar = null;
-        [SerializeField] private ButtonViewElement _cameraButton = null;
+        [SerializeField] private ButtonViewItem _cameraButton = null;
 
-        [SerializeField] private ButtonViewElement _itemHeaderPrefab = null;
+        [SerializeField] private ButtonViewItem _itemHeaderPrefab = null;
         [SerializeField] private DopesheetLane _itemLanePrefab = null;
         [SerializeField] private float _itemHeight = 100f;
         [SerializeField] private float _width = 10000f;
@@ -30,7 +30,7 @@ namespace RoguegardUnity
         private readonly NewBoneMenuScreen newBoneMenu = new();
         private const int buttonsCount = 3;
 
-        private readonly List<ViewElement> viewElements = new();
+        private readonly List<ViewItem> viewElements = new();
         private StateProvider currentStateProvider;
         private readonly MenuScreen menuScreen = new();
 
@@ -80,8 +80,8 @@ namespace RoguegardUnity
         }
 
         public override void SetParameters(
-            IReadOnlyList<object> list, IElementHandler handler, IListMenuManager manager, IListMenuArg arg,
-            ref IElementsSubviewStateProvider stateProvider)
+            IReadOnlyList<object> list, IViewItemHandler handler, IListMenuManager manager, IListMenuArg arg,
+            ref ISubviewStateProvider stateProvider)
         {
             if (stateProvider == null) { stateProvider = new StateProvider(); }
             if (!(stateProvider is StateProvider local)) throw new System.ArgumentException(
@@ -92,7 +92,7 @@ namespace RoguegardUnity
             {
                 currentStateProvider.VerticalAbsolutePosition = VerticalAbsolutePosition;
                 currentStateProvider.HorizontalAbsolutePosition = HorizontalAbsolutePosition;
-                currentStateProvider.SelectedIndex = viewElements.IndexOf(LastSelectedViewElement);
+                currentStateProvider.SelectedIndex = viewElements.IndexOf(LastSelectedItem);
             }
 
             var editInfo = (MotionGrapherInfo)((MArg)arg).Arg.Other;
@@ -161,10 +161,10 @@ namespace RoguegardUnity
                 var headerWidth = _floatingContent.rect.width;
                 var header = Instantiate(_itemHeaderPrefab, _scrollRect.content);
                 header.Initialize(this);
-                header.SetElement(SelectOption.Create<MMgr, MArg>("+ ボーンを追加", (manager, arg) =>
+                header.Bind(SelectOption.Create<MMgr, MArg>("+ ボーンを追加", (manager, arg) =>
                 {
                     manager.PushMenuScreen(newBoneMenu, other: editInfo);
-                }), SelectOptionHandler.Instance);
+                }), SelectOptionViewItemHandler.Instance);
                 header.RectTransform.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, y, _itemHeight);
                 header.RectTransform.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Left, 0f, headerWidth);
                 viewElements.Add(header);
@@ -172,7 +172,7 @@ namespace RoguegardUnity
                 sumHeight += _itemHeight;
             }
             {
-                _menuButton.SetElement(SelectOption.Create<MMgr, MArg>("...", menuScreen), SelectOptionHandler.Instance);
+                _menuButton.Bind(SelectOption.Create<MMgr, MArg>("...", menuScreen), SelectOptionViewItemHandler.Instance);
             }
 
             var scrollRect = _scrollRect.viewport.rect;
@@ -183,14 +183,14 @@ namespace RoguegardUnity
         }
 
         private void UpdateKeyFrameListElement(
-            string name, object keyFrameList, MotionGrapherInfo editInfo, HandleClickElement<MMgr, MArg> handleRemove, ref float sumHeight)
+            string name, object keyFrameList, MotionGrapherInfo editInfo, ClickItemHandler<MMgr, MArg> handleRemove, ref float sumHeight)
         {
             var y = sumHeight;
             var headerWidth = _floatingContent.rect.width;
 
             var header = Instantiate(_itemHeaderPrefab, _scrollRect.content);
             header.Initialize(this);
-            header.SetElement(SelectOption.Create<MMgr, MArg>(name, (manager, arg) =>
+            header.Bind(SelectOption.Create<MMgr, MArg>(name, (manager, arg) =>
             {
                 manager.PushMenuScreen(
                     new ChoicesMenuScreen($"{name} を削除しますか？")
@@ -200,7 +200,7 @@ namespace RoguegardUnity
                         manager.PopMenuScreen();
                     })
                     .Back(), arg);
-            }), SelectOptionHandler.Instance);
+            }), SelectOptionViewItemHandler.Instance);
             header.RectTransform.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, y, _itemHeight);
             header.RectTransform.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Left, 0f, headerWidth);
             viewElements.Add(header);
@@ -208,7 +208,7 @@ namespace RoguegardUnity
             var lane = Instantiate(_itemLanePrefab, _scrollRect.content);
             lane.Initialize(this);
             lane.SetParent(_timeScale, editInfo);
-            lane.SetElement(keyFrameList, ElementToStringHandler.Instance);
+            lane.Bind(keyFrameList, ToStringViewItemHandler.Instance);
             lane.RectTransform.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, y, _itemHeight);
             lane.RectTransform.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Left, headerWidth, _width - headerWidth);
             viewElements.Add(lane);
@@ -216,7 +216,7 @@ namespace RoguegardUnity
             sumHeight += _itemHeight;
         }
 
-        private class StateProvider : IElementsSubviewStateProvider
+        private class StateProvider : ISubviewStateProvider
         {
             public float VerticalAbsolutePosition { get; set; }
             public float HorizontalAbsolutePosition { get; set; }
@@ -229,7 +229,7 @@ namespace RoguegardUnity
                 SelectedIndex = -1;
             }
 
-            public void ApplySelectedIndex(List<ViewElement> viewElements)
+            public void ApplySelectedIndex(List<ViewItem> viewElements)
             {
                 if (SelectedIndex <= 0 || viewElements.Count <= SelectedIndex || EventSystem.current == null)
                 {

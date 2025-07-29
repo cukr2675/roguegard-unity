@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,10 +9,10 @@ using UnityEngine.EventSystems;
 namespace Lysionium
 {
     /// <summary>
-    /// Subview のアニメーターパラメータ名と LUI Play を制御するコンポーネント。このオブジェクトの下の <see cref="ElementsSubview"/> に影響を与える
+    /// Subview のアニメーターパラメータ名と LUI Play を制御するコンポーネント。このオブジェクトの下の <see cref="Subview"/> に影響を与える
     /// </summary>
-    [AddComponentMenu("UI/Lysionium/LUI Elements View Animator")]
-    public class ElementsViewAnimator : MonoBehaviour
+    [AddComponentMenu("UI/Lysionium/LUI Subview Animator")]
+    public class SubviewAnimator : MonoBehaviour
     {
         [Tooltip("Subview の AnimatorController の表示/非表示パラメータ名")]
         [SerializeField] private string _visibleBool = "IsVisible";
@@ -34,7 +34,7 @@ namespace Lysionium
         [SerializeField] private PlayObjectEvent _onPlayObject = null;
         public PlayObjectEvent OnPlayObject => _onPlayObject;
 
-        [Header("ViewElement")]
+        [Header("ViewItem")]
 
         [Tooltip("範囲内でカーソル移動したとき再生")]
         [SerializeField] private string _playOnSelect = "Select";
@@ -60,10 +60,10 @@ namespace Lysionium
         /// </summary>
         private bool queuedCancelSelection;
 
-        public static ElementsViewAnimator Get(Component obj)
+        public static SubviewAnimator Get(Component obj)
         {
-            LuiUtility.TryGetComponentInRecursiveParents<ElementsViewAnimator>(obj.transform, out var viewAnimator);
-            return viewAnimator;
+            LuiUtility.TryGetComponentInRecursiveParents<SubviewAnimator>(obj.transform, out var subviewAnimator);
+            return subviewAnimator;
         }
 
         private void Awake()
@@ -83,14 +83,14 @@ namespace Lysionium
                 {
                     animatorLog.Append("[");
 
-                    var firstElement = true;
+                    var firstItem = true;
                     for (int i = 0; i < animator.layerCount; i++)
                     {
                         // 重みがゼロのレイヤーは表示しない
                         if (animator.GetLayerWeight(i) == 0f) continue;
 
                         // 区切りカンマ
-                        if (!firstElement) { animatorLog.Append(", "); }
+                        if (!firstItem) { animatorLog.Append(", "); }
 
                         // Base Layer はレイヤー名を表示しない
                         if (i >= 1) { animatorLog.Append("<color=grey>").Append(animator.GetLayerName(i)).Append(":</color> "); }
@@ -101,12 +101,12 @@ namespace Lysionium
                         {
                             animatorLog.Append(clipInfos[0].clip.name);
                             if (clipInfos.Count >= 2) { animatorLog.Append(" (+").Append(clipInfos.Count - 1).Append(")"); }
-                            firstElement = false;
+                            firstItem = false;
                         }
                         else if (i >= 1)
                         {
                             animatorLog.Append("<color=grey><No AnimationClip></color>");
-                            firstElement = false;
+                            firstItem = false;
                         }
                     }
 
@@ -119,10 +119,10 @@ namespace Lysionium
             string SenderToString(object sender)
             {
                 // ビュー要素は緑
-                if (sender is ViewElement || sender is GameObject) return $"<color=green>{sender}</color>";
+                if (sender is ViewItem || sender is GameObject) return $"<color=green>{sender}</color>";
 
                 // Subview は青
-                else if (sender is IElementsSubview) return $"<color=blue>{sender}</color>";
+                else if (sender is ISubview) return $"<color=blue>{sender}</color>";
 
                 // それ以外は通常色
                 else return $"{sender}";

@@ -1,9 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
 using UnityEngine.UI;
-using UnityEngine.EventSystems;
 
 namespace Lysionium
 {
@@ -12,26 +8,26 @@ namespace Lysionium
     public class SliderViewWidget : ViewWidget
     {
         private IWidgetOption widgetOption;
-        private ElementsSubviewBase _parent;
+        private SubviewBase _parent;
         private Slider slider;
 
         public override string WidgetName => widgetOption.Name;
-        protected override ElementsSubviewBase Parent => _parent;
+        protected override SubviewBase Parent => _parent;
 
         public delegate float GetValue<TMgr, TArg>(TMgr manager, TArg arg);
         public delegate float HandleValueChanged<TMgr, TArg>(TMgr manager, TArg arg, float value);
 
         public override bool TryInstantiateWidget(
-            object element, IElementHandler handler, ElementsSubviewBase elementsSubview, out ViewWidget viewWidget)
+            object item, IViewItemHandler handler, SubviewBase subview, out ViewWidget viewWidget)
         {
-            if (!(element is IWidgetOption widgetOption))
+            if (item is not IWidgetOption widgetOption)
             {
                 viewWidget = null;
                 return false;
             }
 
             var inputFieldViewWidget = Instantiate(this);
-            inputFieldViewWidget._parent = elementsSubview;
+            inputFieldViewWidget._parent = subview;
             inputFieldViewWidget.widgetOption = widgetOption;
             inputFieldViewWidget.slider = inputFieldViewWidget.GetComponent<Slider>();
             inputFieldViewWidget.Initialize();

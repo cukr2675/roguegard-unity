@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,7 +7,7 @@ namespace Lysionium
     public static class SelectOption
     {
         public static SelectOption<TMgr, TArg> Create<TMgr, TArg>(
-            string name, HandleClickElement<TMgr, TArg> handleClick, string style = null)
+            string name, ClickItemHandler<TMgr, TArg> handleClick, string style = null)
             where TMgr : IListMenuManager
             where TArg : IListMenuArg
         {
@@ -19,7 +19,7 @@ namespace Lysionium
         }
 
         public static SelectOption<TMgr, TArg> Create<TMgr, TArg>(
-            GetElementName<TMgr, TArg> getName, HandleClickElement<TMgr, TArg> handleClick, string style = null)
+            ItemNameSelector<TMgr, TArg> getName, ClickItemHandler<TMgr, TArg> handleClick, string style = null)
             where TMgr : IListMenuManager
             where TArg : IListMenuArg
         {
@@ -36,11 +36,11 @@ namespace Lysionium
         where TArg : IListMenuArg
     {
         private string name;
-        private GetElementName<TMgr, TArg> getName;
+        private ItemNameSelector<TMgr, TArg> getName;
 
         public string Style { get; set; }
 
-        public HandleClickElement<TMgr, TArg> HandleClick { get; set; }
+        public ClickItemHandler<TMgr, TArg> HandleClick { get; set; }
 
         public void SetName(string name)
         {
@@ -50,7 +50,7 @@ namespace Lysionium
             getName = null;
         }
 
-        public void SetName(GetElementName<TMgr, TArg> getName)
+        public void SetName(ItemNameSelector<TMgr, TArg> getName)
         {
             if (getName == null) throw new System.ArgumentNullException(nameof(getName));
 

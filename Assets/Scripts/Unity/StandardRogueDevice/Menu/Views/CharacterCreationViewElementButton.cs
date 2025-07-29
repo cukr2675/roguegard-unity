@@ -12,7 +12,7 @@ using Roguegard.Device;
 
 namespace RoguegardUnity
 {
-    public class CharacterCreationViewElementButton : ViewElement, IPointerClickHandler
+    public class CharacterCreationViewElementButton : ViewItem, IPointerClickHandler
     {
         [SerializeField] private CanvasGroup _canvasGroup = null;
         [SerializeField] private Image _background = null;
@@ -30,9 +30,9 @@ namespace RoguegardUnity
 
         private const float lightRatio = 248f / 255f;
 
-        private IElementsSubview view;
+        private ISubview view;
 
-        private IButtonElementHandler presenter;
+        private IButtonViewItemHandler presenter;
 
         private object source;
 
@@ -49,7 +49,7 @@ namespace RoguegardUnity
             RectTransform = GetComponent<RectTransform>();
         }
 
-        public void SetItem(IButtonElementHandler presenter, IReadOnlyIntrinsic intrinsic, ICharacterCreationData characterCreationData)
+        public void SetItem(IButtonViewItemHandler presenter, IReadOnlyIntrinsic intrinsic, ICharacterCreationData characterCreationData)
         {
             this.presenter = presenter;
             source = intrinsic;
@@ -68,7 +68,7 @@ namespace RoguegardUnity
             ShowCaption(intrinsic.Option);
         }
 
-        public void SetItem(IButtonElementHandler presenter, IReadOnlyStartingItem startingItem)
+        public void SetItem(IButtonViewItemHandler presenter, IReadOnlyStartingItem startingItem)
         {
             this.presenter = presenter;
             source = startingItem;
@@ -86,7 +86,7 @@ namespace RoguegardUnity
             ShowCaption(startingItem.Option);
         }
 
-        public void SetItem(IButtonElementHandler presenter, string text, string captionText)
+        public void SetItem(IButtonViewItemHandler presenter, string text, string captionText)
         {
             this.presenter = presenter;
             source = null;
@@ -132,7 +132,7 @@ namespace RoguegardUnity
             presenter.HandleClick(source, Manager, Arg);
         }
 
-        protected override void SetElementCore(object element, IElementHandler handler)
+        protected override void BindCore(object element, IViewItemHandler handler)
         {
             throw new System.NotImplementedException();
         }

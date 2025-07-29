@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,12 +10,12 @@ namespace RoguegardUnity
 {
     internal class SelectFileCommandMenuScreen : RogueMenuScreen
     {
-        private readonly HandleClickElement<FileInfo, MMgr, MArg> selectCallback;
+        private readonly ClickItemHandler<FileInfo, MMgr, MArg> selectCallback;
         private readonly MainMenuViewTemplate<MMgr, MArg> view;
 
         public override bool IsIncremental => true;
 
-        public SelectFileCommandMenuScreen(HandleClickElement<FileInfo, MMgr, MArg> selectCallback)
+        public SelectFileCommandMenuScreen(ClickItemHandler<FileInfo, MMgr, MArg> selectCallback)
         {
             this.selectCallback = selectCallback;
 

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,20 +8,20 @@ using UnityEngine.EventSystems;
 namespace Lysionium
 {
     [AddComponentMenu("UI/Lysionium/Subviews/LUI Scroll Subview")]
-    public class ScrollSubview : ElementsSubview
+    public class ScrollSubview : Subview
     {
         [SerializeField] private ScrollRect _scrollRect = null;
 
-        [SerializeField] private ViewElement _viewElementPrefab = null;
+        [SerializeField] private ViewItem _viewItemPrefab = null;
 
         [Tooltip("カーソル移動に合わせてスクロールする速さ")]
         [SerializeField] private float _elasticityToCursor = 0.2f;
 
         private float itemHeight;
 
-        private IElementHandler handler;
+        private IViewItemHandler handler;
         private readonly List<object> list = new();
-        private readonly List<ViewElement> viewElements = new();
+        private readonly List<ViewItem> viewItems = new();
         private StateProvider currentStateProvider;
 
         private int lastItemOffset;
@@ -48,14 +48,14 @@ namespace Lysionium
 
         protected override void CommonInitCore()
         {
-            itemHeight = _viewElementPrefab.GetComponent<RectTransform>().rect.height;
-            _scrollRect.onValueChanged.AddListener((x) => UpdateElements());
+            itemHeight = _viewItemPrefab.GetComponent<RectTransform>().rect.height;
+            _scrollRect.onValueChanged.AddListener((x) => UpdateViewItems());
             _scrollRect.horizontal = false;
         }
 
         public override void SetParameters(
-            IReadOnlyList<object> list, IElementHandler handler, IListMenuManager manager, IListMenuArg arg,
-            ref IElementsSubviewStateProvider stateProvider)
+            IReadOnlyList<object> list, IViewItemHandler handler, IListMenuManager manager, IListMenuArg arg,
+            ref ISubviewStateProvider stateProvider)
         {
             if (stateProvider == null) { stateProvider = new StateProvider(); }
             if (!(stateProvider is StateProvider local)) throw new System.ArgumentException(
@@ -65,7 +65,7 @@ namespace Lysionium
             if (currentStateProvider != null)
             {
                 currentStateProvider.VerticalAbsolutePosition = VerticalAbsolutePosition;
-                currentStateProvider.SelectedIndex = viewElements.IndexOf(LastSelectedViewElement);
+                currentStateProvider.SelectedIndex = viewItems.IndexOf(LastSelectedItem);
             }
 
             // 表示更新
@@ -76,8 +76,8 @@ namespace Lysionium
                 this.list.Add(list[i]);
             }
             SetArg(manager, arg);
-            InitElements();
-            UpdateElements();
+            InitViewItems();
+            UpdateViewItems();
             SetStatusCode(0);
 
             // 新しい StateProvider に切り替える
@@ -86,20 +86,20 @@ namespace Lysionium
             local.ApplySelectedIndex(this);
         }
 
-        private void InitElements()
+        private void InitViewItems()
         {
-            for (int i = 0; i < viewElements.Count; i++)
+            for (int i = 0; i < viewItems.Count; i++)
             {
-                var viewElement = viewElements[i];
-                viewElement.ClearElement();
+                var viewItem = viewItems[i];
+                viewItem.Unbind();
             }
         }
 
-        private void UpdateElements()
+        private void UpdateViewItems()
         {
-            // ScrollRect の縦幅を埋められる ViewElement の数に変更
+            // ScrollRect の縦幅を埋められる ViewItem の数に変更
             var scrollRectHeight = _scrollRect.viewport.rect.height;
-            AdjustViewElements(Mathf.CeilToInt(scrollRectHeight / itemHeight) + 2); // カーソルスクロール用に上下にはみ出る要素を1つずつ追加
+            AdjustViewItems(Mathf.CeilToInt(scrollRectHeight / itemHeight) + 2); // カーソルスクロール用に上下にはみ出る要素を1つずつ追加
 
             // 最後の要素が一番上までスクロールできるスライダーサイズに変更
             var contentHeight = scrollRectHeight + itemHeight * (list.Count - 1);
@@ -108,83 +108,83 @@ namespace Lysionium
 
             marginHeight = contentHeight - scrollRectHeight;
 
-            // 実際に見えている範囲とその前後1件の ViewElement のみ表示する
+            // 実際に見えている範囲とその前後1件の ViewItem のみ表示する
             // （前後1件を加えることでUIナビゲーションによる画面外項目の選択が可能となる）
-            var elementsOffset = Mathf.FloorToInt(VerticalAbsolutePosition / itemHeight) - 1;
-            for (int i = 0; i < viewElements.Count; i++)
+            var viewItemsOffset = Mathf.FloorToInt(VerticalAbsolutePosition / itemHeight) - 1;
+            for (int i = 0; i < viewItems.Count; i++)
             {
-                var viewElement = viewElements[i];
-                var viewElementTransform = (RectTransform)viewElement.transform;
-                var elementIndex = i + elementsOffset;
+                var viewItem = viewItems[i];
+                var viewItemTransform = (RectTransform)viewItem.transform;
+                var viewItemIndex = i + viewItemsOffset;
 
                 // UIナビゲーションに影響するため、非表示の要素も移動させる
-                viewElementTransform.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, elementIndex * itemHeight, itemHeight);
+                viewItemTransform.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, viewItemIndex * itemHeight, itemHeight);
 
-                if (elementIndex < 0 || list.Count <= elementIndex)
+                if (viewItemIndex < 0 || list.Count <= viewItemIndex)
                 {
-                    // 範囲外の ViewElement は非表示
-                    viewElement.ClearElement();
-                    viewElement.SetVisible(false, true);
+                    // 範囲外の ViewItem は非表示
+                    viewItem.Unbind();
+                    viewItem.SetVisible(false, true);
                     continue;
                 }
 
-                viewElement.SetElement(list[elementIndex], handler);
-                viewElement.SetVisible(true, false);
+                viewItem.Bind(list[viewItemIndex], handler);
+                viewItem.SetVisible(true, false);
             }
 
             // スクロールによって選択中の要素が変わらないよう調整
             var selected = EventSystem.current != null ? EventSystem.current.currentSelectedGameObject : null;
-            if (selected != null && selected.transform.IsChildOf(_scrollRect.content) && selected.TryGetComponent<ViewElement>(out var selectedElement) &&
+            if (selected != null && selected.transform.IsChildOf(_scrollRect.content) && selected.TryGetComponent<ViewItem>(out var selectedViewItem) &&
 
                 Interactable) // 上に表示されているメニューに影響を与えないようにする。これがないとコマンドメニュー表示時の初期選択を上書きしてしまうことがある
             {
-                var selectedIndex = viewElements.IndexOf(selectedElement);
+                var selectedIndex = viewItems.IndexOf(selectedViewItem);
                 if (selectedIndex != -1)
                 {
-                    var i = selectedIndex - elementsOffset + lastItemOffset;
-                    if (i < 0 || viewElements.Count <= i)
+                    var i = selectedIndex - viewItemsOffset + lastItemOffset;
+                    if (i < 0 || viewItems.Count <= i)
                     {
                         QueueSelect(gameObject, null, CursorPlay.None);
                     }
                     else
                     {
-                        QueueSelect(gameObject, viewElements[i].gameObject, CursorPlay.None);
+                        QueueSelect(gameObject, viewItems[i].gameObject, CursorPlay.None);
 
                         // ↑のようにカーソル移動キューが処理されるのを待っても↓コメントのように直接設定しても選択タイミングは変わらない
-                        //EventSystem.current.SetSelectedGameObject(viewElements[i].gameObject);
+                        //EventSystem.current.SetSelectedGameObject(viewItems[i].gameObject);
                     }
                 }
             }
-            lastItemOffset = elementsOffset;
+            lastItemOffset = viewItemsOffset;
         }
 
-        private void AdjustViewElements(int count)
+        private void AdjustViewItems(int count)
         {
-            if (viewElements.Count != count)
+            if (viewItems.Count != count)
             {
-                // 足りない ViewElement を生成する
-                while (viewElements.Count < count)
+                // 足りない ViewItem を生成する
+                while (viewItems.Count < count)
                 {
-                    var viewElement = Instantiate(_viewElementPrefab, _scrollRect.content.transform);
-                    viewElement.Initialize(this);
-                    var viewElementTransform = (RectTransform)viewElement.transform;
-                    viewElementTransform.anchorMin = new Vector2(0f, 0f);
-                    viewElementTransform.anchorMax = new Vector2(1f, 0f);
-                    viewElementTransform.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Left, 0f, _scrollRect.content.rect.width);
+                    var viewItem = Instantiate(_viewItemPrefab, _scrollRect.content.transform);
+                    viewItem.Initialize(this);
+                    var viewItemTransform = (RectTransform)viewItem.transform;
+                    viewItemTransform.anchorMin = new Vector2(0f, 0f);
+                    viewItemTransform.anchorMax = new Vector2(1f, 0f);
+                    viewItemTransform.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Left, 0f, _scrollRect.content.rect.width);
 
-                    viewElements.Add(viewElement);
-                    ViewElement.SetVerticalNavigation(viewElements, viewElements.Count - 1); // ナビゲーションを明示したほうが長押し移動がスムーズになる？
+                    viewItems.Add(viewItem);
+                    ViewItem.SetVerticalNavigation(viewItems, viewItems.Count - 1); // ナビゲーションを明示したほうが長押し移動がスムーズになる？
                 }
 
-                // 不要な ViewElement は削除する
-                if (viewElements.Count > count)
+                // 不要な ViewItem は削除する
+                if (viewItems.Count > count)
                 {
-                    for (int i = viewElements.Count - 1; i >= count; i--)
+                    for (int i = viewItems.Count - 1; i >= count; i--)
                     {
-                        Destroy(viewElements[i].gameObject);
+                        Destroy(viewItems[i].gameObject);
                     }
-                    viewElements.RemoveRange(count, viewElements.Count - count);
-                    ViewElement.SetVerticalNavigation(viewElements, viewElements.Count - 1);
+                    viewItems.RemoveRange(count, viewItems.Count - count);
+                    ViewItem.SetVerticalNavigation(viewItems, viewItems.Count - 1);
                 }
             }
         }
@@ -198,25 +198,25 @@ namespace Lysionium
             if (selected == null || !selected.transform.IsChildOf(_scrollRect.content)) return;
 
             var contentHeight = _scrollRect.content.rect.height;
-            var selectedElementTransform = (RectTransform)selected.transform;
+            var selectedViewItemTransform = (RectTransform)selected.transform;
 
             var verticalAbsoluteTop = Mathf.Lerp(-marginHeight, 0f, _scrollRect.verticalNormalizedPosition);
             var verticalAbsoluteBottom = Mathf.Lerp(-contentHeight, -contentHeight + marginHeight, _scrollRect.verticalNormalizedPosition);
-            var selectedElementTop = selectedElementTransform.localPosition.y + selectedElementTransform.rect.yMax;
-            var selectedElementBottom = selectedElementTransform.localPosition.y + selectedElementTransform.rect.yMin;
-            if (selectedElementTop > verticalAbsoluteTop) // 上にはみ出ているとき
+            var selectedViewItemTop = selectedViewItemTransform.localPosition.y + selectedViewItemTransform.rect.yMax;
+            var selectedViewItemBottom = selectedViewItemTransform.localPosition.y + selectedViewItemTransform.rect.yMin;
+            if (selectedViewItemTop > verticalAbsoluteTop) // 上にはみ出ているとき
             {
-                var targetPosition = Mathf.Max(-selectedElementTop, 0f);
+                var targetPosition = Mathf.Max(-selectedViewItemTop, 0f);
                 VerticalAbsolutePosition = Mathf.Lerp(VerticalAbsolutePosition, targetPosition, _elasticityToCursor);
             }
-            else if (selectedElementBottom < verticalAbsoluteBottom) // 下にはみ出ているとき
+            else if (selectedViewItemBottom < verticalAbsoluteBottom) // 下にはみ出ているとき
             {
-                var targetPosition = Mathf.Min(-selectedElementBottom - _scrollRect.viewport.rect.height, marginHeight);
+                var targetPosition = Mathf.Min(-selectedViewItemBottom - _scrollRect.viewport.rect.height, marginHeight);
                 VerticalAbsolutePosition = Mathf.Lerp(VerticalAbsolutePosition, targetPosition, _elasticityToCursor);
             }
         }
 
-        private class StateProvider : IElementsSubviewStateProvider
+        private class StateProvider : ISubviewStateProvider
         {
             public float VerticalAbsolutePosition { get; set; }
             public int SelectedIndex { get; set; }
@@ -229,10 +229,10 @@ namespace Lysionium
 
             public void ApplySelectedIndex(ScrollSubview subview)
             {
-                if (SelectedIndex <= 0 || subview.viewElements.Count <= SelectedIndex || EventSystem.current == null)
+                if (SelectedIndex <= 0 || subview.viewItems.Count <= SelectedIndex || EventSystem.current == null)
                 {
                     // 選択オブジェクトが見つからなければ最初の項目を選択
-                    if (ViewElement.TryFirstNotNull(subview.viewElements, out var first))
+                    if (ViewItem.TryFirstNotNull(subview.viewItems, out var first))
                     {
                         //EventSystem.current.SetSelectedGameObject(first.gameObject); // これだと Show メソッドで interactable が true になる前に選択してしまう
                         subview.QueueSelect(subview.gameObject, first.gameObject, CursorPlay.None);
@@ -240,7 +240,7 @@ namespace Lysionium
                     return;
                 }
 
-                subview.QueueSelect(subview.gameObject, subview.viewElements[SelectedIndex].gameObject, CursorPlay.None);
+                subview.QueueSelect(subview.gameObject, subview.viewItems[SelectedIndex].gameObject, CursorPlay.None);
             }
         }
     }

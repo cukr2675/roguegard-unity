@@ -1,5 +1,3 @@
-﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Lysionium
@@ -7,25 +5,25 @@ namespace Lysionium
     [AddComponentMenu("UI/Lysionium/View Widgets/Meta/LUI Style Meta Widget")]
     public class StyleMetaWidget : ViewWidget
     {
-        private ElementsSubviewBase _parent;
-        protected override ElementsSubviewBase Parent => _parent;
+        private SubviewBase _parent;
+        protected override SubviewBase Parent => _parent;
 
         public override bool TryInstantiateWidget(
-            object element, IElementHandler handler, ElementsSubviewBase elementsSubview, out ViewWidget viewWidget)
+            object item, IViewItemHandler handler, SubviewBase subview, out ViewWidget viewWidget)
         {
-            if (!(element is IWidgetOption widgetOption))
+            if (item is not IWidgetOption widgetOption)
             {
                 viewWidget = null;
                 return false;
             }
 
-            if (elementsSubview is WidgetsSubview widgetsSubview)
+            if (subview is WidgetsSubview widgetsSubview)
             {
                 widgetsSubview.SetStyle(widgetOption.Style);
             }
 
             var metaWidget = Instantiate(this);
-            metaWidget._parent = elementsSubview;
+            metaWidget._parent = subview;
             viewWidget = metaWidget;
             return true;
         }

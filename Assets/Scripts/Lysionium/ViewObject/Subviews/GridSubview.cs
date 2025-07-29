@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,17 +8,17 @@ using UnityEngine.UI;
 namespace Lysionium
 {
     [AddComponentMenu("UI/Lysionium/Subviews/LUI Grid Subview")]
-    public class GridSubview : ElementsSubview
+    public class GridSubview : Subview
     {
         [SerializeField] private RectTransform _content = null;
-        [SerializeField] private ViewElement _viewElementPrefab = null;
+        [SerializeField] private ViewItem _viewItemPrefab = null;
         private Vector2 itemSize;
         private Vector2 margin;
 
         [Header("Layout")]
 
         [Tooltip("グリッド分割数")]
-        [SerializeField] private Vector2Int _viewElementCount = Vector2Int.one;
+        [SerializeField] private Vector2Int _viewItemCount = Vector2Int.one;
 
         [Tooltip("拡張方向（はい/いいえ等の選択肢用）")]
         [SerializeField] private ExtensionDirection _extensionDirection = ExtensionDirection.NotExtend;
@@ -28,23 +28,23 @@ namespace Lysionium
         [Tooltip("この値が true のときカーソル移動の対象となる")]
         [SerializeField] private bool _isSelectable = true;
 
-        private IElementHandler handler;
-        private readonly List<ViewElement> viewElements = new();
+        private IViewItemHandler handler;
+        private readonly List<ViewItem> viewItems = new();
         private StateProvider currentStateProvider;
 
         protected override void CommonInitCore()
         {
             var contentRectTransform = (RectTransform)_content.transform;
             var rect = contentRectTransform.rect;
-            itemSize = rect.size / _viewElementCount;
+            itemSize = rect.size / _viewItemCount;
 
             var rectTransform = (RectTransform)transform;
             margin = rectTransform.rect.size - rect.size;
         }
 
         public override void SetParameters(
-            IReadOnlyList<object> list, IElementHandler handler, IListMenuManager manager, IListMenuArg arg,
-            ref IElementsSubviewStateProvider stateProvider)
+            IReadOnlyList<object> list, IViewItemHandler handler, IListMenuManager manager, IListMenuArg arg,
+            ref ISubviewStateProvider stateProvider)
         {
             if (stateProvider == null) { stateProvider = new StateProvider(); }
             if (!(stateProvider is StateProvider local)) throw new System.ArgumentException(
@@ -53,12 +53,12 @@ namespace Lysionium
             // 現在の StateProvider を外す前に状態を保存する
             if (currentStateProvider != null)
             {
-                currentStateProvider.SelectedIndex = viewElements.IndexOf(LastSelectedViewElement);
+                currentStateProvider.SelectedIndex = viewItems.IndexOf(LastSelectedItem);
             }
 
             this.handler = handler;
             SetArg(manager, arg);
-            UpdateElements(list);
+            UpdateViewItems(list);
             SetStatusCode(0);
 
             // 新しい StateProvider に切り替える
@@ -66,64 +66,64 @@ namespace Lysionium
             if (_isSelectable) { local.ApplySelectedIndex(this); }
         }
 
-        private void UpdateElements(IReadOnlyList<object> list)
+        private void UpdateViewItems(IReadOnlyList<object> list)
         {
             // 表示要素を生成/削除
             if (_extensionDirection != ExtensionDirection.NotExtend)
             {
-                AdjustViewElements(list.Count);
+                AdjustViewItems(list.Count);
             }
             else
             {
-                var length = _viewElementCount.x * _viewElementCount.y;
+                var length = _viewItemCount.x * _viewItemCount.y;
                 length = Mathf.Min(length, list.Count);
-                AdjustViewElements(length);
+                AdjustViewItems(length);
             }
 
             // 表示要素に値とハンドラを注入
-            for (int i = 0; i < viewElements.Count; i++)
+            for (int i = 0; i < viewItems.Count; i++)
             {
-                var itemButton = viewElements[i];
-                itemButton.SetElement(list[i], handler);
+                var itemButton = viewItems[i];
+                itemButton.Bind(list[i], handler);
             }
         }
 
-        private void AdjustViewElements(int count)
+        private void AdjustViewItems(int count)
         {
-            if (viewElements.Count != count)
+            if (viewItems.Count != count)
             {
-                // 足りない ViewElement を生成する
-                while (viewElements.Count < count)
+                // 足りない ViewItem を生成する
+                while (viewItems.Count < count)
                 {
-                    var index = viewElements.Count;
-                    var x = index % _viewElementCount.x;
-                    var y = index / _viewElementCount.x;
+                    var index = viewItems.Count;
+                    var x = index % _viewItemCount.x;
+                    var y = index / _viewItemCount.x;
 
-                    var viewElement = Instantiate(_viewElementPrefab, _content.transform);
-                    viewElement.Initialize(this);
-                    viewElement.SetVisible(true, false);
-                    if (viewElement.TryGetComponent<Selectable>(out var selectable))
+                    var viewItem = Instantiate(_viewItemPrefab, _content.transform);
+                    viewItem.Initialize(this);
+                    viewItem.SetVisible(true, false);
+                    if (viewItem.TryGetComponent<Selectable>(out var selectable))
                     {
                         selectable.navigation = new Navigation() { mode = _isSelectable ? Navigation.Mode.Automatic : Navigation.Mode.None };
                     }
-                    var itemButtonTransform = (RectTransform)viewElement.transform;
+                    var itemButtonTransform = (RectTransform)viewItem.transform;
                     itemButtonTransform.anchorMin = new Vector2(0f, 0f);
                     itemButtonTransform.anchorMax = new Vector2(1f, 0f);
                     itemButtonTransform.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Left, x * itemSize.x, itemSize.x);
                     itemButtonTransform.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, y * itemSize.y, itemSize.y);
 
-                    viewElements.Add(viewElement);
-                    //ViewElement.SetVerticalNavigation(index >= 1 ? viewElements[index - 1] : null, viewElement);
+                    viewItems.Add(viewItem);
+                    //ViewItem.SetVerticalNavigation(index >= 1 ? viewItems[index - 1] : null, viewItem);
                 }
 
-                // 不要な ViewElement は削除する
-                if (viewElements.Count > count)
+                // 不要な ViewItem は削除する
+                if (viewItems.Count > count)
                 {
-                    for (int i = viewElements.Count - 1; i >= count; i--)
+                    for (int i = viewItems.Count - 1; i >= count; i--)
                     {
-                        Destroy(viewElements[i].gameObject);
+                        Destroy(viewItems[i].gameObject);
                     }
-                    viewElements.RemoveRange(count, viewElements.Count - count);
+                    viewItems.RemoveRange(count, viewItems.Count - count);
                 }
 
                 // 選択肢の要素数に合わせてウィンドウを拡張する
@@ -147,11 +147,11 @@ namespace Lysionium
             var rect = ((RectTransform)contentTransform).rect;
             var size = rect.size * contentTransform.lossyScale;
             var startPosition = (Vector2)contentTransform.position - size / 2f;
-            var itemSize = size / _viewElementCount;
+            var itemSize = size / _viewItemCount;
             Gizmos.color = Color.green;
-            for (int y = 0; y < _viewElementCount.y; y++)
+            for (int y = 0; y < _viewItemCount.y; y++)
             {
-                for (int x = 0; x < _viewElementCount.x; x++)
+                for (int x = 0; x < _viewItemCount.x; x++)
                 {
                     var position = startPosition + itemSize * new Vector2(x + 0.5f, y + 0.5f);
                     Gizmos.DrawWireCube(position, itemSize);
@@ -168,7 +168,7 @@ namespace Lysionium
             Up,
         }
 
-        private class StateProvider : IElementsSubviewStateProvider
+        private class StateProvider : ISubviewStateProvider
         {
             public int SelectedIndex { get; set; }
 
@@ -179,10 +179,10 @@ namespace Lysionium
 
             public void ApplySelectedIndex(GridSubview subview)
             {
-                if (SelectedIndex <= 0 || subview.viewElements.Count <= SelectedIndex || EventSystem.current == null)
+                if (SelectedIndex <= 0 || subview.viewItems.Count <= SelectedIndex || EventSystem.current == null)
                 {
                     // 選択オブジェクトが見つからなければ最初の項目を選択
-                    if (ViewElement.TryFirstNotNull(subview.viewElements, out var first))
+                    if (ViewItem.TryFirstNotNull(subview.viewItems, out var first))
                     {
                         //EventSystem.current.SetSelectedGameObject(first.gameObject); // これだと Show メソッドで interactable が true になる前に選択してしまう
                         subview.QueueSelect(subview.gameObject, first.gameObject, CursorPlay.None);
@@ -190,7 +190,7 @@ namespace Lysionium
                     return;
                 }
 
-                subview.QueueSelect(subview.gameObject, subview.viewElements[SelectedIndex].gameObject, CursorPlay.None);
+                subview.QueueSelect(subview.gameObject, subview.viewItems[SelectedIndex].gameObject, CursorPlay.None);
             }
         }
     }

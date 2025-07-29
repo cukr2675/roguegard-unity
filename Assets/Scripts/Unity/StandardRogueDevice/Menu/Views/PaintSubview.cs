@@ -10,7 +10,7 @@ using Roguegard.Device;
 
 namespace RoguegardUnity
 {
-    public class PaintSubview : ElementsSubview, IPaintElementsSubview
+    public class PaintSubview : Subview, IPaintElementsSubview
     {
         [SerializeField] private DotterToolSet _toolSet = null;
         [SerializeField] private Image _splitLine = null;
@@ -45,8 +45,8 @@ namespace RoguegardUnity
         }
 
         public override void SetParameters(
-            IReadOnlyList<object> list, IElementHandler handler, IListMenuManager manager, IListMenuArg arg,
-            ref IElementsSubviewStateProvider stateProvider)
+            IReadOnlyList<object> list, IViewItemHandler handler, IListMenuManager manager, IListMenuArg arg,
+            ref ISubviewStateProvider stateProvider)
             => throw new System.NotSupportedException();
 
         void IPaintElementsSubview.SetPaint(
@@ -62,13 +62,13 @@ namespace RoguegardUnity
             ShowSplitLine(showSplitLine, pivots);
         }
 
-        public override void Show(HandleEndAnimation onEndAnimation = null)
+        public override void Show(EndAnimationHandler onEndAnimation = null)
         {
             base.Show(onEndAnimation);
             _toolSet.enabled = true;
         }
 
-        public override void Hide(bool back, HandleEndAnimation onEndAnimation = null)
+        public override void Hide(bool back, EndAnimationHandler onEndAnimation = null)
         {
             _toolSet.enabled = false;
             base.Hide(back, onEndAnimation);

@@ -1,4 +1,3 @@
-﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,17 +7,17 @@ namespace Lysionium
     /// モデルのリストをコントローラで制御する UI のクラス。
     /// </summary>
     [RequireComponent(typeof(CanvasGroup))]
-    public abstract class ElementsSubview : ElementsSubviewBase, IElementsSubview
+    public abstract class Subview : SubviewBase, ISubview
     {
         private CanvasGroup canvasGroup;
 
-        protected event HandleEndAnimation OnEndAnimation;
+        protected event EndAnimationHandler OnEndAnimation;
 
         /// <summary>
         /// この Subview 内で最後に選択された <see cref="GameObject"/>
         /// </summary>
-        protected GameObject LastSelectedObj { get; private set; }
-        protected ViewElement LastSelectedViewElement { get; private set; }
+        protected GameObject LastSelectedObject { get; private set; }
+        protected ViewItem LastSelectedItem { get; private set; }
 
         /// <summary>
         /// このプロパティが true のとき <see cref="IListMenuManager"/> の動作を停止させる。アニメーションを待機させるために使用する
@@ -49,13 +48,13 @@ namespace Lysionium
         /// <summary>
         /// <see cref="CommonInit"/> 内で呼び出すメソッド。
         /// 言語変更などで <see cref="IListMenuManager.Localize"/> が変わる可能性があるため、
-        /// このメソッド内で <see cref="ViewElement.SetElement"/> を呼び出してはならない
+        /// このメソッド内で <see cref="ViewItem.Bind"/> を呼び出してはならない
         /// </summary>
         protected virtual void CommonInitCore() { }
 
         public abstract void SetParameters(
-            IReadOnlyList<object> list, IElementHandler handler, IListMenuManager manager, IListMenuArg arg,
-            ref IElementsSubviewStateProvider stateProvider);
+            IReadOnlyList<object> list, IViewItemHandler handler, IListMenuManager manager, IListMenuArg arg,
+            ref ISubviewStateProvider stateProvider);
 
         public void SetStatusCode(int statusCode)
         {
@@ -72,7 +71,7 @@ namespace Lysionium
             canvasGroup.interactable = interactable;
         }
 
-        public virtual void Show(HandleEndAnimation onEndAnimation = null)
+        public virtual void Show(EndAnimationHandler onEndAnimation = null)
         {
             SetInteractable(true);
             AnimatorTupple.TrySetVisible(this, true);
@@ -83,7 +82,7 @@ namespace Lysionium
             }
         }
 
-        public virtual void Hide(bool back, HandleEndAnimation onEndAnimation = null)
+        public virtual void Hide(bool back, EndAnimationHandler onEndAnimation = null)
         {
             if (back) { SetStatusCode(backStatusCode); }
             SetInteractable(false);
@@ -95,12 +94,12 @@ namespace Lysionium
             }
         }
 
-        public override void OnSelectViewElement(GameObject selectedObj, bool outOfRange)
+        public override void OnSelectItem(GameObject selectedObj, bool outOfRange)
         {
             if (!outOfRange)
             {
-                LastSelectedObj = selectedObj;
-                LastSelectedViewElement = selectedObj.GetComponent<ViewElement>();
+                LastSelectedObject = selectedObj;
+                LastSelectedItem = selectedObj.GetComponent<ViewItem>();
             }
             AnimatorTupple.OnSelect(this, selectedObj, outOfRange);
         }
@@ -110,8 +109,8 @@ namespace Lysionium
         /// </summary>
         public override void QueueSelect(GameObject sender, GameObject to, CursorPlay play)
         {
-            LastSelectedObj = to;
-            LastSelectedViewElement = to != null ? to.GetComponent<ViewElement>() : null;
+            LastSelectedObject = to;
+            LastSelectedItem = to != null ? to.GetComponent<ViewItem>() : null;
             AnimatorTupple.QueueSelect(this, sender, to, play);
         }
 

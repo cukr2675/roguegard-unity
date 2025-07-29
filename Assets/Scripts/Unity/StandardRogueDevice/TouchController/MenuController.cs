@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -92,7 +92,7 @@ namespace RoguegardUnity
             }
         }
 
-        public override IElementsSubview GetSubview(string subviewName)
+        public override ISubview GetSubview(string subviewName)
         {
             if (subviewName == RoguegardSubviews.Face) return _face;
             if (subviewName == RoguegardSubviews.Summary) return _summary;

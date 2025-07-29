@@ -9,7 +9,7 @@ using Roguegard;
 
 namespace RoguegardUnity
 {
-    public class StatsSubview : ElementsSubview
+    public class StatsSubview : Subview
     {
         [SerializeField] private TMP_Text _text = null;
         [SerializeField] private TMP_Text _hpText = null;
@@ -22,8 +22,8 @@ namespace RoguegardUnity
         private static readonly RogueNameBuilder nameBuilder = new RogueNameBuilder();
 
         public override void SetParameters(
-            IReadOnlyList<object> list, IElementHandler handler, IListMenuManager manager, IListMenuArg arg,
-            ref IElementsSubviewStateProvider stateProvider)
+            IReadOnlyList<object> list, IViewItemHandler handler, IListMenuManager manager, IListMenuArg arg,
+            ref ISubviewStateProvider stateProvider)
             => new System.NotSupportedException();
 
         public void SetText(RogueObj obj)

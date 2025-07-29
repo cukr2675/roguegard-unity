@@ -13,7 +13,7 @@ using Roguegard.CharacterCreation;
 
 namespace RoguegardUnity
 {
-    public class SummarySubview : ElementsSubview, ISummaryElementsSubview
+    public class SummarySubview : Subview, ISummaryElementsSubview
     {
         [SerializeField] private ScrollRect _scrollRect = null;
         [SerializeField] private TMP_Text _topText = null;
@@ -76,8 +76,8 @@ namespace RoguegardUnity
         }
 
         public override void SetParameters(
-            IReadOnlyList<object> list, IElementHandler handler, IListMenuManager manager, IListMenuArg arg,
-            ref IElementsSubviewStateProvider stateProvider)
+            IReadOnlyList<object> list, IViewItemHandler handler, IListMenuManager manager, IListMenuArg arg,
+            ref ISubviewStateProvider stateProvider)
         {
             SetArg(manager, arg);
             SetStatusCode(0);
@@ -94,10 +94,10 @@ namespace RoguegardUnity
                 SetTile(tile);
             }
 
-            IElementsSubviewStateProvider stateProvider = null;
+            ISubviewStateProvider stateProvider = null;
             manager
                 .GetSubview(StandardSubviewTable.BackAnchorName)
-                .Show(backSelectOption, SelectOptionHandler.Instance, manager, Arg, ref stateProvider);
+                .Show(backSelectOption, SelectOptionViewItemHandler.Instance, manager, Arg, ref stateProvider);
         }
 
         private void SetObj(RogueObj obj, RogueObj resultDungeon)
@@ -128,10 +128,10 @@ namespace RoguegardUnity
 
             SetObj(player, dungeon);
 
-            IElementsSubviewStateProvider stateProvider = null;
+            ISubviewStateProvider stateProvider = null;
             manager
                 .GetSubview(StandardSubviewTable.ForwardAnchorName)
-                .Show(submitSelectOption, SelectOptionHandler.Instance, manager, Arg, ref stateProvider);
+                .Show(submitSelectOption, SelectOptionViewItemHandler.Instance, manager, Arg, ref stateProvider);
         }
 
         public void SetGameOver(RogueObj player, RogueObj dungeon, MMgr manager)
@@ -140,13 +140,13 @@ namespace RoguegardUnity
 
             SetObj(player, null);
 
-            IElementsSubviewStateProvider stateProvider = null;
+            ISubviewStateProvider stateProvider = null;
             manager
                 .GetSubview(StandardSubviewTable.BackAnchorName)
-                .Show(backSelectOption, SelectOptionHandler.Instance, manager, Arg, ref stateProvider);
+                .Show(backSelectOption, SelectOptionViewItemHandler.Instance, manager, Arg, ref stateProvider);
             manager
                 .GetSubview(StandardSubviewTable.ForwardAnchorName)
-                .Show(submitSelectOption, SelectOptionHandler.Instance, manager, Arg, ref stateProvider);
+                .Show(submitSelectOption, SelectOptionViewItemHandler.Instance, manager, Arg, ref stateProvider);
         }
 
         public void SetQuest(RogueObj player, DungeonQuest quest, bool showSubmitButton, MMgr manager)
@@ -210,15 +210,15 @@ namespace RoguegardUnity
             _textRightL.SetText(rightLBuilder);
             _textRightR.SetText(rightRBuilder);
 
-            IElementsSubviewStateProvider stateProvider = null;
+            ISubviewStateProvider stateProvider = null;
             manager
                 .GetSubview(StandardSubviewTable.BackAnchorName)
-                .Show(backSelectOption, SelectOptionHandler.Instance, manager, Arg, ref stateProvider);
+                .Show(backSelectOption, SelectOptionViewItemHandler.Instance, manager, Arg, ref stateProvider);
             if (showSubmitButton)
             {
                 manager
                     .GetSubview(StandardSubviewTable.ForwardAnchorName)
-                    .Show(startQuestSelectOption, SelectOptionHandler.Instance, manager, Arg, ref stateProvider);
+                    .Show(startQuestSelectOption, SelectOptionViewItemHandler.Instance, manager, Arg, ref stateProvider);
             }
         }
 

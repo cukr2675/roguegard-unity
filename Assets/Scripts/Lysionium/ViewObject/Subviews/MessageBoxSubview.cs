@@ -8,12 +8,12 @@ using UnityEngine.Events;
 namespace Lysionium
 {
     [AddComponentMenu("UI/Lysionium/Subviews/LUI Message Box Subview")]
-    public class MessageBoxSubview : ElementsSubview
+    public class MessageBoxSubview : Subview
     {
         [SerializeField] private MessageBox _messageBox = null;
         public MessageBox MessageBox => _messageBox;
 
-        [SerializeField] private ViewElement _blocker = null;
+        [SerializeField] private ViewItem _blocker = null;
 
         [Space, SerializeField] private Button.ButtonClickedEvent _onClick = null;
         [Space, SerializeField] private StartSpeechEvent _onStartSpeech = null;
@@ -21,7 +21,7 @@ namespace Lysionium
 
         private bool isSpeechingNow;
 
-        private event HandleEndAnimation OnCompleted;
+        private event EndAnimationHandler OnCompleted;
 
         protected override void CommonInitCore()
         {
@@ -41,8 +41,8 @@ namespace Lysionium
         }
 
         public override void SetParameters(
-            IReadOnlyList<object> list, IElementHandler handler, IListMenuManager manager, IListMenuArg arg,
-            ref IElementsSubviewStateProvider stateProvider)
+            IReadOnlyList<object> list, IViewItemHandler handler, IListMenuManager manager, IListMenuArg arg,
+            ref ISubviewStateProvider stateProvider)
         {
             _messageBox.Clear();
             OnEndAnimation += (manager, arg) =>
@@ -60,13 +60,13 @@ namespace Lysionium
 
             if (_blocker != null)
             {
-                _blocker.SetElement(
-                    SelectOption.Create<IListMenuManager, IListMenuArg>("", delegate { _onClick.Invoke(); }), SelectOptionHandler.Instance);
+                _blocker.Bind(
+                    SelectOption.Create<IListMenuManager, IListMenuArg>("", delegate { _onClick.Invoke(); }), SelectOptionViewItemHandler.Instance);
                 _blocker.SetVisible(true, true);
             }
         }
 
-        public void DoScheduledAfterCompletion(HandleEndAnimation onEndAnimation)
+        public void DoScheduledAfterCompletion(EndAnimationHandler onEndAnimation)
         {
             OnCompleted += onEndAnimation;
         }

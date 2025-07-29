@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,7 +9,7 @@ using Roguegard.Device;
 
 namespace RoguegardUnity
 {
-    public class FaceSubview : ElementsSubview
+    public class FaceSubview : Subview
     {
         [SerializeField] private RectTransform _content = null;
 
@@ -27,8 +27,8 @@ namespace RoguegardUnity
         }
 
         public override void SetParameters(
-            IReadOnlyList<object> list, IElementHandler handler, IListMenuManager manager, IListMenuArg arg,
-            ref IElementsSubviewStateProvider stateProvider)
+            IReadOnlyList<object> list, IViewItemHandler handler, IListMenuManager manager, IListMenuArg arg,
+            ref ISubviewStateProvider stateProvider)
         {
             var mArg = (MArg)arg;
             var obj = mArg.Arg.TargetObj;

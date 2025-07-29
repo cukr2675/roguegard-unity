@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,16 +6,16 @@ using R3;
 
 namespace Lysionium.R3
 {
-    internal interface IObserverElementHandler : IElementHandler
+    internal interface IObserverElementHandler : IViewItemHandler
     {
         void OnNext(object element, IListMenuManager manager, IListMenuArg arg, R3RuleContext ctx);
 
-        string IElementHandler.GetName(object element, IListMenuManager manager, IListMenuArg arg)
+        string IViewItemHandler.GetName(object element, IListMenuManager manager, IListMenuArg arg)
         {
             return GetNameExtension.GetName(this, element, manager, arg);
         }
 
-        string IElementHandler.GetStyle(object element, IListMenuManager manager, IListMenuArg arg)
+        string IViewItemHandler.GetStyle(object element, IListMenuManager manager, IListMenuArg arg)
         {
             return GetNameExtension.GetName(this, element, manager, arg);
         }
@@ -49,7 +49,7 @@ namespace Lysionium.R3
         }
 
         public static void OnClick<TElm, TMgr, TArg>(
-            this Observable<R3RuleArg<object, IListMenuManager, IListMenuArg, object, object>> observable, GetElementName<TElm, TMgr, TArg> getName)
+            this Observable<R3RuleArg<object, IListMenuManager, IListMenuArg, object, object>> observable, ItemNameSelector<TElm, TMgr, TArg> getName)
         {
             observable.Subscribe(x =>
             {
@@ -77,7 +77,7 @@ namespace Lysionium.R3
         }
 
         public static void OnClick<TElm, TMgr, TArg>(
-            this Observable<R3RuleArg<object, IListMenuManager, IListMenuArg, object, object>> observable, HandleClickElement<TElm, TMgr, TArg> onClick)
+            this Observable<R3RuleArg<object, IListMenuManager, IListMenuArg, object, object>> observable, ClickItemHandler<TElm, TMgr, TArg> onClick)
         {
             observable.Subscribe(x =>
             {

@@ -23,7 +23,7 @@ namespace Roguegard
 
         private class Menu : RogueMenuScreen
         {
-            private IElementsSubviewStateProvider subviewStateProvider;
+            private ISubviewStateProvider subviewStateProvider;
 
             public override void OpenScreen(in MMgr manager, in MArg arg)
             {

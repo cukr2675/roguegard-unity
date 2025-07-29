@@ -79,7 +79,7 @@ namespace Roguegard.Rgpacks
                         }
                         else
                         {
-                            return SelectOptionHandler.Instance.GetName(element, manager, arg);
+                            return SelectOptionViewItemHandler.Instance.GetName(element, manager, arg);
                         }
                     })
 
@@ -92,7 +92,7 @@ namespace Roguegard.Rgpacks
                         }
                         else
                         {
-                            SelectOptionHandler.Instance.HandleClick(element, manager, arg);
+                            SelectOptionViewItemHandler.Instance.HandleClick(element, manager, arg);
                         }
                     })
 

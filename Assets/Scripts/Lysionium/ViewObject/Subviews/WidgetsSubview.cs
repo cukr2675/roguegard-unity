@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,7 +8,7 @@ using UnityEngine.UI;
 namespace Lysionium
 {
     [AddComponentMenu("UI/Lysionium/Subviews/LUI Widgets Subview")]
-    public class WidgetsSubview : ElementsSubview
+    public class WidgetsSubview : Subview
     {
         [SerializeField] private ScrollRect _scrollRect = null;
 
@@ -25,8 +25,8 @@ namespace Lysionium
         [Tooltip("この値が true のときカーソル移動の対象となる")]
         [SerializeField] private bool _isSelectable = true;
 
-        private IElementHandler handler;
-        private readonly List<ViewElement> viewElements = new();
+        private IViewItemHandler handler;
+        private readonly List<ViewItem> viewItems = new();
         private readonly List<ViewWidget> viewWidgets = new();
         private Selectable fallbackSelectable;
         private readonly List<GameObject> viewWidgetRootObjs = new();
@@ -83,11 +83,11 @@ namespace Lysionium
         }
 
         public override void SetParameters(
-            IReadOnlyList<object> list, IElementHandler handler, IListMenuManager manager, IListMenuArg arg,
-            ref IElementsSubviewStateProvider stateProvider)
+            IReadOnlyList<object> list, IViewItemHandler handler, IListMenuManager manager, IListMenuArg arg,
+            ref ISubviewStateProvider stateProvider)
         {
             if (stateProvider == null) { stateProvider = new StateProvider(); }
-            if (!(stateProvider is StateProvider local)) throw new System.ArgumentException(
+            if (stateProvider is not StateProvider local) throw new System.ArgumentException(
                 $"{stateProvider} は {nameof(StateProvider)} ではありません。");
 
             // 現在の StateProvider を外す前に状態を保存する
@@ -95,13 +95,13 @@ namespace Lysionium
             {
                 currentStateProvider.VerticalAbsolutePosition = VerticalAbsolutePosition;
                 currentStateProvider.HorizontalAbsolutePosition = HorizontalAbsolutePosition;
-                currentStateProvider.LoadSelectedElementName(LastSelectedObj);
+                currentStateProvider.LoadSelectedItemName(LastSelectedObject);
             }
 
             // 表示更新
             this.handler = handler;
             SetArg(manager, arg);
-            UpdateElements(list);
+            UpdateItems(list);
             SetStatusCode(0);
 
             // 新しい StateProvider に切り替える
@@ -111,7 +111,7 @@ namespace Lysionium
             if (_isSelectable) { local.ApplySelectedIndex(this); }
         }
 
-        private void UpdateElements(IReadOnlyList<object> list)
+        private void UpdateItems(IReadOnlyList<object> list)
         {
             // ビューの状態を初期化
             _scrollRect.horizontal = false;
@@ -133,7 +133,7 @@ namespace Lysionium
             {
                 Destroy(viewWidgetRootObj);
             }
-            viewElements.Clear();
+            viewItems.Clear();
             viewWidgets.Clear();
             fallbackSelectable = null;
             viewWidgetRootObjs.Clear();
@@ -154,7 +154,7 @@ namespace Lysionium
                 sumHeight += viewWidget.rect.height;
                 maxWidth = Mathf.Max(maxWidth, viewWidget.rect.width);
 
-                viewElements.AddRange(viewWidget.GetComponentsInChildren<ViewElement>());
+                viewItems.AddRange(viewWidget.GetComponentsInChildren<ViewItem>());
                 viewWidgets.AddRange(viewWidget.GetComponentsInChildren<ViewWidget>());
                 if (fallbackSelectable == null) { fallbackSelectable = viewWidget.GetComponentInChildren<Selectable>(); }
                 viewWidgetRootObjs.Add(viewWidget.gameObject);
@@ -266,7 +266,7 @@ namespace Lysionium
             }
         }
 
-        private class StateProvider : IElementsSubviewStateProvider
+        private class StateProvider : ISubviewStateProvider
         {
             public float VerticalAbsolutePosition { get; set; }
             public float HorizontalAbsolutePosition { get; set; }
@@ -281,20 +281,20 @@ namespace Lysionium
                 SelectedIndex = -1;
             }
 
-            public void LoadSelectedElementName(GameObject lastSelectedObj)
+            public void LoadSelectedItemName(GameObject lastSelectedObject)
             {
-                if (lastSelectedObj == null)
+                if (lastSelectedObject == null)
                 {
                     SelectedName = null;
                 }
-                else if (lastSelectedObj.TryGetComponent<ViewWidget>(out var lastSelectedViewWidget))
+                else if (lastSelectedObject.TryGetComponent<ViewWidget>(out var lastSelectedViewWidget))
                 {
                     SelectedName = lastSelectedViewWidget.WidgetName;
                     SelectedIsWidget = true;
                 }
-                else if (lastSelectedObj.TryGetComponent<ViewElement>(out var lastSelectedViewElement))
+                else if (lastSelectedObject.TryGetComponent<ViewItem>(out var lastSelectedViewItem))
                 {
-                    SelectedName = lastSelectedViewElement.ElementName;
+                    SelectedName = lastSelectedViewItem.ItemName;
                     SelectedIsWidget = false;
                 }
                 else
@@ -321,12 +321,12 @@ namespace Lysionium
                     }
                     else
                     {
-                        foreach (var element in subview.viewElements)
+                        foreach (var item in subview.viewItems)
                         {
-                            if (element.ElementName == SelectedName)
+                            if (item.ItemName == SelectedName)
                             {
-                                //EventSystem.current.SetSelectedGameObject(element.gameObject); // これだと Show メソッドで interactable が true になる前に選択してしまう
-                                subview.QueueSelect(subview.gameObject, element.gameObject, CursorPlay.None);
+                                //EventSystem.current.SetSelectedGameObject(item.gameObject); // これだと Show メソッドで interactable が true になる前に選択してしまう
+                                subview.QueueSelect(subview.gameObject, item.gameObject, CursorPlay.None);
                                 return;
                             }
                         }

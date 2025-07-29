@@ -1,11 +1,11 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Lysionium
 {
     /// <summary>
-    /// <see cref="SelectOptionHandler"/> のモデルとして扱うインターフェース。
+    /// <see cref="SelectOptionViewItemHandler"/> のモデルとして扱うインターフェース。
     /// </summary>
     public interface ISelectOption
     {

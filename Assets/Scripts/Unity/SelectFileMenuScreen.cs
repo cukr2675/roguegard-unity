@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,7 +11,7 @@ namespace RoguegardUnity
     internal class SelectFileMenuScreen : RogueMenuScreen
     {
         private RogueMenuScreen nextScreen;
-        private HandleClickElement<MMgr, MArg> onNewFile;
+        private ClickItemHandler<MMgr, MArg> onNewFile;
         private RogueScrollViewTemplate<object> view;
         private readonly List<FileInfo> files = new();
 
@@ -22,8 +22,8 @@ namespace RoguegardUnity
         private SelectFileMenuScreen() { }
 
         public static SelectFileMenuScreen Load(
-            HandleClickElement<FileInfo, MMgr, MArg> onSelectFile,
-            HandleClickElement<MMgr, MArg> onNewFile = null)
+            ClickItemHandler<FileInfo, MMgr, MArg> onSelectFile,
+            ClickItemHandler<MMgr, MArg> onNewFile = null)
         {
             var instance = new SelectFileMenuScreen();
             instance.nextScreen = new SelectFileCommandMenuScreen(onSelectFile);
@@ -54,8 +54,8 @@ namespace RoguegardUnity
         }
 
         public static SelectFileMenuScreen Save(
-            HandleClickElement<FileInfo, MMgr, MArg> onSelectFile,
-            HandleClickElement<MMgr, MArg> onNewFile = null)
+            ClickItemHandler<FileInfo, MMgr, MArg> onSelectFile,
+            ClickItemHandler<MMgr, MArg> onNewFile = null)
         {
             var instance = new SelectFileMenuScreen();
             instance.nextScreen = new ChoicesMenuScreen(

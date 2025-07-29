@@ -12,25 +12,25 @@ using Roguegard.CharacterCreation;
 
 namespace RoguegardUnity
 {
-    public class CharacterCreationSubview : ElementsSubview, ICharacterCreationElementsSubview
+    public class CharacterCreationSubview : Subview, ICharacterCreationElementsSubview
     {
         [SerializeField] private ScrollRect _scrollRect = null;
         [SerializeField] private RectTransform _firstParent = null;
         [SerializeField] private RectTransform _appearanceParent = null;
-        [SerializeField] private ButtonViewElement _appearanceButton = null;
+        [SerializeField] private ButtonViewItem _appearanceButton = null;
         [SerializeField] private TMP_InputField _nameField = null;
         [SerializeField] private CharacterCreationStarsItem _stars = null;
-        [SerializeField] private ButtonViewElement _raceButton = null;
+        [SerializeField] private ButtonViewItem _raceButton = null;
         [SerializeField] private RectTransform _secondParent = null;
-        [SerializeField] private LabelViewElement _headerPrefab = null;
+        [SerializeField] private LabelViewItem _headerPrefab = null;
         [SerializeField] private CharacterCreationViewElementButton _elementButtonPrefab = null;
 
         private CharacterCreationData characterCreationData;
         private CharacterCreationAddMenu addMenu;
         private CharacterCreationOptionMenu optionMenu;
 
-        private IButtonElementHandler intrinsicPresenter;
-        private IButtonElementHandler startingItemPresenter;
+        private IButtonViewItemHandler intrinsicPresenter;
+        private IButtonViewItemHandler startingItemPresenter;
         private static readonly ISelectOption intrinsicHeader
             = SelectOption.Create<MMgr, MArg>("固有能力", delegate { });
         private static readonly ISelectOption startingItemHeader
@@ -44,7 +44,7 @@ namespace RoguegardUnity
             = SelectOption.Create<MMgr, MArg>(":Load", new LoadPresetMenu());
         private static readonly object[] leftAnchorObjs = new object[2];
 
-        private readonly List<ViewElement> viewElements = new();
+        private readonly List<ViewItem> viewElements = new();
 
         ISelectOption ICharacterCreationElementsSubview.LoadPresetOption => LoadPresetSelectOption;
 
@@ -72,8 +72,8 @@ namespace RoguegardUnity
         }
 
         public override void SetParameters(
-            IReadOnlyList<object> list, IElementHandler handler, IListMenuManager manager, IListMenuArg iArg,
-            ref IElementsSubviewStateProvider stateProvider)
+            IReadOnlyList<object> list, IViewItemHandler handler, IListMenuManager manager, IListMenuArg iArg,
+            ref ISubviewStateProvider stateProvider)
         {
             var arg = (MArg)iArg;
             characterCreationData = (CharacterCreationData)arg.Arg.Other;
@@ -91,7 +91,7 @@ namespace RoguegardUnity
 
             if (intrinsicPresenter == null)
             {
-                intrinsicPresenter = new ButtonElementHandler<Intrinsic, MMgr, MArg>()
+                intrinsicPresenter = new ButtonViewItemHandler<Intrinsic, MMgr, MArg>()
                 {
                     GetName = (element, manager, arg) =>
                     {
@@ -105,7 +105,7 @@ namespace RoguegardUnity
                     },
                 };
 
-                startingItemPresenter = new ButtonElementHandler<StartingItem, MMgr, MArg>()
+                startingItemPresenter = new ButtonViewItemHandler<StartingItem, MMgr, MArg>()
                 {
                     GetName = (element, manager, arg) =>
                     {
@@ -148,7 +148,7 @@ namespace RoguegardUnity
                 sumHeight += ((RectTransform)header.transform).rect.height;
                 odd = false;
                 header.Initialize(this);
-                header.SetElement(intrinsicHeader, SelectOptionHandler.Instance);
+                header.Bind(intrinsicHeader, SelectOptionViewItemHandler.Instance);
                 itemObjects.Add(header);
             }
             for (int i = 0; i < characterCreationData.Intrinsics.Count; i++)
@@ -176,7 +176,7 @@ namespace RoguegardUnity
                 sumHeight += ((RectTransform)header.transform).rect.height;
                 odd = false;
                 header.Initialize(this);
-                header.SetElement(startingItemHeader, SelectOptionHandler.Instance);
+                header.Bind(startingItemHeader, SelectOptionViewItemHandler.Instance);
                 itemObjects.Add(header);
             }
             for (int i = 0; i < characterCreationData.StartingItemTable.Count; i++)
@@ -199,9 +199,9 @@ namespace RoguegardUnity
             _scrollRect.content.SetInsetAndSizeFromParentEdge(
                 RectTransform.Edge.Top, 0, _firstParent.rect.height + sumHeight);
 
-            _raceButton.SetElement(raceSelectOption, SelectOptionHandler.Instance);
+            _raceButton.Bind(raceSelectOption, SelectOptionViewItemHandler.Instance);
             viewElements.Add(_raceButton);
-            _appearanceButton.SetElement(appearanceSelectOption, SelectOptionHandler.Instance);
+            _appearanceButton.Bind(appearanceSelectOption, SelectOptionViewItemHandler.Instance);
             viewElements.Add(_appearanceButton);
         }
 

@@ -3,7 +3,7 @@ using Roguegard.CharacterCreation;
 
 namespace Roguegard.Device
 {
-    public interface ISummaryElementsSubview : IElementsSubview
+    public interface ISummaryElementsSubview : ISubview
     {
         void SetObj(object obj, MMgr manager);
         void SetResult(RogueObj player, RogueObj dungeon, MMgr manager);

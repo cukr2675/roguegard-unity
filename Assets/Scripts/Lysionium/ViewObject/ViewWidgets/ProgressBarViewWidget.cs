@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
 using UnityEngine.UI;
 
 namespace Lysionium
@@ -13,24 +10,24 @@ namespace Lysionium
         [SerializeField] private string _fillAmountFloat = null;
 
         private IWidgetOption widgetOption;
-        private ElementsSubviewBase _parent;
+        private SubviewBase _parent;
         private Animator animator;
 
-        protected override ElementsSubviewBase Parent => _parent;
+        protected override SubviewBase Parent => _parent;
 
         public delegate float GetProgress<TMgr, TArg>(TMgr manager, TArg arg);
 
         public override bool TryInstantiateWidget(
-            object element, IElementHandler handler, ElementsSubviewBase elementsSubview, out ViewWidget viewWidget)
+            object item, IViewItemHandler handler, SubviewBase subview, out ViewWidget viewWidget)
         {
-            if (!(element is IWidgetOption widgetOption))
+            if (item is not IWidgetOption widgetOption)
             {
                 viewWidget = null;
                 return false;
             }
 
             var progressBarViewWidget = Instantiate(this);
-            progressBarViewWidget._parent = elementsSubview;
+            progressBarViewWidget._parent = subview;
             progressBarViewWidget.widgetOption = widgetOption;
             progressBarViewWidget.animator = progressBarViewWidget.GetComponent<Animator>();
             viewWidget = progressBarViewWidget;

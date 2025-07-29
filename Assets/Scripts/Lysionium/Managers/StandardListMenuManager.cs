@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -63,7 +63,7 @@ namespace Lysionium
             }
         }
 
-        public virtual IElementsSubview GetSubview(string subviewName)
+        public virtual ISubview GetSubview(string subviewName)
         {
             return StandardSubviewTable.Subviews[subviewName];
         }

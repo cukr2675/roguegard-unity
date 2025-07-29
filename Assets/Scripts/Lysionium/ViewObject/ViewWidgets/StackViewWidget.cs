@@ -1,8 +1,6 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
-
-using System;
 
 namespace Lysionium
 {
@@ -13,9 +11,9 @@ namespace Lysionium
     public class StackViewWidget : ViewWidget
     {
         public override bool TryInstantiateWidget(
-            object element, IElementHandler handler, ElementsSubviewBase elementsSubview, out ViewWidget stackViewWidget)
+            object item, IViewItemHandler handler, SubviewBase subview, out ViewWidget stackViewWidget)
         {
-            if (element is IWidgetOption viewWidgets)
+            if (item is IWidgetOption viewWidgets)
             {
                 stackViewWidget = Instantiate(this);
                 var content = (RectTransform)stackViewWidget.transform;
@@ -35,7 +33,7 @@ namespace Lysionium
                 var maxHeight = 0f;
                 for (int i = 0; i < children.Count; i++)
                 {
-                    if (!ViewWidgetFactory.TryCreateViewWidget(children[i].element, handler, elementsSubview, out var viewWidget))
+                    if (!ViewWidgetFactory.TryCreateViewWidget(children[i].item, handler, subview, out var viewWidget))
                     {
                         Debug.LogError($"{children[i]} の {nameof(ViewWidget)} を生成できません。");
                         continue;
@@ -52,7 +50,7 @@ namespace Lysionium
                 return true;
             }
 
-            if (element is IReadOnlyList<object> oldViewWidgets)
+            if (item is IReadOnlyList<object> oldViewWidgets)
             {
                 Debug.LogWarning("Obsolete");
 
@@ -60,18 +58,18 @@ namespace Lysionium
                 var content = (RectTransform)stackViewWidget.transform;
 
                 var maxHeight = 0f;
-                var viewElementWidth = 1f / oldViewWidgets.Count;
+                var viewItemWidth = 1f / oldViewWidgets.Count;
                 for (int i = 0; i < oldViewWidgets.Count; i++)
                 {
-                    if (!ViewWidgetFactory.TryCreateViewWidget(oldViewWidgets[i], handler, elementsSubview, out var viewWidget))
+                    if (!ViewWidgetFactory.TryCreateViewWidget(oldViewWidgets[i], handler, subview, out var viewWidget))
                     {
                         Debug.LogError($"{oldViewWidgets[i]} の {nameof(ViewWidget)} を生成できません。");
                         continue;
                     }
 
                     viewWidget.SetParent(content, false);
-                    viewWidget.anchorMin = new Vector2(i * viewElementWidth, viewWidget.anchorMin.y);
-                    viewWidget.anchorMax = new Vector2((i + 1) * viewElementWidth, viewWidget.anchorMax.y);
+                    viewWidget.anchorMin = new Vector2(i * viewItemWidth, viewWidget.anchorMin.y);
+                    viewWidget.anchorMax = new Vector2((i + 1) * viewItemWidth, viewWidget.anchorMax.y);
                     viewWidget.sizeDelta = new Vector2(0f, viewWidget.sizeDelta.y);
                     maxHeight = Mathf.Max(maxHeight, viewWidget.rect.height);
                 }
@@ -83,7 +81,7 @@ namespace Lysionium
             return false;
         }
 
-        public static IWidgetOption CreateOption(params (string width, object element)[] children)
+        public static IWidgetOption CreateOption(params (string width, object item)[] children)
         {
             return new WidgetOption()
             {
@@ -95,13 +93,13 @@ namespace Lysionium
         public interface IWidgetOption
         {
             string Name { get; }
-            public IReadOnlyList<(string width, object element)> Children { get; }
+            public IReadOnlyList<(string width, object item)> Children { get; }
         }
 
         private class WidgetOption : IWidgetOption
         {
             public string Name { get; set; }
-            public IReadOnlyList<(string width, object element)> Children { get; set; }
+            public IReadOnlyList<(string width, object item)> Children { get; set; }
         }
     }
 }

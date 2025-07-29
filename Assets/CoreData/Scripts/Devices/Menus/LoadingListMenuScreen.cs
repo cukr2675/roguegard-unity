@@ -6,7 +6,7 @@ namespace Roguegard.Device
     {
         private readonly string text;
         private readonly string buttonText;
-        private readonly HandleClickElement<MMgr, MArg> buttonAction;
+        private readonly ClickItemHandler<MMgr, MArg> buttonAction;
         private readonly ProgressBarViewWidget.GetProgress<MMgr, MArg> getProgress;
         private readonly object[] elms;
 
@@ -19,7 +19,7 @@ namespace Roguegard.Device
 
         public LoadingListMenuScreen(
             string text, string buttonText,
-            HandleClickElement<MMgr, MArg> buttonAction,
+            ClickItemHandler<MMgr, MArg> buttonAction,
             ProgressBarViewWidget.GetProgress<MMgr, MArg> updateAction = null)
         {
             this.text = text;

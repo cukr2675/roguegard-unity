@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -17,12 +17,12 @@ namespace Lysionium
         public List<ISelectOption> BackAnchorList { get; set; } = new() { BackSelectOption.Instance };
 
         private object prevViewStateHolder;
-        private IElementsSubviewStateProvider dialogSubviewStateProvider;
-        private IElementsSubviewStateProvider captionBoxSubviewStateProvider;
-        private IElementsSubviewStateProvider backAnchorSubviewStateProvider;
+        private ISubviewStateProvider dialogSubviewStateProvider;
+        private ISubviewStateProvider captionBoxSubviewStateProvider;
+        private ISubviewStateProvider backAnchorSubviewStateProvider;
 
         private string message;
-        private event HandleClickElement<string, TMgr, TArg> handleClickLink;
+        private event ClickItemHandler<string, TMgr, TArg> handleClickLink;
 
         public Builder ShowTemplate(string message, TMgr manager, TArg arg, object viewStateHolder = null)
         {
@@ -59,20 +59,20 @@ namespace Lysionium
 
             manager
                 .GetSubview(DialogSubviewName)
-                .Show(List, SelectOptionHandler.Instance, manager, arg, ref dialogSubviewStateProvider);
+                .Show(List, SelectOptionViewItemHandler.Instance, manager, arg, ref dialogSubviewStateProvider);
 
             if (Title != null)
             {
                 manager
                     .GetSubview(CaptionBoxSubviewName)
-                    .Show(TitleSingle, ElementToStringHandler.Instance, manager, arg, ref captionBoxSubviewStateProvider);
+                    .Show(TitleSingle, ToStringViewItemHandler.Instance, manager, arg, ref captionBoxSubviewStateProvider);
             }
 
             if (BackAnchorSubviewName != null)
             {
                 manager
                     .GetSubview(BackAnchorSubviewName)
-                    .Show(BackAnchorList, SelectOptionHandler.Instance, manager, arg, ref backAnchorSubviewStateProvider);
+                    .Show(BackAnchorList, SelectOptionViewItemHandler.Instance, manager, arg, ref backAnchorSubviewStateProvider);
             }
         }
 
@@ -93,7 +93,7 @@ namespace Lysionium
                 this.parent = parent;
             }
 
-            public Builder Option(string name, HandleClickElement<TMgr, TArg> onClick, string style = null)
+            public Builder Option(string name, ClickItemHandler<TMgr, TArg> onClick, string style = null)
             {
                 AssertNotBuilt();
 
@@ -101,7 +101,7 @@ namespace Lysionium
                 return this;
             }
 
-            public Builder StackOptions(params (string, HandleClickElement<TMgr, TArg>)[] selectOptions)
+            public Builder StackOptions(params (string, ClickItemHandler<TMgr, TArg>)[] selectOptions)
             {
                 AssertNotBuilt();
 
@@ -114,7 +114,7 @@ namespace Lysionium
                 return this;
             }
 
-            public Builder OnClickLink(HandleClickElement<string, TMgr, TArg> onClickLink)
+            public Builder OnClickLink(ClickItemHandler<string, TMgr, TArg> onClickLink)
             {
                 AssertNotBuilt();
 

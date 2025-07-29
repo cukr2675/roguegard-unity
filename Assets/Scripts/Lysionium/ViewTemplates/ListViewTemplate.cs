@@ -1,16 +1,15 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace Lysionium
 {
-    public abstract class ListViewTemplate<TElm, TMgr, TArg> : ViewTemplate<TMgr, TArg>
-        where TElm : class
+    public abstract class ListViewTemplate<TItem, TMgr, TArg> : ViewTemplate<TMgr, TArg>
+        where TItem : class
         where TMgr : IListMenuManager
         where TArg : IListMenuArg
     {
         private readonly List<object> headList = new();
-        protected List<TElm> OriginalList { get; } = new();
+        protected List<TItem> OriginalList { get; } = new();
         private readonly List<object> tailList = new();
         protected IReadOnlyList<object> List { get; }
 
@@ -22,31 +21,31 @@ namespace Lysionium
         public abstract class BaseListBuilder<TOut> : BaseBuilder<TOut>
             where TOut : BaseListBuilder<TOut>
         {
-            private ListViewTemplate<TElm, TMgr, TArg> parent;
+            private ListViewTemplate<TItem, TMgr, TArg> parent;
 
-            protected BaseListBuilder(ListViewTemplate<TElm, TMgr, TArg> parent, TMgr manager, TArg arg)
+            protected BaseListBuilder(ListViewTemplate<TItem, TMgr, TArg> parent, TMgr manager, TArg arg)
                 : base(parent, manager, arg)
             {
                 this.parent = parent;
             }
 
-            public TOut Head(TElm element)
+            public TOut Head(TItem item)
             {
                 AssertNotBuilt();
 
-                parent.headList.Add(element);
+                parent.headList.Add(item);
                 return (TOut)this;
             }
 
-            public TOut HeadRange(IEnumerable<TElm> elements)
+            public TOut HeadRange(IEnumerable<TItem> items)
             {
                 AssertNotBuilt();
 
-                parent.tailList.AddRange(elements);
+                parent.tailList.AddRange(items);
                 return (TOut)this;
             }
 
-            public TOut HeadOption(string name, HandleClickElement<TMgr, TArg> onClick, string style = null)
+            public TOut HeadOption(string name, ClickItemHandler<TMgr, TArg> onClick, string style = null)
             {
                 AssertNotBuilt();
 
@@ -54,23 +53,23 @@ namespace Lysionium
                 return (TOut)this;
             }
 
-            public TOut Tail(TElm element)
+            public TOut Tail(TItem item)
             {
                 AssertNotBuilt();
 
-                parent.tailList.Add(element);
+                parent.tailList.Add(item);
                 return (TOut)this;
             }
 
-            public TOut TailRange(IEnumerable<TElm> elements)
+            public TOut TailRange(IEnumerable<TItem> items)
             {
                 AssertNotBuilt();
 
-                parent.tailList.AddRange(elements);
+                parent.tailList.AddRange(items);
                 return (TOut)this;
             }
 
-            public TOut TailOption(string name, HandleClickElement<TMgr, TArg> onClick, string style = null)
+            public TOut TailOption(string name, ClickItemHandler<TMgr, TArg> onClick, string style = null)
             {
                 AssertNotBuilt();
 

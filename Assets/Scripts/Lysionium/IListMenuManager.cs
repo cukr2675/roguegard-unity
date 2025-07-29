@@ -1,7 +1,3 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 namespace Lysionium
 {
     public interface IListMenuManager
@@ -10,7 +6,7 @@ namespace Lysionium
 
         ISelectOption ErrorOption { get; }
 
-        IElementsSubview GetSubview(string subviewName);
+        ISubview GetSubview(string subviewName);
 
         void HideAll(bool back);
 

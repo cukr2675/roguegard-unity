@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,12 +7,12 @@ namespace Lysionium.HandlerRules
     public static class ElementHandlerBuilderExtension
     {
         public static TOut Rule<TElm, TMgr, TArg, TOut>(
-            this IElementHandlerBuilder<TElm, TMgr, TArg, TOut> builder, out HandlerSubject<TElm, TMgr, TArg, TOut> subject)
+            this IViewItemHandlerBuilder<TElm, TMgr, TArg, TOut> builder, out HandlerSubject<TElm, TMgr, TArg, TOut> subject)
         {
             subject = new HandlerSubject<TElm, TMgr, TArg, TOut>();
             SubscribeElementHandler(builder, subject);
 
-            if (builder is IButtonElementHandlerBuilder<TElm, TMgr, TArg, TOut> buttonsBuilder)
+            if (builder is IButtonViewItemHandlerBuilder<TElm, TMgr, TArg, TOut> buttonsBuilder)
             {
                 ButtonElementHandlerBuilderExtension.SubscribeButtonElementHandler(buttonsBuilder, subject);
             }
@@ -71,7 +71,7 @@ namespace Lysionium.HandlerRules
 
 
         public static TOut SubscribeElementHandler<TElm, TMgr, TArg, TOut>(
-            this IElementHandlerBuilder<TElm, TMgr, TArg, TOut> builder, HandlerSubject<TElm, TMgr, TArg, TOut> subject)
+            this IViewItemHandlerBuilder<TElm, TMgr, TArg, TOut> builder, HandlerSubject<TElm, TMgr, TArg, TOut> subject)
         {
             if (builder == null) throw new System.ArgumentNullException(nameof(builder));
             if (subject == null) throw new System.ArgumentNullException(nameof(subject));
@@ -105,13 +105,13 @@ namespace Lysionium.HandlerRules
         /// 暗黙の Handle() 呼び出し
         /// </summary>
         public static RuledHandlerSubject<TElm, TMgr, TArg, TBuilder, TValue> NameFrom<TElm, TMgr, TArg, TBuilder, TValue>(
-            this IRulable<TElm, TMgr, TArg, TBuilder, TValue> source, GetElementName<TValue, TMgr, TArg> nameFrom)
-            where TBuilder : IElementHandlerBuilder<TElm, TMgr, TArg, TBuilder>
+            this IRulable<TElm, TMgr, TArg, TBuilder, TValue> source, ItemNameSelector<TValue, TMgr, TArg> nameFrom)
+            where TBuilder : IViewItemHandlerBuilder<TElm, TMgr, TArg, TBuilder>
             => source.Handle().NameFrom(nameFrom);
 
         public static RuledHandlerSubject<TElm, TMgr, TArg, TBuilder, TValue> NameFrom<TElm, TMgr, TArg, TBuilder, TValue>(
-            this RuledHandlerSubject<TElm, TMgr, TArg, TBuilder, TValue> source, GetElementName<TValue, TMgr, TArg> nameFrom)
-            where TBuilder : IElementHandlerBuilder<TElm, TMgr, TArg, TBuilder>
+            this RuledHandlerSubject<TElm, TMgr, TArg, TBuilder, TValue> source, ItemNameSelector<TValue, TMgr, TArg> nameFrom)
+            where TBuilder : IViewItemHandlerBuilder<TElm, TMgr, TArg, TBuilder>
         {
             if (source == null) throw new System.ArgumentNullException(nameof(source));
             if (nameFrom == null) throw new System.ArgumentNullException(nameof(nameFrom));
@@ -127,13 +127,13 @@ namespace Lysionium.HandlerRules
         /// 暗黙の Handle() 呼び出し
         /// </summary>
         public static RuledHandlerSubject<TElm, TMgr, TArg, TBuilder, TValue> StyleFrom<TElm, TMgr, TArg, TBuilder, TValue>(
-            this IRulable<TElm, TMgr, TArg, TBuilder, TValue> source, GetElementName<TValue, TMgr, TArg> styleFrom)
-            where TBuilder : IElementHandlerBuilder<TElm, TMgr, TArg, TBuilder>
+            this IRulable<TElm, TMgr, TArg, TBuilder, TValue> source, ItemNameSelector<TValue, TMgr, TArg> styleFrom)
+            where TBuilder : IViewItemHandlerBuilder<TElm, TMgr, TArg, TBuilder>
             => source.Handle().StyleFrom(styleFrom);
 
         public static RuledHandlerSubject<TElm, TMgr, TArg, TBuilder, TValue> StyleFrom<TElm, TMgr, TArg, TBuilder, TValue>(
-            this RuledHandlerSubject<TElm, TMgr, TArg, TBuilder, TValue> source, GetElementName<TValue, TMgr, TArg> styleFrom)
-            where TBuilder : IElementHandlerBuilder<TElm, TMgr, TArg, TBuilder>
+            this RuledHandlerSubject<TElm, TMgr, TArg, TBuilder, TValue> source, ItemNameSelector<TValue, TMgr, TArg> styleFrom)
+            where TBuilder : IViewItemHandlerBuilder<TElm, TMgr, TArg, TBuilder>
         {
             if (source == null) throw new System.ArgumentNullException(nameof(source));
             if (styleFrom == null) throw new System.ArgumentNullException(nameof(styleFrom));
@@ -150,12 +150,12 @@ namespace Lysionium.HandlerRules
         /// </summary>
         public static RuledHandlerSubject<TElm, TMgr, TArg, TBuilder, TValue> StyleFrom<TElm, TMgr, TArg, TBuilder, TValue>(
             this IRulable<TElm, TMgr, TArg, TBuilder, TValue> source, string style)
-            where TBuilder : IElementHandlerBuilder<TElm, TMgr, TArg, TBuilder>
+            where TBuilder : IViewItemHandlerBuilder<TElm, TMgr, TArg, TBuilder>
             => source.Handle().StyleFrom(style);
 
         public static RuledHandlerSubject<TElm, TMgr, TArg, TBuilder, TValue> StyleFrom<TElm, TMgr, TArg, TBuilder, TValue>(
             this RuledHandlerSubject<TElm, TMgr, TArg, TBuilder, TValue> source, string style)
-            where TBuilder : IElementHandlerBuilder<TElm, TMgr, TArg, TBuilder>
+            where TBuilder : IViewItemHandlerBuilder<TElm, TMgr, TArg, TBuilder>
         {
             if (source == null) throw new System.ArgumentNullException(nameof(source));
 

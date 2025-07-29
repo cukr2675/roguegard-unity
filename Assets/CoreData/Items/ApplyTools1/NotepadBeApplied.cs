@@ -21,7 +21,7 @@ namespace Roguegard
                 SelectOption.Create<MMgr, MArg>("閉じる", Back),
             };
 
-            private IElementsSubviewStateProvider stateProvider;
+            private ISubviewStateProvider stateProvider;
 
             public override void OpenScreen(in MMgr manager, in MArg arg)
             {
@@ -31,7 +31,7 @@ namespace Roguegard
                 var textEditor = RoguegardSubviews.GetTextEditor(manager);
                 textEditor.Text = text;
                 textEditor.Show();
-                manager.StandardSubviewTable.BackAnchor.Show(backAnchor, SelectOptionHandler.Instance, manager, arg, ref stateProvider);
+                manager.StandardSubviewTable.BackAnchor.Show(backAnchor, SelectOptionViewItemHandler.Instance, manager, arg, ref stateProvider);
             }
 
             private static void Back(MMgr manager, MArg arg)

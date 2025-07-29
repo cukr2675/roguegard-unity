@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,27 +9,27 @@ using System.Linq;
 namespace Lysionium
 {
     [AddComponentMenu("UI/Lysionium/Subviews/LUI Carousel 3D Subview")]
-    public class Carousel3DSubview : ElementsSubview
+    public class Carousel3DSubview : Subview
     {
         [SerializeField] private Vector2 _axisAnchoredPosition = Vector2.zero;
         [SerializeField] private Quaternion _axisRotation = Quaternion.Euler(-15f, 0f, 0f);
         [SerializeField] private float _radius = 1f;
 
         [SerializeField] private RectTransform _content = null;
-        [SerializeField] private ViewElement _prevButton = null;
-        [SerializeField] private ViewElement _nextButton = null;
+        [SerializeField] private ViewItem _prevButton = null;
+        [SerializeField] private ViewItem _nextButton = null;
 
-        [SerializeField] private ViewElement _viewElementPrefab = null;
+        [SerializeField] private ViewItem _viewItemPrefab = null;
 
         [Tooltip("指定のインデックスまで回転する速さ")]
         [SerializeField] private float _elasticity = 0.2f;
 
         private float itemHeight;
 
-        private IElementHandler handler;
+        private IViewItemHandler handler;
         private readonly List<object> list = new();
-        private readonly List<ViewElement> viewElements = new();
-        private readonly List<RectTransform> zSortedViewElements = new();
+        private readonly List<ViewItem> viewItems = new();
+        private readonly List<RectTransform> zSortedViewItems = new();
         private StateProvider currentStateProvider;
 
         private int lastItemOffset;
@@ -45,42 +45,42 @@ namespace Lysionium
         private float beforeAngleDegree;
         private const float angleDegreeEpsilon = 0.1f;
 
-        private event HandleEndAnimation OnEndRotateAngle;
+        private event EndAnimationHandler OnEndRotateAngle;
 
         protected override void CommonInitCore()
         {
-            itemHeight = _viewElementPrefab.GetComponent<RectTransform>().rect.height;
+            itemHeight = _viewItemPrefab.GetComponent<RectTransform>().rect.height;
             beforeAngleDegree = -1f;
         }
 
         /// <summary>
         /// 指定のインデックスを 0 ~ 要素数 のループ空間に変換して設定する
         /// </summary>
-        public void FocusAngleIndex(int index, HandleEndAnimation onEndRotateAngle = null)
+        public void FocusAngleIndex(int index, EndAnimationHandler onEndRotateAngle = null)
         {
-            AngleIndex = (index + viewElements.Count) % viewElements.Count;
+            AngleIndex = (index + viewItems.Count) % viewItems.Count;
             if (EventSystem.current != null)
             {
-                EventSystem.current.SetSelectedGameObject(viewElements[AngleIndex].gameObject);
-                QueueSelect(gameObject, viewElements[AngleIndex].gameObject, CursorPlay.None);
+                EventSystem.current.SetSelectedGameObject(viewItems[AngleIndex].gameObject);
+                QueueSelect(gameObject, viewItems[AngleIndex].gameObject, CursorPlay.None);
             }
             OnEndRotateAngle += onEndRotateAngle;
         }
 
         private void LateUpdate()
         {
-            if (viewElements.Count == 0) return;
+            if (viewItems.Count == 0) return;
 
             // カーソル移動で回転する
             var selected = EventSystem.current != null ? EventSystem.current.currentSelectedGameObject : null;
-            if (selected != null && selected.TryGetComponent<ViewElement>(out var selectedViewElement))
+            if (selected != null && selected.TryGetComponent<ViewItem>(out var selectedViewItem))
             {
-                var selectedElementIndex = viewElements.IndexOf(selectedViewElement);
-                if (selectedElementIndex != -1) { AngleIndex = selectedElementIndex; }
+                var selectedItemIndex = viewItems.IndexOf(selectedViewItem);
+                if (selectedItemIndex != -1) { AngleIndex = selectedItemIndex; }
             }
 
             // 目標の要素まで回転させる
-            var targetAngle = 360f * AngleIndex / viewElements.Count;
+            var targetAngle = 360f * AngleIndex / viewItems.Count;
             AngleDegree = Mathf.LerpAngle(AngleDegree, targetAngle, _elasticity);
             if (Mathf.Abs(AngleDegree - targetAngle) <= angleDegreeEpsilon)
             {
@@ -95,17 +95,17 @@ namespace Lysionium
             if (AngleDegree == beforeAngleDegree) return;
             beforeAngleDegree = AngleDegree;
 
-            for (int i = 0; i < viewElements.Count; i++)
+            for (int i = 0; i < viewItems.Count; i++)
             {
-                var viewElement = viewElements[i];
-                var viewElementTransform = (RectTransform)viewElement.transform;
-                viewElementTransform.anchoredPosition3D = GetCarouselAnchoredPosition((float)i / viewElements.Count);
+                var viewItem = viewItems[i];
+                var viewItemTransform = (RectTransform)viewItem.transform;
+                viewItemTransform.anchoredPosition3D = GetCarouselAnchoredPosition((float)i / viewItems.Count);
             }
 
-            zSortedViewElements.Sort((a, b) => -a.anchoredPosition3D.z.CompareTo(b.anchoredPosition3D.z));
-            for (int i = zSortedViewElements.Count - 1; i >= 0; i--)
+            zSortedViewItems.Sort((a, b) => -a.anchoredPosition3D.z.CompareTo(b.anchoredPosition3D.z));
+            for (int i = zSortedViewItems.Count - 1; i >= 0; i--)
             {
-                zSortedViewElements[i].SetSiblingIndex(i);
+                zSortedViewItems[i].SetSiblingIndex(i);
             }
         }
 
@@ -118,8 +118,8 @@ namespace Lysionium
         }
 
         public override void SetParameters(
-            IReadOnlyList<object> list, IElementHandler handler, IListMenuManager manager, IListMenuArg arg,
-            ref IElementsSubviewStateProvider stateProvider)
+            IReadOnlyList<object> list, IViewItemHandler handler, IListMenuManager manager, IListMenuArg arg,
+            ref ISubviewStateProvider stateProvider)
         {
             if (stateProvider == null) { stateProvider = new StateProvider(); }
             if (!(stateProvider is StateProvider local)) throw new System.ArgumentException(
@@ -129,7 +129,7 @@ namespace Lysionium
             if (currentStateProvider != null)
             {
                 currentStateProvider.AngleIndex = AngleIndex;
-                currentStateProvider.SelectedIndex = viewElements.IndexOf(LastSelectedViewElement);
+                currentStateProvider.SelectedIndex = viewItems.IndexOf(LastSelectedItem);
             }
 
             // 表示更新
@@ -140,73 +140,73 @@ namespace Lysionium
                 this.list.Add(list[i]);
             }
             SetArg(manager, arg);
-            InitElements();
+            InitViewItems();
             SetStatusCode(0);
 
             // 新しい StateProvider に切り替える
             currentStateProvider = local;
             AngleIndex = local.AngleIndex;
-            AngleDegree = 360f * AngleIndex / viewElements.Count;
+            AngleDegree = 360f * AngleIndex / viewItems.Count;
             local.ApplySelectedIndex(this);
         }
 
-        private void InitElements()
+        private void InitViewItems()
         {
-            AdjustViewElements(list.Count);
+            AdjustViewItems(list.Count);
 
-            for (int i = 0; i < viewElements.Count; i++)
+            for (int i = 0; i < viewItems.Count; i++)
             {
-                var viewElement = viewElements[i];
-                viewElement.SetElement(list[i], handler);
+                var viewItem = viewItems[i];
+                viewItem.Bind(list[i], handler);
             }
 
             if (_prevButton != null)
             {
                 _prevButton.Initialize(this);
-                _prevButton.SetElement(
-                    SelectOption.Create<IListMenuManager, IListMenuArg>("", delegate { FocusAngleIndex(AngleIndex - 1); }), SelectOptionHandler.Instance);
+                _prevButton.Bind(
+                    SelectOption.Create<IListMenuManager, IListMenuArg>("", delegate { FocusAngleIndex(AngleIndex - 1); }), SelectOptionViewItemHandler.Instance);
                 _prevButton.SetVisible(true, true);
             }
             if (_nextButton != null)
             {
                 _nextButton.Initialize(this);
-                _nextButton.SetElement(
-                    SelectOption.Create<IListMenuManager, IListMenuArg>("", delegate { FocusAngleIndex(AngleIndex + 1); }), SelectOptionHandler.Instance);
+                _nextButton.Bind(
+                    SelectOption.Create<IListMenuManager, IListMenuArg>("", delegate { FocusAngleIndex(AngleIndex + 1); }), SelectOptionViewItemHandler.Instance);
                 _nextButton.SetVisible(true, true);
             }
         }
 
-        private void AdjustViewElements(int count)
+        private void AdjustViewItems(int count)
         {
-            if (viewElements.Count != count)
+            if (viewItems.Count != count)
             {
-                // 足りない ViewElement を生成する
-                while (viewElements.Count < count)
+                // 足りない ViewItem を生成する
+                while (viewItems.Count < count)
                 {
-                    var viewElement = Instantiate(_viewElementPrefab, _content);
-                    viewElement.Initialize(this);
+                    var viewItem = Instantiate(_viewItemPrefab, _content);
+                    viewItem.Initialize(this);
 
-                    viewElements.Add(viewElement);
-                    ViewElement.SetHorizontalNavigation(viewElements, viewElements.Count - 1, loop: true); // ナビゲーションを明示したほうが長押し移動がスムーズになる？
+                    viewItems.Add(viewItem);
+                    ViewItem.SetHorizontalNavigation(viewItems, viewItems.Count - 1, loop: true); // ナビゲーションを明示したほうが長押し移動がスムーズになる？
                 }
 
-                // 不要な ViewElement は削除する
-                if (viewElements.Count > count)
+                // 不要な ViewItem は削除する
+                if (viewItems.Count > count)
                 {
-                    for (int i = viewElements.Count - 1; i >= count; i--)
+                    for (int i = viewItems.Count - 1; i >= count; i--)
                     {
-                        Destroy(viewElements[i].gameObject);
+                        Destroy(viewItems[i].gameObject);
                     }
-                    viewElements.RemoveRange(count, viewElements.Count - count);
-                    ViewElement.SetHorizontalNavigation(viewElements, viewElements.Count - 1, loop: true);
+                    viewItems.RemoveRange(count, viewItems.Count - count);
+                    ViewItem.SetHorizontalNavigation(viewItems, viewItems.Count - 1, loop: true);
                 }
 
-                zSortedViewElements.Clear();
-                zSortedViewElements.AddRange(viewElements.Select(x => (RectTransform)x.transform));
+                zSortedViewItems.Clear();
+                zSortedViewItems.AddRange(viewItems.Select(x => (RectTransform)x.transform));
             }
         }
 
-        private class StateProvider : IElementsSubviewStateProvider
+        private class StateProvider : ISubviewStateProvider
         {
             public int AngleIndex { get; set; }
             public int SelectedIndex { get; set; }
@@ -219,10 +219,10 @@ namespace Lysionium
 
             public void ApplySelectedIndex(Carousel3DSubview subview)
             {
-                if (SelectedIndex <= 0 || subview.viewElements.Count <= SelectedIndex || EventSystem.current == null)
+                if (SelectedIndex <= 0 || subview.viewItems.Count <= SelectedIndex || EventSystem.current == null)
                 {
                     // 選択オブジェクトが見つからなければ最初の項目を選択
-                    if (ViewElement.TryFirstNotNull(subview.viewElements, out var first))
+                    if (ViewItem.TryFirstNotNull(subview.viewItems, out var first))
                     {
                         //EventSystem.current.SetSelectedGameObject(first.gameObject); // これだと Show メソッドで interactable が true になる前に選択してしまう
                         subview.QueueSelect(subview.gameObject, first.gameObject, CursorPlay.None);
@@ -230,7 +230,7 @@ namespace Lysionium
                     return;
                 }
 
-                subview.QueueSelect(subview.gameObject, subview.viewElements[SelectedIndex].gameObject, CursorPlay.None);
+                subview.QueueSelect(subview.gameObject, subview.viewItems[SelectedIndex].gameObject, CursorPlay.None);
             }
         }
     }

@@ -1,7 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-
 using System.Linq;
 
 namespace Lysionium
@@ -19,9 +16,9 @@ namespace Lysionium
         public List<ISelectOption> BackAnchorList { get; set; } = new() { BackSelectOption.Instance };
 
         private object prevViewStateHolder;
-        private IElementsSubviewStateProvider primaryCommandSubviewStateProvider;
-        private IElementsSubviewStateProvider captionBoxSubviewStateProvider;
-        private IElementsSubviewStateProvider backAnchorSubviewStateProvider;
+        private ISubviewStateProvider primaryCommandSubviewStateProvider;
+        private ISubviewStateProvider captionBoxSubviewStateProvider;
+        private ISubviewStateProvider backAnchorSubviewStateProvider;
 
         public Builder ShowTemplate(IReadOnlyList<object> widgetOptions, TMgr manager, TArg arg, object viewStateHolder = null)
         {
@@ -50,20 +47,20 @@ namespace Lysionium
         {
             manager
                 .GetSubview(WidgetsSubviewName)
-                .Show(List, SelectOptionHandler.Instance, manager, arg, ref primaryCommandSubviewStateProvider);
+                .Show(List, SelectOptionViewItemHandler.Instance, manager, arg, ref primaryCommandSubviewStateProvider);
 
             if (Title != null)
             {
                 manager
                     .GetSubview(CaptionBoxSubviewName)
-                    .Show(TitleSingle, ElementToStringHandler.Instance, manager, arg, ref captionBoxSubviewStateProvider);
+                    .Show(TitleSingle, ToStringViewItemHandler.Instance, manager, arg, ref captionBoxSubviewStateProvider);
             }
 
             if (BackAnchorSubviewName != null)
             {
                 manager
                     .GetSubview(BackAnchorSubviewName)
-                    .Show(BackAnchorList, SelectOptionHandler.Instance, manager, arg, ref backAnchorSubviewStateProvider);
+                    .Show(BackAnchorList, SelectOptionViewItemHandler.Instance, manager, arg, ref backAnchorSubviewStateProvider);
             }
         }
 
@@ -84,14 +81,14 @@ namespace Lysionium
                 this.parent = parent;
             }
 
-            public Builder HeadStack(params object[] elements)
+            public Builder HeadStack(params object[] items)
             {
-                return Head(StackViewWidget.CreateOption(elements.Select(x => ("1*", x)).ToArray()));
+                return Head(StackViewWidget.CreateOption(items.Select(x => ("1*", x)).ToArray()));
             }
 
-            public Builder TailStack(params object[] elements)
+            public Builder TailStack(params object[] items)
             {
-                return Tail(StackViewWidget.CreateOption(elements.Select(x => ("1*", x)).ToArray()));
+                return Tail(StackViewWidget.CreateOption(items.Select(x => ("1*", x)).ToArray()));
             }
         }
     }

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,7 +9,7 @@ using HSVPicker;
 namespace Lysionium
 {
     [AddComponentMenu("UI/Lysionium/Subviews/LUI Color Picker Subview")]
-    public class ColorPickerSubview : ElementsSubview
+    public class ColorPickerSubview : Subview
     {
         [SerializeField] private ColorPicker _colorPicker = null;
         public ColorPicker ColorPicker => _colorPicker;
@@ -27,13 +27,13 @@ namespace Lysionium
         }
 
         public override void SetParameters(
-            IReadOnlyList<object> list, IElementHandler handler, IListMenuManager manager, IListMenuArg arg,
-            ref IElementsSubviewStateProvider stateProvider)
+            IReadOnlyList<object> list, IViewItemHandler handler, IListMenuManager manager, IListMenuArg arg,
+            ref ISubviewStateProvider stateProvider)
             => throw new System.NotSupportedException();
 
         public void SetParameters(
             Color color, HandleClose onClose, IListMenuManager manager, IListMenuArg arg,
-            ref IElementsSubviewStateProvider stateProvider)
+            ref ISubviewStateProvider stateProvider)
         {
             if (stateProvider == null) { stateProvider = new StateProvider(); }
             if (!(stateProvider is StateProvider local)) throw new System.ArgumentException(
@@ -55,7 +55,7 @@ namespace Lysionium
             EventSystem.current.SetSelectedGameObject(_initialSelectable.gameObject);
         }
 
-        private class StateProvider : IElementsSubviewStateProvider
+        private class StateProvider : ISubviewStateProvider
         {
             public void Reset()
             {

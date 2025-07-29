@@ -16,7 +16,7 @@ namespace Roguegard.Device
             screen = new ChoicesMenuScreen<MMgr, MArg>(message);
         }
 
-        public ChoicesMenuScreen(GetElementName<MMgr, MArg> getMessage)
+        public ChoicesMenuScreen(ItemNameSelector<MMgr, MArg> getMessage)
         {
             screen = new ChoicesMenuScreen<MMgr, MArg>(getMessage);
         }
@@ -25,8 +25,8 @@ namespace Roguegard.Device
         /// 「保存して戻りますか？」のダイアログ画面を生成する
         /// </summary>
         public static ChoicesMenuScreen SaveBackDialog(
-            HandleClickElement<MMgr, MArg> saveAction,
-            HandleClickElement<MMgr, MArg> notSaveAction = null)
+            ClickItemHandler<MMgr, MArg> saveAction,
+            ClickItemHandler<MMgr, MArg> notSaveAction = null)
         {
             var selectOption = SaveBackDialog(":SaveBackDialogMsg", ":Overwrite", saveAction, ":DontSave", notSaveAction);
             return selectOption;
@@ -37,8 +37,8 @@ namespace Roguegard.Device
         /// </summary>
         public static ChoicesMenuScreen SaveBackDialog(
             string message,
-            string saveName, HandleClickElement<MMgr, MArg> saveAction,
-            string notSaveName, HandleClickElement<MMgr, MArg> notSaveAction)
+            string saveName, ClickItemHandler<MMgr, MArg> saveAction,
+            string notSaveName, ClickItemHandler<MMgr, MArg> notSaveAction)
         {
             var selectOption = new ChoicesMenuScreen(message)
 
@@ -65,7 +65,7 @@ namespace Roguegard.Device
             manager.PopMenuScreen(2);
         }
 
-        public ChoicesMenuScreen Option(string name, HandleClickElement<MMgr, MArg> onClick)
+        public ChoicesMenuScreen Option(string name, ClickItemHandler<MMgr, MArg> onClick)
         {
             screen.Option(name, onClick);
             return this;

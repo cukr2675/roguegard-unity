@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,8 +7,8 @@ namespace Lysionium
     /// <summary>
     /// 項目のスクロールが必要なメニュー向け ViewTemplate
     /// </summary>
-    public class ScrollViewTemplate<TElm, TMgr, TArg> : ListViewTemplate<TElm, TMgr, TArg>
-        where TElm : class
+    public class ScrollViewTemplate<TItem, TMgr, TArg> : ListViewTemplate<TItem, TMgr, TArg>
+        where TItem : class
         where TMgr : IListMenuManager
         where TArg : IListMenuArg
     {
@@ -18,7 +18,7 @@ namespace Lysionium
         public List<ISelectOption> BackAnchorList { get; set; } = new() { BackSelectOption.Instance };
 
         /// <summary>
-        /// このインスタンスのデリゲート実行前に <see cref="SelectOptionHandler"/> の処理を挟む
+        /// このインスタンスのデリゲート実行前に <see cref="SelectOptionViewItemHandler"/> の処理を挟む
         /// (リストの前後に <see cref="ISelectOption"/> を入れる場合を想定)
         /// </summary>
         public bool EnableSelectOptionProxy
@@ -28,14 +28,14 @@ namespace Lysionium
         }
 
         private object prevViewStateHolder;
-        private IElementsSubviewStateProvider scrollSubviewStateProvider;
-        private IElementsSubviewStateProvider captionBoxSubviewStateProvider;
-        private IElementsSubviewStateProvider backAnchorSubviewStateProvider;
+        private ISubviewStateProvider scrollSubviewStateProvider;
+        private ISubviewStateProvider captionBoxSubviewStateProvider;
+        private ISubviewStateProvider backAnchorSubviewStateProvider;
 
-        private readonly ButtonElementHandler<TElm, TMgr, TArg> scrollSubviewHandler = new();
+        private readonly ButtonViewItemHandler<TItem, TMgr, TArg> scrollSubviewHandler = new();
 
         public Builder ShowTemplate(
-            IReadOnlyList<TElm> list, TMgr manager, TArg arg, object viewStateHolder = null)
+            IReadOnlyList<TItem> list, TMgr manager, TArg arg, object viewStateHolder = null)
         {
             if (list == null) throw new System.ArgumentNullException(nameof(list));
             if (manager == null) throw new System.ArgumentNullException(nameof(manager));
@@ -72,14 +72,14 @@ namespace Lysionium
             {
                 manager
                     .GetSubview(CaptionBoxSubviewName)
-                    .Show(TitleSingle, ElementToStringHandler.Instance, manager, arg, ref captionBoxSubviewStateProvider);
+                    .Show(TitleSingle, ToStringViewItemHandler.Instance, manager, arg, ref captionBoxSubviewStateProvider);
             }
 
             if (BackAnchorSubviewName != null)
             {
                 manager
                     .GetSubview(BackAnchorSubviewName)
-                    .Show(BackAnchorList, SelectOptionHandler.Instance, manager, arg, ref backAnchorSubviewStateProvider);
+                    .Show(BackAnchorList, SelectOptionViewItemHandler.Instance, manager, arg, ref backAnchorSubviewStateProvider);
             }
         }
 
@@ -90,41 +90,41 @@ namespace Lysionium
             if (BackAnchorSubviewName != null) { manager.GetSubview(BackAnchorSubviewName).Hide(back); }
         }
 
-        public class Builder : BaseListBuilder<Builder>, IButtonElementHandlerBuilder<TElm, TMgr, TArg, Builder>
+        public class Builder : BaseListBuilder<Builder>, IButtonViewItemHandlerBuilder<TItem, TMgr, TArg, Builder>
         {
-            private readonly ScrollViewTemplate<TElm, TMgr, TArg> parent;
+            private readonly ScrollViewTemplate<TItem, TMgr, TArg> parent;
 
-            public Builder(ScrollViewTemplate<TElm, TMgr, TArg> parent, TMgr manager, TArg arg)
+            public Builder(ScrollViewTemplate<TItem, TMgr, TArg> parent, TMgr manager, TArg arg)
                 : base(parent, manager, arg)
             {
                 this.parent = parent;
             }
 
-            public Builder NameFrom(GetElementName<TElm, TMgr, TArg> nameFrom)
+            public Builder NameFrom(ItemNameSelector<TItem, TMgr, TArg> selector)
             {
                 AssertNotBuilt();
 
                 if (parent.scrollSubviewHandler.GetName != null) { Debug.LogWarning($"{nameof(NameFrom)} が多重購読されました。"); }
 
-                parent.scrollSubviewHandler.GetName += nameFrom;
+                parent.scrollSubviewHandler.GetName += selector;
                 return this;
             }
 
-            public Builder StyleFrom(GetElementStyle<TElm, TMgr, TArg> styleFrom)
+            public Builder StyleFrom(ItemStyleSelector<TItem, TMgr, TArg> selector)
             {
                 AssertNotBuilt();
 
                 if (parent.scrollSubviewHandler.GetStyle != null) { Debug.LogWarning($"{nameof(StyleFrom)} が多重購読されました。"); }
 
-                parent.scrollSubviewHandler.GetStyle += styleFrom;
+                parent.scrollSubviewHandler.GetStyle += selector;
                 return this;
             }
 
-            public Builder OnClick(HandleClickElement<TElm, TMgr, TArg> onClick)
+            public Builder OnClick(ClickItemHandler<TItem, TMgr, TArg> handler)
             {
                 AssertNotBuilt();
 
-                parent.scrollSubviewHandler.HandleClick += onClick;
+                parent.scrollSubviewHandler.HandleClick += handler;
                 return this;
             }
         }

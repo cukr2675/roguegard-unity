@@ -1,9 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-using UnityEngine.EventSystems;
 using TMPro;
+using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace Lysionium
 {
@@ -12,26 +9,26 @@ namespace Lysionium
     public class InputFieldViewWidget : ViewWidget, ISelectHandler
     {
         private IWidgetOption widgetOption;
-        private ElementsSubviewBase _parent;
+        private SubviewBase _parent;
         private TMP_InputField inputField;
         private bool queuedDeactivateInputField;
 
         public override string WidgetName => widgetOption.Name;
-        protected override ElementsSubviewBase Parent => _parent;
+        protected override SubviewBase Parent => _parent;
 
         public delegate string HandleValueChanged<TMgr, TArg>(TMgr manager, TArg arg, string value);
 
         public override bool TryInstantiateWidget(
-            object element, IElementHandler handler, ElementsSubviewBase elementsSubview, out ViewWidget viewWidget)
+            object item, IViewItemHandler handler, SubviewBase subview, out ViewWidget viewWidget)
         {
-            if (!(element is IWidgetOption widgetOption))
+            if (item is not IWidgetOption widgetOption)
             {
                 viewWidget = null;
                 return false;
             }
 
             var inputFieldViewWidget = Instantiate(this);
-            inputFieldViewWidget._parent = elementsSubview;
+            inputFieldViewWidget._parent = subview;
             inputFieldViewWidget.widgetOption = widgetOption;
             inputFieldViewWidget.inputField = inputFieldViewWidget.GetComponent<TMP_InputField>();
             inputFieldViewWidget.Initialize();
@@ -50,7 +47,7 @@ namespace Lysionium
         }
 
         public static IWidgetOption CreateOption<TMgr, TArg>(
-            GetElementName<TMgr, TArg> getValue, HandleValueChanged<TMgr, TArg> handleValueChanged,
+            ItemNameSelector<TMgr, TArg> getValue, HandleValueChanged<TMgr, TArg> handleValueChanged,
             TMP_InputField.ContentType contentType = TMP_InputField.ContentType.Standard, string name = null)
         {
             return new WidgetOption<TMgr, TArg>()
@@ -91,7 +88,7 @@ namespace Lysionium
         {
             public string Name { get; set; }
             public TMP_InputField.ContentType ContentType { get; set; }
-            public GetElementName<TMgr, TArg> GetValue { get; set; }
+            public ItemNameSelector<TMgr, TArg> GetValue { get; set; }
             public HandleValueChanged<TMgr, TArg> HandleValueChanged { get; set; }
 
             string IWidgetOption.GetValue(IListMenuManager manager, IListMenuArg arg)

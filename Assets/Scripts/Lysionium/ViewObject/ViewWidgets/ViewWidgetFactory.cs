@@ -1,5 +1,3 @@
-﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Lysionium
@@ -11,14 +9,14 @@ namespace Lysionium
     public class ViewWidgetFactory : MonoBehaviour
     {
         [SerializeField] private ViewWidget[] _ViewWidgetPrefabs = null;
-        [SerializeField] private ViewElement _fallbackViewElementPrefab = null;
+        [SerializeField] private ViewItem _fallbackViewItemPrefab = null;
 
-        public static bool TryCreateViewWidget(object element, IElementHandler handler, ElementsSubviewBase elementsSubview, out RectTransform viewWidget)
+        public static bool TryCreateViewWidget(object item, IViewItemHandler handler, SubviewBase subview, out RectTransform viewWidget)
         {
-            var transform = elementsSubview.transform;
+            var transform = subview.transform;
             while (LuiUtility.TryGetComponentInRecursiveParents<ViewWidgetFactory>(transform, out var library))
             {
-                if (library.TryCreate(element, handler, elementsSubview, out viewWidget)) return true;
+                if (library.TryCreate(item, handler, subview, out viewWidget)) return true;
 
                 transform = library.transform.parent;
             }
@@ -26,22 +24,22 @@ namespace Lysionium
             return false;
         }
 
-        private bool TryCreate(object element, IElementHandler handler, ElementsSubviewBase elementsSubview, out RectTransform viewWidget)
+        private bool TryCreate(object item, IViewItemHandler handler, SubviewBase subview, out RectTransform viewWidget)
         {
             foreach (var viewWidgetPrefab in _ViewWidgetPrefabs)
             {
-                if (viewWidgetPrefab.TryInstantiateWidget(element, handler, elementsSubview, out var widget))
+                if (viewWidgetPrefab.TryInstantiateWidget(item, handler, subview, out var widget))
                 {
                     viewWidget = (RectTransform)widget.transform;
                     return true;
                 }
             }
-            if (_fallbackViewElementPrefab != null)
+            if (_fallbackViewItemPrefab != null)
             {
-                var viewElement = Instantiate(_fallbackViewElementPrefab);
-                viewElement.Initialize(elementsSubview);
-                viewElement.SetElement(element, handler);
-                viewWidget = (RectTransform)viewElement.transform;
+                var viewItem = Instantiate(_fallbackViewItemPrefab);
+                viewItem.Initialize(subview);
+                viewItem.Bind(item, handler);
+                viewWidget = (RectTransform)viewItem.transform;
                 return true;
             }
             viewWidget = null;

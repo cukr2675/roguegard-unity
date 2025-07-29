@@ -13,9 +13,9 @@ namespace Roguegard.Device
         public List<ISelectOption> BackAnchorList { get; set; } = new() { BackSelectOption.Instance };
 
         private object prevViewStateHolder;
-        private IElementsSubviewStateProvider scrollSubviewStateProvider;
-        private IElementsSubviewStateProvider captionBoxSubviewStateProvider;
-        private IElementsSubviewStateProvider backAnchorSubviewStateProvider;
+        private ISubviewStateProvider scrollSubviewStateProvider;
+        private ISubviewStateProvider captionBoxSubviewStateProvider;
+        private ISubviewStateProvider backAnchorSubviewStateProvider;
 
         private readonly ElementHandler scrollSubviewHandler = new();
 
@@ -63,14 +63,14 @@ namespace Roguegard.Device
             {
                 manager
                     .GetSubview(CaptionBoxSubviewName)
-                    .Show(TitleSingle, ElementToStringHandler.Instance, manager, arg, ref captionBoxSubviewStateProvider);
+                    .Show(TitleSingle, ToStringViewItemHandler.Instance, manager, arg, ref captionBoxSubviewStateProvider);
             }
 
             if (BackAnchorSubviewName != null)
             {
                 manager
                     .GetSubview(BackAnchorSubviewName)
-                    .Show(BackAnchorList, SelectOptionHandler.Instance, manager, arg, ref backAnchorSubviewStateProvider);
+                    .Show(BackAnchorList, SelectOptionViewItemHandler.Instance, manager, arg, ref backAnchorSubviewStateProvider);
             }
         }
 
@@ -127,7 +127,7 @@ namespace Roguegard.Device
                 return this;
             }
 
-            public Builder OnClick(HandleClickElement<T, MMgr, MArg> method)
+            public Builder OnClick(ClickItemHandler<T, MMgr, MArg> method)
             {
                 AssertNotBuilt();
 
@@ -136,10 +136,10 @@ namespace Roguegard.Device
             }
         }
 
-        private class ElementHandler : IRogueElementHandler, IButtonElementHandler
+        private class ElementHandler : IRogueElementHandler, IButtonViewItemHandler
         {
             public GetInfo<Color?, Sprite, Color?, int?, float?, string, string, bool> GetInfo { get; set; }
-            public HandleClickElement<T, MMgr, MArg> HandleClick { get; set; }
+            public ClickItemHandler<T, MMgr, MArg> HandleClick { get; set; }
 
             public string GetName(object elementObj, IListMenuManager manager, IListMenuArg arg)
             {
@@ -162,7 +162,7 @@ namespace Roguegard.Device
 
             public string GetStyle(object element, IListMenuManager manager, IListMenuArg arg) => null;
 
-            void IButtonElementHandler.HandleClick(object elementObj, IListMenuManager iManager, IListMenuArg iArg)
+            void IButtonViewItemHandler.HandleClick(object elementObj, IListMenuManager iManager, IListMenuArg iArg)
             {
                 var element = (T)elementObj;
                 var manager = (MMgr)iManager;

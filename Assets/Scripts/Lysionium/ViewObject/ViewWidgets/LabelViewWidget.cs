@@ -1,10 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-using UnityEngine.UI;
-using UnityEngine.EventSystems;
 using TMPro;
+using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 namespace Lysionium
 {
@@ -21,26 +18,26 @@ namespace Lysionium
         [Space, SerializeField] private Button.ButtonClickedEvent _onClick = null;
 
         private IWidgetOption widgetOption;
-        private ElementsSubviewBase _parent;
+        private SubviewBase _parent;
 
-        protected override ElementsSubviewBase Parent => _parent;
+        protected override SubviewBase Parent => _parent;
 
         public override bool TryInstantiateWidget(
-            object element, IElementHandler handler, ElementsSubviewBase elementsSubview, out ViewWidget viewWidget)
+            object item, IViewItemHandler handler, SubviewBase subview, out ViewWidget viewWidget)
         {
-            if (element is string text)
+            if (item is string text)
             {
-                var labelViewWidget = Instantiate(this, elementsSubview.transform);
-                labelViewWidget._parent = elementsSubview;
+                var labelViewWidget = Instantiate(this, subview.transform);
+                labelViewWidget._parent = subview;
                 labelViewWidget.Initialize(text);
                 viewWidget = labelViewWidget;
                 return true;
             }
-            else if (element is IWidgetOption widgetOption)
+            else if (item is IWidgetOption widgetOption)
             {
-                var baseText = widgetOption.GetText(elementsSubview.Manager, elementsSubview.Arg);
-                var labelViewWidget = Instantiate(this, elementsSubview.transform);
-                labelViewWidget._parent = elementsSubview;
+                var baseText = widgetOption.GetText(subview.Manager, subview.Arg);
+                var labelViewWidget = Instantiate(this, subview.transform);
+                labelViewWidget._parent = subview;
                 labelViewWidget.widgetOption = widgetOption;
                 labelViewWidget.Initialize(baseText);
                 viewWidget = labelViewWidget;
@@ -93,7 +90,7 @@ namespace Lysionium
             widgetOption.HandleClickLink(linkInfo.GetLinkText(), _parent.Manager, _parent.Arg);
         }
 
-        public static IWidgetOption CreateOption<TMgr, TArg>(string text, HandleClickElement<string, TMgr, TArg> onClickLink = null)
+        public static IWidgetOption CreateOption<TMgr, TArg>(string text, ClickItemHandler<string, TMgr, TArg> onClickLink = null)
         {
             return new WidgetOption<TMgr, TArg>()
             {
@@ -103,7 +100,7 @@ namespace Lysionium
         }
 
         public static IWidgetOption CreateOption<TMgr, TArg>(
-            GetElementName<TMgr, TArg> getText, HandleClickElement<string, TMgr, TArg> onClickLink = null)
+            ItemNameSelector<TMgr, TArg> getText, ClickItemHandler<string, TMgr, TArg> onClickLink = null)
         {
             return new WidgetOption<TMgr, TArg>()
             {
@@ -122,8 +119,8 @@ namespace Lysionium
         private class WidgetOption<TMgr, TArg> : IWidgetOption
         {
             public string WidgetName { get; set; }
-            public GetElementName<TMgr, TArg> GetText { get; set; }
-            public HandleClickElement<string, TMgr, TArg> HandleClickLink { get; set; }
+            public ItemNameSelector<TMgr, TArg> GetText { get; set; }
+            public ClickItemHandler<string, TMgr, TArg> HandleClickLink { get; set; }
 
             string IWidgetOption.GetText(IListMenuManager manager, IListMenuArg arg)
             {

@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Roguegard.Device
 {
-    public interface IPaintElementsSubview : IElementsSubview
+    public interface IPaintElementsSubview : ISubview
     {
         Spanning<DotterBoard> Boards { get; }
         Color32 MainColor { get; }

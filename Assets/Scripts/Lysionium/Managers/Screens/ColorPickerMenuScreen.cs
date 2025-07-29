@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -48,7 +48,7 @@ namespace Lysionium
 
         private class ViewTemplate : ViewTemplate<TMgr, TArg>
         {
-            private IElementsSubviewStateProvider colorPickerSubviewStateProvider;
+            private ISubviewStateProvider colorPickerSubviewStateProvider;
             private Color color;
             private event ColorPickerSubview.HandleClose HandleClose;
 
