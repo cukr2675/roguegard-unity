@@ -13,7 +13,7 @@ namespace Roguegard
         private static readonly CommandMenu nextMenu = new();
         private static readonly PartyBoardCharacterCreationMenu newMenu = new();
 
-        private readonly ScrollViewTemplate<RogueObj, MMgr, MArg> view = new()
+        private readonly ScrollViewData<RogueObj, MMgr, MArg> view = new()
         {
         };
 
@@ -30,7 +30,7 @@ namespace Roguegard
             }
             elms.Add(null);
 
-            view.ShowTemplate(elms, manager, arg)
+            view.Show(elms, manager, arg)
                 ?
                 
                 .NameFrom((obj, manager, arg) =>
@@ -98,13 +98,13 @@ namespace Roguegard
         {
             private static readonly PartyBoardCharacterCreationMenu nextMenu = new();
 
-            private readonly MainMenuViewTemplate<MMgr, MArg> view = new()
+            private readonly MainMenuViewData<MMgr, MArg> view = new()
             {
             };
 
             public override void OpenScreen(in MMgr manager, in MArg arg)
             {
-                view.ShowTemplate(manager, arg)
+                view.Show(manager, arg)
                     ?.Option("交代", Change)
                     .Option("加入", Invite)
                     .Option("編集", Edit)

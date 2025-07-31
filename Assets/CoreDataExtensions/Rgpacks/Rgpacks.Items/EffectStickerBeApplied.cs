@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -27,13 +27,13 @@ namespace Roguegard.Rgpacks
 
         private class Menu : RogueMenuScreen
         {
-            private readonly VariableWidgetsViewTemplate<MMgr, MArg> view = new()
+            private readonly VariableWidgetsViewData<MMgr, MArg> view = new()
             {
             };
 
             public override void OpenScreen(in MMgr manager, in MArg arg)
             {
-                view.ShowTemplate(System.Array.Empty<object>(), manager, arg)
+                view.Show(System.Array.Empty<object>(), manager, arg)
                     ?
                     .Tail(
                         new object[]

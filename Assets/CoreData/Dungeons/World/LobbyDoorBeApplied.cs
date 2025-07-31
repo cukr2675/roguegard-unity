@@ -36,7 +36,7 @@ namespace Roguegard
 
         private class RogueMenu : RogueMenuScreen
         {
-            private readonly ScrollViewTemplate<ISelectOption, MMgr, MArg> view = new()
+            private readonly ScrollViewData<ISelectOption, MMgr, MArg> view = new()
             {
             };
 
@@ -50,7 +50,7 @@ namespace Roguegard
                     selectOptions.Add(option);
                 }
 
-                view.ShowTemplate(selectOptions, manager, arg)
+                view.Show(selectOptions, manager, arg)
                     ?
                     .Build();
             }

@@ -16,7 +16,7 @@ namespace Roguegard.Device
         private CharacterCreationOptionMenu characterCreationOptionMenu;
         private StartingItemTableMenu startingItemTableMenu;
 
-        private readonly VariableWidgetsViewTemplate<MMgr, MArg> view = new()
+        private readonly VariableWidgetsViewData<MMgr, MArg> view = new()
         {
         };
 
@@ -71,7 +71,7 @@ namespace Roguegard.Device
                 }
             }
 
-            view.ShowTemplate(elms, manager, arg)
+            view.Show(elms, manager, arg)
                 ?
                 .HeadStack("アセットID", InputFieldViewWidget.CreateOption<MMgr, MArg>(
                     (manager, arg) => ((PropertiedCmnData)arg.Arg.Other).Cmn,
@@ -87,7 +87,7 @@ namespace Roguegard.Device
             private readonly CharacterCreationAddMenu characterCreationAddMenu = new(RoguegardSettings.CharacterCreationDatabase);
             private readonly CharacterCreationOptionMenu characterCreationOptionMenu = new(RoguegardSettings.CharacterCreationDatabase);
 
-            private readonly ScrollViewTemplate<object, MMgr, MArg> view;
+            private readonly ScrollViewData<object, MMgr, MArg> view;
 
             public StartingItemTableMenu()
             {
@@ -118,7 +118,7 @@ namespace Roguegard.Device
                     elms.Add(table[i][0]);
                 }
 
-                view.ShowTemplate(elms, manager, arg)
+                view.Show(elms, manager, arg)
                     ?
                     .Tail(SelectOption.Create<MMgr, MArg>(
                         "+ アイテムを追加",

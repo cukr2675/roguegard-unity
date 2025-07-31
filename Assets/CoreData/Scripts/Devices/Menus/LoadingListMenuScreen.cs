@@ -12,7 +12,7 @@ namespace Roguegard.Device
 
         private float oldProgress;
 
-        private readonly DialogViewTemplate<MMgr, MArg> view = new()
+        private readonly DialogViewData<MMgr, MArg> view = new()
         {
             BackAnchorSubviewName = null,
         };
@@ -31,7 +31,7 @@ namespace Roguegard.Device
         public override void OpenScreen(in MMgr manager, in MArg arg)
         {
             oldProgress = 0f;
-            view.ShowTemplate(text, manager, arg)
+            view.Show(text, manager, arg)
                 ?.Tail(ProgressBarViewWidget.CreateOption<MMgr, MArg>((manager, arg) =>
                 {
                     var progress = getProgress(manager, arg);

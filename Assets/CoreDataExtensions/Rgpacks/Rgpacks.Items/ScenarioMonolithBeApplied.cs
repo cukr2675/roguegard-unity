@@ -29,7 +29,7 @@ namespace Roguegard.Rgpacks
         {
             private readonly ScenarioMonolithBeApplied parent;
 
-            private readonly MainMenuViewTemplate<MMgr, MArg> view = new()
+            private readonly MainMenuViewData<MMgr, MArg> view = new()
             {
                 PrimaryCommandSubviewName = StandardSubviewTable.ScrollName,
                 BackAnchorSubviewName = StandardSubviewTable.BackAnchorName,
@@ -42,7 +42,7 @@ namespace Roguegard.Rgpacks
 
             public override void OpenScreen(in MMgr manager, in MArg arg)
             {
-                view.ShowTemplate(manager, arg)
+                view.Show(manager, arg)
                     ?
                     .Option("ショップ", new ShopScreen() { parent = parent })
                     .Option("メインチャート設定", new SetMainChartScreen())
@@ -73,7 +73,7 @@ namespace Roguegard.Rgpacks
         {
             public ScenarioMonolithBeApplied parent;
 
-            private readonly ScrollViewTemplate<AssetStartingItem, MMgr, MArg> view = new()
+            private readonly ScrollViewData<AssetStartingItem, MMgr, MArg> view = new()
             {
             };
 
@@ -81,7 +81,7 @@ namespace Roguegard.Rgpacks
             {
                 var list = parent._shopItems;
 
-                view.ShowTemplate(list, manager, arg)
+                view.Show(list, manager, arg)
                     ?
                     .NameFrom((item, manager, arg) =>
                     {
@@ -101,14 +101,14 @@ namespace Roguegard.Rgpacks
 
         private class SetMainChartScreen : RogueMenuScreen
         {
-            private readonly DialogViewTemplate<MMgr, MArg> view = new()
+            private readonly DialogViewData<MMgr, MArg> view = new()
             {
                 DialogSubviewName = StandardSubviewTable.WidgetsName,
             };
 
             public override void OpenScreen(in MMgr manager, in MArg arg)
             {
-                view.ShowTemplate("", manager, arg)
+                view.Show("", manager, arg)
                     ?.Tail(InputFieldViewWidget.CreateOption<MMgr, MArg>(
                         (manager, arg) =>
                         {

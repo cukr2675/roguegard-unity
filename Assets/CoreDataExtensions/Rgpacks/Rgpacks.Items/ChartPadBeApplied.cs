@@ -31,7 +31,7 @@ namespace Roguegard.Rgpacks
             private static readonly List<object> elms = new();
             private static readonly PropertiedCmnMenu nextMenu = new();
 
-            private readonly VariableWidgetsViewTemplate<MMgr, MArg> view = new()
+            private readonly VariableWidgetsViewData<MMgr, MArg> view = new()
             {
             };
 
@@ -51,7 +51,7 @@ namespace Roguegard.Rgpacks
                             }));
                 }
 
-                view.ShowTemplate(elms, manager, arg)
+                view.Show(elms, manager, arg)
                     ?
                     .Head(
                         new object[]

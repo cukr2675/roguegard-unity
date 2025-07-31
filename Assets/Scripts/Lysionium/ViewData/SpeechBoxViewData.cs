@@ -1,15 +1,12 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-
 using System.Text.RegularExpressions;
 
 namespace Lysionium
 {
     /// <summary>
-    /// 会話ボックスと選択肢を扱う ViewTemplate
+    /// 会話ボックスと選択肢を扱う ViewData
     /// </summary>
-    public class SpeechBoxViewTemplate<TMgr, TArg> : ListViewTemplate<ISelectOption, TMgr, TArg>
+    public class SpeechBoxViewData<TMgr, TArg> : ListViewData<ISelectOption, TMgr, TArg>
         where TMgr : IListMenuManager
         where TArg : IListMenuArg
     {
@@ -31,7 +28,7 @@ namespace Lysionium
 
         private readonly string[] message = new string[1];
 
-        public Builder ShowTemplate(string message, TMgr manager, TArg arg, object viewStateHolder = null)
+        public Builder Show(string message, TMgr manager, TArg arg, object viewStateHolder = null)
         {
             if (message == null) throw new System.ArgumentNullException(nameof(message));
             if (manager == null) throw new System.ArgumentNullException(nameof(manager));
@@ -90,7 +87,7 @@ namespace Lysionium
             }
         }
 
-        public void HideTemplate(TMgr manager, bool back)
+        public void Hide(TMgr manager, bool back)
         {
             manager.GetSubview(SpeechBoxSubviewName).Hide(back);
             manager.GetSubview(ChoicesSubviewName).Hide(back);
@@ -99,9 +96,9 @@ namespace Lysionium
 
         public class Builder : BaseListBuilder<Builder>
         {
-            private readonly SpeechBoxViewTemplate<TMgr, TArg> parent;
+            private readonly SpeechBoxViewData<TMgr, TArg> parent;
 
-            public Builder(SpeechBoxViewTemplate<TMgr, TArg> parent, TMgr manager, TArg arg)
+            public Builder(SpeechBoxViewData<TMgr, TArg> parent, TMgr manager, TArg arg)
                 : base(parent, manager, arg)
             {
                 this.parent = parent;

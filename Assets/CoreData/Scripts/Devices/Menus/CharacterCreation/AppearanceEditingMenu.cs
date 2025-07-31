@@ -16,7 +16,7 @@ namespace Roguegard.Device
         public CharacterCreationOptionMenu NextMenu { get; set; }
         public CharacterCreationAddMenu AddMenu { get; set; }
 
-        private readonly ScrollViewTemplate<object, MMgr, MArg> view = new()
+        private readonly ScrollViewData<object, MMgr, MArg> view = new()
         {
         };
 
@@ -62,7 +62,7 @@ namespace Roguegard.Device
             }
             elms.Add(addOtherElement);
 
-            view.ShowTemplate(elms, manager, arg)
+            view.Show(elms, manager, arg)
                 ?
                 .NameFrom((element, manager, arg) =>
                 {

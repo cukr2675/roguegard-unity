@@ -16,7 +16,7 @@ namespace RoguegardUnity
     /// </summary>
     public class MainMenu : RogueMenuScreen
     {
-        private readonly ViewTemplate view = new();
+        private readonly ViewData view = new();
 
         private readonly ObjsMenu objsMenu;
         private readonly SkillsMenu skillsMenu;
@@ -33,7 +33,7 @@ namespace RoguegardUnity
 
         public override void OpenScreen(in MMgr manager, in MArg arg)
         {
-            view.ShowTemplate(manager, arg)
+            view.Show(manager, arg)
                 ?
                 .Option(":Skills", skillsMenu.Use)
                 .Option(":Items", (manager, arg) => manager.PushMenuScreen(objsMenu.Items, arg.Self, null, targetObj: arg.Self))
@@ -45,7 +45,7 @@ namespace RoguegardUnity
                 .Build();
         }
 
-        private class ViewTemplate : MainMenuViewTemplate<MMgr, MArg>
+        private class ViewData : MainMenuViewData<MMgr, MArg>
         {
             protected override void ShowSubviews(MMgr manager, MArg arg)
             {
@@ -61,7 +61,7 @@ namespace RoguegardUnity
 
         private class LogMenu : RogueMenuScreen
         {
-            private readonly MainMenuViewTemplate<MMgr, MArg> view = new()
+            private readonly MainMenuViewData<MMgr, MArg> view = new()
             {
                 PrimaryCommandSubviewName = StandardSubviewTable.LongMessageName,
                 BackAnchorSubviewName = StandardSubviewTable.BackAnchorName,
@@ -69,7 +69,7 @@ namespace RoguegardUnity
 
             public override void OpenScreen(in MMgr manager, in MArg arg)
             {
-                view.ShowTemplate(manager, arg)
+                view.Show(manager, arg)
                     ?
                     .Build();
             }
@@ -81,7 +81,7 @@ namespace RoguegardUnity
             private readonly QuestMenu questMenu = new();
             private readonly OptionsMenu optionsMenu = new();
 
-            private readonly MainMenuViewTemplate<MMgr, MArg> view = new()
+            private readonly MainMenuViewData<MMgr, MArg> view = new()
             {
             };
 
@@ -91,7 +91,7 @@ namespace RoguegardUnity
                 var inLobby = RogueDevice.Primary.Player.Location == worldInfo.Lobby;
                 var openArg = new RogueMethodArgument(count: inLobby ? 1 : 0);
 
-                view.ShowTemplate(manager, arg)
+                view.Show(manager, arg)
                     ?
                     .Option(":Save", (manager, arg) =>
                     {
@@ -125,13 +125,13 @@ namespace RoguegardUnity
 
             private class GiveUpMenu : RogueMenuScreen
             {
-                private readonly SpeechBoxViewTemplate<MMgr, MArg> view = new()
+                private readonly SpeechBoxViewData<MMgr, MArg> view = new()
                 {
                 };
 
                 public override void OpenScreen(in MMgr manager, in MArg arg)
                 {
-                    view.ShowTemplate(":GiveUpMsg", manager, arg)
+                    view.Show(":GiveUpMsg", manager, arg)
                         ?.Option(":Yes", (manager, arg) =>
                         {
                             manager.Done();
@@ -158,14 +158,14 @@ namespace RoguegardUnity
 
         private class OptionsMenu : RogueMenuScreen
         {
-            private readonly DialogViewTemplate<MMgr, MArg> view = new()
+            private readonly DialogViewData<MMgr, MArg> view = new()
             {
                 DialogSubviewName = StandardSubviewTable.WidgetsName,
             };
 
             public override void OpenScreen(in MMgr manager, in MArg arg)
             {
-                view.ShowTemplate("", manager, arg)
+                view.Show("", manager, arg)
                     ?
                     .Tail(
                         new object[]
@@ -203,7 +203,7 @@ namespace RoguegardUnity
             {
                 private readonly List<object> elms = new();
 
-                private readonly ScrollViewTemplate<object, MMgr, MArg> view = new()
+                private readonly ScrollViewData<object, MMgr, MArg> view = new()
                 {
                 };
 
@@ -218,7 +218,7 @@ namespace RoguegardUnity
                         }
                     }
 
-                    view.ShowTemplate(elms, manager, arg)
+                    view.Show(elms, manager, arg)
                         ?
                         .NameFrom((element, manager, arg) =>
                         {

@@ -11,7 +11,7 @@ namespace RoguegardUnity
     internal class SelectFileCommandMenuScreen : RogueMenuScreen
     {
         private readonly ClickItemHandler<FileInfo, MMgr, MArg> selectCallback;
-        private readonly MainMenuViewTemplate<MMgr, MArg> view;
+        private readonly MainMenuViewData<MMgr, MArg> view;
 
         public override bool IsIncremental => true;
 
@@ -30,7 +30,7 @@ namespace RoguegardUnity
             var text = RogueFile.GetName(((FileInfo)arg.Arg.Other).FullName) + "をロードしますか？";
             view.Title = text;
 
-            view.ShowTemplate(manager, arg)
+            view.Show(manager, arg)
                 ?
                 .Option(":Load", (manager, arg) =>
                 {
@@ -61,7 +61,7 @@ namespace RoguegardUnity
 
         public override void CloseScreenView(MMgr manager, bool back)
         {
-            view.HideTemplate(manager, back);
+            view.Hide(manager, back);
         }
 
         private class Paths
@@ -73,7 +73,7 @@ namespace RoguegardUnity
         {
             private string newName;
 
-            private readonly DialogViewTemplate<MMgr, MArg> view = new()
+            private readonly DialogViewData<MMgr, MArg> view = new()
             {
                 BackAnchorSubviewName = null,
             };
@@ -85,7 +85,7 @@ namespace RoguegardUnity
                 var fileInfo = (FileInfo)arg.Arg.Other;
                 newName = Path.GetFileNameWithoutExtension(fileInfo.Name);
 
-                view.ShowTemplate("", manager, arg)
+                view.Show("", manager, arg)
                     ?
                     .Tail(InputFieldViewWidget.CreateOption<MMgr, MArg>(
                         (manager, arg) =>
@@ -128,7 +128,7 @@ namespace RoguegardUnity
 
             public override void CloseScreenView(MMgr manager, bool back)
             {
-                view.HideTemplate(manager, back);
+                view.Hide(manager, back);
             }
 
             private static void Overwrite(MMgr manager, MArg arg)

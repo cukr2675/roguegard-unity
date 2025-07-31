@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,7 +12,7 @@ namespace RoguegardUnity
     {
         public override bool IsIncremental => true;
 
-        private readonly MainMenuViewTemplate<MMgr, MArg> view = new()
+        private readonly MainMenuViewData<MMgr, MArg> view = new()
         {
             PrimaryCommandSubviewName = StandardSubviewTable.SecondaryCommandName,
         };
@@ -25,7 +25,7 @@ namespace RoguegardUnity
 
             view.Title = StandardRogueDeviceUtility.GetCaption(selectedSkill);
 
-            view.ShowTemplate(manager, arg)
+            view.Show(manager, arg)
                 ?.Option(":Use", (manager, arg) =>
                 {
                     var info = RogueDeviceEffect.Get(arg.Self);
@@ -39,7 +39,7 @@ namespace RoguegardUnity
 
         public override void CloseScreenView(MMgr manager, bool back)
         {
-            view.HideTemplate(manager, back);
+            view.Hide(manager, back);
         }
 
         private class CommandAction : IDeviceCommandAction

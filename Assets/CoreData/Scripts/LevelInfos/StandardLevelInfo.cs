@@ -163,13 +163,13 @@ namespace Roguegard
         {
             public string message;
 
-            private readonly SpeechBoxViewTemplate<MMgr, MArg> view = new()
+            private readonly SpeechBoxViewData<MMgr, MArg> view = new()
             {
             };
 
             public override void OpenScreen(in MMgr manager, in MArg arg)
             {
-                view.ShowTemplate($"{arg.Self.GetName()}はレベルが上がった！{{v}}{message}", manager, arg)
+                view.Show($"{arg.Self.GetName()}はレベルが上がった！{{v}}{message}", manager, arg)
                     ?
                     .OnCompleted((manager, arg) => manager.Done())
 

@@ -74,7 +74,7 @@ namespace Roguegard.Device
 
             public ICharacterCreationDatabase database;
 
-            private readonly ScrollViewTemplate<object, MMgr, MArg> view = new()
+            private readonly ScrollViewData<object, MMgr, MArg> view = new()
             {
             };
 
@@ -85,7 +85,7 @@ namespace Roguegard.Device
                 elms.Clear();
                 CharacterCreationAddMenu.AddOptionsTo(elms, arg.Self, editTarget, database);
 
-                view.ShowTemplate(elms, manager, arg, editTarget?.GetType())
+                view.Show(elms, manager, arg, editTarget?.GetType())
                     ?
                     .NameFrom((element, manager, arg) =>
                     {

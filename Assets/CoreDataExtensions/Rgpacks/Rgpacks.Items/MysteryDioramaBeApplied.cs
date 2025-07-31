@@ -35,7 +35,7 @@ namespace Roguegard.Rgpacks
 
             private static readonly List<object> elms = new();
 
-            private readonly ScrollViewTemplate<object, MMgr, MArg> view = new()
+            private readonly ScrollViewData<object, MMgr, MArg> view = new()
             {
                 ScrollSubviewName = StandardSubviewTable.WidgetsName,
             };
@@ -51,7 +51,7 @@ namespace Roguegard.Rgpacks
                     elms.Add(dioramaFloorObj);
                 }
 
-                view.ShowTemplate(elms, manager, arg)
+                view.Show(elms, manager, arg)
                     ?
                     .Head(
                         new object[]
@@ -113,14 +113,14 @@ namespace Roguegard.Rgpacks
         {
             public AssetStartingItem _newFloor;
 
-            private readonly DialogViewTemplate<MMgr, MArg> view = new()
+            private readonly DialogViewData<MMgr, MArg> view = new()
             {
                 DialogSubviewName = StandardSubviewTable.WidgetsName,
             };
 
             public override void OpenScreen(in MMgr manager, in MArg arg)
             {
-                view.ShowTemplate("", manager, arg)
+                view.Show("", manager, arg)
                     ?
                     .Tail(
                         new object[]

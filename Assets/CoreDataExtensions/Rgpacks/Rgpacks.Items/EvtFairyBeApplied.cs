@@ -30,7 +30,7 @@ namespace Roguegard.Rgpacks
             private static readonly List<object> elms = new();
             private static readonly PageMenu nextMenu = new();
 
-            private readonly VariableWidgetsViewTemplate<MMgr, MArg> view = new()
+            private readonly VariableWidgetsViewData<MMgr, MArg> view = new()
             {
             };
 
@@ -47,7 +47,7 @@ namespace Roguegard.Rgpacks
                             (manager, arg) => { manager.PushMenuScreen(nextMenu, arg.Self, other: page); }));
                 }
 
-                view.ShowTemplate(elms, manager, arg)
+                view.Show(elms, manager, arg)
                     ?
                     .Head(
                         new object[]
@@ -85,13 +85,13 @@ namespace Roguegard.Rgpacks
 
         private class PageMenu : RogueMenuScreen
         {
-            private readonly VariableWidgetsViewTemplate<MMgr, MArg> view = new()
+            private readonly VariableWidgetsViewData<MMgr, MArg> view = new()
             {
             };
 
             public override void OpenScreen(in MMgr manager, in MArg arg)
             {
-                view.ShowTemplate(System.Array.Empty<object>(), manager, arg)
+                view.Show(System.Array.Empty<object>(), manager, arg)
                     ?
                     .Tail(
                         new object[]
@@ -135,13 +135,13 @@ namespace Roguegard.Rgpacks
                 EvtFairyCategory.Trap
             };
 
-            private readonly ScrollViewTemplate<object, MMgr, MArg> view = new()
+            private readonly ScrollViewData<object, MMgr, MArg> view = new()
             {
             };
 
             public override void OpenScreen(in MMgr manager, in MArg arg)
             {
-                view.ShowTemplate(elms, manager, arg)
+                view.Show(elms, manager, arg)
                     ?
                     .NameFrom((category, manager, arg) => category.ToString())
                     .OnClick((category, manager, arg) =>

@@ -14,7 +14,7 @@ namespace RoguegardUnity
 
         private readonly List<RogueObj> partyMembers = new();
 
-        private readonly ScrollViewTemplate<RogueObj, MMgr, MArg> view = new()
+        private readonly ScrollViewData<RogueObj, MMgr, MArg> view = new()
         {
             Title = ":Party",
         };
@@ -32,7 +32,7 @@ namespace RoguegardUnity
                 partyMembers.Add(partyMemberObj);
             }
 
-            view.ShowTemplate(partyMembers, manager, arg)
+            view.Show(partyMembers, manager, arg)
                 ?.OnClick((partyMember, manager, arg) =>
                 {
                     // 選択したパーティメンバーの情報と選択肢を表示する

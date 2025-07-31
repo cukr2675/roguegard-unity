@@ -26,7 +26,7 @@ namespace Roguegard
         {
             private readonly List<RoguePost> posts = new();
 
-            private readonly ScrollViewTemplate<RoguePost, MMgr, MArg> view = new()
+            private readonly ScrollViewData<RoguePost, MMgr, MArg> view = new()
             {
             };
 
@@ -39,7 +39,7 @@ namespace Roguegard
                     posts.Add(post);
                 }
 
-                view.ShowTemplate(posts, manager, arg)
+                view.Show(posts, manager, arg)
                     ?
                     .NameFrom((post, manager, arg) => post.Name)
 
@@ -52,7 +52,7 @@ namespace Roguegard
 
         private class DetailsScreen : RogueMenuScreen
         {
-            private readonly DialogViewTemplate<MMgr, MArg> view = new()
+            private readonly DialogViewData<MMgr, MArg> view = new()
             {
                 DialogSubviewName = StandardSubviewTable.WidgetsName,
             };
@@ -61,7 +61,7 @@ namespace Roguegard
             {
                 var post = (RoguePost)arg.Arg.Other;
 
-                view.ShowTemplate(post.Name, manager, arg)
+                view.Show(post.Name, manager, arg)
                     ?
                     .Build();
             }

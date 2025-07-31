@@ -49,7 +49,7 @@ namespace RoguegardUnity
 
             private static CategorizedSortTable sortTable;
 
-            private readonly RogueScrollViewTemplate<RogueObj> view = new()
+            private readonly RogueScrollViewData<RogueObj> view = new()
             {
             };
 
@@ -71,7 +71,7 @@ namespace RoguegardUnity
                 var list = GetObjs(arg.Self, arg.Arg.TargetObj);
                 var viewStateHolder = GetViewStateHolder(manager, arg);
 
-                view.ShowTemplate(list, manager, arg, viewStateHolder)
+                view.Show(list, manager, arg, viewStateHolder)
                     ?
                     .InfoFrom((obj, manager, arg) =>
                     {

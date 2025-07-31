@@ -187,7 +187,7 @@ namespace Roguegard.CharacterCreation
 
         private class RewardsScreen : RogueMenuScreen
         {
-            private readonly SpeechBoxViewTemplate<MMgr, MArg> view = new()
+            private readonly SpeechBoxViewData<MMgr, MArg> view = new()
             {
             };
 
@@ -216,7 +216,7 @@ namespace Roguegard.CharacterCreation
                     }
                 }
 
-                view.ShowTemplate(message.ToString(), manager, arg)
+                view.Show(message.ToString(), manager, arg)
                     ?
                     .OnCompleted((manager, arg) => manager.Done())
 
@@ -226,13 +226,13 @@ namespace Roguegard.CharacterCreation
 
         private class NotifyScreen : RogueMenuScreen
         {
-            private readonly SpeechBoxViewTemplate<MMgr, MArg> view = new()
+            private readonly SpeechBoxViewData<MMgr, MArg> view = new()
             {
             };
 
             public override void OpenScreen(in MMgr manager, in MArg arg)
             {
-                view.ShowTemplate($"目標の階に到達しました{{v}}", manager, arg)
+                view.Show($"目標の階に到達しました{{v}}", manager, arg)
                     ?
                     .OnCompleted((manager, arg) => manager.Done())
 

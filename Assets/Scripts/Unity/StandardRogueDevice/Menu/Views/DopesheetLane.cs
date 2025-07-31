@@ -108,7 +108,7 @@ namespace RoguegardUnity
             private float targetTime;
             private float? value;
 
-            private readonly DialogViewTemplate<MMgr, MArg> view = new()
+            private readonly DialogViewData<MMgr, MArg> view = new()
             {
                 BackAnchorSubviewName = null,
             };
@@ -132,7 +132,7 @@ namespace RoguegardUnity
                     value = null;
                 }
 
-                view.ShowTemplate(string.Empty, manager, arg)
+                view.Show(string.Empty, manager, arg)
                     ?
                     .Tail(
                         new object[]
@@ -173,7 +173,7 @@ namespace RoguegardUnity
 
             public override void CloseScreenView(MMgr manager, bool back)
             {
-                view.HideTemplate(manager, back);
+                view.Hide(manager, back);
             }
         }
 
@@ -185,7 +185,7 @@ namespace RoguegardUnity
 
             private readonly PaintMenu nextMenu = new(0);
 
-            private readonly DialogViewTemplate<MMgr, MArg> view = new()
+            private readonly DialogViewData<MMgr, MArg> view = new()
             {
                 BackAnchorSubviewName = null,
             };
@@ -213,7 +213,7 @@ namespace RoguegardUnity
                 }
                 nextMenu.SetTarget(editInfo, (PaintBoneSprite)value);
 
-                view.ShowTemplate(string.Empty, manager, arg)
+                view.Show(string.Empty, manager, arg)
                     ?
                     .Tail(SelectOption.Create<MMgr, MArg>(":Edit", (manager, arg) =>
                     {
@@ -232,7 +232,7 @@ namespace RoguegardUnity
 
             public override void CloseScreenView(MMgr manager, bool back)
             {
-                view.HideTemplate(manager, back);
+                view.Hide(manager, back);
             }
         }
 

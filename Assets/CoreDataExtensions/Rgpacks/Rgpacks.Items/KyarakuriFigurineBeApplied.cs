@@ -28,13 +28,13 @@ namespace Roguegard.Rgpacks
 
         private class Menu : RogueMenuScreen
         {
-            private readonly VariableWidgetsViewTemplate<MMgr, MArg> view = new()
+            private readonly VariableWidgetsViewData<MMgr, MArg> view = new()
             {
             };
 
             public override void OpenScreen(in MMgr manager, in MArg arg)
             {
-                view.ShowTemplate(System.Array.Empty<object>(), manager, arg)
+                view.Show(System.Array.Empty<object>(), manager, arg)
                     ?
                     .Tail(
                         new object[]
@@ -66,7 +66,7 @@ namespace Roguegard.Rgpacks
 
         private class EditMenu : RogueMenuScreen
         {
-            private readonly ScrollViewTemplate<object, MMgr, MArg> view = new()
+            private readonly ScrollViewData<object, MMgr, MArg> view = new()
             {
                 ScrollSubviewName = RoguegardSubviews.CharacterCreation,
                 BackAnchorList = new()
@@ -86,7 +86,7 @@ namespace Roguegard.Rgpacks
                 var characterCreation = RoguegardSubviews.GetCharacterCreation(manager);
                 view.BackAnchorList[0] = characterCreation.LoadPresetOption;
 
-                view.ShowTemplate(System.Array.Empty<object>(), manager, arg)
+                view.Show(System.Array.Empty<object>(), manager, arg)
                     ?
                     .Build();
             }

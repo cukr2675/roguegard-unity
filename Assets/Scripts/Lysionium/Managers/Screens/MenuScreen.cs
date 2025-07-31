@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 namespace Lysionium
 {
     /// <summary>
@@ -19,7 +15,7 @@ namespace Lysionium
 
         /// <summary>
         /// 画面を開くメソッド。画面の初期化処理とUIの表示を行う。
-        /// <para>メモ: 引数が in なのは ViewTemplate クラスのメソッドチェーンで誤って使用しないようにするため</para>
+        /// <para>メモ: 引数が in なのは ViewData クラスのメソッドチェーンで誤って使用しないようにするため</para>
         /// </summary>
         public abstract void OpenScreen(in TMgr manager, in TArg arg);
 

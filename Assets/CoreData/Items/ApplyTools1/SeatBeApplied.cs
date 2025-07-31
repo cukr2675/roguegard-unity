@@ -39,7 +39,7 @@ namespace Roguegard
         {
             private readonly List<RogueObj> objs = new();
 
-            private readonly ScrollViewTemplate<RogueObj, MMgr, MArg> view = new()
+            private readonly ScrollViewData<RogueObj, MMgr, MArg> view = new()
             {
             };
 
@@ -53,7 +53,7 @@ namespace Roguegard
                     objs.Add(lobbyMember);
                 }
 
-                view.ShowTemplate(objs, manager, arg)
+                view.Show(objs, manager, arg)
                     ?
                     .R3(out var r3)
 

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Roguegard.Device
 {
-    public class RogueScrollViewTemplate<T> : ListViewTemplate<T, MMgr, MArg>
+    public class RogueScrollViewData<T> : ListViewData<T, MMgr, MArg>
         where T : class
     {
         public string ScrollSubviewName { get; set; } = StandardSubviewTable.ScrollName;
@@ -27,8 +27,7 @@ namespace Roguegard.Device
         public delegate (object, T1, T2, T3, T4, T5, T6, T7) GetInfo<T1, T2, T3, T4, T5, T6, T7>(T element, MMgr manager, MArg arg);
         public delegate (object, T1, T2, T3, T4, T5, T6, T7, T8) GetInfo<T1, T2, T3, T4, T5, T6, T7, T8>(T element, MMgr manager, MArg arg);
 
-        public Builder ShowTemplate(
-            IReadOnlyList<T> list, MMgr manager, MArg arg, object viewStateHolder = null)
+        public Builder Show(IReadOnlyList<T> list, MMgr manager, MArg arg, object viewStateHolder = null)
         {
             if (list == null) throw new System.ArgumentNullException(nameof(list));
             if (manager == null) throw new System.ArgumentNullException(nameof(manager));
@@ -74,7 +73,7 @@ namespace Roguegard.Device
             }
         }
 
-        public void HideTemplate(MMgr manager, bool back)
+        public void Hide(MMgr manager, bool back)
         {
             manager.GetSubview(ScrollSubviewName).Hide(back);
             if (Title != null) { manager.GetSubview(CaptionBoxSubviewName).Hide(back); }
@@ -83,9 +82,9 @@ namespace Roguegard.Device
 
         public class Builder : BaseListBuilder<Builder>
         {
-            private readonly RogueScrollViewTemplate<T> parent;
+            private readonly RogueScrollViewData<T> parent;
 
-            public Builder(RogueScrollViewTemplate<T> parent, MMgr manager, MArg arg)
+            public Builder(RogueScrollViewData<T> parent, MMgr manager, MArg arg)
                 : base(parent, manager, arg)
             {
                 this.parent = parent;

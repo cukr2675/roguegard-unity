@@ -66,7 +66,7 @@ namespace Roguegard
         {
             public ISelectOption[] selectOptions;
 
-            private readonly FadeOutInViewTemplate<MMgr, MArg> view = new()
+            private readonly FadeOutInViewData<MMgr, MArg> view = new()
             {
             };
 

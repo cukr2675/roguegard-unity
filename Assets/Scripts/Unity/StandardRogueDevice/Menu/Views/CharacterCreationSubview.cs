@@ -229,7 +229,7 @@ namespace RoguegardUnity
 
             private readonly ChoicesMenuScreen nextMenu;
 
-            private readonly ScrollViewTemplate<CharacterCreationData, MMgr, MArg> view;
+            private readonly ScrollViewData<CharacterCreationData, MMgr, MArg> view;
 
             public LoadPresetMenu()
             {
@@ -253,7 +253,7 @@ namespace RoguegardUnity
                     }
                 }
 
-                view.ShowTemplate(presets, manager, arg)
+                view.Show(presets, manager, arg)
                     ?
                     .NameFrom((preset, manager, arg) =>
                     {

@@ -23,7 +23,7 @@ namespace Roguegard
             new PaintMenu(3),
         };
 
-        private readonly VariableWidgetsViewTemplate<MMgr, MArg> view = new()
+        private readonly VariableWidgetsViewData<MMgr, MArg> view = new()
         {
         };
 
@@ -139,7 +139,7 @@ namespace Roguegard
             }
             elms.Add(remove);
 
-            view.ShowTemplate(elms, manager, arg)
+            view.Show(elms, manager, arg)
                 ?
                 .Build();
         }
@@ -148,7 +148,7 @@ namespace Roguegard
         {
             private static string[] elms;
 
-            private readonly ScrollViewTemplate<string, MMgr, MArg> view = new()
+            private readonly ScrollViewData<string, MMgr, MArg> view = new()
             {
             };
 
@@ -165,7 +165,7 @@ namespace Roguegard
                     BoneKeyword.Head.Name,
                 };
 
-                view.ShowTemplate(elms, manager, arg)
+                view.Show(elms, manager, arg)
                     ?
                     .NameFrom((boneName, manager, arg) => boneName)
 

@@ -24,7 +24,7 @@ namespace RoguegardUnity
         public ISelectOption Details { get; }
         public ISelectOption Rename { get; }
 
-        private readonly CommandListViewTemplate<ISelectOption, MMgr, MArg> view = new()
+        private readonly CommandListViewData<ISelectOption, MMgr, MArg> view = new()
         {
         };
 
@@ -64,19 +64,19 @@ namespace RoguegardUnity
 
             view.Title = StandardRogueDeviceUtility.GetCaption(tool.Main.InfoSet);
 
-            view.ShowTemplate(selectOptions, manager, arg)
+            view.Show(selectOptions, manager, arg)
                 ?
                 .Build();
         }
 
         public override void CloseScreenView(MMgr manager, bool back)
         {
-            view.HideTemplate(manager, back);
+            view.Hide(manager, back);
         }
 
         private class SummaryMenuScreen : RogueMenuScreen
         {
-            private readonly DialogViewTemplate<MMgr, MArg> view = new()
+            private readonly DialogViewData<MMgr, MArg> view = new()
             {
                 DialogSubviewName = StandardSubviewTable.WidgetsName,
             };
@@ -105,7 +105,7 @@ namespace RoguegardUnity
 
         private class DetailsMenuScreen : RogueMenuScreen
         {
-            private readonly DialogViewTemplate<MMgr, MArg> view = new()
+            private readonly DialogViewData<MMgr, MArg> view = new()
             {
                 DialogSubviewName = StandardSubviewTable.WidgetsName,
             };
@@ -117,7 +117,7 @@ namespace RoguegardUnity
                 var details = "";
                 if (describable != null) { details = StandardRogueDeviceUtility.GetDescription(describable); }
 
-                view.ShowTemplate(details ?? "", manager, arg)
+                view.Show(details ?? "", manager, arg)
                     ?
                     .Build();
             }
@@ -127,7 +127,7 @@ namespace RoguegardUnity
         {
             private string newName;
 
-            private readonly DialogViewTemplate<MMgr, MArg> view = new()
+            private readonly DialogViewData<MMgr, MArg> view = new()
             {
                 BackAnchorSubviewName = null,
             };
@@ -136,7 +136,7 @@ namespace RoguegardUnity
 
             public override void OpenScreen(in MMgr manager, in MArg arg)
             {
-                view.ShowTemplate("", manager, arg)
+                view.Show("", manager, arg)
                     ?
                     .Tail(InputFieldViewWidget.CreateOption<MMgr, MArg>(
                         (manager, arg) =>
@@ -175,7 +175,7 @@ namespace RoguegardUnity
 
             public override void CloseScreenView(MMgr manager, bool back)
             {
-                view.HideTemplate(manager, back);
+                view.Hide(manager, back);
             }
         }
     }

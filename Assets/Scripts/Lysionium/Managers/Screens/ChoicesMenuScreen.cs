@@ -10,7 +10,7 @@ namespace Lysionium
     {
         private readonly ItemNameSelector<TMgr, TArg> getMessage;
         private readonly List<ISelectOption> selectOptions = new();
-        private readonly SpeechBoxViewTemplate<TMgr, TArg> view;
+        private readonly SpeechBoxViewData<TMgr, TArg> view;
 
         public override bool IsIncremental { get; }
 
@@ -61,7 +61,7 @@ namespace Lysionium
         {
             var message = getMessage(manager, arg);
 
-            view.ShowTemplate(message, manager, arg)
+            view.Show(message, manager, arg)
                 ?
                 .TailRange(selectOptions)
 
@@ -70,7 +70,7 @@ namespace Lysionium
 
         public override void CloseScreenView(TMgr manager, bool back)
         {
-            if (IsIncremental) { view.HideTemplate(manager, back); }
+            if (IsIncremental) { view.Hide(manager, back); }
             else { base.CloseScreenView(manager, back); }
         }
     }

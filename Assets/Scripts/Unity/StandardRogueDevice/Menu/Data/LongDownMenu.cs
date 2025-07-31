@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,7 +16,7 @@ namespace RoguegardUnity
         private readonly ISelectOption[] selectOptions;
         private readonly RogueMenuScreen commandMenu;
 
-        private readonly MainMenuViewTemplate<MMgr, MArg> view = new()
+        private readonly MainMenuViewData<MMgr, MArg> view = new()
         {
         };
 
@@ -41,7 +41,7 @@ namespace RoguegardUnity
                 return;
             }
 
-            view.ShowTemplate(manager, arg)
+            view.Show(manager, arg)
                 ?.TailRange(selectOptions)
                 .Build();
         }

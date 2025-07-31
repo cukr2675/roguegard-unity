@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,7 +15,7 @@ namespace RoguegardUnity
 
         private float beforeProgress;
 
-        private readonly DialogViewTemplate<MMgr, MArg> view = new()
+        private readonly DialogViewData<MMgr, MArg> view = new()
         {
             DialogSubviewName = StandardSubviewTable.OverlayName,
             BackAnchorSubviewName = null,
@@ -24,7 +24,7 @@ namespace RoguegardUnity
         public override void OpenScreen(in MMgr manager, in MArg arg)
         {
             beforeProgress = 0f;
-            view.ShowTemplate("世界と同期中…", manager, arg)
+            view.Show("世界と同期中…", manager, arg)
                 ?
                 .Tail(ProgressBarViewWidget.CreateOption<MMgr, MArg>((manager, arg) =>
                 {

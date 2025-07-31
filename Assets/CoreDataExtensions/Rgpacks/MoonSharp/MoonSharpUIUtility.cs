@@ -199,7 +199,7 @@ namespace Roguegard.Rgpacks.MoonSharp
             public List<string> selectOptions = new();
             private static readonly DynValue[] args = new DynValue[1];
 
-            private readonly CommandListViewTemplate<string, MMgr, MArg> view = new()
+            private readonly CommandListViewData<string, MMgr, MArg> view = new()
             {
                 SecodaryCommandSubviewName = StandardSubviewTable.ChoicesName,
             };
@@ -208,7 +208,7 @@ namespace Roguegard.Rgpacks.MoonSharp
 
             public override void OpenScreen(in MMgr manager, in MArg arg)
             {
-                view.ShowTemplate(selectOptions, manager, arg)
+                view.Show(selectOptions, manager, arg)
                     ?
                     .OnClick((selectOption, manager, arg) =>
                     {
@@ -238,7 +238,7 @@ namespace Roguegard.Rgpacks.MoonSharp
             {
                 if (!back) return;
 
-                view.HideTemplate(manager, back);
+                view.Hide(manager, back);
             }
         }
 
@@ -248,7 +248,7 @@ namespace Roguegard.Rgpacks.MoonSharp
             public bool fadeIn;
             public System.Action fadeInAction;
 
-            private readonly FadeOutInViewTemplate<MMgr, MArg> view = new()
+            private readonly FadeOutInViewData<MMgr, MArg> view = new()
             {
             };
 

@@ -1,20 +1,19 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Lysionium
 {
     /// <summary>
-    /// 項目数が可変のメニュー向け ViewTemplate
+    /// 項目のスクロールが必要なメニュー向け ViewData
     /// </summary>
-    public class CommandListViewTemplate<TItem, TMgr, TArg> : ListViewTemplate<TItem, TMgr, TArg>
+    public class ScrollViewData<TItem, TMgr, TArg> : ListViewData<TItem, TMgr, TArg>
         where TItem : class
         where TMgr : IListMenuManager
         where TArg : IListMenuArg
     {
-        public string SecodaryCommandSubviewName { get; set; } = StandardSubviewTable.SecondaryCommandName;
+        public string ScrollSubviewName { get; set; } = StandardSubviewTable.ScrollName;
         public string CaptionBoxSubviewName { get; set; } = StandardSubviewTable.CaptionBoxName;
-        public string BackAnchorSubviewName { get; set; } = null;
+        public string BackAnchorSubviewName { get; set; } = StandardSubviewTable.BackAnchorName;
         public List<ISelectOption> BackAnchorList { get; set; } = new() { BackSelectOption.Instance };
 
         /// <summary>
@@ -23,44 +22,50 @@ namespace Lysionium
         /// </summary>
         public bool EnableSelectOptionProxy
         {
-            get => secodaryCommandSubviewHandler.EnableSelectOptionProxy;
-            set => secodaryCommandSubviewHandler.EnableSelectOptionProxy = value;
+            get => scrollSubviewHandler.EnableSelectOptionProxy;
+            set => scrollSubviewHandler.EnableSelectOptionProxy = value;
         }
 
         private object prevViewStateHolder;
-        private ISubviewStateProvider secodaryCommandSubviewStateProvider;
+        private ISubviewStateProvider scrollSubviewStateProvider;
         private ISubviewStateProvider captionBoxSubviewStateProvider;
         private ISubviewStateProvider backAnchorSubviewStateProvider;
 
-        private readonly ButtonViewItemHandler<TItem, TMgr, TArg> secodaryCommandSubviewHandler = new();
+        private readonly ButtonViewItemHandler<TItem, TMgr, TArg> scrollSubviewHandler = new();
 
-        public Builder ShowTemplate(
+        public Builder Show(
             IReadOnlyList<TItem> list, TMgr manager, TArg arg, object viewStateHolder = null)
         {
             if (list == null) throw new System.ArgumentNullException(nameof(list));
             if (manager == null) throw new System.ArgumentNullException(nameof(manager));
 
             // 必要に応じてスクロール位置をリセット
-            if (viewStateHolder != prevViewStateHolder)
-            {
-                secodaryCommandSubviewStateProvider?.Reset();
-                captionBoxSubviewStateProvider?.Reset();
-                backAnchorSubviewStateProvider?.Reset();
-            }
+            if (viewStateHolder != prevViewStateHolder) { ResetSubviewStateProviders(); }
             prevViewStateHolder = viewStateHolder;
 
+            // スクロールのビューを表示
             OriginalList.Clear();
-            OriginalList.AddRange(list);
+            for (int i = 0; i < list.Count; i++)
+            {
+                OriginalList.Add(list[i]);
+            }
 
             if (TryShowSubviews(manager, arg)) return null;
             else return new Builder(this, manager, arg);
         }
 
+        protected virtual void ResetSubviewStateProviders()
+        {
+            scrollSubviewStateProvider?.Reset();
+            captionBoxSubviewStateProvider?.Reset();
+            backAnchorSubviewStateProvider?.Reset();
+        }
+
         protected override void ShowSubviews(TMgr manager, TArg arg)
         {
             manager
-                .GetSubview(SecodaryCommandSubviewName)
-                .Show(List, secodaryCommandSubviewHandler, manager, arg, ref secodaryCommandSubviewStateProvider);
+                .GetSubview(ScrollSubviewName)
+                .Show(List, scrollSubviewHandler, manager, arg, ref scrollSubviewStateProvider);
 
             if (Title != null)
             {
@@ -77,18 +82,18 @@ namespace Lysionium
             }
         }
 
-        public void HideTemplate(TMgr manager, bool back)
+        public virtual void Hide(TMgr manager, bool back)
         {
-            manager.GetSubview(SecodaryCommandSubviewName).Hide(back);
+            manager.GetSubview(ScrollSubviewName).Hide(back);
             if (Title != null) { manager.GetSubview(CaptionBoxSubviewName).Hide(back); }
             if (BackAnchorSubviewName != null) { manager.GetSubview(BackAnchorSubviewName).Hide(back); }
         }
 
-        public class Builder : BaseBuilder<Builder>, IButtonViewItemHandlerBuilder<TItem, TMgr, TArg, Builder>
+        public class Builder : BaseListBuilder<Builder>, IButtonViewItemHandlerBuilder<TItem, TMgr, TArg, Builder>
         {
-            private readonly CommandListViewTemplate<TItem, TMgr, TArg> parent;
+            private readonly ScrollViewData<TItem, TMgr, TArg> parent;
 
-            public Builder(CommandListViewTemplate<TItem, TMgr, TArg> parent, TMgr manager, TArg arg)
+            public Builder(ScrollViewData<TItem, TMgr, TArg> parent, TMgr manager, TArg arg)
                 : base(parent, manager, arg)
             {
                 this.parent = parent;
@@ -98,9 +103,9 @@ namespace Lysionium
             {
                 AssertNotBuilt();
 
-                if (parent.secodaryCommandSubviewHandler.GetName != null) { Debug.LogWarning($"{nameof(NameFrom)} が多重購読されました。"); }
+                if (parent.scrollSubviewHandler.GetName != null) { Debug.LogWarning($"{nameof(NameFrom)} が多重購読されました。"); }
 
-                parent.secodaryCommandSubviewHandler.GetName += selector;
+                parent.scrollSubviewHandler.GetName += selector;
                 return this;
             }
 
@@ -108,9 +113,9 @@ namespace Lysionium
             {
                 AssertNotBuilt();
 
-                if (parent.secodaryCommandSubviewHandler.GetStyle != null) { Debug.LogWarning($"{nameof(StyleFrom)} が多重購読されました。"); }
+                if (parent.scrollSubviewHandler.GetStyle != null) { Debug.LogWarning($"{nameof(StyleFrom)} が多重購読されました。"); }
 
-                parent.secodaryCommandSubviewHandler.GetStyle += selector;
+                parent.scrollSubviewHandler.GetStyle += selector;
                 return this;
             }
 
@@ -118,7 +123,7 @@ namespace Lysionium
             {
                 AssertNotBuilt();
 
-                parent.secodaryCommandSubviewHandler.HandleClick += handler;
+                parent.scrollSubviewHandler.HandleClick += handler;
                 return this;
             }
         }

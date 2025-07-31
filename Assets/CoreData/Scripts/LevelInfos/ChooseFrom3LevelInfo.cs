@@ -198,13 +198,13 @@ namespace Roguegard
 
         private class LevelUpBonusScreen : RogueMenuScreen
         {
-            private readonly SpeechBoxViewTemplate<MMgr, MArg> view = new()
+            private readonly SpeechBoxViewData<MMgr, MArg> view = new()
             {
             };
 
             public override void OpenScreen(in MMgr manager, in MArg arg)
             {
-                view.ShowTemplate(arg.Self.GetName() + "はレベルが上がった！{v}", manager, arg)
+                view.Show(arg.Self.GetName() + "はレベルが上がった！{v}", manager, arg)
                     ?
                     .OnCompleted(new SelectScreen())
 
@@ -213,14 +213,14 @@ namespace Roguegard
 
             private class SelectScreen : RogueMenuScreen
             {
-                private readonly MainMenuViewTemplate<MMgr, MArg> view = new()
+                private readonly MainMenuViewData<MMgr, MArg> view = new()
                 {
                     PrimaryCommandSubviewName = StandardSubviewTable.ScrollName,
                 };
 
                 public override void OpenScreen(in MMgr manager, in MArg arg)
                 {
-                    view.ShowTemplate(manager, arg)
+                    view.Show(manager, arg)
                         ?
                         .VarOnce(out var nextScreen, new ConfirmScreen())
 
@@ -247,7 +247,7 @@ namespace Roguegard
             {
                 private readonly ResultScreen nextScreen = new();
 
-                private readonly MainMenuViewTemplate<MMgr, MArg> view = new()
+                private readonly MainMenuViewData<MMgr, MArg> view = new()
                 {
                     PrimaryCommandSubviewName = StandardSubviewTable.SecondaryCommandName,
                 };
@@ -256,7 +256,7 @@ namespace Roguegard
 
                 public override void OpenScreen(in MMgr manager, in MArg arg)
                 {
-                    view.ShowTemplate(manager, arg)
+                    view.Show(manager, arg)
                         ?
                         .Option("決定", (manager, arg) =>
                         {
@@ -299,7 +299,7 @@ namespace Roguegard
 
                 public override void CloseScreenView(MMgr manager, bool back)
                 {
-                    view.HideTemplate(manager, back);
+                    view.Hide(manager, back);
                 }
             }
         }
@@ -308,13 +308,13 @@ namespace Roguegard
         {
             public string message;
 
-            private readonly SpeechBoxViewTemplate<MMgr, MArg> view = new()
+            private readonly SpeechBoxViewData<MMgr, MArg> view = new()
             {
             };
 
             public override void OpenScreen(in MMgr manager, in MArg arg)
             {
-                view.ShowTemplate(message + "{v}", manager, arg)
+                view.Show(message + "{v}", manager, arg)
                     ?
                     .OnCompleted((manager, arg) => manager.Done())
 

@@ -42,7 +42,7 @@ namespace Roguegard
         {
             public LobbyMerchantBeApplied parent;
 
-            private readonly SpeechBoxViewTemplate<MMgr, MArg> view = new()
+            private readonly SpeechBoxViewData<MMgr, MArg> view = new()
             {
             };
 
@@ -50,7 +50,7 @@ namespace Roguegard
 
             public override void OpenScreen(in MMgr manager, in MArg arg)
             {
-                view.ShowTemplate($"商人「わたしは商人です でもまだ準備中です{{v}}", manager, arg)
+                view.Show($"商人「わたしは商人です でもまだ準備中です{{v}}", manager, arg)
                     ?
                     .VarOnce(out var nextScreen, new RogueMenu() { parent = parent })
 
@@ -67,13 +67,13 @@ namespace Roguegard
         {
             public LobbyMerchantBeApplied parent;
 
-            private readonly ScrollViewTemplate<AssetStartingItem, MMgr, MArg> view = new()
+            private readonly ScrollViewData<AssetStartingItem, MMgr, MArg> view = new()
             {
             };
 
             public override void OpenScreen(in MMgr manager, in MArg arg)
             {
-                view.ShowTemplate(parent._items, manager, arg)
+                view.Show(parent._items, manager, arg)
                     ?
                     .NameFrom((item, manager, arg) =>
                     {

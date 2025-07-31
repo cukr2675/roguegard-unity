@@ -1,13 +1,11 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace Lysionium
 {
     /// <summary>
-    /// テキストと項目を表示する ViewTemplate
+    /// テキストと項目を表示する ViewData
     /// </summary>
-    public class DialogViewTemplate<TMgr, TArg> : ListViewTemplate<object, TMgr, TArg>
+    public class DialogViewData<TMgr, TArg> : ListViewData<object, TMgr, TArg>
         where TMgr : IListMenuManager
         where TArg : IListMenuArg
     {
@@ -24,7 +22,7 @@ namespace Lysionium
         private string message;
         private event ClickItemHandler<string, TMgr, TArg> handleClickLink;
 
-        public Builder ShowTemplate(string message, TMgr manager, TArg arg, object viewStateHolder = null)
+        public Builder Show(string message, TMgr manager, TArg arg, object viewStateHolder = null)
         {
             if (message == null) throw new System.ArgumentNullException(nameof(message));
             if (manager == null) throw new System.ArgumentNullException(nameof(manager));
@@ -76,7 +74,7 @@ namespace Lysionium
             }
         }
 
-        public void HideTemplate(TMgr manager, bool back)
+        public void Hide(TMgr manager, bool back)
         {
             manager.GetSubview(DialogSubviewName).Hide(back);
             if (Title != null) { manager.GetSubview(CaptionBoxSubviewName).Hide(back); }
@@ -85,9 +83,9 @@ namespace Lysionium
 
         public class Builder : BaseListBuilder<Builder>
         {
-            private readonly DialogViewTemplate<TMgr, TArg> parent;
+            private readonly DialogViewData<TMgr, TArg> parent;
 
-            public Builder(DialogViewTemplate<TMgr, TArg> parent, TMgr manager, TArg arg)
+            public Builder(DialogViewData<TMgr, TArg> parent, TMgr manager, TArg arg)
                 : base(parent, manager, arg)
             {
                 this.parent = parent;

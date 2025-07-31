@@ -40,7 +40,7 @@ namespace Roguegard
             private static readonly List<DungeonQuest> elms = new();
             private static readonly QuestViewMenu nextMenu = new();
 
-            private readonly ScrollViewTemplate<DungeonQuest, MMgr, MArg> view = new()
+            private readonly ScrollViewData<DungeonQuest, MMgr, MArg> view = new()
             {
             };
 
@@ -53,7 +53,7 @@ namespace Roguegard
                     elms.Add(quest);
                 }
 
-                view.ShowTemplate(elms, manager, arg)
+                view.Show(elms, manager, arg)
                     ?
                     .NameFrom((quest, manager, arg) =>
                     {

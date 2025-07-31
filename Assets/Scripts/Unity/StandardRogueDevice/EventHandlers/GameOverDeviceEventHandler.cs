@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -61,7 +61,7 @@ namespace RoguegardUnity
         /// </summary>
         private class GameOverMenu : RogueMenuScreen
         {
-            private readonly MainMenuViewTemplate<MMgr, MArg> view = new()
+            private readonly MainMenuViewData<MMgr, MArg> view = new()
             {
                 PrimaryCommandSubviewName = StandardSubviewTable.LongMessageName,
                 BackAnchorSubviewName = StandardSubviewTable.ForwardAnchorName,
@@ -71,7 +71,7 @@ namespace RoguegardUnity
             public override void OpenScreen(in MMgr manager, in MArg arg)
             {
                 // ログ表示
-                view.ShowTemplate(manager, arg)
+                view.Show(manager, arg)
                     ?
                     .Build();
             }

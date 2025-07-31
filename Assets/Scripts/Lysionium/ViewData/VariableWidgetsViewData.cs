@@ -4,9 +4,9 @@ using System.Linq;
 namespace Lysionium
 {
     /// <summary>
-    /// 項目数が可変のウィジェットメニュー向け ViewTemplate
+    /// 項目数が可変のウィジェットメニュー向け ViewData
     /// </summary>
-    public class VariableWidgetsViewTemplate<TMgr, TArg> : ListViewTemplate<object, TMgr, TArg>
+    public class VariableWidgetsViewData<TMgr, TArg> : ListViewData<object, TMgr, TArg>
         where TMgr : IListMenuManager
         where TArg : IListMenuArg
     {
@@ -20,7 +20,7 @@ namespace Lysionium
         private ISubviewStateProvider captionBoxSubviewStateProvider;
         private ISubviewStateProvider backAnchorSubviewStateProvider;
 
-        public Builder ShowTemplate(IReadOnlyList<object> widgetOptions, TMgr manager, TArg arg, object viewStateHolder = null)
+        public Builder Show(IReadOnlyList<object> widgetOptions, TMgr manager, TArg arg, object viewStateHolder = null)
         {
             if (manager == null) throw new System.ArgumentNullException(nameof(manager));
 
@@ -64,7 +64,7 @@ namespace Lysionium
             }
         }
 
-        public void HideTemplate(TMgr manager, bool back)
+        public void Hide(TMgr manager, bool back)
         {
             manager.GetSubview(WidgetsSubviewName).Hide(back);
             if (Title != null) { manager.GetSubview(CaptionBoxSubviewName).Hide(back); }
@@ -73,9 +73,9 @@ namespace Lysionium
 
         public class Builder : BaseListBuilder<Builder>
         {
-            private readonly VariableWidgetsViewTemplate<TMgr, TArg> parent;
+            private readonly VariableWidgetsViewData<TMgr, TArg> parent;
 
-            public Builder(VariableWidgetsViewTemplate<TMgr, TArg> parent, TMgr manager, TArg arg)
+            public Builder(VariableWidgetsViewData<TMgr, TArg> parent, TMgr manager, TArg arg)
                 : base(parent, manager, arg)
             {
                 this.parent = parent;

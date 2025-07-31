@@ -12,7 +12,7 @@ namespace RoguegardUnity
     {
         private RogueMenuScreen nextScreen;
         private ClickItemHandler<MMgr, MArg> onNewFile;
-        private RogueScrollViewTemplate<object> view;
+        private RogueScrollViewData<object> view;
         private readonly List<FileInfo> files = new();
 
         private static readonly LoadingListMenuScreen savingMenu = new LoadingListMenuScreen("セーブ中…", "キャンセル", LoadingCancel);
@@ -76,7 +76,7 @@ namespace RoguegardUnity
             files.Clear();
             files.AddRange(StandardRogueDeviceSave.GetFiles());
 
-            view.ShowTemplate(files, manager, arg)
+            view.Show(files, manager, arg)
                 ?
                 .VarOnce(out var newArg, new MArg.Builder())
 
@@ -154,7 +154,7 @@ namespace RoguegardUnity
 
         private class ImportScreen : RogueMenuScreen
         {
-            private readonly DialogViewTemplate<MMgr, MArg> view = new()
+            private readonly DialogViewData<MMgr, MArg> view = new()
             {
                 DialogSubviewName = StandardSubviewTable.OverlayName,
                 BackAnchorSubviewName = null,
@@ -164,7 +164,7 @@ namespace RoguegardUnity
 
             public override void OpenScreen(in MMgr manager, in MArg arg)
             {
-                view.ShowTemplate("インポート中…", manager, arg)
+                view.Show("インポート中…", manager, arg)
                     ?
                     .Option("キャンセル", (manager, arg) => manager.PopMenuScreen())
 
@@ -173,7 +173,7 @@ namespace RoguegardUnity
 
             public override void CloseScreenView(MMgr manager, bool back)
             {
-                view.HideTemplate(manager, back);
+                view.Hide(manager, back);
             }
         }
     }

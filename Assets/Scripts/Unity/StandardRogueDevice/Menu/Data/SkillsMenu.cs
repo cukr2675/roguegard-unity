@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -22,7 +22,7 @@ namespace RoguegardUnity
         /// </summary>
         private class UseMenu : RogueMenuScreen
         {
-            private readonly RogueScrollViewTemplate<ISkill> view = new()
+            private readonly RogueScrollViewData<ISkill> view = new()
             {
                 Title = ":Skills",
             };
@@ -39,7 +39,7 @@ namespace RoguegardUnity
                     list.Add(skills[i]);
                 }
 
-                view.ShowTemplate(list, manager, arg)
+                view.Show(list, manager, arg)
                     ?
                     .InfoFrom((skill, manager, arg) =>
                     {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Lysionium
 {
-    public abstract class ListViewTemplate<TItem, TMgr, TArg> : ViewTemplate<TMgr, TArg>
+    public abstract class ListViewData<TItem, TMgr, TArg> : ViewData<TMgr, TArg>
         where TItem : class
         where TMgr : IListMenuManager
         where TArg : IListMenuArg
@@ -13,7 +13,7 @@ namespace Lysionium
         private readonly List<object> tailList = new();
         protected IReadOnlyList<object> List { get; }
 
-        protected ListViewTemplate()
+        protected ListViewData()
         {
             List = new ReadOnlyListConcat(headList, OriginalList, tailList);
         }
@@ -21,9 +21,9 @@ namespace Lysionium
         public abstract class BaseListBuilder<TOut> : BaseBuilder<TOut>
             where TOut : BaseListBuilder<TOut>
         {
-            private ListViewTemplate<TItem, TMgr, TArg> parent;
+            private ListViewData<TItem, TMgr, TArg> parent;
 
-            protected BaseListBuilder(ListViewTemplate<TItem, TMgr, TArg> parent, TMgr manager, TArg arg)
+            protected BaseListBuilder(ListViewData<TItem, TMgr, TArg> parent, TMgr manager, TArg arg)
                 : base(parent, manager, arg)
             {
                 this.parent = parent;

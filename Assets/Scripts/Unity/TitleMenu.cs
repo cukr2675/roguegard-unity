@@ -96,7 +96,7 @@ namespace RoguegardUnity
         private class MainScreen : RogueMenuScreen
         {
             private readonly TitleMenu parent;
-            private readonly MainMenuViewTemplate<MMgr, MArg> view;
+            private readonly MainMenuViewData<MMgr, MArg> view;
 
             public MainScreen(TitleMenu parent)
             {
@@ -110,7 +110,7 @@ namespace RoguegardUnity
 
             public override void OpenScreen(in MMgr manager, in MArg arg)
             {
-                view.ShowTemplate(manager, arg)
+                view.Show(manager, arg)
                     ?
                     .VarOnce(out var loadFadeOutScreen, new LoadFadeOutScreen(parent))
                     .VarOnce(out var newGameMenu, new NewGameScreen(loadFadeOutScreen))
@@ -150,7 +150,7 @@ namespace RoguegardUnity
         /// </summary>
         private class NewGameScreen : RogueMenuScreen
         {
-            private readonly ScrollViewTemplate<object, MMgr, MArg> view;
+            private readonly ScrollViewData<object, MMgr, MArg> view;
 
             public NewGameScreen(LoadFadeOutScreen loadFadeOutScreen)
             {
@@ -175,7 +175,7 @@ namespace RoguegardUnity
                 var characterCreation = RoguegardSubviews.GetCharacterCreation(manager);
                 view.BackAnchorList[0] = characterCreation.LoadPresetOption;
 
-                view.ShowTemplate(System.Array.Empty<object>(), manager, arg)
+                view.Show(System.Array.Empty<object>(), manager, arg)
                     ?
                     .Build();
             }
@@ -189,7 +189,7 @@ namespace RoguegardUnity
         private class LoadFadeOutScreen : RogueMenuScreen
         {
             private readonly TitleMenu parent;
-            private readonly FadeOutInViewTemplate<MMgr, MArg> view;
+            private readonly FadeOutInViewData<MMgr, MArg> view;
 
             public LoadFadeOutScreen(TitleMenu parent)
             {
@@ -249,14 +249,14 @@ namespace RoguegardUnity
         {
             public IReadOnlyList<CreditData> credits;
 
-            private readonly ScrollViewTemplate<CreditData, MMgr, MArg> view = new()
+            private readonly ScrollViewData<CreditData, MMgr, MArg> view = new()
             {
                 Title = ":Credit",
             };
 
             public override void OpenScreen(in MMgr manager, in MArg arg)
             {
-                view.ShowTemplate(credits, manager, arg)
+                view.Show(credits, manager, arg)
                     ?
                     .VarOnce(out var nextScreen, new CreditDetailsScreen())
 
@@ -279,7 +279,7 @@ namespace RoguegardUnity
             /// </summary>
             private class CreditDetailsScreen : RogueMenuScreen
             {
-                private readonly DialogViewTemplate<MMgr, MArg> view = new()
+                private readonly DialogViewData<MMgr, MArg> view = new()
                 {
                     DialogSubviewName = StandardSubviewTable.WidgetsName,
                 };
@@ -291,7 +291,7 @@ namespace RoguegardUnity
                     // 文字列にリンクを貼ったものを表示
                     var text = Regex.Replace(credit.Details, @"(https?://[a-zA-Z0-9@:%_\\+\-.~#?&/=]+)", "<color=#8080ff><u><link>$1</link></u></color>");
 
-                    view.ShowTemplate(text, manager, arg)
+                    view.Show(text, manager, arg)
                         ?
                         .VarOnce(out var viewWidth, 8000f)
                         .Tail(ContentSizeMetaWidget.CreateOption(viewWidth))
@@ -311,7 +311,7 @@ namespace RoguegardUnity
             /// </summary>
             private class URLDialog : RogueMenuScreen
             {
-                private readonly SpeechBoxViewTemplate<MMgr, MArg> view = new()
+                private readonly SpeechBoxViewData<MMgr, MArg> view = new()
                 {
                 };
 
@@ -320,7 +320,7 @@ namespace RoguegardUnity
                 public override void OpenScreen(in MMgr manager, in MArg arg)
                 {
                     var url = (string)arg.Arg.Other;
-                    view.ShowTemplate($"{url} へ移動しますか？", manager, arg)
+                    view.Show($"{url} へ移動しますか？", manager, arg)
                         ?
                         .Option(":Yes", (manager, arg) =>
                         {
@@ -336,7 +336,7 @@ namespace RoguegardUnity
 
                 public override void CloseScreenView(MMgr manager, bool back)
                 {
-                    view.HideTemplate(manager, back);
+                    view.Hide(manager, back);
                 }
             }
         }

@@ -1,10 +1,12 @@
-﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace Lysionium
 {
-    public abstract class ViewTemplate<TMgr, TArg>
+    // 命名メモ: データ駆動メニュービュー
+    // ViewFrame はUI要素としてのフレームと被る
+    // ViewMarkup は markup (マークをつける) というよりは builder や query のほうが近い
+    // ViewSetup は Initialize を連想させる
+    public abstract class ViewData<TMgr, TArg>
         where TMgr : IListMenuManager
         where TArg : IListMenuArg
     {
@@ -42,11 +44,11 @@ namespace Lysionium
         public abstract class BaseBuilder<TOut>
             where TOut : BaseBuilder<TOut>
         {
-            private readonly ViewTemplate<TMgr, TArg> parent;
+            private readonly ViewData<TMgr, TArg> parent;
             private readonly TMgr manager;
             private readonly TArg arg;
 
-            protected BaseBuilder(ViewTemplate<TMgr, TArg> parent, TMgr manager, TArg arg)
+            protected BaseBuilder(ViewData<TMgr, TArg> parent, TMgr manager, TArg arg)
             {
                 this.parent = parent;
                 this.manager = manager;

@@ -22,7 +22,7 @@ namespace Roguegard
         {
             private readonly List<RogueObj> elms = new();
 
-            private readonly ScrollViewTemplate<RogueObj, MMgr, MArg> view = new()
+            private readonly ScrollViewData<RogueObj, MMgr, MArg> view = new()
             {
             };
 
@@ -37,7 +37,7 @@ namespace Roguegard
                 }
                 elms.Add(null);
 
-                view.ShowTemplate(elms, manager, arg)
+                view.Show(elms, manager, arg)
                     ?
                     .NameFrom((item, manager, arg) =>
                     {
@@ -75,7 +75,7 @@ namespace Roguegard
         {
             private static List<object> elms;
 
-            private readonly ScrollViewTemplate<object, MMgr, MArg> view = new()
+            private readonly ScrollViewData<object, MMgr, MArg> view = new()
             {
                 ScrollSubviewName = StandardSubviewTable.WidgetsName,
                 BackAnchorList = new()
@@ -159,7 +159,7 @@ namespace Roguegard
                 }
                 elms.Add(null);
 
-                view.ShowTemplate(elms, manager, arg)
+                view.Show(elms, manager, arg)
                     ?
                     .NameFrom((element, manager, arg) =>
                     {
@@ -219,7 +219,7 @@ namespace Roguegard
         {
             private ISerializableKeyword[] elms;
 
-            private readonly ScrollViewTemplate<ISerializableKeyword, MMgr, MArg> view = new()
+            private readonly ScrollViewData<ISerializableKeyword, MMgr, MArg> view = new()
             {
             };
 
@@ -245,7 +245,7 @@ namespace Roguegard
                     null
                 };
 
-                view.ShowTemplate(elms, manager, arg)
+                view.Show(elms, manager, arg)
                     ?
                     .NameFrom((slot, manager, arg) =>
                     {

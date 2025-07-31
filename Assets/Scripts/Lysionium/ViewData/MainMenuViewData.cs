@@ -1,13 +1,11 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace Lysionium
 {
     /// <summary>
-    /// 項目数が固定のメニュー向け ViewTemplate
+    /// 項目数が固定のメニュー向け ViewData
     /// </summary>
-    public class MainMenuViewTemplate<TMgr, TArg> : ListViewTemplate<ISelectOption, TMgr, TArg>
+    public class MainMenuViewData<TMgr, TArg> : ListViewData<ISelectOption, TMgr, TArg>
         where TMgr : IListMenuManager
         where TArg : IListMenuArg
     {
@@ -21,7 +19,7 @@ namespace Lysionium
         private ISubviewStateProvider captionBoxSubviewStateProvider;
         private ISubviewStateProvider backAnchorSubviewStateProvider;
 
-        public Builder ShowTemplate(TMgr manager, TArg arg, object viewStateHolder = null)
+        public Builder Show(TMgr manager, TArg arg, object viewStateHolder = null)
         {
             if (manager == null) throw new System.ArgumentNullException(nameof(manager));
 
@@ -61,7 +59,7 @@ namespace Lysionium
             }
         }
 
-        public virtual void HideTemplate(TMgr manager, bool back)
+        public virtual void Hide(TMgr manager, bool back)
         {
             manager.GetSubview(PrimaryCommandSubviewName).Hide(back);
             if (Title != null) { manager.GetSubview(CaptionBoxSubviewName).Hide(back); }
@@ -70,9 +68,9 @@ namespace Lysionium
 
         public class Builder : BaseListBuilder<Builder>
         {
-            private readonly MainMenuViewTemplate<TMgr, TArg> parent;
+            private readonly MainMenuViewData<TMgr, TArg> parent;
 
-            public Builder(MainMenuViewTemplate<TMgr, TArg> parent, TMgr manager, TArg arg)
+            public Builder(MainMenuViewData<TMgr, TArg> parent, TMgr manager, TArg arg)
                 : base(parent, manager, arg)
             {
                 this.parent = parent;

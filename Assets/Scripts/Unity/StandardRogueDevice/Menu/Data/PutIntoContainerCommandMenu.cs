@@ -11,7 +11,7 @@ namespace RoguegardUnity
 {
     public class PutIntoContainerCommandMenu : RogueMenuScreen
     {
-        private readonly MainMenuViewTemplate<MMgr, MArg> view = new()
+        private readonly MainMenuViewData<MMgr, MArg> view = new()
         {
             PrimaryCommandSubviewName = StandardSubviewTable.SecondaryCommandName,
         };
@@ -20,7 +20,7 @@ namespace RoguegardUnity
 
         public override void OpenScreen(in MMgr manager, in MArg arg)
         {
-            view.ShowTemplate(manager, arg)
+            view.Show(manager, arg)
                 ?
                 .Option("すべて入れる", (manager, arg) =>
                 {
@@ -51,7 +51,7 @@ namespace RoguegardUnity
 
         public override void CloseScreenView(MMgr manager, bool back)
         {
-            view.HideTemplate(manager, back);
+            view.Hide(manager, back);
         }
     }
 }

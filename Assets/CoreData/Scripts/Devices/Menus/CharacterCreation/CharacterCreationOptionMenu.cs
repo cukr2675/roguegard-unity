@@ -17,7 +17,7 @@ namespace Roguegard.Device
         private readonly CharacterCreationOptionsSelectOption singleItemMemberSelectOption;
         private readonly CharacterCreationOptionsSelectOption alphabetTypeMemberSelectOption;
 
-        private readonly VariableWidgetsViewTemplate<MMgr, MArg> view;
+        private readonly VariableWidgetsViewData<MMgr, MArg> view;
 
         public CharacterCreationOptionMenu(ICharacterCreationDatabase database)
         {
@@ -166,7 +166,7 @@ namespace Roguegard.Device
             }
             Debug.Log(arg.Arg.Other);
 
-            view.ShowTemplate(elms, manager, arg)
+            view.Show(elms, manager, arg)
                 ?
                 .Build();
         }
@@ -303,7 +303,7 @@ namespace Roguegard.Device
             private Race race;
             private readonly List<IRogueGender> list = new();
 
-            private readonly ScrollViewTemplate<IRogueGender, MMgr, MArg> view = new()
+            private readonly ScrollViewData<IRogueGender, MMgr, MArg> view = new()
             {
             };
 
@@ -316,7 +316,7 @@ namespace Roguegard.Device
                     list.Add(gender);
                 }
 
-                view.ShowTemplate(list, manager, arg)
+                view.Show(list, manager, arg)
                     ?
                     .NameFrom((gender, manager, arg) =>
                     {

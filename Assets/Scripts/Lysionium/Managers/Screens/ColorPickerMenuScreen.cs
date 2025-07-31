@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Lysionium
@@ -10,7 +8,7 @@ namespace Lysionium
     {
         private readonly System.Func<TMgr, TArg, Color> getColor;
         private readonly System.Action<TMgr, TArg, Color> handleClose;
-        private readonly ViewTemplate view;
+        private readonly ViewData view;
 
         public override bool IsIncremental => true;
 
@@ -29,7 +27,7 @@ namespace Lysionium
         {
             var color = getColor(manager, arg);
 
-            view.ShowTemplate(color, manager, arg)
+            view.Show(color, manager, arg)
                 ?
                 .OnClose((manager, arg, color) =>
                 {
@@ -43,16 +41,16 @@ namespace Lysionium
 
         public override void CloseScreenView(TMgr manager, bool back)
         {
-            view.HideTemplate(manager, back);
+            view.Hide(manager, back);
         }
 
-        private class ViewTemplate : ViewTemplate<TMgr, TArg>
+        private class ViewData : ViewData<TMgr, TArg>
         {
             private ISubviewStateProvider colorPickerSubviewStateProvider;
             private Color color;
             private event ColorPickerSubview.HandleClose HandleClose;
 
-            public Builder ShowTemplate(Color color, TMgr manager, TArg arg)
+            public Builder Show(Color color, TMgr manager, TArg arg)
             {
                 if (manager == null) throw new System.ArgumentNullException(nameof(manager));
 
@@ -70,16 +68,16 @@ namespace Lysionium
                 colorPickerSubview.Show();
             }
 
-            public void HideTemplate(TMgr manager, bool back)
+            public void Hide(TMgr manager, bool back)
             {
                 manager.GetSubview(StandardSubviewTable.ColorPickerName).Hide(back);
             }
 
             public class Builder : BaseBuilder<Builder>
             {
-                private readonly ViewTemplate parent;
+                private readonly ViewData parent;
 
-                public Builder(ViewTemplate parent, TMgr manager, TArg arg)
+                public Builder(ViewData parent, TMgr manager, TArg arg)
                     : base(parent, manager, arg)
                 {
                     this.parent = parent;

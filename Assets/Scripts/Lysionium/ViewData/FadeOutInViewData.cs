@@ -1,13 +1,11 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace Lysionium
 {
     /// <summary>
-    /// 画面のフェードアウト/フェードインを扱う ViewTemplate
+    /// 画面のフェードアウト/フェードインを扱う ViewData
     /// </summary>
-    public class FadeOutInViewTemplate<TMgr, TArg> : ViewTemplate<TMgr, TArg>
+    public class FadeOutInViewData<TMgr, TArg> : ViewData<TMgr, TArg>
         where TMgr : IListMenuManager
         where TArg : IListMenuArg
     {
@@ -22,7 +20,7 @@ namespace Lysionium
         private readonly EndAnimationHandler onFadeOutAnimation;
         private readonly EndAnimationHandler onFadeInAnimation;
 
-        public FadeOutInViewTemplate()
+        public FadeOutInViewData()
         {
             onFadeOutAnimation = (manager, arg) =>
             {
@@ -70,9 +68,9 @@ namespace Lysionium
 
         public class Builder : BaseBuilder<Builder>
         {
-            private readonly FadeOutInViewTemplate<TMgr, TArg> parent;
+            private readonly FadeOutInViewData<TMgr, TArg> parent;
 
-            public Builder(FadeOutInViewTemplate<TMgr, TArg> parent, TMgr manager, TArg arg)
+            public Builder(FadeOutInViewData<TMgr, TArg> parent, TMgr manager, TArg arg)
                 : base(parent, manager, arg)
             {
                 this.parent = parent;

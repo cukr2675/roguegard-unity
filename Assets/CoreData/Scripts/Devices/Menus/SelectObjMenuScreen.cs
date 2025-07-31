@@ -8,7 +8,7 @@ namespace Roguegard.Device
         private readonly IDeviceCommandAction callback;
         private readonly List<RogueObj> list = new();
 
-        private readonly ScrollViewTemplate<RogueObj, MMgr, MArg> view = new()
+        private readonly ScrollViewData<RogueObj, MMgr, MArg> view = new()
         {
         };
 
@@ -25,7 +25,7 @@ namespace Roguegard.Device
                 list.Add(obj);
             }
 
-            view.ShowTemplate(list, manager, arg)
+            view.Show(list, manager, arg)
                 ?
                 .NameFrom((obj, manager, arg) =>
                 {

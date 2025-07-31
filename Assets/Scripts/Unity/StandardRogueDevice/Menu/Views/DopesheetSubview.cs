@@ -262,13 +262,13 @@ namespace RoguegardUnity
                 "外部参照"
             };
 
-            private readonly ScrollViewTemplate<string, MMgr, MArg> view = new()
+            private readonly ScrollViewData<string, MMgr, MArg> view = new()
             {
             };
 
             public override void OpenScreen(in MMgr manager, in MArg arg)
             {
-                view.ShowTemplate(boneNames, manager, arg)
+                view.Show(boneNames, manager, arg)
                     ?
                     .NameFrom((boneName, manager, arg) =>
                     {
@@ -296,14 +296,14 @@ namespace RoguegardUnity
 
         private class ReferenceNameMenuScreen : RogueMenuScreen
         {
-            private readonly DialogViewTemplate<MMgr, MArg> view = new()
+            private readonly DialogViewData<MMgr, MArg> view = new()
             {
                 BackAnchorSubviewName = null
             };
 
             public override void OpenScreen(in MMgr manager, in MArg arg)
             {
-                view.ShowTemplate(string.Empty, manager, arg)
+                view.Show(string.Empty, manager, arg)
                     ?
                     .VarOnce(out string id)
                     .Tail(InputFieldViewWidget.CreateOption<MMgr, MArg>(
@@ -330,13 +330,13 @@ namespace RoguegardUnity
 
         private class MenuScreen : RogueMenuScreen
         {
-            private readonly VariableWidgetsViewTemplate<MMgr, MArg> view = new()
+            private readonly VariableWidgetsViewData<MMgr, MArg> view = new()
             {
             };
 
             public override void OpenScreen(in MMgr manager, in MArg arg)
             {
-                view.ShowTemplate(System.Array.Empty<object>(), manager, arg)
+                view.Show(System.Array.Empty<object>(), manager, arg)
                     ?
                     .Tail(
                         new object[]

@@ -10,7 +10,7 @@ namespace Roguegard.Device
     {
         private readonly ICharacterCreationDatabase database;
         private readonly List<object> elms;
-        private readonly ScrollViewTemplate<object, MMgr, MArg> view;
+        private readonly ScrollViewData<object, MMgr, MArg> view;
 
         private CharacterCreationData characterCreationData;
 
@@ -34,7 +34,7 @@ namespace Roguegard.Device
             elms.Clear();
             AddOptionsTo(elms, arg.Self, (System.Type)arg.Arg.Other, database);
 
-            view.ShowTemplate(elms, manager, arg)
+            view.Show(elms, manager, arg)
                 ?
                 .NameFrom((element, manager, arg) => ((IRogueDescribable)element).Name)
 
