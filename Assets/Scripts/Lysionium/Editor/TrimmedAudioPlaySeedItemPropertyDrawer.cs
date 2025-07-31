@@ -1,10 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-using System.Threading;
 using System.Reflection;
+using System.Threading;
 using UnityEditor;
+using UnityEngine;
 
 namespace Lysionium.Audio.Editor
 {

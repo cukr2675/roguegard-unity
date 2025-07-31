@@ -1,10 +1,8 @@
-using System.Collections;
+using HSVPicker;
 using System.Collections.Generic;
 using UnityEngine;
-
-using UnityEngine.UI;
 using UnityEngine.EventSystems;
-using HSVPicker;
+using UnityEngine.UI;
 
 namespace Lysionium
 {
