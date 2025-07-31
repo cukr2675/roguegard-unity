@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -31,6 +31,7 @@ namespace RoguegardUnity
             renderTexture = RenderTexture.GetTemporary(screenSize.x, screenSize.y);
             renderTexture.autoGenerateMips = false;
             renderTexture.filterMode = FilterMode.Point;
+            renderTexture.depthStencilFormat = UnityEngine.Experimental.Rendering.GraphicsFormat.D16_UNorm;
             _mainCamera.targetTexture = renderTexture;
             _image.texture = renderTexture;
             imageTransform = _image.rectTransform;
