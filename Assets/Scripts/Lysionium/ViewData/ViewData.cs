@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Lysionium
 {
@@ -21,6 +22,8 @@ namespace Lysionium
 
         public bool IsBuilt { get; private set; }
 
+        private TMgr callerManager;
+
         /// <summary>
         /// このメソッドが失敗する（false を返す）ときのみ FluentBuilder を返すように実装する
         /// </summary>
@@ -28,6 +31,11 @@ namespace Lysionium
         {
             if (IsBuilt)
             {
+                if (!ReferenceEquals(manager, callerManager))
+                {
+                    Debug.LogWarning($"{GetType()} をビルドしたマネージャーは {callerManager} です。 {manager} に表示することはできません。");
+                }
+
                 ShowSubviews(manager, arg);
                 return true;
             }
@@ -48,12 +56,14 @@ namespace Lysionium
             private readonly ViewData<TMgr, TArg> parent;
             private readonly TMgr manager;
             private readonly TArg arg;
+            private readonly List<System.IDisposable> disposables;
 
             protected BaseBuilder(ViewData<TMgr, TArg> parent, TMgr manager, TArg arg)
             {
                 this.parent = parent;
                 this.manager = manager;
                 this.arg = arg;
+                disposables = new List<System.IDisposable>();
             }
 
             protected void AssertNotBuilt()
@@ -72,6 +82,18 @@ namespace Lysionium
                 if (action == null) throw new System.ArgumentNullException(nameof(action));
 
                 action();
+                return (TOut)this;
+            }
+
+            public TOut Init(System.Func<System.IDisposable> func)
+            {
+                if (func == null) throw new System.ArgumentNullException(nameof(func));
+
+                var disposable = func();
+                if (disposable != null)
+                {
+                    disposables.Add(disposable);
+                }
                 return (TOut)this;
             }
 
@@ -112,8 +134,21 @@ namespace Lysionium
             public void Build()
             {
                 AssertNotBuilt();
+                manager.OnUnload += () => Unload();
                 parent.IsBuilt = true;
+                parent.callerManager = manager;
                 parent.ShowSubviews(manager, arg);
+            }
+
+            private void Unload()
+            {
+                foreach (var disposable in disposables)
+                {
+                    disposable.Dispose();
+                }
+                disposables.Clear();
+                parent.IsBuilt = false;
+                parent.callerManager = default;
             }
         }
     }

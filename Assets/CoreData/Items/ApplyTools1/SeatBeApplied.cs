@@ -1,5 +1,5 @@
 using Lysionium;
-using Lysionium.R3;
+using Lysionium.MergeExtensions.R3;
 using Roguegard.Device;
 using System.Collections.Generic;
 
@@ -55,43 +55,41 @@ namespace Roguegard
 
                 view.Show(objs, manager, arg)
                     ?
-                    .R3(out var r3)
-
+                    .Merge(out var merged)
                     .Init(
-                        () => r3
-                        .WithoutHandle()
-                        .NameFrom((lobbyMember, manager, arg) => lobbyMember.GetName()))
+                        () => merged
 
-                    .Init(
-                        () => r3
-                        .WhereElm(lo => lo.Location == null)
-                        .OnClick((lobbyMember, manager, arg) =>
-                        {
-                            manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-                            manager.Done();
+                        .NameFrom(lobbyMember => lobbyMember.GetName())
 
-                            var info = LobbyMemberList.GetMemberInfo(lobbyMember);
-                            info.Seat = arg.Arg.TargetObj;
-
-                            info.ItemRegister.Clear();
-                            foreach (var item in lobbyMember.Space.Objs)
+                        .Case(
+                            lo => lo.Location == null,
+                            _ => _
+                            .OnClick((lobbyMember, manager, arg) =>
                             {
-                                if (item == null) continue;
+                                manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
+                                manager.Done();
+                                
+                                var info = LobbyMemberList.GetMemberInfo(lobbyMember);
+                                info.Seat = arg.Arg.TargetObj;
+                                
+                                info.ItemRegister.Clear();
+                                foreach (var item in lobbyMember.Space.Objs)
+                                {
+                                    if (item == null) continue;
 
-                                info.ItemRegister.Add(item);
-                            }
+                                    info.ItemRegister.Add(item);
+                                }
 
-                            var world = RogueWorldInfo.GetWorld(arg.Self);
-                            SpaceUtility.TryLocate(lobbyMember, world);
-                            info.SavePoint = RogueWorldSavePointInfo.Instance;
-                            var mainParty = RogueDevice.Primary.Player.Main.Stats.Party;
-                            lobbyMember.Main.Stats.TryAssignParty(lobbyMember, new RogueParty(mainParty.Faction, mainParty.TargetFactions));
-                        }))
+                                var world = RogueWorldInfo.GetWorld(arg.Self);
+                                SpaceUtility.TryLocate(lobbyMember, world);
+                                info.SavePoint = RogueWorldSavePointInfo.Instance;
+                                var mainParty = RogueDevice.Primary.Player.Main.Stats.Party;
+                                lobbyMember.Main.Stats.TryAssignParty(lobbyMember, new RogueParty(mainParty.Faction, mainParty.TargetFactions));
+                            }))
 
-                    .Init(
-                        () => r3
-                        .NotHandled()
-                        .StyleFrom("Disabled"))
+                        .Otherwise(
+                            _ => _
+                            .StyleFrom("Disabled")))
 
                     .Build();
             }

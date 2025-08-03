@@ -6,6 +6,8 @@ namespace Lysionium
 
         ISelectOption ErrorOption { get; }
 
+        event System.Action OnUnload;
+
         ISubview GetSubview(string subviewName);
 
         void HideAll(bool back);

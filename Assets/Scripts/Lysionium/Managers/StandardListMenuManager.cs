@@ -17,6 +17,7 @@ namespace Lysionium
 
         public event System.Action OnError;
         public event System.Action OnDone;
+        public event System.Action OnUnload;
 
         private readonly MenuScreenStack<TMgr, TArg> stack = new();
         private MenuScreenStack<TMgr, TArg>.StackItem reservedMenu;
@@ -43,8 +44,14 @@ namespace Lysionium
             HideAll();
         }
 
+        protected virtual void OnDestroy()
+        {
+            OnUnload?.Invoke();
+            OnUnload = null;
+        }
+
         // アニメーションが再生されるのを待機するため Update ではなく LateUpdate にする
-        private void LateUpdate()
+        protected virtual void LateUpdate()
         {
             if (reservedMenu == null || HasManagerLock) return;
 
