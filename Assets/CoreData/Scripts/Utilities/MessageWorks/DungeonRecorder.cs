@@ -26,7 +26,7 @@ namespace Roguegard
         public int FloorLv { get; }
         public MessageWorkList List { get; }
 
-        private readonly PlayCommand playCommand;
+        private readonly PlayDeviceCommand playCommand;
 
         public DungeonRecorder(DungeonQuest quest, int floorLv)
         {
@@ -38,7 +38,7 @@ namespace Roguegard
             //obj.Main.SetBaseInfoSet(obj, RogueDevice.Primary.Player.Main.InfoSet);
             //List.Add(RogueCharacterWork.CreateWalk(obj, Vector2Int.zero, RogueDirection.Down, KeywordSpriteMotion.Attack, false));
             //List.Add(RogueCharacterWork.CreateWalk(obj, Vector2Int.one*100, 1f, RogueDirection.Down, KeywordSpriteMotion.Attack, false));
-            playCommand = new PlayCommand() { recorder = this };
+            playCommand = new PlayDeviceCommand() { recorder = this };
         }
 
         public void Add(IKeyword keyword, int integer)
@@ -102,12 +102,12 @@ namespace Roguegard
             device.SetDeviceCommand(playCommand, null, RogueMethodArgument.Identity);
         }
 
-        private class PlayCommand : IDeviceCommandAction
+        private class PlayDeviceCommand : IDeviceCommand
         {
             public DungeonRecorder recorder;
             public int index;
 
-            public bool CommandInvoke(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
+            public bool Execute(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
             {
                 while (index < recorder.List.Count)
                 {

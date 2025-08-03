@@ -1,0 +1,37 @@
+using Roguegard.Extensions;
+using UnityEngine;
+
+namespace Roguegard
+{
+    public class StairsSaveObjCommand : SelfCallingObjCommand
+    {
+        public override IKeyword Keyword => CategoryKw.DownStairs;
+
+        public override string Name => "下りてセーブ";
+
+        protected override bool Invoke(RogueObj player, RogueObj user, float activationDepth, in RogueMethodArgument arg)
+        {
+            // プレイヤー操作を要求するため、プレイヤーキャラのみ実行可能とする
+            if (RogueDevice.Primary.Player != player) return false;
+            if (CommonAssert.RequireTool(arg, out var tool)) return false;
+            if (tool.Main.Category != CategoryKw.LevelDownStairs)
+            {
+                Debug.LogError($"{tool} のカテゴリは {CategoryKw.LevelDownStairs.Name} ではありません。");
+                return false;
+            }
+
+            var info = SavePointInfo.Get(tool);
+            if (!this.LocateSavePoint(player, tool, activationDepth, info)) return false;
+
+            var memberInfo = LobbyMemberList.GetMemberInfo(player);
+            memberInfo.SavePoint = info;
+            RogueDevice.Add(DeviceKw.SaveGame, 0);
+            return true;
+        }
+
+        public override ISkillDescribable GetSkillDescribable(RogueObj self, RogueObj tool)
+        {
+            return null;
+        }
+    }
+}

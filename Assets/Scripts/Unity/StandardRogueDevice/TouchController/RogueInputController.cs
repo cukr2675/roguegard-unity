@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -172,7 +172,7 @@ namespace RoguegardUnity
         public void NextTurn(RogueObj player)
         {
             // ダッシュボタンを攻撃ボタンにする
-            var attackTarget = PointAttackCommandAction.GetVisibleTarget(player);
+            var attackTarget = PointAttackDeviceCommand.GetVisibleTarget(player);
             if (attackTarget != null) { currentDashSpriteTable = _attackSprite; }
             else { currentDashSpriteTable = _sprintSprite; }
 
@@ -278,7 +278,7 @@ namespace RoguegardUnity
 
             if (dashForward && !_cameraController.IsCameraMode)
             {
-                attackTarget = PointAttackCommandAction.GetVisibleTarget(player);
+                attackTarget = PointAttackDeviceCommand.GetVisibleTarget(player);
                 startsDashForward = dashButton.IsDown;
                 return true;
             }

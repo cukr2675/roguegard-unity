@@ -1,0 +1,22 @@
+namespace Roguegard
+{
+    public class StairsDownObjCommand : SelfCallingObjCommand
+    {
+        public override IKeyword Keyword => CategoryKw.DownStairs;
+
+        public override string Name => "下りる";
+
+        protected override bool Invoke(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
+        {
+            if (CommonAssert.RequireTool(CategoryKw.DownStairs, arg, out var tool, out var beAppliedMethod)) return false;
+
+            var result = RogueMethodAspectState.Invoke(CategoryKw.DownStairs, beAppliedMethod, tool, self, activationDepth, arg);
+            return result;
+        }
+
+        public override ISkillDescribable GetSkillDescribable(RogueObj self, RogueObj tool)
+        {
+            return null;
+        }
+    }
+}

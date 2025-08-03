@@ -81,7 +81,7 @@ namespace Roguegard
                 {
                     var positionIndex = random.Next(0, predicator.Positions.Length);
                     var arg = new RogueMethodArgument(tool: item, targetPosition: predicator.Positions[positionIndex]);
-                    var result = option.CommandInvoke(self, user, activationDepth, arg);
+                    var result = option.Execute(self, user, activationDepth, arg);
                     if (result) return true;
                 }
             }
@@ -128,7 +128,7 @@ namespace Roguegard
                 {
                     var positionIndex = random.Next(0, predicator.Positions.Length);
                     var arg = new RogueMethodArgument(tool: item, targetPosition: predicator.Positions[positionIndex]);
-                    var result = option.CommandInvoke(self, user, activationDepth, arg);
+                    var result = option.Execute(self, user, activationDepth, arg);
                     if (result) return true;
                 }
             }

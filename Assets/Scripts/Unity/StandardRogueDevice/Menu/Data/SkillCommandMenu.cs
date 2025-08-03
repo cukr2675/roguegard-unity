@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 using Lysionium;
 using Roguegard;
 using Roguegard.Device;
@@ -17,7 +13,7 @@ namespace RoguegardUnity
             PrimaryCommandSubviewName = StandardSubviewTable.SecondaryCommandName,
         };
 
-        private readonly CommandAction commandAction = new();
+        private readonly DeviceCommand deviceCommand = new();
 
         public override void OpenScreen(in MMgr manager, in MArg arg)
         {
@@ -30,7 +26,7 @@ namespace RoguegardUnity
                 {
                     var info = RogueDeviceEffect.Get(arg.Self);
                     var selectedSkill = (ISkill)arg.Arg.Other;
-                    info.SetDeviceCommand(commandAction, null, new(other: selectedSkill));
+                    info.SetDeviceCommand(deviceCommand, null, new(other: selectedSkill));
                     manager.Done();
                 })
                 .Back()
@@ -42,9 +38,9 @@ namespace RoguegardUnity
             view.Hide(manager, back);
         }
 
-        private class CommandAction : IDeviceCommandAction
+        private class DeviceCommand : IDeviceCommand
         {
-            public bool CommandInvoke(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
+            public bool Execute(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
             {
                 if (!RoguegardSettings.KeywordsNotEnqueueMessageRule.Contains(MainInfoKw.Skill))
                 {

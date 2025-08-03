@@ -9,7 +9,7 @@ namespace Roguegard.Extensions
         private static readonly LoseExpRogueMethod loseExp = new();
         private static readonly TryAnyRogueMethod tryAnyRogueMethod = new();
         private static readonly TryAnyKeyword tryAnyKeyword = new();
-        private static readonly SwapPositionCommand swapPositionCommand = new();
+        private static readonly SwapPositionObjCommand SwapPositionObjCommand = new();
 
         public static bool PutIn(
             this IApplyRogueMethodCaller method, RogueObj self, RogueObj container, IContainerInfo containerInfo, RogueObj obj, float activationDepth)
@@ -33,8 +33,8 @@ namespace Roguegard.Extensions
                 var obj = self.Location.Space.GetColliderObj(self.Position + direction.Forward);
                 if (obj != null && !obj.AsTile && !StatsEffectedValues.AreVS(self, obj))
                 {
-                    // 被敵対キャラと入れ替わる
-                    return swapPositionCommand.CommandInvoke(self, null, activationDepth, new(targetObj: obj));
+                    // 非敵対キャラと入れ替わる
+                    return SwapPositionObjCommand.Execute(self, null, activationDepth, new(targetObj: obj));
                 }
             }
 

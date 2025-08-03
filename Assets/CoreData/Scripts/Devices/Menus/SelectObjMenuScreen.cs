@@ -5,14 +5,14 @@ namespace Roguegard.Device
 {
     public class SelectObjMenuScreen : RogueMenuScreen
     {
-        private readonly IDeviceCommandAction callback;
+        private readonly IDeviceCommand callback;
         private readonly List<RogueObj> list = new();
 
         private readonly ScrollViewData<RogueObj, MMgr, MArg> view = new()
         {
         };
 
-        public SelectObjMenuScreen(IDeviceCommandAction callback)
+        public SelectObjMenuScreen(IDeviceCommand callback)
         {
             this.callback = callback;
         }

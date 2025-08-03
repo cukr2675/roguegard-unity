@@ -45,8 +45,8 @@ namespace RoguegardUnity
         public bool OpenGrid => _inputController.OpenGrid;
         public bool FastForward => _inputController.FastForward;
 
-        private static readonly PushCommand pushCommand = new PushCommand();
-        private static readonly SwapPositionCommand swapPositionCommand = new SwapPositionCommand();
+        private static readonly PushObjCommand PushObjCommand = new PushObjCommand();
+        private static readonly SwapPositionObjCommand SwapPositionObjCommand = new SwapPositionObjCommand();
 
         internal void Initialize(Tilemap tilemap, RogueSpriteRendererPool rendererPool, System.Action stopAutoPlay)
         {
@@ -147,7 +147,7 @@ namespace RoguegardUnity
                 
                 // ボタン UI から方向転換の入力を取得し、現在のプレイヤーキャラの向きと違う場合、プレイヤーキャラを方向転換させる。
                 var arg = new RogueMethodArgument(targetPosition: player.Position + toDirection.Forward);
-                deviceInfo.SetDeviceCommand(TurnCommandAction.Instance, player, arg);
+                deviceInfo.SetDeviceCommand(TurnDeviceCommand.Instance, player, arg);
                 EndTurn();
                 return;
             }
@@ -230,7 +230,7 @@ namespace RoguegardUnity
                         return;
                     }
 
-                    deviceInfo.SetDeviceCommand(WaitCommandAction.Instance, player, RogueMethodArgument.Identity);
+                    deviceInfo.SetDeviceCommand(WaitDeviceCommand.Instance, player, RogueMethodArgument.Identity);
                     EndTurn();
                     return;
                 }
@@ -238,7 +238,7 @@ namespace RoguegardUnity
                 {
                     // 攻撃
                     var arg = new RogueMethodArgument(targetObj: attackTarget, targetPosition: player.Position + player.Main.Stats.Direction.Forward);
-                    deviceInfo.SetDeviceCommand(PointAttackCommandAction.Instance, player, arg);
+                    deviceInfo.SetDeviceCommand(PointAttackDeviceCommand.Instance, player, arg);
                     EndTurn();
                     return;
                 }
@@ -246,7 +246,7 @@ namespace RoguegardUnity
                 {
                     // 前方へ移動する（通路であれば曲がり角を曲がる）
                     var arg = new RogueMethodArgument(targetPosition: targetPosition);
-                    deviceInfo.SetDeviceCommand(WalkCommandAction.Instance, player, arg);
+                    deviceInfo.SetDeviceCommand(WalkDeviceCommand.Instance, player, arg);
                     EndTurn();
                     return;
                 }
@@ -257,7 +257,7 @@ namespace RoguegardUnity
 
                     // 曲がり角では方向転換だけ行う
                     var arg = new RogueMethodArgument(targetPosition: targetPosition);
-                    deviceInfo.SetDeviceCommand(TurnCommandAction.Instance, player, arg);
+                    deviceInfo.SetDeviceCommand(TurnDeviceCommand.Instance, player, arg);
                     EndTurn();
                     return;
                 }
@@ -304,7 +304,7 @@ namespace RoguegardUnity
                         if (StatsEffectedValues.AreVS(player, obj))
                         {
                             // 敵をクリックして攻撃
-                            deviceInfo.SetDeviceCommand(PointAttackCommandAction.Instance, player, new(targetObj: obj, targetPosition: p));
+                            deviceInfo.SetDeviceCommand(PointAttackDeviceCommand.Instance, player, new(targetObj: obj, targetPosition: p));
                             EndTurn();
                             ClearInput();
                             return;
@@ -312,7 +312,7 @@ namespace RoguegardUnity
                         else if (obj.Main.InfoSet.Category == CategoryKw.MovableObstacle)
                         {
                             // 大岩をクリックして押して移動させる
-                            deviceInfo.SetDeviceCommand(pushCommand, player, new(targetObj: obj));
+                            deviceInfo.SetDeviceCommand(PushObjCommand, player, new(targetObj: obj));
                             EndTurn();
                             ClearInput();
                             return;
@@ -320,7 +320,7 @@ namespace RoguegardUnity
                         else if (player.Main.Stats.Party.Members.Contains(obj))
                         {
                             // パーティメンバーをクリックして場所を入れ替える
-                            deviceInfo.SetDeviceCommand(swapPositionCommand, player, new(targetObj: obj));
+                            deviceInfo.SetDeviceCommand(SwapPositionObjCommand, player, new(targetObj: obj));
                             EndTurn();
                             ClearInput();
                             return;
@@ -348,7 +348,7 @@ namespace RoguegardUnity
                     }
 
                     // 地面をクリックして移動
-                    deviceInfo.SetDeviceCommand(WalkCommandAction.Instance, player, new(targetPosition: point));
+                    deviceInfo.SetDeviceCommand(WalkDeviceCommand.Instance, player, new(targetPosition: point));
                     EndTurn();
                     return;
                 }

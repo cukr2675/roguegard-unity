@@ -12,7 +12,7 @@ namespace Roguegard
 
         private PreparationKitBeApplied()
         {
-            var callback = new SelectedRogueMethod() { parent = this };
+            var callback = new SelectedDeviceCommand() { parent = this };
             menu = new SelectObjMenuScreen(callback);
         }
 
@@ -29,11 +29,11 @@ namespace Roguegard
             }
         }
 
-        private class SelectedRogueMethod : IDeviceCommandAction
+        private class SelectedDeviceCommand : IDeviceCommand
         {
             public PreparationKitBeApplied parent;
 
-            public bool CommandInvoke(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
+            public bool Execute(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
             {
                 if (CommonAssert.RequireTool(arg, out var tool)) return false;
 

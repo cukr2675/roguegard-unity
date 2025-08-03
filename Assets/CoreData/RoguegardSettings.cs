@@ -51,7 +51,7 @@ namespace Roguegard
 
         public static DefaultRaceOptionAsset DefaultRaceOption { get; set; }
 
-        public static ObjCommandTable ObjCommandTable { get; set; }
+        public static ObjCommandTableAsset ObjCommandTable { get; set; }
 
         public static ICharacterCreationDatabase CharacterCreationDatabase { get; set; }
 

@@ -12,7 +12,7 @@ namespace Roguegard
 
         private LinkPhialBeApplied()
         {
-            var callback = new SecondRogueMethod(this);
+            var callback = new SecondDeviceCommand(this);
             menu = new SelectObjMenuScreen(callback);
         }
 
@@ -29,18 +29,18 @@ namespace Roguegard
             }
         }
 
-        private class SecondRogueMethod : IDeviceCommandAction
+        private class SecondDeviceCommand : IDeviceCommand
         {
-            private readonly SelectedRogueMethod callback;
+            private readonly SelectedDeviceCommand callback;
             private readonly SelectObjMenuScreen menu;
 
-            public SecondRogueMethod(LinkPhialBeApplied parent)
+            public SecondDeviceCommand(LinkPhialBeApplied parent)
             {
-                callback = new SelectedRogueMethod() { parent = parent };
+                callback = new SelectedDeviceCommand() { parent = parent };
                 menu = new SelectObjMenuScreen(callback);
             }
 
-            public bool CommandInvoke(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
+            public bool Execute(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
             {
                 if (CommonAssert.RequireTool(arg, out var tool)) return false;
 
@@ -50,12 +50,12 @@ namespace Roguegard
             }
         }
 
-        private class SelectedRogueMethod : IDeviceCommandAction
+        private class SelectedDeviceCommand : IDeviceCommand
         {
             public LinkPhialBeApplied parent;
             public RogueObj firstTool;
 
-            public bool CommandInvoke(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
+            public bool Execute(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
             {
                 if (CommonAssert.RequireTool(arg, out var secondTool)) return false;
 

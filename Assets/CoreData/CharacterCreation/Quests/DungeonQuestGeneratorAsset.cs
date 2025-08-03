@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Roguegard.CharacterCreation
 {
-    [CreateAssetMenu(menuName = "Roguegard/Dungeon Quest Generator")]
+    [CreateAssetMenu(menuName = "Roguegard/Settings/Dungeon Quest Generator")]
     public class DungeonQuestGeneratorAsset : ScriptableObject
     {
         [SerializeField] private QuestEffectIntrinsicOptionAsset[] _objectiveEffects = null;

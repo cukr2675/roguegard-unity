@@ -6,7 +6,7 @@ namespace Roguegard.Device
         /// <summary>
         /// 例外発生時に無限ループしないために <see cref="StaticId"/> でリセットする
         /// </summary>
-        [System.NonSerialized] private readonly StaticInitializable<IDeviceCommandAction> commandAction = new(() => null);
+        [System.NonSerialized] private readonly StaticInitializable<IDeviceCommand> command = new(() => null);
 
         [System.NonSerialized] private RogueObj commandUser;
         [System.NonSerialized] private RogueMethodArgument commandArg;
@@ -32,18 +32,18 @@ namespace Roguegard.Device
             RogueEffectUtility.RemoveClose(obj, this);
         }
 
-        public void SetDeviceCommand(IDeviceCommandAction action, RogueObj user, in RogueMethodArgument arg)
+        public void SetDeviceCommand(IDeviceCommand action, RogueObj user, in RogueMethodArgument arg)
         {
-            if (commandAction.Value != null) throw new System.InvalidOperationException($"{nameof(commandAction)} を上書きすることはできません。");
+            if (command.Value != null) throw new System.InvalidOperationException($"{nameof(command)} を上書きすることはできません。");
 
-            commandAction.Value = action;
+            command.Value = action;
             commandUser = user;
             commandArg = arg;
         }
 
         public void ClearDeviceCommand()
         {
-            commandAction.Value = null;
+            command.Value = null;
         }
 
         void IRogueEffect.Open(RogueObj self)
@@ -61,11 +61,11 @@ namespace Roguegard.Device
             else
             {
                 var activeResult = false;
-                if (commandAction.Value != null)
+                if (command.Value != null)
                 {
                     // コマンドが設定されていたら実行する。
-                    activeResult = commandAction.Value.CommandInvoke(self, commandUser, activationDepth, commandArg);
-                    commandAction.Value = null;
+                    activeResult = command.Value.Execute(self, commandUser, activationDepth, commandArg);
+                    command.Value = null;
                 }
                 if (activeResult)
                 {

@@ -45,7 +45,7 @@ namespace Roguegard
                 if (nearestItem.Position == self.Position)
                 {
                     // アイテムの上についたら拾う
-                    if (pickUp.CommandInvoke(self, null, activationDepth, new(tool: nearestItem)))
+                    if (pickUp.Execute(self, null, activationDepth, new(tool: nearestItem)))
                     {
                         return RogueObjUpdaterContinueType.Break;
                     }

@@ -11,8 +11,8 @@ namespace Roguegard
         private bool selectedPositionIsEnabled;
         private Vector2Int selectedPosition;
 
-        private static readonly CommandFloorDownStairs apply = new();
-        private static readonly CommandDownStairs apply2 = new();
+        private static readonly StairsDownFloorObjCommand apply = new();
+        private static readonly StairsDownObjCommand apply2 = new();
 
         public RogueObjUpdaterContinueType Tick(RogueObj self, float activationDepth)
         {
@@ -35,14 +35,14 @@ namespace Roguegard
                     // 階段についたら使う
                     if (obj.Main.InfoSet.Category == CategoryKw.LevelDownStairs)
                     {
-                        if (apply.CommandInvoke(self, null, activationDepth, new(tool: obj)))
+                        if (apply.Execute(self, null, activationDepth, new(tool: obj)))
                         {
                             return default;
                         }
                     }
                     else
                     {
-                        if (apply2.CommandInvoke(self, null, activationDepth, new(tool: obj)))
+                        if (apply2.Execute(self, null, activationDepth, new(tool: obj)))
                         {
                             return default;
                         }
