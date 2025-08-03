@@ -6,7 +6,7 @@ namespace Lysionium
     {
         public ItemNameSelector<TItem, TMgr, TArg> GetName { get; set; }
         public ItemStyleSelector<TItem, TMgr, TArg> GetStyle { get; set; }
-        public ClickItemHandler<TItem, TMgr, TArg> HandleClick { get; set; }
+        public ClickItemHandler<TItem, TMgr, TArg> Click { get; set; }
 
         /// <summary>
         /// このインスタンスのデリゲート実行前に <see cref="SelectOptionViewItemHandler"/> の処理を挟む
@@ -42,20 +42,20 @@ namespace Lysionium
             return GetStyle?.Invoke(tItem, tMgr, tArg);
         }
 
-        void IButtonViewItemHandler.HandleClick(object item, IListMenuManager manager, IListMenuArg arg)
+        void IButtonViewItemHandler.Click(object item, IListMenuManager manager, IListMenuArg arg)
         {
             if (EnableSelectOptionProxy && item is ISelectOption)
             {
-                SelectOptionViewItemHandler.Instance.HandleClick(item, manager, arg);
+                SelectOptionViewItemHandler.Instance.Click(item, manager, arg);
                 return;
             }
 
-            if (HandleClick == null) throw new System.InvalidOperationException($"{HandleClick} が null です。");
+            if (Click == null) throw new System.InvalidOperationException($"{Click} が null です。");
             if (LuiAssert.Type<TItem>(item, out var tItem, manager) ||
                 LuiAssert.Type<TMgr>(manager, out var tMgr, manager) ||
                 LuiAssert.Type<TArg>(arg, out var tArg, manager)) return;
 
-            HandleClick(tItem, tMgr, tArg);
+            Click(tItem, tMgr, tArg);
         }
     }
 }

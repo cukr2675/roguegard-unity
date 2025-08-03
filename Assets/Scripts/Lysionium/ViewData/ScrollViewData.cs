@@ -123,7 +123,7 @@ namespace Lysionium
             {
                 AssertNotBuilt();
 
-                parent.scrollSubviewHandler.HandleClick += handler;
+                parent.scrollSubviewHandler.Click += handler;
                 return this;
             }
         }

@@ -261,7 +261,7 @@ namespace Roguegard.Device
 
             string ISelectOption.GetStyle(IListMenuManager manager, IListMenuArg arg) => null;
 
-            void ISelectOption.HandleClick(IListMenuManager iManager, IListMenuArg iArg)
+            void ISelectOption.Click(IListMenuManager iManager, IListMenuArg iArg)
             {
                 var manager = (MMgr)iManager;
                 var arg = (MArg)iArg;

@@ -56,7 +56,7 @@ namespace Roguegard
 
         string ISelectOption.GetStyle(IListMenuManager manager, IListMenuArg arg) => null;
 
-        void ISelectOption.HandleClick(IListMenuManager manager, IListMenuArg arg)
+        void ISelectOption.Click(IListMenuManager manager, IListMenuArg arg)
         {
             var args = (MArg)arg;
             Activate((MMgr)manager, args.Self, args.User, args.Arg);
@@ -86,7 +86,7 @@ namespace Roguegard
                             levelText = dungeonInfo.GetLevelText(arg.Self.Location);
                         }
 
-                        selectOptions[0].HandleClick(manager, arg);
+                        selectOptions[0].Click(manager, arg);
                         manager.GetSubview(StandardSubviewTable.OverlayName).Show(
                             new[] {
                                 $"<align=\"center\"><size=+32>{arg.Self.Location.GetName()} {levelText}"

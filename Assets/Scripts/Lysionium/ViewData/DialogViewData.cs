@@ -20,7 +20,7 @@ namespace Lysionium
         private ISubviewStateProvider backAnchorSubviewStateProvider;
 
         private string message;
-        private event ClickItemHandler<string, TMgr, TArg> handleClickLink;
+        private event ClickItemHandler<string, TMgr, TArg> ClickLink;
 
         public Builder Show(string message, TMgr manager, TArg arg, object viewStateHolder = null)
         {
@@ -46,9 +46,9 @@ namespace Lysionium
         protected override void ShowSubviews(TMgr manager, TArg arg)
         {
             OriginalList.Clear();
-            if (handleClickLink != null)
+            if (ClickLink != null)
             {
-                OriginalList.Add(LabelViewWidget.CreateOption(message, handleClickLink));
+                OriginalList.Add(LabelViewWidget.CreateOption(message, ClickLink));
             }
             else
             {
@@ -116,7 +116,7 @@ namespace Lysionium
             {
                 AssertNotBuilt();
 
-                parent.handleClickLink += onClickLink;
+                parent.ClickLink += onClickLink;
                 return this;
             }
         }

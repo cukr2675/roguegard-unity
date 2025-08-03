@@ -9,6 +9,6 @@ namespace Lysionium
 
         string GetStyle(IListMenuManager manager, IListMenuArg arg);
 
-        void HandleClick(IListMenuManager manager, IListMenuArg arg);
+        void Click(IListMenuManager manager, IListMenuArg arg);
     }
 }

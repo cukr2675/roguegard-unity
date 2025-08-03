@@ -16,7 +16,7 @@ namespace Lysionium
         {
             this.getColor = getColor;
             handleClose = onClose;
-            handleClose += (manager, arg, color) => manager.BackOption.HandleClick(manager, arg);
+            handleClose += (manager, arg, color) => manager.BackOption.Click(manager, arg);
 
             view = new()
             {

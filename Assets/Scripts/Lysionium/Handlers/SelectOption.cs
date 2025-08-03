@@ -3,26 +3,26 @@ namespace Lysionium
     public static class SelectOption
     {
         public static SelectOption<TMgr, TArg> Create<TMgr, TArg>(
-            string name, ClickItemHandler<TMgr, TArg> handleClick, string style = null)
+            string name, ClickItemHandler<TMgr, TArg> onClick, string style = null)
             where TMgr : IListMenuManager
             where TArg : IListMenuArg
         {
             var instance = new SelectOption<TMgr, TArg>();
             instance.SetName(name);
             instance.Style = style;
-            instance.HandleClick = handleClick;
+            instance.Click = onClick;
             return instance;
         }
 
         public static SelectOption<TMgr, TArg> Create<TMgr, TArg>(
-            ItemNameSelector<TMgr, TArg> getName, ClickItemHandler<TMgr, TArg> handleClick, string style = null)
+            ItemNameSelector<TMgr, TArg> getName, ClickItemHandler<TMgr, TArg> onClick, string style = null)
             where TMgr : IListMenuManager
             where TArg : IListMenuArg
         {
             var instance = new SelectOption<TMgr, TArg>();
             instance.SetName(getName);
             instance.Style = style;
-            instance.HandleClick = handleClick;
+            instance.Click = onClick;
             return instance;
         }
     }
@@ -36,7 +36,7 @@ namespace Lysionium
 
         public string Style { get; set; }
 
-        public ClickItemHandler<TMgr, TArg> HandleClick { get; set; }
+        public ClickItemHandler<TMgr, TArg> Click { get; set; }
 
         public void SetName(string name)
         {
@@ -71,12 +71,12 @@ namespace Lysionium
             return Style;
         }
 
-        void ISelectOption.HandleClick(IListMenuManager manager, IListMenuArg arg)
+        void ISelectOption.Click(IListMenuManager manager, IListMenuArg arg)
         {
             if (LuiAssert.Type<TMgr>(manager, out var tMgr, manager) ||
                 LuiAssert.Type<TArg>(arg, out var tArg, manager)) return;
 
-            HandleClick(tMgr, tArg);
+            Click(tMgr, tArg);
         }
     }
 }

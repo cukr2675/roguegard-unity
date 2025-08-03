@@ -36,7 +36,7 @@ namespace RoguegardUnity
             var button = GetComponent<Button>();
             button.onClick.AddListener(() =>
             {
-                handler.HandleClick(element, Manager, Arg);
+                handler.Click(element, Manager, Arg);
             });
 
             TryGetComponent(out animator);

@@ -114,7 +114,7 @@ namespace RoguegardUnity
                         newArg.Arg = new(other: fileInfo);
                         manager.PushMenuScreen(nextScreen, newArg.ReadOnly);
                     }
-                    else if (element is ISelectOption option) { option.HandleClick(manager, arg); }
+                    else if (element is ISelectOption option) { option.Click(manager, arg); }
                     else throw new System.InvalidOperationException();
                 })
 
@@ -149,7 +149,7 @@ namespace RoguegardUnity
 
         private static void ErrorMsgOK(IListMenuManager manager, MArg arg)
         {
-            manager.BackOption.HandleClick(manager, arg);
+            manager.BackOption.Click(manager, arg);
         }
 
         private class ImportScreen : RogueMenuScreen

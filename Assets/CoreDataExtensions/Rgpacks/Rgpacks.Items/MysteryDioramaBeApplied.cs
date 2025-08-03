@@ -92,7 +92,7 @@ namespace Roguegard.Rgpacks
                         }
                         else
                         {
-                            SelectOptionViewItemHandler.Instance.HandleClick(element, manager, arg);
+                            SelectOptionViewItemHandler.Instance.Click(element, manager, arg);
                         }
                     })
 

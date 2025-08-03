@@ -21,11 +21,11 @@ namespace Lysionium
             return selectOption.GetStyle(manager, arg);
         }
 
-        public void HandleClick(object item, IListMenuManager manager, IListMenuArg arg)
+        public void Click(object item, IListMenuManager manager, IListMenuArg arg)
         {
             if (LuiAssert.Type<ISelectOption>(item, out var selectOption, manager)) return;
 
-            selectOption.HandleClick(manager, arg);
+            selectOption.Click(manager, arg);
         }
     }
 }

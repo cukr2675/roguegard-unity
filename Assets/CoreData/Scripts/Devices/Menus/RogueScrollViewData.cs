@@ -130,7 +130,7 @@ namespace Roguegard.Device
             {
                 AssertNotBuilt();
 
-                parent.scrollSubviewHandler.HandleClick = method;
+                parent.scrollSubviewHandler.Click = method;
                 return this;
             }
         }
@@ -138,7 +138,7 @@ namespace Roguegard.Device
         private class ElementHandler : IRogueElementHandler, IButtonViewItemHandler
         {
             public GetInfo<Color?, Sprite, Color?, int?, float?, string, string, bool> GetInfo { get; set; }
-            public ClickItemHandler<T, MMgr, MArg> HandleClick { get; set; }
+            public ClickItemHandler<T, MMgr, MArg> Click { get; set; }
 
             public string GetName(object elementObj, IListMenuManager manager, IListMenuArg arg)
             {
@@ -161,14 +161,14 @@ namespace Roguegard.Device
 
             public string GetStyle(object element, IListMenuManager manager, IListMenuArg arg) => null;
 
-            void IButtonViewItemHandler.HandleClick(object elementObj, IListMenuManager iManager, IListMenuArg iArg)
+            void IButtonViewItemHandler.Click(object elementObj, IListMenuManager iManager, IListMenuArg iArg)
             {
                 var element = (T)elementObj;
                 var manager = (MMgr)iManager;
                 var arg = (MArg)iArg;
 
                 // 選択したスキルの情報と選択肢を表示する
-                HandleClick(element, manager, arg);
+                Click(element, manager, arg);
             }
         }
     }

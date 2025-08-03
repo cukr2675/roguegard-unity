@@ -98,7 +98,7 @@ namespace RoguegardUnity
                         if (element == null) return "+ 固有能力を追加";
                         else return element.Name;
                     },
-                    HandleClick = (element, manager, arg) =>
+                    Click = (element, manager, arg) =>
                     {
                         if (element == null) { manager.PushMenuScreen(addMenu, arg.Self, other: typeof(Intrinsic)); }
                         else { manager.PushMenuScreen(optionMenu, arg.Self, other: element); }
@@ -112,7 +112,7 @@ namespace RoguegardUnity
                         if (element == null) return "+ 固有能力を追加";
                         else return element.Name;
                     },
-                    HandleClick = (element, manager, arg) =>
+                    Click = (element, manager, arg) =>
                     {
                         if (element == null) { manager.PushMenuScreen(addMenu, arg.Self, other: typeof(StartingItem)); }
                         else { manager.PushMenuScreen(optionMenu, arg.Self, other: element); }

@@ -87,7 +87,7 @@ namespace Lysionium
             _onClick.Invoke();
 
             var linkInfo = _text.textInfo.linkInfo[linkIndex];
-            widgetOption.HandleClickLink(linkInfo.GetLinkText(), _parent.Manager, _parent.Arg);
+            widgetOption.ClickLink(linkInfo.GetLinkText(), _parent.Manager, _parent.Arg);
         }
 
         public static IWidgetOption CreateOption<TMgr, TArg>(string text, ClickItemHandler<string, TMgr, TArg> onClickLink = null)
@@ -95,7 +95,7 @@ namespace Lysionium
             return new WidgetOption<TMgr, TArg>()
             {
                 GetText = delegate { return text; },
-                HandleClickLink = onClickLink
+                ClickLink = onClickLink
             };
         }
 
@@ -105,7 +105,7 @@ namespace Lysionium
             return new WidgetOption<TMgr, TArg>()
             {
                 GetText = getText,
-                HandleClickLink = onClickLink
+                ClickLink = onClickLink
             };
         }
 
@@ -113,14 +113,14 @@ namespace Lysionium
         {
             string GetText(IListMenuManager manager, IListMenuArg arg);
 
-            void HandleClickLink(string link, IListMenuManager manager, IListMenuArg arg);
+            void ClickLink(string link, IListMenuManager manager, IListMenuArg arg);
         }
 
         private class WidgetOption<TMgr, TArg> : IWidgetOption
         {
             public string WidgetName { get; set; }
             public ItemNameSelector<TMgr, TArg> GetText { get; set; }
-            public ClickItemHandler<string, TMgr, TArg> HandleClickLink { get; set; }
+            public ClickItemHandler<string, TMgr, TArg> ClickLink { get; set; }
 
             string IWidgetOption.GetText(IListMenuManager manager, IListMenuArg arg)
             {
@@ -130,12 +130,12 @@ namespace Lysionium
                 return GetText(tMgr, tArg);
             }
 
-            void IWidgetOption.HandleClickLink(string link, IListMenuManager manager, IListMenuArg arg)
+            void IWidgetOption.ClickLink(string link, IListMenuManager manager, IListMenuArg arg)
             {
                 if (LuiAssert.Type<TMgr>(manager, out var tMgr) ||
                     LuiAssert.Type<TArg>(arg, out var tArg)) return;
 
-                HandleClickLink?.Invoke(link, tMgr, tArg);
+                ClickLink?.Invoke(link, tMgr, tArg);
             }
         }
     }

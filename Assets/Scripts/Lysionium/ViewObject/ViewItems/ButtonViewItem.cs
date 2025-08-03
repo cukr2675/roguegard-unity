@@ -30,7 +30,7 @@ namespace Lysionium
             var button = GetComponent<Button>();
             button.onClick.AddListener(() =>
             {
-                handler.HandleClick(item, Manager, Arg);
+                handler.Click(item, Manager, Arg);
             });
 
             clickActionPerformed = ctx => ExecuteEvents.Execute(gameObject, new BaseEventData(EventSystem.current), ExecuteEvents.submitHandler);

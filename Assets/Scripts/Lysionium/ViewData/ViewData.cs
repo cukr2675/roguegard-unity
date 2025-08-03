@@ -6,6 +6,7 @@ namespace Lysionium
     // ViewFrame はUI要素としてのフレームと被る
     // ViewMarkup は markup (マークをつける) というよりは builder や query のほうが近い
     // ViewSetup は Initialize を連想させる
+    // ViewPresenter, ViewController はビューに参照されるわけではないので不適切
     public abstract class ViewData<TMgr, TArg>
         where TMgr : IListMenuManager
         where TArg : IListMenuArg

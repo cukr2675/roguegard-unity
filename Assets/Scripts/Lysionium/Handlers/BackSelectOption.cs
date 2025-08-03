@@ -19,6 +19,6 @@ namespace Lysionium
 
         string ISelectOption.GetName(IListMenuManager manager, IListMenuArg arg) => name ?? manager.BackOption.GetName(manager, arg);
         string ISelectOption.GetStyle(IListMenuManager manager, IListMenuArg arg) => style ?? manager.BackOption.GetStyle(manager, arg);
-        void ISelectOption.HandleClick(IListMenuManager manager, IListMenuArg arg) => manager.BackOption.HandleClick(manager, arg);
+        void ISelectOption.Click(IListMenuManager manager, IListMenuArg arg) => manager.BackOption.Click(manager, arg);
     }
 }

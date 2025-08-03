@@ -116,7 +116,7 @@ namespace Lysionium
             {
                 AssertNotBuilt();
 
-                parent.secodaryCommandSubviewHandler.HandleClick += handler;
+                parent.secodaryCommandSubviewHandler.Click += handler;
                 return this;
             }
         }

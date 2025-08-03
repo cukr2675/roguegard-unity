@@ -129,7 +129,7 @@ namespace RoguegardUnity
 
         void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
         {
-            presenter.HandleClick(source, Manager, Arg);
+            presenter.Click(source, Manager, Arg);
         }
 
         protected override void BindCore(object element, IViewItemHandler handler)

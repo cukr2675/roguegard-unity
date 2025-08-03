@@ -19,7 +19,7 @@ namespace Lysionium
             else
             {
                 Debug.LogError($"{instance} を {typeof(T)} に変換できません。");
-                manager?.ErrorOption.HandleClick(manager, null);
+                manager?.ErrorOption.Click(manager, null);
 
                 castedInstance = default;
                 return true;

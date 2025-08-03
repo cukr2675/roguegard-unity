@@ -1,6 +1,6 @@
 namespace Lysionium
 {
-    // Lysionium.HandlerRules のように Observer 風に GetName や HandleClick に分岐させればハンドラのダウンキャストを無くせるが
+    // Lysionium.MergeExtensions のように Observer 風に GetName や Click に分岐させればハンドラのダウンキャストを無くせるが
     // ・ViewItem が利用するハンドラをインターフェースとして保持できないため、依存関係が不明瞭になる
     // ・ハンドラの実装と呼び出しが直感的ではなくなる（参照やスタックトレースが追いづらくなる）
     // などデメリットがある
