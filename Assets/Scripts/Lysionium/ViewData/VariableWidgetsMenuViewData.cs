@@ -6,7 +6,7 @@ namespace Lysionium
     /// <summary>
     /// 項目数が可変のウィジェットメニュー向け ViewData
     /// </summary>
-    public class VariableWidgetsViewData<TMgr, TArg> : ListViewData<object, TMgr, TArg>
+    public class VariableWidgetsMenuViewData<TMgr, TArg> : ListViewData<object, TMgr, TArg>
         where TMgr : IListMenuManager
         where TArg : IListMenuArg
     {
@@ -73,9 +73,9 @@ namespace Lysionium
 
         public class Builder : BaseListBuilder<Builder>
         {
-            private readonly VariableWidgetsViewData<TMgr, TArg> parent;
+            private readonly VariableWidgetsMenuViewData<TMgr, TArg> parent;
 
-            public Builder(VariableWidgetsViewData<TMgr, TArg> parent, TMgr manager, TArg arg)
+            public Builder(VariableWidgetsMenuViewData<TMgr, TArg> parent, TMgr manager, TArg arg)
                 : base(parent, manager, arg)
             {
                 this.parent = parent;

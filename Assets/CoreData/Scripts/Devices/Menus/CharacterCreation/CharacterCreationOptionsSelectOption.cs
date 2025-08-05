@@ -74,7 +74,7 @@ namespace Roguegard.Device
 
             public ICharacterCreationDatabase database;
 
-            private readonly ScrollViewData<object, MMgr, MArg> view = new()
+            private readonly ScrollMenuViewData<object, MMgr, MArg> view = new()
             {
             };
 

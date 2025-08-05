@@ -12,7 +12,7 @@ namespace RoguegardUnity
     {
         private RogueMenuScreen nextScreen;
         private ClickItemHandler<MMgr, MArg> onNewFile;
-        private RogueScrollViewData<object> view;
+        private RogueScrollMenuViewData<object> view;
         private readonly List<FileInfo> files = new();
 
         private static readonly LoadingListMenuScreen savingMenu = new LoadingListMenuScreen("セーブ中…", "キャンセル", LoadingCancel);

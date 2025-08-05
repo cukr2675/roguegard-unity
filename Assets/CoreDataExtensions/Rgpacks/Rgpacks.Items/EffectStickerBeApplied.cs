@@ -27,7 +27,7 @@ namespace Roguegard.Rgpacks
 
         private class Menu : RogueMenuScreen
         {
-            private readonly VariableWidgetsViewData<MMgr, MArg> view = new()
+            private readonly VariableWidgetsMenuViewData<MMgr, MArg> view = new()
             {
             };
 

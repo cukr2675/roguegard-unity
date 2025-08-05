@@ -150,7 +150,7 @@ namespace RoguegardUnity
         /// </summary>
         private class NewGameScreen : RogueMenuScreen
         {
-            private readonly ScrollViewData<object, MMgr, MArg> view;
+            private readonly ScrollMenuViewData<object, MMgr, MArg> view;
 
             public NewGameScreen(LoadFadeOutScreen loadFadeOutScreen)
             {
@@ -249,7 +249,7 @@ namespace RoguegardUnity
         {
             public IReadOnlyList<CreditData> credits;
 
-            private readonly ScrollViewData<CreditData, MMgr, MArg> view = new()
+            private readonly ScrollMenuViewData<CreditData, MMgr, MArg> view = new()
             {
                 Title = ":Credit",
             };

@@ -30,7 +30,7 @@ namespace Roguegard.Rgpacks
             private static readonly List<object> elms = new();
             private static readonly PageMenu nextMenu = new();
 
-            private readonly VariableWidgetsViewData<MMgr, MArg> view = new()
+            private readonly VariableWidgetsMenuViewData<MMgr, MArg> view = new()
             {
             };
 
@@ -85,7 +85,7 @@ namespace Roguegard.Rgpacks
 
         private class PageMenu : RogueMenuScreen
         {
-            private readonly VariableWidgetsViewData<MMgr, MArg> view = new()
+            private readonly VariableWidgetsMenuViewData<MMgr, MArg> view = new()
             {
             };
 
@@ -135,7 +135,7 @@ namespace Roguegard.Rgpacks
                 EvtFairyCategory.Trap
             };
 
-            private readonly ScrollViewData<object, MMgr, MArg> view = new()
+            private readonly ScrollMenuViewData<object, MMgr, MArg> view = new()
             {
             };
 

@@ -24,7 +24,7 @@ namespace RoguegardUnity
         public ISelectOption Details { get; }
         public ISelectOption Rename { get; }
 
-        private readonly CommandListViewData<ISelectOption, MMgr, MArg> view = new()
+        private readonly CommandListMenuViewData<ISelectOption, MMgr, MArg> view = new()
         {
         };
 

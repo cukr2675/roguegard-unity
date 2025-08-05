@@ -22,7 +22,7 @@ namespace Roguegard
         {
             private readonly List<RogueObj> elms = new();
 
-            private readonly ScrollViewData<RogueObj, MMgr, MArg> view = new()
+            private readonly ScrollMenuViewData<RogueObj, MMgr, MArg> view = new()
             {
             };
 
@@ -75,7 +75,7 @@ namespace Roguegard
         {
             private static List<object> elms;
 
-            private readonly ScrollViewData<object, MMgr, MArg> view = new()
+            private readonly ScrollMenuViewData<object, MMgr, MArg> view = new()
             {
                 ScrollSubviewName = StandardSubviewTable.WidgetsName,
                 BackAnchorList = new()
@@ -219,7 +219,7 @@ namespace Roguegard
         {
             private ISerializableKeyword[] elms;
 
-            private readonly ScrollViewData<ISerializableKeyword, MMgr, MArg> view = new()
+            private readonly ScrollMenuViewData<ISerializableKeyword, MMgr, MArg> view = new()
             {
             };
 

@@ -23,7 +23,7 @@ namespace Roguegard
             new PaintMenu(3),
         };
 
-        private readonly VariableWidgetsViewData<MMgr, MArg> view = new()
+        private readonly VariableWidgetsMenuViewData<MMgr, MArg> view = new()
         {
         };
 
@@ -148,7 +148,7 @@ namespace Roguegard
         {
             private static string[] elms;
 
-            private readonly ScrollViewData<string, MMgr, MArg> view = new()
+            private readonly ScrollMenuViewData<string, MMgr, MArg> view = new()
             {
             };
 

@@ -73,7 +73,7 @@ namespace Roguegard.Rgpacks
         {
             public ScenarioMonolithBeApplied parent;
 
-            private readonly ScrollViewData<AssetStartingItem, MMgr, MArg> view = new()
+            private readonly ScrollMenuViewData<AssetStartingItem, MMgr, MArg> view = new()
             {
             };
 

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Roguegard.Device
 {
-    public class RogueScrollViewData<T> : ListViewData<T, MMgr, MArg>
+    public class RogueScrollMenuViewData<T> : ListViewData<T, MMgr, MArg>
         where T : class
     {
         public string ScrollSubviewName { get; set; } = StandardSubviewTable.ScrollName;
@@ -74,9 +74,9 @@ namespace Roguegard.Device
 
         public class Builder : BaseListBuilder<Builder>
         {
-            private readonly RogueScrollViewData<T> parent;
+            private readonly RogueScrollMenuViewData<T> parent;
 
-            public Builder(RogueScrollViewData<T> parent, MMgr manager, MArg arg)
+            public Builder(RogueScrollMenuViewData<T> parent, MMgr manager, MArg arg)
                 : base(parent, manager, arg)
             {
                 this.parent = parent;

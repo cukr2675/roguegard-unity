@@ -14,7 +14,7 @@ namespace RoguegardUnity
 
         private readonly List<RogueObj> partyMembers = new();
 
-        private readonly ScrollViewData<RogueObj, MMgr, MArg> view = new()
+        private readonly ScrollMenuViewData<RogueObj, MMgr, MArg> view = new()
         {
             Title = ":Party",
         };

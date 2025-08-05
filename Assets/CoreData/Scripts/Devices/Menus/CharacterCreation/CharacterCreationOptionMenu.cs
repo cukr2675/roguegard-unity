@@ -17,7 +17,7 @@ namespace Roguegard.Device
         private readonly CharacterCreationOptionsSelectOption singleItemMemberSelectOption;
         private readonly CharacterCreationOptionsSelectOption alphabetTypeMemberSelectOption;
 
-        private readonly VariableWidgetsViewData<MMgr, MArg> view;
+        private readonly VariableWidgetsMenuViewData<MMgr, MArg> view;
 
         public CharacterCreationOptionMenu(ICharacterCreationDatabase database)
         {
@@ -303,7 +303,7 @@ namespace Roguegard.Device
             private Race race;
             private readonly List<IRogueGender> list = new();
 
-            private readonly ScrollViewData<IRogueGender, MMgr, MArg> view = new()
+            private readonly ScrollMenuViewData<IRogueGender, MMgr, MArg> view = new()
             {
             };
 

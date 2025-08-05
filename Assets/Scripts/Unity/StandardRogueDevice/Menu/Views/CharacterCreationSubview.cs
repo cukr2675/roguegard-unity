@@ -229,7 +229,7 @@ namespace RoguegardUnity
 
             private readonly ChoicesMenuScreen nextMenu;
 
-            private readonly ScrollViewData<CharacterCreationData, MMgr, MArg> view;
+            private readonly ScrollMenuViewData<CharacterCreationData, MMgr, MArg> view;
 
             public LoadPresetMenu()
             {

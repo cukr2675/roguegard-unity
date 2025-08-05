@@ -22,7 +22,7 @@ namespace RoguegardUnity
         /// </summary>
         private class UseMenu : RogueMenuScreen
         {
-            private readonly RogueScrollViewData<ISkill> view = new()
+            private readonly RogueScrollMenuViewData<ISkill> view = new()
             {
                 Title = ":Skills",
             };

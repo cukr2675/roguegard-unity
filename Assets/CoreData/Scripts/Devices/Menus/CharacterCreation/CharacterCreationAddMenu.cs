@@ -10,7 +10,7 @@ namespace Roguegard.Device
     {
         private readonly ICharacterCreationDatabase database;
         private readonly List<object> elms;
-        private readonly ScrollViewData<object, MMgr, MArg> view;
+        private readonly ScrollMenuViewData<object, MMgr, MArg> view;
 
         private CharacterCreationData characterCreationData;
 

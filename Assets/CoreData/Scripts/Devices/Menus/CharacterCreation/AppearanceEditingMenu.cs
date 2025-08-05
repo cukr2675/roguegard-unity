@@ -16,7 +16,7 @@ namespace Roguegard.Device
         public CharacterCreationOptionMenu NextMenu { get; set; }
         public CharacterCreationAddMenu AddMenu { get; set; }
 
-        private readonly ScrollViewData<object, MMgr, MArg> view = new()
+        private readonly ScrollMenuViewData<object, MMgr, MArg> view = new()
         {
         };
 

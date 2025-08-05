@@ -199,7 +199,7 @@ namespace Roguegard.Rgpacks.MoonSharp
             public List<string> selectOptions = new();
             private static readonly DynValue[] args = new DynValue[1];
 
-            private readonly CommandListViewData<string, MMgr, MArg> view = new()
+            private readonly CommandListMenuViewData<string, MMgr, MArg> view = new()
             {
                 SecodaryCommandSubviewName = StandardSubviewTable.ChoicesName,
             };

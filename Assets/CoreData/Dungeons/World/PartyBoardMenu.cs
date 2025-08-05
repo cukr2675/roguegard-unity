@@ -13,7 +13,7 @@ namespace Roguegard
         private static readonly CommandMenu nextMenu = new();
         private static readonly PartyBoardCharacterCreationMenu newMenu = new();
 
-        private readonly ScrollViewData<RogueObj, MMgr, MArg> view = new()
+        private readonly ScrollMenuViewData<RogueObj, MMgr, MArg> view = new()
         {
         };
 

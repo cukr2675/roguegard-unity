@@ -203,7 +203,7 @@ namespace RoguegardUnity
             {
                 private readonly List<object> elms = new();
 
-                private readonly ScrollViewData<object, MMgr, MArg> view = new()
+                private readonly ScrollMenuViewData<object, MMgr, MArg> view = new()
                 {
                 };
 

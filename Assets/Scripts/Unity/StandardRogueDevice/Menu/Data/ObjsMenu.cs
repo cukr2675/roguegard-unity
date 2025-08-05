@@ -49,7 +49,7 @@ namespace RoguegardUnity
 
             private static CategorizedSortTable sortTable;
 
-            private readonly RogueScrollViewData<RogueObj> view = new()
+            private readonly RogueScrollMenuViewData<RogueObj> view = new()
             {
             };
 

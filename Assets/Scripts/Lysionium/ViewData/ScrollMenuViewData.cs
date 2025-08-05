@@ -6,7 +6,7 @@ namespace Lysionium
     /// <summary>
     /// 項目のスクロールが必要なメニュー向け ViewData
     /// </summary>
-    public class ScrollViewData<TItem, TMgr, TArg> : ListViewData<TItem, TMgr, TArg>
+    public class ScrollMenuViewData<TItem, TMgr, TArg> : ListViewData<TItem, TMgr, TArg>
         where TItem : class
         where TMgr : IListMenuManager
         where TArg : IListMenuArg
@@ -91,9 +91,9 @@ namespace Lysionium
 
         public class Builder : BaseListBuilder<Builder>, IButtonViewItemHandlerBuilder<TItem, TMgr, TArg, Builder>
         {
-            private readonly ScrollViewData<TItem, TMgr, TArg> parent;
+            private readonly ScrollMenuViewData<TItem, TMgr, TArg> parent;
 
-            public Builder(ScrollViewData<TItem, TMgr, TArg> parent, TMgr manager, TArg arg)
+            public Builder(ScrollMenuViewData<TItem, TMgr, TArg> parent, TMgr manager, TArg arg)
                 : base(parent, manager, arg)
             {
                 this.parent = parent;

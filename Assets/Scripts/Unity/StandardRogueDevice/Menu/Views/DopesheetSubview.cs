@@ -262,7 +262,7 @@ namespace RoguegardUnity
                 "外部参照"
             };
 
-            private readonly ScrollViewData<string, MMgr, MArg> view = new()
+            private readonly ScrollMenuViewData<string, MMgr, MArg> view = new()
             {
             };
 
@@ -330,7 +330,7 @@ namespace RoguegardUnity
 
         private class MenuScreen : RogueMenuScreen
         {
-            private readonly VariableWidgetsViewData<MMgr, MArg> view = new()
+            private readonly VariableWidgetsMenuViewData<MMgr, MArg> view = new()
             {
             };
 

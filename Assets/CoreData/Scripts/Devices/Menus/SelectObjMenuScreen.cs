@@ -8,7 +8,7 @@ namespace Roguegard.Device
         private readonly IDeviceCommand callback;
         private readonly List<RogueObj> list = new();
 
-        private readonly ScrollViewData<RogueObj, MMgr, MArg> view = new()
+        private readonly ScrollMenuViewData<RogueObj, MMgr, MArg> view = new()
         {
         };
 

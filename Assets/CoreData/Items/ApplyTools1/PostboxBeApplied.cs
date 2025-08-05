@@ -26,7 +26,7 @@ namespace Roguegard
         {
             private readonly List<RoguePost> posts = new();
 
-            private readonly ScrollViewData<RoguePost, MMgr, MArg> view = new()
+            private readonly ScrollMenuViewData<RoguePost, MMgr, MArg> view = new()
             {
             };
 

@@ -31,7 +31,7 @@ namespace Roguegard.Rgpacks
             private static readonly List<object> elms = new();
             private static readonly PropertiedCmnMenu nextMenu = new();
 
-            private readonly VariableWidgetsViewData<MMgr, MArg> view = new()
+            private readonly VariableWidgetsMenuViewData<MMgr, MArg> view = new()
             {
             };
 

@@ -16,7 +16,7 @@ namespace Roguegard.Device
         private CharacterCreationOptionMenu characterCreationOptionMenu;
         private StartingItemTableMenu startingItemTableMenu;
 
-        private readonly VariableWidgetsViewData<MMgr, MArg> view = new()
+        private readonly VariableWidgetsMenuViewData<MMgr, MArg> view = new()
         {
         };
 
@@ -87,7 +87,7 @@ namespace Roguegard.Device
             private readonly CharacterCreationAddMenu characterCreationAddMenu = new(RoguegardSettings.CharacterCreationDatabase);
             private readonly CharacterCreationOptionMenu characterCreationOptionMenu = new(RoguegardSettings.CharacterCreationDatabase);
 
-            private readonly ScrollViewData<object, MMgr, MArg> view;
+            private readonly ScrollMenuViewData<object, MMgr, MArg> view;
 
             public StartingItemTableMenu()
             {

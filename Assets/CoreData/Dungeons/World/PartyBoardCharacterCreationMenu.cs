@@ -7,7 +7,7 @@ namespace Roguegard
 {
     public class PartyBoardCharacterCreationMenu : RogueMenuScreen
     {
-        private readonly ScrollViewData<object, MMgr, MArg> view = new()
+        private readonly ScrollMenuViewData<object, MMgr, MArg> view = new()
         {
             ScrollSubviewName = RoguegardSubviews.CharacterCreation,
             BackAnchorList = new()

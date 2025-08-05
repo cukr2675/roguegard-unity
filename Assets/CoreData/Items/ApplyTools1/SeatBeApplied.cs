@@ -39,7 +39,7 @@ namespace Roguegard
         {
             private readonly List<RogueObj> objs = new();
 
-            private readonly ScrollViewData<RogueObj, MMgr, MArg> view = new()
+            private readonly ScrollMenuViewData<RogueObj, MMgr, MArg> view = new()
             {
             };
 

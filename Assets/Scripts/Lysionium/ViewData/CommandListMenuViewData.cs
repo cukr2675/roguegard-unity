@@ -6,7 +6,7 @@ namespace Lysionium
     /// <summary>
     /// 項目数が可変のメニュー向け ViewData
     /// </summary>
-    public class CommandListViewData<TItem, TMgr, TArg> : ListViewData<TItem, TMgr, TArg>
+    public class CommandListMenuViewData<TItem, TMgr, TArg> : ListViewData<TItem, TMgr, TArg>
         where TItem : class
         where TMgr : IListMenuManager
         where TArg : IListMenuArg
@@ -84,9 +84,9 @@ namespace Lysionium
 
         public class Builder : BaseBuilder<Builder>, IButtonViewItemHandlerBuilder<TItem, TMgr, TArg, Builder>
         {
-            private readonly CommandListViewData<TItem, TMgr, TArg> parent;
+            private readonly CommandListMenuViewData<TItem, TMgr, TArg> parent;
 
-            public Builder(CommandListViewData<TItem, TMgr, TArg> parent, TMgr manager, TArg arg)
+            public Builder(CommandListMenuViewData<TItem, TMgr, TArg> parent, TMgr manager, TArg arg)
                 : base(parent, manager, arg)
             {
                 this.parent = parent;

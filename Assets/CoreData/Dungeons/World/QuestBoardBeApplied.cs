@@ -40,7 +40,7 @@ namespace Roguegard
             private static readonly List<DungeonQuest> elms = new();
             private static readonly QuestViewMenu nextMenu = new();
 
-            private readonly ScrollViewData<DungeonQuest, MMgr, MArg> view = new()
+            private readonly ScrollMenuViewData<DungeonQuest, MMgr, MArg> view = new()
             {
             };
 

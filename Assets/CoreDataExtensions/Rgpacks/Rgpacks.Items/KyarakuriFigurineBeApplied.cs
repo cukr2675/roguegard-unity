@@ -28,7 +28,7 @@ namespace Roguegard.Rgpacks
 
         private class Menu : RogueMenuScreen
         {
-            private readonly VariableWidgetsViewData<MMgr, MArg> view = new()
+            private readonly VariableWidgetsMenuViewData<MMgr, MArg> view = new()
             {
             };
 
@@ -66,7 +66,7 @@ namespace Roguegard.Rgpacks
 
         private class EditMenu : RogueMenuScreen
         {
-            private readonly ScrollViewData<object, MMgr, MArg> view = new()
+            private readonly ScrollMenuViewData<object, MMgr, MArg> view = new()
             {
                 ScrollSubviewName = RoguegardSubviews.CharacterCreation,
                 BackAnchorList = new()
