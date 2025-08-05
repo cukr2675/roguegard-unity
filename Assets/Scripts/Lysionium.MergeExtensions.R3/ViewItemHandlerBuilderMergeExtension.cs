@@ -128,7 +128,7 @@ namespace Lysionium.MergeExtensions.R3
         }
 
         public static Observable<MergedViewItemHandleArg<TItem, TMgr, TArg, TBuilder, TValue>> NameFrom<TItem, TMgr, TArg, TBuilder, TValue>(
-            this Observable<MergedViewItemHandleArg<TItem, TMgr, TArg, TBuilder, TValue>> source, ItemNameSelector<TValue, TMgr, TArg> selector)
+            this Observable<MergedViewItemHandleArg<TItem, TMgr, TArg, TBuilder, TValue>> source, System.Func<TValue, TMgr, TArg, string> selector)
             where TBuilder : IViewItemHandlerBuilder<TItem, TMgr, TArg, TBuilder>
         {
             if (source == null) throw new System.ArgumentNullException(nameof(source));
@@ -154,7 +154,7 @@ namespace Lysionium.MergeExtensions.R3
         }
 
         public static Observable<MergedViewItemHandleArg<TItem, TMgr, TArg, TBuilder, TValue>> StyleFrom<TItem, TMgr, TArg, TBuilder, TValue>(
-            this Observable<MergedViewItemHandleArg<TItem, TMgr, TArg, TBuilder, TValue>> source, ItemNameSelector<TValue, TMgr, TArg> selector)
+            this Observable<MergedViewItemHandleArg<TItem, TMgr, TArg, TBuilder, TValue>> source, System.Func<TValue, TMgr, TArg, string> selector)
             where TBuilder : IViewItemHandlerBuilder<TItem, TMgr, TArg, TBuilder>
         {
             if (source == null) throw new System.ArgumentNullException(nameof(source));

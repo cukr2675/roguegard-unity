@@ -4,8 +4,8 @@ namespace Lysionium
         where TMgr : IListMenuManager
         where TArg : IListMenuArg
     {
-        public ItemNameSelector<TItem, TMgr, TArg> GetName { get; set; }
-        public ItemStyleSelector<TItem, TMgr, TArg> GetStyle { get; set; }
+        public System.Func<TItem, TMgr, TArg, string> GetName { get; set; }
+        public System.Func<TItem, TMgr, TArg, string> GetStyle { get; set; }
         public ClickItemHandler<TItem, TMgr, TArg> Click { get; set; }
 
         /// <summary>

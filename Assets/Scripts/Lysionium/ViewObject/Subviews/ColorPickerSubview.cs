@@ -14,14 +14,14 @@ namespace Lysionium
         [SerializeField] private Button _closeButton = null;
         [SerializeField] private Selectable _initialSelectable = null;
 
-        private HandleClose handleClose;
+        private ColorPickerEventHandler onClose;
         private StateProvider currentStateProvider;
 
-        public delegate void HandleClose(IListMenuManager manager, IListMenuArg arg, Color color);
+        public delegate void ColorPickerEventHandler(IListMenuManager manager, IListMenuArg arg, Color color);
 
         protected override void CommonInitCore()
         {
-            _closeButton.onClick.AddListener(() => handleClose?.Invoke(Manager, Arg, _colorPicker.CurrentColor));
+            _closeButton.onClick.AddListener(() => onClose?.Invoke(Manager, Arg, _colorPicker.CurrentColor));
         }
 
         public override void SetParameters(
@@ -30,7 +30,7 @@ namespace Lysionium
             => throw new System.NotSupportedException();
 
         public void SetParameters(
-            Color color, HandleClose onClose, IListMenuManager manager, IListMenuArg arg,
+            Color color, ColorPickerEventHandler onClose, IListMenuManager manager, IListMenuArg arg,
             ref ISubviewStateProvider stateProvider)
         {
             if (stateProvider == null) { stateProvider = new StateProvider(); }
@@ -44,7 +44,7 @@ namespace Lysionium
 
             // 表示更新
             _colorPicker.CurrentColor = color;
-            handleClose = onClose;
+            this.onClose = onClose;
             SetArg(manager, arg);
             SetStatusCode(0);
 

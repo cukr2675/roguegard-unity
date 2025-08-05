@@ -48,7 +48,7 @@ namespace Lysionium
         {
             private ISubviewStateProvider colorPickerSubviewStateProvider;
             private Color color;
-            private event ColorPickerSubview.HandleClose HandleClose;
+            private event ColorPickerSubview.ColorPickerEventHandler HandleClose;
 
             public Builder Show(Color color, TMgr manager, TArg arg)
             {
@@ -83,7 +83,7 @@ namespace Lysionium
                     this.parent = parent;
                 }
 
-                public Builder OnClose(ColorPickerSubview.HandleClose onClose)
+                public Builder OnClose(ColorPickerSubview.ColorPickerEventHandler onClose)
                 {
                     AssertNotBuilt();
 

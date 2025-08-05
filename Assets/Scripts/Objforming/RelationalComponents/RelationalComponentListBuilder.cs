@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -62,11 +62,11 @@ namespace Objforming
         }
 
         /// <summary>
-        /// <paramref name="assemblies"/> で出現する型に対して <paramref name="creator"/> を実行し、その戻り値を追加する。
-        /// このリストに追加済みの要素または <paramref name="creator"/> の戻り値の、
+        /// <paramref name="assemblies"/> で出現する型に対して <paramref name="relationalComponentCreator"/> を実行し、その戻り値を追加する。
+        /// このリストに追加済みの要素または <paramref name="relationalComponentCreator"/> の戻り値の、
         /// <see cref="IRelationalComponent.FieldTypes"/> で出現しない型に対しては実行・追加しない。
         /// </summary>
-        public void AddAuto(IEnumerable<Assembly> assemblies, RelationalComponentCreator creator)
+        public void AddAuto(IEnumerable<Assembly> assemblies, Func<Type, IRelationalComponent> relationalComponentCreator)
         {
             var instanceTypes = assemblies.SelectMany(x => x.GetTypes()).Where(type => !type.IsAbstract && !type.IsInterface).ToArray();
             var types = new HashSet<Type>();
@@ -105,7 +105,7 @@ namespace Objforming
                         if (tempComponents.Any(x => x.InstanceType == instanceType)) continue;
 
                         // コンポーネントが必要な型であれば、コンポーネントを追加する。
-                        var instanceTypeComponent = creator(instanceType);
+                        var instanceTypeComponent = relationalComponentCreator(instanceType);
                         if (instanceTypeComponent == null)
                         {
                             ObjformingLogger.LogError($"[{component.InstanceType}] {instanceType} のコンポーネントが必要です。");

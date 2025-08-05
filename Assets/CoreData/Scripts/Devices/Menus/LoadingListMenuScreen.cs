@@ -7,7 +7,7 @@ namespace Roguegard.Device
         private readonly string text;
         private readonly string buttonText;
         private readonly ClickItemHandler<MMgr, MArg> buttonAction;
-        private readonly ProgressBarViewWidget.GetProgress<MMgr, MArg> getProgress;
+        private readonly System.Func<MMgr, MArg, float> getProgress;
         private readonly object[] elms;
 
         private float oldProgress;
@@ -20,7 +20,7 @@ namespace Roguegard.Device
         public LoadingListMenuScreen(
             string text, string buttonText,
             ClickItemHandler<MMgr, MArg> buttonAction,
-            ProgressBarViewWidget.GetProgress<MMgr, MArg> updateAction = null)
+            System.Func<MMgr, MArg, float> updateAction = null)
         {
             this.text = text;
             this.buttonText = buttonText;

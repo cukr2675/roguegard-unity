@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,7 +12,7 @@ namespace RoguegardUnity
     {
         [SerializeField] private Image _image = null;
 
-        public event AnchorButton.SelectItem OnEnter;
+        public event AnchorButton.EnterItemHandler OnEnter;
 
         private void Start()
         {

@@ -15,7 +15,7 @@ namespace Lysionium
         }
 
         public static SelectOption<TMgr, TArg> Create<TMgr, TArg>(
-            ItemNameSelector<TMgr, TArg> getName, ClickItemHandler<TMgr, TArg> onClick, string style = null)
+            System.Func<TMgr, TArg, string> getName, ClickItemHandler<TMgr, TArg> onClick, string style = null)
             where TMgr : IListMenuManager
             where TArg : IListMenuArg
         {
@@ -32,7 +32,7 @@ namespace Lysionium
         where TArg : IListMenuArg
     {
         private string name;
-        private ItemNameSelector<TMgr, TArg> getName;
+        private System.Func<TMgr, TArg, string> getName;
 
         public string Style { get; set; }
 
@@ -46,7 +46,7 @@ namespace Lysionium
             getName = null;
         }
 
-        public void SetName(ItemNameSelector<TMgr, TArg> getName)
+        public void SetName(System.Func<TMgr, TArg, string> getName)
         {
             if (getName == null) throw new System.ArgumentNullException(nameof(getName));
 

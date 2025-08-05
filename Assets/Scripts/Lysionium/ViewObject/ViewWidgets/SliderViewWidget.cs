@@ -14,8 +14,7 @@ namespace Lysionium
         public override string WidgetName => widgetOption.Name;
         protected override SubviewBase Parent => _parent;
 
-        public delegate float GetValue<TMgr, TArg>(TMgr manager, TArg arg);
-        public delegate float HandleValueChanged<TMgr, TArg>(TMgr manager, TArg arg, float value);
+        public delegate float SliderEventHandler<TMgr, TArg>(TMgr manager, TArg arg, float value);
 
         public override bool TryInstantiateWidget(
             object item, IViewItemHandler handler, SubviewBase subview, out ViewWidget viewWidget)
@@ -47,7 +46,7 @@ namespace Lysionium
         }
 
         public static IWidgetOption CreateOption<TMgr, TArg>(
-            GetValue<TMgr, TArg> getValue, HandleValueChanged<TMgr, TArg> onValueChanged,
+            System.Func<TMgr, TArg, float> getValue, SliderEventHandler<TMgr, TArg> onValueChanged,
             float minValue = 0f, float maxValue = 100f, string name = null)
         {
             return new WidgetOption<TMgr, TArg>()
@@ -78,8 +77,8 @@ namespace Lysionium
             public string Name { get; set; }
             public float MinValue { get; set; }
             public float MaxValue { get; set; }
-            public GetValue<TMgr, TArg> GetValue { get; set; }
-            public HandleValueChanged<TMgr, TArg> HandleValueChanged { get; set; }
+            public System.Func<TMgr, TArg, float> GetValue { get; set; }
+            public SliderEventHandler<TMgr, TArg> HandleValueChanged { get; set; }
 
             float IWidgetOption.GetValue(IListMenuManager manager, IListMenuArg arg)
             {

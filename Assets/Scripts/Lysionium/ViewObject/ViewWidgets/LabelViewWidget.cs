@@ -100,7 +100,7 @@ namespace Lysionium
         }
 
         public static IWidgetOption CreateOption<TMgr, TArg>(
-            ItemNameSelector<TMgr, TArg> getText, ClickItemHandler<string, TMgr, TArg> onClickLink = null)
+            System.Func<TMgr, TArg, string> getText, ClickItemHandler<string, TMgr, TArg> onClickLink = null)
         {
             return new WidgetOption<TMgr, TArg>()
             {
@@ -119,7 +119,7 @@ namespace Lysionium
         private class WidgetOption<TMgr, TArg> : IWidgetOption
         {
             public string WidgetName { get; set; }
-            public ItemNameSelector<TMgr, TArg> GetText { get; set; }
+            public System.Func<TMgr, TArg, string> GetText { get; set; }
             public ClickItemHandler<string, TMgr, TArg> ClickLink { get; set; }
 
             string IWidgetOption.GetText(IListMenuManager manager, IListMenuArg arg)

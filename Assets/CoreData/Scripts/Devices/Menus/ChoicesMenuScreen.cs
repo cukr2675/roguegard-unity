@@ -16,7 +16,7 @@ namespace Roguegard.Device
             screen = new ChoicesMenuScreen<MMgr, MArg>(message);
         }
 
-        public ChoicesMenuScreen(ItemNameSelector<MMgr, MArg> getMessage)
+        public ChoicesMenuScreen(System.Func<MMgr, MArg, string> getMessage)
         {
             screen = new ChoicesMenuScreen<MMgr, MArg>(getMessage);
         }

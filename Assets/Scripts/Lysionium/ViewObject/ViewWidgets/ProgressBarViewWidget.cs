@@ -15,8 +15,6 @@ namespace Lysionium
 
         protected override SubviewBase Parent => _parent;
 
-        public delegate float GetProgress<TMgr, TArg>(TMgr manager, TArg arg);
-
         public override bool TryInstantiateWidget(
             object item, IViewItemHandler handler, SubviewBase subview, out ViewWidget viewWidget)
         {
@@ -47,7 +45,7 @@ namespace Lysionium
             }
         }
 
-        public static IWidgetOption CreateOption<TMgr, TArg>(GetProgress<TMgr, TArg> getProgress, string name = null)
+        public static IWidgetOption CreateOption<TMgr, TArg>(System.Func<TMgr, TArg, float> getProgress, string name = null)
         {
             return new WidgetOption<TMgr, TArg>()
             {
@@ -63,7 +61,7 @@ namespace Lysionium
         private class WidgetOption<TMgr, TArg> : IWidgetOption
         {
             public string Name { get; set; }
-            public GetProgress<TMgr, TArg> GetProgress { get; set; }
+            public System.Func<TMgr, TArg, float> GetProgress { get; set; }
 
             float IWidgetOption.GetProgress(IListMenuManager manager, IListMenuArg arg)
             {

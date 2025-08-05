@@ -132,7 +132,7 @@ namespace Lysionium
         public class StringReplacer
         {
             public string From { get; }
-            private readonly ItemNameSelector<TMgr, TArg> to;
+            private readonly System.Func<TMgr, TArg, string> to;
 
             public StringReplacer(string from, string to)
             {
@@ -143,7 +143,7 @@ namespace Lysionium
                 this.to = delegate { return to; };
             }
 
-            public StringReplacer(string from, ItemNameSelector<TMgr, TArg> to)
+            public StringReplacer(string from, System.Func<TMgr, TArg, string> to)
             {
                 if (from == null) throw new System.ArgumentNullException(nameof(from));
                 if (to == null) throw new System.ArgumentNullException(nameof(to));

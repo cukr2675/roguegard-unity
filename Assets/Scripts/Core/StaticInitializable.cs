@@ -4,7 +4,7 @@ namespace Roguegard
     {
         private StaticId staticId;
 
-        private readonly Initializer initializer;
+        private readonly System.Func<T> initializer;
 
         private T _value;
 
@@ -24,9 +24,7 @@ namespace Roguegard
             }
         }
 
-        public delegate T Initializer();
-
-        public StaticInitializable(Initializer initializer)
+        public StaticInitializable(System.Func<T> initializer)
         {
             this.initializer = initializer;
             _value = default;

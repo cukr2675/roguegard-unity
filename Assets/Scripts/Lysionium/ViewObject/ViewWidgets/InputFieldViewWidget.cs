@@ -16,7 +16,7 @@ namespace Lysionium
         public override string WidgetName => widgetOption.Name;
         protected override SubviewBase Parent => _parent;
 
-        public delegate string HandleValueChanged<TMgr, TArg>(TMgr manager, TArg arg, string value);
+        public delegate string InputFieldEventHandler<TMgr, TArg>(TMgr manager, TArg arg, string value);
 
         public override bool TryInstantiateWidget(
             object item, IViewItemHandler handler, SubviewBase subview, out ViewWidget viewWidget)
@@ -47,7 +47,7 @@ namespace Lysionium
         }
 
         public static IWidgetOption CreateOption<TMgr, TArg>(
-            ItemNameSelector<TMgr, TArg> getValue, HandleValueChanged<TMgr, TArg> handleValueChanged,
+            System.Func<TMgr, TArg, string> getValue, InputFieldEventHandler<TMgr, TArg> handleValueChanged,
             TMP_InputField.ContentType contentType = TMP_InputField.ContentType.Standard, string name = null)
         {
             return new WidgetOption<TMgr, TArg>()
@@ -88,8 +88,8 @@ namespace Lysionium
         {
             public string Name { get; set; }
             public TMP_InputField.ContentType ContentType { get; set; }
-            public ItemNameSelector<TMgr, TArg> GetValue { get; set; }
-            public HandleValueChanged<TMgr, TArg> HandleValueChanged { get; set; }
+            public System.Func<TMgr, TArg, string> GetValue { get; set; }
+            public InputFieldEventHandler<TMgr, TArg> HandleValueChanged { get; set; }
 
             string IWidgetOption.GetValue(IListMenuManager manager, IListMenuArg arg)
             {

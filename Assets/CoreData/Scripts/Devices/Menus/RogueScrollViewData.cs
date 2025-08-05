@@ -19,14 +19,6 @@ namespace Roguegard.Device
 
         private readonly ElementHandler scrollSubviewHandler = new();
 
-        public delegate object GetInfo(T element, MMgr manager, MArg arg);
-        public delegate (object, T1) GetInfo<T1>(T element, MMgr manager, MArg arg);
-        public delegate (object, T1, T2) GetInfo<T1, T2>(T element, MMgr manager, MArg arg);
-        public delegate (object, T1, T2, T3) GetInfo<T1, T2, T3>(T element, MMgr manager, MArg arg);
-        public delegate (object, T1, T2, T3, T4, T5, T6) GetInfo<T1, T2, T3, T4, T5, T6>(T element, MMgr manager, MArg arg);
-        public delegate (object, T1, T2, T3, T4, T5, T6, T7) GetInfo<T1, T2, T3, T4, T5, T6, T7>(T element, MMgr manager, MArg arg);
-        public delegate (object, T1, T2, T3, T4, T5, T6, T7, T8) GetInfo<T1, T2, T3, T4, T5, T6, T7, T8>(T element, MMgr manager, MArg arg);
-
         public Builder Show(IReadOnlyList<T> list, MMgr manager, MArg arg, object viewStateHolder = null)
         {
             if (list == null) throw new System.ArgumentNullException(nameof(list));
@@ -90,7 +82,7 @@ namespace Roguegard.Device
                 this.parent = parent;
             }
 
-            public Builder InfoFrom(GetInfo method)
+            public Builder InfoFrom(System.Func<T, MMgr, MArg, object> method)
             {
                 AssertNotBuilt();
 
@@ -102,7 +94,7 @@ namespace Roguegard.Device
                 return this;
             }
 
-            public Builder InfoFrom(GetInfo<string, string> method)
+            public Builder InfoFrom(System.Func<T, MMgr, MArg, (object, string, string)> method)
             {
                 AssertNotBuilt();
 
@@ -114,7 +106,7 @@ namespace Roguegard.Device
                 return this;
             }
 
-            public Builder InfoFrom(GetInfo<Sprite, Color, int?, float?, string, string, bool> method)
+            public Builder InfoFrom(System.Func<T, MMgr, MArg, (object, Sprite, Color, int?, float?, string, string, bool)> method)
             {
                 AssertNotBuilt();
 
@@ -137,7 +129,7 @@ namespace Roguegard.Device
 
         private class ElementHandler : IRogueElementHandler, IButtonViewItemHandler
         {
-            public GetInfo<Color?, Sprite, Color?, int?, float?, string, string, bool> GetInfo { get; set; }
+            public System.Func<T, MMgr, MArg, (object, Color?, Sprite, Color?, int?, float?, string, string, bool)> GetInfo { get; set; }
             public ClickItemHandler<T, MMgr, MArg> Click { get; set; }
 
             public string GetName(object elementObj, IListMenuManager manager, IListMenuArg arg)

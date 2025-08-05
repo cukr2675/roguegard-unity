@@ -59,7 +59,7 @@ namespace RoguegardUnity
         private AnchorKeyItem enteredItem;
         private RogueDirectionalSpriteTable keySpriteTable;
 
-        public delegate void SelectItem(AnchorKeyItem item);
+        public delegate void EnterItemHandler(AnchorKeyItem item);
 
         public void Initialize(bool keyMode, RogueDirectionalSpriteTable keySpriteTable = null)
         {
@@ -87,7 +87,7 @@ namespace RoguegardUnity
 
         private void Start()
         {
-            SelectItem setItem = (x) => enteredItem = x;
+            EnterItemHandler setItem = (x) => enteredItem = x;
             _upperLeftKey.OnEnter += setItem;
             _upKey.OnEnter += setItem;
             _upperRightKey.OnEnter += setItem;

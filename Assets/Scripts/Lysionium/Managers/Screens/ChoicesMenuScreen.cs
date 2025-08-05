@@ -6,13 +6,14 @@ namespace Lysionium
         where TMgr : IListMenuManager
         where TArg : IListMenuArg
     {
-        private readonly ItemNameSelector<TMgr, TArg> getMessage;
+        private readonly System.Func<TMgr, TArg, string> getMessage;
         private readonly List<ISelectOption> selectOptions = new();
         private readonly SpeechBoxViewData<TMgr, TArg> view;
 
         public override bool IsIncremental { get; }
 
-        public ChoicesMenuScreen(string message, bool isIncremental = true, string speechBoxSubviewName = null, string choicesSubviewName = null)
+        public ChoicesMenuScreen(
+            string message, bool isIncremental = true, string speechBoxSubviewName = null, string choicesSubviewName = null)
         {
             getMessage = delegate { return message; };
             IsIncremental = isIncremental;
@@ -24,7 +25,8 @@ namespace Lysionium
             if (choicesSubviewName != null) { view.ChoicesSubviewName = choicesSubviewName; }
         }
 
-        public ChoicesMenuScreen(ItemNameSelector<TMgr, TArg> getMessage, bool isIncremental = true, string speechBoxSubviewName = null, string choicesSubviewName = null)
+        public ChoicesMenuScreen(
+            System.Func<TMgr, TArg, string> getMessage, bool isIncremental = true, string speechBoxSubviewName = null, string choicesSubviewName = null)
         {
             this.getMessage = getMessage;
             IsIncremental = isIncremental;

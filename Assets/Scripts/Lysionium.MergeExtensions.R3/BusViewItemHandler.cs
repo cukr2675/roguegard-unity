@@ -51,7 +51,7 @@ namespace Lysionium.MergeExtensions.R3
         }
 
         public static void NameFrom<TItem, TMgr, TArg>(
-            this Observable<MergedViewItemHandleArg<object, IListMenuManager, IListMenuArg, object, object>> observable, ItemNameSelector<TItem, TMgr, TArg> getName)
+            this Observable<MergedViewItemHandleArg<object, IListMenuManager, IListMenuArg, object, object>> observable, System.Func<TItem, TMgr, TArg, string> getName)
         {
             observable.Subscribe(x =>
             {

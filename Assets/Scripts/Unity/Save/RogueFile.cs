@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,8 +10,6 @@ namespace RoguegardUnity
 {
     public static class RogueFile
     {
-        public delegate void Callback(string errorMsg = null);
-
         public static void InitializeDirectory(string path)
         {
             if (!Directory.Exists(path))
@@ -77,7 +75,7 @@ namespace RoguegardUnity
             exporter.Export();
         }
 
-        public static void Import(string path, Callback callback)
+        public static void Import(string path, System.Action<string> callback)
         {
             if (path.Contains('\\')) { path = path.Replace('\\', '/'); };
 

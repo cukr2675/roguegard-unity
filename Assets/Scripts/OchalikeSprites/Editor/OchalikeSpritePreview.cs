@@ -31,10 +31,11 @@ namespace OchalikeSprites.Editor
 
         public static OchalikeSpritePreview Primary { get; set; } = new();
 
-        public delegate OchalikeMorph GetMorph(OchalikeMorphData morphData);
-        public delegate IReadOnlyOchalikeBone GetOchalikeSprite(OchalikeSpriteData ochalikeSpriteData, Color bareColor, OchalikeMorph morph);
-        public delegate OchalikeSpriteTransform GetSpriteTransform(SpriteMotionData motionData, SpriteDirection direction, int animationTime);
-        public delegate void Render(
+        // Color bareColor (defaultColor と混乱する) など型だけでは判断が難しい引数があるため System.Func ではなく定義デリゲートを使う
+        public delegate OchalikeMorph MorphFunc(OchalikeMorphData morphData);
+        public delegate IReadOnlyOchalikeBone OchalikeSpriteFunc(OchalikeSpriteData ochalikeSpriteData, Color bareColor, OchalikeMorph morph);
+        public delegate OchalikeSpriteTransform SpriteTransformFunc(SpriteMotionData motionData, SpriteDirection direction, int animationTime);
+        public delegate void RenderHandler(
             RenderTexture preview, IReadOnlyOchalikeBone ochalikeSprite, OchalikeMorph morph, OchalikeSpriteTransform spriteTransform, Color defaultColor);
 
         /// <summary>
@@ -46,8 +47,8 @@ namespace OchalikeSprites.Editor
         /// <param name="step3GetSpriteTransform"><see cref="OchalikeSpriteTransform"/> 生成ステップ</param>
         /// <param name="step4Render">レンダリングステップ</param>
         public void RenderTo(
-            RenderTexture preview, GetMorph step1GetMorph = null, GetOchalikeSprite step2GetOchalikeSprite = null,
-            GetSpriteTransform step3GetSpriteTransform = null, Render step4Render = null)
+            RenderTexture preview, MorphFunc step1GetMorph = null, OchalikeSpriteFunc step2GetOchalikeSprite = null,
+            SpriteTransformFunc step3GetSpriteTransform = null, RenderHandler step4Render = null)
         {
             // null ならば初期値を使用
             step1GetMorph ??= (morphData) =>

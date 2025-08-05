@@ -92,7 +92,7 @@ namespace Lysionium
                 this.parent = parent;
             }
 
-            public Builder NameFrom(ItemNameSelector<TItem, TMgr, TArg> selector)
+            public Builder NameFrom(System.Func<TItem, TMgr, TArg, string> selector)
             {
                 AssertNotBuilt();
 
@@ -102,7 +102,7 @@ namespace Lysionium
                 return this;
             }
 
-            public Builder StyleFrom(ItemStyleSelector<TItem, TMgr, TArg> selector)
+            public Builder StyleFrom(System.Func<TItem, TMgr, TArg, string> selector)
             {
                 AssertNotBuilt();
 
