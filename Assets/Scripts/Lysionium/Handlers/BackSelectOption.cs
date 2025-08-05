@@ -11,10 +11,11 @@ namespace Lysionium
             where TMgr : IListMenuManager
             where TArg : IListMenuArg
         {
-            var instance = new BackSelectOption();
-            instance.name = name;
-            instance.style = style;
-            return instance;
+            return new BackSelectOption
+            {
+                name = name,
+                style = style
+            };
         }
 
         string ISelectOption.GetName(IListMenuManager manager, IListMenuArg arg) => name ?? manager.BackOption.GetName(manager, arg);

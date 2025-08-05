@@ -4,7 +4,6 @@ using UnityEngine.Audio;
 
 namespace Lysionium.Audio
 {
-    //[CreateAssetMenu(menuName = "Lysionium/Play/Audio Play Table")]
     public class AudioPlayTable : ScriptableObject
     {
         [Tooltip("音声冒頭に挿入する無音区間のサイズ（WebGL向け）")]

@@ -37,18 +37,18 @@ namespace Lysionium.Audio.Editor
                     var item = _items[i];
                     var audioClip = item.CreateAudioClip(blankSamples);
                     var targetPath = $@"{directory}\{item.PlayName}.g.wav";
-                    var created = !File.Exists(targetPath);
                     SaveAsWav(audioClip, targetPath, _normalize);
                     EditorUtility.SetDirty(audioClip);
                     AssetDatabase.ImportAsset(targetPath);
 
                     // 実際に使用する AudioClip を取得
-                    var resultItem = new AudioPlayTable.Item();
-                    resultItem.PlayName = item.PlayName;
-                    resultItem.AudioClip = AssetDatabase.LoadAssetAtPath<AudioClip>(targetPath);
-                    resultItem.AudioMixerGroup = _audioMixerGroup;
-                    resultItem.PlayBehaviour = _playBehaviour;
-                    result[i] = resultItem;
+                    result[i] = new AudioPlayTable.Item
+                    {
+                        PlayName = item.PlayName,
+                        AudioClip = AssetDatabase.LoadAssetAtPath<AudioClip>(targetPath),
+                        AudioMixerGroup = _audioMixerGroup,
+                        PlayBehaviour = _playBehaviour
+                    };
                 }
                 return result;
             }
@@ -62,13 +62,15 @@ namespace Lysionium.Audio.Editor
                     var targetPath = $@"{directory}\{item.PlayName}.g.wav";
 
                     // 実際に使用する AudioClip を取得
-                    var resultItem = new AudioPlayTable.Item();
-                    resultItem.PlayName = item.PlayName;
-                    resultItem.AudioClip = AssetDatabase.LoadAssetAtPath<AudioClip>(targetPath);
-                    if (resultItem.AudioClip == null) throw new System.Exception($"AudioClip ({targetPath}) が見つかりません。");
-                    resultItem.AudioMixerGroup = _audioMixerGroup;
-                    resultItem.PlayBehaviour = _playBehaviour;
-                    result[i] = resultItem;
+                    result[i] = new AudioPlayTable.Item
+                    {
+                        PlayName = item.PlayName,
+                        AudioClip = AssetDatabase.LoadAssetAtPath<AudioClip>(targetPath),
+                        AudioMixerGroup = _audioMixerGroup,
+                        PlayBehaviour = _playBehaviour
+                    };
+
+                    if (result[i].AudioClip == null) throw new System.Exception($"AudioClip ({targetPath}) が見つかりません。");
                 }
                 return result;
             }

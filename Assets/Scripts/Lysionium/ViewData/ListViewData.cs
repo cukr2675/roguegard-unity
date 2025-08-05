@@ -21,7 +21,7 @@ namespace Lysionium
         public abstract class BaseListBuilder<TOut> : BaseBuilder<TOut>
             where TOut : BaseListBuilder<TOut>
         {
-            private ListViewData<TItem, TMgr, TArg> parent;
+            private readonly ListViewData<TItem, TMgr, TArg> parent;
 
             protected BaseListBuilder(ListViewData<TItem, TMgr, TArg> parent, TMgr manager, TArg arg)
                 : base(parent, manager, arg)

@@ -49,6 +49,7 @@ namespace Lysionium
         {
             return new WidgetOption<TMgr, TArg>()
             {
+                Name = name ?? EmitIdentity("ProgressBarViewWidget"),
                 GetProgress = getProgress
             };
         }

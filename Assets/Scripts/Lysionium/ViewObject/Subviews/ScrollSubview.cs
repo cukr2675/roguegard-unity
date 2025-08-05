@@ -55,8 +55,8 @@ namespace Lysionium
             IReadOnlyList<object> list, IViewItemHandler handler, IListMenuManager manager, IListMenuArg arg,
             ref ISubviewStateProvider stateProvider)
         {
-            if (stateProvider == null) { stateProvider = new StateProvider(); }
-            if (!(stateProvider is StateProvider local)) throw new System.ArgumentException(
+            stateProvider ??= new StateProvider();
+            if (stateProvider is not StateProvider local) throw new System.ArgumentException(
                 $"{stateProvider} は {nameof(StateProvider)} ではありません。");
 
             // 現在の StateProvider を外す前に状態を保存する

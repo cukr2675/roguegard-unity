@@ -51,7 +51,7 @@ namespace Lysionium
         {
             return new WidgetOption<TMgr, TArg>()
             {
-                Name = name ?? EmitIdentity("InputFieldViewWidget"),
+                Name = name ?? EmitIdentity("SliderViewWidget"),
                 MinValue = minValue,
                 MaxValue = maxValue,
                 GetValue = getValue,

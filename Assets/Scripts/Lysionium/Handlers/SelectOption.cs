@@ -40,17 +40,13 @@ namespace Lysionium
 
         public void SetName(string name)
         {
-            if (name == null) throw new System.ArgumentNullException(nameof(name));
-
-            this.name = name;
+            this.name = name ?? throw new System.ArgumentNullException(nameof(name));
             getName = null;
         }
 
         public void SetName(System.Func<TMgr, TArg, string> getName)
         {
-            if (getName == null) throw new System.ArgumentNullException(nameof(getName));
-
-            this.getName = getName;
+            this.getName = getName ?? throw new System.ArgumentNullException(nameof(getName));
             name = null;
         }
 
