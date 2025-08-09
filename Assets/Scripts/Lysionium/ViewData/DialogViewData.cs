@@ -28,18 +28,20 @@ namespace Lysionium
             if (manager == null) throw new System.ArgumentNullException(nameof(manager));
 
             // 必要に応じてスクロール位置をリセット
-            if (viewStateHolder != prevViewStateHolder)
-            {
-                dialogSubviewStateProvider?.Reset();
-                captionBoxSubviewStateProvider?.Reset();
-                backAnchorSubviewStateProvider?.Reset();
-            }
+            if (viewStateHolder != prevViewStateHolder) { ResetSubviewStateProviders(); }
             prevViewStateHolder = viewStateHolder;
 
             this.message = message;
 
             if (TryShowSubviews(manager, arg)) return null;
             else return new Builder(this, manager, arg);
+        }
+
+        protected virtual void ResetSubviewStateProviders()
+        {
+            dialogSubviewStateProvider?.Reset();
+            captionBoxSubviewStateProvider?.Reset();
+            backAnchorSubviewStateProvider?.Reset();
         }
 
         protected override void ShowSubviews(TMgr manager, TArg arg)
@@ -73,7 +75,7 @@ namespace Lysionium
             }
         }
 
-        public void Hide(TMgr manager, bool back)
+        public virtual void Hide(TMgr manager, bool back)
         {
             manager.GetSubview(DialogSubviewName).Hide(back);
             if (Title != null) { manager.GetSubview(CaptionBoxSubviewName).Hide(back); }
@@ -95,16 +97,16 @@ namespace Lysionium
                 return this;
             }
 
-            public Builder StackOptions(params (string, ClickItemHandler<TMgr, TArg>)[] selectOptions)
+            public Builder OptionStack(params (string, ClickItemHandler<TMgr, TArg>)[] selectOptions)
             {
                 AssertNotBuilt();
 
-                var stack = new List<object>();
-                foreach (var selectOption in selectOptions)
+                var stack = new (string, object)[selectOptions.Length];
+                for (int i = 0; i < selectOptions.Length; i++)
                 {
-                    stack.Add(SelectOption.Create(selectOption.Item1, selectOption.Item2));
+                    stack[i] = ("1*", SelectOption.Create(selectOptions[i].Item1, selectOptions[i].Item2));
                 }
-                Tail(stack);
+                Tail(StackViewWidget.CreateOption(stack));
                 return this;
             }
 

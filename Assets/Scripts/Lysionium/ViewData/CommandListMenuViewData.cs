@@ -54,16 +54,18 @@ namespace Lysionium
         private Builder ShowCore(TMgr manager, TArg arg, object viewStateHolder)
         {
             // 必要に応じてスクロール位置をリセット
-            if (viewStateHolder != prevViewStateHolder)
-            {
-                secodaryCommandSubviewStateProvider?.Reset();
-                captionBoxSubviewStateProvider?.Reset();
-                backAnchorSubviewStateProvider?.Reset();
-            }
+            if (viewStateHolder != prevViewStateHolder) { ResetSubviewStateProviders(); }
             prevViewStateHolder = viewStateHolder;
 
             if (TryShowSubviews(manager, arg)) return null;
             else return new Builder(this, manager, arg);
+        }
+
+        protected virtual void ResetSubviewStateProviders()
+        {
+            secodaryCommandSubviewStateProvider?.Reset();
+            captionBoxSubviewStateProvider?.Reset();
+            backAnchorSubviewStateProvider?.Reset();
         }
 
         protected override void ShowSubviews(TMgr manager, TArg arg)
@@ -87,7 +89,7 @@ namespace Lysionium
             }
         }
 
-        public void Hide(TMgr manager, bool back)
+        public virtual void Hide(TMgr manager, bool back)
         {
             manager.GetSubview(SecodaryCommandSubviewName).Hide(back);
             if (Title != null) { manager.GetSubview(CaptionBoxSubviewName).Hide(back); }
