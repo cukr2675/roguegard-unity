@@ -97,13 +97,11 @@ namespace RoguegardUnity
                             var invalidCharIndex = value.IndexOfAny(Path.GetInvalidFileNameChars());
                             if (invalidCharIndex >= 0) return newName;
                             else return newName = value;
-                        })
-                    )
+                        }))
 
                     .VarOnce(out var overwriteDialog, new ChoicesMenuScreen(":RenameOverride").Option(":Yes", Overwrite).Back())
-                    .Tail(new object[]
-                    {
-                        SelectOption.Create<MMgr, MArg>(":Rename", (manager, arg) =>
+                    .Tail(StackViewWidget.CreateOption(
+                        ("1*", SelectOption.Create<MMgr, MArg>(":Rename", (manager, arg) =>
                         {
                             if (string.IsNullOrWhiteSpace(newName))return;
 
@@ -119,9 +117,8 @@ namespace RoguegardUnity
                                 fileInfo.MoveTo(newPath);
                                 manager.PopMenuScreen(2);
                             }
-                        }),
-                        BackSelectOption.Instance
-                    })
+                        })),
+                        ("1*", BackSelectOption.Instance)))
 
                     .Build();
             }

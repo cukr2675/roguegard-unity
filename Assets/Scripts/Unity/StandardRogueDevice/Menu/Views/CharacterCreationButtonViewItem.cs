@@ -12,7 +12,7 @@ using Roguegard.Device;
 
 namespace RoguegardUnity
 {
-    public class CharacterCreationViewElementButton : ViewItem, IPointerClickHandler
+    public class CharacterCreationButtonViewItem : ViewItem, IPointerClickHandler
     {
         [SerializeField] private CanvasGroup _canvasGroup = null;
         [SerializeField] private Image _background = null;
@@ -132,7 +132,7 @@ namespace RoguegardUnity
             presenter.Click(source, Manager, Arg);
         }
 
-        protected override void BindCore(object element, IViewItemHandler handler)
+        protected override void BindCore(object item, IViewItemHandler handler)
         {
             throw new System.NotImplementedException();
         }

@@ -24,8 +24,6 @@ namespace Roguegard
 
         private class MenuScreen : RogueMenuScreen
         {
-            private readonly List<RoguePost> posts = new();
-
             private readonly ScrollMenuViewData<RoguePost, MMgr, MArg> view = new()
             {
             };
@@ -33,13 +31,8 @@ namespace Roguegard
             public override void OpenScreen(in MMgr manager, in MArg arg)
             {
                 var info = PostboxInfo.Get(arg.Arg.Tool);
-                posts.Clear();
-                foreach (var post in info.Posts)
-                {
-                    posts.Add(post);
-                }
 
-                view.Show(posts, manager, arg)
+                view.Show(info.Posts, manager, arg)
                     ?
                     .NameFrom((post, manager, arg) => post.Name)
 

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -25,9 +25,9 @@ namespace Roguegard.Rgpacks
             return false;
         }
 
-        //private class Menu : IListMenu, IElementPresenter
+        //private class Menu : IListMenu, IViewItemHandler
         //{
-        //    private static readonly List<object> elms = new List<object>()
+        //    private static readonly List<object> list = new List<object>()
         //    {
         //        new AssetId(),
         //        new RaceWeight()
@@ -36,19 +36,19 @@ namespace Roguegard.Rgpacks
         //    public void OpenMenu(IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         //    {
         //        var options = manager.GetView(DeviceKw.MenuOptions);
-        //        options.OpenView(this, elms, manager, self, user, arg);
+        //        options.OpenView(this, list, manager, self, user, arg);
         //        options.SetPosition(0f);
         //        ExitListMenuSelectOption.OpenLeftAnchorExit(manager);
         //    }
 
-        //    public string GetItemName(object element, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+        //    public string GetItemName(object item, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         //    {
-        //        return SelectOptionPresenter.Instance.GetItemName(element, manager, self, user, arg);
+        //        return SelectOptionPresenter.Instance.GetItemName(item, manager, self, user, arg);
         //    }
 
-        //    public void ActivateItem(object element, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+        //    public void Click(object item, IListMenuManager manager, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         //    {
-        //        SelectOptionPresenter.Instance.ActivateItem(element, manager, self, user, arg);
+        //        SelectOptionPresenter.Instance.ActivateItem(item, manager, self, user, arg);
         //    }
 
         //    private class AssetId : IOptionsMenuText

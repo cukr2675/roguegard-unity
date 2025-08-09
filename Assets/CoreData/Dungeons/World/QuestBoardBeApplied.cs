@@ -37,8 +37,7 @@ namespace Roguegard
 
         public class RogueMenu : RogueMenuScreen
         {
-            private static readonly List<DungeonQuest> elms = new();
-            private static readonly QuestViewMenu nextMenu = new();
+            private static readonly List<DungeonQuest> questList = new();
 
             private readonly ScrollMenuViewData<DungeonQuest, MMgr, MArg> view = new()
             {
@@ -46,24 +45,19 @@ namespace Roguegard
 
             public override void OpenScreen(in MMgr manager, in MArg arg)
             {
-                elms.Clear();
+                questList.Clear();
                 for (int i = 0; i < 4; i++)
                 {
                     var quest = RoguegardSettings.DungeonQuestGenerator.GenerateQuest(RogueRandom.Primary);
-                    elms.Add(quest);
+                    questList.Add(quest);
                 }
 
-                view.Show(elms, manager, arg)
+                view.Show(questList, manager, arg)
                     ?
-                    .NameFrom((quest, manager, arg) =>
-                    {
-                        return quest.Caption;
-                    })
+                    .NameFrom(quest => quest.Caption)
 
-                    .OnClick((quest, manager, arg) =>
-                    {
-                        manager.PushMenuScreen(nextMenu, arg.Self, other: quest);
-                    })
+                    .VarOnce(out var nextMenu, new QuestViewMenu())
+                    .OnClick((quest, manager, arg) => manager.PushMenuScreen(nextMenu, arg.Self, other: quest))
 
                     .Build();
             }

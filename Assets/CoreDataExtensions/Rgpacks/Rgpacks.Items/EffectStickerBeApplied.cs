@@ -35,32 +35,20 @@ namespace Roguegard.Rgpacks
             {
                 view.Show(System.Array.Empty<object>(), manager, arg)
                     ?
-                    .Tail(
-                        new object[]
-                        {
-                            "アセットID",
-                            InputFieldViewWidget.CreateOption<MMgr, MArg>(
-                                (manager, arg) => NamingEffect.Get(arg.Arg.TargetObj)?.Naming,
-                                (manager, arg, value) => {
-                                    var sticker = arg.Arg.TargetObj;
-                                    default(IActiveRogueMethodCaller).Affect(sticker, 1f, NamingEffect.Callback);
-                                    return NamingEffect.Get(sticker).Naming = value;
-                                })
-                        })
+                    .TailStack("アセットID", InputFieldViewWidget.CreateOption<MMgr, MArg>(
+                        (manager, arg) => NamingEffect.Get(arg.Arg.TargetObj)?.Naming,
+                        (manager, arg, value) => {
+                            var sticker = arg.Arg.TargetObj;
+                            default(IActiveRogueMethodCaller).Affect(sticker, 1f, NamingEffect.Callback);
+                            return NamingEffect.Get(sticker).Naming = value;
+                        }))
 
                     .VarOnce(out var cmnMenu, new PropertiedCmnMenu())
-                    .Tail(SelectOption.Create<MMgr, MArg>(
-                        "Update",
-                        (manager, arg) => manager.PushMenuScreen(cmnMenu, arg.Self, other: EffectStickerInfo.Get(arg.Arg.TargetObj).Update)))
+                    .TailOption("Update", (manager, arg) => manager.PushMenuScreen(cmnMenu, arg.Self, other: EffectStickerInfo.Get(arg.Arg.TargetObj).Update))
 
-                    .Tail(
-                        new object[]
-                        {
-                            "スプライト",
-                            InputFieldViewWidget.CreateOption<MMgr, MArg>(
-                                (manager, arg) => EffectStickerInfo.Get(arg.Arg.TargetObj).Sprite,
-                                (manager, arg, value) =>  EffectStickerInfo.Get(arg.Arg.TargetObj).Sprite = value)
-                        })
+                    .TailStack("スプライト", InputFieldViewWidget.CreateOption<MMgr, MArg>(
+                        (manager, arg) => EffectStickerInfo.Get(arg.Arg.TargetObj).Sprite,
+                        (manager, arg, value) =>  EffectStickerInfo.Get(arg.Arg.TargetObj).Sprite = value))
 
                     .Build();
             }

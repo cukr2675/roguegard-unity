@@ -58,14 +58,14 @@ namespace RoguegardUnity
             {
                 selectOptions.Add(command.SelectOption);
             }
-            selectOptions.Add(Details);
-            selectOptions.Add(Rename);
-            selectOptions.Add(BackSelectOption.Instance);
 
             view.Title = StandardRogueDeviceUtility.GetCaption(tool.Main.InfoSet);
 
             view.Show(selectOptions, manager, arg)
                 ?
+                .Tail(Details)
+                .Tail(Rename)
+                .Tail(BackSelectOption.Instance)
                 .Build();
         }
 
@@ -76,11 +76,6 @@ namespace RoguegardUnity
 
         private class SummaryMenuScreen : RogueMenuScreen
         {
-            private readonly DialogViewData<MMgr, MArg> view = new()
-            {
-                DialogSubviewName = StandardSubviewTable.WidgetsName,
-            };
-
             public override void OpenScreen(in MMgr manager, in MArg arg)
             {
                 object target;
@@ -150,9 +145,8 @@ namespace RoguegardUnity
                         })
                     )
 
-                    .Tail(new object[]
-                    {
-                        SelectOption.Create<MMgr, MArg>(":Rename", (manager, arg) =>
+                    .Tail(StackViewWidget.CreateOption(
+                        ("1*", SelectOption.Create<MMgr, MArg>(":Rename", (manager, arg) =>
                         {
                             var obj = arg.Arg.Tool ?? arg.Arg.TargetObj;
                             default(IActiveRogueMethodCaller).Affect(obj, 1f, NamingEffect.Callback);
@@ -166,9 +160,8 @@ namespace RoguegardUnity
                             }
                             manager.PopMenuScreen(2);
                             manager.Reopen();
-                        }),
-                        BackSelectOption.Instance
-                    })
+                        })),
+                        ("1*", BackSelectOption.Instance)))
 
                     .Build();
             }

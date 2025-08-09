@@ -23,7 +23,7 @@ namespace RoguegardUnity
         [SerializeField] private ButtonViewItem _raceButton = null;
         [SerializeField] private RectTransform _secondParent = null;
         [SerializeField] private LabelViewItem _headerPrefab = null;
-        [SerializeField] private CharacterCreationViewElementButton _elementButtonPrefab = null;
+        [SerializeField] private CharacterCreationButtonViewItem _buttonViewItemPrefab = null;
 
         private CharacterCreationData characterCreationData;
         private CharacterCreationAddMenu addMenu;
@@ -44,7 +44,7 @@ namespace RoguegardUnity
             = SelectOption.Create<MMgr, MArg>(":Load", new LoadPresetMenu());
         private static readonly object[] leftAnchorObjs = new object[2];
 
-        private readonly List<ViewItem> viewElements = new();
+        private readonly List<ViewItem> viewItems = new();
 
         ISelectOption ICharacterCreationElementsSubview.LoadPresetOption => LoadPresetSelectOption;
 
@@ -87,35 +87,35 @@ namespace RoguegardUnity
             appearanceEditingMenu.NextMenu = optionMenu;
             appearanceEditingMenu.AddMenu = addMenu;
 
-            viewElements.Clear();
+            viewItems.Clear();
 
             if (intrinsicPresenter == null)
             {
                 intrinsicPresenter = new ButtonViewItemHandler<Intrinsic, MMgr, MArg>()
                 {
-                    GetName = (element, manager, arg) =>
+                    GetName = (intrinsic, manager, arg) =>
                     {
-                        if (element == null) return "+ 固有能力を追加";
-                        else return element.Name;
+                        if (intrinsic == null) return "+ 固有能力を追加";
+                        else return intrinsic.Name;
                     },
-                    Click = (element, manager, arg) =>
+                    Click = (intrinsic, manager, arg) =>
                     {
-                        if (element == null) { manager.PushMenuScreen(addMenu, arg.Self, other: typeof(Intrinsic)); }
-                        else { manager.PushMenuScreen(optionMenu, arg.Self, other: element); }
+                        if (intrinsic == null) { manager.PushMenuScreen(addMenu, arg.Self, other: typeof(Intrinsic)); }
+                        else { manager.PushMenuScreen(optionMenu, arg.Self, other: intrinsic); }
                     },
                 };
 
                 startingItemPresenter = new ButtonViewItemHandler<StartingItem, MMgr, MArg>()
                 {
-                    GetName = (element, manager, arg) =>
+                    GetName = (startingItem, manager, arg) =>
                     {
-                        if (element == null) return "+ 固有能力を追加";
-                        else return element.Name;
+                        if (startingItem == null) return "+ 固有能力を追加";
+                        else return startingItem.Name;
                     },
-                    Click = (element, manager, arg) =>
+                    Click = (startingItem, manager, arg) =>
                     {
-                        if (element == null) { manager.PushMenuScreen(addMenu, arg.Self, other: typeof(StartingItem)); }
-                        else { manager.PushMenuScreen(optionMenu, arg.Self, other: element); }
+                        if (startingItem == null) { manager.PushMenuScreen(addMenu, arg.Self, other: typeof(StartingItem)); }
+                        else { manager.PushMenuScreen(optionMenu, arg.Self, other: startingItem); }
                     },
                 };
             }
@@ -154,14 +154,14 @@ namespace RoguegardUnity
             for (int i = 0; i < characterCreationData.Intrinsics.Count; i++)
             {
                 var intrinsic = characterCreationData.Intrinsics[i];
-                var itemButton = Instantiate(_elementButtonPrefab, _secondParent);
+                var itemButton = Instantiate(_buttonViewItemPrefab, _secondParent);
                 SetTransform((RectTransform)itemButton.transform, ref sumHeight, ref odd);
                 itemButton.Initialize(this);
                 itemButton.SetItem(intrinsicPresenter, intrinsic, characterCreationData);
                 itemObjects.Add(itemButton);
             }
             {
-                var itemButton = Instantiate(_elementButtonPrefab, _secondParent);
+                var itemButton = Instantiate(_buttonViewItemPrefab, _secondParent);
                 SetTransform((RectTransform)itemButton.transform, ref sumHeight, ref odd);
                 itemButton.Initialize(this);
                 itemButton.SetItem(intrinsicPresenter, null, "+ 固有能力を追加");
@@ -182,14 +182,14 @@ namespace RoguegardUnity
             for (int i = 0; i < characterCreationData.StartingItemTable.Count; i++)
             {
                 var startingItem = characterCreationData.StartingItemTable[i][0];
-                var itemButton = Instantiate(_elementButtonPrefab, _secondParent);
+                var itemButton = Instantiate(_buttonViewItemPrefab, _secondParent);
                 SetTransform((RectTransform)itemButton.transform, ref sumHeight, ref odd);
                 itemButton.Initialize(this);
                 itemButton.SetItem(startingItemPresenter, startingItem);
                 itemObjects.Add(itemButton);
             }
             {
-                var itemButton = Instantiate(_elementButtonPrefab, _secondParent);
+                var itemButton = Instantiate(_buttonViewItemPrefab, _secondParent);
                 SetTransform((RectTransform)itemButton.transform, ref sumHeight, ref odd);
                 itemButton.Initialize(this);
                 itemButton.SetItem(startingItemPresenter, null, "+ 初期アイテムを追加");
@@ -200,9 +200,9 @@ namespace RoguegardUnity
                 RectTransform.Edge.Top, 0, _firstParent.rect.height + sumHeight);
 
             _raceButton.Bind(raceSelectOption, SelectOptionViewItemHandler.Instance);
-            viewElements.Add(_raceButton);
+            viewItems.Add(_raceButton);
             _appearanceButton.Bind(appearanceSelectOption, SelectOptionViewItemHandler.Instance);
-            viewElements.Add(_appearanceButton);
+            viewItems.Add(_appearanceButton);
         }
 
         private static void SetTransform(RectTransform itemTransform, ref float sumHeight, ref bool odd)
@@ -225,22 +225,9 @@ namespace RoguegardUnity
         {
             private static List<CharacterCreationData> presets;
 
-            private CharacterCreationData element;
-
-            private readonly ChoicesMenuScreen nextMenu;
-
-            private readonly ScrollMenuViewData<CharacterCreationData, MMgr, MArg> view;
-
-            public LoadPresetMenu()
+            private readonly ScrollMenuViewData<CharacterCreationData, MMgr, MArg> view = new()
             {
-                nextMenu = new ChoicesMenuScreen("ロードすると 編集中のキャラは消えてしまいますが よろしいですか？")
-                    .Option("ロードする", Load)
-                    .Back();
-
-                view = new()
-                {
-                };
-            }
+            };
 
             public override void OpenScreen(in MMgr manager, in MArg arg)
             {
@@ -255,24 +242,26 @@ namespace RoguegardUnity
 
                 view.Show(presets, manager, arg)
                     ?
-                    .NameFrom((preset, manager, arg) =>
-                    {
-                        return preset.ShortName;
-                    })
+                    .NameFrom(preset => preset.ShortName)
 
+                    .VarOnce(out CharacterCreationData selectedPreset)
+                    .VarOnce(
+                        out var nextMenu, new ChoicesMenuScreen("ロードすると 編集中のキャラは消えてしまいますが よろしいですか？")
+                        .Option("ロードする", (manager, arg) => Load(selectedPreset, manager, arg))
+                        .Back())
                     .OnClick((preset, manager, arg) =>
                     {
-                        element = preset;
+                        selectedPreset = preset;
                         manager.PushMenuScreen(nextMenu, other: (CharacterCreationData)arg.Arg.Other);
                     })
 
                     .Build();
             }
 
-            private void Load(MMgr manager, MArg arg)
+            private void Load(CharacterCreationData selectedPreset, MMgr manager, MArg arg)
             {
                 var characterCreationData = (CharacterCreationData)arg.Arg.Other;
-                characterCreationData.Set(element);
+                characterCreationData.Set(selectedPreset);
                 manager.PopMenuScreen(2);
             }
         }

@@ -6797,7 +6797,7 @@ MonoBehaviour:
   _raceButton: {fileID: 5692585360849520324}
   _secondParent: {fileID: 8507770701815763753}
   _headerPrefab: {fileID: 4666641263920320602, guid: bd6cf6ea84c50a04995e329fd4a0019c, type: 3}
-  _elementButtonPrefab: {fileID: 9002094812848519153, guid: 86ce7831cece9c54997bfb62f175f168, type: 3}
+  _buttonViewItemPrefab: {fileID: 9002094812848519153, guid: 86ce7831cece9c54997bfb62f175f168, type: 3}
 --- !u!224 &8802696955980064615 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3519301190486513262, guid: 3ebc47c7d31e8af4dac2ec188e7f017c, type: 3}

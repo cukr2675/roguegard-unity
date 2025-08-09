@@ -8,20 +8,18 @@ namespace Roguegard.Device
 {
     public class CharacterCreationAddMenu : RogueMenuScreen
     {
+        private readonly List<object> list = new();
+        private readonly ScrollMenuViewData<object, MMgr, MArg> view = new()
+        {
+        };
+
         private readonly ICharacterCreationDatabase database;
-        private readonly List<object> elms;
-        private readonly ScrollMenuViewData<object, MMgr, MArg> view;
 
         private CharacterCreationData characterCreationData;
 
         public CharacterCreationAddMenu(ICharacterCreationDatabase database)
         {
             this.database = database;
-            elms = new List<object>();
-
-            view = new()
-            {
-            };
         }
 
         public void Set(CharacterCreationData characterCreationData)
@@ -31,30 +29,30 @@ namespace Roguegard.Device
 
         public override void OpenScreen(in MMgr manager, in MArg arg)
         {
-            elms.Clear();
-            AddOptionsTo(elms, arg.Self, (System.Type)arg.Arg.Other, database);
+            list.Clear();
+            AddOptionsTo(list, arg.Self, (System.Type)arg.Arg.Other, database);
 
-            view.Show(elms, manager, arg)
+            view.Show(list, manager, arg)
                 ?
-                .NameFrom((element, manager, arg) => ((IRogueDescribable)element).Name)
+                .NameFrom((item, manager, arg) => ((IRogueDescribable)item).Name)
 
-                .OnClick((element, manager, arg) =>
+                .OnClick((item, manager, arg) =>
                 {
                     var editTargetType = (System.Type)arg.Arg.Other;
                     if (editTargetType == typeof(Appearance))
                     {
                         var appearance = characterCreationData.Appearances.Add();
-                        appearance.Option = (IAppearanceOption)element;
+                        appearance.Option = (IAppearanceOption)item;
                     }
                     else if (editTargetType == typeof(Intrinsic))
                     {
                         var intrinsic = characterCreationData.Intrinsics.Add();
-                        intrinsic.Option = (IIntrinsicOption)element;
+                        intrinsic.Option = (IIntrinsicOption)item;
                     }
                     else if (editTargetType == typeof(StartingItem))
                     {
                         var startingItem = characterCreationData.StartingItemTable.Add().Add();
-                        startingItem.Option = (IStartingItemOption)element;
+                        startingItem.Option = (IStartingItemOption)item;
                         startingItem.Stack = 1;
                         ConsumeStartingItemOptionObj(startingItem.Option, arg.Self);
                     }
@@ -65,13 +63,13 @@ namespace Roguegard.Device
                 .Build();
         }
 
-        public static void AddOptionsTo(List<object> elms, RogueObj player, object editTarget, ICharacterCreationDatabase database)
+        public static void AddOptionsTo(List<object> list, RogueObj player, object editTarget, ICharacterCreationDatabase database)
         {
             if (editTarget is Race)
             {
                 foreach (var option in database.RaceOptions)
                 {
-                    elms.Add(option);
+                    list.Add(option);
                 }
             }
             else if (editTarget is Appearance appearance)
@@ -80,7 +78,7 @@ namespace Roguegard.Device
                 {
                     if (appearance.Option != null && option.BoneName == appearance.Option.BoneName)
                     {
-                        elms.Add(option);
+                        list.Add(option);
                     }
                 }
             }
@@ -88,7 +86,7 @@ namespace Roguegard.Device
             {
                 foreach (var option in database.IntrinsicOptions)
                 {
-                    elms.Add(option);
+                    list.Add(option);
                 }
             }
             else if (editTarget is StartingItem || editTarget is SingleItemMember)
@@ -100,14 +98,14 @@ namespace Roguegard.Device
                         if (item?.Main.BaseInfoSet is CharacterCreationInfoSet itemInfoSet &&
                             itemInfoSet.Data is IStartingItemOption option &&
                             item.Main.RogueEffects.Effects.Length <= 1 &&
-                            !elms.Contains(option))
+                            !list.Contains(option))
                         {
-                            elms.Add(option);
+                            list.Add(option);
                         }
                         if (item?.Main.BaseInfoSet is SewedEquipmentInfoSet &&
                             item.Main.RogueEffects.Effects.Length <= 1)
                         {
-                            elms.Add(new ObjStartingItemOption { Obj = item.Clone() });
+                            list.Add(new ObjStartingItemOption { Obj = item.Clone() });
                             continue;
                         }
                     }
@@ -116,7 +114,7 @@ namespace Roguegard.Device
                 {
                     foreach (var option in database.StartingItemOptions)
                     {
-                        elms.Add(option);
+                        list.Add(option);
                     }
                 }
             }
@@ -124,18 +122,18 @@ namespace Roguegard.Device
             {
                 for (int i = 0; i < alphabetTypeMember.Types.Length; i++)
                 {
-                    elms.Add(i);
+                    list.Add(i);
                 }
             }
         }
 
-        public static void AddOptionsTo(List<object> elms, RogueObj player, System.Type editTargetType, ICharacterCreationDatabase database)
+        public static void AddOptionsTo(List<object> list, RogueObj player, System.Type editTargetType, ICharacterCreationDatabase database)
         {
             if (editTargetType == typeof(Race))
             {
                 foreach (var option in database.AppearanceOptions)
                 {
-                    elms.Add(option);
+                    list.Add(option);
                 }
             }
             else if (editTargetType == typeof(Appearance))
@@ -144,7 +142,7 @@ namespace Roguegard.Device
                 {
                     if (option.BoneName == BoneKeyword.Free)
                     {
-                        elms.Add(option);
+                        list.Add(option);
                     }
                 }
             }
@@ -152,7 +150,7 @@ namespace Roguegard.Device
             {
                 foreach (var option in database.IntrinsicOptions)
                 {
-                    elms.Add(option);
+                    list.Add(option);
                 }
             }
             else if (editTargetType == typeof(StartingItem) || editTargetType == typeof(SingleItemMember))
@@ -162,15 +160,15 @@ namespace Roguegard.Device
                     if (item?.Main.BaseInfoSet is CharacterCreationInfoSet itemInfoSet &&
                         itemInfoSet.Data is IStartingItemOption option &&
                         item.Main.RogueEffects.Effects.Length <= 1 &&
-                        !elms.Contains(option))
+                        !list.Contains(option))
                     {
-                        elms.Add(option);
+                        list.Add(option);
                         continue;
                     }
                     if (item?.Main.BaseInfoSet is SewedEquipmentInfoSet &&
                         item.Main.RogueEffects.Effects.Length <= 1)
                     {
-                        elms.Add(new ObjStartingItemOption { Obj = item.Clone() });
+                        list.Add(new ObjStartingItemOption { Obj = item.Clone() });
                         continue;
                     }
                 }

@@ -27,57 +27,46 @@ namespace Roguegard.Rgpacks
 
         private class Menu : RogueMenuScreen
         {
-            private static readonly List<object> elms = new();
-            private static readonly PageMenu nextMenu = new();
-
+            private static readonly List<object> list = new();
             private readonly VariableWidgetsMenuViewData<MMgr, MArg> view = new()
             {
             };
+
+            private static readonly PageMenu nextMenu = new();
 
             public override void OpenScreen(in MMgr manager, in MArg arg)
             {
                 var fairy = arg.Arg.TargetObj;
                 var eventFairyInfo = EvtFairyInfo.Get(fairy);
-                elms.Clear();
+                list.Clear();
                 foreach (var page in eventFairyInfo.Pages)
                 {
-                    elms.Add(
-                        SelectOption.Create<MMgr, MArg>(
-                            page.ChartCmn ?? "",
-                            (manager, arg) => { manager.PushMenuScreen(nextMenu, arg.Self, other: page); }));
+                    list.Add(SelectOption.Create<MMgr, MArg>(
+                        page.ChartCmn ?? "",
+                        (manager, arg) => { manager.PushMenuScreen(nextMenu, arg.Self, other: page); }));
                 }
 
-                view.Show(elms, manager, arg)
+                view.Show(list, manager, arg)
                     ?
-                    .Head(
-                        new object[]
-                        {
-                            "アセットID",
-                            InputFieldViewWidget.CreateOption<MMgr, MArg>(
-                                (manager, arg) => NamingEffect.Get(arg.Arg.TargetObj)?.Naming,
-                                (manager, arg, value) => {
-                                    var fairy = arg.Arg.TargetObj;
-                                    default(IActiveRogueMethodCaller).Affect(fairy, 1f, NamingEffect.Callback);
-                                    return NamingEffect.Get(fairy).Naming = value;
-                                })
-                        })
-                    .Head(
-                        new object[]
-                        {
-                            "チャートID",
-                            InputFieldViewWidget.CreateOption<MMgr, MArg>(
-                                (manager, arg) => EvtFairyInfo.Get(arg.Arg.TargetObj).RelatedChart,
-                                (manager, arg, value) => EvtFairyInfo.Get(arg.Arg.TargetObj).RelatedChart = value)
-                        })
-
-                    .Tail(
-                        SelectOption.Create<MMgr, MArg>("+ ページを追加", (manager, arg) =>
-                        {
+                    .HeadStack("アセットID", InputFieldViewWidget.CreateOption<MMgr, MArg>(
+                        (manager, arg) => NamingEffect.Get(arg.Arg.TargetObj)?.Naming,
+                        (manager, arg, value) => {
                             var fairy = arg.Arg.TargetObj;
-                            var eventFairyInfo = EvtFairyInfo.Get(fairy);
-                            eventFairyInfo.AddPage();
-                            manager.Reopen();
+                            default(IActiveRogueMethodCaller).Affect(fairy, 1f, NamingEffect.Callback);
+                            return NamingEffect.Get(fairy).Naming = value;
                         }))
+
+                    .HeadStack("チャートID", InputFieldViewWidget.CreateOption<MMgr, MArg>(
+                        (manager, arg) => EvtFairyInfo.Get(arg.Arg.TargetObj).RelatedChart,
+                        (manager, arg, value) => EvtFairyInfo.Get(arg.Arg.TargetObj).RelatedChart = value))
+
+                    .TailOption("+ ページを追加", (manager, arg) =>
+                    {
+                        var fairy = arg.Arg.TargetObj;
+                        var eventFairyInfo = EvtFairyInfo.Get(fairy);
+                        eventFairyInfo.AddPage();
+                        manager.Reopen();
+                    })
 
                     .Build();
             }
@@ -93,35 +82,22 @@ namespace Roguegard.Rgpacks
             {
                 view.Show(System.Array.Empty<object>(), manager, arg)
                     ?
-                    .Tail(
-                        new object[]
-                        {
-                            "条件Cmn",
-                            InputFieldViewWidget.CreateOption<MMgr, MArg>(
-                                (manager, arg) => ((EvtFairyInfo.Page)arg.Arg.Other).ChartCmn,
-                                (manager, arg, value) => ((EvtFairyInfo.Page)arg.Arg.Other).ChartCmn = value)
-                        })
-                    .Tail(
-                        new object[]
-                        {
-                            "追加条件Cmn",
-                            InputFieldViewWidget.CreateOption<MMgr, MArg>(
-                                (manager, arg) => ((EvtFairyInfo.Page)arg.Arg.Other).IfCmn.Cmn,
-                                (manager, arg, value) => ((EvtFairyInfo.Page)arg.Arg.Other).IfCmn.Cmn = value)
-                        })
-                    .Tail(
-                        new object[]
-                        {
-                            "見た目アセットID",
-                            InputFieldViewWidget.CreateOption<MMgr, MArg>(
-                                (manager, arg) => ((EvtFairyInfo.Page)arg.Arg.Other).Sprite,
-                                (manager, arg, value) => ((EvtFairyInfo.Page)arg.Arg.Other).Sprite = value)
-                        })
-                    .Tail(SelectOption.Create<MMgr, MArg>("カテゴリ", new CategoryMenu()))
+                    .TailStack("条件Cmn", InputFieldViewWidget.CreateOption<MMgr, MArg>(
+                        (manager, arg) => ((EvtFairyInfo.Page)arg.Arg.Other).ChartCmn,
+                        (manager, arg, value) => ((EvtFairyInfo.Page)arg.Arg.Other).ChartCmn = value))
+
+                    .TailStack("追加条件Cmn", InputFieldViewWidget.CreateOption<MMgr, MArg>(
+                        (manager, arg) => ((EvtFairyInfo.Page)arg.Arg.Other).IfCmn.Cmn,
+                        (manager, arg, value) => ((EvtFairyInfo.Page)arg.Arg.Other).IfCmn.Cmn = value))
+
+                    .TailStack("見た目アセットID", InputFieldViewWidget.CreateOption<MMgr, MArg>(
+                        (manager, arg) => ((EvtFairyInfo.Page)arg.Arg.Other).Sprite,
+                        (manager, arg, value) => ((EvtFairyInfo.Page)arg.Arg.Other).Sprite = value))
+
+                    .TailOption("カテゴリ", new CategoryMenu())
+
                     .VarOnce(out var cmnMenu, new PropertiedCmnMenu())
-                    .Tail(SelectOption.Create<MMgr, MArg>(
-                        "Cmn",
-                        (manager, arg) => manager.PushMenuScreen(cmnMenu, arg.Self, other: ((EvtFairyInfo.Page)arg.Arg.Other).Cmn)))
+                    .TailOption("Cmn", (manager, arg) => manager.PushMenuScreen(cmnMenu, arg.Self, other: ((EvtFairyInfo.Page)arg.Arg.Other).Cmn))
 
                     .Build();
             }
@@ -129,7 +105,7 @@ namespace Roguegard.Rgpacks
 
         private class CategoryMenu : RogueMenuScreen
         {
-            private static readonly object[] elms = new object[]
+            private static readonly object[] categories = new object[]
             {
                 EvtFairyCategory.ApplyTool,
                 EvtFairyCategory.Trap
@@ -141,9 +117,9 @@ namespace Roguegard.Rgpacks
 
             public override void OpenScreen(in MMgr manager, in MArg arg)
             {
-                view.Show(elms, manager, arg)
+                view.Show(categories, manager, arg)
                     ?
-                    .NameFrom((category, manager, arg) => category.ToString())
+                    .NameFrom(category => category.ToString())
                     .OnClick((category, manager, arg) =>
                     {
                         var page = (EvtFairyInfo.Page)arg.Arg.Other;

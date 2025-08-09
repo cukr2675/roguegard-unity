@@ -37,8 +37,6 @@ namespace Roguegard
 
         private class MenuScreen : RogueMenuScreen
         {
-            private readonly List<RogueObj> objs = new();
-
             private readonly ScrollMenuViewData<RogueObj, MMgr, MArg> view = new()
             {
             };
@@ -47,13 +45,8 @@ namespace Roguegard
             {
                 var player = arg.Self;
                 var worldInfo = RogueWorldInfo.GetByCharacter(player);
-                objs.Clear();
-                foreach (var lobbyMember in worldInfo.LobbyMembers.Members)
-                {
-                    objs.Add(lobbyMember);
-                }
 
-                view.Show(objs, manager, arg)
+                view.Show(worldInfo.LobbyMembers.Members, manager, arg)
                     ?
                     .Merge(out var merged)
                     .Init(

@@ -11,20 +11,19 @@ namespace Roguegard.Device
 {
     public class PropertiedCmnMenu : RogueMenuScreen
     {
-        private readonly List<object> elms = new();
-
-        private CharacterCreationOptionMenu characterCreationOptionMenu;
-        private StartingItemTableMenu startingItemTableMenu;
-
+        private readonly List<object> list = new();
         private readonly VariableWidgetsMenuViewData<MMgr, MArg> view = new()
         {
         };
+
+        private CharacterCreationOptionMenu characterCreationOptionMenu;
+        private StartingItemTableMenu startingItemTableMenu;
 
         public override void OpenScreen(in MMgr manager, in MArg arg)
         {
             var cmnData = (PropertiedCmnData)arg.Arg.Other;
 
-            elms.Clear();
+            list.Clear();
             if (!string.IsNullOrWhiteSpace(cmnData.Cmn))
             {
                 // コモンイベントのプロパティ一覧を取得するためにビルドする
@@ -40,38 +39,33 @@ namespace Roguegard.Device
                     {
                         if (pair.Value is NumberCmnProperty numberCmnProperty)
                         {
-                            elms.Add(
-                                new object[]
-                                {
-                                pair.Key,
-                                InputFieldViewWidget.CreateOption<MMgr, MArg>(
+                            list.Add(StackViewWidget.CreateOption(
+                                ("1*", pair.Key),
+                                ("1*", InputFieldViewWidget.CreateOption<MMgr, MArg>(
                                     (manager, arg) => numberCmnProperty.Value.ToString(),
                                     (manager, arg, value) => (numberCmnProperty.Value = float.Parse(value)).ToString(),
-                                    TMP_InputField.ContentType.DecimalNumber)
-                                });
+                                    TMP_InputField.ContentType.DecimalNumber))));
                         }
                         else if (pair.Value is StartingItemCmnProperty startingItemCmnProperty)
                         {
                             characterCreationOptionMenu ??= new CharacterCreationOptionMenu(RoguegardSettings.CharacterCreationDatabase);
                             startingItemCmnProperty.Value ??= new StartingItem() { Option = RoguegardSettings.CharacterCreationDatabase.StartingItemOptions[0] };
-                            elms.Add(
-                                SelectOption.Create<MMgr, MArg>(
-                                    pair.Key,
-                                    (manager, arg) => manager.PushMenuScreen(characterCreationOptionMenu, other: startingItemCmnProperty.Value)));
+                            list.Add(SelectOption.Create<MMgr, MArg>(
+                                pair.Key,
+                                (manager, arg) => manager.PushMenuScreen(characterCreationOptionMenu, other: startingItemCmnProperty.Value)));
                         }
                         else if (pair.Value is StartingItemTableCmnProperty startingItemTableCmnProperty)
                         {
                             startingItemTableMenu ??= new StartingItemTableMenu();
-                            elms.Add(
-                                SelectOption.Create<MMgr, MArg>(
-                                    pair.Key,
-                                    (manager, arg) => manager.PushMenuScreen(startingItemTableMenu, other: startingItemTableCmnProperty)));
+                            list.Add(SelectOption.Create<MMgr, MArg>(
+                                pair.Key,
+                                (manager, arg) => manager.PushMenuScreen(startingItemTableMenu, other: startingItemTableCmnProperty)));
                         }
                     }
                 }
             }
 
-            view.Show(elms, manager, arg)
+            view.Show(list, manager, arg)
                 ?
                 .HeadStack("アセットID", InputFieldViewWidget.CreateOption<MMgr, MArg>(
                     (manager, arg) => ((PropertiedCmnData)arg.Arg.Other).Cmn,
@@ -82,12 +76,12 @@ namespace Roguegard.Device
 
         private class StartingItemTableMenu : RogueMenuScreen
         {
-            private readonly List<object> elms = new();
             private readonly CharacterCreationData characterCreationData = new();
-            private readonly CharacterCreationAddMenu characterCreationAddMenu = new(RoguegardSettings.CharacterCreationDatabase);
             private readonly CharacterCreationOptionMenu characterCreationOptionMenu = new(RoguegardSettings.CharacterCreationDatabase);
+            private readonly CharacterCreationAddMenu characterCreationAddMenu = new(RoguegardSettings.CharacterCreationDatabase);
 
-            private readonly ScrollMenuViewData<object, MMgr, MArg> view;
+            private readonly List<StartingItem> startingItems = new();
+            private readonly ScrollMenuViewData<StartingItem, MMgr, MArg> view;
 
             public StartingItemTableMenu()
             {
@@ -109,32 +103,22 @@ namespace Roguegard.Device
             public override void OpenScreen(in MMgr manager, in MArg arg)
             {
                 var startingItemTableCmnProperty = (StartingItemTableCmnProperty)arg.Arg.Other;
-                var table = startingItemTableCmnProperty.Value;
+                var startingItemTable = startingItemTableCmnProperty.Value;
                 characterCreationData.StartingItemTable.Clear();
-                characterCreationData.StartingItemTable.AddClones(table);
-                elms.Clear();
-                for (int i = 0; i < table.Count; i++)
+                characterCreationData.StartingItemTable.AddClones(startingItemTable);
+                startingItems.Clear();
+                for (int i = 0; i < startingItemTable.Count; i++)
                 {
-                    elms.Add(table[i][0]);
+                    startingItems.Add(startingItemTable[i][0]);
                 }
 
-                view.Show(elms, manager, arg)
+                view.Show(startingItems, manager, arg)
                     ?
-                    .Tail(SelectOption.Create<MMgr, MArg>(
-                        "+ アイテムを追加",
-                        (manager, arg) => manager.PushMenuScreen(characterCreationAddMenu, other: typeof(StartingItem))))
+                    .NameFrom(startingItem => startingItem.Name)
 
-                    .NameFrom((element, manager, arg) =>
-                    {
-                        if (element is StartingItem startingItem) return startingItem.Name;
-                        else throw new System.InvalidOperationException();
-                    })
+                    .OnClick((startingItem, manager, arg) => manager.PushMenuScreen(characterCreationOptionMenu, other: startingItem))
 
-                    .OnClick((element, manager, arg) =>
-                    {
-                        if (element is StartingItem startingItem) { manager.PushMenuScreen(characterCreationOptionMenu, other: startingItem); }
-                        else throw new System.InvalidOperationException();
-                    })
+                    .TailOption("+ アイテムを追加", (manager, arg) => manager.PushMenuScreen(characterCreationAddMenu, other: typeof(StartingItem)))
 
                     .Build();
             }

@@ -83,20 +83,20 @@ namespace RoguegardUnity
                 .InitIf(
                     onNewFile != null, x => x
                     
-                    .Head(SelectOption.Create(":+ New File", onNewFile))
+                    .HeadOption(":+ New File", onNewFile)
                     
                     )
 
-                .InfoFrom((element, manager, arg) =>
+                .InfoFrom((item, manager, arg) =>
                 {
-                    if (element is FileInfo fileInfo)
+                    if (item is FileInfo fileInfo)
                     {
                         var name = fileInfo.Name;
                         var infoText1 = $"{fileInfo.Length / 1000:N0}KB";
                         var infoText2 = fileInfo.LastWriteTime.ToString();
                         return (name, infoText1, infoText2);
                     }
-                    else if (element is ISelectOption option)
+                    else if (item is ISelectOption option)
                     {
                         var name = option.GetName(manager, arg);
                         return (name, null, null);
@@ -107,14 +107,14 @@ namespace RoguegardUnity
                     }
                 })
 
-                .OnClick((element, manager, arg) =>
+                .OnClick((item, manager, arg) =>
                 {
-                    if (element is FileInfo fileInfo)
+                    if (item is FileInfo fileInfo)
                     {
                         newArg.Arg = new(other: fileInfo);
                         manager.PushMenuScreen(nextScreen, newArg.ReadOnly);
                     }
-                    else if (element is ISelectOption option) { option.Click(manager, arg); }
+                    else if (item is ISelectOption option) { option.Click(manager, arg); }
                     else throw new System.InvalidOperationException();
                 })
 

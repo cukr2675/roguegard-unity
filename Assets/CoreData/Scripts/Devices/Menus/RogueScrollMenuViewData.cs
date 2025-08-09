@@ -91,9 +91,9 @@ namespace Roguegard.Device
             {
                 AssertNotBuilt();
 
-                Parent.scrollSubviewHandler.GetInfo = (element, manager, arg) =>
+                Parent.scrollSubviewHandler.GetInfo = (item, manager, arg) =>
                 {
-                    var nameObj = method(element, manager, arg);
+                    var nameObj = method(item, manager, arg);
                     return (nameObj, null, null, null, null, null, null, null, false);
                 };
                 return this;
@@ -103,9 +103,9 @@ namespace Roguegard.Device
             {
                 AssertNotBuilt();
 
-                Parent.scrollSubviewHandler.GetInfo = (element, manager, arg) =>
+                Parent.scrollSubviewHandler.GetInfo = (item, manager, arg) =>
                 {
-                    var info = method(element, manager, arg);
+                    var info = method(item, manager, arg);
                     return (info.Item1, null, null, null, null, null, info.Item2, info.Item3, false);
                 };
                 return this;
@@ -115,9 +115,9 @@ namespace Roguegard.Device
             {
                 AssertNotBuilt();
 
-                Parent.scrollSubviewHandler.GetInfo = (element, manager, arg) =>
+                Parent.scrollSubviewHandler.GetInfo = (item, manager, arg) =>
                 {
-                    var info = method(element, manager, arg);
+                    var info = method(item, manager, arg);
                     return (info.Item1, null, info.Item2, info.Item3, info.Item4, info.Item5, info.Item6, info.Item7, info.Item8);
                 };
                 return this;
@@ -137,35 +137,35 @@ namespace Roguegard.Device
             public System.Func<T, MMgr, MArg, (object, Color?, Sprite, Color?, int?, float?, string, string, bool)> GetInfo { get; set; }
             public ClickItemHandler<T, MMgr, MArg> Click { get; set; }
 
-            public string GetName(object elementObj, IListMenuManager manager, IListMenuArg arg)
+            public string GetName(object itemObj, IListMenuManager manager, IListMenuArg arg)
             {
-                var element = (T)elementObj;
-                var info = GetInfo(element, (MMgr)manager, (MArg)arg);
+                var item = (T)itemObj;
+                var info = GetInfo(item, (MMgr)manager, (MArg)arg);
                 return info.Item1.ToString();
             }
 
             public void GetRogueInfo(
-                object elementObj, MMgr manager, MArg arg,
+                object itemObj, MMgr manager, MArg arg,
                 out object nameObj, ref Color color, ref Sprite icon, ref Color iconColor, ref int? stack,
                 ref float? stars, ref string infoText1, ref string infoText2, ref bool equipeed)
             {
-                var element = (T)elementObj;
-                var info = GetInfo(element, manager, arg);
+                var item = (T)itemObj;
+                var info = GetInfo(item, manager, arg);
                 (nameObj, _, icon, _, stack, stars, infoText1, infoText2, equipeed) = info;
                 if (info.Item2.HasValue) { color = info.Item2.Value; }
                 if (info.Item4.HasValue) { iconColor = info.Item4.Value; }
             }
 
-            public string GetStyle(object element, IListMenuManager manager, IListMenuArg arg) => null;
+            public string GetStyle(object item, IListMenuManager manager, IListMenuArg arg) => string.Empty;
 
-            void IButtonViewItemHandler.Click(object elementObj, IListMenuManager iManager, IListMenuArg iArg)
+            void IButtonViewItemHandler.Click(object itemObj, IListMenuManager iManager, IListMenuArg iArg)
             {
-                var element = (T)elementObj;
+                var item = (T)itemObj;
                 var manager = (MMgr)iManager;
                 var arg = (MArg)iArg;
 
                 // 選択したスキルの情報と選択肢を表示する
-                Click(element, manager, arg);
+                Click(item, manager, arg);
             }
         }
     }

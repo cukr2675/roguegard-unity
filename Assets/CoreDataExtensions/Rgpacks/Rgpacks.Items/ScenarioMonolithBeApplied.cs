@@ -79,14 +79,9 @@ namespace Roguegard.Rgpacks
 
             public override void OpenScreen(in MMgr manager, in MArg arg)
             {
-                var list = parent._shopItems;
-
-                view.Show(list, manager, arg)
+                view.Show(parent._shopItems, manager, arg)
                     ?
-                    .NameFrom((item, manager, arg) =>
-                    {
-                        return item.Name;
-                    })
+                    .NameFrom(item => item.Name)
 
                     .OnClick((item, manager, arg) =>
                     {
@@ -109,7 +104,8 @@ namespace Roguegard.Rgpacks
             public override void OpenScreen(in MMgr manager, in MArg arg)
             {
                 view.Show("", manager, arg)
-                    ?.Tail(InputFieldViewWidget.CreateOption<MMgr, MArg>(
+                    ?
+                    .Tail(InputFieldViewWidget.CreateOption<MMgr, MArg>(
                         (manager, arg) =>
                         {
                             var monolith = arg.Arg.Tool;
@@ -122,6 +118,7 @@ namespace Roguegard.Rgpacks
                             var info = ScenarioMonolithInfo.Get(monolith);
                             return info.MainChart = value;
                         }))
+
                     .Build();
             }
         }

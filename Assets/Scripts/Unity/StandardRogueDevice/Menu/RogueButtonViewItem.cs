@@ -10,7 +10,7 @@ using Roguegard.Device;
 
 namespace RoguegardUnity
 {
-    public class RogueButtonViewElement : ViewItem
+    public class RogueButtonViewItem : ViewItem
     {
         [SerializeField] private Image _icon = null;
         [SerializeField] private TMP_Text _nameText = null;
@@ -25,7 +25,7 @@ namespace RoguegardUnity
         private Animator animator;
 
         private IButtonViewItemHandler handler;
-        private object element;
+        private object item;
 
         private static readonly RogueNameBuilder nameBuilder = new();
 
@@ -36,16 +36,16 @@ namespace RoguegardUnity
             var button = GetComponent<Button>();
             button.onClick.AddListener(() =>
             {
-                handler.Click(element, Manager, Arg);
+                handler.Click(item, Manager, Arg);
             });
 
             TryGetComponent(out animator);
         }
 
-        protected override void BindCore(object element, IViewItemHandler handler)
+        protected override void BindCore(object item, IViewItemHandler handler)
         {
             this.handler = handler as IButtonViewItemHandler;
-            this.element = element;
+            this.item = item;
 
             var color = RoguegardSettings.White;
             Sprite icon = null;
@@ -60,7 +60,7 @@ namespace RoguegardUnity
                 Arg is MArg arg)
             {
                 rogueElementHandler.GetRogueInfo(
-                    element, manager, arg, out var nameObj, ref color, ref icon, ref iconColor, ref stack,
+                    item, manager, arg, out var nameObj, ref color, ref icon, ref iconColor, ref stack,
                     ref stars, ref infoText1, ref infoText2, ref equipeed);
                 if (nameObj is RogueObj rogueObj)
                 {
@@ -82,7 +82,7 @@ namespace RoguegardUnity
             }
             else
             {
-                var baseText = handler.GetName(element, Manager, Arg);
+                var baseText = handler.GetName(item, Manager, Arg);
                 _nameText.text = Manager.Localize(baseText);
             }
             _nameText.color = color;
@@ -97,7 +97,7 @@ namespace RoguegardUnity
 
             if (animator != null)
             {
-                var style = handler.GetStyle(element, Manager, Arg);
+                var style = handler.GetStyle(item, Manager, Arg);
                 if (style == null) { style = _defaultStyle; }
                 for (int i = 0; i < animator.layerCount; i++)
                 {

@@ -36,29 +36,22 @@ namespace Roguegard.Rgpacks
             {
                 view.Show(System.Array.Empty<object>(), manager, arg)
                     ?
-                    .Tail(
-                        new object[]
-                        {
-                            "アセットID",
-                            InputFieldViewWidget.CreateOption<MMgr, MArg>(
-                                (manager, arg) => NamingEffect.Get(arg.Arg.TargetObj)?.Naming,
-                                (manager, arg, value) =>
-                                {
-                                    var figurine = arg.Arg.TargetObj;
-                                    default(IActiveRogueMethodCaller).Affect(figurine, 1f, NamingEffect.Callback);
-                                    return NamingEffect.Get(figurine).Naming = value;
-                                })
-                        })
-
-                    .VarOnce(out var nextMenu, new EditMenu())
-                    .Tail(SelectOption.Create<MMgr, MArg>(
-                        "キャラクリ設定",
-                        (manager, arg) =>
+                    .TailStack("アセットID", InputFieldViewWidget.CreateOption<MMgr, MArg>(
+                        (manager, arg) => NamingEffect.Get(arg.Arg.TargetObj)?.Naming,
+                        (manager, arg, value) =>
                         {
                             var figurine = arg.Arg.TargetObj;
-                            var characterCreationData = new CharacterCreationData(KyarakuriFigurineInfo.Get(figurine));
-                            manager.PushMenuScreen(nextMenu, arg.Self, targetObj: figurine, other: characterCreationData);
+                            default(IActiveRogueMethodCaller).Affect(figurine, 1f, NamingEffect.Callback);
+                            return NamingEffect.Get(figurine).Naming = value;
                         }))
+
+                    .VarOnce(out var nextMenu, new EditMenu())
+                    .TailOption("キャラクリ設定", (manager, arg) =>
+                    {
+                        var figurine = arg.Arg.TargetObj;
+                        var characterCreationData = new CharacterCreationData(KyarakuriFigurineInfo.Get(figurine));
+                        manager.PushMenuScreen(nextMenu, arg.Self, targetObj: figurine, other: characterCreationData);
+                    })
 
                     .Build();
             }

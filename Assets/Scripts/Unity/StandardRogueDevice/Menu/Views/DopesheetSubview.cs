@@ -30,7 +30,7 @@ namespace RoguegardUnity
         private readonly NewBoneMenuScreen newBoneMenu = new();
         private const int buttonsCount = 3;
 
-        private readonly List<ViewItem> viewElements = new();
+        private readonly List<ViewItem> viewItems = new();
         private StateProvider currentStateProvider;
         private readonly MenuScreen menuScreen = new();
 
@@ -74,9 +74,9 @@ namespace RoguegardUnity
             _menuButton.Initialize(this);
             _playButton.Initialize(this);
             _cameraButton.Initialize(this);
-            viewElements.Add(_menuButton);
-            viewElements.Add(_playButton);
-            viewElements.Add(_cameraButton);
+            viewItems.Add(_menuButton);
+            viewItems.Add(_playButton);
+            viewItems.Add(_cameraButton);
         }
 
         public override void SetParameters(
@@ -92,7 +92,7 @@ namespace RoguegardUnity
             {
                 currentStateProvider.VerticalAbsolutePosition = VerticalAbsolutePosition;
                 currentStateProvider.HorizontalAbsolutePosition = HorizontalAbsolutePosition;
-                currentStateProvider.SelectedIndex = viewElements.IndexOf(LastSelectedItem);
+                currentStateProvider.SelectedIndex = viewItems.IndexOf(LastSelectedItem);
             }
 
             var editInfo = (MotionGrapherInfo)((MArg)arg).Arg.Other;
@@ -110,7 +110,7 @@ namespace RoguegardUnity
             currentStateProvider = local;
             VerticalAbsolutePosition = local.VerticalAbsolutePosition;
             HorizontalAbsolutePosition = local.HorizontalAbsolutePosition;
-            local.ApplySelectedIndex(viewElements);
+            local.ApplySelectedIndex(viewItems);
         }
 
         private void UpdateElements(MotionGrapherInfo editInfo, int actorIndex)
@@ -118,11 +118,11 @@ namespace RoguegardUnity
             // 横スクロール幅変更
             _scrollRect.content.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Left, 0f, _width);
 
-            for (int i = buttonsCount; i < viewElements.Count; i++)
+            for (int i = buttonsCount; i < viewItems.Count; i++)
             {
-                Destroy(viewElements[i].gameObject);
+                Destroy(viewItems[i].gameObject);
             }
-            viewElements.RemoveRange(buttonsCount, viewElements.Count - buttonsCount);
+            viewItems.RemoveRange(buttonsCount, viewItems.Count - buttonsCount);
 
             var sumHeight = 0f;
             for (int i = 0; i < editInfo.Tracks.Length; i++)
@@ -167,7 +167,7 @@ namespace RoguegardUnity
                 }), SelectOptionViewItemHandler.Instance);
                 header.RectTransform.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, y, _itemHeight);
                 header.RectTransform.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Left, 0f, headerWidth);
-                viewElements.Add(header);
+                viewItems.Add(header);
 
                 sumHeight += _itemHeight;
             }
@@ -203,7 +203,7 @@ namespace RoguegardUnity
             }), SelectOptionViewItemHandler.Instance);
             header.RectTransform.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, y, _itemHeight);
             header.RectTransform.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Left, 0f, headerWidth);
-            viewElements.Add(header);
+            viewItems.Add(header);
 
             var lane = Instantiate(_itemLanePrefab, _scrollRect.content);
             lane.Initialize(this);
@@ -211,7 +211,7 @@ namespace RoguegardUnity
             lane.Bind(keyFrameList, ToStringViewItemHandler.Instance);
             lane.RectTransform.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, y, _itemHeight);
             lane.RectTransform.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Left, headerWidth, _width - headerWidth);
-            viewElements.Add(lane);
+            viewItems.Add(lane);
 
             sumHeight += _itemHeight;
         }
@@ -229,19 +229,19 @@ namespace RoguegardUnity
                 SelectedIndex = -1;
             }
 
-            public void ApplySelectedIndex(List<ViewItem> viewElements)
+            public void ApplySelectedIndex(List<ViewItem> viewItems)
             {
-                if (SelectedIndex <= 0 || viewElements.Count <= SelectedIndex || EventSystem.current == null)
+                if (SelectedIndex <= 0 || viewItems.Count <= SelectedIndex || EventSystem.current == null)
                 {
                     // 選択オブジェクトが見つからなければ最初の項目を選択
-                    if (viewElements.Count >= 2)
+                    if (viewItems.Count >= 2)
                     {
-                        EventSystem.current.SetSelectedGameObject(viewElements[1].gameObject);
+                        EventSystem.current.SetSelectedGameObject(viewItems[1].gameObject);
                     }
                     return;
                 }
 
-                EventSystem.current.SetSelectedGameObject(viewElements[SelectedIndex].gameObject);
+                EventSystem.current.SetSelectedGameObject(viewItems[SelectedIndex].gameObject);
             }
         }
 
@@ -270,10 +270,7 @@ namespace RoguegardUnity
             {
                 view.Show(boneNames, manager, arg)
                     ?
-                    .NameFrom((boneName, manager, arg) =>
-                    {
-                        return boneName;
-                    })
+                    .NameFrom(boneName => boneName)
 
                     .VarOnce(out var referenceMenu, new ReferenceNameMenuScreen())
                     .OnClick((boneName, manager, arg) =>
@@ -310,19 +307,16 @@ namespace RoguegardUnity
                         (manager, arg) => id,
                         (manager, arg, value) => id = value))
 
-                    .Tail(
-                        new object[]
+                    .Tail(StackViewWidget.CreateOption(
+                        ("1*", SelectOption.Create<MMgr, MArg>("追加", (manager, arg) =>
                         {
-                            SelectOption.Create<MMgr, MArg>("追加", (manager, arg) =>
-                            {
-                                var editInfo = (MotionGrapherInfo)arg.Arg.Other;
-                                var newTrack = new SubTimelineMotionGrapherTrack();
-                                newTrack.AddClip(new RgpackReferenceTimelineClip() { Id = id });
-                                editInfo.InsertTrack(0, newTrack);
-                                manager.PopMenuScreen(2);
-                            }),
-                            BackSelectOption.Instance
-                        })
+                            var editInfo = (MotionGrapherInfo)arg.Arg.Other;
+                            var newTrack = new SubTimelineMotionGrapherTrack();
+                            newTrack.AddClip(new RgpackReferenceTimelineClip() { Id = id });
+                            editInfo.InsertTrack(0, newTrack);
+                            manager.PopMenuScreen(2);
+                        })),
+                        ("1*", BackSelectOption.Instance)))
 
                     .Build();
             }
@@ -338,43 +332,33 @@ namespace RoguegardUnity
             {
                 view.Show(System.Array.Empty<object>(), manager, arg)
                     ?
-                    .Tail(
-                        new object[]
+                    .TailStack("ループ回数", InputFieldViewWidget.CreateOption<MMgr, MArg>(
+                        (manager, arg) => ((MotionGrapherInfo)arg.Arg.Other).LoopCount.ToString(),
+                        (manager, arg, strValue) =>
                         {
-                            "ループ回数",
-                            InputFieldViewWidget.CreateOption<MMgr, MArg>(
-                                (manager, arg) => ((MotionGrapherInfo)arg.Arg.Other).LoopCount.ToString(),
-                                (manager, arg, strValue) =>
-                                {
-                                    if (!int.TryParse(strValue, out var value))return strValue;
+                            if (!int.TryParse(strValue, out var value)) return strValue;
 
-                                    ((MotionGrapherInfo)arg.Arg.Other).LoopCount = value;
-                                    return strValue;
-                                })
-                        })
+                            ((MotionGrapherInfo)arg.Arg.Other).LoopCount = value;
+                            return strValue;
+                        }))
 
-                    .Tail(
-                        new object[]
+                    .TailStack("再生速度", InputFieldViewWidget.CreateOption<MMgr, MArg>(
+                        (manager, arg) => ((MotionGrapherInfo)arg.Arg.Other).PlaybackSpeed.ToString(),
+                        (manager, arg, strValue) =>
                         {
-                            "再生速度",
-                            InputFieldViewWidget.CreateOption<MMgr, MArg>(
-                                (manager, arg) => ((MotionGrapherInfo)arg.Arg.Other).PlaybackSpeed.ToString(),
-                                (manager, arg, strValue) =>
-                                {
-                                    if (!float.TryParse(strValue, out var value))return strValue;
+                            if (!float.TryParse(strValue, out var value))return strValue;
 
-                                    ((MotionGrapherInfo)arg.Arg.Other).PlaybackSpeed = value;
-                                    return strValue;
-                                })
-                        })
+                            ((MotionGrapherInfo)arg.Arg.Other).PlaybackSpeed = value;
+                            return strValue;
+                        }))
 
-                    .Tail(SelectOption.Create<MMgr, MArg>("編集終了", (manager, arg) =>
+                    .TailOption("編集終了", (manager, arg) =>
                     {
                         var editInfo = (MotionGrapherInfo)arg.Arg.Other;
                         RogueDevice.AddWork(DeviceKw.EnqueueWork, RogueCharacterWork.CreateSpriteMotion(arg.Self, new MotionGrapherSpriteMotion(editInfo), true));
 
                         manager.PopMenuScreen(2);
-                    }))
+                    })
 
                     .Build();
             }

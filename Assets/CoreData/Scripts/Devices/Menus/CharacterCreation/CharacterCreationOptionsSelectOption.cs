@@ -16,18 +16,11 @@ namespace Roguegard.Device
             nextMenu = new SelectOptionMenu() { database = database };
         }
 
-        private CharacterCreationOptionsSelectOption SetInner(object editTarget)
+        public CharacterCreationOptionsSelectOption Set(object editTarget)
         {
             this.editTarget = editTarget ?? throw new System.ArgumentNullException(nameof(editTarget));
             return this;
         }
-
-        public CharacterCreationOptionsSelectOption Set(Race race) => SetInner(race);
-        public CharacterCreationOptionsSelectOption Set(Appearance appearance) => SetInner(appearance);
-        public CharacterCreationOptionsSelectOption Set(Intrinsic intrinsic) => SetInner(intrinsic);
-        public CharacterCreationOptionsSelectOption Set(StartingItem startingItem) => SetInner(startingItem);
-        public CharacterCreationOptionsSelectOption Set(SingleItemMember singleItemMember) => SetInner(singleItemMember);
-        public CharacterCreationOptionsSelectOption Set(AlphabetTypeMember alphabetTypeMember) => SetInner(alphabetTypeMember);
 
         string ISelectOption.GetName(IListMenuManager manager, IListMenuArg arg)
         {
@@ -70,10 +63,9 @@ namespace Roguegard.Device
 
         private class SelectOptionMenu : RogueMenuScreen
         {
-            private readonly List<object> elms = new();
-
             public ICharacterCreationDatabase database;
 
+            private readonly List<object> list = new();
             private readonly ScrollMenuViewData<object, MMgr, MArg> view = new()
             {
             };
@@ -82,54 +74,54 @@ namespace Roguegard.Device
             {
                 var editTarget = arg.Arg.Other;
 
-                elms.Clear();
-                CharacterCreationAddMenu.AddOptionsTo(elms, arg.Self, editTarget, database);
+                list.Clear();
+                CharacterCreationAddMenu.AddOptionsTo(list, arg.Self, editTarget, database);
 
-                view.Show(elms, manager, arg, editTarget?.GetType())
+                view.Show(list, manager, arg, editTarget?.GetType())
                     ?
-                    .NameFrom((element, manager, arg) =>
+                    .NameFrom((item, manager, arg) =>
                     {
-                        if (element is IRogueDescribable describable)
+                        if (item is IRogueDescribable describable)
                         {
                             return describable.Name;
                         }
                         else if (arg.Arg.Other is AlphabetTypeMember alphabetTypeMember)
                         {
-                            return $"タイプ{alphabetTypeMember.Types[(int)element]}";
+                            return $"タイプ{alphabetTypeMember.Types[(int)item]}";
                         }
                         Debug.LogError("不正な型です。");
                         return null;
                     })
 
-                    .OnClick((element, manager, arg) =>
+                    .OnClick((item, manager, arg) =>
                     {
                         if (arg.Arg.Other is Race race)
                         {
-                            race.Option = (IRaceOption)element;
+                            race.Option = (IRaceOption)item;
                         }
                         else if (arg.Arg.Other is Appearance appearance)
                         {
-                            appearance.Option = (IAppearanceOption)element;
+                            appearance.Option = (IAppearanceOption)item;
                         }
                         else if (arg.Arg.Other is Intrinsic intrinsic)
                         {
-                            intrinsic.Option = (IIntrinsicOption)element;
+                            intrinsic.Option = (IIntrinsicOption)item;
                         }
                         else if (arg.Arg.Other is StartingItem startingItem)
                         {
                             CharacterCreationAddMenu.ReceiveStartingItemOptionObj(startingItem.Option, arg.Self);
-                            startingItem.Option = (IStartingItemOption)element;
+                            startingItem.Option = (IStartingItemOption)item;
                             CharacterCreationAddMenu.ConsumeStartingItemOptionObj(startingItem.Option, arg.Self);
                         }
                         else if (arg.Arg.Other is SingleItemMember singleItemMember)
                         {
                             CharacterCreationAddMenu.ReceiveStartingItemOptionObj(singleItemMember.ItemOption, arg.Self);
-                            singleItemMember.ItemOption = (IStartingItemOption)element;
+                            singleItemMember.ItemOption = (IStartingItemOption)item;
                             CharacterCreationAddMenu.ConsumeStartingItemOptionObj(singleItemMember.ItemOption, arg.Self);
                         }
                         else if (arg.Arg.Other is AlphabetTypeMember alphabetTypeMember)
                         {
-                            alphabetTypeMember.TypeIndex = (int)element;
+                            alphabetTypeMember.TypeIndex = (int)item;
                         }
                         manager.PopMenuScreen();
                     })

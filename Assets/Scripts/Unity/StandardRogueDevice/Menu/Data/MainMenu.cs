@@ -167,31 +167,28 @@ namespace RoguegardUnity
             {
                 view.Show("", manager, arg)
                     ?
-                    .Tail(
-                        new object[]
-                        {
-                            "マスター音量",
-                            InputFieldViewWidget.CreateOption<MMgr, MArg>(
-                                (manager, arg) =>
-                                {
-                                    var device = (StandardRogueDevice)RogueDevice.Primary;
-                                    return Mathf.FloorToInt(device.Options.MasterVolume * 100f).ToString();
-                                },
-                                (manager, arg, valueString) =>
-                                {
-                                    if (!int.TryParse(valueString, out var value)) { value = 0; }
+                    .Tail(StackViewWidget.CreateOption(
+                        ("1*", "マスター音量"),
+                        ("1*", InputFieldViewWidget.CreateOption<MMgr, MArg>(
+                            (manager, arg) =>
+                            {
+                                var device = (StandardRogueDevice)RogueDevice.Primary;
+                                return Mathf.FloorToInt(device.Options.MasterVolume * 100f).ToString();
+                            },
+                            (manager, arg, valueString) =>
+                            {
+                                if (!int.TryParse(valueString, out var value)) { value = 0; }
 
-                                    value = Mathf.Clamp(value, 0, 100);
-                                    var device = (StandardRogueDevice)RogueDevice.Primary;
-                                    device.Options.SetMasterVolume(value / 100f);
+                                value = Mathf.Clamp(value, 0, 100);
+                                var device = (StandardRogueDevice)RogueDevice.Primary;
+                                device.Options.SetMasterVolume(value / 100f);
 
-                                    // 音量確認用の効果音を鳴らす
-                                    manager.StandardSubviewTable.MessageBox.PlayString("Submit");
+                                // 音量確認用の効果音を鳴らす
+                                manager.StandardSubviewTable.MessageBox.PlayString("Submit");
 
-                                    return value.ToString();
-                                },
-                                TMP_InputField.ContentType.IntegerNumber)
-                        })
+                                return value.ToString();
+                            },
+                            TMP_InputField.ContentType.IntegerNumber))))
 
                     .VarOnce(out var windowTypeScreen, new WindowTypeScreen())
                     .Option("ウィンドウタイプ", windowTypeScreen)
@@ -201,7 +198,7 @@ namespace RoguegardUnity
 
             private class WindowTypeScreen : RogueMenuScreen
             {
-                private readonly List<object> elms = new();
+                private readonly List<object> indexList = new();
 
                 private readonly ScrollMenuViewData<object, MMgr, MArg> view = new()
                 {
@@ -209,26 +206,26 @@ namespace RoguegardUnity
 
                 public override void OpenScreen(in MMgr manager, in MArg arg)
                 {
-                    if (elms.Count != WindowFrameList.Count)
+                    if (indexList.Count != WindowFrameList.Count)
                     {
-                        elms.Clear();
+                        indexList.Clear();
                         for (int i = 0; i < WindowFrameList.Count; i++)
                         {
-                            elms.Add(new object());
+                            indexList.Add(new object());
                         }
                     }
 
-                    view.Show(elms, manager, arg)
+                    view.Show(indexList, manager, arg)
                         ?
-                        .NameFrom((element, manager, arg) =>
+                        .NameFrom((item, manager, arg) =>
                         {
-                            var index = elms.IndexOf(element);
+                            var index = indexList.IndexOf(item);
                             return WindowFrameList.GetName(index);
                         })
 
-                        .OnClick((element, manager, arg) =>
+                        .OnClick((item, manager, arg) =>
                         {
-                            var index = elms.IndexOf(element);
+                            var index = indexList.IndexOf(item);
                             var device = (StandardRogueDevice)RogueDevice.Primary;
                             device.Options.SetWindowFrame(index, device.Options.WindowFrameColor);
 

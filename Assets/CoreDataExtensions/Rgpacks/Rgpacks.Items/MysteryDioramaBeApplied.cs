@@ -33,9 +33,7 @@ namespace Roguegard.Rgpacks
         {
             public AssetStartingItem _newFloor;
 
-            private static readonly List<object> elms = new();
-
-            private readonly ScrollMenuViewData<object, MMgr, MArg> view = new()
+            private readonly ScrollMenuViewData<RogueObj, MMgr, MArg> view = new()
             {
                 ScrollSubviewName = StandardSubviewTable.WidgetsName,
             };
@@ -43,67 +41,37 @@ namespace Roguegard.Rgpacks
             public override void OpenScreen(in MMgr manager, in MArg arg)
             {
                 var diorama = arg.Arg.TargetObj;
-                elms.Clear();
-                foreach (var dioramaFloorObj in diorama.Space.Objs)
-                {
-                    if (dioramaFloorObj == null) continue;
 
-                    elms.Add(dioramaFloorObj);
-                }
-
-                view.Show(elms, manager, arg)
+                view.Show(diorama.Space.Objs, manager, arg)
                     ?
-                    .Head(
-                        new object[]
-                        {
-                            "アセットID",
-                            InputFieldViewWidget.CreateOption<MMgr, MArg>(
-                                (manager, arg) =>
-                                {
-                                    var diorama = arg.Arg.TargetObj;
-                                    return NamingEffect.Get(diorama)?.Naming;
-                                },
-                                (manager, arg, value) =>
-                                {
-                                    var diorama = arg.Arg.TargetObj;
-                                    default(IActiveRogueMethodCaller).Affect(diorama, 1f, NamingEffect.Callback);
-                                    return NamingEffect.Get(diorama).Naming = value;
-                                })
-                        })
+                    .Filter(obj => obj != null)
 
-                    .NameFrom((element, manager, arg) =>
-                    {
-                        if (element is RogueObj dioramaFloorObj)
-                        {
-                            return dioramaFloorObj.GetName();
-                        }
-                        else
-                        {
-                            return SelectOptionViewItemHandler.Instance.GetName(element, manager, arg);
-                        }
-                    })
+                    .Head(StackViewWidget.CreateOption(
+                        ("1*", "アセットID"),
+                        ("1*", InputFieldViewWidget.CreateOption<MMgr, MArg>(
+                            (manager, arg) =>
+                            {
+                                var diorama = arg.Arg.TargetObj;
+                                return NamingEffect.Get(diorama)?.Naming;
+                            },
+                            (manager, arg, value) =>
+                            {
+                                var diorama = arg.Arg.TargetObj;
+                                default(IActiveRogueMethodCaller).Affect(diorama, 1f, NamingEffect.Callback);
+                                return NamingEffect.Get(diorama).Naming = value;
+                            }))))
+
+                    .NameFrom(dioramaFloorObj => dioramaFloorObj.GetName())
 
                     .VarOnce(out var nextMenu, new FloorMenu())
-                    .OnClick((element, manager, arg) =>
-                    {
-                        if (element is RogueObj dioramaFloorObj)
-                        {
-                            manager.PushMenuScreen(nextMenu, arg.Self, targetObj: dioramaFloorObj);
-                        }
-                        else
-                        {
-                            SelectOptionViewItemHandler.Instance.Click(element, manager, arg);
-                        }
-                    })
+                    .OnClick((dioramaFloorObj, manager, arg) => manager.PushMenuScreen(nextMenu, arg.Self, targetObj: dioramaFloorObj))
 
-                    .Tail(SelectOption.Create<MMgr, MArg>(
-                        "+ 階層を追加",
-                        (manager, arg) =>
-                        {
-                            var diorama = arg.Arg.TargetObj;
-                            _newFloor.Option.CreateObj(_newFloor, diorama, Vector2Int.zero, RogueRandom.Primary);
-                            manager.Reopen();
-                        }))
+                    .TailOption("+ 階層を追加", (manager, arg) =>
+                    {
+                        var diorama = arg.Arg.TargetObj;
+                        _newFloor.Option.CreateObj(_newFloor, diorama, Vector2Int.zero, RogueRandom.Primary);
+                        manager.Reopen();
+                    })
 
                     .Build();
             }
@@ -122,31 +90,27 @@ namespace Roguegard.Rgpacks
             {
                 view.Show("", manager, arg)
                     ?
-                    .Tail(
-                        new object[]
-                        {
-                            "アセットID",
-                            InputFieldViewWidget.CreateOption<MMgr, MArg>(
-                                (manager, arg) =>
-                                {
-                                    var diorama = arg.Arg.TargetObj;
-                                    return NamingEffect.Get(diorama)?.Naming;
-                                },
-                                (manager, arg, value) =>
-                                {
-                                    var diorama = arg.Arg.TargetObj;
-                                    default(IActiveRogueMethodCaller).Affect(diorama, 1f, NamingEffect.Callback);
-                                    return NamingEffect.Get(diorama).Naming = value;
-                                })
-                        })
+                    .Tail(StackViewWidget.CreateOption(
+                        ("1*", "アセットID"),
+                        ("1*", InputFieldViewWidget.CreateOption<MMgr, MArg>(
+                            (manager, arg) =>
+                            {
+                                var diorama = arg.Arg.TargetObj;
+                                return NamingEffect.Get(diorama)?.Naming;
+                            },
+                            (manager, arg, value) =>
+                            {
+                                var diorama = arg.Arg.TargetObj;
+                                default(IActiveRogueMethodCaller).Affect(diorama, 1f, NamingEffect.Callback);
+                                return NamingEffect.Get(diorama).Naming = value;
+                            }))))
 
-                    .Option(
-                        "入る", (manager, arg) =>
-                        {
-                            var dioramaFloor = arg.Arg.TargetObj;
-                            SpaceUtility.TryLocate(arg.Self, dioramaFloor, Vector2Int.one);
-                            manager.Done();
-                        })
+                    .Option("入る", (manager, arg) =>
+                    {
+                        var dioramaFloor = arg.Arg.TargetObj;
+                        SpaceUtility.TryLocate(arg.Self, dioramaFloor, Vector2Int.one);
+                        manager.Done();
+                    })
 
                     .Build();
             }

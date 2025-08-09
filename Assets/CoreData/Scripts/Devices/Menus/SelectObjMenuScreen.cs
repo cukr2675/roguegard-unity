@@ -1,16 +1,14 @@
 using Lysionium;
-using System.Collections.Generic;
 
 namespace Roguegard.Device
 {
     public class SelectObjMenuScreen : RogueMenuScreen
     {
-        private readonly IDeviceCommand callback;
-        private readonly List<RogueObj> list = new();
-
         private readonly ScrollMenuViewData<RogueObj, MMgr, MArg> view = new()
         {
         };
+
+        private readonly IDeviceCommand callback;
 
         public SelectObjMenuScreen(IDeviceCommand callback)
         {
@@ -19,18 +17,11 @@ namespace Roguegard.Device
 
         public override void OpenScreen(in MMgr manager, in MArg arg)
         {
-            list.Clear();
-            foreach (var obj in arg.Self.Space.Objs)
-            {
-                list.Add(obj);
-            }
-
-            view.Show(list, manager, arg)
+            view.Show(arg.Self.Space.Objs, manager, arg)
                 ?
-                .NameFrom((obj, manager, arg) =>
-                {
-                    return obj.GetName();
-                })
+                .Filter(obj => obj != null)
+
+                .NameFrom(obj => obj.GetName())
 
                 .OnClick((obj, manager, arg) =>
                 {

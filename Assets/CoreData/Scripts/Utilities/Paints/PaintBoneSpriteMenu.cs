@@ -10,85 +10,21 @@ namespace Roguegard
 {
     internal class PaintBoneSpriteMenu : RogueMenuScreen
     {
-        private static List<object> elms;
-        private static object mirroring;
-        private static object remove;
-        private static BoneKeyword[] mirroringBones;
-
-        private static readonly RogueMenuScreen[] paintMenus = new[]
-        {
-            new PaintMenu(0),
-            new PaintMenu(1),
-            new PaintMenu(2),
-            new PaintMenu(3),
-        };
-
+        private readonly List<object> list = new();
         private readonly VariableWidgetsMenuViewData<MMgr, MArg> view = new()
         {
         };
 
+        private static object mirroring;
+        private static BoneKeyword[] mirroringBones;
+
         public override void OpenScreen(in MMgr manager, in MArg arg)
         {
-            if (elms == null)
+            if (mirroring == null)
             {
-                elms = new List<object>
-                {
-                    SelectOption.Create<MMgr, MArg>("部位を変更", new BoneMenu()),
-
-                    new object[]
-                    {
-                        "中心点距離",
-                        InputFieldViewWidget.CreateOption<MMgr, MArg>(
-                            (manager, arg) =>
-                            {
-                                var table = (PaintBoneSpriteTable)arg.Arg.Other;
-                                var itemIndex = arg.Arg.Count;
-                                var boneSprite = (PaintBoneSprite)table.Items[itemIndex];
-                                return boneSprite.PivotDistance.ToString();
-                            },
-                            (manager, arg, value) =>
-                            {
-                                var table = (PaintBoneSpriteTable)arg.Arg.Other;
-                                var itemIndex = arg.Arg.Count;
-                                var boneSprite = (PaintBoneSprite)table.Items[itemIndex];
-                                if (!int.TryParse(value, out var pivotDistance)) { pivotDistance = 0; }
-
-                                boneSprite.PivotDistance = pivotDistance;
-                                return pivotDistance.ToString();
-                            },
-                            TMP_InputField.ContentType.IntegerNumber),
-                    },
-
-                    new object[]
-                    {
-                        "上書き",
-                        InputFieldViewWidget.CreateOption<MMgr, MArg>(
-                            (manager, arg) =>
-                            {
-                                var table = (PaintBoneSpriteTable)arg.Arg.Other;
-                                var itemIndex = arg.Arg.Count;
-                                var boneSprite = (PaintBoneSprite)table.Items[itemIndex];
-                                return boneSprite.IsBare ? "T" : "";
-                            },
-                            (manager, arg, value) =>
-                            {
-                                var table = (PaintBoneSpriteTable)arg.Arg.Other;
-                                var itemIndex = arg.Arg.Count;
-                                var boneSprite = (PaintBoneSprite)table.Items[itemIndex];
-                                boneSprite.IsBare = !string.IsNullOrWhiteSpace(value);
-                                return boneSprite.IsBare ? "T" : "";
-                            }),
-                    },
-
-                    SelectOption.Create<MMgr, MArg>("正面を編集", paintMenus[0]),
-
-                    SelectOption.Create<MMgr, MArg>("背面を編集", paintMenus[2]),
-                };
-
-                mirroring = new object[]
-                {
-                    "ミラーリング",
-                    InputFieldViewWidget.CreateOption<MMgr, MArg>(
+                mirroring = StackViewWidget.CreateOption(
+                    ("1*", "ミラーリング"),
+                    ("1*", InputFieldViewWidget.CreateOption<MMgr, MArg>(
                         (manager, arg) =>
                         {
                             var table = (PaintBoneSpriteTable)arg.Arg.Other;
@@ -103,18 +39,7 @@ namespace Roguegard
                             var boneSprite = (PaintBoneSprite)table.Items[itemIndex];
                             boneSprite.Mirroring = !string.IsNullOrWhiteSpace(value);
                             return boneSprite.Mirroring ? "T" : "";
-                        }),
-                };
-
-                remove = SelectOption.Create<MMgr, MArg>(
-                    "<#f00>削除",
-                    (manager, arg) =>
-                    {
-                        var table = (PaintBoneSpriteTable)arg.Arg.Other;
-                        var itemIndex = arg.Arg.Count;
-                        table.RemoveAt(itemIndex);
-                        manager.PopMenuScreen();
-                    });
+                        })));
 
                 mirroringBones = new[]
                 {
@@ -132,29 +57,79 @@ namespace Roguegard
             var itemIndex = arg.Arg.Count;
 
             // 一部ボーンはミラーリング設定を表示する
-            elms.RemoveRange(5, elms.Count - 5);
+            list.Clear();
             if (table.Items[itemIndex] is PaintBoneSprite paintBoneSprite && System.Array.IndexOf(mirroringBones, paintBoneSprite.Bone) != -1)
             {
-                elms.Add(mirroring);
+                list.Add(mirroring);
             }
-            elms.Add(remove);
 
-            view.Show(elms, manager, arg)
+            view.Show(list, manager, arg)
                 ?
+                .HeadOption("部位を変更", new BoneMenu())
+
+                .HeadStack("中心点距離", InputFieldViewWidget.CreateOption<MMgr, MArg>(
+                    (manager, arg) =>
+                    {
+                        var table = (PaintBoneSpriteTable)arg.Arg.Other;
+                        var itemIndex = arg.Arg.Count;
+                        var boneSprite = (PaintBoneSprite)table.Items[itemIndex];
+                        return boneSprite.PivotDistance.ToString();
+                    },
+                    (manager, arg, value) =>
+                    {
+                        var table = (PaintBoneSpriteTable)arg.Arg.Other;
+                        var itemIndex = arg.Arg.Count;
+                        var boneSprite = (PaintBoneSprite)table.Items[itemIndex];
+                        if (!int.TryParse(value, out var pivotDistance)) { pivotDistance = 0; }
+
+                        boneSprite.PivotDistance = pivotDistance;
+                        return pivotDistance.ToString();
+                    },
+                    TMP_InputField.ContentType.IntegerNumber))
+
+                .HeadStack("上書き", InputFieldViewWidget.CreateOption<MMgr, MArg>(
+                    (manager, arg) =>
+                    {
+                        var table = (PaintBoneSpriteTable)arg.Arg.Other;
+                        var itemIndex = arg.Arg.Count;
+                        var boneSprite = (PaintBoneSprite)table.Items[itemIndex];
+                        return boneSprite.IsBare ? "T" : "";
+                    },
+                    (manager, arg, value) =>
+                    {
+                        var table = (PaintBoneSpriteTable)arg.Arg.Other;
+                        var itemIndex = arg.Arg.Count;
+                        var boneSprite = (PaintBoneSprite)table.Items[itemIndex];
+                        boneSprite.IsBare = !string.IsNullOrWhiteSpace(value);
+                        return boneSprite.IsBare ? "T" : "";
+                    }))
+
+                .HeadOption("正面を編集", new PaintMenu(0))
+
+                .HeadOption("背面を編集", new PaintMenu(2))
+
+                .TailOption("<#f00>削除", (manager, arg) =>
+                {
+                    var table = (PaintBoneSpriteTable)arg.Arg.Other;
+                    var itemIndex = arg.Arg.Count;
+                    table.RemoveAt(itemIndex);
+                    manager.PopMenuScreen();
+                })
+
                 .Build();
         }
 
         private class BoneMenu : RogueMenuScreen
         {
-            private static string[] elms;
-
             private readonly ScrollMenuViewData<string, MMgr, MArg> view = new()
             {
             };
 
+            private static string[] boneNames;
+
             public override void OpenScreen(in MMgr manager, in MArg arg)
             {
-                elms ??= new[]
+                boneNames ??= new[]
                 {
                     BoneKeyword.Body.Name,
                     BoneKeyword.LeftArm.Name,
@@ -165,9 +140,9 @@ namespace Roguegard
                     BoneKeyword.Head.Name,
                 };
 
-                view.Show(elms, manager, arg)
+                view.Show(boneNames, manager, arg)
                     ?
-                    .NameFrom((boneName, manager, arg) => boneName)
+                    .NameFrom(boneName => boneName)
 
                     .OnClick((boneName, manager, arg) =>
                     {
@@ -188,7 +163,7 @@ namespace Roguegard
         {
             private readonly int directionIndex;
 
-            private static readonly DotterBoard[] elms = new DotterBoard[1];
+            private static readonly DotterBoard[] dotterBoards = new DotterBoard[1];
             private static readonly Vector2[] pivots = new Vector2[2];
             private readonly object[] back;
 
@@ -212,22 +187,22 @@ namespace Roguegard
                 switch (directionIndex)
                 {
                     case 0:
-                        elms[0] = boneSprite.NormalFront;
+                        dotterBoards[0] = boneSprite.NormalFront;
                         break;
                     case 1:
-                        elms[0] = boneSprite.NormalRear;
+                        dotterBoards[0] = boneSprite.NormalRear;
                         break;
                     case 2:
-                        elms[0] = boneSprite.BackFront;
+                        dotterBoards[0] = boneSprite.BackFront;
                         break;
                     case 3:
-                        elms[0] = boneSprite.BackRear;
+                        dotterBoards[0] = boneSprite.BackRear;
                         break;
                 }
-                var showsSplitLine = boneSprite.ShowsSplitLine(elms[0], out pivots[0], out pivots[1]);
+                var showsSplitLine = boneSprite.ShowsSplitLine(dotterBoards[0], out pivots[0], out pivots[1]);
 
                 var paint = RoguegardSubviews.GetPaint(manager);
-                paint.SetPaint(elms, table.Palette, table.MainColor, showsSplitLine, pivots);
+                paint.SetPaint(dotterBoards, table.Palette, table.MainColor, showsSplitLine, pivots);
                 paint.Show();
 
                 ISubviewStateProvider stateProvider = null;

@@ -1,18 +1,13 @@
 using Lysionium;
+using Lysionium.MergeExtensions.R3;
 using Roguegard.CharacterCreation;
 using Roguegard.Device;
 using Roguegard.Extensions;
-using System.Collections.Generic;
 
 namespace Roguegard
 {
     public class PartyBoardMenu : RogueMenuScreen
     {
-        private static readonly List<RogueObj> elms = new();
-
-        private static readonly CommandMenu nextMenu = new();
-        private static readonly PartyBoardCharacterCreationMenu newMenu = new();
-
         private readonly ScrollMenuViewData<RogueObj, MMgr, MArg> view = new()
         {
         };
@@ -21,61 +16,38 @@ namespace Roguegard
         {
             // ロビーメンバーの一覧を表示する
             var worldInfo = RogueWorldInfo.GetByCharacter(arg.Self);
-            elms.Clear();
-            foreach (var lobbyMember in worldInfo.LobbyMembers.Members)
-            {
-                if (lobbyMember == null) continue;
 
-                elms.Add(lobbyMember);
-            }
-            elms.Add(null);
-
-            view.Show(elms, manager, arg)
+            view.Show(worldInfo.LobbyMembers.Members, manager, arg)
                 ?
-                
-                .NameFrom((obj, manager, arg) =>
-                {
-                    if (obj == null)
-                    {
-                        return "+ 追加";
-                    }
-                    else
-                    {
-                        var info = LobbyMemberList.GetMemberInfo(obj);
-                        var name = obj.GetName();
-                        if (info.Seat != null) return "<#ffff00>" + name; // 席についているキャラは別メニュー
-                        else return name;
-                    }
-                })
+                .Merge(out var merged)
+                .Init(
+                    () => merged
+                    .Filter(lobbyMember => lobbyMember != null)
+                    
+                    .Case(
+                        lobbyMember => LobbyMemberList.GetMemberInfo(lobbyMember).Seat != null,
+                        _ => _
+                        .NameFrom(lobbyMember => "<#ffff00>" + lobbyMember.GetName())
 
-                .VarOnce(out ChoicesMenuScreen callLobbyDialog)
-                .OnClick((obj, manager, arg) =>
-                {
-                    if (obj == null)
-                    {
-                        // 新規メンバー作成
-                        var characterCreationData = RoguegardSettings.CharacterCreationDatabase.LoadPreset(0);
-                        manager.PushMenuScreen(newMenu, arg.Self, arg.User, other: characterCreationData);
-                    }
-                    else
-                    {
-                        // 既存メンバーのメニュー表示
-                        var info = LobbyMemberList.GetMemberInfo(obj);
-                        if (info.Seat != null)
-                        {
-                            // 席についているキャラはそこから呼び戻すか尋ねる
-                            callLobbyDialog ??= new ChoicesMenuScreen(
-                                (manager, arg) => $"{arg.Arg.TargetObj}を呼び戻しますか？")
+                        // 席についているキャラはそこから呼び戻すか尋ねる
+                        .VarOnce(
+                            out var callLobbyDialog, new ChoicesMenuScreen((manager, arg) => $"{arg.Arg.TargetObj}を呼び戻しますか？")
                             .Option("はい", CallLobby)
-                            .Back();
+                            .Back())
+                        .OnClick((lobbyMember, manager, arg) => manager.PushMenuScreen(callLobbyDialog, arg.Self, targetObj: lobbyMember)))
 
-                            manager.PushMenuScreen(callLobbyDialog, arg.Self, targetObj: obj);
-                        }
-                        else
-                        {
-                            manager.PushMenuScreen(nextMenu, arg.Self, targetObj: obj);
-                        }
-                    }
+                    .Otherwise(
+                        _ => _
+                        .NameFrom(lobbyMember => lobbyMember.GetName())
+                        .VarOnce(out var nextMenu, new CommandMenu())
+                        .OnClick((lobbyMember, manager, arg) => manager.PushMenuScreen(nextMenu, arg.Self, targetObj: lobbyMember))))
+
+                .VarOnce(out var newMenu, new PartyBoardCharacterCreationMenu())
+                .TailOption("+ 追加", (manager, arg) =>
+                {
+                    // 新規メンバー作成
+                    var characterCreationData = RoguegardSettings.CharacterCreationDatabase.LoadPreset(0);
+                    manager.PushMenuScreen(newMenu, arg.Self, arg.User, other: characterCreationData);
                 })
 
                 .Build();
@@ -100,18 +72,25 @@ namespace Roguegard
 
             private readonly MainMenuViewData<MMgr, MArg> view = new()
             {
+                PrimaryCommandSubviewName = StandardSubviewTable.SecondaryCommandName,
             };
+
+            public override bool IsIncremental => true;
 
             public override void OpenScreen(in MMgr manager, in MArg arg)
             {
                 view.Show(manager, arg)
-                    ?.Option("交代", Change)
+                    ?
+                    .Option("交代", Change)
                     .Option("加入", Invite)
                     .Option("編集", Edit)
                     .Back()
                     .Build();
             }
 
+            /// <summary>
+            /// 交代ボタンクリック時
+            /// </summary>
             private static void Change(MMgr manager, MArg arg)
             {
                 // 席が設定されている場合は失敗させる
@@ -143,6 +122,9 @@ namespace Roguegard
                 manager.Done();
             }
 
+            /// <summary>
+            /// 加入ボタンクリック時
+            /// </summary>
             private static void Invite(MMgr manager, MArg arg)
             {
                 // 席が設定されている場合は失敗させる
@@ -176,6 +158,9 @@ namespace Roguegard
                 manager.Done();
             }
 
+            /// <summary>
+            /// 編集ボタンクリック時
+            /// </summary>
             private static void Edit(MMgr manager, MArg arg)
             {
                 // 席が設定されている場合は失敗させる
@@ -191,6 +176,11 @@ namespace Roguegard
 
                 manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
                 manager.PushMenuScreen(nextMenu, arg.Self, arg.User, targetObj: character, other: characterCreationData);
+            }
+
+            public override void CloseScreenView(MMgr manager, bool back)
+            {
+                view.Hide(manager, back);
             }
         }
     }

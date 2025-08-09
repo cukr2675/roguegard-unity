@@ -8,7 +8,7 @@ namespace Roguegard.Device
 {
     public class CharacterCreationOptionMenu : RogueMenuScreen
     {
-        private readonly List<object> elms = new();
+        private readonly List<object> list = new();
         private readonly ICharacterCreationDatabase database;
         private readonly CharacterCreationOptionsSelectOption selectOption;
         private readonly RemoveSelectOption removeSelectOption;
@@ -17,7 +17,10 @@ namespace Roguegard.Device
         private readonly CharacterCreationOptionsSelectOption singleItemMemberSelectOption;
         private readonly CharacterCreationOptionsSelectOption alphabetTypeMemberSelectOption;
 
-        private readonly VariableWidgetsMenuViewData<MMgr, MArg> view;
+        private readonly VariableWidgetsMenuViewData<MMgr, MArg> raceView = new();
+        private readonly VariableWidgetsMenuViewData<MMgr, MArg> appearanceView = new();
+        private readonly VariableWidgetsMenuViewData<MMgr, MArg> intrinsicView = new();
+        private readonly VariableWidgetsMenuViewData<MMgr, MArg> startingItemView = new();
 
         public CharacterCreationOptionMenu(ICharacterCreationDatabase database)
         {
@@ -27,10 +30,6 @@ namespace Roguegard.Device
 
             singleItemMemberSelectOption = new CharacterCreationOptionsSelectOption(database);
             alphabetTypeMemberSelectOption = new CharacterCreationOptionsSelectOption(database);
-
-            view = new()
-            {
-            };
         }
 
         public void Set(CharacterCreationData characterCreationData)
@@ -40,183 +39,165 @@ namespace Roguegard.Device
 
         public override void OpenScreen(in MMgr manager, in MArg arg)
         {
+            selectOption.Set(arg.Arg.Other);
+            list.Clear();
+            AddMemberElementsTo(list, (IReadOnlyMemberable)arg.Arg.Other);
+
             if (arg.Arg.Other is Race race)
             {
-                elms.Clear();
-                elms.Add(
-                    new object[]
-                    {
-                        "職業／二つ名",
-                        InputFieldViewWidget.CreateOption<MMgr, MArg>(
-                            (manager, arg) => removeSelectOption.characterCreationData.ShortName,
-                            (manager, arg, value) => removeSelectOption.characterCreationData.ShortName = value)
-                    });
-                elms.Add(selectOption.Set(race));
-                elms.Add(
-                    new object[]
-                    {
-                        SelectOption.Create<MMgr, MArg>(
-                            (manager, arg) =>
-                            {
-                                if (arg.Arg.Other is Race race)
-                                {
-                                    return $"性別：{race.Gender.Name}";
-                                }
-                                Debug.LogError("不正な型です。");
-                                return "性別：";
-                            },
-                            (manager, arg) =>
-                            {
-                                if (arg.Arg.Other is Race race)
-                                {
-                                    var nextMenu = new SelectGenderMenu() { database = database };
-                                    manager.PushMenuScreen(nextMenu, arg.Self, other: arg.Arg.Other);
-                                    return;
-                                }
-                                Debug.LogError("不正な型です。");
-                            })
-                    });
-                elms.Add(
-                    SelectOption.Create<MMgr, MArg>(
-                        $"<#{ColorUtility.ToHtmlStringRGBA(race.BodyColor)}>カラー",
-                        ColorPicker()));
-                AddMemberElements(race);
+                raceView.Show(list, manager, arg)
+                    ?
+                    .HeadStack("職業／二つ名", InputFieldViewWidget.CreateOption<MMgr, MArg>(
+                        (manager, arg) => removeSelectOption.characterCreationData.ShortName,
+                        (manager, arg, value) => removeSelectOption.characterCreationData.ShortName = value))
+
+                    .Head(selectOption)
+
+                    .Head(SelectOption.Create<MMgr, MArg>(
+                        (manager, arg) =>
+                        {
+                            var race = (Race)arg.Arg.Other;
+                            return $"性別：{race.Gender.Name}";
+                        },
+                        (manager, arg) =>
+                        {
+                            var race = (Race)arg.Arg.Other;
+                            var nextMenu = new SelectGenderMenu { database = database };
+                            manager.PushMenuScreen(nextMenu, arg.Self, other: arg.Arg.Other);
+                        }))
+
+                    .Head(SelectOption.Create<MMgr, MArg>(
+                        (manager, arg) =>
+                        {
+                            var race = (Race)arg.Arg.Other;
+                            return $"<#{ColorUtility.ToHtmlStringRGBA(race.BodyColor)}>カラー";
+                        },
+                        ColorPicker()))
+
+                    .Build();
             }
             else if (arg.Arg.Other is Appearance appearance)
             {
-                elms.Clear();
-                elms.Add(selectOption.Set(appearance));
-                elms.Add(
-                    SelectOption.Create<MMgr, MArg>(
-                        $"<#{ColorUtility.ToHtmlStringRGBA(appearance.Color)}>カラー",
-                        ColorPicker()));
-                AddMemberElements(appearance);
-                elms.Add(removeSelectOption);
+                appearanceView.Show(list, manager, arg)
+                    ?
+                    .Head(selectOption)
+
+                    .Head(SelectOption.Create<MMgr, MArg>(
+                        (manager, arg) =>
+                        {
+                            var appearance = (Appearance)arg.Arg.Other;
+                            return $"<#{ColorUtility.ToHtmlStringRGBA(appearance.Color)}>カラー";
+                        },
+                        ColorPicker()))
+
+                    .Tail(removeSelectOption)
+
+                    .Build();
             }
             else if (arg.Arg.Other is Intrinsic intrinsic)
             {
-                elms.Clear();
-                elms.Add(selectOption.Set(intrinsic));
-                elms.Add(
-                    new object[]
-                    {
-                        "名前",
-                        InputFieldViewWidget.CreateOption<MMgr, MArg>(
-                            (manager, arg) =>
-                            {
-                                if (arg.Arg.Other is Intrinsic intrinsic)
-                                {
-                                    return intrinsic.CustomName;
-                                }
-                                Debug.LogError("不正な型です。");
-                                return "???";
-                            },
-                            (manager, arg, value) =>
-                            {
-                                // 空欄の場合は上書きしないよう null にする
-                                if (string.IsNullOrWhiteSpace(value)) { value = null; }
+                intrinsicView.Show(list, manager, arg)
+                    ?
+                    .Head(selectOption)
 
-                                if (arg.Arg.Other is Intrinsic intrinsic)
-                                {
-                                    return intrinsic.CustomName = value;
-                                }
-                                Debug.LogError("不正な型です。");
-                                return null;
-                            })
-                    });
-                AddMemberElements(intrinsic);
-                elms.Add(removeSelectOption);
+                    .HeadStack("名前", InputFieldViewWidget.CreateOption<MMgr, MArg>(
+                        (manager, arg) =>
+                        {
+                            var intrinsic = (Intrinsic)arg.Arg.Other;
+                            return intrinsic.CustomName;
+                        },
+                        (manager, arg, value) =>
+                        {
+                            // 空欄の場合は上書きしないよう null にする
+                            if (string.IsNullOrWhiteSpace(value)) { value = null; }
+
+                            var intrinsic = (Intrinsic)arg.Arg.Other;
+                            return intrinsic.CustomName = value;
+                        }))
+
+                    .Tail(removeSelectOption)
+
+                    .Build();
             }
             else if (arg.Arg.Other is StartingItem startingItem)
             {
-                Debug.Log("a");
-                elms.Clear();
-                elms.Add(selectOption.Set(startingItem));
-                elms.Add(
-                    new object[]
-                    {
-                        "個数",
-                        InputFieldViewWidget.CreateOption<MMgr, MArg>(
-                            (manager, arg) =>
-                            {
-                                if (arg.Arg.Other is StartingItem startingItem)
-                                {
-                                    var value = startingItem.Stack
-                                        / RogueObj.GetMaxStack(startingItem.Option.InfoSet, StackOption.Default);
-                                    return value.ToString();
-                                }
-                                Debug.LogError("不正な型です。");
-                                return "0";
-                            },
-                            (manager, arg, valueString) =>
-                            {
-                                if (arg.Arg.Other is StartingItem startingItem && int.TryParse(valueString, out var value))
-                                {
-                                    startingItem.Stack = value * RogueObj.GetMaxStack(startingItem.Option.InfoSet, StackOption.Default);
-                                    if (startingItem.Stack <= 0) { startingItem.Stack = 1; }
-                                    return startingItem.Stack.ToString();
-                                }
-                                Debug.LogError("不正な型です。");
-                                return null;
-                            },
-                            TMP_InputField.ContentType.IntegerNumber)
-                    });
-                AddMemberElements(startingItem);
-                elms.Add(removeSelectOption);
-            }
-            Debug.Log(arg.Arg.Other);
+                startingItemView.Show(list, manager, arg)
+                    ?
+                    .Head(selectOption)
 
-            view.Show(elms, manager, arg)
-                ?
-                .Build();
+                    .HeadStack("個数", InputFieldViewWidget.CreateOption<MMgr, MArg>(
+                        (manager, arg) =>
+                        {
+                            var startingItem = (StartingItem)arg.Arg.Other;
+                            var value = startingItem.Stack / RogueObj.GetMaxStack(startingItem.Option.InfoSet, StackOption.Default);
+                            return value.ToString();
+                        },
+                        (manager, arg, valueString) =>
+                        {
+                            if (int.TryParse(valueString, out var value))
+                            {
+                                var startingItem = (StartingItem)arg.Arg.Other;
+                                startingItem.Stack = value * RogueObj.GetMaxStack(startingItem.Option.InfoSet, StackOption.Default);
+                                if (startingItem.Stack <= 0) { startingItem.Stack = 1; }
+                                return startingItem.Stack.ToString();
+                            }
+                            Debug.LogError("不正な型です。");
+                            return valueString;
+                        },
+                        TMP_InputField.ContentType.IntegerNumber))
+
+                    .Tail(removeSelectOption)
+
+                    .Build();
+            }
+            else
+            {
+                throw new System.InvalidOperationException();
+            }
         }
 
-        private void AddMemberElements(IReadOnlyMemberable memberable)
+        private void AddMemberElementsTo(List<object> list, IReadOnlyMemberable memberable)
         {
             foreach (var memberSource in memberable.MemberSources)
             {
                 var member = memberable.GetMember(memberSource);
                 if (member is SingleItemMember singleItemMember)
                 {
-                    elms.Add(singleItemMemberSelectOption.Set(singleItemMember));
+                    list.Add(singleItemMemberSelectOption.Set(singleItemMember));
                 }
                 else if (member is EquipMember equipMember)
                 {
-                    elms.Add(
-                        SelectOption.Create<MMgr, MArg>(
-                            (manager, arg) =>
-                            {
-                                return $"<#808080>装備する：{equipMember.IsEquipped}";
-                            },
-                            (manager, arg) =>
-                            {
-                                equipMember.IsEquipped = !equipMember.IsEquipped;
-                            }));
+                    list.Add(SelectOption.Create<MMgr, MArg>(
+                        (manager, arg) =>
+                        {
+                            return $"<#808080>装備する：{equipMember.IsEquipped}";
+                        },
+                        (manager, arg) =>
+                        {
+                            equipMember.IsEquipped = !equipMember.IsEquipped;
+                        }));
                 }
                 else if (member is AlphabetTypeMember alphabetTypeMember && memberable is Appearance appearance)
                 {
                     appearance.Option.UpdateMemberRange(alphabetTypeMember, appearance, removeSelectOption.characterCreationData);
-                    elms.Add(alphabetTypeMemberSelectOption.Set(alphabetTypeMember));
+                    list.Add(alphabetTypeMemberSelectOption.Set(alphabetTypeMember));
                 }
                 else if (member is StandardRaceMember standardRaceMember && memberable is Race race)
                 {
                     race.Option.UpdateMemberRange(standardRaceMember, race.Option, removeSelectOption.characterCreationData);
                     var standardRaceOption = (IStandardRaceOption)race.Option;
-                    elms.Add(
-                        new object[]
-                        {
-                            "サイズ",
-                            InputFieldViewWidget.CreateOption<MMgr, MArg>(
-                                (manager, arg) => standardRaceMember.Size.ToString(),
-                                (manager, arg, valueString) =>
-                                {
-                                    if (!int.TryParse(valueString, out var value)) return valueString;
+                    list.Add(StackViewWidget.CreateOption(
+                        ("1*", "サイズ"),
+                        ("1*", InputFieldViewWidget.CreateOption<MMgr, MArg>(
+                            (manager, arg) => standardRaceMember.Size.ToString(),
+                            (manager, arg, valueString) =>
+                            {
+                                if (!int.TryParse(valueString, out var value)) return valueString;
 
-                                    standardRaceMember.Size = Mathf.Clamp(value, standardRaceOption.MinSize, standardRaceOption.MaxSize);
-                                    return standardRaceMember.Size.ToString();
-                                },
-                                TMP_InputField.ContentType.IntegerNumber)
-                        });
+                                standardRaceMember.Size = Mathf.Clamp(value, standardRaceOption.MinSize, standardRaceOption.MaxSize);
+                                return standardRaceMember.Size.ToString();
+                            },
+                            TMP_InputField.ContentType.IntegerNumber))));
                 }
             }
         }
@@ -300,28 +281,20 @@ namespace Roguegard.Device
         private class SelectGenderMenu : RogueMenuScreen
         {
             public ICharacterCreationDatabase database;
-            private Race race;
-            private readonly List<IRogueGender> list = new();
 
             private readonly ScrollMenuViewData<IRogueGender, MMgr, MArg> view = new()
             {
             };
 
+            private Race race;
+
             public override void OpenScreen(in MMgr manager, in MArg arg)
             {
                 race = (Race)arg.Arg.Other;
-                list.Clear();
-                foreach (var gender in race.Option.Genders)
-                {
-                    list.Add(gender);
-                }
 
-                view.Show(list, manager, arg)
+                view.Show(race.Option.Genders, manager, arg)
                     ?
-                    .NameFrom((gender, manager, arg) =>
-                    {
-                        return gender.Name;
-                    })
+                    .NameFrom(gender => gender.Name)
 
                     .OnClick((gender, manager, arg) =>
                     {

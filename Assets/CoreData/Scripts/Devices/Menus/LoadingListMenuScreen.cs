@@ -8,7 +8,6 @@ namespace Roguegard.Device
         private readonly string buttonText;
         private readonly ClickItemHandler<MMgr, MArg> buttonAction;
         private readonly System.Func<MMgr, MArg, float> getProgress;
-        private readonly object[] elms;
 
         private float oldProgress;
 
@@ -32,7 +31,8 @@ namespace Roguegard.Device
         {
             oldProgress = 0f;
             view.Show(text, manager, arg)
-                ?.Tail(ProgressBarViewWidget.CreateOption<MMgr, MArg>((manager, arg) =>
+                ?
+                .Tail(ProgressBarViewWidget.CreateOption<MMgr, MArg>((manager, arg) =>
                 {
                     var progress = getProgress(manager, arg);
                     if (progress >= 1f && oldProgress < 1f) { manager.Done(); }
@@ -40,7 +40,9 @@ namespace Roguegard.Device
 
                     return progress;
                 }))
-                .Tail(SelectOption.Create(buttonText, buttonAction))
+
+                .TailOption(buttonText, buttonAction)
+
                 .Build();
         }
     }

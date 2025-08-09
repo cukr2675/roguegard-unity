@@ -1,6 +1,5 @@
 using Lysionium;
 using Roguegard.Device;
-using System.Collections.Generic;
 
 namespace Roguegard
 {
@@ -40,17 +39,9 @@ namespace Roguegard
             {
             };
 
-            private readonly List<ISelectOption> selectOptions = new();
-
             public override void OpenScreen(in MMgr manager, in MArg arg)
             {
-                selectOptions.Clear();
-                foreach (var option in RoguegardSettings.DungeonSelectOption)
-                {
-                    selectOptions.Add(option);
-                }
-
-                view.Show(selectOptions, manager, arg)
+                view.Show(RoguegardSettings.DungeonSelectOption, manager, arg)
                     ?
                     .Build();
             }

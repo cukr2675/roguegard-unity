@@ -20,25 +20,16 @@ namespace Roguegard
 
         private class Menu : RogueMenuScreen
         {
-            private readonly List<RogueObj> elms = new();
-
             private readonly ScrollMenuViewData<RogueObj, MMgr, MArg> view = new()
             {
             };
 
             public override void OpenScreen(in MMgr manager, in MArg arg)
             {
-                elms.Clear();
-                foreach (var obj in arg.Self.Space.Objs)
-                {
-                    if (obj == null) continue;
-
-                    elms.Add(obj);
-                }
-                elms.Add(null);
-
-                view.Show(elms, manager, arg)
+                view.Show(arg.Self.Space.Objs, manager, arg)
                     ?
+                    .Filter(obj => obj != null)
+
                     .NameFrom((item, manager, arg) =>
                     {
                         if (item == null) return "+ 新しく作る";
@@ -48,23 +39,24 @@ namespace Roguegard
                     .VarOnce(out var nextScreen, new SewingScreen())
                     .OnClick((item, manager, arg) =>
                     {
-                        if (item == null)
-                        {
-                            // 装備品を新規作成する場合はデータクラスを生成する
-                            var data = new SewedEquipmentData();
-                            for (int i = 0; i < RoguegardSettings.DefaultPalette.Length; i++)
-                            {
-                                data.BoneSprites.SetPalette(i, RoguegardSettings.DefaultPalette[i]);
-                            }
-                            data.BoneSprites.MainColor = Color.white;
-                            manager.PushMenuScreen(nextScreen, arg.Self, other: data, targetObj: null);
-                        }
-                        else if (item.Main.BaseInfoSet is SewedEquipmentInfoSet infoSet)
+                        if (item.Main.BaseInfoSet is SewedEquipmentInfoSet infoSet)
                         {
                             // 保存せず終了できるように複製する
                             var data = infoSet.GetDataClone();
                             manager.PushMenuScreen(nextScreen, arg.Self, other: data, targetObj: item);
                         }
+                    })
+
+                    .TailOption("+ 新しく作る", (manager, arg) =>
+                    {
+                        // 装備品を新規作成する場合はデータクラスを生成する
+                        var data = new SewedEquipmentData();
+                        for (int i = 0; i < RoguegardSettings.DefaultPalette.Length; i++)
+                        {
+                            data.BoneSprites.SetPalette(i, RoguegardSettings.DefaultPalette[i]);
+                        }
+                        data.BoneSprites.MainColor = Color.white;
+                        manager.PushMenuScreen(nextScreen, arg.Self, other: data, targetObj: null);
                     })
 
                     .Build();
@@ -73,9 +65,7 @@ namespace Roguegard
 
         private class SewingScreen : RogueMenuScreen
         {
-            private static List<object> elms;
-
-            private readonly ScrollMenuViewData<object, MMgr, MArg> view = new()
+            private readonly ScrollMenuViewData<IPaintBoneSprite, MMgr, MArg> view = new()
             {
                 ScrollSubviewName = StandardSubviewTable.WidgetsName,
                 BackAnchorList = new()
@@ -86,9 +76,11 @@ namespace Roguegard
 
             public override void OpenScreen(in MMgr manager, in MArg arg)
             {
-                if (elms == null)
-                {
-                    var colorPicker = new ColorPickerMenuScreen<MMgr, MArg>(
+                var data = (SewedEquipmentData)arg.Arg.Other;
+
+                view.Show(data.BoneSprites.Items, manager, arg)
+                    ?
+                    .VarOnce(out var colorPicker, new ColorPickerMenuScreen<MMgr, MArg>(
                         (manager, arg) =>
                         {
                             var data = (SewedEquipmentData)arg.Arg.Other;
@@ -98,96 +90,75 @@ namespace Roguegard
                         {
                             var data = (SewedEquipmentData)arg.Arg.Other;
                             data.BoneSprites.MainColor = color;
-                        });
-
-                    elms = new List<object>()
-                    {
-                        new object[]
-                        {
-                            "名前",
-                            InputFieldViewWidget.CreateOption<MMgr, MArg>(
-                                (manager, arg) =>
-                                {
-                                    var data = (SewedEquipmentData)arg.Arg.Other;
-                                    return data.Name;
-                                },
-                                (manager, arg, value) =>
-                                {
-                                    var data = (SewedEquipmentData)arg.Arg.Other;
-                                    return data.Name = value;
-                                }),
-                        },
-
-                        SelectOption.Create<MMgr, MArg>(
+                        }))
+                    .Head(StackViewWidget.CreateOption(
+                        ("1*", "名前"),
+                        ("1*", InputFieldViewWidget.CreateOption<MMgr, MArg>(
                             (manager, arg) =>
                             {
                                 var data = (SewedEquipmentData)arg.Arg.Other;
-                                return $"<#{ColorUtility.ToHtmlStringRGBA(data.BoneSprites.MainColor)}>メインカラー";
-                            }, colorPicker),
+                                return data.Name;
+                            },
+                            (manager, arg, value) =>
+                            {
+                                var data = (SewedEquipmentData)arg.Arg.Other;
+                                return data.Name = value;
+                            }))))
 
-                        SelectOption.Create<MMgr, MArg>("装備部位", new EquipmentSlotsScreen()),
-
-                        new object[]
+                    .Head(SelectOption.Create<MMgr, MArg>(
+                        getName: (manager, arg) =>
                         {
-                            "順序",
-                            InputFieldViewWidget.CreateOption<MMgr, MArg>(
-                                (manager, arg) =>
-                                {
-                                    var data = (SewedEquipmentData)arg.Arg.Other;
-                                    return data.BoneSpriteEffectOrder.ToString();
-                                },
-                                (manager, arg, value) =>
-                                {
-                                    if (!float.TryParse(value, out var order)) { order = 0f; }
-                                    
-                                    var data = (SewedEquipmentData)arg.Arg.Other;
-                                    data.BoneSpriteEffectOrder = order;
-                                    return order.ToString();
-                                },
-                                TMP_InputField.ContentType.DecimalNumber),
+                            var data = (SewedEquipmentData)arg.Arg.Other;
+                            return $"<#{ColorUtility.ToHtmlStringRGBA(data.BoneSprites.MainColor)}>メインカラー";
                         },
-                    };
-                }
+                        onClick: colorPicker))
 
-                var data = (SewedEquipmentData)arg.Arg.Other;
-                var equipment = arg.Arg.TargetObj;
+                    .VarOnce(out var equipmentSlotsScreen, new EquipmentSlotsScreen())
+                    .Head(SelectOption.Create<MMgr, MArg>("装備部位", equipmentSlotsScreen))
 
-                elms.RemoveRange(4, elms.Count - 4);
-                foreach (var item in data.BoneSprites.Items)
-                {
-                    elms.Add(item);
-                }
-                elms.Add(null);
+                    .Head(StackViewWidget.CreateOption(
+                        ("1*", "順序"),
+                        ("1*", InputFieldViewWidget.CreateOption<MMgr, MArg>(
+                            (manager, arg) =>
+                            {
+                                var data = (SewedEquipmentData)arg.Arg.Other;
+                                return data.BoneSpriteEffectOrder.ToString();
+                            },
+                            (manager, arg, value) =>
+                            {
+                                if (!float.TryParse(value, out var order)) { order = 0f; }
 
-                view.Show(elms, manager, arg)
-                    ?
-                    .NameFrom((element, manager, arg) =>
+                                var data = (SewedEquipmentData)arg.Arg.Other;
+                                data.BoneSpriteEffectOrder = order;
+                                return order.ToString();
+                            },
+                            TMP_InputField.ContentType.DecimalNumber))))
+
+                    .NameFrom((item, manager, arg) =>
                     {
-                        if (element is PaintBoneSprite item) return item.Bone.Name;
-                        else return "+ 追加";
+                        if (item is PaintBoneSprite boneSprite) return boneSprite.Bone.Name;
+                        else return string.Empty;
                     })
 
                     .VarOnce(out var nextScreen, new PaintBoneSpriteMenu())
-                    .OnClick((element, manager, arg) =>
+                    .OnClick((boneSprite, manager, arg) =>
                     {
-                        if (element is PaintBoneSprite boneSprite)
-                        {
-                            // 部位編集
-                            var data = (SewedEquipmentData)arg.Arg.Other;
-                            manager.PushMenuScreen(nextScreen, arg.Self, other: data.BoneSprites, count: data.BoneSprites.IndexOf(boneSprite));
-                        }
-                        else
-                        {
-                            // 部位追加
-                            var data = (SewedEquipmentData)arg.Arg.Other;
-                            boneSprite = new PaintBoneSprite();
-                            boneSprite.NormalFront = boneSprite.BackRear = new DotterBoard(new Vector2Int(32, 32), 16);
-                            boneSprite.NormalRear = boneSprite.BackFront = new DotterBoard(new Vector2Int(32, 32), 16);
-                            boneSprite.Bone = BoneKeyword.Body;
-                            boneSprite.Mirroring = true;
-                            data.BoneSprites.Add(boneSprite);
-                            manager.PushMenuScreen(nextScreen, arg.Self, other: data.BoneSprites, count: data.BoneSprites.IndexOf(boneSprite));
-                        }
+                        // 部位編集
+                        var data = (SewedEquipmentData)arg.Arg.Other;
+                        manager.PushMenuScreen(nextScreen, arg.Self, other: data.BoneSprites, count: data.BoneSprites.IndexOf(boneSprite));
+                    })
+
+                    .TailOption("+ 追加", (manager, arg) =>
+                    {
+                        // 部位追加
+                        var data = (SewedEquipmentData)arg.Arg.Other;
+                        var boneSprite = new PaintBoneSprite();
+                        boneSprite.NormalFront = boneSprite.BackRear = new DotterBoard(new Vector2Int(32, 32), 16);
+                        boneSprite.NormalRear = boneSprite.BackFront = new DotterBoard(new Vector2Int(32, 32), 16);
+                        boneSprite.Bone = BoneKeyword.Body;
+                        boneSprite.Mirroring = true;
+                        data.BoneSprites.Add(boneSprite);
+                        manager.PushMenuScreen(nextScreen, arg.Self, other: data.BoneSprites, count: data.BoneSprites.IndexOf(boneSprite));
                     })
 
                     .Build();
@@ -217,7 +188,7 @@ namespace Roguegard
 
         private class EquipmentSlotsScreen : RogueMenuScreen
         {
-            private ISerializableKeyword[] elms;
+            private ISerializableKeyword[] keywords;
 
             private readonly ScrollMenuViewData<ISerializableKeyword, MMgr, MArg> view = new()
             {
@@ -225,7 +196,7 @@ namespace Roguegard
 
             public override void OpenScreen(in MMgr manager, in MArg arg)
             {
-                elms ??= new ISerializableKeyword[]
+                keywords ??= new ISerializableKeyword[]
                 {
                     //EquipKw.Shield,
                     //EquipKw.Weapon,
@@ -245,7 +216,7 @@ namespace Roguegard
                     null
                 };
 
-                view.Show(elms, manager, arg)
+                view.Show(keywords, manager, arg)
                     ?
                     .NameFrom((slot, manager, arg) =>
                     {

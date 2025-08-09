@@ -44,9 +44,9 @@ namespace RoguegardUnity
             this.editInfo = editInfo;
         }
 
-        protected override void BindCore(object element, IViewItemHandler handler)
+        protected override void BindCore(object item, IViewItemHandler handler)
         {
-            editList = element;
+            editList = item;
 
             foreach (var keyIcon in keyIcons)
             {
@@ -134,25 +134,18 @@ namespace RoguegardUnity
 
                 view.Show(string.Empty, manager, arg)
                     ?
-                    .Tail(
-                        new object[]
-                        {
-                            InputFieldViewWidget.CreateOption<MMgr, MArg>(
-                                (manager, arg) => value.ToString(),
-                                (manager, arg, value) => SetKeyFrame(value)),
-                        })
+                    .Tail(InputFieldViewWidget.CreateOption<MMgr, MArg>(
+                        (manager, arg) => value.ToString(),
+                        (manager, arg, value) => SetKeyFrame(value)))
 
-                    .Tail(
-                        new object[]
+                    .Tail(StackViewWidget.CreateOption(
+                        ("1*", SelectOption.Create<MMgr, MArg>(":Submit", (manager, arg) =>
                         {
-                            SelectOption.Create<MMgr, MArg>(":Submit", (manager, arg) =>
-                            {
-                                if (value != null) { editList.Set(targetTime, value.Value); }
-                                else { editList.Remove(targetTime); }
-                                manager.PopMenuScreen();
-                            }),
-                            BackSelectOption.Instance
-                        })
+                            if (value != null) { editList.Set(targetTime, value.Value); }
+                            else { editList.Remove(targetTime); }
+                            manager.PopMenuScreen();
+                        })),
+                        ("1*", BackSelectOption.Instance)))
 
                     .Build();
             }
@@ -215,15 +208,15 @@ namespace RoguegardUnity
 
                 view.Show(string.Empty, manager, arg)
                     ?
-                    .Tail(SelectOption.Create<MMgr, MArg>(":Edit", (manager, arg) =>
+                    .TailOption(":Edit", (manager, arg) =>
                     {
                         manager.PushMenuScreen(nextMenu, arg);
-                    }))
+                    })
 
-                    //.Append(SelectOption.Create<MMgr, MArg>(":Delete", (manager, arg) =>
+                    //.TailOption(":Delete", (manager, arg) =>
                     //{
                     //    manager.Back();
-                    //}))
+                    //})
 
                     .Tail(BackSelectOption.Instance)
 
@@ -240,7 +233,7 @@ namespace RoguegardUnity
         {
             private readonly int directionIndex;
 
-            private static readonly DotterBoard[] elms = new DotterBoard[1];
+            private static readonly DotterBoard[] dotterBoards = new DotterBoard[1];
             private static readonly Vector2[] pivots = new Vector2[2];
             private readonly object[] back;
 
@@ -270,22 +263,22 @@ namespace RoguegardUnity
                 switch (directionIndex)
                 {
                     case 0:
-                        elms[0] = boneSprite.NormalFront;
+                        dotterBoards[0] = boneSprite.NormalFront;
                         break;
                     case 1:
-                        elms[0] = boneSprite.NormalRear;
+                        dotterBoards[0] = boneSprite.NormalRear;
                         break;
                     case 2:
-                        elms[0] = boneSprite.BackFront;
+                        dotterBoards[0] = boneSprite.BackFront;
                         break;
                     case 3:
-                        elms[0] = boneSprite.BackRear;
+                        dotterBoards[0] = boneSprite.BackRear;
                         break;
                 }
-                var showsSplitLine = boneSprite.ShowsSplitLine(elms[0], out pivots[0], out pivots[1]);
+                var showsSplitLine = boneSprite.ShowsSplitLine(dotterBoards[0], out pivots[0], out pivots[1]);
 
                 var paint = RoguegardSubviews.GetPaint(manager);
-                paint.SetPaint(elms, editInfo.Palette, editInfo.MainColor, showsSplitLine, pivots);
+                paint.SetPaint(dotterBoards, editInfo.Palette, editInfo.MainColor, showsSplitLine, pivots);
                 paint.Show();
 
                 ISubviewStateProvider stateProvider = null;

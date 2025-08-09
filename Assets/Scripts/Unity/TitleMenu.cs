@@ -258,17 +258,12 @@ namespace RoguegardUnity
             {
                 view.Show(credits, manager, arg)
                     ?
+                    .NameFrom(credit => credit.Name)
+
                     .VarOnce(out var nextScreen, new CreditDetailsScreen())
-
-                    .NameFrom((credit, manager, arg) =>
-                    {
-                        return credit.Name;
-                    })
-
                     .OnClick((credit, manager, arg) =>
                     {
                         manager.PushMenuScreen(nextScreen, other: credit);
-                        //parent._creditMenu.Show(credit, manager);
                     })
 
                     .Build();
@@ -295,12 +290,9 @@ namespace RoguegardUnity
                         ?
                         .VarOnce(out var viewWidth, 8000f)
                         .Tail(ContentSizeMetaWidget.CreateOption(viewWidth))
-                        .VarOnce(out var nextScreen, new URLDialog())
 
-                        .OnClickLink((link, manager, arg) =>
-                        {
-                            manager.PushMenuScreen(nextScreen, other: link);
-                        })
+                        .VarOnce(out var nextScreen, new URLDialog())
+                        .OnClickLink((link, manager, arg) => manager.PushMenuScreen(nextScreen, other: link))
 
                         .Build();
                 }
