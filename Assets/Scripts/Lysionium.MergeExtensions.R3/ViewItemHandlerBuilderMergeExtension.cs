@@ -120,7 +120,7 @@ namespace Lysionium.MergeExtensions.R3
                     using var _ = styleFromContext.OpenSelf();
                     subject.OnNext(new MergedViewItemHandleArg<TItem, TMgr, TArg, TOut, TItem>(item, manager, arg, styleFromContext));
                     if (styleFromContext.TryGetResult(out var result)) return result;
-                    else return null;
+                    else return string.Empty;
                 }
             });
 
@@ -179,7 +179,7 @@ namespace Lysionium.MergeExtensions.R3
             });
         }
 
-        public static Observable<MergedViewItemHandleArg<TItem, TMgr, TArg, TBuilder, TValue>> StyleFrom<TItem, TMgr, TArg, TBuilder, TValue>(
+        public static Observable<MergedViewItemHandleArg<TItem, TMgr, TArg, TBuilder, TValue>> Style<TItem, TMgr, TArg, TBuilder, TValue>(
             this Observable<MergedViewItemHandleArg<TItem, TMgr, TArg, TBuilder, TValue>> source, string style)
             where TBuilder : IViewItemHandlerBuilder<TItem, TMgr, TArg, TBuilder>
         {

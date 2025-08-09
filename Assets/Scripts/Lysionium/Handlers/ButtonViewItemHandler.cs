@@ -39,7 +39,7 @@ namespace Lysionium
                 LuiAssert.Type<TMgr>(manager, out var tMgr) ||
                 LuiAssert.Type<TArg>(arg, out var tArg)) return manager.ErrorOption.GetStyle(manager, arg);
 
-            return GetStyle?.Invoke(tItem, tMgr, tArg);
+            return GetStyle?.Invoke(tItem, tMgr, tArg) ?? string.Empty;
         }
 
         void IButtonViewItemHandler.Click(object item, IListMenuManager manager, IListMenuArg arg)

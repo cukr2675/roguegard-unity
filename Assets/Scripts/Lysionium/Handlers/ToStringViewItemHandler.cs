@@ -11,7 +11,7 @@ namespace Lysionium
 
         string IViewItemHandler.GetStyle(object item, IListMenuManager manager, IListMenuArg arg)
         {
-            return null;
+            return string.Empty;
         }
     }
 }

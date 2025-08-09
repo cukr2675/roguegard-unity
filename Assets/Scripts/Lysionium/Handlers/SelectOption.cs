@@ -3,25 +3,49 @@ namespace Lysionium
     public static class SelectOption
     {
         public static SelectOption<TMgr, TArg> Create<TMgr, TArg>(
-            string name, ClickItemHandler<TMgr, TArg> onClick, string style = null)
+            string name, ClickItemHandler<TMgr, TArg> onClick, string style = "")
             where TMgr : IListMenuManager
             where TArg : IListMenuArg
         {
             var instance = new SelectOption<TMgr, TArg>();
             instance.SetName(name);
-            instance.Style = style;
+            instance.SetStyle(style);
             instance.Click = onClick;
             return instance;
         }
 
         public static SelectOption<TMgr, TArg> Create<TMgr, TArg>(
-            System.Func<TMgr, TArg, string> getName, ClickItemHandler<TMgr, TArg> onClick, string style = null)
+            System.Func<TMgr, TArg, string> getName, ClickItemHandler<TMgr, TArg> onClick, string style = "")
             where TMgr : IListMenuManager
             where TArg : IListMenuArg
         {
             var instance = new SelectOption<TMgr, TArg>();
             instance.SetName(getName);
-            instance.Style = style;
+            instance.SetStyle(style);
+            instance.Click = onClick;
+            return instance;
+        }
+
+        public static SelectOption<TMgr, TArg> Create<TMgr, TArg>(
+            string name, ClickItemHandler<TMgr, TArg> onClick, System.Func<TMgr, TArg, string> style)
+            where TMgr : IListMenuManager
+            where TArg : IListMenuArg
+        {
+            var instance = new SelectOption<TMgr, TArg>();
+            instance.SetName(name);
+            instance.SetStyle(style);
+            instance.Click = onClick;
+            return instance;
+        }
+
+        public static SelectOption<TMgr, TArg> Create<TMgr, TArg>(
+            System.Func<TMgr, TArg, string> getName, ClickItemHandler<TMgr, TArg> onClick, System.Func<TMgr, TArg, string> style)
+            where TMgr : IListMenuManager
+            where TArg : IListMenuArg
+        {
+            var instance = new SelectOption<TMgr, TArg>();
+            instance.SetName(getName);
+            instance.SetStyle(style);
             instance.Click = onClick;
             return instance;
         }
@@ -34,7 +58,8 @@ namespace Lysionium
         private string name;
         private System.Func<TMgr, TArg, string> getName;
 
-        public string Style { get; set; }
+        private string style;
+        private System.Func<TMgr, TArg, string> getStyle;
 
         public ClickItemHandler<TMgr, TArg> Click { get; set; }
 
@@ -44,10 +69,22 @@ namespace Lysionium
             getName = null;
         }
 
-        public void SetName(System.Func<TMgr, TArg, string> getName)
+        public void SetName(System.Func<TMgr, TArg, string> selector)
         {
-            this.getName = getName ?? throw new System.ArgumentNullException(nameof(getName));
+            getName = selector ?? throw new System.ArgumentNullException(nameof(selector));
             name = null;
+        }
+
+        public void SetStyle(string style)
+        {
+            this.style = style;
+            getStyle = null;
+        }
+
+        public void SetStyle(System.Func<TMgr, TArg, string> selector)
+        {
+            getStyle = selector;
+            style = null;
         }
 
         string ISelectOption.GetName(IListMenuManager manager, IListMenuArg arg)
@@ -64,7 +101,14 @@ namespace Lysionium
 
         string ISelectOption.GetStyle(IListMenuManager manager, IListMenuArg arg)
         {
-            return Style;
+            if (getStyle != null)
+            {
+                if (LuiAssert.Type<TMgr>(manager, out var tMgr) ||
+                    LuiAssert.Type<TArg>(arg, out var tArg)) return null;
+
+                return getStyle(tMgr, tArg);
+            }
+            else return style;
         }
 
         void ISelectOption.Click(IListMenuManager manager, IListMenuArg arg)

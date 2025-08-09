@@ -16,7 +16,7 @@ namespace Lysionium.MergeExtensions.R3
 
         string IViewItemHandler.GetStyle(object item, IListMenuManager manager, IListMenuArg arg)
         {
-            return GetNameExtension.GetName(this, item, manager, arg);
+            return string.Empty;
         }
     }
 

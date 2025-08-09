@@ -89,7 +89,7 @@ namespace Roguegard
 
                         .Otherwise(
                             _ => _
-                            .StyleFrom("Disabled")))
+                            .Style("Disabled")))
 
                     .Build();
             }
