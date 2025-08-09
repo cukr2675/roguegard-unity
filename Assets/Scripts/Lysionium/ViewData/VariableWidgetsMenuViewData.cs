@@ -38,7 +38,7 @@ namespace Lysionium
             return ShowCore(manager, arg, viewStateHolder);
         }
 
-        public Builder ShowCore(TMgr manager, TArg arg, object viewStateHolder)
+        private Builder ShowCore(TMgr manager, TArg arg, object viewStateHolder)
         {
             // 必要に応じてスクロール位置をリセット
             if (viewStateHolder != prevViewStateHolder)
@@ -81,14 +81,11 @@ namespace Lysionium
             if (BackAnchorSubviewName != null) { manager.GetSubview(BackAnchorSubviewName).Hide(back); }
         }
 
-        public class Builder : BaseListBuilder<Builder>
+        public class Builder : BaseListBuilder<VariableWidgetsMenuViewData<TMgr, TArg>, Builder>
         {
-            private readonly VariableWidgetsMenuViewData<TMgr, TArg> parent;
-
             public Builder(VariableWidgetsMenuViewData<TMgr, TArg> parent, TMgr manager, TArg arg)
                 : base(parent, manager, arg)
             {
-                this.parent = parent;
             }
 
             public Builder HeadStack(params object[] items)

@@ -80,14 +80,11 @@ namespace Lysionium
             if (BackAnchorSubviewName != null) { manager.GetSubview(BackAnchorSubviewName).Hide(back); }
         }
 
-        public class Builder : BaseListBuilder<Builder>
+        public class Builder : BaseListBuilder<DialogViewData<TMgr, TArg>, Builder>
         {
-            private readonly DialogViewData<TMgr, TArg> parent;
-
             public Builder(DialogViewData<TMgr, TArg> parent, TMgr manager, TArg arg)
                 : base(parent, manager, arg)
             {
-                this.parent = parent;
             }
 
             public Builder Option(string name, ClickItemHandler<TMgr, TArg> onClick, string style = null)
@@ -115,7 +112,7 @@ namespace Lysionium
             {
                 AssertNotBuilt();
 
-                parent.ClickLink += onClickLink;
+                Parent.ClickLink += onClickLink;
                 return this;
             }
         }

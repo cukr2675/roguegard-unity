@@ -51,7 +51,7 @@ namespace Lysionium
             return ShowCore(manager, arg, viewStateHolder);
         }
 
-        public Builder ShowCore(TMgr manager, TArg arg, object viewStateHolder)
+        private Builder ShowCore(TMgr manager, TArg arg, object viewStateHolder)
         {
             // 必要に応じてスクロール位置をリセット
             if (viewStateHolder != prevViewStateHolder)
@@ -94,23 +94,20 @@ namespace Lysionium
             if (BackAnchorSubviewName != null) { manager.GetSubview(BackAnchorSubviewName).Hide(back); }
         }
 
-        public class Builder : BaseBuilder<Builder>, IButtonViewItemHandlerBuilder<TItem, TMgr, TArg, Builder>
+        public class Builder : BaseListBuilder<CommandListMenuViewData<TItem, TMgr, TArg>, Builder>, IButtonViewItemHandlerBuilder<TItem, TMgr, TArg, Builder>
         {
-            private readonly CommandListMenuViewData<TItem, TMgr, TArg> parent;
-
             public Builder(CommandListMenuViewData<TItem, TMgr, TArg> parent, TMgr manager, TArg arg)
                 : base(parent, manager, arg)
             {
-                this.parent = parent;
             }
 
             public Builder NameFrom(System.Func<TItem, TMgr, TArg, string> selector)
             {
                 AssertNotBuilt();
 
-                if (parent.secodaryCommandSubviewHandler.GetName != null) { Debug.LogWarning($"{nameof(NameFrom)} が多重購読されました。"); }
+                if (Parent.secodaryCommandSubviewHandler.GetName != null) { Debug.LogWarning($"{nameof(NameFrom)} が多重購読されました。"); }
 
-                parent.secodaryCommandSubviewHandler.GetName += selector;
+                Parent.secodaryCommandSubviewHandler.GetName += selector;
                 return this;
             }
 
@@ -118,9 +115,9 @@ namespace Lysionium
             {
                 AssertNotBuilt();
 
-                if (parent.secodaryCommandSubviewHandler.GetStyle != null) { Debug.LogWarning($"{nameof(StyleFrom)} が多重購読されました。"); }
+                if (Parent.secodaryCommandSubviewHandler.GetStyle != null) { Debug.LogWarning($"{nameof(StyleFrom)} が多重購読されました。"); }
 
-                parent.secodaryCommandSubviewHandler.GetStyle += selector;
+                Parent.secodaryCommandSubviewHandler.GetStyle += selector;
                 return this;
             }
 
@@ -128,7 +125,7 @@ namespace Lysionium
             {
                 AssertNotBuilt();
 
-                parent.secodaryCommandSubviewHandler.Click += handler;
+                Parent.secodaryCommandSubviewHandler.Click += handler;
                 return this;
             }
         }

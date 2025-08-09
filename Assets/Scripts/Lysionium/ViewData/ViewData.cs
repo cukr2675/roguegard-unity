@@ -50,25 +50,26 @@ namespace Lysionium
         /// <summary>
         /// フルエントビルダークラス
         /// </summary>
-        public abstract class BaseBuilder<TOut>
-            where TOut : BaseBuilder<TOut>
+        public abstract class BaseBuilder<TViewData, TOut>
+            where TViewData : ViewData<TMgr, TArg>
+            where TOut : BaseBuilder<TViewData, TOut>
         {
-            protected readonly ViewData<TMgr, TArg> parent;
-            protected readonly TMgr manager;
-            protected readonly TArg arg;
+            protected TViewData Parent { get; }
+            protected TMgr Manager { get; }
+            protected TArg Arg { get; }
             private readonly List<System.IDisposable> disposables;
 
-            protected BaseBuilder(ViewData<TMgr, TArg> parent, TMgr manager, TArg arg)
+            protected BaseBuilder(TViewData parent, TMgr manager, TArg arg)
             {
-                this.parent = parent;
-                this.manager = manager;
-                this.arg = arg;
+                Parent = parent;
+                Manager = manager;
+                Arg = arg;
                 disposables = new List<System.IDisposable>();
             }
 
             protected void AssertNotBuilt()
             {
-                if (parent.IsBuilt) throw new System.InvalidOperationException($"{parent} はビルド済みです。");
+                if (Parent.IsBuilt) throw new System.InvalidOperationException($"{Parent} はビルド済みです。");
             }
 
             public TOut VarOnce<T>(out T variable, T defaultValue = default)
@@ -134,10 +135,10 @@ namespace Lysionium
             public virtual void Build()
             {
                 AssertNotBuilt();
-                manager.OnUnload += () => Unload();
-                parent.IsBuilt = true;
-                parent.callerManager = manager;
-                parent.ShowSubviews(manager, arg);
+                Manager.OnUnload += () => Unload();
+                Parent.IsBuilt = true;
+                Parent.callerManager = Manager;
+                Parent.ShowSubviews(Manager, Arg);
             }
 
             private void Unload()
@@ -147,8 +148,8 @@ namespace Lysionium
                     disposable.Dispose();
                 }
                 disposables.Clear();
-                parent.IsBuilt = false;
-                parent.callerManager = default;
+                Parent.IsBuilt = false;
+                Parent.callerManager = default;
             }
         }
     }

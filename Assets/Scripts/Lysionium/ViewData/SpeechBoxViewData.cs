@@ -94,21 +94,18 @@ namespace Lysionium
             if (Title != null) { manager.GetSubview(CaptionBoxSubviewName).Hide(back); }
         }
 
-        public class Builder : BaseListBuilder<Builder>
+        public class Builder : BaseListBuilder<SpeechBoxViewData<TMgr, TArg>, Builder>
         {
-            private readonly SpeechBoxViewData<TMgr, TArg> parent;
-
             public Builder(SpeechBoxViewData<TMgr, TArg> parent, TMgr manager, TArg arg)
                 : base(parent, manager, arg)
             {
-                this.parent = parent;
             }
 
             public Builder OnCompleted(ClickItemHandler<TMgr, TArg> onCompleted)
             {
                 AssertNotBuilt();
 
-                parent.OnCompleted += onCompleted;
+                Parent.OnCompleted += onCompleted;
                 return this;
             }
 

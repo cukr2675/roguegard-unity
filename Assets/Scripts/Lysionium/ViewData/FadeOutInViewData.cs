@@ -66,21 +66,18 @@ namespace Lysionium
             manager.GetSubview(FadeMaskSubviewName).Hide(back, onFadeInAnimation);
         }
 
-        public class Builder : BaseBuilder<Builder>
+        public class Builder : BaseBuilder<FadeOutInViewData<TMgr, TArg>, Builder>
         {
-            private readonly FadeOutInViewData<TMgr, TArg> parent;
-
             public Builder(FadeOutInViewData<TMgr, TArg> parent, TMgr manager, TArg arg)
                 : base(parent, manager, arg)
             {
-                this.parent = parent;
             }
 
             public Builder Append(object widgetOption)
             {
                 AssertNotBuilt();
 
-                parent.widgetOptions.Add(widgetOption);
+                Parent.widgetOptions.Add(widgetOption);
                 return this;
             }
 
@@ -88,7 +85,7 @@ namespace Lysionium
             {
                 AssertNotBuilt();
 
-                parent.HandleFadeOut += onFadeOut;
+                Parent.HandleFadeOut += onFadeOut;
                 return this;
             }
 
@@ -96,7 +93,7 @@ namespace Lysionium
             {
                 AssertNotBuilt();
 
-                parent.HandleFadeIn += onFadeIn;
+                Parent.HandleFadeIn += onFadeIn;
                 return this;
             }
         }

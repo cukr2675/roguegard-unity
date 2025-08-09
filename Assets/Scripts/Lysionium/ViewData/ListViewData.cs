@@ -57,30 +57,28 @@ namespace Lysionium
             }
         }
 
-        public abstract class BaseListBuilder<TOut> : BaseBuilder<TOut>, IViewItemFilterBuilder<TItem, TMgr, TArg, TOut>
-            where TOut : BaseListBuilder<TOut>
+        public abstract class BaseListBuilder<TViewData, TOut> : BaseBuilder<TViewData, TOut>, IViewItemFilterBuilder<TItem, TMgr, TArg, TOut>
+            where TViewData : ListViewData<TItem, TMgr, TArg>
+            where TOut : BaseListBuilder<TViewData, TOut>
         {
-            private readonly new ListViewData<TItem, TMgr, TArg> parent;
-
-            protected BaseListBuilder(ListViewData<TItem, TMgr, TArg> parent, TMgr manager, TArg arg)
+            protected BaseListBuilder(TViewData parent, TMgr manager, TArg arg)
                 : base(parent, manager, arg)
             {
-                this.parent = parent;
             }
 
-            public TOut Head(TItem item)
+            public TOut Head(object item)
             {
                 AssertNotBuilt();
 
-                parent.headList.Add(item);
+                Parent.headList.Add(item);
                 return (TOut)this;
             }
 
-            public TOut HeadRange(IEnumerable<TItem> items)
+            public TOut HeadRange(IEnumerable<object> items)
             {
                 AssertNotBuilt();
 
-                parent.tailList.AddRange(items);
+                Parent.tailList.AddRange(items);
                 return (TOut)this;
             }
 
@@ -88,23 +86,23 @@ namespace Lysionium
             {
                 AssertNotBuilt();
 
-                parent.headList.Add(SelectOption.Create(name, onClick, style));
+                Parent.headList.Add(SelectOption.Create(name, onClick, style));
                 return (TOut)this;
             }
 
-            public TOut Tail(TItem item)
+            public TOut Tail(object item)
             {
                 AssertNotBuilt();
 
-                parent.tailList.Add(item);
+                Parent.tailList.Add(item);
                 return (TOut)this;
             }
 
-            public TOut TailRange(IEnumerable<TItem> items)
+            public TOut TailRange(IEnumerable<object> items)
             {
                 AssertNotBuilt();
 
-                parent.tailList.AddRange(items);
+                Parent.tailList.AddRange(items);
                 return (TOut)this;
             }
 
@@ -112,7 +110,7 @@ namespace Lysionium
             {
                 AssertNotBuilt();
 
-                parent.tailList.Add(SelectOption.Create(name, onClick, style));
+                Parent.tailList.Add(SelectOption.Create(name, onClick, style));
                 return (TOut)this;
             }
 
@@ -120,18 +118,18 @@ namespace Lysionium
             {
                 AssertNotBuilt();
 
-                if (parent.filter != null) { Debug.LogWarning($"{nameof(Filter)} が多重購読されました。"); }
+                if (Parent.filter != null) { Debug.LogWarning($"{nameof(Filter)} が多重購読されました。"); }
 
-                parent.filter += predicate;
+                Parent.filter += predicate;
                 return (TOut)this;
             }
 
             public override void Build()
             {
                 // IsBuilt == false 時の Show ではフィルタ未設定状態で SetOriginalList を実行しているため、フィルタ設定後であるここで再実行する
-                for (int i = parent.OriginalList.Count - 1; i >= 0 ; i--)
+                for (int i = Parent.OriginalList.Count - 1; i >= 0 ; i--)
                 {
-                    if (!(parent.filter?.Invoke(parent.OriginalList[i], manager, arg)) ?? false) { parent.OriginalList.RemoveAt(i); }
+                    if (!(Parent.filter?.Invoke(Parent.OriginalList[i], Manager, Arg)) ?? false) { Parent.OriginalList.RemoveAt(i); }
                 }
 
                 base.Build();

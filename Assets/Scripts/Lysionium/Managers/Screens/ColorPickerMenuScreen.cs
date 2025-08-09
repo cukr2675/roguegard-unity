@@ -73,21 +73,18 @@ namespace Lysionium
                 manager.GetSubview(StandardSubviewTable.ColorPickerName).Hide(back);
             }
 
-            public class Builder : BaseBuilder<Builder>
+            public class Builder : BaseBuilder<ViewData, Builder>
             {
-                private readonly ViewData parent;
-
                 public Builder(ViewData parent, TMgr manager, TArg arg)
                     : base(parent, manager, arg)
                 {
-                    this.parent = parent;
                 }
 
                 public Builder OnClose(ColorPickerSubview.ColorPickerEventHandler onClose)
                 {
                     AssertNotBuilt();
 
-                    parent.HandleClose += onClose;
+                    Parent.HandleClose += onClose;
                     return this;
                 }
             }

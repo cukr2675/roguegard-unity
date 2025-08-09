@@ -96,23 +96,20 @@ namespace Lysionium
             if (BackAnchorSubviewName != null) { manager.GetSubview(BackAnchorSubviewName).Hide(back); }
         }
 
-        public class Builder : BaseListBuilder<Builder>, IButtonViewItemHandlerBuilder<TItem, TMgr, TArg, Builder>
+        public class Builder : BaseListBuilder<ScrollMenuViewData<TItem, TMgr, TArg>, Builder>, IButtonViewItemHandlerBuilder<TItem, TMgr, TArg, Builder>
         {
-            private readonly ScrollMenuViewData<TItem, TMgr, TArg> parent;
-
             public Builder(ScrollMenuViewData<TItem, TMgr, TArg> parent, TMgr manager, TArg arg)
                 : base(parent, manager, arg)
             {
-                this.parent = parent;
             }
 
             public Builder NameFrom(System.Func<TItem, TMgr, TArg, string> selector)
             {
                 AssertNotBuilt();
 
-                if (parent.scrollSubviewHandler.GetName != null) { Debug.LogWarning($"{nameof(NameFrom)} が多重購読されました。"); }
+                if (Parent.scrollSubviewHandler.GetName != null) { Debug.LogWarning($"{nameof(NameFrom)} が多重購読されました。"); }
 
-                parent.scrollSubviewHandler.GetName += selector;
+                Parent.scrollSubviewHandler.GetName += selector;
                 return this;
             }
 
@@ -120,9 +117,9 @@ namespace Lysionium
             {
                 AssertNotBuilt();
 
-                if (parent.scrollSubviewHandler.GetStyle != null) { Debug.LogWarning($"{nameof(StyleFrom)} が多重購読されました。"); }
+                if (Parent.scrollSubviewHandler.GetStyle != null) { Debug.LogWarning($"{nameof(StyleFrom)} が多重購読されました。"); }
 
-                parent.scrollSubviewHandler.GetStyle += selector;
+                Parent.scrollSubviewHandler.GetStyle += selector;
                 return this;
             }
 
@@ -130,7 +127,7 @@ namespace Lysionium
             {
                 AssertNotBuilt();
 
-                parent.scrollSubviewHandler.Click += handler;
+                Parent.scrollSubviewHandler.Click += handler;
                 return this;
             }
         }

@@ -80,21 +80,18 @@ namespace Roguegard.Device
             if (BackAnchorSubviewName != null) { manager.GetSubview(BackAnchorSubviewName).Hide(back); }
         }
 
-        public class Builder : BaseListBuilder<Builder>
+        public class Builder : BaseListBuilder<RogueScrollMenuViewData<T>, Builder>
         {
-            private readonly RogueScrollMenuViewData<T> parent;
-
             public Builder(RogueScrollMenuViewData<T> parent, MMgr manager, MArg arg)
                 : base(parent, manager, arg)
             {
-                this.parent = parent;
             }
 
             public Builder InfoFrom(System.Func<T, MMgr, MArg, object> method)
             {
                 AssertNotBuilt();
 
-                parent.scrollSubviewHandler.GetInfo = (element, manager, arg) =>
+                Parent.scrollSubviewHandler.GetInfo = (element, manager, arg) =>
                 {
                     var nameObj = method(element, manager, arg);
                     return (nameObj, null, null, null, null, null, null, null, false);
@@ -106,7 +103,7 @@ namespace Roguegard.Device
             {
                 AssertNotBuilt();
 
-                parent.scrollSubviewHandler.GetInfo = (element, manager, arg) =>
+                Parent.scrollSubviewHandler.GetInfo = (element, manager, arg) =>
                 {
                     var info = method(element, manager, arg);
                     return (info.Item1, null, null, null, null, null, info.Item2, info.Item3, false);
@@ -118,7 +115,7 @@ namespace Roguegard.Device
             {
                 AssertNotBuilt();
 
-                parent.scrollSubviewHandler.GetInfo = (element, manager, arg) =>
+                Parent.scrollSubviewHandler.GetInfo = (element, manager, arg) =>
                 {
                     var info = method(element, manager, arg);
                     return (info.Item1, null, info.Item2, info.Item3, info.Item4, info.Item5, info.Item6, info.Item7, info.Item8);
@@ -130,7 +127,7 @@ namespace Roguegard.Device
             {
                 AssertNotBuilt();
 
-                parent.scrollSubviewHandler.Click = method;
+                Parent.scrollSubviewHandler.Click = method;
                 return this;
             }
         }
