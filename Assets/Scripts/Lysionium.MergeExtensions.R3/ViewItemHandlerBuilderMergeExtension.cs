@@ -34,6 +34,13 @@ namespace Lysionium.MergeExtensions.R3
             return new MergedViewItemHandlerBuilder<TItem, TMgr, TArg, TBuilder, TValue>(source);
         }
 
+        public static Observable<MergedViewItemHandleArg<TItem, TMgr, TArg, TBuilder, TValue>> VarOnce<TItem, TMgr, TArg, TBuilder, TValue, TVar>(
+            this Observable<MergedViewItemHandleArg<TItem, TMgr, TArg, TBuilder, TValue>> source, out TVar variable, TVar defaultValue = default)
+        {
+            variable = defaultValue;
+            return source;
+        }
+
         internal static Observable<MergedViewItemHandleArg<TItem, TMgr, TArg, TBuilder, TValue>> Fallback<TItem, TMgr, TArg, TBuilder, TValue>(
             this Observable<MergedViewItemHandleArg<TItem, TMgr, TArg, TBuilder, TValue>> source)
         {
