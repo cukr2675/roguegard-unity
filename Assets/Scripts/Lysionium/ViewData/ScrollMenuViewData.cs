@@ -33,22 +33,29 @@ namespace Lysionium
 
         private readonly ButtonViewItemHandler<TItem, TMgr, TArg> scrollSubviewHandler = new();
 
-        public Builder Show(
-            IReadOnlyList<TItem> list, TMgr manager, TArg arg, object viewStateHolder = null)
+        public Builder Show(TItem[] list, TMgr manager, TArg arg, object viewStateHolder = null)
         {
-            if (list == null) throw new System.ArgumentNullException(nameof(list));
-            if (manager == null) throw new System.ArgumentNullException(nameof(manager));
+            SetOriginalList(list, manager, arg);
+            return ShowCore(manager, arg, viewStateHolder);
+        }
 
+        public Builder Show(IReadOnlyList<TItem> list, TMgr manager, TArg arg, object viewStateHolder = null)
+        {
+            SetOriginalList(list, manager, arg);
+            return ShowCore(manager, arg, viewStateHolder);
+        }
+
+        public Builder Show(System.ReadOnlySpan<TItem> list, TMgr manager, TArg arg, object viewStateHolder = null)
+        {
+            SetOriginalList(list, manager, arg);
+            return ShowCore(manager, arg, viewStateHolder);
+        }
+
+        private Builder ShowCore(TMgr manager, TArg arg, object viewStateHolder)
+        {
             // 必要に応じてスクロール位置をリセット
             if (viewStateHolder != prevViewStateHolder) { ResetSubviewStateProviders(); }
             prevViewStateHolder = viewStateHolder;
-
-            // スクロールのビューを表示
-            OriginalList.Clear();
-            for (int i = 0; i < list.Count; i++)
-            {
-                OriginalList.Add(list[i]);
-            }
 
             if (TryShowSubviews(manager, arg)) return null;
             else return new Builder(this, manager, arg);

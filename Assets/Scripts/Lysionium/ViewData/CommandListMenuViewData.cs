@@ -33,11 +33,26 @@ namespace Lysionium
 
         private readonly ButtonViewItemHandler<TItem, TMgr, TArg> secodaryCommandSubviewHandler = new();
 
+        public Builder Show(TItem[] list, TMgr manager, TArg arg, object viewStateHolder = null)
+        {
+            SetOriginalList(list, manager, arg);
+            return ShowCore(manager, arg, viewStateHolder);
+        }
+
         public Builder Show(IReadOnlyList<TItem> list, TMgr manager, TArg arg, object viewStateHolder = null)
         {
-            if (list == null) throw new System.ArgumentNullException(nameof(list));
-            if (manager == null) throw new System.ArgumentNullException(nameof(manager));
+            SetOriginalList(list, manager, arg);
+            return ShowCore(manager, arg, viewStateHolder);
+        }
 
+        public Builder Show(System.ReadOnlySpan<TItem> list, TMgr manager, TArg arg, object viewStateHolder = null)
+        {
+            SetOriginalList(list, manager, arg);
+            return ShowCore(manager, arg, viewStateHolder);
+        }
+
+        public Builder ShowCore(TMgr manager, TArg arg, object viewStateHolder)
+        {
             // 必要に応じてスクロール位置をリセット
             if (viewStateHolder != prevViewStateHolder)
             {
@@ -46,9 +61,6 @@ namespace Lysionium
                 backAnchorSubviewStateProvider?.Reset();
             }
             prevViewStateHolder = viewStateHolder;
-
-            OriginalList.Clear();
-            OriginalList.AddRange(list);
 
             if (TryShowSubviews(manager, arg)) return null;
             else return new Builder(this, manager, arg);

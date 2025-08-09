@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Lysionium
 {
@@ -13,15 +14,53 @@ namespace Lysionium
         private readonly List<object> tailList = new();
         protected IReadOnlyList<object> List { get; }
 
+        // 並べ替えとフィルタは Head(TItem) や Tail(TItem) とは別のほうが実用的
+        private System.Func<TItem, TMgr, TArg, bool> filter;
+
         protected ListViewData()
         {
             List = new ReadOnlyListConcat(headList, OriginalList, tailList);
         }
 
-        public abstract class BaseListBuilder<TOut> : BaseBuilder<TOut>
+        protected void SetOriginalList(TItem[] list, TMgr manager, TArg arg)
+        {
+            if (list == null) throw new System.ArgumentNullException(nameof(list));
+            if (manager == null) throw new System.ArgumentNullException(nameof(manager));
+
+            OriginalList.Clear();
+            foreach (var item in list)
+            {
+                if (filter?.Invoke(item, manager, arg) ?? true) { OriginalList.Add(item); }
+            }
+        }
+
+        protected void SetOriginalList(IReadOnlyList<TItem> list, TMgr manager, TArg arg)
+        {
+            if (list == null) throw new System.ArgumentNullException(nameof(list));
+            if (manager == null) throw new System.ArgumentNullException(nameof(manager));
+
+            OriginalList.Clear();
+            for (int i = 0; i < list.Count; i++)
+            {
+                if (filter?.Invoke(list[i], manager, arg) ?? true) { OriginalList.Add(list[i]); }
+            }
+        }
+
+        protected void SetOriginalList(System.ReadOnlySpan<TItem> list, TMgr manager, TArg arg)
+        {
+            if (manager == null) throw new System.ArgumentNullException(nameof(manager));
+
+            OriginalList.Clear();
+            foreach (var item in list)
+            {
+                if (filter?.Invoke(item, manager, arg) ?? true) { OriginalList.Add(item); }
+            }
+        }
+
+        public abstract class BaseListBuilder<TOut> : BaseBuilder<TOut>, IViewItemFilterBuilder<TItem, TMgr, TArg, TOut>
             where TOut : BaseListBuilder<TOut>
         {
-            private readonly ListViewData<TItem, TMgr, TArg> parent;
+            private readonly new ListViewData<TItem, TMgr, TArg> parent;
 
             protected BaseListBuilder(ListViewData<TItem, TMgr, TArg> parent, TMgr manager, TArg arg)
                 : base(parent, manager, arg)
@@ -75,6 +114,27 @@ namespace Lysionium
 
                 parent.tailList.Add(SelectOption.Create(name, onClick, style));
                 return (TOut)this;
+            }
+
+            public TOut Filter(System.Func<TItem, TMgr, TArg, bool> predicate)
+            {
+                AssertNotBuilt();
+
+                if (parent.filter != null) { Debug.LogWarning($"{nameof(Filter)} が多重購読されました。"); }
+
+                parent.filter += predicate;
+                return (TOut)this;
+            }
+
+            public override void Build()
+            {
+                // IsBuilt == false 時の Show ではフィルタ未設定状態で SetOriginalList を実行しているため、フィルタ設定後であるここで再実行する
+                for (int i = parent.OriginalList.Count - 1; i >= 0 ; i--)
+                {
+                    if (!(parent.filter?.Invoke(parent.OriginalList[i], manager, arg)) ?? false) { parent.OriginalList.RemoveAt(i); }
+                }
+
+                base.Build();
             }
         }
 

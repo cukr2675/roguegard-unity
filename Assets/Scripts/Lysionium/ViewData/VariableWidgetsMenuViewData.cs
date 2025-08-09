@@ -20,10 +20,26 @@ namespace Lysionium
         private ISubviewStateProvider captionBoxSubviewStateProvider;
         private ISubviewStateProvider backAnchorSubviewStateProvider;
 
+        public Builder Show(object[] widgetOptions, TMgr manager, TArg arg, object viewStateHolder = null)
+        {
+            SetOriginalList(widgetOptions, manager, arg);
+            return ShowCore(manager, arg, viewStateHolder);
+        }
+
         public Builder Show(IReadOnlyList<object> widgetOptions, TMgr manager, TArg arg, object viewStateHolder = null)
         {
-            if (manager == null) throw new System.ArgumentNullException(nameof(manager));
+            SetOriginalList(widgetOptions, manager, arg);
+            return ShowCore(manager, arg, viewStateHolder);
+        }
 
+        public Builder Show(System.ReadOnlySpan<object> widgetOptions, TMgr manager, TArg arg, object viewStateHolder = null)
+        {
+            SetOriginalList(widgetOptions, manager, arg);
+            return ShowCore(manager, arg, viewStateHolder);
+        }
+
+        public Builder ShowCore(TMgr manager, TArg arg, object viewStateHolder)
+        {
             // 必要に応じてスクロール位置をリセット
             if (viewStateHolder != prevViewStateHolder)
             {
@@ -32,12 +48,6 @@ namespace Lysionium
                 backAnchorSubviewStateProvider?.Reset();
             }
             prevViewStateHolder = viewStateHolder;
-
-            OriginalList.Clear();
-            for (int i = 0; i < widgetOptions.Count; i++)
-            {
-                OriginalList.Add(widgetOptions[i]);
-            }
 
             if (TryShowSubviews(manager, arg)) return null;
             else return new Builder(this, manager, arg);

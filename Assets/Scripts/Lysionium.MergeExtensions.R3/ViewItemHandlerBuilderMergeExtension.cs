@@ -20,6 +20,10 @@ namespace Lysionium.MergeExtensions.R3
             {
                 ButtonViewItemHandlerBuilderMergeExtension.SubscribeButtonViewItemHandler(buttonBuilder, merged);
             }
+            if (builder is IViewItemFilterBuilder<TItem, TMgr, TArg, TOut> filterBuilder)
+            {
+                ViewItemFilterBuilderMergeExtension.SubscribeViewItemFilter(filterBuilder, merged);
+            }
 
             return (TOut)builder;
         }

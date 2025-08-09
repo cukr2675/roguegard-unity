@@ -19,11 +19,26 @@ namespace Roguegard.Device
 
         private readonly ElementHandler scrollSubviewHandler = new();
 
+        public Builder Show(T[] list, MMgr manager, MArg arg, object viewStateHolder = null)
+        {
+            SetOriginalList(list, manager, arg);
+            return Show(manager, arg, viewStateHolder);
+        }
+
         public Builder Show(IReadOnlyList<T> list, MMgr manager, MArg arg, object viewStateHolder = null)
         {
-            if (list == null) throw new System.ArgumentNullException(nameof(list));
-            if (manager == null) throw new System.ArgumentNullException(nameof(manager));
+            SetOriginalList(list, manager, arg);
+            return Show(manager, arg, viewStateHolder);
+        }
 
+        public Builder Show(System.ReadOnlySpan<T> list, MMgr manager, MArg arg, object viewStateHolder = null)
+        {
+            SetOriginalList(list, manager, arg);
+            return Show(manager, arg, viewStateHolder);
+        }
+
+        public Builder Show(MMgr manager, MArg arg, object viewStateHolder)
+        {
             // 必要に応じてスクロール位置をリセット
             if (viewStateHolder != prevViewStateHolder)
             {
@@ -32,13 +47,6 @@ namespace Roguegard.Device
                 backAnchorSubviewStateProvider?.Reset();
             }
             prevViewStateHolder = viewStateHolder;
-
-            // スクロールのビューを表示
-            OriginalList.Clear();
-            for (int i = 0; i < list.Count; i++)
-            {
-                OriginalList.Add(list[i]);
-            }
 
             if (TryShowSubviews(manager, arg)) return null;
             else return new Builder(this, manager, arg);

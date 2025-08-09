@@ -36,7 +36,6 @@ namespace Lysionium
             }
             prevViewStateHolder = viewStateHolder;
 
-            // スクロールのビューを表示
             this.message = message;
 
             if (TryShowSubviews(manager, arg)) return null;

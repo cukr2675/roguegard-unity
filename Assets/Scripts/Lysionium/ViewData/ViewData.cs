@@ -53,9 +53,9 @@ namespace Lysionium
         public abstract class BaseBuilder<TOut>
             where TOut : BaseBuilder<TOut>
         {
-            private readonly ViewData<TMgr, TArg> parent;
-            private readonly TMgr manager;
-            private readonly TArg arg;
+            protected readonly ViewData<TMgr, TArg> parent;
+            protected readonly TMgr manager;
+            protected readonly TArg arg;
             private readonly List<System.IDisposable> disposables;
 
             protected BaseBuilder(ViewData<TMgr, TArg> parent, TMgr manager, TArg arg)
@@ -131,7 +131,7 @@ namespace Lysionium
                 return (TOut)this;
             }
 
-            public void Build()
+            public virtual void Build()
             {
                 AssertNotBuilt();
                 manager.OnUnload += () => Unload();
