@@ -2,8 +2,8 @@ using System.Collections.Generic;
 
 namespace Roguegard
 {
-    [Objforming.Formable]
-    public class LobbyMemberList
+    [Objforming.Formable(Objforming.FormerMode.Wrapper)]
+    public sealed class LobbyMemberList
     {
         private readonly List<RogueObj> _members = new();
         public Spanning<RogueObj> Members => Spanning.Get(_members);

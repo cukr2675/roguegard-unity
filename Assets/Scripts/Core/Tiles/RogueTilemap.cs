@@ -2,8 +2,8 @@ using UnityEngine;
 
 namespace Roguegard
 {
-    [Objforming.Formable]
-    public class RogueTilemap
+    [Objforming.Formable(Objforming.FormerMode.Wrapper)]
+    public sealed class RogueTilemap
     {
         private readonly IRogueTile[][][] tilemap;
 

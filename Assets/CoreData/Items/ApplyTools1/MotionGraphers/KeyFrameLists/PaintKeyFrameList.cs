@@ -4,8 +4,8 @@ using System.Linq;
 
 namespace Roguegard
 {
-    [Objforming.Formable]
-    public class PaintKeyFrameList
+    [Objforming.Formable(Objforming.FormerMode.Wrapper)]
+    public sealed class PaintKeyFrameList
     {
         private readonly List<KeyFrame> items;
 

@@ -4,8 +4,8 @@ using System.Linq;
 
 namespace Roguegard.CharacterCreation
 {
-    [Objforming.Formable]
-    public class StartingItemList : IWeightedRogueObjGeneratorList, IEnumerable<StartingItem>
+    [Objforming.Formable(Objforming.FormerMode.Wrapper)]
+    public sealed class StartingItemList : IWeightedRogueObjGeneratorList, IEnumerable<StartingItem>
     {
         private readonly List<StartingItem> list = new();
 

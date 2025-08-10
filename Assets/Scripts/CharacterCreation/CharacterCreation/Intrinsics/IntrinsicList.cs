@@ -4,8 +4,8 @@ using System.Linq;
 
 namespace Roguegard.CharacterCreation
 {
-    [Objforming.Formable]
-    public class IntrinsicList : IEnumerable<Intrinsic>
+    [Objforming.Formable(Objforming.FormerMode.Wrapper)]
+    public sealed class IntrinsicList : IEnumerable<Intrinsic>
     {
         private readonly List<Intrinsic> list = new();
 

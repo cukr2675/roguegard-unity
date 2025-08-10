@@ -5,8 +5,8 @@ using System.Linq;
 
 namespace Roguegard.CharacterCreation
 {
-    [Objforming.Formable]
-    public class AppearanceList : IEnumerable<Appearance>
+    [Objforming.Formable(Objforming.FormerMode.Wrapper)]
+    public sealed class AppearanceList : IEnumerable<Appearance>
     {
         private readonly List<Appearance> list = new();
 

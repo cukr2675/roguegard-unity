@@ -5,8 +5,8 @@ using UnityEngine;
 
 namespace Roguegard
 {
-    [Objforming.Formable]
-    public class FloatKeyFrameList
+    [Objforming.Formable(Objforming.FormerMode.Wrapper)]
+    public sealed class FloatKeyFrameList
     {
         private readonly List<KeyFrame> items;
 

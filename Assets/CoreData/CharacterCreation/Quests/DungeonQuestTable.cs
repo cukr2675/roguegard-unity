@@ -2,8 +2,8 @@ using System.Collections.Generic;
 
 namespace Roguegard.CharacterCreation
 {
-    [Objforming.Formable]
-    public class DungeonQuestTable
+    [Objforming.Formable(Objforming.FormerMode.Wrapper)]
+    public sealed class DungeonQuestTable
     {
         private readonly List<Item> items = new();
 

@@ -4,8 +4,8 @@ using UnityEngine;
 
 namespace Roguegard
 {
-    [Objforming.Formable]
-    public class RogueObjList
+    [Objforming.Formable(Objforming.FormerMode.Wrapper)]
+    public sealed class RogueObjList
     {
         private readonly List<RogueObj> objs;
 

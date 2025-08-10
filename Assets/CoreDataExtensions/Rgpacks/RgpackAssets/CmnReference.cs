@@ -4,8 +4,8 @@ using UnityEngine;
 
 namespace Roguegard.Rgpacks
 {
-    [Objforming.Formable]
-    public class CmnReference : RgpackReference<ICmnAssset>
+    [Objforming.Formable(Objforming.FormerMode.Wrapper)]
+    public sealed class CmnReference : RgpackReference<ICmnAssset>
     {
         public new ICmnAssset Asset => base.Asset;
 

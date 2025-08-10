@@ -3,8 +3,8 @@ using System.Collections.Generic;
 
 namespace Roguegard.CharacterCreation
 {
-    [Objforming.Formable]
-    public class StartingItemTable : IEnumerable<StartingItemList>
+    [Objforming.Formable(Objforming.FormerMode.Wrapper)]
+    public sealed class StartingItemTable : IEnumerable<StartingItemList>
     {
         private readonly List<StartingItemList> table = new();
 

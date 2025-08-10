@@ -3,8 +3,8 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Roguegard
 {
-    [Objforming.Formable]
-    public class RogueEffectState
+    [Objforming.Formable(Objforming.FormerMode.Wrapper)]
+    public sealed class RogueEffectState
     {
         private readonly List<IRogueEffect> _effects;
 

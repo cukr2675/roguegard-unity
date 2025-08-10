@@ -2,8 +2,8 @@ using System.Collections.Generic;
 
 namespace Roguegard
 {
-    [Objforming.Formable]
-    public class LearnedSkillList
+    [Objforming.Formable(Objforming.FormerMode.Wrapper)]
+    public sealed class LearnedSkillList
     {
         private readonly List<LearnedSkill> skills = new();
 
