@@ -134,6 +134,14 @@ namespace Lysionium
 
                 base.Build();
             }
+
+            protected override void Unload()
+            {
+                base.Unload();
+                Parent.headList.Clear();
+                Parent.tailList.Clear();
+                Parent.filter = null;
+            }
         }
 
         private class ReadOnlyListConcat : IReadOnlyList<object>

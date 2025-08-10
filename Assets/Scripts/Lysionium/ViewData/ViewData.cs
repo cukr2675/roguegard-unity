@@ -141,7 +141,7 @@ namespace Lysionium
                 Parent.ShowSubviews(Manager, Arg);
             }
 
-            private void Unload()
+            protected virtual void Unload()
             {
                 foreach (var disposable in disposables)
                 {
