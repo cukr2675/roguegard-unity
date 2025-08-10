@@ -1,4 +1,5 @@
 using System;
+using System.Reflection;
 
 namespace Objforming
 {
@@ -9,5 +10,17 @@ namespace Objforming
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Enum, Inherited = false)]
     public sealed class FormableAttribute : Attribute
     {
+        public FormerMode Mode { get; }
+
+        public FormableAttribute(FormerMode mode = FormerMode.Default)
+        {
+            Mode = mode;
+        }
+
+        public static FormerMode GetModeOrDefault(Type type)
+        {
+            var attribute = type.GetCustomAttribute<FormableAttribute>();
+            return attribute?.Mode ?? FormerMode.Default;
+        }
     }
 }

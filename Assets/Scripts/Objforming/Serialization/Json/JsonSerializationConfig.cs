@@ -17,7 +17,7 @@ namespace Objforming.Serialization.Json
         {
             serializer = JsonSerializer.Create();
             serializer.PreserveReferencesHandling = PreserveReferencesHandling.Objects;
-            serializer.TypeNameHandling = TypeNameHandling.Auto;
+            serializer.TypeNameHandling = TypeNameHandling.None; // JsonConverter が介入すると $type が効かないようなので必要ない（無効化する）
             serializer.TypeNameAssemblyFormatHandling = TypeNameAssemblyFormatHandling.Simple;
 
             referenceJsonConverter = new ReferenceJsonConverter();

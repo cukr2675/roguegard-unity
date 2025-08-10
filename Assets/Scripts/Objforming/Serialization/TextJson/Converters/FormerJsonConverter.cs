@@ -22,8 +22,11 @@ namespace Objforming.Serialization.TextJson
         public static FormerJsonConverter Create(Type type, bool force = false, bool includeObjectMember = false)
         {
             var members = FormerMember.Generate(type, force, includeObjectMember);
-            var former = new Former(type, members);
-            return new FormerJsonConverter(former);
+            var mode = FormableAttribute.GetModeOrDefault(type);
+            var former = new Former(type, members, mode);
+            if (mode == FormerMode.Default) return new FormerJsonConverter(former);
+            else if (mode == FormerMode.Wrapper) return new WrapperFormerJsonConverter(former);
+            else throw new InvalidOperationException();
         }
 
         public override void Write(Utf8JsonWriter writer, object value, JsonSerializerOptions options)

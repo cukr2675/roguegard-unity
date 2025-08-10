@@ -65,6 +65,34 @@ namespace Objforming
             }
         }
 
+        /// <summary>
+        /// <see cref="FormerMode.Wrapper"/> に設定されていないラッパークラス候補を取得する
+        /// </summary>
+        public static Type[] GetNotModedWrapperTypes(bool includeNotSealed, params Assembly[] assemblies)
+        {
+            var types = assemblies.SelectMany(x => x.GetTypes()).ToArray();
+            var requirers = GetRequirers(types);
+            var searchTypes = assemblies
+                .SelectMany(x => x.GetTypes())
+                .Where(x => x.IsDefined(typeof(FormableAttribute)))
+                .Where(x => !requirers.Any(y => y.IsAssignableFrom(x)))
+                .Where(x => !x.IsEnum);
+            var notModedWrapperTypes = new List<Type>();
+            foreach (var type in searchTypes)
+            {
+                var mode = FormableAttribute.GetModeOrDefault(type);
+                if (mode == FormerMode.Wrapper) continue;
+
+                if (!includeNotSealed && !type.IsSealed) continue;
+
+                var members = FormerMember.Generate(type, true, true);
+                if (members.Length != 1) continue;
+
+                notModedWrapperTypes.Add(type);
+            }
+            return notModedWrapperTypes.ToArray();
+        }
+
         private static List<Type> GetFormableTypes(params Assembly[] assemblies)
         {
             var types = assemblies.SelectMany(x => x.GetTypes()).ToArray();

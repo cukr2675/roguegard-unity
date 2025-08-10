@@ -11,6 +11,7 @@ namespace Objforming
     {
         public Type InstanceType { get; }
         private readonly FormerMember[] _members;
+        public FormerMode Mode { get; }
 
         [NonSerialized] private MemberList memberList;
         public IReadOnlyList<FormerMember> Members => memberList ??= new MemberList() { parent = this };
@@ -25,10 +26,16 @@ namespace Objforming
 
         private Former() { }
 
-        public Former(Type instanceType, IEnumerable<FormerMember> members)
+        public Former(Type instanceType, IEnumerable<FormerMember> members, FormerMode mode = FormerMode.Default)
         {
+            if (FormableAttribute.GetModeOrDefault(instanceType) == FormerMode.Wrapper && !instanceType.IsSealed)
+            {
+                ObjformingLogger.LogWarning($"{instanceType} は {FormerMode.Wrapper} に設定されていますが sealed ではありません。");
+            }
+
             InstanceType = instanceType;
             _members = members.ToArray();
+            Mode = mode;
         }
 
         public FormerMember GetMemberByCamel(string camelName)
@@ -37,7 +44,7 @@ namespace Objforming
             {
                 if (item.CamelName == camelName) return item;
             }
-            throw new Exception($"{InstanceType} に {camelName} のメンバーは存在しません。");
+            throw new InvalidOperationException($"{InstanceType} に {camelName} のメンバーは存在しません。");
         }
 
         public bool TryGetMemberByCamel(string camelName, out FormerMember member)
@@ -107,7 +114,7 @@ namespace Objforming
                 }
                 else
                 {
-                    throw new Exception(
+                    throw new InvalidOperationException(
                         $"{instanceType} で {nameof(CreateInstanceAttribute)} を持つコンストラクタまたは引数なしコンストラクタが見つかりません。");
                 }
             }
