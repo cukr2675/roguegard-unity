@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections;
+using System;
 using System.Collections.Generic;
-
 using System.Text.Json.Serialization;
 
 namespace Objforming.Serialization.TextJson
@@ -23,7 +21,7 @@ namespace Objforming.Serialization.TextJson
         private class Resolver : ReferenceResolver
         {
             private readonly Dictionary<object, string> instance2IdTable;
-            private readonly Dictionary<string, object> id2InstanceTable = new Dictionary<string, object>();
+            private readonly Dictionary<string, object> id2InstanceTable = new();
             private int referenceIndex = 0;
 
             public Resolver(bool enabledReferenceMerge)
@@ -69,7 +67,7 @@ namespace Objforming.Serialization.TextJson
                 }
                 else
                 {
-                    throw new Exception($"$ref: {reference} が見つかりません。");
+                    throw new InvalidOperationException($"$ref: {reference} が見つかりません。");
                 }
             }
         }

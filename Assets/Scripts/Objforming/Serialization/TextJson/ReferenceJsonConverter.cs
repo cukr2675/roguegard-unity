@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections;
+using System;
 using System.Collections.Generic;
-
 using System.Linq;
 using System.Reflection;
 using System.Text.Json;
@@ -9,44 +7,60 @@ using System.Text.Json.Serialization;
 
 namespace Objforming.Serialization.TextJson
 {
+    /// <summary>
+    /// <see cref="ReferableAttribute"/> が付与されている型のシリアル化と、逆シリアル時の <see cref="ReferenceResolver"/> を準備するクラス
+    /// </summary>
     internal class ReferenceJsonConverter : JsonConverter<object>
     {
-        private readonly Dictionary<Type, Dictionary<string, object>> values = new Dictionary<Type, Dictionary<string, object>>();
+        private readonly Dictionary<Type, Dictionary<string, object>> referableInstanceTable = new();
 
-        public void Add(IReadOnlyDictionary<string, object> table)
+        /// <summary>
+        /// <see cref="ReferableAttribute"/> が付与されている型のキーとインスタンスを登録する
+        /// </summary>
+        public void RegisterReferableInstances(IReadOnlyDictionary<string, object> referableInstanceTable)
         {
-            var notReferableTypes = table
+            // 引数に Referable 属性が付与されていない型のインスタンスが含まれる場合、例外を投げる
+            var notReferableTypes = referableInstanceTable
                 .Select(x => x.Value.GetType())
                 .Distinct()
                 .Where(x => !x.IsDefined(typeof(ReferableAttribute)))
                 .ToArray();
-            if (notReferableTypes.Length >= 1) throw new Exception(string.Join<Type>(", ", notReferableTypes) + " は Referable ではありません。");
+            if (notReferableTypes.Length >= 1)
+            {
+                foreach (var notReferableType in notReferableTypes)
+                {
+                    ObjformingLogger.LogError(string.Join(", ", referableInstanceTable.Where(x => x.Value.GetType() == notReferableType)));
+                }
+                throw new ArgumentException(string.Join<Type>(", ", notReferableTypes) + " は Referable ではありません。", nameof(referableInstanceTable));
+            }
 
-            foreach (var pair in table)
+            // キーとインスタンスを登録する
+            foreach (var pair in referableInstanceTable)
             {
                 var type = pair.Value.GetType();
-                if (!values.TryGetValue(type, out var typedValues))
+                if (!this.referableInstanceTable.TryGetValue(type, out var typedReferableInstanceTable))
                 {
-                    typedValues = new Dictionary<string, object>();
-                    values.Add(type, typedValues);
+                    typedReferableInstanceTable = new Dictionary<string, object>();
+                    this.referableInstanceTable.Add(type, typedReferableInstanceTable);
                 }
 
-                typedValues.Add(pair.Key, pair.Value);
+                typedReferableInstanceTable.Add(pair.Key, pair.Value);
             }
         }
 
         public void SetReferences(JsonSerializerOptions options)
         {
-            if (values.Count == 0) return;
+            if (referableInstanceTable.Count == 0) return;
 
             // 最初のメンバーが登録済みであれば、すべて登録されていると判断して何もしない
-            var firstId = values.First().Value.First().Key;
+            var firstId = referableInstanceTable.First().Value.First().Key;
             var referenceResolver = options.ReferenceHandler.CreateResolver();
             if (referenceResolver.ResolveReference(firstId) != null) return;
 
-            foreach (var table in values.Values)
+            // デシリアライズ時はこのクラスではなく ReferenceResolver で解決するため、前もって登録しておく
+            foreach (var typedReferableInstanceTable in referableInstanceTable.Values)
             {
-                foreach (var pair in table)
+                foreach (var pair in typedReferableInstanceTable)
                 {
                     referenceResolver.AddReference(pair.Key, pair.Value);
                 }
@@ -55,13 +69,13 @@ namespace Objforming.Serialization.TextJson
 
         public override bool CanConvert(Type typeToConvert)
         {
-            var result = values.Keys.Contains(typeToConvert);
+            var result = referableInstanceTable.Keys.Contains(typeToConvert);
             if (result) return true;
 
             // このコンバーターは必ず最後に実行されるので、ここで例外判定する
-            if (typeToConvert.IsDefined(typeof(ReferableAttribute))) throw new Exception(
+            if (typeToConvert.IsDefined(typeof(ReferableAttribute))) throw new InvalidOperationException(
                 $"{typeToConvert} には {nameof(ReferableAttribute)} が設定されていますが、該当するコンバーターが見つかりません。");
-            if (typeToConvert.IsDefined(typeof(FormableAttribute))) throw new Exception(
+            if (typeToConvert.IsDefined(typeof(FormableAttribute))) throw new InvalidOperationException(
                 $"{typeToConvert} には {nameof(FormableAttribute)} が設定されていますが、該当するコンバーターが見つかりません。");
             return false;
         }
@@ -70,9 +84,9 @@ namespace Objforming.Serialization.TextJson
         {
             writer.WriteStartObject();
             var type = value.GetType();
-            if (values.TryGetValue(type, out var table))
+            if (referableInstanceTable.TryGetValue(type, out var typedReferableInstanceTable))
             {
-                foreach (var pair in table)
+                foreach (var pair in typedReferableInstanceTable)
                 {
                     if (pair.Value != value) continue;
 
@@ -81,7 +95,7 @@ namespace Objforming.Serialization.TextJson
                     return;
                 }
             }
-            throw new Exception($"{value} は登録されていません。");
+            throw new InvalidOperationException($"{value} は登録されていません。");
         }
 
         public override object Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)

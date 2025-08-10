@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections;
+using System;
 using System.Collections.Generic;
-
 using System.IO;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -16,8 +14,7 @@ namespace Objforming.Serialization.TextJson
 
         public JsonSerializationConfig(IEnumerable<JsonSerializationModule> modules, IDependencyModuleTable<JsonSerializationModule> moduleTable)
         {
-            objConverter = new ObjectJsonConverter();
-            objConverter.parent = this;
+            objConverter = new ObjectJsonConverter { parent = this };
             referenceConverter = new ReferenceJsonConverter();
             converters = new List<RelationalJsonConverter>();
 
@@ -33,15 +30,17 @@ namespace Objforming.Serialization.TextJson
             foreach (var converter in allConverters)
             {
                 converters.Add(converter);
-                referenceConverter.Add(converter.References);
+                referenceConverter.RegisterReferableInstances(converter.References);
             }
         }
 
         public void Serialize<T>(Stream stream, T instance)
         {
-            var options = new JsonSerializerOptions();
-            options.WriteIndented = true;
-            options.ReferenceHandler = new ObjformingReferenceHandler(true);
+            var options = new JsonSerializerOptions
+            {
+                WriteIndented = true,
+                ReferenceHandler = new ObjformingReferenceHandler(true)
+            };
             foreach (var converter in converters)
             {
                 options.Converters.Add(converter);
@@ -54,9 +53,11 @@ namespace Objforming.Serialization.TextJson
 
         public T Deserialize<T>(Stream stream)
         {
-            var options = new JsonSerializerOptions();
-            options.WriteIndented = true;
-            options.ReferenceHandler = new ObjformingReferenceHandler(true);
+            var options = new JsonSerializerOptions
+            {
+                WriteIndented = true,
+                ReferenceHandler = new ObjformingReferenceHandler(true)
+            };
             foreach (var converter in converters)
             {
                 options.Converters.Add(converter);
@@ -88,6 +89,8 @@ namespace Objforming.Serialization.TextJson
                     if (objectTypeDefinition == typeof(List<>)) return false;
                     if (objectTypeDefinition == typeof(Dictionary<,>)) return false;
                 }
+
+                // 上記を除いた型をコンバートの対象とする
                 return true;
             }
 
@@ -113,7 +116,7 @@ namespace Objforming.Serialization.TextJson
                     parent.referenceConverter.Write(writer, value, options);
                     return;
                 }
-                throw new Exception($"{type} ({value}) に対応するコンバーターが見つかりません。");
+                throw new InvalidOperationException($"{type} ({value}) に対応するコンバーターが見つかりません。");
             }
 
             public override object Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
@@ -121,12 +124,13 @@ namespace Objforming.Serialization.TextJson
                 //if (reader.TokenType == JsonTokenType.Null) return null;
 
                 var tempReader = reader;
-                if (JsonConverterUtility.ReadTryResolveReference(ref reader, options, out var referencedValue, out _, out var typeText)) return referencedValue;
+                if (ReferenceResolverUtility.ReadTryResolveReference(ref reader, options, out var resolvedValue, out _, out var typeText)) return resolvedValue;
 
                 // json の $type から型名を取得する
                 // $type が設定されていなければ objectType をそのまま使用する
-                var type = JsonConverterUtility.Text2Type(typeText, typeToConvert);
+                var type = ReferenceResolverUtility.GetType(typeText, typeToConvert);
 
+                // $type をもとにデシリアライズする
                 foreach (var converter in parent.converters)
                 {
                     if (converter.CanConvert(type))
@@ -137,7 +141,7 @@ namespace Objforming.Serialization.TextJson
                 }
 
                 // 対応するコンバーターがなければ例外を投げる
-                throw new Exception($"{typeToConvert} に対応するコンバーターが見つかりません。");
+                throw new InvalidOperationException($"{typeToConvert} に対応するコンバーターが見つかりません。");
             }
         }
     }

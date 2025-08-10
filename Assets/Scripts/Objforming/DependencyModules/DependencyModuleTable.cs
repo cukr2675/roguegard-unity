@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections;
+using System;
 using System.Collections.Generic;
-
 using System.Linq;
 
 namespace Objforming
@@ -26,7 +24,7 @@ namespace Objforming
 
             if (list.Any(x => x.Version == module.Version))
             {
-                throw new Exception($"{module.Name} のバージョン {module.Version} はすでに追加されています。");
+                throw new InvalidOperationException($"{module.Name} のバージョン {module.Version} はすでに追加されています。");
             }
 
             // Version の昇順で追加
@@ -52,13 +50,13 @@ namespace Objforming
             Version newerVersion, olderVersion;
             if (versionText.StartsWith('^'))
             {
-                versionText = versionText.Substring(1);
+                versionText = versionText[1..];
                 olderVersion = Version.Parse(versionText);
                 newerVersion = new Version(olderVersion.Major, int.MaxValue);
             }
             else if (versionText.StartsWith('~'))
             {
-                versionText = versionText.Substring(1);
+                versionText = versionText[1..];
                 olderVersion = Version.Parse(versionText);
                 newerVersion = new Version(olderVersion.Major, olderVersion.Minor, int.MaxValue);
             }

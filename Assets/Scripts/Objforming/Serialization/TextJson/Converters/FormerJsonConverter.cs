@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections;
+using System;
 using System.Collections.Generic;
-
 using System.Linq;
 using System.Text.Json;
 
@@ -31,7 +29,7 @@ namespace Objforming.Serialization.TextJson
         public override void Write(Utf8JsonWriter writer, object value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
-            if (JsonConverterUtility.WriteReferenceOrIDAndType(writer, value, options))
+            if (ReferenceResolverUtility.WriteReferenceOrIDAndType(writer, value, options))
             {
                 for (int i = 0; i < Former.Members.Count; i++)
                 {
@@ -47,23 +45,28 @@ namespace Objforming.Serialization.TextJson
         public override object Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
             if (reader.TokenType == JsonTokenType.Null) return null;
-            if (JsonConverterUtility.ReadTryResolveReference(ref reader, options, out var referencedValue, out var id, out _)) return referencedValue;
+            if (ReferenceResolverUtility.ReadTryResolveReference(ref reader, options, out var resolvedValue, out var id, out _)) return resolvedValue;
 
             var value = Former.CreateInstance();
-            JsonConverterUtility.AddReference(id, value, options);
+            ReferenceResolverUtility.AddReference(id, value, options);
             while (true)
             {
                 if (reader.TokenType == JsonTokenType.EndObject) break;
 
                 var propertyName = reader.GetString();
+                reader.Read(); // キーを飛ばす
 
-                reader.Read();
-                if (!Former.TryGetMemberByCamel(propertyName, out var member)) continue;
+                if (!Former.TryGetMemberByCamel(propertyName, out var member))
+                {
+                    // 無効なプロパティ名の場合
+                    reader.Skip(); // 配列またはオブジェクトを飛ばす
+                    reader.Read(); // 数値、文字列、boolean、nullまたは配列とオブジェクトの終端を飛ばす
+                    continue;
+                }
 
                 var memberValue = JsonSerializer.Deserialize(ref reader, member.FieldType, options);
                 member.SetValue(value, memberValue);
-
-                reader.Read();
+                reader.Read(); // メンバデシリアライズ後の終端を飛ばす
             }
             return value;
         }

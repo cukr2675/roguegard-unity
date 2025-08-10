@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections;
+using System;
 using System.Collections.Generic;
-
+using System.Linq;
 using System.Reflection;
 using System.Text;
-using System.Text.RegularExpressions;
-using System.Linq;
 
 namespace Objforming
 {
@@ -64,7 +61,7 @@ namespace Objforming
                 {
                     if (TryCreate(fieldInfo, includeObjectMember, out var member))
                     {
-                        if (members.Select(x => x.Name).Contains(member.Name)) throw new Exception(
+                        if (members.Select(x => x.Name).Contains(member.Name)) throw new InvalidOperationException(
                             $"{type1} のメンバ名 {member.Name} は二つ以上存在します。");
 
                         members.Add(member);

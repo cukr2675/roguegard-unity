@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections;
+using System;
 using System.Collections.Generic;
-
 using System.Linq;
 using System.Reflection;
 
@@ -113,9 +111,9 @@ namespace Objforming
 
         private static void GetRecursiveValueTypes(List<Type> typeStack, HashSet<Type> recursiveValueTypes, IReadOnlyList<IRelationalComponent> components)
         {
-            var type = typeStack[typeStack.Count - 1];
+            var type = typeStack[^1];
             if (!type.IsValueType) throw new ArgumentException($"{type} は値型ではありません。");
-            if (!TryGetComponentOf(type, out var component)) throw new Exception($"{type} の {nameof(IRelationalComponent)} が見つかりません。");
+            if (!TryGetComponentOf(type, out var component)) throw new InvalidOperationException($"{type} の {nameof(IRelationalComponent)} が見つかりません。");
 
             foreach (var fieldType in component.FieldTypes)
             {

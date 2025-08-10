@@ -1,20 +1,17 @@
-﻿using System;
-using System.Collections;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
-
 using System.IO;
 using System.Reflection;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json.Converters;
 
 namespace Objforming.Serialization.Json
 {
     public class JsonSerializationConfig
     {
         private readonly JsonSerializer serializer;
-        private readonly ObjectJsonConverter objConverter;
-        private readonly ReferenceJsonConverter referenceConverter;
+        private readonly ReferenceJsonConverter referenceJsonConverter;
 
         public JsonSerializationConfig(IEnumerable<JsonSerializationModule> modules, IDependencyModuleTable<JsonSerializationModule> moduleTable)
         {
@@ -22,44 +19,41 @@ namespace Objforming.Serialization.Json
             serializer.PreserveReferencesHandling = PreserveReferencesHandling.Objects;
             serializer.TypeNameHandling = TypeNameHandling.Auto;
             serializer.TypeNameAssemblyFormatHandling = TypeNameAssemblyFormatHandling.Simple;
-            //serializer.Formatting = Formatting.Indented;
 
-            objConverter = new ObjectJsonConverter();
-            objConverter.parent = this;
-            referenceConverter = new ReferenceJsonConverter();
-
+            referenceJsonConverter = new ReferenceJsonConverter();
             foreach (var module in modules)
             {
                 var converters = module.GetAllConverters(moduleTable);
                 foreach (var converter in converters)
                 {
                     serializer.Converters.Add(converter);
-                    referenceConverter.Add(converter.References);
+                    referenceJsonConverter.RegisterReferableInstances(converter.References);
                 }
             }
-            serializer.Converters.Add(referenceConverter);
-            serializer.Converters.Add(objConverter);
+
+            serializer.Converters.Add(referenceJsonConverter);
+            serializer.Converters.Add(new ObjectJsonConverter { parent = this });
         }
 
-        public void Serialize<T>(JsonWriter writer, T instance)
+        public void Serialize<T>(JsonWriter writer, T value)
         {
             serializer.ReferenceResolver = new ObjformingReferenceResolver(true);
 
-            serializer.Serialize(writer, instance, typeof(T));
+            serializer.Serialize(writer, value, typeof(T));
         }
 
-        public void Serialize<T>(Stream stream, T instance)
+        public void Serialize<T>(Stream stream, T value)
         {
             var streamWriter = new StreamWriter(stream);
             var writer = new JsonTextWriter(streamWriter);
-            Serialize(writer, instance);
-            writer.Flush();
+            Serialize(writer, value);
+            writer.Flush(); // JsonTextWriter の完了処理
         }
 
         public T Deserialize<T>(JsonReader reader)
         {
             serializer.ReferenceResolver = new ObjformingReferenceResolver(true);
-            referenceConverter.SetReferences(serializer);
+            referenceJsonConverter.SetReferences(serializer);
 
             return serializer.Deserialize<T>(reader);
         }
@@ -72,7 +66,7 @@ namespace Objforming.Serialization.Json
         }
 
         /// <summary>
-        /// 一部を除いたすべての型をコンバート対象とするため、 <see cref="JsonSerializer.Converters"/> の最後に設定する必要がある。
+        /// ほぼすべての型をコンバート対象とするため、 <see cref="JsonSerializer.Converters"/> の最後に設定する必要がある。
         /// このコンバーターには WriteJson を実装しない。（WriteJson が呼び出された時点でデフォルトのシリアル化ができなくなるため）
         /// </summary>
         private class ObjectJsonConverter : CustomCreationConverter<object>
@@ -92,8 +86,9 @@ namespace Objforming.Serialization.Json
                     if (objectTypeDefinition == typeof(List<>)) return false;
                     if (objectTypeDefinition == typeof(Dictionary<,>)) return false;
                 }
+
+                // 上記を除いた型をコンバートの対象とする
                 return true;
-                //return base.CanConvert(objectType);
             }
 
             public override object Create(Type objectType)
@@ -103,18 +98,21 @@ namespace Objforming.Serialization.Json
 
             public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
             {
+                // "null" は null を返す
                 if (reader.TokenType == JsonToken.Null) return null;
 
+                // jObj に $ref が設定されている場合は解決を試行し、解決できればその値を返す
                 var jObj = JObject.Load(reader);
-                if (JsonConverterUtility.TryResolveReference(jObj["$ref"]?.ToString(), serializer, out var referencedValue)) return referencedValue;
+                if (ReferenceResolverUtility.TryResolveReference(jObj, serializer, out var resolvedValue)) return resolvedValue;
 
                 using var jObjReader = jObj.CreateReader();
                 jObjReader.Read();
 
                 // json の $type から型名を取得する
                 // $type が設定されていなければ objectType をそのまま使用する
-                var type = JsonConverterUtility.Text2Type(jObj["$type"]?.ToString(), objectType, serializer);
+                var type = ReferenceResolverUtility.GetType(jObj, objectType, serializer);
 
+                // $type をもとにデシリアライズする
                 foreach (var converter in serializer.Converters)
                 {
                     if (converter != this && converter.CanRead && converter.CanConvert(type))
@@ -138,7 +136,6 @@ namespace Objforming.Serialization.Json
                     $"{type} をインスタンスにできません。 Json が不正であるか、 {type} 向けコンバーターが不足している可能性があります。");
                 serializer.Populate(jObjReader, value);
                 return value;
-                //return base.ReadJson(jObjReader, type, existingValue, serializer);
             }
         }
     }

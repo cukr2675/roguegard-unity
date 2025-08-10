@@ -1,12 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-using System;
-using System.Linq;
-using System.Text.Json;
 using Objforming;
 using Objforming.Serialization.TextJson;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.Json;
 
 namespace Roguegard.Objforming.TextJson
 {
@@ -40,7 +37,7 @@ namespace Roguegard.Objforming.TextJson
         public override void Write(Utf8JsonWriter writer, object value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
-            if (JsonConverterUtility.WriteReferenceOrIDAndType(writer, value, options))
+            if (ReferenceResolverUtility.WriteReferenceOrIDAndType(writer, value, options))
             {
                 for (int i = 0; i < Former.Members.Count; i++)
                 {
@@ -74,10 +71,10 @@ namespace Roguegard.Objforming.TextJson
         public override object Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
             if (reader.TokenType == JsonTokenType.Null) return null;
-            if (JsonConverterUtility.ReadTryResolveReference(ref reader, options, out var referencedValue, out var id, out _)) return referencedValue;
+            if (ReferenceResolverUtility.ReadTryResolveReference(ref reader, options, out var resolvedValue, out var id, out _)) return resolvedValue;
 
             var value = Former.CreateInstance();
-            JsonConverterUtility.AddReference(id, value, options);
+            ReferenceResolverUtility.AddReference(id, value, options);
             while (true)
             {
                 if (reader.TokenType == JsonTokenType.EndObject) break;

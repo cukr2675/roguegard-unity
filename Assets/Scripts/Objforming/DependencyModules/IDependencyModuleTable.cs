@@ -1,7 +1,3 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-
 namespace Objforming
 {
     public interface IDependencyModuleTable<T>

@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-
 using System.Linq;
 using System.Reflection;
 
@@ -28,11 +27,11 @@ namespace Objforming
 
         public void Add(T component)
         {
-            if (component.InstanceType == null) throw new Exception(
+            if (component.InstanceType == null) throw new InvalidOperationException(
                 $"{nameof(IRelationalComponent.InstanceType)} を null にすることはできません。 ({component})");
 
             // AddAuto で不要なコンポーネントが追加されることを防ぐため、このリスト内での上書きは禁止する
-            if (OverrideAny(components, component, out var pre)) throw new Exception(
+            if (OverrideAny(components, component, out var pre)) throw new InvalidOperationException(
                 $"{typeof(RelationalComponentListBuilder<>)} 内でコンポーネントを上書きすることはできません。 {component} は {pre} を上書きします。");
 
             components.Add(component);
@@ -113,7 +112,7 @@ namespace Objforming
                         }
 
                         // AddAuto で不要なコンポーネントが追加されることを防ぐため、このリスト内での上書きは禁止する
-                        if (OverrideAny(tempComponents, instanceTypeComponent, out var pre)) throw new Exception(
+                        if (OverrideAny(tempComponents, instanceTypeComponent, out var pre)) throw new InvalidOperationException(
                             $"{nameof(AddAuto)} 内でコンポーネントを上書きすることはできません。 {instanceTypeComponent} は {pre} を上書きします。");
 
                         tempComponents.Add(instanceTypeComponent);

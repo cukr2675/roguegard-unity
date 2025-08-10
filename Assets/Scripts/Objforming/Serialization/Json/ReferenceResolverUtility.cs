@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
 
 namespace Objforming.Serialization.Json
 {
-    public static class JsonConverterUtility
+    public static class ReferenceResolverUtility
     {
         /// <summary>
         /// $ref または $id と $type を書き込む。
@@ -51,17 +49,17 @@ namespace Objforming.Serialization.Json
             serializer.SerializationBinder.BindToName(type, out var assemblyName, out _);
             if (serializer.TypeNameAssemblyFormatHandling == TypeNameAssemblyFormatHandling.Simple)
             {
-                assemblyName = assemblyName.Substring(0, assemblyName.IndexOf(','));
+                assemblyName = assemblyName[..assemblyName.IndexOf(',')];
             }
             var typeName = type.ToString();
             writer.WriteValue($"{typeName}, {assemblyName}");
         }
 
-        public static bool ReadTryResolveReference(JsonReader reader, JsonSerializer serializer, out object referencedValue, out string id, out string typeText)
+        public static bool ReadTryResolveReference(JsonReader reader, JsonSerializer serializer, out object resolvedValue, out string id, out string typeText)
         {
             if (reader.TokenType != JsonToken.StartObject) throw new JsonException($"{reader.TokenType} is not {JsonToken.StartObject}");
 
-            referencedValue = null;
+            resolvedValue = null;
             id = null;
             typeText = null;
             while (true)
@@ -74,8 +72,8 @@ namespace Objforming.Serialization.Json
                 {
                     reader.Read();
                     var reference = (string)reader.Value;
-                    referencedValue = serializer.ReferenceResolver.ResolveReference(serializer, reference);
-                    if (referencedValue == null) { ObjformingLogger.LogWarning($"$ref: {reference} は null です。"); }
+                    resolvedValue = serializer.ReferenceResolver.ResolveReference(serializer, reference);
+                    if (resolvedValue == null) { ObjformingLogger.LogWarning($"$ref: {reference} は null です。"); }
                 }
                 else if (propertyName == "$id")
                 {
@@ -92,20 +90,21 @@ namespace Objforming.Serialization.Json
                     break;
                 }
             }
-            return referencedValue != null;
+            return resolvedValue != null;
         }
 
-        public static bool TryResolveReference(string reference, JsonSerializer serializer, out object referencedValue)
+        public static bool TryResolveReference(JObject jObj, JsonSerializer serializer, out object resolvedValue)
         {
+            var reference = jObj["$ref"]?.ToString();
             if (reference != null)
             {
-                referencedValue = serializer.ReferenceResolver.ResolveReference(serializer, reference);
-                if (referencedValue == null) { ObjformingLogger.LogWarning($"$ref: {reference} は null です。"); }
+                resolvedValue = serializer.ReferenceResolver.ResolveReference(serializer, reference);
+                if (resolvedValue == null) { ObjformingLogger.LogWarning($"$ref: {reference} は null です。"); }
                 return true;
             }
             else
             {
-                referencedValue = null;
+                resolvedValue = null;
                 return false;
             }
         }
@@ -115,8 +114,9 @@ namespace Objforming.Serialization.Json
             if (id != null) { serializer.ReferenceResolver.AddReference(serializer, id, value); }
         }
 
-        public static Type Text2Type(string typeText, Type objectType, JsonSerializer serializer)
+        internal static Type GetType(JObject jObj, Type objectType, JsonSerializer serializer)
         {
+            var typeText = jObj["$type"]?.ToString();
             if (typeText != null)
             {
                 Split(typeText, out var typeName, out var assemblyName);
@@ -132,10 +132,10 @@ namespace Objforming.Serialization.Json
         {
             var typeAssemblySeparatorIndex = GetTypeAssemblySeparatorIndex(typeText);
 
-            typeName = typeText.Substring(0, typeAssemblySeparatorIndex).Trim();
-            assemblyName = typeText.Substring(typeAssemblySeparatorIndex + 1).Trim();
+            typeName = typeText[..typeAssemblySeparatorIndex].Trim();
+            assemblyName = typeText[(typeAssemblySeparatorIndex + 1)..].Trim();
 
-            int GetTypeAssemblySeparatorIndex(string text)
+            static int GetTypeAssemblySeparatorIndex(string text)
             {
                 var depth = 0;
                 for (int i = 0; i < text.Length; i++)
@@ -145,7 +145,7 @@ namespace Objforming.Serialization.Json
                     else if (item == ']') { depth--; }
                     else if (item == ',' && depth == 0) return i;
                 }
-                throw new Exception();
+                throw new InvalidOperationException();
             }
         }
     }

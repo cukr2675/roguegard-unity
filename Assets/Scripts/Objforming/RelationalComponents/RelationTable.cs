@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -6,7 +6,7 @@ namespace Objforming
 {
     public class RelationTable : IReadOnlyDictionary<Type, IEnumerable<Type>>
     {
-        private readonly Dictionary<Type, Value> table = new Dictionary<Type, Value>();
+        private readonly Dictionary<Type, Value> table = new();
 
         public IEnumerable<Type> this[Type key] => table[key];
         public IEnumerable<Type> Keys => table.Keys;
@@ -17,7 +17,7 @@ namespace Objforming
         {
         }
 
-        public RelationTable(IReadOnlyDictionary<Type, IEnumerable<Type>> source)
+        public RelationTable(IEnumerable<KeyValuePair<Type, IEnumerable<Type>>> source)
         {
             foreach (var pair in source)
             {
@@ -98,7 +98,7 @@ namespace Objforming
 
         public class Value : IEnumerable<Type>
         {
-            private readonly HashSet<Type> set = new HashSet<Type>();
+            private readonly HashSet<Type> set = new();
 
             public void Add(Type type)
             {

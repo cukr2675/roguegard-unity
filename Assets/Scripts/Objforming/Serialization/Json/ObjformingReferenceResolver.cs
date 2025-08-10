@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-
 using Newtonsoft.Json.Serialization;
+using System;
+using System.Collections.Generic;
 
 namespace Objforming.Serialization.Json
 {
@@ -11,8 +9,8 @@ namespace Objforming.Serialization.Json
     /// </summary>
     internal class ObjformingReferenceResolver : IReferenceResolver
     {
-        private readonly Dictionary<object, string> instance2IDTable = new Dictionary<object, string>();
-        private readonly Dictionary<string, object> id2InstanceTable = new Dictionary<string, object>();
+        private readonly Dictionary<object, string> instance2IDTable = new();
+        private readonly Dictionary<string, object> id2InstanceTable = new();
         private int referenceIndex = 0;
         //private object currentContext;
 
@@ -65,7 +63,7 @@ namespace Objforming.Serialization.Json
             }
             else
             {
-                throw new Exception($"$ref: {reference} が見つかりません。");
+                throw new InvalidOperationException($"$ref: {reference} が見つかりません。");
             }
         }
 

@@ -1,10 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-using Newtonsoft.Json;
 using MoonSharp.Interpreter;
+using Newtonsoft.Json;
 using Objforming.Serialization.Json;
+using System.Collections.Generic;
 
 namespace Roguegard.Rgpacks.MoonSharp.Objforming.Serialization.Json
 {
@@ -18,7 +15,7 @@ namespace Roguegard.Rgpacks.MoonSharp.Objforming.Serialization.Json
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
             writer.WriteStartObject();
-            if (JsonConverterUtility.WriteReferenceOrIDAndType(writer, value, serializer))
+            if (ReferenceResolverUtility.WriteReferenceOrIDAndType(writer, value, serializer))
             {
                 var serial = (MoonSharpTableSerial)value;
                 foreach (var pair in serial.Table.Pairs)
@@ -38,10 +35,10 @@ namespace Roguegard.Rgpacks.MoonSharp.Objforming.Serialization.Json
         public override object ReadJson(JsonReader reader, System.Type objectType, object existingValue, JsonSerializer serializer)
         {
             if (reader.TokenType == JsonToken.Null) return null;
-            if (JsonConverterUtility.ReadTryResolveReference(reader, serializer, out var referencedValue, out var id, out _)) return referencedValue;
+            if (ReferenceResolverUtility.ReadTryResolveReference(reader, serializer, out var resolvedValue, out var id, out _)) return resolvedValue;
 
             var value = (MoonSharpTableSerial)existingValue ?? new MoonSharpTableSerial();
-            JsonConverterUtility.AddReference(id, value, serializer);
+            ReferenceResolverUtility.AddReference(id, value, serializer);
             while (true)
             {
                 if (reader.TokenType == JsonToken.EndObject) break;

@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-
+using System;
 using System.Reflection;
 using System.Text.Json;
 
 namespace Objforming.Serialization.TextJson
 {
-    public static class JsonConverterUtility
+    public static class ReferenceResolverUtility
     {
         /// <summary>
         /// $ref または $id と $type を書き込む。
@@ -44,11 +41,11 @@ namespace Objforming.Serialization.TextJson
         }
 
         public static bool ReadTryResolveReference(
-            ref Utf8JsonReader reader, JsonSerializerOptions options, out object referencedValue, out string id, out string typeText)
+            ref Utf8JsonReader reader, JsonSerializerOptions options, out object resolvedValue, out string id, out string typeText)
         {
             if (reader.TokenType != JsonTokenType.StartObject) throw new JsonException($"{reader.TokenType} is not {JsonTokenType.StartObject}");
 
-            referencedValue = null;
+            resolvedValue = null;
             id = null;
             typeText = null;
             while (true)
@@ -62,8 +59,8 @@ namespace Objforming.Serialization.TextJson
                     reader.Read();
                     var reference = reader.GetString();
                     var referenceResolver = options.ReferenceHandler.CreateResolver();
-                    referencedValue = referenceResolver.ResolveReference(reference);
-                    if (referencedValue == null) { ObjformingLogger.LogWarning($"$ref: {reference} は null です。"); }
+                    resolvedValue = referenceResolver.ResolveReference(reference);
+                    if (resolvedValue == null) { ObjformingLogger.LogWarning($"$ref: {reference} は null です。"); }
                 }
                 else if (propertyName == "$id")
                 {
@@ -80,21 +77,21 @@ namespace Objforming.Serialization.TextJson
                     break;
                 }
             }
-            return referencedValue != null;
+            return resolvedValue != null;
         }
 
-        public static bool TryResolveReference(string reference, JsonSerializerOptions options, out object referencedValue)
+        public static bool TryResolveReference(string referenceId, JsonSerializerOptions options, out object resolvedValue)
         {
-            if (reference != null)
+            if (referenceId != null)
             {
                 var referenceResolver = options.ReferenceHandler.CreateResolver();
-                referencedValue = referenceResolver.ResolveReference(reference);
-                if (referencedValue == null) { ObjformingLogger.LogWarning($"$ref: {reference} は null です。"); }
+                resolvedValue = referenceResolver.ResolveReference(referenceId);
+                if (resolvedValue == null) { ObjformingLogger.LogWarning($"$ref: {referenceId} は null です。"); }
                 return true;
             }
             else
             {
-                referencedValue = null;
+                resolvedValue = null;
                 return false;
             }
         }
@@ -108,7 +105,7 @@ namespace Objforming.Serialization.TextJson
             }
         }
 
-        public static Type Text2Type(string typeText, Type objectType)
+        internal static Type GetType(string typeText, Type objectType)
         {
             if (typeText != null)
             {
@@ -127,10 +124,10 @@ namespace Objforming.Serialization.TextJson
         {
             var typeAssemblySeparatorIndex = GetTypeAssemblySeparatorIndex(typeText);
 
-            typeName = typeText.Substring(0, typeAssemblySeparatorIndex).Trim();
-            assemblyName = typeText.Substring(typeAssemblySeparatorIndex + 1).Trim();
+            typeName = typeText[..typeAssemblySeparatorIndex].Trim();
+            assemblyName = typeText[(typeAssemblySeparatorIndex + 1)..].Trim();
 
-            int GetTypeAssemblySeparatorIndex(string text)
+            static int GetTypeAssemblySeparatorIndex(string text)
             {
                 var depth = 0;
                 for (int i = 0; i < text.Length; i++)
@@ -140,7 +137,7 @@ namespace Objforming.Serialization.TextJson
                     else if (item == ']') { depth--; }
                     else if (item == ',' && depth == 0) return i;
                 }
-                throw new Exception();
+                throw new InvalidOperationException();
             }
         }
     }
