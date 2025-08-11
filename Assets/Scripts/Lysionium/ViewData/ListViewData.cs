@@ -14,8 +14,10 @@ namespace Lysionium
         private readonly List<object> tailList = new();
         protected IReadOnlyList<object> List { get; }
 
-        // 並べ替えとフィルタは Head(TItem) や Tail(TItem) とは別のほうが実用的
+        // フィルタは headList や tailList には効かないほうが実用的
         private System.Func<TItem, TMgr, TArg, bool> filter;
+
+        // 並べ替えや Map メソッドは実装しない（ビルダーの責務が増大して可読性が落ちるため）
 
         protected ListViewData()
         {
@@ -65,6 +67,9 @@ namespace Lysionium
                 : base(parent, manager, arg)
             {
             }
+
+            // 命名メモ: Prepend/Append (Linq風) ではなく Head/Tail
+            // そもそも Linq ではないのとぱっと見の見分けやすさ重視
 
             public TOut Head(object item)
             {
