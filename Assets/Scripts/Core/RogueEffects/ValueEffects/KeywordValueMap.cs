@@ -5,7 +5,7 @@ namespace Roguegard
     /// <summary>
     /// 未登録の値は 0 に相当する連想配列クラス。
     /// </summary>
-    public class KeywordValueTable
+    public class KeywordValueMap
     {
         private readonly Dictionary<IKeyword, float> subValues = new();
 
@@ -33,12 +33,12 @@ namespace Roguegard
             return this[key] != 0f;
         }
 
-        public void CopyTo(KeywordValueTable table)
+        public void CopyTo(KeywordValueMap map)
         {
-            table.Clear();
+            map.Clear();
             foreach (var pair in subValues)
             {
-                table.subValues.Add(pair.Key, pair.Value);
+                map.subValues.Add(pair.Key, pair.Value);
             }
         }
     }

@@ -6,7 +6,7 @@ namespace Roguegard
     {
         public float BaseMainValue { get; set; }
         public float MainValue { get; set; }
-        public KeywordValueTable SubValues { get; } = new();
+        public KeywordValueMap SubValues { get; } = new();
 
         private static readonly Stack<EffectableValue> poolingStack = new();
 
