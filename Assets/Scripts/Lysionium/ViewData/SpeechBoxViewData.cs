@@ -124,6 +124,12 @@ namespace Lysionium
                 Tail(BackSelectOption.Instance);
                 return this;
             }
+
+            protected override void Unload()
+            {
+                base.Unload();
+                Parent.OnCompleted = null;
+            }
         }
 
         public class StringReplacer

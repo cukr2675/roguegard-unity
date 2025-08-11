@@ -117,6 +117,12 @@ namespace Lysionium
                 Parent.ClickLink += onClickLink;
                 return this;
             }
+
+            protected override void Unload()
+            {
+                base.Unload();
+                Parent.ClickLink = null;
+            }
         }
     }
 }

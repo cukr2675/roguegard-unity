@@ -162,6 +162,16 @@ namespace Lysionium
                 Parent.scrollSubviewHandler.Click += handler;
                 return this;
             }
+
+            protected override void Unload()
+            {
+                base.Unload();
+                Parent.scrollSubviewHandler.GetName = null;
+                Parent.scrollSubviewHandler.GetStyle = null;
+                Parent.scrollSubviewHandler.Click = null;
+                Parent.onShow = null;
+                Parent.onHide = null;
+            }
         }
     }
 }

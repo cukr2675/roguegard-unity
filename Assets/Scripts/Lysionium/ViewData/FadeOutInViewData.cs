@@ -96,6 +96,13 @@ namespace Lysionium
                 Parent.HandleFadeIn += onFadeIn;
                 return this;
             }
+
+            protected override void Unload()
+            {
+                base.Unload();
+                Parent.HandleFadeOut = null;
+                Parent.HandleFadeIn = null;
+            }
         }
     }
 }

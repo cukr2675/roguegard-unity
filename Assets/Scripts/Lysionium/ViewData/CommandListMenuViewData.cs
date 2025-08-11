@@ -130,6 +130,14 @@ namespace Lysionium
                 Parent.secodaryCommandSubviewHandler.Click += handler;
                 return this;
             }
+
+            protected override void Unload()
+            {
+                base.Unload();
+                Parent.secodaryCommandSubviewHandler.GetName = null;
+                Parent.secodaryCommandSubviewHandler.GetStyle = null;
+                Parent.secodaryCommandSubviewHandler.Click = null;
+            }
         }
     }
 }
