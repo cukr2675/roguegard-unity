@@ -25,7 +25,7 @@ namespace Objforming
             this.components = new List<T>(components);
         }
 
-        public void Add(T component)
+        public RelationalComponentListBuilder<T> Add(T component)
         {
             if (component.InstanceType == null) throw new InvalidOperationException(
                 $"{nameof(IRelationalComponent.InstanceType)} を null にすることはできません。 ({component})");
@@ -35,6 +35,7 @@ namespace Objforming
                 $"{typeof(RelationalComponentListBuilder<>)} 内でコンポーネントを上書きすることはできません。 {component} は {pre} を上書きします。");
 
             components.Add(component);
+            return this;
         }
 
         private bool OverrideAny<TC>(IEnumerable<TC> list, TC component, out TC pre)
@@ -52,12 +53,13 @@ namespace Objforming
             return false;
         }
 
-        public void AddRange(IEnumerable<T> components)
+        public RelationalComponentListBuilder<T> AddRange(IEnumerable<T> components)
         {
             foreach (var component in components)
             {
                 Add(component);
             }
+            return this;
         }
 
         /// <summary>
@@ -65,7 +67,7 @@ namespace Objforming
         /// このリストに追加済みの要素または <paramref name="relationalComponentCreator"/> の戻り値の、
         /// <see cref="IRelationalComponent.FieldTypes"/> で出現しない型に対しては実行・追加しない。
         /// </summary>
-        public void AddAuto(IEnumerable<Assembly> assemblies, Func<Type, IRelationalComponent> relationalComponentCreator)
+        public RelationalComponentListBuilder<T> AddAuto(IEnumerable<Assembly> assemblies, Func<Type, IRelationalComponent> relationalComponentCreator)
         {
             var instanceTypes = assemblies.SelectMany(x => x.GetTypes()).Where(type => !type.IsAbstract && !type.IsInterface).ToArray();
             var types = new HashSet<Type>();
@@ -120,13 +122,14 @@ namespace Objforming
                     }
                 }
             }
+            return this;
         }
 
         /// <summary>
         /// 要素の <see cref="IRelationalComponent.InstanceType"/> と <see cref="IRelationalComponent.FieldTypes"/> で出現するすべての型から、
         /// <see cref="object"/> 型を除いた配列を取得する。
         /// </summary>
-        public Type[] GetTypesOtherThanObject()
+        internal Type[] GetTypesOtherThanObject()
         {
             var types = new HashSet<Type>();
             for (int i = 0; i < components.Count; i++)
