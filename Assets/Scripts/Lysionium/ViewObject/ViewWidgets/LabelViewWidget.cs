@@ -100,11 +100,11 @@ namespace Lysionium
         }
 
         public static IWidgetOption CreateOption<TMgr, TArg>(
-            System.Func<TMgr, TArg, string> getText, ClickItemHandler<string, TMgr, TArg> onClickLink = null)
+            System.Func<TMgr, TArg, string> text, ClickItemHandler<string, TMgr, TArg> onClickLink = null)
         {
             return new WidgetOption<TMgr, TArg>()
             {
-                GetText = getText,
+                GetText = text,
                 ClickLink = onClickLink
             };
         }

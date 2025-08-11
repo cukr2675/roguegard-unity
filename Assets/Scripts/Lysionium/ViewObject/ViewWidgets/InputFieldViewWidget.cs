@@ -47,14 +47,14 @@ namespace Lysionium
         }
 
         public static IWidgetOption CreateOption<TMgr, TArg>(
-            System.Func<TMgr, TArg, string> getValue, InputFieldEventHandler<TMgr, TArg> handleValueChanged,
+            System.Func<TMgr, TArg, string> value, InputFieldEventHandler<TMgr, TArg> handleValueChanged,
             TMP_InputField.ContentType contentType = TMP_InputField.ContentType.Standard, string name = null)
         {
             return new WidgetOption<TMgr, TArg>()
             {
                 Name = name ?? EmitIdentity("InputFieldViewWidget"),
                 ContentType = contentType,
-                GetValue = getValue,
+                GetValue = value,
                 HandleValueChanged = handleValueChanged
             };
         }

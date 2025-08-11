@@ -45,12 +45,12 @@ namespace Lysionium
             }
         }
 
-        public static IWidgetOption CreateOption<TMgr, TArg>(System.Func<TMgr, TArg, float> getProgress, string name = null)
+        public static IWidgetOption CreateOption<TMgr, TArg>(System.Func<TMgr, TArg, float> progress, string name = null)
         {
             return new WidgetOption<TMgr, TArg>()
             {
                 Name = name ?? EmitIdentity("ProgressBarViewWidget"),
-                GetProgress = getProgress
+                GetProgress = progress
             };
         }
 

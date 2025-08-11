@@ -46,7 +46,7 @@ namespace Lysionium
         }
 
         public static IWidgetOption CreateOption<TMgr, TArg>(
-            System.Func<TMgr, TArg, float> getValue, SliderEventHandler<TMgr, TArg> onValueChanged,
+            System.Func<TMgr, TArg, float> value, SliderEventHandler<TMgr, TArg> onValueChanged,
             float minValue = 0f, float maxValue = 100f, string name = null)
         {
             return new WidgetOption<TMgr, TArg>()
@@ -54,7 +54,7 @@ namespace Lysionium
                 Name = name ?? EmitIdentity("SliderViewWidget"),
                 MinValue = minValue,
                 MaxValue = maxValue,
-                GetValue = getValue,
+                GetValue = value,
                 HandleValueChanged = onValueChanged
             };
         }
