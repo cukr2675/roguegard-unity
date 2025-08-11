@@ -32,6 +32,8 @@ namespace Lysionium
         private ISubviewStateProvider backAnchorSubviewStateProvider;
 
         private readonly ButtonViewItemHandler<TItem, TMgr, TArg> scrollSubviewHandler = new();
+        private LuiEventHandler onShow;
+        private LuiEventHandler onHide;
 
         public Builder Show(TItem[] list, TMgr manager, TArg arg, object viewStateHolder = null)
         {
@@ -70,9 +72,11 @@ namespace Lysionium
 
         protected override void ShowSubviews(TMgr manager, TArg arg)
         {
+            onShow?.Invoke(manager, arg);
+
             manager
                 .GetSubview(ScrollSubviewName)
-                .Show(List, scrollSubviewHandler, manager, arg, ref scrollSubviewStateProvider);
+                .Show(List, scrollSubviewHandler, manager, arg, ref scrollSubviewStateProvider, onHide: onHide);
 
             if (Title != null)
             {
@@ -101,6 +105,34 @@ namespace Lysionium
             public Builder(ScrollMenuViewData<TItem, TMgr, TArg> parent, TMgr manager, TArg arg)
                 : base(parent, manager, arg)
             {
+            }
+
+            public Builder OnShow(LuiEventHandler<TMgr, TArg> handler)
+            {
+                AssertNotBuilt();
+
+                Parent.onShow += (manager, arg) =>
+                {
+                    if (LuiAssert.Type<TMgr>(manager, out var tMgr, manager) ||
+                        LuiAssert.Type<TArg>(arg, out var tArg, manager)) return;
+
+                    handler(tMgr, tArg);
+                };
+                return this;
+            }
+
+            public Builder OnHide(LuiEventHandler<TMgr, TArg> handler)
+            {
+                AssertNotBuilt();
+
+                Parent.onHide += (manager, arg) =>
+                {
+                    if (LuiAssert.Type<TMgr>(manager, out var tMgr, manager) ||
+                        LuiAssert.Type<TArg>(arg, out var tArg, manager)) return;
+
+                    handler(tMgr, tArg);
+                };
+                return this;
             }
 
             public Builder NameFrom(System.Func<TItem, TMgr, TArg, string> selector)
