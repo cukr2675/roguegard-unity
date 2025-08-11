@@ -15,8 +15,8 @@ namespace Lysionium
             IReadOnlyList<object> list, IViewItemHandler handler, IListMenuManager manager, IListMenuArg arg,
             ref ISubviewStateProvider stateProvider);
 
-        void Show(EndAnimationHandler onEndAnimation = null);
+        void Show(LuiEventHandler onEndAnimation = null);
 
-        void Hide(bool back, EndAnimationHandler onEndAnimation = null);
+        void Hide(bool back, LuiEventHandler onEndAnimation = null);
     }
 }

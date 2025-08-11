@@ -4,5 +4,5 @@ namespace Lysionium
 
     public delegate void ClickItemHandler<TMgr, TArg>(TMgr manager, TArg arg);
 
-    public delegate void EndAnimationHandler(IListMenuManager manager, IListMenuArg arg);
+    public delegate void LuiEventHandler(IListMenuManager manager, IListMenuArg arg);
 }

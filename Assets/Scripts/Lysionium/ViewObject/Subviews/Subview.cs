@@ -11,7 +11,7 @@ namespace Lysionium
     {
         private CanvasGroup canvasGroup;
 
-        protected event EndAnimationHandler OnEndAnimation;
+        protected event LuiEventHandler OnEndAnimation;
 
         /// <summary>
         /// この Subview 内で最後に選択された <see cref="GameObject"/>
@@ -71,7 +71,7 @@ namespace Lysionium
             canvasGroup.interactable = interactable;
         }
 
-        public virtual void Show(EndAnimationHandler onEndAnimation = null)
+        public virtual void Show(LuiEventHandler onEndAnimation = null)
         {
             SetInteractable(true);
             AnimatorTupple.TrySetVisible(this, true);
@@ -82,7 +82,7 @@ namespace Lysionium
             }
         }
 
-        public virtual void Hide(bool back, EndAnimationHandler onEndAnimation = null)
+        public virtual void Hide(bool back, LuiEventHandler onEndAnimation = null)
         {
             if (back) { SetStatusCode(backStatusCode); }
             SetInteractable(false);

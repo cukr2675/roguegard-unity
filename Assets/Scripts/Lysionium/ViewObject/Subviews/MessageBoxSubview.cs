@@ -19,7 +19,7 @@ namespace Lysionium
 
         private bool isSpeechingNow;
 
-        private event EndAnimationHandler OnCompleted;
+        private event LuiEventHandler OnCompleted;
 
         protected override void CommonInitCore()
         {
@@ -64,7 +64,7 @@ namespace Lysionium
             }
         }
 
-        public void DoScheduledAfterCompletion(EndAnimationHandler onEndAnimation)
+        public void DoScheduledAfterCompletion(LuiEventHandler onEndAnimation)
         {
             OnCompleted += onEndAnimation;
         }
