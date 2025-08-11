@@ -13,6 +13,7 @@ namespace Lysionium
 
         protected event LuiEventHandler OnEndAnimation;
         protected event LuiEventHandler OnHide;
+        private bool justShowed;
 
         /// <summary>
         /// この Subview 内で最後に選択された <see cref="GameObject"/>
@@ -74,10 +75,15 @@ namespace Lysionium
 
         public virtual void Show(LuiEventHandler onEndAnimation = null, LuiEventHandler onHide = null)
         {
-            OnEndAnimation = null;
+            var tempOnHide = OnHide;
             OnHide = null;
+            tempOnHide?.Invoke(Manager, Arg);
+
             SetInteractable(true);
             AnimatorTupple.TrySetVisible(this, true);
+
+            if (!justShowed) { onEndAnimation = null; }
+            justShowed = true;
 
             if (onEndAnimation != null) { OnEndAnimation += onEndAnimation; }
             if (onHide != null) { OnHide += onHide; }
@@ -89,10 +95,12 @@ namespace Lysionium
             OnHide = null;
             tempOnHide?.Invoke(Manager, Arg);
 
-            OnEndAnimation = null;
             if (back) { SetStatusCode(backStatusCode); }
             SetInteractable(false);
             AnimatorTupple.TrySetVisible(this, false);
+
+            if (justShowed) { onEndAnimation = null; }
+            justShowed = false;
 
             if (onEndAnimation != null) { OnEndAnimation += onEndAnimation; }
         }
