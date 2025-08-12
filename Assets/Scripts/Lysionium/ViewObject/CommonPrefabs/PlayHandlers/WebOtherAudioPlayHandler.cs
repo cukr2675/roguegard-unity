@@ -34,7 +34,7 @@ namespace Lysionium.Audio
 
         public bool Wait => waitSource?.IsPlaying ?? false;
 
-        private void Awake()
+        protected virtual void Awake()
         {
 #if !UNITY_EDITOR && UNITY_WEBGL
             var audioPlayTable = _webAudioPlayTable;

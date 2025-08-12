@@ -136,7 +136,7 @@ namespace Lysionium
         #region Editor Only
 
 #if UNITY_EDITOR
-        private void OnDrawGizmosSelected()
+        protected virtual void OnDrawGizmosSelected()
         {
             if (_content == null) return;
 

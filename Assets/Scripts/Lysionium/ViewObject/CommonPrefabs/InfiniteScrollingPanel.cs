@@ -11,13 +11,13 @@ namespace Lysionium
         private Vector2 startPosition;
         private float elapsedTime;
 
-        private void Start()
+        protected virtual void Start()
         {
             startPosition = transform.localPosition;
             elapsedTime = 0f;
         }
 
-        private void Update()
+        protected virtual void Update()
         {
             elapsedTime += Time.deltaTime;
             if (elapsedTime >= _repeatTime)

@@ -80,7 +80,7 @@ namespace Lysionium
         public bool IsTypingNow => enabled && _characterPerSecond > 0f && !textTypingEffect.IsEof && !_isScrollingNow;
         public bool IsScrollingNow => _isScrollingNow;
 
-        private void Awake()
+        protected virtual void Awake()
         {
             textTypingEffect = new TextTypingEffect(_text, _maxLineCount, _hiddenLinkIdOnPageOver, _hiddenLinkIdOnEof, _onReachHiddenLink);
             textRuleEffect = new TextHorizontalRuler(_horizontalRulePrefab, _rulesContent, _maxLineCount, textTypingEffect.LineHeight, _text.margin.y);
@@ -105,7 +105,7 @@ namespace Lysionium
             }
         }
 
-        private void Update()
+        protected virtual void Update()
         {
             if (!_isScrollingNow)
             {
@@ -126,7 +126,7 @@ namespace Lysionium
             }
         }
 
-        private void LateUpdate()
+        protected virtual void LateUpdate()
         {
             ScrollPosition = Mathf.LerpUnclamped(startLineOffset, CalculateTargetTextOffset(), _normalizedLineOffset);
             textRuleEffect.UpdateLines(ScrollPosition);

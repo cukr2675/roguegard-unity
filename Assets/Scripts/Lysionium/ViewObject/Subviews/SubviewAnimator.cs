@@ -64,7 +64,7 @@ namespace Lysionium
             return subviewAnimator;
         }
 
-        private void Awake()
+        protected virtual void Awake()
         {
 #if UNITY_EDITOR
             _onPlayString.AddListener(Log);
@@ -140,7 +140,7 @@ namespace Lysionium
 #endif
         }
 
-        private void Update()
+        protected virtual void Update()
         {
             // 予約されたカーソル移動処理を実行する
             if (queuedCancelSelection)
@@ -155,7 +155,7 @@ namespace Lysionium
 
         }
 
-        private void LateUpdate()
+        protected virtual void LateUpdate()
         {
             // 監視されていないカーソル移動を検知する
             var currentSelectedGameObject = EventSystem.current.currentSelectedGameObject;

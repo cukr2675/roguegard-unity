@@ -21,13 +21,13 @@ namespace Lysionium
         private SubviewAnimator parentAnimator;
         private bool queuedDisableInteractable;
 
-        private void Awake()
+        protected virtual void Awake()
         {
             selectable = GetComponent<Selectable>();
             LuiUtility.TryGetComponentInRecursiveParents(transform.parent, out parentSelectable);
         }
 
-        private void Update()
+        protected virtual void Update()
         {
             if (queuedDisableInteractable)
             {
@@ -63,7 +63,7 @@ namespace Lysionium
         #region Editor Only
 
 #if UNITY_EDITOR
-        private void OnDrawGizmos()
+        protected virtual void OnDrawGizmos()
         {
             if (!UnityEditor.EditorPrefs.GetBool("SelectableEditor.ShowNavigation")) return;
             if (UnityEditor.Selection.activeGameObject == null) return;

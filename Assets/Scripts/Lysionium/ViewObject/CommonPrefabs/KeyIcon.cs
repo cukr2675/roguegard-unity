@@ -15,7 +15,7 @@ namespace Lysionium
         private LayoutElement layoutElement;
         private RectTransform keySpriteTransform;
 
-        private void Awake()
+        protected virtual void Awake()
         {
             layoutElement = GetComponent<LayoutElement>();
             keySpriteTransform = _keySprite.GetComponent<RectTransform>();

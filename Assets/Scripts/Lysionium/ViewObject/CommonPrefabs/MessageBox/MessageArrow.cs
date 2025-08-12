@@ -12,7 +12,7 @@ namespace Lysionium
         [SerializeField] private int _deltaCharacterIndex = 0;
         [SerializeField] private float _normalizedX = .5f;
 
-        private void Update()
+        protected virtual void Update()
         {
             transform.localPosition = _target.GetCurrentCharacterPosition(_deltaCharacterIndex, _normalizedX);
         }

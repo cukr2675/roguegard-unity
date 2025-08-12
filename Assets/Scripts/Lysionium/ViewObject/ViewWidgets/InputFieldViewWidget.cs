@@ -64,7 +64,7 @@ namespace Lysionium
             queuedDeactivateInputField = true;
         }
 
-        private void LateUpdate()
+        protected virtual void LateUpdate()
         {
             if (queuedDeactivateInputField)
             {

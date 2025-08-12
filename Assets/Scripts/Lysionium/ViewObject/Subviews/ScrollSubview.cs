@@ -187,7 +187,7 @@ namespace Lysionium
             }
         }
 
-        private void LateUpdate()
+        protected virtual void LateUpdate()
         {
             if (!CursorImageSystem.ShowCursor) return;
 

@@ -64,7 +64,7 @@ namespace Lysionium
             OnEndRotateAngle += onEndRotateAngle;
         }
 
-        private void LateUpdate()
+        protected virtual void LateUpdate()
         {
             if (viewItems.Count == 0) return;
 

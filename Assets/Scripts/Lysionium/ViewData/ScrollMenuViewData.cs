@@ -72,8 +72,6 @@ namespace Lysionium
 
         protected override void ShowSubviews(TMgr manager, TArg arg)
         {
-            onShow?.Invoke(manager, arg);
-
             manager
                 .GetSubview(ScrollSubviewName)
                 .Show(List, scrollSubviewHandler, manager, arg, ref scrollSubviewStateProvider, onHide: onHide);
@@ -91,6 +89,9 @@ namespace Lysionium
                     .GetSubview(BackAnchorSubviewName)
                     .Show(BackAnchorList, SelectOptionViewItemHandler.Instance, manager, arg, ref backAnchorSubviewStateProvider);
             }
+
+            // 上記の Show によって実行される onHide の後に onShow を呼び出す
+            onShow?.Invoke(manager, arg);
         }
 
         public virtual void Hide(TMgr manager, bool back)

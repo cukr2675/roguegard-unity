@@ -71,7 +71,7 @@ namespace Lysionium
             }
         }
 
-        private void Awake()
+        protected virtual void Awake()
         {
             if (TryGetComponent(out animator))
             {

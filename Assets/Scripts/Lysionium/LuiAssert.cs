@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Lysionium
 {
-    internal static class LuiAssert
+    public static class LuiAssert
     {
         public static bool Type<T>(object instance, out T castedInstance, IListMenuManager manager = null)
         {

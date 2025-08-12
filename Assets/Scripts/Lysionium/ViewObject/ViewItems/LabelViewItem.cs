@@ -9,7 +9,7 @@ namespace Lysionium
     {
         private TMP_Text text;
 
-        private void Awake()
+        protected virtual void Awake()
         {
             TryGetComponent(out text);
         }

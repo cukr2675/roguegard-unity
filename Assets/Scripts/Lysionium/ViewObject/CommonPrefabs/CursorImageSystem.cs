@@ -26,7 +26,7 @@ namespace Lysionium
         private static CursorImageSystem current;
         public static bool ShowCursor => !current.hide;
 
-        private void OnEnable()
+        protected virtual void OnEnable()
         {
             current = this;
             _hideAction.action.performed += OnTouch;
@@ -35,7 +35,7 @@ namespace Lysionium
             _showAction.action.Enable();
         }
 
-        private void OnDisable()
+        protected virtual void OnDisable()
         {
             if (current == this) { current = null; }
             _hideAction.action.performed -= OnTouch;
@@ -54,7 +54,7 @@ namespace Lysionium
             hide = false;
         }
 
-        private void Update()
+        protected virtual void Update()
         {
             if (!cursorInstance)
             {

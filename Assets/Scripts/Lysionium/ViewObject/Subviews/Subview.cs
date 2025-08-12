@@ -54,6 +54,13 @@ namespace Lysionium
         /// </summary>
         protected virtual void CommonInitCore() { }
 
+        protected virtual void OnDestroy()
+        {
+            var tempOnHide = OnHide;
+            OnHide = null;
+            tempOnHide?.Invoke(Manager, Arg);
+        }
+
         public abstract void SetParameters(
             IReadOnlyList<object> list, IViewItemHandler handler, IListMenuManager manager, IListMenuArg arg,
             ref ISubviewStateProvider stateProvider);

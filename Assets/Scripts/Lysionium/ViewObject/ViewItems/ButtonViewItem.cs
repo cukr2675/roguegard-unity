@@ -25,7 +25,7 @@ namespace Lysionium
         private object item;
         private string style;
 
-        private void Awake()
+        protected virtual void Awake()
         {
             var button = GetComponent<Button>();
             button.onClick.AddListener(() =>
@@ -45,7 +45,7 @@ namespace Lysionium
 
             if (_text != null)
             {
-                _text.text = Manager.Localize(name);
+                _text.text = Manager.Localize(ItemName);
             }
 
             if (_icon != null && handler is IColoredIconViewItemHandler iconViewItemHandler)
@@ -167,12 +167,6 @@ namespace Lysionium
             {
                 yield return animator.GetLayerName(i);
             }
-        }
-
-        private void OnDestroy()
-        {
-            // キーバインドを解除するためにスタイルをリセット
-            SetStyle(null);
         }
     }
 }
