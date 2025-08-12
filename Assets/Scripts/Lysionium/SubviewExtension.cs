@@ -7,7 +7,7 @@ namespace Lysionium
         public static void Show(
             this ISubview subview, IReadOnlyList<object> list, IViewItemHandler handler,
             IListMenuManager manager, IListMenuArg arg, ref ISubviewStateProvider stateProvider,
-            LuiEventHandler onEndAnimation = null, LuiEventHandler onHide = null)
+            ListMenuEventHandler onEndAnimation = null, ListMenuEventHandler onHide = null)
         {
             subview.SetParameters(list, handler, manager, arg, ref stateProvider);
             subview.Show(onEndAnimation, onHide);

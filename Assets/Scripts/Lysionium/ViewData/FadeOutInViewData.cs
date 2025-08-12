@@ -17,8 +17,8 @@ namespace Lysionium
         private event ClickItemHandler<TMgr, TArg> HandleFadeIn;
 
         private readonly List<object> widgetOptions = new();
-        private readonly LuiEventHandler onFadeOutAnimation;
-        private readonly LuiEventHandler onFadeInAnimation;
+        private readonly ListMenuEventHandler onFadeOutAnimation;
+        private readonly ListMenuEventHandler onFadeInAnimation;
 
         public FadeOutInViewData()
         {

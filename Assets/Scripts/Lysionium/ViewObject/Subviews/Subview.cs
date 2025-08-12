@@ -11,8 +11,8 @@ namespace Lysionium
     {
         private CanvasGroup canvasGroup;
 
-        protected event LuiEventHandler OnEndAnimation;
-        protected event LuiEventHandler OnHide;
+        protected event ListMenuEventHandler OnEndAnimation;
+        protected event ListMenuEventHandler OnHide;
         private bool justShowed;
 
         /// <summary>
@@ -80,7 +80,7 @@ namespace Lysionium
             canvasGroup.interactable = interactable;
         }
 
-        public virtual void Show(LuiEventHandler onEndAnimation = null, LuiEventHandler onHide = null)
+        public virtual void Show(ListMenuEventHandler onEndAnimation = null, ListMenuEventHandler onHide = null)
         {
             var tempOnHide = OnHide;
             OnHide = null;
@@ -96,7 +96,7 @@ namespace Lysionium
             if (onHide != null) { OnHide += onHide; }
         }
 
-        public virtual void Hide(bool back, LuiEventHandler onEndAnimation = null)
+        public virtual void Hide(bool back, ListMenuEventHandler onEndAnimation = null)
         {
             var tempOnHide = OnHide;
             OnHide = null;
