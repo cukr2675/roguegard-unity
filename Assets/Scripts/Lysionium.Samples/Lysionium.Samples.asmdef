@@ -1,0 +1,19 @@
+{
+    "name": "Lysionium.Samples",
+    "rootNamespace": "Lysionium.Samples",
+    "references": [
+        "GUID:39cbc532d78a39c47a64cb722d1c8a72",
+        "GUID:6761aefac4418ce41a9a75db2bdf5ba0",
+        "GUID:6055be8ebefd69e48b49212b09b47b2f",
+        "GUID:75469ad4d38634e559750d17036d5f7c"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
