@@ -2,9 +2,9 @@ using UnityEngine;
 
 namespace Roguegard
 {
-    [CreateAssetMenu(menuName = "Roguegard/Keyword/Equip")]
+    [CreateAssetMenu(menuName = "Roguegard/Keyword/Equipment Slot")]
     [Objforming.Referable]
-    public class EquipKeywordAsset : SerializableKeywordAsset
+    public class EquipmentSlotKeywordAsset : SerializableKeywordAsset
     {
         [Header("Equip")]
         [SerializeField] private float _order = 0f;

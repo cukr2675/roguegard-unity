@@ -198,21 +198,21 @@ namespace Roguegard
             {
                 keywords ??= new ISerializableKeyword[]
                 {
-                    //EquipKw.Shield,
-                    //EquipKw.Weapon,
-                    //EquipKw.Ammo,
-                    EquipKw.Headwear,
-                    EquipKw.Cloak,
-                    //EquipKw.Accessory,
-                    //EquipKw.BodyArmor,
-                    EquipKw.Tops,
-                    EquipKw.Boots,
-                    EquipKw.Bottoms,
-                    EquipKw.Glasses,
-                    EquipKw.FaceMask,
-                    EquipKw.Gloves,
-                    EquipKw.Socks,
-                    EquipKw.Innerwear,
+                    //EquipmentSlotKw.Shield,
+                    //EquipmentSlotKw.Weapon,
+                    //EquipmentSlotKw.Ammo,
+                    EquipmentSlotKw.Headwear,
+                    EquipmentSlotKw.Cloak,
+                    //EquipmentSlotKw.Accessory,
+                    //EquipmentSlotKw.BodyArmor,
+                    EquipmentSlotKw.Tops,
+                    EquipmentSlotKw.Boots,
+                    EquipmentSlotKw.Bottoms,
+                    EquipmentSlotKw.Glasses,
+                    EquipmentSlotKw.FaceMask,
+                    EquipmentSlotKw.Gloves,
+                    EquipmentSlotKw.Socks,
+                    EquipmentSlotKw.Innerwear,
                     null
                 };
 
@@ -235,7 +235,7 @@ namespace Roguegard
                         {
                             data.SetEquipmentSlots(new[] { slot });
 
-                            if (slot is EquipKeywordAsset keyword)
+                            if (slot is EquipmentSlotKeywordAsset keyword)
                             {
                                 data.BoneSpriteEffectOrder = keyword.Order;
                             }

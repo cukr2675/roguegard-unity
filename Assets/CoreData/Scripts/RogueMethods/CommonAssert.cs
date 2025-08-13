@@ -7,7 +7,7 @@ namespace Roguegard
         public static bool ObjDoesNotHaveToolAbility(RogueObj obj)
         {
             var equipmentState = obj.Main.GetEquipmentState(obj);
-            if (equipmentState == null || equipmentState.GetLength(EquipKw.Weapon) == -1)
+            if (equipmentState == null || equipmentState.GetLength(EquipmentSlotKw.Weapon) == -1)
             {
                 if (RogueDevice.Primary.Player == obj)
                 {

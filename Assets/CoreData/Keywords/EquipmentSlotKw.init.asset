@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f3c9e8ba52224cf4e96297aac419669f, type: 3}
-  m_Name: EquipKw.init
+  m_Name: EquipmentSlotKw.init
   m_EditorClassIdentifier: 
   _accessory: {fileID: 11400000, guid: 343599ea2c47b7545949b99582567a27, type: 2}
   _ammo: {fileID: 11400000, guid: d21eebdbb823a8a45938ccc35e91ddee, type: 2}

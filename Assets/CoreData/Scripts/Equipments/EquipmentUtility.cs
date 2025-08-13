@@ -29,9 +29,9 @@ namespace Roguegard
             weaponInfo = default;
             var ownerEquipmentState = owner.Main.GetEquipmentState(owner);
             if (ownerEquipmentState == null) return null;
-            if (ownerEquipmentState.GetLength(EquipKw.Weapon) <= 0) return null;
+            if (ownerEquipmentState.GetLength(EquipmentSlotKw.Weapon) <= 0) return null;
 
-            var weapon = ownerEquipmentState.GetEquipment(EquipKw.Weapon, 0);
+            var weapon = ownerEquipmentState.GetEquipment(EquipmentSlotKw.Weapon, 0);
             if (weapon == null) return null;
 
             weaponInfo = GetWeaponInfo(weapon);
@@ -56,9 +56,9 @@ namespace Roguegard
             ammoInfo = default;
             var ownerEquipmentState = owner.Main.GetEquipmentState(owner);
             if (ownerEquipmentState == null) return null;
-            if (ownerEquipmentState.GetLength(EquipKw.Ammo) <= 0) return null;
+            if (ownerEquipmentState.GetLength(EquipmentSlotKw.Ammo) <= 0) return null;
 
-            var ammo = ownerEquipmentState.GetEquipment(EquipKw.Ammo, 0);
+            var ammo = ownerEquipmentState.GetEquipment(EquipmentSlotKw.Ammo, 0);
             if (ammo == null) return null;
 
             ammoInfo = GetAmmoInfo(ammo);

@@ -109,7 +109,7 @@ namespace RoguegardUnity.Tests
             Debug.Log($"{nameof(equipmentInfo.EquippedSubslot)} != {-1}");
 
             var equipmentState = player.Main.GetEquipmentState(player);
-            var equipEquipment = equipmentState.GetEquipment(EquipKw.Bottoms, 0);
+            var equipEquipment = equipmentState.GetEquipment(EquipmentSlotKw.Bottoms, 0);
             if (equipEquipment != equipment)
             {
                 Debug.LogError($"{nameof(equipmentState.GetEquipment)} != {nameof(equipment)}");
@@ -137,7 +137,7 @@ namespace RoguegardUnity.Tests
             }
             Debug.Log($"シリアル化で装備が解除されませんでした。");
 
-            var jEquipEquipment = jPlayer.Main.GetEquipmentState(jPlayer).GetEquipment(EquipKw.Bottoms, 0);
+            var jEquipEquipment = jPlayer.Main.GetEquipmentState(jPlayer).GetEquipment(EquipmentSlotKw.Bottoms, 0);
             if (jEquipEquipment != jEquipment)
             {
                 Debug.LogError($"逆シリアル化: {nameof(RideRogueEffect.GetVehicle)} != {nameof(jEquipment)}");

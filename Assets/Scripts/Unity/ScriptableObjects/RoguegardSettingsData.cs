@@ -53,7 +53,7 @@ namespace RoguegardUnity
 
         [Header("Global Assets")]
         [SerializeField] private ScriptRef<ILevelInfoInitializer> _levelInfoInitializer = null;
-        [SerializeField] private EquipKeywordAsset _equipmentSlotOfInnerwear = null;
+        [SerializeField] private EquipmentSlotKeywordAsset _equipmentSlotOfInnerwear = null;
         [SerializeField] private DefaultRaceOptionAsset _defaultRaceOption = null;
         [SerializeField] private ObjCommandTableAsset _objCommandTable = null;
         [SerializeField] private DungeonQuestGeneratorAsset _dungeonQuestGenerator = null;
