@@ -18,11 +18,19 @@ namespace Objforming.Serialization.TextJson
         {
             var member = Former.Members[0];
             var memberValue = member.GetValue(value);
+
+            if (memberValue == null)
+            {
+                ObjformingLogger.LogWarning($"ラッパークラスインスタンス {value} の値が null です。このインスタンスは逆シリアル化時に null となります。");
+            }
+
             JsonSerializer.Serialize(writer, memberValue, member.FieldType, options);
         }
 
         public override object Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
+            if (reader.TokenType == JsonTokenType.Null) return null;
+
             var member = Former.Members[0];
             var memberValue = JsonSerializer.Deserialize(ref reader, member.FieldType, options);
 
