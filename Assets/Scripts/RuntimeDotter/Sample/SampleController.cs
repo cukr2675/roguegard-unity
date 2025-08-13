@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,7 +8,7 @@ namespace RuntimeDotter.Sample
     {
         [SerializeField] private DotterToolSet _toolSet = null;
 
-        private void Start()
+        protected virtual void Start()
         {
             var size = Vector2Int.one * 32;
             //var palette = new Color32[16]

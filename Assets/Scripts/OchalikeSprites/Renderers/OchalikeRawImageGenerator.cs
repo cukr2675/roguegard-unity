@@ -31,7 +31,7 @@ namespace OchalikeSprites
         private int backBonesCount;
         private SpritePose enabledImmutablePose;
 
-        private void Awake()
+        protected virtual void Awake()
         {
             if (renderController != null) return;
 
@@ -55,7 +55,7 @@ namespace OchalikeSprites
             renderController = new RenderController() { material = _material, offset = _spriteOffset };
         }
 
-        private void OnDestroy()
+        protected virtual void OnDestroy()
         {
             RenderTexture.ReleaseTemporary(renderTexture);
         }
@@ -125,7 +125,7 @@ namespace OchalikeSprites
             else enabledImmutablePose = null;
         }
 
-        private void LateUpdate()
+        protected virtual void LateUpdate()
         {
             if (root == null) return;
 

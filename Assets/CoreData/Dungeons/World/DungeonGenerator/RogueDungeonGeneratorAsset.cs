@@ -128,7 +128,7 @@ namespace Roguegard
             space.SetRooms(rects);
         }
 
-        private void OnValidate()
+        protected virtual void OnValidate()
         {
             // 壁を壊したときのため、床は必ず埋める
             if (!ContainsGround(_fillTiles)) { Debug.LogError($"[{this}] {nameof(_fillTiles)} に {RogueTileLayer.Ground} が含まれません。"); }

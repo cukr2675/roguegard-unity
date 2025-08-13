@@ -14,7 +14,7 @@ namespace RoguegardUnity
         [SerializeField] private float _imageRotationSpeed = 10f;
         [SerializeField] private AssetReferenceT<TitleData> _titleData = null;
 
-        private void Start()
+        protected virtual void Start()
         {
             // Roguegard 全体の初期化処理
             StaticId.Next();
@@ -68,7 +68,7 @@ namespace RoguegardUnity
             _image.fillAmount = progress;
         }
 
-        private void Update()
+        protected virtual void Update()
         {
             // ローディングアニメーション
             if (_image.enabled)

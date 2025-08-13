@@ -41,7 +41,7 @@ namespace OchalikeSprites.Editor
             AssetDatabase.ImportAsset(path);
         }
 
-        private void OnValidate()
+        protected virtual void OnValidate()
         {
             foreach (var slicer in Slicers)
             {

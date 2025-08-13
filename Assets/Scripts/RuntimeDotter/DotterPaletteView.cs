@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -30,7 +30,7 @@ namespace RuntimeDotter
 
         private bool editMainColor;
 
-        private void Awake()
+        protected virtual void Awake()
         {
             layoutGroup = GetComponent<GridLayoutGroup>();
             baseCellSize = layoutGroup.cellSize;

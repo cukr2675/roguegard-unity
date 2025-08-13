@@ -18,7 +18,7 @@ namespace OchalikeSprites
 
         public Vector2Int ScreenSize => _screenSize;
 
-        private void Awake()
+        protected virtual void Awake()
         {
             if (_sourceCamera != null) { SetSourceCamera(_sourceCamera); }
         }
@@ -39,12 +39,12 @@ namespace OchalikeSprites
             SetZoom(_zoom);
         }
 
-        private void OnDestroy()
+        protected virtual void OnDestroy()
         {
             RenderTexture.ReleaseTemporary(renderTexture);
         }
 
-        public void LateUpdate()
+        protected virtual void LateUpdate()
         {
             var position = _sourceCamera.transform.localPosition;
             position = new Vector3(AdjustPixel(position.x), AdjustPixel(position.y), position.z);

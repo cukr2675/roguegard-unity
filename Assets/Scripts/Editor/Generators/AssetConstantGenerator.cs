@@ -20,7 +20,7 @@ namespace Roguegard.Editor
 
         private string FindFilter => string.Join(' ', _assetTypeNames.Select(x => $"t: {x}"));
 
-        private void OnValidate()
+        protected virtual void OnValidate()
         {
             var targetFolderPath = AssetDatabase.GetAssetPath(_targetFolder);
             if (!Directory.Exists(targetFolderPath))

@@ -19,7 +19,7 @@ namespace RoguegardUnity
         [SerializeField] private RogueCharacter _characterPrefab = null;
         [SerializeField] private Image _imagePrefab = null;
 
-        private void Awake()
+        protected virtual void Awake()
         {
             if (_spriteRendererPrefab == null) throw new System.InvalidOperationException($"{nameof(_spriteRendererPrefab)} が設定されていません。");
             if (_characterPrefab == null) throw new System.InvalidOperationException($"{nameof(_characterPrefab)} が設定されていません。");

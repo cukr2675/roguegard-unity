@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -17,7 +17,7 @@ namespace RuntimeDotter
 
         public bool IsDown { get; private set; }
 
-        private void Update()
+        protected virtual void Update()
         {
             if (!IsInteractable()) return;
 

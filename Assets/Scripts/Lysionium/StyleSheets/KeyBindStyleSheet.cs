@@ -63,7 +63,7 @@ namespace Lysionium
             //action.Disable(); // バインディングされているアクションが一つとは限らないため無効化しない
         }
 
-        private void OnDestroy()
+        protected virtual void OnDestroy()
         {
             foreach (var binding in _bindings)
             {

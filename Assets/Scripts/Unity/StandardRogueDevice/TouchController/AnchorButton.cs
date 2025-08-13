@@ -81,7 +81,7 @@ namespace RoguegardUnity
             }
         }
 
-        private void Start()
+        protected virtual void Start()
         {
             void setItem(AnchorKeyItem x) => enteredItem = x;
             _upperLeftKey.OnEnter += setItem;
@@ -94,7 +94,7 @@ namespace RoguegardUnity
             _lowerRightKey.OnEnter += setItem;
         }
 
-        private void Update()
+        protected virtual void Update()
         {
             if (Input.GetKeyDown(Key))
             {

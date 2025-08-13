@@ -32,7 +32,7 @@ namespace Lysionium
             return true;
         }
 
-        private void Update()
+        protected virtual void Update()
         {
             var fillAmount = widgetOption.GetProgress(_parent.Manager, _parent.Arg);
             foreach (var image in _fillAmountTargetImages)

@@ -26,7 +26,7 @@ namespace RoguegardUnity
 
         private static readonly RogueNameBuilder nameBuilder = new();
 
-        private void Awake()
+        protected virtual void Awake()
         {
             iconWidth = _icon.rectTransform.rect.width;
 

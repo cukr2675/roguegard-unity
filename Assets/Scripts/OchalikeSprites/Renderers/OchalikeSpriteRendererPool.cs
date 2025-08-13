@@ -17,7 +17,7 @@ namespace OchalikeSprites
         [SerializeField] private SpriteRenderer _spriteRendererPrefab = null;
         [SerializeField] private Image _imagePrefab = null;
 
-        private void Awake()
+        protected virtual void Awake()
         {
             if (_spriteRendererPrefab == null) throw new System.InvalidOperationException($"{nameof(_spriteRendererPrefab)} が設定されていません。");
             if (_imagePrefab == null) throw new System.InvalidOperationException($"{nameof(_imagePrefab)} が設定されていません。");

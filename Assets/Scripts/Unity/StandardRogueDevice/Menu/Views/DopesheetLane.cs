@@ -30,7 +30,7 @@ namespace RoguegardUnity
         private float timeScale;
         private object editList;
 
-        private void Awake()
+        protected virtual void Awake()
         {
             TryGetComponent(out animator);
         }

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -24,7 +24,7 @@ namespace RuntimeDotter
         public Color32 MainColor => _paletteView.MainColor;
         public IReadOnlyList<ShiftableColor> Palette => _paletteView.Palette;
 
-        private void Awake()
+        protected virtual void Awake()
         {
             _paletteView.Picker.OnColorChanged.AddListener(x => _boardView.UpdateView(_paletteView.Palette, _paletteView.MainColor));
             _undoRedoButton?.onClick.AddListener(() => Undo());
@@ -43,7 +43,7 @@ namespace RuntimeDotter
             _boardView.UpdateView(palette, mainColor);
         }
 
-        private void Update()
+        protected virtual void Update()
         {
             if (!_holdButton.IsInteractable()) return;
 

@@ -15,7 +15,7 @@ namespace Lysionium.Audio.Editor
 
         protected override string IconSearchFilter => "LUI_Icon";
 
-        private void Reset()
+        protected virtual void Reset()
         {
             _platforms = new[]
             {

@@ -17,7 +17,7 @@ namespace Roguegard.CharacterCreation.Editor
         private RogueObj obj;
         private int motionIndex;
 
-        private void OnEnable()
+        protected virtual void OnEnable()
         {
             preview = RenderTexture.GetTemporary(64, 64, 1);
             preview.autoGenerateMips = false;
@@ -27,7 +27,7 @@ namespace Roguegard.CharacterCreation.Editor
             OchalikeSpritePreview.Primary.OnUpdatePreview += UpdatePreview;
         }
 
-        private void OnDisable()
+        protected virtual void OnDisable()
         {
             if (preview != null) { RenderTexture.ReleaseTemporary(preview); }
 

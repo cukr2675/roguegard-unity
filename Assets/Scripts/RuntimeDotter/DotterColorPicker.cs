@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -32,7 +32,7 @@ namespace RuntimeDotter
         private bool afterOpen;
         private Color afterOpenColor;
 
-        private void Awake()
+        protected virtual void Awake()
         {
             // プリセット上限に達したら最古のプリセットを削除する
             if (_normalPicker != null)

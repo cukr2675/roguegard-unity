@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -48,7 +48,7 @@ namespace Objforming.Unity.RuntimeInspector
             _prevButton.onClick.AddListener(() => Prev());
         }
 
-        private void Update()
+        protected virtual void Update()
         {
             if (Input.GetKeyDown(_keyCode) || GetDoubleTap())
             {

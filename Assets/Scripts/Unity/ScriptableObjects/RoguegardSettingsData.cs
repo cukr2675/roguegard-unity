@@ -205,7 +205,7 @@ return m
         }
 
 #if UNITY_EDITOR
-        private void OnEnable()
+        protected virtual void OnEnable()
         {
             // isPlaying では初回実行時しか動作しない
             // isUpdating ではコンパイル時にも動作してしまう

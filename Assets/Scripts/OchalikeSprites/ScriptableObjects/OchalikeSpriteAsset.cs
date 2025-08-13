@@ -58,7 +58,7 @@ namespace OchalikeSprites
             }
         }
 
-        private void OnValidate()
+        protected virtual void OnValidate()
         {
             foreach (var bone in _bones)
             {

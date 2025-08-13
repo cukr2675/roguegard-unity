@@ -9,7 +9,7 @@ namespace RoguegardUnity
 
         private int animationTime;
 
-        private void Awake()
+        protected virtual void Awake()
         {
             animationTime = 0;
         }

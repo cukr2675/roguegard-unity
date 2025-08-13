@@ -35,7 +35,7 @@ namespace RoguegardUnity
             imageTransform.sizeDelta = screenSize;
         }
 
-        private void OnDestroy()
+        protected virtual void OnDestroy()
         {
             RenderTexture.ReleaseTemporary(renderTexture);
         }

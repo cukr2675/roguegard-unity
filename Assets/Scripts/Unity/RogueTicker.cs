@@ -11,7 +11,7 @@ namespace RoguegardUnity
 
         private TickEnumerator tick = new();
 
-        private void Update()
+        protected virtual void Update()
         {
             if (updating)
             {

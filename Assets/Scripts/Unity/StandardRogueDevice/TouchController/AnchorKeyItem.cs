@@ -11,7 +11,7 @@ namespace RoguegardUnity
 
         public event AnchorButton.EnterItemHandler OnEnter;
 
-        private void Start()
+        protected virtual void Start()
         {
             _image.color = RoguegardSettings.White;
         }

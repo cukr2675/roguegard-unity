@@ -66,7 +66,7 @@ namespace RoguegardUnity
             _menuController.PushInitialMenuScreen(new MainScreen(this), enableTouchMask: false);
         }
 
-        private void Update()
+        protected virtual void Update()
         {
             if (_menuController.IsDone)
             {

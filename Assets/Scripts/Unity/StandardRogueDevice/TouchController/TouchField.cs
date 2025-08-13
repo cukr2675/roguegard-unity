@@ -52,7 +52,7 @@ namespace RoguegardUnity
             maxPowedZoom = Mathf.Pow(2f, mouseInputManager.WheelZoomingFilters[^1]);
         }
 
-        private void Update()
+        protected virtual void Update()
         {
             var deltaTime = Time.deltaTime;
             pointerManager.Update(deltaTime);
