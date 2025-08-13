@@ -15,11 +15,13 @@ namespace Roguegard.Rgpacks
 
         public Page AddPage()
         {
-            var page = new Page();
-            page.ChartCmn = null;
-            page.IfCmn = new PropertiedCmnData();
-            page.Sprite = null;
-            page.Cmn = new PropertiedCmnData();
+            var page = new Page
+            {
+                ChartCmn = null,
+                IfCmn = new PropertiedCmnData(),
+                Sprite = null,
+                Cmn = new PropertiedCmnData()
+            };
             _pages.Add(page);
             return page;
         }

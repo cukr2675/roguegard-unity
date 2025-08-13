@@ -17,7 +17,7 @@ namespace Roguegard.Rgpacks
             {
                 var tilemap = CreateTilemap();
                 self.Space.SetTilemap(tilemap);
-                var rooms = new RectInt[] { new RectInt(0, 0, tilemap.Width, tilemap.Height) };
+                var rooms = new RectInt[] { new(0, 0, tilemap.Width, tilemap.Height) };
                 self.Space.SetRooms(rooms);
                 _monolith.Option.CreateObj(_monolith, self, new Vector2Int(1, 1), RogueRandom.Primary);
             }

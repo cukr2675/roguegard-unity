@@ -23,7 +23,7 @@ namespace Roguegard.Rgpacks
         public IRogueGender Gender => RoguegardSettings.DefaultRaceOption.Genders[0];
         public string HpName => null;
         public string MpName => null;
-        private MemberList _members = new MemberList();
+        private readonly MemberList _members = new();
 
         public string Name => info.Name;
         public Sprite Icon => null;

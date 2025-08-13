@@ -7,7 +7,7 @@ namespace Roguegard.Rgpacks
 {
     internal static class RgpackLoader
     {
-        private static Dictionary<System.Type, Former> formers;
+        private static readonly Dictionary<System.Type, Former> formers;
 
         //public static T Get<T>(RogueObj world)
         //{
@@ -36,8 +36,10 @@ namespace Roguegard.Rgpacks
                 Assembly.Load("Roguegard.Rgpacks"),
                 Assembly.Load("Roguegard.Rgpacks.MoonSharp")
             };
-            var forms = new RelationalComponentListBuilder<Form>();
-            forms.Add(Form.Create(typeof(RogueObj)));
+            var forms = new RelationalComponentListBuilder<Form>
+            {
+                Form.Create(typeof(RogueObj))
+            };
             forms.AddAuto(assemblies, instanceType =>
             {
                 if (instanceType.IsArray)

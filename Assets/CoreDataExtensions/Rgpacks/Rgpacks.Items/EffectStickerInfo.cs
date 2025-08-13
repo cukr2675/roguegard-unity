@@ -37,9 +37,11 @@ namespace Roguegard.Rgpacks
             // 上書き不可
             if (info.info != null) throw new System.InvalidOperationException();
 
-            info.info = new EffectStickerInfo();
-            info.info.Update = new PropertiedCmnData();
-            info.info.PassiveAspect = new PropertiedCmnData();
+            info.info = new EffectStickerInfo
+            {
+                Update = new PropertiedCmnData(),
+                PassiveAspect = new PropertiedCmnData()
+            };
         }
 
         [Objforming.Formable]

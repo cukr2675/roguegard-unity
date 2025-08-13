@@ -66,9 +66,9 @@ namespace Roguegard.Rgpacks
                 {
                     table.Add(assetId, new KyarakuriClayAsset(kyarakuriClayInfo, Id, fullId));
                 }
-                else if (pair.Value is MysteryDioramaInfo mysteryDioramaInfo)
+                else if (pair.Value is MysteryDioramaInfo)
                 {
-                    table.Add(assetId, new MysteryDioramaAsset(mysteryDioramaInfo, Id, fullId));
+                    table.Add(assetId, new MysteryDioramaAsset(Id, fullId));
                 }
                 else if (pair.Value is MapDioramaFloorInfo mapDioramaFloorInfo)
                 {
@@ -76,7 +76,7 @@ namespace Roguegard.Rgpacks
                 }
                 else if (pair.Value is EffectStickerInfo effectStickerInfo)
                 {
-                    table.Add(assetId, new EffectStickerAsset(effectStickerInfo, Id, fullId));
+                    table.Add(assetId, new EffectStickerAsset(effectStickerInfo, Id));
                 }
                 else if (pair.Value is EvtFairyInfo evtFairyInfo)
                 {
@@ -122,7 +122,7 @@ namespace Roguegard.Rgpacks
                 if (!pair.Key.StartsWith(id)) continue;
                 if (pair.Key == id) continue;
                 if (pair.Key.IndexOf('.', id.Length + 1) >= 0) continue;
-                if (!(pair.Value is T t)) continue;
+                if (pair.Value is not T t) continue;
 
                 yield return t;
             }

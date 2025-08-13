@@ -16,14 +16,15 @@ namespace Roguegard.Rgpacks
             pages = new List<Page>();
             foreach (var infoPage in info.Pages)
             {
-                var newPage = new Page();
-                newPage.ChartCmn = new CmnReference(infoPage.ChartCmn, envRgpackId);
-                newPage.IfCmn = infoPage.IfCmn.ToReference(envRgpackId);
-                newPage.Sprite = new RogueObjSpriteReference(infoPage.Sprite, envRgpackId);
-                newPage.Category = infoPage.Category;
-                newPage.Cmn = infoPage.Cmn.ToReference(envRgpackId);
-                newPage.Position = infoPage.Position;
-                pages.Add(newPage);
+                pages.Add(new Page
+                {
+                    ChartCmn = new CmnReference(infoPage.ChartCmn, envRgpackId),
+                    IfCmn = infoPage.IfCmn.ToReference(envRgpackId),
+                    Sprite = new RogueObjSpriteReference(infoPage.Sprite, envRgpackId),
+                    Category = infoPage.Category,
+                    Cmn = infoPage.Cmn.ToReference(envRgpackId),
+                    Position = infoPage.Position
+                });
             }
 
             this.fullId = fullId;
@@ -32,7 +33,7 @@ namespace Roguegard.Rgpacks
         public EvtFairyReference GetInfoSet()
         {
             var worldInfo = RogueWorldInfo.GetByCharacter(RogueDevice.Primary.Player);
-            if (worldInfo.ChartState.TryGet<ChartPadReference>(relatedChartSource, out var chart))
+            if (worldInfo.ChartState.TryGet<ChartPadReference>(relatedChartSource, out _))
             {
                 foreach (var page in pages)
                 {
@@ -60,10 +61,7 @@ namespace Roguegard.Rgpacks
 
             public EvtFairyReference GetInfoSet(string id, string envRgpackId)
             {
-                if (infoSet == null)
-                {
-                    infoSet = new EvtFairyReference(id, envRgpackId, this);
-                }
+                infoSet ??= new EvtFairyReference(id, envRgpackId, this);
                 return infoSet;
             }
         }

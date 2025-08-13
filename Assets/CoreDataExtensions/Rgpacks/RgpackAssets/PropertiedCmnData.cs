@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Roguegard.Rgpacks
 {
@@ -22,8 +23,8 @@ namespace Roguegard.Rgpacks
             properties = new Dictionary<string, ICmnProperty>(data.properties);
         }
 
-        [Objforming.CreateInstance]
-        private PropertiedCmnData(bool dummy) { }
+        [Objforming.CreateInstance, SuppressMessage("Style", "IDE0051")]
+        private PropertiedCmnData(bool _) { }
 
         public IReadOnlyDictionary<string, ICmnProperty> GetProperties(string envRgpackId)
         {

@@ -55,8 +55,7 @@ namespace Roguegard.Rgpacks
                 var chartPadInfo = ChartPadInfo.Get(obj);
                 if (chartPadInfo != null) { directory.Add(assetId, chartPadInfo); }
 
-                var sewedInfoSet = obj.Main.InfoSet as SewedEquipmentInfoSet;
-                if (sewedInfoSet != null)
+                if (obj.Main.InfoSet is SewedEquipmentInfoSet sewedInfoSet)
                 {
                     directory.Add(assetId, sewedInfoSet.GetDataClone());
                 }

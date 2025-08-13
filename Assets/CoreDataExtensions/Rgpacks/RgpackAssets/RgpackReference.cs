@@ -20,14 +20,14 @@ namespace Roguegard.Rgpacks
             }
             else
             {
-                return id.Substring(0, id.IndexOf('.'));
+                return id[..id.IndexOf('.')];
             }
         }
 
         public static string GetAssetId(string id)
         {
             if (id == null) return "";
-            return id.Substring(id.IndexOf('.') + 1);
+            return id[(id.IndexOf('.') + 1)..];
         }
 
         public static bool TryGetRgpack(string rgpackId, out Rgpack rgpack)
@@ -56,10 +56,10 @@ namespace Roguegard.Rgpacks
         public string FullId { get; }
 
         [System.NonSerialized] private string _rgpackId;
-        public string RgpackId => _rgpackId ??= FullId is null ? "" : FullId.Substring(0, FullId.IndexOf('.'));
+        public string RgpackId => _rgpackId ??= FullId is null ? "" : FullId[..FullId.IndexOf('.')];
 
         [System.NonSerialized] private string _assetId;
-        public string AssetId => _assetId ??= FullId is null ? "" : FullId.Substring(FullId.IndexOf('.') + 1);
+        public string AssetId => _assetId ??= FullId is null ? "" : FullId[(FullId.IndexOf('.') + 1)..];
 
         [System.NonSerialized] private T _asset;
         protected T Asset => _asset ??= GetAsset();
@@ -69,7 +69,7 @@ namespace Roguegard.Rgpacks
             get
             {
                 if (!RgpackReference.TryGetRgpack(RgpackId, out var rgpack)) return false;
-                if (!rgpack.TryGetAsset<T>(AssetId, out var asset)) return false;
+                if (!rgpack.TryGetAsset<T>(AssetId, out _)) return false;
                 return true;
             }
         }

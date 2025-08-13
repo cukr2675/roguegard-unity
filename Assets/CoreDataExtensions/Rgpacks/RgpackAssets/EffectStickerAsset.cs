@@ -4,15 +4,15 @@ namespace Roguegard.Rgpacks
 {
     public class EffectStickerAsset : IRogueObjUpdater, IBoneSpriteEffect
     {
-        private PropertiedCmnReference _update;
+        private readonly PropertiedCmnReference _update;
         float IRogueObjUpdater.Order => 0f;
 
-        private PropertiedCmnReference _passive;
+        private readonly PropertiedCmnReference _passive;
 
-        private RogueObjSpriteReference _sprite;
+        private readonly RogueObjSpriteReference _sprite;
         float IBoneSpriteEffect.Order => 0f;
 
-        public EffectStickerAsset(EffectStickerInfo info, string envRgpackId, string fullId)
+        public EffectStickerAsset(EffectStickerInfo info, string envRgpackId)
         {
             _update = info.Update.ToReference(envRgpackId);
             _sprite = new RogueObjSpriteReference(info.Sprite, envRgpackId);

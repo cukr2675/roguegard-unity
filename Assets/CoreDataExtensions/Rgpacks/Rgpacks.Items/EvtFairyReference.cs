@@ -10,7 +10,7 @@ namespace Roguegard.Rgpacks
     public class EvtFairyReference : RgpackReference<IEvtAsset>, IMainInfoSet
     {
         [System.NonSerialized] private string _evtId;
-        public string EvtId => _evtId ??= FullId.Substring(FullId.LastIndexOf('.') + 1);
+        public string EvtId => _evtId ??= FullId[(FullId.LastIndexOf('.') + 1)..];
 
         [System.NonSerialized] private readonly EvtFairyAsset.Page point;
 
@@ -113,7 +113,7 @@ namespace Roguegard.Rgpacks
             return 0;
         }
 
-        public RogueObj CreateObj(RogueObj location, IRogueRandom random, StackOption stackOption = StackOption.Default)
+        public RogueObj CreateObj(RogueObj location, StackOption stackOption = StackOption.Default)
         {
             var obj = new RogueObj();
             obj.Main.SetBaseInfoSet(obj, this);

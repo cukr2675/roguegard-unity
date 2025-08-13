@@ -18,10 +18,7 @@ namespace Roguegard.Rgpacks
 
         public void GenerateFloor(RogueObj player, RogueObj floor, IRogueRandom random)
         {
-            if (evts == null)
-            {
-                evts = RgpackReference.GetSubAssets<EvtFairyAsset>(fullId, "").ToArray();
-            }
+            evts ??= RgpackReference.GetSubAssets<EvtFairyAsset>(fullId, "").ToArray();
 
             var tilemap = new RogueTilemap(this.tilemap);
             floor.Space.SetTilemap(tilemap);
@@ -30,7 +27,7 @@ namespace Roguegard.Rgpacks
 
             foreach (var evt in evts)
             {
-                evt.GetInfoSet().CreateObj(floor, RogueRandom.Primary);
+                evt.GetInfoSet().CreateObj(floor);
             }
         }
     }
