@@ -22,7 +22,7 @@ MonoBehaviour:
   _gloves: {fileID: 11400000, guid: ef173008b2fd2ee44a39362f4abec77b, type: 2}
   _headwear: {fileID: 11400000, guid: a9b106ec03139934fa761fa7f6484de4, type: 2}
   _innerwear: {fileID: 11400000, guid: 477e575ba17b0dd4eb9bab0a3d571fe8, type: 2}
-  _lenses: {fileID: 11400000, guid: ee5bf4666c7731d4b83fd28829b78295, type: 2}
+  _glasses: {fileID: 11400000, guid: ee5bf4666c7731d4b83fd28829b78295, type: 2}
   _shield: {fileID: 11400000, guid: dae43f9bc590f3d4dac614a92bee6241, type: 2}
   _socks: {fileID: 11400000, guid: b289b559087fe644490cc0a62d428417, type: 2}
   _tops: {fileID: 11400000, guid: 9dc0901d9f2ea2b4086b555c0feabb26, type: 2}

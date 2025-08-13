@@ -208,7 +208,7 @@ namespace Roguegard
                     EquipKw.Tops,
                     EquipKw.Boots,
                     EquipKw.Bottoms,
-                    EquipKw.Lenses,
+                    EquipKw.Glasses,
                     EquipKw.FaceMask,
                     EquipKw.Gloves,
                     EquipKw.Socks,

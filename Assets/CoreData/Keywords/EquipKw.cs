@@ -28,6 +28,9 @@ namespace Roguegard
         [SerializeField] private EquipKeywordAsset _faceMask;
         public static ISerializableKeyword FaceMask => instance._faceMask;
 
+        [SerializeField] private EquipKeywordAsset _glasses;
+        public static ISerializableKeyword Glasses => instance._glasses;
+
         [SerializeField] private EquipKeywordAsset _gloves;
         public static ISerializableKeyword Gloves => instance._gloves;
 
@@ -36,9 +39,6 @@ namespace Roguegard
 
         [SerializeField] private EquipKeywordAsset _innerwear;
         public static ISerializableKeyword Innerwear => instance._innerwear;
-
-        [SerializeField] private EquipKeywordAsset _lenses;
-        public static ISerializableKeyword Lenses => instance._lenses;
 
         [SerializeField] private EquipKeywordAsset _shield;
         public static ISerializableKeyword Shield => instance._shield;
