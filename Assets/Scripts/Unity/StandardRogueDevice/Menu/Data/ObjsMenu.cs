@@ -1,11 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 using Lysionium;
 using Roguegard;
 using Roguegard.CharacterCreation;
 using Roguegard.Device;
+using System.Collections.Generic;
 
 namespace RoguegardUnity
 {
@@ -119,10 +116,7 @@ namespace RoguegardUnity
 
             private void Sort(MMgr manager, MArg arg)
             {
-                if (sortTable == null)
-                {
-                    sortTable = new CategorizedSortTable(RoguegardSettings.ObjCommandTable.Categories);
-                }
+                sortTable ??= new CategorizedSortTable(RoguegardSettings.ObjCommandTable.Categories);
 
                 // ソートしたあと開きなおす
                 sortTable.Sort(arg.Arg.TargetObj);

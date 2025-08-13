@@ -1,9 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-using UnityEngine.Tilemaps;
 using Roguegard;
+using UnityEngine;
+using UnityEngine.Tilemaps;
 
 namespace RoguegardUnity
 {
@@ -152,10 +149,10 @@ namespace RoguegardUnity
             menuButton.SetSprite(_menuSprite);
         }
 
-        public void LateUpdateController(RogueObj player, Vector3 playerPosition)
+        public void LateUpdateController(Vector3 playerPosition)
         {
             _cameraController.UpdateCamera(
-                player, playerPosition, _touchField.Drag,
+                playerPosition, _touchField.Drag,
                 _touchField.StartsDrag, _touchField.DragRelativePosition, _touchField.PowedZoom, _touchField.DeltaPosition);
             _touchField.ResetStartsDrag();
         }

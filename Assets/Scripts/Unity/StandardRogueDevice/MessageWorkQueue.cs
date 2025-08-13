@@ -1,11 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-using System.Diagnostics;
 using OchalikeSprites;
 using Roguegard;
 using Roguegard.Device;
+using System.Collections.Generic;
+using System.Diagnostics;
+using UnityEngine;
 
 namespace RoguegardUnity
 {
@@ -21,7 +19,7 @@ namespace RoguegardUnity
         private readonly Stack<RogueObj> hideCharacters;
 
 #if DEBUG
-        private readonly Queue<StackTrace> stackTraces = new Queue<StackTrace>();
+        private readonly Queue<StackTrace> stackTraces = new();
 #endif
 
         public StackTrace PeekStackTrace
@@ -35,7 +33,7 @@ namespace RoguegardUnity
 
         public int Count => others.Count;
 
-        private static readonly HideMotion hideMotion = new HideMotion();
+        private static readonly HideMotion hideMotion = new();
 
         public MessageWorkQueue()
         {

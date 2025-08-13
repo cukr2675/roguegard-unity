@@ -1,10 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-using System.Linq;
-using System.IO;
 using Save2IDB;
+using System.IO;
+using System.Linq;
 
 namespace RoguegardUnity
 {

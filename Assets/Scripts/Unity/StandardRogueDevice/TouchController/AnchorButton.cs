@@ -1,10 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-using UnityEngine.UI;
-using UnityEngine.EventSystems;
 using Roguegard;
+using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 namespace RoguegardUnity
 {
@@ -57,7 +54,6 @@ namespace RoguegardUnity
 
         private bool readyToDrag;
         private AnchorKeyItem enteredItem;
-        private RogueDirectionalSpriteTable keySpriteTable;
 
         public delegate void EnterItemHandler(AnchorKeyItem item);
 
@@ -87,7 +83,7 @@ namespace RoguegardUnity
 
         private void Start()
         {
-            EnterItemHandler setItem = (x) => enteredItem = x;
+            void setItem(AnchorKeyItem x) => enteredItem = x;
             _upperLeftKey.OnEnter += setItem;
             _upKey.OnEnter += setItem;
             _upperRightKey.OnEnter += setItem;

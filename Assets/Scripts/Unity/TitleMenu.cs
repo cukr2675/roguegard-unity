@@ -1,15 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-using System.Text.RegularExpressions;
-using UnityEngine.Audio;
-using UnityEngine.AddressableAssets;
-using TMPro;
 using Lysionium;
 using Roguegard;
-using Roguegard.Device;
 using Roguegard.CharacterCreation;
+using Roguegard.Device;
+using System.Collections.Generic;
+using System.Text.RegularExpressions;
+using TMPro;
+using UnityEngine;
+using UnityEngine.AddressableAssets;
+using UnityEngine.Audio;
 
 namespace RoguegardUnity
 {
@@ -53,7 +51,7 @@ namespace RoguegardUnity
 
 
 
-            _menuController.Initialize(spriteRendererPool, false);
+            _menuController.Initialize(spriteRendererPool);
 
             _menuController.OnError += () =>
             {

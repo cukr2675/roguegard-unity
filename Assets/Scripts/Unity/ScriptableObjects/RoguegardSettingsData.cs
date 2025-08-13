@@ -1,18 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-using System.Linq;
-using System.Reflection;
-using RuntimeDotter;
 using Roguegard;
 using Roguegard.CharacterCreation;
 using Roguegard.Rgpacks;
+using RuntimeDotter;
+using System.Collections;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Reflection;
+using UnityEngine;
 
 namespace RoguegardUnity
 {
-    [CreateAssetMenu(menuName = "RoguegardData/Settings/RoguegardSettings")]
+    [CreateAssetMenu(menuName = "Roguegard Unity/Settings/Roguegard Settings")]
     public class RoguegardSettingsData : ScriptableObject
     {
 #if UNITY_EDITOR

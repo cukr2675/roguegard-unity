@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
 using UnityEngine.Audio;
 
 namespace RoguegardUnity
@@ -51,7 +48,7 @@ namespace RoguegardUnity
             WindowFrameIndex = index;
             _windowFrameColor = color;
             WindowFrameList.GetWindowFrame(index, out var spriteA, out var spriteB);
-            menuController?.SetWindowFrame(spriteA, spriteB, color);
+            if (menuController != null) { menuController.SetWindowFrame(spriteA, spriteB, color); }
         }
     }
 }

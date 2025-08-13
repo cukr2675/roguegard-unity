@@ -1,10 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-using UnityEngine.Rendering;
 using OchalikeSprites;
 using Roguegard;
+using UnityEngine;
+using UnityEngine.Rendering;
 
 namespace RoguegardUnity
 {
@@ -85,12 +82,11 @@ namespace RoguegardUnity
             var y = Mathf.Round(transform.Position.y * RoguegardSettings.PixelsPerUnit) / RoguegardSettings.PixelsPerUnit;
             transform.Position = new Vector3(x, y);
 
-            if (transform.PoseSource == null) { transform.PoseSource = DefaultSpritePoseSource.Instance; }
+            transform.PoseSource ??= DefaultSpritePoseSource.Instance;
             var pose = transform.PoseSource.GetSpritePose(transform.Direction);
             obj.Main.Sprite.SetTo(mainRenderer, pose, direction);
             var rendererTransform = mainRenderer.transform;
-            rendererTransform.localPosition = transform.Position;
-            rendererTransform.localRotation = transform.Rotation;
+            rendererTransform.SetLocalPositionAndRotation(transform.Position, transform.Rotation);
             rendererTransform.localScale = transform.Scale;
 
             //IRogueSprite statusEffectIcon = null;
@@ -128,12 +124,11 @@ namespace RoguegardUnity
             var y = Mathf.Round(transform.Position.y * RoguegardSettings.PixelsPerUnit) / RoguegardSettings.PixelsPerUnit;
             transform.Position = new Vector3(x, y);
 
-            if (transform.PoseSource == null) { transform.PoseSource = DefaultSpritePoseSource.Instance; }
+            transform.PoseSource ??= DefaultSpritePoseSource.Instance;
             var pose = transform.PoseSource.GetSpritePose(transform.Direction);
             effectSprite.SetTo(renderer, pose, direction);
             var rendererTransform = renderer.transform;
-            rendererTransform.localPosition = transform.Position;
-            rendererTransform.localRotation = transform.Rotation;
+            rendererTransform.SetLocalPositionAndRotation(transform.Position, transform.Rotation);
             rendererTransform.localScale = transform.Scale;
 
             return endOfMotion;

@@ -1,22 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-using UnityEngine.UI;
-using UnityEngine.EventSystems;
-using TMPro;
 using Lysionium;
 using OchalikeSprites;
-using RuntimeDotter;
 using Roguegard;
 using Roguegard.Device;
+using RuntimeDotter;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 namespace RoguegardUnity
 {
     public class DopesheetLane : ViewItem, IPointerClickHandler
     {
         [SerializeField] private Image _keyIconPrefab = null;
-        private List<Image> keyIcons = new();
+        private readonly List<Image> keyIcons = new();
 
         [SerializeField] private float _resolution = 0.1f;
 

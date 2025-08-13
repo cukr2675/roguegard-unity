@@ -1,7 +1,3 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 using Roguegard;
 
 namespace RoguegardUnity
@@ -11,7 +7,7 @@ namespace RoguegardUnity
     /// </summary>
     public class FoundEnemyWalkStopper : IStatedWalkStopper
     {
-        private RogueObjList lastViews = new RogueObjList();
+        private readonly RogueObjList lastViews = new();
 
         public bool GetStop(RogueObj self)
         {

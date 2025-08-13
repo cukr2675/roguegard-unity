@@ -1,14 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-using UnityEngine.EventSystems;
-using UnityEngine.UI;
-using OchalikeSprites;
 using Lysionium;
+using OchalikeSprites;
 using Roguegard;
 using Roguegard.Device;
 using Roguegard.Rgpacks;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 namespace RoguegardUnity
 {
@@ -83,8 +81,8 @@ namespace RoguegardUnity
             IReadOnlyList<object> list, IViewItemHandler handler, IListMenuManager manager, IListMenuArg arg,
             ref ISubviewStateProvider stateProvider)
         {
-            if (stateProvider == null) { stateProvider = new StateProvider(); }
-            if (!(stateProvider is StateProvider local)) throw new System.ArgumentException(
+            stateProvider ??= new StateProvider();
+            if (stateProvider is not StateProvider local) throw new System.ArgumentException(
                 $"{stateProvider} は {nameof(StateProvider)} ではありません。");
 
             // 現在の StateProvider を外す前に状態を保存する
@@ -103,7 +101,7 @@ namespace RoguegardUnity
 
             // 表示更新
             SetArg(manager, arg);
-            UpdateElements(editInfo, 0);
+            UpdateElements(editInfo);
             SetStatusCode(0);
 
             // 新しい StateProvider に切り替える
@@ -113,7 +111,7 @@ namespace RoguegardUnity
             local.ApplySelectedIndex(viewItems);
         }
 
-        private void UpdateElements(MotionGrapherInfo editInfo, int actorIndex)
+        private void UpdateElements(MotionGrapherInfo editInfo)
         {
             // 横スクロール幅変更
             _scrollRect.content.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Left, 0f, _width);
@@ -282,7 +280,7 @@ namespace RoguegardUnity
                         }
                         else
                         {
-                            ((SpriteMotionGrapherTrack)editInfo.Tracks[editInfo.Tracks.Length - 1]).AddBone(boneName);
+                            ((SpriteMotionGrapherTrack)editInfo.Tracks[^1]).AddBone(boneName);
                             manager.PopMenuScreen();
                         }
                     })

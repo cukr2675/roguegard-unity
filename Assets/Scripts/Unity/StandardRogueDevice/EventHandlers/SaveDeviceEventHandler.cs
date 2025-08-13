@@ -1,11 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 using Roguegard;
 using Roguegard.Device;
 using Roguegard.Extensions;
 using Roguegard.Rgpacks;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
 namespace RoguegardUnity
 {
@@ -140,13 +139,15 @@ namespace RoguegardUnity
             ClearViewInfoAfterLocate(subject);
 
             // セーブ用データを生成
-            var data = new StandardRogueDeviceData();
-            data.Player = player;
-            data.Subject = componentManager.Subject;
-            data.World = componentManager.World;
-            data.Options = componentManager.Options;
-            data.CurrentRandom = RogueRandom.Primary;
-            data.SaveDateTime = System.DateTime.UtcNow.ToString();
+            var data = new StandardRogueDeviceData
+            {
+                Player = player,
+                Subject = componentManager.Subject,
+                World = componentManager.World,
+                Options = componentManager.Options,
+                CurrentRandom = RogueRandom.Primary,
+                SaveDateTime = System.DateTime.UtcNow.ToString()
+            };
 
             var name = RogueFile.GetName(path);
             var stream = RogueFile.Create(path);
@@ -154,7 +155,7 @@ namespace RoguegardUnity
             save.SaveGame(stream, name, data); // ここでシリアル化
 
             stream.Close();
-            manager?.Done();
+            if (manager != null) { manager.Done(); }
 
             // セーブ完了メッセージを表示
             if (autoSave)
@@ -174,9 +175,11 @@ namespace RoguegardUnity
                 if (!rgpack.TryGetAsset<ScenarioMonolithAsset>("__main", out var monolith)) throw new System.InvalidOperationException();
 
                 var random = new RogueRandom();
-                var scenarioDeviceData = new StandardRogueDeviceData();
-                scenarioDeviceData.CurrentRandom = random;
-                scenarioDeviceData.World = RoguegardSettings.WorldGenerator.CreateObj(null, Vector2Int.zero, random);
+                var scenarioDeviceData = new StandardRogueDeviceData
+                {
+                    CurrentRandom = random,
+                    World = RoguegardSettings.WorldGenerator.CreateObj(null, Vector2Int.zero, random)
+                };
                 var preset = RoguegardSettings.CharacterCreationDatabase.LoadPreset(0);
                 preset.Name = "Playtest";
                 var rgpackPlayer = preset.CreateObj(scenarioDeviceData.World, Vector2Int.zero, random);

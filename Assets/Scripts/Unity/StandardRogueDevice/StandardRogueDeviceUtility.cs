@@ -1,17 +1,13 @@
-using System.Collections;
+using Roguegard;
 using System.Collections.Generic;
 using UnityEngine;
-
-using Roguegard;
-using UnityEngine.Localization;
-using UnityEngine.Localization.Tables;
 
 namespace RoguegardUnity
 {
     public static class StandardRogueDeviceUtility
     {
-        private static readonly List<object> formatArgs = new List<object>();
-        private static readonly RogueNameBuilder nameBuilder = new RogueNameBuilder();
+        private static readonly List<object> formatArgs = new();
+        private static readonly RogueNameBuilder nameBuilder = new();
 
         public static Color GetColor(RogueObj self, RogueObj obj)
         {
@@ -39,8 +35,8 @@ namespace RoguegardUnity
 
             if (text[index] == ':')
             {
-                var head = text.Substring(0, index);
-                text = text.Substring(index + 1);
+                var head = text[..index];
+                text = text[(index + 1)..];
                 if (!RogueLocalizedStringTable.TryGetEntry(text, out var entry, false))
                 {
                     localizedText = null;
@@ -76,8 +72,8 @@ namespace RoguegardUnity
 
             if (index < text.Length && text[index] == ':')
             {
-                var head = text.Substring(0, index);
-                text = text.Substring(index + 1);
+                var head = text[..index];
+                text = text[(index + 1)..];
                 if (!RogueLocalizedStringTable.TryGetEntry(text, out var entry)) return text;
 
                 return head + entry.GetLocalizedString();
@@ -129,7 +125,7 @@ namespace RoguegardUnity
 
         private static object LocalizeMessage(string text, RogueObj player, MessageWorkQueue messageWorkQueue)
         {
-            text = text.Substring(1);
+            text = text[1..];
             if (!RogueLocalizedStringTable.TryGetEntry(text, out var entry)) return text;
 
             formatArgs.Clear();
@@ -141,7 +137,7 @@ namespace RoguegardUnity
 
                 for (int i = 0; i < formatCount; i++)
                 {
-                    messageWorkQueue.Dequeue(out var other, out var work, out var integer, out var number, out var stackTrace);
+                    messageWorkQueue.Dequeue(out var other, out _, out var integer, out var number, out _);
                     if (other == DeviceKw.EnqueueInteger)
                     {
                         formatArgs.Add(integer);
@@ -152,7 +148,7 @@ namespace RoguegardUnity
                     }
                     else
                     {
-                        formatArgs.Add(LocalizeMessage(other, player, (MessageWorkQueue)null));
+                        formatArgs.Add(LocalizeMessage(other, player, null));
                     }
                 }
             }
@@ -194,7 +190,7 @@ namespace RoguegardUnity
 
         private static string LocalizeMessage(string text, RogueObj player, string[] args)
         {
-            text = text.Substring(1);
+            text = text[1..];
             if (!RogueLocalizedStringTable.TryGetEntry(text, out var entry)) return text;
 
             formatArgs.Clear();

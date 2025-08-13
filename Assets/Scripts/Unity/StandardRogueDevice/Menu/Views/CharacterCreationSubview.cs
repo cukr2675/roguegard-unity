@@ -1,14 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-using UnityEngine.UI;
-using TMPro;
 using Lysionium;
 using OchalikeSprites;
 using Roguegard;
-using Roguegard.Device;
 using Roguegard.CharacterCreation;
+using Roguegard.Device;
+using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
 
 namespace RoguegardUnity
 {
@@ -39,7 +37,7 @@ namespace RoguegardUnity
         private ISelectOption raceSelectOption;
         private ISelectOption appearanceSelectOption;
         private AppearanceEditingMenu appearanceEditingMenu;
-        private readonly List<MonoBehaviour> itemObjects = new List<MonoBehaviour>();
+        private readonly List<MonoBehaviour> itemObjects = new();
         private static ISelectOption LoadPresetSelectOption { get; }
             = SelectOption.Create<MMgr, MArg>(":Load", new LoadPresetMenu());
         private static readonly object[] leftAnchorObjs = new object[2];

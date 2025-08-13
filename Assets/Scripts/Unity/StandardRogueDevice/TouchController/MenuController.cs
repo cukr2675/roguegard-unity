@@ -1,12 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-using UnityEngine.UI;
 using Lysionium;
 using Lysionium.Audio;
 using Roguegard;
 using Roguegard.Device;
+using System.Diagnostics.CodeAnalysis;
+using UnityEngine;
 
 namespace RoguegardUnity
 {
@@ -51,7 +48,7 @@ namespace RoguegardUnity
             base.HasManagerLock || _stats.HasManagerLock || _face.HasManagerLock || _summary.HasManagerLock || _textEditor.HasManagerLock ||
             _characterCreation.HasManagerLock || _paint.HasManagerLock || _dopesheet.HasManagerLock || (_titleMenu != null && _titleMenu.HasManagerLock);
 
-        internal void Initialize(RogueSpriteRendererPool rendererPool, bool touchMaskIsEnabled = true)
+        internal void Initialize(RogueSpriteRendererPool rendererPool)
         {
             BackOption = SelectOption.Create<MMgr, MArg>("<", (manager, arg) => manager.PopMenuScreen(), "Cancel click:Cancel");
 
@@ -194,6 +191,7 @@ namespace RoguegardUnity
             }
         }
 
+        [SuppressMessage("Style", "IDE0060", Justification = "UnityEvent で使用")]
         public void Play(string value, object sender)
         {
             if (value == "Select")

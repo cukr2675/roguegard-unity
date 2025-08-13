@@ -1,11 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-using System.Text;
-using TMPro;
 using Lysionium;
 using Roguegard;
+using System.Collections.Generic;
+using System.Text;
+using TMPro;
+using UnityEngine;
 
 namespace RoguegardUnity
 {
@@ -16,10 +14,10 @@ namespace RoguegardUnity
         [SerializeField] private TMP_Text _mpText = null;
         [SerializeField] private TMP_Text _dungeonText = null;
 
-        private static readonly StringBuilder textBuilder = new StringBuilder();
-        private static readonly StringBuilder hpTextBuilder = new StringBuilder();
-        private static readonly StringBuilder mpTextBuilder = new StringBuilder();
-        private static readonly RogueNameBuilder nameBuilder = new RogueNameBuilder();
+        private static readonly StringBuilder textBuilder = new();
+        private static readonly StringBuilder hpTextBuilder = new();
+        private static readonly StringBuilder mpTextBuilder = new();
+        private static readonly RogueNameBuilder nameBuilder = new();
 
         public override void SetParameters(
             IReadOnlyList<object> list, IViewItemHandler handler, IListMenuManager manager, IListMenuArg arg,

@@ -1,8 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 using Roguegard;
+using UnityEngine;
 
 namespace RoguegardUnity
 {
@@ -12,7 +9,7 @@ namespace RoguegardUnity
 
         private bool updating;
 
-        private TickEnumerator tick = new TickEnumerator();
+        private TickEnumerator tick = new();
 
         private void Update()
         {

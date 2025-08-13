@@ -1,14 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-using System.Linq;
-using System.Reflection;
-using System.IO;
 using Objforming;
 using Objforming.Unity.RuntimeInspector;
 using Roguegard;
 using Roguegard.Objforming.RuntimeInspector;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using UnityEngine;
 
 namespace RoguegardUnity
 {
@@ -48,18 +46,20 @@ namespace RoguegardUnity
                 Assembly.Load("Roguegard.Rgpacks"),
                 Assembly.Load("Roguegard.Rgpacks.MoonSharp")
             };
-            var forms = new RelationalComponentListBuilder<RelationalForm>();
-            forms.Add(new Int32Form(_inputElementPrefab));
-            forms.Add(new SingleForm(_inputElementPrefab));
-            forms.Add(new BooleanForm(_toggleElementPrefab));
-            forms.Add(new StringForm(_inputElementPrefab));
-            forms.Add(FormerForm.Create(typeof(Vector2Int), _linkElementPrefab, true));
-            forms.Add(FormerForm.Create(typeof(RectInt), _linkElementPrefab, true));
-            forms.Add(FormerForm.Create(typeof(Color32), _linkElementPrefab, true));
-            forms.Add(RogueObjForm.Create(_linkElementPrefab, _buttonElementPrefab, x => SerializeRogueObj(x)));
-            forms.Add(RogueObjListForm.Create(_rogueObjListItemElementPrefab, _linkElementPrefab));
-            forms.Add(FormerForm.Create(typeof(StandardRogueDeviceData), _linkElementPrefab));
-            forms.Add(FormerForm.Create(typeof(RogueOptions), _linkElementPrefab));
+            var forms = new RelationalComponentListBuilder<RelationalForm>
+            {
+                new Int32Form(_inputElementPrefab),
+                new SingleForm(_inputElementPrefab),
+                new BooleanForm(_toggleElementPrefab),
+                new StringForm(_inputElementPrefab),
+                FormerForm.Create(typeof(Vector2Int), _linkElementPrefab, true),
+                FormerForm.Create(typeof(RectInt), _linkElementPrefab, true),
+                FormerForm.Create(typeof(Color32), _linkElementPrefab, true),
+                RogueObjForm.Create(_linkElementPrefab, _buttonElementPrefab, x => SerializeRogueObj(x)),
+                RogueObjListForm.Create(_rogueObjListItemElementPrefab, _linkElementPrefab),
+                FormerForm.Create(typeof(StandardRogueDeviceData), _linkElementPrefab),
+                FormerForm.Create(typeof(RogueOptions), _linkElementPrefab)
+            };
             forms.AddAuto(assemblies, instanceType =>
             {
                 if (instanceType.IsArray)

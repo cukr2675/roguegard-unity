@@ -1,9 +1,7 @@
-﻿using System.Collections;
+using OchalikeSprites;
 using System.Collections.Generic;
 using UnityEngine;
-
 using UnityEngine.Rendering;
-using OchalikeSprites;
 
 namespace RoguegardUnity
 {
@@ -92,7 +90,7 @@ namespace RoguegardUnity
             }
         }
 
-        private struct Bone
+        private readonly struct Bone
         {
             public readonly SpriteRenderer spriteRenderer;
 
@@ -111,8 +109,7 @@ namespace RoguegardUnity
                 spriteRenderer.flipX = flipX;
                 spriteRenderer.flipY = flipY;
                 var transform = spriteRenderer.transform;
-                transform.localPosition = localPosition;
-                transform.localRotation = localRotation;
+                transform.SetLocalPositionAndRotation(localPosition, localRotation);
                 transform.localScale = localScale;
             }
 

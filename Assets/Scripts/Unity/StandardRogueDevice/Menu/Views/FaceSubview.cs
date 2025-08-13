@@ -1,11 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 using Lysionium;
 using OchalikeSprites;
 using Roguegard;
 using Roguegard.Device;
+using System.Collections.Generic;
+using UnityEngine;
 
 namespace RoguegardUnity
 {

@@ -1,10 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-using UnityEngine.UI;
 using OchalikeSprites;
 using Roguegard;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
 
 namespace RoguegardUnity
 {
@@ -61,7 +59,7 @@ namespace RoguegardUnity
             bones[index].SetSprite(name, sprite, color, flipX, flipY, localPosition, localRotation, localScale);
         }
 
-        private struct Bone
+        private readonly struct Bone
         {
             public readonly Image image;
 

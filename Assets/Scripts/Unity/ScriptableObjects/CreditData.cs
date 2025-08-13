@@ -1,10 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace RoguegardUnity
 {
-    [CreateAssetMenu(menuName = "RoguegardData/Credit")]
+    [CreateAssetMenu(menuName = "Roguegard Unity/Credit")]
     public class CreditData : ScriptableObject
     {
         [SerializeField] private string _name = null;

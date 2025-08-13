@@ -1,13 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-
 using System.Linq;
 using System.Reflection;
+using UnityEngine;
 
 namespace RoguegardUnity
 {
-    [CreateAssetMenu(menuName = "RoguegardData/Settings/RogueAssetTable")]
+    [CreateAssetMenu(menuName = "Roguegard Unity/Settings/Rogue Asset Table")]
     public class RogueAssetTable : ScriptableObject, IReadOnlyDictionary<string, object>
     {
 #if UNITY_EDITOR
@@ -16,7 +15,7 @@ namespace RoguegardUnity
         [SerializeField] private UnityEditor.DefaultAsset[] _targetFolders = null;
 #endif
 
-        [SerializeField] private List<Item> _items = new List<Item>();
+        [SerializeField] private List<Item> _items = new();
 
         private Dictionary<string, object> _table;
         private Dictionary<string, object> Table => _table ??= new Dictionary<string, object>(_items.Select(x => x.ToPair()));
@@ -100,7 +99,7 @@ namespace RoguegardUnity
                 _asset = asset;
             }
 
-            public KeyValuePair<string, object> ToPair() => new KeyValuePair<string, object>(Key, Asset);
+            public KeyValuePair<string, object> ToPair() => new(Key, Asset);
         }
     }
 }

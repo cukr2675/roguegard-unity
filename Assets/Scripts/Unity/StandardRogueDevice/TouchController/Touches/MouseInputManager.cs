@@ -1,5 +1,3 @@
-﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace RoguegardUnity
@@ -17,7 +15,7 @@ namespace RoguegardUnity
             this.info = info;
         }
 
-        public void Update(float deltaTime)
+        public void Update()
         {
             // マウスホイール操作を毎フレーム取得する
             scrollDelta += Input.mouseScrollDelta;

@@ -7,7 +7,7 @@ namespace RoguegardUnity
     {
         public static TurnDeviceCommand Instance { get; } = new TurnDeviceCommand();
 
-        private static TurnRogueMethod turnRogueMethod = new TurnRogueMethod();
+        private static readonly TurnRogueMethod turnRogueMethod = new();
 
         public bool Execute(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
         {

@@ -1,12 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-using System.Diagnostics;
-using UnityEngine.Tilemaps;
 using Roguegard;
-using Roguegard.CharacterCreation;
 using Roguegard.Device;
+using UnityEngine;
+using UnityEngine.Tilemaps;
 
 namespace RoguegardUnity
 {
@@ -45,8 +40,8 @@ namespace RoguegardUnity
         public bool OpenGrid => _inputController.OpenGrid;
         public bool FastForward => _inputController.FastForward;
 
-        private static readonly PushObjCommand PushObjCommand = new PushObjCommand();
-        private static readonly SwapPositionObjCommand SwapPositionObjCommand = new SwapPositionObjCommand();
+        private static readonly PushObjCommand PushObjCommand = new();
+        private static readonly SwapPositionObjCommand SwapPositionObjCommand = new();
 
         internal void Initialize(Tilemap tilemap, RogueSpriteRendererPool rendererPool, System.Action stopAutoPlay)
         {
@@ -103,10 +98,10 @@ namespace RoguegardUnity
         /// <summary>
         /// <see cref="StandardRogueDeviceEventManager.messageWorkQueue"/> のキュー処理後メソッド
         /// </summary>
-        public void LateUpdateController(RogueObj player, Vector3 playerPosition, int deltaTime)
+        public void LateUpdateController(Vector3 playerPosition, int deltaTime)
         {
             // カメラとメニューを更新する。
-            _inputController.LateUpdateController(player, playerPosition);
+            _inputController.LateUpdateController(playerPosition);
             _menuController.EventManager.UpdateUI(deltaTime);
         }
 

@@ -1,10 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-using System.IO;
 using Lysionium;
 using Roguegard.Device;
+using System.Collections.Generic;
+using System.IO;
 
 namespace RoguegardUnity
 {
@@ -15,7 +12,7 @@ namespace RoguegardUnity
         private RogueScrollMenuViewData<object> view;
         private readonly List<FileInfo> files = new();
 
-        private static readonly LoadingListMenuScreen savingMenu = new LoadingListMenuScreen("セーブ中…", "キャンセル", LoadingCancel);
+        private static readonly LoadingListMenuScreen savingMenu = new("セーブ中…", "キャンセル", LoadingCancel);
         private static readonly ChoicesMenuScreen errorMsgDialog
             = new ChoicesMenuScreen((manager, arg) => $":An error has occurred.:, ({arg.Arg.Other})").Option("OK", ErrorMsgOK);
 
@@ -25,9 +22,11 @@ namespace RoguegardUnity
             ClickItemHandler<FileInfo, MMgr, MArg> onSelectFile,
             ClickItemHandler<MMgr, MArg> onNewFile = null)
         {
-            var instance = new SelectFileMenuScreen();
-            instance.nextScreen = new SelectFileCommandMenuScreen(onSelectFile);
-            instance.onNewFile = onNewFile;
+            var instance = new SelectFileMenuScreen
+            {
+                nextScreen = new SelectFileCommandMenuScreen(onSelectFile),
+                onNewFile = onNewFile
+            };
 
             var importScreen = new ImportScreen();
 
@@ -57,15 +56,17 @@ namespace RoguegardUnity
             ClickItemHandler<FileInfo, MMgr, MArg> onSelectFile,
             ClickItemHandler<MMgr, MArg> onNewFile = null)
         {
-            var instance = new SelectFileMenuScreen();
-            instance.nextScreen = new ChoicesMenuScreen(
-                (manager, arg) => StandardRogueDeviceUtility.LocalizeMessage(":OverwriteMsg::1", ((FileInfo)arg.Arg.Other).Name))
-                .Option(":Overwrite", (manager, arg) => onSelectFile((FileInfo)arg.Arg.Other, manager, arg))
-                .Back();
-            instance.onNewFile = onNewFile;
-
-            instance.view = new()
+            var instance = new SelectFileMenuScreen
             {
+                nextScreen = new ChoicesMenuScreen(
+                    (manager, arg) => StandardRogueDeviceUtility.LocalizeMessage(":OverwriteMsg::1", ((FileInfo)arg.Arg.Other).Name))
+                    .Option(":Overwrite", (manager, arg) => onSelectFile((FileInfo)arg.Arg.Other, manager, arg))
+                    .Back(),
+                onNewFile = onNewFile,
+
+                view = new()
+                {
+                }
             };
 
             return instance;

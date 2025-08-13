@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 using Roguegard;
+using System.Collections.Generic;
 
 namespace RoguegardUnity
 {
@@ -20,7 +17,7 @@ namespace RoguegardUnity
             //var location = RogueDevice.Primary.Player.Location;
             if (location != null)
             {
-                if (item == null) { item = new Item(); }
+                item ??= new Item();
                 for (int i = 0; i < maxIteration; i++)
                 {
                     var result = item.MoveNext(location);

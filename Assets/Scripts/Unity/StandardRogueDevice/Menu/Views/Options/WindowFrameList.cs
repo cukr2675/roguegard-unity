@@ -1,12 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 using Roguegard;
+using System.Collections;
+using UnityEngine;
 
 namespace RoguegardUnity
 {
-    [CreateAssetMenu(menuName = "RoguegardData/Settings/WindowFrameList")]
+    [CreateAssetMenu(menuName = "Roguegard Unity/Settings/Window Frame List")]
     public class WindowFrameList : ScriptableLoader
     {
         private static WindowFrameList instance;

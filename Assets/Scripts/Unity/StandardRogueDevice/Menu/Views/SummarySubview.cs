@@ -1,15 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-using System.Text;
-using UnityEngine.UI;
 using Lysionium;
 using Roguegard;
+using Roguegard.CharacterCreation;
 using Roguegard.Device;
 using Roguegard.Extensions;
+using System.Collections.Generic;
+using System.Text;
 using TMPro;
-using Roguegard.CharacterCreation;
+using UnityEngine;
+using UnityEngine.UI;
 
 namespace RoguegardUnity
 {
@@ -352,7 +350,7 @@ namespace RoguegardUnity
             _textRightR.SetText(rightRBuilder);
         }
 
-        public void SetOther(in RogueMethodArgument arg)
+        public void SetOther()
         {
             leftLBuilder.Clear();
             leftRBuilder.Clear();

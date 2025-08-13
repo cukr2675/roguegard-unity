@@ -1,9 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-using UnityEngine.Tilemaps;
 using Roguegard;
+using UnityEngine;
+using UnityEngine.Tilemaps;
 
 namespace RoguegardUnity
 {

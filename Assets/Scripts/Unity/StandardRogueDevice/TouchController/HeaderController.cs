@@ -1,11 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-using System.Text;
-using UnityEngine.UI;
-using TMPro;
 using Roguegard;
+using System.Text;
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
 
 namespace RoguegardUnity
 {
@@ -19,7 +16,7 @@ namespace RoguegardUnity
         [SerializeField] private TMP_Text _text2 = null;
         [SerializeField] private TMP_Text _text3 = null;
 
-        private readonly StringBuilder textBuilder = new StringBuilder();
+        private readonly StringBuilder textBuilder = new();
 
         public void Initialize()
         {

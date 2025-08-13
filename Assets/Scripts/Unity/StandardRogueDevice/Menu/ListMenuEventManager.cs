@@ -1,9 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 using Lysionium.Audio;
 using Roguegard;
+using UnityEngine;
 
 namespace RoguegardUnity
 {

@@ -1,10 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+using Roguegard;
 using UnityEngine;
-
 using UnityEngine.EventSystems;
 using UnityEngine.Tilemaps;
-using Roguegard;
 
 namespace RoguegardUnity
 {
@@ -36,26 +33,30 @@ namespace RoguegardUnity
         public void Initialize(Tilemap tilemap, CameraController cameraController)
         {
             info = new TouchInputInfo();
-            pointerManager = new FieldPointerManager(info, tilemap, cameraController, .1f);
-            pointerManager.LongDownSeconds = .5f;
-            pointerManager.ZoomClippingRadius = .2f;
-            pointerManager.AntiJumpDistanceThreshold = 40f;
-            pointerManager.AntiJumpValidSeconds = .1f;
-            mouseInputManager = new MouseInputManager(info);
-            mouseInputManager.WheelZoomingFilters = new[]
+            pointerManager = new FieldPointerManager(info, tilemap, cameraController, .1f)
             {
-                -4f, -3.5f, -3f, -2.5f, -2f, -1.5f, -1f, -.5f,
-                Mathf.Log(1f, 2f), Mathf.Log(1.5f, 2f), Mathf.Log(2f, 2f), Mathf.Log(3f, 2f), Mathf.Log(4f, 2f), Mathf.Log(6f, 2f), Mathf.Log(8f, 2f)
+                LongDownSeconds = .5f,
+                ZoomClippingRadius = .2f,
+                AntiJumpDistanceThreshold = 40f,
+                AntiJumpValidSeconds = .1f
+            };
+            mouseInputManager = new MouseInputManager(info)
+            {
+                WheelZoomingFilters = new[]
+                {
+                    -4f, -3.5f, -3f, -2.5f, -2f, -1.5f, -1f, -.5f,
+                    Mathf.Log(1f, 2f), Mathf.Log(1.5f, 2f), Mathf.Log(2f, 2f), Mathf.Log(3f, 2f), Mathf.Log(4f, 2f), Mathf.Log(6f, 2f), Mathf.Log(8f, 2f)
+                }
             };
             minPowedZoom = Mathf.Pow(2f, mouseInputManager.WheelZoomingFilters[0]);
-            maxPowedZoom = Mathf.Pow(2f, mouseInputManager.WheelZoomingFilters[mouseInputManager.WheelZoomingFilters.Length - 1]);
+            maxPowedZoom = Mathf.Pow(2f, mouseInputManager.WheelZoomingFilters[^1]);
         }
 
         private void Update()
         {
             var deltaTime = Time.deltaTime;
             pointerManager.Update(deltaTime);
-            mouseInputManager.Update(deltaTime);
+            mouseInputManager.Update();
         }
 
         public void UpdateField(bool visiblePlayer, Vector3 playerPosition, RogueDirection playerDirection, int deltaTime)

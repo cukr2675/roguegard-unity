@@ -1,12 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-using RuntimeDotter;
-using UnityEngine.UI;
 using Lysionium;
 using Roguegard;
 using Roguegard.Device;
+using RuntimeDotter;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
 
 namespace RoguegardUnity
 {

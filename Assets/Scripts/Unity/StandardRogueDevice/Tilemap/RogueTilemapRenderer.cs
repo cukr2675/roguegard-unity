@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
 using UnityEngine.Tilemaps;
 
 namespace RoguegardUnity
@@ -27,7 +24,10 @@ namespace RoguegardUnity
 
         public void SetGridIsEnabled(bool enabled)
         {
-            _gridRenderer ??= _gridTilemap.GetComponent<TilemapRenderer>();
+            if (_gridRenderer == null)
+            {
+                _gridRenderer = _gridTilemap.GetComponent<TilemapRenderer>();
+            }
             _gridRenderer.enabled = enabled;
         }
     }

@@ -1,14 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-using UnityEngine.EventSystems;
-using UnityEngine.UI;
-using TMPro;
 using Lysionium;
 using Roguegard;
 using Roguegard.CharacterCreation;
-using Roguegard.Device;
+using TMPro;
+using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 namespace RoguegardUnity
 {
@@ -30,24 +26,11 @@ namespace RoguegardUnity
 
         private const float lightRatio = 248f / 255f;
 
-        private ISubview view;
-
         private IButtonViewItemHandler presenter;
 
         private object source;
 
-        public RectTransform RectTransform { get; private set; }
-
         public CanvasGroup CanvasGroup => _canvasGroup;
-
-        private static readonly RogueNameBuilder nameBuilder = new RogueNameBuilder();
-
-        private const float iconWidth = 130f;
-
-        private void Awake()
-        {
-            RectTransform = GetComponent<RectTransform>();
-        }
 
         public void SetItem(IButtonViewItemHandler presenter, IReadOnlyIntrinsic intrinsic, ICharacterCreationData characterCreationData)
         {

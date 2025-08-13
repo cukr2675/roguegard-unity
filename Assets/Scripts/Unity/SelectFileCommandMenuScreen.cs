@@ -1,10 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-using System.IO;
 using Lysionium;
 using Roguegard.Device;
+using System.IO;
 
 namespace RoguegardUnity
 {

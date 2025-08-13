@@ -1,11 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 using Lysionium;
 using Roguegard;
 using Roguegard.Device;
 using Roguegard.Extensions;
+using System.Collections.Generic;
 
 namespace RoguegardUnity
 {
@@ -13,7 +10,7 @@ namespace RoguegardUnity
     {
         private readonly StandardRogueDeviceComponentManager componentManager;
 
-        private static readonly GameOverMenu gameOverMenu = new GameOverMenu();
+        private static readonly GameOverMenu gameOverMenu = new();
 
         public GameOverDeviceEventHandler(StandardRogueDeviceComponentManager componentManager)
         {

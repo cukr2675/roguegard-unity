@@ -1,10 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-using UnityEngine.Audio;
 using Roguegard;
 using Roguegard.Device;
+using UnityEngine.Audio;
 
 namespace RoguegardUnity
 {

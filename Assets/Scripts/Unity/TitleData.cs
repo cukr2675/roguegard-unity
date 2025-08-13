@@ -1,12 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 using UnityEngine.Audio;
 
 namespace RoguegardUnity
 {
-    [CreateAssetMenu(menuName = "RoguegardData/TitleData")]
+    [CreateAssetMenu(menuName = "Roguegard Unity/Title Data")]
     public class TitleData : ScriptableObject
     {
         [SerializeField] private Sprite _progressCircle = null;

@@ -1,21 +1,19 @@
-using System.Collections;
+using Roguegard;
 using System.Collections.Generic;
 using UnityEngine;
-
 using UnityEngine.Rendering;
 using UnityEngine.UI;
-using Roguegard;
 
 namespace RoguegardUnity
 {
     public class RogueSpriteRendererPool : MonoBehaviour
     {
-        private readonly Stack<SpriteRenderer> pooledSpriteRenderers = new Stack<SpriteRenderer>();
-        private readonly Stack<SortingGroup> pooledSortingGroups = new Stack<SortingGroup>();
-        private readonly Stack<RogueObjSpriteRenderer> pooledRogueObjSpriteRenderers = new Stack<RogueObjSpriteRenderer>();
-        private readonly Stack<RogueCharacter> pooledCharacters = new Stack<RogueCharacter>();
-        private readonly Stack<Image> pooledImages = new Stack<Image>();
-        private readonly Stack<MenuRogueObjSpriteRenderer> pooledMenuRogueObjSpriteRenderers = new Stack<MenuRogueObjSpriteRenderer>();
+        private readonly Stack<SpriteRenderer> pooledSpriteRenderers = new();
+        private readonly Stack<SortingGroup> pooledSortingGroups = new();
+        private readonly Stack<RogueObjSpriteRenderer> pooledRogueObjSpriteRenderers = new();
+        private readonly Stack<RogueCharacter> pooledCharacters = new();
+        private readonly Stack<Image> pooledImages = new();
+        private readonly Stack<MenuRogueObjSpriteRenderer> pooledMenuRogueObjSpriteRenderers = new();
 
         [SerializeField] private SpriteRenderer _spriteRendererPrefab = null;
         [SerializeField] private RogueCharacter _characterPrefab = null;

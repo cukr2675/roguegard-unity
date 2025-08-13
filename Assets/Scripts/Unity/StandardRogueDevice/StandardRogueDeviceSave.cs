@@ -1,23 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-using System.Linq;
-using System.Text.RegularExpressions;
-using System.IO;
-using System.IO.Compression;
-using System.Reflection;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Objforming;
 using Objforming.Serialization.Json;
-using RuntimeDotter;
 using Roguegard;
 using Roguegard.CharacterCreation;
 using Roguegard.Device;
 using Roguegard.Extensions;
-using Roguegard.Rgpacks.MoonSharp.Objforming.Serialization.Json;
 using Roguegard.Objforming.Json;
+using Roguegard.Rgpacks.MoonSharp.Objforming.Serialization.Json;
+using RuntimeDotter;
+using System.Collections.Generic;
+using System.IO;
+using System.IO.Compression;
+using System.Linq;
+using System.Reflection;
+using System.Text.RegularExpressions;
+using UnityEngine;
 
 namespace RoguegardUnity
 {
@@ -36,7 +34,7 @@ namespace RoguegardUnity
         public static Spanning<string> Extensions => _extensions;
         private static readonly string[] _extensions = new[] { ".gard", ".zip" };
 
-        private static readonly NewGamePointInfo newGamePointInfo = new NewGamePointInfo();
+        private static readonly NewGamePointInfo newGamePointInfo = new();
 
         private readonly CharacterCreationData characterCreationData;
 
@@ -113,12 +111,14 @@ namespace RoguegardUnity
             // デバイスを設定
             var options = new RogueOptions();
             options.ClearWithoutSet();
-            var data = new StandardRogueDeviceData();
-            data.Player = player;
-            data.Subject = player;
-            data.World = world;
-            data.Options = options;
-            data.CurrentRandom = random;
+            var data = new StandardRogueDeviceData
+            {
+                Player = player,
+                Subject = player,
+                World = world,
+                Options = options,
+                CurrentRandom = random
+            };
             var device = new StandardRogueDevice(data);
             RogueDeviceEffect.SetTo(player);
             return device;
@@ -149,8 +149,8 @@ namespace RoguegardUnity
         public StandardRogueDeviceData LoadGameData(Stream stream)
         {
             using var archive = new ZipArchive(stream, ZipArchiveMode.Read, true);
-            var entry = archive.Entries.FirstOrDefault(x => x.Name.EndsWith(".json"));
-            if (entry == null) throw new System.InvalidOperationException("読み込んだファイル内で .json ファイルが見つかりません。");
+            var entry = archive.Entries.FirstOrDefault(x => x.Name.EndsWith(".json")) ?? throw new System.InvalidOperationException(
+                "読み込んだファイル内で .json ファイルが見つかりません。");
             using var streamReader = new StreamReader(entry.Open());
             using var reader = new JsonTextReader(streamReader);
 
@@ -184,16 +184,18 @@ namespace RoguegardUnity
                 Assembly.Load("Roguegard.Rgpacks"),
                 Assembly.Load("Roguegard.Rgpacks.MoonSharp")
             };
-            var converters = new RelationalComponentListBuilder<RelationalJsonConverter>();
-            converters.Add(FormerJsonConverter.Create(typeof(Vector2Int), true));
-            converters.Add(FormerJsonConverter.Create(typeof(RectInt), true));
-            converters.Add(FormerJsonConverter.Create(typeof(Color32), true));
-            converters.Add(FormerJsonConverter.Create(typeof(ShiftableColor), true));
-            converters.Add(FormerJsonConverter.Create(typeof(DotterBoard), true));
-            converters.Add(RogueObjJsonConverter.Create());
-            converters.Add(new MoonSharpTableSerialJsonConverter());
-            converters.Add(FormerJsonConverter.Create(typeof(StandardRogueDeviceData)));
-            converters.Add(FormerJsonConverter.Create(typeof(RogueOptions)));
+            var converters = new RelationalComponentListBuilder<RelationalJsonConverter>
+            {
+                FormerJsonConverter.Create(typeof(Vector2Int), true),
+                FormerJsonConverter.Create(typeof(RectInt), true),
+                FormerJsonConverter.Create(typeof(Color32), true),
+                FormerJsonConverter.Create(typeof(ShiftableColor), true),
+                FormerJsonConverter.Create(typeof(DotterBoard), true),
+                RogueObjJsonConverter.Create(),
+                new MoonSharpTableSerialJsonConverter(),
+                FormerJsonConverter.Create(typeof(StandardRogueDeviceData)),
+                FormerJsonConverter.Create(typeof(RogueOptions))
+            };
             converters.AddAuto(assemblies, instanceType =>
             {
                 if (instanceType.IsArray)

@@ -1,10 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-using UnityEngine.Audio;
 using Roguegard;
 using Roguegard.Extensions;
+using System.Collections;
+using UnityEngine;
+using UnityEngine.Audio;
 
 namespace RoguegardUnity
 {
@@ -25,7 +23,7 @@ namespace RoguegardUnity
         private MenuController menuController;
         private StandardRogueDeviceInspector runtimeInspector;
 
-        private static readonly DummySavePoint dummySavePoint = new DummySavePoint();
+        private static readonly DummySavePoint dummySavePoint = new();
 
         public StandardRogueDeviceEventManager EventManager { get; private set; }
 
@@ -309,7 +307,7 @@ namespace RoguegardUnity
             if (characterRenderSystem.TryGetPositioning(Subject, out var position, out _)) { playerPosition = position; }
 
             // カメラ・メニュー処理
-            touchController.LateUpdateController(Player, playerPosition, deltaTime);
+            touchController.LateUpdateController(playerPosition, deltaTime);
 
             // キュー完全処理後
             if (!characterRenderSystem.InAnimation)

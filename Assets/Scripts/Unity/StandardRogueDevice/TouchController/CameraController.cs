@@ -1,9 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-using UnityEngine.UI;
 using Roguegard;
+using UnityEngine;
+using UnityEngine.UI;
 
 namespace RoguegardUnity
 {
@@ -44,7 +41,7 @@ namespace RoguegardUnity
         }
 
         public void UpdateCamera(
-            RogueObj player, Vector3 playerPosition, bool drag, bool startsDrag, Vector3 dragRelativePosition, float zoom, Vector3 deltaPosition)
+            Vector3 playerPosition, bool drag, bool startsDrag, Vector3 dragRelativePosition, float zoom, Vector3 deltaPosition)
         {
             // ドラッグでカメラ移動
             if (drag)

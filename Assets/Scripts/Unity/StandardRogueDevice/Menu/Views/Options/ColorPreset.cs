@@ -1,12 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 using Roguegard;
+using System.Collections;
+using UnityEngine;
 
 namespace RoguegardUnity
 {
-    [CreateAssetMenu(menuName = "RoguegardData/Settings/ColorPreset")]
+    [CreateAssetMenu(menuName = "Roguegard Unity/Settings/Color Preset")]
     public class ColorPreset : ScriptableLoader
     {
         private static ColorPreset instance;

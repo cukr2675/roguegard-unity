@@ -1,16 +1,15 @@
-﻿using System.Collections;
+using Roguegard;
+using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-
 using System.Linq;
+using UnityEngine;
 using UnityEngine.Localization;
 using UnityEngine.Localization.Tables;
 using UnityEngine.ResourceManagement.AsyncOperations;
-using Roguegard;
 
 namespace RoguegardUnity
 {
-    [CreateAssetMenu(menuName = "RoguegardData/Settings/RogueLocalizedStringTable")]
+    [CreateAssetMenu(menuName = "Roguegard Unity/Settings/Rogue Localized String Table")]
     public class RogueLocalizedStringTable : ScriptableLoader
     {
         [SerializeField] private string[] _tableCollectionNames = null;
