@@ -8,8 +8,8 @@ namespace Roguegard.CharacterCreation
     {
         [SerializeField] private RogueDungeonGeneratorAsset _dungeonGenerator = null;
         [Space]
-        [SerializeField] private RandomRoomObjTable[] _items = null;
-        [SerializeField] private RandomRoomObjTable _goalItem = null;
+        [SerializeField] private AssetStartingItemList[] _items = null;
+        [SerializeField] private AssetStartingItemList _goalItem = null;
 
         public override Spanning<IRogueTile> FillTiles => _dungeonGenerator.FillTiles;
         public override Spanning<IRogueTile> NoizeTiles => _dungeonGenerator.NoiseTiles;
@@ -80,13 +80,13 @@ namespace Roguegard.CharacterCreation
             for (int i = 0; i < _items.Length; i++)
             {
                 var position = floor.Space.Tilemap.Rect.size / 2 + GetItemPosition(i, _items.Length);
-                _items[i].GenerateFloor(floor, position, random);
+                GenerateFloor(_items[i], floor, position, random);
             }
 
             // ゴールを生成
             {
                 var position = floor.Space.Tilemap.Rect.size / 2 + Vector2Int.up * 5;
-                _goalItem.GenerateFloor(floor, position, random);
+                GenerateFloor(_goalItem, floor, position, random);
             }
 
             // 空間移動後は obj.Main.IsTicked = true になる。

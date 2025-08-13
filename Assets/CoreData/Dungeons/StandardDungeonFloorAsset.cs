@@ -12,13 +12,13 @@ namespace Roguegard.CharacterCreation
         public override Spanning<IRogueTile> RoomGroundTiles => _dungeonGenerator.RoomGroundTiles;
         public override Spanning<IRogueTile> RoomWallTiles => _dungeonGenerator.RoomWallTiles;
 
-        [SerializeField] private RandomRoomObjTable[] _enemyTable = null;
+        [SerializeField] private AssetStartingItemList[] _enemyTable = null;
         public override Spanning<IWeightedRogueObjGeneratorList> EnemyTable => _enemyTable;
 
-        [SerializeField] private RandomRoomObjTable[] _itemTable = null;
+        [SerializeField] private AssetStartingItemList[] _itemTable = null;
         public override Spanning<IWeightedRogueObjGeneratorList> ItemTable => _itemTable;
 
-        [SerializeField] private RandomRoomObjTable[] _otherTable = null;
+        [SerializeField] private AssetStartingItemList[] _otherTable = null;
         public override Spanning<IWeightedRogueObjGeneratorList> OtherTable => _otherTable;
 
         [SerializeField] private float _monsterHouseRate = .2f;
@@ -57,19 +57,19 @@ namespace Roguegard.CharacterCreation
             // 敵を生成
             for (int i = 0; i < _enemyTable.Length; i++)
             {
-                _enemyTable[i].GenerateFloor(player, floor, random);
+                GenerateFloor(_enemyTable[i], player, floor, random);
             }
 
             // アイテムを生成
             for (int i = 0; i < _itemTable.Length; i++)
             {
-                _itemTable[i].GenerateFloor(player, floor, random);
+                GenerateFloor(_itemTable[i], player, floor, random);
             }
 
             // その他を生成
             for (int i = 0; i < _otherTable.Length; i++)
             {
-                _otherTable[i].GenerateFloor(player, floor, random);
+                GenerateFloor(_otherTable[i], player, floor, random);
             }
 
             // 空間移動後は obj.Main.IsTicked = true になる。
@@ -130,7 +130,7 @@ namespace Roguegard.CharacterCreation
                 if (enemyCount < enemyMaxCount)
                 {
                     // 敵の数が最大数より少なかった場合、敵を出現させる
-                    enemyTable.GenerateFloor(RogueDevice.Primary.Player, self, RogueRandom.Primary, 1);
+                    GenerateFloor(enemyTable, RogueDevice.Primary.Player, self, RogueRandom.Primary, 1);
                 }
                 return default;
             }

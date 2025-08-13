@@ -4,9 +4,12 @@ using System.Linq;
 
 namespace Roguegard.CharacterCreation
 {
-    [Objforming.Formable(Objforming.FormerMode.Wrapper)]
+    [Objforming.Formable]
     public sealed class StartingItemList : IWeightedRogueObjGeneratorList, IEnumerable<StartingItem>
     {
+        public int MinFrequency { get; set; } = 1;
+        public int MaxFrequency { get; set; } = 1;
+
         private readonly List<StartingItem> list = new();
 
         public StartingItem this[int index] => list[index];
@@ -27,9 +30,6 @@ namespace Roguegard.CharacterCreation
         }
 
         public Spanning<IWeightedRogueObjGenerator> Span => Spanning.Get<IWeightedRogueObjGenerator>(list);
-
-        int IWeightedRogueObjGeneratorList.MinFrequency => 1;
-        int IWeightedRogueObjGeneratorList.MaxFrequency => 1;
 
         public StartingItem Add()
         {
