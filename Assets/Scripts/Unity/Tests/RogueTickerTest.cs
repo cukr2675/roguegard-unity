@@ -1,17 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using NUnit.Framework;
-using UnityEngine;
-using UnityEngine.TestTools;
-
-using System.IO;
-using System.Reflection;
-using Objforming;
-using Objforming.Serialization.Json;
 using Roguegard;
 using Roguegard.CharacterCreation;
 using Roguegard.Device;
 using RoguegardUnity.Tests;
+using System.IO;
+using UnityEngine;
 
 namespace RoguegardUnity
 {
@@ -61,9 +54,10 @@ namespace RoguegardUnity
                 var obj = data.CreateObj(world, Vector2Int.zero, random);
 
                 // デバイスを設定
-                var device = new Device();
-                device.Player = obj;
-                return device;
+                return new Device
+                {
+                    Player = obj
+                };
             }
 
             public Device LoadGame(Stream stream)

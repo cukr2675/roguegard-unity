@@ -1,15 +1,13 @@
-﻿using System.Collections;
+using Roguegard;
 using System.Collections.Generic;
 using UnityEngine;
-
-using Roguegard;
 
 namespace RoguegardUnity.Tests
 {
     public class DebugRogueRandom : IRogueRandom
     {
         private readonly RogueRandom random;
-        private readonly Dictionary<int, float> values = new Dictionary<int, float>();
+        private readonly Dictionary<int, float> values = new();
         private int index;
 
         public DebugRogueRandom(int seed)
