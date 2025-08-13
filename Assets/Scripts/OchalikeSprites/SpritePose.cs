@@ -13,7 +13,7 @@ namespace OchalikeSprites
     // 命名メモ: ISpriteMotion にならって OchalikePose ではなく SpritePose
 
     /// <summary>
-    /// <see cref="OchalikeSpriteData"/> のポージングをするクラス。
+    /// <see cref="OchalikeSpriteAsset"/> のポージングをするクラス。
     /// <see cref="OchalikeBone"/> を <see cref="OchalikeMorph"/> で変更を加えたところに位置・角度・スプライト・色などを変更する
     /// </summary>
     public class SpritePose
@@ -24,7 +24,7 @@ namespace OchalikeSprites
         public bool IsImmutable { get; private set; }
 
         /// <summary>
-        /// true のとき、この <see cref="SpritePose"/> を適用した <see cref="OchalikeSpriteData"/> を背中向きにする。
+        /// true のとき、この <see cref="SpritePose"/> を適用した <see cref="OchalikeSpriteAsset"/> を背中向きにする。
         /// </summary>
         public bool Back { get; private set; }
 

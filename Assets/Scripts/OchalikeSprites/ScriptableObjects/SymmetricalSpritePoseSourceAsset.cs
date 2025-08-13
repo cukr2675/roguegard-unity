@@ -1,12 +1,11 @@
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using UnityEngine;
 
 namespace OchalikeSprites
 {
     [CreateAssetMenu(menuName = "Ochalike Sprites/Sprite Pose Source/Symmetrical")]
-    public class SymmetricalSpritePoseSourceData : DirectionalSpritePoseSourceData
+    public class SymmetricalSpritePoseSourceAsset : DirectionalSpritePoseSourceAsset
     {
         [SerializeField] private int _pixelsPerUnit = OchalikeSpritesUtility.DefaultPixelsPerUnit;
         [SerializeField] private List<Item> _items = null;
@@ -15,7 +14,7 @@ namespace OchalikeSprites
 
 #if UNITY_EDITOR
         [Header("Editor Only")]
-        [SerializeField] internal OchalikeSpriteData _previewOchalikeSprite = null; // PropertyDrawer で使用
+        [SerializeField] internal OchalikeSpriteAsset _previewOchalikeSprite = null; // PropertyDrawer で使用
 #endif
 
         [System.NonSerialized] private ImmutableSymmetricalSpritePoseSource poseSource;
@@ -54,7 +53,7 @@ namespace OchalikeSprites
         [System.Serializable]
         private class Item
         {
-            [SerializeField] private BoneKeywordData _boneName;
+            [SerializeField] private BoneKeywordAsset _boneName;
             public BoneKeyword BoneName => _boneName;
 
             [Tooltip("MorphedBareSprite を上書きする。最初から BareSprite が存在しなければ変化しない")]
@@ -101,7 +100,7 @@ namespace OchalikeSprites
         [System.Serializable]
         private class BackItem
         {
-            [SerializeField] private BoneKeywordData _name;
+            [SerializeField] private BoneKeywordAsset _name;
             public BoneKeyword Name => _name;
 
             [SerializeField] private BoneBack.Type _localBack;
@@ -116,7 +115,7 @@ namespace OchalikeSprites
         [System.Serializable]
         private class ReorderItem
         {
-            [SerializeField] private BoneKeywordData _name;
+            [SerializeField] private BoneKeywordAsset _name;
             public BoneKeyword Name => _name;
 
             [SerializeField] private BoneReorder.Type _reorder;

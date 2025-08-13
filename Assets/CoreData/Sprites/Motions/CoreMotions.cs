@@ -1,4 +1,3 @@
-using OchalikeSprites;
 using System.Collections;
 using UnityEngine;
 
@@ -8,47 +7,47 @@ namespace Roguegard
     {
         private static CoreMotions instance;
 
-        [SerializeField] private RotatableSpriteMotionData _beThrownDrop;
-        public static ISpriteMotion BeThrownDrop => instance._beThrownDrop;
+        [SerializeField] private OchalikeSprites.RotatableSpriteMotionAsset _beThrownDrop;
+        public static OchalikeSprites.ISpriteMotion BeThrownDrop => instance._beThrownDrop;
 
-        [SerializeField] private RotatableSpriteMotionData _beThrownFlying;
-        public static ISpriteMotion BeThrownFlying => instance._beThrownFlying;
+        [SerializeField] private OchalikeSprites.RotatableSpriteMotionAsset _beThrownFlying;
+        public static OchalikeSprites.ISpriteMotion BeThrownFlying => instance._beThrownFlying;
 
-        [SerializeField] private RotatableSpriteMotionData _bomb;
-        public static ISpriteMotion Bomb => instance._bomb;
+        [SerializeField] private OchalikeSprites.RotatableSpriteMotionAsset _bomb;
+        public static OchalikeSprites.ISpriteMotion Bomb => instance._bomb;
 
-        [SerializeField] private RotatableSpriteMotionData _buff;
-        public static ISpriteMotion Buff => instance._buff;
+        [SerializeField] private OchalikeSprites.RotatableSpriteMotionAsset _buff;
+        public static OchalikeSprites.ISpriteMotion Buff => instance._buff;
 
-        [SerializeField] private RotatableSpriteMotionData _confusion;
-        public static ISpriteMotion Confusion => instance._confusion;
+        [SerializeField] private OchalikeSprites.RotatableSpriteMotionAsset _confusion;
+        public static OchalikeSprites.ISpriteMotion Confusion => instance._confusion;
 
-        [SerializeField] private RotatableSpriteMotionData _debuff;
-        public static ISpriteMotion Debuff => instance._debuff;
+        [SerializeField] private OchalikeSprites.RotatableSpriteMotionAsset _debuff;
+        public static OchalikeSprites.ISpriteMotion Debuff => instance._debuff;
 
-        [SerializeField] private RotatableSpriteMotionData _discus;
-        public static ISpriteMotion Discus => instance._discus;
+        [SerializeField] private OchalikeSprites.RotatableSpriteMotionAsset _discus;
+        public static OchalikeSprites.ISpriteMotion Discus => instance._discus;
 
-        [SerializeField] private RotatableSpriteMotionData _eat;
-        public static ISpriteMotion Eat => instance._eat;
+        [SerializeField] private OchalikeSprites.RotatableSpriteMotionAsset _eat;
+        public static OchalikeSprites.ISpriteMotion Eat => instance._eat;
 
-        [SerializeField] private RotatableSpriteMotionData _fullTurn;
-        public static ISpriteMotion FullTurn => instance._fullTurn;
+        [SerializeField] private OchalikeSprites.RotatableSpriteMotionAsset _fullTurn;
+        public static OchalikeSprites.ISpriteMotion FullTurn => instance._fullTurn;
 
-        [SerializeField] private RotatableSpriteMotionData _heal;
-        public static ISpriteMotion Heal => instance._heal;
+        [SerializeField] private OchalikeSprites.RotatableSpriteMotionAsset _heal;
+        public static OchalikeSprites.ISpriteMotion Heal => instance._heal;
 
-        [SerializeField] private RotatableSpriteMotionData _paralysis;
-        public static ISpriteMotion Paralysis => instance._paralysis;
+        [SerializeField] private OchalikeSprites.RotatableSpriteMotionAsset _paralysis;
+        public static OchalikeSprites.ISpriteMotion Paralysis => instance._paralysis;
 
-        [SerializeField] private Rotatable1To8SpriteMotionData _powerSlash;
-        public static ISpriteMotion PowerSlash => instance._powerSlash;
+        [SerializeField] private OchalikeSprites.Rotatable1To8SpriteMotionAsset _powerSlash;
+        public static OchalikeSprites.ISpriteMotion PowerSlash => instance._powerSlash;
 
-        [SerializeField] private RotatableSpriteMotionData _sleep;
-        public static ISpriteMotion Sleep => instance._sleep;
+        [SerializeField] private OchalikeSprites.RotatableSpriteMotionAsset _sleep;
+        public static OchalikeSprites.ISpriteMotion Sleep => instance._sleep;
 
-        [SerializeField] private RotatableSpriteMotionData _smoke;
-        public static ISpriteMotion Smoke => instance._smoke;
+        [SerializeField] private OchalikeSprites.RotatableSpriteMotionAsset _smoke;
+        public static OchalikeSprites.ISpriteMotion Smoke => instance._smoke;
 
         public override IEnumerator LoadAsync()
         {

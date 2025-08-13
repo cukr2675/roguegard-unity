@@ -4,7 +4,7 @@ using UnityEngine;
 namespace OchalikeSprites
 {
     [CreateAssetMenu(menuName = "Ochalike Sprites/Ochalike Sprite")]
-    public class OchalikeSpriteData : ScriptableObject
+    public class OchalikeSpriteAsset : ScriptableObject
     {
         [SerializeField] private int _pixelsPerUnit = OchalikeSpritesUtility.DefaultPixelsPerUnit;
         public int PixelsPerUnit { get => _pixelsPerUnit; set => _pixelsPerUnit = value; }
@@ -69,11 +69,11 @@ namespace OchalikeSprites
         [System.Serializable]
         public class Bone
         {
-            [SerializeField] private BoneKeywordData _boneName = null;
-            public BoneKeywordData BoneName { get => _boneName; set => _boneName = value; }
+            [SerializeField] private BoneKeywordAsset _boneName = null;
+            public BoneKeywordAsset BoneName { get => _boneName; set => _boneName = value; }
 
-            [SerializeField] private BoneKeywordData _parentBoneName = null;
-            public BoneKeywordData ParentBoneName { get => _parentBoneName; set => _parentBoneName = value; }
+            [SerializeField] private BoneKeywordAsset _parentBoneName = null;
+            public BoneKeywordAsset ParentBoneName { get => _parentBoneName; set => _parentBoneName = value; }
 
             [Space]
 

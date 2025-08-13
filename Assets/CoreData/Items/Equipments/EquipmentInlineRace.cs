@@ -16,10 +16,10 @@ namespace Roguegard.CharacterCreation
 
         [SerializeField] private bool _canStackWhileEquipped;
 
-        [SerializeField] private OchalikeMorphData _ochalikeMorph;
+        [SerializeField] private OchalikeMorphAsset _ochalikeMorph;
 
         [Tooltip("この値が設定されているとき、装備者の指定のボーンの色をスポイトする")]
-        [SerializeField] private BoneKeywordData _eyeDropBoneName;
+        [SerializeField] private BoneKeywordAsset _eyeDropBoneName;
 
         [SerializeField] private bool _overridesBoneSpriteEffectOrder;
 

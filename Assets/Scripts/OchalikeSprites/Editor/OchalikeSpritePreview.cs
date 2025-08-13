@@ -10,10 +10,10 @@ namespace OchalikeSprites.Editor
     /// </summary>
     public class OchalikeSpritePreview
     {
-        public OchalikeSpriteData OchalikeSpriteData { get; set; } = null;
+        public OchalikeSpriteAsset OchalikeSpriteData { get; set; } = null;
         public Color BareColor { get; set; } = Color.white;
-        public OchalikeMorphData MorphData { get; set; } = null;
-        public SpriteMotionData MotionData { get; set; } = null;
+        public OchalikeMorphAsset MorphData { get; set; } = null;
+        public SpriteMotionAsset MotionData { get; set; } = null;
         public SpriteDirection Direction { get; set; } = SpriteDirection.LowerLeft;
         public Color DefaultColor { get; set; } = Color.white;
 
@@ -32,9 +32,9 @@ namespace OchalikeSprites.Editor
         public static OchalikeSpritePreview Primary { get; set; } = new();
 
         // Color bareColor (defaultColor と混乱する) など型だけでは判断が難しい引数があるため System.Func ではなく定義デリゲートを使う
-        public delegate OchalikeMorph MorphFunc(OchalikeMorphData morphData);
-        public delegate IReadOnlyOchalikeBone OchalikeSpriteFunc(OchalikeSpriteData ochalikeSpriteData, Color bareColor, OchalikeMorph morph);
-        public delegate OchalikeSpriteTransform SpriteTransformFunc(SpriteMotionData motionData, SpriteDirection direction, int animationTime);
+        public delegate OchalikeMorph MorphFunc(OchalikeMorphAsset morphData);
+        public delegate IReadOnlyOchalikeBone OchalikeSpriteFunc(OchalikeSpriteAsset ochalikeSpriteData, Color bareColor, OchalikeMorph morph);
+        public delegate OchalikeSpriteTransform SpriteTransformFunc(SpriteMotionAsset motionData, SpriteDirection direction, int animationTime);
         public delegate void RenderHandler(
             RenderTexture preview, IReadOnlyOchalikeBone ochalikeSprite, OchalikeMorph morph, OchalikeSpriteTransform spriteTransform, Color defaultColor);
 
@@ -140,7 +140,7 @@ namespace OchalikeSprites.Editor
 
             if (enableOchalikeSpriteData)
             {
-                OchalikeSpriteData = (OchalikeSpriteData)EditorGUILayout.ObjectField(OchalikeSpriteData, typeof(OchalikeSpriteData), false, GUILayout.Width(96));
+                OchalikeSpriteData = (OchalikeSpriteAsset)EditorGUILayout.ObjectField(OchalikeSpriteData, typeof(OchalikeSpriteAsset), false, GUILayout.Width(96));
             }
             if (enableBareColor)
             {
@@ -148,11 +148,11 @@ namespace OchalikeSprites.Editor
             }
             if (enableMorphData)
             {
-                MorphData = (OchalikeMorphData)EditorGUILayout.ObjectField(MorphData, typeof(OchalikeMorphData), false, GUILayout.Width(96));
+                MorphData = (OchalikeMorphAsset)EditorGUILayout.ObjectField(MorphData, typeof(OchalikeMorphAsset), false, GUILayout.Width(96));
             }
             if (enableMotionData)
             {
-                MotionData = (SpriteMotionData)EditorGUILayout.ObjectField(MotionData, typeof(SpriteMotionData), false, GUILayout.Width(96));
+                MotionData = (SpriteMotionAsset)EditorGUILayout.ObjectField(MotionData, typeof(SpriteMotionAsset), false, GUILayout.Width(96));
             }
             if (enableDirection)
             {
@@ -174,15 +174,15 @@ namespace OchalikeSprites.Editor
         /// <summary>
         /// リフレクションを使用してプレビュー用の <see cref="OchalikeSpriteData"/> を取得する
         /// </summary>
-        internal static OchalikeSpriteData GetOchalikeSpriteData(Object target)
+        internal static OchalikeSpriteAsset GetOchalikeSpriteData(Object target)
         {
             var propertyInfo = target.GetType()
                 .GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic) // public, private を問わないインスタンスフィールドで
-                .Where(p => p.FieldType == typeof(OchalikeSpriteData))                           // OchalikeSpriteData 型のフィールドを取得
+                .Where(p => p.FieldType == typeof(OchalikeSpriteAsset))                           // OchalikeSpriteData 型のフィールドを取得
                 .FirstOrDefault();
             if (propertyInfo == null) return null; // 該当するフィールドが見つからなければ null
 
-            return (OchalikeSpriteData)propertyInfo.GetValue(target);
+            return (OchalikeSpriteAsset)propertyInfo.GetValue(target);
         }
     }
 }

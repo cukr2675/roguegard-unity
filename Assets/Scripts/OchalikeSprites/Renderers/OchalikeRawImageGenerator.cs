@@ -7,12 +7,12 @@ namespace OchalikeSprites
     public class OchalikeRawImageGenerator : MonoBehaviour
     {
         [Header("Ochalike Sprites")]
-        [SerializeField] private OchalikeSpriteData _ochalikeSprite = null;
+        [SerializeField] private OchalikeSpriteAsset _ochalikeSprite = null;
         [SerializeField] private Color _defaultColor = Color.white;
         [SerializeField] private Color _bareColor = Color.white;
         [SerializeField] private bool _useDarkOutline = false;
-        [SerializeField] private OchalikeMorphData _morph = null;
-        [SerializeField] private SpriteMotionData _motion = null;
+        [SerializeField] private OchalikeMorphAsset _morph = null;
+        [SerializeField] private SpriteMotionAsset _motion = null;
         [SerializeField] private int _angle = 6;
         [SerializeField] private Vector2Int _spriteSize = new(64, 64);
         [SerializeField] private Vector2 _spriteOffset = new(0f, -.5f);

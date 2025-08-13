@@ -5,8 +5,8 @@ namespace Roguegard.CharacterCreation
 {
     public class StraddlingPoseEquipped : ReferableScript, IEquippedEffectSource
     {
-        [SerializeField] private DirectionalSpritePoseSourceData _pose;
-        [SerializeField] private BoneKeywordData _vehicleBoneName;
+        [SerializeField] private DirectionalSpritePoseSourceAsset _pose;
+        [SerializeField] private BoneKeywordAsset _vehicleBoneName;
         [SerializeField] private BoneSprite _vehicleBoneSprite;
 
         IEquippedEffect IEquippedEffectSource.CreateOrReuse(RogueObj equipment, IEquippedEffect effect)

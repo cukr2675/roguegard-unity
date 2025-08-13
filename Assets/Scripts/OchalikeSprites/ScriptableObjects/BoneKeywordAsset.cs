@@ -3,9 +3,9 @@ using UnityEngine;
 namespace OchalikeSprites
 {
     [CreateAssetMenu(menuName = "Ochalike Sprites/Bone Keyword")]
-    public class BoneKeywordData : ScriptableObject
+    public class BoneKeywordAsset : ScriptableObject
     {
-        public static implicit operator BoneKeyword(BoneKeywordData data)
+        public static implicit operator BoneKeyword(BoneKeywordAsset data)
         {
             return new BoneKeyword(data.name);
         }

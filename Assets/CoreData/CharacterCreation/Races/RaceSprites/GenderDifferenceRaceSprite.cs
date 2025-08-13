@@ -63,8 +63,8 @@ namespace Roguegard.CharacterCreation
             [SerializeField] private RogueGenderAsset _gender = null;
             public IRogueGender Gender => _gender;
 
-            [SerializeField] private OchalikeSpriteData _bone = null;
-            public OchalikeSpriteData Bone => _bone;
+            [SerializeField] private OchalikeSpriteAsset _bone = null;
+            public OchalikeSpriteAsset Bone => _bone;
 
             [SerializeField] private SpriteMotionSetAsset _motionSet = null;
             public SpriteMotionSetAsset MotionSet => _motionSet;

@@ -15,5 +15,5 @@ MonoBehaviour:
   _namespaceName: Roguegard
   _targetFolder: {fileID: 102900000, guid: 839f70096f828be40bf05a26af0e0267, type: 3}
   _assetTypeNames:
-  - OchalikeSprites.RotatableSpriteMotionData
+  - OchalikeSprites.RotatableSpriteMotionAsset
   _propertyTypeName: OchalikeSprites.ISpriteMotion

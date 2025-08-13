@@ -7,8 +7,8 @@ namespace Roguegard
     {
         private static CoreOchalikeMorphs instance;
 
-        [SerializeField] private OchalikeSprites.OchalikeMorphData _guruguruEyes;
-        public static OchalikeSprites.OchalikeMorphData GuruguruEyes => instance._guruguruEyes;
+        [SerializeField] private OchalikeSprites.OchalikeMorphAsset _guruguruEyes;
+        public static OchalikeSprites.OchalikeMorphAsset GuruguruEyes => instance._guruguruEyes;
 
         public override IEnumerator LoadAsync()
         {

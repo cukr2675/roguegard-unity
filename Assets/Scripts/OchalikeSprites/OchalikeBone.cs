@@ -4,7 +4,7 @@ using UnityEngine;
 namespace OchalikeSprites
 {
     /// <summary>
-    /// <see cref="OchalikeSpriteData"/> を構成するボーン。
+    /// <see cref="OchalikeSpriteAsset"/> を構成するボーン。
     /// これをもとに <see cref="OchalikeMorph"/> と <see cref="SpritePose"/> の効果を受ける
     /// </summary>
     public class OchalikeBone : IReadOnlyOchalikeBone

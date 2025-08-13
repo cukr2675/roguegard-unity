@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace OchalikeSprites.Editor
 {
-    [CustomEditor(typeof(OchalikeMorphData), true)]
+    [CustomEditor(typeof(OchalikeMorphAsset), true)]
     [CanEditMultipleObjects]
     public class OchalikeMorphDataEditor : UnityEditor.Editor
     {
@@ -28,7 +28,7 @@ namespace OchalikeSprites.Editor
 
         private void UpdatePreview()
         {
-            var data = (OchalikeMorphData)target;
+            var data = (OchalikeMorphAsset)target;
             OchalikeSpritePreview.Primary.RenderTo(
                 preview,
                 step1GetMorph: (_) =>

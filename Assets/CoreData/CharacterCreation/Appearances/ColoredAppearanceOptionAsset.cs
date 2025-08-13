@@ -6,8 +6,8 @@ namespace Roguegard.CharacterCreation
     public abstract class ColoredAppearanceOptionAsset : AppearanceOptionAsset
     {
         [Space]
-        [SerializeField] private BoneKeywordData _boneName = null;
-        public BoneKeywordData BoneNameSource { get => _boneName; set => _boneName = value; }
+        [SerializeField] private BoneKeywordAsset _boneName = null;
+        public BoneKeywordAsset BoneNameSource { get => _boneName; set => _boneName = value; }
         public override BoneKeyword BoneName => _boneName;
 
         [SerializeField] private bool _isBone = false;

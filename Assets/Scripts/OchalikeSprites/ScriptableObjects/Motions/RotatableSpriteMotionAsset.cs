@@ -4,7 +4,7 @@ using UnityEngine;
 namespace OchalikeSprites
 {
     [CreateAssetMenu(menuName = "Ochalike Sprites/Sprite Motion/Rotatable")]
-    public class RotatableSpriteMotionData : SpriteMotionData
+    public class RotatableSpriteMotionAsset : SpriteMotionAsset
     {
         [SerializeField] private int _pixelsPerUnit = OchalikeSpritesUtility.DefaultPixelsPerUnit;
         [SerializeField] private int _loopCount = 0;
@@ -13,7 +13,7 @@ namespace OchalikeSprites
 
 #if UNITY_EDITOR
         [Header("Editor Only")]
-        [SerializeField] internal OchalikeSpriteData _previewOchalikeSprite = null; // PropertyDrawer で使用する
+        [SerializeField] internal OchalikeSpriteAsset _previewOchalikeSprite = null; // PropertyDrawer で使用する
 #endif
 
         public override void ApplyTo(int animationTime, SpriteDirection direction, ref OchalikeSpriteTransform transform, out bool endOfMotion)
@@ -77,7 +77,7 @@ namespace OchalikeSprites
         [System.Serializable]
         private class Item
         {
-            [SerializeField] private DirectionalSpritePoseSourceData _poseSource;
+            [SerializeField] private DirectionalSpritePoseSourceAsset _poseSource;
             public IDirectionalSpritePoseSource PoseSource => _poseSource;
 
             [SerializeField] private Vector3 _pixelPosition;

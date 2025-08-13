@@ -78,11 +78,11 @@ namespace OchalikeSprites.Editor
             return new BoneSprite(normalFront, normalRear, backFront, backRear);
         }
 
-        public static BoneKeywordData GetBoneKeyword(string name)
+        public static BoneKeywordAsset GetBoneKeyword(string name)
         {
-            return AssetDatabase.FindAssets($"{name} t:{nameof(BoneKeywordData)}")
+            return AssetDatabase.FindAssets($"{name} t:{nameof(BoneKeywordAsset)}")
                 .Select(guid => AssetDatabase.GUIDToAssetPath(guid))
-                .Select(path => AssetDatabase.LoadAssetAtPath<BoneKeywordData>(path))
+                .Select(path => AssetDatabase.LoadAssetAtPath<BoneKeywordAsset>(path))
                 .First(); // 見つからなければ例外を投げる
         }
     }

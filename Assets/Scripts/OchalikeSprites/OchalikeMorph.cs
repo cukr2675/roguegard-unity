@@ -11,7 +11,7 @@ namespace OchalikeSprites
     // OchalikeMakeup だと服にも使うことがわかりにくくなる
 
     /// <summary>
-    /// <see cref="OchalikeSpriteData"/> のボーン構造と位置はそのままに見た目を変更するクラス。
+    /// <see cref="OchalikeSpriteAsset"/> のボーン構造と位置はそのままに見た目を変更するクラス。
     /// 処理順は <see cref="OchalikeBone"/> と <see cref="SpritePose"/> の中間に位置する
     /// </summary>
     public class OchalikeMorph

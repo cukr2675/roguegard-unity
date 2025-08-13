@@ -6,7 +6,7 @@ namespace Roguegard
     /// <summary>
     /// <see cref="ScriptableObject"/> を継承した <see cref="RogueSpriteMotion"/>
     /// </summary>
-    public abstract class RogueSpriteMotionAsset : SpriteMotionData, IRogueSpriteMotion
+    public abstract class RogueSpriteMotionAsset : SpriteMotionAsset, IRogueSpriteMotion
     {
         public abstract IKeyword Keyword { get; }
 

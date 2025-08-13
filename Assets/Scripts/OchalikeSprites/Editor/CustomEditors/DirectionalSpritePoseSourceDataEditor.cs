@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace OchalikeSprites.Editor
 {
-    [CustomEditor(typeof(DirectionalSpritePoseSourceData), true)]
+    [CustomEditor(typeof(DirectionalSpritePoseSourceAsset), true)]
     [CanEditMultipleObjects]
     public class DirectionalSpritePoseSourceDataEditor : UnityEditor.Editor
     {
@@ -28,7 +28,7 @@ namespace OchalikeSprites.Editor
 
         private void UpdatePreview()
         {
-            var data = (DirectionalSpritePoseSourceData)target;
+            var data = (DirectionalSpritePoseSourceAsset)target;
             OchalikeSpritePreview.Primary.RenderTo(
                 preview,
                 step2GetOchalikeSprite: (ochalikeSpriteData, bareColor, morph) =>

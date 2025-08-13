@@ -44,7 +44,7 @@ namespace Roguegard
             [SerializeField] private KeywordAsset _key;
             public IKeyword Key => _key;
 
-            [SerializeField] private SpriteMotionData _value;
+            [SerializeField] private SpriteMotionAsset _value;
             public ISpriteMotion Value => _value;
         }
     }

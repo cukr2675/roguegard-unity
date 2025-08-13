@@ -4,14 +4,14 @@ using UnityEngine;
 namespace OchalikeSprites.Editor
 {
     [CreateAssetMenu(menuName = "Ochalike Sprites/Editor/Humanoid Ochalike Sprite Generator")]
-    public class HumanoidOchalikeSpriteDataGenerator : ScriptableObjectGenerator<OchalikeSpriteData>
+    public class HumanoidOchalikeSpriteDataGenerator : ScriptableObjectGenerator<OchalikeSpriteAsset>
     {
         [SerializeField] private DefaultAsset _spritesFolder = null;
 
         protected override int Start => 1;
         protected override int Length => 9;
 
-        protected override bool TrySetObject(OchalikeSpriteData data, int index)
+        protected override bool TrySetObject(OchalikeSpriteAsset data, int index)
         {
             var searchInFolders = new string[] { AssetDatabase.GetAssetPath(_spritesFolder) };
 
@@ -96,7 +96,7 @@ namespace OchalikeSprites.Editor
             return GetChestStatureRank(bodyStature) + 1;
         }
 
-        private abstract class BaseBone : OchalikeSpriteData.Bone
+        private abstract class BaseBone : OchalikeSpriteAsset.Bone
         {
             public BaseBone()
             {
@@ -108,10 +108,10 @@ namespace OchalikeSprites.Editor
 
         private static class Body
         {
-            public static OchalikeSpriteData.Bone Create(int bodyStature, int legStature, string[] searchInFolders)
+            public static OchalikeSpriteAsset.Bone Create(int bodyStature, int legStature, string[] searchInFolders)
             {
                 var statureRank = GetBodyStatureRank(legStature);
-                return new OchalikeSpriteData.Bone
+                return new OchalikeSpriteAsset.Bone
                 {
                     BoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("Body"),
                     BareSprite = GetSprite(bodyStature, searchInFolders),
@@ -134,10 +134,10 @@ namespace OchalikeSprites.Editor
 
         private static class Chest
         {
-            public static OchalikeSpriteData.Bone Create(int bodyStature, string[] searchInFolders)
+            public static OchalikeSpriteAsset.Bone Create(int bodyStature, string[] searchInFolders)
             {
                 var statureRank = GetChestStatureRank(bodyStature);
-                return new OchalikeSpriteData.Bone
+                return new OchalikeSpriteAsset.Bone
                 {
                     BoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("Chest"),
                     ParentBoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("Body"),
@@ -152,10 +152,10 @@ namespace OchalikeSprites.Editor
 
         private static class LeftArm
         {
-            public static OchalikeSpriteData.Bone Create(int bodyStature, int armStature, string[] searchInFolders)
+            public static OchalikeSpriteAsset.Bone Create(int bodyStature, int armStature, string[] searchInFolders)
             {
                 var statureRank = GetChestStatureRank(bodyStature);
-                return new OchalikeSpriteData.Bone
+                return new OchalikeSpriteAsset.Bone
                 {
                     BoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("LeftArm"),
                     ParentBoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("Body"),
@@ -169,10 +169,10 @@ namespace OchalikeSprites.Editor
 
         private static class LeftHand
         {
-            public static OchalikeSpriteData.Bone Create(int armStature)
+            public static OchalikeSpriteAsset.Bone Create(int armStature)
             {
                 var statureRank = GetHandStatureRank(armStature);
-                return new OchalikeSpriteData.Bone
+                return new OchalikeSpriteAsset.Bone
                 {
                     BoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("LeftHand"),
                     ParentBoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("LeftArm"),
@@ -185,10 +185,10 @@ namespace OchalikeSprites.Editor
 
         private static class RightArm
         {
-            public static OchalikeSpriteData.Bone Create(int bodyStature, int armStature, string[] searchInFolders)
+            public static OchalikeSpriteAsset.Bone Create(int bodyStature, int armStature, string[] searchInFolders)
             {
                 var statureRank = GetChestStatureRank(bodyStature);
-                return new OchalikeSpriteData.Bone
+                return new OchalikeSpriteAsset.Bone
                 {
                     BoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("RightArm"),
                     ParentBoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("Body"),
@@ -203,10 +203,10 @@ namespace OchalikeSprites.Editor
 
         private static class RightHand
         {
-            public static OchalikeSpriteData.Bone Create(int armStature)
+            public static OchalikeSpriteAsset.Bone Create(int armStature)
             {
                 var statureRank = GetHandStatureRank(armStature);
-                return new OchalikeSpriteData.Bone
+                return new OchalikeSpriteAsset.Bone
                 {
                     BoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("RightHand"),
                     ParentBoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("RightArm"),
@@ -220,9 +220,9 @@ namespace OchalikeSprites.Editor
 
         private static class LeftLeg
         {
-            public static OchalikeSpriteData.Bone Create(int legStature, string[] searchInFolders)
+            public static OchalikeSpriteAsset.Bone Create(int legStature, string[] searchInFolders)
             {
-                return new OchalikeSpriteData.Bone
+                return new OchalikeSpriteAsset.Bone
                 {
                     BoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("LeftLeg"),
                     ParentBoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("Body"),
@@ -236,10 +236,10 @@ namespace OchalikeSprites.Editor
 
         private static class LeftFoot
         {
-            public static OchalikeSpriteData.Bone Create(int legStature)
+            public static OchalikeSpriteAsset.Bone Create(int legStature)
             {
                 var statureRank = GetFootStatureRank(legStature);
-                return new OchalikeSpriteData.Bone
+                return new OchalikeSpriteAsset.Bone
                 {
                     BoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("LeftFoot"),
                     ParentBoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("LeftLeg"),
@@ -252,9 +252,9 @@ namespace OchalikeSprites.Editor
 
         private static class RightLeg
         {
-            public static OchalikeSpriteData.Bone Create(int legStature, string[] searchInFolders)
+            public static OchalikeSpriteAsset.Bone Create(int legStature, string[] searchInFolders)
             {
-                return new OchalikeSpriteData.Bone
+                return new OchalikeSpriteAsset.Bone
                 {
                     BoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("RightLeg"),
                     ParentBoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("Body"),
@@ -268,10 +268,10 @@ namespace OchalikeSprites.Editor
 
         private static class RightFoot
         {
-            public static OchalikeSpriteData.Bone Create(int legStature)
+            public static OchalikeSpriteAsset.Bone Create(int legStature)
             {
                 var statureRank = GetFootStatureRank(legStature);
-                return new OchalikeSpriteData.Bone
+                return new OchalikeSpriteAsset.Bone
                 {
                     BoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("RightFoot"),
                     ParentBoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("RightLeg"),
@@ -284,10 +284,10 @@ namespace OchalikeSprites.Editor
 
         private static class Head
         {
-            public static OchalikeSpriteData.Bone Create(int bodyStature, string[] searchInFolders)
+            public static OchalikeSpriteAsset.Bone Create(int bodyStature, string[] searchInFolders)
             {
                 var statureRank = GetHeadStatureRank(bodyStature);
-                return new OchalikeSpriteData.Bone
+                return new OchalikeSpriteAsset.Bone
                 {
                     BoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("Head"),
                     ParentBoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("Body"),
@@ -301,9 +301,9 @@ namespace OchalikeSprites.Editor
 
         private static class Hair
         {
-            public static OchalikeSpriteData.Bone Create()
+            public static OchalikeSpriteAsset.Bone Create()
             {
-                return new OchalikeSpriteData.Bone
+                return new OchalikeSpriteAsset.Bone
                 {
                     BoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("Hair"),
                     ParentBoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("Head"),
@@ -315,9 +315,9 @@ namespace OchalikeSprites.Editor
 
         private static class LeftEar
         {
-            public static OchalikeSpriteData.Bone Create()
+            public static OchalikeSpriteAsset.Bone Create()
             {
-                return new OchalikeSpriteData.Bone
+                return new OchalikeSpriteAsset.Bone
                 {
                     BoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("LeftEar"),
                     ParentBoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("Head"),
@@ -330,9 +330,9 @@ namespace OchalikeSprites.Editor
 
         private static class RightEar
         {
-            public static OchalikeSpriteData.Bone Create()
+            public static OchalikeSpriteAsset.Bone Create()
             {
-                return new OchalikeSpriteData.Bone
+                return new OchalikeSpriteAsset.Bone
                 {
                     BoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("RightEar"),
                     ParentBoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("Head"),
@@ -345,9 +345,9 @@ namespace OchalikeSprites.Editor
 
         private static class LeftEye
         {
-            public static OchalikeSpriteData.Bone Create()
+            public static OchalikeSpriteAsset.Bone Create()
             {
-                return new OchalikeSpriteData.Bone
+                return new OchalikeSpriteAsset.Bone
                 {
                     BoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("LeftEye"),
                     ParentBoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("Head"),
@@ -360,9 +360,9 @@ namespace OchalikeSprites.Editor
 
         private static class RightEye
         {
-            public static OchalikeSpriteData.Bone Create()
+            public static OchalikeSpriteAsset.Bone Create()
             {
-                return new OchalikeSpriteData.Bone
+                return new OchalikeSpriteAsset.Bone
                 {
                     BoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("RightEye"),
                     ParentBoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("Head"),
@@ -375,10 +375,10 @@ namespace OchalikeSprites.Editor
 
         private static class Mouth
         {
-            public static OchalikeSpriteData.Bone Create(string[] searchInFolders)
+            public static OchalikeSpriteAsset.Bone Create(string[] searchInFolders)
             {
                 var clearSprite = OchalikeSpritesAssetDatabase.GetSprite("OSpR_Humanoid_Clear", searchInFolders);
-                return new OchalikeSpriteData.Bone
+                return new OchalikeSpriteAsset.Bone
                 {
                     BoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("Mouth"),
                     ParentBoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("Head"),
@@ -392,10 +392,10 @@ namespace OchalikeSprites.Editor
 
         private static class Wings
         {
-            public static OchalikeSpriteData.Bone Create(int bodyStature)
+            public static OchalikeSpriteAsset.Bone Create(int bodyStature)
             {
                 var statureRank = GetChestStatureRank(bodyStature);
-                return new OchalikeSpriteData.Bone
+                return new OchalikeSpriteAsset.Bone
                 {
                     BoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("Wing"),
                     ParentBoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("Body"),
@@ -408,9 +408,9 @@ namespace OchalikeSprites.Editor
 
         private static class LongHair
         {
-            public static OchalikeSpriteData.Bone Create()
+            public static OchalikeSpriteAsset.Bone Create()
             {
-                return new OchalikeSpriteData.Bone
+                return new OchalikeSpriteAsset.Bone
                 {
                     BoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("LongHair"),
                     ParentBoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("Wings"),
@@ -422,9 +422,9 @@ namespace OchalikeSprites.Editor
 
         private static class Tail
         {
-            public static OchalikeSpriteData.Bone Create()
+            public static OchalikeSpriteAsset.Bone Create()
             {
-                return new OchalikeSpriteData.Bone
+                return new OchalikeSpriteAsset.Bone
                 {
                     BoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("Tail"),
                     ParentBoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("Body"),
@@ -437,10 +437,10 @@ namespace OchalikeSprites.Editor
 
         private static class BodyEffect
         {
-            public static OchalikeSpriteData.Bone Create(string[] searchInFolders)
+            public static OchalikeSpriteAsset.Bone Create(string[] searchInFolders)
             {
                 var clearSprite = OchalikeSpritesAssetDatabase.GetSprite("OSpR_Humanoid_Clear", searchInFolders);
-                return new OchalikeSpriteData.Bone
+                return new OchalikeSpriteAsset.Bone
                 {
                     BoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("BodyEffect"),
                     ParentBoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("Body"),
@@ -453,10 +453,10 @@ namespace OchalikeSprites.Editor
 
         private static class HeadEffect
         {
-            public static OchalikeSpriteData.Bone Create(string[] searchInFolders)
+            public static OchalikeSpriteAsset.Bone Create(string[] searchInFolders)
             {
                 var clearSprite = OchalikeSpritesAssetDatabase.GetSprite("OSpR_Humanoid_Clear", searchInFolders);
-                return new OchalikeSpriteData.Bone
+                return new OchalikeSpriteAsset.Bone
                 {
                     BoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("HeadEffect"),
                     ParentBoneName = OchalikeSpritesAssetDatabase.GetBoneKeyword("Head"),

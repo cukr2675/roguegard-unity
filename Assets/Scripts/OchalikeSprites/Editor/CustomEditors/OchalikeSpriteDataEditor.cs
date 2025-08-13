@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace OchalikeSprites.Editor
 {
-    [CustomEditor(typeof(OchalikeSpriteData), true)]
+    [CustomEditor(typeof(OchalikeSpriteAsset), true)]
     public class OchalikeSpriteDataEditor : UnityEditor.Editor
     {
         private RenderTexture preview;
@@ -27,7 +27,7 @@ namespace OchalikeSprites.Editor
 
         private void UpdatePreview()
         {
-            var data = (OchalikeSpriteData)target;
+            var data = (OchalikeSpriteAsset)target;
             OchalikeSpritePreview.Primary.RenderTo(
                 preview,
                 step2GetOchalikeSprite: (_, bareColor, morph) => data.CreateOchalikeSpriteWithHairColor(bareColor, morph));

@@ -3,13 +3,13 @@ using UnityEngine;
 namespace OchalikeSprites
 {
     [CreateAssetMenu(menuName = "Ochalike Sprites/Ochalike Morph")]
-    public class OchalikeMorphData : ScriptableObject
+    public class OchalikeMorphAsset : ScriptableObject
     {
         [SerializeField] private Item[] _items = null;
 
 #if UNITY_EDITOR
         [Header("Editor Only")]
-        [SerializeField] internal OchalikeSpriteData _previewOchalikeSprite = null; // PropertyDrawer で使用
+        [SerializeField] internal OchalikeSpriteAsset _previewOchalikeSprite = null; // PropertyDrawer で使用
 #endif
 
         public void AddTo(OchalikeMorph ochalikeMorph)
@@ -51,7 +51,7 @@ namespace OchalikeSprites
         [System.Serializable]
         private class Item
         {
-            [SerializeField] private BoneKeywordData _name;
+            [SerializeField] private BoneKeywordAsset _name;
             internal BoneKeyword Name => _name;
 
             [Tooltip("BareSprite を上書きする")]

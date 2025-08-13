@@ -7,10 +7,10 @@ namespace Roguegard
     {
         private static CoreFacials instance;
 
-        [SerializeField] private OchalikeSprites.RotatableSpriteMotionData _coldLook;
+        [SerializeField] private OchalikeSprites.RotatableSpriteMotionAsset _coldLook;
         public static OchalikeSprites.ISpriteMotion ColdLook => instance._coldLook;
 
-        [SerializeField] private OchalikeSprites.RotatableSpriteMotionData _smile;
+        [SerializeField] private OchalikeSprites.RotatableSpriteMotionAsset _smile;
         public static OchalikeSprites.ISpriteMotion Smile => instance._smile;
 
         public override IEnumerator LoadAsync()
