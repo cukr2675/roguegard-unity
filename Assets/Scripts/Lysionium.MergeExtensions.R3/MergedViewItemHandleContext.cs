@@ -21,7 +21,9 @@ namespace Lysionium.MergeExtensions.R3
     }
 
     /// <summary>
-    /// 非同期の Result はサポートしない。非同期で取得したい場合は ViewItem のバインドを使用する
+    /// コンテキスト発行元に <see cref="T"/> 型の戻り値を返すコンテキスト。
+    /// 非同期の Result はサポートしないため、非同期で取得したい場合は ViewItem のバインドを使用する。
+    /// （Rx で戻り値を扱うべきではないが OnClick と NameFrom を並記できるように拡張する）
     /// </summary>
     public abstract class MergedViewItemHandleContext<T> : MergedViewItemHandleContext
     {
