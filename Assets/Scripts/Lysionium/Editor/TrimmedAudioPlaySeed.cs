@@ -70,7 +70,7 @@ namespace Lysionium.Audio.Editor
                         PlayBehaviour = _playBehaviour
                     };
 
-                    if (result[i].AudioClip == null) throw new System.Exception($"AudioClip ({targetPath}) が見つかりません。");
+                    if (result[i].AudioClip == null) throw new FileNotFoundException($"AudioClip ({targetPath}) が見つかりません。");
                 }
                 return result;
             }

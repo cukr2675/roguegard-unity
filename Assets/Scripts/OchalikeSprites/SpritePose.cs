@@ -46,7 +46,7 @@ namespace OchalikeSprites
 
         public void Clear()
         {
-            if (IsImmutable) throw new System.Exception();
+            AssertMutable();
 
             Back = false;
             _boneTransforms.Clear();
@@ -55,13 +55,13 @@ namespace OchalikeSprites
 
         public void SetBack(bool back)
         {
-            if (IsImmutable) throw new System.Exception();
+            AssertMutable();
             Back = back;
         }
 
         public void SetBoneTransforms(SpritePose pose)
         {
-            if (IsImmutable) throw new System.Exception();
+            AssertMutable();
 
             foreach (var pair in pose._boneTransforms)
             {
@@ -71,26 +71,31 @@ namespace OchalikeSprites
 
         public void AddBoneTransform(SpritePoseBoneTransform value, BoneKeyword name)
         {
-            if (IsImmutable) throw new System.Exception();
+            AssertMutable();
             _boneTransforms.Add(name, value);
         }
 
         public void SetBoneTransform(SpritePoseBoneTransform value, BoneKeyword name)
         {
-            if (IsImmutable) throw new System.Exception();
+            AssertMutable();
             _boneTransforms[name] = value;
         }
 
         public void SetBoneOrder(BoneOrder boneOrder)
         {
-            if (IsImmutable) throw new System.Exception();
+            AssertMutable();
             _boneOrder = boneOrder;
         }
 
         public void SetImmutable()
         {
-            if (IsImmutable) throw new System.Exception();
+            AssertMutable();
             IsImmutable = true;
+        }
+
+        private void AssertMutable()
+        {
+            if (IsImmutable) throw new System.InvalidOperationException($"不変の {nameof(SpritePose)} を変更しようとしました。");
         }
     }
 }

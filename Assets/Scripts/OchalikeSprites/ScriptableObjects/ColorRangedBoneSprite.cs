@@ -12,9 +12,9 @@ namespace OchalikeSprites
         // 黒を基本とするよりもグレーを基本としたほうが使い分け基準の説明が容易
 
         public bool IsColorRanged => _isColorRanged;
-        public BoneSprite Sprite => !_isColorRanged ? _spriteOrLightSprite : throw new System.Exception();
-        public BoneSprite LightSprite => _isColorRanged ? _spriteOrLightSprite : throw new System.Exception();
-        public BoneSprite DarkSprite => _isColorRanged ? _darkSprite : throw new System.Exception();
+        public BoneSprite Sprite => !_isColorRanged ? _spriteOrLightSprite : throw new System.InvalidOperationException();
+        public BoneSprite LightSprite => _isColorRanged ? _spriteOrLightSprite : throw new System.InvalidOperationException();
+        public BoneSprite DarkSprite => _isColorRanged ? _darkSprite : throw new System.InvalidOperationException();
         public BoneSprite Icon => _spriteOrLightSprite;
 
         public ColorRangedBoneSprite() { }

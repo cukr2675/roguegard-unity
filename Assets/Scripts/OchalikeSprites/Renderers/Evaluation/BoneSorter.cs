@@ -18,7 +18,7 @@ namespace OchalikeSprites
                     BoneBack.Type.InversePose => !poseBack,
                     BoneBack.Type.ForcedNormal => false,
                     BoneBack.Type.ForcedBack => true,
-                    _ => throw new System.Exception()
+                    _ => throw new System.InvalidOperationException()
                 };
 
                 if (poseBack) { childBone.BackPoseFrontSpriteIndex = bonesCount; }
@@ -49,7 +49,7 @@ namespace OchalikeSprites
                 BoneBack.Type.InversePose => !poseBack,
                 BoneBack.Type.ForcedNormal => false,
                 BoneBack.Type.ForcedBack => true,
-                _ => throw new System.Exception()
+                _ => throw new System.InvalidOperationException()
             };
 
             var boneChildren = bone.Children;

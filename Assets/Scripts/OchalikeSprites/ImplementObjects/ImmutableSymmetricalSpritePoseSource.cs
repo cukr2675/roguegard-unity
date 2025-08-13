@@ -15,7 +15,7 @@ namespace OchalikeSprites
         public ImmutableSymmetricalSpritePoseSource(SpritePose immutableLowerLeftPose, bool nonUp = false)
         {
             lowerLeftPose = immutableLowerLeftPose;
-            if (!lowerLeftPose.IsImmutable) throw new System.Exception($"{nameof(immutableLowerLeftPose)} が Immutable ではありません。");
+            if (!lowerLeftPose.IsImmutable) throw new System.InvalidOperationException($"{nameof(immutableLowerLeftPose)} が Immutable ではありません。");
 
             var rightDownPose = new SpritePose();
             rightDownPose.SetBack(lowerLeftPose.Back);
@@ -93,7 +93,7 @@ namespace OchalikeSprites
             {
                 return upperRightPose;
             }
-            throw new System.Exception();
+            throw new System.ArgumentException();
         }
     }
 }

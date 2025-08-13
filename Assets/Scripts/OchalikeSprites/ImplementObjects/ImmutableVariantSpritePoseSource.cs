@@ -25,7 +25,7 @@ namespace OchalikeSprites
             IDirectionalSpritePoseSource poseSource, BoneKeyword variantTargetBoneName, BoneSprite poseBareSprite, Color? poseBareColor, SpriteDirection direction)
         {
             var basePose = poseSource.GetSpritePose(direction);
-            if (!basePose.IsImmutable) throw new System.Exception("元のポーズが不変ではありません。");
+            if (!basePose.IsImmutable) throw new System.ArgumentException("元のポーズが不変ではありません。", nameof(poseSource));
 
             var pose = new SpritePose();
             foreach (var pair in basePose.BoneTransforms)
