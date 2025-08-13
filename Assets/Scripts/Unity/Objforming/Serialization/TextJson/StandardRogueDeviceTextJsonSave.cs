@@ -1,9 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-using System.IO;
-using System.Reflection;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Objforming;
@@ -11,6 +5,10 @@ using Objforming.Serialization.TextJson;
 using Roguegard;
 using Roguegard.Device;
 using Roguegard.Objforming.TextJson;
+using System.Collections.Generic;
+using System.IO;
+using System.Reflection;
+using UnityEngine;
 
 namespace RoguegardUnity
 {
@@ -27,20 +25,24 @@ namespace RoguegardUnity
             var world = RogueWorldInfo.GetWorld(player);
 
             // デバイスを設定
-            var data = new StandardRogueDeviceData();
-            data.Player = player;
-            data.Subject = player;
-            data.World = world;
-            data.CurrentRandom = random;
+            var data = new StandardRogueDeviceData
+            {
+                Player = player,
+                Subject = player,
+                World = world,
+                CurrentRandom = random
+            };
             var device = new StandardRogueDevice(data);
             RogueDeviceEffect.SetTo(player);
             return device;
         }
 
-        public void SaveGame(Stream stream, string name, StandardRogueDevice device)
+        public void SaveGame(Stream stream, StandardRogueDevice device)
         {
-            var save = new SaveClass();
-            save.Data = device;
+            var save = new SaveClass
+            {
+                Data = device
+            };
 
             var config = GetJsonSerializationConfig();
             config.Serialize(stream, save);
@@ -76,12 +78,14 @@ namespace RoguegardUnity
                 Assembly.Load("Roguegard.Rgpacks"),
                 Assembly.Load("Roguegard.Rgpacks.MoonSharp")
             };
-            var converters = new RelationalComponentListBuilder<RelationalJsonConverter>();
-            converters.Add(FormerJsonConverter.Create(typeof(Vector2Int), true));
-            converters.Add(FormerJsonConverter.Create(typeof(RectInt), true));
-            converters.Add(FormerJsonConverter.Create(typeof(Color), true));
-            converters.Add(RogueObjJsonConverter.Create());
-            converters.Add(FormerJsonConverter.Create(typeof(StandardRogueDevice)));
+            var converters = new RelationalComponentListBuilder<RelationalJsonConverter>
+            {
+                FormerJsonConverter.Create(typeof(Vector2Int), true),
+                FormerJsonConverter.Create(typeof(RectInt), true),
+                FormerJsonConverter.Create(typeof(Color), true),
+                RogueObjJsonConverter.Create(),
+                FormerJsonConverter.Create(typeof(StandardRogueDevice))
+            };
             converters.AddAuto(assemblies, instanceType =>
             {
                 if (instanceType.IsArray)
