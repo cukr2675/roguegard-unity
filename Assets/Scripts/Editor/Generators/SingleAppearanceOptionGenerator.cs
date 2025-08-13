@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Roguegard.CharacterCreation.Editor
 {
-    [CreateAssetMenu(menuName = "Roguegard/Character Creation/Appearance/Single Generator")]
+    [CreateAssetMenu(menuName = "Roguegard/Character Creation/Appearance/Generator/Single Generator")]
     public class SingleAppearanceOptionGenerator : ScriptableObjectGenerator<SingleAppearanceOptionAsset>
     {
         [SerializeField] private string _descriptionNameFormat = null;
