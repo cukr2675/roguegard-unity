@@ -1,8 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-using System.Linq;
 using MoonSharp.Interpreter;
 
 namespace Roguegard.Rgpacks.MoonSharp
@@ -19,7 +14,7 @@ namespace Roguegard.Rgpacks.MoonSharp
             cmnProperty = StartingItemTableCmnProperty.Default;
         }
 
-        public StartingItemTableCmnPropertyUserData(StartingItemTableCmnProperty cmnProperty, string envRgpackId)
+        public StartingItemTableCmnPropertyUserData(StartingItemTableCmnProperty cmnProperty)
         {
             this.cmnProperty = cmnProperty;
         }

@@ -1,9 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 using Roguegard.CharacterCreation;
 using Roguegard.Extensions;
+using UnityEngine;
 
 namespace Roguegard.Rgpacks
 {

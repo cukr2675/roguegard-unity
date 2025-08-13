@@ -1,13 +1,11 @@
-using System.Collections;
+using Lysionium;
+using MoonSharp.Interpreter;
+using OchalikeSprites;
+using Roguegard.Device;
 using System.Collections.Generic;
-using UnityEngine;
-
 using System.Text;
 using System.Text.RegularExpressions;
-using Lysionium;
-using OchalikeSprites;
-using MoonSharp.Interpreter;
-using Roguegard.Device;
+using UnityEngine;
 
 namespace Roguegard.Rgpacks.MoonSharp
 {
@@ -49,8 +47,8 @@ namespace Roguegard.Rgpacks.MoonSharp
                         if (value[i + 1] == '#')
                         {
                             var id = value.Substring(i + 2, length - 2);
-                            var rgpackId = id.Substring(0, id.IndexOf('.'));
-                            var assetId = id.Substring(rgpackId.Length + 1);
+                            var rgpackId = id[..id.IndexOf('.')];
+                            var assetId = id[(rgpackId.Length + 1)..];
                             if (!RgpackReference.TryGetRgpack(rgpackId, out var rgpack)) throw new System.InvalidOperationException($"Rgpack ({rgpackId}) が見つかりません。");
                             if (!rgpack.TryGetAsset<object>(assetId, out var asset)) throw new System.InvalidOperationException(
                                 $"Rgpack ({rgpackId}) に ID ({assetId}) のデータが見つかりません。");

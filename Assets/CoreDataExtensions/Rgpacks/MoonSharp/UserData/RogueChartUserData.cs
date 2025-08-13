@@ -1,17 +1,16 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 using MoonSharp.Interpreter;
+using System.Diagnostics.CodeAnalysis;
+using UnityEngine;
 
 namespace Roguegard.Rgpacks.MoonSharp
 {
     [MoonSharpUserData]
+    [SuppressMessage("Style", "IDE1006")]
     public class RogueChartUserData
     {
         private readonly IRogueChartSource chartSource;
 
-        public RogueChartUserData(IRogueChartSource chartSource, Script ownerScript)
+        public RogueChartUserData(IRogueChartSource chartSource)
         {
             this.chartSource = chartSource;
         }

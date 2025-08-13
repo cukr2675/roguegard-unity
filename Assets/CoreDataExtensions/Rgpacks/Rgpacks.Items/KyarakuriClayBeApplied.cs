@@ -1,11 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-using TMPro;
-using Roguegard.Device;
-using Roguegard.Extensions;
-
 namespace Roguegard.Rgpacks
 {
     public class KyarakuriClayBeApplied : BaseApplyRogueMethod

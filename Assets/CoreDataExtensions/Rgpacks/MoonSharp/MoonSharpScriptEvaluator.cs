@@ -1,9 +1,6 @@
-using System.Collections;
+using MoonSharp.Interpreter;
 using System.Collections.Generic;
 using UnityEngine;
-
-using MoonSharp.Interpreter;
-using MoonSharp.Interpreter.Debugging;
 
 namespace Roguegard.Rgpacks.MoonSharp
 {
@@ -74,11 +71,11 @@ namespace Roguegard.Rgpacks.MoonSharp
                         }
                         else if (pair.Value is StartingItemCmnProperty startingItemCmnProperty)
                         {
-                            table.Set(pair.Key, UserData.Create(new StartingItemCmnPropertyUserData(startingItemCmnProperty, envRgpackId)));
+                            table.Set(pair.Key, UserData.Create(new StartingItemCmnPropertyUserData(startingItemCmnProperty)));
                         }
                         else if (pair.Value is StartingItemTableCmnProperty startingItemTableCmnProperty)
                         {
-                            table.Set(pair.Key, UserData.Create(new StartingItemTableCmnPropertyUserData(startingItemTableCmnProperty, envRgpackId)));
+                            table.Set(pair.Key, UserData.Create(new StartingItemTableCmnPropertyUserData(startingItemTableCmnProperty)));
                         }
                     }
                 }

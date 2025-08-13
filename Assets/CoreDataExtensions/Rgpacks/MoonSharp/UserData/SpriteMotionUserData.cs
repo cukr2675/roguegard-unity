@@ -1,13 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 using MoonSharp.Interpreter;
 using OchalikeSprites;
+using System.Diagnostics.CodeAnalysis;
+using UnityEngine;
 
 namespace Roguegard.Rgpacks.MoonSharp
 {
     [MoonSharpUserData]
+    [SuppressMessage("Style", "IDE1006")]
     public class SpriteMotionUserData
     {
         private readonly ISpriteMotion spriteMotion;

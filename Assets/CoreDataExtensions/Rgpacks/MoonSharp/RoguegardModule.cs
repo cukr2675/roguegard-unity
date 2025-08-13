@@ -1,20 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Linq;
 using MoonSharp.Interpreter;
 using MoonSharp.Interpreter.Interop;
-using Lysionium;
-using Roguegard.Extensions;
-using Roguegard.Device;
 using OchalikeSprites;
+using Roguegard.Extensions;
+using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+using System.Text;
+using UnityEngine;
 
 namespace Roguegard.Rgpacks.MoonSharp
 {
     [MoonSharpModule(Namespace = moduleName)]
+    [SuppressMessage("Style", "IDE1006"), SuppressMessage("Style", "IDE0060")]
     internal class RoguegardModule
     {
         private const string moduleName = "roguegard";
@@ -129,7 +125,7 @@ end
             AddTo(stringBuilder, args[0], true, 0);
             return DynValue.NewString(stringBuilder);
 
-            void AddTo(StringBuilder stringBuilder, DynValue obj, bool expandTable, int indentRank)
+            static void AddTo(StringBuilder stringBuilder, DynValue obj, bool expandTable, int indentRank)
             {
                 if (obj.Type == DataType.Number || obj.Type == DataType.Boolean || obj.Type == DataType.Nil)
                 {
@@ -217,7 +213,7 @@ end
             }
             if (asset is ChartPadAsset chartPadAsset)
             {
-                return UserData.Create(new RogueChartUserData(chartPadAsset.ChartSource, executionContext.OwnerScript));
+                return UserData.Create(new RogueChartUserData(chartPadAsset.ChartSource));
             }
             if (asset is ISpriteMotion spriteMotion)
             {
@@ -235,7 +231,7 @@ end
             var location = RogueDevice.Primary.Player.Location;
             foreach (var obj in location.Space.Objs)
             {
-                if (obj == null || !(obj.Main.InfoSet is EvtFairyReference infoSet) || infoSet.EvtId != evtId) continue;
+                if (obj == null || obj.Main.InfoSet is not EvtFairyReference infoSet || infoSet.EvtId != evtId) continue;
 
                 return UserData.Create(new RogueObjUserData(obj, executionContext));
             }

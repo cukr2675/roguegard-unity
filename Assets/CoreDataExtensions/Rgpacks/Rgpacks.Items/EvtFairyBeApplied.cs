@@ -1,10 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 using Lysionium;
 using Roguegard.Device;
 using Roguegard.Extensions;
+using System.Collections.Generic;
 
 namespace Roguegard.Rgpacks
 {

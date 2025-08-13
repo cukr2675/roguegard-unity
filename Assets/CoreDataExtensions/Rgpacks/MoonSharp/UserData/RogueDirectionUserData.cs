@@ -1,17 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 using MoonSharp.Interpreter;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Roguegard.Rgpacks.MoonSharp
 {
     [MoonSharpUserData]
+    [SuppressMessage("Style", "IDE1006")]
     public class RogueDirectionUserData
     {
         public RogueDirection Direction { get; }
 
-        private static readonly RogueDirectionUserData _right = new RogueDirectionUserData(RogueDirection.Right);
+        private static readonly RogueDirectionUserData _right = new(RogueDirection.Right);
         public RogueDirectionUserData right => _right;
         public static RogueDirectionUserData upperRight { get; } = new RogueDirectionUserData(RogueDirection.UpperRight);
         public static RogueDirectionUserData up { get; } = new RogueDirectionUserData(RogueDirection.Up);

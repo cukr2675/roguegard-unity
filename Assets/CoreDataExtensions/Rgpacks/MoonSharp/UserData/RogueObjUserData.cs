@@ -1,14 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 using MoonSharp.Interpreter;
 using OchalikeSprites;
 using Roguegard.Extensions;
+using System.Diagnostics.CodeAnalysis;
+using UnityEngine;
 
 namespace Roguegard.Rgpacks.MoonSharp
 {
     [MoonSharpUserData]
+    [SuppressMessage("Style", "IDE1006")]
     public class RogueObjUserData
     {
         public RogueObj Obj { get; }
@@ -17,7 +16,7 @@ namespace Roguegard.Rgpacks.MoonSharp
         {
             get
             {
-                if (!(Obj.Main.InfoSet is EvtFairyReference evt)) return null;
+                if (Obj.Main.InfoSet is not EvtFairyReference evt) return null;
 
                 return evt.AssetId;
             }
@@ -77,7 +76,7 @@ namespace Roguegard.Rgpacks.MoonSharp
             var assetId = RgpackReference.GetAssetId(id);
 
             if (!RgpackReference.TryGetRgpack(rgpackId, out var rgpack)) throw new System.InvalidOperationException($"Rgpack ({rgpackId}) が見つかりません。");
-            if (!rgpack.TryGetAsset<EffectStickerAsset>(assetId, out var asset)) throw new System.InvalidOperationException(
+            if (!rgpack.TryGetAsset<EffectStickerAsset>(assetId, out _)) throw new System.InvalidOperationException(
                 $"Rgpack ({rgpackId}) に ID ({assetId}) のデータが見つかりません。");
 
             Obj.Main.RogueEffects.AddOpen(Obj, new EffectStickerReference(id, rgpackId));

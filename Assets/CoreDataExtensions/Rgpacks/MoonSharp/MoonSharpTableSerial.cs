@@ -1,9 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 using MoonSharp.Interpreter;
 using MoonSharp.Interpreter.Interop;
+using System.Collections.Generic;
 
 namespace Roguegard.Rgpacks.MoonSharp
 {
@@ -18,8 +15,7 @@ namespace Roguegard.Rgpacks.MoonSharp
 
         public void Load(string key, DynValue value)
         {
-            if (loadTable == null) { loadTable = new Dictionary<string, DynValue>(); }
-
+            loadTable ??= new Dictionary<string, DynValue>();
             loadTable.Add(key, value);
         }
 

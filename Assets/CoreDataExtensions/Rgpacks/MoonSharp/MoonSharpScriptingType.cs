@@ -1,9 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-using System.Linq;
 using MoonSharp.Interpreter;
+using System.Collections.Generic;
 
 namespace Roguegard.Rgpacks.MoonSharp
 {
@@ -17,7 +13,7 @@ namespace Roguegard.Rgpacks.MoonSharp
         
         [System.NonSerialized] private Table table;
 
-        private static readonly List<MoonSharpScriptingType> caches = new List<MoonSharpScriptingType>();
+        private static readonly List<MoonSharpScriptingType> caches = new();
 
         private MoonSharpScriptingType(string name, string source)
         {
