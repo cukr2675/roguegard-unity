@@ -32,11 +32,7 @@ namespace Objforming.Serialization.Json
                     writer.WritePropertyName("$id");
                     writer.WriteValue(id);
                 }
-                if (serializer.TypeNameHandling != TypeNameHandling.None &&
-                    serializer.TypeNameHandling != TypeNameHandling.Arrays)
-                {
-                    WriteType(writer, type, serializer);
-                }
+                WriteType(writer, type, serializer);
                 return true;
             }
         }
