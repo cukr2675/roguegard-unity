@@ -4,6 +4,8 @@ using UnityEngine;
 
 namespace Roguegard.CharacterCreation
 {
+    // ScriptDefault 作りよりも Zenject 等DIコンテナを使うほうが画一的に注入できる
+
     /// <summary>
     /// <see cref="ReferableScript"/> の初期値に相当する値を設定するクラス。
     /// </summary>
