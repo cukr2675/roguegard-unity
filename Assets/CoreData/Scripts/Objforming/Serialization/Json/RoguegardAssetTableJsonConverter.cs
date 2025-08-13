@@ -1,10 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 using Newtonsoft.Json;
 using Objforming;
 using Objforming.Serialization.Json;
+using System.Collections.Generic;
 
 namespace Roguegard.Objforming.Json
 {
