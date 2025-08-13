@@ -107,6 +107,17 @@ namespace RoguegardUnity
             }
         }
 
+        protected override void UnbindCore(object item, IViewItemHandler handler)
+        {
+            _nameText.text = null;
+            _icon.enabled = false;
+            _icon.sprite = null;
+            _stackText.text = null;
+            _info1Text.text = null;
+            _info2Text.text = null;
+            _equipText.enabled = false;
+        }
+
         private void SetIcon(Sprite icon, Color iconColor)
         {
             if (icon == null)

@@ -18,5 +18,10 @@ namespace Lysionium
         {
             text.text = Manager.Localize(name);
         }
+
+        protected override void UnbindCore(object item, IViewItemHandler handler)
+        {
+            text.text = null;
+        }
     }
 }

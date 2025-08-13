@@ -82,6 +82,17 @@ namespace RoguegardUnity
             }
         }
 
+        protected override void UnbindCore(object item, IViewItemHandler handler)
+        {
+            editList = null;
+
+            foreach (var keyIcon in keyIcons)
+            {
+                Destroy(keyIcon.gameObject);
+            }
+            keyIcons.Clear();
+        }
+
         void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
         {
             RectTransformUtility.ScreenPointToLocalPointInRectangle(RectTransform, eventData.position, null, out var localPoint);

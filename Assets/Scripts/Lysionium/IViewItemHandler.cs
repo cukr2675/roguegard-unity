@@ -25,10 +25,5 @@ namespace Lysionium
 
         // Name と Style はラベルをはじめとしたほとんどのコントロールで使うため実装する
         string GetStyle(object item, IListMenuManager manager, IListMenuArg arg);
-
-        // データバインディングを実装する場合は以下のようにして ViewItem から通知ハンドラを渡す
-        // ViewItem を引数にするとビューに依存することになるため避ける
-        //void AddNotifyHandler(object item, IListMenuManager manager, IListMenuArg arg, SomeNotityHandler notify);
-        //void RemoveNotifyHandler(object item, IListMenuManager manager, IListMenuArg arg, SomeNotityHandler notify);
     }
 }

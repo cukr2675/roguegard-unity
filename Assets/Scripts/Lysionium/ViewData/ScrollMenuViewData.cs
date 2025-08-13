@@ -32,7 +32,7 @@ namespace Lysionium
         private ISubviewStateProvider backAnchorSubviewStateProvider;
 
         private readonly ButtonViewItemHandler<TItem, TMgr, TArg> scrollSubviewHandler = new();
-        private ListMenuEventHandler onShow;
+        private ListMenuEventHandler<TMgr, TArg> onShow;
         private ListMenuEventHandler onHide;
 
         public Builder Show(TItem[] list, TMgr manager, TArg arg, object viewStateHolder = null)
@@ -112,13 +112,7 @@ namespace Lysionium
             {
                 AssertNotBuilt();
 
-                Parent.onShow += (manager, arg) =>
-                {
-                    if (LuiAssert.Type<TMgr>(manager, out var tMgr, manager) ||
-                        LuiAssert.Type<TArg>(arg, out var tArg, manager)) return;
-
-                    handler(tMgr, tArg);
-                };
+                Parent.onShow += handler;
                 return this;
             }
 

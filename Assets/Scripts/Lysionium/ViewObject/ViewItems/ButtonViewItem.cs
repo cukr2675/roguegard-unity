@@ -73,6 +73,23 @@ namespace Lysionium
             SetStyle(newStyle);
         }
 
+        protected override void UnbindCore(object item, IViewItemHandler handler)
+        {
+            this.handler = null;
+            this.item = null;
+
+            if (_text != null)
+            {
+                _text.text = null;
+            }
+            if (_icon != null)
+            {
+                _icon.sprite = null;
+                _icon.enabled = false;
+            }
+            SetStyle(null);
+        }
+
         private void SetStyle(string newStyle)
         {
             if (newStyle == style) return;

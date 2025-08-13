@@ -20,6 +20,8 @@ namespace Lysionium
         protected IListMenuArg Arg => Parent.Arg;
         protected SubviewBase Parent { get; private set; }
 
+        private object item;
+        private IViewItemHandler handler;
         public string ItemName { get; private set; }
 
         public RectTransform RectTransform => (RectTransform)transform;
@@ -34,20 +36,48 @@ namespace Lysionium
             TryGetComponent(out canvasGroup);
         }
 
+        protected virtual void OnDestroy()
+        {
+            Unbind();
+        }
+
         public void Bind(object item, IViewItemHandler handler)
         {
+            if (handler == null) throw new System.ArgumentNullException(nameof(handler));
+
+            if (this.handler != null) // すでにバインド中のデータが存在する場合
+            {
+                if (item == this.item && handler == this.handler) return; // バインド中のデータと引数が一致する場合は更新しない
+
+                Unbind();
+            }
+
             name = ItemName = handler.GetName(item, Manager, Arg);
+            this.item = item;
+            this.handler = handler;
             BindCore(item, handler);
         }
 
         public void Unbind()
         {
-            ItemName = null;
-            name = "null";
-            if (Manager != null) { BindCore(null, ToStringViewItemHandler.Instance); }
+            if (handler != null) { UnbindCore(item, handler); }
+            item = null;
+            handler = null;
+            ItemName = "";
+            name = "[unbinded]";
+        }
+
+        public void Rebind()
+        {
+            var tempItem = item;
+            var tempHandler = handler;
+            Unbind();
+            Bind(tempItem, tempHandler);
         }
 
         protected abstract void BindCore(object item, IViewItemHandler handler);
+
+        protected abstract void UnbindCore(object item, IViewItemHandler handler);
 
         public void SetVisible(bool visible, bool outOfRange)
         {

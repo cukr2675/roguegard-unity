@@ -136,5 +136,10 @@ namespace RoguegardUnity
         {
             throw new System.NotImplementedException();
         }
+
+        protected override void UnbindCore(object item, IViewItemHandler handler)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
