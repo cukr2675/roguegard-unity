@@ -13,7 +13,6 @@ namespace Lysionium
 
         protected event ListMenuEventHandler OnEndAnimation;
         protected event ListMenuEventHandler OnHide;
-        private bool justShowed;
 
         /// <summary>
         /// この Subview 内で最後に選択された <see cref="GameObject"/>
@@ -89,9 +88,6 @@ namespace Lysionium
             SetInteractable(true);
             AnimatorTupple.TrySetVisible(this, true);
 
-            if (!justShowed) { onEndAnimation = null; }
-            justShowed = true;
-
             if (onEndAnimation != null) { OnEndAnimation += onEndAnimation; }
             if (onHide != null) { OnHide += onHide; }
         }
@@ -105,9 +101,6 @@ namespace Lysionium
             if (back) { SetStatusCode(backStatusCode); }
             SetInteractable(false);
             AnimatorTupple.TrySetVisible(this, false);
-
-            if (justShowed) { onEndAnimation = null; }
-            justShowed = false;
 
             if (onEndAnimation != null) { OnEndAnimation += onEndAnimation; }
         }
