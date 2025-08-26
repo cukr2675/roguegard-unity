@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -39,7 +39,7 @@ namespace Objforming.Unity.RuntimeInspector
             var allForms = new List<RelationalForm>();
             foreach (var pair in dependencies)
             {
-                if (!moduleTable.TryGetModule(pair.Key, pair.Value, out var module)) throw new System.Exception(
+                if (!moduleTable.TryGetModule(pair.Key, pair.Value, out var module)) throw new System.InvalidOperationException(
                     $"モジュール {pair.Key} : {pair.Value} が見つかりませんでした。");
 
                 var moduleAllConverters = module.GetAllForms(moduleTable);

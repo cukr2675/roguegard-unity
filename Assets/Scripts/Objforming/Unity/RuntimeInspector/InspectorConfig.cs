@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -48,7 +48,7 @@ namespace Objforming.Unity.RuntimeInspector
             }
             else
             {
-                throw new System.Exception($"{type} に対応するフォームが見つかりません。");
+                throw new System.InvalidOperationException($"{type} に対応するフォームが見つかりません。");
             }
         }
 
@@ -80,7 +80,7 @@ namespace Objforming.Unity.RuntimeInspector
             }
             else
             {
-                throw new System.Exception($"{type} に対応するフォームが見つかりません。");
+                throw new System.InvalidOperationException($"{type} に対応するフォームが見つかりません。");
             }
         }
     }
