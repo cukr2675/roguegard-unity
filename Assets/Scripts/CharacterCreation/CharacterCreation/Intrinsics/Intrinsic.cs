@@ -8,7 +8,7 @@ namespace Roguegard.CharacterCreation
     {
         public IIntrinsicOption Option { get; set; }
         public string CustomName { get; set; }
-        //public Sprite OptionIcon { get; set; }
+        //public Sprite CustomIcon { get; set; }
         public Sprite CustomIcon { get => null; set { } }
         public Color32? OptionColor { get; set; }
         public string CustomCaption { get; set; }

@@ -10,7 +10,7 @@ namespace Roguegard
 
         public int Bonus { get; set; }
 
-        private static readonly StringBuilder builder = new();
+        private static readonly StringBuilder builder = new StringBuilder();
 
         public void Append(string text)
         {

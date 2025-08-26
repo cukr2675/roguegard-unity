@@ -31,14 +31,14 @@ MonoBehaviour:
     _asset: {fileID: 11400000, guid: cf165c696a4d995419a4bb84876a2263, type: 2}
   - _key: Core.FaceMask
     _asset: {fileID: 11400000, guid: 0a5066941778bef46a99ac2da12b129b, type: 2}
+  - _key: Core.Glasses
+    _asset: {fileID: 11400000, guid: ee5bf4666c7731d4b83fd28829b78295, type: 2}
   - _key: Core.Gloves
     _asset: {fileID: 11400000, guid: ef173008b2fd2ee44a39362f4abec77b, type: 2}
   - _key: Core.Headwear
     _asset: {fileID: 11400000, guid: a9b106ec03139934fa761fa7f6484de4, type: 2}
   - _key: Core.Innerwear
     _asset: {fileID: 11400000, guid: 477e575ba17b0dd4eb9bab0a3d571fe8, type: 2}
-  - _key: Core.Lenses
-    _asset: {fileID: 11400000, guid: ee5bf4666c7731d4b83fd28829b78295, type: 2}
   - _key: Core.Shield
     _asset: {fileID: 11400000, guid: dae43f9bc590f3d4dac614a92bee6241, type: 2}
   - _key: Core.Socks

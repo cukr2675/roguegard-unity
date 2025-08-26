@@ -206,7 +206,7 @@ namespace Roguegard
 
         internal MainStats Clone(RogueObj self, RogueObj clonedSelf)
         {
-            var clone = new MainStats
+            return new MainStats
             {
                 Hp = Hp,
                 Mp = Mp,
@@ -219,7 +219,6 @@ namespace Roguegard
                 RegenerationHpPermille = RegenerationHpPermille,
                 RegenerationMpPermille = RegenerationMpPermille
             };
-            return clone;
         }
 
         internal void ReplaceObj(RogueObj obj, RogueObj clonedObj)

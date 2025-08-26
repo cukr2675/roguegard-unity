@@ -5,7 +5,7 @@ using System.Linq;
 namespace Roguegard.CharacterCreation
 {
     [Objforming.Formable]
-    public sealed class StartingItemList : IWeightedRogueObjGeneratorList, IEnumerable<StartingItem>
+    public class StartingItemList : IWeightedRogueObjGeneratorList, IEnumerable<StartingItem>
     {
         public int MinFrequency { get; set; } = 1;
         public int MaxFrequency { get; set; } = 1;
