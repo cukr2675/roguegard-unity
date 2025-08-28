@@ -18,8 +18,16 @@ namespace Roguegard.Editor
                 return;
             }
 
-            var preview = AssetPreview.GetAssetPreview(obj.Icon);
-            EditorGUI.PropertyField(position, property, new GUIContent(obj.Name ?? label.text, preview), true);
+            try
+            {
+                var preview = AssetPreview.GetAssetPreview(obj.Icon);
+                EditorGUI.PropertyField(position, property, new GUIContent(obj.Name ?? label.text, preview), true);
+            }
+            catch (System.Exception ex)
+            {
+                Debug.LogException(ex);
+                EditorGUI.PropertyField(position, property, true);
+            }
         }
 
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
