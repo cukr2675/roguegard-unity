@@ -55,6 +55,7 @@ namespace RoguegardUnity
                 FormerForm.Create(typeof(Vector2Int), _linkElementPrefab, true),
                 FormerForm.Create(typeof(RectInt), _linkElementPrefab, true),
                 FormerForm.Create(typeof(Color32), _linkElementPrefab, true),
+                FormerForm.Create(typeof(Color32?), _linkElementPrefab, true),
                 RogueObjForm.Create(_linkElementPrefab, _buttonElementPrefab, x => SerializeRogueObj(x)),
                 RogueObjListForm.Create(_rogueObjListItemElementPrefab, _linkElementPrefab),
                 FormerForm.Create(typeof(StandardRogueDeviceData), _linkElementPrefab),

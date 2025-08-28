@@ -189,6 +189,7 @@ namespace RoguegardUnity
                 FormerJsonConverter.Create(typeof(Vector2Int), true),
                 FormerJsonConverter.Create(typeof(RectInt), true),
                 FormerJsonConverter.Create(typeof(Color32), true),
+                FormerJsonConverter.Create(typeof(Color32?), true),
                 FormerJsonConverter.Create(typeof(ShiftableColor), true),
                 FormerJsonConverter.Create(typeof(DotterBoard), true),
                 RogueObjJsonConverter.Create(),
