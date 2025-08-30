@@ -1,0 +1,12 @@
+<linker>
+  <!-- MoonSharp modules -->
+  <assembly fullname="MoonSharp">
+    <type fullname="MoonSharp.Interpreter.CoreLib.*" preserve="all" />
+  </assembly>
+  
+  <!-- MoonSharp.Interpreter.Loaders.UnityAssetsScriptLoader uses the following via reflection: -->
+  <assembly fullname="UnityEngine">
+    <type fullname="UnityEngine.Resources" preserve="all" />
+    <type fullname="UnityEngine.TextAsset" preserve="all" />
+  </assembly>
+</linker>

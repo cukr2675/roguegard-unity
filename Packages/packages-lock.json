@@ -101,7 +101,7 @@
     },
     "com.unity.addressables": {
       "version": "2.4.3",
-      "depth": 0,
+      "depth": 1,
       "source": "registry",
       "dependencies": {
         "com.unity.profiling.core": "1.0.2",
@@ -233,7 +233,7 @@
     },
     "com.unity.profiling.core": {
       "version": "1.0.2",
-      "depth": 1,
+      "depth": 2,
       "source": "registry",
       "dependencies": {},
       "url": "https://packages.unity.com"
@@ -283,7 +283,7 @@
     },
     "com.unity.scriptablebuildpipeline": {
       "version": "2.3.2",
-      "depth": 1,
+      "depth": 2,
       "source": "registry",
       "dependencies": {
         "com.unity.test-framework": "1.4.5",
@@ -363,7 +363,14 @@
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "ce33412266e178de0b9b26d60beef03a6948e9b4"
+      "hash": "fabbd10761ddbf3357463d76e5274fe489af5e5e"
+    },
+    "moonsharp": {
+      "version": "https://github.com/k0dep/MoonSharp.git#2.0.0",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "54016d620078714e2dda195a9c583f12c5e446fa"
     },
     "org.nuget.microsoft.bcl.asyncinterfaces": {
       "version": "7.0.0",
