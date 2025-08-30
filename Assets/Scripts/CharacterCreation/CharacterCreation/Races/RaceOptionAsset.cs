@@ -43,6 +43,7 @@ namespace Roguegard.CharacterCreation
         public abstract Color Color { get; }
         public abstract string Caption { get; }
         public abstract IRogueDetails Details { get; }
+        public abstract Spanning<IKeyword> Tags { get; }
 
         public abstract IRaceOption Open(
             RogueObj self, MainInfoSetType infoSetType, bool polymorph2Base, IRaceOption raceOption, ICharacterCreationData characterCreationData);

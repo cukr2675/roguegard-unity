@@ -90,6 +90,7 @@ namespace RoguegardUnity
             public Color Color => default;
             public string Caption => null;
             public IRogueDetails Details => null;
+            public Spanning<IKeyword> Tags => Spanning<IKeyword>.Empty;
         }
 
         private class Comparer : IComparer<RogueObj>

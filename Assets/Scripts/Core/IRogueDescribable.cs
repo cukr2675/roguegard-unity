@@ -10,5 +10,6 @@ namespace Roguegard
         Color Color { get; }
         string Caption { get; }
         IRogueDetails Details { get; }
+        Spanning<IKeyword> Tags { get; }
     }
 }

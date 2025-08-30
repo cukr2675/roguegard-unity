@@ -11,6 +11,7 @@ namespace Roguegard
         Color IRogueDescribable.Color => Color.white;
         string IRogueDescribable.Caption => null;
         IRogueDetails IRogueDescribable.Details => null;
+        Spanning<IKeyword> IRogueDescribable.Tags => Spanning<IKeyword>.Empty;
 
         public IRoguePredicator GetPredicator(RogueObj self, float predictionDepth, RogueObj ammo)
         {

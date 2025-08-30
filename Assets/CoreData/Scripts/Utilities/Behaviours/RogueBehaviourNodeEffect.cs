@@ -16,6 +16,7 @@ namespace Roguegard
         Color IRogueDescribable.Color => Color.white;
         string IRogueDescribable.Caption => null;
         IRogueDetails IRogueDescribable.Details => null;
+        Spanning<IKeyword> IRogueDescribable.Tags => Spanning<IKeyword>.Empty;
         float IStatusEffect.Order => 0f;
 
         float IRogueObjUpdater.Order => 1f;

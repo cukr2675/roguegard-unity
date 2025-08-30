@@ -16,6 +16,7 @@ namespace Roguegard.CharacterCreation
         public Color Color => Obj.Main.InfoSet.Color;
         public string Caption => Obj.Main.InfoSet.Caption;
         public IRogueDetails Details => Obj.Main.InfoSet.Details;
+        public Spanning<IKeyword> Tags => Obj.Main.InfoSet.Tags;
         public Spanning<IMemberSource> MemberSources => Spanning<IMemberSource>.Empty;
 
         public float GetCost(IReadOnlyStartingItem startingItem, out bool costIsUnknown)

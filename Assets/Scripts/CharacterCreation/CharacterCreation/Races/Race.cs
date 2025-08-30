@@ -22,6 +22,7 @@ namespace Roguegard.CharacterCreation
         Color IRogueDescribable.Color => Option.Color;
         public string Caption => CustomCaption ?? Option.Caption;
         public IRogueDetails Details => CustomDetails ?? Option.Details;
+        public Spanning<IKeyword> Tags => Option.Tags;
         Color IReadOnlyRace.BodyColor => BodyColor;
         int IReadOnlyRace.Lv => 1;
         Spanning<IMemberSource> IReadOnlyMemberable.MemberSources => Option.MemberSources;

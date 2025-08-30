@@ -23,6 +23,7 @@ namespace Roguegard.CharacterCreation
         public Color Color => OptionColor ?? Option.Color;
         public string Caption => CustomCaption ?? Option.Caption;
         public IRogueDetails Details => CustomDetails ?? Option.Details;
+        public Spanning<IKeyword> Tags => Option.Tags;
 
         IMainInfoSet IRogueObjGenerator.InfoSet => Option.InfoSet;
         int IRogueObjGenerator.Lv => Option.Lv;

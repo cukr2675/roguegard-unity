@@ -58,6 +58,7 @@ namespace Roguegard.CharacterCreation
         public virtual Sprite Icon => Race?.Icon;
         public virtual Color Color => Race.Color;
         public virtual string Caption => null;
+        public virtual Spanning<IKeyword> Tags => Spanning<IKeyword>.Empty;
         public virtual IRogueDetails Details => null;
         int IStartingItemOption.Lv => Race.Lv;
 
@@ -157,6 +158,7 @@ namespace Roguegard.CharacterCreation
             public Color Color => Option.Color;
             public string Caption => Option.Caption;
             public IRogueDetails Details => Option.Details;
+            public Spanning<IKeyword> Tags => Option.Tags;
 
             Spanning<IMemberSource> IReadOnlyMemberable.MemberSources => Option.MemberSources;
 

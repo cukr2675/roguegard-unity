@@ -11,6 +11,7 @@ namespace Roguegard.CharacterCreation
         public Color Color => CurrentRaceOption.Color;
         public string Caption => Data.Caption;
         public IRogueDetails Details => Data.Details;
+        public Spanning<IKeyword> Tags => Data.Tags;
 
         public ICharacterCreationData Data { get; }
 

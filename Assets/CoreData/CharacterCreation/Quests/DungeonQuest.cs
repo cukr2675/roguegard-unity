@@ -12,6 +12,7 @@ namespace Roguegard.CharacterCreation
         public Color Color => _objectives[0].Color;
         public string Caption => _objectives[0].Caption;
         public IRogueDetails Details => _objectives[0].Details;
+        public Spanning<IKeyword> Tags => _objectives[0].Tags;
 
         public DungeonCreationDataAsset Dungeon { get; }
         public int Seed { get; }

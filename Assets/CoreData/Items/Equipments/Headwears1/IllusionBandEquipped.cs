@@ -24,6 +24,7 @@ namespace Roguegard.CharacterCreation
             Color IRogueDescribable.Color => Color.white;
             string IRogueDescribable.Caption => "男性は女性 女性は男性と 間違われる状態";
             IRogueDetails IRogueDescribable.Details => null;
+            Spanning<IKeyword> IRogueDescribable.Tags => Spanning<IKeyword>.Empty;
             IKeyword IStatusEffect.EffectCategory => CategoryKw.Equipment;
             ISpriteMotion IStatusEffect.HeadIcon => null;
             float IStatusEffect.Order => 0f;

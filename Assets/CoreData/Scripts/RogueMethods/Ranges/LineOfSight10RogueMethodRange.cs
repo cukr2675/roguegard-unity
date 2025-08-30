@@ -11,6 +11,7 @@ namespace Roguegard
         Color IRogueDescribable.Color => Color.white;
         string IRogueDescribable.Caption => "直線上10マスまで届く 障害物があるとそこで止まる";
         public IRogueDetails Details => null;
+        Spanning<IKeyword> IRogueDescribable.Tags => Spanning<IKeyword>.Empty;
 
         public void Predicate(
             IRoguePredicator predicator, RogueObj self, float predictionDepth, RogueObj tool, float visibleRadius, RectInt room)

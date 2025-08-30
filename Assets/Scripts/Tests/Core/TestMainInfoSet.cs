@@ -11,6 +11,7 @@ namespace Roguegard
         public Color Color => Color.white;
         public string Caption => null;
         public IRogueDetails Details => null;
+        public Spanning<IKeyword> Tags => Spanning<IKeyword>.Empty;
 
         public IKeyword Category => null;
         public int MaxHp => 0;

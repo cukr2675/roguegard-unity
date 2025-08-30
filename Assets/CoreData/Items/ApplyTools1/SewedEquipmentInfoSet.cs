@@ -19,6 +19,7 @@ namespace Roguegard
         public Color Color => data.BoneSprites.MainColor;
         public string Caption => null;
         public IRogueDetails Details => null;
+        public Spanning<IKeyword> Tags => Spanning<IKeyword>.Empty;
 
         public IKeyword Category => CategoryKw.Equipment;
 

@@ -25,6 +25,7 @@ namespace Roguegard.CharacterCreation
             Sprite IRogueDescribable.Icon => null;
             Color IRogueDescribable.Color => Color.white;
             string IRogueDescribable.Caption => null;
+            Spanning<IKeyword> IRogueDescribable.Tags => Spanning<IKeyword>.Empty;
             IRogueDetails IRogueDescribable.Details => null;
             ISpriteMotion IStatusEffect.HeadIcon => null;
 
@@ -132,6 +133,7 @@ namespace Roguegard.CharacterCreation
                 public Color Color => Color.white;
                 public string Caption => null;
                 public IRogueDetails Details => null;
+                public Spanning<IKeyword> Tags => Spanning<IKeyword>.Empty;
 
                 float IStatusEffect.Order => 0f;
                 void IStatusEffect.GetEffectedName(RogueNameBuilder refName, RogueObj self) { }

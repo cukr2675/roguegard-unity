@@ -13,6 +13,7 @@ namespace Roguegard
         public override Color EffectedColor => Color;
         public abstract string Caption { get; }
         public abstract IRogueDetails Details { get; }
+        public abstract Spanning<IKeyword> Tags { get; }
 
         public abstract IKeyword Category { get; }
 

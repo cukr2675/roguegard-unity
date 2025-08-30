@@ -21,6 +21,7 @@ namespace Roguegard.CharacterCreation
         public Sprite Icon => _option.Icon;
         public string Caption => OptionCustom.Caption ?? _option.Caption;
         public IRogueDetails Details => OptionCustom.Details ?? _option.Details;
+        public Spanning<IKeyword> Tags => _option.Tags;
 
         string IReadOnlyAppearance.CustomName => OptionCustom.DescriptionName;
         string IReadOnlyAppearance.CustomCaption => OptionCustom.Caption;

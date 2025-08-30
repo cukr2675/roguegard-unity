@@ -17,6 +17,7 @@ namespace Roguegard.CharacterCreation
             public virtual Color Color => parent.Color;
             public virtual string Caption => parent.Caption;
             public virtual IRogueDetails Details => parent.Details;
+            public virtual Spanning<IKeyword> Tags => parent.Tags;
 
             public abstract IRogueMethodTarget Target { get; }
             public abstract IRogueMethodRange Range { get; }

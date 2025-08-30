@@ -19,6 +19,7 @@ namespace Roguegard.CharacterCreation
             Color IRogueDescribable.Color => Color.white;
             string IRogueDescribable.Caption => null;
             IRogueDetails IRogueDescribable.Details => null;
+            Spanning<IKeyword> IRogueDescribable.Tags => Spanning<IKeyword>.Empty;
 
             protected AbilitySortedIntrinsic(int lv)
             {

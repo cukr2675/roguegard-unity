@@ -22,6 +22,9 @@ namespace Roguegard.CharacterCreation
         [SerializeField] private ScriptRef<IRogueDetails> _details;
         public IRogueDetails Details => _details.Ref;
 
+        [SerializeField] private KeywordAsset[] _tags;
+        public Spanning<IKeyword> Tags => _tags;
+
 
 
         Spanning<IMemberSource> IRaceOption.MemberSources => Spanning<IMemberSource>.Empty;

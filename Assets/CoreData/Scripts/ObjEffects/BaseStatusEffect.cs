@@ -14,6 +14,7 @@ namespace Roguegard
         public virtual Color Color => Color.white;
         public virtual string Caption => null;
         public virtual IRogueDetails Details => null;
+        public virtual Spanning<IKeyword> Tags => Spanning<IKeyword>.Empty;
 
         public abstract IKeyword EffectCategory { get; }
         public virtual RogueObj Effecter => null;

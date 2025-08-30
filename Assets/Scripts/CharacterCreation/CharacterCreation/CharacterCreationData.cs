@@ -28,6 +28,7 @@ namespace Roguegard.CharacterCreation
         Sprite IRogueDescribable.Icon => Race.Option.Icon;
         Color IRogueDescribable.Color => Race.Option.Color;
         string IRogueDescribable.Caption => Race.Caption;
+        Spanning<IKeyword> IRogueDescribable.Tags => Race.Tags;
 
         IReadOnlyRace ICharacterCreationData.Race => Race;
         Spanning<IReadOnlyAppearance> ICharacterCreationData.Appearances => Appearances.Span;

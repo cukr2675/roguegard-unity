@@ -21,6 +21,7 @@ namespace Roguegard.Rgpacks
         Color IRogueDescribable.Color => Asset.Color;
         string IRogueDescribable.Caption => Asset.Caption;
         IRogueDetails IRogueDescribable.Details => Asset.Details;
+        Spanning<IKeyword> IRogueDescribable.Tags => Spanning<IKeyword>.Empty;
 
         float ICharacterCreationData.Cost => Asset.Cost;
         float IRaceOption.Cost => Asset.Cost;

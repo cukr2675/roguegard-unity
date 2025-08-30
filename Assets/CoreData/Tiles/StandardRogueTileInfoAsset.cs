@@ -25,6 +25,9 @@ namespace Roguegard
         [SerializeField] private ScriptRef<IRogueDetails> _details = null;
         public override IRogueDetails Details => _details.Ref;
 
+        [SerializeField] private KeywordAsset[] _tags;
+        public override Spanning<IKeyword> Tags => _tags;
+
 
 
         [SerializeField] private KeywordAsset _category = null;

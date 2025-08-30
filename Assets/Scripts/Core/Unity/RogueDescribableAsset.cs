@@ -60,5 +60,11 @@ namespace Roguegard
         public IRogueDetails Details => _details?.Ref;
 
         private ScriptRef<IRogueDetails> DetailsSource { get => _details; set => _details = value; }
+
+
+
+        [SerializeField] private KeywordAsset[] _tags = null;
+
+        public Spanning<IKeyword> Tags => _tags;
     }
 }

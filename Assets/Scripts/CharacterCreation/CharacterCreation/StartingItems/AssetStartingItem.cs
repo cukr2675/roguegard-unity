@@ -29,6 +29,7 @@ namespace Roguegard.CharacterCreation
         public Color Color => OptionCustom.ColorOfEnabled ?? _option.Race.Color;
         public string Caption => OptionCustom.Caption ?? _option.Caption;
         public IRogueDetails Details => OptionCustom.Details ?? _option.Details;
+        public Spanning<IKeyword> Tags => _option.Tags;
 
         string IReadOnlyStartingItem.CustomName => OptionCustom.DescriptionName;
         Sprite IReadOnlyStartingItem.CustomIcon => OptionCustom.Icon;

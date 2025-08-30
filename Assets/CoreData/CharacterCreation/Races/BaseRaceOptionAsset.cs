@@ -13,6 +13,7 @@ namespace Roguegard.CharacterCreation
         public override Color Color => _base.Color;
         public override string Caption => _base.Caption;
         public override IRogueDetails Details => _base.Details;
+        public override Spanning<IKeyword> Tags => _base.Tags;
 
         public override float Cost => _base.Cost;
         public override bool CostIsUnknown => _base.CostIsUnknown;
