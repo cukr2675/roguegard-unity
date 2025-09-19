@@ -13,6 +13,7 @@ namespace OchalikeSprites
         public Vector3 PositionOffset { get; set; } = DefaultPositionOffset;
         public Vector3 ScaleOffset { get; set; } = DefaultScaleOffset;
         public Material Material { get; set; } = new Material(Shader.Find("Ochalike Sprites/Sprites/Custom Shift"));
+        public int PixelsPerUnit { get; set; } = OchalikeSpritesUtility.DefaultPixelsPerUnit;
 
         public int Count => bones.Count;
 
@@ -66,6 +67,10 @@ namespace OchalikeSprites
 
         public void RenderTo(RenderTexture renderTexture)
         {
+            var position = Position;
+            position.x = Mathf.Round(Position.x * PixelsPerUnit) / PixelsPerUnit;
+            position.y = Mathf.Round(Position.y * PixelsPerUnit) / PixelsPerUnit;
+
             RenderTexture.active = renderTexture;
             GL.PushMatrix();
             try
@@ -73,7 +78,7 @@ namespace OchalikeSprites
                 GL.Clear(true, true, Color.clear);
                 foreach (var bone in bones)
                 {
-                    bone.GLDraw(renderTexture, Vector3.Scale(Position, ScaleOffset) + PositionOffset, Rotation, Vector3.Scale(Scale, ScaleOffset), Material);
+                    bone.GLDraw(renderTexture, Vector3.Scale(position, ScaleOffset) + PositionOffset, Rotation, Vector3.Scale(Scale, ScaleOffset), Material);
                 }
             }
             finally
