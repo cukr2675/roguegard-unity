@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: affde6d6b08392d4bb0b2e249363d22d, type: 3}
+  m_Script: {fileID: 11500000, guid: 4c8980e43d2f2ae409f68338992ec597, type: 3}
   m_Name: Hair5
   m_EditorClassIdentifier: 
   _descriptionName: "\u9AEA5"
@@ -20,40 +20,22 @@ MonoBehaviour:
     _script: {fileID: 0}
     _ref:
       rid: -2
+  _tags: []
   _boneName: {fileID: 11400000, guid: ec68d48baa662234394a31361604143d, type: 2}
   _isBone: 1
   _sprite:
-    _isColorRanged: 0
     _spriteOrLightSprite:
       _normalFront: {fileID: -1914174892, guid: 6a76f83f271204a45b8c9c778cf89534, type: 3}
-      _normalRear: {fileID: 0}
+      _normalRear: {fileID: 1103580115, guid: 6a76f83f271204a45b8c9c778cf89534, type: 3}
       _backFront: {fileID: 1103580115, guid: 6a76f83f271204a45b8c9c778cf89534, type: 3}
       _backRear: {fileID: 0}
+    _isColorRanged: 0
     _darkSprite:
       _normalFront: {fileID: 0}
       _normalRear: {fileID: 0}
       _backFront: {fileID: 0}
       _backRear: {fileID: 0}
-    _spriteOrLightRed:
-      _normalFront: {fileID: 0}
-      _normalRear: {fileID: 0}
-      _backFront: {fileID: 0}
-      _backRear: {fileID: 0}
-    _darkRed:
-      _normalFront: {fileID: 0}
-      _normalRear: {fileID: 0}
-      _backFront: {fileID: 0}
-      _backRear: {fileID: 0}
-    _lightOther:
-      _normalFront: {fileID: 0}
-      _normalRear: {fileID: 0}
-      _backFront: {fileID: 0}
-      _backRear: {fileID: 0}
-    _darkOther:
-      _normalFront: {fileID: 0}
-      _normalRear: {fileID: 0}
-      _backFront: {fileID: 0}
-      _backRear: {fileID: 0}
+  _morph: {fileID: 11400000, guid: a2aeed68c75dd47489f4543f4eb934c6, type: 2}
   references:
     version: 2
     RefIds:

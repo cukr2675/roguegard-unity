@@ -9,64 +9,113 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1467b00e49562fc4fb508e0324f16c75, type: 3}
+  m_Script: {fileID: 11500000, guid: c464c6291d6012e44b888e9948e53bad, type: 3}
   m_Name: Eye10L
   m_EditorClassIdentifier: 
   _descriptionName: "\u76EE10"
-  _icon: {fileID: 89266277, guid: 7460fdaf1dc29ca49bb0b719cad192bc, type: 3}
+  _icon: {fileID: -661705561, guid: 9b791fc397b39c5428f68fd3665186a2, type: 3}
   _color: {r: 1, g: 1, b: 1, a: 1}
   _caption: 
   _details:
     _script: {fileID: 0}
     _ref:
       rid: -2
+  _tags: []
   _boneName: {fileID: 11400000, guid: d75b8d3f26400424498cb4eff95f5ddd, type: 2}
   _isBone: 1
-  _table:
-  - _isColorRanged: 1
-    _spriteOrLightSprite:
-      _normalFront: {fileID: 89266277, guid: 7460fdaf1dc29ca49bb0b719cad192bc, type: 3}
+  _neutralTable:
+  - _spriteOrLightSprite:
+      _normalFront: {fileID: -661705561, guid: 9b791fc397b39c5428f68fd3665186a2, type: 3}
       _normalRear: {fileID: 0}
       _backFront: {fileID: 0}
       _backRear: {fileID: 0}
+    _isColorRanged: 1
     _darkSprite:
-      _normalFront: {fileID: 606518629, guid: 7460fdaf1dc29ca49bb0b719cad192bc, type: 3}
+      _normalFront: {fileID: 1944563691, guid: 9b791fc397b39c5428f68fd3665186a2, type: 3}
       _normalRear: {fileID: 0}
       _backFront: {fileID: 0}
       _backRear: {fileID: 0}
-  - _isColorRanged: 1
-    _spriteOrLightSprite:
-      _normalFront: {fileID: -81295669, guid: 7460fdaf1dc29ca49bb0b719cad192bc, type: 3}
+  - _spriteOrLightSprite:
+      _normalFront: {fileID: 1269533562, guid: 9b791fc397b39c5428f68fd3665186a2, type: 3}
       _normalRear: {fileID: 0}
       _backFront: {fileID: 0}
       _backRear: {fileID: 0}
+    _isColorRanged: 1
     _darkSprite:
-      _normalFront: {fileID: 657990632, guid: 7460fdaf1dc29ca49bb0b719cad192bc, type: 3}
+      _normalFront: {fileID: -540936991, guid: 9b791fc397b39c5428f68fd3665186a2, type: 3}
       _normalRear: {fileID: 0}
       _backFront: {fileID: 0}
       _backRear: {fileID: 0}
-  - _isColorRanged: 1
-    _spriteOrLightSprite:
-      _normalFront: {fileID: 450844897, guid: 7460fdaf1dc29ca49bb0b719cad192bc, type: 3}
+  - _spriteOrLightSprite:
+      _normalFront: {fileID: 372893656, guid: 9b791fc397b39c5428f68fd3665186a2, type: 3}
       _normalRear: {fileID: 0}
       _backFront: {fileID: 0}
       _backRear: {fileID: 0}
+    _isColorRanged: 1
     _darkSprite:
-      _normalFront: {fileID: -940605749, guid: 7460fdaf1dc29ca49bb0b719cad192bc, type: 3}
+      _normalFront: {fileID: 880823665, guid: 9b791fc397b39c5428f68fd3665186a2, type: 3}
       _normalRear: {fileID: 0}
       _backFront: {fileID: 0}
       _backRear: {fileID: 0}
-  - _isColorRanged: 1
-    _spriteOrLightSprite:
-      _normalFront: {fileID: 793202741, guid: 7460fdaf1dc29ca49bb0b719cad192bc, type: 3}
+  - _spriteOrLightSprite:
+      _normalFront: {fileID: -534021151, guid: 9b791fc397b39c5428f68fd3665186a2, type: 3}
       _normalRear: {fileID: 0}
       _backFront: {fileID: 0}
       _backRear: {fileID: 0}
+    _isColorRanged: 1
     _darkSprite:
-      _normalFront: {fileID: -1582238975, guid: 7460fdaf1dc29ca49bb0b719cad192bc, type: 3}
+      _normalFront: {fileID: 991814456, guid: 9b791fc397b39c5428f68fd3665186a2, type: 3}
       _normalRear: {fileID: 0}
       _backFront: {fileID: 0}
       _backRear: {fileID: 0}
+  _angryTable:
+  - _spriteOrLightSprite:
+      _normalFront: {fileID: -424145895, guid: 44d1031d2914b3447b5ee37e283ee0de, type: 3}
+      _normalRear: {fileID: 0}
+      _backFront: {fileID: 0}
+      _backRear: {fileID: 0}
+    _isColorRanged: 1
+    _darkSprite:
+      _normalFront: {fileID: 1357151279, guid: 44d1031d2914b3447b5ee37e283ee0de, type: 3}
+      _normalRear: {fileID: 0}
+      _backFront: {fileID: 0}
+      _backRear: {fileID: 0}
+  - _spriteOrLightSprite:
+      _normalFront: {fileID: -157498729, guid: 44d1031d2914b3447b5ee37e283ee0de, type: 3}
+      _normalRear: {fileID: 0}
+      _backFront: {fileID: 0}
+      _backRear: {fileID: 0}
+    _isColorRanged: 1
+    _darkSprite:
+      _normalFront: {fileID: 1594978624, guid: 44d1031d2914b3447b5ee37e283ee0de, type: 3}
+      _normalRear: {fileID: 0}
+      _backFront: {fileID: 0}
+      _backRear: {fileID: 0}
+  - _spriteOrLightSprite:
+      _normalFront: {fileID: 1496438112, guid: 44d1031d2914b3447b5ee37e283ee0de, type: 3}
+      _normalRear: {fileID: 0}
+      _backFront: {fileID: 0}
+      _backRear: {fileID: 0}
+    _isColorRanged: 1
+    _darkSprite:
+      _normalFront: {fileID: -2019714372, guid: 44d1031d2914b3447b5ee37e283ee0de, type: 3}
+      _normalRear: {fileID: 0}
+      _backFront: {fileID: 0}
+      _backRear: {fileID: 0}
+  - _spriteOrLightSprite:
+      _normalFront: {fileID: -1392431009, guid: 44d1031d2914b3447b5ee37e283ee0de, type: 3}
+      _normalRear: {fileID: 0}
+      _backFront: {fileID: 0}
+      _backRear: {fileID: 0}
+    _isColorRanged: 1
+    _darkSprite:
+      _normalFront: {fileID: 195840654, guid: 44d1031d2914b3447b5ee37e283ee0de, type: 3}
+      _normalRear: {fileID: 0}
+      _backFront: {fileID: 0}
+      _backRear: {fileID: 0}
+  _cryingTable: []
+  _droopyTable: []
+  _scornfulTable: []
   references:
     version: 2
     RefIds:

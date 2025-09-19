@@ -38,18 +38,20 @@ MonoBehaviour:
     _color: {r: 1, g: 0.98039216, b: 0.23529412, a: 1}
     _members:
       _items: []
-  - _option: {fileID: 11400000, guid: 88a25a29b188e584ba0b84d7f4168941, type: 2}
+  - _option: {fileID: 11400000, guid: ae90940fc72bfbe46911d535067729eb, type: 2}
     _optionCustom: {fileID: 0}
     _color: {r: 0.55, g: 0, b: 0.030555703, a: 1}
     _members:
       _items:
-      - rid: 3586031305728196690
-  - _option: {fileID: 11400000, guid: 33cfe99c27b515b49b56a059e04fa8b4, type: 2}
+      - rid: 3767026234860765198
+      - rid: 3767026234860765199
+  - _option: {fileID: 11400000, guid: bd868524529877040bbfdab95e1a11ce, type: 2}
     _optionCustom: {fileID: 0}
     _color: {r: 0.54901963, g: 0, b: 0.03137255, a: 1}
     _members:
       _items:
-      - rid: 3586031305728196689
+      - rid: 3767026234860765196
+      - rid: 3767026234860765197
   - _option: {fileID: 11400000, guid: 4ed202ff619b0b744a4f0be7bca8218f, type: 2}
     _optionCustom: {fileID: 0}
     _color: {r: 0.8235294, g: 0.11764706, b: 0.15686275, a: 1}
@@ -163,14 +165,6 @@ MonoBehaviour:
       type: {class: SingleItemMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
       data:
         _editorItemOption: {fileID: 11400000, guid: 61b5715891eacdc40818e86462b97bab, type: 2}
-    - rid: 3586031305728196689
-      type: {class: AlphabetTypeMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
-      data:
-        _typeIndex: 1
-    - rid: 3586031305728196690
-      type: {class: AlphabetTypeMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
-      data:
-        _typeIndex: 1
     - rid: 3586031305728196707
       type: {class: EquipMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
       data:
@@ -179,3 +173,19 @@ MonoBehaviour:
       type: {class: EquipMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
       data:
         _isEquipped: 1
+    - rid: 3767026234860765196
+      type: {class: AlphabetTypeMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
+      data:
+        _typeIndex: 1
+    - rid: 3767026234860765197
+      type: {class: ExpressiveEyeMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
+      data:
+        _type: 0
+    - rid: 3767026234860765198
+      type: {class: AlphabetTypeMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
+      data:
+        _typeIndex: 1
+    - rid: 3767026234860765199
+      type: {class: ExpressiveEyeMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
+      data:
+        _type: 0

@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4c8980e43d2f2ae409f68338992ec597, type: 3}
-  m_Name: Hair8
+  m_Name: Hair11
   m_EditorClassIdentifier: 
-  _descriptionName: "\u9AEA8"
-  _icon: {fileID: -531570557, guid: 6a76f83f271204a45b8c9c778cf89534, type: 3}
+  _descriptionName: "\u9AEA11"
+  _icon: {fileID: 646893162, guid: 6a76f83f271204a45b8c9c778cf89534, type: 3}
   _color: {r: 1, g: 1, b: 1, a: 1}
   _caption: 
   _details:
@@ -25,9 +25,9 @@ MonoBehaviour:
   _isBone: 1
   _sprite:
     _spriteOrLightSprite:
-      _normalFront: {fileID: -531570557, guid: 6a76f83f271204a45b8c9c778cf89534, type: 3}
-      _normalRear: {fileID: -923531408, guid: 6a76f83f271204a45b8c9c778cf89534, type: 3}
-      _backFront: {fileID: -923531408, guid: 6a76f83f271204a45b8c9c778cf89534, type: 3}
+      _normalFront: {fileID: 646893162, guid: 6a76f83f271204a45b8c9c778cf89534, type: 3}
+      _normalRear: {fileID: 1089178890, guid: 6a76f83f271204a45b8c9c778cf89534, type: 3}
+      _backFront: {fileID: 1089178890, guid: 6a76f83f271204a45b8c9c778cf89534, type: 3}
       _backRear: {fileID: 0}
     _isColorRanged: 0
     _darkSprite:
@@ -35,7 +35,7 @@ MonoBehaviour:
       _normalRear: {fileID: 0}
       _backFront: {fileID: 0}
       _backRear: {fileID: 0}
-  _morph: {fileID: 11400000, guid: b32913402dcceb246994e607d01d6a16, type: 2}
+  _morph: {fileID: 11400000, guid: 433bacbf21feaa446a95744308db5dcd, type: 2}
   references:
     version: 2
     RefIds:

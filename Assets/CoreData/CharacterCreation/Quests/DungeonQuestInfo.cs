@@ -1,5 +1,6 @@
 namespace Roguegard.CharacterCreation
 {
+    // ダンジョン自体はクエスト = null でも入れるようにしたい
     public static class DungeonQuestInfo
     {
         public static bool TryGetQuest(RogueObj self, out DungeonQuest quest)

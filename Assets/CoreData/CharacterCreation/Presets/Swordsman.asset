@@ -33,23 +33,25 @@ MonoBehaviour:
       _items:
       - rid: 3586031399449133059
   _appearances:
-  - _option: {fileID: 11400000, guid: 54cdab0d11c6db542b51520f5f22bcb3, type: 2}
-    _optionCustom: {fileID: 0}
-    _color: {r: 0.23921569, g: 0.02745098, b: 0.02745098, a: 1}
-    _members:
-      _items:
-      - rid: 1446735840404570112
-  - _option: {fileID: 11400000, guid: 3a926326bb517db4fbedf45fb3388617, type: 2}
-    _optionCustom: {fileID: 0}
-    _color: {r: 0.23921569, g: 0.02745098, b: 0.02745098, a: 1}
-    _members:
-      _items:
-      - rid: 1446735840404570113
   - _option: {fileID: 11400000, guid: dd45398b31707594396bf2674adc6041, type: 2}
     _optionCustom: {fileID: 0}
     _color: {r: 0.39607844, g: 0.3529412, b: 0.35686275, a: 1}
     _members:
       _items: []
+  - _option: {fileID: 11400000, guid: 54cdab0d11c6db542b51520f5f22bcb3, type: 2}
+    _optionCustom: {fileID: 0}
+    _color: {r: 0.23921569, g: 0.02745098, b: 0.02745098, a: 1}
+    _members:
+      _items:
+      - rid: 3767026234860765200
+      - rid: 3767026234860765201
+  - _option: {fileID: 11400000, guid: 3a926326bb517db4fbedf45fb3388617, type: 2}
+    _optionCustom: {fileID: 0}
+    _color: {r: 0.23921569, g: 0.02745098, b: 0.02745098, a: 1}
+    _members:
+      _items:
+      - rid: 3767026234860765202
+      - rid: 3767026234860765203
   - _option: {fileID: 11400000, guid: 4ed202ff619b0b744a4f0be7bca8218f, type: 2}
     _optionCustom: {fileID: 0}
     _color: {r: 1, g: 1, b: 1, a: 1}
@@ -141,14 +143,6 @@ MonoBehaviour:
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
-    - rid: 1446735840404570112
-      type: {class: AlphabetTypeMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
-      data:
-        _typeIndex: 0
-    - rid: 1446735840404570113
-      type: {class: AlphabetTypeMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
-      data:
-        _typeIndex: 0
     - rid: 3586031399449133059
       type: {class: StandardRaceMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
       data:
@@ -187,3 +181,19 @@ MonoBehaviour:
       type: {class: EquipMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
       data:
         _isEquipped: 1
+    - rid: 3767026234860765200
+      type: {class: AlphabetTypeMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
+      data:
+        _typeIndex: 0
+    - rid: 3767026234860765201
+      type: {class: ExpressiveEyeMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
+      data:
+        _type: 0
+    - rid: 3767026234860765202
+      type: {class: AlphabetTypeMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
+      data:
+        _typeIndex: 0
+    - rid: 3767026234860765203
+      type: {class: ExpressiveEyeMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
+      data:
+        _type: 0

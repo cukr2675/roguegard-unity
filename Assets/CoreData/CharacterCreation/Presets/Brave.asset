@@ -43,13 +43,15 @@ MonoBehaviour:
     _color: {r: 0.1764706, g: 0.1764706, b: 0.43137255, a: 1}
     _members:
       _items:
-      - rid: 3003915766944235554
+      - rid: 3767026234860765184
+      - rid: 3767026234860765185
   - _option: {fileID: 11400000, guid: 10f1ae5e8ee7f6d4fa343c7fc85cceef, type: 2}
     _optionCustom: {fileID: 0}
     _color: {r: 0.1764706, g: 0.1764706, b: 0.43137255, a: 1}
     _members:
       _items:
-      - rid: 3003915766944235556
+      - rid: 3767026234860765186
+      - rid: 3767026234860765187
   - _option: {fileID: 11400000, guid: 4ed202ff619b0b744a4f0be7bca8218f, type: 2}
     _optionCustom: {fileID: 0}
     _color: {r: 1, g: 1, b: 1, a: 1}
@@ -154,14 +156,6 @@ MonoBehaviour:
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
-    - rid: 3003915766944235554
-      type: {class: AlphabetTypeMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
-      data:
-        _typeIndex: 1
-    - rid: 3003915766944235556
-      type: {class: AlphabetTypeMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
-      data:
-        _typeIndex: 1
     - rid: 3003915766944235557
       type: {class: EquipMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
       data:
@@ -208,3 +202,19 @@ MonoBehaviour:
       type: {class: EquipMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
       data:
         _isEquipped: 1
+    - rid: 3767026234860765184
+      type: {class: AlphabetTypeMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
+      data:
+        _typeIndex: 1
+    - rid: 3767026234860765185
+      type: {class: ExpressiveEyeMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
+      data:
+        _type: 0
+    - rid: 3767026234860765186
+      type: {class: AlphabetTypeMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
+      data:
+        _typeIndex: 1
+    - rid: 3767026234860765187
+      type: {class: ExpressiveEyeMember, ns: Roguegard.CharacterCreation, asm: Roguegard.CoreData}
+      data:
+        _type: 0

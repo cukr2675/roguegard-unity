@@ -16,5 +16,5 @@ MonoBehaviour:
   _descriptionNameFormat: "\u9AEA{0}"
   _boneName: {fileID: 11400000, guid: ec68d48baa662234394a31361604143d, type: 2}
   _isBone: 1
-  _spriteNameFormat: OSpR_Hair{0}{1}
-  _isColorRanged: 0
+  _spriteNameFormat: OSpR_Hair{0}_Hair{1}
+  _morphNameFormat: OSpR_Hair{0}

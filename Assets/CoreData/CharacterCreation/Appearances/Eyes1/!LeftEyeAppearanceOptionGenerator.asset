@@ -16,5 +16,5 @@ MonoBehaviour:
   _descriptionNameFormat: "\u76EE{0}"
   _boneName: {fileID: 11400000, guid: d75b8d3f26400424498cb4eff95f5ddd, type: 2}
   _isBone: 1
-  _spriteNameFormat: OSpR_Eye{0}L{1}{2}{3}
+  _spriteNameFormat: OSpR_Eye{0}L{1}{2}{3}{4}
   _isColorRanged: 1

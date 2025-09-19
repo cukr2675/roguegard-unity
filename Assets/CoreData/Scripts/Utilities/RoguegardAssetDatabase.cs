@@ -56,6 +56,28 @@ namespace Roguegard.Editor
             return null;
         }
 
+        public static ColorRangedBoneSprite CreateColorRangedBoneSpriteOrNull(bool colorRanged, string facialName, string format, params object[] args)
+        {
+            if (colorRanged)
+            {
+                var lightSprites = GetSprites(format, args.Append(0).Append(facialName));
+                var darkSprites = GetSprites(format, args.Append(1).Append(facialName));
+                if (lightSprites.Any() && darkSprites.Any())
+                {
+                    return new ColorRangedBoneSprite(CreateBoneSprite(lightSprites), CreateBoneSprite(darkSprites));
+                }
+            }
+            else
+            {
+                var sprites = GetSprites(format, args.Append(facialName));
+                if (sprites.Any())
+                {
+                    return new ColorRangedBoneSprite(CreateBoneSprite(sprites));
+                }
+            }
+            return null;
+        }
+
         private static BoneSprite CreateBoneSprite(IEnumerable<Sprite> sprites)
         {
             Sprite normalFront = null;
