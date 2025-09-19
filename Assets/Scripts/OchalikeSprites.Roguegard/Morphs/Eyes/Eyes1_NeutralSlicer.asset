@@ -10,11 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bfb23c4be0e14804084a8fc2298c9c78, type: 3}
-  m_Name: Eyes1Slicer
+  m_Name: Eyes1_NeutralSlicer
   m_EditorClassIdentifier: 
-  _targetTexture: {fileID: 2800000, guid: 7460fdaf1dc29ca49bb0b719cad192bc, type: 3}
+  _targetTexture: {fileID: 2800000, guid: 9b791fc397b39c5428f68fd3665186a2, type: 3}
+  _formatPrefix: OSpR_Eye
+  _formatSuffix: '{0}{1}_Neutral_NF'
   _slicers:
-  - _format: Eye1R{0}{1}_NF
+  - _format: 1R
     _rect:
       x: 0
       y: 56
@@ -23,7 +25,7 @@ MonoBehaviour:
     _pixelSize: {x: 3, y: 4}
     _padding: {x: 2, y: 0}
     _pixelPivot: {x: 2, y: 1}
-  - _format: Eye1L{0}{1}_NF
+  - _format: 1L
     _rect:
       x: 2
       y: 56
@@ -32,7 +34,43 @@ MonoBehaviour:
     _pixelSize: {x: 4, y: 4}
     _padding: {x: 1, y: 0}
     _pixelPivot: {x: 1, y: 1}
-  - _format: Eye2R{0}{1}_NF
+  - _format: 2R
+    _rect:
+      x: 21
+      y: 56
+      width: 21
+      height: 8
+    _pixelSize: {x: 3, y: 4}
+    _padding: {x: 2, y: 0}
+    _pixelPivot: {x: 2, y: 1}
+  - _format: 2L
+    _rect:
+      x: 23
+      y: 56
+      width: 21
+      height: 8
+    _pixelSize: {x: 4, y: 4}
+    _padding: {x: 1, y: 0}
+    _pixelPivot: {x: 1, y: 1}
+  - _format: 3R
+    _rect:
+      x: 42
+      y: 56
+      width: 21
+      height: 8
+    _pixelSize: {x: 3, y: 4}
+    _padding: {x: 2, y: 0}
+    _pixelPivot: {x: 2, y: 1}
+  - _format: 3L
+    _rect:
+      x: 44
+      y: 56
+      width: 21
+      height: 8
+    _pixelSize: {x: 4, y: 4}
+    _padding: {x: 1, y: 0}
+    _pixelPivot: {x: 1, y: 1}
+  - _format: 4R
     _rect:
       x: 0
       y: 48
@@ -41,7 +79,7 @@ MonoBehaviour:
     _pixelSize: {x: 3, y: 4}
     _padding: {x: 2, y: 0}
     _pixelPivot: {x: 2, y: 1}
-  - _format: Eye2L{0}{1}_NF
+  - _format: 4L
     _rect:
       x: 2
       y: 48
@@ -50,7 +88,7 @@ MonoBehaviour:
     _pixelSize: {x: 4, y: 4}
     _padding: {x: 1, y: 0}
     _pixelPivot: {x: 1, y: 1}
-  - _format: Eye3R{0}{1}_NF
+  - _format: 5R
     _rect:
       x: 21
       y: 48
@@ -59,7 +97,7 @@ MonoBehaviour:
     _pixelSize: {x: 3, y: 4}
     _padding: {x: 2, y: 0}
     _pixelPivot: {x: 2, y: 1}
-  - _format: Eye3L{0}{1}_NF
+  - _format: 5L
     _rect:
       x: 23
       y: 48
@@ -68,61 +106,43 @@ MonoBehaviour:
     _pixelSize: {x: 4, y: 4}
     _padding: {x: 1, y: 0}
     _pixelPivot: {x: 1, y: 1}
-  - _format: Eye4R{0}{1}_NF
-    _rect:
-      x: 42
-      y: 48
-      width: 21
-      height: 8
-    _pixelSize: {x: 3, y: 4}
-    _padding: {x: 2, y: 0}
-    _pixelPivot: {x: 2, y: 1}
-  - _format: Eye4L{0}{1}_NF
-    _rect:
-      x: 44
-      y: 48
-      width: 21
-      height: 8
-    _pixelSize: {x: 4, y: 4}
-    _padding: {x: 1, y: 0}
-    _pixelPivot: {x: 1, y: 1}
-  - _format: Eye5R{0}{1}_NF
+  - _format: 6R
     _rect:
       x: 0
-      y: 40
-      width: 26
-      height: 8
-    _pixelSize: {x: 4, y: 4}
-    _padding: {x: 2, y: 0}
-    _pixelPivot: {x: 3, y: 1}
-  - _format: Eye5L{0}{1}_NF
-    _rect:
-      x: 3
-      y: 40
-      width: 26
-      height: 8
-    _pixelSize: {x: 5, y: 4}
-    _padding: {x: 1, y: 0}
-    _pixelPivot: {x: 1, y: 1}
-  - _format: Eye6R{0}{1}_NF
-    _rect:
-      x: 25
       y: 40
       width: 29
       height: 8
     _pixelSize: {x: 4, y: 4}
     _padding: {x: 3, y: 0}
     _pixelPivot: {x: 3, y: 1}
-  - _format: Eye6L{0}{1}_NF
+  - _format: 6L
     _rect:
-      x: 28
+      x: 3
       y: 40
       width: 29
       height: 8
     _pixelSize: {x: 5, y: 4}
     _padding: {x: 2, y: 0}
     _pixelPivot: {x: 1, y: 1}
-  - _format: Eye7R{0}{1}_NF
+  - _format: 7R
+    _rect:
+      x: 29
+      y: 40
+      width: 29
+      height: 8
+    _pixelSize: {x: 4, y: 4}
+    _padding: {x: 3, y: 0}
+    _pixelPivot: {x: 3, y: 1}
+  - _format: 7L
+    _rect:
+      x: 32
+      y: 40
+      width: 29
+      height: 8
+    _pixelSize: {x: 5, y: 4}
+    _padding: {x: 2, y: 0}
+    _pixelPivot: {x: 1, y: 1}
+  - _format: 8R
     _rect:
       x: 0
       y: 32
@@ -131,7 +151,7 @@ MonoBehaviour:
     _pixelSize: {x: 4, y: 4}
     _padding: {x: 3, y: 0}
     _pixelPivot: {x: 3, y: 1}
-  - _format: Eye7L{0}{1}_NF
+  - _format: 8L
     _rect:
       x: 3
       y: 32
@@ -140,165 +160,57 @@ MonoBehaviour:
     _pixelSize: {x: 5, y: 4}
     _padding: {x: 2, y: 0}
     _pixelPivot: {x: 1, y: 1}
-  - _format: Eye8R{0}{1}_NF
+  - _format: 9R
     _rect:
       x: 29
       y: 32
-      width: 21
-      height: 8
-    _pixelSize: {x: 3, y: 4}
-    _padding: {x: 2, y: 0}
-    _pixelPivot: {x: 2, y: 1}
-  - _format: Eye8L{0}{1}_NF
-    _rect:
-      x: 31
-      y: 32
-      width: 21
-      height: 8
-    _pixelSize: {x: 4, y: 4}
-    _padding: {x: 1, y: 0}
-    _pixelPivot: {x: 1, y: 1}
-  - _format: Eye9R{0}{1}_NF
-    _rect:
-      x: 0
-      y: 24
       width: 29
       height: 8
     _pixelSize: {x: 4, y: 4}
     _padding: {x: 3, y: 0}
     _pixelPivot: {x: 3, y: 1}
-  - _format: Eye9L{0}{1}_NF
+  - _format: 9L
     _rect:
-      x: 3
-      y: 24
+      x: 32
+      y: 32
       width: 26
       height: 8
     _pixelSize: {x: 5, y: 4}
     _padding: {x: 2, y: 0}
     _pixelPivot: {x: 1, y: 1}
-  - _format: Eye10R{0}{1}_NF
+  - _format: 10R
     _rect:
-      x: 28
+      x: 0
       y: 24
       width: 29
       height: 8
     _pixelSize: {x: 4, y: 4}
     _padding: {x: 3, y: 0}
     _pixelPivot: {x: 3, y: 1}
-  - _format: Eye10L{0}{1}_NF
+  - _format: 10L
     _rect:
-      x: 31
+      x: 3
       y: 24
       width: 29
       height: 8
     _pixelSize: {x: 5, y: 4}
     _padding: {x: 2, y: 0}
     _pixelPivot: {x: 1, y: 1}
-  - _format: Eye11R{0}{1}_NF
+  - _format: 11R
     _rect:
-      x: 0
-      y: 16
-      width: 21
-      height: 8
-    _pixelSize: {x: 3, y: 4}
-    _padding: {x: 2, y: 0}
-    _pixelPivot: {x: 2, y: 1}
-  - _format: Eye11L{0}{1}_NF
-    _rect:
-      x: 2
-      y: 16
-      width: 21
-      height: 8
-    _pixelSize: {x: 4, y: 4}
-    _padding: {x: 1, y: 0}
-    _pixelPivot: {x: 1, y: 1}
-  - _format: Eye12R{0}{1}_NF
-    _rect:
-      x: 21
-      y: 16
-      width: 21
-      height: 8
-    _pixelSize: {x: 3, y: 4}
-    _padding: {x: 2, y: 0}
-    _pixelPivot: {x: 2, y: 1}
-  - _format: Eye12L{0}{1}_NF
-    _rect:
-      x: 23
-      y: 16
-      width: 21
-      height: 8
-    _pixelSize: {x: 4, y: 4}
-    _padding: {x: 1, y: 0}
-    _pixelPivot: {x: 1, y: 1}
-  - _format: Eye13R{0}{1}_NF
-    _rect:
-      x: 0
-      y: 8
-      width: 21
-      height: 8
-    _pixelSize: {x: 3, y: 4}
-    _padding: {x: 2, y: 0}
-    _pixelPivot: {x: 2, y: 1}
-  - _format: Eye13L{0}{1}_NF
-    _rect:
-      x: 2
-      y: 8
-      width: 21
-      height: 8
-    _pixelSize: {x: 4, y: 4}
-    _padding: {x: 1, y: 0}
-    _pixelPivot: {x: 1, y: 1}
-  - _format: Eye14R{0}{1}_NF
-    _rect:
-      x: 21
-      y: 8
+      x: 29
+      y: 24
       width: 29
       height: 8
     _pixelSize: {x: 4, y: 4}
     _padding: {x: 3, y: 0}
     _pixelPivot: {x: 3, y: 1}
-  - _format: Eye14L{0}{1}_NF
+  - _format: 11L
     _rect:
-      x: 24
-      y: 8
+      x: 32
+      y: 24
       width: 29
       height: 8
     _pixelSize: {x: 5, y: 4}
     _padding: {x: 2, y: 0}
-    _pixelPivot: {x: 1, y: 1}
-  - _format: Eye15R{0}{1}_NF
-    _rect:
-      x: 0
-      y: 0
-      width: 21
-      height: 8
-    _pixelSize: {x: 3, y: 4}
-    _padding: {x: 2, y: 0}
-    _pixelPivot: {x: 2, y: 1}
-  - _format: Eye15L{0}{1}_NF
-    _rect:
-      x: 2
-      y: 0
-      width: 21
-      height: 8
-    _pixelSize: {x: 4, y: 4}
-    _padding: {x: 1, y: 0}
-    _pixelPivot: {x: 1, y: 1}
-  - _format: Eye16R{0}{1}_NF
-    _rect:
-      x: 21
-      y: 0
-      width: 21
-      height: 8
-    _pixelSize: {x: 3, y: 4}
-    _padding: {x: 2, y: 0}
-    _pixelPivot: {x: 2, y: 1}
-  - _format: Eye16L{0}{1}_NF
-    _rect:
-      x: 23
-      y: 0
-      width: 21
-      height: 8
-    _pixelSize: {x: 4, y: 4}
-    _padding: {x: 1, y: 0}
     _pixelPivot: {x: 1, y: 1}

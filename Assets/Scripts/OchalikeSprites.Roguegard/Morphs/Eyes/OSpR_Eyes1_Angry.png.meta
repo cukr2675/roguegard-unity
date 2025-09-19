@@ -1,0 +1,4006 @@
+fileFormatVersion: 2
+guid: 44d1031d2914b3447b5ee37e283ee0de
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 301900120792692518
+    second: OSpR_Eyes1_Angry_0
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 64
+    resizeAlgorithm: 0
+    textureFormat: 4
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: OSpR_Eye1RA0_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 60
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 65f3dee30a7afbc4482fbd376635c0e1
+      internalID: 950075036
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye1RA1_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 56
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5187aa651ed5bdd4ab5c492c58b7daae
+      internalID: -385948409
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye1RB0_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 60
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ef343f77758045d4c8493191ec2455cb
+      internalID: -927901325
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye1RB1_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 56
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 172a7877efe6dac44bf5a1fc4f6c51a6
+      internalID: 608822211
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye1RC0_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 60
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0d22cc5841426a145b915fa94a75d72f
+      internalID: -1224413911
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye1RC1_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 56
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 86a173af7ec19c24aa91aef776eae50c
+      internalID: -1860974382
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye1RD0_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 60
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8ba68c3a70ea2df4baa7d70e306043d3
+      internalID: -597113701
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye1RD1_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 56
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fa4d12c29965474429d1e8abc867b20d
+      internalID: 1243660332
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye1LA0_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 60
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9ab3ac9306e178d4d8c7a2ae2ef3090c
+      internalID: -702615250
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye1LA1_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 56
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e236112eac8da184b87c0d6e763bbf9c
+      internalID: 1203926236
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye1LB0_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 60
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0949864b234b25c44b77802b0919e637
+      internalID: 1399945318
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye1LB1_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 56
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 55d72ace8546f2d49ab2020d41e66487
+      internalID: -1678844360
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye1LC0_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 60
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 980ad81deca70c747b5bf4e6adea8271
+      internalID: 1245136754
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye1LC1_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 56
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 33f71d164276bf34b80d8f774b2ea0e3
+      internalID: -622251176
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye1LD0_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 60
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 64704c7e1956d9f43a9b82d21debd4e6
+      internalID: -1551730399
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye1LD1_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 56
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9f30e6b49b063ca4c8efb0169b25407a
+      internalID: 683794009
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye2RA0_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 60
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a0741a35718b46743842aa611bf722ee
+      internalID: 2082483419
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye2RA1_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 56
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d7e1f0985b5e0f54d8d274eef0e4d55c
+      internalID: -423977038
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye2RB0_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 60
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6d8df49a30471e548a5cd01f3ea3148a
+      internalID: 996480190
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye2RB1_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 56
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 915403f65dbae5b4aa8130f064d14681
+      internalID: 695067764
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye2RC0_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 60
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: db7f9b94475aec04897bcba4375efc65
+      internalID: 1920527534
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye2RC1_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 56
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 19cc54822e77a354bb3b9297b1f9222b
+      internalID: 1211313267
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye2RD0_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 60
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bf39d5bf49df9fb4e9dfcf64cc73c4d3
+      internalID: 1061795505
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye2RD1_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 56
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0a49ba822ca67ec4094612a7bece7b72
+      internalID: -1229631991
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye2LA0_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 60
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7de7447d9397b0a42bd62634d1be3811
+      internalID: 2132167845
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye2LA1_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 56
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c85ab9f3bef1cff4bbe3bb170d04ba48
+      internalID: 792892960
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye2LB0_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 60
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c2b97bf87aeafd04bb8a2b254558c8c0
+      internalID: 838753216
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye2LB1_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 56
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e05d40812f4956e458d888713b1b1100
+      internalID: 1270229518
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye2LC0_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 60
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 715c5140d4803f14faf0525a0f1d0d48
+      internalID: 743716221
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye2LC1_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 56
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 57016378516c7e34ca0e266a1c7dfdb2
+      internalID: -1177239399
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye2LD0_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 38
+        y: 60
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b7182ec9458dd7f4fb25266273f19d26
+      internalID: -814505817
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye2LD1_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 38
+        y: 56
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 81e1e9c3e5b6142419c256cf173508f2
+      internalID: -669540030
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye3RA0_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 60
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 88b6e8d99d06d2242be6dc4d59dc6a56
+      internalID: -720448234
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye3RA1_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 56
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 02e51c27f152be7419d773f98effc3f5
+      internalID: 1634509266
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye3RB0_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 47
+        y: 60
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d2c966d23aa67784ba72d5fdc565d986
+      internalID: -1168204311
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye3RB1_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 47
+        y: 56
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ee5f2146f6e88964bbbd62ec8b7c795e
+      internalID: 1607822654
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye3RC0_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 60
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b4f32eafb2554bf4698a72abb25be1bb
+      internalID: -191232079
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye3RC1_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 56
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0ba9982d7a0769248a5eace4a6904796
+      internalID: -558173811
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye3RD0_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 57
+        y: 60
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 04f3e1e0a814caa46ab7c2b30f001272
+      internalID: 1342551140
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye3RD1_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 57
+        y: 56
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 271e03bc49f563d43ae68af50f0a95d3
+      internalID: -1197081263
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye3LA0_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 44
+        y: 60
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6938ef84aa6347847ae02bd0048ea8f6
+      internalID: -26416153
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye3LA1_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 44
+        y: 56
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ada66fb898e353d48a881746a6ebea0c
+      internalID: -598667423
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye3LB0_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 60
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4d8357433a4cee248a6df103bfac103a
+      internalID: -918752116
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye3LB1_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 56
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8811e253b031fb745944423a458392a6
+      internalID: 2068304446
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye3LC0_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 60
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5b05111d785a9c341b2741c64e62e832
+      internalID: 575892391
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye3LC1_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 56
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6e88ab6757eb6de43bdbe87f1dc26dcd
+      internalID: -1301690131
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye3LD0_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 59
+        y: 60
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6ac961a07726c4440a4b88182f8ec566
+      internalID: 1027685715
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye3LD1_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 59
+        y: 56
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 03ce69c470f46754c89d871ff0f9053e
+      internalID: 198930900
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye4RA0_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 52
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dbf38dea71db2f8449710ed5e996797d
+      internalID: 813336612
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye4RA1_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 48
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7d36f9f508934cc48af8de68987d535f
+      internalID: -1846300398
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye4RB0_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 52
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ffaf65d96eaec5048ac77adeab2b29a5
+      internalID: -492517793
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye4RB1_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 48
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6b994cccf47857848a0aaefb1ec3acdb
+      internalID: 43122416
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye4RC0_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 52
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: be0a32a200be3aa438e433843d8cadc5
+      internalID: 605963763
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye4RC1_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 48
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fc9a412f9b95208488f2228d0d000742
+      internalID: 1026187106
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye4RD0_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 52
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6a36bedcd61eb6c41b1d98a703fa5f6c
+      internalID: -1234688722
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye4RD1_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 48
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7344717f16d35d0478d3810289865d07
+      internalID: 225107833
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye4LA0_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 52
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dc788374c8a4c174695365ec3c179588
+      internalID: 1745214856
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye4LA1_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 48
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 85af86f607aeaf944ba7ae5288d0c54c
+      internalID: 1947471524
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye4LB0_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 52
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d8968fac097376c4eae3f9ecacca297b
+      internalID: 1085357061
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye4LB1_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 48
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4008690fcecc14f46bf47a17297f014e
+      internalID: -1152566172
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye4LC0_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 52
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8826e1e03b9f41246afb81f0f1a37758
+      internalID: 2015990266
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye4LC1_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 48
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dda2f0ab22418f641a125706ac565df9
+      internalID: -1006004436
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye4LD0_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 52
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1f8092568bcddcb48903f2d87b1f4d10
+      internalID: 1910058930
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye4LD1_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 48
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 62b7f7c8c6d30714da7271cf5f2060ef
+      internalID: 1800873406
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye5RA0_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 52
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c65b03fc84550404a97ce9e1a37c8866
+      internalID: 966443292
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye5RA1_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 48
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f7f077c0f448e3347a408f118e88735f
+      internalID: -1364873145
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye5RB0_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 52
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 74407e9c392c24e46b734df2ff097078
+      internalID: 177291833
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye5RB1_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 48
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c8c6a1138ef5d044c818773c4a41b1ea
+      internalID: 623137900
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye5RC0_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 52
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5a0d968786d8fb94ba95e0e6dc404f30
+      internalID: -306632821
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye5RC1_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 48
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8f8bd5e3dd4aa5b47802694e37ede0f9
+      internalID: 1725113533
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye5RD0_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 52
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 398f97d978ddf704c86bb9b04bfdf8a3
+      internalID: -1233684040
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye5RD1_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 48
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d8f0c81747daf3242924225f0b7eb925
+      internalID: -1724477153
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye5LA0_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 52
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 21fe159616030e6418b5db8eede947ca
+      internalID: -1133843096
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye5LA1_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 48
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 63033086f11193e48932754434893658
+      internalID: 1867008626
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye5LB0_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 52
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b3120cbbb705b6040ac133291d5fd767
+      internalID: 955099733
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye5LB1_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 48
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 304a1321d71b6cf40b03e5b6919d9ab5
+      internalID: 2089680675
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye5LC0_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 52
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7c12bfed69aeeb74fbcd59d125b409c7
+      internalID: -486108980
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye5LC1_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 48
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d6193db0d1f3f7845a3dcb7145f797e6
+      internalID: -1660609543
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye5LD0_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 38
+        y: 52
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 571a047033db8ba41a216c7e9207dc56
+      internalID: 469976086
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye5LD1_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 38
+        y: 48
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 39a6095bf3b3fc349a78cbfa2c1bd514
+      internalID: 1961957071
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye6RA0_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 44
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 95efc50c17f97cc4e91e6d10c8a32de1
+      internalID: -1055345986
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye6RA1_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 40
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 33881c2fc5ccf554a8e2c302ce031cb1
+      internalID: -659973523
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye6RB0_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 44
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2622c29a540879d4790706fe377109b0
+      internalID: -1176881113
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye6RB1_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 40
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a8e9f45ce4e83d945ba1baa2d84b5db7
+      internalID: 593123160
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye6RC0_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 44
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ae33e5d41addd3249aa21fc9f591832d
+      internalID: -1218198359
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye6RC1_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 40
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a0eec5082e7183e46921e060faeb7c83
+      internalID: 638053457
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye6RD0_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 44
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 99c3fd99b283d304baa587c89f088aae
+      internalID: -1277155488
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye6RD1_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 40
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ef6909d052139264b8cfce903cb9ed56
+      internalID: -1462843841
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye6LA0_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 44
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 121bf3dda8dbdbd49924dc49ce7eda96
+      internalID: 296651542
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye6LA1_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 40
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 96a5752254f73644593db9cfe5862f3b
+      internalID: 2146558687
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye6LB0_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 44
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7d68cf19325b30d4695b9d77a5bfc945
+      internalID: 1606511484
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye6LB1_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 40
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e0169f7aa6989be4f90b9cd0f6c74b87
+      internalID: 2011080184
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye6LC0_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 44
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0a5173a2bb738704da640b2b1d489eab
+      internalID: -867531877
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye6LC1_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 40
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2e399f49a78ec6f45ad3c4b25bedf90c
+      internalID: 1825836372
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye6LD0_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 44
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: db3db71f23df0e341804add891dfd296
+      internalID: 453531471
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye6LD1_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 40
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f259d06c51d585f48a00eb0edc213c38
+      internalID: -1447831021
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye7RA0_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 29
+        y: 44
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 19b7db2aa6544394380366e54b407c45
+      internalID: 570780700
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye7RA1_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 29
+        y: 40
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3a8d979668dc4ea4d8a8e43dc0fba9f4
+      internalID: -1039338164
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye7RB0_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 44
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5489eb22552a3ea4c893222c9ddffb7d
+      internalID: -517371407
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye7RB1_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 40
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d9b7df8798ec0d442bd722f1eaa43cb7
+      internalID: -1741182924
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye7RC0_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 44
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 81c214f89dd6eb74a8c4006b0e65cb5e
+      internalID: -1985374885
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye7RC1_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 40
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d69c81ae9e488c94c9c94dd3b487adbf
+      internalID: 1605385095
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye7RD0_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 44
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ca9584af0752d6b42ac124ef575476a7
+      internalID: -1035032941
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye7RD1_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 40
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7c5faa636dfc04c41968254afd9f82e7
+      internalID: -1266701753
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye7LA0_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 44
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 09dcd5a039ddf5a44ba446cff085150a
+      internalID: 196567096
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye7LA1_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 40
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3dbcd85cabac4de449b150f5a2cabd9f
+      internalID: 877722547
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye7LB0_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 44
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3a4ba00f8a239bd4c8ebf5fec7f67dea
+      internalID: -476284897
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye7LB1_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 40
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4803fa35009dba04881753a835e29253
+      internalID: 1735070191
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye7LC0_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 44
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6c5b0d1ce4d17414493d5208867e26e0
+      internalID: 1724219564
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye7LC1_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 40
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d4dc77fbcf2096c46ab7b2d0c83d8217
+      internalID: 80625223
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye7LD0_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 53
+        y: 44
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a9333b8eb47475e4da694e72d0c02165
+      internalID: -1345419067
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye7LD1_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 53
+        y: 40
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 726ab02860490a94fb47dfd0d175c353
+      internalID: -183385549
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye8RA0_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 36
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f2db105231413514e9ce3293065ffb91
+      internalID: 87095222
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye8RA1_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 32
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4b2c33972bb94e540845270f833b585f
+      internalID: -1501820994
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye8RB0_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 36
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e1b1099e87afd954da9bcd58be189976
+      internalID: -1432830812
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye8RB1_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 32
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 604b88efe418b854fbabee3c4bbfa5ae
+      internalID: 223382919
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye8RC0_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 36
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 34a6dabbf9ba7bb4bad980566634bbbe
+      internalID: -1572738575
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye8RC1_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 32
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b30f8792a657be14892f6ae831cac2af
+      internalID: -340927002
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye8RD0_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 36
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2107cc92384d6d54e8c06223c378e457
+      internalID: 1892611363
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye8RD1_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 32
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 46e9027db8a380649a182e7d560b0d7d
+      internalID: -1612599913
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye8LA0_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 36
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 76e1d0b6b1c46764d9dcbf32fb0b6e62
+      internalID: -721578586
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye8LA1_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 32
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1c05dbd87348cea429af844b226c5fce
+      internalID: -988824574
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye8LB0_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 36
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 425da13161d416540a289c25f8dc79c4
+      internalID: -1305186883
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye8LB1_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 32
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ab2bcaeaff3b9c94fa58edbaaeedeb6a
+      internalID: -466090588
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye8LC0_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 36
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9b727bed8606abe40b10199ed582048f
+      internalID: 2126718104
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye8LC1_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 32
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 54997367faefcd645bc0b4c4fbe888d6
+      internalID: 110121528
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye8LD0_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 36
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 982c0cb6aae1fe94786f2babc313816f
+      internalID: 976651384
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye8LD1_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 32
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 26d44262a1c1f9a4faf72c9f782b7357
+      internalID: -1711527036
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye9RA0_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 29
+        y: 36
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fa743cacaf528a94fad4eddcc9201625
+      internalID: 1266827646
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye9RA1_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 29
+        y: 32
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 66094bbe41463a940895b8d1f3f06fe8
+      internalID: -1775581707
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye9RB0_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 36
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 86473f136b3f05740bed8d7a1130c440
+      internalID: 1476495695
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye9RB1_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 32
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9d28b5a739a50b247ac1c62770c02b0e
+      internalID: -1141188382
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye9RC0_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 36
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 41ab29e7e57a43d4e8a3b343ebace255
+      internalID: -1798223662
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye9RC1_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 32
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 91e108e3aa075454bb5636e2c308b178
+      internalID: 1195017348
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye9RD0_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 36
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 43fcf1056be62094db393a2811848d8e
+      internalID: -1148696070
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye9RD1_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 32
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4fcf4971d5ea0be4788b746b2e20d913
+      internalID: -182905704
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye9LA0_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 36
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: df9ba9d643ec59443abc8af330531a3f
+      internalID: 1666331553
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye9LA1_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 32
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7d65ae55640d25a43a0b78ab85cf2dbe
+      internalID: 621229114
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye9LB0_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 36
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 46ede4350a4357c44bc9d71d86b7cc66
+      internalID: -678807496
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye9LB1_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 32
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dfe6fbdbdec8b964cb7fe9bf162c5f51
+      internalID: -879154215
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye9LC0_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 36
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a19f889af16326c4699f86310648e584
+      internalID: -1667560941
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye9LC1_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 32
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0b143bbb718c8a44b986b16e793bb2de
+      internalID: 1165375671
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye9LD0_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 53
+        y: 36
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1b6da0c12090d454f98e1e66ab76e9d9
+      internalID: -952871994
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye9LD1_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 53
+        y: 32
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 81e23c5aaa385e34084d0fd754c4b25a
+      internalID: -880538457
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye10RA0_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 28
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a93393844b7c51e43ae03d307fb71064
+      internalID: -1212374178
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye10RA1_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 24
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fb6cba1650e0e0941915df61da0e8b89
+      internalID: -510748082
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye10RB0_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 28
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 733cfa588313e074fa2348d37876370a
+      internalID: -738905569
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye10RB1_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 24
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d287dac8d12096e4788453d1dfc61c3f
+      internalID: 2054156826
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye10RC0_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 28
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 61acb46dc7621b442b5246c6d6579058
+      internalID: -1230682427
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye10RC1_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 24
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 298201fd10df43a4fad5baf042471023
+      internalID: -231933852
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye10RD0_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 28
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a65fd20c3318eac47b4eaab5d78fe6e8
+      internalID: 371071583
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye10RD1_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 24
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 09c1f1e1d2e63824da735cb081630db0
+      internalID: 723022588
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye10LA0_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 28
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7d866f57c6a04f148a68bd22e4d9f29c
+      internalID: -424145895
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye10LA1_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 24
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6e7798b09a4be2e408f38d24037d713b
+      internalID: 1357151279
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye10LB0_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 28
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8a4754ae7433b1241915d15bdfd92c76
+      internalID: -157498729
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye10LB1_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 24
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7bd8ac43237a25f45b3b84650102e636
+      internalID: 1594978624
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye10LC0_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 28
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f5af9b9a77395e440b9591fe472a28e1
+      internalID: 1496438112
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye10LC1_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 24
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9cda4cd4b7aef59489caabaaaa00fac4
+      internalID: -2019714372
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye10LD0_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 28
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 95f461e150d959041881a5ee2504c99c
+      internalID: -1392431009
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye10LD1_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 24
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 70a1f1a7ee6be5144aabfbc5f9758d0f
+      internalID: 195840654
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye11RA0_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 29
+        y: 28
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 934a306ef163b2f40aebe4606cf3727a
+      internalID: -1373839188
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye11RA1_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 29
+        y: 24
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a62a5c7f7acfb9c4eabe4c0ea7735e89
+      internalID: 1723957145
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye11RB0_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 28
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8d5b31b41e9004748b5ad7fb87ec3148
+      internalID: -1230929759
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye11RB1_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 24
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b089cf96902ea3145a518edd016ced9c
+      internalID: 1919579007
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye11RC0_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 28
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1b53f6f6ededf7f49bffb607669159ea
+      internalID: 518380544
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye11RC1_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 24
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 983c3e08a35753842b0f41ac3e2d39c8
+      internalID: 1845041438
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye11RD0_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 28
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0bc5cef4eeda8334bbeb13e6788bf9f3
+      internalID: 1011693342
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye11RD1_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 24
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aca703c1c91fc10458bca58d41b5e67f
+      internalID: -930070413
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye11LA0_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 28
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 03d21b94799e65d4e921ee08216e9410
+      internalID: -1654560781
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye11LA1_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 24
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9cfcd1c2d1c675a4ca415a067e03b4ac
+      internalID: -1040644813
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye11LB0_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 28
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ef47733cc59ef4847ba9e0bca81e91d1
+      internalID: -1873164789
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye11LB1_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 24
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 82d080866043ad541a76bda256ac2edd
+      internalID: -354903858
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye11LC0_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 28
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2ee0149306f0be0488a33b7a3b9a9a3a
+      internalID: -1542700383
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye11LC1_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 24
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 610826e87b617ec43a8ca10946a63b8e
+      internalID: 409468506
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye11LD0_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 53
+        y: 28
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7ca7698b6816d4344b31625fb74837dc
+      internalID: 191299346
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye11LD1_Angry_NF
+      rect:
+        serializedVersion: 2
+        x: 53
+        y: 24
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e4df42df45df14a489501123448dd0ef
+      internalID: 171728254
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 327042869e6b1e544b5ec4fd2a85f88a
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      OSpR_Eyes1_Angry_0: 301900120792692518
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

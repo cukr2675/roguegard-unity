@@ -1,0 +1,4006 @@
+fileFormatVersion: 2
+guid: 9b791fc397b39c5428f68fd3665186a2
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -7550135647045267427
+    second: OSpR_Eyes1_Neutral_0
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 64
+    resizeAlgorithm: 0
+    textureFormat: 4
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: OSpR_Eye1RA0_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 60
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0a163b6135de7194590ad39a74176015
+      internalID: 907702173
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye1RA1_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 56
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b76d83cd7ac609f4fa89664db2b0e143
+      internalID: -1774528512
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye1RB0_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 60
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 955ea3dd409b1954180a04d1328038e0
+      internalID: 74738111
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye1RB1_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 56
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2fbf4bef6b6cde2489ac1dc8dfe5d908
+      internalID: -1443163975
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye1RC0_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 60
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 32d7467f8a4c15e48b02862f9847e2d5
+      internalID: -1993874858
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye1RC1_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 56
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1d6b19b9e62ab884dbf9bc2bb661f572
+      internalID: -926530167
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye1RD0_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 60
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6edc717a38b86fc4aa274a580eee01ef
+      internalID: 2007115879
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye1RD1_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 56
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 552ecc6e2b4cbdc4dbce5273ae96d002
+      internalID: -378459624
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye1LA0_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 60
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eb51fffb37f3f48458fa21db43ff2f8e
+      internalID: 1385381616
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye1LA1_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 56
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 77f6efef3f1bafd4bbe90484eac5e823
+      internalID: -442643863
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye1LB0_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 60
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2e2b816c1c6440e48a99fce5eb6ba92d
+      internalID: -1126094251
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye1LB1_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 56
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 43c10ca3f48045c44b5c59cfe6ebb395
+      internalID: 2045811441
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye1LC0_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 60
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a4ce9765f0137304ea004078354a791b
+      internalID: -1983112632
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye1LC1_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 56
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 289250784d30c8a40853e12342e476fb
+      internalID: 674178266
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye1LD0_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 60
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4f479b4a73e09b74188f67eac90489b2
+      internalID: -691348702
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye1LD1_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 56
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 55fa72dc841babd4799ec2f2814829d4
+      internalID: 1014941362
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye2RA0_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 60
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2cff5ae5740a30849aabc21e9667c555
+      internalID: 833411321
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye2RA1_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 56
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d74edcedc71cbdd438541fc33e0df0e3
+      internalID: -406751975
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye2RB0_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 60
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b54a81ab92b1b3d4199c89ad748239df
+      internalID: 587107492
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye2RB1_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 56
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7f745d78a840a5541a1d2eff42844cda
+      internalID: -2074716776
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye2RC0_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 60
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3232bcb6dae438b40b8c4edb0b980d5e
+      internalID: -504152678
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye2RC1_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 56
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 65120c9bb2a24b448ba5a71228d415cc
+      internalID: 1585368887
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye2RD0_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 60
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 17d5e5af1659aef4eb12b9a59377f68e
+      internalID: -137175341
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye2RD1_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 56
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5355d99bf5cb0c74088d96a1b0064eef
+      internalID: -1251204331
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye2LA0_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 60
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4ee7cdc6be49f154eb16ded764c890db
+      internalID: -2066463441
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye2LA1_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 56
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3b52af3eda5a34c4cb8d8a30cf3609c0
+      internalID: -266714358
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye2LB0_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 60
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 125738b2a7e236544a4cecbdadf93b50
+      internalID: 362989913
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye2LB1_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 56
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6ca40a9a7f8e2694e9e50ef7ff1282c0
+      internalID: -1553882368
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye2LC0_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 60
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 59cb194a4a58e9541bf31935256d8e27
+      internalID: 1097778002
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye2LC1_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 56
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ef194b3f7fe26044c8077e3980dd9611
+      internalID: 1318359829
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye2LD0_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 38
+        y: 60
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aa6aa9217f96d5a41ae2fb51e093e48d
+      internalID: -1351564354
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye2LD1_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 38
+        y: 56
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5aaa7f648768fb2468157558583af751
+      internalID: -2142228254
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye3RA0_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 60
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c943126ddce2dab40a44e714b431266c
+      internalID: 1515244514
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye3RA1_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 56
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f8631cbaa1483334bbcc1affdabac811
+      internalID: -1030920053
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye3RB0_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 47
+        y: 60
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e2646e3ecccbfd3478ac9ed30c4a6c35
+      internalID: 372366353
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye3RB1_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 47
+        y: 56
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 517188b550a8492499b96ef0acd30ac9
+      internalID: 526777395
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye3RC0_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 60
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3787676dd32f2ef48ab675f3dace7e83
+      internalID: 1479346415
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye3RC1_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 56
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eae67324bae20c6478b727d66aba433e
+      internalID: -2084747936
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye3RD0_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 57
+        y: 60
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 88170bc9ebba4b14c9bbe694333581f0
+      internalID: -972196375
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye3RD1_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 57
+        y: 56
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 737a5e9958b6d4b489666853ab5c2c84
+      internalID: 1842982060
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye3LA0_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 44
+        y: 60
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8d34ea15c3ac8f0469e12a4644125595
+      internalID: 1160774334
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye3LA1_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 44
+        y: 56
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3640ebccff2947641aa015ee8a7ed50b
+      internalID: 798563917
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye3LB0_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 60
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 356a60b035f29f94f9885e0b317f31e0
+      internalID: 854460444
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye3LB1_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 56
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b5016e4bfabc00a4ca25a753b1008db6
+      internalID: 380983991
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye3LC0_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 60
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f04fc2208278e60489bcfdf07698378f
+      internalID: -1926061076
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye3LC1_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 56
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 95216dde20d2a654abd0437ec5b2131e
+      internalID: 1898486577
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye3LD0_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 59
+        y: 60
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d5a2a2ad087aee240ac5ec1a84bae707
+      internalID: -707532471
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye3LD1_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 59
+        y: 56
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ee05affa3ec91004dbb7401bec1d2972
+      internalID: -1174050542
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye4RA0_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 52
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c2907e013444da7469488911a93fceaf
+      internalID: -1888382405
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye4RA1_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 48
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2672229eb96307d4ba7d9ef4e2ac1071
+      internalID: -681998816
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye4RB0_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 52
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 64301db19260c2b4ab8ddaa992bd20b0
+      internalID: 1403283684
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye4RB1_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 48
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e76e57ba62bff79498b8ff104552d62b
+      internalID: 890988769
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye4RC0_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 52
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 66a439c7d28035945b131a355b1e37e2
+      internalID: 1657738591
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye4RC1_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 48
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b083c96cbd69a624e92cd456b3ca9b41
+      internalID: 823139497
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye4RD0_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 52
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 378eae2dcbf8c51409110230fd99d30b
+      internalID: -78905684
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye4RD1_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 48
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fcf9a5a557a4dfc4b8df5d4c02469ab1
+      internalID: 2124998225
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye4LA0_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 52
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: acea027e7a3f1c04a93bd0b29a8264c2
+      internalID: -936630954
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye4LA1_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 48
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 100ee02caa71c12409a06f5b0e831f24
+      internalID: -359078769
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye4LB0_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 52
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 88aaeec09e9f1cc4ca5dea5432a39958
+      internalID: 1207245838
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye4LB1_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 48
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: edd54a74eb7cd4941ad43d4c044fd702
+      internalID: 1424014117
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye4LC0_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 52
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 23f785085ce97e74eb55976e016f9ae0
+      internalID: -1879598711
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye4LC1_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 48
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ba680d5a4d299cf4a9b171037ce056d7
+      internalID: 402093606
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye4LD0_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 52
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 78e1b6fc6522ba2438a5c198f4b74267
+      internalID: 1034461677
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye4LD1_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 48
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cdf8345a318572f4f89b5eb668eeb83c
+      internalID: 459111306
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye5RA0_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 52
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e5893c139baa6ed488bbaefbf1650aea
+      internalID: -213043040
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye5RA1_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 48
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: edcd3773d8749764ca0a1cdb3b7fd8f3
+      internalID: -2046701260
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye5RB0_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 52
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2597d81cca1dfc84bb2b7ea1887423d9
+      internalID: -991676167
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye5RB1_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 48
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2465ca0bc02c2734e9965f4a82629ac0
+      internalID: -19153432
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye5RC0_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 52
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a5f9c08ffd0404e4fafde0abb8ce4c6b
+      internalID: 1765687685
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye5RC1_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 48
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 78247fe98c046754ebbc009f32cd8231
+      internalID: 370272790
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye5RD0_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 52
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5e7a4179ce7bf5348ae4cb7f2475aefe
+      internalID: -1438595185
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye5RD1_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 48
+        width: 3
+        height: 4
+      alignment: 9
+      pivot: {x: 0.6666667, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: af5613d129682384285040a6fbfd67ef
+      internalID: 1339561221
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye5LA0_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 52
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0e00052f49898a342b709abd03fad9f9
+      internalID: 132339438
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye5LA1_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 48
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e4db91714653e364ba70840e50b5d772
+      internalID: -2019462328
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye5LB0_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 52
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3e87f2d2dae428843bfbb24ec43939ba
+      internalID: -641736943
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye5LB1_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 48
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5fd79d1a0cd8f064bae8aa1a0a065c86
+      internalID: 823798782
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye5LC0_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 52
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5b976c6efd90e404b8856f1f9c2c394e
+      internalID: 168953904
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye5LC1_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 48
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c1e81caa787b6ef4c9fa39cca8a34ee5
+      internalID: 137339741
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye5LD0_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 38
+        y: 52
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6f494c5bff4e08e499970ce70982c627
+      internalID: 1482038548
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye5LD1_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 38
+        y: 48
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.25, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c5030a45327e5af46b102b217abd1d29
+      internalID: 2086971350
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye6RA0_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 44
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3c9f112677dc3b44eb6453bd1fa98c3f
+      internalID: -1660503961
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye6RA1_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 40
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fd329c6b4dea898439c775e0c8f53c80
+      internalID: 1614455844
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye6RB0_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 44
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7a053fa862872b647b069de54dbc66a5
+      internalID: -1388853662
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye6RB1_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 40
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f51d1a93e6b4a6e49a49106124a4f186
+      internalID: -1288669902
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye6RC0_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 44
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d59fedb1eaee2fc4bae61529bec9234b
+      internalID: -1265689237
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye6RC1_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 40
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 14c1a777a6726354b9de58f5cbeaa9f3
+      internalID: 279403100
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye6RD0_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 44
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e2a7c8b41a18d9945be5f5cd1ced804f
+      internalID: -510687897
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye6RD1_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 40
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d21cba62ebe841e4d92e7c416b0b72d1
+      internalID: 913539240
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye6LA0_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 44
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f88a7f353aec6e843a7202cc1faba5bc
+      internalID: -704233194
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye6LA1_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 40
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 55d3eb8bda06be1418a2785cadee9dd0
+      internalID: -1416248013
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye6LB0_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 44
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a3e5b999abdbd5e419fc31c4ca936a0b
+      internalID: 2085928905
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye6LB1_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 40
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a6f2947632b4f93498cb957db9e60e09
+      internalID: -1668228113
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye6LC0_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 44
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0a187ed5153465e43b72dbb74c4f1aae
+      internalID: -1108681998
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye6LC1_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 40
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9e59131381681024f92e0bbe93067178
+      internalID: -935507385
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye6LD0_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 44
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 43bcddea0772b3a4dba351357d4c9873
+      internalID: -342439566
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye6LD1_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 40
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3ceb589536889884d997371472c27ca8
+      internalID: -10159822
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye7RA0_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 29
+        y: 44
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b753bee085805f442825a5a64968fb14
+      internalID: 547976049
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye7RA1_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 29
+        y: 40
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3b3c091edc787624b9ab6d2367e2ce94
+      internalID: 208704387
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye7RB0_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 44
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 85d92e77cb29eb84f8ae46a2b62e66b4
+      internalID: 1308424404
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye7RB1_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 40
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b7fe956d6546e224382e186549e3bd25
+      internalID: 222186826
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye7RC0_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 44
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5cd2a56110dadc74cb3af80d976e94ac
+      internalID: -284253835
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye7RC1_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 40
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b52784d281e3c084d8546f12b4266ace
+      internalID: -1013566187
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye7RD0_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 44
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fe5ea6c2c233729469063e234222128f
+      internalID: -1923031307
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye7RD1_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 40
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cead7cef4d111a84da314bf4c0a9cc78
+      internalID: 1085669613
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye7LA0_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 44
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 19984aaa48bda944fa158c80142b7569
+      internalID: 1136088803
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye7LA1_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 40
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 29fbedad5694d644e95cbd2f00db0478
+      internalID: 824252857
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye7LB0_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 44
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ddb09ef7098bbfd4b9c3605e8e5aeeea
+      internalID: -1253397410
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye7LB1_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 40
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ccd051ab059a19f4fb2a4c40454bb399
+      internalID: -518511085
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye7LC0_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 44
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2c22f29a1ab01af468608477b3c54917
+      internalID: -557156002
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye7LC1_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 40
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bdb0f64add6593c4598f6004a8776cbf
+      internalID: -1205732215
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye7LD0_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 53
+        y: 44
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fcddb01a453029d4fbf5d634db03b0be
+      internalID: 1275254521
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye7LD1_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 53
+        y: 40
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dacc755343116274d99c5e268965ac7b
+      internalID: 1190173420
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye8RA0_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 36
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e978af8a3d9a2004094891a44d96ed86
+      internalID: -993266791
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye8RA1_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 32
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: acfac7d47521db74e8d8acab08a1a3ec
+      internalID: -4139629
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye8RB0_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 36
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 82674e08ebda8eb48b14b78dd169b078
+      internalID: 223976403
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye8RB1_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 32
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 52335c779836b8045a5c690f996f7189
+      internalID: 5267088
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye8RC0_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 36
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 25540df9d5bc4054c9a4b2cf44dabdc0
+      internalID: -1526390289
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye8RC1_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 32
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3949237b0a8d29c4e91b19c292a9ce33
+      internalID: -2000124072
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye8RD0_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 36
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8a9064eff5a91924b892dbaec4f9f444
+      internalID: 1050684204
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye8RD1_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 32
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 685eebdc4508d4f4cb7136a4d9f0ce85
+      internalID: -816967669
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye8LA0_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 36
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 06ffaa426d0b7354eb321c9a369d481b
+      internalID: -1636155293
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye8LA1_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 32
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ca00ba65869109d48aa47ba6b5e0d320
+      internalID: -2016635353
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye8LB0_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 36
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4a534c8bc8982204d81a607d0e06dd7e
+      internalID: 231984785
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye8LB1_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 32
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 341c4972abafb5d4399002eba6b97588
+      internalID: 2036355528
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye8LC0_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 36
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2e08ac54c94c35c4aa521a217cd07724
+      internalID: 524480755
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye8LC1_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 32
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dca53ac28035d984da7a7f3b41184c60
+      internalID: 1790805844
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye8LD0_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 36
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 79f973fcf3a393240bed3a113845dc01
+      internalID: -1336541273
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye8LD1_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 32
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 236cc2afe2b0ba94184dccbe13c12e93
+      internalID: -2037497760
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye9RA0_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 29
+        y: 36
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2540ff6d20e1d2548882b629f0a2028a
+      internalID: -1917910129
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye9RA1_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 29
+        y: 32
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 45f27dca530b0ec40b32020d9cbdc0ab
+      internalID: -375981472
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye9RB0_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 36
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3a3fa51294ecc264fae464294b9fdf92
+      internalID: 1845147121
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye9RB1_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 32
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ba3828e6b08cb9c48aa4e4cfe0f39d69
+      internalID: -652001726
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye9RC0_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 36
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 162cca56fca3c3a4aad33a14c3206b67
+      internalID: -214672020
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye9RC1_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 32
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0b78de7c9d11cca41837af2e25f9c8ba
+      internalID: 1197581910
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye9RD0_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 36
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a79d762ee6e244d428f407477bc97f6b
+      internalID: 318559457
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye9RD1_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 32
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d8cb2cc36d20d474ea8c9d27bc6b2ee4
+      internalID: 1818941170
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye9LA0_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 36
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 52d70aa4bb6cc9a4d844b8ebd9160e14
+      internalID: 1545552142
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye9LA1_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 32
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b56b24ee7159cd34fba7a66bcee9407f
+      internalID: -614970489
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye9LB0_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 36
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e6eb22631c11c5c48b43b7ebce25adaa
+      internalID: 482044251
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye9LB1_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 32
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 58e54f8d0fc6d3d46aa894cbc3b17c12
+      internalID: -63903581
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye9LC0_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 36
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bbe0d752021778a49b197fe91cb53106
+      internalID: 1770805667
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye9LC1_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 32
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aeeb0b4f84e872e4a867cdb8794a2172
+      internalID: 339564959
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye9LD0_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 53
+        y: 36
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 56d1ab796de07c94e8e70cd5c52f987f
+      internalID: 457059997
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye9LD1_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 53
+        y: 32
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 004cee0078cf27f488c77f4ea065a8f0
+      internalID: -1639637443
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye10RA0_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 28
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 172dc32e38eddb2499eaf8073ce9aec4
+      internalID: -133047696
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye10RA1_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 24
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2e5626b422d52a241ae584f8a251e9d1
+      internalID: -2036782673
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye10RB0_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 28
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7fab7c72f6ac1f54b802d12df0b6f863
+      internalID: -136477796
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye10RB1_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 24
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3c32643242c53f84e92b52c2c000c1d0
+      internalID: -127028823
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye10RC0_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 28
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eb1b3b439b44e894d8ec284d2513747c
+      internalID: -719329452
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye10RC1_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 24
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f544cd2d655c9dd448de976f0bc4773d
+      internalID: 1904626609
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye10RD0_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 28
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d017a8a57de75154796d3460e3a071f6
+      internalID: -875746557
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye10RD1_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 24
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e6cc241b7dee70144a8dbd3098ee9e9f
+      internalID: -1930696612
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye10LA0_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 28
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4dec8b45353515e4db7349a7930786d8
+      internalID: -661705561
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye10LA1_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 24
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 33db899bf85d93a48b2878acbe16f8d1
+      internalID: 1944563691
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye10LB0_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 28
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ca27475bd58770a46b64dc45568da37c
+      internalID: 1269533562
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye10LB1_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 24
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7ab175770420d544ea180405c766afad
+      internalID: -540936991
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye10LC0_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 28
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aa55b086dfb1f034196c444720fdd199
+      internalID: 372893656
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye10LC1_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 24
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 24520a2263aafad4db08e8a0c36d0e17
+      internalID: 880823665
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye10LD0_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 28
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9b16ed3229bfd7443ba61f4193b0d986
+      internalID: -534021151
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye10LD1_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 24
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 94f02f34c7d8a114da70329808be4fb4
+      internalID: 991814456
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye11RA0_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 29
+        y: 28
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9854a8ef712ddec44882488d6d589cc0
+      internalID: 1627836592
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye11RA1_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 29
+        y: 24
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9d0803a3734191348b726862115c16a0
+      internalID: -474533349
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye11RB0_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 28
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 05611fce5c6e10b4f931c3a81fb4f545
+      internalID: -49165433
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye11RB1_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 24
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d8cce4402ecec1641aa050ed135a9b91
+      internalID: -1091360729
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye11RC0_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 28
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7c04e9910946b44468e955446312c955
+      internalID: 118089283
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye11RC1_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 24
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b70a5c5a991fef54f888faaea62705c2
+      internalID: -1096362745
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye11RD0_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 28
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 36700f33ff603674c907ccde43b16cfb
+      internalID: 1935289216
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye11RD1_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 24
+        width: 4
+        height: 4
+      alignment: 9
+      pivot: {x: 0.75, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bc21304f01ec0e94aa08cc62d32f4a57
+      internalID: 1872382104
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye11LA0_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 28
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f0fb227f75e39a64db943cae108cf8c0
+      internalID: -1279514396
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye11LA1_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 24
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e33967248a0b70a4c86d5f423691e960
+      internalID: -1197771759
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye11LB0_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 28
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cf1abf75922a65648bc57ab4273f9111
+      internalID: -884430281
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye11LB1_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 24
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d161e37647759a8439a2959d5cfb94c9
+      internalID: -836714185
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye11LC0_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 28
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: be752e4231dabf240ae741ccb41d3af8
+      internalID: 1317984439
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye11LC1_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 24
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7a3e055e1f1b862499eb77f093950f2a
+      internalID: 915535846
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye11LD0_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 53
+        y: 28
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 123b59c5854890b449e8c79bfc853082
+      internalID: 987340014
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OSpR_Eye11LD1_Neutral_NF
+      rect:
+        serializedVersion: 2
+        x: 53
+        y: 24
+        width: 5
+        height: 4
+      alignment: 9
+      pivot: {x: 0.2, y: 0.25}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e512217c2d88c2541b6012cc23df8c72
+      internalID: 1700350595
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5f43eb26257edf34098369d60ef09ad1
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      OSpR_Eyes1_Neutral_0: -7550135647045267427
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
