@@ -58,8 +58,8 @@ namespace Roguegard.CharacterCreation
         public virtual Sprite Icon => Race?.Icon;
         public virtual Color Color => Race.Color;
         public virtual string Caption => null;
-        public virtual Spanning<IKeyword> Tags => Spanning<IKeyword>.Empty;
         public virtual IRogueDetails Details => null;
+        public virtual Spanning<IKeyword> Tags => Spanning<IKeyword>.Empty;
         int IStartingItemOption.Lv => Race.Lv;
 
         public virtual Spanning<IMemberSource> StartingItemOptionMemberSources => Spanning<IMemberSource>.Empty;
@@ -102,7 +102,8 @@ namespace Roguegard.CharacterCreation
         }
 
         public virtual RogueObj CreateObj(
-            IReadOnlyStartingItem startingItem, RogueObj location, Vector2Int position, IRogueRandom random, StackOption stackOption = StackOption.Default)
+            IReadOnlyStartingItem startingItem, RogueObj location, Vector2Int position, IRogueRandom random,
+            StackOption stackOption = StackOption.Default)
         {
             var raceOption = Race.Option;
             var gender = startingItem.CustomGender ?? Race.Gender ?? GetRandomGender(random);
@@ -117,7 +118,8 @@ namespace Roguegard.CharacterCreation
         }
 
         public RogueObj CreateObj(
-            RogueObj location, Vector2Int position, IRogueRandom random, StackOption stackOption = StackOption.Default, IRogueGender optionGender = null)
+            RogueObj location, Vector2Int position, IRogueRandom random,
+            StackOption stackOption = StackOption.Default, IRogueGender optionGender = null)
         {
             var startingItem = new DefaultItem(this, optionGender);
             return CreateObj(startingItem, location, position, random, stackOption);
