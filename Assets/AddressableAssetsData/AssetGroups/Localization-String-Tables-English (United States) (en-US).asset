@@ -184,7 +184,7 @@ MonoBehaviour:
     - Locale-en-US
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: e05216f3ece548a408175652c106d8d4
-    m_Address: CoreLenses1_en-US
+    m_Address: CoreGlasses1_en-US
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-en-US

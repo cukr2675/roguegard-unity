@@ -100,7 +100,7 @@ MonoBehaviour:
     - Locale-ja-JP
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 632af3db7b9212540b9b43c36ac468be
-    m_Address: CoreLenses1_ja-JP
+    m_Address: CoreGlasses1_ja-JP
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-ja-JP

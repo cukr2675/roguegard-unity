@@ -74,7 +74,7 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 82e775d00540f8c429c094575a87127d
-    m_Address: Assets/CoreData/Items/Equipments/Lenses1/CoreLenses1 Shared Data.asset
+    m_Address: Assets/CoreData/Items/Equipments/Glasses1/CoreGlasses1 Shared Data.asset
     m_ReadOnly: 1
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

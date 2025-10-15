@@ -143,6 +143,8 @@ MonoBehaviour:
     _asset: {fileID: 11400000, guid: b7ed7120220238540817ef105ec0e50c, type: 2}
   - _key: Core.WolfPowder
     _asset: {fileID: 11400000, guid: 9e011b7400977ac48bd09d64774ddf4e, type: 2}
+  - _key: Core.Blindfold
+    _asset: {fileID: 11400000, guid: d3c5a0a25e0d6554ca0eec44b6520a91, type: 2}
   - _key: Core.BraceredGloves
     _asset: {fileID: 11400000, guid: 6782dacad4dffe345a4e70f80da8d307, type: 2}
   - _key: Core.LeatherGauntlets
@@ -157,8 +159,6 @@ MonoBehaviour:
     _asset: {fileID: 11400000, guid: 0ea43a322f3157e429746b82a348df8c, type: 2}
   - _key: Core.Shako
     _asset: {fileID: 11400000, guid: 98602f826227963489021023cf12e914, type: 2}
-  - _key: Core.Blindfold
-    _asset: {fileID: 11400000, guid: d3c5a0a25e0d6554ca0eec44b6520a91, type: 2}
   - _key: Core.BarrierShield
     _asset: {fileID: 11400000, guid: 80b4c5e3b530d624083f6deba7874774, type: 2}
   - _key: Core.RoundShield
