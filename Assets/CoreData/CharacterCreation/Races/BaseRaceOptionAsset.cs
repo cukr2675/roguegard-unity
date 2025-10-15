@@ -84,8 +84,8 @@ namespace Roguegard.CharacterCreation
             => _base.GetSpriteValues(raceOption, characterCreationData, gender, out mainBone, out morph);
 
         public override void GetObjSprite(
-            IRaceOption raceOption, ICharacterCreationData characterCreationData, IRogueGender gender, RogueObj self, IReadOnlyOchalikeBone mainBone,
-            out IRogueObjSprite objSprite, out ISpriteMotionSet motionSet)
+            IRaceOption raceOption, ICharacterCreationData characterCreationData, IRogueGender gender, RogueObj self,
+            IReadOnlyOchalikeBone mainBone, out IRogueObjSprite objSprite, out ISpriteMotionSet motionSet)
             => _base.GetObjSprite(raceOption, characterCreationData, gender, self, mainBone, out objSprite, out motionSet);
 
         public override void InitializeObj(RogueObj self, IRaceOption raceOption, ICharacterCreationData characterCreationData)

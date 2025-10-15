@@ -203,17 +203,19 @@ namespace Roguegard.CharacterCreation
         {
             if (_sprite.Ref != null)
             {
-                _sprite.Ref.GetSpriteValues(raceOption, characterCreationData, gender, out mainBone, out morph);
+                _sprite.Ref.GetSpriteValues(
+                    raceOption, characterCreationData, gender, out mainBone, out morph);
             }
             else
             {
-                RoguegardSettings.DefaultRaceOption.GetSpriteValues(raceOption, characterCreationData, gender, out mainBone, out morph);
+                RoguegardSettings.DefaultRaceOption.GetSpriteValues(
+                    raceOption, characterCreationData, gender, out mainBone, out morph);
             }
         }
 
         public void GetObjSprite(
-            IRaceOption raceOption, ICharacterCreationData characterCreationData, IRogueGender gender, RogueObj self, IReadOnlyOchalikeBone mainBone,
-            out IRogueObjSprite objSprite, out ISpriteMotionSet motionSet)
+            IRaceOption raceOption, ICharacterCreationData characterCreationData, IRogueGender gender, RogueObj self,
+            IReadOnlyOchalikeBone mainBone, out IRogueObjSprite objSprite, out ISpriteMotionSet motionSet)
         {
             if (_sprite.Ref != null)
             {

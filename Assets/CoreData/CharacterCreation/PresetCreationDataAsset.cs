@@ -57,7 +57,8 @@ namespace Roguegard.CharacterCreation
         }
 
         public override RogueObj CreateObj(
-            IReadOnlyStartingItem startingItem, RogueObj location, Vector2Int position, IRogueRandom random, StackOption stackOption = StackOption.Default)
+            IReadOnlyStartingItem startingItem, RogueObj location, Vector2Int position, IRogueRandom random,
+            StackOption stackOption = StackOption.Default)
         {
             // このインスタンスのシリアル化を避けるため、 ToData() の CreateObj を使う
             return ToData().CreateObj(location, position, random, stackOption);

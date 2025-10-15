@@ -111,7 +111,8 @@ namespace Roguegard.CharacterCreation
         {
             _currentRaceOption = null;
             _weight = CurrentRaceOption.GetWeight(CurrentRaceOption, Data);
-            CurrentRaceOption.GetSpriteValues(CurrentRaceOption, Data, _gender, out var mainBone, out characterMorph);
+            CurrentRaceOption.GetSpriteValues(
+            	CurrentRaceOption, Data, _gender, out var mainBone, out characterMorph);
 
             if (mainBone != null)
             {
@@ -202,7 +203,8 @@ namespace Roguegard.CharacterCreation
             stats.Direction = infoSet.Ability.HasFlag(MainInfoSetAbility.HasCollider) ? RogueDirection.Down : RogueDirection.LowerLeft;
             stats.Reset(obj);
             if (startingItems.Length >= 1) { WeightedRogueObjGeneratorUtility.CreateObjs(startingItems, obj, random); }
-            if (!SpaceUtility.TryLocate(obj, location, position, stackOption)) throw new System.InvalidOperationException("生成したオブジェクトの移動に失敗しました。");
+            if (!SpaceUtility.TryLocate(obj, location, position, stackOption)) throw new System.InvalidOperationException(
+                "生成したオブジェクトの移動に失敗しました。");
 
             return obj;
         }

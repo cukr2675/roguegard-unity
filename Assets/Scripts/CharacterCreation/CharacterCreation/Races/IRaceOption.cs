@@ -75,8 +75,8 @@ namespace Roguegard.CharacterCreation
             out OchalikeBone mainBone, out AppearanceMorph morph);
 
         void GetObjSprite(
-            IRaceOption raceOption, ICharacterCreationData characterCreationData, IRogueGender gender, RogueObj self, IReadOnlyOchalikeBone mainBone,
-            out IRogueObjSprite objSprite, out ISpriteMotionSet motionSet);
+            IRaceOption raceOption, ICharacterCreationData characterCreationData, IRogueGender gender, RogueObj self,
+            IReadOnlyOchalikeBone mainBone, out IRogueObjSprite objSprite, out ISpriteMotionSet motionSet);
 
         void UpdateMemberRange(IMember member, IRaceOption raceOption, ICharacterCreationData characterCreationData);
 

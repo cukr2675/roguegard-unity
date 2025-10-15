@@ -74,8 +74,8 @@ namespace Roguegard.CharacterCreation
             => Race.Option.GetSpriteValues(raceOption, characterCreationData, gender, out mainBone, out morph);
 
         void IRaceOption.GetObjSprite(
-            IRaceOption raceOption, ICharacterCreationData characterCreationData, IRogueGender gender, RogueObj self, IReadOnlyOchalikeBone mainBone,
-            out IRogueObjSprite objSprite, out ISpriteMotionSet motionSet)
+            IRaceOption raceOption, ICharacterCreationData characterCreationData, IRogueGender gender, RogueObj self,
+            IReadOnlyOchalikeBone mainBone, out IRogueObjSprite objSprite, out ISpriteMotionSet motionSet)
             => Race.Option.GetObjSprite(raceOption, characterCreationData, gender, self, mainBone, out objSprite, out motionSet);
 
         void IRaceOption.UpdateMemberRange(IMember member, IRaceOption raceOption, ICharacterCreationData characterCreationData)
