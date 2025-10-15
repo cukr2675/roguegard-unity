@@ -15,12 +15,12 @@ namespace Lysionium.MergeExtensions.R3
         /// <summary>
         /// <see cref="Manager"/> のエイリアス
         /// </summary>
-        public TValue Manager_ => Value;
+        public TMgr Manager_ => Manager;
 
         /// <summary>
         /// <see cref="Arg"/> のエイリアス
         /// </summary>
-        public TValue Arg_ => Value;
+        public TArg Arg_ => Arg;
 
         public MergedViewItemHandleArg(TValue value, TMgr manager, TArg arg, MergedViewItemHandleContext context)
         {
