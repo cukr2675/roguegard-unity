@@ -1,0 +1,202 @@
+using System;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+namespace Lysionium
+{
+    public class ViewItemStyleEvaluator
+    {
+        private IInputActionViewItemHandler inputActionHandler;
+        private object item;
+        private IListMenuManager manager;
+        private IListMenuArg arg;
+        private SubviewBase subview;
+        private readonly Action<InputAction.CallbackContext> inputPerformed;
+        private readonly Action<InputAction.CallbackContext> inputStarted;
+        private readonly Action<InputAction.CallbackContext> inputCanceled;
+
+        public string CurrentStyle { get; private set; }
+
+        public ViewItemStyleEvaluator()
+        {
+            inputPerformed = ctx => inputActionHandler?.Performed(item, manager, arg, ctx);
+            inputStarted = ctx => inputActionHandler?.Started(item, manager, arg, ctx);
+            inputCanceled = ctx => inputActionHandler?.Canceled(item, manager, arg, ctx);
+        }
+
+        public void SetParameters(object item, IViewItemHandler handler, IListMenuManager manager, IListMenuArg arg, SubviewBase subview)
+        {
+            this.item = item;
+            inputActionHandler = handler as IInputActionViewItemHandler;
+            this.manager = manager;
+            this.arg = arg;
+            this.subview = subview;
+        }
+
+        public void SetStyle(
+            string style, Animator animator, KeyIcon keyIcon, Action<InputAction.CallbackContext> onClick = null,
+            Action<InputAction.CallbackContext> inputPerformed = null,
+            Action<InputAction.CallbackContext> inputStarted = null,
+            Action<InputAction.CallbackContext> inputCanceled = null)
+        {
+            if (style == null) throw new ArgumentNullException(nameof(style));
+            if (style == CurrentStyle) return;
+
+            if (CurrentStyle != null) throw new InvalidOperationException(
+                $"スタイル ({style}) 解除前に新しいスタイル ({style}) を適用することはできません。");
+
+            Evaluate(style, true, animator, keyIcon, onClick, inputPerformed, inputStarted, inputCanceled);
+
+            // 新しいスタイルを保持
+            CurrentStyle = style;
+        }
+
+        public void ResetStyle(
+            Animator animator, KeyIcon keyIcon, Action<InputAction.CallbackContext> onClick = null,
+            Action<InputAction.CallbackContext> inputPerformed = null,
+            Action<InputAction.CallbackContext> inputStarted = null,
+            Action<InputAction.CallbackContext> inputCanceled = null)
+        {
+            if (CurrentStyle == null) return;
+
+            Evaluate(CurrentStyle, false, animator, keyIcon, onClick, inputPerformed, inputStarted, inputCanceled);
+
+            // 設定済みスタイルを破棄
+            CurrentStyle = null;
+        }
+
+        private void Evaluate(
+            string style, bool apply, Animator animator, KeyIcon keyIcon, Action<InputAction.CallbackContext> onClick,
+            Action<InputAction.CallbackContext> inputPerformed,
+            Action<InputAction.CallbackContext> inputStarted,
+            Action<InputAction.CallbackContext> inputCanceled)
+        {
+            // スタイルをスペース区切りで処理する
+            for (int i = 0; i < style.Length; i++)
+            {
+                if ((i == 0 || style[i - 1] == ' ') && style[i] != ' ')
+                {
+                    var styleItemStart = i;
+                    var styleItemLength = style.IndexOf(' ', styleItemStart);
+                    if (styleItemLength == -1) { styleItemLength = style.Length - styleItemStart; }
+                    i = styleItemStart + styleItemLength;
+
+                    // スペース区切りで取得したスタイル名
+                    var styleItem = style.AsSpan(styleItemStart, styleItemLength);
+
+                    // AnimationController のレイヤーの重みをスタイル名で変更する
+                    if (!styleItem.Contains(":".AsSpan(), StringComparison.CurrentCulture) && animator != null)
+                    {
+                        var any = false;
+                        for (int j = 0; j < animator.layerCount; j++)
+                        {
+                            if (EqualsIgnoreWhiteSpace(animator.GetLayerName(j), styleItem))
+                            {
+                                // スタイル名と一致するレイヤーの重みを更新する
+                                var weight = apply ? 1f : 0f;
+                                animator.SetLayerWeight(j, weight);
+                                any = true;
+                            }
+                        }
+
+                        if (apply && !any)
+                        {
+                            // レイヤーが見つからなければ警告
+                            Debug.LogWarning(
+                                $"レイヤー {new string(styleItem)} が見つかりませんでした。存在するレイヤー: {string.Join(", ", GetLayerNames(animator))}");
+                        }
+                    }
+
+                    // click セレクタ: キーバインド
+                    // ViewItem のバインドで行う関係上 ViewItem が仮想化スクロールでバインド解除されるとキーバインドも解除されてしまうので、
+                    // スクロールビューでキーバインドを使用する場合は仮想化を切る必要がある。
+                    // Subview 単位でキーバインドすることでも解決できるが、ボタンクリックアニメーションの呼び出しが複雑かつ不確実になるため実装しない。
+                    if (styleItem.StartsWith("click:"))
+                    {
+                        if (apply)
+                        {
+                            subview.KeyBind(styleItem["click:".Length..], onClick);
+                            if (keyIcon != null && subview.TryGetKeyIcon(styleItem["click:".Length..], out var keyText, out var keySprite))
+                            {
+                                keyIcon.SetKeyIcon(keyText, keySprite);
+                            }
+                        }
+                        else
+                        {
+                            subview.Unbind(styleItem["click:".Length..], onClick);
+                            if (keyIcon != null)
+                            {
+                                keyIcon.ClearKeyIcon();
+                            }
+                        }
+                    }
+
+                    // input セレクタ
+                    if (styleItem.StartsWith("input:"))
+                    {
+                        if (apply)
+                        {
+                            subview.KeyBind(styleItem["input:".Length..], this.inputPerformed, this.inputStarted, this.inputCanceled);
+                            subview.KeyBind(styleItem["input:".Length..], inputPerformed, inputStarted, inputCanceled);
+                            if (keyIcon != null && subview.TryGetKeyIcon(styleItem["input:".Length..], out var keyText, out var keySprite))
+                            {
+                                keyIcon.SetKeyIcon(keyText, keySprite);
+                            }
+                        }
+                        else
+                        {
+                            subview.Unbind(styleItem["input:".Length..], this.inputPerformed, this.inputStarted, this.inputCanceled);
+                            subview.Unbind(styleItem["input:".Length..], inputPerformed, inputStarted, inputCanceled);
+                            if (keyIcon != null)
+                            {
+                                keyIcon.ClearKeyIcon();
+                            }
+                        }
+                    }
+
+                    // preview セレクタ: KeyIcon を表示のみ変更
+                    if (styleItem.StartsWith("preview:"))
+                    {
+                        if (apply)
+                        {
+                            if (keyIcon != null && subview.TryGetKeyIcon(styleItem["preview:".Length..], out var keyText, out var keySprite))
+                            {
+                                keyIcon.SetKeyIcon(keyText, keySprite);
+                            }
+                        }
+                        else
+                        {
+                            if (keyIcon != null)
+                            {
+                                keyIcon.ClearKeyIcon();
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        private static bool EqualsIgnoreWhiteSpace(string layerName, ReadOnlySpan<char> style)
+        {
+            var styleIndex = 0;
+            for (int i = 0; i < layerName.Length; i++)
+            {
+                if (layerName[i] == ' ') continue; // レイヤー名の空白はないものとして判定する
+
+                if (layerName[i] != style[styleIndex]) return false;
+
+                styleIndex++;
+            }
+            return true;
+        }
+
+        private static IEnumerable<string> GetLayerNames(Animator animator)
+        {
+            for (int i = 0; i < animator.layerCount; i++)
+            {
+                yield return animator.GetLayerName(i);
+            }
+        }
+    }
+}

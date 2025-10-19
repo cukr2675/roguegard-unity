@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -15,15 +13,15 @@ namespace Lysionium
         [SerializeField] private Image _icon = null;
         [SerializeField] private TMP_Text _text = null;
         [SerializeField] private KeyIcon _keyIcon = null;
-        private Action<InputAction.CallbackContext> clickActionPerformed;
+        private Animator animator;
+        private System.Action<InputAction.CallbackContext> clickActionPerformed;
+        private ViewItemStyleEvaluator styleEvaluator;
 
         [Header("Animation")]
         [SerializeField] private string _defaultStyle = "Submit";
-        private Animator animator;
 
         private IButtonViewItemHandler handler;
         private object item;
-        private string style;
 
         protected virtual void Awake()
         {
@@ -33,9 +31,9 @@ namespace Lysionium
                 handler.Click(item, Manager, Arg);
             });
 
-            clickActionPerformed = ctx => ExecuteEvents.Execute(gameObject, new BaseEventData(Parent.EventSystem), ExecuteEvents.submitHandler);
-
             TryGetComponent(out animator);
+            clickActionPerformed = ctx => ExecuteEvents.Execute(gameObject, new BaseEventData(Parent.EventSystem), ExecuteEvents.submitHandler);
+            styleEvaluator = new ViewItemStyleEvaluator();
         }
 
         protected override void BindCore(object item, IViewItemHandler handler)
@@ -66,11 +64,9 @@ namespace Lysionium
                 }
             }
 
-            // 前回のスタイルを解除する
-            SetStyle(null);
-
-            var newStyle = handler.GetStyle(item, Manager, Arg) ?? _defaultStyle;
-            SetStyle(newStyle);
+            var style = handler.GetStyle(item, Manager, Arg) ?? _defaultStyle;
+            styleEvaluator.SetParameters(item, handler, Manager, Arg, Parent);
+            styleEvaluator.SetStyle(style, animator, _keyIcon, clickActionPerformed);
         }
 
         protected override void UnbindCore(object item, IViewItemHandler handler)
@@ -87,103 +83,8 @@ namespace Lysionium
                 _icon.sprite = null;
                 _icon.enabled = false;
             }
-            SetStyle(null);
-        }
 
-        private void SetStyle(string newStyle)
-        {
-            if (newStyle == style) return;
-
-            // この値が true のとき新しいスタイルの適用、 false のとき設定済みスタイルの初期化
-            var apply = newStyle != null;
-
-            if (apply && style != null) throw new InvalidOperationException($"スタイル ({style}) 解除前に新しいスタイルを適用することはできません。");
-
-            // 新しいスタイルを保持
-            if (apply) { style = newStyle; }
-
-            // スタイルをスペース区切りで処理する
-            for (int i = 0; i < style.Length; i++)
-            {
-                if ((i == 0 || style[i - 1] == ' ') && style[i] != ' ')
-                {
-                    var styleItemStart = i;
-                    var styleItemLength = style.IndexOf(' ', styleItemStart);
-                    if (styleItemLength == -1) { styleItemLength = style.Length - styleItemStart; }
-                    i = styleItemStart + styleItemLength;
-
-                    // スペース区切りで取得したスタイル名
-                    var styleItem = style.AsSpan(styleItemStart, styleItemLength);
-
-                    // AnimationController のレイヤーの重みをスタイル名で変更する
-                    if (!styleItem.Contains(":".AsSpan(), StringComparison.CurrentCulture) && animator != null)
-                    {
-                        var any = false;
-                        for (int j = 0; j < animator.layerCount; j++)
-                        {
-                            if (EqualsIgnoreWhiteSpace(animator.GetLayerName(j), styleItem))
-                            {
-                                // スタイル名と一致するレイヤーの重みを更新する
-                                var weight = apply ? 1f : 0f;
-                                animator.SetLayerWeight(j, weight);
-                                any = true;
-                            }
-                        }
-
-                        if (apply && !any)
-                        {
-                            // レイヤーが見つからなければ警告
-                            Debug.LogWarning($"レイヤー {new string(styleItem)} が見つかりませんでした。存在するレイヤー: {string.Join(", ", GetLayerNames(animator))}");
-                        }
-                    }
-
-                    // キーバインド
-                    if (styleItem.StartsWith("click:"))
-                    {
-                        if (apply)
-                        {
-                            Parent.KeyBind(styleItem["click:".Length..], clickActionPerformed);
-                            if (_keyIcon != null && Parent.TryGetKeyIcon(styleItem["click:".Length..], out var keyText, out var keySprite))
-                            {
-                                _keyIcon.SetKeyIcon(keyText, keySprite);
-                            }
-                        }
-                        else
-                        {
-                            Parent.Unbind(styleItem["click:".Length..], clickActionPerformed);
-                            if (_keyIcon != null)
-                            {
-                                _keyIcon.ClearKeyIcon();
-                            }
-                        }
-                    }
-                }
-            }
-
-            // 設定済みスタイルを破棄
-            if (!apply) { style = null; }
-        }
-
-        private static bool EqualsIgnoreWhiteSpace(string layerName, ReadOnlySpan<char> style)
-        {
-            var styleIndex = 0;
-            for (int i = 0; i < layerName.Length; i++)
-            {
-                if (layerName[i] == ' ') continue; // レイヤー名の空白はないものとして判定する
-
-                if (layerName[i] != style[styleIndex]) return false;
-
-                styleIndex++;
-            }
-            return true;
-        }
-
-        private static IEnumerable<string> GetLayerNames(Animator animator)
-        {
-            for (int i = 0; i < animator.layerCount; i++)
-            {
-                yield return animator.GetLayerName(i);
-            }
+            styleEvaluator.ResetStyle(animator, _keyIcon, clickActionPerformed);
         }
     }
 }

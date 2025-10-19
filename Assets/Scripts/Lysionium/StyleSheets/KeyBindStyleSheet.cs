@@ -1,7 +1,6 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.OnScreen;
 
 namespace Lysionium
 {
@@ -50,24 +49,36 @@ namespace Lysionium
             return true;
         }
 
-        public void KeyBind(ReadOnlySpan<char> style, Action<InputAction.CallbackContext> performed)
+        public void KeyBind(
+            ReadOnlySpan<char> style,
+            Action<InputAction.CallbackContext> performed,
+            Action<InputAction.CallbackContext> started,
+            Action<InputAction.CallbackContext> canceled)
         {
             if (!TryGetAction(style, out var action)) return;
 
             if (playerInput == null) { LuiUtility.TryGetComponentInRecursiveParents(transform, out playerInput); }
             if (playerInput != null) { action = playerInput.actions[action.name]; }
             else { action.Enable(); }
-            action.performed += performed;
+            if (performed != null) { action.performed += performed; }
+            if (started != null) { action.started += started; }
+            if (canceled != null) { action.canceled += canceled; }
         }
 
-        public void Unbind(ReadOnlySpan<char> style, Action<InputAction.CallbackContext> performed)
+        public void Unbind(
+            ReadOnlySpan<char> style,
+            Action<InputAction.CallbackContext> performed,
+            Action<InputAction.CallbackContext> started,
+            Action<InputAction.CallbackContext> canceled)
         {
             if (!TryGetAction(style, out var action)) return;
 
             if (playerInput == null) { LuiUtility.TryGetComponentInRecursiveParents(transform, out playerInput); }
             if (playerInput != null) { action = playerInput.actions[action.name]; }
             //else { action.Disable(); } // バインディングされているアクションが一つとは限らないため無効化しない
-            action.performed -= performed;
+            if (performed != null) { action.performed -= performed; }
+            if (started != null) { action.started -= started; }
+            if (canceled != null) { action.canceled -= canceled; }
         }
 
         protected virtual void OnDestroy()
@@ -82,7 +93,7 @@ namespace Lysionium
         private class Binding
         {
             //[SerializeField] private string _style;
-            public ReadOnlySpan<char> Style => MemoryExtensions.AsSpan(_action.action.name);
+            public ReadOnlySpan<char> Style => _action.action.name.AsSpan();
 
             [SerializeField] public InputActionReference _action;
             public InputAction Action => _action;
