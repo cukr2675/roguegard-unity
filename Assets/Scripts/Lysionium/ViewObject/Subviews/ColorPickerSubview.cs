@@ -50,7 +50,7 @@ namespace Lysionium
 
             // 新しい StateProvider に切り替える
             currentStateProvider = local;
-            EventSystem.current.SetSelectedGameObject(_initialSelectable.gameObject);
+            EventSystem.SetSelectedGameObject(_initialSelectable.gameObject);
         }
 
         private class StateProvider : ISubviewStateProvider

@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.OnScreen;
 
 namespace Lysionium
 {
@@ -13,6 +14,8 @@ namespace Lysionium
         [SerializeField] private Sprite _keyboardIconBackground = null;
 
         [SerializeField] private Binding[] _bindings = null;
+
+        private PlayerInput playerInput;
 
         public static KeyBindStyleSheet Get(Component obj)
         {
@@ -51,16 +54,20 @@ namespace Lysionium
         {
             if (!TryGetAction(style, out var action)) return;
 
+            if (playerInput == null) { LuiUtility.TryGetComponentInRecursiveParents(transform, out playerInput); }
+            if (playerInput != null) { action = playerInput.actions[action.name]; }
+            else { action.Enable(); }
             action.performed += performed;
-            action.Enable();
         }
 
         public void Unbind(ReadOnlySpan<char> style, Action<InputAction.CallbackContext> performed)
         {
             if (!TryGetAction(style, out var action)) return;
 
+            if (playerInput == null) { LuiUtility.TryGetComponentInRecursiveParents(transform, out playerInput); }
+            if (playerInput != null) { action = playerInput.actions[action.name]; }
+            //else { action.Disable(); } // バインディングされているアクションが一つとは限らないため無効化しない
             action.performed -= performed;
-            //action.Disable(); // バインディングされているアクションが一つとは限らないため無効化しない
         }
 
         protected virtual void OnDestroy()

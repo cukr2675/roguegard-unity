@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 namespace Lysionium
@@ -8,6 +9,9 @@ namespace Lysionium
     /// </summary>
     public abstract class SubviewBase : MonoBehaviour
     {
+        private EventSystem _eventSystem;
+        public EventSystem EventSystem => _eventSystem ? _eventSystem : _eventSystem = LuiUtility.GetEventSystem(this);
+
         public IListMenuManager Manager { get; private set; }
         public IListMenuArg Arg { get; private set; }
 

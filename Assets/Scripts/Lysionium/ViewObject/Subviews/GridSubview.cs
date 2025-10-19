@@ -177,12 +177,12 @@ namespace Lysionium
 
             public void ApplySelectedIndex(GridSubview subview)
             {
-                if (SelectedIndex <= 0 || subview.viewItems.Count <= SelectedIndex || EventSystem.current == null)
+                if (SelectedIndex <= 0 || subview.viewItems.Count <= SelectedIndex || subview.EventSystem == null)
                 {
                     // 選択オブジェクトが見つからなければ最初の項目を選択
                     if (ViewItem.TryFirstNotNull(subview.viewItems, out var first))
                     {
-                        //EventSystem.current.SetSelectedGameObject(first.gameObject); // これだと Show メソッドで interactable が true になる前に選択してしまう
+                        //subview.EventSystem.SetSelectedGameObject(first.gameObject); // これだと Show メソッドで interactable が true になる前に選択してしまう
                         subview.QueueSelect(subview.gameObject, first.gameObject, CursorPlay.None);
                     }
                     return;

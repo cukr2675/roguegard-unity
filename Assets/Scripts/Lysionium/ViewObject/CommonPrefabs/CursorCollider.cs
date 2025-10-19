@@ -18,6 +18,7 @@ namespace Lysionium
 
         private Selectable selectable;
         private Selectable parentSelectable;
+        private EventSystem eventSystem;
         private SubviewAnimator parentAnimator;
         private bool queuedDisableInteractable;
 
@@ -25,6 +26,7 @@ namespace Lysionium
         {
             selectable = GetComponent<Selectable>();
             LuiUtility.TryGetComponentInRecursiveParents(transform.parent, out parentSelectable);
+            eventSystem = LuiUtility.GetEventSystem(this);
         }
 
         protected virtual void Update()
@@ -37,7 +39,7 @@ namespace Lysionium
 
             if (_isTrigger && !selectable.interactable && parentSelectable.IsInteractable())
             {
-                selectable.interactable = EventSystem.current.currentSelectedGameObject != parentSelectable;
+                selectable.interactable = eventSystem.currentSelectedGameObject != parentSelectable;
             }
         }
 

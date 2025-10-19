@@ -56,9 +56,9 @@ namespace Lysionium
         public void FocusAngleIndex(int index, ListMenuEventHandler onEndRotateAngle = null)
         {
             AngleIndex = (index + viewItems.Count) % viewItems.Count;
-            if (EventSystem.current != null)
+            if (EventSystem != null)
             {
-                EventSystem.current.SetSelectedGameObject(viewItems[AngleIndex].gameObject);
+                EventSystem.SetSelectedGameObject(viewItems[AngleIndex].gameObject);
                 QueueSelect(gameObject, viewItems[AngleIndex].gameObject, CursorPlay.None);
             }
             OnEndRotateAngle += onEndRotateAngle;
@@ -69,7 +69,7 @@ namespace Lysionium
             if (viewItems.Count == 0) return;
 
             // カーソル移動で回転する
-            var selected = EventSystem.current != null ? EventSystem.current.currentSelectedGameObject : null;
+            var selected = EventSystem != null ? EventSystem.currentSelectedGameObject : null;
             if (selected != null && selected.TryGetComponent<ViewItem>(out var selectedViewItem))
             {
                 var selectedItemIndex = viewItems.IndexOf(selectedViewItem);
@@ -216,12 +216,12 @@ namespace Lysionium
 
             public void ApplySelectedIndex(Carousel3DSubview subview)
             {
-                if (SelectedIndex <= 0 || subview.viewItems.Count <= SelectedIndex || EventSystem.current == null)
+                if (SelectedIndex <= 0 || subview.viewItems.Count <= SelectedIndex || subview.EventSystem == null)
                 {
                     // 選択オブジェクトが見つからなければ最初の項目を選択
                     if (ViewItem.TryFirstNotNull(subview.viewItems, out var first))
                     {
-                        //EventSystem.current.SetSelectedGameObject(first.gameObject); // これだと Show メソッドで interactable が true になる前に選択してしまう
+                        //subview.EventSystem.SetSelectedGameObject(first.gameObject); // これだと Show メソッドで interactable が true になる前に選択してしまう
                         subview.QueueSelect(subview.gameObject, first.gameObject, CursorPlay.None);
                     }
                     return;

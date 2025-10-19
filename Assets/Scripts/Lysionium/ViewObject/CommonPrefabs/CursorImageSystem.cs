@@ -20,6 +20,7 @@ namespace Lysionium
 #endif
 
         private CanvasGroup cursorInstance;
+        private EventSystem eventSystem;
 
         private bool hide;
 
@@ -61,9 +62,10 @@ namespace Lysionium
                 // カーソルオブジェクトが削除されたら再生成する
                 cursorInstance = Instantiate(_cursorPrefab);
             }
-
-            var eventSystem = EventSystem.current;
-            if (eventSystem == null) return;
+            if (!eventSystem)
+            {
+                eventSystem = LuiUtility.GetEventSystem(this);
+            }
 
             if (eventSystem.currentSelectedGameObject != null)
             {

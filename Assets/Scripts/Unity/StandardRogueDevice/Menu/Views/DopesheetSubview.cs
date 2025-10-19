@@ -108,7 +108,7 @@ namespace RoguegardUnity
             currentStateProvider = local;
             VerticalAbsolutePosition = local.VerticalAbsolutePosition;
             HorizontalAbsolutePosition = local.HorizontalAbsolutePosition;
-            local.ApplySelectedIndex(viewItems);
+            local.ApplySelectedIndex(this, viewItems);
         }
 
         private void UpdateElements(MotionGrapherInfo editInfo)
@@ -227,19 +227,19 @@ namespace RoguegardUnity
                 SelectedIndex = -1;
             }
 
-            public void ApplySelectedIndex(List<ViewItem> viewItems)
+            public void ApplySelectedIndex(Subview subview, List<ViewItem> viewItems)
             {
-                if (SelectedIndex <= 0 || viewItems.Count <= SelectedIndex || EventSystem.current == null)
+                if (SelectedIndex <= 0 || viewItems.Count <= SelectedIndex || subview.EventSystem == null)
                 {
                     // 選択オブジェクトが見つからなければ最初の項目を選択
                     if (viewItems.Count >= 2)
                     {
-                        EventSystem.current.SetSelectedGameObject(viewItems[1].gameObject);
+                        subview.EventSystem.SetSelectedGameObject(viewItems[1].gameObject);
                     }
                     return;
                 }
 
-                EventSystem.current.SetSelectedGameObject(viewItems[SelectedIndex].gameObject);
+                subview.EventSystem.SetSelectedGameObject(viewItems[SelectedIndex].gameObject);
             }
         }
 

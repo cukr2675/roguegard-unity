@@ -48,6 +48,8 @@ namespace Lysionium
         private static readonly List<AnimatorClipInfo> clipInfos = new();
 #endif
 
+        private EventSystem eventSystem;
+
         /// <summary>
         /// ひとつ前にカーソルで選択されていた項目。選択をはじきたい項目が選択された際この変数の項目に戻す
         /// </summary>
@@ -66,6 +68,8 @@ namespace Lysionium
 
         protected virtual void Awake()
         {
+            eventSystem = LuiUtility.GetEventSystem(this);
+
 #if UNITY_EDITOR
             _onPlayString.AddListener(Log);
             _onPlayObject.AddListener(Log);
@@ -146,10 +150,10 @@ namespace Lysionium
             if (queuedCancelSelection)
             {
 #if UNITY_EDITOR
-                if (_log) { Debug.Log($"Selection was canceled {EventSystem.current.currentSelectedGameObject} -> {lastSelectedGameObject}"); }
+                if (_log) { Debug.Log($"Selection was canceled {eventSystem.currentSelectedGameObject} -> {lastSelectedGameObject}"); }
 #endif
 
-                EventSystem.current.SetSelectedGameObject(lastSelectedGameObject);
+                eventSystem.SetSelectedGameObject(lastSelectedGameObject);
                 queuedCancelSelection = false;
             }
 
@@ -158,7 +162,7 @@ namespace Lysionium
         protected virtual void LateUpdate()
         {
             // 監視されていないカーソル移動を検知する
-            var currentSelectedGameObject = EventSystem.current.currentSelectedGameObject;
+            var currentSelectedGameObject = eventSystem.currentSelectedGameObject;
             if (currentSelectedGameObject != lastSelectedGameObject)
             {
                 // カーソル移動時の Play を実行（タッチ操作中は再生しない）

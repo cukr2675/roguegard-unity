@@ -131,7 +131,7 @@ namespace Lysionium
             }
 
             // スクロールによって選択中の要素が変わらないよう調整
-            var selected = EventSystem.current != null ? EventSystem.current.currentSelectedGameObject : null;
+            var selected = EventSystem != null ? EventSystem.currentSelectedGameObject : null;
             if (selected != null && selected.transform.IsChildOf(_scrollRect.content) && selected.TryGetComponent<ViewItem>(out var selectedViewItem) &&
 
                 Interactable) // 上に表示されているメニューに影響を与えないようにする。これがないとコマンドメニュー表示時の初期選択を上書きしてしまうことがある
@@ -149,7 +149,7 @@ namespace Lysionium
                         QueueSelect(gameObject, viewItems[i].gameObject, CursorPlay.None);
 
                         // ↑のようにカーソル移動キューが処理されるのを待っても↓コメントのように直接設定しても選択タイミングは変わらない
-                        //EventSystem.current.SetSelectedGameObject(viewItems[i].gameObject);
+                        //EventSystem.SetSelectedGameObject(viewItems[i].gameObject);
                     }
                 }
             }
@@ -192,7 +192,7 @@ namespace Lysionium
             if (!CursorImageSystem.ShowCursor) return;
 
             // カーソル移動でスクロールする（はみ出ている項目を選択したときスクロールさせる）
-            var selected = EventSystem.current != null ? EventSystem.current.currentSelectedGameObject : null;
+            var selected = EventSystem != null ? EventSystem.currentSelectedGameObject : null;
             if (selected == null || !selected.transform.IsChildOf(_scrollRect.content)) return;
 
             var contentHeight = _scrollRect.content.rect.height;
@@ -227,12 +227,12 @@ namespace Lysionium
 
             public void ApplySelectedIndex(ScrollSubview subview)
             {
-                if (SelectedIndex <= 0 || subview.viewItems.Count <= SelectedIndex || EventSystem.current == null)
+                if (SelectedIndex <= 0 || subview.viewItems.Count <= SelectedIndex || subview.EventSystem == null)
                 {
                     // 選択オブジェクトが見つからなければ最初の項目を選択
                     if (ViewItem.TryFirstNotNull(subview.viewItems, out var first))
                     {
-                        //EventSystem.current.SetSelectedGameObject(first.gameObject); // これだと Show メソッドで interactable が true になる前に選択してしまう
+                        //subview.EventSystem.SetSelectedGameObject(first.gameObject); // これだと Show メソッドで interactable が true になる前に選択してしまう
                         subview.QueueSelect(subview.gameObject, first.gameObject, CursorPlay.None);
                     }
                     return;

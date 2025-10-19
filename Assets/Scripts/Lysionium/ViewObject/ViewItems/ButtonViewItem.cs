@@ -33,7 +33,7 @@ namespace Lysionium
                 handler.Click(item, Manager, Arg);
             });
 
-            clickActionPerformed = ctx => ExecuteEvents.Execute(gameObject, new BaseEventData(EventSystem.current), ExecuteEvents.submitHandler);
+            clickActionPerformed = ctx => ExecuteEvents.Execute(gameObject, new BaseEventData(Parent.EventSystem), ExecuteEvents.submitHandler);
 
             TryGetComponent(out animator);
         }
