@@ -107,7 +107,7 @@ namespace Lysionium
         /// </summary>
         private static Transform GetUncontrolledParent(Transform transform)
         {
-            while (LuiUtility.TryGetComponentInRecursiveParents<LayoutGroup>(transform, out var layoutGroup))
+            while (LuiUtility.TryGetComponentInParent<LayoutGroup>(transform, out var layoutGroup))
             {
                 // 親にコントロールを制御するコンポーネントが存在する場合、そのコンポーネント上を対象として再検証
                 transform = layoutGroup.transform.parent;

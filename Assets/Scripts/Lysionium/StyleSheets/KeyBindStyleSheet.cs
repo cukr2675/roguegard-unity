@@ -16,12 +16,6 @@ namespace Lysionium
 
         private PlayerInput playerInput;
 
-        public static KeyBindStyleSheet Get(Component obj)
-        {
-            LuiUtility.TryGetComponentInRecursiveParents<KeyBindStyleSheet>(obj.transform, out var styleSheet);
-            return styleSheet;
-        }
-
         public bool TryGetAction(ReadOnlySpan<char> style, out InputAction action)
         {
             foreach (var binding in _bindings)
@@ -57,7 +51,7 @@ namespace Lysionium
         {
             if (!TryGetAction(style, out var action)) return;
 
-            if (playerInput == null) { LuiUtility.TryGetComponentInRecursiveParents(transform, out playerInput); }
+            if (playerInput == null) { playerInput = GetComponentInParent<PlayerInput>(); }
             if (playerInput != null) { action = playerInput.actions[action.name]; }
             else { action.Enable(); }
             if (performed != null) { action.performed += performed; }
@@ -73,7 +67,7 @@ namespace Lysionium
         {
             if (!TryGetAction(style, out var action)) return;
 
-            if (playerInput == null) { LuiUtility.TryGetComponentInRecursiveParents(transform, out playerInput); }
+            if (playerInput == null) { playerInput = GetComponentInParent<PlayerInput>(); }
             if (playerInput != null) { action = playerInput.actions[action.name]; }
             //else { action.Disable(); } // バインディングされているアクションが一つとは限らないため無効化しない
             if (performed != null) { action.performed -= performed; }

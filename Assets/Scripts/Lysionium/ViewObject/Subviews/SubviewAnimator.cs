@@ -60,12 +60,6 @@ namespace Lysionium
         /// </summary>
         private bool queuedCancelSelection;
 
-        public static SubviewAnimator Get(Component obj)
-        {
-            LuiUtility.TryGetComponentInRecursiveParents<SubviewAnimator>(obj.transform, out var subviewAnimator);
-            return subviewAnimator;
-        }
-
         protected virtual void Awake()
         {
             eventSystem = LuiUtility.GetEventSystem(this);

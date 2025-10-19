@@ -14,7 +14,7 @@ namespace Lysionium
         public static bool TryCreateViewWidget(object item, IViewItemHandler handler, SubviewBase subview, out RectTransform viewWidget)
         {
             var transform = subview.transform;
-            while (LuiUtility.TryGetComponentInRecursiveParents<ViewWidgetFactory>(transform, out var library))
+            while (LuiUtility.TryGetComponentInParent<ViewWidgetFactory>(transform, out var library))
             {
                 if (library.TryCreate(item, handler, subview, out viewWidget)) return true;
 

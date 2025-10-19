@@ -58,7 +58,7 @@ namespace Lysionium
             public AnimatorTupple(SubviewBase subview)
             {
                 subview.TryGetComponent(out animator);
-                subviewAnimator = SubviewAnimator.Get(subview);
+                subviewAnimator = subview.GetComponentInParent<SubviewAnimator>();
             }
 
             public static void TrySetVisible(SubviewBase subview, bool visible)
@@ -128,7 +128,7 @@ namespace Lysionium
 
             public KeyBindTuple(SubviewBase subview)
             {
-                keyBindStyleSheet = KeyBindStyleSheet.Get(subview);
+                keyBindStyleSheet = subview.GetComponentInParent<KeyBindStyleSheet>();
             }
 
             public static bool TryGetKeyIcon(
