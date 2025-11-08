@@ -6,7 +6,7 @@ namespace Lysionium
     public static class KeyOption
     {
         public static KeyOption<TMgr, TArg> Create<TMgr, TArg>(
-            string name, InputItemHandler<TMgr, TArg> onPerform, string style,
+            string name, InputItemHandler<TMgr, TArg> onPerform, string style, // input セレクタを想定して style は必須にする
             InputItemHandler<TMgr, TArg> onStart = null, InputItemHandler<TMgr, TArg> onCancel = null)
             where TMgr : IListMenuManager
             where TArg : IListMenuArg

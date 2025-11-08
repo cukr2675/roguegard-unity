@@ -24,6 +24,8 @@ namespace Lysionium
         //Sprite GetIcon(object item, IListMenuManager manager, IListMenuArg arg);
 
         // Name と Style はラベルをはじめとしたほとんどのコントロールで使うため実装する
+
+        // Style は用途的には string[] のほうが近いが、コンマ区切りやデフォルト引数等を考えると冗長に見えるので string にする
         string GetStyle(object item, IListMenuManager manager, IListMenuArg arg);
     }
 }

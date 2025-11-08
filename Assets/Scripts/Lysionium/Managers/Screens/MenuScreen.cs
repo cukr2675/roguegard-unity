@@ -1,5 +1,7 @@
 namespace Lysionium
 {
+    // 画面遷移ナビゲーションを拡張できるようにするため MenuScreen と ViewData に分離する
+
     /// <summary>
     /// メニューの画面単位のクラス
     /// </summary>

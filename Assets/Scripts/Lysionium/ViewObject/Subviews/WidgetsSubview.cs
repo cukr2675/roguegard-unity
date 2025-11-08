@@ -75,6 +75,7 @@ namespace Lysionium
         {
             if (TryGetComponent(out animator))
             {
+                // Animator のレイヤーやパラメータはエディタで設定できる (すなわち Awake 前から初期化済み) ため Awake で設定する
                 if (!string.IsNullOrWhiteSpace(_defaultStyle)) { SetStyle(_defaultStyle); }
                 if (!string.IsNullOrWhiteSpace(_initTrigger) && TryGetComponent(out animator)) { animator.SetTrigger(_initTrigger); }
             }
