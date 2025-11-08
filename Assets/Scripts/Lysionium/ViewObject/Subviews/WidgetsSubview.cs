@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Lysionium
+namespace Lysionium.Views
 {
     [AddComponentMenu("UI/Lysionium/Subviews/LUI Widgets Subview")]
     public class WidgetsSubview : Subview

@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace Lysionium
+namespace Lysionium.Views
 {
     [AddComponentMenu("UI/Lysionium/View Widgets/LUI Input Field View Widget")]
     [RequireComponent(typeof(TMP_InputField))]

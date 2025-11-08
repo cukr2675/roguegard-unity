@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Lysionium
+namespace Lysionium.Views
 {
     [AddComponentMenu("UI/Lysionium/View Widgets/LUI Progress Bar View Widget")]
     public class ProgressBarViewWidget : ViewWidget

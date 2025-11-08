@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Lysionium
+namespace Lysionium.Views
 {
     /// <summary>
     /// <see cref="WidgetsSubview"/> 用の要素コンポーネント。 <see cref="ViewItem"/> と違い表示ごとに再生成される

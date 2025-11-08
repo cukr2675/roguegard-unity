@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-namespace Lysionium
+namespace Lysionium.Views
 {
     [AddComponentMenu("UI/Lysionium/Subviews/LUI Message Box Subview")]
     public class MessageBoxSubview : Subview, IMessageBoxSubview

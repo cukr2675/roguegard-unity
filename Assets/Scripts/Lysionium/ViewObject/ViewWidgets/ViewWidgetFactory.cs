@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Lysionium
+namespace Lysionium.Views
 {
     /// <summary>
     /// <see cref="ViewWidget"/> 用ファクトリーコンポーネント。このオブジェクトから下の <see cref="WidgetsSubview"/> に影響を与える

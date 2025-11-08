@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Lysionium
+namespace Lysionium.Views
 {
     public class ViewItemStyleEvaluator
     {

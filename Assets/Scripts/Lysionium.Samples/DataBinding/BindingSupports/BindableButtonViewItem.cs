@@ -1,3 +1,5 @@
+using Lysionium.Views;
+
 namespace Lysionium.Samples
 {
     public class BindableButtonViewItem : ButtonViewItem

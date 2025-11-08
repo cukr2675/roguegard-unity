@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-namespace Lysionium
+namespace Lysionium.Views
 {
     [AddComponentMenu("UI/Lysionium/View Items/LUI Label View Item")]
     [RequireComponent(typeof(TMP_Text))]

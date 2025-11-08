@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
-namespace Lysionium
+namespace Lysionium.Views
 {
     /// <summary>
     /// Subview のアニメーターパラメータ名と LUI Play を制御するコンポーネント。このオブジェクトの下の <see cref="Subview"/> に影響を与える

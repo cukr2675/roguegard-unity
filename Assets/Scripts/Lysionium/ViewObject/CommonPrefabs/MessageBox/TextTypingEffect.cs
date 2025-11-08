@@ -2,7 +2,7 @@ using System.Text;
 using TMPro;
 using UnityEngine;
 
-namespace Lysionium
+namespace Lysionium.Views
 {
     internal class TextTypingEffect
     {

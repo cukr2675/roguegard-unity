@@ -1,9 +1,10 @@
+using Lysionium.Audio;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 
-namespace Lysionium.Audio
+namespace Lysionium.Views
 {
     [AddComponentMenu("UI/Lysionium/LUI Web Other Audio Play Handler")]
     public class WebOtherAudioPlayHandler : MonoBehaviour

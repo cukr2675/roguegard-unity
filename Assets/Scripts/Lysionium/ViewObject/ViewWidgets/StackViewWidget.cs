@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Lysionium
+namespace Lysionium.Views
 {
     /// <summary>
     /// 複数のウィジェットを横並びに表示する <see cref="ViewWidget"/>

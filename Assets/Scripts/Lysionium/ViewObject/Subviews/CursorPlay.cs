@@ -1,4 +1,4 @@
-namespace Lysionium
+namespace Lysionium.Views
 {
     public enum CursorPlay
     {

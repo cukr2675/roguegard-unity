@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
-namespace Lysionium
+namespace Lysionium.Views
 {
     /// <summary>
     /// モデルのリストをコントローラで制御する UI のクラス。

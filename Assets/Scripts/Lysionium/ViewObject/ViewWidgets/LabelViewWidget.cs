@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace Lysionium
+namespace Lysionium.Views
 {
     /// <summary>
     /// テキストを表示する <see cref="ViewWidget"/>。リンククリック機能付き

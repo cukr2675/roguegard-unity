@@ -1,9 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace Lysionium
+namespace Lysionium.Views
 {
     [AddComponentMenu("UI/Lysionium/Subviews/LUI Grid Subview")]
     public class GridSubview : Subview

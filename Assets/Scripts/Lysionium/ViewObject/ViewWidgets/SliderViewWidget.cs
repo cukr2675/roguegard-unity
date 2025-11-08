@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Lysionium
+namespace Lysionium.Views
 {
     [AddComponentMenu("UI/Lysionium/View Widgets/LUI Input Field View Widget")]
     [RequireComponent(typeof(Slider))]

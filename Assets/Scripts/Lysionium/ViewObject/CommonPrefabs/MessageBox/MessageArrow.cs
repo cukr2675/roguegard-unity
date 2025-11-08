@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Lysionium
+namespace Lysionium.Views
 {
     /// <summary>
     /// <see cref="MessageBox.NextCharacterPosition"/> に追従するコンポーネント

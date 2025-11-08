@@ -3,7 +3,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-namespace Lysionium
+namespace Lysionium.Views
 {
     [AddComponentMenu("UI/Lysionium/LUI Cursor Image System")]
     public class CursorImageSystem : MonoBehaviour

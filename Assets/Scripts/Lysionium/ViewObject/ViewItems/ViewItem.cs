@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace Lysionium
+namespace Lysionium.Views
 {
     [RequireComponent(typeof(CanvasGroup))]
     public abstract class ViewItem : MonoBehaviour, ISelectHandler

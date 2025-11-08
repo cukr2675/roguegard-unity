@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace Lysionium
+namespace Lysionium.Views
 {
     /// <summary>
     /// <see cref="Navigation.Mode.Automatic"/> によるカーソル移動を衝突判定風に制御するコンポーネント。

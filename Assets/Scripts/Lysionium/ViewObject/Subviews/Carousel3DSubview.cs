@@ -3,7 +3,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace Lysionium
+namespace Lysionium.Views
 {
     [AddComponentMenu("UI/Lysionium/Subviews/LUI Carousel 3D Subview")]
     public class Carousel3DSubview : Subview

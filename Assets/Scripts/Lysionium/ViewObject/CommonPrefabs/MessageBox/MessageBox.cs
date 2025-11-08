@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Lysionium
+namespace Lysionium.Views
 {
     [AddComponentMenu("UI/Lysionium/LUI Message Box")]
     public class MessageBox : MonoBehaviour

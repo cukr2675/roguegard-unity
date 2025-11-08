@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Lysionium
+namespace Lysionium.Views
 {
     [AddComponentMenu("UI/Lysionium/View Widgets/Meta/LUI Content Size Meta Widget")]
     public class ContentSizeMetaWidget : ViewWidget

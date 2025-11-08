@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using TMPro;
 
-namespace Lysionium
+namespace Lysionium.Views
 {
     internal class TextHiddenLinkManager
     {

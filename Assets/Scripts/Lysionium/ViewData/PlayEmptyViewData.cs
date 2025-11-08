@@ -1,3 +1,4 @@
+using Lysionium.Views;
 using UnityEngine;
 
 namespace Lysionium
@@ -5,7 +6,7 @@ namespace Lysionium
     /// <summary>
     /// ビューを変更せずに LUI Play を再生するためのクラス
     /// </summary>
-    public class PlayEmptyViewData
+    internal class PlayEmptyViewData
     {
         public string EmptySubviewName { get; set; } = StandardSubviewTable.ScrollName;
 

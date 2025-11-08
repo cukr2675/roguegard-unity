@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Lysionium
+namespace Lysionium.Views
 {
     internal class TextHorizontalRuler
     {

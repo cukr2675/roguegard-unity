@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Lysionium
+namespace Lysionium.Views
 {
     [AddComponentMenu("UI/Lysionium/View Widgets/Meta/LUI Style Meta Widget")]
     public class StyleMetaWidget : ViewWidget

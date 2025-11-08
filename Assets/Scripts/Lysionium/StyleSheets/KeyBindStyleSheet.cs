@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Lysionium
+namespace Lysionium.Views
 {
     /// <summary>
     /// 要素のスタイルでキーバインドするスタイルシート。このオブジェクトの下の <see cref="Subview"/> に影響を与える

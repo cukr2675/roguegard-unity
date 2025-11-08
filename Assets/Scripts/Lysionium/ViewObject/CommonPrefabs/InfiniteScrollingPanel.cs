@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Lysionium
+namespace Lysionium.Views
 {
     [AddComponentMenu("UI/Lysionium/LUI Infinite Scrolling Panel")]
     public class InfiniteScrollingPanel : MonoBehaviour
