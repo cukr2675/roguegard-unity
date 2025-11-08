@@ -1,3 +1,6 @@
+// 命名メモ:
+// ViewData と合わせて Presenter のような働きをするが、モデルに埋め込む運用を想定するため Presenter ではない。
+// そのため namespace Lysionium.Presenters にはしない。
 namespace Lysionium
 {
     // 画面遷移ナビゲーションを拡張できるようにするため MenuScreen と ViewData に分離する
