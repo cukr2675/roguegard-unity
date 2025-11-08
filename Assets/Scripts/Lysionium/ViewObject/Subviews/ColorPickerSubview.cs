@@ -7,17 +7,15 @@ using UnityEngine.UI;
 namespace Lysionium
 {
     [AddComponentMenu("UI/Lysionium/Subviews/LUI Color Picker Subview")]
-    public class ColorPickerSubview : Subview
+    public class ColorPickerSubview : Subview, IColorPickerSubview
     {
         [SerializeField] private ColorPicker _colorPicker = null;
         public ColorPicker ColorPicker => _colorPicker;
         [SerializeField] private Button _closeButton = null;
         [SerializeField] private Selectable _initialSelectable = null;
 
-        private ColorPickerEventHandler onClose;
+        private IColorPickerSubview.ColorPickerEventHandler onClose;
         private StateProvider currentStateProvider;
-
-        public delegate void ColorPickerEventHandler(IListMenuManager manager, IListMenuArg arg, Color color);
 
         protected override void CommonInitCore()
         {
@@ -30,7 +28,7 @@ namespace Lysionium
             => throw new System.NotSupportedException();
 
         public void SetParameters(
-            Color color, ColorPickerEventHandler onClose, IListMenuManager manager, IListMenuArg arg,
+            Color color, IColorPickerSubview.ColorPickerEventHandler onClose, IListMenuManager manager, IListMenuArg arg,
             ref ISubviewStateProvider stateProvider)
         {
             stateProvider ??= new StateProvider();

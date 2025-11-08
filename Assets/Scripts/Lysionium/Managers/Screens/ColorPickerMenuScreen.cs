@@ -48,7 +48,7 @@ namespace Lysionium
         {
             private ISubviewStateProvider colorPickerSubviewStateProvider;
             private Color color;
-            private event ColorPickerSubview.ColorPickerEventHandler HandleClose;
+            private event IColorPickerSubview.ColorPickerEventHandler HandleClose;
 
             public Builder Show(Color color, TMgr manager, TArg arg)
             {
@@ -62,7 +62,7 @@ namespace Lysionium
 
             protected override void ShowSubviews(TMgr manager, TArg arg)
             {
-                if (LuiAssert.Type<ColorPickerSubview>(manager.GetSubview(StandardSubviewTable.ColorPickerName), out var colorPickerSubview)) return;
+                if (LuiAssert.Type<IColorPickerSubview>(manager.GetSubview(StandardSubviewTable.ColorPickerName), out var colorPickerSubview)) return;
 
                 colorPickerSubview.SetParameters(color, HandleClose, manager, arg, ref colorPickerSubviewStateProvider);
                 colorPickerSubview.Show();
@@ -80,7 +80,7 @@ namespace Lysionium
                 {
                 }
 
-                public Builder OnClose(ColorPickerSubview.ColorPickerEventHandler onClose)
+                public Builder OnClose(IColorPickerSubview.ColorPickerEventHandler onClose)
                 {
                     AssertNotBuilt();
 

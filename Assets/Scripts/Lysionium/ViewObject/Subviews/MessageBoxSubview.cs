@@ -6,7 +6,7 @@ using UnityEngine.UI;
 namespace Lysionium
 {
     [AddComponentMenu("UI/Lysionium/Subviews/LUI Message Box Subview")]
-    public class MessageBoxSubview : Subview
+    public class MessageBoxSubview : Subview, IMessageBoxSubview
     {
         [SerializeField] private MessageBox _messageBox = null;
         public MessageBox MessageBox => _messageBox;

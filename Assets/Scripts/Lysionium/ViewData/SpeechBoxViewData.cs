@@ -57,7 +57,7 @@ namespace Lysionium
 
         protected override void ShowSubviews(TMgr manager, TArg arg)
         {
-            if (LuiAssert.Type<MessageBoxSubview>(manager.GetSubview(SpeechBoxSubviewName), out var speechBoxSubview)) return;
+            if (LuiAssert.Type<IMessageBoxSubview>(manager.GetSubview(SpeechBoxSubviewName), out var speechBoxSubview)) return;
 
             speechBoxSubview.Show(message, ToStringViewItemHandler.Instance, manager, arg, ref messageBoxSubviewStateProvider);
             speechBoxSubview.DoScheduledAfterCompletion((manager, arg) =>
