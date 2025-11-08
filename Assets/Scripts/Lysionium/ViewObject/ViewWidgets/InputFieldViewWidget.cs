@@ -16,8 +16,6 @@ namespace Lysionium.Views
         public override string WidgetName => widgetOption.Name;
         protected override SubviewBase Parent => _parent;
 
-        public delegate string InputFieldEventHandler<TMgr, TArg>(TMgr manager, TArg arg, string value);
-
         public override bool TryInstantiateWidget(
             object item, IViewItemHandler handler, SubviewBase subview, out ViewWidget viewWidget)
         {

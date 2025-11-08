@@ -14,7 +14,6 @@ namespace Lysionium.Views
         public override string WidgetName => widgetOption.Name;
         protected override SubviewBase Parent => _parent;
 
-
         public override bool TryInstantiateWidget(
             object item, IViewItemHandler handler, SubviewBase subview, out ViewWidget viewWidget)
         {
