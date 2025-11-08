@@ -11,7 +11,7 @@ namespace Lysionium
         public override bool TryInstantiateWidget(
             object item, IViewItemHandler handler, SubviewBase subview, out ViewWidget viewWidget)
         {
-            if (item is not IWidgetOption widgetOption)
+            if (item is not IStyleMetaWidgetOption widgetOption)
             {
                 viewWidget = null;
                 return false;
@@ -26,24 +26,6 @@ namespace Lysionium
             metaWidget._parent = subview;
             viewWidget = metaWidget;
             return true;
-        }
-
-        public static IWidgetOption CreateOption(string style)
-        {
-            return new WidgetOption()
-            {
-                Style = style,
-            };
-        }
-
-        public interface IWidgetOption
-        {
-            string Style { get; }
-        }
-
-        private class WidgetOption : IWidgetOption
-        {
-            public string Style { get; set; }
         }
     }
 }

@@ -142,11 +142,11 @@ namespace RoguegardUnity
 
                 view.Show(string.Empty, manager, arg)
                     ?
-                    .Tail(InputFieldViewWidget.CreateOption<MMgr, MArg>(
+                    .Tail(InputFieldWidgetOption.Create<MMgr, MArg>(
                         (manager, arg) => value.ToString(),
                         (manager, arg, value) => SetKeyFrame(value)))
 
-                    .Tail(StackViewWidget.CreateOption(
+                    .Tail(StackWidgetOption.Create(
                         ("1*", SelectOption.Create<MMgr, MArg>(":Submit", (manager, arg) =>
                         {
                             if (value != null) { editList.Set(targetTime, value.Value); }

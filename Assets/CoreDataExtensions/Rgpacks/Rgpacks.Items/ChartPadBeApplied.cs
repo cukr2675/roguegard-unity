@@ -48,7 +48,7 @@ namespace Roguegard.Rgpacks
 
                 view.Show(list, manager, arg)
                     ?
-                    .HeadStack("アセットID", InputFieldViewWidget.CreateOption<MMgr, MArg>(
+                    .HeadStack("アセットID", InputFieldWidgetOption.Create<MMgr, MArg>(
                         (manager, arg) =>
                         {
                             var chartPad = arg.Arg.TargetObj;

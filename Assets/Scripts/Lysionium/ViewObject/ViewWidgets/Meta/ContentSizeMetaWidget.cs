@@ -11,7 +11,7 @@ namespace Lysionium
         public override bool TryInstantiateWidget(
             object item, IViewItemHandler handler, SubviewBase subview, out ViewWidget viewWidget)
         {
-            if (item is not IWidgetOption widgetOption)
+            if (item is not IContentSizeMetaWidgetOption widgetOption)
             {
                 viewWidget = null;
                 return false;
@@ -26,24 +26,6 @@ namespace Lysionium
             metaWidget._parent = subview;
             viewWidget = metaWidget;
             return true;
-        }
-
-        public static IWidgetOption CreateOption(float width)
-        {
-            return new WidgetOption()
-            {
-                Width = width,
-            };
-        }
-
-        public interface IWidgetOption
-        {
-            float Width { get; }
-        }
-
-        private class WidgetOption : IWidgetOption
-        {
-            public float Width { get; set; }
         }
     }
 }

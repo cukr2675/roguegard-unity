@@ -14,12 +14,8 @@ namespace Lysionium
 
         protected virtual SubviewBase Parent => null;
 
-        private static int widgetIdentity = 0;
-
         public abstract bool TryInstantiateWidget(
             object item, IViewItemHandler handler, SubviewBase subview, out ViewWidget viewWidget);
-
-        protected static string EmitIdentity(string header) => $"{header}({widgetIdentity++})";
 
         public void PlayString(string value) => Parent.PlayFromItem(value, this);
         public void PlayObject(Object value) => Parent.PlayFromItem(value, this);

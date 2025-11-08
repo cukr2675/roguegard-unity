@@ -32,7 +32,7 @@ namespace Roguegard.Rgpacks
             {
                 view.Show(System.Array.Empty<object>(), manager, arg)
                     ?
-                    .TailStack("アセットID", InputFieldViewWidget.CreateOption<MMgr, MArg>(
+                    .TailStack("アセットID", InputFieldWidgetOption.Create<MMgr, MArg>(
                         (manager, arg) => NamingEffect.Get(arg.Arg.TargetObj)?.Naming,
                         (manager, arg, value) =>
                         {

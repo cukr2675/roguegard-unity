@@ -6,6 +6,10 @@ namespace Lysionium
 {
     public static class LuiUtility
     {
+        private static int identity = 0;
+
+        public static string EmitIdentity(string header) => $"{header}({identity++})";
+
         internal static bool TryGetComponentInParent<T>(Transform transform, out T component)
             where T : Component
         {

@@ -9,7 +9,7 @@ namespace Lysionium
         [SerializeField] private Image[] _fillAmountTargetImages = null;
         [SerializeField] private string _fillAmountFloat = null;
 
-        private IWidgetOption widgetOption;
+        private IProgressBarWidgetOption widgetOption;
         private SubviewBase _parent;
         private Animator animator;
 
@@ -18,7 +18,7 @@ namespace Lysionium
         public override bool TryInstantiateWidget(
             object item, IViewItemHandler handler, SubviewBase subview, out ViewWidget viewWidget)
         {
-            if (item is not IWidgetOption widgetOption)
+            if (item is not IProgressBarWidgetOption widgetOption)
             {
                 viewWidget = null;
                 return false;
@@ -42,34 +42,6 @@ namespace Lysionium
             if (animator != null)
             {
                 animator.SetFloat(_fillAmountFloat, fillAmount);
-            }
-        }
-
-        public static IWidgetOption CreateOption<TMgr, TArg>(System.Func<TMgr, TArg, float> progress, string name = null)
-        {
-            return new WidgetOption<TMgr, TArg>()
-            {
-                Name = name ?? EmitIdentity("ProgressBarViewWidget"),
-                GetProgress = progress
-            };
-        }
-
-        public interface IWidgetOption
-        {
-            float GetProgress(IListMenuManager manager, IListMenuArg arg);
-        }
-
-        private class WidgetOption<TMgr, TArg> : IWidgetOption
-        {
-            public string Name { get; set; }
-            public System.Func<TMgr, TArg, float> GetProgress { get; set; }
-
-            float IWidgetOption.GetProgress(IListMenuManager manager, IListMenuArg arg)
-            {
-                if (LuiAssert.Type<TMgr>(manager, out var tMgr) ||
-                    LuiAssert.Type<TArg>(arg, out var tArg)) return 0f;
-
-                return GetProgress(tMgr, tArg);
             }
         }
     }

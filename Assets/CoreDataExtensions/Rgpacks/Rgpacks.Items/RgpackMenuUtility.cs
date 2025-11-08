@@ -10,7 +10,7 @@ namespace Roguegard.Rgpacks
             new object[]
             {
                 "アセットID",
-                InputFieldViewWidget.CreateOption<MMgr, MArg>(
+                InputFieldWidgetOption.Create<MMgr, MArg>(
                     (manager, arg) => NamingEffect.Get(arg.Arg.TargetObj)?.Naming,
                     (manager, arg, value) => {
                         var fairy = arg.Arg.TargetObj;

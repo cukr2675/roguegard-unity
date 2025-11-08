@@ -36,9 +36,9 @@ namespace Roguegard.Device
                     {
                         if (pair.Value is NumberCmnProperty numberCmnProperty)
                         {
-                            list.Add(StackViewWidget.CreateOption(
+                            list.Add(StackWidgetOption.Create(
                                 ("1*", pair.Key),
-                                ("1*", InputFieldViewWidget.CreateOption<MMgr, MArg>(
+                                ("1*", InputFieldWidgetOption.Create<MMgr, MArg>(
                                     (manager, arg) => numberCmnProperty.Value.ToString(),
                                     (manager, arg, value) => (numberCmnProperty.Value = float.Parse(value)).ToString(),
                                     TMP_InputField.ContentType.DecimalNumber))));
@@ -64,7 +64,7 @@ namespace Roguegard.Device
 
             view.Show(list, manager, arg)
                 ?
-                .HeadStack("アセットID", InputFieldViewWidget.CreateOption<MMgr, MArg>(
+                .HeadStack("アセットID", InputFieldWidgetOption.Create<MMgr, MArg>(
                     (manager, arg) => ((PropertiedCmnData)arg.Arg.Other).Cmn,
                     (manager, arg, value) => ((PropertiedCmnData)arg.Arg.Other).Cmn = value))
 

@@ -45,7 +45,7 @@ namespace Roguegard.Rgpacks
 
                 view.Show(list, manager, arg)
                     ?
-                    .HeadStack("アセットID", InputFieldViewWidget.CreateOption<MMgr, MArg>(
+                    .HeadStack("アセットID", InputFieldWidgetOption.Create<MMgr, MArg>(
                         (manager, arg) => NamingEffect.Get(arg.Arg.TargetObj)?.Naming,
                         (manager, arg, value) => {
                             var fairy = arg.Arg.TargetObj;
@@ -53,7 +53,7 @@ namespace Roguegard.Rgpacks
                             return NamingEffect.Get(fairy).Naming = value;
                         }))
 
-                    .HeadStack("チャートID", InputFieldViewWidget.CreateOption<MMgr, MArg>(
+                    .HeadStack("チャートID", InputFieldWidgetOption.Create<MMgr, MArg>(
                         (manager, arg) => EvtFairyInfo.Get(arg.Arg.TargetObj).RelatedChart,
                         (manager, arg, value) => EvtFairyInfo.Get(arg.Arg.TargetObj).RelatedChart = value))
 
@@ -79,15 +79,15 @@ namespace Roguegard.Rgpacks
             {
                 view.Show(System.Array.Empty<object>(), manager, arg)
                     ?
-                    .TailStack("条件Cmn", InputFieldViewWidget.CreateOption<MMgr, MArg>(
+                    .TailStack("条件Cmn", InputFieldWidgetOption.Create<MMgr, MArg>(
                         (manager, arg) => ((EvtFairyInfo.Page)arg.Arg.Other).ChartCmn,
                         (manager, arg, value) => ((EvtFairyInfo.Page)arg.Arg.Other).ChartCmn = value))
 
-                    .TailStack("追加条件Cmn", InputFieldViewWidget.CreateOption<MMgr, MArg>(
+                    .TailStack("追加条件Cmn", InputFieldWidgetOption.Create<MMgr, MArg>(
                         (manager, arg) => ((EvtFairyInfo.Page)arg.Arg.Other).IfCmn.Cmn,
                         (manager, arg, value) => ((EvtFairyInfo.Page)arg.Arg.Other).IfCmn.Cmn = value))
 
-                    .TailStack("見た目アセットID", InputFieldViewWidget.CreateOption<MMgr, MArg>(
+                    .TailStack("見た目アセットID", InputFieldWidgetOption.Create<MMgr, MArg>(
                         (manager, arg) => ((EvtFairyInfo.Page)arg.Arg.Other).Sprite,
                         (manager, arg, value) => ((EvtFairyInfo.Page)arg.Arg.Other).Sprite = value))
 

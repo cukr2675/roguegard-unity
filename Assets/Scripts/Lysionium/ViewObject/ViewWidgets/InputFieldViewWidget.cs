@@ -8,7 +8,7 @@ namespace Lysionium
     [RequireComponent(typeof(TMP_InputField))]
     public class InputFieldViewWidget : ViewWidget, ISelectHandler
     {
-        private IWidgetOption widgetOption;
+        private IInputFieldWidgetOption widgetOption;
         private SubviewBase _parent;
         private TMP_InputField inputField;
         private bool queuedDeactivateInputField;
@@ -21,7 +21,7 @@ namespace Lysionium
         public override bool TryInstantiateWidget(
             object item, IViewItemHandler handler, SubviewBase subview, out ViewWidget viewWidget)
         {
-            if (item is not IWidgetOption widgetOption)
+            if (item is not IInputFieldWidgetOption widgetOption)
             {
                 viewWidget = null;
                 return false;
@@ -46,19 +46,6 @@ namespace Lysionium
             });
         }
 
-        public static IWidgetOption CreateOption<TMgr, TArg>(
-            System.Func<TMgr, TArg, string> value, InputFieldEventHandler<TMgr, TArg> handleValueChanged,
-            TMP_InputField.ContentType contentType = TMP_InputField.ContentType.Standard, string name = null)
-        {
-            return new WidgetOption<TMgr, TArg>()
-            {
-                Name = name ?? EmitIdentity("InputFieldViewWidget"),
-                ContentType = contentType,
-                GetValue = value,
-                HandleValueChanged = handleValueChanged
-            };
-        }
-
         void ISelectHandler.OnSelect(BaseEventData eventData)
         {
             queuedDeactivateInputField = true;
@@ -70,41 +57,6 @@ namespace Lysionium
             {
                 inputField.DeactivateInputField();
                 queuedDeactivateInputField = false;
-            }
-        }
-
-        public interface IWidgetOption
-        {
-            string Name { get; }
-
-            TMP_InputField.ContentType ContentType { get; }
-
-            string GetValue(IListMenuManager manager, IListMenuArg arg);
-
-            string HandleValueChanged(IListMenuManager manager, IListMenuArg arg, string value);
-        }
-
-        private class WidgetOption<TMgr, TArg> : IWidgetOption
-        {
-            public string Name { get; set; }
-            public TMP_InputField.ContentType ContentType { get; set; }
-            public System.Func<TMgr, TArg, string> GetValue { get; set; }
-            public InputFieldEventHandler<TMgr, TArg> HandleValueChanged { get; set; }
-
-            string IWidgetOption.GetValue(IListMenuManager manager, IListMenuArg arg)
-            {
-                if (LuiAssert.Type<TMgr>(manager, out var tMgr) ||
-                    LuiAssert.Type<TArg>(arg, out var tArg)) return null;
-
-                return GetValue(tMgr, tArg);
-            }
-
-            string IWidgetOption.HandleValueChanged(IListMenuManager manager, IListMenuArg arg, string value)
-            {
-                if (LuiAssert.Type<TMgr>(manager, out var tMgr) ||
-                    LuiAssert.Type<TArg>(arg, out var tArg)) return null;
-
-                return HandleValueChanged(tMgr, tArg, value);
             }
         }
     }

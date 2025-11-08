@@ -42,9 +42,9 @@ namespace Roguegard.Rgpacks
                     ?
                     .Filter(obj => obj != null)
 
-                    .Head(StackViewWidget.CreateOption(
+                    .Head(StackWidgetOption.Create(
                         ("1*", "アセットID"),
-                        ("1*", InputFieldViewWidget.CreateOption<MMgr, MArg>(
+                        ("1*", InputFieldWidgetOption.Create<MMgr, MArg>(
                             (manager, arg) =>
                             {
                                 var diorama = arg.Arg.TargetObj;
@@ -86,9 +86,9 @@ namespace Roguegard.Rgpacks
             {
                 view.Show("", manager, arg)
                     ?
-                    .Tail(StackViewWidget.CreateOption(
+                    .Tail(StackWidgetOption.Create(
                         ("1*", "アセットID"),
-                        ("1*", InputFieldViewWidget.CreateOption<MMgr, MArg>(
+                        ("1*", InputFieldWidgetOption.Create<MMgr, MArg>(
                             (manager, arg) =>
                             {
                                 var diorama = arg.Arg.TargetObj;

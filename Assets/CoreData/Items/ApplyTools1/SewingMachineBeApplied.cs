@@ -91,9 +91,9 @@ namespace Roguegard
                             var data = (SewedEquipmentData)arg.Arg.Other;
                             data.BoneSprites.MainColor = color;
                         }))
-                    .Head(StackViewWidget.CreateOption(
+                    .Head(StackWidgetOption.Create(
                         ("1*", "名前"),
-                        ("1*", InputFieldViewWidget.CreateOption<MMgr, MArg>(
+                        ("1*", InputFieldWidgetOption.Create<MMgr, MArg>(
                             (manager, arg) =>
                             {
                                 var data = (SewedEquipmentData)arg.Arg.Other;
@@ -116,9 +116,9 @@ namespace Roguegard
                     .VarOnce(out var equipmentSlotsScreen, new EquipmentSlotsScreen())
                     .Head(SelectOption.Create<MMgr, MArg>("装備部位", equipmentSlotsScreen))
 
-                    .Head(StackViewWidget.CreateOption(
+                    .Head(StackWidgetOption.Create(
                         ("1*", "順序"),
-                        ("1*", InputFieldViewWidget.CreateOption<MMgr, MArg>(
+                        ("1*", InputFieldWidgetOption.Create<MMgr, MArg>(
                             (manager, arg) =>
                             {
                                 var data = (SewedEquipmentData)arg.Arg.Other;

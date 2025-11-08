@@ -47,7 +47,7 @@ namespace Roguegard.Device
             {
                 raceView.Show(list, manager, arg)
                     ?
-                    .HeadStack("職業／二つ名", InputFieldViewWidget.CreateOption<MMgr, MArg>(
+                    .HeadStack("職業／二つ名", InputFieldWidgetOption.Create<MMgr, MArg>(
                         (manager, arg) => removeSelectOption.characterCreationData.ShortName,
                         (manager, arg, value) => removeSelectOption.characterCreationData.ShortName = value))
 
@@ -100,7 +100,7 @@ namespace Roguegard.Device
                     ?
                     .Head(selectOption)
 
-                    .HeadStack("名前", InputFieldViewWidget.CreateOption<MMgr, MArg>(
+                    .HeadStack("名前", InputFieldWidgetOption.Create<MMgr, MArg>(
                         (manager, arg) =>
                         {
                             var intrinsic = (Intrinsic)arg.Arg.Other;
@@ -125,7 +125,7 @@ namespace Roguegard.Device
                     ?
                     .Head(selectOption)
 
-                    .HeadStack("個数", InputFieldViewWidget.CreateOption<MMgr, MArg>(
+                    .HeadStack("個数", InputFieldWidgetOption.Create<MMgr, MArg>(
                         (manager, arg) =>
                         {
                             var startingItem = (StartingItem)arg.Arg.Other;
@@ -186,9 +186,9 @@ namespace Roguegard.Device
                 {
                     race.Option.UpdateMemberRange(standardRaceMember, race.Option, removeSelectOption.characterCreationData);
                     var standardRaceOption = (IStandardRaceOption)race.Option;
-                    list.Add(StackViewWidget.CreateOption(
+                    list.Add(StackWidgetOption.Create(
                         ("1*", "サイズ"),
-                        ("1*", InputFieldViewWidget.CreateOption<MMgr, MArg>(
+                        ("1*", InputFieldWidgetOption.Create<MMgr, MArg>(
                             (manager, arg) => standardRaceMember.Size.ToString(),
                             (manager, arg, valueString) =>
                             {

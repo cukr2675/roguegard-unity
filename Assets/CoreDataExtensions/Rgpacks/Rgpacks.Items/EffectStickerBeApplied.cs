@@ -31,7 +31,7 @@ namespace Roguegard.Rgpacks
             {
                 view.Show(System.Array.Empty<object>(), manager, arg)
                     ?
-                    .TailStack("アセットID", InputFieldViewWidget.CreateOption<MMgr, MArg>(
+                    .TailStack("アセットID", InputFieldWidgetOption.Create<MMgr, MArg>(
                         (manager, arg) => NamingEffect.Get(arg.Arg.TargetObj)?.Naming,
                         (manager, arg, value) => {
                             var sticker = arg.Arg.TargetObj;
@@ -42,7 +42,7 @@ namespace Roguegard.Rgpacks
                     .VarOnce(out var cmnMenu, new PropertiedCmnMenu())
                     .TailOption("Update", (manager, arg) => manager.PushMenuScreen(cmnMenu, arg.Self, other: EffectStickerInfo.Get(arg.Arg.TargetObj).Update))
 
-                    .TailStack("スプライト", InputFieldViewWidget.CreateOption<MMgr, MArg>(
+                    .TailStack("スプライト", InputFieldWidgetOption.Create<MMgr, MArg>(
                         (manager, arg) => EffectStickerInfo.Get(arg.Arg.TargetObj).Sprite,
                         (manager, arg, value) =>  EffectStickerInfo.Get(arg.Arg.TargetObj).Sprite = value))
 

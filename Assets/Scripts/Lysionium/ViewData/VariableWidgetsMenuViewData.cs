@@ -92,12 +92,12 @@ namespace Lysionium
 
             public Builder HeadStack(params object[] items)
             {
-                return Head(StackViewWidget.CreateOption(items.Select(x => ("1*", x)).ToArray()));
+                return Head(StackWidgetOption.Create(items.Select(x => ("1*", x)).ToArray()));
             }
 
             public Builder TailStack(params object[] items)
             {
-                return Tail(StackViewWidget.CreateOption(items.Select(x => ("1*", x)).ToArray()));
+                return Tail(StackWidgetOption.Create(items.Select(x => ("1*", x)).ToArray()));
             }
         }
     }

@@ -165,9 +165,9 @@ namespace RoguegardUnity
             {
                 view.Show("", manager, arg)
                     ?
-                    .Tail(StackViewWidget.CreateOption(
+                    .Tail(StackWidgetOption.Create(
                         ("1*", "マスター音量"),
-                        ("1*", InputFieldViewWidget.CreateOption<MMgr, MArg>(
+                        ("1*", InputFieldWidgetOption.Create<MMgr, MArg>(
                             (manager, arg) =>
                             {
                                 var device = (StandardRogueDevice)RogueDevice.Primary;

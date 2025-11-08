@@ -153,11 +153,11 @@ namespace Lysionium.Samples
                     ?
                     // name 入力欄
                     .VarOnce(out var name, "")
-                    .Tail(InputFieldViewWidget.CreateOption<ExMgr, ExArg>(
+                    .Tail(InputFieldWidgetOption.Create<ExMgr, ExArg>(
                         value: (_, _) => name,
                         handleValueChanged: (_, _, value) => name = value))
 
-                    .Tail(StackViewWidget.CreateOption(
+                    .Tail(StackWidgetOption.Create(
 
                         // OK ボタン押下時、 name を引数としてコールバック実行
                         ("1*", SelectOption.Create<ExMgr, ExArg>("登録", (manager, _) =>

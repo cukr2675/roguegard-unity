@@ -101,7 +101,7 @@ namespace Roguegard.Rgpacks
             {
                 view.Show("", manager, arg)
                     ?
-                    .Tail(InputFieldViewWidget.CreateOption<MMgr, MArg>(
+                    .Tail(InputFieldWidgetOption.Create<MMgr, MArg>(
                         (manager, arg) =>
                         {
                             var monolith = arg.Arg.Tool;

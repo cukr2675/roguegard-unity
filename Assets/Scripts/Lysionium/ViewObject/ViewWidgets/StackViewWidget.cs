@@ -13,7 +13,7 @@ namespace Lysionium
         public override bool TryInstantiateWidget(
             object item, IViewItemHandler handler, SubviewBase subview, out ViewWidget stackViewWidget)
         {
-            if (item is IWidgetOption viewWidgets)
+            if (item is IStackWidgetOption viewWidgets)
             {
                 stackViewWidget = Instantiate(this);
                 var content = (RectTransform)stackViewWidget.transform;
@@ -79,27 +79,6 @@ namespace Lysionium
 
             stackViewWidget = null;
             return false;
-        }
-
-        public static IWidgetOption CreateOption(params (string width, object item)[] children)
-        {
-            return new WidgetOption()
-            {
-                Name = EmitIdentity("StackViewWidget"),
-                Children = children,
-            };
-        }
-
-        public interface IWidgetOption
-        {
-            string Name { get; }
-            public IReadOnlyList<(string width, object item)> Children { get; }
-        }
-
-        private class WidgetOption : IWidgetOption
-        {
-            public string Name { get; set; }
-            public IReadOnlyList<(string width, object item)> Children { get; set; }
         }
     }
 }

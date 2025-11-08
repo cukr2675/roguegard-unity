@@ -21,7 +21,7 @@ namespace RoguegardUnity
             beforeProgress = 0f;
             view.Show("世界と同期中…", manager, arg)
                 ?
-                .Tail(ProgressBarViewWidget.CreateOption<MMgr, MArg>((manager, arg) =>
+                .Tail(ProgressBarWidgetOption.Create<MMgr, MArg>((manager, arg) =>
                 {
                     if (Progress >= 1f && beforeProgress < 1f) { manager.Done(); }
                     beforeProgress = Progress;

@@ -83,7 +83,7 @@ namespace RoguegardUnity
 
                 view.Show("", manager, arg)
                     ?
-                    .Tail(InputFieldViewWidget.CreateOption<MMgr, MArg>(
+                    .Tail(InputFieldWidgetOption.Create<MMgr, MArg>(
                         (manager, arg) =>
                         {
                             return newName;
@@ -96,7 +96,7 @@ namespace RoguegardUnity
                         }))
 
                     .VarOnce(out var overwriteDialog, new ChoicesMenuScreen(":RenameOverride").Option(":Yes", Overwrite).Back())
-                    .Tail(StackViewWidget.CreateOption(
+                    .Tail(StackWidgetOption.Create(
                         ("1*", SelectOption.Create<MMgr, MArg>(":Rename", (manager, arg) =>
                         {
                             if (string.IsNullOrWhiteSpace(newName))return;

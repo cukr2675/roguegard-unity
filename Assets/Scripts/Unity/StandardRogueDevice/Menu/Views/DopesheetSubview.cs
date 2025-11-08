@@ -301,11 +301,11 @@ namespace RoguegardUnity
                 view.Show(string.Empty, manager, arg)
                     ?
                     .VarOnce(out string id)
-                    .Tail(InputFieldViewWidget.CreateOption<MMgr, MArg>(
+                    .Tail(InputFieldWidgetOption.Create<MMgr, MArg>(
                         (manager, arg) => id,
                         (manager, arg, value) => id = value))
 
-                    .Tail(StackViewWidget.CreateOption(
+                    .Tail(StackWidgetOption.Create(
                         ("1*", SelectOption.Create<MMgr, MArg>("追加", (manager, arg) =>
                         {
                             var editInfo = (MotionGrapherInfo)arg.Arg.Other;
@@ -330,7 +330,7 @@ namespace RoguegardUnity
             {
                 view.Show(System.Array.Empty<object>(), manager, arg)
                     ?
-                    .TailStack("ループ回数", InputFieldViewWidget.CreateOption<MMgr, MArg>(
+                    .TailStack("ループ回数", InputFieldWidgetOption.Create<MMgr, MArg>(
                         (manager, arg) => ((MotionGrapherInfo)arg.Arg.Other).LoopCount.ToString(),
                         (manager, arg, strValue) =>
                         {
@@ -340,7 +340,7 @@ namespace RoguegardUnity
                             return strValue;
                         }))
 
-                    .TailStack("再生速度", InputFieldViewWidget.CreateOption<MMgr, MArg>(
+                    .TailStack("再生速度", InputFieldWidgetOption.Create<MMgr, MArg>(
                         (manager, arg) => ((MotionGrapherInfo)arg.Arg.Other).PlaybackSpeed.ToString(),
                         (manager, arg, strValue) =>
                         {

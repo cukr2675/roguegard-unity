@@ -130,7 +130,7 @@ namespace RoguegardUnity
             {
                 view.Show("", manager, arg)
                     ?
-                    .Tail(InputFieldViewWidget.CreateOption<MMgr, MArg>(
+                    .Tail(InputFieldWidgetOption.Create<MMgr, MArg>(
                         (manager, arg) =>
                         {
                             var obj = arg.Arg.Tool ?? arg.Arg.TargetObj;
@@ -142,7 +142,7 @@ namespace RoguegardUnity
                         })
                     )
 
-                    .Tail(StackViewWidget.CreateOption(
+                    .Tail(StackWidgetOption.Create(
                         ("1*", SelectOption.Create<MMgr, MArg>(":Rename", (manager, arg) =>
                         {
                             var obj = arg.Arg.Tool ?? arg.Arg.TargetObj;

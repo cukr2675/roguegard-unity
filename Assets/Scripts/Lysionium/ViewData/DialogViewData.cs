@@ -49,7 +49,7 @@ namespace Lysionium
             OriginalList.Clear();
             if (ClickLink != null)
             {
-                OriginalList.Add(LabelViewWidget.CreateOption(message, ClickLink));
+                OriginalList.Add(LabelWidgetOption.Create(message, ClickLink));
             }
             else
             {
@@ -106,7 +106,7 @@ namespace Lysionium
                 {
                     stack[i] = ("1*", SelectOption.Create(selectOptions[i].Item1, selectOptions[i].Item2));
                 }
-                Tail(StackViewWidget.CreateOption(stack));
+                Tail(StackWidgetOption.Create(stack));
                 return this;
             }
 

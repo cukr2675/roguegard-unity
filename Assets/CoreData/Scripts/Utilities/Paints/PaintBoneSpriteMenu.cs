@@ -22,9 +22,9 @@ namespace Roguegard
         {
             if (mirroring == null)
             {
-                mirroring = StackViewWidget.CreateOption(
+                mirroring = StackWidgetOption.Create(
                     ("1*", "ミラーリング"),
-                    ("1*", InputFieldViewWidget.CreateOption<MMgr, MArg>(
+                    ("1*", InputFieldWidgetOption.Create<MMgr, MArg>(
                         (manager, arg) =>
                         {
                             var table = (PaintBoneSpriteTable)arg.Arg.Other;
@@ -67,7 +67,7 @@ namespace Roguegard
                 ?
                 .HeadOption("部位を変更", new BoneMenu())
 
-                .HeadStack("中心点距離", InputFieldViewWidget.CreateOption<MMgr, MArg>(
+                .HeadStack("中心点距離", InputFieldWidgetOption.Create<MMgr, MArg>(
                     (manager, arg) =>
                     {
                         var table = (PaintBoneSpriteTable)arg.Arg.Other;
@@ -87,7 +87,7 @@ namespace Roguegard
                     },
                     TMP_InputField.ContentType.IntegerNumber))
 
-                .HeadStack("上書き", InputFieldViewWidget.CreateOption<MMgr, MArg>(
+                .HeadStack("上書き", InputFieldWidgetOption.Create<MMgr, MArg>(
                     (manager, arg) =>
                     {
                         var table = (PaintBoneSpriteTable)arg.Arg.Other;
