@@ -64,6 +64,66 @@ namespace Lysionium
             instance.Canceled = onCancel;
             return instance;
         }
+
+        public static KeyOption<TMgr, TArg> Create<TMgr, TArg>(
+            string name, System.Action<InputAction.CallbackContext> onPerform, string style,
+            System.Action<InputAction.CallbackContext> onStart = null, System.Action<InputAction.CallbackContext> onCancel = null)
+            where TMgr : IListMenuManager
+            where TArg : IListMenuArg
+        {
+            var instance = new KeyOption<TMgr, TArg>();
+            instance.SetName(name);
+            instance.SetStyle(style);
+            if (onPerform != null) { instance.Performed = (_, _, ctx) => onPerform(ctx); }
+            if (onStart != null) { instance.Started = (_, _, ctx) => onStart(ctx); }
+            if (onCancel != null) { instance.Canceled = (_, _, ctx) => onCancel(ctx); }
+            return instance;
+        }
+
+        public static KeyOption<TMgr, TArg> Create<TMgr, TArg>(
+            System.Func<TMgr, TArg, string> getName, System.Action<InputAction.CallbackContext> onPerform, string style,
+            System.Action<InputAction.CallbackContext> onStart = null, System.Action<InputAction.CallbackContext> onCancel = null)
+            where TMgr : IListMenuManager
+            where TArg : IListMenuArg
+        {
+            var instance = new KeyOption<TMgr, TArg>();
+            instance.SetName(getName);
+            instance.SetStyle(style);
+            if (onPerform != null) { instance.Performed = (_, _, ctx) => onPerform(ctx); }
+            if (onStart != null) { instance.Started = (_, _, ctx) => onStart(ctx); }
+            if (onCancel != null) { instance.Canceled = (_, _, ctx) => onCancel(ctx); }
+            return instance;
+        }
+
+        public static KeyOption<TMgr, TArg> Create<TMgr, TArg>(
+            string name, System.Action<InputAction.CallbackContext> onPerform, System.Func<TMgr, TArg, string> style,
+            System.Action<InputAction.CallbackContext> onStart = null, System.Action<InputAction.CallbackContext> onCancel = null)
+            where TMgr : IListMenuManager
+            where TArg : IListMenuArg
+        {
+            var instance = new KeyOption<TMgr, TArg>();
+            instance.SetName(name);
+            instance.SetStyle(style);
+            if (onPerform != null) { instance.Performed = (_, _, ctx) => onPerform(ctx); }
+            if (onStart != null) { instance.Started = (_, _, ctx) => onStart(ctx); }
+            if (onCancel != null) { instance.Canceled = (_, _, ctx) => onCancel(ctx); }
+            return instance;
+        }
+
+        public static KeyOption<TMgr, TArg> Create<TMgr, TArg>(
+            System.Func<TMgr, TArg, string> getName, System.Action<InputAction.CallbackContext> onPerform, System.Func<TMgr, TArg, string> style,
+            System.Action<InputAction.CallbackContext> onStart = null, System.Action<InputAction.CallbackContext> onCancel = null)
+            where TMgr : IListMenuManager
+            where TArg : IListMenuArg
+        {
+            var instance = new KeyOption<TMgr, TArg>();
+            instance.SetName(getName);
+            instance.SetStyle(style);
+            if (onPerform != null) { instance.Performed = (_, _, ctx) => onPerform(ctx); }
+            if (onStart != null) { instance.Started = (_, _, ctx) => onStart(ctx); }
+            if (onCancel != null) { instance.Canceled = (_, _, ctx) => onCancel(ctx); }
+            return instance;
+        }
     }
 
     public class KeyOption<TMgr, TArg> : IKeyOption

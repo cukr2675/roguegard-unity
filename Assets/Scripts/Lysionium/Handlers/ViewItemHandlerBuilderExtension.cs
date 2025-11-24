@@ -16,5 +16,23 @@ namespace Lysionium
         {
             return builder.Filter((item, _, _) => predicate(item));
         }
+
+        public static TOut OnClick<TItem, TMgr, TArg, TOut>(
+            this IButtonViewItemHandlerBuilder<TItem, TMgr, TArg, TOut> builder, System.Action<TItem> handler)
+        {
+            return builder.OnClick((item, manager, arg) => handler(item));
+        }
+
+        public static TOut OnClick<TItem, TMgr, TArg, TOut>(
+            this IButtonViewItemHandlerBuilder<TItem, TMgr, TArg, TOut> builder, System.Func<TItem, ClickItemHandler<TMgr, TArg>> selector)
+        {
+            return builder.OnClick((item, manager, arg) => selector(item)?.Invoke(manager, arg));
+        }
+
+        public static TOut OnClick<TItem, TMgr, TArg, TOut>(
+            this IButtonViewItemHandlerBuilder<TItem, TMgr, TArg, TOut> builder, System.Func<TItem, ClickItemHandler<TItem, TMgr, TArg>> selector)
+        {
+            return builder.OnClick((item, manager, arg) => selector(item)?.Invoke(item, manager, arg));
+        }
     }
 }
