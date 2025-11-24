@@ -62,8 +62,6 @@ namespace Lysionium.Views
 
         protected virtual void Awake()
         {
-            eventSystem = LuiUtility.GetEventSystem(this);
-
 #if UNITY_EDITOR
             _onPlayString.AddListener(Log);
             _onPlayObject.AddListener(Log);
@@ -136,6 +134,11 @@ namespace Lysionium.Views
             //    return null;
             //}
 #endif
+        }
+
+        protected virtual void Start()
+        {
+            eventSystem = LuiUtility.GetEventSystem(this);
         }
 
         protected virtual void Update()

@@ -26,7 +26,6 @@ namespace Lysionium.Views
         {
             selectable = GetComponent<Selectable>();
             parentSelectable = transform.parent.GetComponentInParent<Selectable>();
-            eventSystem = LuiUtility.GetEventSystem(this);
         }
 
         protected virtual void Update()
@@ -39,6 +38,11 @@ namespace Lysionium.Views
 
             if (_isTrigger && !selectable.interactable && parentSelectable.IsInteractable())
             {
+                if (eventSystem == null)
+                {
+                    eventSystem = LuiUtility.GetEventSystem(this);
+                }
+
                 selectable.interactable = eventSystem.currentSelectedGameObject != parentSelectable;
             }
         }

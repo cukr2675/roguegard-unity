@@ -44,11 +44,17 @@ namespace Lysionium
             }
         }
 
+        /// <summary>
+        /// <see cref="EventSystem.current"/> を使用するため Awake() での呼び出しは非推奨
+        /// </summary>
         public static EventSystem GetEventSystem(GameObject obj)
         {
             return GetEventSystem(obj.transform);
         }
 
+        /// <summary>
+        /// <see cref="EventSystem.current"/> を使用するため Awake() での呼び出しは非推奨
+        /// </summary>
         public static EventSystem GetEventSystem(Component component)
         {
             return GetEventSystem(component.transform);
