@@ -8,7 +8,7 @@ namespace Lysionium
 
         TMP_InputField.ContentType ContentType { get; }
 
-        public delegate string InputFieldEventHandler<TMgr, TArg>(TMgr manager, TArg arg, string value);
+        delegate string InputFieldEventHandler<in TMgr, in TArg>(TMgr manager, TArg arg, string value);
 
         string GetValue(IListMenuManager manager, IListMenuArg arg);
 

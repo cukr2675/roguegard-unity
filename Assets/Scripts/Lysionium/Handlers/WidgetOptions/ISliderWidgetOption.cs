@@ -8,7 +8,7 @@ namespace Lysionium
 
         float MaxValue { get; }
 
-        delegate float SliderEventHandler<TMgr, TArg>(TMgr manager, TArg arg, float value);
+        delegate float SliderEventHandler<in TMgr, in TArg>(TMgr manager, TArg arg, float value);
 
         float GetValue(IListMenuManager manager, IListMenuArg arg);
 
