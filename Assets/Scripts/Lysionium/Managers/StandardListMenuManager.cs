@@ -96,7 +96,7 @@ namespace Lysionium
         /// <summary>
         /// メニューを指定の画面へ進める
         /// </summary>
-        public virtual void PushMenuScreen(MenuScreen<TMgr, TArg> menuScreen, TArg arg)
+        public virtual void PushMenuScreen(IMenuScreen<TMgr, TArg> menuScreen, TArg arg)
         {
             menuScreen.CloseScreenView((TMgr)this, false);
             BlockAll();
@@ -105,13 +105,13 @@ namespace Lysionium
 
         void IListMenuManager.PushMenuScreenFromExtension(object menuScreen, IListMenuArg arg)
         {
-            if (LuiAssert.Type<MenuScreen<TMgr, TArg>>(menuScreen, out var tMenuScreen) ||
+            if (LuiAssert.Type<IMenuScreen<TMgr, TArg>>(menuScreen, out var tMenuScreen) ||
                 LuiAssert.Type<TArg>(arg, out var tArg)) throw new System.ArgumentException();
 
             PushMenuScreen(tMenuScreen, tArg);
         }
 
-        public void PushInitialMenuScreen(MenuScreen<TMgr, TArg> menu, TArg arg, bool enableTouchMask = true)
+        public void PushInitialMenuScreen(IMenuScreen<TMgr, TArg> menu, TArg arg, bool enableTouchMask = true)
         {
             stack.Clear();
             PushMenuScreen(menu, arg);

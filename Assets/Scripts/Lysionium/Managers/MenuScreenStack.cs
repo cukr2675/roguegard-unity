@@ -15,7 +15,7 @@ namespace Lysionium
             Clear();
         }
 
-        public StackItem Push(MenuScreen<TMgr, TArg> menuScreen, TArg arg)
+        public StackItem Push(IMenuScreen<TMgr, TArg> menuScreen, TArg arg)
         {
             // 非増分画面を追加するとき、直近の連続した増分画面をすべて削除する
             if (!menuScreen.IsIncremental)
@@ -39,10 +39,10 @@ namespace Lysionium
 
         public class StackItem
         {
-            public MenuScreen<TMgr, TArg> MenuScreen { get; }
+            public IMenuScreen<TMgr, TArg> MenuScreen { get; }
             public TArg Arg { get; }
 
-            public StackItem(MenuScreen<TMgr, TArg> menuScreen, TArg arg)
+            public StackItem(IMenuScreen<TMgr, TArg> menuScreen, TArg arg)
             {
                 MenuScreen = menuScreen;
                 Arg = arg;
