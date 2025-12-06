@@ -11,7 +11,6 @@ namespace Lysionium
     {
         public System.Func<TMgr, IListHandlerSubview> FadeMaskSubviewSelector { get; set; }
             = manager => (manager as IDefaultSubviewTable)?.FadeMask;
-        [System.Obsolete] public string FadeMaskSubviewName { get; set; } = StandardSubviewTable.FadeMaskName;
 
         private object prevViewStateHolder;
         private ISubviewStateProvider fadeMaskSubviewStateProvider;

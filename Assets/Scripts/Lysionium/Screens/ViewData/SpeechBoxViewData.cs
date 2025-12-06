@@ -16,9 +16,6 @@ namespace Lysionium
             = manager => (manager as IDefaultSubviewTable)?.Choices;
         public System.Func<TMgr, IListHandlerSubview> CaptionBoxSubviewSelector { get; set; }
             = manager => (manager as IDefaultSubviewTable)?.CaptionBox;
-        [System.Obsolete] public string SpeechBoxSubviewName { get; set; } = StandardSubviewTable.SpeechBoxName;
-        [System.Obsolete] public string ChoicesSubviewName { get; set; } = StandardSubviewTable.ChoicesName;
-        [System.Obsolete] public string CaptionBoxSubviewName { get; set; } = StandardSubviewTable.CaptionBoxName;
         public List<StringReplacer> MessageReplacers { get; set; } = new List<StringReplacer>()
         {
             new("{v}[\r\n|\r|\n]?$", "<link=\"VerticalArrow\"></link>"),

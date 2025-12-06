@@ -16,9 +16,6 @@ namespace Lysionium
             = manager => (manager as IDefaultSubviewTable)?.CaptionBox;
         public System.Func<TMgr, IListHandlerSubview> BackAnchorSubviewSelector { get; set; }
             = manager => (manager as IDefaultSubviewTable)?.BackAnchor;
-        [System.Obsolete] public string WidgetsSubviewName { get; set; } = StandardSubviewTable.WidgetsName;
-        [System.Obsolete] public string CaptionBoxSubviewName { get; set; } = StandardSubviewTable.CaptionBoxName;
-        [System.Obsolete] public string BackAnchorSubviewName { get; set; } = StandardSubviewTable.BackAnchorName;
         public List<ISelectOption> BackAnchorList { get; set; } = new() { BackSelectOption.Instance };
 
         private object prevViewStateHolder;
