@@ -99,7 +99,7 @@ namespace Lysionium
             if (Title != null) { CaptionBoxSubviewSelector?.Invoke(manager)?.Hide(back); }
         }
 
-        public class Builder : BaseListBuilder<SpeechBoxViewData<TMgr, TArg>, Builder>
+        public class Builder : BaseListBuilder<SpeechBoxViewData<TMgr, TArg>, Builder>, ISelectOptionListBuilder<TMgr, TArg, Builder>
         {
             public Builder(SpeechBoxViewData<TMgr, TArg> parent, TMgr manager, TArg arg)
                 : base(parent, manager, arg)
@@ -114,20 +114,9 @@ namespace Lysionium
                 return this;
             }
 
-            public Builder Option(string name, ClickItemHandler<TMgr, TArg> onClick)
+            public Builder Option(ISelectOption option)
             {
-                AssertNotBuilt();
-
-                Tail(SelectOption.Create(name, onClick));
-                return this;
-            }
-
-            public Builder Back()
-            {
-                AssertNotBuilt();
-
-                Tail(BackSelectOption.Instance);
-                return this;
+                return Tail(option);
             }
 
             protected override void Unload()

@@ -62,21 +62,16 @@ namespace Lysionium
             BackAnchorSubviewSelector?.Invoke(manager)?.Hide(back);
         }
 
-        public class Builder : BaseListBuilder<MainMenuViewData<TMgr, TArg>, Builder>
+        public class Builder : BaseListBuilder<MainMenuViewData<TMgr, TArg>, Builder>, ISelectOptionListBuilder<TMgr, TArg, Builder>
         {
             public Builder(MainMenuViewData<TMgr, TArg> parent, TMgr manager, TArg arg)
                 : base(parent, manager, arg)
             {
             }
 
-            public Builder Option(string name, ClickItemHandler<TMgr, TArg> onClick, string style = null)
+            public Builder Option(ISelectOption option)
             {
-                return Tail(SelectOption.Create(name, onClick, style));
-            }
-
-            public Builder Back()
-            {
-                return Tail(BackSelectOption.Instance);
+                return Tail(option);
             }
         }
     }

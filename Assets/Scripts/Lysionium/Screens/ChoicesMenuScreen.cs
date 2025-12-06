@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace Lysionium
 {
-    public class ChoicesMenuScreen<TMgr, TArg> : MenuScreen<TMgr, TArg>
+    public class ChoicesMenuScreen<TMgr, TArg> : MenuScreen<TMgr, TArg>, ISelectOptionListBuilder<TMgr, TArg, ChoicesMenuScreen<TMgr, TArg>>
         where TMgr : IListMenuManager
         where TArg : IListMenuArg
     {
@@ -42,22 +42,9 @@ namespace Lysionium
             if (choicesSubviewSelector != null) { view.ChoicesSubviewSelector = choicesSubviewSelector; }
         }
 
-        public ChoicesMenuScreen<TMgr, TArg> Option(string name, ClickItemHandler<TMgr, TArg> onClick, string style = null)
+        public ChoicesMenuScreen<TMgr, TArg> Option(ISelectOption option)
         {
-            selectOptions.Add(SelectOption.Create(name, onClick, style));
-            return this;
-        }
-
-        public ChoicesMenuScreen<TMgr, TArg> Back(string name = null)
-        {
-            if (name == null)
-            {
-                selectOptions.Add(BackSelectOption.Instance);
-            }
-            else
-            {
-                selectOptions.Add(BackSelectOption.Create<TMgr, TArg>(name));
-            }
+            selectOptions.Add(option);
             return this;
         }
 
