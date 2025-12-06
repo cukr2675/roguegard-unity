@@ -61,8 +61,8 @@ namespace RoguegardUnity
         {
             private readonly MainMenuViewData<MMgr, MArg> view = new()
             {
-                PrimaryCommandSubviewName = StandardSubviewTable.LongMessageName,
-                BackAnchorSubviewName = StandardSubviewTable.BackAnchorName,
+                PrimaryCommandSubviewSelector = m => m.LongMessage,
+                BackAnchorSubviewSelector = m => m.BackAnchor,
             };
 
             public override void OpenScreen(in MMgr manager, in MArg arg)
@@ -158,7 +158,7 @@ namespace RoguegardUnity
         {
             private readonly DialogViewData<MMgr, MArg> view = new()
             {
-                DialogSubviewName = StandardSubviewTable.WidgetsName,
+                DialogSubviewSelector = m => m.Widgets,
             };
 
             public override void OpenScreen(in MMgr manager, in MArg arg)

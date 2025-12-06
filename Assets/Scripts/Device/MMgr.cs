@@ -5,6 +5,9 @@ namespace Roguegard.Device
 {
     public abstract class MMgr : StandardListMenuManager<MMgr, MArg>
     {
+        public abstract IListHandlerSubview CharacterCreation { get; }
+        public abstract IListHandlerSubview TitleMenu { get; }
+
         public abstract void PushMenuScreen(
             MenuScreen<MMgr, MArg> menuScreen,
             RogueObj self = null,

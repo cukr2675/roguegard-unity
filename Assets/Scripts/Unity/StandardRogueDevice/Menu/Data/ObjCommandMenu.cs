@@ -99,7 +99,7 @@ namespace RoguegardUnity
         {
             private readonly DialogViewData<MMgr, MArg> view = new()
             {
-                DialogSubviewName = StandardSubviewTable.WidgetsName,
+                DialogSubviewSelector = m => m.Widgets,
             };
 
             public override void OpenScreen(in MMgr manager, in MArg arg)
@@ -121,7 +121,7 @@ namespace RoguegardUnity
 
             private readonly DialogViewData<MMgr, MArg> view = new()
             {
-                BackAnchorSubviewName = null,
+                BackAnchorSubviewSelector = null,
             };
 
             public override bool IsIncremental => true;

@@ -9,7 +9,7 @@ namespace RoguegardUnity
     {
         private readonly MainMenuViewData<MMgr, MArg> view = new()
         {
-            PrimaryCommandSubviewName = StandardSubviewTable.SecondaryCommandName,
+            PrimaryCommandSubviewSelector = m => m.SecondaryCommand,
         };
 
         public override bool IsIncremental => true;

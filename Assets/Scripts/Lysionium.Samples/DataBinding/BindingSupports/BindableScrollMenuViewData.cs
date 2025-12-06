@@ -8,9 +8,15 @@ namespace Lysionium.Samples
         where TMgr : IListMenuManager
         where TArg : IListMenuArg
     {
-        public string ScrollSubviewName { get; set; } = StandardSubviewTable.ScrollName;
-        public string CaptionBoxSubviewName { get; set; } = StandardSubviewTable.CaptionBoxName;
-        public string BackAnchorSubviewName { get; set; } = StandardSubviewTable.BackAnchorName;
+        public System.Func<TMgr, IListHandlerSubview> ScrollSubviewSelector { get; set; }
+            = manager => (manager as IDefaultSubviewTable)?.Scroll;
+        public System.Func<TMgr, IListHandlerSubview> CaptionBoxSubviewSelector { get; set; }
+            = manager => (manager as IDefaultSubviewTable)?.CaptionBox;
+        public System.Func<TMgr, IListHandlerSubview> BackAnchorSubviewSelector { get; set; }
+            = manager => (manager as IDefaultSubviewTable)?.BackAnchor;
+        [System.Obsolete] public string ScrollSubviewName { get; set; } = StandardSubviewTable.ScrollName;
+        [System.Obsolete] public string CaptionBoxSubviewName { get; set; } = StandardSubviewTable.CaptionBoxName;
+        [System.Obsolete] public string BackAnchorSubviewName { get; set; } = StandardSubviewTable.BackAnchorName;
         public List<ISelectOption> BackAnchorList { get; set; } = new() { BackSelectOption.Instance };
 
         /// <summary>
@@ -75,23 +81,17 @@ namespace Lysionium.Samples
 
         protected override void ShowSubviews(TMgr manager, TArg arg)
         {
-            manager
-                .GetSubview(ScrollSubviewName)
-                .Show(List, scrollSubviewHandler, manager, arg, ref scrollSubviewStateProvider, onHide: onHide);
+            ScrollSubviewSelector?.Invoke(manager)?.Show(
+                List, scrollSubviewHandler, manager, arg, ref scrollSubviewStateProvider, onHide: onHide);
 
             if (Title != null)
             {
-                manager
-                    .GetSubview(CaptionBoxSubviewName)
-                    .Show(TitleSingle, ToStringViewItemHandler.Instance, manager, arg, ref captionBoxSubviewStateProvider);
+                CaptionBoxSubviewSelector?.Invoke(manager)?.Show(
+                    TitleSingle, ToStringViewItemHandler.Instance, manager, arg, ref captionBoxSubviewStateProvider);
             }
 
-            if (BackAnchorSubviewName != null)
-            {
-                manager
-                    .GetSubview(BackAnchorSubviewName)
-                    .Show(BackAnchorList, SelectOptionViewItemHandler.Instance, manager, arg, ref backAnchorSubviewStateProvider);
-            }
+            BackAnchorSubviewSelector?.Invoke(manager)?.Show(
+                BackAnchorList, SelectOptionViewItemHandler.Instance, manager, arg, ref backAnchorSubviewStateProvider);
 
             // 上記の Show によって実行される onHide の後に onShow を呼び出す
             onShow?.Invoke(manager, arg);
@@ -99,9 +99,9 @@ namespace Lysionium.Samples
 
         public virtual void Hide(TMgr manager, bool back)
         {
-            manager.GetSubview(ScrollSubviewName).Hide(back);
-            if (Title != null) { manager.GetSubview(CaptionBoxSubviewName).Hide(back); }
-            if (BackAnchorSubviewName != null) { manager.GetSubview(BackAnchorSubviewName).Hide(back); }
+            ScrollSubviewSelector?.Invoke(manager)?.Hide(back);
+            if (Title != null) { CaptionBoxSubviewSelector?.Invoke(manager)?.Hide(back); }
+            BackAnchorSubviewSelector?.Invoke(manager)?.Hide(back);
         }
 
         public class Builder : BaseListBuilder<BindableScrollMenuViewData<TItem, TMgr, TArg>, Builder>, IButtonViewItemHandlerBuilder<TItem, TMgr, TArg, Builder>
@@ -122,9 +122,8 @@ namespace Lysionium.Samples
                     parent.SetOriginalList(list, parent.manager, parent.arg);
 
                     // 再バインド対象の Subview のみ更新する（ShowSubviews を呼び出すとダイアログなどで上書きされた他の Subview も更新してしまう）
-                    parent.manager
-                    .GetSubview(parent.ScrollSubviewName)
-                    .SetParameters(parent.List, parent.scrollSubviewHandler, parent.manager, parent.arg, ref parent.scrollSubviewStateProvider);
+                    parent.ScrollSubviewSelector?.Invoke(Manager)?.SetParameters(
+                        parent.List, parent.scrollSubviewHandler, parent.manager, parent.arg, ref parent.scrollSubviewStateProvider);
                 });
                 return this;
             }

@@ -7,7 +7,7 @@ namespace Lysionium.Views
     /// モデルのリストをコントローラで制御する UI のクラス。
     /// </summary>
     [RequireComponent(typeof(CanvasGroup))]
-    public abstract class Subview : SubviewBase, ISubview
+    public abstract class Subview : SubviewBase, ISubview, IListHandlerSubview
     {
         private CanvasGroup canvasGroup;
 

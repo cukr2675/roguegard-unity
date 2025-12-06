@@ -5,7 +5,7 @@ namespace Lysionium
     public static class SubviewExtension
     {
         public static void Show(
-            this ISubview subview, IReadOnlyList<object> list, IViewItemHandler handler,
+            this IListHandlerSubview subview, IReadOnlyList<object> list, IViewItemHandler handler,
             IListMenuManager manager, IListMenuArg arg, ref ISubviewStateProvider stateProvider,
             ListMenuEventHandler onEndAnimation = null, ListMenuEventHandler onHide = null)
         {

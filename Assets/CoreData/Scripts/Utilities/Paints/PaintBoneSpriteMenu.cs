@@ -206,9 +206,7 @@ namespace Roguegard
                 paint.Show();
 
                 ISubviewStateProvider stateProvider = null;
-                manager
-                    .GetSubview(StandardSubviewTable.BackAnchorName)
-                    .Show(back, SelectOptionViewItemHandler.Instance, manager, arg, ref stateProvider);
+                manager.BackAnchor.Show(back, SelectOptionViewItemHandler.Instance, manager, arg, ref stateProvider);
             }
 
             private void Back(MMgr manager, MArg arg)

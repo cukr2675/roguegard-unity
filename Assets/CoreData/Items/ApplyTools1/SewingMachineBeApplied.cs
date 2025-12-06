@@ -66,7 +66,7 @@ namespace Roguegard
         {
             private readonly ScrollMenuViewData<IPaintBoneSprite, MMgr, MArg> view = new()
             {
-                ScrollSubviewName = StandardSubviewTable.WidgetsName,
+                ScrollSubviewSelector = m => m.Widgets,
                 BackAnchorList = new()
                 {
                     SelectOption.Create<MMgr, MArg>(":Back", ChoicesMenuScreen.SaveBackDialog(Save)),

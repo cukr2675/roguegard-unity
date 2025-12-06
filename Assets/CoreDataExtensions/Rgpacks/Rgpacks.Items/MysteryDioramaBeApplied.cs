@@ -31,7 +31,7 @@ namespace Roguegard.Rgpacks
 
             private readonly ScrollMenuViewData<RogueObj, MMgr, MArg> view = new()
             {
-                ScrollSubviewName = StandardSubviewTable.WidgetsName,
+                ScrollSubviewSelector = m => m.Widgets,
             };
 
             public override void OpenScreen(in MMgr manager, in MArg arg)
@@ -79,7 +79,7 @@ namespace Roguegard.Rgpacks
 
             private readonly DialogViewData<MMgr, MArg> view = new()
             {
-                DialogSubviewName = StandardSubviewTable.WidgetsName,
+                DialogSubviewSelector = m => m.Widgets,
             };
 
             public override void OpenScreen(in MMgr manager, in MArg arg)

@@ -13,7 +13,7 @@ namespace Roguegard.Device
 
         private readonly DialogViewData<MMgr, MArg> view = new()
         {
-            BackAnchorSubviewName = null,
+            BackAnchorSubviewSelector = null,
         };
 
         public LoadingListMenuScreen(

@@ -293,7 +293,7 @@ namespace RoguegardUnity
         {
             private readonly DialogViewData<MMgr, MArg> view = new()
             {
-                BackAnchorSubviewName = null
+                BackAnchorSubviewSelector = null
             };
 
             public override void OpenScreen(in MMgr manager, in MArg arg)

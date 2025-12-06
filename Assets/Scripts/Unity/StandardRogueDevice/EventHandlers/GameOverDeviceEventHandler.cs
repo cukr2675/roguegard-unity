@@ -60,8 +60,8 @@ namespace RoguegardUnity
         {
             private readonly MainMenuViewData<MMgr, MArg> view = new()
             {
-                PrimaryCommandSubviewName = StandardSubviewTable.LongMessageName,
-                BackAnchorSubviewName = StandardSubviewTable.ForwardAnchorName,
+                PrimaryCommandSubviewSelector = m => m.LongMessage,
+                BackAnchorSubviewSelector = m => m.ForwardAnchor,
                 BackAnchorList = new List<ISelectOption>() { SelectOption.Create<MMgr, MArg>("OK", new NextMenu()) },
             };
 

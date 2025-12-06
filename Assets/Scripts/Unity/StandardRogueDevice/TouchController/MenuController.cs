@@ -18,6 +18,7 @@ namespace RoguegardUnity
         [SerializeField] private SummarySubview _summary = null;
         [SerializeField] private TextEditorSubview _textEditor = null;
         [SerializeField] private CharacterCreationSubview _characterCreation = null;
+        public override IListHandlerSubview CharacterCreation => _characterCreation;
         [SerializeField] private PaintSubview _paint = null;
         [SerializeField] private DopesheetSubview _dopesheet = null;
 
@@ -26,6 +27,7 @@ namespace RoguegardUnity
         [Header("Title Only")]
         [SerializeField] private GridSubview _titleMenu = null;
         public static string TitleMenuName => "TitleMenu";
+        public override IListHandlerSubview TitleMenu => _titleMenu;
 
         private MainMenu mainMenu;
         private LongDownMenu longDownMenu;

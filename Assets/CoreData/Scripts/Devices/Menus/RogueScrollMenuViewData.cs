@@ -7,9 +7,15 @@ namespace Roguegard.Device
     public class RogueScrollMenuViewData<T> : ListViewData<T, MMgr, MArg>
         where T : class
     {
-        public string ScrollSubviewName { get; set; } = StandardSubviewTable.ScrollName;
-        public string CaptionBoxSubviewName { get; set; } = StandardSubviewTable.CaptionBoxName;
-        public string BackAnchorSubviewName { get; set; } = StandardSubviewTable.BackAnchorName;
+        public System.Func<MMgr, IListHandlerSubview> ScrollSubviewSelector { get; set; }
+            = manager => (manager as IDefaultSubviewTable)?.Scroll;
+        public System.Func<MMgr, IListHandlerSubview> CaptionBoxSubviewSelector { get; set; }
+            = manager => (manager as IDefaultSubviewTable)?.CaptionBox;
+        public System.Func<MMgr, IListHandlerSubview> BackAnchorSubviewSelector { get; set; }
+            = manager => (manager as IDefaultSubviewTable)?.BackAnchor;
+        [System.Obsolete] public string ScrollSubviewName { get; set; } = StandardSubviewTable.ScrollName;
+        [System.Obsolete] public string CaptionBoxSubviewName { get; set; } = StandardSubviewTable.CaptionBoxName;
+        [System.Obsolete] public string BackAnchorSubviewName { get; set; } = StandardSubviewTable.BackAnchorName;
         public List<ISelectOption> BackAnchorList { get; set; } = new() { BackSelectOption.Instance };
 
         private object prevViewStateHolder;
@@ -54,30 +60,24 @@ namespace Roguegard.Device
 
         protected override void ShowSubviews(MMgr manager, MArg arg)
         {
-            manager
-                .GetSubview(ScrollSubviewName)
-                .Show(List, scrollSubviewHandler, manager, arg, ref scrollSubviewStateProvider);
+            ScrollSubviewSelector?.Invoke(manager)?.Show(
+                List, scrollSubviewHandler, manager, arg, ref scrollSubviewStateProvider);
 
             if (Title != null)
             {
-                manager
-                    .GetSubview(CaptionBoxSubviewName)
-                    .Show(TitleSingle, ToStringViewItemHandler.Instance, manager, arg, ref captionBoxSubviewStateProvider);
+                CaptionBoxSubviewSelector?.Invoke(manager)?.Show(
+                    TitleSingle, ToStringViewItemHandler.Instance, manager, arg, ref captionBoxSubviewStateProvider);
             }
 
-            if (BackAnchorSubviewName != null)
-            {
-                manager
-                    .GetSubview(BackAnchorSubviewName)
-                    .Show(BackAnchorList, SelectOptionViewItemHandler.Instance, manager, arg, ref backAnchorSubviewStateProvider);
-            }
+            BackAnchorSubviewSelector?.Invoke(manager)?.Show(
+                BackAnchorList, SelectOptionViewItemHandler.Instance, manager, arg, ref backAnchorSubviewStateProvider);
         }
 
         public void Hide(MMgr manager, bool back)
         {
-            manager.GetSubview(ScrollSubviewName).Hide(back);
-            if (Title != null) { manager.GetSubview(CaptionBoxSubviewName).Hide(back); }
-            if (BackAnchorSubviewName != null) { manager.GetSubview(BackAnchorSubviewName).Hide(back); }
+            ScrollSubviewSelector?.Invoke(manager)?.Hide(back);
+            if (Title != null) { CaptionBoxSubviewSelector?.Invoke(manager)?.Hide(back); }
+            BackAnchorSubviewSelector?.Invoke(manager)?.Hide(back);
         }
 
         public class Builder : BaseListBuilder<RogueScrollMenuViewData<T>, Builder>

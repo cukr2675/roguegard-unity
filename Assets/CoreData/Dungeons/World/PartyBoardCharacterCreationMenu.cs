@@ -9,7 +9,7 @@ namespace Roguegard
     {
         private readonly ScrollMenuViewData<object, MMgr, MArg> view = new()
         {
-            ScrollSubviewName = RoguegardSubviews.CharacterCreation,
+            ScrollSubviewSelector = m => m.CharacterCreation,
             BackAnchorList = new()
             {
                 // プリセット読み込みボタン（OpenScreen で設定）

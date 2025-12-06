@@ -91,7 +91,7 @@ namespace Lysionium.Samples
             private readonly BindingList<BindingValue> list;
             private readonly BindableScrollMenuViewData<BindingValue, ExMgr, ExArg> view = new()
             {
-                BackAnchorSubviewName = null,
+                BackAnchorSubviewSelector = null,
             };
 
             public MainMenu(BindingList<BindingValue> list)
@@ -135,7 +135,7 @@ namespace Lysionium.Samples
         {
             private readonly DialogViewData<ExMgr, ExArg> view = new()
             {
-                BackAnchorSubviewName = null,
+                BackAnchorSubviewSelector = null,
             };
 
             private readonly System.Action<string> onOk;

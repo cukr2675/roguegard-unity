@@ -11,9 +11,14 @@ namespace Lysionium
         where TMgr : IListMenuManager
         where TArg : IListMenuArg
     {
-        public string SecodaryCommandSubviewName { get; set; } = StandardSubviewTable.SecondaryCommandName;
-        public string CaptionBoxSubviewName { get; set; } = StandardSubviewTable.CaptionBoxName;
-        public string BackAnchorSubviewName { get; set; } = null;
+        public System.Func<TMgr, IListHandlerSubview> SecondaryCommandSubviewSelector { get; set; }
+            = manager => (manager as IDefaultSubviewTable)?.SecondaryCommand;
+        public System.Func<TMgr, IListHandlerSubview> CaptionBoxSubviewSelector { get; set; }
+            = manager => (manager as IDefaultSubviewTable)?.CaptionBox;
+        public System.Func<TMgr, IListHandlerSubview> BackAnchorSubviewSelector { get; set; }
+        [System.Obsolete] public string SecodaryCommandSubviewName { get; set; } = StandardSubviewTable.SecondaryCommandName;
+        [System.Obsolete] public string CaptionBoxSubviewName { get; set; } = StandardSubviewTable.CaptionBoxName;
+        [System.Obsolete] public string BackAnchorSubviewName { get; set; } = null;
         public List<ISelectOption> BackAnchorList { get; set; } = new() { BackSelectOption.Instance };
 
         /// <summary>
@@ -22,16 +27,16 @@ namespace Lysionium
         /// </summary>
         public bool EnableSelectOptionProxy
         {
-            get => secodaryCommandSubviewHandler.EnableSelectOptionProxy;
-            set => secodaryCommandSubviewHandler.EnableSelectOptionProxy = value;
+            get => secondaryCommandSubviewHandler.EnableSelectOptionProxy;
+            set => secondaryCommandSubviewHandler.EnableSelectOptionProxy = value;
         }
 
         private object prevViewStateHolder;
-        private ISubviewStateProvider secodaryCommandSubviewStateProvider;
+        private ISubviewStateProvider secondaryCommandSubviewStateProvider;
         private ISubviewStateProvider captionBoxSubviewStateProvider;
         private ISubviewStateProvider backAnchorSubviewStateProvider;
 
-        private readonly ButtonViewItemHandler<TItem, TMgr, TArg> secodaryCommandSubviewHandler = new();
+        private readonly ButtonViewItemHandler<TItem, TMgr, TArg> secondaryCommandSubviewHandler = new();
 
         public Builder Show(TItem[] list, TMgr manager, TArg arg, object viewStateHolder = null)
         {
@@ -63,37 +68,31 @@ namespace Lysionium
 
         protected virtual void ResetSubviewStateProviders()
         {
-            secodaryCommandSubviewStateProvider?.Reset();
+            secondaryCommandSubviewStateProvider?.Reset();
             captionBoxSubviewStateProvider?.Reset();
             backAnchorSubviewStateProvider?.Reset();
         }
 
         protected override void ShowSubviews(TMgr manager, TArg arg)
         {
-            manager
-                .GetSubview(SecodaryCommandSubviewName)
-                .Show(List, secodaryCommandSubviewHandler, manager, arg, ref secodaryCommandSubviewStateProvider);
+            SecondaryCommandSubviewSelector?.Invoke(manager)?.Show(
+                List, secondaryCommandSubviewHandler, manager, arg, ref secondaryCommandSubviewStateProvider);
 
             if (Title != null)
             {
-                manager
-                    .GetSubview(CaptionBoxSubviewName)
-                    .Show(TitleSingle, ToStringViewItemHandler.Instance, manager, arg, ref captionBoxSubviewStateProvider);
+                CaptionBoxSubviewSelector?.Invoke(manager)?.Show(
+                    TitleSingle, ToStringViewItemHandler.Instance, manager, arg, ref captionBoxSubviewStateProvider);
             }
 
-            if (BackAnchorSubviewName != null)
-            {
-                manager
-                    .GetSubview(BackAnchorSubviewName)
-                    .Show(BackAnchorList, SelectOptionViewItemHandler.Instance, manager, arg, ref backAnchorSubviewStateProvider);
-            }
+            BackAnchorSubviewSelector?.Invoke(manager)?.Show(
+                BackAnchorList, SelectOptionViewItemHandler.Instance, manager, arg, ref backAnchorSubviewStateProvider);
         }
 
         public virtual void Hide(TMgr manager, bool back)
         {
-            manager.GetSubview(SecodaryCommandSubviewName).Hide(back);
-            if (Title != null) { manager.GetSubview(CaptionBoxSubviewName).Hide(back); }
-            if (BackAnchorSubviewName != null) { manager.GetSubview(BackAnchorSubviewName).Hide(back); }
+            SecondaryCommandSubviewSelector?.Invoke(manager)?.Hide(back);
+            if (Title != null) { CaptionBoxSubviewSelector?.Invoke(manager)?.Hide(back); }
+            BackAnchorSubviewSelector?.Invoke(manager)?.Hide(back);
         }
 
         public class Builder : BaseListBuilder<CommandListMenuViewData<TItem, TMgr, TArg>, Builder>, IButtonViewItemHandlerBuilder<TItem, TMgr, TArg, Builder>
@@ -107,9 +106,9 @@ namespace Lysionium
             {
                 AssertNotBuilt();
 
-                if (Parent.secodaryCommandSubviewHandler.GetName != null) { Debug.LogWarning($"{nameof(NameFrom)} が多重購読されました。"); }
+                if (Parent.secondaryCommandSubviewHandler.GetName != null) { Debug.LogWarning($"{nameof(NameFrom)} が多重購読されました。"); }
 
-                Parent.secodaryCommandSubviewHandler.GetName += selector;
+                Parent.secondaryCommandSubviewHandler.GetName += selector;
                 return this;
             }
 
@@ -117,9 +116,9 @@ namespace Lysionium
             {
                 AssertNotBuilt();
 
-                if (Parent.secodaryCommandSubviewHandler.GetStyle != null) { Debug.LogWarning($"{nameof(StyleFrom)} が多重購読されました。"); }
+                if (Parent.secondaryCommandSubviewHandler.GetStyle != null) { Debug.LogWarning($"{nameof(StyleFrom)} が多重購読されました。"); }
 
-                Parent.secodaryCommandSubviewHandler.GetStyle += selector;
+                Parent.secondaryCommandSubviewHandler.GetStyle += selector;
                 return this;
             }
 
@@ -127,16 +126,16 @@ namespace Lysionium
             {
                 AssertNotBuilt();
 
-                Parent.secodaryCommandSubviewHandler.Click += handler;
+                Parent.secondaryCommandSubviewHandler.Click += handler;
                 return this;
             }
 
             protected override void Unload()
             {
                 base.Unload();
-                Parent.secodaryCommandSubviewHandler.GetName = null;
-                Parent.secodaryCommandSubviewHandler.GetStyle = null;
-                Parent.secodaryCommandSubviewHandler.Click = null;
+                Parent.secondaryCommandSubviewHandler.GetName = null;
+                Parent.secondaryCommandSubviewHandler.GetStyle = null;
+                Parent.secondaryCommandSubviewHandler.Click = null;
             }
         }
     }

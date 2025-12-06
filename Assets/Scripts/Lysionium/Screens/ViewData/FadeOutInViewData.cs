@@ -9,7 +9,9 @@ namespace Lysionium
         where TMgr : IListMenuManager
         where TArg : IListMenuArg
     {
-        public string FadeMaskSubviewName { get; set; } = StandardSubviewTable.FadeMaskName;
+        public System.Func<TMgr, IListHandlerSubview> FadeMaskSubviewSelector { get; set; }
+            = manager => (manager as IDefaultSubviewTable)?.FadeMask;
+        [System.Obsolete] public string FadeMaskSubviewName { get; set; } = StandardSubviewTable.FadeMaskName;
 
         private object prevViewStateHolder;
         private ISubviewStateProvider fadeMaskSubviewStateProvider;
@@ -56,14 +58,13 @@ namespace Lysionium
 
         protected override void ShowSubviews(TMgr manager, TArg arg)
         {
-            manager
-                .GetSubview(FadeMaskSubviewName)
-                .Show(widgetOptions, ToStringViewItemHandler.Instance, manager, arg, ref fadeMaskSubviewStateProvider, onFadeOutAnimation);
+            FadeMaskSubviewSelector?.Invoke(manager)?.Show(
+                widgetOptions, ToStringViewItemHandler.Instance, manager, arg, ref fadeMaskSubviewStateProvider, onFadeOutAnimation);
         }
 
         public void FadeIn(TMgr manager, bool back)
         {
-            manager.GetSubview(FadeMaskSubviewName).Hide(back, onFadeInAnimation);
+            FadeMaskSubviewSelector?.Invoke(manager)?.Hide(back, onFadeInAnimation);
         }
 
         public class Builder : BaseBuilder<FadeOutInViewData<TMgr, TArg>, Builder>

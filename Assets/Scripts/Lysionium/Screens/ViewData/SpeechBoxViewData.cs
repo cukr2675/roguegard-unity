@@ -10,9 +10,15 @@ namespace Lysionium
         where TMgr : IListMenuManager
         where TArg : IListMenuArg
     {
-        public string SpeechBoxSubviewName { get; set; } = StandardSubviewTable.SpeechBoxName;
-        public string ChoicesSubviewName { get; set; } = StandardSubviewTable.ChoicesName;
-        public string CaptionBoxSubviewName { get; set; } = StandardSubviewTable.CaptionBoxName;
+        public System.Func<TMgr, IMessageBoxSubview> SpeechBoxSubviewSelector { get; set; }
+            = manager => (manager as IDefaultSubviewTable)?.SpeechBox;
+        public System.Func<TMgr, IListHandlerSubview> ChoicesSubviewSelector { get; set; }
+            = manager => (manager as IDefaultSubviewTable)?.Choices;
+        public System.Func<TMgr, IListHandlerSubview> CaptionBoxSubviewSelector { get; set; }
+            = manager => (manager as IDefaultSubviewTable)?.CaptionBox;
+        [System.Obsolete] public string SpeechBoxSubviewName { get; set; } = StandardSubviewTable.SpeechBoxName;
+        [System.Obsolete] public string ChoicesSubviewName { get; set; } = StandardSubviewTable.ChoicesName;
+        [System.Obsolete] public string CaptionBoxSubviewName { get; set; } = StandardSubviewTable.CaptionBoxName;
         public List<StringReplacer> MessageReplacers { get; set; } = new List<StringReplacer>()
         {
             new("{v}[\r\n|\r|\n]?$", "<link=\"VerticalArrow\"></link>"),
@@ -21,7 +27,7 @@ namespace Lysionium
         };
 
         private object prevViewStateHolder;
-        private ISubviewStateProvider messageBoxSubviewStateProvider;
+        private ISubviewStateProvider speechBoxSubviewStateProvider;
         private ISubviewStateProvider choicesSubviewStateProvider;
         private ISubviewStateProvider captionBoxSubviewStateProvider;
         private event ClickItemHandler<TMgr, TArg> OnCompleted;
@@ -36,7 +42,7 @@ namespace Lysionium
             // 必要に応じてスクロール位置をリセット
             if (viewStateHolder != prevViewStateHolder)
             {
-                messageBoxSubviewStateProvider?.Reset();
+                speechBoxSubviewStateProvider?.Reset();
                 choicesSubviewStateProvider?.Reset();
                 captionBoxSubviewStateProvider?.Reset();
             }
@@ -57,41 +63,43 @@ namespace Lysionium
 
         protected override void ShowSubviews(TMgr manager, TArg arg)
         {
-            if (LuiAssert.Type<IMessageBoxSubview>(manager.GetSubview(SpeechBoxSubviewName), out var speechBoxSubview)) return;
-
-            speechBoxSubview.Show(message, ToStringViewItemHandler.Instance, manager, arg, ref messageBoxSubviewStateProvider);
-            speechBoxSubview.DoScheduledAfterCompletion((manager, arg) =>
+            var speechBoxSubview = SpeechBoxSubviewSelector?.Invoke(manager);
+            if (speechBoxSubview != null)
             {
-                if (LuiAssert.Type<TMgr>(manager, out var tMgr, manager) ||
-                    LuiAssert.Type<TArg>(arg, out var tArg, manager)) return;
-
-                OnCompleted?.Invoke(tMgr, tArg);
-            });
-
-            if (List.Count >= 1)
-            {
-                manager
-                    .GetSubview(ChoicesSubviewName)
-                    .SetParameters(List, SelectOptionViewItemHandler.Instance, manager, arg, ref choicesSubviewStateProvider);
+                speechBoxSubview.Show(message, ToStringViewItemHandler.Instance, manager, arg, ref speechBoxSubviewStateProvider);
                 speechBoxSubview.DoScheduledAfterCompletion((manager, arg) =>
                 {
-                    manager.GetSubview(ChoicesSubviewName).Show();
+                    if (LuiAssert.Type<TMgr>(manager, out var tMgr, manager) ||
+                        LuiAssert.Type<TArg>(arg, out var tArg, manager)) return;
+
+                    OnCompleted?.Invoke(tMgr, tArg);
                 });
+
+                if (List.Count >= 1)
+                {
+                    ChoicesSubviewSelector?.Invoke(manager)?.SetParameters(
+                        List, SelectOptionViewItemHandler.Instance, manager, arg, ref choicesSubviewStateProvider);
+                    speechBoxSubview.DoScheduledAfterCompletion((manager, arg) =>
+                    {
+                        if (LuiAssert.Type<TMgr>(manager, out var tMgr)) return;
+
+                        ChoicesSubviewSelector?.Invoke(tMgr)?.Show();
+                    });
+                }
             }
 
             if (Title != null)
             {
-                manager
-                    .GetSubview(CaptionBoxSubviewName)
-                    .Show(TitleSingle, ToStringViewItemHandler.Instance, manager, arg, ref captionBoxSubviewStateProvider);
+                CaptionBoxSubviewSelector?.Invoke(manager)?.Show(
+                    TitleSingle, ToStringViewItemHandler.Instance, manager, arg, ref captionBoxSubviewStateProvider);
             }
         }
 
         public void Hide(TMgr manager, bool back)
         {
-            manager.GetSubview(SpeechBoxSubviewName).Hide(back);
-            manager.GetSubview(ChoicesSubviewName).Hide(back);
-            if (Title != null) { manager.GetSubview(CaptionBoxSubviewName).Hide(back); }
+            SpeechBoxSubviewSelector?.Invoke(manager)?.Hide(back);
+            ChoicesSubviewSelector?.Invoke(manager)?.Hide(back);
+            if (Title != null) { CaptionBoxSubviewSelector?.Invoke(manager)?.Hide(back); }
         }
 
         public class Builder : BaseListBuilder<SpeechBoxViewData<TMgr, TArg>, Builder>

@@ -10,7 +10,7 @@ namespace RoguegardUnity
 
         private readonly MainMenuViewData<MMgr, MArg> view = new()
         {
-            PrimaryCommandSubviewName = StandardSubviewTable.SecondaryCommandName,
+            PrimaryCommandSubviewSelector = m => m.SecondaryCommand,
         };
 
         private readonly DeviceCommand deviceCommand = new();

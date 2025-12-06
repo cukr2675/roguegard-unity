@@ -87,7 +87,7 @@ namespace Roguegard
                         }
 
                         selectOptions[0].Click(manager, arg);
-                        manager.GetSubview(StandardSubviewTable.OverlayName).Show(
+                        manager.Overlay.Show(
                             new[] {
                                 $"<align=\"center\"><size=+32>{arg.Self.Location.GetName()} {levelText}"
                             }, ToStringViewItemHandler.Instance, manager, arg, ref stateProvider);

@@ -9,7 +9,7 @@ namespace Lysionium
     }
 
     [RequireComponent(typeof(StandardSubviewTable))]
-    public abstract class StandardListMenuManager<TMgr, TArg> : MonoBehaviour, IListMenuManager
+    public abstract class StandardListMenuManager<TMgr, TArg> : MonoBehaviour, IListMenuManager, IDefaultSubviewTable
         where TMgr : StandardListMenuManager<TMgr, TArg>
         where TArg : IListMenuArg
     {
@@ -36,6 +36,24 @@ namespace Lysionium
         /// この値が true の間は予約されたメニューを表示しない。遷移アニメーション用
         /// </summary>
         protected virtual bool HasManagerLock => StandardSubviewTable.HasManagerLock;
+
+        public IListHandlerSubview Scroll => StandardSubviewTable.Scroll;
+        public IListHandlerSubview Widgets => StandardSubviewTable.Widgets;
+        public IMessageBoxSubview LongMessage => StandardSubviewTable.LongMessage;
+        public IListHandlerSubview BackAnchor => StandardSubviewTable.BackAnchor;
+        public IListHandlerSubview ForwardAnchor => StandardSubviewTable.ForwardAnchor;
+        public IListHandlerSubview PrimaryCommand => StandardSubviewTable.PrimaryCommand;
+        public IListHandlerSubview CaptionBox => StandardSubviewTable.CaptionBox;
+        public IListHandlerSubview SecondaryCommand => StandardSubviewTable.SecondaryCommand;
+        public IListHandlerSubview Dialog => StandardSubviewTable.Dialog;
+        public IListHandlerSubview ColorPicker => StandardSubviewTable.ColorPicker;
+        public IMessageBoxSubview MessageBox => StandardSubviewTable.MessageBox;
+        public IListHandlerSubview FadeMask => StandardSubviewTable.FadeMask;
+        public IListHandlerSubview Overlay => StandardSubviewTable.Overlay;
+        public IMessageBoxSubview SpeechBox => StandardSubviewTable.SpeechBox;
+        public IListHandlerSubview Choices => StandardSubviewTable.Choices;
+        public IListHandlerSubview DropdownList => throw new System.NotImplementedException();
+        public IListHandlerSubview DropdownGrid => throw new System.NotImplementedException();
 
         protected void CommonInit()
         {

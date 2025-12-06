@@ -11,9 +11,9 @@ namespace Roguegard.Device
         public static string Paint => "Paint";
         public static string Dopesheet => "Dopesheet";
 
-        public static ISubview GetFace(MMgr manager)
+        public static IListHandlerSubview GetFace(MMgr manager)
         {
-            return manager.GetSubview(Face);
+            return (IListHandlerSubview)manager.GetSubview(Face);
         }
 
         public static ISummaryElementsSubview GetSummary(MMgr manager)
@@ -36,9 +36,9 @@ namespace Roguegard.Device
             return (IPaintElementsSubview)manager.GetSubview(Paint);
         }
 
-        public static ISubview GetDopesheet(MMgr manager)
+        public static IListHandlerSubview GetDopesheet(MMgr manager)
         {
-            return manager.GetSubview(Dopesheet);
+            return (IListHandlerSubview)manager.GetSubview(Dopesheet);
         }
     }
 }

@@ -199,7 +199,7 @@ namespace Roguegard.Rgpacks.MoonSharp
 
             private readonly CommandListMenuViewData<string, MMgr, MArg> view = new()
             {
-                SecodaryCommandSubviewName = StandardSubviewTable.ChoicesName,
+                SecondaryCommandSubviewSelector = m => m.Choices,
             };
 
             public override bool IsIncremental => true;

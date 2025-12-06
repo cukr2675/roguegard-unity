@@ -1,6 +1,6 @@
 namespace Lysionium
 {
-    public interface IMessageBoxSubview : ISubview
+    public interface IMessageBoxSubview : IListHandlerSubview
     {
         void DoScheduledAfterCompletion(ListMenuEventHandler onEndAnimation);
     }

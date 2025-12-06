@@ -215,7 +215,7 @@ namespace Roguegard
             {
                 private readonly MainMenuViewData<MMgr, MArg> view = new()
                 {
-                    PrimaryCommandSubviewName = StandardSubviewTable.ScrollName,
+                    PrimaryCommandSubviewSelector = m => m.Scroll,
                 };
 
                 public override void OpenScreen(in MMgr manager, in MArg arg)
@@ -249,7 +249,7 @@ namespace Roguegard
 
                 private readonly MainMenuViewData<MMgr, MArg> view = new()
                 {
-                    PrimaryCommandSubviewName = StandardSubviewTable.SecondaryCommandName,
+                    PrimaryCommandSubviewSelector = m => m.SecondaryCommand,
                 };
 
                 public override bool IsIncremental => true;

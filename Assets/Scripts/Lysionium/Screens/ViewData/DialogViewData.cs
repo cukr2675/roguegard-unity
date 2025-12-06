@@ -9,9 +9,15 @@ namespace Lysionium
         where TMgr : IListMenuManager
         where TArg : IListMenuArg
     {
-        public string DialogSubviewName { get; set; } = StandardSubviewTable.DialogName;
-        public string CaptionBoxSubviewName { get; set; } = StandardSubviewTable.CaptionBoxName;
-        public string BackAnchorSubviewName { get; set; } = StandardSubviewTable.BackAnchorName;
+        public System.Func<TMgr, IListHandlerSubview> DialogSubviewSelector { get; set; }
+            = manager => (manager as IDefaultSubviewTable)?.Dialog;
+        public System.Func<TMgr, IListHandlerSubview> CaptionBoxSubviewSelector { get; set; }
+            = manager => (manager as IDefaultSubviewTable)?.CaptionBox;
+        public System.Func<TMgr, IListHandlerSubview> BackAnchorSubviewSelector { get; set; }
+            = manager => (manager as IDefaultSubviewTable)?.BackAnchor;
+        [System.Obsolete] public string DialogSubviewName { get; set; } = StandardSubviewTable.DialogName;
+        [System.Obsolete] public string CaptionBoxSubviewName { get; set; } = StandardSubviewTable.CaptionBoxName;
+        [System.Obsolete] public string BackAnchorSubviewName { get; set; } = StandardSubviewTable.BackAnchorName;
         public List<ISelectOption> BackAnchorList { get; set; } = new() { BackSelectOption.Instance };
 
         private object prevViewStateHolder;
@@ -56,30 +62,24 @@ namespace Lysionium
                 OriginalList.Add(message);
             }
 
-            manager
-                .GetSubview(DialogSubviewName)
-                .Show(List, SelectOptionViewItemHandler.Instance, manager, arg, ref dialogSubviewStateProvider);
+            DialogSubviewSelector?.Invoke(manager)?.Show(
+                List, SelectOptionViewItemHandler.Instance, manager, arg, ref dialogSubviewStateProvider);
 
             if (Title != null)
             {
-                manager
-                    .GetSubview(CaptionBoxSubviewName)
-                    .Show(TitleSingle, ToStringViewItemHandler.Instance, manager, arg, ref captionBoxSubviewStateProvider);
+                CaptionBoxSubviewSelector?.Invoke(manager)?.Show(
+                    TitleSingle, ToStringViewItemHandler.Instance, manager, arg, ref captionBoxSubviewStateProvider);
             }
 
-            if (BackAnchorSubviewName != null)
-            {
-                manager
-                    .GetSubview(BackAnchorSubviewName)
-                    .Show(BackAnchorList, SelectOptionViewItemHandler.Instance, manager, arg, ref backAnchorSubviewStateProvider);
-            }
+            BackAnchorSubviewSelector?.Invoke(manager)?.Show(
+                BackAnchorList, SelectOptionViewItemHandler.Instance, manager, arg, ref backAnchorSubviewStateProvider);
         }
 
         public virtual void Hide(TMgr manager, bool back)
         {
-            manager.GetSubview(DialogSubviewName).Hide(back);
-            if (Title != null) { manager.GetSubview(CaptionBoxSubviewName).Hide(back); }
-            if (BackAnchorSubviewName != null) { manager.GetSubview(BackAnchorSubviewName).Hide(back); }
+            DialogSubviewSelector?.Invoke(manager)?.Hide(back);
+            if (Title != null) { CaptionBoxSubviewSelector?.Invoke(manager)?.Hide(back); }
+            BackAnchorSubviewSelector?.Invoke(manager)?.Hide(back);
         }
 
         public class Builder : BaseListBuilder<DialogViewData<TMgr, TArg>, Builder>

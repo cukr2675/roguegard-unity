@@ -94,9 +94,7 @@ namespace RoguegardUnity
             }
 
             ISubviewStateProvider stateProvider = null;
-            manager
-                .GetSubview(StandardSubviewTable.BackAnchorName)
-                .Show(backSelectOption, SelectOptionViewItemHandler.Instance, manager, Arg, ref stateProvider);
+            manager.BackAnchor.Show(backSelectOption, SelectOptionViewItemHandler.Instance, manager, Arg, ref stateProvider);
         }
 
         private void SetObj(RogueObj obj, RogueObj resultDungeon)
@@ -128,9 +126,7 @@ namespace RoguegardUnity
             SetObj(player, dungeon);
 
             ISubviewStateProvider stateProvider = null;
-            manager
-                .GetSubview(StandardSubviewTable.ForwardAnchorName)
-                .Show(submitSelectOption, SelectOptionViewItemHandler.Instance, manager, Arg, ref stateProvider);
+            manager.ForwardAnchor.Show(submitSelectOption, SelectOptionViewItemHandler.Instance, manager, Arg, ref stateProvider);
         }
 
         public void SetGameOver(RogueObj player, RogueObj dungeon, MMgr manager)
@@ -140,12 +136,8 @@ namespace RoguegardUnity
             SetObj(player, null);
 
             ISubviewStateProvider stateProvider = null;
-            manager
-                .GetSubview(StandardSubviewTable.BackAnchorName)
-                .Show(backSelectOption, SelectOptionViewItemHandler.Instance, manager, Arg, ref stateProvider);
-            manager
-                .GetSubview(StandardSubviewTable.ForwardAnchorName)
-                .Show(submitSelectOption, SelectOptionViewItemHandler.Instance, manager, Arg, ref stateProvider);
+            manager.BackAnchor.Show(backSelectOption, SelectOptionViewItemHandler.Instance, manager, Arg, ref stateProvider);
+            manager.ForwardAnchor.Show(submitSelectOption, SelectOptionViewItemHandler.Instance, manager, Arg, ref stateProvider);
         }
 
         public void SetQuest(RogueObj player, DungeonQuest quest, bool showSubmitButton, MMgr manager)
@@ -210,14 +202,10 @@ namespace RoguegardUnity
             _textRightR.SetText(rightRBuilder);
 
             ISubviewStateProvider stateProvider = null;
-            manager
-                .GetSubview(StandardSubviewTable.BackAnchorName)
-                .Show(backSelectOption, SelectOptionViewItemHandler.Instance, manager, Arg, ref stateProvider);
+            manager.BackAnchor.Show(backSelectOption, SelectOptionViewItemHandler.Instance, manager, Arg, ref stateProvider);
             if (showSubmitButton)
             {
-                manager
-                    .GetSubview(StandardSubviewTable.ForwardAnchorName)
-                    .Show(startQuestSelectOption, SelectOptionViewItemHandler.Instance, manager, Arg, ref stateProvider);
+                manager.ForwardAnchor.Show(startQuestSelectOption, SelectOptionViewItemHandler.Instance, manager, Arg, ref stateProvider);
             }
         }
 

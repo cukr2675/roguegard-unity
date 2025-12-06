@@ -11,11 +11,11 @@ namespace Lysionium
         [SerializeField] private Image _blocker = null;
 
         [SerializeField] private Subview _scroll = null;
-        public ISubview Scroll => _scroll;
+        public IListHandlerSubview Scroll => _scroll;
         public static string ScrollName => "Scroll";
 
         [SerializeField] private Subview _widgets = null;
-        public ISubview Widgets => _widgets;
+        public IListHandlerSubview Widgets => _widgets;
         public static string WidgetsName => "Widgets";
 
         [SerializeField] private LongMessageSubview _longMessage = null;
@@ -23,31 +23,31 @@ namespace Lysionium
         public static string LongMessageName => "LongMessage";
 
         [SerializeField] private Subview _backAnchor = null;
-        public ISubview BackAnchor => _backAnchor;
+        public IListHandlerSubview BackAnchor => _backAnchor;
         public static string BackAnchorName => "BackAnchor";
 
         [SerializeField] private Subview _forwardAnchor = null;
-        public ISubview ForwardAnchor => _forwardAnchor;
+        public IListHandlerSubview ForwardAnchor => _forwardAnchor;
         public static string ForwardAnchorName => "ForwardAnchor";
 
         [SerializeField] private Subview _primaryCommand = null;
-        public ISubview PrimaryCommand => _primaryCommand;
+        public IListHandlerSubview PrimaryCommand => _primaryCommand;
         public static string PrimaryCommandName => "PrimaryCommand";
 
         [SerializeField] private Subview _captionBox = null;
-        public ISubview CaptionBox => _captionBox;
+        public IListHandlerSubview CaptionBox => _captionBox;
         public static string CaptionBoxName => "CaptionBox";
 
         [SerializeField] private Subview _secondaryCommand = null;
-        public ISubview SecondaryCommand => _secondaryCommand;
+        public IListHandlerSubview SecondaryCommand => _secondaryCommand;
         public static string SecondaryCommandName => "SecondaryCommand";
 
         [SerializeField] private Subview _dialog = null;
-        public ISubview Dialog => _dialog;
+        public IListHandlerSubview Dialog => _dialog;
         public static string DialogName => "Dialog";
 
         [SerializeField] private Subview _colorPicker = null;
-        public ISubview ColorPicker => _colorPicker;
+        public IListHandlerSubview ColorPicker => _colorPicker;
         public static string ColorPickerName => "ColorPicker";
 
         [SerializeField] private MessageBoxSubview _messageBox = null; // Rgpack の rg.msg で表示するため名前はメッセージボックス
@@ -55,11 +55,11 @@ namespace Lysionium
         public static string MessageBoxName => "MessageBox";
 
         [SerializeField] private Subview _fadeMask = null;
-        public ISubview FadeMask => _fadeMask;
+        public IListHandlerSubview FadeMask => _fadeMask;
         public static string FadeMaskName => "FadeMask";
 
         [SerializeField] private Subview _overlay = null;
-        public ISubview Overlay => _overlay;
+        public IListHandlerSubview Overlay => _overlay;
         public static string OverlayName => "Overlay";
 
         [SerializeField] private MessageBoxSubview _speechBox = null; // Rgpack の rg.say で表示するため名前はスピーチボックス
@@ -67,7 +67,7 @@ namespace Lysionium
         public static string SpeechBoxName => "SpeechBox";
 
         [SerializeField] private Subview _choices = null;
-        public ISubview Choices => _choices;
+        public IListHandlerSubview Choices => _choices;
         public static string ChoicesName => "Choices";
 
         public IReadOnlyDictionary<string, Subview> Subviews { get; private set; }
