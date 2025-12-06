@@ -102,7 +102,7 @@ namespace RoguegardUnity
 
                 view = new()
                 {
-                    PrimaryCommandSubviewSelector = m => m.TitleMenu,
+                    PrimaryCommandSubviewSelector = m => (m as IMMgr)?.TitleMenu,
                 };
             }
 
@@ -154,7 +154,7 @@ namespace RoguegardUnity
             {
                 view = new()
                 {
-                    ScrollSubviewSelector = m => m.CharacterCreation,
+                    ScrollSubviewSelector = m => (m as IMMgr)?.CharacterCreation,
                     BackAnchorList = new()
                     {
                         // プリセット読み込みボタン（OpenScreen で設定）

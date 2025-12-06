@@ -12,7 +12,9 @@ namespace Lysionium
 
         public override bool IsIncremental => true;
 
-        public ColorPickerMenuScreen(System.Func<TMgr, TArg, Color> getColor, System.Action<TMgr, TArg, Color> onClose)
+        public ColorPickerMenuScreen(
+            System.Func<TMgr, TArg, Color> getColor, System.Action<TMgr, TArg, Color> onClose,
+            System.Func<TMgr, IColorPickerSubview> colorPickerSubviewSelector = null)
         {
             this.getColor = getColor;
             handleClose = onClose;
@@ -20,6 +22,7 @@ namespace Lysionium
 
             view = new()
             {
+                colorPickerSubviewSelector = colorPickerSubviewSelector ?? (m => (m as IDefaultSubviewTable)?.ColorPicker),
             };
         }
 
@@ -46,6 +49,7 @@ namespace Lysionium
 
         private class ViewData : ViewData<TMgr, TArg>
         {
+            public System.Func<TMgr, IColorPickerSubview> colorPickerSubviewSelector;
             private ISubviewStateProvider colorPickerSubviewStateProvider;
             private Color color;
             private event IColorPickerSubview.ColorPickerEventHandler HandleClose;
@@ -62,7 +66,8 @@ namespace Lysionium
 
             protected override void ShowSubviews(TMgr manager, TArg arg)
             {
-                if (LuiAssert.Type<IColorPickerSubview>(manager.GetSubview(StandardSubviewTable.ColorPickerName), out var colorPickerSubview)) return;
+                var colorPickerSubview = colorPickerSubviewSelector?.Invoke(manager);
+                if (colorPickerSubview == null) return;
 
                 colorPickerSubview.SetParameters(color, HandleClose, manager, arg, ref colorPickerSubviewStateProvider);
                 colorPickerSubview.Show();
@@ -70,7 +75,7 @@ namespace Lysionium
 
             public void Hide(TMgr manager, bool back)
             {
-                manager.GetSubview(StandardSubviewTable.ColorPickerName).Hide(back);
+                colorPickerSubviewSelector?.Invoke(manager)?.Hide(back);
             }
 
             public class Builder : BaseBuilder<ViewData, Builder>

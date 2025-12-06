@@ -8,8 +8,6 @@ namespace Lysionium
 
         event System.Action OnUnload;
 
-        ISubview GetSubview(string subviewName);
-
         void HideAll(bool back);
 
         string Localize(string text);

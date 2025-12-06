@@ -10,24 +10,29 @@ namespace RoguegardUnity
     /// <summary>
     /// メニュー UI
     /// </summary>
-    public class MenuController : MMgr
+    public class MenuController : MMgr, IMMgr
     {
         [SerializeField] private WebOtherAudioPlayHandler _audioPlayHandler = null;
         [SerializeField] private StatsSubview _stats = null;
         [SerializeField] private FaceSubview _face = null;
+        public IListHandlerSubview Face => _face;
         [SerializeField] private SummarySubview _summary = null;
+        public ISummaryElementsSubview Summary => _summary;
         [SerializeField] private TextEditorSubview _textEditor = null;
+        public ITextEditorElementsSubview TextEditor => _textEditor;
         [SerializeField] private CharacterCreationSubview _characterCreation = null;
-        public override IListHandlerSubview CharacterCreation => _characterCreation;
+        public ICharacterCreationElementsSubview CharacterCreation => _characterCreation;
         [SerializeField] private PaintSubview _paint = null;
+        public IPaintElementsSubview Paint => _paint;
         [SerializeField] private DopesheetSubview _dopesheet = null;
+        public IListHandlerSubview Dopesheet => _dopesheet;
 
         public StatsSubview Stats => _stats;
 
         [Header("Title Only")]
         [SerializeField] private GridSubview _titleMenu = null;
         public static string TitleMenuName => "TitleMenu";
-        public override IListHandlerSubview TitleMenu => _titleMenu;
+        public IListHandlerSubview TitleMenu => _titleMenu;
 
         private MainMenu mainMenu;
         private LongDownMenu longDownMenu;
@@ -91,18 +96,6 @@ namespace RoguegardUnity
             }
         }
 
-        public override ISubview GetSubview(string subviewName)
-        {
-            if (subviewName == RoguegardSubviews.Face) return _face;
-            if (subviewName == RoguegardSubviews.Summary) return _summary;
-            if (subviewName == RoguegardSubviews.TextEditor) return _textEditor;
-            if (subviewName == RoguegardSubviews.CharacterCreation) return _characterCreation;
-            if (subviewName == RoguegardSubviews.Paint) return _paint;
-            if (subviewName == RoguegardSubviews.Dopesheet) return _dopesheet;
-            if (subviewName == TitleMenuName) return _titleMenu;
-            return base.GetSubview(subviewName);
-        }
-
         protected override void BlockAll()
         {
             base.BlockAll();
@@ -149,7 +142,7 @@ namespace RoguegardUnity
         }
 
         public void PushInitialMenuScreen(
-            MenuScreen<MMgr, MArg> menuScreen,
+            IMenuScreen<MMgr, MArg> menuScreen,
             RogueObj self = null, RogueObj user = null,
             RogueObj targetObj = null,
             int count = default,

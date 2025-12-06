@@ -11,7 +11,7 @@ namespace Lysionium
         public IListHandlerSubview CaptionBox { get; }
         public IListHandlerSubview SecondaryCommand { get; }
         public IListHandlerSubview Dialog { get; }
-        public IListHandlerSubview ColorPicker { get; }
+        public IColorPickerSubview ColorPicker { get; }
         public IMessageBoxSubview MessageBox { get; }
         public IListHandlerSubview FadeMask { get; }
         public IListHandlerSubview Overlay { get; }

@@ -105,7 +105,7 @@ namespace Roguegard
             {
                 yield return new WaitForSeconds(2f);
 
-                manager.GetSubview(StandardSubviewTable.OverlayName).Hide(false, (manager, arg) =>
+                manager.Overlay.Hide(false, (manager, arg) =>
                 {
                     ((MMgr)manager).Done();
                 });

@@ -46,7 +46,7 @@ namespace Lysionium
         public IListHandlerSubview CaptionBox => StandardSubviewTable.CaptionBox;
         public IListHandlerSubview SecondaryCommand => StandardSubviewTable.SecondaryCommand;
         public IListHandlerSubview Dialog => StandardSubviewTable.Dialog;
-        public IListHandlerSubview ColorPicker => StandardSubviewTable.ColorPicker;
+        public IColorPickerSubview ColorPicker => StandardSubviewTable.ColorPicker;
         public IMessageBoxSubview MessageBox => StandardSubviewTable.MessageBox;
         public IListHandlerSubview FadeMask => StandardSubviewTable.FadeMask;
         public IListHandlerSubview Overlay => StandardSubviewTable.Overlay;
@@ -84,11 +84,6 @@ namespace Lysionium
                 OnError?.Invoke();
                 throw;
             }
-        }
-
-        public virtual ISubview GetSubview(string subviewName)
-        {
-            return StandardSubviewTable.Subviews[subviewName];
         }
 
         protected virtual void BlockAll()

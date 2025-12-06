@@ -13,32 +13,32 @@ namespace Roguegard.Device
 
         public static IListHandlerSubview GetFace(MMgr manager)
         {
-            return (IListHandlerSubview)manager.GetSubview(Face);
+            return (manager as IMMgr)?.Face;
         }
 
         public static ISummaryElementsSubview GetSummary(MMgr manager)
         {
-            return (ISummaryElementsSubview)manager.GetSubview(Summary);
+            return (manager as IMMgr)?.Summary;
         }
 
         public static ITextEditorElementsSubview GetTextEditor(MMgr manager)
         {
-            return (ITextEditorElementsSubview)manager.GetSubview(TextEditor);
+            return (manager as IMMgr)?.TextEditor;
         }
 
         public static ICharacterCreationElementsSubview GetCharacterCreation(MMgr manager)
         {
-            return (ICharacterCreationElementsSubview)manager.GetSubview(CharacterCreation);
+            return (manager as IMMgr)?.CharacterCreation;
         }
 
         public static IPaintElementsSubview GetPaint(MMgr manager)
         {
-            return (IPaintElementsSubview)manager.GetSubview(Paint);
+            return (manager as IMMgr)?.Paint;
         }
 
         public static IListHandlerSubview GetDopesheet(MMgr manager)
         {
-            return (IListHandlerSubview)manager.GetSubview(Dopesheet);
+            return (manager as IMMgr)?.Dopesheet;
         }
     }
 }

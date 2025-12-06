@@ -2,7 +2,7 @@ using Lysionium;
 
 namespace Roguegard.Device
 {
-    public interface ICharacterCreationElementsSubview : ISubview
+    public interface ICharacterCreationElementsSubview : IListHandlerSubview
     {
         ISelectOption LoadPresetOption { get; }
     }

@@ -46,8 +46,8 @@ namespace Lysionium
         public IListHandlerSubview Dialog => _dialog;
         public static string DialogName => "Dialog";
 
-        [SerializeField] private Subview _colorPicker = null;
-        public IListHandlerSubview ColorPicker => _colorPicker;
+        [SerializeField] private ColorPickerSubview _colorPicker = null;
+        public IColorPickerSubview ColorPicker => _colorPicker;
         public static string ColorPickerName => "ColorPicker";
 
         [SerializeField] private MessageBoxSubview _messageBox = null; // Rgpack の rg.msg で表示するため名前はメッセージボックス
