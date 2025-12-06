@@ -79,6 +79,7 @@ namespace Objforming.Serialization.Json
                 if (objectType == typeof(string)) return false;
                 if (objectType == typeof(decimal)) return false;
                 if (objectType == typeof(Type)) return false;
+                if (objectType.IsEnum) return false;
                 if (objectType.IsArray) return false;
                 if (objectType.IsGenericType)
                 {

@@ -82,6 +82,7 @@ namespace Objforming.Serialization.TextJson
                 if (typeToConvert == typeof(string)) return false;
                 if (typeToConvert == typeof(decimal)) return false;
                 if (typeToConvert == typeof(Type)) return false;
+                if (typeToConvert.IsEnum) return false;
                 if (typeToConvert.IsArray) return false;
                 if (typeToConvert.IsGenericType)
                 {
