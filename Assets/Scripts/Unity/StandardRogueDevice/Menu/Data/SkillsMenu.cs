@@ -27,7 +27,7 @@ namespace RoguegardUnity
             private readonly List<ISkill> list = new();
             private readonly SkillCommandMenu menu = new();
 
-            public override void OpenScreen(in MMgr manager, in MArg arg)
+            public override void OpenScreen(MMgr manager, MArg arg)
             {
                 var skills = arg.Self.Main.Skills;
                 list.Clear();

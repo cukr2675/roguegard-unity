@@ -48,7 +48,7 @@ namespace Roguegard
 
             public override bool IsIncremental => true;
 
-            public override void OpenScreen(in MMgr manager, in MArg arg)
+            public override void OpenScreen(MMgr manager, MArg arg)
             {
                 view.Show($"商人「わたしは商人です でもまだ準備中です{{v}}", manager, arg)
                     ?
@@ -71,7 +71,7 @@ namespace Roguegard
             {
             };
 
-            public override void OpenScreen(in MMgr manager, in MArg arg)
+            public override void OpenScreen(MMgr manager, MArg arg)
             {
                 view.Show(parent._items, manager, arg)
                     ?

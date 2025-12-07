@@ -34,7 +34,7 @@ namespace Roguegard.Rgpacks
                 ScrollSubviewSelector = m => m.Widgets,
             };
 
-            public override void OpenScreen(in MMgr manager, in MArg arg)
+            public override void OpenScreen(MMgr manager, MArg arg)
             {
                 var diorama = arg.Arg.TargetObj;
 
@@ -82,7 +82,7 @@ namespace Roguegard.Rgpacks
                 DialogSubviewSelector = m => m.Widgets,
             };
 
-            public override void OpenScreen(in MMgr manager, in MArg arg)
+            public override void OpenScreen(MMgr manager, MArg arg)
             {
                 view.Show("", manager, arg)
                     ?

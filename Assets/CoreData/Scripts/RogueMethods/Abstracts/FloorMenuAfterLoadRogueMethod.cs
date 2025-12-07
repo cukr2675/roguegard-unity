@@ -74,7 +74,7 @@ namespace Roguegard
 
             public override bool IsIncremental => true;
 
-            public override void OpenScreen(in MMgr manager, in MArg arg)
+            public override void OpenScreen(MMgr manager, MArg arg)
             {
                 view.FadeOut(manager, arg)
                     ?

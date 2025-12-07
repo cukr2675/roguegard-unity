@@ -128,7 +128,7 @@ namespace RoguegardUnity
         }
 
         public override void PushMenuScreen(
-            MenuScreen<MMgr, MArg> menuScreen,
+            IMenuScreen<MMgr, MArg> menuScreen,
             RogueObj self = null, RogueObj user = null,
             RogueObj targetObj = null,
             int count = default,

@@ -282,7 +282,7 @@ namespace RoguegardUnity
         {
             public SaveDeviceEventHandler parent;
 
-            public override void OpenScreen(in MMgr inManager, in MArg arg)
+            public override void OpenScreen(MMgr inManager, MArg arg)
             {
                 var manager = inManager;
                 SelectFileMenuScreen.ShowSaving(manager);

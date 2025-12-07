@@ -18,7 +18,7 @@ namespace RoguegardUnity
             this.memberMenu = memberMenu;
         }
 
-        public override void OpenScreen(in MMgr manager, in MArg arg)
+        public override void OpenScreen(MMgr manager, MArg arg)
         {
             view.Show(arg.Self.Main.Stats.Party.Members, manager, arg)
                 ?

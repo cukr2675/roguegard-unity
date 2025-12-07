@@ -28,7 +28,7 @@ namespace Roguegard
             {
             };
 
-            public override void OpenScreen(in MMgr manager, in MArg arg)
+            public override void OpenScreen(MMgr manager, MArg arg)
             {
                 var info = PostboxInfo.Get(arg.Arg.Tool);
 
@@ -50,7 +50,7 @@ namespace Roguegard
                 DialogSubviewSelector = m => m.Widgets,
             };
 
-            public override void OpenScreen(in MMgr manager, in MArg arg)
+            public override void OpenScreen(MMgr manager, MArg arg)
             {
                 var post = (RoguePost)arg.Arg.Other;
 

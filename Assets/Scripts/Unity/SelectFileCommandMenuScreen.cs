@@ -21,7 +21,7 @@ namespace RoguegardUnity
             };
         }
 
-        public override void OpenScreen(in MMgr manager, in MArg arg)
+        public override void OpenScreen(MMgr manager, MArg arg)
         {
             var text = RogueFile.GetName(((FileInfo)arg.Arg.Other).FullName) + "をロードしますか？";
             view.Title = text;
@@ -76,7 +76,7 @@ namespace RoguegardUnity
 
             public override bool IsIncremental => true;
 
-            public override void OpenScreen(in MMgr manager, in MArg arg)
+            public override void OpenScreen(MMgr manager, MArg arg)
             {
                 var fileInfo = (FileInfo)arg.Arg.Other;
                 newName = Path.GetFileNameWithoutExtension(fileInfo.Name);

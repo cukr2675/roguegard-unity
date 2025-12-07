@@ -41,7 +41,7 @@ namespace Roguegard
             {
             };
 
-            public override void OpenScreen(in MMgr manager, in MArg arg)
+            public override void OpenScreen(MMgr manager, MArg arg)
             {
                 var player = arg.Self;
                 var worldInfo = RogueWorldInfo.GetByCharacter(player);

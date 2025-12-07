@@ -106,7 +106,7 @@ namespace RoguegardUnity
                 };
             }
 
-            public override void OpenScreen(in MMgr manager, in MArg arg)
+            public override void OpenScreen(MMgr manager, MArg arg)
             {
                 view.Show(manager, arg)
                     ?
@@ -164,7 +164,7 @@ namespace RoguegardUnity
                 };
             }
 
-            public override void OpenScreen(in MMgr manager, in MArg arg)
+            public override void OpenScreen(MMgr manager, MArg arg)
             {
                 // プリセット読み込みボタンを設定する
                 var characterCreation = RoguegardSubviews.GetCharacterCreation(manager);
@@ -195,7 +195,7 @@ namespace RoguegardUnity
                 };
             }
 
-            public override void OpenScreen(in MMgr manager, in MArg arg)
+            public override void OpenScreen(MMgr manager, MArg arg)
             {
                 view.FadeOut(manager, arg)
                     ?
@@ -249,7 +249,7 @@ namespace RoguegardUnity
                 Title = ":Credit",
             };
 
-            public override void OpenScreen(in MMgr manager, in MArg arg)
+            public override void OpenScreen(MMgr manager, MArg arg)
             {
                 view.Show(credits, manager, arg)
                     ?
@@ -274,7 +274,7 @@ namespace RoguegardUnity
                     DialogSubviewSelector = m => m.Widgets,
                 };
 
-                public override void OpenScreen(in MMgr manager, in MArg arg)
+                public override void OpenScreen(MMgr manager, MArg arg)
                 {
                     var credit = (CreditData)arg.Arg.Other;
 
@@ -304,7 +304,7 @@ namespace RoguegardUnity
 
                 public override bool IsIncremental => true;
 
-                public override void OpenScreen(in MMgr manager, in MArg arg)
+                public override void OpenScreen(MMgr manager, MArg arg)
                 {
                     var url = (string)arg.Arg.Other;
                     view.Show($"{url} へ移動しますか？", manager, arg)

@@ -37,7 +37,7 @@ namespace Roguegard.Device
             removeSelectOption.characterCreationData = characterCreationData;
         }
 
-        public override void OpenScreen(in MMgr manager, in MArg arg)
+        public override void OpenScreen(MMgr manager, MArg arg)
         {
             selectOption.Set(arg.Arg.Other);
             list.Clear();
@@ -288,7 +288,7 @@ namespace Roguegard.Device
 
             private Race race;
 
-            public override void OpenScreen(in MMgr manager, in MArg arg)
+            public override void OpenScreen(MMgr manager, MArg arg)
             {
                 race = (Race)arg.Arg.Other;
 

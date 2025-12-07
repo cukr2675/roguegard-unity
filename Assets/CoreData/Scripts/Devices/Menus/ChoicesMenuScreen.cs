@@ -71,7 +71,7 @@ namespace Roguegard.Device
             return this;
         }
 
-        public override void OpenScreen(in MMgr manager, in MArg arg)
+        public override void OpenScreen(MMgr manager, MArg arg)
         {
             screen.OpenScreen(manager, arg);
         }

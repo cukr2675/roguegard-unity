@@ -126,7 +126,7 @@ namespace Roguegard.Rgpacks.MoonSharp
 
             public override bool IsIncremental => true;
 
-            public override void OpenScreen(in MMgr manager, in MArg arg)
+            public override void OpenScreen(MMgr manager, MArg arg)
             {
                 if (!isOpened)
                 {
@@ -204,7 +204,7 @@ namespace Roguegard.Rgpacks.MoonSharp
 
             public override bool IsIncremental => true;
 
-            public override void OpenScreen(in MMgr manager, in MArg arg)
+            public override void OpenScreen(MMgr manager, MArg arg)
             {
                 view.Show(selectOptions, manager, arg)
                     ?
@@ -252,7 +252,7 @@ namespace Roguegard.Rgpacks.MoonSharp
 
             public override bool IsIncremental => true;
 
-            public override void OpenScreen(in MMgr manager, in MArg arg)
+            public override void OpenScreen(MMgr manager, MArg arg)
             {
                 if (fadeInAction == null)
                 {

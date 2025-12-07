@@ -86,7 +86,7 @@ namespace Lysionium.Samples
             }
         }
 
-        private class MainMenu : MenuScreen<ExMgr, ExArg>
+        private class MainMenu : IMenuScreen<ExMgr, ExArg>
         {
             private readonly BindingList<BindingValue> list;
             private readonly BindableScrollMenuViewData<BindingValue, ExMgr, ExArg> view = new()
@@ -99,7 +99,7 @@ namespace Lysionium.Samples
                 this.list = list;
             }
 
-            public override void OpenScreen(in ExMgr manager, in ExArg arg)
+            public void OpenScreen(ExMgr manager, ExArg arg)
             {
                 view.Show(list, manager, arg)
                     ?
@@ -131,7 +131,7 @@ namespace Lysionium.Samples
             }
         }
 
-        private class AddDialog : MenuScreen<ExMgr, ExArg>
+        private class AddDialog : IMenuScreen<ExMgr, ExArg>
         {
             private readonly DialogViewData<ExMgr, ExArg> view = new()
             {
@@ -140,14 +140,14 @@ namespace Lysionium.Samples
 
             private readonly System.Action<string> onOk;
 
-            public override bool IsIncremental => true;
+            public bool IsIncremental => true;
 
             public AddDialog(System.Action<string> onOk)
             {
                 this.onOk = onOk;
             }
 
-            public override void OpenScreen(in ExMgr manager, in ExArg arg)
+            public void OpenScreen(ExMgr manager, ExArg arg)
             {
                 view.Show("名前を入力してください", manager, arg)
                     ?
@@ -172,7 +172,7 @@ namespace Lysionium.Samples
                     .Build();
             }
 
-            public override void CloseScreenView(ExMgr manager, bool back)
+            public void CloseScreenView(ExMgr manager, bool back)
             {
                 view.Hide(manager, back);
             }

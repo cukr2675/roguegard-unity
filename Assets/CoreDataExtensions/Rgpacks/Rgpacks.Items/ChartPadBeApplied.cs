@@ -31,7 +31,7 @@ namespace Roguegard.Rgpacks
 
             private static readonly PropertiedCmnMenu nextMenu = new();
 
-            public override void OpenScreen(in MMgr manager, in MArg arg)
+            public override void OpenScreen(MMgr manager, MArg arg)
             {
                 var chartPad = arg.Arg.TargetObj;
                 var chartPadInfo = ChartPadInfo.Get(chartPad);

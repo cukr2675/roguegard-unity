@@ -18,7 +18,7 @@ namespace Roguegard
         private static object mirroring;
         private static BoneKeyword[] mirroringBones;
 
-        public override void OpenScreen(in MMgr manager, in MArg arg)
+        public override void OpenScreen(MMgr manager, MArg arg)
         {
             if (mirroring == null)
             {
@@ -127,7 +127,7 @@ namespace Roguegard
 
             private static string[] boneNames;
 
-            public override void OpenScreen(in MMgr manager, in MArg arg)
+            public override void OpenScreen(MMgr manager, MArg arg)
             {
                 boneNames ??= new[]
                 {
@@ -179,7 +179,7 @@ namespace Roguegard
                 };
             }
 
-            public override void OpenScreen(in MMgr manager, in MArg arg)
+            public override void OpenScreen(MMgr manager, MArg arg)
             {
                 var table = (PaintBoneSpriteTable)arg.Arg.Other;
                 var itemIndex = arg.Arg.Count;

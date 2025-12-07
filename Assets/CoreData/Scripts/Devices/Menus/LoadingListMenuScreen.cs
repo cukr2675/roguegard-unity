@@ -27,7 +27,7 @@ namespace Roguegard.Device
             this.getProgress = updateAction ?? delegate { return 0f; };
         }
 
-        public override void OpenScreen(in MMgr manager, in MArg arg)
+        public override void OpenScreen(MMgr manager, MArg arg)
         {
             oldProgress = 0f;
             view.Show(text, manager, arg)

@@ -72,7 +72,7 @@ namespace RoguegardUnity
             return instance;
         }
 
-        public override void OpenScreen(in MMgr manager, in MArg arg)
+        public override void OpenScreen(MMgr manager, MArg arg)
         {
             files.Clear();
             files.AddRange(StandardRogueDeviceSave.GetFiles());
@@ -163,7 +163,7 @@ namespace RoguegardUnity
 
             public override bool IsIncremental => true;
 
-            public override void OpenScreen(in MMgr manager, in MArg arg)
+            public override void OpenScreen(MMgr manager, MArg arg)
             {
                 view.Show("インポート中…", manager, arg)
                     ?

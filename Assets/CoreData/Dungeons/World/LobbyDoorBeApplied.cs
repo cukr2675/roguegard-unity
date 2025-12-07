@@ -39,7 +39,7 @@ namespace Roguegard
             {
             };
 
-            public override void OpenScreen(in MMgr manager, in MArg arg)
+            public override void OpenScreen(MMgr manager, MArg arg)
             {
                 view.Show(RoguegardSettings.DungeonSelectOption, manager, arg)
                     ?

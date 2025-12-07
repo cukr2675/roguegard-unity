@@ -65,7 +65,7 @@ namespace RoguegardUnity
                 BackAnchorList = new(_ => _.Option("OK", new NextMenu())),
             };
 
-            public override void OpenScreen(in MMgr manager, in MArg arg)
+            public override void OpenScreen(MMgr manager, MArg arg)
             {
                 // ログ表示
                 view.Show(manager, arg)
@@ -75,7 +75,7 @@ namespace RoguegardUnity
 
             private class NextMenu : RogueMenuScreen
             {
-                public override void OpenScreen(in MMgr manager, in MArg arg)
+                public override void OpenScreen(MMgr manager, MArg arg)
                 {
                     // リザルト表示 → ロビーへ帰還
                     var player = arg.Self;

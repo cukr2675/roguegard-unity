@@ -27,7 +27,7 @@ namespace Roguegard.Device
             this.characterCreationData = characterCreationData;
         }
 
-        public override void OpenScreen(in MMgr manager, in MArg arg)
+        public override void OpenScreen(MMgr manager, MArg arg)
         {
             list.Clear();
             AddOptionsTo(list, arg.Self, (System.Type)arg.Arg.Other, database);

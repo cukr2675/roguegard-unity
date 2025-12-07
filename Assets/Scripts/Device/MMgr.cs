@@ -6,7 +6,7 @@ namespace Roguegard.Device
     public abstract class MMgr : StandardListMenuManager<MMgr, MArg>
     {
         public abstract void PushMenuScreen(
-            MenuScreen<MMgr, MArg> menuScreen,
+            IMenuScreen<MMgr, MArg> menuScreen,
             RogueObj self = null,
             RogueObj user = null,
             RogueObj targetObj = null,

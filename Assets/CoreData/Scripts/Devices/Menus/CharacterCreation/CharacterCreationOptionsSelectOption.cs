@@ -70,7 +70,7 @@ namespace Roguegard.Device
             {
             };
 
-            public override void OpenScreen(in MMgr manager, in MArg arg)
+            public override void OpenScreen(MMgr manager, MArg arg)
             {
                 var editTarget = arg.Arg.Other;
 

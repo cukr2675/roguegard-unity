@@ -9,8 +9,7 @@ namespace Lysionium
     {
         public virtual bool IsIncremental => false;
 
-        public abstract void OpenScreen(in TMgr manager, in TArg arg);
-        void IMenuScreen<TMgr, TArg>.OpenScreen(TMgr manager, TArg arg) => OpenScreen(manager, arg);
+        public abstract void OpenScreen(TMgr manager, TArg arg);
 
         public virtual void CloseScreenView(TMgr manager, bool back)
         {

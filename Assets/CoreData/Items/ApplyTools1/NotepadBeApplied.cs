@@ -23,7 +23,7 @@ namespace Roguegard
 
             private ISubviewStateProvider stateProvider;
 
-            public override void OpenScreen(in MMgr manager, in MArg arg)
+            public override void OpenScreen(MMgr manager, MArg arg)
             {
                 var memo = arg.Arg.Tool;
                 var text = NotepadInfo.GetText(memo);

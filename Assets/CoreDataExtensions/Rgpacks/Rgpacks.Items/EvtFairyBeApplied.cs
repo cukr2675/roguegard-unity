@@ -31,7 +31,7 @@ namespace Roguegard.Rgpacks
 
             private static readonly PageMenu nextMenu = new();
 
-            public override void OpenScreen(in MMgr manager, in MArg arg)
+            public override void OpenScreen(MMgr manager, MArg arg)
             {
                 var fairy = arg.Arg.TargetObj;
                 var eventFairyInfo = EvtFairyInfo.Get(fairy);
@@ -75,7 +75,7 @@ namespace Roguegard.Rgpacks
             {
             };
 
-            public override void OpenScreen(in MMgr manager, in MArg arg)
+            public override void OpenScreen(MMgr manager, MArg arg)
             {
                 view.Show(System.Array.Empty<object>(), manager, arg)
                     ?
@@ -112,7 +112,7 @@ namespace Roguegard.Rgpacks
             {
             };
 
-            public override void OpenScreen(in MMgr manager, in MArg arg)
+            public override void OpenScreen(MMgr manager, MArg arg)
             {
                 view.Show(categories, manager, arg)
                     ?

@@ -46,7 +46,7 @@ namespace RoguegardUnity
             });
         }
 
-        public override void OpenScreen(in MMgr manager, in MArg arg)
+        public override void OpenScreen(MMgr manager, MArg arg)
         {
             var tool = arg.Arg.Tool;
             RoguegardSettings.ObjCommandTable.GetCommands(arg.Self, tool, commands);
@@ -73,7 +73,7 @@ namespace RoguegardUnity
 
         private class SummaryMenuScreen : RogueMenuScreen
         {
-            public override void OpenScreen(in MMgr manager, in MArg arg)
+            public override void OpenScreen(MMgr manager, MArg arg)
             {
                 object target;
                 if (arg.Arg.TargetObj != null)
@@ -102,7 +102,7 @@ namespace RoguegardUnity
                 DialogSubviewSelector = m => m.Widgets,
             };
 
-            public override void OpenScreen(in MMgr manager, in MArg arg)
+            public override void OpenScreen(MMgr manager, MArg arg)
             {
                 var obj = arg.Arg.Tool ?? arg.Arg.TargetObj;
                 var describable = obj?.Main.InfoSet ?? arg.Arg.Other as IRogueDescribable;
@@ -126,7 +126,7 @@ namespace RoguegardUnity
 
             public override bool IsIncremental => true;
 
-            public override void OpenScreen(in MMgr manager, in MArg arg)
+            public override void OpenScreen(MMgr manager, MArg arg)
             {
                 view.Show("", manager, arg)
                     ?

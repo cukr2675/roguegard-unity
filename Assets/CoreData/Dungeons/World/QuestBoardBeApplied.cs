@@ -43,7 +43,7 @@ namespace Roguegard
             {
             };
 
-            public override void OpenScreen(in MMgr manager, in MArg arg)
+            public override void OpenScreen(MMgr manager, MArg arg)
             {
                 questList.Clear();
                 for (int i = 0; i < 4; i++)
@@ -64,7 +64,7 @@ namespace Roguegard
 
             private class QuestViewMenu : RogueMenuScreen
             {
-                public override void OpenScreen(in MMgr manager, in MArg arg)
+                public override void OpenScreen(MMgr manager, MArg arg)
                 {
                     var quest = (DungeonQuest)arg.Arg.Other;
 

@@ -15,7 +15,7 @@ namespace RoguegardUnity
 
         private readonly DeviceCommand deviceCommand = new();
 
-        public override void OpenScreen(in MMgr manager, in MArg arg)
+        public override void OpenScreen(MMgr manager, MArg arg)
         {
             var selectedSkill = (ISkill)arg.Arg.Other;
 

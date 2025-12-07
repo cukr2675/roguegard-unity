@@ -48,7 +48,7 @@ namespace Lysionium
             return this;
         }
 
-        public override void OpenScreen(in TMgr manager, in TArg arg)
+        public override void OpenScreen(TMgr manager, TArg arg)
         {
             var message = getMessage(manager, arg);
 

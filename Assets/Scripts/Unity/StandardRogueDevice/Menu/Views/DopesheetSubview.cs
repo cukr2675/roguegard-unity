@@ -265,7 +265,7 @@ namespace RoguegardUnity
             {
             };
 
-            public override void OpenScreen(in MMgr manager, in MArg arg)
+            public override void OpenScreen(MMgr manager, MArg arg)
             {
                 view.Show(boneNames, manager, arg)
                     ?
@@ -297,7 +297,7 @@ namespace RoguegardUnity
                 BackAnchorSubviewSelector = null
             };
 
-            public override void OpenScreen(in MMgr manager, in MArg arg)
+            public override void OpenScreen(MMgr manager, MArg arg)
             {
                 view.Show(string.Empty, manager, arg)
                     ?
@@ -327,7 +327,7 @@ namespace RoguegardUnity
             {
             };
 
-            public override void OpenScreen(in MMgr manager, in MArg arg)
+            public override void OpenScreen(MMgr manager, MArg arg)
             {
                 view.Show(System.Array.Empty<object>(), manager, arg)
                     ?

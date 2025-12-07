@@ -16,7 +16,7 @@ namespace Roguegard.Device
         private CharacterCreationOptionMenu characterCreationOptionMenu;
         private StartingItemTableMenu startingItemTableMenu;
 
-        public override void OpenScreen(in MMgr manager, in MArg arg)
+        public override void OpenScreen(MMgr manager, MArg arg)
         {
             var cmnData = (PropertiedCmnData)arg.Arg.Other;
 
@@ -97,7 +97,7 @@ namespace Roguegard.Device
                 };
             }
 
-            public override void OpenScreen(in MMgr manager, in MArg arg)
+            public override void OpenScreen(MMgr manager, MArg arg)
             {
                 var startingItemTableCmnProperty = (StartingItemTableCmnProperty)arg.Arg.Other;
                 var startingItemTable = startingItemTableCmnProperty.Value;

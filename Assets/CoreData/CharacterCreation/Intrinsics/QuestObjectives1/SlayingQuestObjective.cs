@@ -191,7 +191,7 @@ namespace Roguegard.CharacterCreation
             {
             };
 
-            public override void OpenScreen(in MMgr manager, in MArg arg)
+            public override void OpenScreen(MMgr manager, MArg arg)
             {
                 var self = arg.Self;
                 var quest = (DungeonQuest)arg.Arg.Other;
@@ -230,7 +230,7 @@ namespace Roguegard.CharacterCreation
             {
             };
 
-            public override void OpenScreen(in MMgr manager, in MArg arg)
+            public override void OpenScreen(MMgr manager, MArg arg)
             {
                 view.Show($"目標の階に到達しました{{v}}", manager, arg)
                     ?

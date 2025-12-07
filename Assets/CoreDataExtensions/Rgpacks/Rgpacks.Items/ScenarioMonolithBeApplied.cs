@@ -36,7 +36,7 @@ namespace Roguegard.Rgpacks
                 this.parent = parent;
             }
 
-            public override void OpenScreen(in MMgr manager, in MArg arg)
+            public override void OpenScreen(MMgr manager, MArg arg)
             {
                 view.Show(manager, arg)
                     ?
@@ -73,7 +73,7 @@ namespace Roguegard.Rgpacks
             {
             };
 
-            public override void OpenScreen(in MMgr manager, in MArg arg)
+            public override void OpenScreen(MMgr manager, MArg arg)
             {
                 view.Show(parent._shopItems, manager, arg)
                     ?
@@ -97,7 +97,7 @@ namespace Roguegard.Rgpacks
                 DialogSubviewSelector = m => m.Widgets,
             };
 
-            public override void OpenScreen(in MMgr manager, in MArg arg)
+            public override void OpenScreen(MMgr manager, MArg arg)
             {
                 view.Show("", manager, arg)
                     ?

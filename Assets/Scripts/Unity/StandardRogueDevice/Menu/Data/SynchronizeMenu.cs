@@ -16,7 +16,7 @@ namespace RoguegardUnity
             BackAnchorSubviewSelector = null,
         };
 
-        public override void OpenScreen(in MMgr manager, in MArg arg)
+        public override void OpenScreen(MMgr manager, MArg arg)
         {
             beforeProgress = 0f;
             view.Show("世界と同期中…", manager, arg)

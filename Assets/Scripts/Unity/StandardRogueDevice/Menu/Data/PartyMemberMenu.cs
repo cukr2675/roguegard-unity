@@ -3,7 +3,7 @@ using Roguegard.Device;
 
 namespace RoguegardUnity
 {
-    public class PartyMemberMenu : RogueMenuScreen
+    public class PartyMemberMenu : RogueMenuScreen, IMenuScreen<MMgr, MArg>
     {
         private readonly ObjsMenu objsMenu;
         private readonly ObjCommandMenu objCommandMenu;
@@ -23,7 +23,7 @@ namespace RoguegardUnity
             this.skillsMenu = skillsMenu;
         }
 
-        public override void OpenScreen(in MMgr manager, in MArg arg)
+        public override void OpenScreen(MMgr manager, MArg arg)
         {
             view.Show(manager, arg)
                 ?

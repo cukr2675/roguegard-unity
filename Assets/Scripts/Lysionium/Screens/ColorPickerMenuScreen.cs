@@ -26,7 +26,7 @@ namespace Lysionium
             };
         }
 
-        public override void OpenScreen(in TMgr manager, in TArg arg)
+        public override void OpenScreen(TMgr manager, TArg arg)
         {
             var color = getColor(manager, arg);
 

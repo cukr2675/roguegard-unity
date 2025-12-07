@@ -25,7 +25,7 @@ namespace Roguegard
         {
             private ISubviewStateProvider subviewStateProvider;
 
-            public override void OpenScreen(in MMgr manager, in MArg arg)
+            public override void OpenScreen(MMgr manager, MArg arg)
             {
                 var dopesheetSubview = RoguegardSubviews.GetDopesheet(manager);
                 dopesheetSubview.Show(System.Array.Empty<object>(), null, manager, arg, ref subviewStateProvider);

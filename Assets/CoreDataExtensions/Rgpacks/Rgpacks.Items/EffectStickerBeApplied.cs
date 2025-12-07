@@ -27,7 +27,7 @@ namespace Roguegard.Rgpacks
             {
             };
 
-            public override void OpenScreen(in MMgr manager, in MArg arg)
+            public override void OpenScreen(MMgr manager, MArg arg)
             {
                 view.Show(System.Array.Empty<object>(), manager, arg)
                     ?

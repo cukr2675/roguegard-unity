@@ -63,7 +63,7 @@ namespace RoguegardUnity
                 }
             }
 
-            public override void OpenScreen(in MMgr manager, in MArg arg)
+            public override void OpenScreen(MMgr manager, MArg arg)
             {
                 var list = GetObjs(arg.Self, arg.Arg.TargetObj);
                 var viewStateHolder = GetViewStateHolder(manager, arg);

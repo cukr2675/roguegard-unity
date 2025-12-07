@@ -23,7 +23,7 @@ namespace Roguegard
             {
             };
 
-            public override void OpenScreen(in MMgr manager, in MArg arg)
+            public override void OpenScreen(MMgr manager, MArg arg)
             {
                 view.Show(arg.Self.Space.Objs, manager, arg)
                     ?
@@ -70,7 +70,7 @@ namespace Roguegard
                 BackAnchorList = new(_ => _.Option(":Back", ChoicesMenuScreen.SaveBackDialog(Save))),
             };
 
-            public override void OpenScreen(in MMgr manager, in MArg arg)
+            public override void OpenScreen(MMgr manager, MArg arg)
             {
                 var data = (SewedEquipmentData)arg.Arg.Other;
 
@@ -190,7 +190,7 @@ namespace Roguegard
             {
             };
 
-            public override void OpenScreen(in MMgr manager, in MArg arg)
+            public override void OpenScreen(MMgr manager, MArg arg)
             {
                 keywords ??= new ISerializableKeyword[]
                 {

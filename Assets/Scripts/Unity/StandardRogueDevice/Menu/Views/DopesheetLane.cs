@@ -130,7 +130,7 @@ namespace RoguegardUnity
                 targetTime = time;
             }
 
-            public override void OpenScreen(in MMgr manager, in MArg arg)
+            public override void OpenScreen(MMgr manager, MArg arg)
             {
                 if (editList.TryGetValue(targetTime, out var floatValue))
                 {
@@ -201,7 +201,7 @@ namespace RoguegardUnity
                 targetTime = time;
             }
 
-            public override void OpenScreen(in MMgr manager, in MArg arg)
+            public override void OpenScreen(MMgr manager, MArg arg)
             {
                 if (!editList.TryGetValue(targetTime, out var value))
                 {
@@ -267,7 +267,7 @@ namespace RoguegardUnity
                 this.boneSprite = boneSprite;
             }
 
-            public override void OpenScreen(in MMgr manager, in MArg arg)
+            public override void OpenScreen(MMgr manager, MArg arg)
             {
                 switch (directionIndex)
                 {
