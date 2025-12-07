@@ -3,7 +3,9 @@
 // そのため namespace Lysionium.Presenters にはしない。
 namespace Lysionium
 {
-    // 画面遷移ナビゲーションを拡張できるようにするため MenuScreen と ViewData に分離する
+    // 設計メモ: 画面遷移ナビゲーションを拡張できるようにするため MenuScreen と ViewData に分離する
+
+    // 設計メモ: 複数の IListMenuManager で共通のメニュー（クイックメニューなど）を作りたい場合、反変性があると便利なので付与する
 
     /// <summary>
     /// メニューの画面単位のインターフェース

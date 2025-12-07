@@ -108,7 +108,7 @@ namespace Lysionium.Views
                         }
                     }
 
-                    // click セレクタ: キーバインド
+                    // click specifier (クリック指定子): キーバインド
                     // ViewItem のバインドで行う関係上 ViewItem が仮想化スクロールでバインド解除されるとキーバインドも解除されてしまうので、
                     // スクロールビューでキーバインドを使用する場合は仮想化を切る必要がある。
                     // Subview 単位でキーバインドすることでも解決できるが、ボタンクリックアニメーションの呼び出しが複雑かつ不確実になるため実装しない。
@@ -132,7 +132,7 @@ namespace Lysionium.Views
                         }
                     }
 
-                    // input セレクタ
+                    // input 指定子
                     if (styleItem.StartsWith("input:"))
                     {
                         if (apply)
@@ -155,7 +155,7 @@ namespace Lysionium.Views
                         }
                     }
 
-                    // preview セレクタ: KeyIcon を表示のみ変更
+                    // preview 指定子: KeyIcon を表示のみ変更
                     if (styleItem.StartsWith("preview:"))
                     {
                         if (apply)

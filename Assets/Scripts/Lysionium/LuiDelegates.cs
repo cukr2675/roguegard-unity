@@ -2,9 +2,11 @@ using UnityEngine.InputSystem;
 
 namespace Lysionium
 {
-    // İŒvƒƒ‚: delegate void ClickItemHandler<in TItem>(TItem item) ‚Íì‚ç‚È‚¢
-    // Šù‘¶ ClickItemHandler ‚Ìˆø”È—ª”Å‚Æ‚µ‚Äg—p‚·‚é‚¾‚¯‚È‚ç•K—v«‚Í‚³‚Ù‚Ç‚È‚¢
-    // ‚Ş‚µ‚ë System.Action<T> ‚â System.Action<InputAction.CallbackContext> ‚Ì‚Ù‚¤‚ªŠO•”ƒ‚ƒWƒ…[ƒ‹‚Æ‚Ì˜AŒg‚ÉŒü‚¢‚Ä‚¢‚é
+    // è¨­è¨ˆãƒ¡ãƒ¢: delegate void ClickItemHandler<in TItem>(TItem item) ã¯ä½œã‚‰ãªã„
+    // æ—¢å­˜ ClickItemHandler ã®å¼•æ•°çœç•¥ç‰ˆã¨ã—ã¦ä½¿ç”¨ã™ã‚‹ã ã‘ãªã‚‰å¿…è¦æ€§ã¯ã•ã»ã©ãªã„
+    // ã‚€ã—ã‚ System.Action<T> ã‚„ System.Action<InputAction.CallbackContext> ã®ã»ã†ãŒå¤–éƒ¨ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«ã¨ã®é€£æºã«å‘ã„ã¦ã„ã‚‹
+
+    // è¨­è¨ˆãƒ¡ãƒ¢: è¤‡æ•°ã® IListMenuManager ã§å…±é€šã®ãƒ¡ãƒ‹ãƒ¥ãƒ¼ï¼ˆã‚¯ã‚¤ãƒƒã‚¯ãƒ¡ãƒ‹ãƒ¥ãƒ¼ãªã©ï¼‰ã‚’ä½œã‚ŠãŸã„å ´åˆã€åå¤‰æ€§ãŒã‚ã‚‹ã¨ä¾¿åˆ©ãªã®ã§ä»˜ä¸ã™ã‚‹
 
     public delegate void ClickItemHandler<in TItem, in TMgr, in TArg>(TItem item, TMgr manager, TArg arg);
 
