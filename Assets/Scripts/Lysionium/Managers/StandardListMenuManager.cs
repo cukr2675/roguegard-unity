@@ -65,6 +65,12 @@ namespace Lysionium
         protected virtual void OnDestroy()
         {
             OnUnload?.Invoke();
+            if (OnUnload != null)
+            {
+                Debug.LogWarning(
+                    $"{name}.OnDestroy() 時にイベントが購読解除されていません。これらは自動的に解除されます: " +
+                    $"({string.Join(", ", (object[])OnUnload.GetInvocationList())})");
+            }
             OnUnload = null;
         }
 

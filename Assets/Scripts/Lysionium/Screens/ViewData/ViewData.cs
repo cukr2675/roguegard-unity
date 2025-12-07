@@ -135,7 +135,7 @@ namespace Lysionium
             public virtual void Build()
             {
                 AssertNotBuilt();
-                Manager.OnUnload += () => Unload();
+                Manager.OnUnload += Unload;
                 Parent.IsBuilt = true;
                 Parent.callerManager = Manager;
                 Parent.ShowSubviews(Manager, Arg);
@@ -150,6 +150,7 @@ namespace Lysionium
                 disposables.Clear();
                 Parent.IsBuilt = false;
                 Parent.callerManager = default;
+                Manager.OnUnload -= Unload;
             }
         }
     }
