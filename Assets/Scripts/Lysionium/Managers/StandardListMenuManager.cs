@@ -9,7 +9,7 @@ namespace Lysionium
     }
 
     [RequireComponent(typeof(StandardSubviewTable))]
-    public abstract class StandardListMenuManager<TMgr, TArg> : MonoBehaviour, IListMenuManager, IDefaultSubviewTable, IMenuScreenListMenuManager<TMgr, TArg>
+    public abstract class StandardListMenuManager<TMgr, TArg> : MonoBehaviour, IMenuScreenListMenuManager<TMgr, TArg>, IDefaultSubviewTable
         where TMgr : StandardListMenuManager<TMgr, TArg>
         where TArg : IListMenuArg
     {

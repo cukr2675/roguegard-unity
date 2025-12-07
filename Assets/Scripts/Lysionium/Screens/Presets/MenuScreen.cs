@@ -1,5 +1,11 @@
 namespace Lysionium
 {
+    public abstract class MenuScreen<TMgr> : IMenuScreen<TMgr, IListMenuArg>
+        where TMgr : IListMenuManager
+    {
+        public abstract void OpenScreen(TMgr manager, IListMenuArg arg);
+    }
+
     /// <summary>
     /// <see cref="IMenuScreen{TMgr, TArg}"/> の標準実装クラス
     /// </summary>
