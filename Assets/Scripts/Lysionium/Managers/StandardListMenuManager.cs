@@ -97,17 +97,17 @@ namespace Lysionium
 
         protected virtual void BlockAll()
         {
-            foreach (var subview in defaultSubviewTable.Subviews.Values)
+            for (int i = 0; i < defaultSubviewTable.Subviews.Count; i++)
             {
-                subview.SetInteractable(false);
+                defaultSubviewTable.Subviews[i].SetInteractable(false);
             }
         }
 
         public virtual void HideAll(bool back = false)
         {
-            foreach (var subview in defaultSubviewTable.Subviews.Values)
+            for (int i = 0; i < defaultSubviewTable.Subviews.Count; i++)
             {
-                subview.Hide(back);
+                defaultSubviewTable.Subviews[i].Hide(back);
             }
         }
 

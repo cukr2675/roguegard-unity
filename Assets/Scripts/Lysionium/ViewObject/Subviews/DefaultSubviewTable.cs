@@ -10,66 +10,111 @@ namespace Lysionium.Views
         [SerializeField] private Image _blocker = null;
 
         [SerializeField] private Subview _scroll = null;
-        public IListHandlerSubview Scroll => _scroll;
-        public static string ScrollName => "Scroll";
+        public Subview Scroll
+        {
+            get => _scroll;
+            set => _scroll = value;
+        }
 
         [SerializeField] private Subview _widgets = null;
-        public IListHandlerSubview Widgets => _widgets;
-        public static string WidgetsName => "Widgets";
+        public Subview Widgets
+        {
+            get => _widgets;
+            set => _widgets = value;
+        }
 
         [SerializeField] private LongMessageSubview _longMessage = null;
-        public IMessageBoxSubview LongMessage => _longMessage;
-        public static string LongMessageName => "LongMessage";
+        public LongMessageSubview LongMessage
+        {
+            get => _longMessage;
+            set => _longMessage = value;
+        }
 
         [SerializeField] private Subview _backAnchor = null;
-        public IListHandlerSubview BackAnchor => _backAnchor;
-        public static string BackAnchorName => "BackAnchor";
+        public Subview BackAnchor
+        {
+            get => _backAnchor;
+            set => _backAnchor = value;
+        }
 
         [SerializeField] private Subview _forwardAnchor = null;
-        public IListHandlerSubview ForwardAnchor => _forwardAnchor;
-        public static string ForwardAnchorName => "ForwardAnchor";
+        public Subview ForwardAnchor
+        {
+            get => _forwardAnchor;
+            set => _forwardAnchor = value;
+        }
 
         [SerializeField] private Subview _primaryCommand = null;
-        public IListHandlerSubview PrimaryCommand => _primaryCommand;
-        public static string PrimaryCommandName => "PrimaryCommand";
+        public Subview PrimaryCommand
+        {
+            get => _primaryCommand;
+            set => _primaryCommand = value;
+        }
 
         [SerializeField] private Subview _captionBox = null;
-        public IListHandlerSubview CaptionBox => _captionBox;
-        public static string CaptionBoxName => "CaptionBox";
+        public Subview CaptionBox
+        {
+            get => _captionBox;
+            set => _captionBox = value;
+        }
 
         [SerializeField] private Subview _secondaryCommand = null;
-        public IListHandlerSubview SecondaryCommand => _secondaryCommand;
-        public static string SecondaryCommandName => "SecondaryCommand";
+        public Subview SecondaryCommand
+        {
+            get => _secondaryCommand;
+            set => _secondaryCommand = value;
+        }
 
         [SerializeField] private Subview _dialog = null;
-        public IListHandlerSubview Dialog => _dialog;
-        public static string DialogName => "Dialog";
+        public Subview Dialog
+        {
+            get => _dialog;
+            set => _dialog = value;
+        }
 
         [SerializeField] private ColorPickerSubview _colorPicker = null;
-        public IColorPickerSubview ColorPicker => _colorPicker;
-        public static string ColorPickerName => "ColorPicker";
+        public ColorPickerSubview ColorPicker
+        {
+            get => _colorPicker;
+            set => _colorPicker = value;
+        }
 
         [SerializeField] private MessageBoxSubview _messageBox = null; // Rgpack の rg.msg で表示するため名前はメッセージボックス
-        public IMessageBoxSubview MessageBox => _messageBox;
-        public static string MessageBoxName => "MessageBox";
+        public MessageBoxSubview MessageBox
+        {
+            get => _messageBox;
+            set => _messageBox = value;
+        }
 
         [SerializeField] private Subview _fadeMask = null;
-        public IListHandlerSubview FadeMask => _fadeMask;
-        public static string FadeMaskName => "FadeMask";
+        public Subview FadeMask
+        {
+            get => _fadeMask;
+            set => _fadeMask = value;
+        }
 
         [SerializeField] private Subview _overlay = null;
-        public IListHandlerSubview Overlay => _overlay;
-        public static string OverlayName => "Overlay";
+        public Subview Overlay
+        {
+            get => _overlay;
+            set => _overlay = value;
+        }
 
         [SerializeField] private MessageBoxSubview _speechBox = null; // Rgpack の rg.say で表示するため名前はスピーチボックス
-        public IMessageBoxSubview SpeechBox => _speechBox;
-        public static string SpeechBoxName => "SpeechBox";
+        public MessageBoxSubview SpeechBox
+        {
+            get => _speechBox;
+            set => _speechBox = value;
+        }
 
         [SerializeField] private Subview _choices = null;
-        public IListHandlerSubview Choices => _choices;
-        public static string ChoicesName => "Choices";
+        public Subview Choices
+        {
+            get => _choices;
+            set => _choices = value;
+        }
 
-        public IReadOnlyDictionary<string, Subview> Subviews { get; private set; }
+        public IReadOnlyList<Subview> Subviews { get; private set; }
 
         /// <summary>
         /// いずれかの <see cref="Subview.HasManagerLock"/> が true のとき true を取得する
@@ -78,9 +123,9 @@ namespace Lysionium.Views
         {
             get
             {
-                foreach (var pair in Subviews)
+                for (int i = 0; i < Subviews.Count; i++)
                 {
-                    if (pair.Value.HasManagerLock) return true;
+                    if (Subviews[i].HasManagerLock) return true;
                 }
                 return false;
             }
@@ -109,23 +154,23 @@ namespace Lysionium.Views
             _speechBox.CommonInit();
             _choices.CommonInit();
 
-            Subviews = new Dictionary<string, Subview>()
+            Subviews = new Subview[]
             {
-                { ScrollName, _scroll },
-                { WidgetsName, _widgets },
-                { LongMessageName, _longMessage },
-                { BackAnchorName, _backAnchor },
-                { ForwardAnchorName, _forwardAnchor },
-                { PrimaryCommandName, _primaryCommand },
-                { CaptionBoxName, _captionBox },
-                { SecondaryCommandName, _secondaryCommand },
-                { DialogName, _dialog },
-                { ColorPickerName, _colorPicker },
-                { MessageBoxName, _messageBox },
-                { SpeechBoxName, _speechBox },
-                { ChoicesName, _choices },
-                { FadeMaskName, _fadeMask },
-                { OverlayName, _overlay },
+                _scroll,
+                _widgets,
+                _longMessage,
+                _backAnchor,
+                _forwardAnchor,
+                _primaryCommand,
+                _captionBox,
+                _secondaryCommand,
+                _dialog,
+                _colorPicker,
+                _messageBox,
+                _fadeMask,
+                _overlay,
+                _speechBox,
+                _choices,
             };
         }
 

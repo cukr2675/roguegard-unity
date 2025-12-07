@@ -4,13 +4,6 @@ namespace Roguegard.Device
 {
     public static class RoguegardSubviews
     {
-        public static string Face => "Face";
-        public static string Summary => "Summary";
-        public static string TextEditor => "TextEditor";
-        public static string CharacterCreation => "CharacterCreation";
-        public static string Paint => "Paint";
-        public static string Dopesheet => "Dopesheet";
-
         public static IListHandlerSubview GetFace(MMgr manager)
         {
             return (manager as IMMgr)?.Face;
