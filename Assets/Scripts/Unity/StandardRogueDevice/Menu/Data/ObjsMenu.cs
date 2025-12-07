@@ -55,11 +55,10 @@ namespace RoguegardUnity
                 view.Title = Title;
                 if (SortIsEnabled)
                 {
-                    view.BackAnchorList = new List<ISelectOption>
-                    {
-                        SelectOption.Create<MMgr, MArg>(":Sort", Sort, "Sort click:Sp1"),
-                        BackSelectOption.Instance
-                    };
+                    view.BackAnchorList = new(
+                        _ => _
+                        .Option(":Sort", Sort, "Sort click:Sp1")
+                        .Back());
                 }
             }
 

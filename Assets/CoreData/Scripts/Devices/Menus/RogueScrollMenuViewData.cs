@@ -13,7 +13,7 @@ namespace Roguegard.Device
             = manager => (manager as IDefaultSubviewTable)?.CaptionBox;
         public System.Func<MMgr, IListHandlerSubview> BackAnchorSubviewSelector { get; set; }
             = manager => (manager as IDefaultSubviewTable)?.BackAnchor;
-        public List<ISelectOption> BackAnchorList { get; set; } = new() { BackSelectOption.Instance };
+        public SelectOptionList<MMgr, MArg> BackAnchorList { get; set; } = new() { BackSelectOption.Instance };
 
         private object prevViewStateHolder;
         private ISubviewStateProvider scrollSubviewStateProvider;
