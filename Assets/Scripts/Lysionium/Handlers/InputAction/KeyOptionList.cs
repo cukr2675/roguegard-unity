@@ -3,6 +3,11 @@ using System.Collections.Generic;
 
 namespace Lysionium
 {
+    /// <inheritdoc/>
+    public class KeyOptionList<TMgr> : KeyOptionList<TMgr, IListMenuArg>
+        where TMgr : IListMenuManager
+    { }
+
     public class KeyOptionList<TMgr, TArg>
         : IList<IKeyOption>, IReadOnlyList<IKeyOption>, IKeyOptionListBuilder<TMgr, TArg, KeyOptionList<TMgr, TArg>>
         where TMgr : IListMenuManager

@@ -2,6 +2,11 @@ using System.Collections.Generic;
 
 namespace Lysionium
 {
+    /// <inheritdoc/>
+    public class FadeOutInViewData<TMgr> : FadeOutInViewData<TMgr, IListMenuArg>
+        where TMgr : IListMenuManager
+    { }
+
     /// <summary>
     /// 画面のフェードアウト/フェードインを扱う ViewData
     /// </summary>

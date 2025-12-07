@@ -3,6 +3,11 @@ using System.Text.RegularExpressions;
 
 namespace Lysionium
 {
+    /// <inheritdoc/>
+    public class SpeechBoxViewData<TMgr> : SpeechBoxViewData<TMgr, IListMenuArg>
+        where TMgr : IListMenuManager
+    { }
+
     /// <summary>
     /// 会話ボックスと選択肢を扱う ViewData
     /// </summary>

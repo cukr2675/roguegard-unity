@@ -17,7 +17,8 @@ namespace Lysionium
         }
 
         public static TBuilder Option<TMgr, TArg, TBuilder>(
-            this ISelectOptionListBuilder<TMgr, TArg, TBuilder> builder, string name, ClickItemHandler<TMgr, TArg> onClick, string style = null)
+            this ISelectOptionListBuilder<TMgr, TArg, TBuilder> builder,
+            string name, ClickItemHandler<TMgr, TArg> onClick, string style = null)
             where TMgr : IListMenuManager
             where TArg : IListMenuArg
         {

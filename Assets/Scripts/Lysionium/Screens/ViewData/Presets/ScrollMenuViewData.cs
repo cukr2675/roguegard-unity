@@ -3,6 +3,12 @@ using UnityEngine;
 
 namespace Lysionium
 {
+    /// <inheritdoc/>
+    public class ScrollMenuViewData<TItem, TMgr> : ScrollMenuViewData<TItem, TMgr, IListMenuArg>
+        where TItem : class
+        where TMgr : IListMenuManager
+    { }
+
     /// <summary>
     /// 項目のスクロールが必要なメニュー向け ViewData
     /// </summary>

@@ -3,6 +3,11 @@ using System.Linq;
 
 namespace Lysionium
 {
+    /// <inheritdoc/>
+    public class VariableWidgetsMenuViewData<TMgr> : VariableWidgetsMenuViewData<TMgr, IListMenuArg>
+        where TMgr : IListMenuManager
+    { }
+
     /// <summary>
     /// 項目数が可変のウィジェットメニュー向け ViewData
     /// </summary>

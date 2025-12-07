@@ -2,7 +2,18 @@ using UnityEngine;
 
 namespace Lysionium
 {
-    public class ColorPickerMenuScreen<TMgr, TArg> : MenuScreen<TMgr, TArg>
+    /// <inheritdoc/>
+    public class ColorPickerMenuScreen<TMgr> : ColorPickerMenuScreen<TMgr, IListMenuArg>
+        where TMgr : IListMenuManager
+    {
+        public ColorPickerMenuScreen(
+            System.Func<TMgr, IListMenuArg, Color> getColor, System.Action<TMgr, IListMenuArg, Color> onClose,
+            System.Func<TMgr, IColorPickerSubview> colorPickerSubviewSelector = null)
+            : base(getColor, onClose, colorPickerSubviewSelector)
+        { }
+    }
+
+    public class ColorPickerMenuScreen<TMgr, TArg> : IMenuScreen<TMgr, TArg>
         where TMgr : IListMenuManager
         where TArg : IListMenuArg
     {
@@ -10,7 +21,7 @@ namespace Lysionium
         private readonly System.Action<TMgr, TArg, Color> handleClose;
         private readonly ViewData view;
 
-        public override bool IsIncremental => true;
+        public bool IsIncremental => true;
 
         public ColorPickerMenuScreen(
             System.Func<TMgr, TArg, Color> getColor, System.Action<TMgr, TArg, Color> onClose,
@@ -26,7 +37,7 @@ namespace Lysionium
             };
         }
 
-        public override void OpenScreen(TMgr manager, TArg arg)
+        public void OpenScreen(TMgr manager, TArg arg)
         {
             var color = getColor(manager, arg);
 
@@ -42,7 +53,7 @@ namespace Lysionium
                 .Build();
         }
 
-        public override void CloseScreenView(TMgr manager, bool back)
+        public void CloseScreenView(TMgr manager, bool back)
         {
             view.Hide(manager, back);
         }

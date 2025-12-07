@@ -1,7 +1,10 @@
-using System.Collections.Generic;
-
 namespace Lysionium
 {
+    /// <inheritdoc/>
+    public class MainMenuViewData<TMgr> : MainMenuViewData<TMgr, IListMenuArg>
+        where TMgr : IListMenuManager
+    { }
+
     /// <summary>
     /// 項目数が固定のメニュー向け ViewData
     /// </summary>

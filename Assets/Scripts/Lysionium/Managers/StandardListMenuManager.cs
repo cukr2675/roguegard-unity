@@ -10,6 +10,10 @@ namespace Lysionium
         public void Initialize() => CommonInit();
     }
 
+    public abstract class StandardListMenuManager<TMgr> : StandardListMenuManager<TMgr, IListMenuArg>
+        where TMgr : StandardListMenuManager<TMgr, IListMenuArg>
+    { }
+
     [RequireComponent(typeof(DefaultSubviewTable))]
     public abstract class StandardListMenuManager<TMgr, TArg> : MonoBehaviour, IMenuScreenListMenuManager<TMgr, TArg>, IDefaultSubviewTable
         where TMgr : StandardListMenuManager<TMgr, TArg>

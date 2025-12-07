@@ -3,6 +3,11 @@ using System.Collections.Generic;
 
 namespace Lysionium
 {
+    /// <inheritdoc/>
+    public class SelectOptionList<TMgr> : SelectOptionList<TMgr, IListMenuArg>
+        where TMgr : IListMenuManager
+    { }
+
     public class SelectOptionList<TMgr, TArg>
         : IList<ISelectOption>, IReadOnlyList<ISelectOption>, ISelectOptionListBuilder<TMgr, TArg, SelectOptionList<TMgr, TArg>>
         where TMgr : IListMenuManager

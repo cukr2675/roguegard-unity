@@ -3,6 +3,12 @@ using UnityEngine;
 
 namespace Lysionium
 {
+    /// <inheritdoc/>
+    public class CommandListMenuViewData<TItem, TMgr> : CommandListMenuViewData<TItem, TMgr, IListMenuArg>
+        where TItem : class
+        where TMgr : IListMenuManager
+    { }
+
     /// <summary>
     /// 項目数が可変のメニュー向け ViewData
     /// </summary>

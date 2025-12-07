@@ -2,7 +2,26 @@ using System.Collections.Generic;
 
 namespace Lysionium
 {
-    public class ChoicesMenuScreen<TMgr, TArg> : MenuScreen<TMgr, TArg>, ISelectOptionListBuilder<TMgr, TArg, ChoicesMenuScreen<TMgr, TArg>>
+    /// <inheritdoc/>
+    public class ChoicesMenuScreen<TMgr> : ChoicesMenuScreen<TMgr, IListMenuArg>
+        where TMgr : IListMenuManager
+    {
+        public ChoicesMenuScreen(
+            string message, bool isIncremental = true,
+            System.Func<TMgr, IMessageBoxSubview> speechBoxSubviewSelector = null,
+            System.Func<TMgr, IListHandlerSubview> choicesSubviewSelector = null)
+            : base(message, isIncremental, speechBoxSubviewSelector, choicesSubviewSelector)
+        { }
+
+        public ChoicesMenuScreen(
+            System.Func<TMgr, IListMenuArg, string> getMessage, bool isIncremental = true,
+            System.Func<TMgr, IMessageBoxSubview> speechBoxSubviewSelector = null,
+            System.Func<TMgr, IListHandlerSubview> choicesSubviewSelector = null)
+            : base(getMessage, isIncremental, speechBoxSubviewSelector, choicesSubviewSelector)
+        { }
+    }
+
+    public class ChoicesMenuScreen<TMgr, TArg> : IMenuScreen<TMgr, TArg>, ISelectOptionListBuilder<TMgr, TArg, ChoicesMenuScreen<TMgr, TArg>>
         where TMgr : IListMenuManager
         where TArg : IListMenuArg
     {
@@ -10,7 +29,7 @@ namespace Lysionium
         private readonly List<ISelectOption> selectOptions = new();
         private readonly SpeechBoxViewData<TMgr, TArg> view;
 
-        public override bool IsIncremental { get; }
+        public bool IsIncremental { get; }
 
         public ChoicesMenuScreen(
             string message, bool isIncremental = true,
@@ -48,7 +67,7 @@ namespace Lysionium
             return this;
         }
 
-        public override void OpenScreen(TMgr manager, TArg arg)
+        public void OpenScreen(TMgr manager, TArg arg)
         {
             var message = getMessage(manager, arg);
 
@@ -59,10 +78,10 @@ namespace Lysionium
                 .Build();
         }
 
-        public override void CloseScreenView(TMgr manager, bool back)
+        public void CloseScreenView(TMgr manager, bool back)
         {
             if (IsIncremental) { view.Hide(manager, back); }
-            else { base.CloseScreenView(manager, back); }
+            else { manager.HideAll(back); }
         }
     }
 }

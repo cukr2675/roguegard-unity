@@ -2,6 +2,11 @@ using System.Collections.Generic;
 
 namespace Lysionium
 {
+    /// <inheritdoc/>
+    public class DialogViewData<TMgr> : DialogViewData<TMgr, IListMenuArg>
+        where TMgr : IListMenuManager
+    { }
+
     /// <summary>
     /// テキストと項目を表示する ViewData
     /// </summary>
