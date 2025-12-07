@@ -44,11 +44,11 @@ namespace RoguegardUnity
         /// メッセージがアニメーション中 or メニュー操作中は待機
         /// </summary>
         public bool Wait =>
-            StandardSubviewTable.MessageBox.MessageBox.IsInProgress || StandardSubviewTable.SpeechBox.MessageBox.IsInProgress ||
+            MessageBox.IsInProgress || SpeechBox.IsInProgress ||
             ShowsMenuScreen || EventManager.Wait;
 
         public bool TalkingWait =>
-            StandardSubviewTable.SpeechBox.MessageBox.IsInProgress ||
+            SpeechBox.IsInProgress ||
             ShowsMenuScreen || EventManager.Wait;
 
         protected override bool HasManagerLock =>
@@ -77,7 +77,7 @@ namespace RoguegardUnity
             _dopesheet.Initialize();
             if (_titleMenu != null) { _titleMenu.CommonInit(); }
 
-            EventManager = new ListMenuEventManager(new MessageController(StandardSubviewTable), _audioPlayHandler);
+            EventManager = new ListMenuEventManager(new MessageController(MessageBox, LongMessage), _audioPlayHandler);
         }
 
         public void Open(RogueObj menuSubject)

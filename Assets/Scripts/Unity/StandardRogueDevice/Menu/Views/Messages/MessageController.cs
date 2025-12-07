@@ -8,22 +8,22 @@ namespace RoguegardUnity
 {
     public class MessageController
     {
-        private readonly MessageBoxSubview messageSubview;
-        private readonly MessageBoxSubview logSubview;
+        private readonly IMessageBoxSubview messageSubview;
+        private readonly IMessageBoxSubview logSubview;
 
         private bool messageBoxIsVisible;
         private int showMessageTime;
         private const int messageTime = 3 * 60;
 
-        public MessageController(StandardSubviewTable table)
+        public MessageController(IMessageBoxSubview messageSubview, IMessageBoxSubview logSubview)
         {
-            messageSubview = table.MessageBox;
-            logSubview = table.LongMessage;
+            this.messageSubview = messageSubview;
+            this.logSubview = logSubview;
         }
 
         internal void UpdateUI(int deltaTime)
         {
-            if (messageBoxIsVisible && !messageSubview.MessageBox.IsInProgress)
+            if (messageBoxIsVisible && !messageSubview.IsInProgress)
             {
                 showMessageTime += deltaTime;
                 if (showMessageTime >= messageTime)
@@ -42,8 +42,8 @@ namespace RoguegardUnity
 
         private void AppendText(string text)
         {
-            messageSubview.MessageBox.Append(text);
-            logSubview.MessageBox.Append(text);
+            messageSubview.Append(text);
+            logSubview.Append(text);
             showMessageTime = 0;
             ShowMessage();
         }
@@ -108,8 +108,8 @@ namespace RoguegardUnity
 
         public void ClearText()
         {
-            messageSubview.MessageBox.Clear();
-            logSubview.MessageBox.Clear();
+            messageSubview.Clear();
+            logSubview.Clear();
         }
     }
 }

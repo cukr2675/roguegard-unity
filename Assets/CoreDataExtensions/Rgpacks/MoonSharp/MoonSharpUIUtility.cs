@@ -130,12 +130,12 @@ namespace Roguegard.Rgpacks.MoonSharp
             {
                 if (!isOpened)
                 {
-                    manager.StandardSubviewTable.SpeechBox.MessageBox.Clear();
+                    manager.SpeechBox.Clear();
                     isOpened = true;
                 }
 
-                manager.StandardSubviewTable.SpeechBox.MessageBox.Append(message);
-                manager.StandardSubviewTable.SpeechBox.Show();
+                manager.SpeechBox.Append(message);
+                manager.SpeechBox.Show();
 
                 var showFace = arg.Arg.TargetObj != null;
                 if (showFace)
@@ -143,7 +143,7 @@ namespace Roguegard.Rgpacks.MoonSharp
                     RoguegardSubviews.GetFace(manager).Show(null, null, manager, arg, ref faceStateProvider);
                 }
 
-                manager.StandardSubviewTable.SpeechBox.DoScheduledAfterCompletion((iManager, iArg) =>
+                manager.SpeechBox.DoScheduledAfterCompletion((iManager, iArg) =>
                 {
                     try
                     {
@@ -163,7 +163,7 @@ namespace Roguegard.Rgpacks.MoonSharp
 
                         // スピーチボックスと顔グラフィックは表示したままにする
                         manager.ResetDone();
-                        manager.StandardSubviewTable.SpeechBox.Show();
+                        manager.SpeechBox.Show();
                         if (showFace)
                         {
                             RoguegardSubviews.GetFace(manager).Show();
@@ -174,8 +174,8 @@ namespace Roguegard.Rgpacks.MoonSharp
                         // 次のアニメーションやメニューがない場合はスピーチボックスを閉じる
 
                         // AdvanceText のリセット用に VerticalArrow が余分に必要
-                        manager.StandardSubviewTable.SpeechBox.MessageBox.Append("<link=\"VerticalArrow\"></link><link=\"VerticalArrow\"></link>");
-                        manager.StandardSubviewTable.SpeechBox.DoScheduledAfterCompletion((iManager, arg) =>
+                        manager.SpeechBox.Append("<link=\"VerticalArrow\"></link><link=\"VerticalArrow\"></link>");
+                        manager.SpeechBox.DoScheduledAfterCompletion((iManager, arg) =>
                         {
                             var manager = (MMgr)iManager;
                             manager.Done();
@@ -187,7 +187,7 @@ namespace Roguegard.Rgpacks.MoonSharp
 
             public override void CloseScreenView(MMgr manager, bool back)
             {
-                manager.StandardSubviewTable.MessageBox.Hide(back);
+                manager.MessageBox.Hide(back);
             }
         }
 
@@ -211,7 +211,7 @@ namespace Roguegard.Rgpacks.MoonSharp
                     .OnClick((selectOption, manager, arg) =>
                     {
                         manager.Done();
-                        manager.StandardSubviewTable.SpeechBox.MessageBox.Clear();
+                        manager.SpeechBox.Clear();
                         args[0] = DynValue.NewNumber(selectOptions.IndexOf(selectOption) + 1);
                         try
                         {

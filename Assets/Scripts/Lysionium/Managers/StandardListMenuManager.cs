@@ -1,3 +1,4 @@
+using Lysionium.Views;
 using UnityEngine;
 
 namespace Lysionium
@@ -8,12 +9,12 @@ namespace Lysionium
         public void Initialize() => CommonInit();
     }
 
-    [RequireComponent(typeof(StandardSubviewTable))]
+    [RequireComponent(typeof(DefaultSubviewTable))]
     public abstract class StandardListMenuManager<TMgr, TArg> : MonoBehaviour, IMenuScreenListMenuManager<TMgr, TArg>, IDefaultSubviewTable
         where TMgr : StandardListMenuManager<TMgr, TArg>
         where TArg : IListMenuArg
     {
-        public StandardSubviewTable StandardSubviewTable { get; private set; }
+        private DefaultSubviewTable defaultSubviewTable;
 
         public event System.Action OnError;
         public event System.Action OnDone;
@@ -35,30 +36,30 @@ namespace Lysionium
         /// <summary>
         /// この値が true の間は予約されたメニューを表示しない。遷移アニメーション用
         /// </summary>
-        protected virtual bool HasManagerLock => StandardSubviewTable.HasManagerLock;
+        protected virtual bool HasManagerLock => defaultSubviewTable.HasManagerLock;
 
-        public IListHandlerSubview Scroll => StandardSubviewTable.Scroll;
-        public IListHandlerSubview Widgets => StandardSubviewTable.Widgets;
-        public IMessageBoxSubview LongMessage => StandardSubviewTable.LongMessage;
-        public IListHandlerSubview BackAnchor => StandardSubviewTable.BackAnchor;
-        public IListHandlerSubview ForwardAnchor => StandardSubviewTable.ForwardAnchor;
-        public IListHandlerSubview PrimaryCommand => StandardSubviewTable.PrimaryCommand;
-        public IListHandlerSubview CaptionBox => StandardSubviewTable.CaptionBox;
-        public IListHandlerSubview SecondaryCommand => StandardSubviewTable.SecondaryCommand;
-        public IListHandlerSubview Dialog => StandardSubviewTable.Dialog;
-        public IColorPickerSubview ColorPicker => StandardSubviewTable.ColorPicker;
-        public IMessageBoxSubview MessageBox => StandardSubviewTable.MessageBox;
-        public IListHandlerSubview FadeMask => StandardSubviewTable.FadeMask;
-        public IListHandlerSubview Overlay => StandardSubviewTable.Overlay;
-        public IMessageBoxSubview SpeechBox => StandardSubviewTable.SpeechBox;
-        public IListHandlerSubview Choices => StandardSubviewTable.Choices;
+        public IListHandlerSubview Scroll => defaultSubviewTable.Scroll;
+        public IListHandlerSubview Widgets => defaultSubviewTable.Widgets;
+        public IMessageBoxSubview LongMessage => defaultSubviewTable.LongMessage;
+        public IListHandlerSubview BackAnchor => defaultSubviewTable.BackAnchor;
+        public IListHandlerSubview ForwardAnchor => defaultSubviewTable.ForwardAnchor;
+        public IListHandlerSubview PrimaryCommand => defaultSubviewTable.PrimaryCommand;
+        public IListHandlerSubview CaptionBox => defaultSubviewTable.CaptionBox;
+        public IListHandlerSubview SecondaryCommand => defaultSubviewTable.SecondaryCommand;
+        public IListHandlerSubview Dialog => defaultSubviewTable.Dialog;
+        public IColorPickerSubview ColorPicker => defaultSubviewTable.ColorPicker;
+        public IMessageBoxSubview MessageBox => defaultSubviewTable.MessageBox;
+        public IListHandlerSubview FadeMask => defaultSubviewTable.FadeMask;
+        public IListHandlerSubview Overlay => defaultSubviewTable.Overlay;
+        public IMessageBoxSubview SpeechBox => defaultSubviewTable.SpeechBox;
+        public IListHandlerSubview Choices => defaultSubviewTable.Choices;
         public IListHandlerSubview DropdownList => throw new System.NotImplementedException();
         public IListHandlerSubview DropdownGrid => throw new System.NotImplementedException();
 
         protected void CommonInit()
         {
-            StandardSubviewTable = GetComponent<StandardSubviewTable>();
-            StandardSubviewTable.CommonInit();
+            defaultSubviewTable = GetComponent<DefaultSubviewTable>();
+            defaultSubviewTable.CommonInit();
             HideAll();
         }
 
@@ -94,7 +95,7 @@ namespace Lysionium
 
         protected virtual void BlockAll()
         {
-            foreach (var subview in StandardSubviewTable.Subviews.Values)
+            foreach (var subview in defaultSubviewTable.Subviews.Values)
             {
                 subview.SetInteractable(false);
             }
@@ -102,7 +103,7 @@ namespace Lysionium
 
         public virtual void HideAll(bool back = false)
         {
-            foreach (var subview in StandardSubviewTable.Subviews.Values)
+            foreach (var subview in defaultSubviewTable.Subviews.Values)
             {
                 subview.Hide(back);
             }
@@ -126,7 +127,7 @@ namespace Lysionium
         {
             stack.Clear();
             PushMenuScreen(menu, arg);
-            StandardSubviewTable.SetBlocker(enableTouchMask);
+            defaultSubviewTable.SetBlocker(enableTouchMask);
         }
 
         /// <summary>
@@ -170,7 +171,7 @@ namespace Lysionium
             stack.Clear();
             reservedMenu = null;
             HideAll();
-            StandardSubviewTable.SetBlocker(false);
+            defaultSubviewTable.SetBlocker(false);
             IsDone = true;
             OnDone?.Invoke();
         }

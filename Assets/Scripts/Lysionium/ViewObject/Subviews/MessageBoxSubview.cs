@@ -9,7 +9,9 @@ namespace Lysionium.Views
     public class MessageBoxSubview : Subview, IMessageBoxSubview
     {
         [SerializeField] private MessageBox _messageBox = null;
-        public MessageBox MessageBox => _messageBox;
+        protected MessageBox MessageBox => _messageBox;
+
+        public bool IsInProgress => _messageBox.IsInProgress;
 
         [SerializeField] private ViewItem _blocker = null;
 
@@ -62,6 +64,26 @@ namespace Lysionium.Views
                     SelectOption.Create<IListMenuManager, IListMenuArg>("", delegate { _onClick.Invoke(); }), SelectOptionViewItemHandler.Instance);
                 _blocker.SetVisible(true, true);
             }
+        }
+
+        public void Append(string text)
+        {
+            _messageBox.Append(text);
+        }
+
+        public void Append(int integer)
+        {
+            _messageBox.Append(integer);
+        }
+
+        public void Append(float number)
+        {
+            _messageBox.Append(number);
+        }
+
+        public void Clear()
+        {
+            _messageBox.Clear();
         }
 
         public void DoScheduledAfterCompletion(ListMenuEventHandler onEndAnimation)

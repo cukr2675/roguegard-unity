@@ -182,7 +182,7 @@ namespace RoguegardUnity
                                 device.Options.SetMasterVolume(value / 100f);
 
                                 // 音量確認用の効果音を鳴らす
-                                manager.StandardSubviewTable.MessageBox.PlayString("Submit");
+                                ((Lysionium.Views.Subview)manager.MessageBox).PlayString("Submit");
 
                                 return value.ToString();
                             },

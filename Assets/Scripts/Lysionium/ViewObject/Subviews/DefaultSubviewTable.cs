@@ -1,12 +1,11 @@
-using Lysionium.Views;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Lysionium
+namespace Lysionium.Views
 {
-    [AddComponentMenu("UI/Lysionium/LUI Standard Subview Table")]
-    public class StandardSubviewTable : MonoBehaviour
+    [AddComponentMenu("UI/Lysionium/LUI Default Subview Table")]
+    public class DefaultSubviewTable : MonoBehaviour
     {
         [SerializeField] private Image _blocker = null;
 
@@ -19,7 +18,7 @@ namespace Lysionium
         public static string WidgetsName => "Widgets";
 
         [SerializeField] private LongMessageSubview _longMessage = null;
-        public MessageBoxSubview LongMessage => _longMessage;
+        public IMessageBoxSubview LongMessage => _longMessage;
         public static string LongMessageName => "LongMessage";
 
         [SerializeField] private Subview _backAnchor = null;
@@ -51,7 +50,7 @@ namespace Lysionium
         public static string ColorPickerName => "ColorPicker";
 
         [SerializeField] private MessageBoxSubview _messageBox = null; // Rgpack の rg.msg で表示するため名前はメッセージボックス
-        public MessageBoxSubview MessageBox => _messageBox;
+        public IMessageBoxSubview MessageBox => _messageBox;
         public static string MessageBoxName => "MessageBox";
 
         [SerializeField] private Subview _fadeMask = null;
@@ -63,7 +62,7 @@ namespace Lysionium
         public static string OverlayName => "Overlay";
 
         [SerializeField] private MessageBoxSubview _speechBox = null; // Rgpack の rg.say で表示するため名前はスピーチボックス
-        public MessageBoxSubview SpeechBox => _speechBox;
+        public IMessageBoxSubview SpeechBox => _speechBox;
         public static string SpeechBoxName => "SpeechBox";
 
         [SerializeField] private Subview _choices = null;
