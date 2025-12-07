@@ -57,7 +57,7 @@ namespace Roguegard.Rgpacks
                         (manager, arg) => EvtFairyInfo.Get(arg.Arg.TargetObj).RelatedChart,
                         (manager, arg, value) => EvtFairyInfo.Get(arg.Arg.TargetObj).RelatedChart = value))
 
-                    .TailOption("+ ページを追加", (manager, arg) =>
+                    .Tail.Option("+ ページを追加", (manager, arg) =>
                     {
                         var fairy = arg.Arg.TargetObj;
                         var eventFairyInfo = EvtFairyInfo.Get(fairy);
@@ -91,10 +91,10 @@ namespace Roguegard.Rgpacks
                         (manager, arg) => ((EvtFairyInfo.Page)arg.Arg.Other).Sprite,
                         (manager, arg, value) => ((EvtFairyInfo.Page)arg.Arg.Other).Sprite = value))
 
-                    .TailOption("カテゴリ", new CategoryMenu())
+                    .Tail.Option("カテゴリ", new CategoryMenu())
 
                     .VarOnce(out var cmnMenu, new PropertiedCmnMenu())
-                    .TailOption("Cmn", (manager, arg) => manager.PushMenuScreen(cmnMenu, arg.Self, other: ((EvtFairyInfo.Page)arg.Arg.Other).Cmn))
+                    .Tail.Option("Cmn", (manager, arg) => manager.PushMenuScreen(cmnMenu, arg.Self, other: ((EvtFairyInfo.Page)arg.Arg.Other).Cmn))
 
                     .Build();
             }

@@ -5,7 +5,7 @@ namespace Roguegard.Device
     /// <summary>
     /// メッセージと選択肢のメニュー画面
     /// </summary>
-    public class ChoicesMenuScreen : RogueMenuScreen
+    public class ChoicesMenuScreen : RogueMenuScreen, ISelectOptionListBuilder<MMgr, MArg, ChoicesMenuScreen>
     {
         private readonly ChoicesMenuScreen<MMgr, MArg> screen;
 
@@ -65,15 +65,9 @@ namespace Roguegard.Device
             manager.PopMenuScreen(2);
         }
 
-        public ChoicesMenuScreen Option(string name, ClickItemHandler<MMgr, MArg> onClick)
+        public ChoicesMenuScreen Option(ISelectOption option)
         {
-            screen.Option(name, onClick);
-            return this;
-        }
-
-        public ChoicesMenuScreen Back()
-        {
-            screen.Back();
+            screen.Option(option);
             return this;
         }
 

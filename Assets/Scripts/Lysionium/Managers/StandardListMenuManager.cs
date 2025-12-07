@@ -9,7 +9,7 @@ namespace Lysionium
     }
 
     [RequireComponent(typeof(StandardSubviewTable))]
-    public abstract class StandardListMenuManager<TMgr, TArg> : MonoBehaviour, IListMenuManager, IDefaultSubviewTable
+    public abstract class StandardListMenuManager<TMgr, TArg> : MonoBehaviour, IListMenuManager, IDefaultSubviewTable, IMenuScreenListMenuManager<TMgr, TArg>
         where TMgr : StandardListMenuManager<TMgr, TArg>
         where TArg : IListMenuArg
     {
@@ -114,14 +114,6 @@ namespace Lysionium
             menuScreen.CloseScreenView((TMgr)this, false);
             BlockAll();
             reservedMenu = stack.Push(menuScreen, arg);
-        }
-
-        void IListMenuManager.PushMenuScreenFromExtension(object menuScreen, IListMenuArg arg)
-        {
-            if (LuiAssert.Type<IMenuScreen<TMgr, TArg>>(menuScreen, out var tMenuScreen) ||
-                LuiAssert.Type<TArg>(arg, out var tArg)) throw new System.ArgumentException();
-
-            PushMenuScreen(tMenuScreen, tArg);
         }
 
         public void PushInitialMenuScreen(IMenuScreen<TMgr, TArg> menu, TArg arg, bool enableTouchMask = true)

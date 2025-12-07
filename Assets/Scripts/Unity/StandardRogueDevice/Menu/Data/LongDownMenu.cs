@@ -38,7 +38,9 @@ namespace RoguegardUnity
             }
 
             view.Show(manager, arg)
-                ?.TailRange(selectOptions)
+                ?
+                .Tail.OptionRange(selectOptions)
+
                 .Build();
         }
     }

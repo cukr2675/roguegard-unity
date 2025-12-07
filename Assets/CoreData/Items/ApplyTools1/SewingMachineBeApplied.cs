@@ -46,7 +46,7 @@ namespace Roguegard
                         }
                     })
 
-                    .TailOption("+ 新しく作る", (manager, arg) =>
+                    .Tail.Option("+ 新しく作る", (manager, arg) =>
                     {
                         // 装備品を新規作成する場合はデータクラスを生成する
                         var data = new SewedEquipmentData();
@@ -67,10 +67,7 @@ namespace Roguegard
             private readonly ScrollMenuViewData<IPaintBoneSprite, MMgr, MArg> view = new()
             {
                 ScrollSubviewSelector = m => m.Widgets,
-                BackAnchorList = new()
-                {
-                    SelectOption.Create<MMgr, MArg>(":Back", ChoicesMenuScreen.SaveBackDialog(Save)),
-                },
+                BackAnchorList = new(_ => _.Option(":Back", ChoicesMenuScreen.SaveBackDialog(Save))),
             };
 
             public override void OpenScreen(in MMgr manager, in MArg arg)
@@ -90,7 +87,7 @@ namespace Roguegard
                             var data = (SewedEquipmentData)arg.Arg.Other;
                             data.BoneSprites.MainColor = color;
                         }))
-                    .Head(StackWidgetOption.Create(
+                    .Head.Append(StackWidgetOption.Create(
                         ("1*", "名前"),
                         ("1*", InputFieldWidgetOption.Create<MMgr, MArg>(
                             (manager, arg) =>
@@ -104,18 +101,18 @@ namespace Roguegard
                                 return data.Name = value;
                             }))))
 
-                    .Head(SelectOption.Create<MMgr, MArg>(
+                    .Head.Append(SelectOption.Create<MMgr, MArg>(
                         getName: (manager, arg) =>
                         {
                             var data = (SewedEquipmentData)arg.Arg.Other;
                             return $"<#{ColorUtility.ToHtmlStringRGBA(data.BoneSprites.MainColor)}>メインカラー";
                         },
-                        onClick: colorPicker))
+                        onClick: (manager, arg) => manager.PushMenuScreen(colorPicker, arg)))
 
                     .VarOnce(out var equipmentSlotsScreen, new EquipmentSlotsScreen())
-                    .Head(SelectOption.Create<MMgr, MArg>("装備部位", equipmentSlotsScreen))
+                    .Head.Option("装備部位", equipmentSlotsScreen)
 
-                    .Head(StackWidgetOption.Create(
+                    .Head.Append(StackWidgetOption.Create(
                         ("1*", "順序"),
                         ("1*", InputFieldWidgetOption.Create<MMgr, MArg>(
                             (manager, arg) =>
@@ -147,7 +144,7 @@ namespace Roguegard
                         manager.PushMenuScreen(nextScreen, arg.Self, other: data.BoneSprites, count: data.BoneSprites.IndexOf(boneSprite));
                     })
 
-                    .TailOption("+ 追加", (manager, arg) =>
+                    .Tail.Option("+ 追加", (manager, arg) =>
                     {
                         // 部位追加
                         var data = (SewedEquipmentData)arg.Arg.Other;

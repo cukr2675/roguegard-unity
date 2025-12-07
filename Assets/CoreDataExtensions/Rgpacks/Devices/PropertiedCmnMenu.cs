@@ -84,7 +84,7 @@ namespace Roguegard.Device
             {
                 view = new()
                 {
-                    BackAnchorList = new List<ISelectOption>()
+                    BackAnchorList = new()
                     {
                         SelectOption.Create<MMgr, MArg>(":Back", (manager, arg) =>
                         {
@@ -115,7 +115,7 @@ namespace Roguegard.Device
 
                     .OnClick((startingItem, manager, arg) => manager.PushMenuScreen(characterCreationOptionMenu, other: startingItem))
 
-                    .TailOption("+ アイテムを追加", (manager, arg) => manager.PushMenuScreen(characterCreationAddMenu, other: typeof(StartingItem)))
+                    .Tail.Option("+ アイテムを追加", (manager, arg) => manager.PushMenuScreen(characterCreationAddMenu, other: typeof(StartingItem)))
 
                     .Build();
             }

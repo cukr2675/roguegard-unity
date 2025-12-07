@@ -51,9 +51,9 @@ namespace Roguegard.Device
                         (manager, arg) => removeSelectOption.characterCreationData.ShortName,
                         (manager, arg, value) => removeSelectOption.characterCreationData.ShortName = value))
 
-                    .Head(selectOption)
+                    .Head.Option(selectOption)
 
-                    .Head(SelectOption.Create<MMgr, MArg>(
+                    .Head.Option(
                         (manager, arg) =>
                         {
                             var race = (Race)arg.Arg.Other;
@@ -64,15 +64,15 @@ namespace Roguegard.Device
                             var race = (Race)arg.Arg.Other;
                             var nextMenu = new SelectGenderMenu { database = database };
                             manager.PushMenuScreen(nextMenu, arg.Self, other: arg.Arg.Other);
-                        }))
+                        })
 
-                    .Head(SelectOption.Create<MMgr, MArg>(
+                    .Head.Option(
                         (manager, arg) =>
                         {
                             var race = (Race)arg.Arg.Other;
                             return $"<#{ColorUtility.ToHtmlStringRGBA(race.BodyColor)}>カラー";
                         },
-                        ColorPicker()))
+                        ColorPicker())
 
                     .Build();
             }
@@ -80,17 +80,17 @@ namespace Roguegard.Device
             {
                 appearanceView.Show(list, manager, arg)
                     ?
-                    .Head(selectOption)
+                    .Head.Option(selectOption)
 
-                    .Head(SelectOption.Create<MMgr, MArg>(
+                    .Head.Option(
                         (manager, arg) =>
                         {
                             var appearance = (Appearance)arg.Arg.Other;
                             return $"<#{ColorUtility.ToHtmlStringRGBA(appearance.Color)}>カラー";
                         },
-                        ColorPicker()))
+                        ColorPicker())
 
-                    .Tail(removeSelectOption)
+                    .Tail.Option(removeSelectOption)
 
                     .Build();
             }
@@ -98,7 +98,7 @@ namespace Roguegard.Device
             {
                 intrinsicView.Show(list, manager, arg)
                     ?
-                    .Head(selectOption)
+                    .Head.Option(selectOption)
 
                     .HeadStack("名前", InputFieldWidgetOption.Create<MMgr, MArg>(
                         (manager, arg) =>
@@ -115,7 +115,7 @@ namespace Roguegard.Device
                             return intrinsic.CustomName = value;
                         }))
 
-                    .Tail(removeSelectOption)
+                    .Tail.Option(removeSelectOption)
 
                     .Build();
             }
@@ -123,7 +123,7 @@ namespace Roguegard.Device
             {
                 startingItemView.Show(list, manager, arg)
                     ?
-                    .Head(selectOption)
+                    .Head.Option(selectOption)
 
                     .HeadStack("個数", InputFieldWidgetOption.Create<MMgr, MArg>(
                         (manager, arg) =>
@@ -146,7 +146,7 @@ namespace Roguegard.Device
                         },
                         TMP_InputField.ContentType.IntegerNumber))
 
-                    .Tail(removeSelectOption)
+                    .Tail.Option(removeSelectOption)
 
                     .Build();
             }

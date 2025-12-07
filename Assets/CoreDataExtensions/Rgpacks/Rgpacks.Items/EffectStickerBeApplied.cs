@@ -40,7 +40,7 @@ namespace Roguegard.Rgpacks
                         }))
 
                     .VarOnce(out var cmnMenu, new PropertiedCmnMenu())
-                    .TailOption("Update", (manager, arg) => manager.PushMenuScreen(cmnMenu, arg.Self, other: EffectStickerInfo.Get(arg.Arg.TargetObj).Update))
+                    .Tail.Option("Update", (manager, arg) => manager.PushMenuScreen(cmnMenu, arg.Self, other: EffectStickerInfo.Get(arg.Arg.TargetObj).Update))
 
                     .TailStack("スプライト", InputFieldWidgetOption.Create<MMgr, MArg>(
                         (manager, arg) => EffectStickerInfo.Get(arg.Arg.TargetObj).Sprite,

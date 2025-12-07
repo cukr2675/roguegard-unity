@@ -71,53 +71,8 @@ namespace Lysionium
             // 命名メモ: Prepend/Append (Linq風) ではなく Head/Tail
             // そもそも Linq ではないのとぱっと見の見分けやすさ重視
 
-            public TOut Head(object item)
-            {
-                AssertNotBuilt();
-
-                Parent.headList.Add(item);
-                return (TOut)this;
-            }
-
-            public TOut HeadRange(IEnumerable<object> items)
-            {
-                AssertNotBuilt();
-
-                Parent.tailList.AddRange(items);
-                return (TOut)this;
-            }
-
-            public TOut HeadOption(string name, ClickItemHandler<TMgr, TArg> onClick, string style = null)
-            {
-                AssertNotBuilt();
-
-                Parent.headList.Add(SelectOption.Create(name, onClick, style));
-                return (TOut)this;
-            }
-
-            public TOut Tail(object item)
-            {
-                AssertNotBuilt();
-
-                Parent.tailList.Add(item);
-                return (TOut)this;
-            }
-
-            public TOut TailRange(IEnumerable<object> items)
-            {
-                AssertNotBuilt();
-
-                Parent.tailList.AddRange(items);
-                return (TOut)this;
-            }
-
-            public TOut TailOption(string name, ClickItemHandler<TMgr, TArg> onClick, string style = null)
-            {
-                AssertNotBuilt();
-
-                Parent.tailList.Add(SelectOption.Create(name, onClick, style));
-                return (TOut)this;
-            }
+            public HeadBuilder Head => new((TOut)this);
+            public TailBuilder Tail => new((TOut)this);
 
             public TOut Filter(System.Func<TItem, TMgr, TArg, bool> predicate)
             {
@@ -146,6 +101,50 @@ namespace Lysionium
                 Parent.headList.Clear();
                 Parent.tailList.Clear();
                 Parent.filter = null;
+            }
+
+            public readonly struct HeadBuilder : ISelectOptionListBuilder<TMgr, TArg, TOut>
+            {
+                private readonly TOut parent;
+                public HeadBuilder(TOut parent) => this.parent = parent;
+
+                public TOut Append(object item)
+                {
+                    parent.AssertNotBuilt();
+
+                    parent.Parent.headList.Add(item);
+                    return parent;
+                }
+
+                public TOut Option(ISelectOption option)
+                {
+                    parent.AssertNotBuilt();
+
+                    parent.Parent.headList.Add(option);
+                    return parent;
+                }
+            }
+
+            public readonly struct TailBuilder : ISelectOptionListBuilder<TMgr, TArg, TOut>
+            {
+                private readonly TOut parent;
+                public TailBuilder(TOut parent) => this.parent = parent;
+
+                public TOut Append(object item)
+                {
+                    parent.AssertNotBuilt();
+
+                    parent.Parent.tailList.Add(item);
+                    return parent;
+                }
+
+                public TOut Option(ISelectOption option)
+                {
+                    parent.AssertNotBuilt();
+
+                    parent.Parent.tailList.Add(option);
+                    return parent;
+                }
             }
         }
 

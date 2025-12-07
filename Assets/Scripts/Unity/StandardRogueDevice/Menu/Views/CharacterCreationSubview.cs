@@ -39,8 +39,9 @@ namespace RoguegardUnity
         private ISelectOption appearanceSelectOption;
         private AppearanceEditingMenu appearanceEditingMenu;
         private readonly List<MonoBehaviour> itemObjects = new();
+        private static readonly LoadPresetMenu loadPresetMenu = new();
         private static ISelectOption LoadPresetSelectOption { get; }
-            = SelectOption.Create<MMgr, MArg>(":Load", new LoadPresetMenu());
+            = SelectOption.Create<MMgr, MArg>(":Load", (manager, arg) => manager.PushMenuScreen(loadPresetMenu, arg));
         private static readonly object[] leftAnchorObjs = new object[2];
 
         private readonly List<ViewItem> viewItems = new();

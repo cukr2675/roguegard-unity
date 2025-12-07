@@ -89,13 +89,32 @@ namespace Lysionium
 
             public Builder HeadStack(params object[] items)
             {
-                return Head(StackWidgetOption.Create(items.Select(x => ("1*", x)).ToArray()));
+                return Head.Append(StackWidgetOption.Create(items.Select(x => ("1*", x)).ToArray()));
             }
 
             public Builder TailStack(params object[] items)
             {
-                return Tail(StackWidgetOption.Create(items.Select(x => ("1*", x)).ToArray()));
+                return Tail.Append(StackWidgetOption.Create(items.Select(x => ("1*", x)).ToArray()));
             }
         }
     }
+
+    //public static class WidgetListBuilderExtensions
+    //{
+    //    public static VariableWidgetsMenuViewData<TMgr, TArg>.Builder Stack<TMgr, TArg>(
+    //        this VariableWidgetsMenuViewData<TMgr, TArg>.Builder.HeadBuilder builder, params object[] items)
+    //        where TMgr : IListMenuManager
+    //        where TArg : IListMenuArg
+    //    {
+    //        return builder.Append(StackWidgetOption.Create(items.Select(x => ("1*", x)).ToArray()));
+    //    }
+
+    //    public static VariableWidgetsMenuViewData<TMgr, TArg>.Builder Stack<TMgr, TArg>(
+    //        this VariableWidgetsMenuViewData<TMgr, TArg>.Builder.TailBuilder builder, params object[] items)
+    //        where TMgr : IListMenuManager
+    //        where TArg : IListMenuArg
+    //    {
+    //        return builder.Append(StackWidgetOption.Create(items.Select(x => ("1*", x)).ToArray()));
+    //    }
+    //}
 }

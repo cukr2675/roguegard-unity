@@ -42,7 +42,7 @@ namespace Roguegard.Rgpacks
                     ?
                     .Filter(obj => obj != null)
 
-                    .Head(StackWidgetOption.Create(
+                    .Head.Append(StackWidgetOption.Create(
                         ("1*", "アセットID"),
                         ("1*", InputFieldWidgetOption.Create<MMgr, MArg>(
                             (manager, arg) =>
@@ -62,7 +62,7 @@ namespace Roguegard.Rgpacks
                     .VarOnce(out var nextMenu, new FloorMenu())
                     .OnClick((dioramaFloorObj, manager, arg) => manager.PushMenuScreen(nextMenu, arg.Self, targetObj: dioramaFloorObj))
 
-                    .TailOption("+ 階層を追加", (manager, arg) =>
+                    .Tail.Option("+ 階層を追加", (manager, arg) =>
                     {
                         var diorama = arg.Arg.TargetObj;
                         _newFloor.Option.CreateObj(_newFloor, diorama, Vector2Int.zero, RogueRandom.Primary);
@@ -86,7 +86,7 @@ namespace Roguegard.Rgpacks
             {
                 view.Show("", manager, arg)
                     ?
-                    .Tail(StackWidgetOption.Create(
+                    .Tail.Append(StackWidgetOption.Create(
                         ("1*", "アセットID"),
                         ("1*", InputFieldWidgetOption.Create<MMgr, MArg>(
                             (manager, arg) =>
@@ -101,7 +101,7 @@ namespace Roguegard.Rgpacks
                                 return NamingEffect.Get(diorama).Naming = value;
                             }))))
 
-                    .Option("入る", (manager, arg) =>
+                    .Tail.Option("入る", (manager, arg) =>
                     {
                         var dioramaFloor = arg.Arg.TargetObj;
                         SpaceUtility.TryLocate(arg.Self, dioramaFloor, Vector2Int.one);

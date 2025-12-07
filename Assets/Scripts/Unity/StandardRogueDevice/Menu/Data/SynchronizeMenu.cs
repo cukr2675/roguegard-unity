@@ -21,7 +21,7 @@ namespace RoguegardUnity
             beforeProgress = 0f;
             view.Show("世界と同期中…", manager, arg)
                 ?
-                .Tail(ProgressBarWidgetOption.Create<MMgr, MArg>((manager, arg) =>
+                .Tail.Append(ProgressBarWidgetOption.Create<MMgr, MArg>((manager, arg) =>
                 {
                     if (Progress >= 1f && beforeProgress < 1f) { manager.Done(); }
                     beforeProgress = Progress;
@@ -29,7 +29,7 @@ namespace RoguegardUnity
                     return Progress;
                 }))
 
-                .Option("同期を中止", (manager, arg) => Interrupt = true)
+                .Tail.Option("同期を中止", (manager, arg) => Interrupt = true)
 
                 .Build();
         }

@@ -42,7 +42,7 @@ namespace Roguegard.Rgpacks
                         }))
 
                     .VarOnce(out var nextMenu, new EditMenu())
-                    .TailOption("キャラクリ設定", (manager, arg) =>
+                    .Tail.Option("キャラクリ設定", (manager, arg) =>
                     {
                         var figurine = arg.Arg.TargetObj;
                         var characterCreationData = new CharacterCreationData(KyarakuriFigurineInfo.Get(figurine));
@@ -58,15 +58,10 @@ namespace Roguegard.Rgpacks
             private readonly ScrollMenuViewData<object, MMgr, MArg> view = new()
             {
                 ScrollSubviewSelector = m => (m as IMMgr)?.CharacterCreation,
-                BackAnchorList = new()
-                {
-                    // プリセット読み込みボタン（OpenScreen で設定）
-                    null,
-                    
-                    // キャラクタークリエイト完了ボタン
-                    SelectOption.Create<MMgr, MArg>(
-                        ":Done", ChoicesMenuScreen.SaveBackDialog(Save, null))
-                },
+                BackAnchorList = new(
+                    _ => _
+                    .Option(null) // プリセット読み込みボタン（OpenScreen で設定）
+                    .Option(":Done", ChoicesMenuScreen.SaveBackDialog(Save))), // キャラクタークリエイト完了ボタン
             };
 
             public override void OpenScreen(in MMgr manager, in MArg arg)

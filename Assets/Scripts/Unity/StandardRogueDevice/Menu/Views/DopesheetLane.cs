@@ -143,11 +143,11 @@ namespace RoguegardUnity
 
                 view.Show(string.Empty, manager, arg)
                     ?
-                    .Tail(InputFieldWidgetOption.Create<MMgr, MArg>(
+                    .Tail.Append(InputFieldWidgetOption.Create<MMgr, MArg>(
                         (manager, arg) => value.ToString(),
                         (manager, arg, value) => SetKeyFrame(value)))
 
-                    .Tail(StackWidgetOption.Create(
+                    .Tail.Append(StackWidgetOption.Create(
                         ("1*", SelectOption.Create<MMgr, MArg>(":Submit", (manager, arg) =>
                         {
                             if (value != null) { editList.Set(targetTime, value.Value); }
@@ -217,17 +217,17 @@ namespace RoguegardUnity
 
                 view.Show(string.Empty, manager, arg)
                     ?
-                    .TailOption(":Edit", (manager, arg) =>
+                    .Tail.Option(":Edit", (manager, arg) =>
                     {
                         manager.PushMenuScreen(nextMenu, arg);
                     })
 
-                    //.TailOption(":Delete", (manager, arg) =>
+                    //.Tail.Option(":Delete", (manager, arg) =>
                     //{
                     //    manager.Back();
                     //})
 
-                    .Tail(BackSelectOption.Instance)
+                    .Tail.Back()
 
                     .Build();
             }

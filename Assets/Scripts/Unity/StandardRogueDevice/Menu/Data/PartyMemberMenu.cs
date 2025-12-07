@@ -27,7 +27,7 @@ namespace RoguegardUnity
         {
             view.Show(manager, arg)
                 ?
-                .Tail(objCommandMenu.Summary)
+                .Tail.Option(objCommandMenu.Summary)
 
                 .Option(":Items", (manager, arg) =>
                 {

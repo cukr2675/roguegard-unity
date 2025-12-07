@@ -32,7 +32,7 @@ namespace Roguegard.Device
             oldProgress = 0f;
             view.Show(text, manager, arg)
                 ?
-                .Tail(ProgressBarWidgetOption.Create<MMgr, MArg>((manager, arg) =>
+                .Tail.Append(ProgressBarWidgetOption.Create<MMgr, MArg>((manager, arg) =>
                 {
                     var progress = getProgress(manager, arg);
                     if (progress >= 1f && oldProgress < 1f) { manager.Done(); }
@@ -41,7 +41,7 @@ namespace Roguegard.Device
                     return progress;
                 }))
 
-                .TailOption(buttonText, buttonAction)
+                .Tail.Option(buttonText, buttonAction)
 
                 .Build();
         }

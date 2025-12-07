@@ -206,7 +206,7 @@ namespace Roguegard
             {
                 view.Show(arg.Self.GetName() + "はレベルが上がった！{v}", manager, arg)
                     ?
-                    .OnCompleted(new SelectScreen())
+                    .OnCompleted((manager, arg) => manager.PushMenuScreen(new SelectScreen(), arg))
 
                     .Build();
             }

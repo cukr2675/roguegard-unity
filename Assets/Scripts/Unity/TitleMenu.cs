@@ -155,15 +155,12 @@ namespace RoguegardUnity
                 view = new()
                 {
                     ScrollSubviewSelector = m => (m as IMMgr)?.CharacterCreation,
-                    BackAnchorList = new()
-                    {
-                        // プリセット読み込みボタン（OpenScreen で設定）
-                        null,
-
-                        // キャラクタークリエイト完了ボタン
-                        SelectOption.Create<MMgr, MArg>(
-                            ":Done", ChoicesMenuScreen.SaveBackDialog(":DoneMsg", ":SaveAndStart", loadFadeOutScreen, ":QuitWithoutSaving", null))
-                    },
+                    BackAnchorList = new(
+                        _ => _
+                        .Option(null) // プリセット読み込みボタン（OpenScreen で設定）
+                        .Option(":Done", ChoicesMenuScreen.SaveBackDialog( // キャラクタークリエイト完了ボタン
+                            ":DoneMsg", ":SaveAndStart", (manager, arg) => manager.PushMenuScreen(loadFadeOutScreen, arg),
+                            ":QuitWithoutSaving", null))),
                 };
             }
 
@@ -287,7 +284,7 @@ namespace RoguegardUnity
                     view.Show(text, manager, arg)
                         ?
                         .VarOnce(out var viewWidth, 8000f)
-                        .Tail(ContentSizeMetaWidgetOption.Create(viewWidth))
+                        .Tail.Append(ContentSizeMetaWidgetOption.Create(viewWidth))
 
                         .VarOnce(out var nextScreen, new URLDialog())
                         .OnClickLink((link, manager, arg) => manager.PushMenuScreen(nextScreen, other: link))

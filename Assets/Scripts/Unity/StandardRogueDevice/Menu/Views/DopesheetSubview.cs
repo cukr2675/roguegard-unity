@@ -170,7 +170,8 @@ namespace RoguegardUnity
                 sumHeight += _itemHeight;
             }
             {
-                _menuButton.Bind(SelectOption.Create<MMgr, MArg>("...", menuScreen), SelectOptionViewItemHandler.Instance);
+                _menuButton.Bind(SelectOption.Create<MMgr, MArg>(
+                    "...", (manager, arg) => manager.PushMenuScreen(menuScreen, arg)), SelectOptionViewItemHandler.Instance);
             }
 
             var scrollRect = _scrollRect.viewport.rect;
@@ -301,11 +302,11 @@ namespace RoguegardUnity
                 view.Show(string.Empty, manager, arg)
                     ?
                     .VarOnce(out string id)
-                    .Tail(InputFieldWidgetOption.Create<MMgr, MArg>(
+                    .Tail.Append(InputFieldWidgetOption.Create<MMgr, MArg>(
                         (manager, arg) => id,
                         (manager, arg, value) => id = value))
 
-                    .Tail(StackWidgetOption.Create(
+                    .Tail.Append(StackWidgetOption.Create(
                         ("1*", SelectOption.Create<MMgr, MArg>("追加", (manager, arg) =>
                         {
                             var editInfo = (MotionGrapherInfo)arg.Arg.Other;
@@ -350,7 +351,7 @@ namespace RoguegardUnity
                             return strValue;
                         }))
 
-                    .TailOption("編集終了", (manager, arg) =>
+                    .Tail.Option("編集終了", (manager, arg) =>
                     {
                         var editInfo = (MotionGrapherInfo)arg.Arg.Other;
                         RogueDevice.AddWork(DeviceKw.EnqueueWork, RogueCharacterWork.CreateSpriteMotion(arg.Self, new MotionGrapherSpriteMotion(editInfo), true));

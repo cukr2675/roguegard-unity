@@ -27,7 +27,7 @@ namespace Lysionium
         private ISubviewStateProvider speechBoxSubviewStateProvider;
         private ISubviewStateProvider choicesSubviewStateProvider;
         private ISubviewStateProvider captionBoxSubviewStateProvider;
-        private event ClickItemHandler<TMgr, TArg> OnCompleted;
+        private event ListMenuEventHandler<TMgr, TArg> OnCompleted;
 
         private readonly string[] message = new string[1];
 
@@ -106,7 +106,7 @@ namespace Lysionium
             {
             }
 
-            public Builder OnCompleted(ClickItemHandler<TMgr, TArg> onCompleted)
+            public Builder OnCompleted(ListMenuEventHandler<TMgr, TArg> onCompleted)
             {
                 AssertNotBuilt();
 
@@ -116,7 +116,7 @@ namespace Lysionium
 
             public Builder Option(ISelectOption option)
             {
-                return Tail(option);
+                return Tail.Option(option);
             }
 
             protected override void Unload()

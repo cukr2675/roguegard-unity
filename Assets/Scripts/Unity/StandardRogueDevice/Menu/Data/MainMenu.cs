@@ -39,7 +39,7 @@ namespace RoguegardUnity
                 .Option(":Party", partyMenu)
                 .Option(":Log", logMenu)
                 .Option(":Others", othersMenu)
-                .Tail(objsMenu.Close)
+                .Option(objsMenu.Close)
                 .Build();
         }
 
@@ -165,7 +165,7 @@ namespace RoguegardUnity
             {
                 view.Show("", manager, arg)
                     ?
-                    .Tail(StackWidgetOption.Create(
+                    .Tail.Append(StackWidgetOption.Create(
                         ("1*", "マスター音量"),
                         ("1*", InputFieldWidgetOption.Create<MMgr, MArg>(
                             (manager, arg) =>
@@ -189,7 +189,7 @@ namespace RoguegardUnity
                             TMP_InputField.ContentType.IntegerNumber))))
 
                     .VarOnce(out var windowTypeScreen, new WindowTypeScreen())
-                    .Option("ウィンドウタイプ", windowTypeScreen)
+                    .Tail.Option("ウィンドウタイプ", windowTypeScreen)
 
                     .Build();
             }

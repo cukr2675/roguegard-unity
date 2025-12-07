@@ -54,7 +54,7 @@ namespace Lysionium
 
             view.Show(message, manager, arg)
                 ?
-                .TailRange(selectOptions)
+                .OptionRange(selectOptions)
 
                 .Build();
         }

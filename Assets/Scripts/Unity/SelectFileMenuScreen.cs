@@ -84,7 +84,7 @@ namespace RoguegardUnity
                 .InitIf(
                     onNewFile != null, x => x
                     
-                    .HeadOption(":+ New File", onNewFile)
+                    .Head.Option(":+ New File", onNewFile)
                     
                     )
 
@@ -167,7 +167,7 @@ namespace RoguegardUnity
             {
                 view.Show("インポート中…", manager, arg)
                     ?
-                    .Option("キャンセル", (manager, arg) => manager.PopMenuScreen())
+                    .Tail.Option("キャンセル", (manager, arg) => manager.PopMenuScreen())
 
                     .Build();
             }

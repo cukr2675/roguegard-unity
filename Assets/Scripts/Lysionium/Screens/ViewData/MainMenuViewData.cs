@@ -14,7 +14,7 @@ namespace Lysionium
         public System.Func<TMgr, IListHandlerSubview> CaptionBoxSubviewSelector { get; set; }
             = manager => (manager as IDefaultSubviewTable)?.CaptionBox;
         public System.Func<TMgr, IListHandlerSubview> BackAnchorSubviewSelector { get; set; }
-        public List<ISelectOption> BackAnchorList { get; set; } = new() { BackSelectOption.Instance };
+        public SelectOptionList<TMgr, TArg> BackAnchorList { get; set; } = new() { BackSelectOption.Instance };
 
         private object prevViewStateHolder;
         private ISubviewStateProvider primaryCommandSubviewStateProvider;
@@ -71,7 +71,7 @@ namespace Lysionium
 
             public Builder Option(ISelectOption option)
             {
-                return Tail(option);
+                return Tail.Option(option);
             }
         }
     }

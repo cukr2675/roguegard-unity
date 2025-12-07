@@ -43,7 +43,7 @@ namespace Roguegard
                         .OnClick((lobbyMember, manager, arg) => manager.PushMenuScreen(nextMenu, arg.Self, targetObj: lobbyMember))))
 
                 .VarOnce(out var newMenu, new PartyBoardCharacterCreationMenu())
-                .TailOption("+ 追加", (manager, arg) =>
+                .Tail.Option("+ 追加", (manager, arg) =>
                 {
                     // 新規メンバー作成
                     var characterCreationData = RoguegardSettings.CharacterCreationDatabase.LoadPreset(0);

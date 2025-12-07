@@ -61,7 +61,7 @@ namespace Roguegard.Rgpacks
                             return NamingEffect.Get(chartPad).Naming = value;
                         }))
 
-                    .TailOption("+ イベントを追加", (manager, arg) =>
+                    .Tail.Option("+ イベントを追加", (manager, arg) =>
                     {
                         var chartPad = arg.Arg.TargetObj;
                         var chartPadInfo = ChartPadInfo.Get(chartPad);

@@ -10,15 +10,10 @@ namespace Roguegard
         private readonly ScrollMenuViewData<object, MMgr, MArg> view = new()
         {
             ScrollSubviewSelector = m => (m as IMMgr)?.CharacterCreation,
-            BackAnchorList = new()
-            {
-                // プリセット読み込みボタン（OpenScreen で設定）
-                null,
-
-                // キャラクタークリエイト完了ボタン
-                SelectOption.Create<MMgr, MArg>(
-                    ":Done", ChoicesMenuScreen.SaveBackDialog(Save, null))
-            },
+            BackAnchorList = new(
+                _ => _
+                .Option(null) // プリセット読み込みボタン（OpenScreen で設定）
+                .Option(":Done", ChoicesMenuScreen.SaveBackDialog(Save, null))), // キャラクタークリエイト完了ボタン
         };
 
         public override void OpenScreen(in MMgr manager, in MArg arg)

@@ -62,7 +62,7 @@ namespace RoguegardUnity
             {
                 PrimaryCommandSubviewSelector = m => m.LongMessage,
                 BackAnchorSubviewSelector = m => m.ForwardAnchor,
-                BackAnchorList = new List<ISelectOption>() { SelectOption.Create<MMgr, MArg>("OK", new NextMenu()) },
+                BackAnchorList = new(_ => _.Option("OK", new NextMenu())),
             };
 
             public override void OpenScreen(in MMgr manager, in MArg arg)

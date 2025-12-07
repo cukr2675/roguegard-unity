@@ -13,7 +13,5 @@ namespace Lysionium
         string Localize(string text);
 
         T Localize<T>(T obj);
-
-        void PushMenuScreenFromExtension(object menuScreen, IListMenuArg arg);
     }
 }

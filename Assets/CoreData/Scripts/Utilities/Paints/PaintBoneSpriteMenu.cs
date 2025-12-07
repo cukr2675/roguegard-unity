@@ -65,7 +65,7 @@ namespace Roguegard
 
             view.Show(list, manager, arg)
                 ?
-                .HeadOption("部位を変更", new BoneMenu())
+                .Head.Option("部位を変更", new BoneMenu())
 
                 .HeadStack("中心点距離", InputFieldWidgetOption.Create<MMgr, MArg>(
                     (manager, arg) =>
@@ -104,11 +104,11 @@ namespace Roguegard
                         return boneSprite.IsBare ? "T" : "";
                     }))
 
-                .HeadOption("正面を編集", new PaintMenu(0))
+                .Head.Option("正面を編集", new PaintMenu(0))
 
-                .HeadOption("背面を編集", new PaintMenu(2))
+                .Head.Option("背面を編集", new PaintMenu(2))
 
-                .TailOption("<#f00>削除", (manager, arg) =>
+                .Tail.Option("<#f00>削除", (manager, arg) =>
                 {
                     var table = (PaintBoneSpriteTable)arg.Arg.Other;
                     var itemIndex = arg.Arg.Count;

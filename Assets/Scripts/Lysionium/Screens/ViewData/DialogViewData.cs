@@ -86,26 +86,26 @@ namespace Lysionium
             {
             }
 
-            public Builder Option(string name, ClickItemHandler<TMgr, TArg> onClick, string style = null)
-            {
-                AssertNotBuilt();
+            //public Builder Option(string name, ClickItemHandler<TMgr, TArg> onClick, string style = null)
+            //{
+            //    AssertNotBuilt();
 
-                Tail(SelectOption.Create(name, onClick, style));
-                return this;
-            }
+            //    Tail(SelectOption.Create(name, onClick, style));
+            //    return this;
+            //}
 
-            public Builder OptionStack(params (string, ClickItemHandler<TMgr, TArg>)[] selectOptions)
-            {
-                AssertNotBuilt();
+            //public Builder OptionStack(params (string, ClickItemHandler<TMgr, TArg>)[] selectOptions)
+            //{
+            //    AssertNotBuilt();
 
-                var stack = new (string, object)[selectOptions.Length];
-                for (int i = 0; i < selectOptions.Length; i++)
-                {
-                    stack[i] = ("1*", SelectOption.Create(selectOptions[i].Item1, selectOptions[i].Item2));
-                }
-                Tail(StackWidgetOption.Create(stack));
-                return this;
-            }
+            //    var stack = new (string, object)[selectOptions.Length];
+            //    for (int i = 0; i < selectOptions.Length; i++)
+            //    {
+            //        stack[i] = ("1*", SelectOption.Create(selectOptions[i].Item1, selectOptions[i].Item2));
+            //    }
+            //    Tail(StackWidgetOption.Create(stack));
+            //    return this;
+            //}
 
             public Builder OnClickLink(ClickItemHandler<string, TMgr, TArg> onClickLink)
             {
