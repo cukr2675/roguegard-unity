@@ -38,7 +38,11 @@ namespace RoguegardUnity
         private LongDownMenu longDownMenu;
         private ObjsMenu objsMenu;
 
+        public event System.Action OnDone;
+
         internal ListMenuEventManager EventManager { get; private set; }
+
+        public bool IsDone { get; private set; }
 
         /// <summary>
         /// メッセージがアニメーション中 or メニュー操作中は待機
@@ -154,6 +158,21 @@ namespace RoguegardUnity
         {
             var arg = new RogueMethodArgument(targetObj, count, vector, value, tool, other);
             PushInitialMenuScreen(menuScreen, new MArg.Builder(self, user, arg).ReadOnly, enableTouchMask);
+        }
+
+        /// <summary>
+        /// メニュー画面をすべて閉じる
+        /// </summary>
+        public override void Done()
+        {
+            Clear();
+            IsDone = true;
+            OnDone?.Invoke();
+        }
+
+        public override void ResetDone()
+        {
+            IsDone = false;
         }
 
         public void OpenMainMenu(RogueObj subject)

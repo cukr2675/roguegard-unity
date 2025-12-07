@@ -1,4 +1,5 @@
 using Lysionium.Views;
+using System.Text;
 using UnityEngine;
 
 namespace Lysionium
@@ -17,15 +18,12 @@ namespace Lysionium
         private DefaultSubviewTable defaultSubviewTable;
 
         public event System.Action OnError;
-        public event System.Action OnDone;
         public event System.Action OnUnload;
 
         private readonly MenuScreenStack<TMgr, TArg> stack = new();
         private MenuScreenStack<TMgr, TArg>.StackItem reservedMenu;
 
         public bool ShowsMenuScreen => stack.Count >= 1;
-
-        public bool IsDone { get; private set; }
 
         public virtual ISelectOption BackOption { get; protected set; }
             = SelectOption.Create<TMgr, TArg>("Back", (manager, arg) => manager.PopMenuScreen(), "Cancel click:Cancel");
@@ -85,7 +83,7 @@ namespace Lysionium
                 reservedMenu.MenuScreen.OpenScreen((TMgr)this, reservedMenu.Arg);
                 reservedMenu = null;
             }
-            catch (System.Exception)
+            catch
             {
                 reservedMenu = null;
                 OnError?.Invoke();
@@ -109,7 +107,7 @@ namespace Lysionium
             }
         }
 
-        public virtual string Localize(string text) => text?.Normalize(System.Text.NormalizationForm.FormC); // TextMeshPro のために NFD を NFC に正規化する
+        public virtual string Localize(string text) => text?.Normalize(NormalizationForm.FormC); // TextMeshPro のために NFD を NFC に正規化する
 
         public virtual T Localize<T>(T obj) => obj;
 
@@ -159,26 +157,19 @@ namespace Lysionium
             else
             {
                 // メニューがない場合は終了する
-                Done();
+                defaultSubviewTable.SetBlocker(false);
             }
         }
 
         /// <summary>
         /// メニュー画面をすべて閉じる
         /// </summary>
-        public void Done()
+        protected void Clear()
         {
             stack.Clear();
             reservedMenu = null;
             HideAll();
             defaultSubviewTable.SetBlocker(false);
-            IsDone = true;
-            OnDone?.Invoke();
-        }
-
-        public void ResetDone()
-        {
-            IsDone = false;
         }
     }
 }
