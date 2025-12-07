@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace Lysionium
 {
-    public static class SubviewExtension
+    public static class ListHandlerSubviewExtensions
     {
         public static void Show(
             this IListHandlerSubview subview, IReadOnlyList<object> list, IViewItemHandler handler,
