@@ -58,6 +58,9 @@ namespace Lysionium.Views
             BindCore(item, handler);
         }
 
+        public void Bind<TMgr, TArg>(ISelectOption<TMgr, TArg> selectOption) => Bind(selectOption, SelectOptionViewItemHandler<TMgr, TArg>.Instance);
+        public void Bind<TMgr, TArg>(IKeyOption<TMgr, TArg> selectOption) => Bind(selectOption, KeyOptionViewItemHandler<TMgr, TArg>.Instance);
+
         public void Unbind()
         {
             if (handler != null) { UnbindCore(item, handler); }

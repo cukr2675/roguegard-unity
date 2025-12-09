@@ -88,7 +88,7 @@ namespace Lysionium.Samples
             }
 
             BackAnchorSubviewSelector?.Invoke(manager)?.Show(
-                BackAnchorList, SelectOptionViewItemHandler<TMgr, TArg>.Instance, manager, arg, ref backAnchorSubviewStateProvider);
+                BackAnchorList, manager, arg, ref backAnchorSubviewStateProvider);
 
             // 上記の Show によって実行される onHide の後に onShow を呼び出す
             onShow?.Invoke(manager, arg);

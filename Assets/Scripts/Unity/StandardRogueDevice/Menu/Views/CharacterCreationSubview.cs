@@ -148,7 +148,7 @@ namespace RoguegardUnity
                 sumHeight += ((RectTransform)header.transform).rect.height;
                 odd = false;
                 header.Initialize(this);
-                header.Bind(intrinsicHeader, SelectOptionViewItemHandler<MMgr, MArg>.Instance);
+                header.Bind(intrinsicHeader);
                 itemObjects.Add(header);
             }
             for (int i = 0; i < characterCreationData.Intrinsics.Count; i++)
@@ -176,7 +176,7 @@ namespace RoguegardUnity
                 sumHeight += ((RectTransform)header.transform).rect.height;
                 odd = false;
                 header.Initialize(this);
-                header.Bind(startingItemHeader, SelectOptionViewItemHandler<MMgr, MArg>.Instance);
+                header.Bind(startingItemHeader);
                 itemObjects.Add(header);
             }
             for (int i = 0; i < characterCreationData.StartingItemTable.Count; i++)
@@ -199,9 +199,9 @@ namespace RoguegardUnity
             _scrollRect.content.SetInsetAndSizeFromParentEdge(
                 RectTransform.Edge.Top, 0, _firstParent.rect.height + sumHeight);
 
-            _raceButton.Bind(raceSelectOption, SelectOptionViewItemHandler<MMgr, MArg>.Instance);
+            _raceButton.Bind(raceSelectOption);
             viewItems.Add(_raceButton);
-            _appearanceButton.Bind(appearanceSelectOption, SelectOptionViewItemHandler<MMgr, MArg>.Instance);
+            _appearanceButton.Bind(appearanceSelectOption);
             viewItems.Add(_appearanceButton);
         }
 

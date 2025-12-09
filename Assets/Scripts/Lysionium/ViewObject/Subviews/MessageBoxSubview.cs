@@ -60,9 +60,7 @@ namespace Lysionium.Views
 
             if (_blocker != null)
             {
-                _blocker.Bind(
-                    new SelectOption("", delegate { _onClick.Invoke(); }),
-                    SelectOptionViewItemHandler<IListMenuManager, IListMenuArg>.Instance);
+                _blocker.Bind(new SelectOption("", delegate { _onClick.Invoke(); }));
                 _blocker.SetVisible(true, true);
             }
         }

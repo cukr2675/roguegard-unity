@@ -165,7 +165,7 @@ namespace Roguegard
 
             private static readonly DotterBoard[] dotterBoards = new DotterBoard[1];
             private static readonly Vector2[] pivots = new Vector2[2];
-            private readonly object[] back;
+            private readonly SelectOptionList<MMgr, MArg> back;
 
             public PaintMenu(int directionIndex)
             {
@@ -173,10 +173,7 @@ namespace Roguegard
 
                 this.directionIndex = directionIndex;
 
-                back = new object[]
-                {
-                    SelectOption.Create<MMgr, MArg>("<", Back),
-                };
+                back = new(_ => _.Option("<", Back));
             }
 
             public override void OpenScreen(MMgr manager, MArg arg)
@@ -206,7 +203,7 @@ namespace Roguegard
                 paint.Show();
 
                 ISubviewStateProvider stateProvider = null;
-                manager.BackAnchor.Show(back, SelectOptionViewItemHandler<MMgr, MArg>.Instance, manager, arg, ref stateProvider);
+                manager.BackAnchor.Show(back, manager, arg, ref stateProvider);
             }
 
             private void Back(MMgr manager, MArg arg)

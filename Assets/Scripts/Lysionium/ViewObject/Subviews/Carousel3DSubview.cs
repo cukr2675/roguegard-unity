@@ -160,17 +160,13 @@ namespace Lysionium.Views
             if (_prevButton != null)
             {
                 _prevButton.Initialize(this);
-                _prevButton.Bind(
-                    new SelectOption("", delegate { FocusAngleIndex(AngleIndex - 1); }),
-                    SelectOptionViewItemHandler<IListMenuManager, IListMenuArg>.Instance);
+                _prevButton.Bind(new SelectOption("", delegate { FocusAngleIndex(AngleIndex - 1); }));
                 _prevButton.SetVisible(true, true);
             }
             if (_nextButton != null)
             {
                 _nextButton.Initialize(this);
-                _nextButton.Bind(
-                    new SelectOption("", delegate { FocusAngleIndex(AngleIndex + 1); }),
-                    SelectOptionViewItemHandler<IListMenuManager, IListMenuArg>.Instance);
+                _nextButton.Bind(new SelectOption("", delegate { FocusAngleIndex(AngleIndex + 1); }));
                 _nextButton.SetVisible(true, true);
             }
         }

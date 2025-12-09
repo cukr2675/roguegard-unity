@@ -159,10 +159,10 @@ namespace RoguegardUnity
                 var headerWidth = _floatingContent.rect.width;
                 var header = Instantiate(_itemHeaderPrefab, _scrollRect.content);
                 header.Initialize(this);
-                header.Bind(SelectOption.Create<MMgr, MArg>("+ ボーンを追加", (manager, arg) =>
+                header.Bind(new SelectOption<MMgr, MArg>("+ ボーンを追加", (manager, arg) =>
                 {
                     manager.PushMenuScreen(newBoneMenu, other: editInfo);
-                }), SelectOptionViewItemHandler<MMgr, MArg>.Instance);
+                }));
                 header.RectTransform.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, y, _itemHeight);
                 header.RectTransform.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Left, 0f, headerWidth);
                 viewItems.Add(header);
@@ -170,8 +170,8 @@ namespace RoguegardUnity
                 sumHeight += _itemHeight;
             }
             {
-                _menuButton.Bind(SelectOption.Create<MMgr, MArg>(
-                    "...", (manager, arg) => manager.PushMenuScreen(menuScreen, arg)), SelectOptionViewItemHandler<MMgr, MArg>.Instance);
+                _menuButton.Bind(new SelectOption<MMgr, MArg>(
+                    "...", (manager, arg) => manager.PushMenuScreen(menuScreen, arg)));
             }
 
             var scrollRect = _scrollRect.viewport.rect;
@@ -189,7 +189,7 @@ namespace RoguegardUnity
 
             var header = Instantiate(_itemHeaderPrefab, _scrollRect.content);
             header.Initialize(this);
-            header.Bind(SelectOption.Create<MMgr, MArg>(name, (manager, arg) =>
+            header.Bind(new SelectOption<MMgr, MArg>(name, (manager, arg) =>
             {
                 manager.PushMenuScreen(
                     new ChoicesMenuScreen($"{name} を削除しますか？")
@@ -199,7 +199,7 @@ namespace RoguegardUnity
                         manager.PopMenuScreen();
                     })
                     .Back(), arg);
-            }), SelectOptionViewItemHandler<MMgr, MArg>.Instance);
+            }));
             header.RectTransform.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, y, _itemHeight);
             header.RectTransform.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Left, 0f, headerWidth);
             viewItems.Add(header);

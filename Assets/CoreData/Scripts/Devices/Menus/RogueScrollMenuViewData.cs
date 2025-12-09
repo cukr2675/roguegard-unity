@@ -67,7 +67,7 @@ namespace Roguegard.Device
             }
 
             BackAnchorSubviewSelector?.Invoke(manager)?.Show(
-                BackAnchorList, SelectOptionViewItemHandler<MMgr, MArg>.Instance, manager, arg, ref backAnchorSubviewStateProvider);
+                BackAnchorList, manager, arg, ref backAnchorSubviewStateProvider);
         }
 
         public void Hide(MMgr manager, bool back)

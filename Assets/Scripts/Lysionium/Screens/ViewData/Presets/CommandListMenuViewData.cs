@@ -88,7 +88,7 @@ namespace Lysionium
             }
 
             BackAnchorSubviewSelector?.Invoke(manager)?.Show(
-                BackAnchorList, SelectOptionViewItemHandler<TMgr, TArg>.Instance, manager, arg, ref backAnchorSubviewStateProvider);
+                BackAnchorList, manager, arg, ref backAnchorSubviewStateProvider);
         }
 
         public virtual void Hide(TMgr manager, bool back)
@@ -98,7 +98,8 @@ namespace Lysionium
             BackAnchorSubviewSelector?.Invoke(manager)?.Hide(back);
         }
 
-        public class Builder : BaseListBuilder<CommandListMenuViewData<TItem, TMgr, TArg>, Builder>, IButtonViewItemHandlerBuilder<TItem, TMgr, TArg, Builder>
+        public class Builder
+            : BaseListBuilder<CommandListMenuViewData<TItem, TMgr, TArg>, Builder>, IButtonViewItemHandlerBuilder<TItem, TMgr, TArg, Builder>
         {
             public Builder(CommandListMenuViewData<TItem, TMgr, TArg> parent, TMgr manager, TArg arg)
                 : base(parent, manager, arg)

@@ -55,7 +55,7 @@ namespace Lysionium
             }
 
             BackAnchorSubviewSelector?.Invoke(manager)?.Show(
-                BackAnchorList, SelectOptionViewItemHandler<TMgr, TArg>.Instance, manager, arg, ref backAnchorSubviewStateProvider);
+                BackAnchorList, manager, arg, ref backAnchorSubviewStateProvider);
         }
 
         public virtual void Hide(TMgr manager, bool back)

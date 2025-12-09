@@ -15,11 +15,10 @@ namespace Roguegard
 
         private class Menu : RogueMenuScreen
         {
-            private static readonly object[] backAnchor = new object[]
-            {
-                SelectOption.Create<MMgr, MArg>("実行", Execute),
-                SelectOption.Create<MMgr, MArg>("閉じる", Back),
-            };
+            private static readonly SelectOptionList<MMgr, MArg> backAnchor = new(
+                _ => _
+                .Option("実行", Execute)
+                .Option("閉じる", Back));
 
             private ISubviewStateProvider stateProvider;
 
@@ -31,7 +30,7 @@ namespace Roguegard
                 var textEditor = RoguegardSubviews.GetTextEditor(manager);
                 textEditor.Text = text;
                 textEditor.Show();
-                manager.BackAnchor.Show(backAnchor, SelectOptionViewItemHandler<MMgr, MArg>.Instance, manager, arg, ref stateProvider);
+                manager.BackAnchor.Show(backAnchor, manager, arg, ref stateProvider);
             }
 
             private static void Back(MMgr manager, MArg arg)
