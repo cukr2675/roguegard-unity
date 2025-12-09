@@ -358,6 +358,15 @@
       },
       "url": "https://packages.unity.com"
     },
+    "jp.cukr2675.move-tmp-folder-to-packages": {
+      "version": "https://github.com/cukr2675/move-tmp-folder-to-packages.git?path=Packages/jp.cukr2675.move-tmp-folder-to-packages",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.ugui": "1.0.0"
+      },
+      "hash": "46c815c96c43acabcb9bfcaa07b0d12a31e25c66"
+    },
     "jp.cukr2675.save2idb": {
       "version": "https://github.com/cukr2675/save2idb.git?path=Packages/Save2IDB",
       "depth": 0,

@@ -13,6 +13,7 @@
     "com.unity.timeline": "1.8.7",
     "com.unity.ugui": "2.0.0",
     "com.unity.visualscripting": "1.9.6",
+    "jp.cukr2675.move-tmp-folder-to-packages": "https://github.com/cukr2675/move-tmp-folder-to-packages.git?path=Packages/jp.cukr2675.move-tmp-folder-to-packages",
     "jp.cukr2675.save2idb": "https://github.com/cukr2675/save2idb.git?path=Packages/Save2IDB",
     "moonsharp": "https://github.com/k0dep/MoonSharp.git#2.0.0",
     "org.nuget.r3": "1.2.9",
