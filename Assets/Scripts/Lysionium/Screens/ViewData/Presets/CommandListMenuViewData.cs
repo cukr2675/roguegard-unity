@@ -22,7 +22,7 @@ namespace Lysionium
         public System.Func<TMgr, IListHandlerSubview> CaptionBoxSubviewSelector { get; set; }
             = manager => (manager as IDefaultSubviewTable)?.CaptionBox;
         public System.Func<TMgr, IListHandlerSubview> BackAnchorSubviewSelector { get; set; }
-        public SelectOptionList<TMgr, TArg> BackAnchorList { get; set; } = new() { BackSelectOption.Instance };
+        public SelectOptionList<TMgr, TArg> BackAnchorList { get; set; } = new(_ => _.BackIfReflectable());
 
         /// <summary>
         /// このインスタンスのデリゲート実行前に <see cref="SelectOptionViewItemHandler"/> の処理を挟む
@@ -88,7 +88,7 @@ namespace Lysionium
             }
 
             BackAnchorSubviewSelector?.Invoke(manager)?.Show(
-                BackAnchorList, SelectOptionViewItemHandler.Instance, manager, arg, ref backAnchorSubviewStateProvider);
+                BackAnchorList, SelectOptionViewItemHandler<TMgr, TArg>.Instance, manager, arg, ref backAnchorSubviewStateProvider);
         }
 
         public virtual void Hide(TMgr manager, bool back)

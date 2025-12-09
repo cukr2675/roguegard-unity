@@ -1,5 +1,6 @@
 using Lysionium;
 using Roguegard.CharacterCreation;
+using Roguegard.Device;
 using RuntimeDotter;
 using System.Collections.Generic;
 using UnityEngine;
@@ -59,13 +60,13 @@ namespace Roguegard
 
         public static IJsonSerializationSetting JsonSerialization { get; set; }
 
-        private static readonly List<ISelectOption> _dungeonSelectOption = new();
+        private static readonly SelectOptionList<MMgr, MArg> _dungeonSelectOption = new();
 
-        public static Spanning<ISelectOption> DungeonSelectOption => Spanning.Get(_dungeonSelectOption);
+        public static Spanning<ISelectOption<MMgr, MArg>> DungeonSelectOption => Spanning.Get(_dungeonSelectOption);
 
         private static readonly Dictionary<string, Dictionary<string, object>> _assetTables = new();
 
-        public static void AddDungeonSelectOption(ISelectOption dungeonSelectOption)
+        public static void AddDungeonSelectOption(ISelectOption<MMgr, MArg> dungeonSelectOption)
         {
             _dungeonSelectOption.Add(dungeonSelectOption);
         }

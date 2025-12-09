@@ -1,4 +1,3 @@
-using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace Lysionium
@@ -6,14 +5,14 @@ namespace Lysionium
     /// <summary>
     /// <see cref="KeyOptionViewItemHandler"/> のモデルとして扱うインターフェース。
     /// </summary>
-    public interface IKeyOption
+    public interface IKeyOption<in TMgr, in TArg>
     {
-        string GetName(IListMenuManager manager, IListMenuArg arg);
+        string GetName(TMgr manager, TArg arg);
 
-        string GetStyle(IListMenuManager manager, IListMenuArg arg);
+        string GetStyle(TMgr manager, TArg arg);
 
-        void Started(IListMenuManager manager, IListMenuArg arg, InputAction.CallbackContext context);
-        void Canceled(IListMenuManager manager, IListMenuArg arg, InputAction.CallbackContext context);
-        void Performed(IListMenuManager manager, IListMenuArg arg, InputAction.CallbackContext context);
+        void Started(TMgr manager, TArg arg, InputAction.CallbackContext context);
+        void Canceled(TMgr manager, TArg arg, InputAction.CallbackContext context);
+        void Performed(TMgr manager, TArg arg, InputAction.CallbackContext context);
     }
 }

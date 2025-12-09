@@ -12,16 +12,16 @@ namespace RoguegardUnity
     public class ObjCommandMenu : RogueMenuScreen
     {
         private readonly List<IObjCommand> commands;
-        private readonly List<ISelectOption> selectOptions;
+        private readonly SelectOptionList<MMgr, MArg> selectOptions;
         private readonly SummaryMenuScreen summaryMenuScreen = new();
         private readonly DetailsMenuScreen detailsMenuScreen = new();
         private readonly RenameDialog renameDialog = new();
 
-        public ISelectOption Summary { get; }
-        public ISelectOption Details { get; }
-        public ISelectOption Rename { get; }
+        public ISelectOption<MMgr, MArg> Summary { get; }
+        public ISelectOption<MMgr, MArg> Details { get; }
+        public ISelectOption<MMgr, MArg> Rename { get; }
 
-        private readonly CommandListMenuViewData<ISelectOption, MMgr, MArg> view = new()
+        private readonly CommandListMenuViewData<ISelectOption<MMgr, MArg>, MMgr, MArg> view = new()
         {
         };
 
@@ -30,7 +30,7 @@ namespace RoguegardUnity
         public ObjCommandMenu()
         {
             commands = new List<IObjCommand>();
-            selectOptions = new List<ISelectOption>();
+            selectOptions = new SelectOptionList<MMgr, MArg>();
 
             Summary = SelectOption.Create<MMgr, MArg>("つよさ", (manager, arg) =>
             {
@@ -158,7 +158,7 @@ namespace RoguegardUnity
                             manager.PopMenuScreen(2);
                             manager.Reopen();
                         })),
-                        ("1*", BackSelectOption.Instance)))
+                        ("1*", BackSelectOption<MMgr, MArg>.Instance)))
 
                     .Build();
             }

@@ -21,7 +21,10 @@ namespace Lysionium
 
         string IViewItemHandler.GetName(object item, IListMenuManager manager, IListMenuArg arg)
         {
-            if (EnableSelectOptionProxy && item is ISelectOption) { return SelectOptionViewItemHandler.Instance.GetName(item, manager, arg); }
+            if (EnableSelectOptionProxy && item is ISelectOption<TMgr, TArg>)
+            {
+                return SelectOptionViewItemHandler<TMgr, TArg>.Instance.GetName(item, manager, arg);
+            }
 
             if (LuiAssert.Type<TItem>(item, out var tItem) ||
                 LuiAssert.Type<TMgr>(manager, out var tMgr) ||
@@ -33,7 +36,10 @@ namespace Lysionium
 
         string IViewItemHandler.GetStyle(object item, IListMenuManager manager, IListMenuArg arg)
         {
-            if (EnableSelectOptionProxy && item is ISelectOption) { return SelectOptionViewItemHandler.Instance.GetStyle(item, manager, arg); }
+            if (EnableSelectOptionProxy && item is ISelectOption<TMgr, TArg>)
+            {
+                return SelectOptionViewItemHandler<TMgr, TArg>.Instance.GetStyle(item, manager, arg);
+            }
 
             if (LuiAssert.Type<TItem>(item, out var tItem) ||
                 LuiAssert.Type<TMgr>(manager, out var tMgr) ||
@@ -44,9 +50,9 @@ namespace Lysionium
 
         void IButtonViewItemHandler.Click(object item, IListMenuManager manager, IListMenuArg arg)
         {
-            if (EnableSelectOptionProxy && item is ISelectOption)
+            if (EnableSelectOptionProxy && item is ISelectOption<TMgr, TArg>)
             {
-                SelectOptionViewItemHandler.Instance.Click(item, manager, arg);
+                SelectOptionViewItemHandler<TMgr, TArg>.Instance.Click(item, manager, arg);
                 return;
             }
 

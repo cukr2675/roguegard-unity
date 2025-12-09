@@ -31,7 +31,7 @@ namespace Roguegard
                 var textEditor = RoguegardSubviews.GetTextEditor(manager);
                 textEditor.Text = text;
                 textEditor.Show();
-                manager.BackAnchor.Show(backAnchor, SelectOptionViewItemHandler.Instance, manager, arg, ref stateProvider);
+                manager.BackAnchor.Show(backAnchor, SelectOptionViewItemHandler<MMgr, MArg>.Instance, manager, arg, ref stateProvider);
             }
 
             private static void Back(MMgr manager, MArg arg)

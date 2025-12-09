@@ -11,7 +11,7 @@ namespace Lysionium
     /// <summary>
     /// 会話ボックスと選択肢を扱う ViewData
     /// </summary>
-    public class SpeechBoxViewData<TMgr, TArg> : ListViewData<ISelectOption, TMgr, TArg>
+    public class SpeechBoxViewData<TMgr, TArg> : ListViewData<ISelectOption<TMgr, TArg>, TMgr, TArg>
         where TMgr : IListMenuManager
         where TArg : IListMenuArg
     {
@@ -80,7 +80,7 @@ namespace Lysionium
                 if (List.Count >= 1)
                 {
                     ChoicesSubviewSelector?.Invoke(manager)?.SetParameters(
-                        List, SelectOptionViewItemHandler.Instance, manager, arg, ref choicesSubviewStateProvider);
+                        List, SelectOptionViewItemHandler<TMgr, TArg>.Instance, manager, arg, ref choicesSubviewStateProvider);
                     speechBoxSubview.DoScheduledAfterCompletion((manager, arg) =>
                     {
                         if (LuiAssert.Type<TMgr>(manager, out var tMgr)) return;
@@ -119,7 +119,7 @@ namespace Lysionium
                 return this;
             }
 
-            public Builder Option(ISelectOption option)
+            public Builder Option(ISelectOption<TMgr, TArg> option)
             {
                 return Tail.Option(option);
             }

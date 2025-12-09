@@ -13,7 +13,7 @@ namespace Roguegard.Device
             = manager => (manager as IDefaultSubviewTable)?.CaptionBox;
         public System.Func<MMgr, IListHandlerSubview> BackAnchorSubviewSelector { get; set; }
             = manager => (manager as IDefaultSubviewTable)?.BackAnchor;
-        public SelectOptionList<MMgr, MArg> BackAnchorList { get; set; } = new() { BackSelectOption.Instance };
+        public SelectOptionList<MMgr, MArg> BackAnchorList { get; set; } = new(_ => _.BackIfReflectable());
 
         private object prevViewStateHolder;
         private ISubviewStateProvider scrollSubviewStateProvider;
@@ -67,7 +67,7 @@ namespace Roguegard.Device
             }
 
             BackAnchorSubviewSelector?.Invoke(manager)?.Show(
-                BackAnchorList, SelectOptionViewItemHandler.Instance, manager, arg, ref backAnchorSubviewStateProvider);
+                BackAnchorList, SelectOptionViewItemHandler<MMgr, MArg>.Instance, manager, arg, ref backAnchorSubviewStateProvider);
         }
 
         public void Hide(MMgr manager, bool back)

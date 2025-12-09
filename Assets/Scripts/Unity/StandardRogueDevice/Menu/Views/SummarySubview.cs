@@ -28,12 +28,12 @@ namespace RoguegardUnity
         private StringBuilder rightRBuilder;
         private RogueNameBuilder nameBuilder;
 
-        private static readonly ISelectOption[] backSelectOption = new[]
+        private static readonly ISelectOption<MMgr, MArg>[] backSelectOption = new[]
         {
-            BackSelectOption.Instance
+            BackSelectOption<MMgr, MArg>.Instance
         };
 
-        private static readonly ISelectOption[] submitSelectOption = new[]
+        private static readonly ISelectOption<MMgr, MArg>[] submitSelectOption = new[]
         {
             SelectOption.Create<MMgr, MArg>("OK", (manager, arg) =>
             {
@@ -52,7 +52,7 @@ namespace RoguegardUnity
             })
         };
 
-        private static readonly ISelectOption[] startQuestSelectOption = new[]
+        private static readonly ISelectOption<MMgr, MArg>[] startQuestSelectOption = new[]
         {
             SelectOption.Create<MMgr, MArg>("出発", (manager, arg) =>
             {
@@ -94,7 +94,7 @@ namespace RoguegardUnity
             }
 
             ISubviewStateProvider stateProvider = null;
-            manager.BackAnchor.Show(backSelectOption, SelectOptionViewItemHandler.Instance, manager, Arg, ref stateProvider);
+            manager.BackAnchor.Show(backSelectOption, SelectOptionViewItemHandler<MMgr, MArg>.Instance, manager, Arg, ref stateProvider);
         }
 
         private void SetObj(RogueObj obj, RogueObj resultDungeon)
@@ -126,7 +126,7 @@ namespace RoguegardUnity
             SetObj(player, dungeon);
 
             ISubviewStateProvider stateProvider = null;
-            manager.ForwardAnchor.Show(submitSelectOption, SelectOptionViewItemHandler.Instance, manager, Arg, ref stateProvider);
+            manager.ForwardAnchor.Show(submitSelectOption, SelectOptionViewItemHandler<MMgr, MArg>.Instance, manager, Arg, ref stateProvider);
         }
 
         public void SetGameOver(RogueObj player, RogueObj dungeon, MMgr manager)
@@ -136,8 +136,8 @@ namespace RoguegardUnity
             SetObj(player, null);
 
             ISubviewStateProvider stateProvider = null;
-            manager.BackAnchor.Show(backSelectOption, SelectOptionViewItemHandler.Instance, manager, Arg, ref stateProvider);
-            manager.ForwardAnchor.Show(submitSelectOption, SelectOptionViewItemHandler.Instance, manager, Arg, ref stateProvider);
+            manager.BackAnchor.Show(backSelectOption, SelectOptionViewItemHandler<MMgr, MArg>.Instance, manager, Arg, ref stateProvider);
+            manager.ForwardAnchor.Show(submitSelectOption, SelectOptionViewItemHandler<MMgr, MArg>.Instance, manager, Arg, ref stateProvider);
         }
 
         public void SetQuest(RogueObj player, DungeonQuest quest, bool showSubmitButton, MMgr manager)
@@ -202,10 +202,10 @@ namespace RoguegardUnity
             _textRightR.SetText(rightRBuilder);
 
             ISubviewStateProvider stateProvider = null;
-            manager.BackAnchor.Show(backSelectOption, SelectOptionViewItemHandler.Instance, manager, Arg, ref stateProvider);
+            manager.BackAnchor.Show(backSelectOption, SelectOptionViewItemHandler<MMgr, MArg>.Instance, manager, Arg, ref stateProvider);
             if (showSubmitButton)
             {
-                manager.ForwardAnchor.Show(startQuestSelectOption, SelectOptionViewItemHandler.Instance, manager, Arg, ref stateProvider);
+                manager.ForwardAnchor.Show(startQuestSelectOption, SelectOptionViewItemHandler<MMgr, MArg>.Instance, manager, Arg, ref stateProvider);
             }
         }
 

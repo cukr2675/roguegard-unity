@@ -2,9 +2,7 @@ namespace Lysionium
 {
     public interface IListMenuManager
     {
-        ISelectOption BackOption { get; }
-
-        ISelectOption ErrorOption { get; }
+        ISelectOption<IListMenuManager, IListMenuArg> ErrorOption { get; }
 
         event System.Action OnUnload;
 

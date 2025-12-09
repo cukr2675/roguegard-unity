@@ -1,14 +1,18 @@
 namespace Lysionium
 {
+    // 設計メモ: Lysionium.Modeler のハードメニューが IReadOnlyList<ISelectOption> だと TMgr, TArg の型がわからないので型引数をつける
+    // ClickItemHandler に型引数があって ISelectOption に無いのは変
+    // また、複数の IListMenuManager で共通のメニュー（クイックメニューなど）を作りたい場合、反変性があると便利なので付与する
+
     /// <summary>
     /// <see cref="SelectOptionViewItemHandler"/> のモデルとして扱うインターフェース。
     /// </summary>
-    public interface ISelectOption
+    public interface ISelectOption<in TMgr, in TArg>
     {
-        string GetName(IListMenuManager manager, IListMenuArg arg);
+        string GetName(TMgr manager, TArg arg);
 
-        string GetStyle(IListMenuManager manager, IListMenuArg arg);
+        string GetStyle(TMgr manager, TArg arg);
 
-        void Click(IListMenuManager manager, IListMenuArg arg);
+        void Click(TMgr manager, TArg arg);
     }
 }

@@ -162,7 +162,7 @@ namespace RoguegardUnity
                 header.Bind(SelectOption.Create<MMgr, MArg>("+ ボーンを追加", (manager, arg) =>
                 {
                     manager.PushMenuScreen(newBoneMenu, other: editInfo);
-                }), SelectOptionViewItemHandler.Instance);
+                }), SelectOptionViewItemHandler<MMgr, MArg>.Instance);
                 header.RectTransform.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, y, _itemHeight);
                 header.RectTransform.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Left, 0f, headerWidth);
                 viewItems.Add(header);
@@ -171,7 +171,7 @@ namespace RoguegardUnity
             }
             {
                 _menuButton.Bind(SelectOption.Create<MMgr, MArg>(
-                    "...", (manager, arg) => manager.PushMenuScreen(menuScreen, arg)), SelectOptionViewItemHandler.Instance);
+                    "...", (manager, arg) => manager.PushMenuScreen(menuScreen, arg)), SelectOptionViewItemHandler<MMgr, MArg>.Instance);
             }
 
             var scrollRect = _scrollRect.viewport.rect;
@@ -199,7 +199,7 @@ namespace RoguegardUnity
                         manager.PopMenuScreen();
                     })
                     .Back(), arg);
-            }), SelectOptionViewItemHandler.Instance);
+            }), SelectOptionViewItemHandler<MMgr, MArg>.Instance);
             header.RectTransform.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, y, _itemHeight);
             header.RectTransform.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Left, 0f, headerWidth);
             viewItems.Add(header);
@@ -315,7 +315,7 @@ namespace RoguegardUnity
                             editInfo.InsertTrack(0, newTrack);
                             manager.PopMenuScreen(2);
                         })),
-                        ("1*", BackSelectOption.Instance)))
+                        ("1*", BackSelectOption<MMgr, MArg>.Instance)))
 
                     .Build();
             }

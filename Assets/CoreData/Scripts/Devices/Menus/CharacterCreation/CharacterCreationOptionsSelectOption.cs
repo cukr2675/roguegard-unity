@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Roguegard.Device
 {
-    public class CharacterCreationOptionsSelectOption : ISelectOption
+    public class CharacterCreationOptionsSelectOption : ISelectOption<MMgr, MArg>
     {
         private object editTarget;
 
@@ -22,7 +22,7 @@ namespace Roguegard.Device
             return this;
         }
 
-        string ISelectOption.GetName(IListMenuManager manager, IListMenuArg arg)
+        string ISelectOption<MMgr, MArg>.GetName(MMgr manager, MArg arg)
         {
             if (editTarget is Race race)
             {
@@ -52,9 +52,9 @@ namespace Roguegard.Device
             return null;
         }
 
-        string ISelectOption.GetStyle(IListMenuManager manager, IListMenuArg arg) => null;
+        string ISelectOption<MMgr, MArg>.GetStyle(MMgr manager, MArg arg) => null;
 
-        void ISelectOption.Click(IListMenuManager iManager, IListMenuArg iArg)
+        void ISelectOption<MMgr, MArg>.Click(MMgr iManager, MArg iArg)
         {
             var manager = (MMgr)iManager;
             var arg = (MArg)iArg;

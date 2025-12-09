@@ -4,6 +4,6 @@ namespace Roguegard.Device
 {
     public interface ICharacterCreationElementsSubview : IListHandlerSubview
     {
-        ISelectOption LoadPresetOption { get; }
+        ISelectOption<MMgr, MArg> LoadPresetOption { get; }
     }
 }

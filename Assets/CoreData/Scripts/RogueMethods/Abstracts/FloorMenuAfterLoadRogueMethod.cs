@@ -8,7 +8,7 @@ namespace Roguegard
     /// <summary>
     /// ダンジョン名と階層を表示してそこに移動させる <see cref="IRogueMethod"/>
     /// </summary>
-    public abstract class FloorMenuAfterLoadRogueMethod : BaseApplyRogueMethod, ISelectOption
+    public abstract class FloorMenuAfterLoadRogueMethod : BaseApplyRogueMethod, ISelectOption<MMgr, MArg>
     {
         public RogueMenuScreen MenuScreen { get; }
 
@@ -16,7 +16,7 @@ namespace Roguegard
         {
             MenuScreen = new Screen()
             {
-                selectOptions = new ISelectOption[] { this }
+                selectOptions = new ISelectOption<MMgr, MArg>[] { this }
             };
         }
 
@@ -48,15 +48,15 @@ namespace Roguegard
 
         protected abstract void Activate(MMgr manager, RogueObj player, RogueObj empty, in RogueMethodArgument arg);
 
-        string ISelectOption.GetName(IListMenuManager manager, IListMenuArg arg)
+        string ISelectOption<MMgr, MArg>.GetName(MMgr manager, MArg arg)
         {
             var args = (MArg)arg;
             return GetName((MMgr)manager, args.Self, args.User, args.Arg);
         }
 
-        string ISelectOption.GetStyle(IListMenuManager manager, IListMenuArg arg) => null;
+        string ISelectOption<MMgr, MArg>.GetStyle(MMgr manager, MArg arg) => null;
 
-        void ISelectOption.Click(IListMenuManager manager, IListMenuArg arg)
+        void ISelectOption<MMgr, MArg>.Click(MMgr manager, MArg arg)
         {
             var args = (MArg)arg;
             Activate((MMgr)manager, args.Self, args.User, args.Arg);
@@ -64,7 +64,7 @@ namespace Roguegard
 
         private class Screen : RogueMenuScreen
         {
-            public ISelectOption[] selectOptions;
+            public ISelectOption<MMgr, MArg>[] selectOptions;
 
             private readonly FadeOutInViewData<MMgr, MArg> view = new()
             {

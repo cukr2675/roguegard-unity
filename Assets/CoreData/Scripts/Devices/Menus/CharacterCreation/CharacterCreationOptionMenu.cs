@@ -234,15 +234,15 @@ namespace Roguegard.Device
                 });
         }
 
-        private class RemoveSelectOption : ISelectOption
+        private class RemoveSelectOption : ISelectOption<MMgr, MArg>
         {
             public CharacterCreationData characterCreationData;
 
-            string ISelectOption.GetName(IListMenuManager manager, IListMenuArg arg) => "<#f00>削除";
+            string ISelectOption<MMgr, MArg>.GetName(MMgr manager, MArg arg) => "<#f00>削除";
 
-            string ISelectOption.GetStyle(IListMenuManager manager, IListMenuArg arg) => null;
+            string ISelectOption<MMgr, MArg>.GetStyle(MMgr manager, MArg arg) => null;
 
-            void ISelectOption.Click(IListMenuManager iManager, IListMenuArg iArg)
+            void ISelectOption<MMgr, MArg>.Click(MMgr iManager, MArg iArg)
             {
                 var manager = (MMgr)iManager;
                 var arg = (MArg)iArg;

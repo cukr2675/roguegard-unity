@@ -116,7 +116,7 @@ namespace Lysionium
                     return parent;
                 }
 
-                public TOut Option(ISelectOption option)
+                public TOut Option(ISelectOption<TMgr, TArg> option)
                 {
                     parent.AssertNotBuilt();
 
@@ -138,7 +138,7 @@ namespace Lysionium
                     return parent;
                 }
 
-                public TOut Option(ISelectOption option)
+                public TOut Option(ISelectOption<TMgr, TArg> option)
                 {
                     parent.AssertNotBuilt();
 

@@ -1,10 +1,21 @@
-using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace Lysionium
 {
-    public static class KeyOption
+    /// <inheritdoc/>
+    public class KeyOption : KeyOption<IListMenuManager, IListMenuArg>
     {
+        public KeyOption()
+        {
+        }
+
+        public KeyOption(
+            string name, InputItemHandler<IListMenuManager, IListMenuArg> onPerform, string style = null,
+            InputItemHandler<IListMenuManager, IListMenuArg> onStart = null, InputItemHandler<IListMenuManager, IListMenuArg> onCancel = null)
+            : base(name, onPerform, style, onStart, onCancel)
+        {
+        }
+
         public static KeyOption<TMgr, TArg> Create<TMgr, TArg>(
             string name, InputItemHandler<TMgr, TArg> onPerform, string style, // input 指定子を想定して style は必須にする
             InputItemHandler<TMgr, TArg> onStart = null, InputItemHandler<TMgr, TArg> onCancel = null)
@@ -126,9 +137,22 @@ namespace Lysionium
         }
     }
 
-    public class KeyOption<TMgr, TArg> : IKeyOption
-        where TMgr : IListMenuManager
-        where TArg : IListMenuArg
+    /// <inheritdoc/>
+    public class KeyOption<TMgr> : KeyOption<TMgr, IListMenuArg>
+    {
+        public KeyOption()
+        {
+        }
+
+        public KeyOption(
+            string name, InputItemHandler<TMgr, IListMenuArg> onPerform, string style = null,
+            InputItemHandler<TMgr, IListMenuArg> onStart = null, InputItemHandler<TMgr, IListMenuArg> onCancel = null)
+            : base(name, onPerform, style, onStart, onCancel)
+        {
+        }
+    }
+
+    public class KeyOption<TMgr, TArg> : IKeyOption<TMgr, TArg>
     {
         private string name;
         private System.Func<TMgr, TArg, string> getName;
@@ -139,6 +163,21 @@ namespace Lysionium
         public InputItemHandler<TMgr, TArg> Started { get; set; }
         public InputItemHandler<TMgr, TArg> Canceled { get; set; }
         public InputItemHandler<TMgr, TArg> Performed { get; set; }
+
+        public KeyOption()
+        {
+        }
+
+        public KeyOption(
+            string name, InputItemHandler<TMgr, TArg> onPerform, string style = null,
+            InputItemHandler<TMgr, TArg> onStart = null, InputItemHandler<TMgr, TArg> onCancel = null)
+        {
+            this.name = name;
+            this.style = style;
+            Performed = onPerform;
+            Started = onStart;
+            Canceled = onCancel;
+        }
 
         public void SetName(string name)
         {
@@ -164,52 +203,10 @@ namespace Lysionium
             style = null;
         }
 
-        string IKeyOption.GetName(IListMenuManager manager, IListMenuArg arg)
-        {
-            if (getName != null)
-            {
-                if (LuiAssert.Type<TMgr>(manager, out var tMgr) ||
-                    LuiAssert.Type<TArg>(arg, out var tArg)) return null;
-
-                return getName(tMgr, tArg);
-            }
-            else return name;
-        }
-
-        string IKeyOption.GetStyle(IListMenuManager manager, IListMenuArg arg)
-        {
-            if (getStyle != null)
-            {
-                if (LuiAssert.Type<TMgr>(manager, out var tMgr) ||
-                    LuiAssert.Type<TArg>(arg, out var tArg)) return null;
-
-                return getStyle(tMgr, tArg);
-            }
-            else return style;
-        }
-
-        void IKeyOption.Started(IListMenuManager manager, IListMenuArg arg, InputAction.CallbackContext context)
-        {
-            if (LuiAssert.Type<TMgr>(manager, out var tMgr, manager) ||
-                LuiAssert.Type<TArg>(arg, out var tArg, manager)) return;
-
-            Started?.Invoke(tMgr, tArg, context);
-        }
-
-        void IKeyOption.Canceled(IListMenuManager manager, IListMenuArg arg, InputAction.CallbackContext context)
-        {
-            if (LuiAssert.Type<TMgr>(manager, out var tMgr, manager) ||
-                LuiAssert.Type<TArg>(arg, out var tArg, manager)) return;
-
-            Canceled?.Invoke(tMgr, tArg, context);
-        }
-
-        void IKeyOption.Performed(IListMenuManager manager, IListMenuArg arg, InputAction.CallbackContext context)
-        {
-            if (LuiAssert.Type<TMgr>(manager, out var tMgr, manager) ||
-                LuiAssert.Type<TArg>(arg, out var tArg, manager)) return;
-
-            Performed?.Invoke(tMgr, tArg, context);
-        }
+        string IKeyOption<TMgr, TArg>.GetName(TMgr manager, TArg arg) => getName?.Invoke(manager, arg) ?? name;
+        string IKeyOption<TMgr, TArg>.GetStyle(TMgr manager, TArg arg) => getStyle?.Invoke(manager, arg) ?? style;
+        void IKeyOption<TMgr, TArg>.Started(TMgr manager, TArg arg, InputAction.CallbackContext context) => Started?.Invoke(manager, arg, context);
+        void IKeyOption<TMgr, TArg>.Canceled(TMgr manager, TArg arg, InputAction.CallbackContext context) => Canceled?.Invoke(manager, arg, context);
+        void IKeyOption<TMgr, TArg>.Performed(TMgr manager, TArg arg, InputAction.CallbackContext context) => Performed?.Invoke(manager, arg, context);
     }
 }

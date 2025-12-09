@@ -8,7 +8,7 @@ namespace Lysionium
     /// <summary>
     /// 項目数が固定のメニュー向け ViewData
     /// </summary>
-    public class MainMenuViewData<TMgr, TArg> : ListViewData<ISelectOption, TMgr, TArg>
+    public class MainMenuViewData<TMgr, TArg> : ListViewData<ISelectOption<TMgr, TArg>, TMgr, TArg>
         where TMgr : IListMenuManager
         where TArg : IListMenuArg
     {
@@ -17,7 +17,7 @@ namespace Lysionium
         public System.Func<TMgr, IListHandlerSubview> CaptionBoxSubviewSelector { get; set; }
             = manager => (manager as IDefaultSubviewTable)?.CaptionBox;
         public System.Func<TMgr, IListHandlerSubview> BackAnchorSubviewSelector { get; set; }
-        public SelectOptionList<TMgr, TArg> BackAnchorList { get; set; } = new() { BackSelectOption.Instance };
+        public SelectOptionList<TMgr, TArg> BackAnchorList { get; set; } = new(_ => _.BackIfReflectable());
 
         private object prevViewStateHolder;
         private ISubviewStateProvider primaryCommandSubviewStateProvider;
@@ -46,7 +46,7 @@ namespace Lysionium
         protected override void ShowSubviews(TMgr manager, TArg arg)
         {
             PrimaryCommandSubviewSelector?.Invoke(manager)?.Show(
-                List, SelectOptionViewItemHandler.Instance, manager, arg, ref primaryCommandSubviewStateProvider);
+                List, SelectOptionViewItemHandler<TMgr, TArg>.Instance, manager, arg, ref primaryCommandSubviewStateProvider);
 
             if (Title != null)
             {
@@ -55,7 +55,7 @@ namespace Lysionium
             }
 
             BackAnchorSubviewSelector?.Invoke(manager)?.Show(
-                BackAnchorList, SelectOptionViewItemHandler.Instance, manager, arg, ref backAnchorSubviewStateProvider);
+                BackAnchorList, SelectOptionViewItemHandler<TMgr, TArg>.Instance, manager, arg, ref backAnchorSubviewStateProvider);
         }
 
         public virtual void Hide(TMgr manager, bool back)
@@ -72,7 +72,7 @@ namespace Lysionium
             {
             }
 
-            public Builder Option(ISelectOption option)
+            public Builder Option(ISelectOption<TMgr, TArg> option)
             {
                 return Tail.Option(option);
             }

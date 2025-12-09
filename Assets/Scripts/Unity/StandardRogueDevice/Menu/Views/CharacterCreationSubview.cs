@@ -30,23 +30,23 @@ namespace RoguegardUnity
 
         private IButtonViewItemHandler intrinsicPresenter;
         private IButtonViewItemHandler startingItemPresenter;
-        private static readonly ISelectOption intrinsicHeader
+        private static readonly ISelectOption<MMgr, MArg> intrinsicHeader
             = SelectOption.Create<MMgr, MArg>("固有能力", delegate { });
-        private static readonly ISelectOption startingItemHeader
+        private static readonly ISelectOption<MMgr, MArg> startingItemHeader
             = SelectOption.Create<MMgr, MArg>("初期アイテム", delegate { });
         private MenuRogueObjSpriteRenderer spriteRenderer;
-        private ISelectOption raceSelectOption;
-        private ISelectOption appearanceSelectOption;
+        private ISelectOption<MMgr, MArg> raceSelectOption;
+        private ISelectOption<MMgr, MArg> appearanceSelectOption;
         private AppearanceEditingMenu appearanceEditingMenu;
         private readonly List<MonoBehaviour> itemObjects = new();
         private static readonly LoadPresetMenu loadPresetMenu = new();
-        private static ISelectOption LoadPresetSelectOption { get; }
+        private static ISelectOption<MMgr, MArg> LoadPresetSelectOption { get; }
             = SelectOption.Create<MMgr, MArg>(":Load", (manager, arg) => manager.PushMenuScreen(loadPresetMenu, arg));
         private static readonly object[] leftAnchorObjs = new object[2];
 
         private readonly List<ViewItem> viewItems = new();
 
-        ISelectOption ICharacterCreationElementsSubview.LoadPresetOption => LoadPresetSelectOption;
+        ISelectOption<MMgr, MArg> ICharacterCreationElementsSubview.LoadPresetOption => LoadPresetSelectOption;
 
         public void Initialize(RogueSpriteRendererPool rendererPool)
         {
@@ -148,7 +148,7 @@ namespace RoguegardUnity
                 sumHeight += ((RectTransform)header.transform).rect.height;
                 odd = false;
                 header.Initialize(this);
-                header.Bind(intrinsicHeader, SelectOptionViewItemHandler.Instance);
+                header.Bind(intrinsicHeader, SelectOptionViewItemHandler<MMgr, MArg>.Instance);
                 itemObjects.Add(header);
             }
             for (int i = 0; i < characterCreationData.Intrinsics.Count; i++)
@@ -176,7 +176,7 @@ namespace RoguegardUnity
                 sumHeight += ((RectTransform)header.transform).rect.height;
                 odd = false;
                 header.Initialize(this);
-                header.Bind(startingItemHeader, SelectOptionViewItemHandler.Instance);
+                header.Bind(startingItemHeader, SelectOptionViewItemHandler<MMgr, MArg>.Instance);
                 itemObjects.Add(header);
             }
             for (int i = 0; i < characterCreationData.StartingItemTable.Count; i++)
@@ -199,9 +199,9 @@ namespace RoguegardUnity
             _scrollRect.content.SetInsetAndSizeFromParentEdge(
                 RectTransform.Edge.Top, 0, _firstParent.rect.height + sumHeight);
 
-            _raceButton.Bind(raceSelectOption, SelectOptionViewItemHandler.Instance);
+            _raceButton.Bind(raceSelectOption, SelectOptionViewItemHandler<MMgr, MArg>.Instance);
             viewItems.Add(_raceButton);
-            _appearanceButton.Bind(appearanceSelectOption, SelectOptionViewItemHandler.Instance);
+            _appearanceButton.Bind(appearanceSelectOption, SelectOptionViewItemHandler<MMgr, MArg>.Instance);
             viewItems.Add(_appearanceButton);
         }
 

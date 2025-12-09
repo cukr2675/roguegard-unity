@@ -65,7 +65,7 @@ namespace Roguegard.Device
             manager.PopMenuScreen(2);
         }
 
-        public ChoicesMenuScreen Option(ISelectOption option)
+        public ChoicesMenuScreen Option(ISelectOption<MMgr, MArg> option)
         {
             screen.Option(option);
             return this;

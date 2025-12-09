@@ -29,7 +29,13 @@ namespace Lysionium
         {
             this.getColor = getColor;
             handleClose = onClose;
-            handleClose += (manager, arg, color) => manager.BackOption.Click(manager, arg);
+            handleClose += (manager, arg, color) =>
+            {
+                if (manager is IBackOptionProviderListMenuManager<TMgr, TArg> backOptionProvider)
+                {
+                    backOptionProvider.BackOption.Click(manager, arg);
+                }
+            };
 
             view = new()
             {

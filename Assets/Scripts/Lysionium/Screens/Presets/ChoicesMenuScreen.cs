@@ -26,7 +26,7 @@ namespace Lysionium
         where TArg : IListMenuArg
     {
         private readonly System.Func<TMgr, TArg, string> getMessage;
-        private readonly List<ISelectOption> selectOptions = new();
+        private readonly SelectOptionList<TMgr, TArg> selectOptions = new();
         private readonly SpeechBoxViewData<TMgr, TArg> view;
 
         public bool IsIncremental { get; }
@@ -61,7 +61,7 @@ namespace Lysionium
             if (choicesSubviewSelector != null) { view.ChoicesSubviewSelector = choicesSubviewSelector; }
         }
 
-        public ChoicesMenuScreen<TMgr, TArg> Option(ISelectOption option)
+        public ChoicesMenuScreen<TMgr, TArg> Option(ISelectOption<TMgr, TArg> option)
         {
             selectOptions.Add(option);
             return this;

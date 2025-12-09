@@ -15,7 +15,8 @@ namespace Lysionium
     { }
 
     [RequireComponent(typeof(DefaultSubviewTable))]
-    public abstract class StandardListMenuManager<TMgr, TArg> : MonoBehaviour, IMenuScreenListMenuManager<TMgr, TArg>, IDefaultSubviewTable
+    public abstract class StandardListMenuManager<TMgr, TArg>
+        : MonoBehaviour, IMenuScreenListMenuManager<TMgr, TArg>, IBackOptionProviderListMenuManager<TMgr, TArg>, IDefaultSubviewTable
         where TMgr : StandardListMenuManager<TMgr, TArg>
         where TArg : IListMenuArg
     {
@@ -29,10 +30,10 @@ namespace Lysionium
 
         public bool ShowsMenuScreen => stack.Count >= 1;
 
-        public virtual ISelectOption BackOption { get; protected set; }
+        public virtual ISelectOption<TMgr, TArg> BackOption { get; protected set; }
             = SelectOption.Create<TMgr, TArg>("Back", (manager, arg) => manager.PopMenuScreen(), "Cancel click:Cancel");
 
-        public virtual ISelectOption ErrorOption { get; protected set; }
+        public virtual ISelectOption<IListMenuManager, IListMenuArg> ErrorOption { get; protected set; }
             = SelectOption.Create<IListMenuManager, IListMenuArg>("<#F00>ERROR", delegate { }, "Cancel");
 
         /// <summary>

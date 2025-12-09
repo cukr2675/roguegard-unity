@@ -35,7 +35,7 @@ namespace Roguegard
 
         private class RogueMenu : RogueMenuScreen
         {
-            private readonly ScrollMenuViewData<ISelectOption, MMgr, MArg> view = new()
+            private readonly ScrollMenuViewData<ISelectOption<MMgr, MArg>, MMgr, MArg> view = new()
             {
             };
 

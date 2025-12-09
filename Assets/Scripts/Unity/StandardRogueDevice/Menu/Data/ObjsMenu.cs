@@ -11,7 +11,7 @@ namespace RoguegardUnity
     /// </summary>
     public class ObjsMenu
     {
-        public ISelectOption Close { get; }
+        public ISelectOption<MMgr, MArg> Close { get; }
 
         /// <summary>
         /// <see cref="RogueMethodArgument.TargetObj"/> のインベントリを開く

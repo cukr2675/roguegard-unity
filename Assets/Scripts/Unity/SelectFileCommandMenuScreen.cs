@@ -114,7 +114,7 @@ namespace RoguegardUnity
                                 manager.PopMenuScreen(2);
                             }
                         })),
-                        ("1*", BackSelectOption.Instance)))
+                        ("1*", BackSelectOption<MMgr, MArg>.Instance)))
 
                     .Build();
             }

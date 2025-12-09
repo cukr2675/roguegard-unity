@@ -1,7 +1,17 @@
 namespace Lysionium
 {
-    public static class SelectOption
+    /// <inheritdoc/>
+    public class SelectOption : SelectOption<IListMenuManager, IListMenuArg>
     {
+        public SelectOption()
+        {
+        }
+
+        public SelectOption(string name, ClickItemHandler<IListMenuManager, IListMenuArg> onClick, string style = null)
+            : base(name, onClick, style)
+        {
+        }
+
         public static SelectOption<TMgr, TArg> Create<TMgr, TArg>(
             string name, ClickItemHandler<TMgr, TArg> onClick, string style = "")
             where TMgr : IListMenuManager
@@ -51,9 +61,20 @@ namespace Lysionium
         }
     }
 
-    public class SelectOption<TMgr, TArg> : ISelectOption
-        where TMgr : IListMenuManager
-        where TArg : IListMenuArg
+    /// <inheritdoc/>
+    public class SelectOption<TMgr> : SelectOption<TMgr, IListMenuArg>
+    {
+        public SelectOption()
+        {
+        }
+
+        public SelectOption(string name, ClickItemHandler<TMgr, IListMenuArg> onClick, string style = null)
+            : base(name, onClick, style)
+        {
+        }
+    }
+
+    public class SelectOption<TMgr, TArg> : ISelectOption<TMgr, TArg>
     {
         private string name;
         private System.Func<TMgr, TArg, string> getName;
@@ -62,6 +83,17 @@ namespace Lysionium
         private System.Func<TMgr, TArg, string> getStyle;
 
         public ClickItemHandler<TMgr, TArg> Click { get; set; }
+
+        public SelectOption()
+        {
+        }
+
+        public SelectOption(string name, ClickItemHandler<TMgr, TArg> onClick, string style = null)
+        {
+            this.name = name;
+            Click = onClick;
+            this.style = style;
+        }
 
         public void SetName(string name)
         {
@@ -87,36 +119,8 @@ namespace Lysionium
             style = null;
         }
 
-        string ISelectOption.GetName(IListMenuManager manager, IListMenuArg arg)
-        {
-            if (getName != null)
-            {
-                if (LuiAssert.Type<TMgr>(manager, out var tMgr) ||
-                    LuiAssert.Type<TArg>(arg, out var tArg)) return null;
-
-                return getName(tMgr, tArg);
-            }
-            else return name;
-        }
-
-        string ISelectOption.GetStyle(IListMenuManager manager, IListMenuArg arg)
-        {
-            if (getStyle != null)
-            {
-                if (LuiAssert.Type<TMgr>(manager, out var tMgr) ||
-                    LuiAssert.Type<TArg>(arg, out var tArg)) return null;
-
-                return getStyle(tMgr, tArg);
-            }
-            else return style;
-        }
-
-        void ISelectOption.Click(IListMenuManager manager, IListMenuArg arg)
-        {
-            if (LuiAssert.Type<TMgr>(manager, out var tMgr, manager) ||
-                LuiAssert.Type<TArg>(arg, out var tArg, manager)) return;
-
-            Click(tMgr, tArg);
-        }
+        string ISelectOption<TMgr, TArg>.GetName(TMgr manager, TArg arg) => getName?.Invoke(manager, arg) ?? name;
+        string ISelectOption<TMgr, TArg>.GetStyle(TMgr manager, TArg arg) => getStyle?.Invoke(manager, arg) ?? style;
+        void ISelectOption<TMgr, TArg>.Click(TMgr manager, TArg arg) => Click(manager, arg);
     }
 }

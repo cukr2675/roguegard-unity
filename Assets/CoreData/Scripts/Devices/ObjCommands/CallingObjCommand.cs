@@ -10,7 +10,7 @@ namespace Roguegard
     {
         public abstract string Name { get; }
 
-        ISelectOption IObjCommand.SelectOption => menuSelectOption ??= SelectOption.Create<MMgr, MArg>(Name, (manager, arg) =>
+        ISelectOption<MMgr, MArg> IObjCommand.SelectOption => menuSelectOption ??= SelectOption.Create<MMgr, MArg>(Name, (manager, arg) =>
         {
             var deviceInfo = RogueDeviceEffect.Get(arg.Self);
             deviceInfo.SetDeviceCommand(this, arg.User, arg.Arg);

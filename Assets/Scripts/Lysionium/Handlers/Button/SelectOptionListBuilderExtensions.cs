@@ -5,7 +5,7 @@ namespace Lysionium
     public static class SelectOptionListBuilderExtensions
     {
         public static TBuilder OptionRange<TMgr, TArg, TBuilder>(
-            this ISelectOptionListBuilder<TMgr, TArg, TBuilder> builder, IEnumerable<ISelectOption> options)
+            this ISelectOptionListBuilder<TMgr, TArg, TBuilder> builder, IEnumerable<ISelectOption<TMgr, TArg>> options)
             where TMgr : IListMenuManager
             where TArg : IListMenuArg
         {
@@ -32,21 +32,6 @@ namespace Lysionium
             where TArg : IListMenuArg
         {
             return builder.Option(SelectOption.Create(getName, onClick, style));
-        }
-
-        public static TBuilder Back<TMgr, TArg, TBuilder>(
-            this ISelectOptionListBuilder<TMgr, TArg, TBuilder> builder, string name = null, string style = null)
-            where TMgr : IListMenuManager
-            where TArg : IListMenuArg
-        {
-            if (name == null && style == null)
-            {
-                return builder.Option(BackSelectOption.Instance);
-            }
-            else
-            {
-                return builder.Option(BackSelectOption.Create<TMgr, TArg>(name, style));
-            }
         }
     }
 }

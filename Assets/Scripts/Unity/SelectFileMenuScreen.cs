@@ -97,7 +97,7 @@ namespace RoguegardUnity
                         var infoText2 = fileInfo.LastWriteTime.ToString();
                         return (name, infoText1, infoText2);
                     }
-                    else if (item is ISelectOption option)
+                    else if (item is ISelectOption<MMgr, MArg> option)
                     {
                         var name = option.GetName(manager, arg);
                         return (name, null, null);
@@ -115,7 +115,7 @@ namespace RoguegardUnity
                         newArg.Arg = new(other: fileInfo);
                         manager.PushMenuScreen(nextScreen, newArg.ReadOnly);
                     }
-                    else if (item is ISelectOption option) { option.Click(manager, arg); }
+                    else if (item is ISelectOption<MMgr, MArg> option) { option.Click(manager, arg); }
                     else throw new System.InvalidOperationException();
                 })
 
@@ -148,7 +148,7 @@ namespace RoguegardUnity
             manager.PushMenuScreen(errorMsgDialog, other: errorMsg);
         }
 
-        private static void ErrorMsgOK(IListMenuManager manager, MArg arg)
+        private static void ErrorMsgOK(MMgr manager, MArg arg)
         {
             manager.BackOption.Click(manager, arg);
         }

@@ -167,7 +167,7 @@ namespace Lysionium.Samples
                         })),
 
                         // 戻るボタン
-                        ("1*", BackSelectOption.Instance)))
+                        ("1*", BackSelectOption<ExMgr, ExArg>.Instance)))
 
                     .Build();
             }

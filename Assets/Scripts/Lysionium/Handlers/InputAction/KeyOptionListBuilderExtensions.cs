@@ -6,7 +6,7 @@ namespace Lysionium
     public static class KeyOptionListBuilderExtensions
     {
         public static TBuilder OptionRange<TMgr, TArg, TBuilder>(
-            this IKeyOptionListBuilder<TMgr, TArg, TBuilder> builder, IEnumerable<IKeyOption> options)
+            this IKeyOptionListBuilder<TMgr, TArg, TBuilder> builder, IEnumerable<IKeyOption<TMgr, TArg>> options)
             where TMgr : IListMenuManager
             where TArg : IListMenuArg
         {

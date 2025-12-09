@@ -154,7 +154,7 @@ namespace RoguegardUnity
                             else { editList.Remove(targetTime); }
                             manager.PopMenuScreen();
                         })),
-                        ("1*", BackSelectOption.Instance)))
+                        ("1*", BackSelectOption<MMgr, MArg>.Instance)))
 
                     .Build();
             }
@@ -291,7 +291,7 @@ namespace RoguegardUnity
                 paint.Show();
 
                 ISubviewStateProvider stateProvider = null;
-                manager.BackAnchor.Show(back, SelectOptionViewItemHandler.Instance, manager, arg, ref stateProvider);
+                manager.BackAnchor.Show(back, SelectOptionViewItemHandler<MMgr, MArg>.Instance, manager, arg, ref stateProvider);
             }
 
             private void Back(MMgr manager, MArg arg)

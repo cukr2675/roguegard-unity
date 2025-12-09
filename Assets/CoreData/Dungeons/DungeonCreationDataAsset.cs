@@ -40,7 +40,7 @@ namespace Roguegard.CharacterCreation
         // 自然回復あり
         private static readonly UseNutritionLeaderEffect useNutritionLeaderEffect = new();
 
-        public ISelectOption CreateDungeonSelectOption()
+        public ISelectOption<MMgr, MArg> CreateDungeonSelectOption()
         {
             var floorMenu = new FloorMenu() { data = this };
             return SelectOption.Create<MMgr, MArg>(DescriptionName, (manager, arg) =>
