@@ -283,9 +283,8 @@ namespace RoguegardUnity
                 }
                 var showsSplitLine = boneSprite.ShowsSplitLine(dotterBoards[0], out pivots[0], out pivots[1]);
 
-                var paint = RoguegardSubviews.GetPaint(manager);
-                paint.SetPaint(dotterBoards, editInfo.Palette, editInfo.MainColor, showsSplitLine, pivots);
-                paint.Show();
+                manager.Paint.SetPaint(dotterBoards, editInfo.Palette, editInfo.MainColor, showsSplitLine, pivots);
+                manager.Paint.Show();
 
                 ISubviewStateProvider stateProvider = null;
                 manager.BackAnchor.Show(back, manager, arg, ref stateProvider);
@@ -293,24 +292,23 @@ namespace RoguegardUnity
 
             private void Back(MMgr manager, MArg arg)
             {
-                var paint = RoguegardSubviews.GetPaint(manager);
                 switch (directionIndex)
                 {
                     case 0:
                     case 1:
-                        paint.Boards[0].CopyTo(boneSprite.NormalFront);
+                        manager.Paint.Boards[0].CopyTo(boneSprite.NormalFront);
                         boneSprite.BackRear = boneSprite.NormalFront;
                         break;
                     case 2:
                     case 3:
-                        paint.Boards[0].CopyTo(boneSprite.NormalRear);
+                        manager.Paint.Boards[0].CopyTo(boneSprite.NormalRear);
                         boneSprite.BackFront = boneSprite.NormalRear;
                         break;
                 }
-                editInfo.MainColor = paint.MainColor;
-                for (int i = 0; i < paint.Palette.Length; i++)
+                editInfo.MainColor = manager.Paint.MainColor;
+                for (int i = 0; i < manager.Paint.Palette.Length; i++)
                 {
-                    editInfo.SetPalette(i, paint.Palette[i]);
+                    editInfo.SetPalette(i, manager.Paint.Palette[i]);
                 }
 
                 manager.PopMenuScreen();

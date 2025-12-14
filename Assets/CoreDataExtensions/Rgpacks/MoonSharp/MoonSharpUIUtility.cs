@@ -140,7 +140,7 @@ namespace Roguegard.Rgpacks.MoonSharp
                 var showFace = arg.Arg.TargetObj != null;
                 if (showFace)
                 {
-                    RoguegardSubviews.GetFace(manager).Show(null, null, manager, arg, ref faceStateProvider);
+                    manager.Face.Show(null, null, manager, arg, ref faceStateProvider);
                 }
 
                 manager.SpeechBox.DoScheduledAfterCompletion((iManager, iArg) =>
@@ -166,7 +166,7 @@ namespace Roguegard.Rgpacks.MoonSharp
                         manager.SpeechBox.Show();
                         if (showFace)
                         {
-                            RoguegardSubviews.GetFace(manager).Show();
+                            manager.Face.Show();
                         }
                     }
                     else

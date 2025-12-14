@@ -10,7 +10,8 @@
         "Roguegard.CharacterCreation",
         "Roguegard.CoreData",
         "RoguegardUnity",
-        "Roguegard.Device"
+        "Roguegard.Device",
+        "Lysionium"
     ],
     "includePlatforms": [
         "Editor"

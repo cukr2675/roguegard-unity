@@ -1,3 +1,4 @@
+using Lysionium;
 using Roguegard;
 using Roguegard.Device;
 using UnityEngine;
@@ -376,7 +377,7 @@ namespace RoguegardUnity
             _inputController.ClearInput();
         }
 
-        public void OpenMenu(RogueObj player, RogueMenuScreen menu, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+        public void OpenMenu(RogueObj player, IMenuScreen<MMgrBase, MArg> menu, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         {
             _inputController.SetEnabled(false);
             _headerController.UpdateHeader(player);

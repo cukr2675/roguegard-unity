@@ -89,9 +89,8 @@ namespace RoguegardUnity
                     target = arg;
                 }
 
-                var summary = RoguegardSubviews.GetSummary(manager);
-                summary.SetObj(target, manager);
-                summary.Show();
+                manager.Summary.SetObj(target, manager);
+                manager.Summary.Show();
             }
         }
 

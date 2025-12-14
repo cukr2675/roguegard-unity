@@ -10,29 +10,29 @@ namespace RoguegardUnity
     /// <summary>
     /// メニュー UI
     /// </summary>
-    public class MenuController : MMgr, IMMgr
+    public class MenuController : MMgr
     {
         [SerializeField] private WebOtherAudioPlayHandler _audioPlayHandler = null;
         [SerializeField] private StatsSubview _stats = null;
         [SerializeField] private FaceSubview _face = null;
-        public IListHandlerSubview Face => _face;
+        public override IListHandlerSubview Face => _face;
         [SerializeField] private SummarySubview _summary = null;
-        public ISummaryElementsSubview Summary => _summary;
+        public override ISummaryElementsSubview Summary => _summary;
         [SerializeField] private TextEditorSubview _textEditor = null;
-        public ITextEditorElementsSubview TextEditor => _textEditor;
+        public override ITextEditorElementsSubview TextEditor => _textEditor;
         [SerializeField] private CharacterCreationSubview _characterCreation = null;
-        public ICharacterCreationElementsSubview CharacterCreation => _characterCreation;
+        public override ICharacterCreationElementsSubview CharacterCreation => _characterCreation;
         [SerializeField] private PaintSubview _paint = null;
-        public IPaintElementsSubview Paint => _paint;
+        public override IPaintElementsSubview Paint => _paint;
         [SerializeField] private DopesheetSubview _dopesheet = null;
-        public IListHandlerSubview Dopesheet => _dopesheet;
+        public override IListHandlerSubview Dopesheet => _dopesheet;
 
         public StatsSubview Stats => _stats;
 
         [Header("Title Only")]
         [SerializeField] private GridSubview _titleMenu = null;
         public static string TitleMenuName => "TitleMenu";
-        public IListHandlerSubview TitleMenu => _titleMenu;
+        public override IListHandlerSubview TitleMenu => _titleMenu;
 
         private MainMenu mainMenu;
         private LongDownMenu longDownMenu;
@@ -61,7 +61,7 @@ namespace RoguegardUnity
 
         internal void Initialize(RogueSpriteRendererPool rendererPool)
         {
-            BackOption = SelectOption.Create<MMgr, MArg>("<", (manager, arg) => manager.PopMenuScreen(), "Cancel click:Cancel");
+            BackOption = SelectOption.Create<MMgrBase, MArg>("<", (manager, arg) => manager.PopMenuScreen(), "Cancel click:Cancel");
 
             CommonInit();
             var objCommandMenu = new ObjCommandMenu();
@@ -132,7 +132,7 @@ namespace RoguegardUnity
         }
 
         public override void PushMenuScreen(
-            IMenuScreen<MMgr, MArg> menuScreen,
+            IMenuScreen<MMgrBase, MArg> menuScreen,
             RogueObj self = null, RogueObj user = null,
             RogueObj targetObj = null,
             int count = default,
@@ -146,7 +146,7 @@ namespace RoguegardUnity
         }
 
         public void PushInitialMenuScreen(
-            IMenuScreen<MMgr, MArg> menuScreen,
+            IMenuScreen<MMgrBase, MArg> menuScreen,
             RogueObj self = null, RogueObj user = null,
             RogueObj targetObj = null,
             int count = default,

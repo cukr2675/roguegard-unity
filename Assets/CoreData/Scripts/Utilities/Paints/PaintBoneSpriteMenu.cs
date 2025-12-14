@@ -198,9 +198,8 @@ namespace Roguegard
                 }
                 var showsSplitLine = boneSprite.ShowsSplitLine(dotterBoards[0], out pivots[0], out pivots[1]);
 
-                var paint = RoguegardSubviews.GetPaint(manager);
-                paint.SetPaint(dotterBoards, table.Palette, table.MainColor, showsSplitLine, pivots);
-                paint.Show();
+                manager.Paint.SetPaint(dotterBoards, table.Palette, table.MainColor, showsSplitLine, pivots);
+                manager.Paint.Show();
 
                 ISubviewStateProvider stateProvider = null;
                 manager.BackAnchor.Show(back, manager, arg, ref stateProvider);
@@ -211,24 +210,23 @@ namespace Roguegard
                 var table = (PaintBoneSpriteTable)arg.Arg.Other;
                 var itemIndex = arg.Arg.Count;
                 var boneSprite = (PaintBoneSprite)table.Items[itemIndex];
-                var paint = RoguegardSubviews.GetPaint(manager);
                 switch (directionIndex)
                 {
                     case 0:
                     case 1:
-                        paint.Boards[0].CopyTo(boneSprite.NormalFront);
+                        manager.Paint.Boards[0].CopyTo(boneSprite.NormalFront);
                         boneSprite.BackRear = boneSprite.NormalFront;
                         break;
                     case 2:
                     case 3:
-                        paint.Boards[0].CopyTo(boneSprite.NormalRear);
+                        manager.Paint.Boards[0].CopyTo(boneSprite.NormalRear);
                         boneSprite.BackFront = boneSprite.NormalRear;
                         break;
                 }
-                table.MainColor = paint.MainColor;
-                for (int i = 0; i < paint.Palette.Length; i++)
+                table.MainColor = manager.Paint.MainColor;
+                for (int i = 0; i < manager.Paint.Palette.Length; i++)
                 {
-                    table.SetPalette(i, paint.Palette[i]);
+                    table.SetPalette(i, manager.Paint.Palette[i]);
                 }
 
                 manager.PopMenuScreen();

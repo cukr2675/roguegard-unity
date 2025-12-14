@@ -27,16 +27,14 @@ namespace Roguegard
                 var memo = arg.Arg.Tool;
                 var text = NotepadInfo.GetText(memo);
 
-                var textEditor = RoguegardSubviews.GetTextEditor(manager);
-                textEditor.Text = text;
-                textEditor.Show();
+                manager.TextEditor.Text = text;
+                manager.TextEditor.Show();
                 manager.BackAnchor.Show(backAnchor, manager, arg, ref stateProvider);
             }
 
             private static void Back(MMgr manager, MArg arg)
             {
-                var textEditor = RoguegardSubviews.GetTextEditor(manager);
-                NotepadInfo.SetTo(arg.Arg.Tool, textEditor.Text);
+                NotepadInfo.SetTo(arg.Arg.Tool, manager.TextEditor.Text);
                 manager.Done();
             }
 

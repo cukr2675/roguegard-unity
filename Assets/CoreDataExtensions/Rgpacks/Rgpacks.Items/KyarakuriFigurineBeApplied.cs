@@ -57,7 +57,7 @@ namespace Roguegard.Rgpacks
         {
             private readonly ScrollMenuViewData<object, MMgr, MArg> view = new()
             {
-                ScrollSubviewSelector = m => (m as IMMgr)?.CharacterCreation,
+                ScrollSubviewSelector = m => m.CharacterCreation,
                 BackAnchorList = new(
                     _ => _
                     .Option(null) // プリセット読み込みボタン（OpenScreen で設定）
@@ -67,8 +67,7 @@ namespace Roguegard.Rgpacks
             public override void OpenScreen(MMgr manager, MArg arg)
             {
                 // プリセット読み込みボタンを設定する
-                var characterCreation = RoguegardSubviews.GetCharacterCreation(manager);
-                view.BackAnchorList[0] = characterCreation.LoadPresetOption;
+                view.BackAnchorList[0] = manager.CharacterCreation.LoadPresetOption;
 
                 view.Show(System.Array.Empty<object>(), manager, arg)
                     ?

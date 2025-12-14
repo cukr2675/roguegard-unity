@@ -68,9 +68,8 @@ namespace Roguegard
                 {
                     var quest = (DungeonQuest)arg.Arg.Other;
 
-                    var summary = RoguegardSubviews.GetSummary(manager);
-                    summary.SetQuest(arg.Self, quest, true, manager);
-                    summary.Show();
+                    manager.Summary.SetQuest(arg.Self, quest, true, manager);
+                    manager.Summary.Show();
                 }
             }
         }

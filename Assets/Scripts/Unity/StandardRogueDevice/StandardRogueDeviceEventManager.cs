@@ -1,3 +1,4 @@
+using Lysionium;
 using Roguegard;
 using Roguegard.Device;
 using UnityEngine;
@@ -202,7 +203,7 @@ namespace RoguegardUnity
             }
         }
 
-        public void AddMenu(RogueMenuScreen menu, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+        public void AddMenu(IMenuScreen<MMgrBase, MArg> menu, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         {
             messageWorkQueue.EnqueueMenu(menu, self, user, arg);
         }
