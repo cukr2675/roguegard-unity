@@ -30,7 +30,7 @@ namespace Lysionium
             where TArg : IListMenuArg
         {
             // 引数なしで一度取得成功している場合は即キャッシュを返す
-            if (name == null && style == null && Cache<TMgr, TArg>.instance != null)
+            if (name == null && style == null && Cache<TMgr, TArg>.isChached)
             {
                 backOption = Cache<TMgr, TArg>.instance;
                 return true;
@@ -40,6 +40,11 @@ namespace Lysionium
             if (!typeof(IBackOptionProviderListMenuManager<TMgr, TArg>).IsAssignableFrom(typeof(TMgr)))
             {
                 backOption = default;
+                if (name == null && style == null)
+                {
+                    Cache<TMgr, TArg>.instance = backOption; // 引数未指定時はキャッシュ
+                    Cache<TMgr, TArg>.isChached = true;
+                }
                 return false;
             }
 
@@ -48,7 +53,8 @@ namespace Lysionium
             {
                 var instance = genericType.GetProperty("Instance").GetValue(null);
                 backOption = (ISelectOption<TMgr, TArg>)instance;
-                Cache<TMgr, TArg>.instance = backOption;
+                Cache<TMgr, TArg>.instance = backOption; // 引数未指定時はキャッシュ
+                Cache<TMgr, TArg>.isChached = true;
                 return true;
             }
             else
@@ -62,6 +68,7 @@ namespace Lysionium
         private static class Cache<TMgr, TArg>
         {
             public static ISelectOption<TMgr, TArg> instance;
+            public static bool isChached;
         }
     }
 }
