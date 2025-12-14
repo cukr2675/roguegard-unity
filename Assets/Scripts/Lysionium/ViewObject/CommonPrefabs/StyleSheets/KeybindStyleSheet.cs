@@ -7,8 +7,8 @@ namespace Lysionium.Views
     /// <summary>
     /// 要素のスタイルでキーバインドするスタイルシート。このオブジェクトの下の <see cref="Subview"/> に影響を与える
     /// </summary>
-    [AddComponentMenu("UI/Lysionium/LUI Key Bind Style Sheet")]
-    public class KeyBindStyleSheet : MonoBehaviour
+    [AddComponentMenu("UI/Lysionium/LUI Keybind Style Sheet")]
+    public class KeybindStyleSheet : MonoBehaviour
     {
         [SerializeField] private Sprite _keyboardIconBackground = null;
 
@@ -43,7 +43,7 @@ namespace Lysionium.Views
             return true;
         }
 
-        public void KeyBind(
+        public void Keybind(
             ReadOnlySpan<char> style,
             Action<InputAction.CallbackContext> performed,
             Action<InputAction.CallbackContext> started,
@@ -59,7 +59,7 @@ namespace Lysionium.Views
             if (canceled != null) { action.canceled += canceled; }
         }
 
-        public void Unbind(
+        public void Keyunbind(
             ReadOnlySpan<char> style,
             Action<InputAction.CallbackContext> performed,
             Action<InputAction.CallbackContext> started,

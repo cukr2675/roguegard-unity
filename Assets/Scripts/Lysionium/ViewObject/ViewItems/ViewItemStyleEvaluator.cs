@@ -116,7 +116,7 @@ namespace Lysionium.Views
                     {
                         if (apply)
                         {
-                            subview.KeyBind(styleItem["click:".Length..], onClick);
+                            subview.Keybind(styleItem["click:".Length..], onClick);
                             if (keyIcon != null && subview.TryGetKeyIcon(styleItem["click:".Length..], out var keyText, out var keySprite))
                             {
                                 keyIcon.SetKeyIcon(keyText, keySprite);
@@ -124,7 +124,7 @@ namespace Lysionium.Views
                         }
                         else
                         {
-                            subview.Unbind(styleItem["click:".Length..], onClick);
+                            subview.Keyunbind(styleItem["click:".Length..], onClick);
                             if (keyIcon != null)
                             {
                                 keyIcon.ClearKeyIcon();
@@ -137,8 +137,8 @@ namespace Lysionium.Views
                     {
                         if (apply)
                         {
-                            subview.KeyBind(styleItem["input:".Length..], this.inputPerformed, this.inputStarted, this.inputCanceled);
-                            subview.KeyBind(styleItem["input:".Length..], inputPerformed, inputStarted, inputCanceled);
+                            subview.Keybind(styleItem["input:".Length..], this.inputPerformed, this.inputStarted, this.inputCanceled);
+                            subview.Keybind(styleItem["input:".Length..], inputPerformed, inputStarted, inputCanceled);
                             if (keyIcon != null && subview.TryGetKeyIcon(styleItem["input:".Length..], out var keyText, out var keySprite))
                             {
                                 keyIcon.SetKeyIcon(keyText, keySprite);
@@ -146,8 +146,8 @@ namespace Lysionium.Views
                         }
                         else
                         {
-                            subview.Unbind(styleItem["input:".Length..], this.inputPerformed, this.inputStarted, this.inputCanceled);
-                            subview.Unbind(styleItem["input:".Length..], inputPerformed, inputStarted, inputCanceled);
+                            subview.Keyunbind(styleItem["input:".Length..], this.inputPerformed, this.inputStarted, this.inputCanceled);
+                            subview.Keyunbind(styleItem["input:".Length..], inputPerformed, inputStarted, inputCanceled);
                             if (keyIcon != null)
                             {
                                 keyIcon.ClearKeyIcon();

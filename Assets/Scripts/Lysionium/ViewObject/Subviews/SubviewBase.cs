@@ -16,7 +16,7 @@ namespace Lysionium.Views
         public IListMenuArg Arg { get; private set; }
 
         private AnimatorTupple animator;
-        private KeyBindTuple binding;
+        private KeybindTuple binding;
 
         protected void SetArg(IListMenuManager manager, IListMenuArg arg)
         {
@@ -32,19 +32,19 @@ namespace Lysionium.Views
         public void PlayFromItem(string value, Object item) => AnimatorTupple.Play(this, item, value);
         public void PlayFromItem(Object value, Object item) => AnimatorTupple.Play(this, item, value);
         public bool TryGetKeyIcon(System.ReadOnlySpan<char> style, out string keyText, out Sprite keySprite)
-            => KeyBindTuple.TryGetKeyIcon(this, style, out keyText, out keySprite);
-        public void KeyBind(
+            => KeybindTuple.TryGetKeyIcon(this, style, out keyText, out keySprite);
+        public void Keybind(
             System.ReadOnlySpan<char> style,
             System.Action<InputAction.CallbackContext> performed = null,
             System.Action<InputAction.CallbackContext> started = null,
             System.Action<InputAction.CallbackContext> canceled = null)
-            => KeyBindTuple.KeyBind(this, style, performed, started, canceled);
-        public void Unbind(
+            => KeybindTuple.Keybind(this, style, performed, started, canceled);
+        public void Keyunbind(
             System.ReadOnlySpan<char> style,
             System.Action<InputAction.CallbackContext> performed = null,
             System.Action<InputAction.CallbackContext> started = null,
             System.Action<InputAction.CallbackContext> canceled = null)
-            => KeyBindTuple.Unbind(this, style, performed, started, canceled);
+            => KeybindTuple.Keyunbind(this, style, performed, started, canceled);
 
 
 
@@ -120,21 +120,21 @@ namespace Lysionium.Views
             }
         }
 
-        internal class KeyBindTuple
+        internal class KeybindTuple
         {
-            private readonly KeyBindStyleSheet keyBindStyleSheet;
+            private readonly KeybindStyleSheet keyBindStyleSheet;
 
             private bool IsEnabled => keyBindStyleSheet != null;
 
-            public KeyBindTuple(SubviewBase subview)
+            public KeybindTuple(SubviewBase subview)
             {
-                keyBindStyleSheet = subview.GetComponentInParent<KeyBindStyleSheet>();
+                keyBindStyleSheet = subview.GetComponentInParent<KeybindStyleSheet>();
             }
 
             public static bool TryGetKeyIcon(
                 SubviewBase subview, System.ReadOnlySpan<char> style, out string keyText, out Sprite keySprite)
             {
-                var binding = subview.binding ??= new KeyBindTuple(subview);
+                var binding = subview.binding ??= new KeybindTuple(subview);
                 if (!binding.IsEnabled)
                 {
                     keyText = null;
@@ -145,28 +145,28 @@ namespace Lysionium.Views
                 return binding.keyBindStyleSheet.TryGetKeyIcon(style, out keyText, out keySprite);
             }
 
-            public static void KeyBind(
+            public static void Keybind(
                 SubviewBase subview, System.ReadOnlySpan<char> style,
                 System.Action<InputAction.CallbackContext> performed,
                 System.Action<InputAction.CallbackContext> started,
                 System.Action<InputAction.CallbackContext> canceled)
             {
-                var binding = subview.binding ??= new KeyBindTuple(subview);
+                var binding = subview.binding ??= new KeybindTuple(subview);
                 if (!binding.IsEnabled) return;
 
-                binding.keyBindStyleSheet.KeyBind(style, performed, started, canceled);
+                binding.keyBindStyleSheet.Keybind(style, performed, started, canceled);
             }
 
-            public static void Unbind(
+            public static void Keyunbind(
                 SubviewBase subview, System.ReadOnlySpan<char> style,
                 System.Action<InputAction.CallbackContext> performed,
                 System.Action<InputAction.CallbackContext> started,
                 System.Action<InputAction.CallbackContext> canceled)
             {
-                var binding = subview.binding ??= new KeyBindTuple(subview);
+                var binding = subview.binding ??= new KeybindTuple(subview);
                 if (!binding.IsEnabled) return;
 
-                binding.keyBindStyleSheet.Unbind(style, performed, started, canceled);
+                binding.keyBindStyleSheet.Keyunbind(style, performed, started, canceled);
             }
         }
     }

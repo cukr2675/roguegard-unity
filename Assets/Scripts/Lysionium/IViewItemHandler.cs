@@ -16,7 +16,7 @@ namespace Lysionium
         // 右クリックなど種類が増えるとメソッド一つでは足りない
         // メソッドが増えると実装が面倒
         // 戻るボタンは常に esc キーをバインドするのであれば Style と統合したほうがスムーズ
-        //InputAction GetKeyBind(object item, IListMenuManager manager, IListMenuArg arg);
+        //InputAction GetKeybind(object item, IListMenuManager manager, IListMenuArg arg);
 
         // Roguegard の実装を見ると、アイコン以外の情報も同時に返すほうが効率的なため使用していない
         // 使用するとしてもキーバインドと同じように Style でキーワードを渡すべき？
