@@ -1,6 +1,6 @@
 namespace Roguegard
 {
-    public static class SpanningExtension
+    public static class SpanningExtensions
     {
         public static bool Contains<T>(this Spanning<T> spanning, T value)
         {

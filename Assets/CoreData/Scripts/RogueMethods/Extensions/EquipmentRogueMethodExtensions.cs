@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Roguegard.Extensions
 {
     [SuppressMessage("Style", "IDE0060")]
-    public static class EquipmentRogueMethodExtension
+    public static class EquipmentRogueMethodExtensions
     {
         public static bool TryEquip(
             this IApplyRogueMethodCaller method, RogueObj equipment, RogueObj user, float activationDepth, bool replaceEquipments = true)

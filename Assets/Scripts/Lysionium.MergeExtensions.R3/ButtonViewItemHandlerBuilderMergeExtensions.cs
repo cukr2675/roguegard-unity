@@ -2,7 +2,7 @@ using R3;
 
 namespace Lysionium.MergeExtensions.R3
 {
-    public static class ButtonViewItemHandlerBuilderMergeExtension
+    public static class ButtonViewItemHandlerBuilderMergeExtensions
     {
         public static TOut SubscribeButtonViewItemHandler<TItem, TMgr, TArg, TOut>(
             this IButtonViewItemHandlerBuilder<TItem, TMgr, TArg, TOut> builder, Subject<MergedViewItemHandleArg<TItem, TMgr, TArg, TOut, TItem>> subject)

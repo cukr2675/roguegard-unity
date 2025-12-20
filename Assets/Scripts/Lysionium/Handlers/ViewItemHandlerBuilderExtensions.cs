@@ -1,6 +1,6 @@
 namespace Lysionium
 {
-    public static class ViewItemHandlerBuilderExtension
+    public static class ViewItemHandlerBuilderExtensions
     {
         public static TOut NameFrom<TItem, TMgr, TArg, TOut>(
             this IViewItemHandlerBuilder<TItem, TMgr, TArg, TOut> builder, System.Func<TItem, string> selector)

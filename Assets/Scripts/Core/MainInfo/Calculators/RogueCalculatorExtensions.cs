@@ -1,6 +1,6 @@
 namespace Roguegard
 {
-    public static class RogueCalculatorExtension
+    public static class RogueCalculatorExtensions
     {
         /// <summary>
         /// 指定のキーの値が非ゼロであれば true を取得する。

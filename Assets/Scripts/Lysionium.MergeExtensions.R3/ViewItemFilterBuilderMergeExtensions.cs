@@ -2,7 +2,7 @@ using R3;
 
 namespace Lysionium.MergeExtensions.R3
 {
-    public static class ViewItemFilterBuilderMergeExtension
+    public static class ViewItemFilterBuilderMergeExtensions
     {
         public static TOut SubscribeViewItemFilter<TItem, TMgr, TArg, TOut>(
             this IViewItemFilterBuilder<TItem, TMgr, TArg, TOut> builder, Subject<MergedViewItemHandleArg<TItem, TMgr, TArg, TOut, TItem>> subject)

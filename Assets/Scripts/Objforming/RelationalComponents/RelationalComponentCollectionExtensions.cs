@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace Objforming
 {
-    public static class RelationalComponentDictionaryExtension
+    public static class RelationalComponentCollectionExtensions
     {
         /// <summary>
         /// <see cref="IRelationalComponent.Overrides(IRelationalComponent)"/> が true を返すとき上書きで追加するメソッド

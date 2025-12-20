@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Roguegard.Extensions
 {
     [SuppressMessage("Style", "IDE0060")]
-    public static class CoreRogueMethodExtension
+    public static class CoreRogueMethodExtensions
     {
         private static readonly LoseExpRogueMethod loseExp = new();
         private static readonly TryAnyRogueMethod tryAnyRogueMethod = new();

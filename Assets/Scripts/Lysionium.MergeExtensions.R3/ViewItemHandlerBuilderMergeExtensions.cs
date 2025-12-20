@@ -4,7 +4,7 @@ using R3;
 // 前者は Rx 成分が不明瞭で System.Linq のような印象も受ける
 namespace Lysionium.MergeExtensions.R3
 {
-    public static class ViewItemHandlerBuilderMergeExtension
+    public static class ViewItemHandlerBuilderMergeExtensions
     {
         public static TOut Merge<TItem, TMgr, TArg, TOut>(
             this IViewItemHandlerBuilder<TItem, TMgr, TArg, TOut> builder, out Subject<MergedViewItemHandleArg<TItem, TMgr, TArg, TOut, TItem>> merged)
@@ -18,11 +18,11 @@ namespace Lysionium.MergeExtensions.R3
             SubscribeViewItemHandler(builder, merged);
             if (builder is IButtonViewItemHandlerBuilder<TItem, TMgr, TArg, TOut> buttonBuilder)
             {
-                ButtonViewItemHandlerBuilderMergeExtension.SubscribeButtonViewItemHandler(buttonBuilder, merged);
+                buttonBuilder.SubscribeButtonViewItemHandler(merged);
             }
             if (builder is IViewItemFilterBuilder<TItem, TMgr, TArg, TOut> filterBuilder)
             {
-                ViewItemFilterBuilderMergeExtension.SubscribeViewItemFilter(filterBuilder, merged);
+                filterBuilder.SubscribeViewItemFilter(merged);
             }
 
             return (TOut)builder;

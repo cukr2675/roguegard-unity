@@ -3,7 +3,7 @@ using System.Diagnostics.CodeAnalysis;
 namespace Roguegard.Extensions
 {
     [SuppressMessage("Style", "IDE0060")]
-    public static class SaveRogueMethodExtension
+    public static class SaveRogueMethodExtensions
     {
         public static bool LocateSavePoint(
             this IActiveRogueMethodCaller method, RogueObj player, RogueObj tool, float activationDepth, ISavePointInfo savePointInfo, bool force = false)

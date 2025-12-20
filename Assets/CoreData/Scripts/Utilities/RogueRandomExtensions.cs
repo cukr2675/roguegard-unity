@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace Roguegard
 {
-    public static class RogueRandomExtension
+    public static class RogueRandomExtensions
     {
         public static T Choice<T>(this IRogueRandom random, T a, T b)
         {

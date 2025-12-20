@@ -86,7 +86,7 @@ namespace Roguegard
 
         /// <summary>
         /// ステータスエフェクトが
-        /// <see cref="CoreRogueMethodExtension.Affect(IAffectRogueMethodCaller, RogueObj, RogueObj, float, IAffectCallback)"/>
+        /// <see cref="CoreRogueMethodExtensions.Affect(IAffectRogueMethodCaller, RogueObj, RogueObj, float, IAffectCallback)"/>
         /// で付与されるときに呼び出されるメソッド。
         /// </summary>
         protected class AffectCallback : IAffectCallback

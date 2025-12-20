@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Roguegard.Extensions
 {
-    public static class RogueMethodExtension
+    public static class RogueMethodExtensions
     {
         public static bool Locate(
             this IChangeStateRogueMethodCaller method, RogueObj self, RogueObj user, RogueObj location, float activationDepth)

@@ -11,7 +11,7 @@ namespace Lysionium.MergeExtensions.R3
 
         string IViewItemHandler.GetName(object item, IListMenuManager manager, IListMenuArg arg)
         {
-            return GetNameExtension.GetName(this, item, manager, arg);
+            return this.GetName(item, manager, arg);
         }
 
         string IViewItemHandler.GetStyle(object item, IListMenuManager manager, IListMenuArg arg)
@@ -35,7 +35,7 @@ namespace Lysionium.MergeExtensions.R3
         }
     }
 
-    internal static class GetNameExtension
+    internal static class GetNameExtensions
     {
         private static readonly Context context = new();
 
@@ -68,7 +68,7 @@ namespace Lysionium.MergeExtensions.R3
         private class Context : MergedViewItemHandleContext<string> { }
     }
 
-    internal static class OnClickExtension
+    internal static class OnClickExtensions
     {
         private static readonly Context context = new();
 
