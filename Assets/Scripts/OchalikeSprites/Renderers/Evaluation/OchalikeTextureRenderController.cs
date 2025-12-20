@@ -75,6 +75,7 @@ namespace OchalikeSprites
             GL.PushMatrix();
             try
             {
+                GL.modelview = Matrix4x4.identity; // カメラ回転を影響を受けないようにする　これがないと歪むことがある
                 GL.Clear(true, true, Color.clear);
                 foreach (var bone in bones)
                 {

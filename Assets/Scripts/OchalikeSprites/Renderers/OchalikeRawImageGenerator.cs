@@ -244,6 +244,7 @@ namespace OchalikeSprites
                 var fy = flipY ? -1f : +1f;
 
                 GL.PushMatrix();
+                GL.modelview = Matrix4x4.identity; // カメラ回転を影響を受けないようにする　これがないと歪むことがある
                 GL.LoadProjectionMatrix(
                     Matrix4x4.TRS(localPosition, localRotation, localScale) *                               // ④ 変形を適用
                     Matrix4x4.Scale(new Vector3(fx, -fy, 1f) / sprite.pixelsPerUnit) *                      // ③ スプライトをユニット補正 & フリップを適用
