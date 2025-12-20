@@ -2,7 +2,8 @@
     "name": "Lysionium.Editor",
     "rootNamespace": "Lysionium.Editor",
     "references": [
-        "GUID:39cbc532d78a39c47a64cb722d1c8a72"
+        "GUID:39cbc532d78a39c47a64cb722d1c8a72",
+        "GUID:75469ad4d38634e559750d17036d5f7c"
     ],
     "includePlatforms": [
         "Editor"
