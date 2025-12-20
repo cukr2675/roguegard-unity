@@ -8,7 +8,7 @@ namespace OchalikeSprites
     {
         [SerializeField] private int _pixelsPerUnit = OchalikeSpritesUtility.DefaultPixelsPerUnit;
         [SerializeField] private bool _isLoop = true;
-        [SerializeField] private SpriteMotionDirectionType _direction = SpriteMotionDirectionType.Linear;
+        [SerializeField] private SpriteMotionDirection _direction = SpriteMotionDirection.Linear;
         [SerializeField] private List<Item> _items = null;
         
 #if UNITY_EDITOR
@@ -41,7 +41,7 @@ namespace OchalikeSprites
                 }
             }
 
-            var degree = _direction.Convert(direction).Degree + current.Degree;
+            var degree = direction.Convert(_direction).Degree + current.Degree;
             var degreeRotation = Quaternion.Euler(0f, 0f, degree);
             transform.Position = (current.PixelPosition + degreeRotation * current.PixelRotatablePosition) / _pixelsPerUnit;
             transform.Rotation = current.Rotation * degreeRotation;

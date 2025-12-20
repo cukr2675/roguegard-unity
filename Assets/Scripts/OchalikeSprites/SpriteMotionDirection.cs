@@ -1,6 +1,6 @@
 namespace OchalikeSprites
 {
-    public enum SpriteMotionDirectionType
+    public enum SpriteMotionDirection
     {
         Linear,
         NotBack,

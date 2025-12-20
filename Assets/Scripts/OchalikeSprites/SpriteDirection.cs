@@ -132,6 +132,22 @@ namespace OchalikeSprites
             return new SpriteDirection(this.angle + angle);
         }
 
+        public SpriteDirection Convert(SpriteMotionDirection motionDirection)
+        {
+            switch (motionDirection)
+            {
+                case SpriteMotionDirection.Linear:
+                    return this;
+                case SpriteMotionDirection.NotBack:
+                    if (Degree < 180f) return SpriteDirection.FromDegree(360f - Degree);
+                    else return this;
+                case SpriteMotionDirection.DownwardOnly:
+                    return SpriteDirection.Down;
+                default:
+                    throw new System.ArgumentException();
+            }
+        }
+
         public override string ToString()
         {
             return texts[angle];
