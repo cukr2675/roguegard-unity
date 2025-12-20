@@ -149,10 +149,12 @@ namespace Lysionium.Views
                 var action = keybindStyleSheet.Bindings[i].Action;
                 var sprites = new List<Sprite>();
                 addedBindingNames.Clear();
-                foreach (var inputControl in action.controls)
+                foreach (var binding in action.bindings)
                 {
-                    var binding = action.bindings.FirstOrDefault(b => b.isPartOfComposite && InputControlPath.Matches(b.effectivePath, inputControl));
                     if (!addedBindingNames.Add(binding.name)) continue; // WASDと矢印キーの両方が設定されている場合、先に設定されている方だけ表示する
+
+                    var inputControl = action.controls.FirstOrDefault(c => InputControlPath.Matches(binding.effectivePath, c));
+                    if (inputControl == null) continue;
 
                     foreach (var keybindGlyphSource in keybindGlyphSources)
                     {
@@ -161,7 +163,7 @@ namespace Lysionium.Views
                         sprites.Add(sprite);
 
                         // modifier は後ろに「+」をつける（ctrl + C のようにする）
-                        if (modifierSeparatorSprite && binding.name != null && binding.name.StartsWith("modifier"))
+                        if (modifierSeparatorSprite && binding.name.StartsWith("modifier"))
                         {
                             sprites.Add(modifierSeparatorSprite);
                         }
