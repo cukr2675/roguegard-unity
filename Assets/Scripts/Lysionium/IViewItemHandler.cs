@@ -11,6 +11,9 @@ namespace Lysionium
     /// </summary>
     public interface IViewItemHandler
     {
+        // 期待する契約的には GetName(IReadOnlyList<object> list, int index, IListMenuManager manager, IListMenuArg arg) だが、
+        // 回りくどく、かえって分かりづらいため却下
+
         string GetName(object item, IListMenuManager manager, IListMenuArg arg);
 
         // 右クリックなど種類が増えるとメソッド一つでは足りない

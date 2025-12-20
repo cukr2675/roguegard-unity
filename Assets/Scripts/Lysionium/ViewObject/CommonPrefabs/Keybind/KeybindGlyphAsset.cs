@@ -119,53 +119,52 @@ namespace Lysionium.Views
         /// <summary>
         /// 指定の <see cref="KeybindStyleSheet"/> でキーバインドグリフを再生成する
         /// </summary>
-        public void UpdateGlyph(KeybindStyleSheet keybindStyleSheet)
+        public void UpdateGlyphs(IReadOnlyList<KeybindStyleSheet.Binding> keybindStyleSheet)
         {
             // キーバインド別のスプライトを取得する
-            var spriteSets = GetSpriteSets(keybindStyleSheet, _keybindGlyphSources, _modifierSeparatorSprite);
+            var spriteSets = GetSpriteSets(keybindStyleSheet, _keybindGlyphSources);
 
             // スプライトアセットのテクスチャサイズを更新
             ResizeSpriteSheet(_spriteAsset, _spriteSheetSize);
 
             // 指定のスプライトアセットにグリフを書き込む
             WriteTo(_spriteAsset, _packedGlyphSize, spriteSets);
-
-            // 影響があると思われるテキストオブジェクトを更新する
-            var texts = keybindStyleSheet.GetComponentsInChildren<TMP_Text>();
-            foreach (var text in texts)
-            {
-                text.SetAllDirty();
-            }
         }
 
-        private static List<(List<Sprite> spriteSet, string style)> GetSpriteSets(
-            KeybindStyleSheet keybindStyleSheet, IEnumerable<KeybindGlyphSource> keybindGlyphSources, Sprite modifierSeparatorSprite)
+        private List<(List<Sprite> spriteSet, string style)> GetSpriteSets(
+            IReadOnlyList<KeybindStyleSheet.Binding> keybindStyleSheet, IEnumerable<KeybindGlyphSource> keybindGlyphSources)
         {
             var spriteSets = new List<(List<Sprite> spriteSet, string style)>();
             var addedBindingNames = new HashSet<string>();
-            for (int i = 0; i < keybindStyleSheet.Bindings.Count; i++)
+            for (int i = 0; i < keybindStyleSheet.Count; i++)
             {
-                var style = keybindStyleSheet.Bindings[i].Style;
-                var action = keybindStyleSheet.Bindings[i].Action;
+                // キーバインドグリフに使用するスプライト一覧を取得する処理
+                // ① KeybindStyleSheet で指定された InputAction を取得
+                // ② InputAction.binding でループ処理
+                // ③ InputBinding に対応する InputControl を取得　特に意識しなくても有効な ControlPath が取得される
+                // ④ InputControl とマッチするスプライトを取得
+
+                var style = keybindStyleSheet[i].Style;
+                var action = keybindStyleSheet[i].Action; // ① InputAction 指定
                 var sprites = new List<Sprite>();
                 addedBindingNames.Clear();
-                foreach (var binding in action.bindings)
+                foreach (var binding in action.bindings) // ② InputBinding 取得
                 {
                     if (!addedBindingNames.Add(binding.name)) continue; // WASDと矢印キーの両方が設定されている場合、先に設定されている方だけ表示する
 
-                    var inputControl = action.controls.FirstOrDefault(c => InputControlPath.Matches(binding.effectivePath, c));
+                    var inputControl = action.controls.FirstOrDefault(c => InputControlPath.Matches(binding.effectivePath, c));  // ③ InputControl 取得
                     if (inputControl == null) continue;
 
                     foreach (var keybindGlyphSource in keybindGlyphSources)
                     {
-                        if (!keybindGlyphSource.TryGetValue(inputControl, out var sprite)) continue;
+                        if (!keybindGlyphSource.TryGetValue(inputControl, out var sprite)) continue; // ④キーバインドグリフ用 Sprite 取得
 
                         sprites.Add(sprite);
 
                         // modifier は後ろに「+」をつける（ctrl + C のようにする）
-                        if (modifierSeparatorSprite && binding.name.StartsWith("modifier"))
+                        if (_modifierSeparatorSprite && binding.name.StartsWith("modifier"))
                         {
-                            sprites.Add(modifierSeparatorSprite);
+                            sprites.Add(_modifierSeparatorSprite);
                         }
                         break;
                     }

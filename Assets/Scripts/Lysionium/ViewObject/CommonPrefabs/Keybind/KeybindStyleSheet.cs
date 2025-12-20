@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -26,7 +27,17 @@ namespace Lysionium.Views
 
         protected virtual void Start()
         {
-            if (_keybindGlyphAsset != null) { _keybindGlyphAsset.UpdateGlyph(this); }
+            if (_keybindGlyphAsset != null)
+            {
+                _keybindGlyphAsset.UpdateGlyphs(_bindings);
+
+                // 影響があると思われるテキストオブジェクトを更新する
+                var texts = GetComponentsInChildren<TMP_Text>();
+                foreach (var text in texts)
+                {
+                    text.SetAllDirty();
+                }
+            }
         }
 
         public bool TryGetAction(ReadOnlySpan<char> style, out InputAction action)
