@@ -9,7 +9,7 @@
                     "name": "Sp1",
                     "type": "Button",
                     "id": "5f334456-344d-4b8d-9690-9d122d01d319",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -18,7 +18,7 @@
             "bindings": [
                 {
                     "name": "",
-                    "id": "b5844933-8d66-4dcf-b578-44794265706e",
+                    "id": "ad9574e8-2e6f-42e2-b769-c5f853ff5e2f",
                     "path": "<Keyboard>/q",
                     "interactions": "",
                     "processors": "",

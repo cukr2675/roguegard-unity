@@ -1,0 +1,153 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb1ca6b897662e048ac4a39036fa85f9, type: 3}
+  m_Name: LUI_GamepadGlyphTable
+  m_EditorClassIdentifier: 
+  _controlPathExample: <XInputController>/select
+  _items:
+  - _controlPath: <Gamepad>/dpad
+    _sprite: {fileID: -4673782274592020654, guid: e2143846d14a68d409eccbd7a7ac6b00, type: 3}
+  - _controlPath: <Gamepad>/dpad/x
+    _sprite: {fileID: 3675438954557350192, guid: e2143846d14a68d409eccbd7a7ac6b00, type: 3}
+  - _controlPath: <Gamepad>/dpad/y
+    _sprite: {fileID: -4271495949713985937, guid: e2143846d14a68d409eccbd7a7ac6b00, type: 3}
+  - _controlPath: <Gamepad>/dpad/up
+    _sprite: {fileID: -2328080907609485555, guid: e2143846d14a68d409eccbd7a7ac6b00, type: 3}
+  - _controlPath: <Gamepad>/dpad/down
+    _sprite: {fileID: -8818831588182813891, guid: e2143846d14a68d409eccbd7a7ac6b00, type: 3}
+  - _controlPath: <Gamepad>/dpad/left
+    _sprite: {fileID: 7867241007871372632, guid: e2143846d14a68d409eccbd7a7ac6b00, type: 3}
+  - _controlPath: <Gamepad>/dpad/right
+    _sprite: {fileID: 7305050432731074075, guid: e2143846d14a68d409eccbd7a7ac6b00, type: 3}
+  - _controlPath: <Gamepad>/buttonSouth
+    _sprite: {fileID: -1763733032299919666, guid: e2143846d14a68d409eccbd7a7ac6b00, type: 3}
+  - _controlPath: <Gamepad>/buttonWest
+    _sprite: {fileID: 7711321138431855192, guid: e2143846d14a68d409eccbd7a7ac6b00, type: 3}
+  - _controlPath: <Gamepad>/buttonNorth
+    _sprite: {fileID: -8972355617782916593, guid: e2143846d14a68d409eccbd7a7ac6b00, type: 3}
+  - _controlPath: <Gamepad>/buttonEast
+    _sprite: {fileID: 4595819355805352913, guid: e2143846d14a68d409eccbd7a7ac6b00, type: 3}
+  - _controlPath: <Gamepad>/leftStickPress
+    _sprite: {fileID: 3660298755530050699, guid: e2143846d14a68d409eccbd7a7ac6b00, type: 3}
+  - _controlPath: <Gamepad>/rightStickPress
+    _sprite: {fileID: 2763642955174205510, guid: e2143846d14a68d409eccbd7a7ac6b00, type: 3}
+  - _controlPath: <Gamepad>/leftShoulder
+    _sprite: {fileID: -8690202470262144181, guid: e2143846d14a68d409eccbd7a7ac6b00, type: 3}
+  - _controlPath: <Gamepad>/rightShoulder
+    _sprite: {fileID: 8775496722935046269, guid: e2143846d14a68d409eccbd7a7ac6b00, type: 3}
+  - _controlPath: <Gamepad>/start
+    _sprite: {fileID: -4187758759448505707, guid: e2143846d14a68d409eccbd7a7ac6b00, type: 3}
+  - _controlPath: <Gamepad>/select
+    _sprite: {fileID: -1482815271936417117, guid: e2143846d14a68d409eccbd7a7ac6b00, type: 3}
+  - _controlPath: <Gamepad>/leftStick
+    _sprite: {fileID: 990700479192681150, guid: e2143846d14a68d409eccbd7a7ac6b00, type: 3}
+  - _controlPath: <Gamepad>/leftStick/up
+    _sprite: {fileID: 6964226833900438817, guid: e2143846d14a68d409eccbd7a7ac6b00, type: 3}
+  - _controlPath: <Gamepad>/leftStick/x
+    _sprite: {fileID: -4904839956336349899, guid: e2143846d14a68d409eccbd7a7ac6b00, type: 3}
+  - _controlPath: <Gamepad>/leftStick/y
+    _sprite: {fileID: -1262392249451555786, guid: e2143846d14a68d409eccbd7a7ac6b00, type: 3}
+  - _controlPath: <Gamepad>/leftStick/down
+    _sprite: {fileID: 3617569414782245886, guid: e2143846d14a68d409eccbd7a7ac6b00, type: 3}
+  - _controlPath: <Gamepad>/leftStick/left
+    _sprite: {fileID: -9109696446538251023, guid: e2143846d14a68d409eccbd7a7ac6b00, type: 3}
+  - _controlPath: <Gamepad>/leftStick/right
+    _sprite: {fileID: -1190893419649108628, guid: e2143846d14a68d409eccbd7a7ac6b00, type: 3}
+  - _controlPath: <Gamepad>/rightStick
+    _sprite: {fileID: -8068572354977228075, guid: e2143846d14a68d409eccbd7a7ac6b00, type: 3}
+  - _controlPath: <Gamepad>/rightStick/up
+    _sprite: {fileID: 3413272497186488969, guid: e2143846d14a68d409eccbd7a7ac6b00, type: 3}
+  - _controlPath: <Gamepad>/rightStick/x
+    _sprite: {fileID: 8934269111576181139, guid: e2143846d14a68d409eccbd7a7ac6b00, type: 3}
+  - _controlPath: <Gamepad>/rightStick/y
+    _sprite: {fileID: 398972930952162818, guid: e2143846d14a68d409eccbd7a7ac6b00, type: 3}
+  - _controlPath: <Gamepad>/rightStick/down
+    _sprite: {fileID: 8236984641019955868, guid: e2143846d14a68d409eccbd7a7ac6b00, type: 3}
+  - _controlPath: <Gamepad>/rightStick/left
+    _sprite: {fileID: 9149089666612145072, guid: e2143846d14a68d409eccbd7a7ac6b00, type: 3}
+  - _controlPath: <Gamepad>/rightStick/right
+    _sprite: {fileID: 5182132346981606022, guid: e2143846d14a68d409eccbd7a7ac6b00, type: 3}
+  - _controlPath: <Gamepad>/leftTrigger
+    _sprite: {fileID: 6527404361641441907, guid: e2143846d14a68d409eccbd7a7ac6b00, type: 3}
+  - _controlPath: <Gamepad>/rightTrigger
+    _sprite: {fileID: -8485347889684111294, guid: e2143846d14a68d409eccbd7a7ac6b00, type: 3}
+  _autoSetMethod: 4
+  _spriteSheet: {fileID: 2800000, guid: e2143846d14a68d409eccbd7a7ac6b00, type: 3}
+  _spriteNameFormats:
+  - xbox_{0}
+  _spriteNameArgOverrides:
+  - _from: dpad
+    _to: dpad
+  - _from: dpad/x
+    _to: dpad_horizontal
+  - _from: dpad/y
+    _to: dpad_vertical
+  - _from: dpad/up
+    _to: dpad_up
+  - _from: dpad/down
+    _to: dpad_down
+  - _from: dpad/left
+    _to: dpad_left
+  - _from: dpad/right
+    _to: dpad_right
+  - _from: buttonSouth
+    _to: button_a
+  - _from: buttonWest
+    _to: button_x
+  - _from: buttonNorth
+    _to: button_y
+  - _from: buttonEast
+    _to: button_b
+  - _from: leftStickPress
+    _to: stick_l_press
+  - _from: rightStickPress
+    _to: stick_r_press
+  - _from: leftShoulder
+    _to: lb
+  - _from: rightShoulder
+    _to: rb
+  - _from: start
+    _to: button_menu
+  - _from: select
+    _to: button_view
+  - _from: leftStick
+    _to: stick_l
+  - _from: leftStick/up
+    _to: stick_l_up
+  - _from: leftStick/x
+    _to: stick_l_horizontal
+  - _from: leftStick/y
+    _to: stick_l_vertical
+  - _from: leftStick/down
+    _to: stick_l_down
+  - _from: leftStick/left
+    _to: stick_l_left
+  - _from: leftStick/right
+    _to: stick_l_right
+  - _from: rightStick
+    _to: stick_r
+  - _from: rightStick/up
+    _to: stick_r_up
+  - _from: rightStick/x
+    _to: stick_r_horizontal
+  - _from: rightStick/y
+    _to: stick_r_vertical
+  - _from: rightStick/down
+    _to: stick_r_down
+  - _from: rightStick/left
+    _to: stick_r_left
+  - _from: rightStick/right
+    _to: stick_r_right
+  - _from: leftTrigger
+    _to: lt
+  - _from: rightTrigger
+    _to: rt

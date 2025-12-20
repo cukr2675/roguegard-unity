@@ -1,0 +1,964 @@
+fileFormatVersion: 2
+guid: 3667ba62c5619a54f9ebe0f3b81abeb6
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -4343733164943697600
+    second: touch_sheet_default_0
+  - first:
+      213: 4670208177006288817
+    second: touch_sheet_default_1
+  - first:
+      213: 2045426938360775855
+    second: touch_sheet_default_2
+  - first:
+      213: -354366679359233175
+    second: touch_sheet_default_3
+  - first:
+      213: -4708955612234790612
+    second: touch_sheet_default_4
+  - first:
+      213: -3589452459013222086
+    second: touch_sheet_default_5
+  - first:
+      213: 2661561970165999785
+    second: touch_sheet_default_6
+  - first:
+      213: 7807229680051076438
+    second: touch_sheet_default_7
+  - first:
+      213: -4503932015624250275
+    second: touch_sheet_default_8
+  - first:
+      213: -9139469937791340450
+    second: touch_sheet_default_9
+  - first:
+      213: 4050066095290841453
+    second: touch_sheet_default_10
+  - first:
+      213: -5150655721536341752
+    second: touch_sheet_default_11
+  - first:
+      213: 8339574491850908779
+    second: touch_sheet_default_12
+  - first:
+      213: 2515679572126570071
+    second: touch_sheet_default_13
+  - first:
+      213: 1267771924441008702
+    second: touch_sheet_default_14
+  - first:
+      213: -7553573069917059307
+    second: touch_sheet_default_15
+  - first:
+      213: -2038470665447603946
+    second: touch_sheet_default_16
+  - first:
+      213: -7692256748432904551
+    second: touch_sheet_default_17
+  - first:
+      213: 7375261652259690531
+    second: touch_sheet_default_18
+  - first:
+      213: 5975954676722698562
+    second: touch_sheet_default_19
+  - first:
+      213: 5526327381445320802
+    second: touch_sheet_default_20
+  - first:
+      213: -4423447076842991957
+    second: touch_sheet_default_21
+  - first:
+      213: -8130486770924074540
+    second: touch_sheet_default_22
+  - first:
+      213: 6657377837000980480
+    second: touch_sheet_default_23
+  - first:
+      213: 5746420527330179318
+    second: touch_sheet_default_24
+  - first:
+      213: -357428476343460319
+    second: touch_sheet_default_25
+  - first:
+      213: 5909776410498792774
+    second: touch_sheet_default_26
+  - first:
+      213: -8924903245811113845
+    second: touch_sheet_default_27
+  - first:
+      213: -5804463112546831649
+    second: touch_sheet_default_28
+  - first:
+      213: -675621780476680583
+    second: touch_sheet_default_29
+  - first:
+      213: -4475846586024189368
+    second: touch_sheet_default_30
+  - first:
+      213: -6782000704331697114
+    second: touch_sheet_default_31
+  - first:
+      213: 1248270690944626011
+    second: touch_sheet_default_32
+  - first:
+      213: 5090292672420272935
+    second: touch_sheet_default_33
+  - first:
+      213: -5172722393238113923
+    second: touch_sheet_default_34
+  - first:
+      213: 6594007383727514014
+    second: touch_sheet_default_35
+  - first:
+      213: 1219013198986748341
+    second: touch_sheet_default_36
+  - first:
+      213: 3206261163894670434
+    second: touch_sheet_default_37
+  - first:
+      213: -2080259137895258914
+    second: touch_sheet_default_38
+  - first:
+      213: -2881371155040340664
+    second: touch_sheet_default_39
+  - first:
+      213: -8065531795686427162
+    second: touch_sheet_default_40
+  - first:
+      213: 221458593968581569
+    second: touch_sheet_default_41
+  - first:
+      213: -2164491724212934905
+    second: touch_sheet_default_42
+  - first:
+      213: -1613547681333479877
+    second: touch_sheet_default_43
+  - first:
+      213: -6727084821374351794
+    second: touch_sheet_default_44
+  - first:
+      213: -666641889504183756
+    second: touch_sheet_default_45
+  - first:
+      213: 8759486044912167585
+    second: touch_sheet_default_46
+  - first:
+      213: 1569770001545210522
+    second: touch_sheet_default_47
+  - first:
+      213: 5676355520419105959
+    second: touch_sheet_default_48
+  - first:
+      213: 2729858601869513669
+    second: touch_sheet_default_49
+  - first:
+      213: -4312843298007563940
+    second: touch_sheet_default_50
+  - first:
+      213: -3456037618046874027
+    second: touch_sheet_default_51
+  - first:
+      213: 6054163905091945211
+    second: touch_sheet_default_52
+  - first:
+      213: 3310454685689109583
+    second: touch_sheet_default_53
+  - first:
+      213: -5306504540370528641
+    second: touch_sheet_default_54
+  - first:
+      213: 387114416447912754
+    second: touch_sheet_default_55
+  - first:
+      213: 3829702796751776021
+    second: touch_sheet_default_56
+  - first:
+      213: 4301618609415532417
+    second: touch_sheet_default_57
+  - first:
+      213: -5069477533048576839
+    second: touch_sheet_default_58
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: touch_finger_one
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0a792590730da74d0800000000000000
+      internalID: -3135965255711942752
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: touch_finger_two
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a5293ed9ca05b51e0800000000000000
+      internalID: -2208082489981562278
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: touch_hand_closed
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ef463472d6485ee90800000000000000
+      internalID: -6997040841705167618
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: touch_hand_open
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8b26ad2af49444640800000000000000
+      internalID: 5063252487454745272
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: touch_rotate_left
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 61be318502e950ae0800000000000000
+      internalID: -1583685832197018858
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: touch_rotate_right
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8b41c1d7cb82fcfb0800000000000000
+      internalID: -4625433502268255048
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: touch_swipe_down
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8d858dc8e75d01510800000000000000
+      internalID: 1517947813929441496
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: touch_swipe_horizontal
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d967e82e4aaf756f0800000000000000
+      internalID: -695812031322884451
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: touch_swipe_left
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 348cece862a8b81e0800000000000000
+      internalID: -2194508495203678141
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: touch_swipe_move
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e95af71d3e2995e50800000000000000
+      internalID: 6798626619662509470
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: touch_swipe_right
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 03e63dc17dab8df00800000000000000
+      internalID: 1141867938602774064
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: touch_swipe_two_down
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ce96ab5b930b66320800000000000000
+      internalID: 2550920000860482028
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: touch_swipe_two_horizontal
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 64e7d1e634910d790800000000000000
+      internalID: -7507472801425686970
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: touch_swipe_two_left
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fa77200bb779809f0800000000000000
+      internalID: -501984800962086993
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: touch_swipe_two_move
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 69c1c412cb6b916e0800000000000000
+      internalID: -1866259651439616874
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: touch_swipe_two_right
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0c8bfaee75292db00800000000000000
+      internalID: 851904185890748608
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: touch_swipe_two_up
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fe767458f15401320800000000000000
+      internalID: 2526595392637200367
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: touch_swipe_two_vertical
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3a72e73eea28d7b10800000000000000
+      internalID: 1980883098765502371
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: touch_swipe_up
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f215464b3c58a9ac0800000000000000
+      internalID: -3847615856043077329
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: touch_swipe_vertical
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f23d2e8dc15ef6c30800000000000000
+      internalID: 4354951276751147823
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: touch_tap
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cf8d693799fd55020800000000000000
+      internalID: 2330014232396355836
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: touch_tap_double
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b17354101814f4be0800000000000000
+      internalID: -1490900929308444901
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: touch_tap_hold
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5f95ac10a5759cfa0800000000000000
+      internalID: -5779992602664609291
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: touch_two
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 18d09fee9bf55c570800000000000000
+      internalID: 8486294325032455553
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: touch_two_double
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 256
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 04a030ac2350d1d60800000000000000
+      internalID: 7862446240154454592
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: touch_two_hold
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 256
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0b670733a651fb070800000000000000
+      internalID: 8124235798673389232
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: touch_zoom_in
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 256
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 319c47cab91ad72d0800000000000000
+      internalID: -3279287263670515437
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: touch_zoom_out
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 256
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: da776cb60de2b4280800000000000000
+      internalID: -9058094752829376595
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      touch_finger_one: -3135965255711942752
+      touch_finger_two: -2208082489981562278
+      touch_hand_closed: -6997040841705167618
+      touch_hand_open: 5063252487454745272
+      touch_rotate_left: -1583685832197018858
+      touch_rotate_right: -4625433502268255048
+      touch_swipe_down: 1517947813929441496
+      touch_swipe_horizontal: -695812031322884451
+      touch_swipe_left: -2194508495203678141
+      touch_swipe_move: 6798626619662509470
+      touch_swipe_right: 1141867938602774064
+      touch_swipe_two_down: 2550920000860482028
+      touch_swipe_two_horizontal: -7507472801425686970
+      touch_swipe_two_left: -501984800962086993
+      touch_swipe_two_move: -1866259651439616874
+      touch_swipe_two_right: 851904185890748608
+      touch_swipe_two_up: 2526595392637200367
+      touch_swipe_two_vertical: 1980883098765502371
+      touch_swipe_up: -3847615856043077329
+      touch_swipe_vertical: 4354951276751147823
+      touch_tap: 2330014232396355836
+      touch_tap_double: -1490900929308444901
+      touch_tap_hold: -5779992602664609291
+      touch_two: 8486294325032455553
+      touch_two_double: 7862446240154454592
+      touch_two_hold: 8124235798673389232
+      touch_zoom_in: -3279287263670515437
+      touch_zoom_out: -9058094752829376595
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

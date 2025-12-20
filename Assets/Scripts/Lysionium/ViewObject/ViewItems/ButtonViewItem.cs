@@ -12,7 +12,7 @@ namespace Lysionium.Views
     {
         [SerializeField] private Image _icon = null;
         [SerializeField] private TMP_Text _text = null;
-        [SerializeField] private KeyIcon _keyIcon = null;
+        [SerializeField] private KeybindLabel _keybindLabel;
         private Animator animator;
         private System.Action<InputAction.CallbackContext> clickActionPerformed;
         private ViewItemStyleEvaluator styleEvaluator;
@@ -66,7 +66,7 @@ namespace Lysionium.Views
 
             var style = handler.GetStyle(item, Manager, Arg) ?? _defaultStyle;
             styleEvaluator.SetParameters(item, handler, Manager, Arg, Parent);
-            styleEvaluator.SetStyle(style, animator, _keyIcon, clickActionPerformed);
+            styleEvaluator.SetStyle(style, animator, _keybindLabel, clickActionPerformed);
         }
 
         protected override void UnbindCore(object item, IViewItemHandler handler)
@@ -84,7 +84,7 @@ namespace Lysionium.Views
                 _icon.enabled = false;
             }
 
-            styleEvaluator.ResetStyle(animator, _keyIcon, clickActionPerformed);
+            styleEvaluator.ResetStyle(animator, _keybindLabel, clickActionPerformed);
         }
     }
 }

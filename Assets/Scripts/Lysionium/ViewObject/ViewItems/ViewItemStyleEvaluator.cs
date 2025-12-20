@@ -35,7 +35,7 @@ namespace Lysionium.Views
         }
 
         public void SetStyle(
-            string style, Animator animator, KeyIcon keyIcon, Action<InputAction.CallbackContext> onClick = null,
+            string style, Animator animator, KeybindLabel keybindLabel, Action<InputAction.CallbackContext> onClick = null,
             Action<InputAction.CallbackContext> inputPerformed = null,
             Action<InputAction.CallbackContext> inputStarted = null,
             Action<InputAction.CallbackContext> inputCanceled = null)
@@ -46,28 +46,28 @@ namespace Lysionium.Views
             if (CurrentStyle != null) throw new InvalidOperationException(
                 $"スタイル ({style}) 解除前に新しいスタイル ({style}) を適用することはできません。");
 
-            Evaluate(style, true, animator, keyIcon, onClick, inputPerformed, inputStarted, inputCanceled);
+            Evaluate(style, true, animator, keybindLabel, onClick, inputPerformed, inputStarted, inputCanceled);
 
             // 新しいスタイルを保持
             CurrentStyle = style;
         }
 
         public void ResetStyle(
-            Animator animator, KeyIcon keyIcon, Action<InputAction.CallbackContext> onClick = null,
+            Animator animator, KeybindLabel keybindLabel, Action<InputAction.CallbackContext> onClick = null,
             Action<InputAction.CallbackContext> inputPerformed = null,
             Action<InputAction.CallbackContext> inputStarted = null,
             Action<InputAction.CallbackContext> inputCanceled = null)
         {
             if (CurrentStyle == null) return;
 
-            Evaluate(CurrentStyle, false, animator, keyIcon, onClick, inputPerformed, inputStarted, inputCanceled);
+            Evaluate(CurrentStyle, false, animator, keybindLabel, onClick, inputPerformed, inputStarted, inputCanceled);
 
             // 設定済みスタイルを破棄
             CurrentStyle = null;
         }
 
         private void Evaluate(
-            string style, bool apply, Animator animator, KeyIcon keyIcon, Action<InputAction.CallbackContext> onClick,
+            string style, bool apply, Animator animator, KeybindLabel keybindLabel, Action<InputAction.CallbackContext> onClick,
             Action<InputAction.CallbackContext> inputPerformed,
             Action<InputAction.CallbackContext> inputStarted,
             Action<InputAction.CallbackContext> inputCanceled)
@@ -117,18 +117,12 @@ namespace Lysionium.Views
                         if (apply)
                         {
                             subview.Keybind(styleItem["click:".Length..], onClick);
-                            if (keyIcon != null && subview.TryGetKeyIcon(styleItem["click:".Length..], out var keyText, out var keySprite))
-                            {
-                                keyIcon.SetKeyIcon(keyText, keySprite);
-                            }
+                            if (keybindLabel != null) { keybindLabel.SetStyle(styleItem["click:".Length..]); }
                         }
                         else
                         {
                             subview.Keyunbind(styleItem["click:".Length..], onClick);
-                            if (keyIcon != null)
-                            {
-                                keyIcon.ClearKeyIcon();
-                            }
+                            if (keybindLabel != null) { keybindLabel.ResetStyle(styleItem["click:".Length..]); }
                         }
                     }
 
@@ -139,19 +133,13 @@ namespace Lysionium.Views
                         {
                             subview.Keybind(styleItem["input:".Length..], this.inputPerformed, this.inputStarted, this.inputCanceled);
                             subview.Keybind(styleItem["input:".Length..], inputPerformed, inputStarted, inputCanceled);
-                            if (keyIcon != null && subview.TryGetKeyIcon(styleItem["input:".Length..], out var keyText, out var keySprite))
-                            {
-                                keyIcon.SetKeyIcon(keyText, keySprite);
-                            }
+                            if (keybindLabel != null) { keybindLabel.SetStyle(styleItem["click:".Length..]); }
                         }
                         else
                         {
                             subview.Keyunbind(styleItem["input:".Length..], this.inputPerformed, this.inputStarted, this.inputCanceled);
                             subview.Keyunbind(styleItem["input:".Length..], inputPerformed, inputStarted, inputCanceled);
-                            if (keyIcon != null)
-                            {
-                                keyIcon.ClearKeyIcon();
-                            }
+                            if (keybindLabel != null) { keybindLabel.ResetStyle(styleItem["click:".Length..]); }
                         }
                     }
 
@@ -160,17 +148,11 @@ namespace Lysionium.Views
                     {
                         if (apply)
                         {
-                            if (keyIcon != null && subview.TryGetKeyIcon(styleItem["preview:".Length..], out var keyText, out var keySprite))
-                            {
-                                keyIcon.SetKeyIcon(keyText, keySprite);
-                            }
+                            if (keybindLabel != null) { keybindLabel.SetStyle(styleItem["click:".Length..]); }
                         }
                         else
                         {
-                            if (keyIcon != null)
-                            {
-                                keyIcon.ClearKeyIcon();
-                            }
+                            if (keybindLabel != null) { keybindLabel.ResetStyle(styleItem["click:".Length..]); }
                         }
                     }
                 }

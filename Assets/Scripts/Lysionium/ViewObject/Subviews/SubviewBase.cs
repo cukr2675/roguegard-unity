@@ -31,8 +31,6 @@ namespace Lysionium.Views
         // ViewItem から呼び出すメソッド
         public void PlayFromItem(string value, Object item) => AnimatorTupple.Play(this, item, value);
         public void PlayFromItem(Object value, Object item) => AnimatorTupple.Play(this, item, value);
-        public bool TryGetKeyIcon(System.ReadOnlySpan<char> style, out string keyText, out Sprite keySprite)
-            => KeybindTuple.TryGetKeyIcon(this, style, out keyText, out keySprite);
         public void Keybind(
             System.ReadOnlySpan<char> style,
             System.Action<InputAction.CallbackContext> performed = null,
@@ -122,27 +120,13 @@ namespace Lysionium.Views
 
         internal class KeybindTuple
         {
-            private readonly KeybindStyleSheet keyBindStyleSheet;
+            private readonly KeybindStyleSheet keybindStyleSheet;
 
-            private bool IsEnabled => keyBindStyleSheet != null;
+            private bool IsEnabled => keybindStyleSheet != null;
 
             public KeybindTuple(SubviewBase subview)
             {
-                keyBindStyleSheet = subview.GetComponentInParent<KeybindStyleSheet>();
-            }
-
-            public static bool TryGetKeyIcon(
-                SubviewBase subview, System.ReadOnlySpan<char> style, out string keyText, out Sprite keySprite)
-            {
-                var binding = subview.binding ??= new KeybindTuple(subview);
-                if (!binding.IsEnabled)
-                {
-                    keyText = null;
-                    keySprite = null;
-                    return false;
-                }
-
-                return binding.keyBindStyleSheet.TryGetKeyIcon(style, out keyText, out keySprite);
+                keybindStyleSheet = subview.GetComponentInParent<KeybindStyleSheet>();
             }
 
             public static void Keybind(
@@ -154,7 +138,7 @@ namespace Lysionium.Views
                 var binding = subview.binding ??= new KeybindTuple(subview);
                 if (!binding.IsEnabled) return;
 
-                binding.keyBindStyleSheet.Keybind(style, performed, started, canceled);
+                binding.keybindStyleSheet.Keybind(style, performed, started, canceled);
             }
 
             public static void Keyunbind(
@@ -166,7 +150,7 @@ namespace Lysionium.Views
                 var binding = subview.binding ??= new KeybindTuple(subview);
                 if (!binding.IsEnabled) return;
 
-                binding.keyBindStyleSheet.Keyunbind(style, performed, started, canceled);
+                binding.keybindStyleSheet.Keyunbind(style, performed, started, canceled);
             }
         }
     }

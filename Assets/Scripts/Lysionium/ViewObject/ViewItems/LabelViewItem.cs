@@ -8,7 +8,7 @@ namespace Lysionium.Views
     public class LabelViewItem : ViewItem
     {
         private TMP_Text text;
-        [SerializeField] private KeyIcon _keyIcon = null;
+        [SerializeField] private KeybindLabel _keybindLabel;
         private Animator animator;
         private ViewItemStyleEvaluator styleEvaluator;
 
@@ -32,7 +32,7 @@ namespace Lysionium.Views
 
             var style = handler.GetStyle(item, Manager, Arg) ?? _defaultStyle;
             styleEvaluator.SetParameters(item, handler, Manager, Arg, Parent);
-            styleEvaluator.SetStyle(style, animator, _keyIcon);
+            styleEvaluator.SetStyle(style, animator, _keybindLabel);
         }
 
         protected override void UnbindCore(object item, IViewItemHandler handler)
@@ -42,7 +42,7 @@ namespace Lysionium.Views
                 text.text = null;
             }
 
-            styleEvaluator.ResetStyle(animator, _keyIcon);
+            styleEvaluator.ResetStyle(animator, _keybindLabel);
         }
     }
 }

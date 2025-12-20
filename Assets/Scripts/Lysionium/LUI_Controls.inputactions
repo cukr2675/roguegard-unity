@@ -9,7 +9,7 @@
                     "name": "Hide",
                     "type": "Button",
                     "id": "fbe47f49-9614-4268-a105-343d1083a11e",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -101,13 +101,24 @@
                     "name": "Cancel",
                     "type": "Button",
                     "id": "5f334456-344d-4b8d-9690-9d122d01d319",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
                 }
             ],
             "bindings": [
+                {
+                    "name": "",
+                    "id": "469454ec-1cb0-4c44-9df5-b777f48e1f91",
+                    "path": "<Keyboard>/backspace",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Cancel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
                 {
                     "name": "",
                     "id": "b5844933-8d66-4dcf-b578-44794265706e",

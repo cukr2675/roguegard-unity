@@ -1,0 +1,116 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb1ca6b897662e048ac4a39036fa85f9, type: 3}
+  m_Name: LUI_OutlineMouseGlyphTable
+  m_EditorClassIdentifier: 
+  _controlPathExample: <Mouse>/rightButton
+  _items:
+  - _controlPath: <Mouse>/position
+    _sprite: {fileID: -3074904513027467896, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Mouse>/position/x
+    _sprite: {fileID: -6930547750661815086, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Mouse>/position/y
+    _sprite: {fileID: 7192287401040330249, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Mouse>/delta
+    _sprite: {fileID: -3074904513027467896, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Mouse>/delta/up
+    _sprite: {fileID: 0}
+  - _controlPath: <Mouse>/delta/down
+    _sprite: {fileID: 0}
+  - _controlPath: <Mouse>/delta/left
+    _sprite: {fileID: 0}
+  - _controlPath: <Mouse>/delta/right
+    _sprite: {fileID: 0}
+  - _controlPath: <Mouse>/delta/x
+    _sprite: {fileID: -6930547750661815086, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Mouse>/delta/y
+    _sprite: {fileID: 7192287401040330249, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Mouse>/scroll
+    _sprite: {fileID: 3635067687264481653, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Mouse>/scroll/up
+    _sprite: {fileID: -3656833220618883842, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Mouse>/scroll/down
+    _sprite: {fileID: 2782850721302907609, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Mouse>/scroll/left
+    _sprite: {fileID: 0}
+  - _controlPath: <Mouse>/scroll/right
+    _sprite: {fileID: 0}
+  - _controlPath: <Mouse>/scroll/x
+    _sprite: {fileID: 0}
+  - _controlPath: <Mouse>/scroll/y
+    _sprite: {fileID: 0}
+  - _controlPath: <Mouse>/x
+    _sprite: {fileID: -6930547750661815086, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Mouse>/y
+    _sprite: {fileID: 7192287401040330249, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Mouse>/press
+    _sprite: {fileID: -3012989879463529086, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Mouse>/leftButton
+    _sprite: {fileID: -3012989879463529086, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Mouse>/rightButton
+    _sprite: {fileID: 704976013846606023, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Mouse>/middleButton
+    _sprite: {fileID: 0}
+  - _controlPath: <Mouse>/forwardButton
+    _sprite: {fileID: 0}
+  - _controlPath: <Mouse>/backButton
+    _sprite: {fileID: 0}
+  - _controlPath: <Mouse>/pressure
+    _sprite: {fileID: 0}
+  - _controlPath: <Mouse>/radius
+    _sprite: {fileID: 0}
+  - _controlPath: <Mouse>/radius/x
+    _sprite: {fileID: 0}
+  - _controlPath: <Mouse>/radius/y
+    _sprite: {fileID: 0}
+  - _controlPath: <Mouse>/pointerId
+    _sprite: {fileID: 0}
+  - _controlPath: <Mouse>/displayIndex
+    _sprite: {fileID: 0}
+  - _controlPath: <Mouse>/clickCount
+    _sprite: {fileID: 0}
+  _autoSetMethod: 2
+  _spriteSheet: {fileID: 2800000, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  _spriteNameFormats:
+  - mouse_{0}_outline
+  - mouse_{0}
+  _spriteNameArgOverrides:
+  - _from: position
+    _to: move
+  - _from: position/x
+    _to: horizontal
+  - _from: position/y
+    _to: vertical
+  - _from: delta
+    _to: move
+  - _from: delta/x
+    _to: horizontal
+  - _from: delta/y
+    _to: vertical
+  - _from: scroll
+    _to: scroll_vertical
+  - _from: scroll/up
+    _to: scroll_up
+  - _from: scroll/down
+    _to: scroll_down
+  - _from: x
+    _to: horizontal
+  - _from: y
+    _to: vertical
+  - _from: press
+    _to: left
+  - _from: leftButton
+    _to: left
+  - _from: rightButton
+    _to: right
+  - _from: middleButton
+    _to: middle

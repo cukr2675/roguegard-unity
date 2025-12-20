@@ -1,0 +1,326 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb1ca6b897662e048ac4a39036fa85f9, type: 3}
+  m_Name: LUI_OutlineKeyboardGlyphTable
+  m_EditorClassIdentifier: 
+  _controlPathExample: <Keyboard>/leftShift
+  _items:
+  - _controlPath: <Keyboard>/anyKey
+    _sprite: {fileID: 1522739218514323331, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Keyboard>/escape
+    _sprite: {fileID: 397342244263854929, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Keyboard>/space
+    _sprite: {fileID: -573483409226853714, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Keyboard>/enter
+    _sprite: {fileID: -7446096256352937050, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Keyboard>/tab
+    _sprite: {fileID: -4118809611730058807, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Keyboard>/backquote
+    _sprite: {fileID: -2073477968173491886, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Keyboard>/quote
+    _sprite: {fileID: 5782964607487742133, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Keyboard>/semicolon
+    _sprite: {fileID: -7602680627317816256, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Keyboard>/comma
+    _sprite: {fileID: -1851193338281927647, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Keyboard>/period
+    _sprite: {fileID: -7004912429593475223, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Keyboard>/slash
+    _sprite: {fileID: 6220096357968455375, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Keyboard>/backslash
+    _sprite: {fileID: 323514723163572932, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Keyboard>/leftBracket
+    _sprite: {fileID: 7812312784331509571, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Keyboard>/rightBracket
+    _sprite: {fileID: -8770522664302056671, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Keyboard>/minus
+    _sprite: {fileID: 6460870314514549715, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Keyboard>/equals
+    _sprite: {fileID: 6683022876065461221, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Keyboard>/upArrow
+    _sprite: {fileID: -3864472915476093486, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Keyboard>/downArrow
+    _sprite: {fileID: -6775631312786808955, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Keyboard>/leftArrow
+    _sprite: {fileID: -4486174579065343234, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Keyboard>/rightArrow
+    _sprite: {fileID: 3816516202421728403, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Keyboard>/a
+    _sprite: {fileID: 1429377927046926864, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Keyboard>/b
+    _sprite: {fileID: 324176309368404534, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Keyboard>/c
+    _sprite: {fileID: -5248227378122167916, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Keyboard>/d
+    _sprite: {fileID: -1567718762400958880, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Keyboard>/e
+    _sprite: {fileID: -6087718059442880464, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Keyboard>/f
+    _sprite: {fileID: 5892903927050174650, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Keyboard>/g
+    _sprite: {fileID: 8722457818990912220, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Keyboard>/h
+    _sprite: {fileID: 600738300987858923, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Keyboard>/i
+    _sprite: {fileID: 8228805888570662187, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Keyboard>/j
+    _sprite: {fileID: 1193714938018002748, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Keyboard>/k
+    _sprite: {fileID: 5170428300857339870, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Keyboard>/l
+    _sprite: {fileID: -8731110463001806544, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Keyboard>/m
+    _sprite: {fileID: -5792950763424586281, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Keyboard>/n
+    _sprite: {fileID: -5297123857586864619, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Keyboard>/o
+    _sprite: {fileID: 4059307264056006754, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Keyboard>/p
+    _sprite: {fileID: -214725563293902715, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Keyboard>/q
+    _sprite: {fileID: 3679232135494518075, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Keyboard>/r
+    _sprite: {fileID: -4086289641764927971, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Keyboard>/s
+    _sprite: {fileID: 725748518133905330, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Keyboard>/t
+    _sprite: {fileID: 4172385434731944115, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Keyboard>/u
+    _sprite: {fileID: -5183012556171829946, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Keyboard>/v
+    _sprite: {fileID: 5674136009366267874, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Keyboard>/w
+    _sprite: {fileID: -7213330544847241820, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Keyboard>/x
+    _sprite: {fileID: 6032448866125416251, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Keyboard>/y
+    _sprite: {fileID: -5821250790168156809, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Keyboard>/z
+    _sprite: {fileID: -3029273156765665724, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Keyboard>/1
+    _sprite: {fileID: -6888780255202874823, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Keyboard>/2
+    _sprite: {fileID: 7895879629053909744, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Keyboard>/3
+    _sprite: {fileID: 1675852778472404771, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Keyboard>/4
+    _sprite: {fileID: 9080539640996461680, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Keyboard>/5
+    _sprite: {fileID: 8736139859228580546, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Keyboard>/6
+    _sprite: {fileID: -8759816566357694658, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Keyboard>/7
+    _sprite: {fileID: -4836277848844884968, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Keyboard>/8
+    _sprite: {fileID: -6980295037127895059, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Keyboard>/9
+    _sprite: {fileID: -2653143514386494060, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Keyboard>/0
+    _sprite: {fileID: 8330449726384581361, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Keyboard>/leftShift
+    _sprite: {fileID: 545612101435050902, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Keyboard>/rightShift
+    _sprite: {fileID: 545612101435050902, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Keyboard>/shift
+    _sprite: {fileID: 545612101435050902, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Keyboard>/leftAlt
+    _sprite: {fileID: 5555234326869084603, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Keyboard>/rightAlt
+    _sprite: {fileID: 5555234326869084603, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Keyboard>/alt
+    _sprite: {fileID: 5555234326869084603, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Keyboard>/leftCtrl
+    _sprite: {fileID: -378622272074338202, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Keyboard>/rightCtrl
+    _sprite: {fileID: -378622272074338202, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Keyboard>/ctrl
+    _sprite: {fileID: -378622272074338202, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Keyboard>/leftMeta
+    _sprite: {fileID: 0}
+  - _controlPath: <Keyboard>/rightMeta
+    _sprite: {fileID: 0}
+  - _controlPath: <Keyboard>/contextMenu
+    _sprite: {fileID: 0}
+  - _controlPath: <Keyboard>/backspace
+    _sprite: {fileID: -3387589413546977981, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Keyboard>/pageDown
+    _sprite: {fileID: -4725695191283114454, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Keyboard>/pageUp
+    _sprite: {fileID: 8039980430991704668, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Keyboard>/home
+    _sprite: {fileID: 8097166232354757264, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Keyboard>/end
+    _sprite: {fileID: 8927640789005803368, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Keyboard>/insert
+    _sprite: {fileID: -4995438589379444249, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Keyboard>/delete
+    _sprite: {fileID: -9044546026254646601, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Keyboard>/capsLock
+    _sprite: {fileID: 8186429116961804606, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Keyboard>/numLock
+    _sprite: {fileID: -1537730193049132833, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Keyboard>/printScreen
+    _sprite: {fileID: 2104793409663207258, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Keyboard>/scrollLock
+    _sprite: {fileID: 0}
+  - _controlPath: <Keyboard>/pause
+    _sprite: {fileID: 0}
+  - _controlPath: <Keyboard>/numpadEnter
+    _sprite: {fileID: 8719836059040872197, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Keyboard>/numpadDivide
+    _sprite: {fileID: 0}
+  - _controlPath: <Keyboard>/numpadMultiply
+    _sprite: {fileID: 0}
+  - _controlPath: <Keyboard>/numpadPlus
+    _sprite: {fileID: -7610321968718009533, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Keyboard>/numpadMinus
+    _sprite: {fileID: 0}
+  - _controlPath: <Keyboard>/numpadPeriod
+    _sprite: {fileID: 0}
+  - _controlPath: <Keyboard>/numpadEquals
+    _sprite: {fileID: 0}
+  - _controlPath: <Keyboard>/numpad1
+    _sprite: {fileID: 0}
+  - _controlPath: <Keyboard>/numpad2
+    _sprite: {fileID: 0}
+  - _controlPath: <Keyboard>/numpad3
+    _sprite: {fileID: 0}
+  - _controlPath: <Keyboard>/numpad4
+    _sprite: {fileID: 0}
+  - _controlPath: <Keyboard>/numpad5
+    _sprite: {fileID: 0}
+  - _controlPath: <Keyboard>/numpad6
+    _sprite: {fileID: 0}
+  - _controlPath: <Keyboard>/numpad7
+    _sprite: {fileID: 0}
+  - _controlPath: <Keyboard>/numpad8
+    _sprite: {fileID: 0}
+  - _controlPath: <Keyboard>/numpad9
+    _sprite: {fileID: 0}
+  - _controlPath: <Keyboard>/numpad0
+    _sprite: {fileID: 0}
+  - _controlPath: <Keyboard>/f1
+    _sprite: {fileID: -7126127434652113379, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Keyboard>/f2
+    _sprite: {fileID: -3482203745990157659, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Keyboard>/f3
+    _sprite: {fileID: -1529871650770436821, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Keyboard>/f4
+    _sprite: {fileID: -1816370663967604533, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Keyboard>/f5
+    _sprite: {fileID: -1489552515639728627, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Keyboard>/f6
+    _sprite: {fileID: 2144626626856122583, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Keyboard>/f7
+    _sprite: {fileID: 7353701639820232978, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Keyboard>/f8
+    _sprite: {fileID: -1253183370082195813, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Keyboard>/f9
+    _sprite: {fileID: -8743936088247615377, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Keyboard>/f10
+    _sprite: {fileID: 1321824556769632818, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Keyboard>/f11
+    _sprite: {fileID: -1184531226411800602, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Keyboard>/f12
+    _sprite: {fileID: -3577676137621932189, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  - _controlPath: <Keyboard>/OEM1
+    _sprite: {fileID: 0}
+  - _controlPath: <Keyboard>/OEM2
+    _sprite: {fileID: 0}
+  - _controlPath: <Keyboard>/OEM3
+    _sprite: {fileID: 0}
+  - _controlPath: <Keyboard>/OEM4
+    _sprite: {fileID: 0}
+  - _controlPath: <Keyboard>/OEM5
+    _sprite: {fileID: 0}
+  - _controlPath: <Keyboard>/f13
+    _sprite: {fileID: 0}
+  - _controlPath: <Keyboard>/f14
+    _sprite: {fileID: 0}
+  - _controlPath: <Keyboard>/f15
+    _sprite: {fileID: 0}
+  - _controlPath: <Keyboard>/f16
+    _sprite: {fileID: 0}
+  - _controlPath: <Keyboard>/f17
+    _sprite: {fileID: 0}
+  - _controlPath: <Keyboard>/f18
+    _sprite: {fileID: 0}
+  - _controlPath: <Keyboard>/f19
+    _sprite: {fileID: 0}
+  - _controlPath: <Keyboard>/f20
+    _sprite: {fileID: 0}
+  - _controlPath: <Keyboard>/f21
+    _sprite: {fileID: 0}
+  - _controlPath: <Keyboard>/f22
+    _sprite: {fileID: 0}
+  - _controlPath: <Keyboard>/f23
+    _sprite: {fileID: 0}
+  - _controlPath: <Keyboard>/f24
+    _sprite: {fileID: 0}
+  - _controlPath: <Keyboard>/IMESelected
+    _sprite: {fileID: 0}
+  _autoSetMethod: 1
+  _spriteSheet: {fileID: 2800000, guid: 04eb73750b3fa6d44ac0af5bb1f9333f, type: 3}
+  _spriteNameFormats:
+  - keyboard_{0}_outline
+  - keyboard_{0}
+  _spriteNameArgOverrides:
+  - _from: anyKey
+    _to: any
+  - _from: enter
+    _to: return
+  - _from: backquote
+    _to: apostrophe
+  - _from: slash
+    _to: slash_forward
+  - _from: backslash
+    _to: slash_back
+  - _from: leftBracket
+    _to: bracket_open
+  - _from: rightBracket
+    _to: bracket_close
+  - _from: upArrow
+    _to: arrow_up
+  - _from: downArrow
+    _to: arrow_down
+  - _from: leftArrow
+    _to: arrow_left
+  - _from: rightArrow
+    _to: arrow_right
+  - _from: leftShift
+    _to: shift
+  - _from: rightShift
+    _to: shift
+  - _from: leftAlt
+    _to: alt
+  - _from: rightAlt
+    _to: alt
+  - _from: leftCtrl
+    _to: ctrl
+  - _from: rightCtrl
+    _to: ctrl
+  - _from: backspace
+    _to: backspace_icon_alternative
+  - _from: pageDown
+    _to: page_down
+  - _from: pageUp
+    _to: page_up
+  - _from: capsLock
+    _to: capslock
+  - _from: numLock
+    _to: numlock
+  - _from: printScreen
+    _to: printscreen
+  - _from: numpadEnter
+    _to: numpad_enter
+  - _from: numpadPlus
+    _to: numpad_plus

@@ -1,46 +1,45 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace Lysionium.Views
 {
+    // 命名メモ: スタイル名で指定するので StyleSheet
     /// <summary>
     /// 要素のスタイルでキーバインドするスタイルシート。このオブジェクトの下の <see cref="Subview"/> に影響を与える
     /// </summary>
     [AddComponentMenu("UI/Lysionium/LUI Keybind Style Sheet")]
     public class KeybindStyleSheet : MonoBehaviour
     {
-        [SerializeField] private Sprite _keyboardIconBackground = null;
+        [SerializeField] private KeybindGlyphAsset _keybindGlyphAsset;
+        public KeybindGlyphAsset KeybindGlyphAsset
+        {
+            get => _keybindGlyphAsset;
+            set => _keybindGlyphAsset = value;
+        }
 
         [SerializeField] private Binding[] _bindings = null;
+        public IReadOnlyList<Binding> Bindings => _bindings;
 
         private PlayerInput playerInput;
+
+        protected virtual void Start()
+        {
+            if (_keybindGlyphAsset != null) { _keybindGlyphAsset.UpdateGlyph(this); }
+        }
 
         public bool TryGetAction(ReadOnlySpan<char> style, out InputAction action)
         {
             foreach (var binding in _bindings)
             {
-                if (!binding.Style.SequenceEqual(style)) continue;
+                if (!binding.Style.AsSpan().SequenceEqual(style)) continue;
 
                 action = binding.Action;
                 return true;
             }
             action = null;
             return false;
-        }
-
-        public bool TryGetKeyIcon(ReadOnlySpan<char> style, out string keyText, out Sprite keySprite)
-        {
-            if (!TryGetAction(style, out var action))
-            {
-                keyText = null;
-                keySprite = null;
-                return false;
-            }
-
-            keyText = action.GetBindingDisplayString();
-            keySprite = _keyboardIconBackground;
-            return true;
         }
 
         public void Keybind(
@@ -84,10 +83,10 @@ namespace Lysionium.Views
         }
 
         [Serializable]
-        private class Binding
+        public class Binding
         {
             //[SerializeField] private string _style;
-            public ReadOnlySpan<char> Style => _action.action.name.AsSpan();
+            public string Style => _action.action.name;
 
             [SerializeField] public InputActionReference _action;
             public InputAction Action => _action;
