@@ -80,5 +80,7 @@ namespace Roguegard.Device
         {
             screen.CloseScreenView(manager, back);
         }
+
+        ChoicesMenuScreen ISelectOptionListBuilder<MMgr, MArg, ChoicesMenuScreen>.Option() => this;
     }
 }

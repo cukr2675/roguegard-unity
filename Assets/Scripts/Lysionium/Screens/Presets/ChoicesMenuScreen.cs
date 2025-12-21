@@ -83,5 +83,7 @@ namespace Lysionium
             if (IsIncremental) { view.Hide(manager, back); }
             else { manager.HideAll(back); }
         }
+
+        ChoicesMenuScreen<TMgr, TArg> ISelectOptionListBuilder<TMgr, TArg, ChoicesMenuScreen<TMgr, TArg>>.Option() => this;
     }
 }

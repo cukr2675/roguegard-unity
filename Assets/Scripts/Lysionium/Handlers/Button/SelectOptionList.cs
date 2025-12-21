@@ -40,5 +40,6 @@ namespace Lysionium
         public void CopyTo(ISelectOption<TMgr, TArg>[] array, int arrayIndex) => list.CopyTo(array, arrayIndex);
         public IEnumerator<ISelectOption<TMgr, TArg>> GetEnumerator() => list.GetEnumerator();
         IEnumerator IEnumerable.GetEnumerator() => list.GetEnumerator();
+        SelectOptionList<TMgr, TArg> ISelectOptionListBuilder<TMgr, TArg, SelectOptionList<TMgr, TArg>>.Option() => this;
     }
 }

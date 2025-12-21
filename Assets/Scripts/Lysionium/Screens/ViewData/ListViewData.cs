@@ -123,6 +123,8 @@ namespace Lysionium
                     parent.Parent.headList.Add(option);
                     return parent;
                 }
+
+                TOut ISelectOptionListBuilder<TMgr, TArg, TOut>.Option() => parent;
             }
 
             public readonly struct TailBuilder : ISelectOptionListBuilder<TMgr, TArg, TOut>
@@ -145,6 +147,8 @@ namespace Lysionium
                     parent.Parent.tailList.Add(option);
                     return parent;
                 }
+
+                TOut ISelectOptionListBuilder<TMgr, TArg, TOut>.Option() => parent;
             }
         }
 

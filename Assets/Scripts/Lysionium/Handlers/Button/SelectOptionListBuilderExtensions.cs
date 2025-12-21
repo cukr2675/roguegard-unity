@@ -13,7 +13,9 @@ namespace Lysionium
             {
                 builder.Option(option);
             }
-            return (TBuilder)builder;
+
+            // ListViewData.BaseListBuilder.HeadBuilder などビルダーの型と戻り値が一致しない可能性があるためキャストは禁止
+            return builder.Option();
         }
 
         public static TBuilder Option<TMgr, TArg, TBuilder>(

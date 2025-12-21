@@ -129,6 +129,8 @@ namespace Lysionium
                 base.Unload();
                 Parent.OnCompleted = null;
             }
+
+            Builder ISelectOptionListBuilder<TMgr, TArg, Builder>.Option() => this;
         }
 
         public class StringReplacer

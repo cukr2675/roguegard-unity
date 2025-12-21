@@ -76,6 +76,8 @@ namespace Lysionium
             {
                 return Tail.Option(option);
             }
+
+            Builder ISelectOptionListBuilder<TMgr, TArg, Builder>.Option() => this;
         }
     }
 }
