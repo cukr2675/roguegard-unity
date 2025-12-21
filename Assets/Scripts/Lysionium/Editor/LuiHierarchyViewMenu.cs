@@ -52,9 +52,9 @@ namespace Lysionium.Editor
                 return;
             }
 
-            // プレースホルダーオブジェクトを ListMenuStartup オブジェクトに整形する
+            // プレースホルダーオブジェクトを Startup オブジェクトに整形する
             DestroyImmediate(classNameHintObject);
-            instance.name = "ListMenuStartup";
+            instance.name = className;
             Undo.AddComponent(instance, classType);
             Debug.Log($"{instance} に {classType} コンポーネントを追加しました。");
         }
