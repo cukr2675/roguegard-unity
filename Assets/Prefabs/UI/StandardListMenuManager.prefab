@@ -2236,7 +2236,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1581175932945101382, guid: b67da1adde1615e47a41cccacd65cebf, type: 3}
       propertyPath: m_Name
-      value: Panel (LMF)
+      value: Panel (LUI)
       objectReference: {fileID: 0}
     - target: {fileID: 3570125937818368286, guid: b67da1adde1615e47a41cccacd65cebf, type: 3}
       propertyPath: m_Pivot.x
@@ -6931,7 +6931,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3050259966798244115, guid: 3ebc47c7d31e8af4dac2ec188e7f017c, type: 3}
       propertyPath: m_Name
-      value: VerticalScrollRect (LMF)
+      value: VerticalScrollRect (LUI)
       objectReference: {fileID: 0}
     - target: {fileID: 3519301190486513262, guid: 3ebc47c7d31e8af4dac2ec188e7f017c, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -7017,7 +7017,7 @@ MonoBehaviour:
   _stars: {fileID: 161403392698490769}
   _raceButton: {fileID: 5692585360849520324}
   _secondParent: {fileID: 8507770701815763753}
-  _headerPrefab: {fileID: 4666641263920320602, guid: bd6cf6ea84c50a04995e329fd4a0019c, type: 3}
+  _headerPrefab: {fileID: 628751721151635351, guid: ba2141380e8b78546a4601f8c61d2939, type: 3}
   _buttonViewItemPrefab: {fileID: 9002094812848519153, guid: 86ce7831cece9c54997bfb62f175f168, type: 3}
 --- !u!224 &8802696955980064615 stripped
 RectTransform:
@@ -7472,7 +7472,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1581175932945101382, guid: b67da1adde1615e47a41cccacd65cebf, type: 3}
       propertyPath: m_Name
-      value: SubPanel (LMF)
+      value: SubPanel (LUI)
       objectReference: {fileID: 0}
     - target: {fileID: 3570125937818368286, guid: b67da1adde1615e47a41cccacd65cebf, type: 3}
       propertyPath: m_Pivot.x

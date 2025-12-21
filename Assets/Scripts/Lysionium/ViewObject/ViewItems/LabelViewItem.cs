@@ -4,10 +4,9 @@ using UnityEngine;
 namespace Lysionium.Views
 {
     [AddComponentMenu("UI/Lysionium/View Items/LUI Label View Item")]
-    [RequireComponent(typeof(TMP_Text))]
     public class LabelViewItem : ViewItem
     {
-        private TMP_Text text;
+        [SerializeField] private TMP_Text _text;
         [SerializeField] private KeybindLabel _keybindLabel;
         private Animator animator;
         private ViewItemStyleEvaluator styleEvaluator;
@@ -17,17 +16,15 @@ namespace Lysionium.Views
 
         protected virtual void Awake()
         {
-            TryGetComponent(out text);
-
             TryGetComponent(out animator);
             styleEvaluator = new ViewItemStyleEvaluator();
         }
 
         protected override void BindCore(object item, IViewItemHandler handler)
         {
-            if (text != null)
+            if (_text != null)
             {
-                text.text = Manager.Localize(name);
+                _text.text = Manager.Localize(name);
             }
 
             var style = handler.GetStyle(item, Manager, Arg) ?? _defaultStyle;
@@ -37,9 +34,9 @@ namespace Lysionium.Views
 
         protected override void UnbindCore(object item, IViewItemHandler handler)
         {
-            if (text != null)
+            if (_text != null)
             {
-                text.text = null;
+                _text.text = null;
             }
 
             styleEvaluator.ResetStyle(animator, _keybindLabel);

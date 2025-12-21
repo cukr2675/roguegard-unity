@@ -179,7 +179,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fa9bc96c1c1ac14485942628667ecff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _keybindGlyphGenerator: {fileID: 0}
+  _keybindGlyphAsset: {fileID: 0}
   _bindings:
   - _action: {fileID: 3510485718312938927, guid: 3b64fd5dc26924744aff4bbfeae4b445, type: 3}
 --- !u!114 &8210026949675588516
@@ -1123,7 +1123,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _content: {fileID: 510806672258910197}
-  _viewItemPrefab: {fileID: 6695564391999450363, guid: a0b57d8fc9417ce418d15089b20a17ad, type: 3}
+  _viewItemPrefab: {fileID: 4046319007009868131, guid: 9d18c2b3eae0e184b8ca31652b10e6f0, type: 3}
   _viewItemCount: {x: 1, y: 1}
   _extensionDirection: 0
   _isSelectable: 0
@@ -4090,7 +4090,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6517801266944890022, guid: bba66955087438b4d9835e16e81b941d, type: 3}
       propertyPath: m_Name
-      value: SpeechBox (LMF)
+      value: SpeechBox (LUI)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
