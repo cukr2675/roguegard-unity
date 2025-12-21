@@ -99,7 +99,7 @@ namespace Lysionium.Views
             //[SerializeField] private string _style;
             public string Style => _action.action.name;
 
-            [SerializeField] public InputActionReference _action;
+            [SerializeField] private InputActionReference _action;
             public InputAction Action => _action;
         }
     }

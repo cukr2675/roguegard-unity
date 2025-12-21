@@ -49,7 +49,6 @@ namespace Lysionium.Views
             if (_icon != null && handler is IColoredIconViewItemHandler iconViewItemHandler)
             {
                 iconViewItemHandler.GetIcon(item, Manager, Arg, out var iconSprite, out var iconColor);
-                iconSprite = Manager.Localize(iconSprite);
                 if (iconSprite != null)
                 {
                     _icon.sprite = iconSprite;

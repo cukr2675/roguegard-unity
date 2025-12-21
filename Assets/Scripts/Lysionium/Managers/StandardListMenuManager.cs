@@ -114,8 +114,6 @@ namespace Lysionium
 
         public virtual string Localize(string text) => text?.Normalize(NormalizationForm.FormC); // TextMeshPro のために NFD を NFC に正規化する
 
-        public virtual T Localize<T>(T obj) => obj;
-
         /// <summary>
         /// メニューを指定の画面へ進める
         /// </summary>

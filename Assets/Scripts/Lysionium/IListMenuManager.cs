@@ -9,7 +9,5 @@ namespace Lysionium
         void HideAll(bool back);
 
         string Localize(string text);
-
-        T Localize<T>(T obj);
     }
 }
