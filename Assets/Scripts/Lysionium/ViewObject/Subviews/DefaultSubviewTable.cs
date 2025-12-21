@@ -9,6 +9,13 @@ namespace Lysionium.Views
     {
         [SerializeField] private Image _blocker = null;
 
+        [SerializeField] private Subview _indicator = null;
+        public Subview Indicator
+        {
+            get => _indicator;
+            set => _indicator = value;
+        }
+
         [SerializeField] private Subview _scroll = null;
         public Subview Scroll
         {
@@ -138,6 +145,7 @@ namespace Lysionium.Views
             LuiAssert.NotInitialized(this, isInitialized);
             isInitialized = true;
 
+            _indicator.CommonInit();
             _scroll.CommonInit();
             _widgets.CommonInit();
             _longMessage.CommonInit();
@@ -156,6 +164,7 @@ namespace Lysionium.Views
 
             Subviews = new Subview[]
             {
+                _indicator,
                 _scroll,
                 _widgets,
                 _longMessage,
