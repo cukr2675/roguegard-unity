@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 namespace Lysionium.Views
@@ -23,7 +24,9 @@ namespace Lysionium.Views
         [SerializeField] private Binding[] _bindings = null;
         public IReadOnlyList<Binding> Bindings => _bindings;
 
+        private EventSystem eventSystem;
         private PlayerInput playerInput;
+        private bool keybindsAreEnabled;
 
         protected virtual void Start()
         {
@@ -38,6 +41,32 @@ namespace Lysionium.Views
                     text.SetAllDirty();
                 }
             }
+        }
+
+        protected virtual void Update()
+        {
+            var newValue = GetKeybindIsEnabled();
+            if (newValue != keybindsAreEnabled)
+            {
+                keybindsAreEnabled = newValue;
+                foreach (var binding in _bindings)
+                {
+                    if (newValue) { binding.Action.Enable(); }
+                    else { binding.Action.Disable(); }
+                }
+            }
+        }
+
+        private bool GetKeybindIsEnabled()
+        {
+            if (eventSystem == null)
+            {
+                eventSystem = LuiUtility.GetEventSystem(this);
+            }
+            if (eventSystem.currentSelectedGameObject == null ||
+                !eventSystem.currentSelectedGameObject.TryGetComponent<TMP_InputField>(out var inputField)) return true;
+
+            return !inputField.isFocused;
         }
 
         public bool TryGetAction(ReadOnlySpan<char> style, out InputAction action)
