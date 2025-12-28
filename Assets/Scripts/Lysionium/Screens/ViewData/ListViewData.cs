@@ -87,7 +87,7 @@ namespace Lysionium
             public override void Build()
             {
                 // IsBuilt == false 時の Show ではフィルタ未設定状態で SetOriginalList を実行しているため、フィルタ設定後であるここで再実行する
-                for (int i = Parent.OriginalList.Count - 1; i >= 0 ; i--)
+                for (int i = Parent.OriginalList.Count - 1; i >= 0; i--)
                 {
                     if (!(Parent.filter?.Invoke(Parent.OriginalList[i], Manager, Arg)) ?? false) { Parent.OriginalList.RemoveAt(i); }
                 }

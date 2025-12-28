@@ -25,8 +25,8 @@ namespace Lysionium
         public SelectOptionList<TMgr, TArg> BackAnchorList { get; set; } = new(_ => _.BackIfReflectable());
 
         /// <summary>
-        /// このインスタンスのデリゲート実行前に <see cref="SelectOptionViewItemHandler"/> の処理を挟む
-        /// (リストの前後に <see cref="ISelectOption"/> を入れる場合を想定)
+        /// このインスタンスのデリゲート実行前に <see cref="SelectOptionViewItemHandler{TMgr, TArg}"/> の処理を挟む
+        /// (リストの前後に <see cref="ISelectOption{TMgr, TArg}"/> を入れる場合を想定)
         /// </summary>
         public bool EnableSelectOptionProxy
         {

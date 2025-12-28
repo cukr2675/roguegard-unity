@@ -5,7 +5,7 @@ namespace Lysionium
     // また、複数の IListMenuManager で共通のメニュー（クイックメニューなど）を作りたい場合、反変性があると便利なので付与する
 
     /// <summary>
-    /// <see cref="SelectOptionViewItemHandler"/> のモデルとして扱うインターフェース。
+    /// <see cref="SelectOptionViewItemHandler{TMgr, TArg}"/> のモデルとして扱うインターフェース。
     /// </summary>
     public interface ISelectOption<in TMgr, in TArg>
     {
