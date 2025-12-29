@@ -121,6 +121,20 @@ namespace Lysionium.Views
             set => _choices = value;
         }
 
+        [SerializeField] private DropdownScrollSubview _dropdownList = null;
+        public DropdownScrollSubview DropdownList
+        {
+            get => _dropdownList;
+            set => _dropdownList = value;
+        }
+
+        [SerializeField] private DropdownGridSubview _dropdownGrid = null;
+        public DropdownGridSubview DropdownGrid
+        {
+            get => _dropdownGrid;
+            set => _dropdownGrid = value;
+        }
+
         public IReadOnlyList<Subview> Subviews { get; private set; }
 
         /// <summary>
@@ -161,6 +175,8 @@ namespace Lysionium.Views
             _overlay.CommonInit();
             _speechBox.CommonInit();
             _choices.CommonInit();
+            _dropdownList.CommonInit();
+            _dropdownGrid.CommonInit();
 
             Subviews = new Subview[]
             {
@@ -180,7 +196,15 @@ namespace Lysionium.Views
                 _overlay,
                 _speechBox,
                 _choices,
+                _dropdownList,
+                _dropdownGrid,
             };
+        }
+
+        public void SetInvisibleDropdownPosition(Rect rect)
+        {
+            if (!_dropdownList.IsVisible) { _dropdownList.SetPosition(rect); }
+            if (!_dropdownGrid.IsVisible) { _dropdownGrid.SetPosition(rect); }
         }
 
         public void SetBlocker(bool block)

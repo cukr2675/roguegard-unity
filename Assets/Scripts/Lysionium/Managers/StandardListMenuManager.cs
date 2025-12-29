@@ -57,8 +57,8 @@ namespace Lysionium
         public IListHandlerSubview Overlay => defaultSubviewTable.Overlay;
         public IMessageBoxSubview SpeechBox => defaultSubviewTable.SpeechBox;
         public IListHandlerSubview Choices => defaultSubviewTable.Choices;
-        public IListHandlerSubview DropdownList => throw new System.NotImplementedException();
-        public IListHandlerSubview DropdownGrid => throw new System.NotImplementedException();
+        public IListHandlerSubview DropdownList => defaultSubviewTable.DropdownList;
+        public IListHandlerSubview DropdownGrid => defaultSubviewTable.DropdownGrid;
 
         protected void CommonInit()
         {
@@ -111,6 +111,11 @@ namespace Lysionium
             {
                 defaultSubviewTable.Subviews[i].Hide(back);
             }
+        }
+
+        public void SetInvisibleDropdownPosition(Rect rect)
+        {
+            defaultSubviewTable.SetInvisibleDropdownPosition(rect);
         }
 
         public virtual string Localize(string text) => text?.Normalize(NormalizationForm.FormC); // TextMeshPro のために NFD を NFC に正規化する

@@ -35,6 +35,16 @@ namespace Lysionium.Views
             }
         }
 
+        public bool IsVisible
+        {
+            get
+            {
+                if (canvasGroup == null) { canvasGroup = GetComponent<CanvasGroup>(); }
+
+                return canvasGroup.alpha > 0f;
+            }
+        }
+
         private bool isInitialized;
 
         private const int backStatusCode = 1;

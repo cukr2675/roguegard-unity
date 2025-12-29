@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace Lysionium
 {
     public static class ViewItemHandlerBuilderExtensions
@@ -18,6 +20,12 @@ namespace Lysionium
             this IViewItemFilterBuilder<TItem, TMgr, TArg, TOut> builder, System.Func<TItem, bool> predicate)
         {
             return builder.Filter((item, _, _) => predicate(item));
+        }
+
+        public static TOut ChildrenFrom<TItem, TMgr, TArg, TOut>(
+            this ITreeViewItemHandlerBuilder<TItem, TMgr, TArg, TOut> builder, System.Func<TItem, IReadOnlyList<TItem>> selector)
+        {
+            return builder.ChildrenFrom((item, _, _) => selector(item));
         }
     }
 }

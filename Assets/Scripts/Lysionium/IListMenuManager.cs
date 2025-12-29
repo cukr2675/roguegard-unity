@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace Lysionium
 {
     public interface IListMenuManager
@@ -7,6 +9,8 @@ namespace Lysionium
         event System.Action OnUnload;
 
         void HideAll(bool back);
+
+        void SetInvisibleDropdownPosition(Rect rect);
 
         string Localize(string text);
     }

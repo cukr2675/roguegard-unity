@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -6,9 +7,9 @@ using UnityEngine.UI;
 
 namespace Lysionium.Views
 {
-    [AddComponentMenu("UI/Lysionium/View Items/LUI Button View Item")]
+    [AddComponentMenu("UI/Lysionium/View Items/LUI Dropdown Button View Item")]
     [RequireComponent(typeof(Button))]
-    public class ButtonViewItem : ViewItem
+    public class DropdownButtonViewItem : ViewItem
     {
         [SerializeField] private Image _icon = null;
         [SerializeField] private TMP_Text _text = null;
@@ -20,16 +21,27 @@ namespace Lysionium.Views
         [Header("Animation")]
         [SerializeField] private string _defaultStyle = "Submit";
 
+        private ExpandHandler expandHandler;
         private IButtonViewItemHandler handler;
+        private ITreeViewItemHandler treeHandler;
         private object item;
+
+        public delegate void ExpandHandler(IReadOnlyList<object> children, Rect rect);
 
         protected virtual void Awake()
         {
             var button = GetComponent<Button>();
             button.onClick.AddListener(() =>
             {
-                // ドロップダウンの位置を更新
                 var rectTransform = (RectTransform)transform;
+                var children = treeHandler.GetChildren(item, Manager, Arg);
+                if (children != null || children.Count >= 1)
+                {
+                    expandHandler(children, rectTransform.rect);
+                    return;
+                }
+
+                // ドロップダウンの位置を更新
                 Manager.SetInvisibleDropdownPosition(rectTransform.rect);
 
                 handler.Click(item, Manager, Arg);
@@ -40,9 +52,16 @@ namespace Lysionium.Views
             styleEvaluator = new ViewItemStyleEvaluator();
         }
 
+        public void Initialize(SubviewBase parent, ExpandHandler expandHandler)
+        {
+            Initialize(parent);
+            this.expandHandler = expandHandler;
+        }
+
         protected override void BindCore(object item, IViewItemHandler handler)
         {
             this.handler = handler as IButtonViewItemHandler;
+            treeHandler = handler as ITreeViewItemHandler;
             this.item = item;
 
             if (_text != null)
