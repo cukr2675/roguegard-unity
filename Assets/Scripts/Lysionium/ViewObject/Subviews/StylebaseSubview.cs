@@ -17,7 +17,7 @@ namespace Lysionium.Views
 
         [SerializeField] private TextAsset _generationInputInfoPartialScriptFile;
 
-        [SerializeField] private TextAsset _generationIndicatorMenuScreenScriptFile;
+        [SerializeField] private TextAsset _generationHudScreenScriptFile;
 #endif
 
         private IViewItemHandler handler;
@@ -113,8 +113,8 @@ namespace Lysionium.Views
         //    throw new NotImplementedException();
         //}
 
-        //[ContextMenu("Generate IndicatorMenuScreen Script")]
-        //private void GenerateIndicatorMenuScreenScript()
+        //[ContextMenu("Generate HudScreen Script")]
+        //private void GenerateHudScreenScript()
         //{
         //    var partialScriptFilePath = "Assets/InputInfo.Partial.cs";
         //    if (_generationInputInfoPartialScriptFile != null)

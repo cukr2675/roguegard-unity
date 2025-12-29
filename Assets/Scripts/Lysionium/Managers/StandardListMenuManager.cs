@@ -41,7 +41,7 @@ namespace Lysionium
         /// </summary>
         protected virtual bool HasManagerLock => defaultSubviewTable.HasManagerLock;
 
-        public IListHandlerSubview Indicator => defaultSubviewTable.Indicator;
+        public IListHandlerSubview PlayingHud => defaultSubviewTable.PlayingHud;
         public IListHandlerSubview Scroll => defaultSubviewTable.Scroll;
         public IListHandlerSubview Widgets => defaultSubviewTable.Widgets;
         public IMessageBoxSubview LongMessage => defaultSubviewTable.LongMessage;

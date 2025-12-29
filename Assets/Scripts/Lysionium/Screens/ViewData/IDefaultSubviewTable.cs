@@ -2,7 +2,7 @@ namespace Lysionium
 {
     public interface IDefaultSubviewTable
     {
-        public IListHandlerSubview Indicator { get; }
+        public IListHandlerSubview PlayingHud { get; }
         public IListHandlerSubview Scroll { get; }
         public IListHandlerSubview Widgets { get; }
         public IMessageBoxSubview LongMessage { get; }

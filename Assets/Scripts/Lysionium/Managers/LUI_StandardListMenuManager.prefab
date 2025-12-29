@@ -215,7 +215,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _blocker: {fileID: 3869260793036231534}
-  _indicator: {fileID: 1093204432827169414}
+  _playingHud: {fileID: 1093204432827169414}
   _scroll: {fileID: 1556689002913612164}
   _widgets: {fileID: 3815513253355396301}
   _longMessage: {fileID: 3989586082751899086}
@@ -4120,7 +4120,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4495381647456828142, guid: a78d2de924639e947abd970089f6ce12, type: 3}
       propertyPath: m_Name
-      value: IndicatorSubview
+      value: PlayingHudSubview
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

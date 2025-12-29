@@ -9,11 +9,12 @@ namespace Lysionium.Views
     {
         [SerializeField] private Image _blocker = null;
 
-        [SerializeField] private Subview _indicator = null;
-        public Subview Indicator
+        [Tooltip("ゲームプレイ中（メニュー非表示時）だけ表示する Subview 。メニュー表示中も表示させる HUD は Subview の外に追加する")]
+        [SerializeField] private Subview _playingHud = null;
+        public Subview PlayingHud
         {
-            get => _indicator;
-            set => _indicator = value;
+            get => _playingHud;
+            set => _playingHud = value;
         }
 
         [SerializeField] private Subview _scroll = null;
@@ -159,7 +160,7 @@ namespace Lysionium.Views
             LuiAssert.NotInitialized(this, isInitialized);
             isInitialized = true;
 
-            _indicator.CommonInit();
+            _playingHud.CommonInit();
             _scroll.CommonInit();
             _widgets.CommonInit();
             _longMessage.CommonInit();
@@ -180,7 +181,7 @@ namespace Lysionium.Views
 
             Subviews = new Subview[]
             {
-                _indicator,
+                _playingHud,
                 _scroll,
                 _widgets,
                 _longMessage,
