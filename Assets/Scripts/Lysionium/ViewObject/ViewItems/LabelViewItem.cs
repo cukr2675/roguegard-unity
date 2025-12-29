@@ -28,7 +28,7 @@ namespace Lysionium.Views
             }
 
             var style = handler.GetStyle(item, Manager, Arg) ?? _defaultStyle;
-            styleEvaluator.SetParameters(item, handler, Manager, Arg, Parent);
+            styleEvaluator.Bind(item, handler, Manager, Arg, Parent);
             styleEvaluator.SetStyle(style, animator, _keybindLabel);
         }
 

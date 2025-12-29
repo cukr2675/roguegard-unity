@@ -25,7 +25,7 @@ namespace RoguegardUnity
             spriteRendererTransform.localScale = Vector3.one * 8f;
         }
 
-        public override void SetParameters(
+        public override void SetListHandler(
             IReadOnlyList<object> list, IViewItemHandler handler, IListMenuManager manager, IListMenuArg arg,
             ref ISubviewStateProvider stateProvider)
         {

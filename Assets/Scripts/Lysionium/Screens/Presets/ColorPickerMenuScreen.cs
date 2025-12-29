@@ -86,7 +86,7 @@ namespace Lysionium
                 var colorPickerSubview = colorPickerSubviewSelector?.Invoke(manager);
                 if (colorPickerSubview == null) return;
 
-                colorPickerSubview.SetParameters(color, HandleClose, manager, arg, ref colorPickerSubviewStateProvider);
+                colorPickerSubview.SetupColorPicker(color, HandleClose, manager, arg, ref colorPickerSubviewStateProvider);
                 colorPickerSubview.Show();
             }
 

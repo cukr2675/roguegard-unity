@@ -9,7 +9,7 @@ namespace Lysionium
             IListMenuManager manager, IListMenuArg arg, ref ISubviewStateProvider stateProvider,
             ListMenuEventHandler onEndAnimation = null, ListMenuEventHandler onHide = null)
         {
-            subview.SetParameters(list, handler, manager, arg, ref stateProvider);
+            subview.SetListHandler(list, handler, manager, arg, ref stateProvider);
             subview.Show(onEndAnimation, onHide);
         }
 

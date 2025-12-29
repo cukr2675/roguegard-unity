@@ -114,7 +114,7 @@ namespace Lysionium.Views
             return (Vector3)_axisAnchoredPosition + (_axisRotation * Quaternion.Euler(0f, (AngleDegree - t * 360f), 0f) * (Vector3.back * _radius));
         }
 
-        public override void SetParameters(
+        public override void SetListHandler(
             IReadOnlyList<object> list, IViewItemHandler handler, IListMenuManager manager, IListMenuArg arg,
             ref ISubviewStateProvider stateProvider)
         {

@@ -25,7 +25,7 @@ namespace Lysionium.Views
             inputCanceled = ctx => inputActionHandler?.Canceled(item, manager, arg, ctx);
         }
 
-        public void SetParameters(object item, IViewItemHandler handler, IListMenuManager manager, IListMenuArg arg, SubviewBase subview)
+        public void Bind(object item, IViewItemHandler handler, IListMenuManager manager, IListMenuArg arg, SubviewBase subview)
         {
             this.item = item;
             inputActionHandler = handler as IInputActionViewItemHandler;

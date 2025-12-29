@@ -71,7 +71,7 @@ namespace RoguegardUnity
             _nameField.onValueChanged.AddListener(text => characterCreationData.Name = text);
         }
 
-        public override void SetParameters(
+        public override void SetListHandler(
             IReadOnlyList<object> list, IViewItemHandler handler, IListMenuManager manager, IListMenuArg iArg,
             ref ISubviewStateProvider stateProvider)
         {

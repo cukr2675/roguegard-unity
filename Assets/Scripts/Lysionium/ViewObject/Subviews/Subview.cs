@@ -70,7 +70,7 @@ namespace Lysionium.Views
             tempOnHide?.Invoke(Manager, Arg);
         }
 
-        public abstract void SetParameters(
+        public abstract void SetListHandler(
             IReadOnlyList<object> list, IViewItemHandler handler, IListMenuManager manager, IListMenuArg arg,
             ref ISubviewStateProvider stateProvider);
 

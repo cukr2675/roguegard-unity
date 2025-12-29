@@ -79,7 +79,7 @@ namespace Lysionium
 
                 if (List.Count >= 1)
                 {
-                    ChoicesSubviewSelector?.Invoke(manager)?.SetParameters(
+                    ChoicesSubviewSelector?.Invoke(manager)?.SetListHandler(
                         List, SelectOptionViewItemHandler<TMgr, TArg>.Instance, manager, arg, ref choicesSubviewStateProvider);
                     speechBoxSubview.DoScheduledAfterCompletion((manager, arg) =>
                     {

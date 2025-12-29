@@ -25,7 +25,7 @@ namespace Lysionium.Views
         private readonly List<GridViewContainer> viewContainers = new();
         private StateProvider currentStateProvider;
 
-        public override void SetParameters(
+        public override void SetListHandler(
             IReadOnlyList<object> list, IViewItemHandler handler, IListMenuManager manager, IListMenuArg arg,
             ref ISubviewStateProvider stateProvider)
         {

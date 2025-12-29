@@ -20,7 +20,7 @@ namespace RoguegardUnity
         private static readonly StringBuilder mpTextBuilder = new();
         private static readonly RogueNameBuilder nameBuilder = new();
 
-        public override void SetParameters(
+        public override void SetListHandler(
             IReadOnlyList<object> list, IViewItemHandler handler, IListMenuManager manager, IListMenuArg arg,
             ref ISubviewStateProvider stateProvider)
             => new System.NotSupportedException();

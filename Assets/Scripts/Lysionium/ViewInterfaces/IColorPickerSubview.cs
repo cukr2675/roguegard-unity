@@ -6,7 +6,7 @@ namespace Lysionium
     {
         delegate void ColorPickerEventHandler(IListMenuManager manager, IListMenuArg arg, Color color);
 
-        void SetParameters(
+        void SetupColorPicker(
             Color color, ColorPickerEventHandler onClose, IListMenuManager manager, IListMenuArg arg,
             ref ISubviewStateProvider stateProvider);
     }

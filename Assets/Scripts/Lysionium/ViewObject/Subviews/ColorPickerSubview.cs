@@ -22,12 +22,12 @@ namespace Lysionium.Views
             _closeButton.onClick.AddListener(() => onClose?.Invoke(Manager, Arg, _colorPicker.CurrentColor));
         }
 
-        public override void SetParameters(
+        public override void SetListHandler(
             IReadOnlyList<object> list, IViewItemHandler handler, IListMenuManager manager, IListMenuArg arg,
             ref ISubviewStateProvider stateProvider)
             => throw new System.NotSupportedException();
 
-        public void SetParameters(
+        public void SetupColorPicker(
             Color color, IColorPickerSubview.ColorPickerEventHandler onClose, IListMenuManager manager, IListMenuArg arg,
             ref ISubviewStateProvider stateProvider)
         {

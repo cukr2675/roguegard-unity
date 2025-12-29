@@ -39,7 +39,7 @@ namespace Lysionium.Views
             margin = rectTransform.rect.size - rect.size;
         }
 
-        public override void SetParameters(
+        public override void SetListHandler(
             IReadOnlyList<object> list, IViewItemHandler handler, IListMenuManager manager, IListMenuArg arg,
             ref ISubviewStateProvider stateProvider)
         {

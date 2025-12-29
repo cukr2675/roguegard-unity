@@ -13,7 +13,7 @@ namespace RoguegardUnity
 
         public string Text { get => _inputField.text; set => _inputField.SetTextWithoutNotify(value); }
 
-        public override void SetParameters(
+        public override void SetListHandler(
             IReadOnlyList<object> list, IViewItemHandler handler, IListMenuManager manager, IListMenuArg arg,
             ref ISubviewStateProvider stateProvider)
             => throw new System.NotSupportedException();

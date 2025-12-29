@@ -74,7 +74,7 @@ namespace RoguegardUnity
             nameBuilder = new RogueNameBuilder();
         }
 
-        public override void SetParameters(
+        public override void SetListHandler(
             IReadOnlyList<object> list, IViewItemHandler handler, IListMenuManager manager, IListMenuArg arg,
             ref ISubviewStateProvider stateProvider)
         {
