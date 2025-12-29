@@ -119,7 +119,7 @@ namespace Lysionium.Samples
                     parent.SetOriginalList(list, parent.manager, parent.arg);
 
                     // 再バインド対象の Subview のみ更新する（ShowSubviews を呼び出すとダイアログなどで上書きされた他の Subview も更新してしまう）
-                    parent.ScrollSubviewSelector?.Invoke(Manager)?.SetParameters(
+                    parent.ScrollSubviewSelector?.Invoke(Manager)?.SetListHandler(
                         parent.List, parent.scrollSubviewHandler, parent.manager, parent.arg, ref parent.scrollSubviewStateProvider);
                 });
                 return this;

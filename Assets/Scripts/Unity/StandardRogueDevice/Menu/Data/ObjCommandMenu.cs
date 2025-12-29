@@ -53,7 +53,7 @@ namespace RoguegardUnity
             selectOptions.Clear();
             foreach (var command in commands)
             {
-                selectOptions.Add(command.SelectOption);
+                selectOptions.Option(command.SelectOption);
             }
 
             view.Title = StandardRogueDeviceUtility.GetCaption(tool.Main.InfoSet);

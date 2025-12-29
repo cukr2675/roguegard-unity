@@ -60,7 +60,7 @@ namespace Roguegard
 
         public static IJsonSerializationSetting JsonSerialization { get; set; }
 
-        private static readonly SelectOptionList<MMgr, MArg> _dungeonSelectOption = new();
+        private static readonly List<ISelectOption<MMgr, MArg>> _dungeonSelectOption = new();
 
         public static Spanning<ISelectOption<MMgr, MArg>> DungeonSelectOption => Spanning.Get(_dungeonSelectOption);
 

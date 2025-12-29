@@ -63,7 +63,7 @@ namespace Lysionium
 
         public ChoicesMenuScreen<TMgr, TArg> Option(ISelectOption<TMgr, TArg> option)
         {
-            selectOptions.Add(option);
+            selectOptions.Option(option);
             return this;
         }
 

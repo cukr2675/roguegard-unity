@@ -84,16 +84,15 @@ namespace Roguegard.Device
             {
                 view = new()
                 {
-                    BackAnchorList = new()
-                    {
-                        SelectOption.Create<MMgr, MArg>(":Back", (manager, arg) =>
+                    BackAnchorList = new(
+                        _ => _
+                        .Option(":Back", (manager, arg) =>
                         {
                             var startingItemTableCmnProperty = (StartingItemTableCmnProperty)arg.Arg.Other;
                             startingItemTableCmnProperty.Value.Clear();
                             startingItemTableCmnProperty.Value.AddClones(characterCreationData.StartingItemTable);
                             manager.PopMenuScreen();
-                        }, "Cancel")
-                    }
+                        }, "Cancel"))
                 };
             }
 

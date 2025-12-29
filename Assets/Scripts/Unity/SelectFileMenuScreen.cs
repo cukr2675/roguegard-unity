@@ -32,22 +32,24 @@ namespace RoguegardUnity
 
             instance.view = new()
             {
-            };
-            instance.view.BackAnchorList.Insert(0,
-                SelectOption.Create<MMgr, MArg>(":Import", (manager, arg) =>
-                {
-                    manager.PushMenuScreen(importScreen);
-                    RogueFile.Import(StandardRogueDeviceSave.RootDirectory, errorMsg =>
+                BackAnchorList = new(
+                    _ => _
+                    .Option(":Import", (manager, arg) =>
                     {
-                        manager.PopMenuScreen();
-
-                        if (errorMsg != null)
+                        manager.PushMenuScreen(importScreen);
+                        RogueFile.Import(StandardRogueDeviceSave.RootDirectory, errorMsg =>
                         {
-                            ShowErrorMsg(manager, errorMsg);
-                            return;
-                        }
-                    });
-                }, "Submit click:Sp1"));
+                            manager.PopMenuScreen();
+
+                            if (errorMsg != null)
+                            {
+                                ShowErrorMsg(manager, errorMsg);
+                                return;
+                            }
+                        });
+                    }, "Submit click:Sp1")
+                    .Back())
+            };
 
             return instance;
         }

@@ -148,29 +148,30 @@ namespace RoguegardUnity
         /// </summary>
         private class NewGameScreen : RogueMenuScreen
         {
-            private readonly ScrollMenuViewData<object, MMgr, MArg> view;
+            private readonly LoadFadeOutScreen loadFadeOutScreen;
+            private readonly ScrollMenuViewData<object, MMgr, MArg> view = new()
+            {
+                ScrollSubviewSelector = m => m.CharacterCreation,
+            };
 
             public NewGameScreen(LoadFadeOutScreen loadFadeOutScreen)
             {
-                view = new()
-                {
-                    ScrollSubviewSelector = m => m.CharacterCreation,
-                    BackAnchorList = new(
-                        _ => _
-                        .Option(null) // プリセット読み込みボタン（OpenScreen で設定）
-                        .Option(":Done", ChoicesMenuScreen.SaveBackDialog( // キャラクタークリエイト完了ボタン
-                            ":DoneMsg", ":SaveAndStart", (manager, arg) => manager.PushMenuScreen(loadFadeOutScreen, arg),
-                            ":QuitWithoutSaving", null))),
-                };
+                this.loadFadeOutScreen = loadFadeOutScreen;
             }
 
             public override void OpenScreen(MMgr manager, MArg arg)
             {
-                // プリセット読み込みボタンを設定する
-                view.BackAnchorList[0] = manager.CharacterCreation.LoadPresetOption;
-
                 view.Show(System.Array.Empty<object>(), manager, arg)
                     ?
+                    .Init(() =>
+                    {
+                        view.BackAnchorList = new(
+                            _ => _
+                            .Option(manager.CharacterCreation.LoadPresetOption) // プリセット読み込みボタン
+                            .Option(":Done", ChoicesMenuScreen.SaveBackDialog( // キャラクタークリエイト完了ボタン
+                                ":DoneMsg", ":SaveAndStart", (manager, arg) => manager.PushMenuScreen(loadFadeOutScreen, arg),
+                                ":QuitWithoutSaving", null)));
+                    })
                     .Build();
             }
         }

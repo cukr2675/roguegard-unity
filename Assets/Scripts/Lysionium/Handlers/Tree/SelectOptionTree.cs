@@ -37,6 +37,7 @@ namespace Lysionium
             return this;
         }
 
+        public void Clear() => list.Clear();
         public IEnumerator<object> GetEnumerator() => list.GetEnumerator();
         IEnumerator IEnumerable.GetEnumerator() => list.GetEnumerator();
         SelectOptionTree<TMgr, TArg> ISelectOptionListBuilder<TMgr, TArg, SelectOptionTree<TMgr, TArg>>.Option() => this;

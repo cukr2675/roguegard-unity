@@ -29,6 +29,7 @@ namespace Lysionium
             return this;
         }
 
+        public void Clear() => list.Clear();
         public IEnumerator<IKeyOption<TMgr, TArg>> GetEnumerator() => list.GetEnumerator();
         IEnumerator IEnumerable.GetEnumerator() => list.GetEnumerator();
         KeyOptionList<TMgr, TArg> IKeyOptionListBuilder<TMgr, TArg, KeyOptionList<TMgr, TArg>>.Option() => this;
