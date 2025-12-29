@@ -7,14 +7,14 @@ namespace Lysionium.MergeExtensions.R3
 
     internal interface IBusViewItemHandler : IViewItemHandler
     {
-        void OnNext(object item, IListMenuManager manager, IListMenuArg arg, MergedViewItemHandleContext context);
+        void OnNext(object item, IListuiManager manager, IListuiArg arg, MergedViewItemHandleContext context);
 
-        string IViewItemHandler.GetName(object item, IListMenuManager manager, IListMenuArg arg)
+        string IViewItemHandler.GetName(object item, IListuiManager manager, IListuiArg arg)
         {
             return this.GetName(item, manager, arg);
         }
 
-        string IViewItemHandler.GetStyle(object item, IListMenuManager manager, IListMenuArg arg)
+        string IViewItemHandler.GetStyle(object item, IListuiManager manager, IListuiArg arg)
         {
             return string.Empty;
         }
@@ -22,11 +22,11 @@ namespace Lysionium.MergeExtensions.R3
 
     internal class BusViewItemHandler : IBusViewItemHandler, System.IDisposable
     {
-        public Subject<MergedViewItemHandleArg<object, IListMenuManager, IListMenuArg, object, object>> Subject { get; } = new();
+        public Subject<MergedViewItemHandleArg<object, IListuiManager, IListuiArg, object, object>> Subject { get; } = new();
 
-        public void OnNext(object item, IListMenuManager manager, IListMenuArg arg, MergedViewItemHandleContext context)
+        public void OnNext(object item, IListuiManager manager, IListuiArg arg, MergedViewItemHandleContext context)
         {
-            Subject.OnNext(new MergedViewItemHandleArg<object, IListMenuManager, IListMenuArg, object, object>(item, manager, arg, context));
+            Subject.OnNext(new MergedViewItemHandleArg<object, IListuiManager, IListuiArg, object, object>(item, manager, arg, context));
         }
 
         public void Dispose()
@@ -39,7 +39,7 @@ namespace Lysionium.MergeExtensions.R3
     {
         private static readonly Context context = new();
 
-        public static string GetName(this IBusViewItemHandler handler, object item, IListMenuManager manager, IListMenuArg arg)
+        public static string GetName(this IBusViewItemHandler handler, object item, IListuiManager manager, IListuiArg arg)
         {
             lock (context)
             {
@@ -51,7 +51,7 @@ namespace Lysionium.MergeExtensions.R3
         }
 
         public static void NameFrom<TItem, TMgr, TArg>(
-            this Observable<MergedViewItemHandleArg<object, IListMenuManager, IListMenuArg, object, object>> observable, System.Func<TItem, TMgr, TArg, string> getName)
+            this Observable<MergedViewItemHandleArg<object, IListuiManager, IListuiArg, object, object>> observable, System.Func<TItem, TMgr, TArg, string> getName)
         {
             observable.Subscribe(x =>
             {
@@ -72,7 +72,7 @@ namespace Lysionium.MergeExtensions.R3
     {
         private static readonly Context context = new();
 
-        public static void OnClick(this IBusViewItemHandler handler, object item, IListMenuManager manager, IListMenuArg arg)
+        public static void OnClick(this IBusViewItemHandler handler, object item, IListuiManager manager, IListuiArg arg)
         {
             lock (context)
             {
@@ -82,7 +82,7 @@ namespace Lysionium.MergeExtensions.R3
         }
 
         public static void OnClick<TItem, TMgr, TArg>(
-            this Observable<MergedViewItemHandleArg<object, IListMenuManager, IListMenuArg, object, object>> observable, ClickItemHandler<TItem, TMgr, TArg> onClick)
+            this Observable<MergedViewItemHandleArg<object, IListuiManager, IListuiArg, object, object>> observable, ClickItemHandler<TItem, TMgr, TArg> onClick)
         {
             observable.Subscribe(x =>
             {
@@ -101,7 +101,7 @@ namespace Lysionium.MergeExtensions.R3
 
     internal static class LocalAssert
     {
-        public static bool Type<T>(object instance, out T castedInstance, IListMenuManager manager = null)
+        public static bool Type<T>(object instance, out T castedInstance, IListuiManager manager = null)
         {
             if (instance is T tInstance)
             {

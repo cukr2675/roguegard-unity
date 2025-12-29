@@ -4,11 +4,11 @@ namespace Lysionium
 {
     // 誤って使用することを避けるため、省略版は実装しない
     ///// <inheritdoc/>
-    //public class KeyOptionViewItemHandler : KeyOptionViewItemHandler<IListMenuManager, IListMenuArg>
+    //public class KeyOptionViewItemHandler : KeyOptionViewItemHandler<IListuiManager, IListuiArg>
     //{
     //}
     ///// <inheritdoc/>
-    //public class KeyOptionViewItemHandler<TMgr> : KeyOptionViewItemHandler<TMgr, IListMenuArg>
+    //public class KeyOptionViewItemHandler<TMgr> : KeyOptionViewItemHandler<TMgr, IListuiArg>
     //{
     //}
 
@@ -16,7 +16,7 @@ namespace Lysionium
     {
         public static KeyOptionViewItemHandler<TMgr, TArg> Instance { get; } = new();
 
-        public string GetName(object item, IListMenuManager manager, IListMenuArg arg)
+        public string GetName(object item, IListuiManager manager, IListuiArg arg)
         {
             if (LuiAssert.Type<IKeyOption<TMgr, TArg>>(item, out var keyOption) ||
                 LuiAssert.Type<TMgr>(manager, out var tMgr) ||
@@ -25,7 +25,7 @@ namespace Lysionium
             return keyOption.GetName(tMgr, tArg);
         }
 
-        public string GetStyle(object item, IListMenuManager manager, IListMenuArg arg)
+        public string GetStyle(object item, IListuiManager manager, IListuiArg arg)
         {
             if (LuiAssert.Type<IKeyOption<TMgr, TArg>>(item, out var keyOption) ||
                 LuiAssert.Type<TMgr>(manager, out var tMgr) ||
@@ -34,7 +34,7 @@ namespace Lysionium
             return keyOption.GetStyle(tMgr, tArg);
         }
 
-        public void Started(object item, IListMenuManager manager, IListMenuArg arg, InputAction.CallbackContext context)
+        public void Started(object item, IListuiManager manager, IListuiArg arg, InputAction.CallbackContext context)
         {
             if (LuiAssert.Type<IKeyOption<TMgr, TArg>>(item, out var keyOption, manager) ||
                 LuiAssert.Type<TMgr>(manager, out var tMgr, manager) ||
@@ -43,7 +43,7 @@ namespace Lysionium
             keyOption.Started(tMgr, tArg, context);
         }
 
-        public void Performed(object item, IListMenuManager manager, IListMenuArg arg, InputAction.CallbackContext context)
+        public void Performed(object item, IListuiManager manager, IListuiArg arg, InputAction.CallbackContext context)
         {
             if (LuiAssert.Type<IKeyOption<TMgr, TArg>>(item, out var keyOption, manager) ||
                 LuiAssert.Type<TMgr>(manager, out var tMgr, manager) ||
@@ -52,7 +52,7 @@ namespace Lysionium
             keyOption.Performed(tMgr, tArg, context);
         }
 
-        public void Canceled(object item, IListMenuManager manager, IListMenuArg arg, InputAction.CallbackContext context)
+        public void Canceled(object item, IListuiManager manager, IListuiArg arg, InputAction.CallbackContext context)
         {
             if (LuiAssert.Type<IKeyOption<TMgr, TArg>>(item, out var keyOption, manager) ||
                 LuiAssert.Type<TMgr>(manager, out var tMgr, manager) ||

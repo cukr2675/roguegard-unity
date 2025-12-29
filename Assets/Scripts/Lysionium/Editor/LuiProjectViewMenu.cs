@@ -5,9 +5,9 @@ namespace Lysionium.Editor
 {
     internal class LuiProjectViewMenu : AssetModificationProcessor
     {
-        private const string listMenuStartupNewFileName = "NewListMenuStartup.cs";
-        private const string listMenuStartupTemplatePath = "Temp/Lysionium__ListMenuStartup Script-NewListMenuStartup.cs.txt";
-        private const string listMenuStartupTemplateContents =
+        private const string listuiStartupNewFileName = "NewListuiStartup.cs";
+        private const string listuiStartupTemplatePath = "Temp/Lysionium__List UI Startup Script-NewListuiStartup.cs.txt";
+        private const string listuiStartupTemplateContents =
 @"using Lysionium;
 using UnityEngine;
 
@@ -16,24 +16,24 @@ public class #SCRIPTNAME# : MonoBehaviour
 {
     protected virtual void Start()
     {
-        var manager = FindAnyObjectByType<StandardListMenuManager>();
+        var manager = FindAnyObjectByType<StandardListuiManager>();
         manager.Initialize();
-        manager.PushInitialMenuScreen(new MenuScreen(), null);
+        manager.PushInitialScreen(new InitialScreen(), null);
     }
 
-    private class MenuScreen : MenuScreen<StandardListMenuManager>
+    private class InitialScreen : ListuiScreen<StandardListuiManager>
     {
-        private readonly MainMenuViewData<StandardListMenuManager> view = new()
+        private readonly MainMenuViewData<StandardListuiManager> view = new()
         {
         };
 
-        public override void OpenScreen(StandardListMenuManager manager, IListMenuArg arg)
+        public override void OpenScreen(StandardListuiManager manager, IListuiArg arg)
         {
             view.Show(manager, arg)
                 ?
 
-                .Option(""Hello"", new ChoicesMenuScreen<StandardListMenuManager>(""'Hello' was clicked."").Back())
-                .Option(""World"", new ChoicesMenuScreen<StandardListMenuManager>(""'World' was clicked."").Back())
+                .Option(""Hello"", new ChoicesScreen<StandardListuiManager>(""'Hello' was clicked."").Back())
+                .Option(""World"", new ChoicesScreen<StandardListuiManager>(""'World' was clicked."").Back())
 
                 .Build();
         }
@@ -42,26 +42,26 @@ public class #SCRIPTNAME# : MonoBehaviour
 #ROOTNAMESPACEEND#
 ";
 
-        private const string menuScreenNewFileName = "NewMenuScreen.cs";
-        private const string menuScreenTemplatePath = "Temp/Lysionium__MenuScreen Script-NewMenuScreen.cs.txt";
-        private const string menuScreenTemplateContents =
+        private const string listuiScreenNewFileName = "NewListuiScreen.cs";
+        private const string listuiScreenTemplatePath = "Temp/Lysionium__List UI Screen Script-NewListuiScreen.cs.txt";
+        private const string listuiScreenTemplateContents =
 @"using Lysionium;
 using UnityEngine;
 
 #ROOTNAMESPACEBEGIN#
-public class #SCRIPTNAME# : MenuScreen<StandardListMenuManager>
+public class #SCRIPTNAME# : ListuiScreen<StandardListuiManager>
 {
-    private readonly MainMenuViewData<StandardListMenuManager> view = new()
+    private readonly MainMenuViewData<StandardListuiManager> view = new()
     {
     };
 
-    public override void OpenScreen(StandardListMenuManager manager, IListMenuArg arg)
+    public override void OpenScreen(StandardListuiManager manager, IListuiArg arg)
     {
         view.Show(manager, arg)
             ?
 
-            .Option(""Hello"", new ChoicesMenuScreen<StandardListMenuManager>(""'Hello' was clicked."").Back())
-            .Option(""World"", new ChoicesMenuScreen<StandardListMenuManager>(""'World' was clicked."").Back())
+            .Option(""Hello"", new ChoicesScreen<StandardListuiManager>(""'Hello' was clicked."").Back())
+            .Option(""World"", new ChoicesScreen<StandardListuiManager>(""'World' was clicked."").Back())
 
             .Build();
     }
@@ -71,10 +71,10 @@ public class #SCRIPTNAME# : MenuScreen<StandardListMenuManager>
 
         private static System.Action<string> OnCreateClass;
 
-        internal static void CreateListMenuStartupScript(System.Action<string> onCreateClass)
+        internal static void CreateListuiStartupScript(System.Action<string> onCreateClass)
         {
-            File.WriteAllText(listMenuStartupTemplatePath, listMenuStartupTemplateContents); // テンプレートファイルを書き込む
-            ProjectWindowUtil.CreateScriptAssetFromTemplateFile(listMenuStartupTemplatePath, listMenuStartupNewFileName); // スクリプト作成
+            File.WriteAllText(listuiStartupTemplatePath, listuiStartupTemplateContents); // テンプレートファイルを書き込む
+            ProjectWindowUtil.CreateScriptAssetFromTemplateFile(listuiStartupTemplatePath, listuiStartupNewFileName); // スクリプト作成
             OnCreateClass += onCreateClass;
         }
 
@@ -88,18 +88,18 @@ public class #SCRIPTNAME# : MenuScreen<StandardListMenuManager>
             return assetPath;
         }
 
-        [MenuItem("Assets/Create/Lysionium/ListMenuStartup Script")]
-        private static void CreateListMenuStartupScript()
+        [MenuItem("Assets/Create/Lysionium/List-UI Startup Script")]
+        private static void CreateListuiStartupScript()
         {
-            File.WriteAllText(listMenuStartupTemplatePath, listMenuStartupTemplateContents); // テンプレートファイルを書き込む
-            ProjectWindowUtil.CreateScriptAssetFromTemplateFile(listMenuStartupTemplatePath, listMenuStartupNewFileName); // スクリプト作成
+            File.WriteAllText(listuiStartupTemplatePath, listuiStartupTemplateContents); // テンプレートファイルを書き込む
+            ProjectWindowUtil.CreateScriptAssetFromTemplateFile(listuiStartupTemplatePath, listuiStartupNewFileName); // スクリプト作成
         }
 
-        [MenuItem("Assets/Create/Lysionium/MenuScreen Script")]
-        private static void CreateMenuScreenScript()
+        [MenuItem("Assets/Create/Lysionium/List-UI Screen Script")]
+        private static void CreateListuiScreenScript()
         {
-            File.WriteAllText(menuScreenTemplatePath, menuScreenTemplateContents); // テンプレートファイルを書き込む
-            ProjectWindowUtil.CreateScriptAssetFromTemplateFile(menuScreenTemplatePath, menuScreenNewFileName); // スクリプト作成
+            File.WriteAllText(listuiScreenTemplatePath, listuiScreenTemplateContents); // テンプレートファイルを書き込む
+            ProjectWindowUtil.CreateScriptAssetFromTemplateFile(listuiScreenTemplatePath, listuiScreenNewFileName); // スクリプト作成
         }
     }
 }

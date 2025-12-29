@@ -58,10 +58,10 @@ namespace Roguegard.Device
         {
             var manager = (MMgr)iManager;
             var arg = (MArg)iArg;
-            manager.PushMenuScreen(nextMenu, arg.Self, other: editTarget);
+            manager.PushScreen(nextMenu, arg.Self, other: editTarget);
         }
 
-        private class SelectOptionMenu : RogueMenuScreen
+        private class SelectOptionMenu : RogueListuiScreen
         {
             public ICharacterCreationDatabase database;
 
@@ -75,7 +75,7 @@ namespace Roguegard.Device
                 var editTarget = arg.Arg.Other;
 
                 list.Clear();
-                CharacterCreationAddMenu.AddOptionsTo(list, arg.Self, editTarget, database);
+                CharacterCreationAddScreen.AddOptionsTo(list, arg.Self, editTarget, database);
 
                 view.Show(list, manager, arg, editTarget?.GetType())
                     ?
@@ -109,21 +109,21 @@ namespace Roguegard.Device
                         }
                         else if (arg.Arg.Other is StartingItem startingItem)
                         {
-                            CharacterCreationAddMenu.ReceiveStartingItemOptionObj(startingItem.Option, arg.Self);
+                            CharacterCreationAddScreen.ReceiveStartingItemOptionObj(startingItem.Option, arg.Self);
                             startingItem.Option = (IStartingItemOption)item;
-                            CharacterCreationAddMenu.ConsumeStartingItemOptionObj(startingItem.Option, arg.Self);
+                            CharacterCreationAddScreen.ConsumeStartingItemOptionObj(startingItem.Option, arg.Self);
                         }
                         else if (arg.Arg.Other is SingleItemMember singleItemMember)
                         {
-                            CharacterCreationAddMenu.ReceiveStartingItemOptionObj(singleItemMember.ItemOption, arg.Self);
+                            CharacterCreationAddScreen.ReceiveStartingItemOptionObj(singleItemMember.ItemOption, arg.Self);
                             singleItemMember.ItemOption = (IStartingItemOption)item;
-                            CharacterCreationAddMenu.ConsumeStartingItemOptionObj(singleItemMember.ItemOption, arg.Self);
+                            CharacterCreationAddScreen.ConsumeStartingItemOptionObj(singleItemMember.ItemOption, arg.Self);
                         }
                         else if (arg.Arg.Other is AlphabetTypeMember alphabetTypeMember)
                         {
                             alphabetTypeMember.TypeIndex = (int)item;
                         }
-                        manager.PopMenuScreen();
+                        manager.PopScreen();
                     })
 
                     .Build();

@@ -6,14 +6,14 @@ namespace Roguegard
 {
     public class PostboxBeApplied : BaseApplyRogueMethod
     {
-        private static MenuScreen menu;
+        private static PostboxScreen postboxScreen;
 
         public override bool Invoke(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
         {
             if (user == RogueDevice.Primary.Player)
             {
-                menu ??= new MenuScreen();
-                RogueDevice.Primary.AddMenu(menu, user, null, new(tool: self));
+                postboxScreen ??= new PostboxScreen();
+                RogueDevice.Primary.AddScreen(postboxScreen, user, null, new(tool: self));
                 return false;
             }
             else
@@ -22,7 +22,7 @@ namespace Roguegard
             }
         }
 
-        private class MenuScreen : RogueMenuScreen
+        private class PostboxScreen : RogueListuiScreen
         {
             private readonly ScrollMenuViewData<RoguePost, MMgr, MArg> view = new()
             {
@@ -37,13 +37,13 @@ namespace Roguegard
                     .NameFrom((post, manager, arg) => post.Name)
 
                     .VarOnce(out var nextScreen, new DetailsScreen())
-                    .OnClick((post, manager, arg) => manager.PushMenuScreen(nextScreen, other: post))
+                    .OnClick((post, manager, arg) => manager.PushScreen(nextScreen, other: post))
 
                     .Build();
             }
         }
 
-        private class DetailsScreen : RogueMenuScreen
+        private class DetailsScreen : RogueListuiScreen
         {
             private readonly DialogViewData<MMgr, MArg> view = new()
             {

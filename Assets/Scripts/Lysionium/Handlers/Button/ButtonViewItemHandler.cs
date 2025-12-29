@@ -1,8 +1,8 @@
 namespace Lysionium
 {
     public class ButtonViewItemHandler<TItem, TMgr, TArg> : IButtonViewItemHandler
-        where TMgr : IListMenuManager
-        where TArg : IListMenuArg
+        where TMgr : IListuiManager
+        where TArg : IListuiArg
     {
         public System.Func<TItem, TMgr, TArg, string> GetName { get; set; }
         public System.Func<TItem, TMgr, TArg, string> GetStyle { get; set; }
@@ -19,7 +19,7 @@ namespace Lysionium
             EnableSelectOptionProxy = enableSelectOptionProxy;
         }
 
-        string IViewItemHandler.GetName(object item, IListMenuManager manager, IListMenuArg arg)
+        string IViewItemHandler.GetName(object item, IListuiManager manager, IListuiArg arg)
         {
             if (EnableSelectOptionProxy && item is ISelectOption<TMgr, TArg>)
             {
@@ -34,7 +34,7 @@ namespace Lysionium
             else return item?.ToString() ?? "null";
         }
 
-        string IViewItemHandler.GetStyle(object item, IListMenuManager manager, IListMenuArg arg)
+        string IViewItemHandler.GetStyle(object item, IListuiManager manager, IListuiArg arg)
         {
             if (EnableSelectOptionProxy && item is ISelectOption<TMgr, TArg>)
             {
@@ -48,7 +48,7 @@ namespace Lysionium
             return GetStyle?.Invoke(tItem, tMgr, tArg) ?? string.Empty;
         }
 
-        void IButtonViewItemHandler.Click(object item, IListMenuManager manager, IListMenuArg arg)
+        void IButtonViewItemHandler.Click(object item, IListuiManager manager, IListuiArg arg)
         {
             if (EnableSelectOptionProxy && item is ISelectOption<TMgr, TArg>)
             {

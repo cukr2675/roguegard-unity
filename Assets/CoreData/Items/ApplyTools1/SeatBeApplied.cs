@@ -1,13 +1,12 @@
 using Lysionium;
 using Lysionium.MergeExtensions.R3;
 using Roguegard.Device;
-using System.Collections.Generic;
 
 namespace Roguegard
 {
     public class SeatBeApplied : BaseApplyRogueMethod
     {
-        private static readonly MenuScreen menu = new();
+        private static readonly SeatScreen seatScreen = new();
 
         public override bool Invoke(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
         {
@@ -28,14 +27,14 @@ namespace Roguegard
                 }
 
                 // 誰も座っていなかったら座らせるキャラを選択させる
-                RogueDevice.Primary.AddMenu(menu, user, null, new(targetObj: self));
+                RogueDevice.Primary.AddScreen(seatScreen, user, null, new(targetObj: self));
                 return false;
             }
 
             return false;
         }
 
-        private class MenuScreen : RogueMenuScreen
+        private class SeatScreen : RogueListuiScreen
         {
             private readonly ScrollMenuViewData<RogueObj, MMgr, MArg> view = new()
             {

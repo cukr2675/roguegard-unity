@@ -21,7 +21,7 @@ namespace Lysionium.Views
 
         private bool isSpeechingNow;
 
-        private event ListMenuEventHandler OnCompleted;
+        private event ListuiEventHandler OnCompleted;
 
         protected override void CommonInitCore()
         {
@@ -41,7 +41,7 @@ namespace Lysionium.Views
         }
 
         public override void SetListHandler(
-            IReadOnlyList<object> list, IViewItemHandler handler, IListMenuManager manager, IListMenuArg arg,
+            IReadOnlyList<object> list, IViewItemHandler handler, IListuiManager manager, IListuiArg arg,
             ref ISubviewStateProvider stateProvider)
         {
             _messageBox.Clear();
@@ -84,7 +84,7 @@ namespace Lysionium.Views
             _messageBox.Clear();
         }
 
-        public void DoScheduledAfterCompletion(ListMenuEventHandler onEndAnimation)
+        public void DoScheduledAfterCompletion(ListuiEventHandler onEndAnimation)
         {
             OnCompleted += onEndAnimation;
         }

@@ -25,8 +25,8 @@ namespace RoguegardUnity
         [SerializeField] private CharacterCreationButtonViewItem _buttonViewItemPrefab = null;
 
         private CharacterCreationData characterCreationData;
-        private CharacterCreationAddMenu addMenu;
-        private CharacterCreationOptionMenu optionMenu;
+        private CharacterCreationAddScreen addScreen;
+        private CharacterCreationOptionScreen optionScreen;
 
         private IButtonViewItemHandler intrinsicPresenter;
         private IButtonViewItemHandler startingItemPresenter;
@@ -37,11 +37,11 @@ namespace RoguegardUnity
         private MenuRogueObjSpriteRenderer spriteRenderer;
         private ISelectOption<MMgr, MArg> raceSelectOption;
         private ISelectOption<MMgr, MArg> appearanceSelectOption;
-        private AppearanceEditingMenu appearanceEditingMenu;
+        private AppearanceEditingScreen appearanceEditingScreen;
         private readonly List<MonoBehaviour> itemObjects = new();
-        private static readonly LoadPresetMenu loadPresetMenu = new();
+        private static readonly LoadPresetScreen loadPresetScreen = new();
         private static ISelectOption<MMgr, MArg> LoadPresetSelectOption { get; }
-            = SelectOption.Create<MMgr, MArg>(":Load", (manager, arg) => manager.PushMenuScreen(loadPresetMenu, arg));
+            = SelectOption.Create<MMgr, MArg>(":Load", (manager, arg) => manager.PushScreen(loadPresetScreen, arg));
         private static readonly object[] leftAnchorObjs = new object[2];
 
         private readonly List<ViewItem> viewItems = new();
@@ -50,7 +50,7 @@ namespace RoguegardUnity
 
         public void Initialize(RogueSpriteRendererPool rendererPool)
         {
-            appearanceEditingMenu = new AppearanceEditingMenu();
+            appearanceEditingScreen = new AppearanceEditingScreen();
             spriteRenderer = rendererPool.GetMenuRogueSpriteRenderer(_appearanceParent);
             var spriteRendererTransform = spriteRenderer.GetComponent<RectTransform>();
             spriteRendererTransform.anchorMin = spriteRendererTransform.anchorMax = new Vector2(.5f, 0f);
@@ -62,30 +62,30 @@ namespace RoguegardUnity
             _appearanceButton.Initialize(this);
             raceSelectOption = SelectOption.Create<MMgr, MArg>("", (manager, arg) =>
             {
-                manager.PushMenuScreen(optionMenu, arg.Self, other: characterCreationData.Race);
+                manager.PushScreen(optionScreen, arg.Self, other: characterCreationData.Race);
             });
             appearanceSelectOption = SelectOption.Create<MMgr, MArg>("", (manager, arg) =>
             {
-                manager.PushMenuScreen(appearanceEditingMenu, arg.Self, other: characterCreationData);
+                manager.PushScreen(appearanceEditingScreen, arg.Self, other: characterCreationData);
             });
             _nameField.onValueChanged.AddListener(text => characterCreationData.Name = text);
         }
 
         public override void SetListHandler(
-            IReadOnlyList<object> list, IViewItemHandler handler, IListMenuManager manager, IListMenuArg iArg,
+            IReadOnlyList<object> list, IViewItemHandler handler, IListuiManager manager, IListuiArg iArg,
             ref ISubviewStateProvider stateProvider)
         {
             var arg = (MArg)iArg;
             characterCreationData = (CharacterCreationData)arg.Arg.Other;
-            if (addMenu == null)
+            if (addScreen == null)
             {
-                addMenu = new CharacterCreationAddMenu(RoguegardSettings.CharacterCreationDatabase);
-                optionMenu = new CharacterCreationOptionMenu(RoguegardSettings.CharacterCreationDatabase);
+                addScreen = new CharacterCreationAddScreen(RoguegardSettings.CharacterCreationDatabase);
+                optionScreen = new CharacterCreationOptionScreen(RoguegardSettings.CharacterCreationDatabase);
             }
-            addMenu.Set(characterCreationData);
-            optionMenu.Set(characterCreationData);
-            appearanceEditingMenu.NextMenu = optionMenu;
-            appearanceEditingMenu.AddMenu = addMenu;
+            addScreen.Set(characterCreationData);
+            optionScreen.Set(characterCreationData);
+            appearanceEditingScreen.OptionScreen = optionScreen;
+            appearanceEditingScreen.AddScreen = addScreen;
 
             viewItems.Clear();
 
@@ -100,8 +100,8 @@ namespace RoguegardUnity
                     },
                     Click = (intrinsic, manager, arg) =>
                     {
-                        if (intrinsic == null) { manager.PushMenuScreen(addMenu, arg.Self, other: typeof(Intrinsic)); }
-                        else { manager.PushMenuScreen(optionMenu, arg.Self, other: intrinsic); }
+                        if (intrinsic == null) { manager.PushScreen(addScreen, arg.Self, other: typeof(Intrinsic)); }
+                        else { manager.PushScreen(optionScreen, arg.Self, other: intrinsic); }
                     },
                 };
 
@@ -114,8 +114,8 @@ namespace RoguegardUnity
                     },
                     Click = (startingItem, manager, arg) =>
                     {
-                        if (startingItem == null) { manager.PushMenuScreen(addMenu, arg.Self, other: typeof(StartingItem)); }
-                        else { manager.PushMenuScreen(optionMenu, arg.Self, other: startingItem); }
+                        if (startingItem == null) { manager.PushScreen(addScreen, arg.Self, other: typeof(StartingItem)); }
+                        else { manager.PushScreen(optionScreen, arg.Self, other: startingItem); }
                     },
                 };
             }
@@ -221,7 +221,7 @@ namespace RoguegardUnity
             }
         }
 
-        private class LoadPresetMenu : RogueMenuScreen
+        private class LoadPresetScreen : RogueListuiScreen
         {
             private static List<CharacterCreationData> presets;
 
@@ -246,13 +246,13 @@ namespace RoguegardUnity
 
                     .VarOnce(out CharacterCreationData selectedPreset)
                     .VarOnce(
-                        out var nextMenu, new ChoicesMenuScreen("ロードすると 編集中のキャラは消えてしまいますが よろしいですか？")
+                        out var nextScreen, new ChoicesScreen("ロードすると 編集中のキャラは消えてしまいますが よろしいですか？")
                         .Option("ロードする", (manager, arg) => Load(selectedPreset, manager, arg))
                         .Back())
                     .OnClick((preset, manager, arg) =>
                     {
                         selectedPreset = preset;
-                        manager.PushMenuScreen(nextMenu, other: (CharacterCreationData)arg.Arg.Other);
+                        manager.PushScreen(nextScreen, other: (CharacterCreationData)arg.Arg.Other);
                     })
 
                     .Build();
@@ -262,7 +262,7 @@ namespace RoguegardUnity
             {
                 var characterCreationData = (CharacterCreationData)arg.Arg.Other;
                 characterCreationData.Set(selectedPreset);
-                manager.PopMenuScreen(2);
+                manager.PopScreen(2);
             }
         }
     }

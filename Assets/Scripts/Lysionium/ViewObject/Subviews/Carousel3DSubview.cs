@@ -42,7 +42,7 @@ namespace Lysionium.Views
         private float beforeAngleDegree;
         private const float angleDegreeEpsilon = 0.1f;
 
-        private event ListMenuEventHandler OnEndRotateAngle;
+        private event ListuiEventHandler OnEndRotateAngle;
 
         protected override void CommonInitCore()
         {
@@ -53,7 +53,7 @@ namespace Lysionium.Views
         /// <summary>
         /// 指定のインデックスを 0 ~ 要素数 のループ空間に変換して設定する
         /// </summary>
-        public void FocusAngleIndex(int index, ListMenuEventHandler onEndRotateAngle = null)
+        public void FocusAngleIndex(int index, ListuiEventHandler onEndRotateAngle = null)
         {
             AngleIndex = (index + viewItems.Count) % viewItems.Count;
             if (EventSystem != null)
@@ -115,7 +115,7 @@ namespace Lysionium.Views
         }
 
         public override void SetListHandler(
-            IReadOnlyList<object> list, IViewItemHandler handler, IListMenuManager manager, IListMenuArg arg,
+            IReadOnlyList<object> list, IViewItemHandler handler, IListuiManager manager, IListuiArg arg,
             ref ISubviewStateProvider stateProvider)
         {
             if (stateProvider == null) { stateProvider = new StateProvider(); }

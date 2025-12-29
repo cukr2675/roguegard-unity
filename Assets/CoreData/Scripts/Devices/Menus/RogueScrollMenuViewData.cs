@@ -134,7 +134,7 @@ namespace Roguegard.Device
             public System.Func<T, MMgr, MArg, (object, Color?, Sprite, Color?, int?, float?, string, string, bool)> GetInfo { get; set; }
             public ClickItemHandler<T, MMgr, MArg> Click { get; set; }
 
-            public string GetName(object itemObj, IListMenuManager manager, IListMenuArg arg)
+            public string GetName(object itemObj, IListuiManager manager, IListuiArg arg)
             {
                 var item = (T)itemObj;
                 var info = GetInfo(item, (MMgr)manager, (MArg)arg);
@@ -153,9 +153,9 @@ namespace Roguegard.Device
                 if (info.Item4.HasValue) { iconColor = info.Item4.Value; }
             }
 
-            public string GetStyle(object item, IListMenuManager manager, IListMenuArg arg) => string.Empty;
+            public string GetStyle(object item, IListuiManager manager, IListuiArg arg) => string.Empty;
 
-            void IButtonViewItemHandler.Click(object itemObj, IListMenuManager iManager, IListMenuArg iArg)
+            void IButtonViewItemHandler.Click(object itemObj, IListuiManager iManager, IListuiArg iArg)
             {
                 var item = (T)itemObj;
                 var manager = (MMgr)iManager;

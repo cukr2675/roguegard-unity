@@ -11,8 +11,8 @@ namespace Lysionium.Views
     {
         private CanvasGroup canvasGroup;
 
-        protected event ListMenuEventHandler OnEndAnimation;
-        protected event ListMenuEventHandler OnHide;
+        protected event ListuiEventHandler OnEndAnimation;
+        protected event ListuiEventHandler OnHide;
 
         /// <summary>
         /// この Subview 内で最後に選択された <see cref="GameObject"/>
@@ -21,7 +21,7 @@ namespace Lysionium.Views
         protected ViewItem LastSelectedItem { get; private set; }
 
         /// <summary>
-        /// このプロパティが true のとき <see cref="IListMenuManager"/> の動作を停止させる。アニメーションを待機させるために使用する
+        /// このプロパティが true のとき <see cref="IListuiManager"/> の動作を停止させる。アニメーションを待機させるために使用する
         /// </summary>
         public bool HasManagerLock { get; private set; }
 
@@ -58,7 +58,7 @@ namespace Lysionium.Views
 
         /// <summary>
         /// <see cref="CommonInit"/> 内で呼び出すメソッド。
-        /// 言語変更などで <see cref="IListMenuManager.Localize"/> が変わる可能性があるため、
+        /// 言語変更などで <see cref="IListuiManager.Localize"/> が変わる可能性があるため、
         /// このメソッド内で <see cref="ViewItem.Bind"/> を呼び出してはならない
         /// </summary>
         protected virtual void CommonInitCore() { }
@@ -71,7 +71,7 @@ namespace Lysionium.Views
         }
 
         public abstract void SetListHandler(
-            IReadOnlyList<object> list, IViewItemHandler handler, IListMenuManager manager, IListMenuArg arg,
+            IReadOnlyList<object> list, IViewItemHandler handler, IListuiManager manager, IListuiArg arg,
             ref ISubviewStateProvider stateProvider);
 
         /// <summary>
@@ -84,7 +84,7 @@ namespace Lysionium.Views
             canvasGroup.interactable = interactable;
         }
 
-        public virtual void Show(ListMenuEventHandler onEndAnimation = null, ListMenuEventHandler onHide = null)
+        public virtual void Show(ListuiEventHandler onEndAnimation = null, ListuiEventHandler onHide = null)
         {
             var tempOnHide = OnHide;
             OnHide = null;
@@ -97,7 +97,7 @@ namespace Lysionium.Views
             if (onHide != null) { OnHide += onHide; }
         }
 
-        public virtual void Hide(bool back, ListMenuEventHandler onEndAnimation = null)
+        public virtual void Hide(bool back, ListuiEventHandler onEndAnimation = null)
         {
             var tempOnHide = OnHide;
             OnHide = null;

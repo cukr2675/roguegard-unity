@@ -25,7 +25,7 @@ namespace RoguegardUnity
         [SerializeField] private float _width = 10000f;
         [SerializeField] private float _timeScale = 1000f;
 
-        private readonly NewBoneMenuScreen newBoneMenu = new();
+        private readonly NewBoneScreen newBoneScreen = new();
         private const int buttonsCount = 3;
 
         private readonly List<ViewItem> viewItems = new();
@@ -78,7 +78,7 @@ namespace RoguegardUnity
         }
 
         public override void SetListHandler(
-            IReadOnlyList<object> list, IViewItemHandler handler, IListMenuManager manager, IListMenuArg arg,
+            IReadOnlyList<object> list, IViewItemHandler handler, IListuiManager manager, IListuiArg arg,
             ref ISubviewStateProvider stateProvider)
         {
             stateProvider ??= new StateProvider();
@@ -160,7 +160,7 @@ namespace RoguegardUnity
                 header.Initialize(this);
                 header.Bind(new SelectOption<MMgr, MArg>("+ ボーンを追加", (manager, arg) =>
                 {
-                    manager.PushMenuScreen(newBoneMenu, other: editInfo);
+                    manager.PushScreen(newBoneScreen, other: editInfo);
                 }));
                 header.RectTransform.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, y, _itemHeight);
                 header.RectTransform.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Left, 0f, headerWidth);
@@ -170,7 +170,7 @@ namespace RoguegardUnity
             }
             {
                 _menuButton.Bind(new SelectOption<MMgr, MArg>(
-                    "...", (manager, arg) => manager.PushMenuScreen(menuScreen, arg)));
+                    "...", (manager, arg) => manager.PushScreen(menuScreen, arg)));
             }
 
             var scrollRect = _scrollRect.viewport.rect;
@@ -190,12 +190,12 @@ namespace RoguegardUnity
             header.Initialize(this);
             header.Bind(new SelectOption<MMgr, MArg>(name, (manager, arg) =>
             {
-                manager.PushMenuScreen(
-                    new ChoicesMenuScreen($"{name} を削除しますか？")
+                manager.PushScreen(
+                    new ChoicesScreen($"{name} を削除しますか？")
                     .Option(":Yes", (manager, arg) =>
                     {
                         handleRemove(manager, arg);
-                        manager.PopMenuScreen();
+                        manager.PopScreen();
                     })
                     .Back(), arg);
             }));
@@ -243,7 +243,7 @@ namespace RoguegardUnity
             }
         }
 
-        private class NewBoneMenuScreen : RogueMenuScreen
+        private class NewBoneScreen : RogueListuiScreen
         {
             private readonly string[] boneNames = new string[]
             {
@@ -270,18 +270,18 @@ namespace RoguegardUnity
                     ?
                     .NameFrom(boneName => boneName)
 
-                    .VarOnce(out var referenceMenu, new ReferenceNameMenuScreen())
+                    .VarOnce(out var referenceScreen, new ReferenceNameScreen())
                     .OnClick((boneName, manager, arg) =>
                     {
                         var editInfo = (MotionGrapherInfo)arg.Arg.Other;
                         if (boneName == "外部参照")
                         {
-                            manager.PushMenuScreen(referenceMenu, other: editInfo);
+                            manager.PushScreen(referenceScreen, other: editInfo);
                         }
                         else
                         {
                             ((SpriteMotionGrapherTrack)editInfo.Tracks[^1]).AddBone(boneName);
-                            manager.PopMenuScreen();
+                            manager.PopScreen();
                         }
                     })
 
@@ -289,7 +289,7 @@ namespace RoguegardUnity
             }
         }
 
-        private class ReferenceNameMenuScreen : RogueMenuScreen
+        private class ReferenceNameScreen : RogueListuiScreen
         {
             private readonly DialogViewData<MMgr, MArg> view = new()
             {
@@ -312,7 +312,7 @@ namespace RoguegardUnity
                             var newTrack = new SubTimelineMotionGrapherTrack();
                             newTrack.AddClip(new RgpackReferenceTimelineClip() { Id = id });
                             editInfo.InsertTrack(0, newTrack);
-                            manager.PopMenuScreen(2);
+                            manager.PopScreen(2);
                         })),
                         ("1*", BackSelectOption<MMgr, MArg>.Instance)))
 
@@ -320,7 +320,7 @@ namespace RoguegardUnity
             }
         }
 
-        private class MenuScreen : RogueMenuScreen
+        private class MenuScreen : RogueListuiScreen
         {
             private readonly VariableWidgetsMenuViewData<MMgr, MArg> view = new()
             {
@@ -355,7 +355,7 @@ namespace RoguegardUnity
                         var editInfo = (MotionGrapherInfo)arg.Arg.Other;
                         RogueDevice.AddWork(DeviceKw.EnqueueWork, RogueCharacterWork.CreateSpriteMotion(arg.Self, new MotionGrapherSpriteMotion(editInfo), true));
 
-                        manager.PopMenuScreen(2);
+                        manager.PopScreen(2);
                     })
 
                     .Build();

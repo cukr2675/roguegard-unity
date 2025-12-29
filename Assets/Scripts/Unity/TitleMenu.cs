@@ -56,14 +56,14 @@ namespace RoguegardUnity
             _menuController.OnError += () =>
             {
                 // 例外発生時はメニューを開きなおす（操作不能になる可能性があるため）
-                _menuController.PushInitialMenuScreen(new MainScreen(this), enableTouchMask: false);
+                _menuController.PushInitialScreen(new MainScreen(this), enableTouchMask: false);
             };
 
             WindowFrameList.GetWindowFrame(0, out var backgroundA, out var backgroundB);
             var windowColor = ColorPreset.GetColor(0);
             _menuController.SetWindowFrame(backgroundA, backgroundB, windowColor);
 
-            _menuController.PushInitialMenuScreen(new MainScreen(this), enableTouchMask: false);
+            _menuController.PushInitialScreen(new MainScreen(this), enableTouchMask: false);
         }
 
         protected virtual void Update()
@@ -71,7 +71,7 @@ namespace RoguegardUnity
             if (_menuController.IsDone)
             {
                 _menuController.ResetDone();
-                _menuController.PushInitialMenuScreen(new MainScreen(this), enableTouchMask: false);
+                _menuController.PushInitialScreen(new MainScreen(this), enableTouchMask: false);
             }
         }
 
@@ -91,7 +91,7 @@ namespace RoguegardUnity
         /// <summary>
         /// タイトルのメイン画面
         /// </summary>
-        private class MainScreen : RogueMenuScreen
+        private class MainScreen : RogueListuiScreen
         {
             private readonly TitleMenu parent;
             private readonly MainMenuViewData<MMgr, MArg> view;
@@ -111,10 +111,10 @@ namespace RoguegardUnity
                 view.Show(manager, arg)
                     ?
                     .VarOnce(out var loadFadeOutScreen, new LoadFadeOutScreen(parent))
-                    .VarOnce(out var newGameMenu, new NewGameScreen(loadFadeOutScreen))
+                    .VarOnce(out var newGameScreen, new NewGameScreen(loadFadeOutScreen))
 
                     // はじめる
-                    .Option(":Play", SelectFileMenuScreen.Load(
+                    .Option(":Play", FileSelectionScreen.Load(
 
                         // はじめから
                         onNewFile: (manager, arg) =>
@@ -124,14 +124,14 @@ namespace RoguegardUnity
                             MessageWorkListener.ClearListeners();
                             MessageWorkListener.AddListener(new DeviceMessageWorkListener());
                             var player = characterCreationData.CreateObj(null, Vector2Int.zero, RogueRandom.Primary);
-                            manager.PushMenuScreen(newGameMenu, player, null, other: characterCreationData);
+                            manager.PushScreen(newGameScreen, player, null, other: characterCreationData);
                         },
 
                         // つづきから
                         onSelectFile: (fileInfo, manager, arg) =>
                         {
-                            manager.PopMenuScreen();
-                            manager.PushMenuScreen(loadFadeOutScreen, other: fileInfo.FullName);
+                            manager.PopScreen();
+                            manager.PushScreen(loadFadeOutScreen, other: fileInfo.FullName);
                         }))
 
                     // クレジット
@@ -146,7 +146,7 @@ namespace RoguegardUnity
         /// <summary>
         /// ニューゲームのキャラクタークリエイト画面
         /// </summary>
-        private class NewGameScreen : RogueMenuScreen
+        private class NewGameScreen : RogueListuiScreen
         {
             private readonly LoadFadeOutScreen loadFadeOutScreen;
             private readonly ScrollMenuViewData<object, MMgr, MArg> view = new()
@@ -168,8 +168,8 @@ namespace RoguegardUnity
                         view.BackAnchorList = new(
                             _ => _
                             .Option(manager.CharacterCreation.LoadPresetOption) // プリセット読み込みボタン
-                            .Option(":Done", ChoicesMenuScreen.SaveBackDialog( // キャラクタークリエイト完了ボタン
-                                ":DoneMsg", ":SaveAndStart", (manager, arg) => manager.PushMenuScreen(loadFadeOutScreen, arg),
+                            .Option(":Done", ChoicesScreen.SaveBackDialog( // キャラクタークリエイト完了ボタン
+                                ":DoneMsg", ":SaveAndStart", (manager, arg) => manager.PushScreen(loadFadeOutScreen, arg),
                                 ":QuitWithoutSaving", null)));
                     })
                     .Build();
@@ -181,7 +181,7 @@ namespace RoguegardUnity
         /// - ニューゲームのキャラクタークリエイト確定
         /// の後に実行するフェードアウトとシーン切り替えの画面
         /// </summary>
-        private class LoadFadeOutScreen : RogueMenuScreen
+        private class LoadFadeOutScreen : RogueListuiScreen
         {
             private readonly TitleMenu parent;
             private readonly FadeOutInViewData<MMgr, MArg> view;
@@ -240,7 +240,7 @@ namespace RoguegardUnity
         /// <summary>
         /// クレジット一覧画面
         /// </summary>
-        private class CreditListScreen : RogueMenuScreen
+        private class CreditListScreen : RogueListuiScreen
         {
             public IReadOnlyList<CreditData> credits;
 
@@ -258,7 +258,7 @@ namespace RoguegardUnity
                     .VarOnce(out var nextScreen, new CreditDetailsScreen())
                     .OnClick((credit, manager, arg) =>
                     {
-                        manager.PushMenuScreen(nextScreen, other: credit);
+                        manager.PushScreen(nextScreen, other: credit);
                     })
 
                     .Build();
@@ -267,7 +267,7 @@ namespace RoguegardUnity
             /// <summary>
             /// クレジット詳細画面
             /// </summary>
-            private class CreditDetailsScreen : RogueMenuScreen
+            private class CreditDetailsScreen : RogueListuiScreen
             {
                 private readonly DialogViewData<MMgr, MArg> view = new()
                 {
@@ -287,7 +287,7 @@ namespace RoguegardUnity
                         .Tail.Append(ContentSizeMetaWidgetOption.Create(viewWidth))
 
                         .VarOnce(out var nextScreen, new URLDialog())
-                        .OnClickLink((link, manager, arg) => manager.PushMenuScreen(nextScreen, other: link))
+                        .OnClickLink((link, manager, arg) => manager.PushScreen(nextScreen, other: link))
 
                         .Build();
                 }
@@ -296,7 +296,7 @@ namespace RoguegardUnity
             /// <summary>
             /// クレジット詳細の URL クリック時の「{URL} へ移動しますか？」ダイアログ
             /// </summary>
-            private class URLDialog : RogueMenuScreen
+            private class URLDialog : RogueListuiScreen
             {
                 private readonly SpeechBoxViewData<MMgr, MArg> view = new()
                 {
@@ -312,7 +312,7 @@ namespace RoguegardUnity
                         .Option(":Yes", (manager, arg) =>
                         {
                             var url = (string)arg.Arg.Other;
-                            manager.PopMenuScreen();
+                            manager.PopScreen();
                             Application.OpenURL(url);
                         })
 

@@ -3,15 +3,15 @@ using UnityEngine.InputSystem;
 namespace Lysionium
 {
     /// <inheritdoc/>
-    public class KeyOption : KeyOption<IListMenuManager, IListMenuArg>
+    public class KeyOption : KeyOption<IListuiManager, IListuiArg>
     {
         public KeyOption()
         {
         }
 
         public KeyOption(
-            string name, InputItemHandler<IListMenuManager, IListMenuArg> onPerform, string style = null,
-            InputItemHandler<IListMenuManager, IListMenuArg> onStart = null, InputItemHandler<IListMenuManager, IListMenuArg> onCancel = null)
+            string name, InputItemHandler<IListuiManager, IListuiArg> onPerform, string style = null,
+            InputItemHandler<IListuiManager, IListuiArg> onStart = null, InputItemHandler<IListuiManager, IListuiArg> onCancel = null)
             : base(name, onPerform, style, onStart, onCancel)
         {
         }
@@ -19,8 +19,8 @@ namespace Lysionium
         public static KeyOption<TMgr, TArg> Create<TMgr, TArg>(
             string name, InputItemHandler<TMgr, TArg> onPerform, string style, // input 指定子を想定して style は必須にする
             InputItemHandler<TMgr, TArg> onStart = null, InputItemHandler<TMgr, TArg> onCancel = null)
-            where TMgr : IListMenuManager
-            where TArg : IListMenuArg
+            where TMgr : IListuiManager
+            where TArg : IListuiArg
         {
             var instance = new KeyOption<TMgr, TArg>();
             instance.SetName(name);
@@ -34,8 +34,8 @@ namespace Lysionium
         public static KeyOption<TMgr, TArg> Create<TMgr, TArg>(
             System.Func<TMgr, TArg, string> getName, InputItemHandler<TMgr, TArg> onPerform, string style,
             InputItemHandler<TMgr, TArg> onStart = null, InputItemHandler<TMgr, TArg> onCancel = null)
-            where TMgr : IListMenuManager
-            where TArg : IListMenuArg
+            where TMgr : IListuiManager
+            where TArg : IListuiArg
         {
             var instance = new KeyOption<TMgr, TArg>();
             instance.SetName(getName);
@@ -49,8 +49,8 @@ namespace Lysionium
         public static KeyOption<TMgr, TArg> Create<TMgr, TArg>(
             string name, InputItemHandler<TMgr, TArg> onPerform, System.Func<TMgr, TArg, string> style,
             InputItemHandler<TMgr, TArg> onStart = null, InputItemHandler<TMgr, TArg> onCancel = null)
-            where TMgr : IListMenuManager
-            where TArg : IListMenuArg
+            where TMgr : IListuiManager
+            where TArg : IListuiArg
         {
             var instance = new KeyOption<TMgr, TArg>();
             instance.SetName(name);
@@ -64,8 +64,8 @@ namespace Lysionium
         public static KeyOption<TMgr, TArg> Create<TMgr, TArg>(
             System.Func<TMgr, TArg, string> getName, InputItemHandler<TMgr, TArg> onPerform, System.Func<TMgr, TArg, string> style,
             InputItemHandler<TMgr, TArg> onStart = null, InputItemHandler<TMgr, TArg> onCancel = null)
-            where TMgr : IListMenuManager
-            where TArg : IListMenuArg
+            where TMgr : IListuiManager
+            where TArg : IListuiArg
         {
             var instance = new KeyOption<TMgr, TArg>();
             instance.SetName(getName);
@@ -79,8 +79,8 @@ namespace Lysionium
         public static KeyOption<TMgr, TArg> Create<TMgr, TArg>(
             string name, System.Action<InputAction.CallbackContext> onPerform, string style,
             System.Action<InputAction.CallbackContext> onStart = null, System.Action<InputAction.CallbackContext> onCancel = null)
-            where TMgr : IListMenuManager
-            where TArg : IListMenuArg
+            where TMgr : IListuiManager
+            where TArg : IListuiArg
         {
             var instance = new KeyOption<TMgr, TArg>();
             instance.SetName(name);
@@ -94,8 +94,8 @@ namespace Lysionium
         public static KeyOption<TMgr, TArg> Create<TMgr, TArg>(
             System.Func<TMgr, TArg, string> getName, System.Action<InputAction.CallbackContext> onPerform, string style,
             System.Action<InputAction.CallbackContext> onStart = null, System.Action<InputAction.CallbackContext> onCancel = null)
-            where TMgr : IListMenuManager
-            where TArg : IListMenuArg
+            where TMgr : IListuiManager
+            where TArg : IListuiArg
         {
             var instance = new KeyOption<TMgr, TArg>();
             instance.SetName(getName);
@@ -109,8 +109,8 @@ namespace Lysionium
         public static KeyOption<TMgr, TArg> Create<TMgr, TArg>(
             string name, System.Action<InputAction.CallbackContext> onPerform, System.Func<TMgr, TArg, string> style,
             System.Action<InputAction.CallbackContext> onStart = null, System.Action<InputAction.CallbackContext> onCancel = null)
-            where TMgr : IListMenuManager
-            where TArg : IListMenuArg
+            where TMgr : IListuiManager
+            where TArg : IListuiArg
         {
             var instance = new KeyOption<TMgr, TArg>();
             instance.SetName(name);
@@ -124,8 +124,8 @@ namespace Lysionium
         public static KeyOption<TMgr, TArg> Create<TMgr, TArg>(
             System.Func<TMgr, TArg, string> getName, System.Action<InputAction.CallbackContext> onPerform, System.Func<TMgr, TArg, string> style,
             System.Action<InputAction.CallbackContext> onStart = null, System.Action<InputAction.CallbackContext> onCancel = null)
-            where TMgr : IListMenuManager
-            where TArg : IListMenuArg
+            where TMgr : IListuiManager
+            where TArg : IListuiArg
         {
             var instance = new KeyOption<TMgr, TArg>();
             instance.SetName(getName);
@@ -138,15 +138,15 @@ namespace Lysionium
     }
 
     /// <inheritdoc/>
-    public class KeyOption<TMgr> : KeyOption<TMgr, IListMenuArg>
+    public class KeyOption<TMgr> : KeyOption<TMgr, IListuiArg>
     {
         public KeyOption()
         {
         }
 
         public KeyOption(
-            string name, InputItemHandler<TMgr, IListMenuArg> onPerform, string style = null,
-            InputItemHandler<TMgr, IListMenuArg> onStart = null, InputItemHandler<TMgr, IListMenuArg> onCancel = null)
+            string name, InputItemHandler<TMgr, IListuiArg> onPerform, string style = null,
+            InputItemHandler<TMgr, IListuiArg> onStart = null, InputItemHandler<TMgr, IListuiArg> onCancel = null)
             : base(name, onPerform, style, onStart, onCancel)
         {
         }

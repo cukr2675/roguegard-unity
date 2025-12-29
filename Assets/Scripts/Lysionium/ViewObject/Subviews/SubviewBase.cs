@@ -12,13 +12,13 @@ namespace Lysionium.Views
         private EventSystem _eventSystem;
         public EventSystem EventSystem => _eventSystem ? _eventSystem : _eventSystem = LuiUtility.GetEventSystem(this);
 
-        public IListMenuManager Manager { get; private set; }
-        public IListMenuArg Arg { get; private set; }
+        public IListuiManager Manager { get; private set; }
+        public IListuiArg Arg { get; private set; }
 
         private AnimatorTupple animator;
         private KeybindTuple binding;
 
-        protected void SetArg(IListMenuManager manager, IListMenuArg arg)
+        protected void SetArg(IListuiManager manager, IListuiArg arg)
         {
             Manager = manager;
             Arg = arg;

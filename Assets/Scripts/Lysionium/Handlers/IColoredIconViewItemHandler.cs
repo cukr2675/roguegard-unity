@@ -8,6 +8,6 @@ namespace Lysionium
     /// </summary>
     internal interface IColoredIconViewItemHandler : IViewItemHandler
     {
-        void GetIcon(object item, IListMenuManager manager, IListMenuArg arg, out Sprite sprite, out Color color);
+        void GetIcon(object item, IListuiManager manager, IListuiArg arg, out Sprite sprite, out Color color);
     }
 }

@@ -5,15 +5,15 @@ namespace Roguegard
 {
     public class NotepadBeApplied : BaseApplyRogueMethod
     {
-        private static readonly Menu menu = new();
+        private static readonly NotepadScreen notepadScreen = new();
 
         public override bool Invoke(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
         {
-            RogueDevice.Primary.AddMenu(menu, user, null, new(tool: self));
+            RogueDevice.Primary.AddScreen(notepadScreen, user, null, new(tool: self));
             return false;
         }
 
-        private class Menu : RogueMenuScreen
+        private class NotepadScreen : RogueListuiScreen
         {
             private static readonly SelectOptionList<MMgr, MArg> backAnchor = new(
                 _ => _

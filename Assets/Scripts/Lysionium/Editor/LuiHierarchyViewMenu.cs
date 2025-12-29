@@ -9,22 +9,22 @@ namespace Lysionium.Editor
 {
     internal class LuiHierarchyViewMenu : ScriptableObject
     {
-        [SerializeField] private StandardListMenuManager _standardListMenuManagerPrefab;
+        [SerializeField] private StandardListuiManager _standardListuiManagerPrefab;
 
-        [MenuItem("GameObject/UI/Lysionium/List Menu Startup (and script)", false, 2675)]
-        private static void CreateListMenuStartup()
+        [MenuItem("GameObject/UI/Lysionium/List-UI Startup (and script)", false, 2675)]
+        private static void CreateListuiStartup()
         {
-            // StandardListMenuManager が無ければ生成する
-            EnsureStandardListMenuManagerExists();
+            // StandardListuiManager が無ければ生成する
+            EnsureStandardListuiManagerExists();
 
-            // ListMenuStartup コンポーネントをアタッチするためのプレースホルダーオブジェクトを生成する
+            // ListuiStartup コンポーネントをアタッチするためのプレースホルダーオブジェクトを生成する
             var parent = Selection.activeGameObject != null ? Selection.activeGameObject.transform : null;
-            var instance = new GameObject("[ListMenuStartupPlaceholder]");
+            var instance = new GameObject("[List-UI Startup Placeholder]");
             instance.transform.SetParent(parent, false);
-            Undo.RegisterCreatedObjectUndo(instance, $"Create ListMenuStartup");
+            Undo.RegisterCreatedObjectUndo(instance, $"Create List-UI Startup");
 
-            // ListMenuStartup コンポーネントクラスを作成させる
-            LuiProjectViewMenu.CreateListMenuStartupScript(className =>
+            // ListuiStartup コンポーネントクラスを作成させる
+            LuiProjectViewMenu.CreateListuiStartupScript(className =>
             {
                 // 作成後、アタッチするクラスを探すためのヒントオブジェクトを生成する
                 var classNameHintObject = new GameObject(className);
@@ -34,13 +34,13 @@ namespace Lysionium.Editor
 
         // コンパイル後に実行される
         [InitializeOnLoadMethod]
-        private static void AutoAddListMenuStartupComponent()
+        private static void AutoAddListuiStartupComponent()
         {
-            // CreateListMenuStartup() で生成したプレースホルダーオブジェクトを取得する
-            var instance = GameObject.Find("[ListMenuStartupPlaceholder]");
+            // CreateListuiStartup() で生成したプレースホルダーオブジェクトを取得する
+            var instance = GameObject.Find("[List-UI Startup Placeholder]");
             if (instance == null || instance.transform.childCount == 0) return; // 存在しない/不正な状態であれば何もしない
 
-            // CreateListMenuStartup() で生成したヒントオブジェクトを取得し、そこからクラスを取得する
+            // CreateListuiStartup() で生成したヒントオブジェクトを取得し、そこからクラスを取得する
             var classNameHintObject = instance.transform.GetChild(0).gameObject;
             var className = classNameHintObject.name;
             var classType = System.AppDomain.CurrentDomain.GetAssemblies()
@@ -59,19 +59,19 @@ namespace Lysionium.Editor
             Debug.Log($"{instance} に {classType} コンポーネントを追加しました。");
         }
 
-        [MenuItem("GameObject/UI/Lysionium/Standard List Menu Manager", false, 2676)]
-        private static void CreateStandardListMenuManager()
+        [MenuItem("GameObject/UI/Lysionium/Standard List-UI Manager", false, 2676)]
+        private static void CreateStandardListuiManager()
         {
             // EventSystem が無ければ生成する
             EnsureEventSystemExists();
 
-            // プレハブから StandardListMenuManager オブジェクトを生成する
+            // プレハブから StandardListuiManager オブジェクトを生成する
             var hierarchyViewMenu = CreateInstance<LuiHierarchyViewMenu>();
             try
             {
                 var parent = Selection.activeGameObject != null ? Selection.activeGameObject.transform : null;
-                var instance = (StandardListMenuManager)PrefabUtility.InstantiatePrefab(hierarchyViewMenu._standardListMenuManagerPrefab, parent);
-                instance.gameObject.name = "StandardListMenuManager";
+                var instance = (StandardListuiManager)PrefabUtility.InstantiatePrefab(hierarchyViewMenu._standardListuiManagerPrefab, parent);
+                instance.gameObject.name = "StandardListuiManager";
                 Undo.RegisterCreatedObjectUndo(instance.gameObject, $"Create {instance.name}");
             }
             finally
@@ -92,13 +92,13 @@ namespace Lysionium.Editor
             Undo.RegisterCreatedObjectUndo(eventSystem, "Create EventSystem");
         }
 
-        private static void EnsureStandardListMenuManagerExists()
+        private static void EnsureStandardListuiManagerExists()
         {
             if (PrefabStageUtility.GetCurrentPrefabStage() != null) return; // Prefab モード中は何もしない
-            if (FindAnyObjectByType<StandardListMenuManager>() != null) return; // 既にあれば何もしない
+            if (FindAnyObjectByType<StandardListuiManager>() != null) return; // 既にあれば何もしない
 
-            // 存在しなければ StandardListMenuManager を作成
-            CreateStandardListMenuManager();
+            // 存在しなければ StandardListuiManager を作成
+            CreateStandardListuiManager();
         }
     }
 }

@@ -7,8 +7,8 @@ namespace Lysionium
         public static TBuilder Node<TMgr, TArg, TBuilder>(
             this ITreeOptionListBuilder<TMgr, TArg, TBuilder> builder,
             string name, System.Action<SelectOptionTree<TMgr, TArg>> nodeInitializeAction)
-            where TMgr : IListMenuManager
-            where TArg : IListMenuArg
+            where TMgr : IListuiManager
+            where TArg : IListuiArg
         {
             var children = new SelectOptionTree<TMgr, TArg>(nodeInitializeAction);
             return builder.Option(new Option<TMgr, TArg> { name = name, style = null, children = children });
@@ -17,8 +17,8 @@ namespace Lysionium
         public static TBuilder Node<TMgr, TArg, TBuilder>(
             this ITreeOptionListBuilder<TMgr, TArg, TBuilder> builder,
             string name, string style, System.Action<SelectOptionTree<TMgr, TArg>> nodeInitializeAction)
-            where TMgr : IListMenuManager
-            where TArg : IListMenuArg
+            where TMgr : IListuiManager
+            where TArg : IListuiArg
         {
             var children = new SelectOptionTree<TMgr, TArg>(nodeInitializeAction);
             return builder.Option(new Option<TMgr, TArg> { name = name, style = style, children = children });

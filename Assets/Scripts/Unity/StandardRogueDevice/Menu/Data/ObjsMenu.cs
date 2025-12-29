@@ -16,33 +16,36 @@ namespace RoguegardUnity
         /// <summary>
         /// <see cref="RogueMethodArgument.TargetObj"/> のインベントリを開く
         /// </summary>
-        public RogueMenuScreen Items { get; }
+        public RogueListuiScreen Items { get; }
 
         /// <summary>
         /// <see cref="RogueMethodArgument.TargetObj"/> の足元のアイテム一覧を開く
         /// </summary>
-        public RogueMenuScreen Ground { get; }
+        public RogueListuiScreen Ground { get; }
 
-        public RogueMenuScreen PutIntoContainer { get; }
+        public RogueListuiScreen PutIntoContainer { get; }
 
-        public RogueMenuScreen TakeOutOfContainer { get; }
+        public RogueListuiScreen TakeOutOfContainer { get; }
 
-        public ObjsMenu(ObjCommandMenu commandMenu, PutIntoContainerCommandMenu putInCommandMenu, TakeOutOfContainerCommandMenu takeOutCommandMenu)
+        public ObjsMenu(
+            ObjCommandMenuScreen commandMenuScreen,
+            PutIntoContainerCommandMenuScreen putInCommandMenuScreen,
+            TakeOutOfContainerCommandMenuScreen takeOutCommandMenuScreen)
         {
             Close = SelectOption.Create<MMgr, MArg>(":Close", (manager, arg) => manager.Done(), "Cancel");
-            Items = new ItemsMenu() { commandMenu = commandMenu };
-            Ground = new GroundMenu() { commandMenu = commandMenu };
-            PutIntoContainer = new PutIntoContainerMenu() { commandMenu = putInCommandMenu };
-            TakeOutOfContainer = new TakeOutOfContainerMenu() { commandMenu = takeOutCommandMenu };
+            Items = new ItemsScreen() { commandMenuScreen = commandMenuScreen };
+            Ground = new GroundScreen() { commandMenuScreen = commandMenuScreen };
+            PutIntoContainer = new PutIntoContainerScreen() { commandMenuScreen = putInCommandMenuScreen };
+            TakeOutOfContainer = new TakeOutOfContainerScreen() { commandMenuScreen = takeOutCommandMenuScreen };
         }
 
-        private abstract class ScrollMenu : RogueMenuScreen
+        private abstract class BaseScreen : RogueListuiScreen
         {
             protected abstract string Title { get; }
             protected virtual bool Skip0WeightObjs => false;
             protected virtual bool SortIsEnabled => false;
 
-            public RogueMenuScreen commandMenu;
+            public RogueListuiScreen commandMenuScreen;
 
             private static CategorizedSortTable sortTable;
 
@@ -50,7 +53,7 @@ namespace RoguegardUnity
             {
             };
 
-            protected ScrollMenu()
+            protected BaseScreen()
             {
                 view.Title = Title;
                 if (SortIsEnabled)
@@ -88,7 +91,7 @@ namespace RoguegardUnity
                     .OnClick((obj, manager, arg) =>
                     {
                         // 選択したアイテムの情報と選択肢を表示する
-                        manager.PushMenuScreen(commandMenu, arg.Self, null, targetObj: arg.Arg.TargetObj, tool: obj);
+                        manager.PushScreen(commandMenuScreen, arg.Self, null, targetObj: arg.Arg.TargetObj, tool: obj);
                     })
 
                     .Build();
@@ -123,7 +126,7 @@ namespace RoguegardUnity
             }
         }
 
-        private class ItemsMenu : ScrollMenu
+        private class ItemsScreen : BaseScreen
         {
             protected override string Title => ":Inventory";
             protected override bool Skip0WeightObjs => true;
@@ -145,7 +148,7 @@ namespace RoguegardUnity
             }
         }
 
-        private class GroundMenu : ScrollMenu
+        private class GroundScreen : BaseScreen
         {
             protected override string Title => ":Ground";
 
@@ -165,7 +168,7 @@ namespace RoguegardUnity
             }
         }
 
-        private class PutIntoContainerMenu : ScrollMenu
+        private class PutIntoContainerScreen : BaseScreen
         {
             protected override string Title => ":Put in what?";
 
@@ -182,7 +185,7 @@ namespace RoguegardUnity
             }
         }
 
-        private class TakeOutOfContainerMenu : ScrollMenu
+        private class TakeOutOfContainerScreen : BaseScreen
         {
             protected override string Title => ":Take out what?";
             protected override bool SortIsEnabled => true;

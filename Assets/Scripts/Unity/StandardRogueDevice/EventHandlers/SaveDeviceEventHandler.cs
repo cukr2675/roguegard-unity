@@ -12,9 +12,9 @@ namespace RoguegardUnity
     {
         private readonly StandardRogueDeviceComponentManager componentManager;
         private readonly TouchController touchController;
-        private readonly SelectFileMenuScreen writeFileMenu;
-        private readonly SelectFileMenuScreen readFileMenu;
-        private readonly AutoSaveMenu autoSaveMenu;
+        private readonly FileSelectionScreen writeFileScreen;
+        private readonly FileSelectionScreen readFileScreen;
+        private readonly AutoSaveScreen autoSaveScreen;
 
         private IReadOnlyDictionary<string, object> scenarioRgpack;
 
@@ -23,7 +23,7 @@ namespace RoguegardUnity
             this.componentManager = componentManager;
             this.touchController = touchController;
 
-            writeFileMenu = SelectFileMenuScreen.Save(
+            writeFileScreen = FileSelectionScreen.Save(
                 onSelectFile: (fileInfo, manager, arg) =>
                 {
                     SaveDelay(manager, fileInfo.FullName, false, scenarioRgpack);
@@ -31,7 +31,7 @@ namespace RoguegardUnity
                 },
                 onNewFile: (manager, arg) =>
                 {
-                    manager.PopMenuScreen();
+                    manager.PopScreen();
 
                     StandardRogueDeviceSave.GetNewNumberingPath(
                         RoguegardSettings.DefaultSaveFileName, path =>
@@ -41,10 +41,10 @@ namespace RoguegardUnity
                         });
                 });
 
-            readFileMenu = SelectFileMenuScreen.Load(
+            readFileScreen = FileSelectionScreen.Load(
                 onSelectFile: (fileInfo, manager, arg) =>
                 {
-                    manager.PopMenuScreen();
+                    manager.PopScreen();
 
                     // 入力されたパスの Stream を開く
                     StandardRogueDeviceData loadDeviceData;
@@ -60,7 +60,7 @@ namespace RoguegardUnity
                     componentManager.OpenDelay(loadDeviceData);
                 });
 
-            autoSaveMenu = new AutoSaveMenu() { parent = this };
+            autoSaveScreen = new AutoSaveScreen() { parent = this };
         }
 
         bool IStandardRogueDeviceEventHandler.TryHandle(IKeyword keyword, int integer, float number, object obj)
@@ -78,7 +78,7 @@ namespace RoguegardUnity
                 }
 
                 // オートセーブ
-                touchController.OpenMenu(componentManager.Subject, autoSaveMenu, null, null, RogueMethodArgument.Identity);
+                touchController.OpenScreen(componentManager.Subject, autoSaveScreen, null, null, RogueMethodArgument.Identity);
                 return true;
             }
             if (keyword == DeviceKw.SaveGame)
@@ -87,13 +87,13 @@ namespace RoguegardUnity
 
                 // 名前を付けてセーブ
                 this.scenarioRgpack = null;
-                touchController.OpenMenu(componentManager.Subject, writeFileMenu, null, null, RogueMethodArgument.Identity);
+                touchController.OpenScreen(componentManager.Subject, writeFileScreen, null, null, RogueMethodArgument.Identity);
                 return true;
             }
             if (keyword == DeviceKw.LoadGame)
             {
                 // ロード
-                touchController.OpenMenu(componentManager.Subject, readFileMenu, null, null, RogueMethodArgument.Identity);
+                touchController.OpenScreen(componentManager.Subject, readFileScreen, null, null, RogueMethodArgument.Identity);
                 return true;
             }
             if (keyword == DeviceKw.StartPlaytest && obj is IReadOnlyDictionary<string, object> scenarioRgpack)
@@ -102,7 +102,7 @@ namespace RoguegardUnity
 
                 // 名前を付けてテストプレイ
                 this.scenarioRgpack = scenarioRgpack;
-                touchController.OpenMenu(componentManager.Subject, writeFileMenu, null, null, RogueMethodArgument.Identity);
+                touchController.OpenScreen(componentManager.Subject, writeFileScreen, null, null, RogueMethodArgument.Identity);
                 return true;
             }
             return false;
@@ -110,8 +110,8 @@ namespace RoguegardUnity
 
         private void SaveDelay(MMgr manager, string path, bool autoSave, IReadOnlyDictionary<string, object> scenarioRgpack)
         {
-            manager.PopMenuScreen();
-            SelectFileMenuScreen.ShowSaving(manager);
+            manager.PopScreen();
+            FileSelectionScreen.ShowSaving(manager);
             manager.StartCoroutine(Save(manager, path, autoSave, scenarioRgpack));
         }
 
@@ -278,14 +278,14 @@ namespace RoguegardUnity
             }
         }
 
-        private class AutoSaveMenu : RogueMenuScreen
+        private class AutoSaveScreen : RogueListuiScreen
         {
             public SaveDeviceEventHandler parent;
 
             public override void OpenScreen(MMgr inManager, MArg arg)
             {
                 var manager = inManager;
-                SelectFileMenuScreen.ShowSaving(manager);
+                FileSelectionScreen.ShowSaving(manager);
                 StandardRogueDeviceSave.GetNewAutoSavePath("AutoSave.gard", path => parent.SaveDelay(manager, path, true, null));
             }
         }

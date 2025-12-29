@@ -2,7 +2,7 @@ using Lysionium;
 
 namespace Roguegard.Device
 {
-    public abstract class MMgrBase : StandardListMenuManager<MMgrBase, MArg>
+    public abstract class MMgrBase : StandardListuiManager<MMgrBase, MArg>
     {
         /// <summary>
         /// メニュー画面をすべて閉じる

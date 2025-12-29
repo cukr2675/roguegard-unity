@@ -7,7 +7,7 @@ namespace Roguegard.Rgpacks
 {
     public class ChartPadBeApplied : BaseApplyRogueMethod
     {
-        private static Menu menu;
+        private static ChartPadScreen chartPadScreen;
 
         public override bool Invoke(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
         {
@@ -17,19 +17,19 @@ namespace Roguegard.Rgpacks
                 ChartPadInfo.SetTo(self);
             }
 
-            menu ??= new();
-            RogueDevice.Primary.AddMenu(menu, user, null, new(targetObj: self));
+            chartPadScreen ??= new();
+            RogueDevice.Primary.AddScreen(chartPadScreen, user, null, new(targetObj: self));
             return false;
         }
 
-        private class Menu : RogueMenuScreen
+        private class ChartPadScreen : RogueListuiScreen
         {
             private static readonly List<object> list = new();
             private readonly VariableWidgetsMenuViewData<MMgr, MArg> view = new()
             {
             };
 
-            private static readonly PropertiedCmnMenu nextMenu = new();
+            private static readonly PropertiedCmnMenuScreen nextScreen = new();
 
             public override void OpenScreen(MMgr manager, MArg arg)
             {
@@ -42,7 +42,7 @@ namespace Roguegard.Rgpacks
                         cmn.Cmn ?? "[新しいコモンイベント]",
                         (manager, arg) =>
                         {
-                            manager.PushMenuScreen(nextMenu, arg.Self, other: cmn);
+                            manager.PushScreen(nextScreen, arg.Self, other: cmn);
                         }));
                 }
 

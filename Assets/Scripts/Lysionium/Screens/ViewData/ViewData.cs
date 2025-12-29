@@ -9,8 +9,8 @@ namespace Lysionium
     // ViewSetup は Initialize を連想させる
     // ViewPresenter, ViewController はビューに参照されるわけではないので不適切
     public abstract class ViewData<TMgr, TArg>
-        where TMgr : IListMenuManager
-        where TArg : IListMenuArg
+        where TMgr : IListuiManager
+        where TArg : IListuiArg
     {
         private readonly string[] _titleSingle = new string[1];
         protected IReadOnlyList<string> TitleSingle => _titleSingle;

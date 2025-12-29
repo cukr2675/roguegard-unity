@@ -16,8 +16,8 @@ namespace Lysionium.Views
         /// </summary>
         private bool isOutOfRange;
 
-        protected IListMenuManager Manager => Parent.Manager;
-        protected IListMenuArg Arg => Parent.Arg;
+        protected IListuiManager Manager => Parent.Manager;
+        protected IListuiArg Arg => Parent.Arg;
         protected SubviewBase Parent { get; private set; }
 
         private object item;

@@ -52,8 +52,8 @@ namespace RoguegardUnity
                 }
                 else if (other == DeviceKw.EnqueueMenu)
                 {
-                    messageWorkQueue.DequeueMenu(out var menu, out var self, out var user, out var arg);
-                    touchController.OpenMenu(subject, menu, self, user, arg);
+                    messageWorkQueue.DequeueScreen(out var screen, out var self, out var user, out var arg);
+                    touchController.OpenScreen(subject, screen, self, user, arg);
                     break;
                 }
                 else if (other == DeviceKw.EnqueueSE)
@@ -203,9 +203,9 @@ namespace RoguegardUnity
             }
         }
 
-        public void AddMenu(IMenuScreen<MMgrBase, MArg> menu, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+        public void AddScreen(IListuiScreen<MMgrBase, MArg> screen, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         {
-            messageWorkQueue.EnqueueMenu(menu, self, user, arg);
+            messageWorkQueue.EnqueueScreen(screen, self, user, arg);
         }
 
         public void Clear()

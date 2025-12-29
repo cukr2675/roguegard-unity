@@ -6,7 +6,7 @@ namespace Lysionium
     {
         public static TreeOptionViewItemHandler<TMgr, TArg> Instance { get; } = new();
 
-        public string GetName(object item, IListMenuManager manager, IListMenuArg arg)
+        public string GetName(object item, IListuiManager manager, IListuiArg arg)
         {
             if (LuiAssert.Type<ITreeOption<TMgr, TArg>>(item, out var selectOption) ||
                 LuiAssert.Type<TMgr>(manager, out var tMgr) ||
@@ -15,7 +15,7 @@ namespace Lysionium
             return selectOption.GetName(tMgr, tArg);
         }
 
-        public string GetStyle(object item, IListMenuManager manager, IListMenuArg arg)
+        public string GetStyle(object item, IListuiManager manager, IListuiArg arg)
         {
             if (LuiAssert.Type<ITreeOption<TMgr, TArg>>(item, out var selectOption) ||
                 LuiAssert.Type<TMgr>(manager, out var tMgr) ||
@@ -24,7 +24,7 @@ namespace Lysionium
             return selectOption.GetStyle(tMgr, tArg);
         }
 
-        public IReadOnlyList<object> GetChildren(object item, IListMenuManager manager, IListMenuArg arg)
+        public IReadOnlyList<object> GetChildren(object item, IListuiManager manager, IListuiArg arg)
         {
             if (LuiAssert.Type<ITreeOption<TMgr, TArg>>(item, out var selectOption) ||
                 LuiAssert.Type<TMgr>(manager, out var tMgr) ||

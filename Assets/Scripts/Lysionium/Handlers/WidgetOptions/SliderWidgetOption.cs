@@ -24,7 +24,7 @@ namespace Lysionium
             public System.Func<TMgr, TArg, float> GetValue { get; set; }
             public ISliderWidgetOption.SliderEventHandler<TMgr, TArg> HandleValueChanged { get; set; }
 
-            float ISliderWidgetOption.GetValue(IListMenuManager manager, IListMenuArg arg)
+            float ISliderWidgetOption.GetValue(IListuiManager manager, IListuiArg arg)
             {
                 if (LuiAssert.Type<TMgr>(manager, out var tMgr) ||
                     LuiAssert.Type<TArg>(arg, out var tArg)) return 0f;
@@ -32,7 +32,7 @@ namespace Lysionium
                 return GetValue(tMgr, tArg);
             }
 
-            float ISliderWidgetOption.HandleValueChanged(IListMenuManager manager, IListMenuArg arg, float value)
+            float ISliderWidgetOption.HandleValueChanged(IListuiManager manager, IListuiArg arg, float value)
             {
                 if (LuiAssert.Type<TMgr>(manager, out var tMgr) ||
                     LuiAssert.Type<TArg>(arg, out var tArg)) return 0f;

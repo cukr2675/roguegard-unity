@@ -9,13 +9,13 @@ namespace Roguegard
         int ISkillDescribable.RequiredMp => 0;
         Spanning<IKeyword> ISkillDescribable.AmmoCategories => Spanning<IKeyword>.Empty;
 
-        private static readonly PartyBoardMenu menu = new();
+        private static readonly PartyBoardScreen partyBoardScreen = new();
 
         public bool Invoke(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
         {
             if (user == RogueDevice.Primary.Player)
             {
-                RogueDevice.Primary.AddMenu(menu, user, null, RogueMethodArgument.Identity);
+                RogueDevice.Primary.AddScreen(partyBoardScreen, user, null, RogueMethodArgument.Identity);
                 return true;
             }
             else

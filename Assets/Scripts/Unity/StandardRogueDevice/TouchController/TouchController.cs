@@ -30,7 +30,7 @@ namespace RoguegardUnity
         private WalkStopper pointingWalkStopper;
         private WalkStopper dashForwardWalkStopper;
 
-        internal ListMenuEventManager EventManager => _menuController.EventManager;
+        internal RogueListuiEventManager EventManager => _menuController.EventManager;
 
         /// <summary>
         /// 入力待機状態かを取得する。
@@ -377,14 +377,14 @@ namespace RoguegardUnity
             _inputController.ClearInput();
         }
 
-        public void OpenMenu(RogueObj player, IMenuScreen<MMgrBase, MArg> menu, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+        public void OpenScreen(RogueObj player, IListuiScreen<MMgrBase, MArg> screen, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         {
             _inputController.SetEnabled(false);
             _headerController.UpdateHeader(player);
-            _menuController.PushInitialMenuScreen(menu, new MArg.Builder(self, user, arg).ReadOnly);
+            _menuController.PushInitialScreen(screen, new MArg.Builder(self, user, arg).ReadOnly);
         }
 
-        public void CloseMenu()
+        public void CloseScreen()
         {
             _menuController.Done();
         }

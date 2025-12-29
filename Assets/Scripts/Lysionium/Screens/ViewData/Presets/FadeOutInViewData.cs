@@ -3,16 +3,16 @@ using System.Collections.Generic;
 namespace Lysionium
 {
     /// <inheritdoc/>
-    public class FadeOutInViewData<TMgr> : FadeOutInViewData<TMgr, IListMenuArg>
-        where TMgr : IListMenuManager
+    public class FadeOutInViewData<TMgr> : FadeOutInViewData<TMgr, IListuiArg>
+        where TMgr : IListuiManager
     { }
 
     /// <summary>
     /// 画面のフェードアウト/フェードインを扱う ViewData
     /// </summary>
     public class FadeOutInViewData<TMgr, TArg> : ViewData<TMgr, TArg>
-        where TMgr : IListMenuManager
-        where TArg : IListMenuArg
+        where TMgr : IListuiManager
+        where TArg : IListuiArg
     {
         public System.Func<TMgr, IListHandlerSubview> FadeMaskSubviewSelector { get; set; }
             = manager => (manager as IDefaultSubviewTable)?.FadeMask;
@@ -23,8 +23,8 @@ namespace Lysionium
         private event ClickItemHandler<TMgr, TArg> HandleFadeIn;
 
         private readonly List<object> widgetOptions = new();
-        private readonly ListMenuEventHandler onFadeOutAnimation;
-        private readonly ListMenuEventHandler onFadeInAnimation;
+        private readonly ListuiEventHandler onFadeOutAnimation;
+        private readonly ListuiEventHandler onFadeInAnimation;
 
         public FadeOutInViewData()
         {

@@ -7,22 +7,22 @@ namespace Roguegard.Rgpacks
 {
     public class KyarakuriFigurineBeApplied : BaseApplyRogueMethod
     {
-        private static Menu menu;
+        private static KyarakuriFigurineScreen kyarakuriFigurineScreen;
 
         public override bool Invoke(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
         {
-            menu ??= new();
+            kyarakuriFigurineScreen ??= new();
             var characterCreationInfo = KyarakuriFigurineInfo.Get(self);
             if (characterCreationInfo == null)
             {
                 KyarakuriFigurineInfo.SetTo(self, RoguegardSettings.CharacterCreationDatabase.LoadPreset(0));
             }
 
-            RogueDevice.Primary.AddMenu(menu, user, null, new(targetObj: self));
+            RogueDevice.Primary.AddScreen(kyarakuriFigurineScreen, user, null, new(targetObj: self));
             return false;
         }
 
-        private class Menu : RogueMenuScreen
+        private class KyarakuriFigurineScreen : RogueListuiScreen
         {
             private readonly VariableWidgetsMenuViewData<MMgr, MArg> view = new()
             {
@@ -41,19 +41,19 @@ namespace Roguegard.Rgpacks
                             return NamingEffect.Get(figurine).Naming = value;
                         }))
 
-                    .VarOnce(out var nextMenu, new EditMenu())
+                    .VarOnce(out var nextScreen, new EditScreen())
                     .Tail.Option("キャラクリ設定", (manager, arg) =>
                     {
                         var figurine = arg.Arg.TargetObj;
                         var characterCreationData = new CharacterCreationData(KyarakuriFigurineInfo.Get(figurine));
-                        manager.PushMenuScreen(nextMenu, arg.Self, targetObj: figurine, other: characterCreationData);
+                        manager.PushScreen(nextScreen, arg.Self, targetObj: figurine, other: characterCreationData);
                     })
 
                     .Build();
             }
         }
 
-        private class EditMenu : RogueMenuScreen
+        private class EditScreen : RogueListuiScreen
         {
             private readonly ScrollMenuViewData<object, MMgr, MArg> view = new()
             {
@@ -69,7 +69,7 @@ namespace Roguegard.Rgpacks
                         view.BackAnchorList = new(
                             _ => _
                             .Option(manager.CharacterCreation.LoadPresetOption) // プリセット読み込みボタン
-                            .Option(":Done", ChoicesMenuScreen.SaveBackDialog(Save))); // キャラクタークリエイト完了ボタン
+                            .Option(":Done", ChoicesScreen.SaveBackDialog(Save))); // キャラクタークリエイト完了ボタン
                     })
                     .Build();
             }
@@ -83,7 +83,7 @@ namespace Roguegard.Rgpacks
                     KyarakuriFigurineInfo.SetTo(figurine, characterCreationData);
                 }
 
-                manager.PopMenuScreen(2);
+                manager.PopScreen(2);
             }
         }
     }

@@ -1,21 +1,21 @@
 namespace Lysionium
 {
     /// <inheritdoc/>
-    public class SelectOption : SelectOption<IListMenuManager, IListMenuArg>
+    public class SelectOption : SelectOption<IListuiManager, IListuiArg>
     {
         public SelectOption()
         {
         }
 
-        public SelectOption(string name, ClickItemHandler<IListMenuManager, IListMenuArg> onClick, string style = null)
+        public SelectOption(string name, ClickItemHandler<IListuiManager, IListuiArg> onClick, string style = null)
             : base(name, onClick, style)
         {
         }
 
         public static SelectOption<TMgr, TArg> Create<TMgr, TArg>(
             string name, ClickItemHandler<TMgr, TArg> onClick, string style = "")
-            where TMgr : IListMenuManager
-            where TArg : IListMenuArg
+            where TMgr : IListuiManager
+            where TArg : IListuiArg
         {
             var instance = new SelectOption<TMgr, TArg>();
             instance.SetName(name);
@@ -26,8 +26,8 @@ namespace Lysionium
 
         public static SelectOption<TMgr, TArg> Create<TMgr, TArg>(
             System.Func<TMgr, TArg, string> getName, ClickItemHandler<TMgr, TArg> onClick, string style = "")
-            where TMgr : IListMenuManager
-            where TArg : IListMenuArg
+            where TMgr : IListuiManager
+            where TArg : IListuiArg
         {
             var instance = new SelectOption<TMgr, TArg>();
             instance.SetName(getName);
@@ -38,8 +38,8 @@ namespace Lysionium
 
         public static SelectOption<TMgr, TArg> Create<TMgr, TArg>(
             string name, ClickItemHandler<TMgr, TArg> onClick, System.Func<TMgr, TArg, string> style)
-            where TMgr : IListMenuManager
-            where TArg : IListMenuArg
+            where TMgr : IListuiManager
+            where TArg : IListuiArg
         {
             var instance = new SelectOption<TMgr, TArg>();
             instance.SetName(name);
@@ -50,8 +50,8 @@ namespace Lysionium
 
         public static SelectOption<TMgr, TArg> Create<TMgr, TArg>(
             System.Func<TMgr, TArg, string> getName, ClickItemHandler<TMgr, TArg> onClick, System.Func<TMgr, TArg, string> style)
-            where TMgr : IListMenuManager
-            where TArg : IListMenuArg
+            where TMgr : IListuiManager
+            where TArg : IListuiArg
         {
             var instance = new SelectOption<TMgr, TArg>();
             instance.SetName(getName);
@@ -62,13 +62,13 @@ namespace Lysionium
     }
 
     /// <inheritdoc/>
-    public class SelectOption<TMgr> : SelectOption<TMgr, IListMenuArg>
+    public class SelectOption<TMgr> : SelectOption<TMgr, IListuiArg>
     {
         public SelectOption()
         {
         }
 
-        public SelectOption(string name, ClickItemHandler<TMgr, IListMenuArg> onClick, string style = null)
+        public SelectOption(string name, ClickItemHandler<TMgr, IListuiArg> onClick, string style = null)
             : base(name, onClick, style)
         {
         }

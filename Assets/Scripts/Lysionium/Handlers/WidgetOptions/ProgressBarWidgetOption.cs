@@ -16,7 +16,7 @@ namespace Lysionium
             public string Name { get; set; }
             public System.Func<TMgr, TArg, float> GetProgress { get; set; }
 
-            float IProgressBarWidgetOption.GetProgress(IListMenuManager manager, IListMenuArg arg)
+            float IProgressBarWidgetOption.GetProgress(IListuiManager manager, IListuiArg arg)
             {
                 if (LuiAssert.Type<TMgr>(manager, out var tMgr) ||
                     LuiAssert.Type<TArg>(arg, out var tArg)) return 0f;

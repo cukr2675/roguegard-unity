@@ -23,12 +23,12 @@ namespace Lysionium.Views
         }
 
         public override void SetListHandler(
-            IReadOnlyList<object> list, IViewItemHandler handler, IListMenuManager manager, IListMenuArg arg,
+            IReadOnlyList<object> list, IViewItemHandler handler, IListuiManager manager, IListuiArg arg,
             ref ISubviewStateProvider stateProvider)
             => throw new System.NotSupportedException();
 
         public void SetupColorPicker(
-            Color color, IColorPickerSubview.ColorPickerEventHandler onClose, IListMenuManager manager, IListMenuArg arg,
+            Color color, IColorPickerSubview.ColorPickerEventHandler onClose, IListuiManager manager, IListuiArg arg,
             ref ISubviewStateProvider stateProvider)
         {
             stateProvider ??= new StateProvider();

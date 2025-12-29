@@ -12,7 +12,7 @@ namespace RoguegardUnity
     /// <summary>
     /// メインメニュー（開いてすぐのメニュー）
     /// </summary>
-    public class MainMenu : RogueMenuScreen
+    public class MainMenu : RogueListuiScreen
     {
         private readonly ViewData view = new();
 
@@ -34,8 +34,8 @@ namespace RoguegardUnity
             view.Show(manager, arg)
                 ?
                 .Option(":Skills", skillsMenu.Use)
-                .Option(":Items", (manager, arg) => manager.PushMenuScreen(objsMenu.Items, arg.Self, null, targetObj: arg.Self))
-                .Option(":Ground", (manager, arg) => manager.PushMenuScreen(objsMenu.Ground, arg.Self, null, targetObj: arg.Self))
+                .Option(":Items", (manager, arg) => manager.PushScreen(objsMenu.Items, arg.Self, null, targetObj: arg.Self))
+                .Option(":Ground", (manager, arg) => manager.PushScreen(objsMenu.Ground, arg.Self, null, targetObj: arg.Self))
                 .Option(":Party", partyMenu)
                 .Option(":Log", logMenu)
                 .Option(":Others", othersMenu)
@@ -57,7 +57,7 @@ namespace RoguegardUnity
             }
         }
 
-        private class LogMenu : RogueMenuScreen
+        private class LogMenu : RogueListuiScreen
         {
             private readonly MainMenuViewData<MMgr, MArg> view = new()
             {
@@ -73,7 +73,7 @@ namespace RoguegardUnity
             }
         }
 
-        private class OthersMenu : RogueMenuScreen
+        private class OthersMenu : RogueListuiScreen
         {
             private readonly GiveUpMenu giveUpMenu = new();
             private readonly QuestMenu questMenu = new();
@@ -100,7 +100,7 @@ namespace RoguegardUnity
                     })
                     .Option(":GiveUp", (manager, arg) =>
                     {
-                        manager.PushMenuScreen(giveUpMenu, arg);
+                        manager.PushScreen(giveUpMenu, arg);
                     })
                     .Option(":Load", (manager, arg) =>
                     {
@@ -113,7 +113,7 @@ namespace RoguegardUnity
                     {
                         if (DungeonQuestInfo.TryGetQuest(arg.Self, out _))
                         {
-                            manager.PushMenuScreen(questMenu, arg.Self);
+                            manager.PushScreen(questMenu, arg.Self);
                         }
                     })
                     .Option(":Options", optionsMenu)
@@ -121,7 +121,7 @@ namespace RoguegardUnity
                     .Build();
             }
 
-            private class GiveUpMenu : RogueMenuScreen
+            private class GiveUpMenu : RogueListuiScreen
             {
                 private readonly SpeechBoxViewData<MMgr, MArg> view = new()
                 {
@@ -141,7 +141,7 @@ namespace RoguegardUnity
                 }
             }
 
-            private class QuestMenu : RogueMenuScreen
+            private class QuestMenu : RogueListuiScreen
             {
                 public override void OpenScreen(MMgr manager, MArg arg)
                 {
@@ -153,7 +153,7 @@ namespace RoguegardUnity
             }
         }
 
-        private class OptionsMenu : RogueMenuScreen
+        private class OptionsMenu : RogueListuiScreen
         {
             private readonly DialogViewData<MMgr, MArg> view = new()
             {
@@ -193,7 +193,7 @@ namespace RoguegardUnity
                     .Build();
             }
 
-            private class WindowTypeScreen : RogueMenuScreen
+            private class WindowTypeScreen : RogueListuiScreen
             {
                 private readonly List<object> indexList = new();
 
@@ -226,7 +226,7 @@ namespace RoguegardUnity
                             var device = (StandardRogueDevice)RogueDevice.Primary;
                             device.Options.SetWindowFrame(index, device.Options.WindowFrameColor);
 
-                            manager.PopMenuScreen();
+                            manager.PopScreen();
                         })
 
                         .Build();

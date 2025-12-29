@@ -6,19 +6,19 @@ namespace RoguegardUnity
     internal class ContainerDeviceEventHandler : IStandardRogueDeviceEventHandler
     {
         private readonly StandardRogueDeviceComponentManager componentManager;
-        private readonly RogueMenuScreen putIntoContainerMenu;
-        private readonly RogueMenuScreen takeOutOfContainerMenu;
+        private readonly RogueListuiScreen putIntoContainerScreen;
+        private readonly RogueListuiScreen takeOutOfContainerScreen;
 
         public ContainerDeviceEventHandler(StandardRogueDeviceComponentManager componentManager)
         {
             this.componentManager = componentManager;
 
-            var putInCommandMenu = new PutIntoContainerCommandMenu();
-            var takeOutCommandMenu = new TakeOutOfContainerCommandMenu();
-            var objsMenu = new ObjsMenu(null, putInCommandMenu, takeOutCommandMenu);
+            var putInCommandMenuScreen = new PutIntoContainerCommandMenuScreen();
+            var takeOutCommandMenuScreen = new TakeOutOfContainerCommandMenuScreen();
+            var objsMenu = new ObjsMenu(null, putInCommandMenuScreen, takeOutCommandMenuScreen);
 
-            putIntoContainerMenu = objsMenu.PutIntoContainer;
-            takeOutOfContainerMenu = objsMenu.TakeOutOfContainer;
+            putIntoContainerScreen = objsMenu.PutIntoContainer;
+            takeOutOfContainerScreen = objsMenu.TakeOutOfContainer;
         }
 
         bool IStandardRogueDeviceEventHandler.TryHandle(IKeyword keyword, int integer, float number, object obj)
@@ -27,13 +27,13 @@ namespace RoguegardUnity
             if (keyword == StdKw.TakeOutOfContainer && obj is RogueObj takeContainer)
             {
                 // 入れ物からアイテムを取り出す
-                componentManager.EventManager.AddMenu(takeOutOfContainerMenu, player, null, new(targetObj: takeContainer));
+                componentManager.EventManager.AddScreen(takeOutOfContainerScreen, player, null, new(targetObj: takeContainer));
                 return true;
             }
             if (keyword == StdKw.PutIntoContainer && obj is RogueObj putContainer)
             {
                 // 入れ物へアイテムを入れる
-                componentManager.EventManager.AddMenu(putIntoContainerMenu, player, null, new(targetObj: putContainer));
+                componentManager.EventManager.AddScreen(putIntoContainerScreen, player, null, new(targetObj: putContainer));
                 return true;
             }
             return false;

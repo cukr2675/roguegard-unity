@@ -9,15 +9,15 @@ namespace Roguegard
 {
     public class SewingMachineBeApplied : BaseApplyRogueMethod
     {
-        private static readonly Menu menu = new();
+        private static readonly SewingMachineScreen sewingMachineScreen = new();
 
         public override bool Invoke(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
         {
-            RogueDevice.Primary.AddMenu(menu, user, null, RogueMethodArgument.Identity);
+            RogueDevice.Primary.AddScreen(sewingMachineScreen, user, null, RogueMethodArgument.Identity);
             return false;
         }
 
-        private class Menu : RogueMenuScreen
+        private class SewingMachineScreen : RogueListuiScreen
         {
             private readonly ScrollMenuViewData<RogueObj, MMgr, MArg> view = new()
             {
@@ -42,7 +42,7 @@ namespace Roguegard
                         {
                             // 保存せず終了できるように複製する
                             var data = infoSet.GetDataClone();
-                            manager.PushMenuScreen(nextScreen, arg.Self, other: data, targetObj: item);
+                            manager.PushScreen(nextScreen, arg.Self, other: data, targetObj: item);
                         }
                     })
 
@@ -55,19 +55,19 @@ namespace Roguegard
                             data.BoneSprites.SetPalette(i, RoguegardSettings.DefaultPalette[i]);
                         }
                         data.BoneSprites.MainColor = Color.white;
-                        manager.PushMenuScreen(nextScreen, arg.Self, other: data, targetObj: null);
+                        manager.PushScreen(nextScreen, arg.Self, other: data, targetObj: null);
                     })
 
                     .Build();
             }
         }
 
-        private class SewingScreen : RogueMenuScreen
+        private class SewingScreen : RogueListuiScreen
         {
             private readonly ScrollMenuViewData<IPaintBoneSprite, MMgr, MArg> view = new()
             {
                 ScrollSubviewSelector = m => m.Widgets,
-                BackAnchorList = new(_ => _.Option(":Back", ChoicesMenuScreen.SaveBackDialog(Save))),
+                BackAnchorList = new(_ => _.Option(":Back", ChoicesScreen.SaveBackDialog(Save))),
             };
 
             public override void OpenScreen(MMgr manager, MArg arg)
@@ -76,7 +76,7 @@ namespace Roguegard
 
                 view.Show(data.BoneSprites.Items, manager, arg)
                     ?
-                    .VarOnce(out var colorPicker, new ColorPickerMenuScreen<MMgr, MArg>(
+                    .VarOnce(out var colorPicker, new ColorPickerScreen<MMgr, MArg>(
                         (manager, arg) =>
                         {
                             var data = (SewedEquipmentData)arg.Arg.Other;
@@ -107,7 +107,7 @@ namespace Roguegard
                             var data = (SewedEquipmentData)arg.Arg.Other;
                             return $"<#{ColorUtility.ToHtmlStringRGBA(data.BoneSprites.MainColor)}>メインカラー";
                         },
-                        onClick: (manager, arg) => manager.PushMenuScreen(colorPicker, arg)))
+                        onClick: (manager, arg) => manager.PushScreen(colorPicker, arg)))
 
                     .VarOnce(out var equipmentSlotsScreen, new EquipmentSlotsScreen())
                     .Head.Option("装備部位", equipmentSlotsScreen)
@@ -136,12 +136,12 @@ namespace Roguegard
                         else return string.Empty;
                     })
 
-                    .VarOnce(out var nextScreen, new PaintBoneSpriteMenu())
+                    .VarOnce(out var nextScreen, new PaintBoneSpriteMenuScreen())
                     .OnClick((boneSprite, manager, arg) =>
                     {
                         // 部位編集
                         var data = (SewedEquipmentData)arg.Arg.Other;
-                        manager.PushMenuScreen(nextScreen, arg.Self, other: data.BoneSprites, count: data.BoneSprites.IndexOf(boneSprite));
+                        manager.PushScreen(nextScreen, arg.Self, other: data.BoneSprites, count: data.BoneSprites.IndexOf(boneSprite));
                     })
 
                     .Tail.Option("+ 追加", (manager, arg) =>
@@ -154,7 +154,7 @@ namespace Roguegard
                         boneSprite.Bone = BoneKeyword.Body;
                         boneSprite.Mirroring = true;
                         data.BoneSprites.Add(boneSprite);
-                        manager.PushMenuScreen(nextScreen, arg.Self, other: data.BoneSprites, count: data.BoneSprites.IndexOf(boneSprite));
+                        manager.PushScreen(nextScreen, arg.Self, other: data.BoneSprites, count: data.BoneSprites.IndexOf(boneSprite));
                     })
 
                     .Build();
@@ -178,11 +178,11 @@ namespace Roguegard
                     new SewedEquipmentInfoSet(data).CreateObj(arg.Self, Vector2Int.zero);
                 }
 
-                manager.PopMenuScreen(2);
+                manager.PopScreen(2);
             }
         }
 
-        private class EquipmentSlotsScreen : RogueMenuScreen
+        private class EquipmentSlotsScreen : RogueListuiScreen
         {
             private ISerializableKeyword[] keywords;
 
@@ -237,7 +237,7 @@ namespace Roguegard
                             }
                         }
 
-                        manager.PopMenuScreen();
+                        manager.PopScreen();
                     })
 
                     .Build();

@@ -4,9 +4,9 @@ using UnityEngine;
 namespace Lysionium
 {
     /// <inheritdoc/>
-    public class ScrollMenuViewData<TItem, TMgr> : ScrollMenuViewData<TItem, TMgr, IListMenuArg>
+    public class ScrollMenuViewData<TItem, TMgr> : ScrollMenuViewData<TItem, TMgr, IListuiArg>
         where TItem : class
-        where TMgr : IListMenuManager
+        where TMgr : IListuiManager
     { }
 
     /// <summary>
@@ -14,8 +14,8 @@ namespace Lysionium
     /// </summary>
     public class ScrollMenuViewData<TItem, TMgr, TArg> : ListViewData<TItem, TMgr, TArg>
         where TItem : class
-        where TMgr : IListMenuManager
-        where TArg : IListMenuArg
+        where TMgr : IListuiManager
+        where TArg : IListuiArg
     {
         public System.Func<TMgr, IListHandlerSubview> ScrollSubviewSelector { get; set; }
             = manager => (manager as IDefaultSubviewTable)?.Scroll;
@@ -41,8 +41,8 @@ namespace Lysionium
         private ISubviewStateProvider backAnchorSubviewStateProvider;
 
         private readonly ButtonViewItemHandler<TItem, TMgr, TArg> scrollSubviewHandler = new();
-        private ListMenuEventHandler<TMgr, TArg> onShow;
-        private ListMenuEventHandler onHide;
+        private ListuiEventHandler<TMgr, TArg> onShow;
+        private ListuiEventHandler onHide;
 
         public Builder Show(TItem[] list, TMgr manager, TArg arg, object viewStateHolder = null)
         {
@@ -111,7 +111,7 @@ namespace Lysionium
             {
             }
 
-            public Builder OnShow(ListMenuEventHandler<TMgr, TArg> handler)
+            public Builder OnShow(ListuiEventHandler<TMgr, TArg> handler)
             {
                 AssertNotBuilt();
 
@@ -119,7 +119,7 @@ namespace Lysionium
                 return this;
             }
 
-            public Builder OnHide(ListMenuEventHandler<TMgr, TArg> handler)
+            public Builder OnHide(ListuiEventHandler<TMgr, TArg> handler)
             {
                 AssertNotBuilt();
 

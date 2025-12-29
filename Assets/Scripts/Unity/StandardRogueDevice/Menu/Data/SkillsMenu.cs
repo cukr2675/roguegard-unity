@@ -7,7 +7,7 @@ namespace RoguegardUnity
     // スキル選択メニュー。
     public class SkillsMenu
     {
-        public RogueMenuScreen Use { get; }
+        public RogueListuiScreen Use { get; }
 
         public SkillsMenu()
         {
@@ -17,7 +17,7 @@ namespace RoguegardUnity
         /// <summary>
         /// 使うスキルを選択するメニュー
         /// </summary>
-        private class UseMenu : RogueMenuScreen
+        private class UseMenu : RogueListuiScreen
         {
             private readonly RogueScrollMenuViewData<ISkill> view = new()
             {
@@ -25,7 +25,7 @@ namespace RoguegardUnity
             };
 
             private readonly List<ISkill> list = new();
-            private readonly SkillCommandMenu menu = new();
+            private readonly SkillCommandMenuScreen menu = new();
 
             public override void OpenScreen(MMgr manager, MArg arg)
             {
@@ -49,7 +49,7 @@ namespace RoguegardUnity
                     .OnClick((skill, manager, arg) =>
                     {
                         // 選択したスキルの情報と選択肢を表示する
-                        manager.PushMenuScreen(menu, arg.Self, other: skill);
+                        manager.PushScreen(menu, arg.Self, other: skill);
                     })
 
                     .Build();

@@ -33,7 +33,7 @@ namespace Lysionium.Samples
                 new("Spaceキーで変更"),
             };
 
-            _manager.PushInitialMenuScreen(new MainMenu(list), null);
+            _manager.PushInitialScreen(new MainScreen(list), null);
         }
 
         protected virtual void OnEnable()
@@ -86,7 +86,7 @@ namespace Lysionium.Samples
             }
         }
 
-        private class MainMenu : IMenuScreen<ExMgr, ExArg>
+        private class MainScreen : IListuiScreen<ExMgr, ExArg>
         {
             private readonly BindingList<BindingValue> list;
             private readonly BindableScrollMenuViewData<BindingValue, ExMgr, ExArg> view = new()
@@ -94,7 +94,7 @@ namespace Lysionium.Samples
                 BackAnchorSubviewSelector = null,
             };
 
-            public MainMenu(BindingList<BindingValue> list)
+            public MainScreen(BindingList<BindingValue> list)
             {
                 this.list = list;
             }
@@ -111,27 +111,27 @@ namespace Lysionium.Samples
                     // 項目クリック時、削除ダイアログ表示
                     .VarOnce(out BindingValue selectedItem)
                     .VarOnce(
-                        out var removeDialog, new ChoicesMenuScreen<ExMgr, ExArg>((_, _) => $"{selectedItem} を削除しますか？")
+                        out var removeDialog, new ChoicesScreen<ExMgr, ExArg>((_, _) => $"{selectedItem} を削除しますか？")
                         .Option("削除", (manager, _) =>
                         {
                             list.Remove(selectedItem);
-                            manager.PopMenuScreen();
+                            manager.PopScreen();
                         })
                         .Back())
                     .OnClick((item, manager, arg) =>
                     {
                         selectedItem = item;
-                        manager.PushMenuScreen(removeDialog, null);
+                        manager.PushScreen(removeDialog, null);
                     })
 
                     // 追加ボタン押下時、追加ダイアログ表示
-                    .Tail.Option("+ 追加", new AddDialog(name => list.Add(new BindingValue(name))))
+                    .Tail.Option("+ 追加", new AddDialogScreen(name => list.Add(new BindingValue(name))))
 
                     .Build();
             }
         }
 
-        private class AddDialog : IMenuScreen<ExMgr, ExArg>
+        private class AddDialogScreen : IListuiScreen<ExMgr, ExArg>
         {
             private readonly DialogViewData<ExMgr, ExArg> view = new()
             {
@@ -142,7 +142,7 @@ namespace Lysionium.Samples
 
             public bool IsIncremental => true;
 
-            public AddDialog(System.Action<string> onOk)
+            public AddDialogScreen(System.Action<string> onOk)
             {
                 this.onOk = onOk;
             }
@@ -163,7 +163,7 @@ namespace Lysionium.Samples
                         ("1*", SelectOption.Create<ExMgr, ExArg>("登録", (manager, _) =>
                         {
                             onOk?.Invoke(name);
-                            manager.PopMenuScreen();
+                            manager.PopScreen();
                         })),
 
                         // 戻るボタン

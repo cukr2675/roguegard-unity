@@ -68,7 +68,7 @@ namespace Roguegard
             if (selfIsPlayerPartyMember)
             {
                 RogueDevice.Add(DeviceKw.EnqueueSEAndWait, StdKw.LevelUp);
-                RogueDevice.Primary.AddMenu(levelUpBonusScreen, self, null, RogueMethodArgument.Identity);
+                RogueDevice.Primary.AddScreen(levelUpBonusScreen, self, null, RogueMethodArgument.Identity);
             }
 
             // 偶数Lvに上がった時HPを、奇数Lvに上がった時MPを上げる。
@@ -159,7 +159,7 @@ namespace Roguegard
             return initialLv.GetHashCode();
         }
 
-        private class LevelUpBonusScreen : RogueMenuScreen
+        private class LevelUpBonusScreen : RogueListuiScreen
         {
             public string message;
 

@@ -5,11 +5,11 @@ namespace Roguegard
 {
     public class MotionGrapherBeApplied : BaseApplyRogueMethod
     {
-        private static Menu menu;
+        private static MotionGrapherScreen motionGrapherScreen;
 
         public override bool Invoke(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
         {
-            menu ??= new();
+            motionGrapherScreen ??= new();
             var choreographerInfo = MotionGrapherInfo.Get(self);
             if (choreographerInfo == null)
             {
@@ -17,11 +17,11 @@ namespace Roguegard
                 choreographerInfo = MotionGrapherInfo.Get(self);
             }
 
-            RogueDevice.Primary.AddMenu(menu, user, null, new(other: choreographerInfo));
+            RogueDevice.Primary.AddScreen(motionGrapherScreen, user, null, new(other: choreographerInfo));
             return false;
         }
 
-        private class Menu : RogueMenuScreen
+        private class MotionGrapherScreen : RogueListuiScreen
         {
             private ISubviewStateProvider subviewStateProvider;
 

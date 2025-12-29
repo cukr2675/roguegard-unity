@@ -16,7 +16,7 @@ namespace RoguegardUnity
 
         private readonly Queue<object> others;
 
-        private readonly ListMenuQueue menus;
+        private readonly ListuiScreenQueue screens;
         private readonly Stack<RogueObj> hideCharacters;
 
 #if DEBUG
@@ -42,7 +42,7 @@ namespace RoguegardUnity
             integers = new Queue<int>();
             numbers = new Queue<float>();
             others = new Queue<object>();
-            menus = new ListMenuQueue();
+            screens = new ListuiScreenQueue();
             hideCharacters = new Stack<RogueObj>();
             Clear();
         }
@@ -77,10 +77,10 @@ namespace RoguegardUnity
             EnqueueStackTrace();
         }
 
-        public void EnqueueMenu(IMenuScreen<MMgrBase, MArg> menu, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+        public void EnqueueScreen(IListuiScreen<MMgrBase, MArg> screen, RogueObj self, RogueObj user, in RogueMethodArgument arg)
         {
             others.Enqueue(DeviceKw.EnqueueMenu);
-            menus.Enqueue(menu, self, user, arg);
+            screens.Enqueue(screen, self, user, arg);
             EnqueueStackTrace();
         }
 
@@ -141,9 +141,9 @@ namespace RoguegardUnity
 #endif
         }
 
-        public void DequeueMenu(out IMenuScreen<MMgrBase, MArg> menu, out RogueObj self, out RogueObj user, out RogueMethodArgument arg)
+        public void DequeueScreen(out IListuiScreen<MMgrBase, MArg> screen, out RogueObj self, out RogueObj user, out RogueMethodArgument arg)
         {
-            menus.Dequeue(out menu, out self, out user, out arg);
+            screens.Dequeue(out screen, out self, out user, out arg);
         }
 
         private void EnqueueStackTrace()

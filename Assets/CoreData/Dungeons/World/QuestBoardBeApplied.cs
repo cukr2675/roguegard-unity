@@ -14,13 +14,13 @@ namespace Roguegard
         int ISkillDescribable.RequiredMp => 0;
         Spanning<IKeyword> ISkillDescribable.AmmoCategories => Spanning<IKeyword>.Empty;
 
-        private static readonly RogueMenu rogueMenu = new();
+        private static readonly QuestBoardScreen questBoardScreen = new();
 
         public bool Invoke(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
         {
             if (user == RogueDevice.Primary.Player)
             {
-                RogueDevice.Primary.AddMenu(rogueMenu, user, null, RogueMethodArgument.Identity);
+                RogueDevice.Primary.AddScreen(questBoardScreen, user, null, RogueMethodArgument.Identity);
                 return true;
             }
             else
@@ -35,7 +35,7 @@ namespace Roguegard
             return 0;
         }
 
-        public class RogueMenu : RogueMenuScreen
+        public class QuestBoardScreen : RogueListuiScreen
         {
             private static readonly List<DungeonQuest> questList = new();
 
@@ -56,13 +56,13 @@ namespace Roguegard
                     ?
                     .NameFrom(quest => quest.Caption)
 
-                    .VarOnce(out var nextMenu, new QuestViewMenu())
-                    .OnClick((quest, manager, arg) => manager.PushMenuScreen(nextMenu, arg.Self, other: quest))
+                    .VarOnce(out var nextScreen, new QuestSummaryScreen())
+                    .OnClick((quest, manager, arg) => manager.PushScreen(nextScreen, arg.Self, other: quest))
 
                     .Build();
             }
 
-            private class QuestViewMenu : RogueMenuScreen
+            private class QuestSummaryScreen : RogueListuiScreen
             {
                 public override void OpenScreen(MMgr manager, MArg arg)
                 {

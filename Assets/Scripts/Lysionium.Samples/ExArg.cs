@@ -1,8 +1,8 @@
 namespace Lysionium.Samples
 {
-    public class ExArg : IListMenuArg
+    public class ExArg : IListuiArg
     {
-        void IListMenuArg.CopyTo(ref IListMenuArg dest)
+        void IListuiArg.CopyTo(ref IListuiArg dest)
         {
             throw new System.NotImplementedException();
         }

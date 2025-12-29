@@ -3,7 +3,7 @@ using Roguegard.Device;
 
 namespace RoguegardUnity
 {
-    internal class SynchronizeMenu : RogueMenuScreen
+    internal class SynchronizeMenu : RogueListuiScreen
     {
         public bool Interrupt { get; private set; }
         public float Progress { get; set; }

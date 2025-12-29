@@ -4,9 +4,9 @@ using UnityEngine;
 namespace Lysionium
 {
     /// <inheritdoc/>
-    public class DropdownListMenuViewData<TItem, TMgr> : DropdownListMenuViewData<TItem, TMgr, IListMenuArg>
+    public class DropdownListMenuViewData<TItem, TMgr> : DropdownListMenuViewData<TItem, TMgr, IListuiArg>
         where TItem : class
-        where TMgr : IListMenuManager
+        where TMgr : IListuiManager
     { }
 
     /// <summary>
@@ -14,8 +14,8 @@ namespace Lysionium
     /// </summary>
     public class DropdownListMenuViewData<TItem, TMgr, TArg> : TreeViewData<TItem, TMgr, TArg>
         where TItem : class
-        where TMgr : IListMenuManager
-        where TArg : IListMenuArg
+        where TMgr : IListuiManager
+        where TArg : IListuiArg
     {
         public System.Func<TMgr, IListHandlerSubview> DropdownListSubviewSelector { get; set; }
             = manager => (manager as IDefaultSubviewTable)?.DropdownList;
@@ -37,8 +37,8 @@ namespace Lysionium
         private ISubviewStateProvider captionBoxSubviewStateProvider;
 
         private readonly TreeButtonViewItemHandler<TItem, TMgr, TArg> dropdownListSubviewHandler = new();
-        private ListMenuEventHandler<TMgr, TArg> onShow;
-        private ListMenuEventHandler onHide;
+        private ListuiEventHandler<TMgr, TArg> onShow;
+        private ListuiEventHandler onHide;
 
         public Builder Show(TItem[] list, TMgr manager, TArg arg, object viewStateHolder = null)
         {
@@ -105,7 +105,7 @@ namespace Lysionium
             {
             }
 
-            public Builder OnShow(ListMenuEventHandler<TMgr, TArg> handler)
+            public Builder OnShow(ListuiEventHandler<TMgr, TArg> handler)
             {
                 AssertNotBuilt();
 
@@ -113,7 +113,7 @@ namespace Lysionium
                 return this;
             }
 
-            public Builder OnHide(ListMenuEventHandler<TMgr, TArg> handler)
+            public Builder OnHide(ListuiEventHandler<TMgr, TArg> handler)
             {
                 AssertNotBuilt();
 

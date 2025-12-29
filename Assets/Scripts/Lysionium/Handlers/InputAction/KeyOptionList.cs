@@ -4,14 +4,14 @@ using System.Collections.Generic;
 namespace Lysionium
 {
     /// <inheritdoc/>
-    public class KeyOptionList<TMgr> : KeyOptionList<TMgr, IListMenuArg>
-        where TMgr : IListMenuManager
+    public class KeyOptionList<TMgr> : KeyOptionList<TMgr, IListuiArg>
+        where TMgr : IListuiManager
     { }
 
     public class KeyOptionList<TMgr, TArg>
         : IReadOnlyList<IKeyOption<TMgr, TArg>>, IKeyOptionListBuilder<TMgr, TArg, KeyOptionList<TMgr, TArg>>
-        where TMgr : IListMenuManager
-        where TArg : IListMenuArg
+        where TMgr : IListuiManager
+        where TArg : IListuiArg
     {
         private readonly List<IKeyOption<TMgr, TArg>> list = new();
 

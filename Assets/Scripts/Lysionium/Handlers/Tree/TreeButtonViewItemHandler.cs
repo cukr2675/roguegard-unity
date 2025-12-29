@@ -3,8 +3,8 @@ using System.Collections.Generic;
 namespace Lysionium
 {
     public class TreeButtonViewItemHandler<TItem, TMgr, TArg> : IButtonViewItemHandler, ITreeViewItemHandler
-        where TMgr : IListMenuManager
-        where TArg : IListMenuArg
+        where TMgr : IListuiManager
+        where TArg : IListuiArg
     {
         public System.Func<TItem, TMgr, TArg, string> GetName { get; set; }
         public System.Func<TItem, TMgr, TArg, string> GetStyle { get; set; }
@@ -22,7 +22,7 @@ namespace Lysionium
             EnableSelectOptionProxy = enableSelectOptionProxy;
         }
 
-        string IViewItemHandler.GetName(object item, IListMenuManager manager, IListMenuArg arg)
+        string IViewItemHandler.GetName(object item, IListuiManager manager, IListuiArg arg)
         {
             if (EnableSelectOptionProxy && item is ISelectOption<TMgr, TArg>)
                 return SelectOptionViewItemHandler<TMgr, TArg>.Instance.GetName(item, manager, arg);
@@ -37,7 +37,7 @@ namespace Lysionium
             else return item?.ToString() ?? "null";
         }
 
-        string IViewItemHandler.GetStyle(object item, IListMenuManager manager, IListMenuArg arg)
+        string IViewItemHandler.GetStyle(object item, IListuiManager manager, IListuiArg arg)
         {
             if (EnableSelectOptionProxy && item is ISelectOption<TMgr, TArg>)
                 return SelectOptionViewItemHandler<TMgr, TArg>.Instance.GetStyle(item, manager, arg);
@@ -51,7 +51,7 @@ namespace Lysionium
             return GetStyle?.Invoke(tItem, tMgr, tArg) ?? string.Empty;
         }
 
-        IReadOnlyList<object> ITreeViewItemHandler.GetChildren(object item, IListMenuManager manager, IListMenuArg arg)
+        IReadOnlyList<object> ITreeViewItemHandler.GetChildren(object item, IListuiManager manager, IListuiArg arg)
         {
             if (EnableSelectOptionProxy && item is ISelectOption<TMgr, TArg>)
                 return System.Array.Empty<object>();
@@ -65,7 +65,7 @@ namespace Lysionium
             return (IReadOnlyList<object>)GetChildren?.Invoke(tItem, tMgr, tArg) ?? System.Array.Empty<object>();
         }
 
-        void IButtonViewItemHandler.Click(object item, IListMenuManager manager, IListMenuArg arg)
+        void IButtonViewItemHandler.Click(object item, IListuiManager manager, IListuiArg arg)
         {
             if (EnableSelectOptionProxy && item is ISelectOption<TMgr, TArg>)
             {

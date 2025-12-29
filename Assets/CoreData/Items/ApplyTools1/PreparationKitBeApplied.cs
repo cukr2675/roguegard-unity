@@ -8,19 +8,19 @@ namespace Roguegard
     {
         [SerializeField] private CharacterCreationDataAsset _potionInfoSet = null;
 
-        private readonly SelectObjMenuScreen menu;
+        private readonly ObjSelectionScreen objSelectionScreen;
 
         private PreparationKitBeApplied()
         {
             var callback = new SelectedDeviceCommand() { parent = this };
-            menu = new SelectObjMenuScreen(callback);
+            objSelectionScreen = new ObjSelectionScreen(callback);
         }
 
         public override bool Invoke(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
         {
             if (user == RogueDevice.Primary.Player)
             {
-                RogueDevice.Primary.AddMenu(menu, user, null, RogueMethodArgument.Identity);
+                RogueDevice.Primary.AddScreen(objSelectionScreen, user, null, RogueMethodArgument.Identity);
                 return false;
             }
             else

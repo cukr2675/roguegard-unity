@@ -98,12 +98,12 @@ namespace RoguegardUnity
             if (editList is FloatKeyFrameList floatList)
             {
                 floatDialog.SetTarget(floatList, clickTime);
-                MManager.PushMenuScreen(floatDialog);
+                MManager.PushScreen(floatDialog);
             }
             else if (editList is PaintKeyFrameList paintList)
             {
                 paintDialog.SetTarget(editInfo, paintList, clickTime);
-                MManager.PushMenuScreen(paintDialog);
+                MManager.PushScreen(paintDialog);
             }
             else
             {
@@ -111,7 +111,7 @@ namespace RoguegardUnity
             }
         }
 
-        private class FloatDialog : RogueMenuScreen
+        private class FloatDialog : RogueListuiScreen
         {
             private FloatKeyFrameList editList;
             private float targetTime;
@@ -152,7 +152,7 @@ namespace RoguegardUnity
                         {
                             if (value != null) { editList.Set(targetTime, value.Value); }
                             else { editList.Remove(targetTime); }
-                            manager.PopMenuScreen();
+                            manager.PopScreen();
                         })),
                         ("1*", BackSelectOption<MMgr, MArg>.Instance)))
 
@@ -179,13 +179,13 @@ namespace RoguegardUnity
             }
         }
 
-        private class PaintDialog : RogueMenuScreen
+        private class PaintDialog : RogueListuiScreen
         {
             private MotionGrapherInfo editInfo;
             private PaintKeyFrameList editList;
             private float targetTime;
 
-            private readonly PaintMenu nextMenu = new(0);
+            private readonly PaintScreen nextScreen = new(0);
 
             private readonly DialogViewData<MMgr, MArg> view = new()
             {
@@ -213,13 +213,13 @@ namespace RoguegardUnity
                     value = boneSprite;
                     editList.Set(targetTime, value);
                 }
-                nextMenu.SetTarget(editInfo, (PaintBoneSprite)value);
+                nextScreen.SetTarget(editInfo, (PaintBoneSprite)value);
 
                 view.Show(string.Empty, manager, arg)
                     ?
                     .Tail.Option(":Edit", (manager, arg) =>
                     {
-                        manager.PushMenuScreen(nextMenu, arg);
+                        manager.PushScreen(nextScreen, arg);
                     })
 
                     //.Tail.Option(":Delete", (manager, arg) =>
@@ -238,7 +238,7 @@ namespace RoguegardUnity
             }
         }
 
-        private class PaintMenu : RogueMenuScreen
+        private class PaintScreen : RogueListuiScreen
         {
             private readonly int directionIndex;
 
@@ -249,7 +249,7 @@ namespace RoguegardUnity
             private MotionGrapherInfo editInfo;
             private PaintBoneSprite boneSprite;
 
-            public PaintMenu(int directionIndex)
+            public PaintScreen(int directionIndex)
             {
                 if (directionIndex < 0 || 4 <= directionIndex) throw new System.ArgumentOutOfRangeException(nameof(directionIndex));
 
@@ -311,7 +311,7 @@ namespace RoguegardUnity
                     editInfo.SetPalette(i, manager.Paint.Palette[i]);
                 }
 
-                manager.PopMenuScreen();
+                manager.PopScreen();
             }
         }
     }

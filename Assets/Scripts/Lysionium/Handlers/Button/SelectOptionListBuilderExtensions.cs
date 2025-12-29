@@ -6,8 +6,8 @@ namespace Lysionium
     {
         public static TBuilder OptionRange<TMgr, TArg, TBuilder>(
             this ISelectOptionListBuilder<TMgr, TArg, TBuilder> builder, IEnumerable<ISelectOption<TMgr, TArg>> options)
-            where TMgr : IListMenuManager
-            where TArg : IListMenuArg
+            where TMgr : IListuiManager
+            where TArg : IListuiArg
         {
             foreach (var option in options)
             {
@@ -21,8 +21,8 @@ namespace Lysionium
         public static TBuilder Option<TMgr, TArg, TBuilder>(
             this ISelectOptionListBuilder<TMgr, TArg, TBuilder> builder,
             string name, ClickItemHandler<TMgr, TArg> onClick, string style = null)
-            where TMgr : IListMenuManager
-            where TArg : IListMenuArg
+            where TMgr : IListuiManager
+            where TArg : IListuiArg
         {
             return builder.Option(SelectOption.Create(name, onClick, style));
         }
@@ -30,8 +30,8 @@ namespace Lysionium
         public static TBuilder Option<TMgr, TArg, TBuilder>(
             this ISelectOptionListBuilder<TMgr, TArg, TBuilder> builder,
             System.Func<TMgr, TArg, string> getName, ClickItemHandler<TMgr, TArg> onClick, string style = null)
-            where TMgr : IListMenuManager
-            where TArg : IListMenuArg
+            where TMgr : IListuiManager
+            where TArg : IListuiArg
         {
             return builder.Option(SelectOption.Create(getName, onClick, style));
         }

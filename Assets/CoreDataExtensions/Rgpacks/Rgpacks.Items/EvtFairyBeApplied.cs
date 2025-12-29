@@ -7,29 +7,29 @@ namespace Roguegard.Rgpacks
 {
     public class EvtFairyBeApplied : BaseApplyRogueMethod
     {
-        private static Menu menu;
+        private static EvtFairyScreen evtFairyScreen;
 
         public override bool Invoke(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
         {
-            menu ??= new();
+            evtFairyScreen ??= new();
             var characterCreationInfo = EvtFairyInfo.Get(self);
             if (characterCreationInfo == null)
             {
                 EvtFairyInfo.SetTo(self);
             }
 
-            RogueDevice.Primary.AddMenu(menu, user, null, new(targetObj: self));
+            RogueDevice.Primary.AddScreen(evtFairyScreen, user, null, new(targetObj: self));
             return false;
         }
 
-        private class Menu : RogueMenuScreen
+        private class EvtFairyScreen : RogueListuiScreen
         {
             private static readonly List<object> list = new();
             private readonly VariableWidgetsMenuViewData<MMgr, MArg> view = new()
             {
             };
 
-            private static readonly PageMenu nextMenu = new();
+            private static readonly PageScreen nextScreen = new();
 
             public override void OpenScreen(MMgr manager, MArg arg)
             {
@@ -40,7 +40,7 @@ namespace Roguegard.Rgpacks
                 {
                     list.Add(SelectOption.Create<MMgr, MArg>(
                         page.ChartCmn ?? "",
-                        (manager, arg) => { manager.PushMenuScreen(nextMenu, arg.Self, other: page); }));
+                        (manager, arg) => { manager.PushScreen(nextScreen, arg.Self, other: page); }));
                 }
 
                 view.Show(list, manager, arg)
@@ -69,7 +69,7 @@ namespace Roguegard.Rgpacks
             }
         }
 
-        private class PageMenu : RogueMenuScreen
+        private class PageScreen : RogueListuiScreen
         {
             private readonly VariableWidgetsMenuViewData<MMgr, MArg> view = new()
             {
@@ -91,16 +91,16 @@ namespace Roguegard.Rgpacks
                         (manager, arg) => ((EvtFairyInfo.Page)arg.Arg.Other).Sprite,
                         (manager, arg, value) => ((EvtFairyInfo.Page)arg.Arg.Other).Sprite = value))
 
-                    .Tail.Option("カテゴリ", new CategoryMenu())
+                    .Tail.Option("カテゴリ", new CategoryScreen())
 
-                    .VarOnce(out var cmnMenu, new PropertiedCmnMenu())
-                    .Tail.Option("Cmn", (manager, arg) => manager.PushMenuScreen(cmnMenu, arg.Self, other: ((EvtFairyInfo.Page)arg.Arg.Other).Cmn))
+                    .VarOnce(out var cmnScreen, new PropertiedCmnMenuScreen())
+                    .Tail.Option("Cmn", (manager, arg) => manager.PushScreen(cmnScreen, arg.Self, other: ((EvtFairyInfo.Page)arg.Arg.Other).Cmn))
 
                     .Build();
             }
         }
 
-        private class CategoryMenu : RogueMenuScreen
+        private class CategoryScreen : RogueListuiScreen
         {
             private static readonly object[] categories = new object[]
             {
@@ -121,7 +121,7 @@ namespace Roguegard.Rgpacks
                     {
                         var page = (EvtFairyInfo.Page)arg.Arg.Other;
                         page.Category = (EvtFairyCategory)category;
-                        manager.PopMenuScreen();
+                        manager.PopScreen();
                     })
 
                     .Build();

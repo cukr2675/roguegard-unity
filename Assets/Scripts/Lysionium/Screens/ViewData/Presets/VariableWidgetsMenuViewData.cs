@@ -4,16 +4,16 @@ using System.Linq;
 namespace Lysionium
 {
     /// <inheritdoc/>
-    public class VariableWidgetsMenuViewData<TMgr> : VariableWidgetsMenuViewData<TMgr, IListMenuArg>
-        where TMgr : IListMenuManager
+    public class VariableWidgetsMenuViewData<TMgr> : VariableWidgetsMenuViewData<TMgr, IListuiArg>
+        where TMgr : IListuiManager
     { }
 
     /// <summary>
     /// 項目数が可変のウィジェットメニュー向け ViewData
     /// </summary>
     public class VariableWidgetsMenuViewData<TMgr, TArg> : ListViewData<object, TMgr, TArg>
-        where TMgr : IListMenuManager
-        where TArg : IListMenuArg
+        where TMgr : IListuiManager
+        where TArg : IListuiArg
     {
         public System.Func<TMgr, IListHandlerSubview> WidgetsSubviewSelector { get; set; }
             = manager => (manager as IDefaultSubviewTable)?.Widgets;
@@ -108,16 +108,16 @@ namespace Lysionium
     //{
     //    public static VariableWidgetsMenuViewData<TMgr, TArg>.Builder Stack<TMgr, TArg>(
     //        this VariableWidgetsMenuViewData<TMgr, TArg>.Builder.HeadBuilder builder, params object[] items)
-    //        where TMgr : IListMenuManager
-    //        where TArg : IListMenuArg
+    //        where TMgr : IListuiManager
+    //        where TArg : IListuiArg
     //    {
     //        return builder.Append(StackWidgetOption.Create(items.Select(x => ("1*", x)).ToArray()));
     //    }
 
     //    public static VariableWidgetsMenuViewData<TMgr, TArg>.Builder Stack<TMgr, TArg>(
     //        this VariableWidgetsMenuViewData<TMgr, TArg>.Builder.TailBuilder builder, params object[] items)
-    //        where TMgr : IListMenuManager
-    //        where TArg : IListMenuArg
+    //        where TMgr : IListuiManager
+    //        where TArg : IListuiArg
     //    {
     //        return builder.Append(StackWidgetOption.Create(items.Select(x => ("1*", x)).ToArray()));
     //    }

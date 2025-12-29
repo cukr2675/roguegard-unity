@@ -12,9 +12,9 @@ namespace Roguegard.Rgpacks.MoonSharp
     public static class MoonSharpUIUtility
     {
         private static readonly StringBuilder stringBuilder = new();
-        private static readonly SpeechMenu speechMenu = new();
-        private static readonly ChoicesMenu choicesMenu = new();
-        private static readonly FadeOutMenu fadeOutMenu = new();
+        private static readonly SpeechScreen speechScreen = new();
+        private static readonly ChoicesScreen choicesScreen = new();
+        private static readonly FadeOutScreen fadeOutScreen = new();
 
         public static void Say(string text, ScriptExecutionContext executionContext, RogueObj faceObj = null, string facialId = null)
         {
@@ -82,40 +82,40 @@ namespace Roguegard.Rgpacks.MoonSharp
             }
 
             // 会話が読まれるまで待機
-            speechMenu.coroutine = executionContext.GetCallingCoroutine();
-            speechMenu.message = stringBuilder.ToString();
-            RogueDevice.Primary.AddMenu(speechMenu, null, null, new(targetObj: faceObj, other: facial));
+            speechScreen.coroutine = executionContext.GetCallingCoroutine();
+            speechScreen.message = stringBuilder.ToString();
+            RogueDevice.Primary.AddScreen(speechScreen, null, null, new(targetObj: faceObj, other: facial));
         }
 
         public static void Choices(Table selectOptions, ScriptExecutionContext executionContext)
         {
             // 選択肢が選択されるまで待機
-            choicesMenu.coroutine = executionContext.GetCallingCoroutine();
-            choicesMenu.selectOptions.Clear();
+            choicesScreen.coroutine = executionContext.GetCallingCoroutine();
+            choicesScreen.selectOptions.Clear();
             foreach (var selectOption in selectOptions.Values)
             {
-                choicesMenu.selectOptions.Add(selectOption.CastToString());
+                choicesScreen.selectOptions.Add(selectOption.CastToString());
             }
-            RogueDevice.Primary.AddMenu(choicesMenu, null, null, RogueMethodArgument.Identity);
+            RogueDevice.Primary.AddScreen(choicesScreen, null, null, RogueMethodArgument.Identity);
         }
 
         public static void FadeOut(ScriptExecutionContext executionContext)
         {
             // 選択肢が選択されるまで待機
-            fadeOutMenu.coroutine = executionContext.GetCallingCoroutine();
-            fadeOutMenu.fadeIn = false;
-            RogueDevice.Primary.AddMenu(fadeOutMenu, null, null, RogueMethodArgument.Identity);
+            fadeOutScreen.coroutine = executionContext.GetCallingCoroutine();
+            fadeOutScreen.fadeIn = false;
+            RogueDevice.Primary.AddScreen(fadeOutScreen, null, null, RogueMethodArgument.Identity);
         }
 
         public static void FadeIn(ScriptExecutionContext executionContext)
         {
             // 選択肢が選択されるまで待機
-            fadeOutMenu.coroutine = executionContext.GetCallingCoroutine();
-            fadeOutMenu.fadeIn = true;
-            fadeOutMenu.fadeInAction();
+            fadeOutScreen.coroutine = executionContext.GetCallingCoroutine();
+            fadeOutScreen.fadeIn = true;
+            fadeOutScreen.fadeInAction();
         }
 
-        private class SpeechMenu : RogueMenuScreen
+        private class SpeechScreen : RogueListuiScreen
         {
             public global::MoonSharp.Interpreter.Coroutine coroutine;
             public string message;
@@ -191,7 +191,7 @@ namespace Roguegard.Rgpacks.MoonSharp
             }
         }
 
-        private class ChoicesMenu : RogueMenuScreen
+        private class ChoicesScreen : RogueListuiScreen
         {
             public global::MoonSharp.Interpreter.Coroutine coroutine;
             public List<string> selectOptions = new();
@@ -225,7 +225,7 @@ namespace Roguegard.Rgpacks.MoonSharp
 
                         if (coroutine.State == CoroutineState.Dead)
                         {
-                            SpeechMenu.isOpened = false;
+                            SpeechScreen.isOpened = false;
                         }
                     })
 
@@ -240,7 +240,7 @@ namespace Roguegard.Rgpacks.MoonSharp
             }
         }
 
-        private class FadeOutMenu : RogueMenuScreen
+        private class FadeOutScreen : RogueListuiScreen
         {
             public global::MoonSharp.Interpreter.Coroutine coroutine;
             public bool fadeIn;
@@ -257,7 +257,7 @@ namespace Roguegard.Rgpacks.MoonSharp
                 if (fadeInAction == null)
                 {
                     var actionManager = manager;
-                    fadeInAction = () => actionManager.PopMenuScreen();
+                    fadeInAction = () => actionManager.PopScreen();
                 }
 
                 view.FadeOut(manager, arg)

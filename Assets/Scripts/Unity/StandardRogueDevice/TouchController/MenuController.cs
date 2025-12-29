@@ -40,7 +40,7 @@ namespace RoguegardUnity
 
         public event System.Action OnDone;
 
-        internal ListMenuEventManager EventManager { get; private set; }
+        internal RogueListuiEventManager EventManager { get; private set; }
 
         public bool IsDone { get; private set; }
 
@@ -61,19 +61,19 @@ namespace RoguegardUnity
 
         internal void Initialize(RogueSpriteRendererPool rendererPool)
         {
-            BackOption = SelectOption.Create<MMgrBase, MArg>("<", (manager, arg) => manager.PopMenuScreen(), "Cancel click:Cancel");
+            BackOption = SelectOption.Create<MMgrBase, MArg>("<", (manager, arg) => manager.PopScreen(), "Cancel click:Cancel");
 
             CommonInit();
-            var objCommandMenu = new ObjCommandMenu();
-            var putInCommandMenu = new PutIntoContainerCommandMenu();
-            var takeOutCommandMenu = new TakeOutOfContainerCommandMenu();
+            var objCommandMenuScreen = new ObjCommandMenuScreen();
+            var putInCommandMenuScreen = new PutIntoContainerCommandMenuScreen();
+            var takeOutCommandMenuScreen = new TakeOutOfContainerCommandMenuScreen();
 
-            objsMenu = new ObjsMenu(objCommandMenu, putInCommandMenu, takeOutCommandMenu);
+            objsMenu = new ObjsMenu(objCommandMenuScreen, putInCommandMenuScreen, takeOutCommandMenuScreen);
             var skillsMenu = new SkillsMenu();
-            var partyMemberMenu = new PartyMemberMenu(objsMenu, objCommandMenu, skillsMenu);
+            var partyMemberMenu = new PartyMemberMenu(objsMenu, objCommandMenuScreen, skillsMenu);
             var partyMenu = new PartyMenu(partyMemberMenu);
             mainMenu = new MainMenu(objsMenu, skillsMenu, partyMenu);
-            longDownMenu = new LongDownMenu(objsMenu, objCommandMenu);
+            longDownMenu = new LongDownMenu(objsMenu, objCommandMenuScreen);
 
             _face.Initialize(rendererPool);
             _summary.Initialize();
@@ -81,7 +81,7 @@ namespace RoguegardUnity
             _dopesheet.Initialize();
             if (_titleMenu != null) { _titleMenu.CommonInit(); }
 
-            EventManager = new ListMenuEventManager(new MessageController(MessageBox, LongMessage), _audioPlayHandler);
+            EventManager = new RogueListuiEventManager(new MessageController(MessageBox, LongMessage), _audioPlayHandler);
         }
 
         public void Open(RogueObj menuSubject)
@@ -131,8 +131,8 @@ namespace RoguegardUnity
             return base.Localize(StandardRogueDeviceUtility.Localize(text));
         }
 
-        public override void PushMenuScreen(
-            IMenuScreen<MMgrBase, MArg> menuScreen,
+        public override void PushScreen(
+            IListuiScreen<MMgrBase, MArg> screen,
             RogueObj self = null, RogueObj user = null,
             RogueObj targetObj = null,
             int count = default,
@@ -142,11 +142,11 @@ namespace RoguegardUnity
             object other = null)
         {
             var arg = new RogueMethodArgument(targetObj, count, vector, value, tool, other);
-            PushMenuScreen(menuScreen, new MArg.Builder(self, user, arg).ReadOnly);
+            PushScreen(screen, new MArg.Builder(self, user, arg).ReadOnly);
         }
 
-        public void PushInitialMenuScreen(
-            IMenuScreen<MMgrBase, MArg> menuScreen,
+        public void PushInitialScreen(
+            IListuiScreen<MMgrBase, MArg> screen,
             RogueObj self = null, RogueObj user = null,
             RogueObj targetObj = null,
             int count = default,
@@ -157,7 +157,7 @@ namespace RoguegardUnity
             bool enableTouchMask = true)
         {
             var arg = new RogueMethodArgument(targetObj, count, vector, value, tool, other);
-            PushInitialMenuScreen(menuScreen, new MArg.Builder(self, user, arg).ReadOnly, enableTouchMask);
+            PushInitialScreen(screen, new MArg.Builder(self, user, arg).ReadOnly, enableTouchMask);
         }
 
         /// <summary>
@@ -177,12 +177,12 @@ namespace RoguegardUnity
 
         public void OpenMainMenu(RogueObj subject)
         {
-            PushInitialMenuScreen(mainMenu, subject);
+            PushInitialScreen(mainMenu, subject);
         }
 
         public void OpenGroundMenu(RogueObj subject)
         {
-            PushInitialMenuScreen(objsMenu.Ground, subject, targetObj: subject);
+            PushInitialScreen(objsMenu.Ground, subject, targetObj: subject);
         }
 
         public void OpenLongDownMenu(RogueObj subject, Vector2Int position)
@@ -194,14 +194,14 @@ namespace RoguegardUnity
                 if (obj == null || obj.Position != position) continue;
 
                 // オブジェクトを長押ししたとき
-                PushInitialMenuScreen(longDownMenu, subject, targetObj: obj);
+                PushInitialScreen(longDownMenu, subject, targetObj: obj);
                 return;
             }
             {
                 // オブジェクトが見つからないときはタイルを見る
                 view.GetTile(position, out _, out var groundTile, out var buildingTile, out _);
                 var topTile = buildingTile ?? groundTile;
-                PushInitialMenuScreen(longDownMenu, subject, other: topTile);
+                PushInitialScreen(longDownMenu, subject, other: topTile);
             }
         }
 

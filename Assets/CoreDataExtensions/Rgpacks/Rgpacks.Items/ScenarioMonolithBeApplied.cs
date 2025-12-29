@@ -10,18 +10,18 @@ namespace Roguegard.Rgpacks
     {
         [SerializeField, DescribeElement] private AssetStartingItem[] _shopItems = null;
 
-        private Menu menu;
+        private ScenarioMonolithScreen scenarioMonolithScreen;
 
         public override bool Invoke(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
         {
-            menu ??= new(this);
+            scenarioMonolithScreen ??= new(this);
             if (ScenarioMonolithInfo.Get(self) == null) { ScenarioMonolithInfo.SetTo(self); }
 
-            RogueDevice.Primary.AddMenu(menu, user, null, new(tool: self));
+            RogueDevice.Primary.AddScreen(scenarioMonolithScreen, user, null, new(tool: self));
             return false;
         }
 
-        private class Menu : RogueMenuScreen
+        private class ScenarioMonolithScreen : RogueListuiScreen
         {
             private readonly ScenarioMonolithBeApplied parent;
 
@@ -31,7 +31,7 @@ namespace Roguegard.Rgpacks
                 BackAnchorSubviewSelector = m => m.BackAnchor,
             };
 
-            public Menu(ScenarioMonolithBeApplied parent)
+            public ScenarioMonolithScreen(ScenarioMonolithBeApplied parent)
             {
                 this.parent = parent;
             }
@@ -65,7 +65,7 @@ namespace Roguegard.Rgpacks
             }
         }
 
-        private class ShopScreen : RogueMenuScreen
+        private class ShopScreen : RogueListuiScreen
         {
             public ScenarioMonolithBeApplied parent;
 
@@ -90,7 +90,7 @@ namespace Roguegard.Rgpacks
             }
         }
 
-        private class SetMainChartScreen : RogueMenuScreen
+        private class SetMainChartScreen : RogueListuiScreen
         {
             private readonly DialogViewData<MMgr, MArg> view = new()
             {

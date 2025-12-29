@@ -4,10 +4,10 @@ namespace Lysionium
 {
     public interface IColorPickerSubview : ISubview
     {
-        delegate void ColorPickerEventHandler(IListMenuManager manager, IListMenuArg arg, Color color);
+        delegate void ColorPickerEventHandler(IListuiManager manager, IListuiArg arg, Color color);
 
         void SetupColorPicker(
-            Color color, ColorPickerEventHandler onClose, IListMenuManager manager, IListMenuArg arg,
+            Color color, ColorPickerEventHandler onClose, IListuiManager manager, IListuiArg arg,
             ref ISubviewStateProvider stateProvider);
     }
 }

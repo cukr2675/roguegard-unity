@@ -27,7 +27,7 @@ namespace Lysionium
             public System.Func<TMgr, TArg, string> GetText { get; set; }
             public ClickItemHandler<string, TMgr, TArg> ClickLink { get; set; }
 
-            string ILabelWidgetOption.GetText(IListMenuManager manager, IListMenuArg arg)
+            string ILabelWidgetOption.GetText(IListuiManager manager, IListuiArg arg)
             {
                 if (LuiAssert.Type<TMgr>(manager, out var tMgr) ||
                     LuiAssert.Type<TArg>(arg, out var tArg)) return manager.ErrorOption.GetName(manager, arg);
@@ -35,7 +35,7 @@ namespace Lysionium
                 return GetText(tMgr, tArg);
             }
 
-            void ILabelWidgetOption.ClickLink(string link, IListMenuManager manager, IListMenuArg arg)
+            void ILabelWidgetOption.ClickLink(string link, IListuiManager manager, IListuiArg arg)
             {
                 if (LuiAssert.Type<TMgr>(manager, out var tMgr) ||
                     LuiAssert.Type<TArg>(arg, out var tArg)) return;

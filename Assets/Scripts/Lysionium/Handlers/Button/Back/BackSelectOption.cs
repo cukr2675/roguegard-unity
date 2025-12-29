@@ -1,8 +1,8 @@
 namespace Lysionium
 {
     public class BackSelectOption<TMgr, TArg> : ISelectOption<TMgr, TArg>
-        where TMgr : IBackOptionProviderListMenuManager<TMgr, TArg>
-        where TArg : IListMenuArg
+        where TMgr : IBackOptionProviderListuiManager<TMgr, TArg>
+        where TArg : IListuiArg
     {
         private readonly string name;
         private readonly string style;
@@ -26,8 +26,8 @@ namespace Lysionium
     internal static class BackSelectOption
     {
         internal static bool TryCreate<TMgr, TArg>(out ISelectOption<TMgr, TArg> backOption, string name = null, string style = null)
-            where TMgr : IListMenuManager
-            where TArg : IListMenuArg
+            where TMgr : IListuiManager
+            where TArg : IListuiArg
         {
             // 引数なしで一度取得成功している場合は即キャッシュを返す
             if (name == null && style == null && Cache<TMgr, TArg>.isChached)
@@ -37,7 +37,7 @@ namespace Lysionium
             }
 
             // 使用可能な型を判定
-            if (!typeof(IBackOptionProviderListMenuManager<TMgr, TArg>).IsAssignableFrom(typeof(TMgr)))
+            if (!typeof(IBackOptionProviderListuiManager<TMgr, TArg>).IsAssignableFrom(typeof(TMgr)))
             {
                 backOption = default;
                 if (name == null && style == null)

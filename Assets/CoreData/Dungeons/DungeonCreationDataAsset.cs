@@ -42,12 +42,12 @@ namespace Roguegard.CharacterCreation
 
         public ISelectOption<MMgr, MArg> CreateDungeonSelectOption()
         {
-            var floorMenu = new FloorMenu() { data = this };
+            var floorScreen = new FloorScreen() { data = this };
             return SelectOption.Create<MMgr, MArg>(DescriptionName, (manager, arg) =>
             {
                 manager.AddObject(DeviceKw.EnqueueSE, CategoryKw.DownStairs);
                 manager.Done();
-                RogueDevice.Primary.AddMenu(floorMenu.MenuScreen, arg.Self, arg.User, RogueMethodArgument.Identity);
+                RogueDevice.Primary.AddScreen(floorScreen.EnteredScreen, arg.Self, arg.User, RogueMethodArgument.Identity);
             });
         }
 
@@ -120,7 +120,7 @@ namespace Roguegard.CharacterCreation
             Debug.LogError($"{name} ({nameof(DungeonCreationDataAsset)}) の {nameof(IOpenEffect)} に {nameof(DungeonOpen)} が設定されていません。");
         }
 
-        private class FloorMenu : FloorMenuAfterLoadRogueMethod
+        private class FloorScreen : FloorScreenAfterLoadRogueMethod
         {
             public DungeonCreationDataAsset data;
 

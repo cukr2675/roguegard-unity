@@ -3,10 +3,10 @@ using Roguegard.Device;
 
 namespace RoguegardUnity
 {
-    public class PartyMemberMenu : RogueMenuScreen, IMenuScreen<MMgr, MArg>
+    public class PartyMemberMenu : RogueListuiScreen, IListuiScreen<MMgr, MArg>
     {
         private readonly ObjsMenu objsMenu;
-        private readonly ObjCommandMenu objCommandMenu;
+        private readonly ObjCommandMenuScreen objCommandMenu;
         private readonly SkillsMenu skillsMenu;
 
         private readonly MainMenuViewData<MMgr, MArg> view = new()
@@ -16,7 +16,7 @@ namespace RoguegardUnity
 
         public override bool IsIncremental => true;
 
-        public PartyMemberMenu(ObjsMenu objsMenu, ObjCommandMenu objCommandMenu, SkillsMenu skillsMenu)
+        public PartyMemberMenu(ObjsMenu objsMenu, ObjCommandMenuScreen objCommandMenu, SkillsMenu skillsMenu)
         {
             this.objsMenu = objsMenu;
             this.objCommandMenu = objCommandMenu;
@@ -31,12 +31,12 @@ namespace RoguegardUnity
 
                 .Option(":Items", (manager, arg) =>
                 {
-                    manager.PushMenuScreen(objsMenu.Items, arg.Self, targetObj: arg.Self);
+                    manager.PushScreen(objsMenu.Items, arg.Self, targetObj: arg.Self);
                 })
 
                 .Option(":Skills", (manager, arg) =>
                 {
-                    manager.PushMenuScreen(skillsMenu.Use, arg.Self);
+                    manager.PushScreen(skillsMenu.Use, arg.Self);
                 })
 
                 .Back()

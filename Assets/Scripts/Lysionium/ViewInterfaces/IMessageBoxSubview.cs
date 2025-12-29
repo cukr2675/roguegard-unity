@@ -10,6 +10,6 @@ namespace Lysionium
 
         void Clear();
 
-        void DoScheduledAfterCompletion(ListMenuEventHandler onEndAnimation);
+        void DoScheduledAfterCompletion(ListuiEventHandler onEndAnimation);
     }
 }

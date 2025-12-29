@@ -16,14 +16,14 @@ namespace Roguegard
         int ISkillDescribable.RequiredMp => 0;
         Spanning<IKeyword> ISkillDescribable.AmmoCategories => Spanning<IKeyword>.Empty;
 
-        private SpeechScreen rogueMenu;
+        private SpeechScreen speechScreen;
 
         public bool Invoke(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
         {
             if (user == RogueDevice.Primary.Player)
             {
-                rogueMenu ??= new SpeechScreen() { parent = this };
-                RogueDevice.Primary.AddMenu(rogueMenu, user, null, RogueMethodArgument.Identity);
+                speechScreen ??= new SpeechScreen() { parent = this };
+                RogueDevice.Primary.AddScreen(speechScreen, user, null, RogueMethodArgument.Identity);
                 return true;
             }
             else
@@ -38,7 +38,7 @@ namespace Roguegard
             return 0;
         }
 
-        private class SpeechScreen : RogueMenuScreen
+        private class SpeechScreen : RogueListuiScreen
         {
             public LobbyMerchantBeApplied parent;
 
@@ -52,18 +52,18 @@ namespace Roguegard
             {
                 view.Show($"商人「わたしは商人です でもまだ準備中です{{v}}", manager, arg)
                     ?
-                    .VarOnce(out var nextScreen, new RogueMenu() { parent = parent })
+                    .VarOnce(out var nextScreen, new ShopScreen() { parent = parent })
 
                     .OnCompleted((manager, arg) =>
                     {
-                        manager.PushMenuScreen(nextScreen, arg.Self);
+                        manager.PushScreen(nextScreen, arg.Self);
                     })
 
                     .Build();
             }
         }
 
-        private class RogueMenu : RogueMenuScreen
+        private class ShopScreen : RogueListuiScreen
         {
             public LobbyMerchantBeApplied parent;
 

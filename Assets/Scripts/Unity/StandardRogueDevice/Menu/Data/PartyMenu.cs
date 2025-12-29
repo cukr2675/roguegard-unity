@@ -4,7 +4,7 @@ using Roguegard.Device;
 
 namespace RoguegardUnity
 {
-    public class PartyMenu : RogueMenuScreen
+    public class PartyMenu : RogueListuiScreen
     {
         private readonly ScrollMenuViewData<RogueObj, MMgr, MArg> view = new()
         {
@@ -25,7 +25,7 @@ namespace RoguegardUnity
                 .OnClick((partyMember, manager, arg) =>
                 {
                     // 選択したパーティメンバーの情報と選択肢を表示する
-                    manager.PushMenuScreen(memberMenu, arg.Self, targetObj: partyMember);
+                    manager.PushScreen(memberMenu, arg.Self, targetObj: partyMember);
                 })
                 .Build();
         }

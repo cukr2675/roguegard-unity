@@ -1,6 +1,6 @@
 namespace Lysionium.Samples
 {
-    public class ExMgr : StandardListMenuManager<ExMgr, ExArg>
+    public class ExMgr : StandardListuiManager<ExMgr, ExArg>
     {
         public void Initialize()
         {

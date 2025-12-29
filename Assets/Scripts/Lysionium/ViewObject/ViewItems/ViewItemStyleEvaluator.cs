@@ -9,8 +9,8 @@ namespace Lysionium.Views
     {
         private IInputActionViewItemHandler inputActionHandler;
         private object item;
-        private IListMenuManager manager;
-        private IListMenuArg arg;
+        private IListuiManager manager;
+        private IListuiArg arg;
         private SubviewBase subview;
         private readonly Action<InputAction.CallbackContext> inputPerformed;
         private readonly Action<InputAction.CallbackContext> inputStarted;
@@ -25,7 +25,7 @@ namespace Lysionium.Views
             inputCanceled = ctx => inputActionHandler?.Canceled(item, manager, arg, ctx);
         }
 
-        public void Bind(object item, IViewItemHandler handler, IListMenuManager manager, IListMenuArg arg, SubviewBase subview)
+        public void Bind(object item, IViewItemHandler handler, IListuiManager manager, IListuiArg arg, SubviewBase subview)
         {
             this.item = item;
             inputActionHandler = handler as IInputActionViewItemHandler;

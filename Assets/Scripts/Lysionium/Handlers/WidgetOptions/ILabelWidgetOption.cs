@@ -2,8 +2,8 @@ namespace Lysionium
 {
     public interface ILabelWidgetOption
     {
-        string GetText(IListMenuManager manager, IListMenuArg arg);
+        string GetText(IListuiManager manager, IListuiArg arg);
 
-        void ClickLink(string link, IListMenuManager manager, IListMenuArg arg);
+        void ClickLink(string link, IListuiManager manager, IListuiArg arg);
     }
 }

@@ -85,7 +85,7 @@ namespace Roguegard.CharacterCreation
             }
         }
 
-        private class AfterLoadRogueMethod : FloorMenuAfterLoadRogueMethod
+        private class AfterLoadRogueMethod : FloorScreenAfterLoadRogueMethod
         {
             private readonly DungeonCreationDataAsset data;
 

@@ -6,8 +6,8 @@ namespace Lysionium
 {
     public abstract class TreeViewData<TItem, TMgr, TArg> : ViewData<TMgr, TArg>
         where TItem : class
-        where TMgr : IListMenuManager
-        where TArg : IListMenuArg
+        where TMgr : IListuiManager
+        where TArg : IListuiArg
     {
         private readonly List<object> headList = new();
         protected List<TItem> OriginalList { get; } = new();

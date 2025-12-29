@@ -63,14 +63,14 @@ namespace Roguegard
 
             if (self == RogueDevice.Primary.Player)
             {
-                RogueDevice.Primary.AddMenu(levelUpBonusScreen, self, null, RogueMethodArgument.Identity);
+                RogueDevice.Primary.AddScreen(levelUpBonusScreen, self, null, RogueMethodArgument.Identity);
                 RogueDevice.Add(DeviceKw.AppendText, DeviceKw.HorizontalRule);
             }
             else
             {
                 if (selfIsPlayerPartyMember)
                 {
-                    RogueDevice.Primary.AddMenu(resultScreen, self, null, RogueMethodArgument.Identity);
+                    RogueDevice.Primary.AddScreen(resultScreen, self, null, RogueMethodArgument.Identity);
                 }
                 resultScreen.message = "";
 
@@ -196,7 +196,7 @@ namespace Roguegard
             };
         }
 
-        private class LevelUpBonusScreen : RogueMenuScreen
+        private class LevelUpBonusScreen : RogueListuiScreen
         {
             private readonly SpeechBoxViewData<MMgr, MArg> view = new()
             {
@@ -206,12 +206,12 @@ namespace Roguegard
             {
                 view.Show(arg.Self.GetName() + "はレベルが上がった！{v}", manager, arg)
                     ?
-                    .OnCompleted((manager, arg) => manager.PushMenuScreen(new SelectScreen(), arg))
+                    .OnCompleted((manager, arg) => manager.PushScreen(new SelectScreen(), arg))
 
                     .Build();
             }
 
-            private class SelectScreen : RogueMenuScreen
+            private class SelectScreen : RogueListuiScreen
             {
                 private readonly MainMenuViewData<MMgr, MArg> view = new()
                 {
@@ -226,24 +226,24 @@ namespace Roguegard
 
                         .Option("最大HP +5", (manager, arg) =>
                         {
-                            manager.PushMenuScreen(nextScreen, arg.Self, arg.User, count: 0);
+                            manager.PushScreen(nextScreen, arg.Self, arg.User, count: 0);
                         })
 
                         .Option("最大MP +5", (manager, arg) =>
                         {
-                            manager.PushMenuScreen(nextScreen, arg.Self, arg.User, count: 1);
+                            manager.PushScreen(nextScreen, arg.Self, arg.User, count: 1);
                         })
 
                         .Option("最大重量 +2", (manager, arg) =>
                         {
-                            manager.PushMenuScreen(nextScreen, arg.Self, arg.User, count: 2);
+                            manager.PushScreen(nextScreen, arg.Self, arg.User, count: 2);
                         })
 
                         .Build();
                 }
             }
 
-            private class ConfirmScreen : RogueMenuScreen
+            private class ConfirmScreen : RogueListuiScreen
             {
                 private readonly ResultScreen nextScreen = new();
 
@@ -276,18 +276,18 @@ namespace Roguegard
                                     levelInfo.maxHp += 5;
                                     self.Main.Stats.SetHp(self, self.Main.Stats.Hp + 5, true);
                                     nextScreen.message += $"{StatsKw.MaxHp.Name}が5上がった";
-                                    manager.PushMenuScreen(nextScreen);
+                                    manager.PushScreen(nextScreen);
                                     break;
                                 case 1:
                                     levelInfo.maxMp += 5;
                                     self.Main.Stats.SetMp(self, self.Main.Stats.Mp + 5, true);
                                     nextScreen.message += $"{StatsKw.MaxMp.Name}が5上がった";
-                                    manager.PushMenuScreen(nextScreen);
+                                    manager.PushScreen(nextScreen);
                                     break;
                                 case 2:
                                     levelInfo.loadCapacity += 2;
                                     nextScreen.message += $"{StatsKw.LoadCapacity.Name}が2上がった";
-                                    manager.PushMenuScreen(nextScreen);
+                                    manager.PushScreen(nextScreen);
                                     break;
                             }
                         })
@@ -304,7 +304,7 @@ namespace Roguegard
             }
         }
 
-        private class ResultScreen : RogueMenuScreen
+        private class ResultScreen : RogueListuiScreen
         {
             public string message;
 

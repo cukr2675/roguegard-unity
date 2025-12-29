@@ -10,8 +10,8 @@ namespace Lysionium
 
         delegate float SliderEventHandler<in TMgr, in TArg>(TMgr manager, TArg arg, float value);
 
-        float GetValue(IListMenuManager manager, IListMenuArg arg);
+        float GetValue(IListuiManager manager, IListuiArg arg);
 
-        float HandleValueChanged(IListMenuManager manager, IListMenuArg arg, float value);
+        float HandleValueChanged(IListuiManager manager, IListuiArg arg, float value);
     }
 }

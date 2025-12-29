@@ -4,9 +4,9 @@ using UnityEngine;
 namespace Lysionium
 {
     /// <inheritdoc/>
-    public class CommandListMenuViewData<TItem, TMgr> : CommandListMenuViewData<TItem, TMgr, IListMenuArg>
+    public class CommandListMenuViewData<TItem, TMgr> : CommandListMenuViewData<TItem, TMgr, IListuiArg>
         where TItem : class
-        where TMgr : IListMenuManager
+        where TMgr : IListuiManager
     { }
 
     /// <summary>
@@ -14,8 +14,8 @@ namespace Lysionium
     /// </summary>
     public class CommandListMenuViewData<TItem, TMgr, TArg> : ListViewData<TItem, TMgr, TArg>
         where TItem : class
-        where TMgr : IListMenuManager
-        where TArg : IListMenuArg
+        where TMgr : IListuiManager
+        where TArg : IListuiArg
     {
         public System.Func<TMgr, IListHandlerSubview> SecondaryCommandSubviewSelector { get; set; }
             = manager => (manager as IDefaultSubviewTable)?.SecondaryCommand;

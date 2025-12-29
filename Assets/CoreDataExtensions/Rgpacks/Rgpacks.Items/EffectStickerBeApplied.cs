@@ -6,22 +6,22 @@ namespace Roguegard.Rgpacks
 {
     public class EffectStickerBeApplied : BaseApplyRogueMethod
     {
-        private static Menu menu;
+        private static EffectStickerScreen effectStickerScreen;
 
         public override bool Invoke(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
         {
-            menu ??= new();
+            effectStickerScreen ??= new();
             var effectStickerInfo = EffectStickerInfo.Get(self);
             if (effectStickerInfo == null)
             {
                 EffectStickerInfo.SetTo(self);
             }
 
-            RogueDevice.Primary.AddMenu(menu, user, null, new(targetObj: self));
+            RogueDevice.Primary.AddScreen(effectStickerScreen, user, null, new(targetObj: self));
             return false;
         }
 
-        private class Menu : RogueMenuScreen
+        private class EffectStickerScreen : RogueListuiScreen
         {
             private readonly VariableWidgetsMenuViewData<MMgr, MArg> view = new()
             {
@@ -39,8 +39,8 @@ namespace Roguegard.Rgpacks
                             return NamingEffect.Get(sticker).Naming = value;
                         }))
 
-                    .VarOnce(out var cmnMenu, new PropertiedCmnMenu())
-                    .Tail.Option("Update", (manager, arg) => manager.PushMenuScreen(cmnMenu, arg.Self, other: EffectStickerInfo.Get(arg.Arg.TargetObj).Update))
+                    .VarOnce(out var cmnScreen, new PropertiedCmnMenuScreen())
+                    .Tail.Option("Update", (manager, arg) => manager.PushScreen(cmnScreen, arg.Self, other: EffectStickerInfo.Get(arg.Arg.TargetObj).Update))
 
                     .TailStack("スプライト", InputFieldWidgetOption.Create<MMgr, MArg>(
                         (manager, arg) => EffectStickerInfo.Get(arg.Arg.TargetObj).Sprite,

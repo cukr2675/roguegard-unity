@@ -105,7 +105,7 @@ namespace Roguegard.CharacterCreation
                         RogueDevice.Add(DeviceKw.AppendText, "は");
                         RogueDevice.Add(DeviceKw.AppendText, quest);
                         RogueDevice.Add(DeviceKw.AppendText, "をクリアして 報酬を受け取った");
-                        RogueDevice.Primary.AddMenu(rewardsScreen, self, null, new(other: quest));
+                        RogueDevice.Primary.AddScreen(rewardsScreen, self, null, new(other: quest));
                     }
 
                     var clearMethod = new GoalDownStairsBeApplied();
@@ -128,7 +128,7 @@ namespace Roguegard.CharacterCreation
                 {
                     if (RogueDevice.Primary.Player == self)
                     {
-                        RogueDevice.Primary.AddMenu(notifyScreen, self, null, RogueMethodArgument.Identity);
+                        RogueDevice.Primary.AddScreen(notifyScreen, self, null, RogueMethodArgument.Identity);
                     }
 
                     // 目標の階層への移動に成功したとき討伐対象を生成する。
@@ -185,7 +185,7 @@ namespace Roguegard.CharacterCreation
             }
         }
 
-        private class RewardsScreen : RogueMenuScreen
+        private class RewardsScreen : RogueListuiScreen
         {
             private readonly SpeechBoxViewData<MMgr, MArg> view = new()
             {
@@ -224,7 +224,7 @@ namespace Roguegard.CharacterCreation
             }
         }
 
-        private class NotifyScreen : RogueMenuScreen
+        private class NotifyScreen : RogueListuiScreen
         {
             private readonly SpeechBoxViewData<MMgr, MArg> view = new()
             {

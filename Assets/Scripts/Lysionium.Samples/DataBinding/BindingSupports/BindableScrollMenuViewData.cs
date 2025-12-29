@@ -5,8 +5,8 @@ namespace Lysionium.Samples
 {
     public class BindableScrollMenuViewData<TItem, TMgr, TArg> : ListViewData<TItem, TMgr, TArg>
         where TItem : class
-        where TMgr : IListMenuManager
-        where TArg : IListMenuArg
+        where TMgr : IListuiManager
+        where TArg : IListuiArg
     {
         public System.Func<TMgr, IListHandlerSubview> ScrollSubviewSelector { get; set; }
             = manager => (manager as IDefaultSubviewTable)?.Scroll;
@@ -32,8 +32,8 @@ namespace Lysionium.Samples
         private ISubviewStateProvider backAnchorSubviewStateProvider;
 
         private readonly BindableButtonViewItemHandler<TItem, TMgr, TArg> scrollSubviewHandler = new();
-        private ListMenuEventHandler<TMgr, TArg> onShow;
-        private ListMenuEventHandler onHide;
+        private ListuiEventHandler<TMgr, TArg> onShow;
+        private ListuiEventHandler onHide;
 
         private TMgr manager;
         private TArg arg;
@@ -144,7 +144,7 @@ namespace Lysionium.Samples
                 return this;
             }
 
-            public Builder OnShow(ListMenuEventHandler<TMgr, TArg> handler)
+            public Builder OnShow(ListuiEventHandler<TMgr, TArg> handler)
             {
                 AssertNotBuilt();
 
@@ -152,7 +152,7 @@ namespace Lysionium.Samples
                 return this;
             }
 
-            public Builder OnHide(ListMenuEventHandler<TMgr, TArg> handler)
+            public Builder OnHide(ListuiEventHandler<TMgr, TArg> handler)
             {
                 AssertNotBuilt();
 

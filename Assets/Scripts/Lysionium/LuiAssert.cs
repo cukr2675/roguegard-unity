@@ -4,7 +4,7 @@ namespace Lysionium
 {
     public static class LuiAssert
     {
-        public static bool Type<T>(object instance, out T castedInstance, IListMenuManager manager = null)
+        public static bool Type<T>(object instance, out T castedInstance, IListuiManager manager = null)
         {
             if (instance is T tInstance)
             {

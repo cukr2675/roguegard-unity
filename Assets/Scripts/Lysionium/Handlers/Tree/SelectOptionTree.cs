@@ -4,16 +4,16 @@ using System.Collections.Generic;
 namespace Lysionium
 {
     /// <inheritdoc/>
-    public class SelectOptionTree<TMgr> : SelectOptionTree<TMgr, IListMenuArg>
-        where TMgr : IListMenuManager
+    public class SelectOptionTree<TMgr> : SelectOptionTree<TMgr, IListuiArg>
+        where TMgr : IListuiManager
     { }
 
     public class SelectOptionTree<TMgr, TArg> :
         IReadOnlyList<object>,
         ISelectOptionListBuilder<TMgr, TArg, SelectOptionTree<TMgr, TArg>>,
         ITreeOptionListBuilder<TMgr, TArg, SelectOptionTree<TMgr, TArg>>
-        where TMgr : IListMenuManager
-        where TArg : IListMenuArg
+        where TMgr : IListuiManager
+        where TArg : IListuiArg
     {
         private readonly List<object> list = new();
 

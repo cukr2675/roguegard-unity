@@ -12,13 +12,13 @@ namespace Roguegard
         int ISkillDescribable.RequiredMp => 0;
         Spanning<IKeyword> ISkillDescribable.AmmoCategories => Spanning<IKeyword>.Empty;
 
-        private static readonly RogueMenu rogueMenu = new();
+        private static readonly DungeonSelectionScreen dungeonSelectionScreen = new();
 
         public bool Invoke(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
         {
             if (user == RogueDevice.Primary.Player)
             {
-                RogueDevice.Primary.AddMenu(rogueMenu, user, null, RogueMethodArgument.Identity);
+                RogueDevice.Primary.AddScreen(dungeonSelectionScreen, user, null, RogueMethodArgument.Identity);
                 return true;
             }
             else
@@ -33,7 +33,7 @@ namespace Roguegard
             return 0;
         }
 
-        private class RogueMenu : RogueMenuScreen
+        private class DungeonSelectionScreen : RogueListuiScreen
         {
             private readonly ScrollMenuViewData<ISelectOption<MMgr, MArg>, MMgr, MArg> view = new()
             {

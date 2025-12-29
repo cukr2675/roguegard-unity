@@ -14,7 +14,7 @@ namespace RoguegardUnity
         public string Text { get => _inputField.text; set => _inputField.SetTextWithoutNotify(value); }
 
         public override void SetListHandler(
-            IReadOnlyList<object> list, IViewItemHandler handler, IListMenuManager manager, IListMenuArg arg,
+            IReadOnlyList<object> list, IViewItemHandler handler, IListuiManager manager, IListuiArg arg,
             ref ISubviewStateProvider stateProvider)
             => throw new System.NotSupportedException();
     }

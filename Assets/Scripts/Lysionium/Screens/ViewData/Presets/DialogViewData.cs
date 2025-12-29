@@ -3,16 +3,16 @@ using System.Collections.Generic;
 namespace Lysionium
 {
     /// <inheritdoc/>
-    public class DialogViewData<TMgr> : DialogViewData<TMgr, IListMenuArg>
-        where TMgr : IListMenuManager
+    public class DialogViewData<TMgr> : DialogViewData<TMgr, IListuiArg>
+        where TMgr : IListuiManager
     { }
 
     /// <summary>
     /// テキストと項目を表示する ViewData
     /// </summary>
     public class DialogViewData<TMgr, TArg> : ListViewData<object, TMgr, TArg>
-        where TMgr : IListMenuManager
-        where TArg : IListMenuArg
+        where TMgr : IListuiManager
+        where TArg : IListuiArg
     {
         public System.Func<TMgr, IListHandlerSubview> DialogSubviewSelector { get; set; }
             = manager => (manager as IDefaultSubviewTable)?.Dialog;

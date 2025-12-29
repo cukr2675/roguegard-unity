@@ -7,7 +7,7 @@ namespace Lysionium
         // リストとハンドラを Subpresenter でカプセル化すべきかもしれないが、
         // リストのコピーとハンドラのダウンキャストを考えると複雑になるためそのまま渡す
         void SetListHandler(
-            IReadOnlyList<object> list, IViewItemHandler handler, IListMenuManager manager, IListMenuArg arg,
+            IReadOnlyList<object> list, IViewItemHandler handler, IListuiManager manager, IListuiArg arg,
             ref ISubviewStateProvider stateProvider);
 
         // list 引数を object 型にすれば Subview が直接リスト要素を取得しないようにもできるが、

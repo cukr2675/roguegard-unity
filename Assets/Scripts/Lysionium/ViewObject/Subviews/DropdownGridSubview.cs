@@ -26,7 +26,7 @@ namespace Lysionium.Views
         private StateProvider currentStateProvider;
 
         public override void SetListHandler(
-            IReadOnlyList<object> list, IViewItemHandler handler, IListMenuManager manager, IListMenuArg arg,
+            IReadOnlyList<object> list, IViewItemHandler handler, IListuiManager manager, IListuiArg arg,
             ref ISubviewStateProvider stateProvider)
         {
             stateProvider ??= new StateProvider();

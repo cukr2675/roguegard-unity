@@ -55,7 +55,7 @@ namespace RoguegardUnity
         void IRogueDevice.AddObject(IKeyword keyword, object obj) => Add(keyword, obj: obj);
         void IRogueDevice.AddWork(IKeyword keyword, in RogueCharacterWork work)
             => componentManager.EventManager.AddWork(componentManager.Player, keyword, work, componentManager.FastForward);
-        void IRogueDevice.AddMenu(IMenuScreen<MMgrBase, MArg> menu, RogueObj self, RogueObj user, in RogueMethodArgument arg)
-            => componentManager.EventManager.AddMenu(menu, self, user, arg);
+        void IRogueDevice.AddScreen(IListuiScreen<MMgrBase, MArg> screen, RogueObj self, RogueObj user, in RogueMethodArgument arg)
+            => componentManager.EventManager.AddScreen(screen, self, user, arg);
     }
 }

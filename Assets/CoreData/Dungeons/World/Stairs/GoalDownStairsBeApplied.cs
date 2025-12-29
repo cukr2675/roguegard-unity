@@ -5,7 +5,7 @@ namespace Roguegard
 {
     public class GoalDownStairsBeApplied : BaseApplyRogueMethod
     {
-        private static readonly ResultRogueMenu resultRogueMenu = new();
+        private static readonly ResultScreen resultScreen = new();
 
         public override bool Invoke(RogueObj self, RogueObj player, float activationDepth, in RogueMethodArgument arg)
         {
@@ -24,7 +24,7 @@ namespace Roguegard
             if (player == RogueDevice.Primary.Player)
             {
                 // プレイヤー操作を要求するため、プレイヤーキャラのみ実行可能とする
-                RogueDevice.Primary.AddMenu(resultRogueMenu, player, null, RogueMethodArgument.Identity);
+                RogueDevice.Primary.AddScreen(resultScreen, player, null, RogueMethodArgument.Identity);
                 return false;
             }
             else if (activationDepth < 1f)
@@ -39,7 +39,7 @@ namespace Roguegard
             return false;
         }
 
-        private class ResultRogueMenu : RogueMenuScreen
+        private class ResultScreen : RogueListuiScreen
         {
             public override void OpenScreen(MMgr manager, MArg arg)
             {

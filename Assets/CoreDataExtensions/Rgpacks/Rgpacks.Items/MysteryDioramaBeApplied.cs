@@ -10,22 +10,22 @@ namespace Roguegard.Rgpacks
     {
         [SerializeField] private AssetStartingItem _newFloor = null;
 
-        private Menu menu;
+        private MysteryDioramaScreen mysteryDioramaScreen;
 
         public override bool Invoke(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
         {
-            menu ??= new() { _newFloor = _newFloor };
+            mysteryDioramaScreen ??= new() { _newFloor = _newFloor };
             var mysteryDioramaInfo = MysteryDioramaInfo.Get(self);
             if (mysteryDioramaInfo == null)
             {
                 MysteryDioramaInfo.SetTo(self);
             }
 
-            RogueDevice.Primary.AddMenu(menu, user, null, new(targetObj: self));
+            RogueDevice.Primary.AddScreen(mysteryDioramaScreen, user, null, new(targetObj: self));
             return false;
         }
 
-        private class Menu : RogueMenuScreen
+        private class MysteryDioramaScreen : RogueListuiScreen
         {
             public AssetStartingItem _newFloor;
 
@@ -59,8 +59,8 @@ namespace Roguegard.Rgpacks
 
                     .NameFrom(dioramaFloorObj => dioramaFloorObj.GetName())
 
-                    .VarOnce(out var nextMenu, new FloorMenu())
-                    .OnClick((dioramaFloorObj, manager, arg) => manager.PushMenuScreen(nextMenu, arg.Self, targetObj: dioramaFloorObj))
+                    .VarOnce(out var nextScreen, new FloorScreen())
+                    .OnClick((dioramaFloorObj, manager, arg) => manager.PushScreen(nextScreen, arg.Self, targetObj: dioramaFloorObj))
 
                     .Tail.Option("+ 階層を追加", (manager, arg) =>
                     {
@@ -73,7 +73,7 @@ namespace Roguegard.Rgpacks
             }
         }
 
-        private class FloorMenu : RogueMenuScreen
+        private class FloorScreen : RogueListuiScreen
         {
             public AssetStartingItem _newFloor;
 

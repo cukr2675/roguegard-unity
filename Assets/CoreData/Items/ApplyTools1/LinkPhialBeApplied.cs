@@ -8,19 +8,19 @@ namespace Roguegard
     {
         [SerializeField] private CharacterCreationDataAsset _potionInfoSet = null;
 
-        private readonly SelectObjMenuScreen menu;
+        private readonly ObjSelectionScreen objSelectionScreen;
 
         private LinkPhialBeApplied()
         {
             var callback = new SecondDeviceCommand(this);
-            menu = new SelectObjMenuScreen(callback);
+            objSelectionScreen = new ObjSelectionScreen(callback);
         }
 
         public override bool Invoke(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
         {
             if (user == RogueDevice.Primary.Player)
             {
-                RogueDevice.Primary.AddMenu(menu, user, null, RogueMethodArgument.Identity);
+                RogueDevice.Primary.AddScreen(objSelectionScreen, user, null, RogueMethodArgument.Identity);
                 return false;
             }
             else
@@ -32,12 +32,12 @@ namespace Roguegard
         private class SecondDeviceCommand : IDeviceCommand
         {
             private readonly SelectedDeviceCommand callback;
-            private readonly SelectObjMenuScreen menu;
+            private readonly ObjSelectionScreen objSelectionScreen;
 
             public SecondDeviceCommand(LinkPhialBeApplied parent)
             {
                 callback = new SelectedDeviceCommand() { parent = parent };
-                menu = new SelectObjMenuScreen(callback);
+                objSelectionScreen = new ObjSelectionScreen(callback);
             }
 
             public bool Execute(RogueObj self, RogueObj user, float activationDepth, in RogueMethodArgument arg)
@@ -45,7 +45,7 @@ namespace Roguegard
                 if (CommonAssert.RequireTool(arg, out var tool)) return false;
 
                 callback.firstTool = tool;
-                RogueDevice.Primary.AddMenu(menu, user, null, RogueMethodArgument.Identity);
+                RogueDevice.Primary.AddScreen(objSelectionScreen, user, null, RogueMethodArgument.Identity);
                 return true;
             }
         }

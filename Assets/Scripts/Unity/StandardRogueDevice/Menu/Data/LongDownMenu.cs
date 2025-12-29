@@ -7,24 +7,24 @@ namespace RoguegardUnity
     /// <summary>
     /// 長押しメニュー
     /// </summary>
-    public class LongDownMenu : RogueMenuScreen
+    public class LongDownMenu : RogueListuiScreen
     {
         private readonly ISelectOption<MMgr, MArg>[] selectOptions;
-        private readonly RogueMenuScreen commandMenu;
+        private readonly RogueListuiScreen commandMenu;
 
         private readonly MainMenuViewData<MMgr, MArg> view = new()
         {
         };
 
-        public LongDownMenu(ObjsMenu objsMenu, ObjCommandMenu objCommandMenu)
+        public LongDownMenu(ObjsMenu objsMenu, ObjCommandMenuScreen objCommandMenuScreen)
         {
             selectOptions = new ISelectOption<MMgr, MArg>[]
             {
-                objCommandMenu.Summary,
-                objCommandMenu.Details,
+                objCommandMenuScreen.Summary,
+                objCommandMenuScreen.Details,
                 objsMenu.Close
             };
-            commandMenu = objCommandMenu;
+            commandMenu = objCommandMenuScreen;
         }
 
         public override void OpenScreen(MMgr manager, MArg arg)

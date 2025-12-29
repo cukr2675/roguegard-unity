@@ -1,16 +1,16 @@
 namespace Lysionium
 {
     /// <inheritdoc/>
-    public class MainMenuViewData<TMgr> : MainMenuViewData<TMgr, IListMenuArg>
-        where TMgr : IListMenuManager
+    public class MainMenuViewData<TMgr> : MainMenuViewData<TMgr, IListuiArg>
+        where TMgr : IListuiManager
     { }
 
     /// <summary>
     /// 項目数が固定のメニュー向け ViewData
     /// </summary>
     public class MainMenuViewData<TMgr, TArg> : ListViewData<ISelectOption<TMgr, TArg>, TMgr, TArg>
-        where TMgr : IListMenuManager
-        where TArg : IListMenuArg
+        where TMgr : IListuiManager
+        where TArg : IListuiArg
     {
         public System.Func<TMgr, IListHandlerSubview> PrimaryCommandSubviewSelector { get; set; }
             = manager => (manager as IDefaultSubviewTable)?.PrimaryCommand;

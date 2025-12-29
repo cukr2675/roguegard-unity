@@ -141,7 +141,7 @@ namespace RoguegardUnity
 
                 // ロード画面表示
                 var synchronizeMenu = new SynchronizeMenu();
-                menuController.PushInitialMenuScreen(synchronizeMenu);
+                menuController.PushInitialScreen(synchronizeMenu);
 
                 // ダミーのセーブポイントを設定して入力待機ループを素通りする
                 memberInfo.SavePoint = dummySavePoint;
@@ -210,7 +210,7 @@ namespace RoguegardUnity
             // その対策として、エラー発生時はメニューを閉じる
             if (type == LogType.Error || type == LogType.Exception)
             {
-                touchController.CloseMenu();
+                touchController.CloseScreen();
             }
         }
 

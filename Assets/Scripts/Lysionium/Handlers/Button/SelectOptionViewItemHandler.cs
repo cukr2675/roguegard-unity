@@ -2,11 +2,11 @@ namespace Lysionium
 {
     // 誤って使用することを避けるため、省略版は実装しない
     ///// <inheritdoc/>
-    //public class SelectOptionViewItemHandler : SelectOptionViewItemHandler<IListMenuManager, IListMenuArg>
+    //public class SelectOptionViewItemHandler : SelectOptionViewItemHandler<IListuiManager, IListuiArg>
     //{
     //}
     ///// <inheritdoc/>
-    //public class SelectOptionViewItemHandler<TMgr> : SelectOptionViewItemHandler<TMgr, IListMenuArg>
+    //public class SelectOptionViewItemHandler<TMgr> : SelectOptionViewItemHandler<TMgr, IListuiArg>
     //{
     //}
 
@@ -17,7 +17,7 @@ namespace Lysionium
     {
         public static SelectOptionViewItemHandler<TMgr, TArg> Instance { get; } = new();
 
-        public string GetName(object item, IListMenuManager manager, IListMenuArg arg)
+        public string GetName(object item, IListuiManager manager, IListuiArg arg)
         {
             if (LuiAssert.Type<ISelectOption<TMgr, TArg>>(item, out var selectOption) ||
                 LuiAssert.Type<TMgr>(manager, out var tMgr) ||
@@ -26,7 +26,7 @@ namespace Lysionium
             return selectOption.GetName(tMgr, tArg);
         }
 
-        public string GetStyle(object item, IListMenuManager manager, IListMenuArg arg)
+        public string GetStyle(object item, IListuiManager manager, IListuiArg arg)
         {
             if (LuiAssert.Type<ISelectOption<TMgr, TArg>>(item, out var selectOption) ||
                 LuiAssert.Type<TMgr>(manager, out var tMgr) ||
@@ -35,7 +35,7 @@ namespace Lysionium
             return selectOption.GetStyle(tMgr, tArg);
         }
 
-        public void Click(object item, IListMenuManager manager, IListMenuArg arg)
+        public void Click(object item, IListuiManager manager, IListuiArg arg)
         {
             if (LuiAssert.Type<ISelectOption<TMgr, TArg>>(item, out var selectOption, manager) ||
                 LuiAssert.Type<TMgr>(manager, out var tMgr, manager) ||

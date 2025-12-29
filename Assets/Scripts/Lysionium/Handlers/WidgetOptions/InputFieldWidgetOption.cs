@@ -24,7 +24,7 @@ namespace Lysionium
             public System.Func<TMgr, TArg, string> GetValue { get; set; }
             public IInputFieldWidgetOption.InputFieldEventHandler<TMgr, TArg> HandleValueChanged { get; set; }
 
-            string IInputFieldWidgetOption.GetValue(IListMenuManager manager, IListMenuArg arg)
+            string IInputFieldWidgetOption.GetValue(IListuiManager manager, IListuiArg arg)
             {
                 if (LuiAssert.Type<TMgr>(manager, out var tMgr) ||
                     LuiAssert.Type<TArg>(arg, out var tArg)) return null;
@@ -32,7 +32,7 @@ namespace Lysionium
                 return GetValue(tMgr, tArg);
             }
 
-            string IInputFieldWidgetOption.HandleValueChanged(IListMenuManager manager, IListMenuArg arg, string value)
+            string IInputFieldWidgetOption.HandleValueChanged(IListuiManager manager, IListuiArg arg, string value)
             {
                 if (LuiAssert.Type<TMgr>(manager, out var tMgr) ||
                     LuiAssert.Type<TArg>(arg, out var tArg)) return null;

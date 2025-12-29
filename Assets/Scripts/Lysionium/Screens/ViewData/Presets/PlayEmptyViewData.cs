@@ -10,7 +10,7 @@
 //    {
 //        public string EmptySubviewName { get; set; } = StandardSubviewTable.ScrollName;
 
-//        public void Play(string value, IListMenuManager manager)
+//        public void Play(string value, IListuiManager manager)
 //        {
 //            if (value == null) throw new System.ArgumentNullException(nameof(value));
 //            if (manager == null) throw new System.ArgumentNullException(nameof(manager));
@@ -21,7 +21,7 @@
 //            subview.PlayString(value);
 //        }
 
-//        public void Play(Object value, IListMenuManager manager)
+//        public void Play(Object value, IListuiManager manager)
 //        {
 //            if (value == null) throw new System.ArgumentNullException(nameof(value));
 //            if (manager == null) throw new System.ArgumentNullException(nameof(manager));

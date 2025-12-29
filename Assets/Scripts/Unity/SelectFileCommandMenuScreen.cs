@@ -4,7 +4,7 @@ using System.IO;
 
 namespace RoguegardUnity
 {
-    internal class SelectFileCommandMenuScreen : RogueMenuScreen
+    internal class SelectFileCommandMenuScreen : RogueListuiScreen
     {
         private readonly ClickItemHandler<FileInfo, MMgr, MArg> selectCallback;
         private readonly MainMenuViewData<MMgr, MArg> view;
@@ -38,10 +38,10 @@ namespace RoguegardUnity
                 .Option(":Export", (manager, arg) =>
                 {
                     RogueFile.Export(((FileInfo)arg.Arg.Other).FullName);
-                    manager.PopMenuScreen();
+                    manager.PopScreen();
                 })
 
-                .Option("<#f00>:Delete", new ChoicesMenuScreen(":DeleteMsg").Option("<#f00>:Delete", DeleteYes).Back())
+                .Option("<#f00>:Delete", new ChoicesScreen(":DeleteMsg").Option("<#f00>:Delete", DeleteYes).Back())
 
                 .Back()
 
@@ -52,7 +52,7 @@ namespace RoguegardUnity
         {
             var fileInfo = (FileInfo)arg.Arg.Other;
             fileInfo.Delete();
-            manager.PopMenuScreen(2);
+            manager.PopScreen(2);
         }
 
         public override void CloseScreenView(MMgr manager, bool back)
@@ -65,7 +65,7 @@ namespace RoguegardUnity
             public string path, newPath;
         }
 
-        private class RenameDialog : RogueMenuScreen
+        private class RenameDialog : RogueListuiScreen
         {
             private string newName;
 
@@ -95,7 +95,7 @@ namespace RoguegardUnity
                             else return newName = value;
                         }))
 
-                    .VarOnce(out var overwriteDialog, new ChoicesMenuScreen(":RenameOverride").Option(":Yes", Overwrite).Back())
+                    .VarOnce(out var overwriteDialog, new ChoicesScreen(":RenameOverride").Option(":Yes", Overwrite).Back())
                     .Tail.Append(StackWidgetOption.Create(
                         ("1*", SelectOption.Create<MMgr, MArg>(":Rename", (manager, arg) =>
                         {
@@ -105,13 +105,13 @@ namespace RoguegardUnity
                             var newPath = Path.Combine(fileInfo.DirectoryName, $"{newName}{Path.GetExtension(fileInfo.Name)}");
                             if (newName != Path.GetFileNameWithoutExtension(fileInfo.Name) && File.Exists(newPath))
                             {
-                                manager.PopMenuScreen(2);
-                                manager.PushMenuScreen(overwriteDialog, other: new Paths() { path = fileInfo.FullName, newPath = newPath });
+                                manager.PopScreen(2);
+                                manager.PushScreen(overwriteDialog, other: new Paths() { path = fileInfo.FullName, newPath = newPath });
                             }
                             else
                             {
                                 fileInfo.MoveTo(newPath);
-                                manager.PopMenuScreen(2);
+                                manager.PopScreen(2);
                             }
                         })),
                         ("1*", BackSelectOption<MMgr, MArg>.Instance)))
@@ -126,7 +126,7 @@ namespace RoguegardUnity
 
             private static void Overwrite(MMgr manager, MArg arg)
             {
-                manager.PopMenuScreen();
+                manager.PopScreen();
 
                 var paths = (Paths)arg.Arg.Other;
                 File.Delete(paths.newPath);

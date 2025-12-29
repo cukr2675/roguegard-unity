@@ -10,8 +10,8 @@ namespace Lysionium
 
         delegate string InputFieldEventHandler<in TMgr, in TArg>(TMgr manager, TArg arg, string value);
 
-        string GetValue(IListMenuManager manager, IListMenuArg arg);
+        string GetValue(IListuiManager manager, IListuiArg arg);
 
-        string HandleValueChanged(IListMenuManager manager, IListMenuArg arg, string value);
+        string HandleValueChanged(IListuiManager manager, IListuiArg arg, string value);
     }
 }

@@ -4,12 +4,12 @@ namespace Lysionium
     {
         public static ToStringViewItemHandler Instance { get; } = new();
 
-        public string GetName(object item, IListMenuManager manager, IListMenuArg arg)
+        public string GetName(object item, IListuiManager manager, IListuiArg arg)
         {
             return item?.ToString();
         }
 
-        string IViewItemHandler.GetStyle(object item, IListMenuManager manager, IListMenuArg arg)
+        string IViewItemHandler.GetStyle(object item, IListuiManager manager, IListuiArg arg)
         {
             return string.Empty;
         }

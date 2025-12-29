@@ -58,7 +58,7 @@ namespace Roguegard
             }
         }
 
-        private class AfterLoadRogueMethod : FloorMenuAfterLoadRogueMethod
+        private class AfterLoadRogueMethod : FloorScreenAfterLoadRogueMethod
         {
             protected override string GetName(MMgr manager, RogueObj player, RogueObj empty, in RogueMethodArgument arg)
             {

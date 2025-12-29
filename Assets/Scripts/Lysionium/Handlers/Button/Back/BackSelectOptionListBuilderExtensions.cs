@@ -4,8 +4,8 @@ namespace Lysionium
     {
         public static TBuilder Back<TMgr, TArg, TBuilder>(
             this ISelectOptionListBuilder<TMgr, TArg, TBuilder> builder, string name = null, string style = null)
-            where TMgr : IBackOptionProviderListMenuManager<TMgr, TArg>
-            where TArg : IListMenuArg
+            where TMgr : IBackOptionProviderListuiManager<TMgr, TArg>
+            where TArg : IListuiArg
         {
             if (name == null && style == null)
             {
@@ -19,8 +19,8 @@ namespace Lysionium
 
         // 設計メモ: あまり自由に使ってほしくないので引数は作らない
         public static SelectOptionList<TMgr, TArg> BackIfReflectable<TMgr, TArg>(this SelectOptionList<TMgr, TArg> builder)
-            where TMgr : IListMenuManager
-            where TArg : IListMenuArg
+            where TMgr : IListuiManager
+            where TArg : IListuiArg
         {
             if (BackSelectOption.TryCreate<TMgr, TArg>(out var backOption))
             {

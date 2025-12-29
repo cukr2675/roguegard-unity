@@ -44,7 +44,7 @@ namespace RoguegardUnity
         }
 
         public override void SetListHandler(
-            IReadOnlyList<object> list, IViewItemHandler handler, IListMenuManager manager, IListMenuArg arg,
+            IReadOnlyList<object> list, IViewItemHandler handler, IListuiManager manager, IListuiArg arg,
             ref ISubviewStateProvider stateProvider)
             => throw new System.NotSupportedException();
 
@@ -61,13 +61,13 @@ namespace RoguegardUnity
             ShowSplitLine(showSplitLine, pivots);
         }
 
-        public override void Show(ListMenuEventHandler onEndAnimation = null, ListMenuEventHandler onHide = null)
+        public override void Show(ListuiEventHandler onEndAnimation = null, ListuiEventHandler onHide = null)
         {
             base.Show(onEndAnimation, onHide);
             _toolSet.enabled = true;
         }
 
-        public override void Hide(bool back, ListMenuEventHandler onEndAnimation = null)
+        public override void Hide(bool back, ListuiEventHandler onEndAnimation = null)
         {
             base.Hide(back, onEndAnimation);
             _toolSet.enabled = false;

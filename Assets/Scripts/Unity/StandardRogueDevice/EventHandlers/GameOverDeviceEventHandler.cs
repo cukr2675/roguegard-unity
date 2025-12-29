@@ -10,7 +10,7 @@ namespace RoguegardUnity
     {
         private readonly StandardRogueDeviceComponentManager componentManager;
 
-        private static readonly GameOverMenu gameOverMenu = new();
+        private static readonly GameOverScreen gameOverScreen = new();
 
         public GameOverDeviceEventHandler(StandardRogueDeviceComponentManager componentManager)
         {
@@ -41,7 +41,7 @@ namespace RoguegardUnity
 
             if (leaderCharacter == componentManager.Subject)
             {
-                componentManager.EventManager.AddMenu(gameOverMenu, leaderCharacter, null, new(targetObj: dungeon));
+                componentManager.EventManager.AddScreen(gameOverScreen, leaderCharacter, null, new(targetObj: dungeon));
                 RogueDevice.Add(DeviceKw.EnqueueViewDequeueState, 0);
             }
             else
@@ -56,13 +56,13 @@ namespace RoguegardUnity
         /// <summary>
         /// ログ表示 → リザルト表示 → ロビーへ帰還
         /// </summary>
-        private class GameOverMenu : RogueMenuScreen
+        private class GameOverScreen : RogueListuiScreen
         {
             private readonly MainMenuViewData<MMgr, MArg> view = new()
             {
                 PrimaryCommandSubviewSelector = m => m.LongMessage,
                 BackAnchorSubviewSelector = m => m.ForwardAnchor,
-                BackAnchorList = new(_ => _.Option("OK", new NextMenu())),
+                BackAnchorList = new(_ => _.Option("OK", new NextScreen())),
             };
 
             public override void OpenScreen(MMgr manager, MArg arg)
@@ -73,7 +73,7 @@ namespace RoguegardUnity
                     .Build();
             }
 
-            private class NextMenu : RogueMenuScreen
+            private class NextScreen : RogueListuiScreen
             {
                 public override void OpenScreen(MMgr manager, MArg arg)
                 {

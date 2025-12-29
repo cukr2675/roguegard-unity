@@ -4,16 +4,16 @@ using System.Text.RegularExpressions;
 namespace Lysionium
 {
     /// <inheritdoc/>
-    public class SpeechBoxViewData<TMgr> : SpeechBoxViewData<TMgr, IListMenuArg>
-        where TMgr : IListMenuManager
+    public class SpeechBoxViewData<TMgr> : SpeechBoxViewData<TMgr, IListuiArg>
+        where TMgr : IListuiManager
     { }
 
     /// <summary>
     /// 会話ボックスと選択肢を扱う ViewData
     /// </summary>
     public class SpeechBoxViewData<TMgr, TArg> : ListViewData<ISelectOption<TMgr, TArg>, TMgr, TArg>
-        where TMgr : IListMenuManager
-        where TArg : IListMenuArg
+        where TMgr : IListuiManager
+        where TArg : IListuiArg
     {
         public System.Func<TMgr, IMessageBoxSubview> SpeechBoxSubviewSelector { get; set; }
             = manager => (manager as IDefaultSubviewTable)?.SpeechBox;
@@ -32,7 +32,7 @@ namespace Lysionium
         private ISubviewStateProvider speechBoxSubviewStateProvider;
         private ISubviewStateProvider choicesSubviewStateProvider;
         private ISubviewStateProvider captionBoxSubviewStateProvider;
-        private event ListMenuEventHandler<TMgr, TArg> OnCompleted;
+        private event ListuiEventHandler<TMgr, TArg> OnCompleted;
 
         private readonly string[] message = new string[1];
 
@@ -111,7 +111,7 @@ namespace Lysionium
             {
             }
 
-            public Builder OnCompleted(ListMenuEventHandler<TMgr, TArg> onCompleted)
+            public Builder OnCompleted(ListuiEventHandler<TMgr, TArg> onCompleted)
             {
                 AssertNotBuilt();
 
