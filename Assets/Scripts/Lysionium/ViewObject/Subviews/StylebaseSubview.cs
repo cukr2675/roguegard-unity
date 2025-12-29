@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Lysionium.Views
 {
     [AddComponentMenu("UI/Lysionium/Subviews/LUI Stylebase Subview")]
-    public class StylebaseSubview : Subview
+    public class StylebaseSubview : ListHandlerSubview
     {
         [Tooltip("インジケータを構成する要素リスト")]
         [SerializeField] private List<StylebaseElement> _viewItems;

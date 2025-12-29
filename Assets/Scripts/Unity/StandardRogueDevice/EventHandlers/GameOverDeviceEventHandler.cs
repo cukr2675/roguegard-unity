@@ -60,7 +60,7 @@ namespace RoguegardUnity
         {
             private readonly MainMenuViewData<MMgr, MArg> view = new()
             {
-                PrimaryCommandSubviewSelector = m => m.LongMessage,
+                PrimaryCommandSubviewSelector = null,
                 BackAnchorSubviewSelector = m => m.ForwardAnchor,
                 BackAnchorList = new(_ => _.Option("OK", new NextScreen())),
             };
@@ -71,6 +71,8 @@ namespace RoguegardUnity
                 view.Show(manager, arg)
                     ?
                     .Build();
+
+                manager.LongMessage.Show();
             }
 
             private class NextScreen : RogueListuiScreen

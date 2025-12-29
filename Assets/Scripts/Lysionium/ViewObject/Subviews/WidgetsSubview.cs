@@ -6,7 +6,7 @@ using UnityEngine.UI;
 namespace Lysionium.Views
 {
     [AddComponentMenu("UI/Lysionium/Subviews/LUI Widgets Subview")]
-    public class WidgetsSubview : Subview
+    public class WidgetsSubview : ListHandlerSubview
     {
         [SerializeField] private ScrollRect _scrollRect = null;
 

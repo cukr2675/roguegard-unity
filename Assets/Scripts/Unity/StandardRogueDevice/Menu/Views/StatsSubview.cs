@@ -1,7 +1,5 @@
-using Lysionium;
 using Lysionium.Views;
 using Roguegard;
-using System.Collections.Generic;
 using System.Text;
 using TMPro;
 using UnityEngine;
@@ -19,11 +17,6 @@ namespace RoguegardUnity
         private static readonly StringBuilder hpTextBuilder = new();
         private static readonly StringBuilder mpTextBuilder = new();
         private static readonly RogueNameBuilder nameBuilder = new();
-
-        public override void SetListHandler(
-            IReadOnlyList<object> list, IViewItemHandler handler, IListuiManager manager, IListuiArg arg,
-            ref ISubviewStateProvider stateProvider)
-            => new System.NotSupportedException();
 
         public void SetText(RogueObj obj)
         {

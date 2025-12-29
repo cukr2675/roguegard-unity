@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace RoguegardUnity
 {
-    public class FaceSubview : Subview
+    public class FaceSubview : ListHandlerSubview
     {
         [SerializeField] private RectTransform _content = null;
 

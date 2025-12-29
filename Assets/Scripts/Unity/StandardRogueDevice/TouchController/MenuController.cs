@@ -81,6 +81,11 @@ namespace RoguegardUnity
             _dopesheet.Initialize();
             if (_titleMenu != null) { _titleMenu.CommonInit(); }
 
+            {
+                ISubviewStateProvider _ = null;
+                MessageBox.Clear(this, null, ref _);
+                LongMessage.Clear(this, null, ref _);
+            }
             EventManager = new RogueListuiEventManager(new MessageController(MessageBox, LongMessage), _audioPlayHandler);
         }
 

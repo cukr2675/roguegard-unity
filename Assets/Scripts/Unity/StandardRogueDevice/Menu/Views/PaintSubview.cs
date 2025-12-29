@@ -43,11 +43,6 @@ namespace RoguegardUnity
             }
         }
 
-        public override void SetListHandler(
-            IReadOnlyList<object> list, IViewItemHandler handler, IListuiManager manager, IListuiArg arg,
-            ref ISubviewStateProvider stateProvider)
-            => throw new System.NotSupportedException();
-
         void IPaintElementsSubview.SetPaint(
             IReadOnlyList<DotterBoard> dotterBoards, Spanning<ShiftableColor> palette, Color32 mainColor, bool showSplitLine, Vector2[] pivots)
         {

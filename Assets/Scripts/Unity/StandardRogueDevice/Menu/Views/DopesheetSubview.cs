@@ -10,7 +10,7 @@ using UnityEngine.UI;
 
 namespace RoguegardUnity
 {
-    public class DopesheetSubview : Subview
+    public class DopesheetSubview : ListHandlerSubview
     {
         [SerializeField] private ScrollRect _scrollRect = null;
         [SerializeField] private RectTransform _floatingContent = null;

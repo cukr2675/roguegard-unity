@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Lysionium.Views
 {
     [AddComponentMenu("UI/Lysionium/Subviews/LUI Dropdown Grid Subview")]
-    public class DropdownGridSubview : Subview
+    public class DropdownGridSubview : ListHandlerSubview
     {
         [SerializeField] private GridViewContainer _viewContainerPrefab = null;
 

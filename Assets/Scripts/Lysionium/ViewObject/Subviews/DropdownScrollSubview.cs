@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Lysionium.Views
 {
     [AddComponentMenu("UI/Lysionium/Subviews/LUI Dropdown Scroll Subview")]
-    public class DropdownScrollSubview : Subview
+    public class DropdownScrollSubview : ListHandlerSubview
     {
         [SerializeField] private GridViewContainer _viewContainerPrefab = null;
 

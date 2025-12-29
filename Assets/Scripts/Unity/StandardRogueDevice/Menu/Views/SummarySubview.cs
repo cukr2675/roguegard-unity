@@ -74,13 +74,6 @@ namespace RoguegardUnity
             nameBuilder = new RogueNameBuilder();
         }
 
-        public override void SetListHandler(
-            IReadOnlyList<object> list, IViewItemHandler handler, IListuiManager manager, IListuiArg arg,
-            ref ISubviewStateProvider stateProvider)
-        {
-            SetArg(manager, arg);
-        }
-
         public void SetObj(object obj, MMgr manager)
         {
             if (obj is RogueObj rogueObj)

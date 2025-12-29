@@ -10,71 +10,71 @@ namespace Lysionium.Views
         [SerializeField] private Image _blocker = null;
 
         [Tooltip("ゲームプレイ中（メニュー非表示時）だけ表示する Subview 。メニュー表示中も表示させる HUD は Subview の外に追加する")]
-        [SerializeField] private Subview _playingHud = null;
-        public Subview PlayingHud
+        [SerializeField] private ListHandlerSubview _playingHud = null;
+        public ListHandlerSubview PlayingHud
         {
             get => _playingHud;
             set => _playingHud = value;
         }
 
-        [SerializeField] private Subview _scroll = null;
-        public Subview Scroll
+        [SerializeField] private ListHandlerSubview _scroll = null;
+        public ListHandlerSubview Scroll
         {
             get => _scroll;
             set => _scroll = value;
         }
 
-        [SerializeField] private Subview _widgets = null;
-        public Subview Widgets
+        [SerializeField] private ListHandlerSubview _widgets = null;
+        public ListHandlerSubview Widgets
         {
             get => _widgets;
             set => _widgets = value;
         }
 
-        [SerializeField] private LongMessageSubview _longMessage = null;
-        public LongMessageSubview LongMessage
+        [SerializeField] private MessageBoxSubview _longMessage = null;
+        public MessageBoxSubview LongMessage
         {
             get => _longMessage;
             set => _longMessage = value;
         }
 
-        [SerializeField] private Subview _backAnchor = null;
-        public Subview BackAnchor
+        [SerializeField] private ListHandlerSubview _backAnchor = null;
+        public ListHandlerSubview BackAnchor
         {
             get => _backAnchor;
             set => _backAnchor = value;
         }
 
-        [SerializeField] private Subview _forwardAnchor = null;
-        public Subview ForwardAnchor
+        [SerializeField] private ListHandlerSubview _forwardAnchor = null;
+        public ListHandlerSubview ForwardAnchor
         {
             get => _forwardAnchor;
             set => _forwardAnchor = value;
         }
 
-        [SerializeField] private Subview _primaryCommand = null;
-        public Subview PrimaryCommand
+        [SerializeField] private ListHandlerSubview _primaryCommand = null;
+        public ListHandlerSubview PrimaryCommand
         {
             get => _primaryCommand;
             set => _primaryCommand = value;
         }
 
-        [SerializeField] private Subview _captionBox = null;
-        public Subview CaptionBox
+        [SerializeField] private ListHandlerSubview _captionBox = null;
+        public ListHandlerSubview CaptionBox
         {
             get => _captionBox;
             set => _captionBox = value;
         }
 
-        [SerializeField] private Subview _secondaryCommand = null;
-        public Subview SecondaryCommand
+        [SerializeField] private ListHandlerSubview _secondaryCommand = null;
+        public ListHandlerSubview SecondaryCommand
         {
             get => _secondaryCommand;
             set => _secondaryCommand = value;
         }
 
-        [SerializeField] private Subview _dialog = null;
-        public Subview Dialog
+        [SerializeField] private ListHandlerSubview _dialog = null;
+        public ListHandlerSubview Dialog
         {
             get => _dialog;
             set => _dialog = value;
@@ -94,15 +94,15 @@ namespace Lysionium.Views
             set => _messageBox = value;
         }
 
-        [SerializeField] private Subview _fadeMask = null;
-        public Subview FadeMask
+        [SerializeField] private ListHandlerSubview _fadeMask = null;
+        public ListHandlerSubview FadeMask
         {
             get => _fadeMask;
             set => _fadeMask = value;
         }
 
-        [SerializeField] private Subview _overlay = null;
-        public Subview Overlay
+        [SerializeField] private ListHandlerSubview _overlay = null;
+        public ListHandlerSubview Overlay
         {
             get => _overlay;
             set => _overlay = value;
@@ -115,8 +115,8 @@ namespace Lysionium.Views
             set => _speechBox = value;
         }
 
-        [SerializeField] private Subview _choices = null;
-        public Subview Choices
+        [SerializeField] private ListHandlerSubview _choices = null;
+        public ListHandlerSubview Choices
         {
             get => _choices;
             set => _choices = value;

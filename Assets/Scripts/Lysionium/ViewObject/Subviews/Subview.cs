@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Lysionium.Views
@@ -7,7 +6,7 @@ namespace Lysionium.Views
     /// モデルのリストをコントローラで制御する UI のクラス。
     /// </summary>
     [RequireComponent(typeof(CanvasGroup))]
-    public abstract class Subview : SubviewBase, ISubview, IListHandlerSubview
+    public abstract class Subview : SubviewBase, ISubview
     {
         private CanvasGroup canvasGroup;
 
@@ -69,10 +68,6 @@ namespace Lysionium.Views
             OnHide = null;
             tempOnHide?.Invoke(Manager, Arg);
         }
-
-        public abstract void SetListHandler(
-            IReadOnlyList<object> list, IViewItemHandler handler, IListuiManager manager, IListuiArg arg,
-            ref ISubviewStateProvider stateProvider);
 
         /// <summary>
         /// この Subview のUI操作をブロックしてプレイヤーからの操作を防ぐ（使用例: ダイアログの後ろで表示されているメニューをブロックする）

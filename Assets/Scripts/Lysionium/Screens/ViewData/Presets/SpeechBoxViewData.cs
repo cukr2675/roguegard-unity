@@ -34,7 +34,7 @@ namespace Lysionium
         private ISubviewStateProvider captionBoxSubviewStateProvider;
         private event ListuiEventHandler<TMgr, TArg> OnCompleted;
 
-        private readonly string[] message = new string[1];
+        private string message;
 
         public Builder Show(string message, TMgr manager, TArg arg, object viewStateHolder = null)
         {
@@ -57,7 +57,7 @@ namespace Lysionium
             }
 
             // メッセージボックスのビューを表示
-            this.message[0] = message;
+            this.message = message;
 
             if (TryShowSubviews(manager, arg)) return null;
             else return new Builder(this, manager, arg);
@@ -68,7 +68,12 @@ namespace Lysionium
             var speechBoxSubview = SpeechBoxSubviewSelector?.Invoke(manager);
             if (speechBoxSubview != null)
             {
-                speechBoxSubview.Show(message, ToStringViewItemHandler.Instance, manager, arg, ref speechBoxSubviewStateProvider);
+                speechBoxSubview.Clear(manager, arg, ref speechBoxSubviewStateProvider);
+                speechBoxSubview.Show((_, _) =>
+                {
+                    // メッセージボックスの表示アニメーションが完了してから文字を表示する
+                    speechBoxSubview.Append(message);
+                });
                 speechBoxSubview.DoScheduledAfterCompletion((manager, arg) =>
                 {
                     if (LuiAssert.Type<TMgr>(manager, out var tMgr, manager) ||

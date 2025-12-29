@@ -5,7 +5,7 @@ using UnityEngine.UI;
 namespace Lysionium.Views
 {
     [AddComponentMenu("UI/Lysionium/Subviews/LUI Grid Subview")]
-    public class GridSubview : Subview
+    public class GridSubview : ListHandlerSubview
     {
         [SerializeField] private RectTransform _content = null;
         [SerializeField] private ViewItem _viewItemPrefab = null;

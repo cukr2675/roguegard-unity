@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -40,21 +39,14 @@ namespace Lysionium.Views
             }
         }
 
-        public override void SetListHandler(
-            IReadOnlyList<object> list, IViewItemHandler handler, IListuiManager manager, IListuiArg arg,
-            ref ISubviewStateProvider stateProvider)
+        public void Clear()
         {
             _messageBox.Clear();
-            OnEndAnimation += (manager, arg) =>
-            {
-                // メッセージボックスの表示アニメーションが完了してから文字を表示する
-                for (int i = 0; i < list.Count; i++)
-                {
-                    var name = handler.GetName(list[i], manager, arg);
-                    name = manager.Localize(name);
-                    _messageBox.Append(name);
-                }
-            };
+        }
+
+        public void Clear(IListuiManager manager, IListuiArg arg, ref ISubviewStateProvider stateProvider)
+        {
+            _messageBox.Clear();
             SetArg(manager, arg);
 
             if (_blocker != null)
@@ -66,7 +58,7 @@ namespace Lysionium.Views
 
         public void Append(string text)
         {
-            _messageBox.Append(text);
+            _messageBox.Append(Manager.Localize(text));
         }
 
         public void Append(int integer)
@@ -77,11 +69,6 @@ namespace Lysionium.Views
         public void Append(float number)
         {
             _messageBox.Append(number);
-        }
-
-        public void Clear()
-        {
-            _messageBox.Clear();
         }
 
         public void DoScheduledAfterCompletion(ListuiEventHandler onEndAnimation)

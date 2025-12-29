@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 namespace Lysionium.Views
 {
     [AddComponentMenu("UI/Lysionium/Subviews/LUI Carousel 3D Subview")]
-    public class Carousel3DSubview : Subview
+    public class Carousel3DSubview : ListHandlerSubview
     {
         [SerializeField] private Vector2 _axisAnchoredPosition = Vector2.zero;
         [SerializeField] private Quaternion _axisRotation = Quaternion.Euler(-15f, 0f, 0f);

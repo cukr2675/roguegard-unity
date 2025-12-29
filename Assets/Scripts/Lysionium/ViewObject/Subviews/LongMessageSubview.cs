@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,13 +10,6 @@ namespace Lysionium.Views
         [SerializeField] private ScrollRect _scrollRect = null;
 
         private TMP_Text text;
-
-        public override void SetListHandler(
-            IReadOnlyList<object> list, IViewItemHandler handler, IListuiManager manager, IListuiArg arg,
-            ref ISubviewStateProvider stateProvider)
-        {
-            SetArg(manager, arg);
-        }
 
         protected override void Update()
         {

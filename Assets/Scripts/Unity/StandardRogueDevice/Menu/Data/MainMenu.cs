@@ -61,7 +61,7 @@ namespace RoguegardUnity
         {
             private readonly MainMenuViewData<MMgr, MArg> view = new()
             {
-                PrimaryCommandSubviewSelector = m => m.LongMessage,
+                PrimaryCommandSubviewSelector = null,
                 BackAnchorSubviewSelector = m => m.BackAnchor,
             };
 
@@ -70,6 +70,8 @@ namespace RoguegardUnity
                 view.Show(manager, arg)
                     ?
                     .Build();
+
+                manager.LongMessage.Show();
             }
         }
 

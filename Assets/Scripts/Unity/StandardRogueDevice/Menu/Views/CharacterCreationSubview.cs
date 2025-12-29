@@ -11,7 +11,7 @@ using UnityEngine.UI;
 
 namespace RoguegardUnity
 {
-    public class CharacterCreationSubview : Subview, ICharacterCreationElementsSubview
+    public class CharacterCreationSubview : ListHandlerSubview, ICharacterCreationElementsSubview
     {
         [SerializeField] private ScrollRect _scrollRect = null;
         [SerializeField] private RectTransform _firstParent = null;

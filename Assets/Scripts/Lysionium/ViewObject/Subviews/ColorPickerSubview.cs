@@ -1,5 +1,4 @@
 using HSVPicker;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -21,11 +20,6 @@ namespace Lysionium.Views
         {
             _closeButton.onClick.AddListener(() => onClose?.Invoke(Manager, Arg, _colorPicker.CurrentColor));
         }
-
-        public override void SetListHandler(
-            IReadOnlyList<object> list, IViewItemHandler handler, IListuiManager manager, IListuiArg arg,
-            ref ISubviewStateProvider stateProvider)
-            => throw new System.NotSupportedException();
 
         public void SetupColorPicker(
             Color color, IColorPickerSubview.ColorPickerEventHandler onClose, IListuiManager manager, IListuiArg arg,
