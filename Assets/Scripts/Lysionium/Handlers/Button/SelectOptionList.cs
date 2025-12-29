@@ -9,15 +9,14 @@ namespace Lysionium
     { }
 
     public class SelectOptionList<TMgr, TArg>
-        : IList<ISelectOption<TMgr, TArg>>, IReadOnlyList<ISelectOption<TMgr, TArg>>, ISelectOptionListBuilder<TMgr, TArg, SelectOptionList<TMgr, TArg>>
+        : IReadOnlyList<ISelectOption<TMgr, TArg>>, ISelectOptionListBuilder<TMgr, TArg, SelectOptionList<TMgr, TArg>>
         where TMgr : IListMenuManager
         where TArg : IListMenuArg
     {
         private readonly List<ISelectOption<TMgr, TArg>> list = new();
 
-        public ISelectOption<TMgr, TArg> this[int index] { get => list[index]; set => list[index] = value; }
+        public ISelectOption<TMgr, TArg> this[int index] => list[index];
         public int Count => list.Count;
-        public bool IsReadOnly => ((ICollection<ISelectOption<TMgr, TArg>>)list).IsReadOnly;
 
         public SelectOptionList(System.Action<SelectOptionList<TMgr, TArg>> initializeAction = null)
         {
@@ -30,14 +29,6 @@ namespace Lysionium
             return this;
         }
 
-        public void Add(ISelectOption<TMgr, TArg> item) => list.Add(item);
-        public void Insert(int index, ISelectOption<TMgr, TArg> item) => list.Insert(index, item);
-        public bool Remove(ISelectOption<TMgr, TArg> item) => list.Remove(item);
-        public void RemoveAt(int index) => list.RemoveAt(index);
-        public void Clear() => list.Clear();
-        public bool Contains(ISelectOption<TMgr, TArg> item) => list.Contains(item);
-        public int IndexOf(ISelectOption<TMgr, TArg> item) => list.IndexOf(item);
-        public void CopyTo(ISelectOption<TMgr, TArg>[] array, int arrayIndex) => list.CopyTo(array, arrayIndex);
         public IEnumerator<ISelectOption<TMgr, TArg>> GetEnumerator() => list.GetEnumerator();
         IEnumerator IEnumerable.GetEnumerator() => list.GetEnumerator();
         SelectOptionList<TMgr, TArg> ISelectOptionListBuilder<TMgr, TArg, SelectOptionList<TMgr, TArg>>.Option() => this;

@@ -44,6 +44,8 @@ namespace Lysionium
         //
         // IsIncremental が隠れるので可読性が下がる
         //
+        // IsIncremental == false の画面から IsIncremental == true の画面に戻れるように拡張しづらくなる
+        //
         //bool CloseScreenViewIsIncremental(TMgr manager, bool back);
     }
 }

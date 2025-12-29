@@ -19,6 +19,7 @@ namespace Lysionium.Views
         protected virtual void OnEnable()
         {
             if (playerInput == null) { playerInput = GetComponentInParent<PlayerInput>(); }
+            if (playerInput == null) return;
 
             InputUser.onChange += OnChange;
 

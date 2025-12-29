@@ -12,8 +12,6 @@ namespace Lysionium
     /// </summary>
     public interface ISubview
     {
-        void CommonInit();
-
         void Show(ListMenuEventHandler onEndAnimation = null, ListMenuEventHandler onHide = null);
 
         void Hide(bool back, ListMenuEventHandler onEndAnimation = null);
