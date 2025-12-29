@@ -68,13 +68,13 @@ namespace Lysionium.Views
                 animator.animator.SetBool(parameterName, visible);
             }
 
-            public static void TrySetStatusCode(SubviewBase subview, int statusCode)
+            public static void TrySetBack(SubviewBase subview, bool back)
             {
                 var animator = subview.animator ??= new AnimatorTupple(subview);
                 if (!animator.IsEnabled) return;
 
-                var parameterName = animator.subviewAnimator.StatusCodeInteger;
-                animator.animator.SetInteger(parameterName, statusCode);
+                var parameterName = animator.subviewAnimator.BackBool;
+                animator.animator.SetBool(parameterName, back);
             }
 
             public static void Play(SubviewBase subview, Object sender, string value)

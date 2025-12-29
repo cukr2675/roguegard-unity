@@ -102,7 +102,6 @@ namespace RoguegardUnity
             // 表示更新
             SetArg(manager, arg);
             UpdateElements(editInfo);
-            SetStatusCode(0);
 
             // 新しい StateProvider に切り替える
             currentStateProvider = local;

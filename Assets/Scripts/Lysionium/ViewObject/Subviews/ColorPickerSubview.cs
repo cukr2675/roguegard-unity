@@ -44,7 +44,6 @@ namespace Lysionium.Views
             _colorPicker.CurrentColor = color;
             this.onClose = onClose;
             SetArg(manager, arg);
-            SetStatusCode(0);
 
             // 新しい StateProvider に切り替える
             currentStateProvider = local;

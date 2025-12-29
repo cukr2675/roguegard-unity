@@ -17,8 +17,8 @@ namespace Lysionium.Views
         public string VisibleBool => _visibleBool;
 
         [Tooltip("Subview の AnimatorController のステータスコードパラメータ名")]
-        [SerializeField] private string _statusCodeInteger = "StatusCode";
-        public string StatusCodeInteger => _statusCodeInteger;
+        [SerializeField] private string _backBool = "Back";
+        public string BackBool => _backBool;
 
         [Space]
 

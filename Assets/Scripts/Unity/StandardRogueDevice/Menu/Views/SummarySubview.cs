@@ -79,7 +79,6 @@ namespace RoguegardUnity
             ref ISubviewStateProvider stateProvider)
         {
             SetArg(manager, arg);
-            SetStatusCode(0);
         }
 
         public void SetObj(object obj, MMgr manager)

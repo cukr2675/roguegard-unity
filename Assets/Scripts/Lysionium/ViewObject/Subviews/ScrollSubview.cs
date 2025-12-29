@@ -76,7 +76,6 @@ namespace Lysionium.Views
             SetArg(manager, arg);
             InitViewItems();
             UpdateViewItems();
-            SetStatusCode(0);
 
             // 新しい StateProvider に切り替える
             currentStateProvider = local;

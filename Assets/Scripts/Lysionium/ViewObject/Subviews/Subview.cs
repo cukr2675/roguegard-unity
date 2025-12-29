@@ -74,11 +74,6 @@ namespace Lysionium.Views
             IReadOnlyList<object> list, IViewItemHandler handler, IListMenuManager manager, IListMenuArg arg,
             ref ISubviewStateProvider stateProvider);
 
-        public void SetStatusCode(int statusCode)
-        {
-            AnimatorTupple.TrySetStatusCode(this, statusCode);
-        }
-
         /// <summary>
         /// この Subview のUI操作をブロックしてプレイヤーからの操作を防ぐ（使用例: ダイアログの後ろで表示されているメニューをブロックする）
         /// </summary>
@@ -108,9 +103,9 @@ namespace Lysionium.Views
             OnHide = null;
             tempOnHide?.Invoke(Manager, Arg);
 
-            if (back) { SetStatusCode(backStatusCode); }
             SetInteractable(false);
             AnimatorTupple.TrySetVisible(this, false);
+            AnimatorTupple.TrySetBack(this, back);
 
             if (onEndAnimation != null) { OnEndAnimation += onEndAnimation; }
         }

@@ -17,7 +17,6 @@ namespace Lysionium.Views
             ref ISubviewStateProvider stateProvider)
         {
             SetArg(manager, arg);
-            SetStatusCode(0);
         }
 
         protected override void Update()

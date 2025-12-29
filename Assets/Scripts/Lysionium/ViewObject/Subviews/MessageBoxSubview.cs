@@ -56,7 +56,6 @@ namespace Lysionium.Views
                 }
             };
             SetArg(manager, arg);
-            SetStatusCode(0);
 
             if (_blocker != null)
             {

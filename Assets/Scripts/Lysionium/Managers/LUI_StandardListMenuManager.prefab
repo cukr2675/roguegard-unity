@@ -139,7 +139,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _visibleBool: IsVisible
-  _statusCodeInteger: StatusCode
+  _backBool: Back
   _onPlayString:
     m_PersistentCalls:
       m_Calls: []
