@@ -19,7 +19,7 @@ namespace Lysionium
         { }
     }
 
-    public class ChoicesScreen<TMgr, TArg> : IListuiScreen<TMgr, TArg>, ISelectOptionListBuilder<TMgr, TArg, ChoicesScreen<TMgr, TArg>>
+    public class ChoicesScreen<TMgr, TArg> : IListuiScreen<TMgr, TArg>, ISelectOptionsBuilder<TMgr, TArg, ChoicesScreen<TMgr, TArg>>
         where TMgr : IListuiManager
         where TArg : IListuiArg
     {
@@ -82,6 +82,6 @@ namespace Lysionium
             else { manager.HideAll(back); }
         }
 
-        ChoicesScreen<TMgr, TArg> ISelectOptionListBuilder<TMgr, TArg, ChoicesScreen<TMgr, TArg>>.Option() => this;
+        ChoicesScreen<TMgr, TArg> ISelectOptionsBuilder<TMgr, TArg, ChoicesScreen<TMgr, TArg>>.Option() => this;
     }
 }

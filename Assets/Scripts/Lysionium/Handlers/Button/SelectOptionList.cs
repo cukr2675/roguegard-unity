@@ -14,7 +14,7 @@ namespace Lysionium
     }
 
     public class SelectOptionList<TMgr, TArg>
-        : IReadOnlyList<ISelectOption<TMgr, TArg>>, ISelectOptionListBuilder<TMgr, TArg, SelectOptionList<TMgr, TArg>>
+        : IReadOnlyList<ISelectOption<TMgr, TArg>>, ISelectOptionsBuilder<TMgr, TArg, SelectOptionList<TMgr, TArg>>
         where TMgr : IListuiManager
         where TArg : IListuiArg
     {
@@ -37,6 +37,6 @@ namespace Lysionium
         public void Clear() => list.Clear();
         public IEnumerator<ISelectOption<TMgr, TArg>> GetEnumerator() => list.GetEnumerator();
         IEnumerator IEnumerable.GetEnumerator() => list.GetEnumerator();
-        SelectOptionList<TMgr, TArg> ISelectOptionListBuilder<TMgr, TArg, SelectOptionList<TMgr, TArg>>.Option() => this;
+        SelectOptionList<TMgr, TArg> ISelectOptionsBuilder<TMgr, TArg, SelectOptionList<TMgr, TArg>>.Option() => this;
     }
 }

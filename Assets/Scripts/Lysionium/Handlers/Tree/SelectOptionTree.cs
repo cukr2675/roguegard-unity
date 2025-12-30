@@ -10,8 +10,8 @@ namespace Lysionium
 
     public class SelectOptionTree<TMgr, TArg> :
         IReadOnlyList<object>,
-        ISelectOptionListBuilder<TMgr, TArg, SelectOptionTree<TMgr, TArg>>,
-        ITreeOptionListBuilder<TMgr, TArg, SelectOptionTree<TMgr, TArg>>
+        ISelectOptionsBuilder<TMgr, TArg, SelectOptionTree<TMgr, TArg>>,
+        ITreeOptionsBuilder<TMgr, TArg, SelectOptionTree<TMgr, TArg>>
         where TMgr : IListuiManager
         where TArg : IListuiArg
     {
@@ -40,7 +40,7 @@ namespace Lysionium
         public void Clear() => list.Clear();
         public IEnumerator<object> GetEnumerator() => list.GetEnumerator();
         IEnumerator IEnumerable.GetEnumerator() => list.GetEnumerator();
-        SelectOptionTree<TMgr, TArg> ISelectOptionListBuilder<TMgr, TArg, SelectOptionTree<TMgr, TArg>>.Option() => this;
-        SelectOptionTree<TMgr, TArg> ITreeOptionListBuilder<TMgr, TArg, SelectOptionTree<TMgr, TArg>>.Option() => this;
+        SelectOptionTree<TMgr, TArg> ISelectOptionsBuilder<TMgr, TArg, SelectOptionTree<TMgr, TArg>>.Option() => this;
+        SelectOptionTree<TMgr, TArg> ITreeOptionsBuilder<TMgr, TArg, SelectOptionTree<TMgr, TArg>>.Option() => this;
     }
 }

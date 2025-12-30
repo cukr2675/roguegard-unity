@@ -2,10 +2,10 @@ using System.Collections.Generic;
 
 namespace Lysionium
 {
-    public static class SelectOptionListBuilderExtensions
+    public static class SelectOptionsBuilderExtensions
     {
         public static TBuilder OptionRange<TMgr, TArg, TBuilder>(
-            this ISelectOptionListBuilder<TMgr, TArg, TBuilder> builder, IEnumerable<ISelectOption<TMgr, TArg>> options)
+            this ISelectOptionsBuilder<TMgr, TArg, TBuilder> builder, IEnumerable<ISelectOption<TMgr, TArg>> options)
             where TMgr : IListuiManager
             where TArg : IListuiArg
         {
@@ -19,7 +19,7 @@ namespace Lysionium
         }
 
         public static TBuilder Option<TMgr, TArg, TBuilder>(
-            this ISelectOptionListBuilder<TMgr, TArg, TBuilder> builder,
+            this ISelectOptionsBuilder<TMgr, TArg, TBuilder> builder,
             string name, ClickItemHandler<TMgr, TArg> onClick, string style = null)
             where TMgr : IListuiManager
             where TArg : IListuiArg
@@ -28,7 +28,7 @@ namespace Lysionium
         }
 
         public static TBuilder Option<TMgr, TArg, TBuilder>(
-            this ISelectOptionListBuilder<TMgr, TArg, TBuilder> builder,
+            this ISelectOptionsBuilder<TMgr, TArg, TBuilder> builder,
             System.Func<TMgr, TArg, string> getName, ClickItemHandler<TMgr, TArg> onClick, string style = null)
             where TMgr : IListuiManager
             where TArg : IListuiArg

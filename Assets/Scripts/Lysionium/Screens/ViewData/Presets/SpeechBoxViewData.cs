@@ -103,7 +103,7 @@ namespace Lysionium
             if (Title != null) { CaptionBoxSubviewSelector?.Invoke(manager)?.Hide(back); }
         }
 
-        public class Builder : BaseListBuilder<SpeechBoxViewData<TMgr, TArg>, Builder>, ISelectOptionListBuilder<TMgr, TArg, Builder>
+        public class Builder : BaseListBuilder<SpeechBoxViewData<TMgr, TArg>, Builder>, ISelectOptionsBuilder<TMgr, TArg, Builder>
         {
             public Builder(SpeechBoxViewData<TMgr, TArg> parent, TMgr manager, TArg arg)
                 : base(parent, manager, arg)
@@ -129,7 +129,7 @@ namespace Lysionium
                 Parent.OnCompleted = null;
             }
 
-            Builder ISelectOptionListBuilder<TMgr, TArg, Builder>.Option() => this;
+            Builder ISelectOptionsBuilder<TMgr, TArg, Builder>.Option() => this;
         }
 
         public class StringReplacer

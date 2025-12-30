@@ -3,12 +3,12 @@ using UnityEngine.InputSystem;
 
 namespace Lysionium
 {
-    public static class KeyOptionListBuilderExtensions
+    public static class KeyOptionsBuilderExtensions
     {
         // 命名メモ: メソッド名を Option にすると UnityEngine.InputSystem をインポートしていないアセンブリで SelectOptionListBuilderExtensions が使えなくなる
 
         public static TBuilder KeyOptionRange<TMgr, TArg, TBuilder>(
-            this IKeyOptionListBuilder<TMgr, TArg, TBuilder> builder, IEnumerable<IKeyOption<TMgr, TArg>> options)
+            this IKeyOptionsBuilder<TMgr, TArg, TBuilder> builder, IEnumerable<IKeyOption<TMgr, TArg>> options)
             where TMgr : IListuiManager
             where TArg : IListuiArg
         {
@@ -22,7 +22,7 @@ namespace Lysionium
         // input 指定子を想定して style は必須にする
         // name と style は近いほうが見やすいので onDo よりも左にする
         public static TBuilder KeyOption<TMgr, TArg, TBuilder>(
-            this IKeyOptionListBuilder<TMgr, TArg, TBuilder> builder,
+            this IKeyOptionsBuilder<TMgr, TArg, TBuilder> builder,
             string name, string style,
             InputItemHandler<TMgr, TArg> onDo,
             KeybindPhase phase = KeybindPhase.Performed | KeybindPhase.Canceled)
@@ -37,7 +37,7 @@ namespace Lysionium
         }
 
         public static TBuilder KeyOption<TMgr, TArg, TBuilder>(
-            this IKeyOptionListBuilder<TMgr, TArg, TBuilder> builder,
+            this IKeyOptionsBuilder<TMgr, TArg, TBuilder> builder,
             string name, string style,
             System.Action<InputAction.CallbackContext> onDo,
             KeybindPhase phase = KeybindPhase.Performed | KeybindPhase.Canceled)
@@ -52,7 +52,7 @@ namespace Lysionium
         }
 
         public static TBuilder KeyOption<TMgr, TArg, TBuilder>(
-            this IKeyOptionListBuilder<TMgr, TArg, TBuilder> builder,
+            this IKeyOptionsBuilder<TMgr, TArg, TBuilder> builder,
             string name, string style,
             InputItemHandler<TMgr, TArg> onStart,
             InputItemHandler<TMgr, TArg> onPerform,
@@ -64,7 +64,7 @@ namespace Lysionium
         }
 
         public static TBuilder KeyOption<TMgr, TArg, TBuilder>(
-            this IKeyOptionListBuilder<TMgr, TArg, TBuilder> builder,
+            this IKeyOptionsBuilder<TMgr, TArg, TBuilder> builder,
             string name, string style,
             System.Action<InputAction.CallbackContext> onStart,
             System.Action<InputAction.CallbackContext> onPerform,

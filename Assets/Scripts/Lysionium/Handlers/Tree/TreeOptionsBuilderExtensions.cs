@@ -2,10 +2,10 @@ using System.Collections.Generic;
 
 namespace Lysionium
 {
-    public static class TreeOptionListBuilderExtensions
+    public static class TreeOptionsBuilderExtensions
     {
         public static TBuilder Node<TMgr, TArg, TBuilder>(
-            this ITreeOptionListBuilder<TMgr, TArg, TBuilder> builder,
+            this ITreeOptionsBuilder<TMgr, TArg, TBuilder> builder,
             string name, System.Action<SelectOptionTree<TMgr, TArg>> nodeInitializeAction)
             where TMgr : IListuiManager
             where TArg : IListuiArg
@@ -15,7 +15,7 @@ namespace Lysionium
         }
 
         public static TBuilder Node<TMgr, TArg, TBuilder>(
-            this ITreeOptionListBuilder<TMgr, TArg, TBuilder> builder,
+            this ITreeOptionsBuilder<TMgr, TArg, TBuilder> builder,
             string name, string style, System.Action<SelectOptionTree<TMgr, TArg>> nodeInitializeAction)
             where TMgr : IListuiManager
             where TArg : IListuiArg

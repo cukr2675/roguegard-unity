@@ -3,7 +3,7 @@ namespace Lysionium
     public static class ListuiScreenManagerExtensions
     {
         public static TBuilder Option<TMgr, TArg, TBuilder>(
-            this ISelectOptionListBuilder<TMgr, TArg, TBuilder> builder,
+            this ISelectOptionsBuilder<TMgr, TArg, TBuilder> builder,
             string name, IListuiScreen<TMgr, TArg> screen, string style = null)
             where TMgr : IListuiScreenManager<TMgr, TArg>
             where TArg : IListuiArg
@@ -12,7 +12,7 @@ namespace Lysionium
         }
 
         public static TBuilder Option<TMgr, TArg, TBuilder>(
-            this ISelectOptionListBuilder<TMgr, TArg, TBuilder> builder,
+            this ISelectOptionsBuilder<TMgr, TArg, TBuilder> builder,
             System.Func<TMgr, TArg, string> getName, IListuiScreen<TMgr, TArg> screen, string style = null)
             where TMgr : IListuiScreenManager<TMgr, TArg>
             where TArg : IListuiArg

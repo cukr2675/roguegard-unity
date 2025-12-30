@@ -24,7 +24,7 @@ namespace Lysionium
     }
 
     public class KeyOptionList<TMgr, TArg>
-        : IReadOnlyList<IKeyOption<TMgr, TArg>>, IKeyOptionListBuilder<TMgr, TArg, KeyOptionList<TMgr, TArg>>
+        : IReadOnlyList<IKeyOption<TMgr, TArg>>, IKeyOptionsBuilder<TMgr, TArg, KeyOptionList<TMgr, TArg>>
         where TMgr : IListuiManager
         where TArg : IListuiArg
     {
@@ -47,6 +47,6 @@ namespace Lysionium
         public void Clear() => list.Clear();
         public IEnumerator<IKeyOption<TMgr, TArg>> GetEnumerator() => list.GetEnumerator();
         IEnumerator IEnumerable.GetEnumerator() => list.GetEnumerator();
-        KeyOptionList<TMgr, TArg> IKeyOptionListBuilder<TMgr, TArg, KeyOptionList<TMgr, TArg>>.Option() => this;
+        KeyOptionList<TMgr, TArg> IKeyOptionsBuilder<TMgr, TArg, KeyOptionList<TMgr, TArg>>.Option() => this;
     }
 }

@@ -103,7 +103,7 @@ namespace Lysionium
                 Parent.filter = null;
             }
 
-            public readonly struct HeadBuilder : ISelectOptionListBuilder<TMgr, TArg, TOut>
+            public readonly struct HeadBuilder : ISelectOptionsBuilder<TMgr, TArg, TOut>
             {
                 private readonly TOut parent;
                 public HeadBuilder(TOut parent) => this.parent = parent;
@@ -124,10 +124,10 @@ namespace Lysionium
                     return parent;
                 }
 
-                TOut ISelectOptionListBuilder<TMgr, TArg, TOut>.Option() => parent;
+                TOut ISelectOptionsBuilder<TMgr, TArg, TOut>.Option() => parent;
             }
 
-            public readonly struct TailBuilder : ISelectOptionListBuilder<TMgr, TArg, TOut>
+            public readonly struct TailBuilder : ISelectOptionsBuilder<TMgr, TArg, TOut>
             {
                 private readonly TOut parent;
                 public TailBuilder(TOut parent) => this.parent = parent;
@@ -148,7 +148,7 @@ namespace Lysionium
                     return parent;
                 }
 
-                TOut ISelectOptionListBuilder<TMgr, TArg, TOut>.Option() => parent;
+                TOut ISelectOptionsBuilder<TMgr, TArg, TOut>.Option() => parent;
             }
         }
 

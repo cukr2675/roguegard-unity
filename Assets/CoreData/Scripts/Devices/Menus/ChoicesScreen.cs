@@ -5,7 +5,7 @@ namespace Roguegard.Device
     /// <summary>
     /// メッセージと選択肢のメニュー画面
     /// </summary>
-    public class ChoicesScreen : RogueListuiScreen, ISelectOptionListBuilder<MMgr, MArg, ChoicesScreen>
+    public class ChoicesScreen : RogueListuiScreen, ISelectOptionsBuilder<MMgr, MArg, ChoicesScreen>
     {
         private readonly ChoicesScreen<MMgr, MArg> screen;
 
@@ -81,6 +81,6 @@ namespace Roguegard.Device
             screen.CloseScreenView(manager, back);
         }
 
-        ChoicesScreen ISelectOptionListBuilder<MMgr, MArg, ChoicesScreen>.Option() => this;
+        ChoicesScreen ISelectOptionsBuilder<MMgr, MArg, ChoicesScreen>.Option() => this;
     }
 }

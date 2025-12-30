@@ -1,6 +1,6 @@
 namespace Lysionium
 {
-    public interface ITreeOptionListBuilder<TMgr, TArg, TBuilder>
+    public interface ITreeOptionsBuilder<TMgr, TArg, TBuilder>
     {
         TBuilder Option();
 

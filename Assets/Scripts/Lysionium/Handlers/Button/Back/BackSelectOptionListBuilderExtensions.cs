@@ -3,7 +3,7 @@ namespace Lysionium
     public static class BackSelectOptionListBuilderExtensions
     {
         public static TBuilder Back<TMgr, TArg, TBuilder>(
-            this ISelectOptionListBuilder<TMgr, TArg, TBuilder> builder, string name = null, string style = null)
+            this ISelectOptionsBuilder<TMgr, TArg, TBuilder> builder, string name = null, string style = null)
             where TMgr : IBackOptionProviderListuiManager<TMgr, TArg>
             where TArg : IListuiArg
         {
