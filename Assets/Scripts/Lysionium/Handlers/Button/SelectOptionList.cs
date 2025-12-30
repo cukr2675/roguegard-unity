@@ -6,7 +6,12 @@ namespace Lysionium
     /// <inheritdoc/>
     public class SelectOptionList<TMgr> : SelectOptionList<TMgr, IListuiArg>
         where TMgr : IListuiManager
-    { }
+    {
+        public SelectOptionList(System.Action<SelectOptionList<TMgr, IListuiArg>> initializeAction = null)
+            : base(initializeAction)
+        {
+        }
+    }
 
     public class SelectOptionList<TMgr, TArg>
         : IReadOnlyList<ISelectOption<TMgr, TArg>>, ISelectOptionListBuilder<TMgr, TArg, SelectOptionList<TMgr, TArg>>

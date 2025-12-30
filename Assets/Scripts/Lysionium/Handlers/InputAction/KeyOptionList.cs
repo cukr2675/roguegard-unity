@@ -6,7 +6,12 @@ namespace Lysionium
     /// <inheritdoc/>
     public class KeyOptionList<TMgr> : KeyOptionList<TMgr, IListuiArg>
         where TMgr : IListuiManager
-    { }
+    {
+        public KeyOptionList(System.Action<KeyOptionList<TMgr, IListuiArg>> initializeAction = null)
+            : base(initializeAction)
+        {
+        }
+    }
 
     public class KeyOptionList<TMgr, TArg>
         : IReadOnlyList<IKeyOption<TMgr, TArg>>, IKeyOptionListBuilder<TMgr, TArg, KeyOptionList<TMgr, TArg>>
