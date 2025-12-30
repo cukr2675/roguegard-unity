@@ -14,6 +14,7 @@ namespace Lysionium
         where TMgr : IListuiManager
         where TArg : IListuiArg
     {
+        // 命名メモ: 前画面に対する増分 (Incremental) として振る舞うため。単純に重ねる方法とは異なるため添加物 (Additive) ではない
         /// <summary>
         /// このメニューを表示中のメニューに重ねて表示するかを取得する。
         /// ダイアログなどを実装する際は true でオーバーライドしたうえで <see cref="CloseScreenView(TMgr, bool)"/> も実装する

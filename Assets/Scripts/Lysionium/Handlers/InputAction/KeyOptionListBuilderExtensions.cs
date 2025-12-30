@@ -5,6 +5,8 @@ namespace Lysionium
 {
     public static class KeyOptionListBuilderExtensions
     {
+        // 命名メモ: メソッド名を Option にすると UnityEngine.InputSystem をインポートしていないアセンブリで SelectOptionListBuilderExtensions が使えなくなる
+
         public static TBuilder KeyOptionRange<TMgr, TArg, TBuilder>(
             this IKeyOptionListBuilder<TMgr, TArg, TBuilder> builder, IEnumerable<IKeyOption<TMgr, TArg>> options)
             where TMgr : IListuiManager
