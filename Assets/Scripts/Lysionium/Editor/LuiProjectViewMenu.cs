@@ -11,7 +11,7 @@ namespace Lysionium.Editor
 @"using Lysionium;
 using UnityEngine;
 
-#ROOTNAMESPACEBEGIN#
+    #ROOTNAMESPACEBEGIN#
 public class #SCRIPTNAME# : MonoBehaviour
 {
     protected virtual void Start()
@@ -48,7 +48,7 @@ public class #SCRIPTNAME# : MonoBehaviour
 @"using Lysionium;
 using UnityEngine;
 
-#ROOTNAMESPACEBEGIN#
+    #ROOTNAMESPACEBEGIN#
 public class #SCRIPTNAME# : ListuiScreen<StandardListuiManager>
 {
     private readonly MainMenuViewData<StandardListuiManager> view = new()
