@@ -206,7 +206,7 @@ namespace RoguegardUnity
             var lane = Instantiate(_itemLanePrefab, _scrollRect.content);
             lane.Initialize(this);
             lane.SetParent(_timeScale, editInfo);
-            lane.Bind(keyFrameList, ToStringViewItemHandler.Instance);
+            lane.Bind(keyFrameList, SelectOptionViewItemHandler<IListuiManager, IListuiArg>.Instance);
             lane.RectTransform.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, y, _itemHeight);
             lane.RectTransform.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Left, headerWidth, _width - headerWidth);
             viewItems.Add(lane);

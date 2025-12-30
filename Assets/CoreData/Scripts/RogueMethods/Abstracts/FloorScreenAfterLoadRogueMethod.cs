@@ -88,7 +88,7 @@ namespace Roguegard
                         manager.Overlay.Show(
                             new[] {
                                 $"<align=\"center\"><size=+32>{arg.Self.Location.GetName()} {levelText}"
-                            }, ToStringViewItemHandler.Instance, manager, arg, ref stateProvider);
+                            }, SelectOptionViewItemHandler<IListuiManager, IListuiArg>.Instance, manager, arg, ref stateProvider);
                         manager.StartCoroutine(Wait2sDone(manager));
                     })
 
