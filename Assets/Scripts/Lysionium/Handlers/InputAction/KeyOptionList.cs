@@ -3,6 +3,16 @@ using System.Collections.Generic;
 
 namespace Lysionium
 {
+    // KeyOptionList は BackSelectOption がない（マネージャーに依存することが少ない）ので、型引数を省略可能にする
+    /// <inheritdoc/>
+    public class KeyOptionList : KeyOptionList<IListuiManager, IListuiArg>
+    {
+        public KeyOptionList(System.Action<KeyOptionList<IListuiManager, IListuiArg>> initializeAction = null)
+            : base(initializeAction)
+        {
+        }
+    }
+
     /// <inheritdoc/>
     public class KeyOptionList<TMgr> : KeyOptionList<TMgr, IListuiArg>
         where TMgr : IListuiManager
