@@ -1,3 +1,4 @@
+using System.Text;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -16,7 +17,12 @@ namespace Lysionium.Views
         [Header("Display")]
 
         [Tooltip("テキスト表示アニメーション")]
-        [SerializeField] private VisibleMode _visibleMode = VisibleMode.Static;
+        [SerializeField] private MessageBoxVisibleMode _visibleMode = MessageBoxVisibleMode.Static;
+        public MessageBoxVisibleMode VisibleMode
+        {
+            get => _visibleMode;
+            set => _visibleMode = value;
+        }
 
         [Tooltip("VisibleMode == Typing: テキスト表示速度　一秒あたりの文字数")]
         [SerializeField] private float _characterPerSecond = 60f;
@@ -111,7 +117,7 @@ namespace Lysionium.Views
             {
                 startLineOffset = CalculateTargetTextOffset();
 
-                if (_visibleMode == VisibleMode.Static)
+                if (_visibleMode == MessageBoxVisibleMode.Static)
                 {
                     textTypingEffect.UpdateUI(linePosition);
                 }
@@ -135,19 +141,14 @@ namespace Lysionium.Views
         public Vector2 GetCurrentCharacterPosition(int deltaCharacterIndex, float normalizedX)
             => textTypingEffect.GetCurrentCharacterPosition(deltaCharacterIndex, normalizedX);
 
-        public void Append(string text)
+        public void Append(System.ReadOnlySpan<char> text)
         {
             textTypingEffect.Append(text);
         }
 
-        public void Append(int integer)
+        public void Append(StringBuilder stringBuilder)
         {
-            textTypingEffect.Append(integer);
-        }
-
-        public void Append(float number)
-        {
-            textTypingEffect.Append(number);
+            textTypingEffect.Append(stringBuilder);
         }
 
         private void InsertHorizontalRule()
@@ -187,7 +188,7 @@ namespace Lysionium.Views
         /// </summary>
         public void StartScrollAndAddLinePositionAuto(int multiplier)
         {
-            if (_visibleMode == VisibleMode.Static) { linePosition += 1 * multiplier; }
+            if (_visibleMode == MessageBoxVisibleMode.Static) { linePosition += 1 * multiplier; }
             else { linePosition += _maxLineCount * multiplier; }
             _isScrollingNow = true;
         }
@@ -206,7 +207,7 @@ namespace Lysionium.Views
 
             // 表示に必要なくなったテキストを削除する
             int removedLineCount;
-            if (_visibleMode == VisibleMode.Static)
+            if (_visibleMode == MessageBoxVisibleMode.Static)
             {
                 // タイピングエフェクトが無効の場合
 
@@ -261,12 +262,6 @@ namespace Lysionium.Views
                     break;
                 }
             }
-        }
-
-        private enum VisibleMode
-        {
-            Static,
-            Typing
         }
 
         [System.Serializable] public class ReachHiddenLinkEvent : UnityEvent<string> { }

@@ -19,7 +19,7 @@ namespace Lysionium
     {
         public System.Func<TMgr, IListHandlerSubview> DropdownListSubviewSelector { get; set; }
             = manager => (manager as IDefaultSubviewTable)?.DropdownList;
-        public System.Func<TMgr, IListHandlerSubview> CaptionBoxSubviewSelector { get; set; }
+        public System.Func<TMgr, IMessageBoxSubview> CaptionBoxSubviewSelector { get; set; }
             = manager => (manager as IDefaultSubviewTable)?.CaptionBox;
 
         /// <summary>
@@ -82,7 +82,7 @@ namespace Lysionium
             if (Title != null)
             {
                 CaptionBoxSubviewSelector?.Invoke(manager)?.Show(
-                    TitleSingle, ToStringViewItemHandler.Instance, manager, arg, ref captionBoxSubviewStateProvider);
+                    Title, manager, arg, ref captionBoxSubviewStateProvider);
             }
 
             // 上記の Show によって実行される onHide の後に onShow を呼び出す

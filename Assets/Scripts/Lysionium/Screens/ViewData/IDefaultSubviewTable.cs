@@ -9,7 +9,7 @@ namespace Lysionium
         public IListHandlerSubview BackAnchor { get; }
         public IListHandlerSubview ForwardAnchor { get; }
         public IListHandlerSubview PrimaryCommand { get; }
-        public IListHandlerSubview CaptionBox { get; }
+        public IMessageBoxSubview CaptionBox { get; }
         public IListHandlerSubview SecondaryCommand { get; }
         public IListHandlerSubview Dialog { get; }
         public IColorPickerSubview ColorPicker { get; }

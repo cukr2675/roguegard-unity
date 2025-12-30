@@ -12,13 +12,7 @@ namespace Lysionium
         where TMgr : IListuiManager
         where TArg : IListuiArg
     {
-        private readonly string[] _titleSingle = new string[1];
-        protected IReadOnlyList<string> TitleSingle => _titleSingle;
-        public string Title
-        {
-            get => _titleSingle[0];
-            set => _titleSingle[0] = value;
-        }
+        public string Title { get; set; }
 
         public bool IsBuilt { get; private set; }
 

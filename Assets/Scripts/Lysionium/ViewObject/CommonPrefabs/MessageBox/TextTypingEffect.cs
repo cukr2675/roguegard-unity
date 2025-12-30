@@ -67,21 +67,15 @@ namespace Lysionium.Views
             return new Vector2(Mathf.LerpUnclamped(left, right, normalizedX), y);
         }
 
-        public void Append(string text)
+        public void Append(System.ReadOnlySpan<char> text)
         {
             stringBuilder.Append(text);
             isDirty = true;
         }
 
-        public void Append(int integer)
+        public void Append(StringBuilder stringBuilder)
         {
-            stringBuilder.Append(integer);
-            isDirty = true;
-        }
-
-        public void Append(float number)
-        {
-            stringBuilder.Append(number);
+            this.stringBuilder.Append(stringBuilder);
             isDirty = true;
         }
 

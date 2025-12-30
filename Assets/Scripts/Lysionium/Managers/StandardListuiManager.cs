@@ -48,7 +48,7 @@ namespace Lysionium
         public IListHandlerSubview BackAnchor => defaultSubviewTable.BackAnchor;
         public IListHandlerSubview ForwardAnchor => defaultSubviewTable.ForwardAnchor;
         public IListHandlerSubview PrimaryCommand => defaultSubviewTable.PrimaryCommand;
-        public IListHandlerSubview CaptionBox => defaultSubviewTable.CaptionBox;
+        public IMessageBoxSubview CaptionBox => defaultSubviewTable.CaptionBox;
         public IListHandlerSubview SecondaryCommand => defaultSubviewTable.SecondaryCommand;
         public IListHandlerSubview Dialog => defaultSubviewTable.Dialog;
         public IColorPickerSubview ColorPicker => defaultSubviewTable.ColorPicker;

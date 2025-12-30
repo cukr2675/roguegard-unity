@@ -59,8 +59,8 @@ namespace Lysionium.Views
             set => _primaryCommand = value;
         }
 
-        [SerializeField] private ListHandlerSubview _captionBox = null;
-        public ListHandlerSubview CaptionBox
+        [SerializeField] private MessageBoxSubview _captionBox = null;
+        public MessageBoxSubview CaptionBox
         {
             get => _captionBox;
             set => _captionBox = value;

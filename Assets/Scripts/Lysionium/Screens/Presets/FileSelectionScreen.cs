@@ -10,7 +10,7 @@ namespace Lysionium
         public FileSelectionScreen(
             string title, string directory, string fileSearchPattern = null, bool includeSubDirectories = false, bool createDirectoryIfNotExists = true,
             System.Func<TMgr, IListHandlerSubview> scrollSubviewSelector = null,
-            System.Func<TMgr, IListHandlerSubview> captionBoxSubviewSelector = null,
+            System.Func<TMgr, IMessageBoxSubview> captionBoxSubviewSelector = null,
             System.Func<TMgr, IListHandlerSubview> backAnchorSubviewSelector = null,
             bool includeDefaultBack = true)
             : base(title, directory, fileSearchPattern, includeSubDirectories, createDirectoryIfNotExists,
@@ -38,7 +38,7 @@ namespace Lysionium
         public FileSelectionScreen(
             string title, string directory, string fileSearchPattern = null, bool includeSubDirectories = false, bool createDirectoryIfNotExists = true,
             System.Func<TMgr, IListHandlerSubview> scrollSubviewSelector = null,
-            System.Func<TMgr, IListHandlerSubview> captionBoxSubviewSelector = null,
+            System.Func<TMgr, IMessageBoxSubview> captionBoxSubviewSelector = null,
             System.Func<TMgr, IListHandlerSubview> backAnchorSubviewSelector = null,
             bool includeDefaultBack = true)
         {

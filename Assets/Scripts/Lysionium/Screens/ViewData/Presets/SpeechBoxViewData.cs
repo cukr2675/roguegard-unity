@@ -19,7 +19,7 @@ namespace Lysionium
             = manager => (manager as IDefaultSubviewTable)?.SpeechBox;
         public System.Func<TMgr, IListHandlerSubview> ChoicesSubviewSelector { get; set; }
             = manager => (manager as IDefaultSubviewTable)?.Choices;
-        public System.Func<TMgr, IListHandlerSubview> CaptionBoxSubviewSelector { get; set; }
+        public System.Func<TMgr, IMessageBoxSubview> CaptionBoxSubviewSelector { get; set; }
             = manager => (manager as IDefaultSubviewTable)?.CaptionBox;
         public List<StringReplacer> MessageReplacers { get; set; } = new List<StringReplacer>()
         {
@@ -68,13 +68,7 @@ namespace Lysionium
             var speechBoxSubview = SpeechBoxSubviewSelector?.Invoke(manager);
             if (speechBoxSubview != null)
             {
-                speechBoxSubview.Clear(manager, arg, ref speechBoxSubviewStateProvider);
-                speechBoxSubview.Show((_, _) =>
-                {
-                    // メッセージボックスの表示アニメーションが完了してから文字を表示する
-                    speechBoxSubview.Append(message);
-                });
-                speechBoxSubview.DoScheduledAfterCompletion((manager, arg) =>
+                speechBoxSubview.Show(message, manager, arg, ref speechBoxSubviewStateProvider, (manager, arg) =>
                 {
                     if (LuiAssert.Type<TMgr>(manager, out var tMgr, manager) ||
                         LuiAssert.Type<TArg>(arg, out var tArg, manager)) return;
@@ -98,7 +92,7 @@ namespace Lysionium
             if (Title != null)
             {
                 CaptionBoxSubviewSelector?.Invoke(manager)?.Show(
-                    TitleSingle, ToStringViewItemHandler.Instance, manager, arg, ref captionBoxSubviewStateProvider);
+                    Title, manager, arg, ref captionBoxSubviewStateProvider);
             }
         }
 

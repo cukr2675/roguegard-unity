@@ -1,3 +1,4 @@
+using System.Text;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -39,15 +40,40 @@ namespace Lysionium.Views
             }
         }
 
-        public void Clear()
-        {
-            _messageBox.Clear();
-        }
-
-        public void Clear(IListuiManager manager, IListuiArg arg, ref ISubviewStateProvider stateProvider)
+        public void SetText(string text, IListuiManager manager, IListuiArg arg, ref ISubviewStateProvider stateProvider)
         {
             _messageBox.Clear();
             SetArg(manager, arg);
+            if (_messageBox.VisibleMode == MessageBoxVisibleMode.Typing || !IsVisible)
+            {
+                // メッセージボックスの表示アニメーションが完了してから文字を表示する
+                OnEndAnimation += (_, _) => Append(text);
+            }
+            else
+            {
+                Append(text);
+            }
+
+            if (_blocker != null)
+            {
+                _blocker.Bind(new SelectOption("", delegate { _onClick.Invoke(); }));
+                _blocker.SetVisible(true, true);
+            }
+        }
+
+        public void SetTextRaw(StringBuilder stringBuilder, IListuiManager manager, IListuiArg arg, ref ISubviewStateProvider stateProvider)
+        {
+            _messageBox.Clear();
+            SetArg(manager, arg);
+            if (_messageBox.VisibleMode == MessageBoxVisibleMode.Typing || !IsVisible)
+            {
+                // メッセージボックスの表示アニメーションが完了してから文字を表示する
+                OnEndAnimation += (_, _) => AppendRaw(stringBuilder);
+            }
+            else
+            {
+                AppendRaw(stringBuilder);
+            }
 
             if (_blocker != null)
             {
@@ -61,14 +87,14 @@ namespace Lysionium.Views
             _messageBox.Append(Manager.Localize(text));
         }
 
-        public void Append(int integer)
+        public void AppendRaw(StringBuilder stringBuilder)
         {
-            _messageBox.Append(integer);
+            _messageBox.Append(stringBuilder);
         }
 
-        public void Append(float number)
+        public void Clear()
         {
-            _messageBox.Append(number);
+            _messageBox.Clear();
         }
 
         public void DoScheduledAfterCompletion(ListuiEventHandler onEndAnimation)

@@ -19,7 +19,7 @@ namespace Lysionium
     {
         public System.Func<TMgr, IListHandlerSubview> ScrollSubviewSelector { get; set; }
             = manager => (manager as IDefaultSubviewTable)?.Scroll;
-        public System.Func<TMgr, IListHandlerSubview> CaptionBoxSubviewSelector { get; set; }
+        public System.Func<TMgr, IMessageBoxSubview> CaptionBoxSubviewSelector { get; set; }
             = manager => (manager as IDefaultSubviewTable)?.CaptionBox;
         public System.Func<TMgr, IListHandlerSubview> BackAnchorSubviewSelector { get; set; }
             = manager => (manager as IDefaultSubviewTable)?.BackAnchor;
@@ -87,7 +87,7 @@ namespace Lysionium
             if (Title != null)
             {
                 CaptionBoxSubviewSelector?.Invoke(manager)?.Show(
-                    TitleSingle, ToStringViewItemHandler.Instance, manager, arg, ref captionBoxSubviewStateProvider);
+                    Title, manager, arg, ref captionBoxSubviewStateProvider);
             }
 
             BackAnchorSubviewSelector?.Invoke(manager)?.Show(

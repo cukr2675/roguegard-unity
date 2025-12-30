@@ -9,7 +9,7 @@ namespace Roguegard.Device
     {
         public System.Func<MMgr, IListHandlerSubview> ScrollSubviewSelector { get; set; }
             = manager => (manager as IDefaultSubviewTable)?.Scroll;
-        public System.Func<MMgr, IListHandlerSubview> CaptionBoxSubviewSelector { get; set; }
+        public System.Func<MMgr, IMessageBoxSubview> CaptionBoxSubviewSelector { get; set; }
             = manager => (manager as IDefaultSubviewTable)?.CaptionBox;
         public System.Func<MMgr, IListHandlerSubview> BackAnchorSubviewSelector { get; set; }
             = manager => (manager as IDefaultSubviewTable)?.BackAnchor;
@@ -63,7 +63,7 @@ namespace Roguegard.Device
             if (Title != null)
             {
                 CaptionBoxSubviewSelector?.Invoke(manager)?.Show(
-                    TitleSingle, ToStringViewItemHandler.Instance, manager, arg, ref captionBoxSubviewStateProvider);
+                    Title, manager, arg, ref captionBoxSubviewStateProvider);
             }
 
             BackAnchorSubviewSelector?.Invoke(manager)?.Show(
