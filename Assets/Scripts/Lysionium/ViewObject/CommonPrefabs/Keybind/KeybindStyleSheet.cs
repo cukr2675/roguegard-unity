@@ -84,8 +84,8 @@ namespace Lysionium.Views
 
         public void Keybind(
             ReadOnlySpan<char> style,
-            Action<InputAction.CallbackContext> performed,
             Action<InputAction.CallbackContext> started,
+            Action<InputAction.CallbackContext> performed,
             Action<InputAction.CallbackContext> canceled)
         {
             if (!TryGetAction(style, out var action)) return;
@@ -93,15 +93,15 @@ namespace Lysionium.Views
             if (playerInput == null) { playerInput = GetComponentInParent<PlayerInput>(); }
             if (playerInput != null) { action = playerInput.actions[action.name]; }
             else { action.Enable(); }
-            if (performed != null) { action.performed += performed; }
             if (started != null) { action.started += started; }
+            if (performed != null) { action.performed += performed; }
             if (canceled != null) { action.canceled += canceled; }
         }
 
         public void Keyunbind(
             ReadOnlySpan<char> style,
-            Action<InputAction.CallbackContext> performed,
             Action<InputAction.CallbackContext> started,
+            Action<InputAction.CallbackContext> performed,
             Action<InputAction.CallbackContext> canceled)
         {
             if (!TryGetAction(style, out var action)) return;
@@ -109,8 +109,8 @@ namespace Lysionium.Views
             if (playerInput == null) { playerInput = GetComponentInParent<PlayerInput>(); }
             if (playerInput != null) { action = playerInput.actions[action.name]; }
             //else { action.Disable(); } // バインディングされているアクションが一つとは限らないため無効化しない
-            if (performed != null) { action.performed -= performed; }
             if (started != null) { action.started -= started; }
+            if (performed != null) { action.performed -= performed; }
             if (canceled != null) { action.canceled -= canceled; }
         }
 

@@ -12,16 +12,16 @@ namespace Lysionium.Views
         private IListuiManager manager;
         private IListuiArg arg;
         private SubviewBase subview;
-        private readonly Action<InputAction.CallbackContext> inputPerformed;
         private readonly Action<InputAction.CallbackContext> inputStarted;
+        private readonly Action<InputAction.CallbackContext> inputPerformed;
         private readonly Action<InputAction.CallbackContext> inputCanceled;
 
         public string CurrentStyle { get; private set; }
 
         public ViewItemStyleEvaluator()
         {
-            inputPerformed = ctx => inputActionHandler?.Performed(item, manager, arg, ctx);
             inputStarted = ctx => inputActionHandler?.Started(item, manager, arg, ctx);
+            inputPerformed = ctx => inputActionHandler?.Performed(item, manager, arg, ctx);
             inputCanceled = ctx => inputActionHandler?.Canceled(item, manager, arg, ctx);
         }
 
@@ -36,8 +36,8 @@ namespace Lysionium.Views
 
         public void SetStyle(
             string style, Animator animator, KeybindLabel keybindLabel, Action<InputAction.CallbackContext> onClick = null,
-            Action<InputAction.CallbackContext> inputPerformed = null,
             Action<InputAction.CallbackContext> inputStarted = null,
+            Action<InputAction.CallbackContext> inputPerformed = null,
             Action<InputAction.CallbackContext> inputCanceled = null)
         {
             if (style == null) throw new ArgumentNullException(nameof(style));
@@ -46,7 +46,7 @@ namespace Lysionium.Views
             if (CurrentStyle != null) throw new InvalidOperationException(
                 $"スタイル ({style}) 解除前に新しいスタイル ({style}) を適用することはできません。");
 
-            Evaluate(style, true, animator, keybindLabel, onClick, inputPerformed, inputStarted, inputCanceled);
+            Evaluate(style, true, animator, keybindLabel, onClick, inputStarted, inputPerformed, inputCanceled);
 
             // 新しいスタイルを保持
             CurrentStyle = style;
@@ -54,13 +54,13 @@ namespace Lysionium.Views
 
         public void ResetStyle(
             Animator animator, KeybindLabel keybindLabel, Action<InputAction.CallbackContext> onClick = null,
-            Action<InputAction.CallbackContext> inputPerformed = null,
             Action<InputAction.CallbackContext> inputStarted = null,
+            Action<InputAction.CallbackContext> inputPerformed = null,
             Action<InputAction.CallbackContext> inputCanceled = null)
         {
             if (CurrentStyle == null) return;
 
-            Evaluate(CurrentStyle, false, animator, keybindLabel, onClick, inputPerformed, inputStarted, inputCanceled);
+            Evaluate(CurrentStyle, false, animator, keybindLabel, onClick, inputStarted, inputPerformed, inputCanceled);
 
             // 設定済みスタイルを破棄
             CurrentStyle = null;
@@ -68,8 +68,8 @@ namespace Lysionium.Views
 
         private void Evaluate(
             string style, bool apply, Animator animator, KeybindLabel keybindLabel, Action<InputAction.CallbackContext> onClick,
-            Action<InputAction.CallbackContext> inputPerformed,
             Action<InputAction.CallbackContext> inputStarted,
+            Action<InputAction.CallbackContext> inputPerformed,
             Action<InputAction.CallbackContext> inputCanceled)
         {
             // スタイルをスペース区切りで処理する
@@ -131,14 +131,14 @@ namespace Lysionium.Views
                     {
                         if (apply)
                         {
-                            subview.Keybind(styleItem["input:".Length..], this.inputPerformed, this.inputStarted, this.inputCanceled);
-                            subview.Keybind(styleItem["input:".Length..], inputPerformed, inputStarted, inputCanceled);
+                            subview.Keybind(styleItem["input:".Length..], this.inputStarted, this.inputPerformed, this.inputCanceled);
+                            subview.Keybind(styleItem["input:".Length..], inputStarted, inputPerformed, inputCanceled);
                             if (keybindLabel != null) { keybindLabel.SetStyle(styleItem["click:".Length..]); }
                         }
                         else
                         {
-                            subview.Keyunbind(styleItem["input:".Length..], this.inputPerformed, this.inputStarted, this.inputCanceled);
-                            subview.Keyunbind(styleItem["input:".Length..], inputPerformed, inputStarted, inputCanceled);
+                            subview.Keyunbind(styleItem["input:".Length..], this.inputStarted, this.inputPerformed, this.inputCanceled);
+                            subview.Keyunbind(styleItem["input:".Length..], inputStarted, inputPerformed, inputCanceled);
                             if (keybindLabel != null) { keybindLabel.ResetStyle(styleItem["click:".Length..]); }
                         }
                     }

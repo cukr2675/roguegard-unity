@@ -12,7 +12,7 @@ namespace Lysionium
         string GetStyle(TMgr manager, TArg arg);
 
         void Started(TMgr manager, TArg arg, InputAction.CallbackContext context);
-        void Canceled(TMgr manager, TArg arg, InputAction.CallbackContext context);
         void Performed(TMgr manager, TArg arg, InputAction.CallbackContext context);
+        void Canceled(TMgr manager, TArg arg, InputAction.CallbackContext context);
     }
 }
