@@ -35,7 +35,7 @@ namespace Lysionium.Views
             {
                 var rectTransform = (RectTransform)transform;
                 var children = treeHandler.GetChildren(item, Manager, Arg);
-                if (children != null || children.Count >= 1)
+                if (children != null && children.Count >= 1)
                 {
                     expandHandler(children, rectTransform.rect);
                     return;

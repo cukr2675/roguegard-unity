@@ -23,6 +23,7 @@ namespace Lysionium.Views
 
         private IViewItemHandler handler;
         private readonly List<GridViewContainer> viewContainers = new();
+        private Rect rect;
         private StateProvider currentStateProvider;
 
         public override void SetListHandler(
@@ -50,15 +51,16 @@ namespace Lysionium.Views
         private void UpdateViewItems(IReadOnlyList<object> list)
         {
             var viewContainer = Instantiate(_viewContainerPrefab, transform);
+            var viewContainerTransform = (RectTransform)viewContainer.transform;
+            viewContainerTransform.sizeDelta = rect.size * 3f;
+            viewContainerTransform.position = rect.position;
             viewContainer.SetListHandler(list, handler, this, ((RectTransform)transform).rect);
             viewContainers.Add(viewContainer);
         }
 
         public void SetPosition(Rect rect)
         {
-            var rectTransform = (RectTransform)transform;
-            rectTransform.sizeDelta = rect.size;
-            rectTransform.anchoredPosition = rect.position;
+            this.rect = rect;
         }
 
         private enum ExtensionDirection

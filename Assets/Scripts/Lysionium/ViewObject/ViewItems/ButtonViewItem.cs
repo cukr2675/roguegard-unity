@@ -30,7 +30,9 @@ namespace Lysionium.Views
             {
                 // ドロップダウンの位置を更新
                 var rectTransform = (RectTransform)transform;
-                Manager.SetInvisibleDropdownPosition(rectTransform.rect);
+                var rect = rectTransform.rect;
+                rect.position = rectTransform.position;
+                Manager.SetInvisibleDropdownPosition(rect);
 
                 handler.Click(item, Manager, Arg);
             });
