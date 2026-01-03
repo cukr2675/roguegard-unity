@@ -8,6 +8,8 @@ namespace Lysionium
     {
         private readonly Stack<StackItem> stack = new();
 
+        public IListuiScreen<TMgr, TArg> Peek => stack.TryPeek(out var item) ? item.Screen : null;
+
         public int Count => stack.Count;
 
         public ListuiScreenStack()

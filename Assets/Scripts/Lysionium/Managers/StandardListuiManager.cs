@@ -28,7 +28,7 @@ namespace Lysionium
         private readonly ListuiScreenStack<TMgr, TArg> stack = new();
         private ListuiScreenStack<TMgr, TArg>.StackItem reservedScreen;
 
-        public bool ShowsMenuScreen => stack.Count >= 1;
+        public IListuiScreen<TMgr, TArg> PeekScreen => stack.Peek;
 
         public virtual ISelectOption<TMgr, TArg> BackOption { get; protected set; }
             = SelectOption.Create<TMgr, TArg>("Back", (manager, arg) => manager.PopScreen(), "Cancel click:Cancel");

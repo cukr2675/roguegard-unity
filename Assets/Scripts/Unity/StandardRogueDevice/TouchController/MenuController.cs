@@ -49,11 +49,11 @@ namespace RoguegardUnity
         /// </summary>
         public bool Wait =>
             MessageBox.IsInProgress || SpeechBox.IsInProgress ||
-            ShowsMenuScreen || EventManager.Wait;
+            (PeekScreen != null) || EventManager.Wait;
 
         public bool TalkingWait =>
             SpeechBox.IsInProgress ||
-            ShowsMenuScreen || EventManager.Wait;
+            (PeekScreen != null) || EventManager.Wait;
 
         protected override bool HasManagerLock =>
             base.HasManagerLock || _stats.HasManagerLock || _face.HasManagerLock || _summary.HasManagerLock || _textEditor.HasManagerLock ||
