@@ -167,7 +167,7 @@ namespace Lysionium.Views
                     var viewItemTransform = (RectTransform)viewItem.transform;
                     viewItemTransform.anchorMin = new Vector2(0f, 0f);
                     viewItemTransform.anchorMax = new Vector2(1f, 0f);
-                    viewItemTransform.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Left, 0f, _scrollRect.content.rect.width);
+                    viewItemTransform.sizeDelta = Vector2.zero;
 
                     viewItems.Add(viewItem);
                     ViewItem.SetVerticalNavigation(viewItems, viewItems.Count - 1); // ナビゲーションを明示したほうが長押し移動がスムーズになる？

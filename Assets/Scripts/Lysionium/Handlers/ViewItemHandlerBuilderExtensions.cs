@@ -27,5 +27,11 @@ namespace Lysionium
         {
             return builder.ChildrenFrom((item, _, _) => selector(item));
         }
+
+        public static TOut OnClick<TItem, TMgr, TArg, TOut>(
+            this IButtonViewItemHandlerBuilder<TItem, TMgr, TArg, TOut> builder, System.Action<TItem> handler)
+        {
+            return builder.OnClick((item, _, _) => handler(item));
+        }
     }
 }
