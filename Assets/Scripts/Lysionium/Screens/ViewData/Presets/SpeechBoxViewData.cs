@@ -74,7 +74,7 @@ namespace Lysionium
                         LuiAssert.Type<TArg>(arg, out var tArg, manager)) return;
 
                     OnCompleted?.Invoke(tMgr, tArg);
-                });
+                }, OnHide);
 
                 if (List.Count >= 1)
                 {

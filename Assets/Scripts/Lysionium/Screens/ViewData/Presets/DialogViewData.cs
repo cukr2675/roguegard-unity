@@ -65,7 +65,7 @@ namespace Lysionium
             }
 
             DialogSubviewSelector?.Invoke(manager)?.Show(
-                List, SelectOptionViewItemHandler<TMgr, TArg>.Instance, manager, arg, ref dialogSubviewStateProvider);
+                List, SelectOptionViewItemHandler<TMgr, TArg>.Instance, manager, arg, ref dialogSubviewStateProvider, onHide: OnHide);
 
             if (Title != null)
             {

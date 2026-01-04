@@ -15,9 +15,8 @@ namespace Lysionium
         protected IReadOnlyList<object> List { get; }
 
         // フィルタは headList や tailList には効かないほうが実用的
-        private System.Func<TItem, TMgr, TArg, bool> filter;
-
         // 並べ替えや Map メソッドは実装しない（ビルダーの責務が増大して可読性が落ちるため）
+        private System.Func<TItem, TMgr, TArg, bool> filter;
 
         protected ListViewData()
         {

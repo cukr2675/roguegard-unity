@@ -87,7 +87,7 @@ namespace Lysionium
                 if (colorPickerSubview == null) return;
 
                 colorPickerSubview.SetupColorPicker(color, HandleClose, manager, arg, ref colorPickerSubviewStateProvider);
-                colorPickerSubview.Show();
+                colorPickerSubview.Show(onHide: OnHide);
             }
 
             public void Hide(TMgr manager, bool back)

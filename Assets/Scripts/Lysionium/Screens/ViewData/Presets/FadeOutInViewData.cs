@@ -63,7 +63,8 @@ namespace Lysionium
         protected override void ShowSubviews(TMgr manager, TArg arg)
         {
             FadeMaskSubviewSelector?.Invoke(manager)?.Show(
-                widgetOptions, SelectOptionViewItemHandler<TMgr, TArg>.Instance, manager, arg, ref fadeMaskSubviewStateProvider, onFadeOutAnimation);
+                widgetOptions, SelectOptionViewItemHandler<TMgr, TArg>.Instance, manager, arg, ref fadeMaskSubviewStateProvider,
+                onFadeOutAnimation, OnHide);
         }
 
         public void FadeIn(TMgr manager, bool back)

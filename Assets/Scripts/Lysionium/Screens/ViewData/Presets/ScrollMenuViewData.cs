@@ -41,8 +41,6 @@ namespace Lysionium
         private ISubviewStateProvider backAnchorSubviewStateProvider;
 
         private readonly ButtonViewItemHandler<TItem, TMgr, TArg> scrollSubviewHandler = new();
-        private ListuiEventHandler<TMgr, TArg> onShow;
-        private ListuiEventHandler onHide;
 
         public Builder Show(TItem[] list, TMgr manager, TArg arg, object viewStateHolder = null)
         {
@@ -82,7 +80,7 @@ namespace Lysionium
         protected override void ShowSubviews(TMgr manager, TArg arg)
         {
             ScrollSubviewSelector?.Invoke(manager)?.Show(
-                List, scrollSubviewHandler, manager, arg, ref scrollSubviewStateProvider, onHide: onHide);
+                List, scrollSubviewHandler, manager, arg, ref scrollSubviewStateProvider, onHide: OnHide);
 
             if (Title != null)
             {
@@ -92,9 +90,6 @@ namespace Lysionium
 
             BackAnchorSubviewSelector?.Invoke(manager)?.Show(
                 BackAnchorList, manager, arg, ref backAnchorSubviewStateProvider);
-
-            // 上記の Show によって実行される onHide の後に onShow を呼び出す
-            onShow?.Invoke(manager, arg);
         }
 
         public virtual void Hide(TMgr manager, bool back)
@@ -109,28 +104,6 @@ namespace Lysionium
             public Builder(ScrollMenuViewData<TItem, TMgr, TArg> parent, TMgr manager, TArg arg)
                 : base(parent, manager, arg)
             {
-            }
-
-            public Builder OnShow(ListuiEventHandler<TMgr, TArg> handler)
-            {
-                AssertNotBuilt();
-
-                Parent.onShow += handler;
-                return this;
-            }
-
-            public Builder OnHide(ListuiEventHandler<TMgr, TArg> handler)
-            {
-                AssertNotBuilt();
-
-                Parent.onHide += (manager, arg) =>
-                {
-                    if (LuiAssert.Type<TMgr>(manager, out var tMgr, manager) ||
-                        LuiAssert.Type<TArg>(arg, out var tArg, manager)) return;
-
-                    handler(tMgr, tArg);
-                };
-                return this;
             }
 
             public Builder NameFrom(System.Func<TItem, TMgr, TArg, string> selector)
@@ -167,8 +140,6 @@ namespace Lysionium
                 Parent.scrollSubviewHandler.GetName = null;
                 Parent.scrollSubviewHandler.GetStyle = null;
                 Parent.scrollSubviewHandler.Click = null;
-                Parent.onShow = null;
-                Parent.onHide = null;
             }
         }
     }

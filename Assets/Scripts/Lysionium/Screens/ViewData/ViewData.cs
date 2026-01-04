@@ -19,6 +19,12 @@ namespace Lysionium
         private TMgr callerManager;
 
         /// <summary>
+        /// <see cref="ISubview.Show"/> によって実行される <see cref="OnHide"/> の後にこのデリゲートを呼び出す
+        /// </summary>
+        private ListuiEventHandler<TMgr, TArg> onShow;
+        protected ListuiEventHandler OnHide { get; private set; }
+
+        /// <summary>
         /// このメソッドが失敗する（false を返す）ときのみ FluentBuilder を返すように実装する
         /// </summary>
         protected bool TryShowSubviews(TMgr manager, TArg arg)
@@ -31,6 +37,7 @@ namespace Lysionium
                 }
 
                 ShowSubviews(manager, arg);
+                onShow?.Invoke(manager, arg);
                 return true;
             }
             else
@@ -39,6 +46,10 @@ namespace Lysionium
             }
         }
 
+        /// <summary>
+        /// <see cref="ISubview"/> 群を表示するメソッド。
+        /// このメソッド単体では <see cref="onShow"/> が実行されないため、呼び出しは非推奨（<see cref="TryShowSubviews"/> の使用を検討）
+        /// </summary>
         protected abstract void ShowSubviews(TMgr manager, TArg arg);
 
         /// <summary>
@@ -126,6 +137,28 @@ namespace Lysionium
                 return (TOut)this;
             }
 
+            public TOut OnShow(ListuiEventHandler<TMgr, TArg> handler)
+            {
+                AssertNotBuilt();
+
+                Parent.onShow += handler;
+                return (TOut)this;
+            }
+
+            public TOut OnHide(ListuiEventHandler<TMgr, TArg> handler)
+            {
+                AssertNotBuilt();
+
+                Parent.OnHide += (manager, arg) =>
+                {
+                    if (LuiAssert.Type<TMgr>(manager, out var tMgr, manager) ||
+                        LuiAssert.Type<TArg>(arg, out var tArg, manager)) return;
+
+                    handler(tMgr, tArg);
+                };
+                return (TOut)this;
+            }
+
             public virtual void Build()
             {
                 AssertNotBuilt();
@@ -133,6 +166,7 @@ namespace Lysionium
                 Parent.IsBuilt = true;
                 Parent.callerManager = Manager;
                 Parent.ShowSubviews(Manager, Arg);
+                Parent.onShow?.Invoke(Manager, Arg);
             }
 
             protected virtual void Unload()
@@ -144,6 +178,8 @@ namespace Lysionium
                 disposables.Clear();
                 Parent.IsBuilt = false;
                 Parent.callerManager = default;
+                Parent.onShow = null;
+                Parent.OnHide = null;
                 Manager.OnUnload -= Unload;
             }
         }

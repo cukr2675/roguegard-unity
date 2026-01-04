@@ -46,7 +46,7 @@ namespace Lysionium
         protected override void ShowSubviews(TMgr manager, TArg arg)
         {
             PrimaryCommandSubviewSelector?.Invoke(manager)?.Show(
-                List, SelectOptionViewItemHandler<TMgr, TArg>.Instance, manager, arg, ref primaryCommandSubviewStateProvider);
+                List, SelectOptionViewItemHandler<TMgr, TArg>.Instance, manager, arg, ref primaryCommandSubviewStateProvider, onHide: OnHide);
 
             if (Title != null)
             {

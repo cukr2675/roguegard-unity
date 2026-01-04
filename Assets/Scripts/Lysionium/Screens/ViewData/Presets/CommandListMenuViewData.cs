@@ -79,7 +79,7 @@ namespace Lysionium
         protected override void ShowSubviews(TMgr manager, TArg arg)
         {
             SecondaryCommandSubviewSelector?.Invoke(manager)?.Show(
-                List, secondaryCommandSubviewHandler, manager, arg, ref secondaryCommandSubviewStateProvider);
+                List, secondaryCommandSubviewHandler, manager, arg, ref secondaryCommandSubviewStateProvider, onHide: OnHide);
 
             if (Title != null)
             {
