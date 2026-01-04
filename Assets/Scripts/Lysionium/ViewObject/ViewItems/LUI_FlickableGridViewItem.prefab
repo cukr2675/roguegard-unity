@@ -34,7 +34,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 566078401443226956, guid: 1ddd769cb3edc4940958d277dfc4b09c, type: 3}
       propertyPath: m_Name
-      value: LUI_FlickButtonGridViewItem
+      value: LUI_FlickableGridViewItem
       objectReference: {fileID: 0}
     - target: {fileID: 1624490802104918538, guid: 1ddd769cb3edc4940958d277dfc4b09c, type: 3}
       propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
@@ -212,9 +212,6 @@ MonoBehaviour:
   _icon: {fileID: 0}
   _text: {fileID: 3760552939175369216}
   _keybindLabel: {fileID: 5549039354080945279}
-  _dropdownContentSubviews:
-  - DropdownList
-  - DropdownGrid
   _defaultStyle: Submit
 --- !u!114 &5549039354080945279 stripped
 MonoBehaviour:

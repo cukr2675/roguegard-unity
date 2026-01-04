@@ -6,11 +6,13 @@ using UnityEngine.UI;
 
 namespace Lysionium.Views
 {
+    [RequireComponent(typeof(Selectable))]
     public class FlickableViewItem : ViewItem, IPointerDownHandler, IPointerUpHandler, IPointerClickHandler, IPointerExitHandler
     {
         [SerializeField] private Image _icon = null;
         [SerializeField] private TMP_Text _text = null;
         [SerializeField] private KeybindLabel _keybindLabel = null;
+        private Selectable _selectable;
         private Animator animator;
         private System.Action<InputAction.CallbackContext> inputPerformed;
         private System.Action<InputAction.CallbackContext> inputCanceled;
@@ -21,17 +23,23 @@ namespace Lysionium.Views
 
         private IFlickableViewItemHandler handler;
         private object item;
+        private bool isDown;
 
         protected virtual void Awake()
         {
+            TryGetComponent(out _selectable);
             TryGetComponent(out animator);
             inputPerformed = ctx =>
             {
+                if (!_selectable.interactable) return;
+
                 handler.KeyDown(item, Manager, Arg);
             };
             inputCanceled = ctx =>
             {
-                Click();
+                if (!_selectable.interactable) return;
+
+                Expand();
                 handler.KeyUp(item, Manager, Arg);
             };
             styleEvaluator = new ViewItemStyleEvaluator();
@@ -70,7 +78,7 @@ namespace Lysionium.Views
             styleEvaluator.ResetStyle(animator, _keybindLabel, inputPerformed: inputPerformed, inputCanceled: inputCanceled);
         }
 
-        private void Click()
+        private void Expand()
         {
             // ドロップダウンの位置を更新
             var rectTransform = (RectTransform)transform;
@@ -83,8 +91,10 @@ namespace Lysionium.Views
 
         public virtual void OnPointerDown(PointerEventData eventData)
         {
+            if (!_selectable.interactable) return;
             if (eventData.button != PointerEventData.InputButton.Left) return; // 左ボタンのときのみ実行
 
+            isDown = true;
             handler.KeyDown(item, Manager, Arg);
 
             //if (!_expandMethod.HasFlag(ExpandMethod.Press)) return; // 押下で展開する設定のときのみ実行
@@ -95,25 +105,29 @@ namespace Lysionium.Views
 
         public virtual void OnPointerUp(PointerEventData eventData)
         {
+            if (!isDown) return;
             if (eventData.button != PointerEventData.InputButton.Left) return; // 左ボタンのときのみ実行
 
+            isDown = false;
             handler.KeyUp(item, Manager, Arg);
         }
 
         public virtual void OnPointerClick(PointerEventData eventData)
         {
+            if (!_selectable.interactable) return;
             if (eventData.button != PointerEventData.InputButton.Left) return; // 左ボタンのときのみ実行
             if (eventData.dragging) return; // 非ドラッグのときのみ実行
 
-            Click();
+            Expand();
         }
 
         public virtual void OnPointerExit(PointerEventData eventData)
         {
+            if (!_selectable.interactable) return;
             if (eventData.button != PointerEventData.InputButton.Left) return; // 左ボタンのときのみ実行
             if (eventData.pointerPress != gameObject) return; // フリック時（ポインターが自身を押下したうえで離れたとき）のみ実行
 
-            Click();
+            Expand();
         }
     }
 }
