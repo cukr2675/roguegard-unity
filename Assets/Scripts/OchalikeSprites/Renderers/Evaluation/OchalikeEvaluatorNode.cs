@@ -91,7 +91,7 @@ namespace OchalikeSprites
             }
         }
 
-        public void ApplyTable(OchalikeMorph ochalikeMorph)
+        public void ApplyMorph(OchalikeMorph ochalikeMorph)
         {
             var item = ochalikeMorph.GetSprite(source.Name);
             SetBareSprite(item);
@@ -108,7 +108,7 @@ namespace OchalikeSprites
             for (int i = 0; i < _children.Count; i++)
             {
                 var child = _children[i];
-                child.ApplyTable(ochalikeMorph);
+                child.ApplyMorph(ochalikeMorph);
             }
         }
 

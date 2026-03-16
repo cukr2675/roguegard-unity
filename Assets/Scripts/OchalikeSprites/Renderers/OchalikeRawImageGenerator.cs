@@ -74,12 +74,12 @@ namespace OchalikeSprites
                 root = new OchalikeEvaluatorNode(ochalikeSprite);
                 var rootMorph = new OchalikeMorph();
                 _morph.AddTo(rootMorph);
-                root.ApplyTable(rootMorph);
+                root.ApplyMorph(rootMorph);
             }
 
             if (morph != null)
             {
-                root.ApplyTable(morph);
+                root.ApplyMorph(morph);
             }
 
             if (motion != null)

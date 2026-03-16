@@ -61,7 +61,7 @@ namespace Roguegard
             {
                 effect.AffectSprite(self, rootBone, ochalikeMorph);
             }
-            root.ApplyTable(ochalikeMorph);
+            root.ApplyMorph(ochalikeMorph);
             wasChangedEquipments = true;
         }
 

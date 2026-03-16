@@ -24,7 +24,7 @@ namespace OchalikeSprites
         {
             // 評価ノードを初期化
             var root = new OchalikeEvaluatorNode(ochalikeSprite); // OchalikeSprite を読み込み
-            root.ApplyTable(morph); // 見た目を適用
+            root.ApplyMorph(morph); // 見た目を適用
             var pose = spriteTransform.PoseSource.GetSpritePose(spriteTransform.Direction); // ポーズを取得
             var bonesCount = BoneSorter.SetIndexAndGetCount(root, pose.BoneOrder, pose.Back); // ポーズを適用
 
