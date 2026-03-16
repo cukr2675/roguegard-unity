@@ -25,7 +25,7 @@ MonoBehaviour:
     _morphBareColorIsFixed: 0
     _hasMorphBareColor: 0
     _overridesOnDefaultColor: 0
-    _equipmentSprites: []
+    _wearSprites: []
   - _name: {fileID: 11400000, guid: c9d1479eeb1d2424ba5ab7f85da95ed0, type: 2}
     _hasMorphBareSprite: 1
     _morphBareSprite:
@@ -37,4 +37,4 @@ MonoBehaviour:
     _morphBareColorIsFixed: 0
     _hasMorphBareColor: 0
     _overridesOnDefaultColor: 0
-    _equipmentSprites: []
+    _wearSprites: []

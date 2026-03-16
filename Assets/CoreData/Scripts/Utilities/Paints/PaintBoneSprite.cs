@@ -137,7 +137,7 @@ namespace Roguegard
             }
             else
             {
-                ochalikeMorph.AddEquipmentSprite(name, sprite, color, overridesOnDefaultColor);
+                ochalikeMorph.AddWearSprite(name, sprite, color, overridesOnDefaultColor);
             }
         }
 

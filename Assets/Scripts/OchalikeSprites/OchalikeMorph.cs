@@ -16,37 +16,37 @@ namespace OchalikeSprites
     /// </summary>
     public class OchalikeMorph
     {
-        private readonly Dictionary<BoneKeyword, Item> items = new();
+        private readonly Dictionary<BoneKeyword, ItemCore> items = new();
 
-        private static readonly Stack<Item> itemPool = new();
+        private static readonly Stack<ItemCore> itemPool = new();
 
-        private static readonly Item emptyItem = new();
+        private static readonly ItemCore emptyItem = new();
 
         public bool Any => items.Count >= 1;
 
-        public RefItem GetSprite(BoneKeyword name)
+        public Item GetSprite(BoneKeyword name)
         {
             if (items.TryGetValue(name, out var item))
             {
-                return new RefItem(item);
+                return new Item(item);
             }
             else
             {
-                return new RefItem(emptyItem);
+                return new Item(emptyItem);
             }
         }
 
-        private Item CreateItem()
+        private ItemCore CreateItem()
         {
             if (!itemPool.TryPop(out var item))
             {
-                item = new Item();
+                item = new ItemCore();
             }
             return item;
         }
 
         /// <summary>
-        /// <see cref="Item.equipmentSprites"/> をクリアして <see cref="Item.MorphBareSprite"/> を設定する
+        /// <see cref="ItemCore.wearSprites"/> をクリアして <see cref="ItemCore.MorphBareSprite"/> を設定する
         /// </summary>
         /// <param name="overridesOnDefaultColor">true のとき素体のスプライトの色をベースカラーから上書きする。</param>
         public void SetBareSprite(BoneKeyword name, BoneSprite morphBareSprite = null, Color? morphBareColor = null, bool overridesOnDefaultColor = false)
@@ -63,12 +63,14 @@ namespace OchalikeSprites
             item.MorphBareSprite = morphBareSprite ?? item.MorphBareSprite;
             item.MorphBareColor = morphBareColor ?? item.MorphBareColor;
             item.OverridesOnDefaultColor = overridesOnDefaultColor;
-            item.equipmentSprites.Clear();
-            item.equipmentColors.Clear();
+            item.wearSprites.Clear();
+            item.wearColors.Clear();
         }
 
-        /// <param name="overridesOnDefaultColor">true かつ <paramref name="color"/> の不透明度が 100% のとき素体のスプライトの色をベースカラーから上書きする。</param>
-        public void AddEquipmentSprite(BoneKeyword name, BoneSprite sprite, Color color, bool overridesOnDefaultColor = false)
+        /// <param name="overridesOnDefaultColor">
+        /// true かつ <paramref name="color"/> の不透明度が 100% のとき素体のスプライトの色をベースカラーから上書きする。
+        /// </param>
+        public void AddWearSprite(BoneKeyword name, BoneSprite sprite, Color color, bool overridesOnDefaultColor = false)
         {
             if (sprite == null) throw new System.ArgumentNullException(nameof(sprite));
 
@@ -76,12 +78,12 @@ namespace OchalikeSprites
             {
                 item = CreateItem();
                 items.Add(name, item);
-                item.equipmentSprites.Clear();
-                item.equipmentColors.Clear();
+                item.wearSprites.Clear();
+                item.wearColors.Clear();
             }
             item.OverridesOnDefaultColor |= overridesOnDefaultColor && color.a >= 1f;
-            item.equipmentSprites.Add(sprite);
-            item.equipmentColors.Add(color);
+            item.wearSprites.Add(sprite);
+            item.wearColors.Add(color);
         }
 
         public void AddTo(OchalikeMorph ochalikeMorph)
@@ -95,8 +97,8 @@ namespace OchalikeSprites
                     item.MorphBareSprite = null;
                     item.MorphBareColor = null;
                     item.OverridesOnDefaultColor = false;
-                    item.equipmentSprites.Clear();
-                    item.equipmentColors.Clear();
+                    item.wearSprites.Clear();
+                    item.wearColors.Clear();
                     ochalikeMorph.items.Add(pair.Key, item);
                 }
                 var value = pair.Value;
@@ -105,16 +107,16 @@ namespace OchalikeSprites
                 if (value.MorphBareSprite != null || value.MorphBareColor != null)
                 {
                     item.OverridesOnDefaultColor = value.OverridesOnDefaultColor;
-                    item.equipmentSprites.Clear();
-                    item.equipmentColors.Clear();
+                    item.wearSprites.Clear();
+                    item.wearColors.Clear();
                 }
-                foreach (var equipmentSprite in value.equipmentSprites)
+                foreach (var wearSprite in value.wearSprites)
                 {
-                    item.equipmentSprites.Add(equipmentSprite);
+                    item.wearSprites.Add(wearSprite);
                 }
-                foreach (var equipmentColor in value.equipmentColors)
+                foreach (var equipmentColor in value.wearColors)
                 {
-                    item.equipmentColors.Add(equipmentColor);
+                    item.wearColors.Add(equipmentColor);
 
                     // 不透明のスプライトを重ねるときのみベースカラーの設定を上書きする
                     if (equipmentColor.a >= 1f) { item.OverridesOnDefaultColor |= value.OverridesOnDefaultColor; }
@@ -133,8 +135,8 @@ namespace OchalikeSprites
                     item.MorphBareSprite = null;
                     item.MorphBareColor = null;
                     item.OverridesOnDefaultColor = false;
-                    item.equipmentSprites.Clear();
-                    item.equipmentColors.Clear();
+                    item.wearSprites.Clear();
+                    item.wearColors.Clear();
                     ochalikeMorph.items.Add(pair.Key, item);
                 }
                 var value = pair.Value;
@@ -143,17 +145,17 @@ namespace OchalikeSprites
                 if (value.MorphBareSprite != null || value.MorphBareColor != null)
                 {
                     item.OverridesOnDefaultColor = value.OverridesOnDefaultColor;
-                    item.equipmentSprites.Clear();
-                    item.equipmentColors.Clear();
+                    item.wearSprites.Clear();
+                    item.wearColors.Clear();
                 }
-                foreach (var equipmentSprite in value.equipmentSprites)
+                foreach (var wearSprite in value.wearSprites)
                 {
-                    item.equipmentSprites.Add(equipmentSprite);
-                    item.equipmentColors.Add(toColor);
+                    item.wearSprites.Add(wearSprite);
+                    item.wearColors.Add(toColor);
                 }
 
                 // 不透明のスプライトを重ねるときのみベースカラーの設定を上書きする
-                if (value.equipmentSprites.Count >= 1 && toColor.a >= 1f) { item.OverridesOnDefaultColor |= value.OverridesOnDefaultColor; }
+                if (value.wearSprites.Count >= 1 && toColor.a >= 1f) { item.OverridesOnDefaultColor |= value.OverridesOnDefaultColor; }
             }
         }
 
@@ -167,45 +169,42 @@ namespace OchalikeSprites
         }
 
         /// <summary>
-        /// <see cref="RefItem"/> のコンストラクタを internal で <see cref="OchalikeMorph"/> に公開する必要があるため、
+        /// <see cref="Item"/> のコンストラクタを internal で <see cref="OchalikeMorph"/> に公開する必要があるため、
         /// このクラスも internal にする
         /// <see cref="OchalikeMorph"/> 以外では使用しない
         /// </summary>
-        internal sealed class Item
+        internal sealed class ItemCore
         {
+            /// <summary>
+            /// 命名メモ: <see cref="SpritePoseBoneTransform.PoseBareSprite"/> と区別するため Morph をつける
+            /// </summary>
             public BoneSprite MorphBareSprite { get; set; }
             public Color? MorphBareColor { get; set; }
             public bool OverridesOnDefaultColor { get; set; }
-            public readonly List<BoneSprite> equipmentSprites = new();
-            public readonly List<Color> equipmentColors = new();
+            public readonly List<BoneSprite> wearSprites = new(); // 命名メモ: 装備品でも BaseSprite を使用することがあるため EquipmentSprites は不適切
+            public readonly List<Color> wearColors = new();
 
-            public int EquipmentSpriteCount => equipmentSprites.Count;
+            public int WearSpriteCount => wearSprites.Count;
 
-            public void GetEquipmentSprite(int index, out BoneSprite sprite, out Color color)
+            public void GetWearSprite(int index, out BoneSprite sprite, out Color color)
             {
-                sprite = equipmentSprites[index];
-                color = equipmentColors[index];
+                sprite = wearSprites[index];
+                color = wearColors[index];
             }
         }
 
-        public readonly ref struct RefItem
+        public readonly ref struct Item
         {
-            private readonly Item item;
+            private readonly ItemCore item;
 
             public BoneSprite MorphBareSprite => item.MorphBareSprite;
             public Color? MorphBareColor => item.MorphBareColor;
             public bool OverridesOnDefaultColor => item.OverridesOnDefaultColor;
-            public int EquipmentSpriteCount => item.EquipmentSpriteCount;
+            public int WearSpriteCount => item.WearSpriteCount;
 
-            internal RefItem(Item item)
-            {
-                this.item = item;
-            }
+            internal Item(ItemCore item) => this.item = item;
 
-            public void GetEquipmentSprite(int index, out BoneSprite sprite, out Color color)
-            {
-                item.GetEquipmentSprite(index, out sprite, out color);
-            }
+            public void GetWearSprite(int index, out BoneSprite sprite, out Color color) => item.GetWearSprite(index, out sprite, out color);
         }
     }
 }

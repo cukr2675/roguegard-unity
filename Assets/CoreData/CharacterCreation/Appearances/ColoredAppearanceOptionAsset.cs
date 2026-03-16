@@ -25,7 +25,7 @@ namespace Roguegard.CharacterCreation
             else
             {
                 var sprite = GetSprite(appearance, characterCreationData);
-                morph.BaseEffectOchalikeMorph.AddEquipmentSprite(BoneName, sprite, appearance.Color);
+                morph.BaseEffectOchalikeMorph.AddWearSprite(BoneName, sprite, appearance.Color);
                 return;
             }
 

@@ -156,16 +156,16 @@ namespace Roguegard
                 var owner = equipment.Location;
                 if (ochalikeMorph.Any)
                 {
-                    var equipmentSpriteState = owner.Main.GetBoneSpriteEffectState(owner);
-                    equipmentSpriteState.AddFromRogueEffect(owner, this);
+                    var boneSpriteEffectState = owner.Main.GetBoneSpriteEffectState(owner);
+                    boneSpriteEffectState.AddFromRogueEffect(owner, this);
                 }
             }
 
             protected override void RemoveEffect(RogueObj equipment)
             {
                 var owner = equipment.Location;
-                var equipmentSpriteState = owner.Main.GetBoneSpriteEffectState(owner);
-                equipmentSpriteState.Remove(this);
+                var boneSpriteEffectState = owner.Main.GetBoneSpriteEffectState(owner);
+                boneSpriteEffectState.Remove(this);
             }
 
             void IBoneSpriteEffect.AffectSprite(RogueObj owner, IReadOnlyOchalikeBone rootBone, OchalikeMorph ochalikeMorph)

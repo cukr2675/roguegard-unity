@@ -24,7 +24,7 @@ MonoBehaviour:
     _morphBareColor: {r: 1, g: 1, b: 1, a: 1}
     _morphBareColorIsFixed: 0
     _overridesOnDefaultColor: 0
-    _equipmentSprites:
+    _wearSprites:
     - _sprite:
         _normalFront: {fileID: -834868669, guid: 40c71f15d26832846a0eb4a89b3c8e54, type: 3}
         _normalRear: {fileID: 0}

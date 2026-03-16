@@ -24,5 +24,5 @@ MonoBehaviour:
     _morphBareColor: {r: 1, g: 1, b: 1, a: 1}
     _morphBareColorIsFixed: 0
     _overridesOnDefaultColor: 0
-    _equipmentSprites: []
+    _wearSprites: []
   _previewOchalikeSprite: {fileID: 11400000, guid: 41113a2e6e61ac547b7c4c7da3a45789, type: 2}

@@ -26,16 +26,16 @@ namespace OchalikeSprites
 
         private BoneSprite bareSprite;
         private Color bareColor;
-        private readonly List<BoneSprite> equipmentSprites;
-        private readonly List<Color> equipmentColors;
+        private readonly List<BoneSprite> wearSprites;
+        private readonly List<Color> wearColors;
         private bool overridesOnDefaultColor;
 
         public OchalikeEvaluatorNode(IReadOnlyOchalikeBone bone)
         {
             source = bone;
             _children = new BoneChildren<OchalikeEvaluatorNode>();
-            equipmentSprites = new List<BoneSprite>();
-            equipmentColors = new List<Color>();
+            wearSprites = new List<BoneSprite>();
+            wearColors = new List<Color>();
             for (int i = 0; i < bone.Children.Count; i++)
             {
                 var childBone = bone.Children[i];
@@ -48,8 +48,8 @@ namespace OchalikeSprites
         {
             source = node.source;
             _children = new BoneChildren<OchalikeEvaluatorNode>();
-            equipmentSprites = new List<BoneSprite>();
-            equipmentColors = new List<Color>();
+            wearSprites = new List<BoneSprite>();
+            wearColors = new List<Color>();
             for (int i = 0; i < node._children.Count; i++)
             {
                 var childBone = node._children[i];
@@ -71,12 +71,12 @@ namespace OchalikeSprites
             return true;
         }
 
-        private void SetBareSprite(OchalikeMorph.RefItem morphItem)
+        private void SetBareSprite(OchalikeMorph.Item morphItem)
         {
             bareSprite = morphItem.MorphBareSprite ?? source.BareSprite;
             bareColor = morphItem.MorphBareColor ?? source.BareColor;
-            equipmentSprites.Clear();
-            equipmentColors.Clear();
+            wearSprites.Clear();
+            wearColors.Clear();
             overridesOnDefaultColor = source.OverridesOnDefaultColor || morphItem.OverridesOnDefaultColor;
             NormalFrontSpriteCount = 0;
             NormalRearSpriteCount = 0;
@@ -95,11 +95,11 @@ namespace OchalikeSprites
         {
             var item = ochalikeMorph.GetSprite(source.Name);
             SetBareSprite(item);
-            for (int i = 0; i < item.EquipmentSpriteCount; i++)
+            for (int i = 0; i < item.WearSpriteCount; i++)
             {
-                item.GetEquipmentSprite(i, out var sprite, out var color);
-                equipmentSprites.Add(sprite);
-                equipmentColors.Add(color);
+                item.GetWearSprite(i, out var sprite, out var color);
+                wearSprites.Add(sprite);
+                wearColors.Add(color);
                 if (sprite.NormalFront != null) { NormalFrontSpriteCount++; }
                 if (sprite.NormalRear != null) { NormalRearSpriteCount++; }
                 if (sprite.BackFront != null) { BackFrontSpriteCount++; }
@@ -194,10 +194,10 @@ namespace OchalikeSprites
                         SetSprite(boneSprite, color, ref frontIndex, ref rearIndex);
                     }
                 }
-                for (int i = 0; i < equipmentSprites.Count; i++)
+                for (int i = 0; i < wearSprites.Count; i++)
                 {
-                    var boneSprite = equipmentSprites[i];
-                    var color = equipmentColors[i];
+                    var boneSprite = wearSprites[i];
+                    var color = wearColors[i];
                     SetSprite(boneSprite, color, ref frontIndex, ref rearIndex);
                 }
             }

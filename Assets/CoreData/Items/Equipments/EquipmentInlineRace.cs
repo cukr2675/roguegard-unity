@@ -84,8 +84,8 @@ namespace Roguegard.CharacterCreation
                 var owner = equipment.Location;
                 if (Data._ochalikeMorph != null)
                 {
-                    var equipmentSpriteState = owner.Main.GetBoneSpriteEffectState(owner);
-                    equipmentSpriteState.AddFromRogueEffect(owner, this);
+                    var boneSpriteEffectState = owner.Main.GetBoneSpriteEffectState(owner);
+                    boneSpriteEffectState.AddFromRogueEffect(owner, this);
                 }
 
                 foreach (var effect in effects)
@@ -97,8 +97,8 @@ namespace Roguegard.CharacterCreation
             protected override void RemoveEffect(RogueObj equipment)
             {
                 var owner = equipment.Location;
-                var equipmentSpriteState = owner.Main.GetBoneSpriteEffectState(owner);
-                equipmentSpriteState.Remove(this);
+                var boneSpriteEffectState = owner.Main.GetBoneSpriteEffectState(owner);
+                boneSpriteEffectState.Remove(this);
 
                 foreach (var effect in effects)
                 {

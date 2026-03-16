@@ -4,6 +4,7 @@ namespace OchalikeSprites
 {
     public class SpritePoseBoneTransform
     {
+        // 命名メモ: OchalikeMorph.Item.MorphBareSprite と区別するため Pose をつける
         public BoneSprite PoseBareSprite { get; }
 
         public Color? PoseBareColor { get; }

@@ -16,16 +16,15 @@ namespace OchalikeSprites
         {
             foreach (var item in _items)
             {
-                // BareSprite/Color が設定されている場合のみ EquipmentList.Clear して設定
                 if (item.MorphBareSprite != null || item.MorphBareColor != null)
                 {
                     ochalikeMorph.SetBareSprite(item.Name, item.MorphBareSprite, item.MorphBareColor, item.OverridesOnDefaultColor);
                 }
 
-                for (int i = 0; i < item.EquipmentSprites.Length; i++)
+                for (int i = 0; i < item.WearSprites.Length; i++)
                 {
-                    var equipmentPair = item.EquipmentSprites[i];
-                    ochalikeMorph.AddEquipmentSprite(item.Name, equipmentPair.Sprite, equipmentPair.Color, item.OverridesOnDefaultColor);
+                    var wearPair = item.WearSprites[i];
+                    ochalikeMorph.AddWearSprite(item.Name, wearPair.Sprite, wearPair.Color, item.OverridesOnDefaultColor);
                 }
             }
         }
@@ -34,16 +33,15 @@ namespace OchalikeSprites
         {
             foreach (var item in _items)
             {
-                // BareSprite/Color が設定されている場合のみ EquipmentList.Clear して設定
                 if (item.MorphBareSprite != null || item.MorphBareColor != null)
                 {
                     ochalikeMorph.SetBareSprite(item.Name, item.MorphBareSprite, item.GetMorphBareColor(toColor), item.OverridesOnDefaultColor);
                 }
 
-                for (int i = 0; i < item.EquipmentSprites.Length; i++)
+                for (int i = 0; i < item.WearSprites.Length; i++)
                 {
-                    var equipmentPair = item.EquipmentSprites[i];
-                    ochalikeMorph.AddEquipmentSprite(item.Name, equipmentPair.Sprite, equipmentPair.GetColor(toColor), item.OverridesOnDefaultColor);
+                    var wearPair = item.WearSprites[i];
+                    ochalikeMorph.AddWearSprite(item.Name, wearPair.Sprite, wearPair.GetColor(toColor), item.OverridesOnDefaultColor);
                 }
             }
         }
@@ -70,8 +68,8 @@ namespace OchalikeSprites
             [SerializeField] private bool _overridesOnDefaultColor;
             internal bool OverridesOnDefaultColor => _overridesOnDefaultColor;
 
-            [SerializeField] private BoneSpriteColorPair[] _equipmentSprites;
-            internal System.ReadOnlySpan<BoneSpriteColorPair> EquipmentSprites => _equipmentSprites;
+            [SerializeField] private BoneSpriteColorPair[] _wearSprites;
+            internal System.ReadOnlySpan<BoneSpriteColorPair> WearSprites => _wearSprites;
 
             internal Color? GetMorphBareColor(Color toColor)
             {

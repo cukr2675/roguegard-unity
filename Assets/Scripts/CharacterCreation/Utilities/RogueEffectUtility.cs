@@ -34,10 +34,10 @@ namespace Roguegard
                 var aspectState = self.Main.GetRogueMethodAspectState(self);
                 aspectState.AddPassiveFromRogueEffect(self, passiveAspect);
             }
-            if (effect is IBoneSpriteEffect equipmentSpriteEffect)
+            if (effect is IBoneSpriteEffect boneSpriteEffect)
             {
-                var equipmentSpriteState = self.Main.GetBoneSpriteEffectState(self);
-                equipmentSpriteState.AddFromRogueEffect(self, equipmentSpriteEffect);
+                var boneSpriteEffectState = self.Main.GetBoneSpriteEffectState(self);
+                boneSpriteEffectState.AddFromRogueEffect(self, boneSpriteEffect);
             }
             if (effect is ISpriteMotionEffect motionEffect)
             {
@@ -73,10 +73,10 @@ namespace Roguegard
                 var aspectState = self.Main.GetRogueMethodAspectState(self);
                 aspectState.AddPassiveFromInfoSet(self, passiveAspect);
             }
-            if (effect is IBoneSpriteEffect equipmentSpriteEffect)
+            if (effect is IBoneSpriteEffect boneSpriteEffect)
             {
-                var equipmentSpriteState = self.Main.GetBoneSpriteEffectState(self);
-                equipmentSpriteState.AddFromInfoSet(self, equipmentSpriteEffect);
+                var boneSpriteEffectState = self.Main.GetBoneSpriteEffectState(self);
+                boneSpriteEffectState.AddFromInfoSet(self, boneSpriteEffect);
             }
             if (effect is ISpriteMotionEffect motionEffect)
             {
@@ -138,10 +138,10 @@ namespace Roguegard
                 var aspectState = self.Main.GetRogueMethodAspectState(self);
                 result |= aspectState.ReplacePassiveWithNull(passiveAspect);
             }
-            if (effect is IBoneSpriteEffect equipmentSpriteEffect)
+            if (effect is IBoneSpriteEffect boneSpriteEffect)
             {
-                var equipmentSpriteState = self.Main.GetBoneSpriteEffectState(self);
-                result |= equipmentSpriteState.Remove(equipmentSpriteEffect);
+                var boneSpriteEffectState = self.Main.GetBoneSpriteEffectState(self);
+                result |= boneSpriteEffectState.Remove(boneSpriteEffect);
             }
             if (effect is ISpriteMotionEffect motionEffect)
             {
