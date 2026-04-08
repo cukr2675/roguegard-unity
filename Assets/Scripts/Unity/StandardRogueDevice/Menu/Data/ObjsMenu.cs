@@ -32,7 +32,7 @@ namespace RoguegardUnity
             PutIntoContainerCommandMenuScreen putInCommandMenuScreen,
             TakeOutOfContainerCommandMenuScreen takeOutCommandMenuScreen)
         {
-            Close = SelectOption.Create<MMgr, MArg>(":Close", (manager, arg) => manager.Done(), "Cancel");
+            Close = SelectOption.Create<MMgr, MArg>(":Close", (m, _) => m.Done(), "Cancel");
             Items = new ItemsScreen() { commandMenuScreen = commandMenuScreen };
             Ground = new GroundScreen() { commandMenuScreen = commandMenuScreen };
             PutIntoContainer = new PutIntoContainerScreen() { commandMenuScreen = putInCommandMenuScreen };
@@ -63,16 +63,15 @@ namespace RoguegardUnity
                         .Option(":Sort", Sort, "Sort click:Sp1")
                         .Back());
                 }
-            }
 
-            public override void OpenScreen(MMgr manager, MArg arg)
-            {
-                var list = GetObjs(arg.Self, arg.Arg.TargetObj);
-                var viewStateHolder = GetViewStateHolder(manager, arg);
+                OnOpenScreen += (manager) =>
+                {
+                    var list = GetObjs(Arg.Self, Arg.Arg.TargetObj);
+                    var viewStateHolder = GetViewStateHolder(manager);
 
-                view.Show(list, manager, arg, viewStateHolder)
+                    view.Show(list, manager, viewStateHolder)
                     ?
-                    .InfoFrom((obj, manager, arg) =>
+                    .InfoFrom((obj, manager) =>
                     {
                         var icon = obj.Main.InfoSet.Icon;
                         var color = RogueColorUtility.GetColor(obj);
@@ -88,26 +87,27 @@ namespace RoguegardUnity
                         return (obj, icon, color, stack, null, null, weightText, equipeed);
                     })
 
-                    .OnClick((obj, manager, arg) =>
+                    .OnClick((obj, manager) =>
                     {
                         // 選択したアイテムの情報と選択肢を表示する
-                        manager.PushScreen(commandMenuScreen, arg.Self, null, targetObj: arg.Arg.TargetObj, tool: obj);
+                        manager.PushScreen(commandMenuScreen, Arg.Self, null, targetObj: Arg.Arg.TargetObj, tool: obj);
                     })
 
                     .Build();
+                };
             }
 
-            protected virtual object GetViewStateHolder(MMgr manager, MArg arg)
-                => arg.Arg.TargetObj;
+            protected virtual object GetViewStateHolder(MMgr manager)
+                => Arg.Arg.TargetObj;
 
             protected abstract List<RogueObj> GetObjs(RogueObj self, RogueObj targetObj);
 
-            protected virtual float GetDefaultViewPosition(MMgr manager, MArg arg)
+            protected virtual float GetDefaultViewPosition(MMgr manager)
             {
                 if (!Skip0WeightObjs) return 0f;
 
                 // 重さがゼロではないアイテムまで自動スクロール
-                var objs = GetObjs(arg.Self, arg.Arg.TargetObj);
+                var objs = GetObjs(Arg.Self, Arg.Arg.TargetObj);
                 for (int i = 0; i < objs.Count; i++)
                 {
                     var weight = WeightCalculator.Get(objs[i]);
@@ -116,12 +116,12 @@ namespace RoguegardUnity
                 return 0f;
             }
 
-            private void Sort(MMgr manager, MArg arg)
+            private void Sort(MMgr manager)
             {
                 sortTable ??= new CategorizedSortTable(RoguegardSettings.ObjCommandTable.Categories);
 
                 // ソートしたあと開きなおす
-                sortTable.Sort(arg.Arg.TargetObj);
+                sortTable.Sort(Arg.Arg.TargetObj);
                 manager.Reopen();
             }
         }

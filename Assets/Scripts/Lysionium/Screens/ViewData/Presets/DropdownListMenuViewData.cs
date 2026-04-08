@@ -3,19 +3,12 @@ using UnityEngine;
 
 namespace Lysionium
 {
-    /// <inheritdoc/>
-    public class DropdownListMenuViewData<TItem, TMgr> : DropdownListMenuViewData<TItem, TMgr, IListuiArg>
-        where TItem : class
-        where TMgr : IListuiManager
-    { }
-
     /// <summary>
     /// 項目のスクロールが必要なメニュー向け ViewData
     /// </summary>
-    public class DropdownListMenuViewData<TItem, TMgr, TArg> : TreeViewData<TItem, TMgr, TArg>
+    public class DropdownListMenuViewData<TItem, TMgr> : TreeViewData<TItem, TMgr>
         where TItem : class
         where TMgr : IListuiManager
-        where TArg : IListuiArg
     {
         public System.Func<TMgr, IListHandlerSubview> DropdownListSubviewSelector { get; set; }
             = manager => (manager as IDefaultSubviewTable)?.DropdownList;
@@ -23,8 +16,8 @@ namespace Lysionium
             = manager => (manager as IDefaultSubviewTable)?.CaptionBox;
 
         /// <summary>
-        /// このインスタンスのデリゲート実行前に <see cref="SelectOptionViewItemHandler{TMgr, TArg}"/> の処理を挟む
-        /// (リストの前後に <see cref="ISelectOption{TMgr, TArg}"/> を入れる場合を想定)
+        /// このインスタンスのデリゲート実行前に <see cref="SelectOptionViewItemHandler{TMgr}"/> の処理を挟む
+        /// (リストの前後に <see cref="ISelectOption{TMgr}"/> を入れる場合を想定)
         /// </summary>
         public bool EnableSelectOptionProxy
         {
@@ -36,36 +29,34 @@ namespace Lysionium
         private ISubviewStateProvider dropdownListSubviewStateProvider;
         private ISubviewStateProvider captionBoxSubviewStateProvider;
 
-        private readonly TreeButtonViewItemHandler<TItem, TMgr, TArg> dropdownListSubviewHandler = new();
-        private ListuiEventHandler<TMgr, TArg> onShow;
-        private ListuiEventHandler onHide;
+        private readonly TreeButtonViewItemHandler<TItem, TMgr> dropdownListSubviewHandler = new();
 
-        public Builder Show(TItem[] list, TMgr manager, TArg arg, object viewStateHolder = null)
+        public Builder Show(TItem[] list, TMgr manager, object viewStateHolder = null)
         {
-            SetOriginalList(list, manager, arg);
-            return ShowCore(manager, arg, viewStateHolder);
+            SetOriginalList(list, manager);
+            return ShowCore(manager, viewStateHolder);
         }
 
-        public Builder Show(IReadOnlyList<TItem> list, TMgr manager, TArg arg, object viewStateHolder = null)
+        public Builder Show(IReadOnlyList<TItem> list, TMgr manager, object viewStateHolder = null)
         {
-            SetOriginalList(list, manager, arg);
-            return ShowCore(manager, arg, viewStateHolder);
+            SetOriginalList(list, manager);
+            return ShowCore(manager, viewStateHolder);
         }
 
-        public Builder Show(System.ReadOnlySpan<TItem> list, TMgr manager, TArg arg, object viewStateHolder = null)
+        public Builder Show(System.ReadOnlySpan<TItem> list, TMgr manager, object viewStateHolder = null)
         {
-            SetOriginalList(list, manager, arg);
-            return ShowCore(manager, arg, viewStateHolder);
+            SetOriginalList(list, manager);
+            return ShowCore(manager, viewStateHolder);
         }
 
-        private Builder ShowCore(TMgr manager, TArg arg, object viewStateHolder)
+        private Builder ShowCore(TMgr manager, object viewStateHolder)
         {
             // 必要に応じてスクロール位置をリセット
             if (viewStateHolder != prevViewStateHolder) { ResetSubviewStateProviders(); }
             prevViewStateHolder = viewStateHolder;
 
-            if (TryShowSubviews(manager, arg)) return null;
-            else return new Builder(this, manager, arg);
+            if (TryShowSubviews(manager)) return null;
+            else return new Builder(this, manager);
         }
 
         protected virtual void ResetSubviewStateProviders()
@@ -74,19 +65,16 @@ namespace Lysionium
             captionBoxSubviewStateProvider?.Reset();
         }
 
-        protected override void ShowSubviews(TMgr manager, TArg arg)
+        protected override void ShowSubviews(TMgr manager)
         {
             DropdownListSubviewSelector?.Invoke(manager)?.Show(
-                List, dropdownListSubviewHandler, manager, arg, ref dropdownListSubviewStateProvider, onHide: onHide);
+                List, dropdownListSubviewHandler, manager, ref dropdownListSubviewStateProvider, onHide: OnHide);
 
             if (Title != null)
             {
                 CaptionBoxSubviewSelector?.Invoke(manager)?.Show(
-                    Title, manager, arg, ref captionBoxSubviewStateProvider);
+                    Title, manager, ref captionBoxSubviewStateProvider);
             }
-
-            // 上記の Show によって実行される onHide の後に onShow を呼び出す
-            onShow?.Invoke(manager, arg);
         }
 
         public virtual void Hide(TMgr manager, bool back)
@@ -96,38 +84,16 @@ namespace Lysionium
         }
 
         public class Builder :
-            BaseListBuilder<DropdownListMenuViewData<TItem, TMgr, TArg>, Builder>,
-            IButtonViewItemHandlerBuilder<TItem, TMgr, TArg, Builder>,
-            ITreeViewItemHandlerBuilder<TItem, TMgr, TArg, Builder>
+            BaseListBuilder<DropdownListMenuViewData<TItem, TMgr>, Builder>,
+            IButtonViewItemHandlerBuilder<TItem, TMgr, Builder>,
+            ITreeViewItemHandlerBuilder<TItem, TMgr, Builder>
         {
-            public Builder(DropdownListMenuViewData<TItem, TMgr, TArg> parent, TMgr manager, TArg arg)
-                : base(parent, manager, arg)
+            public Builder(DropdownListMenuViewData<TItem, TMgr> parent, TMgr manager)
+                : base(parent, manager)
             {
             }
 
-            public Builder OnShow(ListuiEventHandler<TMgr, TArg> handler)
-            {
-                AssertNotBuilt();
-
-                Parent.onShow += handler;
-                return this;
-            }
-
-            public Builder OnHide(ListuiEventHandler<TMgr, TArg> handler)
-            {
-                AssertNotBuilt();
-
-                Parent.onHide += (manager, arg) =>
-                {
-                    if (LuiAssert.Type<TMgr>(manager, out var tMgr, manager) ||
-                        LuiAssert.Type<TArg>(arg, out var tArg, manager)) return;
-
-                    handler(tMgr, tArg);
-                };
-                return this;
-            }
-
-            public Builder NameFrom(System.Func<TItem, TMgr, TArg, string> selector)
+            public Builder NameFrom(System.Func<TItem, TMgr, string> selector)
             {
                 AssertNotBuilt();
 
@@ -137,7 +103,7 @@ namespace Lysionium
                 return this;
             }
 
-            public Builder StyleFrom(System.Func<TItem, TMgr, TArg, string> selector)
+            public Builder StyleFrom(System.Func<TItem, TMgr, string> selector)
             {
                 AssertNotBuilt();
 
@@ -147,7 +113,7 @@ namespace Lysionium
                 return this;
             }
 
-            public Builder OnClick(ClickItemHandler<TItem, TMgr, TArg> handler)
+            public Builder OnClick(ClickItemHandler<TItem, TMgr> handler)
             {
                 AssertNotBuilt();
 
@@ -155,7 +121,7 @@ namespace Lysionium
                 return this;
             }
 
-            public Builder ChildrenFrom(System.Func<TItem, TMgr, TArg, IReadOnlyList<TItem>> selector)
+            public Builder ChildrenFrom(System.Func<TItem, TMgr, IReadOnlyList<TItem>> selector)
             {
                 AssertNotBuilt();
 
@@ -172,8 +138,6 @@ namespace Lysionium
                 Parent.dropdownListSubviewHandler.GetStyle = null;
                 Parent.dropdownListSubviewHandler.Click = null;
                 Parent.dropdownListSubviewHandler.GetChildren = null;
-                Parent.onShow = null;
-                Parent.onHide = null;
             }
         }
     }

@@ -2,8 +2,8 @@ using System.Collections.Generic;
 
 namespace Lysionium
 {
-    public interface ITreeViewItemHandlerBuilder<TItem, TMgr, TArg, TBuilder>
+    public interface ITreeViewItemHandlerBuilder<TItem, TMgr, TBuilder>
     {
-        TBuilder ChildrenFrom(System.Func<TItem, TMgr, TArg, IReadOnlyList<TItem>> selector);
+        TBuilder ChildrenFrom(System.Func<TItem, TMgr, IReadOnlyList<TItem>> selector);
     }
 }

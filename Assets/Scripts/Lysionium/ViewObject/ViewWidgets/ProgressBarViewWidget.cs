@@ -34,7 +34,7 @@ namespace Lysionium.Views
 
         protected virtual void Update()
         {
-            var fillAmount = widgetOption.GetProgress(_parent.Manager, _parent.Arg);
+            var fillAmount = widgetOption.GetProgress(_parent.Manager);
             foreach (var image in _fillAmountTargetImages)
             {
                 image.fillAmount = fillAmount;

@@ -21,18 +21,19 @@ namespace Lysionium
     }
 
     /// <inheritdoc/>
-    public interface IListuiScreen<in TMgr, in TArg> : IListuiScreen
+    public interface IListuiScreen<in TMgr> : IListuiScreen
         where TMgr : IListuiManager
-        where TArg : IListuiArg
     {
         /// <summary>
         /// 画面を開くメソッド。画面の初期化処理とUIの表示を行う。
         /// </summary>
-        void OpenScreen(TMgr manager, TArg arg);
+        void OpenScreen(TMgr manager);
 
         /// <summary>
         /// 画面UIを閉じるメソッド。 <see cref="IsIncremental"/> によって実行されないことがあるためビジネスロジックの記述は禁止。
-        /// <para>メモ: この画面のUI表示前に独自の遷移アニメーションをトリガーしたい場合や <see cref="IsIncremental"/> == true のときオーバーライドする</para>
+        /// <para>
+        /// メモ: この画面のUI表示前に独自の遷移アニメーションをトリガーしたい場合や <see cref="IsIncremental"/> == true のときオーバーライドする
+        /// </para>
         /// </summary>
         void CloseScreenView(TMgr manager, bool back) // 命名メモ：表示処理のみ扱うことを推奨するため View をつける
         {
@@ -55,20 +56,21 @@ namespace Lysionium
     }
 
     /// <inheritdoc/>
-    public interface IListuiScreen<in TMgr, in TArg, TCtx> : IListuiScreen
+    public interface IListuiScreen<in TMgr, in TArg> : IListuiScreen
         where TMgr : IListuiManager
-        where TArg : IListuiArg
     {
         /// <summary>
         /// 画面を開くメソッド。画面の初期化処理とUIの表示を行う。
         /// </summary>
-        void OpenScreen(TMgr manager, TArg arg, TCtx context);
+        void OpenScreen(TMgr manager, TArg arg);
 
         /// <summary>
         /// 画面UIを閉じるメソッド。 <see cref="IsIncremental"/> によって実行されないことがあるためビジネスロジックの記述は禁止。
-        /// <para>メモ: この画面のUI表示前に独自の遷移アニメーションをトリガーしたい場合や <see cref="IsIncremental"/> == true のときオーバーライドする</para>
+        /// <para>
+        /// メモ: この画面のUI表示前に独自の遷移アニメーションをトリガーしたい場合や <see cref="IsIncremental"/> == true のときオーバーライドする
+        /// </para>
         /// </summary>
-        void CloseScreenView(TMgr manager, bool back, TCtx context) // 命名メモ：表示処理のみ扱うことを推奨するため View をつける
+        void CloseScreenView(TMgr manager, bool back, TArg arg)
         {
             manager.HideAll(back);
         }

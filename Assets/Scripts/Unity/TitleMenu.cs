@@ -93,22 +93,18 @@ namespace RoguegardUnity
         /// </summary>
         private class MainScreen : RogueListuiScreen
         {
-            private readonly TitleMenu parent;
-            private readonly MainMenuViewData<MMgr, MArg> view;
+            private readonly MainMenuViewData<MMgr> view;
 
             public MainScreen(TitleMenu parent)
             {
-                this.parent = parent;
-
                 view = new()
                 {
                     PrimaryCommandSubviewSelector = m => m.TitleMenu,
                 };
-            }
 
-            public override void OpenScreen(MMgr manager, MArg arg)
-            {
-                view.Show(manager, arg)
+                OnOpenScreen += (manager) =>
+                {
+                    view.Show(manager)
                     ?
                     .VarOnce(out var loadFadeOutScreen, new LoadFadeOutScreen(parent))
                     .VarOnce(out var newGameScreen, new NewGameScreen(loadFadeOutScreen))
@@ -117,7 +113,7 @@ namespace RoguegardUnity
                     .Option(":Play", FileSelectionScreen.Load(
 
                         // はじめから
-                        onNewFile: (manager, arg) =>
+                        onNewFile: (manager) =>
                         {
                             var characterCreationData = RoguegardSettings.CharacterCreationDatabase.LoadPreset(0);
                             RogueRandom.Primary = new RogueRandom();
@@ -128,16 +124,17 @@ namespace RoguegardUnity
                         },
 
                         // つづきから
-                        onSelectFile: (fileInfo, manager, arg) =>
+                        onSelectFile: (fileInfo, manager) =>
                         {
                             manager.PopScreen();
                             manager.PushScreen(loadFadeOutScreen, other: fileInfo.FullName);
-                        }))
+                        }), () => Arg)
 
                     // クレジット
-                    .Option(":Credit", new CreditListScreen() { credits = parent._credits })
+                    .Option(":Credit", new CreditListScreen(parent._credits), () => Arg)
 
                     .Build();
+                };
             }
         }
 
@@ -148,31 +145,27 @@ namespace RoguegardUnity
         /// </summary>
         private class NewGameScreen : RogueListuiScreen
         {
-            private readonly LoadFadeOutScreen loadFadeOutScreen;
-            private readonly ScrollMenuViewData<object, MMgr, MArg> view = new()
+            private readonly CharacterCreationViewData view = new()
             {
-                ScrollSubviewSelector = m => m.CharacterCreation,
             };
 
             public NewGameScreen(LoadFadeOutScreen loadFadeOutScreen)
             {
-                this.loadFadeOutScreen = loadFadeOutScreen;
-            }
-
-            public override void OpenScreen(MMgr manager, MArg arg)
-            {
-                view.Show(System.Array.Empty<object>(), manager, arg)
+                OnOpenScreen += (manager) =>
+                {
+                    view.Show(manager)
                     ?
                     .Init(() =>
                     {
                         view.BackAnchorList = new(
                             _ => _
-                            .Option(manager.CharacterCreation.LoadPresetOption) // プリセット読み込みボタン
+                            .Option(manager.CharacterCreation.LoadPresetOption, () => Arg) // プリセット読み込みボタン
                             .Option(":Done", ChoicesScreen.SaveBackDialog( // キャラクタークリエイト完了ボタン
-                                ":DoneMsg", ":SaveAndStart", (manager, arg) => manager.PushScreen(loadFadeOutScreen, arg),
-                                ":QuitWithoutSaving", null)));
+                                ":DoneMsg", ":SaveAndStart", m => m.PushScreen(loadFadeOutScreen, Arg),
+                                ":QuitWithoutSaving", null), () => Arg));
                     })
                     .Build();
+                };
             }
         }
 
@@ -183,25 +176,21 @@ namespace RoguegardUnity
         /// </summary>
         private class LoadFadeOutScreen : RogueListuiScreen
         {
-            private readonly TitleMenu parent;
-            private readonly FadeOutInViewData<MMgr, MArg> view;
+            private readonly FadeOutInViewData<MMgr> view;
 
             public LoadFadeOutScreen(TitleMenu parent)
             {
-                this.parent = parent;
-
                 view = new()
                 {
                 };
-            }
 
-            public override void OpenScreen(MMgr manager, MArg arg)
-            {
-                view.FadeOut(manager, arg)
+                OnOpenScreen += (manager) =>
+                {
+                    view.FadeOut(manager)
                     ?
-                    .OnFadeOutCompleted((manager, arg) =>
+                    .OnFadeOutCompleted((manager) =>
                     {
-                        if (arg.Arg.Other is CharacterCreationData characterCreationData)
+                        if (Arg.Arg.Other is CharacterCreationData characterCreationData)
                         {
                             // クリエイトしたキャラクターで開始
                             var loadSceneOperation = Addressables.LoadSceneAsync(parent._nextSceneAddress, activateOnLoad: true);
@@ -212,7 +201,7 @@ namespace RoguegardUnity
                                 parent.OpenDevice(device);
                             };
                         }
-                        else if (arg.Arg.Other is string path)
+                        else if (Arg.Arg.Other is string path)
                         {
                             // セーブデータを読み込んで開始
                             var loadSceneOperation = Addressables.LoadSceneAsync(parent._nextSceneAddress, activateOnLoad: true);
@@ -232,6 +221,7 @@ namespace RoguegardUnity
                     })
 
                     .Build();
+                };
             }
         }
 
@@ -242,26 +232,24 @@ namespace RoguegardUnity
         /// </summary>
         private class CreditListScreen : RogueListuiScreen
         {
-            public IReadOnlyList<CreditData> credits;
-
-            private readonly ScrollMenuViewData<CreditData, MMgr, MArg> view = new()
+            private readonly ScrollMenuViewData<CreditData, MMgr> view = new()
             {
                 Title = ":Credit",
             };
 
-            public override void OpenScreen(MMgr manager, MArg arg)
+            public CreditListScreen(IReadOnlyList<CreditData> credits)
             {
-                view.Show(credits, manager, arg)
+                OnOpenScreen += (manager) =>
+                {
+                    view.Show(credits, manager)
                     ?
                     .NameFrom(credit => credit.Name)
 
                     .VarOnce(out var nextScreen, new CreditDetailsScreen())
-                    .OnClick((credit, manager, arg) =>
-                    {
-                        manager.PushScreen(nextScreen, other: credit);
-                    })
+                    .OnClick((credit, m) => m.PushScreen(nextScreen, other: credit))
 
                     .Build();
+                };
             }
 
             /// <summary>
@@ -269,27 +257,30 @@ namespace RoguegardUnity
             /// </summary>
             private class CreditDetailsScreen : RogueListuiScreen
             {
-                private readonly DialogViewData<MMgr, MArg> view = new()
+                private readonly DialogViewData<MMgr> view = new()
                 {
                     DialogSubviewSelector = m => m.Widgets,
                 };
 
-                public override void OpenScreen(MMgr manager, MArg arg)
+                public CreditDetailsScreen()
                 {
-                    var credit = (CreditData)arg.Arg.Other;
+                    OnOpenScreen += (manager) =>
+                    {
+                        var credit = (CreditData)Arg.Arg.Other;
 
-                    // 文字列にリンクを貼ったものを表示
-                    var text = Regex.Replace(credit.Details, @"(https?://[a-zA-Z0-9@:%_\\+\-.~#?&/=]+)", "<color=#8080ff><u><link>$1</link></u></color>");
+                        // 文字列にリンクを貼ったものを表示
+                        var text = Regex.Replace(credit.Details, @"(https?://[a-zA-Z0-9@:%_\\+\-.~#?&/=]+)", "<color=#8080ff><u><link>$1</link></u></color>");
 
-                    view.Show(text, manager, arg)
+                        view.Show(text, manager)
                         ?
                         .VarOnce(out var viewWidth, 8000f)
                         .Tail.Append(ContentSizeMetaWidgetOption.Create(viewWidth))
 
                         .VarOnce(out var nextScreen, new URLDialog())
-                        .OnClickLink((link, manager, arg) => manager.PushScreen(nextScreen, other: link))
+                        .OnClickLink((link, manager) => manager.PushScreen(nextScreen, other: link))
 
                         .Build();
+                    };
                 }
             }
 
@@ -298,20 +289,20 @@ namespace RoguegardUnity
             /// </summary>
             private class URLDialog : RogueListuiScreen
             {
-                private readonly SpeechBoxViewData<MMgr, MArg> view = new()
+                private readonly SpeechBoxViewData<MMgr> view = new()
                 {
                 };
 
-                public override bool IsIncremental => true;
-
-                public override void OpenScreen(MMgr manager, MArg arg)
+                public URLDialog()
                 {
-                    var url = (string)arg.Arg.Other;
-                    view.Show($"{url} へ移動しますか？", manager, arg)
+                    OnOpenScreen += (manager) =>
+                    {
+                        var url = (string)Arg.Arg.Other;
+                        view.Show($"{url} へ移動しますか？", manager)
                         ?
-                        .Option(":Yes", (manager, arg) =>
+                        .Option(":Yes", (manager) =>
                         {
-                            var url = (string)arg.Arg.Other;
+                            var url = (string)Arg.Arg.Other;
                             manager.PopScreen();
                             Application.OpenURL(url);
                         })
@@ -319,11 +310,12 @@ namespace RoguegardUnity
                         .Back()
 
                         .Build();
-                }
+                    };
 
-                public override void CloseScreenView(MMgr manager, bool back)
-                {
-                    view.Hide(manager, back);
+                    OnCloseScreenView += (manager, back) =>
+                    {
+                        view.Hide(manager, back);
+                    };
                 }
             }
         }

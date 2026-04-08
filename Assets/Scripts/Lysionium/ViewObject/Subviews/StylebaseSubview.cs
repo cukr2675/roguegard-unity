@@ -32,8 +32,7 @@ namespace Lysionium.Views
         }
 
         public override void SetListHandler(
-            IReadOnlyList<object> list, IViewItemHandler handler, IListuiManager manager, IListuiArg arg,
-            ref ISubviewStateProvider stateProvider)
+            IReadOnlyList<object> list, IViewItemHandler handler, IListuiManager manager, ref ISubviewStateProvider stateProvider)
         {
             stateProvider ??= new StateProvider();
             if (stateProvider is not StateProvider local) throw new ArgumentException(
@@ -45,7 +44,7 @@ namespace Lysionium.Views
             }
 
             this.handler = handler;
-            SetArg(manager, arg);
+            Manager = manager;
             UpdateViewItems(list);
 
             // 新しい StateProvider に切り替える
@@ -64,7 +63,7 @@ namespace Lysionium.Views
             for (int i = 0; i < list.Count; i++)
             {
                 var item = list[i];
-                var style = handler.GetStyle(item, Manager, Arg);
+                var style = handler.GetStyle(item, Manager);
                 foreach (var viewItem in _viewItems)
                 {
                     if (!viewItem.Match(style)) continue;

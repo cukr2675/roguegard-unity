@@ -1,10 +1,9 @@
 namespace Lysionium.MergeExtensions.R3
 {
-    public readonly struct MergedViewItemHandleArg<TItem, TMgr, TArg, TBuilder, TValue>
+    public readonly struct MergedViewItemHandleArg<TItem, TMgr, TBuilder, TValue>
     {
         public TValue Value { get; }
         public TMgr Manager { get; }
-        public TArg Arg { get; }
         internal MergedViewItemHandleContext Context { get; }
 
         /// <summary>
@@ -17,22 +16,16 @@ namespace Lysionium.MergeExtensions.R3
         /// </summary>
         public TMgr Manager_ => Manager;
 
-        /// <summary>
-        /// <see cref="Arg"/> のエイリアス
-        /// </summary>
-        public TArg Arg_ => Arg;
-
-        public MergedViewItemHandleArg(TValue value, TMgr manager, TArg arg, MergedViewItemHandleContext context)
+        public MergedViewItemHandleArg(TValue value, TMgr manager, MergedViewItemHandleContext context)
         {
             Value = value;
             Manager = manager;
-            Arg = arg;
             Context = context;
         }
 
-        public MergedViewItemHandleArg<TItem, TMgr, TArg, TBuilder, T> SetValue<T>(T value)
+        public MergedViewItemHandleArg<TItem, TMgr, TBuilder, T> SetValue<T>(T value)
         {
-            return new MergedViewItemHandleArg<TItem, TMgr, TArg, TBuilder, T>(value, Manager, Arg, Context);
+            return new MergedViewItemHandleArg<TItem, TMgr, TBuilder, T>(value, Manager, Context);
         }
     }
 }

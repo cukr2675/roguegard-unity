@@ -1,16 +1,15 @@
 namespace Lysionium
 {
-    public class ButtonViewItemHandler<TItem, TMgr, TArg> : IButtonViewItemHandler
+    public class ButtonViewItemHandler<TItem, TMgr> : IButtonViewItemHandler
         where TMgr : IListuiManager
-        where TArg : IListuiArg
     {
-        public System.Func<TItem, TMgr, TArg, string> GetName { get; set; }
-        public System.Func<TItem, TMgr, TArg, string> GetStyle { get; set; }
-        public ClickItemHandler<TItem, TMgr, TArg> Click { get; set; }
+        public System.Func<TItem, TMgr, string> GetName { get; set; }
+        public System.Func<TItem, TMgr, string> GetStyle { get; set; }
+        public ClickItemHandler<TItem, TMgr> Click { get; set; }
 
         /// <summary>
-        /// このインスタンスのデリゲート実行前に <see cref="SelectOptionViewItemHandler{TMgr, TArg}"/> の処理を挟む
-        /// (リストの前後に <see cref="ISelectOption{TMgr, TArg}"/> を入れる場合を想定)
+        /// このインスタンスのデリゲート実行前に <see cref="SelectOptionViewItemHandler{TMgr}"/> の処理を挟む
+        /// (リストの前後に <see cref="ISelectOption{TMgr}"/> を入れる場合を想定)
         /// </summary>
         public bool EnableSelectOptionProxy { get; set; }
 
@@ -19,49 +18,46 @@ namespace Lysionium
             EnableSelectOptionProxy = enableSelectOptionProxy;
         }
 
-        string IViewItemHandler.GetName(object item, IListuiManager manager, IListuiArg arg)
+        string IViewItemHandler.GetName(object item, IListuiManager manager)
         {
-            if (EnableSelectOptionProxy && item is ISelectOption<TMgr, TArg>)
+            if (EnableSelectOptionProxy && item is ISelectOption<TMgr>)
             {
-                return SelectOptionViewItemHandler<TMgr, TArg>.Instance.GetName(item, manager, arg);
+                return SelectOptionViewItemHandler<TMgr>.Instance.GetName(item, manager);
             }
 
             if (LuiAssert.Type<TItem>(item, out var tItem) ||
-                LuiAssert.Type<TMgr>(manager, out var tMgr) ||
-                LuiAssert.Type<TArg>(arg, out var tArg)) return manager.ErrorOption.GetName(manager, arg);
+                LuiAssert.Type<TMgr>(manager, out var tMgr)) return manager.ErrorOption.GetName(manager);
 
-            if (GetName != null) return GetName(tItem, tMgr, tArg);
+            if (GetName != null) return GetName(tItem, tMgr);
             else return item?.ToString() ?? "null";
         }
 
-        string IViewItemHandler.GetStyle(object item, IListuiManager manager, IListuiArg arg)
+        string IViewItemHandler.GetStyle(object item, IListuiManager manager)
         {
-            if (EnableSelectOptionProxy && item is ISelectOption<TMgr, TArg>)
+            if (EnableSelectOptionProxy && item is ISelectOption<TMgr>)
             {
-                return SelectOptionViewItemHandler<TMgr, TArg>.Instance.GetStyle(item, manager, arg);
+                return SelectOptionViewItemHandler<TMgr>.Instance.GetStyle(item, manager);
             }
 
             if (LuiAssert.Type<TItem>(item, out var tItem) ||
-                LuiAssert.Type<TMgr>(manager, out var tMgr) ||
-                LuiAssert.Type<TArg>(arg, out var tArg)) return manager.ErrorOption.GetStyle(manager, arg);
+                LuiAssert.Type<TMgr>(manager, out var tMgr)) return manager.ErrorOption.GetStyle(manager);
 
-            return GetStyle?.Invoke(tItem, tMgr, tArg) ?? string.Empty;
+            return GetStyle?.Invoke(tItem, tMgr) ?? string.Empty;
         }
 
-        void IButtonViewItemHandler.Click(object item, IListuiManager manager, IListuiArg arg)
+        void IButtonViewItemHandler.Click(object item, IListuiManager manager)
         {
-            if (EnableSelectOptionProxy && item is ISelectOption<TMgr, TArg>)
+            if (EnableSelectOptionProxy && item is ISelectOption<TMgr>)
             {
-                SelectOptionViewItemHandler<TMgr, TArg>.Instance.Click(item, manager, arg);
+                SelectOptionViewItemHandler<TMgr>.Instance.Click(item, manager);
                 return;
             }
 
             if (Click == null) throw new System.InvalidOperationException($"{Click} が null です。");
             if (LuiAssert.Type<TItem>(item, out var tItem, manager) ||
-                LuiAssert.Type<TMgr>(manager, out var tMgr, manager) ||
-                LuiAssert.Type<TArg>(arg, out var tArg, manager)) return;
+                LuiAssert.Type<TMgr>(manager, out var tMgr, manager)) return;
 
-            Click(tItem, tMgr, tArg);
+            Click(tItem, tMgr);
         }
     }
 }

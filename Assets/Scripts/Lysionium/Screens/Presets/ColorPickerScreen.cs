@@ -2,38 +2,26 @@ using UnityEngine;
 
 namespace Lysionium
 {
-    /// <inheritdoc/>
-    public class ColorPickerScreen<TMgr> : ColorPickerScreen<TMgr, IListuiArg>
+    public class ColorPickerScreen<TMgr> : IListuiScreen<TMgr>
         where TMgr : IListuiManager
     {
-        public ColorPickerScreen(
-            System.Func<TMgr, IListuiArg, Color> getColor, System.Action<TMgr, IListuiArg, Color> onClose,
-            System.Func<TMgr, IColorPickerSubview> colorPickerSubviewSelector = null)
-            : base(getColor, onClose, colorPickerSubviewSelector)
-        { }
-    }
-
-    public class ColorPickerScreen<TMgr, TArg> : IListuiScreen<TMgr, TArg>
-        where TMgr : IListuiManager
-        where TArg : IListuiArg
-    {
-        private readonly System.Func<TMgr, TArg, Color> getColor;
-        private readonly System.Action<TMgr, TArg, Color> handleClose;
+        private readonly System.Func<TMgr, Color> getColor;
+        private readonly System.Action<Color, TMgr> handleClose;
         private readonly ViewData view;
 
         public bool IsIncremental => true;
 
         public ColorPickerScreen(
-            System.Func<TMgr, TArg, Color> getColor, System.Action<TMgr, TArg, Color> onClose,
+            System.Func<TMgr, Color> getColor, System.Action<Color, TMgr> onClose,
             System.Func<TMgr, IColorPickerSubview> colorPickerSubviewSelector = null)
         {
             this.getColor = getColor;
             handleClose = onClose;
-            handleClose += (manager, arg, color) =>
+            handleClose += (color, manager) =>
             {
-                if (manager is IBackOptionProviderListuiManager<TMgr, TArg> backOptionProvider)
+                if (manager is IBackOptionProviderListuiManager<TMgr> backOptionProvider)
                 {
-                    backOptionProvider.BackOption.Click(manager, arg);
+                    backOptionProvider.BackOption.Click(manager);
                 }
             };
 
@@ -43,18 +31,17 @@ namespace Lysionium
             };
         }
 
-        public void OpenScreen(TMgr manager, TArg arg)
+        public void OpenScreen(TMgr manager)
         {
-            var color = getColor(manager, arg);
+            var color = getColor(manager);
 
-            view.Show(color, manager, arg)
+            view.Show(color, manager)
                 ?
-                .OnClose((manager, arg, color) =>
+                .OnClose((color, manager) =>
                 {
-                    if (LuiAssert.Type<TMgr>(manager, out var tMgr, manager) ||
-                        LuiAssert.Type<TArg>(arg, out var tArg, manager)) return;
+                    if (LuiAssert.Type<TMgr>(manager, out var tMgr, manager)) return;
 
-                    handleClose(tMgr, tArg, color);
+                    handleClose(color, tMgr);
                 })
                 .Build();
         }
@@ -64,29 +51,45 @@ namespace Lysionium
             view.Hide(manager, back);
         }
 
-        private class ViewData : ViewData<TMgr, TArg>
+        public ISelectOption<T> ToSelectOption<T>()
+            where T : IListuiScreenManager<T>, TMgr
+        {
+            return SelectOption.Create<T>(
+                (manager) =>
+                {
+                    var color = getColor(manager);
+                    var rgba = ColorUtility.ToHtmlStringRGBA(color);
+                    return $"<#{rgba}>■";
+                },
+                (manager) =>
+                {
+                    manager.PushScreen((IListuiScreen<T>)this);
+                });
+        }
+
+        private class ViewData : ViewData<TMgr>
         {
             public System.Func<TMgr, IColorPickerSubview> colorPickerSubviewSelector;
             private ISubviewStateProvider colorPickerSubviewStateProvider;
             private Color color;
             private event IColorPickerSubview.ColorPickerEventHandler HandleClose;
 
-            public Builder Show(Color color, TMgr manager, TArg arg)
+            public Builder Show(Color color, TMgr manager)
             {
                 if (manager == null) throw new System.ArgumentNullException(nameof(manager));
 
                 this.color = color;
 
-                if (TryShowSubviews(manager, arg)) return null;
-                else return new Builder(this, manager, arg);
+                if (TryShowSubviews(manager)) return null;
+                else return new Builder(this, manager);
             }
 
-            protected override void ShowSubviews(TMgr manager, TArg arg)
+            protected override void ShowSubviews(TMgr manager)
             {
                 var colorPickerSubview = colorPickerSubviewSelector?.Invoke(manager);
                 if (colorPickerSubview == null) return;
 
-                colorPickerSubview.SetupColorPicker(color, HandleClose, manager, arg, ref colorPickerSubviewStateProvider);
+                colorPickerSubview.SetupColorPicker(color, HandleClose, manager, ref colorPickerSubviewStateProvider);
                 colorPickerSubview.Show(onHide: OnHide);
             }
 
@@ -97,8 +100,8 @@ namespace Lysionium
 
             public class Builder : BaseBuilder<ViewData, Builder>
             {
-                public Builder(ViewData parent, TMgr manager, TArg arg)
-                    : base(parent, manager, arg)
+                public Builder(ViewData parent, TMgr manager)
+                    : base(parent, manager)
                 {
                 }
 

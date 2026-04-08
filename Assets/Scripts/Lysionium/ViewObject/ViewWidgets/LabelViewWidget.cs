@@ -35,7 +35,7 @@ namespace Lysionium.Views
             }
             else if (item is ILabelWidgetOption widgetOption)
             {
-                var baseText = widgetOption.GetText(subview.Manager, subview.Arg);
+                var baseText = widgetOption.GetText(subview.Manager);
                 var labelViewWidget = Instantiate(this, subview.transform);
                 labelViewWidget._parent = subview;
                 labelViewWidget.widgetOption = widgetOption;
@@ -87,7 +87,7 @@ namespace Lysionium.Views
             _onClick.Invoke();
 
             var linkInfo = _text.textInfo.linkInfo[linkIndex];
-            widgetOption.ClickLink(linkInfo.GetLinkText(), _parent.Manager, _parent.Arg);
+            widgetOption.ClickLink(linkInfo.GetLinkText(), _parent.Manager);
         }
     }
 }

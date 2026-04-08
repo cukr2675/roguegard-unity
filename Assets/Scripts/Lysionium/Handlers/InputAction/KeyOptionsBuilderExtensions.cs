@@ -7,10 +7,9 @@ namespace Lysionium
     {
         // 命名メモ: メソッド名を Option にすると UnityEngine.InputSystem をインポートしていないアセンブリで SelectOptionListBuilderExtensions が使えなくなる
 
-        public static TBuilder KeyOptionRange<TMgr, TArg, TBuilder>(
-            this IKeyOptionsBuilder<TMgr, TArg, TBuilder> builder, IEnumerable<IKeyOption<TMgr, TArg>> options)
+        public static TBuilder KeyOptionRange<TMgr, TBuilder>(
+            this IKeyOptionsBuilder<TMgr, TBuilder> builder, IEnumerable<IKeyOption<TMgr>> options)
             where TMgr : IListuiManager
-            where TArg : IListuiArg
         {
             foreach (var option in options)
             {
@@ -21,77 +20,73 @@ namespace Lysionium
 
         // input 指定子を想定して style は必須にする
         // name と style は近いほうが見やすいので onDo よりも左にする
-        public static TBuilder KeyOption<TMgr, TArg, TBuilder>(
-            this IKeyOptionsBuilder<TMgr, TArg, TBuilder> builder,
+        public static TBuilder KeyOption<TMgr, TBuilder>(
+            this IKeyOptionsBuilder<TMgr, TBuilder> builder,
             string name, string style,
-            InputItemHandler<TMgr, TArg> onDo,
+            InputOptionHandler<TMgr> onDo,
             KeybindPhase phase = KeybindPhase.Performed | KeybindPhase.Canceled)
             where TMgr : IListuiManager
-            where TArg : IListuiArg
         {
-            return builder.Option(new Implement<TMgr, TArg>(
+            return builder.Option(new Implement<TMgr>(
                 name, style,
                 (phase & KeybindPhase.Started) != 0 ? onDo : null,
                 (phase & KeybindPhase.Performed) != 0 ? onDo : null,
                 (phase & KeybindPhase.Canceled) != 0 ? onDo : null));
         }
 
-        public static TBuilder KeyOption<TMgr, TArg, TBuilder>(
-            this IKeyOptionsBuilder<TMgr, TArg, TBuilder> builder,
+        public static TBuilder KeyOption<TMgr, TBuilder>(
+            this IKeyOptionsBuilder<TMgr, TBuilder> builder,
             string name, string style,
             System.Action<InputAction.CallbackContext> onDo,
             KeybindPhase phase = KeybindPhase.Performed | KeybindPhase.Canceled)
             where TMgr : IListuiManager
-            where TArg : IListuiArg
         {
-            return builder.Option(new Implement<TMgr, TArg>(
+            return builder.Option(new Implement<TMgr>(
                 name, style,
                 (phase & KeybindPhase.Started) != 0 ? onDo : null,
                 (phase & KeybindPhase.Performed) != 0 ? onDo : null,
                 (phase & KeybindPhase.Canceled) != 0 ? onDo : null));
         }
 
-        public static TBuilder KeyOption<TMgr, TArg, TBuilder>(
-            this IKeyOptionsBuilder<TMgr, TArg, TBuilder> builder,
+        public static TBuilder KeyOption<TMgr, TBuilder>(
+            this IKeyOptionsBuilder<TMgr, TBuilder> builder,
             string name, string style,
-            InputItemHandler<TMgr, TArg> onStart,
-            InputItemHandler<TMgr, TArg> onPerform,
-            InputItemHandler<TMgr, TArg> onCancel)
+            InputOptionHandler<TMgr> onStart,
+            InputOptionHandler<TMgr> onPerform,
+            InputOptionHandler<TMgr> onCancel)
             where TMgr : IListuiManager
-            where TArg : IListuiArg
         {
-            return builder.Option(new Implement<TMgr, TArg>(name, style, onStart, onPerform, onCancel));
+            return builder.Option(new Implement<TMgr>(name, style, onStart, onPerform, onCancel));
         }
 
-        public static TBuilder KeyOption<TMgr, TArg, TBuilder>(
-            this IKeyOptionsBuilder<TMgr, TArg, TBuilder> builder,
+        public static TBuilder KeyOption<TMgr, TBuilder>(
+            this IKeyOptionsBuilder<TMgr, TBuilder> builder,
             string name, string style,
             System.Action<InputAction.CallbackContext> onStart,
             System.Action<InputAction.CallbackContext> onPerform,
             System.Action<InputAction.CallbackContext> onCancel)
             where TMgr : IListuiManager
-            where TArg : IListuiArg
         {
-            return builder.Option(new Implement<TMgr, TArg>(name, style, onStart, onPerform, onCancel));
+            return builder.Option(new Implement<TMgr>(name, style, onStart, onPerform, onCancel));
         }
 
-        private class Implement<TMgr, TArg> : IKeyOption<TMgr, TArg>
+        private class Implement<TMgr> : IKeyOption<TMgr>
         {
             private string name;
-            private System.Func<TMgr, TArg, string> getName;
+            private System.Func<TMgr, string> getName;
 
             private string style;
-            private System.Func<TMgr, TArg, string> getStyle;
+            private System.Func<TMgr, string> getStyle;
 
-            public InputItemHandler<TMgr, TArg> Started { get; set; }
-            public InputItemHandler<TMgr, TArg> Performed { get; set; }
-            public InputItemHandler<TMgr, TArg> Canceled { get; set; }
+            public InputOptionHandler<TMgr> Started { get; set; }
+            public InputOptionHandler<TMgr> Performed { get; set; }
+            public InputOptionHandler<TMgr> Canceled { get; set; }
 
             public Implement(
                 string name, string style,
-                InputItemHandler<TMgr, TArg> onStart,
-                InputItemHandler<TMgr, TArg> onPerform,
-                InputItemHandler<TMgr, TArg> onCancel)
+                InputOptionHandler<TMgr> onStart,
+                InputOptionHandler<TMgr> onPerform,
+                InputOptionHandler<TMgr> onCancel)
             {
                 this.name = name;
                 this.style = style;
@@ -108,9 +103,9 @@ namespace Lysionium
             {
                 this.name = name;
                 this.style = style;
-                if (onStart != null) { Started = (_, _, ctx) => onStart(ctx); }
-                if (onPerform != null) { Performed = (_, _, ctx) => onPerform(ctx); }
-                if (onCancel != null) { Canceled = (_, _, ctx) => onCancel(ctx); }
+                if (onStart != null) { Started = (_, ctx) => onStart(ctx); }
+                if (onPerform != null) { Performed = (_, ctx) => onPerform(ctx); }
+                if (onCancel != null) { Canceled = (_, ctx) => onCancel(ctx); }
             }
 
             public void SetName(string name)
@@ -119,7 +114,7 @@ namespace Lysionium
                 getName = null;
             }
 
-            public void SetName(System.Func<TMgr, TArg, string> selector)
+            public void SetName(System.Func<TMgr, string> selector)
             {
                 getName = selector ?? throw new System.ArgumentNullException(nameof(selector));
                 name = null;
@@ -131,17 +126,17 @@ namespace Lysionium
                 getStyle = null;
             }
 
-            public void SetStyle(System.Func<TMgr, TArg, string> selector)
+            public void SetStyle(System.Func<TMgr, string> selector)
             {
                 getStyle = selector;
                 style = null;
             }
 
-            string IKeyOption<TMgr, TArg>.GetName(TMgr manager, TArg arg) => getName?.Invoke(manager, arg) ?? name;
-            string IKeyOption<TMgr, TArg>.GetStyle(TMgr manager, TArg arg) => getStyle?.Invoke(manager, arg) ?? style;
-            void IKeyOption<TMgr, TArg>.Started(TMgr manager, TArg arg, InputAction.CallbackContext context) => Started?.Invoke(manager, arg, context);
-            void IKeyOption<TMgr, TArg>.Performed(TMgr manager, TArg arg, InputAction.CallbackContext context) => Performed?.Invoke(manager, arg, context);
-            void IKeyOption<TMgr, TArg>.Canceled(TMgr manager, TArg arg, InputAction.CallbackContext context) => Canceled?.Invoke(manager, arg, context);
+            string IKeyOption<TMgr>.GetName(TMgr manager) => getName?.Invoke(manager) ?? name;
+            string IKeyOption<TMgr>.GetStyle(TMgr manager) => getStyle?.Invoke(manager) ?? style;
+            void IKeyOption<TMgr>.Started(TMgr manager, InputAction.CallbackContext context) => Started?.Invoke(manager, context);
+            void IKeyOption<TMgr>.Performed(TMgr manager, InputAction.CallbackContext context) => Performed?.Invoke(manager, context);
+            void IKeyOption<TMgr>.Canceled(TMgr manager, InputAction.CallbackContext context) => Canceled?.Invoke(manager, context);
         }
     }
 }

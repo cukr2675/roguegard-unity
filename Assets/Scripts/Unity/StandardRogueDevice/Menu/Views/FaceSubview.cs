@@ -8,11 +8,13 @@ using UnityEngine;
 
 namespace RoguegardUnity
 {
-    public class FaceSubview : ListHandlerSubview
+    public class FaceSubview : Subview, ICharacterCreationElementsSubview
     {
         [SerializeField] private RectTransform _content = null;
 
         private MenuRogueObjSpriteRenderer spriteRenderer;
+
+        ISelectOption<MMgr, MArg> ICharacterCreationElementsSubview.LoadPresetOption => throw new System.NotSupportedException();
 
         public void Initialize(RogueSpriteRendererPool rendererPool)
         {
@@ -25,13 +27,12 @@ namespace RoguegardUnity
             spriteRendererTransform.localScale = Vector3.one * 8f;
         }
 
-        public override void SetListHandler(
-            IReadOnlyList<object> list, IViewItemHandler handler, IListuiManager manager, IListuiArg arg,
+        public void SetListHandler(
+            IReadOnlyList<object> list, IViewItemHandler handler, MMgr manager, MArg arg,
             ref ISubviewStateProvider stateProvider)
         {
-            var mArg = (MArg)arg;
-            var obj = mArg.Arg.TargetObj;
-            var facial = (ISpriteMotion)mArg.Arg.Other;
+            var obj = arg.Arg.TargetObj;
+            var facial = (ISpriteMotion)arg.Arg.Other;
             obj.Main.Sprite.Update(obj);
             var spriteTransform = OchalikeSpriteTransform.Identity;
             if (facial != null)

@@ -8,9 +8,8 @@ namespace Lysionium
     // ViewMarkup は markup (マークをつける) というよりは builder や query のほうが近い
     // ViewSetup は Initialize を連想させる
     // ViewPresenter, ViewController はビューに参照されるわけではないので不適切
-    public abstract class ViewData<TMgr, TArg>
+    public abstract class ViewData<TMgr>
         where TMgr : IListuiManager
-        where TArg : IListuiArg
     {
         public string Title { get; set; }
 
@@ -21,13 +20,13 @@ namespace Lysionium
         /// <summary>
         /// <see cref="ISubview.Show"/> によって実行される <see cref="OnHide"/> の後にこのデリゲートを呼び出す
         /// </summary>
-        private ListuiEventHandler<TMgr, TArg> onShow;
+        private ListuiEventHandler<TMgr> onShow;
         protected ListuiEventHandler OnHide { get; private set; }
 
         /// <summary>
         /// このメソッドが失敗する（false を返す）ときのみ FluentBuilder を返すように実装する
         /// </summary>
-        protected bool TryShowSubviews(TMgr manager, TArg arg)
+        protected bool TryShowSubviews(TMgr manager)
         {
             if (IsBuilt)
             {
@@ -36,8 +35,8 @@ namespace Lysionium
                     Debug.LogWarning($"{GetType()} をビルドしたマネージャーは {callerManager} です。 {manager} に表示することはできません。");
                 }
 
-                ShowSubviews(manager, arg);
-                onShow?.Invoke(manager, arg);
+                ShowSubviews(manager);
+                onShow?.Invoke(manager);
                 return true;
             }
             else
@@ -50,25 +49,23 @@ namespace Lysionium
         /// <see cref="ISubview"/> 群を表示するメソッド。
         /// このメソッド単体では <see cref="onShow"/> が実行されないため、呼び出しは非推奨（<see cref="TryShowSubviews"/> の使用を検討）
         /// </summary>
-        protected abstract void ShowSubviews(TMgr manager, TArg arg);
+        protected abstract void ShowSubviews(TMgr manager);
 
         /// <summary>
         /// フルエントビルダークラス
         /// </summary>
         public abstract class BaseBuilder<TViewData, TOut>
-            where TViewData : ViewData<TMgr, TArg>
+            where TViewData : ViewData<TMgr>
             where TOut : BaseBuilder<TViewData, TOut>
         {
             protected TViewData Parent { get; }
             protected TMgr Manager { get; }
-            protected TArg Arg { get; }
             private readonly List<System.IDisposable> disposables;
 
-            protected BaseBuilder(TViewData parent, TMgr manager, TArg arg)
+            protected BaseBuilder(TViewData parent, TMgr manager)
             {
                 Parent = parent;
                 Manager = manager;
-                Arg = arg;
                 disposables = new List<System.IDisposable>();
             }
 
@@ -137,7 +134,7 @@ namespace Lysionium
                 return (TOut)this;
             }
 
-            public TOut OnShow(ListuiEventHandler<TMgr, TArg> handler)
+            public TOut OnShow(ListuiEventHandler<TMgr> handler)
             {
                 AssertNotBuilt();
 
@@ -145,16 +142,15 @@ namespace Lysionium
                 return (TOut)this;
             }
 
-            public TOut OnHide(ListuiEventHandler<TMgr, TArg> handler)
+            public TOut OnHide(ListuiEventHandler<TMgr> handler)
             {
                 AssertNotBuilt();
 
-                Parent.OnHide += (manager, arg) =>
+                Parent.OnHide += (manager) =>
                 {
-                    if (LuiAssert.Type<TMgr>(manager, out var tMgr, manager) ||
-                        LuiAssert.Type<TArg>(arg, out var tArg, manager)) return;
+                    if (LuiAssert.Type<TMgr>(manager, out var tMgr, manager)) return;
 
-                    handler(tMgr, tArg);
+                    handler(tMgr);
                 };
                 return (TOut)this;
             }
@@ -165,8 +161,8 @@ namespace Lysionium
                 Manager.OnUnload += Unload;
                 Parent.IsBuilt = true;
                 Parent.callerManager = Manager;
-                Parent.ShowSubviews(Manager, Arg);
-                Parent.onShow?.Invoke(Manager, Arg);
+                Parent.ShowSubviews(Manager);
+                Parent.onShow?.Invoke(Manager);
             }
 
             protected virtual void Unload()

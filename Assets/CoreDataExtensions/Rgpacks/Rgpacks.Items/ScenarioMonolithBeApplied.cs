@@ -23,9 +23,7 @@ namespace Roguegard.Rgpacks
 
         private class ScenarioMonolithScreen : RogueListuiScreen
         {
-            private readonly ScenarioMonolithBeApplied parent;
-
-            private readonly MainMenuViewData<MMgr, MArg> view = new()
+            private readonly MainMenuViewData<MMgr> view = new()
             {
                 PrimaryCommandSubviewSelector = m => m.Scroll,
                 BackAnchorSubviewSelector = m => m.BackAnchor,
@@ -33,33 +31,31 @@ namespace Roguegard.Rgpacks
 
             public ScenarioMonolithScreen(ScenarioMonolithBeApplied parent)
             {
-                this.parent = parent;
-            }
-
-            public override void OpenScreen(MMgr manager, MArg arg)
-            {
-                view.Show(manager, arg)
+                OnOpenScreen += (manager) =>
+                {
+                    view.Show(manager)
                     ?
-                    .Option("ショップ", new ShopScreen() { parent = parent })
-                    .Option("メインチャート設定", new SetMainChartScreen())
+                    .Option("ショップ", new ShopScreen(parent), () => Arg)
+                    .Option("メインチャート設定", new SetMainChartScreen(), () => Arg)
                     .Option("テストプレイ", Playtest)
                     .Option("アトリエから出る", Leave)
                     .Build();
+                };
             }
 
-            private static void Playtest(MMgr manager, MArg arg)
+            private void Playtest(MMgr manager)
             {
-                var monolith = arg.Arg.Tool;
+                var monolith = Arg.Arg.Tool;
                 var scenarioAtelier = monolith.Location;
                 var rgpack = Rgpacker.Pack(scenarioAtelier);
                 RogueDevice.Add(DeviceKw.StartPlaytest, rgpack);
             }
 
-            private static void Leave(MMgr manager, MArg arg)
+            private void Leave(MMgr manager)
             {
                 manager.AddObject(DeviceKw.EnqueueSE, CategoryKw.DownStairs);
-                default(IActiveRogueMethodCaller).LocateSavePoint(arg.Self, null, 0f, RogueWorldSavePointInfo.Instance, true);
-                var memberInfo = LobbyMemberList.GetMemberInfo(arg.Self);
+                default(IActiveRogueMethodCaller).LocateSavePoint(Arg.Self, null, 0f, RogueWorldSavePointInfo.Instance, true);
+                var memberInfo = LobbyMemberList.GetMemberInfo(Arg.Self);
                 memberInfo.SavePoint = RogueWorldSavePointInfo.Instance;
                 manager.Done();
             }
@@ -67,55 +63,59 @@ namespace Roguegard.Rgpacks
 
         private class ShopScreen : RogueListuiScreen
         {
-            public ScenarioMonolithBeApplied parent;
-
-            private readonly ScrollMenuViewData<AssetStartingItem, MMgr, MArg> view = new()
+            private readonly ScrollMenuViewData<AssetStartingItem, MMgr> view = new()
             {
             };
 
-            public override void OpenScreen(MMgr manager, MArg arg)
+            public ShopScreen(ScenarioMonolithBeApplied parent)
             {
-                view.Show(parent._shopItems, manager, arg)
+                OnOpenScreen += (manager) =>
+                {
+                    view.Show(parent._shopItems, manager)
                     ?
                     .NameFrom(item => item.Name)
 
-                    .OnClick((item, manager, arg) =>
+                    .OnClick((item, manager) =>
                     {
                         manager.AddObject(DeviceKw.AppendText, item);
                         manager.AddObject(DeviceKw.AppendText, "を手に入れた\n");
-                        item.Option.CreateObj(item, arg.Self, Vector2Int.zero, RogueRandom.Primary);
+                        item.Option.CreateObj(item, Arg.Self, Vector2Int.zero, RogueRandom.Primary);
                     })
 
                     .Build();
+                };
             }
         }
 
         private class SetMainChartScreen : RogueListuiScreen
         {
-            private readonly DialogViewData<MMgr, MArg> view = new()
+            private readonly DialogViewData<MMgr> view = new()
             {
                 DialogSubviewSelector = m => m.Widgets,
             };
 
-            public override void OpenScreen(MMgr manager, MArg arg)
+            public SetMainChartScreen()
             {
-                view.Show("", manager, arg)
+                OnOpenScreen += (manager) =>
+                {
+                    view.Show("", manager)
                     ?
-                    .Tail.Append(InputFieldWidgetOption.Create<MMgr, MArg>(
-                        (manager, arg) =>
+                    .Tail.Append(InputFieldWidgetOption.Create<MMgr>(
+                        _ =>
                         {
-                            var monolith = arg.Arg.Tool;
+                            var monolith = Arg.Arg.Tool;
                             var info = ScenarioMonolithInfo.Get(monolith);
                             return info.MainChart;
                         },
-                        (manager, arg, value) =>
+                        value =>
                         {
-                            var monolith = arg.Arg.Tool;
+                            var monolith = Arg.Arg.Tool;
                             var info = ScenarioMonolithInfo.Get(monolith);
                             return info.MainChart = value;
                         }))
 
                     .Build();
+                };
             }
         }
     }

@@ -15,37 +15,40 @@ namespace Roguegard
 
         private class NotepadScreen : RogueListuiScreen
         {
-            private static readonly SelectOptionList<MMgr, MArg> backAnchor = new(
-                _ => _
-                .Option("実行", Execute)
-                .Option("閉じる", Back));
-
             private ISubviewStateProvider stateProvider;
 
-            public override void OpenScreen(MMgr manager, MArg arg)
+            public NotepadScreen()
             {
-                var memo = arg.Arg.Tool;
-                var text = NotepadInfo.GetText(memo);
+                var backAnchor = new SelectOptionList<MMgr>(
+                    _ => _
+                    .Option("実行", Execute)
+                    .Option("閉じる", Back));
 
-                manager.TextEditor.Text = text;
-                manager.TextEditor.Show();
-                manager.BackAnchor.Show(backAnchor, manager, arg, ref stateProvider);
+                OnOpenScreen += (manager) =>
+                {
+                    var memo = Arg.Arg.Tool;
+                    var text = NotepadInfo.GetText(memo);
+
+                    manager.TextEditor.Text = text;
+                    manager.TextEditor.Show();
+                    manager.BackAnchor.Show(backAnchor, manager, ref stateProvider);
+                };
             }
 
-            private static void Back(MMgr manager, MArg arg)
+            private void Back(MMgr manager)
             {
-                NotepadInfo.SetTo(arg.Arg.Tool, manager.TextEditor.Text);
+                NotepadInfo.SetTo(Arg.Arg.Tool, manager.TextEditor.Text);
                 manager.Done();
             }
 
-            private static void Execute(MMgr manager, MArg arg)
+            private void Execute(MMgr manager)
             {
                 //var scroll = manager.GetView(DeviceKw.MenuTextEditor);
                 //if (parent._inputField.text.StartsWith("#!lua"))
                 //{
                 //    root.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-                //    NotepadInfo.SetTo(arg.Tool, parent._inputField.text);
-                //    var code = NotepadInfo.GetQuote(arg.Tool);
+                //    NotepadInfo.SetTo(Arg.Tool, parent._inputField.text);
+                //    var code = NotepadInfo.GetQuote(Arg.Tool);
                 //    script.Call(code, self);
                 //}
                 //else

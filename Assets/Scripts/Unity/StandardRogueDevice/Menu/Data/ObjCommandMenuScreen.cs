@@ -12,7 +12,7 @@ namespace RoguegardUnity
     public class ObjCommandMenuScreen : RogueListuiScreen
     {
         private readonly List<IObjCommand> commands;
-        private readonly SelectOptionList<MMgr, MArg> selectOptions;
+        private readonly List<ISelectOption<MMgr, MArg>> selectOptions;
         private readonly SummaryScreen summaryScreen = new();
         private readonly DetailsScreen detailsScreen = new();
         private readonly RenameDialog renameDialog = new();
@@ -21,16 +21,14 @@ namespace RoguegardUnity
         public ISelectOption<MMgr, MArg> Details { get; }
         public ISelectOption<MMgr, MArg> Rename { get; }
 
-        private readonly CommandListMenuViewData<ISelectOption<MMgr, MArg>, MMgr, MArg> view = new()
+        private readonly CommandListMenuViewData<ISelectOption<MMgr, MArg>, MMgr> view = new()
         {
         };
-
-        public override bool IsIncremental => true;
 
         public ObjCommandMenuScreen()
         {
             commands = new List<IObjCommand>();
-            selectOptions = new SelectOptionList<MMgr, MArg>();
+            selectOptions = new List<ISelectOption<MMgr, MArg>>();
 
             Summary = SelectOption.Create<MMgr, MArg>("つよさ", (manager, arg) =>
             {
@@ -44,107 +42,115 @@ namespace RoguegardUnity
             {
                 manager.PushScreen(renameDialog, arg);
             });
-        }
 
-        public override void OpenScreen(MMgr manager, MArg arg)
-        {
-            var tool = arg.Arg.Tool;
-            RoguegardSettings.ObjCommandTable.GetCommands(arg.Self, tool, commands);
-            selectOptions.Clear();
-            foreach (var command in commands)
+            OnOpenScreen += (manager) =>
             {
-                selectOptions.Option(command.SelectOption);
-            }
+                var tool = Arg.Arg.Tool;
+                RoguegardSettings.ObjCommandTable.GetCommands(Arg.Self, tool, commands);
+                selectOptions.Clear();
+                foreach (var command in commands)
+                {
+                    selectOptions.Add(command.SelectOption);
+                }
 
-            view.Title = StandardRogueDeviceUtility.GetCaption(tool.Main.InfoSet);
+                view.Title = StandardRogueDeviceUtility.GetCaption(tool.Main.InfoSet);
 
-            view.Show(selectOptions, manager, arg)
+                view.Show(selectOptions, manager)
                 ?
-                .Tail.Option(Details)
-                .Tail.Option(Rename)
+                .NameFrom((o, m) => o.GetName(m, Arg))
+                .OnClick((o, m) => o.Click(m, Arg))
+                .StyleFrom((o, m) => o.GetStyle(m, Arg))
+                .Tail.Option(Details, () => Arg)
+                .Tail.Option(Rename, () => Arg)
                 .Tail.Back()
                 .Build();
-        }
+            };
 
-        public override void CloseScreenView(MMgr manager, bool back)
-        {
-            view.Hide(manager, back);
+            OnCloseScreenView += (manager, back) =>
+            {
+                view.Hide(manager, back);
+            };
         }
 
         private class SummaryScreen : RogueListuiScreen
         {
-            public override void OpenScreen(MMgr manager, MArg arg)
+            public SummaryScreen()
             {
-                object target;
-                if (arg.Arg.TargetObj != null)
+                OnOpenScreen += (manager) =>
                 {
-                    target = arg.Arg.TargetObj;
-                }
-                else if (arg.Arg.Other is IRogueTile tile)
-                {
-                    target = tile;
-                }
-                else
-                {
-                    target = arg;
-                }
+                    object target;
+                    if (Arg.Arg.TargetObj != null)
+                    {
+                        target = Arg.Arg.TargetObj;
+                    }
+                    else if (Arg.Arg.Other is IRogueTile tile)
+                    {
+                        target = tile;
+                    }
+                    else
+                    {
+                        target = Arg;
+                    }
 
-                manager.Summary.SetObj(target, manager);
-                manager.Summary.Show();
+                    manager.Summary.SetObj(target, manager);
+                    manager.Summary.Show();
+                };
             }
         }
 
         private class DetailsScreen : RogueListuiScreen
         {
-            private readonly DialogViewData<MMgr, MArg> view = new()
+            private readonly DialogViewData<MMgr> view = new()
             {
                 DialogSubviewSelector = m => m.Widgets,
             };
 
-            public override void OpenScreen(MMgr manager, MArg arg)
+            public DetailsScreen()
             {
-                var obj = arg.Arg.Tool ?? arg.Arg.TargetObj;
-                var describable = obj?.Main.InfoSet ?? arg.Arg.Other as IRogueDescribable;
-                var details = "";
-                if (describable != null) { details = StandardRogueDeviceUtility.GetDescription(describable); }
+                OnOpenScreen += (manager) =>
+                {
+                    var obj = Arg.Arg.Tool ?? Arg.Arg.TargetObj;
+                    var describable = obj?.Main.InfoSet ?? Arg.Arg.Other as IRogueDescribable;
+                    var details = "";
+                    if (describable != null) { details = StandardRogueDeviceUtility.GetDescription(describable); }
 
-                view.Show(details ?? "", manager, arg)
+                    view.Show(details ?? "", manager)
                     ?
                     .Build();
+                };
             }
         }
 
         private class RenameDialog : RogueListuiScreen
         {
-            private string newName;
-
-            private readonly DialogViewData<MMgr, MArg> view = new()
+            private readonly DialogViewData<MMgr> view = new()
             {
                 BackAnchorSubviewSelector = null,
             };
 
-            public override bool IsIncremental => true;
-
-            public override void OpenScreen(MMgr manager, MArg arg)
+            public RenameDialog()
             {
-                view.Show("", manager, arg)
+                OnOpenScreen += (manager) =>
+                {
+                    view.Show("", manager)
                     ?
-                    .Tail.Append(InputFieldWidgetOption.Create<MMgr, MArg>(
-                        (manager, arg) =>
+                    .VarOnce(out string newName)
+                    .Tail.Append(InputFieldWidgetOption.Create<MMgr>(
+                        _ =>
                         {
-                            var obj = arg.Arg.Tool ?? arg.Arg.TargetObj;
+                            var obj = Arg.Arg.Tool ?? Arg.Arg.TargetObj;
                             return newName = NamingEffect.Get(obj)?.Naming;
                         },
-                        (manager, arg, value) =>
+                        value =>
                         {
                             return newName = value;
                         })
                     )
 
                     .Tail.Append(StackWidgetOption.Create(
-                        ("1*", SelectOption.Create<MMgr, MArg>(":Rename", (manager, arg) =>
+                        ("1*", SelectOption.Create<MMgr>(":Rename", (manager) =>
                         {
-                            var obj = arg.Arg.Tool ?? arg.Arg.TargetObj;
+                            var obj = Arg.Arg.Tool ?? Arg.Arg.TargetObj;
                             default(IActiveRogueMethodCaller).Affect(obj, 1f, NamingEffect.Callback);
                             if (string.IsNullOrWhiteSpace(newName))
                             {
@@ -157,14 +163,15 @@ namespace RoguegardUnity
                             manager.PopScreen(2);
                             manager.Reopen();
                         })),
-                        ("1*", BackSelectOption<MMgr, MArg>.Instance)))
+                        ("1*", BackSelectOption<MMgr>.Instance)))
 
                     .Build();
-            }
+                };
 
-            public override void CloseScreenView(MMgr manager, bool back)
-            {
-                view.Hide(manager, back);
+                OnCloseScreenView += (manager, back) =>
+                {
+                    view.Hide(manager, back);
+                };
             }
         }
     }

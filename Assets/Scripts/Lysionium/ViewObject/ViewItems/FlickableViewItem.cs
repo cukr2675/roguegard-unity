@@ -33,14 +33,14 @@ namespace Lysionium.Views
             {
                 if (!_selectable.interactable) return;
 
-                handler.KeyDown(item, Manager, Arg);
+                handler.KeyDown(item, Manager);
             };
             inputCanceled = ctx =>
             {
                 if (!_selectable.interactable) return;
 
                 Expand();
-                handler.KeyUp(item, Manager, Arg);
+                handler.KeyUp(item, Manager);
             };
             styleEvaluator = new ViewItemStyleEvaluator();
         }
@@ -55,8 +55,8 @@ namespace Lysionium.Views
                 _text.text = Manager.Localize(ItemName);
             }
 
-            var style = handler.GetStyle(item, Manager, Arg) ?? _defaultStyle;
-            styleEvaluator.Bind(item, handler, Manager, Arg, Parent);
+            var style = handler.GetStyle(item, Manager) ?? _defaultStyle;
+            styleEvaluator.Bind(item, handler, Manager, Parent);
             styleEvaluator.SetStyle(style, animator, _keybindLabel, inputPerformed: inputPerformed, inputCanceled: inputCanceled);
         }
 
@@ -86,7 +86,7 @@ namespace Lysionium.Views
             rect.position = rectTransform.position;
             Manager.SetInvisibleDropdownPosition(rect);
 
-            handler.Expand(item, Manager, Arg);
+            handler.Expand(item, Manager);
         }
 
         public virtual void OnPointerDown(PointerEventData eventData)
@@ -95,7 +95,7 @@ namespace Lysionium.Views
             if (eventData.button != PointerEventData.InputButton.Left) return; // 左ボタンのときのみ実行
 
             isDown = true;
-            handler.KeyDown(item, Manager, Arg);
+            handler.KeyDown(item, Manager);
 
             //if (!_expandMethod.HasFlag(ExpandMethod.Press)) return; // 押下で展開する設定のときのみ実行
             //if (eventData.button != PointerEventData.InputButton.Left) return; // 左ボタンのときのみ実行
@@ -109,7 +109,7 @@ namespace Lysionium.Views
             if (eventData.button != PointerEventData.InputButton.Left) return; // 左ボタンのときのみ実行
 
             isDown = false;
-            handler.KeyUp(item, Manager, Arg);
+            handler.KeyUp(item, Manager);
         }
 
         public virtual void OnPointerClick(PointerEventData eventData)

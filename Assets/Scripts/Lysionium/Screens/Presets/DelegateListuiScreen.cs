@@ -1,29 +1,24 @@
 namespace Lysionium
 {
-    /// <inheritdoc/>
-    public abstract class DelegateListuiScreen<TMgr> : DelegateListuiScreen<TMgr, IListuiArg>
+    public abstract class DelegateListuiScreen<TMgr> : IListuiScreen<TMgr>
         where TMgr : IListuiManager
-    { }
-
-    // プライマリコンストラクタ (C#12) が使えるようになったら廃止予定
-    public abstract class DelegateListuiScreen<TMgr, TArg> : IListuiScreen<TMgr, TArg>
-        where TMgr : IListuiManager
-        where TArg : IListuiArg
     {
         protected event OpenScreenHandler OnOpenScreen;
         protected event CloseScreenViewHandler OnCloseScreenView;
 
         bool IListuiScreen.IsIncremental => OnCloseScreenView != null;
 
-        public delegate void OpenScreenHandler(TMgr manager, TArg arg);
+        public delegate void OpenScreenHandler(TMgr manager);
         public delegate void CloseScreenViewHandler(TMgr manager, bool back);
 
-        void IListuiScreen<TMgr, TArg>.OpenScreen(TMgr manager, TArg arg)
+        void IListuiScreen<TMgr>.OpenScreen(TMgr manager)
         {
-            OnOpenScreen?.Invoke(manager, arg);
+            if (OnOpenScreen == null) throw new System.InvalidOperationException($"{this}.{nameof(OnOpenScreen)} が設定されていません。");
+
+            OnOpenScreen(manager);
         }
 
-        void IListuiScreen<TMgr, TArg>.CloseScreenView(TMgr manager, bool back)
+        void IListuiScreen<TMgr>.CloseScreenView(TMgr manager, bool back)
         {
             if (OnCloseScreenView != null)
             {
@@ -36,28 +31,32 @@ namespace Lysionium
         }
     }
 
-    public abstract class DelegateListuiScreen<TMgr, TArg, TCtx> : IListuiScreen<TMgr, TArg, TCtx>
+    public abstract class DelegateListuiScreen<TMgr, TArg> : IListuiScreen<TMgr, TArg>
         where TMgr : IListuiManager
-        where TArg : IListuiArg
     {
+        protected TArg Arg { get; private set; }
         protected event OpenScreenHandler OnOpenScreen;
         protected event CloseScreenViewHandler OnCloseScreenView;
 
         bool IListuiScreen.IsIncremental => OnCloseScreenView != null;
 
-        public delegate void OpenScreenHandler(TMgr manager, TArg arg, TCtx context);
-        public delegate void CloseScreenViewHandler(TMgr manager, bool back, TCtx context);
+        public delegate void OpenScreenHandler(TMgr manager);
+        public delegate void CloseScreenViewHandler(TMgr manager, bool back);
 
-        void IListuiScreen<TMgr, TArg, TCtx>.OpenScreen(TMgr manager, TArg arg, TCtx context)
+        void IListuiScreen<TMgr, TArg>.OpenScreen(TMgr manager, TArg arg)
         {
-            OnOpenScreen?.Invoke(manager, arg, context);
+            if (OnOpenScreen == null) throw new System.InvalidOperationException($"{this}.{nameof(OnOpenScreen)} が設定されていません。");
+
+            Arg = arg;
+            OnOpenScreen(manager);
         }
 
-        void IListuiScreen<TMgr, TArg, TCtx>.CloseScreenView(TMgr manager, bool back, TCtx context)
+        void IListuiScreen<TMgr, TArg>.CloseScreenView(TMgr manager, bool back, TArg arg)
         {
+            Arg = arg;
             if (OnCloseScreenView != null)
             {
-                OnCloseScreenView(manager, back, context);
+                OnCloseScreenView(manager, back);
             }
             else
             {
@@ -71,28 +70,27 @@ namespace Lysionium
     // ViewDataBuilder.Build() の戻り値を CloseScreenHandler にすることで CloseScreenView もオーバーライド不要にする
     // 処理フローが隠れるので可読性が低下する
     // ViewDataBuilder.Build() の戻り値は IDisposable にすべきではないか？
-    internal abstract class DelegateListuiScreen2<TMgr, TArg> : IListuiScreen<TMgr, TArg>
+    internal abstract class DelegateListuiScreen2<TMgr> : IListuiScreen<TMgr>
         where TMgr : IListuiManager
-        where TArg : IListuiArg
     {
         protected event OpenScreenHandler OnOpenScreen;
         protected event OpenScreenOfIncrementalHandler OnOpenScreenOfIncremental;
         private event CloseScreenHandler OnCloseScreen;
         bool IListuiScreen.IsIncremental => OnCloseScreen != null;
 
-        protected delegate void OpenScreenHandler(in TMgr manager, in TArg arg);
+        protected delegate void OpenScreenHandler(in TMgr manager);
         protected delegate void CloseScreenHandler(TMgr manager, bool back);
-        protected delegate CloseScreenHandler OpenScreenOfIncrementalHandler(in TMgr manager, in TArg arg);
+        protected delegate CloseScreenHandler OpenScreenOfIncrementalHandler(in TMgr manager);
 
-        void IListuiScreen<TMgr, TArg>.OpenScreen(TMgr manager, TArg arg)
+        void IListuiScreen<TMgr>.OpenScreen(TMgr manager)
         {
             if (OnOpenScreen != null && OnOpenScreenOfIncremental != null) throw new System.InvalidOperationException();
 
-            OnOpenScreen?.Invoke(manager, arg);
-            OnCloseScreen += OnOpenScreenOfIncremental?.Invoke(manager, arg);
+            OnOpenScreen?.Invoke(manager);
+            OnCloseScreen += OnOpenScreenOfIncremental?.Invoke(manager);
         }
 
-        void IListuiScreen<TMgr, TArg>.CloseScreenView(TMgr manager, bool back)
+        void IListuiScreen<TMgr>.CloseScreenView(TMgr manager, bool back)
         {
             OnCloseScreen?.Invoke(manager, back);
         }

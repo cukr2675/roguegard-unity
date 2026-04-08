@@ -3,40 +3,29 @@ using System.Collections.Generic;
 
 namespace Lysionium
 {
-    /// <inheritdoc/>
-    public class SelectOptionList<TMgr> : SelectOptionList<TMgr, IListuiArg>
+    public class SelectOptionList<TMgr>
+        : IReadOnlyList<ISelectOption<TMgr>>, ISelectOptionsBuilder<TMgr, SelectOptionList<TMgr>>
         where TMgr : IListuiManager
     {
-        public SelectOptionList(System.Action<SelectOptionList<TMgr, IListuiArg>> initializeAction = null)
-            : base(initializeAction)
-        {
-        }
-    }
+        private readonly List<ISelectOption<TMgr>> list = new();
 
-    public class SelectOptionList<TMgr, TArg>
-        : IReadOnlyList<ISelectOption<TMgr, TArg>>, ISelectOptionsBuilder<TMgr, TArg, SelectOptionList<TMgr, TArg>>
-        where TMgr : IListuiManager
-        where TArg : IListuiArg
-    {
-        private readonly List<ISelectOption<TMgr, TArg>> list = new();
-
-        public ISelectOption<TMgr, TArg> this[int index] => list[index];
+        public ISelectOption<TMgr> this[int index] => list[index];
         public int Count => list.Count;
 
-        public SelectOptionList(System.Action<SelectOptionList<TMgr, TArg>> initializeAction = null)
+        public SelectOptionList(System.Action<SelectOptionList<TMgr>> initializeAction = null)
         {
             initializeAction?.Invoke(this);
         }
 
-        public SelectOptionList<TMgr, TArg> Option(ISelectOption<TMgr, TArg> option)
+        public SelectOptionList<TMgr> Option(ISelectOption<TMgr> option)
         {
             list.Add(option);
             return this;
         }
 
         public void Clear() => list.Clear();
-        public IEnumerator<ISelectOption<TMgr, TArg>> GetEnumerator() => list.GetEnumerator();
+        public IEnumerator<ISelectOption<TMgr>> GetEnumerator() => list.GetEnumerator();
         IEnumerator IEnumerable.GetEnumerator() => list.GetEnumerator();
-        SelectOptionList<TMgr, TArg> ISelectOptionsBuilder<TMgr, TArg, SelectOptionList<TMgr, TArg>>.Option() => this;
+        SelectOptionList<TMgr> ISelectOptionsBuilder<TMgr, SelectOptionList<TMgr>>.Option() => this;
     }
 }

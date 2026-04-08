@@ -39,37 +39,43 @@ namespace Roguegard
         {
             private static readonly List<DungeonQuest> questList = new();
 
-            private readonly ScrollMenuViewData<DungeonQuest, MMgr, MArg> view = new()
+            private readonly ScrollMenuViewData<DungeonQuest, MMgr> view = new()
             {
             };
 
-            public override void OpenScreen(MMgr manager, MArg arg)
+            public QuestBoardScreen()
             {
-                questList.Clear();
-                for (int i = 0; i < 4; i++)
+                OnOpenScreen += (manager) =>
                 {
-                    var quest = RoguegardSettings.DungeonQuestGenerator.GenerateQuest(RogueRandom.Primary);
-                    questList.Add(quest);
-                }
+                    questList.Clear();
+                    for (int i = 0; i < 4; i++)
+                    {
+                        var quest = RoguegardSettings.DungeonQuestGenerator.GenerateQuest(RogueRandom.Primary);
+                        questList.Add(quest);
+                    }
 
-                view.Show(questList, manager, arg)
+                    view.Show(questList, manager)
                     ?
                     .NameFrom(quest => quest.Caption)
 
                     .VarOnce(out var nextScreen, new QuestSummaryScreen())
-                    .OnClick((quest, manager, arg) => manager.PushScreen(nextScreen, arg.Self, other: quest))
+                    .OnClick((quest, manager) => manager.PushScreen(nextScreen, Arg.Self, other: quest))
 
                     .Build();
+                };
             }
 
             private class QuestSummaryScreen : RogueListuiScreen
             {
-                public override void OpenScreen(MMgr manager, MArg arg)
+                public QuestSummaryScreen()
                 {
-                    var quest = (DungeonQuest)arg.Arg.Other;
+                    OnOpenScreen += (manager) =>
+                    {
+                        var quest = (DungeonQuest)Arg.Arg.Other;
 
-                    manager.Summary.SetQuest(arg.Self, quest, true, manager);
-                    manager.Summary.Show();
+                        manager.Summary.SetQuest(Arg.Self, quest, true, manager);
+                        manager.Summary.Show();
+                    };
                 }
             }
         }

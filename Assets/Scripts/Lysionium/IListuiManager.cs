@@ -10,7 +10,7 @@ namespace Lysionium
 
     public interface IListuiManager
     {
-        ISelectOption<IListuiManager, IListuiArg> ErrorOption { get; }
+        ISelectOption<IListuiManager> ErrorOption { get; }
 
         event System.Action OnUnload;
 

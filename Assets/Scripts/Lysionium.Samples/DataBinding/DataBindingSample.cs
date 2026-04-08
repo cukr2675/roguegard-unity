@@ -33,7 +33,7 @@ namespace Lysionium.Samples
                 new("Spaceキーで変更"),
             };
 
-            _manager.PushInitialScreen(new MainScreen(list), null);
+            _manager.PushInitialScreen(new MainScreen(list));
         }
 
         protected virtual void OnEnable()
@@ -86,10 +86,10 @@ namespace Lysionium.Samples
             }
         }
 
-        private class MainScreen : IListuiScreen<ExMgr, ExArg>
+        private class MainScreen : IListuiScreen<ExMgr>
         {
             private readonly BindingList<BindingValue> list;
-            private readonly BindableScrollMenuViewData<BindingValue, ExMgr, ExArg> view = new()
+            private readonly BindableScrollMenuViewData<BindingValue, ExMgr> view = new()
             {
                 BackAnchorSubviewSelector = null,
             };
@@ -99,29 +99,29 @@ namespace Lysionium.Samples
                 this.list = list;
             }
 
-            public void OpenScreen(ExMgr manager, ExArg arg)
+            public void OpenScreen(ExMgr manager)
             {
-                view.Show(list, manager, arg)
+                view.Show(list, manager)
                     ?
                     .VarOnceRebindList(out BindingList<BindingValue>.OnChangedHandler rebindList, rebindList => () => rebindList(list))
-                    .OnShow((manager, arg) => list.OnChanged += rebindList)
-                    .OnHide((manager, arg) => list.OnChanged -= rebindList)
+                    .OnShow(_ => list.OnChanged += rebindList)
+                    .OnHide(_ => list.OnChanged -= rebindList)
                     .BinderFrom(notify => new BindingValueDataBinder(notify))
 
                     // 項目クリック時、削除ダイアログ表示
                     .VarOnce(out BindingValue selectedItem)
                     .VarOnce(
-                        out var removeDialog, new ChoicesScreen<ExMgr, ExArg>((_, _) => $"{selectedItem} を削除しますか？")
-                        .Option("削除", (manager, _) =>
+                        out var removeDialog, new ChoicesScreen<ExMgr>(_ => $"{selectedItem} を削除しますか？")
+                        .Option("削除", (manager) =>
                         {
                             list.Remove(selectedItem);
                             manager.PopScreen();
                         })
                         .Back())
-                    .OnClick((item, manager, arg) =>
+                    .OnClick((item, manager) =>
                     {
                         selectedItem = item;
-                        manager.PushScreen(removeDialog, null);
+                        manager.PushScreen(removeDialog);
                     })
 
                     // 追加ボタン押下時、追加ダイアログ表示
@@ -131,9 +131,9 @@ namespace Lysionium.Samples
             }
         }
 
-        private class AddDialogScreen : IListuiScreen<ExMgr, ExArg>
+        private class AddDialogScreen : IListuiScreen<ExMgr>
         {
-            private readonly DialogViewData<ExMgr, ExArg> view = new()
+            private readonly DialogViewData<ExMgr> view = new()
             {
                 BackAnchorSubviewSelector = null,
             };
@@ -147,27 +147,27 @@ namespace Lysionium.Samples
                 this.onOk = onOk;
             }
 
-            public void OpenScreen(ExMgr manager, ExArg arg)
+            public void OpenScreen(ExMgr manager)
             {
-                view.Show("名前を入力してください", manager, arg)
+                view.Show("名前を入力してください", manager)
                     ?
                     // name 入力欄
                     .VarOnce(out var name, "")
-                    .Tail.Append(InputFieldWidgetOption.Create<ExMgr, ExArg>(
-                        value: (_, _) => name,
-                        handleValueChanged: (_, _, value) => name = value))
+                    .Tail.Append(InputFieldWidgetOption.Create<ExMgr>(
+                        value: _ => name,
+                        handleValueChanged: value => name = value))
 
                     .Tail.Append(StackWidgetOption.Create(
 
                         // OK ボタン押下時、 name を引数としてコールバック実行
-                        ("1*", SelectOption.Create<ExMgr, ExArg>("登録", (manager, _) =>
+                        ("1*", SelectOption.Create<ExMgr>("登録", (manager) =>
                         {
                             onOk?.Invoke(name);
                             manager.PopScreen();
                         })),
 
                         // 戻るボタン
-                        ("1*", BackSelectOption<ExMgr, ExArg>.Instance)))
+                        ("1*", BackSelectOption<ExMgr>.Instance)))
 
                     .Build();
             }

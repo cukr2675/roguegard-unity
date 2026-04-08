@@ -68,7 +68,8 @@ namespace Roguegard.Rgpacks.MoonSharp
             if (stringBuilder.Length == 0) { stringBuilder.Append(" "); }
 
             ISpriteMotion facial = null;
-            if (!string.IsNullOrWhiteSpace(facialId)) {
+            if (!string.IsNullOrWhiteSpace(facialId))
+            {
                 //var envRgpackId = executionContext.OwnerScript.DoString("return __rgpack").String;
                 var envRgpackId = "Playtest";
                 var rgpackId = RgpackReference.GetRgpackId(facialId, envRgpackId);
@@ -124,70 +125,72 @@ namespace Roguegard.Rgpacks.MoonSharp
 
             private ISubviewStateProvider faceStateProvider;
 
-            public override bool IsIncremental => true;
-
-            public override void OpenScreen(MMgr manager, MArg arg)
+            public SpeechScreen()
             {
-                if (!isOpened)
+                OnOpenScreen += (manager) =>
                 {
-                    manager.SpeechBox.Clear();
-                    isOpened = true;
-                }
-
-                manager.SpeechBox.Append(message);
-                manager.SpeechBox.Show();
-
-                var showFace = arg.Arg.TargetObj != null;
-                if (showFace)
-                {
-                    manager.Face.Show(null, null, manager, arg, ref faceStateProvider);
-                }
-
-                manager.SpeechBox.DoScheduledAfterCompletion((iManager, iArg) =>
-                {
-                    try
+                    if (!isOpened)
                     {
-                        coroutine.Resume();
-                    }
-                    catch (InterpreterException ex)
-                    {
-                        Debug.LogError(string.Join("\n", ex.CallStack));
-                        throw;
+                        manager.SpeechBox.Clear();
+                        isOpened = true;
                     }
 
-                    var manager = (MMgr)iManager;
-                    if (coroutine.State == CoroutineState.Suspended)
-                    {
-                        // 次のアニメーションやメニューを受け取るためにいったん閉じる
-                        manager.Done();
+                    manager.SpeechBox.Append(message);
+                    manager.SpeechBox.Show();
 
-                        // スピーチボックスと顔グラフィックは表示したままにする
-                        manager.ResetDone();
-                        manager.SpeechBox.Show();
-                        if (showFace)
+                    var showFace = Arg.Arg.TargetObj != null;
+                    if (showFace)
+                    {
+                        manager.Face.SetListHandler(null, null, manager, Arg, ref faceStateProvider);
+                        manager.Face.Show();
+                    }
+
+                    manager.SpeechBox.DoScheduledAfterCompletion((iManager) =>
+                    {
+                        try
                         {
-                            manager.Face.Show();
+                            coroutine.Resume();
                         }
-                    }
-                    else
-                    {
-                        // 次のアニメーションやメニューがない場合はスピーチボックスを閉じる
-
-                        // AdvanceText のリセット用に VerticalArrow が余分に必要
-                        manager.SpeechBox.Append("<link=\"VerticalArrow\"></link><link=\"VerticalArrow\"></link>");
-                        manager.SpeechBox.DoScheduledAfterCompletion((iManager, arg) =>
+                        catch (InterpreterException ex)
                         {
-                            var manager = (MMgr)iManager;
-                            manager.Done();
-                            isOpened = false;
-                        });
-                    }
-                });
-            }
+                            Debug.LogError(string.Join("\n", ex.CallStack));
+                            throw;
+                        }
 
-            public override void CloseScreenView(MMgr manager, bool back)
-            {
-                manager.MessageBox.Hide(back);
+                        var manager = (MMgr)iManager;
+                        if (coroutine.State == CoroutineState.Suspended)
+                        {
+                            // 次のアニメーションやメニューを受け取るためにいったん閉じる
+                            manager.Done();
+
+                            // スピーチボックスと顔グラフィックは表示したままにする
+                            manager.ResetDone();
+                            manager.SpeechBox.Show();
+                            if (showFace)
+                            {
+                                manager.Face.Show();
+                            }
+                        }
+                        else
+                        {
+                            // 次のアニメーションやメニューがない場合はスピーチボックスを閉じる
+
+                            // AdvanceText のリセット用に VerticalArrow が余分に必要
+                            manager.SpeechBox.Append("<link=\"VerticalArrow\"></link><link=\"VerticalArrow\"></link>");
+                            manager.SpeechBox.DoScheduledAfterCompletion((iManager) =>
+                            {
+                                var manager = (MMgr)iManager;
+                                manager.Done();
+                                isOpened = false;
+                            });
+                        }
+                    });
+                };
+
+                OnCloseScreenView += (manager, back) =>
+                {
+                    manager.MessageBox.Hide(back);
+                };
             }
         }
 
@@ -197,18 +200,18 @@ namespace Roguegard.Rgpacks.MoonSharp
             public List<string> selectOptions = new();
             private static readonly DynValue[] args = new DynValue[1];
 
-            private readonly CommandListMenuViewData<string, MMgr, MArg> view = new()
+            private readonly CommandListMenuViewData<string, MMgr> view = new()
             {
                 SecondaryCommandSubviewSelector = m => m.Choices,
             };
 
-            public override bool IsIncremental => true;
-
-            public override void OpenScreen(MMgr manager, MArg arg)
+            public ChoicesScreen()
             {
-                view.Show(selectOptions, manager, arg)
+                OnOpenScreen += (manager) =>
+                {
+                    view.Show(selectOptions, manager)
                     ?
-                    .OnClick((selectOption, manager, arg) =>
+                    .OnClick((selectOption, manager) =>
                     {
                         manager.Done();
                         manager.SpeechBox.Clear();
@@ -230,13 +233,14 @@ namespace Roguegard.Rgpacks.MoonSharp
                     })
 
                     .Build();
-            }
+                };
 
-            public override void CloseScreenView(MMgr manager, bool back)
-            {
-                if (!back) return;
+                OnCloseScreenView += (manager, back) =>
+                {
+                    if (!back) return;
 
-                view.Hide(manager, back);
+                    view.Hide(manager, back);
+                };
             }
         }
 
@@ -246,28 +250,28 @@ namespace Roguegard.Rgpacks.MoonSharp
             public bool fadeIn;
             public System.Action fadeInAction;
 
-            private readonly FadeOutInViewData<MMgr, MArg> view = new()
+            private readonly FadeOutInViewData<MMgr> view = new()
             {
             };
 
-            public override bool IsIncremental => true;
-
-            public override void OpenScreen(MMgr manager, MArg arg)
+            public FadeOutScreen()
             {
-                if (fadeInAction == null)
+                OnOpenScreen += (manager) =>
                 {
-                    var actionManager = manager;
-                    fadeInAction = () => actionManager.PopScreen();
-                }
+                    if (fadeInAction == null)
+                    {
+                        var actionManager = manager;
+                        fadeInAction = () => actionManager.PopScreen();
+                    }
 
-                view.FadeOut(manager, arg)
+                    view.FadeOut(manager)
                     ?
-                    .OnFadeOutCompleted((manager, arg) =>
+                    .OnFadeOutCompleted((manager) =>
                     {
                         coroutine.Resume();
                     })
 
-                    .OnFadeInCompleted((manager, arg) =>
+                    .OnFadeInCompleted((manager) =>
                     {
                         if (!fadeIn) return;
 
@@ -275,11 +279,12 @@ namespace Roguegard.Rgpacks.MoonSharp
                     })
 
                     .Build();
-            }
+                };
 
-            public override void CloseScreenView(MMgr manager, bool back)
-            {
-                view.FadeIn(manager, back);
+                OnCloseScreenView += (manager, back) =>
+                {
+                    view.FadeIn(manager, back);
+                };
             }
         }
     }

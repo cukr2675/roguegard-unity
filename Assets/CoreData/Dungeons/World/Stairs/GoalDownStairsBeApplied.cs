@@ -41,12 +41,15 @@ namespace Roguegard
 
         private class ResultScreen : RogueListuiScreen
         {
-            public override void OpenScreen(MMgr manager, MArg arg)
+            public ResultScreen()
             {
-                var player = arg.Self;
-                var dungeon = player.Location;
-                manager.Summary.SetResult(player, dungeon, manager);
-                manager.Summary.Show();
+                OnOpenScreen += (manager) =>
+                {
+                    var player = Arg.Self;
+                    var dungeon = player.Location;
+                    manager.Summary.SetResult(player, dungeon, manager);
+                    manager.Summary.Show();
+                };
             }
         }
     }

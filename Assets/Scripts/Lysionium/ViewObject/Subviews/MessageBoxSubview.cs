@@ -31,7 +31,7 @@ namespace Lysionium.Views
 
                 var tempAction = OnCompleted;
                 OnCompleted = null;
-                tempAction?.Invoke(Manager, Arg);
+                tempAction?.Invoke(Manager);
             });
 
             if (_blocker != null)
@@ -40,14 +40,14 @@ namespace Lysionium.Views
             }
         }
 
-        public void SetText(string text, IListuiManager manager, IListuiArg arg, ref ISubviewStateProvider stateProvider)
+        public void SetText(string text, IListuiManager manager, ref ISubviewStateProvider stateProvider)
         {
+            Manager = manager;
             _messageBox.Clear();
-            SetArg(manager, arg);
             if (_messageBox.VisibleMode == MessageBoxVisibleMode.Typing || !IsVisible)
             {
                 // メッセージボックスの表示アニメーションが完了してから文字を表示する
-                OnEndAnimation += (_, _) => Append(text);
+                OnEndAnimation += _ => Append(text);
             }
             else
             {
@@ -61,14 +61,14 @@ namespace Lysionium.Views
             }
         }
 
-        public void SetTextRaw(StringBuilder stringBuilder, IListuiManager manager, IListuiArg arg, ref ISubviewStateProvider stateProvider)
+        public void SetTextRaw(StringBuilder stringBuilder, IListuiManager manager, ref ISubviewStateProvider stateProvider)
         {
+            Manager = manager;
             _messageBox.Clear();
-            SetArg(manager, arg);
             if (_messageBox.VisibleMode == MessageBoxVisibleMode.Typing || !IsVisible)
             {
                 // メッセージボックスの表示アニメーションが完了してから文字を表示する
-                OnEndAnimation += (_, _) => AppendRaw(stringBuilder);
+                OnEndAnimation += _ => AppendRaw(stringBuilder);
             }
             else
             {

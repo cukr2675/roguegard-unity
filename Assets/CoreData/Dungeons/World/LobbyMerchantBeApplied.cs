@@ -42,24 +42,28 @@ namespace Roguegard
         {
             public LobbyMerchantBeApplied parent;
 
-            private readonly SpeechBoxViewData<MMgr, MArg> view = new()
+            private readonly SpeechBoxViewData<MMgr> view = new()
             {
             };
 
-            public override bool IsIncremental => true;
-
-            public override void OpenScreen(MMgr manager, MArg arg)
+            public SpeechScreen()
             {
-                view.Show($"商人「わたしは商人です でもまだ準備中です{{v}}", manager, arg)
+                OnOpenScreen += (manager) =>
+                {
+                    view.Show($"商人「わたしは商人です でもまだ準備中です{{v}}", manager)
                     ?
                     .VarOnce(out var nextScreen, new ShopScreen() { parent = parent })
 
-                    .OnCompleted((manager, arg) =>
+                    .OnCompleted((manager) =>
                     {
-                        manager.PushScreen(nextScreen, arg.Self);
+                        manager.PushScreen(nextScreen, Arg.Self);
                     })
 
                     .Build();
+                };
+
+                // IsIncremental を true にする
+                OnCloseScreenView += (_, _) => { };
             }
         }
 
@@ -67,28 +71,31 @@ namespace Roguegard
         {
             public LobbyMerchantBeApplied parent;
 
-            private readonly ScrollMenuViewData<AssetStartingItem, MMgr, MArg> view = new()
+            private readonly ScrollMenuViewData<AssetStartingItem, MMgr> view = new()
             {
             };
 
-            public override void OpenScreen(MMgr manager, MArg arg)
+            public ShopScreen()
             {
-                view.Show(parent._items, manager, arg)
+                OnOpenScreen += (manager) =>
+                {
+                    view.Show(parent._items, manager)
                     ?
-                    .NameFrom((item, manager, arg) =>
+                    .NameFrom((item, manager) =>
                     {
                         return item.Name;
                     })
 
-                    .OnClick((item, manager, arg) =>
+                    .OnClick((item, manager) =>
                     {
                         manager.AddObject(DeviceKw.AppendText, item);
                         manager.AddObject(DeviceKw.AppendText, "を手に入れた\n");
 
-                        item.Option.CreateObj(item, arg.Self, Vector2Int.zero, RogueRandom.Primary);
+                        item.Option.CreateObj(item, Arg.Self, Vector2Int.zero, RogueRandom.Primary);
                     })
 
                     .Build();
+                };
             }
         }
     }

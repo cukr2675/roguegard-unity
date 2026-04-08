@@ -24,62 +24,67 @@ namespace Roguegard.Rgpacks
 
         private class KyarakuriFigurineScreen : RogueListuiScreen
         {
-            private readonly VariableWidgetsMenuViewData<MMgr, MArg> view = new()
+            private readonly VariableWidgetsMenuViewData<MMgr> view = new()
             {
             };
 
-            public override void OpenScreen(MMgr manager, MArg arg)
+            public KyarakuriFigurineScreen()
             {
-                view.Show(System.Array.Empty<object>(), manager, arg)
+                OnOpenScreen += (manager) =>
+                {
+                    view.Show(System.Array.Empty<object>(), manager)
                     ?
-                    .TailStack("アセットID", InputFieldWidgetOption.Create<MMgr, MArg>(
-                        (manager, arg) => NamingEffect.Get(arg.Arg.TargetObj)?.Naming,
-                        (manager, arg, value) =>
+                    .TailStack("アセットID", InputFieldWidgetOption.Create<MMgr>(
+                        _ => NamingEffect.Get(Arg.Arg.TargetObj)?.Naming,
+                        value =>
                         {
-                            var figurine = arg.Arg.TargetObj;
+                            var figurine = Arg.Arg.TargetObj;
                             default(IActiveRogueMethodCaller).Affect(figurine, 1f, NamingEffect.Callback);
                             return NamingEffect.Get(figurine).Naming = value;
                         }))
 
                     .VarOnce(out var nextScreen, new EditScreen())
-                    .Tail.Option("キャラクリ設定", (manager, arg) =>
+                    .Tail.Option("キャラクリ設定", (manager) =>
                     {
-                        var figurine = arg.Arg.TargetObj;
+                        var figurine = Arg.Arg.TargetObj;
                         var characterCreationData = new CharacterCreationData(KyarakuriFigurineInfo.Get(figurine));
-                        manager.PushScreen(nextScreen, arg.Self, targetObj: figurine, other: characterCreationData);
+                        manager.PushScreen(nextScreen, Arg.Self, targetObj: figurine, other: characterCreationData);
                     })
 
                     .Build();
+                };
             }
         }
 
         private class EditScreen : RogueListuiScreen
         {
-            private readonly ScrollMenuViewData<object, MMgr, MArg> view = new()
+            private readonly CharacterCreationViewData view = new()
             {
-                ScrollSubviewSelector = m => m.CharacterCreation,
             };
 
-            public override void OpenScreen(MMgr manager, MArg arg)
+            public EditScreen()
             {
-                view.Show(System.Array.Empty<object>(), manager, arg)
+                OnOpenScreen += (manager) =>
+                {
+                    view.Show(manager)
                     ?
                     .Init(() =>
                     {
                         view.BackAnchorList = new(
                             _ => _
-                            .Option(manager.CharacterCreation.LoadPresetOption) // プリセット読み込みボタン
-                            .Option(":Done", ChoicesScreen.SaveBackDialog(Save))); // キャラクタークリエイト完了ボタン
+                            .Option(manager.CharacterCreation.LoadPresetOption, () => Arg) // プリセット読み込みボタン
+                            .Option(":Done", ChoicesScreen.SaveBackDialog(Save), () => Arg)); // キャラクタークリエイト完了ボタン
                     })
                     .Build();
+                };
             }
 
-            private static void Save(MMgr manager, MArg arg)
+            private void Save(MMgr manager)
             {
-                if (arg.Arg.Other is CharacterCreationData characterCreationData)
+                if (Arg.Arg.Other is CharacterCreationData characterCreationData)
                 {
                     // キャラクリ画面から戻ったとき、人形を更新する
-                    var figurine = arg.Arg.TargetObj;
+                    var figurine = Arg.Arg.TargetObj;
                     KyarakuriFigurineInfo.SetTo(figurine, characterCreationData);
                 }
 

@@ -5,34 +5,29 @@ using UnityEngine;
 namespace Lysionium
 {
     [AddComponentMenu("UI/Lysionium/LUI Standard List-UI Manager")]
-    public class StandardListuiManager : StandardListuiManager<StandardListuiManager, IListuiArg>
+    public class StandardListuiManager : StandardListuiManager<StandardListuiManager>
     {
         public void Initialize() => CommonInit();
     }
 
-    public abstract class StandardListuiManager<TMgr> : StandardListuiManager<TMgr, IListuiArg>
-        where TMgr : StandardListuiManager<TMgr, IListuiArg>
-    { }
-
     [RequireComponent(typeof(DefaultSubviewTable))]
-    public abstract class StandardListuiManager<TMgr, TArg>
-        : MonoBehaviour, IListuiScreenManager<TMgr, TArg>, IBackOptionProviderListuiManager<TMgr, TArg>, IDefaultSubviewTable
-        where TMgr : StandardListuiManager<TMgr, TArg>
-        where TArg : IListuiArg
+    public abstract class StandardListuiManager<TMgr>
+        : MonoBehaviour, IListuiScreenManager<TMgr>, IBackOptionProviderListuiManager<TMgr>, IDefaultSubviewTable
+        where TMgr : StandardListuiManager<TMgr>
     {
         private DefaultSubviewTable defaultSubviewTable;
 
         public event System.Action OnError;
         public event System.Action OnUnload;
 
-        private readonly ListuiScreenStack<TMgr, TArg> stack = new();
-        private ListuiScreenStack<TMgr, TArg>.StackItem reservedScreen;
+        private readonly ListuiScreenStack<TMgr> stack = new();
+        private ListuiScreenStack<TMgr>.StackItem reservedScreen;
 
-        public virtual ISelectOption<TMgr, TArg> BackOption { get; protected set; }
-            = SelectOption.Create<TMgr, TArg>("Back", (manager, arg) => manager.PopScreen(), "Cancel click:Cancel");
+        public virtual ISelectOption<TMgr> BackOption { get; protected set; }
+            = SelectOption.Create<TMgr>("Back", m => m.PopScreen(), "Cancel click:Cancel");
 
-        public virtual ISelectOption<IListuiManager, IListuiArg> ErrorOption { get; protected set; }
-            = SelectOption.Create<IListuiManager, IListuiArg>("<#F00>ERROR", delegate { }, "Cancel");
+        public virtual ISelectOption<IListuiManager> ErrorOption { get; protected set; }
+            = SelectOption.Create<IListuiManager>("<#F00>ERROR", delegate { }, "Cancel");
 
         /// <summary>
         /// この値が true の間は予約されたメニューを表示しない。遷移アニメーション用
@@ -124,21 +119,28 @@ namespace Lysionium
         /// <summary>
         /// メニューを指定の画面へ進める
         /// </summary>
-        public virtual void PushScreen(IListuiScreen<TMgr, TArg> screen, TArg arg)
+        public virtual void PushScreen(IListuiScreen<TMgr> screen)
         {
             screen.CloseScreenView((TMgr)this, false);
+            BlockAll();
+            reservedScreen = stack.Push(screen);
+        }
+
+        public void PushScreen<TArg>(IListuiScreen<TMgr, TArg> screen, TArg arg)
+        {
+            screen.CloseScreenView((TMgr)this, false, arg);
             BlockAll();
             reservedScreen = stack.Push(screen, arg);
         }
 
-        public void PushScreen<TCtx>(IListuiScreen<TMgr, TArg, TCtx> screen, TArg arg, TCtx context)
+        public void PushInitialScreen(IListuiScreen<TMgr> screen, bool enableTouchMask = true)
         {
-            screen.CloseScreenView((TMgr)this, false, context);
-            BlockAll();
-            reservedScreen = stack.Push(screen, arg, context);
+            stack.Clear();
+            PushScreen(screen);
+            defaultSubviewTable.SetBlocker(enableTouchMask);
         }
 
-        public void PushInitialScreen(IListuiScreen<TMgr, TArg> screen, TArg arg, bool enableTouchMask = true)
+        public void PushInitialScreen<TArg>(IListuiScreen<TMgr, TArg> screen, TArg arg, bool enableTouchMask = true)
         {
             stack.Clear();
             PushScreen(screen, arg);

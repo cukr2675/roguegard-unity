@@ -12,17 +12,10 @@ namespace Lysionium.Views
         private EventSystem _eventSystem;
         public EventSystem EventSystem => _eventSystem ? _eventSystem : _eventSystem = LuiUtility.GetEventSystem(this);
 
-        public IListuiManager Manager { get; private set; }
-        public IListuiArg Arg { get; private set; }
+        public IListuiManager Manager { get; protected set; }
 
         private AnimatorTupple animator;
         private KeybindTuple binding;
-
-        protected void SetArg(IListuiManager manager, IListuiArg arg)
-        {
-            Manager = manager;
-            Arg = arg;
-        }
 
         public abstract void OnSelectItem(GameObject selectedObj, bool outOfRange);
         public abstract void QueueSelect(GameObject sender, GameObject to, CursorPlay play);

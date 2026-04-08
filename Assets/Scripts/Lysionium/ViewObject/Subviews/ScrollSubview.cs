@@ -47,13 +47,18 @@ namespace Lysionium.Views
         protected override void CommonInitCore()
         {
             itemHeight = _viewItemPrefab.GetComponent<RectTransform>().rect.height;
-            _scrollRect.onValueChanged.AddListener((x) => UpdateViewItems());
+            _scrollRect.onValueChanged.AddListener((x) =>
+            {
+                // 非表示時は更新しない（直接スクロール操作されなくても画面サイズ変更によって呼び出されることがある）
+                if (!IsVisible) return;
+
+                UpdateViewItems();
+            });
             _scrollRect.horizontal = false;
         }
 
         public override void SetListHandler(
-            IReadOnlyList<object> list, IViewItemHandler handler, IListuiManager manager, IListuiArg arg,
-            ref ISubviewStateProvider stateProvider)
+            IReadOnlyList<object> list, IViewItemHandler handler, IListuiManager manager, ref ISubviewStateProvider stateProvider)
         {
             stateProvider ??= new StateProvider();
             if (stateProvider is not StateProvider local) throw new System.ArgumentException(
@@ -73,7 +78,7 @@ namespace Lysionium.Views
             {
                 this.list.Add(list[i]);
             }
-            SetArg(manager, arg);
+            Manager = manager;
             InitViewItems();
             UpdateViewItems();
 

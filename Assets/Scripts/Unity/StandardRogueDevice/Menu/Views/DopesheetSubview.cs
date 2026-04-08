@@ -10,7 +10,7 @@ using UnityEngine.UI;
 
 namespace RoguegardUnity
 {
-    public class DopesheetSubview : ListHandlerSubview
+    public class DopesheetSubview : Subview, ICharacterCreationElementsSubview
     {
         [SerializeField] private ScrollRect _scrollRect = null;
         [SerializeField] private RectTransform _floatingContent = null;
@@ -31,6 +31,8 @@ namespace RoguegardUnity
         private readonly List<ViewItem> viewItems = new();
         private StateProvider currentStateProvider;
         private readonly MenuScreen menuScreen = new();
+
+        private MArg arg;
 
         /// <summary>
         /// スクロールバーの遊び
@@ -67,6 +69,8 @@ namespace RoguegardUnity
             }
         }
 
+        ISelectOption<MMgr, MArg> ICharacterCreationElementsSubview.LoadPresetOption => throw new System.NotSupportedException();
+
         public void Initialize()
         {
             _menuButton.Initialize(this);
@@ -77,9 +81,8 @@ namespace RoguegardUnity
             viewItems.Add(_cameraButton);
         }
 
-        public override void SetListHandler(
-            IReadOnlyList<object> list, IViewItemHandler handler, IListuiManager manager, IListuiArg arg,
-            ref ISubviewStateProvider stateProvider)
+        public void SetListHandler(
+            IReadOnlyList<object> list, IViewItemHandler handler, MMgr manager, MArg arg, ref ISubviewStateProvider stateProvider)
         {
             stateProvider ??= new StateProvider();
             if (stateProvider is not StateProvider local) throw new System.ArgumentException(
@@ -93,14 +96,15 @@ namespace RoguegardUnity
                 currentStateProvider.SelectedIndex = viewItems.IndexOf(LastSelectedItem);
             }
 
-            var editInfo = (MotionGrapherInfo)((MArg)arg).Arg.Other;
+            var editInfo = (MotionGrapherInfo)arg.Arg.Other;
             if (editInfo.Tracks.Length == 0)
             {
                 editInfo.AddTrack(new SpriteMotionGrapherTrack());
             }
 
             // 表示更新
-            SetArg(manager, arg);
+            Manager = manager;
+            this.arg = arg;
             UpdateElements(editInfo);
 
             // 新しい StateProvider に切り替える
@@ -158,7 +162,7 @@ namespace RoguegardUnity
                 var headerWidth = _floatingContent.rect.width;
                 var header = Instantiate(_itemHeaderPrefab, _scrollRect.content);
                 header.Initialize(this);
-                header.Bind(new SelectOption<MMgr, MArg>("+ ボーンを追加", (manager, arg) =>
+                header.Bind(new SelectOption<MMgr>("+ ボーンを追加", (manager) =>
                 {
                     manager.PushScreen(newBoneScreen, other: editInfo);
                 }));
@@ -169,8 +173,7 @@ namespace RoguegardUnity
                 sumHeight += _itemHeight;
             }
             {
-                _menuButton.Bind(new SelectOption<MMgr, MArg>(
-                    "...", (manager, arg) => manager.PushScreen(menuScreen, arg)));
+                _menuButton.Bind(new SelectOption<MMgr>("...", (manager) => manager.PushScreen(menuScreen, arg)));
             }
 
             var scrollRect = _scrollRect.viewport.rect;
@@ -181,20 +184,20 @@ namespace RoguegardUnity
         }
 
         private void UpdateKeyFrameListElement(
-            string name, object keyFrameList, MotionGrapherInfo editInfo, ClickItemHandler<MMgr, MArg> handleRemove, ref float sumHeight)
+            string name, object keyFrameList, MotionGrapherInfo editInfo, ClickOptionHandler<MMgr> handleRemove, ref float sumHeight)
         {
             var y = sumHeight;
             var headerWidth = _floatingContent.rect.width;
 
             var header = Instantiate(_itemHeaderPrefab, _scrollRect.content);
             header.Initialize(this);
-            header.Bind(new SelectOption<MMgr, MArg>(name, (manager, arg) =>
+            header.Bind(new SelectOption<MMgr>(name, (manager) =>
             {
                 manager.PushScreen(
                     new ChoicesScreen($"{name} を削除しますか？")
-                    .Option(":Yes", (manager, arg) =>
+                    .Option(":Yes", (manager) =>
                     {
-                        handleRemove(manager, arg);
+                        handleRemove(manager);
                         manager.PopScreen();
                     })
                     .Back(), arg);
@@ -206,7 +209,7 @@ namespace RoguegardUnity
             var lane = Instantiate(_itemLanePrefab, _scrollRect.content);
             lane.Initialize(this);
             lane.SetParent(_timeScale, editInfo);
-            lane.Bind(keyFrameList, SelectOptionViewItemHandler<IListuiManager, IListuiArg>.Instance);
+            lane.Bind(keyFrameList, SelectOptionViewItemHandler<IListuiManager>.Instance);
             lane.RectTransform.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, y, _itemHeight);
             lane.RectTransform.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Left, headerWidth, _width - headerWidth);
             viewItems.Add(lane);
@@ -260,20 +263,22 @@ namespace RoguegardUnity
                 "外部参照"
             };
 
-            private readonly ScrollMenuViewData<string, MMgr, MArg> view = new()
+            private readonly ScrollMenuViewData<string, MMgr> view = new()
             {
             };
 
-            public override void OpenScreen(MMgr manager, MArg arg)
+            public NewBoneScreen()
             {
-                view.Show(boneNames, manager, arg)
+                OnOpenScreen += (manager) =>
+                {
+                    view.Show(boneNames, manager)
                     ?
                     .NameFrom(boneName => boneName)
 
                     .VarOnce(out var referenceScreen, new ReferenceNameScreen())
-                    .OnClick((boneName, manager, arg) =>
+                    .OnClick((boneName, manager) =>
                     {
-                        var editInfo = (MotionGrapherInfo)arg.Arg.Other;
+                        var editInfo = (MotionGrapherInfo)Arg.Arg.Other;
                         if (boneName == "外部参照")
                         {
                             manager.PushScreen(referenceScreen, other: editInfo);
@@ -286,79 +291,88 @@ namespace RoguegardUnity
                     })
 
                     .Build();
+                };
             }
         }
 
         private class ReferenceNameScreen : RogueListuiScreen
         {
-            private readonly DialogViewData<MMgr, MArg> view = new()
+            private readonly DialogViewData<MMgr> view = new()
             {
                 BackAnchorSubviewSelector = null
             };
 
-            public override void OpenScreen(MMgr manager, MArg arg)
+            public ReferenceNameScreen()
             {
-                view.Show(string.Empty, manager, arg)
+                OnOpenScreen += (manager) =>
+                {
+                    view.Show(string.Empty, manager)
                     ?
                     .VarOnce(out string id)
-                    .Tail.Append(InputFieldWidgetOption.Create<MMgr, MArg>(
-                        (manager, arg) => id,
-                        (manager, arg, value) => id = value))
+                    .Tail.Append(InputFieldWidgetOption.Create<MMgr>(
+                        _ => id,
+                        value => id = value))
 
                     .Tail.Append(StackWidgetOption.Create(
-                        ("1*", SelectOption.Create<MMgr, MArg>("追加", (manager, arg) =>
+                        ("1*", SelectOption.Create<MMgr>("追加", (manager) =>
                         {
-                            var editInfo = (MotionGrapherInfo)arg.Arg.Other;
+                            var editInfo = (MotionGrapherInfo)Arg.Arg.Other;
                             var newTrack = new SubTimelineMotionGrapherTrack();
                             newTrack.AddClip(new RgpackReferenceTimelineClip() { Id = id });
                             editInfo.InsertTrack(0, newTrack);
                             manager.PopScreen(2);
                         })),
-                        ("1*", BackSelectOption<MMgr, MArg>.Instance)))
+                        ("1*", BackSelectOption<MMgr>.Instance)))
 
                     .Build();
+                };
             }
         }
 
         private class MenuScreen : RogueListuiScreen
         {
-            private readonly VariableWidgetsMenuViewData<MMgr, MArg> view = new()
+            private readonly VariableWidgetsMenuViewData<MMgr> view = new()
             {
             };
 
-            public override void OpenScreen(MMgr manager, MArg arg)
+            public MenuScreen()
             {
-                view.Show(System.Array.Empty<object>(), manager, arg)
+                OnOpenScreen += (manager) =>
+                {
+                    view.Show(System.Array.Empty<object>(), manager)
                     ?
-                    .TailStack("ループ回数", InputFieldWidgetOption.Create<MMgr, MArg>(
-                        (manager, arg) => ((MotionGrapherInfo)arg.Arg.Other).LoopCount.ToString(),
-                        (manager, arg, strValue) =>
+                    .TailStack("ループ回数", InputFieldWidgetOption.Create<MMgr>(
+                        _ => ((MotionGrapherInfo)Arg.Arg.Other).LoopCount.ToString(),
+                        (strValue) =>
                         {
                             if (!int.TryParse(strValue, out var value)) return strValue;
 
-                            ((MotionGrapherInfo)arg.Arg.Other).LoopCount = value;
+                            ((MotionGrapherInfo)Arg.Arg.Other).LoopCount = value;
                             return strValue;
                         }))
 
-                    .TailStack("再生速度", InputFieldWidgetOption.Create<MMgr, MArg>(
-                        (manager, arg) => ((MotionGrapherInfo)arg.Arg.Other).PlaybackSpeed.ToString(),
-                        (manager, arg, strValue) =>
+                    .TailStack("再生速度", InputFieldWidgetOption.Create<MMgr>(
+                        _ => ((MotionGrapherInfo)Arg.Arg.Other).PlaybackSpeed.ToString(),
+                        (strValue) =>
                         {
                             if (!float.TryParse(strValue, out var value))return strValue;
 
-                            ((MotionGrapherInfo)arg.Arg.Other).PlaybackSpeed = value;
+                            ((MotionGrapherInfo)Arg.Arg.Other).PlaybackSpeed = value;
                             return strValue;
                         }))
 
-                    .Tail.Option("編集終了", (manager, arg) =>
+                    .Tail.Option("編集終了", (manager) =>
                     {
-                        var editInfo = (MotionGrapherInfo)arg.Arg.Other;
-                        RogueDevice.AddWork(DeviceKw.EnqueueWork, RogueCharacterWork.CreateSpriteMotion(arg.Self, new MotionGrapherSpriteMotion(editInfo), true));
+                        var editInfo = (MotionGrapherInfo)Arg.Arg.Other;
+                        RogueDevice.AddWork(
+                            DeviceKw.EnqueueWork,
+                            RogueCharacterWork.CreateSpriteMotion(Arg.Self, new MotionGrapherSpriteMotion(editInfo), true));
 
                         manager.PopScreen(2);
                     })
 
                     .Build();
+                };
             }
         }
     }

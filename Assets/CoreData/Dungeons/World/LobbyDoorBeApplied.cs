@@ -35,15 +35,21 @@ namespace Roguegard
 
         private class DungeonSelectionScreen : RogueListuiScreen
         {
-            private readonly ScrollMenuViewData<ISelectOption<MMgr, MArg>, MMgr, MArg> view = new()
+            private readonly ScrollMenuViewData<ISelectOption<MMgr, MArg>, MMgr> view = new()
             {
             };
 
-            public override void OpenScreen(MMgr manager, MArg arg)
+            public DungeonSelectionScreen()
             {
-                view.Show(RoguegardSettings.DungeonSelectOption, manager, arg)
+                OnOpenScreen += (manager) =>
+                {
+                    view.Show(RoguegardSettings.DungeonSelectOption, manager)
                     ?
+                    .NameFrom((o, m) => o.GetName(m, Arg))
+                    .OnClick((o, m) => o.Click(m, Arg))
+                    .StyleFrom((o, m) => o.GetStyle(m, Arg))
                     .Build();
+                };
             }
         }
     }

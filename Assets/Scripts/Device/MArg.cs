@@ -1,8 +1,6 @@
-using Lysionium;
-
 namespace Roguegard.Device
 {
-    public class MArg : IListuiArg
+    public class MArg
     {
         private readonly Builder source;
         public RogueObj Self => source.Self;
@@ -14,29 +12,11 @@ namespace Roguegard.Device
             this.source = source;
         }
 
-        public void CopyTo(ref IListuiArg dest)
-        {
-            if (!(dest is Copy destArg)) { dest = destArg = new Copy(); }
-
-            destArg.Self = Self;
-            destArg.User = User;
-            destArg.Arg = Arg;
-        }
-
-        private class Copy : IListuiArg
+        private class Copy
         {
             public RogueObj Self { get; set; }
             public RogueObj User { get; set; }
             public RogueMethodArgument Arg { get; set; }
-
-            public void CopyTo(ref IListuiArg dest)
-            {
-                if (!(dest is Copy destArg)) { dest = destArg = new Copy(); }
-
-                destArg.Self = Self;
-                destArg.User = User;
-                destArg.Arg = Arg;
-            }
         }
 
         public class Builder

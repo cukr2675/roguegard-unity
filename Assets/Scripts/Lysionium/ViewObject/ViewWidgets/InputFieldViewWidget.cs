@@ -37,10 +37,10 @@ namespace Lysionium.Views
         private void Initialize()
         {
             inputField.contentType = widgetOption.ContentType;
-            inputField.SetTextWithoutNotify(widgetOption.GetValue(_parent.Manager, _parent.Arg));
+            inputField.SetTextWithoutNotify(widgetOption.GetValue(_parent.Manager));
             inputField.onValueChanged.AddListener(value =>
             {
-                inputField.SetTextWithoutNotify(widgetOption.HandleValueChanged(_parent.Manager, _parent.Arg, value));
+                inputField.SetTextWithoutNotify(widgetOption.HandleValueChanged(value, _parent.Manager));
             });
         }
 

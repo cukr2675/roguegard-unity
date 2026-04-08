@@ -1,7 +1,7 @@
 namespace Lysionium
 {
-    public interface IButtonViewItemHandlerBuilder<TItem, TMgr, TArg, TBuilder> : IViewItemHandlerBuilder<TItem, TMgr, TArg, TBuilder>
+    public interface IButtonViewItemHandlerBuilder<TItem, TMgr, TBuilder> : IViewItemHandlerBuilder<TItem, TMgr, TBuilder>
     {
-        TBuilder OnClick(ClickItemHandler<TItem, TMgr, TArg> handler);
+        TBuilder OnClick(ClickItemHandler<TItem, TMgr> handler);
     }
 }

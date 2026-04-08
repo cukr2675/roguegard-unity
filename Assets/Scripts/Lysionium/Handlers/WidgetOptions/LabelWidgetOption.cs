@@ -2,45 +2,43 @@ namespace Lysionium
 {
     public static class LabelWidgetOption
     {
-        public static ILabelWidgetOption Create<TMgr, TArg>(string text, ClickItemHandler<string, TMgr, TArg> onClickLink = null)
+        public static ILabelWidgetOption Create<TMgr>(string text, ClickItemHandler<string, TMgr> onClickLink = null)
         {
-            return new WidgetOptionImplement<TMgr, TArg>()
+            return new WidgetOptionImplement<TMgr>()
             {
                 GetText = delegate { return text; },
                 ClickLink = onClickLink
             };
         }
 
-        public static ILabelWidgetOption Create<TMgr, TArg>(
-            System.Func<TMgr, TArg, string> text, ClickItemHandler<string, TMgr, TArg> onClickLink = null)
+        public static ILabelWidgetOption Create<TMgr>(
+            System.Func<TMgr, string> text, ClickItemHandler<string, TMgr> onClickLink = null)
         {
-            return new WidgetOptionImplement<TMgr, TArg>()
+            return new WidgetOptionImplement<TMgr>()
             {
                 GetText = text,
                 ClickLink = onClickLink
             };
         }
 
-        private class WidgetOptionImplement<TMgr, TArg> : ILabelWidgetOption
+        private class WidgetOptionImplement<TMgr> : ILabelWidgetOption
         {
             public string WidgetName { get; set; }
-            public System.Func<TMgr, TArg, string> GetText { get; set; }
-            public ClickItemHandler<string, TMgr, TArg> ClickLink { get; set; }
+            public System.Func<TMgr, string> GetText { get; set; }
+            public ClickItemHandler<string, TMgr> ClickLink { get; set; }
 
-            string ILabelWidgetOption.GetText(IListuiManager manager, IListuiArg arg)
+            string ILabelWidgetOption.GetText(IListuiManager manager)
             {
-                if (LuiAssert.Type<TMgr>(manager, out var tMgr) ||
-                    LuiAssert.Type<TArg>(arg, out var tArg)) return manager.ErrorOption.GetName(manager, arg);
+                if (LuiAssert.Type<TMgr>(manager, out var tMgr)) return manager.ErrorOption.GetName(manager);
 
-                return GetText(tMgr, tArg);
+                return GetText(tMgr);
             }
 
-            void ILabelWidgetOption.ClickLink(string link, IListuiManager manager, IListuiArg arg)
+            void ILabelWidgetOption.ClickLink(string link, IListuiManager manager)
             {
-                if (LuiAssert.Type<TMgr>(manager, out var tMgr) ||
-                    LuiAssert.Type<TArg>(arg, out var tArg)) return;
+                if (LuiAssert.Type<TMgr>(manager, out var tMgr)) return;
 
-                ClickLink?.Invoke(link, tMgr, tArg);
+                ClickLink?.Invoke(link, tMgr);
             }
         }
     }

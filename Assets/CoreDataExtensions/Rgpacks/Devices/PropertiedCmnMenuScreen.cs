@@ -8,115 +8,118 @@ namespace Roguegard.Device
 {
     public class PropertiedCmnMenuScreen : RogueListuiScreen
     {
-        private readonly List<object> list = new();
-        private readonly VariableWidgetsMenuViewData<MMgr, MArg> view = new()
+        private readonly VariableWidgetsMenuViewData<MMgr> view = new()
         {
         };
 
-        private CharacterCreationOptionScreen characterCreationOptionScreen;
-        private StartingItemSelectionScreen startingItemSelectionScreen;
-
-        public override void OpenScreen(MMgr manager, MArg arg)
+        public PropertiedCmnMenuScreen()
         {
-            var cmnData = (PropertiedCmnData)arg.Arg.Other;
+            var list = new List<object>();
+            CharacterCreationOptionScreen characterCreationOptionScreen = null;
+            StartingItemSelectionScreen startingItemSelectionScreen = null;
 
-            list.Clear();
-            if (!string.IsNullOrWhiteSpace(cmnData.Cmn))
+            OnOpenScreen += (manager) =>
             {
-                // コモンイベントのプロパティ一覧を取得するためにビルドする
-                var atelier = ScenarioMonolithInfo.GetAtelierByCharacter(arg.Self);
-                var rgpackDirectory = Rgpacker.Pack(atelier);
-                var rgpack = new Rgpack("Playtest", rgpackDirectory, Rgpacker.DefaultEvaluator);
-                RgpackReference.LoadRgpack(rgpack);
+                var cmnData = (PropertiedCmnData)Arg.Arg.Other;
 
-                var properties = cmnData.GetProperties(rgpack.Id);
-                if (properties != null)
+                list.Clear();
+                if (!string.IsNullOrWhiteSpace(cmnData.Cmn))
                 {
-                    foreach (var pair in properties)
+                    // コモンイベントのプロパティ一覧を取得するためにビルドする
+                    var atelier = ScenarioMonolithInfo.GetAtelierByCharacter(Arg.Self);
+                    var rgpackDirectory = Rgpacker.Pack(atelier);
+                    var rgpack = new Rgpack("Playtest", rgpackDirectory, Rgpacker.DefaultEvaluator);
+                    RgpackReference.LoadRgpack(rgpack);
+
+                    var properties = cmnData.GetProperties(rgpack.Id);
+                    if (properties != null)
                     {
-                        if (pair.Value is NumberCmnProperty numberCmnProperty)
+                        foreach (var pair in properties)
                         {
-                            list.Add(StackWidgetOption.Create(
-                                ("1*", pair.Key),
-                                ("1*", InputFieldWidgetOption.Create<MMgr, MArg>(
-                                    (manager, arg) => numberCmnProperty.Value.ToString(),
-                                    (manager, arg, value) => (numberCmnProperty.Value = float.Parse(value)).ToString(),
-                                    TMP_InputField.ContentType.DecimalNumber))));
-                        }
-                        else if (pair.Value is StartingItemCmnProperty startingItemCmnProperty)
-                        {
-                            characterCreationOptionScreen ??= new CharacterCreationOptionScreen(RoguegardSettings.CharacterCreationDatabase);
-                            startingItemCmnProperty.Value ??= new StartingItem() { Option = RoguegardSettings.CharacterCreationDatabase.StartingItemOptions[0] };
-                            list.Add(SelectOption.Create<MMgr, MArg>(
-                                pair.Key,
-                                (manager, arg) => manager.PushScreen(characterCreationOptionScreen, other: startingItemCmnProperty.Value)));
-                        }
-                        else if (pair.Value is StartingItemTableCmnProperty startingItemTableCmnProperty)
-                        {
-                            startingItemSelectionScreen ??= new StartingItemSelectionScreen();
-                            list.Add(SelectOption.Create<MMgr, MArg>(
-                                pair.Key,
-                                (manager, arg) => manager.PushScreen(startingItemSelectionScreen, other: startingItemTableCmnProperty)));
+                            if (pair.Value is NumberCmnProperty numberCmnProperty)
+                            {
+                                list.Add(StackWidgetOption.Create(
+                                    ("1*", pair.Key),
+                                    ("1*", InputFieldWidgetOption.Create<MMgr>(
+                                        _ => numberCmnProperty.Value.ToString(),
+                                        value => (numberCmnProperty.Value = float.Parse(value)).ToString(),
+                                        TMP_InputField.ContentType.DecimalNumber))));
+                            }
+                            else if (pair.Value is StartingItemCmnProperty startingItemCmnProperty)
+                            {
+                                characterCreationOptionScreen ??= new CharacterCreationOptionScreen(RoguegardSettings.CharacterCreationDatabase);
+                                startingItemCmnProperty.Value ??= new StartingItem() { Option = RoguegardSettings.CharacterCreationDatabase.StartingItemOptions[0] };
+                                list.Add(SelectOption.Create<MMgr>(
+                                    pair.Key,
+                                    m => m.PushScreen(characterCreationOptionScreen, other: startingItemCmnProperty.Value)));
+                            }
+                            else if (pair.Value is StartingItemTableCmnProperty startingItemTableCmnProperty)
+                            {
+                                startingItemSelectionScreen ??= new StartingItemSelectionScreen();
+                                list.Add(SelectOption.Create<MMgr>(
+                                    pair.Key,
+                                    m => m.PushScreen(startingItemSelectionScreen, other: startingItemTableCmnProperty)));
+                            }
                         }
                     }
                 }
-            }
 
-            view.Show(list, manager, arg)
+                view.Show(list, manager)
                 ?
-                .HeadStack("アセットID", InputFieldWidgetOption.Create<MMgr, MArg>(
-                    (manager, arg) => ((PropertiedCmnData)arg.Arg.Other).Cmn,
-                    (manager, arg, value) => ((PropertiedCmnData)arg.Arg.Other).Cmn = value))
+                .HeadStack("アセットID", InputFieldWidgetOption.Create<MMgr>(
+                    _ => ((PropertiedCmnData)Arg.Arg.Other).Cmn,
+                    value => ((PropertiedCmnData)Arg.Arg.Other).Cmn = value))
 
                 .Build();
+            };
         }
 
         private class StartingItemSelectionScreen : RogueListuiScreen
         {
-            private readonly CharacterCreationData characterCreationData = new();
-            private readonly CharacterCreationOptionScreen characterCreationOptionScreen = new(RoguegardSettings.CharacterCreationDatabase);
-            private readonly CharacterCreationAddScreen characterCreationAddScreen = new(RoguegardSettings.CharacterCreationDatabase);
-
-            private readonly List<StartingItem> startingItems = new();
-            private readonly ScrollMenuViewData<StartingItem, MMgr, MArg> view;
+            private readonly ScrollMenuViewData<StartingItem, MMgr> view;
 
             public StartingItemSelectionScreen()
             {
+                var characterCreationData = new CharacterCreationData();
+                var characterCreationOptionScreen = new CharacterCreationOptionScreen(RoguegardSettings.CharacterCreationDatabase);
+                var characterCreationAddScreen = new CharacterCreationAddScreen(RoguegardSettings.CharacterCreationDatabase);
                 view = new()
                 {
                     BackAnchorList = new(
                         _ => _
-                        .Option(":Back", (manager, arg) =>
+                        .Option(":Back", (manager) =>
                         {
-                            var startingItemTableCmnProperty = (StartingItemTableCmnProperty)arg.Arg.Other;
+                            var startingItemTableCmnProperty = (StartingItemTableCmnProperty)Arg.Arg.Other;
                             startingItemTableCmnProperty.Value.Clear();
                             startingItemTableCmnProperty.Value.AddClones(characterCreationData.StartingItemTable);
                             manager.PopScreen();
                         }, "Cancel"))
                 };
-            }
 
-            public override void OpenScreen(MMgr manager, MArg arg)
-            {
-                var startingItemTableCmnProperty = (StartingItemTableCmnProperty)arg.Arg.Other;
-                var startingItemTable = startingItemTableCmnProperty.Value;
-                characterCreationData.StartingItemTable.Clear();
-                characterCreationData.StartingItemTable.AddClones(startingItemTable);
-                startingItems.Clear();
-                for (int i = 0; i < startingItemTable.Count; i++)
+                var startingItems = new List<StartingItem>();
+
+                OnOpenScreen += (manager) =>
                 {
-                    startingItems.Add(startingItemTable[i][0]);
-                }
+                    var startingItemTableCmnProperty = (StartingItemTableCmnProperty)Arg.Arg.Other;
+                    var startingItemTable = startingItemTableCmnProperty.Value;
+                    characterCreationData.StartingItemTable.Clear();
+                    characterCreationData.StartingItemTable.AddClones(startingItemTable);
+                    startingItems.Clear();
+                    for (int i = 0; i < startingItemTable.Count; i++)
+                    {
+                        startingItems.Add(startingItemTable[i][0]);
+                    }
 
-                view.Show(startingItems, manager, arg)
+                    view.Show(startingItems, manager)
                     ?
                     .NameFrom(startingItem => startingItem.Name)
 
-                    .OnClick((startingItem, manager, arg) => manager.PushScreen(characterCreationOptionScreen, other: startingItem))
+                    .OnClick((startingItem, m) => m.PushScreen(characterCreationOptionScreen, other: startingItem))
 
-                    .Tail.Option("+ アイテムを追加", (manager, arg) => manager.PushScreen(characterCreationAddScreen, other: typeof(StartingItem)))
+                    .Tail.Option("+ アイテムを追加", m => m.PushScreen(characterCreationAddScreen, other: typeof(StartingItem)))
 
                     .Build();
+                };
             }
         }
     }

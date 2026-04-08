@@ -3,23 +3,23 @@ using UnityEngine.SceneManagement;
 
 namespace Lysionium
 {
-    public class LoadSceneFadeOutScreen : DelegateListuiScreen<IListuiManager, IListuiArg>
+    public class LoadSceneFadeOutScreen : DelegateListuiScreen<IListuiManager>
     {
-        private readonly FadeOutInViewData<IListuiManager, IListuiArg> view = new()
+        private readonly FadeOutInViewData<IListuiManager> view = new()
         {
         };
 
         public LoadSceneFadeOutScreen(string nextSceneName, System.Action<AsyncOperation> onLoadSceneCompleted = null, string style = null)
         {
-            OnOpenScreen += (manager, arg) =>
+            OnOpenScreen += (manager) =>
             {
-                view.FadeOut(manager, arg)
+                view.FadeOut(manager)
                 ?
                 .InitIf(
                     style != null, _ => _
                     .Append(StyleMetaWidgetOption.Create(style)))
 
-                .OnFadeOutCompleted((manager, arg) =>
+                .OnFadeOutCompleted(_ =>
                 {
                     var loadSceneOperation = SceneManager.LoadSceneAsync(nextSceneName);
                     loadSceneOperation.completed += onLoadSceneCompleted;

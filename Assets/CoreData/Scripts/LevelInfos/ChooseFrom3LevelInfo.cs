@@ -1,6 +1,7 @@
 using Lysionium;
 using Roguegard.CharacterCreation;
 using Roguegard.Device;
+using System.Text;
 using UnityEngine;
 
 namespace Roguegard
@@ -22,6 +23,7 @@ namespace Roguegard
 
         private static readonly LevelUpBonusScreen levelUpBonusScreen = new();
         private static readonly ResultScreen resultScreen = new();
+        private static readonly StringBuilder stringBuilder = new();
 
         static ChooseFrom3LevelInfo()
         {
@@ -68,11 +70,7 @@ namespace Roguegard
             }
             else
             {
-                if (selfIsPlayerPartyMember)
-                {
-                    RogueDevice.Primary.AddScreen(resultScreen, self, null, RogueMethodArgument.Identity);
-                }
-                resultScreen.message = "";
+                stringBuilder.Clear();
 
                 // プレイヤーでない場合、HP・MP・最大重量をランダムに選択して上げる。
                 switch (RogueRandom.Primary.Next(0, 3))
@@ -82,7 +80,7 @@ namespace Roguegard
                         self.Main.Stats.SetHp(self, self.Main.Stats.Hp + 5, true);
                         if (selfIsPlayerPartyMember)
                         {
-                            resultScreen.message = $"{StatsKw.MaxHp.Name}が5上がった\n";
+                            stringBuilder.Append($"{StatsKw.MaxHp.Name}が5上がった\n");
                         }
                         break;
                     case 1:
@@ -90,14 +88,14 @@ namespace Roguegard
                         self.Main.Stats.SetMp(self, self.Main.Stats.Mp + 5, true);
                         if (selfIsPlayerPartyMember)
                         {
-                            resultScreen.message = $"{StatsKw.MaxMp.Name}が5上がった\n";
+                            stringBuilder.Append($"{StatsKw.MaxMp.Name}が5上がった\n");
                         }
                         break;
                     case 2:
                         loadCapacity += 2;
                         if (selfIsPlayerPartyMember)
                         {
-                            resultScreen.message = $"{StatsKw.LoadCapacity.Name}が2上がった\n";
+                            stringBuilder.Append($"{StatsKw.LoadCapacity.Name}が2上がった\n");
                         }
                         break;
                 }
@@ -105,8 +103,13 @@ namespace Roguegard
                 {
                     if (self.Main.Stats.Lv == 10 || self.Main.Stats.Lv == 20)
                     {
-                        resultScreen.message += $"{StatsKw.Atk.Name}が1上がった\n";
+                        stringBuilder.Append($"{StatsKw.Atk.Name}が1上がった\n");
                     }
+                }
+
+                if (selfIsPlayerPartyMember)
+                {
+                    RogueDevice.Primary.AddScreen(resultScreen, self, null, new RogueMethodArgument(other: stringBuilder.ToString()));
                 }
             }
         }
@@ -198,127 +201,132 @@ namespace Roguegard
 
         private class LevelUpBonusScreen : RogueListuiScreen
         {
-            private readonly SpeechBoxViewData<MMgr, MArg> view = new()
+            private readonly SpeechBoxViewData<MMgr> view = new()
             {
             };
 
-            public override void OpenScreen(MMgr manager, MArg arg)
+            public LevelUpBonusScreen()
             {
-                view.Show(arg.Self.GetName() + "はレベルが上がった！{v}", manager, arg)
+                OnOpenScreen += (manager) =>
+                {
+                    view.Show(Arg.Self.GetName() + "はレベルが上がった！{v}", manager)
                     ?
-                    .OnCompleted((manager, arg) => manager.PushScreen(new SelectScreen(), arg))
+                    .OnCompleted(m => m.PushScreen(new SelectScreen(), Arg))
 
                     .Build();
+                };
             }
 
             private class SelectScreen : RogueListuiScreen
             {
-                private readonly MainMenuViewData<MMgr, MArg> view = new()
+                private readonly MainMenuViewData<MMgr> view = new()
                 {
                     PrimaryCommandSubviewSelector = m => m.Scroll,
                 };
 
-                public override void OpenScreen(MMgr manager, MArg arg)
+                public SelectScreen()
                 {
-                    view.Show(manager, arg)
+                    OnOpenScreen += (manager) =>
+                    {
+                        view.Show(manager)
                         ?
                         .VarOnce(out var nextScreen, new ConfirmScreen())
 
-                        .Option("最大HP +5", (manager, arg) =>
+                        .Option("最大HP +5", (manager) =>
                         {
-                            manager.PushScreen(nextScreen, arg.Self, arg.User, count: 0);
+                            manager.PushScreen(nextScreen, Arg.Self, Arg.User, count: 0);
                         })
 
-                        .Option("最大MP +5", (manager, arg) =>
+                        .Option("最大MP +5", (manager) =>
                         {
-                            manager.PushScreen(nextScreen, arg.Self, arg.User, count: 1);
+                            manager.PushScreen(nextScreen, Arg.Self, Arg.User, count: 1);
                         })
 
-                        .Option("最大重量 +2", (manager, arg) =>
+                        .Option("最大重量 +2", (manager) =>
                         {
-                            manager.PushScreen(nextScreen, arg.Self, arg.User, count: 2);
+                            manager.PushScreen(nextScreen, Arg.Self, Arg.User, count: 2);
                         })
 
                         .Build();
+                    };
                 }
             }
 
             private class ConfirmScreen : RogueListuiScreen
             {
-                private readonly ResultScreen nextScreen = new();
-
-                private readonly MainMenuViewData<MMgr, MArg> view = new()
+                private readonly MainMenuViewData<MMgr> view = new()
                 {
                     PrimaryCommandSubviewSelector = m => m.SecondaryCommand,
                 };
 
-                public override bool IsIncremental => true;
-
-                public override void OpenScreen(MMgr manager, MArg arg)
+                public ConfirmScreen()
                 {
-                    view.Show(manager, arg)
+                    OnOpenScreen += (manager) =>
+                    {
+                        view.Show(manager)
                         ?
-                        .Option("決定", (manager, arg) =>
+                        .VarOnce(out var stringBuilder, new StringBuilder())
+                        .VarOnce(out var nextScreen, new ResultScreen())
+                        .Option("決定", (manager) =>
                         {
-                            var self = arg.Self;
+                            stringBuilder.Clear();
+
+                            var self = Arg.Self;
                             var levelInfo = (ChooseFrom3LevelInfo)self.Main.GetLevelInfo(self);
                             if (self.Main.Stats.Lv == 10 || self.Main.Stats.Lv == 20)
                             {
-                                nextScreen.message = $"{StatsKw.Atk.Name}が1上がった<link=\"HorizontalArrow\"></link>\n";
+                                stringBuilder.Append($"{StatsKw.Atk.Name}が1上がった<link=\"HorizontalArrow\"></link>\n");
                             }
-                            else
-                            {
-                                nextScreen.message = "";
-                            }
-                            switch (arg.Arg.Count)
+
+                            switch (Arg.Arg.Count)
                             {
                                 case 0:
                                     levelInfo.maxHp += 5;
                                     self.Main.Stats.SetHp(self, self.Main.Stats.Hp + 5, true);
-                                    nextScreen.message += $"{StatsKw.MaxHp.Name}が5上がった";
-                                    manager.PushScreen(nextScreen);
+                                    stringBuilder.Append(StatsKw.MaxHp.Name).Append("が5上がった{v}");
                                     break;
                                 case 1:
                                     levelInfo.maxMp += 5;
                                     self.Main.Stats.SetMp(self, self.Main.Stats.Mp + 5, true);
-                                    nextScreen.message += $"{StatsKw.MaxMp.Name}が5上がった";
-                                    manager.PushScreen(nextScreen);
+                                    stringBuilder.Append(StatsKw.MaxMp.Name).Append("が5上がった{v}");
                                     break;
                                 case 2:
                                     levelInfo.loadCapacity += 2;
-                                    nextScreen.message += $"{StatsKw.LoadCapacity.Name}が2上がった";
-                                    manager.PushScreen(nextScreen);
+                                    stringBuilder.Append(StatsKw.LoadCapacity.Name).Append("が2上がった{v}");
                                     break;
                             }
+                            manager.PushScreen(nextScreen, other: stringBuilder.ToString());
                         })
 
                         .Back()
 
                         .Build();
-                }
+                    };
 
-                public override void CloseScreenView(MMgr manager, bool back)
-                {
-                    view.Hide(manager, back);
+                    OnCloseScreenView += (manager, back) =>
+                    {
+                        view.Hide(manager, back);
+                    };
                 }
             }
         }
 
         private class ResultScreen : RogueListuiScreen
         {
-            public string message;
-
-            private readonly SpeechBoxViewData<MMgr, MArg> view = new()
+            private readonly SpeechBoxViewData<MMgr> view = new()
             {
             };
 
-            public override void OpenScreen(MMgr manager, MArg arg)
+            public ResultScreen()
             {
-                view.Show(message + "{v}", manager, arg)
+                OnOpenScreen += (manager) =>
+                {
+                    view.Show(Arg.Arg.Other as string, manager)
                     ?
-                    .OnCompleted((manager, arg) => manager.Done())
+                    .OnCompleted(m => m.Done())
 
                     .Build();
+                };
             }
         }
     }

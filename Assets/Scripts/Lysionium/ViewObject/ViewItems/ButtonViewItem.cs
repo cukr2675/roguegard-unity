@@ -34,7 +34,7 @@ namespace Lysionium.Views
                 rect.position = rectTransform.position;
                 Manager.SetInvisibleDropdownPosition(rect);
 
-                handler.Click(item, Manager, Arg);
+                handler.Click(item, Manager);
             });
 
             TryGetComponent(out animator);
@@ -54,7 +54,7 @@ namespace Lysionium.Views
 
             if (_icon != null && handler is IColoredIconViewItemHandler iconViewItemHandler)
             {
-                iconViewItemHandler.GetIcon(item, Manager, Arg, out var iconSprite, out var iconColor);
+                iconViewItemHandler.GetIcon(item, Manager, out var iconSprite, out var iconColor);
                 if (iconSprite != null)
                 {
                     _icon.sprite = iconSprite;
@@ -69,8 +69,8 @@ namespace Lysionium.Views
                 }
             }
 
-            var style = handler.GetStyle(item, Manager, Arg) ?? _defaultStyle;
-            styleEvaluator.Bind(item, handler, Manager, Arg, Parent);
+            var style = handler.GetStyle(item, Manager) ?? _defaultStyle;
+            styleEvaluator.Bind(item, handler, Manager, Parent);
             styleEvaluator.SetStyle(style, animator, _keybindLabel, clickActionPerformed);
         }
 

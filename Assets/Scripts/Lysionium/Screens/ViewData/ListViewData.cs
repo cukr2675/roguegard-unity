@@ -4,10 +4,9 @@ using UnityEngine;
 
 namespace Lysionium
 {
-    public abstract class ListViewData<TItem, TMgr, TArg> : ViewData<TMgr, TArg>
+    public abstract class ListViewData<TItem, TMgr> : ViewData<TMgr>
         where TItem : class
         where TMgr : IListuiManager
-        where TArg : IListuiArg
     {
         private readonly List<object> headList = new();
         protected List<TItem> OriginalList { get; } = new();
@@ -16,14 +15,14 @@ namespace Lysionium
 
         // フィルタは headList や tailList には効かないほうが実用的
         // 並べ替えや Map メソッドは実装しない（ビルダーの責務が増大して可読性が落ちるため）
-        private System.Func<TItem, TMgr, TArg, bool> filter;
+        private System.Func<TItem, TMgr, bool> filter;
 
         protected ListViewData()
         {
             List = new ReadOnlyListConcat(headList, OriginalList, tailList);
         }
 
-        protected void SetOriginalList(TItem[] list, TMgr manager, TArg arg)
+        protected void SetOriginalList(TItem[] list, TMgr manager)
         {
             if (list == null) throw new System.ArgumentNullException(nameof(list));
             if (manager == null) throw new System.ArgumentNullException(nameof(manager));
@@ -31,11 +30,11 @@ namespace Lysionium
             OriginalList.Clear();
             foreach (var item in list)
             {
-                if (filter?.Invoke(item, manager, arg) ?? true) { OriginalList.Add(item); }
+                if (filter?.Invoke(item, manager) ?? true) { OriginalList.Add(item); }
             }
         }
 
-        protected void SetOriginalList(IReadOnlyList<TItem> list, TMgr manager, TArg arg)
+        protected void SetOriginalList(IReadOnlyList<TItem> list, TMgr manager)
         {
             if (list == null) throw new System.ArgumentNullException(nameof(list));
             if (manager == null) throw new System.ArgumentNullException(nameof(manager));
@@ -43,27 +42,27 @@ namespace Lysionium
             OriginalList.Clear();
             for (int i = 0; i < list.Count; i++)
             {
-                if (filter?.Invoke(list[i], manager, arg) ?? true) { OriginalList.Add(list[i]); }
+                if (filter?.Invoke(list[i], manager) ?? true) { OriginalList.Add(list[i]); }
             }
         }
 
-        protected void SetOriginalList(System.ReadOnlySpan<TItem> list, TMgr manager, TArg arg)
+        protected void SetOriginalList(System.ReadOnlySpan<TItem> list, TMgr manager)
         {
             if (manager == null) throw new System.ArgumentNullException(nameof(manager));
 
             OriginalList.Clear();
             foreach (var item in list)
             {
-                if (filter?.Invoke(item, manager, arg) ?? true) { OriginalList.Add(item); }
+                if (filter?.Invoke(item, manager) ?? true) { OriginalList.Add(item); }
             }
         }
 
-        public abstract class BaseListBuilder<TViewData, TOut> : BaseBuilder<TViewData, TOut>, IViewItemFilterBuilder<TItem, TMgr, TArg, TOut>
-            where TViewData : ListViewData<TItem, TMgr, TArg>
+        public abstract class BaseListBuilder<TViewData, TOut> : BaseBuilder<TViewData, TOut>, IViewItemFilterBuilder<TItem, TMgr, TOut>
+            where TViewData : ListViewData<TItem, TMgr>
             where TOut : BaseListBuilder<TViewData, TOut>
         {
-            protected BaseListBuilder(TViewData parent, TMgr manager, TArg arg)
-                : base(parent, manager, arg)
+            protected BaseListBuilder(TViewData parent, TMgr manager)
+                : base(parent, manager)
             {
             }
 
@@ -73,7 +72,7 @@ namespace Lysionium
             public HeadBuilder Head => new((TOut)this);
             public TailBuilder Tail => new((TOut)this);
 
-            public TOut Filter(System.Func<TItem, TMgr, TArg, bool> predicate)
+            public TOut Filter(System.Func<TItem, TMgr, bool> predicate)
             {
                 AssertNotBuilt();
 
@@ -88,7 +87,7 @@ namespace Lysionium
                 // IsBuilt == false 時の Show ではフィルタ未設定状態で SetOriginalList を実行しているため、フィルタ設定後であるここで再実行する
                 for (int i = Parent.OriginalList.Count - 1; i >= 0; i--)
                 {
-                    if (!(Parent.filter?.Invoke(Parent.OriginalList[i], Manager, Arg)) ?? false) { Parent.OriginalList.RemoveAt(i); }
+                    if (!(Parent.filter?.Invoke(Parent.OriginalList[i], Manager)) ?? false) { Parent.OriginalList.RemoveAt(i); }
                 }
 
                 base.Build();
@@ -102,7 +101,7 @@ namespace Lysionium
                 Parent.filter = null;
             }
 
-            public readonly struct HeadBuilder : ISelectOptionsBuilder<TMgr, TArg, TOut>
+            public readonly struct HeadBuilder : ISelectOptionsBuilder<TMgr, TOut>
             {
                 private readonly TOut parent;
                 public HeadBuilder(TOut parent) => this.parent = parent;
@@ -115,7 +114,7 @@ namespace Lysionium
                     return parent;
                 }
 
-                public TOut Option(ISelectOption<TMgr, TArg> option)
+                public TOut Option(ISelectOption<TMgr> option)
                 {
                     parent.AssertNotBuilt();
 
@@ -123,10 +122,10 @@ namespace Lysionium
                     return parent;
                 }
 
-                TOut ISelectOptionsBuilder<TMgr, TArg, TOut>.Option() => parent;
+                TOut ISelectOptionsBuilder<TMgr, TOut>.Option() => parent;
             }
 
-            public readonly struct TailBuilder : ISelectOptionsBuilder<TMgr, TArg, TOut>
+            public readonly struct TailBuilder : ISelectOptionsBuilder<TMgr, TOut>
             {
                 private readonly TOut parent;
                 public TailBuilder(TOut parent) => this.parent = parent;
@@ -139,7 +138,7 @@ namespace Lysionium
                     return parent;
                 }
 
-                public TOut Option(ISelectOption<TMgr, TArg> option)
+                public TOut Option(ISelectOption<TMgr> option)
                 {
                     parent.AssertNotBuilt();
 
@@ -147,7 +146,7 @@ namespace Lysionium
                     return parent;
                 }
 
-                TOut ISelectOptionsBuilder<TMgr, TArg, TOut>.Option() => parent;
+                TOut ISelectOptionsBuilder<TMgr, TOut>.Option() => parent;
             }
         }
 

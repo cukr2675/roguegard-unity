@@ -3,17 +3,11 @@ using System.Linq;
 
 namespace Lysionium
 {
-    /// <inheritdoc/>
-    public class VariableWidgetsMenuViewData<TMgr> : VariableWidgetsMenuViewData<TMgr, IListuiArg>
-        where TMgr : IListuiManager
-    { }
-
     /// <summary>
     /// 項目数が可変のウィジェットメニュー向け ViewData
     /// </summary>
-    public class VariableWidgetsMenuViewData<TMgr, TArg> : ListViewData<object, TMgr, TArg>
+    public class VariableWidgetsMenuViewData<TMgr> : ListViewData<object, TMgr>
         where TMgr : IListuiManager
-        where TArg : IListuiArg
     {
         public System.Func<TMgr, IListHandlerSubview> WidgetsSubviewSelector { get; set; }
             = manager => (manager as IDefaultSubviewTable)?.Widgets;
@@ -21,39 +15,39 @@ namespace Lysionium
             = manager => (manager as IDefaultSubviewTable)?.CaptionBox;
         public System.Func<TMgr, IListHandlerSubview> BackAnchorSubviewSelector { get; set; }
             = manager => (manager as IDefaultSubviewTable)?.BackAnchor;
-        public SelectOptionList<TMgr, TArg> BackAnchorList { get; set; } = new(_ => _.BackIfReflectable());
+        public SelectOptionList<TMgr> BackAnchorList { get; set; } = new(_ => _.BackIfReflectable());
 
         private object prevViewStateHolder;
         private ISubviewStateProvider primaryCommandSubviewStateProvider;
         private ISubviewStateProvider captionBoxSubviewStateProvider;
         private ISubviewStateProvider backAnchorSubviewStateProvider;
 
-        public Builder Show(object[] widgetOptions, TMgr manager, TArg arg, object viewStateHolder = null)
+        public Builder Show(object[] widgetOptions, TMgr manager, object viewStateHolder = null)
         {
-            SetOriginalList(widgetOptions, manager, arg);
-            return ShowCore(manager, arg, viewStateHolder);
+            SetOriginalList(widgetOptions, manager);
+            return ShowCore(manager, viewStateHolder);
         }
 
-        public Builder Show(IReadOnlyList<object> widgetOptions, TMgr manager, TArg arg, object viewStateHolder = null)
+        public Builder Show(IReadOnlyList<object> widgetOptions, TMgr manager, object viewStateHolder = null)
         {
-            SetOriginalList(widgetOptions, manager, arg);
-            return ShowCore(manager, arg, viewStateHolder);
+            SetOriginalList(widgetOptions, manager);
+            return ShowCore(manager, viewStateHolder);
         }
 
-        public Builder Show(System.ReadOnlySpan<object> widgetOptions, TMgr manager, TArg arg, object viewStateHolder = null)
+        public Builder Show(System.ReadOnlySpan<object> widgetOptions, TMgr manager, object viewStateHolder = null)
         {
-            SetOriginalList(widgetOptions, manager, arg);
-            return ShowCore(manager, arg, viewStateHolder);
+            SetOriginalList(widgetOptions, manager);
+            return ShowCore(manager, viewStateHolder);
         }
 
-        private Builder ShowCore(TMgr manager, TArg arg, object viewStateHolder)
+        private Builder ShowCore(TMgr manager, object viewStateHolder)
         {
             // 必要に応じてスクロール位置をリセット
             if (viewStateHolder != prevViewStateHolder) { ResetSubviewStateProviders(); }
             prevViewStateHolder = viewStateHolder;
 
-            if (TryShowSubviews(manager, arg)) return null;
-            else return new Builder(this, manager, arg);
+            if (TryShowSubviews(manager)) return null;
+            else return new Builder(this, manager);
         }
 
         protected virtual void ResetSubviewStateProviders()
@@ -63,19 +57,19 @@ namespace Lysionium
             backAnchorSubviewStateProvider?.Reset();
         }
 
-        protected override void ShowSubviews(TMgr manager, TArg arg)
+        protected override void ShowSubviews(TMgr manager)
         {
             WidgetsSubviewSelector?.Invoke(manager)?.Show(
-                List, SelectOptionViewItemHandler<TMgr, TArg>.Instance, manager, arg, ref primaryCommandSubviewStateProvider, onHide: OnHide);
+                List, SelectOptionViewItemHandler<TMgr>.Instance, manager, ref primaryCommandSubviewStateProvider, onHide: OnHide);
 
             if (Title != null)
             {
                 CaptionBoxSubviewSelector?.Invoke(manager)?.Show(
-                    Title, manager, arg, ref captionBoxSubviewStateProvider);
+                    Title, manager, ref captionBoxSubviewStateProvider);
             }
 
             BackAnchorSubviewSelector?.Invoke(manager)?.Show(
-                BackAnchorList, manager, arg, ref backAnchorSubviewStateProvider);
+                BackAnchorList, manager, ref backAnchorSubviewStateProvider);
         }
 
         public virtual void Hide(TMgr manager, bool back)
@@ -85,10 +79,10 @@ namespace Lysionium
             BackAnchorSubviewSelector?.Invoke(manager)?.Hide(back);
         }
 
-        public class Builder : BaseListBuilder<VariableWidgetsMenuViewData<TMgr, TArg>, Builder>
+        public class Builder : BaseListBuilder<VariableWidgetsMenuViewData<TMgr>, Builder>
         {
-            public Builder(VariableWidgetsMenuViewData<TMgr, TArg> parent, TMgr manager, TArg arg)
-                : base(parent, manager, arg)
+            public Builder(VariableWidgetsMenuViewData<TMgr> parent, TMgr manager)
+                : base(parent, manager)
             {
             }
 
@@ -106,18 +100,16 @@ namespace Lysionium
 
     //public static class WidgetListBuilderExtensions
     //{
-    //    public static VariableWidgetsMenuViewData<TMgr, TArg>.Builder Stack<TMgr, TArg>(
-    //        this VariableWidgetsMenuViewData<TMgr, TArg>.Builder.HeadBuilder builder, params object[] items)
+    //    public static VariableWidgetsMenuViewData<TMgr>.Builder Stack<TMgr>(
+    //        this VariableWidgetsMenuViewData<TMgr>.Builder.HeadBuilder builder, params object[] items)
     //        where TMgr : IListuiManager
-    //        where TArg : IListuiArg
     //    {
     //        return builder.Append(StackWidgetOption.Create(items.Select(x => ("1*", x)).ToArray()));
     //    }
 
-    //    public static VariableWidgetsMenuViewData<TMgr, TArg>.Builder Stack<TMgr, TArg>(
-    //        this VariableWidgetsMenuViewData<TMgr, TArg>.Builder.TailBuilder builder, params object[] items)
+    //    public static VariableWidgetsMenuViewData<TMgr>.Builder Stack<TMgr>(
+    //        this VariableWidgetsMenuViewData<TMgr>.Builder.TailBuilder builder, params object[] items)
     //        where TMgr : IListuiManager
-    //        where TArg : IListuiArg
     //    {
     //        return builder.Append(StackWidgetOption.Create(items.Select(x => ("1*", x)).ToArray()));
     //    }

@@ -15,7 +15,7 @@ namespace RoguegardUnity
         [SerializeField] private WebOtherAudioPlayHandler _audioPlayHandler = null;
         [SerializeField] private StatsSubview _stats = null;
         [SerializeField] private FaceSubview _face = null;
-        public override IListHandlerSubview Face => _face;
+        public override ICharacterCreationElementsSubview Face => _face;
         [SerializeField] private SummarySubview _summary = null;
         public override ISummaryElementsSubview Summary => _summary;
         [SerializeField] private TextEditorSubview _textEditor = null;
@@ -25,7 +25,7 @@ namespace RoguegardUnity
         [SerializeField] private PaintSubview _paint = null;
         public override IPaintElementsSubview Paint => _paint;
         [SerializeField] private DopesheetSubview _dopesheet = null;
-        public override IListHandlerSubview Dopesheet => _dopesheet;
+        public override ICharacterCreationElementsSubview Dopesheet => _dopesheet;
 
         public StatsSubview Stats => _stats;
 
@@ -59,7 +59,7 @@ namespace RoguegardUnity
 
         internal void Initialize(RogueSpriteRendererPool rendererPool)
         {
-            BackOption = SelectOption.Create<MMgrBase, MArg>("<", (manager, arg) => manager.PopScreen(), "Cancel click:Cancel");
+            BackOption = SelectOption.Create<MMgrBase>("<", m => m.PopScreen(), "Cancel click:Cancel");
 
             CommonInit();
             var objCommandMenuScreen = new ObjCommandMenuScreen();
@@ -81,8 +81,8 @@ namespace RoguegardUnity
 
             {
                 ISubviewStateProvider _ = null;
-                MessageBox.SetText("", this, null, ref _);
-                LongMessage.SetText("", this, null, ref _);
+                MessageBox.SetText("", this, ref _);
+                LongMessage.SetText("", this, ref _);
             }
             EventManager = new RogueListuiEventManager(new MessageController(MessageBox, LongMessage), _audioPlayHandler);
         }

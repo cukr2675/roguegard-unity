@@ -7,38 +7,39 @@ namespace RoguegardUnity
 {
     public class TakeOutOfContainerCommandMenuScreen : RogueListuiScreen
     {
-        private readonly MainMenuViewData<MMgr, MArg> view = new()
+        private readonly MainMenuViewData<MMgr> view = new()
         {
             PrimaryCommandSubviewSelector = m => m.SecondaryCommand,
         };
 
-        public override bool IsIncremental => true;
-
-        public override void OpenScreen(MMgr manager, MArg arg)
+        public TakeOutOfContainerCommandMenuScreen()
         {
-            view.Show(manager, arg)
+            OnOpenScreen += (manager) =>
+            {
+                view.Show(manager)
                 ?
-                .Option("取り出す", (manager, arg) =>
+                .Option("取り出す", (manager) =>
                 {
                     manager.Done();
 
-                    var containerInfo = ContainerInfo.GetInfo(arg.Arg.TargetObj);
-                    default(IActiveRogueMethodCaller).TakeOut(arg.Self, arg.Arg.TargetObj, containerInfo, arg.Arg.Tool, 0f);
+                    var containerInfo = ContainerInfo.GetInfo(Arg.Arg.TargetObj);
+                    default(IActiveRogueMethodCaller).TakeOut(Arg.Self, Arg.Arg.TargetObj, containerInfo, Arg.Arg.Tool, 0f);
 
-                    RogueDevice.Add(DeviceKw.AppendText, arg.Arg.TargetObj);
+                    RogueDevice.Add(DeviceKw.AppendText, Arg.Arg.TargetObj);
                     RogueDevice.Add(DeviceKw.AppendText, "から");
-                    RogueDevice.Add(DeviceKw.AppendText, arg.Arg.Tool);
+                    RogueDevice.Add(DeviceKw.AppendText, Arg.Arg.Tool);
                     RogueDevice.Add(DeviceKw.AppendText, "を取り出した\n");
                 }, "PickUp")
 
                 .Back()
 
                 .Build();
-        }
+            };
 
-        public override void CloseScreenView(MMgr manager, bool back)
-        {
-            view.Hide(manager, back);
+            OnCloseScreenView += (manager, back) =>
+            {
+                view.Hide(manager, back);
+            };
         }
     }
 }

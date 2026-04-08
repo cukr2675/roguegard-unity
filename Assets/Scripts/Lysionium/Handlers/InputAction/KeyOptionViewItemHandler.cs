@@ -4,61 +4,52 @@ namespace Lysionium
 {
     // 誤って使用することを避けるため、省略版は実装しない
     ///// <inheritdoc/>
-    //public class KeyOptionViewItemHandler : KeyOptionViewItemHandler<IListuiManager, IListuiArg>
-    //{
-    //}
-    ///// <inheritdoc/>
-    //public class KeyOptionViewItemHandler<TMgr> : KeyOptionViewItemHandler<TMgr, IListuiArg>
+    //public class KeyOptionViewItemHandler : KeyOptionViewItemHandler<IListuiManager>
     //{
     //}
 
-    public class KeyOptionViewItemHandler<TMgr, TArg> : IInputActionViewItemHandler
+    public class KeyOptionViewItemHandler<TMgr> : IInputActionViewItemHandler
     {
-        public static KeyOptionViewItemHandler<TMgr, TArg> Instance { get; } = new();
+        public static KeyOptionViewItemHandler<TMgr> Instance { get; } = new();
 
-        public string GetName(object item, IListuiManager manager, IListuiArg arg)
+        public string GetName(object item, IListuiManager manager)
         {
-            if (LuiAssert.Type<IKeyOption<TMgr, TArg>>(item, out var keyOption) ||
-                LuiAssert.Type<TMgr>(manager, out var tMgr) ||
-                LuiAssert.Type<TArg>(arg, out var tArg)) return manager.ErrorOption.GetName(manager, arg);
+            if (LuiAssert.Type<IKeyOption<TMgr>>(item, out var keyOption) ||
+                LuiAssert.Type<TMgr>(manager, out var tMgr)) return manager.ErrorOption.GetName(manager);
 
-            return keyOption.GetName(tMgr, tArg);
+            return keyOption.GetName(tMgr);
         }
 
-        public string GetStyle(object item, IListuiManager manager, IListuiArg arg)
+        public string GetStyle(object item, IListuiManager manager)
         {
-            if (LuiAssert.Type<IKeyOption<TMgr, TArg>>(item, out var keyOption) ||
-                LuiAssert.Type<TMgr>(manager, out var tMgr) ||
-                LuiAssert.Type<TArg>(arg, out var tArg)) return manager.ErrorOption.GetStyle(manager, arg);
+            if (LuiAssert.Type<IKeyOption<TMgr>>(item, out var keyOption) ||
+                LuiAssert.Type<TMgr>(manager, out var tMgr)) return manager.ErrorOption.GetStyle(manager);
 
-            return keyOption.GetStyle(tMgr, tArg);
+            return keyOption.GetStyle(tMgr);
         }
 
-        public void Started(object item, IListuiManager manager, IListuiArg arg, InputAction.CallbackContext context)
+        public void Started(object item, IListuiManager manager, InputAction.CallbackContext context)
         {
-            if (LuiAssert.Type<IKeyOption<TMgr, TArg>>(item, out var keyOption, manager) ||
-                LuiAssert.Type<TMgr>(manager, out var tMgr, manager) ||
-                LuiAssert.Type<TArg>(arg, out var tArg, manager)) return;
+            if (LuiAssert.Type<IKeyOption<TMgr>>(item, out var keyOption, manager) ||
+                LuiAssert.Type<TMgr>(manager, out var tMgr, manager)) return;
 
-            keyOption.Started(tMgr, tArg, context);
+            keyOption.Started(tMgr, context);
         }
 
-        public void Performed(object item, IListuiManager manager, IListuiArg arg, InputAction.CallbackContext context)
+        public void Performed(object item, IListuiManager manager, InputAction.CallbackContext context)
         {
-            if (LuiAssert.Type<IKeyOption<TMgr, TArg>>(item, out var keyOption, manager) ||
-                LuiAssert.Type<TMgr>(manager, out var tMgr, manager) ||
-                LuiAssert.Type<TArg>(arg, out var tArg, manager)) return;
+            if (LuiAssert.Type<IKeyOption<TMgr>>(item, out var keyOption, manager) ||
+                LuiAssert.Type<TMgr>(manager, out var tMgr, manager)) return;
 
-            keyOption.Performed(tMgr, tArg, context);
+            keyOption.Performed(tMgr, context);
         }
 
-        public void Canceled(object item, IListuiManager manager, IListuiArg arg, InputAction.CallbackContext context)
+        public void Canceled(object item, IListuiManager manager, InputAction.CallbackContext context)
         {
-            if (LuiAssert.Type<IKeyOption<TMgr, TArg>>(item, out var keyOption, manager) ||
-                LuiAssert.Type<TMgr>(manager, out var tMgr, manager) ||
-                LuiAssert.Type<TArg>(arg, out var tArg, manager)) return;
+            if (LuiAssert.Type<IKeyOption<TMgr>>(item, out var keyOption, manager) ||
+                LuiAssert.Type<TMgr>(manager, out var tMgr, manager)) return;
 
-            keyOption.Canceled(tMgr, tArg, context);
+            keyOption.Canceled(tMgr, context);
         }
     }
 }

@@ -1,13 +1,12 @@
 namespace Lysionium
 {
-    public class BackSelectOption<TMgr, TArg> : ISelectOption<TMgr, TArg>
-        where TMgr : IBackOptionProviderListuiManager<TMgr, TArg>
-        where TArg : IListuiArg
+    public class BackSelectOption<TMgr> : ISelectOption<TMgr>
+        where TMgr : IBackOptionProviderListuiManager<TMgr>
     {
         private readonly string name;
         private readonly string style;
 
-        public static BackSelectOption<TMgr, TArg> Instance { get; } = new();
+        public static BackSelectOption<TMgr> Instance { get; } = new();
 
         public BackSelectOption(string name = null, string style = null)
         {
@@ -15,59 +14,58 @@ namespace Lysionium
             this.style = style;
         }
 
-        string ISelectOption<TMgr, TArg>.GetName(TMgr manager, TArg arg) => name ?? manager.BackOption.GetName(manager, arg);
-        string ISelectOption<TMgr, TArg>.GetStyle(TMgr manager, TArg arg) => style ?? manager.BackOption.GetStyle(manager, arg);
-        void ISelectOption<TMgr, TArg>.Click(TMgr manager, TArg arg) => manager.BackOption.Click(manager, arg);
+        string ISelectOption<TMgr>.GetName(TMgr manager) => name ?? manager.BackOption.GetName(manager);
+        string ISelectOption<TMgr>.GetStyle(TMgr manager) => style ?? manager.BackOption.GetStyle(manager);
+        void ISelectOption<TMgr>.Click(TMgr manager) => manager.BackOption.Click(manager);
     }
 
     /// <summary>
-    /// リフレクションで <see cref="BackSelectOption{TMgr, TArg}"/> を取得するクラス
+    /// リフレクションで <see cref="BackSelectOption{TMgr}"/> を取得するクラス
     /// </summary>
     internal static class BackSelectOption
     {
-        internal static bool TryCreate<TMgr, TArg>(out ISelectOption<TMgr, TArg> backOption, string name = null, string style = null)
+        internal static bool TryCreate<TMgr>(out ISelectOption<TMgr> backOption, string name = null, string style = null)
             where TMgr : IListuiManager
-            where TArg : IListuiArg
         {
             // 引数なしで一度取得成功している場合は即キャッシュを返す
-            if (name == null && style == null && Cache<TMgr, TArg>.isChached)
+            if (name == null && style == null && Cache<TMgr>.isChached)
             {
-                backOption = Cache<TMgr, TArg>.instance;
+                backOption = Cache<TMgr>.instance;
                 return true;
             }
 
             // 使用可能な型を判定
-            if (!typeof(IBackOptionProviderListuiManager<TMgr, TArg>).IsAssignableFrom(typeof(TMgr)))
+            if (!typeof(IBackOptionProviderListuiManager<TMgr>).IsAssignableFrom(typeof(TMgr)))
             {
                 backOption = default;
                 if (name == null && style == null)
                 {
-                    Cache<TMgr, TArg>.instance = backOption; // 引数未指定時はキャッシュ
-                    Cache<TMgr, TArg>.isChached = true;
+                    Cache<TMgr>.instance = backOption; // 引数未指定時はキャッシュ
+                    Cache<TMgr>.isChached = true;
                 }
                 return false;
             }
 
-            var genericType = typeof(BackSelectOption<,>).MakeGenericType(typeof(TMgr), typeof(TArg));
+            var genericType = typeof(BackSelectOption<>).MakeGenericType(typeof(TMgr));
             if (name == null && style == null)
             {
                 var instance = genericType.GetProperty("Instance").GetValue(null);
-                backOption = (ISelectOption<TMgr, TArg>)instance;
-                Cache<TMgr, TArg>.instance = backOption; // 引数未指定時はキャッシュ
-                Cache<TMgr, TArg>.isChached = true;
+                backOption = (ISelectOption<TMgr>)instance;
+                Cache<TMgr>.instance = backOption; // 引数未指定時はキャッシュ
+                Cache<TMgr>.isChached = true;
                 return true;
             }
             else
             {
                 var instance = System.Activator.CreateInstance(genericType, name, style);
-                backOption = (ISelectOption<TMgr, TArg>)instance;
+                backOption = (ISelectOption<TMgr>)instance;
                 return true;
             }
         }
 
-        private static class Cache<TMgr, TArg>
+        private static class Cache<TMgr>
         {
-            public static ISelectOption<TMgr, TArg> instance;
+            public static ISelectOption<TMgr> instance;
             public static bool isChached;
         }
     }

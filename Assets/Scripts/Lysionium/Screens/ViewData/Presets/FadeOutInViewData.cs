@@ -2,25 +2,19 @@ using System.Collections.Generic;
 
 namespace Lysionium
 {
-    /// <inheritdoc/>
-    public class FadeOutInViewData<TMgr> : FadeOutInViewData<TMgr, IListuiArg>
-        where TMgr : IListuiManager
-    { }
-
     /// <summary>
     /// 画面のフェードアウト/フェードインを扱う ViewData
     /// </summary>
-    public class FadeOutInViewData<TMgr, TArg> : ViewData<TMgr, TArg>
+    public class FadeOutInViewData<TMgr> : ViewData<TMgr>
         where TMgr : IListuiManager
-        where TArg : IListuiArg
     {
         public System.Func<TMgr, IListHandlerSubview> FadeMaskSubviewSelector { get; set; }
             = manager => (manager as IDefaultSubviewTable)?.FadeMask;
 
         private object prevViewStateHolder;
         private ISubviewStateProvider fadeMaskSubviewStateProvider;
-        private event ClickItemHandler<TMgr, TArg> HandleFadeOut;
-        private event ClickItemHandler<TMgr, TArg> HandleFadeIn;
+        private event ListuiEventHandler<TMgr> HandleFadeOut;
+        private event ListuiEventHandler<TMgr> HandleFadeIn;
 
         private readonly List<object> widgetOptions = new();
         private readonly ListuiEventHandler onFadeOutAnimation;
@@ -28,24 +22,22 @@ namespace Lysionium
 
         public FadeOutInViewData()
         {
-            onFadeOutAnimation = (manager, arg) =>
+            onFadeOutAnimation = (manager) =>
             {
                 if (LuiAssert.Type<TMgr>(manager, out var tMgr)) return;
-                if (LuiAssert.Type<TArg>(arg, out var tArg)) return;
 
-                HandleFadeOut?.Invoke(tMgr, tArg);
+                HandleFadeOut?.Invoke(tMgr);
             };
 
-            onFadeInAnimation = (manager, arg) =>
+            onFadeInAnimation = (manager) =>
             {
                 if (LuiAssert.Type<TMgr>(manager, out var tMgr)) return;
-                if (LuiAssert.Type<TArg>(arg, out var tArg)) return;
 
-                HandleFadeIn?.Invoke(tMgr, tArg);
+                HandleFadeIn?.Invoke(tMgr);
             };
         }
 
-        public Builder FadeOut(TMgr manager, TArg arg, object viewStateHolder = null)
+        public Builder FadeOut(TMgr manager, object viewStateHolder = null)
         {
             if (manager == null) throw new System.ArgumentNullException(nameof(manager));
 
@@ -56,14 +48,14 @@ namespace Lysionium
             }
             prevViewStateHolder = viewStateHolder;
 
-            if (TryShowSubviews(manager, arg)) return null;
-            else return new Builder(this, manager, arg);
+            if (TryShowSubviews(manager)) return null;
+            else return new Builder(this, manager);
         }
 
-        protected override void ShowSubviews(TMgr manager, TArg arg)
+        protected override void ShowSubviews(TMgr manager)
         {
             FadeMaskSubviewSelector?.Invoke(manager)?.Show(
-                widgetOptions, SelectOptionViewItemHandler<TMgr, TArg>.Instance, manager, arg, ref fadeMaskSubviewStateProvider,
+                widgetOptions, SelectOptionViewItemHandler<TMgr>.Instance, manager, ref fadeMaskSubviewStateProvider,
                 onFadeOutAnimation, OnHide);
         }
 
@@ -72,10 +64,10 @@ namespace Lysionium
             FadeMaskSubviewSelector?.Invoke(manager)?.Hide(back, onFadeInAnimation);
         }
 
-        public class Builder : BaseBuilder<FadeOutInViewData<TMgr, TArg>, Builder>
+        public class Builder : BaseBuilder<FadeOutInViewData<TMgr>, Builder>
         {
-            public Builder(FadeOutInViewData<TMgr, TArg> parent, TMgr manager, TArg arg)
-                : base(parent, manager, arg)
+            public Builder(FadeOutInViewData<TMgr> parent, TMgr manager)
+                : base(parent, manager)
             {
             }
 
@@ -87,7 +79,7 @@ namespace Lysionium
                 return this;
             }
 
-            public Builder OnFadeOutCompleted(ClickItemHandler<TMgr, TArg> onFadeOut)
+            public Builder OnFadeOutCompleted(ListuiEventHandler<TMgr> onFadeOut)
             {
                 AssertNotBuilt();
 
@@ -95,7 +87,7 @@ namespace Lysionium
                 return this;
             }
 
-            public Builder OnFadeInCompleted(ClickItemHandler<TMgr, TArg> onFadeIn)
+            public Builder OnFadeInCompleted(ListuiEventHandler<TMgr> onFadeIn)
             {
                 AssertNotBuilt();
 

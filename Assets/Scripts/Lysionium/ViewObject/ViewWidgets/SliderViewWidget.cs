@@ -36,10 +36,10 @@ namespace Lysionium.Views
         {
             slider.minValue = widgetOption.MinValue;
             slider.maxValue = widgetOption.MaxValue;
-            slider.SetValueWithoutNotify(widgetOption.GetValue(_parent.Manager, _parent.Arg));
+            slider.SetValueWithoutNotify(widgetOption.GetValue(_parent.Manager));
             slider.onValueChanged.AddListener(value =>
             {
-                slider.SetValueWithoutNotify(widgetOption.HandleValueChanged(_parent.Manager, _parent.Arg, value));
+                slider.SetValueWithoutNotify(widgetOption.HandleValueChanged(_parent.Manager, value));
             });
         }
     }

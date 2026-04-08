@@ -6,28 +6,24 @@ namespace RoguegardUnity
 {
     public class PartyMenu : RogueListuiScreen
     {
-        private readonly ScrollMenuViewData<RogueObj, MMgr, MArg> view = new()
+        private readonly ScrollMenuViewData<RogueObj, MMgr> view = new()
         {
             Title = ":Party",
         };
 
-        private readonly PartyMemberMenu memberMenu;
-
         public PartyMenu(PartyMemberMenu memberMenu)
         {
-            this.memberMenu = memberMenu;
-        }
-
-        public override void OpenScreen(MMgr manager, MArg arg)
-        {
-            view.Show(arg.Self.Main.Stats.Party.Members, manager, arg)
+            OnOpenScreen += (manager) =>
+            {
+                view.Show(Arg.Self.Main.Stats.Party.Members, manager)
                 ?
-                .OnClick((partyMember, manager, arg) =>
+                .OnClick((partyMember, manager) =>
                 {
                     // 選択したパーティメンバーの情報と選択肢を表示する
-                    manager.PushScreen(memberMenu, arg.Self, targetObj: partyMember);
+                    manager.PushScreen(memberMenu, Arg.Self, targetObj: partyMember);
                 })
                 .Build();
+            };
         }
     }
 }

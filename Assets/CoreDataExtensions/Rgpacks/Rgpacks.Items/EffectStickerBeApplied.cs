@@ -23,30 +23,33 @@ namespace Roguegard.Rgpacks
 
         private class EffectStickerScreen : RogueListuiScreen
         {
-            private readonly VariableWidgetsMenuViewData<MMgr, MArg> view = new()
+            private readonly VariableWidgetsMenuViewData<MMgr> view = new()
             {
             };
 
-            public override void OpenScreen(MMgr manager, MArg arg)
+            public EffectStickerScreen()
             {
-                view.Show(System.Array.Empty<object>(), manager, arg)
+                OnOpenScreen += (manager) =>
+                {
+                    view.Show(System.Array.Empty<object>(), manager)
                     ?
-                    .TailStack("アセットID", InputFieldWidgetOption.Create<MMgr, MArg>(
-                        (manager, arg) => NamingEffect.Get(arg.Arg.TargetObj)?.Naming,
-                        (manager, arg, value) => {
-                            var sticker = arg.Arg.TargetObj;
+                    .TailStack("アセットID", InputFieldWidgetOption.Create<MMgr>(
+                        _ => NamingEffect.Get(Arg.Arg.TargetObj)?.Naming,
+                        value => {
+                            var sticker = Arg.Arg.TargetObj;
                             default(IActiveRogueMethodCaller).Affect(sticker, 1f, NamingEffect.Callback);
                             return NamingEffect.Get(sticker).Naming = value;
                         }))
 
                     .VarOnce(out var cmnScreen, new PropertiedCmnMenuScreen())
-                    .Tail.Option("Update", (manager, arg) => manager.PushScreen(cmnScreen, arg.Self, other: EffectStickerInfo.Get(arg.Arg.TargetObj).Update))
+                    .Tail.Option("Update", (manager) => manager.PushScreen(cmnScreen, Arg.Self, other: EffectStickerInfo.Get(Arg.Arg.TargetObj).Update))
 
-                    .TailStack("スプライト", InputFieldWidgetOption.Create<MMgr, MArg>(
-                        (manager, arg) => EffectStickerInfo.Get(arg.Arg.TargetObj).Sprite,
-                        (manager, arg, value) =>  EffectStickerInfo.Get(arg.Arg.TargetObj).Sprite = value))
+                    .TailStack("スプライト", InputFieldWidgetOption.Create<MMgr>(
+                        _ => EffectStickerInfo.Get(Arg.Arg.TargetObj).Sprite,
+                        value =>  EffectStickerInfo.Get(Arg.Arg.TargetObj).Sprite = value))
 
                     .Build();
+                };
             }
         }
     }

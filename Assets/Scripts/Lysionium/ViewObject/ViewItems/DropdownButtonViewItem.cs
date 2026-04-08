@@ -34,7 +34,7 @@ namespace Lysionium.Views
             button.onClick.AddListener(() =>
             {
                 var rectTransform = (RectTransform)transform;
-                var children = treeHandler.GetChildren(item, Manager, Arg);
+                var children = treeHandler.GetChildren(item, Manager);
                 if (children != null && children.Count >= 1)
                 {
                     expandHandler(children, rectTransform.rect);
@@ -44,7 +44,7 @@ namespace Lysionium.Views
                 // ドロップダウンの位置を更新
                 Manager.SetInvisibleDropdownPosition(rectTransform.rect);
 
-                handler.Click(item, Manager, Arg);
+                handler.Click(item, Manager);
             });
 
             TryGetComponent(out animator);
@@ -71,7 +71,7 @@ namespace Lysionium.Views
 
             if (_icon != null && handler is IColoredIconViewItemHandler iconViewItemHandler)
             {
-                iconViewItemHandler.GetIcon(item, Manager, Arg, out var iconSprite, out var iconColor);
+                iconViewItemHandler.GetIcon(item, Manager, out var iconSprite, out var iconColor);
                 if (iconSprite != null)
                 {
                     _icon.sprite = iconSprite;
@@ -86,8 +86,8 @@ namespace Lysionium.Views
                 }
             }
 
-            var style = handler.GetStyle(item, Manager, Arg) ?? _defaultStyle;
-            styleEvaluator.Bind(item, handler, Manager, Arg, Parent);
+            var style = handler.GetStyle(item, Manager) ?? _defaultStyle;
+            styleEvaluator.Bind(item, handler, Manager, Parent);
             styleEvaluator.SetStyle(style, animator, _keybindLabel, clickActionPerformed);
         }
 

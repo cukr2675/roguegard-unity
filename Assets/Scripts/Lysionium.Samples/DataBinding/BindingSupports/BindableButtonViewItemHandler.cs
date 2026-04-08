@@ -1,8 +1,7 @@
 namespace Lysionium.Samples
 {
-    public class BindableButtonViewItemHandler<TItem, TMgr, TArg> : ButtonViewItemHandler<TItem, TMgr, TArg>, IBindableViewItemHandler
+    public class BindableButtonViewItemHandler<TItem, TMgr> : ButtonViewItemHandler<TItem, TMgr>, IBindableViewItemHandler
         where TMgr : IListuiManager
-        where TArg : IListuiArg
     {
         public System.Func<NotifyItemHandler, DataBinderCache, IDataBinder> GetBinder { get; set; }
 

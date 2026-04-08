@@ -1,52 +1,47 @@
 namespace Lysionium
 {
-    public class FlickableOptionViewItemHandler<TMgr, TArg> : IFlickableViewItemHandler
+    public class FlickableOptionViewItemHandler<TMgr> : IFlickableViewItemHandler
     {
-        public static FlickableOptionViewItemHandler<TMgr, TArg> Instance { get; } = new();
+        public static FlickableOptionViewItemHandler<TMgr> Instance { get; } = new();
 
-        public string GetName(object item, IListuiManager manager, IListuiArg arg)
+        public string GetName(object item, IListuiManager manager)
         {
-            if (LuiAssert.Type<IFlickableOption<TMgr, TArg>>(item, out var flickableOption) ||
-                LuiAssert.Type<TMgr>(manager, out var tMgr) ||
-                LuiAssert.Type<TArg>(arg, out var tArg)) return manager.ErrorOption.GetName(manager, arg);
+            if (LuiAssert.Type<IFlickableOption<TMgr>>(item, out var flickableOption) ||
+                LuiAssert.Type<TMgr>(manager, out var tMgr)) return manager.ErrorOption.GetName(manager);
 
-            return flickableOption.GetName(tMgr, tArg);
+            return flickableOption.GetName(tMgr);
         }
 
-        public string GetStyle(object item, IListuiManager manager, IListuiArg arg)
+        public string GetStyle(object item, IListuiManager manager)
         {
-            if (LuiAssert.Type<IFlickableOption<TMgr, TArg>>(item, out var flickableOption) ||
-                LuiAssert.Type<TMgr>(manager, out var tMgr) ||
-                LuiAssert.Type<TArg>(arg, out var tArg)) return manager.ErrorOption.GetStyle(manager, arg);
+            if (LuiAssert.Type<IFlickableOption<TMgr>>(item, out var flickableOption) ||
+                LuiAssert.Type<TMgr>(manager, out var tMgr)) return manager.ErrorOption.GetStyle(manager);
 
-            return flickableOption.GetStyle(tMgr, tArg);
+            return flickableOption.GetStyle(tMgr);
         }
 
-        public void KeyDown(object item, IListuiManager manager, IListuiArg arg)
+        public void KeyDown(object item, IListuiManager manager)
         {
-            if (LuiAssert.Type<IFlickableOption<TMgr, TArg>>(item, out var flickableOption, manager) ||
-                LuiAssert.Type<TMgr>(manager, out var tMgr, manager) ||
-                LuiAssert.Type<TArg>(arg, out var tArg, manager)) return;
+            if (LuiAssert.Type<IFlickableOption<TMgr>>(item, out var flickableOption, manager) ||
+                LuiAssert.Type<TMgr>(manager, out var tMgr, manager)) return;
 
-            flickableOption.KeyDown(tMgr, tArg);
+            flickableOption.KeyDown(tMgr);
         }
 
-        public void Expand(object item, IListuiManager manager, IListuiArg arg)
+        public void Expand(object item, IListuiManager manager)
         {
-            if (LuiAssert.Type<IFlickableOption<TMgr, TArg>>(item, out var flickableOption, manager) ||
-                LuiAssert.Type<TMgr>(manager, out var tMgr, manager) ||
-                LuiAssert.Type<TArg>(arg, out var tArg, manager)) return;
+            if (LuiAssert.Type<IFlickableOption<TMgr>>(item, out var flickableOption, manager) ||
+                LuiAssert.Type<TMgr>(manager, out var tMgr, manager)) return;
 
-            flickableOption.Expand(tMgr, tArg);
+            flickableOption.Expand(tMgr);
         }
 
-        public void KeyUp(object item, IListuiManager manager, IListuiArg arg)
+        public void KeyUp(object item, IListuiManager manager)
         {
-            if (LuiAssert.Type<IFlickableOption<TMgr, TArg>>(item, out var flickableOption, manager) ||
-                LuiAssert.Type<TMgr>(manager, out var tMgr, manager) ||
-                LuiAssert.Type<TArg>(arg, out var tArg, manager)) return;
+            if (LuiAssert.Type<IFlickableOption<TMgr>>(item, out var flickableOption, manager) ||
+                LuiAssert.Type<TMgr>(manager, out var tMgr, manager)) return;
 
-            flickableOption.KeyUp(tMgr, tArg);
+            flickableOption.KeyUp(tMgr);
         }
     }
 }

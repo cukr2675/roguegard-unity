@@ -85,7 +85,7 @@ namespace Lysionium.Views
                 AngleDegree = targetAngle;
                 var onEndRotateAngle = OnEndRotateAngle;
                 OnEndRotateAngle = null;
-                onEndRotateAngle?.Invoke(Manager, Arg);
+                onEndRotateAngle?.Invoke(Manager);
             }
 
             // アングルが変わっていなければ更新しない
@@ -115,8 +115,7 @@ namespace Lysionium.Views
         }
 
         public override void SetListHandler(
-            IReadOnlyList<object> list, IViewItemHandler handler, IListuiManager manager, IListuiArg arg,
-            ref ISubviewStateProvider stateProvider)
+            IReadOnlyList<object> list, IViewItemHandler handler, IListuiManager manager, ref ISubviewStateProvider stateProvider)
         {
             if (stateProvider == null) { stateProvider = new StateProvider(); }
             if (!(stateProvider is StateProvider local)) throw new System.ArgumentException(
@@ -136,7 +135,7 @@ namespace Lysionium.Views
             {
                 this.list.Add(list[i]);
             }
-            SetArg(manager, arg);
+            Manager = manager;
             InitViewItems();
 
             // 新しい StateProvider に切り替える

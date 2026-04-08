@@ -1,7 +1,7 @@
 namespace Lysionium
 {
-    public interface IViewItemFilterBuilder<TItem, TMgr, TArg, TBuilder>
+    public interface IViewItemFilterBuilder<TItem, TMgr, TBuilder>
     {
-        TBuilder Filter(System.Func<TItem, TMgr, TArg, bool> selector);
+        TBuilder Filter(System.Func<TItem, TMgr, bool> selector);
     }
 }

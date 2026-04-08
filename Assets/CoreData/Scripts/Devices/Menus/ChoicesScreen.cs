@@ -5,28 +5,30 @@ namespace Roguegard.Device
     /// <summary>
     /// メッセージと選択肢のメニュー画面
     /// </summary>
-    public class ChoicesScreen : RogueListuiScreen, ISelectOptionsBuilder<MMgr, MArg, ChoicesScreen>
+    public class ChoicesScreen : RogueListuiScreen, ISelectOptionsBuilder<MMgr, ChoicesScreen>
     {
-        private readonly ChoicesScreen<MMgr, MArg> screen;
-
-        public override bool IsIncremental => screen.IsIncremental;
+        private readonly ChoicesScreen<MMgr> screen;
 
         public ChoicesScreen(string message)
         {
-            screen = new ChoicesScreen<MMgr, MArg>(message);
+            screen = new ChoicesScreen<MMgr>(message, isIncremental: true);
+            OnOpenScreen += screen.OpenScreen;
+            OnCloseScreenView += screen.CloseScreenView;
         }
 
-        public ChoicesScreen(System.Func<MMgr, MArg, string> getMessage)
+        public ChoicesScreen(System.Func<MMgr, string> getMessage)
         {
-            screen = new ChoicesScreen<MMgr, MArg>(getMessage);
+            screen = new ChoicesScreen<MMgr>(getMessage, isIncremental: true);
+            OnOpenScreen += screen.OpenScreen;
+            OnCloseScreenView += screen.CloseScreenView;
         }
 
         /// <summary>
         /// 「保存して戻りますか？」のダイアログ画面を生成する
         /// </summary>
         public static ChoicesScreen SaveBackDialog(
-            ClickItemHandler<MMgr, MArg> saveAction,
-            ClickItemHandler<MMgr, MArg> notSaveAction = null)
+            ClickOptionHandler<MMgr> saveAction,
+            ClickOptionHandler<MMgr> notSaveAction = null)
         {
             var selectOption = SaveBackDialog(":SaveBackDialogMsg", ":Overwrite", saveAction, ":DontSave", notSaveAction);
             return selectOption;
@@ -37,50 +39,44 @@ namespace Roguegard.Device
         /// </summary>
         public static ChoicesScreen SaveBackDialog(
             string message,
-            string saveName, ClickItemHandler<MMgr, MArg> saveAction,
-            string notSaveName, ClickItemHandler<MMgr, MArg> notSaveAction)
+            string saveName, ClickOptionHandler<MMgr> saveAction,
+            string notSaveName, ClickOptionHandler<MMgr> notSaveAction)
         {
-            var selectOption = new ChoicesScreen(message)
+            var selectOption = new ChoicesScreen(message);
+            selectOption
 
                 // 保存
                 .Option(saveName, saveAction)
 
                 // 保存しない場合は再度聞く
-                .Option(notSaveName, new ChoicesScreen(":SaveBackDialogMsg::Second").Option(notSaveName, notSaveAction ?? NotSave).Option(":Cancel", Cancel))
+                .Option(
+                    notSaveName,
+                    new ChoicesScreen(":SaveBackDialogMsg::Second").Option(notSaveName, notSaveAction ?? NotSave).Option(":Cancel", Cancel),
+                    () => selectOption.Arg)
 
-                .Option(":Cancel", (manager, arg) => manager.PopScreen());
+                .Option(":Cancel", (manager) => manager.PopScreen());
 
             return selectOption;
         }
 
-        private static void NotSave(MMgr manager, MArg arg)
+        private static void NotSave(MMgr manager)
         {
             // 何もせず閉じる
             manager.PopScreen(3);
         }
 
-        private static void Cancel(MMgr manager, MArg arg)
+        private static void Cancel(MMgr manager)
         {
             // 何もせず閉じる
             manager.PopScreen(2);
         }
 
-        public ChoicesScreen Option(ISelectOption<MMgr, MArg> option)
+        public ChoicesScreen Option(ISelectOption<MMgr> option)
         {
             screen.Option(option);
             return this;
         }
 
-        public override void OpenScreen(MMgr manager, MArg arg)
-        {
-            screen.OpenScreen(manager, arg);
-        }
-
-        public override void CloseScreenView(MMgr manager, bool back)
-        {
-            screen.CloseScreenView(manager, back);
-        }
-
-        ChoicesScreen ISelectOptionsBuilder<MMgr, MArg, ChoicesScreen>.Option() => this;
+        ChoicesScreen ISelectOptionsBuilder<MMgr, ChoicesScreen>.Option() => this;
     }
 }

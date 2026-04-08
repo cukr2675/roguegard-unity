@@ -24,12 +24,12 @@ namespace RoguegardUnity
             this.touchController = touchController;
 
             writeFileScreen = FileSelectionScreen.Save(
-                onSelectFile: (fileInfo, manager, arg) =>
+                onSelectFile: (fileInfo, manager) =>
                 {
                     SaveDelay(manager, fileInfo.FullName, false, scenarioRgpack);
                     scenarioRgpack = null;
                 },
-                onNewFile: (manager, arg) =>
+                onNewFile: (manager) =>
                 {
                     manager.PopScreen();
 
@@ -42,7 +42,7 @@ namespace RoguegardUnity
                 });
 
             readFileScreen = FileSelectionScreen.Load(
-                onSelectFile: (fileInfo, manager, arg) =>
+                onSelectFile: (fileInfo, manager) =>
                 {
                     manager.PopScreen();
 
@@ -282,11 +282,13 @@ namespace RoguegardUnity
         {
             public SaveDeviceEventHandler parent;
 
-            public override void OpenScreen(MMgr inManager, MArg arg)
+            public AutoSaveScreen()
             {
-                var manager = inManager;
-                FileSelectionScreen.ShowSaving(manager);
-                StandardRogueDeviceSave.GetNewAutoSavePath("AutoSave.gard", path => parent.SaveDelay(manager, path, true, null));
+                OnOpenScreen += (manager) =>
+                {
+                    FileSelectionScreen.ShowSaving(manager);
+                    StandardRogueDeviceSave.GetNewAutoSavePath("AutoSave.gard", path => parent.SaveDelay(manager, path, true, null));
+                };
             }
         }
     }

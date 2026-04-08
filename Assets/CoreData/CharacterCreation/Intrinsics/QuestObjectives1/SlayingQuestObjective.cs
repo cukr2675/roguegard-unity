@@ -187,56 +187,62 @@ namespace Roguegard.CharacterCreation
 
         private class RewardsScreen : RogueListuiScreen
         {
-            private readonly SpeechBoxViewData<MMgr, MArg> view = new()
+            private readonly SpeechBoxViewData<MMgr> view = new()
             {
             };
 
-            public override void OpenScreen(MMgr manager, MArg arg)
+            public RewardsScreen()
             {
-                var self = arg.Self;
-                var quest = (DungeonQuest)arg.Arg.Other;
-                
-                var message = new StringBuilder();
-                message.Append(arg.Self.GetName()).Append("は").Append(quest).Append("をクリアした！");
-                if (quest.LootTable.Length >= 1)
+                OnOpenScreen += (manager) =>
                 {
-                    message.Append("{v}その報酬として…");
-                }
-                foreach (var lootTableRow in quest.LootTable)
-                {
-                    var loot = WeightedRogueObjGeneratorUtility.CreateObj(lootTableRow, self, RogueRandom.Primary);
-                    message.Append("{v}").AppendLine();
-                    if (loot.Main.InfoSet.Equals(RoguegardSettings.MoneyInfoSet))
-                    {
-                        message.Append(loot.Stack).Append("G受け取った！");
-                    }
-                    else
-                    {
-                        message.Append(loot).Append("を受け取った！");
-                    }
-                }
+                    var self = Arg.Self;
+                    var quest = (DungeonQuest)Arg.Arg.Other;
 
-                view.Show(message.ToString(), manager, arg)
+                    var message = new StringBuilder();
+                    message.Append(Arg.Self.GetName()).Append("は").Append(quest).Append("をクリアした！");
+                    if (quest.LootTable.Length >= 1)
+                    {
+                        message.Append("{v}その報酬として…");
+                    }
+                    foreach (var lootTableRow in quest.LootTable)
+                    {
+                        var loot = WeightedRogueObjGeneratorUtility.CreateObj(lootTableRow, self, RogueRandom.Primary);
+                        message.Append("{v}").AppendLine();
+                        if (loot.Main.InfoSet.Equals(RoguegardSettings.MoneyInfoSet))
+                        {
+                            message.Append(loot.Stack).Append("G受け取った！");
+                        }
+                        else
+                        {
+                            message.Append(loot).Append("を受け取った！");
+                        }
+                    }
+
+                    view.Show(message.ToString(), manager)
                     ?
-                    .OnCompleted((manager, arg) => manager.Done())
+                    .OnCompleted(m => m.Done())
 
                     .Build();
+                };
             }
         }
 
         private class NotifyScreen : RogueListuiScreen
         {
-            private readonly SpeechBoxViewData<MMgr, MArg> view = new()
+            private readonly SpeechBoxViewData<MMgr> view = new()
             {
             };
 
-            public override void OpenScreen(MMgr manager, MArg arg)
+            public NotifyScreen()
             {
-                view.Show($"目標の階に到達しました{{v}}", manager, arg)
+                OnOpenScreen += (manager) =>
+                {
+                    view.Show($"目標の階に到達しました{{v}}", manager)
                     ?
-                    .OnCompleted((manager, arg) => manager.Done())
+                    .OnCompleted(m => m.Done())
 
                     .Build();
+                };
             }
         }
     }

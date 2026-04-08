@@ -66,7 +66,7 @@ namespace Lysionium.Views
         {
             var tempOnHide = OnHide;
             OnHide = null;
-            tempOnHide?.Invoke(Manager, Arg);
+            tempOnHide?.Invoke(Manager);
         }
 
         /// <summary>
@@ -83,7 +83,7 @@ namespace Lysionium.Views
         {
             var tempOnHide = OnHide;
             OnHide = null;
-            tempOnHide?.Invoke(Manager, Arg);
+            tempOnHide?.Invoke(Manager);
 
             SetInteractable(true);
             AnimatorTupple.TrySetVisible(this, true);
@@ -96,7 +96,7 @@ namespace Lysionium.Views
         {
             var tempOnHide = OnHide;
             OnHide = null;
-            tempOnHide?.Invoke(Manager, Arg);
+            tempOnHide?.Invoke(Manager);
 
             SetInteractable(false);
             AnimatorTupple.TrySetVisible(this, false);
@@ -137,7 +137,7 @@ namespace Lysionium.Views
             HasManagerLock = false;
             var tempOnEndAnimation = OnEndAnimation;
             OnEndAnimation = null;
-            tempOnEndAnimation?.Invoke(Manager, Arg);
+            tempOnEndAnimation?.Invoke(Manager);
         }
         public void PlayString(string value) => AnimatorTupple.Play(this, this, value);
         public void PlayObject(Object value) => AnimatorTupple.Play(this, this, value);

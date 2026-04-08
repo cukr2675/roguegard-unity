@@ -25,45 +25,44 @@ namespace Roguegard.Rgpacks
         private class ChartPadScreen : RogueListuiScreen
         {
             private static readonly List<object> list = new();
-            private readonly VariableWidgetsMenuViewData<MMgr, MArg> view = new()
+            private readonly VariableWidgetsMenuViewData<MMgr> view = new()
             {
             };
 
             private static readonly PropertiedCmnMenuScreen nextScreen = new();
 
-            public override void OpenScreen(MMgr manager, MArg arg)
+            public ChartPadScreen()
             {
-                var chartPad = arg.Arg.TargetObj;
-                var chartPadInfo = ChartPadInfo.Get(chartPad);
-                list.Clear();
-                foreach (var cmn in chartPadInfo.Cmns)
+                OnOpenScreen += (manager) =>
                 {
-                    list.Add(SelectOption.Create<MMgr, MArg>(
-                        cmn.Cmn ?? "[新しいコモンイベント]",
-                        (manager, arg) =>
-                        {
-                            manager.PushScreen(nextScreen, arg.Self, other: cmn);
-                        }));
-                }
+                    var chartPad = Arg.Arg.TargetObj;
+                    var chartPadInfo = ChartPadInfo.Get(chartPad);
+                    list.Clear();
+                    foreach (var cmn in chartPadInfo.Cmns)
+                    {
+                        list.Add(SelectOption.Create<MMgr>(
+                            cmn.Cmn ?? "[新しいコモンイベント]",
+                            m => m.PushScreen(nextScreen, Arg.Self, other: cmn)));
+                    }
 
-                view.Show(list, manager, arg)
+                    view.Show(list, manager)
                     ?
-                    .HeadStack("アセットID", InputFieldWidgetOption.Create<MMgr, MArg>(
-                        (manager, arg) =>
+                    .HeadStack("アセットID", InputFieldWidgetOption.Create<MMgr>(
+                        _ =>
                         {
-                            var chartPad = arg.Arg.TargetObj;
+                            var chartPad = Arg.Arg.TargetObj;
                             return NamingEffect.Get(chartPad)?.Naming;
                         },
-                        (manager, arg, value) =>
+                        value =>
                         {
-                            var chartPad = arg.Arg.TargetObj;
+                            var chartPad = Arg.Arg.TargetObj;
                             default(IActiveRogueMethodCaller).Affect(chartPad, 1f, NamingEffect.Callback);
                             return NamingEffect.Get(chartPad).Naming = value;
                         }))
 
-                    .Tail.Option("+ イベントを追加", (manager, arg) =>
+                    .Tail.Option("+ イベントを追加", (manager) =>
                     {
-                        var chartPad = arg.Arg.TargetObj;
+                        var chartPad = Arg.Arg.TargetObj;
                         var chartPadInfo = ChartPadInfo.Get(chartPad);
 
                         chartPadInfo.AddCmn();
@@ -71,6 +70,7 @@ namespace Roguegard.Rgpacks
                     })
 
                     .Build();
+                };
             }
         }
     }

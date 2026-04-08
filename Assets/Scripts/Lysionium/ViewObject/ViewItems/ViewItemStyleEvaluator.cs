@@ -10,7 +10,6 @@ namespace Lysionium.Views
         private IInputActionViewItemHandler inputActionHandler;
         private object item;
         private IListuiManager manager;
-        private IListuiArg arg;
         private SubviewBase subview;
         private readonly Action<InputAction.CallbackContext> inputStarted;
         private readonly Action<InputAction.CallbackContext> inputPerformed;
@@ -20,17 +19,16 @@ namespace Lysionium.Views
 
         public ViewItemStyleEvaluator()
         {
-            inputStarted = ctx => inputActionHandler?.Started(item, manager, arg, ctx);
-            inputPerformed = ctx => inputActionHandler?.Performed(item, manager, arg, ctx);
-            inputCanceled = ctx => inputActionHandler?.Canceled(item, manager, arg, ctx);
+            inputStarted = ctx => inputActionHandler?.Started(item, manager, ctx);
+            inputPerformed = ctx => inputActionHandler?.Performed(item, manager, ctx);
+            inputCanceled = ctx => inputActionHandler?.Canceled(item, manager, ctx);
         }
 
-        public void Bind(object item, IViewItemHandler handler, IListuiManager manager, IListuiArg arg, SubviewBase subview)
+        public void Bind(object item, IViewItemHandler handler, IListuiManager manager, SubviewBase subview)
         {
             this.item = item;
             inputActionHandler = handler as IInputActionViewItemHandler;
             this.manager = manager;
-            this.arg = arg;
             this.subview = subview;
         }
 

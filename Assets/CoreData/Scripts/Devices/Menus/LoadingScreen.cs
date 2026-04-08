@@ -6,20 +6,20 @@ namespace Roguegard.Device
     {
         private readonly string text;
         private readonly string buttonText;
-        private readonly ClickItemHandler<MMgr, MArg> buttonAction;
-        private readonly System.Func<MMgr, MArg, float> getProgress;
+        private readonly ClickOptionHandler<MMgr> buttonAction;
+        private readonly System.Func<MMgr, float> getProgress;
 
         private float oldProgress;
 
-        private readonly DialogViewData<MMgr, MArg> view = new()
+        private readonly DialogViewData<MMgr> view = new()
         {
             BackAnchorSubviewSelector = null,
         };
 
         public LoadingScreen(
             string text, string buttonText,
-            ClickItemHandler<MMgr, MArg> buttonAction,
-            System.Func<MMgr, MArg, float> updateAction = null)
+            ClickOptionHandler<MMgr> buttonAction,
+            System.Func<MMgr, float> updateAction = null)
         {
             this.text = text;
             this.buttonText = buttonText;
@@ -27,14 +27,16 @@ namespace Roguegard.Device
             this.getProgress = updateAction ?? delegate { return 0f; };
         }
 
-        public override void OpenScreen(MMgr manager, MArg arg)
+        public LoadingScreen()
         {
-            oldProgress = 0f;
-            view.Show(text, manager, arg)
+            OnOpenScreen += (manager) =>
+            {
+                oldProgress = 0f;
+                view.Show(text, manager)
                 ?
-                .Tail.Append(ProgressBarWidgetOption.Create<MMgr, MArg>((manager, arg) =>
+                .Tail.Append(ProgressBarWidgetOption.Create<MMgr>((manager) =>
                 {
-                    var progress = getProgress(manager, arg);
+                    var progress = getProgress(manager);
                     if (progress >= 1f && oldProgress < 1f) { manager.Done(); }
                     oldProgress = progress;
 
@@ -44,6 +46,7 @@ namespace Roguegard.Device
                 .Tail.Option(buttonText, buttonAction)
 
                 .Build();
+            };
         }
     }
 }

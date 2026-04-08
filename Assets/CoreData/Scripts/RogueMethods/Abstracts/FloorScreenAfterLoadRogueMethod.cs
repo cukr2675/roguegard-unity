@@ -8,16 +8,13 @@ namespace Roguegard
     /// <summary>
     /// ダンジョン名と階層を表示してそこに移動させる <see cref="IRogueMethod"/>
     /// </summary>
-    public abstract class FloorScreenAfterLoadRogueMethod : BaseApplyRogueMethod, ISelectOption<MMgr, MArg>
+    public abstract class FloorScreenAfterLoadRogueMethod : BaseApplyRogueMethod
     {
         public RogueListuiScreen EnteredScreen { get; }
 
         protected FloorScreenAfterLoadRogueMethod()
         {
-            EnteredScreen = new Screen()
-            {
-                selectOptions = new ISelectOption<MMgr, MArg>[] { this }
-            };
+            EnteredScreen = new Screen(this);
         }
 
         /// <summary>
@@ -48,62 +45,47 @@ namespace Roguegard
 
         protected abstract void Activate(MMgr manager, RogueObj player, RogueObj empty, in RogueMethodArgument arg);
 
-        string ISelectOption<MMgr, MArg>.GetName(MMgr manager, MArg arg)
-        {
-            return GetName(manager, arg.Self, arg.User, arg.Arg);
-        }
-
-        string ISelectOption<MMgr, MArg>.GetStyle(MMgr manager, MArg arg) => null;
-
-        void ISelectOption<MMgr, MArg>.Click(MMgr manager, MArg arg)
-        {
-            Activate(manager, arg.Self, arg.User, arg.Arg);
-        }
-
         private class Screen : RogueListuiScreen
         {
-            public ISelectOption<MMgr, MArg>[] selectOptions;
-
-            private readonly FadeOutInViewData<MMgr, MArg> view = new()
+            private readonly FadeOutInViewData<MMgr> view = new()
             {
             };
 
-            private ISubviewStateProvider stateProvider;
-
-            public override bool IsIncremental => true;
-
-            public override void OpenScreen(MMgr manager, MArg arg)
+            public Screen(FloorScreenAfterLoadRogueMethod parent)
             {
-                view.FadeOut(manager, arg)
+                ISubviewStateProvider stateProvider = null;
+
+                OnOpenScreen += (manager) =>
+                {
+                    view.FadeOut(manager)
                     ?
-                    .OnFadeOutCompleted((manager, arg) =>
+                    .OnFadeOutCompleted((manager) =>
                     {
                         var levelText = "";
-                        if (DungeonInfo.TryGet(arg.Self.Location, out var dungeonInfo))
+                        if (DungeonInfo.TryGet(Arg.Self.Location, out var dungeonInfo))
                         {
-                            levelText = dungeonInfo.GetLevelText(arg.Self.Location);
+                            levelText = dungeonInfo.GetLevelText(Arg.Self.Location);
                         }
 
-                        selectOptions[0].Click(manager, arg);
+                        parent.Activate(manager, Arg.Self, Arg.User, Arg.Arg);
                         manager.Overlay.Show(
                             new[] {
-                                $"<align=\"center\"><size=+32>{arg.Self.Location.GetName()} {levelText}"
-                            }, SelectOptionViewItemHandler<IListuiManager, IListuiArg>.Instance, manager, arg, ref stateProvider);
+                                $"<align=\"center\"><size=+32>{Arg.Self.Location.GetName()} {levelText}"
+                            }, SelectOptionViewItemHandler<IListuiManager>.Instance, manager, ref stateProvider);
                         manager.StartCoroutine(Wait2sDone(manager));
                     })
 
                     .Build();
-            }
+                };
 
-            public override void CloseScreenView(MMgr manager, bool back)
-            {
+                OnCloseScreenView += (manager, back) => { };
             }
 
             private IEnumerator Wait2sDone(MMgr manager)
             {
                 yield return new WaitForSeconds(2f);
 
-                manager.Overlay.Hide(false, (manager, arg) =>
+                manager.Overlay.Hide(false, (manager) =>
                 {
                     ((MMgr)manager).Done();
                 });

@@ -2,7 +2,6 @@ using Lysionium;
 using Roguegard;
 using Roguegard.Device;
 using Roguegard.Extensions;
-using System.Collections.Generic;
 
 namespace RoguegardUnity
 {
@@ -58,31 +57,38 @@ namespace RoguegardUnity
         /// </summary>
         private class GameOverScreen : RogueListuiScreen
         {
-            private readonly MainMenuViewData<MMgr, MArg> view = new()
+            private readonly MainMenuViewData<MMgr> view = new()
             {
                 PrimaryCommandSubviewSelector = null,
                 BackAnchorSubviewSelector = m => m.ForwardAnchor,
-                BackAnchorList = new(_ => _.Option("OK", new NextScreen())),
             };
 
-            public override void OpenScreen(MMgr manager, MArg arg)
+            public GameOverScreen()
             {
-                // ログ表示
-                view.Show(manager, arg)
+                view.BackAnchorList = new(_ => _.Option("OK", new NextScreen(), () => Arg));
+
+                OnOpenScreen += (manager) =>
+                {
+                    // ログ表示
+                    view.Show(manager)
                     ?
                     .Build();
 
-                manager.LongMessage.Show();
+                    manager.LongMessage.Show();
+                };
             }
 
             private class NextScreen : RogueListuiScreen
             {
-                public override void OpenScreen(MMgr manager, MArg arg)
+                public NextScreen()
                 {
-                    // リザルト表示 → ロビーへ帰還
-                    var player = arg.Self;
-                    manager.Summary.SetGameOver(player, arg.Arg.TargetObj, manager);
-                    manager.Summary.Show();
+                    OnOpenScreen += (manager) =>
+                    {
+                        // リザルト表示 → ロビーへ帰還
+                        var player = Arg.Self;
+                        manager.Summary.SetGameOver(player, Arg.Arg.TargetObj, manager);
+                        manager.Summary.Show();
+                    };
                 }
             }
         }

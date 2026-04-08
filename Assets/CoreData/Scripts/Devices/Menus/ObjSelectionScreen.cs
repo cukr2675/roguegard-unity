@@ -4,34 +4,30 @@ namespace Roguegard.Device
 {
     public class ObjSelectionScreen : RogueListuiScreen
     {
-        private readonly ScrollMenuViewData<RogueObj, MMgr, MArg> view = new()
+        private readonly ScrollMenuViewData<RogueObj, MMgr> view = new()
         {
         };
 
-        private readonly IDeviceCommand callback;
-
         public ObjSelectionScreen(IDeviceCommand callback)
         {
-            this.callback = callback;
-        }
-
-        public override void OpenScreen(MMgr manager, MArg arg)
-        {
-            view.Show(arg.Self.Space.Objs, manager, arg)
+            OnOpenScreen += (manager) =>
+            {
+                view.Show(Arg.Self.Space.Objs, manager)
                 ?
                 .Filter(obj => obj != null)
 
                 .NameFrom(obj => obj.GetName())
 
-                .OnClick((obj, manager, arg) =>
+                .OnClick((obj, manager) =>
                 {
-                    var device = RogueDeviceEffect.Get(arg.Self);
+                    var device = RogueDeviceEffect.Get(Arg.Self);
                     var callbackArg = new RogueMethodArgument(tool: obj);
-                    device.SetDeviceCommand(callback, arg.Self, callbackArg);
+                    device.SetDeviceCommand(callback, Arg.Self, callbackArg);
                     manager.Done();
                 })
 
                 .Build();
+            };
         }
     }
 }

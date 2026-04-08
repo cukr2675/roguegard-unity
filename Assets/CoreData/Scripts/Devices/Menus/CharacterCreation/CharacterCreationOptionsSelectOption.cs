@@ -5,8 +5,9 @@ using UnityEngine;
 
 namespace Roguegard.Device
 {
-    public class CharacterCreationOptionsSelectOption : ISelectOption<MMgr, MArg>
+    public class CharacterCreationOptionsSelectOption : ISelectOption<MMgr>
     {
+        private RogueObj self;
         private object editTarget;
 
         private readonly SelectOptionMenu nextMenu;
@@ -16,13 +17,14 @@ namespace Roguegard.Device
             nextMenu = new SelectOptionMenu() { database = database };
         }
 
-        public CharacterCreationOptionsSelectOption Set(object editTarget)
+        public CharacterCreationOptionsSelectOption Set(RogueObj self, object editTarget)
         {
+            this.self = self;
             this.editTarget = editTarget ?? throw new System.ArgumentNullException(nameof(editTarget));
             return this;
         }
 
-        string ISelectOption<MMgr, MArg>.GetName(MMgr manager, MArg arg)
+        string ISelectOption<MMgr>.GetName(MMgr manager)
         {
             if (editTarget is Race race)
             {
@@ -52,13 +54,11 @@ namespace Roguegard.Device
             return null;
         }
 
-        string ISelectOption<MMgr, MArg>.GetStyle(MMgr manager, MArg arg) => null;
+        string ISelectOption<MMgr>.GetStyle(MMgr manager) => null;
 
-        void ISelectOption<MMgr, MArg>.Click(MMgr iManager, MArg iArg)
+        void ISelectOption<MMgr>.Click(MMgr manager)
         {
-            var manager = (MMgr)iManager;
-            var arg = (MArg)iArg;
-            manager.PushScreen(nextMenu, arg.Self, other: editTarget);
+            manager.PushScreen(nextMenu, self, other: editTarget);
         }
 
         private class SelectOptionMenu : RogueListuiScreen
@@ -66,26 +66,28 @@ namespace Roguegard.Device
             public ICharacterCreationDatabase database;
 
             private readonly List<object> list = new();
-            private readonly ScrollMenuViewData<object, MMgr, MArg> view = new()
+            private readonly ScrollMenuViewData<object, MMgr> view = new()
             {
             };
 
-            public override void OpenScreen(MMgr manager, MArg arg)
+            public SelectOptionMenu()
             {
-                var editTarget = arg.Arg.Other;
+                OnOpenScreen += (manager) =>
+                {
+                    var editTarget = Arg.Arg.Other;
 
-                list.Clear();
-                CharacterCreationAddScreen.AddOptionsTo(list, arg.Self, editTarget, database);
+                    list.Clear();
+                    CharacterCreationAddScreen.AddOptionsTo(list, Arg.Self, editTarget, database);
 
-                view.Show(list, manager, arg, editTarget?.GetType())
+                    view.Show(list, manager, editTarget?.GetType())
                     ?
-                    .NameFrom((item, manager, arg) =>
+                    .NameFrom((item, manager) =>
                     {
                         if (item is IRogueDescribable describable)
                         {
                             return describable.Name;
                         }
-                        else if (arg.Arg.Other is AlphabetTypeMember alphabetTypeMember)
+                        else if (Arg.Arg.Other is AlphabetTypeMember alphabetTypeMember)
                         {
                             return $"タイプ{alphabetTypeMember.Types[(int)item]}";
                         }
@@ -93,33 +95,33 @@ namespace Roguegard.Device
                         return null;
                     })
 
-                    .OnClick((item, manager, arg) =>
+                    .OnClick((item, manager) =>
                     {
-                        if (arg.Arg.Other is Race race)
+                        if (Arg.Arg.Other is Race race)
                         {
                             race.Option = (IRaceOption)item;
                         }
-                        else if (arg.Arg.Other is Appearance appearance)
+                        else if (Arg.Arg.Other is Appearance appearance)
                         {
                             appearance.Option = (IAppearanceOption)item;
                         }
-                        else if (arg.Arg.Other is Intrinsic intrinsic)
+                        else if (Arg.Arg.Other is Intrinsic intrinsic)
                         {
                             intrinsic.Option = (IIntrinsicOption)item;
                         }
-                        else if (arg.Arg.Other is StartingItem startingItem)
+                        else if (Arg.Arg.Other is StartingItem startingItem)
                         {
-                            CharacterCreationAddScreen.ReceiveStartingItemOptionObj(startingItem.Option, arg.Self);
+                            CharacterCreationAddScreen.ReceiveStartingItemOptionObj(startingItem.Option, Arg.Self);
                             startingItem.Option = (IStartingItemOption)item;
-                            CharacterCreationAddScreen.ConsumeStartingItemOptionObj(startingItem.Option, arg.Self);
+                            CharacterCreationAddScreen.ConsumeStartingItemOptionObj(startingItem.Option, Arg.Self);
                         }
-                        else if (arg.Arg.Other is SingleItemMember singleItemMember)
+                        else if (Arg.Arg.Other is SingleItemMember singleItemMember)
                         {
-                            CharacterCreationAddScreen.ReceiveStartingItemOptionObj(singleItemMember.ItemOption, arg.Self);
+                            CharacterCreationAddScreen.ReceiveStartingItemOptionObj(singleItemMember.ItemOption, Arg.Self);
                             singleItemMember.ItemOption = (IStartingItemOption)item;
-                            CharacterCreationAddScreen.ConsumeStartingItemOptionObj(singleItemMember.ItemOption, arg.Self);
+                            CharacterCreationAddScreen.ConsumeStartingItemOptionObj(singleItemMember.ItemOption, Arg.Self);
                         }
-                        else if (arg.Arg.Other is AlphabetTypeMember alphabetTypeMember)
+                        else if (Arg.Arg.Other is AlphabetTypeMember alphabetTypeMember)
                         {
                             alphabetTypeMember.TypeIndex = (int)item;
                         }
@@ -127,6 +129,7 @@ namespace Roguegard.Device
                     })
 
                     .Build();
+                };
             }
         }
     }

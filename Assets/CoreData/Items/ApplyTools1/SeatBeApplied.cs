@@ -36,16 +36,18 @@ namespace Roguegard
 
         private class SeatScreen : RogueListuiScreen
         {
-            private readonly ScrollMenuViewData<RogueObj, MMgr, MArg> view = new()
+            private readonly ScrollMenuViewData<RogueObj, MMgr> view = new()
             {
             };
 
-            public override void OpenScreen(MMgr manager, MArg arg)
+            public SeatScreen()
             {
-                var player = arg.Self;
-                var worldInfo = RogueWorldInfo.GetByCharacter(player);
+                OnOpenScreen += (manager) =>
+                {
+                    var player = Arg.Self;
+                    var worldInfo = RogueWorldInfo.GetByCharacter(player);
 
-                view.Show(worldInfo.LobbyMembers.Members, manager, arg)
+                    view.Show(worldInfo.LobbyMembers.Members, manager)
                     ?
                     .Merge(out var merged)
                     .Init(
@@ -56,14 +58,14 @@ namespace Roguegard
                         .Case(
                             lo => lo.Location == null,
                             _ => _
-                            .OnClick((lobbyMember, manager, arg) =>
+                            .OnClick((lobbyMember, manager) =>
                             {
                                 manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
                                 manager.Done();
-                                
+
                                 var info = LobbyMemberList.GetMemberInfo(lobbyMember);
-                                info.Seat = arg.Arg.TargetObj;
-                                
+                                info.Seat = Arg.Arg.TargetObj;
+
                                 info.ItemRegister.Clear();
                                 foreach (var item in lobbyMember.Space.Objs)
                                 {
@@ -72,7 +74,7 @@ namespace Roguegard
                                     info.ItemRegister.Add(item);
                                 }
 
-                                var world = RogueWorldInfo.GetWorld(arg.Self);
+                                var world = RogueWorldInfo.GetWorld(Arg.Self);
                                 SpaceUtility.TryLocate(lobbyMember, world);
                                 info.SavePoint = RogueWorldSavePointInfo.Instance;
                                 var mainParty = RogueDevice.Primary.Player.Main.Stats.Party;
@@ -84,6 +86,7 @@ namespace Roguegard
                             .Style("Disabled")))
 
                     .Build();
+                };
             }
         }
     }

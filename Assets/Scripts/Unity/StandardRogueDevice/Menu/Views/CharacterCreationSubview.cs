@@ -11,7 +11,7 @@ using UnityEngine.UI;
 
 namespace RoguegardUnity
 {
-    public class CharacterCreationSubview : ListHandlerSubview, ICharacterCreationElementsSubview
+    public class CharacterCreationSubview : Subview, ICharacterCreationElementsSubview
     {
         [SerializeField] private ScrollRect _scrollRect = null;
         [SerializeField] private RectTransform _firstParent = null;
@@ -24,24 +24,25 @@ namespace RoguegardUnity
         [SerializeField] private LabelViewItem _headerPrefab = null;
         [SerializeField] private CharacterCreationButtonViewItem _buttonViewItemPrefab = null;
 
+        private MArg arg;
         private CharacterCreationData characterCreationData;
         private CharacterCreationAddScreen addScreen;
         private CharacterCreationOptionScreen optionScreen;
 
         private IButtonViewItemHandler intrinsicPresenter;
         private IButtonViewItemHandler startingItemPresenter;
-        private static readonly ISelectOption<MMgr, MArg> intrinsicHeader
-            = SelectOption.Create<MMgr, MArg>("固有能力", delegate { });
-        private static readonly ISelectOption<MMgr, MArg> startingItemHeader
-            = SelectOption.Create<MMgr, MArg>("初期アイテム", delegate { });
+        private static readonly ISelectOption<MMgr> intrinsicHeader
+            = SelectOption.Create<MMgr>("固有能力", delegate { });
+        private static readonly ISelectOption<MMgr> startingItemHeader
+            = SelectOption.Create<MMgr>("初期アイテム", delegate { });
         private MenuRogueObjSpriteRenderer spriteRenderer;
-        private ISelectOption<MMgr, MArg> raceSelectOption;
-        private ISelectOption<MMgr, MArg> appearanceSelectOption;
+        private ISelectOption<MMgr> raceSelectOption;
+        private ISelectOption<MMgr> appearanceSelectOption;
         private AppearanceEditingScreen appearanceEditingScreen;
         private readonly List<MonoBehaviour> itemObjects = new();
         private static readonly LoadPresetScreen loadPresetScreen = new();
         private static ISelectOption<MMgr, MArg> LoadPresetSelectOption { get; }
-            = SelectOption.Create<MMgr, MArg>(":Load", (manager, arg) => manager.PushScreen(loadPresetScreen, arg));
+            = SelectOption.Create<MMgr, MArg>(":Load", (m, a) => m.PushScreen(loadPresetScreen, a));
         private static readonly object[] leftAnchorObjs = new object[2];
 
         private readonly List<ViewItem> viewItems = new();
@@ -60,22 +61,21 @@ namespace RoguegardUnity
             spriteRendererTransform.localScale = Vector3.one * 4f;
             _raceButton.Initialize(this);
             _appearanceButton.Initialize(this);
-            raceSelectOption = SelectOption.Create<MMgr, MArg>("", (manager, arg) =>
+            raceSelectOption = SelectOption.Create<MMgr>("", (manager) =>
             {
                 manager.PushScreen(optionScreen, arg.Self, other: characterCreationData.Race);
             });
-            appearanceSelectOption = SelectOption.Create<MMgr, MArg>("", (manager, arg) =>
+            appearanceSelectOption = SelectOption.Create<MMgr>("", (manager) =>
             {
                 manager.PushScreen(appearanceEditingScreen, arg.Self, other: characterCreationData);
             });
             _nameField.onValueChanged.AddListener(text => characterCreationData.Name = text);
         }
 
-        public override void SetListHandler(
-            IReadOnlyList<object> list, IViewItemHandler handler, IListuiManager manager, IListuiArg iArg,
+        public void SetListHandler(
+            IReadOnlyList<object> list, IViewItemHandler handler, MMgr manager, MArg arg,
             ref ISubviewStateProvider stateProvider)
         {
-            var arg = (MArg)iArg;
             characterCreationData = (CharacterCreationData)arg.Arg.Other;
             if (addScreen == null)
             {
@@ -83,7 +83,7 @@ namespace RoguegardUnity
                 optionScreen = new CharacterCreationOptionScreen(RoguegardSettings.CharacterCreationDatabase);
             }
             addScreen.Set(characterCreationData);
-            optionScreen.Set(characterCreationData);
+            optionScreen.Set(arg.Self, arg.Arg.Other, characterCreationData);
             appearanceEditingScreen.OptionScreen = optionScreen;
             appearanceEditingScreen.AddScreen = addScreen;
 
@@ -91,28 +91,28 @@ namespace RoguegardUnity
 
             if (intrinsicPresenter == null)
             {
-                intrinsicPresenter = new ButtonViewItemHandler<Intrinsic, MMgr, MArg>()
+                intrinsicPresenter = new ButtonViewItemHandler<Intrinsic, MMgr>()
                 {
-                    GetName = (intrinsic, manager, arg) =>
+                    GetName = (intrinsic, manager) =>
                     {
                         if (intrinsic == null) return "+ 固有能力を追加";
                         else return intrinsic.Name;
                     },
-                    Click = (intrinsic, manager, arg) =>
+                    Click = (intrinsic, manager) =>
                     {
                         if (intrinsic == null) { manager.PushScreen(addScreen, arg.Self, other: typeof(Intrinsic)); }
                         else { manager.PushScreen(optionScreen, arg.Self, other: intrinsic); }
                     },
                 };
 
-                startingItemPresenter = new ButtonViewItemHandler<StartingItem, MMgr, MArg>()
+                startingItemPresenter = new ButtonViewItemHandler<StartingItem, MMgr>()
                 {
-                    GetName = (startingItem, manager, arg) =>
+                    GetName = (startingItem, manager) =>
                     {
                         if (startingItem == null) return "+ 固有能力を追加";
                         else return startingItem.Name;
                     },
-                    Click = (startingItem, manager, arg) =>
+                    Click = (startingItem, manager) =>
                     {
                         if (startingItem == null) { manager.PushScreen(addScreen, arg.Self, other: typeof(StartingItem)); }
                         else { manager.PushScreen(optionScreen, arg.Self, other: startingItem); }
@@ -120,7 +120,8 @@ namespace RoguegardUnity
                 };
             }
 
-            SetArg(manager, arg);
+            Manager = manager;
+            this.arg = arg;
 
             var random = new RogueRandom(0);
             var obj = new CharacterCreationData(characterCreationData).CreateObj(null, Vector2Int.zero, random);
@@ -223,39 +224,42 @@ namespace RoguegardUnity
 
         private class LoadPresetScreen : RogueListuiScreen
         {
-            private static List<CharacterCreationData> presets;
-
-            private readonly ScrollMenuViewData<CharacterCreationData, MMgr, MArg> view = new()
+            private readonly ScrollMenuViewData<CharacterCreationData, MMgr> view = new()
             {
             };
 
-            public override void OpenScreen(MMgr manager, MArg arg)
+            public LoadPresetScreen()
             {
-                if (presets == null)
-                {
-                    presets = new List<CharacterCreationData>();
-                    for (int i = 0; i < RoguegardSettings.CharacterCreationDatabase.PresetsCount; i++)
-                    {
-                        presets.Add(RoguegardSettings.CharacterCreationDatabase.LoadPreset(i));
-                    }
-                }
+                List<CharacterCreationData> presets = null;
 
-                view.Show(presets, manager, arg)
+                OnOpenScreen += (manager) =>
+                {
+                    if (presets == null)
+                    {
+                        presets = new List<CharacterCreationData>();
+                        for (int i = 0; i < RoguegardSettings.CharacterCreationDatabase.PresetsCount; i++)
+                        {
+                            presets.Add(RoguegardSettings.CharacterCreationDatabase.LoadPreset(i));
+                        }
+                    }
+
+                    view.Show(presets, manager)
                     ?
                     .NameFrom(preset => preset.ShortName)
 
                     .VarOnce(out CharacterCreationData selectedPreset)
                     .VarOnce(
                         out var nextScreen, new ChoicesScreen("ロードすると 編集中のキャラは消えてしまいますが よろしいですか？")
-                        .Option("ロードする", (manager, arg) => Load(selectedPreset, manager, arg))
+                        .Option("ロードする", m => Load(selectedPreset, m, Arg))
                         .Back())
-                    .OnClick((preset, manager, arg) =>
+                    .OnClick((preset, manager) =>
                     {
                         selectedPreset = preset;
-                        manager.PushScreen(nextScreen, other: (CharacterCreationData)arg.Arg.Other);
+                        manager.PushScreen(nextScreen, other: (CharacterCreationData)Arg.Arg.Other);
                     })
 
                     .Build();
+                };
             }
 
             private void Load(CharacterCreationData selectedPreset, MMgr manager, MArg arg)

@@ -12,7 +12,7 @@ namespace RoguegardUnity
         private readonly ISelectOption<MMgr, MArg>[] selectOptions;
         private readonly RogueListuiScreen commandMenu;
 
-        private readonly MainMenuViewData<MMgr, MArg> view = new()
+        private readonly ScrollMenuViewData<ISelectOption<MMgr, MArg>, MMgr> view = new()
         {
         };
 
@@ -27,21 +27,27 @@ namespace RoguegardUnity
             commandMenu = objCommandMenuScreen;
         }
 
-        public override void OpenScreen(MMgr manager, MArg arg)
+        public LongDownMenu()
         {
-            if (arg.Arg.TargetObj != null && arg.Arg.TargetObj.HasCollider && (arg.Self.Position - arg.Arg.TargetObj.Position).sqrMagnitude <= 2 &&
-                RoguegardSettings.ObjCommandTable.Categories.Contains(arg.Arg.TargetObj.Main.InfoSet.Category))
+            OnOpenScreen += (manager) =>
             {
-                // 長押ししたアイテムと隣接していた場合、アイテム向けのメニューを表示する
-                commandMenu.OpenScreen(manager, new MArg.Builder(arg.Self, null, new(tool: arg.Arg.TargetObj)).ReadOnly);
-                return;
-            }
+                if (Arg.Arg.TargetObj != null && Arg.Arg.TargetObj.HasCollider && (Arg.Self.Position - Arg.Arg.TargetObj.Position).sqrMagnitude <= 2 &&
+                    RoguegardSettings.ObjCommandTable.Categories.Contains(Arg.Arg.TargetObj.Main.InfoSet.Category))
+                {
+                    // 長押ししたアイテムと隣接していた場合、アイテム向けのメニューを表示する
+                    ((IListuiScreen<MMgrBase, MArg>)commandMenu).OpenScreen(
+                        manager, new MArg.Builder(Arg.Self, null, new(tool: Arg.Arg.TargetObj)).ReadOnly);
+                    return;
+                }
 
-            view.Show(manager, arg)
+                view.Show(selectOptions, manager)
                 ?
-                .Tail.OptionRange(selectOptions)
+                .NameFrom((o, m) => o.GetName(m, Arg))
+                .OnClick((o, m) => o.Click(m, Arg))
+                .StyleFrom((o, m) => o.GetStyle(m, Arg))
 
                 .Build();
+            };
         }
     }
 }

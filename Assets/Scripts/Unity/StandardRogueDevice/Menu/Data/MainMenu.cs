@@ -14,64 +14,89 @@ namespace RoguegardUnity
     /// </summary>
     public class MainMenu : RogueListuiScreen
     {
-        private readonly ViewData view = new();
-
-        private readonly ObjsMenu objsMenu;
-        private readonly SkillsMenu skillsMenu;
-        private readonly PartyMenu partyMenu;
+        private readonly ViewData view;
         private readonly LogMenu logMenu = new();
         private readonly OthersMenu othersMenu = new();
 
         public MainMenu(ObjsMenu objsMenu, SkillsMenu skillsMenu, PartyMenu partyMenu)
         {
-            this.objsMenu = objsMenu;
-            this.skillsMenu = skillsMenu;
-            this.partyMenu = partyMenu;
-        }
-
-        public override void OpenScreen(MMgr manager, MArg arg)
-        {
-            view.Show(manager, arg)
-                ?
-                .Option(":Skills", skillsMenu.Use)
-                .Option(":Items", (manager, arg) => manager.PushScreen(objsMenu.Items, arg.Self, null, targetObj: arg.Self))
-                .Option(":Ground", (manager, arg) => manager.PushScreen(objsMenu.Ground, arg.Self, null, targetObj: arg.Self))
-                .Option(":Party", partyMenu)
-                .Option(":Log", logMenu)
-                .Option(":Others", othersMenu)
-                .Option(objsMenu.Close)
-                .Build();
-        }
-
-        private class ViewData : MainMenuViewData<MMgr, MArg>
-        {
-            protected override void ShowSubviews(MMgr manager, MArg arg)
+            view = new ViewData()
             {
-                base.ShowSubviews(manager, arg);
+                screen = this
+            };
+
+            OnOpenScreen += (manager) =>
+            {
+                view.Show(manager)
+                ?
+                .Option(
+                    name: ":Skills",
+                    screen: skillsMenu.Use,
+                    args: () => Arg)
+
+                .Option(
+                    name: ":Items",
+                    onClick: m => m.PushScreen(objsMenu.Items, Arg.Self, null, targetObj: Arg.Self))
+
+                .Option(
+                    name: ":Ground",
+                    onClick: m => m.PushScreen(objsMenu.Ground, Arg.Self, null, targetObj: Arg.Self))
+
+                .Option(
+                    name: ":Party",
+                    screen: partyMenu,
+                    args: () => Arg)
+
+                .Option(
+                    name: ":Log",
+                    screen: logMenu,
+                    args: () => Arg)
+
+                .Option(
+                    name: ":Others",
+                    screen: othersMenu,
+                    args: () => Arg)
+
+                .Option(objsMenu.Close, () => Arg)
+
+                .Build();
+            };
+        }
+
+        private class ViewData : MainMenuViewData<MMgr>
+        {
+            public MainMenu screen;
+
+            protected override void ShowSubviews(MMgr manager)
+            {
+                base.ShowSubviews(manager);
 
                 // ダンジョン名とパーティの名前/HP/MPを表示
                 var parent = (MenuController)manager;
-                parent.Stats.SetText(arg.Self);
-                parent.Stats.SetDungeon(arg.Self.Location);
+                parent.Stats.SetText(screen.Arg.Self);
+                parent.Stats.SetDungeon(screen.Arg.Self.Location);
                 parent.Stats.Show();
             }
         }
 
         private class LogMenu : RogueListuiScreen
         {
-            private readonly MainMenuViewData<MMgr, MArg> view = new()
+            private readonly MainMenuViewData<MMgr> view = new()
             {
                 PrimaryCommandSubviewSelector = null,
                 BackAnchorSubviewSelector = m => m.BackAnchor,
             };
 
-            public override void OpenScreen(MMgr manager, MArg arg)
+            public LogMenu()
             {
-                view.Show(manager, arg)
+                OnOpenScreen += (manager) =>
+                {
+                    view.Show(manager)
                     ?
                     .Build();
 
-                manager.LongMessage.Show();
+                    manager.LongMessage.Show();
+                };
             }
         }
 
@@ -81,100 +106,111 @@ namespace RoguegardUnity
             private readonly QuestMenu questMenu = new();
             private readonly OptionsMenu optionsMenu = new();
 
-            private readonly MainMenuViewData<MMgr, MArg> view = new()
+            private readonly MainMenuViewData<MMgr> view = new()
             {
             };
 
-            public override void OpenScreen(MMgr manager, MArg arg)
+            public OthersMenu()
             {
-                var worldInfo = RogueWorldInfo.GetByCharacter(RogueDevice.Primary.Player);
-                var inLobby = RogueDevice.Primary.Player.Location == worldInfo.Lobby;
-                var openArg = new RogueMethodArgument(count: inLobby ? 1 : 0);
+                OnOpenScreen += (manager) =>
+                {
+                    var worldInfo = RogueWorldInfo.GetByCharacter(RogueDevice.Primary.Player);
+                    var inLobby = RogueDevice.Primary.Player.Location == worldInfo.Lobby;
+                    var openArg = new RogueMethodArgument(count: inLobby ? 1 : 0);
 
-                view.Show(manager, arg)
+                    view.Show(manager)
                     ?
-                    .Option(":Save", (manager, arg) =>
+                    .Option(":Save", (manager) =>
                     {
                         RogueDevice.Add(DeviceKw.SaveGame, null);
 
                         // Done するとセーブメニューが消える
                         //root.Done();
                     })
-                    .Option(":GiveUp", (manager, arg) =>
+                    .Option(":GiveUp", (manager) =>
                     {
-                        manager.PushScreen(giveUpMenu, arg);
+                        manager.PushScreen(giveUpMenu, Arg);
                     })
-                    .Option(":Load", (manager, arg) =>
+                    .Option(":Load", (manager) =>
                     {
                         RogueDevice.Add(DeviceKw.LoadGame, null);
 
                         // Done するとロードメニューが消える
                         //root.Done();
                     })
-                    .Option(":Quest", (manager, arg) =>
+                    .Option(":Quest", (manager) =>
                     {
-                        if (DungeonQuestInfo.TryGetQuest(arg.Self, out _))
+                        if (DungeonQuestInfo.TryGetQuest(Arg.Self, out _))
                         {
-                            manager.PushScreen(questMenu, arg.Self);
+                            manager.PushScreen(questMenu, Arg.Self);
                         }
                     })
-                    .Option(":Options", optionsMenu)
+                    .Option(":Options", optionsMenu, () => Arg)
                     .Back()
                     .Build();
+                };
             }
 
             private class GiveUpMenu : RogueListuiScreen
             {
-                private readonly SpeechBoxViewData<MMgr, MArg> view = new()
+                private readonly SpeechBoxViewData<MMgr> view = new()
                 {
                 };
 
-                public override void OpenScreen(MMgr manager, MArg arg)
+                public GiveUpMenu()
                 {
-                    view.Show(":GiveUpMsg", manager, arg)
-                        ?.Option(":Yes", (manager, arg) =>
+                    OnOpenScreen += (manager) =>
+                    {
+                        view.Show(":GiveUpMsg", manager)
+                        ?.Option(":Yes", (manager) =>
                         {
                             manager.Done();
 
-                            default(IActiveRogueMethodCaller).Defeat(arg.Self, arg.User, 0f);
+                            default(IActiveRogueMethodCaller).Defeat(Arg.Self, Arg.User, 0f);
                         })
                         .Back()
                         .Build();
+                    };
                 }
             }
 
             private class QuestMenu : RogueListuiScreen
             {
-                public override void OpenScreen(MMgr manager, MArg arg)
+                public QuestMenu()
                 {
-                    if (!DungeonQuestInfo.TryGetQuest(arg.Self, out var quest)) throw new System.InvalidOperationException();
+                    OnOpenScreen += (manager) =>
+                    {
+                        if (!DungeonQuestInfo.TryGetQuest(Arg.Self, out var quest)) throw new System.InvalidOperationException();
 
-                    manager.Summary.SetQuest(arg.Self, quest, false, manager);
-                    manager.Summary.Show();
+                        manager.Summary.SetQuest(Arg.Self, quest, false, manager);
+                        manager.Summary.Show();
+                    };
                 }
             }
         }
 
         private class OptionsMenu : RogueListuiScreen
         {
-            private readonly DialogViewData<MMgr, MArg> view = new()
+            private readonly DialogViewData<MMgr> view = new()
             {
                 DialogSubviewSelector = m => m.Widgets,
             };
 
-            public override void OpenScreen(MMgr manager, MArg arg)
+            public OptionsMenu()
             {
-                view.Show("", manager, arg)
+                OnOpenScreen += (manager) =>
+                {
+                    view.Show("", manager)
                     ?
                     .Tail.Append(StackWidgetOption.Create(
                         ("1*", "マスター音量"),
-                        ("1*", InputFieldWidgetOption.Create<MMgr, MArg>(
-                            (manager, arg) =>
+                        ("1*", InputFieldWidgetOption.Create<MMgr>(
+                            _ =>
                             {
                                 var device = (StandardRogueDevice)RogueDevice.Primary;
                                 return Mathf.FloorToInt(device.Options.MasterVolume * 100f).ToString();
                             },
-                            (manager, arg, valueString) =>
+                            valueString =>
                             {
                                 if (!int.TryParse(valueString, out var value)) { value = 0; }
 
@@ -190,39 +226,42 @@ namespace RoguegardUnity
                             TMP_InputField.ContentType.IntegerNumber))))
 
                     .VarOnce(out var windowTypeScreen, new WindowTypeScreen())
-                    .Tail.Option("ウィンドウタイプ", windowTypeScreen)
+                    .Tail.Option("ウィンドウタイプ", windowTypeScreen, () => Arg)
 
                     .Build();
+                };
             }
 
             private class WindowTypeScreen : RogueListuiScreen
             {
                 private readonly List<object> indexList = new();
 
-                private readonly ScrollMenuViewData<object, MMgr, MArg> view = new()
+                private readonly ScrollMenuViewData<object, MMgr> view = new()
                 {
                 };
 
-                public override void OpenScreen(MMgr manager, MArg arg)
+                public WindowTypeScreen()
                 {
-                    if (indexList.Count != WindowFrameList.Count)
+                    OnOpenScreen += (manager) =>
                     {
-                        indexList.Clear();
-                        for (int i = 0; i < WindowFrameList.Count; i++)
+                        if (indexList.Count != WindowFrameList.Count)
                         {
-                            indexList.Add(new object());
+                            indexList.Clear();
+                            for (int i = 0; i < WindowFrameList.Count; i++)
+                            {
+                                indexList.Add(new object());
+                            }
                         }
-                    }
 
-                    view.Show(indexList, manager, arg)
+                        view.Show(indexList, manager)
                         ?
-                        .NameFrom((item, manager, arg) =>
+                        .NameFrom((item, manager) =>
                         {
                             var index = indexList.IndexOf(item);
                             return WindowFrameList.GetName(index);
                         })
 
-                        .OnClick((item, manager, arg) =>
+                        .OnClick((item, manager) =>
                         {
                             var index = indexList.IndexOf(item);
                             var device = (StandardRogueDevice)RogueDevice.Primary;
@@ -232,6 +271,7 @@ namespace RoguegardUnity
                         })
 
                         .Build();
+                    };
                 }
             }
         }

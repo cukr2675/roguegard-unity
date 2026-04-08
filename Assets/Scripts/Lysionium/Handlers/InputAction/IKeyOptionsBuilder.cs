@@ -1,9 +1,9 @@
 namespace Lysionium
 {
-    public interface IKeyOptionsBuilder<TMgr, TArg, TBuilder>
+    public interface IKeyOptionsBuilder<TMgr, TBuilder>
     {
         TBuilder Option();
 
-        TBuilder Option(IKeyOption<TMgr, TArg> option);
+        TBuilder Option(IKeyOption<TMgr> option);
     }
 }

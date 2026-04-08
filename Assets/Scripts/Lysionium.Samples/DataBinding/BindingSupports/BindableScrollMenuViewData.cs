@@ -3,10 +3,9 @@ using UnityEngine;
 
 namespace Lysionium.Samples
 {
-    public class BindableScrollMenuViewData<TItem, TMgr, TArg> : ListViewData<TItem, TMgr, TArg>
+    public class BindableScrollMenuViewData<TItem, TMgr> : ListViewData<TItem, TMgr>
         where TItem : class
         where TMgr : IListuiManager
-        where TArg : IListuiArg
     {
         public System.Func<TMgr, IListHandlerSubview> ScrollSubviewSelector { get; set; }
             = manager => (manager as IDefaultSubviewTable)?.Scroll;
@@ -14,11 +13,11 @@ namespace Lysionium.Samples
             = manager => (manager as IDefaultSubviewTable)?.CaptionBox;
         public System.Func<TMgr, IListHandlerSubview> BackAnchorSubviewSelector { get; set; }
             = manager => (manager as IDefaultSubviewTable)?.BackAnchor;
-        public SelectOptionList<TMgr, TArg> BackAnchorList { get; set; } = new(_ => _.BackIfReflectable());
+        public SelectOptionList<TMgr> BackAnchorList { get; set; } = new(_ => _.BackIfReflectable());
 
         /// <summary>
-        /// このインスタンスのデリゲート実行前に <see cref="SelectOptionViewItemHandler{TMgr, TArg}"/> の処理を挟む
-        /// (リストの前後に <see cref="ISelectOption{TMgr, TArg}"/> を入れる場合を想定)
+        /// このインスタンスのデリゲート実行前に <see cref="SelectOptionViewItemHandler{TMgr}"/> の処理を挟む
+        /// (リストの前後に <see cref="ISelectOption{TMgr}"/> を入れる場合を想定)
         /// </summary>
         public bool EnableSelectOptionProxy
         {
@@ -31,42 +30,34 @@ namespace Lysionium.Samples
         private ISubviewStateProvider captionBoxSubviewStateProvider;
         private ISubviewStateProvider backAnchorSubviewStateProvider;
 
-        private readonly BindableButtonViewItemHandler<TItem, TMgr, TArg> scrollSubviewHandler = new();
-        private ListuiEventHandler<TMgr, TArg> onShow;
-        private ListuiEventHandler onHide;
+        private readonly BindableButtonViewItemHandler<TItem, TMgr> scrollSubviewHandler = new();
 
-        private TMgr manager;
-        private TArg arg;
-
-        public Builder Show(TItem[] list, TMgr manager, TArg arg, object viewStateHolder = null)
+        public Builder Show(TItem[] list, TMgr manager, object viewStateHolder = null)
         {
-            SetOriginalList(list, manager, arg);
-            return ShowCore(manager, arg, viewStateHolder);
+            SetOriginalList(list, manager);
+            return ShowCore(manager, viewStateHolder);
         }
 
-        public Builder Show(IReadOnlyList<TItem> list, TMgr manager, TArg arg, object viewStateHolder = null)
+        public Builder Show(IReadOnlyList<TItem> list, TMgr manager, object viewStateHolder = null)
         {
-            SetOriginalList(list, manager, arg);
-            return ShowCore(manager, arg, viewStateHolder);
+            SetOriginalList(list, manager);
+            return ShowCore(manager, viewStateHolder);
         }
 
-        public Builder Show(System.ReadOnlySpan<TItem> list, TMgr manager, TArg arg, object viewStateHolder = null)
+        public Builder Show(System.ReadOnlySpan<TItem> list, TMgr manager, object viewStateHolder = null)
         {
-            SetOriginalList(list, manager, arg);
-            return ShowCore(manager, arg, viewStateHolder);
+            SetOriginalList(list, manager);
+            return ShowCore(manager, viewStateHolder);
         }
 
-        private Builder ShowCore(TMgr manager, TArg arg, object viewStateHolder)
+        private Builder ShowCore(TMgr manager, object viewStateHolder)
         {
             // 必要に応じてスクロール位置をリセット
             if (viewStateHolder != prevViewStateHolder) { ResetSubviewStateProviders(); }
             prevViewStateHolder = viewStateHolder;
 
-            this.manager = manager;
-            this.arg = arg;
-
-            if (TryShowSubviews(manager, arg)) return null;
-            else return new Builder(this, manager, arg);
+            if (TryShowSubviews(manager)) return null;
+            else return new Builder(this, manager);
         }
 
         protected virtual void ResetSubviewStateProviders()
@@ -76,22 +67,19 @@ namespace Lysionium.Samples
             backAnchorSubviewStateProvider?.Reset();
         }
 
-        protected override void ShowSubviews(TMgr manager, TArg arg)
+        protected override void ShowSubviews(TMgr manager)
         {
             ScrollSubviewSelector?.Invoke(manager)?.Show(
-                List, scrollSubviewHandler, manager, arg, ref scrollSubviewStateProvider, onHide: onHide);
+                List, scrollSubviewHandler, manager, ref scrollSubviewStateProvider, onHide: OnHide);
 
             if (Title != null)
             {
                 CaptionBoxSubviewSelector?.Invoke(manager)?.Show(
-                    Title, manager, arg, ref captionBoxSubviewStateProvider);
+                    Title, manager, ref captionBoxSubviewStateProvider);
             }
 
             BackAnchorSubviewSelector?.Invoke(manager)?.Show(
-                BackAnchorList, manager, arg, ref backAnchorSubviewStateProvider);
-
-            // 上記の Show によって実行される onHide の後に onShow を呼び出す
-            onShow?.Invoke(manager, arg);
+                BackAnchorList, manager, ref backAnchorSubviewStateProvider);
         }
 
         public virtual void Hide(TMgr manager, bool back)
@@ -101,10 +89,10 @@ namespace Lysionium.Samples
             BackAnchorSubviewSelector?.Invoke(manager)?.Hide(back);
         }
 
-        public class Builder : BaseListBuilder<BindableScrollMenuViewData<TItem, TMgr, TArg>, Builder>, IButtonViewItemHandlerBuilder<TItem, TMgr, TArg, Builder>
+        public class Builder : BaseListBuilder<BindableScrollMenuViewData<TItem, TMgr>, Builder>, IButtonViewItemHandlerBuilder<TItem, TMgr, Builder>
         {
-            public Builder(BindableScrollMenuViewData<TItem, TMgr, TArg> parent, TMgr manager, TArg arg)
-                : base(parent, manager, arg)
+            public Builder(BindableScrollMenuViewData<TItem, TMgr> parent, TMgr manager)
+                : base(parent, manager)
             {
             }
 
@@ -116,11 +104,11 @@ namespace Lysionium.Samples
                 rebindList = func(list =>
                 {
                     // 再バインド用にリストを更新
-                    parent.SetOriginalList(list, parent.manager, parent.arg);
+                    parent.SetOriginalList(list, Manager);
 
                     // 再バインド対象の Subview のみ更新する（ShowSubviews を呼び出すとダイアログなどで上書きされた他の Subview も更新してしまう）
                     parent.ScrollSubviewSelector?.Invoke(Manager)?.SetListHandler(
-                        parent.List, parent.scrollSubviewHandler, parent.manager, parent.arg, ref parent.scrollSubviewStateProvider);
+                        parent.List, parent.scrollSubviewHandler, Manager, ref parent.scrollSubviewStateProvider);
                 });
                 return this;
             }
@@ -144,29 +132,7 @@ namespace Lysionium.Samples
                 return this;
             }
 
-            public Builder OnShow(ListuiEventHandler<TMgr, TArg> handler)
-            {
-                AssertNotBuilt();
-
-                Parent.onShow += handler;
-                return this;
-            }
-
-            public Builder OnHide(ListuiEventHandler<TMgr, TArg> handler)
-            {
-                AssertNotBuilt();
-
-                Parent.onHide += (manager, arg) =>
-                {
-                    if (LuiAssert.Type<TMgr>(manager, out var tMgr, manager) ||
-                        LuiAssert.Type<TArg>(arg, out var tArg, manager)) return;
-
-                    handler(tMgr, tArg);
-                };
-                return this;
-            }
-
-            public Builder NameFrom(System.Func<TItem, TMgr, TArg, string> selector)
+            public Builder NameFrom(System.Func<TItem, TMgr, string> selector)
             {
                 AssertNotBuilt();
 
@@ -176,7 +142,7 @@ namespace Lysionium.Samples
                 return this;
             }
 
-            public Builder StyleFrom(System.Func<TItem, TMgr, TArg, string> selector)
+            public Builder StyleFrom(System.Func<TItem, TMgr, string> selector)
             {
                 AssertNotBuilt();
 
@@ -186,7 +152,7 @@ namespace Lysionium.Samples
                 return this;
             }
 
-            public Builder OnClick(ClickItemHandler<TItem, TMgr, TArg> handler)
+            public Builder OnClick(ClickItemHandler<TItem, TMgr> handler)
             {
                 AssertNotBuilt();
 
@@ -200,8 +166,6 @@ namespace Lysionium.Samples
                 Parent.scrollSubviewHandler.GetName = null;
                 Parent.scrollSubviewHandler.GetStyle = null;
                 Parent.scrollSubviewHandler.Click = null;
-                Parent.onShow = null;
-                Parent.onHide = null;
             }
         }
     }

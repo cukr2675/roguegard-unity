@@ -8,22 +8,24 @@ namespace Roguegard
 {
     public class PartyBoardScreen : RogueListuiScreen
     {
-        private readonly ScrollMenuViewData<RogueObj, MMgr, MArg> view = new()
+        private readonly ScrollMenuViewData<RogueObj, MMgr> view = new()
         {
         };
 
-        public override void OpenScreen(MMgr manager, MArg arg)
+        public PartyBoardScreen()
         {
-            // ロビーメンバーの一覧を表示する
-            var worldInfo = RogueWorldInfo.GetByCharacter(arg.Self);
+            OnOpenScreen += (manager) =>
+            {
+                // ロビーメンバーの一覧を表示する
+                var worldInfo = RogueWorldInfo.GetByCharacter(Arg.Self);
 
-            view.Show(worldInfo.LobbyMembers.Members, manager, arg)
+                view.Show(worldInfo.LobbyMembers.Members, manager)
                 ?
                 .Merge(out var merged)
                 .Init(
                     () => merged
                     .Filter(lobbyMember => lobbyMember != null)
-                    
+
                     .Case(
                         lobbyMember => LobbyMemberList.GetMemberInfo(lobbyMember).Seat != null,
                         _ => _
@@ -31,32 +33,33 @@ namespace Roguegard
 
                         // 席についているキャラはそこから呼び戻すか尋ねる
                         .VarOnce(
-                            out var callLobbyDialog, new ChoicesScreen((manager, arg) => $"{arg.Arg.TargetObj}を呼び戻しますか？")
+                            out var callLobbyDialog, new ChoicesScreen(_ => $"{Arg.Arg.TargetObj}を呼び戻しますか？")
                             .Option("はい", CallLobby)
                             .Back())
-                        .OnClick((lobbyMember, manager, arg) => manager.PushScreen(callLobbyDialog, arg.Self, targetObj: lobbyMember)))
+                        .OnClick((lobbyMember, manager) => manager.PushScreen(callLobbyDialog, Arg.Self, targetObj: lobbyMember)))
 
                     .Otherwise(
                         _ => _
                         .NameFrom(lobbyMember => lobbyMember.GetName())
                         .VarOnce(out var nextScreen, new CommandMenuScreen())
-                        .OnClick((lobbyMember, manager, arg) => manager.PushScreen(nextScreen, arg.Self, targetObj: lobbyMember))))
+                        .OnClick((lobbyMember, manager) => manager.PushScreen(nextScreen, Arg.Self, targetObj: lobbyMember))))
 
                 .VarOnce(out var creationScreen, new PartyBoardCharacterCreationScreen())
-                .Tail.Option("+ 追加", (manager, arg) =>
+                .Tail.Option("+ 追加", (manager) =>
                 {
                     // 新規メンバー作成
                     var characterCreationData = RoguegardSettings.CharacterCreationDatabase.LoadPreset(0);
-                    manager.PushScreen(creationScreen, arg.Self, arg.User, other: characterCreationData);
+                    manager.PushScreen(creationScreen, Arg.Self, Arg.User, other: characterCreationData);
                 })
 
                 .Build();
+            };
         }
 
-        private static void CallLobby(MMgr manager, MArg arg)
+        private void CallLobby(MMgr manager)
         {
             // クエストを中止してキャラを席から呼び戻す
-            var character = arg.Arg.TargetObj;
+            var character = Arg.Arg.TargetObj;
             var leader = character.Main.Stats.Party.Members[0];
             default(IActiveRogueMethodCaller).LocateSavePoint(leader, null, 0f, RogueWorldSavePointInfo.Instance, true);
             SpaceUtility.TryLocate(character, null);
@@ -68,33 +71,38 @@ namespace Roguegard
 
         private class CommandMenuScreen : RogueListuiScreen
         {
-            private static readonly PartyBoardCharacterCreationScreen nextScreen = new();
-
-            private readonly MainMenuViewData<MMgr, MArg> view = new()
+            private readonly MainMenuViewData<MMgr> view = new()
             {
                 PrimaryCommandSubviewSelector = m => m.SecondaryCommand,
             };
 
-            public override bool IsIncremental => true;
-
-            public override void OpenScreen(MMgr manager, MArg arg)
+            public CommandMenuScreen()
             {
-                view.Show(manager, arg)
+                OnOpenScreen += (manager) =>
+                {
+                    view.Show(manager)
                     ?
+                    .VarOnce(out var nextScreen, new PartyBoardCharacterCreationScreen())
                     .Option("交代", Change)
                     .Option("加入", Invite)
-                    .Option("編集", Edit)
+                    .Option("編集", m => Edit(m, nextScreen))
                     .Back()
                     .Build();
+                };
+
+                OnCloseScreenView += (manager, back) =>
+                {
+                    view.Hide(manager, back);
+                };
             }
 
             /// <summary>
             /// 交代ボタンクリック時
             /// </summary>
-            private static void Change(MMgr manager, MArg arg)
+            private void Change(MMgr manager)
             {
                 // 席が設定されている場合は失敗させる
-                var info = LobbyMemberList.GetMemberInfo(arg.Arg.TargetObj);
+                var info = LobbyMemberList.GetMemberInfo(Arg.Arg.TargetObj);
                 if (info?.Seat != null)
                 {
                     manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Cancel);
@@ -102,10 +110,10 @@ namespace Roguegard
                 }
 
                 manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-                var newPlayer = arg.Arg.TargetObj;
+                var newPlayer = Arg.Arg.TargetObj;
 
                 // 空間移動
-                var self = arg.Self;
+                var self = Arg.Self;
                 var location = self.Location;
                 var position = self.Position;
                 SpaceUtility.TryLocate(self, null);
@@ -125,10 +133,10 @@ namespace Roguegard
             /// <summary>
             /// 加入ボタンクリック時
             /// </summary>
-            private static void Invite(MMgr manager, MArg arg)
+            private void Invite(MMgr manager)
             {
                 // 席が設定されている場合は失敗させる
-                var info = LobbyMemberList.GetMemberInfo(arg.Arg.TargetObj);
+                var info = LobbyMemberList.GetMemberInfo(Arg.Arg.TargetObj);
                 if (info?.Seat != null)
                 {
                     manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Cancel);
@@ -136,11 +144,11 @@ namespace Roguegard
                 }
 
                 manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-                var newMember = arg.Arg.TargetObj;
+                var newMember = Arg.Arg.TargetObj;
 
                 // 空間移動
-                var party = arg.Self.Main.Stats.Party;
-                if (!default(IChangeStateRogueMethodCaller).LocateNextToAnyMember(newMember, arg.Self, 0f, party)) return;
+                var party = Arg.Self.Main.Stats.Party;
+                if (!default(IChangeStateRogueMethodCaller).LocateNextToAnyMember(newMember, Arg.Self, 0f, party)) return;
                 newMember.Main.Stats.Direction = RogueDirection.Down;
 
                 // パーティ移動
@@ -161,26 +169,21 @@ namespace Roguegard
             /// <summary>
             /// 編集ボタンクリック時
             /// </summary>
-            private static void Edit(MMgr manager, MArg arg)
+            private void Edit(MMgr manager, PartyBoardCharacterCreationScreen nextScreen)
             {
                 // 席が設定されている場合は失敗させる
-                var info = LobbyMemberList.GetMemberInfo(arg.Arg.TargetObj);
+                var info = LobbyMemberList.GetMemberInfo(Arg.Arg.TargetObj);
                 if (info?.Seat != null)
                 {
                     manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Cancel);
                     return;
                 }
 
-                var character = arg.Arg.TargetObj;
+                var character = Arg.Arg.TargetObj;
                 var characterCreationData = new CharacterCreationData(info.CharacterCreationData);
 
                 manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
-                manager.PushScreen(nextScreen, arg.Self, arg.User, targetObj: character, other: characterCreationData);
-            }
-
-            public override void CloseScreenView(MMgr manager, bool back)
-            {
-                view.Hide(manager, back);
+                manager.PushScreen(nextScreen, Arg.Self, Arg.User, targetObj: character, other: characterCreationData);
             }
         }
     }

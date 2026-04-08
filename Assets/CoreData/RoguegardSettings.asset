@@ -51,6 +51,9 @@ MonoBehaviour:
   _lightRatio: 0.972549
   _defaultSaveFileName: Data.gard
   _scriptEvaluators:
+  - _script: {fileID: 11500000, guid: ab4ac0f4fd437c7408da7c7b647746b7, type: 3}
+    _ref:
+      rid: 8559514506458563246
   - _script: {fileID: 11500000, guid: 5c0433e7c1ca6714496bf806c4f4369d, type: 3}
     _ref:
       rid: 7922971030183215106
@@ -98,5 +101,9 @@ MonoBehaviour:
         _assemblyReflectionAssetDummy: 
     - rid: 7922971030183215106
       type: {class: MoonSharpScriptEvaluator, ns: Roguegard.Rgpacks.MoonSharp, asm: Roguegard.Rgpacks.MoonSharp}
+      data:
+        _assemblyReflectionAssetDummy: 
+    - rid: 8559514506458563246
+      type: {class: TypeScriptScriptEvaluator, ns: Roguegard.Rgpacks.TypeScript, asm: Roguegard.Rgpacks.TypeScript}
       data:
         _assemblyReflectionAssetDummy: 

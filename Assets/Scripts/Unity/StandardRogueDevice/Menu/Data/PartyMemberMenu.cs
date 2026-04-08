@@ -3,50 +3,40 @@ using Roguegard.Device;
 
 namespace RoguegardUnity
 {
-    public class PartyMemberMenu : RogueListuiScreen, IListuiScreen<MMgr, MArg>
+    public class PartyMemberMenu : RogueListuiScreen
     {
-        private readonly ObjsMenu objsMenu;
-        private readonly ObjCommandMenuScreen objCommandMenu;
-        private readonly SkillsMenu skillsMenu;
-
-        private readonly MainMenuViewData<MMgr, MArg> view = new()
+        private readonly MainMenuViewData<MMgr> view = new()
         {
             PrimaryCommandSubviewSelector = m => m.SecondaryCommand,
         };
 
-        public override bool IsIncremental => true;
-
         public PartyMemberMenu(ObjsMenu objsMenu, ObjCommandMenuScreen objCommandMenu, SkillsMenu skillsMenu)
         {
-            this.objsMenu = objsMenu;
-            this.objCommandMenu = objCommandMenu;
-            this.skillsMenu = skillsMenu;
-        }
-
-        public override void OpenScreen(MMgr manager, MArg arg)
-        {
-            view.Show(manager, arg)
+            OnOpenScreen += (manager) =>
+            {
+                view.Show(manager)
                 ?
-                .Tail.Option(objCommandMenu.Summary)
+                .Tail.Option(objCommandMenu.Summary, () => Arg)
 
-                .Option(":Items", (manager, arg) =>
+                .Option(":Items", (manager) =>
                 {
-                    manager.PushScreen(objsMenu.Items, arg.Self, targetObj: arg.Self);
+                    manager.PushScreen(objsMenu.Items, Arg.Self, targetObj: Arg.Self);
                 })
 
-                .Option(":Skills", (manager, arg) =>
+                .Option(":Skills", (manager) =>
                 {
-                    manager.PushScreen(skillsMenu.Use, arg.Self);
+                    manager.PushScreen(skillsMenu.Use, Arg.Self);
                 })
 
                 .Back()
 
                 .Build();
-        }
+            };
 
-        public override void CloseScreenView(MMgr manager, bool back)
-        {
-            view.Hide(manager, back);
+            OnCloseScreenView += (manager, back) =>
+            {
+                view.Hide(manager, back);
+            };
         }
     }
 }

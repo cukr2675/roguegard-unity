@@ -1,14 +1,13 @@
 namespace Lysionium
 {
     /// <summary>
-    /// <see cref="IListuiScreen{TMgr, TArg}"/> を表示可能な <see cref="IListuiManager"/>
+    /// <see cref="IListuiScreen{TMgr}"/> を表示可能な <see cref="IListuiManager"/>
     /// </summary>
-    public interface IListuiScreenManager<TMgr, TArg> : IListuiManager
+    public interface IListuiScreenManager<TMgr> : IListuiManager
         where TMgr : IListuiManager
-        where TArg : IListuiArg
     {
-        void PushScreen(IListuiScreen<TMgr, TArg> screen, TArg arg);
+        void PushScreen(IListuiScreen<TMgr> screen);
 
-        void PushScreen<TCtx>(IListuiScreen<TMgr, TArg, TCtx> screen, TArg arg, TCtx context);
+        void PushScreen<TArg>(IListuiScreen<TMgr, TArg> screen, TArg arg);
     }
 }

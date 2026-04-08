@@ -6,8 +6,8 @@ namespace Lysionium
     {
         bool IsInProgress { get; }
 
-        void SetText(string text, IListuiManager manager, IListuiArg arg, ref ISubviewStateProvider stateProvider);
-        void SetTextRaw(StringBuilder stringBuilder, IListuiManager manager, IListuiArg arg, ref ISubviewStateProvider stateProvider);
+        void SetText(string text, IListuiManager manager, ref ISubviewStateProvider stateProvider);
+        void SetTextRaw(StringBuilder stringBuilder, IListuiManager manager, ref ISubviewStateProvider stateProvider);
 
         void Append(string text);
         void AppendRaw(StringBuilder stringBuilder);

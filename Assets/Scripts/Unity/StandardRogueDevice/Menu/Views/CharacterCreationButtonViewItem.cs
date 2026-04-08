@@ -39,7 +39,7 @@ namespace RoguegardUnity
             source = intrinsic;
             _icon.enabled = false;
 
-            var text = presenter.GetName(intrinsic, Manager, Arg);
+            var text = presenter.GetName(intrinsic, Manager);
             text = StandardRogueDeviceUtility.Localize(text);
             var lv = intrinsic.Option.GetLv(intrinsic, characterCreationData);
             _text.text = $"Lv{lv} {text}";
@@ -58,7 +58,7 @@ namespace RoguegardUnity
             source = startingItem;
             _icon.enabled = false;
 
-            var text = presenter.GetName(startingItem, Manager, Arg);
+            var text = presenter.GetName(startingItem, Manager);
             text = StandardRogueDeviceUtility.Localize(text);
             _text.text = text;
 
@@ -113,7 +113,7 @@ namespace RoguegardUnity
 
         void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
         {
-            presenter.Click(source, Manager, Arg);
+            presenter.Click(source, Manager);
         }
 
         protected override void BindCore(object item, IViewItemHandler handler)

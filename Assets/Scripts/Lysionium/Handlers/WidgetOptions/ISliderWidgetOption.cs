@@ -8,10 +8,10 @@ namespace Lysionium
 
         float MaxValue { get; }
 
-        delegate float SliderEventHandler<in TMgr, in TArg>(TMgr manager, TArg arg, float value);
+        delegate float SliderEventHandler<in TMgr>(TMgr manager, float value);
 
-        float GetValue(IListuiManager manager, IListuiArg arg);
+        float GetValue(IListuiManager manager);
 
-        float HandleValueChanged(IListuiManager manager, IListuiArg arg, float value);
+        float HandleValueChanged(IListuiManager manager, float value);
     }
 }

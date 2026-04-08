@@ -19,34 +19,36 @@ namespace Roguegard
 
         private class SewingMachineScreen : RogueListuiScreen
         {
-            private readonly ScrollMenuViewData<RogueObj, MMgr, MArg> view = new()
+            private readonly ScrollMenuViewData<RogueObj, MMgr> view = new()
             {
             };
 
-            public override void OpenScreen(MMgr manager, MArg arg)
+            public SewingMachineScreen()
             {
-                view.Show(arg.Self.Space.Objs, manager, arg)
+                OnOpenScreen += (manager) =>
+                {
+                    view.Show(Arg.Self.Space.Objs, manager)
                     ?
                     .Filter(obj => obj != null)
 
-                    .NameFrom((item, manager, arg) =>
+                    .NameFrom((item, manager) =>
                     {
                         if (item == null) return "+ 新しく作る";
                         else return item.GetName();
                     })
 
                     .VarOnce(out var nextScreen, new SewingScreen())
-                    .OnClick((item, manager, arg) =>
+                    .OnClick((item, manager) =>
                     {
                         if (item.Main.BaseInfoSet is SewedEquipmentInfoSet infoSet)
                         {
                             // 保存せず終了できるように複製する
                             var data = infoSet.GetDataClone();
-                            manager.PushScreen(nextScreen, arg.Self, other: data, targetObj: item);
+                            manager.PushScreen(nextScreen, Arg.Self, other: data, targetObj: item);
                         }
                     })
 
-                    .Tail.Option("+ 新しく作る", (manager, arg) =>
+                    .Tail.Option("+ 新しく作る", (manager) =>
                     {
                         // 装備品を新規作成する場合はデータクラスを生成する
                         var data = new SewedEquipmentData();
@@ -55,118 +57,123 @@ namespace Roguegard
                             data.BoneSprites.SetPalette(i, RoguegardSettings.DefaultPalette[i]);
                         }
                         data.BoneSprites.MainColor = Color.white;
-                        manager.PushScreen(nextScreen, arg.Self, other: data, targetObj: null);
+                        manager.PushScreen(nextScreen, Arg.Self, other: data, targetObj: null);
                     })
 
                     .Build();
+                };
             }
         }
 
         private class SewingScreen : RogueListuiScreen
         {
-            private readonly ScrollMenuViewData<IPaintBoneSprite, MMgr, MArg> view = new()
+            private readonly ScrollMenuViewData<IPaintBoneSprite, MMgr> view = new()
             {
                 ScrollSubviewSelector = m => m.Widgets,
-                BackAnchorList = new(_ => _.Option(":Back", ChoicesScreen.SaveBackDialog(Save))),
             };
 
-            public override void OpenScreen(MMgr manager, MArg arg)
+            public SewingScreen()
             {
-                var data = (SewedEquipmentData)arg.Arg.Other;
+                view.BackAnchorList = new(_ => _.Option(":Back", ChoicesScreen.SaveBackDialog(Save), () => Arg));
 
-                view.Show(data.BoneSprites.Items, manager, arg)
+                OnOpenScreen += (manager) =>
+                {
+                    var data = (SewedEquipmentData)Arg.Arg.Other;
+
+                    view.Show(data.BoneSprites.Items, manager)
                     ?
-                    .VarOnce(out var colorPicker, new ColorPickerScreen<MMgr, MArg>(
-                        (manager, arg) =>
+                    .VarOnce(out var colorPicker, new ColorPickerScreen<MMgr>(
+                        (manager) =>
                         {
-                            var data = (SewedEquipmentData)arg.Arg.Other;
+                            var data = (SewedEquipmentData)Arg.Arg.Other;
                             return data.BoneSprites.MainColor;
                         },
-                        (manager, arg, color) =>
+                        (color, manager) =>
                         {
-                            var data = (SewedEquipmentData)arg.Arg.Other;
+                            var data = (SewedEquipmentData)Arg.Arg.Other;
                             data.BoneSprites.MainColor = color;
                         }))
                     .Head.Append(StackWidgetOption.Create(
                         ("1*", "名前"),
-                        ("1*", InputFieldWidgetOption.Create<MMgr, MArg>(
-                            (manager, arg) =>
+                        ("1*", InputFieldWidgetOption.Create<MMgr>(
+                            _ =>
                             {
-                                var data = (SewedEquipmentData)arg.Arg.Other;
+                                var data = (SewedEquipmentData)Arg.Arg.Other;
                                 return data.Name;
                             },
-                            (manager, arg, value) =>
+                            value =>
                             {
-                                var data = (SewedEquipmentData)arg.Arg.Other;
+                                var data = (SewedEquipmentData)Arg.Arg.Other;
                                 return data.Name = value;
                             }))))
 
-                    .Head.Append(SelectOption.Create<MMgr, MArg>(
-                        getName: (manager, arg) =>
+                    .Head.Append(SelectOption.Create<MMgr>(
+                        getName: (manager) =>
                         {
-                            var data = (SewedEquipmentData)arg.Arg.Other;
+                            var data = (SewedEquipmentData)Arg.Arg.Other;
                             return $"<#{ColorUtility.ToHtmlStringRGBA(data.BoneSprites.MainColor)}>メインカラー";
                         },
-                        onClick: (manager, arg) => manager.PushScreen(colorPicker, arg)))
+                        onClick: (manager) => manager.PushScreen(colorPicker)))
 
                     .VarOnce(out var equipmentSlotsScreen, new EquipmentSlotsScreen())
-                    .Head.Option("装備部位", equipmentSlotsScreen)
+                    .Head.Option("装備部位", equipmentSlotsScreen, () => Arg)
 
                     .Head.Append(StackWidgetOption.Create(
                         ("1*", "順序"),
-                        ("1*", InputFieldWidgetOption.Create<MMgr, MArg>(
-                            (manager, arg) =>
+                        ("1*", InputFieldWidgetOption.Create<MMgr>(
+                            _ =>
                             {
-                                var data = (SewedEquipmentData)arg.Arg.Other;
+                                var data = (SewedEquipmentData)Arg.Arg.Other;
                                 return data.BoneSpriteEffectOrder.ToString();
                             },
-                            (manager, arg, value) =>
+                            value =>
                             {
                                 if (!float.TryParse(value, out var order)) { order = 0f; }
 
-                                var data = (SewedEquipmentData)arg.Arg.Other;
+                                var data = (SewedEquipmentData)Arg.Arg.Other;
                                 data.BoneSpriteEffectOrder = order;
                                 return order.ToString();
                             },
                             TMP_InputField.ContentType.DecimalNumber))))
 
-                    .NameFrom((item, manager, arg) =>
+                    .NameFrom((item, manager) =>
                     {
                         if (item is PaintBoneSprite boneSprite) return boneSprite.Bone.Name;
                         else return string.Empty;
                     })
 
                     .VarOnce(out var nextScreen, new PaintBoneSpriteMenuScreen())
-                    .OnClick((boneSprite, manager, arg) =>
+                    .OnClick((boneSprite, manager) =>
                     {
                         // 部位編集
-                        var data = (SewedEquipmentData)arg.Arg.Other;
-                        manager.PushScreen(nextScreen, arg.Self, other: data.BoneSprites, count: data.BoneSprites.IndexOf(boneSprite));
+                        var data = (SewedEquipmentData)Arg.Arg.Other;
+                        manager.PushScreen(nextScreen, Arg.Self, other: data.BoneSprites, count: data.BoneSprites.IndexOf(boneSprite));
                     })
 
-                    .Tail.Option("+ 追加", (manager, arg) =>
+                    .Tail.Option("+ 追加", (manager) =>
                     {
                         // 部位追加
-                        var data = (SewedEquipmentData)arg.Arg.Other;
+                        var data = (SewedEquipmentData)Arg.Arg.Other;
                         var boneSprite = new PaintBoneSprite();
                         boneSprite.NormalFront = boneSprite.BackRear = new DotterBoard(new Vector2Int(32, 32), 16);
                         boneSprite.NormalRear = boneSprite.BackFront = new DotterBoard(new Vector2Int(32, 32), 16);
                         boneSprite.Bone = BoneKeyword.Body;
                         boneSprite.Mirroring = true;
                         data.BoneSprites.Add(boneSprite);
-                        manager.PushScreen(nextScreen, arg.Self, other: data.BoneSprites, count: data.BoneSprites.IndexOf(boneSprite));
+                        manager.PushScreen(nextScreen, Arg.Self, other: data.BoneSprites, count: data.BoneSprites.IndexOf(boneSprite));
                     })
 
                     .Build();
+                };
             }
 
-            private static void Save(MMgr manager, MArg arg)
+            private void Save(MMgr manager)
             {
                 manager.AddObject(DeviceKw.EnqueueSE, DeviceKw.Submit);
 
                 // 編集画面から戻ったとき、その装備品を更新する
-                var data = (SewedEquipmentData)arg.Arg.Other;
-                var equipment = arg.Arg.TargetObj;
+                var data = (SewedEquipmentData)Arg.Arg.Other;
+                var equipment = Arg.Arg.TargetObj;
                 if (equipment != null)
                 {
                     // 装備品更新
@@ -175,7 +182,7 @@ namespace Roguegard
                 else
                 {
                     // 新規装備品
-                    new SewedEquipmentInfoSet(data).CreateObj(arg.Self, Vector2Int.zero);
+                    new SewedEquipmentInfoSet(data).CreateObj(Arg.Self, Vector2Int.zero);
                 }
 
                 manager.PopScreen(2);
@@ -184,45 +191,47 @@ namespace Roguegard
 
         private class EquipmentSlotsScreen : RogueListuiScreen
         {
-            private ISerializableKeyword[] keywords;
-
-            private readonly ScrollMenuViewData<ISerializableKeyword, MMgr, MArg> view = new()
+            private readonly ScrollMenuViewData<ISerializableKeyword, MMgr> view = new()
             {
             };
 
-            public override void OpenScreen(MMgr manager, MArg arg)
+            public EquipmentSlotsScreen()
             {
-                keywords ??= new ISerializableKeyword[]
-                {
-                    //EquipmentSlotKw.Shield,
-                    //EquipmentSlotKw.Weapon,
-                    //EquipmentSlotKw.Ammo,
-                    EquipmentSlotKw.Headwear,
-                    EquipmentSlotKw.Cloak,
-                    //EquipmentSlotKw.Accessory,
-                    //EquipmentSlotKw.BodyArmor,
-                    EquipmentSlotKw.Tops,
-                    EquipmentSlotKw.Boots,
-                    EquipmentSlotKw.Bottoms,
-                    EquipmentSlotKw.Glasses,
-                    EquipmentSlotKw.FaceMask,
-                    EquipmentSlotKw.Gloves,
-                    EquipmentSlotKw.Socks,
-                    EquipmentSlotKw.Innerwear,
-                    null
-                };
+                ISerializableKeyword[] keywords = null;
 
-                view.Show(keywords, manager, arg)
+                OnOpenScreen += (manager) =>
+                {
+                    keywords ??= new ISerializableKeyword[]
+                    {
+                        //EquipmentSlotKw.Shield,
+                        //EquipmentSlotKw.Weapon,
+                        //EquipmentSlotKw.Ammo,
+                        EquipmentSlotKw.Headwear,
+                        EquipmentSlotKw.Cloak,
+                        //EquipmentSlotKw.Accessory,
+                        //EquipmentSlotKw.BodyArmor,
+                        EquipmentSlotKw.Tops,
+                        EquipmentSlotKw.Boots,
+                        EquipmentSlotKw.Bottoms,
+                        EquipmentSlotKw.Glasses,
+                        EquipmentSlotKw.FaceMask,
+                        EquipmentSlotKw.Gloves,
+                        EquipmentSlotKw.Socks,
+                        EquipmentSlotKw.Innerwear,
+                        null
+                    };
+
+                    view.Show(keywords, manager)
                     ?
-                    .NameFrom((slot, manager, arg) =>
+                    .NameFrom((slot, manager) =>
                     {
                         if (slot == null) return "その他";
                         return slot.Name;
                     })
 
-                    .OnClick((slot, manager, arg) =>
+                    .OnClick((slot, manager) =>
                     {
-                        var data = (SewedEquipmentData)arg.Arg.Other;
+                        var data = (SewedEquipmentData)Arg.Arg.Other;
                         if (slot == null)
                         {
                             data.SetEquipmentSlots(Spanning<ISerializableKeyword>.Empty);
@@ -241,6 +250,7 @@ namespace Roguegard
                     })
 
                     .Build();
+                };
             }
         }
     }

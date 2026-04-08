@@ -17,10 +17,10 @@ namespace Roguegard.Device
         private readonly CharacterCreationOptionsSelectOption singleItemMemberSelectOption;
         private readonly CharacterCreationOptionsSelectOption alphabetTypeMemberSelectOption;
 
-        private readonly VariableWidgetsMenuViewData<MMgr, MArg> raceView = new();
-        private readonly VariableWidgetsMenuViewData<MMgr, MArg> appearanceView = new();
-        private readonly VariableWidgetsMenuViewData<MMgr, MArg> intrinsicView = new();
-        private readonly VariableWidgetsMenuViewData<MMgr, MArg> startingItemView = new();
+        private readonly VariableWidgetsMenuViewData<MMgr> raceView = new();
+        private readonly VariableWidgetsMenuViewData<MMgr> appearanceView = new();
+        private readonly VariableWidgetsMenuViewData<MMgr> intrinsicView = new();
+        private readonly VariableWidgetsMenuViewData<MMgr> startingItemView = new();
 
         public CharacterCreationOptionScreen(ICharacterCreationDatabase database)
         {
@@ -30,62 +30,56 @@ namespace Roguegard.Device
 
             singleItemMemberSelectOption = new CharacterCreationOptionsSelectOption(database);
             alphabetTypeMemberSelectOption = new CharacterCreationOptionsSelectOption(database);
-        }
 
-        public void Set(CharacterCreationData characterCreationData)
-        {
-            removeSelectOption.characterCreationData = characterCreationData;
-        }
-
-        public override void OpenScreen(MMgr manager, MArg arg)
-        {
-            selectOption.Set(arg.Arg.Other);
-            list.Clear();
-            AddMemberElementsTo(list, (IReadOnlyMemberable)arg.Arg.Other);
-
-            if (arg.Arg.Other is Race race)
+            OnOpenScreen += (manager) =>
             {
-                raceView.Show(list, manager, arg)
+                selectOption.Set(Arg.Self, Arg.Arg.Other);
+                list.Clear();
+                AddMemberElementsTo(list, (IReadOnlyMemberable)Arg.Arg.Other);
+
+                if (Arg.Arg.Other is Race race)
+                {
+                    raceView.Show(list, manager)
                     ?
-                    .HeadStack("職業／二つ名", InputFieldWidgetOption.Create<MMgr, MArg>(
-                        (manager, arg) => removeSelectOption.characterCreationData.ShortName,
-                        (manager, arg, value) => removeSelectOption.characterCreationData.ShortName = value))
+                    .HeadStack("職業／二つ名", InputFieldWidgetOption.Create<MMgr>(
+                        _ => removeSelectOption.characterCreationData.ShortName,
+                        value => removeSelectOption.characterCreationData.ShortName = value))
 
                     .Head.Option(selectOption)
 
                     .Head.Option(
-                        (manager, arg) =>
+                        (manager) =>
                         {
-                            var race = (Race)arg.Arg.Other;
+                            var race = (Race)Arg.Arg.Other;
                             return $"性別：{race.Gender.Name}";
                         },
-                        (manager, arg) =>
+                        (manager) =>
                         {
-                            var race = (Race)arg.Arg.Other;
+                            var race = (Race)Arg.Arg.Other;
                             var nextScreen = new GenderSelectionScreen { database = database };
-                            manager.PushScreen(nextScreen, arg.Self, other: arg.Arg.Other);
+                            manager.PushScreen(nextScreen, Arg.Self, other: Arg.Arg.Other);
                         })
 
                     .Head.Option(
-                        (manager, arg) =>
+                        (manager) =>
                         {
-                            var race = (Race)arg.Arg.Other;
+                            var race = (Race)Arg.Arg.Other;
                             return $"<#{ColorUtility.ToHtmlStringRGBA(race.BodyColor)}>カラー";
                         },
                         ColorPicker())
 
                     .Build();
-            }
-            else if (arg.Arg.Other is Appearance appearance)
-            {
-                appearanceView.Show(list, manager, arg)
+                }
+                else if (Arg.Arg.Other is Appearance appearance)
+                {
+                    appearanceView.Show(list, manager)
                     ?
                     .Head.Option(selectOption)
 
                     .Head.Option(
-                        (manager, arg) =>
+                        (manager) =>
                         {
-                            var appearance = (Appearance)arg.Arg.Other;
+                            var appearance = (Appearance)Arg.Arg.Other;
                             return $"<#{ColorUtility.ToHtmlStringRGBA(appearance.Color)}>カラー";
                         },
                         ColorPicker())
@@ -93,50 +87,50 @@ namespace Roguegard.Device
                     .Tail.Option(removeSelectOption)
 
                     .Build();
-            }
-            else if (arg.Arg.Other is Intrinsic intrinsic)
-            {
-                intrinsicView.Show(list, manager, arg)
+                }
+                else if (Arg.Arg.Other is Intrinsic intrinsic)
+                {
+                    intrinsicView.Show(list, manager)
                     ?
                     .Head.Option(selectOption)
 
-                    .HeadStack("名前", InputFieldWidgetOption.Create<MMgr, MArg>(
-                        (manager, arg) =>
+                    .HeadStack("名前", InputFieldWidgetOption.Create<MMgr>(
+                        _ =>
                         {
-                            var intrinsic = (Intrinsic)arg.Arg.Other;
+                            var intrinsic = (Intrinsic)Arg.Arg.Other;
                             return intrinsic.CustomName;
                         },
-                        (manager, arg, value) =>
+                        value =>
                         {
                             // 空欄の場合は上書きしないよう null にする
                             if (string.IsNullOrWhiteSpace(value)) { value = null; }
 
-                            var intrinsic = (Intrinsic)arg.Arg.Other;
+                            var intrinsic = (Intrinsic)Arg.Arg.Other;
                             return intrinsic.CustomName = value;
                         }))
 
                     .Tail.Option(removeSelectOption)
 
                     .Build();
-            }
-            else if (arg.Arg.Other is StartingItem startingItem)
-            {
-                startingItemView.Show(list, manager, arg)
+                }
+                else if (Arg.Arg.Other is StartingItem startingItem)
+                {
+                    startingItemView.Show(list, manager)
                     ?
                     .Head.Option(selectOption)
 
-                    .HeadStack("個数", InputFieldWidgetOption.Create<MMgr, MArg>(
-                        (manager, arg) =>
+                    .HeadStack("個数", InputFieldWidgetOption.Create<MMgr>(
+                        _ =>
                         {
-                            var startingItem = (StartingItem)arg.Arg.Other;
+                            var startingItem = (StartingItem)Arg.Arg.Other;
                             var value = startingItem.Stack / RogueObj.GetMaxStack(startingItem.Option.InfoSet, StackOption.Default);
                             return value.ToString();
                         },
-                        (manager, arg, valueString) =>
+                        valueString =>
                         {
                             if (int.TryParse(valueString, out var value))
                             {
-                                var startingItem = (StartingItem)arg.Arg.Other;
+                                var startingItem = (StartingItem)Arg.Arg.Other;
                                 startingItem.Stack = value * RogueObj.GetMaxStack(startingItem.Option.InfoSet, StackOption.Default);
                                 if (startingItem.Stack <= 0) { startingItem.Stack = 1; }
                                 return startingItem.Stack.ToString();
@@ -149,11 +143,19 @@ namespace Roguegard.Device
                     .Tail.Option(removeSelectOption)
 
                     .Build();
-            }
-            else
-            {
-                throw new System.InvalidOperationException();
-            }
+                }
+                else
+                {
+                    throw new System.InvalidOperationException();
+                }
+            };
+        }
+
+        public void Set(RogueObj self, object other, CharacterCreationData characterCreationData)
+        {
+            removeSelectOption.self = self;
+            removeSelectOption.other = other;
+            removeSelectOption.characterCreationData = characterCreationData;
         }
 
         private void AddMemberElementsTo(List<object> list, IReadOnlyMemberable memberable)
@@ -163,7 +165,7 @@ namespace Roguegard.Device
                 var member = memberable.GetMember(memberSource);
                 if (member is SingleItemMember singleItemMember)
                 {
-                    list.Add(singleItemMemberSelectOption.Set(singleItemMember));
+                    list.Add(singleItemMemberSelectOption.Set(Arg.Self, singleItemMember));
                 }
                 else if (member is EquipMember equipMember)
                 {
@@ -180,7 +182,7 @@ namespace Roguegard.Device
                 else if (member is AlphabetTypeMember alphabetTypeMember && memberable is Appearance appearance)
                 {
                     appearance.Option.UpdateMemberRange(alphabetTypeMember, appearance, removeSelectOption.characterCreationData);
-                    list.Add(alphabetTypeMemberSelectOption.Set(alphabetTypeMember));
+                    list.Add(alphabetTypeMemberSelectOption.Set(Arg.Self, alphabetTypeMember));
                 }
                 else if (member is StandardRaceMember standardRaceMember && memberable is Race race)
                 {
@@ -188,9 +190,9 @@ namespace Roguegard.Device
                     var standardRaceOption = (IStandardRaceOption)race.Option;
                     list.Add(StackWidgetOption.Create(
                         ("1*", "サイズ"),
-                        ("1*", InputFieldWidgetOption.Create<MMgr, MArg>(
-                            (manager, arg) => standardRaceMember.Size.ToString(),
-                            (manager, arg, valueString) =>
+                        ("1*", InputFieldWidgetOption.Create<MMgr>(
+                            _ => standardRaceMember.Size.ToString(),
+                            valueString =>
                             {
                                 if (!int.TryParse(valueString, out var value)) return valueString;
 
@@ -202,30 +204,30 @@ namespace Roguegard.Device
             }
         }
 
-        private ColorPickerScreen<MMgr, MArg> ColorPicker()
+        private ColorPickerScreen<MMgr> ColorPicker()
         {
-            return new ColorPickerScreen<MMgr, MArg>(
-                (manager, arg) =>
+            return new ColorPickerScreen<MMgr>(
+                (manager) =>
                 {
-                    if (arg.Arg.Other is Race race)
+                    if (Arg.Arg.Other is Race race)
                     {
                         return race.BodyColor;
                     }
-                    else if (arg.Arg.Other is Appearance appearance)
+                    else if (Arg.Arg.Other is Appearance appearance)
                     {
                         return appearance.Color;
                     }
                     Debug.LogError("不正な型です。");
                     return Color.white;
                 },
-                (manager, arg, color) =>
+                (color, manager) =>
                 {
-                    if (arg.Arg.Other is Race race)
+                    if (Arg.Arg.Other is Race race)
                     {
                         race.BodyColor = color;
                         return;
                     }
-                    else if (arg.Arg.Other is Appearance appearance)
+                    else if (Arg.Arg.Other is Appearance appearance)
                     {
                         appearance.Color = color;
                         return;
@@ -234,20 +236,19 @@ namespace Roguegard.Device
                 });
         }
 
-        private class RemoveSelectOption : ISelectOption<MMgr, MArg>
+        private class RemoveSelectOption : ISelectOption<MMgr>
         {
+            public RogueObj self;
+            public object other;
             public CharacterCreationData characterCreationData;
 
-            string ISelectOption<MMgr, MArg>.GetName(MMgr manager, MArg arg) => "<#f00>削除";
+            string ISelectOption<MMgr>.GetName(MMgr manager) => "<#f00>削除";
 
-            string ISelectOption<MMgr, MArg>.GetStyle(MMgr manager, MArg arg) => null;
+            string ISelectOption<MMgr>.GetStyle(MMgr manager) => null;
 
-            void ISelectOption<MMgr, MArg>.Click(MMgr iManager, MArg iArg)
+            void ISelectOption<MMgr>.Click(MMgr manager)
             {
-                var manager = (MMgr)iManager;
-                var arg = (MArg)iArg;
-
-                if (arg.Arg.Other is IReadOnlyMemberable memberable)
+                if (other is IReadOnlyMemberable memberable)
                 {
                     foreach (var memberSource in memberable.MemberSources)
                     {
@@ -255,23 +256,23 @@ namespace Roguegard.Device
                         if (member is SingleItemMember singleItemMember)
                         {
                             // 見た目装備を削除したとき、その装備品を獲得する
-                            CharacterCreationAddScreen.ReceiveStartingItemOptionObj(singleItemMember.ItemOption, arg.Self);
+                            CharacterCreationAddScreen.ReceiveStartingItemOptionObj(singleItemMember.ItemOption, self);
                         }
                     }
                 }
 
-                if (arg.Arg.Other is Appearance appearance)
+                if (other is Appearance appearance)
                 {
                     characterCreationData.Appearances.Remove(appearance);
                 }
-                else if (arg.Arg.Other is Intrinsic intrinsic)
+                else if (other is Intrinsic intrinsic)
                 {
                     characterCreationData.Intrinsics.Remove(intrinsic);
                 }
-                else if (arg.Arg.Other is StartingItem startingItem)
+                else if (other is StartingItem startingItem)
                 {
                     // 初期アイテムを削除したとき、そのアイテムを獲得する
-                    CharacterCreationAddScreen.ReceiveStartingItemOptionObj(startingItem.Option, arg.Self);
+                    CharacterCreationAddScreen.ReceiveStartingItemOptionObj(startingItem.Option, self);
                     characterCreationData.StartingItemTable.Remove(startingItem, true);
                 }
                 manager.PopScreen();
@@ -282,27 +283,30 @@ namespace Roguegard.Device
         {
             public ICharacterCreationDatabase database;
 
-            private readonly ScrollMenuViewData<IRogueGender, MMgr, MArg> view = new()
+            private readonly ScrollMenuViewData<IRogueGender, MMgr> view = new()
             {
             };
 
-            private Race race;
-
-            public override void OpenScreen(MMgr manager, MArg arg)
+            public GenderSelectionScreen()
             {
-                race = (Race)arg.Arg.Other;
+                Race race;
 
-                view.Show(race.Option.Genders, manager, arg)
+                OnOpenScreen += (manager) =>
+                {
+                    race = (Race)Arg.Arg.Other;
+
+                    view.Show(race.Option.Genders, manager)
                     ?
                     .NameFrom(gender => gender.Name)
 
-                    .OnClick((gender, manager, arg) =>
+                    .OnClick((gender, manager) =>
                     {
                         race.Gender = gender;
                         manager.PopScreen();
                     })
 
                     .Build();
+                };
             }
         }
     }

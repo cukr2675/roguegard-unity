@@ -21,6 +21,7 @@ namespace RoguegardUnity
         [SerializeField] private TMP_Text _textRightL = null;
         [SerializeField] private TMP_Text _textRightR = null;
 
+        private MArg arg;
         private StringBuilder topBuilder;
         private StringBuilder leftLBuilder;
         private StringBuilder leftRBuilder;
@@ -28,41 +29,13 @@ namespace RoguegardUnity
         private StringBuilder rightRBuilder;
         private RogueNameBuilder nameBuilder;
 
-        private static readonly ISelectOption<MMgr, MArg>[] backSelectOption = new[]
+        private static readonly ISelectOption<MMgr>[] backSelectOption = new[]
         {
-            BackSelectOption<MMgr, MArg>.Instance
+            BackSelectOption<MMgr>.Instance
         };
 
-        private static readonly ISelectOption<MMgr, MArg>[] submitSelectOption = new[]
-        {
-            SelectOption.Create<MMgr, MArg>("OK", (manager, arg) =>
-            {
-                var dungeon = DungeonInfo.GetLargestDungeon(arg.Arg.TargetObj);
-
-                if (!default(IActiveRogueMethodCaller).LocateSavePoint(arg.Self, null, 0f, RogueWorldSavePointInfo.Instance, true)) return;
-
-                if (dungeon?.Stack >= 1)
-                {
-                    dungeon.TrySetStack(0);
-                }
-                var memberInfo = LobbyMemberList.GetMemberInfo(arg.Self);
-                memberInfo.SavePoint = RogueWorldSavePointInfo.Instance;
-
-                RogueDevice.Add(DeviceKw.AutoSave, 0);
-            })
-        };
-
-        private static readonly ISelectOption<MMgr, MArg>[] startQuestSelectOption = new[]
-        {
-            SelectOption.Create<MMgr, MArg>("出発", (manager, arg) =>
-            {
-                var quest = (DungeonQuest)arg.Arg.Other;
-                quest.Start(arg.Self);
-
-                // BackToLobby で階層表示させるため、ここでは終了させない。
-                manager.Done();
-            })
-        };
+        private ISelectOption<MMgr>[] submitSelectOption;
+        private ISelectOption<MMgr>[] startQuestSelectOption;
 
         public void Initialize()
         {
@@ -72,6 +45,37 @@ namespace RoguegardUnity
             rightLBuilder = new StringBuilder();
             rightRBuilder = new StringBuilder();
             nameBuilder = new RogueNameBuilder();
+
+            submitSelectOption = new[]
+            {
+                SelectOption.Create<MMgr>("OK", (manager) =>
+                {
+                    var dungeon = DungeonInfo.GetLargestDungeon(arg.Arg.TargetObj);
+
+                    if (!default(IActiveRogueMethodCaller).LocateSavePoint(arg.Self, null, 0f, RogueWorldSavePointInfo.Instance, true)) return;
+
+                    if (dungeon?.Stack >= 1)
+                    {
+                        dungeon.TrySetStack(0);
+                    }
+                    var memberInfo = LobbyMemberList.GetMemberInfo(arg.Self);
+                    memberInfo.SavePoint = RogueWorldSavePointInfo.Instance;
+
+                    RogueDevice.Add(DeviceKw.AutoSave, 0);
+                })
+            };
+            
+            startQuestSelectOption = new[]
+            {
+                SelectOption.Create<MMgr>("出発", (manager) =>
+                {
+                    var quest = (DungeonQuest)arg.Arg.Other;
+                    quest.Start(arg.Self);
+
+                    // BackToLobby で階層表示させるため、ここでは終了させない。
+                    manager.Done();
+                })
+            };
         }
 
         public void SetObj(object obj, MMgr manager)
@@ -86,7 +90,7 @@ namespace RoguegardUnity
             }
 
             ISubviewStateProvider stateProvider = null;
-            manager.BackAnchor.Show(backSelectOption, manager, Arg, ref stateProvider);
+            manager.BackAnchor.Show(backSelectOption, manager, ref stateProvider);
         }
 
         private void SetObj(RogueObj obj, RogueObj resultDungeon)
@@ -113,28 +117,31 @@ namespace RoguegardUnity
 
         public void SetResult(RogueObj player, RogueObj dungeon, MMgr manager)
         {
-            SetArg(manager, new MArg.Builder(self: player, arg: new(targetObj: dungeon)).ReadOnly);
+            Manager = manager;
+            arg = new MArg.Builder(self: player, arg: new(targetObj: dungeon)).ReadOnly;
 
             SetObj(player, dungeon);
 
             ISubviewStateProvider stateProvider = null;
-            manager.ForwardAnchor.Show(submitSelectOption, manager, Arg, ref stateProvider);
+            manager.ForwardAnchor.Show(submitSelectOption, manager, ref stateProvider);
         }
 
         public void SetGameOver(RogueObj player, RogueObj dungeon, MMgr manager)
         {
-            SetArg(manager, new MArg.Builder(self: player, arg: new(targetObj: dungeon)).ReadOnly);
+            Manager = manager;
+            arg = new MArg.Builder(self: player, arg: new(targetObj: dungeon)).ReadOnly;
 
             SetObj(player, null);
 
             ISubviewStateProvider stateProvider = null;
-            manager.BackAnchor.Show(backSelectOption, manager, Arg, ref stateProvider);
-            manager.ForwardAnchor.Show(submitSelectOption, manager, Arg, ref stateProvider);
+            manager.BackAnchor.Show(backSelectOption, manager, ref stateProvider);
+            manager.ForwardAnchor.Show(submitSelectOption, manager, ref stateProvider);
         }
 
         public void SetQuest(RogueObj player, DungeonQuest quest, bool showSubmitButton, MMgr manager)
         {
-            SetArg(manager, new MArg.Builder(self: player, arg: new(other: quest)).ReadOnly);
+            Manager = manager;
+            arg = new MArg.Builder(self: player, arg: new(other: quest)).ReadOnly;
 
             _topText.text = null;
             leftLBuilder.Clear();
@@ -194,10 +201,10 @@ namespace RoguegardUnity
             _textRightR.SetText(rightRBuilder);
 
             ISubviewStateProvider stateProvider = null;
-            manager.BackAnchor.Show(backSelectOption, manager, Arg, ref stateProvider);
+            manager.BackAnchor.Show(backSelectOption, manager, ref stateProvider);
             if (showSubmitButton)
             {
-                manager.ForwardAnchor.Show(startQuestSelectOption, manager, Arg, ref stateProvider);
+                manager.ForwardAnchor.Show(startQuestSelectOption, manager, ref stateProvider);
             }
         }
 

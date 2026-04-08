@@ -2,17 +2,11 @@ using System.Collections.Generic;
 
 namespace Lysionium
 {
-    /// <inheritdoc/>
-    public class DialogViewData<TMgr> : DialogViewData<TMgr, IListuiArg>
-        where TMgr : IListuiManager
-    { }
-
     /// <summary>
     /// テキストと項目を表示する ViewData
     /// </summary>
-    public class DialogViewData<TMgr, TArg> : ListViewData<object, TMgr, TArg>
+    public class DialogViewData<TMgr> : ListViewData<object, TMgr>
         where TMgr : IListuiManager
-        where TArg : IListuiArg
     {
         public System.Func<TMgr, IListHandlerSubview> DialogSubviewSelector { get; set; }
             = manager => (manager as IDefaultSubviewTable)?.Dialog;
@@ -20,7 +14,7 @@ namespace Lysionium
             = manager => (manager as IDefaultSubviewTable)?.CaptionBox;
         public System.Func<TMgr, IListHandlerSubview> BackAnchorSubviewSelector { get; set; }
             = manager => (manager as IDefaultSubviewTable)?.BackAnchor;
-        public SelectOptionList<TMgr, TArg> BackAnchorList { get; set; } = new(_ => _.BackIfReflectable());
+        public SelectOptionList<TMgr> BackAnchorList { get; set; } = new(_ => _.BackIfReflectable());
 
         private object prevViewStateHolder;
         private ISubviewStateProvider dialogSubviewStateProvider;
@@ -28,9 +22,9 @@ namespace Lysionium
         private ISubviewStateProvider backAnchorSubviewStateProvider;
 
         private string message;
-        private event ClickItemHandler<string, TMgr, TArg> ClickLink;
+        private event ClickItemHandler<string, TMgr> ClickLink;
 
-        public Builder Show(string message, TMgr manager, TArg arg, object viewStateHolder = null)
+        public Builder Show(string message, TMgr manager, object viewStateHolder = null)
         {
             if (message == null) throw new System.ArgumentNullException(nameof(message));
             if (manager == null) throw new System.ArgumentNullException(nameof(manager));
@@ -41,8 +35,8 @@ namespace Lysionium
 
             this.message = message;
 
-            if (TryShowSubviews(manager, arg)) return null;
-            else return new Builder(this, manager, arg);
+            if (TryShowSubviews(manager)) return null;
+            else return new Builder(this, manager);
         }
 
         protected virtual void ResetSubviewStateProviders()
@@ -52,7 +46,7 @@ namespace Lysionium
             backAnchorSubviewStateProvider?.Reset();
         }
 
-        protected override void ShowSubviews(TMgr manager, TArg arg)
+        protected override void ShowSubviews(TMgr manager)
         {
             OriginalList.Clear();
             if (ClickLink != null)
@@ -65,16 +59,16 @@ namespace Lysionium
             }
 
             DialogSubviewSelector?.Invoke(manager)?.Show(
-                List, SelectOptionViewItemHandler<TMgr, TArg>.Instance, manager, arg, ref dialogSubviewStateProvider, onHide: OnHide);
+                List, SelectOptionViewItemHandler<TMgr>.Instance, manager, ref dialogSubviewStateProvider, onHide: OnHide);
 
             if (Title != null)
             {
                 CaptionBoxSubviewSelector?.Invoke(manager)?.Show(
-                    Title, manager, arg, ref captionBoxSubviewStateProvider);
+                    Title, manager, ref captionBoxSubviewStateProvider);
             }
 
             BackAnchorSubviewSelector?.Invoke(manager)?.Show(
-                BackAnchorList, manager, arg, ref backAnchorSubviewStateProvider);
+                BackAnchorList, manager, ref backAnchorSubviewStateProvider);
         }
 
         public virtual void Hide(TMgr manager, bool back)
@@ -84,22 +78,22 @@ namespace Lysionium
             BackAnchorSubviewSelector?.Invoke(manager)?.Hide(back);
         }
 
-        public class Builder : BaseListBuilder<DialogViewData<TMgr, TArg>, Builder>
+        public class Builder : BaseListBuilder<DialogViewData<TMgr>, Builder>
         {
-            public Builder(DialogViewData<TMgr, TArg> parent, TMgr manager, TArg arg)
-                : base(parent, manager, arg)
+            public Builder(DialogViewData<TMgr> parent, TMgr manager)
+                : base(parent, manager)
             {
             }
 
-            //public Builder Option(string name, ClickItemHandler<TMgr, TArg> onClick, string style = null)
+            //public Builder Option(string name, ClickOptionHandler<TMgr> onClick, string style = null)
             //{
             //    AssertNotBuilt();
 
-            //    Tail(SelectOption.Create(name, onClick, style));
+            //    Tail.Option(SelectOption.Create(name, onClick, style));
             //    return this;
             //}
 
-            //public Builder OptionStack(params (string, ClickItemHandler<TMgr, TArg>)[] selectOptions)
+            //public Builder OptionStack(params (string, ClickOptionHandler<TMgr>)[] selectOptions)
             //{
             //    AssertNotBuilt();
 
@@ -108,11 +102,11 @@ namespace Lysionium
             //    {
             //        stack[i] = ("1*", SelectOption.Create(selectOptions[i].Item1, selectOptions[i].Item2));
             //    }
-            //    Tail(StackWidgetOption.Create(stack));
+            //    Tail.Append(StackWidgetOption.Create(stack));
             //    return this;
             //}
 
-            public Builder OnClickLink(ClickItemHandler<string, TMgr, TArg> onClickLink)
+            public Builder OnClickLink(ClickItemHandler<string, TMgr> onClickLink)
             {
                 AssertNotBuilt();
 

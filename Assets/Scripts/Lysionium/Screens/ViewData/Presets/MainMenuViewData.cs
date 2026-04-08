@@ -1,30 +1,24 @@
 namespace Lysionium
 {
-    /// <inheritdoc/>
-    public class MainMenuViewData<TMgr> : MainMenuViewData<TMgr, IListuiArg>
-        where TMgr : IListuiManager
-    { }
-
     /// <summary>
     /// 項目数が固定のメニュー向け ViewData
     /// </summary>
-    public class MainMenuViewData<TMgr, TArg> : ListViewData<ISelectOption<TMgr, TArg>, TMgr, TArg>
+    public class MainMenuViewData<TMgr> : ListViewData<ISelectOption<TMgr>, TMgr>
         where TMgr : IListuiManager
-        where TArg : IListuiArg
     {
         public System.Func<TMgr, IListHandlerSubview> PrimaryCommandSubviewSelector { get; set; }
             = manager => (manager as IDefaultSubviewTable)?.PrimaryCommand;
         public System.Func<TMgr, IMessageBoxSubview> CaptionBoxSubviewSelector { get; set; }
             = manager => (manager as IDefaultSubviewTable)?.CaptionBox;
         public System.Func<TMgr, IListHandlerSubview> BackAnchorSubviewSelector { get; set; }
-        public SelectOptionList<TMgr, TArg> BackAnchorList { get; set; } = new(_ => _.BackIfReflectable());
+        public SelectOptionList<TMgr> BackAnchorList { get; set; } = new(_ => _.BackIfReflectable());
 
         private object prevViewStateHolder;
         private ISubviewStateProvider primaryCommandSubviewStateProvider;
         private ISubviewStateProvider captionBoxSubviewStateProvider;
         private ISubviewStateProvider backAnchorSubviewStateProvider;
 
-        public Builder Show(TMgr manager, TArg arg, object viewStateHolder = null)
+        public Builder Show(TMgr manager, object viewStateHolder = null)
         {
             if (manager == null) throw new System.ArgumentNullException(nameof(manager));
 
@@ -32,8 +26,8 @@ namespace Lysionium
             if (viewStateHolder != prevViewStateHolder) { ResetSubviewStateProviders(); }
             prevViewStateHolder = viewStateHolder;
 
-            if (TryShowSubviews(manager, arg)) return null;
-            else return new Builder(this, manager, arg);
+            if (TryShowSubviews(manager)) return null;
+            else return new Builder(this, manager);
         }
 
         protected virtual void ResetSubviewStateProviders()
@@ -43,19 +37,19 @@ namespace Lysionium
             backAnchorSubviewStateProvider?.Reset();
         }
 
-        protected override void ShowSubviews(TMgr manager, TArg arg)
+        protected override void ShowSubviews(TMgr manager)
         {
             PrimaryCommandSubviewSelector?.Invoke(manager)?.Show(
-                List, SelectOptionViewItemHandler<TMgr, TArg>.Instance, manager, arg, ref primaryCommandSubviewStateProvider, onHide: OnHide);
+                List, SelectOptionViewItemHandler<TMgr>.Instance, manager, ref primaryCommandSubviewStateProvider, onHide: OnHide);
 
             if (Title != null)
             {
                 CaptionBoxSubviewSelector?.Invoke(manager)?.Show(
-                    Title, manager, arg, ref captionBoxSubviewStateProvider);
+                    Title, manager, ref captionBoxSubviewStateProvider);
             }
 
             BackAnchorSubviewSelector?.Invoke(manager)?.Show(
-                BackAnchorList, manager, arg, ref backAnchorSubviewStateProvider);
+                BackAnchorList, manager, ref backAnchorSubviewStateProvider);
         }
 
         public virtual void Hide(TMgr manager, bool back)
@@ -65,19 +59,19 @@ namespace Lysionium
             BackAnchorSubviewSelector?.Invoke(manager)?.Hide(back);
         }
 
-        public class Builder : BaseListBuilder<MainMenuViewData<TMgr, TArg>, Builder>, ISelectOptionsBuilder<TMgr, TArg, Builder>
+        public class Builder : BaseListBuilder<MainMenuViewData<TMgr>, Builder>, ISelectOptionsBuilder<TMgr, Builder>
         {
-            public Builder(MainMenuViewData<TMgr, TArg> parent, TMgr manager, TArg arg)
-                : base(parent, manager, arg)
+            public Builder(MainMenuViewData<TMgr> parent, TMgr manager)
+                : base(parent, manager)
             {
             }
 
-            public Builder Option(ISelectOption<TMgr, TArg> option)
+            public Builder Option(ISelectOption<TMgr> option)
             {
                 return Tail.Option(option);
             }
 
-            Builder ISelectOptionsBuilder<TMgr, TArg, Builder>.Option() => this;
+            Builder ISelectOptionsBuilder<TMgr, Builder>.Option() => this;
         }
     }
 }

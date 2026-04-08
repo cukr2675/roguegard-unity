@@ -25,9 +25,13 @@ namespace Roguegard
         {
             private ISubviewStateProvider subviewStateProvider;
 
-            public override void OpenScreen(MMgr manager, MArg arg)
+            public MotionGrapherScreen()
             {
-                manager.Dopesheet.Show(System.Array.Empty<object>(), null, manager, arg, ref subviewStateProvider);
+                OnOpenScreen += (manager) =>
+                {
+                    manager.Dopesheet.SetListHandler(System.Array.Empty<object>(), null, manager, Arg, ref subviewStateProvider);
+                    manager.Dopesheet.Show();
+                };
             }
         }
     }

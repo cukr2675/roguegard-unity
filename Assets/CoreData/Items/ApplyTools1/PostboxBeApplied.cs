@@ -24,39 +24,45 @@ namespace Roguegard
 
         private class PostboxScreen : RogueListuiScreen
         {
-            private readonly ScrollMenuViewData<RoguePost, MMgr, MArg> view = new()
+            private readonly ScrollMenuViewData<RoguePost, MMgr> view = new()
             {
             };
 
-            public override void OpenScreen(MMgr manager, MArg arg)
+            public PostboxScreen()
             {
-                var info = PostboxInfo.Get(arg.Arg.Tool);
+                OnOpenScreen += (manager) =>
+                {
+                    var info = PostboxInfo.Get(Arg.Arg.Tool);
 
-                view.Show(info.Posts, manager, arg)
+                    view.Show(info.Posts, manager)
                     ?
-                    .NameFrom((post, manager, arg) => post.Name)
+                    .NameFrom((post, manager) => post.Name)
 
                     .VarOnce(out var nextScreen, new DetailsScreen())
-                    .OnClick((post, manager, arg) => manager.PushScreen(nextScreen, other: post))
+                    .OnClick((post, manager) => manager.PushScreen(nextScreen, other: post))
 
                     .Build();
+                };
             }
         }
 
         private class DetailsScreen : RogueListuiScreen
         {
-            private readonly DialogViewData<MMgr, MArg> view = new()
+            private readonly DialogViewData<MMgr> view = new()
             {
                 DialogSubviewSelector = m => m.Widgets,
             };
 
-            public override void OpenScreen(MMgr manager, MArg arg)
+            public DetailsScreen()
             {
-                var post = (RoguePost)arg.Arg.Other;
+                OnOpenScreen += (manager) =>
+                {
+                    var post = (RoguePost)Arg.Arg.Other;
 
-                view.Show(post.Name, manager, arg)
+                    view.Show(post.Name, manager)
                     ?
                     .Build();
+                };
             }
         }
     }

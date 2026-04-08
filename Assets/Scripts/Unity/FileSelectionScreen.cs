@@ -8,19 +8,71 @@ namespace RoguegardUnity
     internal class FileSelectionScreen : RogueListuiScreen
     {
         private RogueListuiScreen nextScreen;
-        private ClickItemHandler<MMgr, MArg> onNewFile;
+        private ClickOptionHandler<MMgr> onNewFile;
         private RogueScrollMenuViewData<object> view;
         private readonly List<FileInfo> files = new();
+        private readonly ChoicesScreen errorMsgDialogScreen;
 
         private static readonly LoadingScreen savingScreen = new("セーブ中…", "キャンセル", LoadingCancel);
-        private static readonly ChoicesScreen errorMsgDialogScreen
-            = new ChoicesScreen((manager, arg) => $":An error has occurred.:, ({arg.Arg.Other})").Option("OK", ErrorMsgOK);
 
-        private FileSelectionScreen() { }
+        private FileSelectionScreen()
+        {
+            errorMsgDialogScreen = new ChoicesScreen((manager) => $":An error has occurred.:, ({Arg.Arg.Other})").Option("OK", ErrorMsgOK);
+
+            OnOpenScreen += (manager) =>
+            {
+                files.Clear();
+                files.AddRange(StandardRogueDeviceSave.GetFiles());
+
+                view.Show(files, manager)
+                ?
+                .VarOnce(out var newArg, new MArg.Builder())
+
+                .InitIf(
+                    onNewFile != null, x => x
+                    
+                    .Head.Option(":+ New File", onNewFile)
+                    
+                    )
+
+                .InfoFrom((item, manager) =>
+                {
+                    if (item is FileInfo fileInfo)
+                    {
+                        var name = fileInfo.Name;
+                        var infoText1 = $"{fileInfo.Length / 1000:N0}KB";
+                        var infoText2 = fileInfo.LastWriteTime.ToString();
+                        return (name, infoText1, infoText2);
+                    }
+                    else if (item is ISelectOption<MMgr> option)
+                    {
+                        var name = option.GetName(manager);
+                        return (name, null, null);
+                    }
+                    else
+                    {
+                        throw new System.InvalidOperationException();
+                    }
+                })
+
+                .OnClick((item, manager) =>
+                {
+                    if (item is FileInfo fileInfo)
+                    {
+                        newArg.Arg = new(other: fileInfo);
+                        manager.PushScreen(nextScreen, newArg.ReadOnly);
+                    }
+                    else if (item is ISelectOption<MMgr> option) { option.Click(manager); }
+                    else throw new System.InvalidOperationException();
+                })
+
+                .Build();
+            };
+        }
 
         public static FileSelectionScreen Load(
-            ClickItemHandler<FileInfo, MMgr, MArg> onSelectFile,
-            ClickItemHandler<MMgr, MArg> onNewFile = null)
+            ClickItemHandler<FileInfo, MMgr> onSelectFile,
+            ClickOptionHandler<MMgr> onNewFile = null)
         {
             var instance = new FileSelectionScreen
             {
@@ -29,12 +81,11 @@ namespace RoguegardUnity
             };
 
             var importScreen = new ImportScreen();
-
             instance.view = new()
             {
                 BackAnchorList = new(
                     _ => _
-                    .Option(":Import", (manager, arg) =>
+                    .Option(":Import", (manager) =>
                     {
                         manager.PushScreen(importScreen);
                         RogueFile.Import(StandardRogueDeviceSave.RootDirectory, errorMsg =>
@@ -43,7 +94,7 @@ namespace RoguegardUnity
 
                             if (errorMsg != null)
                             {
-                                ShowErrorMsg(manager, errorMsg);
+                                instance.ShowErrorMsg(manager, errorMsg);
                                 return;
                             }
                         });
@@ -55,73 +106,20 @@ namespace RoguegardUnity
         }
 
         public static FileSelectionScreen Save(
-            ClickItemHandler<FileInfo, MMgr, MArg> onSelectFile,
-            ClickItemHandler<MMgr, MArg> onNewFile = null)
+            ClickItemHandler<FileInfo, MMgr> onSelectFile,
+            ClickOptionHandler<MMgr> onNewFile = null)
         {
-            var instance = new FileSelectionScreen
+            var instance = new FileSelectionScreen();
+            instance.nextScreen = new ChoicesScreen(
+                (manager) => StandardRogueDeviceUtility.LocalizeMessage(":OverwriteMsg::1", ((FileInfo)instance.Arg.Arg.Other).Name))
+                .Option(":Overwrite", (manager) => onSelectFile((FileInfo)instance.Arg.Arg.Other, manager))
+                .Back();
+            instance.onNewFile = onNewFile;
+            instance.view = new()
             {
-                nextScreen = new ChoicesScreen(
-                    (manager, arg) => StandardRogueDeviceUtility.LocalizeMessage(":OverwriteMsg::1", ((FileInfo)arg.Arg.Other).Name))
-                    .Option(":Overwrite", (manager, arg) => onSelectFile((FileInfo)arg.Arg.Other, manager, arg))
-                    .Back(),
-                onNewFile = onNewFile,
-
-                view = new()
-                {
-                }
             };
 
             return instance;
-        }
-
-        public override void OpenScreen(MMgr manager, MArg arg)
-        {
-            files.Clear();
-            files.AddRange(StandardRogueDeviceSave.GetFiles());
-
-            view.Show(files, manager, arg)
-                ?
-                .VarOnce(out var newArg, new MArg.Builder())
-
-                .InitIf(
-                    onNewFile != null, x => x
-                    
-                    .Head.Option(":+ New File", onNewFile)
-                    
-                    )
-
-                .InfoFrom((item, manager, arg) =>
-                {
-                    if (item is FileInfo fileInfo)
-                    {
-                        var name = fileInfo.Name;
-                        var infoText1 = $"{fileInfo.Length / 1000:N0}KB";
-                        var infoText2 = fileInfo.LastWriteTime.ToString();
-                        return (name, infoText1, infoText2);
-                    }
-                    else if (item is ISelectOption<MMgr, MArg> option)
-                    {
-                        var name = option.GetName(manager, arg);
-                        return (name, null, null);
-                    }
-                    else
-                    {
-                        throw new System.InvalidOperationException();
-                    }
-                })
-
-                .OnClick((item, manager, arg) =>
-                {
-                    if (item is FileInfo fileInfo)
-                    {
-                        newArg.Arg = new(other: fileInfo);
-                        manager.PushScreen(nextScreen, newArg.ReadOnly);
-                    }
-                    else if (item is ISelectOption<MMgr, MArg> option) { option.Click(manager, arg); }
-                    else throw new System.InvalidOperationException();
-                })
-
-                .Build();
         }
 
         public static void ShowSaving(MMgr manager)
@@ -129,11 +127,11 @@ namespace RoguegardUnity
             manager.PushScreen(savingScreen);
         }
 
-        private static void LoadingCancel(MMgr manager, MArg arg)
+        private static void LoadingCancel(MMgr manager)
         {
         }
 
-        public static void ReopenCallback(MMgr manager, string errorMsg)
+        public void ReopenCallback(MMgr manager, string errorMsg)
         {
             if (errorMsg != null)
             {
@@ -145,38 +143,39 @@ namespace RoguegardUnity
             manager.Reopen();
         }
 
-        public static void ShowErrorMsg(MMgr manager, string errorMsg)
+        public void ShowErrorMsg(MMgr manager, string errorMsg)
         {
             manager.PushScreen(errorMsgDialogScreen, other: errorMsg);
         }
 
-        private static void ErrorMsgOK(MMgr manager, MArg arg)
+        private static void ErrorMsgOK(MMgr manager)
         {
-            manager.BackOption.Click(manager, arg);
+            manager.BackOption.Click(manager);
         }
 
         private class ImportScreen : RogueListuiScreen
         {
-            private readonly DialogViewData<MMgr, MArg> view = new()
+            private readonly DialogViewData<MMgr> view = new()
             {
                 DialogSubviewSelector = m => m.Overlay,
                 BackAnchorSubviewSelector = null,
             };
 
-            public override bool IsIncremental => true;
-
-            public override void OpenScreen(MMgr manager, MArg arg)
+            public ImportScreen()
             {
-                view.Show("インポート中…", manager, arg)
+                OnOpenScreen += (manager) =>
+                {
+                    view.Show("インポート中…", manager)
                     ?
-                    .Tail.Option("キャンセル", (manager, arg) => manager.PopScreen())
+                    .Tail.Option("キャンセル", m => m.PopScreen())
 
                     .Build();
-            }
+                };
 
-            public override void CloseScreenView(MMgr manager, bool back)
-            {
-                view.Hide(manager, back);
+                OnCloseScreenView += (manager, back) =>
+                {
+                    view.Hide(manager, back);
+                };
             }
         }
     }

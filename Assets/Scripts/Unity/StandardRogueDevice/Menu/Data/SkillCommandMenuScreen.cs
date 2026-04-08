@@ -6,36 +6,37 @@ namespace RoguegardUnity
 {
     public class SkillCommandMenuScreen : RogueListuiScreen
     {
-        public override bool IsIncremental => true;
-
-        private readonly MainMenuViewData<MMgr, MArg> view = new()
+        private readonly MainMenuViewData<MMgr> view = new()
         {
             PrimaryCommandSubviewSelector = m => m.SecondaryCommand,
         };
 
-        private readonly DeviceCommand deviceCommand = new();
-
-        public override void OpenScreen(MMgr manager, MArg arg)
+        public SkillCommandMenuScreen()
         {
-            var selectedSkill = (ISkill)arg.Arg.Other;
+            OnOpenScreen += (manager) =>
+            {
+                var selectedSkill = (ISkill)Arg.Arg.Other;
 
-            view.Title = StandardRogueDeviceUtility.GetCaption(selectedSkill);
+                view.Title = StandardRogueDeviceUtility.GetCaption(selectedSkill);
 
-            view.Show(manager, arg)
-                ?.Option(":Use", (manager, arg) =>
+                view.Show(manager)
+                ?
+                .VarOnce(out var deviceCommand, new DeviceCommand())
+                .Option(":Use", (manager) =>
                 {
-                    var info = RogueDeviceEffect.Get(arg.Self);
-                    var selectedSkill = (ISkill)arg.Arg.Other;
+                    var info = RogueDeviceEffect.Get(Arg.Self);
+                    var selectedSkill = (ISkill)Arg.Arg.Other;
                     info.SetDeviceCommand(deviceCommand, null, new(other: selectedSkill));
                     manager.Done();
                 })
                 .Back()
                 .Build();
-        }
+            };
 
-        public override void CloseScreenView(MMgr manager, bool back)
-        {
-            view.Hide(manager, back);
+            OnCloseScreenView += (manager, back) =>
+            {
+                view.Hide(manager, back);
+            };
         }
 
         private class DeviceCommand : IDeviceCommand

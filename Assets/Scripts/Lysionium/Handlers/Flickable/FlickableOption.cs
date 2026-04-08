@@ -2,14 +2,13 @@ namespace Lysionium
 {
     public static class FlickableOption
     {
-        public static IFlickableOption<TMgr, TArg> Create<TMgr, TArg>(
+        public static IFlickableOption<TMgr> Create<TMgr>(
             string name,
-            ClickItemHandler<TMgr, TArg> onKeyDown, ClickItemHandler<TMgr, TArg> onExpand, ClickItemHandler<TMgr, TArg> onKeyUp,
+            ClickOptionHandler<TMgr> onKeyDown, ClickOptionHandler<TMgr> onExpand, ClickOptionHandler<TMgr> onKeyUp,
             string style)
             where TMgr : IListuiManager
-            where TArg : IListuiArg
         {
-            var instance = new Implement<TMgr, TArg>();
+            var instance = new Implement<TMgr>();
             instance.SetName(name);
             instance.SetStyle(style);
             instance.KeyDown = onKeyDown;
@@ -18,14 +17,13 @@ namespace Lysionium
             return instance;
         }
 
-        public static IFlickableOption<TMgr, TArg> Create<TMgr, TArg>(
-            System.Func<TMgr, TArg, string> getName,
-            ClickItemHandler<TMgr, TArg> onKeyDown, ClickItemHandler<TMgr, TArg> onExpand, ClickItemHandler<TMgr, TArg> onKeyUp,
+        public static IFlickableOption<TMgr> Create<TMgr>(
+            System.Func<TMgr, string> getName,
+            ClickOptionHandler<TMgr> onKeyDown, ClickOptionHandler<TMgr> onExpand, ClickOptionHandler<TMgr> onKeyUp,
             string style)
             where TMgr : IListuiManager
-            where TArg : IListuiArg
         {
-            var instance = new Implement<TMgr, TArg>();
+            var instance = new Implement<TMgr>();
             instance.SetName(getName);
             instance.SetStyle(style);
             instance.KeyDown = onKeyDown;
@@ -34,14 +32,13 @@ namespace Lysionium
             return instance;
         }
 
-        public static IFlickableOption<TMgr, TArg> Create<TMgr, TArg>(
+        public static IFlickableOption<TMgr> Create<TMgr>(
             string name,
-            ClickItemHandler<TMgr, TArg> onKeyDown, ClickItemHandler<TMgr, TArg> onExpand, ClickItemHandler<TMgr, TArg> onKeyUp,
-            System.Func<TMgr, TArg, string> style)
+            ClickOptionHandler<TMgr> onKeyDown, ClickOptionHandler<TMgr> onExpand, ClickOptionHandler<TMgr> onKeyUp,
+            System.Func<TMgr, string> style)
             where TMgr : IListuiManager
-            where TArg : IListuiArg
         {
-            var instance = new Implement<TMgr, TArg>();
+            var instance = new Implement<TMgr>();
             instance.SetName(name);
             instance.SetStyle(style);
             instance.KeyDown = onKeyDown;
@@ -50,14 +47,13 @@ namespace Lysionium
             return instance;
         }
 
-        public static IFlickableOption<TMgr, TArg> Create<TMgr, TArg>(
-            System.Func<TMgr, TArg, string> getName,
-            ClickItemHandler<TMgr, TArg> onKeyDown, ClickItemHandler<TMgr, TArg> onExpand, ClickItemHandler<TMgr, TArg> onKeyUp,
-            System.Func<TMgr, TArg, string> style)
+        public static IFlickableOption<TMgr> Create<TMgr>(
+            System.Func<TMgr, string> getName,
+            ClickOptionHandler<TMgr> onKeyDown, ClickOptionHandler<TMgr> onExpand, ClickOptionHandler<TMgr> onKeyUp,
+            System.Func<TMgr, string> style)
             where TMgr : IListuiManager
-            where TArg : IListuiArg
         {
-            var instance = new Implement<TMgr, TArg>();
+            var instance = new Implement<TMgr>();
             instance.SetName(getName);
             instance.SetStyle(style);
             instance.KeyDown = onKeyDown;
@@ -66,19 +62,18 @@ namespace Lysionium
             return instance;
         }
 
-        private class Implement<TMgr, TArg> : IFlickableOption<TMgr, TArg>
+        private class Implement<TMgr> : IFlickableOption<TMgr>
             where TMgr : IListuiManager
-            where TArg : IListuiArg
         {
             private string name;
-            private System.Func<TMgr, TArg, string> getName;
+            private System.Func<TMgr, string> getName;
 
             private string style;
-            private System.Func<TMgr, TArg, string> getStyle;
+            private System.Func<TMgr, string> getStyle;
 
-            public ClickItemHandler<TMgr, TArg> KeyDown { get; set; }
-            public ClickItemHandler<TMgr, TArg> Expand { get; set; }
-            public ClickItemHandler<TMgr, TArg> KeyUp { get; set; }
+            public ClickOptionHandler<TMgr> KeyDown { get; set; }
+            public ClickOptionHandler<TMgr> Expand { get; set; }
+            public ClickOptionHandler<TMgr> KeyUp { get; set; }
 
             public void SetName(string name)
             {
@@ -86,7 +81,7 @@ namespace Lysionium
                 getName = null;
             }
 
-            public void SetName(System.Func<TMgr, TArg, string> selector)
+            public void SetName(System.Func<TMgr, string> selector)
             {
                 getName = selector ?? throw new System.ArgumentNullException(nameof(selector));
                 name = null;
@@ -98,58 +93,53 @@ namespace Lysionium
                 getStyle = null;
             }
 
-            public void SetStyle(System.Func<TMgr, TArg, string> selector)
+            public void SetStyle(System.Func<TMgr, string> selector)
             {
                 getStyle = selector;
                 style = null;
             }
 
-            string IFlickableOption<TMgr, TArg>.GetName(TMgr manager, TArg arg)
+            string IFlickableOption<TMgr>.GetName(TMgr manager)
             {
                 if (getName != null)
                 {
-                    if (LuiAssert.Type<TMgr>(manager, out var tMgr) ||
-                        LuiAssert.Type<TArg>(arg, out var tArg)) return null;
+                    if (LuiAssert.Type<TMgr>(manager, out var tMgr)) return null;
 
-                    return getName(tMgr, tArg);
+                    return getName(tMgr);
                 }
                 else return name;
             }
 
-            string IFlickableOption<TMgr, TArg>.GetStyle(TMgr manager, TArg arg)
+            string IFlickableOption<TMgr>.GetStyle(TMgr manager)
             {
                 if (getStyle != null)
                 {
-                    if (LuiAssert.Type<TMgr>(manager, out var tMgr) ||
-                        LuiAssert.Type<TArg>(arg, out var tArg)) return null;
+                    if (LuiAssert.Type<TMgr>(manager, out var tMgr)) return null;
 
-                    return getStyle(tMgr, tArg);
+                    return getStyle(tMgr);
                 }
                 else return style;
             }
 
-            void IFlickableOption<TMgr, TArg>.KeyDown(TMgr manager, TArg arg)
+            void IFlickableOption<TMgr>.KeyDown(TMgr manager)
             {
-                if (LuiAssert.Type<TMgr>(manager, out var tMgr, manager) ||
-                    LuiAssert.Type<TArg>(arg, out var tArg, manager)) return;
+                if (LuiAssert.Type<TMgr>(manager, out var tMgr, manager)) return;
 
-                KeyDown?.Invoke(tMgr, tArg);
+                KeyDown?.Invoke(tMgr);
             }
 
-            void IFlickableOption<TMgr, TArg>.Expand(TMgr manager, TArg arg)
+            void IFlickableOption<TMgr>.Expand(TMgr manager)
             {
-                if (LuiAssert.Type<TMgr>(manager, out var tMgr, manager) ||
-                    LuiAssert.Type<TArg>(arg, out var tArg, manager)) return;
+                if (LuiAssert.Type<TMgr>(manager, out var tMgr, manager)) return;
 
-                Expand?.Invoke(tMgr, tArg);
+                Expand?.Invoke(tMgr);
             }
 
-            void IFlickableOption<TMgr, TArg>.KeyUp(TMgr manager, TArg arg)
+            void IFlickableOption<TMgr>.KeyUp(TMgr manager)
             {
-                if (LuiAssert.Type<TMgr>(manager, out var tMgr, manager) ||
-                    LuiAssert.Type<TArg>(arg, out var tArg, manager)) return;
+                if (LuiAssert.Type<TMgr>(manager, out var tMgr, manager)) return;
 
-                KeyUp?.Invoke(tMgr, tArg);
+                KeyUp?.Invoke(tMgr);
             }
         }
     }

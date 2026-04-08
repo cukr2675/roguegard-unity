@@ -18,12 +18,11 @@ namespace Lysionium.Views
 
         protected override void CommonInitCore()
         {
-            _closeButton.onClick.AddListener(() => onClose?.Invoke(Manager, Arg, _colorPicker.CurrentColor));
+            _closeButton.onClick.AddListener(() => onClose?.Invoke(_colorPicker.CurrentColor, Manager));
         }
 
         public void SetupColorPicker(
-            Color color, IColorPickerSubview.ColorPickerEventHandler onClose, IListuiManager manager, IListuiArg arg,
-            ref ISubviewStateProvider stateProvider)
+            Color color, IColorPickerSubview.ColorPickerEventHandler onClose, IListuiManager manager, ref ISubviewStateProvider stateProvider)
         {
             stateProvider ??= new StateProvider();
             if (stateProvider is not StateProvider local) throw new System.ArgumentException(
@@ -37,7 +36,7 @@ namespace Lysionium.Views
             // 表示更新
             _colorPicker.CurrentColor = color;
             this.onClose = onClose;
-            SetArg(manager, arg);
+            Manager = manager;
 
             // 新しい StateProvider に切り替える
             currentStateProvider = local;

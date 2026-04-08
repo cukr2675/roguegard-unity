@@ -7,14 +7,14 @@ namespace Lysionium.MergeExtensions.R3
 
     internal interface IBusViewItemHandler : IViewItemHandler
     {
-        void OnNext(object item, IListuiManager manager, IListuiArg arg, MergedViewItemHandleContext context);
+        void OnNext(object item, IListuiManager manager, MergedViewItemHandleContext context);
 
-        string IViewItemHandler.GetName(object item, IListuiManager manager, IListuiArg arg)
+        string IViewItemHandler.GetName(object item, IListuiManager manager)
         {
-            return this.GetName(item, manager, arg);
+            return GetName(item, manager);
         }
 
-        string IViewItemHandler.GetStyle(object item, IListuiManager manager, IListuiArg arg)
+        string IViewItemHandler.GetStyle(object item, IListuiManager manager)
         {
             return string.Empty;
         }
@@ -22,11 +22,11 @@ namespace Lysionium.MergeExtensions.R3
 
     internal class BusViewItemHandler : IBusViewItemHandler, System.IDisposable
     {
-        public Subject<MergedViewItemHandleArg<object, IListuiManager, IListuiArg, object, object>> Subject { get; } = new();
+        public Subject<MergedViewItemHandleArg<object, IListuiManager, object, object>> Subject { get; } = new();
 
-        public void OnNext(object item, IListuiManager manager, IListuiArg arg, MergedViewItemHandleContext context)
+        public void OnNext(object item, IListuiManager manager, MergedViewItemHandleContext context)
         {
-            Subject.OnNext(new MergedViewItemHandleArg<object, IListuiManager, IListuiArg, object, object>(item, manager, arg, context));
+            Subject.OnNext(new MergedViewItemHandleArg<object, IListuiManager, object, object>(item, manager, context));
         }
 
         public void Dispose()
@@ -39,29 +39,28 @@ namespace Lysionium.MergeExtensions.R3
     {
         private static readonly Context context = new();
 
-        public static string GetName(this IBusViewItemHandler handler, object item, IListuiManager manager, IListuiArg arg)
+        public static string GetName(this IBusViewItemHandler handler, object item, IListuiManager manager)
         {
             lock (context)
             {
                 using var _ = context.OpenSelf();
-                handler.OnNext(item, manager, arg, context);
+                handler.OnNext(item, manager, context);
                 if (context.TryGetResult(out var result)) return result;
                 else return item?.ToString() ?? "null";
             }
         }
 
-        public static void NameFrom<TItem, TMgr, TArg>(
-            this Observable<MergedViewItemHandleArg<object, IListuiManager, IListuiArg, object, object>> observable, System.Func<TItem, TMgr, TArg, string> getName)
+        public static void NameFrom<TItem, TMgr>(
+            this Observable<MergedViewItemHandleArg<object, IListuiManager, object, object>> observable, System.Func<TItem, TMgr, string> getName)
         {
             observable.Subscribe(x =>
             {
                 if (x.Context is not Context context) return;
 
                 if (LocalAssert.Type<TItem>(x.Value, out var TItem) ||
-                    LocalAssert.Type<TMgr>(x.Manager, out var tMgr) ||
-                    LocalAssert.Type<TArg>(x.Arg, out var tArg)) return;
+                    LocalAssert.Type<TMgr>(x.Manager, out var tMgr)) return;
 
-                context.Result = getName(TItem, tMgr, tArg);
+                context.Result = getName(TItem, tMgr);
             });
         }
 
@@ -72,27 +71,26 @@ namespace Lysionium.MergeExtensions.R3
     {
         private static readonly Context context = new();
 
-        public static void OnClick(this IBusViewItemHandler handler, object item, IListuiManager manager, IListuiArg arg)
+        public static void OnClick(this IBusViewItemHandler handler, object item, IListuiManager manager)
         {
             lock (context)
             {
                 using var _ = context.OpenSelf();
-                handler.OnNext(item, manager, arg, context);
+                handler.OnNext(item, manager, context);
             }
         }
 
-        public static void OnClick<TItem, TMgr, TArg>(
-            this Observable<MergedViewItemHandleArg<object, IListuiManager, IListuiArg, object, object>> observable, ClickItemHandler<TItem, TMgr, TArg> onClick)
+        public static void OnClick<TItem, TMgr>(
+            this Observable<MergedViewItemHandleArg<object, IListuiManager, object, object>> observable, ClickItemHandler<TItem, TMgr> onClick)
         {
             observable.Subscribe(x =>
             {
                 if (x.Context is not Context) return;
 
                 if (LocalAssert.Type<TItem>(x.Value, out var TItem) ||
-                    LocalAssert.Type<TMgr>(x.Manager, out var tMgr) ||
-                    LocalAssert.Type<TArg>(x.Arg, out var tArg)) return;
+                    LocalAssert.Type<TMgr>(x.Manager, out var tMgr)) return;
 
-                onClick(TItem, tMgr, tArg);
+                onClick(TItem, tMgr);
             });
         }
 
@@ -116,7 +114,7 @@ namespace Lysionium.MergeExtensions.R3
             else
             {
                 Debug.LogError($"{instance} を {typeof(T)} に変換できません。");
-                manager?.ErrorOption.Click(manager, null);
+                manager?.ErrorOption.Click(manager);
 
                 castedInstance = default;
                 return true;

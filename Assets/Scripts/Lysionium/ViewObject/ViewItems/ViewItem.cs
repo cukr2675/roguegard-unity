@@ -17,7 +17,6 @@ namespace Lysionium.Views
         private bool isOutOfRange;
 
         protected IListuiManager Manager => Parent.Manager;
-        protected IListuiArg Arg => Parent.Arg;
         protected SubviewBase Parent { get; private set; }
 
         private object item;
@@ -52,14 +51,14 @@ namespace Lysionium.Views
                 Unbind();
             }
 
-            name = ItemName = handler.GetName(item, Manager, Arg);
+            name = ItemName = handler.GetName(item, Manager);
             this.item = item;
             this.handler = handler;
             BindCore(item, handler);
         }
 
-        public void Bind<TMgr, TArg>(ISelectOption<TMgr, TArg> selectOption) => Bind(selectOption, SelectOptionViewItemHandler<TMgr, TArg>.Instance);
-        public void Bind<TMgr, TArg>(IKeyOption<TMgr, TArg> selectOption) => Bind(selectOption, KeyOptionViewItemHandler<TMgr, TArg>.Instance);
+        public void Bind<TMgr>(ISelectOption<TMgr> selectOption) => Bind(selectOption, SelectOptionViewItemHandler<TMgr>.Instance);
+        public void Bind<TMgr>(IKeyOption<TMgr> selectOption) => Bind(selectOption, KeyOptionViewItemHandler<TMgr>.Instance);
 
         public void Unbind()
         {

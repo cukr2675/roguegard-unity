@@ -3,17 +3,11 @@ using System.Text.RegularExpressions;
 
 namespace Lysionium
 {
-    /// <inheritdoc/>
-    public class SpeechBoxViewData<TMgr> : SpeechBoxViewData<TMgr, IListuiArg>
-        where TMgr : IListuiManager
-    { }
-
     /// <summary>
     /// 会話ボックスと選択肢を扱う ViewData
     /// </summary>
-    public class SpeechBoxViewData<TMgr, TArg> : ListViewData<ISelectOption<TMgr, TArg>, TMgr, TArg>
+    public class SpeechBoxViewData<TMgr> : ListViewData<ISelectOption<TMgr>, TMgr>
         where TMgr : IListuiManager
-        where TArg : IListuiArg
     {
         public System.Func<TMgr, IMessageBoxSubview> SpeechBoxSubviewSelector { get; set; }
             = manager => (manager as IDefaultSubviewTable)?.SpeechBox;
@@ -32,11 +26,11 @@ namespace Lysionium
         private ISubviewStateProvider speechBoxSubviewStateProvider;
         private ISubviewStateProvider choicesSubviewStateProvider;
         private ISubviewStateProvider captionBoxSubviewStateProvider;
-        private event ListuiEventHandler<TMgr, TArg> OnCompleted;
+        private event ListuiEventHandler<TMgr> OnCompleted;
 
         private string message;
 
-        public Builder Show(string message, TMgr manager, TArg arg, object viewStateHolder = null)
+        public Builder Show(string message, TMgr manager, object viewStateHolder = null)
         {
             if (message == null) throw new System.ArgumentNullException(nameof(message));
             if (manager == null) throw new System.ArgumentNullException(nameof(manager));
@@ -53,34 +47,33 @@ namespace Lysionium
             // 文字送り矢印などを処理する
             foreach (var replacer in MessageReplacers)
             {
-                message = Regex.Replace(message, replacer.From, replacer.GetTo(manager, arg), RegexOptions.IgnoreCase);
+                message = Regex.Replace(message, replacer.From, replacer.GetTo(manager), RegexOptions.IgnoreCase);
             }
 
             // メッセージボックスのビューを表示
             this.message = message;
 
-            if (TryShowSubviews(manager, arg)) return null;
-            else return new Builder(this, manager, arg);
+            if (TryShowSubviews(manager)) return null;
+            else return new Builder(this, manager);
         }
 
-        protected override void ShowSubviews(TMgr manager, TArg arg)
+        protected override void ShowSubviews(TMgr manager)
         {
             var speechBoxSubview = SpeechBoxSubviewSelector?.Invoke(manager);
             if (speechBoxSubview != null)
             {
-                speechBoxSubview.Show(message, manager, arg, ref speechBoxSubviewStateProvider, (manager, arg) =>
+                speechBoxSubview.Show(message, manager, ref speechBoxSubviewStateProvider, (manager) =>
                 {
-                    if (LuiAssert.Type<TMgr>(manager, out var tMgr, manager) ||
-                        LuiAssert.Type<TArg>(arg, out var tArg, manager)) return;
+                    if (LuiAssert.Type<TMgr>(manager, out var tMgr, manager)) return;
 
-                    OnCompleted?.Invoke(tMgr, tArg);
+                    OnCompleted?.Invoke(tMgr);
                 }, OnHide);
 
                 if (List.Count >= 1)
                 {
                     ChoicesSubviewSelector?.Invoke(manager)?.SetListHandler(
-                        List, SelectOptionViewItemHandler<TMgr, TArg>.Instance, manager, arg, ref choicesSubviewStateProvider);
-                    speechBoxSubview.DoScheduledAfterCompletion((manager, arg) =>
+                        List, SelectOptionViewItemHandler<TMgr>.Instance, manager, ref choicesSubviewStateProvider);
+                    speechBoxSubview.DoScheduledAfterCompletion((manager) =>
                     {
                         if (LuiAssert.Type<TMgr>(manager, out var tMgr)) return;
 
@@ -92,7 +85,7 @@ namespace Lysionium
             if (Title != null)
             {
                 CaptionBoxSubviewSelector?.Invoke(manager)?.Show(
-                    Title, manager, arg, ref captionBoxSubviewStateProvider);
+                    Title, manager, ref captionBoxSubviewStateProvider);
             }
         }
 
@@ -103,14 +96,14 @@ namespace Lysionium
             if (Title != null) { CaptionBoxSubviewSelector?.Invoke(manager)?.Hide(back); }
         }
 
-        public class Builder : BaseListBuilder<SpeechBoxViewData<TMgr, TArg>, Builder>, ISelectOptionsBuilder<TMgr, TArg, Builder>
+        public class Builder : BaseListBuilder<SpeechBoxViewData<TMgr>, Builder>, ISelectOptionsBuilder<TMgr, Builder>
         {
-            public Builder(SpeechBoxViewData<TMgr, TArg> parent, TMgr manager, TArg arg)
-                : base(parent, manager, arg)
+            public Builder(SpeechBoxViewData<TMgr> parent, TMgr manager)
+                : base(parent, manager)
             {
             }
 
-            public Builder OnCompleted(ListuiEventHandler<TMgr, TArg> onCompleted)
+            public Builder OnCompleted(ListuiEventHandler<TMgr> onCompleted)
             {
                 AssertNotBuilt();
 
@@ -118,7 +111,7 @@ namespace Lysionium
                 return this;
             }
 
-            public Builder Option(ISelectOption<TMgr, TArg> option)
+            public Builder Option(ISelectOption<TMgr> option)
             {
                 return Tail.Option(option);
             }
@@ -129,13 +122,13 @@ namespace Lysionium
                 Parent.OnCompleted = null;
             }
 
-            Builder ISelectOptionsBuilder<TMgr, TArg, Builder>.Option() => this;
+            Builder ISelectOptionsBuilder<TMgr, Builder>.Option() => this;
         }
 
         public class StringReplacer
         {
             public string From { get; }
-            private readonly System.Func<TMgr, TArg, string> to;
+            private readonly System.Func<TMgr, string> to;
 
             public StringReplacer(string from, string to)
             {
@@ -146,7 +139,7 @@ namespace Lysionium
                 this.to = delegate { return to; };
             }
 
-            public StringReplacer(string from, System.Func<TMgr, TArg, string> to)
+            public StringReplacer(string from, System.Func<TMgr, string> to)
             {
                 if (from == null) throw new System.ArgumentNullException(nameof(from));
                 if (to == null) throw new System.ArgumentNullException(nameof(to));
@@ -155,9 +148,9 @@ namespace Lysionium
                 this.to = to;
             }
 
-            public string GetTo(TMgr manager, TArg arg)
+            public string GetTo(TMgr manager)
             {
-                return to(manager, arg);
+                return to(manager);
             }
         }
     }

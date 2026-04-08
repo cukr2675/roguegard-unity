@@ -8,37 +8,28 @@ namespace Roguegard.Device
 {
     public class CharacterCreationAddScreen : RogueListuiScreen
     {
-        private readonly List<object> list = new();
-        private readonly ScrollMenuViewData<object, MMgr, MArg> view = new()
+        private readonly ScrollMenuViewData<object, MMgr> view = new()
         {
         };
-
-        private readonly ICharacterCreationDatabase database;
 
         private CharacterCreationData characterCreationData;
 
         public CharacterCreationAddScreen(ICharacterCreationDatabase database)
         {
-            this.database = database;
-        }
+            var list = new List<object>();
 
-        public void Set(CharacterCreationData characterCreationData)
-        {
-            this.characterCreationData = characterCreationData;
-        }
+            OnOpenScreen += (manager) =>
+            {
+                list.Clear();
+                AddOptionsTo(list, Arg.Self, (System.Type)Arg.Arg.Other, database);
 
-        public override void OpenScreen(MMgr manager, MArg arg)
-        {
-            list.Clear();
-            AddOptionsTo(list, arg.Self, (System.Type)arg.Arg.Other, database);
-
-            view.Show(list, manager, arg)
+                view.Show(list, manager)
                 ?
-                .NameFrom((item, manager, arg) => ((IRogueDescribable)item).Name)
+                .NameFrom((item, manager) => ((IRogueDescribable)item).Name)
 
-                .OnClick((item, manager, arg) =>
+                .OnClick((item, manager) =>
                 {
-                    var editTargetType = (System.Type)arg.Arg.Other;
+                    var editTargetType = (System.Type)Arg.Arg.Other;
                     if (editTargetType == typeof(Appearance))
                     {
                         var appearance = characterCreationData.Appearances.Add();
@@ -54,13 +45,19 @@ namespace Roguegard.Device
                         var startingItem = characterCreationData.StartingItemTable.Add().Add();
                         startingItem.Option = (IStartingItemOption)item;
                         startingItem.Stack = 1;
-                        ConsumeStartingItemOptionObj(startingItem.Option, arg.Self);
+                        ConsumeStartingItemOptionObj(startingItem.Option, Arg.Self);
                     }
 
                     manager.PopScreen();
                 })
 
                 .Build();
+            };
+        }
+
+        public void Set(CharacterCreationData characterCreationData)
+        {
+            this.characterCreationData = characterCreationData;
         }
 
         public static void AddOptionsTo(List<object> list, RogueObj player, object editTarget, ICharacterCreationDatabase database)

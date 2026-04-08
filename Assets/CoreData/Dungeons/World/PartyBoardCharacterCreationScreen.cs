@@ -7,31 +7,33 @@ namespace Roguegard
 {
     public class PartyBoardCharacterCreationScreen : RogueListuiScreen
     {
-        private readonly ScrollMenuViewData<object, MMgr, MArg> view = new()
+        private readonly CharacterCreationViewData view = new()
         {
-            ScrollSubviewSelector = m => m.CharacterCreation,
         };
 
-        public override void OpenScreen(MMgr manager, MArg arg)
+        public PartyBoardCharacterCreationScreen()
         {
-            view.Show(System.Array.Empty<object>(), manager, arg)
+            OnOpenScreen += (manager) =>
+            {
+                view.Show(manager)
                 ?
                 .Init(() =>
                 {
                     view.BackAnchorList = new(
                         _ => _
-                        .Option(manager.CharacterCreation.LoadPresetOption) // プリセット読み込みボタン
-                        .Option(":Done", ChoicesScreen.SaveBackDialog(Save, null))); // キャラクタークリエイト完了ボタン
+                        .Option(manager.CharacterCreation.LoadPresetOption, () => Arg) // プリセット読み込みボタン
+                        .Option(":Done", ChoicesScreen.SaveBackDialog(Save, null), () => Arg)); // キャラクタークリエイト完了ボタン
                 })
                 .Build();
+            };
         }
 
-        private static void Save(MMgr manager, MArg arg)
+        private void Save(MMgr manager)
         {
-            if (arg.Arg.Other is CharacterCreationData characterCreationData)
+            if (Arg.Arg.Other is CharacterCreationData characterCreationData)
             {
                 // キャラクリ画面から戻ったとき、そのキャラを更新する
-                var character = arg.Arg.TargetObj;
+                var character = Arg.Arg.TargetObj;
                 if (character != null)
                 {
                     // 編集キャラ更新
@@ -40,7 +42,7 @@ namespace Roguegard
                 else
                 {
                     // 新規キャラ追加
-                    var worldInfo = RogueWorldInfo.GetByCharacter(arg.Self);
+                    var worldInfo = RogueWorldInfo.GetByCharacter(Arg.Self);
                     character = characterCreationData.CreateObj(null, Vector2Int.zero, RogueRandom.Primary);
                     worldInfo.LobbyMembers.Add(character);
                 }

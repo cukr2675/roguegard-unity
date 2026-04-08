@@ -8,10 +8,11 @@ namespace Lysionium
 
         TMP_InputField.ContentType ContentType { get; }
 
-        delegate string InputFieldEventHandler<in TMgr, in TArg>(TMgr manager, TArg arg, string value);
+        delegate string InputFieldEventHandler(string value);
+        delegate string InputFieldEventHandler<in TMgr>(string value, TMgr manager);
 
-        string GetValue(IListuiManager manager, IListuiArg arg);
+        string GetValue(IListuiManager manager);
 
-        string HandleValueChanged(IListuiManager manager, IListuiArg arg, string value);
+        string HandleValueChanged(string value, IListuiManager manager);
     }
 }

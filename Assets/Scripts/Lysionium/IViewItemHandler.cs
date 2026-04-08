@@ -11,24 +11,24 @@ namespace Lysionium
     /// </summary>
     public interface IViewItemHandler
     {
-        // 期待する契約的には GetName(IReadOnlyList<object> list, int index, IListuiManager manager, IListuiArg arg) だが、
+        // 期待する契約的には GetName(IReadOnlyList<object> list, int index, IListuiManager manager) だが、
         // 回りくどく、かえって分かりづらいため却下
 
-        string GetName(object item, IListuiManager manager, IListuiArg arg);
+        string GetName(object item, IListuiManager manager);
 
         // 右クリックなど種類が増えるとメソッド一つでは足りない
         // メソッドが増えると実装が面倒
         // 戻るボタンは常に esc キーをバインドするのであれば Style と統合したほうがスムーズ
-        //InputAction GetKeybind(object item, IListuiManager manager, IListuiArg arg);
+        //InputAction GetKeybind(object item, IListuiManager manager);
 
         // Roguegard の実装を見ると、アイコン以外の情報も同時に返すほうが効率的なため使用していない
         // 使用するとしてもキーバインドと同じように Style でキーワードを渡すべき？
         // GetName はデバッグにも使用できるが GetIcon は不向き
-        //Sprite GetIcon(object item, IListuiManager manager, IListuiArg arg);
+        //Sprite GetIcon(object item, IListuiManager manager);
 
         // Name と Style はラベルをはじめとしたほとんどのコントロールで使うため実装する
 
         // Style は用途的には string[] のほうが近いが、コンマ区切りやデフォルト引数等を考えると冗長に見えるので string にする
-        string GetStyle(object item, IListuiManager manager, IListuiArg arg);
+        string GetStyle(object item, IListuiManager manager);
     }
 }
