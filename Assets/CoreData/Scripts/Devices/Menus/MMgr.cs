@@ -32,5 +32,14 @@ namespace Roguegard.Device
         {
             base.PushScreen((IListuiScreen<MMgrBase, MArg>)screen, arg);
         }
+
+        /// <summary>
+        /// <see cref="MMgrBase"/> の実装は <see cref="MMgr"/> を必ず継承することを想定するため、
+        /// <see cref="RogueListuiScreen"/> と合わせて安全ではないキャストを許容する
+        /// </summary>
+        public void PushScreen<TCtx>(IListuiScreen<MMgr, MArg, TCtx> screen, MArg arg, TCtx context)
+        {
+            base.PushScreen((IListuiScreen<MMgrBase, MArg, TCtx>)screen, arg, context);
+        }
     }
 }

@@ -48,12 +48,10 @@ namespace RoguegardUnity
         /// メッセージがアニメーション中 or メニュー操作中は待機
         /// </summary>
         public bool Wait =>
-            MessageBox.IsInProgress || SpeechBox.IsInProgress ||
-            (PeekScreen != null) || EventManager.Wait;
+            (PeekScreenOrDefault() != null) || EventManager.Wait || MessageBox.IsInProgress || SpeechBox.IsInProgress;
 
         public bool TalkingWait =>
-            SpeechBox.IsInProgress ||
-            (PeekScreen != null) || EventManager.Wait;
+            (PeekScreenOrDefault() != null) || EventManager.Wait || SpeechBox.IsInProgress;
 
         protected override bool HasManagerLock =>
             base.HasManagerLock || _stats.HasManagerLock || _face.HasManagerLock || _summary.HasManagerLock || _textEditor.HasManagerLock ||

@@ -59,6 +59,30 @@ namespace Lysionium
             instance.Click = onClick;
             return instance;
         }
+
+        public static SelectOption<TMgr, TArg, TCtx> Create<TMgr, TArg, TCtx>(
+            string name, ClickItemHandler<TMgr, TArg, TCtx> onClick, string style = "")
+            where TMgr : IListuiManager
+            where TArg : IListuiArg
+        {
+            var instance = new SelectOption<TMgr, TArg, TCtx>();
+            instance.SetName(name);
+            instance.SetStyle(style);
+            instance.Click = onClick;
+            return instance;
+        }
+
+        public static SelectOption<TMgr, TArg, TCtx> Create<TMgr, TArg, TCtx>(
+            System.Func<TMgr, TArg, TCtx, string> getName, ClickItemHandler<TMgr, TArg, TCtx> onClick, string style = "")
+            where TMgr : IListuiManager
+            where TArg : IListuiArg
+        {
+            var instance = new SelectOption<TMgr, TArg, TCtx>();
+            instance.SetName(getName);
+            instance.SetStyle(style);
+            instance.Click = onClick;
+            return instance;
+        }
     }
 
     /// <inheritdoc/>
@@ -122,5 +146,55 @@ namespace Lysionium
         string ISelectOption<TMgr, TArg>.GetName(TMgr manager, TArg arg) => getName?.Invoke(manager, arg) ?? name;
         string ISelectOption<TMgr, TArg>.GetStyle(TMgr manager, TArg arg) => getStyle?.Invoke(manager, arg) ?? style;
         void ISelectOption<TMgr, TArg>.Click(TMgr manager, TArg arg) => Click(manager, arg);
+    }
+
+    public class SelectOption<TMgr, TArg, TCtx> : ISelectOption<TMgr, TArg, TCtx>
+    {
+        private string name;
+        private System.Func<TMgr, TArg, TCtx, string> getName;
+
+        private string style;
+        private System.Func<TMgr, TArg, TCtx, string> getStyle;
+
+        public ClickItemHandler<TMgr, TArg, TCtx> Click { get; set; }
+
+        public SelectOption()
+        {
+        }
+
+        public SelectOption(string name, ClickItemHandler<TMgr, TArg, TCtx> onClick, string style = null)
+        {
+            this.name = name;
+            Click = onClick;
+            this.style = style;
+        }
+
+        public void SetName(string name)
+        {
+            this.name = name ?? throw new System.ArgumentNullException(nameof(name));
+            getName = null;
+        }
+
+        public void SetName(System.Func<TMgr, TArg, TCtx, string> selector)
+        {
+            getName = selector ?? throw new System.ArgumentNullException(nameof(selector));
+            name = null;
+        }
+
+        public void SetStyle(string style)
+        {
+            this.style = style;
+            getStyle = null;
+        }
+
+        public void SetStyle(System.Func<TMgr, TArg, TCtx, string> selector)
+        {
+            getStyle = selector;
+            style = null;
+        }
+
+        string ISelectOption<TMgr, TArg, TCtx>.GetName(TMgr manager, TArg arg, TCtx context) => getName?.Invoke(manager, arg, context) ?? name;
+        string ISelectOption<TMgr, TArg, TCtx>.GetStyle(TMgr manager, TArg arg, TCtx context) => getStyle?.Invoke(manager, arg, context) ?? style;
+        void ISelectOption<TMgr, TArg, TCtx>.Click(TMgr manager, TArg arg, TCtx context) => Click(manager, arg, context);
     }
 }

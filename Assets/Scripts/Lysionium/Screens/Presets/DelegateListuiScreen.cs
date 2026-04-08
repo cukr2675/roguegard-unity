@@ -13,7 +13,7 @@ namespace Lysionium
         protected event OpenScreenHandler OnOpenScreen;
         protected event CloseScreenViewHandler OnCloseScreenView;
 
-        bool IListuiScreen<TMgr, TArg>.IsIncremental => OnCloseScreenView != null;
+        bool IListuiScreen.IsIncremental => OnCloseScreenView != null;
 
         public delegate void OpenScreenHandler(TMgr manager, TArg arg);
         public delegate void CloseScreenViewHandler(TMgr manager, bool back);
@@ -36,6 +36,36 @@ namespace Lysionium
         }
     }
 
+    public abstract class DelegateListuiScreen<TMgr, TArg, TCtx> : IListuiScreen<TMgr, TArg, TCtx>
+        where TMgr : IListuiManager
+        where TArg : IListuiArg
+    {
+        protected event OpenScreenHandler OnOpenScreen;
+        protected event CloseScreenViewHandler OnCloseScreenView;
+
+        bool IListuiScreen.IsIncremental => OnCloseScreenView != null;
+
+        public delegate void OpenScreenHandler(TMgr manager, TArg arg, TCtx context);
+        public delegate void CloseScreenViewHandler(TMgr manager, bool back, TCtx context);
+
+        void IListuiScreen<TMgr, TArg, TCtx>.OpenScreen(TMgr manager, TArg arg, TCtx context)
+        {
+            OnOpenScreen?.Invoke(manager, arg, context);
+        }
+
+        void IListuiScreen<TMgr, TArg, TCtx>.CloseScreenView(TMgr manager, bool back, TCtx context)
+        {
+            if (OnCloseScreenView != null)
+            {
+                OnCloseScreenView(manager, back, context);
+            }
+            else
+            {
+                manager.HideAll(back);
+            }
+        }
+    }
+
 #if UNITY_EDITOR
     // コラム: DelegateListuiScreen の没拡張案
     // ViewDataBuilder.Build() の戻り値を CloseScreenHandler にすることで CloseScreenView もオーバーライド不要にする
@@ -48,7 +78,7 @@ namespace Lysionium
         protected event OpenScreenHandler OnOpenScreen;
         protected event OpenScreenOfIncrementalHandler OnOpenScreenOfIncremental;
         private event CloseScreenHandler OnCloseScreen;
-        bool IListuiScreen<TMgr, TArg>.IsIncremental => OnCloseScreen != null;
+        bool IListuiScreen.IsIncremental => OnCloseScreen != null;
 
         protected delegate void OpenScreenHandler(in TMgr manager, in TArg arg);
         protected delegate void CloseScreenHandler(TMgr manager, bool back);

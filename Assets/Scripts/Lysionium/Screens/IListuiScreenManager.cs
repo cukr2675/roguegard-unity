@@ -8,5 +8,7 @@ namespace Lysionium
         where TArg : IListuiArg
     {
         void PushScreen(IListuiScreen<TMgr, TArg> screen, TArg arg);
+
+        void PushScreen<TCtx>(IListuiScreen<TMgr, TArg, TCtx> screen, TArg arg, TCtx context);
     }
 }

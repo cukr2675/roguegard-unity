@@ -28,8 +28,6 @@ namespace Lysionium
         private readonly ListuiScreenStack<TMgr, TArg> stack = new();
         private ListuiScreenStack<TMgr, TArg>.StackItem reservedScreen;
 
-        public IListuiScreen<TMgr, TArg> PeekScreen => stack.Peek;
-
         public virtual ISelectOption<TMgr, TArg> BackOption { get; protected set; }
             = SelectOption.Create<TMgr, TArg>("Back", (manager, arg) => manager.PopScreen(), "Cancel click:Cancel");
 
@@ -86,7 +84,7 @@ namespace Lysionium
 
             try
             {
-                reservedScreen.Screen.OpenScreen((TMgr)this, reservedScreen.Arg);
+                reservedScreen.OpenScreen((TMgr)this);
                 reservedScreen = null;
             }
             catch
@@ -120,6 +118,9 @@ namespace Lysionium
 
         public virtual string Localize(string text) => text?.Normalize(NormalizationForm.FormC); // TextMeshPro のために NFD を NFC に正規化する
 
+        // 設計メモ: Stack<T>.Peek にならってプロパティではなくメソッドにする
+        public IListuiScreen PeekScreenOrDefault() => stack.TryPeek(out var item) ? item.Screen : null;
+
         /// <summary>
         /// メニューを指定の画面へ進める
         /// </summary>
@@ -128,6 +129,13 @@ namespace Lysionium
             screen.CloseScreenView((TMgr)this, false);
             BlockAll();
             reservedScreen = stack.Push(screen, arg);
+        }
+
+        public void PushScreen<TCtx>(IListuiScreen<TMgr, TArg, TCtx> screen, TArg arg, TCtx context)
+        {
+            screen.CloseScreenView((TMgr)this, false, context);
+            BlockAll();
+            reservedScreen = stack.Push(screen, arg, context);
         }
 
         public void PushInitialScreen(IListuiScreen<TMgr, TArg> screen, TArg arg, bool enableTouchMask = true)
@@ -147,7 +155,7 @@ namespace Lysionium
                 if (stack.Count == 0) break;
 
                 var item = stack.Pop();
-                item.Screen.CloseScreenView((TMgr)this, true);
+                item.CloseScreenView((TMgr)this, true);
             }
             Reopen();
         }

@@ -10,9 +10,7 @@ namespace Lysionium
     /// <summary>
     /// メニューの画面単位のインターフェース
     /// </summary>
-    public interface IListuiScreen<in TMgr, in TArg>
-        where TMgr : IListuiManager
-        where TArg : IListuiArg
+    public interface IListuiScreen
     {
         // 命名メモ: 前画面に対する増分 (Incremental) として振る舞うため。単純に重ねる方法とは異なるため添加物 (Additive) ではない
         /// <summary>
@@ -20,7 +18,13 @@ namespace Lysionium
         /// ダイアログなどを実装する際は true でオーバーライドしたうえで <see cref="CloseScreenView(TMgr, bool)"/> も実装する
         /// </summary>
         bool IsIncremental => false;
+    }
 
+    /// <inheritdoc/>
+    public interface IListuiScreen<in TMgr, in TArg> : IListuiScreen
+        where TMgr : IListuiManager
+        where TArg : IListuiArg
+    {
         /// <summary>
         /// 画面を開くメソッド。画面の初期化処理とUIの表示を行う。
         /// </summary>
@@ -48,5 +52,25 @@ namespace Lysionium
         // IsIncremental == false の画面から IsIncremental == true の画面に戻れるように拡張しづらくなる
         //
         //bool CloseScreenViewIsIncremental(TMgr manager, bool back);
+    }
+
+    /// <inheritdoc/>
+    public interface IListuiScreen<in TMgr, in TArg, TCtx> : IListuiScreen
+        where TMgr : IListuiManager
+        where TArg : IListuiArg
+    {
+        /// <summary>
+        /// 画面を開くメソッド。画面の初期化処理とUIの表示を行う。
+        /// </summary>
+        void OpenScreen(TMgr manager, TArg arg, TCtx context);
+
+        /// <summary>
+        /// 画面UIを閉じるメソッド。 <see cref="IsIncremental"/> によって実行されないことがあるためビジネスロジックの記述は禁止。
+        /// <para>メモ: この画面のUI表示前に独自の遷移アニメーションをトリガーしたい場合や <see cref="IsIncremental"/> == true のときオーバーライドする</para>
+        /// </summary>
+        void CloseScreenView(TMgr manager, bool back, TCtx context) // 命名メモ：表示処理のみ扱うことを推奨するため View をつける
+        {
+            manager.HideAll(back);
+        }
     }
 }

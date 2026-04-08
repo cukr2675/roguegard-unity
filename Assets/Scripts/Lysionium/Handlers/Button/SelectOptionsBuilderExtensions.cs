@@ -35,5 +35,23 @@ namespace Lysionium
         {
             return builder.Option(SelectOption.Create(getName, onClick, style));
         }
+
+        public static TBuilder Option<TMgr, TArg, TCtx, TBuilder>(
+            this ISelectOptionsBuilder<TMgr, TArg, TCtx, TBuilder> builder,
+            string name, ClickItemHandler<TMgr, TArg, TCtx> onClick, string style = null)
+            where TMgr : IListuiManager
+            where TArg : IListuiArg
+        {
+            return builder.Option(SelectOption.Create(name, onClick, style));
+        }
+
+        public static TBuilder Option<TMgr, TArg, TCtx, TBuilder>(
+            this ISelectOptionsBuilder<TMgr, TArg, TCtx, TBuilder> builder,
+            System.Func<TMgr, TArg, TCtx, string> getName, ClickItemHandler<TMgr, TArg, TCtx> onClick, string style = null)
+            where TMgr : IListuiManager
+            where TArg : IListuiArg
+        {
+            return builder.Option(SelectOption.Create(getName, onClick, style));
+        }
     }
 }

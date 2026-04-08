@@ -10,4 +10,9 @@ namespace Lysionium
 
         TBuilder Option(ISelectOption<TMgr, TArg> option);
     }
+
+    public interface ISelectOptionsBuilder<TMgr, TArg, TCtx, TBuilder> : ISelectOptionsBuilder<TMgr, TArg, TBuilder>
+    {
+        TBuilder Option(ISelectOption<TMgr, TArg, TCtx> option);
+    }
 }

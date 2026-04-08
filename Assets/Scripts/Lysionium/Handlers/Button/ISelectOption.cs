@@ -15,4 +15,13 @@ namespace Lysionium
 
         void Click(TMgr manager, TArg arg);
     }
+
+    public interface ISelectOption<in TMgr, in TArg, in TCtx>
+    {
+        string GetName(TMgr manager, TArg arg, TCtx context);
+
+        string GetStyle(TMgr manager, TArg arg, TCtx context);
+
+        void Click(TMgr manager, TArg arg, TCtx context);
+    }
 }
