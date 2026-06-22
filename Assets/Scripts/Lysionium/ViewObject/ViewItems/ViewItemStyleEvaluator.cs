@@ -19,9 +19,18 @@ namespace Lysionium.Views
 
         public ViewItemStyleEvaluator()
         {
-            inputStarted = ctx => inputActionHandler?.Started(item, manager, ctx);
-            inputPerformed = ctx => inputActionHandler?.Performed(item, manager, ctx);
-            inputCanceled = ctx => inputActionHandler?.Canceled(item, manager, ctx);
+            inputStarted = ctx =>
+            {
+                if (subview.Interactable) { inputActionHandler?.Started(item, manager, ctx); }
+            };
+            inputPerformed = ctx =>
+            {
+                if (subview.Interactable) { inputActionHandler?.Performed(item, manager, ctx); }
+            };
+            inputCanceled = ctx =>
+            {
+                if (subview.Interactable) { inputActionHandler?.Canceled(item, manager, ctx); }
+            };
         }
 
         public void Bind(object item, IViewItemHandler handler, IListuiManager manager, SubviewBase subview)

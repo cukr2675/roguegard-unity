@@ -24,7 +24,7 @@ namespace Lysionium.Views
         /// </summary>
         public bool HasManagerLock { get; private set; }
 
-        public bool Interactable
+        public override bool Interactable
         {
             get
             {

@@ -31,7 +31,7 @@ namespace Lysionium.Views
             LuiAssert.NotInitialized(this, Parent != null);
 
             Parent = parent;
-            selectable = GetComponent<Selectable>();
+            TryGetComponent(out selectable);
             TryGetComponent(out canvasGroup);
         }
 
@@ -119,7 +119,7 @@ namespace Lysionium.Views
             {
                 if (viewItems[i].ItemName != null)
                 {
-                    firstViewItem= viewItems[i];
+                    firstViewItem = viewItems[i];
                     return true;
                 }
             }

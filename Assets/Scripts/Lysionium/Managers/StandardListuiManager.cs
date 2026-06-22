@@ -79,8 +79,10 @@ namespace Lysionium
 
             try
             {
-                reservedScreen.OpenScreen((TMgr)this);
+                // OpenScreen 中に PushScreen されることを想定して一時保持する
+                var tempScreen = reservedScreen;
                 reservedScreen = null;
+                tempScreen.OpenScreen((TMgr)this);
             }
             catch
             {
@@ -160,6 +162,19 @@ namespace Lysionium
                 item.CloseScreenView((TMgr)this, true);
             }
             Reopen();
+        }
+
+        public void PopScreensUntil(IListuiScreen screen)
+        {
+            const int whileLimit = 10000;
+            for (int i = 0; i < whileLimit; i++)
+            {
+                if (PeekScreenOrDefault() == null || PeekScreenOrDefault() == screen) return;
+
+                PopScreen();
+            }
+            throw new System.InvalidOperationException(
+                $"{nameof(PopScreensUntil)} のループ回数が {whileLimit} を超えました。");
         }
 
         /// <summary>

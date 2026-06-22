@@ -11,7 +11,7 @@ namespace Lysionium.Editor
     {
         [SerializeField] private StandardListuiManager _standardListuiManagerPrefab;
 
-        [MenuItem("GameObject/UI/Lysionium/List-UI Startup (and script)", false, 2675)]
+        [MenuItem("GameObject/UI (Canvas)/Lysionium/List-UI Startup (and script)", false, 2675)]
         private static void CreateListuiStartup()
         {
             // StandardListuiManager が無ければ生成する
@@ -59,7 +59,7 @@ namespace Lysionium.Editor
             Debug.Log($"{instance} に {classType} コンポーネントを追加しました。");
         }
 
-        [MenuItem("GameObject/UI/Lysionium/Standard List-UI Manager", false, 2676)]
+        [MenuItem("GameObject/UI (Canvas)/Lysionium/Standard List-UI Manager", false, 2676)]
         private static void CreateStandardListuiManager()
         {
             // EventSystem が無ければ生成する

@@ -18,24 +18,26 @@ public class #SCRIPTNAME# : MonoBehaviour
     {
         var manager = FindAnyObjectByType<StandardListuiManager>();
         manager.Initialize();
-        manager.PushInitialScreen(new InitialScreen(), null);
+        manager.PushInitialScreen(new InitialScreen());
     }
 
-    private class InitialScreen : ListuiScreen<StandardListuiManager>
+    private class InitialScreen : DelegateListuiScreen<StandardListuiManager>
     {
         private readonly MainMenuViewData<StandardListuiManager> view = new()
         {
         };
 
-        public override void OpenScreen(StandardListuiManager manager, IListuiArg arg)
+        public InitialScreen()
         {
-            view.Show(manager, arg)
+            OnOpenScreen += (manager) =>
+            {
+                view.Show(manager)
                 ?
-
                 .Option(""Hello"", new ChoicesScreen<StandardListuiManager>(""'Hello' was clicked."").Back())
                 .Option(""World"", new ChoicesScreen<StandardListuiManager>(""'World' was clicked."").Back())
 
                 .Build();
+            };
         }
     }
 }
@@ -49,21 +51,23 @@ public class #SCRIPTNAME# : MonoBehaviour
 using UnityEngine;
 
     #ROOTNAMESPACEBEGIN#
-public class #SCRIPTNAME# : ListuiScreen<StandardListuiManager>
+public class #SCRIPTNAME# : DelegateListuiScreen<StandardListuiManager>
 {
     private readonly MainMenuViewData<StandardListuiManager> view = new()
     {
     };
 
-    public override void OpenScreen(StandardListuiManager manager, IListuiArg arg)
+    public #SCRIPTNAME#()
     {
-        view.Show(manager, arg)
+        OnOpenScreen += (manager) =>
+        {
+            view.Show(manager)
             ?
-
             .Option(""Hello"", new ChoicesScreen<StandardListuiManager>(""'Hello' was clicked."").Back())
             .Option(""World"", new ChoicesScreen<StandardListuiManager>(""'World' was clicked."").Back())
 
             .Build();
+        };
     }
 }
 #ROOTNAMESPACEEND#

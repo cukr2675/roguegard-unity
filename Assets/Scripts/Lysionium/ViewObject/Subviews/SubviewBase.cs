@@ -14,6 +14,9 @@ namespace Lysionium.Views
 
         public IListuiManager Manager { get; protected set; }
 
+        // 設計メモ: LabelViewItem などの非 Selectable 要素で Interactable を取得するためのプロパティ
+        public abstract bool Interactable { get; }
+
         private AnimatorTupple animator;
         private KeybindTuple binding;
 

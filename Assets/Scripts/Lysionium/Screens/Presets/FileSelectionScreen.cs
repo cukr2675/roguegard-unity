@@ -312,11 +312,11 @@ namespace Lysionium
                 {
                     view.Show(message, manager)
                     ?
-                    .VarOnce(out var invalidPathChars, Path.GetInvalidPathChars())
+                    .VarOnce(out var invalidFileNameChars, Path.GetInvalidFileNameChars())
                     .VarOnce(out var entryPath, "")
                     .Tail.Append(InputFieldWidgetOption.Create<TMgr>(
                         _ => entryPath,
-                        value => entryPath = invalidPathChars.Any(x => value.Contains(x)) ? entryPath : value))
+                        value => entryPath = invalidFileNameChars.Any(x => value.Contains(x)) ? entryPath : value))
 
                     .Tail.Append(StackWidgetOption.Create(
                         ("1*", SelectOption.Create<TMgr>(
