@@ -22,7 +22,7 @@ MonoBehaviour:
     _rotation: {x: 0, y: 0, z: 0, w: 1}
     _scale: {x: 1, y: 1, z: 1}
     _degree: 0
-    _play: 
+    _eventString: 
     _wait: 8
   - _poseSource: {fileID: 11400000, guid: cb6184a66f7accf45a2096fb0ad8c9ea, type: 2}
     _pixelPosition: {x: 0, y: 0, z: 0}
@@ -30,7 +30,7 @@ MonoBehaviour:
     _rotation: {x: 0, y: 0, z: 0, w: 1}
     _scale: {x: 1, y: 1, z: 1}
     _degree: 0
-    _play: 
+    _eventString: 
     _wait: 8
   - _poseSource: {fileID: 11400000, guid: e5b447bbdfa3a034e8a598941318b2cc, type: 2}
     _pixelPosition: {x: 0, y: -1, z: 0}
@@ -38,7 +38,7 @@ MonoBehaviour:
     _rotation: {x: 0, y: 0, z: 0, w: 1}
     _scale: {x: 1, y: 1, z: 1}
     _degree: 0
-    _play: 
+    _eventString: 
     _wait: 8
   - _poseSource: {fileID: 11400000, guid: cb6184a66f7accf45a2096fb0ad8c9ea, type: 2}
     _pixelPosition: {x: 0, y: 0, z: 0}
@@ -46,6 +46,6 @@ MonoBehaviour:
     _rotation: {x: 0, y: 0, z: 0, w: 1}
     _scale: {x: 1, y: 1, z: 1}
     _degree: 0
-    _play: 
+    _eventString: 
     _wait: 8
   _previewOchalikeSprite: {fileID: 11400000, guid: 431c37f1690795147a09f0fa91718a49, type: 2}

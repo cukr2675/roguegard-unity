@@ -22,7 +22,7 @@ MonoBehaviour:
     _rotation: {x: 0, y: 0, z: 0, w: 1}
     _scale: {x: 1, y: 1, z: 1}
     _degree: 0
-    _play: 
+    _eventString: 
     _wait: 1
   - _poseSource: {fileID: 11400000, guid: 0dd1c2fb3538b654da256908f79d0a7f, type: 2}
     _pixelPosition: {x: 0, y: 0, z: 0}
@@ -30,6 +30,6 @@ MonoBehaviour:
     _rotation: {x: 0, y: 0, z: 0, w: 1}
     _scale: {x: 0, y: 0, z: 0}
     _degree: 0
-    _play: 
+    _eventString: 
     _wait: 1
   _previewOchalikeSprite: {fileID: 11400000, guid: 41113a2e6e61ac547b7c4c7da3a45789, type: 2}

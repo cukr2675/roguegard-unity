@@ -25,9 +25,14 @@ namespace OchalikeSprites
 
         /// <summary>
         /// 効果音などのモーションに付随する要素をポーズと同等に取得・制御するためのプロパティ。
-        /// より自由度の高い制御がいる場合はタイムラインを使用すべき（ただし、コマ単位の同期には注意が必要）
+        /// <para>
+        /// - 同時に複数のイベントを発火したい場合は 0 秒のキーフレームを使用する
+        /// </para>
+        /// <para>
+        /// - より自由度の高い制御がいる場合はタイムラインを使用すべき（ただし、コマ単位の同期には注意が必要）
+        /// </para>
         /// </summary>
-        public string Play { get; set; }
+        public string EventString { get; set; }
 
         public static OchalikeSpriteTransform Identity => new(false);
 
@@ -40,7 +45,7 @@ namespace OchalikeSprites
             Scale = Vector3.one;
             _poseSource = DefaultSpritePoseSource.Instance;
             Direction = SpriteDirection.Down;
-            Play = null;
+            EventString = null;
         }
     }
 }

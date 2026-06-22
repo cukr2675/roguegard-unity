@@ -22,7 +22,7 @@ MonoBehaviour:
     _rotation: {x: 0, y: 0, z: 0, w: 1}
     _scale: {x: 1, y: 1, z: 1}
     _degree: -135
-    _play: 
+    _eventString: 
     _wait: 8
   - _poseSource: {fileID: 11400000, guid: 2f6fb66bdb0d8934bac4173d86409555, type: 2}
     _pixelPosition: {x: 0, y: 0, z: 0}
@@ -30,7 +30,7 @@ MonoBehaviour:
     _rotation: {x: 0, y: 0, z: 0, w: 1}
     _scale: {x: 1, y: 1, z: 1}
     _degree: -90
-    _play: 
+    _eventString: 
     _wait: 6
   - _poseSource: {fileID: 11400000, guid: 2f6fb66bdb0d8934bac4173d86409555, type: 2}
     _pixelPosition: {x: 0, y: 0, z: 0}
@@ -38,7 +38,7 @@ MonoBehaviour:
     _rotation: {x: 0, y: 0, z: 0, w: 1}
     _scale: {x: 1, y: 1, z: 1}
     _degree: -45
-    _play: 
+    _eventString: 
     _wait: 6
   - _poseSource: {fileID: 11400000, guid: 25a7fbda3d4acd34194bdccf440d08dd, type: 2}
     _pixelPosition: {x: 0, y: 1, z: 0}
@@ -46,7 +46,7 @@ MonoBehaviour:
     _rotation: {x: 0, y: 0, z: 0, w: 1}
     _scale: {x: 1, y: 1, z: 1}
     _degree: 0
-    _play: 
+    _eventString: 
     _wait: 2
   - _poseSource: {fileID: 11400000, guid: 25a7fbda3d4acd34194bdccf440d08dd, type: 2}
     _pixelPosition: {x: 0, y: 2, z: 0}
@@ -54,7 +54,7 @@ MonoBehaviour:
     _rotation: {x: 0, y: 0, z: 0, w: 1}
     _scale: {x: 1, y: 1, z: 1}
     _degree: 0
-    _play: 
+    _eventString: 
     _wait: 2
   - _poseSource: {fileID: 11400000, guid: 25a7fbda3d4acd34194bdccf440d08dd, type: 2}
     _pixelPosition: {x: 0, y: 3, z: 0}
@@ -62,7 +62,7 @@ MonoBehaviour:
     _rotation: {x: 0, y: 0, z: 0, w: 1}
     _scale: {x: 1, y: 1, z: 1}
     _degree: 0
-    _play: 
+    _eventString: 
     _wait: 2
   - _poseSource: {fileID: 11400000, guid: 25a7fbda3d4acd34194bdccf440d08dd, type: 2}
     _pixelPosition: {x: 0, y: 4, z: 0}
@@ -70,7 +70,7 @@ MonoBehaviour:
     _rotation: {x: 0, y: 0, z: 0, w: 1}
     _scale: {x: 1, y: 1, z: 1}
     _degree: 0
-    _play: 
+    _eventString: 
     _wait: 2
   - _poseSource: {fileID: 11400000, guid: 25a7fbda3d4acd34194bdccf440d08dd, type: 2}
     _pixelPosition: {x: 0, y: 3, z: 0}
@@ -78,7 +78,7 @@ MonoBehaviour:
     _rotation: {x: 0, y: 0, z: 0, w: 1}
     _scale: {x: 1, y: 1, z: 1}
     _degree: 0
-    _play: 
+    _eventString: 
     _wait: 2
   - _poseSource: {fileID: 11400000, guid: 25a7fbda3d4acd34194bdccf440d08dd, type: 2}
     _pixelPosition: {x: 0, y: 2, z: 0}
@@ -86,7 +86,7 @@ MonoBehaviour:
     _rotation: {x: 0, y: 0, z: 0, w: 1}
     _scale: {x: 1, y: 1, z: 1}
     _degree: 0
-    _play: 
+    _eventString: 
     _wait: 2
   - _poseSource: {fileID: 11400000, guid: 25a7fbda3d4acd34194bdccf440d08dd, type: 2}
     _pixelPosition: {x: 0, y: 1, z: 0}
@@ -94,7 +94,7 @@ MonoBehaviour:
     _rotation: {x: 0, y: 0, z: 0, w: 1}
     _scale: {x: 1, y: 1, z: 1}
     _degree: 0
-    _play: 
+    _eventString: 
     _wait: 2
   - _poseSource: {fileID: 11400000, guid: 25a7fbda3d4acd34194bdccf440d08dd, type: 2}
     _pixelPosition: {x: 0, y: 0, z: 0}
@@ -102,6 +102,6 @@ MonoBehaviour:
     _rotation: {x: 0, y: 0, z: 0, w: 1}
     _scale: {x: 1, y: 1, z: 1}
     _degree: 0
-    _play: 
+    _eventString: 
     _wait: 2
   _previewOchalikeSprite: {fileID: 11400000, guid: 41113a2e6e61ac547b7c4c7da3a45789, type: 2}

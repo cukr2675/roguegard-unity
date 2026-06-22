@@ -53,7 +53,7 @@ namespace OchalikeSprites
             transform.Scale = current.Scale;
             transform.PoseSource = current.PoseSource;
             transform.Direction = SpriteDirection.FromDegree(degree);
-            if (first) { transform.Play = current.Play; } // 切り替わった瞬間だけ再生
+            if (first) { transform.EventString = current.EventString; } // 切り替わった瞬間だけ再生
 
             if (_loopCount >= 1)
             {
@@ -95,8 +95,11 @@ namespace OchalikeSprites
             [SerializeField] private float _degree;
             public float Degree => _degree;
 
-            [SerializeField] private string _play;
-            public string Play => _play;
+            [SerializeField] private string _eventString;
+            public string EventString => _eventString;
+
+            //[SerializeField] private Object _eventObject;
+            //public Object EventObject => _eventObject;
 
             [SerializeField] private int _wait;
             public int Wait => _wait;
