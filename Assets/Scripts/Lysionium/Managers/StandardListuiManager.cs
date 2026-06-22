@@ -15,7 +15,7 @@ namespace Lysionium
         : MonoBehaviour, IListuiScreenManager<TMgr>, IBackOptionProviderListuiManager<TMgr>, IDefaultSubviewTable
         where TMgr : StandardListuiManager<TMgr>
     {
-        private DefaultSubviewTable defaultSubviewTable;
+        protected DefaultSubviewTable DefaultSubviewTable { get; private set; }
 
         public event System.Action OnError;
         public event System.Action OnUnload;
@@ -32,31 +32,31 @@ namespace Lysionium
         /// <summary>
         /// この値が true の間は予約されたメニューを表示しない。遷移アニメーション用
         /// </summary>
-        protected virtual bool HasManagerLock => defaultSubviewTable.HasManagerLock;
+        protected virtual bool HasManagerLock => DefaultSubviewTable.HasManagerLock;
 
-        public IListHandlerSubview PlayingHud => defaultSubviewTable.PlayingHud;
-        public IListHandlerSubview Scroll => defaultSubviewTable.Scroll;
-        public IListHandlerSubview Widgets => defaultSubviewTable.Widgets;
-        public IMessageBoxSubview LongMessage => defaultSubviewTable.LongMessage;
-        public IListHandlerSubview BackAnchor => defaultSubviewTable.BackAnchor;
-        public IListHandlerSubview ForwardAnchor => defaultSubviewTable.ForwardAnchor;
-        public IListHandlerSubview PrimaryCommand => defaultSubviewTable.PrimaryCommand;
-        public IMessageBoxSubview CaptionBox => defaultSubviewTable.CaptionBox;
-        public IListHandlerSubview SecondaryCommand => defaultSubviewTable.SecondaryCommand;
-        public IListHandlerSubview Dialog => defaultSubviewTable.Dialog;
-        public IColorPickerSubview ColorPicker => defaultSubviewTable.ColorPicker;
-        public IMessageBoxSubview MessageBox => defaultSubviewTable.MessageBox;
-        public IListHandlerSubview FadeMask => defaultSubviewTable.FadeMask;
-        public IListHandlerSubview Overlay => defaultSubviewTable.Overlay;
-        public IMessageBoxSubview SpeechBox => defaultSubviewTable.SpeechBox;
-        public IListHandlerSubview Choices => defaultSubviewTable.Choices;
-        public IListHandlerSubview DropdownList => defaultSubviewTable.DropdownList;
-        public IListHandlerSubview DropdownGrid => defaultSubviewTable.DropdownGrid;
+        public IListHandlerSubview PlayingHud => DefaultSubviewTable.PlayingHud;
+        public IListHandlerSubview Scroll => DefaultSubviewTable.Scroll;
+        public IListHandlerSubview Widgets => DefaultSubviewTable.Widgets;
+        public IMessageBoxSubview LongMessage => DefaultSubviewTable.LongMessage;
+        public IListHandlerSubview BackAnchor => DefaultSubviewTable.BackAnchor;
+        public IListHandlerSubview ForwardAnchor => DefaultSubviewTable.ForwardAnchor;
+        public IListHandlerSubview PrimaryCommand => DefaultSubviewTable.PrimaryCommand;
+        public IMessageBoxSubview CaptionBox => DefaultSubviewTable.CaptionBox;
+        public IListHandlerSubview SecondaryCommand => DefaultSubviewTable.SecondaryCommand;
+        public IListHandlerSubview Dialog => DefaultSubviewTable.Dialog;
+        public IColorPickerSubview ColorPicker => DefaultSubviewTable.ColorPicker;
+        public IMessageBoxSubview MessageBox => DefaultSubviewTable.MessageBox;
+        public IListHandlerSubview FadeMask => DefaultSubviewTable.FadeMask;
+        public IListHandlerSubview Overlay => DefaultSubviewTable.Overlay;
+        public IMessageBoxSubview SpeechBox => DefaultSubviewTable.SpeechBox;
+        public IListHandlerSubview Choices => DefaultSubviewTable.Choices;
+        public IListHandlerSubview DropdownList => DefaultSubviewTable.DropdownList;
+        public IListHandlerSubview DropdownGrid => DefaultSubviewTable.DropdownGrid;
 
         protected void CommonInit()
         {
-            defaultSubviewTable = GetComponent<DefaultSubviewTable>();
-            defaultSubviewTable.CommonInit();
+            DefaultSubviewTable = GetComponent<DefaultSubviewTable>();
+            DefaultSubviewTable.CommonInit();
             HideAll();
         }
 
@@ -86,7 +86,6 @@ namespace Lysionium
             }
             catch
             {
-                reservedScreen = null;
                 OnError?.Invoke();
                 throw;
             }
@@ -94,23 +93,23 @@ namespace Lysionium
 
         protected virtual void BlockAll()
         {
-            for (int i = 0; i < defaultSubviewTable.Subviews.Count; i++)
+            for (int i = 0; i < DefaultSubviewTable.Subviews.Count; i++)
             {
-                defaultSubviewTable.Subviews[i].SetInteractable(false);
+                DefaultSubviewTable.Subviews[i].SetInteractable(false);
             }
         }
 
         public virtual void HideAll(bool back = false)
         {
-            for (int i = 0; i < defaultSubviewTable.Subviews.Count; i++)
+            for (int i = 0; i < DefaultSubviewTable.Subviews.Count; i++)
             {
-                defaultSubviewTable.Subviews[i].Hide(back);
+                DefaultSubviewTable.Subviews[i].Hide(back);
             }
         }
 
         public void SetInvisibleDropdownPosition(Rect rect)
         {
-            defaultSubviewTable.SetInvisibleDropdownPosition(rect);
+            DefaultSubviewTable.SetInvisibleDropdownPosition(rect);
         }
 
         public virtual string Localize(string text) => text?.Normalize(NormalizationForm.FormC); // TextMeshPro のために NFD を NFC に正規化する
@@ -139,14 +138,14 @@ namespace Lysionium
         {
             stack.Clear();
             PushScreen(screen);
-            defaultSubviewTable.SetBlocker(enableTouchMask);
+            DefaultSubviewTable.SetBlocker(enableTouchMask);
         }
 
         public void PushInitialScreen<TArg>(IListuiScreen<TMgr, TArg> screen, TArg arg, bool enableTouchMask = true)
         {
             stack.Clear();
             PushScreen(screen, arg);
-            defaultSubviewTable.SetBlocker(enableTouchMask);
+            DefaultSubviewTable.SetBlocker(enableTouchMask);
         }
 
         /// <summary>
@@ -191,7 +190,7 @@ namespace Lysionium
             else
             {
                 // メニューがない場合は終了する
-                defaultSubviewTable.SetBlocker(false);
+                DefaultSubviewTable.SetBlocker(false);
             }
         }
 
@@ -203,7 +202,7 @@ namespace Lysionium
             stack.Clear();
             reservedScreen = null;
             HideAll();
-            defaultSubviewTable.SetBlocker(false);
+            DefaultSubviewTable.SetBlocker(false);
         }
     }
 }
