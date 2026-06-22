@@ -7,12 +7,12 @@ using UnityEngine.Audio;
 
 namespace Lysionium.Audio.Editor
 {
-    [CreateAssetMenu(menuName = "Lysionium/Play/Trimmed Audio Play Seed")]
-    public class TrimmedAudioPlaySeed : AudioPlaySeed
+    [CreateAssetMenu(menuName = "Lysionium/Evtfx Audio/Trim Seed", fileName = "AppAudioTableSfx")]
+    public class TrimEvtfxAudioSeed : EvtfxAudioSeed
     {
         [SerializeField] private AudioMixerGroup _audioMixerGroup = null;
 
-        [SerializeField] private AudioPlayTable.PlayBehaviour _playBehaviour = AudioPlayTable.PlayBehaviour.Sfx;
+        [SerializeField] private EvtfxAudioTable.PlayBehaviour _playBehaviour = EvtfxAudioTable.PlayBehaviour.Sfx;
 
         [SerializeField] private bool _normalize = true;
 
@@ -26,25 +26,25 @@ namespace Lysionium.Audio.Editor
             EditorUtility.SetDirty(this);
         }
 
-        public override AudioPlayTable.Item[] CreatePlayItems(string directory, int blankSamples)
+        public override EvtfxAudioTable.Item[] CreateEvtfxAudioItems(string directory, int blankSamples)
         {
             if (_isDirty)
             {
-                var result = new AudioPlayTable.Item[_items.Length];
+                var result = new EvtfxAudioTable.Item[_items.Length];
                 for (int i = 0; i < _items.Length; i++)
                 {
                     // wavファイルを生成
                     var item = _items[i];
                     var audioClip = item.CreateAudioClip(blankSamples);
-                    var targetPath = $@"{directory}\{item.PlayName}.g.wav";
+                    var targetPath = $@"{directory}\{item.EvtfxName}.g.wav";
                     SaveAsWav(audioClip, targetPath, _normalize);
                     EditorUtility.SetDirty(audioClip);
                     AssetDatabase.ImportAsset(targetPath);
 
                     // 実際に使用する AudioClip を取得
-                    result[i] = new AudioPlayTable.Item
+                    result[i] = new EvtfxAudioTable.Item
                     {
-                        PlayName = item.PlayName,
+                        EvtfxName = item.EvtfxName,
                         AudioClip = AssetDatabase.LoadAssetAtPath<AudioClip>(targetPath),
                         AudioMixerGroup = _audioMixerGroup,
                         PlayBehaviour = _playBehaviour
@@ -55,16 +55,16 @@ namespace Lysionium.Audio.Editor
             else
             {
 
-                var result = new AudioPlayTable.Item[_items.Length];
+                var result = new EvtfxAudioTable.Item[_items.Length];
                 for (int i = 0; i < _items.Length; i++)
                 {
                     var item = _items[i];
-                    var targetPath = $@"{directory}\{item.PlayName}.g.wav";
+                    var targetPath = $@"{directory}\{item.EvtfxName}.g.wav";
 
                     // 実際に使用する AudioClip を取得
-                    result[i] = new AudioPlayTable.Item
+                    result[i] = new EvtfxAudioTable.Item
                     {
-                        PlayName = item.PlayName,
+                        EvtfxName = item.EvtfxName,
                         AudioClip = AssetDatabase.LoadAssetAtPath<AudioClip>(targetPath),
                         AudioMixerGroup = _audioMixerGroup,
                         PlayBehaviour = _playBehaviour
@@ -147,8 +147,8 @@ namespace Lysionium.Audio.Editor
         [System.Serializable]
         internal class Item
         {
-            [SerializeField] private string _playName;
-            public string PlayName => string.IsNullOrWhiteSpace(_playName) ? _originalClip.name : _playName;
+            [SerializeField] private string _evtfxName;
+            public string EvtfxName => string.IsNullOrWhiteSpace(_evtfxName) ? _originalClip.name : _evtfxName;
 
             [SerializeField] private AudioClip _originalClip;
             public AudioClip OriginalClip => _originalClip;

@@ -5,8 +5,8 @@ using UnityEngine;
 
 namespace Lysionium.Audio.Editor
 {
-    [CustomPropertyDrawer(typeof(TrimmedAudioPlaySeed.Item))]
-    public class TrimmedAudioPlaySeedItemPropertyDrawer : PropertyDrawer
+    [CustomPropertyDrawer(typeof(TrimEvtfxAudioSeed.Item))]
+    public class TrimEvtfxAudioSeedItemPropertyDrawer : PropertyDrawer
     {
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {

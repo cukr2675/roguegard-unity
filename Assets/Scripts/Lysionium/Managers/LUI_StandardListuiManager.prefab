@@ -140,14 +140,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _visibleBool: IsVisible
   _backBool: Back
-  _onPlayString:
+  _onEvtfxString:
     m_PersistentCalls:
       m_Calls: []
-  _onPlayObject:
+  _onEvtfxObject:
     m_PersistentCalls:
       m_Calls: []
-  _playOnSelect: Select
-  _playOnSelectOutOfRange: SelectOutOfRange
+  _evtfxOnSelect: Select
+  _evtfxOnSelectOutOfRange: SelectOutOfRange
   _log: 0
 --- !u!114 &-5307896561031752095
 MonoBehaviour:
@@ -858,7 +858,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3484323335538157972, guid: 0869485a554e1fd418107586aab3766f, type: 3}
       propertyPath: _onEndSpeech.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: PlayString
+      value: PlayEvtfxString
       objectReference: {fileID: 0}
     - target: {fileID: 3484323335538157972, guid: 0869485a554e1fd418107586aab3766f, type: 3}
       propertyPath: _onStartSpeech.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
@@ -870,7 +870,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3484323335538157972, guid: 0869485a554e1fd418107586aab3766f, type: 3}
       propertyPath: _onStartSpeech.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: PlayString
+      value: PlayEvtfxString
       objectReference: {fileID: 0}
     - target: {fileID: 3484323335538157972, guid: 0869485a554e1fd418107586aab3766f, type: 3}
       propertyPath: _onClickWithoutBlock.m_PersistentCalls.m_Calls.Array.data[0].m_Target

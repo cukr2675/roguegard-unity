@@ -6,19 +6,19 @@ using UnityEngine.Audio;
 
 namespace Lysionium.Views
 {
-    [AddComponentMenu("UI/Lysionium/LUI Web Other Audio Play Handler")]
-    public class WebOtherAudioPlayHandler : MonoBehaviour
+    [AddComponentMenu("UI/Lysionium/LUI Web Other Evtfx Audio Controller")]
+    public class WebOtherEvtfxAudioController : MonoBehaviour
     {
         [SerializeField] private AudioSource _audioSourcePrefab = null;
-        [SerializeField] private string _stopBgmPlayName = null;
+        [SerializeField] private string _stopBgmEvtfxName = null;
 
 #if UNITY_EDITOR || !UNITY_WEBGL
         [Space]
-        [SerializeField] private AudioPlayTable _defaultAudioPlayTable = null;
+        [SerializeField] private EvtfxAudioTable _defaultEvtfxAudioTable = null;
 #endif
 #if UNITY_EDITOR || UNITY_WEBGL
-        [Tooltip("Web プラットフォームで再生する " + nameof(AudioPlayTable))]
-        [SerializeField] private AudioPlayTable _webAudioPlayTable = null;
+        [Tooltip("Web プラットフォームで再生する " + nameof(EvtfxAudioTable))]
+        [SerializeField] private EvtfxAudioTable _webEvtfxAudioTable = null;
 #endif
 
 #if UNITY_EDITOR
@@ -33,50 +33,54 @@ namespace Lysionium.Views
         private Item waitSource;
         private Item bgmSource;
 
-        public bool Wait => waitSource?.IsPlaying ?? false;
+        // 命名メモ: IsInWaiting だとウェイトでこのコンポーネント全体が待機しているように見える
+        /// <summary>
+        /// 待機対象の音声が再生中のとき true
+        /// </summary>
+        public bool AudioWaitIsInProgress => waitSource?.IsPlaying ?? false;
 
         protected virtual void Awake()
         {
 #if !UNITY_EDITOR && UNITY_WEBGL
-            var audioPlayTable = _webAudioPlayTable;
+            var evtfxAudioTable = _webAudioEvtfxTable;
 #else
-            var audioPlayTable = _defaultAudioPlayTable;
+            var evtfxAudioTable = _defaultEvtfxAudioTable;
 #endif
 #if UNITY_EDITOR
-            if (_simulateWeb) { audioPlayTable = _webAudioPlayTable; }
+            if (_simulateWeb) { evtfxAudioTable = _webEvtfxAudioTable; }
 #endif
 
-            blankSamples = audioPlayTable.BlankSamples;
+            blankSamples = evtfxAudioTable.BlankSamples;
             table = new Dictionary<string, Item>();
-            foreach (var item in audioPlayTable.Items)
+            foreach (var item in evtfxAudioTable.Items)
             {
                 var source = new Item(this, item.AudioClip, item.AudioMixerGroup, item.PlayBehaviour);
-                table.Add(item.PlayName, source);
+                table.Add(item.EvtfxName, source);
             }
         }
 
-        public void Play(string name, object sender)
+        public void Play(string evtfxName, object sender)
         {
-            Play(name, false);
+            Play(evtfxName, false);
         }
 
-        public void Play(string name, bool wait)
+        public void Play(string evtfxName, bool wait)
         {
-            if (name == _stopBgmPlayName)
+            if (evtfxName == _stopBgmEvtfxName)
             {
                 StopBgm();
                 return;
             }
-            if (!table.TryGetValue(name, out var item)) return;
+            if (!table.TryGetValue(evtfxName, out var item)) return;
 
             waitSource = wait ? item : null;
 
             switch (item.PlayType)
             {
-                case AudioPlayTable.PlayBehaviour.Sfx:
+                case EvtfxAudioTable.PlayBehaviour.Sfx:
                     item.Play();
                     break;
-                case AudioPlayTable.PlayBehaviour.SfxOneShot:
+                case EvtfxAudioTable.PlayBehaviour.SfxOneShot:
 #if UNITY_EDITOR
                     if (_simulateWeb)
                     {
@@ -90,28 +94,32 @@ namespace Lysionium.Views
                     item.PlayOneShot();
 #endif
                     break;
-                case AudioPlayTable.PlayBehaviour.Bgm:
-                case AudioPlayTable.PlayBehaviour.BgmOnce:
+                case EvtfxAudioTable.PlayBehaviour.Bgm:
                     bgmSource?.StopAll();
                     bgmSource = item;
                     item.PlayLoop();
                     break;
-                case AudioPlayTable.PlayBehaviour.Manual:
+                case EvtfxAudioTable.PlayBehaviour.BgmOnce:
+                    bgmSource?.StopAll();
+                    bgmSource = item;
+                    item.Play();
+                    break;
+                case EvtfxAudioTable.PlayBehaviour.Manual:
                 default:
                     break;
             }
         }
 
-        public void PlayLoop(string name)
+        public void PlayLoop(string evtfxName)
         {
-            if (!table.TryGetValue(name, out var item)) return;
+            if (!table.TryGetValue(evtfxName, out var item)) return;
 
             item.PlayLoop();
         }
 
-        public void SetLastLoop(string name)
+        public void SetLastLoop(string evtfxName)
         {
-            if (!table.TryGetValue(name, out var item)) return;
+            if (!table.TryGetValue(evtfxName, out var item)) return;
 
             item.SetLastLoop();
         }
@@ -124,12 +132,12 @@ namespace Lysionium.Views
 
         private class Item
         {
-            private readonly WebOtherAudioPlayHandler parent;
+            private readonly WebOtherEvtfxAudioController parent;
             private readonly AudioClip clip;
             private readonly AudioMixerGroup group;
             private readonly List<AudioSource> sources = new();
 
-            public AudioPlayTable.PlayBehaviour PlayType { get; }
+            public EvtfxAudioTable.PlayBehaviour PlayType { get; }
 
             public bool IsPlaying => sources[0].isPlaying;
 
@@ -137,7 +145,7 @@ namespace Lysionium.Views
             private int loopCount;
             private bool isLoop;
 
-            public Item(WebOtherAudioPlayHandler parent, AudioClip clip, AudioMixerGroup group, AudioPlayTable.PlayBehaviour playType)
+            public Item(WebOtherEvtfxAudioController parent, AudioClip clip, AudioMixerGroup group, EvtfxAudioTable.PlayBehaviour playType)
             {
                 this.parent = parent;
                 this.clip = clip;

@@ -17,7 +17,7 @@ namespace Lysionium.Views
         public abstract bool TryInstantiateWidget(
             object item, IViewItemHandler handler, SubviewBase subview, out ViewWidget viewWidget);
 
-        public void PlayString(string value) => Parent.PlayFromItem(value, this);
-        public void PlayObject(Object value) => Parent.PlayFromItem(value, this);
+        public void PlayEvtfxString(string value) => Parent.PlayEvtfxFromItem(value, this);
+        public void PlayEvtfxObject(Object value) => Parent.PlayEvtfxFromItem(value, this);
     }
 }

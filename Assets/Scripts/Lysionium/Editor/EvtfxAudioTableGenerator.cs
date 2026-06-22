@@ -6,12 +6,12 @@ using UnityEngine;
 
 namespace Lysionium.Audio.Editor
 {
-    [CreateAssetMenu(menuName = "Lysionium/Play/Audio Play Table Generator")]
-    public class AudioPlayTableGenerator : ScriptableGenerator
+    [CreateAssetMenu(menuName = "Lysionium/Evtfx Audio/Table Generator", fileName = "AppAudioTable")]
+    public class EvtfxAudioTableGenerator : ScriptableGenerator
     {
         [SerializeField] private Platform[] _platforms = null;
 
-        [SerializeField] private AudioPlaySeed[] _seeds = null;
+        [SerializeField] private EvtfxAudioSeed[] _seeds = null;
 
         protected override string IconSearchFilter => "LUI_Icon";
 
@@ -35,8 +35,8 @@ namespace Lysionium.Audio.Editor
                 var targetPath = $@"{thisDirectory}\{targetName}.asset";
                 if (targetPath == thisPath) throw new System.InvalidOperationException("生成によるジェネレータアセットの上書きは禁止です。");
 
-                var target = AssetDatabase.LoadAssetAtPath<AudioPlayTable>(targetPath);
-                if (target == null) { target = CreateInstance<AudioPlayTable>(); }
+                var target = AssetDatabase.LoadAssetAtPath<EvtfxAudioTable>(targetPath);
+                if (target == null) { target = CreateInstance<EvtfxAudioTable>(); }
 
                 var platformDirectory = $@"{thisDirectory}\{platform.PlatformName}";
                 Directory.CreateDirectory(platformDirectory);
@@ -63,15 +63,15 @@ namespace Lysionium.Audio.Editor
             }
         }
 
-        private void SetTo(AudioPlayTable audioPlayTable, Platform platform, string directory)
+        private void SetTo(EvtfxAudioTable evtfxAudioTable, Platform platform, string directory)
         {
-            audioPlayTable.BlankSamples = platform.BlankSamples;
-            var items = new List<AudioPlayTable.Item>();
+            evtfxAudioTable.BlankSamples = platform.BlankSamples;
+            var items = new List<EvtfxAudioTable.Item>();
             foreach (var seed in _seeds)
             {
-                items.AddRange(seed.CreatePlayItems(directory, platform.BlankSamples));
+                items.AddRange(seed.CreateEvtfxAudioItems(directory, platform.BlankSamples));
             }
-            audioPlayTable.SetItems(items);
+            evtfxAudioTable.SetItems(items);
         }
 
 

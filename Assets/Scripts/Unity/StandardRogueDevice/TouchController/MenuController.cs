@@ -12,7 +12,7 @@ namespace RoguegardUnity
     /// </summary>
     public class MenuController : MMgr
     {
-        [SerializeField] private WebOtherAudioPlayHandler _audioPlayHandler = null;
+        [SerializeField] private WebOtherEvtfxAudioController _evtfxAudioController = null;
         [SerializeField] private StatsSubview _stats = null;
         [SerializeField] private FaceSubview _face = null;
         public override ICharacterCreationElementsSubview Face => _face;
@@ -84,7 +84,7 @@ namespace RoguegardUnity
                 MessageBox.SetText("", this, ref _);
                 LongMessage.SetText("", this, ref _);
             }
-            EventManager = new RogueListuiEventManager(new MessageController(MessageBox, LongMessage), _audioPlayHandler);
+            EventManager = new RogueListuiEventManager(new MessageController(MessageBox, LongMessage), _evtfxAudioController);
         }
 
         public void Open(RogueObj menuSubject)
@@ -221,11 +221,11 @@ namespace RoguegardUnity
             }
             else if (value == "StartSpeech")
             {
-                _audioPlayHandler.PlayLoop(DeviceKw.StartTalk.Name);
+                _evtfxAudioController.PlayLoop(DeviceKw.StartTalk.Name);
             }
             else if (value == "EndSpeech")
             {
-                _audioPlayHandler.SetLastLoop(DeviceKw.StartTalk.Name);
+                _evtfxAudioController.SetLastLoop(DeviceKw.StartTalk.Name);
             }
         }
 

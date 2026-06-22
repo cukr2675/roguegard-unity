@@ -1,6 +1,6 @@
 namespace Lysionium.Views
 {
-    public enum CursorPlay
+    public enum CursorEvtfx
     {
         None,
         Select,

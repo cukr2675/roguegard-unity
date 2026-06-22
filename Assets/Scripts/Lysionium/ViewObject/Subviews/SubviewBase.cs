@@ -21,12 +21,12 @@ namespace Lysionium.Views
         private KeybindTuple binding;
 
         public abstract void OnSelectItem(GameObject selectedObj, bool outOfRange);
-        public abstract void QueueSelect(GameObject sender, GameObject to, CursorPlay play);
-        public abstract void QueueSelectToLastSelectedObj(GameObject sender, CursorPlay play);
+        public abstract void QueueSelect(GameObject sender, GameObject to, CursorEvtfx evtfx);
+        public abstract void QueueSelectToLastSelectedObj(GameObject sender, CursorEvtfx evtfx);
 
         // ViewItem から呼び出すメソッド
-        public void PlayFromItem(string value, Object item) => AnimatorTupple.Play(this, item, value);
-        public void PlayFromItem(Object value, Object item) => AnimatorTupple.Play(this, item, value);
+        public void PlayEvtfxFromItem(string value, Object item) => AnimatorTupple.PlayEvtfx(this, item, value);
+        public void PlayEvtfxFromItem(Object value, Object item) => AnimatorTupple.PlayEvtfx(this, item, value);
         public void Keybind(
             System.ReadOnlySpan<char> style,
             System.Action<InputAction.CallbackContext> started = null,
@@ -73,20 +73,20 @@ namespace Lysionium.Views
                 animator.animator.SetBool(parameterName, back);
             }
 
-            public static void Play(SubviewBase subview, Object sender, string value)
+            public static void PlayEvtfx(SubviewBase subview, Object sender, string value)
             {
                 var animator = subview.animator ??= new AnimatorTupple(subview);
                 if (!animator.IsEnabled) return;
 
-                animator.subviewAnimator.OnPlayString.Invoke(value, sender);
+                animator.subviewAnimator.OnEvtfxString.Invoke(value, sender);
             }
 
-            public static void Play(SubviewBase subview, Object sender, Object value)
+            public static void PlayEvtfx(SubviewBase subview, Object sender, Object value)
             {
                 var animator = subview.animator ??= new AnimatorTupple(subview);
                 if (!animator.IsEnabled) return;
 
-                animator.subviewAnimator.OnPlayObject.Invoke(value, sender);
+                animator.subviewAnimator.OnEvtfxObject.Invoke(value, sender);
             }
 
             public static void OnSelect(SubviewBase subview, GameObject gameObject, bool outOfRange)
@@ -97,20 +97,20 @@ namespace Lysionium.Views
                 animator.subviewAnimator.OnSelect(gameObject, outOfRange);
             }
 
-            public static void QueueSelect(SubviewBase subview, GameObject sender, GameObject to, CursorPlay play)
+            public static void QueueSelect(SubviewBase subview, GameObject sender, GameObject to, CursorEvtfx evtfx)
             {
                 var animator = subview.animator ??= new AnimatorTupple(subview);
                 if (!animator.IsEnabled) return;
 
-                animator.subviewAnimator.QueueSelect(sender, to, play);
+                animator.subviewAnimator.QueueSelect(sender, to, evtfx);
             }
 
-            public static void QueueSelectToLastSelectedObj(SubviewBase subview, GameObject sender, CursorPlay play)
+            public static void QueueSelectToLastSelectedObj(SubviewBase subview, GameObject sender, CursorEvtfx evtfx)
             {
                 var animator = subview.animator ??= new AnimatorTupple(subview);
                 if (!animator.IsEnabled) return;
 
-                animator.subviewAnimator.QueueSelectToLastSelectedObj(sender, play);
+                animator.subviewAnimator.QueueSelectToLastSelectedObj(sender, evtfx);
             }
         }
 

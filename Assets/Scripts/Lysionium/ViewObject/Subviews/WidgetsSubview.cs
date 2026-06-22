@@ -311,7 +311,7 @@ namespace Lysionium.Views
                             if (widget.WidgetName == SelectedName)
                             {
                                 //EventSystem.current.SetSelectedGameObject(widget.gameObject); // これだと Show メソッドで interactable が true になる前に選択してしまう
-                                subview.QueueSelect(subview.gameObject, widget.gameObject, CursorPlay.None);
+                                subview.QueueSelect(subview.gameObject, widget.gameObject, CursorEvtfx.None);
                                 return;
                             }
                         }
@@ -323,7 +323,7 @@ namespace Lysionium.Views
                             if (item.ItemName == SelectedName)
                             {
                                 //EventSystem.current.SetSelectedGameObject(item.gameObject); // これだと Show メソッドで interactable が true になる前に選択してしまう
-                                subview.QueueSelect(subview.gameObject, item.gameObject, CursorPlay.None);
+                                subview.QueueSelect(subview.gameObject, item.gameObject, CursorEvtfx.None);
                                 return;
                             }
                         }
@@ -331,7 +331,7 @@ namespace Lysionium.Views
                 }
 
                 // 選択オブジェクトが見つからなければ最初の項目を選択
-                if (subview.fallbackSelectable != null) { subview.QueueSelect(subview.gameObject, subview.fallbackSelectable.gameObject, CursorPlay.None); }
+                if (subview.fallbackSelectable != null) { subview.QueueSelect(subview.gameObject, subview.fallbackSelectable.gameObject, CursorEvtfx.None); }
             }
         }
     }

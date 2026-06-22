@@ -4,7 +4,7 @@ using UnityEngine.Audio;
 
 namespace Lysionium.Audio
 {
-    public class AudioPlayTable : ScriptableObject
+    public class EvtfxAudioTable : ScriptableObject
     {
         [Tooltip("音声冒頭に挿入する無音区間のサイズ（WebGL向け）")]
         [SerializeField] private int _blankSamples = 0;
@@ -21,8 +21,8 @@ namespace Lysionium.Audio
         [System.Serializable]
         public class Item
         {
-            [SerializeField] private string _playName;
-            public string PlayName { get => _playName; set => _playName = value; }
+            [SerializeField] private string _evtfxName;
+            public string EvtfxName { get => _evtfxName; set => _evtfxName = value; }
 
             [SerializeField] private AudioClip _audioClip;
             public AudioClip AudioClip { get => _audioClip; set => _audioClip = value; }

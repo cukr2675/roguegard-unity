@@ -7,7 +7,12 @@ using UnityEngine.EventSystems;
 namespace Lysionium.Views
 {
     /// <summary>
-    /// Subview のアニメーターパラメータ名と LUI Play を制御するコンポーネント。このオブジェクトの下の <see cref="Subview"/> に影響を与える
+    /// Subview のアニメーターパラメータ名と LUI EVTFX を制御するコンポーネント。
+    /// このオブジェクトの下の <see cref="Subview"/> に影響を与える
+    /// <para>
+    /// ビューコンポーネント以外からの参照は非推奨。
+    /// <see cref="OnEvtfxString"/> または <see cref="OnEvtfxObject"/> を経由すること
+    /// </para>
     /// </summary>
     [AddComponentMenu("UI/Lysionium/LUI Subview Animator")]
     public class SubviewAnimator : MonoBehaviour
@@ -16,29 +21,29 @@ namespace Lysionium.Views
         [SerializeField] private string _visibleBool = "IsVisible";
         public string VisibleBool => _visibleBool;
 
-        [Tooltip("Subview の AnimatorController のステータスコードパラメータ名")]
+        [Tooltip("Subview の AnimatorController のメニュー戻り判定パラメータ名")]
         [SerializeField] private string _backBool = "Back";
         public string BackBool => _backBool;
 
         [Space]
 
-        [Tooltip("LUI Play イベント (string 引数)")]
-        [SerializeField] private PlayStringEvent _onPlayString = null;
-        public PlayStringEvent OnPlayString => _onPlayString;
+        [Tooltip("LUI EVTFX イベント (string 引数)")]
+        [SerializeField] private EvtfxStringEvent _onEvtfxString = null;
+        public EvtfxStringEvent OnEvtfxString => _onEvtfxString;
 
         [Space]
 
-        [Tooltip("LUI Play イベント (object 引数)")]
-        [SerializeField] private PlayObjectEvent _onPlayObject = null;
-        public PlayObjectEvent OnPlayObject => _onPlayObject;
+        [Tooltip("LUI EVTFX イベント (object 引数)")]
+        [SerializeField] private EvtfxObjectEvent _onEvtfxObject = null;
+        public EvtfxObjectEvent OnEvtfxObject => _onEvtfxObject;
 
         [Header("ViewItem")]
 
         [Tooltip("範囲内でカーソル移動したとき再生")]
-        [SerializeField] private string _playOnSelect = "Select";
+        [SerializeField] private string _evtfxOnSelect = "Select";
 
         [Tooltip("範囲外にカーソル移動しようとしたとき再生")]
-        [SerializeField] private string _playOnSelectOutOfRange = "SelectOutOfRange";
+        [SerializeField] private string _evtfxOnSelectOutOfRange = "SelectOutOfRange";
 
 #if UNITY_EDITOR
         [Header("Debug (Editor Only)")]
@@ -63,14 +68,14 @@ namespace Lysionium.Views
         protected virtual void Awake()
         {
 #if UNITY_EDITOR
-            _onPlayString.AddListener(Log);
-            _onPlayObject.AddListener(Log);
+            _onEvtfxString.AddListener(Log);
+            _onEvtfxObject.AddListener(Log);
 
             void Log(object value, object sender)
             {
                 if (!_log) return;
 
-                // Play をリクエストしたオブジェクトがアニメーターを持つ場合、その状態を表示する
+                // EVTFX をリクエストしたオブジェクトがアニメーターを持つ場合、その状態を表示する
                 animatorLog.Clear();
                 if ((sender is GameObject obj && obj.TryGetComponent<Animator>(out var animator)) ||
                     (sender is Component component && component.TryGetComponent(out animator)))
@@ -107,7 +112,7 @@ namespace Lysionium.Views
                     animatorLog.Append("]");
                 }
 
-                Debug.Log($"<color=grey>Play:</color> {value} <color=grey>Sender:</color> {SenderToString(sender)} {animatorLog}");
+                Debug.Log($"<color=grey>EVTFX:</color> {value} <color=grey>Sender:</color> {SenderToString(sender)} {animatorLog}");
             }
 
             string SenderToString(object sender)
@@ -162,8 +167,8 @@ namespace Lysionium.Views
             var currentSelectedGameObject = eventSystem.currentSelectedGameObject;
             if (currentSelectedGameObject != lastSelectedGameObject)
             {
-                // カーソル移動時の Play を実行（タッチ操作中は再生しない）
-                if (CursorImageSystem.ShowCursor) { _onPlayString.Invoke(_playOnSelect, currentSelectedGameObject); }
+                // カーソル移動時の EVTFX を実行（タッチ操作中は再生しない）
+                if (CursorImageSystem.ShowCursor) { _onEvtfxString.Invoke(_evtfxOnSelect, currentSelectedGameObject); }
 
                 // 選択履歴を更新する
                 lastSelectedGameObject = currentSelectedGameObject;
@@ -172,12 +177,12 @@ namespace Lysionium.Views
 
         public void OnSelect(GameObject gameObject, bool outOfRange)
         {
-            // カーソル移動時の Play を実行
+            // カーソル移動時の EVTFX を実行
             if (gameObject != lastSelectedGameObject && // QueueSelect で移動していた場合は再生しない（QueueSelect で再生しない場合は鳴らないようにする）
                 CursorImageSystem.ShowCursor) // タッチ操作中は再生しない
             {
-                if (outOfRange) { _onPlayString.Invoke(_playOnSelectOutOfRange, gameObject); } // 範囲外にカーソル移動しようとしたとき再生
-                else { _onPlayString.Invoke(_playOnSelect, gameObject); } // 範囲内でカーソル移動したとき再生
+                if (outOfRange) { _onEvtfxString.Invoke(_evtfxOnSelectOutOfRange, gameObject); } // 範囲外にカーソル移動しようとしたとき再生
+                else { _onEvtfxString.Invoke(_evtfxOnSelect, gameObject); } // 範囲内でカーソル移動したとき再生
             }
 
             if (outOfRange)
@@ -193,29 +198,29 @@ namespace Lysionium.Views
             }
         }
 
-        public void QueueSelect(GameObject sender, GameObject to, CursorPlay play)
+        public void QueueSelect(GameObject sender, GameObject to, CursorEvtfx evtfx)
         {
-            // カーソル移動時の Play を実行
-            if (play == CursorPlay.SelectOutOfRange) { _onPlayString.Invoke(_playOnSelectOutOfRange, sender); }
-            else if (play == CursorPlay.Select) { _onPlayString.Invoke(_playOnSelect, sender); }
+            // カーソル移動時の EVTFX を実行
+            if (evtfx == CursorEvtfx.SelectOutOfRange) { _onEvtfxString.Invoke(_evtfxOnSelectOutOfRange, sender); }
+            else if (evtfx == CursorEvtfx.Select) { _onEvtfxString.Invoke(_evtfxOnSelect, sender); }
 
             // 即移動させると無限再帰となるためカーソル移動処理を予約
             lastSelectedGameObject = to;
             queuedCancelSelection = true;
         }
 
-        public void QueueSelectToLastSelectedObj(GameObject sender, CursorPlay play)
+        public void QueueSelectToLastSelectedObj(GameObject sender, CursorEvtfx evtfx)
         {
-            // カーソル移動時の Play を実行
-            if (play == CursorPlay.SelectOutOfRange) { _onPlayString.Invoke(_playOnSelectOutOfRange, sender); }
-            else if (play == CursorPlay.Select) { _onPlayString.Invoke(_playOnSelect, sender); }
+            // カーソル移動時の EVTFX を実行
+            if (evtfx == CursorEvtfx.SelectOutOfRange) { _onEvtfxString.Invoke(_evtfxOnSelectOutOfRange, sender); }
+            else if (evtfx == CursorEvtfx.Select) { _onEvtfxString.Invoke(_evtfxOnSelect, sender); }
 
             // 範囲外にカーソル移動したときなどにカーソルを戻す
             // 即戻すと無限再帰となるためカーソル移動キャンセル処理を予約
             queuedCancelSelection = true;
         }
 
-        [System.Serializable] public class PlayStringEvent : UnityEvent<string, object> { }
-        [System.Serializable] public class PlayObjectEvent : UnityEvent<Object, object> { }
+        [System.Serializable] public class EvtfxStringEvent : UnityEvent<string, object> { }
+        [System.Serializable] public class EvtfxObjectEvent : UnityEvent<Object, object> { }
     }
 }

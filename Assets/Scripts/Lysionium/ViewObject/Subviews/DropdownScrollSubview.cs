@@ -80,7 +80,7 @@ namespace Lysionium.Views
                 if (ViewItem.TryFirstNotNull(subview.viewContainers[0].ViewItems, out var first))
                 {
                     //subview.EventSystem.SetSelectedGameObject(first.gameObject); // これだと Show メソッドで interactable が true になる前に選択してしまう
-                    subview.QueueSelect(subview.gameObject, first.gameObject, CursorPlay.None);
+                    subview.QueueSelect(subview.gameObject, first.gameObject, CursorEvtfx.None);
                 }
             }
         }

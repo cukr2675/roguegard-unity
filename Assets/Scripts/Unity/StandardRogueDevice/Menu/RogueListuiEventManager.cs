@@ -7,17 +7,17 @@ namespace RoguegardUnity
     internal class RogueListuiEventManager
     {
         private readonly MessageController messageController;
-        private readonly WebOtherAudioPlayHandler audioPlayHandler;
+        private readonly WebOtherEvtfxAudioController evtfxAudioController;
         private readonly WaitTimer waitTimer;
 
         public RogueObj MenuSubject { get; set; }
 
-        public bool Wait => audioPlayHandler.Wait || waitTimer.Wait;
+        public bool Wait => evtfxAudioController.AudioWaitIsInProgress || waitTimer.Wait;
 
-        public RogueListuiEventManager(MessageController messageController, WebOtherAudioPlayHandler audioPlayHandler)
+        public RogueListuiEventManager(MessageController messageController, WebOtherEvtfxAudioController evtfxAudioController)
         {
             this.messageController = messageController;
-            this.audioPlayHandler = audioPlayHandler;
+            this.evtfxAudioController = evtfxAudioController;
             waitTimer = new WaitTimer();
         }
 
@@ -51,7 +51,7 @@ namespace RoguegardUnity
             }
             if (keyword == DeviceKw.EnqueueSE || keyword == DeviceKw.EnqueueSEAndWait)
             {
-                audioPlayHandler.Play(((IKeyword)obj).Name, keyword == DeviceKw.EnqueueSEAndWait);
+                evtfxAudioController.Play(((IKeyword)obj).Name, keyword == DeviceKw.EnqueueSEAndWait);
                 return;
             }
             if (keyword == DeviceKw.EnqueueWaitSeconds)

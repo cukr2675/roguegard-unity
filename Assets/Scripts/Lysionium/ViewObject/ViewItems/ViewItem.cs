@@ -95,7 +95,7 @@ namespace Lysionium.Views
             try
             {
                 if (selectable.IsInteractable()) { Parent.OnSelectItem(gameObject, isOutOfRange); }
-                else { Parent.QueueSelectToLastSelectedObj(gameObject, CursorPlay.None); }
+                else { Parent.QueueSelectToLastSelectedObj(gameObject, CursorEvtfx.None); }
             }
             catch
             {
@@ -105,8 +105,8 @@ namespace Lysionium.Views
         }
 
         // Animation から呼び出すメソッド
-        public void PlayString(string value) => Parent.PlayFromItem(value, this);
-        public void PlayObject(Object value) => Parent.PlayFromItem(value, this);
+        public void PlayEvtfxString(string value) => Parent.PlayEvtfxFromItem(value, this);
+        public void PlayEvtfxObject(Object value) => Parent.PlayEvtfxFromItem(value, this);
 
 
 

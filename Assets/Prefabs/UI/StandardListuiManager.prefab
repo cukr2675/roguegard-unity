@@ -549,9 +549,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _audioSourcePrefab: {fileID: 5282523497276891947, guid: 0119011335df52a45a3e9f7a20a29ee8, type: 3}
-  _stopBgmPlayName: 
-  _defaultAudioPlayTable: {fileID: 11400000, guid: 93c6bfd3822611645b6d06ef3d3066a0, type: 2}
-  _webAudioPlayTable: {fileID: 11400000, guid: 9d94b6791c572ec4b995b73de9ec8338, type: 2}
+  _stopBgmEvtfxName: 
+  _defaultEvtfxAudioTable: {fileID: 11400000, guid: 93c6bfd3822611645b6d06ef3d3066a0, type: 2}
+  _webEvtfxAudioTable: {fileID: 11400000, guid: 9d94b6791c572ec4b995b73de9ec8338, type: 2}
   _simulateWeb: 0
 --- !u!1 &3509860378145273311
 GameObject:
@@ -3142,55 +3142,55 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6074793677709108079, guid: 5be8eb9e0a436de4480278aa42eba45b, type: 3}
-      propertyPath: _onPlayString.m_PersistentCalls.m_Calls.Array.size
+      propertyPath: _onEvtfxString.m_PersistentCalls.m_Calls.Array.size
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6074793677709108079, guid: 5be8eb9e0a436de4480278aa42eba45b, type: 3}
-      propertyPath: _onPlayString.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      propertyPath: _onEvtfxString.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6074793677709108079, guid: 5be8eb9e0a436de4480278aa42eba45b, type: 3}
-      propertyPath: _onPlayString.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      propertyPath: _onEvtfxString.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6074793677709108079, guid: 5be8eb9e0a436de4480278aa42eba45b, type: 3}
-      propertyPath: _onPlayString.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      propertyPath: _onEvtfxString.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1629327148685822779}
     - target: {fileID: 6074793677709108079, guid: 5be8eb9e0a436de4480278aa42eba45b, type: 3}
-      propertyPath: _onPlayString.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      propertyPath: _onEvtfxString.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 1120517065421235832}
     - target: {fileID: 6074793677709108079, guid: 5be8eb9e0a436de4480278aa42eba45b, type: 3}
-      propertyPath: _onPlayString.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      propertyPath: _onEvtfxString.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6074793677709108079, guid: 5be8eb9e0a436de4480278aa42eba45b, type: 3}
-      propertyPath: _onPlayString.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      propertyPath: _onEvtfxString.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6074793677709108079, guid: 5be8eb9e0a436de4480278aa42eba45b, type: 3}
-      propertyPath: _onPlayString.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      propertyPath: _onEvtfxString.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: Play
       objectReference: {fileID: 0}
     - target: {fileID: 6074793677709108079, guid: 5be8eb9e0a436de4480278aa42eba45b, type: 3}
-      propertyPath: _onPlayString.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      propertyPath: _onEvtfxString.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
       value: Play
       objectReference: {fileID: 0}
     - target: {fileID: 6074793677709108079, guid: 5be8eb9e0a436de4480278aa42eba45b, type: 3}
-      propertyPath: _onPlayString.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      propertyPath: _onEvtfxString.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: RoguegardUnity.MenuController, RoguegardUnity
       objectReference: {fileID: 0}
     - target: {fileID: 6074793677709108079, guid: 5be8eb9e0a436de4480278aa42eba45b, type: 3}
-      propertyPath: _onPlayString.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      propertyPath: _onEvtfxString.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
       value: ListingMF.Audio.WebOtherAudioPlayHandler, ListingMenuFoundation
       objectReference: {fileID: 0}
     - target: {fileID: 6074793677709108079, guid: 5be8eb9e0a436de4480278aa42eba45b, type: 3}
-      propertyPath: _onPlayString.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      propertyPath: _onEvtfxString.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 6074793677709108079, guid: 5be8eb9e0a436de4480278aa42eba45b, type: 3}
-      propertyPath: _onPlayString.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      propertyPath: _onEvtfxString.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 6097370789241803400, guid: 5be8eb9e0a436de4480278aa42eba45b, type: 3}
@@ -4034,7 +4034,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dee565dbc3dc8fe44b70efd805002858, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _audioPlayHandler: {fileID: 1120517065421235832}
+  _evtfxAudioController: {fileID: 1120517065421235832}
   _stats: {fileID: 5370450463558817365}
   _face: {fileID: 5692312534936473439}
   _summary: {fileID: 7861572407568715607}

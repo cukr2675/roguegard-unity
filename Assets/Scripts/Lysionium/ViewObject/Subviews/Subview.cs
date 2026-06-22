@@ -118,16 +118,16 @@ namespace Lysionium.Views
         /// <summary>
         /// カーソルを移動させる。使用時は一番上に表示されているメニューのカーソル移動（特に初期選択）を阻害しないように気を付ける
         /// </summary>
-        public override void QueueSelect(GameObject sender, GameObject to, CursorPlay play)
+        public override void QueueSelect(GameObject sender, GameObject to, CursorEvtfx evtfx)
         {
             LastSelectedObject = to;
             LastSelectedItem = to != null ? to.GetComponent<ViewItem>() : null;
-            AnimatorTupple.QueueSelect(this, sender, to, play);
+            AnimatorTupple.QueueSelect(this, sender, to, evtfx);
         }
 
-        public override void QueueSelectToLastSelectedObj(GameObject sender, CursorPlay play)
+        public override void QueueSelectToLastSelectedObj(GameObject sender, CursorEvtfx evtfx)
         {
-            AnimatorTupple.QueueSelectToLastSelectedObj(this, sender, play);
+            AnimatorTupple.QueueSelectToLastSelectedObj(this, sender, evtfx);
         }
 
         // Animation から呼び出すメソッド
@@ -139,7 +139,7 @@ namespace Lysionium.Views
             OnEndAnimation = null;
             tempOnEndAnimation?.Invoke(Manager);
         }
-        public void PlayString(string value) => AnimatorTupple.Play(this, this, value);
-        public void PlayObject(Object value) => AnimatorTupple.Play(this, this, value);
+        public void PlayEvtfxString(string value) => AnimatorTupple.PlayEvtfx(this, this, value);
+        public void PlayEvtfxObject(Object value) => AnimatorTupple.PlayEvtfx(this, this, value);
     }
 }

@@ -146,11 +146,11 @@ namespace Lysionium.Views
                     var i = selectedIndex - viewItemsOffset + lastItemOffset;
                     if (i < 0 || viewItems.Count <= i)
                     {
-                        QueueSelect(gameObject, null, CursorPlay.None);
+                        QueueSelect(gameObject, null, CursorEvtfx.None);
                     }
                     else
                     {
-                        QueueSelect(gameObject, viewItems[i].gameObject, CursorPlay.None);
+                        QueueSelect(gameObject, viewItems[i].gameObject, CursorEvtfx.None);
 
                         // ↑のようにカーソル移動キューが処理されるのを待っても↓コメントのように直接設定しても選択タイミングは変わらない
                         //EventSystem.SetSelectedGameObject(viewItems[i].gameObject);
@@ -237,12 +237,12 @@ namespace Lysionium.Views
                     if (ViewItem.TryFirstNotNull(subview.viewItems, out var first))
                     {
                         //subview.EventSystem.SetSelectedGameObject(first.gameObject); // これだと Show メソッドで interactable が true になる前に選択してしまう
-                        subview.QueueSelect(subview.gameObject, first.gameObject, CursorPlay.None);
+                        subview.QueueSelect(subview.gameObject, first.gameObject, CursorEvtfx.None);
                     }
                     return;
                 }
 
-                subview.QueueSelect(subview.gameObject, subview.viewItems[SelectedIndex].gameObject, CursorPlay.None);
+                subview.QueueSelect(subview.gameObject, subview.viewItems[SelectedIndex].gameObject, CursorEvtfx.None);
             }
         }
     }

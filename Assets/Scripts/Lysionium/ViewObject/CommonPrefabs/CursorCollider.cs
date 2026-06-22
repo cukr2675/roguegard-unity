@@ -58,11 +58,11 @@ namespace Lysionium.Views
             if (_isTrigger)
             {
                 queuedDisableInteractable = true;
-                parentAnimator.QueueSelect(gameObject, parentSelectable.gameObject, CursorPlay.Select);
+                parentAnimator.QueueSelect(gameObject, parentSelectable.gameObject, CursorEvtfx.Select);
             }
             else
             {
-                parentAnimator.QueueSelectToLastSelectedObj(gameObject, CursorPlay.None);
+                parentAnimator.QueueSelectToLastSelectedObj(gameObject, CursorEvtfx.None);
             }
         }
 
