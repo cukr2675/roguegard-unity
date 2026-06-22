@@ -10,7 +10,7 @@ namespace Lysionium.Views
 {
     // 命名メモ: TMP_SpriteAsset 風に ...Asset で終わる名前
 
-    [CreateAssetMenu(menuName = "Lysionium/Keybind/Keybind Glyph Asset")]
+    [CreateAssetMenu(menuName = "Lysionium/Keybind/Keybind Glyph Asset", fileName = "AppKeybindGlyphAsset")]
     public class KeybindGlyphAsset : ScriptableObject
     {
         [Tooltip("パッキング先の TMP_SpriteAsset")]

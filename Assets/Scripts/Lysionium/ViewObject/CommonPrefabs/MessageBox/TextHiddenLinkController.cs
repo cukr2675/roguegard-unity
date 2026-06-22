@@ -3,7 +3,7 @@ using TMPro;
 
 namespace Lysionium.Views
 {
-    internal class TextHiddenLinkManager
+    internal class TextHiddenLinkController
     {
         private readonly List<Item> items = new();
 

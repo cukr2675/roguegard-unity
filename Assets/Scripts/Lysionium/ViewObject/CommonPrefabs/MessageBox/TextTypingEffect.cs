@@ -11,7 +11,7 @@ namespace Lysionium.Views
         private readonly string pageTurnHiddenLinkId;
         private readonly string eofHiddenLinkId;
         private readonly MessageBox.ReachHiddenLinkEvent onReachHiddenLink;
-        private readonly TextHiddenLinkManager hiddenLinkManager;
+        private readonly TextHiddenLinkController hiddenLinkController;
         private readonly StringBuilder stringBuilder;
 
         private bool isDirty;
@@ -38,7 +38,7 @@ namespace Lysionium.Views
             this.pageTurnHiddenLinkId = pageTurnHiddenLinkId;
             this.eofHiddenLinkId = eofHiddenLinkId;
             this.onReachHiddenLink = onReachHiddenLink;
-            hiddenLinkManager = new TextHiddenLinkManager();
+            hiddenLinkController = new TextHiddenLinkController();
 
             // サイズ取得用テキストを設定して一行あたりの幅をサンプリングする
             const int samplingLineCount = 100;
@@ -99,7 +99,7 @@ namespace Lysionium.Views
 
             text.SetText(stringBuilder);
             text.ForceMeshUpdate(true);
-            hiddenLinkManager.UpdateLinks(text);
+            hiddenLinkController.UpdateLinks(text);
             isDirty = false;
             IsEof = stringBuilder.Length == 0; // text.text は WebGL で誤った文字列を取得してしまうため stringBuilder から取得する
             if (IsEof) { onReachHiddenLink.Invoke(eofHiddenLinkId); }
@@ -135,7 +135,7 @@ namespace Lysionium.Views
             }
 
             // リンクを検知
-            while (hiddenLinkManager.ForwardDetect(maxVisibleCharacters, out var hiddenLinkId, out var nextVisibleCharacters))
+            while (hiddenLinkController.ForwardDetect(maxVisibleCharacters, out var hiddenLinkId, out var nextVisibleCharacters))
             {
                 text.maxVisibleCharacters = nextVisibleCharacters;
                 onReachHiddenLink.Invoke(hiddenLinkId);
@@ -164,7 +164,7 @@ namespace Lysionium.Views
             if (IsEof) return;
 
             // リンクを検知
-            if (hiddenLinkManager.ForwardDetect(text.maxVisibleCharacters + deltaVisibleCharacters, out var hiddenLinkId, out var nextVisibleCharacters))
+            if (hiddenLinkController.ForwardDetect(text.maxVisibleCharacters + deltaVisibleCharacters, out var hiddenLinkId, out var nextVisibleCharacters))
             {
                 // 表示位置が戻るのは未サポート
                 if (nextVisibleCharacters < text.maxVisibleCharacters) throw new System.NotImplementedException();
@@ -240,7 +240,7 @@ namespace Lysionium.Views
         /// </summary>
         public int TrimBeforeFirstLinkId(string hiddenLinkId)
         {
-            if (!hiddenLinkManager.TryGetFirstHiddenLinkCharacterIndex(text.maxVisibleCharacters, hiddenLinkId, out var endLinkStringIndex)) return 0;
+            if (!hiddenLinkController.TryGetFirstHiddenLinkCharacterIndex(text.maxVisibleCharacters, hiddenLinkId, out var endLinkStringIndex)) return 0;
 
             // テキストを削除する
             MeshUpdate(); // テキストの行数を更新する
