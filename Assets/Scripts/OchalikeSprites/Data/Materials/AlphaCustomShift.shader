@@ -1,6 +1,7 @@
+// 試作シェーダー
 // Renderer.color のアルファ値で淡色と濃色を手動で切り替えるための CustomShift
 
-Shader "Ochalike Sprites/Sprites/Alpha Custom Shift"
+Shader "Hidden/Ochalike Sprites/Sprites/Alpha Custom Shift"
 {
     Properties
     {
