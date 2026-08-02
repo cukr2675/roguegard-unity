@@ -34,7 +34,7 @@ namespace Lysionium.Editor
         [SerializeField] private bool _incluldeJISLevel2Kanji = true;
 
         [Header("Manual")]
-        [SerializeField, TextArea(3, 6)] private string _otherCharacters = "♥";
+        [SerializeField, TextArea(3, 6)] private string _otherCharacters = "♥♡";
 
         protected override string IconSearchFilter => "LUI_Icon";
 

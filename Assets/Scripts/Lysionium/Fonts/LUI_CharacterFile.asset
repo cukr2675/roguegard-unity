@@ -11,7 +11,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b362bacf3fa00794895ce2c477f0c9cc, type: 3}
   m_Name: LUI_CharacterFile
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: Lysionium.Editor::Lysionium.Editor.CharacterFileGenerator
   _includeASCII: 1
   _include2ByteSpecialCharacter: 1
   _include2ByteDigitsAndRoman: 1
@@ -23,4 +23,4 @@ MonoBehaviour:
   _includeNECSpecialCharacter: 1
   _incluldeJISLevel1Kanji: 1
   _incluldeJISLevel2Kanji: 1
-  _otherCharacters: "\u2665"
+  _otherCharacters: "\u2665\u2661"
