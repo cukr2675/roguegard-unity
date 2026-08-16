@@ -26,7 +26,7 @@ namespace Lysionium
         private ISubviewStateProvider speechBoxSubviewStateProvider;
         private ISubviewStateProvider choicesSubviewStateProvider;
         private ISubviewStateProvider captionBoxSubviewStateProvider;
-        private event ListuiEventHandler<TMgr> OnCompleted;
+        private event System.Action<TMgr> OnCompleted;
 
         private string message;
 
@@ -103,7 +103,7 @@ namespace Lysionium
             {
             }
 
-            public Builder OnCompleted(ListuiEventHandler<TMgr> onCompleted)
+            public Builder OnCompleted(System.Action<TMgr> onCompleted)
             {
                 AssertNotBuilt();
 

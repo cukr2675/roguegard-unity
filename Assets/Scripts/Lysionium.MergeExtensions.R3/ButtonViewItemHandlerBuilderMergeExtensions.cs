@@ -9,7 +9,7 @@ namespace Lysionium.MergeExtensions.R3
         {
             if (builder == null) throw new System.ArgumentNullException(nameof(builder));
             if (subject == null) throw new System.ArgumentNullException(nameof(subject));
-            
+
             var onClickContext = new OnClickContext();
             builder.OnClick((item, manager) =>
             {
@@ -25,6 +25,19 @@ namespace Lysionium.MergeExtensions.R3
 
         public static Observable<MergedViewItemHandleArg<TItem, TMgr, TBuilder, TValue>> OnClick<TItem, TMgr, TBuilder, TValue>(
             this Observable<MergedViewItemHandleArg<TItem, TMgr, TBuilder, TValue>> source, ClickItemHandler<TValue, TMgr> handler)
+            where TBuilder : IButtonViewItemHandlerBuilder<TItem, TMgr, TBuilder>
+        {
+            if (source == null) throw new System.ArgumentNullException(nameof(source));
+            if (handler == null) throw new System.ArgumentNullException(nameof(handler));
+
+            return source.ToBuilder().SubscribeTo<OnClickContext>((value, manager, _) =>
+            {
+                handler(value, manager);
+            });
+        }
+
+        public static Observable<MergedViewItemHandleArg<TItem, TMgr, TBuilder, TValue>> OnClick<TItem, TMgr, TBuilder, TValue>(
+            this Observable<MergedViewItemHandleArg<TItem, TMgr, TBuilder, TValue>> source, System.Action<TValue, TMgr> handler)
             where TBuilder : IButtonViewItemHandlerBuilder<TItem, TMgr, TBuilder>
         {
             if (source == null) throw new System.ArgumentNullException(nameof(source));

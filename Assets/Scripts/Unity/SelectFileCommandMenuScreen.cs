@@ -11,7 +11,7 @@ namespace RoguegardUnity
             PrimaryCommandSubviewSelector = m => m.SecondaryCommand,
         };
 
-        public SelectFileCommandMenuScreen(ClickItemHandler<FileInfo, MMgr> selectCallback)
+        public SelectFileCommandMenuScreen(System.Action<FileInfo, MMgr> selectCallback)
         {
             OnOpenScreen += (manager) =>
             {
@@ -94,7 +94,7 @@ namespace RoguegardUnity
                     .Tail.Append(StackWidgetOption.Create(
                         ("1*", SelectOption.Create<MMgr>(":Rename", (manager) =>
                         {
-                            if (string.IsNullOrWhiteSpace(newName))return;
+                            if (string.IsNullOrWhiteSpace(newName)) return;
 
                             var fileInfo = (FileInfo)Arg.Arg.Other;
                             var newPath = Path.Combine(fileInfo.DirectoryName, $"{newName}{Path.GetExtension(fileInfo.Name)}");

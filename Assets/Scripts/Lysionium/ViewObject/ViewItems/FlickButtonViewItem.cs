@@ -33,14 +33,14 @@ namespace Lysionium.Views
             {
                 if (!_selectable.interactable) return;
 
-                handler.KeyDown(item, Manager);
+                handler.Press(item, Manager);
             };
             inputCanceled = ctx =>
             {
                 if (!_selectable.interactable) return;
 
                 Expand();
-                handler.KeyUp(item, Manager);
+                handler.Release(item, Manager);
             };
             styleEvaluator = new ViewItemStyleEvaluator();
         }
@@ -95,7 +95,7 @@ namespace Lysionium.Views
             if (eventData.button != PointerEventData.InputButton.Left) return; // 左ボタンのときのみ実行
 
             isDown = true;
-            handler.KeyDown(item, Manager);
+            handler.Press(item, Manager);
 
             //if (!_expandMethod.HasFlag(ExpandMethod.Press)) return; // 押下で展開する設定のときのみ実行
             //if (eventData.button != PointerEventData.InputButton.Left) return; // 左ボタンのときのみ実行
@@ -109,7 +109,7 @@ namespace Lysionium.Views
             if (eventData.button != PointerEventData.InputButton.Left) return; // 左ボタンのときのみ実行
 
             isDown = false;
-            handler.KeyUp(item, Manager);
+            handler.Release(item, Manager);
         }
 
         public virtual void OnPointerClick(PointerEventData eventData)

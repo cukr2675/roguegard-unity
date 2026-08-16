@@ -56,13 +56,13 @@ namespace RoguegardUnity
             ShowSplitLine(showSplitLine, pivots);
         }
 
-        public override void Show(ListuiEventHandler onEndAnimation = null, ListuiEventHandler onHide = null)
+        public override void Show(System.Action<IListuiManager> onEndAnimation = null, System.Action<IListuiManager> onHide = null)
         {
             base.Show(onEndAnimation, onHide);
             _toolSet.enabled = true;
         }
 
-        public override void Hide(bool back, ListuiEventHandler onEndAnimation = null)
+        public override void Hide(bool back, System.Action<IListuiManager> onEndAnimation = null)
         {
             base.Hide(back, onEndAnimation);
             _toolSet.enabled = false;

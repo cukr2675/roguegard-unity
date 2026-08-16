@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace Lysionium
 {
     // 設計メモ: Lysionium.Modeler のハードメニューが IReadOnlyList<ISelectOption> だと TMgr, TArg の型がわからないので型引数をつける
@@ -9,19 +11,27 @@ namespace Lysionium
     /// </summary>
     public interface ISelectOption<in TMgr>
     {
+        private static readonly List<string> clickSingle = new() { "Click" };
+
         string GetName(TMgr manager);
 
         string GetStyle(TMgr manager);
 
-        void Click(TMgr manager);
+        IReadOnlyList<string> GetCandidateClickNames(TMgr manager) => clickSingle;
+
+        void Click(TMgr manager, string clickName = "Click");
     }
 
     public interface ISelectOption<in TMgr, in TArg>
     {
+        private static readonly List<string> clickSingle = new() { "Click" };
+
         string GetName(TMgr manager, TArg arg);
 
         string GetStyle(TMgr manager, TArg arg);
 
-        void Click(TMgr manager, TArg arg);
+        IReadOnlyList<string> GetCandidateClickNames(TMgr manager, TArg arg) => clickSingle;
+
+        void Click(TMgr manager, string clickName, TArg arg);
     }
 }

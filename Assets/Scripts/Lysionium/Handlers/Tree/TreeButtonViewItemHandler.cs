@@ -16,6 +16,8 @@ namespace Lysionium
         /// </summary>
         public bool EnableSelectOptionProxy { get; set; }
 
+        private static readonly IReadOnlyList<string> clickSingle = new List<string>() { "Click" };
+
         public TreeButtonViewItemHandler(bool enableSelectOptionProxy = true)
         {
             EnableSelectOptionProxy = enableSelectOptionProxy;
@@ -61,11 +63,24 @@ namespace Lysionium
             return (IReadOnlyList<object>)GetChildren?.Invoke(tItem, tMgr) ?? System.Array.Empty<object>();
         }
 
-        void IButtonViewItemHandler.Click(object item, IListuiManager manager)
+        IReadOnlyList<string> IButtonViewItemHandler.GetCandidateClickNames(object item, IListuiManager manager)
+        {
+            if (EnableSelectOptionProxy && item is ISelectOption<TMgr>)
+                return System.Array.Empty<string>();
+            if (EnableSelectOptionProxy && item is ITreeOption<TMgr>) throw new System.InvalidOperationException(
+                $"{item} は {nameof(ITreeOption<TMgr>)} です。この型にクリックイベントは存在しません。");
+
+            if (LuiAssert.Type<TItem>(item, out var tItem) ||
+                LuiAssert.Type<TMgr>(manager, out var tMgr)) return System.Array.Empty<string>();
+
+            return clickSingle;
+        }
+
+        void IButtonViewItemHandler.Click(object item, IListuiManager manager, string clickName)
         {
             if (EnableSelectOptionProxy && item is ISelectOption<TMgr>)
             {
-                SelectOptionViewItemHandler<TMgr>.Instance.Click(item, manager);
+                SelectOptionViewItemHandler<TMgr>.Instance.Click(item, manager, clickName);
                 return;
             }
             if (EnableSelectOptionProxy && item is ITreeOption<TMgr>) throw new System.InvalidOperationException(
@@ -75,7 +90,7 @@ namespace Lysionium
             if (LuiAssert.Type<TItem>(item, out var tItem, manager) ||
                 LuiAssert.Type<TMgr>(manager, out var tMgr, manager)) return;
 
-            Click(tItem, tMgr);
+            Click(tItem, tMgr, clickName);
         }
     }
 }

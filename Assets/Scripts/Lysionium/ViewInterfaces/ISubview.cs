@@ -10,8 +10,8 @@ namespace Lysionium
     /// </summary>
     public interface ISubview
     {
-        void Show(ListuiEventHandler onEndAnimation = null, ListuiEventHandler onHide = null);
+        void Show(System.Action<IListuiManager> onEndAnimation = null, System.Action<IListuiManager> onHide = null);
 
-        void Hide(bool back, ListuiEventHandler onEndAnimation = null);
+        void Hide(bool back, System.Action<IListuiManager> onEndAnimation = null);
     }
 }

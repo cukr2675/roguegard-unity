@@ -6,7 +6,7 @@ namespace Roguegard.Device
     {
         private readonly string text;
         private readonly string buttonText;
-        private readonly ClickOptionHandler<MMgr> buttonAction;
+        private readonly System.Action<MMgr> buttonAction;
         private readonly System.Func<MMgr, float> getProgress;
 
         private float oldProgress;
@@ -18,7 +18,7 @@ namespace Roguegard.Device
 
         public LoadingScreen(
             string text, string buttonText,
-            ClickOptionHandler<MMgr> buttonAction,
+            System.Action<MMgr> buttonAction,
             System.Func<MMgr, float> updateAction = null)
         {
             this.text = text;

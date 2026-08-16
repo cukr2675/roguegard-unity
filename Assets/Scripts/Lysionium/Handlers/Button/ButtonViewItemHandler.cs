@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace Lysionium
 {
     public class ButtonViewItemHandler<TItem, TMgr> : IButtonViewItemHandler
@@ -45,11 +47,19 @@ namespace Lysionium
             return GetStyle?.Invoke(tItem, tMgr) ?? string.Empty;
         }
 
-        void IButtonViewItemHandler.Click(object item, IListuiManager manager)
+        public IReadOnlyList<string> GetCandidateClickNames(object item, IListuiManager manager)
+        {
+            if (LuiAssert.Type<ISelectOption<TMgr>>(item, out var selectOption) ||
+                LuiAssert.Type<TMgr>(manager, out var tMgr)) return System.Array.Empty<string>();
+
+            return selectOption.GetCandidateClickNames(tMgr);
+        }
+
+        void IButtonViewItemHandler.Click(object item, IListuiManager manager, string clickName)
         {
             if (EnableSelectOptionProxy && item is ISelectOption<TMgr>)
             {
-                SelectOptionViewItemHandler<TMgr>.Instance.Click(item, manager);
+                SelectOptionViewItemHandler<TMgr>.Instance.Click(item, manager, clickName);
                 return;
             }
 
@@ -57,7 +67,7 @@ namespace Lysionium
             if (LuiAssert.Type<TItem>(item, out var tItem, manager) ||
                 LuiAssert.Type<TMgr>(manager, out var tMgr, manager)) return;
 
-            Click(tItem, tMgr);
+            Click(tItem, tMgr, clickName);
         }
     }
 }

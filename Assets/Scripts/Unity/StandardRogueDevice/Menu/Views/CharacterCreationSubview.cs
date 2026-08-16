@@ -98,7 +98,7 @@ namespace RoguegardUnity
                         if (intrinsic == null) return "+ 固有能力を追加";
                         else return intrinsic.Name;
                     },
-                    Click = (intrinsic, manager) =>
+                    Click = (intrinsic, manager, _) =>
                     {
                         if (intrinsic == null) { manager.PushScreen(addScreen, arg.Self, other: typeof(Intrinsic)); }
                         else { manager.PushScreen(optionScreen, arg.Self, other: intrinsic); }
@@ -112,7 +112,7 @@ namespace RoguegardUnity
                         if (startingItem == null) return "+ 固有能力を追加";
                         else return startingItem.Name;
                     },
-                    Click = (startingItem, manager) =>
+                    Click = (startingItem, manager, _) =>
                     {
                         if (startingItem == null) { manager.PushScreen(addScreen, arg.Self, other: typeof(StartingItem)); }
                         else { manager.PushScreen(optionScreen, arg.Self, other: startingItem); }

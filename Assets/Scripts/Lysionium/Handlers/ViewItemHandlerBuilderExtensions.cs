@@ -31,7 +31,13 @@ namespace Lysionium
         public static TOut OnClick<TItem, TMgr, TOut>(
             this IButtonViewItemHandlerBuilder<TItem, TMgr, TOut> builder, System.Action<TItem> handler)
         {
-            return builder.OnClick((item, _) => handler(item));
+            return builder.OnClick((item, _, clickName) => handler(item));
+        }
+
+        public static TOut OnClick<TItem, TMgr, TOut>(
+            this IButtonViewItemHandlerBuilder<TItem, TMgr, TOut> builder, System.Action<TItem, TMgr> handler)
+        {
+            return builder.OnClick((item, manager, clickName) => handler(item, manager));
         }
     }
 }

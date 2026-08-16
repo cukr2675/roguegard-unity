@@ -12,7 +12,7 @@ namespace Lysionium
 
             return builder.Option(SelectOption.Create<TMgr>(
                 m => option.GetName(m, args()),
-                m => option.Click(m, args()),
+                m => option.Click(m, "Click", args()),
                 m => option.GetStyle(m, args())));
         }
 
@@ -31,7 +31,7 @@ namespace Lysionium
 
         public static TBuilder Option<TMgr, TBuilder>(
             this ISelectOptionsBuilder<TMgr, TBuilder> builder,
-            string name, ClickOptionHandler<TMgr> onClick, string style = null)
+            string name, System.Action<TMgr> onClick, string style = null)
             where TMgr : IListuiManager
         {
             return builder.Option(SelectOption.Create(name, onClick, style));
@@ -39,7 +39,7 @@ namespace Lysionium
 
         public static TBuilder Option<TMgr, TBuilder>(
             this ISelectOptionsBuilder<TMgr, TBuilder> builder,
-            System.Func<TMgr, string> getName, ClickOptionHandler<TMgr> onClick, string style = null)
+            System.Func<TMgr, string> getName, System.Action<TMgr> onClick, string style = null)
             where TMgr : IListuiManager
         {
             return builder.Option(SelectOption.Create(getName, onClick, style));
@@ -60,7 +60,7 @@ namespace Lysionium
 
         public static TBuilder Option<TMgr, TArg, TBuilder>(
             this ISelectOptionsBuilder<TMgr, TArg, TBuilder> builder,
-            string name, ClickOptionHandler<TMgr, TArg> onClick, string style = null)
+            string name, System.Action<TMgr, TArg> onClick, string style = null)
             where TMgr : IListuiManager
         {
             return builder.Option(SelectOption.Create(name, onClick, style));
@@ -68,7 +68,7 @@ namespace Lysionium
 
         public static TBuilder Option<TMgr, TArg, TBuilder>(
             this ISelectOptionsBuilder<TMgr, TArg, TBuilder> builder,
-            System.Func<TMgr, TArg, string> getName, ClickOptionHandler<TMgr, TArg> onClick, string style = null)
+            System.Func<TMgr, TArg, string> getName, System.Action<TMgr, TArg> onClick, string style = null)
             where TMgr : IListuiManager
         {
             return builder.Option(SelectOption.Create(getName, onClick, style));

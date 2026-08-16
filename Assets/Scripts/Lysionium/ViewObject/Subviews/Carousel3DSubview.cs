@@ -42,7 +42,7 @@ namespace Lysionium.Views
         private float beforeAngleDegree;
         private const float angleDegreeEpsilon = 0.1f;
 
-        private event ListuiEventHandler OnEndRotateAngle;
+        private event System.Action<IListuiManager> OnEndRotateAngle;
 
         protected override void CommonInitCore()
         {
@@ -53,7 +53,7 @@ namespace Lysionium.Views
         /// <summary>
         /// 指定のインデックスを 0 ~ 要素数 のループ空間に変換して設定する
         /// </summary>
-        public void FocusAngleIndex(int index, ListuiEventHandler onEndRotateAngle = null)
+        public void FocusAngleIndex(int index, System.Action<IListuiManager> onEndRotateAngle = null)
         {
             AngleIndex = (index + viewItems.Count) % viewItems.Count;
             if (EventSystem != null)

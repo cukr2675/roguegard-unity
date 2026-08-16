@@ -21,7 +21,7 @@ namespace Lysionium.Views
 
         private bool isSpeechingNow;
 
-        private event ListuiEventHandler OnCompleted;
+        private event System.Action<IListuiManager> OnCompleted;
 
         protected override void CommonInitCore()
         {
@@ -97,7 +97,7 @@ namespace Lysionium.Views
             _messageBox.Clear();
         }
 
-        public void DoScheduledAfterCompletion(ListuiEventHandler onEndAnimation)
+        public void DoScheduledAfterCompletion(System.Action<IListuiManager> onEndAnimation)
         {
             OnCompleted += onEndAnimation;
         }

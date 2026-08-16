@@ -56,7 +56,7 @@ namespace Roguegard.Device
 
         string ISelectOption<MMgr>.GetStyle(MMgr manager) => null;
 
-        void ISelectOption<MMgr>.Click(MMgr manager)
+        void ISelectOption<MMgr>.Click(MMgr manager, string clickName)
         {
             manager.PushScreen(nextMenu, self, other: editTarget);
         }

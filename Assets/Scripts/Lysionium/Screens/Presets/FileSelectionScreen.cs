@@ -66,7 +66,7 @@ namespace Lysionium
             else return null;
         }
 
-        public FileSelectionScreen<TMgr> Head(string name, ClickOptionHandler<TMgr> onClick, string style = null)
+        public FileSelectionScreen<TMgr> Head(string name, System.Action<TMgr> onClick, string style = null)
         {
             heads.Option(name, onClick, style);
             return this;
@@ -80,7 +80,7 @@ namespace Lysionium
             return this;
         }
 
-        public FileSelectionScreen<TMgr> Tail(string name, ClickOptionHandler<TMgr> onClick, string style = null)
+        public FileSelectionScreen<TMgr> Tail(string name, System.Action<TMgr> onClick, string style = null)
         {
             tails.Option(name, onClick, style);
             return this;
@@ -171,7 +171,7 @@ namespace Lysionium
         //    return this;
         //}
 
-        public FileSelectionScreen<TMgr> BackOption(string name, ClickOptionHandler<TMgr> onClick, string style = null)
+        public FileSelectionScreen<TMgr> BackOption(string name, System.Action<TMgr> onClick, string style = null)
         {
             view.BackAnchorList.Option(name, onClick, style);
             return this;

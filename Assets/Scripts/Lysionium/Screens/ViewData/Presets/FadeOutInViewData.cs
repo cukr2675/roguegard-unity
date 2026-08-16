@@ -13,12 +13,12 @@ namespace Lysionium
 
         private object prevViewStateHolder;
         private ISubviewStateProvider fadeMaskSubviewStateProvider;
-        private event ListuiEventHandler<TMgr> HandleFadeOut;
-        private event ListuiEventHandler<TMgr> HandleFadeIn;
+        private event System.Action<TMgr> HandleFadeOut;
+        private event System.Action<TMgr> HandleFadeIn;
 
         private readonly List<object> widgetOptions = new();
-        private readonly ListuiEventHandler onFadeOutAnimation;
-        private readonly ListuiEventHandler onFadeInAnimation;
+        private readonly System.Action<IListuiManager> onFadeOutAnimation;
+        private readonly System.Action<IListuiManager> onFadeInAnimation;
 
         public FadeOutInViewData()
         {
@@ -79,7 +79,7 @@ namespace Lysionium
                 return this;
             }
 
-            public Builder OnFadeOutCompleted(ListuiEventHandler<TMgr> onFadeOut)
+            public Builder OnFadeOutCompleted(System.Action<TMgr> onFadeOut)
             {
                 AssertNotBuilt();
 
@@ -87,7 +87,7 @@ namespace Lysionium
                 return this;
             }
 
-            public Builder OnFadeInCompleted(ListuiEventHandler<TMgr> onFadeIn)
+            public Builder OnFadeInCompleted(System.Action<TMgr> onFadeIn)
             {
                 AssertNotBuilt();
 

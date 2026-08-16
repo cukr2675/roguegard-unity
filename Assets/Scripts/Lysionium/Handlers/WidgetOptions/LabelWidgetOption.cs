@@ -38,7 +38,7 @@ namespace Lysionium
             {
                 if (LuiAssert.Type<TMgr>(manager, out var tMgr)) return;
 
-                ClickLink?.Invoke(link, tMgr);
+                ClickLink?.Invoke(link, tMgr, "Click");
             }
         }
     }

@@ -10,8 +10,8 @@ namespace Lysionium.Views
     {
         private CanvasGroup canvasGroup;
 
-        protected event ListuiEventHandler OnEndAnimation;
-        protected event ListuiEventHandler OnHide;
+        protected event System.Action<IListuiManager> OnEndAnimation;
+        protected event System.Action<IListuiManager> OnHide;
 
         /// <summary>
         /// この Subview 内で最後に選択された <see cref="GameObject"/>
@@ -79,7 +79,8 @@ namespace Lysionium.Views
             canvasGroup.interactable = interactable;
         }
 
-        public virtual void Show(ListuiEventHandler onEndAnimation = null, ListuiEventHandler onHide = null)
+        public virtual void Show(
+            System.Action<IListuiManager> onEndAnimation = null, System.Action<IListuiManager> onHide = null)
         {
             var tempOnHide = OnHide;
             OnHide = null;
@@ -92,7 +93,7 @@ namespace Lysionium.Views
             if (onHide != null) { OnHide += onHide; }
         }
 
-        public virtual void Hide(bool back, ListuiEventHandler onEndAnimation = null)
+        public virtual void Hide(bool back, System.Action<IListuiManager> onEndAnimation = null)
         {
             var tempOnHide = OnHide;
             OnHide = null;

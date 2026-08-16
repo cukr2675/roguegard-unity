@@ -19,55 +19,55 @@ namespace Lysionium
         }
 
         // input 指定子を想定して style は必須にする
-        // name と style は近いほうが見やすいので onDo よりも左にする
+        // name と style は近いほうが見やすいので onCallback よりも左にする
         public static TBuilder KeyOption<TMgr, TBuilder>(
             this IKeyOptionsBuilder<TMgr, TBuilder> builder,
             string name, string style,
-            InputOptionHandler<TMgr> onDo,
+            InputOptionHandler<TMgr> onCallback,
             KeybindPhase phase = KeybindPhase.Performed | KeybindPhase.Canceled)
             where TMgr : IListuiManager
         {
             return builder.Option(new Implement<TMgr>(
                 name, style,
-                (phase & KeybindPhase.Started) != 0 ? onDo : null,
-                (phase & KeybindPhase.Performed) != 0 ? onDo : null,
-                (phase & KeybindPhase.Canceled) != 0 ? onDo : null));
+                (phase & KeybindPhase.Started) != 0 ? onCallback : null,
+                (phase & KeybindPhase.Performed) != 0 ? onCallback : null,
+                (phase & KeybindPhase.Canceled) != 0 ? onCallback : null));
         }
 
         public static TBuilder KeyOption<TMgr, TBuilder>(
             this IKeyOptionsBuilder<TMgr, TBuilder> builder,
             string name, string style,
-            System.Action<InputAction.CallbackContext> onDo,
+            System.Action<InputAction.CallbackContext> onCallback,
             KeybindPhase phase = KeybindPhase.Performed | KeybindPhase.Canceled)
             where TMgr : IListuiManager
         {
             return builder.Option(new Implement<TMgr>(
                 name, style,
-                (phase & KeybindPhase.Started) != 0 ? onDo : null,
-                (phase & KeybindPhase.Performed) != 0 ? onDo : null,
-                (phase & KeybindPhase.Canceled) != 0 ? onDo : null));
+                (phase & KeybindPhase.Started) != 0 ? onCallback : null,
+                (phase & KeybindPhase.Performed) != 0 ? onCallback : null,
+                (phase & KeybindPhase.Canceled) != 0 ? onCallback : null));
         }
 
         public static TBuilder KeyOption<TMgr, TBuilder>(
             this IKeyOptionsBuilder<TMgr, TBuilder> builder,
             string name, string style,
-            InputOptionHandler<TMgr> onStart,
-            InputOptionHandler<TMgr> onPerform,
-            InputOptionHandler<TMgr> onCancel)
+            InputOptionHandler<TMgr> onStarted,
+            InputOptionHandler<TMgr> onPerformed,
+            InputOptionHandler<TMgr> onCanceled)
             where TMgr : IListuiManager
         {
-            return builder.Option(new Implement<TMgr>(name, style, onStart, onPerform, onCancel));
+            return builder.Option(new Implement<TMgr>(name, style, onStarted, onPerformed, onCanceled));
         }
 
         public static TBuilder KeyOption<TMgr, TBuilder>(
             this IKeyOptionsBuilder<TMgr, TBuilder> builder,
             string name, string style,
-            System.Action<InputAction.CallbackContext> onStart,
-            System.Action<InputAction.CallbackContext> onPerform,
-            System.Action<InputAction.CallbackContext> onCancel)
+            System.Action<InputAction.CallbackContext> onStarted,
+            System.Action<InputAction.CallbackContext> onPerformed,
+            System.Action<InputAction.CallbackContext> onCanceled)
             where TMgr : IListuiManager
         {
-            return builder.Option(new Implement<TMgr>(name, style, onStart, onPerform, onCancel));
+            return builder.Option(new Implement<TMgr>(name, style, onStarted, onPerformed, onCanceled));
         }
 
         private class Implement<TMgr> : IKeyOption<TMgr>
@@ -84,28 +84,28 @@ namespace Lysionium
 
             public Implement(
                 string name, string style,
-                InputOptionHandler<TMgr> onStart,
-                InputOptionHandler<TMgr> onPerform,
-                InputOptionHandler<TMgr> onCancel)
+                InputOptionHandler<TMgr> onStarted,
+                InputOptionHandler<TMgr> onPerformed,
+                InputOptionHandler<TMgr> onCanceled)
             {
                 this.name = name;
                 this.style = style;
-                Started = onStart;
-                Performed = onPerform;
-                Canceled = onCancel;
+                Started = onStarted;
+                Performed = onPerformed;
+                Canceled = onCanceled;
             }
 
             public Implement(
                 string name, string style,
-                System.Action<InputAction.CallbackContext> onStart,
-                System.Action<InputAction.CallbackContext> onPerform,
-                System.Action<InputAction.CallbackContext> onCancel)
+                System.Action<InputAction.CallbackContext> onStarted,
+                System.Action<InputAction.CallbackContext> onPerformed,
+                System.Action<InputAction.CallbackContext> onCanceled)
             {
                 this.name = name;
                 this.style = style;
-                if (onStart != null) { Started = (_, ctx) => onStart(ctx); }
-                if (onPerform != null) { Performed = (_, ctx) => onPerform(ctx); }
-                if (onCancel != null) { Canceled = (_, ctx) => onCancel(ctx); }
+                if (onStarted != null) { Started = (_, ctx) => onStarted(ctx); }
+                if (onPerformed != null) { Performed = (_, ctx) => onPerformed(ctx); }
+                if (onCanceled != null) { Canceled = (_, ctx) => onCanceled(ctx); }
             }
 
             public void SetName(string name)

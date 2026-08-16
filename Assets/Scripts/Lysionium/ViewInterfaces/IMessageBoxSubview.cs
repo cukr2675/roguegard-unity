@@ -13,6 +13,6 @@ namespace Lysionium
         void AppendRaw(StringBuilder stringBuilder);
         void Clear();
 
-        void DoScheduledAfterCompletion(ListuiEventHandler onEndAnimation);
+        void DoScheduledAfterCompletion(System.Action<IListuiManager> onEndAnimation);
     }
 }

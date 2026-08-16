@@ -16,7 +16,8 @@ namespace Lysionium
 
         string ISelectOption<TMgr>.GetName(TMgr manager) => name ?? manager.BackOption.GetName(manager);
         string ISelectOption<TMgr>.GetStyle(TMgr manager) => style ?? manager.BackOption.GetStyle(manager);
-        void ISelectOption<TMgr>.Click(TMgr manager) => manager.BackOption.Click(manager);
+        void ISelectOption<TMgr>.Click(TMgr manager, string clickName)
+            => manager.BackOption.Click(manager, clickName);
     }
 
     /// <summary>
@@ -24,7 +25,8 @@ namespace Lysionium
     /// </summary>
     internal static class BackSelectOption
     {
-        internal static bool TryCreate<TMgr>(out ISelectOption<TMgr> backOption, string name = null, string style = null)
+        internal static bool TryCreate<TMgr>(
+            out ISelectOption<TMgr> backOption, string name = null, string style = null)
             where TMgr : IListuiManager
         {
             // 引数なしで一度取得成功している場合は即キャッシュを返す

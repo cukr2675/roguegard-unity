@@ -4,128 +4,84 @@ namespace Lysionium
     {
         public static IFlickButtonOption<TMgr> Create<TMgr>(
             string name,
-            ClickOptionHandler<TMgr> onKeyDown, ClickOptionHandler<TMgr> onExpand, ClickOptionHandler<TMgr> onKeyUp,
-            string style)
+            string style = null,
+            ClickOptionHandler<TMgr> onPress = null,
+            System.Action<TMgr> onExpand = null,
+            ClickOptionHandler<TMgr> onRelease = null)
             where TMgr : IListuiManager
         {
             var instance = new Implement<TMgr>();
             instance.SetName(name);
             instance.SetStyle(style);
-            instance.KeyDown = onKeyDown;
+            instance.Press = onPress;
             instance.Expand = onExpand;
-            instance.KeyUp = onKeyUp;
+            instance.Release = onRelease;
             return instance;
         }
 
         public static IFlickButtonOption<TMgr> Create<TMgr>(
             System.Func<TMgr, string> getName,
-            ClickOptionHandler<TMgr> onKeyDown, ClickOptionHandler<TMgr> onExpand, ClickOptionHandler<TMgr> onKeyUp,
-            string style)
+            string style = null,
+            ClickOptionHandler<TMgr> onPress = null,
+            System.Action<TMgr> onExpand = null,
+            ClickOptionHandler<TMgr> onRelease = null)
             where TMgr : IListuiManager
         {
             var instance = new Implement<TMgr>();
             instance.SetName(getName);
             instance.SetStyle(style);
-            instance.KeyDown = onKeyDown;
+            instance.Press = onPress;
             instance.Expand = onExpand;
-            instance.KeyUp = onKeyUp;
+            instance.Release = onRelease;
             return instance;
         }
 
         public static IFlickButtonOption<TMgr> Create<TMgr>(
             string name,
-            ClickOptionHandler<TMgr> onKeyDown, ClickOptionHandler<TMgr> onExpand, ClickOptionHandler<TMgr> onKeyUp,
-            System.Func<TMgr, string> style)
+            System.Func<TMgr, string> style,
+            ClickOptionHandler<TMgr> onPress = null,
+            System.Action<TMgr> onExpand = null,
+            ClickOptionHandler<TMgr> onRelease = null)
             where TMgr : IListuiManager
         {
             var instance = new Implement<TMgr>();
             instance.SetName(name);
             instance.SetStyle(style);
-            instance.KeyDown = onKeyDown;
+            instance.Press = onPress;
             instance.Expand = onExpand;
-            instance.KeyUp = onKeyUp;
+            instance.Release = onRelease;
             return instance;
         }
 
         public static IFlickButtonOption<TMgr> Create<TMgr>(
             System.Func<TMgr, string> getName,
-            ClickOptionHandler<TMgr> onKeyDown, ClickOptionHandler<TMgr> onExpand, ClickOptionHandler<TMgr> onKeyUp,
-            System.Func<TMgr, string> style)
+            System.Func<TMgr, string> style,
+            ClickOptionHandler<TMgr> onPress = null,
+            System.Action<TMgr> onExpand = null,
+            ClickOptionHandler<TMgr> onRelease = null)
             where TMgr : IListuiManager
         {
             var instance = new Implement<TMgr>();
             instance.SetName(getName);
             instance.SetStyle(style);
-            instance.KeyDown = onKeyDown;
+            instance.Press = onPress;
             instance.Expand = onExpand;
-            instance.KeyUp = onKeyUp;
+            instance.Release = onRelease;
             return instance;
         }
 
-        private class Implement<TMgr> : IFlickButtonOption<TMgr>
+        private class Implement<TMgr> : SelectOption<TMgr>, IFlickButtonOption<TMgr>
             where TMgr : IListuiManager
         {
-            private string name;
-            private System.Func<TMgr, string> getName;
+            public ClickOptionHandler<TMgr> Press { get; set; }
+            public System.Action<TMgr> Expand { get; set; }
+            public ClickOptionHandler<TMgr> Release { get; set; }
 
-            private string style;
-            private System.Func<TMgr, string> getStyle;
-
-            public ClickOptionHandler<TMgr> KeyDown { get; set; }
-            public ClickOptionHandler<TMgr> Expand { get; set; }
-            public ClickOptionHandler<TMgr> KeyUp { get; set; }
-
-            public void SetName(string name)
-            {
-                this.name = name ?? throw new System.ArgumentNullException(nameof(name));
-                getName = null;
-            }
-
-            public void SetName(System.Func<TMgr, string> selector)
-            {
-                getName = selector ?? throw new System.ArgumentNullException(nameof(selector));
-                name = null;
-            }
-
-            public void SetStyle(string style)
-            {
-                this.style = style;
-                getStyle = null;
-            }
-
-            public void SetStyle(System.Func<TMgr, string> selector)
-            {
-                getStyle = selector;
-                style = null;
-            }
-
-            string IFlickButtonOption<TMgr>.GetName(TMgr manager)
-            {
-                if (getName != null)
-                {
-                    if (LuiAssert.Type<TMgr>(manager, out var tMgr)) return null;
-
-                    return getName(tMgr);
-                }
-                else return name;
-            }
-
-            string IFlickButtonOption<TMgr>.GetStyle(TMgr manager)
-            {
-                if (getStyle != null)
-                {
-                    if (LuiAssert.Type<TMgr>(manager, out var tMgr)) return null;
-
-                    return getStyle(tMgr);
-                }
-                else return style;
-            }
-
-            void IFlickButtonOption<TMgr>.KeyDown(TMgr manager)
+            void IFlickButtonOption<TMgr>.Press(TMgr manager)
             {
                 if (LuiAssert.Type<TMgr>(manager, out var tMgr, manager)) return;
 
-                KeyDown?.Invoke(tMgr);
+                Press?.Invoke(tMgr);
             }
 
             void IFlickButtonOption<TMgr>.Expand(TMgr manager)
@@ -135,11 +91,11 @@ namespace Lysionium
                 Expand?.Invoke(tMgr);
             }
 
-            void IFlickButtonOption<TMgr>.KeyUp(TMgr manager)
+            void IFlickButtonOption<TMgr>.Release(TMgr manager)
             {
                 if (LuiAssert.Type<TMgr>(manager, out var tMgr, manager)) return;
 
-                KeyUp?.Invoke(tMgr);
+                Release?.Invoke(tMgr);
             }
         }
     }

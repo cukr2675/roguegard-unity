@@ -20,8 +20,8 @@ namespace Lysionium
         /// <summary>
         /// <see cref="ISubview.Show"/> によって実行される <see cref="OnHide"/> の後にこのデリゲートを呼び出す
         /// </summary>
-        private ListuiEventHandler<TMgr> onShow;
-        protected ListuiEventHandler OnHide { get; private set; }
+        private System.Action<TMgr> onShow;
+        protected System.Action<IListuiManager> OnHide { get; private set; }
 
         /// <summary>
         /// このメソッドが失敗する（false を返す）ときのみ FluentBuilder を返すように実装する
@@ -134,7 +134,7 @@ namespace Lysionium
                 return (TOut)this;
             }
 
-            public TOut OnShow(ListuiEventHandler<TMgr> handler)
+            public TOut OnShow(System.Action<TMgr> handler)
             {
                 AssertNotBuilt();
 
@@ -142,7 +142,7 @@ namespace Lysionium
                 return (TOut)this;
             }
 
-            public TOut OnHide(ListuiEventHandler<TMgr> handler)
+            public TOut OnHide(System.Action<TMgr> handler)
             {
                 AssertNotBuilt();
 

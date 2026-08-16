@@ -8,7 +8,7 @@ namespace RoguegardUnity
     internal class FileSelectionScreen : RogueListuiScreen
     {
         private RogueListuiScreen nextScreen;
-        private ClickOptionHandler<MMgr> onNewFile;
+        private System.Action<MMgr> onNewFile;
         private RogueScrollMenuViewData<object> view;
         private readonly List<FileInfo> files = new();
         private readonly ChoicesScreen errorMsgDialogScreen;
@@ -30,9 +30,9 @@ namespace RoguegardUnity
 
                 .InitIf(
                     onNewFile != null, x => x
-                    
+
                     .Head.Option(":+ New File", onNewFile)
-                    
+
                     )
 
                 .InfoFrom((item, manager) =>
@@ -71,8 +71,8 @@ namespace RoguegardUnity
         }
 
         public static FileSelectionScreen Load(
-            ClickItemHandler<FileInfo, MMgr> onSelectFile,
-            ClickOptionHandler<MMgr> onNewFile = null)
+            System.Action<FileInfo, MMgr> onSelectFile,
+            System.Action<MMgr> onNewFile = null)
         {
             var instance = new FileSelectionScreen
             {
@@ -106,8 +106,8 @@ namespace RoguegardUnity
         }
 
         public static FileSelectionScreen Save(
-            ClickItemHandler<FileInfo, MMgr> onSelectFile,
-            ClickOptionHandler<MMgr> onNewFile = null)
+            System.Action<FileInfo, MMgr> onSelectFile,
+            System.Action<MMgr> onNewFile = null)
         {
             var instance = new FileSelectionScreen();
             instance.nextScreen = new ChoicesScreen(

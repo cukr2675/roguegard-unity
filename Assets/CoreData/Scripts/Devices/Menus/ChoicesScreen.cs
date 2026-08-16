@@ -27,8 +27,8 @@ namespace Roguegard.Device
         /// 「保存して戻りますか？」のダイアログ画面を生成する
         /// </summary>
         public static ChoicesScreen SaveBackDialog(
-            ClickOptionHandler<MMgr> saveAction,
-            ClickOptionHandler<MMgr> notSaveAction = null)
+            System.Action<MMgr> saveAction,
+            System.Action<MMgr> notSaveAction = null)
         {
             var selectOption = SaveBackDialog(":SaveBackDialogMsg", ":Overwrite", saveAction, ":DontSave", notSaveAction);
             return selectOption;
@@ -39,8 +39,8 @@ namespace Roguegard.Device
         /// </summary>
         public static ChoicesScreen SaveBackDialog(
             string message,
-            string saveName, ClickOptionHandler<MMgr> saveAction,
-            string notSaveName, ClickOptionHandler<MMgr> notSaveAction)
+            string saveName, System.Action<MMgr> saveAction,
+            string notSaveName, System.Action<MMgr> notSaveAction)
         {
             var selectOption = new ChoicesScreen(message);
             selectOption

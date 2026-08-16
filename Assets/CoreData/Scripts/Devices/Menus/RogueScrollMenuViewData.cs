@@ -120,7 +120,7 @@ namespace Roguegard.Device
                 return this;
             }
 
-            public Builder OnClick(ClickItemHandler<T, MMgr> method)
+            public Builder OnClick(System.Action<T, MMgr> method)
             {
                 AssertNotBuilt();
 
@@ -132,7 +132,9 @@ namespace Roguegard.Device
         private class ElementHandler : IRogueElementHandler, IButtonViewItemHandler
         {
             public System.Func<T, MMgr, (object, Color?, Sprite, Color?, int?, float?, string, string, bool)> GetInfo { get; set; }
-            public ClickItemHandler<T, MMgr> Click { get; set; }
+            public System.Action<T, MMgr> Click { get; set; }
+
+            private static readonly IReadOnlyList<string> clickSingle = new List<string> { "Click" };
 
             public string GetName(object itemObj, IListuiManager manager)
             {
@@ -155,7 +157,12 @@ namespace Roguegard.Device
 
             public string GetStyle(object item, IListuiManager manager) => string.Empty;
 
-            void IButtonViewItemHandler.Click(object itemObj, IListuiManager iManager)
+            IReadOnlyList<string> IButtonViewItemHandler.GetCandidateClickNames(object item, IListuiManager manager)
+            {
+                return clickSingle;
+            }
+
+            void IButtonViewItemHandler.Click(object itemObj, IListuiManager iManager, string clickName)
             {
                 var item = (T)itemObj;
                 var manager = (MMgr)iManager;

@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace Lysionium
 {
     // 誤って使用することを避けるため、省略版は実装しない
@@ -29,12 +31,20 @@ namespace Lysionium
             return selectOption.GetStyle(tMgr);
         }
 
-        public void Click(object item, IListuiManager manager)
+        public IReadOnlyList<string> GetCandidateClickNames(object item, IListuiManager manager)
+        {
+            if (LuiAssert.Type<ISelectOption<TMgr>>(item, out var selectOption) ||
+                LuiAssert.Type<TMgr>(manager, out var tMgr)) return System.Array.Empty<string>();
+
+            return selectOption.GetCandidateClickNames(tMgr);
+        }
+
+        public void Click(object item, IListuiManager manager, string clickName)
         {
             if (LuiAssert.Type<ISelectOption<TMgr>>(item, out var selectOption, manager) ||
                 LuiAssert.Type<TMgr>(manager, out var tMgr, manager)) return;
 
-            selectOption.Click(tMgr);
+            selectOption.Click(tMgr, clickName);
         }
     }
 }
