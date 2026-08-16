@@ -1,8 +1,8 @@
 namespace Lysionium
 {
-    public static class FlickableOption
+    public static class FlickButtonOption
     {
-        public static IFlickableOption<TMgr> Create<TMgr>(
+        public static IFlickButtonOption<TMgr> Create<TMgr>(
             string name,
             ClickOptionHandler<TMgr> onKeyDown, ClickOptionHandler<TMgr> onExpand, ClickOptionHandler<TMgr> onKeyUp,
             string style)
@@ -17,7 +17,7 @@ namespace Lysionium
             return instance;
         }
 
-        public static IFlickableOption<TMgr> Create<TMgr>(
+        public static IFlickButtonOption<TMgr> Create<TMgr>(
             System.Func<TMgr, string> getName,
             ClickOptionHandler<TMgr> onKeyDown, ClickOptionHandler<TMgr> onExpand, ClickOptionHandler<TMgr> onKeyUp,
             string style)
@@ -32,7 +32,7 @@ namespace Lysionium
             return instance;
         }
 
-        public static IFlickableOption<TMgr> Create<TMgr>(
+        public static IFlickButtonOption<TMgr> Create<TMgr>(
             string name,
             ClickOptionHandler<TMgr> onKeyDown, ClickOptionHandler<TMgr> onExpand, ClickOptionHandler<TMgr> onKeyUp,
             System.Func<TMgr, string> style)
@@ -47,7 +47,7 @@ namespace Lysionium
             return instance;
         }
 
-        public static IFlickableOption<TMgr> Create<TMgr>(
+        public static IFlickButtonOption<TMgr> Create<TMgr>(
             System.Func<TMgr, string> getName,
             ClickOptionHandler<TMgr> onKeyDown, ClickOptionHandler<TMgr> onExpand, ClickOptionHandler<TMgr> onKeyUp,
             System.Func<TMgr, string> style)
@@ -62,7 +62,7 @@ namespace Lysionium
             return instance;
         }
 
-        private class Implement<TMgr> : IFlickableOption<TMgr>
+        private class Implement<TMgr> : IFlickButtonOption<TMgr>
             where TMgr : IListuiManager
         {
             private string name;
@@ -99,7 +99,7 @@ namespace Lysionium
                 style = null;
             }
 
-            string IFlickableOption<TMgr>.GetName(TMgr manager)
+            string IFlickButtonOption<TMgr>.GetName(TMgr manager)
             {
                 if (getName != null)
                 {
@@ -110,7 +110,7 @@ namespace Lysionium
                 else return name;
             }
 
-            string IFlickableOption<TMgr>.GetStyle(TMgr manager)
+            string IFlickButtonOption<TMgr>.GetStyle(TMgr manager)
             {
                 if (getStyle != null)
                 {
@@ -121,21 +121,21 @@ namespace Lysionium
                 else return style;
             }
 
-            void IFlickableOption<TMgr>.KeyDown(TMgr manager)
+            void IFlickButtonOption<TMgr>.KeyDown(TMgr manager)
             {
                 if (LuiAssert.Type<TMgr>(manager, out var tMgr, manager)) return;
 
                 KeyDown?.Invoke(tMgr);
             }
 
-            void IFlickableOption<TMgr>.Expand(TMgr manager)
+            void IFlickButtonOption<TMgr>.Expand(TMgr manager)
             {
                 if (LuiAssert.Type<TMgr>(manager, out var tMgr, manager)) return;
 
                 Expand?.Invoke(tMgr);
             }
 
-            void IFlickableOption<TMgr>.KeyUp(TMgr manager)
+            void IFlickButtonOption<TMgr>.KeyUp(TMgr manager)
             {
                 if (LuiAssert.Type<TMgr>(manager, out var tMgr, manager)) return;
 

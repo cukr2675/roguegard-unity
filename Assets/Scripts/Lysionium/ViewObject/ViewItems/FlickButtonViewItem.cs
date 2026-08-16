@@ -7,7 +7,7 @@ using UnityEngine.UI;
 namespace Lysionium.Views
 {
     [RequireComponent(typeof(Selectable))]
-    public class FlickableViewItem : ViewItem, IPointerDownHandler, IPointerUpHandler, IPointerClickHandler, IPointerExitHandler
+    public class FlickButtonViewItem : ViewItem, IPointerDownHandler, IPointerUpHandler, IPointerClickHandler, IPointerExitHandler
     {
         [SerializeField] private Image _icon = null;
         [SerializeField] private TMP_Text _text = null;
@@ -21,7 +21,7 @@ namespace Lysionium.Views
         [Header("Animation")]
         [SerializeField] private string _defaultStyle = "Submit";
 
-        private IFlickableViewItemHandler handler;
+        private IFlickButtonViewItemHandler handler;
         private object item;
         private bool isDown;
 
@@ -47,7 +47,7 @@ namespace Lysionium.Views
 
         protected override void BindCore(object item, IViewItemHandler handler)
         {
-            this.handler = handler as IFlickableViewItemHandler;
+            this.handler = handler as IFlickButtonViewItemHandler;
             this.item = item;
 
             if (_text != null)

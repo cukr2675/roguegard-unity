@@ -1,6 +1,6 @@
 namespace Lysionium
 {
-    public interface IFlickableOption<in TMgr>
+    public interface IFlickButtonOption<in TMgr>
     {
         string GetName(TMgr manager);
 
