@@ -9,11 +9,11 @@ using UnityEngine.Audio;
 namespace Roguegard.Editor
 {
     [CreateAssetMenu(menuName = "Roguegard/Settings/Rogue Audio Play Seed")]
-    public class RogueAudioPlaySeed : AudioPlaySeed
+    public class RogueAudioPlaySeed : EvtfxAudioSeed
     {
         [SerializeField] private AudioMixerGroup _audioMixerGroup = null;
 
-        [SerializeField] private AudioPlayTable.PlayBehaviour _playBehaviour = AudioPlayTable.PlayBehaviour.Sfx;
+        [SerializeField] private EvtfxAudioTable.PlayBehaviour _playBehaviour = EvtfxAudioTable.PlayBehaviour.Sfx;
 
         [SerializeField] private Item[] _items = null;
 
@@ -23,23 +23,23 @@ namespace Roguegard.Editor
             //EditorUtility.SetDirty(this);
         }
 
-        public override AudioPlayTable.Item[] CreatePlayItems(string directory, int blankSamples)
+        public override EvtfxAudioTable.Item[] CreateEvtfxAudioItems(string directory, int blankSamples)
         {
-            var result = new AudioPlayTable.Item[_items.Length];
+            var result = new EvtfxAudioTable.Item[_items.Length];
             for (int i = 0; i < _items.Length; i++)
             {
                 // wavファイルを生成
                 var item = _items[i];
                 var audioClip = item.CreateAudioClip(blankSamples);
-                var targetPath = $@"{directory}\{item.PlayName}.g.wav";
+                var targetPath = $@"{directory}\{item.EvtfxName}.g.wav";
                 SaveAsWav(audioClip, targetPath);
                 EditorUtility.SetDirty(audioClip);
                 AssetDatabase.ImportAsset(targetPath);
 
                 // 実際に使用する AudioClip を取得
-                result[i] = new AudioPlayTable.Item
+                result[i] = new EvtfxAudioTable.Item
                 {
-                    PlayName = item.PlayName,
+                    EvtfxName = item.EvtfxName,
                     AudioClip = AssetDatabase.LoadAssetAtPath<AudioClip>(targetPath),
                     AudioMixerGroup = _audioMixerGroup,
                     PlayBehaviour = _playBehaviour
@@ -107,8 +107,8 @@ namespace Roguegard.Editor
         [System.Serializable]
         private class Item
         {
-            [SerializeField] private KeywordAsset _playName;
-            public string PlayName => _playName.DescriptionName;
+            [SerializeField] private KeywordAsset _evtfxName;
+            public string EvtfxName => _evtfxName.DescriptionName;
 
             [SerializeField] private AudioClip _originalClip;
             public AudioClip OriginalClip => _originalClip;
