@@ -20,7 +20,7 @@ namespace Lysionium.Views
         [Header("Animation")]
         [SerializeField] private string _defaultStyle = "Submit";
 
-        private IButtonViewItemHandler handler;
+        private IEventGestureViewItemHandler handler;
         private object item;
 
         protected virtual void Awake()
@@ -34,7 +34,7 @@ namespace Lysionium.Views
                 rect.position = rectTransform.position;
                 Manager.SetInvisibleDropdownPosition(rect);
 
-                handler.Click(item, Manager);
+                handler.EventGestureConfirmed(item, Manager, "Click");
             });
 
             TryGetComponent(out animator);
@@ -44,7 +44,7 @@ namespace Lysionium.Views
 
         protected override void BindCore(object item, IViewItemHandler handler)
         {
-            this.handler = handler as IButtonViewItemHandler;
+            this.handler = handler as IEventGestureViewItemHandler;
             this.item = item;
 
             if (_text != null)

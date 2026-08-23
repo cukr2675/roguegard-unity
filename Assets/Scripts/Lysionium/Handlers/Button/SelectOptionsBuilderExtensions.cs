@@ -10,10 +10,7 @@ namespace Lysionium
         {
             if (args == null) throw new System.ArgumentNullException(nameof(args));
 
-            return builder.Option(SelectOption.Create<TMgr>(
-                m => option.GetName(m, args()),
-                m => option.Click(m, "Click", args()),
-                m => option.GetStyle(m, args())));
+            return builder.Option(new SelectOptionWrapper<TMgr, TArg> { core = option, args = args });
         }
 
         public static TBuilder OptionRange<TMgr, TBuilder>(
@@ -72,6 +69,19 @@ namespace Lysionium
             where TMgr : IListuiManager
         {
             return builder.Option(SelectOption.Create(getName, onClick, style));
+        }
+
+        private class SelectOptionWrapper<TMgr, TArg> : ISelectOption<TMgr>
+        {
+            public ISelectOption<TMgr, TArg> core;
+            public System.Func<TArg> args;
+
+            public string GetName(TMgr manager) => core.GetName(manager, args());
+            public string GetStyle(TMgr manager) => core.GetStyle(manager, args());
+            public void EventGestureConfirmed(TMgr manager, string eventGestureName)
+                => core.EventGestureConfirmed(manager, eventGestureName, args());
+            public IReadOnlyList<string> GetCandidateEventGestureNames(TMgr manager)
+                => core.GetCandidateEventGestureNames(manager, args());
         }
     }
 }

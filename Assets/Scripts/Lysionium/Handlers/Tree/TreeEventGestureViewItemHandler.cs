@@ -2,13 +2,13 @@ using System.Collections.Generic;
 
 namespace Lysionium
 {
-    public class TreeButtonViewItemHandler<TItem, TMgr> : IButtonViewItemHandler, ITreeViewItemHandler
+    public class TreeEventGestureViewItemHandler<TItem, TMgr> : IEventGestureViewItemHandler, ITreeViewItemHandler
         where TMgr : IListuiManager
     {
         public System.Func<TItem, TMgr, string> GetName { get; set; }
         public System.Func<TItem, TMgr, string> GetStyle { get; set; }
         public System.Func<TItem, TMgr, IReadOnlyList<TItem>> GetChildren { get; set; }
-        public ClickItemHandler<TItem, TMgr> Click { get; set; }
+        private System.Action<TItem, TMgr, string> eventGestureConfirmed;
 
         /// <summary>
         /// このインスタンスのデリゲート実行前に <see cref="SelectOptionViewItemHandler{TMgr}"/> の処理を挟む
@@ -16,11 +16,34 @@ namespace Lysionium
         /// </summary>
         public bool EnableSelectOptionProxy { get; set; }
 
-        private static readonly IReadOnlyList<string> clickSingle = new List<string>() { "Click" };
+        private readonly List<string> candidateEventGestureNames = new();
 
-        public TreeButtonViewItemHandler(bool enableSelectOptionProxy = true)
+        public TreeEventGestureViewItemHandler(bool enableSelectOptionProxy = true)
         {
             EnableSelectOptionProxy = enableSelectOptionProxy;
+        }
+
+        public void SubscribeEventGestureConfirmed(
+            string eventGestureName, SubmitItemHandler<TItem, TMgr> onEventGestureConfirmed)
+        {
+            if (!candidateEventGestureNames.Contains(eventGestureName))
+            {
+                candidateEventGestureNames.Add(eventGestureName);
+            }
+
+            eventGestureConfirmed += (item, manager, currentEventGestureName) =>
+            {
+                if (currentEventGestureName == eventGestureName)
+                {
+                    onEventGestureConfirmed(item, manager);
+                }
+            };
+        }
+
+        public void ClearEventGestureConfirmed()
+        {
+            candidateEventGestureNames.Clear();
+            eventGestureConfirmed = null;
         }
 
         string IViewItemHandler.GetName(object item, IListuiManager manager)
@@ -63,34 +86,38 @@ namespace Lysionium
             return (IReadOnlyList<object>)GetChildren?.Invoke(tItem, tMgr) ?? System.Array.Empty<object>();
         }
 
-        IReadOnlyList<string> IButtonViewItemHandler.GetCandidateClickNames(object item, IListuiManager manager)
+        IReadOnlyList<string> IEventGestureViewItemHandler.GetCandidateEventGestureNames(
+            object item, IListuiManager manager)
         {
             if (EnableSelectOptionProxy && item is ISelectOption<TMgr>)
-                return System.Array.Empty<string>();
+                return SelectOptionViewItemHandler<TMgr>.Instance.GetCandidateEventGestureNames(item, manager)
+                    ?? System.Array.Empty<string>();
             if (EnableSelectOptionProxy && item is ITreeOption<TMgr>) throw new System.InvalidOperationException(
                 $"{item} は {nameof(ITreeOption<TMgr>)} です。この型にクリックイベントは存在しません。");
 
             if (LuiAssert.Type<TItem>(item, out var tItem) ||
                 LuiAssert.Type<TMgr>(manager, out var tMgr)) return System.Array.Empty<string>();
 
-            return clickSingle;
+            return candidateEventGestureNames;
         }
 
-        void IButtonViewItemHandler.Click(object item, IListuiManager manager, string clickName)
+        void IEventGestureViewItemHandler.EventGestureConfirmed(
+            object item, IListuiManager manager, string eventGestureName)
         {
             if (EnableSelectOptionProxy && item is ISelectOption<TMgr>)
             {
-                SelectOptionViewItemHandler<TMgr>.Instance.Click(item, manager, clickName);
+                SelectOptionViewItemHandler<TMgr>.Instance.EventGestureConfirmed(item, manager, eventGestureName);
                 return;
             }
             if (EnableSelectOptionProxy && item is ITreeOption<TMgr>) throw new System.InvalidOperationException(
                 $"{item} は {nameof(ITreeOption<TMgr>)} です。この型にクリックイベントは存在しません。");
 
-            if (Click == null) throw new System.InvalidOperationException($"{Click} が null です。");
+            if (eventGestureConfirmed == null) throw new System.InvalidOperationException(
+                $"{eventGestureConfirmed} が null です。");
             if (LuiAssert.Type<TItem>(item, out var tItem, manager) ||
                 LuiAssert.Type<TMgr>(manager, out var tMgr, manager)) return;
 
-            Click(tItem, tMgr, clickName);
+            eventGestureConfirmed(tItem, tMgr, eventGestureName);
         }
     }
 }

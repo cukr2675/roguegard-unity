@@ -2,12 +2,12 @@ using System.Collections.Generic;
 
 namespace Lysionium
 {
-    public class ButtonViewItemHandler<TItem, TMgr> : IButtonViewItemHandler
+    public class EventGestureViewItemHandler<TItem, TMgr> : IEventGestureViewItemHandler
         where TMgr : IListuiManager
     {
         public System.Func<TItem, TMgr, string> GetName { get; set; }
         public System.Func<TItem, TMgr, string> GetStyle { get; set; }
-        public ClickItemHandler<TItem, TMgr> Click { get; set; }
+        private System.Action<TItem, TMgr, string> eventGestureConfirmed;
 
         /// <summary>
         /// このインスタンスのデリゲート実行前に <see cref="SelectOptionViewItemHandler{TMgr}"/> の処理を挟む
@@ -15,9 +15,34 @@ namespace Lysionium
         /// </summary>
         public bool EnableSelectOptionProxy { get; set; }
 
-        public ButtonViewItemHandler(bool enableSelectOptionProxy = true)
+        private readonly List<string> candidateEventGestureNames = new();
+
+        public EventGestureViewItemHandler(bool enableSelectOptionProxy = true)
         {
             EnableSelectOptionProxy = enableSelectOptionProxy;
+        }
+
+        public void SubscribeEventGestureConfirmed(
+            string eventGestureName, SubmitItemHandler<TItem, TMgr> onEventGestureConfirmed)
+        {
+            if (!candidateEventGestureNames.Contains(eventGestureName))
+            {
+                candidateEventGestureNames.Add(eventGestureName);
+            }
+
+            eventGestureConfirmed += (item, manager, currentEventGestureName) =>
+            {
+                if (currentEventGestureName == eventGestureName)
+                {
+                    onEventGestureConfirmed(item, manager);
+                }
+            };
+        }
+
+        public void ClearEventGestureConfirmed()
+        {
+            candidateEventGestureNames.Clear();
+            eventGestureConfirmed = null;
         }
 
         string IViewItemHandler.GetName(object item, IListuiManager manager)
@@ -47,27 +72,35 @@ namespace Lysionium
             return GetStyle?.Invoke(tItem, tMgr) ?? string.Empty;
         }
 
-        public IReadOnlyList<string> GetCandidateClickNames(object item, IListuiManager manager)
-        {
-            if (LuiAssert.Type<ISelectOption<TMgr>>(item, out var selectOption) ||
-                LuiAssert.Type<TMgr>(manager, out var tMgr)) return System.Array.Empty<string>();
-
-            return selectOption.GetCandidateClickNames(tMgr);
-        }
-
-        void IButtonViewItemHandler.Click(object item, IListuiManager manager, string clickName)
+        IReadOnlyList<string> IEventGestureViewItemHandler.GetCandidateEventGestureNames(
+            object item, IListuiManager manager)
         {
             if (EnableSelectOptionProxy && item is ISelectOption<TMgr>)
             {
-                SelectOptionViewItemHandler<TMgr>.Instance.Click(item, manager, clickName);
+                return SelectOptionViewItemHandler<TMgr>.Instance.GetCandidateEventGestureNames(item, manager);
+            }
+
+            if (LuiAssert.Type<TItem>(item, out var tItem) ||
+                LuiAssert.Type<TMgr>(manager, out var tMgr)) return System.Array.Empty<string>();
+
+            return candidateEventGestureNames;
+        }
+
+        void IEventGestureViewItemHandler.EventGestureConfirmed(
+            object item, IListuiManager manager, string eventGestureName)
+        {
+            if (EnableSelectOptionProxy && item is ISelectOption<TMgr>)
+            {
+                SelectOptionViewItemHandler<TMgr>.Instance.EventGestureConfirmed(item, manager, eventGestureName);
                 return;
             }
 
-            if (Click == null) throw new System.InvalidOperationException($"{Click} が null です。");
+            if (eventGestureConfirmed == null) throw new System.InvalidOperationException(
+                $"{eventGestureConfirmed} が null です。");
             if (LuiAssert.Type<TItem>(item, out var tItem, manager) ||
                 LuiAssert.Type<TMgr>(manager, out var tMgr, manager)) return;
 
-            Click(tItem, tMgr, clickName);
+            eventGestureConfirmed(tItem, tMgr, eventGestureName);
         }
     }
 }

@@ -117,7 +117,7 @@ namespace Lysionium
             selectOptions.Option(
                 SelectOption.Create<TMgr>(
                     m => option.GetName(m, arg),
-                    m => option.Click(m, "Click", arg),
+                    m => option.Click(m, arg),
                     m => option.GetStyle(m, arg)));
             return this;
         }

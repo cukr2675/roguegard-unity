@@ -81,7 +81,8 @@ namespace Lysionium.MergeExtensions.R3
         }
 
         public static void OnClick<TItem, TMgr>(
-            this Observable<MergedViewItemHandleArg<object, IListuiManager, object, object>> observable, ClickItemHandler<TItem, TMgr> onClick)
+            this Observable<MergedViewItemHandleArg<object, IListuiManager, object, object>> observable,
+            SubmitItemHandler<TItem, TMgr> onClick)
         {
             observable.Subscribe(x =>
             {

@@ -4,7 +4,7 @@ namespace Roguegard.Device
 {
     public class CharacterCreationViewData : ListViewData<object, MMgr>
     {
-        private readonly ButtonViewItemHandler<object, MMgr> subviewHandler = new();
+        private readonly EventGestureViewItemHandler<object, MMgr> subviewHandler = new();
 
         public SelectOptionList<MMgr> BackAnchorList { get; set; }
         public System.Func<MArg> Args { get; set; }

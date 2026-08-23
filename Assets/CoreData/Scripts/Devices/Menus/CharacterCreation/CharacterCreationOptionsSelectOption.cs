@@ -12,6 +12,9 @@ namespace Roguegard.Device
 
         private readonly SelectOptionMenu nextMenu;
 
+        private static readonly IReadOnlyList<string> clickOnlyEventGestureNames
+            = new List<string> { "Click" }.AsReadOnly();
+
         public CharacterCreationOptionsSelectOption(ICharacterCreationDatabase database)
         {
             nextMenu = new SelectOptionMenu() { database = database };
@@ -56,7 +59,12 @@ namespace Roguegard.Device
 
         string ISelectOption<MMgr>.GetStyle(MMgr manager) => null;
 
-        void ISelectOption<MMgr>.Click(MMgr manager, string clickName)
+        IReadOnlyList<string> ISelectOption<MMgr>.GetCandidateEventGestureNames(MMgr manager)
+        {
+            return clickOnlyEventGestureNames;
+        }
+
+        void ISelectOption<MMgr>.EventGestureConfirmed(MMgr manager, string eventGestureName)
         {
             manager.PushScreen(nextMenu, self, other: editTarget);
         }

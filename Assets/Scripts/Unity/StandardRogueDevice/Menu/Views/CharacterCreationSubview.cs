@@ -29,8 +29,8 @@ namespace RoguegardUnity
         private CharacterCreationAddScreen addScreen;
         private CharacterCreationOptionScreen optionScreen;
 
-        private IButtonViewItemHandler intrinsicPresenter;
-        private IButtonViewItemHandler startingItemPresenter;
+        private IEventGestureViewItemHandler intrinsicPresenter;
+        private IEventGestureViewItemHandler startingItemPresenter;
         private static readonly ISelectOption<MMgr> intrinsicHeader
             = SelectOption.Create<MMgr>("固有能力", delegate { });
         private static readonly ISelectOption<MMgr> startingItemHeader
@@ -91,33 +91,35 @@ namespace RoguegardUnity
 
             if (intrinsicPresenter == null)
             {
-                intrinsicPresenter = new ButtonViewItemHandler<Intrinsic, MMgr>()
+                var intrinsicPresenterCore = new EventGestureViewItemHandler<Intrinsic, MMgr>()
                 {
                     GetName = (intrinsic, manager) =>
                     {
                         if (intrinsic == null) return "+ 固有能力を追加";
                         else return intrinsic.Name;
                     },
-                    Click = (intrinsic, manager, _) =>
-                    {
-                        if (intrinsic == null) { manager.PushScreen(addScreen, arg.Self, other: typeof(Intrinsic)); }
-                        else { manager.PushScreen(optionScreen, arg.Self, other: intrinsic); }
-                    },
                 };
+                intrinsicPresenterCore.SubscribeEventGestureConfirmed("Click", (intrinsic, manager) =>
+                {
+                    if (intrinsic == null) { manager.PushScreen(addScreen, arg.Self, other: typeof(Intrinsic)); }
+                    else { manager.PushScreen(optionScreen, arg.Self, other: intrinsic); }
+                });
+                intrinsicPresenter = intrinsicPresenterCore;
 
-                startingItemPresenter = new ButtonViewItemHandler<StartingItem, MMgr>()
+                var startingItemPresenterCore = new EventGestureViewItemHandler<StartingItem, MMgr>()
                 {
                     GetName = (startingItem, manager) =>
                     {
                         if (startingItem == null) return "+ 固有能力を追加";
                         else return startingItem.Name;
                     },
-                    Click = (startingItem, manager, _) =>
-                    {
-                        if (startingItem == null) { manager.PushScreen(addScreen, arg.Self, other: typeof(StartingItem)); }
-                        else { manager.PushScreen(optionScreen, arg.Self, other: startingItem); }
-                    },
                 };
+                startingItemPresenterCore.SubscribeEventGestureConfirmed("Click", (startingItem, manager) =>
+                {
+                    if (startingItem == null) { manager.PushScreen(addScreen, arg.Self, other: typeof(StartingItem)); }
+                    else { manager.PushScreen(optionScreen, arg.Self, other: startingItem); }
+                });
+                startingItemPresenter = startingItemPresenterCore;
             }
 
             Manager = manager;

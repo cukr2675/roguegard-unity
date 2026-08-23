@@ -16,9 +16,9 @@ namespace Lysionium.MergeExtensions.R3
 
             // 各ハンドラを購読
             SubscribeViewItemHandler(builder, merged);
-            if (builder is IButtonViewItemHandlerBuilder<TItem, TMgr, TOut> buttonBuilder)
+            if (builder is IEventGestureViewItemHandlerBuilder<TItem, TMgr, TOut> buttonBuilder)
             {
-                buttonBuilder.SubscribeButtonViewItemHandler(merged);
+                buttonBuilder.SubscribeEventGestureViewItemHandler(merged);
             }
             if (builder is IViewItemFilterBuilder<TItem, TMgr, TOut> filterBuilder)
             {

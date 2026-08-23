@@ -43,7 +43,7 @@ namespace RoguegardUnity
                 view.Show(selectOptions, manager)
                 ?
                 .NameFrom((o, m) => o.GetName(m, Arg))
-                .OnClick((o, m) => o.Click(m, "Click", Arg))
+                .OnClick((o, m) => o.Click(m, Arg))
                 .StyleFrom((o, m) => o.GetStyle(m, Arg))
 
                 .Build();

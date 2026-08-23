@@ -33,7 +33,7 @@ namespace Lysionium
         private ISubviewStateProvider captionBoxSubviewStateProvider;
         private ISubviewStateProvider backAnchorSubviewStateProvider;
 
-        private readonly ButtonViewItemHandler<TItem, TMgr> scrollSubviewHandler = new();
+        private readonly EventGestureViewItemHandler<TItem, TMgr> scrollSubviewHandler = new();
 
         public Builder Show(TItem[] list, TMgr manager, object viewStateHolder = null)
         {
@@ -92,7 +92,9 @@ namespace Lysionium
             BackAnchorSubviewSelector?.Invoke(manager)?.Hide(back);
         }
 
-        public class Builder : BaseListBuilder<ScrollMenuViewData<TItem, TMgr>, Builder>, IButtonViewItemHandlerBuilder<TItem, TMgr, Builder>
+        public class Builder :
+            BaseListBuilder<ScrollMenuViewData<TItem, TMgr>, Builder>,
+            IEventGestureViewItemHandlerBuilder<TItem, TMgr, Builder>
         {
             public Builder(ScrollMenuViewData<TItem, TMgr> parent, TMgr manager)
                 : base(parent, manager)
@@ -119,11 +121,11 @@ namespace Lysionium
                 return this;
             }
 
-            public Builder OnClick(ClickItemHandler<TItem, TMgr> handler)
+            public Builder OnEventGestureConfirmed(string eventGestureName, SubmitItemHandler<TItem, TMgr> handler)
             {
                 AssertNotBuilt();
 
-                Parent.scrollSubviewHandler.Click += handler;
+                Parent.scrollSubviewHandler.SubscribeEventGestureConfirmed(eventGestureName, handler);
                 return this;
             }
 
@@ -132,7 +134,7 @@ namespace Lysionium
                 base.Unload();
                 Parent.scrollSubviewHandler.GetName = null;
                 Parent.scrollSubviewHandler.GetStyle = null;
-                Parent.scrollSubviewHandler.Click = null;
+                Parent.scrollSubviewHandler.ClearEventGestureConfirmed();
             }
         }
     }

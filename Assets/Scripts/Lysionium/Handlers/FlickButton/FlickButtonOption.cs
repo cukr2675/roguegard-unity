@@ -5,9 +5,9 @@ namespace Lysionium
         public static IFlickButtonOption<TMgr> Create<TMgr>(
             string name,
             string style = null,
-            ClickOptionHandler<TMgr> onPress = null,
+            SubmitOptionHandler<TMgr> onPress = null,
             System.Action<TMgr> onExpand = null,
-            ClickOptionHandler<TMgr> onRelease = null)
+            SubmitOptionHandler<TMgr> onRelease = null)
             where TMgr : IListuiManager
         {
             var instance = new Implement<TMgr>();
@@ -22,9 +22,9 @@ namespace Lysionium
         public static IFlickButtonOption<TMgr> Create<TMgr>(
             System.Func<TMgr, string> getName,
             string style = null,
-            ClickOptionHandler<TMgr> onPress = null,
+            SubmitOptionHandler<TMgr> onPress = null,
             System.Action<TMgr> onExpand = null,
-            ClickOptionHandler<TMgr> onRelease = null)
+            SubmitOptionHandler<TMgr> onRelease = null)
             where TMgr : IListuiManager
         {
             var instance = new Implement<TMgr>();
@@ -39,9 +39,9 @@ namespace Lysionium
         public static IFlickButtonOption<TMgr> Create<TMgr>(
             string name,
             System.Func<TMgr, string> style,
-            ClickOptionHandler<TMgr> onPress = null,
+            SubmitOptionHandler<TMgr> onPress = null,
             System.Action<TMgr> onExpand = null,
-            ClickOptionHandler<TMgr> onRelease = null)
+            SubmitOptionHandler<TMgr> onRelease = null)
             where TMgr : IListuiManager
         {
             var instance = new Implement<TMgr>();
@@ -56,9 +56,9 @@ namespace Lysionium
         public static IFlickButtonOption<TMgr> Create<TMgr>(
             System.Func<TMgr, string> getName,
             System.Func<TMgr, string> style,
-            ClickOptionHandler<TMgr> onPress = null,
+            SubmitOptionHandler<TMgr> onPress = null,
             System.Action<TMgr> onExpand = null,
-            ClickOptionHandler<TMgr> onRelease = null)
+            SubmitOptionHandler<TMgr> onRelease = null)
             where TMgr : IListuiManager
         {
             var instance = new Implement<TMgr>();
@@ -73,9 +73,9 @@ namespace Lysionium
         private class Implement<TMgr> : SelectOption<TMgr>, IFlickButtonOption<TMgr>
             where TMgr : IListuiManager
         {
-            public ClickOptionHandler<TMgr> Press { get; set; }
+            public SubmitOptionHandler<TMgr> Press { get; set; }
             public System.Action<TMgr> Expand { get; set; }
-            public ClickOptionHandler<TMgr> Release { get; set; }
+            public SubmitOptionHandler<TMgr> Release { get; set; }
 
             void IFlickButtonOption<TMgr>.Press(TMgr manager)
             {

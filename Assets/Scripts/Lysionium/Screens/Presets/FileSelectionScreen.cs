@@ -26,7 +26,7 @@ namespace Lysionium
         private ChoicesScreen<TMgr, Context> errorScreenOfContainsSlash;
         private ChoicesScreen<TMgr, Context> errorScreenOfDirectoryExists;
         private ChoicesScreen<TMgr, Context> errorScreenOfExternalEffect;
-        private ClickItemHandler<string, TMgr> onSubmit;
+        private SubmitItemHandler<string, TMgr> onSubmit;
 
         private Context context;
 
@@ -152,7 +152,7 @@ namespace Lysionium
             return this;
         }
 
-        public FileSelectionScreen<TMgr> OnSubmit(ClickItemHandler<string, TMgr> onSubmit)
+        public FileSelectionScreen<TMgr> OnSubmit(SubmitItemHandler<string, TMgr> onSubmit)
         {
             this.onSubmit += onSubmit;
             return this;

@@ -27,13 +27,14 @@ namespace RoguegardUnity
 
         private const float lightRatio = 248f / 255f;
 
-        private IButtonViewItemHandler presenter;
+        private IEventGestureViewItemHandler presenter;
 
         private object source;
 
         public CanvasGroup CanvasGroup => _canvasGroup;
 
-        public void SetItem(IButtonViewItemHandler presenter, IReadOnlyIntrinsic intrinsic, ICharacterCreationData characterCreationData)
+        public void SetItem(
+            IEventGestureViewItemHandler presenter, IReadOnlyIntrinsic intrinsic, ICharacterCreationData characterCreationData)
         {
             this.presenter = presenter;
             source = intrinsic;
@@ -52,7 +53,7 @@ namespace RoguegardUnity
             ShowCaption(intrinsic.Option);
         }
 
-        public void SetItem(IButtonViewItemHandler presenter, IReadOnlyStartingItem startingItem)
+        public void SetItem(IEventGestureViewItemHandler presenter, IReadOnlyStartingItem startingItem)
         {
             this.presenter = presenter;
             source = startingItem;
@@ -70,7 +71,7 @@ namespace RoguegardUnity
             ShowCaption(startingItem.Option);
         }
 
-        public void SetItem(IButtonViewItemHandler presenter, string text, string captionText)
+        public void SetItem(IEventGestureViewItemHandler presenter, string text, string captionText)
         {
             this.presenter = presenter;
             source = null;
@@ -113,7 +114,7 @@ namespace RoguegardUnity
 
         void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
         {
-            presenter.Click(source, Manager);
+            presenter.EventGestureConfirmed(source, Manager, "Click");
         }
 
         protected override void BindCore(object item, IViewItemHandler handler)

@@ -2,10 +2,11 @@ using R3;
 
 namespace Lysionium.MergeExtensions.R3
 {
-    public static class ButtonViewItemHandlerBuilderMergeExtensions
+    public static class EventGestureViewItemHandlerBuilderMergeExtensions
     {
-        public static TOut SubscribeButtonViewItemHandler<TItem, TMgr, TOut>(
-            this IButtonViewItemHandlerBuilder<TItem, TMgr, TOut> builder, Subject<MergedViewItemHandleArg<TItem, TMgr, TOut, TItem>> subject)
+        public static TOut SubscribeEventGestureViewItemHandler<TItem, TMgr, TOut>(
+            this IEventGestureViewItemHandlerBuilder<TItem, TMgr, TOut> builder,
+            Subject<MergedViewItemHandleArg<TItem, TMgr, TOut, TItem>> subject)
         {
             if (builder == null) throw new System.ArgumentNullException(nameof(builder));
             if (subject == null) throw new System.ArgumentNullException(nameof(subject));
@@ -24,21 +25,8 @@ namespace Lysionium.MergeExtensions.R3
         }
 
         public static Observable<MergedViewItemHandleArg<TItem, TMgr, TBuilder, TValue>> OnClick<TItem, TMgr, TBuilder, TValue>(
-            this Observable<MergedViewItemHandleArg<TItem, TMgr, TBuilder, TValue>> source, ClickItemHandler<TValue, TMgr> handler)
-            where TBuilder : IButtonViewItemHandlerBuilder<TItem, TMgr, TBuilder>
-        {
-            if (source == null) throw new System.ArgumentNullException(nameof(source));
-            if (handler == null) throw new System.ArgumentNullException(nameof(handler));
-
-            return source.ToBuilder().SubscribeTo<OnClickContext>((value, manager, _) =>
-            {
-                handler(value, manager);
-            });
-        }
-
-        public static Observable<MergedViewItemHandleArg<TItem, TMgr, TBuilder, TValue>> OnClick<TItem, TMgr, TBuilder, TValue>(
-            this Observable<MergedViewItemHandleArg<TItem, TMgr, TBuilder, TValue>> source, System.Action<TValue, TMgr> handler)
-            where TBuilder : IButtonViewItemHandlerBuilder<TItem, TMgr, TBuilder>
+            this Observable<MergedViewItemHandleArg<TItem, TMgr, TBuilder, TValue>> source, SubmitItemHandler<TValue, TMgr> handler)
+            where TBuilder : IEventGestureViewItemHandlerBuilder<TItem, TMgr, TBuilder>
         {
             if (source == null) throw new System.ArgumentNullException(nameof(source));
             if (handler == null) throw new System.ArgumentNullException(nameof(handler));

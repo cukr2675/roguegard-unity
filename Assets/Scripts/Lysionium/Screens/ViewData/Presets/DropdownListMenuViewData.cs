@@ -29,7 +29,7 @@ namespace Lysionium
         private ISubviewStateProvider dropdownListSubviewStateProvider;
         private ISubviewStateProvider captionBoxSubviewStateProvider;
 
-        private readonly TreeButtonViewItemHandler<TItem, TMgr> dropdownListSubviewHandler = new();
+        private readonly TreeEventGestureViewItemHandler<TItem, TMgr> dropdownListSubviewHandler = new();
 
         public Builder Show(TItem[] list, TMgr manager, object viewStateHolder = null)
         {
@@ -85,7 +85,7 @@ namespace Lysionium
 
         public class Builder :
             BaseListBuilder<DropdownListMenuViewData<TItem, TMgr>, Builder>,
-            IButtonViewItemHandlerBuilder<TItem, TMgr, Builder>,
+            IEventGestureViewItemHandlerBuilder<TItem, TMgr, Builder>,
             ITreeViewItemHandlerBuilder<TItem, TMgr, Builder>
         {
             public Builder(DropdownListMenuViewData<TItem, TMgr> parent, TMgr manager)
@@ -113,11 +113,11 @@ namespace Lysionium
                 return this;
             }
 
-            public Builder OnClick(ClickItemHandler<TItem, TMgr> handler)
+            public Builder OnEventGestureConfirmed(string eventGestureName, SubmitItemHandler<TItem, TMgr> handler)
             {
                 AssertNotBuilt();
 
-                Parent.dropdownListSubviewHandler.Click += handler;
+                Parent.dropdownListSubviewHandler.SubscribeEventGestureConfirmed(eventGestureName, handler);
                 return this;
             }
 
@@ -136,7 +136,7 @@ namespace Lysionium
                 base.Unload();
                 Parent.dropdownListSubviewHandler.GetName = null;
                 Parent.dropdownListSubviewHandler.GetStyle = null;
-                Parent.dropdownListSubviewHandler.Click = null;
+                Parent.dropdownListSubviewHandler.ClearEventGestureConfirmed();
                 Parent.dropdownListSubviewHandler.GetChildren = null;
             }
         }

@@ -29,15 +29,15 @@ namespace Lysionium
         }
 
         public static TOut OnClick<TItem, TMgr, TOut>(
-            this IButtonViewItemHandlerBuilder<TItem, TMgr, TOut> builder, System.Action<TItem> handler)
+            this IEventGestureViewItemHandlerBuilder<TItem, TMgr, TOut> builder, System.Action<TItem> handler)
         {
-            return builder.OnClick((item, _, clickName) => handler(item));
+            return builder.OnEventGestureConfirmed("Click", (item, _) => handler(item));
         }
 
         public static TOut OnClick<TItem, TMgr, TOut>(
-            this IButtonViewItemHandlerBuilder<TItem, TMgr, TOut> builder, System.Action<TItem, TMgr> handler)
+            this IEventGestureViewItemHandlerBuilder<TItem, TMgr, TOut> builder, SubmitItemHandler<TItem, TMgr> handler)
         {
-            return builder.OnClick((item, manager, clickName) => handler(item, manager));
+            return builder.OnEventGestureConfirmed("Click", (item, manager) => handler(item, manager));
         }
     }
 }

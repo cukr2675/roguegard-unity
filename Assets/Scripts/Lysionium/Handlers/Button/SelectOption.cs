@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace Lysionium
 {
     /// <inheritdoc/>
@@ -19,7 +21,7 @@ namespace Lysionium
             var instance = new SelectOption<TMgr>();
             instance.SetName(name);
             instance.SetStyle(style);
-            instance.Click = onClick;
+            instance.EventGestureConfirmed = (m, _) => onClick(m);
             return instance;
         }
 
@@ -30,7 +32,7 @@ namespace Lysionium
             var instance = new SelectOption<TMgr>();
             instance.SetName(getName);
             instance.SetStyle(style);
-            instance.Click = onClick;
+            instance.EventGestureConfirmed = (m, _) => onClick(m);
             return instance;
         }
 
@@ -41,7 +43,7 @@ namespace Lysionium
             var instance = new SelectOption<TMgr>();
             instance.SetName(name);
             instance.SetStyle(style);
-            instance.Click = onClick;
+            instance.EventGestureConfirmed = (m, _) => onClick(m);
             return instance;
         }
 
@@ -52,7 +54,7 @@ namespace Lysionium
             var instance = new SelectOption<TMgr>();
             instance.SetName(getName);
             instance.SetStyle(style);
-            instance.Click = onClick;
+            instance.EventGestureConfirmed = (m, _) => onClick(m);
             return instance;
         }
 
@@ -63,7 +65,7 @@ namespace Lysionium
             var instance = new SelectOption<TMgr, TArg>();
             instance.SetName(name);
             instance.SetStyle(style);
-            instance.Click = onClick;
+            instance.EventGestureConfirmed = (m, _, a) => onClick(m, a);
             return instance;
         }
 
@@ -74,7 +76,7 @@ namespace Lysionium
             var instance = new SelectOption<TMgr, TArg>();
             instance.SetName(getName);
             instance.SetStyle(style);
-            instance.Click = onClick;
+            instance.EventGestureConfirmed = (m, _, a) => onClick(m, a);
             return instance;
         }
 
@@ -85,7 +87,7 @@ namespace Lysionium
             var instance = new SelectOption<TMgr, TArg>();
             instance.SetName(name);
             instance.SetStyle(style);
-            instance.Click = onClick;
+            instance.EventGestureConfirmed = (m, _, a) => onClick(m, a);
             return instance;
         }
 
@@ -98,7 +100,7 @@ namespace Lysionium
             var instance = new SelectOption<TMgr, TArg>();
             instance.SetName(getName);
             instance.SetStyle(style);
-            instance.Click = onClick;
+            instance.EventGestureConfirmed = (m, _, a) => onClick(m, a);
             return instance;
         }
     }
@@ -111,7 +113,12 @@ namespace Lysionium
         private string style;
         private System.Func<TMgr, string> getStyle;
 
-        public System.Action<TMgr> Click { get; set; }
+        private readonly IReadOnlyList<string> candidateEventGestureNames = clickOnlyEventGestureNames;
+
+        public System.Action<TMgr, string> EventGestureConfirmed { get; set; }
+
+        private static readonly IReadOnlyList<string> clickOnlyEventGestureNames
+            = new List<string> { "Click" }.AsReadOnly();
 
         public SelectOption()
         {
@@ -120,7 +127,19 @@ namespace Lysionium
         public SelectOption(string name, System.Action<TMgr> onClick, string style = null)
         {
             this.name = name;
-            Click = onClick;
+            EventGestureConfirmed = (m, _) => onClick(m);
+            this.style = style;
+        }
+
+        public SelectOption(
+            string name,
+            IReadOnlyList<string> candidateEventGestureNames,
+            System.Action<TMgr, string> onEventGestureConfirmed,
+            string style = null)
+        {
+            this.name = name;
+            this.candidateEventGestureNames = candidateEventGestureNames;
+            EventGestureConfirmed = onEventGestureConfirmed;
             this.style = style;
         }
 
@@ -150,7 +169,10 @@ namespace Lysionium
 
         string ISelectOption<TMgr>.GetName(TMgr manager) => getName?.Invoke(manager) ?? name;
         string ISelectOption<TMgr>.GetStyle(TMgr manager) => getStyle?.Invoke(manager) ?? style;
-        void ISelectOption<TMgr>.Click(TMgr manager, string clickName) => Click?.Invoke(manager);
+        IReadOnlyList<string> ISelectOption<TMgr>.GetCandidateEventGestureNames(TMgr manager)
+            => candidateEventGestureNames;
+        void ISelectOption<TMgr>.EventGestureConfirmed(TMgr manager, string eventGestureName)
+            => EventGestureConfirmed?.Invoke(manager, eventGestureName);
     }
 
     public class SelectOption<TMgr, TArg> : ISelectOption<TMgr, TArg>
@@ -161,7 +183,12 @@ namespace Lysionium
         private string style;
         private System.Func<TMgr, TArg, string> getStyle;
 
-        public System.Action<TMgr, TArg> Click { get; set; }
+        private readonly IReadOnlyList<string> candidateEventGestureNames = clickOnlyEventGestureNames;
+
+        public System.Action<TMgr, string, TArg> EventGestureConfirmed { get; set; }
+
+        private static readonly IReadOnlyList<string> clickOnlyEventGestureNames
+            = new List<string> { "Click" }.AsReadOnly();
 
         public SelectOption()
         {
@@ -170,7 +197,19 @@ namespace Lysionium
         public SelectOption(string name, System.Action<TMgr, TArg> onClick, string style = null)
         {
             this.name = name;
-            Click = onClick;
+            EventGestureConfirmed = (m, _, a) => onClick(m, a);
+            this.style = style;
+        }
+
+        public SelectOption(
+            string name,
+            IReadOnlyList<string> candidateEventGestureNames,
+            System.Action<TMgr, string, TArg> onEventGestureConfirmed,
+            string style = null)
+        {
+            this.name = name;
+            this.candidateEventGestureNames = candidateEventGestureNames;
+            EventGestureConfirmed = onEventGestureConfirmed;
             this.style = style;
         }
 
@@ -200,7 +239,9 @@ namespace Lysionium
 
         string ISelectOption<TMgr, TArg>.GetName(TMgr manager, TArg arg) => getName?.Invoke(manager, arg) ?? name;
         string ISelectOption<TMgr, TArg>.GetStyle(TMgr manager, TArg arg) => getStyle?.Invoke(manager, arg) ?? style;
-        void ISelectOption<TMgr, TArg>.Click(TMgr manager, string clickName, TArg arg)
-            => Click?.Invoke(manager, arg);
+        IReadOnlyList<string> ISelectOption<TMgr, TArg>.GetCandidateEventGestureNames(TMgr manager, TArg arg)
+            => candidateEventGestureNames;
+        void ISelectOption<TMgr, TArg>.EventGestureConfirmed(TMgr manager, string eventGestureName, TArg arg)
+            => EventGestureConfirmed?.Invoke(manager, eventGestureName, arg);
     }
 }

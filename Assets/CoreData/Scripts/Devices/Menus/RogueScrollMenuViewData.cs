@@ -129,12 +129,10 @@ namespace Roguegard.Device
             }
         }
 
-        private class ElementHandler : IRogueElementHandler, IButtonViewItemHandler
+        private class ElementHandler : IRogueElementHandler, IEventGestureViewItemHandler
         {
             public System.Func<T, MMgr, (object, Color?, Sprite, Color?, int?, float?, string, string, bool)> GetInfo { get; set; }
             public System.Action<T, MMgr> Click { get; set; }
-
-            private static readonly IReadOnlyList<string> clickSingle = new List<string> { "Click" };
 
             public string GetName(object itemObj, IListuiManager manager)
             {
@@ -157,12 +155,14 @@ namespace Roguegard.Device
 
             public string GetStyle(object item, IListuiManager manager) => string.Empty;
 
-            IReadOnlyList<string> IButtonViewItemHandler.GetCandidateClickNames(object item, IListuiManager manager)
+            IReadOnlyList<string> IEventGestureViewItemHandler.GetCandidateEventGestureNames(
+                object item, IListuiManager manager)
             {
-                return clickSingle;
+                return IEventGestureViewItemHandler.ClickOnlyEventGestureNames;
             }
 
-            void IButtonViewItemHandler.Click(object itemObj, IListuiManager iManager, string clickName)
+            void IEventGestureViewItemHandler.EventGestureConfirmed(
+                object itemObj, IListuiManager iManager, string eventGestureName)
             {
                 var item = (T)itemObj;
                 var manager = (MMgr)iManager;

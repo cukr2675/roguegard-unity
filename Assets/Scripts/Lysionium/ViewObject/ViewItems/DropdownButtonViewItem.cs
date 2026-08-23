@@ -22,7 +22,7 @@ namespace Lysionium.Views
         [SerializeField] private string _defaultStyle = "Submit";
 
         private ExpandHandler expandHandler;
-        private IButtonViewItemHandler handler;
+        private IEventGestureViewItemHandler handler;
         private ITreeViewItemHandler treeHandler;
         private object item;
 
@@ -44,7 +44,7 @@ namespace Lysionium.Views
                 // ドロップダウンの位置を更新
                 Manager.SetInvisibleDropdownPosition(rectTransform.rect);
 
-                handler.Click(item, Manager);
+                handler.EventGestureConfirmed(item, Manager, "Click");
             });
 
             TryGetComponent(out animator);
@@ -60,7 +60,7 @@ namespace Lysionium.Views
 
         protected override void BindCore(object item, IViewItemHandler handler)
         {
-            this.handler = handler as IButtonViewItemHandler;
+            this.handler = handler as IEventGestureViewItemHandler;
             treeHandler = handler as ITreeViewItemHandler;
             this.item = item;
 

@@ -242,11 +242,17 @@ namespace Roguegard.Device
             public object other;
             public CharacterCreationData characterCreationData;
 
+            private static readonly IReadOnlyList<string> clickOnlyEventGestureNames
+                = new List<string> { "Click" }.AsReadOnly();
+
             string ISelectOption<MMgr>.GetName(MMgr manager) => "<#f00>削除";
 
             string ISelectOption<MMgr>.GetStyle(MMgr manager) => null;
 
-            void ISelectOption<MMgr>.Click(MMgr manager, string clickName)
+            IReadOnlyList<string> ISelectOption<MMgr>.GetCandidateEventGestureNames(MMgr manager)
+                => clickOnlyEventGestureNames;
+
+            void ISelectOption<MMgr>.EventGestureConfirmed(MMgr manager, string eventGestureName)
             {
                 if (other is IReadOnlyMemberable memberable)
                 {

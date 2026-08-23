@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace Lysionium
 {
     public class BackSelectOption<TMgr> : ISelectOption<TMgr>
@@ -16,8 +18,10 @@ namespace Lysionium
 
         string ISelectOption<TMgr>.GetName(TMgr manager) => name ?? manager.BackOption.GetName(manager);
         string ISelectOption<TMgr>.GetStyle(TMgr manager) => style ?? manager.BackOption.GetStyle(manager);
-        void ISelectOption<TMgr>.Click(TMgr manager, string clickName)
-            => manager.BackOption.Click(manager, clickName);
+        IReadOnlyList<string> ISelectOption<TMgr>.GetCandidateEventGestureNames(TMgr manager)
+            => manager.BackOption.GetCandidateEventGestureNames(manager);
+        void ISelectOption<TMgr>.EventGestureConfirmed(TMgr manager, string eventGestureName)
+            => manager.BackOption.EventGestureConfirmed(manager, eventGestureName);
     }
 
     /// <summary>

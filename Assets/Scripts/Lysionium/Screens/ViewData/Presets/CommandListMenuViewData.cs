@@ -32,7 +32,7 @@ namespace Lysionium
         private ISubviewStateProvider captionBoxSubviewStateProvider;
         private ISubviewStateProvider backAnchorSubviewStateProvider;
 
-        private readonly ButtonViewItemHandler<TItem, TMgr> secondaryCommandSubviewHandler = new();
+        private readonly EventGestureViewItemHandler<TItem, TMgr> secondaryCommandSubviewHandler = new();
 
         public Builder Show(TItem[] list, TMgr manager, object viewStateHolder = null)
         {
@@ -91,8 +91,9 @@ namespace Lysionium
             BackAnchorSubviewSelector?.Invoke(manager)?.Hide(back);
         }
 
-        public class Builder
-            : BaseListBuilder<CommandListMenuViewData<TItem, TMgr>, Builder>, IButtonViewItemHandlerBuilder<TItem, TMgr, Builder>
+        public class Builder :
+            BaseListBuilder<CommandListMenuViewData<TItem, TMgr>, Builder>,
+            IEventGestureViewItemHandlerBuilder<TItem, TMgr, Builder>
         {
             public Builder(CommandListMenuViewData<TItem, TMgr> parent, TMgr manager)
                 : base(parent, manager)
@@ -119,11 +120,11 @@ namespace Lysionium
                 return this;
             }
 
-            public Builder OnClick(ClickItemHandler<TItem, TMgr> handler)
+            public Builder OnEventGestureConfirmed(string eventGestureName, SubmitItemHandler<TItem, TMgr> handler)
             {
                 AssertNotBuilt();
 
-                Parent.secondaryCommandSubviewHandler.Click += handler;
+                Parent.secondaryCommandSubviewHandler.SubscribeEventGestureConfirmed(eventGestureName, handler);
                 return this;
             }
 
@@ -132,7 +133,7 @@ namespace Lysionium
                 base.Unload();
                 Parent.secondaryCommandSubviewHandler.GetName = null;
                 Parent.secondaryCommandSubviewHandler.GetStyle = null;
-                Parent.secondaryCommandSubviewHandler.Click = null;
+                Parent.secondaryCommandSubviewHandler.ClearEventGestureConfirmed();
             }
         }
     }

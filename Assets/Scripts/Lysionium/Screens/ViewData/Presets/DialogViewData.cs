@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace Lysionium
 {
     /// <summary>
@@ -22,7 +20,7 @@ namespace Lysionium
         private ISubviewStateProvider backAnchorSubviewStateProvider;
 
         private string message;
-        private event ClickItemHandler<string, TMgr> ClickLink;
+        private event SubmitItemHandler<string, TMgr> ClickLink;
 
         public Builder Show(string message, TMgr manager, object viewStateHolder = null)
         {
@@ -106,7 +104,7 @@ namespace Lysionium
             //    return this;
             //}
 
-            public Builder OnClickLink(ClickItemHandler<string, TMgr> onClickLink)
+            public Builder OnClickLink(SubmitItemHandler<string, TMgr> onClickLink)
             {
                 AssertNotBuilt();
 

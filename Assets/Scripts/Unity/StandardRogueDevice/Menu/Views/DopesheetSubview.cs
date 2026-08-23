@@ -184,7 +184,7 @@ namespace RoguegardUnity
         }
 
         private void UpdateKeyFrameListElement(
-            string name, object keyFrameList, MotionGrapherInfo editInfo, ClickOptionHandler<MMgr> handleRemove, ref float sumHeight)
+            string name, object keyFrameList, MotionGrapherInfo editInfo, SubmitOptionHandler<MMgr> handleRemove, ref float sumHeight)
         {
             var y = sumHeight;
             var headerWidth = _floatingContent.rect.width;
@@ -355,7 +355,7 @@ namespace RoguegardUnity
                         _ => ((MotionGrapherInfo)Arg.Arg.Other).PlaybackSpeed.ToString(),
                         (strValue) =>
                         {
-                            if (!float.TryParse(strValue, out var value))return strValue;
+                            if (!float.TryParse(strValue, out var value)) return strValue;
 
                             ((MotionGrapherInfo)Arg.Arg.Other).PlaybackSpeed = value;
                             return strValue;

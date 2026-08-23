@@ -11,7 +11,7 @@ namespace Lysionium
     /// <summary>
     /// モデルのリストではなく選択肢を扱いたいときに使用する <see cref="IViewItemHandler"/> 。
     /// </summary>
-    public class SelectOptionViewItemHandler<TMgr> : IButtonViewItemHandler
+    public class SelectOptionViewItemHandler<TMgr> : IEventGestureViewItemHandler
     {
         public static SelectOptionViewItemHandler<TMgr> Instance { get; } = new();
 
@@ -31,20 +31,20 @@ namespace Lysionium
             return selectOption.GetStyle(tMgr);
         }
 
-        public IReadOnlyList<string> GetCandidateClickNames(object item, IListuiManager manager)
+        public IReadOnlyList<string> GetCandidateEventGestureNames(object item, IListuiManager manager)
         {
             if (LuiAssert.Type<ISelectOption<TMgr>>(item, out var selectOption) ||
                 LuiAssert.Type<TMgr>(manager, out var tMgr)) return System.Array.Empty<string>();
 
-            return selectOption.GetCandidateClickNames(tMgr);
+            return selectOption.GetCandidateEventGestureNames(tMgr);
         }
 
-        public void Click(object item, IListuiManager manager, string clickName)
+        public void EventGestureConfirmed(object item, IListuiManager manager, string eventGestureName)
         {
             if (LuiAssert.Type<ISelectOption<TMgr>>(item, out var selectOption, manager) ||
                 LuiAssert.Type<TMgr>(manager, out var tMgr, manager)) return;
 
-            selectOption.Click(tMgr, clickName);
+            selectOption.EventGestureConfirmed(tMgr, eventGestureName);
         }
     }
 }

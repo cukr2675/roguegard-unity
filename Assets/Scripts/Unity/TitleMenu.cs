@@ -277,7 +277,7 @@ namespace RoguegardUnity
                         .Tail.Append(ContentSizeMetaWidgetOption.Create(viewWidth))
 
                         .VarOnce(out var nextScreen, new URLDialog())
-                        .OnClickLink((link, manager, _) => manager.PushScreen(nextScreen, other: link))
+                        .OnClickLink((link, manager) => manager.PushScreen(nextScreen, other: link))
 
                         .Build();
                     };

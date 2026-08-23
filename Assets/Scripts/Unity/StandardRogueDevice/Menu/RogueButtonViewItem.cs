@@ -22,7 +22,7 @@ namespace RoguegardUnity
         [SerializeField] private string _defaultStyle = "Submit";
         private Animator animator;
 
-        private IButtonViewItemHandler handler;
+        private IEventGestureViewItemHandler handler;
         private object item;
 
         private static readonly RogueNameBuilder nameBuilder = new();
@@ -34,7 +34,7 @@ namespace RoguegardUnity
             var button = GetComponent<Button>();
             button.onClick.AddListener(() =>
             {
-                handler.Click(item, Manager);
+                handler.EventGestureConfirmed(item, Manager, "Click");
             });
 
             TryGetComponent(out animator);
@@ -42,7 +42,7 @@ namespace RoguegardUnity
 
         protected override void BindCore(object item, IViewItemHandler handler)
         {
-            this.handler = handler as IButtonViewItemHandler;
+            this.handler = handler as IEventGestureViewItemHandler;
             this.item = item;
 
             var color = RoguegardSettings.White;

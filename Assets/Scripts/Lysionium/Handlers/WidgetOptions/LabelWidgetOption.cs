@@ -2,7 +2,7 @@ namespace Lysionium
 {
     public static class LabelWidgetOption
     {
-        public static ILabelWidgetOption Create<TMgr>(string text, ClickItemHandler<string, TMgr> onClickLink = null)
+        public static ILabelWidgetOption Create<TMgr>(string text, SubmitItemHandler<string, TMgr> onClickLink = null)
         {
             return new WidgetOptionImplement<TMgr>()
             {
@@ -12,7 +12,7 @@ namespace Lysionium
         }
 
         public static ILabelWidgetOption Create<TMgr>(
-            System.Func<TMgr, string> text, ClickItemHandler<string, TMgr> onClickLink = null)
+            System.Func<TMgr, string> text, SubmitItemHandler<string, TMgr> onClickLink = null)
         {
             return new WidgetOptionImplement<TMgr>()
             {
@@ -25,7 +25,7 @@ namespace Lysionium
         {
             public string WidgetName { get; set; }
             public System.Func<TMgr, string> GetText { get; set; }
-            public ClickItemHandler<string, TMgr> ClickLink { get; set; }
+            public SubmitItemHandler<string, TMgr> ClickLink { get; set; }
 
             string ILabelWidgetOption.GetText(IListuiManager manager)
             {
@@ -38,7 +38,7 @@ namespace Lysionium
             {
                 if (LuiAssert.Type<TMgr>(manager, out var tMgr)) return;
 
-                ClickLink?.Invoke(link, tMgr, "Click");
+                ClickLink?.Invoke(link, tMgr);
             }
         }
     }
