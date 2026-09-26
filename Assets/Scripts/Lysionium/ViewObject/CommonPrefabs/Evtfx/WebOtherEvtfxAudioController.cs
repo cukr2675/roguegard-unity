@@ -42,7 +42,7 @@ namespace Lysionium.Views
         protected virtual void Awake()
         {
 #if !UNITY_EDITOR && UNITY_WEBGL
-            var evtfxAudioTable = _webAudioEvtfxTable;
+            var evtfxAudioTable = _webEvtfxAudioTable;
 #else
             var evtfxAudioTable = _defaultEvtfxAudioTable;
 #endif

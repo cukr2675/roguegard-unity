@@ -111,13 +111,13 @@ namespace Lysionium.Views
 
 
         /// <summary>
-        /// 指定のリストで最初に出現する <see cref="ItemName"/> != null のインスタンスを取得する
+        /// 指定のリストで最初に出現する <see cref="ItemName"/> != <see cref="string.Empty"/> のインスタンスを取得する
         /// </summary>
         public static bool TryFirstNotNull(IReadOnlyList<ViewItem> viewItems, out ViewItem firstViewItem)
         {
             for (int i = 0; i < viewItems.Count; i++)
             {
-                if (viewItems[i].ItemName != null)
+                if (viewItems[i].ItemName != string.Empty)
                 {
                     firstViewItem = viewItems[i];
                     return true;
