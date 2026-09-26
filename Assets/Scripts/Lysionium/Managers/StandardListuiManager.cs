@@ -151,7 +151,7 @@ namespace Lysionium
         /// <summary>
         /// メニュー画面を指定の回数戻る
         /// </summary>
-        public void PopScreen(int count = 1)
+        public virtual void PopScreen(int count = 1)
         {
             for (int i = 0; i < count; i++)
             {
