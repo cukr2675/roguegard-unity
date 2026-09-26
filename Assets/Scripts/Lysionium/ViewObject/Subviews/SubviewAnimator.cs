@@ -48,6 +48,7 @@ namespace Lysionium.Views
 #if UNITY_EDITOR
         [Header("Debug (Editor Only)")]
         [SerializeField] private bool _log = false;
+        [SerializeField] private bool _logDetails = false;
 
         private static readonly StringBuilder animatorLog = new();
         private static readonly List<AnimatorClipInfo> clipInfos = new();
@@ -152,7 +153,7 @@ namespace Lysionium.Views
             if (queuedCancelSelection)
             {
 #if UNITY_EDITOR
-                if (_log) { Debug.Log($"Selection was canceled {eventSystem.currentSelectedGameObject} -> {lastSelectedGameObject}"); }
+                if (_logDetails) { Debug.Log($"Selection was canceled {eventSystem.currentSelectedGameObject} -> {lastSelectedGameObject}"); }
 #endif
 
                 eventSystem.SetSelectedGameObject(lastSelectedGameObject);
@@ -165,8 +166,12 @@ namespace Lysionium.Views
         {
             // 監視されていないカーソル移動を検知する
             var currentSelectedGameObject = eventSystem.currentSelectedGameObject;
-            if (currentSelectedGameObject != lastSelectedGameObject)
+            if (currentSelectedGameObject != lastSelectedGameObject && !queuedCancelSelection)
             {
+#if UNITY_EDITOR
+                if (_logDetails) { Debug.Log($"Set last selected GameObject. ({currentSelectedGameObject})"); }
+#endif
+
                 // カーソル移動時の EVTFX を実行（タッチ操作中は再生しない）
                 if (CursorImageSystem.ShowCursor) { _onEvtfxString.Invoke(_evtfxOnSelect, currentSelectedGameObject); }
 
@@ -187,12 +192,20 @@ namespace Lysionium.Views
 
             if (outOfRange)
             {
+#if UNITY_EDITOR
+                if (_logDetails) { Debug.Log($"Cancel Selection is queued. ({gameObject})"); }
+#endif
+
                 // 範囲外にカーソル移動したときカーソルを戻す
                 // 即戻すと無限再帰となるためカーソル移動キャンセル処理を予約
                 queuedCancelSelection = true;
             }
             else
             {
+#if UNITY_EDITOR
+                if (_logDetails) { Debug.Log($"Set last selected GameObject. ({gameObject})"); }
+#endif
+
                 // 範囲内の項目を選択したとき選択履歴を更新する
                 lastSelectedGameObject = gameObject;
             }
@@ -200,6 +213,10 @@ namespace Lysionium.Views
 
         public void QueueSelect(GameObject sender, GameObject to, CursorEvtfx evtfx)
         {
+#if UNITY_EDITOR
+            if (_logDetails) { Debug.Log($"Cancel Selection is queued. ({to}) by {sender}"); }
+#endif
+
             // カーソル移動時の EVTFX を実行
             if (evtfx == CursorEvtfx.SelectOutOfRange) { _onEvtfxString.Invoke(_evtfxOnSelectOutOfRange, sender); }
             else if (evtfx == CursorEvtfx.Select) { _onEvtfxString.Invoke(_evtfxOnSelect, sender); }
@@ -211,6 +228,10 @@ namespace Lysionium.Views
 
         public void QueueSelectToLastSelectedObj(GameObject sender, CursorEvtfx evtfx)
         {
+#if UNITY_EDITOR
+            if (_logDetails) { Debug.Log($"Cancel Selection is queued. by {sender}"); }
+#endif
+
             // カーソル移動時の EVTFX を実行
             if (evtfx == CursorEvtfx.SelectOutOfRange) { _onEvtfxString.Invoke(_evtfxOnSelectOutOfRange, sender); }
             else if (evtfx == CursorEvtfx.Select) { _onEvtfxString.Invoke(_evtfxOnSelect, sender); }
