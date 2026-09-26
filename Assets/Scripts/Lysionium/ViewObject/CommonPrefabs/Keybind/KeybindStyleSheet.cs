@@ -1,9 +1,12 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Users;
+using UnityEngine.UI;
 
 namespace Lysionium.Views
 {
@@ -28,18 +31,54 @@ namespace Lysionium.Views
         private PlayerInput playerInput;
         private bool keybindsAreEnabled;
 
-        protected virtual void Start()
+        protected virtual void OnEnable()
         {
-            if (_keybindGlyphAsset != null)
-            {
-                _keybindGlyphAsset.UpdateGlyphs(_bindings);
+            UpdateGlyphs();
 
-                // 影響があると思われるテキストオブジェクトを更新する
-                var texts = GetComponentsInChildren<TMP_Text>();
-                foreach (var text in texts)
-                {
-                    text.SetAllDirty();
-                }
+            if (playerInput == null) { playerInput = GetComponentInParent<PlayerInput>(); }
+            if (playerInput != null)
+            {
+                InputUser.onChange += OnChange;
+            }
+        }
+
+        protected virtual void OnDisable()
+        {
+            InputUser.onChange -= OnChange;
+        }
+
+        private void OnChange(InputUser user, InputUserChange change, InputDevice device)
+        {
+            if (user != playerInput.user) return;
+
+            if (change == InputUserChange.ControlSchemeChanged)
+            {
+                UpdateGlyphs();
+            }
+        }
+
+        private void UpdateGlyphs()
+        {
+            if (_keybindGlyphAsset == null) return;
+
+            _keybindGlyphAsset.UpdateGlyphs(_bindings);
+
+            // 影響があると思われるテキストオブジェクトを更新する
+            var texts = GetComponentsInChildren<TMP_Text>();
+            foreach (var text in texts)
+            {
+                text.SetAllDirty();
+            }
+            StartCoroutine(LateUpdateGlyphs());
+        }
+
+        private IEnumerator LateUpdateGlyphs()
+        {
+            yield return null;
+            var layoutGroups = GetComponentsInChildren<LayoutGroup>();
+            foreach (var layoutGroup in layoutGroups)
+            {
+                LayoutRebuilder.MarkLayoutForRebuild((RectTransform)layoutGroup.transform);
             }
         }
 

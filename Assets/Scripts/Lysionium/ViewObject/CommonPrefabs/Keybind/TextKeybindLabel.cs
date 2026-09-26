@@ -1,7 +1,6 @@
 using System.Text;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Lysionium.Views
 {
@@ -9,19 +8,16 @@ namespace Lysionium.Views
     /// スタイル名から '&lt;sprite="{SpriteAsset.name}" name="{スタイル名}"&gt;' に変換して表示する <see cref="KeybindLabel"/> の具象コンポーネント
     /// </summary>
     [AddComponentMenu("UI/Lysionium/LUI Keybind Label")]
-    [RequireComponent(typeof(LayoutElement))]
     public class TextKeybindLabel : KeybindLabel
     {
         [SerializeField] private TMP_Text _text;
         [SerializeField] private Vector2 _padding = Vector2.zero;
         
-        private LayoutElement layoutElement;
         private string textHead, textFoot;
         private readonly StringBuilder stringBuilder = new();
 
         protected virtual void Awake()
         {
-            layoutElement = GetComponent<LayoutElement>();
             textHead = $"<sprite name=\"";
             textFoot = $"\" tint>";
             gameObject.SetActive(false);
@@ -30,8 +26,13 @@ namespace Lysionium.Views
             var keybindStyleSheet = GetComponentInParent<KeybindStyleSheet>();
             if (keybindStyleSheet && keybindStyleSheet.KeybindGlyphAsset && keybindStyleSheet.KeybindGlyphAsset.SpriteAsset)
             {
-                var spriteAssetName = keybindStyleSheet.KeybindGlyphAsset.SpriteAsset.name;
-                textHead = $"<sprite=\"{spriteAssetName}\" name=\"";
+                _text.spriteAsset = keybindStyleSheet.KeybindGlyphAsset.SpriteAsset;
+
+                // スプライトアセット名で指定する方法
+                // エディタ上では動作するが、実機では裏でキャッシュされるため
+                // スプライトアセットの動的変更ができなくなる
+                //var spriteAssetName = keybindStyleSheet.KeybindGlyphAsset.SpriteAsset.name;
+                //textHead = $"<sprite=\"{spriteAssetName}\" name=\"";
             }
         }
 
@@ -40,8 +41,6 @@ namespace Lysionium.Views
             stringBuilder.Clear().Append(textHead).Append(style).Append(textFoot);
             _text.SetText(stringBuilder);
             _text.ForceMeshUpdate(true, true);
-            layoutElement.preferredWidth = _text.preferredWidth + _padding.x * 2f; // 左右を空けるので2倍
-            layoutElement.preferredHeight = _text.preferredHeight + _padding.y * 2f; // 上下を空けるので2倍
             gameObject.SetActive(true);
         }
 

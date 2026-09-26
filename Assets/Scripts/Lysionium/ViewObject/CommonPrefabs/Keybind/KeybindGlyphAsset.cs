@@ -150,10 +150,11 @@ namespace Lysionium.Views
                 addedBindingNames.Clear();
                 foreach (var binding in action.bindings) // ② InputBinding 取得
                 {
-                    if (!addedBindingNames.Add(binding.name)) continue; // WASDと矢印キーの両方が設定されている場合、先に設定されている方だけ表示する
-
                     var inputControl = action.controls.FirstOrDefault(c => InputControlPath.Matches(binding.effectivePath, c));  // ③ InputControl 取得
                     if (inputControl == null) continue;
+
+                    // WASDと矢印キーの両方が設定されている場合、先に設定されている方だけ表示する
+                    if (inputControl.device is Keyboard && !addedBindingNames.Add(binding.name)) continue;
 
                     foreach (var keybindGlyphSource in keybindGlyphSources)
                     {
